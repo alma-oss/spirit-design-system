@@ -22,7 +22,7 @@ yarn add @alma-oss/spirit-icons
 So it will not be automatically installed with `@alma-oss/spirit-web-react`.
 
 - [`@alma-oss/spirit-icons`][icons-package] - Spirit Icons package
-- [`html-react-parser`][html-react-parser-package] - HTML to React parser (avoid usage of `dangerouslySetInnerHTML` on the server side)
+- [`html-react-parser`][html-react-parser-package] - HTML to React parser (avoid usage of `dangerouslySetInnerHTML` on the server-side)
 
 ## Usage
 
