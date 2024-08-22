@@ -84,13 +84,13 @@ For full functionality, you need to provide JavaScript which will handle togglin
 
 ### Methods
 
-| Method                | Description                                                                                                                                                                                                                                              |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `getInstance`         | _Static_ method which allows you to get the collapse instance associated with a DOM element                                                                                                                                                              |
-| `getOrCreateInstance` | _Static_ method which allows you to get the collapse instance associated with a DOM element, or create a new one in case it wasn’t initialized.                                                                                                          |
-| `hide`                | Hides collapse. Returns to the caller before the collapse has actually been hidden (i.e. before the `hidden.collapse` event occurs). This is considered a “manual” triggering of the collapse.                                                           |
-| `show`                | Reveals collapse. **Returns to the caller before the collapse has actually been shown** (i.e. before the `shown.collapse` event occurs). This is considered a “manual” triggering of the collapse. Tooltips with zero-length titles are never displayed. |
-| `toggle`              | Toggles collapse. **Returns to the caller before the collapse has actually been shown or hidden** (i.e. before the `shown.collapse` or `hidden.collapse` event occurs). This is considered a “manual” triggering of the collapse.                        |
+| Method                | Description                                                                                                                                                                                                                                                 |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `getInstance`         | _Static_ method which allows you to get the collapse instance associated with a DOM element                                                                                                                                                                 |
+| `getOrCreateInstance` | _Static_ method which allows you to get the collapse instance associated with a DOM element, or create a new one in case it wasn't initialized.                                                                                                             |
+| `hide`                | Hides collapse. Returns to the caller before the collapse has actually been hidden (that is before the `hidden.collapse` event occurs). This is considered a “manual” triggering of the collapse.                                                           |
+| `show`                | Reveals collapse. **Returns to the caller before the collapse has actually been shown** (that is before the `shown.collapse` event occurs). This is considered a “manual” triggering of the collapse. Tooltips with zero-length titles are never displayed. |
+| `toggle`              | Toggles collapse. **Returns to the caller before the collapse has actually been shown or hidden** (that is before the `shown.collapse` or `hidden.collapse` event occurs). This is considered a “manual” triggering of the collapse.                        |
 
 ```js
 const collapse = Collapse.getInstance('#example'); // Returns a collapse instance

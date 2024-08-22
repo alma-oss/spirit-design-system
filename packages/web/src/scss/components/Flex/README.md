@@ -62,7 +62,7 @@ Use the `Flex--inline` modifier to render the Flex container as an inline-level 
 
 ## Responsive Direction
 
-To create a responsive layout, use the `tablet` and `desktop` infixes, e.g. `Flex--tablet--horizontal` or `Flex--desktop--vertical`.
+To create a responsive layout, use the `tablet` and `desktop` infixes, for example `Flex--tablet--horizontal` or `Flex--desktop--vertical`.
 
 ```html
 <div class="Flex Flex--vertical Flex--tablet--horizontal Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch">
@@ -87,7 +87,7 @@ By default, Flex items will not wrap (the `Flex--noWrap` modifier). To enable wr
 
 ### Responsive Wrapping
 
-To create a responsive layout, use the `tablet` and `desktop` infixes, e.g. `Flex--tablet--wrap` or `Flex--desktop--wrap`.
+To create a responsive layout, use the `tablet` and `desktop` infixes, for example `Flex--tablet--wrap` or `Flex--desktop--wrap`.
 
 ```html
 <div
@@ -145,7 +145,7 @@ Example:
 
 ### Responsive Alignment
 
-To create a responsive layout, use the `tablet` and `desktop` infixes, e.g. `Flex--tablet--alignmentXRight` or
+To create a responsive layout, use the `tablet` and `desktop` infixes, for example `Flex--tablet--alignmentXRight` or
 `Flex--desktop--alignmentYBaseline`.
 
 Example:
