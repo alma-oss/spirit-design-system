@@ -107,7 +107,8 @@ Where:
 - `{Display Name}` is the human name (e.g. "Web React", "Design Tokens")
 - `{version}` is the version number (e.g. 4.5.0)
 - `{npm-package-name}` is the full scoped name (e.g. @alma-oss/spirit-web-react)
-- The "Full changelog" line must use markdown link syntax `[Full changelog](url)` — bare URLs containing `@` (from scoped package names) break in Slack Canvas because `@` is interpreted as a mention
+- The "Full changelog" line must use Markdown link syntax `[Full changelog](url)` — bare URLs containing `@` (from scoped package names) break in Slack Canvas because `@` is interpreted as a mention
+
 - Omit the Features or Bug Fixes section entirely if there are no entries for it
 
 ---
