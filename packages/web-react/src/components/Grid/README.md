@@ -18,7 +18,7 @@ Use Grid to build multiple column layouts. This Grid works on twelve column syst
 ## Custom Spacing
 
 You can use the `spacing` prop to apply custom spacing between items in both horizontal and vertical directions. The prop
-accepts either a spacing token (e.g. `space-100`) or an object with breakpoint keys and spacing token values.
+accepts either a spacing token (for example `space-100`) or an object with breakpoint keys and spacing token values.
 
 You can set custom spacing in the horizontal (x-axis) and vertical (y-axis) direction separately using the `spacingX` and `spacingY` props.
 
@@ -117,14 +117,14 @@ Grid Item is a wrapper for Grid items. It allows you to configure your Grid stru
 as you wish. Use props to set a column and rows where the Grid Item should start or end.
 Numeric values are used as a coordinates in the grid.
 
-If you want to set how to item should span over columns or rows, set the value as `span X`
+To set how to item should span over columns or rows, set the value as `span X`
 where X is the number of columns or rows the item should span, like this `columnStart="span 2"`
 or `rowEnd="span 3"`. Span could be used with responsive props as well and for both start and end.
 To understand how to use `span` read one of many articles about CSS Grid,
-eg. [CSS Grid Layout: The Span Keyword][digitalocean-span].
+for example [CSS Grid Layout: The Span Keyword][digitalocean-span].
 
-If you need to set a layout with repetitive columns, you can set this on the `Grid`
-component itself using the [`cols` prop](#api) and might not need to set columns on the items. Eg. article
+To set a layout with repetitive columns, you can set this on the `Grid`
+component itself using the [`cols` prop](#api) and might not need to set columns on the items. For example, an article
 listing with 3 columns is easier to set using `cols="3"` on the `Grid` component than setting
 `columnStart` and `columnEnd` on each `GridItem`.
 
