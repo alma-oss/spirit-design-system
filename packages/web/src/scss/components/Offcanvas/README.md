@@ -73,13 +73,13 @@ const customOffcanvas = document.getElementById('custom-offcanvas');
 const spiritOffcanvas = new Offcanvas(customOffcanvas);
 ```
 
-| Method                | Description                                                                                                                                                                                                  |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `toggle`              | Toggles an Offcanvas element to shown or hidden. Returns to the caller before the Offcanvas element has actually been shown or hidden (i.e. before the `show.offcanvas` or `hidden.offcanvas` event occurs). |
-| `show`                | Shows an Offcanvas element. Returns to the caller before the Offcanvas element has actually been shown (i.e. before the `shown.offcanvas` event occurs).                                                     |
-| `hide`                | Hides an Offcanvas element. Returns to the caller before the Offcanvas element has actually been hidden (i.e. before the `hidden.offcanvas` event occurs).                                                   |
-| `getInstance`         | Static method which allows you to get the Offcanvas instance associated with a DOM element                                                                                                                   |
-| `getOrCreateInstance` | Static method which allows you to get the Offcanvas instance associated with a DOM element, or create a new one in case it wasn’t initialised                                                                |
+| Method                | Description                                                                                                                                                                                                     |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `toggle`              | Toggles an Offcanvas element to shown or hidden. Returns to the caller before the Offcanvas element has actually been shown or hidden (that is before the `show.offcanvas` or `hidden.offcanvas` event occurs). |
+| `show`                | Shows an Offcanvas element. Returns to the caller before the Offcanvas element has actually been shown (that is before the `shown.offcanvas` event occurs).                                                     |
+| `hide`                | Hides an Offcanvas element. Returns to the caller before the Offcanvas element has actually been hidden (that is before the `hidden.offcanvas` event occurs).                                                   |
+| `getInstance`         | Static method which allows you to get the Offcanvas instance associated with a DOM element                                                                                                                      |
+| `getOrCreateInstance` | Static method which allows you to get the Offcanvas instance associated with a DOM element, or create a new one in case it wasn't initialised                                                                   |
 
 ### Events
 

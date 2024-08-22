@@ -1,6 +1,6 @@
 // 1. Input styling inspired by https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/.
 //
-//    Note that while we’re repeating code here, that’s necessary as you can’t comma-separate these types of selectors.
+//    Note that while we're repeating code here, that's necessary as you can't comma-separate these types of selectors.
 //    Browsers will drop the entire selector if they do not understand a part of it. (CSS Tricks)
 //
 // 2. While the lower portion of the track is styled through the `::-moz-range-progress` pseudo-element in Firefox,
