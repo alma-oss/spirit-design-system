@@ -153,7 +153,7 @@ TextField supports the following input types:
 - `text`
 - `url`
 
-Other meaningful values (e.g. `date`, `file`) will work but the design of the
+Other meaningful values (for example `date`, `file`) will work but the design of the
 input field will not be consistent across platforms/browsers.
 
 ## Input Width
@@ -166,7 +166,7 @@ The `size` attribute is supported on inputs of the following types: `email`,
 `password`, `tel`, `text`, `url`.
 
 This option is generally recommended for inputs with a limited value length
-(e.g. numeric representation of day, month, year). Supported values are `2`, `3`
+(for example numeric representation of day, month, year). Supported values are `2`, `3`
 and `4` (characters). If you need any other value or prefer using `em` unit
 instead of default `ch`, define a `--spirit-input-container-input-width` CSS custom property on the `<input>`
 element:

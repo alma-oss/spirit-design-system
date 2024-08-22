@@ -1,6 +1,6 @@
 # PartnerLogo
 
-PartnerLogo is a component designed to display the partner's logo (e.g. advertiser, business partner, etc.).
+PartnerLogo is a component designed to display the partner's logo (for example advertiser, business partner, etc.).
 
 ```html
 <div class="PartnerLogo">
