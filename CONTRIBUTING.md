@@ -75,7 +75,7 @@ The `<type>` and `<summary>` fields are mandatory, the `(<scope>)` field is opti
 
 MUST be one of the following:
 
-- **Chore**: Changes to our CI configuration files and scripts (examples: CircleCI, SauceLabs) or changes that affect the build system
+- **Chore**: Changes to our CI configuration files and scripts (for example CircleCI, Sauce Labs) or changes that affect the build system
 - **Deps**: Changes to dependencies
 - **Docs**: Documentation only changes
 - **Feat**: A new feature
