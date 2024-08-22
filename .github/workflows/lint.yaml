@@ -35,7 +35,7 @@ jobs:
           scope: lint
 
       - name: Lint
-        run: yarn lint
+        run: yarn lint:script
 
       - name: Save Nx cache
         uses: ./.github/actions/nx-cache-save
