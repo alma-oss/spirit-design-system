@@ -50,12 +50,12 @@ See [`references/jira-comment-template.md`](references/jira-comment-template.md)
 
 The skill works in any agent that reads `.agents/skills`. It needs:
 
-| Capability  | Preferred              | Fallback                                                       |
-| ----------- | ---------------------- | -------------------------------------------------------------- |
-| Jira        | Jira MCP server        | REST with `JIRA_PERSONAL_TOKEN`                                |
-| GitHub      | GitHub MCP server      | `gh` CLI, authenticated                                        |
-| Browser     | Any browser automation | `scripts/verify.mjs` (Playwright from the repo + local Chrome) |
-| Attachments | —                      | `scripts/jira-attach.sh` with `JIRA_PERSONAL_TOKEN`            |
+| Capability  | Preferred              | Fallback                                                             |
+| ----------- | ---------------------- | -------------------------------------------------------------------- |
+| Jira        | Jira MCP server        | REST with `JIRA_PERSONAL_TOKEN`                                      |
+| GitHub      | GitHub MCP server      | `gh` CLI, authenticated                                              |
+| Browser     | Any browser automation | `scripts/verify.mjs` (Playwright from the repository + local Chrome) |
+| Attachments | —                      | `scripts/jira-attach.sh` with `JIRA_PERSONAL_TOKEN`                  |
 
 - Jira is on-prem and requires the company VPN.
 - `JIRA_PERSONAL_TOKEN` is a Jira personal access token (Jira → Profile → Personal Access Tokens). Store it however you prefer — export it in your shell profile, keep it in a git-ignored `.env.local`, or inject it from a secret manager (for example `op run`, `doppler run`, or your OS keychain).

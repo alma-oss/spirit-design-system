@@ -60,7 +60,7 @@ What good stabilization commits usually include:
 
 ## Commit Scoping
 
-The repo **commitlint** config allows one **scope** per commit. A stabilization usually spans several scopes,
+The repository **commitlint** config allows one **scope** per commit. A stabilization usually spans several scopes,
 so split into separate commits, e.g.:
 
 - `feat(web-react)!: stabilize X and Y, remove Z #DS-XXXX`
@@ -163,7 +163,7 @@ identifier. Do not wait for a later cleanup PR.
 
 ## Verification
 
-1. **Search for leftovers** across the repo:
+1. **Search for leftovers** across the repository:
    - `rg "UNSTABLE_X|UnstableX|unstable-x"` should only match intentional, unrelated strings.
    - `rg "<RemovedComponent|RemovedComponentProps"` should return nothing.
 2. **Typecheck + build** the changed packages (web-react, web, codemods). If the web-react build complains

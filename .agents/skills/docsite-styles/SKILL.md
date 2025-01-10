@@ -98,7 +98,7 @@ Do not "fix" these with the wrong token.
 
 ## Lint
 
-- `yarn workspace @alma-oss/spirit-docsite lint` already runs `css:lint`. Autofix with `yarn workspace @alma-oss/spirit-docsite css:lint:fix`.
+- `yarn workspace @alma-oss/spirit-docsite lint` already runs `css:lint`. autofix with `yarn workspace @alma-oss/spirit-docsite css:lint:fix`.
 - Stylelint currently covers only `src/domains/homepage/**/*.scss`. SCSS elsewhere in the docsite is not linted yet,
   so follow these rules there by hand.
 - The config is `stylelint-config-spirit`, the same setup as `packages/web`.
