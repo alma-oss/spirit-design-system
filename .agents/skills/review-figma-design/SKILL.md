@@ -204,7 +204,7 @@ Connect file.
    1. `packages/web-react/src/components/` — Spirit's default components path
    2. `libs/design-system/components/` — Cyborg convention
    3. `componentsPath` value in `.agents/skills/review-figma-design/config.json` — custom override
-      (set `componentsPath` to a relative path from the repo root; `null` skips this step)
+      (set `componentsPath` to a relative path from the repository root; `null` skips this step)
 
    If none of the paths exist in the repository, skip the existence check and treat the component
    as "not yet implemented".
@@ -300,7 +300,7 @@ For every icon in the design:
    1. `packages/icons/src/` — Spirit's default icon path
    2. `libs/design-icons/` — Cyborg convention
    3. `iconsPath` value in `.agents/skills/review-figma-design/config.json` — custom override
-      (set `iconsPath` to a relative path from the repo root; `null` skips this step)
+      (set `iconsPath` to a relative path from the repository root; `null` skips this step)
 
    If none of the paths exist in the repository, skip the existence check and note in the report
    that the icon path could not be resolved.
@@ -323,7 +323,7 @@ For every icon in the design:
 
 ### Step 7: Spirit Repo Checks (Spirit Repo Only)
 
-Check whether the skill is running inside the Spirit repo by testing for the presence of
+Check whether the skill is running inside the Spirit repository by testing for the presence of
 `packages/web-react/`. If the directory does not exist, skip this step entirely — all JIRA cells
 in the Required DS Changes table will be _to be created_.
 
@@ -914,7 +914,7 @@ Before writing the final report:
 - `TextField` / `Select` / `TextArea` instances inspected for child layers (`Enhancer`, `Leading`, `Trailing`, or extra icon/text) not reflected in their Code Connect snippet → Enhancer/Addon use routed to Development Considerations ⚠️ + Required DS Changes
 - `ControlButton` nested inside `Tag` instance detected → Development Considerations ℹ️ note added about Spirit v5 color scheme inheritance vs current `dynamic-color-*` fallback
 - _(multi-frame)_ Named instance heights compared across all frames → height drift flagged in Findings as ⚠️
-- Spirit repo detected (`packages/web-react/` present) — if yes, `git log --oneline -50` checked, DS ticket references noted, JIRA column populated; if no, all JIRA cells set to _to be created_
+- Spirit repository detected (`packages/web-react/` present) — if yes, `git log --oneline -50` checked, DS ticket references noted, JIRA column populated; if no, all JIRA cells set to _to be created_
 - Hardcoded spacing values identified → cross-referenced with Spirit scale
 - Hardcoded color values identified → flagged
 - Typography tokens verified

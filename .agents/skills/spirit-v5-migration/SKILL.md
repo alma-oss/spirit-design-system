@@ -47,7 +47,7 @@ mark the result `partial` with review locations in the report.
 
 ### Step 0: Classify Target Profile
 
-At discovery, classify how the repo consumes Spirit. This drives codemod flags, scan paths, and validation commands.
+At discovery, classify how the repository consumes Spirit. This drives codemod flags, scan paths, and validation commands.
 
 | Profile              | Signals                                               | Codemod `-s`                         | Migration recipe                                   |
 | -------------------- | ----------------------------------------------------- | ------------------------------------ | -------------------------------------------------- |
@@ -221,7 +221,7 @@ Always run all cross-cutting recipes, even for React-only apps:
 Use the target app's configured scripts and package manager. Inspect `package.json`, workspace configuration,
 `Makefile`, Docker Compose / CI docs, and contribution guides first; do not invent commands. Prefer the same
 entry points the app uses in CI (for example `make test-e2e` or a Docker-wrapped Playwright target when host
-`yarn test:e2e` is not how that repo runs E2E). For wrapper monorepos, validate the design-system lib before
+`yarn test:e2e` is not how that repository runs E2E). For wrapper monorepos, validate the design-system lib before
 downstream plugins.
 
 ```bash
@@ -247,7 +247,7 @@ Use the equivalent `npm`, `pnpm`, workspace, Make, Docker, or repository-specifi
 linters only when they are present and configured, but record missing scripts as `not-configured` rather than
 silently skipping them.
 
-**Wrapper monorepo:** run types/tests on the wrapper package, then on downstream workspaces that had the heaviest migrations (`yarn workspace <name> test` / `test:unit` as defined in the repo).
+**Wrapper monorepo:** run types/tests on the wrapper package, then on downstream workspaces that had the heaviest migrations (`yarn workspace <name> test` / `test:unit` as defined in the repository).
 
 Re-run targeted searches for leftover v4 APIs, feature flags, renamed tokens, and unresolved codemod scaffolding:
 
@@ -368,7 +368,7 @@ Create a report file in the workspace root named:
 ## Handling Hard Blockers
 
 Use `blocked` only when the agent **cannot** edit the codebase — for example the target path is missing,
-required business logic is outside the repo, or repeated build failures cannot be resolved.
+required business logic is outside the repository, or repeated build failures cannot be resolved.
 
 When a recipe has no codemod:
 

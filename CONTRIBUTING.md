@@ -1,6 +1,6 @@
 # Contributing to Spirit Design System
 
-First of all, thanks for your contribution to this project! ❤️
+Thank you for your contribution to this project! ❤️
 Here are some tips how to make your contributing efforts efficient and eventually accepted & merged:
 
 - [General Usage](#general-usage)
@@ -107,7 +107,7 @@ The following is the list of supported scopes:
 - Repository-wide:
   - `ci`: used for changes that affect the Continuous Integration process and builds
   - `repo`: used for repository-wide changes
-  - none/empty string: useful for `Test` and `Refactor` changes that are done across all packages (e.g. `Test: Add missing unit tests`) and for docs changes that are not related to a specific package (e.g. `Docs: Fix typo in the tutorial`).
+  - none/empty string: useful for `Test` and `Refactor` changes that are done across all packages (for example `Test: Add missing unit tests`) and for docs changes that are not related to a specific package (for example `Docs: Fix typo in the tutorial`).
 
 ##### Summary
 
@@ -122,7 +122,7 @@ Use the summary field to provide a succinct description of the change:
 Just as in the summary, use the imperative, present tense: "fix" not "fixed" nor "fixes".
 
 Explain the motivation for the change in the commit message body. This commit message SHOULD explain _why_ you are making the change.
-You can include a comparison of the previous behavior with the new behavior in order to illustrate the impact of the change.
+You can include a comparison of the previous behavior with the new behavior to illustrate the impact of the change.
 
 #### Commit Message Footer
 
@@ -147,7 +147,7 @@ If the commit reverts a previous commit, it SHOULD begin with `Revert: `, follow
 The content of the commit message body SHOULD contain:
 
 - information about the SHA of the commit being reverted in the following format: `This reverts commit <SHA>`,
-- a clear description of the reason for reverting the commit message.
+- a clear description of why the commit message is being reverted.
 
 ### Before Commit
 
@@ -159,18 +159,18 @@ This project uses Prettier for code formatting. You can run `make format` to for
 
 ## Documenting the Components
 
-1. All components MUST be documented in a `README` file in the root of the component, e.g. `packages/web-react/Accordion/README.md`.
+1. All components MUST be documented in a `README` file in the root of the component, for example `packages/web-react/Accordion/README.md`.
 2. The documentation MUST be written in Markdown.
 3. The documentation MUST contain at least a basic example usage of the component.
 4. For complex components or components with subcomponents, the documentation SHOULD contain examples of individual building blocks as well as an example composition.
 5. Component and subcomponent props MUST be documented in a table.
    1. The table MUST be placed in a section introduced by a headline called `API`.
    2. The table MUST contain the following columns:
-      - `Name` — the name of the prop, e.g. `title`
-      - `Type` — the type of the prop, e.g. `string`, `number`, `bool`, `[horizontal | vertical]`, an existing [dictionary][dictionary], etc.
-      - `Default` — the default value of the prop, e.g. `null` or `—` (em-dash) if there is no default value
+      - `Name` — the name of the prop, for example `title`
+      - `Type` — the type of the prop, for example `string`, `number`, `bool`, `[horizontal | vertical]`, an existing [dictionary][dictionary], etc.
+      - `Default` — the default value of the prop, for example `null` or `—` (em-dash) if there is no default value
       - `Required` — if the prop is required `✓` or not `✕`
-      - `Description` — the description of the prop, e.g. `Title of the accordion`
+      - `Description` — the description of the prop, for example `Title of the accordion`
    3. The props MUST be sorted alphabetically by their name.
 
 ## Figma Code Connect
@@ -254,9 +254,9 @@ Using this you can test the entire package and verify that all parts of the pack
 
 The testing script includes:
 
-- linting using [ESlint][eslint]
+- linting using [ESLint][eslint]
 - checking format using the [Prettier][prettier]
-- checking types using the [Typescript][typescript] compiler
+- checking types using the [TypeScript][typescript] compiler
 - running unit test using the [Jest][jest]
 
 ### Unit Testing
@@ -312,9 +312,9 @@ Look for `Artifact download URL: https://github.com/alma-oss/spirit-design-syste
 It can be time-consuming and painful to test GitHub Actions.
 First, you have to change the GitHub Actions file locally, push your local code into the GitHub repository, and wait for the result.
 
-To solve this issue, you can use [act][act] CLI tool to test and write the GitHub actions locally.
+To solve this issue, you can use [act][act] command-line tool to test and write the GitHub actions locally.
 
-For more, please read the article [How to Run GitHub Actions Locally with the act CLI tool][act-article].
+For more, please read the article [How to Run GitHub Actions Locally with the act command-line tool][act-article].
 
 ## Publishing
 
@@ -343,7 +343,7 @@ The [`Version`][version-action] workflow authenticates as a GitHub App rather th
 A short-lived installation token is minted per run via `actions/create-github-app-token`, using the
 `GH_APP_CLIENT_ID` and `GH_APP_PRIVATE_KEY` secrets. Commits, tags, and releases it creates are attributed to
 `almaoss-spirit-design-system[bot]`. Unlike the PAT (tied to a personal account and requiring manual
-renewal), this token is org-owned, scoped to this repo, and expires automatically.
+renewal), this token is org-owned, scoped to this repository, and expires automatically.
 
 **If the `Version` workflow fails with an authentication or permission error**, check the GitHub App's
 installation in the org's [GitHub App settings][github-app-settings] (find the app tied to
@@ -363,7 +363,7 @@ token scoped to that single run — there is no `NPM_TOKEN`/`NODE_AUTH_TOKEN` se
 
 This only works because the workflow runs under the `npm-registry` GitHub Actions environment,
 and each published package (`@alma-oss/spirit-web`, `@alma-oss/spirit-web-react`,
-`@alma-oss/spirit-design-tokens`, etc.) has this exact repo, workflow file, and environment
+`@alma-oss/spirit-design-tokens`, etc.) has this exact repository, workflow file, and environment
 registered as its Trusted Publisher on npmjs.com.
 
 **If `Publish` fails with an npm authentication or 403 error**:

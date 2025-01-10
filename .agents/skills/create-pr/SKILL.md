@@ -96,7 +96,7 @@ Use `AskUserQuestion` with the following questions:
    - **No** — publish immediately (default)
    - **Yes** — create as draft
 
-The preview field renders markdown — format the draft exactly as it will appear in the PR body.
+The preview field renders Markdown — format the draft exactly as it will appear in the PR body.
 
 ### Step 6: Create or Update the PR
 

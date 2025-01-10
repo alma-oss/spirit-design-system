@@ -135,7 +135,7 @@ component name.
 
 ### 6. Assets
 
-- Prefer Figma MCP assets, files already in the repo, or an explicit product image source.
+- Prefer Figma MCP assets, files already in the repository, or an explicit product image source.
 - MCP asset URLs expire; for committed code, download the bytes or wire the app’s image source.
 - Do not use `picsum.photos` or other random remote placeholders.
 - If no asset is available, use a clearly labeled local placeholder and flag it in the handoff.
@@ -145,9 +145,9 @@ component name.
 Validation is required, not optional. After implementation:
 
 1. Confirm every Spirit prop against current types. Fix invalid token names and removed APIs.
-2. Run linters on edited files (`ReadLints` in this repo) and fix new issues.
+2. Run linters on edited files (`ReadLints` in this repository) and fix new issues.
 3. Run relevant unit tests when the change lives in this repository.
-4. Render and compare. In this repo: start Vite with `make start` or `yarn start`
+4. Render and compare. In this repository: start Vite with `make start` or `yarn start`
    (`http://localhost:3456/packages/web-react/`), inspect with Playwright MCP, then use Docker
    Make targets (`make test-e2e`, `make test-e2e-a11y`) for suite runs. Do not skip visual
    comparison silently.
@@ -168,5 +168,5 @@ If a gate cannot run, say so in the handoff (`verified` vs `unverified`) and lis
 - \[ \] Form wraps fields and actions; submit first in DOM; personal-data autocomplete per `/spirit:accessibility`
 - \[ \] Responsive values exist only where Figma supports them; breakpoints are Spirit tokens
 - \[ \] Assets are stable; alt/decorative decisions are explicit
-- \[ \] Accessibility, TypeScript, lint, render, and (when in this repo) tests/a11y checks ran — or the handoff is marked unverified
+- \[ \] Accessibility, TypeScript, lint, render, and (when in this repository) tests/a11y checks ran — or the handoff is marked unverified
 - \[ \] Unclear patterns were asked about instead of improvised
