@@ -69,7 +69,7 @@ does not work.
 | Storybook          | `deploy-preview-<PR>--spirit-design-system-storybook.netlify.app/?path=/docs/components-<name>--docs` | only if the PR changed a story   |
 
 Component casing is **PascalCase** on GitHub and **lowercase** in preview URLs. Demo paths mirror
-source paths because the demo app's Vite root is the repo root (`apps/demo/config/vite/app.ts`);
+source paths because the demo app's Vite root is the repository root (`apps/demo/config/vite/app.ts`);
 Storybook paths come from the story's `title` (`Components/<Name>`).
 
 **Storybook is always optional and gated on stories, never on scope** — a link to a page nobody

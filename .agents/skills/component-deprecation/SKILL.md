@@ -188,7 +188,7 @@ Before merge, verify no stale references remain by searching for:
 
 ## Commits
 
-The repo **commitlint** config allows one **scope** per commit. Touching **web** and **web-react** usually means **two commits** (e.g. `feat(web-react): deprecate \`MyComponent\` component #DS-XXXX`and`feat(web): deprecate \`MyComponent\` component #DS-XXXX`).
+The repository **commitlint** config allows one **scope** per commit. Touching **web** and **web-react** usually means **two commits** (e.g. `feat(web-react): deprecate \`MyComponent\` component #DS-XXXX`and`feat(web): deprecate \`MyComponent\` component #DS-XXXX`).
 
 For major removals, use breaking-change style commits/scopes consistent with current repository conventions.
 

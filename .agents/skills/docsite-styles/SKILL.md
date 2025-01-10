@@ -98,7 +98,7 @@ Do not "fix" these with the wrong token.
 
 ## Lint
 
-- `yarn workspace @alma-oss/spirit-docsite lint` already runs `css:lint`. Autofix with `yarn workspace @alma-oss/spirit-docsite css:lint:fix`.
+- `yarn workspace @alma-oss/spirit-docsite lint` already runs `css:lint`. autofix with `yarn workspace @alma-oss/spirit-docsite css:lint:fix`.
 - Stylelint covers `src/domains/**/*.scss`.
 - The config is `stylelint-config-spirit`, the same setup as `packages/web`.
 - Do not disable a rule unless `packages/web` already uses that same inline disable for the same kind of selector.

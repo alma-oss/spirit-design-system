@@ -459,7 +459,7 @@ The `label` prop is now required by the TextField component.
 #### Migration Guide
 
 Please ensure that `label` is added to all instances of the TextField component.
-If you need to hide the `label`, you can use the `isLabelHidden` prop.
+To hide the `label`, you can use the `isLabelHidden` prop.
 
 ### Tooltip: `off` Placement
 

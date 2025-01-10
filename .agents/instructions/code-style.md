@@ -20,7 +20,7 @@ The following config files are the source of truth for code style. Do not hardco
 | Remark       | `.remarkrc.js`                                         | Markdown linting                   |
 | Commitlint   | `.commitlintrc.mjs`                                    | Commit message linting             |
 
-Run `make format` to auto-format code before committing.
+Run `make format` to autoformat code before committing.
 
 ## Naming Conventions
 
