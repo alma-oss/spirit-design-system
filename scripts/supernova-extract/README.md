@@ -31,7 +31,7 @@ yarn supernova:extract -c 4 -d 100
 
 ## Outputs
 
-- **Canonical Pages** — one markdown file per page, with `{ title }` frontmatter only, colocated under `docs/` or the matching web-react component.
+- **Canonical Pages** — one Markdown file per page, with `{ title }` frontmatter only, colocated under `docs/` or the matching web-react component.
 - **`owned-paths.json`** — sidecar list of repository-relative, allowlisted files this script may overwrite or delete.
 - **`REPORT.md`** — human-readable summary and failure list.
 

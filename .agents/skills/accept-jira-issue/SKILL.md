@@ -79,7 +79,7 @@ Then:
 - Page URLs (component directory name **lowercased**, trailing slash required):
   - web: `<demo>/packages/web/src/scss/components/<name>/`
   - web-react: `<demo>/packages/web-react/src/components/<name>/`
-  - Storybook: look up story ids in `<storybook>/index.json`, then link `<storybook>/?path=/docs/<id>` or `?path=/story/<id>`.
+  - Storybook: look up story IDs in `<storybook>/index.json`, then link `<storybook>/?path=/docs/<id>` or `?path=/story/<id>`.
 
 **Product tickets** — use the deployment URL from Step 1 (staging such as `https://beta.jobs.cz`). If none is mentioned, ask the user for it. Never guess a production URL.
 

@@ -28,7 +28,7 @@ Pitfalls:
 - Some MCP clients pick up a changed token only after restarting the session.
 - The `comment` field embedded in the issue response is paginated on its own and can hold fewer comments than exist — fetch the dedicated `/comment?maxResults=50` endpoint when reading the ticket.
 - The comment returned by the write call is not the stored body — re-fetch.
-- Transition ids differ between workflows; always pick by name (`Accept`, `Deny`).
+- Transition IDs differ between workflows; always pick by name (`Accept`, `Deny`).
 
 ## GitHub
 
@@ -74,7 +74,7 @@ Demo page paths — the component directory is **lowercased** and the trailing s
 - `/packages/web-react/src/components/<name>/`
 - Unstable components use the lowercase `unstable_` prefix, e.g. `/packages/web-react/src/components/unstable_tile/`.
 
-Storybook story ids:
+Storybook story IDs:
 
 ```bash
 curl -s "https://deploy-preview-3011--spirit-design-system-storybook.netlify.app/index.json" \
@@ -102,7 +102,7 @@ node .agents/skills/accept-jira-issue/scripts/verify.mjs \
 
 Pitfalls:
 
-- Playwright's bundled browser is often not downloaded in this repo — the script launches the locally installed Google Chrome (`channel: 'chrome'`) and falls back to the bundled one.
+- Playwright's bundled browser is often not downloaded in this repository — the script launches the locally installed Google Chrome (`channel: 'chrome'`) and falls back to the bundled one.
 - Storybook never reaches `networkidle` — navigate with `load` and wait for the element instead.
 - Prefer text output (computed values, accessibility tree) over screenshots; take screenshots only for the 1–2 most visual criteria.
 
