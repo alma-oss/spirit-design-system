@@ -112,8 +112,10 @@ class Toast extends BaseComponent {
   getAwaitedTransitionPropertyName(): CSS.Properties<string | number> {
     // @ts-expect-error -- TS7015: Element implicitly has an any type because index expression is not of type number.
     return parseInt(getComputedStyle(this.element)[PROPERTY_NAME_SLOWEST_TRANSITION.js], 10) > 0
-      ? PROPERTY_NAME_SLOWEST_TRANSITION.css
-      : PROPERTY_NAME_FALLBACK_TRANSITION;
+      ? // @ts-expect-error -- Type 'string' has no properties in common with type 'Properties<string | number, string & {}>'.
+        PROPERTY_NAME_SLOWEST_TRANSITION.css
+      : // @ts-expect-error -- Type 'string' has no properties in common with type 'Properties<string | number, string & {}>'.
+        PROPERTY_NAME_FALLBACK_TRANSITION;
   }
 
   getContainer(): SpiritElement {
