@@ -35,6 +35,6 @@
     "jest": "30.2.0",
     "npm-run-all2": "8.0.4",
     "ts-node": "10.9.2",
-    "typescript": "5.7.3"
+    "typescript": "5.8.3"
   }
 }
