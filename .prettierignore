@@ -105,3 +105,6 @@ Caddyfile
 
 # Environment
 .env.*
+
+# Text files
+*.txt
