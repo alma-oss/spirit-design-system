@@ -1,0 +1,4 @@
+Contact: mailto:team_design-system@almacareer.com
+Preferred-Languages: cs, en
+Canonical: https://spiritdesignsystem.com/.well-known/security.txt
+Expires: 2026-01-01T00:00:00.000Z
