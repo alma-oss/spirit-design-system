@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@local/*": ["./src/*"],
+      "@alma-oss/spirit-web-react": ["../../packages/web-react/src/index.ts"],
+      "@alma-oss/spirit-web-react/*": ["../../packages/web-react/src/*"]
+    }
+  },
+  "include": ["./", "./eslint.config.js"]
+}
