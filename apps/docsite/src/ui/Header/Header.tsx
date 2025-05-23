@@ -20,6 +20,7 @@ const Header = () => {
           <UNSTABLE_HeaderLogo elementType={NextLink} href="/" aria-label="Spirit Development Preview">
             <SpiritLogo />
           </UNSTABLE_HeaderLogo>
+          <Menu />
         </Flex>
       </Container>
     </UNSTABLE_Header>
