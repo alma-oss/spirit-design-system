@@ -8,6 +8,15 @@
       "outputs": ["{projectRoot}/.next"],
       "dependsOn": ["^build"],
       "cache": true
+    },
+    "dev": {
+      "dependsOn": ["^build"]
     }
-  }
+  },
+  "implicitDependencies": [
+    "@alma-oss/spirit-design-tokens",
+    "@alma-oss/spirit-icons",
+    "@alma-oss/spirit-web",
+    "@alma-oss/spirit-web-react"
+  ]
 }
