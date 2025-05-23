@@ -1,1 +1,131 @@
 @forward '@alma-oss/spirit-web/src/scss';
+@use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
+@use 'devices/devices' as tokens;
+
+// 1. Expand the page to fill the viewport height to be ready for various themes.
+// 2. Make the footer sticky.
+
+html {
+    height: 100%; // 1.
+}
+
+body {
+    min-height: 100%; // 1.
+    display: grid; // 2.
+    grid-template-rows: auto auto 1fr auto;
+}
+
+:root,
+.theme-light-default {
+    --docs-color-logo-foreground: #7847ff;
+}
+
+.theme-light-on-brand {
+    --docs-color-logo-foreground: #fff;
+}
+
+.docs-Card {
+    display: block;
+    padding: var(--spirit-space-700);
+    border: var(--spirit-border-width-100) solid var(--spirit-color-border-interactive-state-default);
+    border-radius: var(--spirit-radius-300);
+    background-color: var(--spirit-color-background-primary);
+    font-size: var(--spirit-typography-body-large-semibold-mobile-font-size);
+    font-weight: var(--spirit-typography-body-large-semibold-mobile-font-weight);
+    line-height: var(--spirit-typography-body-large-semibold-mobile-line-height);
+    transition: box-shadow 125ms;
+
+    @media (hover: hover) {
+        &:hover {
+            border-color: var(--spirit-color-border-interactive-state-hover);
+            text-decoration: none;
+            box-shadow: var(--spirit-shadow-100);
+        }
+    }
+
+    &:active {
+        border-color: var(--spirit-color-border-interactive-state-active);
+        text-decoration: none;
+    }
+
+    @include breakpoint.up(tokens.$breakpoint-tablet) {
+        padding: var(--spirit-space-900);
+    }
+}
+
+.docs-Heading {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spirit-space-500) var(--spirit-space-600);
+    align-items: baseline;
+    margin-bottom: var(--spirit-space-900);
+    font-size: var(--spirit-typography-heading-small-bold-mobile-font-size);
+    font-weight: var(--spirit-typography-heading-small-bold-mobile-font-weight);
+    line-height: var(--spirit-typography-heading-small-bold-mobile-line-height);
+
+    @include breakpoint.up(tokens.$breakpoint-tablet) {
+        font-size: var(--spirit-typography-heading-small-bold-tablet-font-size);
+    }
+
+    @include breakpoint.up(tokens.$breakpoint-desktop) {
+        font-size: var(--spirit-typography-heading-small-bold-desktop-font-size);
+    }
+}
+
+.docs-Stack {
+    display: grid;
+    row-gap: var(--spirit-space-700);
+}
+
+.docs-Stack--start {
+    justify-items: start;
+}
+
+.docs-Stack--stretch {
+    justify-items: stretch;
+}
+
+.docs-Box {
+    min-height: var(--spirit-space-1000);
+    padding: var(--spirit-space-700);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--spirit-color-neutral-content-subtle);
+    background: var(--spirit-color-neutral-background-basic);
+}
+
+.docs-Box--small {
+    font-size: var(--spirit-typography-body-small-regular-mobile-font-size);
+    text-align: center;
+    white-space: normal;
+}
+
+.docs-Box--multiline {
+    overflow: unset;
+    white-space: unset;
+}
+
+.docs-Placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: var(--spirit-space-1200) var(--spirit-space-900);
+    text-align: center;
+    gap: var(--spirit-space-1000);
+    border: var(--spirit-border-width-200) dashed var(--spirit-color-border-basic);
+    border-radius: var(--spirit-radius-200);
+    background: var(--spirit-color-background-primary);
+}
+
+.docs-Placeholder__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-500);
+}
+
+.docs-border-bottom-basic {
+    border-bottom: 1px solid var(--spirit-color-border-basic);
+}
