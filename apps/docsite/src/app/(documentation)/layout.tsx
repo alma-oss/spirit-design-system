@@ -2,7 +2,7 @@
 
 import { Container, Footer } from '@alma-oss/spirit-web-react';
 import useIsPage from '@local/hooks/useIsPage';
-// import { Cover } from '@local/ui/Cover';
+import { Cover } from '@local/ui/Cover';
 import { Header } from '@local/ui/Header';
 import React, { ReactNode } from 'react';
 
@@ -12,10 +12,8 @@ const DocumentationLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header />
-      <main>
-        {/* <Cover /> */}
-        {children}
-      </main>
+      <Cover />
+      <main>{children}</main>
       <Footer
         backgroundColor="secondary"
         marginTop={{ mobile: 'space-1200', tablet: 'space-1200' }}
