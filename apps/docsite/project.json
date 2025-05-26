@@ -11,6 +11,9 @@
     },
     "dev": {
       "dependsOn": ["^build"]
+    },
+    "lint": {
+      "dependsOn": ["@alma-oss/spirit-icons:build"]
     }
   },
   "implicitDependencies": [
