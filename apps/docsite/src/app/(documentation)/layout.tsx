@@ -1,29 +1,15 @@
-'use client';
+import { type ChildrenProps } from '@local/types';
+import { Cover, Header, Footer } from '@local/ui';
 
-import { Container, Footer } from '@alma-oss/spirit-web-react';
-import useIsPage from '@local/hooks/useIsPage';
-import { Cover } from '@local/ui/Cover';
-import { Header } from '@local/ui/Header';
-import React, { ReactNode } from 'react';
+interface DocumentationLayoutProps extends ChildrenProps {}
 
-const DocumentationLayout = ({ children }: { children: ReactNode }) => {
-  const isComponentsPage = useIsPage('components');
-
-  return (
-    <>
-      <Header />
-      <Cover />
-      <main>{children}</main>
-      <Footer
-        backgroundColor="secondary"
-        marginTop={{ mobile: 'space-1200', tablet: 'space-1200' }}
-        textAlignment="center"
-        {...(isComponentsPage && { UNSAFE_className: 'hide-from-visual-tests' })}
-      >
-        <Container>© Alma Career Oy and its subsidiaries</Container>
-      </Footer>
-    </>
-  );
-};
+const DocumentationLayout = async ({ children }: DocumentationLayoutProps) => (
+  <>
+    <Header />
+    <Cover />
+    <main className="py-1100 pt-tablet-1600">{children}</main>
+    <Footer />
+  </>
+);
 
 export default DocumentationLayout;

@@ -1,10 +1,15 @@
-import { Heading } from '@alma-oss/spirit-web-react';
+import { Container, Grid, Section } from '@alma-oss/spirit-web-react';
+import ComponentsCard from '@local/domains/homepage/ComponentsCard';
 import { NextPage } from 'next';
 
 const Home: NextPage = () => (
-  <Heading elementType="h1" size="large">
-    Spirit Documentation Site
-  </Heading>
+  <Container>
+    <Section>
+      <Grid cols={{ mobile: 1, tablet: 2 }}>
+        <ComponentsCard />
+      </Grid>
+    </Section>
+  </Container>
 );
 
 export default Home;

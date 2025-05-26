@@ -24,35 +24,6 @@ body {
     --docs-color-logo-foreground: #fff;
 }
 
-.docs-Card {
-    display: block;
-    padding: var(--spirit-space-700);
-    border: var(--spirit-border-width-100) solid var(--spirit-color-border-interactive-state-default);
-    border-radius: var(--spirit-radius-300);
-    background-color: var(--spirit-color-background-primary);
-    font-size: var(--spirit-typography-body-large-semibold-mobile-font-size);
-    font-weight: var(--spirit-typography-body-large-semibold-mobile-font-weight);
-    line-height: var(--spirit-typography-body-large-semibold-mobile-line-height);
-    transition: box-shadow 125ms;
-
-    @media (hover: hover) {
-        &:hover {
-            border-color: var(--spirit-color-border-interactive-state-hover);
-            text-decoration: none;
-            box-shadow: var(--spirit-shadow-100);
-        }
-    }
-
-    &:active {
-        border-color: var(--spirit-color-border-interactive-state-active);
-        text-decoration: none;
-    }
-
-    @include breakpoint.up(tokens.$breakpoint-tablet) {
-        padding: var(--spirit-space-900);
-    }
-}
-
 .docs-Heading {
     display: flex;
     flex-wrap: wrap;
