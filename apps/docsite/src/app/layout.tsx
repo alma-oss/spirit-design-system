@@ -1,8 +1,10 @@
+import { type ChildrenProps } from '@local/types';
 import { AppProvider } from '@local/ui/AppProvider';
 import { inter } from '@local/ui/fonts';
+import '@local/ui/globals.scss';
 import { Metadata } from 'next';
-import { ReactNode } from 'react';
-import '../ui/globals.scss';
+
+interface RootLayoutProps extends ChildrenProps {}
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
