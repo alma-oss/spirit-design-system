@@ -1,3 +1,4 @@
+import { AppProvider } from '@local/ui/AppProvider';
 import { inter } from '@local/ui/fonts';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
