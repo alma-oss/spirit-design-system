@@ -26,7 +26,7 @@ interface HeaderProps {
 }
 
 const Header = ({ disableClientRouting = false }: HeaderProps) => {
-  const isHomePage = useIsPage(routes.home);
+  const isHomePage = useIsPage(routes.homepage);
   const isComponentsPage = useIsPage(routes.components);
 
   return (
@@ -39,7 +39,7 @@ const Header = ({ disableClientRouting = false }: HeaderProps) => {
         <Flex alignmentX="left" spacingX="space-1000">
           <UNSTABLE_HeaderLogo
             elementType={disableClientRouting ? 'a' : NextLink}
-            href={routes.home}
+            href={routes.homepage}
             aria-label="Spirit Development Preview"
           >
             <SpiritLogo />

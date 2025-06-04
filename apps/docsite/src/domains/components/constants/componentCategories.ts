@@ -21,7 +21,7 @@ export const COMPONENT_CATEGORIES: Record<string, string[]> = {
     'TextField',
     'TextFieldBase',
     'Toggle',
-    'UNSTABLE_Attachment',
+    'UNSTABLE_File',
     'UNSTABLE_FileUpload',
   ],
   Layout: ['Box', 'Collapse', 'Container', 'Divider', 'Flex', 'Grid', 'Matrix', 'ScrollView', 'Section', 'Stack'],

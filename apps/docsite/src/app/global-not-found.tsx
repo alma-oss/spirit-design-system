@@ -32,9 +32,7 @@ const GlobalNotFound = () => (
                 <Text>The page you are looking for might have been moved, deleted, or never existed.</Text>
               </EmptyStateSection>
               <EmptyStateSection>
-                <ButtonLink href={routes.home} color="primary">
-                  Back to Homepage
-                </ButtonLink>
+                <ButtonLink href={routes.homepage}>Back to Homepage</ButtonLink>
               </EmptyStateSection>
             </EmptyState>
           </Container>
