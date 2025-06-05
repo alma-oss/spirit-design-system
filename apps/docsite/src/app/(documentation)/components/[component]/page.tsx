@@ -1,5 +1,3 @@
-const ComponentPage = async () => {
-  return null;
-};
+const ComponentPage = async () => null;
 
 export default ComponentPage;
