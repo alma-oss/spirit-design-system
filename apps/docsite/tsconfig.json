@@ -14,7 +14,9 @@
       }
     ],
     "paths": {
-      "@local/*": ["./src/*"]
+      "@local/*": ["./src/*"],
+      "@workspace/web-react/*": ["../../packages/web-react/src/*"],
+      "@workspace/web/*": ["../../packages/web/src/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "target": "esnext",

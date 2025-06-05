@@ -1,9 +1,31 @@
+import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
+import { notFound } from 'next/navigation';
 import React from 'react';
 
-const WebTabPage = async () => {
-  return (
-    <>web</>
-  );
+interface WebTabPageProps {
+  params: Promise<{ component: string }>;
+}
+
+const { error: logError } = console;
+
+const WebTabPage = async ({ params }: WebTabPageProps) => {
+  const { component } = await params;
+
+  if (!isValidComponentSlug(component)) {
+    notFound();
+  }
+
+  try {
+    const { default: ReadMe } = await import(
+      `@workspace/web/scss/components/${slugToComponentName(component)}/README.md`
+    );
+
+    return <ReadMe />;
+  } catch (error) {
+    logError(`[ComponentView] Failed to load Web README for "${component}":`, error);
+
+    return null;
+  }
 };
 
 export default WebTabPage;

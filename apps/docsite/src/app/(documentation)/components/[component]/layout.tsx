@@ -11,11 +11,12 @@ interface ViewsLayoutProps {
   params: Promise<{ component: string }>;
 }
 
+const viewSegments = Object.values(componentSegments).filter((segment) => segment !== componentSegments.guidelines);
+
 const ViewsLayout = ({ views, params }: ViewsLayoutProps) => {
-  const segments = Object.values(componentSegments).slice(1);
   const { component } = use(params);
   const selectedSegment = useSelectedLayoutSegment('views') || '';
-  const selectedNav = segments.includes(selectedSegment) ? selectedSegment : componentSegments.guidelines;
+  const selectedNav = viewSegments.includes(selectedSegment) ? selectedSegment : componentSegments.guidelines;
 
   return (
     <Section>

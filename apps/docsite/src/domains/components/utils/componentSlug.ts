@@ -13,6 +13,16 @@ const kebabToPascal = (value: string): string =>
     .map((segment) => `${segment.charAt(0).toUpperCase()}${segment.slice(1)}`)
     .join('');
 
+const COMPONENT_SLUG_PATTERN = /^[a-z0-9-]+$/;
+
+/**
+ * Returns true when the slug contains only lowercase letters, digits, and hyphens.
+ * Call this before using the slug in dynamic import specifiers to prevent path traversal.
+ *
+ * @param slug
+ */
+export const isValidComponentSlug = (slug: string): boolean => COMPONENT_SLUG_PATTERN.test(slug);
+
 /**
  * PascalCase directory name → kebab-case URL slug
  *
