@@ -1,5 +1,5 @@
 import { type ChildrenProps } from '@local/types';
-import { Cover, Header, Footer } from '@local/ui';
+import { Cover, Footer } from '@local/ui';
 
 interface HomepageLayoutProps extends ChildrenProps {}
 
