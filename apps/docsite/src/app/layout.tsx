@@ -2,6 +2,7 @@ import { type ChildrenProps } from '@local/types';
 import { AppProvider } from '@local/ui/AppProvider';
 import { inter } from '@local/ui/fonts';
 import '@local/ui/globals.scss';
+import { Header } from '@local/ui/Header';
 import { Metadata } from 'next';
 
 interface RootLayoutProps extends ChildrenProps {}
@@ -19,7 +20,10 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: RootLayoutProps) => (
   <html lang="en">
     <body className={`${inter.className} antialiased`}>
-      <AppProvider>{children}</AppProvider>
+      <AppProvider>
+        <Header />
+        {children}
+      </AppProvider>
     </body>
   </html>
 );
