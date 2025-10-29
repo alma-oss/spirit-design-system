@@ -26,8 +26,10 @@
     "nuqs": "catalog:frontend",
     "react": "catalog:frontend",
     "react-dom": "catalog:frontend",
+    "rehype-pretty-code": "catalog:content",
     "remark-gfm": "catalog:content",
-    "sass-embedded": "catalog:build"
+    "sass-embedded": "catalog:build",
+    "shiki": "catalog:content"
   },
   "devDependencies": {
     "@eslint/compat": "catalog:lint",
