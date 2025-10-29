@@ -11,9 +11,13 @@ const pathDir = dirname(fileURLToPath(import.meta.url));
 type JsonValue = string | number | boolean | JsonValue[] | { [key: string]: JsonValue };
 type StringPluginTuple = [pluginName: string, ...options: JsonValue[]];
 
+const rehypePrettyCodeOptions = {
+  theme: 'github-light',
+};
+
 const mdxPluginOptions: { remarkPlugins: StringPluginTuple[]; rehypePlugins: StringPluginTuple[] } = {
   remarkPlugins: [['remark-gfm']],
-  rehypePlugins: [],
+  rehypePlugins: [['rehype-pretty-code', rehypePrettyCodeOptions]],
 };
 
 const nextConfig: NextConfig = {
