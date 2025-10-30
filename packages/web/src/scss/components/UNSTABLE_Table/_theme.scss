@@ -1,0 +1,14 @@
+@use '@tokens' as tokens;
+@use '../../settings/transitions';
+
+$border-width: tokens.$border-width-100;
+$border-style: solid;
+$border-color: tokens.$border-basic;
+$background-color-header: tokens.$background-secondary;
+$background-color-striped: tokens.$background-tertiary;
+$padding-cell: tokens.$space-400;
+$padding-cell-compact: tokens.$space-300;
+$typography: tokens.$body-medium-regular;
+$typography-header: tokens.$body-medium-bold;
+$transition-duration: transitions.$duration-100;
+$transition-timing: transitions.$timing-eased-in-out;

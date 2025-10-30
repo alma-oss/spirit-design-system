@@ -1,0 +1,67 @@
+@use '@tokens' as tokens;
+@use '../../tools/typography';
+@use 'theme';
+
+.UNSTABLE_Table {
+    @include typography.generate(theme.$typography);
+
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.UNSTABLE_Table thead {
+    text-align: left;
+    background-color: theme.$background-color-header;
+}
+
+.UNSTABLE_Table th {
+    @include typography.generate(theme.$typography-header);
+
+    padding: theme.$padding-cell;
+    vertical-align: middle;
+    border-bottom: theme.$border-width theme.$border-style theme.$border-color;
+}
+
+.UNSTABLE_Table td {
+    padding: theme.$padding-cell;
+    vertical-align: middle;
+    border-bottom: theme.$border-width theme.$border-style theme.$border-color;
+}
+
+.UNSTABLE_Table--bordered {
+    border: theme.$border-width theme.$border-style theme.$border-color;
+}
+
+.UNSTABLE_Table--bordered th,
+.UNSTABLE_Table--bordered td {
+    border: theme.$border-width theme.$border-style theme.$border-color;
+}
+
+.UNSTABLE_Table--compact th,
+.UNSTABLE_Table--compact td {
+    padding: theme.$padding-cell-compact;
+}
+
+// cSpell:ignore hoverable
+.UNSTABLE_Table--hoverable tbody tr {
+    transition: background-color theme.$transition-duration theme.$transition-timing;
+}
+
+.UNSTABLE_Table--striped tbody tr:nth-child(odd) {
+    background-color: theme.$background-color-striped;
+}
+
+// cSpell:ignore hoverable
+.UNSTABLE_Table--hoverable tbody tr:hover {
+    background-color: theme.$background-color-striped;
+}
+
+.UNSTABLE_Table tr:last-child td {
+    border-bottom: none;
+}
+
+.UNSTABLE_Table--responsive {
+    display: block;
+    overflow-x: auto;
+}
