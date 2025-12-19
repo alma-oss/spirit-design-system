@@ -43,6 +43,8 @@ jobs:
     permissions:
       # create commits and releases
       contents: write
+    env:
+      NPM_CONFIG_PROVENANCE: true
 
     steps:
       - name: Clone repository
@@ -62,7 +64,7 @@ jobs:
       - name: Publish
         run: make publish
         env:
-          GH_TOKEN: ${{ github.token}}
+          GH_TOKEN: ${{ github.token }}
 
       - name: Post Changelog
         run: yarn post-changelog
