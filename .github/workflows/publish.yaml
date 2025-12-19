@@ -59,20 +59,10 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Authenticate npm
-        run: ./bin/ci/npm-auth.sh
-        # @TODO: remove automation token when Lerna adds support for OIDC and trusted publishing
-        # @see: https://github.com/lerna/lerna/issues/4219
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Publish
         run: make publish
         env:
           GH_TOKEN: ${{ github.token}}
-          # @TODO: remove automation token when Lerna adds support for OIDC and trusted publishing
-          # @see: https://github.com/lerna/lerna/issues/4219
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Post Changelog
         run: yarn post-changelog
