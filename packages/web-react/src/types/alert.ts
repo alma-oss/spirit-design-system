@@ -1,19 +1,9 @@
 import { type ElementType } from 'react';
-import type { ChildrenProps, EmotionColorNamesType, StyleProps, TransferProps } from './shared';
+import type { ChildrenProps, EmotionColorNamesType, SpiritPolymorphicComponentPropWithRef, StyleProps } from './shared';
 
-export interface AriaAlertElementTypeProps<E extends ElementType = 'div'> {
-  /**
-   * The HTML element or React element used to render the alert, e.g. 'div', 'span'.
-   *
-   * @default 'div'
-   */
-  elementType?: E;
-}
+export interface AlertBaseProps extends ChildrenProps, StyleProps {}
 
-export interface AlertProps extends ChildrenProps, StyleProps, TransferProps {}
-
-export interface SpiritAlertProps<T extends ElementType = 'div', C = void>
-  extends AriaAlertElementTypeProps<T>, AlertProps {
+export interface AlertProps<C = void> extends AlertBaseProps {
   /** The color of the alert. */
   color?: EmotionColorNamesType | C;
   /** Icon used in Alert. */
@@ -21,3 +11,8 @@ export interface SpiritAlertProps<T extends ElementType = 'div', C = void>
   /** Whether the alert should be centered. */
   isCentered?: boolean;
 }
+
+export type SpiritAlertProps<E extends ElementType = 'div', C = void> = SpiritPolymorphicComponentPropWithRef<
+  E,
+  AlertProps<C>
+>;

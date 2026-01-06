@@ -1,34 +1,41 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type SpiritAlertProps } from '../../types';
+import { type AlertProps, type PolymorphicComponent, type SpiritAlertProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Icon } from '../Icon';
 import { useAlertIcon } from './useAlertIcon';
 import { useAlertStyleProps } from './useAlertStyleProps';
 
-const defaultProps: Partial<SpiritAlertProps> = {
+const defaultProps = {
   color: 'success',
   isCentered: false,
+  elementType: 'div',
 };
 
-export const Alert = <E extends ElementType = 'div', C = void>(props: SpiritAlertProps<E, C>) => {
+const _Alert = <E extends ElementType = 'div', C = void>(props: SpiritAlertProps<E, C>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag = 'div', children, color, iconName, ...restProps } = propsWithDefaults;
+  const { elementType, children, color, iconName, ...restProps } = propsWithDefaults;
+
+  const Component = elementType as ElementType;
+
   const { classProps, props: modifiedProps } = useAlertStyleProps({ color, ...restProps });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
   const alertIconName = useAlertIcon({ color, iconName, ...otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       <Icon name={alertIconName} />
       <div>{children}</div>
-    </ElementTag>
+    </Component>
   );
 };
 
+const Alert = forwardRef<HTMLDivElement, AlertProps>(_Alert) as unknown as PolymorphicComponent<'div', AlertProps>;
+
 Alert.spiritComponent = 'Alert';
+Alert.displayName = 'Alert';
 
 export default Alert;
