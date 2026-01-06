@@ -1,18 +1,15 @@
 import classNames from 'classnames';
-import { type ElementType } from 'react';
 import { useClassNamePrefix } from '../../hooks';
-import { type AlertProps, type SpiritAlertProps } from '../../types';
+import { type AlertBaseProps, type AlertProps } from '../../types';
 
-export interface AlertStyles {
+export interface AlertStyle {
   /** className props */
   classProps: string;
   /** props to be passed to the element */
-  props: AlertProps;
+  props: AlertBaseProps;
 }
 
-export function useAlertStyleProps<E extends ElementType = 'div', C = void>(
-  props: SpiritAlertProps<E, C>,
-): AlertStyles {
+export function useAlertStyleProps<C = void>(props: AlertProps<C>): AlertStyle {
   const { color, isCentered, ...modifiedProps } = props;
 
   const alertClass = useClassNamePrefix('Alert');
