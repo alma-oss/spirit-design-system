@@ -270,32 +270,9 @@ Netlify will also attach a link to the deploy preview to your PR so you can easi
 
 For a better UI experience when searching for the deploy preview link, you can use this [Gist with userContent.css][netlify-preview-gist].
 
-### Visual Regression Testing
+### End-to-End Testing
 
-**Prerequisites:** [Docker][docker] 🐳
-
-You can run visual regression testing via `Makefile` in the project root.
-All commands will execute a Docker command that starts [Playwright][playwright] in a containerized environment.
-
-- Use `make test-e2e` to run the tests.
-- Use `make test-e2e-update` to update the snapshots.
-- Use `make test-e2e-report` to generate and serve a report of visual regression testing. Find a report URL in the terminal output.
-
-👉 Visual snapshots are generated based on the platform, so we need to use the same platform locally and on CI (GitHub Actions).
-
-⚠️ The version number of the [Playwright][playwright] dependency must be the same in `package.json` file and in the `./bin/make/e2e.sh` to ensure that no additional [Playwright][playwright] dependencies will need to install (browsers are backed in the Docker image). See https://playwright.dev/docs/docker.
-
-We run visual regression testing locally against our demo apps. Web and Web React packages are served using Vite.
-
-We have two test suites and you can find them in the `./tests/e2e` directory:
-
-- `demo-homepages` - tests the homepages of our demo apps.
-  - This test is used to verify that the demo apps are working properly and their homepages are not broken.
-- `demo-components-compare` - tests components' pages of our demo apps'.
-  - This test gets the list of components from the file system for each package and then it goes through each component and compares its page in all demo apps.
-  - Only one screenshot is taken for each component. If you run the update command, only the last screenshot will be saved.
-
-👉 To save time and repository size, we test only in the Chromium browser and only on the desktop viewport.
+For detailed information about writing and extending E2E tests, see the [E2E Testing Guidelines][e2e-testing] and [Accessibility Testing][accessibility-testing].
 
 #### On CI Pipeline
 
@@ -307,23 +284,6 @@ Then the tests will be run against the Netlify deployment on every change pushed
 When the tests fail, there will be a comment in the PR with a link to the report and a message about the failure will be raised in the Slack channel `#spirit-design-system-notifications_en`.
 You can also find the report URL in the GitHub Actions run under the `Run actions/upload-artifact` section.
 Look for `Artifact download URL: https://github.com/lmc-eu/spirit-design-system/actions/runs/<run-id>/artifacts/<artifact-id>`.
-
-#### Configuring Playwright Options
-
-You can customize Playwright test execution locally by creating a `.env.local.playwright` file in the project root.
-Copy the example file and adjust values as needed:
-
-```bash
-cp .env.local.playwright.example .env.local.playwright
-```
-
-Available environment variables:
-
-| Variable     | Description                  | Default (local)    | Default (CI) |
-| ------------ | ---------------------------- | ------------------ | ------------ |
-| `PW_WORKERS` | Number of parallel workers   | Playwright default | `1`          |
-| `PW_TIMEOUT` | Test timeout in milliseconds | `120000`           | `120000`     |
-| `PW_RETRIES` | Number of retries            | `0`                | `2`          |
 
 ### Developing and Testing GitHub Actions
 
@@ -395,6 +355,7 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 
 > If you have further questions do not hesitate to open an issue and ask us! ❤️
 
+[accessibility-testing]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/contribution/accessibility-testing.md
 [act]: https://github.com/nektos/act
 [act-article]: https://www.freecodecamp.org/news/how-to-run-github-actions-locally/
 [conventional-commits]: https://www.conventionalcommits.org
@@ -402,13 +363,12 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [decisions]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/decisions/README.md
 [developer-handbook]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/contribution/development.md
 [dictionary]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/DICTIONARIES.md
-[docker]: https://www.docker.com/
+[e2e-testing]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/contribution/e2e-testing.md
 [eslint]: https://eslint.org/
 [jest]: https://jestjs.io/
 [lerna-home]: https://lerna.js.org
 [netlify-preview-gist]: https://gist.github.com/adamkudrna/694f3048c1338f07375b9b8af24afe2f
 [packages]: packages/
-[playwright]: https://playwright.dev/
 [prettier]: https://prettier.io/
 [publish-action]: https://github.com/lmc-eu/spirit-design-system/actions/workflows/publish.yaml
 [release-notes-template]: https://almamedia.slack.com/docs/T0325RBAD/F08D6U6EAKH

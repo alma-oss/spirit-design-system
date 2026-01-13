@@ -77,11 +77,9 @@ Most components also accept native HTML attributes based on the component's elem
 
 ## Testing
 
-### Accessibility Testing
+### End-to-End Testing
 
-- Accessibility tests live alongside component specs under `src/components/**/__tests__/*accessibility.test.tsx`.
-- Use `runAxe` from `@local/tests` and assert with `expect(results).toHaveNoAxeViolations()` to guard against regressions.
-- Detailed authoring guidance is available in [`docs/contribution/accessibility-testing.md`][accessibility-testing].
+For detailed information about E2E tests including visual regression and accessibility testing, please refer to [`docs/contribution/e2e-testing.md`][e2e-testing] and [`docs/contribution/accessibility-testing.md`][accessibility-testing].
 
 ## Styling
 
@@ -233,6 +231,7 @@ See the [LICENSE](LICENSE.md) file for information.
 [accessibility-testing]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/contribution/accessibility-testing.md
 [all-deprecations]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web-react/DEPRECATIONS.md
 [dictionary-breakpoint]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
+[e2e-testing]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/contribution/e2e-testing.md
 [examples]: https://spirit-design-system-storybook.netlify.app
 [react-controlled]: https://reactjs.org/docs/forms.html#controlled-components
 [react-uncontrolled]: https://reactjs.org/docs/uncontrolled-components.html
