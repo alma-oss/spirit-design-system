@@ -3,17 +3,31 @@
 Spirit Web React components now include automated accessibility checks powered by [axe-core][axe-core] and [jest-axe][jest-axe].
 This document explains how to extend the existing coverage and how to handle known false positives.
 
+## Running Tests
+
+**⚠️ Important**: Before running tests, ensure the development server is running (i.e., `make start`).
+
+Unit tests can be executed with:
+
+```sh
+yarn workspace @alma-oss/spirit-web-react test:unit
+```
+
+To focus on accessibility specs only, pass `--testPathPatterns=accessibility`.
+
+Using the Makefile to run E2E accessibility tests:
+
+```bash
+# Run only accessibility tests
+make test-e2e-a11y
+```
+
+For more information about how to run E2E tests, please refer to the [E2E Testing Guidelines][e2e-guideline-run-tests].
+
 ## Test Harness
 
 - Jest configuration automatically registers `jest-axe` matchers (including `toHaveNoViolations`) and a custom `toHaveNoAxeViolations` matcher with richer failure output.
 - Reusable helpers live in `packages/web-react/tests/testUtils`. Import `runAxe` from `@local/tests` in component tests.
-- Unit tests can be executed with:
-
-  ```sh
-  yarn workspace @alma-oss/spirit-web-react test:unit
-  ```
-
-  To focus on accessibility specs only, pass `--testPathPatterns=accessibility`.
 
 ## Authoring Accessibility Specs
 
@@ -264,70 +278,6 @@ await assertNoA11yViolations(page, {
 - `.hide-from-visual-tests` - Elements hidden for visual regression tests
 - `[aria-hidden="true"]` - Intentionally hidden from screen readers
 
-### Running E2E Accessibility Tests
-
-There are two approaches to run E2E accessibility tests: locally via Yarn or using Docker.
-
-**⚠️ Important**: Before running tests, ensure the development server is running (e.g., `make start` or `yarn start` for Spirit Web React).
-
-#### Option 1: Running Locally with Yarn
-
-```bash
-# Run all E2E tests (including accessibility tests)
-yarn test:e2e
-
-# Run only accessibility tests
-yarn test:e2e:a11y
-# or
-yarn playwright test tests/e2e/a11y/
-
-# Run specific accessibility test file
-yarn playwright test tests/e2e/a11y/checkbox.spec.ts
-
-# Run with UI mode for debugging
-yarn test:e2e:ui
-
-# Update snapshots (not needed for a11y tests, but available)
-yarn test:e2e:update
-
-# View test report after running tests
-yarn test:e2e:report
-```
-
-#### Option 2: Running with Docker
-
-Using the Makefile (recommended):
-
-```bash
-# Run all E2E tests in Docker
-make test-e2e
-
-# Run only accessibility tests
-make test-e2e-a11y
-
-# Run with UI mode (opens UI at http://localhost:43008)
-make test-e2e-ui
-
-# Update snapshots
-make test-e2e-update
-
-# View test report
-make test-e2e-report
-```
-
-**Docker Benefits:**
-
-- Consistent environment across different machines
-- No need to install Playwright browsers locally
-- Isolated test execution
-- Matches CI environment
-
-**Yarn Benefits:**
-
-- Faster execution (no Docker overhead)
-- Direct access to test files
-- Better for rapid development and debugging
-
 ### Best Practices for E2E Accessibility Tests
 
 1. **Test all interactive states**: Open/closed, expanded/collapsed, focused/blurred, loading/loaded
@@ -368,6 +318,7 @@ All functions are exported from `tests/helpers/a11y/index.ts` for convenient imp
 [axe-core]: https://github.com/dequelabs/axe-core
 [axe-core-rules]: https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md
 [docs-axe-core-playwright]: https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright
+[e2e-guideline-run-tests]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/e2e-testing.md#running-tests
 [jest-axe]: https://github.com/nickcolley/jest-axe
 [playwright-docs]: https://playwright.dev/docs/intro
 [wcag-guidelines]: https://www.w3.org/WAI/WCAG21/quickref/
