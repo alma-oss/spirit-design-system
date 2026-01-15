@@ -71,6 +71,130 @@ export const Example = () => {
 };
 ```
 
+### Client Side Routing
+
+If you want to use client-side routing with router-integrated link-like components (for example `Link`, `ButtonLink`, `PaginationLink`, `HeaderLink`, or `TabLink`), you can use the `RouterProvider` context to provide a router navigation function. When a router is provided, internal links will use client-side navigation instead of full page reloads.
+
+The `RouterProvider` accepts the following props:
+
+- `children` - React node subtree that should receive the router integration (required)
+- `navigate` - A function that accepts a path string and optional router options
+
+External links (absolute `http://` / `https://` URLs, protocol-relative URLs like `//example.com`, or URLs with other schemes such as `mailto:` and `tel:`), links with non-`_self` target, links with `download`, and disabled links will always use standard anchor behavior.
+
+#### Router Options
+
+All link components accept a `routerOptions` prop, which is an object that is passed through to the client side router's `navigate` function as the second argument. This can be used to control any router-specific behaviors, such as scrolling, replacing instead of pushing to the history, etc.
+
+```jsx
+<Link href="/login" routerOptions={{ replace: true }}>
+  Login
+</Link>
+```
+
+#### Next.js App Router
+
+```jsx
+'use client';
+
+import { Link, RouterProvider } from '@alma-oss/spirit-web-react';
+import { useRouter } from 'next/navigation';
+
+const MyComponent = () => {
+  const router = useRouter();
+
+  return (
+    <RouterProvider navigate={router.push}>
+      <Link href="/about">About</Link>
+      <Link href="/contact">Contact</Link>
+    </RouterProvider>
+  );
+};
+```
+
+If you use the Next.js [basePath](https://nextjs.org/docs/app/api-reference/next-config-js/basePath) setting, include it directly in Spirit `href` values so rendered anchor URLs stay correct:
+
+```jsx
+'use client';
+
+import { Link, RouterProvider } from '@alma-oss/spirit-web-react';
+import { useRouter } from 'next/navigation';
+
+// Same string as `basePath` in `next.config.js` (leading slash, no trailing slash)
+const basePath = '/docs';
+
+const MyComponent = () => {
+  const router = useRouter();
+
+  return (
+    <RouterProvider navigate={router.push}>
+      <Link href={`${basePath}/about`}>About</Link>
+    </RouterProvider>
+  );
+};
+```
+
+#### Next.js Pages Router
+
+In the Pages Router, [`router.push`][next-pages-router-push] is `(url, as?, options?)`: the second argument is the optional `as` path, and transition options (e.g. `shallow`) belong in the **third** argument. Spirit passes `routerOptions` from link components as the second argument to `navigate`, so you should **not** pass `router.push` directly—use a thin wrapper that forwards options as the third parameter:
+
+```jsx
+import { Link, RouterProvider } from '@alma-oss/spirit-web-react';
+import { useRouter } from 'next/router';
+
+const MyComponent = () => {
+  const router = useRouter();
+  const navigate = (path, opts) => router.push(path, undefined, opts);
+
+  return (
+    <RouterProvider navigate={navigate}>
+      <Link href="/about">About</Link>
+      <Link href="/contact" routerOptions={{ shallow: true }}>
+        Contact
+      </Link>
+    </RouterProvider>
+  );
+};
+```
+
+#### React Router
+
+Use `navigate` from your router. Keep `href` values in the format expected by your app/router configuration.
+
+```jsx
+import { Link, RouterProvider } from '@alma-oss/spirit-web-react';
+import { useNavigate } from 'react-router-dom';
+
+const MyComponent = () => {
+  const navigate = useNavigate();
+
+  return (
+    <RouterProvider navigate={navigate}>
+      <Link href="/about">About</Link>
+    </RouterProvider>
+  );
+};
+```
+
+#### Remix
+
+Remix re-exports compatible navigation helpers; use `navigate` in the same way:
+
+```jsx
+import { Link, RouterProvider } from '@alma-oss/spirit-web-react';
+import { useNavigate } from '@remix-run/react';
+
+const MyComponent = () => {
+  const navigate = useNavigate();
+
+  return (
+    <RouterProvider navigate={navigate}>
+      <Link href="/about">About</Link>
+    </RouterProvider>
+  );
+};
+```
+
 ## Additional Attributes
 
 All components accept additional attributes that are passed down to the root element of the component.
@@ -292,6 +416,7 @@ See the [LICENSE][license] file for information.
 [figma-mcp]: https://developers.figma.com/docs/figma-mcp-server/
 [figma-skill]: https://skills.sh/alma-oss/spirit-design-system/figma-to-spirit
 [license]: LICENSE.md
+[next-pages-router-push]: https://nextjs.org/docs/pages/api-reference/functions/use-router#routerpush
 [react-controlled]: https://reactjs.org/docs/forms.html#controlled-components
 [react-uncontrolled]: https://reactjs.org/docs/uncontrolled-components.html
 [skills-docs]: https://skills.sh/docs

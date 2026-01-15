@@ -18,6 +18,7 @@ export * from './radii';
 export * from './refs';
 export * from './responsive';
 export * from './rest';
+export * from './router';
 export * from './sizes';
 export * from './style';
 export * from './text';
