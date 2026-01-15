@@ -55,6 +55,69 @@ import { ClassNamePrefixProvider } from '@alma-oss/spirit-web-react/context/Clas
 </ClassNamePrefixProvider>;
 ```
 
+### Client Side Routing
+
+If you want to use client-side routing with Link and Pagination components, you can use the `RouterProvider` context to provide a router navigation function. When a router is provided, internal links will use client-side navigation instead of full page reloads.
+
+The router must provide a `navigate` function that accepts a path string. External links (starting with `http://` or `https://`), links with `target="_blank"`, and disabled links will always use standard anchor behavior.
+
+#### Next.js App Router
+
+```jsx
+'use client';
+
+import { Link, RouterProvider } from '@alma-oss/spirit-web-react';
+import { useRouter } from 'next/navigation';
+
+const MyComponent = () => {
+  const router = useRouter();
+
+  return (
+    <RouterProvider value={{ navigate: router.push }}>
+      <Link href="/about">About</Link>
+      <Link href="/contact">Contact</Link>
+    </RouterProvider>
+  );
+};
+```
+
+#### Next.js Pages Router
+
+```jsx
+import { Link, RouterProvider } from '@alma-oss/spirit-web-react';
+import { useRouter } from 'next/router';
+
+const MyComponent = () => {
+  const router = useRouter();
+
+  return (
+    <RouterProvider value={{ navigate: router.push }}>
+      <Link href="/about">About</Link>
+      <Link href="/contact">Contact</Link>
+    </RouterProvider>
+  );
+};
+```
+
+#### Other Routing Libraries
+
+You can use RouterProvider with any routing library that provides a navigation function:
+
+```jsx
+import { Link, RouterProvider } from '@alma-oss/spirit-web-react';
+import { useNavigate } from 'react-router-dom';
+
+const MyComponent = () => {
+  const navigate = useNavigate();
+
+  return (
+    <RouterProvider value={{ navigate }}>
+      <Link href="/about">About</Link>
+    </RouterProvider>
+  );
+};
+```
+
 ## Additional Attributes
 
 All components accept additional attributes that are passed down to the root element of the component.

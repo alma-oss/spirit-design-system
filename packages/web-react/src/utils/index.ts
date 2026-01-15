@@ -6,6 +6,7 @@ export * from './debounce';
 export * from './delayedCallback';
 export * from './htmlReactParser';
 export * from './mergeStyleProps';
+export * from './router';
 export * from './responsive';
 export * from './ssr';
 export * from './string';
