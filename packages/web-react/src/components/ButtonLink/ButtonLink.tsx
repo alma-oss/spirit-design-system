@@ -1,12 +1,13 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { useStyleProps } from '../../hooks';
+import { useLinkClick, useStyleProps } from '../../hooks';
 import {
   type ButtonProps,
   type ButtonSizesType,
   type PolymorphicComponent,
   type PolymorphicRef,
+  type RouterLinkProps,
   type SpiritButtonLinkProps,
 } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -33,7 +34,7 @@ const _ButtonLink = <E extends ElementType = 'a', C = void, S = void>(
   ref: PolymorphicRef<E>,
 ) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
+  const { elementType = defaultProps.elementType, children, routerOptions, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
 
@@ -42,8 +43,14 @@ const _ButtonLink = <E extends ElementType = 'a', C = void, S = void>(
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
+  const handleClick = useLinkClick({
+    ...restProps,
+    routerOptions,
+    onClick: buttonLinkProps.onClick,
+  });
+
   return (
-    <Component {...otherProps} {...buttonLinkProps} {...mergedStyleProps} ref={ref}>
+    <Component {...otherProps} {...buttonLinkProps} {...mergedStyleProps} onClick={handleClick} ref={ref}>
       {children}
       {restProps.isLoading && <Spinner />}
     </Component>
@@ -52,7 +59,7 @@ const _ButtonLink = <E extends ElementType = 'a', C = void, S = void>(
 
 const ButtonLink = forwardRef<HTMLAnchorElement, SpiritButtonLinkProps<'a', void, void>>(
   _ButtonLink,
-) as unknown as PolymorphicComponent<'a', Omit<ButtonProps<void, void>, 'type'>>;
+) as unknown as PolymorphicComponent<'a', Omit<ButtonProps<void, void>, 'type'> & RouterLinkProps>;
 
 ButtonLink.spiritComponent = 'ButtonLink';
 ButtonLink.displayName = 'ButtonLink';

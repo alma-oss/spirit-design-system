@@ -2,6 +2,7 @@ import { type ElementType } from 'react';
 import { type SpiritButtonProps } from './button';
 import {
   type ChildrenProps,
+  type RouterLinkProps,
   type SpiritElementProps,
   type SpiritLItemElementProps,
   type SpiritPolymorphicElementPropsWithRef,
@@ -25,17 +26,20 @@ export interface PaginationLinkBaseProps<E extends ElementType = 'a'> {
 }
 
 export interface PaginationLinkProps<E extends ElementType = 'a'>
-  extends PaginationLinkBaseProps<E>, AriaPaginationProps {
+  extends PaginationLinkBaseProps<E>, AriaPaginationProps, RouterLinkProps {
   isCurrent?: boolean;
   pageNumber: number;
 }
 
 export type PaginationButtonLinkProps<E extends ElementType = 'a'> = SpiritButtonProps<E> &
-  AriaPaginationProps & {
+  AriaPaginationProps &
+  RouterLinkProps & {
     direction: PaginationLinkDirectionType;
   };
 
-export type PaginationLinkPreviousNextProps<E extends ElementType = 'a'> = SpiritButtonProps<E> & AriaPaginationProps;
+export type PaginationLinkPreviousNextProps<E extends ElementType = 'a'> = SpiritButtonProps<E> &
+  AriaPaginationProps &
+  RouterLinkProps;
 
 export interface SpiritPaginationProps extends PaginationProps {}
 

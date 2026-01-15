@@ -3,6 +3,7 @@ import {
   type ChildrenProps,
   type ClickEvents,
   type PolymorphicComponentProps,
+  type RouterLinkProps,
   type SpacingProp,
   type StyleProps,
   type TransferProps,
@@ -37,7 +38,7 @@ export interface TabsProps extends ChildrenProps, SpacingProp, TransferProps, Ta
 export type TabLinkItemProps = StyleProps & HTMLProps<HTMLLIElement>;
 
 /** ===== BASE API ===== */
-export interface TabLinkBaseProps extends ChildrenProps, StyleProps, TransferProps {}
+export interface TabLinkBaseProps extends ChildrenProps, StyleProps, TransferProps, RouterLinkProps {}
 
 /** ===== STYLE API ===== */
 export interface TabLinkStyleProps extends TabLinkBaseProps {

@@ -4,6 +4,7 @@ import type {
   ChildrenProps,
   LinkColorsDictionaryType,
   PolymorphicComponentProps,
+  RouterLinkProps,
   StyleProps,
   TransferProps,
 } from './shared';
@@ -23,7 +24,7 @@ export type LinkColorsExtendedNamesType = (typeof LinkColorsExtended)[keyof type
 
 export type LinkColor<C> = LinkColorsDictionaryType | LinkColorsExtendedNamesType | C;
 
-export interface LinkBaseProps extends ChildrenProps, StyleProps, TransferProps {}
+export interface LinkBaseProps extends ChildrenProps, StyleProps, TransferProps, RouterLinkProps {}
 
 /** ===== STYLE API ===== */
 export interface LinkStyleProps<C = void> extends LinkBaseProps {

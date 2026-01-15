@@ -7,6 +7,7 @@ import type {
   ComponentButtonColorNamesType,
   EmotionColorNamesType,
   PolymorphicComponentProps,
+  RouterLinkProps,
   SingleOrResponsive,
   SizesDictionaryType,
   StyleProps,
@@ -35,6 +36,9 @@ export interface ButtonStyleProps<C = void, S = void> extends ButtonBaseProps {
   size?: ButtonSize<S>;
 }
 
+/** Style props for link-styled buttons (`ButtonLink`, pagination prev/next); includes router integration. */
+export type ButtonLinkStyleProps<C = void, S = void> = ButtonStyleProps<C, S> & RouterLinkProps;
+
 /** ===== INTERNAL API ===== */
 export interface ButtonProps<C = void, S = void> extends ButtonStyleProps<C, S> {
   /**
@@ -52,5 +56,5 @@ export type SpiritButtonProps<E extends ElementType = 'button', C = void, S = vo
 >;
 export type SpiritButtonLinkProps<E extends ElementType = 'a', C = void, S = void> = PolymorphicComponentProps<
   E,
-  Omit<ButtonProps<C, S>, 'type'>
+  Omit<ButtonProps<C, S>, 'type'> & RouterLinkProps
 >;

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { useStyleProps } from '../../hooks';
+import { useLinkClick, useStyleProps } from '../../hooks';
 import { type LinkProps, type PolymorphicComponent, type PolymorphicRef, type SpiritLinkProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useLinkStyleProps } from './useLinkStyleProps';
@@ -18,7 +18,7 @@ const _Link = <E extends ElementType = 'a', C = void>(
   ref: PolymorphicRef<E>,
 ): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
+  const { elementType = defaultProps.elementType, children, routerOptions, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
 
@@ -26,8 +26,10 @@ const _Link = <E extends ElementType = 'a', C = void>(
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
+  const handleClick = useLinkClick({ ...restProps, routerOptions });
+
   return (
-    <Component {...otherProps} {...mergedStyleProps} href={restProps.href} ref={ref}>
+    <Component {...otherProps} {...mergedStyleProps} onClick={handleClick} ref={ref}>
       {children}
     </Component>
   );

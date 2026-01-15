@@ -16,6 +16,7 @@ export * from './useIconName';
 export * from './useInputPositionClass';
 export * from './useIsomorphicLayoutEffect';
 export * from './useLastActiveFocus';
+export * from './useLinkClick';
 export * from './useResizeObserver';
 export * from './useScrollControl';
 export * from './useSpacingStyle';
