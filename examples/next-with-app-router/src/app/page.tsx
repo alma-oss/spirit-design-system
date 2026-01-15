@@ -1,10 +1,15 @@
-import { Heading } from '@alma-oss/spirit-web-react';
+import { Heading, Link } from '@alma-oss/spirit-web-react';
 import { NextPage } from 'next';
 
 const Home: NextPage = () => (
-  <Heading elementType="h2" size="large">
-    Spirit App Router
-  </Heading>
+  <>
+    <Heading elementType="h2" size="large">
+      Spirit App Router
+    </Heading>
+    <p>
+      <Link href="/routing">RouterProvider demo (client-side routing)</Link>
+    </p>
+  </>
 );
 
 export default Home;
