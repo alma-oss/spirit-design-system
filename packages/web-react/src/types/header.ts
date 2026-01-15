@@ -2,6 +2,7 @@ import { type ElementType, type SyntheticEvent } from 'react';
 import {
   type ChildrenProps,
   type PolymorphicComponentProps,
+  type RouterLinkProps,
   type SpiritButtonElementProps,
   type SpiritDialogElementProps,
   type SpiritElementProps,
@@ -67,11 +68,11 @@ export interface HeaderNavProps extends SpiritUListElementProps, ChildrenProps {
 export interface HeaderNavItemProps extends SpiritLItemElementProps, ChildrenProps {}
 
 /** ===== STYLE API ===== */
-export interface HeaderDialogLinkStyleProps extends ChildrenProps, StyleProps, TransferProps {
+export interface HeaderDialogLinkStyleProps extends ChildrenProps, StyleProps, TransferProps, RouterLinkProps {
   isCurrent?: boolean;
 }
 
-export interface HeaderLinkStyleProps extends ChildrenProps, StyleProps, TransferProps {
+export interface HeaderLinkStyleProps extends ChildrenProps, StyleProps, TransferProps, RouterLinkProps {
   isCurrent?: boolean;
 }
 

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { useStyleProps } from '../../hooks';
+import { useLinkClick, useStyleProps } from '../../hooks';
 import {
   type HeaderLinkProps,
   type PolymorphicComponent,
@@ -15,7 +15,8 @@ const _HeaderLink = <E extends ElementType = 'a'>(
   props: SpiritHeaderLinkProps<E>,
   ref: PolymorphicRef<E>,
 ): JSX.Element => {
-  const { elementType = 'a', children, isCurrent, ...restProps } = props;
+  const { elementType = 'a', children, isCurrent, routerOptions, ...restProps } = props;
+  const { href } = restProps;
 
   const Component = elementType as ElementType;
 
@@ -27,8 +28,10 @@ const _HeaderLink = <E extends ElementType = 'a'>(
     otherProps,
   });
 
+  const handleClick = useLinkClick({ ...restProps, routerOptions });
+
   return (
-    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
+    <Component {...otherProps} {...mergedStyleProps} href={href} onClick={handleClick} ref={ref}>
       {children}
     </Component>
   );

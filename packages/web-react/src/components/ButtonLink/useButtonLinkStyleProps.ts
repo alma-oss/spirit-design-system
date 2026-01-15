@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { warning } from '../../common/utilities';
 import { useClassNamePrefix, useDeprecationMessage, useSymmetry } from '../../hooks';
-import { type ButtonColor, type ButtonSize, type ButtonStyleProps } from '../../types';
+import { type ButtonColor, type ButtonLinkStyleProps, type ButtonSize } from '../../types';
 import { applyColor, applySize } from '../../utils/classname';
 import { compose } from '../../utils/compose';
 
@@ -12,7 +12,7 @@ const getButtonLinkColorClassname = <C = void>(className: string, color: ButtonC
 const getButtonLinkSizeClassname = <S = void>(className: string, size: ButtonSize<S>): string =>
   compose(applySize<ButtonSize<S>>(size))(className);
 
-export function useButtonLinkStyleProps<C = void, S = void>(props: ButtonStyleProps<C, S>) {
+export function useButtonLinkStyleProps<C = void, S = void>(props: Omit<ButtonLinkStyleProps<C, S>, 'routerOptions'>) {
   const { color, isBlock, isDisabled, isLoading, isSymmetrical, size, ...restProps } = props;
 
   // @see https://jira.almacareer.tech/browse/DS-1897

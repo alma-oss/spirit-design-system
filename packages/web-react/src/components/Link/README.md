@@ -102,9 +102,12 @@ and [escape hatches][readme-escape-hatches].
 
 Link classes are fabricated using `useLinkStyleProps` hook. You can use it to create your own custom Link component.
 
+The hook only accepts styling-related props: strip `routerOptions` (and any other non-DOM props your wrapper handles separately) before calling it—the built-in `Link` component does this at its root.
+
 ```tsx
 const CustomLink = (props: SpiritLinkProps): JSX.Element => {
-  const { classProps, props: modifiedProps, children } = useLinkStyleProps(props);
+  const { children, routerOptions, ...styleProps } = props;
+  const { classProps, props: modifiedProps } = useLinkStyleProps(styleProps);
 
   return (
     <a {...modifiedProps} href={props.href} className={classProps}>

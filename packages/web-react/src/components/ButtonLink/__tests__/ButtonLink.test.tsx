@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
@@ -13,6 +13,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { RouterProvider } from '../../../context/RouterContext';
 import ButtonLink from '../ButtonLink';
 
 jest.mock('../../../hooks/useIcon');
@@ -103,5 +104,44 @@ describe('ButtonLink', () => {
     const element = screen.getByRole('button');
 
     expect(element).toHaveAttribute('target', '_blank');
+  });
+
+  it('should not navigate or call onClick when disabled with RouterProvider', () => {
+    const navigate = jest.fn();
+    const onClick = jest.fn();
+
+    render(
+      <RouterProvider navigate={navigate}>
+        <ButtonLink href="/jobs" isDisabled onClick={onClick}>
+          Jobs
+        </ButtonLink>
+      </RouterProvider>,
+    );
+
+    const element = screen.getByRole('button', { name: 'Jobs' });
+    const clickResult = fireEvent.click(element);
+
+    expect(clickResult).toBe(false);
+    expect(onClick).not.toHaveBeenCalled();
+    expect(navigate).not.toHaveBeenCalled();
+  });
+
+  it('should call onClick and navigate for enabled internal link', () => {
+    const navigate = jest.fn();
+    const onClick = jest.fn();
+
+    render(
+      <RouterProvider navigate={navigate}>
+        <ButtonLink href="/jobs" onClick={onClick}>
+          Jobs
+        </ButtonLink>
+      </RouterProvider>,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Jobs' }));
+
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(navigate).toHaveBeenCalledTimes(1);
+    expect(navigate).toHaveBeenCalledWith('/jobs', undefined);
   });
 });
