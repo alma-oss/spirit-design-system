@@ -7,7 +7,7 @@ import FileUploaderInput from '../FileUploaderInput';
 import FileUploaderList from '../FileUploaderList';
 import { useFileQueue } from '../useFileQueue';
 
-/* eslint-disable react/no-unstable-nested-components, react-refresh/only-export-components -- this is a Figma example */
+/* eslint-disable react/no-unstable-nested-components -- this is a Figma example */
 const FileUploaderExample = () => {
   const { fileQueue, addToQueue, clearQueue, onDismiss, findInQueue, updateQueue } = useFileQueue();
 

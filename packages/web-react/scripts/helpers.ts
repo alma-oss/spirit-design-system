@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { glob } from 'glob';
 import * as path from 'path';
 import * as recast from 'recast';
@@ -35,7 +34,6 @@ export async function eachFile(dir: string, callback: (absPath: string, relPath:
       if (relPath.endsWith('invariantErrorCodes.js')) return;
 
       promises.push(
-        // eslint-disable-next-line no-shadow
         new Promise((resolve) => {
           resolve(callback(file, relPath));
         }),

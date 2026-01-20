@@ -15,9 +15,11 @@ const setCustomHeight = (
     return Object.keys(propValue).reduce((acc, key) => {
       const suffix = key === 'mobile' ? '' : `-${key}`;
       const propName = `--${baseVarName}${suffix}`;
-      acc[propName] = propValue[key as keyof ModalDialogCSSHeightBreakpoints]?.toString();
 
-      return acc;
+      return {
+        ...acc,
+        [propName]: propValue[key as keyof ModalDialogCSSHeightBreakpoints]?.toString(),
+      };
     }, {} as CustomizedHeightCSSProperties);
   }
   const propName = `--${baseVarName}`;

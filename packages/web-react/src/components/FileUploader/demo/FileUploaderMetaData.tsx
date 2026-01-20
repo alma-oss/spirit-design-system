@@ -82,7 +82,6 @@ const FileUploaderMetaData = () => {
           linkText="Upload your file(s)"
           name="attachments"
           maxUploadedFiles={1}
-          /* eslint-disable-next-line no-console */
           onError={(error) => console.error('My error log', error)}
         />
         <FileUploaderList

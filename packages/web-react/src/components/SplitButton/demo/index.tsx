@@ -1,5 +1,5 @@
 // Because there is no `dist` directory during the CI run
-/* eslint-disable import/no-extraneous-dependencies, import/extensions, import/no-unresolved */
+/* eslint-disable import/extensions, import/no-unresolved */
 // @ts-ignore: No declaration file -- @see https://jira.almacareer.tech/browse/DS-561
 import icons from '@alma-oss/spirit-icons/icons';
 import React, { StrictMode } from 'react';

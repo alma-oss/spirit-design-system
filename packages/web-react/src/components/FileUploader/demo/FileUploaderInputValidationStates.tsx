@@ -52,7 +52,6 @@ const FileUploaderInputValidationStates = () => {
           labelText="or drag and drop here"
           linkText="Upload your file"
           name="attachmentsSuccess"
-          /* eslint-disable-next-line no-console */
           onError={(error) => console.error('My error log', error)}
           validationText="Success validation text"
           validationState="success"
@@ -82,7 +81,6 @@ const FileUploaderInputValidationStates = () => {
           labelText="or drag and drop here"
           linkText="Upload your file"
           name="attachmentsWarning"
-          /* eslint-disable-next-line no-console */
           onError={(error) => console.error('My error log', error)}
           validationText="Warning validation text"
           validationState="warning"
@@ -112,7 +110,6 @@ const FileUploaderInputValidationStates = () => {
           labelText="or drag and drop here"
           linkText="Upload your file"
           name="attachmentsDanger"
-          /* eslint-disable-next-line no-console */
           onError={(error) => console.error('My error log', error)}
           validationText={['Danger validation text', 'Another danger validation text']}
           validationState="danger"

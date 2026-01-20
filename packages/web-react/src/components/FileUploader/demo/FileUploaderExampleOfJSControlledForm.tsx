@@ -9,7 +9,7 @@ const FileUploaderExampleOfJSControlledForm = () => {
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    /* eslint-disable-next-line no-console */
+
     console.info('file queue', fileQueue);
 
     setSubmitting(true);
@@ -17,7 +17,7 @@ const FileUploaderExampleOfJSControlledForm = () => {
     setTimeout(() => {
       clearQueue();
       setSubmitting(false);
-      /* eslint-disable-next-line no-console */
+
       console.log('file queue after submit', fileQueue);
     }, 250);
   };
@@ -44,7 +44,6 @@ const FileUploaderExampleOfJSControlledForm = () => {
           labelText="or drag and drop here"
           linkText="Upload your file"
           name="attachments"
-          /* eslint-disable-next-line no-console */
           onError={(error) => console.error('My error log', error)}
         />
         <FileUploaderList

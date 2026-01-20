@@ -31,7 +31,6 @@ const FileUploaderInputValidationWithIcon = () => {
             labelText="or drag and drop here"
             linkText="Upload your file"
             name="attachmentsWarning"
-            /* eslint-disable-next-line no-console */
             onError={(error) => console.error('My error log', error)}
             validationText={`This is ${state} validation text. Long validation text to show how it wraps.`}
             validationState={state}

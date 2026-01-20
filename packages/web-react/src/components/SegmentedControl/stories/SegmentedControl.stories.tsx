@@ -92,7 +92,8 @@ const SegmentedControlWithHooks = ({ name, label, children, ...args }: Segmented
 
   useEffect(() => {
     setSelectedValue(args.isMultiselect ? defaultMultipleValue : defaultSingleValue);
-  }, [args.isMultiselect]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- we want to run this only once on mount
+  }, [args.isMultiselect, defaultSingleValue]);
 
   return (
     <SegmentedControl

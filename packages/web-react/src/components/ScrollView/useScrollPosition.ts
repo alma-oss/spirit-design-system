@@ -69,6 +69,7 @@ export const useScrollPosition = ({
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- debounce is stable
   const debouncedHandler = useCallback(debounce(handleScrollViewState, DEBOUNCE_DELAY), [handleScrollViewState]);
 
   useResizeObserver({

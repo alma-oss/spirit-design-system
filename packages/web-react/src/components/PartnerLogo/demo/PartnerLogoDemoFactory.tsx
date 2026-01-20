@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components -- Demo file exports constants alongside components */
 import React from 'react';
 import { Sizes } from '../../../constants';
 import { type SpiritPartnerLogoProps } from '../../../types/partnerLogo';
