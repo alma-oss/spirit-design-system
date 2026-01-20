@@ -14,7 +14,7 @@ const defaultProps: Partial<SpiritSkipLinkProps> = {
 /* eslint no-underscore-dangle: ['error', { allow: ['_SkipLink'] }] */
 const _SkipLink = <E extends ElementType = 'a'>(props: SpiritSkipLinkProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const {
     elementType: ElementTag = defaultProps.elementType as ElementType,
     children,

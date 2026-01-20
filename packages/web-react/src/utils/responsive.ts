@@ -4,7 +4,7 @@ import type { Responsive } from '../types';
  * Checks if a value is a responsive object (has breakpoint keys).
  *
  * @param value - The value to check.
- * @returns True if the value is a responsive object, false otherwise.
+ * @returns {boolean} True if the value is a responsive object, false otherwise.
  */
 export function isResponsive<T>(value: unknown): value is Responsive<T> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -15,7 +15,7 @@ export function isResponsive<T>(value: unknown): value is Responsive<T> {
  *
  * @param componentClass - The base component class name.
  * @param value - The responsive value or single value.
- * @returns Array of class names.
+ * @returns {string[]} Array of class names.
  */
 export function generateResponsiveClassNames<T extends string>(
   componentClass: string,

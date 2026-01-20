@@ -22,7 +22,7 @@ Story.args = {
   listProps: {
     label: 'Attachments',
   },
-  /* eslint-disable-next-line no-console */
+
   onInputError: (error: string | Error) => console.error('My error log', error),
 };
 

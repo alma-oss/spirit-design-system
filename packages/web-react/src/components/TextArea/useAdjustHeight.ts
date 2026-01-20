@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable no-param-reassign -- DOM manipulation is required for dynamic height adjustment */
 import { type FormEvent, type FormEventHandler, type ForwardedRef, type MutableRefObject, useEffect } from 'react';
 
 export interface UseAdjustHeightProps {

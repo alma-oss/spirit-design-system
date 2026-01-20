@@ -12,7 +12,6 @@ const Spinner = <C extends undefined = undefined>(props: SpiritSpinnerProps<C>):
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
 
   return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Incompatible HTMLElement and SVGSVGElement
     <Icon
       {...otherProps}

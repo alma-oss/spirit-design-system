@@ -1,5 +1,5 @@
 // Because there is no `dist` directory during the CI run
-/* eslint-disable import/no-extraneous-dependencies, import/extensions, import/no-unresolved */
+
 import { type StoryFn } from '@storybook/react';
 import React from 'react';
 import { Link } from '../../Link';

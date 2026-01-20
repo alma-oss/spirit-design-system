@@ -96,7 +96,7 @@ figma.connect(EmptyState, EMPTY_STATE_NODE_URL, {
         </Text>
       </EmptyStateSection>
       <EmptyStateSection>
-        <Link href="#">Link to something</Link>
+        <Link href="#link">Link to something</Link>
       </EmptyStateSection>
     </EmptyState>
   ),
@@ -156,7 +156,7 @@ figma.connect(EmptyState, EMPTY_STATE_NODE_URL, {
         </ActionGroup>
       </EmptyStateSection>
       <EmptyStateSection>
-        <Link href="#">Link to something</Link>
+        <Link href="#link">Link to something</Link>
       </EmptyStateSection>
     </EmptyState>
   ),
@@ -180,7 +180,7 @@ figma.connect(EmptyState, EMPTY_STATE_NODE_URL, {
         </Text>
       </EmptyStateSection>
       <EmptyStateSection>
-        <Link href="#">Link to something</Link>
+        <Link href="#link">Link to something</Link>
       </EmptyStateSection>
     </EmptyState>
   ),
@@ -212,7 +212,7 @@ figma.connect(EmptyState, EMPTY_STATE_NODE_URL, {
         </ActionGroup>
       </EmptyStateSection>
       <EmptyStateSection>
-        <Link href="#">Link to something</Link>
+        <Link href="#link">Link to something</Link>
       </EmptyStateSection>
     </EmptyState>
   ),

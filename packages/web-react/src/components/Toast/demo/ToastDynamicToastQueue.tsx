@@ -70,7 +70,8 @@ const ToastDynamicToastQueue = () => {
 
   useEffect(() => {
     setQueue(defaultToastQueue);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- we want to run this only once on mount
+  }, [setQueue]);
 
   const handleAlignmentYChange = (event: ChangeEvent<HTMLInputElement>) => {
     setAlignmentY(event.target.value as AlignmentYDictionaryType);

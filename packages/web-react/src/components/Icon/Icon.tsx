@@ -35,7 +35,6 @@ const _Icon = (props: SpiritIconProps, ref: ForwardedRef<SVGSVGElement>) => {
   }
 
   return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Incompatible HTMLElement and SVGSVGElement
     <svg
       {...otherProps}

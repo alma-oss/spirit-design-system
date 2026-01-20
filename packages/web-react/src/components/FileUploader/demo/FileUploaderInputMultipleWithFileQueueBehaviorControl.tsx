@@ -29,7 +29,6 @@ const FileUploaderInputMultipleWithFileQueueBehaviorControl = () => {
         linkText="Upload your file(s)"
         maxUploadedFiles={2}
         name="attachments"
-        /* eslint-disable-next-line no-console */
         onError={(error) => console.error('My error log', error)}
         queueLimitBehavior="hide"
       />

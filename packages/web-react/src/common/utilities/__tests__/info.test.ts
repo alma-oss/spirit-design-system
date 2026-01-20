@@ -23,7 +23,7 @@ describe('info', () => {
 
   // https://github.com/getify/You-Dont-Know-JS/blob/master/types%20%26%20grammar/ch4.md#falsy-values
   // testing falsy values
-  // eslint-disable-next-line no-undefined
+
   it.each([undefined, null, false, +0, -0, NaN, ''])('should log a info if the condition is falsy', (falsyValue) => {
     const message: string = `hey ${String(falsyValue)}`;
     info(falsyValue, message);

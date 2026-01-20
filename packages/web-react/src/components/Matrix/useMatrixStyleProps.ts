@@ -22,7 +22,7 @@ export interface MatrixStyles<T> {
  * @param rows - The row configuration for the Matrix, which can be a dimension type or undefined.
  * @param itemsCount
  * @param prefix - The CSS variable prefix used for generating styles.
- * @returns A CSSProperties object containing the calculated row styles.
+ * @returns {CSSProperties} A CSSProperties object containing the calculated row styles.
  */
 export const useDefaultResponsiveRowsStyle = (
   cols: DimensionType | undefined,

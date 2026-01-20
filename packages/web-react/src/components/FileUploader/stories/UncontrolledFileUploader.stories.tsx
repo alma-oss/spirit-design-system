@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { type FormEvent, type MutableRefObject, createRef, useState } from 'react';
+import { action } from 'storybook/actions';
 import { ValidationStates } from '../../../constants';
 import {
   type FileQueueMapType,
@@ -143,7 +144,7 @@ const UncontrolledFileUploaderWithHooks = (args: SpiritUncontrolledFileUploaderP
 
   const changeHandler = (fileQueue: FileQueueMapType) => {
     setQueue(fileQueue);
-    console.log('change handler:', fileQueue);
+    action('changeHandler')(fileQueue);
   };
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
@@ -151,11 +152,12 @@ const UncontrolledFileUploaderWithHooks = (args: SpiritUncontrolledFileUploaderP
     const master = new Map(queue);
 
     setSubmitting(true);
-    console.log('inputReference:', inputReference);
-    console.log('dropZoneReference:', dropZoneReference);
+    action('submitHandler:inputReference')(inputReference);
+    action('submitHandler:dropZoneReference')(dropZoneReference);
 
     setTimeout(() => {
-      console.info('form data:', master, event);
+      action('submitHandler:formData:master')(master);
+      action('submitHandler:formData:event')(event);
       setSubmitting(false);
       setSubmitted(true);
 
@@ -165,7 +167,7 @@ const UncontrolledFileUploaderWithHooks = (args: SpiritUncontrolledFileUploaderP
   };
 
   const errorHandler = (error: string | Error) => {
-    console.error(error);
+    action('errorHandler')(error);
     setValidationState('danger');
     setValidationText(String(error));
 

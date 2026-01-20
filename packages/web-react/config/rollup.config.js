@@ -1,10 +1,9 @@
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
+import minify from '@rollup/plugin-terser';
 // ES lint is disabled because there is a conflict between 2 rules
 // 1) it should not be empty line before imports (required is considered as import) and
 // 2) should be empty line after last import (required is not considered as import)
-// eslint-disable-next-line import/order
-import minify from '@rollup/plugin-terser';
 // eslint-disable-next-line import/order -- empty line between imports
 import path from 'path';
 
