@@ -1,9 +1,14 @@
 /* @jest-environment node */
 
-import { resolve } from 'path';
-import { pathToFileURL } from 'url';
+import { dirname, resolve } from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
 import { sync } from 'glob';
 import { runSass } from 'sass-true';
+
+// Jest runners (VS Code / Cursor) may execute tests with a different CWD than the package root.
+// Derive paths from this file location instead of relying on process.cwd().
+const currentDir = dirname(fileURLToPath(import.meta.url));
+const packageRoot = resolve(currentDir, '..');
 
 const importers = [
   // Make @tokens work
@@ -14,7 +19,7 @@ const importers = [
       }
 
       return new URL(
-        pathToFileURL(resolve(process.cwd(), '../../node_modules/@alma-oss/spirit-design-tokens/src/scss', url)),
+        pathToFileURL(resolve(packageRoot, '../../node_modules/@alma-oss/spirit-design-tokens/src/scss', url)),
       );
     },
   },
@@ -29,7 +34,7 @@ const customLogger = {
 };
 
 describe('Sass', () => {
-  const sassTestFiles = sync(resolve(process.cwd(), 'src/**/*.test.scss'));
+  const sassTestFiles = sync(resolve(packageRoot, 'src/**/*.test.scss'));
 
   sassTestFiles.forEach((file) => runSass({ describe, it }, file, { importers, logger: customLogger }));
 });
