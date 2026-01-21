@@ -1,10 +1,6 @@
 import { resolve } from 'path';
 
 export const config = {
-  // The root directory that Jest should scan for tests and modules within.
-  // https://jestjs.io/docs/configuration#rootdir-string
-  rootDir: resolve('./'),
-
   // This option tells Jest that all imported modules in your tests should be mocked automatically.
   // https://jestjs.io/docs/configuration#automock-boolean
   automock: false,
@@ -16,7 +12,9 @@ export const config = {
   // A map from regular expressions to paths to transformers
   // https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
   transform: {
-    '^.+\\.(t|j)sx?$': [resolve('./../../node_modules/@swc/jest')],
+    // Use <rootDir> so this works no matter what the current working directory is
+    // (important for IDE runners like vscode-jest / Cursor).
+    '^.+\\.(t|j)sx?$': ['<rootDir>/../../node_modules/@swc/jest'],
   },
 
   // This line is because of polyfill for useResizeHook
