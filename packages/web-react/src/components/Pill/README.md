@@ -28,8 +28,8 @@ and [escape hatches][readme-escape-hatches].
 
 For detailed information see [Pill][pill] component
 
-[pill]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Pill/README.md
-[readme-additional-attributes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
-[readme-escape-hatches]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
-[readme-generated-types]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
-[readme-style-props]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[pill]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Pill/README.md
+[readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
+[readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

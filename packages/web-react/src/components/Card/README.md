@@ -519,18 +519,18 @@ When you put it all together:
 
 ℹ️ A big shout-out to [Ondřej Pohl][ondrej-pohl] for sharing many of these best practices!
 
-[dictionary-alignment]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
-[dictionary-breakpoint]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
-[dictionary-color]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#color
-[dictionary-direction]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#direction
-[dictionary-intensity]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#intensity
-[dictionary-size]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
-[grid]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
+[dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
+[dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
+[dictionary-color]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#color
+[dictionary-direction]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#direction
+[dictionary-intensity]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#intensity
+[dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
+[grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
 [heydon-pickering-card]: https://inclusive-components.design/cards/
 [hugo-giraudel-card]: https://kittygiraudel.com/2022/04/02/accessible-cards/
 [mdn-object-fit]: https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
 [ondrej-pohl]: https://linkedin.com/in/ondrejpohl
-[readme-additional-attributes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
-[readme-escape-hatches]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
-[readme-generated-types]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#api-generated-types
-[readme-style-props]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#api-generated-types
+[readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

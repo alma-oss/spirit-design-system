@@ -207,9 +207,9 @@ With Buttons:
 </Navigation>
 ```
 
-[dictionary-direction]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#direction
-[dictionary-variant]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/DICTIONARIES.md#variant
-[readme-additional-attributes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
-[readme-escape-hatches]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
-[readme-style-props]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#style-props
-[web-react-unstable-header]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Header/README.md
+[dictionary-direction]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#direction
+[dictionary-variant]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#variant
+[readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[web-react-unstable-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Header/README.md
