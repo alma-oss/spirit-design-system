@@ -65,5 +65,5 @@ check out our [Contributing Guide][contributing]! 👀
 Licensed under the [MIT][license].
 
 [yarn]: https://yarnpkg.com/en/
-[contributing]: https://github.com/lmc-eu/spirit-design-system/blob/main/CONTRIBUTING.md
-[license]: https://github.com/lmc-eu/spirit-design-system/blob/main/LICENSE.md
+[contributing]: https://github.com/alma-oss/spirit-design-system/blob/main/CONTRIBUTING.md
+[license]: https://github.com/alma-oss/spirit-design-system/blob/main/LICENSE.md

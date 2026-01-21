@@ -21,7 +21,7 @@ registerA11yMatchers();
 
 /**
  * @todo Place here the content of the `packages/web-react/config/jest/setupTestingLibrary.ts`
- * @see { @link https://github.com/lmc-eu/spirit-design-system/issues/1413 }
+ * @see { @link https://github.com/alma-oss/spirit-design-system/issues/1413 }
  *
  * Here should be the setup of the general mocks like one for console.log, etc.
  * Also consider better patching of the Console.

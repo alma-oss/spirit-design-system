@@ -473,9 +473,9 @@ If you have questions about truncation in a specific component or scenario:
 2. Review this guide for general best practices
 3. Reach out to the Spirit Design System team
 
-[contributing-a11y-testing]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/contribution/accessibility-testing.md
-[demo-text-helpers]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/helpers/text/index.html
-[docs-react-breadcrumbs]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Breadcrumbs/README.md
-[docs-segmented-control]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/SegmentedControl/README.md
-[docs-truncate]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web-react/src/components/Truncate/README.md
-[docs-web-breadcrumbs]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Breadcrumbs/README.md
+[contributing-a11y-testing]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/accessibility-testing.md
+[demo-text-helpers]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/helpers/text/index.html
+[docs-react-breadcrumbs]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Breadcrumbs/README.md
+[docs-segmented-control]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/SegmentedControl/README.md
+[docs-truncate]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react/src/components/Truncate/README.md
+[docs-web-breadcrumbs]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Breadcrumbs/README.md

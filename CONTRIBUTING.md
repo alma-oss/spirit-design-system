@@ -283,7 +283,7 @@ Then the tests will be run against the Netlify deployment on every change pushed
 
 When the tests fail, there will be a comment in the PR with a link to the report and a message about the failure will be raised in the Slack channel `#spirit-design-system-notifications_en`.
 You can also find the report URL in the GitHub Actions run under the `Run actions/upload-artifact` section.
-Look for `Artifact download URL: https://github.com/lmc-eu/spirit-design-system/actions/runs/<run-id>/artifacts/<artifact-id>`.
+Look for `Artifact download URL: https://github.com/alma-oss/spirit-design-system/actions/runs/<run-id>/artifacts/<artifact-id>`.
 
 ### Developing and Testing GitHub Actions
 
@@ -355,22 +355,22 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 
 > If you have further questions do not hesitate to open an issue and ask us! ❤️
 
-[accessibility-testing]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/contribution/accessibility-testing.md
+[accessibility-testing]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/accessibility-testing.md
 [act]: https://github.com/nektos/act
 [act-article]: https://www.freecodecamp.org/news/how-to-run-github-actions-locally/
 [conventional-commits]: https://www.conventionalcommits.org
-[commitlint-config]: https://github.com/lmc-eu/code-quality-tools/tree/main/packages/commitlint-config
-[decisions]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/decisions/README.md
-[developer-handbook]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/contribution/development.md
-[dictionary]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/DICTIONARIES.md
-[e2e-testing]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/contribution/e2e-testing.md
+[commitlint-config]: https://github.com/alma-oss/code-quality-tools/tree/main/packages/commitlint-config
+[decisions]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/README.md
+[developer-handbook]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/development.md
+[dictionary]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md
+[e2e-testing]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/e2e-testing.md
 [eslint]: https://eslint.org/
 [jest]: https://jestjs.io/
 [lerna-home]: https://lerna.js.org
 [netlify-preview-gist]: https://gist.github.com/adamkudrna/694f3048c1338f07375b9b8af24afe2f
 [packages]: packages/
 [prettier]: https://prettier.io/
-[publish-action]: https://github.com/lmc-eu/spirit-design-system/actions/workflows/publish.yaml
+[publish-action]: https://github.com/alma-oss/spirit-design-system/actions/workflows/publish.yaml
 [release-notes-template]: https://almamedia.slack.com/docs/T0325RBAD/F08D6U6EAKH
 [typescript]: https://www.typescriptlang.org/
 [figma-access-token]: https://help.figma.com/hc/en-us/articles/8085703771159-Manage-personal-access-tokens
@@ -378,4 +378,4 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [figma-code-connect]: https://developers.figma.com/docs/code-connect/
 [figma-dev-mode]: https://help.figma.com/hc/en-us/articles/15023124644247-Guide-to-Dev-Mode
 [figma-react-guide]: https://developers.figma.com/docs/code-connect/react/
-[version-action]: https://github.com/lmc-eu/spirit-design-system/actions/workflows/version.yaml
+[version-action]: https://github.com/alma-oss/spirit-design-system/actions/workflows/version.yaml

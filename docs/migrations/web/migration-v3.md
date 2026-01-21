@@ -321,4 +321,4 @@ The Toast component now has its own close button and link.
 ---
 
 [spirit-figma-file]: https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/
-[themes-decision]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/decisions/008-themes.md
+[themes-decision]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/008-themes.md

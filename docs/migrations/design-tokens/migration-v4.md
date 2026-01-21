@@ -51,5 +51,5 @@ Also update any other imports or references to the package:
 
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
 
-[migration-guide-web]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/migrations/web/migration-v4.md
-[migration-guide-web-react]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/migrations/web-react/migration-v4.md
+[migration-guide-web]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v4.md
+[migration-guide-web-react]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web-react/migration-v4.md

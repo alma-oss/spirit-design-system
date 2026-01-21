@@ -2,7 +2,7 @@
 
 This is a collection of codemods for updating Web-React v3 components.
 
-You can find instructions on how to run these codemods in the main package [README](https://github.com/lmc-eu/spirit-design-system/blob/main/packages/codemods/README.md).
+You can find instructions on how to run these codemods in the main package [README](https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/README.md).
 
 ## Included Scripts
 

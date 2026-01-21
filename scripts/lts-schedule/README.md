@@ -32,6 +32,6 @@ check out our [Contributing Guide][contributing]! 👀
 
 Licensed under the [MIT][license].
 
-[contributing]: https://github.com/lmc-eu/spirit-design-system/blob/main/CONTRIBUTING.md
+[contributing]: https://github.com/alma-oss/spirit-design-system/blob/main/CONTRIBUTING.md
 [node-lts-repo]: https://github.com/nodejs/LTS/blob/master/schedule.json
-[license]: https://github.com/lmc-eu/spirit-design-system/blob/main/LICENSE.md
+[license]: https://github.com/alma-oss/spirit-design-system/blob/main/LICENSE.md

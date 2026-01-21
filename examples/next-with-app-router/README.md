@@ -203,4 +203,4 @@ Congratulation! The application will now be running at http://localhost:3000 and
 
 [nextjs-postcss-documentation]: https://nextjs.org/docs/pages/building-your-application/configuring/post-css
 [npm-error-enoworkspaces]: https://github.com/vercel/turborepo/issues/4183
-[rebranding-spirit]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/design-tokens/README.md#rebranding-spirit
+[rebranding-spirit]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#rebranding-spirit
