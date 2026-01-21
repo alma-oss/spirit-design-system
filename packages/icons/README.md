@@ -94,6 +94,6 @@ This configuration is not required if you are using the Next.js App Router.
 
 For more information, please see the [Next.js documentation][nextjs-transpile-packages].
 
-[spirit-web]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web
+[spirit-web]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web
 [nextjs-transpile-packages]: https://nextjs.org/docs/pages/api-reference/next-config-js/transpilePackages
 [react-svgr]: https://react-svgr.com/

@@ -53,6 +53,6 @@ In such cases, the breaking changes can be introduced without deprecation as a s
 We consider there is a no less than 1 month period between the release of the deprecation notice and the release of the new major version.
 When the gap is longer, we should deprecate the feature first.
 
-[migration-guides]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/migrations/README.md
+[migration-guides]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/README.md
 [semver-zero-version]: https://semver.org/#spec-item-4
 [twig-deprecated]: https://twig.symfony.com/doc/3.x/tags/deprecated.html

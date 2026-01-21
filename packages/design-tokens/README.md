@@ -431,5 +431,5 @@ See the [LICENSE](LICENSE.md) file for information.
 [spirit-figma]: https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/
 [spirit-supernova]: https://spirit.design/
 [supernova]: https://spirit.supernova-docs.io
-[web-docs]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web#readme
+[web-docs]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web#readme
 [sass-embedded]: https://sass-lang.com/documentation/breaking-changes/legacy-js-api/#bundlers

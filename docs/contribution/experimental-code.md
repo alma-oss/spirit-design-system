@@ -180,4 +180,4 @@ be met to move a component from experimental to stable:
   - [ ] The component has visual tests written using the project's End-to-End testing library for testing the component design
   <!--lint enable no-undefined-references-->
 
-[docs-feature-flags]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/contribution/feature-flags.md
+[docs-feature-flags]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/feature-flags.md

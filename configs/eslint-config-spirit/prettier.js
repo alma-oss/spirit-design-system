@@ -1,6 +1,6 @@
 /**
  * @todo Move this configuration to Code Quality Tools once the migration to ESLint v9 is done
- * @see { @link https://github.com/lmc-eu/spirit-design-system/issues/2268 }
+ * @see { @link https://github.com/alma-oss/spirit-design-system/issues/2268 }
  */
 let prettierConfig;
 

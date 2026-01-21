@@ -318,6 +318,6 @@ Instead of using `.Tooltip--top` or `.Tooltip--topLeft`, use a data attribute li
 
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
 
-[dictionary-placement]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#placement
-[readme-tooltip]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Tooltip/README.md
+[dictionary-placement]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#placement
+[readme-tooltip]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Tooltip/README.md
 [floating-ui]: https://floating-ui.com

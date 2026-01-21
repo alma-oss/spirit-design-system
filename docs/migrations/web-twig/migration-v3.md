@@ -444,10 +444,10 @@ default. You can turn them off by setting them to `false`.
 
 Please refer back to this guide or reach out to our team if you encounter any issues during migration.
 
-[migration-guide-web]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/migrations/web/migration-v2.md
+[migration-guide-web]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v2.md
 [alert-role-documentation]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/alert_role
-[dictionary-placement]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#placement
+[dictionary-placement]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#placement
 [mdn-anchor-target]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target
-[readme-additional-attributes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-twig/README.md#additional-attributes
-[tooltip-readme]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-twig/src/Resources/components/Tooltip/README.md
+[readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-twig/README.md#additional-attributes
+[tooltip-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-twig/src/Resources/components/Tooltip/README.md
 [floating-ui]: https://floating-ui.com

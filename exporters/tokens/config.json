@@ -11,7 +11,7 @@
     "type": "string",
     "default": "",
     "title": "Search",
-    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/lmc-eu/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
+    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
     "category": "1. Replace font"
   },
   {
@@ -27,7 +27,7 @@
     "type": "string",
     "default": "",
     "title": "Search",
-    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/lmc-eu/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
+    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
     "category": "2. Replace font"
   },
   {
@@ -43,7 +43,7 @@
     "type": "string",
     "default": "",
     "title": "Search",
-    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/lmc-eu/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
+    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
     "category": "3. Replace font"
   },
   {
@@ -59,7 +59,7 @@
     "type": "string",
     "default": "",
     "title": "Search",
-    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/lmc-eu/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
+    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
     "category": "4. Replace font"
   },
   {
@@ -75,7 +75,7 @@
     "type": "string",
     "default": "",
     "title": "Search",
-    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/lmc-eu/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
+    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
     "category": "5. Replace font"
   },
   {

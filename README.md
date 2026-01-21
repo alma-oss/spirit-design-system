@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://github.com/lmc-eu/spirit-design-system/blob/main/static/spirit.svg?raw=true" width="400" height="230" alt="Spirit Design System" />
+<img src="https://github.com/alma-oss/spirit-design-system/blob/main/static/spirit.svg?raw=true" width="400" height="230" alt="Spirit Design System" />
 
 ### Spirit Design System
 
@@ -59,7 +59,7 @@ See individual [packages](#packages) to learn how to get started.
 
 ### 🚀 Start Development
 
-- `git clone ssh://git@github.com:lmc-eu/spirit-design-system.git`
+- `git clone ssh://git@github.com:alma-oss/spirit-design-system.git`
 - `cd spirit-design-system`
 
 Using Make (recommended):
@@ -87,9 +87,9 @@ check out our [Contributing Guide][contributing]! 👀
 See the [LICENSE][license] file for information.
 
 [alma-career]: https://github.com/lmc-eu
-[code-quality-checks]: https://github.com/lmc-eu/spirit-design-system/actions
-[code-quality-checks-svg]: https://github.com/lmc-eu/spirit-design-system/actions/workflows/test.yaml/badge.svg?branch=main
-[contributing]: https://github.com/lmc-eu/spirit-design-system/blob/main/CONTRIBUTING.md
+[code-quality-checks]: https://github.com/alma-oss/spirit-design-system/actions
+[code-quality-checks-svg]: https://github.com/alma-oss/spirit-design-system/actions/workflows/test.yaml/badge.svg?branch=main
+[contributing]: https://github.com/alma-oss/spirit-design-system/blob/main/CONTRIBUTING.md
 [coverage-status]: https://coveralls.io/github/lmc-eu/spirit-design-system?branch=main
 [coverage-status-svg]: https://coveralls.io/repos/github/lmc-eu/spirit-design-system/badge.svg?branch=main
 [corepack]: https://yarnpkg.com/corepack#installation
@@ -97,27 +97,27 @@ See the [LICENSE][license] file for information.
 [docker-compose]: https://docs.docker.com/compose/
 [lerna]: https://lerna.js.org
 [lerna-svg]: https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg
-[license]: https://github.com/lmc-eu/spirit-design-system/blob/main/LICENSE.md
+[license]: https://github.com/alma-oss/spirit-design-system/blob/main/LICENSE.md
 [nodejs]: https://nodejs.org
-[packages-analytics]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/analytics
-[packages-codemods]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/codemods
-[packages-common]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/common
-[packages-design-tokens]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/design-tokens
-[packages-icons]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/icons
-[packages-web]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web
-[packages-web-react]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web-react
-[package.json]: https://github.com/lmc-eu/spirit-design-system/blob/main/package.json
-[sa-badge]: https://img.shields.io/npm/v/%40lmc-eu/spirit-analytics.svg?style=flat-square
+[packages-analytics]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/analytics
+[packages-codemods]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/codemods
+[packages-common]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/common
+[packages-design-tokens]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens
+[packages-icons]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/icons
+[packages-web]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web
+[packages-web-react]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react
+[package.json]: https://github.com/alma-oss/spirit-design-system/blob/main/package.json
+[sa-badge]: https://img.shields.io/npm/v/%40alma-oss/spirit-analytics.svg?style=flat-square
 [sa-npm]: https://www.npmjs.com/package/@alma-oss/spirit-analytics
-[sc-badge]: https://img.shields.io/npm/v/%40lmc-eu/spirit-codemods.svg?style=flat-square
+[sc-badge]: https://img.shields.io/npm/v/%40alma-oss/spirit-codemods.svg?style=flat-square
 [sc-npm]: https://www.npmjs.com/package/@alma-oss/spirit-codemods
-[sdt-badge]: https://img.shields.io/npm/v/%40lmc-eu/spirit-design-tokens.svg?style=flat-square
+[sdt-badge]: https://img.shields.io/npm/v/%40alma-oss/spirit-design-tokens.svg?style=flat-square
 [sdt-npm]: https://www.npmjs.com/package/@alma-oss/spirit-design-tokens
-[si-badge]: https://img.shields.io/npm/v/%40lmc-eu/spirit-icons.svg?style=flat-square
+[si-badge]: https://img.shields.io/npm/v/%40alma-oss/spirit-icons.svg?style=flat-square
 [si-npm]: https://www.npmjs.com/package/@alma-oss/spirit-icons
-[sw-badge]: https://img.shields.io/npm/v/%40lmc-eu/spirit-web.svg?style=flat-square
+[sw-badge]: https://img.shields.io/npm/v/%40alma-oss/spirit-web.svg?style=flat-square
 [sw-npm]: https://www.npmjs.com/package/@alma-oss/spirit-web
-[swr-badge]: https://img.shields.io/npm/v/%40lmc-eu/spirit-web-react.svg?style=flat-square
+[swr-badge]: https://img.shields.io/npm/v/%40alma-oss/spirit-web-react.svg?style=flat-square
 [swr-npm]: https://www.npmjs.com/package/@alma-oss/spirit-web-react
 [lmc-eu-packages-web-twig]: https://github.com/lmc-eu/spirit-design-system/tree/%40lmc-eu/spirit-web-twig%405.0.0/packages/web-twig
 [lmc-eu-packages-analytics]: https://github.com/lmc-eu/spirit-design-system/tree/%40lmc-eu/spirit-analytics%401.0.17/packages/analytics
