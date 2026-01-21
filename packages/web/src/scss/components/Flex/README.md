@@ -214,7 +214,7 @@ Custom spacing for each breakpoint:
 </div>
 ```
 
-[dictionary-breakpoint]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
+[dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [mdn-display-flex]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout
 [mdn-display-grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout
-[dictionary-alignment]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
+[dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment

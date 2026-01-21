@@ -99,5 +99,5 @@ myOffcanvas.addEventListener('hidden.offcanvas', function () {
 });
 ```
 
-[dictionary-breakpoint]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
-[js-plugin-readme]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web#javascript
+[dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
+[js-plugin-readme]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web#javascript

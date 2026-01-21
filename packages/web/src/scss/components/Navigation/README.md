@@ -171,4 +171,4 @@ With Buttons and NavigationAvatar:
 </nav>
 ```
 
-[web-unstable-header]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Header/README.md
+[web-unstable-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Header/README.md

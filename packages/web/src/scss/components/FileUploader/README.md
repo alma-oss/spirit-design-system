@@ -652,11 +652,11 @@ to the missing `name` attribute.
 
 Example: So if you set `name="attachments"` to the default input element, the attachments will then show `name="attachments[]"`.
 
-[dictionary-validation]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
-[learn-about-file-sizes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/FileUploader/README.md#understanding-file-size-in-bytes
+[dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[learn-about-file-sizes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FileUploader/README.md#understanding-file-size-in-bytes
 [mdn-accept]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
 [mdn-input-file]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
 [mdn-multiple]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#multiple
 [mdn-template]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template
-[prefixed]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
-[web-readme]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md
+[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

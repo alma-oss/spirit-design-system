@@ -497,9 +497,9 @@ And the complete Header Dialog:
 ✍️ Please do feel free to let us know should you believe this component lacks
 some important capabilities. Thank you! 🙏
 
-[dictionary-breakpoint]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
-[readme-deprecations]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md#deprecations
-[web-readme]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md
+[dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
+[readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#deprecations
+[web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md
 [mdn-dialog]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
-[offcanvas-docs]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Offcanvas/README.md
-[unstable-header-component]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Header/README.md
+[offcanvas-docs]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Offcanvas/README.md
+[unstable-header-component]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Header/README.md

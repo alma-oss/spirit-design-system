@@ -205,5 +205,5 @@ The Timeline component uses [CSS Grid layout][mdn-grid] to achieve proper alignm
 
 Connector lines between timeline items are created using CSS pseudo-elements (::after) for a clean, maintainable implementation without additional DOM elements. The connector appears in the second row of the marker column and is hidden for the last timeline item.
 
-[dictionary-breakpoint]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
+[dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [mdn-grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout

@@ -240,5 +240,5 @@ Set `data-spirit-toggle="segmentedControl"` attribute on the `fieldset` element.
 
 Please consult the [main README][web-readme] for how to include JavaScript plugins.
 
-[truncation]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/TRUNCATING.md#segmented-control
-[web-readme]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md
+[truncation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/TRUNCATING.md#segmented-control
+[web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

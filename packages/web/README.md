@@ -260,14 +260,14 @@ Check your browser console to see if you are using any of the deprecated functio
 
 See the [LICENSE][license] file for information.
 
-[all-deprecations]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web/DEPRECATIONS.md
-[deprecations]: https://github.com/lmc-eu/spirit-design-system/blob/main/static/deprecations-browser-console.png?raw=true
-[design-tokens-usage]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/design-tokens#basic-usage
-[design-tokens-load-path]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/design-tokens#in-sass
-[design-tokens-color-tokens]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/design-tokens/src/scss/themes/_color-tokens.scss
-[design-tokens-rebranding]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/design-tokens#rebranding-spirit
+[all-deprecations]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/DEPRECATIONS.md
+[deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/static/deprecations-browser-console.png?raw=true
+[design-tokens-usage]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens#basic-usage
+[design-tokens-load-path]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens#in-sass
+[design-tokens-color-tokens]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/src/scss/themes/_color-tokens.scss
+[design-tokens-rebranding]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens#rebranding-spirit
 [examples]: https://spirit-design-system.netlify.app/packages/web/
-[feature-flags-docs]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/contribution/feature-flags.md
-[license]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/LICENSE.md
+[feature-flags-docs]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/feature-flags.md
+[license]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/LICENSE.md
 [postcss-prefix-selector]: https://www.npmjs.com/package/postcss-prefix-selector
 [vite]: https://vitejs.dev

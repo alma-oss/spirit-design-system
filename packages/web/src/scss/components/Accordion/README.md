@@ -211,4 +211,4 @@ All attributes are inherited from the [**Collapse** component][collapse].
 Under the hood, the Accordion makes use of the [Collapse][collapse] JavaScript
 plugin for the collapsing functionality.
 
-[collapse]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Collapse/README.md
+[collapse]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Collapse/README.md

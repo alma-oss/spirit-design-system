@@ -341,7 +341,7 @@ variables.
 </div>
 ```
 
-[alignment-dictionary]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
-[dictionary-breakpoint]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
+[alignment-dictionary]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
+[dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [css-tricks-grid]: https://css-tricks.com/snippets/css/complete-guide-grid/
 [grid-mdn]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout

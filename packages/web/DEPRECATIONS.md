@@ -92,6 +92,6 @@ For more information, see documentation of the [TextField][text-field] component
 <span class="TextField__passwordToggle__icon accessibility-checked"><!-- … --></span>
 ```
 
-[button]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md
-[readme-deprecations]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md#deprecations
-[text-field]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/TextField/README.md
+[button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md
+[readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#deprecations
+[text-field]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/TextField/README.md

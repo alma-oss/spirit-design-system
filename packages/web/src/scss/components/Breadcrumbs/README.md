@@ -57,4 +57,4 @@ For comprehensive guidance on handling text truncation, translations, and multip
 <!-- … --->
 ```
 
-[truncation]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/TRUNCATING.md#breadcrumbs
+[truncation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/TRUNCATING.md#breadcrumbs
