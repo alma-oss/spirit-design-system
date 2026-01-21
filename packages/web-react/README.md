@@ -188,7 +188,7 @@ You can use the `Uncontrolled` variant for faster development.
 This package uses the deprecation warnings for props, functions and components that will be removed or replaced in the next major release.
 Check your browser console to see if you are using any of the deprecated functionality.
 
-![Deprecations in the Browser's console](https://github.com/lmc-eu/spirit-design-system/blob/main/static/deprecations-browser-console.png?raw=true)
+![Deprecations in the Browser's console](https://github.com/alma-oss/spirit-design-system/blob/main/static/deprecations-browser-console.png?raw=true)
 
 👉 [See the DEPRECATIONS file][all-deprecations] for the list of all deprecations.
 
@@ -228,13 +228,13 @@ afterEach(() => {
 
 See the [LICENSE](LICENSE.md) file for information.
 
-[accessibility-testing]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/contribution/accessibility-testing.md
-[all-deprecations]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web-react/DEPRECATIONS.md
-[dictionary-breakpoint]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
-[e2e-testing]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/contribution/e2e-testing.md
+[accessibility-testing]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/accessibility-testing.md
+[all-deprecations]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react/DEPRECATIONS.md
+[dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
+[e2e-testing]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/e2e-testing.md
 [examples]: https://spirit-design-system-storybook.netlify.app
 [react-controlled]: https://reactjs.org/docs/forms.html#controlled-components
 [react-uncontrolled]: https://reactjs.org/docs/uncontrolled-components.html
-[web-docs]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web#readme
-[web-pkg-rebrand]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web#rebranding
-[web-pkg-prefixes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[web-docs]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web#readme
+[web-pkg-rebrand]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web#rebranding
+[web-pkg-prefixes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names

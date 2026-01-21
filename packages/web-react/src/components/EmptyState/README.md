@@ -60,5 +60,5 @@ The component is based on the [Stack][stack] component and accepts all its prope
 </EmptyState>
 ```
 
-[stack]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md
-[stack-api]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md#api
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md
+[stack-api]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md#api

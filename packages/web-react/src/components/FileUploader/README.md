@@ -573,13 +573,13 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 
 [button-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
 [div-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div
-[file-uploader]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/FileUploader/README.md
+[file-uploader]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/FileUploader/README.md
 [input-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
 [list-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul
 [list-item-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li
 [next-js-body-size-limit]: https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions#bodysizelimit
-[readme-additional-attributes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
-[readme-escape-hatches]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
-[readme-style-props]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#style-props
-[web-react-icon-documentation]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#-usage
+[readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[web-react-icon-documentation]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#-usage
 [wiki-binary-prefixes]: https://en.wikipedia.org/wiki/Binary_prefix

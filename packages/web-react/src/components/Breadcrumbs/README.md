@@ -115,10 +115,10 @@ For detailed information see [Breadcrumbs][breadcrumbs] component.
 This component uses the `Icon` component internally. To ensure correct rendering,
 please refer to the [Icon component documentation][web-react-icon-documentation] for setup instructions.
 
-[breadcrumbs]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Breadcrumbs/README.md
-[readme-additional-attributes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
-[readme-escape-hatches]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
-[readme-style-props]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#style-props
-[truncation]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/TRUNCATING.md#breadcrumbs
+[breadcrumbs]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Breadcrumbs/README.md
+[readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[truncation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/TRUNCATING.md#breadcrumbs
 [truncate-npm-search]: https://www.npmjs.com/search?q=truncate
-[web-react-icon-documentation]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#-usage
+[web-react-icon-documentation]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#-usage

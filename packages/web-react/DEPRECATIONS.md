@@ -62,8 +62,8 @@ The `isBlock` property will be removed in the next major version.
 
 For more information, see documentation for [Button][button] and [ButtonLink][button-link] components.
 
-[button]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Button/README.md#how-to-make-a-fluid-button
-[button-link]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/ButtonLink/README.md#how-to-make-a-fluid-buttonlink
-[codemod-collapse]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/codemods/src/transforms/v4/web-react/README.md#v4web-reactcollapse-isdisposable-prop--uncontrolledcollapse-hideoncollapse-to-isdisposable-prop-change
-[codemod-flex]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/codemods/src/transforms/v4/web-react/README.md#v4web-reactflex-direction-values---flex-direction-prop-values-row-to-horizontal-and-column-to-vertical
-[readme-deprecations]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#deprecations
+[button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Button/README.md#how-to-make-a-fluid-button
+[button-link]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ButtonLink/README.md#how-to-make-a-fluid-buttonlink
+[codemod-collapse]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v4/web-react/README.md#v4web-reactcollapse-isdisposable-prop--uncontrolledcollapse-hideoncollapse-to-isdisposable-prop-change
+[codemod-flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v4/web-react/README.md#v4web-reactflex-direction-values---flex-direction-prop-values-row-to-horizontal-and-column-to-vertical
+[readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#deprecations
