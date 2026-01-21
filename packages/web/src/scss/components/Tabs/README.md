@@ -131,5 +131,5 @@ plugins.
 
 Or feel free to write the controlling script yourself.
 
-[dictionary-breakpoint]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
-[web-readme]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md
+[dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
+[web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

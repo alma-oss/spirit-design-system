@@ -199,5 +199,5 @@ helper class.
 ℹ️ We recommend applying the `accessibility-tap-target` helper class to ensure
 the tap target size of ControlButton is large enough.
 
-[button]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md
-[dynamic-color]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/helpers/dynamic-color/README.md
+[button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md
+[dynamic-color]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/helpers/dynamic-color/README.md

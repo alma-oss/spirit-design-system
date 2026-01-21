@@ -214,10 +214,10 @@ To avoid conflicts, we need a convention to distinguish situations when somethin
 - `id` attribute can be used by **JS only**.
 </details>
 
-[design-tokens]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/design-tokens
-[design-tokens-in-sass]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/design-tokens#in-sass
-[design-tokens-faq]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/design-tokens#faq
-[rebranding]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web#rebranding
+[design-tokens]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens
+[design-tokens-in-sass]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens#in-sass
+[design-tokens-faq]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens#faq
+[rebranding]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web#rebranding
 [sass-modules]: https://sass-lang.com/blog/the-module-system-is-launched
 [es-modules]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
 [sass-true]: https://github.com/oddbird/true

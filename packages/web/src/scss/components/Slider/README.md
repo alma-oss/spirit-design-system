@@ -236,7 +236,7 @@ JS interaction class when controlled by JavaScript:
 </div>
 ```
 
-[dictionary-validation]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [html-spec-range]: https://html.spec.whatwg.org/multipage/input.html#range-state-(type=range)
 [mdn-range]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
-[prefixed]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names

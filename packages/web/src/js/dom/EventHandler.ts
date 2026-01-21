@@ -14,7 +14,7 @@ const addHandler = (element: EventHandlerElement, eventType: string, handler: an
    * and the touch on Modal's backdrop did not close it
    *
    * @see https://chromestatus.com/feature/5093566007214080
-   * @see https://github.com/lmc-eu/spirit-design-system/pull/892
+   * @see https://github.com/alma-oss/spirit-design-system/pull/892
    */
   element.addEventListener(eventType, handler, { passive: false });
 };

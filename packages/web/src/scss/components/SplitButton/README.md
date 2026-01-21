@@ -79,6 +79,6 @@ Learn more about the [Tooltip][readme-tooltip] component in its documentation.
 </div>
 ```
 
-[readme-button]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md
-[readme-dropdown]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Dropdown/README.md
-[readme-tooltip]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Tooltip/README.md
+[readme-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md
+[readme-dropdown]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Dropdown/README.md
+[readme-tooltip]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Tooltip/README.md
