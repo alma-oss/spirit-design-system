@@ -27,7 +27,7 @@ const meta: Meta<typeof ButtonLink> = {
         '<Icon />': <Icon name="profile" />,
         '<Icon /> Text': (
           <>
-            <Icon name="profile" marginRight="space-400" /> Text
+            <Icon name="profile" /> Text
           </>
         ),
       },

@@ -1,7 +1,8 @@
 import classNames from 'classnames';
+import { type CSSProperties, type ElementType } from 'react';
 import { warning } from '../../common/utilities';
-import { useClassNamePrefix, useDeprecationMessage, useSymmetry } from '../../hooks';
-import { type ButtonColor, type ButtonSize, type ButtonStyleProps } from '../../types';
+import { useClassNamePrefix, useDeprecationMessage, useSpacingStyle, useSymmetry } from '../../hooks';
+import { type ButtonColor, type ButtonSize, type SpacingType, type SpiritButtonProps } from '../../types';
 import { applyColor, applySize } from '../../utils/classname';
 import { compose } from '../../utils/compose';
 
@@ -12,8 +13,23 @@ const getButtonColorClassname = <C = void>(className: string, color: ButtonColor
 const getButtonSizeClassname = <S = void>(className: string, size: ButtonSize<S>): string =>
   compose(applySize<ButtonSize<S>>(size))(className);
 
-export function useButtonStyleProps<C = void, S = void>(props: ButtonStyleProps<C, S>) {
-  const { color, isBlock, isDisabled, isLoading, isSymmetrical, size, ...restProps } = props;
+interface ButtonCSSProperties extends CSSProperties {
+  [key: string]: string | undefined | number;
+}
+
+export interface ButtonStyles {
+  /** className props */
+  classProps: string;
+  /** Props for the button element */
+  props: SpiritButtonProps;
+  /** Style props for the element */
+  styleProps: ButtonCSSProperties;
+}
+
+export function useButtonStyleProps<T extends ElementType = 'button', C = void, S = void>(
+  props: SpiritButtonProps<T, C, S>,
+): ButtonStyles {
+  const { color, isBlock, isDisabled, isLoading, isSymmetrical, size, spacing, ...restProps } = props;
 
   // @see https://jira.almacareer.tech/browse/DS-1897
   useDeprecationMessage({
@@ -50,8 +66,13 @@ export function useButtonStyleProps<C = void, S = void>(props: ButtonStyleProps<
     symmetricalClassName,
   );
 
+  const buttonStyle: ButtonCSSProperties = {
+    ...(useSpacingStyle(spacing as SpacingType, 'button') as ButtonCSSProperties),
+  };
+
   return {
     classProps,
     props: restProps,
+    styleProps: buttonStyle,
   };
 }

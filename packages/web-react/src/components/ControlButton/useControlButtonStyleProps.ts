@@ -1,13 +1,29 @@
 import classNames from 'classnames';
-import { useClassNamePrefix, useSymmetry } from '../../hooks';
-import { type ControlButtonStyleProps, type SizeExtendedDictionaryType } from '../../types';
+import { type CSSProperties, type ElementType } from 'react';
+import { useClassNamePrefix, useSpacingStyle, useSymmetry } from '../../hooks';
+import { type SizeExtendedDictionaryType, type SpacingType, type SpiritControlButtonProps } from '../../types';
 import { applySize, compose } from '../../utils';
 
 const getControlButtonSizeClassname = <S = void>(className: string, size: SizeExtendedDictionaryType | S): string =>
   compose(applySize<SizeExtendedDictionaryType | S>(size))(className);
 
-export function useControlButtonStyleProps<S = void>(props: ControlButtonStyleProps<S>) {
-  const { isDisabled, isSubtle, isSymmetrical, size, ...restProps } = props;
+interface ControlButtonCSSProperties extends CSSProperties {
+  [key: string]: string | undefined | number;
+}
+
+export interface ControlButtonStyles {
+  /** className props */
+  classProps: string;
+  /** Props for the control button element */
+  props: SpiritControlButtonProps;
+  /** Style props for the element */
+  styleProps: ControlButtonCSSProperties;
+}
+
+export function useControlButtonStyleProps<T extends ElementType = 'button', S = void>(
+  props: SpiritControlButtonProps<T, S>,
+): ControlButtonStyles {
+  const { isDisabled, isSubtle, isSymmetrical, size, spacing, ...restProps } = props;
 
   const controlButtonClass = useClassNamePrefix('ControlButton');
   const controlButtonBackgroundClass = `${controlButtonClass}--hasBackground`;
@@ -31,8 +47,13 @@ export function useControlButtonStyleProps<S = void>(props: ControlButtonStylePr
     symmetricalClassName,
   );
 
+  const controlButtonStyle: ControlButtonCSSProperties = {
+    ...(useSpacingStyle(spacing as SpacingType, 'control-button') as ControlButtonCSSProperties),
+  };
+
   return {
     classProps,
     props: restProps,
+    styleProps: controlButtonStyle,
   };
 }
