@@ -190,6 +190,70 @@ Symmetrical on mobile and tablet, not on desktop (combine breakpoint-specific cl
 </button>
 ```
 
+## Custom Spacing
+
+Use CSS custom properties to define custom spacing between control button content items (icons and text). Set the `--control-button-spacing`
+property to one of the spacing token values defined on the `:root` element, e.g. `--control-button-spacing: var(--spirit-space-600)`.
+This will set the spacing to `var(--spirit-space-600)` for all breakpoints.
+
+Custom spacing:
+
+```html
+<button
+  type="button"
+  class="ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target"
+  style="--control-button-spacing: var(--spirit-space-600)"
+  aria-label="Close"
+>
+  <svg class="Icon" width="16" height="16" aria-hidden="true">
+    <use xlink:href="/icons/svg/sprite.svg#close" />
+  </svg>
+  Close
+</button>
+```
+
+ℹ️ We highly discourage from using absolute values like `--control-button-spacing: 1rem`. It will work, but you will lose
+the consistency between the spacing and the design tokens.
+
+If you need to set custom spacing from a specific breakpoint, use the `--control-button-spacing-{breakpoint}` property,
+e.g. `--control-button-spacing-tablet: var(--spirit-space-800)`. The breakpoint value must be one of the breakpoint tokens
+except for the `mobile` breakpoint where you don't need the suffix at all. The spacing is set to all larger breakpoints
+automatically if you don't set them explicitly. E.g. if you set only `--control-button-spacing-tablet: var(--spirit-space-800)`
+the spacing will be set to `var(--spirit-space-800)` for `tablet` and `desktop` breakpoints while on the `mobile`
+breakpoint the default spacing will be used.
+
+Custom spacing from tablet up:
+
+```html
+<button
+  type="button"
+  class="ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target"
+  style="--control-button-spacing-tablet: var(--spirit-space-800)"
+  aria-label="Close"
+>
+  <svg class="Icon" width="16" height="16" aria-hidden="true">
+    <use xlink:href="/icons/svg/sprite.svg#close" />
+  </svg>
+  Close
+</button>
+```
+
+Custom spacing for each breakpoint:
+
+```html
+<button
+  type="button"
+  class="ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target"
+  style="--control-button-spacing: var(--spirit-space-400); --control-button-spacing-tablet: var(--spirit-space-600); --control-button-spacing-desktop: var(--spirit-space-800)"
+  aria-label="Close"
+>
+  <svg class="Icon" width="16" height="16" aria-hidden="true">
+    <use xlink:href="/icons/svg/sprite.svg#close" />
+  </svg>
+  Close
+</button>
+```
+
 ## Accessibility
 
 For icon-only buttons, always include an accessible label, for example, using
