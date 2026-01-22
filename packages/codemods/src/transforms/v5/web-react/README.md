@@ -160,3 +160,56 @@ npx @lmc-eu/spirit-codemods -p <path> -t v5/web-react/unstable-truncate-componen
 - <UNSTABLE_Truncate lines={3} … />
 + <Truncate mode="lines" limit={3} … />
 ```
+
+### `v5/web-react/button-icon-margin-removal` — Remove Margin Props From Icons Inside Button, ButtonLink, and ControlButton
+
+This codemod removes the `marginRight`, `marginLeft`, and `marginX` props from `Icon` components that are children of `Button`, `ButtonLink`, or `ControlButton` components. This is necessary because these components now automatically provide spacing between their children using [`column-gap`][mdn-column-gap], so manual spacing is no longer needed.
+
+If the margin value used is not equal to the default spacing (`space-400`), the codemod will automatically set the `spacing` prop on the button component to preserve the original spacing behavior.
+
+ℹ️ This codemod only updates margin-related props (`marginRight`, `marginLeft`, `marginX`) applied directly to children `Icon` components. If you are applying spacing or margins via other means (for example offset the text, not the icon), you will need to review and update those cases manually, as this codemod will not cover them.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/button-icon-margin-removal
+```
+
+#### Example
+
+When margin value is the default (`space-400`), it's simply removed:
+
+```diff
+- <Button>
+-   <Icon name="hamburger" marginRight="space-400" />
++ <Button>
++   <Icon name="hamburger" />
+   Menu
+ </Button>
+```
+
+When margin value is different from the default, the `spacing` prop is set on the button:
+
+```diff
+- <Button>
+-   <Icon name="hamburger" marginRight="space-600" />
++ <Button spacing="space-600">
++   <Icon name="hamburger" />
+   Menu
+ </Button>
+```
+
+Responsive margin values are also converted:
+
+```diff
+- <ButtonLink href="#">
+-   <Icon name="link" marginRight={{ mobile: 'space-400', tablet: 'space-600' }} />
++ <ButtonLink href="#" spacing={{ mobile: 'space-400', tablet: 'space-600' }}>
++   <Icon name="link" />
+   Link
+ </ButtonLink>
+```
+
+Note: If all values in a responsive object are `space-400`, the spacing prop is not set (default behavior).
+
+[mdn-column-gap]: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/column-gap
