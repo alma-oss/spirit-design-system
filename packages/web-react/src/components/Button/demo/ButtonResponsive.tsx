@@ -12,7 +12,7 @@ const ButtonResponsive = () => (
     </Button>
 
     <Button isSymmetrical={{ tablet: true }}>
-      <Icon name="hamburger" marginRight={{ mobile: 'space-400', tablet: 'space-0' }} />
+      <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
       <Hidden from="tablet" aria-hidden="true">
         Menu
@@ -20,7 +20,7 @@ const ButtonResponsive = () => (
     </Button>
 
     <Button isSymmetrical={{ desktop: true }}>
-      <Icon name="hamburger" marginRight={{ mobile: 'space-400', desktop: 'space-0' }} />
+      <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
       <Hidden from="desktop" aria-hidden="true">
         Menu
@@ -28,7 +28,7 @@ const ButtonResponsive = () => (
     </Button>
 
     <Button isSymmetrical={{ mobile: true, tablet: false }}>
-      <Icon name="hamburger" marginRight={{ tablet: 'space-400' }} />
+      <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
       <Hidden on="mobile" aria-hidden="true">
         Menu
@@ -36,7 +36,7 @@ const ButtonResponsive = () => (
     </Button>
 
     <Button isSymmetrical={{ mobile: true, desktop: false }}>
-      <Icon name="hamburger" marginRight={{ desktop: 'space-400' }} />
+      <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
       <Hidden on={['mobile', 'tablet']} aria-hidden="true">
         Menu
@@ -44,7 +44,7 @@ const ButtonResponsive = () => (
     </Button>
 
     <Button isSymmetrical={{ tablet: true, desktop: false }}>
-      <Icon name="hamburger" marginRight={{ mobile: 'space-400', tablet: 'space-0', desktop: 'space-400' }} />
+      <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
       <Hidden on="tablet" aria-hidden="true">
         Menu
