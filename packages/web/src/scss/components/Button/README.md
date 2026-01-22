@@ -39,11 +39,11 @@ Button comes in three available sizes:
 
 ## Icons
 
-To insert an icon into a button, use the [Icon][readme-icon] component with proper spacing:
+To insert an icon into a button, use the [Icon][readme-icon] component. Spacing is automatically provided:
 
 ```html
 <button type="button" class="Button Button--primary Button--medium">
-  <svg class="Icon mr-400" width="20" height="20" aria-hidden="true">
+  <svg class="Icon" width="20" height="20" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   Menu
@@ -95,7 +95,7 @@ Icon on mobile, text label from tablet onwards:
 
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--symmetrical Button--tablet--asymmetrical">
-  <svg class="Icon mr-tablet-400" width="20" height="20" aria-hidden="true">
+  <svg class="Icon" width="20" height="20" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
@@ -107,7 +107,7 @@ Text label on mobile, icon from tablet onwards:
 
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--tablet--symmetrical">
-  <svg class="Icon mr-400 mr-tablet-0" width="20" height="20" aria-hidden="true">
+  <svg class="Icon" width="20" height="20" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
@@ -119,7 +119,7 @@ Text label on mobile, icon from desktop onwards:
 
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--desktop--symmetrical">
-  <svg class="Icon mr-400 mr-desktop-0" width="20" height="20" aria-hidden="true">
+  <svg class="Icon" width="20" height="20" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
@@ -131,7 +131,7 @@ Icon on mobile and tablet, text label on desktop:
 
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--symmetrical Button--desktop--asymmetrical">
-  <svg class="Icon mr-desktop-400" width="20" height="20" aria-hidden="true">
+  <svg class="Icon" width="20" height="20" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
@@ -146,7 +146,7 @@ Icon on tablet only:
   type="button"
   class="Button Button--primary Button--medium Button--tablet--symmetrical Button--desktop--asymmetrical"
 >
-  <svg class="Icon mr-400 mr-tablet-0 mr-desktop-400" width="20" height="20" aria-hidden="true">
+  <svg class="Icon" width="20" height="20" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
@@ -226,7 +226,7 @@ Loading button with an icon and a text label:
 
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--loading" disabled>
-  <svg class="Icon mr-400" width="20" height="20" aria-hidden="true">
+  <svg class="Icon" width="20" height="20" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   Menu
@@ -269,7 +269,6 @@ For example, add the `aria-label` attribute to the Button:
   <svg class="Icon" width="20" height="20" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#hamburger" />
   </svg>
-  <span class="d-tablet-none" aria-hidden="true">Menu</span>
 </button>
 ```
 
@@ -313,6 +312,63 @@ In other cases, consider displaying the button label in a [Tooltip][readme-toolt
 ```
 
 👉 See the [Tooltip][readme-tooltip] documentation for more examples.
+
+## Custom Spacing
+
+Use CSS custom properties to define custom spacing between button content items (icons and text). Set the `--button-spacing`
+property to one of the spacing token values defined on the `:root` element, e.g. `--button-spacing: var(--spirit-space-600)`.
+This will set the spacing to `var(--spirit-space-600)` for all breakpoints.
+
+Custom spacing:
+
+```html
+<button type="button" class="Button Button--primary Button--medium" style="--button-spacing: var(--spirit-space-600)">
+  <svg class="Icon" width="20" height="20" aria-hidden="true">
+    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+  </svg>
+  Menu
+</button>
+```
+
+ℹ️ We highly discourage from using absolute values like `--button-spacing: 1rem`. It will work, but you will lose
+the consistency between the spacing and the design tokens.
+
+If you need to set custom spacing from a specific breakpoint, use the `--button-spacing-{breakpoint}` property,
+e.g. `--button-spacing-tablet: var(--spirit-space-800)`. The breakpoint value must be one of the breakpoint tokens
+except for the `mobile` breakpoint where you don't need the suffix at all. The spacing is set to all larger breakpoints
+automatically if you don't set them explicitly. E.g. if you set only `--button-spacing-tablet: var(--spirit-space-800)`
+the spacing will be set to `var(--spirit-space-800)` for `tablet` and `desktop` breakpoints while on the `mobile`
+breakpoint the default spacing will be used.
+
+Custom spacing from tablet up:
+
+```html
+<button
+  type="button"
+  class="Button Button--primary Button--medium"
+  style="--button-spacing-tablet: var(--spirit-space-800)"
+>
+  <svg class="Icon" width="20" height="20" aria-hidden="true">
+    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+  </svg>
+  Menu
+</button>
+```
+
+Custom spacing for each breakpoint:
+
+```html
+<button
+  type="button"
+  class="Button Button--primary Button--medium"
+  style="--button-spacing: var(--spirit-space-400); --button-spacing-tablet: var(--spirit-space-600); --button-spacing-desktop: var(--spirit-space-800)"
+>
+  <svg class="Icon" width="20" height="20" aria-hidden="true">
+    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+  </svg>
+  Menu
+</button>
+```
 
 [readme-grid]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [readme-icon]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Icon/README.md
