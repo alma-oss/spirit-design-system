@@ -8,6 +8,7 @@
 @use '../../settings/cursors';
 @use '../../tools/breakpoint';
 @use '../../tools/dictionaries';
+@use '../../tools/responsive-properties';
 @use '../../tools/typography';
 @use 'theme';
 @use 'tools';
@@ -19,6 +20,12 @@ $_component-name: 'Button';
 
     @include tools.responsive-border-radius();
     @include typography.from-css-variables($infix: string.to-lower-case($_component-name));
+    @include responsive-properties.create-cascade(
+        $property: 'column-gap',
+        $input-custom-property-base-name: 'button-spacing',
+        $breakpoints: theme.$breakpoints,
+        $fallback-value: theme.$column-gap
+    );
 
     display: inline-flex;
     align-items: center;
