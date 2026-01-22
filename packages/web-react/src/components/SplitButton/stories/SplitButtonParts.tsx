@@ -49,7 +49,7 @@ export const SplitButtonWithDropdowns = () => {
       <Dropdown id="split-button-dropdown" isOpen={dropdownOpen} onToggle={toggleDropdown} placement="bottom-end">
         <DropdownTrigger elementType={Button}>
           More
-          <Icon name="chevron-down" marginLeft="space-400" />
+          <Icon name="chevron-down" />
         </DropdownTrigger>
         <DropdownPopover>
           <DropdownContent />
@@ -91,7 +91,7 @@ export const SplitButtonWithEverything = () => {
   return (
     <>
       <Button>
-        <Icon name="check-plain" marginRight="space-400" /> Button
+        <Icon name="check-plain" /> Button
       </Button>
       <Button>Button</Button>
       <Tooltip
@@ -111,7 +111,7 @@ export const SplitButtonWithEverything = () => {
       <Dropdown id="split-button-dropdown" isOpen={dropdownOpen} onToggle={toggleDropdown} placement="bottom-end">
         <DropdownTrigger elementType={Button}>
           More
-          <Icon name="chevron-down" marginLeft="space-400" />
+          <Icon name="chevron-down" />
         </DropdownTrigger>
         <DropdownPopover>
           <DropdownContent />
