@@ -11,7 +11,7 @@ const ButtonLinkResponsiveSymmetrical = () => (
     </ButtonLink>
 
     <ButtonLink href="#" isSymmetrical={{ tablet: true }}>
-      <Icon name="hamburger" marginRight={{ mobile: 'space-400', tablet: 'space-0' }} />
+      <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
       <span className="d-tablet-none" aria-hidden="true">
         Menu
@@ -19,7 +19,7 @@ const ButtonLinkResponsiveSymmetrical = () => (
     </ButtonLink>
 
     <ButtonLink href="#" isSymmetrical={{ desktop: true }}>
-      <Icon name="hamburger" marginRight={{ mobile: 'space-400', desktop: 'space-0' }} />
+      <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
       <span className="d-desktop-none" aria-hidden="true">
         Menu
@@ -27,7 +27,7 @@ const ButtonLinkResponsiveSymmetrical = () => (
     </ButtonLink>
 
     <ButtonLink href="#" isSymmetrical={{ mobile: true, tablet: false }}>
-      <Icon name="hamburger" marginRight={{ tablet: 'space-400' }} />
+      <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
       <span className="d-none d-tablet-inline" aria-hidden="true">
         Menu
@@ -35,7 +35,7 @@ const ButtonLinkResponsiveSymmetrical = () => (
     </ButtonLink>
 
     <ButtonLink href="#" isSymmetrical={{ mobile: true, desktop: false }}>
-      <Icon name="hamburger" marginRight={{ desktop: 'space-400' }} />
+      <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
       <span className="d-none d-desktop-inline" aria-hidden="true">
         Menu
@@ -43,7 +43,7 @@ const ButtonLinkResponsiveSymmetrical = () => (
     </ButtonLink>
 
     <ButtonLink href="#" isSymmetrical={{ tablet: true, desktop: false }}>
-      <Icon name="hamburger" marginRight={{ mobile: 'space-400', tablet: 'space-0', desktop: 'space-400' }} />
+      <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
       <span className="d-tablet-none d-desktop-inline" aria-hidden="true">
         Menu

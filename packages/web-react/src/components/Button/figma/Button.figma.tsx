@@ -43,7 +43,7 @@ figma.connect(Button, BUTTON_NODE_URL, {
   variant: { Content: 'Text-and-icon' },
   example: ({ children, ...props }) => (
     <Button {...props}>
-      <Icon name="placeholder" marginRight="space-500" />
+      <Icon name="placeholder" />
       {children}
     </Button>
   ),
