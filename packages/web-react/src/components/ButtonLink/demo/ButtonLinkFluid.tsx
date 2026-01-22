@@ -21,7 +21,7 @@ const ButtonLinkFluid = () => {
                 {`Button ${color}`}
               </ButtonLink>{' '}
               <ButtonLink href="#" size={size} color={color}>
-                <Icon name="chevron-left" marginRight="space-400" />
+                <Icon name="chevron-left" />
                 Return back
               </ButtonLink>
             </Grid>

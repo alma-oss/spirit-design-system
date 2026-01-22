@@ -27,7 +27,7 @@ const meta: Meta<typeof Button> = {
         '<Icon />': <Icon name="profile" />,
         '<Icon /> Text': (
           <>
-            <Icon name="profile" marginRight="space-400" /> Text
+            <Icon name="profile" /> Text
           </>
         ),
       },
@@ -58,6 +58,11 @@ const meta: Meta<typeof Button> = {
     size: {
       control: 'select',
       options: [...Object.values(Sizes)],
+    },
+    spacing: {
+      control: 'object',
+      description:
+        'Custom spacing between button content items. Can be a spacing token (e.g. "space-400") or an object with breakpoint keys.',
     },
     type: {
       control: 'select',

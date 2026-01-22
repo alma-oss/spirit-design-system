@@ -51,7 +51,7 @@ const SplitButtonDemoFactory = <C extends void>(props: {
         <DocsSection key={size} title={`Size ${size}${titleColor}`} container="none" hasPadding={false}>
           <SplitButton color={color} size={size} isDisabled={isDisabled}>
             <Button>
-              <Icon name="check-plain" marginRight="space-400" />
+              <Icon name="check-plain" />
               Button
             </Button>
             <Dropdown
@@ -62,7 +62,7 @@ const SplitButtonDemoFactory = <C extends void>(props: {
             >
               <DropdownTrigger elementType={Button}>
                 More
-                <Icon name="chevron-down" marginLeft="space-400" />
+                <Icon name="chevron-down" />
               </DropdownTrigger>
               <DropdownPopover>
                 <DropdownContent />
@@ -72,7 +72,7 @@ const SplitButtonDemoFactory = <C extends void>(props: {
 
           <SplitButton color={color} size={size} isDisabled={isDisabled}>
             <Button>
-              <Icon name="check-plain" marginRight="space-400" />
+              <Icon name="check-plain" />
               Button
             </Button>
             <Button>Button</Button>
@@ -94,7 +94,7 @@ const SplitButtonDemoFactory = <C extends void>(props: {
 
           <SplitButton color={color} size={size} isDisabled={isDisabled}>
             <Button>
-              <Icon name="check-plain" marginRight="space-400" />
+              <Icon name="check-plain" />
               Button
             </Button>
             <Dropdown

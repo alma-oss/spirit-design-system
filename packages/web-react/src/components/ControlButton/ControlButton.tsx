@@ -29,9 +29,17 @@ const _ControlButton = <T extends ElementType = 'button', S = void>(
   } = propsWithDefaults;
 
   const { controlButtonProps } = useControlButtonProps(restProps);
-  const { classProps, props: modifiedProps } = useControlButtonStyleProps(restProps);
+  const {
+    classProps,
+    props: modifiedProps,
+    styleProps: controlButtonStyleProps,
+  } = useControlButtonStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(ElementTag, {
+    classProps,
+    styleProps: { ...controlButtonStyleProps, ...styleProps },
+    otherProps,
+  });
 
   return (
     <ElementTag {...otherProps} {...controlButtonProps} ref={ref} {...mergedStyleProps}>

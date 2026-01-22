@@ -8,6 +8,7 @@ import type {
   EmotionColorNamesType,
   SingleOrResponsive,
   SizesDictionaryType,
+  SpaceToken,
   StyleProps,
 } from './shared';
 
@@ -28,6 +29,8 @@ export interface ButtonBaseProps<C = void, S = void> extends ChildrenProps, Styl
   isSymmetrical?: SingleOrResponsive<boolean>;
   /** The size of the button. */
   size?: ButtonSize<S>;
+  /** Custom spacing between button content items. */
+  spacing?: SingleOrResponsive<SpaceToken>;
 }
 
 export type ButtonProps<E extends ElementType, C = void, S = void> = {

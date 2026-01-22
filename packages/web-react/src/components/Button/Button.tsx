@@ -37,9 +37,13 @@ const _Button = <T extends ElementType = 'button', C = void, S = void>(
   } = propsWithDefaults;
 
   const { buttonProps } = useButtonProps(restProps);
-  const { classProps, props: modifiedProps } = useButtonStyleProps(restProps);
+  const { classProps, props: modifiedProps, styleProps: buttonStyleProps } = useButtonStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(ElementTag, {
+    classProps,
+    styleProps: { ...buttonStyleProps, ...styleProps },
+    otherProps,
+  });
 
   return (
     <ElementTag {...otherProps} {...buttonProps} ref={ref} {...mergedStyleProps}>
