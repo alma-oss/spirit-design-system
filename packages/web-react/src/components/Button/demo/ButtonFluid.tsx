@@ -21,7 +21,7 @@ const ButtonFluid = () => {
                 {`Button ${color}`}
               </Button>{' '}
               <Button size={size} color={color}>
-                <Icon name="hamburger" marginRight="space-400" />
+                <Icon name="hamburger" />
                 Menu
               </Button>
             </Grid>

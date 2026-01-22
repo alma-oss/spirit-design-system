@@ -5,6 +5,7 @@ import type {
   ClickEvents,
   SingleOrResponsive,
   SizesDictionaryType,
+  SpaceToken,
   StyleProps,
 } from './shared';
 
@@ -19,6 +20,8 @@ export interface ControlButtonBaseProps<S = void> extends ChildrenProps, StylePr
   isSymmetrical?: SingleOrResponsive<boolean>;
   /** The size of the button. */
   size?: ControlButtonSize<S>;
+  /** Custom spacing between button content items. */
+  spacing?: SingleOrResponsive<SpaceToken>;
 }
 
 export type ControlButtonProps<E extends ElementType, S = void> = {
