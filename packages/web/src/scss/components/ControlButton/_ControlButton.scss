@@ -6,6 +6,7 @@
 @use '../../tools/breakpoint';
 @use '../../tools/dictionaries';
 @use '../../tools/reset';
+@use '../../tools/responsive-properties';
 @use '../../tools/string' as spirit-string;
 @use '../../tools/typography';
 @use 'theme';
@@ -18,6 +19,12 @@ $_component-name-infix: spirit-string.convert-pascal-case-to-kebab-case($_compon
 
     @include reset.button();
     @include typography.from-css-variables($infix: $_component-name-infix);
+    @include responsive-properties.create-cascade(
+        $property: 'column-gap',
+        $input-custom-property-base-name: 'control-button-spacing',
+        $breakpoints: theme.$breakpoints,
+        $fallback-value: theme.$column-gap
+    );
 
     height: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-height);
     padding-inline: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-padding-x);
