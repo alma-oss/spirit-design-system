@@ -51,7 +51,7 @@ export const FigmaTextAndIcon: Story = {
   name: 'Text and Icon',
   render: ({ children, ...props }) => (
     <Button {...props}>
-      <Icon name="placeholder" marginRight="space-500" />
+      <Icon name="placeholder" />
       {children}
     </Button>
   ),
