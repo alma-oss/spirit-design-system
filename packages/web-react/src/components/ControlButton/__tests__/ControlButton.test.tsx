@@ -69,4 +69,24 @@ describe('ControlButton', () => {
     expect(element).toHaveClass('ControlButton--disabled');
     expect(element).toBeDisabled();
   });
+
+  it('should render with custom spacing', () => {
+    render(<ControlButton spacing="space-600">Close</ControlButton>);
+
+    expect(screen.getByRole('button')).toHaveStyle({ '--control-button-spacing': 'var(--spirit-space-600)' });
+  });
+
+  it('should render with custom spacing for each breakpoint', () => {
+    render(
+      <ControlButton spacing={{ mobile: 'space-100', tablet: 'space-1000', desktop: 'space-1200' }}>
+        Close
+      </ControlButton>,
+    );
+
+    const element = screen.getByRole('button') as HTMLElement;
+
+    expect(element).toHaveStyle({ '--control-button-spacing': 'var(--spirit-space-100)' });
+    expect(element).toHaveStyle({ '--control-button-spacing-tablet': 'var(--spirit-space-1000)' });
+    expect(element).toHaveStyle({ '--control-button-spacing-desktop': 'var(--spirit-space-1200)' });
+  });
 });

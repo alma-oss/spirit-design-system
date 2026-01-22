@@ -22,7 +22,7 @@ const ButtonLinkDemoFactory = ({ ...props }: ButtonStyleProps) => {
                 {`Button ${color}`}
               </ButtonLink>{' '}
               <ButtonLink href="#" size={size} color={color} {...props}>
-                <Icon name="link" marginRight="space-400" />
+                <Icon name="link" />
                 Menu
               </ButtonLink>{' '}
               <ButtonLink href="#" size={size} color={color} isSymmetrical {...props}>
