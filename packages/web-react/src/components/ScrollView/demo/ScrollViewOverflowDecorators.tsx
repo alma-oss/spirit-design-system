@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type CSSProperties } from 'react';
 import ScrollView from '../ScrollView';
 import { HORIZONTAL_CONTENT, VERTICAL_CONTENT } from './constants';
 
@@ -40,7 +40,7 @@ const ScrollViewOverflowDecorators = () => (
           {
             '--scroll-view-start-shadow-background': 'linear-gradient(to right, #9400d3 0%, #9400d300 100%)',
             '--scroll-view-end-shadow-background': 'linear-gradient(to left, #9400d3 0%, #9400d300 100%)',
-          } as React.CSSProperties
+          } as CSSProperties
         }
       >
         <p className="py-900" style={{ whiteSpace: 'nowrap' }}>
@@ -58,7 +58,7 @@ const ScrollViewOverflowDecorators = () => (
           {
             '--scroll-view-start-shadow-background': 'linear-gradient(to bottom, #9400d3 0%, #9400d300 100%)',
             '--scroll-view-end-shadow-background': 'linear-gradient(to top, #9400d3 0%, #9400d300 100%)',
-          } as React.CSSProperties
+          } as CSSProperties
         }
       >
         <p>{VERTICAL_CONTENT}</p>

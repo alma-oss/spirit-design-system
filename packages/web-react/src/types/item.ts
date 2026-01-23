@@ -1,4 +1,4 @@
-import { type ElementType, type JSXElementConstructor } from 'react';
+import { type ElementType, type JSXElementConstructor, type ReactNode } from 'react';
 import { type StyleProps, type TransferProps } from './shared';
 
 export interface AriaItemElementTypeProps<T extends ElementType = 'button'> {
@@ -23,5 +23,5 @@ export interface SpiritItemProps<T extends ElementType = 'button'>
   iconName?: string;
   isDisabled?: boolean;
   isSelected?: boolean;
-  label: string | React.ReactNode;
+  label: string | ReactNode;
 }

@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import React, { createRef } from 'react';
+import React, { type RefObject, createRef } from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
@@ -57,7 +57,7 @@ describe('ScrollViewArrows', () => {
         clientWidth: 500,
         scrollTo,
       },
-    } as unknown as React.RefObject<HTMLDivElement>;
+    } as unknown as RefObject<HTMLDivElement>;
 
     jest.useFakeTimers();
 
@@ -100,7 +100,7 @@ describe('ScrollViewArrows', () => {
         clientHeight: 500,
         scrollTo,
       },
-    } as unknown as React.RefObject<HTMLDivElement>;
+    } as unknown as RefObject<HTMLDivElement>;
 
     jest.useFakeTimers();
 

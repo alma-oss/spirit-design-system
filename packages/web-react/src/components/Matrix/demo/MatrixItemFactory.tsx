@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import DocsBox from '../../../../docs/DocsBox';
 import { Stack } from '../../Stack';
 
@@ -9,7 +9,7 @@ type MatrixItemFactoryProps = {
 };
 
 const MatrixItemFactory = ({ items, itemKey, hasStack }: MatrixItemFactoryProps) => {
-  const Wrapper = hasStack ? Stack : React.Fragment;
+  const Wrapper = hasStack ? Stack : Fragment;
 
   return (
     <Wrapper {...(hasStack ? { hasSpacing: true } : {})}>

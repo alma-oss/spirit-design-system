@@ -1,16 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import TabsDefault from './TabsDefault';
 import TabsWithCustomSpacing from './TabsWithCustomSpacing';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <DocsSection title="Default" stackAlignment="stretch">
       <TabsDefault />
     </DocsSection>
     <DocsSection title="Custom Spacing" stackAlignment="stretch">
       <TabsWithCustomSpacing />
     </DocsSection>
-  </React.StrictMode>,
+  </StrictMode>,
 );

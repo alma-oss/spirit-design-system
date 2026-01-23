@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../../Button';
 import Dropdown from '../Dropdown';
 import DropdownPopover from '../DropdownPopover';
@@ -7,7 +7,7 @@ import { dropdownContent } from './constants';
 import DropdownContentFactory from './DropdownContentFactory';
 
 const DropdownFullwidthAll = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const onToggle = () => setIsOpen(!isOpen);
 
   return (

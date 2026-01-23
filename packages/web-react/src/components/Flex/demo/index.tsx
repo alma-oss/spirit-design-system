@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import FlexCustomSpacing from './FlexCustomSpacing';
 import FlexHorizontalLayout from './FlexHorizontalLayout';
@@ -15,8 +15,8 @@ import FlexVerticalLayout from './FlexVerticalLayout';
 import FlexVerticalLayoutHorizontalAlignment from './FlexVerticalLayoutHorizontalAlignment';
 import FlexWrapping from './FlexWrapping';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <DocsSection title="Horizontal Layout">
       <FlexHorizontalLayout />
     </DocsSection>
@@ -56,5 +56,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <DocsSection title="Responsive Custom Vertical Spacing">
       <FlexResponsiveCustomVerticalSpacing />
     </DocsSection>
-  </React.StrictMode>,
+  </StrictMode>,
 );

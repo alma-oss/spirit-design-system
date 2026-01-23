@@ -1,16 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import PillColors from './PillColors';
 import PillLongText from './PillLongText';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <DocsSection title="Colors">
       <PillColors />
     </DocsSection>
     <DocsSection title="Long Text">
       <PillLongText />
     </DocsSection>
-  </React.StrictMode>,
+  </StrictMode>,
 );
