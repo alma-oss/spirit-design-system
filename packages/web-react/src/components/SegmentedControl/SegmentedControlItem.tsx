@@ -9,9 +9,17 @@ import { useSegmentedControlStyleProps } from './useSegmentedControlStyleProps';
 
 const SegmentedControlItem = forwardRef<HTMLLabelElement, SpiritSegmentedControlItemProps>((props, ref) => {
   const { isMultiselect, name, onSelectionChange, selectedValue, setSelectedValue } = useSegmentedControlContext();
-  const { id, isDisabled, value, children, ...restProps } = props;
+  const { id, isDisabled, value, children, ...restProps } = props as SpiritSegmentedControlItemProps & {
+    id: string;
+    value: string | number;
+    name?: string;
+    children?: React.ReactNode;
+  };
   const { classProps, props: modifiedProps } = useSegmentedControlStyleProps(restProps);
-  const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
+  const { styleProps, props: otherProps } = useStyleProps(modifiedProps) as {
+    styleProps: Record<string, unknown>;
+    props: Record<string, unknown>;
+  };
 
   const handleSetSelectedValue = (v: string) => {
     if (isDisabled) return;
@@ -42,7 +50,7 @@ const SegmentedControlItem = forwardRef<HTMLLabelElement, SpiritSegmentedControl
         {...otherProps}
         {...styleProps}
         {...(isDisabled && { disabled: true })}
-        className={classNames(classProps.input, styleProps.className)}
+        className={classNames(classProps.input, styleProps.className as string | undefined)}
         type={isMultiselect ? 'checkbox' : 'radio'}
         name={name}
         id={id}
@@ -50,7 +58,12 @@ const SegmentedControlItem = forwardRef<HTMLLabelElement, SpiritSegmentedControl
         checked={isChecked}
         onChange={() => handleSetSelectedValue(String(value))}
       />
-      <label ref={ref} htmlFor={id} {...styleProps} className={classNames(classProps.label, styleProps.className)}>
+      <label
+        ref={ref}
+        htmlFor={id}
+        {...styleProps}
+        className={classNames(classProps.label, styleProps.className as string | undefined)}
+      >
         {children}
       </label>
     </>

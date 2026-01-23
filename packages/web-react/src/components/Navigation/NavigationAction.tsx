@@ -35,7 +35,13 @@ const _NavigationAction = <E extends ElementType = 'a'>(
   );
 };
 
-const NavigationAction = forwardRef<HTMLElement, SpiritNavigationActionProps<ElementType>>(_NavigationAction);
+// @ts-expect-error - TransferProps index signature causes Omit to lose type information
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const NavigationAction = forwardRef(_NavigationAction) as any as (<E extends ElementType = 'a'>(
+  props: SpiritNavigationActionProps<E> & { ref?: PolymorphicRef<E> },
+) => ReactElement) & {
+  spiritComponent: string;
+};
 
 NavigationAction.spiritComponent = 'NavigationAction';
 

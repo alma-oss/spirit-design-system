@@ -1,9 +1,5 @@
-import React, { type ElementType, type ReactElement, forwardRef, useState } from 'react';
-import {
-  type PolymorphicRef,
-  type SpiritNavigationActionProps,
-  type SpiritNavigationAvatarProps,
-} from '../../../types';
+import React, { type ReactElement, forwardRef, useState } from 'react';
+import { type PolymorphicRef, type SpiritNavigationAvatarProps } from '../../../types';
 import Dropdown from '../../Dropdown/Dropdown';
 import DropdownPopover from '../../Dropdown/DropdownPopover';
 import DropdownTrigger from '../../Dropdown/DropdownTrigger';
@@ -16,12 +12,16 @@ import NavigationItem from '../NavigationItem';
 
 /* We need an exception for components exported with forwardRef */
 /* eslint no-underscore-dangle: ['error', { allow: ['_NavigationAvatarAsDropdownTrigger'] }] */
-const _NavigationAvatarAsDropdownTrigger = <E extends ElementType = 'a'>(
-  props: SpiritNavigationActionProps<E>,
-  ref: PolymorphicRef<E>,
+const _NavigationAvatarAsDropdownTrigger = (
+  props: SpiritNavigationAvatarProps<'button'> & { avatarContent: React.ReactElement | React.ReactNode },
+  ref: PolymorphicRef<'button'>,
 ): ReactElement => <NavigationAvatar {...props} elementType="button" ref={ref} />;
 
-const NavigationAvatarAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNavigationAvatarProps<ElementType>>(
+const NavigationAvatarAsDropdownTrigger = forwardRef<
+  HTMLButtonElement,
+  SpiritNavigationAvatarProps<'button'> & { avatarContent: React.ReactElement | React.ReactNode }
+>(
+  // @ts-expect-error - TransferProps index signature causes Omit to lose type information
   _NavigationAvatarAsDropdownTrigger,
 );
 

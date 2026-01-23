@@ -16,7 +16,7 @@ const defaultProps: Partial<SpiritNavigationAvatarProps> = {
 /* We need an exception for components exported with forwardRef */
 /* eslint no-underscore-dangle: ['error', { allow: ['_NavigationAvatar'] }] */
 const _NavigationAvatar = <E extends ElementType = 'a'>(
-  props: SpiritNavigationAvatarProps<E>,
+  props: SpiritNavigationAvatarProps<E> & { avatarContent: React.ReactElement | React.ReactNode },
   ref: PolymorphicRef<E>,
 ): ReactElement => {
   const propsWithDefaults = { ...defaultProps, ...props };
@@ -42,7 +42,13 @@ const _NavigationAvatar = <E extends ElementType = 'a'>(
   );
 };
 
-const NavigationAvatar = forwardRef<HTMLElement, SpiritNavigationAvatarProps<ElementType>>(_NavigationAvatar);
+// @ts-expect-error - TransferProps index signature causes Omit to lose type information
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const NavigationAvatar = forwardRef(_NavigationAvatar) as any as (<E extends ElementType = 'a'>(
+  props: SpiritNavigationAvatarProps<E> & { ref?: PolymorphicRef<E> },
+) => ReactElement) & {
+  spiritComponent: string;
+};
 
 NavigationAvatar.spiritComponent = 'NavigationAvatar';
 

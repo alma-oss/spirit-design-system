@@ -16,7 +16,10 @@ import { useDialog } from './useDialog';
 // @TODO: Type 'MutableRefObject<ForwardedRef<HTMLDialogElement | null>>' is not assignable to type 'MutableRefObject<HTMLDialogElement | null>'.
 // Solved using `as MutableRefObject<HTMLDialogElement | null>` but I do not like it
 
-const Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>): JSX.Element => {
+const Dialog = (
+  props: DialogProps & { isOpen: boolean; onClose: (event: Event) => void },
+  ref: ForwardedRef<HTMLDialogElement | null>,
+): JSX.Element => {
   const { children, isOpen, onClose, closeOnBackdropClick = true, closeOnEscapeKeyDown, ...restProps } = props;
   const dialogElementRef: MutableRefObject<ForwardedRef<HTMLDialogElement | null>> = useRef(ref);
   const contentElementRef: MutableRefObject<HTMLElement | null> = useRef(null);
@@ -76,4 +79,5 @@ const Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>)
 
 Dialog.spiritComponent = 'Dialog';
 
+// @ts-expect-error - TransferProps index signature causes Omit to lose type information
 export default forwardRef(Dialog);

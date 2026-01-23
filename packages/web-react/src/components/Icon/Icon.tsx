@@ -15,7 +15,7 @@ const defaultProps = {
 
 /* We need an exception for components exported with forwardRef */
 /* eslint no-underscore-dangle: ['error', { allow: ['_Icon'] }] */
-const _Icon = (props: SpiritIconProps, ref: ForwardedRef<SVGSVGElement>) => {
+const _Icon = (props: SpiritIconProps & { name: string }, ref: ForwardedRef<SVGSVGElement>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { boxSize, name, title, ariaHidden, ...restProps } = propsWithDefaults;
 
@@ -51,6 +51,7 @@ const _Icon = (props: SpiritIconProps, ref: ForwardedRef<SVGSVGElement>) => {
   );
 };
 
+// @ts-expect-error - TransferProps index signature causes Omit to lose type information
 const Icon = forwardRef<SVGSVGElement, SpiritIconProps>(_Icon);
 
 Icon.spiritComponent = 'Icon';

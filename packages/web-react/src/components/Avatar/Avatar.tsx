@@ -29,12 +29,18 @@ const _Avatar = <E extends ElementType = 'div'>(props: SpiritAvatarProps<E>, ref
   );
 };
 
-_Avatar.spiritComponent = 'Avatar';
-_Avatar.spiritDefaultElement = 'div' as const;
-_Avatar.spiritDefaultProps = null as unknown as SpiritAvatarProps<'div'>;
-
-const Avatar = forwardRef(_Avatar) as <E extends ElementType = 'div'>(
+// @ts-expect-error - TransferProps index signature causes Omit to lose type information
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Avatar = forwardRef(_Avatar) as any as (<E extends ElementType = 'div'>(
   props: SpiritAvatarProps<E> & { ref?: PolymorphicRef<E> },
-) => ReactElement;
+) => ReactElement) & {
+  spiritComponent: string;
+  spiritDefaultElement: 'div';
+  spiritDefaultProps: SpiritAvatarProps<'div'>;
+};
+
+Avatar.spiritComponent = 'Avatar';
+Avatar.spiritDefaultElement = 'div' as const;
+Avatar.spiritDefaultProps = null as unknown as SpiritAvatarProps<'div'>;
 
 export default Avatar;

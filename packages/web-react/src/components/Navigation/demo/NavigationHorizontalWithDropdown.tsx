@@ -1,4 +1,4 @@
-import React, { type ElementType, type ReactElement, forwardRef, useState } from 'react';
+import React, { type ReactElement, forwardRef } from 'react';
 import { type PolymorphicRef, type SpiritNavigationActionProps } from '../../../types';
 import Dropdown from '../../Dropdown/Dropdown';
 import DropdownPopover from '../../Dropdown/DropdownPopover';
@@ -11,12 +11,12 @@ import NavigationItem from '../NavigationItem';
 
 /* We need an exception for components exported with forwardRef */
 /* eslint no-underscore-dangle: ['error', { allow: ['_NavigationActionAsDropdownTrigger'] }] */
-const _NavigationActionAsDropdownTrigger = <E extends ElementType = 'a'>(
-  props: SpiritNavigationActionProps<E>,
-  ref: PolymorphicRef<E>,
+const _NavigationActionAsDropdownTrigger = (
+  props: SpiritNavigationActionProps<'button'>,
+  ref: PolymorphicRef<'button'>,
 ): ReactElement => <NavigationAction {...props} elementType="button" ref={ref} />;
 
-const NavigationActionAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNavigationActionProps<ElementType>>(
+const NavigationActionAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNavigationActionProps<'button'>>(
   _NavigationActionAsDropdownTrigger,
 );
 

@@ -10,7 +10,10 @@ import { usePaginationStyleProps } from './usePaginationStyleProps';
 
 /* We need an exception for components exported with forwardRef */
 /* eslint no-underscore-dangle: ['error', { allow: ['_PaginationLink'] }] */
-const _PaginationLink = <E extends ElementType = 'a'>(props: SpiritPaginationLinkProps<E>, ref: PolymorphicRef<E>) => {
+const _PaginationLink = <E extends ElementType = 'a'>(
+  props: SpiritPaginationLinkProps<E> & { pageNumber: number | string },
+  ref: PolymorphicRef<E>,
+) => {
   const { elementType: ElementTag = 'a', accessibilityLabel, isCurrent, pageNumber, ...restProps } = props;
   const visuallyHiddenLabel =
     accessibilityLabel || `${PAGINATION_LINK_DEFAULT_ACCESSIBILITY_LABEL_PREFIX} ${pageNumber}`;
@@ -27,7 +30,13 @@ const _PaginationLink = <E extends ElementType = 'a'>(props: SpiritPaginationLin
   );
 };
 
-const PaginationLink = forwardRef<HTMLAnchorElement, SpiritPaginationLinkProps<ElementType>>(_PaginationLink);
+// @ts-expect-error - TransferProps index signature causes Omit to lose type information
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const PaginationLink = forwardRef(_PaginationLink) as any as (<E extends ElementType = 'a'>(
+  props: SpiritPaginationLinkProps<E> & { ref?: PolymorphicRef<E> },
+) => React.JSX.Element) & {
+  spiritComponent: string;
+};
 
 PaginationLink.spiritComponent = 'PaginationLink';
 
