@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import GridAlignment from './GridAlignment';
 import GridCustomSpacing from './GridCustomSpacing';
@@ -15,8 +15,8 @@ import GridResponsiveCustomSpacing from './GridResponsiveCustomSpacing';
 import GridResponsiveCustomVerticalSpacing from './GridResponsiveCustomVerticalSpacing';
 import GridResponsiveGridItem from './GridResponsiveGridItem';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <DocsSection title="Equal Columns">
       <GridEqual />
     </DocsSection>
@@ -56,5 +56,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <DocsSection title="Responsive Alignment">
       <GridResponsiveAlignment />
     </DocsSection>
-  </React.StrictMode>,
+  </StrictMode>,
 );

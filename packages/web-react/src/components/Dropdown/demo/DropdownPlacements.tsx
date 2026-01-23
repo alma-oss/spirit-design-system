@@ -9,7 +9,7 @@ import DropdownPopover from '../DropdownPopover';
 import DropdownTrigger from '../DropdownTrigger';
 
 const DropdownPlacements = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [placement, setPlacement] = useState<PlacementDictionaryType>('bottom-start');
   const onToggle = () => setIsOpen(!isOpen);
 

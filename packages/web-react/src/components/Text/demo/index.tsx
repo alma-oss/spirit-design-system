@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import TextAlignment from './TextAlignment';
 import TextBalanced from './TextBalanced';
@@ -10,8 +10,8 @@ import TextHyphens from './TextHyphens';
 import TextSizes from './TextSizes';
 import TextWordBreak from './TextWordBreak';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <DocsSection title="Default">
       <TextDefault />
     </DocsSection>
@@ -36,5 +36,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <DocsSection title="Hyphens" stackAlignment="stretch">
       <TextHyphens />
     </DocsSection>
-  </React.StrictMode>,
+  </StrictMode>,
 );

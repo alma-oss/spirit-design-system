@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import PartnerLogoDefault from './PartnerLogoDefault';
 import PartnerLogoFluid from './PartnerLogoFluid';
 import PartnerLogoResponsiveSize from './PartnerLogoResponsiveSize';
 import PartnerLogoSafeAreaDisabled from './PartnerLogoSafeAreaDisabled';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <DocsSection title="Default" hasStack={false}>
       <PartnerLogoDefault />
     </DocsSection>
@@ -20,5 +20,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <DocsSection title="Fluid Size" hasStack={false}>
       <PartnerLogoFluid />
     </DocsSection>
-  </React.StrictMode>,
+  </StrictMode>,
 );

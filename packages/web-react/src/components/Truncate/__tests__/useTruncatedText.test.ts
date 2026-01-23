@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import React from 'react';
+import { createElement } from 'react';
 import { TruncateModes } from '../../../types';
 import { truncateByCharacters, truncateByLines, truncateByWords, useTruncatedText } from '../useTruncatedText';
 
@@ -88,7 +88,7 @@ describe('useTruncatedText', () => {
   });
 
   it('should pass ReactNode content (non-string) without truncation', () => {
-    const reactNode = React.createElement('span', null, 'React content');
+    const reactNode = createElement('span', null, 'React content');
     const { result } = renderHook(() => useTruncatedText(reactNode, TruncateModes.WORDS, 5));
 
     expect(result.current).toBe(reactNode);

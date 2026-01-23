@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import LinkColors from './LinkColors';
 import LinkDefault from './LinkDefault';
@@ -8,8 +8,8 @@ import LinkUnderlined from './LinkUnderlined';
 import LinkVisited from './LinkVisited';
 import LinkVisitedDisabled from './LinkVisitedDisabled';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <DocsSection title="Default">
       <LinkDefault />
     </DocsSection>
@@ -28,5 +28,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <DocsSection title="Visited Disabled">
       <LinkVisitedDisabled />
     </DocsSection>
-  </React.StrictMode>,
+  </StrictMode>,
 );

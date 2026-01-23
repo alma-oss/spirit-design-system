@@ -1,6 +1,6 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { Children, type ElementType } from 'react';
 import { useStyleProps } from '../../hooks';
 import { type SpiritMatrixProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -26,7 +26,7 @@ const Matrix = <T extends ElementType = 'div'>(props: SpiritMatrixProps<T>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
 
   const { elementType: ElementTag = 'div', children, ...restProps } = propsWithDefaults;
-  const itemsCount: number = React.Children.count(children);
+  const itemsCount: number = Children.count(children);
   const {
     classProps,
     props: modifiedProps,

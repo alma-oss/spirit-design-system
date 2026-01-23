@@ -1,6 +1,6 @@
 'use client';
 
-import React, { type ForwardedRef, type RefObject, forwardRef } from 'react';
+import React, { type ElementType, type ForwardedRef, type RefObject, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import { type SpiritTextFieldBaseInputProps } from '../../types';
 import { useTextFieldBaseInputStyleProps } from './useTextFieldBaseInputStyleProps';
@@ -15,7 +15,7 @@ const _TextFieldBaseInput = (
   const { id, isDisabled, isMultiline, isRequired, inputWidth, type, ...restProps } = modifiedProps;
   const { props: otherProps } = useStyleProps(restProps);
 
-  const ElementType: React.ElementType = isMultiline ? 'textarea' : 'input';
+  const ElementType: ElementType = isMultiline ? 'textarea' : 'input';
   const inputType = isMultiline ? undefined : type;
 
   return (

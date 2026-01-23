@@ -3,8 +3,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: No declaration file -- @see https://jira.almacareer.tech/browse/DS-561
 import icons from '@alma-oss/spirit-icons/icons';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import SegmentedControlContentVariants from './SegmentedControlContentVariants';
@@ -15,8 +15,8 @@ import SegmentedControlWithDisableItem from './SegmentedControlWithDisableItem';
 import SegmentedControlWithTooltip from './SegmentedControlWithTooltip';
 import SegmentedControlWithTooltipAndLargerItemSet from './SegmentedControlWithTooltipAndLargerItemSet';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <IconsProvider value={icons}>
       <DocsSection title="Design Variants">
         <SegmentedControlDesignVariants />
@@ -40,5 +40,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <SegmentedControlWithTooltipAndLargerItemSet />
       </DocsSection>
     </IconsProvider>
-  </React.StrictMode>,
+  </StrictMode>,
 );

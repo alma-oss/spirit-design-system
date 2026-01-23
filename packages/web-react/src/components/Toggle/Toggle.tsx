@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames';
-import React, { type ForwardedRef, forwardRef, useState } from 'react';
+import React, { type ChangeEvent, type ForwardedRef, forwardRef, useState } from 'react';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type SpiritToggleProps } from '../../types';
 import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
@@ -36,7 +36,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
     validationText,
   });
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
     onChange(event);
   };

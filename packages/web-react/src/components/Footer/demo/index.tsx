@@ -3,8 +3,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment, import/extensions, import/no-unresolved
 // @ts-ignore: No declaration file -- @see https://jira.almacareer.tech/browse/DS-561
 import icons from '@alma-oss/spirit-icons/icons';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import FooterDefault from './FooterDefault';
@@ -12,8 +12,8 @@ import FooterMinimalistic from './FooterMinimalistic';
 import FooterNested from './FooterNested';
 import FooterTextAlignment from './FooterTextAlignment';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <IconsProvider value={icons}>
       <DocsSection title="Basic Usage" stackAlignment="stretch" container="heading-only">
         <FooterDefault />
@@ -28,5 +28,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <FooterTextAlignment />
       </DocsSection>
     </IconsProvider>
-  </React.StrictMode>,
+  </StrictMode>,
 );

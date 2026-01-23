@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import SectionBackground from './SectionBackground';
 import SectionCustomPadding from './SectionCustomPadding';
@@ -7,8 +7,8 @@ import SectionDefault from './SectionDefault';
 import SectionSizes from './SectionSizes';
 import SectionTextAlignment from './SectionTextAlignment';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <DocsSection title="Default" stackAlignment="stretch" container="heading-only">
       <SectionDefault />
     </DocsSection>
@@ -24,5 +24,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <DocsSection title="Text Alignment" stackAlignment="stretch" container="heading-only">
       <SectionTextAlignment />
     </DocsSection>
-  </React.StrictMode>,
+  </StrictMode>,
 );

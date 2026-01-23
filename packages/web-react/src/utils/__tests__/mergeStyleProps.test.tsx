@@ -1,4 +1,4 @@
-import React, { type CSSProperties } from 'react';
+import React, { type CSSProperties, type HTMLAttributes } from 'react';
 import { Button } from '../../components';
 import { type ElementTypeProp } from '../../types';
 import { mergeStyleProps } from '../mergeStyleProps';
@@ -12,7 +12,7 @@ describe('mergeStyleProps', () => {
     testCustomVar: { '--custom-var': '10px' } as CSSProperties,
   };
 
-  const CustomComponent = (props: React.HTMLAttributes<HTMLDivElement>) => <div {...props} />;
+  const CustomComponent = (props: HTMLAttributes<HTMLDivElement>) => <div {...props} />;
 
   const testCases = [
     { component: Button, label: 'a Spirit component', expectedKey: 'UNSAFE_' },

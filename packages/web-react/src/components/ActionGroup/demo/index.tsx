@@ -1,12 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import ActionLayoutCentered from './ActionLayoutCentered';
 import ActionLayoutDefault from './ActionLayoutDefault';
 import ActionLayoutReversedOnRight from './ActionLayoutReversedOnRight';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <DocsSection title="Default" stackAlignment="stretch">
       <ActionLayoutDefault />
     </DocsSection>
@@ -16,5 +16,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <DocsSection title="On Right Reversed" stackAlignment="stretch">
       <ActionLayoutReversedOnRight />
     </DocsSection>
-  </React.StrictMode>,
+  </StrictMode>,
 );
