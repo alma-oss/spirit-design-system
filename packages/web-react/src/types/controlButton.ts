@@ -1,16 +1,22 @@
-import { type ComponentPropsWithRef, type ElementType } from 'react';
+import { type ElementType } from 'react';
 import type {
   ButtonType,
   ChildrenProps,
   ClickEvents,
+  PolymorphicComponentProps,
   SingleOrResponsive,
   SizesDictionaryType,
   StyleProps,
 } from './shared';
 
+/** ===== BASE API ===== */
 /** @deprecated "SizesDictionaryType" fallback will be removed in the next major version. */
 export type ControlButtonSize<S> = keyof S extends never ? SizesDictionaryType : 'small' | 'medium' | 'large' | S;
-export interface ControlButtonBaseProps<S = void> extends ChildrenProps, StyleProps, ClickEvents {
+
+export interface ControlButtonBaseProps extends ChildrenProps, StyleProps, ClickEvents {}
+
+/** ===== STYLE API ===== */
+export interface ControlButtonStyleProps<S = void> extends ControlButtonBaseProps {
   /** Whether the button is disabled. */
   isDisabled?: boolean;
   /** Whether the button is in a subtle variant (without border). */
@@ -21,20 +27,18 @@ export interface ControlButtonBaseProps<S = void> extends ChildrenProps, StylePr
   size?: ControlButtonSize<S>;
 }
 
-export type ControlButtonProps<E extends ElementType, S = void> = {
-  /**
-   * The HTML element or React element used to render the button, e.g. 'div', 'a', or `RouterLink`.
-   *
-   * @default 'button'
-   */
-  elementType?: E;
+/** ===== INTERNAL API ===== */
+export interface ControlButtonProps<S = void> extends ControlButtonStyleProps<S> {
   /**
    * The behavior of the button when used in an HTML form.
    *
    * @default 'button'
    */
   type?: ButtonType;
-} & ControlButtonBaseProps<S>;
+}
 
-export type SpiritControlButtonProps<E extends ElementType = 'button', S = void> = ControlButtonProps<E, S> &
-  ComponentPropsWithRef<E>;
+/** ===== PUBLIC API ===== */
+export type SpiritControlButtonProps<E extends ElementType = 'button', S = void> = PolymorphicComponentProps<
+  E,
+  ControlButtonProps<S>
+>;

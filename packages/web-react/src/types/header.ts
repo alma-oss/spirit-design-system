@@ -2,17 +2,18 @@ import { type ElementType } from 'react';
 import {
   type ChildrenProps,
   type ClickEvent,
+  type PolymorphicComponentProps,
   type SpiritButtonElementProps,
   type SpiritDialogElementProps,
   type SpiritElementProps,
   type SpiritLItemElementProps,
-  type SpiritPolymorphicElementPropsWithRef,
   type SpiritSpanElementProps,
   type SpiritUListElementProps,
   type StyleProps,
   type TransferProps,
 } from './shared';
 
+/** ===== BASE API ===== */
 export type HeaderActionsColorType = 'primary' | 'secondary';
 export type HeaderColorType = 'primary' | 'transparent';
 
@@ -51,43 +52,11 @@ export interface HeaderDialogCloseButtonProps extends Omit<SpiritButtonElementPr
   label?: string;
 }
 
-export interface BaseHeaderDialogLinkProps extends ChildrenProps, StyleProps, TransferProps {
-  isCurrent?: boolean;
-}
-
-export type HeaderDialogLinkProps<E extends ElementType = 'a'> = {
-  /**
-   * The HTML element or React element used to render the Link, e.g. 'a'.
-   *
-   * @default 'a'
-   */
-  elementType?: E;
-} & BaseHeaderDialogLinkProps;
-
-export type SpiritDialogHeaderLinkProps<E extends ElementType = 'a'> = HeaderDialogLinkProps<E> &
-  SpiritPolymorphicElementPropsWithRef<E, HeaderDialogLinkProps<E>>;
-
 export interface HeaderDialogNavProps extends SpiritUListElementProps, ChildrenProps {}
 
 export interface HeaderDialogNavItemProps extends SpiritLItemElementProps, ChildrenProps {}
 
 export interface HeaderDialogTextProps extends SpiritSpanElementProps, ChildrenProps {}
-
-export interface HeaderLinkBaseProps extends ChildrenProps, StyleProps, TransferProps {
-  isCurrent?: boolean;
-}
-
-export type HeaderLinkProps<E extends ElementType = 'a'> = {
-  /**
-   * The HTML element or React element used to render the Link, e.g. 'a'.
-   *
-   * @default 'a'
-   */
-  elementType?: E;
-} & HeaderLinkBaseProps;
-
-export type SpiritHeaderLinkProps<E extends ElementType = 'a'> = HeaderLinkProps<E> &
-  SpiritPolymorphicElementPropsWithRef<E, HeaderLinkProps<E>>;
 
 export interface HeaderMobileActionsProps extends SpiritElementProps, HeaderMobileActionsHandlingProps, ChildrenProps {
   dialogId: string;
@@ -97,3 +66,25 @@ export interface HeaderMobileActionsProps extends SpiritElementProps, HeaderMobi
 export interface HeaderNavProps extends SpiritUListElementProps, ChildrenProps {}
 
 export interface HeaderNavItemProps extends SpiritLItemElementProps, ChildrenProps {}
+
+/** ===== STYLE API ===== */
+export interface HeaderDialogLinkStyleProps extends ChildrenProps, StyleProps, TransferProps {
+  isCurrent?: boolean;
+}
+
+export interface HeaderLinkStyleProps extends ChildrenProps, StyleProps, TransferProps {
+  isCurrent?: boolean;
+}
+
+/** ===== INTERNAL API ===== */
+export interface HeaderDialogLinkProps extends HeaderDialogLinkStyleProps {}
+
+export interface HeaderLinkProps extends HeaderLinkStyleProps {}
+
+/** ===== PUBLIC API ===== */
+export type SpiritDialogHeaderLinkProps<E extends ElementType = 'a'> = PolymorphicComponentProps<
+  E,
+  HeaderDialogLinkProps
+>;
+
+export type SpiritHeaderLinkProps<E extends ElementType = 'a'> = PolymorphicComponentProps<E, HeaderLinkProps>;

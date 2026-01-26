@@ -1,12 +1,13 @@
 import { type ElementType } from 'react';
-import {
-  type ChildrenProps,
-  type SpacingProp,
-  type SpiritPolymorphicElementPropsWithoutRef,
-  type StyleProps,
-} from './shared';
+import { type ChildrenProps, type PolymorphicComponentProps, type SpacingProp, type StyleProps } from './shared';
 
-export interface StackBaseProps extends ChildrenProps, SpacingProp, StyleProps {
+/** ===== BASE API ===== */
+export interface StackBaseProps extends ChildrenProps, SpacingProp, StyleProps {}
+
+export interface StackItemBaseProps extends ChildrenProps, StyleProps {}
+
+/** ===== STYLE API ===== */
+export interface StackStyleProps extends StackBaseProps {
   /** Whether the Stack has divider on the end */
   hasEndDivider?: boolean;
   /** Whether the Stack has divider between items */
@@ -17,28 +18,14 @@ export interface StackBaseProps extends ChildrenProps, SpacingProp, StyleProps {
   hasStartDivider?: boolean;
 }
 
-export type StackProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the stack, e.g. 'div'.
-   *
-   * @default 'div'
-   */
-  elementType?: E;
-} & StackBaseProps;
+export interface StackItemStyleProps extends StackItemBaseProps {}
 
-export type SpiritStackProps<E extends ElementType = 'div'> = StackProps<E> &
-  SpiritPolymorphicElementPropsWithoutRef<E, StackProps<E>>;
+/** ===== INTERNAL API ===== */
+export interface StackProps extends StackStyleProps {}
 
-export interface StackItemBaseProps extends ChildrenProps, StyleProps {}
+export interface StackItemProps extends StackItemStyleProps {}
 
-export type StackItemProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the stack item, e.g. 'div'.
-   *
-   * @default 'div'
-   */
-  elementType?: E;
-} & StackItemBaseProps;
+/** ===== PUBLIC API ===== */
+export type SpiritStackProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, StackProps>;
 
-export type SpiritStackItemProps<E extends ElementType = 'div'> = StackItemProps<E> &
-  SpiritPolymorphicElementPropsWithoutRef<E, StackItemProps<E>>;
+export type SpiritStackItemProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, StackItemProps>;

@@ -1,6 +1,7 @@
 import { renderHook } from '@testing-library/react';
+import { type ElementType } from 'react';
 import { BorderRadii } from '../../../constants';
-import type { Responsive, SizeExtendedDictionaryType } from '../../../types';
+import type { Responsive, SizeExtendedDictionaryType, SpiritIconBoxProps } from '../../../types';
 import { useIconBoxStyleProps } from '../useIconBoxStyleProps';
 
 const expectedIconBoxStyles = {
@@ -41,7 +42,11 @@ describe('useIconBoxStyleProps', () => {
 
   it('should forward other props', () => {
     const { result } = renderHook(() =>
-      useIconBoxStyleProps({ size: 'medium', hasBorder: false, 'aria-label': 'foo' }),
+      useIconBoxStyleProps({
+        size: 'medium',
+        hasBorder: false,
+        'aria-label': 'foo',
+      } as unknown as SpiritIconBoxProps<ElementType>),
     );
 
     expect(result.current.props).toHaveProperty('aria-label', 'foo');

@@ -61,7 +61,7 @@ describe('Hidden', () => {
 
   elementTypePropsTest(Hidden);
 
-  staticPropsTest(Hidden, 'Hidden', 'span');
+  staticPropsTest(Hidden, 'Hidden');
 
   it('should render children', () => {
     render(<Hidden>Content</Hidden>);

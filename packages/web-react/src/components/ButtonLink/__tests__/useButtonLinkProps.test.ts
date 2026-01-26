@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react';
-import { type UseButtonLinkProps, useButtonLinkProps } from '../useButtonLinkProps';
+import { type SpiritButtonLinkProps } from '../../..';
+import { useButtonLinkProps } from '../useButtonLinkProps';
 
 describe('useButtonAriaProps', () => {
   it('should return aria props for anchor tag', () => {
@@ -9,7 +10,7 @@ describe('useButtonAriaProps', () => {
       isDisabled: false,
       target: '_blank',
       rel: 'noopener',
-    } as UseButtonLinkProps;
+    } as SpiritButtonLinkProps;
     const { result } = renderHook(() => useButtonLinkProps(props));
 
     expect(result.current.buttonLinkProps).toEqual({
@@ -30,7 +31,7 @@ describe('useButtonAriaProps', () => {
       isDisabled: true,
       target: '_blank',
       rel: 'noopener',
-    } as UseButtonLinkProps;
+    } as SpiritButtonLinkProps;
     const { result } = renderHook(() => useButtonLinkProps(props));
 
     expect(result.current.buttonLinkProps).toEqual({
@@ -48,7 +49,7 @@ describe('useButtonAriaProps', () => {
     const props = {
       elementType: 'button',
       isDisabled: false,
-    } as unknown as UseButtonLinkProps;
+    } as unknown as SpiritButtonLinkProps;
     const { result } = renderHook(() => useButtonLinkProps(props));
 
     expect(result.current.buttonLinkProps).toEqual({
@@ -65,7 +66,7 @@ describe('useButtonAriaProps', () => {
     const props = {
       elementType: 'button',
       isDisabled: true,
-    } as unknown as UseButtonLinkProps;
+    } as unknown as SpiritButtonLinkProps;
     const { result } = renderHook(() => useButtonLinkProps(props));
 
     expect(result.current.buttonLinkProps).toEqual({

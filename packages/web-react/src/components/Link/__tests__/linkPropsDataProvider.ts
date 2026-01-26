@@ -1,4 +1,13 @@
-const linkPropsDataProvider = [
+import { type LinkColorsDictionaryType, type UnderlineOptions } from '../../../types';
+
+type LinkPropsDataProviderType = [
+  color: LinkColorsDictionaryType<void>,
+  underlined: UnderlineOptions | undefined,
+  isDisabled: boolean,
+  expectedClassName: string,
+];
+
+const linkPropsDataProvider: LinkPropsDataProviderType[] = [
   // color, underlined, isDisabled, expectedClassName
   ['primary', undefined, false, 'link-primary'],
   ['secondary', undefined, false, 'link-secondary'],

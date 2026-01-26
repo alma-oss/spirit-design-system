@@ -28,8 +28,6 @@ const _Avatar = <E extends ElementType = 'div'>(props: SpiritAvatarProps<E>, ref
 };
 
 _Avatar.spiritComponent = 'Avatar';
-_Avatar.spiritDefaultElement = 'div' as const;
-_Avatar.spiritDefaultProps = null as unknown as SpiritAvatarProps<'div'>;
 
 const Avatar = forwardRef(_Avatar) as <E extends ElementType = 'div'>(
   props: SpiritAvatarProps<E> & { ref?: PolymorphicRef<E> },

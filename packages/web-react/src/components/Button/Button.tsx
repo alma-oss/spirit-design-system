@@ -1,15 +1,15 @@
 'use client';
 
-import React, { type ElementType, type ForwardedRef, forwardRef } from 'react';
+import React, { type ElementType, forwardRef } from 'react';
 import { usePropsContext } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type SpiritButtonProps } from '../../types';
+import { type ButtonProps, type PolymorphicComponent, type PolymorphicRef, type SpiritButtonProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Spinner } from '../Spinner';
 import { useButtonProps } from './useButtonProps';
 import { useButtonStyleProps } from './useButtonStyleProps';
 
-const defaultProps: Partial<SpiritButtonProps> = {
+const defaultProps = {
   color: 'primary',
   /**
    * @deprecated "isBlock" property will be removed in the next major version. Please read component's README for more information.
@@ -26,31 +26,30 @@ const defaultProps: Partial<SpiritButtonProps> = {
 
 const _Button = <T extends ElementType = 'button', C = void, S = void>(
   props: SpiritButtonProps<T, C, S>,
-  ref: ForwardedRef<HTMLButtonElement>,
+  ref: PolymorphicRef<T>,
 ) => {
   const propsWithContext = usePropsContext();
   const propsWithDefaults = { ...defaultProps, ...props, ...propsWithContext };
-  const {
-    elementType: ElementTag = defaultProps.elementType as ElementType,
-    children,
-    ...restProps
-  } = propsWithDefaults;
+  const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
+
+  const Component = elementType as ElementType;
 
   const { buttonProps } = useButtonProps(restProps);
   const { classProps, props: modifiedProps } = useButtonStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...buttonProps} ref={ref} {...mergedStyleProps}>
+    <Component {...otherProps} {...buttonProps} ref={ref} {...mergedStyleProps}>
       {children}
       {restProps.isLoading && <Spinner />}
-    </ElementTag>
+    </Component>
   );
 };
 
-const Button = forwardRef<HTMLButtonElement, SpiritButtonProps<ElementType>>(_Button);
+const Button = forwardRef(_Button) as unknown as PolymorphicComponent<'button', ButtonProps<void, void>>;
 
 Button.spiritComponent = 'Button';
+Button.displayName = 'Button';
 
 export default Button;

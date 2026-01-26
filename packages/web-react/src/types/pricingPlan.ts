@@ -1,4 +1,4 @@
-import type { ElementType, JSXElementConstructor, ReactNode } from 'react';
+import type { ElementType, ReactNode } from 'react';
 import type { ChildrenProps, RequiredProps, SpiritPolymorphicElementPropsWithRef, StyleProps } from './shared';
 
 export interface PricingPlanBaseProps extends ChildrenProps, StyleProps {
@@ -45,7 +45,7 @@ export type PricingPlanProps<E extends ElementType> = {
    *
    * @default 'article'
    */
-  elementType?: E | JSXElementConstructor<unknown>;
+  elementType?: E;
 };
 
 export type SpiritPricingPlanProps<E extends ElementType = 'article'> = PricingPlanProps<E> &

@@ -25,7 +25,8 @@ const Heading = <T extends ElementType, S = void, E = void>(props: SpiritHeading
   const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+    <ElementTag {...(otherProps as any)} {...mergedStyleProps}>
       {children}
     </ElementTag>
   );

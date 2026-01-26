@@ -14,7 +14,6 @@ const UncontrolledAccordion = <T extends ElementType = 'section'>(props: SpiritU
 };
 
 UncontrolledAccordion.spiritComponent = 'UncontrolledAccordion';
-UncontrolledAccordion.spiritDefaultElement = 'section' as const;
-UncontrolledAccordion.spiritDefaultProps = null as unknown as SpiritUncontrolledAccordionProps<'section'>;
+UncontrolledAccordion.displayName = 'UncontrolledAccordion';
 
 export default UncontrolledAccordion;
