@@ -1,13 +1,13 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { type ElementType, forwardRef } from 'react';
 import { AlignmentXExtended, AlignmentYExtended, DirectionExtended } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import { type SpiritFlexProps } from '../../types';
+import { type FlexProps, type PolymorphicComponent, type PolymorphicRef, type SpiritFlexProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useFlexStyleProps } from './useFlexStyleProps';
 
-const defaultProps: SpiritFlexProps = {
+const defaultProps = {
   alignmentX: AlignmentXExtended.STRETCH,
   alignmentY: AlignmentYExtended.STRETCH,
   direction: DirectionExtended.HORIZONTAL,
@@ -15,10 +15,10 @@ const defaultProps: SpiritFlexProps = {
   isWrapping: false,
 };
 
-const Flex = <T extends ElementType = 'div'>(props: SpiritFlexProps<T>): JSX.Element => {
+const _Flex = <T extends ElementType = 'div'>(props: SpiritFlexProps<T>, ref: PolymorphicRef<T>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const {
-    elementType: ElementTag = 'div',
+    elementType = defaultProps.elementType,
     /**
      * @deprecated "row" and "column" values will be removed in the next major version. Please use "horizontal" and "vertical" instead.
      * @see https://jira.almacareer.tech/browse/DS-1629
@@ -27,19 +27,23 @@ const Flex = <T extends ElementType = 'div'>(props: SpiritFlexProps<T>): JSX.Ele
     children,
     ...restProps
   } = propsWithDefaults;
+
+  const Component = elementType as ElementType;
+
   const { classProps, props: modifiedProps, styleProps: flexStyle } = useFlexStyleProps({ direction, ...restProps });
   const { styleProps, props: otherProps } = useStyleProps({ ...modifiedProps });
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, flexStyle, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, flexStyle, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
+const Flex = forwardRef(_Flex) as unknown as PolymorphicComponent<'div', FlexProps>;
+
 Flex.spiritComponent = 'Flex';
-Flex.spiritDefaultElement = 'div' as const;
-Flex.spiritDefaultProps = null as unknown as SpiritFlexProps<'div'>;
+Flex.displayName = 'Flex';
 
 export default Flex;

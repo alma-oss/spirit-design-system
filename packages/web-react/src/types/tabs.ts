@@ -2,8 +2,8 @@ import { type ElementType, type HTMLProps } from 'react';
 import {
   type ChildrenProps,
   type ClickEvents,
+  type PolymorphicComponentProps,
   type SpacingProp,
-  type SpiritPolymorphicElementPropsWithRef,
   type StyleProps,
   type TransferProps,
 } from './shared';
@@ -36,21 +36,19 @@ export interface TabsProps extends ChildrenProps, SpacingProp, TransferProps, Ta
 
 export type TabLinkItemProps = StyleProps & HTMLProps<HTMLLIElement>;
 
-export interface TabLinkBaseProps extends ChildrenProps, StyleProps, TransferProps {
+/** ===== BASE API ===== */
+export interface TabLinkBaseProps extends ChildrenProps, StyleProps, TransferProps {}
+
+/** ===== STYLE API ===== */
+export interface TabLinkStyleProps extends TabLinkBaseProps {
   itemProps?: TabLinkItemProps;
 }
 
-export type TabLinkProps<E extends ElementType = 'a'> = {
-  /**
-   * The HTML element or React element used to render the Link, e.g. 'a'.
-   *
-   * @default 'a'
-   */
-  elementType?: E;
-} & TabLinkBaseProps;
+/** ===== INTERNAL API ===== */
+export interface TabLinkProps extends TabLinkStyleProps {}
 
-export type SpiritTabLinkProps<E extends ElementType = 'a'> = TabLinkProps<E> &
-  SpiritPolymorphicElementPropsWithRef<E, TabLinkProps<E>>;
+/** ===== PUBLIC API ===== */
+export type SpiritTabLinkProps<E extends ElementType = 'a'> = PolymorphicComponentProps<E, TabLinkProps>;
 
 export type TabsToggler = (id: TabId) => void;
 

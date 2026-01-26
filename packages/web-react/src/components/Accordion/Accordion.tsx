@@ -1,18 +1,25 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type SpiritAccordionProps } from '../../types';
+import {
+  type AccordionProps,
+  type PolymorphicComponent,
+  type PolymorphicRef,
+  type SpiritAccordionProps,
+} from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { AccordionProvider } from './AccordionContext';
 import { useAccordionStyleProps } from './useAccordionStyleProps';
 
-const Accordion = <T extends ElementType = 'section'>(props: SpiritAccordionProps<T>) => {
-  const { children, elementType: ElementTag = 'section', open, toggle, ...restProps } = props;
+const _Accordion = <T extends ElementType = 'section'>(props: SpiritAccordionProps<T>, ref: PolymorphicRef<T>) => {
+  const { children, elementType = 'section', open, toggle, ...restProps } = props;
+
+  const Component = elementType as ElementType;
 
   const { classProps } = useAccordionStyleProps();
   const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.root, styleProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps });
 
   const contextValue = {
     open,
@@ -20,14 +27,15 @@ const Accordion = <T extends ElementType = 'section'>(props: SpiritAccordionProp
   };
 
   return (
-    <ElementTag {...transferProps} {...mergedStyleProps}>
+    <Component {...transferProps} {...mergedStyleProps} ref={ref}>
       <AccordionProvider value={contextValue}>{children}</AccordionProvider>
-    </ElementTag>
+    </Component>
   );
 };
 
+const Accordion = forwardRef(_Accordion) as unknown as PolymorphicComponent<'section', AccordionProps>;
+
 Accordion.spiritComponent = 'Accordion';
-Accordion.spiritDefaultElement = 'section' as const;
-Accordion.spiritDefaultProps = null as unknown as SpiritAccordionProps<'section'>;
+Accordion.displayName = 'Accordion';
 
 export default Accordion;

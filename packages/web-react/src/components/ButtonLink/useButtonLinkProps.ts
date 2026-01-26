@@ -1,12 +1,10 @@
+import { type ElementType } from 'react';
 import { useClick } from '../../hooks';
 import { type SpiritButtonLinkProps } from '../../types';
 
-export type UseButtonLinkProps = Partial<SpiritButtonLinkProps>;
-export type UseButtonLinkReturn = {
-  buttonLinkProps: UseButtonLinkProps;
-};
-
-export const useButtonLinkProps = (props: UseButtonLinkProps): UseButtonLinkReturn => {
+export const useButtonLinkProps = <T extends ElementType = 'a', C = void, S = void>(
+  props: SpiritButtonLinkProps<T, C, S>,
+) => {
   const { elementType, isDisabled, isLoading, onClick, href, target, rel } = props;
   const handleClick = useClick(isDisabled, onClick);
 

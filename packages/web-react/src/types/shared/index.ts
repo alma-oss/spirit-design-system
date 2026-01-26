@@ -1,4 +1,4 @@
-import { type ElementType, type JSXElementConstructor, type ReactNode } from 'react';
+import { type ElementType, type ReactNode } from 'react';
 
 export * from './adornments';
 export * from './buttons';
@@ -34,7 +34,7 @@ export interface ElementTypeProps<T extends ElementType = 'div'> {
    *
    * @default 'div'
    */
-  elementType?: T | JSXElementConstructor<unknown>;
+  elementType?: T;
 }
 
 export enum SpiritBreakpoints {

@@ -177,5 +177,5 @@ const HeaderWithHooks = (args: HeaderDialogLinkProps) => {
 
 export const HeaderDialogLinkPlayground: Story = {
   name: 'HeaderDialogLink',
-  render: (args) => <HeaderWithHooks {...args} />,
+  render: (args) => <HeaderWithHooks {...(args as HeaderDialogLinkProps)} />,
 };

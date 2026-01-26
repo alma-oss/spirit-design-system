@@ -1,23 +1,8 @@
 import classNames from 'classnames';
-import { type ElementType } from 'react';
 import { useClassNamePrefix, useSpacingStyle } from '../../hooks';
-import { type SpacingCSSProperties, type SpiritStackProps } from '../../types';
+import { type StackStyleProps } from '../../types';
 
-interface StackCSSProperties extends SpacingCSSProperties {}
-
-export interface StackStyles {
-  /** className props */
-  classProps: {
-    root: string;
-    item: string;
-  };
-  /** props to be passed to the element */
-  props: SpiritStackProps;
-  /** Style props for the element */
-  styleProps: StackCSSProperties;
-}
-
-export function useStackStyleProps<T extends ElementType = 'div'>(props: SpiritStackProps<T>): StackStyles {
+export function useStackStyleProps(props: StackStyleProps) {
   const { hasEndDivider, hasIntermediateDividers, hasSpacing, hasStartDivider, spacing, ...restProps } = props;
 
   const StackClass = useClassNamePrefix('Stack');

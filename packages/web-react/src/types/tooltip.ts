@@ -1,14 +1,15 @@
 import { type Placement, type Strategy } from '@floating-ui/react';
-import type { ElementType, JSXElementConstructor, ReactNode } from 'react';
+import type { ElementType, ReactNode } from 'react';
 import type {
   ChildrenProps,
   ClickEvent,
   ElementTypeProp,
-  SpiritPolymorphicElementPropsWithRef,
+  PolymorphicComponentProps,
   StyleProps,
   TransferProps,
 } from './shared';
 
+/** ===== BASE API ===== */
 export const TOOLTIP_TRIGGER = {
   CLICK: 'click',
   HOVER: 'hover',
@@ -18,53 +19,52 @@ export const TOOLTIP_TRIGGER = {
   ESCAPE_KEY: 'escape-key',
 } as const;
 
-export interface TooltipPopoverProps extends ChildrenProps, StyleProps {}
-
 export type TooltipTriggerType = 'click' | 'hover' | 'focus' | 'manual';
-
-export interface TooltipTriggerProps extends StyleProps, TransferProps {
-  elementType?: ElementTypeProp;
-  children?: string | ReactNode | ((props: { isOpen: boolean }) => ReactNode);
-}
-
-export interface UncontrolledTooltipProps extends BaseTooltipProps {}
 
 export interface TooltipCloseButtonProps extends StyleProps {
   onClick?: (event: ClickEvent) => void;
   label?: string;
 }
 
-export interface TooltipHandlingProps {
+export interface TooltipState {
   isOpen?: boolean;
   onToggle: (isOpen: boolean) => void;
 }
 
-export interface BaseTooltipProps extends ChildrenProps, StyleProps {
+export interface TooltipBaseProps extends ChildrenProps, StyleProps {
   closeLabel?: string;
   id: string;
-  isDismissible?: boolean;
+}
+
+export interface TooltipStateProps {
+  enableFlipping?: boolean;
+  enableFlippingCrossAxis?: boolean;
+  enableShifting?: boolean;
+  enableSizing?: boolean;
+  flipFallbackAxisSideDirection?: 'none' | 'start' | 'end';
+  flipFallbackPlacements?: Placement | Placement[];
+  isFocusableOnHover?: boolean;
+  positionStrategy?: Strategy;
+  trigger?: TooltipTriggerType[];
   placement?: Placement;
 }
 
-export interface TooltipProps<E extends ElementType> extends BaseTooltipProps, TooltipHandlingProps {
-  /**
-   * The HTML element or React element used to render the plan, e.g. 'div', 'a', or `RouterLink`.
-   *
-   * @default 'div'
-   */
-  elementType?: E | JSXElementConstructor<unknown>;
+/** ===== STYLE API ===== */
+export interface TooltipStyleProps extends TooltipBaseProps, TooltipState, TooltipStateProps {
+  isDismissible?: boolean;
 }
 
-export type SpiritTooltipProps<E extends ElementType = 'div'> = TooltipProps<E> &
-  SpiritPolymorphicElementPropsWithRef<E, TooltipProps<E>> &
-  ChildrenProps & {
-    enableFlipping?: boolean;
-    enableFlippingCrossAxis?: boolean;
-    enableShifting?: boolean;
-    enableSizing?: boolean;
-    flipFallbackAxisSideDirection?: 'none' | 'start' | 'end';
-    flipFallbackPlacements?: Placement | Placement[];
-    isFocusableOnHover?: boolean;
-    positionStrategy?: Strategy;
-    trigger?: TooltipTriggerType[];
-  };
+/** ===== INTERNAL API ===== */
+export interface TooltipProps extends TooltipStyleProps {}
+
+// Sub-components receive props from JSX, but get state/handlers from context
+export interface TooltipPopoverProps extends ChildrenProps, StyleProps, TransferProps {}
+export interface TooltipTriggerProps extends StyleProps, TransferProps {
+  elementType?: ElementTypeProp;
+  children?: string | ReactNode | ((props: { isOpen: boolean }) => ReactNode);
+}
+
+export interface UncontrolledTooltipProps extends TooltipStyleProps {}
+
+/** ===== PUBLIC API ===== */
+export type SpiritTooltipProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, TooltipProps>;

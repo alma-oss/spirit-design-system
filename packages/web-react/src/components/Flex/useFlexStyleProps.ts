@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { type CSSProperties, type ElementType } from 'react';
 import { DirectionAxis } from '../../constants';
 import {
   useAlignmentClass,
@@ -8,23 +7,10 @@ import {
   useSpacingStyle,
   useWrapClass,
 } from '../../hooks';
-import { type FlexAlignmentXType, type FlexAlignmentYType, type SpacingType, type SpiritFlexProps } from '../../types';
+import { type FlexAlignmentXType, type FlexAlignmentYType, type FlexStyleProps, type SpacingType } from '../../types';
 import { generateStylePropsClassNames, stringOrObjectKebabCaseToCamelCase } from '../../utils';
 
-interface FlexCSSProperties extends CSSProperties {
-  [key: string]: string | undefined | number;
-}
-
-export interface FlexStyle<T> {
-  /** className props */
-  classProps: string;
-  /** Props for the flex element. */
-  props: T;
-  /** Style props for the element */
-  styleProps: FlexCSSProperties;
-}
-
-export function useFlexStyleProps(props: SpiritFlexProps<ElementType>): FlexStyle<SpiritFlexProps<ElementType>> {
+export function useFlexStyleProps(props: FlexStyleProps) {
   const { alignmentX, alignmentY, direction, spacing, spacingX, spacingY, isWrapping, ...restProps } = props;
 
   // @see https://jira.almacareer.tech/browse/DS-1629
@@ -38,7 +24,7 @@ export function useFlexStyleProps(props: SpiritFlexProps<ElementType>): FlexStyl
 
   const flexClass = useClassNamePrefix('Flex');
 
-  const flexStyle: FlexCSSProperties = {
+  const flexStyle = {
     ...useSpacingStyle(spacing as SpacingType, 'flex', DirectionAxis.X),
     ...useSpacingStyle(spacing as SpacingType, 'flex', DirectionAxis.Y),
     ...useSpacingStyle(spacingX as SpacingType, 'flex', DirectionAxis.X),

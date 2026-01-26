@@ -1,27 +1,16 @@
 'use client';
 
 import classNames from 'classnames';
-import { type ElementType, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useClassNamePrefix } from '../../hooks';
-import { type TooltipProps } from '../../types';
+import { type StyleProps } from '../../types';
 
-type omittedProps = 'id' | 'onToggle';
-
-export interface UseTooltipStyleProps<E extends ElementType = 'div'> extends TooltipProps<E> {}
-
-export interface UseTooltipStylePropsReturn<E extends ElementType = 'div'> {
-  classProps: {
-    rootClassName: string;
-    popoverClassName: string;
-    arrowClassName: string;
-    closeButtonClassName: string;
-  };
-  props: Omit<TooltipProps<E>, omittedProps>;
+interface UseTooltipStyleProps extends StyleProps {
+  isDismissible?: boolean;
+  isOpen?: boolean;
 }
 
-export const useTooltipStyleProps = <E extends ElementType = 'div'>(
-  props: Omit<UseTooltipStyleProps<E>, omittedProps>,
-): UseTooltipStylePropsReturn<E> => {
+export const useTooltipStyleProps = (props: UseTooltipStyleProps) => {
   const { isDismissible, isOpen, ...modifiedProps } = props;
   const tooltipClass = useClassNamePrefix('Tooltip');
   const tooltipPopoverClass = `${tooltipClass}Popover`;

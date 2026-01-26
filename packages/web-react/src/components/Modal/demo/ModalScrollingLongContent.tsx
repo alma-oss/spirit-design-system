@@ -293,9 +293,10 @@ const ModalScrollingLongContent = () => {
                       columnStart={{ mobile: 6, tablet: 4 }}
                       columnEnd={{ mobile: 13, tablet: 7 }}
                       elementType="span"
-                      id={`custom-max-height-${breakpoint}-value`}
                     >
-                      {isCustomHeightEnabled[breakpoint] ? `${heightValue.maxHeight[breakpoint]} px` : '—'}
+                      <span id={`custom-max-height-${breakpoint}-value`}>
+                        {isCustomHeightEnabled[breakpoint] ? `${heightValue.maxHeight[breakpoint]} px` : '—'}
+                      </span>
                     </GridItem>
                     <input
                       autoComplete="off"

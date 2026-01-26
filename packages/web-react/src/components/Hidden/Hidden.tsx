@@ -1,17 +1,19 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type SpiritHiddenProps } from '../../types';
+import { type HiddenProps, type PolymorphicComponent, type PolymorphicRef, type SpiritHiddenProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 
 const defaultProps = {
-  elementType: 'span' as const,
+  elementType: 'span',
 };
 
-const Hidden = <T extends ElementType = 'span'>(props: SpiritHiddenProps<T>) => {
+const _Hidden = <T extends ElementType = 'span'>(props: SpiritHiddenProps<T>, ref: PolymorphicRef<T>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag = 'span', children, on, from, ...restProps } = propsWithDefaults;
+  const { elementType = defaultProps.elementType, children, on, from, ...restProps } = propsWithDefaults;
+
+  const Component = elementType as ElementType;
 
   const stylePropsWithMapping = {
     ...restProps,
@@ -20,17 +22,18 @@ const Hidden = <T extends ElementType = 'span'>(props: SpiritHiddenProps<T>) => 
   };
 
   const { styleProps, props: otherProps } = useStyleProps(stylePropsWithMapping);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { styleProps });
+  const mergedStyleProps = mergeStyleProps(Component, { styleProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
+const Hidden = forwardRef(_Hidden) as unknown as PolymorphicComponent<'span', HiddenProps>;
+
 Hidden.spiritComponent = 'Hidden';
-Hidden.spiritDefaultElement = 'span' as const;
-Hidden.spiritDefaultProps = null as unknown as SpiritHiddenProps<'span'>;
+Hidden.displayName = 'Hidden';
 
 export default Hidden;

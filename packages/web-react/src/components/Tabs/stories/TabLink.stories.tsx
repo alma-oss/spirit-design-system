@@ -45,5 +45,5 @@ const TabsWithHooks = (args: TabLinkProps) => {
 
 export const TabLinkPlayground: Story = {
   name: 'TabLink',
-  render: (args) => <TabsWithHooks {...args} />,
+  render: (args) => <TabsWithHooks {...(args as TabLinkProps)} />,
 };

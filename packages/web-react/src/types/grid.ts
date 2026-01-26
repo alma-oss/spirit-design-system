@@ -1,15 +1,16 @@
-import { type ElementType, type JSXElementConstructor } from 'react';
+import { type ElementType } from 'react';
 import {
   type AlignmentXExtendedDictionaryType,
   type AlignmentYExtendedDictionaryType,
   type ChildrenProps,
   type GridColumns,
+  type PolymorphicComponentProps,
   type SingleOrResponsive,
   type SpaceToken,
-  type SpiritPolymorphicElementPropsWithRef,
   type StyleProps,
 } from './shared';
 
+/** ===== BASE API ===== */
 export type GridColsBreakpoints = {
   mobile?: GridColumns;
   tablet?: GridColumns;
@@ -22,24 +23,6 @@ export type GridItemPositionBreakpoints = {
   desktop?: number | GridItemSpan;
 };
 export type GridItemPosition = number | GridItemSpan | GridItemPositionBreakpoints;
-
-export interface GridElementTypeProps<T extends ElementType = 'div'> {
-  /**
-   * The HTML element or React element used to render the Grid, e.g. 'div'.
-   *
-   * @default 'div'
-   */
-  elementType?: T | JSXElementConstructor<unknown>;
-}
-
-export interface GridItemElementTypeProps<T extends ElementType = 'div'> {
-  /**
-   * The HTML element or React element used to render the GridItem, e.g. 'div'.
-   *
-   * @default 'div'
-   */
-  elementType?: T | JSXElementConstructor<unknown>;
-}
 
 export type GridAlignmentXType =
   | NonNullable<AlignmentXExtendedDictionaryType>
@@ -67,17 +50,21 @@ export interface GridItemCustomLayoutProps {
   rowStart?: GridItemPosition;
 }
 
-export interface GridProps<T extends ElementType = 'div'> extends GridElementTypeProps<T>, GridCustomLayoutProps {}
+export interface GridBaseProps extends ChildrenProps, StyleProps {}
 
-export interface GridItemProps<T extends ElementType = 'div'>
-  extends GridItemElementTypeProps<T>, GridItemCustomLayoutProps {}
+export interface GridItemBaseProps extends ChildrenProps, StyleProps {}
 
-export type SpiritGridProps<T extends ElementType = 'div'> = GridProps<T> &
-  ChildrenProps &
-  StyleProps &
-  SpiritPolymorphicElementPropsWithRef<T, GridProps<T>>;
+/** ===== STYLE API ===== */
+export interface GridStyleProps extends GridBaseProps, GridCustomLayoutProps {}
 
-export type SpiritGridItemProps<T extends ElementType = 'div'> = GridItemProps<T> &
-  ChildrenProps &
-  StyleProps &
-  SpiritPolymorphicElementPropsWithRef<T, GridItemProps<T>>;
+export interface GridItemStyleProps extends GridItemBaseProps, GridItemCustomLayoutProps {}
+
+/** ===== INTERNAL API ===== */
+export interface GridProps extends GridStyleProps {}
+
+export interface GridItemProps extends GridItemStyleProps {}
+
+/** ===== PUBLIC API ===== */
+export type SpiritGridProps<T extends ElementType = 'div'> = PolymorphicComponentProps<T, GridProps>;
+
+export type SpiritGridItemProps<T extends ElementType = 'div'> = PolymorphicComponentProps<T, GridItemProps>;
