@@ -1,6 +1,14 @@
 import { type ComponentPropsWithRef, type ElementType } from 'react';
 
 /**
+ * Static properties that all Spirit components should have
+ */
+export interface SpiritComponentStaticProps {
+  spiritComponent: string;
+  displayName: string;
+}
+
+/**
  * Polymorphic component props type
  *
  * Creates a type that combines:
@@ -45,8 +53,15 @@ type ComponentStaticProps = {
 
 /**
  * Type for polymorphic component with React component metadata
+ *
+ * Note: E extends ElementType (not E extends T) because we want to allow
+ * ANY element type, not just subtypes of T. The T parameter is only used
+ * as the default element type.
+ *
+ * Example: Accordion has T='section' as default, but users should be able
+ * to pass elementType="article" or elementType="div" etc.
  */
-export type PolymorphicComponent<T extends ElementType, Props> = (<E extends T = T>(
+export type PolymorphicComponent<T extends ElementType, Props> = (<E extends ElementType = T>(
   props: PolymorphicComponentProps<E, Props> & { ref?: PolymorphicRef<E> },
 ) => JSX.Element) &
   ComponentStaticProps;

@@ -2,8 +2,8 @@ import { type ElementType } from 'react';
 import { type LinkTarget } from './link';
 import {
   type ChildrenProps,
+  type PolymorphicComponentProps,
   type SpiritElementProps,
-  type SpiritPolymorphicElementPropsWithRef,
   type StyleProps,
   type TransferProps,
 } from './shared';
@@ -15,18 +15,11 @@ export interface HeaderLogoBaseProps extends ChildrenProps, StyleProps, Transfer
   target?: LinkTarget;
 }
 
-export type HeaderLogoProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the button, e.g. 'div', 'a', or `RouterLink`.
-   *
-   * @default 'a'
-   */
-  elementType?: E;
-} & HeaderLogoBaseProps;
+export type HeaderLogoProps<E extends ElementType = 'a'> = PolymorphicComponentProps<E, HeaderLogoBaseProps>;
 
 export interface SpiritHeaderProps extends SpiritElementProps, ChildrenProps {
   hasBottomDivider?: boolean;
 }
 
-export type SpiritHeaderLogoProps<E extends ElementType = 'a'> = HeaderLogoProps<E> &
-  SpiritPolymorphicElementPropsWithRef<E, HeaderLogoProps<E>>;
+/** @deprecated Use HeaderLogoProps instead */
+export type SpiritHeaderLogoProps<E extends ElementType = 'a'> = HeaderLogoProps<E>;

@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import { LinkColors } from '../../../constants';
+import { UNDERLINED_OPTIONS } from '../../../types';
 import { Icon } from '../../Icon';
 import { Link } from '../../Link';
 import Breadcrumbs from '../Breadcrumbs';
@@ -29,9 +31,9 @@ const BreadcrumbsCustom = () => {
         const isLastItem = index === items.length - 1;
 
         const linkParams = {
-          underlined: isLastItem ? 'hover' : 'always',
+          underlined: isLastItem ? UNDERLINED_OPTIONS.HOVER : UNDERLINED_OPTIONS.ALWAYS,
           'aria-current': isLastItem ? 'page' : undefined,
-          color: isLastItem ? 'secondary' : 'primary',
+          color: isLastItem ? LinkColors.SECONDARY : LinkColors.PRIMARY,
         };
 
         return (
@@ -39,7 +41,7 @@ const BreadcrumbsCustom = () => {
             {index === items.length - 2 && (
               <li className="d-tablet-none">
                 <Icon name="chevron-left" />
-                <Link href={item.url} color="primary" underlined="always">
+                <Link href={item.url} color={LinkColors.PRIMARY} underlined={UNDERLINED_OPTIONS.ALWAYS}>
                   Back
                 </Link>
               </li>

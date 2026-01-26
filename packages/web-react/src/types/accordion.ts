@@ -1,14 +1,9 @@
 import { type ElementType, type ReactNode } from 'react';
-import {
-  type ChildrenProps,
-  type ElementTypeProps,
-  type SpiritPolymorphicElementPropsWithRef,
-  type StyleProps,
-} from './shared';
+import { type ChildrenProps, type PolymorphicComponentProps, type StyleProps } from './shared';
 
 export type AccordionOpenStateType = string | string[] | undefined;
 
-export interface AccordionHandlingProps {
+export interface AccordionState {
   open: AccordionOpenStateType;
   toggle: (id: string) => void;
 }
@@ -17,37 +12,57 @@ export interface AccordionItemContextProps {
   id: string;
 }
 
-export interface BaseAccordionProps extends ChildrenProps, StyleProps {}
+export interface AccordionBaseProps extends ChildrenProps, StyleProps {}
 
-export interface AccordionBaseProps extends BaseAccordionProps, AccordionHandlingProps {}
+export interface AccordionStyleProps extends AccordionBaseProps, AccordionState {}
 
-export type AccordionProps<T extends ElementType> = ElementTypeProps<T> & AccordionBaseProps;
+export type AccordionProps<T extends ElementType = 'section'> = PolymorphicComponentProps<T, AccordionStyleProps>;
 
-export type SpiritAccordionProps<T extends ElementType = 'section'> = AccordionProps<T> &
-  SpiritPolymorphicElementPropsWithRef<T, AccordionProps<T>>;
+/** @deprecated Use AccordionProps instead */
+export type SpiritAccordionProps<T extends ElementType = 'section'> = AccordionProps<T>;
 
-export type AccordionHeaderProps<T extends ElementType = 'h3'> = ElementTypeProps<T> & {
-  slot?: ReactNode;
-} & BaseAccordionProps;
+export type AccordionHeaderProps<T extends ElementType = 'h3'> = PolymorphicComponentProps<
+  T,
+  AccordionBaseProps & {
+    slot?: ReactNode;
+  }
+>;
 
-export type SpiritAccordionHeaderProps<T extends ElementType = 'h3'> = AccordionHeaderProps<T> &
-  SpiritPolymorphicElementPropsWithRef<T, AccordionHeaderProps<T>>;
+/** @deprecated Use AccordionHeaderProps instead */
+export type SpiritAccordionHeaderProps<T extends ElementType = 'h3'> = AccordionHeaderProps<T>;
 
-export interface AccordionItemBaseProps extends BaseAccordionProps, AccordionItemContextProps {}
+export interface AccordionItemBaseProps extends AccordionBaseProps, AccordionItemContextProps {}
 
-export type AccordionItemProps<T extends ElementType> = ElementTypeProps<T> & AccordionItemBaseProps;
+export type AccordionItemProps<T extends ElementType = 'article'> = PolymorphicComponentProps<
+  T,
+  AccordionItemBaseProps
+>;
 
-export type SpiritAccordionItemProps<T extends ElementType = 'article'> = AccordionItemProps<T> &
-  SpiritPolymorphicElementPropsWithRef<T, AccordionItemProps<T>>;
+/** @deprecated Use AccordionItemProps instead */
+export type SpiritAccordionItemProps<T extends ElementType = 'article'> = AccordionItemProps<T>;
 
-export interface AccordionContentProps extends BaseAccordionProps {}
+export interface AccordionContentProps extends AccordionBaseProps {}
 
-export interface UncontrolledAccordionBaseProps extends BaseAccordionProps {
+/**
+ * @internal
+ */
+export interface AccordionStateProps {
+  /** Initial open state */
   defaultOpen?: AccordionOpenStateType;
+  /** Whether to allow multiple items open at once */
   stayOpen?: boolean;
 }
 
-export type UncontrolledAccordionProps<T extends ElementType> = ElementTypeProps<T> & UncontrolledAccordionBaseProps;
+/**
+ * Props for UncontrolledAccordion component.
+ * Similar structure to AccordionProps but uses uncontrolled-specific props instead of state props.
+ * When you destructure and omit defaultOpen and stayOpen,
+ * the remaining props are exactly what Accordion expects (base props + HTML attrs).
+ */
+export type UncontrolledAccordionProps<T extends ElementType = 'section'> = PolymorphicComponentProps<
+  T,
+  AccordionBaseProps & AccordionStateProps
+>;
 
-export type SpiritUncontrolledAccordionProps<T extends ElementType = 'section'> = UncontrolledAccordionProps<T> &
-  SpiritPolymorphicElementPropsWithRef<T, UncontrolledAccordionProps<T>>;
+/** @deprecated Use UncontrolledAccordionProps instead */
+export type SpiritUncontrolledAccordionProps<T extends ElementType = 'section'> = UncontrolledAccordionProps<T>;

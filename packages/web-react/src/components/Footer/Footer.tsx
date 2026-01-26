@@ -1,43 +1,44 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { type ElementType, forwardRef } from 'react';
 import { BackgroundColors, PaddingStyleProps, TextStyleProps } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import { type SpiritFooterProps } from '../../types';
+import { type FooterBaseProps, type FooterProps, type PolymorphicComponent, type PolymorphicRef } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { PADDING_BOTTOM, PADDING_TOP } from './constants';
 import { useFooterStyleProps } from './useFooterStyleProps';
 
-const defaultStyleProps: SpiritFooterProps = {
+const defaultProps = {
   backgroundColor: BackgroundColors.SECONDARY,
   elementType: 'footer',
   paddingBottom: PADDING_BOTTOM,
   paddingTop: PADDING_TOP,
 };
 
-const Footer = <T extends ElementType = 'footer'>(props: SpiritFooterProps<T>): JSX.Element => {
-  const propsWithDefaults = { ...defaultStyleProps, ...props };
-  const {
-    elementType: ElementTag = defaultStyleProps.elementType as ElementType,
-    children,
-    backgroundColor,
-    ...restProps
-  } = propsWithDefaults;
+const _Footer = <T extends ElementType = 'footer'>(props: FooterProps<T>, ref: PolymorphicRef<T>): JSX.Element => {
+  const propsWithDefaults = { ...defaultProps, ...props };
+  const { elementType = defaultProps.elementType, children, backgroundColor, ...restProps } = propsWithDefaults;
+
+  const Component = elementType as ElementType;
+
   const { classProps } = useFooterStyleProps({ backgroundColor });
   const { styleProps, props: otherProps } = useStyleProps(restProps, {
     paddingBottom: PaddingStyleProps.paddingBottom,
     paddingTop: PaddingStyleProps.paddingTop,
     textAlignment: TextStyleProps.textAlignment,
   });
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
+const Footer = forwardRef(_Footer) as unknown as PolymorphicComponent<'footer', FooterBaseProps>;
+
 Footer.spiritComponent = 'Footer';
+Footer.displayName = 'Footer';
 
 export default Footer;

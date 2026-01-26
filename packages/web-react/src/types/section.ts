@@ -3,24 +3,15 @@ import { type ContainerProps } from './container';
 import {
   type BackgroundColorsDictionaryType,
   type ChildrenProps,
+  type PolymorphicComponentProps,
   type SingleOrResponsive,
   type SizeExtendedDictionaryType,
   type SpaceToken,
-  type SpiritPolymorphicElementPropsWithRef,
   type StyleProps,
   type TextAlignmentType,
 } from './shared';
 
-export interface SectionBaseProps<E extends ElementType> extends ChildrenProps, StyleProps {
-  /**
-   * The HTML element or React element used to render the section, e.g. 'div' or 'section'.
-   *
-   * @default 'section'
-   */
-  elementType?: E;
-}
-
-export interface SectionProps<E extends ElementType, S = void> extends SectionBaseProps<E> {
+export interface SectionStyleProps<S = void> extends StyleProps, ChildrenProps {
   /** Container props to pass to the container component. */
   containerProps?: ContainerProps;
   /** Whether the section should have a container. */
@@ -39,5 +30,10 @@ export interface SectionProps<E extends ElementType, S = void> extends SectionBa
   textAlignment?: TextAlignmentType;
 }
 
-export type SpiritSectionProps<E extends ElementType = 'section', S = void> = SectionProps<E, S> &
-  SpiritPolymorphicElementPropsWithRef<E, SectionProps<E, S>>;
+export type SectionProps<E extends ElementType = 'section', S = void> = PolymorphicComponentProps<
+  E,
+  SectionStyleProps<S>
+>;
+
+/** @deprecated Use SectionProps instead */
+export type SpiritSectionProps<E extends ElementType = 'section', S = void> = SectionProps<E, S>;

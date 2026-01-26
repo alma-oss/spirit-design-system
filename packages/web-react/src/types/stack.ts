@@ -1,12 +1,7 @@
 import { type ElementType } from 'react';
-import {
-  type ChildrenProps,
-  type SpacingProp,
-  type SpiritPolymorphicElementPropsWithoutRef,
-  type StyleProps,
-} from './shared';
+import { type ChildrenProps, type PolymorphicComponentProps, type SpacingProp, type StyleProps } from './shared';
 
-export interface StackBaseProps extends ChildrenProps, SpacingProp, StyleProps {
+export interface StackStyleProps extends ChildrenProps, SpacingProp, StyleProps {
   /** Whether the Stack has divider on the end */
   hasEndDivider?: boolean;
   /** Whether the Stack has divider between items */
@@ -17,28 +12,14 @@ export interface StackBaseProps extends ChildrenProps, SpacingProp, StyleProps {
   hasStartDivider?: boolean;
 }
 
-export type StackProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the stack, e.g. 'div'.
-   *
-   * @default 'div'
-   */
-  elementType?: E;
-} & StackBaseProps;
+export type StackProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, StackStyleProps>;
 
-export type SpiritStackProps<E extends ElementType = 'div'> = StackProps<E> &
-  SpiritPolymorphicElementPropsWithoutRef<E, StackProps<E>>;
+/** @deprecated Use StackProps instead */
+export type SpiritStackProps<E extends ElementType = 'div'> = StackProps<E>;
 
-export interface StackItemBaseProps extends ChildrenProps, StyleProps {}
+export interface StackItemStyleProps extends ChildrenProps, StyleProps {}
 
-export type StackItemProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the stack item, e.g. 'div'.
-   *
-   * @default 'div'
-   */
-  elementType?: E;
-} & StackItemBaseProps;
+export type StackItemProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, StackItemStyleProps>;
 
-export type SpiritStackItemProps<E extends ElementType = 'div'> = StackItemProps<E> &
-  SpiritPolymorphicElementPropsWithoutRef<E, StackItemProps<E>>;
+/** @deprecated Use StackItemProps instead */
+export type SpiritStackItemProps<E extends ElementType = 'div'> = StackItemProps<E>;

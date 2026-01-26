@@ -2,12 +2,12 @@ import React from 'react';
 import { DemoButtonComponentColors, DemoEmotionColors } from '../../../../docs/constants';
 import DocsSection from '../../../../docs/DocsSection';
 import { Sizes } from '../../../constants';
-import { type ButtonBaseProps } from '../../../types';
+import { type ButtonStyleProps } from '../../../types';
 import { Icon } from '../../Icon';
 import { VisuallyHidden } from '../../VisuallyHidden';
 import Button from '../Button';
 
-const ButtonDemoFactory = ({ ...props }: ButtonBaseProps) => {
+const ButtonDemoFactory = ({ ...props }: ButtonStyleProps) => {
   const sizes = Object.values(Sizes);
   const buttonColors = Object.values(DemoButtonComponentColors);
   const emotionColors = Object.values(DemoEmotionColors);

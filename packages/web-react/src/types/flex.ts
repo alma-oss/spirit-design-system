@@ -1,23 +1,14 @@
-import { type ElementType, type JSXElementConstructor } from 'react';
+import { type ElementType } from 'react';
 import {
   type AlignmentXExtendedDictionaryType,
   type AlignmentYExtendedDictionaryType,
   type ChildrenProps,
   type DirectionExtendedDictionaryType,
+  type PolymorphicComponentProps,
   type SingleOrResponsive,
   type SpaceToken,
-  type SpiritPolymorphicElementPropsWithRef,
   type StyleProps,
 } from './shared';
-
-export interface FlexElementTypeProps<T extends ElementType = 'div'> {
-  /**
-   * The HTML element or React element used to render the Flex, e.g. 'div'.
-   *
-   * @default 'div'
-   */
-  elementType?: T | JSXElementConstructor<unknown>;
-}
 
 /**
  * @deprecated "row" and "column" values will be replaced in the next major version. Please use "horizontal" and "vertical" instead.
@@ -33,7 +24,7 @@ export type FlexAlignmentYType =
   | { [key: string]: NonNullable<AlignmentYExtendedDictionaryType> };
 export type FlexWrapType = boolean | { [key: string]: boolean };
 
-export interface FlexCustomLayoutProps {
+export interface FlexStyleProps extends ChildrenProps, StyleProps {
   alignmentX?: FlexAlignmentXType;
   alignmentY?: FlexAlignmentYType;
   direction?: FlexDirectionType;
@@ -46,9 +37,7 @@ export interface FlexCustomLayoutProps {
   spacingY?: SingleOrResponsive<SpaceToken>;
 }
 
-export interface FlexProps<T extends ElementType = 'div'> extends FlexElementTypeProps<T>, FlexCustomLayoutProps {}
+export type FlexProps<T extends ElementType = 'div'> = PolymorphicComponentProps<T, FlexStyleProps>;
 
-export type SpiritFlexProps<T extends ElementType = 'div'> = FlexProps<T> &
-  ChildrenProps &
-  StyleProps &
-  SpiritPolymorphicElementPropsWithRef<T, FlexProps<T>>;
+/** @deprecated Use FlexProps instead */
+export type SpiritFlexProps<T extends ElementType = 'div'> = FlexProps<T>;

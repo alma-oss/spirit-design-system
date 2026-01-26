@@ -33,9 +33,9 @@ describe('Link', () => {
     render(
       <Link
         href="/"
-        color={color as LinkColorsDictionaryType<string>}
-        underlined={underlined}
-        isDisabled={isDisabled}
+        color={color as LinkColorsDictionaryType<void>}
+        underlined={underlined as 'hover' | 'always' | 'never' | undefined}
+        isDisabled={isDisabled as boolean | undefined}
       />,
     );
 

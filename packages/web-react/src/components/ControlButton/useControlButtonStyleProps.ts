@@ -1,22 +1,12 @@
 import classNames from 'classnames';
-import { type ElementType } from 'react';
 import { useClassNamePrefix, useSymmetry } from '../../hooks';
-import { type ControlButtonSize, type SpiritControlButtonProps } from '../../types';
+import { type ControlButtonSize, type ControlButtonStyleProps } from '../../types';
 import { applySize, compose } from '../../utils';
 
 const getControlButtonSizeClassname = <S = void>(className: string, size: ControlButtonSize<S>): string =>
   compose(applySize<ControlButtonSize<S>>(size))(className);
 
-export interface ControlButtonStyles {
-  /** className props */
-  classProps: string;
-  /** Props for the control button element */
-  props: SpiritControlButtonProps;
-}
-
-export function useControlButtonStyleProps<T extends ElementType = 'button', S = void>(
-  props: SpiritControlButtonProps<T, S>,
-): ControlButtonStyles {
+export function useControlButtonStyleProps<S = void>(props: ControlButtonStyleProps<S>) {
   const { isDisabled, isSubtle, isSymmetrical, size, ...restProps } = props;
 
   const controlButtonClass = useClassNamePrefix('ControlButton');

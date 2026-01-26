@@ -7,7 +7,7 @@ import { type TooltipProps } from '../../types';
 
 type omittedProps = 'id' | 'onToggle';
 
-export interface UseTooltipStyleProps<E extends ElementType = 'div'> extends TooltipProps<E> {}
+export type UseTooltipStyleProps<E extends ElementType = 'div'> = TooltipProps<E>;
 
 export interface UseTooltipStylePropsReturn<E extends ElementType = 'div'> {
   classProps: {
@@ -16,11 +16,11 @@ export interface UseTooltipStylePropsReturn<E extends ElementType = 'div'> {
     arrowClassName: string;
     closeButtonClassName: string;
   };
-  props: Omit<TooltipProps<E>, omittedProps>;
+  props: Omit<TooltipProps<E>, omittedProps | 'isDismissible' | 'isOpen'>;
 }
 
 export const useTooltipStyleProps = <E extends ElementType = 'div'>(
-  props: Omit<UseTooltipStyleProps<E>, omittedProps>,
+  props: Omit<TooltipProps<E>, omittedProps>,
 ): UseTooltipStylePropsReturn<E> => {
   const { isDismissible, isOpen, ...modifiedProps } = props;
   const tooltipClass = useClassNamePrefix('Tooltip');
@@ -44,6 +44,6 @@ export const useTooltipStyleProps = <E extends ElementType = 'div'>(
       arrowClassName: arrowClass,
       closeButtonClassName: closeButtonClass,
     },
-    props: modifiedProps,
+    props: modifiedProps as Omit<TooltipProps<E>, omittedProps | 'isDismissible' | 'isOpen'>,
   };
 };

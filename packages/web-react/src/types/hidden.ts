@@ -1,10 +1,5 @@
-import { type ElementType, type JSXElementConstructor } from 'react';
-import {
-  type BreakpointToken,
-  type ChildrenProps,
-  type SpiritPolymorphicElementPropsWithRef,
-  type StyleProps,
-} from './shared';
+import { type ElementType } from 'react';
+import { type BreakpointToken, type ChildrenProps, type PolymorphicComponentProps, type StyleProps } from './shared';
 
 export interface HiddenBaseProps extends ChildrenProps, StyleProps {
   /** Hide from breakpoint onwards */
@@ -13,14 +8,7 @@ export interface HiddenBaseProps extends ChildrenProps, StyleProps {
   on?: BreakpointToken | BreakpointToken[];
 }
 
-export type HiddenProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the hidden wrapper, e.g. 'span', 'div', 'section'.
-   *
-   * @default 'span'
-   */
-  elementType?: E | JSXElementConstructor<unknown>;
-} & HiddenBaseProps;
+export type HiddenProps<E extends ElementType = 'span'> = PolymorphicComponentProps<E, HiddenBaseProps>;
 
-export type SpiritHiddenProps<E extends ElementType = 'span'> = HiddenProps<E> &
-  SpiritPolymorphicElementPropsWithRef<E, HiddenProps<E>>;
+/** @deprecated Use HiddenProps instead */
+export type SpiritHiddenProps<E extends ElementType = 'span'> = HiddenProps<E>;

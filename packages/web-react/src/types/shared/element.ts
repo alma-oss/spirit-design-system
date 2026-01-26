@@ -7,6 +7,7 @@ import {
   type HTMLProps,
   type PropsWithChildren,
 } from 'react';
+import { type PolymorphicRef } from './polymorphic';
 import { type OverloadStyleProps } from './style';
 
 type ElementTypeProp<E extends ElementType> = {
@@ -15,17 +16,6 @@ type ElementTypeProp<E extends ElementType> = {
 
 // DistributiveOmit distributes over union types, which helps with component type inference
 type DistributiveOmit<T, U> = T extends unknown ? Pick<T, Exclude<keyof T, U>> : never;
-
-/**
- * If the element type has a `spiritDefaultElement` marker,
- * use that as the "real" element type for props.
- * Otherwise, just use E unchanged.
- */
-type DefaultElementOf<E extends ElementType> = E extends { spiritDefaultElement: infer D }
-  ? D extends ElementType
-    ? D
-    : E
-  : E;
 
 /**
  * Extracts props from an element type, handling both HTML elements and React components.
@@ -68,13 +58,6 @@ export type SpiritPolymorphicElementPropsWithoutRef<E extends ElementType, P> = 
   ComponentPropsWithoutRef<E>,
   keyof P
 >;
-/**
- * Type React's forwarded ref with `PolymorphicRef` to allow generic `elementType` to be strongly typed, e.g. component allows switching of elements
- * Uses DefaultElementOf to handle generic components with default element markers
- *
- * @see https://www.freecodecamp.org/news/build-strongly-typed-polymorphic-components-with-react-and-typescript/
- */
-export type PolymorphicRef<C extends ElementType> = ComponentPropsWithRef<DefaultElementOf<C>>['ref'];
 
 export type SpiritElementBaseProps = SpiritDetailedHTMLProps<HTMLElement>;
 export type SpiritAnchorElementBaseProps = SpiritCombinedHTMLProps<HTMLButtonElement>;

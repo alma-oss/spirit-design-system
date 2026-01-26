@@ -1,17 +1,23 @@
 'use client';
 
-import React, { type ElementType, useRef } from 'react';
+import React, { type ElementType, forwardRef, useRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type SpiritTooltipProps } from '../../types';
+import {
+  type BaseTooltipProps,
+  type PolymorphicComponent,
+  type PolymorphicRef,
+  type TooltipCustomProps,
+  type TooltipProps,
+} from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { TooltipProvider } from './TooltipContext';
 import { useFloating } from './useFloating';
 import { useTooltipStyleProps } from './useTooltipStyleProps';
 
-const Tooltip = <T extends ElementType = 'div'>(props: SpiritTooltipProps<T>) => {
+const _Tooltip = <T extends ElementType = 'div'>(props: TooltipProps<T>, ref: PolymorphicRef<T>) => {
   const {
     children,
-    elementType: ElementTag = 'div',
+    elementType = 'div',
     enableFlipping: flipProp = true,
     enableFlippingCrossAxis: flipCrossAxis = true,
     enableShifting: shiftProp = true,
@@ -29,13 +35,15 @@ const Tooltip = <T extends ElementType = 'div'>(props: SpiritTooltipProps<T>) =>
     ...restProps
   } = props;
 
+  const Component = elementType as ElementType;
+
   const { classProps, props: modifiedProps } = useTooltipStyleProps({
     isDismissible,
     isOpen,
     ...restProps,
-  });
+  } as TooltipProps<T>);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, {
+  const mergedStyleProps = mergeStyleProps(Component, {
     classProps: classProps.rootClassName,
     styleProps,
   });
@@ -108,13 +116,16 @@ const Tooltip = <T extends ElementType = 'div'>(props: SpiritTooltipProps<T>) =>
         position,
       }}
     >
-      <ElementTag {...otherProps} ref={tooltipRef} {...mergedStyleProps}>
+      <Component {...otherProps} ref={ref || tooltipRef} {...mergedStyleProps}>
         {children}
-      </ElementTag>
+      </Component>
     </TooltipProvider>
   );
 };
 
+const Tooltip = forwardRef(_Tooltip) as unknown as PolymorphicComponent<'div', BaseTooltipProps & TooltipCustomProps>;
+
 Tooltip.spiritComponent = 'Tooltip';
+Tooltip.displayName = 'Tooltip';
 
 export default Tooltip;

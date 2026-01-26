@@ -2,40 +2,37 @@
 
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type PolymorphicRef, type SpiritLinkProps } from '../../types';
+import { type LinkBaseProps, type LinkProps, type PolymorphicComponent, type PolymorphicRef } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useLinkStyleProps } from './useLinkStyleProps';
 
-const defaultProps: Partial<SpiritLinkProps> = {
+const defaultProps = {
   elementType: 'a',
   color: 'primary',
   hasVisitedStyleAllowed: false,
   underlined: 'hover',
 };
 
-const _Link = <E extends ElementType = 'a', T = void>(
-  props: SpiritLinkProps<E, T>,
-  ref: PolymorphicRef<E>,
-): JSX.Element => {
+const _Link = <E extends ElementType = 'a', C = void>(props: LinkProps<E, C>, ref: PolymorphicRef<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const {
-    elementType: ElementTag = defaultProps.elementType as ElementType,
-    children,
-    ...restProps
-  } = propsWithDefaults;
-  const { classProps, props: modifiedProps } = useLinkStyleProps(restProps);
+  const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
+
+  const Component = elementType as ElementType;
+
+  const { classProps, props: modifiedProps } = useLinkStyleProps(propsWithDefaults);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps} href={restProps.href} ref={ref}>
+    <Component {...otherProps} {...mergedStyleProps} href={restProps.href} ref={ref}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
-const Link = forwardRef<HTMLAnchorElement, SpiritLinkProps<ElementType>>(_Link);
+const Link = forwardRef(_Link) as unknown as PolymorphicComponent<'a', LinkBaseProps<void>>;
 
 Link.spiritComponent = 'Link';
+Link.displayName = 'Link';
 
 export default Link;

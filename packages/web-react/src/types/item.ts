@@ -1,4 +1,4 @@
-import { type ElementType, type JSXElementConstructor, type ReactNode } from 'react';
+import { type ElementType, type ReactNode } from 'react';
 import { type StyleProps, type TransferProps } from './shared';
 
 export interface AriaItemElementTypeProps<T extends ElementType = 'button'> {
@@ -7,7 +7,7 @@ export interface AriaItemElementTypeProps<T extends ElementType = 'button'> {
    *
    * @default 'button'
    */
-  elementType?: T | JSXElementConstructor<unknown>;
+  elementType?: T;
 }
 
 export interface ItemStyleProps extends StyleProps, TransferProps {

@@ -6,7 +6,7 @@ import { Grid } from '../../Grid';
 import ControlButtonDemoFactory from './ControlButtonDemoFactory';
 
 const basicColors = Object.values(BackgroundColors);
-const neutralColor = 'neutral' as const;
+const neutralColor = 'neutral';
 const emotionColors = Object.values(DemoEmotionColors);
 const accentColors = getAccentColorNames();
 
