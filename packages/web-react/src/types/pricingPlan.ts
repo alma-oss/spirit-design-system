@@ -14,7 +14,7 @@ export interface PricingPlanHeaderBaseProps extends StyleProps {
   /** Action element, e.g. a button or link */
   action?: ReactNode;
   /** Badge text or element */
-  badge?: string;
+  badge?: ReactNode;
   /** Note or additional information */
   note?: string;
   /** Price of the plan */

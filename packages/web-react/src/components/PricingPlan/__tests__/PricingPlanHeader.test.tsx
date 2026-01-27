@@ -75,6 +75,13 @@ describe('PricingPlanHeader', () => {
       expect(badge).toHaveClass('PricingPlanHeader__badge');
     });
 
+    it('should render badge as ReactNode', () => {
+      render(<PricingPlanHeader badge={<span data-testid="custom-badge">Custom Badge</span>} />);
+      const badge = screen.getByText('Custom Badge');
+
+      expect(badge).toBeInTheDocument();
+    });
+
     it('should render note', () => {
       render(<PricingPlanHeader note="Note text" />);
       const note = screen.getByText('Note text');

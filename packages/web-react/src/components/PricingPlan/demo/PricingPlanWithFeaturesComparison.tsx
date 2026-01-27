@@ -87,8 +87,12 @@ const PricingPlanWithFeaturesComparison = () => {
                     Get started
                   </ButtonLink>
                 }
-                badge="Recommended"
-                title={<span id="plan-comparison-2-title">Plan 2</span>}
+                badge={<span id="plan-comparison-2-badge">Recommended</span>}
+                title={
+                  <span id="plan-comparison-2-title" aria-labelledby="plan-comparison-2-badge plan-comparison-2-title">
+                    Plan 2
+                  </span>
+                }
                 subtitle="Supporting text or message"
                 price={selectedValue === 'monthly' ? '59 EUR' : '54 EUR'}
               />

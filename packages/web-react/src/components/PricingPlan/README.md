@@ -80,6 +80,32 @@ import { PricingPlanHeader } from '@alma-oss/spirit-web-react';
 
 ### Accessibility
 
+#### Badge and Title Connection
+
+For better accessibility, when a badge is present, it should be connected to the heading using `aria-labelledby`, similar to how the action button links to the title. This ensures screen reader users receive this information immediately when navigating by headings, so blind users don't skip important information like "Recommended" when moving through the page structure.
+
+To connect the badge and title, you need to:
+
+1. Provide IDs for both the badge and title elements
+2. Add `aria-labelledby` to the title element referencing both IDs
+
+```jsx
+<PricingPlanHeader
+  badge={<span id="plan-badge">Recommended</span>}
+  title={
+    <span id="plan-title" aria-labelledby="plan-badge plan-title">
+      Plan 2
+    </span>
+  }
+  subtitle="Supporting text"
+  price="59 EUR"
+/>
+```
+
+The heading will have `aria-labelledby="plan-badge plan-title"`, so screen readers will announce "Recommended Plan 2" when navigating by headings.
+
+#### Action Button and Title Connection
+
 For better accessibility, it is recommended to link the action button to the plan title using `aria-labelledby`. This provides screen reader users with context about which plan the action applies to.
 
 ```jsx
@@ -101,13 +127,21 @@ When using a string for the `title`, wrap it in a `span` element with an `id` at
 
 | Name          | Type          | Default  | Required | Description                              |
 | ------------- | ------------- | -------- | -------- | ---------------------------------------- |
-| `action`      | `ReactNode`   | -        | ✕        | Call to action button                    |
-| `badge`       | `string`      | -        | ✕        | Optional badge to highlight the plan     |
+| `action`      | `ReactNode`   | -        | ✕        | Call to action button \*                 |
+| `badge`       | `ReactNode`   | -        | ✕        | Optional badge to highlight the plan \*  |
 | `elementType` | `ElementType` | `header` | ✕        | Type of element                          |
 | `note`        | `string`      | -        | ✕        | Optional note for additional information |
 | `price`       | `string`      | -        | ✕        | Price amount of the plan                 |
 | `subtitle`    | `string`      | -        | ✕        | Subtitle for the plan                    |
-| `title`       | `ReactNode`   | -        | ✕        | Title of the plan                        |
+| `title`       | `ReactNode`   | -        | ✕        | Title of the plan \*                     |
+
+(\*) For accessibility, provide IDs on these elements:
+
+- `action`: Provide an ID on the action element and reference it along with the title's ID in the action's `aria-labelledby` (see [Action Button and Title Connection](#action-button-and-title-connection)).
+- `badge`: Provide an ID on the badge element and reference it in the title's `aria-labelledby` (see [Badge and Title Connection](#badge-and-title-connection)).
+- `title`: Provide an ID on the title element.
+  - When using a `badge`, reference the badge ID in the title's `aria-labelledby` (see [Badge and Title Connection](#badge-and-title-connection)).
+  - When using an `action`, ensure the title ID is referenced in the action's `aria-labelledby` (see [Action Button and Title Connection](#action-button-and-title-connection)).
 
 The components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

@@ -72,8 +72,12 @@ const PricingPlanInMatrix = () => (
                 Get started
               </ButtonLink>
             }
-            badge="Recommended"
-            title={<span id="plan-matrix-2-title">Plan 2</span>}
+            badge={<span id="plan-matrix-2-badge">Recommended</span>}
+            title={
+              <span id="plan-matrix-2-title" aria-labelledby="plan-matrix-2-badge plan-matrix-2-title">
+                Plan 2
+              </span>
+            }
             subtitle="Supporting text or message"
             price="59 EUR"
           />

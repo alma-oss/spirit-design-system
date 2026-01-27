@@ -93,3 +93,26 @@ export const PricingPlanHeaderPlayground: Story = {
     </PricingPlan>
   ),
 };
+
+export const PricingPlanHeaderWithBadge: Story = {
+  name: 'PricingPlanHeader with Badge',
+  render: () => (
+    <PricingPlan>
+      <PricingPlanHeader
+        action={
+          <ButtonLink href="#" size="large" id="plan-action" aria-labelledby="plan-action plan-title">
+            Get started
+          </ButtonLink>
+        }
+        badge={<span id="plan-badge">Recommended</span>}
+        title={
+          <span id="plan-title" aria-labelledby="plan-badge plan-title">
+            Plan 2
+          </span>
+        }
+        subtitle="Supporting text or message"
+        price="59 EUR"
+      />
+    </PricingPlan>
+  ),
+};
