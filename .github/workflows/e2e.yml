@@ -65,8 +65,14 @@ jobs:
           NETLIFY_DEPLOYED_URL: ${{ env.PR_NUMBER && env.NETLIFY_DEPLOY_PREVIEW_URL || env.NETLIFY_MAIN_URL }}
         run: echo "site_url=${{ env.NETLIFY_DEPLOYED_URL }}" >> "$GITHUB_OUTPUT"
 
+      - name: Get Playwright Version
+        id: playwright-version
+        run: |
+          PW_VERSION=$(node -p "require('./package.json').devDependencies['@playwright/test']")
+          echo "version=$PW_VERSION" >> $GITHUB_OUTPUT
+
       - name: Run Playwright tests
-        uses: docker://mcr.microsoft.com/playwright:v1.56.0-noble
+        uses: docker://mcr.microsoft.com/playwright:v${{ steps.playwright-version.outputs.version }}-noble
         with:
           args: 'sh -c "corepack install && corepack enable && yarn test:e2e"'
         env:
