@@ -85,11 +85,7 @@ Most components also accept native HTML attributes based on the component's elem
 
 ### End-to-End Testing
 
-- E2E tests use [Playwright](https://playwright.dev/) to verify components render and behave correctly in real browsers.
-- Most components are automatically tested via `tests/e2e/demo-components-compare.spec.ts` by having an `index.html` demo page.
-- Complex interactive components may have dedicated test files in `tests/e2e/components/` for testing user interactions.
-- Tests should be run in Docker using Make commands: `make test-e2e`, `make test-e2e-update`, `make test-e2e-ui`.
-- Detailed authoring guidance is available in [`docs/contribution/e2e-testing.md`][e2e-testing].
+E2E tests use [Playwright](https://playwright.dev/) for visual regression testing. For detailed information, see [`docs/contribution/e2e-testing.md`][e2e-testing].
 
 ## Styling
 

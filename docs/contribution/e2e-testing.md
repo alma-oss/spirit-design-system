@@ -37,11 +37,28 @@ The Make commands execute `bin/make/e2e.sh`, which:
 - Handles web server configuration (can use host or Docker-based server)
 - Manages snapshot directories and test options
 
-You can also run tests directly with yarn (outside Docker), but this is not recommended for production use:
+You can also run tests directly with yarn (outside Docker), but this requires installing Playwright browser dependencies locally:
 
 ```sh
 yarn test:e2e
 ```
+
+### Configuring Playwright Options
+
+You can customize Playwright test execution locally by creating a `.env.local.playwright` file in the project root.
+Copy the example file and adjust values as needed:
+
+```bash
+cp .env.local.playwright.example .env.local.playwright
+```
+
+Available environment variables:
+
+| Variable     | Description                  | Default (local)    | Default (CI) |
+| ------------ | ---------------------------- | ------------------ | ------------ |
+| `PW_WORKERS` | Number of parallel workers   | Playwright default | `1`          |
+| `PW_TIMEOUT` | Test timeout in milliseconds | `120000`           | `120000`     |
+| `PW_RETRIES` | Number of retries            | `0`                | `2`          |
 
 ## Test Structure
 
@@ -51,7 +68,7 @@ The E2E test suite consists of two types of tests:
 
 **File**: `tests/e2e/demo-components-compare.spec.ts`
 
-Most component tests run automatically through the component discovery mechanism. This test file:
+Most component visual regression tests run automatically through the component discovery mechanism. This test file:
 
 1. **Scans component directories** for both packages:
 
@@ -60,18 +77,16 @@ Most component tests run automatically through the component discovery mechanism
 
 2. **Discovers components** that contain an `index.html` file
 
-3. **Creates a test for each component** that:
+3. **Creates a visual regression test for each component** that:
 
    - Navigates to the component demo page
-   - Waits for page resources to load
-   - Hides dynamic content from visual tests
    - Captures a full-page screenshot for visual regression testing
 
 4. **Filters components**:
    - Components listed in `IGNORED_TESTS` array are skipped
    - Unstable components (prefixed with `unstable_`) are tested but failures only log warnings
 
-**This means most components require no test code**—simply adding an `index.html` demo page is sufficient for automatic E2E coverage.
+**This means most components require no test code**—simply adding an `index.html` demo page is sufficient for automatic visual regression coverage.
 
 ### 2. Component-Specific Tests
 
@@ -90,29 +105,6 @@ Examples:
 - `demo-drawer-compare.spec.ts` - Tests drawer positioning and interactions
 - `demo-unstable-header-compare.spec.ts` - Tests header with nested navigation
 
-### Test Configuration
-
-Both test types use the same package configuration to ensure consistency:
-
-```ts
-const testConfigs: TestConfig[] = [
-  {
-    componentsDir: '/src/scss/components',
-    packageDir: 'packages/web',
-    packageName: 'web',
-  },
-  {
-    componentsDir: '/src/components',
-    packageDir: 'packages/web-react',
-    packageName: 'web-react',
-  },
-];
-
-testConfigs.forEach(runComponentCompareTests);
-```
-
-This ensures both the vanilla web implementation and React implementation are tested with identical scenarios.
-
 ## Authoring E2E Tests
 
 ### When to Add a Component-Specific Test
@@ -127,63 +119,7 @@ Otherwise, rely on automatic discovery by ensuring your component has an `index.
 
 ### Basic Component-Specific Test Pattern
 
-Follow the navigate → prepare → interact → capture pattern:
-
-```ts
-import { test, Page } from '@playwright/test';
-import { formatPackageName, getServerUrl, hideFromVisualTests, takeScreenshot, waitForPageLoad } from '../../helpers';
-
-type TestConfig = {
-  componentsDir: string;
-  packageName: string;
-  componentName: string;
-};
-
-const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) return;
-
-  const formattedPackageName = formatPackageName(packageName);
-
-  test.describe(`Test ${componentName} interactions`, () => {
-    test(`Test ${componentName} in ${formattedPackageName}`, async ({ page }: { page: Page }) => {
-      const url = getServerUrl(packageName);
-      await page.goto(`${url}${componentsDir}/${componentName}/`);
-      await waitForPageLoad(page);
-      await hideFromVisualTests(page);
-
-      // Test component interactions here
-      await runComponentTests(page, componentName, packageName);
-    });
-  });
-};
-
-const runComponentTests = async (page: Page, componentName: string, packageName: string): Promise<void> => {
-  // Test default state
-  await takeScreenshot(page, `${componentName}-default`);
-
-  // Test interaction
-  await page.click('button:has-text("Open")');
-  await page.waitForTimeout(500); // Wait for animation
-  await takeScreenshot(page, `${componentName}-opened`);
-};
-
-const componentName = 'MyComponent';
-
-const testConfigs: TestConfig[] = [
-  {
-    componentName,
-    componentsDir: '/src/scss/components',
-    packageName: 'web',
-  },
-  {
-    componentName,
-    componentsDir: '/src/components',
-    packageName: 'web-react',
-  },
-];
-
-testConfigs.forEach(runComponentCompareTests);
-```
+Follow the navigate → interact → capture pattern. See existing test files in `tests/e2e/components/` for complete examples.
 
 ### Writing Stable Selectors
 
@@ -222,23 +158,11 @@ Use stable, semantic selectors that won't break when implementation details chan
 
 **Note**: While some older tests use `data-test-id` attributes, the project is moving away from them in favor of more semantic selectors.
 
-### Covering Key Scenarios
-
-For complex components ensure that E2E coverage includes:
-
-- Default rendering (component displays correctly)
-- Interactive behaviors (clicks, keyboard navigation, focus management)
-- Multiple states (opened/closed, loading, error states)
-- Edge cases (stacking modals, nested interactive elements)
-- Animation completion (wait for transitions before capturing screenshots)
-
 When adding new components or modifying existing ones, consider whether the automatic discovery test is sufficient or if dedicated interaction tests are needed.
 
 ### Naming Conventions
 
-- **Automatic tests**: Discovered by `demo-components-compare.spec.ts` for any component directory containing `index.html`
-- **Component-specific tests**: Live in `tests/e2e/components/` named `demo-<component>-compare.spec.ts`
-- **Package homepage tests**: `demo-homepages.spec.ts` tests the main demo pages for each package
+Component-specific tests live in `tests/e2e/components/` and follow the pattern `demo-<component>-compare.spec.ts`.
 
 ## Test Helpers
 
@@ -308,29 +232,13 @@ const formattedName = formatPackageName('web-react'); // "Web React"
 
 ## Visual Regression Testing
 
-Visual regression tests capture screenshots of components and compare them against stored baselines. When component appearance changes:
+Visual regression tests capture screenshots of components and compare them against stored baselines. When component appearance changes, update the baselines with:
 
-1. **Run tests locally** to see failures:
+```sh
+make test-e2e-update
+```
 
-   ```sh
-   make test-e2e
-   ```
-
-2. **Review the differences**: Playwright generates an HTML report showing visual diffs. View it with:
-
-   ```sh
-   make test-e2e-report
-   ```
-
-3. **Verify the change is intentional**: If the visual change is expected (e.g., design update, bug fix), update the baselines.
-
-4. **Update baselines** to accept the new screenshots:
-
-   ```sh
-   make test-e2e-update
-   ```
-
-5. **Commit updated snapshots**: Snapshot files in `tests/e2e/**/*-snapshots/` should be committed with your changes.
+Snapshot files in `tests/e2e/**/*-snapshots/` should be committed with your changes.
 
 ### Handling Flaky Visual Tests
 
@@ -439,34 +347,7 @@ await page.click('dialog[open] header button');
 
 ### Test Both Packages
 
-Most components exist in both `web` and `web-react` packages. The automatic discovery test handles this, but component-specific tests should include configuration for both packages:
-
-```ts
-const testConfigs: TestConfig[] = [
-  {
-    componentName: 'Modal',
-    componentsDir: '/src/scss/components',
-    packageName: 'web',
-  },
-  {
-    componentName: 'Modal',
-    componentsDir: '/src/components',
-    packageName: 'web-react',
-  },
-];
-
-testConfigs.forEach(runComponentCompareTests);
-```
-
-### Handle Package-Specific Differences
-
-When packages have different markup or selectors, handle differences explicitly:
-
-```ts
-const buttonSelector = packageName === 'web' ? '#button-focus' : 'button:has-text("Focus me")';
-
-await page.focus(buttonSelector);
-```
+Most components exist in both `web` and `web-react` packages. The automatic discovery test handles this, and component-specific tests should follow the same pattern. See existing test files in `tests/e2e/components/` for examples.
 
 ## Continuous Integration
 
