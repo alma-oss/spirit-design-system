@@ -345,10 +345,6 @@ await takeScreenshot(page, 'modal-with-dropdown-open');
 await page.click('dialog[open] header button');
 ```
 
-### Test Both Packages
-
-Most components exist in both `web` and `web-react` packages. The automatic discovery test handles this, and component-specific tests should follow the same pattern. See existing test files in `tests/e2e/components/` for examples.
-
 ## Continuous Integration
 
 E2E tests run automatically in CI:
