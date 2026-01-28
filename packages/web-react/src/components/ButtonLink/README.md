@@ -36,9 +36,9 @@ You can define responsive values for the `isSymmetrical` prop using an object:
 <ButtonLink href="#" isSymmetrical={{ tablet: true }}>
   <Icon name="hamburger" marginRight={{ mobile: 'space-400', tablet: 'space-0' }} />
   <VisuallyHidden>Menu</VisuallyHidden>
-  <span className="d-tablet-none" aria-hidden="true">
+  <Hidden from="tablet" aria-hidden="true">
     Menu
-  </span>
+  </Hidden>
 </ButtonLink>
 ```
 
@@ -48,14 +48,14 @@ To turn off symmetrical from a specific breakpoint onwards, set the value to `fa
 <ButtonLink href="#" isSymmetrical={{ mobile: true, tablet: false }}>
   <Icon name="hamburger" marginRight={{ tablet: 'space-400' }} />
   <VisuallyHidden>Menu</VisuallyHidden>
-  <span className="d-none d-tablet-inline" aria-hidden="true">
+  <Hidden on="mobile" aria-hidden="true">
     Menu
-  </span>
+  </Hidden>
 </ButtonLink>
 ```
 
 ⚠️ **Accessibility note:** Always use `VisuallyHidden` for the accessible label and add `aria-hidden="true"` to the
-visible text or add `aria-label` to the button. Using `display: none` utility classes (like `d-tablet-none`)
+visible text or add `aria-label` to the button. Using the `Hidden` component (like `<Hidden on="mobile">Menu</Hidden>`)
 hides content from screen readers, so the `VisuallyHidden` component ensures the label is always accessible
 regardless of viewport size.
 
@@ -96,8 +96,8 @@ For more information, please read the section [How to Make a Fluid ButtonLink](#
 | `isBlock`       | `bool`                                                                                        | `false`   | ✕        | [**DEPRECATED**](#deprecation-notice) Span the element to the full width of its parent, see [How to Make a Fluid ButtonLink](#how-to-make-a-fluid-buttonlink) section |
 | `isDisabled`    | `bool`                                                                                        | `false`   | ✕        | If true, ButtonLink is disabled                                                                                                                                       |
 | `isLoading`     | `bool`                                                                                        | `false`   | ✕        | If true, ButtonLink is in a loading state, disabled and the Spinner is visible                                                                                        |
-| `isSymmetrical` | \[`bool` \| `Responsive<bool>`]                                                               | `false`   | ✕        | If true, ButtonLink has symmetrical dimensions, use object to set responsive values, e.g. `{ mobile: true, tablet: false }`                                           |
-| `onClick`       | `string`                                                                                      | `null`    | ✕        | JS function to call on click                                                                                                                                          |
+| `isSymmetrical` | `bool` \| `Responsive<bool>`                                                                  | `false`   | ✕        | If true, ButtonLink has symmetrical dimensions, use object to set responsive values, e.g. `{ mobile: true, tablet: false }`                                           |
+| `onClick`       | `(event: ClickEvent) => void`                                                                 | —         | ✕        | JS function to call on click                                                                                                                                          |
 | `ref`           | `ForwardedRef<HTMLAnchorElement>`                                                             | —         | ✕        | Anchor element reference                                                                                                                                              |
 | `size`          | [Size dictionary][dictionary-size]                                                            | `medium`  | ✕        | Size variant                                                                                                                                                          |
 | `target`        | `string`                                                                                      | `null`    | ✕        | Link target                                                                                                                                                           |

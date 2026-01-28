@@ -11,7 +11,7 @@ import ButtonDefault from './ButtonDefault';
 import ButtonDisabled from './ButtonDisabled';
 import ButtonFluid from './ButtonFluid';
 import ButtonLoading from './ButtonLoading';
-import ButtonResponsiveSymmetrical from './ButtonResponsiveSymmetrical';
+import ButtonResponsive from './ButtonResponsive';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -28,8 +28,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <DocsSection title="Fluid" stackAlignment="stretch">
         <ButtonFluid />
       </DocsSection>
-      <DocsSection title="Responsive Symmetrical" stackAlignment="start">
-        <ButtonResponsiveSymmetrical />
+      <DocsSection title="Responsive" stackAlignment="start">
+        <ButtonResponsive />
       </DocsSection>
     </IconsProvider>
   </React.StrictMode>,
