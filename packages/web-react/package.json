@@ -70,7 +70,7 @@
     "eslint-plugin-react-hooks": "4.6.2",
     "eslint-plugin-react-refresh": "0.4.20",
     "eslint-plugin-standard": "5.0.0",
-    "glob": "11.0.0",
+    "glob": "11.1.0",
     "html-element-attributes": "3.5.0",
     "jest": "30.2.0",
     "jest-axe": "10.0.0",
