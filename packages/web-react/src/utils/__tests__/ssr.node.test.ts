@@ -1,10 +1,7 @@
+/* @jest-environment node */
 /**
- * @jest-environment node
- *
  * This test runs in Node environment without jsdom setup
  * to properly test SSR detection where window is undefined
- *
- * eslint-disable @typescript-eslint/no-var-requires, global-require -- Required for Node environment test
  */
 
 describe('isSSR in Node environment', () => {

@@ -8,7 +8,7 @@ export interface DimensionCSSProperties extends SpacingCSSProperties {}
  *
  * @param property - The dimension property, which can be an object with breakpoints or a single number.
  * @param prefix - The CSS variable prefix to use for the generated styles.
- * @returns `CSSProperties` object containing the generated styles.
+ * @returns {CSSProperties} Object containing the generated styles.
  */
 export const useDimensionStyle = (property: DimensionType | undefined, prefix: string): CSSProperties => {
   const style: DimensionCSSProperties = {};

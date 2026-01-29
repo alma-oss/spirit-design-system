@@ -7,6 +7,7 @@ interface GridItemCSSProperties extends CSSProperties {
 }
 
 const setStyleProperty = (styleObject: GridItemCSSProperties, propertyName: string, value: string | undefined) => {
+  // eslint-disable-next-line no-param-reassign -- Intentional mutation for style object building
   (styleObject as Record<string, string | undefined>)[propertyName] = value;
 };
 
@@ -39,26 +40,29 @@ export function useGridItemStyleProps(
 
   const gridItemStyle: GridItemCSSProperties = {};
 
-  const typePropNames = Object.keys(props).filter(
+  // Clone props to avoid mutating the original
+  const propsClone = { ...props };
+
+  const typePropNames = Object.keys(propsClone).filter(
     (propName) => propName.startsWith('column') || propName.startsWith('row'),
   );
 
   typePropNames.forEach((propName) => {
     const type = propName.startsWith('column') ? 'column' : 'row';
-    if (props[propName]) {
+    if (propsClone[propName]) {
       setGridItemStyle(
         gridItemStyle,
         `grid-item-${type}-${propName.replace(type, '').toLowerCase()}`,
-        props[propName] as GridItemPosition,
+        propsClone[propName] as GridItemPosition,
       );
     }
 
-    delete props[propName];
+    delete propsClone[propName];
   });
 
   return {
     classProps: gridItemClass,
-    props,
+    props: propsClone,
     styleProps: gridItemStyle,
   };
 }

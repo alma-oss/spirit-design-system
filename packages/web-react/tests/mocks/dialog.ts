@@ -1,5 +1,6 @@
 /**
  * Mock for HTMLDialogElement methods since jsdom doesn't support dialog events.
+ *
  * @see https://github.com/jsdom/jsdom/issues/3294
  *
  * Usage in tests:

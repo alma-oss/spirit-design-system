@@ -230,7 +230,7 @@ describe('htmlReactParser', () => {
 
   it('decodes HTML entities', () => {
     const encodedEntities = 'asdf &amp; &yuml; &uuml; &apos;';
-    // eslint-disable-next-line quotes -- using double quotes to avoid escaping
+
     const decodedEntities = "asdf & ÿ ü '";
     const reactElement = htmlReactParser(`<i>${encodedEntities}</i>`) as JSX.Element;
     expect(reactElement.props.children).toBe(decodedEntities);

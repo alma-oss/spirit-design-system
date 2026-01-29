@@ -23,7 +23,6 @@ const FileUploaderFluidWidth = () => {
         labelText="or drag and drop here"
         linkText="Upload your file"
         name="attachments"
-        /* eslint-disable-next-line no-console */
         onError={(error) => console.error('My error log', error)}
       />
       <ul className="FileUploaderList">

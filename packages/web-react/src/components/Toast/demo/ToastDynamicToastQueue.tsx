@@ -33,44 +33,43 @@ const ToastDynamicToastQueue = () => {
 
   const { queue, show, hide, clear, setQueue } = useToast();
 
-  const defaultToastQueue: ToastItem[] = [
-    {
-      id: '1',
-      isOpen: true,
-      content: {
-        message: 'I was first!',
-        link: 'Action',
-      },
-      color: 'success',
-      hasIcon: true,
-      isDismissible: true,
-      iconName: undefined,
-      enableAutoClose: false,
-      linkProps: {
-        href: '#',
-      },
-    },
-    {
-      id: '2',
-      content: {
-        message: 'I appeared later. This toast has a long message that wraps automatically.',
-        link: 'Action',
-      },
-      isOpen: true,
-      color: 'informative',
-      hasIcon: true,
-      isDismissible: true,
-      iconName: undefined,
-      enableAutoClose: false,
-      linkProps: {
-        href: '#',
-      },
-    },
-  ];
-
   useEffect(() => {
+    const defaultToastQueue: ToastItem[] = [
+      {
+        id: '1',
+        isOpen: true,
+        content: {
+          message: 'I was first!',
+          link: 'Action',
+        },
+        color: 'success',
+        hasIcon: true,
+        isDismissible: true,
+        iconName: undefined,
+        enableAutoClose: false,
+        linkProps: {
+          href: '#',
+        },
+      },
+      {
+        id: '2',
+        content: {
+          message: 'I appeared later. This toast has a long message that wraps automatically.',
+          link: 'Action',
+        },
+        isOpen: true,
+        color: 'informative',
+        hasIcon: true,
+        isDismissible: true,
+        iconName: undefined,
+        enableAutoClose: false,
+        linkProps: {
+          href: '#',
+        },
+      },
+    ];
     setQueue(defaultToastQueue);
-  }, []);
+  }, [setQueue]);
 
   const handleAlignmentYChange = (event: ChangeEvent<HTMLInputElement>) => {
     setAlignmentY(event.target.value as AlignmentYDictionaryType);

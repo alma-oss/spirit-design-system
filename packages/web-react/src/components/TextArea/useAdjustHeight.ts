@@ -26,12 +26,16 @@ export const useAdjustHeight = ({
     const borderBottomWidth = parseFloat(getComputedStyle(element).getPropertyValue('border-bottom-width')) || 0;
     const totalBorderWidth = borderTopWidth + borderBottomWidth;
 
+    // eslint-disable-next-line no-param-reassign -- DOM manipulation is required for dynamic height adjustment
     element.style.height = 'auto';
+    // eslint-disable-next-line no-param-reassign -- DOM manipulation is required for dynamic height adjustment
     element.style.overflow = 'auto';
 
     const totalHeight = element.scrollHeight + totalBorderWidth;
 
+    // eslint-disable-next-line no-param-reassign -- DOM manipulation is required for dynamic height adjustment
     element.style.height = `${totalHeight < maxHeight ? totalHeight : maxHeight}px`;
+    // eslint-disable-next-line no-param-reassign -- DOM manipulation is required for dynamic height adjustment
     element.style.overflow = totalHeight < maxHeight ? 'hidden' : 'auto';
   };
 

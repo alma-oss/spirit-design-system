@@ -32,12 +32,13 @@ export const useDeprecationMessage = ({
   propertyProps,
   customText,
 }: UseDeprecationMessageProps) => {
-  let message: string | undefined;
-  let hasProps: boolean;
   const messageBase = `Deprecation warning (${componentName}):`;
 
   useEffect(() => {
     const isExecutable = trigger && componentName && process.env.NODE_ENV === 'development';
+
+    let message: string | undefined;
+    let hasProps: boolean;
 
     switch (method) {
       case 'property':
@@ -71,7 +72,6 @@ export const useDeprecationMessage = ({
       warning(false, message);
     }
 
-    /* We want to call this hook only once */
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- We want to call this hook only once
   }, []);
 };

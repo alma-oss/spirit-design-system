@@ -1,6 +1,6 @@
 'use client';
 
-import { type MutableRefObject, type UIEvent, useCallback, useEffect, useState } from 'react';
+import { type MutableRefObject, type UIEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { Position, isDirectionHorizontal } from '../../constants';
 import { useResizeObserver } from '../../hooks';
 import { type PositionType, type ScrollViewDirectionType } from '../../types';
@@ -31,23 +31,23 @@ export const useScrollPosition = ({
   const [isScrolledAtStart, setScrolledStart] = useState<boolean>(false);
   const [isScrolledAtEnd, setScrolledAtEnd] = useState<boolean>(false);
 
-  const getElementsPositionDifference = (): CurrentPositionProps | null => {
-    if (!(contentReference.current && viewportReference.current)) {
-      return null;
-    }
+  const handleScrollViewState = useCallback(() => {
+    const getElementsPositionDifference = (): CurrentPositionProps | null => {
+      if (!(contentReference.current && viewportReference.current)) {
+        return null;
+      }
 
-    const contentPosition: DOMRect = contentReference.current.getBoundingClientRect();
-    const viewportPosition: DOMRect = viewportReference.current.getBoundingClientRect();
+      const contentPosition: DOMRect = contentReference.current.getBoundingClientRect();
+      const viewportPosition: DOMRect = viewportReference.current.getBoundingClientRect();
 
-    return {
-      [Position.BOTTOM]: contentPosition.bottom - viewportPosition.bottom,
-      [Position.LEFT]: contentPosition.left - viewportPosition.left,
-      [Position.RIGHT]: contentPosition.right - viewportPosition.right,
-      [Position.TOP]: contentPosition.top - viewportPosition.top,
+      return {
+        [Position.BOTTOM]: contentPosition.bottom - viewportPosition.bottom,
+        [Position.LEFT]: contentPosition.left - viewportPosition.left,
+        [Position.RIGHT]: contentPosition.right - viewportPosition.right,
+        [Position.TOP]: contentPosition.top - viewportPosition.top,
+      };
     };
-  };
 
-  const handleScrollViewState = () => {
     const isHorizontal = isDirectionHorizontal(direction);
     const scrollPositionStart = isHorizontal ? Position.LEFT : Position.TOP;
     const scrollPositionEnd = isHorizontal ? Position.RIGHT : Position.BOTTOM;
@@ -67,9 +67,9 @@ export const useScrollPosition = ({
     if (isScrolledAtEndActive !== isScrolledAtEnd) {
       setScrolledAtEnd(isScrolledAtEndActive);
     }
-  };
+  }, [direction, isScrolledAtStart, isScrolledAtEnd, contentReference, viewportReference]);
 
-  const debouncedHandler = useCallback(debounce(handleScrollViewState, DEBOUNCE_DELAY), [handleScrollViewState]);
+  const debouncedHandler = useMemo(() => debounce(handleScrollViewState, DEBOUNCE_DELAY), [handleScrollViewState]);
 
   useResizeObserver({
     ref: viewportReference,

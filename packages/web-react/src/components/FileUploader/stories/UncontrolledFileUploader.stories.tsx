@@ -143,6 +143,7 @@ const UncontrolledFileUploaderWithHooks = (args: SpiritUncontrolledFileUploaderP
 
   const changeHandler = (fileQueue: FileQueueMapType) => {
     setQueue(fileQueue);
+    // eslint-disable-next-line no-console
     console.log('change handler:', fileQueue);
   };
 
@@ -151,10 +152,13 @@ const UncontrolledFileUploaderWithHooks = (args: SpiritUncontrolledFileUploaderP
     const master = new Map(queue);
 
     setSubmitting(true);
+    // eslint-disable-next-line no-console
     console.log('inputReference:', inputReference);
+    // eslint-disable-next-line no-console
     console.log('dropZoneReference:', dropZoneReference);
 
     setTimeout(() => {
+      // eslint-disable-next-line no-console
       console.info('form data:', master, event);
       setSubmitting(false);
       setSubmitted(true);
@@ -165,6 +169,7 @@ const UncontrolledFileUploaderWithHooks = (args: SpiritUncontrolledFileUploaderP
   };
 
   const errorHandler = (error: string | Error) => {
+    // eslint-disable-next-line no-console
     console.error(error);
     setValidationState('danger');
     setValidationText(String(error));

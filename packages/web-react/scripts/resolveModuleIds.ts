@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies, no-shadow, no-console */
+/* eslint-disable import/no-extraneous-dependencies, no-console */
 import * as fs from 'fs';
 import * as path from 'path';
 import * as recast from 'recast';
@@ -65,9 +65,11 @@ class Transformer {
       // option, which is apparently now true by default when the enclosing
       // package's package.json file has "type": "module"
       if (source.value.split('/', 2).join('/') === 'ts-invariant/process') {
+        // eslint-disable-next-line no-param-reassign -- AST manipulation is intentional
         source.value = 'ts-invariant/process/index.js';
       } else if (this.isRelative(source.value)) {
         try {
+          // eslint-disable-next-line no-param-reassign -- AST manipulation is intentional
           source.value = this.normalizeId(source.value, file);
         } catch (error) {
           console.error(`Failed to resolve ${source.value} in ${file} with error ${error}`);

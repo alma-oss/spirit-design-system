@@ -55,6 +55,7 @@ const defaultToastContext: ToastContextType = {
   show: () => {},
 };
 
+// eslint-disable-next-line react-refresh/only-export-components -- Context file exports context alongside provider component
 export const ToastContext = createContext<ToastContextType>(defaultToastContext);
 
 type ActionType =
@@ -163,38 +164,41 @@ export const ToastProvider: FC<ToastProviderProps> = ({ children }) => {
       options?.enableAutoClose &&
         delayedCallback(() => hide(toastId), options?.autoCloseInterval || DEFAULT_TOAST_AUTO_CLOSE_INTERVAL);
     },
-    [],
+    [hide],
   );
-  const setQueue = useCallback((newQueue: ToastItem[]) => {
-    dispatch({ type: 'clear', payload: null });
+  const setQueue = useCallback(
+    (newQueue: ToastItem[]) => {
+      dispatch({ type: 'clear', payload: null });
 
-    newQueue.forEach((item) => {
-      const enableAutoClose = item.enableAutoClose ?? true;
-      const autoCloseInterval = item.autoCloseInterval || DEFAULT_TOAST_AUTO_CLOSE_INTERVAL;
+      newQueue.forEach((item) => {
+        const enableAutoClose = item.enableAutoClose ?? true;
+        const autoCloseInterval = item.autoCloseInterval || DEFAULT_TOAST_AUTO_CLOSE_INTERVAL;
 
-      dispatch({
-        type: 'show',
-        payload: {
-          content: {
-            message: item.content.message,
-            link: item.content.link ?? undefined,
+        dispatch({
+          type: 'show',
+          payload: {
+            content: {
+              message: item.content.message,
+              link: item.content.link ?? undefined,
+            },
+            toastId: item.id,
+            options: {
+              autoCloseInterval,
+              enableAutoClose,
+              color: item.color,
+              hasIcon: item.hasIcon || false,
+              iconName: item.iconName,
+              isDismissible: item.isDismissible || false,
+              linkProps: item.linkProps || {},
+            },
           },
-          toastId: item.id,
-          options: {
-            autoCloseInterval,
-            enableAutoClose,
-            color: item.color,
-            hasIcon: item.hasIcon || false,
-            iconName: item.iconName,
-            isDismissible: item.isDismissible || false,
-            linkProps: item.linkProps || {},
-          },
-        },
+        });
+
+        enableAutoClose && delayedCallback(() => hide(item.id), autoCloseInterval || DEFAULT_TOAST_AUTO_CLOSE_INTERVAL);
       });
-
-      enableAutoClose && delayedCallback(() => hide(item.id), autoCloseInterval || DEFAULT_TOAST_AUTO_CLOSE_INTERVAL);
-    });
-  }, []);
+    },
+    [hide],
+  );
 
   const contextValue = useMemo(
     () => ({
@@ -204,7 +208,7 @@ export const ToastProvider: FC<ToastProviderProps> = ({ children }) => {
       setQueue,
       show,
     }),
-    [hide, show, clear, queue.length, setQueue],
+    [hide, show, clear, queue, setQueue],
   );
 
   return <ToastContext.Provider value={contextValue}>{children}</ToastContext.Provider>;

@@ -189,6 +189,7 @@ export const useFileUploaderInput = (props: UseFileUploaderInputProps): UseFileU
     }
 
     event.target.blur();
+    // eslint-disable-next-line no-param-reassign -- Resetting input value is required for file inputs
     event.target.value = '';
   };
 

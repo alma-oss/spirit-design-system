@@ -1,6 +1,6 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FillVariants } from '../../../constants';
 import { type SegmentedControlProps } from '../../../types/segmentedControl';
 import { Icon } from '../../Icon';
@@ -83,8 +83,13 @@ export default meta;
 type Story = StoryObj<typeof SegmentedControl>;
 
 const SegmentedControlWithHooks = ({ name, label, children, ...args }: SegmentedControlProps) => {
-  const defaultSingleValue = 'value-1';
-  const defaultMultipleValue = ['value-1'];
+  const { defaultSingleValue, defaultMultipleValue } = useMemo(
+    () => ({
+      defaultSingleValue: 'value-1',
+      defaultMultipleValue: ['value-1'],
+    }),
+    [],
+  );
 
   const [selectedValue, setSelectedValue] = useState<string | string[]>(
     args.isMultiselect ? defaultMultipleValue : defaultSingleValue,
@@ -92,7 +97,7 @@ const SegmentedControlWithHooks = ({ name, label, children, ...args }: Segmented
 
   useEffect(() => {
     setSelectedValue(args.isMultiselect ? defaultMultipleValue : defaultSingleValue);
-  }, [args.isMultiselect]);
+  }, [args.isMultiselect, defaultSingleValue, defaultMultipleValue]);
 
   return (
     <SegmentedControl

@@ -23,4 +23,5 @@ const SegmentedControlProvider = SegmentedControlContext.Provider;
 const useSegmentedControlContext = (): SegmentedControlContextProps => useContext(SegmentedControlContext);
 
 export default SegmentedControlContext;
+// eslint-disable-next-line react-refresh/only-export-components -- Context file exports context alongside hooks
 export { SegmentedControlProvider, useSegmentedControlContext };

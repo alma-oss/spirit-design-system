@@ -1,5 +1,5 @@
 // Because there is no `dist` directory during the CI run
-/* eslint-disable import/no-extraneous-dependencies, import/extensions, import/no-unresolved */
+/* eslint-disable react-refresh/only-export-components -- Demo file exports constants alongside components */
 import React, { useState } from 'react';
 import { type AccordionOpenStateType } from '../../../types';
 import { Link } from '../../Link';
