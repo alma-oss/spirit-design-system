@@ -290,23 +290,6 @@ Look for `Artifact download URL: https://github.com/lmc-eu/spirit-design-system/
 
 ⚠️ Currently we do not deploy the Web Twig package to any environment, so you can only test it locally.
 
-#### Configuring Playwright Options
-
-You can customize Playwright test execution locally by creating a `.env.local.playwright` file in the project root.
-Copy the example file and adjust values as needed:
-
-```bash
-cp .env.local.playwright.example .env.local.playwright
-```
-
-Available environment variables:
-
-| Variable     | Description                  | Default (local)    | Default (CI) |
-| ------------ | ---------------------------- | ------------------ | ------------ |
-| `PW_WORKERS` | Number of parallel workers   | Playwright default | `1`          |
-| `PW_TIMEOUT` | Test timeout in milliseconds | `120000`           | `120000`     |
-| `PW_RETRIES` | Number of retries            | `0`                | `2`          |
-
 ### Developing and Testing GitHub Actions
 
 It can be time-consuming and painful to test GitHub Actions.

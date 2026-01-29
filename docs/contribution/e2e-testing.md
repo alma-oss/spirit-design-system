@@ -40,8 +40,31 @@ The Make commands execute `bin/make/e2e.sh`, which:
 You can also run tests directly with yarn (outside Docker), but this requires installing Playwright browser dependencies locally:
 
 ```sh
+# Run all E2E tests
 yarn test:e2e
+
+# Update visual regression baselines after intentional changes
+yarn test:e2e:update
+
+# View the HTML test report
+yarn test:e2e:report
+
+# Run tests in interactive UI mode for debugging
+yarn test:e2e:ui
 ```
+
+**Docker Benefits:**
+
+- Consistent environment across different machines
+- No need to install Playwright browsers locally
+- Isolated test execution
+- Matches CI environment
+
+**Yarn Benefits:**
+
+- Faster execution (no Docker overhead)
+- Direct access to test files
+- Better for rapid development and debugging
 
 ### Configuring Playwright Options
 
@@ -64,11 +87,11 @@ Available environment variables:
 
 The E2E test suite consists of two types of tests:
 
-### 1. Automatic Component Discovery
+### 1. Automatic Component Testing
 
 **File**: `tests/e2e/demo-components-compare.spec.ts`
 
-Most component visual regression tests run automatically through the component discovery mechanism. This test file:
+Most component visual regression tests run automatically. This test file:
 
 1. **Scans component directories** for both packages:
 
@@ -83,6 +106,7 @@ Most component visual regression tests run automatically through the component d
    - Captures a full-page screenshot for visual regression testing
 
 4. **Filters components**:
+
    - Components listed in `IGNORED_TESTS` array are skipped
    - Unstable components (prefixed with `unstable_`) are tested but failures only log warnings
 
@@ -97,13 +121,6 @@ Components with complex interactions require dedicated test files. These test sp
 - Interactive states (opening/closing, keyboard navigation)
 - Edge cases (stacking modals, dropdown inside modal)
 - User workflows (focus management, backdrop clicks)
-
-Examples:
-
-- `demo-modal-compare.spec.ts` - Tests modal opening, closing, stacking, and interactions
-- `demo-tooltip-compare.spec.ts` - Tests tooltip triggers (focus, hover, click)
-- `demo-drawer-compare.spec.ts` - Tests drawer positioning and interactions
-- `demo-unstable-header-compare.spec.ts` - Tests header with nested navigation
 
 ## Authoring E2E Tests
 
@@ -156,7 +173,7 @@ Use stable, semantic selectors that won't break when implementation details chan
    await page.click('[data-test-id="open-modal"]');
    ```
 
-**Note**: While some older tests use `data-test-id` attributes, the project is moving away from them in favor of more semantic selectors.
+**ℹ️ Note**: While some older tests use `data-test-id` attributes, the project is moving away from them in favor of more semantic selectors.
 
 When adding new components or modifying existing ones, consider whether the automatic discovery test is sufficient or if dedicated interaction tests are needed.
 
@@ -166,69 +183,7 @@ Component-specific tests live in `tests/e2e/components/` and follow the pattern 
 
 ## Test Helpers
 
-The repository provides several reusable helpers in `tests/helpers/` to simplify test authoring:
-
-### `waitForPageLoad(page)`
-
-Waits for all page resources to load before proceeding with tests:
-
-```ts
-await waitForPageLoad(page);
-```
-
-This helper:
-
-- Waits for fonts to load (`document.fonts.ready`)
-- Waits for all images to complete loading
-- Waits for the page load state to settle
-- Reduces animation iteration counts to prevent flaky screenshots
-
-### `hideFromVisualTests(page)`
-
-Hides elements with the `.hide-from-visual-tests` class from screenshots:
-
-```ts
-await hideFromVisualTests(page);
-```
-
-Apply this class to dynamic content like dates, timers, or randomly generated values that would cause false positives in visual regression tests.
-
-### `takeScreenshot(page, name, options)`
-
-Captures a screenshot with consistent settings:
-
-```ts
-// Viewport screenshot
-await takeScreenshot(page, 'component-name');
-
-// Full page screenshot
-await takeScreenshot(page, 'component-name', { fullPage: true });
-```
-
-Default options:
-
-- `animations: 'disabled'` - Prevents animation-related flakiness
-- `fullPage: false` - Captures viewport only (pass `{ fullPage: true }` for full-page screenshots)
-
-Screenshots are stored in `tests/e2e/**/*-snapshots/` and automatically compared against baselines.
-
-### `getServerUrl(packageName)`
-
-Returns the correct server URL for the specified package:
-
-```ts
-const url = getServerUrl('web-react');
-```
-
-Automatically resolves URLs for both local development and CI environments, and handles Docker host detection.
-
-### `formatPackageName(packageName)`
-
-Formats package names for test descriptions:
-
-```ts
-const formattedName = formatPackageName('web-react'); // "Web React"
-```
+The repository provides several reusable helpers in `tests/helpers/` to simplify test.
 
 ## Visual Regression Testing
 
@@ -252,7 +207,7 @@ If tests fail inconsistently:
   await takeScreenshot(page, 'after-close');
   ```
 
-- **Dynamic content**: Hide timestamps, random IDs, or changing values:
+- **Dynamic content**: Hide timestamps, random IDs, or changing values via class `hide-from-visual-tests`:
 
   ```html
   <div class="hide-from-visual-tests">2026-01-12 15:30:45</div>
@@ -275,84 +230,23 @@ For components that are intentionally broken during development, add them to the
 const IGNORED_TESTS: string[] = ['BrokenComponent', 'WorkInProgress'];
 ```
 
-**Important**: Remove components from this list once they're fixed. The array should remain empty in production.
+**⚠️ Important**: Remove components from this list once they're fixed. The array should remain empty in production.
 
 ### Unstable Components
 
 Components prefixed with `unstable_` receive special handling:
 
-- Tests still run but failures log warnings instead of errors
-- This allows continued development while maintaining test coverage
-- Example: `unstable_Header`, `unstable_Truncate`
+- Tests still run but failures log warnings instead of errors.
+- This allows continued development while maintaining test coverage.
 
 Remove the `unstable_` prefix once the component reaches stable status.
 
-## Best Practices
+### E2E Accessibility Testing
 
-### Wait for State Changes
+Accessibility tests are integrated into the E2E suite using [Playwright's accessibility features][docs-axe-core-playwright].
 
-Always wait for state changes and animations to complete before taking screenshots:
+For more information, please refer to the [Accessibility Testing Guidelines][accessibility-testing].
 
-```ts
-// Open modal and wait for animation
-await page.click('button:has-text("Open Modal")');
-await page.waitForTimeout(500);
-await takeScreenshot(page, 'modal-open');
-
-// Close with escape and wait for animation
-await page.keyboard.press('Escape');
-await page.waitForTimeout(1000);
-await takeScreenshot(page, 'modal-closed');
-```
-
-For more reliable waits, prefer `waitForSelector` when specific elements indicate state:
-
-```ts
-await page.click('button:has-text("Load Data")');
-await page.waitForSelector('[data-state="loaded"]');
-await takeScreenshot(page, 'data-loaded');
-```
-
-### Keep Tests Focused
-
-Each test should verify a single workflow or behavior. Split complex scenarios into multiple tests:
-
-```ts
-// Good - focused tests
-test('Modal opens with button click', async ({ page }) => {
-  // Test opening only
-});
-
-test('Modal closes with escape key', async ({ page }) => {
-  // Test keyboard closing only
-});
-
-// Avoid - one test doing everything
-test('Modal everything', async ({ page }) => {
-  // Opening, closing, stacking, dropdowns, forms...
-});
-```
-
-### Document Complex Interactions
-
-Add comments to clarify test intent, especially for complex interaction sequences:
-
-```ts
-// Open modal, then open dropdown inside modal, verify dropdown is positioned correctly
-await page.click('button:has-text("Open Modal with Dropdown")');
-await page.click('dialog[open] .Dropdown button');
-await takeScreenshot(page, 'modal-with-dropdown-open');
-await page.click('dialog[open] header button');
-```
-
-## Continuous Integration
-
-E2E tests run automatically in CI:
-
-- Tests run in a Docker container with Ubuntu to ensure consistent environment
-- Only Chromium is tested to optimize CI time (additional browsers can be added in `playwright.config.ts` if needed)
-- CI runs with `retries: 2` to handle transient network or timing issues
-- CI runs with `workers: 1` to prevent parallel execution issues and ensure consistent screenshots
-- The `forbidOnly` flag ensures no `test.only()` calls are accidentally committed
-
+[accessibility-testing]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/accessibility-testing.md#e2e-accessibility-testing-with-playwright
+[docs-axe-core-playwright]: https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright
 [playwright-docs]: https://playwright.dev/

@@ -61,6 +61,14 @@ See individual [packages](#packages) to learn how to get started.
 
 - `git clone ssh://git@github.com:lmc-eu/spirit-design-system.git`
 - `cd spirit-design-system`
+
+Using Make (recommended):
+
+- `make install`
+- `make start`
+
+or using Yarn:
+
 - `corepack enable`
 - `corepack install`
 - `yarn install`
