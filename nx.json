@@ -1,11 +1,4 @@
 {
-  "tasksRunnerOptions": {
-    "default": {
-      "options": {
-        "accessToken": "NGYxNTY3NTAtOWY5NC00MWVmLThiNWEtY2MwNjE4OWJjZTcxfHJlYWQ="
-      }
-    }
-  },
   "pluginsConfig": {
     "@nrwl/js": {
       "analyzeSourceFiles": false
