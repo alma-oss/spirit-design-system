@@ -13,8 +13,8 @@ jobs:
     name: 🔗 Checking Markdown Links
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: tcort/github-action-markdown-link-check@v1.1.0
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: tcort/github-action-markdown-link-check@a800ad5f1c35bf61987946fd31c15726a1c9f2ba # v1.1.0
         with:
           use-quiet-mode: 'yes' # only show errors in output
           use-verbose-mode: 'yes'
@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Setup Node and Install Dependencies
         uses: ./.github/actions/setup-install

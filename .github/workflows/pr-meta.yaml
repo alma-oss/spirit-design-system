@@ -16,7 +16,7 @@ jobs:
         uses: toshimaru/auto-author-assign@16f0022cf3d7970c106d8d1105f75a1165edb516 # v2.1.1
 
       - name: Add labels
-        uses: TimonVS/pr-labeler-action@v5.0.0
+        uses: TimonVS/pr-labeler-action@f9c084306ce8b3f488a8f3ee1ccedc6da131d1af # v5.0.0
         with:
           configuration-path: .github/pr-labeler.yaml
         env:
