@@ -3,14 +3,7 @@ import { type ElementType } from 'react';
 import { useClassNamePrefix } from '../../hooks';
 import { type LinkProps, type SpiritLinkProps, UNDERLINED_OPTIONS } from '../../types';
 
-export interface LinkStyles<E extends ElementType = 'p'> {
-  /** className props */
-  classProps: string | null;
-  /** props to be passed to the input element */
-  props: Partial<LinkProps<E>>;
-}
-
-export function useLinkStyleProps<E extends ElementType = 'a', T = void>(props: SpiritLinkProps<E, T>): LinkStyles<E> {
+export function useLinkStyleProps<E extends ElementType = 'a', T = void>(props: SpiritLinkProps<E, T>) {
   const { color, hasVisitedStyleAllowed, isDisabled, underlined, ...restProps } = props;
 
   const linkClass = useClassNamePrefix('link');
@@ -29,6 +22,6 @@ export function useLinkStyleProps<E extends ElementType = 'a', T = void>(props: 
 
   return {
     classProps: className,
-    props: restProps,
+    props: restProps as Partial<LinkProps<E>>,
   };
 }

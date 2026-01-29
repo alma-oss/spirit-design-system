@@ -1,18 +1,25 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { forwardRef, type ElementType } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type SpiritAccordionProps } from '../../types';
+import { type AccordionProps, type PolymorphicRef, type SpiritComponentStaticProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { AccordionProvider } from './AccordionContext';
 import { useAccordionStyleProps } from './useAccordionStyleProps';
 
-const Accordion = <T extends ElementType = 'section'>(props: SpiritAccordionProps<T>) => {
-  const { children, elementType: ElementTag = 'section', open, toggle, ...restProps } = props;
+/* We need an exception for components exported with forwardRef */
+/* eslint no-underscore-dangle: ['error', { allow: ['_Accordion'] }] */
+const _Accordion = <T extends ElementType = 'section'>(
+  props: AccordionProps<T>,
+  ref: PolymorphicRef<T>,
+) => {
+  const { children, elementType = 'section', open, toggle, ...restProps } = props;
+
+  const Component = elementType as React.ElementType;
 
   const { classProps } = useAccordionStyleProps();
   const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.root, styleProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps });
 
   const contextValue = {
     open,
@@ -20,14 +27,18 @@ const Accordion = <T extends ElementType = 'section'>(props: SpiritAccordionProp
   };
 
   return (
-    <ElementTag {...transferProps} {...mergedStyleProps}>
+    <Component {...transferProps} {...mergedStyleProps} ref={ref}>
       <AccordionProvider value={contextValue}>{children}</AccordionProvider>
-    </ElementTag>
+    </Component>
   );
 };
 
+const Accordion = forwardRef(_Accordion) as unknown as (<T extends ElementType = 'section'>(
+  props: AccordionProps<T> & { ref?: PolymorphicRef<T> }
+) => React.ReactElement) &
+  SpiritComponentStaticProps;
+
 Accordion.spiritComponent = 'Accordion';
-Accordion.spiritDefaultElement = 'section' as const;
-Accordion.spiritDefaultProps = null as unknown as SpiritAccordionProps<'section'>;
+Accordion.displayName = 'Accordion';
 
 export default Accordion;

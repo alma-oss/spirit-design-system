@@ -110,13 +110,14 @@ const renderRow = (
   return (
     <Box
       key={intensity || 'default'}
-      alignmentX={{ mobile: 'center', tablet: 'left' }}
-      alignmentY="center"
       backgroundColor={backgroundColor}
-      elementType={Flex}
       padding="space-800"
       textColor={textColor}
     >
+      <Flex
+        alignmentX={{ mobile: 'center', tablet: 'left' }}
+        alignmentY="center"
+      >
       {sizes.map((size) => (
         <Fragment key={`${size}-subtle`}>
           <ControlButton size={size} isSymmetrical isSubtle aria-label="Close dialog">
@@ -131,6 +132,7 @@ const renderRow = (
           </ControlButton>
         </Fragment>
       ))}
+      </Flex>
     </Box>
   );
 };

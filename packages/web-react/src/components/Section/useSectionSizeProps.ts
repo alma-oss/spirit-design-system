@@ -7,10 +7,6 @@ import {
   type SpiritSectionProps,
 } from '../../types';
 
-export interface UseSectionSizeProps {
-  modifiedProps: Partial<SpiritSectionProps<ElementType>>;
-}
-
 const sizePaddingMapping: Record<SizeExtendedDictionaryType<never>, { paddingY: Responsive<SpaceToken> }> = {
   [SizesExtended.XSMALL]: { paddingY: { mobile: 'space-900', tablet: 'space-1000' } },
   [SizesExtended.SMALL]: { paddingY: { mobile: 'space-1000', tablet: 'space-1100' } },
@@ -19,10 +15,13 @@ const sizePaddingMapping: Record<SizeExtendedDictionaryType<never>, { paddingY: 
   [SizesExtended.XLARGE]: { paddingY: { mobile: 'space-1400', tablet: 'space-1600' } },
 };
 
-export const useSectionSizeProps = (props: Partial<SpiritSectionProps<ElementType>>): UseSectionSizeProps => {
-  const { size } = props;
+export const useSectionSizeProps = (props: Record<string, any> = {}) => {
+  const { size, ...restProps } = props;
 
-  const modifiedProps = size ? { ...sizePaddingMapping[size], ...props } : props;
+  const modifiedProps =
+    size && typeof size === 'string' && size in sizePaddingMapping
+      ? ({ ...sizePaddingMapping[size as SizeExtendedDictionaryType<never>], ...restProps } as typeof restProps)
+      : restProps;
 
   return {
     modifiedProps,

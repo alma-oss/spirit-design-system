@@ -1,35 +1,46 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { forwardRef, type ElementType } from 'react';
 import { AlignmentXExtended, AlignmentYExtended } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import { type SpiritGridProps } from '../../types';
+import { type GridProps, type PolymorphicRef, type SpiritComponentStaticProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useGridStyleProps } from './useGridStyleProps';
 
-const defaultProps: SpiritGridProps = {
+const defaultProps = {
   alignmentX: AlignmentXExtended.STRETCH,
   alignmentY: AlignmentYExtended.STRETCH,
-  elementType: 'div',
+  elementType: 'div' as const,
 };
 
-const Grid = <T extends ElementType = 'div'>(props: SpiritGridProps<T>): JSX.Element => {
+/* We need an exception for components exported with forwardRef */
+/* eslint no-underscore-dangle: ['error', { allow: ['_Grid'] }] */
+const _Grid = <T extends ElementType = 'div'>(
+  props: GridProps<T>,
+  ref: PolymorphicRef<T>,
+): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
 
-  const { elementType: ElementTag = 'div', children, ...restProps } = propsWithDefaults;
+  const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
+  const Component = elementType as React.ElementType;
+
   const { classProps, props: modifiedProps, styleProps: gridStyle } = useGridStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps, gridStyle });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps, gridStyle });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
+const Grid = forwardRef(_Grid) as unknown as (<T extends ElementType = 'div'>(
+  props: GridProps<T> & { ref?: PolymorphicRef<T> }
+) => React.ReactElement) &
+  SpiritComponentStaticProps;
+
 Grid.spiritComponent = 'Grid';
-Grid.spiritDefaultElement = 'div' as const;
-Grid.spiritDefaultProps = null as unknown as SpiritGridProps<'div'>;
+Grid.displayName = 'Grid';
 
 export default Grid;

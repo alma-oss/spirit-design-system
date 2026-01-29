@@ -1,4 +1,4 @@
-import { type ComponentPropsWithRef, type ElementType } from 'react';
+import { type ElementType } from 'react';
 import type {
   ButtonSizesType,
   ButtonType,
@@ -6,6 +6,8 @@ import type {
   ClickEvents,
   ComponentButtonColorNamesType,
   EmotionColorNamesType,
+  PolymorphicComponentProps,
+  PolymorphicRef,
   SingleOrResponsive,
   SizesDictionaryType,
   StyleProps,
@@ -28,34 +30,29 @@ export interface ButtonBaseProps<C = void, S = void> extends ChildrenProps, Styl
   isSymmetrical?: SingleOrResponsive<boolean>;
   /** The size of the button. */
   size?: ButtonSize<S>;
-}
-
-export type ButtonProps<E extends ElementType, C = void, S = void> = {
-  /**
-   * The HTML element or React element used to render the button, e.g. 'div', 'a', or `RouterLink`.
-   *
-   * @default 'button'
-   */
-  elementType?: E;
   /**
    * The behavior of the button when used in an HTML form.
    *
    * @default 'button'
    */
   type?: ButtonType;
-} & ButtonBaseProps<C, S>;
+}
 
-export type ButtonLinkProps<E extends ElementType, C = void, S = void> = {
-  /**
-   * The HTML element or React element used to render the button, e.g. 'div', 'a', or `RouterLink`.
-   *
-   * @default 'a'
-   */
-  elementType?: E;
-} & ButtonBaseProps<C, S>;
+export type ButtonProps<E extends ElementType = 'button', C = void, S = void> = PolymorphicComponentProps<
+  E,
+  ButtonBaseProps<C, S>
+>;
 
-export type SpiritButtonProps<E extends ElementType = 'button', C = void, S = void> = ButtonProps<E, C, S> &
-  ComponentPropsWithRef<E>;
+export type ButtonLinkProps<E extends ElementType = 'a', C = void, S = void> = PolymorphicComponentProps<E, Omit<ButtonBaseProps<C, S>, 'type'>>;
 
-export type SpiritButtonLinkProps<E extends ElementType = 'a', C = void, S = void> = ButtonLinkProps<E, C, S> &
-  ComponentPropsWithRef<E>;
+/** @deprecated Use ButtonProps instead */
+export type SpiritButtonProps<E extends ElementType = 'button', C = void, S = void> = ButtonProps<E, C, S>;
+
+/** @deprecated Use ButtonLinkProps instead */
+export type SpiritButtonLinkProps<E extends ElementType = 'a', C = void, S = void> = ButtonLinkProps<E, C, S>;
+
+/**
+ * @internal
+ * Helper type to get the correct ref type for a Button component
+ */
+export type ButtonRef<E extends ElementType = 'button'> = PolymorphicRef<E>;

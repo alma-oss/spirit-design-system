@@ -1,29 +1,37 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { forwardRef, type ElementType } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type SpiritStackProps } from '../../types';
+import { type PolymorphicRef, type SpiritComponentStaticProps, type StackProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useStackStyleProps } from './useStackStyleProps';
 
-const defaultProps: SpiritStackProps = {
-  elementType: 'div',
+const defaultProps = {
+  elementType: 'div' as const,
   hasSpacing: false,
   hasEndDivider: false,
   hasIntermediateDividers: false,
   hasStartDivider: false,
 };
 
-const Stack = <T extends ElementType = 'div'>(props: SpiritStackProps<T>): JSX.Element => {
+/* We need an exception for components exported with forwardRef */
+/* eslint no-underscore-dangle: ['error', { allow: ['_Stack'] }] */
+const _Stack = <T extends ElementType = 'div'>(
+  props: StackProps<T>,
+  ref: PolymorphicRef<T>,
+): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const {
-    elementType: ElementTag = defaultProps.elementType as ElementType,
+    elementType = defaultProps.elementType,
     children,
     ...restProps
   } = propsWithDefaults;
-  const { classProps, props: modifiedProps, styleProps: stackStyle } = useStackStyleProps(restProps);
+
+  const Component = elementType as React.ElementType;
+
+  const { classProps, props: modifiedProps, styleProps: stackStyle } = useStackStyleProps(propsWithDefaults);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, {
+  const mergedStyleProps = mergeStyleProps(Component, {
     classProps: classProps.root,
     stackStyle,
     styleProps,
@@ -31,12 +39,18 @@ const Stack = <T extends ElementType = 'div'>(props: SpiritStackProps<T>): JSX.E
   });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
+const Stack = forwardRef(_Stack) as unknown as (<T extends ElementType = 'div'>(
+  props: StackProps<T> & { ref?: PolymorphicRef<T> }
+) => React.ReactElement) &
+  SpiritComponentStaticProps;
+
 Stack.spiritComponent = 'Stack';
+Stack.displayName = 'Stack';
 
 export default Stack;

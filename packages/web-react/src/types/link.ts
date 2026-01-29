@@ -1,5 +1,12 @@
 import { type ElementType } from 'react';
-import { type ChildrenProps, type LinkColorsDictionaryType, type StyleProps, type TransferProps } from './shared';
+import type {
+  ChildrenProps,
+  LinkColorsDictionaryType,
+  PolymorphicComponentProps,
+  PolymorphicRef,
+  StyleProps,
+  TransferProps,
+} from './shared';
 
 export const UNDERLINED_OPTIONS = {
   ALWAYS: 'always',
@@ -24,13 +31,13 @@ export interface LinkBaseProps<C = void> extends ChildrenProps, StyleProps, Tran
   isDisabled?: boolean;
 }
 
-export type LinkProps<E extends ElementType = 'a', C = void> = {
-  /**
-   * The HTML element or React element used to render the Link, e.g. 'a'.
-   *
-   * @default 'a'
-   */
-  elementType?: E;
-} & LinkBaseProps<C>;
+export type LinkProps<E extends ElementType = 'a', C = void> = PolymorphicComponentProps<E, LinkBaseProps<C>>;
 
+/** @deprecated Use LinkProps instead */
 export type SpiritLinkProps<E extends ElementType = 'a', C = void> = LinkProps<E, C>;
+
+/**
+ * @internal
+ * Helper type to get the correct ref type for a Link component
+ */
+export type LinkRef<E extends ElementType = 'a'> = PolymorphicRef<E>;

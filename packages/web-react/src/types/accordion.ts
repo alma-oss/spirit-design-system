@@ -1,8 +1,8 @@
 import { type ElementType, type ReactNode } from 'react';
 import {
   type ChildrenProps,
-  type ElementTypeProps,
-  type SpiritPolymorphicElementPropsWithRef,
+  type PolymorphicComponentProps,
+  type PolymorphicRef,
   type StyleProps,
 } from './shared';
 
@@ -21,24 +21,45 @@ export interface BaseAccordionProps extends ChildrenProps, StyleProps {}
 
 export interface AccordionBaseProps extends BaseAccordionProps, AccordionHandlingProps {}
 
-export type AccordionProps<T extends ElementType> = ElementTypeProps<T> & AccordionBaseProps;
+export type AccordionProps<T extends ElementType = 'section'> = PolymorphicComponentProps<T, AccordionBaseProps>;
 
-export type SpiritAccordionProps<T extends ElementType = 'section'> = AccordionProps<T> &
-  SpiritPolymorphicElementPropsWithRef<T, AccordionProps<T>>;
+/** @deprecated Use AccordionProps instead */
+export type SpiritAccordionProps<T extends ElementType = 'section'> = AccordionProps<T>;
 
-export type AccordionHeaderProps<T extends ElementType = 'h3'> = ElementTypeProps<T> & {
-  slot?: ReactNode;
-} & BaseAccordionProps;
+/**
+ * @internal
+ * Helper type to get the correct ref type for an Accordion component
+ */
+export type AccordionRef<T extends ElementType = 'section'> = PolymorphicRef<T>;
 
-export type SpiritAccordionHeaderProps<T extends ElementType = 'h3'> = AccordionHeaderProps<T> &
-  SpiritPolymorphicElementPropsWithRef<T, AccordionHeaderProps<T>>;
+export type AccordionHeaderProps<T extends ElementType = 'h3'> = PolymorphicComponentProps<
+  T,
+  BaseAccordionProps & {
+    slot?: ReactNode;
+  }
+>;
+
+/** @deprecated Use AccordionHeaderProps instead */
+export type SpiritAccordionHeaderProps<T extends ElementType = 'h3'> = AccordionHeaderProps<T>;
+
+/**
+ * @internal
+ * Helper type to get the correct ref type for an AccordionHeader component
+ */
+export type AccordionHeaderRef<T extends ElementType = 'h3'> = PolymorphicRef<T>;
 
 export interface AccordionItemBaseProps extends BaseAccordionProps, AccordionItemContextProps {}
 
-export type AccordionItemProps<T extends ElementType> = ElementTypeProps<T> & AccordionItemBaseProps;
+export type AccordionItemProps<T extends ElementType = 'article'> = PolymorphicComponentProps<T, AccordionItemBaseProps>;
 
-export type SpiritAccordionItemProps<T extends ElementType = 'article'> = AccordionItemProps<T> &
-  SpiritPolymorphicElementPropsWithRef<T, AccordionItemProps<T>>;
+/** @deprecated Use AccordionItemProps instead */
+export type SpiritAccordionItemProps<T extends ElementType = 'article'> = AccordionItemProps<T>;
+
+/**
+ * @internal
+ * Helper type to get the correct ref type for an AccordionItem component
+ */
+export type AccordionItemRef<T extends ElementType = 'article'> = PolymorphicRef<T>;
 
 export interface AccordionContentProps extends BaseAccordionProps {}
 
@@ -47,7 +68,10 @@ export interface UncontrolledAccordionBaseProps extends BaseAccordionProps {
   stayOpen?: boolean;
 }
 
-export type UncontrolledAccordionProps<T extends ElementType> = ElementTypeProps<T> & UncontrolledAccordionBaseProps;
+export type UncontrolledAccordionProps<T extends ElementType = 'section'> = PolymorphicComponentProps<
+  T,
+  UncontrolledAccordionBaseProps
+>;
 
-export type SpiritUncontrolledAccordionProps<T extends ElementType = 'section'> = UncontrolledAccordionProps<T> &
-  SpiritPolymorphicElementPropsWithRef<T, UncontrolledAccordionProps<T>>;
+/** @deprecated Use UncontrolledAccordionProps instead */
+export type SpiritUncontrolledAccordionProps<T extends ElementType = 'section'> = UncontrolledAccordionProps<T>;

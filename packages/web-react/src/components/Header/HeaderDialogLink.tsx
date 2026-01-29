@@ -1,35 +1,42 @@
 'use client';
 
-import React, { type ElementType, forwardRef } from 'react';
+import React, { forwardRef, type ElementType } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type PolymorphicRef, type SpiritDialogHeaderLinkProps } from '../../types';
+import { type HeaderDialogLinkProps, type PolymorphicRef, type SpiritComponentStaticProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useHeaderStyleProps } from './useHeaderStyleProps';
 
 /* We need an exception for components exported with forwardRef */
 /* eslint no-underscore-dangle: ['error', { allow: ['_HeaderDialogLink'] }] */
 const _HeaderDialogLink = <E extends ElementType = 'a'>(
-  props: SpiritDialogHeaderLinkProps<E>,
+  props: HeaderDialogLinkProps<E>,
   ref: PolymorphicRef<E>,
 ): JSX.Element => {
-  const { elementType: ElementTag = 'a', children, isCurrent, ...restProps } = props;
+  const { elementType = 'a', children, isCurrent, ...restProps } = props;
+
+  const Component = elementType as React.ElementType;
+
   const { classProps } = useHeaderStyleProps({ isCurrentLink: isCurrent });
   const { styleProps, props: otherProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, {
+  const mergedStyleProps = mergeStyleProps(Component, {
     classProps: classProps.headerDialogLink,
     styleProps,
     otherProps,
   });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps} ref={ref}>
+    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
-const HeaderDialogLink = forwardRef<HTMLAnchorElement, SpiritDialogHeaderLinkProps<ElementType>>(_HeaderDialogLink);
+const HeaderDialogLink = forwardRef(_HeaderDialogLink) as unknown as (<E extends ElementType = 'a'>(
+  props: HeaderDialogLinkProps<E> & { ref?: PolymorphicRef<E> }
+) => React.ReactElement) &
+  SpiritComponentStaticProps;
 
 HeaderDialogLink.spiritComponent = 'HeaderDialogLink';
+HeaderDialogLink.displayName = 'HeaderDialogLink';
 
 export default HeaderDialogLink;

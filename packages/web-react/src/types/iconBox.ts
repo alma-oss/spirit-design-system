@@ -4,9 +4,10 @@ import type {
   AccentColorNamesType,
   ChildrenProps,
   EmotionColorNamesType,
+  PolymorphicComponentProps,
+  PolymorphicRef,
   SingleOrResponsive,
   SizeExtendedDictionaryType,
-  SpiritPolymorphicElementPropsWithRef,
   StyleProps,
 } from './shared';
 
@@ -30,14 +31,16 @@ export interface IconBoxBaseProps extends ChildrenProps, StyleProps {
   size?: SingleOrResponsive<SizeExtendedDictionaryType>;
 }
 
-export type IconBoxProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the box, e.g. 'div', 'a', or `RouterLink`.
-   *
-   * @default 'div'
-   */
-  elementType?: E | JSXElementConstructor<unknown>;
-} & IconBoxBaseProps;
+export type IconBoxProps<E extends ElementType = 'div'> = PolymorphicComponentProps<
+  E | JSXElementConstructor<unknown>,
+  IconBoxBaseProps
+>;
 
-export type SpiritIconBoxProps<E extends ElementType = 'div'> = IconBoxProps<E> &
-  SpiritPolymorphicElementPropsWithRef<E, IconBoxProps<E>>;
+/** @deprecated Use IconBoxProps instead */
+export type SpiritIconBoxProps<E extends ElementType = 'div'> = IconBoxProps<E>;
+
+/**
+ * @internal
+ * Helper type to get the correct ref type for an IconBox component
+ */
+export type IconBoxRef<E extends ElementType = 'div'> = PolymorphicRef<E>;

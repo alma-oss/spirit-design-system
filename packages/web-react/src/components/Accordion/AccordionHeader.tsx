@@ -1,8 +1,8 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { forwardRef, type ElementType } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type SpiritAccordionHeaderProps } from '../../types';
+import { type AccordionHeaderProps, type PolymorphicRef, type SpiritComponentStaticProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Icon } from '../Icon';
 import { useAccordionContext } from './AccordionContext';
@@ -11,20 +11,28 @@ import { useAccordionAriaProps } from './useAccordionAriaProps';
 import { useAccordionStyleProps } from './useAccordionStyleProps';
 import { useOpenItem } from './useOpenItem';
 
-const defaultProps: Partial<SpiritAccordionHeaderProps> = {
+const defaultProps: Partial<AccordionHeaderProps> = {
   elementType: 'h3',
 };
 
-const AccordionHeader = <T extends ElementType = 'h3'>(props: SpiritAccordionHeaderProps<T>) => {
+/* We need an exception for components exported with forwardRef */
+/* eslint no-underscore-dangle: ['error', { allow: ['_AccordionHeader'] }] */
+const _AccordionHeader = <T extends ElementType = 'h3'>(
+  props: AccordionHeaderProps<T>,
+  ref: PolymorphicRef<T>,
+) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag = 'h3', children, slot, ...restProps } = propsWithDefaults;
+  const { elementType = 'h3', children, slot, ...restProps } = propsWithDefaults;
+  
+  const Component = elementType as React.ElementType;
+  
   const { classProps } = useAccordionStyleProps();
   const { toggle } = useAccordionContext();
   const { id } = useAccordionItemContext();
   const { styleProps, props: transferProps } = useStyleProps(restProps);
   const { isOpen } = useOpenItem(id);
   const { triggerProps, headerProps } = useAccordionAriaProps({ id, isOpen });
-  const mergedStyleProps = mergeStyleProps(ElementTag, {
+  const mergedStyleProps = mergeStyleProps(Component, {
     classProps: classProps.header,
     styleProps,
   });
@@ -36,7 +44,7 @@ const AccordionHeader = <T extends ElementType = 'h3'>(props: SpiritAccordionHea
   };
 
   return (
-    <ElementTag {...transferProps} {...mergedStyleProps} {...headerProps}>
+    <Component {...transferProps} {...mergedStyleProps} {...headerProps} ref={ref}>
       <button type="button" className={classProps.toggle} onClick={itemToggle} {...triggerProps}>
         {children}
       </button>
@@ -46,12 +54,16 @@ const AccordionHeader = <T extends ElementType = 'h3'>(props: SpiritAccordionHea
           <Icon name="chevron-down" />
         </span>
       </span>
-    </ElementTag>
+    </Component>
   );
 };
 
+const AccordionHeader = forwardRef(_AccordionHeader) as unknown as (<T extends ElementType = 'h3'>(
+  props: AccordionHeaderProps<T> & { ref?: PolymorphicRef<T> }
+) => React.ReactElement) &
+  SpiritComponentStaticProps;
+
 AccordionHeader.spiritComponent = 'AccordionHeader';
-AccordionHeader.spiritDefaultElement = 'h3' as const;
-AccordionHeader.spiritDefaultProps = null as unknown as SpiritAccordionHeaderProps<'h3'>;
+AccordionHeader.displayName = 'AccordionHeader';
 
 export default AccordionHeader;

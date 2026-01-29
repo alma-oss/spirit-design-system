@@ -1,30 +1,41 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { forwardRef, type ElementType } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type SpiritAccordionItemProps } from '../../types';
+import { type AccordionItemProps, type PolymorphicRef, type SpiritComponentStaticProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { AccordionItemProvider } from './AccordionItemContext';
 import { useAccordionStyleProps } from './useAccordionStyleProps';
 
-const AccordionItem = <T extends ElementType = 'article'>(props: SpiritAccordionItemProps<T>) => {
-  const { children, elementType: ElementTag = 'article', id, ...restProps } = props;
+/* We need an exception for components exported with forwardRef */
+/* eslint no-underscore-dangle: ['error', { allow: ['_AccordionItem'] }] */
+const _AccordionItem = <T extends ElementType = 'article'>(
+  props: AccordionItemProps<T>,
+  ref: PolymorphicRef<T>,
+) => {
+  const { children, elementType = 'article', id, ...restProps } = props;
+
+  const Component = elementType as React.ElementType;
 
   const { classProps } = useAccordionStyleProps();
   const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.item, styleProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.item, styleProps });
 
   const contextValue = { id };
 
   return (
-    <ElementTag {...transferProps} id={id} {...mergedStyleProps}>
+    <Component {...transferProps} id={id} {...mergedStyleProps} ref={ref}>
       <AccordionItemProvider value={contextValue}>{children}</AccordionItemProvider>
-    </ElementTag>
+    </Component>
   );
 };
 
+const AccordionItem = forwardRef(_AccordionItem) as unknown as (<T extends ElementType = 'article'>(
+  props: AccordionItemProps<T> & { ref?: PolymorphicRef<T> }
+) => React.ReactElement) &
+  SpiritComponentStaticProps;
+
 AccordionItem.spiritComponent = 'AccordionItem';
-AccordionItem.spiritDefaultElement = 'article' as const;
-AccordionItem.spiritDefaultProps = null as unknown as SpiritAccordionItemProps<'article'>;
+AccordionItem.displayName = 'AccordionItem';
 
 export default AccordionItem;

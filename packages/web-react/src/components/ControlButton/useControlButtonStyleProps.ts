@@ -7,16 +7,9 @@ import { applySize, compose } from '../../utils';
 const getControlButtonSizeClassname = <S = void>(className: string, size: ControlButtonSize<S>): string =>
   compose(applySize<ControlButtonSize<S>>(size))(className);
 
-export interface ControlButtonStyles {
-  /** className props */
-  classProps: string;
-  /** Props for the control button element */
-  props: SpiritControlButtonProps;
-}
-
 export function useControlButtonStyleProps<T extends ElementType = 'button', S = void>(
   props: SpiritControlButtonProps<T, S>,
-): ControlButtonStyles {
+) {
   const { isDisabled, isSubtle, isSymmetrical, size, ...restProps } = props;
 
   const controlButtonClass = useClassNamePrefix('ControlButton');

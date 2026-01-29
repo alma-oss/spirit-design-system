@@ -12,6 +12,7 @@ export * from './element';
 export * from './events';
 export * from './inputs';
 export * from './item';
+export * from './polymorphic';
 export * from './positions';
 export * from './radii';
 export * from './refs';

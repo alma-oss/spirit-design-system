@@ -2,11 +2,12 @@ import { type ElementType } from 'react';
 import {
   type ChildrenProps,
   type ClickEvent,
+  type PolymorphicComponentProps,
+  type PolymorphicRef,
   type SpiritButtonElementProps,
   type SpiritDialogElementProps,
   type SpiritElementProps,
   type SpiritLItemElementProps,
-  type SpiritPolymorphicElementPropsWithRef,
   type SpiritSpanElementProps,
   type SpiritUListElementProps,
   type StyleProps,
@@ -55,17 +56,16 @@ export interface BaseHeaderDialogLinkProps extends ChildrenProps, StyleProps, Tr
   isCurrent?: boolean;
 }
 
-export type HeaderDialogLinkProps<E extends ElementType = 'a'> = {
-  /**
-   * The HTML element or React element used to render the Link, e.g. 'a'.
-   *
-   * @default 'a'
-   */
-  elementType?: E;
-} & BaseHeaderDialogLinkProps;
+export type HeaderDialogLinkProps<E extends ElementType = 'a'> = PolymorphicComponentProps<E, BaseHeaderDialogLinkProps>;
 
-export type SpiritDialogHeaderLinkProps<E extends ElementType = 'a'> = HeaderDialogLinkProps<E> &
-  SpiritPolymorphicElementPropsWithRef<E, HeaderDialogLinkProps<E>>;
+/** @deprecated Use HeaderDialogLinkProps instead */
+export type SpiritDialogHeaderLinkProps<E extends ElementType = 'a'> = HeaderDialogLinkProps<E>;
+
+/**
+ * @internal
+ * Helper type to get the correct ref type for a HeaderDialogLink component
+ */
+export type HeaderDialogLinkRef<E extends ElementType = 'a'> = PolymorphicRef<E>;
 
 export interface HeaderDialogNavProps extends SpiritUListElementProps, ChildrenProps {}
 
@@ -77,17 +77,16 @@ export interface HeaderLinkBaseProps extends ChildrenProps, StyleProps, Transfer
   isCurrent?: boolean;
 }
 
-export type HeaderLinkProps<E extends ElementType = 'a'> = {
-  /**
-   * The HTML element or React element used to render the Link, e.g. 'a'.
-   *
-   * @default 'a'
-   */
-  elementType?: E;
-} & HeaderLinkBaseProps;
+export type HeaderLinkProps<E extends ElementType = 'a'> = PolymorphicComponentProps<E, HeaderLinkBaseProps>;
 
-export type SpiritHeaderLinkProps<E extends ElementType = 'a'> = HeaderLinkProps<E> &
-  SpiritPolymorphicElementPropsWithRef<E, HeaderLinkProps<E>>;
+/** @deprecated Use HeaderLinkProps instead */
+export type SpiritHeaderLinkProps<E extends ElementType = 'a'> = HeaderLinkProps<E>;
+
+/**
+ * @internal
+ * Helper type to get the correct ref type for a HeaderLink component
+ */
+export type HeaderLinkRef<E extends ElementType = 'a'> = PolymorphicRef<E>;
 
 export interface HeaderMobileActionsProps extends SpiritElementProps, HeaderMobileActionsHandlingProps, ChildrenProps {
   dialogId: string;

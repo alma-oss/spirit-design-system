@@ -1,8 +1,9 @@
 import { type ElementType } from 'react';
 import {
   type ChildrenProps,
+  type PolymorphicComponentProps,
+  type PolymorphicRef,
   type SpacingProp,
-  type SpiritPolymorphicElementPropsWithoutRef,
   type StyleProps,
 } from './shared';
 
@@ -17,28 +18,26 @@ export interface StackBaseProps extends ChildrenProps, SpacingProp, StyleProps {
   hasStartDivider?: boolean;
 }
 
-export type StackProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the stack, e.g. 'div'.
-   *
-   * @default 'div'
-   */
-  elementType?: E;
-} & StackBaseProps;
+export type StackProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, StackBaseProps>;
 
-export type SpiritStackProps<E extends ElementType = 'div'> = StackProps<E> &
-  SpiritPolymorphicElementPropsWithoutRef<E, StackProps<E>>;
+/** @deprecated Use StackProps instead */
+export type SpiritStackProps<E extends ElementType = 'div'> = StackProps<E>;
+
+/**
+ * @internal
+ * Helper type to get the correct ref type for a Stack component
+ */
+export type StackRef<E extends ElementType = 'div'> = PolymorphicRef<E>;
 
 export interface StackItemBaseProps extends ChildrenProps, StyleProps {}
 
-export type StackItemProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the stack item, e.g. 'div'.
-   *
-   * @default 'div'
-   */
-  elementType?: E;
-} & StackItemBaseProps;
+export type StackItemProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, StackItemBaseProps>;
 
-export type SpiritStackItemProps<E extends ElementType = 'div'> = StackItemProps<E> &
-  SpiritPolymorphicElementPropsWithoutRef<E, StackItemProps<E>>;
+/** @deprecated Use StackItemProps instead */
+export type SpiritStackItemProps<E extends ElementType = 'div'> = StackItemProps<E>;
+
+/**
+ * @internal
+ * Helper type to get the correct ref type for a StackItem component
+ */
+export type StackItemRef<E extends ElementType = 'div'> = PolymorphicRef<E>;

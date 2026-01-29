@@ -8,6 +8,7 @@ import {
   type PropsWithChildren,
 } from 'react';
 import { type OverloadStyleProps } from './style';
+import { type PolymorphicRef } from './polymorphic';
 
 type ElementTypeProp<E extends ElementType> = {
   elementType?: E;
@@ -68,13 +69,12 @@ export type SpiritPolymorphicElementPropsWithoutRef<E extends ElementType, P> = 
   ComponentPropsWithoutRef<E>,
   keyof P
 >;
+
 /**
- * Type React's forwarded ref with `PolymorphicRef` to allow generic `elementType` to be strongly typed, e.g. component allows switching of elements
- * Uses DefaultElementOf to handle generic components with default element markers
- *
- * @see https://www.freecodecamp.org/news/build-strongly-typed-polymorphic-components-with-react-and-typescript/
+ * @deprecated Use `PolymorphicRef` from './polymorphic' instead.
+ * This type is kept for backward compatibility but should not be used in new code.
  */
-export type PolymorphicRef<C extends ElementType> = ComponentPropsWithRef<DefaultElementOf<C>>['ref'];
+type PolymorphicRefDeprecated<C extends ElementType> = ComponentPropsWithRef<DefaultElementOf<C>>['ref'];
 
 export type SpiritElementBaseProps = SpiritDetailedHTMLProps<HTMLElement>;
 export type SpiritAnchorElementBaseProps = SpiritCombinedHTMLProps<HTMLButtonElement>;

@@ -5,19 +5,7 @@ import { type SpacingCSSProperties, type SpiritStackProps } from '../../types';
 
 interface StackCSSProperties extends SpacingCSSProperties {}
 
-export interface StackStyles {
-  /** className props */
-  classProps: {
-    root: string;
-    item: string;
-  };
-  /** props to be passed to the element */
-  props: SpiritStackProps;
-  /** Style props for the element */
-  styleProps: StackCSSProperties;
-}
-
-export function useStackStyleProps<T extends ElementType = 'div'>(props: SpiritStackProps<T>): StackStyles {
+export function useStackStyleProps<T extends ElementType = 'div'>(props: SpiritStackProps<T>) {
   const { hasEndDivider, hasIntermediateDividers, hasSpacing, hasStartDivider, spacing, ...restProps } = props;
 
   const StackClass = useClassNamePrefix('Stack');

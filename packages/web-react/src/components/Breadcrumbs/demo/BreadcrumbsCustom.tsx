@@ -46,7 +46,7 @@ const BreadcrumbsCustom = () => {
             )}
             <li className="d-none d-tablet-flex">
               {index !== 0 && <Icon name="chevron-right" />}
-              <Link href={item.url} {...linkParams}>
+              <Link href={item.url} {...linkParams} underlined={linkParams.underlined as 'hover' | 'always' | 'never' | undefined}>
                 {item.title}
               </Link>
             </li>

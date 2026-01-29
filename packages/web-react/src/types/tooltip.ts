@@ -4,7 +4,8 @@ import type {
   ChildrenProps,
   ClickEvent,
   ElementTypeProp,
-  SpiritPolymorphicElementPropsWithRef,
+  PolymorphicComponentProps,
+  PolymorphicRef,
   StyleProps,
   TransferProps,
 } from './shared';
@@ -46,25 +47,28 @@ export interface BaseTooltipProps extends ChildrenProps, StyleProps {
   placement?: Placement;
 }
 
-export interface TooltipProps<E extends ElementType> extends BaseTooltipProps, TooltipHandlingProps {
-  /**
-   * The HTML element or React element used to render the plan, e.g. 'div', 'a', or `RouterLink`.
-   *
-   * @default 'div'
-   */
-  elementType?: E | JSXElementConstructor<unknown>;
+export interface TooltipCustomProps extends TooltipHandlingProps {
+  enableFlipping?: boolean;
+  enableFlippingCrossAxis?: boolean;
+  enableShifting?: boolean;
+  enableSizing?: boolean;
+  flipFallbackAxisSideDirection?: 'none' | 'start' | 'end';
+  flipFallbackPlacements?: Placement | Placement[];
+  isFocusableOnHover?: boolean;
+  positionStrategy?: Strategy;
+  trigger?: TooltipTriggerType[];
 }
 
-export type SpiritTooltipProps<E extends ElementType = 'div'> = TooltipProps<E> &
-  SpiritPolymorphicElementPropsWithRef<E, TooltipProps<E>> &
-  ChildrenProps & {
-    enableFlipping?: boolean;
-    enableFlippingCrossAxis?: boolean;
-    enableShifting?: boolean;
-    enableSizing?: boolean;
-    flipFallbackAxisSideDirection?: 'none' | 'start' | 'end';
-    flipFallbackPlacements?: Placement | Placement[];
-    isFocusableOnHover?: boolean;
-    positionStrategy?: Strategy;
-    trigger?: TooltipTriggerType[];
-  };
+export type TooltipProps<E extends ElementType = 'div'> = PolymorphicComponentProps<
+  E | JSXElementConstructor<unknown>,
+  BaseTooltipProps & TooltipCustomProps
+>;
+
+/** @deprecated Use TooltipProps instead */
+export type SpiritTooltipProps<E extends ElementType = 'div'> = TooltipProps<E>;
+
+/**
+ * @internal
+ * Helper type to get the correct ref type for a Tooltip component
+ */
+export type TooltipRef<E extends ElementType = 'div'> = PolymorphicRef<E>;

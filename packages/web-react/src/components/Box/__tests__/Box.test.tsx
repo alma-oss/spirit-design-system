@@ -115,7 +115,7 @@ describe('Box', () => {
 
   elementTypePropsTest(Box);
 
-  staticPropsTest(Box, 'Box', 'div');
+  staticPropsTest(Box, 'Box');
 
   it('should render children', () => {
     render(<Box>Content</Box>);

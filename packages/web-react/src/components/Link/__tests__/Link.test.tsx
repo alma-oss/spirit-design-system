@@ -34,8 +34,8 @@ describe('Link', () => {
       <Link
         href="/"
         color={color as LinkColorsDictionaryType<string>}
-        underlined={underlined}
-        isDisabled={isDisabled}
+        underlined={underlined as 'hover' | 'always' | 'never' | undefined}
+        isDisabled={isDisabled as boolean | undefined}
       />,
     );
 

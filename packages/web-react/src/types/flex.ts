@@ -4,20 +4,12 @@ import {
   type AlignmentYExtendedDictionaryType,
   type ChildrenProps,
   type DirectionExtendedDictionaryType,
+  type PolymorphicComponentProps,
+  type PolymorphicRef,
   type SingleOrResponsive,
   type SpaceToken,
-  type SpiritPolymorphicElementPropsWithRef,
   type StyleProps,
 } from './shared';
-
-export interface FlexElementTypeProps<T extends ElementType = 'div'> {
-  /**
-   * The HTML element or React element used to render the Flex, e.g. 'div'.
-   *
-   * @default 'div'
-   */
-  elementType?: T | JSXElementConstructor<unknown>;
-}
 
 /**
  * @deprecated "row" and "column" values will be replaced in the next major version. Please use "horizontal" and "vertical" instead.
@@ -46,9 +38,18 @@ export interface FlexCustomLayoutProps {
   spacingY?: SingleOrResponsive<SpaceToken>;
 }
 
-export interface FlexProps<T extends ElementType = 'div'> extends FlexElementTypeProps<T>, FlexCustomLayoutProps {}
+export interface FlexBaseProps extends FlexCustomLayoutProps, ChildrenProps, StyleProps {}
 
-export type SpiritFlexProps<T extends ElementType = 'div'> = FlexProps<T> &
-  ChildrenProps &
-  StyleProps &
-  SpiritPolymorphicElementPropsWithRef<T, FlexProps<T>>;
+export type FlexProps<T extends ElementType = 'div'> = PolymorphicComponentProps<
+  T | JSXElementConstructor<unknown>,
+  FlexBaseProps
+>;
+
+/** @deprecated Use FlexProps instead */
+export type SpiritFlexProps<T extends ElementType = 'div'> = FlexProps<T>;
+
+/**
+ * @internal
+ * Helper type to get the correct ref type for a Flex component
+ */
+export type FlexRef<T extends ElementType = 'div'> = PolymorphicRef<T>;
