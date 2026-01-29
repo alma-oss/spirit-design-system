@@ -15,4 +15,4 @@ This directory contains all the decisions we've made for this design system as a
 Decisions here are never final.
 But these documents should serve as a good way for someone to come up to speed on why certain decisions were made.
 
-[opinions-image]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/decisions/opinions.png?raw=true
+[opinions-image]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/opinions.png?raw=true

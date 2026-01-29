@@ -111,5 +111,5 @@ take care of the text length and case. The rest is handled by the component.
 using an abbreviation. The `aria-hidden` attribute is set on the text span, because the `aria-label`
 attribute is set on the container and the abbreviation is not useful for screen readers.
 
-[dictionary-size]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
-[icon-documentation]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web/src/scss/components/Icon
+[dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
+[icon-documentation]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Icon

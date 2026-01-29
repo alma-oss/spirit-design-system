@@ -231,7 +231,7 @@ myTooltipEl.addEventListener('hidden.tooltip', () => {
 tooltip.hide();
 ```
 
-[dictionary-placement]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/DICTIONARIES.md#placement
+[dictionary-placement]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#placement
 [floating-ui-flip-cross-axis]: https://floating-ui.com/docs/flip#crossaxis
 [floating-ui-flip-fallback-axis-side-direction]: https://floating-ui.com/docs/flip#fallbackaxissidedirection
 [floating-ui-flip-fallback-placements]: https://floating-ui.com/docs/flip#fallbackplacements

@@ -55,4 +55,4 @@ If you have questions about this security policy, please contact us at **securit
 **Policy Version**: 1.0
 
 [alma-vulnerability-disclosure]: https://www.almacareer.com/vulnerability-disclosure
-[spirit-design-system-repository]: https://github.com/lmc-eu/spirit-design-system
+[spirit-design-system-repository]: https://github.com/alma-oss/spirit-design-system

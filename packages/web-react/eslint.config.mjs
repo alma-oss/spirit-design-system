@@ -78,7 +78,7 @@ export default [
       'react/display-name': 'off',
 
       /* start: allow UNSTABLE_ and UNSAFE_ prefix in component and prop names */
-      // @see: { @link https://github.com/lmc-eu/spirit-design-system/blob/main/docs/decisions/006-experimental-code.md }
+      // @see: { @link https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/006-experimental-code.md }
 
       // enforce PascalCase for user-defined JSX components
       // @see: { @link https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md }

@@ -275,8 +275,8 @@ number of grid rows, use the `rows` prop.
 
 For more information about the implementation, see the [PricingPlan][pricing-plan-web-documentation] web documentation.
 
-[matrix-documentation]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Matrix/README.md
-[pricing-plan-web-documentation]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web/src/scss/components/PricingPlan/README.md#implementation-notes
-[readme-additional-attributes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
-[readme-escape-hatches]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
-[readme-style-props]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[matrix-documentation]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Matrix/README.md
+[pricing-plan-web-documentation]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/PricingPlan/README.md#implementation-notes
+[readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

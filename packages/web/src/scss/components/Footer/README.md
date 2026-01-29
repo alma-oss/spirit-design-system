@@ -289,10 +289,10 @@ Responsive values can be defined using the `tablet` and `desktop` infixes.
 </footer>
 ```
 
-[button]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md
-[divider]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Divider/README.md
-[flex]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Flex/README.md
-[grid]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
-[product-logo]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/ProductLogo/README.md
-[select]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Select/README.md
-[stack]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
+[button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md
+[divider]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Divider/README.md
+[flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Flex/README.md
+[grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
+[product-logo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ProductLogo/README.md
+[select]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Select/README.md
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md

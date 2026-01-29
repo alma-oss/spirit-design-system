@@ -306,15 +306,15 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
-[buttonlink]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/ButtonLink/README.md
-[dictionary-alignment]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/DICTIONARIES.md#alignment
-[dictionary-background-color]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#color
-[divider]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Divider/README.md
-[flex]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Flex/README.md
-[grid]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
-[product-logo]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/ProductLogo/README.md
-[readme-additional-attributes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
-[readme-escape-hatches]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
-[readme-style-props]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#style-props
-[select]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Select/README.md
-[stack]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md
+[buttonlink]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ButtonLink/README.md
+[dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#alignment
+[dictionary-background-color]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#color
+[divider]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Divider/README.md
+[flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Flex/README.md
+[grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
+[product-logo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ProductLogo/README.md
+[readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[select]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Select/README.md
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md

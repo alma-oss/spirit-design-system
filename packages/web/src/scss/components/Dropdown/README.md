@@ -343,6 +343,6 @@ myDropdownEl.addEventListener('hidden.dropdown', () => {
 dropdown.hide();
 ```
 
-[dictionary-alignment]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/DICTIONARIES.md#alignment
-[dictionary-placement]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/DICTIONARIES.md#placement
-[item]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web/src/scss/components/Item/README.md
+[dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#alignment
+[dictionary-placement]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#placement
+[item]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Item/README.md

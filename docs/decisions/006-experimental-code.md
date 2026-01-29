@@ -39,4 +39,4 @@ Over time it becomes apparent an experimental API has stabilized and suits the n
 
 Note: Details on how to document experimental components and exports prefixed with `UNSTABLE_` can be found in the [documentation][docs-experimental-code].
 
-[docs-experimental-code]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/contribution/experimental-code.md
+[docs-experimental-code]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/experimental-code.md

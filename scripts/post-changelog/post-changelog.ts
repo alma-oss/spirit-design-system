@@ -153,7 +153,7 @@ function format(str: string, packageName: string, prefix: string = '@alma-oss') 
     .replace('Code Refactoring', '🛠️ Code Refactoring')
     .replace('Chores', '🔨 Chores')
     .replace('Styles', '💅 Styles')
-    .replaceAll('https://github.com/lmc-eu/spirit-design-system/issues/', 'https://jira.almacareer.tech/browse/');
+    .replaceAll('https://github.com/alma-oss/spirit-design-system/issues/', 'https://jira.almacareer.tech/browse/');
 
   return output;
 }

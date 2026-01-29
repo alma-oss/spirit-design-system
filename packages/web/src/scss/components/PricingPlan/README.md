@@ -234,6 +234,6 @@ spacing because `row-gap` is applied even for empty grid rows. Instead, to
 prevent the empty rows from expanding the component vertically, we use `margin`
 to separate individual content rows.
 
-[matrix]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Matrix/README.md
+[matrix]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Matrix/README.md
 [mdn-grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout
 [mdn-subgrid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Subgrid

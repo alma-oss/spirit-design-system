@@ -180,6 +180,6 @@ Use the composition mentioned above to create the layout you need.
 </header>
 ```
 
-[web-container]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
-[web-flex]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Flex/README.md
-[web-navigation]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Navigation/README.md
+[web-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[web-flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Flex/README.md
+[web-navigation]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Navigation/README.md

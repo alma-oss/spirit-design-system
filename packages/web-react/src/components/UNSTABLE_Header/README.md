@@ -185,9 +185,9 @@ Use the composition mentioned above to create the layout you need.
 </UNSTABLE_Header>
 ```
 
-[readme-additional-attributes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
-[readme-escape-hatches]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
-[readme-style-props]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#style-props
-[web-react-container]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Container/README.md
-[web-react-flex]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Flex/README.md
-[web-react-navigation]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/src/components/Navigation/README.md
+[readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[web-react-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Container/README.md
+[web-react-flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Flex/README.md
+[web-react-navigation]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Navigation/README.md

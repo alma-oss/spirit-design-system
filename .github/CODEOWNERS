@@ -1,22 +1,22 @@
 # Code owners for spirit-design-system
 # https://help.github.com/en/articles/about-code-owners
 
-* @lmc-eu/spirit-design-system
+* @alma-oss/spirit-design-system
 
 # Figma Code Connect files
-**/figma/**                      @literat @crishpeen @dlouhak @lmc-eu/spirit-design-system
-**/figma.*                       @literat @crishpeen @dlouhak @lmc-eu/spirit-design-system
+**/figma/**                      @literat @crishpeen @dlouhak @alma-oss/spirit-design-system
+**/figma.*                       @literat @crishpeen @dlouhak @alma-oss/spirit-design-system
 
 # Packages' owners
 
-/configs                          @literat @pavelklibani @lmc-eu/spirit-design-system
+/configs                          @literat @pavelklibani @alma-oss/spirit-design-system
 
-/exporters                        @literat @crishpeen @pavelklibani @lmc-eu/spirit-design-system
+/exporters                        @literat @crishpeen @pavelklibani @alma-oss/spirit-design-system
 
-/packages/analytics               @literat @crishpeen @pavelklibani @lmc-eu/spirit-design-system
-/packages/codemods                @literat @adamkudrna @crishpeen @pavelklibani @dlouhak @lmc-eu/spirit-design-system
-/packages/common                  @literat @pavelklibani @lmc-eu/spirit-design-system
-/packages/design-tokens           @literat @adamkudrna @crishpeen @pavelklibani @katerinarehorkova @dlouhak @lmc-eu/spirit-design-system
-/packages/icons                   @literat @adamkudrna @crishpeen @dlouhak @lmc-eu/spirit-design-system
-/packages/web                     @literat @adamkudrna @crishpeen @pavelklibani @katerinarehorkova @dlouhak @lmc-eu/spirit-design-system
-/packages/web-react               @literat @pavelklibani @katerinarehorkova @dlouhak @lmc-eu/spirit-design-system
+/packages/analytics               @literat @crishpeen @pavelklibani @alma-oss/spirit-design-system
+/packages/codemods                @literat @adamkudrna @crishpeen @pavelklibani @dlouhak @alma-oss/spirit-design-system
+/packages/common                  @literat @pavelklibani @alma-oss/spirit-design-system
+/packages/design-tokens           @literat @adamkudrna @crishpeen @pavelklibani @katerinarehorkova @dlouhak @alma-oss/spirit-design-system
+/packages/icons                   @literat @adamkudrna @crishpeen @dlouhak @alma-oss/spirit-design-system
+/packages/web                     @literat @adamkudrna @crishpeen @pavelklibani @katerinarehorkova @dlouhak @alma-oss/spirit-design-system
+/packages/web-react               @literat @pavelklibani @katerinarehorkova @dlouhak @alma-oss/spirit-design-system

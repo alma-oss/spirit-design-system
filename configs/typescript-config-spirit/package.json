@@ -5,10 +5,10 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/lmc-eu/spirit-design-system.git",
+    "url": "https://github.com/alma-oss/spirit-design-system.git",
     "directory": "configs/typescript-config-spirit"
   },
-  "bugs": "https://github.com/lmc-eu/spirit-design-system/issues",
+  "bugs": "https://github.com/alma-oss/spirit-design-system/issues",
   "keywords": [
     "alma",
     "career",

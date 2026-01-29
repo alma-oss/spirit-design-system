@@ -69,5 +69,5 @@ The property which sets a new block formatting context to Container root element
 
 [What are deprecations?][readme-deprecations]
 
-[readme-feature-flags]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web/README.md#feature-flags
-[readme-deprecations]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/web/README.md#deprecations
+[readme-feature-flags]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/README.md#feature-flags
+[readme-deprecations]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/README.md#deprecations

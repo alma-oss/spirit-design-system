@@ -125,4 +125,4 @@ Replace the `inverted` variant with `neutral`:
 
 Please refer back to this guide or reach out to our team if you encounter any issues during migration.
 
-[migration-guide-web]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/migrations/web/migration-v3.md
+[migration-guide-web]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v3.md

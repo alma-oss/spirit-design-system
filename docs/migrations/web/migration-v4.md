@@ -40,4 +40,4 @@ Also update any other imports or references to the package:
 
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
 
-[migration-guide-design-tokens]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/migrations/design-tokens/migration-v4.md
+[migration-guide-design-tokens]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/design-tokens/migration-v4.md

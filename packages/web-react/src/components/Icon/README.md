@@ -94,11 +94,11 @@ and [escape hatches][readme-escape-hatches].
 For more details about Icons see [Spirit Icons][spirit-icons] package.
 
 [html-react-parser-package]: https://www.npmjs.com/package/html-react-parser
-[icons-package]: https://github.com/lmc-eu/spirit-design-system/tree/main/packages/icons
+[icons-package]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/icons
 [npm]: https://www.npmjs.com/
-[readme-additional-attributes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
-[readme-escape-hatches]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
-[readme-generated-types]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
-[readme-style-props]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#style-props
-[spirit-icons]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/icons/README.md
+[readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
+[readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[spirit-icons]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/icons/README.md
 [yarn]: https://yarnpkg.com/

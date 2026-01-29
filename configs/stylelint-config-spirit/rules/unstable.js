@@ -1,7 +1,7 @@
 export default {
   rules: {
     // Allow UNSTABLE_Component classnames
-    // @see: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/contribution/experimental-code.md
+    // @see: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/experimental-code.md
     'selector-class-pattern': [
       '(^(UNSTABLE_)?([A-Z][a-zA-Z0-9]*)((--|__)[a-z][a-zA-Z0-9]*)*$)|(^([a-z][a-z0-9]*)(-[a-z0-9]+)*$)',
       {

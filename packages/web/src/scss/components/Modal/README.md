@@ -451,9 +451,9 @@ Please consult the [main package README][web-readme] for how to include JavaScri
 
 Or feel free to write controlling scripts yourself.
 
-[dictionary-breakpoint]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
+[dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [mdn-dialog]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 [mdn-dialog-form]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#usage_notes
-[scroll-view]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/ScrollView/README.md
-[web-readme]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md
-[dictionary-alignment]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
+[scroll-view]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ScrollView/README.md
+[web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md
+[dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment

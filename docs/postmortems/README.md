@@ -22,4 +22,4 @@ topic.
 
 [learning-from-failure]: https://landing.google.com/sre/sre-book/chapters/postmortem-culture/
 [sre-book]: https://landing.google.com/sre/sre-book/chapters/postmortem/
-[postmortem-template]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/postmortems/0000-00-00-template.md
+[postmortem-template]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/postmortems/0000-00-00-template.md

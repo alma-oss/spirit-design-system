@@ -31,7 +31,7 @@ export default [
 
       // Exclude JSON files from being linted
       // @TODO: use `eslint-plugin-jsonc` to lint JSON files properly
-      // @see: https://github.com/lmc-eu/spirit-design-system/issues/2243
+      // @see: https://github.com/alma-oss/spirit-design-system/issues/2243
       '**/*.json',
 
       // Unformatted fixtures

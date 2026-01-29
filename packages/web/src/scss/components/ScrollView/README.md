@@ -281,6 +281,6 @@ See [WAI Scrollable content guidelines][wai-scrollable-content] for more informa
 | `getInstance`         | _Static_ method which allows you to get the ScrollView instance associated with a DOM element.                                                    |
 | `getOrCreateInstance` | _Static_ method which allows you to get the ScrollView instance associated with a DOM element, or create a new one in case it wasn’t initialized. |
 
-[container]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
 [wai-scrollable-content]: https://www.w3.org/WAI/standards-guidelines/act/rules/0ssw9k/
-[web-readme]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md
+[web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

@@ -209,6 +209,6 @@ Filled</textarea
 
 👉 Please note that responsive border radius is defined by design specifications.
 
-[web-readme]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md
-[prefixed]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
-[dictionary-validation]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md
+[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation

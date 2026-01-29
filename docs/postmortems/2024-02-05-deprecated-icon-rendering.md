@@ -124,8 +124,8 @@ postmortem -->
 Commit introducing the problematic deprecation warning: [79f9f6f][commit-79f9f6f]
 PR containing the problematic deprecation warning: [#1200][pr-1200]
 
-[commit-79f9f6f]: https://github.com/lmc-eu/spirit-design-system/commit/79f9f6f207c87296c0c5af1d6c521f48f73206eb
+[commit-79f9f6f]: https://github.com/alma-oss/spirit-design-system/commit/79f9f6f207c87296c0c5af1d6c521f48f73206eb
 [issue-1145]: https://jira.almacareer.tech/browse/DS-1145
-[pr-1200]: https://github.com/lmc-eu/spirit-design-system/pull/1200
-[pr-1266]: https://github.com/lmc-eu/spirit-design-system/pull/1266
-[pr-1272]: https://github.com/lmc-eu/spirit-design-system/pull/1272
+[pr-1200]: https://github.com/alma-oss/spirit-design-system/pull/1200
+[pr-1266]: https://github.com/alma-oss/spirit-design-system/pull/1266
+[pr-1272]: https://github.com/alma-oss/spirit-design-system/pull/1272

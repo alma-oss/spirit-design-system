@@ -12,5 +12,5 @@ Introducing lists containing deprecations and feature flags to be removed in the
 
 - [Deprecations][web-react-deprecations]
 
-[web-deprecations]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/DEPRECATIONS.md
-[web-react-deprecations]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/DEPRECATIONS.md
+[web-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/DEPRECATIONS.md
+[web-react-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/DEPRECATIONS.md

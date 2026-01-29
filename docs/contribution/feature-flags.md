@@ -64,4 +64,4 @@ Example:
 </body>
 ```
 
-[feature-flag-documentation]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/contribution/experimental-code.md#feature-flags
+[feature-flag-documentation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/experimental-code.md#feature-flags

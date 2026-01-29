@@ -307,7 +307,7 @@ Then the tests will be run against the Netlify deployment on every change pushed
 
 When the tests fail, there will be a comment in the PR with a link to the report and a message about the failure will be raised in the Slack channel `#spirit-design-system-notifications_en`.
 You can also find the report URL in the GitHub Actions run under the `Run actions/upload-artifact` section.
-Look for `Artifact download URL: https://github.com/lmc-eu/spirit-design-system/actions/runs/<run-id>/artifacts/<artifact-id>`.
+Look for `Artifact download URL: https://github.com/alma-oss/spirit-design-system/actions/runs/<run-id>/artifacts/<artifact-id>`.
 
 ⚠️ Currently we do not deploy the Web Twig package to any environment, so you can only test it locally.
 
@@ -402,9 +402,9 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [act-article]: https://www.freecodecamp.org/news/how-to-run-github-actions-locally/
 [conventional-commits]: https://www.conventionalcommits.org
 [commitlint-config]: https://github.com/lmc-eu/code-quality-tools/tree/main/packages/commitlint-config
-[decisions]: https://github.com/lmc-eu/spirit-design-system/blob/main/docs/decisions/README.md
-[developer-handbook]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/contribution/development.md
-[dictionary]: https://github.com/lmc-eu/spirit-design-system/tree/main/docs/DICTIONARIES.md
+[decisions]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/README.md
+[developer-handbook]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/development.md
+[dictionary]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md
 [docker]: https://www.docker.com/
 [eslint]: https://eslint.org/
 [jest]: https://jestjs.io/
@@ -413,7 +413,7 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [packages]: packages/
 [playwright]: https://playwright.dev/
 [prettier]: https://prettier.io/
-[publish-action]: https://github.com/lmc-eu/spirit-design-system/actions/workflows/publish.yaml
+[publish-action]: https://github.com/alma-oss/spirit-design-system/actions/workflows/publish.yaml
 [release-notes-template]: https://almamedia.slack.com/docs/T0325RBAD/F08D6U6EAKH
 [typescript]: https://www.typescriptlang.org/
 [figma-access-token]: https://help.figma.com/hc/en-us/articles/8085703771159-Manage-personal-access-tokens
@@ -421,4 +421,4 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [figma-code-connect]: https://developers.figma.com/docs/code-connect/
 [figma-dev-mode]: https://help.figma.com/hc/en-us/articles/15023124644247-Guide-to-Dev-Mode
 [figma-react-guide]: https://developers.figma.com/docs/code-connect/react/
-[version-action]: https://github.com/lmc-eu/spirit-design-system/actions/workflows/version.yaml
+[version-action]: https://github.com/alma-oss/spirit-design-system/actions/workflows/version.yaml
