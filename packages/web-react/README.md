@@ -59,7 +59,22 @@ import { ClassNamePrefixProvider } from '@alma-oss/spirit-web-react/context/Clas
 
 If you want to use client-side routing with Link and Pagination components, you can use the `RouterProvider` context to provide a router navigation function. When a router is provided, internal links will use client-side navigation instead of full page reloads.
 
-The router must provide a `navigate` function that accepts a path string. External links (starting with `http://` or `https://`), links with `target="_blank"`, and disabled links will always use standard anchor behavior.
+The router accepts the following props:
+
+- `navigate` - A function that accepts a path string and optional router options
+- `useHref` - An optional function that transforms hrefs (e.g., prepending a base path)
+
+External links (starting with `http://` or `https://`), links with `target="_blank"`, and disabled links will always use standard anchor behavior.
+
+#### Router Options
+
+All link components accept a `routerOptions` prop, which is an object that is passed through to the client side router's `navigate` function as the second argument. This can be used to control any router-specific behaviors, such as scrolling, replacing instead of pushing to the history, etc.
+
+```jsx
+<Link href="/login" routerOptions={{ replace: true }}>
+  Login
+</Link>
+```
 
 #### Next.js App Router
 
@@ -73,9 +88,29 @@ const MyComponent = () => {
   const router = useRouter();
 
   return (
-    <RouterProvider value={{ navigate: router.push }}>
+    <RouterProvider navigate={router.push}>
       <Link href="/about">About</Link>
       <Link href="/contact">Contact</Link>
+    </RouterProvider>
+  );
+};
+```
+
+If you are using the Next.js [basePath](https://nextjs.org/docs/app/api-reference/next-config-js/basePath) setting, you'll need to provide a custom `useHref` function to prepend it to the href for all links:
+
+```jsx
+'use client';
+
+import { Link, RouterProvider } from '@alma-oss/spirit-web-react';
+import { useRouter } from 'next/navigation';
+
+const MyComponent = () => {
+  const router = useRouter();
+  const useHref = (href: string) => process.env.BASE_PATH + href;
+
+  return (
+    <RouterProvider navigate={router.push} useHref={useHref}>
+      <Link href="/about">About</Link>
     </RouterProvider>
   );
 };
@@ -91,7 +126,7 @@ const MyComponent = () => {
   const router = useRouter();
 
   return (
-    <RouterProvider value={{ navigate: router.push }}>
+    <RouterProvider navigate={router.push}>
       <Link href="/about">About</Link>
       <Link href="/contact">Contact</Link>
     </RouterProvider>
@@ -99,19 +134,36 @@ const MyComponent = () => {
 };
 ```
 
-#### Other Routing Libraries
-
-You can use RouterProvider with any routing library that provides a navigation function:
+#### React Router
 
 ```jsx
 import { Link, RouterProvider } from '@alma-oss/spirit-web-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useHref } from 'react-router-dom';
 
 const MyComponent = () => {
   const navigate = useNavigate();
 
   return (
-    <RouterProvider value={{ navigate }}>
+    <RouterProvider navigate={navigate} useHref={useHref}>
+      <Link href="/about">About</Link>
+    </RouterProvider>
+  );
+};
+```
+
+#### Remix
+
+Remix uses React Router under the hood, so the same `useNavigate` and `useHref` hooks work in Remix apps:
+
+```jsx
+import { Link, RouterProvider } from '@alma-oss/spirit-web-react';
+import { useNavigate, useHref } from '@remix-run/react';
+
+const MyComponent = () => {
+  const navigate = useNavigate();
+
+  return (
+    <RouterProvider navigate={navigate} useHref={useHref}>
       <Link href="/about">About</Link>
     </RouterProvider>
   );
