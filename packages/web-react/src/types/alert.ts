@@ -1,5 +1,7 @@
 import { type ElementType } from 'react';
-import type { ChildrenProps, EmotionColorNamesType, StyleProps, TransferProps } from './shared';
+import type { ChildrenProps, EmotionColorNamesType, SpiritPolymorphicElementPropsWithRef, StyleProps } from './shared';
+
+export interface AlertBaseProps extends ChildrenProps, StyleProps {}
 
 export interface AriaAlertElementTypeProps<T extends ElementType = 'div'> {
   /**
@@ -10,11 +12,9 @@ export interface AriaAlertElementTypeProps<T extends ElementType = 'div'> {
   elementType?: T;
 }
 
-export interface AlertProps extends ChildrenProps, StyleProps, TransferProps {}
-
-export interface SpiritAlertProps<T extends ElementType = 'div', C = void>
+export interface AlertProps<T extends ElementType = 'div', C = void>
   extends AriaAlertElementTypeProps<T>,
-    AlertProps {
+    AlertBaseProps {
   /** The color of the alert. */
   color?: EmotionColorNamesType | C;
   /** Icon used in Alert. */
@@ -22,3 +22,6 @@ export interface SpiritAlertProps<T extends ElementType = 'div', C = void>
   /** Whether the alert should be centered. */
   isCentered?: boolean;
 }
+
+export type SpiritAlertProps<T extends ElementType = 'div', C = void> = AlertProps<T, C> &
+  SpiritPolymorphicElementPropsWithRef<T, AlertProps<T, C>>;
