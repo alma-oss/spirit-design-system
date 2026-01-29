@@ -1,9 +1,10 @@
 'use client';
 
 import React, { type ElementType, type ForwardedRef, forwardRef } from 'react';
+import { useRouter } from '../../context/RouterContext';
 import { useStyleProps } from '../../hooks';
-import { type SpiritButtonLinkProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { type ClickEvent, type SpiritButtonLinkProps } from '../../types';
+import { handleLinkClick, mergeStyleProps } from '../../utils';
 import { Spinner } from '../Spinner';
 import { useButtonLinkProps } from './useButtonLinkProps';
 import { useButtonLinkStyleProps } from './useButtonLinkStyleProps';
@@ -34,14 +35,25 @@ const _ButtonLink = <T extends ElementType = 'a', C = void, S = void>(
     children,
     ...restProps
   } = propsWithDefaults;
+  const { href, target, isDisabled, routerOptions, onClick } = restProps;
+  const router = useRouter();
 
   const { buttonLinkProps } = useButtonLinkProps(propsWithDefaults);
   const { classProps, props: modifiedProps } = useButtonLinkStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
 
+  const handleClick = handleLinkClick({
+    router,
+    href,
+    isDisabled,
+    target,
+    routerOptions,
+    onClick: onClick as ((event: ClickEvent) => void) | undefined,
+  });
+
   return (
-    <ElementTag {...otherProps} {...buttonLinkProps} {...mergedStyleProps} ref={ref}>
+    <ElementTag {...otherProps} {...buttonLinkProps} {...mergedStyleProps} href={href} onClick={handleClick} ref={ref}>
       {children}
       {restProps.isLoading && <Spinner />}
     </ElementTag>

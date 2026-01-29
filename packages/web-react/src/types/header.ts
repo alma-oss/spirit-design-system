@@ -2,6 +2,7 @@ import { type ElementType } from 'react';
 import {
   type ChildrenProps,
   type ClickEvent,
+  type RouterLinkProps,
   type SpiritButtonElementProps,
   type SpiritDialogElementProps,
   type SpiritElementProps,
@@ -51,7 +52,7 @@ export interface HeaderDialogCloseButtonProps extends Omit<SpiritButtonElementPr
   label?: string;
 }
 
-export interface BaseHeaderDialogLinkProps extends ChildrenProps, StyleProps, TransferProps {
+export interface BaseHeaderDialogLinkProps extends ChildrenProps, StyleProps, TransferProps, RouterLinkProps {
   isCurrent?: boolean;
 }
 
@@ -73,7 +74,7 @@ export interface HeaderDialogNavItemProps extends SpiritLItemElementProps, Child
 
 export interface HeaderDialogTextProps extends SpiritSpanElementProps, ChildrenProps {}
 
-export interface HeaderLinkBaseProps extends ChildrenProps, StyleProps, TransferProps {
+export interface HeaderLinkBaseProps extends ChildrenProps, StyleProps, TransferProps, RouterLinkProps {
   isCurrent?: boolean;
 }
 

@@ -11,7 +11,8 @@ export interface LinkStyles<E extends ElementType = 'p'> {
 }
 
 export function useLinkStyleProps<E extends ElementType = 'a', T = void>(props: SpiritLinkProps<E, T>): LinkStyles<E> {
-  const { color, hasVisitedStyleAllowed, isDisabled, underlined, ...restProps } = props;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { color, hasVisitedStyleAllowed, isDisabled, underlined, routerOptions, ...restProps } = props;
 
   const linkClass = useClassNamePrefix('link');
   const linkColorClass = `${linkClass}-${color}`;
