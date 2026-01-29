@@ -9,7 +9,8 @@
   "sideEffects": false,
   "publishConfig": {
     "access": "public",
-    "directory": "dist"
+    "directory": "dist",
+    "provenance": true
   },
   "repository": {
     "type": "git",
