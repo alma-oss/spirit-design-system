@@ -5,6 +5,10 @@ The Hidden component controls responsive visibility without any visual styling. 
 ## Basic Usage
 
 ```jsx
+import { Hidden } from '@alma-oss/spirit-web-react';
+```
+
+```jsx
 <Hidden on="mobile">Desktop and tablet only</Hidden>
 ```
 
@@ -75,10 +79,10 @@ For example, add the `aria-label` attribute to the Button:
 
 ```jsx
 <Button aria-label="Edit">
+  <Icon name="edit" hideFrom="tablet" />
   <Hidden on="mobile" aria-hidden="true">
     Edit
   </Hidden>
-  <Icon name="edit" hideFrom="tablet" />
 </Button>
 ```
 
@@ -88,11 +92,11 @@ Alternatively, use the [VisuallyHidden][visually-hidden] component:
 
 ```jsx
 <Button>
+  <Icon name="edit" hideFrom="tablet" />
   <VisuallyHidden>Edit</VisuallyHidden>
   <Hidden on="mobile" aria-hidden="true">
     Edit
   </Hidden>
-  <Icon name="edit" hideFrom="tablet" />
 </Button>
 ```
 
