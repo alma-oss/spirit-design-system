@@ -68,7 +68,7 @@ jobs:
       - name: Get Playwright Version
         id: playwright-version
         run: |
-          PW_VERSION=$(node -p "require('./package.json').devDependencies['@playwright/test']")
+          PW_VERSION=$(jq -r '.devDependencies["@playwright/test"]' package.json)
           echo "version=$PW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Run Playwright tests
