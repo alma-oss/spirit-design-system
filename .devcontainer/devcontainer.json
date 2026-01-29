@@ -4,7 +4,7 @@
     "dockerfile": "Dockerfile"
   },
 
-  "postCreateCommand": "corepack install && yarn install && yarn playwright install chromium",
+  "postCreateCommand": "corepack enable && corepack install && yarn install && yarn playwright install --with-deps chromium",
   "postStartCommand": "sudo chown -R $(id -u):$(id -g) /workspace/node_modules /workspace/.yarn/cache",
 
   "appPort": ["3456:3456", "6006:6006", "9323:9323"],
@@ -29,7 +29,8 @@
     "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
     "source=${localWorkspaceFolderBasename}-yarn-cache,target=${containerWorkspaceFolder}/.yarn/cache,type=volume",
     "source=claude-code-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
-    "source=claude-code-config-${devcontainerId},target=/home/node/.claude,type=volume"
+    "source=claude-code-config-${devcontainerId},target=/home/node/.claude,type=volume",
+    "source=${localWorkspaceFolder}/.devcontainer/.zshrc,target=/home/node/.zshrc,type=bind"
   ],
 
   "containerEnv": {

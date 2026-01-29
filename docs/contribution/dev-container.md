@@ -9,6 +9,7 @@ This project supports [Dev Containers][dev-containers] for a consistent, contain
 - [Git](#git)
 - [Running E2E Tests](#running-e2e-tests)
 - [Using AI Tools](#using-ai-tools)
+- [Mounted Volumes](#mounted-volumes)
 
 ## Prerequisites
 
@@ -98,9 +99,46 @@ Each AI tool has its own authentication method. Refer to the tool's documentatio
 - [Open Code][open-code]
 - [Cursor][cursor]
 
+## Mounted Volumes
+
+The Dev Container uses [named Docker volumes][docker-volumes] for several directories instead of
+syncing them from the host filesystem:
+
+| Volume               | Purpose                   |
+| -------------------- | ------------------------- |
+| `node_modules`       | Project dependencies      |
+| `.yarn/cache`        | Yarn cache                |
+| `/commandhistory`    | Bash history persistence  |
+| `/home/node/.claude` | Claude Code configuration |
+
+The first two are critical for performance; the others provide convenience across container rebuilds.
+
+Additionally, `.devcontainer/.zshrc` is bind-mounted to `/home/node/.zshrc`. Unlike named volumes,
+this is a direct link to the host file — changes take effect immediately without rebuilding the
+container (just start a new shell or run `source ~/.zshrc`).
+
+**Why?**
+
+1. **Performance** — Keeping dependencies inside the Docker VM's filesystem avoids the significant
+   I/O overhead of Docker's filesystem sharing, especially on macOS and Windows.
+2. **Isolation** — The container's `node_modules` won't conflict with any on your host machine
+   (which might contain different platform-specific binaries).
+3. **Persistence** — Named volumes survive container rebuilds, so `yarn install` only runs when
+   dependencies actually change.
+
+**Tradeoffs:**
+
+- `node_modules` won't be visible in your host's file explorer or IDE file tree
+- To fully reset dependencies, you need to remove the Docker volumes (not just rebuild the container)
+
+> **Note:** If you see a `node_modules` folder on your host machine, it is **not** the one used by the
+> container. The container uses its own `node_modules` stored in a Docker volume. Any `node_modules`
+> on the host is ignored inside the container.
+
 [claude-code]: https://docs.anthropic.com/en/docs/claude-code
 [cursor]: https://www.cursor.com/
 [dev-containers]: https://containers.dev/
+[docker-volumes]: https://docs.docker.com/engine/storage/volumes/
 [docker]: https://www.docker.com/
 [github-cli]: https://cli.github.com/
 [open-code]: https://github.com/anthropics/opencode

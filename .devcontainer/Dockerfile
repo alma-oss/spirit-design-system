@@ -1,5 +1,5 @@
 # Use the bookworm distribution as a base image since it already contains many dependencies required by Playwright.
-FROM node:20-bookworm
+FROM node:20
 
 # Set `DEVCONTAINER` environment variable to help with orientation
 ENV DEVCONTAINER=true
@@ -9,16 +9,12 @@ ARG USERNAME=node
 
 # Install basic development tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  zsh \
   gh \
   jq \
-  nano \
   sudo \
   vim \
+  zsh \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install Playwright system dependencies (browsers are installed in postCreateCommand)
-RUN corepack enable && yarn dlx playwright install-deps chromium
 
 # Grant passwordless sudo to the non-root user
 RUN echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USERNAME \
@@ -45,7 +41,6 @@ USER $USERNAME
 
 # Set the default shell to zsh rather than sh
 ENV SHELL=/bin/zsh
-COPY .zshrc /home/$USERNAME/.zshrc
 
 # Install Claude Code
 RUN curl -fsSL https://claude.ai/install.sh | bash
