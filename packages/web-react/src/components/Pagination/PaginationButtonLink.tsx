@@ -1,9 +1,9 @@
 'use client';
 
 import React, { type ElementType, type ForwardedRef, forwardRef } from 'react';
-import { useRouterContext } from '../../context/RouterContext';
+import { useRouter } from '../../context/RouterContext';
 import { type ClickEvent, type SpiritPaginationButtonLinkProps } from '../../types';
-import { getRouterClickHandler } from '../../utils';
+import { handleLinkClick } from '../../utils';
 import { ButtonLink } from '../Button';
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
@@ -23,21 +23,23 @@ const _PaginationButtonLink = <E extends ElementType = 'a'>(
     accessibilityLabel = direction === 'previous'
       ? PAGINATION_PREVIOUS_LINK_DEFAULT_ACCESSIBILITY_LABEL
       : PAGINATION_NEXT_LINK_DEFAULT_ACCESSIBILITY_LABEL,
+    routerOptions,
     ...restProps
   } = props as unknown as SpiritPaginationButtonLinkProps;
   const { href, target, isDisabled, onClick } = restProps;
-  const router = useRouterContext();
+  const router = useRouter();
 
   const iconType = {
     previous: 'chevron-left',
     next: 'chevron-right',
   };
 
-  const handleClick = getRouterClickHandler({
+  const handleClick = handleLinkClick({
     router,
     href,
     isDisabled,
     target,
+    routerOptions,
     onClick: onClick as ((event: ClickEvent) => void) | undefined,
   });
 

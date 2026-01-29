@@ -1,9 +1,10 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
+import { useRouter } from '../../context/RouterContext';
 import { useStyleProps } from '../../hooks';
-import { type PolymorphicRef, type SpiritHeaderLinkProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { type ClickEvent, type PolymorphicRef, type SpiritHeaderLinkProps } from '../../types';
+import { handleLinkClick, mergeStyleProps } from '../../utils';
 import { useHeaderStyleProps } from './useHeaderStyleProps';
 
 /* We need an exception for components exported with forwardRef */
@@ -12,7 +13,9 @@ const _HeaderLink = <E extends ElementType = 'a'>(
   props: SpiritHeaderLinkProps<E>,
   ref: PolymorphicRef<E>,
 ): JSX.Element => {
-  const { elementType: ElementTag = 'a', children, isCurrent, ...restProps } = props;
+  const { elementType: ElementTag = 'a', children, isCurrent, routerOptions, ...restProps } = props;
+  const { href, target, onClick } = restProps;
+  const router = useRouter();
   const { classProps } = useHeaderStyleProps({ isCurrentLink: isCurrent });
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const mergedStyleProps = mergeStyleProps(ElementTag, {
@@ -21,8 +24,16 @@ const _HeaderLink = <E extends ElementType = 'a'>(
     otherProps,
   });
 
+  const handleClick = handleLinkClick({
+    router,
+    href,
+    target,
+    routerOptions,
+    onClick: onClick as ((event: ClickEvent) => void) | undefined,
+  });
+
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps} ref={ref}>
+    <ElementTag {...otherProps} {...mergedStyleProps} href={href} onClick={handleClick} ref={ref}>
       {children}
     </ElementTag>
   );
