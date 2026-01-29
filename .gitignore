@@ -50,5 +50,6 @@ nx-cloud.env
 !.yarn/versions
 
 # Dotenv
+.env
 .env.local.*
 !.env.local.*.example
