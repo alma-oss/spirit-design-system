@@ -22,9 +22,14 @@ const RouterDemo = () => {
       </p>
 
       <h3>Link with RouterProvider</h3>
-      <RouterProvider value={{ navigate: router.push }}>
+      <RouterProvider navigate={router.push}>
         <p>
           <Link href="/?demo=with-provider">Go with provider</Link>
+        </p>
+        <p>
+          <Link href="/?demo=with-options" routerOptions={{ scroll: false }}>
+            Go with provider (no scroll)
+          </Link>
         </p>
         <p>
           <Link href="https://example.com">External link (https)</Link>
