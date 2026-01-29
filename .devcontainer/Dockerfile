@@ -20,9 +20,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USERNAME \
   && chmod 0440 /etc/sudoers.d/$USERNAME
 
-# Ensure default user has access to /usr/local/share
+# Ensure default user has access to /usr/local/share and /usr/local/bin (for corepack symlinks)
 RUN mkdir -p /usr/local/share/npm-global && \
-  chown -R $USERNAME:$USERNAME /usr/local/share
+  chown -R $USERNAME:$USERNAME /usr/local/share /usr/local/bin
 
 # Persist bash history
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
