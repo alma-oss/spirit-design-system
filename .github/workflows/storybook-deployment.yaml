@@ -39,6 +39,10 @@ jobs:
 
       - name: Build Storybook
         run: yarn lerna run build --scope=@alma-oss/spirit-storybook --include-dependencies
+        env:
+          # Disable connection to NX Cloud
+          # @see: https://nx.dev/docs/reference/nx-cloud/config#disabling-connections-to-nx-cloud
+          NX_NO_CLOUD: 'true'
 
       - name: Publish to Chromatic
         id: chromatic
