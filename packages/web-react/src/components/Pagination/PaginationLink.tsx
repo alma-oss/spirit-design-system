@@ -38,7 +38,14 @@ const _PaginationLink = <E extends ElementType = 'a'>(props: SpiritPaginationLin
   });
 
   return (
-    <ElementTag {...(isCurrent && { 'aria-current': 'page' })} {...otherProps} {...mergedStyleProps} href={href} onClick={handleClick} ref={ref}>
+    <ElementTag
+      {...(isCurrent && { 'aria-current': 'page' })}
+      {...otherProps}
+      {...mergedStyleProps}
+      href={href}
+      onClick={handleClick}
+      ref={ref}
+    >
       <VisuallyHidden>{visuallyHiddenLabel}</VisuallyHidden>
       <span aria-hidden="true">{pageNumber}</span>
     </ElementTag>
