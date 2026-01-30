@@ -11,6 +11,8 @@ $colors: ();
     }
 }
 
+$colors: list.append($colors, 'unstyled');
+
 $text-decoration-default: none;
 $text-decoration-hover: underline;
 $text-decoration-skip-ink: none;

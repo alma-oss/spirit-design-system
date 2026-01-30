@@ -23,3 +23,13 @@
         list-style: none;
     }
 }
+
+@mixin link() {
+    color: inherit;
+
+    &:hover,
+    &:active,
+    &:visited {
+        color: inherit;
+    }
+}
