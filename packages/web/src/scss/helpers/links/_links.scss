@@ -14,12 +14,18 @@
 @use '../../settings/links' as links-settings;
 @use '../../tools/dictionaries';
 @use '../../tools/links' as links-tools;
+@use '../../tools/reset';
 
 // 1.
 @include dictionaries.prepare-button-links(links-settings.$colors);
 
 // 2.
 @include dictionaries.generate-link-colors($selector: '.link', $dictionary-values: links-settings.$colors);
+
+// 2.
+.link-unstyled {
+    @include reset.link();
+}
 
 // 3.
 [class*='typography-heading'] a {
