@@ -272,9 +272,6 @@ For a better UI experience when searching for the deploy preview link, you can u
 
 ### Visual Regression and Accessibility Testing
 
-You can run visual regression and accessibility testing via `Makefile` in the project root.
-All commands will execute a Docker command that starts [Playwright][playwright] in a containerized environment.
-
 For detailed information about writing and extending E2E tests, see the [E2E Testing Guidelines][e2e-testing] and [Accessibility testing][accessibility-testing].
 
 #### On CI Pipeline

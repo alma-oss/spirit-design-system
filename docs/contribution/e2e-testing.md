@@ -75,19 +75,13 @@ Copy the example file and adjust values as needed:
 cp .env.local.playwright.example .env.local.playwright
 ```
 
-Available environment variables:
-
-| Variable     | Description                  | Default (local)    | Default (CI) |
-| ------------ | ---------------------------- | ------------------ | ------------ |
-| `PW_WORKERS` | Number of parallel workers   | Playwright default | `1`          |
-| `PW_TIMEOUT` | Test timeout in milliseconds | `120000`           | `120000`     |
-| `PW_RETRIES` | Number of retries            | `0`                | `2`          |
+If you need to customize options further, please refer to the [Playwright configuration documentation][playwright-docs-config].
 
 ## Test Structure
 
 The E2E test suite consists of two types of tests:
 
-### 1. Automatic Component Testing
+### 1. Visual Comparison Tests
 
 **File**: `tests/e2e/demo-components-compare.spec.ts`
 
@@ -140,38 +134,9 @@ Follow the navigate → interact → capture pattern. See existing test files in
 
 ### Writing Stable Selectors
 
-Use stable, semantic selectors that won't break when implementation details change. Prefer selectors in this order:
+Use stable, semantic selectors which are accessible for every user and won't break when implementation details change.
 
-1. **Semantic text-based selectors** (best for buttons and links):
-
-   ```ts
-   await page.click('button:has-text("Open Modal")');
-   await page.focus('button:has-text("Focus me")');
-   ```
-
-2. **Role-based selectors** (good for accessibility):
-
-   ```ts
-   await page.getByRole('button', { name: 'Submit' }).click();
-   await page.getByRole('dialog').isVisible();
-   ```
-
-3. **Element state selectors** (good for specific states):
-
-   ```ts
-   await page.click('dialog[open] header button');
-   await page.focus('#button-focus');
-   ```
-
-4. **Avoid unstable selectors**:
-
-   ```ts
-   // Fragile - CSS classes may change
-   await page.click('.Button--primary');
-
-   // Legacy - being phased out
-   await page.click('[data-test-id="open-modal"]');
-   ```
+For more information, please refer to [this guideline about testing query priority][testing-query-priority].
 
 **ℹ️ Note**: While some older tests use `data-test-id` attributes, the project is moving away from them in favor of more semantic selectors.
 
@@ -250,3 +215,5 @@ For more information, please refer to the [Accessibility Testing Guidelines][acc
 [accessibility-testing]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/accessibility-testing.md#e2e-accessibility-testing-with-playwright
 [docs-axe-core-playwright]: https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright
 [playwright-docs]: https://playwright.dev/
+[playwright-docs-config]: https://playwright.dev/docs/test-configuration
+[testing-query-priority]: https://testing-library.com/docs/queries/about/#priority

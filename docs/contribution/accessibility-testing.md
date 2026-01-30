@@ -24,18 +24,11 @@ There are two approaches to run E2E accessibility tests: via Docker (recommended
 Using the Makefile (recommended):
 
 ```bash
-# Run all E2E tests in Docker
-make test-e2e
-
 # Run only accessibility tests
 make test-e2e-a11y
-
-# Run with UI mode (opens UI at http://localhost:43008)
-make test-e2e-ui
-
-# View test report
-make test-e2e-report
 ```
+
+For more information about how to run E2E tests, please refer to the [E2E Testing Guidelines][e2e-guideline-run-tests]
 
 ## Authoring Accessibility Specs
 
@@ -326,6 +319,7 @@ All functions are exported from `tests/helpers/a11y/index.ts` for convenient imp
 [axe-core]: https://github.com/dequelabs/axe-core
 [axe-core-rules]: https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md
 [docs-axe-core-playwright]: https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright
+[e2e-guideline-run-tests]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/e2e-testing.md#running-tests
 [jest-axe]: https://github.com/nickcolley/jest-axe
 [playwright-docs]: https://playwright.dev/docs/intro
 [wcag-guidelines]: https://www.w3.org/WAI/WCAG21/quickref/

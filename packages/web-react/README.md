@@ -79,13 +79,11 @@ Most components also accept native HTML attributes based on the component's elem
 
 ### Accessibility Testing
 
-- Accessibility tests live alongside component specs under `src/components/**/__tests__/*accessibility.test.tsx`.
-- Use `runAxe` from `@local/tests` and assert with `expect(results).toHaveNoAxeViolations()` to guard against regressions.
-- Detailed authoring guidance is available in [`docs/contribution/accessibility-testing.md`][accessibility-testing].
+For detailed information about unit and end-to-end accessibility tests, please refer to [`docs/contribution/accessibility-testing.md`][accessibility-testing].
 
 ### End-to-End Testing
 
-E2E tests use [Playwright](https://playwright.dev/) for visual regression testing. For detailed information, see [`docs/contribution/e2e-testing.md`][e2e-testing].
+For detailed information end-to-end tests, please refer to [`docs/contribution/e2e-testing.md`][e2e-testing].
 
 ## Styling
 
