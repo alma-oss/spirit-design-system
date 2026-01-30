@@ -371,7 +371,6 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [lerna-home]: https://lerna.js.org
 [netlify-preview-gist]: https://gist.github.com/adamkudrna/694f3048c1338f07375b9b8af24afe2f
 [packages]: packages/
-[playwright]: https://playwright.dev/
 [prettier]: https://prettier.io/
 [publish-action]: https://github.com/lmc-eu/spirit-design-system/actions/workflows/publish.yaml
 [release-notes-template]: https://almamedia.slack.com/docs/T0325RBAD/F08D6U6EAKH
