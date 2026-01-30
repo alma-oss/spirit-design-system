@@ -79,6 +79,7 @@ export const LinkColors = {
   PRIMARY: 'primary',
   SECONDARY: 'secondary',
   TERTIARY: 'tertiary',
+  UNSTYLED: 'unstyled',
 } as const;
 
 export const TextColors = createUppercaseKeyDictionary(textColors);
