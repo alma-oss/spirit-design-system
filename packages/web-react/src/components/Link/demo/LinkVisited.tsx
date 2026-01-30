@@ -9,11 +9,17 @@ const LinkVisited = () => (
     <Link href="#" color="primary" hasVisitedStyleAllowed>
       Primary Link
     </Link>
+
     <Link href="#" color="secondary" hasVisitedStyleAllowed>
       Secondary Link
     </Link>
+
     <Link href="#" color="tertiary" hasVisitedStyleAllowed>
       Tertiary Link
+    </Link>
+
+    <Link href="#" color="inherit" hasVisitedStyleAllowed>
+      Inherit Link
     </Link>
   </>
 );

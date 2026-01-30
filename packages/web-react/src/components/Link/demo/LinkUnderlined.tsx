@@ -13,6 +13,9 @@ const LinkUnderlined = () => (
     <Link href="https://www.example.com/" target="_blank" title="Warning" underlined="always">
       ⚠️ Link with Icon
     </Link>
+    <Link elementType="button" underlined="always">
+      Link as button
+    </Link>
 
     <h3 className="mb-0 mt-600">Never</h3>
     <Link href="#" color="primary" underlined="never">
@@ -23,6 +26,9 @@ const LinkUnderlined = () => (
     </Link>
     <Link href="https://www.example.com/" target="_blank" title="Warning" underlined="never">
       ⚠️ Link with Icon
+    </Link>
+    <Link elementType="button" underlined="never">
+      Link as button
     </Link>
   </>
 );
