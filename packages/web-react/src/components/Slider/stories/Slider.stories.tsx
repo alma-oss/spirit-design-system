@@ -1,6 +1,6 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
-import React, { useState } from 'react';
+import React, { type ChangeEvent, useState } from 'react';
 import { ValidationStates } from '../../../constants';
 import { type SpiritSliderProps } from '../../../types';
 import { DEMO_SLIDER_DEFAULT_VALUE, SLIDER_DEFAULT_PROPS } from '../constants';
@@ -134,7 +134,7 @@ const SliderWithHooks = (args: SpiritSliderProps) => {
   const { value: argValue } = args;
   const [value, setValue] = useState(argValue);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(Number(event.target.value));
   };
 

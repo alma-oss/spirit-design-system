@@ -1,4 +1,4 @@
-import React, { type ElementType, type ReactElement, forwardRef } from 'react';
+import React, { type ElementType, type ReactElement, forwardRef, useState } from 'react';
 import { type PolymorphicRef, type SpiritNavigationActionProps } from '../../../types';
 import Dropdown from '../../Dropdown/Dropdown';
 import DropdownPopover from '../../Dropdown/DropdownPopover';
@@ -21,7 +21,7 @@ const NavigationActionAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNa
 );
 
 const NavigationHorizontalWithDropdown = () => {
-  const [isNavigationActionDropdownOpen, setIsNavigationActionDropdownOpen] = React.useState(false);
+  const [isNavigationActionDropdownOpen, setIsNavigationActionDropdownOpen] = useState(false);
 
   return (
     <Navigation aria-label="Main Navigation">

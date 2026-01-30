@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import ContainerAlignment from './ContainerAlignment';
 import ContainerBlockFormattingContext from './ContainerBlockFormattingContext';
@@ -7,8 +7,8 @@ import ContainerDefault from './ContainerDefault';
 import ContainerFluid from './ContainerFluid';
 import ContainerSizes from './ContainerSizes';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <DocsSection title="Default" stackAlignment="stretch" container="heading-only">
       <ContainerDefault />
     </DocsSection>
@@ -22,5 +22,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <DocsSection title="Feature Flag: Block Formatting Context" stackAlignment="stretch" container="heading-only">
       <ContainerBlockFormattingContext />
     </DocsSection>
-  </React.StrictMode>,
+  </StrictMode>,
 );

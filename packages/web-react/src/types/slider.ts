@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type ChangeEvent, type ReactNode } from 'react';
 import {
   type HelperTextProps,
   type InputBaseProps,
@@ -23,7 +23,7 @@ export interface SliderProps
   label: ReactNode;
   max?: number;
   min?: number;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   step?: number;
   validationText?: ValidationTextType;
   value: number;

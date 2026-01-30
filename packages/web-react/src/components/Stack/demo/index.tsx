@@ -1,7 +1,7 @@
 // Because there is no `dist` directory during the CI run
 /* eslint-disable import/no-extraneous-dependencies, import/extensions, import/no-unresolved */
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import StackBlocks from './StackBlocks';
 import StackBlocksWithCustomSpacing from './StackBlocksWithCustomSpacing';
@@ -14,8 +14,8 @@ import StackBlocksWithInnerDividersWithoutVerticalSpacing from './StackBlocksWit
 import StackBlocksWithVerticalSpacing from './StackBlocksWithVerticalSpacing';
 import StackFormFields from './StackFormFields';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <DocsSection title="Stacked Form Fields" stackAlignment="stretch">
       <StackFormFields />
     </DocsSection>
@@ -46,5 +46,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <DocsSection title="Stacked Blocks with Custom Spacing and Inner and Outer Dividers" stackAlignment="stretch">
       <StackBlocksWithCustomSpacingAndDividers />
     </DocsSection>
-  </React.StrictMode>,
+  </StrictMode>,
 );

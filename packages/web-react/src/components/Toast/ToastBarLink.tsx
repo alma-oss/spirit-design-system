@@ -1,6 +1,6 @@
 'use client';
 
-import React, { type ElementType, type ForwardedRef, forwardRef } from 'react';
+import React, { type ElementType, type ForwardedRef, type ReactNode, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import { type ToastLinkProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -25,7 +25,7 @@ const _ToastBarLink = (props: ToastLinkProps, ref: ForwardedRef<HTMLAnchorElemen
 
   return (
     <ElementTag {...otherProps} {...mergedStyleProps} ref={ref}>
-      {children as React.ReactNode}
+      {children as ReactNode}
     </ElementTag>
   );
 };

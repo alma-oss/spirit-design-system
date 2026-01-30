@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import HeadingAlignment from './HeadingAlignment';
 import HeadingBalanced from './HeadingBalanced';
@@ -10,8 +10,8 @@ import HeadingSizes from './HeadingSizes';
 import HeadingTextColor from './HeadingTextColor';
 import HeadingWordBreak from './HeadingWordBreak';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <DocsSection title="Default">
       <HeadingDefault />
     </DocsSection>
@@ -36,5 +36,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <DocsSection title="Text Hyphens" stackAlignment="stretch">
       <HeadingHyphens />
     </DocsSection>
-  </React.StrictMode>,
+  </StrictMode>,
 );

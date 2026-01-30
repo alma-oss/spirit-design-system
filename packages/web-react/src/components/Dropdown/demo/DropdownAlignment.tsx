@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box } from '../../Box';
 import { Button } from '../../Button';
 import { Grid } from '../../Grid';
@@ -8,7 +8,7 @@ import DropdownPopover from '../DropdownPopover';
 import DropdownTrigger from '../DropdownTrigger';
 
 const DropdownAlignment = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const onToggle = () => setIsOpen(!isOpen);
 
   return (

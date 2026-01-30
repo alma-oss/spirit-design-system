@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react';
-import React, { useEffect } from 'react';
+import React, { type FC, useEffect } from 'react';
 import '@testing-library/jest-dom';
 import useAriaIds from '../useAriaIds';
 
 describe('useAriaIds', () => {
   it('should initialize with an empty array of ids', () => {
-    const TestComponent: React.FC = () => {
+    const TestComponent: FC = () => {
       const [ids, register] = useAriaIds();
 
       useEffect(() => {

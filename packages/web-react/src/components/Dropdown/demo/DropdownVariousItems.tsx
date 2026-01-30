@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../../Button';
 import { Checkbox } from '../../Checkbox';
 import { Item } from '../../Item';
@@ -8,7 +8,7 @@ import DropdownPopover from '../DropdownPopover';
 import DropdownTrigger from '../DropdownTrigger';
 
 const DropdownVariousItems = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const onToggle = () => setIsOpen(!isOpen);
 
   return (

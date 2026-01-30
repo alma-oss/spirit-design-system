@@ -1,4 +1,4 @@
-import React, { type ReactElement, type ReactNode } from 'react';
+import React, { type ReactElement, type ReactNode, cloneElement } from 'react';
 import { accessibilityDisabledTest, accessibilityTest, accessibilityValidationStateTest } from '@local/tests';
 import { FileUploader, FileUploaderInput, useFileQueue } from '..';
 
@@ -20,7 +20,7 @@ describe('FileUploader accessibility', () => {
         updateQueue={updateQueue}
       >
         {/* Clone children element and merge props from accessibility test helpers */}
-        {React.cloneElement(children as ReactElement, props)}
+        {cloneElement(children as ReactElement, props)}
       </FileUploader>
     );
   };

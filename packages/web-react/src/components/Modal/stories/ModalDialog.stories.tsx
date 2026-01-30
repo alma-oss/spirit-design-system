@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React, { useState } from 'react';
+import React, { type ElementType, type JSX, type RefAttributes, useState } from 'react';
 import { type ModalDialogProps } from '../../../types';
 import { Button } from '../../Button';
 import { Modal, ModalBody, ModalDialog, ModalFooter, ModalHeader } from '..';
@@ -41,9 +41,7 @@ export default meta;
 type Story = StoryObj<typeof ModalDialog>;
 
 const ModalWithHooks = (
-  args: React.JSX.IntrinsicAttributes &
-    Omit<ModalDialogProps<React.ElementType>, 'ref'> &
-    React.RefAttributes<HTMLDivElement>,
+  args: JSX.IntrinsicAttributes & Omit<ModalDialogProps<ElementType>, 'ref'> & RefAttributes<HTMLDivElement>,
 ) => {
   const [isOpen, setOpen] = useState(true);
 

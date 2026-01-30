@@ -3,8 +3,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment, import/extensions, import/no-unresolved
 // @ts-ignore: No declaration file -- @see https://jira.almacareer.tech/browse/DS-561
 import icons from '@alma-oss/spirit-icons/icons';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import ToggleDefault from './ToggleDefault';
@@ -18,8 +18,8 @@ import ToggleRequired from './ToggleRequired';
 import ToggleValidation from './ToggleValidation';
 import ToggleValidationWithIcon from './ToggleValidationWithIcon';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <IconsProvider value={icons}>
       <DocsSection title="Default" stackAlignment="stretch">
         <ToggleDefault />
@@ -52,5 +52,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <ToggleInputPosition />
       </DocsSection>
     </IconsProvider>
-  </React.StrictMode>,
+  </StrictMode>,
 );

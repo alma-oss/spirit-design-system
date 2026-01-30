@@ -29,7 +29,7 @@ export const useDefaultResponsiveRowsStyle = (
   rows: DimensionType | undefined,
   itemsCount: number,
   prefix: string,
-): React.CSSProperties => {
+): CSSProperties => {
   const style: DimensionCSSProperties = {};
   const cssPrefix: string = `--${prefix}`;
 

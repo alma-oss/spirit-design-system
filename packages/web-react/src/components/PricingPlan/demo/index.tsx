@@ -3,8 +3,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: No declaration file -- @see https://jira.almacareer.tech/browse/DS-561
 import icons from '@alma-oss/spirit-icons/icons';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import PricingPlanDefault from './PricingPlanDefault';
@@ -13,8 +13,8 @@ import PricingPlanWithFeaturesComparison from './PricingPlanWithFeaturesComparis
 import PricingPlanWithModal from './PricingPlanWithModal';
 import PricingPlanWithTooltip from './PricingPlanWithTooltip';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <IconsProvider value={icons}>
       <DocsSection title="Default" stackAlignment="start">
         <PricingPlanDefault />
@@ -32,5 +32,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <PricingPlanWithFeaturesComparison />
       </DocsSection>
     </IconsProvider>
-  </React.StrictMode>,
+  </StrictMode>,
 );
