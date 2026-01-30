@@ -31,6 +31,9 @@
     $config: theme.$color-config
 );
 
+// @deprecated This style will be removed in the next major version.
+// Migration: delete '.Alert :where(a)' styles
+// @see https://jira.almacareer.tech/browse/DS-2379
 .Alert :where(a) {
     color: var(--#{tokens.$css-variable-prefix}alert-color);
 
