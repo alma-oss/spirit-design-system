@@ -15,7 +15,6 @@
 @use '../../settings/links' as links-settings;
 @use '../../tools/dictionaries';
 @use '../../tools/links' as links-tools;
-@use '../../tools/reset';
 
 // 1.
 @include dictionaries.prepare-button-links(list.append(links-settings.$colors, 'inherit'));
@@ -25,22 +24,31 @@
 
 // 2.
 .link-inherit {
-    --spirit-link-color-internal: var(--spirit-link-color, inherit);
+    --#{tokens.$css-variable-prefix}-link-color-internal: var(--#{tokens.$css-variable-prefix}-link-color, inherit);
 
-    color: var(--spirit-link-color-internal);
+    color: var(--#{tokens.$css-variable-prefix}-link-color-internal);
 
     @media (hover: hover) {
         &:hover {
-            color: var(--spirit-link-color-hover, var(--spirit-link-color-internal));
+            color: var(
+                --#{tokens.$css-variable-prefix}-link-color-hover,
+                var(--#{tokens.$css-variable-prefix}-link-color-internal)
+            );
         }
     }
 
     &:active {
-        color: var(--spirit-link-color-active, var(--spirit-link-color-internal));
+        color: var(
+            --#{tokens.$css-variable-prefix}-link-color-active,
+            var(--#{tokens.$css-variable-prefix}-link-color-internal)
+        );
     }
 
     &:visited {
-        color: var(--spirit-link-color-visited, var(--spirit-link-color-internal));
+        color: var(
+            --#{tokens.$css-variable-prefix}-link-color-visited,
+            var(--#{tokens.$css-variable-prefix}-link-color-internal)
+        );
     }
 }
 
