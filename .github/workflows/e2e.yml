@@ -22,13 +22,13 @@ jobs:
       e2e: ${{ steps.has-label.outputs.labeled-run-visual-tests }}
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.12.1
+        uses: styfle/cancel-workflow-action@85880fa0301c86cca9da44039ee3bb12d3bedbfa # 0.12.1
         with:
           access_token: ${{ github.token }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Labeled to e2e
         id: has-label
-        uses: DanielTamkin/HasLabel@v1.0.4
+        uses: DanielTamkin/HasLabel@eb337eaf9036a5408ddd8ebc3e9ac540d74d2ae0 # v1.0.4
         with:
           contains: 'run-visual-tests'
 
@@ -40,7 +40,7 @@ jobs:
     timeout-minutes: 60
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Setup Node and Install Dependencies
         uses: ./.github/actions/setup-install
@@ -72,7 +72,7 @@ jobs:
         env:
           WEBSITE_URL: ${{ steps.get-netlify-preview-url.outcome == 'success' && steps.get-netlify-preview-url.outputs.url || steps.get-site-url.outputs.site_url }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: failure()
         id: artifact-upload-step
         with:
@@ -82,7 +82,7 @@ jobs:
 
       - name: Comment PR with artifact URL
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const issue_number = context.issue.number;
@@ -100,7 +100,7 @@ jobs:
 
       - name: Notify Slack when failure
         id: Slack
-        uses: slackapi/slack-github-action@v1.27.1
+        uses: slackapi/slack-github-action@fcfb566f8b0aab22203f066d80ca1d7e4b5d05b3 # v1.27.1
         if: failure()
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }} # Slack channel-id of #spirit-design-system-notifications_en
