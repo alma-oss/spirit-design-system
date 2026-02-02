@@ -2,21 +2,15 @@
 
 import classNames from 'classnames';
 import React, { useMemo } from 'react';
-import { useStyleProps } from '../../hooks';
+import { useI18n, useStyleProps } from '../../hooks';
 import { type SpiritFileUploaderListProps } from '../../types';
-import { DEFAULT_ATTACHMENT_LIST_LABEL } from './constants';
 import { useFileUploaderContext } from './FileUploaderContext';
 import { useFileUploaderStyleProps } from './useFileUploaderStyleProps';
 
 const FileUploaderList = (props: SpiritFileUploaderListProps) => {
-  const {
-    label = DEFAULT_ATTACHMENT_LIST_LABEL,
-    id,
-    attachmentComponent,
-    inputName,
-    hasImagePreview,
-    ...restProps
-  } = props;
+  const { t } = useI18n();
+  const { label, id, attachmentComponent, inputName, hasImagePreview, ...restProps } = props;
+  const attachmentsLabel = label ?? t('fileUploader.attachments');
 
   const { classProps } = useFileUploaderStyleProps();
   const { styleProps, props: transferProps } = useStyleProps(restProps);
@@ -43,7 +37,7 @@ const FileUploaderList = (props: SpiritFileUploaderListProps) => {
   return (
     <>
       <h3 id={id} hidden>
-        {label}
+        {attachmentsLabel}
       </h3>
       <ul
         aria-labelledby={id}
