@@ -1,21 +1,21 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useI18n } from '../../hooks';
 import { type UncontrolledSplitButtonProps } from '../../types';
 import { Button } from '../Button';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../Dropdown';
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
-import { UNCONTROLLED_SPLIT_BUTTON_DROPDOWN_TRIGGER_LABEL_DEFAULT } from './constants';
 import SplitButton from './SplitButton';
 
 const defaultProps: Partial<UncontrolledSplitButtonProps> = {
   dropdownPlacement: 'bottom-end',
   dropdownTriggerIconName: 'chevron-down',
-  dropdownTriggerLabel: UNCONTROLLED_SPLIT_BUTTON_DROPDOWN_TRIGGER_LABEL_DEFAULT,
 };
 
 const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
+  const { t } = useI18n();
   const propsWithDefaults = { ...defaultProps, ...props };
   const {
     buttonIconName,
@@ -31,6 +31,7 @@ const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
     isDropdownTriggerLabelHidden,
     ...restProps
   } = propsWithDefaults;
+  const resolvedDropdownTriggerLabel = dropdownTriggerLabel ?? t('splitButton.dropdown');
   const [openDropdownState, setOpenDropdownState] = useState(false);
 
   return (
@@ -47,9 +48,9 @@ const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
       >
         <DropdownTrigger elementType={Button}>
           {isDropdownTriggerLabelHidden ? (
-            <VisuallyHidden>{dropdownTriggerLabel}</VisuallyHidden>
+            <VisuallyHidden>{resolvedDropdownTriggerLabel}</VisuallyHidden>
           ) : (
-            dropdownTriggerLabel
+            resolvedDropdownTriggerLabel
           )}
           <Icon name={dropdownTriggerIconName} marginLeft={!isDropdownTriggerLabelHidden && 'space-400'} />
         </DropdownTrigger>

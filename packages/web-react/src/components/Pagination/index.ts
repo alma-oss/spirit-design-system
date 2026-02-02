@@ -5,5 +5,4 @@ export { default as PaginationLink } from './PaginationLink';
 export { default as PaginationLinkNext } from './PaginationLinkNext';
 export { default as PaginationLinkPrevious } from './PaginationLinkPrevious';
 export { default as UncontrolledPagination } from './UncontrolledPagination';
-export * from './constants';
 export * from './usePaginationStyleProps';

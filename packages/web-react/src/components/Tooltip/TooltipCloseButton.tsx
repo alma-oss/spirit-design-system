@@ -2,13 +2,15 @@
 
 import classNames from 'classnames';
 import React from 'react';
-import { useStyleProps } from '../../hooks';
+import { useI18n, useStyleProps } from '../../hooks';
 import { type TooltipCloseButtonProps } from '../../types';
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { useTooltipStyleProps } from './useTooltipStyleProps';
 
-const TooltipCloseButton = ({ label = 'Close', onClick, ...restProps }: TooltipCloseButtonProps) => {
+const TooltipCloseButton = ({ label, onClick, ...restProps }: TooltipCloseButtonProps) => {
+  const { t } = useI18n();
+  const closeLabel = label ?? t('common.close');
   const { classProps, props: modifiedProps } = useTooltipStyleProps(restProps);
   const { styleProps } = useStyleProps({ ...modifiedProps });
 
@@ -21,7 +23,7 @@ const TooltipCloseButton = ({ label = 'Close', onClick, ...restProps }: TooltipC
       aria-expanded="true"
     >
       <Icon name="close" aria-hidden="true" />
-      <VisuallyHidden>{label}</VisuallyHidden>
+      <VisuallyHidden>{closeLabel}</VisuallyHidden>
     </button>
   );
 };

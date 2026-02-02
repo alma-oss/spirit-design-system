@@ -9,8 +9,6 @@ export const TRANSITIONING_STYLES: Record<string, string> = {
 
 export const ICON_BOX_SIZE = 20;
 
-export const TOAST_BAR_CLOSE_BUTTON_LABEL_DEFAULT = 'Close';
-
 export const DEFAULT_TOAST_COLOR = 'neutral';
 
 export const DEFAULT_TOAST_AUTO_CLOSE_INTERVAL = 3000; // milliseconds
