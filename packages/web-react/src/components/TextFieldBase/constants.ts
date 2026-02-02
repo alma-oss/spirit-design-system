@@ -1,2 +1,0 @@
-export const TEXT_FIELD_BASE_PASSWORD_TOGGLE_SHOW_LABEL_DEFAULT = 'Show password';
-export const TEXT_FIELD_BASE_PASSWORD_TOGGLE_HIDE_LABEL_DEFAULT = 'Hide password';

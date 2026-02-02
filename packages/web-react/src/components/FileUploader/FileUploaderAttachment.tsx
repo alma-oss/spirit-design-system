@@ -2,25 +2,21 @@
 
 import classNames from 'classnames';
 import React, { type MouseEvent, type RefObject, useRef, useState } from 'react';
-import { useClassNamePrefix, useStyleProps } from '../../hooks';
+import { useClassNamePrefix, useI18n, useStyleProps } from '../../hooks';
 import { type SpiritFileUploaderAttachmentProps } from '../../types';
 import { Icon } from '../Icon';
 import AttachmentActionButton from './AttachmentActionButton';
 import AttachmentDismissButton from './AttachmentDismissButton';
 import AttachmentImagePreview from './AttachmentImagePreview';
-import {
-  DEFAULT_BUTTON_LABEL,
-  DEFAULT_EDIT_BUTTON_LABEL,
-  DEFAULT_ICON_NAME,
-  IMAGE_PREVIEW_BASE64_MAX_WIDTH,
-} from './constants';
+import { DEFAULT_ICON_NAME, IMAGE_PREVIEW_BASE64_MAX_WIDTH } from './constants';
 import { useFileUploaderAttachment } from './useFileUploaderAttachment';
 import { useFileUploaderStyleProps } from './useFileUploaderStyleProps';
 import { image2Base64Preview } from './utils';
 
 const FileUploaderAttachment = (props: SpiritFileUploaderAttachmentProps) => {
+  const { t } = useI18n();
   const {
-    editText = DEFAULT_EDIT_BUTTON_LABEL,
+    editText,
     file,
     hasImagePreview,
     iconName = DEFAULT_ICON_NAME,
@@ -32,9 +28,11 @@ const FileUploaderAttachment = (props: SpiritFileUploaderAttachmentProps) => {
     onDismiss,
     onEdit,
     onError,
-    removeText = DEFAULT_BUTTON_LABEL,
+    removeText,
     ...restProps
   } = props;
+  const resolvedEditText = editText ?? t('fileUploader.edit');
+  const resolvedRemoveText = removeText ?? t('fileUploader.remove');
   const [imagePreview, setImagePreview] = useState<string>('');
 
   const { classProps } = useFileUploaderStyleProps();
@@ -78,10 +76,10 @@ const FileUploaderAttachment = (props: SpiritFileUploaderAttachmentProps) => {
       </span>
       {onEdit && (
         <span className={classProps.attachment.slot}>
-          <AttachmentActionButton onClick={onEditHandler}>{editText}</AttachmentActionButton>
+          <AttachmentActionButton onClick={onEditHandler}>{resolvedEditText}</AttachmentActionButton>
         </span>
       )}
-      <AttachmentDismissButton onClick={dismissHandler}>{removeText}</AttachmentDismissButton>
+      <AttachmentDismissButton onClick={dismissHandler}>{resolvedRemoveText}</AttachmentDismissButton>
     </li>
   );
 };

@@ -1,26 +1,20 @@
 'use client';
 
 import React, { type ElementType, type ForwardedRef, forwardRef } from 'react';
+import { useI18n } from '../../hooks';
 import { type SpiritPaginationButtonLinkProps } from '../../types';
 import { ButtonLink } from '../Button';
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
-import {
-  PAGINATION_NEXT_LINK_DEFAULT_ACCESSIBILITY_LABEL,
-  PAGINATION_PREVIOUS_LINK_DEFAULT_ACCESSIBILITY_LABEL,
-} from './constants';
 
 const _PaginationButtonLink = <E extends ElementType = 'a'>(
   props: SpiritPaginationButtonLinkProps<E>,
   ref: ForwardedRef<HTMLAnchorElement>,
 ) => {
-  const {
-    direction,
-    accessibilityLabel = direction === 'previous'
-      ? PAGINATION_PREVIOUS_LINK_DEFAULT_ACCESSIBILITY_LABEL
-      : PAGINATION_NEXT_LINK_DEFAULT_ACCESSIBILITY_LABEL,
-    ...restProps
-  } = props as unknown as SpiritPaginationButtonLinkProps;
+  const { t } = useI18n();
+  const { direction, accessibilityLabel, ...restProps } = props as unknown as SpiritPaginationButtonLinkProps;
+  const directionLabel =
+    accessibilityLabel ?? (direction === 'previous' ? t('pagination.previous') : t('pagination.next'));
 
   const iconType = {
     previous: 'chevron-left',
@@ -30,7 +24,7 @@ const _PaginationButtonLink = <E extends ElementType = 'a'>(
   return (
     <ButtonLink color="secondary" isSymmetrical {...restProps} ref={ref}>
       <Icon name={iconType[direction]} />
-      <VisuallyHidden>{accessibilityLabel}</VisuallyHidden>
+      <VisuallyHidden>{directionLabel}</VisuallyHidden>
     </ButtonLink>
   );
 };
