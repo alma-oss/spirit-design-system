@@ -8,6 +8,7 @@ export * from './useClickOutside';
 export * from './useDeprecationMessage';
 export * from './useDimensionStyle';
 export * from './useDragAndDrop';
+export * from './useI18n';
 export * from './useIcon';
 export * from './useIconName';
 export * from './useInputPositionClass';
