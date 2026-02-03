@@ -53,4 +53,18 @@ describe('Card', () => {
 
     expect(screen.getByRole('article')).toHaveTextContent('Hello World');
   });
+
+  it('should have alignmentY class name', () => {
+    render(<Card alignmentY="center" />);
+
+    expect(screen.getByRole('article')).toHaveClass('Card--alignmentYCenter');
+  });
+
+  it('should have responsive alignmentY class name', () => {
+    render(<Card alignmentY={{ mobile: 'top', tablet: 'center', desktop: 'bottom' }} />);
+
+    expect(screen.getByRole('article')).toHaveClass(
+      'Card--alignmentYTop Card--tablet--alignmentYCenter Card--desktop--alignmentYBottom',
+    );
+  });
 });

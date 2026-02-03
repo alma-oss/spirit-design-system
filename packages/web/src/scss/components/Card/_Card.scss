@@ -11,6 +11,7 @@
 @use 'sass:map';
 @use '@tokens' as tokens;
 @use '../../tools/breakpoint';
+@use '../../tools/dictionaries';
 @use '../../tools/typography';
 @use 'theme';
 
@@ -69,6 +70,13 @@
     $infix: breakpoint.get-modifier(infix, $breakpoint-name, $breakpoint-value);
 
     @include breakpoint.up($breakpoint-value) {
+        @include dictionaries.generate-alignments(
+            $class-name: 'Card',
+            $dictionary-values: theme.$alignment-y-dictionary,
+            $axis: 'y',
+            $infix: $infix
+        );
+
         .Card--#{$infix}vertical {
             --#{tokens.$css-variable-prefix}card-columns: #{map.get(theme.$layouts, vertical, columns)};
             --#{tokens.$css-variable-prefix}card-rows: #{map.get(theme.$layouts, vertical, rows)};

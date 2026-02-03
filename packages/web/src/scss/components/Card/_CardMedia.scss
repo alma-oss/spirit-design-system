@@ -64,8 +64,12 @@
         :is(.Card--#{$infix}horizontal, .Card--#{$infix}horizontalReversed) > .CardMedia {
             --#{tokens.$css-variable-prefix}card-media-canvas-width: var(--spirit-card-media-size);
             --#{tokens.$css-variable-prefix}card-media-canvas-height: auto;
-            --#{tokens.$css-variable-prefix}card-media-align-self: start;
             --#{tokens.$css-variable-prefix}card-media-margin-bottom: 0;
+        }
+
+        :is(.Card--#{$infix}horizontal, .Card--#{$infix}horizontalReversed):where(:not(.Card[class*='--alignmentY']))
+            > .CardMedia {
+            --#{tokens.$css-variable-prefix}card-media-align-self: start;
         }
 
         :is(.Card--#{$infix}horizontal, .Card--#{$infix}horizontalReversed)

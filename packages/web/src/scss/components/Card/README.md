@@ -90,6 +90,36 @@ Card can be displayed with a border and a box shadow on hover.
 </article>
 ```
 
+### Vertical Alignment of the Content
+
+Card content can be vertically aligned. This is particularly useful in horizontal Card layouts where content height
+may vary.
+
+To align Card content vertically, use one of the following CSS modifiers:
+
+- `Card--alignmentYTop` — aligns content to the top
+- `Card--alignmentYCenter` — centers content vertically
+- `Card--alignmentYBottom` — aligns content to the bottom
+
+```html
+<article class="Card Card--horizontal Card--alignmentYCenter">
+  <!-- … -->
+</article>
+```
+
+#### Responsive Alignment
+
+Card alignment can be adjusted based on the [breakpoint][dictionary-breakpoint]. To create a responsive alignment,
+use the `tablet` and `desktop` infixes, e.g. `Card--tablet--alignmentYCenter` or `Card--desktop--alignmentYBottom`.
+
+```html
+<article
+  class="Card Card--vertical Card--tablet--horizontal Card--tablet--alignmentYCenter Card--desktop--alignmentYBottom"
+>
+  <!-- … -->
+</article>
+```
+
 ## CardArtwork
 
 CardArtwork is an optional subcomponent that displays a small image or icon.

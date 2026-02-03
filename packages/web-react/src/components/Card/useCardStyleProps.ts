@@ -1,9 +1,15 @@
 import classNames from 'classnames';
 import { useAlignmentClass, useClassNamePrefix } from '../../hooks';
-import { type CardAlignmentXType, type CardDirectionType, type CardSizesDictionaryType } from '../../types';
+import {
+  type CardAlignmentXType,
+  type CardAlignmentYType,
+  type CardDirectionType,
+  type CardSizesDictionaryType,
+} from '../../types';
 import { generateStylePropsClassNames, stringOrObjectKebabCaseToCamelCase } from '../../utils';
 
 export interface UseCardStyleProps {
+  alignmentY?: CardAlignmentYType;
   artworkAlignmentX?: CardAlignmentXType;
   direction?: CardDirectionType;
   footerAlignmentX?: CardAlignmentXType;
@@ -33,6 +39,7 @@ export interface UseCardStylePropsReturn {
 
 export function useCardStyleProps(props?: UseCardStyleProps): UseCardStylePropsReturn {
   const {
+    alignmentY,
     artworkAlignmentX,
     direction,
     footerAlignmentX,
@@ -78,6 +85,7 @@ export function useCardStyleProps(props?: UseCardStyleProps): UseCardStylePropsR
     [mediaHasFilledHeightClass]: hasFilledHeight,
   });
   const rootClasses = classNames(cardClass, {
+    [useAlignmentClass(cardClass, alignmentY!, 'alignmentY')]: alignmentY,
     [directionClass]: direction,
     [isBoxedClass]: isBoxed,
   });

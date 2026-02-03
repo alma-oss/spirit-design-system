@@ -15,8 +15,15 @@ const defaultProps: Partial<SpiritCardProps> = {
 
 const Card = <T extends ElementType = 'article'>(props: SpiritCardProps<T>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag = 'article', direction, isBoxed, children, ...restProps } = propsWithDefaults;
-  const { classProps } = useCardStyleProps({ direction, isBoxed });
+  const {
+    elementType: ElementTag = 'article',
+    alignmentY,
+    direction,
+    isBoxed,
+    children,
+    ...restProps
+  } = propsWithDefaults;
+  const { classProps } = useCardStyleProps({ alignmentY, direction, isBoxed });
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.root, styleProps, otherProps });
 

@@ -2,11 +2,13 @@ import { type ElementType, type JSXElementConstructor } from 'react';
 import { type ObjectFit, Sizes } from '../constants';
 import {
   type AlignmentXDictionaryType,
+  type AlignmentYDictionaryType,
   type BackgroundAccentColorsType,
   type BackgroundColorsDictionaryType,
   type BackgroundEmotionColorsType,
   type ChildrenProps,
   type DirectionExtendedDictionaryType,
+  type SingleOrResponsive,
   type StyleProps,
   type TransferProps,
 } from './shared';
@@ -19,9 +21,9 @@ export const CardSizes = {
 export type CardSizesDictionaryKeys = keyof typeof CardSizes;
 export type CardSizesDictionaryType<T = undefined> = (typeof CardSizes)[CardSizesDictionaryKeys] | T;
 
-export type CardAlignmentXType =
-  | NonNullable<AlignmentXDictionaryType>
-  | { [key: string]: NonNullable<AlignmentXDictionaryType> };
+export type CardAlignmentXType = SingleOrResponsive<NonNullable<AlignmentXDictionaryType>>;
+
+export type CardAlignmentYType = SingleOrResponsive<NonNullable<AlignmentYDictionaryType>>;
 
 export interface CardElementTypeProps<T extends ElementType = 'article'> {
   /**
@@ -38,6 +40,7 @@ export type CardDirectionType =
   | { [key: string]: NonNullable<DirectionExtendedDictionaryType> };
 
 export interface CardProps<T extends ElementType = 'article'> extends CardElementTypeProps<T> {
+  alignmentY?: CardAlignmentYType;
   direction?: CardDirectionType;
   isBoxed?: boolean;
 }

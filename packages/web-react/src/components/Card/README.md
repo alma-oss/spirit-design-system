@@ -87,13 +87,44 @@ Card can be displayed with a border and a box shadow on hover.
 <Card isBoxed>{/* … */}</Card>
 ```
 
+### Vertical Alignment of the Content
+
+Card content can be vertically aligned. This is particularly useful in horizontal Card layouts where content height
+may vary.
+
+To align Card content vertically, use the `alignmentY` prop:
+
+- `top` — aligns content to the top
+- `center` — centers content vertically
+- `bottom` — aligns content to the bottom
+
+```jsx
+<Card direction="horizontal" alignmentY="center">
+  {/* … */}
+</Card>
+```
+
+#### Responsive Alignment
+
+Pass an object to `alignmentY` to set different values for different [breakpoints][dictionary-breakpoint].
+
+```jsx
+<Card
+  direction={{ mobile: 'vertical', tablet: 'horizontal' }}
+  alignmentY={{ mobile: 'top', tablet: 'center', desktop: 'bottom' }}
+>
+  {/* … */}
+</Card>
+```
+
 ### API
 
-| Name          | Type                                                                | Default    | Required | Description                                                                                                                                                              |
-| ------------- | ------------------------------------------------------------------- | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `direction`   | \[[DirectionExtended dictionary][dictionary-direction] \| `object`] | `vertical` | ✕        | Direction of the content inside Card component, use object to set responsive values, e.g. `{ mobile: 'horizontal', tablet: 'vertical', desktop: 'horizontal-reversed' }` |
-| `elementType` | `ElementType`                                                       | `article`  | ✕        | Type of element                                                                                                                                                          |
-| `isBoxed`     | `bool`                                                              | `false`    | ✕        | Whether the Card have border                                                                                                                                             |
+| Name          | Type                                                                                       | Default    | Required | Description                                                                                                                                                              |
+| ------------- | ------------------------------------------------------------------------------------------ | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `alignmentY`  | \[[AlignmentY dictionary][dictionary-alignment] \| `Responsive<AlignmentYDictionaryType>`] | —          | ✕        | Vertical alignment of the content, use object to set responsive values, e.g. `{ mobile: 'top', tablet: 'center' }`                                                       |
+| `direction`   | \[[DirectionExtended dictionary][dictionary-direction] \| `object`]                        | `vertical` | ✕        | Direction of the content inside Card component, use object to set responsive values, e.g. `{ mobile: 'horizontal', tablet: 'vertical', desktop: 'horizontal-reversed' }` |
+| `elementType` | `ElementType`                                                                              | `article`  | ✕        | Type of element                                                                                                                                                          |
+| `isBoxed`     | `bool`                                                                                     | `false`    | ✕        | Whether the Card have border                                                                                                                                             |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
