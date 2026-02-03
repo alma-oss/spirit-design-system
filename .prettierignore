@@ -31,17 +31,10 @@ static/assets/icons/react
 packages/**/*.hbs
 *.hbs
 
-# PHP files
-**/vendor
-**/vendor/**
-*.php
-
-# Twig files
-*.twig
-
 # Narwal NX files (cache etc.)
 .nx
 /.nx/cache
+/.nx/workspace-data
 
 # Ignore codemods test outputs, because we compare them with generated code which we cannot format
 packages/codemods/src/transforms/**/*.output.tsx
@@ -109,8 +102,6 @@ Caddyfile
 # Git
 .gitignore
 .gitattributes
-
-/.nx/workspace-data
 
 # Environment
 .env.*

@@ -549,17 +549,11 @@ For precise calculations, especially when using parameters like `maxFileSize`,
 
 For more details about binary prefixes and file size standards, check out [this Wikipedia article on binary prefixes][wiki-binary-prefixes].
 
-#### PHP & Next.js Configurations
+#### Next.js Configuration
 
 In some cases, you can set file sizes using shorthand notations. However, these values are still interpreted as binary sizes internally.
 
-For example, [in PHP][php-upload-max-filesize] you can use the shorthand `1M` for the `upload_max_filesize`, which corresponds to **1,048,576 bytes (1 MiB)**:
-
-```php
-upload_max_filesize=1M
-```
-
-Similarly, [in Next.js][next-js-body-size-limit], you can specify file size limits using a shorthand like `1mb`.
+[In Next.js][next-js-body-size-limit], you can specify file size limits using a shorthand like `1mb`.
 This will also be interpreted as **1,048,576 bytes (1 MiB)**:
 
 ```jsx
@@ -584,7 +578,6 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 [list-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul
 [list-item-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li
 [next-js-body-size-limit]: https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions#bodysizelimit
-[php-upload-max-filesize]: https://www.php.net/manual/en/ini.core.php#ini.upload-max-filesize
 [readme-additional-attributes]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web-react/README.md#style-props

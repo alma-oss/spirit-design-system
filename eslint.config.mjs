@@ -24,8 +24,6 @@ export default [
       // Ignore the playwright-report directory
       '**/playwright-report/**',
       '**/test-results/**',
-      // Ignore vendor directory in `packages/web-twig`
-      '**/vendor/**',
 
       // Internal output folders
       'static',

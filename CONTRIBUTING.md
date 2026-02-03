@@ -286,7 +286,6 @@ All commands will execute a Docker command that starts [Playwright][playwright] 
 ⚠️ The version number of the [Playwright][playwright] dependency must be the same in `package.json` file and in the `./bin/make/e2e.sh` to ensure that no additional [Playwright][playwright] dependencies will need to install (browsers are backed in the Docker image). See https://playwright.dev/docs/docker.
 
 We run visual regression testing locally against our demo apps. Web and Web React packages are served using Vite.
-Web Twig package is served using the Symfony app.
 
 We have two test suites and you can find them in the `./tests/e2e` directory:
 
@@ -308,8 +307,6 @@ Then the tests will be run against the Netlify deployment on every change pushed
 When the tests fail, there will be a comment in the PR with a link to the report and a message about the failure will be raised in the Slack channel `#spirit-design-system-notifications_en`.
 You can also find the report URL in the GitHub Actions run under the `Run actions/upload-artifact` section.
 Look for `Artifact download URL: https://github.com/lmc-eu/spirit-design-system/actions/runs/<run-id>/artifacts/<artifact-id>`.
-
-⚠️ Currently we do not deploy the Web Twig package to any environment, so you can only test it locally.
 
 #### Configuring Playwright Options
 

@@ -12,15 +12,8 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{php,scss}]
-indent_size = 4
-
-[packages/web-twig/*.yaml]
-indent_size = 4
-
-[packages/web-twig/**/*.twig]
+[*.scss]
 indent_size = 4
 
 [Makefile]
 indent_style = tab
-indent_size = 2

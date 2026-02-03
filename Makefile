@@ -42,9 +42,8 @@ unlock: pristine ## Unlock dependencies
 	touch package.json
 	touch yarn.lock
 
-pristine: clean ## Remove all `node_modules`, `vendor` and files
+pristine: clean ## Remove all `node_modules` and files
 	-rm -rf node_modules {apps,configs,examples,exporters,packages}/*/node_modules
-	-rm -rf vendor {packages,apps}/*/vendor
 
 ## —— Development 🏗️ ——————————————————————————————————————————————————————————————
 

@@ -29,18 +29,6 @@
               Web React
             </a>
           </li>
-          {{!-- Hide link to the Twig implementation in production. Twig demo app only runs on localhost, we don't deploy it anywhere. --}}
-          {{!-- For the same reason, we don't include the link in the visual tests. --}}
-          {{#if @is_development}}
-          <li class="NavigationItem NavigationItem--alignmentYCenter hide-from-visual-tests">
-            <a
-              href="https://localhost:4443"
-              class="NavigationAction NavigationAction--pill"
-            >
-              Web Twig
-            </a>
-          </li>
-          {{/if}}
         </ul>
       </nav>
       <!-- Desktop Main Navigation: end -->
@@ -104,12 +92,6 @@
             <li class="NavigationItem NavigationItem--alignmentYCenter">
               <a href="/packages/web-react/" class="NavigationAction NavigationAction--pill {{# if (eq package 'Web React')}}NavigationAction--selected{{/if}}" {{# if (eq package 'Web React')}}aria-current="page"{{/if}}>Web React</a>
             </li>
-            {{!-- Hide link to the Twig implementation in production. Twig demo app only runs on localhost, we don't deploy it anywhere. --}}
-            {{#if @is_development}}
-            <li class="NavigationItem NavigationItem--alignmentYCenter">
-              <a href="https://localhost:4443" class="NavigationAction NavigationAction--pill">Web Twig</a>
-            </li>
-            {{/if}}
           </ul>
         </nav>
         <!-- Drawer Main Navigation: end -->
