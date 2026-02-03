@@ -10,7 +10,7 @@ import { LOGO } from './constants';
 
 const CardCustom = () => (
   <Grid cols={{ mobile: 1, tablet: 2, desktop: 4 }}>
-    <Card direction="horizontal-reversed" isBoxed>
+    <Card direction="horizontal-reversed" isBoxed alignmentY="center">
       <CardArtwork>
         <CardLink href="#">
           <PartnerLogo size="small" hasSafeArea={false}>
@@ -27,7 +27,7 @@ const CardCustom = () => (
       </CardBody>
     </Card>
 
-    <Card direction="horizontal-reversed" isBoxed>
+    <Card direction="horizontal-reversed" isBoxed alignmentY="center">
       <CardArtwork>
         <CardLink href="#">
           <PartnerLogo size="small" hasSafeArea={false}>
@@ -44,7 +44,7 @@ const CardCustom = () => (
       </CardBody>
     </Card>
 
-    <Card direction="horizontal-reversed" isBoxed>
+    <Card direction="horizontal-reversed" isBoxed alignmentY="center">
       <CardArtwork>
         <CardLink href="#">
           <PartnerLogo size="small" hasSafeArea={false}>
@@ -61,7 +61,7 @@ const CardCustom = () => (
       </CardBody>
     </Card>
 
-    <Card direction="horizontal-reversed" isBoxed>
+    <Card direction="horizontal-reversed" isBoxed alignmentY="center">
       <CardArtwork>
         <CardLink href="#">
           <PartnerLogo size="small" hasSafeArea={false}>

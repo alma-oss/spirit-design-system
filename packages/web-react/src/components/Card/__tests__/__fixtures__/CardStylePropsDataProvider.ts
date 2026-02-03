@@ -1,5 +1,5 @@
-import { AlignmentX, DirectionExtended } from '../../../../constants';
-import { type AlignmentXDictionaryType, CardSizes } from '../../../../types';
+import { AlignmentX, AlignmentY, DirectionExtended } from '../../../../constants';
+import { type AlignmentXDictionaryType, type AlignmentYDictionaryType, CardSizes } from '../../../../types';
 import { toPascalCase } from '../../../../utils';
 import { type UseCardStyleProps, type UseCardStylePropsReturn } from '../../useCardStyleProps';
 
@@ -22,13 +22,11 @@ export const defaultExpectedClasses = {
   title: 'CardTitle',
 };
 
-// Helper function to generate classes
 const generateExpectedClassProps = (overrides: Partial<typeof defaultExpectedClasses>) => ({
   ...defaultExpectedClasses,
   ...overrides,
 });
 
-// Helper for artworkAlignmentX, footerAlignmentX, and sizes
 const alignmentDataProvider = (type: 'artwork' | 'footer', values: { alignment: AlignmentXDictionaryType }[]) =>
   values.map(({ alignment }) => ({
     props: { [`${type}AlignmentX`]: alignment },
@@ -36,6 +34,17 @@ const alignmentDataProvider = (type: 'artwork' | 'footer', values: { alignment: 
     expected: {
       classProps: generateExpectedClassProps({
         [type]: `${defaultExpectedClasses[type]} ${defaultExpectedClasses[type]}--alignmentX${toPascalCase(alignment!)}`,
+      }),
+    },
+  }));
+
+const alignmentYDataProvider = (values: { alignment: AlignmentYDictionaryType }[]) =>
+  values.map(({ alignment }) => ({
+    props: { alignmentY: alignment },
+    description: `return correct classProps for alignmentY ${alignment!.toLowerCase()}`,
+    expected: {
+      classProps: generateExpectedClassProps({
+        root: `Card Card--alignmentY${toPascalCase(alignment!)}`,
       }),
     },
   }));
@@ -51,7 +60,6 @@ const sizeDataProvider = Object.values(CardSizes).map((size) => ({
 }));
 
 export const textPropsDataProvider: TextPropsDataProviderType[] = [
-  // Direction-specific classes
   {
     props: { direction: DirectionExtended.VERTICAL },
     description: 'return correct classProps for direction vertical',
@@ -68,28 +76,30 @@ export const textPropsDataProvider: TextPropsDataProviderType[] = [
     expected: { classProps: generateExpectedClassProps({ root: 'Card Card--horizontalReversed' }) },
   },
 
-  // Artwork alignment
   ...alignmentDataProvider('artwork', [
     { alignment: AlignmentX.LEFT },
     { alignment: AlignmentX.RIGHT },
     { alignment: AlignmentX.CENTER },
   ]),
 
-  // Footer alignment
   ...alignmentDataProvider('footer', [
     { alignment: AlignmentX.LEFT },
     { alignment: AlignmentX.RIGHT },
     { alignment: AlignmentX.CENTER },
   ]),
 
-  // Boxed card
+  ...alignmentYDataProvider([
+    { alignment: AlignmentY.TOP },
+    { alignment: AlignmentY.CENTER },
+    { alignment: AlignmentY.BOTTOM },
+  ]),
+
   {
     props: { isBoxed: true },
     description: 'return correct classProps for boxed card',
     expected: { classProps: generateExpectedClassProps({ root: 'Card Card--boxed' }) },
   },
 
-  // Body-specific properties
   {
     props: { isSelectable: true },
     description: 'return correct classProps for body selectable',
@@ -100,7 +110,6 @@ export const textPropsDataProvider: TextPropsDataProviderType[] = [
     },
   },
 
-  // Media-specific properties
   {
     props: { hasFilledHeight: true },
     description: 'return correct classProps for media with filled height',
@@ -121,7 +130,6 @@ export const textPropsDataProvider: TextPropsDataProviderType[] = [
   },
   ...sizeDataProvider,
 
-  // Title-specific properties
   {
     props: { isHeading: true },
     description: 'return correct classProps for title heading',
@@ -132,9 +140,9 @@ export const textPropsDataProvider: TextPropsDataProviderType[] = [
     },
   },
 
-  // Complex scenario
   {
     props: {
+      alignmentY: AlignmentY.CENTER,
       artworkAlignmentX: AlignmentX.LEFT,
       direction: DirectionExtended.HORIZONTAL,
       footerAlignmentX: AlignmentX.RIGHT,
@@ -145,14 +153,15 @@ export const textPropsDataProvider: TextPropsDataProviderType[] = [
       isSelectable: true,
       size: CardSizes.SMALL,
     },
-    description: 'return correct classProps for a horizontal, boxed, expanded card with small size',
+    description:
+      'return correct classProps for a horizontal, boxed, expanded card with small size and center alignment',
     expected: {
       classProps: generateExpectedClassProps({
         artwork: 'CardArtwork CardArtwork--alignmentXLeft',
         body: 'CardBody CardBody--selectable',
         footer: 'CardFooter CardFooter--alignmentXRight',
         media: 'CardMedia CardMedia--small CardMedia--expanded CardMedia--filledHeight',
-        root: 'Card Card--horizontal Card--boxed',
+        root: 'Card Card--alignmentYCenter Card--horizontal Card--boxed',
       }),
     },
   },

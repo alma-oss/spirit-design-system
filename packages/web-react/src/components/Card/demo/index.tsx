@@ -7,6 +7,7 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
+import CardAlignment from './CardAlignment';
 import CardContentOptions from './CardContentOptions';
 import CardCustom from './CardCustom';
 import CardFooterAlignment from './CardFooterAlignment';
@@ -41,6 +42,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Responsive Card Layout">
         <CardResponsiveCard />
+      </DocsSection>
+      <DocsSection title="Card Vertical Alignment">
+        <CardAlignment />
       </DocsSection>
       <DocsSection title="Media Options">
         <CardMediaOptions />

@@ -43,6 +43,8 @@ $layouts-boxed: (
     ),
 );
 
+$alignment-y-dictionary: dictionaries.$alignments-y;
+
 $gap: tokens.$space-900;
 $gap-dense: tokens.$space-700;
 

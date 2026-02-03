@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { DirectionExtended } from '../../../constants';
+import { AlignmentY, DirectionExtended } from '../../../constants';
 import { ButtonLink } from '../../ButtonLink';
 import { Container } from '../../Container';
 import { PartnerLogo } from '../../PartnerLogo';
@@ -24,6 +24,14 @@ const meta: Meta<typeof Card> = {
     },
   },
   argTypes: {
+    alignmentY: {
+      control: 'select',
+      description: 'Vertical alignment of the card content.',
+      options: [undefined, ...Object.values(AlignmentY)],
+      table: {
+        defaultValue: { summary: undefined },
+      },
+    },
     direction: {
       control: 'select',
       description: 'Direction of the card.',
@@ -44,6 +52,7 @@ const meta: Meta<typeof Card> = {
     },
   },
   args: {
+    alignmentY: undefined,
     direction: DirectionExtended.VERTICAL,
     elementType: 'article',
     isBoxed: false,
