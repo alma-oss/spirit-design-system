@@ -17,8 +17,6 @@ const defaultProps: Partial<SpiritControlButtonProps> = {
   type: 'button',
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_ControlButton'] }] */
 const _ControlButton = <T extends ElementType = 'button', S = void>(
   props: SpiritControlButtonProps<T, S>,
   ref: ForwardedRef<HTMLButtonElement>,

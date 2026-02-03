@@ -8,8 +8,6 @@ import { VisuallyHidden } from '../VisuallyHidden';
 import { PAGINATION_LINK_DEFAULT_ACCESSIBILITY_LABEL_PREFIX } from './constants';
 import { usePaginationStyleProps } from './usePaginationStyleProps';
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_PaginationLink'] }] */
 const _PaginationLink = <E extends ElementType = 'a'>(props: SpiritPaginationLinkProps<E>, ref: PolymorphicRef<E>) => {
   const { elementType: ElementTag = 'a', accessibilityLabel, isCurrent, pageNumber, ...restProps } = props;
   const visuallyHiddenLabel =

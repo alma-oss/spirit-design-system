@@ -6,8 +6,6 @@ import { type DrawerPanelElementType, type DrawerPanelProps } from '../../types'
 import { mergeStyleProps } from '../../utils';
 import { useDrawerStyleProps } from './useDrawerStyleProps';
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_DrawerPanel'] }] */
 const _DrawerPanel = <E extends ElementType = DrawerPanelElementType>(
   props: DrawerPanelProps<E>,
   ref: ForwardedRef<HTMLDivElement>,

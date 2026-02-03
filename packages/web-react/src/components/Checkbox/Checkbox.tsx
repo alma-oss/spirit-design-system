@@ -8,8 +8,6 @@ import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { useCheckboxStyleProps } from './useCheckboxStyleProps';
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_Checkbox'] }] */
 const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
   const { classProps, props: modifiedProps } = useCheckboxStyleProps(props);
   const {

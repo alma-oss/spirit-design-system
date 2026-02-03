@@ -231,4 +231,11 @@ export default [
       'react-refresh/only-export-components': 'off',
     },
   },
+  {
+    // Allow underscore dangle for components exported with forwardRef in src/components
+    files: ['src/components/**/*.{ts,tsx}'],
+    rules: {
+      'no-underscore-dangle': 'off',
+    },
+  },
 ];

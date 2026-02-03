@@ -5,8 +5,6 @@ import { useStyleProps } from '../../hooks';
 import { type SpiritTextFieldBaseInputProps } from '../../types';
 import { useTextFieldBaseInputStyleProps } from './useTextFieldBaseInputStyleProps';
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_TextFieldBaseInput'] }] */
 const _TextFieldBaseInput = (
   props: SpiritTextFieldBaseInputProps,
   ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>,

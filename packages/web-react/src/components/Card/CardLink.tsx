@@ -10,8 +10,6 @@ const defaultProps: Partial<SpiritCardLinkProps> = {
   elementType: 'a',
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_CardLink'] }] */
 const _CardLink = <E extends ElementType = 'a'>(props: SpiritCardLinkProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const {

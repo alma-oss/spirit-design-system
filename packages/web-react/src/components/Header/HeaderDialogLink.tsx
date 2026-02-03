@@ -6,8 +6,6 @@ import { type PolymorphicRef, type SpiritDialogHeaderLinkProps } from '../../typ
 import { mergeStyleProps } from '../../utils';
 import { useHeaderStyleProps } from './useHeaderStyleProps';
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_HeaderDialogLink'] }] */
 const _HeaderDialogLink = <E extends ElementType = 'a'>(
   props: SpiritDialogHeaderLinkProps<E>,
   ref: PolymorphicRef<E>,

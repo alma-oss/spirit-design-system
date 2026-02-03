@@ -10,8 +10,6 @@ import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { Icon } from '../Icon';
 import { useSelectStyleProps } from './useSelectStyleProps';
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_Select'] }] */
 const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>) => {
   const {
     'aria-describedby': ariaDescribedBy = '',

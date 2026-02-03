@@ -13,8 +13,6 @@ const defaultProps: Partial<SpiritNavigationActionProps> = {
   variant: ShapeVariants.BOX,
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_NavigationAction'] }] */
 const _NavigationAction = <E extends ElementType = 'a'>(
   props: SpiritNavigationActionProps<E>,
   ref: PolymorphicRef<E>,

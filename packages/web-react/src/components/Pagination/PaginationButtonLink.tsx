@@ -10,8 +10,6 @@ import {
   PAGINATION_PREVIOUS_LINK_DEFAULT_ACCESSIBILITY_LABEL,
 } from './constants';
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_PaginationButtonLink'] }] */
 const _PaginationButtonLink = <E extends ElementType = 'a'>(
   props: SpiritPaginationButtonLinkProps<E>,
   ref: ForwardedRef<HTMLAnchorElement>,

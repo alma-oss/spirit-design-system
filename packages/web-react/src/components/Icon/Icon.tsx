@@ -13,8 +13,6 @@ const defaultProps = {
   boxSize: DEFAULT_BOX_SIZE,
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_Icon'] }] */
 const _Icon = (props: SpiritIconProps, ref: ForwardedRef<SVGSVGElement>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { boxSize, name, title, ariaHidden, ...restProps } = propsWithDefaults;

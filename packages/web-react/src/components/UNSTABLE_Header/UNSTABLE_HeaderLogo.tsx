@@ -10,8 +10,6 @@ const defaultProps: Partial<SpiritHeaderLogoProps> = {
   elementType: 'a',
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_HeaderLogo'] }] */
 const _HeaderLogo = <E extends ElementType = 'a'>(
   props: SpiritHeaderLogoProps<E>,
   ref: PolymorphicRef<E>,

@@ -13,8 +13,6 @@ const defaultProps = {
   ...SLIDER_DEFAULT_PROPS,
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_Slider'] }] */
 const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const {

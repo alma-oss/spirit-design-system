@@ -13,8 +13,6 @@ const defaultProps: Partial<SpiritLinkProps> = {
   underlined: 'hover',
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_Link'] }] */
 const _Link = <E extends ElementType = 'a', T = void>(
   props: SpiritLinkProps<E, T>,
   ref: PolymorphicRef<E>,

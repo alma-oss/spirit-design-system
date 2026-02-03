@@ -6,8 +6,6 @@ import { NavigationAvatar } from '../../../Navigation';
 import { Text } from '../../../Text';
 import { DropdownPopoverContent } from '../HeaderWithNavigationAndNestedItems/MainHorizontalNavigationDropdown';
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_NavigationAvatarAsDropdownTrigger'] }] */
 const _NavigationAvatarAsDropdownTrigger = <E extends ElementType = 'button'>(
   props: SpiritNavigationAvatarProps<E>,
   ref: PolymorphicRef<E>,

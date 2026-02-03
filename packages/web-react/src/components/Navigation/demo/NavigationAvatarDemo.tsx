@@ -14,8 +14,6 @@ import Navigation from '../Navigation';
 import NavigationAvatar from '../NavigationAvatar';
 import NavigationItem from '../NavigationItem';
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_NavigationAvatarAsDropdownTrigger'] }] */
 const _NavigationAvatarAsDropdownTrigger = <E extends ElementType = 'a'>(
   props: SpiritNavigationActionProps<E>,
   ref: PolymorphicRef<E>,
