@@ -14,24 +14,24 @@
     "@alma-oss/spirit-icons": "workspace:^",
     "@alma-oss/spirit-web": "workspace:^",
     "@alma-oss/spirit-web-react": "workspace:^",
-    "next": "15.5.11",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "sass": "1.93.2",
-    "sass-embedded": "1.93.2"
+    "next": "catalog:frontend",
+    "react": "catalog:frontend",
+    "react-dom": "catalog:frontend",
+    "sass": "catalog:build",
+    "sass-embedded": "catalog:build"
   },
   "devDependencies": {
-    "@eslint/compat": "1.4.0",
-    "@eslint/eslintrc": "3.3.1",
-    "@next/eslint-plugin-next": "14.2.33",
-    "@types/node": "20.19.26",
-    "@types/react": "18.3.18",
-    "@types/react-dom": "18.3.5",
-    "eslint": "9.39.1",
-    "eslint-config-next": "14.2.29",
+    "@eslint/compat": "catalog:lint",
+    "@eslint/eslintrc": "catalog:lint",
+    "@next/eslint-plugin-next": "catalog:lint",
+    "@types/node": "catalog:types",
+    "@types/react": "catalog:types",
+    "@types/react-dom": "catalog:types",
+    "eslint": "catalog:lint",
+    "eslint-config-next": "catalog:lint",
     "eslint-config-spirit": "workspace:^",
-    "eslint-plugin-react-refresh": "0.4.24",
-    "globals": "16.5.0",
-    "typescript": "5.7.3"
+    "eslint-plugin-react-refresh": "catalog:lint",
+    "globals": "catalog:lint",
+    "typescript": "catalog:types"
   }
 }
