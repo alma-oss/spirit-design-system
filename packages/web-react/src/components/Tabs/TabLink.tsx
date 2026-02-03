@@ -11,8 +11,6 @@ const defaultProps: SpiritTabLinkProps = {
   itemProps: {},
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_TabLink'] }] */
 const _TabLink = <E extends ElementType = 'a'>(props: SpiritTabLinkProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'a', children, itemProps = {}, ...restProps } = propsWithDefaults;

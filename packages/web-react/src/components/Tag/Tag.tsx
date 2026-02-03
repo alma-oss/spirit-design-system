@@ -15,8 +15,6 @@ const defaultProps: Partial<SpiritTagProps> = {
   size: SizesExtended.MEDIUM,
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_Tag'] }] */
 const _Tag = <T extends ElementType = 'span', C = void, S = void>(
   props: SpiritTagProps<T, C, S>,
   ref: ForwardedRef<HTMLSpanElement>,

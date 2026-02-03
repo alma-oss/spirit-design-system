@@ -13,8 +13,6 @@ const defaultProps: SpiritAvatarProps = {
   size: SizesExtended.MEDIUM,
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_Avatar'] }] */
 const _Avatar = <E extends ElementType = 'div'>(props: SpiritAvatarProps<E>, ref: PolymorphicRef<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'div', children, ...restProps } = propsWithDefaults;

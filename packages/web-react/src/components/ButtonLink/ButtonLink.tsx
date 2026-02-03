@@ -22,8 +22,6 @@ const defaultProps: Partial<SpiritButtonLinkProps> = {
   size: 'medium',
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_ButtonLink'] }] */
 const _ButtonLink = <T extends ElementType = 'a', C = void, S = void>(
   props: SpiritButtonLinkProps<T, C, S>,
   ref: ForwardedRef<HTMLAnchorElement>,

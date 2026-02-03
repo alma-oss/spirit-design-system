@@ -6,8 +6,6 @@ import { type PolymorphicRef, type SpiritHeaderLinkProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useHeaderStyleProps } from './useHeaderStyleProps';
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_HeaderLink'] }] */
 const _HeaderLink = <E extends ElementType = 'a'>(
   props: SpiritHeaderLinkProps<E>,
   ref: PolymorphicRef<E>,

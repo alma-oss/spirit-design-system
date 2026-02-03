@@ -13,8 +13,6 @@ const defaultProps: Partial<SpiritNavigationAvatarProps> = {
   isSquare: false,
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_NavigationAvatar'] }] */
 const _NavigationAvatar = <E extends ElementType = 'a'>(
   props: SpiritNavigationAvatarProps<E>,
   ref: PolymorphicRef<E>,

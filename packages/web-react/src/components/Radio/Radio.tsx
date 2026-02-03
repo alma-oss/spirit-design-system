@@ -7,8 +7,6 @@ import { type SpiritRadioProps } from '../../types';
 import { HelperText, Label, useAriaIds } from '../Field';
 import { useRadioStyleProps } from './useRadioStyleProps';
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_Radio'] }] */
 const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
   const { classProps, props: modifiedProps } = useRadioStyleProps(props);
   const {

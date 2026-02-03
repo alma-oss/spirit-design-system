@@ -10,8 +10,6 @@ const defaultProps: Partial<ToastLinkProps> = {
   elementType: 'a',
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_ToastBarLink'] }] */
 const _ToastBarLink = (props: ToastLinkProps, ref: ForwardedRef<HTMLAnchorElement>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const {

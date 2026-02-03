@@ -10,8 +10,6 @@ const defaultProps: Partial<SpiritSkipLinkProps> = {
   elementType: 'a',
 };
 
-/* We need an exception for components exported with forwardRef */
-/* eslint no-underscore-dangle: ['error', { allow: ['_SkipLink'] }] */
 const _SkipLink = <E extends ElementType = 'a'>(props: SpiritSkipLinkProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
 
