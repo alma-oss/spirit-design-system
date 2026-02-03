@@ -6,6 +6,7 @@ This file provides AI assistants with context and guidelines for working with th
 
 - [Contributing Guide](CONTRIBUTING.md)
 - [Git Workflow Guidelines](docs/ai-instructions/git-workflow.md) - Branch naming, commit messages, and PRs
+- [Code Style Guidelines](docs/ai-instructions/code-style.md) - Formatting tools and naming conventions
 
 ## Project Overview
 
