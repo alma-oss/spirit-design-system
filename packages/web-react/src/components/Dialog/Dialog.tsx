@@ -79,5 +79,4 @@ const Dialog = (
 
 Dialog.spiritComponent = 'Dialog';
 
-// @ts-expect-error - TransferProps index signature causes Omit to lose type information
 export default forwardRef(Dialog);

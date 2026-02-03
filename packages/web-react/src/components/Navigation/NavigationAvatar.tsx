@@ -42,7 +42,6 @@ const _NavigationAvatar = <E extends ElementType = 'a'>(
   );
 };
 
-// @ts-expect-error - TransferProps index signature causes Omit to lose type information
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const NavigationAvatar = forwardRef(_NavigationAvatar) as any as (<E extends ElementType = 'a'>(
   props: SpiritNavigationAvatarProps<E> & { ref?: PolymorphicRef<E> },

@@ -51,7 +51,6 @@ const _Icon = (props: SpiritIconProps & { name: string }, ref: ForwardedRef<SVGS
   );
 };
 
-// @ts-expect-error - TransferProps index signature causes Omit to lose type information
 const Icon = forwardRef<SVGSVGElement, SpiritIconProps>(_Icon);
 
 Icon.spiritComponent = 'Icon';

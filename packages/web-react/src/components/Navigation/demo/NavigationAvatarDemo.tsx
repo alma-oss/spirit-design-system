@@ -21,7 +21,6 @@ const NavigationAvatarAsDropdownTrigger = forwardRef<
   HTMLButtonElement,
   SpiritNavigationAvatarProps<'button'> & { avatarContent: React.ReactElement | React.ReactNode }
 >(
-  // @ts-expect-error - TransferProps index signature causes Omit to lose type information
   _NavigationAvatarAsDropdownTrigger,
 );
 
