@@ -6,14 +6,14 @@
 
     <section class="theme-light-on-brand bg-primary text-primary text-center py-1200 py-tablet-1700">
       <div class="Container">
-  
+
         <h1 class="typography-heading-xlarge-bold">
           Spirit Design System
         </h1>
         <h2 class="typography-heading-small-regular text-secondary mb-1000">
           Development Preview
         </h2>
-  
+
         <div class="Flex Flex--horizontal Flex--wrap Flex--alignmentXCenter Flex--alignmentYCenter">
           <a
             href="https://spirit.supernova-docs.io/spirit/"
@@ -28,10 +28,10 @@
             GitHub
           </a>
         </div>
-  
+
       </div>
     </section>
-    
+
     <section class="py-1100 pt-tablet-1600">
       <div class="Container">
 
@@ -44,12 +44,6 @@
           <li class="d-grid">
             <a href="/packages/web-react/" class="docs-Card">Web React</a>
           </li>
-          {{!-- Hide link to the Twig implementation in production. Twig demo app only runs on localhost, we don't deploy it anywhere. --}}
-          {{#if @is_development}}
-            <li class="d-grid">
-              <a href="https://localhost:4443" class="docs-Card">Web Twig</a>
-            </li>
-          {{/if}}
         </ul>
 
       </div>
