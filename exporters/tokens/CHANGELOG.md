@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>4.0.3 (2026-02-04)</small>
+
+- chore(deps): pin dependencies ([5bb95e5](https://github.com/alma-oss/spirit-design-system/commit/5bb95e5))
+- feat(exporter-tokens): allow REM units recalculation #DS-2284 ([04fea52](https://github.com/alma-oss/spirit-design-system/commit/04fea52)), closes [#DS-2284](https://github.com/alma-oss/spirit-design-system/issues/DS-2284)
+
 <a name="4.0.2"></a>
 
 ## [4.0.2](https://github.com/lmc-eu/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.0.1...@alma-oss/spirit-tokens-exporter@4.0.2) (2026-01-21)

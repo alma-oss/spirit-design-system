@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.3.3 (2026-02-04)</small>
+
+- chore(deps): upgrade next.js to 15.5.11 ([1d4f848](https://github.com/alma-oss/spirit-design-system/commit/1d4f848))
+
 <a name="0.3.2"></a>
 
 ## [0.3.2](https://github.com/lmc-eu/spirit-design-system/compare/@alma-oss/spirit-example-next-with-pages-router@0.3.1...@alma-oss/spirit-example-next-with-pages-router@0.3.2) (2026-01-21)

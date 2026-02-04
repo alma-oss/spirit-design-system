@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>2.0.2 (2026-02-04)</small>
+
+- chore(repo): use Nx project configuration for libraries ([ebc2ff5](https://github.com/lmc-eu/spirit-design-system/commit/ebc2ff5))
+
 <a name="2.0.1"></a>
 
 ## [2.0.1](https://github.com/lmc-eu/spirit-design-system/compare/@alma-oss/spirit-codemods@2.0.0...@alma-oss/spirit-codemods@2.0.1) (2025-12-19)

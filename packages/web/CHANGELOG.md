@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>4.1.1 (2026-02-04)</small>
+
+- feat(web): accessibility - connect badge with PricingPlan heading #DS-2180 ([e00eb2f](https://github.com/lmc-eu/spirit-design-system/commit/e00eb2f)), closes [#DS-2180](https://github.com/lmc-eu/spirit-design-system/issues/DS-2180)
+- feat(web): introduce responsive Button Symmetrical classes #DS-2311 ([f1c655f](https://github.com/lmc-eu/spirit-design-system/commit/f1c655f)), closes [#DS-2311](https://github.com/lmc-eu/spirit-design-system/issues/DS-2311)
+- feat(web): introduce responsive ControlButton Symmetrical classes #DS-2311 ([514c7e5](https://github.com/lmc-eu/spirit-design-system/commit/514c7e5)), closes [#DS-2311](https://github.com/lmc-eu/spirit-design-system/issues/DS-2311)
+- fix(web): do not log @debug in SCSS tests, add tests to check the warning #DS-2323 ([b022b1b](https://github.com/lmc-eu/spirit-design-system/commit/b022b1b)), closes [#DS-2323](https://github.com/lmc-eu/spirit-design-system/issues/DS-2323)
+- fix(web): remove unneeded eslint-disable and add new one where needed ([550cdc1](https://github.com/lmc-eu/spirit-design-system/commit/550cdc1))
+- chore(deps-dev): bump glob from 11.0.0 to 11.1.0 in /packages/web ([c627907](https://github.com/lmc-eu/spirit-design-system/commit/c627907))
+- chore(deps): update dependency glob to v11 ([00bf245](https://github.com/lmc-eu/spirit-design-system/commit/00bf245))
+- chore(repo): use Nx project configuration for libraries ([ebc2ff5](https://github.com/lmc-eu/spirit-design-system/commit/ebc2ff5))
+- docs(web,web-react): introduce Breakpoint dictionary and link it in READMEs ([bf67ed9](https://github.com/lmc-eu/spirit-design-system/commit/bf67ed9))
+- feat(web, web-react): add `inputPosition` prop to `Checkbox`, `Radio`, and `Toggle` #DS-2312 ([9d081e5](https://github.com/lmc-eu/spirit-design-system/commit/9d081e5)), closes [#DS-2312](https://github.com/lmc-eu/spirit-design-system/issues/DS-2312)
+
 <a name="4.1.0"></a>
 
 # [4.1.0](https://github.com/lmc-eu/spirit-design-system/compare/@alma-oss/spirit-web@4.0.1...@alma-oss/spirit-web@4.1.0) (2026-01-21)

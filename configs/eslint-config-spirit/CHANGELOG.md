@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.1.5 (2026-02-04)</small>
+
+- style(eslint-config): introduce stylistic rules instead of prettier formatting ([dd45550](https://github.com/lmc-eu/spirit-design-system/commit/dd45550))
+- style(repo): apply stylistic rules ([a5d3373](https://github.com/lmc-eu/spirit-design-system/commit/a5d3373))
+
 <a name="0.1.4"></a>
 
 ## [0.1.4](https://github.com/lmc-eu/spirit-design-system/compare/eslint-config-spirit@0.1.3...eslint-config-spirit@0.1.4) (2025-12-01)

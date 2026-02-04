@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>4.2.1 (2026-02-04)</small>
+
+- style(web-react): create eslint rule for using underscore dangle for internal components ([13a0d5d](https://github.com/lmc-eu/spirit-design-system/commit/13a0d5d))
+- fix(web-react): clean up ESLint directives and improve code consistency across demo files ([d29fb2f](https://github.com/lmc-eu/spirit-design-system/commit/d29fb2f))
+- fix(web-react): minor fixes across Figma Code Connect files #DS-2343 ([4975057](https://github.com/lmc-eu/spirit-design-system/commit/4975057)), closes [#DS-2343](https://github.com/lmc-eu/spirit-design-system/issues/DS-2343)
+- fix(web-react): provide `aria-current="page"` for active PaginationLink #DS-2354 ([8cfd404](https://github.com/lmc-eu/spirit-design-system/commit/8cfd404)), closes [#DS-2354](https://github.com/lmc-eu/spirit-design-system/issues/DS-2354)
+- chore(deps-dev): bump glob from 11.0.0 to 11.1.0 ([c3f88d2](https://github.com/lmc-eu/spirit-design-system/commit/c3f88d2))
+- chore(deps): pin dependencies ([5bb95e5](https://github.com/lmc-eu/spirit-design-system/commit/5bb95e5))
+- chore(deps): update dependency glob to v11 ([00bf245](https://github.com/lmc-eu/spirit-design-system/commit/00bf245))
+- chore(deps): update monorepo:storybook to v10.1.11 ([137cc04](https://github.com/lmc-eu/spirit-design-system/commit/137cc04))
+- chore(repo): use Nx project configuration for libraries ([ebc2ff5](https://github.com/lmc-eu/spirit-design-system/commit/ebc2ff5))
+- chore(web-react): delete unused `useDirectionClass` hook ([09ea3e3](https://github.com/lmc-eu/spirit-design-system/commit/09ea3e3))
+- chore(web-react): update ESlint config rules for Figma files ([1cab41c](https://github.com/lmc-eu/spirit-design-system/commit/1cab41c))
+- refactor(web-react): use named imports for React and ReactDOM constructs #DS-2364 ([d6e08cd](https://github.com/lmc-eu/spirit-design-system/commit/d6e08cd)), closes [#DS-2364](https://github.com/lmc-eu/spirit-design-system/issues/DS-2364)
+- feat(web-react): accessibility - connect badge with PricingPlan heading #DS-2180 ([83eb54f](https://github.com/lmc-eu/spirit-design-system/commit/83eb54f)), closes [#DS-2180](https://github.com/lmc-eu/spirit-design-system/issues/DS-2180)
+- feat(web-react): allow responsive isSymmetrical in Button and ButtonLink #DS-2311 ([680d1fa](https://github.com/lmc-eu/spirit-design-system/commit/680d1fa)), closes [#DS-2311](https://github.com/lmc-eu/spirit-design-system/issues/DS-2311)
+- feat(web-react): allow responsive isSymmetrical in ControlButton #DS-2311 ([81e8956](https://github.com/lmc-eu/spirit-design-system/commit/81e8956)), closes [#DS-2311](https://github.com/lmc-eu/spirit-design-system/issues/DS-2311)
+- feat(web-react): implement Figma Code Connect for FileUploader #DS-2343 ([43f36aa](https://github.com/lmc-eu/spirit-design-system/commit/43f36aa)), closes [#DS-2343](https://github.com/lmc-eu/spirit-design-system/issues/DS-2343)
+- feat(web-react): introduce `Hidden` component #DS-2311 ([030d4d8](https://github.com/lmc-eu/spirit-design-system/commit/030d4d8)), closes [#DS-2311](https://github.com/lmc-eu/spirit-design-system/issues/DS-2311)
+- feat(web-react): introduce Figma Code Connect in UNSTABLE_Header #DS-2343 ([8855ab4](https://github.com/lmc-eu/spirit-design-system/commit/8855ab4)), closes [#DS-2343](https://github.com/lmc-eu/spirit-design-system/issues/DS-2343)
+- feat(web-react): introduce Figma Code Connect to Accordion #DS-2343 ([e922ae7](https://github.com/lmc-eu/spirit-design-system/commit/e922ae7)), closes [#DS-2343](https://github.com/lmc-eu/spirit-design-system/issues/DS-2343)
+- feat(web-react): introduce Figma Code Connect to Card #DS-2343 ([da710a2](https://github.com/lmc-eu/spirit-design-system/commit/da710a2)), closes [#DS-2343](https://github.com/lmc-eu/spirit-design-system/issues/DS-2343)
+- test(web-react): unify selectors in the unit tests for PaginationLink #DS-2354 ([5c11183](https://github.com/lmc-eu/spirit-design-system/commit/5c11183)), closes [#DS-2354](https://github.com/lmc-eu/spirit-design-system/issues/DS-2354)
+- docs(web,web-react): introduce Breakpoint dictionary and link it in READMEs ([bf67ed9](https://github.com/lmc-eu/spirit-design-system/commit/bf67ed9))
+- feat(web, web-react): add `inputPosition` prop to `Checkbox`, `Radio`, and `Toggle` #DS-2312 ([9d081e5](https://github.com/lmc-eu/spirit-design-system/commit/9d081e5)), closes [#DS-2312](https://github.com/lmc-eu/spirit-design-system/issues/DS-2312)
+
 <a name="4.2.0"></a>
 
 # [4.2.0](https://github.com/lmc-eu/spirit-design-system/compare/@alma-oss/spirit-web-react@4.1.0...@alma-oss/spirit-web-react@4.2.0) (2026-01-21)

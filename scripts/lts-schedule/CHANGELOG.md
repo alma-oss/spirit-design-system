@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>2.0.1 (2026-02-04)</small>
+
+- style(repo): apply stylistic rules ([a5d3373](https://github.com/lmc-eu/spirit-design-system/commit/a5d3373))
+
 <a name="2.0.0"></a>
 
 # 2.0.0 (2025-12-15)

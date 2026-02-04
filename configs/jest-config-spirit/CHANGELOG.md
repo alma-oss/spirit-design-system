@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.2.1 (2026-02-04)</small>
+
+- style(repo): apply stylistic rules ([a5d3373](https://github.com/lmc-eu/spirit-design-system/commit/a5d3373))
+
 <a name="0.2.0"></a>
 
 # [0.2.0](https://github.com/lmc-eu/spirit-design-system/compare/jest-config-spirit@0.1.10...jest-config-spirit@0.2.0) (2026-01-21)

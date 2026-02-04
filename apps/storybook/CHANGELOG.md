@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.3.3 (2026-02-04)</small>
+
+- chore(ci): disable connection to nx cloud ([3581e3d](https://github.com/lmc-eu/spirit-design-system/commit/3581e3d))
+- chore(deps): update monorepo:storybook to v10.1.11 ([137cc04](https://github.com/lmc-eu/spirit-design-system/commit/137cc04))
+- chore(repo): use Nx project configuration for libraries ([ebc2ff5](https://github.com/lmc-eu/spirit-design-system/commit/ebc2ff5))
+
 <a name="0.3.2"></a>
 
 ## [0.3.2](https://github.com/lmc-eu/spirit-design-system/compare/@alma-oss/spirit-storybook@0.3.1...@alma-oss/spirit-storybook@0.3.2) (2026-01-21)

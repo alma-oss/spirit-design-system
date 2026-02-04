@@ -1,6 +1,6 @@
 {
   "name": "@alma-oss/spirit-lts-schedule",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Generate the Spirit Design System LTS schedule",
   "private": true,
   "main": "lib/index.js",

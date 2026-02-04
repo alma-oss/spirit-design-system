@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>0.5.3 (2026-02-04)</small>
+
+- chore(deps): bump next in /examples/next-with-app-router ([e2c0871](https://github.com/alma-oss/spirit-design-system/commit/e2c0871))
+- chore(deps): upgrade next.js to 15.5.11 ([1d4f848](https://github.com/alma-oss/spirit-design-system/commit/1d4f848))
+
 <a name="0.5.2"></a>
 
 ## [0.5.2](https://github.com/lmc-eu/spirit-design-system/compare/@alma-oss/spirit-example-next-with-app-router@0.5.1...@alma-oss/spirit-example-next-with-app-router@0.5.2) (2026-01-21)
