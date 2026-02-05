@@ -5,8 +5,8 @@ This file provides AI assistants with context and guidelines for working with th
 ## Quick Links
 
 - [Contributing Guide](CONTRIBUTING.md)
-- [Git Workflow Guidelines](docs/agents/instructions/git-workflow.md) – branch naming, commit messages, and PRs
-- [Code Style Guidelines](docs/agents/instructions/code-style.md) – formatting tools and naming conventions
+- [Git Workflow Guidelines](.agents/instructions/git-workflow.md) – branch naming, commit messages, and PRs
+- [Code Style Guidelines](.agents/instructions/code-style.md) – formatting tools and naming conventions
 
 ## Project Overview
 
