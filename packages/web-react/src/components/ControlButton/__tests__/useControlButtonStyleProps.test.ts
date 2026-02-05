@@ -128,4 +128,30 @@ describe('useControlButtonStyleProps', () => {
       'ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border',
     );
   });
+
+  it.each([
+    // spacing, expectedStyle
+    [undefined, {}],
+    ['space-100', { '--control-button-spacing': 'var(--spirit-space-100)' }],
+    [
+      { mobile: 'space-100', tablet: 'space-200' },
+      {
+        '--control-button-spacing': 'var(--spirit-space-100)',
+        '--control-button-spacing-tablet': 'var(--spirit-space-200)',
+      },
+    ],
+    [
+      { mobile: 'space-100', tablet: 'space-200', desktop: 'space-400' },
+      {
+        '--control-button-spacing': 'var(--spirit-space-100)',
+        '--control-button-spacing-tablet': 'var(--spirit-space-200)',
+        '--control-button-spacing-desktop': 'var(--spirit-space-400)',
+      },
+    ],
+  ])('should return spacing CSS properties', (spacing, expectedStyle) => {
+    const props = { size: 'medium', spacing } as SpiritControlButtonProps;
+    const { result } = renderHook(() => useControlButtonStyleProps(props));
+
+    expect(result.current.styleProps).toEqual(expectedStyle);
+  });
 });

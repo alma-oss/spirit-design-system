@@ -31,7 +31,7 @@ describe('Button accessibility', () => {
   it('should be accessible when rendered as a responsive icon/text action', async () => {
     const { getByRole } = render(
       <Button isSymmetrical={{ tablet: true }}>
-        <Icon name="hamburger" marginRight={{ mobile: 'space-400', tablet: 'space-0' }} />
+        <Icon name="hamburger" />
         <VisuallyHidden>Menu</VisuallyHidden>
         <Hidden from="tablet" aria-hidden="true">
           Menu

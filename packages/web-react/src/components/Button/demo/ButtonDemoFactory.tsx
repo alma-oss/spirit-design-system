@@ -23,7 +23,7 @@ const ButtonDemoFactory = ({ ...props }: ButtonBaseProps) => {
                 {`Button ${color}`}
               </Button>{' '}
               <Button size={size} color={color} {...props}>
-                <Icon name="hamburger" marginRight="space-400" />
+                <Icon name="hamburger" />
                 Menu
               </Button>{' '}
               <Button size={size} color={color} isSymmetrical {...props}>

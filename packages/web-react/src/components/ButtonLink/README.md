@@ -34,7 +34,7 @@ You can define responsive values for the `isSymmetrical` prop using an object:
 
 ```jsx
 <ButtonLink href="#" isSymmetrical={{ tablet: true }}>
-  <Icon name="hamburger" marginRight={{ mobile: 'space-400', tablet: 'space-0' }} />
+  <Icon name="hamburger" />
   <VisuallyHidden>Menu</VisuallyHidden>
   <Hidden from="tablet" aria-hidden="true">
     Menu
@@ -46,7 +46,7 @@ To turn off symmetrical from a specific breakpoint onwards, set the value to `fa
 
 ```jsx
 <ButtonLink href="#" isSymmetrical={{ mobile: true, tablet: false }}>
-  <Icon name="hamburger" marginRight={{ tablet: 'space-400' }} />
+  <Icon name="hamburger" />
   <VisuallyHidden>Menu</VisuallyHidden>
   <Hidden on="mobile" aria-hidden="true">
     Menu

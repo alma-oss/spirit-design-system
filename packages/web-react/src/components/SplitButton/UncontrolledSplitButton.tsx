@@ -36,7 +36,7 @@ const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
   return (
     <SplitButton {...restProps} id={id} isDisabled={isDisabled}>
       <Button onClick={buttonOnClick}>
-        {buttonIconName && <Icon name={buttonIconName} marginRight={!isButtonLabelHidden && 'space-400'} />}
+        {buttonIconName && <Icon name={buttonIconName} />}
         {isButtonLabelHidden ? <VisuallyHidden>{buttonLabel}</VisuallyHidden> : buttonLabel}
       </Button>
       <Dropdown
@@ -51,7 +51,7 @@ const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
           ) : (
             dropdownTriggerLabel
           )}
-          <Icon name={dropdownTriggerIconName} marginLeft={!isDropdownTriggerLabelHidden && 'space-400'} />
+          <Icon name={dropdownTriggerIconName} />
         </DropdownTrigger>
         <DropdownPopover>{children}</DropdownPopover>
       </Dropdown>
