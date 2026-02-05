@@ -3,10 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## <small>2.0.2 (2026-02-04)</small>
+## [2.0.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-analytics@2.0.1...@alma-oss/spirit-analytics@2.0.2) (2026-02-04)
 
-- chore(deps): pin dependencies ([5bb95e5](https://github.com/lmc-eu/spirit-design-system/commit/5bb95e5))
-- chore(repo): use Nx project configuration for libraries ([ebc2ff5](https://github.com/lmc-eu/spirit-design-system/commit/ebc2ff5))
+### Chores
+
+- **deps:** pin dependencies ([5bb95e5](https://github.com/alma-oss/spirit-design-system/commit/5bb95e5))
+- **repo:** use Nx project configuration for libraries ([ebc2ff5](https://github.com/alma-oss/spirit-design-system/commit/ebc2ff5))
 
 <a name="2.0.1"></a>
 
