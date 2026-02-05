@@ -14,7 +14,7 @@
     "@alma-oss/spirit-icons": "workspace:^",
     "@alma-oss/spirit-web": "workspace:^",
     "@alma-oss/spirit-web-react": "workspace:^",
-    "next": "15.5.11",
+    "next": "16.0.10",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "sass": "1.93.2",
