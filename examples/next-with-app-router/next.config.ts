@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
     fiber: false,
     implementation: 'sass-embedded',
     quietDeps: true,
-    includePaths: [
+    loadPaths: [
       path.join(pathDir, '../../node_modules'),
       path.join(pathDir, '../../node_modules/@alma-oss/spirit-design-tokens/scss'),
     ],
