@@ -35,8 +35,8 @@ For detailed API references, examples, and common mistakes:
 6. **Use https://picsum.photos/ for all image placeholders** - Format: `https://picsum.photos/seed/{identifier}/{width}/{height}`
 7. **DO NOT set props to default values** - Only set props when they differ from component defaults (check API Reference tables in component docs)
 8. **Context7 MCP is a LAST RESORT** - Only use for components not documented in this skill:
-   - Call `resolve-library-id` with `@lmc-eu/spirit-design-system`
-   - Call `query-docs` with `/lmc-eu/spirit-design-system` and the component name
+   - Call `resolve-library-id` with `@alma-oss/spirit-design-system`
+   - Call `query-docs` with `/alma-oss/spirit-design-system` and the component name
 9. **ASK when uncertain** - If you encounter a layout, pattern, or problem you don't know how to implement with Spirit components:
    - **DO NOT guess or improvise** - Stop and ask the user for guidance
    - Describe what you're trying to achieve and what's unclear
