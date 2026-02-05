@@ -39,5 +39,5 @@ Before committing, verify code passes all checks:
 
 ```bash
 make format     # Auto-format code
-mate test       # Run linting, type checking, and tests
+make test       # Run linting, type checking, and tests
 ```
