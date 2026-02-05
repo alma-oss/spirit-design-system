@@ -1,5 +1,9 @@
 name: 💥 Supernova
 
+concurrency:
+  group: supernova-io
+  cancel-in-progress: true
+
 on:
   push:
     branches:
@@ -31,6 +35,9 @@ jobs:
     needs: has-tags
     if: ${{ needs.has-tags.outputs.has-tag == 'true' }}
     runs-on: ubuntu-24.04
+    environment: supernova-io
+    permissions:
+      contents: read
 
     steps:
       - name: Clone repository
