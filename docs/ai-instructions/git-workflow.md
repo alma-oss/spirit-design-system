@@ -69,10 +69,7 @@ type(scope): description #DS-XXXX
 
 ### Valid Scopes
 
-Packages: `analytics`, `codemods`, `common`, `design-tokens`, `icons`, `web`, `web-react`
-Exporters: `exporter-assets`, `exporter-tokens`
-Configs: `eslint-config`, `jest-config`, `prettier-config`, `stylelint-config`, `typescript-config`
-Other: `scripts`, `ci`, `repo`, `demo`, `docsite`, `deps`, `deps-dev`
+See the full list of valid commit scopes in [`@.commitlintrc.mjs`](../../.commitlintrc.mjs). This file is the source of truth for which scopes are accepted.
 
 ### Jira Issue ID
 
@@ -104,9 +101,9 @@ git rebase -i --autosquash main
 
 ```bash
 # ✅ Correct (lowercase)
-feat(web-react): introduce `spacing` prop for Button #DS-2344
+feat(web-react): introduce `spacing` prop for `Button` #DS-2344
 fix(web-react): clean up ESLint directives
-chore(deps): upgrade next.js to 15.5.11
+chore(deps): upgrade Next.js to 15.5.11
 refactor(web-react): use named imports for React constructs #DS-2364
 docs(repo): introduce documentation about E2E tests #DS-2320
 
