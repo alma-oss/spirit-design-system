@@ -43,6 +43,11 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
+      - name: Install system dependencies (libsecret)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsecret-1-0 dbus
+
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
 
