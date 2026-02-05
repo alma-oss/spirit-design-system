@@ -10,7 +10,7 @@ const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
     fiber: false,
-    includePaths: [
+    loadPaths: [
       path.join(pathDir, '../../node_modules'),
       path.join(pathDir, '../../node_modules/@alma-oss/spirit-design-tokens/scss'),
     ],
