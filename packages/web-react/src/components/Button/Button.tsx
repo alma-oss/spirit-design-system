@@ -3,7 +3,7 @@
 import React, { type ElementType, forwardRef } from 'react';
 import { usePropsContext } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type ButtonProps, type ButtonStyleProps, type PolymorphicComponent, type PolymorphicRef } from '../../types';
+import { type SpiritButtonProps, type ButtonProps, type PolymorphicComponent, type PolymorphicRef } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Spinner } from '../Spinner';
 import { useButtonProps } from './useButtonProps';
@@ -25,7 +25,7 @@ const defaultProps = {
 };
 
 const _Button = <T extends ElementType = 'button', C = void, S = void>(
-  props: ButtonProps<T, C, S>,
+  props: SpiritButtonProps<T, C, S>,
   ref: PolymorphicRef<T>,
 ) => {
   const propsWithContext = usePropsContext();
@@ -47,7 +47,7 @@ const _Button = <T extends ElementType = 'button', C = void, S = void>(
   );
 };
 
-const Button = forwardRef(_Button) as unknown as PolymorphicComponent<'button', ButtonStyleProps<void, void>>;
+const Button = forwardRef(_Button) as unknown as PolymorphicComponent<'button', ButtonProps<void, void>>;
 
 Button.spiritComponent = 'Button';
 Button.displayName = 'Button';

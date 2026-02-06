@@ -3,10 +3,11 @@
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import {
-  type ButtonLinkProps,
-  type ButtonStyleProps,
+  type SpiritButtonLinkProps,
   type PolymorphicComponent,
   type PolymorphicRef,
+  ButtonProps,
+  ButtonSizesType,
 } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Spinner } from '../Spinner';
@@ -24,11 +25,11 @@ const defaultProps = {
   isDisabled: false,
   isLoading: false,
   isSymmetrical: false,
-  size: 'medium',
+  size: 'medium' as ButtonSizesType,
 };
 
 const _ButtonLink = <T extends ElementType = 'a', C = void, S = void>(
-  props: ButtonLinkProps<T, C, S>,
+  props: SpiritButtonLinkProps<T, C, S>,
   ref: PolymorphicRef<T>,
 ) => {
   const propsWithDefaults = { ...defaultProps, ...props };
@@ -36,7 +37,7 @@ const _ButtonLink = <T extends ElementType = 'a', C = void, S = void>(
 
   const Component = elementType as ElementType;
 
-  const { buttonLinkProps } = useButtonLinkProps(restProps);
+  const { buttonLinkProps } = useButtonLinkProps(propsWithDefaults);
   const { classProps, props: modifiedProps } = useButtonLinkStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
@@ -51,7 +52,7 @@ const _ButtonLink = <T extends ElementType = 'a', C = void, S = void>(
 
 const ButtonLink = forwardRef(_ButtonLink) as unknown as PolymorphicComponent<
   'a',
-  Omit<ButtonStyleProps<void, void>, 'type'>
+  Omit<ButtonProps<void, void>, 'type'>
 >;
 
 ButtonLink.spiritComponent = 'ButtonLink';
