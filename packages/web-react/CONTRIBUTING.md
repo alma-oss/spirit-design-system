@@ -60,7 +60,7 @@ This is an example of a typical file structure of a component:
 
 #### Visual Hierarchy
 
-```
+```txt
 ┌─────────────────────────────────────────────────────────────┐
 │ Spirit<Component>Props<E>                                   │  ← PUBLIC API (polymorphic)
 │ = PolymorphicComponentProps<E, <Component>Props>            │
@@ -69,7 +69,7 @@ This is an example of a typical file structure of a component:
                          ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ <Component>Props                                            │  ← Internal (complete props)
-│ extends:                                                     │
+│ extends:                                                    │
 │   - <Component>StyleProps                                   │
 │   - <Component>State (optional)                             │
 │   - ChildrenProps                                           │
