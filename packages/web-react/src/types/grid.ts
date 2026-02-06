@@ -10,6 +10,7 @@ import {
   type StyleProps,
 } from './shared';
 
+/** ===== BASE API ===== */
 export type GridColsBreakpoints = {
   mobile?: GridColumns;
   tablet?: GridColumns;
@@ -49,16 +50,21 @@ export interface GridItemCustomLayoutProps {
   rowStart?: GridItemPosition;
 }
 
-export interface GridBaseProps extends GridCustomLayoutProps, ChildrenProps, StyleProps {}
+export interface GridBaseProps extends ChildrenProps, StyleProps {}
 
-export interface GridItemBaseProps extends GridItemCustomLayoutProps, ChildrenProps, StyleProps {}
+export interface GridItemBaseProps extends ChildrenProps, StyleProps {}
 
-export type GridProps<T extends ElementType = 'div'> = PolymorphicComponentProps<T, GridBaseProps>;
+/** ===== STYLE API ===== */
+export interface GridStyleProps extends GridBaseProps, GridCustomLayoutProps {}
 
-export type GridItemProps<T extends ElementType = 'div'> = PolymorphicComponentProps<T, GridItemBaseProps>;
+export interface GridItemStyleProps extends GridItemBaseProps, GridItemCustomLayoutProps {}
 
-/** @deprecated Use GridProps instead */
-export type SpiritGridProps<T extends ElementType = 'div'> = GridProps<T>;
+/** ===== INTERNAL API ===== */
+export interface GridProps extends GridStyleProps {}
 
-/** @deprecated Use GridItemProps instead */
-export type SpiritGridItemProps<T extends ElementType = 'div'> = GridItemProps<T>;
+export interface GridItemProps extends GridItemStyleProps {}
+
+/** ===== PUBLIC API ===== */
+export type SpiritGridProps<T extends ElementType = 'div'> = PolymorphicComponentProps<T, GridProps>;
+
+export type SpiritGridItemProps<T extends ElementType = 'div'> = PolymorphicComponentProps<T, GridItemProps>;
