@@ -36,14 +36,19 @@ export interface TabsProps extends ChildrenProps, SpacingProp, TransferProps, Ta
 
 export type TabLinkItemProps = StyleProps & HTMLProps<HTMLLIElement>;
 
-export interface TabLinkBaseProps extends ChildrenProps, StyleProps, TransferProps {
+/** ===== BASE API ===== */
+export interface TabLinkBaseProps extends ChildrenProps, StyleProps, TransferProps {}
+
+/** ===== STYLE API ===== */
+export interface TabLinkStyleProps extends TabLinkBaseProps {
   itemProps?: TabLinkItemProps;
 }
 
-export type TabLinkProps<E extends ElementType = 'a'> = PolymorphicComponentProps<E, TabLinkBaseProps>;
+/** ===== INTERNAL API ===== */
+export interface TabLinkProps extends TabLinkStyleProps {}
 
-/** @deprecated Use TabLinkProps instead */
-export type SpiritTabLinkProps<E extends ElementType = 'a'> = TabLinkProps<E>;
+/** ===== PUBLIC API ===== */
+export type SpiritTabLinkProps<E extends ElementType = 'a'> = PolymorphicComponentProps<E, TabLinkProps>;
 
 export type TabsToggler = (id: TabId) => void;
 
