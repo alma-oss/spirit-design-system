@@ -3,10 +3,10 @@
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import {
-  type HeaderLogoBaseProps,
   type HeaderLogoProps,
   type PolymorphicComponent,
   type PolymorphicRef,
+  type SpiritHeaderLogoProps,
 } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useUnstableHeaderStyleProps } from './useUnstableHeaderStyleProps';
@@ -15,7 +15,7 @@ const defaultProps: Partial<HeaderLogoProps> = {
   elementType: 'a',
 };
 
-const _HeaderLogo = <E extends ElementType = 'a'>(props: HeaderLogoProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
+const _HeaderLogo = <E extends ElementType = 'a'>(props: SpiritHeaderLogoProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType as ElementType, children, ...restProps } = propsWithDefaults;
 
@@ -32,7 +32,7 @@ const _HeaderLogo = <E extends ElementType = 'a'>(props: HeaderLogoProps<E>, ref
   );
 };
 
-const UNSTABLE_HeaderLogo = forwardRef(_HeaderLogo) as unknown as PolymorphicComponent<'a', HeaderLogoBaseProps>;
+const UNSTABLE_HeaderLogo = forwardRef(_HeaderLogo) as unknown as PolymorphicComponent<'a', HeaderLogoProps>;
 
 UNSTABLE_HeaderLogo.spiritComponent = 'UNSTABLE_HeaderLogo';
 UNSTABLE_HeaderLogo.displayName = 'UNSTABLE_HeaderLogo';

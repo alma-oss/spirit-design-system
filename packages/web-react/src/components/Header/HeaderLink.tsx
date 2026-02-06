@@ -3,15 +3,15 @@
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import {
-  type HeaderLinkBaseProps,
   type HeaderLinkProps,
   type PolymorphicComponent,
   type PolymorphicRef,
+  type SpiritHeaderLinkProps,
 } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useHeaderStyleProps } from './useHeaderStyleProps';
 
-const _HeaderLink = <E extends ElementType = 'a'>(props: HeaderLinkProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
+const _HeaderLink = <E extends ElementType = 'a'>(props: SpiritHeaderLinkProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
   const { elementType = 'a', children, isCurrent, ...restProps } = props;
 
   const Component = elementType as ElementType;
@@ -31,7 +31,7 @@ const _HeaderLink = <E extends ElementType = 'a'>(props: HeaderLinkProps<E>, ref
   );
 };
 
-const HeaderLink = forwardRef(_HeaderLink) as unknown as PolymorphicComponent<'a', HeaderLinkBaseProps>;
+const HeaderLink = forwardRef(_HeaderLink) as unknown as PolymorphicComponent<'a', HeaderLinkProps>;
 
 HeaderLink.spiritComponent = 'HeaderLink';
 HeaderLink.displayName = 'HeaderLink';

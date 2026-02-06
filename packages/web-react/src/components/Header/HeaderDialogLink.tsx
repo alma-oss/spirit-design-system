@@ -3,16 +3,16 @@
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import {
-  type BaseHeaderDialogLinkProps,
   type HeaderDialogLinkProps,
   type PolymorphicComponent,
   type PolymorphicRef,
+  type SpiritDialogHeaderLinkProps,
 } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useHeaderStyleProps } from './useHeaderStyleProps';
 
 const _HeaderDialogLink = <E extends ElementType = 'a'>(
-  props: HeaderDialogLinkProps<E>,
+  props: SpiritDialogHeaderLinkProps<E>,
   ref: PolymorphicRef<E>,
 ): JSX.Element => {
   const { elementType = 'a', children, isCurrent, ...restProps } = props;
@@ -34,10 +34,7 @@ const _HeaderDialogLink = <E extends ElementType = 'a'>(
   );
 };
 
-const HeaderDialogLink = forwardRef(_HeaderDialogLink) as unknown as PolymorphicComponent<
-  'a',
-  BaseHeaderDialogLinkProps
->;
+const HeaderDialogLink = forwardRef(_HeaderDialogLink) as unknown as PolymorphicComponent<'a', HeaderDialogLinkProps>;
 
 HeaderDialogLink.spiritComponent = 'HeaderDialogLink';
 HeaderDialogLink.displayName = 'HeaderDialogLink';

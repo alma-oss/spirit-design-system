@@ -8,18 +8,26 @@ import {
   type TransferProps,
 } from './shared';
 
-export interface HeaderLogoBaseProps extends ChildrenProps, StyleProps, TransferProps {
+/** ===== BASE API ===== */
+export interface HeaderBaseProps extends ChildrenProps, StyleProps {}
+
+/** ===== STYLE API ===== */
+export interface HeaderLogoStyleProps extends ChildrenProps, StyleProps, TransferProps {
   /** Header's href attribute */
   href?: string;
   /** Header's target attribute */
   target?: LinkTarget;
 }
 
-export type HeaderLogoProps<E extends ElementType = 'a'> = PolymorphicComponentProps<E, HeaderLogoBaseProps>;
-
-export interface SpiritHeaderProps extends SpiritElementProps, ChildrenProps {
+export interface UnstableHeaderProps extends SpiritElementProps, ChildrenProps {
   hasBottomDivider?: boolean;
 }
 
-/** @deprecated Use HeaderLogoProps instead */
-export type SpiritHeaderLogoProps<E extends ElementType = 'a'> = HeaderLogoProps<E>;
+/** ===== INTERNAL API ===== */
+export interface HeaderLogoProps extends HeaderLogoStyleProps {}
+
+/** ===== PUBLIC API ===== */
+export type SpiritHeaderLogoProps<E extends ElementType = 'a'> = PolymorphicComponentProps<E, HeaderLogoProps>;
+
+/** @deprecated Use UnstableHeaderProps instead */
+export type SpiritHeaderProps = UnstableHeaderProps;
