@@ -2,7 +2,7 @@
 
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type PolymorphicComponent, type PolymorphicRef, type StackProps, type SpiritStackProps } from '../../types';
+import { type PolymorphicComponent, type PolymorphicRef, type SpiritStackProps, type StackProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useStackStyleProps } from './useStackStyleProps';
 

@@ -15,7 +15,10 @@ const defaultProps = {
   paddingTop: PADDING_TOP,
 };
 
-const _Footer = <T extends ElementType = 'footer'>(props: SpiritFooterProps<T>, ref: PolymorphicRef<T>): JSX.Element => {
+const _Footer = <T extends ElementType = 'footer'>(
+  props: SpiritFooterProps<T>,
+  ref: PolymorphicRef<T>,
+): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType, children, backgroundColor, ...restProps } = propsWithDefaults;
 

@@ -15,7 +15,10 @@ const defaultProps: Partial<HeaderLogoProps> = {
   elementType: 'a',
 };
 
-const _HeaderLogo = <E extends ElementType = 'a'>(props: SpiritHeaderLogoProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
+const _HeaderLogo = <E extends ElementType = 'a'>(
+  props: SpiritHeaderLogoProps<E>,
+  ref: PolymorphicRef<E>,
+): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType as ElementType, children, ...restProps } = propsWithDefaults;
 

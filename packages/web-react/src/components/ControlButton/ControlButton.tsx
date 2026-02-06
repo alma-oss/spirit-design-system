@@ -1,6 +1,7 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
+import { Sizes } from '../../constants';
 import { useStyleProps } from '../../hooks';
 import {
   type ControlButtonProps,
@@ -11,7 +12,6 @@ import {
 import { mergeStyleProps } from '../../utils';
 import { useControlButtonProps } from './useControlButtonProps';
 import { useControlButtonStyleProps } from './useControlButtonStyleProps';
-import { Sizes } from '../../constants';
 
 const defaultProps = {
   elementType: 'button',

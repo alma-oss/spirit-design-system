@@ -11,7 +11,10 @@ import {
 import { mergeStyleProps } from '../../utils';
 import { useHeaderStyleProps } from './useHeaderStyleProps';
 
-const _HeaderLink = <E extends ElementType = 'a'>(props: SpiritHeaderLinkProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
+const _HeaderLink = <E extends ElementType = 'a'>(
+  props: SpiritHeaderLinkProps<E>,
+  ref: PolymorphicRef<E>,
+): JSX.Element => {
   const { elementType = 'a', children, isCurrent, ...restProps } = props;
 
   const Component = elementType as ElementType;

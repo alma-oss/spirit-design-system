@@ -3,10 +3,9 @@
 import React, { type ElementType, forwardRef, useRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import {
-  type BaseTooltipProps,
   type PolymorphicComponent,
   type PolymorphicRef,
-  type TooltipCustomProps,
+  type SpiritTooltipProps,
   type TooltipProps,
 } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -14,7 +13,7 @@ import { TooltipProvider } from './TooltipContext';
 import { useFloating } from './useFloating';
 import { useTooltipStyleProps } from './useTooltipStyleProps';
 
-const _Tooltip = <T extends ElementType = 'div'>(props: TooltipProps<T>, ref: PolymorphicRef<T>) => {
+const _Tooltip = <T extends ElementType = 'div'>(props: SpiritTooltipProps<T>, ref: PolymorphicRef<T>) => {
   const {
     children,
     elementType = 'div',
@@ -41,7 +40,8 @@ const _Tooltip = <T extends ElementType = 'div'>(props: TooltipProps<T>, ref: Po
     isDismissible,
     isOpen,
     ...restProps,
-  } as TooltipProps<T>);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- incompatible type
+  } as any);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, {
     classProps: classProps.rootClassName,
@@ -123,7 +123,7 @@ const _Tooltip = <T extends ElementType = 'div'>(props: TooltipProps<T>, ref: Po
   );
 };
 
-const Tooltip = forwardRef(_Tooltip) as unknown as PolymorphicComponent<'div', BaseTooltipProps & TooltipCustomProps>;
+const Tooltip = forwardRef(_Tooltip) as unknown as PolymorphicComponent<'div', TooltipProps>;
 
 Tooltip.spiritComponent = 'Tooltip';
 Tooltip.displayName = 'Tooltip';

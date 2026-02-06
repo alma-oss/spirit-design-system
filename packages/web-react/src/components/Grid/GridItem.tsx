@@ -15,7 +15,10 @@ const defaultProps = {
   elementType: 'div',
 };
 
-const _GridItem = <T extends ElementType = 'div'>(props: SpiritGridItemProps<T>, ref: PolymorphicRef<T>): JSX.Element => {
+const _GridItem = <T extends ElementType = 'div'>(
+  props: SpiritGridItemProps<T>,
+  ref: PolymorphicRef<T>,
+): JSX.Element => {
   const { elementType = defaultProps.elementType, children, ...restProps } = props;
   const Component = elementType as ElementType;
 

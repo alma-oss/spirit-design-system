@@ -3,11 +3,11 @@
 import classNames from 'classnames';
 import { type ElementType, useMemo } from 'react';
 import { useClassNamePrefix } from '../../hooks';
-import { type TooltipProps } from '../../types';
+import { type TooltipPropsGeneric } from '../../types';
 
 type omittedProps = 'id' | 'onToggle';
 
-export type UseTooltipStyleProps<E extends ElementType = 'div'> = TooltipProps<E>;
+export type UseTooltipStyleProps<E extends ElementType = 'div'> = TooltipPropsGeneric<E>;
 
 export interface UseTooltipStylePropsReturn<E extends ElementType = 'div'> {
   classProps: {
@@ -16,11 +16,11 @@ export interface UseTooltipStylePropsReturn<E extends ElementType = 'div'> {
     arrowClassName: string;
     closeButtonClassName: string;
   };
-  props: Omit<TooltipProps<E>, omittedProps | 'isDismissible' | 'isOpen'>;
+  props: Omit<TooltipPropsGeneric<E>, omittedProps | 'isDismissible' | 'isOpen'>;
 }
 
 export const useTooltipStyleProps = <E extends ElementType = 'div'>(
-  props: Omit<TooltipProps<E>, omittedProps>,
+  props: Omit<TooltipPropsGeneric<E>, omittedProps>,
 ): UseTooltipStylePropsReturn<E> => {
   const { isDismissible, isOpen, ...modifiedProps } = props;
   const tooltipClass = useClassNamePrefix('Tooltip');
@@ -44,6 +44,6 @@ export const useTooltipStyleProps = <E extends ElementType = 'div'>(
       arrowClassName: arrowClass,
       closeButtonClassName: closeButtonClass,
     },
-    props: modifiedProps as Omit<TooltipProps<E>, omittedProps | 'isDismissible' | 'isOpen'>,
+    props: modifiedProps as Omit<TooltipPropsGeneric<E>, omittedProps | 'isDismissible' | 'isOpen'>,
   };
 };
