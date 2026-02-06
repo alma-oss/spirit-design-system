@@ -2,14 +2,16 @@
 
 > Guide for Spirit Web React contributors.
 
-## Adding New Component
+## Guidelines
+
+### Writing a Component
 
 Do not forget to export and register new component in all necessary places.
 
 - `scripts/entryPoints.js`
 - `src/components/index.ts`
 
-## File Structure
+### File Hierarchy
 
 This is an example of a typical file structure of a component:
 
@@ -32,7 +34,7 @@ This is an example of a typical file structure of a component:
                 └── use<ComponentName>StyleProps.test.ts — component's hook test
 ```
 
-## Development with Storybook
+## Code Style
 
 ### Naming Types
 
