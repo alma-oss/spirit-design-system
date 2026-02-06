@@ -2,14 +2,14 @@
 
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type HiddenBaseProps, type HiddenProps, type PolymorphicComponent, type PolymorphicRef } from '../../types';
+import { type HiddenProps, type PolymorphicComponent, type PolymorphicRef, type SpiritHiddenProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 
 const defaultProps = {
   elementType: 'span',
 };
 
-const _Hidden = <T extends ElementType = 'span'>(props: HiddenProps<T>, ref: PolymorphicRef<T>) => {
+const _Hidden = <T extends ElementType = 'span'>(props: SpiritHiddenProps<T>, ref: PolymorphicRef<T>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType, children, on, from, ...restProps } = propsWithDefaults;
 
@@ -31,7 +31,7 @@ const _Hidden = <T extends ElementType = 'span'>(props: HiddenProps<T>, ref: Pol
   );
 };
 
-const Hidden = forwardRef(_Hidden) as unknown as PolymorphicComponent<'span', HiddenBaseProps>;
+const Hidden = forwardRef(_Hidden) as unknown as PolymorphicComponent<'span', HiddenProps>;
 
 Hidden.spiritComponent = 'Hidden';
 Hidden.displayName = 'Hidden';
