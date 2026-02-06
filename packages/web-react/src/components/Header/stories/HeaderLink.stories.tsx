@@ -175,5 +175,5 @@ const HeaderWithHooks = (args: HeaderLinkProps) => {
 
 export const HeaderLinkPlayground: Story = {
   name: 'HeaderLink',
-  render: (args) => <HeaderWithHooks {...args} />,
+  render: (args) => <HeaderWithHooks {...(args as HeaderLinkProps)} />,
 };

@@ -1,4 +1,4 @@
-import { type ElementType, type JSXElementConstructor } from 'react';
+import { type ElementType } from 'react';
 import {
   type ChildrenProps,
   type GridColumns,
@@ -14,7 +14,7 @@ export interface MatrixElementTypeProps<T extends ElementType = 'div'> {
    *
    * @default 'div'
    */
-  elementType?: T | JSXElementConstructor<unknown>;
+  elementType?: T;
 }
 
 export interface MatrixCustomLayoutProps {

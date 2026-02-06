@@ -1,4 +1,4 @@
-import { type ElementType, type JSXElementConstructor } from 'react';
+import { type ElementType } from 'react';
 import { type ChildrenProps, type StyleProps, type TransferProps } from './shared';
 
 export interface VisuallyHiddenElementTypeProps<T extends ElementType = 'span'> {
@@ -7,7 +7,7 @@ export interface VisuallyHiddenElementTypeProps<T extends ElementType = 'span'> 
    *
    * @default 'span'
    */
-  elementType?: T | JSXElementConstructor<unknown>;
+  elementType?: T;
 }
 
 export interface VisuallyHiddenProps<T extends ElementType = 'span'>

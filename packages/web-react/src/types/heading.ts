@@ -1,4 +1,4 @@
-import { type ElementType, type JSXElementConstructor } from 'react';
+import { type ElementType } from 'react';
 import type {
   ChildrenProps,
   EmphasisDictionaryType,
@@ -18,7 +18,7 @@ export interface HeadingElementTypeProps<T extends ElementType> {
   /**
    * The HTML element or React element used to render the Heading, e.g. 'h2'.
    */
-  elementType: T | JSXElementConstructor<unknown>;
+  elementType: T;
 }
 
 export interface HeadingProps<T extends ElementType>

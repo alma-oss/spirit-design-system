@@ -1,14 +1,8 @@
 import classNames from 'classnames';
-import { type ElementType } from 'react';
 import { useClassNamePrefix } from '../../hooks';
-import { type SpiritSectionProps } from '../../types';
+import { type SectionStyleProps } from '../../types';
 
-export interface UseSectionStyleProps {
-  /** className props */
-  classProps: string;
-}
-
-export const useSectionStyleProps = (props: Partial<SpiritSectionProps<ElementType>>): UseSectionStyleProps => {
+export const useSectionStyleProps = (props: SectionStyleProps) => {
   const { backgroundColor } = props || {};
 
   const sectionBackgroundClassName = useClassNamePrefix(`bg-${backgroundColor}`);

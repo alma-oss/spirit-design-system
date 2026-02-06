@@ -1,20 +1,6 @@
 import { useClassNamePrefix } from '../../hooks';
 
-export interface AccordionStyleReturn {
-  /** className props */
-  classProps: {
-    root: string;
-    item: string;
-    header: string;
-    toggle: string;
-    side: string;
-    slot: string;
-    icon: string;
-    content: string;
-  };
-}
-
-export const useAccordionStyleProps = (): AccordionStyleReturn => {
+export const useAccordionStyleProps = () => {
   const accordionClass = useClassNamePrefix('Accordion');
   const accordionItemClass = `${accordionClass}__item`;
   const accordionItemHeaderClass = `${accordionClass}__itemHeader`;

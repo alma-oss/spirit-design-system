@@ -1,26 +1,41 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type SpiritGridItemProps } from '../../types';
+import {
+  type GridItemProps,
+  type PolymorphicComponent,
+  type PolymorphicRef,
+  type SpiritGridItemProps,
+} from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useGridItemStyleProps } from './useGridItemStyleProps';
 
-const GridItem = <T extends ElementType = 'div'>(props: SpiritGridItemProps<T>): JSX.Element => {
-  const { elementType: ElementTag = 'div', children, ...restProps } = props;
+const defaultProps = {
+  elementType: 'div',
+};
+
+const _GridItem = <T extends ElementType = 'div'>(
+  props: SpiritGridItemProps<T>,
+  ref: PolymorphicRef<T>,
+): JSX.Element => {
+  const { elementType = defaultProps.elementType, children, ...restProps } = props;
+  const Component = elementType as ElementType;
+
   const { classProps, styleProps: gridItemStyle, props: modifiedProps } = useGridItemStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps, gridItemStyle });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps, gridItemStyle });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
+const GridItem = forwardRef(_GridItem) as unknown as PolymorphicComponent<'div', GridItemProps>;
+
 GridItem.spiritComponent = 'GridItem';
-GridItem.spiritDefaultElement = 'div' as const;
-GridItem.spiritDefaultProps = null as unknown as SpiritGridItemProps<'div'>;
+GridItem.displayName = 'GridItem';
 
 export default GridItem;

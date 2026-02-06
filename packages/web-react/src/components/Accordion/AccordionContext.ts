@@ -1,17 +1,17 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import { type AccordionHandlingProps } from '../../types';
+import { type AccordionState } from '../../types';
 
-const defaultContext: AccordionHandlingProps = {
+const defaultContext: AccordionState = {
   open: undefined,
   toggle: () => null,
 };
 
-const AccordionContext = createContext<AccordionHandlingProps>(defaultContext);
+const AccordionContext = createContext<AccordionState>(defaultContext);
 const AccordionProvider = AccordionContext.Provider;
 const AccordionConsumer = AccordionContext.Consumer;
-const useAccordionContext = (): AccordionHandlingProps => useContext(AccordionContext);
+const useAccordionContext = (): AccordionState => useContext(AccordionContext);
 
 export default AccordionContext;
 export { AccordionProvider, AccordionConsumer, useAccordionContext };

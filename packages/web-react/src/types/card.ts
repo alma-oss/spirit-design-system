@@ -1,4 +1,4 @@
-import { type ElementType, type JSXElementConstructor } from 'react';
+import { type ElementType } from 'react';
 import { type ObjectFit, Sizes } from '../constants';
 import {
   type AlignmentXDictionaryType,
@@ -31,7 +31,7 @@ export interface CardElementTypeProps<T extends ElementType = 'article'> {
    *
    * @default 'article'
    */
-  elementType?: T | JSXElementConstructor<unknown>;
+  elementType?: T;
 }
 
 // Card types

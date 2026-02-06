@@ -1,15 +1,5 @@
-import { type ElementType } from 'react';
 import { SizesExtended } from '../../constants';
-import {
-  type Responsive,
-  type SizeExtendedDictionaryType,
-  type SpaceToken,
-  type SpiritSectionProps,
-} from '../../types';
-
-export interface UseSectionSizeProps {
-  modifiedProps: Partial<SpiritSectionProps<ElementType>>;
-}
+import { type Responsive, type SectionProps, type SizeExtendedDictionaryType, type SpaceToken } from '../../types';
 
 const sizePaddingMapping: Record<SizeExtendedDictionaryType<never>, { paddingY: Responsive<SpaceToken> }> = {
   [SizesExtended.XSMALL]: { paddingY: { mobile: 'space-900', tablet: 'space-1000' } },
@@ -19,7 +9,7 @@ const sizePaddingMapping: Record<SizeExtendedDictionaryType<never>, { paddingY: 
   [SizesExtended.XLARGE]: { paddingY: { mobile: 'space-1400', tablet: 'space-1600' } },
 };
 
-export const useSectionSizeProps = (props: Partial<SpiritSectionProps<ElementType>>): UseSectionSizeProps => {
+export const useSectionSizeProps = (props: SectionProps = {}) => {
   const { size } = props;
 
   const modifiedProps = size ? { ...sizePaddingMapping[size], ...props } : props;

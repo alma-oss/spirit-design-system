@@ -1,21 +1,25 @@
-import { type ElementType, type JSXElementConstructor } from 'react';
+import { type ElementType } from 'react';
 import { type IconBoxShapes } from '../components/IconBox/constants';
 import type {
   AccentColorNamesType,
   ChildrenProps,
   EmotionColorNamesType,
+  PolymorphicComponentProps,
   SingleOrResponsive,
   SizeExtendedDictionaryType,
-  SpiritPolymorphicElementPropsWithRef,
   StyleProps,
 } from './shared';
 
+/** ===== BASE API ===== */
 export type IconBoxShapeKeys = keyof typeof IconBoxShapes;
 export type IconBoxShapeType = (typeof IconBoxShapes)[IconBoxShapeKeys];
 
 export type IconBoxColorsType = AccentColorNamesType | EmotionColorNamesType;
 
-export interface IconBoxBaseProps extends ChildrenProps, StyleProps {
+export interface IconBoxBaseProps extends ChildrenProps, StyleProps {}
+
+/** ===== STYLE API ===== */
+export interface IconBoxStyleProps extends IconBoxBaseProps {
   /** The color of the iconBox. */
   color?: IconBoxColorsType;
   /** The shape of the iconBox. */
@@ -30,14 +34,8 @@ export interface IconBoxBaseProps extends ChildrenProps, StyleProps {
   size?: SingleOrResponsive<SizeExtendedDictionaryType>;
 }
 
-export type IconBoxProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the box, e.g. 'div', 'a', or `RouterLink`.
-   *
-   * @default 'div'
-   */
-  elementType?: E | JSXElementConstructor<unknown>;
-} & IconBoxBaseProps;
+/** ===== INTERNAL API ===== */
+export interface IconBoxProps extends IconBoxStyleProps {}
 
-export type SpiritIconBoxProps<E extends ElementType = 'div'> = IconBoxProps<E> &
-  SpiritPolymorphicElementPropsWithRef<E, IconBoxProps<E>>;
+/** ===== PUBLIC API ===== */
+export type SpiritIconBoxProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, IconBoxProps>;

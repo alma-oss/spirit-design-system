@@ -1,14 +1,19 @@
 'use client';
 
-import React, { type ElementType, type ForwardedRef, forwardRef } from 'react';
+import React, { type ElementType, forwardRef } from 'react';
 import { Sizes } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import { type SpiritControlButtonProps } from '../../types';
+import {
+  type ControlButtonProps,
+  type PolymorphicComponent,
+  type PolymorphicRef,
+  type SpiritControlButtonProps,
+} from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useControlButtonProps } from './useControlButtonProps';
 import { useControlButtonStyleProps } from './useControlButtonStyleProps';
 
-const defaultProps: Partial<SpiritControlButtonProps> = {
+const defaultProps = {
   elementType: 'button',
   isDisabled: false,
   isSubtle: false,
@@ -19,29 +24,28 @@ const defaultProps: Partial<SpiritControlButtonProps> = {
 
 const _ControlButton = <T extends ElementType = 'button', S = void>(
   props: SpiritControlButtonProps<T, S>,
-  ref: ForwardedRef<HTMLButtonElement>,
+  ref: PolymorphicRef<T>,
 ) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const {
-    elementType: ElementTag = defaultProps.elementType as ElementType,
-    children,
-    ...restProps
-  } = propsWithDefaults;
+  const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
+
+  const Component = elementType as ElementType;
 
   const { controlButtonProps } = useControlButtonProps(restProps);
   const { classProps, props: modifiedProps } = useControlButtonStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...controlButtonProps} ref={ref} {...mergedStyleProps}>
+    <Component {...otherProps} {...controlButtonProps} ref={ref} {...mergedStyleProps}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
-const ControlButton = forwardRef<HTMLButtonElement, SpiritControlButtonProps<ElementType>>(_ControlButton);
+const ControlButton = forwardRef(_ControlButton) as unknown as PolymorphicComponent<'button', ControlButtonProps<void>>;
 
 ControlButton.spiritComponent = 'ControlButton';
+ControlButton.displayName = 'ControlButton';
 
 export default ControlButton;

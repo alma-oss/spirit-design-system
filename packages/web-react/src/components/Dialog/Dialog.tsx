@@ -57,7 +57,7 @@ const Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>)
    * @see https://reactjs.org/docs/react-api.html#reactchildren
    * @throws Error
    */
-  const child = Children.only(children);
+  const child = Children.only(children) as ReactElement;
 
   return (
     <dialog
@@ -65,7 +65,7 @@ const Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>)
       onTransitionEnd={onTransitionEnd}
       {...restProps}
     >
-      {cloneElement(child as ReactElement, {
+      {cloneElement(child, {
         ref: (clonedElementRef: HTMLElement) => {
           contentElementRef.current = clonedElementRef;
         },

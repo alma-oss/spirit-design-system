@@ -37,32 +37,31 @@ export function useGridItemStyleProps(
   props: SpiritGridItemProps<ElementType>,
 ): GridItemStyle<SpiritGridItemProps<ElementType>> {
   const gridItemClass = useClassNamePrefix('GridItem');
-
   const gridItemStyle: GridItemCSSProperties = {};
+  const mutableProps = { ...props } as Record<string, unknown> & SpiritGridItemProps<ElementType>;
 
-  // Clone props to avoid mutating the original
-  const propsClone = { ...props };
-
-  const typePropNames = Object.keys(propsClone).filter(
+  const typePropNames = Object.keys(mutableProps).filter(
     (propName) => propName.startsWith('column') || propName.startsWith('row'),
   );
 
   typePropNames.forEach((propName) => {
     const type = propName.startsWith('column') ? 'column' : 'row';
-    if (propsClone[propName]) {
+    const value = mutableProps[propName];
+
+    if (value) {
       setGridItemStyle(
         gridItemStyle,
         `grid-item-${type}-${propName.replace(type, '').toLowerCase()}`,
-        propsClone[propName] as GridItemPosition,
+        value as GridItemPosition,
       );
     }
 
-    delete propsClone[propName];
+    delete mutableProps[propName];
   });
 
   return {
     classProps: gridItemClass,
-    props: propsClone,
+    props: mutableProps as SpiritGridItemProps<ElementType>,
     styleProps: gridItemStyle,
   };
 }

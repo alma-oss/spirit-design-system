@@ -1,4 +1,4 @@
-import { type ElementType, type JSXElementConstructor } from 'react';
+import { type ElementType } from 'react';
 import {
   type BackgroundAccentColorsType,
   type BackgroundColorsDictionaryType,
@@ -12,9 +12,9 @@ import {
   type BorderStylesDictionaryType,
   type BorderWidthsDictionaryType,
   type ChildrenProps,
+  type PolymorphicComponentProps,
   type SingleOrResponsive,
   type SpaceToken,
-  type SpiritPolymorphicElementPropsWithRef,
   type StyleProps,
   type TextColorProps,
 } from './shared';
@@ -54,14 +54,7 @@ export interface BoxBaseProps extends ChildrenProps, TextColorProps, StyleProps 
   paddingRight?: SingleOrResponsive<SpaceToken>;
 }
 
-export type BoxProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the box, e.g. 'div', 'a', or `RouterLink`.
-   *
-   * @default 'div'
-   */
-  elementType?: E | JSXElementConstructor<unknown>;
-} & BoxBaseProps;
+export type BoxProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, BoxBaseProps>;
 
-export type SpiritBoxProps<E extends ElementType = 'div'> = BoxProps<E> &
-  SpiritPolymorphicElementPropsWithRef<E, BoxProps<E>>;
+/** @deprecated Use BoxProps instead */
+export type SpiritBoxProps<E extends ElementType = 'div'> = BoxProps<E>;

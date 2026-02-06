@@ -1,17 +1,17 @@
 'use client';
 
 import classNames from 'classnames';
-import React, { type ElementType } from 'react';
+import React, { type ElementType, forwardRef } from 'react';
 import { BorderWidths, EmotionColors, SizesExtended } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import type { SpiritIconBoxProps } from '../../types';
+import type { IconBoxProps, PolymorphicComponent, PolymorphicRef, SpiritIconBoxProps } from '../../types';
 import { Box } from '../Box';
 import { Icon } from '../Icon';
 import { IconBoxShapes } from './constants';
 import { useIconBoxColors } from './useIconBoxColors';
 import { useIconBoxStyleProps } from './useIconBoxStyleProps';
 
-const defaultProps: Partial<SpiritIconBoxProps> = {
+const defaultProps = {
   shape: IconBoxShapes.ROUNDED,
   color: EmotionColors.INFORMATIVE,
   elementType: 'div',
@@ -20,9 +20,11 @@ const defaultProps: Partial<SpiritIconBoxProps> = {
   size: SizesExtended.MEDIUM,
 };
 
-const IconBox = <T extends ElementType = 'div'>(props: SpiritIconBoxProps<T>) => {
+const _IconBox = <T extends ElementType = 'div'>(props: SpiritIconBoxProps<T>, ref: PolymorphicRef<T>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType, shape, color, iconName, isSubtle, hasBorder, size, ...restProps } = propsWithDefaults;
+
+  const Component = elementType as ElementType;
 
   const { colors } = useIconBoxColors(color, isSubtle);
   const {
@@ -41,7 +43,8 @@ const IconBox = <T extends ElementType = 'div'>(props: SpiritIconBoxProps<T>) =>
     <Box
       {...otherProps}
       backgroundColor={colors.background}
-      elementType={elementType}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Polymorphic elementType needs type assertion
+      elementType={Component as any}
       borderColor={hasBorder ? colors.border : undefined}
       borderRadius={shapesProps}
       borderWidth={hasBorder ? BorderWidths['100'] : undefined}
@@ -52,12 +55,16 @@ const IconBox = <T extends ElementType = 'div'>(props: SpiritIconBoxProps<T>) =>
         ...styleProps.style,
         ...iconBoxStyleProps,
       }}
+      ref={ref}
     >
       <Icon aria-hidden="true" boxSize={iconSize} name={iconName} />
     </Box>
   );
 };
 
+const IconBox = forwardRef(_IconBox) as unknown as PolymorphicComponent<'div', IconBoxProps>;
+
 IconBox.spiritComponent = 'IconBox';
+IconBox.displayName = 'IconBox';
 
 export default IconBox;

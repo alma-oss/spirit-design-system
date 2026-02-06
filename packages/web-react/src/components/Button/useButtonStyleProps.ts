@@ -1,8 +1,7 @@
 import classNames from 'classnames';
-import { type ElementType } from 'react';
 import { warning } from '../../common/utilities';
 import { useClassNamePrefix, useDeprecationMessage, useSymmetry } from '../../hooks';
-import { type ButtonColor, type ButtonSize, type SpiritButtonProps } from '../../types';
+import { type ButtonColor, type ButtonSize, type ButtonStyleProps } from '../../types';
 import { applyColor, applySize } from '../../utils/classname';
 import { compose } from '../../utils/compose';
 
@@ -13,16 +12,7 @@ const getButtonColorClassname = <C = void>(className: string, color: ButtonColor
 const getButtonSizeClassname = <S = void>(className: string, size: ButtonSize<S>): string =>
   compose(applySize<ButtonSize<S>>(size))(className);
 
-export interface ButtonStyles {
-  /** className props */
-  classProps: string;
-  /** Props for the button element */
-  props: SpiritButtonProps;
-}
-
-export function useButtonStyleProps<T extends ElementType = 'button', C = void, S = void>(
-  props: SpiritButtonProps<T, C, S>,
-): ButtonStyles {
+export function useButtonStyleProps<C = void, S = void>(props: ButtonStyleProps<C, S>) {
   const { color, isBlock, isDisabled, isLoading, isSymmetrical, size, ...restProps } = props;
 
   // @see https://jira.almacareer.tech/browse/DS-1897

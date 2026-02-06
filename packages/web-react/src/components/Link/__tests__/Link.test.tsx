@@ -10,7 +10,6 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { type LinkColorsDictionaryType } from '../../../types';
 import Link from '../Link';
 import linkPropsDataProvider from './linkPropsDataProvider';
 
@@ -30,16 +29,9 @@ describe('Link', () => {
   elementTypePropsTest(Link);
 
   it.each(linkPropsDataProvider)('should have class', (color, underlined, isDisabled, expectedClassName) => {
-    render(
-      <Link
-        href="/"
-        color={color as LinkColorsDictionaryType<string>}
-        underlined={underlined}
-        isDisabled={isDisabled}
-      />,
-    );
+    render(<Link href="/" color={color} underlined={underlined} isDisabled={isDisabled} />);
 
-    expect(screen.getByRole('link')).toHaveClass(expectedClassName as string);
+    expect(screen.getByRole('link')).toHaveClass(expectedClassName);
   });
 
   it('should have correct href', () => {
