@@ -3,7 +3,7 @@
 import React, { type ElementType, forwardRef } from 'react';
 import { usePropsContext } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type SpiritButtonProps, type ButtonProps, type PolymorphicComponent, type PolymorphicRef } from '../../types';
+import { type ButtonProps, type PolymorphicComponent, type PolymorphicRef, type SpiritButtonProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Spinner } from '../Spinner';
 import { useButtonProps } from './useButtonProps';

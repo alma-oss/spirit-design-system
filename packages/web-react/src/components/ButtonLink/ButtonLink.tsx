@@ -3,11 +3,11 @@
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import {
-  type SpiritButtonLinkProps,
+  type ButtonProps,
+  type ButtonSizesType,
   type PolymorphicComponent,
   type PolymorphicRef,
-  ButtonProps,
-  ButtonSizesType,
+  type SpiritButtonLinkProps,
 } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Spinner } from '../Spinner';
