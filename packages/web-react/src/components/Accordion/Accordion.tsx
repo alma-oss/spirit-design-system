@@ -4,15 +4,15 @@ import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import {
   type AccordionProps,
-  type AccordionStyleProps,
   type PolymorphicComponent,
   type PolymorphicRef,
+  type SpiritAccordionProps,
 } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { AccordionProvider } from './AccordionContext';
 import { useAccordionStyleProps } from './useAccordionStyleProps';
 
-const _Accordion = <T extends ElementType = 'section'>(props: AccordionProps<T>, ref: PolymorphicRef<T>) => {
+const _Accordion = <T extends ElementType = 'section'>(props: SpiritAccordionProps<T>, ref: PolymorphicRef<T>) => {
   const { children, elementType = 'section', open, toggle, ...restProps } = props;
 
   const Component = elementType as ElementType;
@@ -33,7 +33,7 @@ const _Accordion = <T extends ElementType = 'section'>(props: AccordionProps<T>,
   );
 };
 
-const Accordion = forwardRef(_Accordion) as unknown as PolymorphicComponent<'section', AccordionStyleProps>;
+const Accordion = forwardRef(_Accordion) as unknown as PolymorphicComponent<'section', AccordionProps>;
 
 Accordion.spiritComponent = 'Accordion';
 Accordion.displayName = 'Accordion';

@@ -3,16 +3,19 @@
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import {
-  type AccordionItemBaseProps,
   type AccordionItemProps,
   type PolymorphicComponent,
   type PolymorphicRef,
+  type SpiritAccordionItemProps,
 } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { AccordionItemProvider } from './AccordionItemContext';
 import { useAccordionStyleProps } from './useAccordionStyleProps';
 
-const _AccordionItem = <T extends ElementType = 'article'>(props: AccordionItemProps<T>, ref: PolymorphicRef<T>) => {
+const _AccordionItem = <T extends ElementType = 'article'>(
+  props: SpiritAccordionItemProps<T>,
+  ref: PolymorphicRef<T>,
+) => {
   const { children, elementType = 'article', id, ...restProps } = props;
 
   const Component = elementType as ElementType;
@@ -30,7 +33,7 @@ const _AccordionItem = <T extends ElementType = 'article'>(props: AccordionItemP
   );
 };
 
-const AccordionItem = forwardRef(_AccordionItem) as unknown as PolymorphicComponent<'article', AccordionItemBaseProps>;
+const AccordionItem = forwardRef(_AccordionItem) as unknown as PolymorphicComponent<'article', AccordionItemProps>;
 
 AccordionItem.spiritComponent = 'AccordionItem';
 AccordionItem.displayName = 'AccordionItem';

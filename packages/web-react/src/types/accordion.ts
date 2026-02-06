@@ -1,6 +1,7 @@
 import { type ElementType, type ReactNode } from 'react';
 import { type ChildrenProps, type PolymorphicComponentProps, type StyleProps } from './shared';
 
+/** ===== BASE API ===== */
 export type AccordionOpenStateType = string | string[] | undefined;
 
 export interface AccordionState {
@@ -12,39 +13,6 @@ export interface AccordionItemContextProps {
   id: string;
 }
 
-export interface AccordionBaseProps extends ChildrenProps, StyleProps {}
-
-export interface AccordionStyleProps extends AccordionBaseProps, AccordionState {}
-
-export type AccordionProps<T extends ElementType = 'section'> = PolymorphicComponentProps<T, AccordionStyleProps>;
-
-/** @deprecated Use AccordionProps instead */
-export type SpiritAccordionProps<T extends ElementType = 'section'> = AccordionProps<T>;
-
-export interface AccordionHeaderBaseProps extends AccordionBaseProps {
-  slot?: ReactNode;
-}
-
-export type AccordionHeaderProps<T extends ElementType = 'h3'> = PolymorphicComponentProps<T, AccordionHeaderBaseProps>;
-
-/** @deprecated Use AccordionHeaderProps instead */
-export type SpiritAccordionHeaderProps<T extends ElementType = 'h3'> = AccordionHeaderProps<T>;
-
-export interface AccordionItemBaseProps extends AccordionBaseProps, AccordionItemContextProps {}
-
-export type AccordionItemProps<T extends ElementType = 'article'> = PolymorphicComponentProps<
-  T,
-  AccordionItemBaseProps
->;
-
-/** @deprecated Use AccordionItemProps instead */
-export type SpiritAccordionItemProps<T extends ElementType = 'article'> = AccordionItemProps<T>;
-
-export interface AccordionContentProps extends AccordionBaseProps {}
-
-/**
- * @internal
- */
 export interface AccordionStateProps {
   /** Initial open state */
   defaultOpen?: AccordionOpenStateType;
@@ -52,16 +20,37 @@ export interface AccordionStateProps {
   stayOpen?: boolean;
 }
 
+export interface AccordionBaseProps extends ChildrenProps, StyleProps {}
+
+/** ===== STYLE API ===== */
+export interface AccordionStyleProps extends AccordionBaseProps, AccordionState {}
+
+/** ===== INTERNAL API ===== */
+export interface AccordionProps extends AccordionStyleProps {}
+export interface AccordionHeaderProps extends AccordionBaseProps {
+  slot?: ReactNode;
+}
+export interface AccordionItemProps extends AccordionBaseProps, AccordionItemContextProps {}
+export interface AccordionContentProps extends AccordionBaseProps {}
 /**
  * Props for UncontrolledAccordion component.
  * Similar structure to AccordionProps but uses uncontrolled-specific props instead of state props.
  * When you destructure and omit defaultOpen and stayOpen,
  * the remaining props are exactly what Accordion expects (base props + HTML attrs).
  */
-export type UncontrolledAccordionProps<T extends ElementType = 'section'> = PolymorphicComponentProps<
-  T,
-  AccordionBaseProps & AccordionStateProps
->;
+export type UncontrolledAccordionProps = AccordionBaseProps & AccordionStateProps;
 
-/** @deprecated Use UncontrolledAccordionProps instead */
-export type SpiritUncontrolledAccordionProps<T extends ElementType = 'section'> = UncontrolledAccordionProps<T>;
+/** ===== PUBLIC API ===== */
+export type SpiritAccordionProps<T extends ElementType = 'section'> = PolymorphicComponentProps<T, AccordionProps>;
+export type SpiritAccordionHeaderProps<T extends ElementType = 'h3'> = PolymorphicComponentProps<
+  T,
+  AccordionHeaderProps
+>;
+export type SpiritAccordionItemProps<T extends ElementType = 'article'> = PolymorphicComponentProps<
+  T,
+  AccordionItemProps
+>;
+export type SpiritUncontrolledAccordionProps<T extends ElementType = 'section'> = PolymorphicComponentProps<
+  T,
+  UncontrolledAccordionProps
+>;

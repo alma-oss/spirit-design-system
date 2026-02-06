@@ -1,12 +1,12 @@
 'use client';
 
-import React, { type ElementType, type ReactNode, forwardRef } from 'react';
+import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import {
-  AccordionHeaderBaseProps,
   type AccordionHeaderProps,
   type PolymorphicComponent,
   type PolymorphicRef,
+  type SpiritAccordionHeaderProps,
 } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Icon } from '../Icon';
@@ -16,11 +16,14 @@ import { useAccordionAriaProps } from './useAccordionAriaProps';
 import { useAccordionStyleProps } from './useAccordionStyleProps';
 import { useOpenItem } from './useOpenItem';
 
-const defaultProps: Partial<AccordionHeaderProps> = {
+const defaultProps: Partial<SpiritAccordionHeaderProps> = {
   elementType: 'h3',
 };
 
-const _AccordionHeader = <T extends ElementType = 'h3'>(props: AccordionHeaderProps<T>, ref: PolymorphicRef<T>) => {
+const _AccordionHeader = <T extends ElementType = 'h3'>(
+  props: SpiritAccordionHeaderProps<T>,
+  ref: PolymorphicRef<T>,
+) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = 'h3', children, slot, ...restProps } = propsWithDefaults;
 
@@ -58,10 +61,7 @@ const _AccordionHeader = <T extends ElementType = 'h3'>(props: AccordionHeaderPr
   );
 };
 
-const AccordionHeader = forwardRef(_AccordionHeader) as unknown as PolymorphicComponent<
-  'h3',
-  AccordionHeaderBaseProps
->;
+const AccordionHeader = forwardRef(_AccordionHeader) as unknown as PolymorphicComponent<'h3', AccordionHeaderProps>;
 
 AccordionHeader.spiritComponent = 'AccordionHeader';
 AccordionHeader.displayName = 'AccordionHeader';
