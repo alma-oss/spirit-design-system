@@ -21,13 +21,6 @@ export const TOOLTIP_TRIGGER = {
 
 export type TooltipTriggerType = 'click' | 'hover' | 'focus' | 'manual';
 
-export interface TooltipPopoverProps extends ChildrenProps, StyleProps {}
-
-export interface TooltipTriggerProps extends StyleProps, TransferProps {
-  elementType?: ElementTypeProp;
-  children?: string | ReactNode | ((props: { isOpen: boolean }) => ReactNode);
-}
-
 export interface TooltipCloseButtonProps extends StyleProps {
   onClick?: (event: ClickEvent) => void;
   label?: string;
@@ -38,16 +31,12 @@ export interface TooltipState {
   onToggle: (isOpen: boolean) => void;
 }
 
-export interface TooltipBaseProps extends ChildrenProps, StyleProps {}
-
-export interface UncontrolledTooltipProps extends TooltipStyleProps {}
-
-/** ===== STYLE API ===== */
-export interface TooltipStyleProps extends TooltipBaseProps, TooltipState {
+export interface TooltipBaseProps extends ChildrenProps, StyleProps {
   closeLabel?: string;
   id: string;
-  isDismissible?: boolean;
-  placement?: Placement;
+}
+
+export interface TooltipStateProps {
   enableFlipping?: boolean;
   enableFlippingCrossAxis?: boolean;
   enableShifting?: boolean;
@@ -57,36 +46,25 @@ export interface TooltipStyleProps extends TooltipBaseProps, TooltipState {
   isFocusableOnHover?: boolean;
   positionStrategy?: Strategy;
   trigger?: TooltipTriggerType[];
+  placement?: Placement;
+}
+
+/** ===== STYLE API ===== */
+export interface TooltipStyleProps extends TooltipBaseProps, TooltipState, TooltipStateProps {
+  isDismissible?: boolean;
 }
 
 /** ===== INTERNAL API ===== */
 export interface TooltipProps extends TooltipStyleProps {}
 
-// Backward compatibility with hooks
-export interface BaseTooltipProps extends TooltipBaseProps {
-  closeLabel?: string;
-  id: string;
-  isDismissible?: boolean;
-  placement?: Placement;
+// Sub-components receive props from JSX, but get state/handlers from context
+export interface TooltipPopoverProps extends ChildrenProps, StyleProps, TransferProps {}
+export interface TooltipTriggerProps extends StyleProps, TransferProps {
+  elementType?: ElementTypeProp;
+  children?: string | ReactNode | ((props: { isOpen: boolean }) => ReactNode);
 }
 
-export interface TooltipCustomProps extends TooltipState {
-  enableFlipping?: boolean;
-  enableFlippingCrossAxis?: boolean;
-  enableShifting?: boolean;
-  enableSizing?: boolean;
-  flipFallbackAxisSideDirection?: 'none' | 'start' | 'end';
-  flipFallbackPlacements?: Placement | Placement[];
-  isFocusableOnHover?: boolean;
-  positionStrategy?: Strategy;
-  trigger?: TooltipTriggerType[];
-}
-
-// Generic version for hooks (maintains backward compatibility)
-export type TooltipPropsGeneric<E extends ElementType = 'div'> = PolymorphicComponentProps<
-  E,
-  BaseTooltipProps & TooltipCustomProps
->;
+export interface UncontrolledTooltipProps extends TooltipStyleProps {}
 
 /** ===== PUBLIC API ===== */
 export type SpiritTooltipProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, TooltipProps>;

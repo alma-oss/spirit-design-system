@@ -40,7 +40,7 @@ const _Tooltip = <T extends ElementType = 'div'>(props: SpiritTooltipProps<T>, r
     isDismissible,
     isOpen,
     ...restProps,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- incompatible type
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- incompatible type
   } as any);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, {

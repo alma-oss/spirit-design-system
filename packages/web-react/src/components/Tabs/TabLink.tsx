@@ -3,7 +3,12 @@
 import classNames from 'classnames';
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type PolymorphicComponent, type PolymorphicRef, type SpiritTabLinkProps, type TabLinkProps } from '../../types';
+import {
+  type PolymorphicComponent,
+  type PolymorphicRef,
+  type SpiritTabLinkProps,
+  type TabLinkProps,
+} from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useTabsStyleProps } from './useTabsStyleProps';
 
