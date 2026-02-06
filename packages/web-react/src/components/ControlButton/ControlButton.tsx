@@ -1,9 +1,13 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { Sizes } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import { type ControlButtonProps, type PolymorphicComponent, type PolymorphicRef } from '../../types';
+import {
+  type ControlButtonProps,
+  type PolymorphicComponent,
+  type PolymorphicRef,
+  type SpiritControlButtonProps,
+} from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useControlButtonProps } from './useControlButtonProps';
 import { useControlButtonStyleProps } from './useControlButtonStyleProps';
@@ -13,12 +17,12 @@ const defaultProps = {
   isDisabled: false,
   isSubtle: false,
   isSymmetrical: false,
-  size: Sizes.MEDIUM,
+  size: 'medium',
   type: 'button',
 };
 
 const _ControlButton = <T extends ElementType = 'button', S = void>(
-  props: ControlButtonProps<T, S>,
+  props: SpiritControlButtonProps<T, S>,
   ref: PolymorphicRef<T>,
 ) => {
   const propsWithDefaults = { ...defaultProps, ...props };
@@ -38,10 +42,7 @@ const _ControlButton = <T extends ElementType = 'button', S = void>(
   );
 };
 
-const ControlButton = forwardRef(_ControlButton) as unknown as PolymorphicComponent<
-  'button',
-  ControlButtonProps<ElementType, void>
->;
+const ControlButton = forwardRef(_ControlButton) as unknown as PolymorphicComponent<'button', ControlButtonProps<void>>;
 
 ControlButton.spiritComponent = 'ControlButton';
 ControlButton.displayName = 'ControlButton';
