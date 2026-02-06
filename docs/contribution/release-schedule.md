@@ -3,14 +3,15 @@
 This is a living document outlining the plan for previous, current, and future
 major versions of the Spirit Design System.
 
-| Release      | Status      | Initial release | Begin Active | Begin Maintenance | End of Life |
-| ------------ | ----------- | --------------- | ------------ | ----------------- | ----------- |
-| `main`       | unstable    | unstable        | unstable     | unstable          | unstable    |
-| v0           | End of Life | 2021-09-20      | 2021-09-20   | 2023-07-21        | 2024-06-10  |
-| v1 🌟 Aura   | End of Life | 2023-07-21      | 2023-07-21   | 2024-06-10        | 2024-10-17  |
-| v2 🍃 Breeze | Maintenance | 2024-06-10      | 2024-06-10   | 2024-11-25        | -/-         |
-| v3 ✨ Charm  | Active      | 2024-10-17      | 2024-11-25   | -/-               | -/-         |
-| v4 🌈 Divine | Unreleased  | -/-             | -/-          | -/-               | -/-         |
+| Release       | Status      | Initial release | Begin Active | Begin Maintenance | End of Life |
+| ------------- | ----------- | --------------- | ------------ | ----------------- | ----------- |
+| `main`        | unstable    | unstable        | unstable     | unstable          | unstable    |
+| v0            | End of Life | 2021-09-20      | 2021-09-20   | 2023-07-21        | 2024-06-10  |
+| v1 🌟 Aura    | End of Life | 2023-07-21      | 2023-07-21   | 2024-06-10        | 2024-10-17  |
+| v2 🍃 Breeze  | End of Life | 2024-06-10      | 2024-06-10   | 2024-11-25        | 2026-01-08  |
+| v3 ✨ Charm   | Maintenance | 2024-10-17      | 2024-11-25   | 2026-01-08        | -/-         |
+| v4 🌈 Divine  | Active      | 2025-12-15      | 2026-01-08   | -/-               | -/-         |
+| v5 💫 Essence | Unreleased  | -/-             | -/-          | -/-               | -/-         |
 
 > Dates are subject to change
 
