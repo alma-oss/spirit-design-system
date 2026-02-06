@@ -1,7 +1,13 @@
 import { type ElementType } from 'react';
 import { type ChildrenProps, type PolymorphicComponentProps, type SpacingProp, type StyleProps } from './shared';
 
-export interface StackStyleProps extends ChildrenProps, SpacingProp, StyleProps {
+/** ===== BASE API ===== */
+export interface StackBaseProps extends ChildrenProps, SpacingProp, StyleProps {}
+
+export interface StackItemBaseProps extends ChildrenProps, StyleProps {}
+
+/** ===== STYLE API ===== */
+export interface StackStyleProps extends StackBaseProps {
   /** Whether the Stack has divider on the end */
   hasEndDivider?: boolean;
   /** Whether the Stack has divider between items */
@@ -12,14 +18,14 @@ export interface StackStyleProps extends ChildrenProps, SpacingProp, StyleProps 
   hasStartDivider?: boolean;
 }
 
-export type StackProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, StackStyleProps>;
+export interface StackItemStyleProps extends StackItemBaseProps {}
 
-/** @deprecated Use StackProps instead */
-export type SpiritStackProps<E extends ElementType = 'div'> = StackProps<E>;
+/** ===== INTERNAL API ===== */
+export interface StackProps extends StackStyleProps {}
 
-export interface StackItemStyleProps extends ChildrenProps, StyleProps {}
+export interface StackItemProps extends StackItemStyleProps {}
 
-export type StackItemProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, StackItemStyleProps>;
+/** ===== PUBLIC API ===== */
+export type SpiritStackProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, StackProps>;
 
-/** @deprecated Use StackItemProps instead */
-export type SpiritStackItemProps<E extends ElementType = 'div'> = StackItemProps<E>;
+export type SpiritStackItemProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, StackItemProps>;

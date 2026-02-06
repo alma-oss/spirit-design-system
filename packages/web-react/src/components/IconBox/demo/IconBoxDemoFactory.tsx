@@ -1,9 +1,9 @@
 import React from 'react';
-import type { IconBoxBaseProps } from '../../../types';
+import type { IconBoxStyleProps } from '../../../types';
 import { Flex } from '../../Flex';
 import IconBox from '../IconBox';
 
-type IconBoxDemoFactoryProps = IconBoxBaseProps & {
+type IconBoxDemoFactoryProps = IconBoxStyleProps & {
   label: string;
 };
 

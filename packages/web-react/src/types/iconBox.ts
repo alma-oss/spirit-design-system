@@ -10,12 +10,16 @@ import type {
   StyleProps,
 } from './shared';
 
+/** ===== BASE API ===== */
 export type IconBoxShapeKeys = keyof typeof IconBoxShapes;
 export type IconBoxShapeType = (typeof IconBoxShapes)[IconBoxShapeKeys];
 
 export type IconBoxColorsType = AccentColorNamesType | EmotionColorNamesType;
 
-export interface IconBoxBaseProps extends ChildrenProps, StyleProps {
+export interface IconBoxBaseProps extends ChildrenProps, StyleProps {}
+
+/** ===== STYLE API ===== */
+export interface IconBoxStyleProps extends IconBoxBaseProps {
   /** The color of the iconBox. */
   color?: IconBoxColorsType;
   /** The shape of the iconBox. */
@@ -30,7 +34,8 @@ export interface IconBoxBaseProps extends ChildrenProps, StyleProps {
   size?: SingleOrResponsive<SizeExtendedDictionaryType>;
 }
 
-export type IconBoxProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, IconBoxBaseProps>;
+/** ===== INTERNAL API ===== */
+export interface IconBoxProps extends IconBoxStyleProps {}
 
-/** @deprecated Use IconBoxProps instead */
-export type SpiritIconBoxProps<E extends ElementType = 'div'> = IconBoxProps<E>;
+/** ===== PUBLIC API ===== */
+export type SpiritIconBoxProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, IconBoxProps>;

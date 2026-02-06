@@ -2,7 +2,7 @@
 
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type PolymorphicComponent, type PolymorphicRef, type StackProps, type StackStyleProps } from '../../types';
+import { type PolymorphicComponent, type PolymorphicRef, type StackProps, type SpiritStackProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useStackStyleProps } from './useStackStyleProps';
 
@@ -14,7 +14,7 @@ const defaultProps = {
   hasStartDivider: false,
 };
 
-const _Stack = <T extends ElementType = 'div'>(props: StackProps<T>, ref: PolymorphicRef<T>): JSX.Element => {
+const _Stack = <T extends ElementType = 'div'>(props: SpiritStackProps<T>, ref: PolymorphicRef<T>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
 
@@ -36,7 +36,7 @@ const _Stack = <T extends ElementType = 'div'>(props: StackProps<T>, ref: Polymo
   );
 };
 
-const Stack = forwardRef(_Stack) as unknown as PolymorphicComponent<'div', StackStyleProps>;
+const Stack = forwardRef(_Stack) as unknown as PolymorphicComponent<'div', StackProps>;
 
 Stack.spiritComponent = 'Stack';
 Stack.displayName = 'Stack';

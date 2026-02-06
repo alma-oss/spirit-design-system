@@ -11,7 +11,11 @@ import {
   type TextAlignmentType,
 } from './shared';
 
-export interface SectionStyleProps<S = void> extends StyleProps, ChildrenProps {
+/** ===== BASE API ===== */
+export interface SectionBaseProps extends ChildrenProps, StyleProps {}
+
+/** ===== STYLE API ===== */
+export interface SectionStyleProps<S = void> extends SectionBaseProps {
   /** Container props to pass to the container component. */
   containerProps?: ContainerProps;
   /** Whether the section should have a container. */
@@ -30,10 +34,11 @@ export interface SectionStyleProps<S = void> extends StyleProps, ChildrenProps {
   textAlignment?: TextAlignmentType;
 }
 
-export type SectionProps<E extends ElementType = 'section', S = void> = PolymorphicComponentProps<
-  E,
-  SectionStyleProps<S>
->;
+/** ===== INTERNAL API ===== */
+export interface SectionProps<S = void> extends SectionStyleProps<S> {}
 
-/** @deprecated Use SectionProps instead */
-export type SpiritSectionProps<E extends ElementType = 'section', S = void> = SectionProps<E, S>;
+/** ===== PUBLIC API ===== */
+export type SpiritSectionProps<E extends ElementType = 'section', S = void> = PolymorphicComponentProps<
+  E,
+  SectionProps<S>
+>;

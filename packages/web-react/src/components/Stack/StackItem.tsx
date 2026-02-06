@@ -6,7 +6,7 @@ import {
   type PolymorphicComponent,
   type PolymorphicRef,
   type StackItemProps,
-  type StackItemStyleProps,
+  type SpiritStackItemProps,
 } from '../../types';
 import { mergeStyleProps } from '../../utils';
 
@@ -14,7 +14,7 @@ const defaultProps = {
   elementType: 'div',
 };
 
-const _StackItem = <T extends ElementType = 'div'>(props: StackItemProps<T>, ref: PolymorphicRef<T>): JSX.Element => {
+const _StackItem = <T extends ElementType = 'div'>(props: SpiritStackItemProps<T>, ref: PolymorphicRef<T>): JSX.Element => {
   const { elementType = defaultProps.elementType, children, ...restProps } = props;
 
   const Component = elementType as ElementType;
@@ -36,7 +36,7 @@ const _StackItem = <T extends ElementType = 'div'>(props: StackItemProps<T>, ref
   );
 };
 
-const StackItem = forwardRef(_StackItem) as unknown as PolymorphicComponent<'div', StackItemStyleProps>;
+const StackItem = forwardRef(_StackItem) as unknown as PolymorphicComponent<'div', StackItemProps>;
 
 StackItem.spiritComponent = 'StackItem';
 StackItem.displayName = 'StackItem';

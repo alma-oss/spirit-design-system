@@ -3,7 +3,7 @@
 import React, { type ElementType, forwardRef } from 'react';
 import { PaddingStyleProps, TextStyleProps } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import { type PolymorphicComponent, type PolymorphicRef, type SectionProps } from '../../types';
+import { type PolymorphicComponent, type PolymorphicRef, type SectionProps, type SpiritSectionProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Container } from '../Container';
 import { useSectionSizeProps } from './useSectionSizeProps';
@@ -15,7 +15,7 @@ const defaultProps = {
   size: undefined,
 };
 
-const _Section = <T extends ElementType = 'section', S = void>(props: SectionProps<T, S>, ref: PolymorphicRef<T>) => {
+const _Section = <T extends ElementType = 'section', S = void>(props: SpiritSectionProps<T, S>, ref: PolymorphicRef<T>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const {
     elementType = defaultProps.elementType,
@@ -45,7 +45,7 @@ const _Section = <T extends ElementType = 'section', S = void>(props: SectionPro
   );
 };
 
-const Section = forwardRef(_Section) as unknown as PolymorphicComponent<'section', SectionProps<ElementType, void>>;
+const Section = forwardRef(_Section) as unknown as PolymorphicComponent<'section', SectionProps<void>>;
 
 Section.spiritComponent = 'Section';
 Section.displayName = 'Section';
