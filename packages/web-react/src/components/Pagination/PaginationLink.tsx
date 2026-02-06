@@ -1,17 +1,16 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { useStyleProps } from '../../hooks';
+import { useI18n, useStyleProps } from '../../hooks';
 import { type PolymorphicRef, type SpiritPaginationLinkProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { VisuallyHidden } from '../VisuallyHidden';
-import { PAGINATION_LINK_DEFAULT_ACCESSIBILITY_LABEL_PREFIX } from './constants';
 import { usePaginationStyleProps } from './usePaginationStyleProps';
 
 const _PaginationLink = <E extends ElementType = 'a'>(props: SpiritPaginationLinkProps<E>, ref: PolymorphicRef<E>) => {
+  const { t } = useI18n();
   const { elementType: ElementTag = 'a', accessibilityLabel, isCurrent, pageNumber, ...restProps } = props;
-  const visuallyHiddenLabel =
-    accessibilityLabel || `${PAGINATION_LINK_DEFAULT_ACCESSIBILITY_LABEL_PREFIX} ${pageNumber}`;
+  const visuallyHiddenLabel = accessibilityLabel || `${t('pagination.goToPage')} ${pageNumber}`;
 
   const { classProps } = usePaginationStyleProps({ isCurrent });
   const { styleProps, props: otherProps } = useStyleProps(restProps);

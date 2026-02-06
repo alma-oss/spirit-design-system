@@ -3,25 +3,20 @@
 import classNames from 'classnames';
 import React, { type MutableRefObject, useRef } from 'react';
 import { Transition, type TransitionStatus } from 'react-transition-group';
-import { useStyleProps } from '../../hooks';
+import { useI18n, useStyleProps } from '../../hooks';
 import { type SpiritToastBarProps } from '../../types';
 import { Icon } from '../Icon';
-import {
-  DEFAULT_TOAST_COLOR,
-  ICON_BOX_SIZE,
-  TOAST_BAR_CLOSE_BUTTON_LABEL_DEFAULT,
-  TRANSITIONING_STYLES,
-  TRANSITION_DURATION,
-} from './constants';
+import { DEFAULT_TOAST_COLOR, ICON_BOX_SIZE, TRANSITIONING_STYLES, TRANSITION_DURATION } from './constants';
 import ToastCloseButton from './ToastCloseButton';
 import { useToastBarStyleProps } from './useToastBarStyleProps';
 import { useToastIcon } from './useToastIcon';
 
 const ToastBar = (props: SpiritToastBarProps) => {
+  const { t } = useI18n();
   const {
     id,
     children,
-    closeLabel = TOAST_BAR_CLOSE_BUTTON_LABEL_DEFAULT,
+    closeLabel,
     color = DEFAULT_TOAST_COLOR,
     hasIcon,
     iconName,
@@ -30,6 +25,7 @@ const ToastBar = (props: SpiritToastBarProps) => {
     onClose = () => {},
     ...restProps
   } = props;
+  const resolvedCloseLabel = closeLabel ?? t('common.close');
   const rootElementRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const toastIconName = useToastIcon({ color, iconName });
   const { classProps, props: modifiedProps } = useToastBarStyleProps({
@@ -57,7 +53,7 @@ const ToastBar = (props: SpiritToastBarProps) => {
             <ToastCloseButton
               id={id}
               isOpen={isOpen}
-              closeLabel={closeLabel}
+              closeLabel={resolvedCloseLabel}
               onClose={onClose}
               isDismissible={isDismissible}
             />

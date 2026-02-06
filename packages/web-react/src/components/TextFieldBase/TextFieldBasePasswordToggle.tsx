@@ -2,20 +2,16 @@
 
 import React from 'react';
 import { Sizes } from '../../constants';
+import { useI18n } from '../../hooks';
 import { type SpiritTextFieldBasePasswordToggleProps } from '../../types';
 import { Icon } from '../Icon';
-import {
-  TEXT_FIELD_BASE_PASSWORD_TOGGLE_HIDE_LABEL_DEFAULT,
-  TEXT_FIELD_BASE_PASSWORD_TOGGLE_SHOW_LABEL_DEFAULT,
-} from './constants';
 import { useTextFieldBasePasswordToggleStyleProps } from './useTextFieldBasePasswordToggleStyleProps';
 
 const TextFieldBasePasswordToggle = (props: SpiritTextFieldBasePasswordToggleProps): JSX.Element => {
+  const { t } = useI18n();
   const { children, isPasswordShown, onToggleClick, isDisabled, size } = props;
   const { classProps } = useTextFieldBasePasswordToggleStyleProps();
-  const ariaLabel = isPasswordShown
-    ? TEXT_FIELD_BASE_PASSWORD_TOGGLE_HIDE_LABEL_DEFAULT
-    : TEXT_FIELD_BASE_PASSWORD_TOGGLE_SHOW_LABEL_DEFAULT;
+  const ariaLabel = isPasswordShown ? t('textField.password.hide') : t('textField.password.show');
 
   return (
     <div className={classProps.passwordToggle}>
