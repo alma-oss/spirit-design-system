@@ -1,5 +1,11 @@
 import { type ElementType } from 'react';
-import { type ChildrenProps, type LinkColorsDictionaryType, type StyleProps, type TransferProps } from './shared';
+import {
+  type ChildrenProps,
+  type LinkColorsDictionaryType,
+  type RouterLinkProps,
+  type StyleProps,
+  type TransferProps,
+} from './shared';
 
 export const UNDERLINED_OPTIONS = {
   ALWAYS: 'always',
@@ -11,7 +17,7 @@ export type LinkTarget = '_blank' | '_self' | '_parent' | '_top';
 
 export type UnderlineOptions = (typeof UNDERLINED_OPTIONS)[keyof typeof UNDERLINED_OPTIONS];
 
-export interface LinkBaseProps<C = void> extends ChildrenProps, StyleProps, TransferProps {
+export interface LinkBaseProps<C = void> extends ChildrenProps, StyleProps, TransferProps, RouterLinkProps {
   /** Link's href attribute */
   href?: string;
   /** Link's target attribute */
