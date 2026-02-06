@@ -10,7 +10,6 @@ import { useSectionSizeProps } from './useSectionSizeProps';
 import { useSectionStyleProps } from './useSectionStyleProps';
 
 const defaultProps = {
-  containerProps: undefined,
   elementType: 'section',
   hasContainer: true,
   size: undefined,
@@ -41,7 +40,7 @@ const _Section = <T extends ElementType = 'section', S = void>(props: SectionPro
 
   return (
     <Component {...otherProps} {...mergedStyleProps} ref={ref}>
-      {hasContainer ? <Container {...(containerProps || {})}>{children}</Container> : children}
+      {hasContainer ? <Container {...containerProps}>{children}</Container> : children}
     </Component>
   );
 };
