@@ -8,16 +8,19 @@ import {
   type TextAlignmentType,
 } from './shared';
 
-export interface FooterStyleProps {
+/** ===== BASE API ===== */
+export interface FooterBaseProps extends ChildrenProps, StyleProps {}
+
+/** ===== STYLE API ===== */
+export interface FooterStyleProps extends FooterBaseProps {
   paddingTop?: SpaceToken;
   paddingBottom?: SpaceToken;
   backgroundColor?: BackgroundColorsDictionaryType;
   textAlignment?: TextAlignmentType;
 }
 
-export interface FooterBaseProps extends FooterStyleProps, ChildrenProps, StyleProps {}
+/** ===== INTERNAL API ===== */
+export interface FooterProps extends FooterStyleProps {}
 
-export type FooterProps<E extends ElementType = 'footer'> = PolymorphicComponentProps<E, FooterBaseProps>;
-
-/** @deprecated Use FooterProps instead */
-export type SpiritFooterProps<E extends ElementType = 'footer'> = FooterProps<E>;
+/** ===== PUBLIC API ===== */
+export type SpiritFooterProps<E extends ElementType = 'footer'> = PolymorphicComponentProps<E, FooterProps>;

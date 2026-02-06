@@ -10,6 +10,7 @@ import {
   type StyleProps,
 } from './shared';
 
+/** ===== BASE API ===== */
 /**
  * @deprecated "row" and "column" values will be replaced in the next major version. Please use "horizontal" and "vertical" instead.
  * @see https://jira.almacareer.tech/browse/DS-1629
@@ -24,7 +25,10 @@ export type FlexAlignmentYType =
   | { [key: string]: NonNullable<AlignmentYExtendedDictionaryType> };
 export type FlexWrapType = boolean | { [key: string]: boolean };
 
-export interface FlexStyleProps extends ChildrenProps, StyleProps {
+export interface FlexBaseProps extends ChildrenProps, StyleProps {}
+
+/** ===== STYLE API ===== */
+export interface FlexStyleProps extends FlexBaseProps {
   alignmentX?: FlexAlignmentXType;
   alignmentY?: FlexAlignmentYType;
   direction?: FlexDirectionType;
@@ -37,7 +41,8 @@ export interface FlexStyleProps extends ChildrenProps, StyleProps {
   spacingY?: SingleOrResponsive<SpaceToken>;
 }
 
-export type FlexProps<T extends ElementType = 'div'> = PolymorphicComponentProps<T, FlexStyleProps>;
+/** ===== INTERNAL API ===== */
+export interface FlexProps extends FlexStyleProps {}
 
-/** @deprecated Use FlexProps instead */
-export type SpiritFlexProps<T extends ElementType = 'div'> = FlexProps<T>;
+/** ===== PUBLIC API ===== */
+export type SpiritFlexProps<T extends ElementType = 'div'> = PolymorphicComponentProps<T, FlexProps>;

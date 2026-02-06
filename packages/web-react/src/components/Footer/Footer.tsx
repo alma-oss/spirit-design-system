@@ -3,7 +3,7 @@
 import React, { type ElementType, forwardRef } from 'react';
 import { BackgroundColors, PaddingStyleProps, TextStyleProps } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import { type FooterBaseProps, type FooterProps, type PolymorphicComponent, type PolymorphicRef } from '../../types';
+import { type FooterProps, type PolymorphicComponent, type PolymorphicRef, type SpiritFooterProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { PADDING_BOTTOM, PADDING_TOP } from './constants';
 import { useFooterStyleProps } from './useFooterStyleProps';
@@ -15,7 +15,7 @@ const defaultProps = {
   paddingTop: PADDING_TOP,
 };
 
-const _Footer = <T extends ElementType = 'footer'>(props: FooterProps<T>, ref: PolymorphicRef<T>): JSX.Element => {
+const _Footer = <T extends ElementType = 'footer'>(props: SpiritFooterProps<T>, ref: PolymorphicRef<T>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType, children, backgroundColor, ...restProps } = propsWithDefaults;
 
@@ -36,7 +36,7 @@ const _Footer = <T extends ElementType = 'footer'>(props: FooterProps<T>, ref: P
   );
 };
 
-const Footer = forwardRef(_Footer) as unknown as PolymorphicComponent<'footer', FooterBaseProps>;
+const Footer = forwardRef(_Footer) as unknown as PolymorphicComponent<'footer', FooterProps>;
 
 Footer.spiritComponent = 'Footer';
 Footer.displayName = 'Footer';
