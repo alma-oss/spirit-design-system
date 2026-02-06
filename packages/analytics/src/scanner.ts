@@ -23,7 +23,7 @@ export const getRunnerCall = async ({ outputPath, config, source, type }: Args) 
     });
   } else {
     // @TODO: Make API call
-    // https://jira.lmc.cz/browse/DS-559
+    // https://jira.almacareer.tech/browse/DS-559
   }
 };
 
