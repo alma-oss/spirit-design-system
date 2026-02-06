@@ -50,7 +50,7 @@ const _Tooltip = <T extends ElementType = 'div'>(props: SpiritTooltipProps<T>, r
 
   // Refs for FloatingUI
   const arrowRef = useRef<HTMLSpanElement>(null);
-  const tooltipRef = useRef<HTMLDivElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(ref);
 
   // Get `--tooltip-max-width` and `--tooltip-offset` from CSS variables
   let tooltipMaxWidth;
@@ -116,7 +116,7 @@ const _Tooltip = <T extends ElementType = 'div'>(props: SpiritTooltipProps<T>, r
         position,
       }}
     >
-      <Component {...otherProps} ref={ref || tooltipRef} {...mergedStyleProps}>
+      <Component {...otherProps} ref={tooltipRef} {...mergedStyleProps}>
         {children}
       </Component>
     </TooltipProvider>

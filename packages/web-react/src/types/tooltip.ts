@@ -33,7 +33,7 @@ export interface TooltipCloseButtonProps extends StyleProps {
   label?: string;
 }
 
-export interface TooltipHandlingProps {
+export interface TooltipState {
   isOpen?: boolean;
   onToggle: (isOpen: boolean) => void;
 }
@@ -43,7 +43,7 @@ export interface TooltipBaseProps extends ChildrenProps, StyleProps {}
 export interface UncontrolledTooltipProps extends TooltipStyleProps {}
 
 /** ===== STYLE API ===== */
-export interface TooltipStyleProps extends TooltipBaseProps, TooltipHandlingProps {
+export interface TooltipStyleProps extends TooltipBaseProps, TooltipState {
   closeLabel?: string;
   id: string;
   isDismissible?: boolean;
@@ -70,7 +70,7 @@ export interface BaseTooltipProps extends TooltipBaseProps {
   placement?: Placement;
 }
 
-export interface TooltipCustomProps extends TooltipHandlingProps {
+export interface TooltipCustomProps extends TooltipState {
   enableFlipping?: boolean;
   enableFlippingCrossAxis?: boolean;
   enableShifting?: boolean;
