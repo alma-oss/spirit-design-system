@@ -3,7 +3,7 @@
 import React, { type ElementType, type ReactNode, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import {
-  type AccordionBaseProps,
+  AccordionHeaderBaseProps,
   type AccordionHeaderProps,
   type PolymorphicComponent,
   type PolymorphicRef,
@@ -60,7 +60,7 @@ const _AccordionHeader = <T extends ElementType = 'h3'>(props: AccordionHeaderPr
 
 const AccordionHeader = forwardRef(_AccordionHeader) as unknown as PolymorphicComponent<
   'h3',
-  AccordionBaseProps & { slot?: ReactNode }
+  AccordionHeaderBaseProps
 >;
 
 AccordionHeader.spiritComponent = 'AccordionHeader';

@@ -21,12 +21,11 @@ export type AccordionProps<T extends ElementType = 'section'> = PolymorphicCompo
 /** @deprecated Use AccordionProps instead */
 export type SpiritAccordionProps<T extends ElementType = 'section'> = AccordionProps<T>;
 
-export type AccordionHeaderProps<T extends ElementType = 'h3'> = PolymorphicComponentProps<
-  T,
-  AccordionBaseProps & {
-    slot?: ReactNode;
-  }
->;
+export interface AccordionHeaderBaseProps extends AccordionBaseProps {
+  slot?: ReactNode;
+}
+
+export type AccordionHeaderProps<T extends ElementType = 'h3'> = PolymorphicComponentProps<T, AccordionHeaderBaseProps>;
 
 /** @deprecated Use AccordionHeaderProps instead */
 export type SpiritAccordionHeaderProps<T extends ElementType = 'h3'> = AccordionHeaderProps<T>;
