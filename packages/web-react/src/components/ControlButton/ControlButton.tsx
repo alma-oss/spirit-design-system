@@ -11,13 +11,14 @@ import {
 import { mergeStyleProps } from '../../utils';
 import { useControlButtonProps } from './useControlButtonProps';
 import { useControlButtonStyleProps } from './useControlButtonStyleProps';
+import { Sizes } from '../../constants';
 
 const defaultProps = {
   elementType: 'button',
   isDisabled: false,
   isSubtle: false,
   isSymmetrical: false,
-  size: 'medium',
+  size: Sizes.MEDIUM,
   type: 'button',
 };
 
