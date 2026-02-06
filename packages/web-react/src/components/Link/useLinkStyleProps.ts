@@ -1,9 +1,8 @@
 import classNames from 'classnames';
-import { type ElementType } from 'react';
 import { useClassNamePrefix } from '../../hooks';
-import { type LinkProps, type SpiritLinkProps, UNDERLINED_OPTIONS } from '../../types';
+import { type LinkProps, type LinkStyleProps, UNDERLINED_OPTIONS } from '../../types';
 
-export function useLinkStyleProps<E extends ElementType = 'a', T = void>(props: SpiritLinkProps<E, T>) {
+export function useLinkStyleProps<T = void>(props: LinkStyleProps<T>) {
   const { color, hasVisitedStyleAllowed, isDisabled, underlined, ...restProps } = props;
 
   const linkClass = useClassNamePrefix('link');
@@ -22,6 +21,6 @@ export function useLinkStyleProps<E extends ElementType = 'a', T = void>(props: 
 
   return {
     classProps: className,
-    props: restProps as Partial<LinkProps<E>>,
+    props: restProps as Partial<LinkProps<T>>,
   };
 }

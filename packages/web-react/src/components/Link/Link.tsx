@@ -2,7 +2,7 @@
 
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type LinkBaseProps, type LinkProps, type PolymorphicComponent, type PolymorphicRef } from '../../types';
+import { type SpiritLinkProps, type LinkProps, type PolymorphicComponent, type PolymorphicRef } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useLinkStyleProps } from './useLinkStyleProps';
 
@@ -13,13 +13,13 @@ const defaultProps = {
   underlined: 'hover',
 };
 
-const _Link = <E extends ElementType = 'a', C = void>(props: LinkProps<E, C>, ref: PolymorphicRef<E>): JSX.Element => {
+const _Link = <E extends ElementType = 'a', C = void>(props: SpiritLinkProps<E, C>, ref: PolymorphicRef<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
 
-  const { classProps, props: modifiedProps } = useLinkStyleProps(propsWithDefaults);
+  const { classProps, props: modifiedProps } = useLinkStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
@@ -30,7 +30,7 @@ const _Link = <E extends ElementType = 'a', C = void>(props: LinkProps<E, C>, re
   );
 };
 
-const Link = forwardRef(_Link) as unknown as PolymorphicComponent<'a', LinkBaseProps<void>>;
+const Link = forwardRef(_Link) as unknown as PolymorphicComponent<'a', LinkProps<void>>;
 
 Link.spiritComponent = 'Link';
 Link.displayName = 'Link';

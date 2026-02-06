@@ -10,12 +10,9 @@ const sizePaddingMapping: Record<SizeExtendedDictionaryType<never>, { paddingY: 
 };
 
 export const useSectionSizeProps = (props: SectionProps = {}) => {
-  const { size, ...restProps } = props;
+  const { size } = props;
 
-  const modifiedProps =
-    size && typeof size === 'string' && size in sizePaddingMapping
-      ? ({ ...sizePaddingMapping[size as SizeExtendedDictionaryType<never>], ...restProps } as typeof restProps)
-      : restProps;
+  const modifiedProps = size ? { ...sizePaddingMapping[size], ...props } : props;
 
   return {
     modifiedProps,
