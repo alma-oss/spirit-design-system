@@ -29,7 +29,7 @@
     "@eslint/compat": "1.4.0",
     "@eslint/eslintrc": "3.3.1",
     "@types/jest": "30.0.0",
-    "@types/node": "20.19.26",
+    "@types/node": "20.19.30",
     "eslint": "9.39.1",
     "eslint-config-spirit": "workspace:^",
     "jest": "30.2.0",
