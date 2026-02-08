@@ -21,6 +21,7 @@ jobs:
   chromatic:
     name: Deploy Storybook to Chromatic
     runs-on: ubuntu-24.04
+    environment: chromatic
     timeout-minutes: 15
     permissions:
       contents: read
