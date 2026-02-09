@@ -6,7 +6,6 @@
 @use 'sass:math';
 @use '@tokens' as tokens;
 @use '../../tools/placement';
-@use '../../tools/reset';
 @use '../../tools/svg';
 @use '../../tools/typography';
 @use 'theme';
@@ -28,9 +27,7 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
     text-align: left;
     white-space: normal;
     word-break: normal;
-    color: theme.$color;
     border-radius: theme.$border-radius;
-    background-color: theme.$background-color;
     box-shadow: theme.$box-shadow;
     word-wrap: break-word;
 
@@ -51,17 +48,11 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
 
     width: var(--tooltip-arrow-width); // 2.
     height: var(--tooltip-arrow-height); // 2.
-    background: no-repeat center/cover svg.escape(theme.$arrow-shape);
+    background-color: inherit;
+    mask-image: svg.escape(theme.$arrow-shape);
+    mask-size: cover;
     rotate: z var(--#{$_tooltip-placement-prefix}-arrow-rotate, 0deg);
     transform-origin: var(--#{$_tooltip-placement-prefix}-arrow-transform-origin, bottom center);
-}
-
-.TooltipPopover__close {
-    @include reset.button();
-
-    width: theme.$close-button-size;
-    height: theme.$close-button-size;
-    color: theme.$color;
 }
 
 .TooltipPopover--dismissible {
@@ -71,6 +62,10 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
     grid-template-columns: 1fr auto;
     column-gap: theme.$gap;
     align-items: center;
+}
+
+.TooltipPopover a:link {
+    color: inherit;
 }
 
 // Controlled visibility

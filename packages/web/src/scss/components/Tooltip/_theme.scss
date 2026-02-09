@@ -1,3 +1,5 @@
+// 1. Match the size of a small ControlButton.
+
 @use '@tokens' as tokens;
 @use '../../settings/dictionaries';
 @use '../../settings/transitions';
@@ -18,6 +20,6 @@ $arrow-width: 13px;
 $arrow-height: 8px;
 $arrow-corner-offset: tokens.$space-600;
 
-$close-button-size: tokens.$space-900;
+$close-button-size: tokens.$space-900; // 1.
 
 $placement-dictionary: dictionaries.$placement;

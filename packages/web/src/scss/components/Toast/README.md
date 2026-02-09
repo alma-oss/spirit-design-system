@@ -164,8 +164,8 @@ elements.
 Minimum example:
 
 ```html
-<div class="ToastBar ToastBar--neutral">
-  <div class="ToastBar__box">
+<div class="ToastBar">
+  <div class="ToastBar__box color-scheme-on-neutral-basic">
     <div class="ToastBar__container">
       <div class="ToastBar__content">
         <div class="text-truncate-multiline" data-spirit-populate-field="message">Message only</div>
@@ -180,8 +180,8 @@ Minimum example:
 An icon can be added to the ToastBar component:
 
 ```html
-<div class="ToastBar ToastBar--neutral">
-  <div class="ToastBar__box">
+<div class="ToastBar">
+  <div class="ToastBar__box color-scheme-on-neutral-basic">
     <div class="ToastBar__container">
       <svg width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#info" />
@@ -205,8 +205,8 @@ The content of `ToastBar` can be assembled from the following subcomponents:
 Usage example:
 
 ```html
-<div class="ToastBar ToastBar--neutral">
-  <div class="ToastBar__box">
+<div class="ToastBar">
+  <div class="ToastBar__box color-scheme-on-neutral-basic">
     <div class="ToastBar__container">
       <div class="ToastBar__content">
         <div class="text-truncate-multiline">Message with action</div>
@@ -223,8 +223,8 @@ Usage example:
 Usage example:
 
 ```html
-<div class="ToastBar ToastBar--neutral">
-  <div class="ToastBar__box">
+<div class="ToastBar">
+  <div class="ToastBar__box color-scheme-on-neutral-basic">
     <div class="ToastBar__container">
       <div class="ToastBar__content">
         <div class="text-truncate-multiline">Message with action</div>
@@ -242,13 +242,21 @@ said action), as it is very hard (if not impossible) to reach for users with ass
 ### Colors
 
 The ToastBar component is available in all [emotion colors][dictionary-color], plus the `neutral` variant (default).
-Use the `ToastBar--<color>` modifier class to change the color of the ToastBar component.
+Use the `color-scheme-on-*` utility class on the `ToastBar__box` element to change the color of the ToastBar component.
+
+Available color schemes:
+
+- `color-scheme-on-neutral-basic` (default)
+- `color-scheme-on-emotion-success-basic`
+- `color-scheme-on-emotion-informative-basic`
+- `color-scheme-on-emotion-warning-basic`
+- `color-scheme-on-emotion-danger-basic`
 
 For example:
 
 ```html
-<div class="ToastBar ToastBar--success">
-  <div class="ToastBar__box">
+<div class="ToastBar">
+  <div class="ToastBar__box color-scheme-on-emotion-success-basic">
     <div class="ToastBar__container">
       <div class="ToastBar__content">
         <div class="text-truncate-multiline">Success message</div>
@@ -286,8 +294,8 @@ To make the ToastBar dismissible, add the `ToastBar--dismissible` modifier class
 button:
 
 ```html
-<div id="my-dismissible-toast" class="ToastBar ToastBar--neutral ToastBar--dismissible">
-  <div class="ToastBar__box">
+<div id="my-dismissible-toast" class="ToastBar ToastBar--dismissible">
+  <div class="ToastBar__box color-scheme-on-neutral-basic">
     <div class="ToastBar__container">
       <div class="ToastBar__content">
         <div class="ToastBar__message">Dismissible message</div>
@@ -295,13 +303,13 @@ button:
     </div>
     <button
       type="button"
-      class="ToastBar__close"
+      class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target"
       data-spirit-dismiss="toast"
       data-spirit-target="#my-dismissible-toast"
       aria-controls="my-dismissible-toast"
       aria-expanded="true"
     >
-      <svg width="24" height="24" aria-hidden="true">
+      <svg width="16" height="16" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#close" />
       </svg>
       <span class="accessibility-hidden">Close</span>
@@ -328,7 +336,7 @@ button:
 <div class="Toast Toast--bottom Toast--center" role="log">
   <div class="Toast__queue">
     <!-- ToastBar: start -->
-    <div id="my-dismissible-toast" class="ToastBar ToastBar--neutral ToastBar--dismissible is-hidden">
+    <div id="my-dismissible-toast" class="ToastBar ToastBar--dismissible is-hidden">
       <div class="ToastBar__box">
         <div class="ToastBar__container">
           <svg width="20" height="20" aria-hidden="true">
@@ -341,12 +349,12 @@ button:
         </div>
         <button
           type="button"
-          class="ToastBar__close"
+          class="ControlButton ControlButton--medium ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+          data-spirit-populate-field="close-button"
           data-spirit-dismiss="toast"
-          aria-controls="my-dismissible-toast"
           aria-expanded="true"
         >
-          <svg width="24" height="24" aria-hidden="true">
+          <svg width="16" height="16" aria-hidden="true">
             <use xlink:href="/icons/svg/sprite.svg#close" />
           </svg>
           <span class="accessibility-hidden">Close</span>
@@ -371,8 +379,8 @@ the template and apply it on any toasts to be shown to the user, using the confi
   <div class="Toast__queue" data-spirit-element="toast-queue">
     <!-- This is the template for new ToastBar components: -->
     <template data-spirit-snippet="item">
-      <div class="ToastBar is-hidden" data-spirit-color="neutral" data-spirit-populate-field="item">
-        <div class="ToastBar__box">
+      <div class="ToastBar is-hidden" data-spirit-populate-field="item">
+        <div class="ToastBar__box" data-spirit-populate-field="box">
           <div class="ToastBar__container">
             <svg width="20" height="20" aria-hidden="true" data-spirit-populate-field="icon">
               <use xlink:href="/icons/svg/sprite.svg#info" />
@@ -384,12 +392,12 @@ the template and apply it on any toasts to be shown to the user, using the confi
           </div>
           <button
             type="button"
-            class="ToastBar__close"
+            class="ControlButton ControlButton--medium ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
             data-spirit-populate-field="close-button"
             data-spirit-dismiss="toast"
             aria-expanded="true"
           >
-            <svg width="24" height="24" aria-hidden="true">
+            <svg width="16" height="16" aria-hidden="true">
               <use xlink:href="/icons/svg/sprite.svg#close" />
             </svg>
             <span class="accessibility-hidden">Close</span>

@@ -10,6 +10,7 @@ import {
   ATTRIBUTE_DATA_POPULATE_FIELD,
   ATTRIBUTE_DATA_SNIPPET,
   ATTRIBUTE_DATA_TARGET,
+  CLASS_NAME_COLOR_SCHEME_PREFIX,
   CLASS_NAME_LINK_DISABLED,
   CLASS_NAME_LINK_UNDERLINED,
   CLASS_NAME_HIDDEN,
@@ -53,6 +54,7 @@ const SELECTOR_CLOSE_BUTTON_ELEMENT = `[${ATTRIBUTE_DATA_POPULATE_FIELD}="close-
 const SELECTOR_DISMISS_TRIGGER_ELEMENT = `[${ATTRIBUTE_DATA_DISMISS}="${NAME}"]`;
 const SELECTOR_MESSAGE_ELEMENT = `[${ATTRIBUTE_DATA_POPULATE_FIELD}="message"]`;
 const SELECTOR_LINK_ELEMENT = `[${ATTRIBUTE_DATA_POPULATE_FIELD}="link"]`;
+const SELECTOR_BOX_ELEMENT = `[${ATTRIBUTE_DATA_POPULATE_FIELD}="box"]`;
 
 // Keep in sync with transitions in `scss/Toast/_theme.scss`.
 export const PROPERTY_NAME_SLOWEST_TRANSITION = {
@@ -60,6 +62,8 @@ export const PROPERTY_NAME_SLOWEST_TRANSITION = {
   js: 'maxHeight',
 };
 const PROPERTY_NAME_FALLBACK_TRANSITION = 'opacity';
+
+const CLASS_NAME_TOAST_BAR_LINK = 'ToastBar__link';
 
 type Color = keyof typeof COLOR_ICON_MAP;
 type Underlined = keyof typeof UNDERLINE_MAP;
@@ -210,7 +214,7 @@ class Toast extends BaseComponent {
       linkElement.replaceWith(linkElementWithType);
       const { underlined = UNDERLINE_MAP.always } = linkProps;
 
-      linkElementWithType.classList.add('ToastBar__link');
+      linkElementWithType.classList.add(CLASS_NAME_TOAST_BAR_LINK);
       if (underlined === UNDERLINE_MAP.always) {
         linkElementWithType.classList.add(CLASS_NAME_LINK_UNDERLINED);
       }
@@ -248,7 +252,12 @@ class Toast extends BaseComponent {
     const linkElement = template.querySelector(SELECTOR_LINK_ELEMENT) as HTMLElement;
 
     itemElement!.setAttribute('id', config.id);
-    itemElement!.setAttribute('data-spirit-color', config.color);
+
+    const boxElement = itemElement!.querySelector(SELECTOR_BOX_ELEMENT) as HTMLElement;
+    if (boxElement) {
+      const colorScheme = config.color === 'neutral' ? 'neutral-basic' : `emotion-${config.color}-basic`;
+      boxElement.classList.add(`${CLASS_NAME_COLOR_SCHEME_PREFIX}${colorScheme}`);
+    }
 
     this.updateOrRemoveIcon(iconElement);
     this.updateOrRemoveCloseButton(closeButtonElement);
