@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@alma-oss/spirit-common": "workspace:^",
-    "@babel/core": "7.26.10",
+    "@babel/core": "7.29.0",
     "@eslint/compat": "1.4.1",
     "@eslint/eslintrc": "3.3.3",
     "@lmc-eu/browserslist-config": "2.0.1",

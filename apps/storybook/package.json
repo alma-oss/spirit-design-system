@@ -17,7 +17,7 @@
     "@alma-oss/spirit-design-tokens": "workspace:^",
     "@alma-oss/spirit-icons": "workspace:^",
     "@alma-oss/spirit-web-react": "workspace:^",
-    "@babel/core": "7.26.10",
+    "@babel/core": "7.29.0",
     "@storybook/addon-a11y": "10.2.3",
     "@storybook/addon-docs": "10.2.3",
     "@storybook/html": "10.2.3",
