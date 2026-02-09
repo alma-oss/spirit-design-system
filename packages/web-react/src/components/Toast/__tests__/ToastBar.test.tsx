@@ -24,21 +24,22 @@ describe('ToastBar', () => {
   ariaAttributesTest(ToastBar);
 
   it('should not render', () => {
-    const dom = render(<ToastBar isOpen={false} id="test" />);
+    render(<ToastBar isOpen={false} id="test" />);
 
-    const element = dom.container.querySelector('div') as HTMLElement;
-
-    expect(element).not.toBeInTheDocument();
+    expect(screen.queryByTestId('toast-bar-test')).not.toBeInTheDocument();
   });
 
   it('should render', () => {
-    const dom = render(<ToastBar isOpen id="test" />);
+    render(<ToastBar isOpen id="test" data-testid="toast-bar-test" />);
 
-    const element = dom.container.querySelector('div') as HTMLElement;
+    const element = screen.getByTestId('toast-bar-test');
+    const boxElement = element.querySelector('.ToastBar__box') as HTMLElement;
 
     expect(element).toBeInTheDocument();
     expect(element).toHaveClass('ToastBar');
-    expect(element).toHaveClass('ToastBar--neutral');
+
+    expect(boxElement).toBeInTheDocument();
+    expect(boxElement).toHaveClass('color-scheme-on-neutral-basic');
   });
 
   it('should render text children', () => {
@@ -53,18 +54,18 @@ describe('ToastBar', () => {
   });
 
   it('should render icon and have danger class', () => {
-    const dom = render(
-      <ToastBar id="test" color="danger" hasIcon isDismissible>
+    render(
+      <ToastBar id="test" color="danger" hasIcon isDismissible data-testid="toast-bar-danger">
         Hello World
       </ToastBar>,
     );
 
-    const element = dom.container.querySelector('div') as HTMLElement;
+    const element = screen.getByTestId('toast-bar-danger');
+    const boxElement = element.querySelector('.ToastBar__box') as HTMLElement;
 
-    expect(element).toHaveClass('ToastBar--danger ToastBar--dismissible');
+    expect(element).toHaveClass('ToastBar--dismissible');
+    expect(boxElement).toHaveClass('color-scheme-on-emotion-danger-basic');
 
-    const icon = dom.container.querySelector('svg') as SVGSVGElement;
-
-    expect(icon).toBeInTheDocument();
+    expect(element.querySelector('svg')).toBeInTheDocument();
   });
 });

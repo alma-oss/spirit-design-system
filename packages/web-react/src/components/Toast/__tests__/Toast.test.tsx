@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
@@ -22,32 +22,26 @@ describe('Toast', () => {
   ariaAttributesTest(Toast);
 
   it('should render with default alignments', () => {
-    const dom = render(<Toast />);
+    render(<Toast />);
 
-    const element = dom.container.querySelector('div') as HTMLElement;
-
-    expect(element).toHaveClass('Toast Toast--center Toast--bottom');
+    expect(screen.getByRole('log')).toHaveClass('Toast Toast--center Toast--bottom');
   });
 
   it('should render with custom alignments', () => {
-    const dom = render(<Toast alignmentX="left" alignmentY="top" />);
+    render(<Toast alignmentX="left" alignmentY="top" />);
 
-    const element = dom.container.querySelector('div') as HTMLElement;
-
-    expect(element).toHaveClass('Toast Toast--left Toast--top');
+    expect(screen.getByRole('log')).toHaveClass('Toast Toast--left Toast--top');
   });
 
   it('should render with responsive alignments', () => {
-    const dom = render(
+    render(
       <Toast
         alignmentX={{ mobile: 'right', tablet: 'center', desktop: 'left' }}
         alignmentY={{ mobile: 'top', tablet: 'bottom', desktop: 'top' }}
       />,
     );
 
-    const element = dom.container.querySelector('div') as HTMLElement;
-
-    expect(element).toHaveClass(
+    expect(screen.getByRole('log')).toHaveClass(
       'Toast Toast--desktop--left Toast--tablet--center Toast--right Toast--desktop--top Toast--tablet--bottom Toast--top',
     );
   });
