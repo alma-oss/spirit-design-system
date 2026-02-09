@@ -26,8 +26,8 @@
     "types": "tsc"
   },
   "devDependencies": {
-    "@eslint/compat": "1.4.0",
-    "@eslint/eslintrc": "3.3.1",
+    "@eslint/compat": "1.4.1",
+    "@eslint/eslintrc": "3.3.3",
     "@types/jest": "30.0.0",
     "@types/node": "20.19.26",
     "eslint": "9.39.2",
