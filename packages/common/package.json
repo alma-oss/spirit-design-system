@@ -30,7 +30,7 @@
     "@eslint/eslintrc": "3.3.1",
     "@types/jest": "30.0.0",
     "@types/node": "20.19.26",
-    "eslint": "9.39.1",
+    "eslint": "9.39.2",
     "eslint-config-spirit": "workspace:^",
     "jest": "30.2.0",
     "npm-run-all2": "8.0.4",
