@@ -1,5 +1,10 @@
 import { type CSSProperties, type ElementType } from 'react';
-import { type ModalDialogCSSHeight, type ModalDialogCSSHeightBreakpoints, type ModalDialogProps } from '../../types';
+import {
+  type ModalDialogCSSHeight,
+  type ModalDialogCSSHeightBreakpoints,
+  type ModalDialogProps,
+  type ModalDialogStyleProps,
+} from '../../types';
 
 interface CustomizedHeightCSSProperties extends CSSProperties {
   [key: string]: string | undefined | number;
@@ -27,7 +32,12 @@ const setCustomHeight = (
   return { [propName]: propValue?.toString() } as CustomizedHeightCSSProperties;
 };
 
-export const useModalDialogStyleProps = <E extends ElementType>(props: ModalDialogProps<E>) => {
+export interface ModalDialogStyles<E extends ElementType> {
+  modalDialogStyleProps: CustomizedHeightCSSProperties;
+  props: Omit<ModalDialogProps<E>, keyof ModalDialogStyleProps<E>>;
+}
+
+export const useModalDialogStyleProps = <E extends ElementType>(props: ModalDialogProps<E>): ModalDialogStyles<E> => {
   const { height, maxHeight, ...otherProps } = props;
 
   const customizedHeightStyle = {

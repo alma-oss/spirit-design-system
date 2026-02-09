@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { type CSSProperties } from 'react';
 import { TextColors } from '../../constants';
 import { useClassNamePrefix } from '../../hooks';
-import type { IconBoxSize, SpiritIconProps } from '../../types';
+import type { IconBoxSize, IconStyleProps, SpiritIconProps } from '../../types';
 
 const setCustomDimension = (prefix: string, size: IconBoxSize): CSSProperties => {
   const style: CSSProperties = {};
@@ -19,7 +19,13 @@ const setCustomDimension = (prefix: string, size: IconBoxSize): CSSProperties =>
   return style;
 };
 
-export const useIconStyleProps = (props: SpiritIconProps) => {
+export interface IconStyles {
+  classProps: string;
+  iconStyleProps: CSSProperties;
+  props: Omit<SpiritIconProps, keyof IconStyleProps>;
+}
+
+export const useIconStyleProps = (props: SpiritIconProps): IconStyles => {
   const { boxSize, color, name, ...otherProps } = props;
   const stylePrefix: string = `--${cssVariablePrefix}icon`;
   const isDualtoneIcon = String(name).includes('-dualtone');

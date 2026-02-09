@@ -23,6 +23,12 @@ export type SkeletonRadius<C> = SingleOrResponsive<BorderRadiiDictionaryType> | 
 
 export interface SkeletonProps extends ChildrenProps, StyleProps, TransferProps {}
 
+export interface SkeletonStyleProps<C = void> {
+  width: number;
+  height: number;
+  borderRadius?: SkeletonRadius<C>;
+}
+
 export interface SpiritSkeletonProps<T extends ElementType = 'div', C = void>
   extends AriaSkeletonElementTypeProps<T>,
     SkeletonProps {
@@ -30,10 +36,12 @@ export interface SpiritSkeletonProps<T extends ElementType = 'div', C = void>
   lines?: number;
 }
 
+export type SkeletonShapeStyleProps<T extends ElementType = 'div', C = void> = Pick<
+  SpiritSkeletonShapeProps<T, C>,
+  keyof SkeletonStyleProps<C>
+>;
+
 export interface SpiritSkeletonShapeProps<T extends ElementType = 'div', C = void>
   extends AriaSkeletonElementTypeProps<T>,
-    SkeletonProps {
-  width: number;
-  height: number;
-  borderRadius?: SkeletonRadius<C>;
-}
+    SkeletonProps,
+    SkeletonStyleProps<C> {}
