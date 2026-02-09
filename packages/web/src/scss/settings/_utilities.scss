@@ -110,6 +110,32 @@ $utilities: (
             200: tokens.$border-width-200,
         ),
     ),
+    'color-scheme': (
+        responsive: false,
+        property: null,
+        class: color-scheme-on,
+        generate-custom-properties: true,
+        values: spirit-map.merge-multiple(
+                utilities.generate-color-scheme-map(
+                    $tokens-group: $accent-tokens-key,
+                    $prefix: $accent-prefix,
+                ),
+                utilities.generate-color-scheme-map(
+                    $tokens-group: $emotion-tokens-key,
+                    $prefix: $emotion-prefix,
+                ),
+                (
+                    neutral-basic: (
+                        background-color: tokens.$neutral-background-basic,
+                        color: tokens.$neutral-content-subtle,
+                    ),
+                    neutral-subtle: (
+                        background-color: tokens.$neutral-background-subtle,
+                        color: tokens.$neutral-content-basic,
+                    ),
+                )
+            ),
+    ),
     'display': (
         responsive: true,
         property: display,
