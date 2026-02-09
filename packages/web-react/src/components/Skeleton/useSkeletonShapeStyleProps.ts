@@ -2,7 +2,7 @@ import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
 import classNames from 'classnames';
 import { type CSSProperties, type ElementType } from 'react';
 import { useClassNamePrefix } from '../../hooks';
-import { type SpiritSkeletonShapeProps } from '../../types';
+import { type SkeletonShapeStyleProps, type SpiritSkeletonShapeProps } from '../../types';
 
 interface CustomizedCSSProperties extends CSSProperties {
   [key: string]: string | undefined | number;
@@ -36,9 +36,15 @@ const setCustomBorderRadius = (
   return style;
 };
 
+export interface SkeletonShapeStyles<T extends ElementType = 'div', E = void> {
+  classProps: string;
+  skeletonShapeStyleProps: CustomizedCSSProperties;
+  props: Omit<SpiritSkeletonShapeProps<T, E>, keyof SkeletonShapeStyleProps<T, E>>;
+}
+
 export const useSkeletonShapeStyleProps = <T extends ElementType = 'div', E = void>(
   props: SpiritSkeletonShapeProps<T, E>,
-) => {
+): SkeletonShapeStyles<T, E> => {
   const { height, width, borderRadius, ...otherProps } = props;
 
   const skeletonClass = useClassNamePrefix('Skeleton');

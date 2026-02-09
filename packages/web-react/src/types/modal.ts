@@ -37,12 +37,19 @@ export type ModalDialogCSSHeightBreakpoints = {
   desktop?: ModalDialogCSSHeight;
 };
 
-export type ModalDialogProps<E extends ElementType = 'article'> = {
+export interface ModalDialogHeightProps {
   height?: ModalDialogCSSHeight | ModalDialogCSSHeightBreakpoints;
   maxHeight?: ModalDialogCSSHeight | ModalDialogCSSHeightBreakpoints;
-} & ModalDialogBaseProps<E> &
+}
+
+export type ModalDialogProps<E extends ElementType = 'article'> = ModalDialogHeightProps &
+  ModalDialogBaseProps<E> &
   ComponentPropsWithRef<E>;
 
+export type ModalDialogStyleProps<E extends ElementType = 'article'> = Pick<
+  ModalDialogProps<E>,
+  keyof ModalDialogHeightProps
+>;
 export interface ModalBodyProps extends SpiritDivElementProps, ChildrenProps {}
 
 export interface ModalHeaderProps extends SpiritElementProps, ChildrenProps {
