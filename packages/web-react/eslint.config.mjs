@@ -1,5 +1,6 @@
-import { fixupConfigRules } from '@eslint/compat';
+import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
@@ -42,6 +43,10 @@ export default [
     ),
   ),
   {
+    plugins: {
+      'react-refresh': fixupPluginRules(reactRefresh),
+    },
+
     languageOptions: {
       parserOptions: {
         ecmaVersion: 'latest',
