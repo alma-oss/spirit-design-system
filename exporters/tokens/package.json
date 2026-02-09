@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@supernovaio/export-helpers": "1.0.31",
-    "@supernovaio/sdk-exporters": "2.2.10",
+    "@supernovaio/sdk-exporters": "2.2.54",
     "vite": "7.0.8"
   },
   "devDependencies": {
