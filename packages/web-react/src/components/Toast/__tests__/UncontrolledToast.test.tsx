@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { validHtmlAttributesTest } from '@local/tests';
 import { type ToastLinkProps } from '../../../types';
@@ -36,15 +36,13 @@ describe('UncontrolledToast', () => {
   validHtmlAttributesTest(UncontrolledToast);
 
   it('should not render', () => {
-    const dom = render(
+    render(
       <ToastContext.Provider value={defaultContextValue}>
         <UncontrolledToast />
       </ToastContext.Provider>,
     );
 
-    const element = dom.container.querySelector('.ToastBar') as HTMLElement;
-
-    expect(element).not.toBeInTheDocument();
+    expect(screen.queryByTestId('toast-bar-test-id')).not.toBeInTheDocument();
   });
 
   it('should render opened toast', () => {
@@ -53,19 +51,21 @@ describe('UncontrolledToast', () => {
       queue: [{ ...defaultToast, isOpen: true }],
     };
 
-    const dom = render(
+    render(
       <ToastContext.Provider value={contextValue}>
         <UncontrolledToast />
       </ToastContext.Provider>,
     );
 
-    const elementToast = dom.container.querySelector('.Toast') as HTMLElement;
-    const elementToastBar = dom.container.querySelector('.ToastBar') as HTMLElement;
+    const elementToast = screen.getByRole('log');
+    const elementToastBar = screen.getByText('Toast message').closest('.ToastBar') as HTMLElement;
+    const elementToastBarBox = elementToastBar.querySelector('.ToastBar__box') as HTMLElement;
 
     expect(elementToast).toBeInTheDocument();
     expect(elementToastBar).toBeInTheDocument();
-    expect(elementToastBar).toHaveClass('is-open ToastBar--neutral');
-    expect(elementToastBar.querySelector('.ToastBar .ToastBar__container svg')).not.toBeInTheDocument();
+    expect(elementToastBar).toHaveClass('is-open');
+    expect(elementToastBarBox).toHaveClass('color-scheme-on-neutral-basic');
+    expect(elementToastBar.querySelector('.ToastBar__container svg')).not.toBeInTheDocument();
   });
 
   it('should render opened toast with params', () => {
@@ -74,21 +74,23 @@ describe('UncontrolledToast', () => {
       queue: [{ ...defaultToast, isOpen: true, isDismissible: true, hasIcon: true }],
     };
 
-    const dom = render(
+    render(
       <ToastContext.Provider value={contextValue}>
         <UncontrolledToast alignmentX="right" alignmentY="top" closeLabel="Close test" />
       </ToastContext.Provider>,
     );
 
-    const elementToast = dom.container.querySelector('.Toast') as HTMLElement;
-    const elementToastBar = dom.container.querySelector('.ToastBar') as HTMLElement;
+    const elementToast = screen.getByRole('log');
+    const elementToastBar = screen.getByText('Toast message').closest('.ToastBar') as HTMLElement;
+    const elementToastBarBox = elementToastBar.querySelector('.ToastBar__box') as HTMLElement;
 
     expect(elementToast).toBeInTheDocument();
     expect(elementToastBar).toBeInTheDocument();
     expect(elementToast).toHaveClass('Toast--right Toast--top');
-    expect(elementToastBar).toHaveClass('ToastBar ToastBar--neutral ToastBar--dismissible is-open');
+    expect(elementToastBar).toHaveClass('ToastBar ToastBar--dismissible is-open');
+    expect(elementToastBarBox).toHaveClass('color-scheme-on-neutral-basic');
     expect(elementToastBar.querySelector('.ToastBar__container svg')).toBeInTheDocument();
-    expect(elementToastBar.querySelector('button')).toHaveTextContent('Close test');
+    expect(screen.getByRole('button')).toHaveTextContent('Close test');
   });
 
   it('should close toast when close button is clicked', () => {
@@ -97,14 +99,13 @@ describe('UncontrolledToast', () => {
       queue: [{ ...defaultToast, isOpen: true, isDismissible: true }],
     };
 
-    const dom = render(
+    render(
       <ToastContext.Provider value={contextValue}>
         <UncontrolledToast />
       </ToastContext.Provider>,
     );
 
-    const elementToastBar = dom.container.querySelector('.ToastBar') as HTMLElement;
-    const elementButton = elementToastBar.querySelector('button') as HTMLButtonElement;
+    const elementButton = screen.getByRole('button');
 
     elementButton.click();
 
