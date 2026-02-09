@@ -21,9 +21,9 @@
     "eslint": "^8.0.0 || ^9.0.0"
   },
   "dependencies": {
-    "@babel/core": "7.26.10",
+    "@babel/core": "7.29.0",
     "@babel/eslint-parser": "^7.19.1",
-    "@babel/preset-react": "7.26.3",
+    "@babel/preset-react": "7.28.5",
     "@lmc-eu/eslint-config-base": "^3.1.1",
     "@lmc-eu/eslint-config-react": "^2.0.4",
     "@lmc-eu/eslint-config-typescript": "^2.1.3",
