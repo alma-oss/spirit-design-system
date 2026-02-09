@@ -13,14 +13,14 @@ const ToastStaticToast = () => {
     <>
       <fieldset className="mb-0" style={{ border: 0 }}>
         <legend className="mb-500">Show hidden toast in the DOM:</legend>
-        <Button onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen} aria-controls="hidden-toast">
+        <Button onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen} aria-controls="toast-dismissible">
           {buttonLabel}
         </Button>
       </fieldset>
 
       <Toast alignmentX="center" alignmentY="top">
         <ToastBar
-          id="hidden-toast"
+          id="toast-dismissible"
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           color="warning"

@@ -6,7 +6,6 @@
 @use 'sass:math';
 @use '../../tools/dictionaries';
 @use '../../tools/placement';
-@use '../../tools/reset';
 @use '../../tools/svg';
 @use '../../tools/typography';
 @use 'theme';
@@ -25,9 +24,7 @@
     text-align: left;
     white-space: normal;
     word-break: normal;
-    color: theme.$color;
     border-radius: theme.$border-radius;
-    background-color: theme.$background-color;
     box-shadow: theme.$box-shadow;
     word-wrap: break-word;
 
@@ -48,15 +45,9 @@
 
     width: var(--tooltip-arrow-width); // 2.
     height: var(--tooltip-arrow-height); // 2.
-    background: no-repeat center/cover svg.escape(theme.$arrow-shape);
-}
-
-.TooltipPopover__close {
-    @include reset.button();
-
-    width: theme.$close-button-size;
-    height: theme.$close-button-size;
-    color: theme.$color;
+    background-color: inherit;
+    mask-image: svg.escape(theme.$arrow-shape);
+    mask-size: cover;
 }
 
 .TooltipPopover--dismissible {
@@ -66,6 +57,10 @@
     grid-template-columns: 1fr auto;
     column-gap: theme.$gap;
     align-items: center;
+}
+
+.TooltipPopover a:link {
+    color: inherit;
 }
 
 @include dictionaries.generate-placements(

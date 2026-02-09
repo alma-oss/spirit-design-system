@@ -21,7 +21,7 @@
           </button>
           <div
             id="tooltip-tooltip-default"
-            class="TooltipPopover"
+            class="TooltipPopover color-scheme-on-neutral-basic"
           >
             Hello there!
             <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
@@ -53,20 +53,20 @@
           </button>
           <div
             id="my-dismissible-tooltip"
-            class="TooltipPopover TooltipPopover--dismissible"
+            class="TooltipPopover TooltipPopover--dismissible color-scheme-on-neutral-basic"
             data-spirit-placement="right"
             data-spirit-trigger="click"
           >
             Close me
             <button
               type="button"
-              class="TooltipPopover__close"
+              class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target"
               data-spirit-dismiss="tooltip"
               data-spirit-target="#my-dismissible-tooltip"
               aria-controls="my-dismissible-tooltip"
               aria-expanded="true"
             >
-              <svg width="24" height="24" aria-hidden="true">
+              <svg class="Icon" width="16" height="16" aria-hidden="true">
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
@@ -98,7 +98,7 @@
           <button id="my-dismissible-button-with-local-storage" class="Button Button--primary Button--medium" data-spirit-target="#my-dismissible-tooltip-with-local-storage" aria-describedby="my-dismissible-tooltip-with-local-storage">I have a tooltip 😎</button>
           <div
             id="my-dismissible-tooltip-with-local-storage"
-            class="TooltipPopover TooltipPopover--dismissible is-hidden"
+            class="TooltipPopover TooltipPopover--dismissible color-scheme-on-neutral-basic is-hidden"
             data-spirit-placement="right"
             data-spirit-flip="true"
             data-spirit-flip-cross-axis="true"
@@ -109,11 +109,11 @@
             <button
               id="my-dismissible-tooltip-with-local-storage-close"
               type="button"
-              class="TooltipPopover__close"
+              class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target"
               aria-controls="my-dismissible-tooltip-with-local-storage"
               aria-expanded="true"
             >
-              <svg width="24" height="24" aria-hidden="true">
+              <svg class="Icon" width="16" height="16" aria-hidden="true">
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
@@ -149,12 +149,12 @@
           </button>
           <div
             id="tooltip-example-hover"
-            class="TooltipPopover is-hidden"
+            class="TooltipPopover color-scheme-on-neutral-basic is-hidden"
             data-spirit-placement="right"
             data-spirit-flip-fallback-placements="left, top-start, bottom-start"
           >
             Hello there! <br />
-            <a href="#" class="link-inverted">Click me</a>
+            <a href="#" class="link-underlined">Click me</a>
             <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
           </div>
         </div>
@@ -189,7 +189,7 @@
           </button>
           <div
             id="tooltip-all"
-            class="TooltipPopover is-hidden"
+            class="TooltipPopover color-scheme-on-neutral-basic is-hidden"
             data-spirit-placement="right"
             data-spirit-flip-fallback-placements="bottom"
             data-spirit-trigger="hover, click, focus"
@@ -217,7 +217,7 @@
           </button>
           <div
             id="tooltip-hover"
-            class="TooltipPopover is-hidden"
+            class="TooltipPopover color-scheme-on-neutral-basic is-hidden"
             data-spirit-placement="right"
             data-spirit-flip-fallback-placements="bottom"
             data-spirit-trigger="hover"
@@ -245,7 +245,7 @@
           </button>
           <div
             id="tooltip-click"
-            class="TooltipPopover is-hidden"
+            class="TooltipPopover color-scheme-on-neutral-basic is-hidden"
             data-spirit-placement="right"
             data-spirit-flip-fallback-placements="bottom"
             data-spirit-trigger="click"
@@ -273,7 +273,7 @@
           </button>
           <div
             id="tooltip-focus"
-            class="TooltipPopover is-hidden"
+            class="TooltipPopover color-scheme-on-neutral-basic is-hidden"
             data-spirit-placement="right"
             data-spirit-flip-fallback-placements="bottom"
             data-spirit-trigger="focus"
@@ -309,7 +309,7 @@
             </svg>
             <div
               id="tooltip-example-with-icon"
-              class="TooltipPopover TooltipPopover--dismissible is-hidden"
+              class="TooltipPopover TooltipPopover--dismissible color-scheme-on-neutral-basic is-hidden"
               data-spirit-placement="right"
               data-spirit-flip="true"
               data-spirit-flip-cross-axis="true"
@@ -319,13 +319,13 @@
               <button
                 id="tooltip-example-with-icon-button"
                 type="button"
-                class="TooltipPopover__close"
+                class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target"
                 data-spirit-dismiss="tooltip"
                 data-spirit-target="#tooltip-example-with-icon"
                 aria-controls="tooltip-example-with-icon"
                 aria-expanded="true"
               >
-                <svg width="24" height="24" aria-hidden="true">
+                <svg class="Icon" width="16" height="16" aria-hidden="true">
                   <use xlink:href="/assets/icons/svg/sprite.svg#close" />
                 </svg>
                 <span class="accessibility-hidden">Close</span>
@@ -466,7 +466,7 @@
                   Click<br />
                   the dots!
                 </div>
-                <div class="TooltipPopover" id="tooltip-placements-example" data-spirit-placement="bottom" data-spirit-trigger="click" data-spirit-enable-flipping="false">
+                <div class="TooltipPopover color-scheme-on-neutral-basic" id="tooltip-placements-example" data-spirit-placement="bottom" data-spirit-trigger="click" data-spirit-enable-flipping="false">
                   <span id="tooltip-placements-example-text">bottom</span>
                   <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
                 </div>
@@ -568,7 +568,7 @@
                 <option value="left-end">left-end</option>
               </select>
               <div class="Select__icon">
-                <svg width="20" height="20" aria-hidden="true">
+                <svg class="Icon" width="20" height="20" aria-hidden="true">
                   <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
                 </svg>
               </div>
@@ -586,7 +586,7 @@
                 <option value="top, bottom">bottom, top</option>
               </select>
               <div class="Select__icon">
-                <svg width="20" height="20" aria-hidden="true">
+                <svg class="Icon" width="20" height="20" aria-hidden="true">
                   <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
                 </svg>
               </div>
@@ -610,7 +610,7 @@
               </button>
               <div
                 id="my-advanced-tooltip"
-                class="TooltipPopover TooltipPopover--dismissible"
+                class="TooltipPopover TooltipPopover--dismissible color-scheme-on-neutral-basic"
                 data-spirit-enable-flipping="true"
                 data-spirit-enable-shifting="true"
                 data-spirit-enable-sizing="true"
@@ -621,13 +621,13 @@
                 This long tooltip is flipping, resizing and shifting to stay in the viewport. Also its arrow is always trying to point to the center of the trigger.
                 <button
                   type="button"
-                  class="TooltipPopover__close"
+                  class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target"
                   data-spirit-dismiss="tooltip"
                   data-spirit-target="#my-advanced-tooltip"
                   aria-controls="my-advanced-tooltip"
                   aria-expanded="true"
                 >
-                  <svg width="24" height="24" aria-hidden="true">
+                  <svg class="Icon" width="16" height="16" aria-hidden="true">
                     <use xlink:href="/assets/icons/svg/sprite.svg#close" />
                   </svg>
                   <span class="accessibility-hidden">Close</span>
