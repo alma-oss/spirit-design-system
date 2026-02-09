@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { useI18n, useStyleProps } from '../../hooks';
 import { type TooltipCloseButtonProps } from '../../types';
+import { ControlButton } from '../ControlButton';
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { useTooltipStyleProps } from './useTooltipStyleProps';
@@ -15,16 +16,17 @@ const TooltipCloseButton = ({ label, onClick, ...restProps }: TooltipCloseButton
   const { styleProps } = useStyleProps({ ...modifiedProps });
 
   return (
-    <button
-      type="button"
-      className={classNames(classProps.closeButtonClassName, styleProps.className)}
-      style={styleProps.style}
+    <ControlButton
       onClick={onClick}
       aria-expanded="true"
+      isSymmetrical
+      isSubtle
+      UNSAFE_className={classNames(classProps.closeButtonClassName, styleProps.className)}
+      UNSAFE_style={styleProps.style}
     >
       <Icon name="close" aria-hidden="true" />
       <VisuallyHidden>{closeLabel}</VisuallyHidden>
-    </button>
+    </ControlButton>
   );
 };
 

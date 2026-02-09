@@ -18,10 +18,11 @@ export const useTooltipStyleProps = (props: UseTooltipStyleProps) => {
   const closeButtonClass = `${tooltipPopoverClass}__close`;
   const rootDismissibleClass = `${tooltipPopoverClass}--dismissible`;
   const rootHiddenClass = 'is-hidden';
+  const colorSchemeClass = 'color-scheme-on-neutral-basic';
 
   const isHiddenClass = useMemo(() => isOpen === false, [isOpen]);
 
-  const tooltipPopoverClassName = classNames(tooltipPopoverClass, {
+  const tooltipPopoverClassName = classNames(tooltipPopoverClass, colorSchemeClass, {
     [rootDismissibleClass]: isDismissible,
     [rootHiddenClass]: isHiddenClass,
   });

@@ -15,6 +15,7 @@ export const CLASS_NAME_VISIBLE = 'is-visible';
 export const CLASS_NAME_LINK_UNDERLINED = 'link-underlined';
 export const CLASS_NAME_LINK_NOT_UNDERLINED = 'link-not-underlined';
 export const CLASS_NAME_LINK_DISABLED = 'link-disabled';
+export const CLASS_NAME_COLOR_SCHEME_PREFIX = 'color-scheme-on-';
 
 export const DEFAULT_TOAST_AUTO_CLOSE_INTERVAL = 3000; // milliseconds
 

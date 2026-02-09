@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use 'true' as test;
 @use '../utilities';
 
@@ -90,8 +91,8 @@
         );
 
         // Check that keys are formatted as '01', '02' not '1', '2'
-        @include test.assert-true(map-has-key($result, 'accent-01-basic'));
-        @include test.assert-true(map-has-key($result, 'accent-02-basic'));
+        @include test.assert-true(map.has-key($result, 'accent-01-basic'));
+        @include test.assert-true(map.has-key($result, 'accent-02-basic'));
     }
 }
 
@@ -173,8 +174,8 @@
             generate-custom-properties: true,
             values: (
                 test-basic: (
-                    background-color: red,
-                    color: white,
+                    background-color: #f00,
+                    color: #fff,
                 ),
             ),
         );
@@ -185,12 +186,12 @@
             }
 
             @include test.expect() {
-                // stylelint-disable declaration-no-important -- We need to allow this to make sass-true work
+                // stylelint-disable custom-property-empty-line-before, declaration-empty-line-before, declaration-no-important, order/order, order/properties-order -- We need to allow this to make sass-true work
                 .color-scheme-on-test-basic {
-                    --spirit-local-background-color: red;
-                    background-color: red !important;
-                    --spirit-local-color: white;
-                    color: white !important;
+                    --spirit-local-background-color: #f00;
+                    background-color: #f00 !important;
+                    --spirit-local-color: #fff;
+                    color: #fff !important;
                 }
                 // stylelint-enable declaration-no-important
             }

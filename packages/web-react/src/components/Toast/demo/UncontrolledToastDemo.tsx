@@ -31,7 +31,12 @@ const ShowToastButton = () => {
       <Button
         type="button"
         onClick={() => {
-          show(ToastTextWithLink, uniqueId, { isDismissible: true, hasIcon: true, linkProps: { href: '#' } });
+          show(ToastTextWithLink, uniqueId, {
+            color: 'neutral',
+            isDismissible: true,
+            hasIcon: true,
+            linkProps: { href: '#' },
+          });
         }}
       >
         Show Toast
