@@ -2,9 +2,9 @@
   "codeConnect": {
     "include": ["src/components/**/*.{tsx,ts}"],
     "label": "React",
-    "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/Spirit-UI-KIT",
+    "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-",
     "documentUrlSubstitutions": {
-      "<FIGMA_FILE_ID>": "https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/Spirit-UI-KIT"
+      "<FIGMA_FILE_ID>": "https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-"
     },
     "importPaths": {
       "src/components/*": "@alma-oss/spirit-web-react"
