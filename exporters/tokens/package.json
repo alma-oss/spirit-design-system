@@ -24,8 +24,8 @@
     "vite": "7.0.8"
   },
   "devDependencies": {
-    "@eslint/compat": "1.4.0",
-    "@eslint/eslintrc": "3.3.1",
+    "@eslint/compat": "1.4.1",
+    "@eslint/eslintrc": "3.3.3",
     "@lmc-eu/eslint-config-typescript": "2.1.5",
     "@swc/core": "1.11.22",
     "@swc/jest": "0.2.38",

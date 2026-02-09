@@ -50,8 +50,8 @@
     "test:unit:coverage": "yarn test:unit --coverage"
   },
   "devDependencies": {
-    "@eslint/compat": "1.4.0",
-    "@eslint/eslintrc": "3.3.1",
+    "@eslint/compat": "1.4.1",
+    "@eslint/eslintrc": "3.3.3",
     "@lmc-eu/eslint-config-jest": "3.0.6",
     "@types/eslint": "9.6.1",
     "@types/jest": "30.0.0",
@@ -64,7 +64,7 @@
     "npm-run-all2": "6.2.6",
     "shx": "0.4.0",
     "ts-node": "10.9.2",
-    "tsup": "8.5.0",
+    "tsup": "8.5.1",
     "typescript": "5.7.3"
   },
   "dependencies": {
