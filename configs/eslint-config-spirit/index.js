@@ -17,7 +17,13 @@ module.exports = {
     'plugin:storybook/recommended',
   ],
 
-  plugins: ['promise', 'react', '@typescript-eslint', 'react-refresh'],
+  /**
+   * Enable `react-refresh` after this config is migrated to flat
+   *
+   * Disabled in:
+   * @see { @link https://github.com/alma-oss/spirit-design-system/pull/2421 }
+   */
+  plugins: ['promise', 'react', '@typescript-eslint', /* 'react-refresh' */],
 
   rules: {
 

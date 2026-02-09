@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components -- Demo file exports constants */
 import React from 'react';
 
 export const MEDIA_IMAGE = (
