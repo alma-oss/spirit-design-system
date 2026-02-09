@@ -8,13 +8,13 @@ import {
   type TransferProps,
 } from './shared';
 
-export interface MatrixElementTypeProps<T extends ElementType = 'div'> {
+export interface MatrixElementTypeProps<E extends ElementType = 'div'> {
   /**
    * The HTML element or React element used to render the Matrix, e.g. 'div'.
    *
    * @default 'div'
    */
-  elementType?: T;
+  elementType?: E;
 }
 
 export interface MatrixCustomLayoutProps {

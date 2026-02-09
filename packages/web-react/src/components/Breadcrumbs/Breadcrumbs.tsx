@@ -12,7 +12,7 @@ const defaultProps: Partial<SpiritBreadcrumbsProps> = {
   items: [],
 };
 
-const Breadcrumbs = <T extends ElementType = 'nav'>(props: SpiritBreadcrumbsProps<T>): JSX.Element => {
+const Breadcrumbs = <E extends ElementType = 'nav'>(props: SpiritBreadcrumbsProps<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { children, elementType: ElementTag = 'nav', goBackTitle, items, ...restProps } = propsWithDefaults;
   const { classProps, props: modifiedProps } = useBreadcrumbsStyleProps({ ...restProps });

@@ -10,8 +10,8 @@ export interface AlertStyles {
   props: AlertProps;
 }
 
-export function useAlertStyleProps<T extends ElementType = 'div', E = void>(
-  props: SpiritAlertProps<T, E>,
+export function useAlertStyleProps<E extends ElementType = 'div', C = void>(
+  props: SpiritAlertProps<E, C>,
 ): AlertStyles {
   const { color, isCentered, ...modifiedProps } = props;
 

@@ -12,7 +12,7 @@ const defaultProps = {
   elementType: 'button',
 };
 
-const DropdownTrigger = <T extends ElementType = 'button'>(props: DropdownTriggerProps<T>) => {
+const DropdownTrigger = <E extends ElementType = 'button'>(props: DropdownTriggerProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'button', children, ...rest } = propsWithDefaults;
   const { id, isOpen, onToggle, fullWidthMode, triggerRef } = useDropdownContext();

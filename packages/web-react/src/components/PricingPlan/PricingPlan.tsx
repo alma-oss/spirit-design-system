@@ -14,7 +14,7 @@ const defaultProps: Partial<SpiritPricingPlanProps> = {
   rows: NUMBER_OF_PLAN_ROWS_DEFAULT,
 };
 
-const PricingPlan = <T extends ElementType = 'article'>(props: SpiritPricingPlanProps<T>) => {
+const PricingPlan = <E extends ElementType = 'article'>(props: SpiritPricingPlanProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'article', children, ...restProps } = propsWithDefaults;
 

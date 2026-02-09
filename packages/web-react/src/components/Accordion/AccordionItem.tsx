@@ -12,9 +12,9 @@ import { mergeStyleProps } from '../../utils';
 import { AccordionItemProvider } from './AccordionItemContext';
 import { useAccordionStyleProps } from './useAccordionStyleProps';
 
-const _AccordionItem = <T extends ElementType = 'article'>(
-  props: SpiritAccordionItemProps<T>,
-  ref: PolymorphicRef<T>,
+const _AccordionItem = <E extends ElementType = 'article'>(
+  props: SpiritAccordionItemProps<E>,
+  ref: PolymorphicRef<E>,
 ) => {
   const { children, elementType = 'article', id, ...restProps } = props;
 

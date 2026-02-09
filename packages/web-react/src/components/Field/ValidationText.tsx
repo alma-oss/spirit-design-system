@@ -14,7 +14,7 @@ const defaultProps: Partial<ValidationTextProps> = {
   role: undefined,
 };
 
-const ValidationText = <T extends ElementType = 'div'>(props: ValidationTextProps<T>) => {
+const ValidationText = <E extends ElementType = 'div'>(props: ValidationTextProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const {
     elementType: ElementTag = defaultProps.elementType as ElementType,

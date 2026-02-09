@@ -8,13 +8,13 @@ import {
   type TransferProps,
 } from './shared';
 
-export interface AriaSkeletonElementTypeProps<T extends ElementType = 'div'> {
+export interface AriaSkeletonElementTypeProps<E extends ElementType = 'div'> {
   /**
    * The HTML element or React element used to render the Skeleton, e.g. 'div', 'span'.
    *
    * @default 'div'
    */
-  elementType?: T;
+  elementType?: E;
 }
 
 export type SkeletonSize<C> = SizeExtendedDictionaryType | C;

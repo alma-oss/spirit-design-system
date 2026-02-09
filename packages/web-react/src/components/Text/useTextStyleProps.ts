@@ -3,14 +3,16 @@ import { type ElementType } from 'react';
 import { useClassNamePrefix } from '../../hooks';
 import { type SpiritTextProps, type TextProps } from '../../types';
 
-export interface TextStyles<T extends ElementType = 'p'> {
+export interface TextStyles<E extends ElementType = 'p'> {
   /** className props */
   classProps: string | null;
   /** props to be passed to the input element */
-  props: TextProps<T>;
+  props: TextProps<E>;
 }
 
-export function useTextStyleProps<T extends ElementType = 'p', S = void>(props: SpiritTextProps<T, S>): TextStyles<T> {
+export function useTextStyleProps<E extends ElementType = 'p', S = void, Emph = void, C = void>(
+  props: SpiritTextProps<E, S, Emph, C>,
+): TextStyles<E> {
   const { emphasis, size, textColor, ...restProps } = props;
 
   const textClass = useClassNamePrefix('typography-body');

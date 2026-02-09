@@ -20,9 +20,9 @@ const defaultProps: Partial<SpiritAccordionHeaderProps> = {
   elementType: 'h3',
 };
 
-const _AccordionHeader = <T extends ElementType = 'h3'>(
-  props: SpiritAccordionHeaderProps<T>,
-  ref: PolymorphicRef<T>,
+const _AccordionHeader = <E extends ElementType = 'h3'>(
+  props: SpiritAccordionHeaderProps<E>,
+  ref: PolymorphicRef<E>,
 ) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = 'h3', children, slot, ...restProps } = propsWithDefaults;

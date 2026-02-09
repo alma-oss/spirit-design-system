@@ -65,6 +65,6 @@ export interface GridProps extends GridStyleProps {}
 export interface GridItemProps extends GridItemStyleProps {}
 
 /** ===== PUBLIC API ===== */
-export type SpiritGridProps<T extends ElementType = 'div'> = PolymorphicComponentProps<T, GridProps>;
+export type SpiritGridProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, GridProps>;
 
-export type SpiritGridItemProps<T extends ElementType = 'div'> = PolymorphicComponentProps<T, GridItemProps>;
+export type SpiritGridItemProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, GridItemProps>;

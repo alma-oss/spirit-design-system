@@ -11,7 +11,7 @@ const defaultProps: Partial<HelperTextProps> = {
   registerAria: undefined,
 };
 
-const HelperText = <T extends ElementType = 'div'>(props: HelperTextProps<T>) => {
+const HelperText = <E extends ElementType = 'div'>(props: HelperTextProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const {
     helperText,

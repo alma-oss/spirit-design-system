@@ -6,22 +6,18 @@ export type PillColorsExtendedNamesType = (typeof PillColorsExtended)[keyof type
 
 export type PillColor<C> = EmotionColorNamesType<C> | PillColorsExtendedNamesType | C;
 
-export interface AriaPillElementTypeProps<T extends ElementType = 'span'> {
+export interface AriaPillElementTypeProps<E extends ElementType = 'span'> {
   /**
    * The HTML element or React element used to render the pill, e.g. 'div', 'span'.
    *
    * @default 'span'
    */
-  elementType?: T;
+  elementType?: E;
 }
 
 export interface PillProps extends ChildrenProps, StyleProps, TransferProps {}
 
-export type SpiritPillProps<
-  T extends ElementType = 'span',
-  C = void,
-  E extends ElementType = T,
-> = AriaPillElementTypeProps<T> &
+export type SpiritPillProps<E extends ElementType = 'span', C = void> = AriaPillElementTypeProps<E> &
   ComponentPropsWithRef<E> &
   PillProps & {
     /** The color of the pill. */

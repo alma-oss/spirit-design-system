@@ -16,13 +16,13 @@ export interface SpiritBreadcrumbsItemProps extends ChildrenProps {
   isGoBackOnly?: boolean;
 }
 
-export interface AriaBreadcrumbsElementTypeProps<T extends ElementType = 'nav'> {
+export interface AriaBreadcrumbsElementTypeProps<E extends ElementType = 'nav'> {
   /**
    * The HTML element or React element used to render the breadcrumbs, e.g. 'div', 'span'.
    *
    * @default 'nav'
    */
-  elementType?: T;
+  elementType?: E;
 }
 
 export interface BreadcrumbsStyleProps extends StyleProps, TransferProps {

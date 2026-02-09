@@ -4,11 +4,11 @@ import { BorderColors } from '../../constants';
 import { useClassNamePrefix } from '../../hooks';
 import { type SpiritBoxProps } from '../../types';
 
-export interface UseBoxStyleProps<T> {
+export interface UseBoxStyleProps<E> {
   /** className props */
   classProps: string;
   /** Props for the box element. */
-  props: T;
+  props: E;
 }
 
 export const useBoxStyleProps = (

@@ -12,21 +12,21 @@ import type {
   TypographyBaseProps,
 } from './shared';
 
-export interface TextElementTypeProps<T extends ElementType = 'p'> {
+export interface TextElementTypeProps<E extends ElementType = 'p'> {
   /**
    * The HTML element or React element used to render the Text, e.g. 'p'.
    *
    * @default 'p'
    */
-  elementType?: T;
+  elementType?: E;
 }
 
 export interface TextProps<T extends ElementType = 'p'>
   extends TextElementTypeProps<T>, ChildrenProps, StyleProps, TransferProps, TypographyBaseProps {}
 
-export interface SpiritTextProps<T extends ElementType = 'p', S = void, E = void, C = void>
+export interface SpiritTextProps<T extends ElementType = 'p', S = void, Emph = void, C = void>
   extends
     TextProps<T>,
     SizeProps<SizeExtendedDictionaryType<S>>,
-    EmphasisProps<EmphasisDictionaryType<E>>,
+    EmphasisProps<EmphasisDictionaryType<Emph>>,
     TextColorProps<TextColorsType<C>> {}

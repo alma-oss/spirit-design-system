@@ -28,13 +28,13 @@ export interface ChildrenProps {
   children?: ReactNode | string;
 }
 
-export interface ElementTypeProps<T extends ElementType = 'div'> {
+export interface ElementTypeProps<E extends ElementType = 'div'> {
   /**
    * The HTML element or React element used to render the component.
    *
    * @default 'div'
    */
-  elementType?: T;
+  elementType?: E;
 }
 
 export enum SpiritBreakpoints {

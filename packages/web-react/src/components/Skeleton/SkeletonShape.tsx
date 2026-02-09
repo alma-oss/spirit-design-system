@@ -11,8 +11,8 @@ const defaultProps: Partial<SpiritSkeletonShapeProps> = {
   borderRadius: BorderRadii[400],
   elementType: 'div',
 };
-const SkeletonShape = <T extends ElementType = 'div', E = void>(
-  props: SpiritSkeletonShapeProps<T, E>,
+const SkeletonShape = <E extends ElementType = 'div', C = void>(
+  props: SpiritSkeletonShapeProps<E, C>,
 ): ReactElement => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'div', ...restProps } = propsWithDefaults;

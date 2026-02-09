@@ -13,7 +13,7 @@ const defaultProps: Partial<SpiritAlertProps> = {
   isCentered: false,
 };
 
-export const Alert = <T extends ElementType = 'div', E = void>(props: SpiritAlertProps<T, E>) => {
+export const Alert = <E extends ElementType = 'div', C = void>(props: SpiritAlertProps<E, C>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'div', children, color, iconName, ...restProps } = propsWithDefaults;
   const { classProps, props: modifiedProps } = useAlertStyleProps({ color, ...restProps });

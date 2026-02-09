@@ -24,9 +24,9 @@ const defaultProps = {
   elementType: 'button',
 };
 
-const _Button = <T extends ElementType = 'button', C = void, S = void>(
-  props: SpiritButtonProps<T, C, S>,
-  ref: PolymorphicRef<T>,
+const _Button = <E extends ElementType = 'button', C = void, S = void>(
+  props: SpiritButtonProps<E, C, S>,
+  ref: PolymorphicRef<E>,
 ) => {
   const propsWithContext = usePropsContext();
   const propsWithDefaults = { ...defaultProps, ...props, ...propsWithContext };

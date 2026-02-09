@@ -45,4 +45,4 @@ export interface FlexStyleProps extends FlexBaseProps {
 export interface FlexProps extends FlexStyleProps {}
 
 /** ===== PUBLIC API ===== */
-export type SpiritFlexProps<T extends ElementType = 'div'> = PolymorphicComponentProps<T, FlexProps>;
+export type SpiritFlexProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, FlexProps>;

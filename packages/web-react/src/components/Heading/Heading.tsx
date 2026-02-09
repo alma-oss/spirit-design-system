@@ -12,7 +12,9 @@ const defaultProps: Partial<SpiritHeadingProps<ElementType, void, void>> = {
   size: SizesExtended.MEDIUM,
 };
 
-const Heading = <T extends ElementType, S = void, E = void>(props: SpiritHeadingProps<T, S, E>): JSX.Element => {
+const Heading = <E extends ElementType = 'h1', S = void, Emph = void>(
+  props: SpiritHeadingProps<E, S, Emph>,
+): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag, children, ...restProps } = propsWithDefaults;
   const { classProps, props: modifiedProps } = useHeadingStyleProps({ ...restProps });

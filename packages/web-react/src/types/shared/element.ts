@@ -24,20 +24,20 @@ type DistributiveOmit<T, U> = T extends unknown ? Pick<T, Exclude<keyof T, U>> :
  * - Otherwise, use default element props intersected with component props
  * This allows component-specific props like backgroundColor while rejecting invalid element props like method.
  */
-type PropsOf<T extends ElementType> = T extends { spiritDefaultElement: infer D; spiritDefaultProps: infer P }
+type PropsOf<E extends ElementType> = E extends { spiritDefaultElement: infer D; spiritDefaultProps: infer P }
   ? D extends ElementType
     ? P extends ComponentPropsWithRef<ElementType>
       ? // Use the component's props when constrained to default element (includes backgroundColor, excludes method)
         P & ComponentPropsWithRef<D>
       : // Fallback: use default element props intersected with component props
-        ComponentPropsWithRef<D> & ComponentPropsWithRef<T>
-    : ComponentPropsWithRef<T>
-  : T extends { spiritDefaultElement: infer D }
+        ComponentPropsWithRef<D> & ComponentPropsWithRef<E>
+    : ComponentPropsWithRef<E>
+  : E extends { spiritDefaultElement: infer D }
     ? D extends ElementType
       ? // No default props marker, use intersection
-        ComponentPropsWithRef<D> & ComponentPropsWithRef<T>
-      : ComponentPropsWithRef<T>
-    : ComponentPropsWithRef<T>;
+        ComponentPropsWithRef<D> & ComponentPropsWithRef<E>
+      : ComponentPropsWithRef<E>
+    : ComponentPropsWithRef<E>;
 
 export type SpiritPolymorphicComponentProp<E extends ElementType, P> = PropsWithChildren<
   ElementTypeProp<E> & P & DistributiveOmit<PropsOf<E>, keyof P | keyof ElementTypeProp<E> | 'ref'>

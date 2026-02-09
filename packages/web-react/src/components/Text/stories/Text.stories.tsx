@@ -2,6 +2,7 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Emphasis, SizesExtended, TextAlignments, TextColors, TextHyphens, TextWordBreaks } from '../../../constants';
+import { type TextColorsType } from '../../../types';
 import { getAccentTextColors, getEmotionTextColors } from '../../../utils';
 import ReadMe from '../README.md';
 import { Text } from '..';
@@ -98,8 +99,10 @@ export const Playground: Story = {
   name: 'Text',
   render: (args) => {
     const { children, textColor, ...restProps } = args;
-    const bgColor = textColor?.replace(/basic|subtle/, (match) => (match === 'basic' ? 'subtle' : 'basic'));
-    const boxClass = textColor?.match(/basic|subtle/) ? `bg-${bgColor}` : '';
+    const bgColor = (textColor as TextColorsType)?.replace(/basic|subtle/, (match) =>
+      match === 'basic' ? 'subtle' : 'basic',
+    );
+    const boxClass = (textColor as TextColorsType)?.match(/basic|subtle/) ? `bg-${bgColor}` : '';
 
     return (
       <div className={`${boxClass} p-800`}>

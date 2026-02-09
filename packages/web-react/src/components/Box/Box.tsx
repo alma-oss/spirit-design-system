@@ -12,7 +12,7 @@ const defaultProps = {
   borderStyle: BorderStyles.SOLID,
 };
 
-const _Box = <T extends ElementType = 'div'>(props: BoxProps<T>, ref: PolymorphicRef<T>) => {
+const _Box = <E extends ElementType = 'div'>(props: BoxProps<E>, ref: PolymorphicRef<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
 

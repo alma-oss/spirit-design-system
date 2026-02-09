@@ -10,7 +10,7 @@ export interface PillStyles {
   props: Partial<SpiritPillProps>;
 }
 
-export function usePillStyleProps<T extends ElementType = 'span', C = void>(props: SpiritPillProps<T, C>): PillStyles {
+export function usePillStyleProps<E extends ElementType = 'span', C = void>(props: SpiritPillProps<E, C>): PillStyles {
   const { color, ...modifiedProps } = props;
 
   const pillClass = useClassNamePrefix('Pill');

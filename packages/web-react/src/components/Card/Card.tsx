@@ -13,7 +13,7 @@ const defaultProps: Partial<SpiritCardProps> = {
   isBoxed: false,
 };
 
-const Card = <T extends ElementType = 'article'>(props: SpiritCardProps<T>) => {
+const Card = <E extends ElementType = 'article'>(props: SpiritCardProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const {
     elementType: ElementTag = 'article',

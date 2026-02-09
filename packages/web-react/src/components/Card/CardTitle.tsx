@@ -11,7 +11,7 @@ const defaultProps: Partial<SpiritCardTitleProps> = {
   isHeading: true,
 };
 
-const CardTitle = <T extends ElementType = 'h4'>(props: SpiritCardTitleProps<T>) => {
+const CardTitle = <E extends ElementType = 'h4'>(props: SpiritCardTitleProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'h4', children, isHeading, ...restProps } = propsWithDefaults;
   const { classProps } = useCardStyleProps({ isHeading });

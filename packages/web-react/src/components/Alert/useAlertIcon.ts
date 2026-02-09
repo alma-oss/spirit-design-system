@@ -2,7 +2,7 @@ import { type ElementType } from 'react';
 import { useIconName } from '../../hooks/useIconName';
 import { type SpiritAlertProps } from '../../types';
 
-export function useAlertIcon<T extends ElementType = 'div', E = void>({ color, iconName }: SpiritAlertProps<T, E>) {
+export function useAlertIcon<E extends ElementType = 'div', C = void>({ color, iconName }: SpiritAlertProps<E, C>) {
   const iconNameValue = useIconName(color as string, {
     default: 'info',
     success: 'check-plain',

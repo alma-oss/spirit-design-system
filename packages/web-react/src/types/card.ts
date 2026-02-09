@@ -19,19 +19,19 @@ export const CardSizes = {
 } as const;
 
 export type CardSizesDictionaryKeys = keyof typeof CardSizes;
-export type CardSizesDictionaryType<T = undefined> = (typeof CardSizes)[CardSizesDictionaryKeys] | T;
+export type CardSizesDictionaryType<C = undefined> = (typeof CardSizes)[CardSizesDictionaryKeys] | C;
 
 export type CardAlignmentXType = SingleOrResponsive<NonNullable<AlignmentXDictionaryType>>;
 
 export type CardAlignmentYType = SingleOrResponsive<NonNullable<AlignmentYDictionaryType>>;
 
-export interface CardElementTypeProps<T extends ElementType = 'article'> {
+export interface CardElementTypeProps<E extends ElementType = 'article'> {
   /**
    * The HTML element or React element used to render the Card, e.g. 'div'.
    *
    * @default 'article'
    */
-  elementType?: T;
+  elementType?: E;
 }
 
 // Card types
@@ -39,7 +39,7 @@ export type CardDirectionType =
   | NonNullable<DirectionExtendedDictionaryType>
   | { [key: string]: NonNullable<DirectionExtendedDictionaryType> };
 
-export interface CardProps<T extends ElementType = 'article'> extends CardElementTypeProps<T> {
+export interface CardProps<E extends ElementType = 'article'> extends CardElementTypeProps<E> {
   alignmentY?: CardAlignmentYType;
   direction?: CardDirectionType;
   isBoxed?: boolean;

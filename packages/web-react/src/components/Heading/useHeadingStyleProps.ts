@@ -3,16 +3,16 @@ import { type ElementType } from 'react';
 import { useClassNamePrefix } from '../../hooks';
 import { type HeadingProps, type SpiritHeadingProps } from '../../types';
 
-export interface HeadingStyles<T extends ElementType> {
+export interface HeadingStyles<E extends ElementType> {
   /** className props */
   classProps: string | null;
   /** props to be passed to the input element */
-  props: Omit<HeadingProps<T>, 'elementType'>;
+  props: Omit<HeadingProps<E>, 'elementType'>;
 }
 
-export function useHeadingStyleProps<T extends ElementType, S = void, E = void>(
-  props: Omit<SpiritHeadingProps<T, S, E>, 'elementType'>,
-): HeadingStyles<T> {
+export function useHeadingStyleProps<E extends ElementType, S = void, Emph = void>(
+  props: Omit<SpiritHeadingProps<E, S, Emph>, 'elementType'>,
+): HeadingStyles<E> {
   const { emphasis, size, textColor, ...restProps } = props;
 
   const headingClass = useClassNamePrefix('typography-heading');

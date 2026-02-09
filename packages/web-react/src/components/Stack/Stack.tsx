@@ -14,7 +14,7 @@ const defaultProps = {
   hasStartDivider: false,
 };
 
-const _Stack = <T extends ElementType = 'div'>(props: SpiritStackProps<T>, ref: PolymorphicRef<T>): JSX.Element => {
+const _Stack = <E extends ElementType = 'div'>(props: SpiritStackProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
 
