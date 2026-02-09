@@ -10,7 +10,7 @@ const defaultProps: Partial<SpiritTimelineStepProps> = {
   elementType: 'li',
 };
 
-const TimelineStep = <T extends ElementType = 'li'>(props: SpiritTimelineStepProps<T>) => {
+const TimelineStep = <E extends ElementType = 'li'>(props: SpiritTimelineStepProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'li', children, ...restProps } = propsWithDefaults;
   const { classProps } = useTimelineStyleProps();

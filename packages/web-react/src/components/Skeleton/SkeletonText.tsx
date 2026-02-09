@@ -14,7 +14,7 @@ const defaultProps: Partial<SpiritSkeletonProps> = {
   lines: LINES_COUNT_DEFAULT,
   elementType: 'div',
 };
-const SkeletonText = <T extends ElementType = 'div', E = void>(props: SpiritSkeletonProps<T, E>): ReactElement => {
+const SkeletonText = <E extends ElementType = 'div', C = void>(props: SpiritSkeletonProps<E, C>): ReactElement => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'div', lines, ...restProps } = propsWithDefaults;
   const { classProps, props: modifiedProps } = useSkeletonStyleProps(restProps);

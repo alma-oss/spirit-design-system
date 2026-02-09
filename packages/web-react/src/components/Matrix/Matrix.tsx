@@ -22,7 +22,7 @@ const defaultProps: Partial<SpiritMatrixProps> = {
   spacingY: MATRIX_SPACING_Y_DEFAULT,
 };
 
-const Matrix = <T extends ElementType = 'div'>(props: SpiritMatrixProps<T>) => {
+const Matrix = <E extends ElementType = 'div'>(props: SpiritMatrixProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
 
   const { elementType: ElementTag = 'div', children, ...restProps } = propsWithDefaults;

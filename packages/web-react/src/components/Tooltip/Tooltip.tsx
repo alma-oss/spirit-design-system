@@ -13,7 +13,7 @@ import { TooltipProvider } from './TooltipContext';
 import { useFloating } from './useFloating';
 import { useTooltipStyleProps } from './useTooltipStyleProps';
 
-const _Tooltip = <T extends ElementType = 'div'>(props: SpiritTooltipProps<T>, ref: PolymorphicRef<T>) => {
+const _Tooltip = <E extends ElementType = 'div'>(props: SpiritTooltipProps<E>, ref: PolymorphicRef<E>) => {
   const {
     children,
     elementType = 'div',

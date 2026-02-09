@@ -6,7 +6,7 @@ import type { SpiritPricingPlanFooterProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { usePricingPlanStyleProps } from './usePricingPlanStyleProps';
 
-const PricingPlanFooter = <T extends ElementType = 'footer'>(props: SpiritPricingPlanFooterProps<T>) => {
+const PricingPlanFooter = <E extends ElementType = 'footer'>(props: SpiritPricingPlanFooterProps<E>) => {
   const { children, elementType: ElementTag = 'footer', ...restProps } = props;
 
   const { classProps, props: modifiedProps } = usePricingPlanStyleProps(restProps);

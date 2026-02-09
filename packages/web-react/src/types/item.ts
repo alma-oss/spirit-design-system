@@ -1,13 +1,13 @@
 import { type ElementType, type ReactNode } from 'react';
 import { type StyleProps, type TransferProps } from './shared';
 
-export interface AriaItemElementTypeProps<T extends ElementType = 'button'> {
+export interface AriaItemElementTypeProps<E extends ElementType = 'button'> {
   /**
    * The HTML element or React element used to render the item, e.g. 'div', 'span'.
    *
    * @default 'button'
    */
-  elementType?: T;
+  elementType?: E;
 }
 
 export interface ItemStyleProps extends StyleProps, TransferProps {

@@ -5,7 +5,7 @@ import { useStyleProps } from '../../hooks';
 import { type SpiritLabelProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 
-const Label = <T extends ElementType = 'label'>(props: SpiritLabelProps<T>): JSX.Element => {
+const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX.Element => {
   const { elementType: ElementTag = 'label', children, htmlFor, for: labelFor, ...restProps } = props;
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const mergedStyleProps = mergeStyleProps(ElementTag, { styleProps, otherProps });

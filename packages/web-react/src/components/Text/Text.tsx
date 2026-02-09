@@ -13,7 +13,9 @@ const defaultProps: Partial<SpiritTextProps> = {
   size: SizesExtended.MEDIUM,
 };
 
-const Text = <T extends ElementType = 'p', S = void>(props: SpiritTextProps<T, S>): JSX.Element => {
+const Text = <E extends ElementType = 'p', S = void, Emph = void, C = void>(
+  props: SpiritTextProps<E, S, Emph, C>,
+): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'p', children, ...restProps } = propsWithDefaults;
   const { classProps, props: modifiedProps } = useTextStyleProps(restProps);

@@ -12,7 +12,7 @@ const defaultProps: Partial<SpiritPillProps> = {
   elementType: 'span',
 };
 
-const Pill = <T extends ElementType = 'span', C = void>(props: SpiritPillProps<T, C>): JSX.Element => {
+const Pill = <E extends ElementType = 'span', C = void>(props: SpiritPillProps<E, C>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'span', children, ...restProps } = propsWithDefaults;
   const { classProps, props: modifiedProps } = usePillStyleProps(restProps);

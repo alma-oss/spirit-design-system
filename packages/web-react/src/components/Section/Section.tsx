@@ -20,9 +20,9 @@ const defaultProps = {
   size: undefined,
 };
 
-const _Section = <T extends ElementType = 'section', S = void>(
-  props: SpiritSectionProps<T, S>,
-  ref: PolymorphicRef<T>,
+const _Section = <E extends ElementType = 'section', S = void>(
+  props: SpiritSectionProps<E, S>,
+  ref: PolymorphicRef<E>,
 ) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const {

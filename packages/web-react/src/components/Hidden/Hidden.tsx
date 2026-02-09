@@ -9,7 +9,7 @@ const defaultProps = {
   elementType: 'span',
 };
 
-const _Hidden = <T extends ElementType = 'span'>(props: SpiritHiddenProps<T>, ref: PolymorphicRef<T>) => {
+const _Hidden = <E extends ElementType = 'span'>(props: SpiritHiddenProps<E>, ref: PolymorphicRef<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType, children, on, from, ...restProps } = propsWithDefaults;
 

@@ -12,7 +12,7 @@ const defaultProps: Partial<SpiritTimelineProps> = {
   size: TIMELINE_SIZE_DEFAULT,
 };
 
-const Timeline = <T extends ElementType = 'ol'>(props: SpiritTimelineProps<T>) => {
+const Timeline = <E extends ElementType = 'ol'>(props: SpiritTimelineProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'ol', children, size, ...restProps } = propsWithDefaults;
   const { classProps } = useTimelineStyleProps({ markerSize: size });

@@ -15,8 +15,8 @@ export interface SkeletonStyles {
   props: SkeletonProps;
 }
 
-export function useSkeletonStyleProps<T extends ElementType = 'div', E = void>(
-  props?: SpiritSkeletonProps<T, E>,
+export function useSkeletonStyleProps<E extends ElementType = 'div', C = void>(
+  props?: SpiritSkeletonProps<E, C>,
 ): SkeletonStyles {
   const { size, ...restProps } = props || {};
 

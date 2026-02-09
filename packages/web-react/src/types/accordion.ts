@@ -41,16 +41,16 @@ export interface AccordionContentProps extends AccordionBaseProps {}
 export type UncontrolledAccordionProps = AccordionBaseProps & AccordionStateProps;
 
 /** ===== PUBLIC API ===== */
-export type SpiritAccordionProps<T extends ElementType = 'section'> = PolymorphicComponentProps<T, AccordionProps>;
-export type SpiritAccordionHeaderProps<T extends ElementType = 'h3'> = PolymorphicComponentProps<
-  T,
+export type SpiritAccordionProps<E extends ElementType = 'section'> = PolymorphicComponentProps<E, AccordionProps>;
+export type SpiritAccordionHeaderProps<E extends ElementType = 'h3'> = PolymorphicComponentProps<
+  E,
   AccordionHeaderProps
 >;
-export type SpiritAccordionItemProps<T extends ElementType = 'article'> = PolymorphicComponentProps<
-  T,
+export type SpiritAccordionItemProps<E extends ElementType = 'article'> = PolymorphicComponentProps<
+  E,
   AccordionItemProps
 >;
-export type SpiritUncontrolledAccordionProps<T extends ElementType = 'section'> = PolymorphicComponentProps<
-  T,
+export type SpiritUncontrolledAccordionProps<E extends ElementType = 'section'> = PolymorphicComponentProps<
+  E,
   UncontrolledAccordionProps
 >;

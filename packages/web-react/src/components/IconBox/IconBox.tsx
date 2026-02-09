@@ -20,7 +20,7 @@ const defaultProps = {
   size: SizesExtended.MEDIUM,
 };
 
-const _IconBox = <T extends ElementType = 'div'>(props: SpiritIconBoxProps<T>, ref: PolymorphicRef<T>) => {
+const _IconBox = <E extends ElementType = 'div'>(props: SpiritIconBoxProps<E>, ref: PolymorphicRef<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType, shape, color, iconName, isSubtle, hasBorder, size, ...restProps } = propsWithDefaults;
 

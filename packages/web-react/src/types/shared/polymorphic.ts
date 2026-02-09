@@ -25,8 +25,8 @@ export interface SpiritComponentStaticProps {
  *   size?: 'small' | 'medium' | 'large';
  * }
  *
- * type ButtonProps<T extends ElementType = 'button'> =
- *   PolymorphicComponentProps<T, ButtonBaseProps>;
+ * type ButtonProps<E extends ElementType = 'button'> =
+ *   PolymorphicComponentProps<E, ButtonBaseProps>;
  *
  * // Usage
  * <Button color="primary" size="medium" /> // renders <button>
@@ -61,8 +61,8 @@ type ComponentStaticProps = {
  * Example: Accordion has T='section' as default, but users should be able
  * to pass elementType="article" or elementType="div" etc.
  */
-export type PolymorphicComponent<T extends ElementType, Props> = (<E extends ElementType = T>(
-  props: PolymorphicComponentProps<E, Props> & { ref?: PolymorphicRef<E> },
+export type PolymorphicComponent<E extends ElementType, Props> = (<T extends ElementType = E>(
+  props: PolymorphicComponentProps<T, Props> & { ref?: PolymorphicRef<T> },
 ) => JSX.Element) &
   ComponentStaticProps;
 
@@ -74,9 +74,9 @@ export type PolymorphicComponent<T extends ElementType, Props> = (<E extends Ele
  *
  * @example
  * ```tsx
- * const ButtonInner = <T extends ElementType = 'button'>(
- *   props: ButtonProps<T>,
- *   ref: PolymorphicRef<T>
+ * const ButtonInner = <E extends ElementType = 'button'>(
+ *   props: ButtonProps<E>,
+ *   ref: PolymorphicRef<E>
  * ) => {
  *   // ref is correctly typed as Ref<HTMLButtonElement> by default
  *   // or Ref<HTMLAnchorElement> when T is 'a'

@@ -5,9 +5,9 @@ import type { Responsive, SpaceToken, SpiritIconBoxProps } from '../../types';
 import { isResponsive } from '../../utils';
 import { IconBoxShapes, IconBoxShapesRadii, IconBoxSizes } from './constants';
 
-export interface UseIconBoxStyleProps<T> {
+export interface UseIconBoxStyleProps<E> {
   iconBoxStyles: CSSProperties;
-  props: T;
+  props: E;
   shapesProps: (typeof IconBoxShapesRadii)[keyof typeof IconBoxShapesRadii];
   sizeProps:
     | (typeof IconBoxSizes)[keyof typeof IconBoxSizes]

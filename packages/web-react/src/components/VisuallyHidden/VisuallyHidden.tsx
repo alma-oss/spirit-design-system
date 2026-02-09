@@ -6,7 +6,7 @@ import { type SpiritVisuallyHiddenProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useVisuallyHiddenProps } from './useVisuallyHiddenProps';
 
-const VisuallyHidden = <T extends ElementType = 'span'>(props: SpiritVisuallyHiddenProps<T>): JSX.Element => {
+const VisuallyHidden = <E extends ElementType = 'span'>(props: SpiritVisuallyHiddenProps<E>): JSX.Element => {
   const { children, elementType: ElementTag = 'span', ...rest } = props;
   const { classProps, props: modifiedProps } = useVisuallyHiddenProps(rest);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);

@@ -10,8 +10,8 @@ export interface TagStyles {
   props: Partial<SpiritTagProps>;
 }
 
-export function useTagStyleProps<T extends ElementType = 'span', C = void, S = void>(
-  props: SpiritTagProps<T, C, S>,
+export function useTagStyleProps<E extends ElementType = 'span', C = void, S = void>(
+  props: SpiritTagProps<E, C, S>,
 ): TagStyles {
   const { color, isSubtle, size, ...modifiedProps } = props;
 

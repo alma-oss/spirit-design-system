@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useClassNamePrefix } from '../../hooks';
 import { type LinkProps, type LinkStyleProps, UNDERLINED_OPTIONS } from '../../types';
 
-export function useLinkStyleProps<T = void>(props: LinkStyleProps<T>) {
+export function useLinkStyleProps<C = void>(props: LinkStyleProps<C>) {
   const { color, hasVisitedStyleAllowed, isDisabled, underlined, ...restProps } = props;
 
   const linkClass = useClassNamePrefix('link');
@@ -21,6 +21,6 @@ export function useLinkStyleProps<T = void>(props: LinkStyleProps<T>) {
 
   return {
     classProps: className,
-    props: restProps as Partial<LinkProps<T>>,
+    props: restProps as Partial<LinkProps<C>>,
   };
 }

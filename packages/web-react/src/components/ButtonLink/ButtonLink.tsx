@@ -28,9 +28,9 @@ const defaultProps = {
   size: 'medium' as ButtonSizesType,
 };
 
-const _ButtonLink = <T extends ElementType = 'a', C = void, S = void>(
-  props: SpiritButtonLinkProps<T, C, S>,
-  ref: PolymorphicRef<T>,
+const _ButtonLink = <E extends ElementType = 'a', C = void, S = void>(
+  props: SpiritButtonLinkProps<E, C, S>,
+  ref: PolymorphicRef<E>,
 ) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;

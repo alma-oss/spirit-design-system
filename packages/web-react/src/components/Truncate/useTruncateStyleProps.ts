@@ -6,15 +6,15 @@ interface TruncateCSSProperties extends CSSProperties {
   '--text-truncate-lines'?: number;
 }
 
-export interface TruncateStyles<T extends ElementType> {
+export interface TruncateStyles<E extends ElementType> {
   classProps: string;
-  props: SpiritTruncateProps<T>;
+  props: SpiritTruncateProps<E>;
   styleProps: TruncateCSSProperties;
   effectiveMode: TruncateMode;
   effectiveLimit?: number;
 }
 
-export const useTruncateStyleProps = <T extends ElementType>(props: SpiritTruncateProps<T>): TruncateStyles<T> => {
+export const useTruncateStyleProps = <E extends ElementType>(props: SpiritTruncateProps<E>): TruncateStyles<E> => {
   const { limit, mode = TruncateModes.LINES, ...restProps } = props;
 
   const truncateClassName = useClassNamePrefix(mode === TruncateModes.LINES ? 'text-truncate-multiline' : '');

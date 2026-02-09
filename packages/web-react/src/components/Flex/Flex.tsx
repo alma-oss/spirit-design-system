@@ -15,7 +15,7 @@ const defaultProps = {
   isWrapping: false,
 };
 
-const _Flex = <T extends ElementType = 'div'>(props: SpiritFlexProps<T>, ref: PolymorphicRef<T>): JSX.Element => {
+const _Flex = <E extends ElementType = 'div'>(props: SpiritFlexProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const {
     elementType = defaultProps.elementType,

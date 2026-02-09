@@ -16,7 +16,7 @@ const defaultProps: Partial<SpiritPricingPlanHeaderProps> = {
   title: undefined,
 };
 
-const PricingPlanHeader = <T extends ElementType = 'header'>(props: SpiritPricingPlanHeaderProps<T>) => {
+const PricingPlanHeader = <E extends ElementType = 'header'>(props: SpiritPricingPlanHeaderProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType: ElementTag = 'header', ...restProps } = propsWithDefaults;
 

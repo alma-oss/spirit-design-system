@@ -12,7 +12,7 @@ const defaultProps: Partial<SpiritPricingPlanBodyProps> = {
   features: [],
 };
 
-const PricingPlanBody = <T extends ElementType = 'div'>(props: SpiritPricingPlanBodyProps<T>) => {
+const PricingPlanBody = <E extends ElementType = 'div'>(props: SpiritPricingPlanBodyProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
 
   const { description, elementType: ElementTag = 'div', features = [], id, ...restProps } = propsWithDefaults;

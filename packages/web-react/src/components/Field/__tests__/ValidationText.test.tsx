@@ -6,7 +6,7 @@ import { A11Y_ALERT_ROLE } from '../constants';
 import { type ValidationTextProps } from '../types';
 import ValidationText from '../ValidationText';
 
-const renderValidationText = <T extends ElementType = 'div'>(props: Partial<ValidationTextProps<T>>) =>
+const renderValidationText = <E extends ElementType = 'div'>(props: Partial<ValidationTextProps<E>>) =>
   render(<ValidationText UNSAFE_className="ValidationText__validationText" {...props} />);
 
 describe('ValidationText', () => {

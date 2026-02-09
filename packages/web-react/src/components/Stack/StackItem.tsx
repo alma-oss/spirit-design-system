@@ -15,9 +15,9 @@ const defaultProps = {
   elementType: 'div',
 };
 
-const _StackItem = <T extends ElementType = 'div'>(
-  props: SpiritStackItemProps<T>,
-  ref: PolymorphicRef<T>,
+const _StackItem = <E extends ElementType = 'div'>(
+  props: SpiritStackItemProps<E>,
+  ref: PolymorphicRef<E>,
 ): JSX.Element => {
   const { elementType = defaultProps.elementType, children, ...restProps } = props;
 

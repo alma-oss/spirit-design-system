@@ -15,8 +15,8 @@ const defaultProps: Partial<SpiritTagProps> = {
   size: SizesExtended.MEDIUM,
 };
 
-const _Tag = <T extends ElementType = 'span', C = void, S = void>(
-  props: SpiritTagProps<T, C, S>,
+const _Tag = <E extends ElementType = 'span', C = void, S = void>(
+  props: SpiritTagProps<E, C, S>,
   ref: ForwardedRef<HTMLSpanElement>,
 ): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };

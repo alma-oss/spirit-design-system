@@ -9,7 +9,7 @@ import { HelperText } from '../Field';
 import { Icon } from '../Icon';
 import { useItemStyleProps } from './useItemStyleProps';
 
-const Item = <T extends ElementType = 'button'>(props: SpiritItemProps<T>): JSX.Element => {
+const Item = <E extends ElementType = 'button'>(props: SpiritItemProps<E>): JSX.Element => {
   const {
     label,
     elementType: ElementTag = 'button',

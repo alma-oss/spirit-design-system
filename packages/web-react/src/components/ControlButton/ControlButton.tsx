@@ -22,9 +22,9 @@ const defaultProps = {
   type: 'button',
 };
 
-const _ControlButton = <T extends ElementType = 'button', S = void>(
-  props: SpiritControlButtonProps<T, S>,
-  ref: PolymorphicRef<T>,
+const _ControlButton = <E extends ElementType = 'button', S = void>(
+  props: SpiritControlButtonProps<E, S>,
+  ref: PolymorphicRef<E>,
 ) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;

@@ -12,7 +12,7 @@ import { mergeStyleProps } from '../../utils';
 import { AccordionProvider } from './AccordionContext';
 import { useAccordionStyleProps } from './useAccordionStyleProps';
 
-const _Accordion = <T extends ElementType = 'section'>(props: SpiritAccordionProps<T>, ref: PolymorphicRef<T>) => {
+const _Accordion = <E extends ElementType = 'section'>(props: SpiritAccordionProps<E>, ref: PolymorphicRef<E>) => {
   const { children, elementType = 'section', open, toggle, ...restProps } = props;
 
   const Component = elementType as ElementType;
