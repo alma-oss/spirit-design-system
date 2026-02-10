@@ -1,9 +1,10 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
+import { useRouter } from '../../context/RouterContext';
 import { useStyleProps } from '../../hooks';
-import { type PolymorphicRef, type SpiritLinkProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { type ClickEvent, type PolymorphicRef, type SpiritLinkProps } from '../../types';
+import { handleLinkClick, mergeStyleProps } from '../../utils';
 import { useLinkStyleProps } from './useLinkStyleProps';
 
 const defaultProps: Partial<SpiritLinkProps> = {
@@ -23,12 +24,23 @@ const _Link = <E extends ElementType = 'a', T = void>(
     children,
     ...restProps
   } = propsWithDefaults;
+  const { href, target, isDisabled, routerOptions, onClick } = restProps;
+  const router = useRouter();
   const { classProps, props: modifiedProps } = useLinkStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
 
+  const handleClick = handleLinkClick({
+    router,
+    href,
+    isDisabled,
+    target,
+    routerOptions,
+    onClick: onClick as ((event: ClickEvent) => void) | undefined,
+  });
+
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps} href={restProps.href} ref={ref}>
+    <ElementTag {...otherProps} {...mergedStyleProps} href={href} onClick={handleClick} ref={ref}>
       {children}
     </ElementTag>
   );

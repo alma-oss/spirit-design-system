@@ -23,7 +23,8 @@ export interface ButtonLinkStyles {
 export function useButtonLinkStyleProps<T extends ElementType = 'button', C = void, S = void>(
   props: SpiritButtonProps<T, C, S>,
 ): ButtonLinkStyles {
-  const { color, isBlock, isDisabled, isLoading, isSymmetrical, size, ...restProps } = props;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { color, isBlock, isDisabled, isLoading, isSymmetrical, size, routerOptions, ...restProps } = props;
 
   // @see https://jira.almacareer.tech/browse/DS-1897
   useDeprecationMessage({

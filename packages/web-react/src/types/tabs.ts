@@ -2,6 +2,7 @@ import { type ElementType, type HTMLProps } from 'react';
 import {
   type ChildrenProps,
   type ClickEvents,
+  type RouterLinkProps,
   type SpacingProp,
   type SpiritPolymorphicElementPropsWithRef,
   type StyleProps,
@@ -36,7 +37,7 @@ export interface TabsProps extends ChildrenProps, SpacingProp, TransferProps, Ta
 
 export type TabLinkItemProps = StyleProps & HTMLProps<HTMLLIElement>;
 
-export interface TabLinkBaseProps extends ChildrenProps, StyleProps, TransferProps {
+export interface TabLinkBaseProps extends ChildrenProps, StyleProps, TransferProps, RouterLinkProps {
   itemProps?: TabLinkItemProps;
 }
 

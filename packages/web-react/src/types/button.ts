@@ -6,6 +6,7 @@ import type {
   ClickEvents,
   ComponentButtonColorNamesType,
   EmotionColorNamesType,
+  RouterLinkProps,
   SingleOrResponsive,
   SizesDictionaryType,
   StyleProps,
@@ -15,7 +16,7 @@ export type ButtonColor<C> = ComponentButtonColorNamesType<C> | EmotionColorName
 /** @deprecated "SizesDictionaryType" fallback will be removed in the next major version. */
 export type ButtonSize<S> = keyof S extends never ? SizesDictionaryType : ButtonSizesType | S;
 
-export interface ButtonBaseProps<C = void, S = void> extends ChildrenProps, StyleProps, ClickEvents {
+export interface ButtonBaseProps<C = void, S = void> extends ChildrenProps, StyleProps, ClickEvents, RouterLinkProps {
   /** The color of the button. */
   color?: ButtonColor<C>;
   /** Whether the button is disabled. */
