@@ -16,7 +16,8 @@ import {
 export type CheckboxElementBaseProps = SpiritInputElementPropsWithRef;
 
 export interface CheckboxProps
-  extends CheckboxElementBaseProps,
+  extends
+    CheckboxElementBaseProps,
     ChildrenProps,
     LabelProps,
     ItemProps,

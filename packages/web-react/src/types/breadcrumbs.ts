@@ -30,9 +30,7 @@ export interface BreadcrumbsStyleProps extends StyleProps, TransferProps {
 }
 
 export interface SpiritBreadcrumbsProps<T extends ElementType = 'nav'>
-  extends AriaBreadcrumbsElementTypeProps<T>,
-    StyleProps,
-    ChildrenProps {
+  extends AriaBreadcrumbsElementTypeProps<T>, StyleProps, ChildrenProps {
   goBackTitle?: string;
   items?: BreadcrumbsItems;
 }

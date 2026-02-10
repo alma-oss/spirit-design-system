@@ -15,7 +15,8 @@ import {
 export type TextAreaElementBaseProps = Omit<SpiritTextAreaElementPropsWithRef, 'size'>;
 
 export interface TextAreaProps<S = void>
-  extends TextAreaElementBaseProps,
+  extends
+    TextAreaElementBaseProps,
     InputBaseProps,
     ChildrenProps,
     LabelProps,

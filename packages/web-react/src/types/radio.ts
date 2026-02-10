@@ -15,7 +15,8 @@ import {
 export type RadioElementBaseProps = SpiritInputElementPropsWithRef;
 
 export interface RadioProps
-  extends RadioElementBaseProps,
+  extends
+    RadioElementBaseProps,
     ChildrenProps,
     LabelProps,
     ItemProps,

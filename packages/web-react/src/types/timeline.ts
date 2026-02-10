@@ -59,15 +59,10 @@ export interface TimelineMarkerProps {
 }
 
 export interface SpiritTimelineProps<T extends ElementType = 'ol'>
-  extends TimelineProps<T>,
-    TimelineBaseProps,
-    ChildrenProps,
-    StyleProps {}
+  extends TimelineProps<T>, TimelineBaseProps, ChildrenProps, StyleProps {}
 
 export interface SpiritTimelineStepProps<T extends ElementType = 'li'>
-  extends TimelineStepProps<T>,
-    ChildrenProps,
-    StyleProps {}
+  extends TimelineStepProps<T>, ChildrenProps, StyleProps {}
 
 export interface SpiritTimelineMarkerProps extends TimelineMarkerProps, ChildrenProps, StyleProps {}
 

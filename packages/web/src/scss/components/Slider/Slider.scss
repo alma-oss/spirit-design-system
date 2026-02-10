@@ -68,7 +68,8 @@ $_field-name: 'Slider';
         @include tools.track();
 
         // 2., 3.
-        background-image: linear-gradient(
+        background-image:
+            linear-gradient(
                 to right,
                 var(--slider-track-lower-background, #{theme.$track-lower-background}) var(--slider-position, 0%),
                 transparent var(--slider-position, 0%)

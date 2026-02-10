@@ -74,7 +74,8 @@ export interface AttachmentImagePreviewProps {
 }
 
 export interface FileUploaderInputBaseProps
-  extends Omit<SpiritInputElementProps, 'onError' | 'label'>,
+  extends
+    Omit<SpiritInputElementProps, 'onError' | 'label'>,
     FileUploaderIntermediateProps,
     FileUploaderTextProps,
     Validation {
@@ -117,8 +118,7 @@ export interface FileUploaderBaseProps extends SpiritDivElementProps, Partial<Fi
 }
 
 export interface UncontrolledFileUploaderBaseProps
-  extends Omit<FileUploaderBaseProps, 'onChange'>,
-    FileUploaderIntermediateProps {
+  extends Omit<FileUploaderBaseProps, 'onChange'>, FileUploaderIntermediateProps {
   attachmentComponent: FileUploaderAttachmentComponentType;
   inputId: string;
   inputLabel: string;
@@ -144,6 +144,4 @@ export interface SpiritFileUploaderAttachmentProps extends FileUploaderAttachmen
 export interface SpiritFileUploaderProps extends FileUploaderBaseProps, FileUploaderHandlingProps {}
 
 export interface SpiritUncontrolledFileUploaderProps
-  extends UncontrolledFileUploaderBaseProps,
-    FileUploaderTextProps,
-    Validation {}
+  extends UncontrolledFileUploaderBaseProps, FileUploaderTextProps, Validation {}

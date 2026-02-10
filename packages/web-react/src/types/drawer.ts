@@ -22,8 +22,10 @@ export type DrawerPanelHandlingProps = {
   closeOnEscapeKeyDown?: boolean;
 };
 
-export interface DrawerCloseButtonProps<C = void, S = void>
-  extends Omit<SpiritButtonElementProps, 'children' | 'color' | 'size'> {
+export interface DrawerCloseButtonProps<C = void, S = void> extends Omit<
+  SpiritButtonElementProps,
+  'children' | 'color' | 'size'
+> {
   color?: ButtonColor<C>;
   iconBoxSize?: IconBoxSize;
   label?: string;

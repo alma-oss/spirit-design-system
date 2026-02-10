@@ -14,11 +14,7 @@ export type SelectElementBaseProps = Omit<SpiritSelectElementPropsWithRef, 'size
 export type SelectSizeType<S> = SizesDictionaryType<S>;
 
 export interface SelectProps<S = void>
-  extends SelectElementBaseProps,
-    LabelProps,
-    HelperTextProps,
-    RequiredProps,
-    Validation {
+  extends SelectElementBaseProps, LabelProps, HelperTextProps, RequiredProps, Validation {
   isDisabled?: boolean;
   isFluid?: boolean;
   isLabelHidden?: boolean;

@@ -17,16 +17,9 @@ export interface FieldProps<T extends ElementType = 'div'> extends FieldElementT
 }
 
 export interface HelperTextProps<T extends ElementType = 'div'>
-  extends FieldProps<T>,
-    StyleProps,
-    ChildrenProps,
-    TransferProps {
+  extends FieldProps<T>, StyleProps, ChildrenProps, TransferProps {
   helperText: ReactNode;
 }
 
 export interface ValidationTextProps<T extends ElementType = 'div'>
-  extends FieldProps<T>,
-    ValidationTextProp,
-    StyleProps,
-    ChildrenProps,
-    TransferProps {}
+  extends FieldProps<T>, ValidationTextProp, StyleProps, ChildrenProps, TransferProps {}

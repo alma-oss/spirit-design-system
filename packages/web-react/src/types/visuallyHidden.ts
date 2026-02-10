@@ -11,9 +11,6 @@ export interface VisuallyHiddenElementTypeProps<T extends ElementType = 'span'> 
 }
 
 export interface VisuallyHiddenProps<T extends ElementType = 'span'>
-  extends VisuallyHiddenElementTypeProps<T>,
-    ChildrenProps,
-    StyleProps,
-    TransferProps {}
+  extends VisuallyHiddenElementTypeProps<T>, ChildrenProps, StyleProps, TransferProps {}
 
 export interface SpiritVisuallyHiddenProps<T extends ElementType = 'span'> extends VisuallyHiddenProps<T> {}

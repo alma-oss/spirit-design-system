@@ -16,9 +16,7 @@ export interface ItemStyleProps extends StyleProps, TransferProps {
 }
 
 export interface SpiritItemProps<T extends ElementType = 'button'>
-  extends AriaItemElementTypeProps<T>,
-    StyleProps,
-    TransferProps {
+  extends AriaItemElementTypeProps<T>, StyleProps, TransferProps {
   helperText?: string;
   iconName?: string;
   isDisabled?: boolean;

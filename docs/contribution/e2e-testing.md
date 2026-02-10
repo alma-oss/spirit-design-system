@@ -60,19 +60,16 @@ The E2E test suite consists of two types of tests:
 Most component visual regression tests run automatically. This test file:
 
 1. **Scans component directories** for both packages:
-
    - `packages/web/src/scss/components/`
    - `packages/web-react/src/components/`
 
 2. **Discovers components** that contain an `index.html` file
 
 3. **Creates a visual regression test for each component** that:
-
    - Navigates to the component demo page
    - Captures a full-page screenshot for visual regression testing
 
 4. **Filters components**:
-
    - Components listed in `IGNORED_TESTS` array are skipped (this should always be a temporary exception, use this option only if you absolutely need to)
    - Unstable components (prefixed with `unstable_`) are tested but failures only log warnings
 

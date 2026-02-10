@@ -9,7 +9,6 @@ Spirit Card components for displaying content in structured, contained blocks. C
 **CRITICAL: How to identify if a Card should be clickable:**
 
 1. **Check for link color tokens** on CardTitle text:
-
    - `themed/link/primary/state-default`
    - `themed/link/primary/state-hover`
    - `themed/link/secondary/...`

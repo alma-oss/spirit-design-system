@@ -12,12 +12,7 @@ import {
 export type SliderBaseProps = SpiritInputElementPropsWithRef;
 
 export interface SliderProps
-  extends SliderBaseProps,
-    HelperTextProps,
-    InputBaseProps,
-    RequiredProps,
-    Validation,
-    StyleProps {
+  extends SliderBaseProps, HelperTextProps, InputBaseProps, RequiredProps, Validation, StyleProps {
   isFluid?: boolean;
   isSelected?: boolean;
   label: ReactNode;

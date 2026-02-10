@@ -209,6 +209,7 @@ the start and end columns for each breakpoint.
   ```
   `column-start` = 1 + (12 - 6) / 2 = 4
 - Responsive grid item centered over 8 columns on mobile, 6 columns on tablet, and 4 columns on desktop:
+
   ```diff
   -<div
   -  class="
@@ -230,6 +231,7 @@ the start and end columns for each breakpoint.
   +  "
   +>…</div>
   ```
+
   - `column-start` = 1 + (12 - 8) / 2 = 3
   - `column-start` = 1 + (12 - 6) / 2 = 4
   - `column-start` = 1 + (12 - 4) / 2 = 5

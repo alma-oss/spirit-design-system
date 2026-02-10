@@ -22,14 +22,11 @@ export interface TextElementTypeProps<T extends ElementType = 'p'> {
 }
 
 export interface TextProps<T extends ElementType = 'p'>
-  extends TextElementTypeProps<T>,
-    ChildrenProps,
-    StyleProps,
-    TransferProps,
-    TypographyBaseProps {}
+  extends TextElementTypeProps<T>, ChildrenProps, StyleProps, TransferProps, TypographyBaseProps {}
 
 export interface SpiritTextProps<T extends ElementType = 'p', S = void, E = void, C = void>
-  extends TextProps<T>,
+  extends
+    TextProps<T>,
     SizeProps<SizeExtendedDictionaryType<S>>,
     EmphasisProps<EmphasisDictionaryType<E>>,
     TextColorProps<TextColorsType<C>> {}

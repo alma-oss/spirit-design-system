@@ -16,7 +16,8 @@ import {
 export type ToggleElementBaseProps = SpiritInputElementPropsWithRef;
 
 export interface ToggleProps
-  extends ToggleElementBaseProps,
+  extends
+    ToggleElementBaseProps,
     ChildrenProps,
     LabelProps,
     RequiredProps,

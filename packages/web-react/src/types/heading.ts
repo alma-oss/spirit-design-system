@@ -22,14 +22,11 @@ export interface HeadingElementTypeProps<T extends ElementType> {
 }
 
 export interface HeadingProps<T extends ElementType>
-  extends HeadingElementTypeProps<T>,
-    ChildrenProps,
-    StyleProps,
-    TransferProps,
-    TypographyBaseProps {}
+  extends HeadingElementTypeProps<T>, ChildrenProps, StyleProps, TransferProps, TypographyBaseProps {}
 
 export interface SpiritHeadingProps<T extends ElementType, S = void, E = void, C = void>
-  extends HeadingProps<T>,
+  extends
+    HeadingProps<T>,
     SizeProps<SizeExtendedDictionaryType<S>>,
     EmphasisProps<EmphasisDictionaryType<E>>,
     TextColorProps<HeadingColorsType<C>> {}

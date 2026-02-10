@@ -100,9 +100,9 @@
         }
 
         :is(.Card--#{$infix}horizontal, .Card--#{$infix}horizontalReversed):has(
-                .CardArtwork:not(:only-child),
-                .CardMedia:not(:only-child)
-            ) {
+            .CardArtwork:not(:only-child),
+            .CardMedia:not(:only-child)
+        ) {
             --#{tokens.$css-variable-prefix}card-column-gap: #{theme.$gap};
         }
 
