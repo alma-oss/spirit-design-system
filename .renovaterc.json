@@ -13,67 +13,67 @@
     {
       "groupName": "monorepo:storybook",
       "groupSlug": "monorepo-storybook",
-      "matchSourceUrlPrefixes": ["https://github.com/storybookjs/storybook"]
+      "matchSourceUrls": ["https://github.com/storybookjs/storybook{/,}**"]
     },
     {
       "groupName": "monorepo:supernovaio non-major",
       "groupSlug": "monorepo-supernovaio-non-major",
-      "matchPackagePatterns": ["^@supernovaio"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["/^@supernovaio/"]
     },
     {
       "groupName": "eslint plugins and configs non-major",
       "groupSlug": "eslint-plugins-configs-non-major",
-      "matchPackagePatterns": ["^eslint"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["/^eslint/"]
     },
     {
       "groupName": "compile tools non-major",
       "groupSlug": "compile-tools-non-major",
-      "matchPackagePatterns": ["^@babel", "^@swc"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["/^@babel/", "/^@swc/"]
     },
     {
       "groupName": "types non-major",
       "groupSlug": "types-non-major",
-      "matchPackagePatterns": ["^@types"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["/^@types/"]
     },
     {
       "groupName": "monorepo:react non-major",
       "groupSlug": "monorepo-react-non-major",
-      "matchPackagePatterns": ["^react"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["/^react/"]
     },
     {
       "groupName": "lint tools non-major",
       "groupSlug": "lint-tools-non-major",
-      "matchPackagePatterns": ["^prettier", "^lint-staged", "^husky"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["/^prettier/", "/^lint-staged/", "/^husky/"]
     },
     {
       "groupName": "stylelint non-major",
       "groupSlug": "stylelint-non-major",
-      "matchPackagePatterns": ["^stylelint"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["/^stylelint/"]
     },
     {
       "groupName": "build tools non-major",
       "groupSlug": "build-tools-non-major",
-      "matchPackagePatterns": ["^rollup", "^vite", "^webpack", "`^@rollup"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["/^rollup/", "/^vite/", "/^webpack/", "/`^@rollup/"]
     },
     {
       "groupName": "monorepo tools non-major",
       "groupSlug": "monorepo-tools-non-major",
-      "matchPackagePatterns": ["^lerna", "^nx"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["/^lerna/", "/^nx/"]
     },
     {
       "groupName": "typescript non-major",
       "groupSlug": "typescript-non-major",
-      "matchPackagePatterns": ["^typescript"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["/^typescript/"]
     },
     {
       "groupName": "Lock html-dom-parser on 5.0.13",
