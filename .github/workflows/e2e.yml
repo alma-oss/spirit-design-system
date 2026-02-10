@@ -79,6 +79,7 @@ jobs:
           docker run --rm \
             -v ${{ github.workspace }}:/work \
             -w /work \
+            -e NODE_ENV="${{ env.NODE_ENV }}" \
             -e WEBSITE_URL="${{ steps.get-netlify-preview-url.outcome == 'success' && steps.get-netlify-preview-url.outputs.url || steps.get-site-url.outputs.site_url }}" \
             mcr.microsoft.com/playwright:v${{ steps.playwright-version.outputs.version }}-noble \
             sh -c "corepack install && corepack enable && yarn test:e2e"
