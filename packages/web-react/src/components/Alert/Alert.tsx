@@ -8,7 +8,7 @@ import { Icon } from '../Icon';
 import { useAlertIcon } from './useAlertIcon';
 import { useAlertStyleProps } from './useAlertStyleProps';
 
-const defaultProps: Partial<SpiritAlertProps> = {
+const defaultProps: SpiritAlertProps = {
   color: 'success',
   isCentered: false,
 };
@@ -30,5 +30,7 @@ export const Alert = <T extends ElementType = 'div', E = void>(props: SpiritAler
 };
 
 Alert.spiritComponent = 'Alert';
+Alert.spiritDefaultElement = 'div' as const;
+Alert.spiritDefaultProps = null as unknown as SpiritAlertProps<'div'>;
 
 export default Alert;
