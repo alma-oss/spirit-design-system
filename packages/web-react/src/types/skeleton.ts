@@ -30,8 +30,7 @@ export interface SkeletonStyleProps<C = void> {
 }
 
 export interface SpiritSkeletonProps<T extends ElementType = 'div', C = void>
-  extends AriaSkeletonElementTypeProps<T>,
-    SkeletonProps {
+  extends AriaSkeletonElementTypeProps<T>, SkeletonProps {
   size?: SkeletonSize<C>;
   lines?: number;
 }
@@ -42,6 +41,4 @@ export type SkeletonShapeStyleProps<T extends ElementType = 'div', C = void> = P
 >;
 
 export interface SpiritSkeletonShapeProps<T extends ElementType = 'div', C = void>
-  extends AriaSkeletonElementTypeProps<T>,
-    SkeletonProps,
-    SkeletonStyleProps<C> {}
+  extends AriaSkeletonElementTypeProps<T>, SkeletonProps, SkeletonStyleProps<C> {}

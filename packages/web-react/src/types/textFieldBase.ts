@@ -34,9 +34,7 @@ export interface PasswordToggleProps<S = void> {
 }
 
 export interface TextFieldBasePasswordToggleProps<S = void>
-  extends ChildrenProps,
-    SpiritTextFieldBaseInputProps,
-    PasswordToggleAdornmentProp {
+  extends ChildrenProps, SpiritTextFieldBaseInputProps, PasswordToggleAdornmentProp {
   size?: TextFieldBaseSizeType<S>;
 }
 

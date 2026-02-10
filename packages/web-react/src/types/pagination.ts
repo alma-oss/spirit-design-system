@@ -25,8 +25,7 @@ export interface PaginationLinkBaseProps<E extends ElementType = 'a'> {
 }
 
 export interface PaginationLinkProps<E extends ElementType = 'a'>
-  extends PaginationLinkBaseProps<E>,
-    AriaPaginationProps {
+  extends PaginationLinkBaseProps<E>, AriaPaginationProps {
   isCurrent?: boolean;
   pageNumber: number;
 }
@@ -59,9 +58,7 @@ export interface UncontrolledPaginationProps {
 }
 
 export interface SpiritUncontrolledPaginationProps
-  extends AriaPaginationProps,
-    UncontrolledPaginationProps,
-    ChildrenProps {}
+  extends AriaPaginationProps, UncontrolledPaginationProps, ChildrenProps {}
 
 export interface UsePaginationProps extends UncontrolledPaginationProps {
   defaultPage: number;

@@ -32,8 +32,6 @@ export interface SpiritSegmentedControlProps extends SegmentedControlProps, Segm
 }
 
 export interface SpiritUncontrolledSegmentedControlProps
-  extends SegmentedControlProps,
-    SegmentedControlBaseProps,
-    SegmentedControlMultiselectProps {
+  extends SegmentedControlProps, SegmentedControlBaseProps, SegmentedControlMultiselectProps {
   defaultSelectedValue?: string | string[];
 }

@@ -112,7 +112,6 @@ Also remove ModalFooter alignment deprecation.
 
 3. **Update Component Tags:**
    Make sure to modify the component tags in your codebase as outlined below:
-
    - `<ModalComposed …>` → `<Modal …>`
    - `<ModalComposedBody …>` → `<ModalBody …>`
    - `<ModalComposedDialog …>` → `<ModalDialog …>`
@@ -121,7 +120,6 @@ Also remove ModalFooter alignment deprecation.
 
 4. **Rename `ModalFooter` Align prop:**
    Instead of `align` use `alignmentX`.
-
    - `<ModalFooter align="left" …>` → `<ModalFooter alignmentX="left" …>`
 
 ## Remove `isFullWidth` and `breakpoint` props from `Dropdown` [#DS-588](https://jira.almacareer.tech/browse/DS-588) ([d3a550e](https://github.com/alma-oss/spirit-design-system/commit/d3a550e))

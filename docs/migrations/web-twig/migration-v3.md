@@ -184,6 +184,7 @@ The default number of columns is 12, so the equation is `1 + (12 - over) / 2` mo
   ```
   `columnStart` = 1 + (12 - 6) / 2 = 4
 - Responsive grid item centered over 8 columns on mobile, 6 columns on tablet, and 4 columns on desktop:
+
   ```diff
   -<GridSpan over="8" tablet="6" desktop="4">…</GridSpan>
   +<GridItem
@@ -191,6 +192,7 @@ The default number of columns is 12, so the equation is `1 + (12 - over) / 2` mo
   +  columnEnd="{{ { mobile: 'span 8', tablet: 'span 6', desktop: 'span 4' } }}"
   +>…</GridItem>
   ```
+
   - `columnStart` = 1 + (12 - 8) / 2 = 3
   - `columnStart` = 1 + (12 - 6) / 2 = 4
   - `columnStart` = 1 + (12 - 4) / 2 = 5

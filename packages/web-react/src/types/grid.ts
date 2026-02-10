@@ -70,8 +70,7 @@ export interface GridItemCustomLayoutProps {
 export interface GridProps<T extends ElementType = 'div'> extends GridElementTypeProps<T>, GridCustomLayoutProps {}
 
 export interface GridItemProps<T extends ElementType = 'div'>
-  extends GridItemElementTypeProps<T>,
-    GridItemCustomLayoutProps {}
+  extends GridItemElementTypeProps<T>, GridItemCustomLayoutProps {}
 
 export type SpiritGridProps<T extends ElementType = 'div'> = GridProps<T> &
   ChildrenProps &

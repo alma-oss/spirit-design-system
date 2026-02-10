@@ -311,11 +311,9 @@ The Toast component now has its own close button and link.
 #### Migration Guide
 
 1. Remove the `link-inverted` class from links inside a Toast.
-
    - `<a href="#" class="ToastBar__link link-inverted link-underlined">` → `<a href="#" class="ToastBar__link link-underlined">`
 
 2. Replace `Button` classes with `Toast__close` class at the close button.
-
    - `<button class="Button Button--square Button--inverted">` → `<button class="ToastBar__close">`
 
 ---

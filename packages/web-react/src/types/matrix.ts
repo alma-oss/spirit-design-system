@@ -33,11 +33,7 @@ export interface MatrixCustomLayoutProps {
 }
 
 export interface MatrixProps<T extends ElementType = 'div'>
-  extends MatrixElementTypeProps<T>,
-    MatrixCustomLayoutProps {}
+  extends MatrixElementTypeProps<T>, MatrixCustomLayoutProps {}
 
 export interface SpiritMatrixProps<T extends ElementType = 'div'>
-  extends MatrixProps<T>,
-    ChildrenProps,
-    StyleProps,
-    TransferProps {}
+  extends MatrixProps<T>, ChildrenProps, StyleProps, TransferProps {}

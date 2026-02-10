@@ -46,10 +46,7 @@ export interface CardProps<T extends ElementType = 'article'> extends CardElemen
 }
 
 export interface SpiritCardProps<T extends ElementType = 'article'>
-  extends CardProps<T>,
-    ChildrenProps,
-    StyleProps,
-    TransferProps {}
+  extends CardProps<T>, ChildrenProps, StyleProps, TransferProps {}
 
 export type CardMediaBackgroundColorsType =
   | BackgroundColorsDictionaryType
@@ -93,11 +90,7 @@ export interface CardTitleProps {
 }
 
 export interface SpiritCardTitleProps<T extends ElementType = 'h4'>
-  extends CardTitleProps,
-    CardElementTypeProps<T>,
-    ChildrenProps,
-    StyleProps,
-    TransferProps {}
+  extends CardTitleProps, CardElementTypeProps<T>, ChildrenProps, StyleProps, TransferProps {}
 
 // CardFooter types
 export interface CardFooterProps {

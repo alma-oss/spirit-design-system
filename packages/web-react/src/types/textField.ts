@@ -18,7 +18,8 @@ export type TextFieldType = 'email' | 'number' | 'password' | 'search' | 'tel' |
 export type TextFieldElementBaseProps = Omit<SpiritInputElementPropsWithRef, 'size'>;
 
 export interface TextFieldProps<S = void>
-  extends TextFieldElementBaseProps,
+  extends
+    TextFieldElementBaseProps,
     InputBaseProps,
     PasswordToggleAdornmentProp,
     ChildrenProps,
