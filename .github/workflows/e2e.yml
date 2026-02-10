@@ -38,6 +38,9 @@ jobs:
     if: ${{ needs.has-label.outputs.e2e || (github.ref == 'refs/heads/main') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 60
+    permissions:
+      contents: read
+      issues: write
 
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -102,7 +105,7 @@ jobs:
               body: `Here is the URL of the uploaded artifact: ${{ steps.artifact-upload-step.outputs.artifact-url }}`
             });
         env:
-          GITHUB_TOKEN: ${{ github.token}}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Notify Slack when failure
         id: Slack
