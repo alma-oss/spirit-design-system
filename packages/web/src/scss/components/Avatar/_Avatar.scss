@@ -45,5 +45,6 @@
 @include dictionaries.generate-sizes(
     $class-name: 'Avatar',
     $dictionary-values: theme.$size-dictionary,
-    $config: theme.$size-config
+    $config: theme.$size-config,
+    $breakpoints: theme.$breakpoints
 );
