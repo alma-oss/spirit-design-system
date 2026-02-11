@@ -50,6 +50,22 @@ Use the `Avatar--<size>` modifier class to change the size of the Avatar compone
 </div>
 ```
 
+## Responsive Sizes
+
+You can set different avatar sizes for different [breakpoints][dictionary-breakpoint] using `tablet` and `desktop` infixes, e.g. `Avatar--tablet--<size>` or `Avatar--desktop--<size>`.
+
+```html
+<a
+  href="#"
+  class="Avatar Avatar--xsmall Avatar--tablet--medium Avatar--desktop--xlarge"
+  aria-label="Profile of Jiří Bárta"
+>
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
+    <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+  </svg>
+</a>
+```
+
 ## Content
 
 The content of the `Avatar` component can be an image, an icon, or a text string.
@@ -111,5 +127,6 @@ take care of the text length and case. The rest is handled by the component.
 using an abbreviation. The `aria-hidden` attribute is set on the text span, because the `aria-label`
 attribute is set on the container and the abbreviation is not useful for screen readers.
 
+[dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [icon-documentation]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Icon
