@@ -28,4 +28,14 @@ describe('useAvatarStyleProps', () => {
 
     expect(result.current.classProps).toBe(`Avatar Avatar--${size}`);
   });
+
+  it('should apply responsive size classes when responsive size is provided', () => {
+    const { result } = renderHook(() =>
+      useAvatarStyleProps({
+        size: { mobile: 'small', tablet: 'medium', desktop: 'large' },
+      }),
+    );
+
+    expect(result.current.classProps).toBe('Avatar Avatar--small Avatar--tablet--medium Avatar--desktop--large');
+  });
 });

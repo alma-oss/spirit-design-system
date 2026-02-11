@@ -1,25 +1,21 @@
 import classNames from 'classnames';
 import { useClassNamePrefix } from '../../hooks';
-import { type AvatarBaseProps, type AvatarSize, type AvatarStyleProps } from '../../types';
-import { applySize, compose } from '../../utils';
+import { type AvatarStyleProps } from '../../types';
+import { generateResponsiveClassNames } from '../../utils';
 
-export interface AvatarStyle {
-  /** className props */
+export interface AvatarStyles<T> {
   classProps: string;
-  /** props to be passed to the element */
-  props: AvatarBaseProps;
+  props: T;
 }
 
-const getAvatarSizeClassname = <S = void>(className: string, size: AvatarSize<S>): string =>
-  compose(applySize<AvatarSize<S>>(size))(className);
-
-export function useAvatarStyleProps<S = void>(props: AvatarStyleProps<S>): AvatarStyle {
+export const useAvatarStyleProps = (props: AvatarStyleProps): AvatarStyles<AvatarStyleProps> => {
   const { isSquare, size, ...restProps } = props;
 
   const avatarClass = useClassNamePrefix('Avatar');
   const avatarSquareClass = `${avatarClass}--square`;
+  const avatarSizeClass = generateResponsiveClassNames(avatarClass, size);
 
-  const classProps = classNames(avatarClass, getAvatarSizeClassname(avatarClass, size as AvatarSize<S>), {
+  const classProps = classNames(avatarClass, ...avatarSizeClass, {
     [avatarSquareClass]: isSquare,
   });
 
@@ -27,4 +23,4 @@ export function useAvatarStyleProps<S = void>(props: AvatarStyleProps<S>): Avata
     classProps,
     props: restProps,
   };
-}
+};
