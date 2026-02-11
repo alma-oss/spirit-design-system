@@ -9,6 +9,7 @@ import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import AvatarIcon from './AvatarIcon';
 import AvatarImage from './AvatarImage';
+import AvatarResponsiveSizes from './AvatarResponsiveSizes';
 import AvatarText from './AvatarText';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
@@ -22,6 +23,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Image">
         <AvatarImage />
+      </DocsSection>
+      <DocsSection title="Responsive Sizes">
+        <AvatarResponsiveSizes />
       </DocsSection>
     </IconsProvider>
   </StrictMode>,

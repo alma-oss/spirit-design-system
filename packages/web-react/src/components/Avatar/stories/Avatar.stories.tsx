@@ -40,6 +40,13 @@ const meta: Meta<typeof Avatar> = {
     size: {
       control: 'select',
       options: [...Object.values(SizesExtended)],
+      table: {
+        type: {
+          summary: 'SingleOrResponsive<SizeExtendedDictionaryType>',
+        },
+      },
+      description:
+        'Size of the Avatar. Can be a single size or responsive object with mobile/tablet/desktop breakpoints.',
     },
   },
   args: {

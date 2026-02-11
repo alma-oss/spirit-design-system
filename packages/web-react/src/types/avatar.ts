@@ -1,16 +1,17 @@
 import { type ElementType } from 'react';
 import {
   type ChildrenProps,
+  type SingleOrResponsive,
   type SizeExtendedDictionaryType,
   type SpiritPolymorphicComponentPropWithRef,
   type StyleProps,
 } from './shared';
 
-export type AvatarSize<S> = SizeExtendedDictionaryType<S> | S;
+export type SpiritAvatarSizeType<S> = SingleOrResponsive<SizeExtendedDictionaryType<S> | S>;
 
 export interface AvatarBaseProps extends ChildrenProps, StyleProps {}
 
-export interface AvatarStyleProps<S = void> extends AvatarBaseProps {
+export interface AvatarStyleProps<S = string> extends AvatarBaseProps {
   /**
    * Whether the Avatar should be square.
    *
@@ -22,12 +23,12 @@ export interface AvatarStyleProps<S = void> extends AvatarBaseProps {
    *
    * @default SizesExtended.MEDIUM
    */
-  size?: AvatarSize<S>;
+  size?: SpiritAvatarSizeType<S>;
 }
 
-export type AvatarProps<S = void> = AvatarStyleProps<S>;
+export type AvatarProps<S = string> = AvatarStyleProps<S>;
 
-export type SpiritAvatarProps<E extends ElementType = 'div', S = void> = SpiritPolymorphicComponentPropWithRef<
+export type SpiritAvatarProps<E extends ElementType = 'div', S = string> = SpiritPolymorphicComponentPropWithRef<
   E,
   AvatarProps<S>
 >;

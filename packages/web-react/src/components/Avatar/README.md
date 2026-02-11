@@ -42,6 +42,18 @@ The Avatar component is available in all [extended sizes][dictionary-size].
 </Avatar>
 ```
 
+## Responsive Sizes
+
+You can set different avatar sizes for different [breakpoints][dictionary-breakpoint] using a responsive object:
+
+```jsx
+<Avatar size={{ mobile: 'xsmall', tablet: 'medium', desktop: 'xlarge' }} aria-label="Profile of Jiří Bárta">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
+    <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+  </svg>
+</Avatar>
+```
+
 ## Content
 
 The content of the `Avatar` component can be an image, an icon, or a text string.
@@ -110,21 +122,23 @@ attribute is set on the container and the abbreviation is not useful for screen 
 
 ## API
 
-| Name          | Type                                        | Default  | Required | Description               |
-| ------------- | ------------------------------------------- | -------- | -------- | ------------------------- |
-| `children`    | `ReactNode`                                 | `null`   | ✓        | Content of the Avatar     |
-| `elementType` | `ElementType`                               | `button` | ✕        | Type of element           |
-| `isSquare`    | `bool`                                      | `false`  | ✕        | If true, Avatar is square |
-| `ref`         | `ForwardedRef<HTMLButtonElement>`           | —        | ✕        | Avatar element reference  |
-| `size`        | [Size Extended dictionary][dictionary-size] | `medium` | ✕        | Size of the Avatar        |
+| Name          | Type                                                                                                                                | Default  | Required | Description                                                                                           |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------- |
+| `children`    | `ReactNode`                                                                                                                         | `null`   | ✓        | Content of the Avatar                                                                                 |
+| `elementType` | `ElementType`                                                                                                                       | `button` | ✕        | Type of element                                                                                       |
+| `isSquare`    | `bool`                                                                                                                              | `false`  | ✕        | If true, Avatar is square                                                                             |
+| `ref`         | `ForwardedRef<HTMLButtonElement>`                                                                                                   | —        | ✕        | Avatar element reference                                                                              |
+| `size`        | \[[Size Extended dictionary][dictionary-size] \| [Responsive][readme-generated-types]<[Size Extended dictionary][dictionary-size]>] | `medium` | ✕        | Size of the Avatar. Can be a single size or responsive object with mobile/tablet/desktop breakpoints. |
 
 The components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
+[dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#size
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-icon-api]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#api
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [web-react-icon-documentation]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#-usage
