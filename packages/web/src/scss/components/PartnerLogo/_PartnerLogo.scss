@@ -24,11 +24,17 @@
     $infix: breakpoint.get-modifier('infix', $breakpoint-name, $breakpoint-value);
 
     @include breakpoint.up($breakpoint-value) {
+        $class-name-infix: '';
+
+        @if $breakpoint-name != mobile {
+            $class-name-infix: $breakpoint-name;
+        }
+
         @include dictionaries.generate-variants(
             $class-name: 'PartnerLogo',
             $dictionary-values: theme.$size-dictionary,
             $config: theme.$size-config,
-            $class-name-infix: if($breakpoint-name == mobile, '', $breakpoint-name)
+            $class-name-infix: $class-name-infix
         );
     }
 }

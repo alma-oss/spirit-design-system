@@ -124,14 +124,22 @@ $_logical-to-physical-placement-map: (
 // Example: get-cross-axis-direction('left') will return 'vertical'
 // Example: get-cross-axis-direction('bottom') will return 'horizontal'
 @function get-cross-axis-direction($main-axis) {
-    @return if(string.index($main-axis, 'left') or string.index($main-axis, 'right'), 'vertical', 'horizontal');
+    @if string.index($main-axis, 'left') or string.index($main-axis, 'right') {
+        @return 'vertical';
+    } @else {
+        @return 'horizontal';
+    }
 }
 
 // Function to check if a placement is logical
 // Example: is-logical('top') will return false
 // Example: is-logical('start') will return true
 @function is-logical($placement) {
-    @return if(string.index($placement, 'start') or string.index($placement, 'end'), true, false);
+    @if string.index($placement, 'start') or string.index($placement, 'end') {
+        @return true;
+    } @else {
+        @return false;
+    }
 }
 
 // Function to translate logical placement to its physical equivalent
@@ -186,10 +194,17 @@ $_logical-to-physical-placement-map: (
     @if list.length($placement-chunks) > 1 {
         $cross-axis: list.nth($placement-chunks, 2);
         $cross-axis-direction: get-cross-axis-direction($main-axis);
+
+        $physical-direction-param: null;
+
+        @if $cross-axis-physical {
+            $physical-direction-param: $cross-axis-direction;
+        }
+
         $cross-axis-transformed: transform-axis(
             $axis: $cross-axis,
             $inverse: $cross-axis-inverse,
-            $physical-direction: if($cross-axis-physical, $cross-axis-direction, null),
+            $physical-direction: $physical-direction-param,
         );
 
         @return spirit-list.to-string(($main-axis-transformed, $cross-axis-transformed), $join-with);
