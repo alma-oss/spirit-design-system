@@ -1,3 +1,7 @@
+// NOTE: Prettier does not yet support the native CSS if() function syntax properly.
+// We use prettier-ignore comments to protect these lines from incorrect formatting.
+// See: https://github.com/prettier/prettier/issues/18465
+
 // 1. Accent colors are optional in design systems. Process them only if they are defined.
 // 2. Apply the color to single-tone icons. Colors for dual-tone icons are handled by CSS variables.
 
@@ -16,10 +20,11 @@
     // 1.
     @if map.has-key(meta.module-variables('tokens'), 'accent-colors') {
         @each $accent-key, $accent-props in tokens.$accent-colors {
+            // prettier-ignore
             $accent-key: if(
-                sass(meta.type-of($accent-key) == 'number'): tokens-tools.format-numeric-key($accent-key)
-                    ;
-                    else: $accent-key,
+                sass(meta.type-of($accent-key) == 'number'):
+                tokens-tools.format-numeric-key($accent-key);
+                else: $accent-key
             );
 
             $accent-variants: map.merge(

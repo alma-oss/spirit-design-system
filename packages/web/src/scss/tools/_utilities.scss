@@ -1,3 +1,7 @@
+// NOTE: Prettier does not yet support the native CSS if() function syntax properly, which is supported by Sass.
+// We use prettier-ignore comments to protect these lines from incorrect formatting.
+// See: https://github.com/prettier/prettier/issues/18465
+
 // 1. Format numeric key names to match Figma variable names, e.g. 1 => '01'
 // 2. Don't prefix if value key is null (e.g. with shadow class)
 // 3. Remove default postfix from class name
@@ -32,13 +36,18 @@
                 null
             {
                 // 1.
+                // prettier-ignore
                 $name: $prefix +
                     if(
-                        sass(meta.type-of($key) == 'number'): tokens-tools.format-numeric-key($key) ; else: $key,
+                        sass(meta.type-of($key) == 'number'):
+                        tokens-tools.format-numeric-key($key);
+                        else: $key
                     ) +
                     '-' +
                     if(
-                        sass($remove-from-name != ''): spirit-string.replace($subkey, $remove-from-name + '-', ''),
+                        sass($remove-from-name != ''):
+                        spirit-string.replace($subkey, $remove-from-name + '-', '');
+                        else: $subkey
                     );
 
                 $result: map.set($result, string.unquote($name), $value);
@@ -74,8 +83,12 @@
         $generate-custom-properties: map.get($utility, generate-custom-properties);
 
         // 2.
+
+        // prettier-ignore
         $property-class-modifier: if(
-            sass($key): '-' + $key; else: '',
+            sass($key):
+            '-' + $key;
+            else: ''
         );
 
         // 3.

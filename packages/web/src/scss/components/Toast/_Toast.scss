@@ -1,3 +1,7 @@
+// NOTE: Prettier does not yet support the native CSS if() function syntax properly.
+// We use prettier-ignore comments to protect these lines from incorrect formatting.
+// See: https://github.com/prettier/prettier/issues/18465
+
 // 1. Spread the `Toast` container over the viewport.
 //
 //    a) For top-to-bottom languages, the `inset-inline` of `0` is a safe way to spread the container horizontally.
@@ -204,9 +208,15 @@ $_queue-collapsed-visible-limit: 2; // 10.
         @each $alignment-name, $alignment-value in theme.$alignments-y {
             .Toast--#{$infix}#{$alignment-name} {
                 --toast-alignment-y: #{$alignment-value};
+
+                // prettier-ignore
                 --toast-inset-top: #{if(sass($alignment-name == 'top'): 0; else: 'auto')};
+
+                // prettier-ignore
                 --toast-inset-bottom: #{if(sass($alignment-name == 'bottom'): 0; else: 'auto')};
-                --toast-queue-direction: #{if(sass($alignment-name == 'bottom'): 'column-reverse' ; else: 'column')};
+
+                // prettier-ignore
+                --toast-queue-direction: #{if(sass($alignment-name == 'bottom'): 'column-reverse'; else: 'column')};
             }
         }
     }

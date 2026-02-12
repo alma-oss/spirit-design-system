@@ -1,3 +1,7 @@
+// NOTE: Prettier does not yet support the native CSS if() function syntax properly.
+// We use prettier-ignore comments to protect these lines from incorrect formatting.
+// See: https://github.com/prettier/prettier/issues/18465
+
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:meta';
@@ -41,12 +45,12 @@
     $responsive-custom-property-names: ($responsive-custom-property-name); // 1.d
 
     // 2.
+
+    // prettier-ignore
     $fallback: if(
-        sass(meta.type-of($fallback-value) == 'map'): var(
-                #{$default-custom-property-name},
-                #{map.get($fallback-value, 'mobile')}
-            )
-            ; else: $fallback-value,
+        sass(meta.type-of($fallback-value) == 'map'):
+        var(#{$default-custom-property-name}, #{map.get($fallback-value, 'mobile')});
+        else: $fallback-value
     );
 
     @each $breakpoint-name, $breakpoint-value in $breakpoints {

@@ -1,3 +1,7 @@
+// NOTE: Prettier does not yet support the native CSS if() function syntax properly.
+// We use prettier-ignore comments to protect these lines from incorrect formatting.
+// See: https://github.com/prettier/prettier/issues/18465
+
 // 1. Force the color to be printed as-is, without any color adjustment.
 // 2. Put the input above the stretched label.
 // 3. Set the color of the label on the root element so it can be overridden by a helper/utility class.
@@ -327,10 +331,11 @@
 
         @include breakpoint.up($breakpoint-value) {
             @each $position, $direction in $positions {
+                // prettier-ignore
                 $default-selector: if(
-                    sass($position == $default-position): '.#{$component-class}:not([class*="--inputPosition"])'
-                        ;
-                        else: null,
+                    sass($position == $default-position):
+                    '.#{$component-class}:not([class*="--inputPosition"])';
+                    else: null
                 );
 
                 .#{$component-class}--#{$infix}#{spirit-string.convert-kebab-case-to-camel-case(input-position-#{$position})},

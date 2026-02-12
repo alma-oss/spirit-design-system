@@ -1,3 +1,7 @@
+// NOTE: Prettier does not yet support the native CSS if() function syntax properly.
+// We use prettier-ignore comments to protect these lines from incorrect formatting.
+// See: https://github.com/prettier/prettier/issues/18465
+
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:meta';
@@ -86,26 +90,28 @@
 
     @each $dictionary-group-name, $dictionary-group-values in $dictionary-values {
         @each $dictionary-item-name, $dictionary-item-value in $dictionary-group-values {
+            // prettier-ignore
             $dictionary-item-name: if(
-                sass(meta.type-of($dictionary-item-name) == 'number'): tokens-tools.format-numeric-key(
-                        $dictionary-item-name
-                    )
-                    ;
-                    else: $dictionary-item-name,
+                sass(meta.type-of($dictionary-item-name) == 'number'):
+                tokens-tools.format-numeric-key($dictionary-item-name);
+                else: $dictionary-item-name
             );
 
+            // prettier-ignore
             $data-attribute-selector: if(
-                sass($generate-data-attribute): '.#{$class-name}[data-spirit-color="#{$dictionary-item-name}"]'
-                    ;
-                    else: null,
+                sass($generate-data-attribute):
+                '.#{$class-name}[data-spirit-color="#{$dictionary-item-name}"]';
+                else: null
             );
 
             .#{$class-name}--#{$dictionary-item-name},
             #{$data-attribute-selector} {
                 @each $property-name, $property-value in $config {
+                    // prettier-ignore
                     $color-group: if(
-                        sass($dictionary-group-name == $dictionary-item-name): $dictionary-group-name;
-                            else: #{$dictionary-group-name}-#{$dictionary-item-name},
+                        sass($dictionary-group-name == $dictionary-item-name):
+                        $dictionary-group-name;
+                        else: #{$dictionary-group-name}-#{$dictionary-item-name}
                     );
 
                     --#{tokens.$css-variable-prefix}#{$component-infix}-#{$property-name}: var(
@@ -144,8 +150,11 @@
 @mixin generate-link-colors($selector, $dictionary-values, $states: (default, hover, active)) {
     @each $dictionary-value in $dictionary-values {
         @each $state in $states {
+            // prettier-ignore
             $variant-class: if(
-                sass($state == 'default'): '#{$dictionary-value}' ; else: '#{$dictionary-value}:#{$state}',
+                sass($state == 'default'):
+                '#{$dictionary-value}';
+                else: '#{$dictionary-value}:#{$state}'
             );
 
             #{$selector}-#{string.unquote($variant-class)} {
@@ -203,17 +212,16 @@
 ) {
     @if validate-config-keys($dictionary-values, $config) {
         $_base: spirit-string.convert-pascal-case-to-kebab-case(spirit-string.remove-prefix($class-name, 'UNSTABLE_'));
+
+        // prettier-ignore
         $_breakpoints: if(
-            sass($breakpoints): $breakpoints;
-                else: (
-                    mobile: 0,
-                ),
+            sass($breakpoints):
+            $breakpoints;
+            else: (mobile: 0)
         );
-        $_infix: if(
-            sass($css-variable-infix == ''): ''
-                ;
-                else: '-#{spirit-string.convert-pascal-case-to-kebab-case($css-variable-infix)}',
-        );
+
+        // prettier-ignore
+        $_infix: if(sass($css-variable-infix == ''): ''; else: '-#{spirit-string.convert-pascal-case-to-kebab-case($css-variable-infix)}');
         $custom-property-base-name: '#{$_base}#{$_infix}';
 
         @each $breakpoint-name, $breakpoint-value in $_breakpoints {
