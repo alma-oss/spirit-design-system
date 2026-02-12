@@ -17,9 +17,9 @@
     @if map.has-key(meta.module-variables('tokens'), 'accent-colors') {
         @each $accent-key, $accent-props in tokens.$accent-colors {
             $accent-key: if(
-                meta.type-of($accent-key) == 'number',
-                tokens-tools.format-numeric-key($accent-key),
-                $accent-key
+                sass(meta.type-of($accent-key) == 'number'): tokens-tools.format-numeric-key($accent-key)
+                    ;
+                    else: $accent-key,
             );
 
             $accent-variants: map.merge(

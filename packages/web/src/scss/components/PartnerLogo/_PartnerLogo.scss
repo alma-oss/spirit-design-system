@@ -28,7 +28,7 @@
             $class-name: 'PartnerLogo',
             $dictionary-values: theme.$size-dictionary,
             $config: theme.$size-config,
-            $class-name-infix: if($breakpoint-name == mobile, '', $breakpoint-name)
+            $class-name-infix: if(sass($breakpoint-name == mobile): '' ; else: $breakpoint-name)
         );
     }
 }

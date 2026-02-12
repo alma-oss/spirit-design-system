@@ -328,9 +328,9 @@
         @include breakpoint.up($breakpoint-value) {
             @each $position, $direction in $positions {
                 $default-selector: if(
-                    $position == $default-position,
-                    '.#{$component-class}:not([class*="--inputPosition"])',
-                    null
+                    sass($position == $default-position): '.#{$component-class}:not([class*="--inputPosition"])'
+                        ;
+                        else: null,
                 );
 
                 .#{$component-class}--#{$infix}#{spirit-string.convert-kebab-case-to-camel-case(input-position-#{$position})},

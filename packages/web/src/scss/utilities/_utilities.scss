@@ -7,7 +7,9 @@
 
 @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
     @include breakpoint.up($breakpoint-value) {
-        $infix: if($breakpoint-value == 0, '', '-#{$breakpoint-name}');
+        $infix: if(
+            sass($breakpoint-value == 0): '' ; else: '-#{$breakpoint-name}',
+        );
 
         @each $key, $utility in utilities-settings.$utilities {
             @if meta.type-of($utility) == 'map' and (map.get($utility, responsive) == true or $infix == '') {
