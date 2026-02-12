@@ -7,7 +7,9 @@
 .Tag {
     @include typography.from-css-variables($infix: 'tag');
 
-    display: inline-block;
+    display: inline-flex;
+    gap: var(--#{tokens.$css-variable-prefix}tag-gap);
+    align-items: center;
     padding-inline: var(--#{tokens.$css-variable-prefix}tag-padding-x);
     padding-block: var(--#{tokens.$css-variable-prefix}tag-padding-y);
     text-align: center;
@@ -23,6 +25,13 @@
     color: var(--#{tokens.$css-variable-prefix}tag-subtle-color);
     border-color: var(--#{tokens.$css-variable-prefix}tag-subtle-border-color);
     background-color: var(--#{tokens.$css-variable-prefix}tag-subtle-background-color);
+}
+
+.Tag--disabled {
+    color: theme.$color-disabled;
+    border-color: theme.$border-color-disabled;
+    background-color: theme.$background-color-disabled;
+    pointer-events: none;
 }
 
 @include dictionaries.generate-colors(

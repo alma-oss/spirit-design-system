@@ -1,6 +1,6 @@
 {{#> web/layout/default title="Tag" parentPageName="Components" }}
 
-{{setVar "colors" "neutral" "success" "informative" "warning" "danger" }}
+{{setVar "colors" "neutral" "success" "informative" "warning" "danger" "selected" }}
 {{setVar "sizes" "xsmall" "small" "medium" "large" "xlarge" }}
 
 <section class="py-900 py-tablet-1000">
@@ -22,6 +22,65 @@
           </div>
         </section>
         {{/each}}
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">With ControlButton</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+      <div class="Tag Tag--selected Tag--xsmall">
+        <span>Tag x-small</span>
+        <button type="button" class="ControlButton ControlButton--small ControlButton--symmetrical" aria-label="Remove Tag x-small">
+          <svg class="Icon" width="16" height="16" aria-hidden="true">
+            <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+          </svg>
+        </button>
+      </div>
+      <div class="Tag Tag--selected Tag--small">
+        <span>Tag small</span>
+        <button type="button" class="ControlButton ControlButton--small ControlButton--symmetrical" aria-label="Remove Tag small">
+          <svg class="Icon" width="16" height="16" aria-hidden="true">
+            <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+          </svg>
+        </button>
+      </div>
+      <div class="Tag Tag--selected Tag--medium">
+        <span>Tag medium</span>
+        <button type="button" class="ControlButton ControlButton--medium ControlButton--symmetrical" aria-label="Remove Tag medium">
+          <svg class="Icon" width="16" height="16" aria-hidden="true">
+            <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Disabled</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+      <span class="Tag Tag--neutral Tag--small Tag--disabled">Disabled small</span>
+      <div class="Tag Tag--neutral Tag--medium Tag--disabled">
+        <span>Disabled medium</span>
+        <button type="button" class="ControlButton ControlButton--medium ControlButton--symmetrical" aria-label="Remove Disabled medium" disabled>
+          <svg class="Icon" width="16" height="16" aria-hidden="true">
+            <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+          </svg>
+        </button>
       </div>
     </div>
 

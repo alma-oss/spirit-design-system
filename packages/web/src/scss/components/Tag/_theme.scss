@@ -9,6 +9,7 @@ $border-radius: tokens.$radius-300;
 $color-dictionary: (
     emotion: dictionaries.$emotion-colors,
     neutral: neutral,
+    selected: selected,
 );
 $color-config: (
     color: 'content-subtle',
@@ -19,31 +20,41 @@ $color-config: (
     subtle-background-color: 'background-subtle',
 );
 
+// Disabled
+$color-disabled: tokens.$disabled-content;
+$background-color-disabled: tokens.$disabled-background;
+$border-color-disabled: tokens.$disabled-border;
+
 $size-dictionary: dictionaries.$size-extended;
 $size-config: (
     xsmall: (
         padding-x: tokens.$space-500,
         padding-y: tokens.$space-200,
+        gap: tokens.$space-300,
         typography: tokens.$body-xsmall-semibold,
     ),
     small: (
         padding-x: tokens.$space-500,
         padding-y: tokens.$space-300,
+        gap: tokens.$space-300,
         typography: tokens.$body-small-semibold,
     ),
     medium: (
         padding-x: tokens.$space-600,
         padding-y: tokens.$space-400,
+        gap: tokens.$space-300,
         typography: tokens.$body-medium-semibold,
     ),
     large: (
         padding-x: tokens.$space-700,
         padding-y: tokens.$space-500,
+        gap: tokens.$space-300,
         typography: tokens.$body-large-semibold,
     ),
     xlarge: (
         padding-x: tokens.$space-700,
         padding-y: tokens.$space-500,
+        gap: tokens.$space-300,
         typography: tokens.$body-xlarge-semibold,
     ),
 );
