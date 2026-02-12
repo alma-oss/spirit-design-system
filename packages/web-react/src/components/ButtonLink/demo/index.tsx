@@ -10,7 +10,7 @@ import { IconsProvider } from '../../../context';
 import ButtonLinkDefault from './ButtonLinkDefault';
 import ButtonLinkDisabled from './ButtonLinkDisabled';
 import ButtonLinkFluid from './ButtonLinkFluid';
-import ButtonLinkResponsiveSymmetrical from './ButtonLinkResponsiveSymmetrical';
+import ButtonLinkResponsive from './ButtonLinkResponsive';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
@@ -24,8 +24,8 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <DocsSection title="Fluid" stackAlignment="stretch">
         <ButtonLinkFluid />
       </DocsSection>
-      <DocsSection title="Responsive Symmetrical" stackAlignment="start">
-        <ButtonLinkResponsiveSymmetrical />
+      <DocsSection title="Responsive" stackAlignment="start">
+        <ButtonLinkResponsive />
       </DocsSection>
     </IconsProvider>
   </StrictMode>,
