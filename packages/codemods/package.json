@@ -61,7 +61,7 @@
     "@lmc-eu/eslint-config-jest": "3.0.6",
     "@types/eslint": "9.6.1",
     "@types/jest": "30.0.0",
-    "@types/node": "20.19.26",
+    "@types/node": "20.19.32",
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
     "eslint": "9.39.2",
