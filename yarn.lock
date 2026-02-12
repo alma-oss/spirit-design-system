@@ -21,7 +21,7 @@ __metadata:
     "@lmc-eu/eslint-config-jest": "npm:3.0.6"
     "@types/eslint": "npm:9.6.1"
     "@types/jest": "npm:30.0.0"
-    "@types/node": "npm:20.19.26"
+    "@types/node": "npm:20.19.32"
     "@typescript-eslint/eslint-plugin": "npm:6.21.0"
     "@typescript-eslint/parser": "npm:6.21.0"
     eslint: "npm:9.39.2"
@@ -51,7 +51,7 @@ __metadata:
     "@types/eslint": "npm:9.6.1"
     "@types/jest": "npm:30.0.0"
     "@types/jscodeshift": "npm:^0.12.0"
-    "@types/node": "npm:20.19.26"
+    "@types/node": "npm:20.19.32"
     "@typescript-eslint/eslint-plugin": "npm:6.21.0"
     "@typescript-eslint/parser": "npm:6.21.0"
     eslint: "npm:9.39.2"
@@ -77,7 +77,7 @@ __metadata:
     "@eslint/compat": "npm:1.4.1"
     "@eslint/eslintrc": "npm:3.3.3"
     "@types/jest": "npm:30.0.0"
-    "@types/node": "npm:20.19.26"
+    "@types/node": "npm:20.19.32"
     eslint: "npm:9.39.2"
     eslint-config-spirit: "workspace:^"
     jest: "npm:30.2.0"
@@ -123,9 +123,9 @@ __metadata:
     "@eslint/compat": "npm:1.4.1"
     "@eslint/eslintrc": "npm:3.3.3"
     "@next/eslint-plugin-next": "npm:14.2.35"
-    "@types/node": "npm:20.19.26"
-    "@types/react": "npm:18.3.18"
-    "@types/react-dom": "npm:18.3.5"
+    "@types/node": "npm:20.19.32"
+    "@types/react": "npm:18.3.28"
+    "@types/react-dom": "npm:18.3.7"
     eslint: "npm:9.39.2"
     eslint-config-next: "npm:14.2.35"
     eslint-config-spirit: "workspace:^"
@@ -155,9 +155,9 @@ __metadata:
     "@eslint/eslintrc": "npm:3.3.3"
     "@next/eslint-plugin-next": "npm:14.2.35"
     "@types/babel__core": "npm:7.20.5"
-    "@types/node": "npm:20.19.26"
-    "@types/react": "npm:18.3.18"
-    "@types/react-dom": "npm:18.3.5"
+    "@types/node": "npm:20.19.32"
+    "@types/react": "npm:18.3.28"
+    "@types/react-dom": "npm:18.3.7"
     eslint: "npm:9.39.2"
     eslint-config-next: "npm:14.2.35"
     eslint-config-spirit: "workspace:^"
@@ -292,9 +292,9 @@ __metadata:
     "@types/babel__core": "npm:7.20.5"
     "@types/jest": "npm:30.0.0"
     "@types/jest-axe": "npm:3.5.9"
-    "@types/node": "npm:20.19.26"
-    "@types/react": "npm:18.3.4"
-    "@types/react-dom": "npm:18.3.5"
+    "@types/node": "npm:20.19.32"
+    "@types/react": "npm:18.3.28"
+    "@types/react-dom": "npm:18.3.7"
     "@types/react-transition-group": "npm:4.4.12"
     "@typescript-eslint/eslint-plugin": "npm:6.21.0"
     "@typescript-eslint/parser": "npm:6.21.0"
@@ -370,7 +370,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:6.9.1"
     "@types/eslint": "npm:9.6.1"
     "@types/jest": "npm:30.0.0"
-    "@types/node": "npm:20.19.26"
+    "@types/node": "npm:20.19.32"
     autoprefixer: "npm:10.4.24"
     clean-css-cli: "npm:5.6.3"
     csstype: "npm:3.2.3"
@@ -10038,12 +10038,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.19.26":
-  version: 20.19.26
-  resolution: "@types/node@npm:20.19.26"
+"@types/node@npm:20.19.32":
+  version: 20.19.32
+  resolution: "@types/node@npm:20.19.32"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10/87ea2aa2e50d3f46d4b02745b8fa9b55dad25b4fb06498b08206ff57365b54a3c23b5fb92630138b9f9b7f1ddd600723283f946c0a5790aeb7933ddf5b9e4c3f
+  checksum: 10/539e892da014abf6404d0e56d79e8eb6f7b6c47ac1a955752e05b84e164c1cf3c90748af97fe073dc1282f5ea0a12bfeefbfa79622d3fc1b75dfe2b6dc5d53bc
   languageName: node
   linkType: hard
 
@@ -10077,12 +10077,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.3.5":
-  version: 18.3.5
-  resolution: "@types/react-dom@npm:18.3.5"
+"@types/react-dom@npm:18.3.7":
+  version: 18.3.7
+  resolution: "@types/react-dom@npm:18.3.7"
   peerDependencies:
     "@types/react": ^18.0.0
-  checksum: 10/02095b326f373867498e0eb2b5ebb60f9bd9535db0d757ea13504c4b7d75e16605cf1d43ce7a2e67893d177b51db4357cabb2842fb4257c49427d02da1a14e09
+  checksum: 10/317569219366d487a3103ba1e5e47154e95a002915fdcf73a44162c48fe49c3a57fcf7f57fc6979e70d447112681e6b13c6c3c1df289db8b544df4aab2d318f3
   languageName: node
   linkType: hard
 
@@ -10095,23 +10095,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.3.18":
-  version: 18.3.18
-  resolution: "@types/react@npm:18.3.18"
+"@types/react@npm:18.3.28":
+  version: 18.3.28
+  resolution: "@types/react@npm:18.3.28"
   dependencies:
     "@types/prop-types": "npm:*"
-    csstype: "npm:^3.0.2"
-  checksum: 10/7fdd8b853e0d291d4138133f93f8d5c333da918e5804afcea61a923aab4bdfc9bb15eb21a5640959b452972b8715ddf10ffb12b3bd071898b9e37738636463f2
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:18.3.4":
-  version: 18.3.4
-  resolution: "@types/react@npm:18.3.4"
-  dependencies:
-    "@types/prop-types": "npm:*"
-    csstype: "npm:^3.0.2"
-  checksum: 10/359973924be42cf9e7366e1d885b28e0b3bd56d31f24458c5351af7a3f2fc070511e90d517b2195fb229146cdcb70342db6318e279c31dd5057beec1105b704e
+    csstype: "npm:^3.2.2"
+  checksum: 10/6db7bb7f19957ee9f530baa7d143527f8befedad1585b064eb80777be0d84621157de75aba4f499ff429b10c5ef0c7d13e89be6bca3296ef71c80472894ff0eb
   languageName: node
   linkType: hard
 
@@ -15202,7 +15192,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:3.2.3":
+"csstype@npm:3.2.3, csstype@npm:^3.2.2":
   version: 3.2.3
   resolution: "csstype@npm:3.2.3"
   checksum: 10/ad41baf7e2ffac65ab544d79107bf7cd1a4bb9bab9ac3302f59ab4ba655d5e30942a8ae46e10ba160c6f4ecea464cc95b975ca2fefbdeeacd6ac63f12f99fe1f
