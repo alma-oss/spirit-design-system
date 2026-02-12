@@ -1,9 +1,10 @@
 import React from 'react';
+import { Hidden } from '../../Hidden';
 import { Icon } from '../../Icon';
 import { VisuallyHidden } from '../../VisuallyHidden';
 import ButtonLink from '../ButtonLink';
 
-const ButtonLinkResponsiveSymmetrical = () => (
+const ButtonLinkResponsive = () => (
   <>
     <ButtonLink href="#" isSymmetrical>
       <Icon name="hamburger" />
@@ -13,43 +14,51 @@ const ButtonLinkResponsiveSymmetrical = () => (
     <ButtonLink href="#" isSymmetrical={{ tablet: true }}>
       <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
-      <span className="d-tablet-none" aria-hidden="true">
+      <Hidden from="tablet" aria-hidden="true">
         Menu
-      </span>
+      </Hidden>
     </ButtonLink>
 
     <ButtonLink href="#" isSymmetrical={{ desktop: true }}>
       <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
-      <span className="d-desktop-none" aria-hidden="true">
+      <Hidden from="desktop" aria-hidden="true">
         Menu
-      </span>
+      </Hidden>
     </ButtonLink>
 
     <ButtonLink href="#" isSymmetrical={{ mobile: true, tablet: false }}>
       <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
-      <span className="d-none d-tablet-inline" aria-hidden="true">
+      <Hidden on="mobile" aria-hidden="true">
         Menu
-      </span>
+      </Hidden>
     </ButtonLink>
 
     <ButtonLink href="#" isSymmetrical={{ mobile: true, desktop: false }}>
       <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
-      <span className="d-none d-desktop-inline" aria-hidden="true">
+      <Hidden on={['mobile', 'tablet']} aria-hidden="true">
         Menu
-      </span>
+      </Hidden>
     </ButtonLink>
 
     <ButtonLink href="#" isSymmetrical={{ tablet: true, desktop: false }}>
       <Icon name="hamburger" />
       <VisuallyHidden>Menu</VisuallyHidden>
-      <span className="d-tablet-none d-desktop-inline" aria-hidden="true">
+      <Hidden on="tablet" aria-hidden="true">
         Menu
-      </span>
+      </Hidden>
+    </ButtonLink>
+
+    <ButtonLink href="#" isSymmetrical={{ mobile: true, desktop: false }}>
+      <Icon name="hamburger" hideFrom="desktop" />
+      <VisuallyHidden>Menu</VisuallyHidden>
+      <Hidden on={['mobile', 'tablet']} aria-hidden="true">
+        Menu
+      </Hidden>
     </ButtonLink>
   </>
 );
 
-export default ButtonLinkResponsiveSymmetrical;
+export default ButtonLinkResponsive;
