@@ -78,10 +78,6 @@ export default defineConfig({
           join(pathRelativeToRepositoryRoot, 'node_modules'),
           join(pathRelativeToRepositoryRoot, 'node_modules/@alma-oss/spirit-design-tokens/src/scss'),
         ],
-        // Silence deprecation warnings related to mixed declarations.
-        // We’ve disabled these warnings because they are evaluated as false positives in our context.
-        // @see https://sass-lang.com/documentation/breaking-changes/mixed-decls/ for more details.
-        silenceDeprecations: ['mixed-decls'],
       },
     },
   },
