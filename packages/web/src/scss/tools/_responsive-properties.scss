@@ -42,9 +42,11 @@
 
     // 2.
     $fallback: if(
-        meta.type-of($fallback-value) == 'map',
-        var(#{$default-custom-property-name}, #{map.get($fallback-value, 'mobile')}),
-        $fallback-value
+        sass(meta.type-of($fallback-value) == 'map'): var(
+                #{$default-custom-property-name},
+                #{map.get($fallback-value, 'mobile')}
+            )
+            ; else: $fallback-value,
     );
 
     @each $breakpoint-name, $breakpoint-value in $breakpoints {
