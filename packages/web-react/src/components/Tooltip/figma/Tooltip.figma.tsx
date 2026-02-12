@@ -6,7 +6,7 @@ import TooltipTrigger from '../TooltipTrigger';
 
 figma.connect(Tooltip, '<FIGMA_FILE_ID>?node-id=4701%3A4086', {
   props: {
-    isDismissible: figma.boolean('Dismisible icon'),
+    isDismissible: figma.boolean('Dismissible'),
     placement: figma.enum('Placement', {
       Top: 'top',
       Right: 'right',
