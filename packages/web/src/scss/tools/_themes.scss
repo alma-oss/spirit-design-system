@@ -12,7 +12,11 @@
     $is-default-theme: true;
 
     @each $theme-name, $theme-token-types in $themes {
-        $selector: if($is-default-theme, ':root, .#{$theme-name}', '.#{$theme-name}');
+        $selector: '.#{$theme-name}';
+
+        @if $is-default-theme {
+            $selector: ':root, .#{$theme-name}';
+        }
         $theme-variables: map.get($theme-token-types, variables);
         $theme-mixins: map.get($theme-token-types, mixins);
         $is-default-theme: false;

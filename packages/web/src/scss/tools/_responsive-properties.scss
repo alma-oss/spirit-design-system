@@ -41,11 +41,12 @@
     $responsive-custom-property-names: ($responsive-custom-property-name); // 1.d
 
     // 2.
-    $fallback: if(
-        meta.type-of($fallback-value) == 'map',
-        var(#{$default-custom-property-name}, #{map.get($fallback-value, 'mobile')}),
-        $fallback-value
-    );
+
+    $fallback: $fallback-value;
+
+    @if meta.type-of($fallback-value) == 'map' {
+        $fallback: var(#{$default-custom-property-name}, #{map.get($fallback-value, 'mobile')});
+    }
 
     @each $breakpoint-name, $breakpoint-value in $breakpoints {
         @if $breakpoint-value > 0 {

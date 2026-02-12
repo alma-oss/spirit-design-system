@@ -204,9 +204,24 @@ $_queue-collapsed-visible-limit: 2; // 10.
         @each $alignment-name, $alignment-value in theme.$alignments-y {
             .Toast--#{$infix}#{$alignment-name} {
                 --toast-alignment-y: #{$alignment-value};
-                --toast-inset-top: #{if($alignment-name == 'top', 0, 'auto')};
-                --toast-inset-bottom: #{if($alignment-name == 'bottom', 0, 'auto')};
-                --toast-queue-direction: #{if($alignment-name == 'bottom', 'column-reverse', 'column')};
+
+                @if $alignment-name == 'top' {
+                    --toast-inset-top: 0;
+                } @else {
+                    --toast-inset-top: auto;
+                }
+
+                @if $alignment-name == 'bottom' {
+                    --toast-inset-bottom: 0;
+                } @else {
+                    --toast-inset-bottom: auto;
+                }
+
+                @if $alignment-name == 'bottom' {
+                    --toast-queue-direction: column-reverse;
+                } @else {
+                    --toast-queue-direction: column;
+                }
             }
         }
     }

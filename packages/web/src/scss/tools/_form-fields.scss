@@ -327,11 +327,11 @@
 
         @include breakpoint.up($breakpoint-value) {
             @each $position, $direction in $positions {
-                $default-selector: if(
-                    $position == $default-position,
-                    '.#{$component-class}:not([class*="--inputPosition"])',
-                    null
-                );
+                $default-selector: null;
+
+                @if $position == $default-position {
+                    $default-selector: '.#{$component-class}:not([class*="--inputPosition"])';
+                }
 
                 .#{$component-class}--#{$infix}#{spirit-string.convert-kebab-case-to-camel-case(input-position-#{$position})},
                 #{$default-selector} {

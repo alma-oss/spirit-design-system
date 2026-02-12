@@ -32,10 +32,19 @@
                 null
             {
                 // 1.
-                $name: $prefix +
-                    if(meta.type-of($key) == 'number', tokens-tools.format-numeric-key($key), $key) +
-                    '-' +
-                    if($remove-from-name != '', spirit-string.replace($subkey, $remove-from-name + '-', ''), null);
+                $key-part: $key;
+
+                @if meta.type-of($key) == 'number' {
+                    $key-part: tokens-tools.format-numeric-key($key);
+                }
+
+                $subkey-part: $subkey;
+
+                @if $remove-from-name != '' {
+                    $subkey-part: spirit-string.replace($subkey, $remove-from-name + '-', '');
+                }
+
+                $name: $prefix + $key-part + '-' + $subkey-part;
 
                 $result: map.set($result, string.unquote($name), $value);
             }
@@ -70,7 +79,12 @@
         $generate-custom-properties: map.get($utility, generate-custom-properties);
 
         // 2.
-        $property-class-modifier: if($key, '-' + $key, '');
+
+        $property-class-modifier: '';
+
+        @if $key {
+            $property-class-modifier: '-' + $key;
+        }
 
         // 3.
         $property-class-modifier: spirit-string.replace($property-class-modifier, '-default', '');

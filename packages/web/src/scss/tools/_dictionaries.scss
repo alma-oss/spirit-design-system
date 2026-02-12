@@ -86,26 +86,24 @@
 
     @each $dictionary-group-name, $dictionary-group-values in $dictionary-values {
         @each $dictionary-item-name, $dictionary-item-value in $dictionary-group-values {
-            $dictionary-item-name: if(
-                meta.type-of($dictionary-item-name) == 'number',
-                tokens-tools.format-numeric-key($dictionary-item-name),
-                $dictionary-item-name
-            );
+            @if meta.type-of($dictionary-item-name) == 'number' {
+                $dictionary-item-name: tokens-tools.format-numeric-key($dictionary-item-name);
+            }
 
-            $data-attribute-selector: if(
-                $generate-data-attribute,
-                '.#{$class-name}[data-spirit-color="#{$dictionary-item-name}"]',
-                null
-            );
+            $data-attribute-selector: null;
+
+            @if $generate-data-attribute {
+                $data-attribute-selector: '.#{$class-name}[data-spirit-color="#{$dictionary-item-name}"]';
+            }
 
             .#{$class-name}--#{$dictionary-item-name},
             #{$data-attribute-selector} {
                 @each $property-name, $property-value in $config {
-                    $color-group: if(
-                        $dictionary-group-name == $dictionary-item-name,
-                        $dictionary-group-name,
-                        #{$dictionary-group-name}-#{$dictionary-item-name}
-                    );
+                    $color-group: #{$dictionary-group-name}-#{$dictionary-item-name};
+
+                    @if $dictionary-group-name == $dictionary-item-name {
+                        $color-group: $dictionary-group-name;
+                    }
 
                     --#{tokens.$css-variable-prefix}#{$component-infix}-#{$property-name}: var(
                         --#{tokens.$css-variable-prefix}color-#{$color-group}-#{$property-value}
@@ -143,7 +141,11 @@
 @mixin generate-link-colors($selector, $dictionary-values, $states: (default, hover, active)) {
     @each $dictionary-value in $dictionary-values {
         @each $state in $states {
-            $variant-class: if($state == 'default', '#{$dictionary-value}', '#{$dictionary-value}:#{$state}');
+            $variant-class: '#{$dictionary-value}:#{$state}';
+
+            @if $state == 'default' {
+                $variant-class: '#{$dictionary-value}';
+            }
 
             #{$selector}-#{string.unquote($variant-class)} {
                 color: var(
@@ -200,18 +202,20 @@
 ) {
     @if validate-config-keys($dictionary-values, $config) {
         $_base: spirit-string.convert-pascal-case-to-kebab-case(spirit-string.remove-prefix($class-name, 'UNSTABLE_'));
-        $_breakpoints: if(
-            $breakpoints,
-            $breakpoints,
-            (
-                mobile: 0,
-            )
+
+        $_breakpoints: (
+            mobile: 0,
         );
-        $_infix: if(
-            $css-variable-infix == '',
-            '',
-            '-#{spirit-string.convert-pascal-case-to-kebab-case($css-variable-infix)}'
-        );
+
+        @if $breakpoints {
+            $_breakpoints: $breakpoints;
+        }
+
+        $_infix: '';
+
+        @if $css-variable-infix != '' {
+            $_infix: '-#{spirit-string.convert-pascal-case-to-kebab-case($css-variable-infix)}';
+        }
         $custom-property-base-name: '#{$_base}#{$_infix}';
 
         @each $breakpoint-name, $breakpoint-value in $_breakpoints {
