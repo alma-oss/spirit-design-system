@@ -17,13 +17,13 @@ const NavigationActionAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNa
 export const DropdownPopoverContent = () => (
   <ul className="list-unstyled">
     <li>
-      <Item label="My Account" href="https://www.example.com" />
+      <Item elementType="a" label="My Account" href="https://www.example.com" />
     </li>
     <li>
-      <Item label="Settings" href="https://www.example.com" />
+      <Item elementType="a" label="Settings" href="https://www.example.com" />
     </li>
     <li>
-      <Item label="Log Out" href="https://www.example.com" />
+      <Item elementType="a" label="Log Out" href="https://www.example.com" />
     </li>
   </ul>
 );
