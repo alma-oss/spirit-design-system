@@ -8,8 +8,9 @@
                 --color-altered: #{dynamic-colors.alter-color($color: #bada55, $lightness-delta: 0.5, $chroma-scale: 2)};
             }
 
+            // prettier-ignore
             @include test.expect() {
-                --color-altered: oklch(from #bada55 calc(l + 0.5 * (0.8 - l)) clamp(0, c * (1 + 2 * (l - 0.5)), 0.2) h);
+                --color-altered: oklch(from #bada55 calc(l + 0.5 * (0.8 - l)) clamp(0, c * (1 + 2 * (l - 0.5)), 0.2) h/100%);
             }
         }
     }
@@ -29,7 +30,7 @@
                     .test-element {
                         border-color: oklch(
                             from var(--spirit-local-background-color) calc(l + 0.75 * (0.8 - l))
-                                clamp(0, calc(c * (1 + 2 * (l - 0.5))), 0.2) h
+                                clamp(0, calc(c * (1 + 2 * (l - 0.5))), 0.2) h/100%
                         );
                     }
                 }
@@ -51,8 +52,8 @@
             @include test.expect() {
                 .test-button {
                     @supports (color: oklch(from red l c h)) {
-                        --spirit-local-background-color-state-hover: oklch(from var(--spirit-local-background-color) calc(l + 0.3 * (0.8 - l)) clamp(0, c * (1 + 4 * (l - 0.5)), 0.2) h);
-                        --spirit-local-background-color-state-active: oklch(from var(--spirit-local-background-color) calc(l + 0.45 * (0.8 - l)) clamp(0, c * (1 + 4 * (l - 0.5)), 0.2) h);
+                        --spirit-local-background-color-state-hover: oklch(from var(--spirit-local-background-color) calc(l + 0.3 * (0.8 - l)) clamp(0, c * (1 + 4 * (l - 0.5)), 0.2) h/100%);
+                        --spirit-local-background-color-state-active: oklch(from var(--spirit-local-background-color) calc(l + 0.45 * (0.8 - l)) clamp(0, c * (1 + 4 * (l - 0.5)), 0.2) h/100%);
 
                         @media (hover: hover) {
                             &:hover {
@@ -82,7 +83,7 @@
                     .test-element {
                         background-color: oklch(
                             from var(--spirit-local-background-color) calc(l + 0.3 * (0.8 - l))
-                                clamp(0, calc(c * (1 + 4 * (l - 0.5))), 0.2) h
+                                clamp(0, calc(c * (1 + 4 * (l - 0.5))), 0.2) h/100%
                         );
                     }
                 }

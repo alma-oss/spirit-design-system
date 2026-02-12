@@ -30,6 +30,12 @@ const meta: Meta<typeof Tag> = {
         defaultValue: { summary: 'span' },
       },
     },
+    isDisabled: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
     isSubtle: {
       control: 'boolean',
       table: {
@@ -48,6 +54,7 @@ const meta: Meta<typeof Tag> = {
     children: 'Tag',
     color: TagColorsExtended.NEUTRAL,
     elementType: 'span',
+    isDisabled: false,
     isSubtle: false,
     size: SizesExtended.MEDIUM,
   },
