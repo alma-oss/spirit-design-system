@@ -18,7 +18,7 @@ const DocsStack = (props: DocsStackProps) => {
   const alignmentClass = stackAlignment ? `docs-Stack--${stackAlignment}` : '';
 
   return (
-    <div {...styleProps} {...transferProps} className={classNames('docs-Stack', alignmentClass)}>
+    <div {...styleProps} {...transferProps} className={classNames('docs-Stack', alignmentClass, styleProps.className)}>
       {children}
     </div>
   );

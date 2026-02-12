@@ -27,10 +27,11 @@ For more details on this approach, see the
 [feature flag documentation][feature-flag-documentation]
 in the Spirit Design System monorepo.
 
-| Flag                                           | Description                                     | Default | SASS flag                                       |
-| ---------------------------------------------- | ----------------------------------------------- | ------- | ----------------------------------------------- |
-| `enable-v5-control-button-expanded-size-scale` | Enable expanded size scale for ControlButton    | `false` | `$enable-v5-control-button-expanded-size-scale` |
-| `enable-v5-container-block-formatting-context` | Enforce creating a new block formatting context | `false` | `$enable-v5-container-block-formatting-context` |
+| Flag                                           | Description                                          | Default | SASS flag                                       |
+| ---------------------------------------------- | ---------------------------------------------------- | ------- | ----------------------------------------------- |
+| `enable-v5-control-button-expanded-size-scale` | Enable expanded size scale for ControlButton         | `false` | `$enable-v5-control-button-expanded-size-scale` |
+| `enable-v5-container-block-formatting-context` | Enforce creating a new block formatting context      | `false` | `$enable-v5-container-block-formatting-context` |
+| `enable-v5-tag-appearance`                     | Enable new Tag appearance (inline-flex, gap, height) | `false` | `$enable-v5-tag-appearance`                     |
 
 ## Turning on Feature Flags in SASS
 

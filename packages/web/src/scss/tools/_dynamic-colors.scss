@@ -22,6 +22,8 @@ $_chroma-scale-background-selected: 4;
 // - The lightness term smoothly moves any color toward the mid tone `$_lightness-midpoint`, making light colors darker and dark colors lighter.
 // - The chroma term scales saturation up for light colors and down for dark colors, proportional to distance from the midpoint `$_chroma-lightness-midpoint`,
 //   so it’s subtle near the midpoint and stronger at the extremes.
+// - The hue term is unchanged.
+// - The alpha term is forced to 100% to avoid transparency potentially present in the input color.
 //
 // Parameters are:
 // * $color: the base color to alter
@@ -34,7 +36,8 @@ $_chroma-scale-background-selected: 4;
 
     @return oklch(
         from #{$color} calc(l + #{$lightness-delta} * (#{$_lightness-midpoint} - l))
-            clamp(0, calc(c * (1 + #{$chroma-scale} * (l - #{$_chroma-lightness-midpoint}))), #{$_chroma-upper-limit}) h
+            clamp(0, calc(c * (1 + #{$chroma-scale} * (l - #{$_chroma-lightness-midpoint}))), #{$_chroma-upper-limit})
+            h / 100%
     );
 }
 
