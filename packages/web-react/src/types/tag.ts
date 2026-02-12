@@ -26,6 +26,7 @@ export interface AriaTagElementTypeProps<T extends ElementType = 'span'> {
 export interface TagProps<E extends ElementType = 'span', C = void, S = void>
   extends ChildrenProps, StyleProps, TransferProps, AriaTagElementTypeProps<E> {
   color?: TagColor<C>;
+  isDisabled?: boolean;
   isSubtle?: boolean;
   size?: TagSize<S>;
 }
