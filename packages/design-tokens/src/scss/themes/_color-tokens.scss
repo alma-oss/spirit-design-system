@@ -85,9 +85,9 @@ $component-pagination-unselected-state-active: var(--spirit-color-component-pagi
 $component-pagination-unselected-state-default: var(--spirit-color-component-pagination-unselected-state-default);
 $component-pagination-unselected-state-hover: var(--spirit-color-component-pagination-unselected-state-hover);
 
-$component-pricing-box-background: var(--spirit-color-component-pricing-box-background);
-$component-pricing-box-border: var(--spirit-color-component-pricing-box-border);
-$component-pricing-box-content: var(--spirit-color-component-pricing-box-content);
+$component-pricing-plan-highlighted-background: var(--spirit-color-component-pricing-plan-highlighted-background);
+$component-pricing-plan-highlighted-border: var(--spirit-color-component-pricing-plan-highlighted-border);
+$component-pricing-plan-highlighted-content: var(--spirit-color-component-pricing-plan-highlighted-content);
 
 $component-toggle-selected-border: var(--spirit-color-component-toggle-selected-border);
 $component-toggle-selected-content: var(--spirit-color-component-toggle-selected-content);
@@ -201,6 +201,10 @@ $neutral-state-active: var(--spirit-color-neutral-state-active);
 $neutral-state-default: var(--spirit-color-neutral-state-default);
 $neutral-state-hover: var(--spirit-color-neutral-state-hover);
 
+$selected-background-basic: var(--spirit-color-selected-background-basic);
+$selected-background-subtle: var(--spirit-color-selected-background-subtle);
+$selected-border-basic: var(--spirit-color-selected-border-basic);
+$selected-border-subtle: var(--spirit-color-selected-border-subtle);
 $selected-content-basic: var(--spirit-color-selected-content-basic);
 $selected-content-subtle: var(--spirit-color-selected-content-subtle);
 $selected-state-active: var(--spirit-color-selected-state-active);
@@ -324,10 +328,10 @@ $component-colors: (
         unselected-state-default: $component-pagination-unselected-state-default,
         unselected-state-hover: $component-pagination-unselected-state-hover,
     ),
-    pricing-box: (
-        background: $component-pricing-box-background,
-        border: $component-pricing-box-border,
-        content: $component-pricing-box-content,
+    pricing-plan: (
+        highlighted-background: $component-pricing-plan-highlighted-background,
+        highlighted-border: $component-pricing-plan-highlighted-border,
+        highlighted-content: $component-pricing-plan-highlighted-content,
     ),
     toggle: (
         selected-border: $component-toggle-selected-border,
@@ -474,6 +478,10 @@ $neutral-colors: (
 ) !default;
 
 $selected-colors: (
+    background-basic: $selected-background-basic,
+    background-subtle: $selected-background-subtle,
+    border-basic: $selected-border-basic,
+    border-subtle: $selected-border-subtle,
     content-basic: $selected-content-basic,
     content-subtle: $selected-content-subtle,
     state-active: $selected-state-active,
