@@ -14,6 +14,10 @@
 @use 'string' as spirit-string;
 @use 'typography';
 
+// NOTE: Prettier does not yet support the native CSS if() function syntax properly.
+// We use prettier-ignore comments to protect these lines from incorrect formatting.
+// See: https://github.com/prettier/prettier/issues/17058
+
 @mixin label-disabled() {
     color: form-fields-settings.$label-color-state-disabled;
 
@@ -327,10 +331,11 @@
 
         @include breakpoint.up($breakpoint-value) {
             @each $position, $direction in $positions {
+                // prettier-ignore
                 $default-selector: if(
-                    sass($position == $default-position): '.#{$component-class}:not([class*="--inputPosition"])'
-                        ;
-                        else: null,
+                    sass($position == $default-position):
+                    '.#{$component-class}:not([class*="--inputPosition"])';
+                    else: null
                 );
 
                 .#{$component-class}--#{$infix}#{spirit-string.convert-kebab-case-to-camel-case(input-position-#{$position})},
