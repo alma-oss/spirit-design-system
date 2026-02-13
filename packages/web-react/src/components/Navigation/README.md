@@ -2,7 +2,7 @@
 
 The `Navigation` component is a container for the navigation actions of the application.
 
-It consists of a these parts:
+It consists of these parts:
 
 - [Navigation](#navigation)
   - [NavigationItem](#navigation-item)
@@ -78,7 +78,7 @@ and [escape hatches][readme-escape-hatches].
 
 ## Navigation Action
 
-The `NavigationAction` is component that is styled to be used as a navigation action.
+The `NavigationAction` is a component that is styled to be used as a navigation action.
 
 It has to be either `box` or `pill` variant. Default variant is `box`.
 
@@ -124,7 +124,7 @@ and [escape hatches][readme-escape-hatches].
 
 ## Navigation Avatar
 
-The `NavigationAvatar` is component that is styled to be used as a navigation action with an avatar.
+The `NavigationAvatar` is a component that is styled to be used as a navigation action with an avatar.
 
 ```jsx
 import { NavigationAvatar } from '@alma-oss/spirit-web-react';
@@ -148,16 +148,56 @@ import { NavigationAvatar } from '@alma-oss/spirit-web-react';
 </NavigationAvatar>;
 ```
 
+ℹ️ The `NavigationAvatar` can be used with different element types (`a`, `button`, `div`, `span`, etc.). Hover and active states only apply to clickable/interactive elements (`a`, `button`, elements with `href` attribute, or elements with `role="button"` or `role="link"`). When using non-interactive elements like `div` or `span`, hover styles will not be applied.
+
+### Avatar Size
+
+The avatar inside `NavigationAvatar` can have different sizes. Use the `avatarSize` prop to change its size. The default size is `small`.
+
+Available sizes: `xsmall`, `small`, `medium`, `large`, `xlarge`.
+
+```jsx
+import { NavigationAvatar } from '@alma-oss/spirit-web-react';
+
+<NavigationAvatar
+  avatarContent={<Icon name="profile" boxSize={16} />}
+  avatarSize="xsmall"
+  aria-label="Profile of Jiří Bárta"
+>
+  <Text elementType="span" size="small" emphasis="semibold">
+    My Account
+  </Text>
+</NavigationAvatar>;
+```
+
+You can also use responsive sizes with a responsive object, e.g. `avatarSize={{ mobile: 'small', tablet: 'medium', desktop: 'large' }}`.
+
+```jsx
+import { NavigationAvatar } from '@alma-oss/spirit-web-react';
+
+<NavigationAvatar
+  avatarContent={<Icon name="profile" boxSize={20} />}
+  avatarSize={{ mobile: 'small', tablet: 'medium', desktop: 'large' }}
+  aria-label="Profile of Jiří Bárta"
+>
+  <Text elementType="span" size="small" emphasis="semibold">
+    My Account
+  </Text>
+</NavigationAvatar>;
+```
+
 ### API
 
-| Name            | Type                              | Default | Required | Description                                            |
-| --------------- | --------------------------------- | ------- | -------- | ------------------------------------------------------ |
-| `avatarContent` | \[`ReactElement` \| `ReactNode`]  | —       | ✓        | Content of the avatar, such as an image, icon, or text |
-| `children`      | \[`string` \| `ReactNode`]        | `null`  | ✕        | Content of the NavigationAvatar                        |
-| `elementType`   | `ElementType`                     | `a`     | ✕        | Type of element used as                                |
-| `href`          | `string`                          | -       | ✕        | URL of the NavigationAvatar link                       |
-| `ref`           | `ForwardedRef<HTMLAnchorElement>` | —       | ✕        | Anchor element reference                               |
-| `target`        | `string`                          | `null`  | ✕        | NavigationAvatar's link target                         |
+| Name            | Type                                                                                   | Default | Required | Description                                                          |
+| --------------- | -------------------------------------------------------------------------------------- | ------- | -------- | -------------------------------------------------------------------- |
+| `avatarContent` | \[`ReactElement` \| `ReactNode`]                                                       | —       | ✓        | Content of the avatar, such as an image, icon, or text               |
+| `avatarSize`    | [Size dictionary][dictionary-size] \| `SingleOrResponsive<SizeExtendedDictionaryType>` | `small` | ✕        | Size of the avatar, which can be a predefined size or a custom value |
+| `children`      | \[`string` \| `ReactNode`]                                                             | `null`  | ✕        | Content of the NavigationAvatar                                      |
+| `elementType`   | `ElementType`                                                                          | `a`     | ✕        | Type of element used as                                              |
+| `href`          | `string`                                                                               | -       | ✕        | URL of the NavigationAvatar link                                     |
+| `isSquare`      | `bool`                                                                                 | `false` | ✕        | Whether the avatar is square                                         |
+| `ref`           | `ForwardedRef<HTMLAnchorElement>`                                                      | —       | ✕        | Anchor element reference                                             |
+| `target`        | `string`                                                                               | `null`  | ✕        | NavigationAvatar's link target                                       |
 
 The components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -208,6 +248,7 @@ With Buttons:
 ```
 
 [dictionary-direction]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#direction
+[dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-variant]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#variant
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches

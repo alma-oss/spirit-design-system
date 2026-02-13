@@ -11,6 +11,7 @@ import { useNavigationStyleProps } from './useNavigationStyleProps';
 const defaultProps: Partial<SpiritNavigationAvatarProps> = {
   elementType: 'a',
   isSquare: false,
+  avatarSize: Sizes.SMALL,
 };
 
 const _NavigationAvatar = <E extends ElementType = 'a'>(
@@ -21,6 +22,7 @@ const _NavigationAvatar = <E extends ElementType = 'a'>(
   const {
     elementType: ElementTag = defaultProps.elementType as ElementType,
     avatarContent,
+    avatarSize = defaultProps.avatarSize,
     isSquare,
     children,
     ...restProps
@@ -31,8 +33,8 @@ const _NavigationAvatar = <E extends ElementType = 'a'>(
   const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.avatar, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps} href={restProps.href} ref={ref}>
-      <Avatar size={Sizes.SMALL} isSquare={isSquare}>
+    <ElementTag {...otherProps} {...mergedStyleProps} ref={ref}>
+      <Avatar size={avatarSize} isSquare={isSquare}>
         {avatarContent}
       </Avatar>
       {children}
