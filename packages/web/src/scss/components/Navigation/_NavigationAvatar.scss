@@ -23,14 +23,14 @@
     background-color: theme.$avatar-background-color-state-default;
 
     @media (hover: hover) {
-        &:hover {
+        &:where(a, button, [href], [role='button'], [role='link']):hover {
             text-decoration: none;
             color: theme.$avatar-color-state-hover;
             background-color: theme.$avatar-background-color-state-hover;
         }
     }
 
-    &:active {
+    &:where(a, button, [href], [role='button'], [role='link']):active {
         text-decoration: none;
         color: theme.$avatar-color-state-active;
         background-color: theme.$avatar-background-color-state-active;
