@@ -7,7 +7,9 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
-import NavigationAvatarDemo from './NavigationAvatarDemo';
+import NavigationAvatarBasic from './NavigationAvatarBasic';
+import NavigationAvatarWithDropdown from './NavigationAvatarWithDropdown';
+import NavigationAvatarWithLink from './NavigationAvatarWithLink';
 import NavigationHorizontal from './NavigationHorizontal';
 import NavigationHorizontalWithBoxAction from './NavigationHorizontalWithBoxAction';
 import NavigationHorizontalWithButtons from './NavigationHorizontalWithButtons';
@@ -53,7 +55,13 @@ createRoot(document.getElementById('root') as HTMLElement).render(
         <NavigationVerticalWithPillAction />
       </DocsSection>
       <DocsSection title="NavigationAvatar" stackAlignment="stretch">
-        <NavigationAvatarDemo />
+        <NavigationAvatarBasic />
+      </DocsSection>
+      <DocsSection title="NavigationAvatar with Link" stackAlignment="stretch">
+        <NavigationAvatarWithLink />
+      </DocsSection>
+      <DocsSection title="NavigationAvatar with Dropdown" stackAlignment="stretch">
+        <NavigationAvatarWithDropdown />
       </DocsSection>
     </IconsProvider>
   </StrictMode>,

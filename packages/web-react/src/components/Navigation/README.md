@@ -2,7 +2,7 @@
 
 The `Navigation` component is a container for the navigation actions of the application.
 
-It consists of a these parts:
+It consists of these parts:
 
 - [Navigation](#navigation)
   - [NavigationItem](#navigation-item)
@@ -15,9 +15,7 @@ The `Navigation` is a `nav` wrapper for navigation items.
 
 The `Navigation` component can be horizontal or vertical. Use `direction` prop to set the orientation. Default direction is `horizontal`.
 
-```jsx
-import { Navigation } from '@alma-oss/spirit-web-react';
-
+```tsx
 <Navigation aria-label="Main Navigation">{/* Navigation items go here */}</Navigation>;
 <Navigation aria-label="Main Navigation" direction="vertical">
   {/* Navigation items go here */}
@@ -44,10 +42,8 @@ and [escape hatches][readme-escape-hatches].
 
 The `NavigationItem` is a container for navigation actions.
 
-```jsx
-import { NavigationItem } from '@alma-oss/spirit-web-react';
-
-<NavigationItem>{/* Navigation actions go here */}</NavigationItem>;
+```tsx
+<NavigationItem>{/* Navigation actions go here */}</NavigationItem>
 ```
 
 ### Navigation Item Alignment
@@ -55,14 +51,12 @@ import { NavigationItem } from '@alma-oss/spirit-web-react';
 Use `alignmentY` prop to center or stretch the content. If there is a `NavigationAction` inside, it overrides the prop and
 stretches its content vertically.
 
-```jsx
-import { NavigationAction, NavigationItem } from '@alma-oss/spirit-web-react';
-
-<NavigationItem>{/* Vertically centered items */}</NavigationItem>;
-<NavigationItem alignmentY="stretch">{/* Vertically stretched items */}</NavigationItem>;
+```tsx
+<NavigationItem>{/* Vertically centered items */}</NavigationItem>
+<NavigationItem alignmentY="stretch">{/* Vertically stretched items */}</NavigationItem>
 <NavigationItem>
   <NavigationAction>{/* Vertically stretched Action */}</NavigationAction>
-</NavigationItem>;
+</NavigationItem>
 ```
 
 ### API
@@ -78,14 +72,12 @@ and [escape hatches][readme-escape-hatches].
 
 ## Navigation Action
 
-The `NavigationAction` is component that is styled to be used as a navigation action.
+The `NavigationAction` is a component that is styled to be used as a navigation action.
 
 It has to be either `box` or `pill` variant. Default variant is `box`.
 
-```jsx
-import { NavigationAction } from '@alma-oss/spirit-web-react';
-
-<NavigationAction href="#">Link</NavigationAction>;
+```tsx
+<NavigationAction href="#">Link</NavigationAction>
 <NavigationAction href="#" variant="pill">
   Link
 </NavigationAction>;
@@ -93,7 +85,7 @@ import { NavigationAction } from '@alma-oss/spirit-web-react';
 
 It can obtain `isSelected` or `isDisabled` states by adding the respective props.
 
-```jsx
+```tsx
 <NavigationAction href="#" aria-current="page" isSelected>Selected Link</NavigationAction>
 <NavigationAction href="#" isDisabled>Disabled Link</NavigationAction>
 ```
@@ -124,40 +116,72 @@ and [escape hatches][readme-escape-hatches].
 
 ## Navigation Avatar
 
-The `NavigationAvatar` is component that is styled to be used as a navigation action with an avatar.
+The `NavigationAvatar` is a component that is styled to be used as a navigation action with an avatar.
 
-```jsx
-import { NavigationAvatar } from '@alma-oss/spirit-web-react';
-
+```tsx
 <NavigationAvatar avatarContent={<Icon name="profile" boxSize={20} />} aria-label="Profile of Jiří Bárta">
   <Text elementType="span" size="small" emphasis="semibold">
     My Account
   </Text>
-</NavigationAvatar>;
+</NavigationAvatar>
 ```
 
 If you want the avatar to be square, don't forget to add the `isSquare` prop to the `NavigationAvatar` component.
 
-```jsx
-import { NavigationAvatar } from '@alma-oss/spirit-web-react';
-
+```tsx
 <NavigationAvatar avatarContent={<Icon name="profile" boxSize={20} />} isSquare aria-label="Profile of Jiří Bárta">
   <Text elementType="span" size="small" emphasis="semibold">
     My Account
   </Text>
-</NavigationAvatar>;
+</NavigationAvatar>
+```
+
+ℹ️ The `NavigationAvatar` can be used with different element types (`a`, `button`, `div`, `span`, etc.). Hover and active states only apply to clickable/interactive elements (`a`, `button`, elements with `href` attribute, or elements with `role="button"` or `role="link"`). When using non-interactive elements like `div` or `span`, hover styles will not be applied.
+
+### Avatar Size
+
+The avatar inside `NavigationAvatar` can have different sizes. Use the `avatarSize` prop to change its size. The default size is `small`.
+
+Available sizes: `xsmall`, `small`, `medium`, `large`, `xlarge`.
+
+```tsx
+<NavigationAvatar
+  avatarContent={<Icon name="profile" boxSize={16} />}
+  avatarSize="xsmall"
+  aria-label="Profile of Jiří Bárta"
+>
+  <Text elementType="span" size="small" emphasis="semibold">
+    My Account
+  </Text>
+</NavigationAvatar>
+```
+
+You can also use responsive sizes with a responsive object, e.g. `avatarSize={{ mobile: 'small', tablet: 'medium', desktop: 'large' }}`.
+
+```tsx
+<NavigationAvatar
+  avatarContent={<Icon name="profile" boxSize={20} />}
+  avatarSize={{ mobile: 'small', tablet: 'medium', desktop: 'large' }}
+  aria-label="Profile of Jiří Bárta"
+>
+  <Text elementType="span" size="small" emphasis="semibold">
+    My Account
+  </Text>
+</NavigationAvatar>
 ```
 
 ### API
 
-| Name            | Type                              | Default | Required | Description                                            |
-| --------------- | --------------------------------- | ------- | -------- | ------------------------------------------------------ |
-| `avatarContent` | \[`ReactElement` \| `ReactNode`]  | —       | ✓        | Content of the avatar, such as an image, icon, or text |
-| `children`      | \[`string` \| `ReactNode`]        | `null`  | ✕        | Content of the NavigationAvatar                        |
-| `elementType`   | `ElementType`                     | `a`     | ✕        | Type of element used as                                |
-| `href`          | `string`                          | -       | ✕        | URL of the NavigationAvatar link                       |
-| `ref`           | `ForwardedRef<HTMLAnchorElement>` | —       | ✕        | Anchor element reference                               |
-| `target`        | `string`                          | `null`  | ✕        | NavigationAvatar's link target                         |
+| Name            | Type                                                                                                                                | Default | Required | Description                                                    |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------- | -------- | -------------------------------------------------------------- |
+| `avatarContent` | \[`ReactElement` \| `ReactNode`]                                                                                                    | —       | ✓        | Content of the avatar, such as an image, icon, or text         |
+| `avatarSize`    | \[[Size Extended dictionary][dictionary-size] \| [Responsive][readme-generated-types]<[Size Extended dictionary][dictionary-size]>] | `small` | ✕        | Size of the Avatar. Can be a single size or responsive object. |
+| `children`      | \[`string` \| `ReactNode`]                                                                                                          | `null`  | ✕        | Content of the NavigationAvatar                                |
+| `elementType`   | `ElementType`                                                                                                                       | `a`     | ✕        | Type of element used as                                        |
+| `href`          | `string`                                                                                                                            | -       | ✕        | URL of the NavigationAvatar link                               |
+| `isSquare`      | `bool`                                                                                                                              | `false` | ✕        | Whether the avatar is square                                   |
+| `ref`           | `ForwardedRef<HTMLAnchorElement>`                                                                                                   | —       | ✕        | Anchor element reference                                       |
+| `target`        | `string`                                                                                                                            | `null`  | ✕        | NavigationAvatar's link target                                 |
 
 The components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -167,7 +191,7 @@ and [escape hatches][readme-escape-hatches].
 
 With NavigationAction/NavigationAvatar components:
 
-```jsx
+```tsx
 <Navigation aria-label="Main Navigation">
   <NavigationItem>
     <NavigationAction href="#" aria-current="page" isSelected>
@@ -194,7 +218,7 @@ With NavigationAction/NavigationAvatar components:
 
 With Buttons:
 
-```jsx
+```tsx
 <Navigation aria-label="Secondary Navigation">
   <NavigationItem>
     <ButtonLink href="#">Button</ButtonLink>
@@ -208,8 +232,10 @@ With Buttons:
 ```
 
 [dictionary-direction]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#direction
+[dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-variant]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#variant
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [web-react-unstable-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Header/README.md

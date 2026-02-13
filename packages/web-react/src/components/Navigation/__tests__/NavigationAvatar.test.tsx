@@ -9,6 +9,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { SizesExtended } from '../../../constants';
 import { Icon } from '../../Icon';
 import NavigationAvatar from '../NavigationAvatar';
 
@@ -72,5 +73,31 @@ describe('NavigationAvatar', () => {
     );
 
     expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  it.each(Object.values(SizesExtended))('should render %s size avatar', (size) => {
+    render(
+      <NavigationAvatar avatarContent={avatarContentMock} href="/" avatarSize={size}>
+        Content
+      </NavigationAvatar>,
+    );
+    const avatarContentElement = screen.getByRole('link').firstChild;
+
+    expect(avatarContentElement).toHaveClass(`Avatar Avatar--${size}`);
+  });
+
+  it('should apply responsive size classes when responsive avatarSize is provided', () => {
+    render(
+      <NavigationAvatar
+        avatarContent={avatarContentMock}
+        avatarSize={{ mobile: 'small', tablet: 'medium', desktop: 'large' }}
+        href="/"
+      >
+        Content
+      </NavigationAvatar>,
+    );
+    const avatarContentElement = screen.getByRole('link').firstChild;
+
+    expect(avatarContentElement).toHaveClass('Avatar Avatar--small Avatar--tablet--medium Avatar--desktop--large');
   });
 });
