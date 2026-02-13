@@ -1,6 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
+import { Sizes, SizesExtended } from '../../../constants';
 import { Icon } from '../../Icon';
 import { Text } from '../../Text';
 import Navigation from '../Navigation';
@@ -29,6 +30,18 @@ const meta: Meta<typeof NavigationAvatar> = {
         image: <img src="https://picsum.photos/id/823/162/162" alt="Jiří Bárta" aria-hidden="true" />,
         text: <span aria-hidden="true">JB</span>,
       },
+    },
+    avatarSize: {
+      control: 'select',
+      options: [...Object.values(SizesExtended)],
+      table: {
+        type: {
+          summary: 'SingleOrResponsive<SizeExtendedDictionaryType>',
+        },
+        defaultValue: { summary: 'small' },
+      },
+      description:
+        'Size of the Avatar. Can be a single size or responsive object with mobile/tablet/desktop breakpoints.',
     },
     children: {
       control: 'select',
@@ -62,6 +75,7 @@ const meta: Meta<typeof NavigationAvatar> = {
   },
   args: {
     avatarContent: 'icon',
+    avatarSize: Sizes.SMALL,
     children: 'text',
     href: '#',
   },
