@@ -18,18 +18,18 @@
     "preview": "vite preview --config config/vite/app.ts"
   },
   "devDependencies": {
-    "@rollup/plugin-terser": "0.4.4",
-    "@rollup/plugin-typescript": "12.3.0",
-    "autoprefixer": "10.4.24",
-    "clean-css-cli": "5.6.3",
-    "npm-run-all2": "6.2.6",
-    "postcss": "8.5.6",
-    "rollup": "4.57.1",
-    "sass-embedded": "1.97.3",
-    "sass-true": "8.1.0",
-    "shx": "0.4.0",
-    "typescript": "5.8.3",
-    "vite": "7.3.1",
-    "vite-plugin-handlebars": "2.0.0"
+    "@rollup/plugin-terser": "catalog:build",
+    "@rollup/plugin-typescript": "catalog:build",
+    "autoprefixer": "catalog:build",
+    "clean-css-cli": "catalog:build",
+    "npm-run-all2": "catalog:script",
+    "postcss": "catalog:build",
+    "rollup": "catalog:build",
+    "sass-embedded": "catalog:build",
+    "sass-true": "catalog:test",
+    "shx": "catalog:script",
+    "typescript": "catalog:types",
+    "vite": "catalog:build",
+    "vite-plugin-handlebars": "catalog:build"
   }
 }
