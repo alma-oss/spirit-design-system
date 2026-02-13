@@ -47,7 +47,7 @@ jobs:
 
       - name: Publish to Chromatic
         id: chromatic
-        uses: chromaui/action@c93e0bc3a63aa176e14a75b61a31847cbfdd341c # v1
+        uses: chromaui/action@9f1ad414f2e282aeff674364a9098b328382103f # v14
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: apps/storybook
