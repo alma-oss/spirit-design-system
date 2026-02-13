@@ -107,4 +107,30 @@ describe('useButtonStyleProps', () => {
 
     consoleWarnMock.mockRestore();
   });
+
+  it.each([
+    // spacing, expectedStyle
+    [undefined, {}],
+    ['space-100', { '--button-spacing': 'var(--spirit-space-100)' }],
+    [
+      { mobile: 'space-100', tablet: 'space-200' },
+      {
+        '--button-spacing': 'var(--spirit-space-100)',
+        '--button-spacing-tablet': 'var(--spirit-space-200)',
+      },
+    ],
+    [
+      { mobile: 'space-100', tablet: 'space-200', desktop: 'space-400' },
+      {
+        '--button-spacing': 'var(--spirit-space-100)',
+        '--button-spacing-tablet': 'var(--spirit-space-200)',
+        '--button-spacing-desktop': 'var(--spirit-space-400)',
+      },
+    ],
+  ])('should return spacing CSS properties', (spacing, expectedStyle) => {
+    const props = { color: 'primary', size: 'medium', spacing } as SpiritButtonProps;
+    const { result } = renderHook(() => useButtonStyleProps(props));
+
+    expect(result.current.styleProps).toEqual(expectedStyle);
+  });
 });

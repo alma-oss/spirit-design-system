@@ -50,7 +50,7 @@ const onToggle = () => setIsOpen(!isOpen);
   <Dropdown id="split-button-dropdown-id" isOpen={isOpen} onToggle={onToggle}>
     <DropdownTrigger elementType={Button}>
       Dropdown
-      <Icon name="chevron-down" marginLeft="space-400" />
+      <Icon name="chevron-down" />
     </DropdownTrigger>
     <DropdownPopover>Dropdown content</DropdownPopover>
   </Dropdown>
@@ -97,7 +97,7 @@ const onDropdownToggle = () => setIsOpen(!isOpen);
   <Dropdown id="split-button-dropdown-id" isOpen={isDropdownOpen} onToggle={onDropdownToggle}>
     <DropdownTrigger elementType={Button}>
       Dropdown
-      <Icon name="chevron-down" marginLeft="space-400" />
+      <Icon name="chevron-down" />
     </DropdownTrigger>
     <DropdownPopover>Dropdown content</DropdownPopover>
   </Dropdown>
