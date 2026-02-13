@@ -21599,6 +21599,7 @@ __metadata:
     jest-environment-jsdom: "npm:30.2.0"
     jest-environment-node-single-context: "npm:29.4.0"
     resize-observer-polyfill: "npm:^1.5.1"
+    ts-node: "npm:10.9.2"
   languageName: unknown
   linkType: soft
 
