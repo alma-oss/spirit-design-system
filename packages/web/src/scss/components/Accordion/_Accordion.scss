@@ -22,6 +22,10 @@
 @use '../../tools/typography';
 @use '../../tools/reset';
 
+.Accordion:where(ul, ol) {
+    @include reset.list();
+}
+
 .Accordion__itemHeader {
     position: relative; // 2.
     display: flex;
