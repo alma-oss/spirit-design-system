@@ -24,6 +24,22 @@ Common wrapper for all items:
 </section>
 ```
 
+For semantic lists, use `ul` or `ol`:
+
+```html
+<ul class="Accordion">
+  <!-- One or more items inside -->
+</ul>
+```
+
+⚠️ If you don't know the content or already know there will be a nested list, use `div` with `role="list"` instead. This avoids nested `ul`/`li` structures (e.g., when accordion items use `li` elements and the content inside also contains a `ul` list), which would require CSS resets. The `role="list"` attribute is essential for accessibility: it tells screen readers and other assistive technologies that this is a list structure, preserving the semantic meaning that would otherwise be lost when using a `div` instead of a semantic `ul` or `ol` element:
+
+```html
+<div class="Accordion" role="list">
+  <!-- One or more items inside -->
+</div>
+```
+
 ### Accordion Item
 
 Put one or more Accordion items into the Accordion wrapper:
@@ -32,6 +48,22 @@ Put one or more Accordion items into the Accordion wrapper:
 <article id="example-1-item-1" class="Accordion__item">
   <!-- Item header and content inside -->
 </article>
+```
+
+For semantic lists, use `li`:
+
+```html
+<li id="example-1-item-1" class="Accordion__item">
+  <!-- Item header and content inside -->
+</li>
+```
+
+⚠️ When using `div` with `role="list"` for the Accordion wrapper, use `div` with `role="listitem"` for items:
+
+```html
+<div id="example-1-item-1" class="Accordion__item" role="listitem">
+  <!-- Item header and content inside -->
+</div>
 ```
 
 ### Accordion Item Header
