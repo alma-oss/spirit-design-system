@@ -19,22 +19,22 @@
     "types": "true"
   },
   "dependencies": {
-    "@supernovaio/export-helpers": "1.0.31",
-    "@supernovaio/sdk-exporters": "2.2.54",
-    "vite": "7.3.1"
+    "@supernovaio/export-helpers": "catalog:design-tools",
+    "@supernovaio/sdk-exporters": "catalog:design-tools",
+    "vite": "catalog:build"
   },
   "devDependencies": {
-    "@eslint/compat": "1.4.1",
-    "@eslint/eslintrc": "3.3.3",
-    "@lmc-eu/eslint-config-typescript": "2.1.5",
-    "@swc/core": "1.15.11",
-    "@swc/jest": "0.2.39",
-    "eslint": "9.39.2",
+    "@eslint/compat": "catalog:lint",
+    "@eslint/eslintrc": "catalog:lint",
+    "@lmc-eu/eslint-config-typescript": "catalog:lint",
+    "@swc/core": "catalog:build",
+    "@swc/jest": "catalog:test",
+    "eslint": "catalog:lint",
     "eslint-config-spirit": "workspace:^",
-    "jest": "30.2.0",
+    "jest": "catalog:test",
     "jest-config-spirit": "workspace:^",
-    "npm-run-all2": "6.2.6",
+    "npm-run-all2": "catalog:script",
     "prettier-config-spirit": "workspace:^",
-    "typescript": "5.8.3"
+    "typescript": "catalog:types"
   }
 }

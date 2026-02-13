@@ -26,10 +26,10 @@
     "stylelint": "^16.0.0"
   },
   "dependencies": {
-    "@almacareer/stylelint-config": "9.1.0",
-    "prettier": "3.8.1",
-    "stylelint": "16.26.1",
-    "stylelint-order": "6.0.4",
-    "stylelint-prettier": "5.0.3"
+    "@almacareer/stylelint-config": "catalog:lint",
+    "prettier": "catalog:lint",
+    "stylelint": "catalog:lint",
+    "stylelint-order": "catalog:lint",
+    "stylelint-prettier": "catalog:lint"
   }
 }

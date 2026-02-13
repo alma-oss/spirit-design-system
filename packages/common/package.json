@@ -26,15 +26,15 @@
     "types": "tsc"
   },
   "devDependencies": {
-    "@eslint/compat": "1.4.1",
-    "@eslint/eslintrc": "3.3.3",
-    "@types/jest": "30.0.0",
-    "@types/node": "20.19.32",
-    "eslint": "9.39.2",
+    "@eslint/compat": "catalog:lint",
+    "@eslint/eslintrc": "catalog:lint",
+    "@types/jest": "catalog:types",
+    "@types/node": "catalog:types",
+    "eslint": "catalog:lint",
     "eslint-config-spirit": "workspace:^",
-    "jest": "30.2.0",
-    "npm-run-all2": "8.0.4",
-    "ts-node": "10.9.2",
-    "typescript": "5.8.3"
+    "jest": "catalog:test",
+    "npm-run-all2": "catalog:script",
+    "ts-node": "catalog:script",
+    "typescript": "catalog:types"
   }
 }

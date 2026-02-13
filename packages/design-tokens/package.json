@@ -38,17 +38,17 @@
     "types": "tsc"
   },
   "devDependencies": {
-    "@eslint/compat": "1.4.1",
-    "@eslint/eslintrc": "3.3.3",
-    "eslint": "9.39.2",
+    "@eslint/compat": "catalog:lint",
+    "@eslint/eslintrc": "catalog:lint",
+    "eslint": "catalog:lint",
     "eslint-config-spirit": "workspace:^",
-    "npm-run-all2": "6.2.6",
-    "rimraf": "6.1.2",
-    "shx": "0.4.0",
-    "stylelint": "16.26.1",
+    "npm-run-all2": "catalog:script",
+    "rimraf": "catalog:script",
+    "shx": "catalog:script",
+    "stylelint": "catalog:lint",
     "stylelint-config-spirit": "workspace:^",
-    "typescript": "5.8.3",
-    "vite": "7.3.1",
-    "vite-plugin-dts": "4.5.4"
+    "typescript": "catalog:types",
+    "vite": "catalog:build",
+    "vite-plugin-dts": "catalog:build"
   }
 }
