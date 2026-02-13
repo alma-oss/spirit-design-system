@@ -50,27 +50,27 @@
     "test:unit:coverage": "yarn test:unit --coverage"
   },
   "devDependencies": {
-    "@eslint/compat": "1.4.1",
-    "@eslint/eslintrc": "3.3.3",
-    "@lmc-eu/eslint-config-jest": "3.0.6",
-    "@types/eslint": "9.6.1",
-    "@types/jest": "30.0.0",
-    "@types/node": "20.19.32",
-    "@typescript-eslint/eslint-plugin": "6.21.0",
-    "@typescript-eslint/parser": "6.21.0",
-    "eslint": "9.39.2",
+    "@eslint/compat": "catalog:lint",
+    "@eslint/eslintrc": "catalog:lint",
+    "@lmc-eu/eslint-config-jest": "catalog:lint",
+    "@types/eslint": "catalog:types",
+    "@types/jest": "catalog:types",
+    "@types/node": "catalog:types",
+    "@typescript-eslint/eslint-plugin": "catalog:lint",
+    "@typescript-eslint/parser": "catalog:lint",
+    "eslint": "catalog:lint",
     "eslint-config-spirit": "workspace:^",
-    "jest": "30.2.0",
-    "npm-run-all2": "6.2.6",
-    "shx": "0.4.0",
-    "ts-node": "10.9.2",
-    "tsup": "8.5.1",
-    "typescript": "5.8.3"
+    "jest": "catalog:test",
+    "npm-run-all2": "catalog:script",
+    "shx": "catalog:script",
+    "ts-node": "catalog:script",
+    "tsup": "catalog:build",
+    "typescript": "catalog:types"
   },
   "dependencies": {
-    "filedirname": "^3.0.0",
-    "react-scanner": "^1.1.0",
-    "sade": "^1.8.1",
-    "zx": "^8.0.0"
+    "filedirname": "catalog:script",
+    "react-scanner": "catalog:script",
+    "sade": "catalog:script",
+    "zx": "catalog:script"
   }
 }
