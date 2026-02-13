@@ -61,7 +61,9 @@ const _AccordionHeader = <E extends ElementType = 'h3'>(
   );
 };
 
-const AccordionHeader = forwardRef(_AccordionHeader) as unknown as PolymorphicComponent<'h3', AccordionHeaderProps>;
+const AccordionHeader = forwardRef<HTMLHeadingElement, SpiritAccordionHeaderProps<'h3'>>(
+  _AccordionHeader,
+) as unknown as PolymorphicComponent<'h3', AccordionHeaderProps>;
 
 AccordionHeader.spiritComponent = 'AccordionHeader';
 AccordionHeader.displayName = 'AccordionHeader';

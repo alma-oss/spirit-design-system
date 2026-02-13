@@ -1,9 +1,5 @@
-import React, { type ElementType, type ReactElement, forwardRef, useState } from 'react';
-import {
-  type PolymorphicRef,
-  type SpiritNavigationActionProps,
-  type SpiritNavigationAvatarProps,
-} from '../../../types';
+import React, { type ElementType, forwardRef, useState } from 'react';
+import { type PolymorphicRef, type SpiritNavigationAvatarProps } from '../../../types';
 import Dropdown from '../../Dropdown/Dropdown';
 import DropdownPopover from '../../Dropdown/DropdownPopover';
 import DropdownTrigger from '../../Dropdown/DropdownTrigger';
@@ -15,12 +11,12 @@ import NavigationAvatar from '../NavigationAvatar';
 import NavigationItem from '../NavigationItem';
 
 const _NavigationAvatarAsDropdownTrigger = <E extends ElementType = 'a'>(
-  props: SpiritNavigationActionProps<E>,
+  props: SpiritNavigationAvatarProps<E>,
   ref: PolymorphicRef<E>,
-): ReactElement => <NavigationAvatar {...props} elementType="button" ref={ref} />;
+) => <NavigationAvatar {...props} elementType="button" ref={ref} />;
 
-const NavigationAvatarAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNavigationAvatarProps<ElementType>>(
-  _NavigationAvatarAsDropdownTrigger,
+const NavigationAvatarAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNavigationAvatarProps<'a'>>(
+  _NavigationAvatarAsDropdownTrigger as never,
 );
 
 const NavigationAvatarDemo = () => {

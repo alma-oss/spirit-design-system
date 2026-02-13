@@ -3,7 +3,7 @@ import Spinner from '../Spinner';
 
 const SpinnerIconProps = () => (
   <>
-    <Spinner boxSize="36" />
+    <Spinner boxSize={36} />
 
     <Spinner title="Spinner title" />
   </>

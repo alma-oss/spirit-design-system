@@ -1,6 +1,6 @@
 'use client';
 
-import React, { type ForwardedRef, forwardRef } from 'react';
+import React, { type ForwardedRef, type ReactElement, forwardRef } from 'react';
 import { useIcon, useStyleProps } from '../../hooks';
 import { type SpiritIconProps } from '../../types';
 import { htmlReactParser, mergeStyleProps } from '../../utils';
@@ -13,7 +13,7 @@ const defaultProps = {
   boxSize: DEFAULT_BOX_SIZE,
 };
 
-const _Icon = (props: SpiritIconProps, ref: ForwardedRef<SVGSVGElement>) => {
+const _Icon = (props: SpiritIconProps, ref: ForwardedRef<SVGSVGElement>): ReactElement => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { boxSize, name, title, ariaHidden, ...restProps } = propsWithDefaults;
 
@@ -52,5 +52,6 @@ const _Icon = (props: SpiritIconProps, ref: ForwardedRef<SVGSVGElement>) => {
 const Icon = forwardRef<SVGSVGElement, SpiritIconProps>(_Icon);
 
 Icon.spiritComponent = 'Icon';
+Icon.displayName = 'Icon';
 
 export default Icon;

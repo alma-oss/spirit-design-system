@@ -123,7 +123,10 @@ const _Tooltip = <E extends ElementType = 'div'>(props: SpiritTooltipProps<E>, r
   );
 };
 
-const Tooltip = forwardRef(_Tooltip) as unknown as PolymorphicComponent<'div', TooltipProps>;
+const Tooltip = forwardRef<HTMLDivElement, SpiritTooltipProps<'div'>>(_Tooltip) as unknown as PolymorphicComponent<
+  'div',
+  TooltipProps
+>;
 
 Tooltip.spiritComponent = 'Tooltip';
 Tooltip.displayName = 'Tooltip';

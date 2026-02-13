@@ -24,7 +24,7 @@ const _PaginationLink = <E extends ElementType = 'a'>(props: SpiritPaginationLin
   );
 };
 
-const PaginationLink = forwardRef<HTMLAnchorElement, SpiritPaginationLinkProps<ElementType>>(_PaginationLink);
+const PaginationLink = forwardRef<HTMLAnchorElement, SpiritPaginationLinkProps<'a'>>(_PaginationLink);
 
 PaginationLink.spiritComponent = 'PaginationLink';
 

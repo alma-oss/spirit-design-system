@@ -9,10 +9,10 @@ import { DropdownPopoverContent } from '../HeaderWithNavigationAndNestedItems/Ma
 const _NavigationAvatarAsDropdownTrigger = <E extends ElementType = 'button'>(
   props: SpiritNavigationAvatarProps<E>,
   ref: PolymorphicRef<E>,
-): ReactElement => <NavigationAvatar {...props} elementType="button" ref={ref} />;
+) => <NavigationAvatar {...props} elementType="button" ref={ref} />;
 
 const NavigationAvatarAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNavigationAvatarProps<'button'>>(
-  _NavigationAvatarAsDropdownTrigger,
+  _NavigationAvatarAsDropdownTrigger as never,
 );
 
 type SecondaryHorizontalNavigationDropdownProps = {

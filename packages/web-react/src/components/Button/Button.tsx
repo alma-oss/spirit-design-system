@@ -47,7 +47,9 @@ const _Button = <E extends ElementType = 'button', C = void, S = void>(
   );
 };
 
-const Button = forwardRef(_Button) as unknown as PolymorphicComponent<'button', ButtonProps<void, void>>;
+const Button = forwardRef<HTMLButtonElement, SpiritButtonProps<'button', void, void>>(
+  _Button,
+) as unknown as PolymorphicComponent<'button', ButtonProps<void, void>>;
 
 Button.spiritComponent = 'Button';
 Button.displayName = 'Button';

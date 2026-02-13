@@ -30,7 +30,10 @@ const _Grid = <E extends ElementType = 'div'>(props: SpiritGridProps<E>, ref: Po
   );
 };
 
-const Grid = forwardRef(_Grid) as unknown as PolymorphicComponent<'div', GridProps>;
+const Grid = forwardRef<HTMLDivElement, SpiritGridProps<'div'>>(_Grid) as unknown as PolymorphicComponent<
+  'div',
+  GridProps
+>;
 
 Grid.spiritComponent = 'Grid';
 Grid.displayName = 'Grid';

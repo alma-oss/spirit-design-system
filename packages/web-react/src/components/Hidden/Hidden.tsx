@@ -31,7 +31,10 @@ const _Hidden = <E extends ElementType = 'span'>(props: SpiritHiddenProps<E>, re
   );
 };
 
-const Hidden = forwardRef(_Hidden) as unknown as PolymorphicComponent<'span', HiddenProps>;
+const Hidden = forwardRef<HTMLSpanElement, SpiritHiddenProps<'span'>>(_Hidden) as unknown as PolymorphicComponent<
+  'span',
+  HiddenProps
+>;
 
 Hidden.spiritComponent = 'Hidden';
 Hidden.displayName = 'Hidden';

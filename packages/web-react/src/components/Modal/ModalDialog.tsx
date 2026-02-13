@@ -39,4 +39,4 @@ const ModalDialog = <E extends ElementType = 'article'>(
 
 ModalDialog.spiritComponent = 'ModalDialog';
 
-export default forwardRef(ModalDialog);
+export default forwardRef<HTMLDivElement, ModalDialogProps<ElementType>>(ModalDialog);

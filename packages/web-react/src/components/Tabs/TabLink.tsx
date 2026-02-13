@@ -40,7 +40,10 @@ const _TabLink = <E extends ElementType = 'a'>(props: SpiritTabLinkProps<E>, ref
   );
 };
 
-const TabLink = forwardRef(_TabLink) as unknown as PolymorphicComponent<'a', TabLinkProps>;
+const TabLink = forwardRef<HTMLAnchorElement, SpiritTabLinkProps<'a'>>(_TabLink) as unknown as PolymorphicComponent<
+  'a',
+  TabLinkProps
+>;
 
 TabLink.spiritComponent = 'TabLink';
 TabLink.displayName = 'TabLink';

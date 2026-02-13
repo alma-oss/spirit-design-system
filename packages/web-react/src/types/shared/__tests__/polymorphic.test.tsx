@@ -24,7 +24,9 @@ const TestButtonInner = <T extends ElementType = 'button'>(props: TestButtonProp
   );
 };
 
-const TestButton = forwardRef(TestButtonInner) as <T extends ElementType = 'button'>(
+const TestButton = forwardRef<HTMLButtonElement, TestButtonProps<'button'>>(TestButtonInner) as <
+  T extends ElementType = 'button',
+>(
   props: TestButtonProps<T> & { ref?: PolymorphicRef<T> },
 ) => ReactElement;
 

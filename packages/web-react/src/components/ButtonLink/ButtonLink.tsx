@@ -50,10 +50,9 @@ const _ButtonLink = <E extends ElementType = 'a', C = void, S = void>(
   );
 };
 
-const ButtonLink = forwardRef(_ButtonLink) as unknown as PolymorphicComponent<
-  'a',
-  Omit<ButtonProps<void, void>, 'type'>
->;
+const ButtonLink = forwardRef<HTMLAnchorElement, SpiritButtonLinkProps<'a', void, void>>(
+  _ButtonLink,
+) as unknown as PolymorphicComponent<'a', Omit<ButtonProps<void, void>, 'type'>>;
 
 ButtonLink.spiritComponent = 'ButtonLink';
 ButtonLink.displayName = 'ButtonLink';

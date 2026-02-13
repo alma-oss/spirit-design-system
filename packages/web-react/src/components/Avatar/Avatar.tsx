@@ -29,7 +29,7 @@ const _Avatar = <E extends ElementType = 'div'>(props: SpiritAvatarProps<E>, ref
 
 _Avatar.spiritComponent = 'Avatar';
 
-const Avatar = forwardRef(_Avatar) as <E extends ElementType = 'div'>(
+const Avatar = forwardRef<HTMLDivElement, SpiritAvatarProps<'div'>>(_Avatar) as <E extends ElementType = 'div'>(
   props: SpiritAvatarProps<E> & { ref?: PolymorphicRef<E> },
 ) => ReactElement;
 

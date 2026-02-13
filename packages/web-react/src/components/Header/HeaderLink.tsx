@@ -34,7 +34,9 @@ const _HeaderLink = <E extends ElementType = 'a'>(
   );
 };
 
-const HeaderLink = forwardRef(_HeaderLink) as unknown as PolymorphicComponent<'a', HeaderLinkProps>;
+const HeaderLink = forwardRef<HTMLAnchorElement, SpiritHeaderLinkProps<'a'>>(
+  _HeaderLink,
+) as unknown as PolymorphicComponent<'a', HeaderLinkProps>;
 
 HeaderLink.spiritComponent = 'HeaderLink';
 HeaderLink.displayName = 'HeaderLink';
