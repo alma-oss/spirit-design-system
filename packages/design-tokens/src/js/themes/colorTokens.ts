@@ -85,9 +85,9 @@ export const componentPaginationUnselectedStateActive = 'var(--spirit-color-comp
 export const componentPaginationUnselectedStateDefault = 'var(--spirit-color-component-pagination-unselected-state-default)';
 export const componentPaginationUnselectedStateHover = 'var(--spirit-color-component-pagination-unselected-state-hover)';
 
-export const componentPricingBoxBackground = 'var(--spirit-color-component-pricing-box-background)';
-export const componentPricingBoxBorder = 'var(--spirit-color-component-pricing-box-border)';
-export const componentPricingBoxContent = 'var(--spirit-color-component-pricing-box-content)';
+export const componentPricingPlanHighlightedBackground = 'var(--spirit-color-component-pricing-plan-highlighted-background)';
+export const componentPricingPlanHighlightedBorder = 'var(--spirit-color-component-pricing-plan-highlighted-border)';
+export const componentPricingPlanHighlightedContent = 'var(--spirit-color-component-pricing-plan-highlighted-content)';
 
 export const componentToggleSelectedBorder = 'var(--spirit-color-component-toggle-selected-border)';
 export const componentToggleSelectedContent = 'var(--spirit-color-component-toggle-selected-content)';
@@ -201,6 +201,10 @@ export const neutralStateActive = 'var(--spirit-color-neutral-state-active)';
 export const neutralStateDefault = 'var(--spirit-color-neutral-state-default)';
 export const neutralStateHover = 'var(--spirit-color-neutral-state-hover)';
 
+export const selectedBackgroundBasic = 'var(--spirit-color-selected-background-basic)';
+export const selectedBackgroundSubtle = 'var(--spirit-color-selected-background-subtle)';
+export const selectedBorderBasic = 'var(--spirit-color-selected-border-basic)';
+export const selectedBorderSubtle = 'var(--spirit-color-selected-border-subtle)';
 export const selectedContentBasic = 'var(--spirit-color-selected-content-basic)';
 export const selectedContentSubtle = 'var(--spirit-color-selected-content-subtle)';
 export const selectedStateActive = 'var(--spirit-color-selected-state-active)';
@@ -324,10 +328,10 @@ export const componentColors = {
     unselectedStateDefault: componentPaginationUnselectedStateDefault,
     unselectedStateHover: componentPaginationUnselectedStateHover,
   },
-  pricingBox: {
-    background: componentPricingBoxBackground,
-    border: componentPricingBoxBorder,
-    content: componentPricingBoxContent,
+  pricingPlan: {
+    highlightedBackground: componentPricingPlanHighlightedBackground,
+    highlightedBorder: componentPricingPlanHighlightedBorder,
+    highlightedContent: componentPricingPlanHighlightedContent,
   },
   toggle: {
     selectedBorder: componentToggleSelectedBorder,
@@ -474,6 +478,10 @@ export const neutralColors = {
 };
 
 export const selectedColors = {
+  backgroundBasic: selectedBackgroundBasic,
+  backgroundSubtle: selectedBackgroundSubtle,
+  borderBasic: selectedBorderBasic,
+  borderSubtle: selectedBorderSubtle,
   contentBasic: selectedContentBasic,
   contentSubtle: selectedContentSubtle,
   stateActive: selectedStateActive,
