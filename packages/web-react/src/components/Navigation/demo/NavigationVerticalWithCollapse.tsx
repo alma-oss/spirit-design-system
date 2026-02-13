@@ -16,7 +16,7 @@ const NavigationVerticalWithCollapse = () => {
       <NavigationItem>
         <NavigationAction elementType="button" onClick={toggleHandler} aria-expanded="true">
           Menu
-          <Icon name={`chevron-${isOpen ? 'up' : 'down'}`} size="small" />
+          <Icon name={`chevron-${isOpen ? 'up' : 'down'}`} boxSize={20} />
         </NavigationAction>
         <Collapse id="collapse-navigation" isOpen={isOpen}>
           <ul>

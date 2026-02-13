@@ -34,7 +34,9 @@ const _HeaderDialogLink = <E extends ElementType = 'a'>(
   );
 };
 
-const HeaderDialogLink = forwardRef(_HeaderDialogLink) as unknown as PolymorphicComponent<'a', HeaderDialogLinkProps>;
+const HeaderDialogLink = forwardRef<HTMLAnchorElement, SpiritDialogHeaderLinkProps<'a'>>(
+  _HeaderDialogLink,
+) as unknown as PolymorphicComponent<'a', HeaderDialogLinkProps>;
 
 HeaderDialogLink.spiritComponent = 'HeaderDialogLink';
 HeaderDialogLink.displayName = 'HeaderDialogLink';

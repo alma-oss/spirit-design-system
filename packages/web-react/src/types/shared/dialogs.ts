@@ -1,8 +1,12 @@
-import { type ChildrenProps, type StyleProps, type TransferProps } from '.';
+import { type SyntheticEvent } from 'react';
+import { type SpiritDialogElementPropsWithRef } from './element';
+import { type ChildrenProps, type StyleProps } from '.';
 
-export interface DialogProps extends ChildrenProps, TransferProps, StyleProps {
+export type DialogElementBaseProps = SpiritDialogElementPropsWithRef;
+
+export interface DialogProps extends DialogElementBaseProps, ChildrenProps, StyleProps {
   isOpen: boolean;
-  onClose: (event: Event) => void;
+  onClose: (event: Event | SyntheticEvent) => void;
   closeOnBackdropClick?: boolean;
   closeOnEscapeKeyDown?: boolean;
 }

@@ -33,7 +33,7 @@ describe('Spinner', () => {
 
   it('should have correct width and height', () => {
     const boxSize = 33;
-    render(<Spinner name="add" boxSize={boxSize} data-testid="Spinner" />);
+    render(<Spinner boxSize={boxSize} data-testid="Spinner" />);
 
     expect(screen.getByTestId('Spinner')).toHaveAttribute('width', boxSize.toString());
     expect(screen.getByTestId('Spinner')).toHaveAttribute('height', boxSize.toString());

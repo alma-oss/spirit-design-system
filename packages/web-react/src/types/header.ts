@@ -1,7 +1,6 @@
-import { type ElementType } from 'react';
+import { type ElementType, type SyntheticEvent } from 'react';
 import {
   type ChildrenProps,
-  type ClickEvent,
   type PolymorphicComponentProps,
   type SpiritButtonElementProps,
   type SpiritDialogElementProps,
@@ -19,12 +18,12 @@ export type HeaderColorType = 'primary' | 'transparent';
 
 export type HeaderDialogHandlingProps = {
   isOpen: boolean;
-  onClose: (event: ClickEvent) => void;
+  onClose: (event: Event | SyntheticEvent) => void;
 };
 
 export type HeaderMobileActionsHandlingProps = {
   isOpen: boolean;
-  onOpen: (event: ClickEvent) => void;
+  onOpen: (event: Event | SyntheticEvent) => void;
 };
 
 export interface HeaderProps extends SpiritElementProps, ChildrenProps {

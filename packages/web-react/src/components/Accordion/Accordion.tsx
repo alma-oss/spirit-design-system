@@ -33,7 +33,9 @@ const _Accordion = <E extends ElementType = 'section'>(props: SpiritAccordionPro
   );
 };
 
-const Accordion = forwardRef(_Accordion) as unknown as PolymorphicComponent<'section', AccordionProps>;
+const Accordion = forwardRef<HTMLElement, SpiritAccordionProps<'section'>>(
+  _Accordion,
+) as unknown as PolymorphicComponent<'section', AccordionProps>;
 
 Accordion.spiritComponent = 'Accordion';
 Accordion.displayName = 'Accordion';

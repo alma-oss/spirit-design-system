@@ -45,7 +45,7 @@ const ValidationText = <E extends ElementType = 'div'>(props: ValidationTextProp
 
   return (
     <ElementTag {...transferProps} {...mergedStyleProps} id={id} role={role}>
-      {hasValidationStateIcon && <Icon name={validationIconName} boxSize="20" />}
+      {hasValidationStateIcon && <Icon name={validationIconName} boxSize={20} />}
       {Array.isArray(validationText) ? (
         <ul>
           {validationText.map((item) => (

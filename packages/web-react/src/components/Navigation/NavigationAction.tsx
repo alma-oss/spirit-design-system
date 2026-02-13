@@ -1,9 +1,14 @@
 'use client';
 
-import React, { type ElementType, type ReactElement, forwardRef } from 'react';
+import React, { type ElementType, forwardRef } from 'react';
 import { ShapeVariants } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import { type PolymorphicRef, type SpiritNavigationActionProps } from '../../types';
+import {
+  type NavigationActionProps,
+  type PolymorphicComponent,
+  type PolymorphicRef,
+  type SpiritNavigationActionProps,
+} from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useNavigationActionProps } from './useNavigationActionProps';
 import { useNavigationStyleProps } from './useNavigationStyleProps';
@@ -16,7 +21,7 @@ const defaultProps: Partial<SpiritNavigationActionProps> = {
 const _NavigationAction = <E extends ElementType = 'a'>(
   props: SpiritNavigationActionProps<E>,
   ref: PolymorphicRef<E>,
-): ReactElement => {
+) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType as ElementType, children, ...restProps } = propsWithDefaults;
   const ElementTag = propsWithDefaults.isDisabled ? 'span' : elementType;
@@ -33,8 +38,11 @@ const _NavigationAction = <E extends ElementType = 'a'>(
   );
 };
 
-const NavigationAction = forwardRef<HTMLElement, SpiritNavigationActionProps<ElementType>>(_NavigationAction);
+const NavigationAction = forwardRef<HTMLAnchorElement, SpiritNavigationActionProps<'a'>>(
+  _NavigationAction,
+) as unknown as PolymorphicComponent<'a', NavigationActionProps<ElementType>>;
 
 NavigationAction.spiritComponent = 'NavigationAction';
+NavigationAction.displayName = 'NavigationAction';
 
 export default NavigationAction;

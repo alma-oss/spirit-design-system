@@ -1,10 +1,9 @@
-import { type ComponentPropsWithRef, type ElementType } from 'react';
+import { type ComponentPropsWithRef, type ElementType, type SyntheticEvent } from 'react';
 import { type AlignmentX } from '../constants';
 import { type ButtonColor, type ButtonSize } from './button';
 import { type IconBoxSize } from './icon';
 import {
   type ChildrenProps,
-  type ClickEvent,
   type OmittedExtendedUnsafeStyleProps,
   type SpiritButtonElementProps,
   type SpiritDialogElementProps,
@@ -17,7 +16,7 @@ export type DrawerPanelElementType = 'aside' | 'form';
 
 export type DrawerPanelHandlingProps = {
   isOpen: boolean;
-  onClose: (event: ClickEvent) => void;
+  onClose: (event: Event | SyntheticEvent) => void;
   closeOnBackdropClick?: boolean;
   closeOnEscapeKeyDown?: boolean;
 };
