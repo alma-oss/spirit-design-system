@@ -1,6 +1,6 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Sizes, SizesExtended } from '../../../constants';
 import { Icon } from '../../Icon';
 import { Text } from '../../Text';
@@ -86,11 +86,15 @@ type Story = StoryObj<typeof NavigationAvatar>;
 
 export const NavigationAvatarPlayground: Story = {
   name: 'NavigationAvatar',
-  render: (args) => (
-    <Navigation>
-      <NavigationItem>
-        <NavigationAvatar {...args} />
-      </NavigationItem>
-    </Navigation>
-  ),
+  render: (args) => {
+    const { avatarContent, ...restArgs } = args as typeof args & { avatarContent: ReactNode };
+
+    return (
+      <Navigation>
+        <NavigationItem>
+          <NavigationAvatar avatarContent={avatarContent} {...restArgs} />
+        </NavigationItem>
+      </Navigation>
+    );
+  },
 };

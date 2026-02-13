@@ -36,7 +36,7 @@ const _Tag = <E extends ElementType = 'span', C = void, S = void>(
   );
 };
 
-const Tag = forwardRef<HTMLSpanElement, SpiritTagProps<ElementType>>(_Tag);
+const Tag = forwardRef<HTMLSpanElement, SpiritTagProps<'span', void, void>>(_Tag);
 
 Tag.spiritComponent = 'Tag';
 

@@ -33,7 +33,10 @@ const _GridItem = <E extends ElementType = 'div'>(
   );
 };
 
-const GridItem = forwardRef(_GridItem) as unknown as PolymorphicComponent<'div', GridItemProps>;
+const GridItem = forwardRef<HTMLDivElement, SpiritGridItemProps<'div'>>(_GridItem) as unknown as PolymorphicComponent<
+  'div',
+  GridItemProps
+>;
 
 GridItem.spiritComponent = 'GridItem';
 GridItem.displayName = 'GridItem';

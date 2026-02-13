@@ -5,12 +5,14 @@ import React, { forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import { type SpiritSegmentedControlItemProps } from '../../types/segmentedControl';
 import { useSegmentedControlContext } from './SegmentedControlContext';
-import { useSegmentedControlStyleProps } from './useSegmentedControlStyleProps';
+import { type UseSegmentedControlStylesProps, useSegmentedControlStyleProps } from './useSegmentedControlStyleProps';
 
 const SegmentedControlItem = forwardRef<HTMLLabelElement, SpiritSegmentedControlItemProps>((props, ref) => {
   const { isMultiselect, name, onSelectionChange, selectedValue, setSelectedValue } = useSegmentedControlContext();
-  const { id, isDisabled, value, children, ...restProps } = props;
-  const { classProps, props: modifiedProps } = useSegmentedControlStyleProps(restProps);
+  const { id, isDisabled, value, children, ...restProps } = props as SpiritSegmentedControlItemProps;
+  const { classProps, props: modifiedProps } = useSegmentedControlStyleProps(
+    restProps as UseSegmentedControlStylesProps,
+  );
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
 
   const handleSetSelectedValue = (v: string) => {
@@ -58,5 +60,6 @@ const SegmentedControlItem = forwardRef<HTMLLabelElement, SpiritSegmentedControl
 });
 
 SegmentedControlItem.spiritComponent = 'SegmentedControlItem';
+SegmentedControlItem.displayName = 'SegmentedControlItem';
 
 export default SegmentedControlItem;

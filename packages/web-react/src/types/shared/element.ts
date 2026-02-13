@@ -103,6 +103,10 @@ export type SpiritTextAreaElementPropsWithRef = Omit<
   SpiritTextAreaElementProps & ComponentPropsWithRef<'textarea'>,
   'id' | 'label'
 >;
+export type SpiritDialogElementPropsWithRef = Omit<
+  SpiritDialogElementProps & ComponentPropsWithRef<'dialog'>,
+  'onClose'
+>;
 export type SpiritFieldGroupElementPropsWithRef = Omit<
   SpiritFieldGroupElementProps & ComponentPropsWithRef<'fieldset'>,
   'id'

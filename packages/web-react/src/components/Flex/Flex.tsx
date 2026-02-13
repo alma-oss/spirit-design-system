@@ -41,7 +41,10 @@ const _Flex = <E extends ElementType = 'div'>(props: SpiritFlexProps<E>, ref: Po
   );
 };
 
-const Flex = forwardRef(_Flex) as unknown as PolymorphicComponent<'div', FlexProps>;
+const Flex = forwardRef<HTMLDivElement, SpiritFlexProps<'div'>>(_Flex) as unknown as PolymorphicComponent<
+  'div',
+  FlexProps
+>;
 
 Flex.spiritComponent = 'Flex';
 Flex.displayName = 'Flex';

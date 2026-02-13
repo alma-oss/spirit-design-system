@@ -39,7 +39,10 @@ const _Footer = <E extends ElementType = 'footer'>(
   );
 };
 
-const Footer = forwardRef(_Footer) as unknown as PolymorphicComponent<'footer', FooterProps>;
+const Footer = forwardRef<HTMLElement, SpiritFooterProps<'footer'>>(_Footer) as unknown as PolymorphicComponent<
+  'footer',
+  FooterProps
+>;
 
 Footer.spiritComponent = 'Footer';
 Footer.displayName = 'Footer';

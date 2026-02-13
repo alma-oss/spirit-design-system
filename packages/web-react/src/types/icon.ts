@@ -6,7 +6,6 @@ import {
   type SingleOrResponsive,
   type StyleProps,
   type TextColorNamesType,
-  type TransferProps,
 } from './shared';
 
 export type IconBoxSize = SingleOrResponsive<number>;
@@ -20,7 +19,7 @@ export interface IconStyleProps extends SVGAttributes<SVGElement> {
   name: string;
 }
 
-export interface IconProps extends IconStyleProps, StyleProps, ChildrenProps, TransferProps {
+export interface IconProps extends IconStyleProps, StyleProps, ChildrenProps {
   /** Aria hidden */
   ariaHidden?: boolean;
   /** Title of the icon */
