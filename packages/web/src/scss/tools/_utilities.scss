@@ -32,10 +32,20 @@
                 null
             {
                 // 1.
+
+                // prettier-ignore
                 $name: $prefix +
-                    if(meta.type-of($key) == 'number', tokens-tools.format-numeric-key($key), $key) +
+                    if(
+                        sass(meta.type-of($key) == 'number'):
+                        tokens-tools.format-numeric-key($key);
+                        else: $key
+                    ) +
                     '-' +
-                    if($remove-from-name != '', spirit-string.replace($subkey, $remove-from-name + '-', ''), null);
+                    if(
+                        sass($remove-from-name != ''):
+                        spirit-string.replace($subkey, $remove-from-name + '-', '');
+                        else: $subkey
+                    );
 
                 $result: map.set($result, string.unquote($name), $value);
             }
@@ -70,7 +80,13 @@
         $generate-custom-properties: map.get($utility, generate-custom-properties);
 
         // 2.
-        $property-class-modifier: if($key, '-' + $key, '');
+
+        // prettier-ignore
+        $property-class-modifier: if(
+            sass($key):
+            '-' + $key;
+            else: ''
+        );
 
         // 3.
         $property-class-modifier: spirit-string.replace($property-class-modifier, '-default', '');
