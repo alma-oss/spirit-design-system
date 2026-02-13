@@ -31,4 +31,25 @@ describe('useLinkStyleProps', () => {
 
     expect(result.current.classProps).toContain('link-allow-visited-style');
   });
+
+  it('should return link-unstyled class', () => {
+    const props = { color: 'unstyled' } as SpiritLinkProps;
+    const { result } = renderHook(() => useLinkStyleProps(props));
+
+    expect(result.current.classProps).toContain('link-unstyled');
+  });
+
+  it('should combine unstyled with underlined', () => {
+    const props = { color: 'unstyled', underlined: 'always' } as SpiritLinkProps;
+    const { result } = renderHook(() => useLinkStyleProps(props));
+
+    expect(result.current.classProps).toBe('link-unstyled link-underlined');
+  });
+
+  it('should combine unstyled with disabled', () => {
+    const props = { color: 'unstyled', isDisabled: true } as SpiritLinkProps;
+    const { result } = renderHook(() => useLinkStyleProps(props));
+
+    expect(result.current.classProps).toBe('link-unstyled link-disabled');
+  });
 });

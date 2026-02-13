@@ -6,6 +6,32 @@ Link allows users to follow navigation.
 <Link href="/" color="primary" isDisabled />
 ```
 
+## Colors
+
+Link supports four color options: `primary` (default), `secondary`, `tertiary`, and `unstyled`.
+
+### Unstyled
+
+The `unstyled` color option allows links to inherit color from their parent element. This is useful when links need to match the color of their container, such as in Alert or other colored components.
+
+```jsx
+<Alert color="success">
+  See{' '}
+  <Link href="/faq" color="unstyled" underlined="always">
+    FAQ
+  </Link>{' '}
+  for more info.
+</Alert>
+```
+
+**Accessibility Note:** When using `color="unstyled"`, it's recommended to set `underlined="always"` to ensure links are visually distinguishable from surrounding text.
+
+```jsx
+<Link href="/" color="unstyled" underlined="always">
+  Unstyled Link
+</Link>
+```
+
 ## Underlined
 
 You can customize the underline behavior for links with three different settings:
