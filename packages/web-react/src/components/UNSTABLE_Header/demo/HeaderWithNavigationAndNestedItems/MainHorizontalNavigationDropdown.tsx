@@ -1,4 +1,4 @@
-import React, { type ElementType, type ReactElement, forwardRef, useState } from 'react';
+import React, { type ElementType, forwardRef, useState } from 'react';
 import { type PolymorphicRef, type SpiritNavigationActionProps } from '../../../../types';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../../../Dropdown';
 import { Icon } from '../../../Icon';
@@ -8,10 +8,10 @@ import { NavigationAction } from '../../../Navigation';
 const _NavigationActionAsDropdownTrigger = <E extends ElementType = 'a'>(
   props: SpiritNavigationActionProps<E>,
   ref: PolymorphicRef<E>,
-): ReactElement => <NavigationAction {...props} elementType="button" ref={ref} />;
+) => <NavigationAction {...props} elementType="button" ref={ref} />;
 
-const NavigationActionAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNavigationActionProps<ElementType>>(
-  _NavigationActionAsDropdownTrigger,
+const NavigationActionAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNavigationActionProps<'a'>>(
+  _NavigationActionAsDropdownTrigger as never,
 );
 
 export const DropdownPopoverContent = () => (

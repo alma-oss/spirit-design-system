@@ -1,11 +1,11 @@
 import { type ReactNode } from 'react';
-import type { TimelineMarkerProps } from '../../../types';
+import type { IconColorType, TimelineMarkerProps } from '../../../types';
 
 export interface TimelineDemoStep {
   marker?: Pick<TimelineMarkerProps, 'backgroundColor' | 'borderColor' | 'textColor'> & {
     content?: string | ReactNode;
     iconName?: string;
-    iconColor?: string;
+    iconColor?: IconColorType;
   };
   heading?: {
     text: string;

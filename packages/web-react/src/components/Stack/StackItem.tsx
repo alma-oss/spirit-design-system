@@ -38,7 +38,9 @@ const _StackItem = <E extends ElementType = 'div'>(
   );
 };
 
-const StackItem = forwardRef(_StackItem) as unknown as PolymorphicComponent<'div', StackItemProps>;
+const StackItem = forwardRef<HTMLDivElement, SpiritStackItemProps<'div'>>(
+  _StackItem,
+) as unknown as PolymorphicComponent<'div', StackItemProps>;
 
 StackItem.spiritComponent = 'StackItem';
 StackItem.displayName = 'StackItem';

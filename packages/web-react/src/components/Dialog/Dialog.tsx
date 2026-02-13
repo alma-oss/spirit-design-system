@@ -13,10 +13,7 @@ import { useCancelEvent, useClickOutside } from '../../hooks';
 import { type DialogProps } from '../../types';
 import { useDialog } from './useDialog';
 
-// @TODO: Type 'MutableRefObject<ForwardedRef<HTMLDialogElement | null>>' is not assignable to type 'MutableRefObject<HTMLDialogElement | null>'.
-// Solved using `as MutableRefObject<HTMLDialogElement | null>` but I do not like it
-
-const Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>): JSX.Element => {
+const _Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>): JSX.Element => {
   const { children, isOpen, onClose, closeOnBackdropClick = true, closeOnEscapeKeyDown, ...restProps } = props;
   const dialogElementRef: MutableRefObject<ForwardedRef<HTMLDialogElement | null>> = useRef(ref);
   const contentElementRef: MutableRefObject<HTMLElement | null> = useRef(null);
@@ -74,6 +71,9 @@ const Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>)
   );
 };
 
-Dialog.spiritComponent = 'Dialog';
+const Dialog = forwardRef<HTMLDialogElement | null, DialogProps>(_Dialog);
 
-export default forwardRef(Dialog);
+Dialog.spiritComponent = 'Dialog';
+Dialog.displayName = 'Dialog';
+
+export default Dialog;

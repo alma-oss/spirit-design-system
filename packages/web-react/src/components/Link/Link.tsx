@@ -33,7 +33,10 @@ const _Link = <E extends ElementType = 'a', C = void>(
   );
 };
 
-const Link = forwardRef(_Link) as unknown as PolymorphicComponent<'a', LinkProps<void>>;
+const Link = forwardRef<HTMLAnchorElement, SpiritLinkProps<'a', void>>(_Link) as unknown as PolymorphicComponent<
+  'a',
+  LinkProps<void>
+>;
 
 Link.spiritComponent = 'Link';
 Link.displayName = 'Link';

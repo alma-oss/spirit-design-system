@@ -35,7 +35,9 @@ const _HeaderLogo = <E extends ElementType = 'a'>(
   );
 };
 
-const UNSTABLE_HeaderLogo = forwardRef(_HeaderLogo) as unknown as PolymorphicComponent<'a', HeaderLogoProps>;
+const UNSTABLE_HeaderLogo = forwardRef<HTMLAnchorElement, SpiritHeaderLogoProps<'a'>>(
+  _HeaderLogo,
+) as unknown as PolymorphicComponent<'a', HeaderLogoProps>;
 
 UNSTABLE_HeaderLogo.spiritComponent = 'UNSTABLE_HeaderLogo';
 UNSTABLE_HeaderLogo.displayName = 'UNSTABLE_HeaderLogo';

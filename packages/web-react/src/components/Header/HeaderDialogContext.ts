@@ -1,12 +1,11 @@
 'use client';
 
-import { createContext, useContext } from 'react';
-import { type ClickEvent } from '../../types';
+import { type SyntheticEvent, createContext, useContext } from 'react';
 
 export interface HeaderDialogContextProps {
   id: string;
   isOpen: boolean;
-  onClose: (event: ClickEvent) => void;
+  onClose: (event: Event | SyntheticEvent) => void;
 }
 
 const defaultContext: HeaderDialogContextProps = {

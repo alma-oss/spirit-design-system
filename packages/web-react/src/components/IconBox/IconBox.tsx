@@ -62,7 +62,10 @@ const _IconBox = <E extends ElementType = 'div'>(props: SpiritIconBoxProps<E>, r
   );
 };
 
-const IconBox = forwardRef(_IconBox) as unknown as PolymorphicComponent<'div', IconBoxProps>;
+const IconBox = forwardRef<HTMLDivElement, SpiritIconBoxProps<'div'>>(_IconBox) as unknown as PolymorphicComponent<
+  'div',
+  IconBoxProps
+>;
 
 IconBox.spiritComponent = 'IconBox';
 IconBox.displayName = 'IconBox';

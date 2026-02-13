@@ -33,7 +33,10 @@ const _Box = <E extends ElementType = 'div'>(props: BoxProps<E>, ref: Polymorphi
   );
 };
 
-const Box = forwardRef(_Box) as unknown as PolymorphicComponent<'div', BoxProps<ElementType>>;
+const Box = forwardRef<HTMLDivElement, BoxProps<'div'>>(_Box) as unknown as PolymorphicComponent<
+  'div',
+  BoxProps<ElementType>
+>;
 
 Box.spiritComponent = 'Box';
 Box.displayName = 'Box';

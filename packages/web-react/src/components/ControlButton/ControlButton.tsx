@@ -43,7 +43,9 @@ const _ControlButton = <E extends ElementType = 'button', S = void>(
   );
 };
 
-const ControlButton = forwardRef(_ControlButton) as unknown as PolymorphicComponent<'button', ControlButtonProps<void>>;
+const ControlButton = forwardRef<HTMLButtonElement, SpiritControlButtonProps<'button', void>>(
+  _ControlButton,
+) as unknown as PolymorphicComponent<'button', ControlButtonProps<void>>;
 
 ControlButton.spiritComponent = 'ControlButton';
 ControlButton.displayName = 'ControlButton';

@@ -4,7 +4,7 @@ import Spinner from '../Spinner';
 
 figma.connect(Spinner, '<FIGMA_FILE_ID>?node-id=11445%3A8917', {
   props: {
-    textColor: figma.enum('Text Color', {
+    color: figma.enum('Text Color', {
       Primary: 'primary',
       Secondary: 'secondary',
     }),

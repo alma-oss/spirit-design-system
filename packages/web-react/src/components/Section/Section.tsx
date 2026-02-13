@@ -53,7 +53,9 @@ const _Section = <E extends ElementType = 'section', S = void>(
   );
 };
 
-const Section = forwardRef(_Section) as unknown as PolymorphicComponent<'section', SectionProps<void>>;
+const Section = forwardRef<HTMLElement, SpiritSectionProps<'section', void>>(
+  _Section,
+) as unknown as PolymorphicComponent<'section', SectionProps<void>>;
 
 Section.spiritComponent = 'Section';
 Section.displayName = 'Section';
