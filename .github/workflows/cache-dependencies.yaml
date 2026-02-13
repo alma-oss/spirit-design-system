@@ -76,7 +76,7 @@ jobs:
       - name: Check Cache
         id: cache-check
         if: ${{ !inputs.purge_cache }}
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5
         with:
           path: ${{ env.CACHE_PATH }}
           key: ${{ steps.cache-key.outputs.key }}
@@ -97,7 +97,7 @@ jobs:
 
       - name: Save Cache
         if: ${{ steps.should-rebuild.outputs.rebuild == 'true' }}
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5
         with:
           path: ${{ env.CACHE_PATH }}
           key: ${{ steps.cache-key.outputs.key }}
