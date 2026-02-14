@@ -7,9 +7,15 @@
     "node": ">=20"
   },
   "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "MIGRATIONS.md",
+    "DEPRECATIONS.md"
+  ],
   "publishConfig": {
     "access": "public",
-    "directory": "dist",
     "provenance": true
   },
   "repository": {
@@ -17,9 +23,9 @@
     "url": "https://github.com/alma-oss/spirit-design-system.git",
     "directory": "packages/web-react"
   },
-  "main": "./index.cjs",
-  "module": "./index.js",
-  "types": "./index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "@floating-ui/react": "^0.27.0",
     "classnames": "^2.3.1",
@@ -42,9 +48,6 @@
     "@lmc-eu/eslint-config-jest": "3.0.6",
     "@lmc-eu/eslint-config-react": "2.0.6",
     "@lmc-eu/eslint-config-typescript": "2.1.5",
-    "@rollup/plugin-node-resolve": "15.3.1",
-    "@rollup/plugin-replace": "6.0.3",
-    "@rollup/plugin-terser": "0.4.4",
     "@storybook/addon-docs": "10.2.4",
     "@storybook/react": "10.2.4",
     "@testing-library/dom": "10.4.1",
@@ -60,6 +63,7 @@
     "@types/react-transition-group": "4.4.12",
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
+    "@vitejs/plugin-react": "^4.2.1",
     "eslint": "9.39.2",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-spirit": "workspace:^",
@@ -71,26 +75,21 @@
     "eslint-plugin-react-hooks": "4.6.2",
     "eslint-plugin-react-refresh": "0.5.0",
     "eslint-plugin-standard": "5.0.0",
-    "glob": "11.1.0",
     "html-element-attributes": "3.5.0",
     "jest": "30.2.0",
     "jest-axe": "10.0.0",
     "npm-run-all2": "6.2.6",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "recast": "0.23.11",
-    "rollup": "4.57.1",
     "sass-embedded": "1.97.3",
     "shx": "0.4.0",
     "storybook": "10.2.7",
-    "terser-webpack-plugin": "5.3.16",
-    "ts-loader": "9.5.4",
     "ts-node": "10.9.2",
     "tsx": "4.21.0",
     "typescript": "5.8.3",
-    "webpack": "5.104.1",
-    "webpack-cli": "5.1.4",
-    "webpack-merge": "6.0.1"
+    "vite": "^7.0.8",
+    "vite-plugin-dts": "^4.5.0",
+    "vite-plugin-externalize-deps": "^0.10.0"
   },
   "peerDependencies": {
     "@alma-oss/spirit-design-tokens": "^4.0.0",
@@ -111,20 +110,11 @@
     }
   },
   "scripts": {
-    "build:prepare": "shx rm -rf dist && shx mkdir -p dist && shx cp package.json README.md dist/ ",
-    "build": "npm-run-all --serial build:prepare build:umd build:es2020 build:esNext build:finalize",
-    "build:cjs": "yarn rollup --bundleConfigAsCjs",
-    "build:umd": "npm-run-all --serial webpack:dev webpack:prod",
-    "build:es2020": "tsc --outDir dist --project ./config/tsconfig.prod.json",
-    "build:esNext": "echo tsc --module esNext --outDir dist/_esNext --project ./config/tsconfig.prod.json",
-    "build:finalize": "npm-run-all prepdist resolve build:cjs",
-    "prepdist": "node ./scripts/prepareDist.js",
-    "types": "tsc",
-    "webpack:dev": "webpack --mode development --config ./config/webpack.js --progress",
-    "webpack:prod": "webpack --mode production --config ./config/webpack.js --progress",
-    "webpack:browser": "webpack --mode production --config ./config/webpack.browser.js --progress",
-    "rollup": "rollup -c ./config/rollup.config.js",
-    "resolve": "tsx ./scripts/resolveModuleIds.ts",
+    "build": "npm-run-all --serial build:prepare build:compile",
+    "build:prepare": "shx rm -rf dist && shx mkdir -p dist",
+    "build:compile": "vite build",
+    "dev": "vite build --watch",
+    "types": "tsc --noEmit",
     "lint": "eslint ./",
     "lint:fix": "yarn lint --fix",
     "test": "npm-run-all --serial lint types test:unit:coverage",
@@ -134,5 +124,615 @@
     "figma:connect": "yarn figma connect",
     "figma:publish": "yarn figma connect publish",
     "figma:unpublish": "yarn figma connect unpublish"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "development": "./src/index.ts",
+      "production": "./dist/index.js",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./common": {
+      "types": "./dist/common/index.d.ts",
+      "development": "./src/common/index.ts",
+      "production": "./dist/common/index.js",
+      "import": "./dist/common/index.js",
+      "require": "./dist/common/index.cjs",
+      "default": "./dist/common/index.js"
+    },
+    "./common/constants": {
+      "types": "./dist/common/constants/index.d.ts",
+      "development": "./src/common/constants/index.ts",
+      "production": "./dist/common/constants/index.js",
+      "import": "./dist/common/constants/index.js",
+      "require": "./dist/common/constants/index.cjs",
+      "default": "./dist/common/constants/index.js"
+    },
+    "./common/utilities": {
+      "types": "./dist/common/utilities/index.d.ts",
+      "development": "./src/common/utilities/index.ts",
+      "production": "./dist/common/utilities/index.js",
+      "import": "./dist/common/utilities/index.js",
+      "require": "./dist/common/utilities/index.cjs",
+      "default": "./dist/common/utilities/index.js"
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "development": "./src/components/index.ts",
+      "production": "./dist/components/index.js",
+      "import": "./dist/components/index.js",
+      "require": "./dist/components/index.cjs",
+      "default": "./dist/components/index.js"
+    },
+    "./components/Accordion": {
+      "types": "./dist/components/Accordion/index.d.ts",
+      "development": "./src/components/Accordion/index.ts",
+      "production": "./dist/components/Accordion/index.js",
+      "import": "./dist/components/Accordion/index.js",
+      "require": "./dist/components/Accordion/index.cjs",
+      "default": "./dist/components/Accordion/index.js"
+    },
+    "./components/ActionGroup": {
+      "types": "./dist/components/ActionGroup/index.d.ts",
+      "development": "./src/components/ActionGroup/index.ts",
+      "production": "./dist/components/ActionGroup/index.js",
+      "import": "./dist/components/ActionGroup/index.js",
+      "require": "./dist/components/ActionGroup/index.cjs",
+      "default": "./dist/components/ActionGroup/index.js"
+    },
+    "./components/Alert": {
+      "types": "./dist/components/Alert/index.d.ts",
+      "development": "./src/components/Alert/index.ts",
+      "production": "./dist/components/Alert/index.js",
+      "import": "./dist/components/Alert/index.js",
+      "require": "./dist/components/Alert/index.cjs",
+      "default": "./dist/components/Alert/index.js"
+    },
+    "./components/Avatar": {
+      "types": "./dist/components/Avatar/index.d.ts",
+      "development": "./src/components/Avatar/index.ts",
+      "production": "./dist/components/Avatar/index.js",
+      "import": "./dist/components/Avatar/index.js",
+      "require": "./dist/components/Avatar/index.cjs",
+      "default": "./dist/components/Avatar/index.js"
+    },
+    "./components/Box": {
+      "types": "./dist/components/Box/index.d.ts",
+      "development": "./src/components/Box/index.ts",
+      "production": "./dist/components/Box/index.js",
+      "import": "./dist/components/Box/index.js",
+      "require": "./dist/components/Box/index.cjs",
+      "default": "./dist/components/Box/index.js"
+    },
+    "./components/Breadcrumbs": {
+      "types": "./dist/components/Breadcrumbs/index.d.ts",
+      "development": "./src/components/Breadcrumbs/index.ts",
+      "production": "./dist/components/Breadcrumbs/index.js",
+      "import": "./dist/components/Breadcrumbs/index.js",
+      "require": "./dist/components/Breadcrumbs/index.cjs",
+      "default": "./dist/components/Breadcrumbs/index.js"
+    },
+    "./components/Button": {
+      "types": "./dist/components/Button/index.d.ts",
+      "development": "./src/components/Button/index.ts",
+      "production": "./dist/components/Button/index.js",
+      "import": "./dist/components/Button/index.js",
+      "require": "./dist/components/Button/index.cjs",
+      "default": "./dist/components/Button/index.js"
+    },
+    "./components/ButtonLink": {
+      "types": "./dist/components/ButtonLink/index.d.ts",
+      "development": "./src/components/ButtonLink/index.ts",
+      "production": "./dist/components/ButtonLink/index.js",
+      "import": "./dist/components/ButtonLink/index.js",
+      "require": "./dist/components/ButtonLink/index.cjs",
+      "default": "./dist/components/ButtonLink/index.js"
+    },
+    "./components/Card": {
+      "types": "./dist/components/Card/index.d.ts",
+      "development": "./src/components/Card/index.ts",
+      "production": "./dist/components/Card/index.js",
+      "import": "./dist/components/Card/index.js",
+      "require": "./dist/components/Card/index.cjs",
+      "default": "./dist/components/Card/index.js"
+    },
+    "./components/Checkbox": {
+      "types": "./dist/components/Checkbox/index.d.ts",
+      "development": "./src/components/Checkbox/index.ts",
+      "production": "./dist/components/Checkbox/index.js",
+      "import": "./dist/components/Checkbox/index.js",
+      "require": "./dist/components/Checkbox/index.cjs",
+      "default": "./dist/components/Checkbox/index.js"
+    },
+    "./components/Collapse": {
+      "types": "./dist/components/Collapse/index.d.ts",
+      "development": "./src/components/Collapse/index.ts",
+      "production": "./dist/components/Collapse/index.js",
+      "import": "./dist/components/Collapse/index.js",
+      "require": "./dist/components/Collapse/index.cjs",
+      "default": "./dist/components/Collapse/index.js"
+    },
+    "./components/Container": {
+      "types": "./dist/components/Container/index.d.ts",
+      "development": "./src/components/Container/index.ts",
+      "production": "./dist/components/Container/index.js",
+      "import": "./dist/components/Container/index.js",
+      "require": "./dist/components/Container/index.cjs",
+      "default": "./dist/components/Container/index.js"
+    },
+    "./components/ControlButton": {
+      "types": "./dist/components/ControlButton/index.d.ts",
+      "development": "./src/components/ControlButton/index.ts",
+      "production": "./dist/components/ControlButton/index.js",
+      "import": "./dist/components/ControlButton/index.js",
+      "require": "./dist/components/ControlButton/index.cjs",
+      "default": "./dist/components/ControlButton/index.js"
+    },
+    "./components/Dialog": {
+      "types": "./dist/components/Dialog/index.d.ts",
+      "development": "./src/components/Dialog/index.ts",
+      "production": "./dist/components/Dialog/index.js",
+      "import": "./dist/components/Dialog/index.js",
+      "require": "./dist/components/Dialog/index.cjs",
+      "default": "./dist/components/Dialog/index.js"
+    },
+    "./components/Divider": {
+      "types": "./dist/components/Divider/index.d.ts",
+      "development": "./src/components/Divider/index.ts",
+      "production": "./dist/components/Divider/index.js",
+      "import": "./dist/components/Divider/index.js",
+      "require": "./dist/components/Divider/index.cjs",
+      "default": "./dist/components/Divider/index.js"
+    },
+    "./components/Drawer": {
+      "types": "./dist/components/Drawer/index.d.ts",
+      "development": "./src/components/Drawer/index.ts",
+      "production": "./dist/components/Drawer/index.js",
+      "import": "./dist/components/Drawer/index.js",
+      "require": "./dist/components/Drawer/index.cjs",
+      "default": "./dist/components/Drawer/index.js"
+    },
+    "./components/Dropdown": {
+      "types": "./dist/components/Dropdown/index.d.ts",
+      "development": "./src/components/Dropdown/index.ts",
+      "production": "./dist/components/Dropdown/index.js",
+      "import": "./dist/components/Dropdown/index.js",
+      "require": "./dist/components/Dropdown/index.cjs",
+      "default": "./dist/components/Dropdown/index.js"
+    },
+    "./components/EmptyState": {
+      "types": "./dist/components/EmptyState/index.d.ts",
+      "development": "./src/components/EmptyState/index.ts",
+      "production": "./dist/components/EmptyState/index.js",
+      "import": "./dist/components/EmptyState/index.js",
+      "require": "./dist/components/EmptyState/index.cjs",
+      "default": "./dist/components/EmptyState/index.js"
+    },
+    "./components/Field": {
+      "types": "./dist/components/Field/index.d.ts",
+      "development": "./src/components/Field/index.ts",
+      "production": "./dist/components/Field/index.js",
+      "import": "./dist/components/Field/index.js",
+      "require": "./dist/components/Field/index.cjs",
+      "default": "./dist/components/Field/index.js"
+    },
+    "./components/FieldGroup": {
+      "types": "./dist/components/FieldGroup/index.d.ts",
+      "development": "./src/components/FieldGroup/index.ts",
+      "production": "./dist/components/FieldGroup/index.js",
+      "import": "./dist/components/FieldGroup/index.js",
+      "require": "./dist/components/FieldGroup/index.cjs",
+      "default": "./dist/components/FieldGroup/index.js"
+    },
+    "./components/FileUploader": {
+      "types": "./dist/components/FileUploader/index.d.ts",
+      "development": "./src/components/FileUploader/index.ts",
+      "production": "./dist/components/FileUploader/index.js",
+      "import": "./dist/components/FileUploader/index.js",
+      "require": "./dist/components/FileUploader/index.cjs",
+      "default": "./dist/components/FileUploader/index.js"
+    },
+    "./components/Flex": {
+      "types": "./dist/components/Flex/index.d.ts",
+      "development": "./src/components/Flex/index.ts",
+      "production": "./dist/components/Flex/index.js",
+      "import": "./dist/components/Flex/index.js",
+      "require": "./dist/components/Flex/index.cjs",
+      "default": "./dist/components/Flex/index.js"
+    },
+    "./components/Footer": {
+      "types": "./dist/components/Footer/index.d.ts",
+      "development": "./src/components/Footer/index.ts",
+      "production": "./dist/components/Footer/index.js",
+      "import": "./dist/components/Footer/index.js",
+      "require": "./dist/components/Footer/index.cjs",
+      "default": "./dist/components/Footer/index.js"
+    },
+    "./components/Grid": {
+      "types": "./dist/components/Grid/index.d.ts",
+      "development": "./src/components/Grid/index.ts",
+      "production": "./dist/components/Grid/index.js",
+      "import": "./dist/components/Grid/index.js",
+      "require": "./dist/components/Grid/index.cjs",
+      "default": "./dist/components/Grid/index.js"
+    },
+    "./components/Header": {
+      "types": "./dist/components/Header/index.d.ts",
+      "development": "./src/components/Header/index.ts",
+      "production": "./dist/components/Header/index.js",
+      "import": "./dist/components/Header/index.js",
+      "require": "./dist/components/Header/index.cjs",
+      "default": "./dist/components/Header/index.js"
+    },
+    "./components/Heading": {
+      "types": "./dist/components/Heading/index.d.ts",
+      "development": "./src/components/Heading/index.ts",
+      "production": "./dist/components/Heading/index.js",
+      "import": "./dist/components/Heading/index.js",
+      "require": "./dist/components/Heading/index.cjs",
+      "default": "./dist/components/Heading/index.js"
+    },
+    "./components/Hidden": {
+      "types": "./dist/components/Hidden/index.d.ts",
+      "development": "./src/components/Hidden/index.ts",
+      "production": "./dist/components/Hidden/index.js",
+      "import": "./dist/components/Hidden/index.js",
+      "require": "./dist/components/Hidden/index.cjs",
+      "default": "./dist/components/Hidden/index.js"
+    },
+    "./components/Icon": {
+      "types": "./dist/components/Icon/index.d.ts",
+      "development": "./src/components/Icon/index.ts",
+      "production": "./dist/components/Icon/index.js",
+      "import": "./dist/components/Icon/index.js",
+      "require": "./dist/components/Icon/index.cjs",
+      "default": "./dist/components/Icon/index.js"
+    },
+    "./components/IconBox": {
+      "types": "./dist/components/IconBox/index.d.ts",
+      "development": "./src/components/IconBox/index.ts",
+      "production": "./dist/components/IconBox/index.js",
+      "import": "./dist/components/IconBox/index.js",
+      "require": "./dist/components/IconBox/index.cjs",
+      "default": "./dist/components/IconBox/index.js"
+    },
+    "./components/Item": {
+      "types": "./dist/components/Item/index.d.ts",
+      "development": "./src/components/Item/index.ts",
+      "production": "./dist/components/Item/index.js",
+      "import": "./dist/components/Item/index.js",
+      "require": "./dist/components/Item/index.cjs",
+      "default": "./dist/components/Item/index.js"
+    },
+    "./components/Link": {
+      "types": "./dist/components/Link/index.d.ts",
+      "development": "./src/components/Link/index.ts",
+      "production": "./dist/components/Link/index.js",
+      "import": "./dist/components/Link/index.js",
+      "require": "./dist/components/Link/index.cjs",
+      "default": "./dist/components/Link/index.js"
+    },
+    "./components/Matrix": {
+      "types": "./dist/components/Matrix/index.d.ts",
+      "development": "./src/components/Matrix/index.ts",
+      "production": "./dist/components/Matrix/index.js",
+      "import": "./dist/components/Matrix/index.js",
+      "require": "./dist/components/Matrix/index.cjs",
+      "default": "./dist/components/Matrix/index.js"
+    },
+    "./components/Modal": {
+      "types": "./dist/components/Modal/index.d.ts",
+      "development": "./src/components/Modal/index.ts",
+      "production": "./dist/components/Modal/index.js",
+      "import": "./dist/components/Modal/index.js",
+      "require": "./dist/components/Modal/index.cjs",
+      "default": "./dist/components/Modal/index.js"
+    },
+    "./components/Navigation": {
+      "types": "./dist/components/Navigation/index.d.ts",
+      "development": "./src/components/Navigation/index.ts",
+      "production": "./dist/components/Navigation/index.js",
+      "import": "./dist/components/Navigation/index.js",
+      "require": "./dist/components/Navigation/index.cjs",
+      "default": "./dist/components/Navigation/index.js"
+    },
+    "./components/NoSsr": {
+      "types": "./dist/components/NoSsr/index.d.ts",
+      "development": "./src/components/NoSsr/index.ts",
+      "production": "./dist/components/NoSsr/index.js",
+      "import": "./dist/components/NoSsr/index.js",
+      "require": "./dist/components/NoSsr/index.cjs",
+      "default": "./dist/components/NoSsr/index.js"
+    },
+    "./components/Pagination": {
+      "types": "./dist/components/Pagination/index.d.ts",
+      "development": "./src/components/Pagination/index.ts",
+      "production": "./dist/components/Pagination/index.js",
+      "import": "./dist/components/Pagination/index.js",
+      "require": "./dist/components/Pagination/index.cjs",
+      "default": "./dist/components/Pagination/index.js"
+    },
+    "./components/PartnerLogo": {
+      "types": "./dist/components/PartnerLogo/index.d.ts",
+      "development": "./src/components/PartnerLogo/index.ts",
+      "production": "./dist/components/PartnerLogo/index.js",
+      "import": "./dist/components/PartnerLogo/index.js",
+      "require": "./dist/components/PartnerLogo/index.cjs",
+      "default": "./dist/components/PartnerLogo/index.js"
+    },
+    "./components/Pill": {
+      "types": "./dist/components/Pill/index.d.ts",
+      "development": "./src/components/Pill/index.ts",
+      "production": "./dist/components/Pill/index.js",
+      "import": "./dist/components/Pill/index.js",
+      "require": "./dist/components/Pill/index.cjs",
+      "default": "./dist/components/Pill/index.js"
+    },
+    "./components/PricingPlan": {
+      "types": "./dist/components/PricingPlan/index.d.ts",
+      "development": "./src/components/PricingPlan/index.ts",
+      "production": "./dist/components/PricingPlan/index.js",
+      "import": "./dist/components/PricingPlan/index.js",
+      "require": "./dist/components/PricingPlan/index.cjs",
+      "default": "./dist/components/PricingPlan/index.js"
+    },
+    "./components/ProductLogo": {
+      "types": "./dist/components/ProductLogo/index.d.ts",
+      "development": "./src/components/ProductLogo/index.ts",
+      "production": "./dist/components/ProductLogo/index.js",
+      "import": "./dist/components/ProductLogo/index.js",
+      "require": "./dist/components/ProductLogo/index.cjs",
+      "default": "./dist/components/ProductLogo/index.js"
+    },
+    "./components/Radio": {
+      "types": "./dist/components/Radio/index.d.ts",
+      "development": "./src/components/Radio/index.ts",
+      "production": "./dist/components/Radio/index.js",
+      "import": "./dist/components/Radio/index.js",
+      "require": "./dist/components/Radio/index.cjs",
+      "default": "./dist/components/Radio/index.js"
+    },
+    "./components/ScrollView": {
+      "types": "./dist/components/ScrollView/index.d.ts",
+      "development": "./src/components/ScrollView/index.ts",
+      "production": "./dist/components/ScrollView/index.js",
+      "import": "./dist/components/ScrollView/index.js",
+      "require": "./dist/components/ScrollView/index.cjs",
+      "default": "./dist/components/ScrollView/index.js"
+    },
+    "./components/Section": {
+      "types": "./dist/components/Section/index.d.ts",
+      "development": "./src/components/Section/index.ts",
+      "production": "./dist/components/Section/index.js",
+      "import": "./dist/components/Section/index.js",
+      "require": "./dist/components/Section/index.cjs",
+      "default": "./dist/components/Section/index.js"
+    },
+    "./components/SegmentedControl": {
+      "types": "./dist/components/SegmentedControl/index.d.ts",
+      "development": "./src/components/SegmentedControl/index.ts",
+      "production": "./dist/components/SegmentedControl/index.js",
+      "import": "./dist/components/SegmentedControl/index.js",
+      "require": "./dist/components/SegmentedControl/index.cjs",
+      "default": "./dist/components/SegmentedControl/index.js"
+    },
+    "./components/Select": {
+      "types": "./dist/components/Select/index.d.ts",
+      "development": "./src/components/Select/index.ts",
+      "production": "./dist/components/Select/index.js",
+      "import": "./dist/components/Select/index.js",
+      "require": "./dist/components/Select/index.cjs",
+      "default": "./dist/components/Select/index.js"
+    },
+    "./components/Skeleton": {
+      "types": "./dist/components/Skeleton/index.d.ts",
+      "development": "./src/components/Skeleton/index.ts",
+      "production": "./dist/components/Skeleton/index.js",
+      "import": "./dist/components/Skeleton/index.js",
+      "require": "./dist/components/Skeleton/index.cjs",
+      "default": "./dist/components/Skeleton/index.js"
+    },
+    "./components/SkipLink": {
+      "types": "./dist/components/SkipLink/index.d.ts",
+      "development": "./src/components/SkipLink/index.ts",
+      "production": "./dist/components/SkipLink/index.js",
+      "import": "./dist/components/SkipLink/index.js",
+      "require": "./dist/components/SkipLink/index.cjs",
+      "default": "./dist/components/SkipLink/index.js"
+    },
+    "./components/Slider": {
+      "types": "./dist/components/Slider/index.d.ts",
+      "development": "./src/components/Slider/index.ts",
+      "production": "./dist/components/Slider/index.js",
+      "import": "./dist/components/Slider/index.js",
+      "require": "./dist/components/Slider/index.cjs",
+      "default": "./dist/components/Slider/index.js"
+    },
+    "./components/Spinner": {
+      "types": "./dist/components/Spinner/index.d.ts",
+      "development": "./src/components/Spinner/index.ts",
+      "production": "./dist/components/Spinner/index.js",
+      "import": "./dist/components/Spinner/index.js",
+      "require": "./dist/components/Spinner/index.cjs",
+      "default": "./dist/components/Spinner/index.js"
+    },
+    "./components/SplitButton": {
+      "types": "./dist/components/SplitButton/index.d.ts",
+      "development": "./src/components/SplitButton/index.ts",
+      "production": "./dist/components/SplitButton/index.js",
+      "import": "./dist/components/SplitButton/index.js",
+      "require": "./dist/components/SplitButton/index.cjs",
+      "default": "./dist/components/SplitButton/index.js"
+    },
+    "./components/Stack": {
+      "types": "./dist/components/Stack/index.d.ts",
+      "development": "./src/components/Stack/index.ts",
+      "production": "./dist/components/Stack/index.js",
+      "import": "./dist/components/Stack/index.js",
+      "require": "./dist/components/Stack/index.cjs",
+      "default": "./dist/components/Stack/index.js"
+    },
+    "./components/Tabs": {
+      "types": "./dist/components/Tabs/index.d.ts",
+      "development": "./src/components/Tabs/index.ts",
+      "production": "./dist/components/Tabs/index.js",
+      "import": "./dist/components/Tabs/index.js",
+      "require": "./dist/components/Tabs/index.cjs",
+      "default": "./dist/components/Tabs/index.js"
+    },
+    "./components/Tag": {
+      "types": "./dist/components/Tag/index.d.ts",
+      "development": "./src/components/Tag/index.ts",
+      "production": "./dist/components/Tag/index.js",
+      "import": "./dist/components/Tag/index.js",
+      "require": "./dist/components/Tag/index.cjs",
+      "default": "./dist/components/Tag/index.js"
+    },
+    "./components/Text": {
+      "types": "./dist/components/Text/index.d.ts",
+      "development": "./src/components/Text/index.ts",
+      "production": "./dist/components/Text/index.js",
+      "import": "./dist/components/Text/index.js",
+      "require": "./dist/components/Text/index.cjs",
+      "default": "./dist/components/Text/index.js"
+    },
+    "./components/TextArea": {
+      "types": "./dist/components/TextArea/index.d.ts",
+      "development": "./src/components/TextArea/index.ts",
+      "production": "./dist/components/TextArea/index.js",
+      "import": "./dist/components/TextArea/index.js",
+      "require": "./dist/components/TextArea/index.cjs",
+      "default": "./dist/components/TextArea/index.js"
+    },
+    "./components/TextField": {
+      "types": "./dist/components/TextField/index.d.ts",
+      "development": "./src/components/TextField/index.ts",
+      "production": "./dist/components/TextField/index.js",
+      "import": "./dist/components/TextField/index.js",
+      "require": "./dist/components/TextField/index.cjs",
+      "default": "./dist/components/TextField/index.js"
+    },
+    "./components/TextFieldBase": {
+      "types": "./dist/components/TextFieldBase/index.d.ts",
+      "development": "./src/components/TextFieldBase/index.ts",
+      "production": "./dist/components/TextFieldBase/index.js",
+      "import": "./dist/components/TextFieldBase/index.js",
+      "require": "./dist/components/TextFieldBase/index.cjs",
+      "default": "./dist/components/TextFieldBase/index.js"
+    },
+    "./components/Timeline": {
+      "types": "./dist/components/Timeline/index.d.ts",
+      "development": "./src/components/Timeline/index.ts",
+      "production": "./dist/components/Timeline/index.js",
+      "import": "./dist/components/Timeline/index.js",
+      "require": "./dist/components/Timeline/index.cjs",
+      "default": "./dist/components/Timeline/index.js"
+    },
+    "./components/Toast": {
+      "types": "./dist/components/Toast/index.d.ts",
+      "development": "./src/components/Toast/index.ts",
+      "production": "./dist/components/Toast/index.js",
+      "import": "./dist/components/Toast/index.js",
+      "require": "./dist/components/Toast/index.cjs",
+      "default": "./dist/components/Toast/index.js"
+    },
+    "./components/Toggle": {
+      "types": "./dist/components/Toggle/index.d.ts",
+      "development": "./src/components/Toggle/index.ts",
+      "production": "./dist/components/Toggle/index.js",
+      "import": "./dist/components/Toggle/index.js",
+      "require": "./dist/components/Toggle/index.cjs",
+      "default": "./dist/components/Toggle/index.js"
+    },
+    "./components/Tooltip": {
+      "types": "./dist/components/Tooltip/index.d.ts",
+      "development": "./src/components/Tooltip/index.ts",
+      "production": "./dist/components/Tooltip/index.js",
+      "import": "./dist/components/Tooltip/index.js",
+      "require": "./dist/components/Tooltip/index.cjs",
+      "default": "./dist/components/Tooltip/index.js"
+    },
+    "./components/Truncate": {
+      "types": "./dist/components/Truncate/index.d.ts",
+      "development": "./src/components/Truncate/index.ts",
+      "production": "./dist/components/Truncate/index.js",
+      "import": "./dist/components/Truncate/index.js",
+      "require": "./dist/components/Truncate/index.cjs",
+      "default": "./dist/components/Truncate/index.js"
+    },
+    "./components/UNSTABLE_Header": {
+      "types": "./dist/components/UNSTABLE_Header/index.d.ts",
+      "development": "./src/components/UNSTABLE_Header/index.ts",
+      "production": "./dist/components/UNSTABLE_Header/index.js",
+      "import": "./dist/components/UNSTABLE_Header/index.js",
+      "require": "./dist/components/UNSTABLE_Header/index.cjs",
+      "default": "./dist/components/UNSTABLE_Header/index.js"
+    },
+    "./components/VisuallyHidden": {
+      "types": "./dist/components/VisuallyHidden/index.d.ts",
+      "development": "./src/components/VisuallyHidden/index.ts",
+      "production": "./dist/components/VisuallyHidden/index.js",
+      "import": "./dist/components/VisuallyHidden/index.js",
+      "require": "./dist/components/VisuallyHidden/index.cjs",
+      "default": "./dist/components/VisuallyHidden/index.js"
+    },
+    "./constants": {
+      "types": "./dist/constants/index.d.ts",
+      "development": "./src/constants/index.ts",
+      "production": "./dist/constants/index.js",
+      "import": "./dist/constants/index.js",
+      "require": "./dist/constants/index.cjs",
+      "default": "./dist/constants/index.js"
+    },
+    "./context": {
+      "types": "./dist/context/index.d.ts",
+      "development": "./src/context/index.ts",
+      "production": "./dist/context/index.js",
+      "import": "./dist/context/index.js",
+      "require": "./dist/context/index.cjs",
+      "default": "./dist/context/index.js"
+    },
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "development": "./src/hooks/index.ts",
+      "production": "./dist/hooks/index.js",
+      "import": "./dist/hooks/index.js",
+      "require": "./dist/hooks/index.cjs",
+      "default": "./dist/hooks/index.js"
+    },
+    "./translations": {
+      "types": "./dist/translations/index.d.ts",
+      "development": "./src/translations/index.ts",
+      "production": "./dist/translations/index.js",
+      "import": "./dist/translations/index.js",
+      "require": "./dist/translations/index.cjs",
+      "default": "./dist/translations/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "development": "./src/types/index.ts",
+      "production": "./dist/types/index.js",
+      "import": "./dist/types/index.js",
+      "require": "./dist/types/index.cjs",
+      "default": "./dist/types/index.js"
+    },
+    "./types/shared": {
+      "types": "./dist/types/shared/index.d.ts",
+      "development": "./src/types/shared/index.ts",
+      "production": "./dist/types/shared/index.js",
+      "import": "./dist/types/shared/index.js",
+      "require": "./dist/types/shared/index.cjs",
+      "default": "./dist/types/shared/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "development": "./src/utils/index.ts",
+      "production": "./dist/utils/index.js",
+      "import": "./dist/utils/index.js",
+      "require": "./dist/utils/index.cjs",
+      "default": "./dist/utils/index.js"
+    }
   }
 }
