@@ -1,5 +1,6 @@
-import { readdirSync, statSync, readFileSync, writeFileSync } from 'fs';
-import { join, relative, resolve } from 'path';
+/* eslint-disable no-console */
+import { readFileSync, readdirSync, statSync, writeFileSync } from 'fs';
+import { join, resolve } from 'path';
 
 const ROOT = resolve(__dirname, '..');
 const SRC_DIR = join(ROOT, 'src');
@@ -18,21 +19,24 @@ interface ExportEntry {
 
 /**
  * Recursively find all index.ts files and return their directory paths
+ *
+ * @param dir
+ * @param basePath
  */
 function findEntryPoints(dir: string, basePath = ''): string[] {
   const entries: string[] = [];
   const items = readdirSync(dir);
 
   // Directories to exclude from entry point discovery
-  const EXCLUDED_DIRS = new Set([
-    '.', 'node_modules', '__tests__', 'demo', 'figma', 'docs', '.coverage', 'stories',
-  ]);
+  const EXCLUDED_DIRS = new Set(['.', 'node_modules', '__tests__', 'demo', 'figma', 'docs', '.coverage', 'stories']);
 
   // Check if current directory has an index.ts and is not in an excluded path
-  if (items.includes('index.ts')
-    && !basePath.includes('/demo')
-    && !basePath.includes('/figma')
-    && !basePath.includes('/stories')) {
+  if (
+    items.includes('index.ts') &&
+    !basePath.includes('/demo') &&
+    !basePath.includes('/figma') &&
+    !basePath.includes('/stories')
+  ) {
     entries.push(basePath || '.');
   }
 
@@ -41,11 +45,13 @@ function findEntryPoints(dir: string, basePath = ''): string[] {
     const fullPath = join(dir, item);
     const stat = statSync(fullPath);
 
-    if (stat.isDirectory()
-      && !EXCLUDED_DIRS.has(item)
-      && !basePath.includes('/demo')
-      && !basePath.includes('/figma')
-      && !basePath.includes('/stories')) {
+    if (
+      stat.isDirectory() &&
+      !EXCLUDED_DIRS.has(item) &&
+      !basePath.includes('/demo') &&
+      !basePath.includes('/figma') &&
+      !basePath.includes('/stories')
+    ) {
       const subPath = basePath ? `${basePath}/${item}` : item;
       entries.push(...findEntryPoints(fullPath, subPath));
     }
@@ -56,11 +62,14 @@ function findEntryPoints(dir: string, basePath = ''): string[] {
 
 /**
  * Convert directory path to export path (e.g., 'components/Button' -> './components/Button')
+ *
+ * @param dirPath
  */
 function dirPathToExportPath(dirPath: string): string {
   if (dirPath === '.') {
     return '.';
   }
+
   return `./${dirPath}`;
 }
 
@@ -124,7 +133,7 @@ function updatePackageJson(): void {
     delete pkg.publishConfig.directory;
   }
 
-  writeFileSync(PKG_PATH, JSON.stringify(pkg, null, 2) + '\n');
+  writeFileSync(PKG_PATH, `${JSON.stringify(pkg, null, 2)}\n`);
   console.log(`✓ Updated ${PKG_PATH}`);
   console.log(`✓ Generated ${Object.keys(exports).length} export paths`);
 }
