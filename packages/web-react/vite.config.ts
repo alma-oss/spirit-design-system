@@ -2,11 +2,13 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import { externalizeDeps } from 'vite-plugin-externalize-deps';
+import preserveDirectives from 'rollup-preserve-directives';
 import { getEntryPoints } from './scripts/generateExports';
 
 export default defineConfig({
   plugins: [
     react(),
+    preserveDirectives(),
     externalizeDeps({
       except: [], // Externalize all dependencies from package.json
     }),

@@ -315,6 +315,7 @@ __metadata:
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
     react-transition-group: "npm:^4.4.5"
+    rollup-preserve-directives: "npm:^1.1.3"
     sass-embedded: "npm:1.97.3"
     shx: "npm:0.4.0"
     storybook: "npm:10.2.7"
@@ -5583,6 +5584,13 @@ __metadata:
   version: 1.5.0
   resolution: "@jridgewell/sourcemap-codec@npm:1.5.0"
   checksum: 10/4ed6123217569a1484419ac53f6ea0d9f3b57e5b57ab30d7c267bdb27792a27eb0e4b08e84a2680aa55cc2f2b411ffd6ec3db01c44fdc6dc43aca4b55f8374fd
+  languageName: node
+  linkType: hard
+
+"@jridgewell/sourcemap-codec@npm:^1.5.5":
+  version: 1.5.5
+  resolution: "@jridgewell/sourcemap-codec@npm:1.5.5"
+  checksum: 10/5d9d207b462c11e322d71911e55e21a4e2772f71ffe8d6f1221b8eb5ae6774458c1d242f897fb0814e8714ca9a6b498abfa74dfe4f434493342902b1a48b33a5
   languageName: node
   linkType: hard
 
@@ -23459,6 +23467,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"magic-string@npm:^0.30.5":
+  version: 0.30.21
+  resolution: "magic-string@npm:0.30.21"
+  dependencies:
+    "@jridgewell/sourcemap-codec": "npm:^1.5.5"
+  checksum: 10/57d5691f41ed40d962d8bd300148114f53db67fadbff336207db10a99f2bdf4a1be9cac3a68ee85dba575912ee1d4402e4396408196ec2d3afd043b076156221
+  languageName: node
+  linkType: hard
+
 "make-dir@npm:4.0.0, make-dir@npm:^4.0.0":
   version: 4.0.0
   resolution: "make-dir@npm:4.0.0"
@@ -30046,6 +30063,17 @@ __metadata:
   dependencies:
     esprima: "npm:^2.1"
   checksum: 10/80eede64c79bcad354dab922c39c67a2467c40716f087444e7860d1565306e8fa73ed86734f5e3aa3b30e896d8c66c7bba0fbe9e98dcf1af847fe30f63122aa7
+  languageName: node
+  linkType: hard
+
+"rollup-preserve-directives@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "rollup-preserve-directives@npm:1.1.3"
+  dependencies:
+    magic-string: "npm:^0.30.5"
+  peerDependencies:
+    rollup: ^2.0.0 || ^3.0.0 || ^4.0.0
+  checksum: 10/0b4b8b21862b26a3dc79ad1f9b039e6a202569d34781fc2d2545f26a1e3b35573045a9aef285d7d347d582b56f767aac7611442e8873f4127bb66bc4e06ce54b
   languageName: node
   linkType: hard
 
