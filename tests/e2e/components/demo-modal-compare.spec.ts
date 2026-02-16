@@ -1,7 +1,7 @@
 /* eslint-disable no-console -- we want to log when test fails */
-import { isTesting as isTestingEnvironment } from '@alma-oss/spirit-common/constants/environments';
 import { test, Page } from '@playwright/test';
 import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot } from '../../helpers';
+import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
 
 type TestConfig = {
   componentsDir: string;
@@ -23,7 +23,7 @@ const runComponentCompareTests = ({ componentsDir, packageName, componentName }:
     test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page }: { page: Page }) => {
       try {
         const url = getServerUrl(packageName);
-        await page.goto(`${url}${componentsDir}/${componentName}/`);
+        await page.goto(normalizeUrl(url, componentsDir, componentName));
         await waitForPageLoad(page);
         await hideFromVisualTests(page);
         await runModalTests(page, componentName);

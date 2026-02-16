@@ -1,6 +1,7 @@
 /* eslint-disable no-console -- we want to log when test fails */
 import { test, Page, expect } from '@playwright/test';
 import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot } from '../../helpers';
+import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
 
 type TestConfig = {
   componentsDir: string;
@@ -18,7 +19,7 @@ const runComponentCompareTests = ({ componentsDir, packageName, componentName }:
       try {
         const url = getServerUrl(packageName);
         await page.setViewportSize({ width: 375, height: 812 });
-        await page.goto(`${url}${componentsDir}/${componentName}/`);
+        await page.goto(normalizeUrl(url, componentsDir, componentName));
         await waitForPageLoad(page);
         await hideFromVisualTests(page);
         await runHeaderTests(page, componentName);
