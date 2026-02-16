@@ -1,8 +1,8 @@
 /* eslint-disable no-console -- we want to log when test fails */
-import { isTesting as isTestingEnvironment } from '@alma-oss/spirit-common/constants/environments';
 import { test } from '@playwright/test';
 import { readdirSync } from 'fs';
 import { formatPackageName, getServerUrl, hideFromVisualTests, takeScreenshot, waitForPageLoad } from '../helpers';
+import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
 
 // Tests that are intentionally broken, but will be fixed in the future
 const IGNORED_TESTS: string[] = [];
@@ -31,7 +31,8 @@ const runComponentCompareTests = (testConfig: TestConfig) => {
         test(`test demo ${formattedPackageName} component ${component}`, async ({ page }) => {
           try {
             const url = getServerUrl(packageName);
-            await page.goto(`${url}${componentsDir}/${component}/`);
+            const fullUrl = normalizeUrl(url, componentsDir, component);
+            await page.goto(fullUrl);
             await waitForPageLoad(page);
             await hideFromVisualTests(page);
             await takeScreenshot(page, `${component}`, { fullPage: true });
