@@ -69,6 +69,7 @@ const entryPoints = [
   { dirs: ['components', 'Toggle'] },
   { dirs: ['components', 'Tooltip'] },
   { dirs: ['components', 'Truncate'] },
+  { dirs: ['components', 'UNSTABLE_FileUpload'] },
   { dirs: ['components', 'UNSTABLE_Header'] },
   { dirs: ['components', 'VisuallyHidden'] },
 ];
