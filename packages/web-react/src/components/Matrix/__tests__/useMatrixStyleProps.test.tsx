@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { MATRIX_ROWS_DEFAULT } from '../constant';
+import { MATRIX_ROWS_DEFAULT } from '../constants';
 import { useDefaultResponsiveRowsStyle, useMatrixStyleProps } from '../useMatrixStyleProps';
 
 describe('useMatrixStyleProps', () => {

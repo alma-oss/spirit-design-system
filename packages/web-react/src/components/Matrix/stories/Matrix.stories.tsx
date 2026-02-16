@@ -9,7 +9,7 @@ import {
   MATRIX_ROWS_DEFAULT,
   MATRIX_SPACING_X_DEFAULT,
   MATRIX_SPACING_Y_DEFAULT,
-} from '../constant';
+} from '../constants';
 import Matrix from '../Matrix';
 import ReadMe from '../README.md';
 
