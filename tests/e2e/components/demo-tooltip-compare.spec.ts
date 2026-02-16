@@ -1,5 +1,5 @@
 /* eslint-disable no-console -- we want to log when test fails */
-import { isTesting as isTestingEnvironment } from '@lmc-eu/spirit-common/constants/environments';
+import { isTesting as isTestingEnvironment } from '@alma-oss/spirit-common/constants/environments';
 import { test, Page, expect } from '@playwright/test';
 import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot } from '../../helpers';
 
