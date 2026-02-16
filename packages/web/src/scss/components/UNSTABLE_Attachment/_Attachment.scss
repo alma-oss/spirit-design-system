@@ -5,7 +5,7 @@
 @use '../../tools/typography';
 @use 'theme';
 
-.FileUploaderAttachment {
+.Attachment {
     @include typography.generate(theme.$attachment-typography);
 
     display: flex;
@@ -19,11 +19,11 @@
     background-color: theme.$attachment-background;
 }
 
-.FileUploaderAttachment--fluid {
+.Attachment--fluid {
     width: var(--file-uploader-attachment-width, 100%);
 }
 
-.FileUploaderAttachment__image {
+.Attachment__image {
     position: relative;
     width: 56px;
     height: 56px;
@@ -32,7 +32,7 @@
     border-radius: theme.$attachment-image-border-radius;
 }
 
-.FileUploaderAttachment__image > img {
+.Attachment__image > img {
     position: absolute;
     top: var(--file-uploader-attachment-image-top, 0);
     left: var(--file-uploader-attachment-image-left, 0);
@@ -42,19 +42,19 @@
     object-position: center;
 }
 
-.FileUploaderAttachment__name {
+.Attachment__name {
     display: grid;
     flex: 1;
 }
 
-.FileUploaderAttachment__slot {
+.Attachment__slot {
     display: flex;
     gap: theme.$attachment-column-gap;
     align-items: center;
     justify-content: space-between;
 }
 
-.FileUploaderAttachment__action {
+.Attachment__action {
     @include reset.button();
     @include accessibility.min-tap-target($size: theme.$attachment-tap-target-size);
 

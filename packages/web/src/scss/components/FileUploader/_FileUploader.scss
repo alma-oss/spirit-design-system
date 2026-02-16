@@ -5,5 +5,7 @@
 }
 
 .FileUploader--fluid {
+    --file-uploader-attachment-width: 100%;
+
     @include form-fields-tools.box-field-fluid();
 }

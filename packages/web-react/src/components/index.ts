@@ -59,5 +59,7 @@ export * from './Toast';
 export * from './Toggle';
 export * from './Tooltip';
 export * from './Truncate';
+export * from './UNSTABLE_Attachment';
+export * from './UNSTABLE_FileUpload';
 export * from './UNSTABLE_Header';
 export * from './VisuallyHidden';
