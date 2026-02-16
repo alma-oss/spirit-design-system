@@ -208,7 +208,51 @@ describe('useStyleUtilities hook', () => {
     const { result } = renderHook(() => useStyleUtilities(mockProps as unknown as StyleProps, ''));
 
     expect(result.current.styleUtilities).toEqual(['mx-desktop-300']);
-    expect(result.current.props).toEqual({});
+    expect(result.current.props).toEqual({ paddingX: '', paddingY: null });
+  });
+
+  it('should preserve non-style props with empty string values', () => {
+    const mockProps = {
+      margin: undefined,
+      paddingY: null,
+      paddingX: '',
+      marginX: {
+        mobile: null,
+        tablet: undefined,
+        desktop: 'space-300',
+      },
+      hideOn: undefined,
+      hideFrom: null,
+      value: '',
+      placeholder: '',
+    };
+
+    const { result } = renderHook(() => useStyleUtilities(mockProps as unknown as StyleProps, ''));
+
+    expect(result.current.styleUtilities).toEqual(['mx-desktop-300']);
+    expect(result.current.props).toEqual({ paddingX: '', paddingY: null, value: '', placeholder: '' });
+  });
+
+  it('should preserve all non-style props regardless of value', () => {
+    const mockProps = {
+      margin: 'space-100',
+      value: '',
+      name: 'test-input',
+      disabled: false,
+      placeholder: '',
+      'data-testid': 'my-component',
+    };
+
+    const { result } = renderHook(() => useStyleUtilities(mockProps as unknown as StyleProps, ''));
+
+    expect(result.current.styleUtilities).toEqual(['m-100']);
+    expect(result.current.props).toEqual({
+      value: '',
+      name: 'test-input',
+      disabled: false,
+      placeholder: '',
+      'data-testid': 'my-component',
+    });
   });
 
   it('should process hideOn utility with single breakpoint', () => {
@@ -275,5 +319,111 @@ describe('useStyleUtilities hook', () => {
       'test-prefix-d-only-desktop-none',
       'test-prefix-d-none',
     ]);
+  });
+
+  describe('padding props whitelist behavior', () => {
+    it('should not process padding props when not in additionalProps', () => {
+      const mockProps = {
+        padding: 'space-100',
+        marginTop: 'space-200',
+      } as unknown as StyleProps;
+      const { result } = renderHook(() => useStyleUtilities(mockProps));
+
+      // margin IS in default whitelist, should be processed
+      expect(result.current.styleUtilities).toContain('mt-200');
+
+      // padding is NOT in default whitelist, should NOT be processed
+      expect(result.current.styleUtilities).not.toContain('p-100');
+
+      // padding should be passed through as a regular prop
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((result.current.props as Record<string, any>).padding).toBe('space-100');
+    });
+
+    it('should not process any padding variant props when not whitelisted', () => {
+      const mockProps = {
+        paddingX: 'space-100',
+        paddingY: 'space-200',
+        paddingTop: 'space-300',
+        paddingBottom: 'space-400',
+        paddingLeft: 'space-500',
+        paddingRight: 'space-600',
+        marginTop: 'space-700',
+      } as unknown as StyleProps;
+      const { result } = renderHook(() => useStyleUtilities(mockProps));
+
+      // margin should be processed (in default whitelist)
+      expect(result.current.styleUtilities).toContain('mt-700');
+
+      // none of the padding props should be processed
+      expect(result.current.styleUtilities).not.toContain('px-100');
+      expect(result.current.styleUtilities).not.toContain('py-200');
+      expect(result.current.styleUtilities).not.toContain('pt-300');
+      expect(result.current.styleUtilities).not.toContain('pb-400');
+      expect(result.current.styleUtilities).not.toContain('pl-500');
+      expect(result.current.styleUtilities).not.toContain('pr-600');
+
+      // all padding props should be passed through
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const restProps = result.current.props as Record<string, any>;
+      expect(restProps.paddingX).toBe('space-100');
+      expect(restProps.paddingY).toBe('space-200');
+      expect(restProps.paddingTop).toBe('space-300');
+      expect(restProps.paddingBottom).toBe('space-400');
+      expect(restProps.paddingLeft).toBe('space-500');
+      expect(restProps.paddingRight).toBe('space-600');
+    });
+
+    it('should process padding props when explicitly whitelisted via additionalProps', () => {
+      const mockProps = {
+        padding: 'space-100',
+        marginTop: 'space-200',
+      } as unknown as StyleProps;
+
+      // Simulate Box component behavior - explicitly whitelist padding
+      const additionalProps = {
+        padding: 'p',
+        paddingX: 'px',
+        paddingY: 'py',
+        paddingTop: 'pt',
+        paddingBottom: 'pb',
+        paddingLeft: 'pl',
+        paddingRight: 'pr',
+      };
+
+      const { result } = renderHook(() => useStyleUtilities(mockProps, '', additionalProps));
+
+      // Both margin and padding should be processed
+      expect(result.current.styleUtilities).toContain('mt-200');
+      expect(result.current.styleUtilities).toContain('p-100');
+
+      // Processed props should NOT be in restProps
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((result.current.props as Record<string, any>).padding).toBeUndefined();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((result.current.props as Record<string, any>).marginTop).toBeUndefined();
+    });
+
+    it('should handle responsive padding props correctly when not whitelisted', () => {
+      const mockProps = {
+        padding: { mobile: 'space-100', tablet: 'space-200' },
+        marginTop: { mobile: 'space-300' },
+      } as unknown as StyleProps;
+      const { result } = renderHook(() => useStyleUtilities(mockProps));
+
+      // margin should be processed
+      expect(result.current.styleUtilities).toContain('mt-300');
+
+      // padding should NOT be processed (not in default whitelist)
+      expect(result.current.styleUtilities).not.toContain('p-100');
+      expect(result.current.styleUtilities).not.toContain('p-tablet-200');
+
+      // padding should be passed through unchanged
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((result.current.props as Record<string, any>).padding).toEqual({
+        mobile: 'space-100',
+        tablet: 'space-200',
+      });
+    });
   });
 });

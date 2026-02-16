@@ -148,7 +148,7 @@ const processDisplayProperties = (
 /**
  * Process the properties.
  *
- * @param {keyof typeof DefaultSpacingStyleProp | keyof typeof DisplayStyleProps} utilityKey - The utility key.
+ * @param {keyof typeof DefaultSpacingStyleProp | keyof typeof DisplayStyleProps | keyof typeof ThemeStyleProps} utilityKey - The utility key.
  * @param {UtilityName} utilityName - The utility name.
  * @param {string | BreakpointPropValue | BreakpointToken | BreakpointToken[]} propValue - The prop value.
  * @param {ClassNamePrefix} prefix - The prefix.
@@ -196,11 +196,18 @@ type IsStylePropProcessableOptions = {
 };
 
 /**
- * Check if style prop is ready to be processed, i.e. the key exists and the value is not `null`.
- * If the key is a style prop and the value is not `null`, process the properties.
+ * Check if a style prop should be processed based on key presence and value emptiness.
  *
- * Beware of the disabling style prop using `undefined` value.
- * Setting the value conditionally in the React is not that simple.
+ * When `includesKey` is `true` (default): Returns `true` if the key exists in styleProps
+ * AND the value is not empty (using `isEmpty()` check for null, undefined, empty strings,
+ * empty arrays, empty objects).
+ *
+ * When `includesKey` is `false`: Returns `true` if the key does NOT exist in styleProps.
+ * Used to filter non-style props that should pass through to the component. Skips emptiness
+ * checks entirely in this mode.
+ *
+ * Beware of disabling style props using `undefined` value.
+ * Setting the value conditionally in React is not that simple.
  *
  * @example
  * ```diff
@@ -209,10 +216,10 @@ type IsStylePropProcessableOptions = {
  * ```
  * @param {PropsShape} styleProps - The style props object.
  * @param {string} stylePropKey - The style prop key.
- * @param {NullableString} stylePropValue - The style prop value.
- * @param {IsStylePropProcessableOptions} options - The options object
- * @param {boolean} options.includesKey - The flag to check if the key should be included in the styleProp or not.
- * @returns {boolean} - `true` if the style prop is processable, `false` otherwise.
+ * @param {NullableString} stylePropValue - The style prop value (can be string, boolean, object, array, null, undefined).
+ * @param {IsStylePropProcessableOptions} options - The options object.
+ * @param {boolean} options.includesKey - When true, checks if key is in styleProps and value is not empty. When false, checks if key is NOT in styleProps (no emptiness check).
+ * @returns {boolean} - `true` if the style prop should be processed, `false` otherwise.
  */
 const isStylePropProcessable = (
   styleProps: PropsShape,
@@ -221,10 +228,12 @@ const isStylePropProcessable = (
   options: IsStylePropProcessableOptions = { includesKey: true },
 ): boolean => {
   const isStylePropKeyIncluded = isKeyIncluded(styleProps, stylePropKey);
-  const isProcessable =
-    (options.includesKey ? isStylePropKeyIncluded : !isStylePropKeyIncluded) && !isEmpty(stylePropValue);
 
-  return isProcessable;
+  if (options.includesKey) {
+    return isStylePropKeyIncluded && !isEmpty(stylePropValue);
+  }
+
+  return !isStylePropKeyIncluded;
 };
 
 export const useStyleUtilities = (
