@@ -4,6 +4,10 @@ export const defaultLabels = {
     edit: 'Edit',
     remove: 'Remove',
   },
+  attachment: {
+    edit: 'Edit',
+    remove: 'Remove',
+  },
   breadcrumbs: {
     back: 'Go back',
   },

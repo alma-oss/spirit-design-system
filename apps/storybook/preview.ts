@@ -25,6 +25,7 @@ export const parameters = {
     expanded: true,
     sort: 'alpha',
     hideNoControlsWarning: true,
+    disableSaveFromUI: true // Disable the "save story" button in the UI. It is overlapping with the last row of controls.
   },
   docs: {
     theme: SpiritTheme,
