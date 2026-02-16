@@ -10,7 +10,7 @@ import {
   MATRIX_ROWS_DEFAULT,
   MATRIX_SPACING_X_DEFAULT,
   MATRIX_SPACING_Y_DEFAULT,
-} from './constant';
+} from './constants';
 import { useMatrixStyleProps } from './useMatrixStyleProps';
 
 const defaultProps: Partial<SpiritMatrixProps> = {

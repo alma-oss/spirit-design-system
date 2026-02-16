@@ -4,7 +4,7 @@ import { type CSSProperties, type ElementType } from 'react';
 import { DirectionAxis } from '../../constants';
 import { type DimensionCSSProperties, useClassNamePrefix, useDimensionStyle, useSpacingStyle } from '../../hooks';
 import { type DimensionType, type SpiritMatrixProps } from '../../types';
-import { MATRIX_ROWS_DEFAULT } from './constant';
+import { MATRIX_ROWS_DEFAULT } from './constants';
 
 export interface MatrixStyles<T> {
   /** className props */
