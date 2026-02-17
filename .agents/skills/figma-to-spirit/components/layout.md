@@ -137,6 +137,18 @@ When Figma shows children with `w-full` or `shrink-0 w-full`, parent must use `a
    <Flex spacing="space-800" />
    ```
 
+6. Guessing spacing instead of reading it from the design context response
+
+   The `get_design_context` response includes the real gap for each layout element (e.g. Tailwind `className` with `gap-[var(--global/spacing/space-700,16px)]` or `gap-[var(--global\/spacing\/space-700,16px)]`). Extract the token (e.g. `space-700`) from that response and use it for the corresponding Flex. Do not substitute a "typical" value like `space-800` when the design context clearly shows `space-700`.
+
+   ```jsx
+   // WRONG - design context shows gap space-700 for Content frame
+   <Flex direction="vertical" alignmentX="left" spacing="space-800">
+
+   // CORRECT - use the gap token from the design context response
+   <Flex direction="vertical" alignmentX="left" spacing="space-700">
+   ```
+
 #### Missing Padding When Figma Shows It on the Layer
 
 Always check Figma for padding values (`pr`, `pl`, `pt`, `pb`, `px`, `py`). When a Flex needs padding, use `Flex elementType={Box}`:
@@ -419,6 +431,7 @@ Neutral container for visual styling (background, border, padding) without layou
 - When you need spacing between child items - use layout components
 - When you need alignment control - use [Flex](#flex) or [Grid](#grid)
 - For semantic grouping - use semantic HTML elements
+- **Wrapping form controls (TextField, etc.) in Box with custom flex/width** unless Figma explicitly shows a custom width—use the component's default width
 
 ### API Reference
 
@@ -487,6 +500,26 @@ Neutral container for visual styling (background, border, padding) without layou
    <Box backgroundColor="accent-01-subtle" />
    // or
    <Box backgroundColor="accent-02-subtle" />
+   ```
+
+4. Wrapping form controls in Box with custom flex/width
+
+   Do not wrap TextField (or other form controls) in a Box with `UNSAFE_style` for flex/width unless Figma explicitly shows a custom width for that control. Use the component's default width.
+
+   ```jsx
+   // WRONG - unnecessary Box wrapper with custom flex
+   <Flex direction="horizontal" alignmentY="center" spacing="space-600">
+     <Box UNSAFE_style={{ minWidth: 0, flex: "1 1 200px" }}>
+       <TextField id="input-1" label="Email" isLabelHidden size="large" placeholder="Placeholder" />
+     </Box>
+     <Button size="large">Button</Button>
+   </Flex>
+
+   // CORRECT - use default TextField width
+   <Flex direction="horizontal" alignmentY="center" spacing="space-600">
+     <TextField id="input-1" label="Email" isLabelHidden size="large" placeholder="Placeholder" />
+     <Button size="large">Button</Button>
+   </Flex>
    ```
 
 #### Missing Padding From Figma Layer
@@ -588,6 +621,16 @@ Semantic content block for main page sections with optional background styling.
 - For consistent vertical padding between page areas
 - Figma layer named "Design Block" or similar
 
+### CRITICAL: Multiple Container Layers in Figma
+
+When Figma has **two or more Container layers** inside a section (e.g. "Container Medium", "Container XLarge"):
+
+1. Set **`hasContainer={false}`** on Section so it does not render its default single container.
+2. Render **that many `Container` components** as children (typically inside a Flex for vertical stacking and spacing).
+3. Set each Container's **`size`** from the Figma layer name: e.g. "Container Medium" → `size="medium"`, "Container XLarge" → `size="xlarge"`. Valid sizes: `xsmall`, `small`, `medium`, `large`, `xlarge`.
+
+Do not use a single Section with default container when the design has multiple Container layers.
+
 ### When NOT to Use
 
 - For small content groupings - use [Box](#box) or Card
@@ -620,23 +663,27 @@ Semantic content block for main page sections with optional background styling.
 
 ### Common Mistakes
 
-1. **Nesting Container inside Section**
+1. Nesting a single Container inside Section (when Section has default hasContainer)
+
+   When Section uses its default container (one inner Container), do not add another Container.
 
    ```jsx
-   // WRONG - Section already includes Container
+   // WRONG - Section already includes one Container
    <Section>
      <Container>
        <Content />
      </Container>
    </Section>
 
-   // CORRECT
+   // CORRECT - one container: use Section's default
    <Section>
      <Content />
    </Section>
    ```
 
-2. **Not using containerProps for Container sizing**
+   **Exception:** When Figma has **multiple** Container layers, use `hasContainer={false}` and render that many `Container` components (see "CRITICAL: Multiple Container Layers in Figma" above).
+
+2. **Not using containerProps for Container sizing (when Section has a single container)**
 
    ```jsx
    // WRONG
@@ -650,6 +697,21 @@ Semantic content block for main page sections with optional background styling.
    <Section containerProps={{ size: "medium" }}>
      <Content />
    </Section>
+   ```
+
+3. Using a container size that does not match the Figma layer name
+
+   The Container `size` in `containerProps` must come from the **Figma layer name**. If the layer is named "Container XLarge", use `size: "xlarge"`; if "Container Medium", use `size: "medium"`. **When the layer is "Container XLarge", omit `containerProps` entirely**—xlarge is the default Container size.
+
+   ```jsx
+   // WRONG - Figma layer is named "Container XLarge" but medium was used
+   <Section size="xlarge" containerProps={{ size: "medium" }}>
+
+   // CORRECT - "Container XLarge" is the default, so omit containerProps
+   <Section size="xlarge">
+
+   // CORRECT - "Container Medium" in Figma → set size explicitly
+   <Section size="xlarge" containerProps={{ size: "medium" }}>
    ```
 
 ### Examples
@@ -675,6 +737,20 @@ Semantic content block for main page sections with optional background styling.
 <Section hasContainer={false} backgroundColor="primary">
   <FullWidthComponent />
 </Section>
+
+// Section with multiple Container layers (from Figma)
+<Section hasContainer={false} size="xlarge" textAlignment="center">
+  <Flex direction="vertical" spacing="space-1000" alignmentX="center">
+    <Container size="medium" textAlignment="center">
+      <Tag>Label</Tag>
+      <Heading elementType="h1">Title</Heading>
+      <Text>Intro text</Text>
+    </Container>
+    <Container size="xlarge">
+      <Grid cols={4}>...</Grid>
+    </Container>
+  </Flex>
+</Section>
 ```
 
 ---
@@ -685,13 +761,14 @@ Responsive content wrapper that centers content and constrains width.
 
 ### When to Use
 
-- **Usually via Section's `containerProps`** - rarely used directly
+- **Usually via Section's `containerProps`** - when the section has a single container
+- **When Figma has multiple Container layers**: use Section `hasContainer={false}` and render multiple `Container` components with `size` from each layer name (e.g. "Container Medium" → `size="medium"`)
 - When you need an independent container without Section semantics
 - For constraining content width in custom layouts
 
 ### When NOT to Use
 
-- Inside Section - use `containerProps` instead
+- Inside Section when Section has only one container - use `containerProps` instead (do not nest one Container inside Section)
 - For semantic grouping - use [Section](#section)
 - For visual styling - use [Box](#box)
 
