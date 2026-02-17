@@ -4,6 +4,22 @@ Spirit typography components for consistent text rendering. These components do 
 
 > **This documentation is the primary reference.** Use the API tables and examples below. Only use Context7 MCP for components not documented here.
 
+## CRITICAL: Figma Text Style → Spirit Component
+
+**Always choose the Spirit component from the Figma text style name.** Do not use visual appearance alone.
+
+| Figma text style                                           | Spirit component |
+| ---------------------------------------------------------- | ---------------- |
+| **Heading\*** (e.g. Heading/Large/Bold)                    | `Heading`        |
+| **Body\*** (e.g. Body/Medium/Semibold, Body/Small/Regular) | `Text`           |
+
+- **Heading\*** text style ⇒ use **Heading** component (with appropriate `elementType`: h1–h6 for semantic headings, div/span for decorative).
+- **Figma Heading style name** is `Heading/[Size]/[Emphasis]` → map to Spirit `size` and optionally `emphasis`. Example: **Heading/Large/Bold** → `<Heading size="large">` (omit `emphasis="bold"`—it is the default). **Heading/XLarge/Bold** → `size="xlarge"`. Use the exact size from the style name (Large → `large`, XLarge → `xlarge`, etc.).
+- **Body\*** text style ⇒ use **Text** component (never use Heading for Body styles, even if the text is bold or prominent).
+- **Figma Body style name** is `Body/[Size]/[Emphasis]` → map to Spirit `size` and optionally `emphasis`. Example: **Body/Small/Regular** → `<Text size="small">` (omit emphasis if Regular is the default). **Body/Medium/Semibold** → `<Text size="medium" emphasis="semibold">`. Use the exact size from the style name (Small → `small`, Medium → `medium`, etc.); do not use `xsmall` for Body/Small.
+
+Example: Figma "Body/Medium/Semibold" for a person's name → use `<Text size="medium" emphasis="semibold">`, not Heading.
+
 ## Quick Reference: Text Colors
 
 | Figma Color           | Spirit textColor                                               |
@@ -62,6 +78,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
 ### When NOT to Use
 
+- For **Body\*** Figma text styles (e.g. Body/Medium/Semibold) - use [Text](#text), not Heading
 - For body text or paragraphs - use [Text](#text)
 - For decorative text that looks like a heading but isn't semantically one - use Heading with `elementType="div"`
 - For button or link labels - use Button or Link components
@@ -82,7 +99,19 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
 ### Common Mistakes
 
-1. **Using h1-h6 for non-heading styled text**
+1. Using Heading for Figma Body\* text styles
+
+   Figma text style determines the component. Body/Medium/Semibold (and any Body\* style) must use Text, not Heading.
+
+   ```jsx
+   // WRONG - Figma shows "Body/Medium/Semibold" for member name
+   <Heading elementType="div" size="medium" emphasis="bold">{member.name}</Heading>
+
+   // CORRECT - Body* style => Text component
+   <Text size="medium" emphasis="semibold">{member.name}</Text>
+   ```
+
+2. **Using h1-h6 for non-heading styled text**
 
    ```jsx
    // WRONG - Statistics numbers are not actual headings
@@ -94,7 +123,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
    <Text size="small" textColor="secondary">Active Users</Text>
    ```
 
-2. **Skipping heading levels**
+3. **Skipping heading levels**
 
    ```jsx
    // WRONG - h1 directly to h3 breaks accessibility
@@ -107,9 +136,21 @@ Utility component for rendering consistent typographic hierarchy and semantic he
    <Heading elementType="h3">Subsection</Heading>
    ```
 
+4. Using the wrong Heading size (not matching Figma text style)
+
+   The Heading `size` must match the **Figma text style name**. Heading/Large/Bold → `size="large"`; Heading/XLarge/Bold → `size="xlarge"`. Do not guess from visual appearance.
+
+   ```jsx
+   // WRONG - Figma text style is Heading/Large/Bold
+   <Heading elementType="h1" size="xlarge">Spirit simplifies your daily tasks.</Heading>
+
+   // CORRECT - size from Figma style name (Bold is default, omit emphasis)
+   <Heading elementType="h1" size="large">Spirit simplifies your daily tasks.</Heading>
+   ```
+
 #### Forgetting MarginBottom="space-0" on Non-Last-Child Elements in Layout Components
 
-**CRITICAL**: Only add `marginBottom="space-0"` to elements that have siblings AFTER them. Last-child elements don't need it since there's nothing after them that would be affected by the margin.
+**CRITICAL**: Only add `marginBottom="space-0"` to elements that have siblings AFTER them. Last-child elements don't need it since there's nothing after them that would be affected by the margin. Do not add `marginBottom="space-0"` on the last child in a Flex/Stack/Grid—it is unnecessary.
 
 ```jsx
 // WRONG - default margin on non-last element interferes with Flex spacing
@@ -277,7 +318,19 @@ Utility component for rendering consistent typography for body content and inlin
    </Flex>
    ```
 
-2. **Using textAlignment when parent alignment is better**
+2. Using the wrong Text size (not matching Figma text style)
+
+   The Text `size` must match the **Figma Body style name**. Body/Small/Regular → `size="small"`; Body/Medium/Regular → `size="medium"`. Do not use `xsmall` for Body/Small.
+
+   ```jsx
+   // WRONG - Figma text style is Body/Small/Regular
+   <Text size="xsmall" textColor="tertiary">By clicking Sign Up...</Text>
+
+   // CORRECT - size from Figma style name (Regular is default, omit emphasis)
+   <Text size="small" textColor="tertiary">By clicking Sign Up...</Text>
+   ```
+
+3. **Using textAlignment when parent alignment is better**
 
    ```jsx
    // LESS IDEAL - each Text has textAlignment
@@ -295,7 +348,7 @@ Utility component for rendering consistent typography for body content and inlin
    </Section>
    ```
 
-3. **Using wrong elementType for semantic meaning**
+4. **Using wrong elementType for semantic meaning**
 
    ```jsx
    // WRONG - using <p> for inline text
