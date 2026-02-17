@@ -10,7 +10,7 @@ import React, {
   useRef,
 } from 'react';
 import { useCancelEvent, useClickOutside } from '../../hooks';
-import { type DialogProps } from '../../types';
+import { type DialogProps, type ForwardRefComponent } from '../../types';
 import { useDialog } from './useDialog';
 
 const _Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>): JSX.Element => {
@@ -71,7 +71,10 @@ const _Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>
   );
 };
 
-const Dialog = forwardRef<HTMLDialogElement | null, DialogProps>(_Dialog);
+const Dialog = forwardRef<HTMLDialogElement | null, DialogProps>(_Dialog) as ForwardRefComponent<
+  HTMLDialogElement | null,
+  DialogProps
+>;
 
 Dialog.spiritComponent = 'Dialog';
 Dialog.displayName = 'Dialog';

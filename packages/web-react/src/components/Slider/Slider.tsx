@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React, { type CSSProperties, type ChangeEvent, type FormEvent, type ForwardedRef, forwardRef } from 'react';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { type SpiritSliderProps } from '../../types';
+import { type ForwardRefComponent, type SpiritSliderProps } from '../../types';
 import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { SLIDER_DEFAULT_PROPS } from './constants';
@@ -94,8 +94,12 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
   );
 };
 
-const Slider = forwardRef<HTMLInputElement, SpiritSliderProps>(_Slider);
+const Slider = forwardRef<HTMLInputElement, SpiritSliderProps>(_Slider) as ForwardRefComponent<
+  HTMLInputElement,
+  SpiritSliderProps
+>;
 
 Slider.spiritComponent = 'Slider';
+Slider.displayName = 'Slider';
 
 export default Slider;

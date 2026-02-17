@@ -2,7 +2,7 @@
 
 import React, { type ElementType, type ForwardedRef, forwardRef } from 'react';
 import { useI18n } from '../../hooks';
-import { type SpiritPaginationButtonLinkProps } from '../../types';
+import { type ForwardRefComponent, type SpiritPaginationButtonLinkProps } from '../../types';
 import { ButtonLink } from '../Button';
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
@@ -29,8 +29,11 @@ const _PaginationButtonLink = <E extends ElementType = 'a'>(
   );
 };
 
-const PaginationButtonLink = forwardRef<HTMLAnchorElement, SpiritPaginationButtonLinkProps>(_PaginationButtonLink);
+const PaginationButtonLink = forwardRef<HTMLAnchorElement, SpiritPaginationButtonLinkProps>(
+  _PaginationButtonLink,
+) as ForwardRefComponent<HTMLAnchorElement, SpiritPaginationButtonLinkProps>;
 
 PaginationButtonLink.spiritComponent = 'PaginationButtonLink';
+PaginationButtonLink.displayName = 'PaginationButtonLink';
 
 export default PaginationButtonLink;

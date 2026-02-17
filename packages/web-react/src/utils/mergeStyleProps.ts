@@ -1,5 +1,6 @@
-import { type CSSProperties, type HTMLAttributes } from 'react';
+import { type CSSProperties, type ElementType, type HTMLAttributes } from 'react';
 import { type ElementTypeProp } from '../types';
+import { type ComponentStaticProps } from '../types/shared/polymorphic';
 
 type MergedStyleProps = {
   className?: string;
@@ -23,6 +24,17 @@ type StylePropValue =
 type StyleProp = Record<string, StylePropValue>;
 
 /**
+ * Type guard to check if a component is a Spirit component.
+ * Spirit components have the `spiritComponent` static property.
+ *
+ * @param elementTag - The element type to check
+ * @returns {boolean} true if the tag is a Spirit component with ComponentStaticProps
+ */
+function hasSpiritComponent(elementTag: ElementTypeProp): elementTag is ElementType & ComponentStaticProps {
+  return typeof elementTag !== 'string' && elementTag !== null && 'spiritComponent' in (elementTag as object);
+}
+
+/**
  * Merges class names, styles, and CSS variables from the given properties
  * and determines whether to use standard (`className`, `style`) or unsafe
  * (`UNSAFE_className`, `UNSAFE_style`) attributes based on the component type.
@@ -32,7 +44,7 @@ type StyleProp = Record<string, StylePropValue>;
  * @returns {MergedStyleProps} An object containing either `{ className, style }` or `{ UNSAFE_className, UNSAFE_style }`.
  */
 export function mergeStyleProps(ElementTag: ElementTypeProp, styleProps: StyleProp): MergedStyleProps {
-  const isSpiritComponent = typeof ElementTag !== 'string' && !!ElementTag?.spiritComponent;
+  const isSpiritComponent = hasSpiritComponent(ElementTag);
 
   const isNonNullableObject = (styleProp: StylePropValue): styleProp is StyleProp =>
     typeof styleProp === 'object' && styleProp !== null;

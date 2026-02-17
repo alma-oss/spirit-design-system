@@ -4,7 +4,11 @@ import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { Sizes } from '../../constants';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { type SpiritTextFieldBaseProps, type TextFieldBasePasswordToggleProps } from '../../types';
+import {
+  type ForwardRefComponent,
+  type SpiritTextFieldBaseProps,
+  type TextFieldBasePasswordToggleProps,
+} from '../../types';
 import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import TextFieldBaseInput from './TextFieldBaseInput';
@@ -68,8 +72,11 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
   );
 };
 
-const TextFieldBase = forwardRef<HTMLInputElement | HTMLTextAreaElement, SpiritTextFieldBaseProps>(_TextFieldBase);
+const TextFieldBase = forwardRef<HTMLInputElement | HTMLTextAreaElement, SpiritTextFieldBaseProps>(
+  _TextFieldBase,
+) as ForwardRefComponent<HTMLInputElement | HTMLTextAreaElement, SpiritTextFieldBaseProps>;
 
 TextFieldBase.spiritComponent = 'TextFieldBase';
+TextFieldBase.displayName = 'TextFieldBase';
 
 export default TextFieldBase;

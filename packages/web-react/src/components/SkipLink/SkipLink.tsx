@@ -2,7 +2,7 @@
 
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type PolymorphicRef, type SpiritSkipLinkProps } from '../../types';
+import { type PolymorphicComponent, type PolymorphicRef, type SpiritSkipLinkProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useSkipLinkStyleProps } from './useSkipLinkStyleProps';
 
@@ -29,8 +29,11 @@ const _SkipLink = <E extends ElementType = 'a'>(props: SpiritSkipLinkProps<E>, r
   );
 };
 
-const SkipLink = forwardRef<HTMLAnchorElement, SpiritSkipLinkProps<ElementType>>(_SkipLink);
+const SkipLink = forwardRef<HTMLAnchorElement, SpiritSkipLinkProps<ElementType>>(
+  _SkipLink,
+) as unknown as PolymorphicComponent<'a', SpiritSkipLinkProps<ElementType>>;
 
 SkipLink.spiritComponent = 'SkipLink';
+SkipLink.displayName = 'SkipLink';
 
 export default SkipLink;

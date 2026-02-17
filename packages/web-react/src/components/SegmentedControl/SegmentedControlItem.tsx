@@ -1,13 +1,13 @@
 'use client';
 
 import classNames from 'classnames';
-import React, { forwardRef } from 'react';
+import React, { type ForwardedRef, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type SpiritSegmentedControlItemProps } from '../../types/segmentedControl';
+import { type ForwardRefComponent, type SpiritSegmentedControlItemProps } from '../../types';
 import { useSegmentedControlContext } from './SegmentedControlContext';
 import { type UseSegmentedControlStylesProps, useSegmentedControlStyleProps } from './useSegmentedControlStyleProps';
 
-const SegmentedControlItem = forwardRef<HTMLLabelElement, SpiritSegmentedControlItemProps>((props, ref) => {
+const _SegmentedControlItem = (props: SpiritSegmentedControlItemProps, ref: ForwardedRef<HTMLLabelElement>) => {
   const { isMultiselect, name, onSelectionChange, selectedValue, setSelectedValue } = useSegmentedControlContext();
   const { id, isDisabled, value, children, ...restProps } = props as SpiritSegmentedControlItemProps;
   const { classProps, props: modifiedProps } = useSegmentedControlStyleProps(
@@ -57,7 +57,11 @@ const SegmentedControlItem = forwardRef<HTMLLabelElement, SpiritSegmentedControl
       </label>
     </>
   );
-});
+};
+
+const SegmentedControlItem = forwardRef<HTMLLabelElement, SpiritSegmentedControlItemProps>(
+  _SegmentedControlItem,
+) as ForwardRefComponent<HTMLLabelElement, SpiritSegmentedControlItemProps>;
 
 SegmentedControlItem.spiritComponent = 'SegmentedControlItem';
 SegmentedControlItem.displayName = 'SegmentedControlItem';

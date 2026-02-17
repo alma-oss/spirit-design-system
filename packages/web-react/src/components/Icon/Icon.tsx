@@ -2,7 +2,7 @@
 
 import React, { type ForwardedRef, type ReactElement, forwardRef } from 'react';
 import { useIcon, useStyleProps } from '../../hooks';
-import { type SpiritIconProps } from '../../types';
+import { type ForwardRefComponent, type SpiritIconProps } from '../../types';
 import { htmlReactParser, mergeStyleProps } from '../../utils';
 import { DEFAULT_BOX_SIZE } from './constants';
 import { useIconBoxSize } from './useIconBoxSize';
@@ -49,7 +49,7 @@ const _Icon = (props: SpiritIconProps, ref: ForwardedRef<SVGSVGElement>): ReactE
   );
 };
 
-const Icon = forwardRef<SVGSVGElement, SpiritIconProps>(_Icon);
+const Icon = forwardRef<SVGSVGElement, SpiritIconProps>(_Icon) as ForwardRefComponent<SVGSVGElement, SpiritIconProps>;
 
 Icon.spiritComponent = 'Icon';
 Icon.displayName = 'Icon';

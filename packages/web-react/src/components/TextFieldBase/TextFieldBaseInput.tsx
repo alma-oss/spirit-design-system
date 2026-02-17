@@ -2,7 +2,7 @@
 
 import React, { type ElementType, type ForwardedRef, type RefObject, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type SpiritTextFieldBaseInputProps } from '../../types';
+import { type ForwardRefComponent, type SpiritTextFieldBaseInputProps } from '../../types';
 import { useTextFieldBaseInputStyleProps } from './useTextFieldBaseInputStyleProps';
 
 const _TextFieldBaseInput = (
@@ -13,11 +13,11 @@ const _TextFieldBaseInput = (
   const { id, isDisabled, isMultiline, isRequired, inputWidth, type, ...restProps } = modifiedProps;
   const { props: otherProps } = useStyleProps(restProps);
 
-  const ElementType: ElementType = isMultiline ? 'textarea' : 'input';
+  const Component: ElementType = isMultiline ? 'textarea' : 'input';
   const inputType = isMultiline ? undefined : type;
 
   return (
-    <ElementType
+    <Component
       {...otherProps}
       className={classProps.input}
       disabled={isDisabled}
@@ -32,8 +32,9 @@ const _TextFieldBaseInput = (
 
 const TextFieldBaseInput = forwardRef<HTMLInputElement | HTMLTextAreaElement, SpiritTextFieldBaseInputProps>(
   _TextFieldBaseInput,
-);
+) as unknown as ForwardRefComponent<HTMLInputElement | HTMLTextAreaElement, SpiritTextFieldBaseInputProps>;
 
 TextFieldBaseInput.spiritComponent = 'TextFieldBaseInput';
+TextFieldBaseInput.displayName = 'TextFieldBaseInput';
 
 export default TextFieldBaseInput;

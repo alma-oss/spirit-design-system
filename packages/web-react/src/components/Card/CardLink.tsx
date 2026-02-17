@@ -2,7 +2,7 @@
 
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type PolymorphicRef, type SpiritCardLinkProps } from '../../types';
+import { type PolymorphicComponent, type PolymorphicRef, type SpiritCardLinkProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useCardStyleProps } from './useCardStyleProps';
 
@@ -29,8 +29,12 @@ const _CardLink = <E extends ElementType = 'a'>(props: SpiritCardLinkProps<E>, r
   );
 };
 
-const CardLink = forwardRef<HTMLAnchorElement, SpiritCardLinkProps<ElementType>>(_CardLink);
+const CardLink = forwardRef<HTMLAnchorElement, SpiritCardLinkProps<'a'>>(_CardLink) as unknown as PolymorphicComponent<
+  'a',
+  SpiritCardLinkProps<'a'>
+>;
 
 CardLink.spiritComponent = 'CardLink';
+CardLink.displayName = 'CardLink';
 
 export default CardLink;
