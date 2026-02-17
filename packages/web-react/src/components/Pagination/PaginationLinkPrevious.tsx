@@ -2,7 +2,7 @@
 
 import React, { type ElementType, type ForwardedRef, forwardRef } from 'react';
 import { useI18n } from '../../hooks';
-import { type SpiritPaginationLinkPreviousNextProps } from '../../types';
+import { type ForwardRefComponent, type SpiritPaginationLinkPreviousNextProps } from '../../types';
 import PaginationButtonLink from './PaginationButtonLink';
 
 const _PaginationLinkPrevious = <E extends ElementType = 'a'>(
@@ -17,8 +17,9 @@ const _PaginationLinkPrevious = <E extends ElementType = 'a'>(
 
 const PaginationLinkPrevious = forwardRef<HTMLAnchorElement, SpiritPaginationLinkPreviousNextProps>(
   _PaginationLinkPrevious,
-);
+) as ForwardRefComponent<HTMLAnchorElement, SpiritPaginationLinkPreviousNextProps>;
 
 PaginationLinkPrevious.spiritComponent = 'PaginationLinkPrevious';
+PaginationLinkPrevious.displayName = 'PaginationLinkPrevious';
 
 export default PaginationLinkPrevious;

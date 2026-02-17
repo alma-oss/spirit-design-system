@@ -2,6 +2,7 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { AlignmentX } from '../../../constants';
+import { type DrawerPanelProps } from '../../../types';
 import Drawer from '../Drawer';
 import DrawerCloseButton from '../DrawerCloseButton';
 import DrawerPanel from '../DrawerPanel';
@@ -39,16 +40,20 @@ type Story = StoryObj<typeof DrawerPanel>;
 
 export const DrawerPanelPlayground: Story = {
   name: 'DrawerPanel',
-  render: (args) => (
-    <Drawer
-      alignmentX={AlignmentX.RIGHT}
-      id="drawer-panel-demo"
-      isOpen
-      onClose={() => {}}
-      closeOnBackdropClick={false}
-      closeOnEscapeKeyDown={false}
-    >
-      <DrawerPanel elementType={args.elementType}>{args.children}</DrawerPanel>
-    </Drawer>
-  ),
+  render: (args) => {
+    const { elementType, children } = args as Partial<DrawerPanelProps>;
+
+    return (
+      <Drawer
+        alignmentX={AlignmentX.RIGHT}
+        id="drawer-panel-demo"
+        isOpen
+        onClose={() => {}}
+        closeOnBackdropClick={false}
+        closeOnEscapeKeyDown={false}
+      >
+        <DrawerPanel elementType={elementType}>{children}</DrawerPanel>
+      </Drawer>
+    );
+  },
 };

@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { type SpiritCheckboxProps } from '../../types';
+import { type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
 import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { useCheckboxStyleProps } from './useCheckboxStyleProps';
@@ -71,8 +71,12 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
   );
 };
 
-const Checkbox = forwardRef<HTMLInputElement, SpiritCheckboxProps>(_Checkbox);
+const Checkbox = forwardRef<HTMLInputElement, SpiritCheckboxProps>(_Checkbox) as ForwardRefComponent<
+  HTMLInputElement,
+  SpiritCheckboxProps
+>;
 
 Checkbox.spiritComponent = 'Checkbox';
+Checkbox.displayName = 'Checkbox';
 
 export default Checkbox;

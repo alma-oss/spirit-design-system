@@ -1,12 +1,9 @@
-import { type ComponentPropsWithRef, type ElementType } from 'react';
-
-/**
- * Static properties that all Spirit components should have
- */
-export interface SpiritComponentStaticProps {
-  spiritComponent: string;
-  displayName: string;
-}
+import {
+  type ComponentPropsWithRef,
+  type ElementType,
+  type ForwardRefExoticComponent,
+  type RefAttributes,
+} from 'react';
 
 /**
  * Polymorphic component props type
@@ -44,9 +41,10 @@ export type PolymorphicComponentProps<E extends ElementType, Props = object> = P
   };
 
 /**
- * Static properties for polymorphic components because of `as unknown as` casting
+ * Static properties that all Spirit components should have
+ * Used by both PolymorphicComponent and ForwardRefComponent
  */
-type ComponentStaticProps = {
+export type ComponentStaticProps = {
   spiritComponent: string;
   displayName: string;
 };
@@ -84,3 +82,24 @@ export type PolymorphicComponent<E extends ElementType, Props> = (<T extends Ele
  * ```
  */
 export type PolymorphicRef<E extends ElementType> = ComponentPropsWithRef<E>['ref'];
+
+/**
+ * Type for non-polymorphic Spirit component with forward ref and static properties
+ *
+ * Use this type for components that:
+ * - Use forwardRef but do NOT support elementType/polymorphism
+ * - Need spiritComponent and displayName static properties
+ * - Render a fixed HTML element type (e.g., always <input>, <textarea>, <a>)
+ *
+ * @template E - The HTML element type (e.g., HTMLInputElement, HTMLTextAreaElement)
+ * @template Props - The component's props interface
+ *
+ * @example
+ * ```tsx
+ * const Checkbox: ForwardRefComponent<HTMLInputElement, SpiritCheckboxProps> =
+ *   forwardRef<HTMLInputElement, SpiritCheckboxProps>(_Checkbox) as ForwardRefComponent<HTMLInputElement, SpiritCheckboxProps>;
+ * Checkbox.spiritComponent = 'Checkbox';
+ * Checkbox.displayName = 'Checkbox';
+ * ```
+ */
+export type ForwardRefComponent<E, Props> = ForwardRefExoticComponent<Props & RefAttributes<E>> & ComponentStaticProps;

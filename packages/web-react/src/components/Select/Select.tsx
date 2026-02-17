@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { Sizes } from '../../constants';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { type SpiritSelectProps } from '../../types';
+import { type ForwardRefComponent, type SpiritSelectProps } from '../../types';
 import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { Icon } from '../Icon';
@@ -85,8 +85,12 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
   );
 };
 
-const Select = forwardRef<HTMLSelectElement, SpiritSelectProps>(_Select);
+const Select = forwardRef<HTMLSelectElement, SpiritSelectProps>(_Select) as ForwardRefComponent<
+  HTMLSelectElement,
+  SpiritSelectProps
+>;
 
 Select.spiritComponent = 'Select';
+Select.displayName = 'Select';
 
 export default Select;

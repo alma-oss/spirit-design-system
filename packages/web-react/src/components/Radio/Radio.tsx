@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { type SpiritRadioProps } from '../../types';
+import { type ForwardRefComponent, type SpiritRadioProps } from '../../types';
 import { HelperText, Label, useAriaIds } from '../Field';
 import { useRadioStyleProps } from './useRadioStyleProps';
 
@@ -54,8 +54,12 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
   );
 };
 
-const Radio = forwardRef<HTMLInputElement, SpiritRadioProps>(_Radio);
+const Radio = forwardRef<HTMLInputElement, SpiritRadioProps>(_Radio) as ForwardRefComponent<
+  HTMLInputElement,
+  SpiritRadioProps
+>;
 
 Radio.spiritComponent = 'Radio';
+Radio.displayName = 'Radio';
 
 export default Radio;

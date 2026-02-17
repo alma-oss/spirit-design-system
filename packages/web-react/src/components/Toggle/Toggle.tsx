@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React, { type ChangeEvent, type ForwardedRef, forwardRef, useState } from 'react';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { type SpiritToggleProps } from '../../types';
+import { type ForwardRefComponent, type SpiritToggleProps } from '../../types';
 import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { useToggleStyleProps } from './useToggleStyleProps';
@@ -77,8 +77,12 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
   );
 };
 
-const Toggle = forwardRef<HTMLInputElement, SpiritToggleProps>(_Toggle);
+const Toggle = forwardRef<HTMLInputElement, SpiritToggleProps>(_Toggle) as ForwardRefComponent<
+  HTMLInputElement,
+  SpiritToggleProps
+>;
 
 Toggle.spiritComponent = 'Toggle';
+Toggle.displayName = 'Toggle';
 
 export default Toggle;

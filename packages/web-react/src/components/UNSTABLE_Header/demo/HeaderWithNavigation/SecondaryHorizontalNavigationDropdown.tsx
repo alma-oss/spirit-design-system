@@ -1,4 +1,4 @@
-import React, { type ElementType, type ReactElement, forwardRef, useState } from 'react';
+import React, { type ReactElement, forwardRef, useState } from 'react';
 import { type PolymorphicRef, type SpiritNavigationAvatarProps } from '../../../../types';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../../../Dropdown';
 import { Icon } from '../../../Icon';
@@ -6,13 +6,13 @@ import { NavigationAvatar } from '../../../Navigation';
 import { Text } from '../../../Text';
 import { DropdownPopoverContent } from '../HeaderWithNavigationAndNestedItems/MainHorizontalNavigationDropdown';
 
-const _NavigationAvatarAsDropdownTrigger = <E extends ElementType = 'button'>(
-  props: SpiritNavigationAvatarProps<E>,
-  ref: PolymorphicRef<E>,
+const _NavigationAvatarAsDropdownTrigger = (
+  props: SpiritNavigationAvatarProps<'button'>,
+  ref: PolymorphicRef<'button'>,
 ) => <NavigationAvatar {...props} elementType="button" ref={ref} />;
 
 const NavigationAvatarAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNavigationAvatarProps<'button'>>(
-  _NavigationAvatarAsDropdownTrigger as never,
+  _NavigationAvatarAsDropdownTrigger,
 );
 
 type SecondaryHorizontalNavigationDropdownProps = {
