@@ -8,6 +8,18 @@
 
 > React implementation of Spirit Design System components.
 
+- [Install](#install)
+- [Usage](#usage)
+- [Additional Attributes](#additional-attributes)
+- [Testing](#testing)
+- [Styling](#styling)
+- [Types Generated From Design Tokens](#types-generated-from-design-tokens)
+- [Controlled vs Uncontrolled Components](#controlled-vs-uncontrolled-components)
+- [Deprecations](#deprecations)
+- [Examples](#examples)
+- [Implementing from Figma](#implementing-from-figma)
+- [License](#license)
+
 ## Install
 
 Expecting you have `react` and `react-dom` installed in your app, run:
@@ -188,7 +200,7 @@ You can use the `Uncontrolled` variant for faster development.
 This package uses the deprecation warnings for props, functions and components that will be removed or replaced in the next major release.
 Check your browser console to see if you are using any of the deprecated functionality.
 
-![Deprecations in the Browser's console](https://github.com/alma-oss/spirit-design-system/blob/main/static/deprecations-browser-console.png?raw=true)
+![Deprecations in the Browser's console][deprecations-console-img]
 
 👉 [See the DEPRECATIONS file][all-deprecations] for the list of all deprecations.
 
@@ -224,17 +236,53 @@ afterEach(() => {
 
 👀 See [examples][examples] for a live demo.
 
+## Implementing From Figma
+
+If you are implementing Spirit components from Figma designs—with or without AI assistance—we provide and recommend
+the following tools to help you.
+
+### Figma Code Connect
+
+[Figma Code Connect][figma-code-connect] links Figma components to code snippets. Use it to see how each design component
+is written in code and which props to use (e.g. `size`, `iconName`, `textColor`) when implementing. With Figma Dev Mode
+you can read the snippets directly in Figma in the "Code" tab.
+
+### AI-Assisted Implementation
+
+If you use AI-powered tools to implement UI from Figma, the following help the agent produce accurate Spirit code.
+
+**Figma MCP** — [Figma MCP][figma-mcp] (Model Context Protocol) lets the AI read your Figma files: design context,
+screenshots, and metadata for selected nodes. With the Figma desktop app open and the Figma MCP server configured
+in your tool, the agent can use tools such as `get_design_context` and `get_screenshot`.
+See [Figma MCP documentation][figma-mcp] for more information.
+
+**Figma-to-Spirit skill** — We also provide an agent skill [Figma to Spirit][figma-skill] that teaches your AI-powered
+tool how to convert Figma designs into React using Spirit Web React components (layout, typography, cards, and rules
+for reading props from Figma and Code Connect). Install it with:
+
+```bash
+npx skills add https://github.com/alma-oss/spirit-design-system --skill figma-to-spirit
+```
+
+To learn more about skills, see [Skills documentation][skills-docs].
+
 ## License
 
-See the [LICENSE](LICENSE.md) file for information.
+See the [LICENSE][license] file for information.
 
 [accessibility-testing]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/accessibility-testing.md
 [all-deprecations]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react/DEPRECATIONS.md
+[deprecations-console-img]: https://github.com/alma-oss/spirit-design-system/blob/main/static/deprecations-browser-console.png?raw=true
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [e2e-testing]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/e2e-testing.md
 [examples]: https://spirit-design-system-storybook.netlify.app
+[figma-code-connect]: https://developers.figma.com/docs/code-connect/
+[figma-mcp]: https://developers.figma.com/docs/figma-mcp-server/
+[figma-skill]: https://skills.sh/alma-oss/spirit-design-system/figma-to-spirit
+[license]: LICENSE.md
 [react-controlled]: https://reactjs.org/docs/forms.html#controlled-components
 [react-uncontrolled]: https://reactjs.org/docs/uncontrolled-components.html
+[skills-docs]: https://skills.sh/docs
 [web-docs]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web#readme
-[web-pkg-rebrand]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web#rebranding
 [web-pkg-prefixes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[web-pkg-rebrand]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web#rebranding
