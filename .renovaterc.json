@@ -88,6 +88,13 @@
       "matchManagers": ["npm"],
       "matchPackageNames": ["html-react-parser"],
       "allowedVersions": "5.1.1"
+    },
+    {
+      "groupName": "Block conventional-changelog-conventionalcommits v8+",
+      "description": "Block v8.0.0+ due to ESM incompatibility with Lerna 9.x. Version 8.0.0+ produces broken changelog output. Allow v7.x updates. See: https://github.com/lerna/lerna/issues/4021",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["conventional-changelog-conventionalcommits"],
+      "allowedVersions": "<8.0.0"
     }
   ]
 }

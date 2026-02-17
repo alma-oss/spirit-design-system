@@ -4,8 +4,8 @@
  * Changelog preset configuration for Lerna.
  *
  * This file uses conventional-changelog-conventionalcommits@7.x which is
- * CommonJS-compatible. Version 8.x+ is ESM-only and cannot be loaded by
- * Lerna 9.x which uses require().
+ * CommonJS-compatible. Version 8.x+ is ESM-only and produces broken
+ * changelog output with Lerna 9.x (missing links, malformed sections).
  *
  * @see https://github.com/lerna/lerna/issues/4021
  */
