@@ -35,20 +35,20 @@
 
         <div class="TextArea TextArea--small">
           <label for="text-area-size-small" class="Label Label--box">Small</label>
-          <textarea id="text-area-size-small" class="TextArea__input" name="size-small" placeholder="Placeholder"></textarea>
-          <div class="TextArea__helperText">Helper text</div>
+          <textarea id="text-area-size-small" class="TextArea__input" name="size-small" placeholder="Placeholder" aria-describedby="text-area-size-small-helper-text"></textarea>
+          <div class="HelperText" id="text-area-size-small-helper-text">Helper text</div>
         </div>
 
         <div class="TextArea TextArea--medium">
           <label for="text-area-size-medium" class="Label Label--box">Medium (default)</label>
-          <textarea id="text-area-size-medium" class="TextArea__input" name="size-medium" placeholder="Placeholder"></textarea>
-          <div class="TextArea__helperText">Helper text</div>
+          <textarea id="text-area-size-medium" class="TextArea__input" name="size-medium" placeholder="Placeholder" aria-describedby="text-area-size-medium-helper-text"></textarea>
+          <div class="HelperText" id="text-area-size-medium-helper-text">Helper text</div>
         </div>
 
         <div class="TextArea TextArea--large">
           <label for="text-area-size-large" class="Label Label--box">Large</label>
-          <textarea id="text-area-size-large" class="TextArea__input" name="size-large" placeholder="Placeholder"></textarea>
-          <div class="TextArea__helperText">Helper text</div>
+          <textarea id="text-area-size-large" class="TextArea__input" name="size-large" placeholder="Placeholder" aria-describedby="text-area-size-large-helper-text"></textarea>
+          <div class="HelperText" id="text-area-size-large-helper-text">Helper text</div>
         </div>
 
       </div>
@@ -106,8 +106,8 @@
 
       <div class="TextArea TextArea--medium">
         <label for="text-area-helper-text" class="Label Label--box">Label</label>
-        <textarea id="text-area-helper-text" class="TextArea__input" name="helperText" placeholder="Placeholder"></textarea>
-        <div class="TextArea__helperText">Helper text</div>
+        <textarea id="text-area-helper-text" class="TextArea__input" name="helperText" placeholder="Placeholder" aria-describedby="text-area-helper-text-helper-text"></textarea>
+        <div class="HelperText" id="text-area-helper-text-helper-text">Helper text</div>
       </div>
 
     </div>
@@ -155,14 +155,14 @@
 
       <div class="TextArea TextArea--medium TextArea--warning">
         <label for="text-area-warning" class="Label Label--box">Label</label>
-        <textarea id="text-area-warning" class="TextArea__input" name="warning" placeholder="Placeholder">Filled</textarea>
-        <div class="TextArea__validationText">Validation text</div>
+        <textarea id="text-area-warning" class="TextArea__input" name="warning" placeholder="Placeholder" aria-describedby="text-area-warning-validation-text">Filled</textarea>
+        <div class="TextArea__validationText" id="text-area-warning-validation-text">Validation text</div>
       </div>
 
       <div class="TextArea TextArea--medium TextArea--danger">
         <label for="text-area-danger" class="Label Label--box">Label</label>
-        <textarea id="text-area-danger" class="TextArea__input" name="danger" placeholder="Placeholder">Filled</textarea>
-        <div class="TextArea__validationText">
+        <textarea id="text-area-danger" class="TextArea__input" name="danger" placeholder="Placeholder" aria-describedby="text-area-danger-validation-text">Filled</textarea>
+        <div class="TextArea__validationText" id="text-area-danger-validation-text">
           <ul>
             <li>Validation text</li>
             <li>Second validation text</li>
@@ -172,9 +172,9 @@
 
       <div class="TextArea TextArea--medium TextArea--danger">
         <label for="text-area-danger-with-helper-text" class="Label Label--box Label--required">Label</label>
-        <textarea id="text-area-danger-with-helper-text" class="TextArea__input" placeholder="Placeholder" name="dangerWithHelperText" required>Filled</textarea>
-        <div class="TextArea__helperText">This is helper text</div>
-        <div class="TextArea__validationText">Danger validation text</div>
+        <textarea id="text-area-danger-with-helper-text" class="TextArea__input" placeholder="Placeholder" name="dangerWithHelperText" required aria-describedby="text-area-danger-with-helper-text-helper-text text-area-danger-with-helper-text-validation-text">Filled</textarea>
+        <div class="HelperText" id="text-area-danger-with-helper-text-helper-text">This is helper text</div>
+        <div class="TextArea__validationText" id="text-area-danger-with-helper-text-validation-text">Danger validation text</div>
       </div>
 
     </div>
@@ -195,9 +195,9 @@
         <label for="text-area-{{state}}-with-icon"
                class="Label Label--box Label--required"
         >Label</label>
-        <textarea id="text-area-{{state}}-with-icon" class="TextArea__input" placeholder="Placeholder" name="dangerWithHelperText" required>Filled</textarea>
+        <textarea id="text-area-{{state}}-with-icon" class="TextArea__input" placeholder="Placeholder" name="dangerWithHelperText" required aria-describedby="text-area-{{state}}-with-icon-validation-text">Filled</textarea>
 
-        <div class="TextArea__validationText">
+        <div class="TextArea__validationText" id="text-area-{{state}}-with-icon-validation-text">
           <svg width="20" height="20" aria-hidden="true">
             {{#if (eq state "success")}}
             <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />

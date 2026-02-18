@@ -63,10 +63,12 @@ Selected with background and icon:
 
 Item with Helper text example:
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <button type="button" class="Item">
   <span class="Label Label--item">Item</span>
-  <span class="Item__helperText">Helper text</span>
+  <span class="HelperText HelperText--item">Helper text</span>
 </button>
 ```
 
@@ -88,7 +90,7 @@ Item with icon and helper text in selected state example:
     </svg>
   </span>
   <span class="Label Label--item">Item</span>
-  <span class="Item__helperText">Helper text</span>
+  <span class="HelperText HelperText--item">Helper text</span>
   <span class="Item__icon Item__icon--end">
     <svg width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#check-plain" />
@@ -157,4 +159,5 @@ Usage in [Dropdown][dropdown] component:
 
 [checkbox]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Checkbox/README.md
 [dropdown]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Dropdown/README.md
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [radio]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Radio/README.md
