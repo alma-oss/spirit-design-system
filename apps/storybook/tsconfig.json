@@ -4,8 +4,7 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@alma-oss/spirit-design-tokens": ["../../packages/design-tokens/src/js"],
-      "@alma-oss/spirit-web-react": ["../../packages/web-react/src"]
+      "@alma-oss/spirit-design-tokens": ["../../packages/design-tokens/src/js"]
     }
   },
   "include": ["./**/*.ts", "./**/*.tsx"],
