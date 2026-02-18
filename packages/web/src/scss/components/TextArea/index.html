@@ -52,7 +52,7 @@
             placeholder="Placeholder"
             aria-describedby="text-area-size-small-helper-text"
           ></textarea>
-          <div id="text-area-size-small-helper-text" class="TextArea__helperText">Helper text</div>
+          <div id="text-area-size-small-helper-text" class="HelperText">Helper text</div>
         </div>
 
         <div class="TextArea TextArea--medium">
@@ -64,7 +64,7 @@
             placeholder="Placeholder"
             aria-describedby="text-area-size-medium-helper-text"
           ></textarea>
-          <div id="text-area-size-medium-helper-text" class="TextArea__helperText">Helper text</div>
+          <div id="text-area-size-medium-helper-text" class="HelperText">Helper text</div>
         </div>
 
         <div class="TextArea TextArea--large">
@@ -76,7 +76,7 @@
             placeholder="Placeholder"
             aria-describedby="text-area-size-large-helper-text"
           ></textarea>
-          <div id="text-area-size-large-helper-text" class="TextArea__helperText">Helper text</div>
+          <div id="text-area-size-large-helper-text" class="HelperText">Helper text</div>
         </div>
 
       </div>
@@ -150,9 +150,9 @@
           class="TextArea__input"
           name="helperText"
           placeholder="Placeholder"
-          aria-describedby="text-area-helper-text-helper"
+          aria-describedby="text-area-helper-text-helper-text"
         ></textarea>
-        <div id="text-area-helper-text-helper" class="TextArea__helperText">Helper text</div>
+        <div id="text-area-helper-text-helper-text" class="HelperText">Helper text</div>
       </div>
 
     </div>
@@ -222,8 +222,9 @@
           class="TextArea__input"
           name="warning"
           placeholder="Placeholder"
+          aria-describedby="text-area-warning-validation-text"
         >Filled</textarea>
-        <div class="TextArea__validationText">Validation text</div>
+        <div class="TextArea__validationText" id="text-area-warning-validation-text">Validation text</div>
       </div>
 
       <div class="TextArea TextArea--medium TextArea--danger">
@@ -233,8 +234,9 @@
           class="TextArea__input"
           name="danger"
           placeholder="Placeholder"
+          aria-describedby="text-area-danger-validation-text"
         >Filled</textarea>
-        <div class="TextArea__validationText">
+        <div class="TextArea__validationText" id="text-area-danger-validation-text">
           <ul>
             <li>Validation text</li>
             <li>Second validation text</li>
@@ -250,10 +252,10 @@
           placeholder="Placeholder"
           name="dangerWithHelperText"
           required
-          aria-describedby="text-area-danger-with-helper-text-helper text-area-danger-with-helper-text-validation"
+          aria-describedby="text-area-danger-with-helper-text-helper-text text-area-danger-with-helper-text-validation-text"
         >Filled</textarea>
-        <div id="text-area-danger-with-helper-text-helper" class="TextArea__helperText">This is helper text</div>
-        <div id="text-area-danger-with-helper-text-validation" class="TextArea__validationText">Danger validation text</div>
+        <div id="text-area-danger-with-helper-text-helper-text" class="HelperText">This is helper text</div>
+        <div id="text-area-danger-with-helper-text-validation-text" class="TextArea__validationText">Danger validation text</div>
       </div>
 
     </div>
@@ -280,9 +282,10 @@
           placeholder="Placeholder"
           name="dangerWithHelperText"
           required
+          aria-describedby="text-area-{{state}}-with-icon-validation-text"
         >Filled</textarea>
 
-        <div class="TextArea__validationText">
+        <div class="TextArea__validationText" id="text-area-{{state}}-with-icon-validation-text">
           <svg
             width="20"
             height="20"
@@ -397,7 +400,7 @@
         ></textarea>
         <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYTop">
           <div>
-            <div id="text-area-counter-show-only-helper-text" class="TextArea__helperText">Write at least 100 characters</div>
+            <div id="text-area-counter-show-only-helper-text" class="HelperText">Write at least 100 characters</div>
           </div>
           <div class="TextArea__counter" aria-hidden="true">0</div>
         </div>
@@ -430,7 +433,7 @@
         ></textarea>
         <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYTop">
           <div>
-            <div id="text-area-counter-min-max-helper-text" class="TextArea__helperText">Write between 100 and 200 characters</div>
+            <div id="text-area-counter-min-max-helper-text" class="HelperText">Write between 100 and 200 characters</div>
           </div>
           <div class="TextArea__counter" aria-hidden="true">0/200</div>
         </div>
@@ -474,7 +477,7 @@
               </svg>
               <div>You have entered too many characters</div>
             </div>
-            <div id="text-area-counter-validation-helper-text" class="TextArea__helperText">Our support will get back to you within 24 hours</div>
+            <div id="text-area-counter-validation-helper-text" class="HelperText">Our support will get back to you within 24 hours</div>
           </div>
           <div class="TextArea__counter" aria-hidden="true">201/200</div>
         </div>
