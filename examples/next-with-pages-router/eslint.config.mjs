@@ -20,6 +20,7 @@ export default [
       '**/node_modules/**',
       '**/dist/**',
       '**/build/**',
+      '**/.next/**',
       '**/.coverage/**',
 
       // # Highly recommended to re-include JavaScript dotfiles to lint them
