@@ -58,6 +58,8 @@ If supported by the device, FileUploaderInput automatically turns on the
 drag-and-drop functionality (signalized by the `has-drag-and-drop` state class
 on the root element).
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="FileUploaderInput" data-spirit-element="wrapper">
   <label for="file-uploader" class="Label Label--box">Label</label>
@@ -76,7 +78,7 @@ on the root element).
       <span class="FileUploaderInput__link link-primary link-underlined">Upload your file</span>
       <span class="FileUploaderInput__dragAndDropLabel">or drag and drop here</span>
     </label>
-    <div class="FileUploaderInput__helperText">Max file size is 10 MB</div>
+    <div class="HelperText">Max file size is 10 MB</div>
   </div>
 </div>
 ```
@@ -579,7 +581,7 @@ This is how all subcomponents build up the complete FileUploader:
         <span class="FileUploaderInput__link link-primary link-underlined">Upload your file</span>
         <span class="FileUploaderInput__dragAndDropLabel">or drag and drop here</span>
       </label>
-      <div class="FileUploaderInput__helperText">Max file size is 10 MB</div>
+      <div class="HelperText">Max file size is 10 MB</div>
     </div>
   </div>
   <!-- FileUploaderInput: end -->
@@ -653,6 +655,7 @@ to the missing `name` attribute.
 Example: So if you set `name="attachments"` to the default input element, the attachments will then show `name="attachments[]"`.
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [learn-about-file-sizes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FileUploader/README.md#understanding-file-size-in-bytes
 [mdn-accept]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
 [mdn-input-file]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
