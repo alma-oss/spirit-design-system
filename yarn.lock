@@ -233,7 +233,6 @@ __metadata:
     storybook: "npm:10.2.4"
     typescript: "npm:5.7.3"
     vite: "npm:7.3.1"
-    vite-raw-plugin: "npm:1.0.2"
   languageName: unknown
   linkType: soft
 
@@ -35300,13 +35299,6 @@ __metadata:
     handlebars: "npm:^4.7.6"
     vite: "npm:^5.0.0"
   checksum: 10/54b59d797c28ef9d6804bb6d5f40b460e43a1c74a1459a3bc930f8b0456de6bf1c89a00f4666ad3506b84820628c41c230ce7f2266b8684c5ba42529f9f90573
-  languageName: node
-  linkType: hard
-
-"vite-raw-plugin@npm:1.0.2":
-  version: 1.0.2
-  resolution: "vite-raw-plugin@npm:1.0.2"
-  checksum: 10/3648333599c7f0747aa55a602aef25e0cf5a4518f94766b091fb4498ff90bd3ffffbc6c7d0c556920b87595548099ef2c23a9a0e0ddec925b126d96005cd0df4
   languageName: node
   linkType: hard
 
