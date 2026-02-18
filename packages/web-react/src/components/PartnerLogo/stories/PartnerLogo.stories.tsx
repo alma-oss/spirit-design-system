@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Sizes } from '../../../constants';
 import PartnerLogo from '../PartnerLogo';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof PartnerLogo> = {
   title: 'Components/PartnerLogo',

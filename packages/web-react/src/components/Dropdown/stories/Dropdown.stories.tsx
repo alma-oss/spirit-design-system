@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Button, Icon, Text } from '../..';
 import { AlignmentXExtended, AlignmentYExtended, Placements } from '../../../constants';
 import { DropdownFullWidthModes, type SpiritDropdownProps } from '../../../types';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '..';
 
 const meta: Meta<typeof Dropdown> = {

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Sizes } from '../../../constants';
 import { TIMELINE_SIZE_DEFAULT } from '../constants';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Timeline } from '..';
 import { TimelineWithDot, TimelineWithIcon, TimelineWithNumber } from './TimelineParts';
 

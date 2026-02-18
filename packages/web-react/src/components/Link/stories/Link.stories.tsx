@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { LinkColors } from '../../../constants';
 import Link from '../Link';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof Link> = {
   title: 'Components/Link',

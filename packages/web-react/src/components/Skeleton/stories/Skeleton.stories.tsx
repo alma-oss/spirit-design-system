@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { SizesExtended } from '../../../constants';
 import { SkeletonText } from '../index';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof SkeletonText> = {
   title: 'Components/Skeleton',

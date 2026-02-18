@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import DocsBox from '../../../../docs/DocsBox';
 import { AlignmentXExtended, AlignmentYExtended, DirectionExtended } from '../../../constants';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Flex } from '..';
 
 const meta: Meta<typeof Flex> = {

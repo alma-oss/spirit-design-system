@@ -7,7 +7,7 @@ import { Text } from '../../Text';
 import Navigation from '../Navigation';
 import NavigationAvatar from '../NavigationAvatar';
 import NavigationItem from '../NavigationItem';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof NavigationAvatar> = {
   title: 'Components/Navigation',

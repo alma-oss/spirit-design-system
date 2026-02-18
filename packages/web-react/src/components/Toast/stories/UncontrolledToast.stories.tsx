@@ -4,7 +4,7 @@ import React from 'react';
 import { AlignmentX, EmotionColors } from '../../../constants';
 import { type ToastColorType, type ToastLinkProps, type UncontrolledToastProps } from '../../../types';
 import { Button } from '../../Button';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { type ToastItem, ToastProvider } from '../ToastContext';
 import { DEFAULT_TOAST_AUTO_CLOSE_INTERVAL, ToastColorsExtended, UncontrolledToast, useToast } from '..';
 

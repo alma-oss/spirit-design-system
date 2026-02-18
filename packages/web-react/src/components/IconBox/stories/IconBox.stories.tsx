@@ -5,7 +5,7 @@ import React from 'react';
 import { EmotionColors, SizesExtended } from '../../../constants';
 import { IconBoxShapes } from '../constants';
 import { IconBox } from '../index';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof IconBox> = {
   title: 'Components/IconBox',

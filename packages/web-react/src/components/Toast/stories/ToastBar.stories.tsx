@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { EmotionColors } from '../../../constants';
 import { type SpiritToastBarProps } from '../../../types';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Toast, ToastBar, ToastBarLink, ToastBarMessage, ToastColorsExtended } from '..';
 
 const meta: Meta<typeof ToastBar> = {

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { ProductLogo } from '../../ProductLogo';
 import { defaultSvgLogo } from '../../ProductLogo/demo/ProductLogoDefault';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import UNSTABLE_Header from '../UNSTABLE_Header';
 import UNSTABLE_HeaderLogo from '../UNSTABLE_HeaderLogo';
 

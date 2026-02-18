@@ -2,7 +2,7 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Sizes, ValidationStates } from '../../../constants';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Select } from '..';
 
 const meta: Meta<typeof Select> = {

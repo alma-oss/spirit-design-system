@@ -18,7 +18,7 @@ import {
   getEmotionTextColors,
 } from '../../../utils';
 import Box from '../Box';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const accentTextColorsObject = getAccentTextColors();
 const emotionTextColorsObject = getEmotionTextColors();
