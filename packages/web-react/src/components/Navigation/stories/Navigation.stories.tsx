@@ -5,7 +5,7 @@ import { Direction } from '../../../constants';
 import Navigation from '../Navigation';
 import NavigationAction from '../NavigationAction';
 import NavigationItem from '../NavigationItem';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof Navigation> = {
   title: 'Components/Navigation',

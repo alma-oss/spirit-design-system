@@ -4,7 +4,7 @@ import React from 'react';
 import { Emphasis, SizesExtended, TextAlignments, TextColors, TextHyphens, TextWordBreaks } from '../../../constants';
 import { type TextColorsType } from '../../../types';
 import { getAccentTextColors, getEmotionTextColors } from '../../../utils';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Text } from '..';
 
 const accentColorsObject = getAccentTextColors();

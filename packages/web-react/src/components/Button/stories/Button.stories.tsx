@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { ComponentButtonColors, EmotionColors, Sizes } from '../../../constants';
 import { Icon } from '../../Icon';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Button } from '..';
 
 const meta: Meta<typeof Button> = {

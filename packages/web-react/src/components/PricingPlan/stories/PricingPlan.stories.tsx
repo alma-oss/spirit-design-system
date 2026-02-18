@@ -6,7 +6,7 @@ import PricingPlan from '../PricingPlan';
 import PricingPlanBody from '../PricingPlanBody';
 import PricingPlanFooter from '../PricingPlanFooter';
 import PricingPlanHeader from '../PricingPlanHeader';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof PricingPlan> = {
   title: 'Components/PricingPlan',

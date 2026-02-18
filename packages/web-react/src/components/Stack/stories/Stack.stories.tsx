@@ -2,7 +2,7 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import DocsBox from '../../../../docs/DocsBox';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Stack } from '..';
 
 const meta: Meta<typeof Stack> = {

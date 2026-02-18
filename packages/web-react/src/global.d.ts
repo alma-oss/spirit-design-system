@@ -40,6 +40,11 @@ declare global {
     export default content;
   }
 
+  module '*.md?raw' {
+    const content: string;
+    export default content;
+  }
+
   module 'prettier' {
     export type BuiltInParserName = unknown;
   }

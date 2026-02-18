@@ -4,7 +4,7 @@ import React from 'react';
 import { ButtonLink } from '../../ButtonLink';
 import PricingPlan from '../PricingPlan';
 import PricingPlanHeader from '../PricingPlanHeader';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof PricingPlanHeader> = {
   title: 'Components/PricingPlan',

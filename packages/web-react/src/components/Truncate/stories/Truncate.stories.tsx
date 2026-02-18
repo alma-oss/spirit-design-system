@@ -2,7 +2,7 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { TruncateModes } from '../../../types';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import Truncate from '../Truncate';
 
 const meta: Meta<typeof Truncate> = {

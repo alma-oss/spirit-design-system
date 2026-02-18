@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { type SpiritCollapseProps } from '../../../types';
 import { Button } from '../../Button';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Collapse, useCollapse } from '..';
 import content from './content';
 

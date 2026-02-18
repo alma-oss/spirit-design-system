@@ -5,7 +5,7 @@ import { AlignmentX } from '../../../constants';
 import Drawer from '../Drawer';
 import DrawerCloseButton from '../DrawerCloseButton';
 import DrawerPanel from '../DrawerPanel';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof DrawerPanel> = {
   title: 'Components/Drawer',

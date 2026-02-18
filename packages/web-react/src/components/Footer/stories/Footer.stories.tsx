@@ -5,7 +5,7 @@ import { BackgroundColors, TextAlignments } from '../../../constants';
 import { Container } from '../../Container';
 import { PADDING_BOTTOM, PADDING_TOP } from '../constants';
 import Footer from '../Footer';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof Footer> = {
   title: 'Components/Footer',

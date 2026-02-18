@@ -5,7 +5,7 @@ import { fn } from 'storybook/test';
 import { AlignmentY } from '../../../constants';
 import { type SpiritModalProps } from '../../../types';
 import { Button } from '../../Button';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Modal, ModalBody, ModalDialog, ModalFooter, ModalHeader } from '..';
 
 const meta: Meta<typeof Modal> = {
