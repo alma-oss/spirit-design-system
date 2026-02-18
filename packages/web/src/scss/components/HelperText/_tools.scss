@@ -1,0 +1,6 @@
+@use 'theme';
+@use '../../tools/typography';
+
+@mixin item-helper-text() {
+    @include typography.generate(theme.$typography);
+}

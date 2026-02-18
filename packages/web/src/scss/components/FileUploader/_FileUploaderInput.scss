@@ -65,9 +65,7 @@ $_field-name: 'FileUploaderInput';
     @include accessibility.hide-text();
 }
 
-.FileUploaderInput__helperText {
-    @include form-fields-tools.helper-text();
-
+.FileUploaderInput .HelperText {
     grid-column-start: 2;
 }
 
@@ -105,10 +103,6 @@ $_field-name: 'FileUploaderInput';
 :is(.FileUploaderInput--disabled, .FileUploaderInput.is-disabled)
     :is(.FileUploaderInput__validationText, [data-spirit-element='validation_text']) {
     @include form-fields-tools.validation-text-disabled();
-}
-
-:is(.FileUploaderInput--disabled, .FileUploaderInput.is-disabled) .FileUploaderInput__helperText {
-    @include form-fields-tools.helper-text-disabled();
 }
 
 // 3.

@@ -6,6 +6,7 @@
 @use '../../tools/form-fields';
 @use '../../tools/reset';
 @use '../../tools/typography';
+@use '../HelperText/tools' as helper-text-tools;
 
 .Item:where(button) {
     @include reset.button();
@@ -38,9 +39,8 @@
     grid-column: 2;
 }
 
-.Item__helperText {
-    @include form-fields.helper-text();
-    @include form-fields.item-helper-text();
+.Item .HelperText {
+    @include helper-text-tools.item-helper-text();
 
     grid-column: 2;
     grid-row: 2;
@@ -72,10 +72,6 @@
 
 .Item--disabled .Item__label {
     @include form-fields.label-disabled();
-}
-
-.Item--disabled .Item__helperText {
-    @include form-fields.helper-text-disabled();
 }
 
 .Item--disabled .Item__icon {

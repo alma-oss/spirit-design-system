@@ -1,0 +1,6 @@
+@use '@tokens' as tokens;
+
+$typography: tokens.$body-small-regular;
+$margin-top: tokens.$space-400;
+$color-state-default: tokens.$form-field-helper-text;
+$color-state-disabled: tokens.$disabled-content;

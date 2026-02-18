@@ -131,10 +131,6 @@ $_field-name: 'Slider';
     @include form-fields-tools.validation-text();
 }
 
-.Slider__helperText {
-    @include form-fields-tools.helper-text();
-}
-
 @include form-fields-tools.input-field-validation-states($_field-name);
 
 .Slider--disabled > .Slider__label {
@@ -166,8 +162,4 @@ $_field-name: 'Slider';
 
 :is(.Slider--disabled, .Slider.is-disabled) > :is(.Slider__validationText, [data-spirit-element='validation_text']) {
     @include form-fields-tools.validation-text-disabled();
-}
-
-:is(.Slider--disabled, .Slider.is-disabled) > :is(.Slider__helperText) {
-    @include form-fields-tools.helper-text-disabled();
 }

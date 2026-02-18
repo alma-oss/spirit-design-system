@@ -1,0 +1,20 @@
+@use '../../tools/typography';
+@use 'theme';
+
+.HelperText {
+    @include typography.generate(theme.$typography);
+
+    display: block;
+    margin-top: theme.$margin-top;
+    color: theme.$color-state-default;
+}
+
+.HelperText--disabled,
+:where(:has(> input:disabled)) .HelperText,
+:where(:has(> input:disabled)) [class*='__text'] > .HelperText,
+[disabled] > .HelperText,
+.is-disabled > .HelperText,
+[class*='--disabled'] > .HelperText,
+:is([class*='--disabled'], .is-disabled) [class*='__text'] > .HelperText {
+    color: theme.$color-state-disabled;
+}

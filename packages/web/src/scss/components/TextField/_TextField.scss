@@ -183,10 +183,6 @@ $_field-name: 'TextField';
     @include form-fields-tools.validation-text();
 }
 
-.TextField__helperText {
-    @include form-fields-tools.helper-text();
-}
-
 @include dictionaries.generate-sizes(
     $class-name: $_field-name,
     $dictionary-values: form-fields-settings.$box-field-size-dictionary,
@@ -228,10 +224,6 @@ $_field-name: 'TextField';
     cursor: cursors.$disabled;
 }
 // stylelint-enable
-
-:is(.TextField--disabled, .TextField.is-disabled) > :is(.TextField__helperText) {
-    @include form-fields-tools.helper-text-disabled();
-}
 
 :is(.TextField--disabled, .TextField.is-disabled)
     > :is(.TextField__validationText, [data-spirit-element='validation_text']) {

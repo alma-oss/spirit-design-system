@@ -81,6 +81,8 @@ See Validation state [dictionary][dictionary-validation].
 
 ## With Helper Text
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="Radio">
   <input
@@ -91,8 +93,8 @@ See Validation state [dictionary][dictionary-validation].
     aria-describedby="radio-helper-text-helper-text"
   />
   <div class="Radio__text">
-    <label class="Radio__label" for="radio-helper-text" for="radio-helper-text">Radio Label</label>
-    <div class="Radio__helperText" id="radio-helper-text-helper-text">Helper text</div>
+    <label class="Radio__label" for="radio-helper-text">Radio Label</label>
+    <div class="HelperText" id="radio-helper-text-helper-text">Helper text</div>
   </div>
 </div>
 ```
@@ -121,7 +123,7 @@ See Validation state [dictionary][dictionary-validation].
   />
   <div class="Radio__text">
     <label class="Radio__label" for="radio-item-helper-text">Radio Label</label>
-    <div class="Radio__helperText" id="radio-item-helper-text-helper-text">Helper text</div>
+    <div class="HelperText" id="radio-item-helper-text-helper-text">Helper text</div>
   </div>
 </div>
 ```
@@ -156,3 +158,4 @@ Use responsive breakpoint modifiers to change input position at different screen
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [field-group]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/FieldGroup/README.md
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md

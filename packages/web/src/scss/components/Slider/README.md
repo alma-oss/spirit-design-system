@@ -96,6 +96,8 @@ position = 100 * (value - min) / (max - min)
 
 ## Helper Text
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="Slider">
   <label for="slider-helper-text" class="Slider__label">Slider</label>
@@ -108,7 +110,7 @@ position = 100 * (value - min) / (max - min)
     value="30"
     oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
   />
-  <div id="slider-helper-text-helper-text" class="Slider__helperText">Helper text</div>
+  <div class="HelperText" id="slider-helper-text-helper-text">Helper text</div>
 </div>
 ```
 
@@ -240,3 +242,4 @@ JS interaction class when controlled by JavaScript:
 [html-spec-range]: https://html.spec.whatwg.org/multipage/input.html#range-state-(type=range)
 [mdn-range]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
 [prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md

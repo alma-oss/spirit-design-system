@@ -35,10 +35,6 @@ $_field-name: 'FieldGroup';
     @include form-fields-tools.validation-text();
 }
 
-.FieldGroup__helperText {
-    @include form-fields-tools.helper-text();
-}
-
 @include form-fields-tools.input-field-validation-states($_field-name);
 
 .FieldGroup[disabled] > .FieldGroup__label {
@@ -47,8 +43,4 @@ $_field-name: 'FieldGroup';
 
 .FieldGroup[disabled] > :is(.FieldGroup__validationText, [data-spirit-element='validation_text']) {
     @include form-fields-tools.validation-text-disabled();
-}
-
-.FieldGroup[disabled] > .FieldGroup__helperText {
-    @include form-fields-tools.helper-text-disabled();
 }

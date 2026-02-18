@@ -172,6 +172,8 @@ Fluid width:
 
 Usage with helper text:
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="Select Select--medium">
   <label for="select-helper-text" class="Select__label">Label</label>
@@ -186,7 +188,7 @@ Usage with helper text:
       </svg>
     </div>
   </div>
-  <div class="Select__helperText">Helper text</div>
+  <div class="HelperText">Helper text</div>
 </div>
 ```
 
@@ -345,3 +347,4 @@ JS interaction class when controlled by JavaScript:
 
 [prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md

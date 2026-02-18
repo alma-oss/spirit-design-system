@@ -6,6 +6,7 @@
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/form-fields' as form-fields-tools;
 @use 'theme';
+@use '../HelperText/tools' as helper-text-tools;
 
 $_field-name: 'Radio';
 
@@ -47,9 +48,7 @@ $_field-name: 'Radio';
     }
 }
 
-.Radio__helperText {
-    @include form-fields-tools.helper-text();
-
+.Radio .HelperText {
     position: relative; // 2.
     z-index: 1; // 2.
 }
@@ -82,8 +81,8 @@ $_field-name: 'Radio';
     @include form-fields-tools.item-label();
 }
 
-.Radio--item .Radio__helperText {
-    @include form-fields-tools.item-helper-text();
+.Radio--item .HelperText {
+    @include helper-text-tools.item-helper-text();
 }
 
 :is(.Radio--disabled, .Radio.is-disabled),
@@ -94,11 +93,6 @@ $_field-name: 'Radio';
 :is(.Radio--disabled, .Radio.is-disabled) .Radio__label,
 .Radio:has(.Radio__input:disabled) .Radio__label {
     @include form-fields-tools.inline-field-label-disabled();
-}
-
-:is(.Radio--disabled, .Radio.is-disabled) .Radio__helperText,
-.Radio:has(.Radio__input:disabled) .Radio__helperText {
-    @include form-fields-tools.helper-text-disabled();
 }
 
 :is(.Radio--disabled, .Radio.is-disabled) > .Radio__input,
