@@ -107,6 +107,8 @@ See Validation state [dictionary][dictionary-validation].
 
 ## Helper Text
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="Checkbox">
   <input
@@ -118,7 +120,7 @@ See Validation state [dictionary][dictionary-validation].
   />
   <div class="Checkbox__text">
     <label class="Label Label--inline" for="checkbox-helper-text">Checkbox Label</label>
-    <div class="Checkbox__helperText" id="checkbox-helper-text-helper-text">Helper text</div>
+    <div class="HelperText HelperText--inline" id="checkbox-helper-text-helper-text">Helper text</div>
   </div>
 </div>
 ```
@@ -163,3 +165,4 @@ Use responsive breakpoint modifiers to change input position at different screen
 ```
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md

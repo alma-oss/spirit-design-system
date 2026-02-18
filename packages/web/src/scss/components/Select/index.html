@@ -41,7 +41,7 @@
         <div class="Select Select--small">
           <label for="select-size-small" class="Label Label--box">Small</label>
           <div class="Select__inputContainer">
-            <select id="select-size-small" name="size-small" class="Select__input">
+            <select id="select-size-small" name="size-small" class="Select__input" aria-describedby="select-size-small-helper-text">
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
             </select>
@@ -51,13 +51,13 @@
               </svg>
             </div>
           </div>
-          <div class="Select__helperText">Helper text</div>
+          <div class="HelperText" id="select-size-small-helper-text">Helper text</div>
         </div>
 
         <div class="Select Select--medium">
           <label for="select-size-medium" class="Label Label--box">Medium (default)</label>
           <div class="Select__inputContainer">
-            <select id="select-size-medium" name="size-medium" class="Select__input">
+            <select id="select-size-medium" name="size-medium" class="Select__input" aria-describedby="select-size-medium-helper-text">
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
             </select>
@@ -67,13 +67,13 @@
               </svg>
             </div>
           </div>
-          <div class="Select__helperText">Helper text</div>
+          <div class="HelperText" id="select-size-medium-helper-text">Helper text</div>
         </div>
 
         <div class="Select Select--large">
           <label for="select-size-large" class="Label Label--box">Large</label>
           <div class="Select__inputContainer">
-            <select id="select-size-large" name="size-large" class="Select__input">
+            <select id="select-size-large" name="size-large" class="Select__input" aria-describedby="select-size-large-helper-text">
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
             </select>
@@ -83,7 +83,7 @@
               </svg>
             </div>
           </div>
-          <div class="Select__helperText">Helper text</div>
+          <div class="HelperText" id="select-size-large-helper-text">Helper text</div>
         </div>
 
       </div>
@@ -209,7 +209,7 @@
       <div class="Select Select--medium">
         <label for="select-helper-text" class="Label Label--box">Label</label>
         <div class="Select__inputContainer">
-          <select id="select-helper-text" name="helperText" class="Select__input">
+          <select id="select-helper-text" name="helperText" class="Select__input" aria-describedby="select-helper-text-helper-text">
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
@@ -219,7 +219,7 @@
             </svg>
           </div>
         </div>
-        <div class="Select__helperText">Helper text</div>
+        <div class="HelperText" id="select-helper-text-helper-text">Helper text</div>
       </div>
 
     </div>
@@ -283,7 +283,7 @@
       <div class="Select Select--medium Select--warning">
         <label for="select-warning" class="Label Label--box">Label</label>
         <div class="Select__inputContainer">
-          <select id="select-warning" name="warning" class="Select__input">
+          <select id="select-warning" name="warning" class="Select__input" aria-describedby="select-warning-validation-text">
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
@@ -293,13 +293,13 @@
             </svg>
           </div>
         </div>
-        <div class="Select__validationText">Validation text</div>
+        <div class="Select__validationText" id="select-warning-validation-text">Validation text</div>
       </div>
 
       <div class="Select Select--medium Select--danger">
         <label for="select-danger" class="Label Label--box">Label</label>
         <div class="Select__inputContainer">
-          <select id="select-danger" name="danger" class="Select__input">
+          <select id="select-danger" name="danger" class="Select__input" aria-describedby="select-danger-validation-text">
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
@@ -309,7 +309,7 @@
             </svg>
           </div>
         </div>
-        <div class="Select__validationText">
+        <div class="Select__validationText" id="select-danger-validation-text">
           <ul>
             <li>First validation text</li>
             <li>Second validation text</li>
@@ -334,7 +334,7 @@
       <div class="Select Select--medium Select--{{state}}">
         <label for="select-{{state}}-icon" class="Label Label--box">Label</label>
         <div class="Select__inputContainer">
-          <select id="select-{{state}}-icon" name="danger" class="Select__input">
+          <select id="select-{{state}}-icon" name="danger" class="Select__input" aria-describedby="select-{{state}}-icon-validation-text">
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
@@ -344,7 +344,7 @@
             </svg>
           </div>
         </div>
-        <div class="Select__validationText">
+        <div class="Select__validationText" id="select-{{state}}-icon-validation-text">
           <svg width="20" height="20" aria-hidden="true">
             {{#if (eq state "success")}}
             <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />

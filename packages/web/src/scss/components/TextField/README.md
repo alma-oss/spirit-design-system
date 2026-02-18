@@ -83,11 +83,22 @@ Fluid width:
 
 Helper Text:
 
+To add helper text, use the [HelperText][helper-text] component. When helper text is present, give the helper element an `id` and set `aria-describedby` on the input to that id so assistive technologies can associate the description with the field:
+
 ```html
 <div class="TextField TextField--medium">
   <label for="text-field-helper-text" class="Label Label--box">Label</label>
   <input type="text" id="text-field-helper-text" class="TextField__input" name="helperText" placeholder="Placeholder" />
-  <div class="TextField__helperText">Helper text</div>
+  <label for="text-field-helper-text" class="TextField__label">Label</label>
+  <input
+    type="text"
+    id="text-field-helper-text"
+    class="TextField__input"
+    name="helperText"
+    placeholder="Placeholder"
+    aria-describedby="text-field-helper-text-helper-text"
+  />
+  <div class="HelperText" id="text-field-helper-text-helper-text">Helper text</div>
 </div>
 ```
 
@@ -333,6 +344,7 @@ JS interaction class when controlled by JavaScript:
 
 👉 Please note that responsive border radius is defined by design specifications.
 
-[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

@@ -68,7 +68,7 @@ code.
 
 ## Helper Text
 
-To render helper text, add a `<div>` element with the `FieldGroup__helperText` class.
+To render helper text, use the [HelperText][helper-text] component:
 
 ```html
 <fieldset class="FieldGroup" aria-describedby="field-group-helper-text">
@@ -77,7 +77,7 @@ To render helper text, add a `<div>` element with the `FieldGroup__helperText` c
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>
-  <div id="field-group-helper-text" class="FieldGroup__helperText">Helper text</div>
+  <div class="HelperText" id="field-group-helper-text">Helper text</div>
 </fieldset>
 ```
 
@@ -190,7 +190,8 @@ handle prefixes their own way.**
 👉 Consider using [`aria-live`][aria-live] attribute on the validation text element to announce validation messages to
 screen readers.
 
-[mdn-fieldset-disabled]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset#disabled_fieldset
-[dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
-[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
 [aria-live]: https://bitsofco.de/using-aria-live/
+[dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[mdn-fieldset-disabled]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset#disabled_fieldset
+[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
