@@ -53,6 +53,7 @@
               id="select-size-small"
               name="size-small"
               class="Select__input"
+              aria-describedby="select-size-small-helper-text"
             >
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
@@ -67,7 +68,7 @@
               </svg>
             </div>
           </div>
-          <div class="Select__helperText">Helper text</div>
+          <div class="HelperText" id="select-size-small-helper-text">Helper text</div>
         </div>
 
         <div class="Select Select--medium">
@@ -77,6 +78,7 @@
               id="select-size-medium"
               name="size-medium"
               class="Select__input"
+              aria-describedby="select-size-medium-helper-text"
             >
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
@@ -91,7 +93,7 @@
               </svg>
             </div>
           </div>
-          <div class="Select__helperText">Helper text</div>
+          <div class="HelperText" id="select-size-medium-helper-text">Helper text</div>
         </div>
 
         <div class="Select Select--large">
@@ -101,6 +103,7 @@
               id="select-size-large"
               name="size-large"
               class="Select__input"
+              aria-describedby="select-size-large-helper-text"
             >
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
@@ -115,7 +118,7 @@
               </svg>
             </div>
           </div>
-          <div class="Select__helperText">Helper text</div>
+          <div class="HelperText" id="select-size-large-helper-text">Helper text</div>
         </div>
 
       </div>
@@ -283,6 +286,7 @@
             id="select-helper-text"
             name="helperText"
             class="Select__input"
+            aria-describedby="select-helper-text-helper-text"
           >
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
@@ -297,7 +301,7 @@
             </svg>
           </div>
         </div>
-        <div class="Select__helperText">Helper text</div>
+        <div class="HelperText" id="select-helper-text-helper-text">Helper text</div>
       </div>
 
     </div>
@@ -382,6 +386,7 @@
             id="select-warning"
             name="warning"
             class="Select__input"
+            aria-describedby="select-warning-validation-text"
           >
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
@@ -396,7 +401,7 @@
             </svg>
           </div>
         </div>
-        <div class="Select__validationText">Validation text</div>
+        <div class="Select__validationText" id="select-warning-validation-text">Validation text</div>
       </div>
 
       <div class="Select Select--medium Select--danger">
@@ -406,6 +411,7 @@
             id="select-danger"
             name="danger"
             class="Select__input"
+            aria-describedby="select-danger-validation-text"
           >
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
@@ -420,7 +426,7 @@
             </svg>
           </div>
         </div>
-        <div class="Select__validationText">
+        <div class="Select__validationText" id="select-danger-validation-text">
           <ul>
             <li>First validation text</li>
             <li>Second validation text</li>
@@ -449,6 +455,7 @@
             id="select-{{state}}-icon"
             name="danger"
             class="Select__input"
+            aria-describedby="select-{{state}}-icon-validation-text"
           >
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
@@ -463,7 +470,7 @@
             </svg>
           </div>
         </div>
-        <div class="Select__validationText">
+        <div class="Select__validationText" id="select-{{state}}-icon-validation-text">
           <svg
             width="20"
             height="20"
