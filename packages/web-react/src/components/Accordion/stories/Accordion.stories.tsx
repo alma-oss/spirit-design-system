@@ -5,7 +5,7 @@ import { type AccordionOpenStateType, type SpiritAccordionProps } from '../../..
 import { Link } from '../../Link';
 import { Pill } from '../../Pill';
 import toggleValueByType from '../demo/toggleValueByType';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Accordion, AccordionContent, AccordionHeader, AccordionItem } from '..';
 import content from './content';
 

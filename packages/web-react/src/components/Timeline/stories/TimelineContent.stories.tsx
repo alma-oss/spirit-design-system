@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Button } from '../../Button';
 import { Text } from '../../Text';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import TimelineContent from '../TimelineContent';
 import { TIMELINE_DATA } from './constants';
 

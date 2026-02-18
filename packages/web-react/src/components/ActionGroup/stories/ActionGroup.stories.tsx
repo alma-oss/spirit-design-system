@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { AlignmentXExtended, AlignmentYExtended, DirectionExtended } from '../../../constants';
 import { Button } from '../../Button';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { ActionGroup } from '..';
 
 const meta: Meta<typeof ActionGroup> = {

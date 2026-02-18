@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import { Button } from '../..';
 import { Placements } from '../../../constants';
 import { type SpiritTooltipProps } from '../../../types';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { TooltipPopover, TooltipTrigger, UncontrolledTooltip } from '..';
 
 const meta: Meta<typeof UncontrolledTooltip> = {

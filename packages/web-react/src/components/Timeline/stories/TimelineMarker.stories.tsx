@@ -12,7 +12,7 @@ import {
 } from '../../../utils';
 import { Icon } from '../../Icon';
 import { TIMELINE_MARKER } from '../constants';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import TimelineMarker from '../TimelineMarker';
 
 const accentTextColorsObject = getAccentTextColors();

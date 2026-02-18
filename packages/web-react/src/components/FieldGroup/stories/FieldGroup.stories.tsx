@@ -5,7 +5,7 @@ import DocsBox from '../../../../docs/DocsBox';
 import { ValidationStates } from '../../../constants';
 import { Checkbox } from '../../Checkbox';
 import { Radio } from '../../Radio';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { FieldGroup } from '..';
 
 const meta: Meta<typeof FieldGroup> = {

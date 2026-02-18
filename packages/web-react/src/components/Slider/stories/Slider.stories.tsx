@@ -4,7 +4,7 @@ import React, { type ChangeEvent, useState } from 'react';
 import { ValidationStates } from '../../../constants';
 import { type SpiritSliderProps } from '../../../types';
 import { DEMO_SLIDER_DEFAULT_VALUE, SLIDER_DEFAULT_PROPS } from '../constants';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Slider } from '..';
 
 const meta: Meta<typeof Slider> = {
