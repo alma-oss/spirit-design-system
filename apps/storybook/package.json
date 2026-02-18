@@ -29,7 +29,6 @@
     "react-dom": "catalog:frontend",
     "storybook": "catalog:storybook",
     "typescript": "catalog:types",
-    "vite": "catalog:build",
-    "vite-raw-plugin": "catalog:build"
+    "vite": "catalog:build"
   }
 }
