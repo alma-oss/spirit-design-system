@@ -59,11 +59,13 @@ Fluid width:
 
 Helper text:
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="TextArea TextArea--medium">
   <label for="text-area-helper-text" class="Label Label--box">Label</label>
   <textarea id="text-area-helper-text" class="TextArea__input" name="helperText" placeholder="Placeholder"></textarea>
-  <div class="TextArea__helperText">Helper text</div>
+  <div class="HelperText">Helper text</div>
 </div>
 ```
 
@@ -209,6 +211,7 @@ Filled</textarea
 
 👉 Please note that responsive border radius is defined by design specifications.
 
-[web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md
-[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

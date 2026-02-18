@@ -120,26 +120,26 @@
 
         <div class="TextField TextField--small">
           <label for="text-field-size-small" class="Label Label--box">Small</label>
-          <input type="text" id="text-field-size-small" class="TextField__input" name="size-small" placeholder="Placeholder" />
-          <div class="TextField__helperText">Helper text</div>
+          <input type="text" id="text-field-size-small" class="TextField__input" name="size-small" placeholder="Placeholder" aria-describedby="text-field-size-small-helper-text" />
+          <div class="HelperText" id="text-field-size-small-helper-text">Helper text</div>
         </div>
 
         <div class="TextField TextField--medium">
           <label for="text-field-size-medium" class="Label Label--box">Medium (default)</label>
-          <input type="text" id="text-field-size-medium" class="TextField__input" name="size-medium" placeholder="Placeholder" />
-          <div class="TextField__helperText">Helper text</div>
+          <input type="text" id="text-field-size-medium" class="TextField__input" name="size-medium" placeholder="Placeholder" aria-describedby="text-field-size-medium-helper-text" />
+          <div class="HelperText" id="text-field-size-medium-helper-text">Helper text</div>
         </div>
 
         <div class="TextField TextField--large">
           <label for="text-field-size-large" class="Label Label--box">Large</label>
-          <input type="text" id="text-field-size-large" class="TextField__input" name="size-large" placeholder="Placeholder" />
-          <div class="TextField__helperText">Helper text</div>
+          <input type="text" id="text-field-size-large" class="TextField__input" name="size-large" placeholder="Placeholder" aria-describedby="text-field-size-large-helper-text" />
+          <div class="HelperText" id="text-field-size-large-helper-text">Helper text</div>
         </div>
 
         <div class="TextField TextField--small">
           <label for="text-field-password-toggle-size-small" class="Label Label--box">Small</label>
           <div class="TextField__passwordToggle">
-            <input type="password" id="text-field-password-toggle-size-small" class="TextField__input" name="password-size-small" value="password" />
+            <input type="password" id="text-field-password-toggle-size-small" class="TextField__input" name="password-size-small" value="password" aria-describedby="text-field-password-toggle-size-small-helper-text" />
             <button
               type="button"
               class="TextField__passwordToggle__button"
@@ -157,16 +157,16 @@
                 <svg class="Icon" width="16" height="16" aria-hidden="true">
                   <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
                 </svg>
-              </span>
-            </button>
-          </div>
-          <div class="TextField__helperText">Helper text</div>
+            </span>
+          </button>
+        </div>
+          <div class="HelperText" id="text-field-password-toggle-size-small-helper-text">Helper text</div>
         </div>
 
         <div class="TextField TextField--medium">
           <label for="text-field-password-toggle-size-medium" class="Label Label--box">Medium (default)</label>
           <div class="TextField__passwordToggle">
-            <input type="password" id="text-field-password-toggle-size-medium" class="TextField__input" name="password-size-medium" value="password" />
+            <input type="password" id="text-field-password-toggle-size-medium" class="TextField__input" name="password-size-medium" value="password" aria-describedby="text-field-password-toggle-size-medium-helper-text" />
             <button
               type="button"
               class="TextField__passwordToggle__button"
@@ -184,16 +184,16 @@
                 <svg class="Icon" width="20" height="20" aria-hidden="true">
                   <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
                 </svg>
-              </span>
-            </button>
-          </div>
-          <div class="TextField__helperText">Helper text</div>
+            </span>
+          </button>
+        </div>
+          <div class="HelperText" id="text-field-password-toggle-size-medium-helper-text">Helper text</div>
         </div>
 
         <div class="TextField TextField--large">
           <label for="text-field-password-toggle-size-large" class="Label Label--box">Large</label>
           <div class="TextField__passwordToggle">
-            <input type="password" id="text-field-password-toggle-size-large" class="TextField__input" name="password-size-large" value="password" />
+            <input type="password" id="text-field-password-toggle-size-large" class="TextField__input" name="password-size-large" value="password" aria-describedby="text-field-password-toggle-size-large-helper-text" />
             <button
               type="button"
               class="TextField__passwordToggle__button"
@@ -212,9 +212,9 @@
                   <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
                 </svg>
               </span>
-            </button>
-          </div>
-          <div class="TextField__helperText">Helper text</div>
+          </button>
+        </div>
+          <div class="HelperText" id="text-field-password-toggle-size-large-helper-text">Helper text</div>
         </div>
 
       </div>
@@ -271,8 +271,8 @@
 
       <div class="TextField TextField--medium">
         <label for="text-field-helper-text" class="Label Label--box">Label</label>
-        <input type="text" id="text-field-helper-text" class="TextField__input" name="helperText" placeholder="Placeholder" />
-        <div class="TextField__helperText">Helper text</div>
+        <input type="text" id="text-field-helper-text" class="TextField__input" name="helperText" placeholder="Placeholder" aria-describedby="text-field-helper-text-helper-text" />
+        <div class="HelperText" id="text-field-helper-text-helper-text">Helper text</div>
       </div>
 
     </div>
@@ -295,7 +295,7 @@
       </div>
 
       <div class="TextField TextField--medium TextField--disabled">
-        <label for="text-field-disabled-filled" class="Label Label--box Label--required TextField--disabled">Label</label>
+        <label for="text-field-disabled-filled" class="Label Label--box Label--required Label--disabled">Label</label>
         <input
           type="text"
           id="text-field-disabled-filled"
@@ -329,14 +329,14 @@
 
       <div class="TextField TextField--medium TextField--warning">
         <label for="text-field-warning" class="Label Label--box">Label</label>
-        <input type="text" id="text-field-warning" class="TextField__input" name="warning" placeholder="Placeholder" value="Filled" />
-        <div class="TextField__validationText">Validation text</div>
+        <input type="text" id="text-field-warning" class="TextField__input" name="warning" placeholder="Placeholder" value="Filled" aria-describedby="text-field-warning-validation-text" />
+        <div class="TextField__validationText" id="text-field-warning-validation-text">Validation text</div>
       </div>
 
       <div class="TextField TextField--medium TextField--danger">
         <label for="text-field-danger" class="Label Label--box">Label</label>
-        <input type="text" id="text-field-danger" class="TextField__input" name="danger" placeholder="Placeholder" value="Filled" />
-        <div class="TextField__validationText">
+        <input type="text" id="text-field-danger" class="TextField__input" name="danger" placeholder="Placeholder" value="Filled" aria-describedby="text-field-danger-validation-text" />
+        <div class="TextField__validationText" id="text-field-danger-validation-text">
           <ul>
             <li>Validation text</li>
             <li>Second validation text</li>
@@ -357,9 +357,10 @@
           placeholder="Placeholder"
           value="Filled"
           required
+          aria-describedby="text-field-danger-with-helper-text-helper-text text-field-danger-with-helper-text-validation-text"
         />
-        <div class="TextField__helperText">This is helper text</div>
-        <div class="TextField__validationText">Danger validation text</div>
+        <div class="HelperText" id="text-field-danger-with-helper-text-helper-text">This is helper text</div>
+        <div class="TextField__validationText" id="text-field-danger-with-helper-text-validation-text">Danger validation text</div>
       </div>
 
     </div>
@@ -390,8 +391,9 @@
           placeholder="Placeholder"
           value="Filled"
           required
+          aria-describedby="text-field-{{state}}-with-icon-validation-text"
         />
-        <div class="TextField__validationText">
+        <div class="TextField__validationText" id="text-field-{{state}}-with-icon-validation-text">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
             {{#if (eq state "success")}}
             <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
