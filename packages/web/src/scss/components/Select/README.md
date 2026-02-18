@@ -172,11 +172,18 @@ Fluid width:
 
 Usage with helper text:
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="Select Select--medium">
   <label for="select-helper-text" class="Label Label--box">Label</label>
   <div class="Select__inputContainer">
-    <select id="select-helper-text" name="helperText" class="Select__input">
+    <select
+      id="select-helper-text"
+      name="helperText"
+      class="Select__input"
+      aria-describedby="select-helper-text-helper-text"
+    >
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
     </select>
@@ -186,7 +193,7 @@ Usage with helper text:
       </svg>
     </div>
   </div>
-  <div class="Select__helperText">Helper text</div>
+  <div class="HelperText" id="select-helper-text-helper-text">Helper text</div>
 </div>
 ```
 
@@ -219,7 +226,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 <div class="Select Select--medium Select--warning">
   <label for="select-warning" class="Label Label--box">Label</label>
   <div class="Select__inputContainer">
-    <select id="select-warning" name="warning" class="Select__input">
+    <select id="select-warning" name="warning" class="Select__input" aria-describedby="select-warning-validation-text">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
     </select>
@@ -229,13 +236,13 @@ a JS interaction class when controlled by JavaScript (`has-success`,
       </svg>
     </div>
   </div>
-  <div class="Select__validationText">Validation text</div>
+  <div class="Select__validationText" id="select-warning-validation-text">Validation text</div>
 </div>
 
 <div class="Select Select--medium Select--danger">
   <label for="select-danger" class="Label Label--box">Label</label>
   <div class="Select__inputContainer">
-    <select id="select-danger" name="danger" class="Select__input">
+    <select id="select-danger" name="danger" class="Select__input" aria-describedby="select-danger-validation-text">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
     </select>
@@ -245,7 +252,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
       </svg>
     </div>
   </div>
-  <div class="Select__validationText">
+  <div class="Select__validationText" id="select-danger-validation-text">
     <ul>
       <li>First validation text</li>
       <li>Second validation text</li>
@@ -254,9 +261,14 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div class="Select Select--medium Select--warning">
-  <label for="select-warning" class="Label Label--box">Label</label>
+  <label for="select-warning-icon" class="Label Label--box">Label</label>
   <div class="Select__inputContainer">
-    <select id="select-warning" name="warning" class="Select__input">
+    <select
+      id="select-warning-icon"
+      name="warning"
+      class="Select__input"
+      aria-describedby="select-warning-icon-validation-text"
+    >
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
     </select>
@@ -266,7 +278,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
       </svg>
     </div>
   </div>
-  <div class="Select__validationText">
+  <div class="Select__validationText" id="select-warning-icon-validation-text">
     <svg width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
@@ -343,5 +355,6 @@ JS interaction class when controlled by JavaScript:
 
 👉 Please note that responsive border radius is defined by design specifications.
 
-[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
