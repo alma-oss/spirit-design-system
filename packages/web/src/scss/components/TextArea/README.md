@@ -21,7 +21,7 @@ Sizes:
     placeholder="Placeholder"
     aria-describedby="text-area-size-small-helper-text"
   ></textarea>
-  <div id="text-area-size-small-helper-text" class="TextArea__helperText">Helper text</div>
+  <div id="text-area-size-small-helper-text" class="HelperText">Helper text</div>
 </div>
 
 <div class="TextArea TextArea--medium">
@@ -33,7 +33,7 @@ Sizes:
     placeholder="Placeholder"
     aria-describedby="text-area-size-medium-helper-text"
   ></textarea>
-  <div id="text-area-size-medium-helper-text" class="TextArea__helperText">Helper text</div>
+  <div id="text-area-size-medium-helper-text" class="HelperText">Helper text</div>
 </div>
 
 <div class="TextArea TextArea--large">
@@ -45,7 +45,7 @@ Sizes:
     placeholder="Placeholder"
     aria-describedby="text-area-size-large-helper-text"
   ></textarea>
-  <div id="text-area-size-large-helper-text" class="TextArea__helperText">Helper text</div>
+  <div id="text-area-size-large-helper-text" class="HelperText">Helper text</div>
 </div>
 ```
 
@@ -80,6 +80,8 @@ Fluid width:
 
 Helper text:
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="TextArea TextArea--medium">
   <label for="text-area-helper-text" class="Label Label--box">Label</label>
@@ -88,9 +90,9 @@ Helper text:
     class="TextArea__input"
     name="helperText"
     placeholder="Placeholder"
-    aria-describedby="text-area-helper-text-helper"
+    aria-describedby="text-area-helper-text-helper-text"
   ></textarea>
-  <div id="text-area-helper-text-helper" class="TextArea__helperText">Helper text</div>
+  <div id="text-area-helper-text-helper-text" class="HelperText">Helper text</div>
 </div>
 ```
 
@@ -110,13 +112,13 @@ is provided by the React package (`@spirit-design-system/web-react`).
 If you need to communicate a minimum length requirement, use the helper text element with a stable **`id`** and reference it from the textarea via **`aria-describedby`** (together with the screen readers (SR) counter message id when both are present):
 
 ```html
-<div id="text-area-example-helper" class="TextArea__helperText">Write between 100 and 200 characters</div>
+<div id="text-area-example-helper" class="HelperText">Write between 100 and 200 characters</div>
 ```
 
 or:
 
 ```html
-<div id="text-area-example-helper" class="TextArea__helperText">Write at least 100 characters</div>
+<div id="text-area-example-helper" class="HelperText">Write at least 100 characters</div>
 ```
 
 Counter with threshold:
@@ -152,7 +154,7 @@ Counter showing only the count:
   ></textarea>
   <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYTop">
     <div>
-      <div id="text-area-counter-only-helper-text" class="TextArea__helperText">Write at least 100 characters</div>
+      <div id="text-area-counter-only-helper-text" class="HelperText">Write at least 100 characters</div>
     </div>
     <div class="TextArea__counter" aria-hidden="true">0</div>
   </div>
@@ -179,7 +181,7 @@ Counter with helper text, validation text, and validation state:
       <div id="text-area-counter-danger-validation-text" class="TextArea__validationText">
         You have entered too many characters
       </div>
-      <div id="text-area-counter-danger-helper-text" class="TextArea__helperText">This is helper text</div>
+      <div id="text-area-counter-danger-helper-text" class="HelperText">This is helper text</div>
     </div>
     <div class="TextArea__counter" aria-hidden="true">201/200</div>
   </div>
@@ -361,3 +363,4 @@ JS interaction class when controlled by JavaScript:
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md
 [prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md

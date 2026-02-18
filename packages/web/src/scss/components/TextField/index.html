@@ -166,8 +166,9 @@
             class="TextField__input"
             name="size-small"
             placeholder="Placeholder"
+            aria-describedby="text-field-size-small-helper-text"
           />
-          <div class="TextField__helperText">Helper text</div>
+          <div id="text-field-size-small-helper-text" class="HelperText">Helper text</div>
         </div>
 
         <div class="TextField TextField--medium">
@@ -178,8 +179,9 @@
             class="TextField__input"
             name="size-medium"
             placeholder="Placeholder"
+            aria-describedby="text-field-size-medium-helper-text"
           />
-          <div class="TextField__helperText">Helper text</div>
+          <div id="text-field-size-medium-helper-text" class="HelperText">Helper text</div>
         </div>
 
         <div class="TextField TextField--large">
@@ -190,8 +192,9 @@
             class="TextField__input"
             name="size-large"
             placeholder="Placeholder"
+            aria-describedby="text-field-size-large-helper-text"
           />
-          <div class="TextField__helperText">Helper text</div>
+          <div id="text-field-size-large-helper-text" class="HelperText">Helper text</div>
         </div>
 
         <div class="TextField TextField--small">
@@ -203,6 +206,7 @@
               class="TextField__input"
               name="password-size-small"
               value="password"
+              aria-describedby="text-field-password-toggle-size-small-helper-text"
             />
             <button
               type="button"
@@ -234,7 +238,7 @@
               </span>
             </button>
           </div>
-          <div class="TextField__helperText">Helper text</div>
+          <div id="text-field-password-toggle-size-small-helper-text" class="HelperText">Helper text</div>
         </div>
 
         <div class="TextField TextField--medium">
@@ -246,6 +250,7 @@
               class="TextField__input"
               name="password-size-medium"
               value="password"
+              aria-describedby="text-field-password-toggle-size-medium-helper-text"
             />
             <button
               type="button"
@@ -277,7 +282,7 @@
               </span>
             </button>
           </div>
-          <div class="TextField__helperText">Helper text</div>
+          <div id="text-field-password-toggle-size-medium-helper-text" class="HelperText">Helper text</div>
         </div>
 
         <div class="TextField TextField--large">
@@ -289,6 +294,7 @@
               class="TextField__input"
               name="password-size-large"
               value="password"
+              aria-describedby="text-field-password-toggle-size-large-helper-text"
             />
             <button
               type="button"
@@ -320,7 +326,7 @@
               </span>
             </button>
           </div>
-          <div class="TextField__helperText">Helper text</div>
+          <div id="text-field-password-toggle-size-large-helper-text" class="HelperText">Helper text</div>
         </div>
 
       </div>
@@ -396,8 +402,9 @@
           class="TextField__input"
           name="helperText"
           placeholder="Placeholder"
+          aria-describedby="text-field-helper-text-helper-text"
         />
-        <div class="TextField__helperText">Helper text</div>
+        <div id="text-field-helper-text-helper-text" class="HelperText">Helper text</div>
       </div>
 
     </div>
@@ -475,8 +482,9 @@
           name="warning"
           placeholder="Placeholder"
           value="Filled"
+          aria-describedby="text-field-warning-validation-text"
         />
-        <div class="TextField__validationText">Validation text</div>
+        <div class="TextField__validationText" id="text-field-warning-validation-text">Validation text</div>
       </div>
 
       <div class="TextField TextField--medium TextField--danger">
@@ -488,8 +496,9 @@
           name="danger"
           placeholder="Placeholder"
           value="Filled"
+          aria-describedby="text-field-danger-validation-text"
         />
-        <div class="TextField__validationText">
+        <div class="TextField__validationText" id="text-field-danger-validation-text">
           <ul>
             <li>Validation text</li>
             <li>Second validation text</li>
@@ -510,9 +519,10 @@
           placeholder="Placeholder"
           value="Filled"
           required
+          aria-describedby="text-field-danger-with-helper-text-helper-text text-field-danger-with-helper-text-validation-text"
         />
-        <div class="TextField__helperText">This is helper text</div>
-        <div class="TextField__validationText">Danger validation text</div>
+        <div id="text-field-danger-with-helper-text-helper-text" class="HelperText">This is helper text</div>
+        <div id="text-field-danger-with-helper-text-validation-text" class="TextField__validationText">Danger validation text</div>
       </div>
 
     </div>
@@ -543,8 +553,9 @@
           placeholder="Placeholder"
           value="Filled"
           required
+          aria-describedby="text-field-{{state}}-with-icon-validation-text"
         />
-        <div class="TextField__validationText">
+        <div class="TextField__validationText" id="text-field-{{state}}-with-icon-validation-text">
           <svg
             class="Icon"
             width="20"
