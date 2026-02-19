@@ -34,11 +34,14 @@ cp .env.local.playwright.example .env.local.playwright
 
 Available environment variables:
 
-| Variable     | Description                  | Default (local)    | Default (CI) |
-| ------------ | ---------------------------- | ------------------ | ------------ |
-| `PW_WORKERS` | Number of parallel workers   | Playwright default | `1`          |
-| `PW_TIMEOUT` | Test timeout in milliseconds | `120000`           | `120000`     |
-| `PW_RETRIES` | Number of retries            | `0`                | `2`          |
+| Variable                | Description                        | Default (local)    | Default (CI) |
+| ----------------------- | ---------------------------------- | ------------------ | ------------ |
+| `PW_WORKERS`            | Number of parallel workers         | Playwright default | `1`          |
+| `PW_TIMEOUT`            | Test timeout in milliseconds       | `120000`           | `120000`     |
+| `PW_RETRIES`            | Number of retries                  | `0`                | `2`          |
+| `PW_ACTION_TIMEOUT`     | Action timeout in milliseconds     | `10000`            | `10000`      |
+| `PW_NAVIGATION_TIMEOUT` | Navigation timeout in milliseconds | `30000`            | `30000`      |
+| `PW_PAGE_RETRIES`       | Page navigation retries            | `3`                | `3`          |
 
 In case of any further configuration needs, please refer to the [Playwright configuration documentation][playwright-docs-config].
 
@@ -77,8 +80,8 @@ Most component visual regression tests run automatically. This test file:
 
 #### Screenshot Comparator: SSIM-CIE94
 
-Spirit uses Playwright's experimental SSIM-CIE94 comparator for visual regression testing.
-This comparator is faster and handles anti-aliasing variations better than the default pixelmatch.
+Spirit uses Playwright's [experimental SSIM-CIE94 comparator][visual-comparison-proposal-feedback] for visual regression testing.
+This [comparator is faster and handles anti-aliasing variations better than the default pixelmatch][visual-comparison-proposal].
 
 | Feature                | pixelmatch | SSIM-CIE94     |
 | ---------------------- | ---------- | -------------- |
@@ -208,3 +211,5 @@ For more information, please refer to the [Accessibility Testing Guidelines][acc
 [playwright-docs]: https://playwright.dev/
 [playwright-docs-config]: https://playwright.dev/docs/test-configuration
 [testing-library-query-priority]: https://testing-library.com/docs/queries/about/#priority
+[visual-comparison-proposal]: https://github.com/microsoft/playwright/issues/24312
+[visual-comparison-proposal-feedback]: https://github.com/microsoft/playwright/issues/32057

@@ -1,6 +1,6 @@
 /* eslint-disable no-console -- we want to log when test fails */
-import { test, Page, expect } from '@playwright/test';
-import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot } from '../../helpers';
+import { test, expect, type Page } from '../../helpers/fixtures';
+import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot, retryPageGoto } from '../../helpers';
 import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
 
 type TestConfig = {
@@ -15,11 +15,11 @@ const runComponentCompareTests = ({ componentsDir, packageName, componentName }:
   const formattedPackageName = formatPackageName(packageName);
 
   test.describe('Test opened UNSTABLE_Header', () => {
-    test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page }: { page: Page }) => {
+    test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page, pageRetries }) => {
       try {
         const url = getServerUrl(packageName);
         await page.setViewportSize({ width: 375, height: 812 });
-        await page.goto(normalizeUrl(url, componentsDir, componentName));
+        await retryPageGoto(page, normalizeUrl(url, componentsDir, componentName), { retries: pageRetries });
         await waitForPageLoad(page);
         await hideFromVisualTests(page);
         await runHeaderTests(page, componentName);
