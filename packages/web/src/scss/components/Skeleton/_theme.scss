@@ -14,7 +14,7 @@ $typography-default-height: tools.get-height(tokens.$body-medium-bold, mobile);
 
 $shape-border-color: tokens.$disabled-border;
 $shape-border-width: tokens.$border-width-100;
-$shape-default-border-radius: tokens.$radius-300;
+$shape-default-border-radius: tokens.$radius-400;
 
 $sizes-body: (
     xsmall: tokens.$body-xsmall-bold,
