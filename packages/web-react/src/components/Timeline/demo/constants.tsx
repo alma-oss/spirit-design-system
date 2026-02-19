@@ -116,17 +116,17 @@ export const SIZE_STEPS: TimelineDemoStep[] = [
 
 export const SIZE_ICON_STEPS: TimelineDemoStep[] = [
   {
-    marker: { iconName: 'file' },
+    marker: { iconName: 'file', iconColor: 'secondary' },
     heading: { text: 'Small Icon Marker' },
     content: { text: SHORT_LOREM_IPSUM },
   },
   {
-    marker: { iconName: 'file' },
+    marker: { iconName: 'file', iconColor: 'secondary' },
     heading: { text: 'Medium Icon Marker' },
     content: { text: SHORT_LOREM_IPSUM },
   },
   {
-    marker: { iconName: 'file' },
+    marker: { iconName: 'file', iconColor: 'secondary' },
     heading: { text: 'Large Icon Marker' },
     content: { text: SHORT_LOREM_IPSUM },
   },
@@ -157,7 +157,7 @@ export const RESPONSIVE_SIZE_STEPS: TimelineDemoStep[] = [
 
 export const RESPONSIVE_SIZE_ICON_STEPS: TimelineDemoStep[] = [
   {
-    marker: { iconName: 'file' },
+    marker: { iconName: 'file', iconColor: 'secondary' },
     heading: { text: 'Responsive Icon Marker' },
     content: { text: SHORT_LOREM_IPSUM },
   },
