@@ -77,6 +77,7 @@ const CardContentOptions = () => (
           controls
           muted
           playsInline
+          preload="metadata"
         />
       </CardMedia>
       <CardBody>
