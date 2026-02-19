@@ -1,0 +1,37 @@
+@use 'theme';
+@use '../../tools/links';
+@use '../../tools/reset';
+
+.UNSTABLE_Filter {
+    position: relative;
+    display: inline-flex;
+    column-gap: theme.$column-gap;
+    align-items: center;
+    min-width: 18rem;
+    min-height: theme.$min-height;
+    padding-inline: theme.$padding-x;
+    color: theme.$color;
+    border: theme.$border-width theme.$border-style theme.$border-color;
+    border-radius: theme.$border-radius;
+    background: theme.$background-color;
+}
+
+.UNSTABLE_Filter__selection {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+
+.UNSTABLE_Filter__selection :where(a, button) {
+    position: relative;
+    z-index: 1;
+}
+
+.UNSTABLE_Filter__trigger {
+    @include links.stretch();
+    @include reset.button();
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
