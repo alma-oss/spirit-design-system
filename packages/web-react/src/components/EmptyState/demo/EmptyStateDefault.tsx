@@ -24,7 +24,7 @@ const EmptyStateDefault = () => (
           <Text emphasis="bold" marginBottom="space-0">
             Placeholder
           </Text>
-          <Text size="small" color="secondary">
+          <Text size="small" textColor="secondary">
             Replace me with your own component
           </Text>
         </div>
