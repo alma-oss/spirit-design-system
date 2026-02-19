@@ -1,7 +1,8 @@
-import { create } from 'storybook/theming/create';
+import { create, convert } from 'storybook/theming';
 import Logo from './assets/images/spirit-logo-inverse.svg';
 
-export default create({
+// Create the base theme vars
+const baseTheme = create({
   base: 'light',
 
   colorPrimary: '#0b1c21',
@@ -16,14 +17,6 @@ export default create({
   // Typography
   fontBase: '"Inter", sans-serif',
   fontCode: 'monospace',
-
-  // Typography structure for addon-docs components
-  typography: {
-    fonts: {
-      base: '"Inter", sans-serif',
-      mono: 'monospace',
-    },
-  },
 
   // Text colors
   // textColor: '#132930',
@@ -43,3 +36,6 @@ export default create({
   brandTitle: 'Spirit Design System',
   brandImage: Logo,
 });
+
+// Convert to StorybookTheme which includes typography.fonts structure
+export default convert(baseTheme);
