@@ -75,6 +75,23 @@ Most component visual regression tests run automatically. This test file:
 
 **This means most components require no test code**—simply adding an `index.html` demo page is sufficient for automatic visual regression coverage.
 
+#### Screenshot Comparator: SSIM-CIE94
+
+Spirit uses Playwright's experimental SSIM-CIE94 comparator for visual regression testing.
+This comparator is faster and handles anti-aliasing variations better than the default pixelmatch.
+
+| Feature                | pixelmatch | SSIM-CIE94     |
+| ---------------------- | ---------- | -------------- |
+| Anti-aliasing handling | ❌ Strict  | ✅ Perceptual  |
+| Color perception       | ❌ Linear  | ✅ Human-based |
+| Performance            | ⚠️ Slower  | ✅ ~2x faster  |
+| False negatives        | ⚠️ Common  | ✅ Reduced     |
+
+Comparison of default Playwright `pixelmatch` vs SSIM-CIE94:
+
+- **pixelmatch**: Strict pixel-by-pixel comparison, often triggers false failures on anti-aliasing changes
+- **SSIM-CIE94**: Perceptually-based comparison, aligns with human visual perception
+
 ### 2. Component-Specific Tests
 
 **Location**: `tests/e2e/components/`
