@@ -1,0 +1,39 @@
+@use 'theme';
+@use '../../tools/links';
+@use '../../tools/reset';
+
+.UNSTABLE_Picker {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    column-gap: theme.$column-gap;
+    align-items: center;
+    min-width: 18rem;
+    min-height: theme.$min-height;
+    padding: theme.$padding-y theme.$padding-x;
+    color: theme.$color;
+    border: theme.$border-width theme.$border-style theme.$border-color;
+    border-radius: theme.$border-radius;
+    background: theme.$background-color;
+}
+
+.UNSTABLE_Picker__selection {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    gap: theme.$selection-gap;
+}
+
+.UNSTABLE_Picker__selection :where(a, button) {
+    position: relative;
+    z-index: 1;
+}
+
+.UNSTABLE_Picker__trigger {
+    @include links.stretch();
+    @include reset.button();
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

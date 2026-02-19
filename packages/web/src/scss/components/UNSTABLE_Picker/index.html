@@ -1,0 +1,403 @@
+{{#> web/layout/default title="Picker" parentPageName="Components" isUnstable=true }}
+
+<!-- TODO:
+1. get ready for salary picker
+2. finalize ControlButton sizes
+3. copy Tag as UNSTABLE_Tag and make changes there (if needed)
+4. interaction states for Tag for tags in magazine
+-->
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Default</h2>
+
+    <!-- TODO: walk through all options with keyboard arrows. -->
+    <!-- TODO: remove all tags except the first one from tab order. -->
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <!-- TODO: Minimum example: -->
+      <!--
+
+        - Dropdown wrapper
+          - Picker, group + label
+            - Picker__selection, live region, grid + label
+              - Tag, grid row + cell + label
+                - ControlButton, label
+            - ControlButton, controls Dropdown, haspopup role?
+          - DropdownPopover
+            - fieldset + label
+
+      -->
+
+      <div
+        class="Dropdown"
+        data-picker-label="Language"
+      >
+
+        <div
+          role="group"
+          aria-label="Languages"
+          class="UNSTABLE_Picker"
+        >
+
+          <div
+            role="grid"
+            tabindex="-1"
+            aria-atomic="false"
+            aria-label="Selected languages"
+            aria-live="off"
+            aria-relevant="additions"
+            id="picker-lang-selection"
+            class="UNSTABLE_Picker__selection"
+          >
+            No selected languages
+            <span aria-hidden="true">Languages</span>
+          </div>
+
+          <!-- TODO Note: react aria labels the add button by the ID of the group child and the visible label. No idea why. -->
+          <button
+            data-spirit-toggle="dropdown"
+            data-spirit-target="#picker_lang"
+            class="UNSTABLE_Picker__trigger"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="picker_lang"
+          >
+            <span class="accessibility-hidden">Add</span>
+            <svg
+              class="Icon"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Alternate version: -->
+        <!--
+        <div role="listbox">
+          <div role="option" aria-selected="false">Czech</div>
+        </div>
+        -->
+
+        <!-- TODO: is the listbox role correct with checkbox inputs? Don't we need the option role? -->
+        <div
+          role="listbox"
+          class="DropdownPopover"
+          data-spirit-placement="bottom-start"
+          id="picker_lang"
+        >
+
+          <fieldset class="FieldGroup FieldGroup--fluid">
+            <legend class="accessibility-hidden">Language</legend>
+            <!--div class="FieldGroup__label" aria-hidden="true">Language</div-->
+            <div class="FieldGroup__fields">
+
+              <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
+                <input
+                  type="checkbox"
+                  id="lang_cs"
+                  class="Checkbox__input"
+                  name="default"
+                />
+                <div class="Checkbox__text">
+                  <label
+                    class="Checkbox__label"
+                    for="lang_cs"
+                  >Czech</label>
+                </div>
+              </div>
+
+              <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
+                <input
+                  type="checkbox"
+                  id="lang_dk"
+                  class="Checkbox__input"
+                  name="default"
+                />
+                <div class="Checkbox__text">
+                  <label
+                    class="Checkbox__label"
+                    for="lang_dk"
+                  >Danish</label>
+                </div>
+              </div>
+
+              <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
+                <input
+                  type="checkbox"
+                  id="lang_kl"
+                  class="Checkbox__input"
+                  name="default"
+                />
+                <div class="Checkbox__text">
+                  <label
+                    class="Checkbox__label"
+                    for="lang_kl"
+                  >Greenlandic</label>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Aggregated Tags</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div
+        class="Dropdown"
+        data-picker-label="Language"
+        data-picker-aggregate-tags
+      >
+
+        <div
+          role="group"
+          aria-label="Languages"
+          class="UNSTABLE_Picker"
+        >
+
+          <div
+            role="grid"
+            tabindex="-1"
+            aria-atomic="false"
+            aria-label="Selected languages"
+            aria-live="off"
+            aria-relevant="additions"
+            id="picker-lang2-selection"
+            class="UNSTABLE_Picker__selection"
+          >
+            No selected languages
+            <span aria-hidden="true">Languages</span>
+          </div>
+
+          <button
+            data-spirit-toggle="dropdown"
+            data-spirit-target="#picker_lang2"
+            class="UNSTABLE_Picker__trigger"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="picker_lang2"
+          >
+            <span class="accessibility-hidden">Add</span>
+            <svg
+              class="Icon"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+            </svg>
+          </button>
+        </div>
+
+        <div
+          role="listbox"
+          class="DropdownPopover"
+          data-spirit-placement="bottom-start"
+          id="picker_lang2"
+        >
+
+          <fieldset class="FieldGroup FieldGroup--fluid">
+            <legend class="accessibility-hidden">Language</legend>
+            <div class="FieldGroup__fields">
+
+              <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
+                <input
+                  type="checkbox"
+                  id="lang2_cs"
+                  class="Checkbox__input"
+                  name="default2"
+                />
+                <div class="Checkbox__text">
+                  <label
+                    class="Checkbox__label"
+                    for="lang2_cs"
+                  >Czech</label>
+                </div>
+              </div>
+
+              <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
+                <input
+                  type="checkbox"
+                  id="lang2_dk"
+                  class="Checkbox__input"
+                  name="default2"
+                />
+                <div class="Checkbox__text">
+                  <label
+                    class="Checkbox__label"
+                    for="lang2_dk"
+                  >Danish</label>
+                </div>
+              </div>
+
+              <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
+                <input
+                  type="checkbox"
+                  id="lang2_kl"
+                  class="Checkbox__input"
+                  name="default2"
+                />
+                <div class="Checkbox__text">
+                  <label
+                    class="Checkbox__label"
+                    for="lang2_kl"
+                  >Greenlandic</label>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+
+        </div>
+
+      </div>
+
+      <!-- Picker selection demo: start -->
+      <span id="picker-tag-description" hidden>Press Delete or Backspace to remove</span>
+
+      <template id="picker-tag-template">
+
+        <!-- TODO: do we need grid, row, cell pattern with max. one Tag displayed? -->
+        <div
+          role="row"
+          data-tag-row
+          tabindex="0"
+          aria-describedby="picker-tag-description"
+          class="Tag Tag--selected bg-selected-basic text-selected-subtle Tag--small"
+        >
+          <!-- TODO CAUTION: an extra div for the cell: -->
+          <div
+            role="cell"
+            aria-colindex="1"
+            style="display: contents"
+          >
+            <span data-tag-label></span>
+            <button
+              type="button"
+              aria-label="Remove"
+              class="ControlButton ControlButton--small ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target"
+              data-tag-close
+            >
+              <svg class="Icon" width="16" height="16" aria-hidden="true">
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </template>
+
+      <script type="module">
+        const tagTemplate = document.getElementById('picker-tag-template');
+
+        function getCheckboxLabel(checkbox) {
+          const label = checkbox.closest('.Checkbox')?.querySelector('.Checkbox__label');
+          return label ? label.textContent.trim() : '';
+        }
+
+        function createTag(tagLabel, onClose) {
+          const tag = tagTemplate.content.cloneNode(true);
+
+          tag.querySelector('[data-tag-row]').setAttribute('aria-label', tagLabel);
+          tag.querySelector('[data-tag-label]').textContent = tagLabel;
+          tag.querySelector('[data-tag-close]').setAttribute('aria-label', `Remove ${tagLabel}`);
+          tag.querySelector('[data-tag-close]').addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            onClose();
+          });
+
+          tag.querySelector('[data-tag-row]').addEventListener('keydown', function (e) {
+            if (e.key === 'Delete' || e.key === 'Backspace') {
+              e.preventDefault();
+              onClose();
+            }
+          });
+
+          return tag;
+        }
+
+        function initPicker(dropdownEl) {
+          const selectionEl = dropdownEl.querySelector('.UNSTABLE_Picker__selection');
+          const popoverId = dropdownEl.querySelector('[data-spirit-target]')?.getAttribute('data-spirit-target')?.slice(1);
+          const popoverEl = popoverId ? document.getElementById(popoverId) : null;
+
+          if (!selectionEl || !popoverEl) return;
+
+          const label = dropdownEl.dataset.pickerLabel || '';
+          const aggregateTags = dropdownEl.hasAttribute('data-picker-aggregate-tags');
+          const getCheckboxes = () => Array.from(popoverEl.querySelectorAll('input[type="checkbox"]'));
+          const getChecked = () => getCheckboxes().filter((cb) => cb.checked);
+
+          function render() {
+            const checked = getChecked();
+            const count = checked.length;
+
+            if (count === 0) {
+              selectionEl.textContent = label;
+              return;
+            }
+
+            selectionEl.textContent = '';
+
+            if (aggregateTags) {
+              const tagLabel = count === 1 ? getCheckboxLabel(checked[0]) : `${label} (${count})`;
+              const tag = createTag(tagLabel, () => {
+                getCheckboxes().forEach((cb) => { cb.checked = false; });
+                render();
+              });
+              selectionEl.appendChild(tag);
+            } else {
+              checked.forEach((checkbox) => {
+                const tagLabel = getCheckboxLabel(checkbox);
+                const tag = createTag(tagLabel, () => {
+                  checkbox.checked = false;
+                  render();
+                });
+                selectionEl.appendChild(tag);
+              });
+            }
+          }
+
+          const fieldset = popoverEl.querySelector('fieldset');
+          if (fieldset) {
+            fieldset.addEventListener('change', render);
+          }
+
+          render();
+        }
+
+        document.querySelectorAll('.Dropdown[data-picker-label]').forEach(initPicker);
+      </script>
+      <!-- Picker selection demo: end -->
+
+    </div>
+
+  </div>
+
+</section>
+
+{{/web/layout/default }}
