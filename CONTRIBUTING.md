@@ -175,13 +175,14 @@ This project uses Prettier for code formatting. You can run `make format` to for
 
 ## Figma Code Connect
 
-[Figma Code Connect][figma-code-connect] links Spirit Web React components to their Figma counterparts, showing developers the correct code to use when inspecting designs in [Figma Dev Mode][figma-dev-mode].
+[Figma Code Connect][figma-code-connect] links Cyborg Design System components to their Figma counterparts,
+showing developers the correct code to use when inspecting designs in [Figma Dev Mode][figma-dev-mode].
 
 ### Prerequisites
 
-Before using Code Connect, you need:
+To implement Code Connect for components, you need:
 
-1. **Figma Desktop App** - Code Connect requires the Figma desktop application (not the browser version)
+1. **Figma Desktop App or Remote MCP** - Code Connect works with the Figma desktop application or via [remote MCP server][figma-mcp-server]
 2. **Access Token** - Generate a [personal access token][figma-access-token] from your Figma account settings
 3. **Environment Variable** - Set your token as an environment variable:
 
@@ -201,7 +202,8 @@ Code Connect configuration is defined in `packages/web-react/figma.config.json`.
 
 ### Connected Components
 
-You can see which components are already connected by looking for files with the suffix `.figma.tsx` in their component directory in `figma` folder.
+You can see which components are already connected by looking for files
+with the suffix `.figma.tsx` in their component directory in `figma` folder.
 
 ### Creating New Connections
 
@@ -211,7 +213,8 @@ To connect a new component to Figma:
 yarn workspace @alma-oss/spirit-web-react run figma:connect
 ```
 
-This will guide you through the process of creating a new Code Connect file. Alternatively, you can create the file manually by following the pattern in existing `*.figma.tsx` files.
+This will guide you through the process of creating a new Code Connect file.
+Alternatively, you can create the file manually by following the pattern in existing `*.figma.tsx` files.
 
 ### Publishing to Figma
 
@@ -225,22 +228,24 @@ yarn workspace @alma-oss/spirit-web-react run figma:publish
 yarn workspace @alma-oss/spirit-web-react run figma:unpublish
 ```
 
-See Figma Docs how to unpublish single node.
+See the [Figma Code Connect documentation][figma-code-connect-unpublish] for instructions on unpublishing individual nodes.
 
 ### Viewing in Figma
 
 Once published, developers can:
 
-1. Open the Spirit UI KIT file in Figma Dev Mode
-2. Select any connected component instance
+1. Open the [SPIRIT DESIGN SYSTEM - UI Kit][figma-design-file] file in Figma Dev Mode
+2. Select any connected component instance in the OPU components section
 3. View the corresponding React code in the "Code" tab
 4. Copy the code snippet directly
+5. Use Code Connect components in Figma MCP code output when working with AI assistants
 
 ### Resources
 
 - [Figma Code Connect Documentation][figma-code-connect]
+- [Code Connect Quickstart Guide][figma-quickstart]
 - [Connecting React Components Guide][figma-react-guide]
-- [Code Connect CLI Reference][figma-cli]
+- [Figma Code Connect CLI Commands][figma-cli]
 
 ## Testing
 
@@ -358,13 +363,22 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [accessibility-testing]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/accessibility-testing.md
 [act]: https://github.com/nektos/act
 [act-article]: https://www.freecodecamp.org/news/how-to-run-github-actions-locally/
-[conventional-commits]: https://www.conventionalcommits.org
 [commitlint-config]: https://github.com/alma-oss/code-quality-tools/tree/main/packages/commitlint-config
+[conventional-commits]: https://www.conventionalcommits.org
 [decisions]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/README.md
 [developer-handbook]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/development.md
 [dictionary]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md
 [e2e-testing]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/e2e-testing.md
 [eslint]: https://eslint.org/
+[figma-access-token]: https://developers.figma.com/docs/code-connect/quickstart-guide/#before-you-begin
+[figma-cli]: https://github.com/figma/code-connect
+[figma-code-connect]: https://developers.figma.com/docs/code-connect/
+[figma-code-connect-unpublish]: https://developers.figma.com/docs/code-connect/troubleshooting/#unpublishing-code-connect
+[figma-design-file]: https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-
+[figma-dev-mode]: https://help.figma.com/hc/en-us/articles/15023124644247-Guide-to-Dev-Mode
+[figma-mcp-server]: https://developers.figma.com/docs/figma-mcp-server/remote-server-installation/
+[figma-quickstart]: https://developers.figma.com/docs/code-connect/quickstart-guide/#before-you-begin
+[figma-react-guide]: https://developers.figma.com/docs/code-connect/react/
 [jest]: https://jestjs.io/
 [lerna-home]: https://lerna.js.org
 [netlify-preview-gist]: https://gist.github.com/adamkudrna/694f3048c1338f07375b9b8af24afe2f
@@ -373,9 +387,4 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [publish-action]: https://github.com/alma-oss/spirit-design-system/actions/workflows/publish.yaml
 [release-notes-template]: https://almamedia.slack.com/docs/T0325RBAD/F08D6U6EAKH
 [typescript]: https://www.typescriptlang.org/
-[figma-access-token]: https://help.figma.com/hc/en-us/articles/8085703771159-Manage-personal-access-tokens
-[figma-cli]: https://github.com/figma/code-connect
-[figma-code-connect]: https://developers.figma.com/docs/code-connect/
-[figma-dev-mode]: https://help.figma.com/hc/en-us/articles/15023124644247-Guide-to-Dev-Mode
-[figma-react-guide]: https://developers.figma.com/docs/code-connect/react/
 [version-action]: https://github.com/alma-oss/spirit-design-system/actions/workflows/version.yaml
