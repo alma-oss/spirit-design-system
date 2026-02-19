@@ -91,10 +91,6 @@ $_field-name: 'Select';
     @include form-fields-tools.validation-text();
 }
 
-.Select__helperText {
-    @include form-fields-tools.helper-text();
-}
-
 @include dictionaries.generate-sizes(
     $class-name: $_field-name,
     $dictionary-values: form-fields-settings.$box-field-size-dictionary,
@@ -123,8 +119,4 @@ $_field-name: 'Select';
 
 :is(.Select--disabled, .Select.is-disabled) > :is(.Select__validationText, [data-spirit-element='validation_text']) {
     @include form-fields-tools.validation-text-disabled();
-}
-
-:is(.Select--disabled, .Select.is-disabled) > .Select__helperText {
-    @include form-fields-tools.helper-text-disabled();
 }

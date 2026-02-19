@@ -1,6 +1,5 @@
 @use 'theme';
 @use '../../settings/cursors';
-@use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/reset';
 
@@ -141,10 +140,6 @@ $_field-name: 'Toggle';
     @include form-fields-tools.validation-text();
 }
 
-.Toggle__helperText {
-    @include form-fields-tools.helper-text();
-}
-
 @include form-fields-tools.input-field-validation-states($_field-name);
 
 .Toggle:is(.Toggle--disabled, .is-disabled) {
@@ -187,10 +182,6 @@ $_field-name: 'Toggle';
 
 .Toggle:is(.Toggle--disabled, .is-disabled) .Toggle__validationText {
     @include form-fields-tools.validation-text-disabled();
-}
-
-.Toggle:is(.Toggle--disabled, .is-disabled) .Toggle__helperText {
-    @include form-fields-tools.helper-text-disabled();
 }
 
 @include form-fields-tools.input-position(

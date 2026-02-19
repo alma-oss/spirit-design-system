@@ -286,22 +286,6 @@
     @include typography.generate(form-fields-settings.$item-label-typography);
 }
 
-@mixin helper-text() {
-    @include typography.generate(form-fields-settings.$helper-text-typography);
-
-    display: block;
-    margin-top: form-fields-settings.$helper-text-margin-top;
-    color: form-fields-settings.$helper-text-color-state-default;
-}
-
-@mixin helper-text-disabled() {
-    color: form-fields-settings.$helper-text-color-state-disabled;
-}
-
-@mixin item-helper-text() {
-    @include typography.generate(form-fields-settings.$item-helper-text-typography);
-}
-
 @mixin stretch($pseudo-element: before) {
     &::#{$pseudo-element} {
         content: '';

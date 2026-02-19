@@ -68,11 +68,13 @@ Add the `required` attribute to the input to mark it as required and add the
 
 ## Helper Text
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
   <div class="Toggle__text">
     <label class="Toggle__label" for="toggle-helper-text">Toggle Label</label>
-    <div class="Toggle__helperText" id="toggle-helper-text-helper-text">Helper text</div>
+    <div class="HelperText" id="toggle-helper-text-helper-text">Helper text</div>
   </div>
   <input
     type="checkbox"
@@ -241,3 +243,4 @@ Use responsive breakpoint modifiers to change input position at different screen
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [mdn-checkbox]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
 [prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md

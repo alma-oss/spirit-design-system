@@ -8,6 +8,7 @@
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/svg';
+@use '../HelperText/tools' as helper-text-tools;
 
 $_field-name: 'Checkbox';
 
@@ -61,12 +62,8 @@ $_field-name: 'Checkbox';
     @include form-fields-tools.validation-text();
 }
 
-.Checkbox__helperText {
-    @include form-fields-tools.helper-text();
-}
-
 .Checkbox__validationText,
-.Checkbox__helperText {
+.Checkbox .HelperText {
     position: relative; // 3.
     z-index: 1; // 3.
 }
@@ -85,8 +82,8 @@ $_field-name: 'Checkbox';
     @include form-fields-tools.item-validation-text();
 }
 
-.Checkbox--item .Checkbox__helperText {
-    @include form-fields-tools.item-helper-text();
+.Checkbox--item .HelperText {
+    @include helper-text-tools.item-helper-text();
 }
 
 .Checkbox--item:is(.Checkbox--disabled, .Checkbox.is-disabled) {
@@ -103,10 +100,6 @@ $_field-name: 'Checkbox';
 
 :is(.Checkbox--disabled, .Checkbox.is-disabled) .Checkbox__validationText {
     @include form-fields-tools.validation-text-disabled();
-}
-
-:is(.Checkbox--disabled, .Checkbox.is-disabled) .Checkbox__helperText {
-    @include form-fields-tools.helper-text-disabled();
 }
 
 :is(.Checkbox--disabled, .Checkbox.is-disabled) > .Checkbox__input,

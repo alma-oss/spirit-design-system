@@ -83,11 +83,13 @@ Fluid width:
 
 Helper Text:
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="TextField TextField--medium">
   <label for="text-field-helper-text" class="TextField__label">Label</label>
   <input type="text" id="text-field-helper-text" class="TextField__input" name="helperText" placeholder="Placeholder" />
-  <div class="TextField__helperText">Helper text</div>
+  <div class="HelperText">Helper text</div>
 </div>
 ```
 
@@ -336,3 +338,4 @@ JS interaction class when controlled by JavaScript:
 [prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md

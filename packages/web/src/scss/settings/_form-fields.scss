@@ -27,10 +27,6 @@ $validation-text-color-state-disabled: tokens.$disabled-content;
 $validation-text-color-success: tokens.$form-field-success;
 $validation-text-color-warning: tokens.$form-field-warning;
 $validation-text-color-danger: tokens.$form-field-danger;
-$helper-text-typography: tokens.$body-small-regular;
-$helper-text-margin-top: tokens.$space-400;
-$helper-text-color-state-default: tokens.$form-field-helper-text;
-$helper-text-color-state-disabled: tokens.$disabled-content;
 
 // Inline field form components – Checkbox, Radio, etc.
 $inline-field-label-typography: tokens.$body-medium-regular;
@@ -129,4 +125,3 @@ $item-background-color-state-hover: tokens.$background-interactive-state-hover;
 $item-background-color-state-active: tokens.$background-interactive-state-active;
 $item-label-typography: tokens.$body-medium-semibold;
 $item-validation-text-typography: tokens.$body-small-semibold;
-$item-helper-text-typography: tokens.$body-small-regular;
