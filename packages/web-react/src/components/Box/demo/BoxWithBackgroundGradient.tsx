@@ -10,7 +10,7 @@ const BoxWithBackgroundGradient = () => (
     <Box padding="space-800" backgroundGradient="secondary">
       Secondary background gradient
     </Box>
-    <Box padding="space-800" backgroundGradient={{ mobile: 'primary', tablet: 'secondary', desktop: 'primary' }}>
+    <Box padding="space-800" backgroundGradient={{ mobile: 'primary', tablet: 'secondary' }}>
       Responsive background gradient
     </Box>
   </>
