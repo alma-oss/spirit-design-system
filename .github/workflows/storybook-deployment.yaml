@@ -44,3 +44,12 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: apps/storybook
           storybookBuildDir: build
+
+      - name: Post Storybook Link Comment
+        if: github.event_name == 'push'
+        uses: dannyhw/storybook-chromatic-link-comment@f44e4cd606de2de337afec3b7ddb6996ee8dfaf4 # v0.11
+        with:
+          github-token: ${{ github.token }}
+          review-url: ${{ steps.chromatic.outputs.url }}
+          build-url: ${{ steps.chromatic.outputs.buildUrl }}
+          storybook-url: ${{ steps.chromatic.outputs.storybookUrl }}
