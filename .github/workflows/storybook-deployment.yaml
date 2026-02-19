@@ -1,20 +1,26 @@
 name: 🎨 Storybook on Chromatic
+run-name: Storybook on Chromatic — ${{ github.event.inputs.branch || github.ref_name }}
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-    paths: &storybook-paths
+  push:
+    branches:
+      - main
+    paths:
       - 'apps/storybook/**'
       - 'packages/icons/**'
       - 'packages/web-react/**'
       - 'packages/design-tokens/**'
-  push:
-    branches:
-      - main
-    paths: *storybook-paths
+  # allow manual trigger
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy to Chromatic'
+        required: false
+        type: string
+        default: ''
 
 concurrency:
-  group: chromatic-${{ github.event.pull_request.number || github.ref }}
+  group: chromatic-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -26,14 +32,13 @@ jobs:
     permissions:
       contents: read
       packages: read
-      pull-requests: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          ref: ${{ github.event.inputs.branch || github.ref }}
 
       - name: Setup Node and Install Dependencies
         uses: ./.github/actions/setup-install
@@ -52,12 +57,54 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: apps/storybook
           storybookBuildDir: build
+          # TurboSnap: only re-snapshot stories whose code changed vs last accepted baseline
+          onlyChanged: true
 
-      - name: Post Storybook Link Comment
-        if: github.event_name == 'pull_request'
-        uses: dannyhw/storybook-chromatic-link-comment@f44e4cd606de2de337afec3b7ddb6996ee8dfaf4 # v0.11
+      - name: Notify Slack with Chromatic URL
+        if: always() && (steps.chromatic.outcome == 'success' || steps.chromatic.outcome == 'failure')
+        uses: slackapi/slack-github-action@fcfb566f8b0aab22203f066d80ca1d7e4b5d05b3 # v1.27.1
         with:
-          github-token: ${{ github.token }}
-          review-url: ${{ steps.chromatic.outputs.url }}
-          build-url: ${{ steps.chromatic.outputs.buildUrl }}
-          storybook-url: ${{ steps.chromatic.outputs.storybookUrl }}
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }} # Slack channel-id of #spirit-design-system-notifications_en
+          payload: |
+            {
+              "attachments": [
+                {
+                  "color": "${{ steps.chromatic.outcome == 'success' && '#36a64f' || '#ff0000' }}",
+                  "blocks": [
+                    {
+                      "type": "header",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "${{ steps.chromatic.outcome == 'success' && ':green_circle: Chromatic build completed' || ':x: Chromatic build failed' }}",
+                        "emoji": true
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*Branch:* `${{ github.ref_name }}`\n*Commit:* <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>\n*Status:* `${{ steps.chromatic.outcome }}`"
+                      }
+                    },
+                    {
+                      "type": "actions",
+                      "elements": [
+                        {
+                          "type": "button",
+                          "text": { "type": "plain_text", "text": "View in Chromatic" },
+                          "url": "${{ steps.chromatic.outputs.url }}"
+                        },
+                        {
+                          "type": "button",
+                          "text": { "type": "plain_text", "text": "GitHub Action" },
+                          "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATIONS_TOKEN }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
