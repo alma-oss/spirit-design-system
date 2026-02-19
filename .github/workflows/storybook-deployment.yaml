@@ -1,20 +1,12 @@
 name: 🎨 Storybook on Chromatic
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-    paths: &storybook-paths
-      - 'apps/storybook/**'
-      - 'packages/icons/**'
-      - 'packages/web-react/**'
-      - 'packages/design-tokens/**'
   push:
-    branches:
-      - main
-    paths: *storybook-paths
+    tags:
+      - 'run-visual-tests'
 
 concurrency:
-  group: chromatic-${{ github.event.pull_request.number || github.ref }}
+  group: chromatic-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -33,7 +25,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          ref: ${{ github.sha }}
 
       - name: Setup Node and Install Dependencies
         uses: ./.github/actions/setup-install
@@ -52,12 +44,3 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: apps/storybook
           storybookBuildDir: build
-
-      - name: Post Storybook Link Comment
-        if: github.event_name == 'pull_request'
-        uses: dannyhw/storybook-chromatic-link-comment@f44e4cd606de2de337afec3b7ddb6996ee8dfaf4 # v0.11
-        with:
-          github-token: ${{ github.token }}
-          review-url: ${{ steps.chromatic.outputs.url }}
-          build-url: ${{ steps.chromatic.outputs.buildUrl }}
-          storybook-url: ${{ steps.chromatic.outputs.storybookUrl }}
