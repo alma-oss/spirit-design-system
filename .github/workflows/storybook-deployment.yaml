@@ -17,7 +17,6 @@ on:
     paths: *storybook-paths
 
 env:
-  CHROMATIC_ENV: 'chromatic'
   STORYBOOK_BUILD_DIR: 'build'
   STORYBOOK_SCOPE: '@alma-oss/spirit-storybook'
   STORYBOOK_WORKING_DIR: 'apps/storybook'
@@ -49,7 +48,7 @@ jobs:
     needs: has-label
     if: ${{ needs.has-label.outputs.has-label == 'true' || (github.ref == 'refs/heads/main') }}
     runs-on: ubuntu-24.04
-    environment: ${{ env.CHROMATIC_ENV }}
+    environment: chromatic
     timeout-minutes: 15
     permissions:
       contents: read
