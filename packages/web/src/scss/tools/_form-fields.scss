@@ -1,7 +1,6 @@
 // 1. Force the color to be printed as-is, without any color adjustment.
 // 2. Put the input above the stretched label.
-// 3. Set the color of the label on the root element so it can be overridden by a helper/utility class.
-// 4. Prepare for the stretched label pseudo element (the `stretch()` mixin).
+// 3. Prepare for the stretched label pseudo element (the `stretch()` mixin).
 
 @use 'sass:map';
 @use 'sass:string';
@@ -13,26 +12,6 @@
 @use 'reset';
 @use 'string' as spirit-string;
 @use 'typography';
-
-@mixin label-disabled() {
-    color: form-fields-settings.$label-color-state-disabled;
-
-    &::after {
-        color: form-fields-settings.$label-color-state-disabled;
-    }
-}
-
-@mixin label-hidden() {
-    @include accessibility.hide-text();
-}
-
-@mixin label-required() {
-    @include typography.generate(form-fields-settings.$label-required-typography);
-
-    content: '*';
-    margin-left: form-fields-settings.$label-required-margin-left;
-    color: form-fields-settings.$label-required-color;
-}
 
 @mixin input-disabled() {
     color: form-fields-settings.$input-color-state-disabled;
@@ -64,7 +43,7 @@
 }
 
 @mixin inline-field-root() {
-    position: relative; // 4.
+    position: relative; // 3.
     display: inline-flex;
     margin-block: form-fields-settings.$inline-field-margin-y;
 
@@ -92,28 +71,6 @@
             );
         }
     }
-}
-
-@mixin inline-field-label() {
-    @include typography.generate(form-fields-settings.$inline-field-label-typography);
-
-    display: block;
-    color: form-fields-settings.$label-color-state-default;
-    cursor: cursors.$form-fields;
-}
-
-@mixin inline-field-label-disabled() {
-    @include label-disabled();
-
-    cursor: cursors.$disabled;
-}
-
-@mixin box-field-label() {
-    @include typography.generate(form-fields-settings.$box-field-label-typography);
-
-    display: block;
-    margin-bottom: form-fields-settings.$box-field-label-margin-bottom;
-    color: form-fields-settings.$label-color-state-default;
 }
 
 @mixin inline-field-input() {
@@ -259,7 +216,6 @@
     width: 100%;
     padding: form-fields-settings.$item-padding-y form-fields-settings.$item-padding-x;
     margin-block: 0;
-    color: form-fields-settings.$label-color-state-default; // 3.
     border-radius: form-fields-settings.$item-border-radius;
     background-color: form-fields-settings.$item-background-color-state-default;
 
@@ -282,10 +238,6 @@
     @include typography.generate(form-fields-settings.$item-validation-text-typography);
 }
 
-@mixin item-label() {
-    @include typography.generate(form-fields-settings.$item-label-typography);
-}
-
 @mixin helper-text() {
     @include typography.generate(form-fields-settings.$helper-text-typography);
 
@@ -300,15 +252,6 @@
 
 @mixin item-helper-text() {
     @include typography.generate(form-fields-settings.$item-helper-text-typography);
-}
-
-@mixin stretch($pseudo-element: before) {
-    &::#{$pseudo-element} {
-        content: '';
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-    }
 }
 
 // Generates responsive input position classes for form field components.

@@ -10,7 +10,7 @@ the native input element and styles it to look like a toggle switch.
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-default">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-default">Toggle Label</label>
   </span>
   <input type="checkbox" id="toggle-default" class="Toggle__input" name="default" />
 </div>
@@ -24,7 +24,7 @@ modifier class to the input. This will add a visual indicators to the toggle swi
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-indicators">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-indicators">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-indicators" class="Toggle__input Toggle__input--indicators" name="default" />
 </div>
@@ -38,7 +38,7 @@ Add the `required` attribute to the input to mark it as required and add the
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
   <div class="Toggle__text">
-    <label class="Toggle__label Toggle__label--required" for="toggle-required">Toggle Label</label>
+    <label class="Label Label--inline Label--required" for="toggle-required">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-required" class="Toggle__input" name="required" required />
 </div>
@@ -49,7 +49,7 @@ Add the `required` attribute to the input to mark it as required and add the
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
   <div class="Toggle__text">
-    <label class="Toggle__label Toggle__label--hidden" for="toggle-hidden-label">Toggle Label</label>
+    <label class="Label Label--inline Label--hidden" for="toggle-hidden-label">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-hidden-label" class="Toggle__input" name="hidden-label" />
 </div>
@@ -60,7 +60,7 @@ Add the `required` attribute to the input to mark it as required and add the
 ```html
 <div class="Toggle Toggle--inputPositionEnd Toggle--fluid">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-fluid">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-fluid">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-fluid" class="Toggle__input" name="fluid" />
 </div>
@@ -71,7 +71,7 @@ Add the `required` attribute to the input to mark it as required and add the
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-helper-text">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-helper-text">Toggle Label</label>
     <div class="Toggle__helperText" id="toggle-helper-text-helper-text">Helper text</div>
   </div>
   <input
@@ -97,14 +97,14 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 ```html
 <div class="Toggle Toggle--inputPositionEnd Toggle--success">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-success">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-success">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-success" class="Toggle__input" name="default" />
 </div>
 
 <div class="Toggle Toggle--inputPositionEnd Toggle--warning">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-warning">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-warning">Toggle Label</label>
     <div class="Toggle__validationText" id="toggle-warning-validation-text">Validation text</div>
   </div>
   <input
@@ -119,7 +119,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 
 <div class="Toggle Toggle--inputPositionEnd Toggle--danger">
   <div class="Toggle__text">
-    <label for="toggle-danger" class="Toggle__label">Toggle Label</label>
+    <label for="toggle-danger" class="Label Label--inline">Toggle Label</label>
     <ul class="Toggle__validationText" id="toggle-danger-validation-text">
       <li>First validation text</li>
       <li>Second validation text</li>
@@ -136,7 +136,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 
 <div class="Toggle Toggle--inputPositionEnd Toggle--warning">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-warning">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-warning">Toggle Label</label>
     <div class="Toggle__validationText" id="toggle-warning-validation-text">
       <svg width="20" height="20" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
@@ -169,7 +169,7 @@ components mix CSS with JS by design and handle prefixes their own way.**
 ```html
 <div class="Toggle Toggle--inputPositionEnd has-success">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-success">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-success">Toggle Label</label>
     <div class="Toggle__validationText" id="toggle-success-validation-text" data-spirit-element="validation_text">
       Validation text
     </div>
@@ -204,7 +204,7 @@ JS interaction class when controlled by JavaScript:
 ```html
 <div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-disabled">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-disabled">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-disabled" class="Toggle__input" name="default" disabled />
 </div>
@@ -219,7 +219,7 @@ The input position can be set to `end` (default) or `start`.
 ```html
 <div class="Toggle Toggle--inputPositionStart">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-position-start">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-position-start">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-position-start" class="Toggle__input" name="position" />
 </div>
@@ -232,7 +232,7 @@ Use responsive breakpoint modifiers to change input position at different screen
 ```html
 <div class="Toggle Toggle--tablet--inputPositionStart">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-position-responsive">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-position-responsive">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-position-responsive" class="Toggle__input" name="position" />
 </div>

@@ -98,7 +98,7 @@
             <input type="checkbox" id="toast-is-collapsible" class="Checkbox__input" name="is-collapsible"
                    autocomplete="off" checked/>
             <div class="Checkbox__text">
-              <label class="Checkbox__label" for="toast-is-collapsible">Collapsible</label>
+              <label class="Label Label--inline" for="toast-is-collapsible">Collapsible</label>
             </div>
           </div>
         </fieldset>
@@ -108,14 +108,14 @@
             <input type="radio" id="toast-alignment-top" name="toast-alignment-y" value="top" class="Radio__input"
                    autocomplete="off" />
             <div class="Radio__text">
-              <label class="Radio__label" for="toast-alignment-top">Top</label>
+              <label class="Label Label--inline" for="toast-alignment-top">Top</label>
             </div>
           </div>
           <div class="Radio mr-600">
             <input type="radio" id="toast-alignment-bottom" name="toast-alignment-y" value="bottom" class="Radio__input"
                    autocomplete="off" checked/>
             <div class="Radio__text">
-              <label class="Radio__label" for="toast-alignment-bottom">Bottom</label>
+              <label class="Label Label--inline" for="toast-alignment-bottom">Bottom</label>
             </div>
           </div>
         </fieldset>
@@ -125,21 +125,21 @@
             <input type="radio" id="toast-alignment-left" name="toast-alignment-x" value="left" class="Radio__input"
                    autocomplete="off" />
             <div class="Radio__text">
-              <label class="Radio__label" for="toast-alignment-left">Left</label>
+              <label class="Label Label--inline" for="toast-alignment-left">Left</label>
             </div>
           </div>
           <div class="Radio mr-600">
             <input type="radio" id="toast-alignment-center" name="toast-alignment-x" value="center" class="Radio__input"
                    autocomplete="off" checked/>
             <div class="Radio__text">
-              <label class="Radio__label" for="toast-alignment-center">Center</label>
+              <label class="Label Label--inline" for="toast-alignment-center">Center</label>
             </div>
           </div>
           <div class="Radio mr-600">
             <input type="radio" id="toast-alignment-right" name="toast-alignment-x" value="right" class="Radio__input"
                    autocomplete="off" />
             <div class="Radio__text">
-              <label class="Radio__label" for="toast-alignment-right">Right</label>
+              <label class="Label Label--inline" for="toast-alignment-right">Right</label>
             </div>
           </div>
         </fieldset>
@@ -181,7 +181,7 @@
           <legend class="mb-500">New Toast:</legend>
           <div class="Stack Stack--hasSpacing">
             <div class="Select Select--medium">
-              <label for="toast-color" class="Select__label">Color</label>
+              <label for="toast-color" class="Label Label--box">Color</label>
               <div class="Select__inputContainer">
                 <select id="toast-color" name="color" class="Select__input" autocomplete="off">
                   <option value="neutral">Neutral</option>
@@ -201,30 +201,30 @@
               <input type="checkbox" id="toast-has-icon" class="Checkbox__input" name="is-dismissible" autocomplete="off"
                      checked/>
               <div class="Checkbox__text">
-                <label class="Checkbox__label" for="toast-has-icon">Has icon</label>
+                <label class="Label Label--inline" for="toast-has-icon">Has icon</label>
               </div>
             </div>
             <div class="Checkbox">
               <input type="checkbox" id="toast-is-dismissible" class="Checkbox__input" name="is-dismissible"
                      autocomplete="off" checked/>
               <div class="Checkbox__text">
-                <label class="Checkbox__label" for="toast-is-dismissible">Dismissible</label>
+                <label class="Label Label--inline" for="toast-is-dismissible">Dismissible</label>
               </div>
             </div>
             <div class="Checkbox">
               <input type="checkbox" id="toast-enable-auto-close" class="Checkbox__input" name="enable-auto-close"
                      autocomplete="off" checked/>
               <div class="Checkbox__text">
-                <label class="Checkbox__label" for="toast-enable-auto-close">Enable AutoClose</label>
+                <label class="Label Label--inline" for="toast-enable-auto-close">Enable AutoClose</label>
               </div>
             </div>
             <div class="TextField TextField--medium">
-              <label for="toast-auto-close-interval" class="TextField__label">AutoClose interval (ms)</label>
+              <label for="toast-auto-close-interval" class="Label Label--box">AutoClose interval (ms)</label>
               <input type="number" min="0" max="60000" step="500" value="3000" id="toast-auto-close-interval"
                      name="auto-close-interval" class="TextField__input"/>
             </div>
             <div class="TextArea TextArea--medium">
-              <label for="toast-message" class="TextArea__label">Message</label>
+              <label for="toast-message" class="Label Label--box">Message</label>
               <textarea id="toast-message" class="TextArea__input"
                         autocomplete="off">This is a new toast message.</textarea>
               <div class="TextArea__helperText">Can contain HTML.</div>
@@ -233,11 +233,11 @@
               <input type="checkbox" id="toast-enable-link" class="Checkbox__input" name="enable-link" autocomplete="off"
                      checked/>
               <div class="Checkbox__text">
-                <label class="Checkbox__label" for="toast-enable-link">Add link</label>
+                <label class="Label Label--inline" for="toast-enable-link">Add link</label>
               </div>
             </div>
             <div class="TextArea TextArea--medium">
-              <label for="toast-link" class="TextArea__label">Link</label>
+              <label for="toast-link" class="Label Label--box">Link</label>
               <textarea id="toast-link" class="TextArea__input" autocomplete="off">This is a toast link.</textarea>
               <div class="TextArea__helperText">Can contain HTML.</div>
             </div>
@@ -274,7 +274,7 @@
         <fieldset style="border: 0;">
           <legend class="mb-500">Virtual keyboard interaction:</legend>
           <div class="TextField TextField--medium">
-            <label for="text-field-for-focus" class="TextField__label">In Chrome on Android, tap into this text field to
+            <label for="text-field-for-focus" class="Label Label--box">In Chrome on Android, tap into this text field to
               see how Toast position updates:</label>
             <input type="text" id="text-field-for-focus" class="TextField__input" name="default" placeholder="Tap here!"/>
           </div>

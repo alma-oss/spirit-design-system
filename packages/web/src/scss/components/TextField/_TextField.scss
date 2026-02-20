@@ -31,18 +31,6 @@ $_field-name: 'TextField';
     @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
 }
 
-.TextField__label {
-    @include form-fields-tools.box-field-label();
-}
-
-.TextField__label--hidden {
-    @include form-fields-tools.label-hidden();
-}
-
-.TextField__label--required::after {
-    @include form-fields-tools.label-required();
-}
-
 .TextField__input {
     @include form-fields-tools.box-field-input($_field-name);
 
@@ -194,10 +182,6 @@ $_field-name: 'TextField';
     $css-variable-infix: 'input'
 );
 @include form-fields-tools.input-field-validation-states($_field-name);
-
-.TextField--disabled > .TextField__label {
-    @include form-fields-tools.label-disabled();
-}
 
 .TextField .TextField__input:disabled,
 :is(.TextField--disabled, .TextField.is-disabled) .TextField__input {

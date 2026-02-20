@@ -60,7 +60,7 @@ on the root element).
 
 ```html
 <div class="FileUploaderInput" data-spirit-element="wrapper">
-  <label for="file-uploader" class="FileUploaderInput__label">Label</label>
+  <label for="file-uploader" class="Label Label--box">Label</label>
   <input
     type="file"
     id="file-uploader"
@@ -174,7 +174,7 @@ To mark the input as required, simply add the `FileUploaderInput__label--require
 
 ```html
 <div class="FileUploaderInput" data-spirit-element="wrapper">
-  <label for="file-uploader" class="FileUploaderInput__label FileUploaderInput__label--required">Label</label>
+  <label for="file-uploader" class="Label Label--box Label--required">Label</label>
   <input
     type="file"
     id="file-uploader"
@@ -563,7 +563,7 @@ This is how all subcomponents build up the complete FileUploader:
 
   <!-- FileUploaderInput: start -->
   <div class="FileUploaderInput" data-spirit-element="wrapper">
-    <label for="file-uploader-with-attachments" class="FileUploaderInput__label">Label</label>
+    <label for="file-uploader-with-attachments" class="Label Label--box">Label</label>
     <input
       type="file"
       id="file-uploader-with-attachments"

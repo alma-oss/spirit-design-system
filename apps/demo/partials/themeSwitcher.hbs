@@ -1,5 +1,5 @@
 <div class="Select Select--medium Select--fluid">
-  <label for="{{id}}" class="Select__label {{#if isLabelHidden }}Select__label--hidden{{/if}}">Theme</label>
+  <label for="{{id}}" class="Label {{#if isLabelHidden }}Label--hidden{{/if}}">Theme</label>
   <div class="Select__inputContainer">
     <select id="{{id}}" name="theme" class="Select__input" onchange="switchTheme(event)" autocomplete="off">
       {{#each @themes as |theme|}}

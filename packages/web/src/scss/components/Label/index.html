@@ -1,0 +1,144 @@
+{{#> web/layout/default title="Label" parentPageName="Components" }}
+
+<section class="py-900 py-tablet-1000 hide-from-visual-tests">
+
+  <div class="Container">
+
+    <p class="mb-600">
+      <strong>Note:</strong> For demonstration purposes and to fulfill accessibility and HTML semantics requirements,
+      all labels on this page are associated with related form component.
+    </p>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Box Label with TextField</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="TextField TextField--medium">
+        <label for="text-field-example" class="Label Label--box">Label</label>
+        <input type="text" id="text-field-example" class="TextField__input" placeholder="Placeholder" />
+      </div>
+
+      <div class="TextField TextField--medium TextField--required">
+        <label for="text-field-required" class="Label Label--box Label--required">Required Field</label>
+        <input type="text" id="text-field-required" class="TextField__input" placeholder="Placeholder" required />
+      </div>
+
+      <div class="TextField TextField--medium TextField--disabled">
+        <label for="text-field-disabled" class="Label Label--box Label--disabled">Disabled Field</label>
+        <input type="text" id="text-field-disabled" class="TextField__input" placeholder="Placeholder" disabled />
+      </div>
+
+      <div class="TextField TextField--medium">
+        <label for="text-field-hidden" class="Label Label--box Label--hidden">Hidden Label</label>
+        <input type="text" id="text-field-hidden" class="TextField__input" placeholder="Placeholder with hidden label" />
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Inline Label with Checkbox</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Checkbox Checkbox--inputPositionStart">
+        <input type="checkbox" id="checkbox-example" class="Checkbox__input" />
+        <div class="Checkbox__text">
+          <label class="Label Label--inline" for="checkbox-example">Checkbox Label</label>
+        </div>
+      </div>
+
+      <div class="Checkbox Checkbox--required Checkbox--inputPositionStart">
+        <input type="checkbox" id="checkbox-required" class="Checkbox__input" required />
+        <div class="Checkbox__text">
+          <label class="Label Label--inline Label--required" for="checkbox-required">Required Checkbox</label>
+        </div>
+      </div>
+
+      <div class="Checkbox Checkbox--disabled Checkbox--inputPositionStart">
+        <input type="checkbox" id="checkbox-disabled" class="Checkbox__input" disabled />
+        <div class="Checkbox__text">
+          <label class="Label Label--inline Label--disabled" for="checkbox-disabled">Disabled Checkbox</label>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Item Label with Item Component</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <button type="button" class="Item">
+        <span class="Label Label--item">Item label</span>
+      </button>
+
+      <button type="button" class="Item Item--selected">
+        <span class="Label Label--item">Selected Item</span>
+        <span class="Item__icon Item__icon--end">
+          <svg width="24" height="24" aria-hidden="true">
+            <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+          </svg>
+        </span>
+      </button>
+
+      <button type="button" class="Item Item--disabled">
+        <span class="Label Label--item Label--disabled">Disabled Item</span>
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Combined Label with Checkbox Item</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
+        <input type="checkbox" id="checkbox-item-example" class="Checkbox__input" />
+        <div class="Checkbox__text">
+          <label class="Label Label--inline Label--item" for="checkbox-item-example">Checkbox Item</label>
+        </div>
+      </div>
+
+      <div class="Radio Radio--inputPositionStart Radio--item">
+        <input type="radio" id="radio-item-example" class="Radio__input" name="example" />
+        <div class="Radio__text">
+          <label class="Label Label--inline Label--item" for="radio-item-example">Radio Item</label>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+{{/web/layout/default }}

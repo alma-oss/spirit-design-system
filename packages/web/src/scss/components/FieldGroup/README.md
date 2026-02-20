@@ -8,7 +8,7 @@ validation messages for all fields in the group.
 ```html
 <fieldset class="FieldGroup">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label" aria-hidden="true">Label</div>
+  <div class="Label Label--box" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>
@@ -37,7 +37,7 @@ element.
 ```html
 <fieldset class="FieldGroup">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label FieldGroup__label--required" aria-hidden="true">Label</div>
+  <div class="Label Label--box Label--required" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>
@@ -73,7 +73,7 @@ To render helper text, add a `<div>` element with the `FieldGroup__helperText` c
 ```html
 <fieldset class="FieldGroup" aria-describedby="field-group-helper-text">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label" aria-hidden="true">Label</div>
+  <div class="Label Label--box" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>
@@ -91,7 +91,7 @@ To make the FieldGroup component fluid, add the `FieldGroup--fluid` modifier cla
 ```html
 <fieldset class="FieldGroup FieldGroup--fluid">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label" aria-hidden="true">Label</div>
+  <div class="Label Label--box" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>
@@ -117,7 +117,7 @@ disabled styling on all elements.
 ```html
 <fieldset class="FieldGroup" disabled>
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label" aria-hidden="true">Label</div>
+  <div class="Label Label--box" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <div class="TextField TextField--medium TextField--disabled">
       <label for="text-field" class="TextField__label">Label</label>
@@ -136,7 +136,7 @@ Validation states can be presented either by adding a CSS modifier class (`Field
 ```html
 <fieldset class="FieldGroup FieldGroup--success" aria-describedby="field-group-success-validation-text">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label" aria-hidden="true">Label</div>
+  <div class="Label Label--box" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>
@@ -179,7 +179,7 @@ handle prefixes their own way.**
 ```html
 <fieldset class="FieldGroup FieldGroup--success" aria-describedby="field-group-success-validation-text">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label" aria-hidden="true">Label</div>
+  <div class="Label Label--box" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>

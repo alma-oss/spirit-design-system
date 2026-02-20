@@ -32,9 +32,7 @@
     }
 }
 
-.Item__label {
-    @include form-fields.item-label();
-
+.Item .Label {
     grid-column: 2;
 }
 
@@ -68,10 +66,6 @@
     user-select: none;
     pointer-events: none;
     cursor: cursors.$disabled;
-}
-
-.Item--disabled .Item__label {
-    @include form-fields.label-disabled();
 }
 
 .Item--disabled .Item__helperText {

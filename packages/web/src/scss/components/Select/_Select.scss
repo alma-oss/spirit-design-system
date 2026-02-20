@@ -17,18 +17,6 @@ $_field-name: 'Select';
     @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
 }
 
-.Select__label {
-    @include form-fields-tools.box-field-label();
-}
-
-.Select__label--hidden {
-    @include form-fields-tools.label-hidden();
-}
-
-.Select__label--required::after {
-    @include form-fields-tools.label-required();
-}
-
 .Select__inputContainer {
     position: relative;
     display: flex;
@@ -106,10 +94,6 @@ $_field-name: 'Select';
 // 2.
 .Select--small {
     --#{tokens.$css-variable-prefix}select-input-line-height: 1.3;
-}
-
-.Select--disabled > .Select__label {
-    @include form-fields-tools.label-disabled();
 }
 
 .Select .Select__input:disabled,
