@@ -14,7 +14,7 @@
 @use '../../settings/dictionaries' as dictionaries-settings;
 @use '../../settings/links' as links-settings;
 @use '../../tools/dictionaries';
-@use '../../tools/links' as links-tools;
+@use '../../tools/pseudo-element';
 
 // 1.
 @include dictionaries.prepare-button-links(list.append(links-settings.$colors, 'inherit'));
@@ -85,7 +85,7 @@
 
 // 7.
 .link-stretched {
-    @include links-tools.stretch();
+    @include pseudo-element.stretch();
 }
 
 // 8.
