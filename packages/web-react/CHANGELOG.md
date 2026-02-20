@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.2.1...@alma-oss/spirit-web-react@4.3.0) (2026-02-20)
+
+### Features
+
+- **web-react:** implement hook for default translations ([e0d9028](https://github.com/alma-oss/spirit-design-system/commit/e0d9028f8775aa228259a7ff23b5fe266b5baa25))
+- **web-react:** introduce responsive sizes in Avatar #DS-2386 ([9c6192f](https://github.com/alma-oss/spirit-design-system/commit/9c6192f9a4901216c770053f2e3ea1c7ffda1bd4)), closes [#DS-2386](https://github.com/alma-oss/spirit-design-system/issues/DS-2386)
+- **web-react:** introduce sizes for NavigationAvatar #DS-2387 ([f13ff45](https://github.com/alma-oss/spirit-design-system/commit/f13ff4500dd2e205a6043887599d301b5945885b)), closes [#DS-2387](https://github.com/alma-oss/spirit-design-system/issues/DS-2387)
+- **web-react:** introduce useI18n hook and default translations ([1e9859c](https://github.com/alma-oss/spirit-design-system/commit/1e9859c24a88e8950f01cab855134fedff585a2d))
+- **web,web-react:** introduce alignmentY to Card ([ad89187](https://github.com/alma-oss/spirit-design-system/commit/ad8918702d125657b3141926528d9ea51813eb9f))
+
+### Bug Fixes
+
+- **jest-config:** add ts-node for TypeScript config files ([e63ed80](https://github.com/alma-oss/spirit-design-system/commit/e63ed80e532205105301ece3ff97d4626e6f399f))
+- **web-react:** add fallback timeout to ensure dialog closes #DS-2342 ([db26ec1](https://github.com/alma-oss/spirit-design-system/commit/db26ec1a4c0cc4a2ce799faf8324e6fd74f20f81)), closes [#DS-2342](https://github.com/alma-oss/spirit-design-system/issues/DS-2342)
+- **web-react:** apply isEmpty check only to whitelisted style props ([7770c12](https://github.com/alma-oss/spirit-design-system/commit/7770c12eb6860dfb1c266896e98f90ab64233109)), closes [#DS-2405](https://github.com/alma-oss/spirit-design-system/issues/DS-2405)
+- **web-react:** remove TransferProps from Alert #DS-2282 ([45308dd](https://github.com/alma-oss/spirit-design-system/commit/45308ddd69cd057158b975d9fd95adb63fbc18d7)), closes [#DS-2282](https://github.com/alma-oss/spirit-design-system/issues/DS-2282)
+- **web-react:** update Figma file name in config ([6dd93e2](https://github.com/alma-oss/spirit-design-system/commit/6dd93e25538d99516239c6a4725fe5dbe15d35b5))
+- **web-react:** update Tooltip isDismissible Figma prop name ([5f61015](https://github.com/alma-oss/spirit-design-system/commit/5f61015a4844053a3574561e3c09dc4a41ebb1b4))
+
+### Documentation
+
+- **repo:** add preload="metadata" to video elements for consistent loading ([de58c5c](https://github.com/alma-oss/spirit-design-system/commit/de58c5cced2687528677bc2f467c9eb942c5556b))
+- **repo:** introduce documentation about E2E tests #DS-2320 ([f5b0db3](https://github.com/alma-oss/spirit-design-system/commit/f5b0db3569ef5177b5c5b29042cd851b2cb42440)), closes [#DS-2320](https://github.com/alma-oss/spirit-design-system/issues/DS-2320)
+- **repo:** migrate links in changelogs ([9feea1b](https://github.com/alma-oss/spirit-design-system/commit/9feea1b51b44ba7a7e99f73b50e311c6ea6d6f46)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+- **repo:** replace `jira.lmc.cz` with `jira.almacareer.tech` links ([aab1d4f](https://github.com/alma-oss/spirit-design-system/commit/aab1d4f8dfb3026b08d6345d673d3a1844fb6008))
+- **web-react:** fix Item `elementType` in UNSTABLE_Header ([3392d55](https://github.com/alma-oss/spirit-design-system/commit/3392d553cabc3883414c21b5c802ce740f31d7a9))
+- **web-react:** introduce code style for typings ([f2cc6ef](https://github.com/alma-oss/spirit-design-system/commit/f2cc6eff51e124febb08234ff5b663a47ea6940d)), closes [#DS-2416](https://github.com/alma-oss/spirit-design-system/issues/DS-2416)
+- **web-react:** migrate links to alma-oss github organization ([534e826](https://github.com/alma-oss/spirit-design-system/commit/534e82670be66768782f393e7de7c047c98b9afa)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+- **web-react:** reformat malformed changelog ([f0766b1](https://github.com/alma-oss/spirit-design-system/commit/f0766b1a49b6fde3e3f638ce4f625277ac950120))
+- **web-react:** set icon colors in markers in Timeline demo ([36fb058](https://github.com/alma-oss/spirit-design-system/commit/36fb058b05fb7b9c5b06ebd14810fe3e2c49328b))
+- **web-react:** use correct color prop on Text component in EmptyState ([35b1140](https://github.com/alma-oss/spirit-design-system/commit/35b11409753cb3513b356b9c7af04d5ab8325a09))
+- **web, web-react:** document responsive `Button` and `ButtonLink` #DS-2311 ([052faa9](https://github.com/alma-oss/spirit-design-system/commit/052faa9810aa12dd155ca9b39b6d06354a2babf3)), closes [#DS-2311](https://github.com/alma-oss/spirit-design-system/issues/DS-2311)
+
+### Dependencies
+
+- Update dependency typescript to v5.8.3 ([6ae7ebc](https://github.com/alma-oss/spirit-design-system/commit/6ae7ebc8acf23c0237a000de719f7b5a522c1eee))
+
+### Chores
+
+- **deps:** update all non-major dependencies ([e568ea0](https://github.com/alma-oss/spirit-design-system/commit/e568ea051d0b4b216646d09193aeb033dcc2ccf6))
+- **deps:** update build tools non-major ([8db171a](https://github.com/alma-oss/spirit-design-system/commit/8db171a2f9dc811a16b4bbb088063bb26ade237e))
+- **deps:** update compile tools non-major ([95f1928](https://github.com/alma-oss/spirit-design-system/commit/95f192895d74c15473c3da4df3738d8eb89d9d9a))
+- **deps:** update dependency webpack to v5.104.1 [security] ([1066ef6](https://github.com/alma-oss/spirit-design-system/commit/1066ef62caf9e5a40fab356e5e6528af94775fab))
+- **deps:** update eslint plugins and configs non-major ([5f56654](https://github.com/alma-oss/spirit-design-system/commit/5f5665474d2ad3e1f2729bfe51ff6f7be1b934c7))
+- **deps:** update monorepo:storybook to v10.2.3 ([14cfcd6](https://github.com/alma-oss/spirit-design-system/commit/14cfcd6c5e1e08d912dcb0204e603d24f0a385e7))
+- **deps:** update monorepo:storybook to v10.2.4 ([b674e7f](https://github.com/alma-oss/spirit-design-system/commit/b674e7fb412974515c97647b460f2faccc3ea29c))
+- **deps:** update types non-major ([b1c747b](https://github.com/alma-oss/spirit-design-system/commit/b1c747b6eb1ab3b31fc0be2877ecf240cc2698f4))
+- **repo:** delete last residuals of the Twig package ([d439ea5](https://github.com/alma-oss/spirit-design-system/commit/d439ea55d912a32fb83a87a7aa899cd40f013f57))
+- **repo:** enable provenance publishing ([6d9078d](https://github.com/alma-oss/spirit-design-system/commit/6d9078d27a6c762872f798a200767c44189acbce)), closes [#DS-2171](https://github.com/alma-oss/spirit-design-system/issues/DS-2171)
+- **repo:** migrate packages repository url to alma-oss github organization ([ff2e427](https://github.com/alma-oss/spirit-design-system/commit/ff2e427a97da8d1e42b386e1701905ec203770a4)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+- **web-react:** add storybook dev dep due to missing types ([0525a59](https://github.com/alma-oss/spirit-design-system/commit/0525a5962a0d34d6821a45ecb5650b715e2471de))
+
+### Styles
+
+- **repo:** reformat code after prettier package upgrade ([eafcce5](https://github.com/alma-oss/spirit-design-system/commit/eafcce50df23ebf6095556c27dbbff4d81b16857))
+- **web-react:** reconfigure `react-refresh` eslint plugin after upgrade ([85ac6fa](https://github.com/alma-oss/spirit-design-system/commit/85ac6fac6dfa771e69470c68da8649fe88593828))
+
+### Code Refactoring
+
+- **web-react:** fix issues in typings after dependency upgrades ([f9f1854](https://github.com/alma-oss/spirit-design-system/commit/f9f1854a06940b29d14e0da3282713048d1e5c53))
+- **web-react:** introduce simplified polymorphic elementType prop with ref ([6706e06](https://github.com/alma-oss/spirit-design-system/commit/6706e06384948971b1aeaee2c83f3f8289315c37)), closes [#DS-2416](https://github.com/alma-oss/spirit-design-system/issues/DS-2416)
+- **web-react:** migrate all components to polymorphic prop ([682486a](https://github.com/alma-oss/spirit-design-system/commit/682486ac8a3d84c1c28ac92c6e7fca696cae510b)), closes [#DS-2416](https://github.com/alma-oss/spirit-design-system/issues/DS-2416)
+- **web-react:** more stricter types after package upgrades ([f76584e](https://github.com/alma-oss/spirit-design-system/commit/f76584e1f0434e63b6a95be5b1a831ec932d0fb2))
+- **web-react:** retype non-polymorphic component using ref forwarding ([777b394](https://github.com/alma-oss/spirit-design-system/commit/777b3945bf78449eddac5fd1d2ab8c586a84491f))
+- **web-react:** typescript generics normalization ([20d7ce6](https://github.com/alma-oss/spirit-design-system/commit/20d7ce647308b93f909b68957f6fa85610c8cb3d))
+- **web-react:** unify naming for `constants.ts` file ([c59af29](https://github.com/alma-oss/spirit-design-system/commit/c59af29c1dc133db90b9cb5faf8102dceee7f643))
+
+### Tests
+
+- **repo:** normalize vizual inconsistencies in e2e tests ([e0e4e1e](https://github.com/alma-oss/spirit-design-system/commit/e0e4e1e5849fe9ef5359657cfe3450f8d0b56b57))
+- **repo:** replace external media in the Card component with local encoded data ([bb81716](https://github.com/alma-oss/spirit-design-system/commit/bb81716c1aae8999737dab452531040d4feb6413))
+- **web-react:** cover responsive Button with accessibility test #DS-2311 ([19b15d4](https://github.com/alma-oss/spirit-design-system/commit/19b15d4638159958979870641b0250e5e05078c3)), closes [#DS-2311](https://github.com/alma-oss/spirit-design-system/issues/DS-2311)
+
 ## [4.2.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.2.0...@alma-oss/spirit-web-react@4.2.1) (2026-02-04)
 
 ### Features

@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.1.1...@alma-oss/spirit-web@4.2.0) (2026-02-20)
+
+### Features
+
+- **web,web-react:** introduce alignmentY to Card ([ad89187](https://github.com/alma-oss/spirit-design-system/commit/ad8918702d125657b3141926528d9ea51813eb9f))
+- **web:** introduce responsive sizes in Avatar #DS-2386 ([cedd0e1](https://github.com/alma-oss/spirit-design-system/commit/cedd0e14e5bd0af8f6a0dd81e2121e9edc8aedea)), closes [#DS-2386](https://github.com/alma-oss/spirit-design-system/issues/DS-2386)
+- **web:** introduce sizes for NavigationAvatar #DS-2387 ([be42d05](https://github.com/alma-oss/spirit-design-system/commit/be42d05526043f65da452e2bde47983397fee3b8)), closes [#DS-2387](https://github.com/alma-oss/spirit-design-system/issues/DS-2387)
+
+### Bug Fixes
+
+- **deps:** update dependency stylelint to v16.26.1 ([3989e82](https://github.com/alma-oss/spirit-design-system/commit/3989e8264fcd142845b0ae7435d90799187ac965))
+- **jest-config:** add ts-node for TypeScript config files ([e63ed80](https://github.com/alma-oss/spirit-design-system/commit/e63ed80e532205105301ece3ff97d4626e6f399f))
+- **web:** add asymmetrical responsive `Button` demo variant #DS-2311 ([ba15b29](https://github.com/alma-oss/spirit-design-system/commit/ba15b29160dae89310ad5c09979fd65084d7d414)), closes [#DS-2311](https://github.com/alma-oss/spirit-design-system/issues/DS-2311)
+- **web:** Ignore Typescript error due to updated dependencies ([4bae8df](https://github.com/alma-oss/spirit-design-system/commit/4bae8df6a48e0277b62c6c4ef78035325a8953be))
+- **web:** set correct CSS default to SkeletonShape radius ([bafa1e6](https://github.com/alma-oss/spirit-design-system/commit/bafa1e643b461f09da6b14ae51fe1485ea526c7d))
+
+### Documentation
+
+- **repo:** add preload="metadata" to video elements for consistent loading ([de58c5c](https://github.com/alma-oss/spirit-design-system/commit/de58c5cced2687528677bc2f467c9eb942c5556b))
+- **repo:** migrate links in changelogs ([9feea1b](https://github.com/alma-oss/spirit-design-system/commit/9feea1b51b44ba7a7e99f73b50e311c6ea6d6f46)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+- **web, web-react:** document responsive `Button` and `ButtonLink` #DS-2311 ([052faa9](https://github.com/alma-oss/spirit-design-system/commit/052faa9810aa12dd155ca9b39b6d06354a2babf3)), closes [#DS-2311](https://github.com/alma-oss/spirit-design-system/issues/DS-2311)
+- **web:** migrate links to alma-oss github organization ([65f70c8](https://github.com/alma-oss/spirit-design-system/commit/65f70c884e72810311c566c6b5b497df8f52323f)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+- **web:** reformat malformed changelog ([a20930b](https://github.com/alma-oss/spirit-design-system/commit/a20930b1027f52f6b10e4196b64a02e5a37b17dd))
+- **web:** unify Dropdown icon sizes in the Navigation ([25ff99a](https://github.com/alma-oss/spirit-design-system/commit/25ff99ac96f31de4c57a8d57afaad28b968ad913))
+- **web:** unify label of Log In button in the UNSTABLE_Header ([e326ca8](https://github.com/alma-oss/spirit-design-system/commit/e326ca8b00c8c919f77cf55db1bdecef02faa970))
+- **web:** use base64 images in web FileUploader, instead of picsum, to unify with react ([de77fab](https://github.com/alma-oss/spirit-design-system/commit/de77fab3a7b6965914e54b45b0f8c3bbd96e3189))
+- **web:** use Icon class in Pagination demo ([2a0893b](https://github.com/alma-oss/spirit-design-system/commit/2a0893b457849e1278a05ed03ab5637d671be7ce))
+
+### Dependencies
+
+- Update dependency typescript to v5.8.3 ([6ae7ebc](https://github.com/alma-oss/spirit-design-system/commit/6ae7ebc8acf23c0237a000de719f7b5a522c1eee))
+
+### Chores
+
+- **deps:** update all non-major dependencies ([e568ea0](https://github.com/alma-oss/spirit-design-system/commit/e568ea051d0b4b216646d09193aeb033dcc2ccf6))
+- **deps:** update build tools non-major ([8db171a](https://github.com/alma-oss/spirit-design-system/commit/8db171a2f9dc811a16b4bbb088063bb26ade237e))
+- **deps:** update compile tools non-major ([95f1928](https://github.com/alma-oss/spirit-design-system/commit/95f192895d74c15473c3da4df3738d8eb89d9d9a))
+- **deps:** update eslint plugins and configs non-major ([5f56654](https://github.com/alma-oss/spirit-design-system/commit/5f5665474d2ad3e1f2729bfe51ff6f7be1b934c7))
+- **deps:** update types non-major ([b1c747b](https://github.com/alma-oss/spirit-design-system/commit/b1c747b6eb1ab3b31fc0be2877ecf240cc2698f4))
+- **repo:** delete last residuals of the Twig package ([d439ea5](https://github.com/alma-oss/spirit-design-system/commit/d439ea55d912a32fb83a87a7aa899cd40f013f57))
+- **repo:** enable provenance publishing ([6d9078d](https://github.com/alma-oss/spirit-design-system/commit/6d9078d27a6c762872f798a200767c44189acbce)), closes [#DS-2171](https://github.com/alma-oss/spirit-design-system/issues/DS-2171)
+- **repo:** migrate packages repository url to alma-oss github organization ([ff2e427](https://github.com/alma-oss/spirit-design-system/commit/ff2e427a97da8d1e42b386e1701905ec203770a4)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+
+### Styles
+
+- **repo:** reformat code after prettier package upgrade ([eafcce5](https://github.com/alma-oss/spirit-design-system/commit/eafcce50df23ebf6095556c27dbbff4d81b16857))
+
+### Tests
+
+- **repo:** normalize vizual inconsistencies in e2e tests ([e0e4e1e](https://github.com/alma-oss/spirit-design-system/commit/e0e4e1e5849fe9ef5359657cfe3450f8d0b56b57))
+- **repo:** replace external media in the Card component with local encoded data ([bb81716](https://github.com/alma-oss/spirit-design-system/commit/bb81716c1aae8999737dab452531040d4feb6413))
+
 ## [4.1.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.1.0...@alma-oss/spirit-web@4.1.1) (2026-02-04)
 
 ### Features

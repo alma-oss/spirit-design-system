@@ -1,6 +1,6 @@
 {
   "name": "@alma-oss/spirit-common",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Common code and scripts for Spirit Design System",
   "license": "MIT",
   "private": true,

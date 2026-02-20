@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.3](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-common@0.5.2...@alma-oss/spirit-common@0.5.3) (2026-02-20)
+
+### Bug Fixes
+
+- **common:** remove leading and trailing slashes from path to prevent double slashes ([f69ceb7](https://github.com/alma-oss/spirit-design-system/commit/f69ceb79a0be5a2be39b9dbd630e251e0788544d))
+- **jest-config:** add ts-node for TypeScript config files ([e63ed80](https://github.com/alma-oss/spirit-design-system/commit/e63ed80e532205105301ece3ff97d4626e6f399f))
+
+### Documentation
+
+- **common:** reformat malformed changelog ([ae1b40a](https://github.com/alma-oss/spirit-design-system/commit/ae1b40a948450273a8ec11ba0e5419af7c019610))
+- **repo:** migrate links in changelogs ([9feea1b](https://github.com/alma-oss/spirit-design-system/commit/9feea1b51b44ba7a7e99f73b50e311c6ea6d6f46)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+
+### Dependencies
+
+- Update dependency typescript to v5.8.3 ([6ae7ebc](https://github.com/alma-oss/spirit-design-system/commit/6ae7ebc8acf23c0237a000de719f7b5a522c1eee))
+
+### Chores
+
+- **deps:** update all non-major dependencies ([e568ea0](https://github.com/alma-oss/spirit-design-system/commit/e568ea051d0b4b216646d09193aeb033dcc2ccf6))
+- **deps:** update eslint plugins and configs non-major ([5f56654](https://github.com/alma-oss/spirit-design-system/commit/5f5665474d2ad3e1f2729bfe51ff6f7be1b934c7))
+- **deps:** update types non-major ([b1c747b](https://github.com/alma-oss/spirit-design-system/commit/b1c747b6eb1ab3b31fc0be2877ecf240cc2698f4))
+- **repo:** migrate packages repository url to alma-oss github organization ([ff2e427](https://github.com/alma-oss/spirit-design-system/commit/ff2e427a97da8d1e42b386e1701905ec203770a4)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+
 ## [0.5.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-common@0.5.1...@alma-oss/spirit-common@0.5.2) (2026-02-04)
 
 ### Chores

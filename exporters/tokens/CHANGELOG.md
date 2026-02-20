@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.0.3...@alma-oss/spirit-tokens-exporter@4.0.4) (2026-02-20)
+
+### Bug Fixes
+
+- **deps:** update dependency @supernovaio/sdk-exporters to v2.2.54 ([b55144f](https://github.com/alma-oss/spirit-design-system/commit/b55144f464ff48c5135ed8d85e8f20de186c5b26))
+- **jest-config:** add ts-node for TypeScript config files ([e63ed80](https://github.com/alma-oss/spirit-design-system/commit/e63ed80e532205105301ece3ff97d4626e6f399f))
+
+### Documentation
+
+- **repo:** migrate links in changelogs ([9feea1b](https://github.com/alma-oss/spirit-design-system/commit/9feea1b51b44ba7a7e99f73b50e311c6ea6d6f46)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+- **repo:** migrate links to alma-oss github organization ([c339043](https://github.com/alma-oss/spirit-design-system/commit/c339043e33553bf50317a4d162ce4a79c06125fb)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+
+### Dependencies
+
+- Update dependency typescript to v5.8.3 ([6ae7ebc](https://github.com/alma-oss/spirit-design-system/commit/6ae7ebc8acf23c0237a000de719f7b5a522c1eee))
+
+### Chores
+
+- **deps:** update all non-major dependencies ([e568ea0](https://github.com/alma-oss/spirit-design-system/commit/e568ea051d0b4b216646d09193aeb033dcc2ccf6))
+- **deps:** update build tools non-major ([8db171a](https://github.com/alma-oss/spirit-design-system/commit/8db171a2f9dc811a16b4bbb088063bb26ade237e))
+- **deps:** update compile tools non-major ([95f1928](https://github.com/alma-oss/spirit-design-system/commit/95f192895d74c15473c3da4df3738d8eb89d9d9a))
+- **deps:** update eslint plugins and configs non-major ([5f56654](https://github.com/alma-oss/spirit-design-system/commit/5f5665474d2ad3e1f2729bfe51ff6f7be1b934c7))
+- **exporter-tokens:** rebuild after dependency upgrades ([061ef6d](https://github.com/alma-oss/spirit-design-system/commit/061ef6da76d8697b809724690506faa5841db050))
+- **exporter-tokens:** rebuild after package update ([4a7388c](https://github.com/alma-oss/spirit-design-system/commit/4a7388c64bd679eefc1ca8b456099c2569b33e83))
+
 ## <small>4.0.3 (2026-02-04)</small>
 
 - chore(deps): pin dependencies ([5bb95e5](https://github.com/alma-oss/spirit-design-system/commit/5bb95e5))

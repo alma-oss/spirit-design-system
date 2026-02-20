@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-post-changelog@2.0.1...@alma-oss/spirit-post-changelog@2.0.2) (2026-02-20)
+
+### Documentation
+
+- **repo:** migrate links in changelogs ([9feea1b](https://github.com/alma-oss/spirit-design-system/commit/9feea1b51b44ba7a7e99f73b50e311c6ea6d6f46)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+- **repo:** migrate links to alma-oss github organization ([c339043](https://github.com/alma-oss/spirit-design-system/commit/c339043e33553bf50317a4d162ce4a79c06125fb)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+
+### Dependencies
+
+- Update dependency typescript to v5.8.3 ([6ae7ebc](https://github.com/alma-oss/spirit-design-system/commit/6ae7ebc8acf23c0237a000de719f7b5a522c1eee))
+
+### Chores
+
+- **repo:** migrate packages repository url to alma-oss github organization ([ff2e427](https://github.com/alma-oss/spirit-design-system/commit/ff2e427a97da8d1e42b386e1701905ec203770a4)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+
 <a name="2.0.1"></a>
 
 ## [2.0.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-post-changelog@2.0.0...@alma-oss/spirit-post-changelog@2.0.1) (2025-12-19)

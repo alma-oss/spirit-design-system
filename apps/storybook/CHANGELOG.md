@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.3.3...@alma-oss/spirit-storybook@0.3.4) (2026-02-20)
+
+### Documentation
+
+- **repo:** migrate links in changelogs ([9feea1b](https://github.com/alma-oss/spirit-design-system/commit/9feea1b51b44ba7a7e99f73b50e311c6ea6d6f46)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+- **repo:** migrate links to alma-oss github organization ([c339043](https://github.com/alma-oss/spirit-design-system/commit/c339043e33553bf50317a4d162ce4a79c06125fb)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+
+### Chores
+
+- **deps:** update build tools non-major ([8db171a](https://github.com/alma-oss/spirit-design-system/commit/8db171a2f9dc811a16b4bbb088063bb26ade237e))
+- **deps:** update compile tools non-major ([95f1928](https://github.com/alma-oss/spirit-design-system/commit/95f192895d74c15473c3da4df3738d8eb89d9d9a))
+- **deps:** update monorepo:storybook to v10.2.3 ([14cfcd6](https://github.com/alma-oss/spirit-design-system/commit/14cfcd6c5e1e08d912dcb0204e603d24f0a385e7))
+- **deps:** update monorepo:storybook to v10.2.4 ([b674e7f](https://github.com/alma-oss/spirit-design-system/commit/b674e7fb412974515c97647b460f2faccc3ea29c))
+- **repo:** migrate packages repository url to alma-oss github organization ([ff2e427](https://github.com/alma-oss/spirit-design-system/commit/ff2e427a97da8d1e42b386e1701905ec203770a4)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+
 ## <small>0.3.3 (2026-02-04)</small>
 
 - chore(ci): disable connection to nx cloud ([3581e3d](https://github.com/lmc-eu/spirit-design-system/commit/3581e3d))

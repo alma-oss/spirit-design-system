@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-example-next-with-pages-router@0.3.3...@alma-oss/spirit-example-next-with-pages-router@0.3.4) (2026-02-20)
+
+### Bug Fixes
+
+- **examples:** fix CSS media query compilation issue #DS-2420 ([bed4138](https://github.com/alma-oss/spirit-design-system/commit/bed4138be92eaa45de929bc8d36147325fe20c76)), closes [#DS-2420](https://github.com/alma-oss/spirit-design-system/issues/DS-2420)
+- **examples:** update Next.js examples for Next.js 16 compatibility ([41f9eaa](https://github.com/alma-oss/spirit-design-system/commit/41f9eaa59125e157afc635e997cd9aa6db18618e))
+
+### Documentation
+
+- **repo:** migrate links in changelogs ([9feea1b](https://github.com/alma-oss/spirit-design-system/commit/9feea1b51b44ba7a7e99f73b50e311c6ea6d6f46)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+- **repo:** migrate links to alma-oss github organization ([c339043](https://github.com/alma-oss/spirit-design-system/commit/c339043e33553bf50317a4d162ce4a79c06125fb)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
+
+### Dependencies
+
+- Update dependency typescript to v5.8.3 ([6ae7ebc](https://github.com/alma-oss/spirit-design-system/commit/6ae7ebc8acf23c0237a000de719f7b5a522c1eee))
+
+### Chores
+
+- **deps:** bump next from 15.5.11 to 16.1.5 ([696c1c5](https://github.com/alma-oss/spirit-design-system/commit/696c1c57afa23ad8a39ad7690b043e5e3a75493e))
+- **deps:** update all non-major dependencies ([e568ea0](https://github.com/alma-oss/spirit-design-system/commit/e568ea051d0b4b216646d09193aeb033dcc2ccf6))
+- **deps:** update compile tools non-major ([95f1928](https://github.com/alma-oss/spirit-design-system/commit/95f192895d74c15473c3da4df3738d8eb89d9d9a))
+- **deps:** update eslint plugins and configs non-major ([5f56654](https://github.com/alma-oss/spirit-design-system/commit/5f5665474d2ad3e1f2729bfe51ff6f7be1b934c7))
+- **deps:** update types non-major ([b1c747b](https://github.com/alma-oss/spirit-design-system/commit/b1c747b6eb1ab3b31fc0be2877ecf240cc2698f4))
+
+### Styles
+
+- **examples:** disable triple slash reference lint in next generated files ([0fa1600](https://github.com/alma-oss/spirit-design-system/commit/0fa16005ff6e848dd30c0d6e38ac3a869cfee864))
+- **examples:** reformat components after dependency updates ([f4ba95d](https://github.com/alma-oss/spirit-design-system/commit/f4ba95d2dd9f73e03eff3a343a441cfe02c22b00))
+
 ## <small>0.3.3 (2026-02-04)</small>
 
 - chore(deps): upgrade next.js to 15.5.11 ([1d4f848](https://github.com/alma-oss/spirit-design-system/commit/1d4f848))
