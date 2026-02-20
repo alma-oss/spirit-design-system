@@ -13,18 +13,6 @@ $_field-name: 'TextArea';
     @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
 }
 
-.TextArea__label {
-    @include form-fields-tools.box-field-label();
-}
-
-.TextArea__label--hidden {
-    @include form-fields-tools.label-hidden();
-}
-
-.TextArea__label--required::after {
-    @include form-fields-tools.label-required();
-}
-
 .TextArea__input {
     @include form-fields-tools.box-field-input($_field-name);
 
@@ -59,10 +47,6 @@ $_field-name: 'TextArea';
     $css-variable-infix: 'input'
 );
 @include form-fields-tools.input-field-validation-states($_field-name);
-
-.TextArea--disabled > .TextArea__label {
-    @include form-fields-tools.label-disabled();
-}
 
 .TextArea .TextArea__input:disabled,
 :is(.TextArea--disabled, .TextArea.is-disabled) .TextArea__input {
