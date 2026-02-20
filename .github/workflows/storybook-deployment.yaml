@@ -2,16 +2,70 @@ name: 🎨 Storybook on Chromatic
 
 on:
   push:
-    tags:
-      - 'run-visual-tests'
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - labeled
 
 concurrency:
-  group: chromatic-${{ github.ref }}
+  group: chromatic-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
+  has-label:
+    name: 🏷️ Analyzing Labels
+    runs-on: ubuntu-latest
+    outputs:
+      has-label: ${{ steps.has-label.outputs.labeled-run-visual-tests }}
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@3155a141048f8f89c06b4cdae32e7853e97536bc # 0.13.0
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: Labeled to run-visual-tests
+        id: has-label
+        uses: DanielTamkin/HasLabel@eb337eaf9036a5408ddd8ebc3e9ac540d74d2ae0 # v1.0.4
+        with:
+          contains: 'run-visual-tests'
+
+  has-tags:
+    name: 🏷️ Analyze Tags
+    runs-on: ubuntu-24.04
+
+    outputs:
+      has-tag: ${{ steps.set-tag-output.outputs.has-tag }}
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          # Even though this is set, shallow clones do not always retrieve all tags correctly
+          fetch-tags: true
+          # So we need to fetch full history, including all tags
+          fetch-depth: 0
+
+      - name: Check Tag On Commit
+        id: check-tag-exists
+        if: github.event_name == 'push'
+        uses: ./.github/actions/has-tags
+
+      - name: Set tag output
+        id: set-tag-output
+        run: |
+          if [ "${{ github.event_name }}" == "push" ]; then
+            echo "has-tag=${{ steps.check-tag-exists.outputs.has-tag }}" >> $GITHUB_OUTPUT
+          else
+            echo "has-tag=false" >> $GITHUB_OUTPUT
+          fi
+
   chromatic:
     name: Deploy Storybook to Chromatic
+    needs: [has-label, has-tags]
+    if: ${{ (needs.has-label.outputs.has-label == 'true') || (github.event_name == 'push' && needs.has-tags.outputs.has-tag == 'true') }}
     runs-on: ubuntu-24.04
     environment: chromatic
     timeout-minutes: 15
@@ -25,7 +79,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           fetch-depth: 0
-          ref: ${{ github.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Setup Node and Install Dependencies
         uses: ./.github/actions/setup-install
@@ -46,7 +100,7 @@ jobs:
           storybookBuildDir: build
 
       - name: Post Storybook Link Comment
-        if: github.event_name == 'push'
+        if: github.event_name == 'pull_request'
         uses: dannyhw/storybook-chromatic-link-comment@f44e4cd606de2de337afec3b7ddb6996ee8dfaf4 # v0.11
         with:
           github-token: ${{ github.token }}
