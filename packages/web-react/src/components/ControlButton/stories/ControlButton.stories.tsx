@@ -65,6 +65,11 @@ const meta: Meta<typeof ControlButton> = {
         },
       },
     },
+    spacing: {
+      control: 'object',
+      description:
+        'Custom spacing between control button content items. Can be a spacing token (e.g. "space-400") or an object with breakpoint keys.',
+    },
     type: {
       control: 'select',
       options: ['button', 'submit', 'reset'],

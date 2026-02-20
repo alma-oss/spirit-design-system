@@ -23,7 +23,7 @@ figma.connect(SplitButton, SPLIT_BUTTON_NODE_URL, {
   example: (props) => (
     <SplitButton {...props}>
       <Button>
-        <Icon name="placeholder" marginRight="space-400" />
+        <Icon name="placeholder" />
         Label
       </Button>
       <Dropdown id="split-button-dropdown" isOpen={false} onToggle={() => {}}>
@@ -45,11 +45,11 @@ figma.connect(SplitButton, SPLIT_BUTTON_NODE_URL, {
   example: (props) => (
     <SplitButton {...props}>
       <Button>
-        <Icon name="placeholder" marginRight="space-400" />
+        <Icon name="placeholder" />
         Label
       </Button>
       <Button>
-        <Icon name="placeholder" marginRight="space-400" />
+        <Icon name="placeholder" />
         Label
       </Button>
       <Dropdown id="split-button-dropdown" isOpen={false} onToggle={() => {}}>

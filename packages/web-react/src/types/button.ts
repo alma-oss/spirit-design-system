@@ -9,6 +9,7 @@ import type {
   PolymorphicComponentProps,
   SingleOrResponsive,
   SizesDictionaryType,
+  SpaceToken,
   StyleProps,
 } from './shared';
 
@@ -33,6 +34,8 @@ export interface ButtonStyleProps<C = void, S = void> extends ButtonBaseProps {
   isSymmetrical?: SingleOrResponsive<boolean>;
   /** The size of the button. */
   size?: ButtonSize<S>;
+  /** Custom spacing between button content items. */
+  spacing?: SingleOrResponsive<SpaceToken>;
 }
 
 /** ===== INTERNAL API ===== */

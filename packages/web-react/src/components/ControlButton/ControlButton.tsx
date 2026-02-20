@@ -32,9 +32,17 @@ const _ControlButton = <E extends ElementType = 'button', S = void>(
   const Component = elementType as ElementType;
 
   const { controlButtonProps } = useControlButtonProps(restProps);
-  const { classProps, props: modifiedProps } = useControlButtonStyleProps(restProps);
+  const {
+    classProps,
+    props: modifiedProps,
+    styleProps: controlButtonStyleProps,
+  } = useControlButtonStyleProps(restProps as SpiritControlButtonProps<T, S>);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, {
+    classProps,
+    styleProps: { ...controlButtonStyleProps, ...styleProps },
+    otherProps,
+  });
 
   return (
     <Component {...otherProps} {...controlButtonProps} ref={ref} {...mergedStyleProps}>
