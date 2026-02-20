@@ -12,18 +12,6 @@
 
 $_field-name: 'FileUploaderInput';
 
-.FileUploaderInput__label {
-    @include form-fields-tools.box-field-label();
-}
-
-.FileUploaderInput__label--hidden {
-    @include form-fields-tools.label-hidden();
-}
-
-.FileUploaderInput__label--required::after {
-    @include form-fields-tools.label-required();
-}
-
 .FileUploaderInput__dropZone {
     position: relative; // 1.
     display: grid;
@@ -140,7 +128,3 @@ $_field-name: 'FileUploaderInput';
     background-color: form-fields-settings.$input-background-color-state-disabled;
 }
 // stylelint-enable selector-max-class
-
-.FileUploaderInput--disabled > .FileUploaderInput__label {
-    @include form-fields-tools.label-disabled();
-}

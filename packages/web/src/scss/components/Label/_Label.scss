@@ -1,7 +1,6 @@
 // 1. Box variant is used for components like TextField, TextArea, Select, etc.
 // 2. Inline variant is used for components like Checkbox, Radio, Toggle, etc.
 // 3. Item variant is used for standalone Item components (button, link, div with .Item class).
-// 4. Automatically detect states from input, textarea, select elements or parent component modifiers.
 
 @use '../../settings/cursors';
 @use '../../tools/accessibility';
@@ -45,38 +44,29 @@
     }
 }
 
-// Hidden state - explicit modifier or automatic detection
-:where(.Label--hidden, :is(input, textarea, select):where(.is-hidden, [type='hidden']) ~ [class*='__text'] > .Label) {
+.Label--hidden,
+:is(input, textarea, select):where(.is-hidden, [type='hidden']) ~ [class*='__text'] > .Label {
     @include accessibility.hide-text();
 }
 
-// Required state - explicit modifier and automatic detection
-:where(
-    .Label--required,
-    :is(input, textarea, select):where(:required, .is-required) ~ [class*='__text'] > .Label
-)::after {
+.Label--disabled,
+[class*='--disabled'] .Label,
+:is(input, textarea, select):where(:disabled, .is-disabled) ~ [class*='__text'] > .Label {
+    color: var(--form-field-label-color-disabled, #{theme.$label-color-state-disabled});
+    cursor: cursors.$disabled;
+}
+
+.Label--disabled.Label--required::after,
+[class*='--disabled'] .Label::after,
+:is(input, textarea, select):where(:disabled, .is-disabled) ~ [class*='__text'] > .Label::after {
+    color: var(--form-field-label-color-disabled, #{theme.$label-color-state-disabled});
+}
+
+.Label--required::after,
+:is(input, textarea, select):where(:required, .is-required) ~ [class*='__text'] > .Label::after {
     @include typography.generate(theme.$label-required-typography);
 
     content: '*';
     margin-left: theme.$label-required-margin-left;
     color: var(--form-field-label-required-color, #{theme.$label-required-color});
-}
-
-// Disabled state - explicit modifier and automatic detection
-:where(
-    .Label--disabled,
-    :is(input, textarea, select):where(:disabled, .is-disabled) ~ [class*='__text'] > .Label,
-    [class*='--disabled'] .Label
-) {
-    color: var(--form-field-label-color-disabled, #{theme.$label-color-state-disabled});
-    cursor: cursors.$disabled;
-}
-
-// Disabled state for required asterisk - explicit modifier and automatic detection
-:where(
-    .Label--disabled.Label--required,
-    :is(input, textarea, select):where(:disabled, .is-disabled) ~ [class*='__text'] > .Label,
-    [class*='--disabled'] .Label
-)::after {
-    color: var(--form-field-label-color-disabled, #{theme.$label-color-state-disabled});
 }

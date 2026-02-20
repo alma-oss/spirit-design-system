@@ -4,7 +4,7 @@ Basic usage:
 
 ```html
 <div class="TextArea TextArea--medium">
-  <label for="text-area-default" class="TextArea__label">Label</label>
+  <label for="text-area-default" class="Label Label--box">Label</label>
   <textarea id="text-area-default" class="TextArea__input" name="default" placeholder="Placeholder"></textarea>
 </div>
 ```
@@ -13,17 +13,17 @@ Sizes:
 
 ```html
 <div class="TextArea TextArea--small">
-  <label for="text-area-size-small" class="TextArea__label">Small</label>
+  <label for="text-area-size-small" class="Label Label--box">Small</label>
   <textarea id="text-area-size-small" class="TextArea__input" name="size-small" placeholder="Placeholder"></textarea>
 </div>
 
 <div class="TextArea TextArea--medium">
-  <label for="text-area-size-medium" class="TextArea__label">Medium (default)</label>
+  <label for="text-area-size-medium" class="Label Label--box">Medium (default)</label>
   <textarea id="text-area-size-medium" class="TextArea__input" name="size-medium" placeholder="Placeholder"></textarea>
 </div>
 
 <div class="TextArea TextArea--large">
-  <label for="text-area-size-large" class="TextArea__label">Large</label>
+  <label for="text-area-size-large" class="Label Label--box">Large</label>
   <textarea id="text-area-size-large" class="TextArea__input" name="size-large" placeholder="Placeholder"></textarea>
 </div>
 ```
@@ -32,7 +32,7 @@ Required textarea:
 
 ```html
 <div class="TextArea TextArea--medium">
-  <label for="text-area-required" class="TextArea__label TextArea__label--required">Label</label>
+  <label for="text-area-required" class="Label Label--box Label--required">Label</label>
   <textarea id="text-area-required" class="TextArea__input" name="required" placeholder="Placeholder"></textarea>
 </div>
 ```
@@ -41,7 +41,7 @@ Hidden label:
 
 ```html
 <div class="TextArea TextArea--medium">
-  <label for="text-area-hidden-label" class="TextArea__label TextArea__label--hidden">Hidden Label</label>
+  <label for="text-area-hidden-label" class="Label Label--box Label--hidden">Hidden Label</label>
   <textarea id="text-area-hidden-label" class="TextArea__input" name="hiddenLabel" placeholder="Placeholder">
 Filled</textarea
   >
@@ -52,7 +52,7 @@ Fluid width:
 
 ```html
 <div class="TextArea TextArea--medium TextArea--fluid">
-  <label for="text-area-fluid" class="TextArea__label">Label</label>
+  <label for="text-area-fluid" class="Label Label--box">Label</label>
   <textarea id="text-area-fluid" class="TextArea__input" name="fluid" placeholder="Placeholder"></textarea>
 </div>
 ```
@@ -61,7 +61,7 @@ Helper text:
 
 ```html
 <div class="TextArea TextArea--medium">
-  <label for="text-area-helper-text" class="TextArea__label">Label</label>
+  <label for="text-area-helper-text" class="Label Label--box">Label</label>
   <textarea id="text-area-helper-text" class="TextArea__input" name="helperText" placeholder="Placeholder"></textarea>
   <div class="TextArea__helperText">Helper text</div>
 </div>
@@ -77,7 +77,7 @@ The number of visible text lines for the control. Supported values are positive 
 
 ```html
 <div class="TextArea TextArea--medium">
-  <label for="text-area-rows" class="TextArea__label">Label</label>
+  <label for="text-area-rows" class="Label Label--box">Label</label>
   <textarea id="text-area-rows" class="TextArea__input" rows="3" name="rows"></textarea>
 </div>
 ```
@@ -104,7 +104,7 @@ Then you need to add data attribute `data-spirit-toggle="autoResize"` to the com
 
 ```html
 <div class="TextArea TextArea--medium" data-spirit-toggle="autoResize">
-  <label for="text-area-auto-resize" class="TextArea__label">Label of auto-resizing TextArea</label>
+  <label for="text-area-auto-resize" class="Label Label--box">Label of auto-resizing TextArea</label>
   <textarea id="text-area-auto-resize" class="TextArea__input" name="autoResize"></textarea>
 </div>
 ```
@@ -121,13 +121,13 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 
 ```html
 <div class="TextArea TextArea--medium TextArea--danger">
-  <label for="text-area-danger" class="TextArea__label">Label</label>
+  <label for="text-area-danger" class="Label Label--box">Label</label>
   <textarea id="text-area-danger" class="TextArea__input" name="danger" placeholder="Placeholder">Filled</textarea>
   <div class="TextArea__validationText">Danger validation text</div>
 </div>
 
 <div class="TextArea TextArea--medium has-danger">
-  <label for="text-area-danger-has-danger" class="TextArea__label">Label</label>
+  <label for="text-area-danger-has-danger" class="Label Label--box">Label</label>
   <textarea id="text-area-danger-has-danger" class="TextArea__input" name="hasDanger" placeholder="Placeholder">
     Filled
   </textarea>
@@ -142,7 +142,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div class="TextArea TextArea--medium has-warning">
-  <label for="text-area-danger-has-warning" class="TextArea__label">Label</label>
+  <label for="text-area-danger-has-warning" class="Label Label--box">Label</label>
   <textarea id="text-area-danger-has-warning" class="TextArea__input" name="hasDanger" placeholder="Placeholder">
     Filled
   </textarea>
@@ -168,7 +168,7 @@ components mix CSS with JS by design and handle prefixes their own way.**
 
 ```html
 <div class="TextArea TextArea--medium has-danger">
-  <label for="text-area-js-validation" class="TextArea__label">Label</label>
+  <label for="text-area-js-validation" class="Label Label--box">Label</label>
   <textarea id="text-area-js-validation" class="TextArea__input" name="jsValidation" placeholder="Placeholder">
 Filled</textarea
   >
@@ -184,7 +184,7 @@ JS interaction class when controlled by JavaScript:
 
 ```html
 <div class="TextArea TextArea--medium TextArea--disabled">
-  <label for="text-area-disabled" class="TextArea__label">Label</label>
+  <label for="text-area-disabled" class="Label Label--box">Label</label>
   <textarea
     id="text-area-disabled"
     class="TextArea__input"
@@ -194,7 +194,7 @@ JS interaction class when controlled by JavaScript:
   ></textarea>
 </div>
 <div class="TextArea TextArea--medium TextArea--disabled">
-  <label for="text-area-disabled-filled" class="TextArea__label">Label</label>
+  <label for="text-area-disabled-filled" class="Label Label--box">Label</label>
   <textarea
     id="text-area-disabled-filled"
     class="TextArea__input"

@@ -6,7 +6,7 @@
 <div class="Checkbox Checkbox--inputPositionStart">
   <input type="checkbox" id="checkbox-default" class="Checkbox__input" name="default" />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-default">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-default">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -17,7 +17,7 @@
 <div class="Checkbox Checkbox--inputPositionStart">
   <input type="checkbox" id="checkbox-required" class="Checkbox__input" name="required" required />
   <div class="Checkbox__text">
-    <label class="Checkbox__label Checkbox__label--required" for="checkbox-required">Checkbox Label</label>
+    <label class="Label Label--inline Label--required" for="checkbox-required">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -39,7 +39,7 @@ See Validation state [dictionary][dictionary-validation].
     aria-describedby="checkbox-warning-helper-text"
   />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-warning">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
     <div class="Checkbox__validationText" id="checkbox-warning-helper-text">Warning validation text</div>
   </div>
 </div>
@@ -53,7 +53,7 @@ See Validation state [dictionary][dictionary-validation].
     aria-describedby="checkbox-danger-helper-text"
   />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-danger">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-danger">Checkbox Label</label>
     <div class="Checkbox__validationText" id="checkbox-danger-helper-text">
       <ul>
         <li>First validation text</li>
@@ -72,7 +72,7 @@ See Validation state [dictionary][dictionary-validation].
     aria-describedby="checkbox-warning-helper-text"
   />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-warning">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
     <div class="Checkbox__validationText" id="checkbox-warning-helper-text">
       <svg width="20" height="20" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
@@ -89,7 +89,7 @@ See Validation state [dictionary][dictionary-validation].
 <div class="Checkbox Checkbox--inputPositionStart">
   <input type="checkbox" id="checkbox-hidden-label" class="Checkbox__input" name="hiddenLabel" required />
   <div class="Checkbox__text">
-    <label class="Checkbox__label Checkbox__label--hidden" for="checkbox-hidden-label">Checkbox Label</label>
+    <label class="Label Label--inline Label--hidden" for="checkbox-hidden-label">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -106,7 +106,7 @@ See Validation state [dictionary][dictionary-validation].
     aria-describedby="checkbox-helper-text-helper-text"
   />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-helper-text">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-helper-text">Checkbox Label</label>
     <div class="Checkbox__helperText" id="checkbox-helper-text-helper-text">Helper text</div>
   </div>
 </div>
@@ -118,7 +118,7 @@ See Validation state [dictionary][dictionary-validation].
 <div class="Checkbox Checkbox--inputPositionStart Checkbox--disabled">
   <input type="checkbox" id="checkbox-disabled" class="Checkbox__input" name="disabled" disabled />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-disabled">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-disabled">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -129,7 +129,7 @@ See Validation state [dictionary][dictionary-validation].
 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
   <input type="checkbox" id="checkbox-item-default" class="Checkbox__input" name="item" />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-item-default">Checkbox Label</label>
+    <label class="Label Label--inline Label--item" for="checkbox-item-default">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -144,7 +144,7 @@ The input position can be set to `start` (default) or `end`.
 <div class="Checkbox Checkbox--inputPositionEnd">
   <input type="checkbox" id="checkbox-position-end" class="Checkbox__input" name="position" />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-position-end">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-position-end">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -157,7 +157,7 @@ Use responsive breakpoint modifiers to change input position at different screen
 <div class="Checkbox Checkbox--tablet--inputPositionEnd">
   <input type="checkbox" id="checkbox-position-responsive" class="Checkbox__input" name="position" />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-position-responsive">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-position-responsive">Checkbox Label</label>
   </div>
 </div>
 ```

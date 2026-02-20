@@ -15,19 +15,6 @@ $_field-name: 'Checkbox';
     @include form-fields-tools.inline-field-root();
 }
 
-.Checkbox__label {
-    @include form-fields-tools.inline-field-label();
-    @include form-fields-tools.stretch();
-}
-
-.Checkbox__label--hidden {
-    @include form-fields-tools.label-hidden();
-}
-
-.Checkbox__label--required::after {
-    @include form-fields-tools.label-required();
-}
-
 .Checkbox__input {
     @include form-fields-tools.inline-field-input();
 
@@ -77,10 +64,6 @@ $_field-name: 'Checkbox';
     @include form-fields-tools.item();
 }
 
-.Checkbox--item .Checkbox__label {
-    @include form-fields-tools.item-label();
-}
-
 .Checkbox--item .Checkbox__validationText {
     @include form-fields-tools.item-validation-text();
 }
@@ -95,10 +78,6 @@ $_field-name: 'Checkbox';
 
 :is(.Checkbox--disabled, .Checkbox.is-disabled) {
     @include form-fields-tools.inline-field-root-disabled();
-}
-
-:is(.Checkbox--disabled, .Checkbox.is-disabled) .Checkbox__label {
-    @include form-fields-tools.inline-field-label-disabled();
 }
 
 :is(.Checkbox--disabled, .Checkbox.is-disabled) .Checkbox__validationText {

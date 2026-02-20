@@ -4,26 +4,6 @@
 @use '../form-fields';
 
 @include test.describe('form-fields mixins') {
-    @include test.it('should return label-disabled mixin styles') {
-        @include test.assert() {
-            @include test.output() {
-                .label-disabled-test {
-                    @include form-fields.label-disabled();
-                }
-            }
-
-            @include test.expect() {
-                .label-disabled-test {
-                    color: form-fields-settings.$label-color-state-disabled;
-
-                    &::after {
-                        color: form-fields-settings.$label-color-state-disabled;
-                    }
-                }
-            }
-        }
-    }
-
     @include test.it('should return input-disabled mixin styles') {
         @include test.assert() {
             @include test.output() {

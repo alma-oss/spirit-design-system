@@ -26,14 +26,6 @@ $_field-name: 'Slider';
     @include form-fields-tools.box-field-root();
 }
 
-.Slider__label {
-    @include form-fields-tools.box-field-label();
-}
-
-.Slider__label--hidden {
-    @include form-fields-tools.label-hidden();
-}
-
 .Slider__input {
     appearance: none;
     width: 100%;
@@ -136,10 +128,6 @@ $_field-name: 'Slider';
 }
 
 @include form-fields-tools.input-field-validation-states($_field-name);
-
-.Slider--disabled > .Slider__label {
-    @include form-fields-tools.label-disabled();
-}
 
 .Slider .Slider__input:disabled,
 :is(.Slider--disabled, .Slider.is-disabled) .Slider__input {

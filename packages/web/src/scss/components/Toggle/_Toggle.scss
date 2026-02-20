@@ -23,19 +23,6 @@ $_field-name: 'Toggle';
     flex: 1;
 }
 
-.Toggle__label {
-    @include form-fields-tools.inline-field-label();
-    @include form-fields-tools.stretch();
-}
-
-.Toggle__label--hidden {
-    @include form-fields-tools.label-hidden();
-}
-
-.Toggle__label--required::after {
-    @include form-fields-tools.label-required();
-}
-
 .Toggle__input {
     @include form-fields-tools.inline-field-input();
 
@@ -149,10 +136,6 @@ $_field-name: 'Toggle';
 
 .Toggle:is(.Toggle--disabled, .is-disabled) {
     @include form-fields-tools.inline-field-root-disabled();
-}
-
-.Toggle:is(.Toggle--disabled, .is-disabled) .Toggle__label {
-    @include form-fields-tools.label-disabled();
 }
 
 .Toggle:is(.Toggle--disabled, .is-disabled) > .Toggle__input,
