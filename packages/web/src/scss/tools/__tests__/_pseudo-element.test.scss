@@ -1,0 +1,126 @@
+@use 'true' as test;
+@use '../pseudo-element';
+
+@include test.describe('stretch mixin') {
+    @include test.it('should output default styles for ::before pseudo-element') {
+        @include test.assert() {
+            @include test.output() {
+                .test {
+                    @include pseudo-element.stretch();
+                }
+            }
+
+            @include test.expect() {
+                .test::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: 0;
+                }
+            }
+        }
+    }
+
+    @include test.it('should output styles for provided pseudo-element') {
+        @include test.assert() {
+            @include test.output() {
+                .test {
+                    @include pseudo-element.stretch('after');
+                }
+            }
+
+            @include test.expect() {
+                .test::after {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: 0;
+                }
+            }
+        }
+    }
+
+    @include test.it('should not add position relative by default') {
+        @include test.assert() {
+            @include test.output() {
+                .test {
+                    @include pseudo-element.stretch();
+                }
+            }
+
+            @include test.expect() {
+                .test::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: 0;
+                }
+            }
+        }
+    }
+
+    @include test.it('should not add position relative when explicitly disabled') {
+        @include test.assert() {
+            @include test.output() {
+                .test {
+                    @include pseudo-element.stretch($set-root-relative: false);
+                }
+            }
+
+            @include test.expect() {
+                .test::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: 0;
+                }
+            }
+        }
+    }
+
+    @include test.it('should add position relative when enabled') {
+        @include test.assert() {
+            @include test.output() {
+                .test {
+                    @include pseudo-element.stretch($set-root-relative: true);
+                }
+            }
+
+            @include test.expect() {
+                .test {
+                    position: relative;
+                }
+
+                .test::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: 0;
+                }
+            }
+        }
+    }
+
+    @include test.it('should work with custom pseudo-element and relative parent') {
+        @include test.assert() {
+            @include test.output() {
+                .test {
+                    @include pseudo-element.stretch('after', true);
+                }
+            }
+
+            @include test.expect() {
+                .test {
+                    position: relative;
+                }
+
+                .test::after {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: 0;
+                }
+            }
+        }
+    }
+}
