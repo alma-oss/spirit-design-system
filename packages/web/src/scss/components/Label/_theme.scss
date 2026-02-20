@@ -1,0 +1,14 @@
+@use '@tokens' as tokens;
+
+$label-color-state-default: tokens.$form-field-label;
+$label-color-state-disabled: tokens.$disabled-content;
+$label-required-typography: tokens.$body-small-regular;
+$label-required-margin-left: tokens.$space-200;
+$label-required-color: tokens.$form-field-danger;
+
+$inline-field-label-typography: tokens.$body-medium-regular;
+
+$box-field-label-typography: tokens.$body-small-semibold;
+$box-field-label-margin-bottom: tokens.$space-400;
+
+$item-label-typography: tokens.$body-medium-semibold;

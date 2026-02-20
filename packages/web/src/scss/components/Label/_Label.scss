@@ -1,0 +1,82 @@
+// 1. Box variant is used for components like TextField, TextArea, Select, etc.
+// 2. Inline variant is used for components like Checkbox, Radio, Toggle, etc.
+// 3. Item variant is used for standalone Item components (button, link, div with .Item class).
+// 4. Automatically detect states from input, textarea, select elements or parent component modifiers.
+
+@use '../../settings/cursors';
+@use '../../tools/accessibility';
+@use '../../tools/typography';
+@use 'theme';
+
+.Label {
+    --form-field-label-color: #{theme.$label-color-state-default};
+    --form-field-label-color-disabled: #{theme.$label-color-state-disabled};
+    --form-field-label-required-color: #{theme.$label-required-color};
+
+    display: block;
+    color: var(--form-field-label-color, #{theme.$label-color-state-default});
+}
+
+// 1.
+.Label--box {
+    @include typography.generate(theme.$box-field-label-typography);
+
+    margin-bottom: theme.$box-field-label-margin-bottom;
+}
+
+// 2.
+.Label--inline {
+    @include typography.generate(theme.$inline-field-label-typography);
+
+    cursor: cursors.$form-fields;
+}
+
+// 3.
+.Label--item {
+    @include typography.generate(theme.$item-label-typography);
+
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
+}
+
+// Hidden state - explicit modifier or automatic detection
+:where(.Label--hidden, :is(input, textarea, select):where(.is-hidden, [type='hidden']) ~ [class*='__text'] > .Label) {
+    @include accessibility.hide-text();
+}
+
+// Required state - explicit modifier and automatic detection
+:where(
+    .Label--required,
+    :is(input, textarea, select):where(:required, .is-required) ~ [class*='__text'] > .Label
+)::after {
+    @include typography.generate(theme.$label-required-typography);
+
+    content: '*';
+    margin-left: theme.$label-required-margin-left;
+    color: var(--form-field-label-required-color, #{theme.$label-required-color});
+}
+
+// Disabled state - explicit modifier and automatic detection
+:where(
+    .Label--disabled,
+    :is(input, textarea, select):where(:disabled, .is-disabled) ~ [class*='__text'] > .Label,
+    [class*='--disabled'] .Label
+) {
+    color: var(--form-field-label-color-disabled, #{theme.$label-color-state-disabled});
+    cursor: cursors.$disabled;
+}
+
+// Disabled state for required asterisk - explicit modifier and automatic detection
+:where(
+    .Label--disabled.Label--required,
+    :is(input, textarea, select):where(:disabled, .is-disabled) ~ [class*='__text'] > .Label,
+    [class*='--disabled'] .Label
+)::after {
+    color: var(--form-field-label-color-disabled, #{theme.$label-color-state-disabled});
+}
