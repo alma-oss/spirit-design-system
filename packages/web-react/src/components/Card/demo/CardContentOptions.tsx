@@ -12,7 +12,7 @@ import CardLink from '../CardLink';
 import CardLogo from '../CardLogo';
 import CardMedia from '../CardMedia';
 import CardTitle from '../CardTitle';
-import { LOGO, MEDIA_IMAGE } from './constants';
+import { LOGO, MEDIA_IMAGE, VIDEO_DATA_URL, VIDEO_POSTER_DATA_URL } from './constants';
 
 const CardContentOptions = () => (
   <Grid cols={{ mobile: 1, tablet: 2, desktop: 3 }}>
@@ -71,14 +71,7 @@ const CardContentOptions = () => (
 
     <Card isBoxed>
       <CardMedia size="auto">
-        <video
-          src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"
-          poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg"
-          controls
-          muted
-          playsInline
-          preload="metadata"
-        />
+        <video src={VIDEO_DATA_URL} poster={VIDEO_POSTER_DATA_URL} controls muted playsInline preload="metadata" />
       </CardMedia>
       <CardBody>
         <CardEyebrow>Content options</CardEyebrow>
