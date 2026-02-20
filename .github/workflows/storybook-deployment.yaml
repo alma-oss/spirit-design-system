@@ -4,18 +4,23 @@ on:
   push:
     branches:
       - main
+    paths: &storybook-paths
+      - 'apps/storybook/**'
+      - 'packages/icons/**'
+      - 'packages/web-react/**'
+      - 'packages/design-tokens/**'
   pull_request:
     types:
       - opened
       - synchronize
       - labeled
+    paths: *storybook-paths
 
 env:
   CHROMATIC_ENV: 'chromatic'
   STORYBOOK_BUILD_DIR: 'build'
   STORYBOOK_SCOPE: '@alma-oss/spirit-storybook'
   STORYBOOK_WORKING_DIR: 'apps/storybook'
-  VISUAL_TESTS_LABEL: 'run-visual-tests'
 
 concurrency:
   group: chromatic-${{ github.event.pull_request.number || github.ref }}
@@ -37,7 +42,7 @@ jobs:
         id: has-label
         uses: DanielTamkin/HasLabel@eb337eaf9036a5408ddd8ebc3e9ac540d74d2ae0 # v1.0.4
         with:
-          contains: ${{ env.VISUAL_TESTS_LABEL }}
+          contains: 'run-visual-tests'
 
   chromatic:
     name: Deploy Storybook to Chromatic
