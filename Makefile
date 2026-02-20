@@ -12,7 +12,8 @@ PKG_MANAGER_FLAGS :=
 PKG_MANAGER_INSTALL := $(if $(CI), install --frozen-lockfile, install)
 MONOREPO_TOOL_FLAGS :=
 # Use `make target DEBUG=true` for enabling debug mode
-MONOREPO_TOOL_NO_PUSH := $(if $(DEBUG), --no-git-tag-version)
+# DEBUG automatically adds --no-push --no-git-tag-version, can be merged with additional flags
+override MONOREPO_TOOL_FLAGS := $(if $(DEBUG), --no-push --no-git-tag-version) $(MONOREPO_TOOL_FLAGS)
 
 # Misc
 .DEFAULT_GOAL = help
@@ -97,24 +98,26 @@ types: ## Check types in all packages
 build: ## Builds all packages
 	$(PKG_MANAGER) build
 
-version: ## Create new release version of packages
+version: ## Create new release version of packages (pushes tags and creates GitHub releases!)
 # @see https://github.com/lerna/lerna/tree/main/commands/version#readme
 # Bump version of packages changed since the last release
-# --yes` - skip all confirmation prompts
-	$(PKG_MANAGER) $(MONOREPO_TOOL) version --create-release github --yes --no-push $(MONOREPO_TOOL_FLAGS) $(MONOREPO_TOOL_NO_PUSH)
+# WARNING: Running this locally will push commits and create GitHub releases.
+#          Use `make version MONOREPO_TOOL_FLAGS="--no-push"` for local-only version bump.
+# --yes - skip all confirmation prompts
+	$(PKG_MANAGER) $(MONOREPO_TOOL) version --create-release github --yes $(MONOREPO_TOOL_FLAGS)
 
 preversion: ## Create new pre-release version of packages, use "preid=" parameter to specify pre-release identifier, example: make preversion preid=alpha
 # @see https://github.com/lerna/lerna/tree/main/commands/version#readme
 # Bump version of packages changed since the last release
 # --yes` - skip all confirmation prompts
 	@$(eval preid ?=)
-	$(PKG_MANAGER) $(MONOREPO_TOOL) version --conventional-prerelease --preid $(preid) --create-release github --yes --no-push $(MONOREPO_TOOL_FLAGS) $(MONOREPO_TOOL_NO_PUSH)
+	$(PKG_MANAGER) $(MONOREPO_TOOL) version --conventional-prerelease --preid $(preid) --create-release github --yes $(MONOREPO_TOOL_FLAGS)
 
 graduate: ## Graduate a pre-release version of packages to stable
 # @see https://github.com/lerna/lerna/tree/main/commands/version#readme
 # Bump version of packages changed since the last release
 # --yes` - skip all confirmation prompts
-	$(PKG_MANAGER) $(MONOREPO_TOOL) version --conventional-graduate --create-release github --yes --no-push $(MONOREPO_TOOL_FLAGS) $(MONOREPO_TOOL_NO_PUSH)
+	$(PKG_MANAGER) $(MONOREPO_TOOL) version --conventional-graduate --create-release github --yes $(MONOREPO_TOOL_FLAGS)
 
 publish: ## Publish packages to repository, use "dist-tag=" parameter to specify distribution tag, example: make publish dist-tag=beta
 	@$(eval pkg ?=)
