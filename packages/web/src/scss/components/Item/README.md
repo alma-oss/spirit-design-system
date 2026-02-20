@@ -8,7 +8,7 @@ Simple Item example:
 
 ```html
 <button type="button" class="Item">
-  <span class="Item__label">Item</span>
+  <span class="Label Label--item">Item</span>
 </button>
 ```
 
@@ -21,7 +21,7 @@ Item with icon example:
       <use xlink:href="/icons/svg/sprite.svg#search" />
     </svg>
   </span>
-  <span class="Item__label">Item</span>
+  <span class="Label Label--item">Item</span>
 </button>
 ```
 
@@ -52,7 +52,7 @@ Selected with background and icon:
 
 ```html
 <button type="button" class="Item Item--selected">
-  <span class="Item__label">Item</span>
+  <span class="Label Label--item">Item</span>
   <span class="Item__icon Item__icon--end">
     <svg width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#check-plain" />
@@ -65,7 +65,7 @@ Item with Helper text example:
 
 ```html
 <button type="button" class="Item">
-  <span class="Item__label">Item</span>
+  <span class="Label Label--item">Item</span>
   <span class="Item__helperText">Helper text</span>
 </button>
 ```
@@ -74,7 +74,7 @@ Item in disabled state example:
 
 ```html
 <button type="button" class="Item Item--disabled">
-  <span class="Item__label">Item</span>
+  <span class="Label Label--item Label--disabled">Item</span>
 </button>
 ```
 
@@ -87,7 +87,7 @@ Item with icon and helper text in selected state example:
       <use xlink:href="/icons/svg/sprite.svg#search" />
     </svg>
   </span>
-  <span class="Item__label">Item</span>
+  <span class="Label Label--item">Item</span>
   <span class="Item__helperText">Helper text</span>
   <span class="Item__icon Item__icon--end">
     <svg width="24" height="24" aria-hidden="true">
@@ -101,7 +101,7 @@ Item as a link example:
 
 ```html
 <a href="#" class="Item">
-  <span class="Item__label">Item</span>
+  <span class="Label Label--item">Item</span>
 </a>
 ```
 
@@ -113,7 +113,7 @@ Radio as a Item:
 <div class="Radio Radio--inputPositionStart Radio--item">
   <input type="radio" id="radio-item" name="example" class="Radio__input" checked />
   <div class="Radio__text">
-    <label class="Radio__label" for="radio-item">Item</label>
+    <label class="Label Label--inline Label--item" for="radio-item">Item</label>
   </div>
 </div>
 ```
@@ -124,7 +124,7 @@ Checkbox as a Item:
 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
   <input type="checkbox" id="checkbox-item" class="Checkbox__input" />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-item">Item</label>
+    <label class="Label Label--inline Label--item" for="checkbox-item">Item</label>
   </div>
 </div>
 ```
@@ -149,7 +149,7 @@ Usage in [Dropdown][dropdown] component:
           <use xlink:href="/icons/svg/sprite.svg#info" />
         </svg>
       </span>
-      <span class="Item__label">Information</span>
+      <span class="Label Label--item">Information</span>
     </a>
   </div>
 </div>
