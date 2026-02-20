@@ -15,11 +15,6 @@ $input-border-color-warning: tokens.$form-field-warning;
 $input-border-color-danger: tokens.$form-field-danger;
 $input-border-color-state-disabled: tokens.$disabled-border;
 $input-focus-shadow: tokens.$focus-ring;
-$label-color-state-default: tokens.$form-field-label;
-$label-color-state-disabled: tokens.$disabled-content;
-$label-required-typography: tokens.$body-small-regular;
-$label-required-margin-left: tokens.$space-200;
-$label-required-color: tokens.$form-field-danger;
 $validation-text-typography: tokens.$body-small-semibold;
 $validation-text-margin-top: tokens.$space-400;
 $validation-text-icon-gap: tokens.$space-400;
@@ -33,7 +28,6 @@ $helper-text-color-state-default: tokens.$form-field-helper-text;
 $helper-text-color-state-disabled: tokens.$disabled-content;
 
 // Inline field form components – Checkbox, Radio, etc.
-$inline-field-label-typography: tokens.$body-medium-regular;
 $inline-field-gap: tokens.$space-500;
 $inline-field-margin-y: tokens.$space-500;
 $inline-field-input-border-color-checked: tokens.$form-field-filled-border-state-selected;
@@ -59,8 +53,6 @@ $box-field-input-placeholder-color-state-disabled: tokens.$disabled-content;
 $box-field-input-padding-x: tokens.$space-600;
 $box-field-input-padding-y: calc(#{tokens.$space-500} - #{tokens.$border-width-100});
 $box-field-input-width: 18rem;
-$box-field-label-typography: tokens.$body-small-semibold;
-$box-field-label-margin-bottom: tokens.$space-400;
 
 $box-field-size-dictionary: dictionaries.$size;
 $box-field-size-config: (
@@ -127,6 +119,5 @@ $item-border-radius: tokens.$radius-200;
 $item-background-color-state-default: tokens.$background-interactive-state-default;
 $item-background-color-state-hover: tokens.$background-interactive-state-hover;
 $item-background-color-state-active: tokens.$background-interactive-state-active;
-$item-label-typography: tokens.$body-medium-semibold;
 $item-validation-text-typography: tokens.$body-small-semibold;
 $item-helper-text-typography: tokens.$body-small-regular;
