@@ -1,5 +1,5 @@
 // 1. Reset button styles for individual link variants.
-// 2. Generate link colors for all link states.
+// 2. Link colors for all link states.
 // 3. Links in headings always have the default decoration, even those with `.link-underlined`.
 // 4. Allow link underline everywhere, except for headings in default state.
 // 5. Allow link to obtain the visited state style
@@ -7,6 +7,7 @@
 // 7. Allow link stretching over the closest element with `position: relative`.
 // 8. Disable link underline everywhere.
 
+@use 'sass:list';
 @use 'sass:map';
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
@@ -16,10 +17,40 @@
 @use '../../tools/links' as links-tools;
 
 // 1.
-@include dictionaries.prepare-button-links(links-settings.$colors);
+@include dictionaries.prepare-button-links(list.append(links-settings.$colors, 'inherit'));
 
 // 2.
 @include dictionaries.generate-link-colors($selector: '.link', $dictionary-values: links-settings.$colors);
+
+// 2.
+.link-inherit {
+    --#{tokens.$css-variable-prefix}-link-color-internal: var(--#{tokens.$css-variable-prefix}-link-color, inherit);
+
+    color: var(--#{tokens.$css-variable-prefix}-link-color-internal);
+
+    @media (hover: hover) {
+        &:hover {
+            color: var(
+                --#{tokens.$css-variable-prefix}-link-color-hover,
+                var(--#{tokens.$css-variable-prefix}-link-color-internal)
+            );
+        }
+    }
+
+    &:active {
+        color: var(
+            --#{tokens.$css-variable-prefix}-link-color-active,
+            var(--#{tokens.$css-variable-prefix}-link-color-internal)
+        );
+    }
+
+    &:visited {
+        color: var(
+            --#{tokens.$css-variable-prefix}-link-color-visited,
+            var(--#{tokens.$css-variable-prefix}-link-color-internal)
+        );
+    }
+}
 
 // 3.
 [class*='typography-heading'] a {

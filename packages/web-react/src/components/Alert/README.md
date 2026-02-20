@@ -15,6 +15,22 @@ import { Alert } from '@alma-oss/spirit-web-react';
 <Alert color="informative" isCentered>Hey! Pay attention!</Alert>
 ```
 
+## Links in Alert
+
+To ensure links inside Alert inherit the alert's color, use the Link component with `color="inherit"`:
+
+```jsx
+<Alert color="success">
+  See{' '}
+  <Link href="/faq" color="inherit" underlined="always">
+    FAQ
+  </Link>{' '}
+  for more info.
+</Alert>
+```
+
+The `underlined="always"` prop is recommended for accessibility to ensure links are distinguishable from surrounding text.
+
 ## Default Icons According to Color Variant
 
 | Color name    | Icon name     |

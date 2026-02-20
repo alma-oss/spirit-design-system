@@ -2,8 +2,34 @@
 
 Link allows users to follow navigation.
 
-```jsx
+```tsx
 <Link href="/" color="primary" isDisabled />
+```
+
+## Colors
+
+Link supports four color options: `primary` (default), `secondary`, `tertiary`, and `inherit`.
+
+### Inherit Color
+
+The `inherit` color option allows links to inherit color from their parent element. This is useful when links need to match the color of their container, such as in Alert or other colored components.
+
+```tsx
+<Alert color="success">
+  See{' '}
+  <Link href="/faq" color="inherit" underlined="always">
+    FAQ
+  </Link>{' '}
+  for more info.
+</Alert>
+```
+
+**Accessibility Note:** When using `color="inherit"`, it's recommended to set `underlined="always"` to ensure links are visually distinguishable from surrounding text.
+
+```tsx
+<Link href="/" color="inherit" underlined="always">
+  Inherit Color Link
+</Link>
 ```
 
 ## Underlined
@@ -14,7 +40,7 @@ You can customize the underline behavior for links with three different settings
 
 This is the **default** value, which makes the underline visible only when the component is hovered over.
 
-```jsx
+```tsx
 <Link href="/" underlined="hover">
   …
 </Link>
@@ -22,7 +48,7 @@ This is the **default** value, which makes the underline visible only when the c
 
 Alternatively, you can omit this prop:
 
-```jsx
+```tsx
 <Link href="/">…</Link>
 ```
 
@@ -30,7 +56,7 @@ Alternatively, you can omit this prop:
 
 The underline is constantly visible, regardless of interaction.
 
-```jsx
+```tsx
 <Link href="/" underlined="always">
   …
 </Link>
@@ -40,7 +66,7 @@ The underline is constantly visible, regardless of interaction.
 
 The underline is never visible, even when the link is hovered over.
 
-```jsx
+```tsx
 <Link href="/" underlined="never">
   …
 </Link>
@@ -50,7 +76,7 @@ The underline is never visible, even when the link is hovered over.
 
 You can allow the link to have visited state style with the `hasVisitedStyleAllowed` prop.
 
-```jsx
+```tsx
 <Link href="/" hasVisitedStyleAllowed>
   …
 </Link>
@@ -76,7 +102,7 @@ and [escape hatches][readme-escape-hatches].
 
 Link classes are fabricated using `useLinkStyleProps` hook. You can use it to create your own custom Link component.
 
-```jsx
+```tsx
 const CustomLink = (props: SpiritLinkProps): JSX.Element => {
   const { classProps, props: modifiedProps, children } = useLinkStyleProps(props);
 
@@ -92,8 +118,8 @@ const CustomLink = (props: SpiritLinkProps): JSX.Element => {
 
 If you are using `forwardRef`, use the `PolymorphicRef` type for the reference.
 
-```jsx
-import { forwardRef } from 'react
+```tsx
+import { forwardRef } from 'react';
 import { Link } from '@alma-oss/spirit-web-react';
 import { PolymorphicRef } from '@alma-oss/spirit-web-react/types';
 
@@ -101,14 +127,8 @@ type LinkProps<T extends ElementType = 'button'> = SpiritLinkProps<T, 'tertiary'
 
 const CustomLinkRoot = <T extends ElementType = 'button'>(
   props: LinkProps<T>,
-  ref: PolymorphicRef<T> // <-- Type `ref` prop with the `PolymorphicRef` here
-): JSX.Element => (
-  <Link
-      ref={ref}
-      elementType="button"
-      {...props}
-  />
-);
+  ref: PolymorphicRef<T>, // <-- Type `ref` prop with the `PolymorphicRef` here
+): JSX.Element => <Link ref={ref} elementType="button" {...props} />;
 
 export const CustomLink = forwardRef(CustomLinkRoot);
 ```

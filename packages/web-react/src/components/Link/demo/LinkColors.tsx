@@ -14,6 +14,12 @@ const LinkColors = () => (
     <Link href="#" color="tertiary">
       Tertiary Link
     </Link>
+
+    <Link href="#" color="inherit">
+      Inherit Link
+    </Link>
+
+    <Link elementType="button">Link as button</Link>
   </>
 );
 

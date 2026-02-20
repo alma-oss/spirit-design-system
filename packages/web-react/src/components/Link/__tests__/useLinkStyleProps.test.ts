@@ -31,4 +31,25 @@ describe('useLinkStyleProps', () => {
 
     expect(result.current.classProps).toContain('link-allow-visited-style');
   });
+
+  it('should return link-inherit class', () => {
+    const props = { color: 'inherit' } as SpiritLinkProps;
+    const { result } = renderHook(() => useLinkStyleProps(props));
+
+    expect(result.current.classProps).toContain('link-inherit');
+  });
+
+  it('should combine inherit with underlined', () => {
+    const props = { color: 'inherit', underlined: 'always' } as SpiritLinkProps;
+    const { result } = renderHook(() => useLinkStyleProps(props));
+
+    expect(result.current.classProps).toBe('link-inherit link-underlined');
+  });
+
+  it('should combine inherit with disabled', () => {
+    const props = { color: 'inherit', isDisabled: true } as SpiritLinkProps;
+    const { result } = renderHook(() => useLinkStyleProps(props));
+
+    expect(result.current.classProps).toBe('link-inherit link-disabled');
+  });
 });

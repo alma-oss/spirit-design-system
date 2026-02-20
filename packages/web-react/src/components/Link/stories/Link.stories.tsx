@@ -19,7 +19,7 @@ const meta: Meta<typeof Link> = {
     },
     color: {
       control: 'select',
-      options: [...Object.values(LinkColors)],
+      options: [...Object.values(LinkColors), 'inherit'],
       table: {
         defaultValue: { summary: LinkColors.PRIMARY },
       },

@@ -14,6 +14,14 @@ const LinkDisabled = () => (
     <Link href="#" color="tertiary" isDisabled>
       Tertiary Disabled Link
     </Link>
+
+    <Link href="#" color="inherit" isDisabled>
+      Inherit Disabled Link
+    </Link>
+
+    <Link elementType="button" isDisabled>
+      Link as button
+    </Link>
   </>
 );
 
