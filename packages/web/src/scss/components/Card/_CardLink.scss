@@ -1,7 +1,7 @@
-@use '../../tools/links';
+@use '../../tools/pseudo-element';
 
 .CardLink:first-of-type {
-    @include links.stretch();
+    @include pseudo-element.stretch();
 
     text-decoration: none;
 
