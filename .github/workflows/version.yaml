@@ -50,27 +50,28 @@ jobs:
         run: |
           make build
 
-      - name: Dry run
+      - name: Dry run (preview changes only)
         if: ${{ github.event.inputs.dryrun == 'true' }}
         run: |
-          yarn lerna version --no-push --no-git-tag-version --yes
+          make version DEBUG=true
+          echo "ℹ️ Dry run complete. No commits or tags were created."
           git diff
 
-      - name: Bump version
-        if: ${{ github.event.inputs.dryrun == 'false' }}
+      - name: Bump version (local only)
+        if: ${{ github.event.inputs.dryrun == 'false' && github.event.inputs.confirm != 'yes' }}
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          make version
+          make version MONOREPO_TOOL_FLAGS="--no-push"
+          echo "⚠️ Version created locally but NOT pushed."
+          echo "ℹ️ To push and create releases, run workflow again with confirm=yes"
           git --no-pager show --stat --patch HEAD
 
-      - name: Push version
-        if: ${{ github.event.inputs.dryrun == 'false' }}
+      - name: Bump version and Create GitHub Releases
+        if: ${{ github.event.inputs.dryrun == 'false' && github.event.inputs.confirm == 'yes' }}
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          if [ "${{ github.event.inputs.confirm }}" != "yes" ]; then
-            echo "Version process aborted."
-            exit 1
-          else
-            echo "Proceeding with the version push..."
-            git push && git push --tags
-          fi
+          echo "🚀 Creating versions, pushing, and publishing GitHub releases..."
+          make version
+          echo "✅ Versions bumped, tags pushed, and GitHub releases created"
