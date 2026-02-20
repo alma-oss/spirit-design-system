@@ -1,25 +1,52 @@
 name: 🎨 Storybook on Chromatic
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
     paths: &storybook-paths
       - 'apps/storybook/**'
       - 'packages/icons/**'
       - 'packages/web-react/**'
       - 'packages/design-tokens/**'
-  push:
-    branches:
-      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - labeled
     paths: *storybook-paths
+
+env:
+  STORYBOOK_BUILD_DIR: 'build'
+  STORYBOOK_SCOPE: '@alma-oss/spirit-storybook'
+  STORYBOOK_WORKING_DIR: 'apps/storybook'
 
 concurrency:
   group: chromatic-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
+  has-label:
+    name: 🏷️ Analyzing Labels
+    runs-on: ubuntu-latest
+    outputs:
+      has-label: ${{ steps.has-label.outputs.labeled-run-visual-tests }}
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@3155a141048f8f89c06b4cdae32e7853e97536bc # 0.13.0
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: Labeled to run-visual-tests
+        id: has-label
+        uses: DanielTamkin/HasLabel@eb337eaf9036a5408ddd8ebc3e9ac540d74d2ae0 # v1.0.4
+        with:
+          contains: 'run-visual-tests'
+
   chromatic:
     name: Deploy Storybook to Chromatic
+    needs: has-label
+    if: ${{ needs.has-label.outputs.has-label == 'true' || (github.ref == 'refs/heads/main') }}
     runs-on: ubuntu-24.04
     environment: chromatic
     timeout-minutes: 15
@@ -39,7 +66,7 @@ jobs:
         uses: ./.github/actions/setup-install
 
       - name: Build Storybook
-        run: yarn lerna run build --scope=@alma-oss/spirit-storybook --include-dependencies
+        run: yarn lerna run build --scope=${{ env.STORYBOOK_SCOPE }} --include-dependencies
         env:
           # Disable connection to NX Cloud
           # @see: https://nx.dev/docs/reference/nx-cloud/config#disabling-connections-to-nx-cloud
@@ -50,8 +77,8 @@ jobs:
         uses: chromaui/action@07791f8243f4cb2698bf4d00426baf4b2d1cb7e0 # v13.3.5
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          workingDir: apps/storybook
-          storybookBuildDir: build
+          workingDir: ${{ env.STORYBOOK_WORKING_DIR }}
+          storybookBuildDir: ${{ env.STORYBOOK_BUILD_DIR }}
 
       - name: Post Storybook Link Comment
         if: github.event_name == 'pull_request'
