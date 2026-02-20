@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use 'true' as test;
 @use '../utilities';
 
@@ -39,6 +40,59 @@
             ),
             ()
         );
+    }
+}
+
+@include test.describe('generate-color-scheme-map function') {
+    @include test.it('should return paired color schemes for emotion colors') {
+        @include test.assert-equal(
+            utilities.generate-color-scheme-map($tokens-group: 'emotion-colors', $prefix: 'emotion-'),
+            (
+                emotion-danger-basic: (
+                    background-color: var(--spirit-color-emotion-danger-background-basic),
+                    color: var(--spirit-color-emotion-danger-content-subtle),
+                ),
+                emotion-danger-subtle: (
+                    background-color: var(--spirit-color-emotion-danger-background-subtle),
+                    color: var(--spirit-color-emotion-danger-content-basic),
+                ),
+                emotion-informative-basic: (
+                    background-color: var(--spirit-color-emotion-informative-background-basic),
+                    color: var(--spirit-color-emotion-informative-content-subtle),
+                ),
+                emotion-informative-subtle: (
+                    background-color: var(--spirit-color-emotion-informative-background-subtle),
+                    color: var(--spirit-color-emotion-informative-content-basic),
+                ),
+                emotion-success-basic: (
+                    background-color: var(--spirit-color-emotion-success-background-basic),
+                    color: var(--spirit-color-emotion-success-content-subtle),
+                ),
+                emotion-success-subtle: (
+                    background-color: var(--spirit-color-emotion-success-background-subtle),
+                    color: var(--spirit-color-emotion-success-content-basic),
+                ),
+                emotion-warning-basic: (
+                    background-color: var(--spirit-color-emotion-warning-background-basic),
+                    color: var(--spirit-color-emotion-warning-content-subtle),
+                ),
+                emotion-warning-subtle: (
+                    background-color: var(--spirit-color-emotion-warning-background-subtle),
+                    color: var(--spirit-color-emotion-warning-content-basic),
+                ),
+            )
+        );
+    }
+
+    @include test.it('should format numeric keys correctly for accent colors') {
+        $result: utilities.generate-color-scheme-map(
+            $tokens-group: 'accent-colors',
+            $prefix: 'accent-',
+        );
+
+        // Check that keys are formatted as '01', '02' not '1', '2'
+        @include test.assert-true(map.has-key($result, 'accent-01-basic'));
+        @include test.assert-true(map.has-key($result, 'accent-02-basic'));
     }
 }
 
@@ -110,6 +164,37 @@
             }
 
             @include test.expect();
+        }
+    }
+
+    @include test.it('should generate multi-property utilities when value is a map') {
+        $sample-utility: (
+            property: null,
+            class: color-scheme-on,
+            generate-custom-properties: true,
+            values: (
+                test-basic: (
+                    background-color: #f00,
+                    color: #fff,
+                ),
+            ),
+        );
+
+        @include test.assert() {
+            @include test.output() {
+                @include utilities.generate($sample-utility, '');
+            }
+
+            @include test.expect() {
+                // stylelint-disable custom-property-empty-line-before, declaration-empty-line-before, declaration-no-important, order/order, order/properties-order -- We need to allow this to make sass-true work
+                .color-scheme-on-test-basic {
+                    --spirit-local-background-color: #f00;
+                    background-color: #f00 !important;
+                    --spirit-local-color: #fff;
+                    color: #fff !important;
+                }
+                // stylelint-enable declaration-no-important
+            }
         }
     }
 }

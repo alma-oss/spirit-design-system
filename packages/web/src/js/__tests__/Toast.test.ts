@@ -13,7 +13,7 @@ const testId = 'toast-test';
 
 const toastHtmlHidden = `
   <div id="${testId}" class="ToastBar ToastBar--success ToastBar--dismissible is-hidden">
-    <div class="ToastBar__box">
+    <div class="ToastBar__box" data-spirit-populate-field="box">
         <button type="button" data-spirit-target="#${testId}" aria-expanded="false">Close</button>
     </div>
   </div>
@@ -21,7 +21,7 @@ const toastHtmlHidden = `
 
 const toastHtmlVisible = `
   <div id="${testId}" class="ToastBar ToastBar--success ToastBar--dismissible is-visible">
-    <div class="ToastBar__box">
+    <div class="ToastBar__box" data-spirit-populate-field="box">
       <button type="button" data-spirit-target="#${testId}" aria-expanded="true">Close</button>
     </div>
   </div>

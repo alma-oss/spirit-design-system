@@ -10,6 +10,54 @@
 @use 'string' as spirit-string;
 @use 'tokens' as tokens-tools;
 
+// Generates a map of color scheme utilities that pair background and text colors.
+// Basic backgrounds are paired with subtle text colors and vice versa.
+// Parameters are:
+// * $tokens-group: the key used to retrieve a group of tokens from `@tokens`.
+// * $prefix: a prefix to prepend to each key in the generated map.
+// Returns a map where each key maps to a property->value map for background-color and color.
+@function generate-color-scheme-map($tokens-group, $prefix: '') {
+    $result: ();
+    $tokens: tokens-tools.get-variable-if-exists($tokens-group, null);
+
+    @each $key, $values in $tokens {
+        // 1.
+        $formatted-key: if(meta.type-of($key) == 'number', tokens-tools.format-numeric-key($key), $key);
+        $background-basic: map.get($values, 'background-basic');
+        $background-subtle: map.get($values, 'background-subtle');
+        $content-basic: map.get($values, 'content-basic');
+        $content-subtle: map.get($values, 'content-subtle');
+
+        // Pair background-basic with content-subtle
+        @if $background-basic and $content-subtle {
+            $name: $prefix + $formatted-key + '-basic';
+            $result: map.set(
+                $result,
+                string.unquote($name),
+                (
+                    background-color: $background-basic,
+                    color: $content-subtle,
+                )
+            );
+        }
+
+        // Pair background-subtle with content-basic
+        @if $background-subtle and $content-basic {
+            $name: $prefix + $formatted-key + '-subtle';
+            $result: map.set(
+                $result,
+                string.unquote($name),
+                (
+                    background-color: $background-subtle,
+                    color: $content-basic,
+                )
+            );
+        }
+    }
+
+    @return $result;
+}
+
 // Generates a map of tokens based on the provided key, prefix, replacement, and scope.
 // It iterates over the tokens and creates a new map with modified keys and values.
 // Parameters are:
@@ -76,13 +124,26 @@
         $property-class-modifier: spirit-string.replace($property-class-modifier, '-default', '');
 
         .#{$property-class + $infix + $property-class-modifier} {
-            @each $property in $properties {
-                @if $generate-custom-properties {
-                    --#{tokens.$css-variable-prefix}local-#{$property}: #{$value};
-                }
+            // Check if $value is a map (for multi-property utilities with different values per property)
+            @if meta.type-of($value) == 'map' {
+                @each $property, $property-value in $value {
+                    @if $generate-custom-properties {
+                        --#{tokens.$css-variable-prefix}local-#{$property}: #{$property-value};
+                    }
 
-                // stylelint-disable-next-line declaration-no-important
-                #{$property}: $value !important;
+                    // stylelint-disable-next-line declaration-no-important
+                    #{$property}: $property-value !important;
+                }
+            } @else {
+                // Original behavior: apply same value to all properties
+                @each $property in $properties {
+                    @if $generate-custom-properties {
+                        --#{tokens.$css-variable-prefix}local-#{$property}: #{$value};
+                    }
+
+                    // stylelint-disable-next-line declaration-no-important
+                    #{$property}: $value !important;
+                }
             }
         }
     }
