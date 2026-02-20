@@ -20,16 +20,16 @@
     "types": "tsc"
   },
   "dependencies": {
-    "dotenv": "^16.4.7",
-    "dotenv-safe": "^9.1.0",
-    "gitdiff-parser": "^0.3.1",
-    "simple-git": "^3.27.0",
-    "slackify-markdown": "^4.4.0",
-    "tsx": "^4.19.3",
-    "zx": "^8.3.0"
+    "dotenv": "catalog:script",
+    "dotenv-safe": "catalog:script",
+    "gitdiff-parser": "catalog:script",
+    "simple-git": "catalog:script",
+    "slackify-markdown": "catalog:script",
+    "tsx": "catalog:script",
+    "zx": "catalog:script"
   },
   "devDependencies": {
-    "@types/dotenv-safe": "8.1.6",
-    "typescript": "5.8.3"
+    "@types/dotenv-safe": "catalog:types",
+    "typescript": "catalog:types"
   }
 }

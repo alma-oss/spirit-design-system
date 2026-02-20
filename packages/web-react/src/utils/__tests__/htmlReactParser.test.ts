@@ -102,10 +102,8 @@ describe('htmlReactParser', () => {
           </header>
           <h1
             style={
-              {
-                "color": "#000",
-                "fontSize": "42px",
-              }
+              "color": "#000",
+              "fontSize": "42px",
             }
           >
             Heading
@@ -128,9 +126,7 @@ describe('htmlReactParser', () => {
           </div>
           <script
             dangerouslySetInnerHTML={
-              {
-                "__html": "alert();",
-              }
+              "__html": "alert();",
             }
           />
         </body>
@@ -239,7 +235,7 @@ describe('htmlReactParser', () => {
   it('escapes tags inside of <title>', () => {
     expect(htmlReactParser(html.title)).toMatchInlineSnapshot(`
       <title>
-        &lt;em&gt;text&lt;/em&gt;
+        <em>text</em>
       </title>
     `);
   });

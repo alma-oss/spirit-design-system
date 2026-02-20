@@ -1,5 +1,9 @@
 /* eslint-disable no-console */
 import '@testing-library/jest-dom';
+import reactElementSerializer from './reactElementSerializer';
+
+// Register custom snapshot serializer for React elements
+expect.addSnapshotSerializer(reactElementSerializer);
 
 const originalError = console.error;
 
