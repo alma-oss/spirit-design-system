@@ -5,7 +5,7 @@ import { type HeaderProps } from '../../../types';
 import { Link } from '../../Link';
 import { ProductLogo } from '../../ProductLogo';
 import JobBoardLogo from '../demo/JobBoardLogo';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import {
   Header,
   HeaderDesktopActions,

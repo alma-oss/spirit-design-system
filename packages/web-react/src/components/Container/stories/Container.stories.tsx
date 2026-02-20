@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import DocsBox from '../../../../docs/DocsBox';
 import { SizesExtended, TextAlignments } from '../../../constants';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Container } from '..';
 
 const meta: Meta<typeof Container> = {

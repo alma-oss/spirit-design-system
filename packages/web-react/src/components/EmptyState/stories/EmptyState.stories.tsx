@@ -6,7 +6,7 @@ import { ButtonLink } from '../../Button';
 import { Heading } from '../../Heading';
 import { Link } from '../../Link';
 import { Text } from '../../Text';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { EmptyState, EmptyStateSection } from '..';
 
 const meta: Meta<typeof EmptyState> = {

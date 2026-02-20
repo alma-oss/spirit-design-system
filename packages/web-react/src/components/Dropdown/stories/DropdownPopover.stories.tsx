@@ -2,7 +2,7 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Button, Icon, Text } from '../..';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '..';
 
 const meta: Meta<typeof DropdownPopover> = {

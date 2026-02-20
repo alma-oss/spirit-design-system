@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Emphasis, SizesExtended, TextAlignments, TextColors, TextHyphens, TextWordBreaks } from '../../../constants';
 import { getAccentTextColors, getEmotionTextColors } from '../../../utils';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Heading } from '..';
 
 const accentColorsObject = getAccentTextColors();

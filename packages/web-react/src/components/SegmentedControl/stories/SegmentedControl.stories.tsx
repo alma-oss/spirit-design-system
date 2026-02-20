@@ -5,7 +5,7 @@ import { FillVariants } from '../../../constants';
 import { type SegmentedControlProps } from '../../../types/segmentedControl';
 import { Icon } from '../../Icon';
 import { VisuallyHidden } from '../../VisuallyHidden';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import SegmentedControl from '../SegmentedControl';
 import SegmentedControlItem from '../SegmentedControlItem';
 

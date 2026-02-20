@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import { type SpiritToastProps } from '../../../types';
 import { Button } from '../../Button';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Toast, ToastBar, ToastBarMessage } from '..';
 
 const meta: Meta<typeof Toast> = {

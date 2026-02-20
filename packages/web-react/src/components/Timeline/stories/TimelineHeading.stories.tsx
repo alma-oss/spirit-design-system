@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Heading } from '../../Heading';
 import { Link } from '../../Link';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import TimelineHeading from '../TimelineHeading';
 
 const meta: Meta<typeof TimelineHeading> = {

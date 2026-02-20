@@ -2,7 +2,7 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useCallback, useState } from 'react';
 import { type TabId, type TabsProps } from '../../../types';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { TabContent, TabItem, TabList, TabPane, Tabs } from '..';
 
 const meta: Meta<typeof Tabs> = {

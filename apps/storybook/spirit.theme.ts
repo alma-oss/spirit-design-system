@@ -17,6 +17,30 @@ export default create({
   fontBase: '"Inter", sans-serif',
   fontCode: 'monospace',
 
+  // Complete typography structure for addon-docs compatibility
+  typography: {
+    fonts: {
+      base: '"Inter", sans-serif',
+      mono: 'monospace',
+    },
+    weight: {
+      regular: 400,
+      bold: 700,
+    },
+    size: {
+      s1: 12,
+      s2: 14,
+      s3: 16,
+      m1: 20,
+      m2: 24,
+      m3: 28,
+      l1: 32,
+      l2: 40,
+      l3: 48,
+      code: 90,
+    },
+  },
+
   // Text colors
   // textColor: '#132930',
   // textInverseColor: '#fff',

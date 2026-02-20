@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { mergeConfig } from 'vite';
-import markdownRawPlugin from 'vite-raw-plugin';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
@@ -28,9 +27,6 @@ const config: StorybookConfig = {
         },
       },
       plugins: [
-        markdownRawPlugin({
-          fileRegex: /\.md$/,
-        }),
         react({
           jsxRuntime: 'automatic',
         }),

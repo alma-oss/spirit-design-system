@@ -8,6 +8,6 @@
       "@alma-oss/spirit-web-react": ["../../packages/web-react/src"]
     }
   },
-  "include": ["./**/*.ts", "./**/*.tsx"],
+  "include": ["./**/*.ts", "./**/*.tsx", "./types/**/*.d.ts"],
   "exclude": ["./node_modules", "./dist"]
 }

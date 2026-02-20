@@ -11,7 +11,7 @@ import CardBody from '../CardBody';
 import CardEyebrow from '../CardEyebrow';
 import CardFooter from '../CardFooter';
 import CardTitle from '../CardTitle';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof CardArtwork> = {
   title: 'Components/Card',

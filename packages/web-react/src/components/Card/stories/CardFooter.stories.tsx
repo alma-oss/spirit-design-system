@@ -13,7 +13,7 @@ import CardLogo from '../CardLogo';
 import CardMedia from '../CardMedia';
 import CardTitle from '../CardTitle';
 import { LOGO, MEDIA_IMAGE } from '../demo/constants';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof CardFooter> = {
   title: 'Components/Card',

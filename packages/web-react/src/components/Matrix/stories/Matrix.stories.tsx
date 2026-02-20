@@ -11,7 +11,7 @@ import {
   MATRIX_SPACING_Y_DEFAULT,
 } from '../constant';
 import Matrix from '../Matrix';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof Matrix> = {
   title: 'Components/Matrix',

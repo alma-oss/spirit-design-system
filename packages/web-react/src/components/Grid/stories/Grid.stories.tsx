@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import DocsBox from '../../../../docs/DocsBox';
 import { AlignmentXExtended, AlignmentYExtended } from '../../../constants';
-import ReadMe from '../README.md';
+import ReadMe from '../README.md?raw';
 import { Grid } from '..';
 
 const meta: Meta<typeof Grid> = {
