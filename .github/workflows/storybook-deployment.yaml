@@ -39,40 +39,10 @@ jobs:
         with:
           contains: ${{ env.VISUAL_TESTS_LABEL }}
 
-  has-tags:
-    name: 🏷️ Analyze Tags
-    runs-on: ubuntu-24.04
-
-    outputs:
-      has-tag: ${{ steps.set-tag-output.outputs.has-tag }}
-
-    steps:
-      - name: Clone repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-        with:
-          # Even though this is set, shallow clones do not always retrieve all tags correctly
-          fetch-tags: true
-          # So we need to fetch full history, including all tags
-          fetch-depth: 0
-
-      - name: Check Tag On Commit
-        id: check-tag-exists
-        if: github.event_name == 'push'
-        uses: ./.github/actions/has-tags
-
-      - name: Set tag output
-        id: set-tag-output
-        run: |
-          if [ "${{ github.event_name }}" == "push" ]; then
-            echo "has-tag=${{ steps.check-tag-exists.outputs.has-tag }}" >> $GITHUB_OUTPUT
-          else
-            echo "has-tag=false" >> $GITHUB_OUTPUT
-          fi
-
   chromatic:
     name: Deploy Storybook to Chromatic
-    needs: [has-label, has-tags]
-    if: ${{ (needs.has-label.outputs.has-label == 'true') || (github.event_name == 'push' && needs.has-tags.outputs.has-tag == 'true') }}
+    needs: has-label
+    if: ${{ needs.has-label.outputs.has-label == 'true' || (github.ref == 'refs/heads/main') }}
     runs-on: ubuntu-24.04
     environment: ${{ env.CHROMATIC_ENV }}
     timeout-minutes: 15
