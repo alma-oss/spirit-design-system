@@ -10,6 +10,13 @@ on:
       - synchronize
       - labeled
 
+env:
+  CHROMATIC_ENV: 'chromatic'
+  STORYBOOK_BUILD_DIR: 'build'
+  STORYBOOK_SCOPE: '@alma-oss/spirit-storybook'
+  STORYBOOK_WORKING_DIR: 'apps/storybook'
+  VISUAL_TESTS_LABEL: 'run-visual-tests'
+
 concurrency:
   group: chromatic-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -30,7 +37,7 @@ jobs:
         id: has-label
         uses: DanielTamkin/HasLabel@eb337eaf9036a5408ddd8ebc3e9ac540d74d2ae0 # v1.0.4
         with:
-          contains: 'run-visual-tests'
+          contains: ${{ env.VISUAL_TESTS_LABEL }}
 
   has-tags:
     name: 🏷️ Analyze Tags
@@ -67,7 +74,7 @@ jobs:
     needs: [has-label, has-tags]
     if: ${{ (needs.has-label.outputs.has-label == 'true') || (github.event_name == 'push' && needs.has-tags.outputs.has-tag == 'true') }}
     runs-on: ubuntu-24.04
-    environment: chromatic
+    environment: ${{ env.CHROMATIC_ENV }}
     timeout-minutes: 15
     permissions:
       contents: read
@@ -85,7 +92,7 @@ jobs:
         uses: ./.github/actions/setup-install
 
       - name: Build Storybook
-        run: yarn lerna run build --scope=@alma-oss/spirit-storybook --include-dependencies
+        run: yarn lerna run build --scope=${{ env.STORYBOOK_SCOPE }} --include-dependencies
         env:
           # Disable connection to NX Cloud
           # @see: https://nx.dev/docs/reference/nx-cloud/config#disabling-connections-to-nx-cloud
@@ -96,8 +103,8 @@ jobs:
         uses: chromaui/action@07791f8243f4cb2698bf4d00426baf4b2d1cb7e0 # v13.3.5
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          workingDir: apps/storybook
-          storybookBuildDir: build
+          workingDir: ${{ env.STORYBOOK_WORKING_DIR }}
+          storybookBuildDir: ${{ env.STORYBOOK_BUILD_DIR }}
 
       - name: Post Storybook Link Comment
         if: github.event_name == 'pull_request'
