@@ -1,40 +1,88 @@
 @use 'true' as test;
+@use '@tokens' as tokens;
+@use '../../settings/links' as links-settings;
 @use '../links';
 
-@include test.describe('stretch mixin') {
-    @include test.it('should output default styles for ::before pseudo-element') {
+@include test.describe('base mixin') {
+    @include test.it('should output default styles without color') {
         @include test.assert() {
             @include test.output() {
                 .test {
-                    @include links.stretch();
+                    @include links.base();
                 }
             }
 
             @include test.expect() {
-                .test::before {
-                    content: '';
-                    position: absolute;
-                    inset: 0;
-                    z-index: 0;
+                .test {
+                    text-decoration-skip-ink: links-settings.$text-decoration-skip-ink;
+                    text-underline-offset: links-settings.$text-underline-offset;
+                }
+
+                @media (hover: hover) {
+                    .test:hover {
+                        text-decoration: links-settings.$text-decoration-hover;
+                    }
+                }
+
+                .test:active {
+                    text-decoration: links-settings.$text-decoration-hover;
                 }
             }
         }
     }
 
-    @include test.it('should output styles for provided pseudo-element') {
+    @include test.it('should not output color when $set-color is false') {
         @include test.assert() {
             @include test.output() {
                 .test {
-                    @include links.stretch('after');
+                    @include links.base($set-color: false);
                 }
             }
 
             @include test.expect() {
-                .test::after {
-                    content: '';
-                    position: absolute;
-                    inset: 0;
-                    z-index: 0;
+                .test {
+                    text-decoration-skip-ink: links-settings.$text-decoration-skip-ink;
+                    text-underline-offset: links-settings.$text-underline-offset;
+                }
+
+                @media (hover: hover) {
+                    .test:hover {
+                        text-decoration: links-settings.$text-decoration-hover;
+                    }
+                }
+
+                .test:active {
+                    text-decoration: links-settings.$text-decoration-hover;
+                }
+            }
+        }
+    }
+
+    @include test.it('should output color styles when $set-color is true') {
+        @include test.assert() {
+            @include test.output() {
+                .test {
+                    @include links.base($set-color: true);
+                }
+            }
+
+            @include test.expect() {
+                .test {
+                    text-decoration-skip-ink: links-settings.$text-decoration-skip-ink;
+                    text-underline-offset: links-settings.$text-underline-offset;
+                    color: tokens.$link-primary-state-default;
+                }
+
+                @media (hover: hover) {
+                    .test:hover {
+                        text-decoration: links-settings.$text-decoration-hover;
+                        color: tokens.$link-primary-state-hover;
+                    }
+                }
+
+                .test:active {
+                    text-decoration: links-settings.$text-decoration-hover;
+                    color: tokens.$link-primary-state-active;
                 }
             }
         }

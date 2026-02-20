@@ -12,18 +12,18 @@
         type="button"
         class="Item"
       >
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item">Item label</span>
       </button>
 
       <a
         href="https://www.example.com"
         class="Item"
       >
-        <span class="Item__label">Item label as link</span>
+        <span class="Label Label--item">Item label</span>
       </a>
 
       <div class="Item">
-        <span class="Item__label">Item label as div</span>
+        <span class="Label Label--item">Item label</span>
       </div>
 
     </div>
@@ -48,7 +48,7 @@
           type="button"
           class="Item"
         >
-          <span class="Item__label">Item label</span>
+          <span class="Label Label--item">Item label</span>
           <span class="Item__icon Item__icon--end">
             <svg
               width="24"
@@ -70,7 +70,7 @@
           type="button"
           class="Item Item--selected"
         >
-          <span class="Item__label">Item label</span>
+          <span class="Label Label--item">Item label</span>
         </button>
 
       </div>
@@ -83,7 +83,7 @@
           type="button"
           class="Item Item--selected"
         >
-          <span class="Item__label">Item label</span>
+          <span class="Label Label--item">Item label</span>
           <span class="Item__icon Item__icon--end">
             <svg
               width="24"
@@ -115,14 +115,14 @@
         type="button"
         class="Item Item--disabled"
       >
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item Label--disabled">Item label</span>
       </button>
 
       <button
         type="button"
-        class="Item Item--disabled"
+        class="Item Item--disabled Item--selected"
       >
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item Label--disabled">Item label</span>
         <span class="Item__icon Item__icon--end">
           <svg
             width="24"
@@ -152,15 +152,15 @@
         type="button"
         class="Item"
       >
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item">Item label</span>
         <span class="Item__helperText">Helper text</span>
       </button>
 
       <button
         type="button"
-        class="Item"
+        class="Item Item--selected"
       >
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item">Item label</span>
         <span class="Item__helperText">Helper text</span>
         <span class="Item__icon Item__icon--end">
           <svg
@@ -177,15 +177,15 @@
         type="button"
         class="Item Item--disabled"
       >
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item Label--disabled">Item label</span>
         <span class="Item__helperText">Helper text</span>
       </button>
 
       <button
         type="button"
-        class="Item Item--disabled"
+        class="Item Item--disabled Item--selected"
       >
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item Label--disabled">Item label</span>
         <span class="Item__helperText">Helper text</span>
         <span class="Item__icon Item__icon--end">
           <svg
@@ -225,12 +225,12 @@
             <use xlink:href="/assets/icons/svg/sprite.svg#search" />
           </svg>
         </span>
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item">Item label</span>
       </button>
 
       <button
         type="button"
-        class="Item"
+        class="Item Item--selected"
       >
         <span class="Item__icon Item__icon--start">
           <svg
@@ -241,7 +241,7 @@
             <use xlink:href="/assets/icons/svg/sprite.svg#search" />
           </svg>
         </span>
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item">Item label</span>
         <span class="Item__icon Item__icon--end">
           <svg
             width="24"
@@ -275,7 +275,7 @@
         />
         <div class="Checkbox__text">
           <label
-            class="Checkbox__label"
+            class="Label Label--inline Label--item"
             for="checkbox-item"
           >Checkbox Item</label>
         </div>
@@ -304,7 +304,7 @@
         />
         <div class="Radio__text">
           <label
-            class="Radio__label"
+            class="Label Label--inline Label--item"
             for="radio-item"
           >Radio Item</label>
         </div>
