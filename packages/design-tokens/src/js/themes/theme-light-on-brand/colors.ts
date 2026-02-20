@@ -85,9 +85,9 @@ export const componentPaginationUnselectedStateActive = '#7847ff';
 export const componentPaginationUnselectedStateDefault = '#6039cc';
 export const componentPaginationUnselectedStateHover = '#6c40e5';
 
-export const componentPricingBoxBackground = '#4e2ea6';
-export const componentPricingBoxBorder = '#e4daff';
-export const componentPricingBoxContent = '#ffcb33';
+export const componentPricingPlanHighlightedBackground = '#4e2ea6';
+export const componentPricingPlanHighlightedBorder = '#e4daff';
+export const componentPricingPlanHighlightedContent = '#ffcb33';
 
 export const componentToggleSelectedBorder = '#a07eff';
 export const componentToggleSelectedContent = '#fff';
@@ -201,6 +201,10 @@ export const neutralStateActive = '#535353';
 export const neutralStateDefault = '#202020';
 export const neutralStateHover = '#404040';
 
+export const selectedBackgroundBasic = '#fff';
+export const selectedBackgroundSubtle = '#fff';
+export const selectedBorderBasic = '#fff';
+export const selectedBorderSubtle = '#fff';
 export const selectedContentBasic = '#fff';
 export const selectedContentSubtle = '#3c2480';
 export const selectedStateActive = '#ffd24d';
