@@ -7,7 +7,6 @@
       "conventionalCommits": true,
       "changelogPreset": "./changelog-preset.config.js",
       "createRelease": "github",
-      "push": false,
       "message": "chore(release): publish",
       "ignoreChanges": ["yarn.lock"]
     },
