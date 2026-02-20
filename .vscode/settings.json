@@ -1,0 +1,6 @@
+{
+  "jest.enable": true,
+  "jest.jestCommandLine": "node ./node_modules/jest/bin/jest.js",
+  "jest.runMode": "on-demand",
+  "jest.disabledWorkspaceFolders": ["node_modules", "dist", ".nx"]
+}
