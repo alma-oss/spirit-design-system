@@ -24,7 +24,6 @@ const config: StorybookConfig = {
         alias: {
           '@alma-oss/spirit-design-tokens': resolve(__dirname, '../../packages/design-tokens/src/js'),
           '@alma-oss/spirit-icons': resolve(__dirname, '../../packages/icons/dist'),
-          '@alma-oss/spirit-web-react': resolve(__dirname, '../../packages/web-react/src'),
         },
       },
       plugins: [
