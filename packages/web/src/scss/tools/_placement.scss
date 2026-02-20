@@ -1,3 +1,7 @@
+// NOTE: Prettier does not yet support the native CSS if() function syntax properly, which is supported by Sass.
+// We use prettier-ignore comments to protect these lines from incorrect formatting.
+// See: https://github.com/prettier/prettier/issues/18465
+
 // 1. The placement logic works as follows:
 //
 //    1. The parent element is positioned relatively.
@@ -18,6 +22,10 @@
 @use 'sass:map';
 @use 'sass:string';
 @use 'list' as spirit-list;
+
+// NOTE: Prettier does not yet support the native CSS if() function syntax properly.
+// We use prettier-ignore comments to protect these lines from incorrect formatting.
+// See: https://github.com/prettier/prettier/issues/18465
 
 $_hyphen: '-';
 
@@ -124,14 +132,16 @@ $_logical-to-physical-placement-map: (
 // Example: get-cross-axis-direction('left') will return 'vertical'
 // Example: get-cross-axis-direction('bottom') will return 'horizontal'
 @function get-cross-axis-direction($main-axis) {
-    @return if(string.index($main-axis, 'left') or string.index($main-axis, 'right'), 'vertical', 'horizontal');
+    // prettier-ignore
+    @return if(sass(string.index($main-axis, 'left') or string.index($main-axis, 'right')): 'vertical'; else: 'horizontal');
 }
 
 // Function to check if a placement is logical
 // Example: is-logical('top') will return false
 // Example: is-logical('start') will return true
 @function is-logical($placement) {
-    @return if(string.index($placement, 'start') or string.index($placement, 'end'), true, false);
+    // prettier-ignore
+    @return if(sass(string.index($placement, 'start') or string.index($placement, 'end')): true; else: false);
 }
 
 // Function to translate logical placement to its physical equivalent
@@ -186,10 +196,16 @@ $_logical-to-physical-placement-map: (
     @if list.length($placement-chunks) > 1 {
         $cross-axis: list.nth($placement-chunks, 2);
         $cross-axis-direction: get-cross-axis-direction($main-axis);
+
+        // prettier-ignore
         $cross-axis-transformed: transform-axis(
             $axis: $cross-axis,
             $inverse: $cross-axis-inverse,
-            $physical-direction: if($cross-axis-physical, $cross-axis-direction, null),
+            $physical-direction: if(
+                sass($cross-axis-physical):
+                $cross-axis-direction;
+                else: null
+            ),
         );
 
         @return spirit-list.to-string(($main-axis-transformed, $cross-axis-transformed), $join-with);

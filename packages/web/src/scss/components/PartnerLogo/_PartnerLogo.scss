@@ -1,3 +1,7 @@
+// NOTE: Prettier does not yet support the native CSS if() function syntax properly.
+// We use prettier-ignore comments to protect these lines from incorrect formatting.
+// See: https://github.com/prettier/prettier/issues/18465
+
 @use 'theme';
 @use '@tokens' as tokens;
 @use '../../tools/breakpoint';
@@ -28,7 +32,9 @@
             $class-name: 'PartnerLogo',
             $dictionary-values: theme.$size-dictionary,
             $config: theme.$size-config,
-            $class-name-infix: if($breakpoint-name == mobile, '', $breakpoint-name)
+
+            // prettier-ignore
+            $class-name-infix: if(sass($breakpoint-name == mobile): '' ; else: $breakpoint-name)
         );
     }
 }

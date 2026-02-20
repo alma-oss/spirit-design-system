@@ -1,3 +1,7 @@
+// NOTE: Prettier does not yet support the native CSS if() function syntax properly, which is supported by Sass.
+// We use prettier-ignore comments to protect these lines from incorrect formatting.
+// See: https://github.com/prettier/prettier/issues/18465
+
 // 1.The default theme will be applied to the :root element.
 //   As in Figma we make the first theme the default one.
 // 2. Set the default text color in each theme.
@@ -12,7 +16,8 @@
     $is-default-theme: true;
 
     @each $theme-name, $theme-token-types in $themes {
-        $selector: if($is-default-theme, ':root, .#{$theme-name}', '.#{$theme-name}');
+        // prettier-ignore
+        $selector: if(sass($is-default-theme): ':root, .#{$theme-name}'; else: '.#{$theme-name}');
         $theme-variables: map.get($theme-token-types, variables);
         $theme-mixins: map.get($theme-token-types, mixins);
         $is-default-theme: false;
