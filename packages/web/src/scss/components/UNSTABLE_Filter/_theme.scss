@@ -1,0 +1,11 @@
+@use '@tokens' as tokens;
+
+$min-height: 40px;
+$column-gap: tokens.$space-600;
+$padding-x: tokens.$space-600;
+$color: tokens.$form-field-filled-placeholder;
+$border-width: tokens.$border-width-100;
+$border-style: solid;
+$border-color: tokens.$form-field-filled-border-state-default;
+$border-radius: tokens.$radius-300;
+$background-color: tokens.$form-field-filled-background-state-default;

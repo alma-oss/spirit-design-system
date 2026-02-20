@@ -1,0 +1,178 @@
+{{#> web/layout/default title="Filter" parentPageName="Components" isUnstable=true }}
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Example of JS-Controlled Filter</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div
+        class="Dropdown"
+        data-filter-label="Language"
+      >
+
+        <div class="UNSTABLE_Filter">
+          <div
+            id="filter-lang-selection"
+            class="UNSTABLE_Filter__selection"
+          >
+            <span>Language</span>
+          </div>
+          <button
+            data-spirit-toggle="dropdown"
+            data-spirit-target="#filter_lang"
+            class="UNSTABLE_Filter__trigger"
+            aria-expanded="false"
+            aria-controls="filter_lang"
+          >
+            <span class="accessibility-hidden">Language</span>
+            <svg
+              class="Icon"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+            </svg>
+          </button>
+        </div>
+
+        <div
+          class="DropdownPopover"
+          data-spirit-placement="bottom-start"
+          id="filter_lang"
+        >
+
+          <fieldset class="FieldGroup FieldGroup--fluid">
+            <legend class="accessibility-hidden">Language</legend>
+            <!--div class="FieldGroup__label" aria-hidden="true">Language</div-->
+            <div class="FieldGroup__fields">
+
+              <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
+                <input
+                  type="checkbox"
+                  id="lang_cs"
+                  class="Checkbox__input"
+                  name="default"
+                />
+                <div class="Checkbox__text">
+                  <label
+                    class="Checkbox__label"
+                    for="lang_cs"
+                  >Czech</label>
+                </div>
+              </div>
+
+              <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
+                <input
+                  type="checkbox"
+                  id="lang_dk"
+                  class="Checkbox__input"
+                  name="default"
+                />
+                <div class="Checkbox__text">
+                  <label
+                    class="Checkbox__label"
+                    for="lang_dk"
+                  >Danish</label>
+                </div>
+              </div>
+
+              <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
+                <input
+                  type="checkbox"
+                  id="lang_kl"
+                  class="Checkbox__input"
+                  name="default"
+                />
+                <div class="Checkbox__text">
+                  <label
+                    class="Checkbox__label"
+                    for="lang_kl"
+                  >Greenlandic</label>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+
+        </div>
+
+      </div>
+
+      <!-- Filter selection demo: start -->
+      <script type="module">
+        const selectionEl = document.getElementById('filter-lang-selection');
+        const dropdownEl = selectionEl && selectionEl.closest('.Dropdown');
+        const popoverId = dropdownEl && dropdownEl.querySelector('[data-spirit-target]')?.getAttribute('data-spirit-target')?.slice(1);
+        const popoverEl = popoverId ? document.getElementById(popoverId) : null;
+        const getLabel = () => dropdownEl?.dataset.filterLabel || 'Language';
+        const getCheckboxes = () => popoverEl ? Array.from(popoverEl.querySelectorAll('input[type="checkbox"]')) : [];
+        const getChecked = () => getCheckboxes().filter((cb) => cb.checked);
+        const getCheckboxLabel = (checkbox) => {
+          const label = checkbox.closest('.Checkbox')?.querySelector('.Checkbox__label');
+          return label ? label.textContent.trim() : '';
+        };
+
+        function escapeHtml(text) {
+          const div = document.createElement('div');
+          div.textContent = text;
+          return div.innerHTML;
+        }
+
+        function render() {
+          if (!selectionEl) return;
+          const checked = getChecked();
+          const count = checked.length;
+          const label = getLabel();
+
+          if (count === 0) {
+            selectionEl.textContent = label;
+            return;
+          }
+
+          const tagLabel = count === 1 ? getCheckboxLabel(checked[0]) : `${label} (${count})`;
+          const closeSvg = '<svg class="Icon" width="16" height="16" aria-hidden="true"><use xlink:href="/assets/icons/svg/sprite.svg#close"/></svg>';
+          const closeBtn = '<button type="button" class="ControlButton ControlButton--small ControlButton--symmetrical" aria-label="Remove ' + escapeHtml(tagLabel) + '">' + closeSvg + '</button>';
+          selectionEl.innerHTML =
+            '<div class="Tag Tag--selected Tag--small">' +
+            '<span>' + escapeHtml(tagLabel) + '</span>' +
+            closeBtn +
+            '</div>';
+
+          const closeButton = selectionEl.querySelector('button');
+          if (closeButton) {
+            closeButton.addEventListener('click', function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              const boxes = getCheckboxes();
+              if (count === 1) {
+                checked[0].checked = false;
+              } else {
+                boxes.forEach((cb) => { cb.checked = false; });
+              }
+              render();
+            });
+          }
+        }
+
+        if (popoverEl) {
+          const fieldset = popoverEl.querySelector('fieldset');
+          if (fieldset) {
+            fieldset.addEventListener('change', render);
+          }
+          render();
+        }
+      </script>
+      <!-- Filter selection demo: end -->
+
+    </div>
+
+  </div>
+
+</section>
+
+{{/web/layout/default }}

@@ -6,9 +6,8 @@ import { Tag, TagColorsExtended } from '..';
 
 const TagDefault = () => {
   const sizes = Object.values(SizesExtended);
-  const tagColors = Object.values(TagColorsExtended);
   const emotionColors = Object.values(DemoEmotionColors);
-  const colors = [...tagColors, ...emotionColors];
+  const colors = [TagColorsExtended.NEUTRAL, ...emotionColors, TagColorsExtended.SELECTED];
 
   return (
     <Grid cols={{ mobile: 1, tablet: 3, desktop: 5 }} spacingY="space-1100">
