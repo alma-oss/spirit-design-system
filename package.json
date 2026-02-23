@@ -61,7 +61,7 @@
     "@almacareer/remark-config": "0.1.0",
     "@axe-core/playwright": "4.11.0",
     "@commitlint/cli": "19.8.1",
-    "@commitlint/config-conventional": "20.4.1",
+    "@commitlint/config-conventional": "19.8.1",
     "@eslint/compat": "1.4.1",
     "@eslint/eslintrc": "3.3.3",
     "@omlet/cli": "1.13.4",
