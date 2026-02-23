@@ -52,7 +52,7 @@ const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
           ) : (
             resolvedDropdownTriggerLabel
           )}
-          <Icon name={dropdownTriggerIconName} />
+          <Icon name={dropdownTriggerIconName as string} />
         </DropdownTrigger>
         <DropdownPopover>{children}</DropdownPopover>
       </Dropdown>
