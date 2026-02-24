@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { usePropsContext } from '../../context';
+import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type ButtonProps, type PolymorphicComponent, type PolymorphicRef, type SpiritButtonProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -28,7 +28,7 @@ const _Button = <E extends ElementType = 'button', C = void, S = void>(
   props: SpiritButtonProps<E, C, S>,
   ref: PolymorphicRef<E>,
 ) => {
-  const propsWithContext = usePropsContext();
+  const propsWithContext = useContextProps();
   const propsWithDefaults = { ...defaultProps, ...props, ...propsWithContext };
   const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
 

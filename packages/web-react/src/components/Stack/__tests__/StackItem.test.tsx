@@ -29,4 +29,13 @@ describe('StackItem', () => {
 
     expect(screen.getByTestId('test')).toHaveTextContent('Hello World');
   });
+
+  it('should default to div when used without Stack context', () => {
+    render(<StackItem data-testid="standalone">Standalone</StackItem>);
+
+    const item = screen.getByTestId('standalone');
+
+    expect(item).toBeInTheDocument();
+    expect(item.tagName).toBe('DIV');
+  });
 });

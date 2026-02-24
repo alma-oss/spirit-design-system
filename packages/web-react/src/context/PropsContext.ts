@@ -1,12 +1,17 @@
 'use client';
 
-import { createContext, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 
 type PropsContextType = Record<string, unknown> | null;
 
 const PropsContext = createContext<PropsContextType>(null);
 
-const PropsProvider = PropsContext.Provider;
+const PropsProvider = ({ value, children }: { value: Record<string, unknown>; children: React.ReactNode }) => {
+  const parentContext = useContext(PropsContext);
+  const mergedValue = parentContext ? { ...parentContext, ...value } : value;
+
+  return React.createElement(PropsContext.Provider, { value: mergedValue }, children);
+};
 const PropsConsumer = PropsContext.Consumer;
 
 /**
@@ -17,11 +22,11 @@ const PropsConsumer = PropsContext.Consumer;
  * @param {T} props - Props to merge with the context
  * @returns {T} The merged props with context values taking precedence
  */
-const usePropsContext = <T extends PropsContextType>(props: T = {} as T): T => {
+const useContextProps = <T extends PropsContextType>(props: T = {} as T): T => {
   const context = useContext(PropsContext);
 
   return context ? { ...props, ...context } : props;
 };
 
 export default PropsContext;
-export { PropsConsumer, PropsProvider, usePropsContext };
+export { PropsConsumer, PropsProvider, useContextProps };

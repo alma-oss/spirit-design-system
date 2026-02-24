@@ -71,6 +71,8 @@ and [escape hatches][readme-escape-hatches].
 `StackItem` is required when using dividers between items.
 It is a wrapper component that should be used inside the `Stack` component.
 
+When `Stack` uses `elementType="ul"` or `elementType="ol"`, `StackItem` automatically defaults to `elementType="li"`, so you do not need to set it on each item. You can still pass `elementType` explicitly on `StackItem` to override this inherited value.
+
 Basic example usage:
 
 ```jsx
@@ -81,21 +83,21 @@ Basic example usage:
 </Stack>
 ```
 
-Advanced example usage:
+Advanced example usage (with list semantics; `elementType="li"` is inherited from the Stack):
 
 ```jsx
 <Stack elementType="ul" hasSpacing hasIntermediateDividers hasStartDivider hasEndDivider>
-  <StackItem elementType="li">Stack Item 1</StackItem>
-  <StackItem elementType="li">Stack Item 2</StackItem>
-  <StackItem elementType="li">Stack Item 3</StackItem>
+  <StackItem>Stack Item 1</StackItem>
+  <StackItem>Stack Item 2</StackItem>
+  <StackItem>Stack Item 3</StackItem>
 </Stack>
 ```
 
 ### API
 
-| Name          | Type          | Default | Required | Description                      |
-| ------------- | ------------- | ------- | -------- | -------------------------------- |
-| `elementType` | `ElementType` | `div`   | ✕        | Element type of the item element |
+| Name          | Type          | Default | Required | Description                                                                 |
+| ------------- | ------------- | ------- | -------- | --------------------------------------------------------------------------- |
+| `elementType` | `ElementType` | `div`   | ✕        | Element type of the item element. Inherits `li` when Stack is `ul` or `ol`. |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
