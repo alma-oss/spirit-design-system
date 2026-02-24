@@ -71,7 +71,7 @@ jobs:
       - name: Get Playwright Version
         id: playwright-version
         run: |
-          PW_VERSION=$(jq -r '.devDependencies["@playwright/test"]' package.json)
+          PW_VERSION=$(yq '.catalogs.test["@playwright/test"]' .yarnrc.yml)
           echo "version=$PW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Run Playwright tests
