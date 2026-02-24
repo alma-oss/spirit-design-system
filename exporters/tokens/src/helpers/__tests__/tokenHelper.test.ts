@@ -1,5 +1,24 @@
-import { Token, TokenGroup, TypographyToken } from '@supernovaio/sdk-exporters';
-import { exampleDeviceUpdatedTokens } from '../../../tests/fixtures/exampleDeviceTokens';
+import {
+  DimensionToken,
+  FontSizeToken,
+  LetterSpacingToken,
+  LineHeightToken,
+  SizeToken,
+  StringToken,
+  Token,
+  TokenGroup,
+  TokenType,
+  TypographyToken,
+} from '@supernovaio/sdk-exporters';
+import {
+  exampleDeviceTokenDimension,
+  exampleDeviceTokenFontSize,
+  exampleDeviceTokenLetterSpacing,
+  exampleDeviceTokenLineHeight,
+  exampleDeviceTokenSize,
+  exampleDeviceTokenString,
+  exampleDeviceUpdatedTokens,
+} from '../../../tests/fixtures/exampleDeviceTokens';
 import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import { exampleTypographyTokens, expectedTypographyValue } from '../../../tests/fixtures/exampleTypographyTokens';
@@ -120,26 +139,77 @@ describe('tokenHelper', () => {
       const tokens = Array.from(exampleDimensionAndStringTokens.values());
       const tokenGroups = exampleGroups;
       const hasParentPrefix = true;
-      const group = 'Grid';
       const sortByNumValue = false;
 
-      const result = sortTokens(tokens, tokenGroups, hasParentPrefix, group, sortByNumValue);
+      const result = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
 
       expect(result[0]?.origin?.name).toBe('Grid/Columns');
       expect(result[1]?.origin?.name).toBe('Grid/spacing/desktop');
     });
 
-    it('should sort tokens by number value', () => {
-      const tokens = Array.from(exampleDimensionAndStringTokens.values());
+    const sortByNumValueCases: Array<{
+      tokenType: string;
+      tokenSource: Map<string, Token>;
+      expectedFirst: number;
+      expectedSecond: number;
+    }> = [
+      {
+        tokenType: TokenType.dimension,
+        tokenSource: exampleDeviceTokenDimension,
+        expectedFirst: 768,
+        expectedSecond: 1200,
+      },
+      {
+        tokenType: TokenType.size,
+        tokenSource: exampleDeviceTokenSize,
+        expectedFirst: 0,
+        expectedSecond: 768,
+      },
+      {
+        tokenType: TokenType.fontSize,
+        tokenSource: exampleDeviceTokenFontSize,
+        expectedFirst: 15,
+        expectedSecond: 30,
+      },
+      {
+        tokenType: TokenType.lineHeight,
+        tokenSource: exampleDeviceTokenLineHeight,
+        expectedFirst: 30,
+        expectedSecond: 45,
+      },
+      {
+        tokenType: TokenType.letterSpacing,
+        tokenSource: exampleDeviceTokenLetterSpacing,
+        expectedFirst: -0.02,
+        expectedSecond: -0.01,
+      },
+    ];
+
+    it.each(sortByNumValueCases)(
+      'should sort $tokenType Tokens by number value',
+      ({ tokenSource, expectedFirst, expectedSecond }) => {
+        const tokens = Array.from(tokenSource.values());
+        const tokenGroups = exampleGroups;
+        const hasParentPrefix = true;
+        const sortByNumValue = true;
+        type NumericSortableToken = DimensionToken | SizeToken | FontSizeToken | LineHeightToken | LetterSpacingToken;
+        const result = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue) as NumericSortableToken[];
+
+        expect(result[0]?.value?.measure).toBe(expectedFirst);
+        expect(result[1]?.value?.measure).toBe(expectedSecond);
+      },
+    );
+
+    it('should sort TokenString by number value', () => {
+      const tokens = Array.from(exampleDeviceTokenString.values());
       const tokenGroups = exampleGroups;
       const hasParentPrefix = true;
-      const group = 'Grid';
       const sortByNumValue = true;
 
-      const result = sortTokens(tokens, tokenGroups, hasParentPrefix, group, sortByNumValue);
+      const result = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue) as StringToken[];
 
-      expect(result[0]?.origin?.name).toBe('Grid/Columns');
-      expect(result[1]?.origin?.name).toBe('Grid/spacing/desktop');
+      expect(result[0].value?.text).toBe('10');
+      expect(result[1].value?.text).toBe('30');
     });
   });
 
