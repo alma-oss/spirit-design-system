@@ -4,6 +4,7 @@ import {
   DimensionToken,
   GradientToken,
   ShadowToken,
+  SizeToken,
   StringToken,
   Token,
   TokenGroup,
@@ -83,16 +84,20 @@ export const sortTokens = (
   const sortedTokens = tokens.sort((a, b) => {
     if (sortByNumValue) {
       const value = (token: Token) => {
-        if (token.tokenType === TokenType.dimension) {
-          const dimensionToken = token as DimensionToken;
+        const numericTokenTypes = [
+          TokenType.dimension,
+          TokenType.size,
+          TokenType.fontSize,
+          TokenType.lineHeight,
+          TokenType.letterSpacing,
+        ];
 
-          return dimensionToken.value.measure;
+        if (numericTokenTypes.includes(token.tokenType)) {
+          return (token as DimensionToken | SizeToken).value.measure;
         }
 
         if (token.tokenType === TokenType.string) {
-          const stringToken = token as StringToken;
-
-          return stringToken.value.text;
+          return (token as StringToken).value.text;
         }
 
         return (token as ColorToken | ShadowToken | GradientToken).value;
