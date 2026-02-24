@@ -32,7 +32,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 get_playwright_version() {
-  grep '"@playwright/test"' "$(dirname "$0")/../../package.json" | sed -E 's/.*"@playwright\/test": *"[~^]?([^"]+)".*/\1/'
+  grep "^[[:space:]]*'@playwright/test':" "$(dirname "$0")/../../.yarnrc.yml" | sed -E "s/^[[:space:]]*'@playwright\/test': *(.+)$/\1/"
 }
 
 is_file_changes_detection_supported() {
