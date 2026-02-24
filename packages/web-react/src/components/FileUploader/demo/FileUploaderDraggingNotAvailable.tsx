@@ -10,14 +10,19 @@ const FileUploaderDraggingNotAvailable = () => {
   );
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const element = document
-        .getElementById('file-uploader-dragging-not-available')
-        ?.querySelector('.has-drag-and-drop');
-      element?.classList.remove('has-drag-and-drop');
-    }, 0);
+    const container = document.getElementById('file-uploader-dragging-not-available');
+    if (!container) {
+      return undefined;
+    }
 
-    return () => clearTimeout(timer);
+    const observer = new MutationObserver(() => {
+      const element = container.querySelector('.has-drag-and-drop');
+      element?.classList.remove('has-drag-and-drop');
+    });
+
+    observer.observe(container, { subtree: true, attributes: true, attributeFilter: ['class'] });
+
+    return () => observer.disconnect();
   }, []);
 
   // ⚠️ VISUAL EXAMPLE ONLY, DO NOT COPY-PASTE
