@@ -1,10 +1,13 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
+import { PropsProvider } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type PolymorphicComponent, type PolymorphicRef, type SpiritStackProps, type StackProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useStackStyleProps } from './useStackStyleProps';
+
+const LIST_ELEMENT_TYPES = ['ul', 'ol'];
 
 const defaultProps = {
   elementType: 'div',
@@ -28,11 +31,14 @@ const _Stack = <E extends ElementType = 'div'>(props: SpiritStackProps<E>, ref: 
     styleProps,
     otherProps,
   });
+  const itemElementType = LIST_ELEMENT_TYPES.includes(elementType as string) ? ('li' as const) : undefined;
 
   return (
-    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
-      {children}
-    </Component>
+    <PropsProvider value={{ elementType: itemElementType }}>
+      <Component {...otherProps} {...mergedStyleProps} ref={ref}>
+        {children}
+      </Component>
+    </PropsProvider>
   );
 };
 

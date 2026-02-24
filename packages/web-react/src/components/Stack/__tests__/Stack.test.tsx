@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
@@ -10,6 +10,7 @@ import {
   validHtmlAttributesTest,
 } from '@local/tests';
 import Stack from '../Stack';
+import StackItem from '../StackItem';
 
 describe('Stack', () => {
   classNamePrefixProviderTest(Stack, 'Stack');
@@ -25,45 +26,48 @@ describe('Stack', () => {
   elementTypePropsTest(Stack);
 
   it('should render text children', () => {
-    const dom = render(<Stack>Hello World</Stack>);
+    render(<Stack data-testid="stack">Hello World</Stack>);
 
-    const element = dom.container.querySelector('div') as HTMLElement;
-    expect(element.textContent).toBe('Hello World');
+    expect(screen.getByTestId('stack')).toHaveTextContent('Hello World');
   });
 
   it('should render element children', () => {
-    const dom = render(
-      <Stack>
+    render(
+      <Stack data-testid="stack">
         <span>Child 1</span>
         <span>Child 2</span>
       </Stack>,
     );
 
-    const element = dom.container.querySelector('div') as HTMLElement;
+    const element = screen.getByTestId('stack');
+
     expect(element.children).toHaveLength(2);
-    expect(element.children[0].textContent).toBe('Child 1');
-    expect(element.children[1].textContent).toBe('Child 2');
+    expect(element.children[0]).toHaveTextContent('Child 1');
+    expect(element.children[1]).toHaveTextContent('Child 2');
   });
 
   it('should render with spacing', () => {
-    const dom = render(<Stack hasSpacing />);
+    render(<Stack data-testid="stack" hasSpacing />);
 
-    const element = dom.container.querySelector('div') as HTMLElement;
-    expect(element).toHaveClass('Stack--hasSpacing');
+    expect(screen.getByTestId('stack')).toHaveClass('Stack--hasSpacing');
   });
 
   it('should render with custom spacing', () => {
-    const dom = render(<Stack spacing="space-1000" />);
+    render(<Stack data-testid="stack" spacing="space-1000" />);
 
-    const element = dom.container.querySelector('div') as HTMLElement;
+    const element = screen.getByTestId('stack');
+
     expect(element).toHaveClass('Stack--hasSpacing');
     expect(element).toHaveStyle({ '--stack-spacing': 'var(--spirit-space-1000)' });
   });
 
   it('should render with custom spacing for each breakpoint', () => {
-    const dom = render(<Stack spacing={{ mobile: 'space-100', tablet: 'space-1000', desktop: 'space-1200' }} />);
+    render(
+      <Stack data-testid="stack" spacing={{ mobile: 'space-100', tablet: 'space-1000', desktop: 'space-1200' }} />,
+    );
 
-    const element = dom.container.querySelector('div') as HTMLElement;
+    const element = screen.getByTestId('stack');
+
     expect(element).toHaveClass('Stack--hasSpacing');
     expect(element).toHaveStyle({ '--stack-spacing': 'var(--spirit-space-100)' });
     expect(element).toHaveStyle({ '--stack-spacing-tablet': 'var(--spirit-space-1000)' });
@@ -71,12 +75,81 @@ describe('Stack', () => {
   });
 
   it('should render with custom spacing for only one breakpoint', () => {
-    const dom = render(<Stack spacing={{ tablet: 'space-1000' }} />);
+    render(<Stack data-testid="stack" spacing={{ tablet: 'space-1000' }} />);
 
-    const element = dom.container.querySelector('div') as HTMLElement;
+    const element = screen.getByTestId('stack');
+
     expect(element).toHaveClass('Stack--hasSpacing');
     expect(element).toHaveStyle({ '--stack-spacing-tablet': 'var(--spirit-space-1000)' });
     expect(element).not.toHaveStyle({ '--stack-spacing': 'var(--spirit-space-100)' });
     expect(element).not.toHaveStyle({ '--stack-spacing-desktop': 'var(--spirit-space-1200)' });
+  });
+
+  it('should provide context so StackItem renders as li when Stack elementType is ul', () => {
+    render(
+      <Stack elementType="ul">
+        <StackItem data-testid="item">Item</StackItem>
+      </Stack>,
+    );
+
+    const list = screen.getByRole('list');
+
+    expect(list.tagName).toBe('UL');
+
+    const item = screen.getByTestId('item');
+
+    expect(item).toBeInTheDocument();
+    expect(item.tagName).toBe('LI');
+    expect(item).toHaveTextContent('Item');
+  });
+
+  it('should provide context so StackItem renders as li when Stack elementType is ol', () => {
+    render(
+      <Stack elementType="ol">
+        <StackItem data-testid="item">Item</StackItem>
+      </Stack>,
+    );
+
+    const list = screen.getByRole('list');
+
+    expect(list.tagName).toBe('OL');
+
+    const item = screen.getByTestId('item');
+
+    expect(item).toBeInTheDocument();
+    expect(item.tagName).toBe('LI');
+    expect(item).toHaveTextContent('Item');
+  });
+
+  it('should allow explicit StackItem elementType to override context', () => {
+    render(
+      <Stack elementType="ul">
+        <StackItem elementType="div" data-testid="item">
+          Item
+        </StackItem>
+      </Stack>,
+    );
+
+    expect(screen.getByRole('list')).toBeInTheDocument();
+
+    const item = screen.getByTestId('item');
+
+    expect(item).toBeInTheDocument();
+    expect(item.localName).toBe('div');
+    expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
+  });
+
+  it('should prevent nested StackItem elements (or any other element) from inheriting context', () => {
+    render(
+      <Stack elementType="ul">
+        <StackItem data-testid="item">
+          <Stack>
+            <StackItem data-testid="nested-item">Item</StackItem>
+          </Stack>
+        </StackItem>
+      </Stack>,
+    );
+
+    expect(screen.queryByTestId('nested-item')?.localName).toBe('div');
   });
 });

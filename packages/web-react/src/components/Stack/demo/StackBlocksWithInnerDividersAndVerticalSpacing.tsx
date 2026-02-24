@@ -6,7 +6,7 @@ import StackItem from '../StackItem';
 const StackBlocksWithInnerDividersAndVerticalSpacing = () => (
   <Stack elementType="ul" hasSpacing hasIntermediateDividers>
     {[1, 2, 3].map((i) => (
-      <StackItem key={`stack-dividers-spacing-${i}`} elementType="li">
+      <StackItem key={`stack-dividers-spacing-${i}`}>
         <DocsBox>Block {i}</DocsBox>
       </StackItem>
     ))}

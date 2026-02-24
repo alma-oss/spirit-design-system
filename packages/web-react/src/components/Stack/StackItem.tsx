@@ -1,6 +1,7 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
+import { PropsProvider, useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import {
   type PolymorphicComponent,
@@ -19,7 +20,10 @@ const _StackItem = <E extends ElementType = 'div'>(
   props: SpiritStackItemProps<E>,
   ref: PolymorphicRef<E>,
 ): JSX.Element => {
-  const { elementType = defaultProps.elementType, children, ...restProps } = props;
+  const { elementType: propsElementType } = props;
+  const contextProps = useContextProps(props);
+  const { children, elementType: contextElementType, ...restProps } = contextProps;
+  const elementType = propsElementType ?? contextElementType ?? defaultProps.elementType;
 
   const Component = elementType as ElementType;
 
@@ -33,7 +37,7 @@ const _StackItem = <E extends ElementType = 'div'>(
 
   return (
     <Component {...otherProps} {...mergedStyleProps} ref={ref}>
-      {children}
+      <PropsProvider value={{ elementType: undefined }}>{children}</PropsProvider>
     </Component>
   );
 };
