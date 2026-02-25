@@ -11,7 +11,7 @@ const customTagAttributes: Record<string, string[]> = {
 };
 
 const validateHTMLAttributes = (element: HTMLElement) => {
-  const tagName = element.tagName.toLowerCase();
+  const tagName = element.localName;
 
   const tagAttributes = htmlElementAttributes[tagName] || [];
   const validAttributes = [...globalAttributes, ...tagAttributes, ...(customTagAttributes[tagName] || [])];

@@ -22,7 +22,7 @@ describe('HelperText', () => {
 
     const element = screen.getByText(helperText);
 
-    expect(element.tagName).toBe('SPAN');
+    expect(element.localName).toBe('span');
   });
 
   it('should render with className and id', () => {

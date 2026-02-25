@@ -24,7 +24,7 @@ class ScrollControl {
     }
 
     // Selects the current value for calculation
-    const clientOffset = this.element.tagName === 'BODY' ? window.innerWidth : this.element.offsetWidth;
+    const clientOffset = this.element.localName === 'body' ? window.innerWidth : this.element.offsetWidth;
     // Browser scrollbar width, may be 0 on some devices, but solves offset when is not 0.
     const scrollBarWidth = clientOffset - this.element.clientWidth;
     // Fixing page offset causing scrollbar on some devices

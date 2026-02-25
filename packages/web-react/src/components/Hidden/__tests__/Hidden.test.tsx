@@ -72,7 +72,7 @@ describe('Hidden', () => {
   it('should render as default span element', () => {
     render(<Hidden data-testid="hidden">Content</Hidden>);
 
-    expect(screen.getByTestId('hidden').tagName).toBe('SPAN');
+    expect(screen.getByTestId('hidden').localName).toBe('span');
   });
 
   it.each(dataProvider)('should render with $description', ({ prop, value, className }) => {
