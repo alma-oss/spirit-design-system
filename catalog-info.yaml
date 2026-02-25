@@ -1,0 +1,128 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: designSystems-spiritAnalytics
+  description: Analytic tools for Spirit Design System
+  annotations:
+    github.com/project-slug: alma-oss/spirit-design-system
+    backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/analytics
+  tags:
+    - designsystem
+    - spirit
+    - analytics
+spec:
+  type: library
+  lifecycle: production
+  owner: user:default/tomas.litera
+  system: designSystems-spiritDesignSystem
+  dependsOn:
+    - technology:default/typescript
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: designSystems-spiritCodemods
+  description: Codemods scripts for Spirit Design System packages
+  annotations:
+    github.com/project-slug: alma-oss/spirit-design-system
+    backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/codemods
+  tags:
+    - designsystem
+    - spirit
+    - codemods
+spec:
+  type: library
+  lifecycle: production
+  owner: user:default/tomas.litera
+  system: designSystems-spiritDesignSystem
+  dependsOn:
+    - technology:default/typescript
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: designSystems-spiritDesignTokens
+  description: Design tokens for Spirit Design System
+  annotations:
+    github.com/project-slug: alma-oss/spirit-design-system
+    backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens
+  tags:
+    - designsystem
+    - spirit
+    - designtokens
+spec:
+  type: library
+  lifecycle: production
+  owner: user:default/tomas.litera
+  system: designSystems-spiritDesignSystem
+  dependsOn:
+    - technology:default/typescript
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: designSystems-spiritIcons
+  description: Icons for Spirit Design System
+  annotations:
+    github.com/project-slug: alma-oss/spirit-design-system
+    backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/icons
+  tags:
+    - designsystem
+    - spirit
+    - icons
+spec:
+  type: library
+  lifecycle: production
+  owner: user:default/tomas.litera
+  system: designSystems-spiritDesignSystem
+  dependsOn:
+    - technology:default/typescript
+    - technology:default/react
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: designSystems-spiritWeb
+  description: CSS and vanilla JS implementation of Spirit Design System
+  annotations:
+    github.com/project-slug: alma-oss/spirit-design-system
+    backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/web
+  tags:
+    - designsystem
+    - spirit
+    - web
+spec:
+  type: library
+  lifecycle: production
+  owner: user:default/tomas.litera
+  system: designSystems-spiritDesignSystem
+  dependsOn:
+    - technology:default/typescript
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: designSystems-spiritWebReact
+  description: React implementation of Spirit Design System components
+  annotations:
+    github.com/project-slug: alma-oss/spirit-design-system
+    backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react
+  tags:
+    - designsystem
+    - spirit
+    - webreact
+  links:
+    - url: https://spiritdesignsystem.com
+      title: Spirit Design System website
+    - url: https://almamedia.slack.com/archives/C068XPSDWQN
+      title: Support spirit-design-system Slack channel
+spec:
+  type: library
+  lifecycle: production
+  owner: user:default/tomas.litera
+  system: designSystems-spiritDesignSystem
+  dependsOn:
+    - technology:default/typescript
+    - technology:default/react
+---

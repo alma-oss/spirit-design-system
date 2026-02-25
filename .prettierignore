@@ -108,3 +108,6 @@ Caddyfile
 
 # Text files
 *.txt
+
+# Backstage Catalog Info
+catalog-info.yaml
