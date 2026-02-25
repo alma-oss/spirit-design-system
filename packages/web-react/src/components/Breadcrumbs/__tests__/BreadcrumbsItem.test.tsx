@@ -46,7 +46,7 @@ describe('BreadcrumbsItem', () => {
     it('should have icon on start', () => {
       const firstElement = listElement.firstChild as SVGElement;
 
-      expect(firstElement.tagName).toBe('svg');
+      expect(firstElement.localName).toBe('svg');
     });
 
     classNamePrefixProviderTest(BreadcrumbsItemGoBack, 'd-tablet-none');
@@ -77,7 +77,7 @@ describe('BreadcrumbsItem', () => {
     it('should not have icon on end', () => {
       const lastElement = listElement.lastChild as SVGElement;
 
-      expect(lastElement.tagName).not.toBe('svg');
+      expect(lastElement.localName).not.toBe('svg');
     });
   });
 

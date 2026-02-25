@@ -244,7 +244,7 @@ describe('Collapse', () => {
       const collapseElement = screen.getByTestId('collapse-div');
 
       expect(collapseElement).toHaveClass('is-open');
-      expect(collapseElement.tagName.toLowerCase()).toBe('div');
+      expect(collapseElement.localName).toBe('div');
     });
   });
 
@@ -258,7 +258,7 @@ describe('Collapse', () => {
 
       const element = screen.getByTestId('collapse-span');
 
-      expect(element.tagName.toLowerCase()).toBe('span');
+      expect(element.localName).toBe('span');
     });
 
     it('should default to div when elementType is not specified', () => {
@@ -270,7 +270,7 @@ describe('Collapse', () => {
 
       const element = screen.getByTestId('collapse-element');
 
-      expect(element.tagName.toLowerCase()).toBe('div');
+      expect(element.localName).toBe('div');
     });
   });
 });

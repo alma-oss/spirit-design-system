@@ -35,7 +35,7 @@ describe('TimelineStep', () => {
     render(<TimelineStep>Content</TimelineStep>);
     const step = screen.getByRole('listitem');
 
-    expect(step.tagName.toLowerCase()).toBe('li');
+    expect(step.localName).toBe('li');
   });
 
   it('should render children correctly', () => {

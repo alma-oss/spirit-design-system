@@ -36,7 +36,7 @@ describe('Timeline', () => {
     render(<Timeline>Item</Timeline>);
     const timeline = screen.getByRole('list');
 
-    expect(timeline.tagName.toLowerCase()).toBe('ol');
+    expect(timeline.localName).toBe('ol');
   });
 
   it('should render children correctly', () => {
