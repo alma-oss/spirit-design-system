@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
@@ -29,41 +29,60 @@ describe('Item', () => {
 
   it('should render label', () => {
     const label = 'Item label';
-    const dom = render(<Item label={label} />);
 
-    const element = dom.container.querySelector('.Item > .Item__label') as HTMLElement;
-    expect(element).toHaveTextContent(label);
+    render(<Item label={label} />);
+
+    expect(screen.getByRole('button', { name: label })).toBeInTheDocument();
   });
 
   it('should render helperText', () => {
     const helperText = 'Helper text';
-    const dom = render(<Item label="Item label" helperText={helperText} />);
+    render(<Item label="Item label" helperText={helperText} />);
 
-    const element = dom.container.querySelector('.Item > .Item__helperText') as HTMLElement;
-    expect(element).toHaveTextContent(helperText);
+    expect(screen.getByText(helperText)).toBeInTheDocument();
   });
 
   it('should render icon', () => {
-    const iconName = 'search';
-    const dom = render(<Item label="Item label" iconName={iconName} />);
+    render(<Item label="Item label" iconName="search" />);
 
-    const element = dom.container.querySelector('.Item > .Item__icon') as HTMLElement;
-    expect(element).toHaveClass('Item__icon--start');
+    const element = screen.getByRole('button', { name: 'Item label' });
+    const startIcon = element.querySelector('.Item__icon--start');
+
+    expect(startIcon).toBeInTheDocument();
   });
 
-  it('should be selected and render end icon', () => {
-    const dom = render(<Item label="Item label" isSelected />);
+  it('should be selected with background only when selectionDecorator is background', () => {
+    render(<Item label="Item label" isSelected selectionDecorator="background" />);
 
-    const element = dom.container.querySelector('.Item') as HTMLElement;
-    const iconElement = dom.container.querySelector('.Item > .Item__icon') as HTMLElement;
+    const element = screen.getByRole('button', { name: 'Item label' });
+
     expect(element).toHaveClass('Item--selected');
-    expect(iconElement).toHaveClass('Item__icon--end');
+    expect(element.querySelectorAll('.Item__icon')).toHaveLength(0);
+  });
+
+  it('should be selected with icon only by default', () => {
+    render(<Item label="Item label" isSelected />);
+
+    const element = screen.getByRole('button', { name: 'Item label' });
+
+    expect(element).not.toHaveClass('Item--selected');
+    expect(element.querySelector('.Item__icon--end')).toBeInTheDocument();
+  });
+
+  it('should be selected with both background and icon when selectionDecorator is both', () => {
+    render(<Item label="Item label" isSelected selectionDecorator="both" />);
+
+    const element = screen.getByRole('button', { name: 'Item label' });
+
+    expect(element).toHaveClass('Item--selected');
+    expect(element.querySelector('.Item__icon--end')).toBeInTheDocument();
   });
 
   it('should be disabled', () => {
-    const dom = render(<Item label="Item label" isDisabled />);
+    render(<Item label="Item label" isDisabled />);
 
-    const element = dom.container.querySelector('.Item') as HTMLElement;
+    const element = screen.getByRole('button', { name: 'Item label' });
+
     expect(element).toHaveClass('Item--disabled');
   });
 });

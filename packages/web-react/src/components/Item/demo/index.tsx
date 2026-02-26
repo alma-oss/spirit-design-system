@@ -21,7 +21,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <DocsSection title="Default">
         <ItemDefault />
       </DocsSection>
-      <DocsSection title="Selected">
+      <DocsSection title="Selected" stackAlignment="stretch">
         <ItemSelected />
       </DocsSection>
       <DocsSection title="Disabled">
