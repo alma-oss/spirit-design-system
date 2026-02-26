@@ -4,7 +4,7 @@
 // 2. Reuse already generated custom properties to allow overriding the arrow appearance live in the browser.
 
 @use 'sass:math';
-@use '../../tools/dictionaries';
+@use '@tokens' as tokens;
 @use '../../tools/placement';
 @use '../../tools/reset';
 @use '../../tools/svg';
@@ -12,11 +12,14 @@
 @use 'theme';
 @use 'tools';
 
+$_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
+
 .TooltipPopover {
     --tooltip-max-width: #{theme.$max-width};
+    --#{$_tooltip-placement-prefix}-offset: #{theme.$arrow-height};
 
     @include placement.child();
-    @include placement.child-controlled($prefix: 'tooltip', $offset: theme.$arrow-height);
+    @include placement.child-controlled($prefix: $_tooltip-placement-prefix, $offset: theme.$arrow-height);
     @include typography.generate(theme.$typography);
 
     width: max-content;
@@ -49,6 +52,8 @@
     width: var(--tooltip-arrow-width); // 2.
     height: var(--tooltip-arrow-height); // 2.
     background: no-repeat center/cover svg.escape(theme.$arrow-shape);
+    rotate: z var(--#{$_tooltip-placement-prefix}-arrow-rotate, 0deg);
+    transform-origin: var(--#{$_tooltip-placement-prefix}-arrow-transform-origin, bottom center);
 }
 
 .TooltipPopover__close {
@@ -67,14 +72,6 @@
     column-gap: theme.$gap;
     align-items: center;
 }
-
-@include dictionaries.generate-placements(
-    $class-name: 'TooltipPopover',
-    $dictionary-values: theme.$placement-dictionary,
-    $offset: theme.$arrow-height,
-    $is-controlled: true,
-    $has-arrow: true
-);
 
 // Controlled visibility
 .TooltipPopover.is-hidden {

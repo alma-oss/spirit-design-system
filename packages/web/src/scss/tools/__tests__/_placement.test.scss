@@ -218,7 +218,7 @@
                     --test-offset: 10px;
 
                     inset: auto auto 100% 50%;
-                    translate: var(--test-offset-orthogonal, -50%) calc(-1 * var(--test-offset, 0));
+                    translate: var(--test-offset-orthogonal, -50%) calc(-1 * var(--test-offset, 0px));
                     transform-origin: bottom;
                 }
             }
@@ -281,6 +281,82 @@
                     inset: auto auto 100% 50%;
                     translate: -50% 0%;
                     rotate: z 0deg;
+                }
+            }
+        }
+    }
+
+    @include test.describe('get-child-transform-origin') {
+        @include test.it('should return inverse main axis for placement') {
+            @include test.assert() {
+                @include test.output() {
+                    --origin-top: #{placement.get-child-transform-origin('top')};
+                    --origin-bottom: #{placement.get-child-transform-origin('bottom')};
+                    --origin-left: #{placement.get-child-transform-origin('left')};
+                    --origin-right: #{placement.get-child-transform-origin('right')};
+                    --origin-top-start: #{placement.get-child-transform-origin('top-start')};
+                }
+
+                @include test.expect() {
+                    --origin-top: bottom;
+                    --origin-bottom: top;
+                    --origin-left: right;
+                    --origin-right: left;
+                    --origin-top-start: bottom left;
+                }
+            }
+        }
+    }
+
+    @include test.describe('get-child-inset') {
+        @include test.it('should return inset value for placement') {
+            @include test.assert() {
+                @include test.output() {
+                    --inset-top: #{placement.get-child-inset('top')};
+                    --inset-bottom: #{placement.get-child-inset('bottom')};
+                    --inset-top-start: #{placement.get-child-inset('top-start')};
+                }
+
+                @include test.expect() {
+                    --inset-top: auto auto 100% 50%;
+                    --inset-bottom: 100% auto auto 50%;
+                    --inset-top-start: auto auto 100% 0;
+                }
+            }
+        }
+    }
+
+    @include test.describe('get-child-translate') {
+        @include test.it('should return translate value for placement and prefix') {
+            @include test.assert() {
+                @include test.output() {
+                    --translate-top: #{placement.get-child-translate('test', 'top')};
+                }
+
+                @include test.expect() {
+                    --translate-top: var(--test-offset-orthogonal, -50%) calc(-1 * var(--test-offset, 0px));
+                }
+            }
+        }
+    }
+
+    @include test.describe('get-arrow-rotate') {
+        @include test.it('should return rotate angle for placement') {
+            @include test.assert() {
+                @include test.output() {
+                    --rotate-top: #{placement.get-arrow-rotate('top')};
+                    --rotate-bottom: #{placement.get-arrow-rotate('bottom')};
+                    --rotate-left: #{placement.get-arrow-rotate('left')};
+                    --rotate-right: #{placement.get-arrow-rotate('right')};
+                    --rotate-top-end: #{placement.get-arrow-rotate('top-end')};
+                }
+
+                @include test.expect() {
+                    --rotate-top: 0deg;
+                    --rotate-bottom: 180deg;
+                    --rotate-left: -90deg;
+                    --rotate-right: 90deg;
+                    --rotate-top-end: 0deg;
                 }
             }
         }
