@@ -2,7 +2,7 @@
 
 import React, { type ElementType, forwardRef } from 'react';
 import { useStyleProps } from '../../hooks';
-import { type AlertProps, type PolymorphicComponent, type SpiritAlertProps } from '../../types';
+import { type AlertProps, type PolymorphicComponent, type PolymorphicRef, type SpiritAlertProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Icon } from '../Icon';
 import { useAlertIcon } from './useAlertIcon';
@@ -14,7 +14,7 @@ const defaultProps = {
   elementType: 'div',
 };
 
-const _Alert = <E extends ElementType = 'div', C = void>(props: SpiritAlertProps<E, C>) => {
+const _Alert = <E extends ElementType = 'div', C = void>(props: SpiritAlertProps<E, C>, ref: PolymorphicRef<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType, children, color, iconName, ...restProps } = propsWithDefaults;
 
@@ -26,7 +26,7 @@ const _Alert = <E extends ElementType = 'div', C = void>(props: SpiritAlertProps
   const alertIconName = useAlertIcon({ color, iconName, ...otherProps });
 
   return (
-    <Component {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
       <Icon name={alertIconName} />
       <div>{children}</div>
     </Component>
