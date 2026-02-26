@@ -1,0 +1,109 @@
+{{#> web/layout/default title="Placement" parentPageName="Helpers" }}
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Placement</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <p class="docs-Text">
+        Shared placement classes position a child relative to its parent. Use
+        <code>.placement-{top|bottom|left|right}</code> (and corners e.g. <code>.placement-bottom-start</code>). Add
+        <code>.placement-controlled</code> when position is controlled by JavaScript (e.g. Floating UI).
+      </p>
+
+      <div class="Flex Flex--alignmentXCenter Flex--alignmentYCenter py-1600">
+        <div
+          class="Grid Grid--cols-2 bg-secondary"
+          style="--grid-spacing-x: var(--spirit-space-0); --grid-spacing-y: var(--spirit-space-0); position: relative; width: 250px; height: 250px;"
+        >
+          <div
+            class="GridItem bg-tertiary"
+            aria-hidden="true"
+          ></div>
+          <div
+            class="GridItem bg-tertiary"
+            style="--grid-item-column-start: 2; --grid-item-row-start: 2;"
+            aria-hidden="true"
+          ></div>
+          <div
+            class="docs-Box placement-top"
+            style="position: absolute;"
+          >
+            <abbr title="Top">T</abbr>
+          </div>
+          <div
+            class="docs-Box placement-bottom"
+            style="position: absolute;"
+          >
+            <abbr title="Bottom">B</abbr>
+          </div>
+          <div
+            class="docs-Box placement-left"
+            style="position: absolute;"
+          >
+            <abbr title="Left">L</abbr>
+          </div>
+          <div
+            class="docs-Box placement-right"
+            style="position: absolute;"
+          >
+            <abbr title="Right">R</abbr>
+          </div>
+          <div
+            class="docs-Box placement-bottom-start"
+            style="position: absolute;"
+          >
+            <abbr title="Bottom Start">BS</abbr>
+          </div>
+          <div
+            class="docs-Box placement-bottom-end"
+            style="position: absolute;"
+          >
+            <abbr title="Bottom End">BE</abbr>
+          </div>
+          <div
+            class="docs-Box placement-left-start"
+            style="position: absolute;"
+          >
+            <abbr title="Left Start">LS</abbr>
+          </div>
+          <div
+            class="docs-Box placement-left-end"
+            style="position: absolute;"
+          >
+            <abbr title="Left End">LE</abbr>
+          </div>
+          <div
+            class="docs-Box placement-right-start"
+            style="position: absolute;"
+          >
+            <abbr title="Right Start">RS</abbr>
+          </div>
+          <div
+            class="docs-Box placement-right-end"
+            style="position: absolute;"
+          >
+            <abbr title="Right End">RE</abbr>
+          </div>
+          <div
+            class="docs-Box placement-top-start"
+            style="position: absolute;"
+          >
+            <abbr title="Top Start">TS</abbr>
+          </div>
+          <div
+            class="docs-Box placement-top-end"
+            style="position: absolute;"
+          >
+            <abbr title="Top End">TE</abbr>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{{/web/layout/default}}
