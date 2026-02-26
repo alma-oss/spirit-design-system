@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useClassNamePrefix } from '../../hooks/useClassNamePrefix';
-import { type ItemStyleProps } from '../../types';
+import { ITEM_SELECTION_DECORATOR_BACKGROUND, ITEM_SELECTION_DECORATOR_BOTH, type ItemStyleProps } from '../../types';
 
 export interface ItemStyles {
   /** className props */
@@ -19,7 +19,7 @@ export interface ItemStyles {
 }
 
 export function useItemStyleProps<P extends ItemStyleProps>(props: P): ItemStyles {
-  const { isDisabled, isSelected, ...restProps } = props;
+  const { isDisabled, isSelected, selectionDecorator, ...restProps } = props;
   const itemClass = useClassNamePrefix('Item');
   const itemRootDisabledClass = `${itemClass}--disabled`;
   const itemRootSelectedClass = `${itemClass}--selected`;
@@ -29,9 +29,14 @@ export function useItemStyleProps<P extends ItemStyleProps>(props: P): ItemStyle
   const itemIconStartClass = `${itemIconClass}--start`;
   const itemIconEndClass = `${itemIconClass}--end`;
 
+  const showSelectedBackground =
+    isSelected &&
+    (selectionDecorator === ITEM_SELECTION_DECORATOR_BACKGROUND ||
+      selectionDecorator === ITEM_SELECTION_DECORATOR_BOTH);
+
   const rootStyles = classNames(itemClass, {
     [itemRootDisabledClass]: isDisabled,
-    [itemRootSelectedClass]: isSelected,
+    [itemRootSelectedClass]: showSelectedBackground,
   });
 
   return {

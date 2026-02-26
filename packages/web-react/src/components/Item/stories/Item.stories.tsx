@@ -37,6 +37,13 @@ const meta: Meta<typeof Item> = {
         defaultValue: { summary: 'false' },
       },
     },
+    selectionDecorator: {
+      control: 'select',
+      options: ['icon', 'background', 'both'],
+      table: {
+        defaultValue: { summary: 'icon' },
+      },
+    },
     label: {
       control: 'text',
     },

@@ -21,12 +21,28 @@ import { Item } from '@alma-oss/spirit-web-react';
 <Item label="Item" iconName="search" />;
 ```
 
-Item in selected state example:
+Item in selected state example (with icon only by default):
 
 ```jsx
 import { Item } from '@alma-oss/spirit-web-react';
 
 <Item label="Item" isSelected />;
+```
+
+Item in selected state with background only:
+
+```jsx
+import { Item } from '@alma-oss/spirit-web-react';
+
+<Item label="Item" isSelected selectionDecorator="background" />;
+```
+
+Item in selected state with both background and icon:
+
+```jsx
+import { Item } from '@alma-oss/spirit-web-react';
+
+<Item label="Item" isSelected selectionDecorator="both" />;
 ```
 
 Item with Helper text example:
@@ -95,14 +111,15 @@ const onToggle = () => setIsOpen(!isOpen);
 
 ## API
 
-| Name          | Type                       | Default  | Required | Description                     |
-| ------------- | -------------------------- | -------- | -------- | ------------------------------- |
-| `elementType` | `ElementType`              | `button` | ✕        | Type of element used as wrapper |
-| `helperText`  | `string`                   | —        | ✕        | Custom helper text              |
-| `iconName`    | `string`                   | —        | ✕        | Icon used in item               |
-| `isDisabled`  | `bool`                     | `false`  | ✕        | Whether is the item disabled    |
-| `isSelected`  | `bool`                     | `false`  | ✕        | Whether is the item selected    |
-| `label`       | \[`string` \| `ReactNode`] | -        | ✓        | Label of the item               |
+| Name                 | Type                                   | Default  | Required | Description                     |
+| -------------------- | -------------------------------------- | -------- | -------- | ------------------------------- |
+| `elementType`        | `ElementType`                          | `button` | ✕        | Type of element used as wrapper |
+| `helperText`         | `string`                               | —        | ✕        | Custom helper text              |
+| `iconName`           | `string`                               | —        | ✕        | Icon used in item               |
+| `isDisabled`         | `bool`                                 | `false`  | ✕        | Whether is the item disabled    |
+| `isSelected`         | `bool`                                 | `false`  | ✕        | Whether is the item selected    |
+| `label`              | \[`string` \| `ReactNode`]             | —        | ✓        | Label of the item               |
+| `selectionDecorator` | `'icon'` \| `'background'` \| `'both'` | `icon`   | ✕        | Selection state decorator       |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
