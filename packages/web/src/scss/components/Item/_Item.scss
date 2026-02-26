@@ -81,3 +81,7 @@
 .Item--disabled .Item__icon {
     color: theme.$icon-color-state-disabled;
 }
+
+.Item--selected:not(.Item--disabled) {
+    background-color: theme.$background-color-state-selected;
+}
