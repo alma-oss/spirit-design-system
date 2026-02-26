@@ -74,7 +74,8 @@ class Tooltip extends BaseComponent {
     this.arrow = this.tip.querySelector(SELECTOR_ARROW) as HTMLElement;
     this.tooltipComputedStyle = window.getComputedStyle(this.tip); // The tooltip computed style
     this.tooltipMaxWidth = cssLengthToPixels(this.tooltipComputedStyle.maxWidth);
-    this.tooltipOffset = cssLengthToPixels(this.tooltipComputedStyle.getPropertyValue('--tooltip-offset')) ?? 0;
+    this.tooltipOffset =
+      cssLengthToPixels(this.tooltipComputedStyle.getPropertyValue('--spirit-placement-offset')) ?? 0;
     this.arrowCornerOffset =
       this.arrow &&
       cssLengthToPixels(window.getComputedStyle(this.arrow).getPropertyValue('--tooltip-arrow-corner-offset'));
@@ -375,7 +376,18 @@ class Tooltip extends BaseComponent {
           });
         }
 
-        tooltip.dataset.spiritPlacement = placement;
+        if (!placement) {
+          return;
+        }
+
+        const newPlacementClass = `placement-${placement}`;
+
+        if (!tooltip.classList.contains(newPlacementClass)) {
+          Array.from(tooltip.classList)
+            .filter((className) => className.startsWith('placement-') && className !== 'placement-controlled')
+            .forEach((className) => tooltip.classList.remove(className));
+          tooltip.classList.add(newPlacementClass, 'placement-controlled');
+        }
       });
     }
   }
