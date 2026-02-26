@@ -7,7 +7,6 @@
 @use 'breakpoint';
 @use 'links';
 @use 'list' as spirit-list;
-@use 'placement';
 @use 'reset';
 @use 'string' as spirit-string;
 @use 'tokens' as tokens-tools;
@@ -152,32 +151,6 @@
                     --#{tokens.$css-variable-prefix}color-link-#{string.unquote(
                             $dictionary-value
                         )}-state-#{string.unquote($state)}
-                );
-            }
-        }
-    }
-}
-
-// Mixin to generate placement classes based on a dictionary
-// Parameters are:
-// * $class-name: the name of the component class to generate
-// * $dictionary-values: map of the placements to generate
-// * $offset: offset of child from its parent, typically for an arrow
-// * $has-arrow: whether the component has an arrow
-@mixin generate-placements($class-name, $dictionary-values, $offset: 0, $is-controlled: false, $has-arrow: false) {
-    $prefix: spirit-string.convert-pascal-case-to-kebab-case($class-name);
-
-    @each $placement in $dictionary-values {
-        .#{$class-name}[data-spirit-placement='#{$placement}'] {
-            @include placement.child-variant($prefix, $placement, $offset, $is-controlled);
-        }
-
-        @if $has-arrow {
-            .#{$class-name}[data-spirit-placement='#{$placement}'] > .#{$class-name}__arrow {
-                @include placement.arrow-variant(
-                    $prefix,
-                    placement.transform($placement, $main-axis-inverse: true),
-                    $is-controlled
                 );
             }
         }
