@@ -204,7 +204,7 @@
                 <span id="dropdown-placements-example-text" style="white-space: nowrap">bottom-start</span>
               </button>
               <div
-                class="DropdownPopover"
+                class="DropdownPopover placement-bottom-start"
                 data-spirit-placement="bottom-start"
                 id="dropdown-placements-example"
               >
@@ -225,16 +225,21 @@
       </form>
 
       <script>
-        const radios = document.querySelectorAll('input[type="radio"]');
+        const placementRadios = document.querySelectorAll('form input[name="placement"]');
+        const dropdownPlacementsExample = document.getElementById('dropdown-placements-example');
+        const placementText = document.getElementById('dropdown-placements-example-text');
 
-        radios.forEach(radio => {
+        placementRadios.forEach((radio) => {
           radio.addEventListener('change', () => {
             const placement = radio.value;
-            const dropdown = document.getElementById('dropdown-placements-example');
-            const placementText = document.getElementById('dropdown-placements-example-text');
+            const placementClass = 'placement-' + placement;
 
-            dropdown.dataset.spiritPlacement = placement;
-            placementText.textContent = placement.split(/(?=[A-Z])/).join('-').toLowerCase();
+            Array.from(dropdownPlacementsExample.classList)
+              .filter((className) => className.startsWith('placement-'))
+              .forEach((className) => dropdownPlacementsExample.classList.remove(className));
+            dropdownPlacementsExample.classList.add(placementClass);
+            dropdownPlacementsExample.dataset.spiritPlacement = placement;
+            placementText.textContent = placement;
           });
         });
       </script>
@@ -266,7 +271,7 @@
             Button as anchor
           </button>
           <div
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom"
             data-spirit-placement="bottom"
             id="dropdown-alignment"
           >
@@ -313,7 +318,7 @@
           Button as anchor
         </button>
         <div
-          class="DropdownPopover"
+          class="DropdownPopover placement-bottom-start"
           data-spirit-placement="bottom-start"
           id="dropdown-various-items"
         >
@@ -386,7 +391,7 @@
           Button as anchor
         </button>
         <div
-          class="DropdownPopover"
+          class="DropdownPopover placement-bottom-start"
           data-spirit-placement="bottom-start"
           id="dropdown-disabled-auto-close"
         >
@@ -471,7 +476,7 @@
           Button as anchor
         </button>
         <div
-          class="DropdownPopover"
+          class="DropdownPopover placement-bottom-start"
           data-spirit-placement="bottom-start"
           id="dropdown-longer"
         >
@@ -556,7 +561,7 @@
           Finibus quis imperdiet, semper imperdiet aliquam
         </button>
         <div
-          class="DropdownPopover"
+          class="DropdownPopover placement-top-start"
           data-spirit-placement="top-start"
           id="dropdown-full-width-mode-all"
           data-spirit-fullwidthmode="all"
@@ -641,7 +646,7 @@
           Finibus quis imperdiet, semper imperdiet aliquam
         </button>
         <div
-          class="DropdownPopover"
+          class="DropdownPopover placement-top-start"
           id="dropdown-full-width-mode-mobile"
           data-spirit-placement="top-start"
           data-spirit-fullwidthmode="mobile-only"
