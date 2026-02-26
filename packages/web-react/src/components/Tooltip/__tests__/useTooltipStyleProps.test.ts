@@ -16,4 +16,11 @@ describe('useTooltipStyleProps', () => {
 
     expect(result.current.classProps.popoverClassName).toBe('TooltipPopover TooltipPopover--dismissible');
   });
+
+  it('should return placement classes when placement is provided', () => {
+    const { result } = renderHook(() => useTooltipStyleProps({ placement: 'top-start' } as TooltipStyleProps));
+
+    expect(result.current.classProps.popoverClassName).toContain('placement-top-start');
+    expect(result.current.classProps.popoverClassName).toContain('placement-controlled');
+  });
 });
