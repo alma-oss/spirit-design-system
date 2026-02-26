@@ -1,5 +1,6 @@
 export * from './assert';
 export * from './classname';
+export * from './getPlacementClassName';
 export * from './colorObjectGenerators';
 export * from './compose';
 export * from './debounce';

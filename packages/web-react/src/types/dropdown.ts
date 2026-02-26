@@ -53,6 +53,7 @@ export interface DropdownProps extends DropdownBaseProps, ChildrenProps {
 
 export interface DropdownStyleProps extends DropdownAlignmentProps, StyleProps {
   isOpen?: boolean;
+  placement?: PlacementDictionaryType;
 }
 
 export interface UncontrolledDropdownProps extends DropdownProps {}
