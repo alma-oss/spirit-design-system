@@ -13,7 +13,7 @@
   >
     Button as anchor
   </button>
-  <div class="DropdownPopover" data-spirit-placement="bottom-start" id="dropdown-default">
+  <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-default">
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
         <use xlink:href="/icons/svg/sprite.svg#info" />
@@ -55,7 +55,7 @@
   >
     Button as anchor
   </button>
-  <div class="DropdownPopover" data-spirit-placement="top-end" id="dropdown-top-end">
+  <div class="DropdownPopover placement-top-end" data-spirit-placement="top-end" id="dropdown-top-end">
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
         <use xlink:href="/icons/svg/sprite.svg#info" />
@@ -98,7 +98,11 @@
   >
     Button as anchor
   </button>
-  <div class="DropdownPopover" data-spirit-placement="bottom-start" id="dropdown-disabled-auto-close">
+  <div
+    class="DropdownPopover placement-bottom-start"
+    data-spirit-placement="bottom-start"
+    id="dropdown-disabled-auto-close"
+  >
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="mr-400">
         <use xlink:href="/icons/svg/sprite.svg#info" />
@@ -141,7 +145,7 @@
     Finibus quis imperdiet, semper imperdiet aliquam
   </button>
   <div
-    class="DropdownPopover"
+    class="DropdownPopover placement-top-start"
     data-spirit-placement="top-start"
     id="dropdown-full-width-mode-all"
     data-spirit-fullwidthmode="all"
@@ -188,7 +192,7 @@
     Finibus quis imperdiet, semper imperdiet aliquam
   </button>
   <div
-    class="DropdownPopover"
+    class="DropdownPopover placement-top-start"
     data-spirit-placement="top-start"
     id="dropdown-full-width-mode-mobile"
     data-spirit-fullwidthmode="mobile-only"
@@ -236,7 +240,7 @@ See the [Item][item] component for more information.
   >
     Button as anchor
   </button>
-  <div class="DropdownPopover" data-spirit-placement="bottom-start" id="dropdown-default">
+  <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-default">
     <a href="#" class="Item">
       <span class="Item__icon Item__icon--start">
         <svg width="24" height="24" aria-hidden="true">
@@ -251,8 +255,7 @@ See the [Item][item] component for more information.
 
 ## Placement
 
-DropdownPopover implements the [Placement Dictionary][dictionary-placement] for placement. The dictionary values are used as
-a value of data attribute `data-spirit-placement`, e.g. `data-spirit-placement="top"`, `data-spirit-placement="right-end"`, etc.
+DropdownPopover uses the shared [placement helpers][placement-helpers] for positioning. Add the matching placement class to the popover (e.g. `placement-bottom-start`, `placement-top-end`) so the helper applies transform-origin and offset. The component sets `--spirit-placement-offset` for the gap; placement values follow the [Placement Dictionary][dictionary-placement]. You can keep `data-spirit-placement` on the element for scripting or accessibility if needed.
 
 ## Alignment
 
@@ -263,7 +266,7 @@ any of these classes will make the element display as `flex`.
 We also support responsive infixes for alignment classes. To use them, add the infix to the class name, e.g. `.Dropdown--tablet--alignmentXRight`.
 
 ℹ️ This controls only the alignment inside the wrapping `.Dropdown` element. And even with alignment, the popover will still be positioned
-at edge of the `.Dropdown` element and on the place defined by the placement attribute.
+at edge of the `.Dropdown` element and on the place defined by the placement class.
 
 ```html
 <div class="Dropdown Dropdown--alignmentXRight Dropdown--desktop--alignmentXCenter">
@@ -277,7 +280,7 @@ at edge of the `.Dropdown` element and on the place defined by the placement att
     Trigger button aligned to the right and centered on desktop
   </button>
   <div
-    class="DropdownPopover"
+    class="DropdownPopover placement-bottom-start"
     data-spirit-placement="bottom-start"
     id="dropdown-alignment"
   >
@@ -294,10 +297,10 @@ There are two options here. Use the trigger element as an anchor or wrap the men
 
 | Attribute               | Type     | Default | Required | Description                                                                                                    |
 | ----------------------- | -------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------- |
-| `data-spirit-target`    | `string` | —       | ✓        | Target menu element selector                                                                                   |
-| `aria-expanded`         | `bool`   | —       | ✓        | Is set on an element to indicate if a control is expanded or collapsed                                         |
 | `aria-controls`         | `string` | —       | ✓        | Identifies the element whose contents or presence are controlled by the element on which this attribute is set |
+| `aria-expanded`         | `bool`   | —       | ✓        | Is set on an element to indicate if a control is expanded or collapsed                                         |
 | `data-spirit-autoclose` | `bool`   | `true`  | ✕        | When you need to disable autoclose feature                                                                     |
+| `data-spirit-target`    | `string` | —       | ✓        | Target menu element selector                                                                                   |
 
 ## DropdownPopover
 
@@ -311,7 +314,7 @@ There are two options here. Use the trigger element as an anchor or wrap the men
 
 | Method                | Description                                                                                                                                                                                                                                    |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `getInstance`         | _Static_ method which allows you to get the dropdown instance associated with a DOM. element                                                                                                                                                   |
+| `getInstance`         | _Static_ method which allows you to get the dropdown instance associated with a DOM element                                                                                                                                                    |
 | `getOrCreateInstance` | _Static_ method which allows you to get the dropdown instance associated with a DOM element, or create a new one in case it wasn’t initialized.                                                                                                |
 | `hide`                | Hides an element’s dropdown. Returns to the caller before the dropdown has actually been hidden (i.e. before the `hidden.dropdown` event occurs). This is considered a “manual” triggering of the dropdown.                                    |
 | `show`                | Reveals an element’s dropdown. **Returns to the caller before the dropdown has actually been shown** (i.e. before the `shown.dropdown` event occurs). This is considered a “manual” triggering of the dropdown.                                |
@@ -327,8 +330,8 @@ dropdown.show();
 
 | Method            | Description                                                                           |
 | ----------------- | ------------------------------------------------------------------------------------- |
-| `hide.dropdown`   | This event is fired immediately when the `hide` instance method has been called.      |
 | `hidden.dropdown` | This event is fired when the `hide` instance has finished being hidden from the user. |
+| `hide.dropdown`   | This event is fired immediately when the `hide` instance method has been called.      |
 | `show.dropdown`   | This event fires immediately when the `show` instance method is called.               |
 | `shown.dropdown`  | This event is fired when the `show` instance has finished being shown to the user.    |
 
@@ -346,3 +349,4 @@ dropdown.hide();
 [dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#alignment
 [dictionary-placement]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#placement
 [item]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Item/README.md
+[placement-helpers]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/helpers/placement/
