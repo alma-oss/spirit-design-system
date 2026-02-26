@@ -44,6 +44,7 @@ export interface DropdownProps extends DropdownAlignmentProps, ChildrenProps, St
 
 export interface DropdownStyleProps extends DropdownAlignmentProps, StyleProps {
   isOpen?: boolean;
+  placement?: PlacementDictionaryType;
 }
 
 export interface SpiritDropdownProps extends DropdownProps, ChildrenProps {
