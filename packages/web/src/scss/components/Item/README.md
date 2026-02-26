@@ -25,7 +25,30 @@ Item with icon example:
 </button>
 ```
 
-Item in selected state example:
+Item in selected state. The selected state can be shown in three ways: **icon only** (no modifier, only checkmark icon), **background only** (`Item--selected`, no icon), or **both** (`Item--selected` with checkmark icon).
+
+Selected with icon only:
+
+```html
+<button type="button" class="Item">
+  <span class="Item__label">Item</span>
+  <span class="Item__icon Item__icon--end">
+    <svg width="24" height="24" aria-hidden="true">
+      <use xlink:href="/icons/svg/sprite.svg#check-plain" />
+    </svg>
+  </span>
+</button>
+```
+
+Selected with background only:
+
+```html
+<button type="button" class="Item Item--selected">
+  <span class="Item__label">Item</span>
+</button>
+```
+
+Selected with background and icon:
 
 ```html
 <button type="button" class="Item Item--selected">
