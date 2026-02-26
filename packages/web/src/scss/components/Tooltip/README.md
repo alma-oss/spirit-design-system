@@ -40,8 +40,14 @@ improved accessibility.
 
 ## Placement
 
-Tooltip implements the [Placement Dictionary][dictionary-placement] for placement. The dictionary values are used as
-a value of data attribute `data-spirit-placement`, e.g. `data-spirit-placement="top"`, `data-spirit-placement="right-end"`, etc.
+Tooltip uses [placement helpers][placement-helpers] for styling (e.g. `.placement-top`). Use `.placement-controlled` for positioning controlled by JavaScript (e.g. Floating UI). Data attribute `data-spirit-placement` can be used to pass the initial placement to Floating UI.
+
+| Scenario                                 | Placement class                                                                                                           | data-spirit-placement                                                                                                                                                             |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **With Floating UI** (JS plugin)         | The plugin adds and updates classes on the popover from the placement Floating UI returns. You can omit classes in HTML.  | Set on the element used to create the Tooltip (trigger or popover) if you want to pass the **initial** placement to Floating UI from HTML; otherwise the plugin uses its default. |
+| **Without Floating UI** (static tooltip) | You must add the class yourself, e.g. `placement-top`, so the helper classes configure the arrow styling and positioning. | Not needed for styling. Optional for your own scripts.                                                                                                                            |
+
+Values follow the [Placement Dictionary][dictionary-placement] (e.g. `top`, `bottom-start`).
 
 ```html
 <div class="Tooltip d-inline-block" data-spirit-element="tooltip">
@@ -53,7 +59,11 @@ a value of data attribute `data-spirit-placement`, e.g. `data-spirit-placement="
   >
     I have a tooltip 😎
   </button>
-  <div id="my-tooltip-placement" class="TooltipPopover is-hidden" data-spirit-placement="right-start">
+  <div
+    id="my-tooltip-placement"
+    class="TooltipPopover is-hidden placement-right-start placement-controlled"
+    data-spirit-placement="right-start"
+  >
     Hello there!
     <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
   </div>
@@ -188,7 +198,7 @@ works and to get an idea of all possible cases you may need to cover.
 | `data-spirit-enable-sizing`                     | \[true \| false]                             | true           | ✕        | Enables [sizing][floating-ui-size] of the element to keep it inside the boundary area by setting the max width.                                                                                                                                                                                                                   |
 | `data-spirit-flip-fallback-axis-side-direction` | \["none" \| "start" \| "end" ]               | "none"         | ✕        | Whether to allow [fallback to the opposite axis][floating-ui-flip-fallback-axis-side-direction] if no placements along the preferred placement axis fit, and if so, which side direction along that axis to choose. If necessary, it will fallback to the other direction.                                                        |
 | `data-spirit-flip-fallback-placements`          | string                                       | -              | ✕        | This describes a list of [explicit placements][floating-ui-flip-fallback-placements] to try if the initial placement doesn’t fit on the axes in which overflow is checked. For example you can set `"top, right, bottom"`                                                                                                         |
-| `data-spirit-placement`                         | [Placement Dictionary][dictionary-placement] | "bottom"       | ✕        | Placement of tooltip                                                                                                                                                                                                                                                                                                              |
+| `data-spirit-placement`                         | [Placement Dictionary][dictionary-placement] | "bottom"       | ✕        | Initial placement of tooltip. Set this on the **trigger** element so the plugin passes it to Floating UI. The plugin applies placement helper classes on the popover (e.g. `placement-top`, `placement-controlled`) from the placement Floating UI returns.                                                                       |
 | `data-spirit-trigger`                           | \["click" \| "hover" \| "focus" \| "manual"] | "click, hover" | ✕        | How tooltip is triggered: `click`, `hover`, `focus`, `manual`. You may pass multiple triggers; separate them with a comma. If you pass `manual`, no event listener will be added, and you should provide your own toggle solution. The `focus` trigger shows the tooltip when the trigger element is focused (e.g., via Tab key). |
 
 👆 All the attributes mentioned above can be also set as an object in the `config` attribute, like this: `data-spirit-config='{"flip": "true", "flipFallbackPlacements": "top, right, bottom"}'`. Please note that this configuration has lower priority than individual attributes and will be overwritten by them.
@@ -239,3 +249,4 @@ tooltip.hide();
 [floating-ui-shift]: https://floating-ui.com/docs/shift
 [floating-ui-size]: https://floating-ui.com/docs/size
 [floating-ui]: https://floating-ui.com
+[placement-helpers]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/helpers/placement/

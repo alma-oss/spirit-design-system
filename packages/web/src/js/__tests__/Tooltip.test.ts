@@ -433,14 +433,13 @@ describe('Tooltip', () => {
           <div class="Tooltip">
             <div
               id="test-tooltip"
-              class="TooltipPopover is-hidden"
+              class="TooltipPopover is-hidden placement-top-start placement-controlled"
               data-spirit-enable-flipping="true"
               data-spirit-enable-shifting="true"
               data-spirit-enable-sizing="true"
               data-spirit-placement="top-start"
               data-spirit-enable-flipping-cross-axis="true"
               data-spirit-flip-fallback-placements="top, right, left, bottom"
-              data-spirit-placement-controlled
             >
               This is tooltip.
               <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
@@ -471,14 +470,13 @@ describe('Tooltip', () => {
           <div class="Tooltip" data-spirit-element="tooltip">
             <div
               id="test-tooltip"
-              class="TooltipPopover is-hidden"
+              class="TooltipPopover is-hidden placement-top-start placement-controlled"
               data-spirit-enable-flipping="true"
               data-spirit-enable-shifting="true"
               data-spirit-enable-sizing="true"
               data-spirit-placement="top-start"
               data-spirit-enable-flipping-cross-axis="true"
               data-spirit-flip-fallback-placements="top, right, left, bottom"
-              data-spirit-placement-controlled
             >
               This is tooltip.
               <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
