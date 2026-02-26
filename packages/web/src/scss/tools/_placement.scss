@@ -104,20 +104,22 @@ $_logical-to-physical-placement-map: (
 
 // 1.3
 @function -get-child-translate-map($prefix) {
+    // stylelint-disable length-zero-no-unit -- We need to use 0px to avoid unitless values
     @return (
-        top: var(--#{$prefix}-offset-orthogonal, -50%) calc(-1 * var(--#{$prefix}-offset, 0)),
-        top-start: var(--#{$prefix}-offset-orthogonal, 0) calc(-1 * var(--#{$prefix}-offset, 0)),
-        top-end: var(--#{$prefix}-offset-orthogonal, 0) calc(-1 * var(--#{$prefix}-offset, 0)),
-        bottom: var(--#{$prefix}-offset-orthogonal, -50%) var(--#{$prefix}-offset, 0),
-        bottom-start: var(--#{$prefix}-offset-orthogonal, 0) var(--#{$prefix}-offset, 0),
-        bottom-end: var(--#{$prefix}-offset-orthogonal, 0) var(--#{$prefix}-offset, 0),
-        left: calc(-1 * var(--#{$prefix}-offset, 0)) var(--#{$prefix}-offset-orthogonal, -50%),
-        left-start: calc(-1 * var(--#{$prefix}-offset, 0)) var(--#{$prefix}-offset-orthogonal, 0),
-        left-end: calc(-1 * var(--#{$prefix}-offset, 0)) var(--#{$prefix}-offset-orthogonal, 0),
-        right: var(--#{$prefix}-offset, 0) var(--#{$prefix}-offset-orthogonal, -50%),
-        right-start: var(--#{$prefix}-offset, 0) var(--#{$prefix}-offset-orthogonal, 0),
-        right-end: var(--#{$prefix}-offset, 0) var(--#{$prefix}-offset-orthogonal, 0)
+        top: var(--#{$prefix}-offset-orthogonal, -50%) calc(-1 * var(--#{$prefix}-offset, 0px)),
+        top-start: var(--#{$prefix}-offset-orthogonal, 0px) calc(-1 * var(--#{$prefix}-offset, 0px)),
+        top-end: var(--#{$prefix}-offset-orthogonal, 0px) calc(-1 * var(--#{$prefix}-offset, 0px)),
+        bottom: var(--#{$prefix}-offset-orthogonal, -50%) var(--#{$prefix}-offset, 0px),
+        bottom-start: var(--#{$prefix}-offset-orthogonal, 0px) var(--#{$prefix}-offset, 0px),
+        bottom-end: var(--#{$prefix}-offset-orthogonal, 0px) var(--#{$prefix}-offset, 0px),
+        left: calc(-1 * var(--#{$prefix}-offset, 0px)) var(--#{$prefix}-offset-orthogonal, -50%),
+        left-start: calc(-1 * var(--#{$prefix}-offset, 0px)) var(--#{$prefix}-offset-orthogonal, 0px),
+        left-end: calc(-1 * var(--#{$prefix}-offset, 0px)) var(--#{$prefix}-offset-orthogonal, 0px),
+        right: var(--#{$prefix}-offset, 0px) var(--#{$prefix}-offset-orthogonal, -50%),
+        right-start: var(--#{$prefix}-offset, 0px) var(--#{$prefix}-offset-orthogonal, 0px),
+        right-end: var(--#{$prefix}-offset, 0px) var(--#{$prefix}-offset-orthogonal, 0px)
     );
+    // stylelint-enable length-zero-no-unit
 }
 
 // Function to get the cross-axis direction
@@ -245,6 +247,20 @@ $_logical-to-physical-placement-map: (
     );
 }
 
+@function get-child-transform-origin($placement) {
+    @return string.unquote(
+        transform($placement, $main-axis-inverse: true, $cross-axis-physical: true, $join-with: ' ')
+    );
+}
+
+@function get-child-inset($placement) {
+    @return map.get($_inset-map, $placement);
+}
+
+@function get-child-translate($prefix, $placement) {
+    @return map.get(-get-child-translate-map($prefix), $placement);
+}
+
 @mixin arrow($prefix, $width, $height, $corner-offset) {
     --#{$prefix}-arrow-width: #{$width};
     --#{$prefix}-arrow-height: #{$height};
@@ -263,4 +279,8 @@ $_logical-to-physical-placement-map: (
     }
 
     rotate: z map.get($_arrow-rotate-map, $placement);
+}
+
+@function get-arrow-rotate($placement) {
+    @return map.get($_arrow-rotate-map, $placement);
 }
