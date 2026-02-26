@@ -10,6 +10,12 @@ describe('useDropdownStyleProps', () => {
     expect(result.current.classProps.popover).toBe('DropdownPopover');
   });
 
+  it('should return placement class when placement is provided', () => {
+    const { result } = renderHook(() => useDropdownStyleProps({ placement: 'bottom-start' }));
+
+    expect(result.current.classProps.popover).toContain('placement-bottom-start');
+  });
+
   it('should render as open', () => {
     const props = {
       isOpen: true,
