@@ -130,7 +130,7 @@
               >
                 <span id="dropdown-placements-example-text" style="white-space: nowrap">bottom-start</span>
               </button>
-              <div class="DropdownPopover" data-spirit-placement="bottom-start" id="dropdown-placements-example">
+              <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-placements-example">
                 <a href="#" class="Item">
                   <span class="Label Label--item">Action</span>
                 </a>
@@ -148,16 +148,21 @@
       </form>
 
       <script>
-        const radios = document.querySelectorAll('input[type="radio"]');
+        const placementRadios = document.querySelectorAll('form input[name="placement"]');
+        const dropdownPlacementsExample = document.getElementById('dropdown-placements-example');
+        const placementText = document.getElementById('dropdown-placements-example-text');
 
-        radios.forEach(radio => {
+        placementRadios.forEach((radio) => {
           radio.addEventListener('change', () => {
             const placement = radio.value;
-            const dropdown = document.getElementById('dropdown-placements-example');
-            const placementText = document.getElementById('dropdown-placements-example-text');
+            const placementClass = 'placement-' + placement;
 
-            dropdown.dataset.spiritPlacement = placement;
-            placementText.textContent = placement.split(/(?=[A-Z])/).join('-').toLowerCase();
+            Array.from(dropdownPlacementsExample.classList)
+              .filter((className) => className.startsWith('placement-'))
+              .forEach((className) => dropdownPlacementsExample.classList.remove(className));
+            dropdownPlacementsExample.classList.add(placementClass);
+            dropdownPlacementsExample.dataset.spiritPlacement = placement;
+            placementText.textContent = placement;
           });
         });
       </script>
@@ -188,7 +193,7 @@
           >
             Button as anchor
           </button>
-          <div class="DropdownPopover" data-spirit-placement="bottom" id="dropdown-alignment">
+          <div class="DropdownPopover placement-bottom" data-spirit-placement="bottom" id="dropdown-alignment">
             <a href="#" class="Item">
               <span class="Label Label--item">Action</span>
             </a>
@@ -231,7 +236,7 @@
         >
           Button as anchor
         </button>
-        <div class="DropdownPopover" data-spirit-placement="bottom-start" id="dropdown-various-items">
+        <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-various-items">
           <a href="#" class="Item">
             <span class="Label Label--item">Plain text</span>
           </a>
@@ -284,7 +289,7 @@
         >
           Button as anchor
         </button>
-        <div class="DropdownPopover" data-spirit-placement="bottom-start" id="dropdown-disabled-auto-close">
+        <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-disabled-auto-close">
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg class="Icon" width="24" height="24" aria-hidden="true">
@@ -345,7 +350,7 @@
         >
           Button as anchor
         </button>
-        <div class="DropdownPopover" data-spirit-placement="bottom-start" id="dropdown-longer">
+        <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-longer">
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg class="Icon" width="24" height="24" aria-hidden="true">
@@ -406,7 +411,7 @@
         >
           Finibus quis imperdiet, semper imperdiet aliquam
         </button>
-        <div class="DropdownPopover" data-spirit-placement="top-start" id="dropdown-full-width-mode-all" data-spirit-fullwidthmode="all">
+        <div class="DropdownPopover placement-top-start" data-spirit-placement="top-start" id="dropdown-full-width-mode-all" data-spirit-fullwidthmode="all">
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg class="Icon" width="24" height="24" aria-hidden="true">
@@ -467,7 +472,7 @@
           Finibus quis imperdiet, semper imperdiet aliquam
         </button>
         <div
-          class="DropdownPopover"
+          class="DropdownPopover placement-top-start"
           id="dropdown-full-width-mode-mobile"
           data-spirit-placement="top-start"
           data-spirit-fullwidthmode="mobile-only"
