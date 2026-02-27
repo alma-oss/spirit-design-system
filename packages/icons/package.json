@@ -1,11 +1,15 @@
 {
   "name": "@alma-oss/spirit-icons",
-  "version": "3.0.5",
+  "version": "3.0.4",
   "description": "Icons for Spirit Design System",
   "license": "MIT",
   "engines": {
     "node": ">=20"
   },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
   "files": [
     "dist",
     "README.md",
@@ -21,33 +25,65 @@
     "directory": "packages/icons"
   },
   "exports": {
-    "./icons": "./dist/icons.mjs",
-    "./react/*": "./dist/react/*.tsx",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./icons": {
+      "types": "./dist/icons.d.ts",
+      "import": "./dist/icons.js",
+      "require": "./dist/icons.cjs",
+      "default": "./dist/icons.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js",
+      "require": "./dist/react/index.cjs",
+      "default": "./dist/react/index.js"
+    },
+    "./react/*": {
+      "types": "./dist/react/*.d.ts",
+      "import": "./dist/react/*.js",
+      "require": "./dist/react/*.cjs",
+      "default": "./dist/react/*.js"
+    },
     "./svg/*": "./dist/svg/*.svg"
   },
   "scripts": {
-    "prepare:react": "node ./scripts/prepareSvgReact.js",
-    "build:svg": "node ./scripts/buildSvg.js",
-    "build:clean": "shx rm -rf dist",
-    "build:dist": "shx mkdir -p dist/svg dist/react dist/.tmp-svg",
-    "build:react": "svg2react-icon --typescript --no-sub-dir ./dist/.tmp-svg ./dist/react",
-    "build:const": "node ./scripts/buildConstants.js",
-    "build:prepare": "npm-run-all build:clean build:dist",
-    "build": "npm-run-all --serial build:prepare build:svg prepare:react build:react build:const build:finalize",
-    "build:finalize": "shx rm -rf 'dist/react/**.d.ts dist/react/**.js.map dist/.tmp-svg'",
+    "build:clean": "shx rm -rf dist .icons-tmp",
+    "build:vite": "vite build",
+    "build:verify": "tsx ./scripts/verifyBuild.ts",
+    "build": "npm-run-all --serial build:clean build:vite build:verify",
+    "dev": "vite build --watch",
+    "types": "tsc --noEmit",
     "test": "npm-run-all --serial test:unit",
     "test:unit": "jest",
     "test:unit:watch": "yarn test:unit --watchAll",
     "test:unit:coverage": "yarn test:unit --coverage"
   },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
   "devDependencies": {
     "@alma-oss/spirit-design-tokens": "workspace:^",
     "@types/jest": "catalog:types",
+    "@types/node": "catalog:types",
+    "@types/react": "catalog:types",
+    "@types/react-dom": "catalog:types",
+    "@vitejs/plugin-react": "catalog:build",
     "jest": "catalog:test",
     "jest-config-spirit": "workspace:^",
     "jsdom": "catalog:test",
     "npm-run-all2": "catalog:script",
     "shx": "catalog:script",
-    "svg2react-icon": "catalog:script"
+    "svg2react-icon": "catalog:script",
+    "tsx": "catalog:script",
+    "typescript": "catalog:types",
+    "vite": "catalog:build",
+    "vite-plugin-dts": "catalog:build",
+    "vite-plugin-externalize-deps": "catalog:build"
   }
 }
