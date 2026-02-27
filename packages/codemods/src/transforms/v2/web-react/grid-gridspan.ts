@@ -109,9 +109,7 @@ const transform = (fileInfo: FileInfo, api: API) => {
 
   // Post-process the generated code to replace double quotes with single quotes in columnEnd object values
   // jscodeshift doesn't support this transformation natively
-  source = source.replace(/columnEnd={{([^}]+)}}/g, (match) => {
-    return match.replace(/"([^"]+)"/g, "'$1'");
-  });
+  source = source.replace(/columnEnd={{([^}]+)}}/g, (match) => match.replace(/"([^"]+)"/g, "'$1'"));
 
   return source;
 };
