@@ -8,6 +8,9 @@
     },
     "importPaths": {
       "src/components/*": "@alma-oss/spirit-web-react"
+    },
+    "storybook": {
+      "url": "https://spirit-design-system-storybook.netlify.app"
     }
   }
 }
