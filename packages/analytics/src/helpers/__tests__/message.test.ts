@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { errorMessage, infoMessage } from '../message';
 
 const mockConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {});

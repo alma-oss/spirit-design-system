@@ -17,7 +17,6 @@ describe('versions', () => {
   describe('getVersions', () => {
     it('should return the correct version when a matching lock file is found', async () => {
       // Mock the return value of globby
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error Property 'mockResolvedValue' does not exist on type
       globby.mockResolvedValue(['/path/to/yarn.lock']);
 
@@ -35,7 +34,6 @@ describe('versions', () => {
 
     it('should return an empty string when no matching lock file is found', async () => {
       // Mock the return value of globby (no lock files found)
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error Property 'mockResolvedValue' does not exist on type
       globby.mockResolvedValue([]);
 
@@ -46,7 +44,6 @@ describe('versions', () => {
 
     it('should return the correct version when a mtching lock file is found with spirit-web-react', async () => {
       // Mock the return value of globby
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error Property 'mockResolvedValue' does not exist on type
       globby.mockResolvedValue(['/path/to/package-lock.json']);
 

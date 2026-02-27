@@ -5,7 +5,7 @@
  *
  * @param baseUrl - The base URL (e.g., 'http://localhost:3456' or 'https://example.com/')
  * @param segments - Path segments to join
- * @returns Normalized URL with single slashes and a trailing slash
+ * @returns {string} Normalized URL with single slashes and a trailing slash
  *
  * @example
  * normalizeUrl('http://localhost:3456', 'packages/web', 'src/components', 'Button')

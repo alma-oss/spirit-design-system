@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions -- Cannot find module error */
 import prettierPlugin from './plugins/prettier.js';
 import styleRules from './rules/style.js';
 import unstableRules from './rules/unstable.js';
