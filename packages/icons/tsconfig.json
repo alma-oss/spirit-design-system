@@ -1,0 +1,17 @@
+{
+  "extends": "../../configs/typescript-config-spirit/dom",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "types": ["jest", "node"]
+  },
+  "include": ["./scripts/**/*"],
+  "exclude": ["./node_modules", "./dist/**/*", "./.icons-tmp/**/*"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
+}
