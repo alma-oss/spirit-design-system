@@ -77,4 +77,16 @@ module.exports = {
      */
     quotes: ['warn', 'single'],
   },
+
+  overrides: [
+    {
+      // Allow @jest-config-loader tag in jest.config.ts files
+      // This is a special Jest directive for specifying the TypeScript loader
+      // @see https://jestjs.io/docs/configuration
+      files: ['**/jest.config.ts'],
+      rules: {
+        'jsdoc/check-tag-names': 'off',
+      },
+    },
+  ],
 };
