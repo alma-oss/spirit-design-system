@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/extensions, @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { defineTest } = require('jscodeshift/dist/testUtils');
 
 export const testTransform = (directory: string, name: string) => {

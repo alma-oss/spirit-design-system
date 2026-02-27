@@ -44,7 +44,6 @@ const spiritAdoptionProcessor = ({
         return acc;
       }
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore index as string
       const currentComponentScan = acc[componentFullName] || [];
       const componentPathAndProps = {

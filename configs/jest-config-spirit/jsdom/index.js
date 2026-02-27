@@ -1,11 +1,8 @@
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
-// eslint-disable-next-line import/extensions
 import { config as nodeConfig } from '../node/index.js';
 
-// eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
-// eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(__filename);
 
 export const config = {

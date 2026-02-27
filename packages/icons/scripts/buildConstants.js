@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-// eslint-disable-next-line import/no-extraneous-dependencies
 const jsdom = require('jsdom');
 const { filterSvgFiles } = require('./shared');
 
@@ -27,7 +26,6 @@ const buildConstants = (srcDir, file) => {
 
       distContent += JSON.stringify(icons, null, 2);
       distContent += ';';
-      // eslint-disable-next-line quotes -- we need to use special chars in this string
       distContent += `\n\nexport default icons;`;
 
       fs.writeFileSync(file, distContent);

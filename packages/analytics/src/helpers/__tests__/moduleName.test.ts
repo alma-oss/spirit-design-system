@@ -1,4 +1,3 @@
-/* eslint-disable no-undefined */
 import { Instance } from '../../types';
 import { getModuleName } from '../moduleName';
 

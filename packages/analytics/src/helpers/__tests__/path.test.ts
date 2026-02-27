@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { path } from 'zx';
 import { getOutputPath } from '../path';
 
