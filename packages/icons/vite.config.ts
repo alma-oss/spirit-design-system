@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     spiritIconsPlugin(),
     react(),
-    externalizeDeps({ except: [] }),
+    externalizeDeps(),
     dts({
       insertTypesEntry: true,
       rollupTypes: false,
