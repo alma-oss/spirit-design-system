@@ -5,13 +5,8 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "baseUrl": ".",
-    "types": ["jest", "node"]
+    "types": ["node"]
   },
   "include": ["./scripts/**/*"],
-  "exclude": ["./node_modules", "./dist/**/*", "./.icons-tmp/**/*"],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs"
-    }
-  }
+  "exclude": ["./node_modules", "./dist/**/*", "./.icons-tmp/**/*"]
 }
