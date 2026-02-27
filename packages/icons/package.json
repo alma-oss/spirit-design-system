@@ -3,6 +3,7 @@
   "version": "3.0.4",
   "description": "Icons for Spirit Design System",
   "license": "MIT",
+  "type": "module",
   "engines": {
     "node": ">=20"
   },
@@ -57,26 +58,18 @@
     "build:verify": "tsx ./scripts/verifyBuild.ts",
     "build": "npm-run-all --serial build:clean build:vite build:verify",
     "dev": "vite build --watch",
-    "types": "tsc --noEmit",
-    "test": "npm-run-all --serial test:unit",
-    "test:unit": "jest",
-    "test:unit:watch": "yarn test:unit --watchAll",
-    "test:unit:coverage": "yarn test:unit --coverage"
+    "types": "tsc --noEmit"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
-    "@alma-oss/spirit-design-tokens": "workspace:^",
-    "@types/jest": "catalog:types",
+    "@alma-oss/vite-plugin-spirit-icons": "workspace:^",
     "@types/node": "catalog:types",
     "@types/react": "catalog:types",
     "@types/react-dom": "catalog:types",
     "@vitejs/plugin-react": "catalog:build",
-    "jest": "catalog:test",
-    "jest-config-spirit": "workspace:^",
-    "jsdom": "catalog:test",
     "npm-run-all2": "catalog:script",
     "shx": "catalog:script",
     "svg2react-icon": "catalog:script",
