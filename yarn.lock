@@ -96,6 +96,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@alma-oss/spirit-design-tokens@npm:4.0.3":
+  version: 4.0.3
+  resolution: "@alma-oss/spirit-design-tokens@npm:4.0.3"
+  checksum: 10/2f60e679aa92b6e74e6ce7695937035d73852459eb07a5407c688ed06d38f01481c7928f3d8f8c98bcdb7233db6214511f8f877cf747e4be8e69cd11cc09f788
+  languageName: node
+  linkType: hard
+
 "@alma-oss/spirit-design-tokens@npm:^4.1.2, @alma-oss/spirit-design-tokens@workspace:^, @alma-oss/spirit-design-tokens@workspace:packages/design-tokens":
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-design-tokens@workspace:packages/design-tokens"
@@ -449,6 +456,28 @@ __metadata:
   peerDependenciesMeta:
     sass:
       optional: true
+  languageName: unknown
+  linkType: soft
+
+"@alma-oss/vite-plugin-spirit-icons@workspace:packages/vite-plugin-spirit-icons":
+  version: 0.0.0-use.local
+  resolution: "@alma-oss/vite-plugin-spirit-icons@workspace:packages/vite-plugin-spirit-icons"
+  dependencies:
+    "@alma-oss/spirit-design-tokens": "npm:4.0.3"
+    "@types/jest": "catalog:types"
+    "@types/node": "catalog:types"
+    jest: "catalog:test"
+    jest-config-spirit: "workspace:^"
+    jsdom: "catalog:build"
+    npm-run-all2: "catalog:script"
+    shx: "catalog:script"
+    svg2react-icon: "catalog:script"
+    tsup: "catalog:build"
+    tsx: "catalog:script"
+    typescript: "catalog:types"
+    vite: "catalog:build"
+  peerDependencies:
+    vite: ">=5"
   languageName: unknown
   linkType: soft
 

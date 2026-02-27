@@ -41,6 +41,7 @@ export default {
         ignorePattern: [
           '^@lmc-eu/spirit-[a-z-]+',
           '^@alma-oss/spirit-[a-z-]+',
+          '^@alma-oss/vite-plugin-[a-z-]+',
           '^spirit-[a-z-]+',
           '`[^`]+`',
           '[a-z-]+-config-spirit',
