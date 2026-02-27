@@ -1,6 +1,7 @@
 import { join, resolve } from 'path';
+import { fileURLToPath } from 'url';
 
-export const ROOT = resolve(__dirname, '..');
+export const ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
 export const STAGING_DIR = join(ROOT, '.icons-tmp');
 export const PKG_PATH = join(ROOT, 'package.json');
 

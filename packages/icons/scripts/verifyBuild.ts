@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const DIST_DIR = path.join(ROOT, 'dist');
 
@@ -16,6 +18,7 @@ function verifyBuild(): VerificationResult {
   const mainEntries = ['index.js', 'index.d.ts', 'icons.js', 'icons.d.ts'];
   mainEntries.forEach((file) => {
     const filePath = path.join(DIST_DIR, file);
+
     if (!fs.existsSync(filePath)) {
       errors.push(`Missing main entry point: ${file}`);
     }
@@ -23,6 +26,7 @@ function verifyBuild(): VerificationResult {
 
   // Check react directory
   const reactDir = path.join(DIST_DIR, 'react');
+
   if (!fs.existsSync(reactDir)) {
     errors.push('Missing react directory');
   } else {
@@ -37,6 +41,7 @@ function verifyBuild(): VerificationResult {
     // Check that there are react component files
     const reactFiles = fs.readdirSync(reactDir);
     const componentFiles = reactFiles.filter((f) => f.endsWith('.js'));
+
     if (componentFiles.length === 0) {
       errors.push('No React component files found in react directory');
     }
@@ -44,13 +49,16 @@ function verifyBuild(): VerificationResult {
 
   // Check svg directory
   const svgDir = path.join(DIST_DIR, 'svg');
+
   if (!fs.existsSync(svgDir)) {
     errors.push('Missing svg directory');
   } else {
     const svgFiles = fs.readdirSync(svgDir).filter((f) => f.endsWith('.svg'));
+
     if (svgFiles.length === 0) {
       errors.push('No SVG files found in svg directory');
     }
+
     if (!svgFiles.includes('sprite.svg')) {
       errors.push('Missing sprite.svg');
     }
@@ -58,6 +66,7 @@ function verifyBuild(): VerificationResult {
 
   // Check that .icons-tmp does not exist (should be cleaned up)
   const tmpDir = path.join(ROOT, '.icons-tmp');
+
   if (fs.existsSync(tmpDir)) {
     errors.push('Staging directory .icons-tmp was not cleaned up');
   }

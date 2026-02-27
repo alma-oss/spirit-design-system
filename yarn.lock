@@ -226,15 +226,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-icons@workspace:packages/icons"
   dependencies:
-    "@alma-oss/spirit-design-tokens": "workspace:^"
-    "@types/jest": "catalog:types"
+    "@alma-oss/vite-plugin-spirit-icons": "workspace:^"
     "@types/node": "catalog:types"
     "@types/react": "catalog:types"
     "@types/react-dom": "catalog:types"
     "@vitejs/plugin-react": "catalog:build"
-    jest: "catalog:test"
-    jest-config-spirit: "workspace:^"
-    jsdom: "catalog:test"
     npm-run-all2: "catalog:script"
     shx: "catalog:script"
     svg2react-icon: "catalog:script"
@@ -459,7 +455,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@alma-oss/vite-plugin-spirit-icons@workspace:packages/vite-plugin-spirit-icons":
+"@alma-oss/vite-plugin-spirit-icons@workspace:^, @alma-oss/vite-plugin-spirit-icons@workspace:packages/vite-plugin-spirit-icons":
   version: 0.0.0-use.local
   resolution: "@alma-oss/vite-plugin-spirit-icons@workspace:packages/vite-plugin-spirit-icons"
   dependencies:
