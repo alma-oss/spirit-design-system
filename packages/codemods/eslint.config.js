@@ -46,5 +46,23 @@ export default [
     },
     // @TODO: remove `files` and `plugins` when all configs are flat
     files: ['**/*.{js,mjs,cjs,ts,tsx,mts,cts}'],
+    rules: {
+      // Allow specific types in JSDoc comments
+      // @see { @link https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/no-undefined-types.md}
+      'jsdoc/no-undefined-types': [
+        'error',
+        {
+          definedTypes: ['core', 'Collection'],
+        },
+      ],
+    },
+  },
+  {
+    // Allow property reassignment in transform and helper files
+    // This is necessary for AST manipulation with jscodeshift
+    files: ['src/transforms/**/*.ts', 'src/helpers/**/*.ts'],
+    rules: {
+      'no-param-reassign': ['error', { props: false }],
+    },
   },
 ];
