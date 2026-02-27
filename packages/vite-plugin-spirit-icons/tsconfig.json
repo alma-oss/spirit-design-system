@@ -1,0 +1,9 @@
+{
+  "extends": "../../configs/typescript-config-spirit/base",
+  "compilerOptions": {
+    "module": "ES2020",
+    "types": ["node", "jest"]
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["./node_modules", "./dist/**/*"]
+}
