@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "ES2020",
+    "target": "es2015",
+    "noEmit": false
+  },
+  "include": ["../.icons-tmp/**/*"],
+  "exclude": []
+}

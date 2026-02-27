@@ -1,12 +1,12 @@
-const path = require('path');
+import path from 'path';
 
-const ICON_TYPE_DUALTONE = 'dualtone';
-const ICON_TYPE_COLORED = 'colored';
+export const ICON_TYPE_DUALTONE = 'dualtone';
+export const ICON_TYPE_COLORED = 'colored';
 
-const filterSvgFiles = (fileNames) =>
+export const filterSvgFiles = (fileNames: string[]): string[] =>
   fileNames.filter((fileName) => path.extname(fileName) === '.svg' && fileName !== 'sprite.svg');
 
-const getIconType = (fileName) => {
+export const getIconType = (fileName: string): string => {
   if (fileName.endsWith('-dualtone.svg')) {
     return ICON_TYPE_DUALTONE;
   }
@@ -16,11 +16,4 @@ const getIconType = (fileName) => {
   }
 
   return 'default';
-};
-
-module.exports = {
-  filterSvgFiles,
-  getIconType,
-  ICON_TYPE_DUALTONE,
-  ICON_TYPE_COLORED,
 };
