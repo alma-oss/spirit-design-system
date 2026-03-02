@@ -12,6 +12,7 @@ import {
 } from '@supernovaio/sdk-exporters';
 import {
   exampleDeviceTokenDimension,
+  exampleDeviceTokenEqualValue,
   exampleDeviceTokenFontSize,
   exampleDeviceTokenLetterSpacing,
   exampleDeviceTokenLineHeight,
@@ -145,6 +146,18 @@ describe('tokenHelper', () => {
 
       expect(result[0]?.origin?.name).toBe('Grid/Columns');
       expect(result[1]?.origin?.name).toBe('Grid/spacing/desktop');
+    });
+
+    it('should sort tokens by variable name if they have the same value', () => {
+      const tokens = Array.from(exampleDeviceTokenEqualValue.values());
+      const tokenGroups = exampleGroups;
+      const hasParentPrefix = true;
+      const sortByNumValue = true;
+
+      const result = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
+
+      expect(result[0]?.origin?.name).toBe('breakpoint-mobile');
+      expect(result[1]?.origin?.name).toBe('breakpoint-tablet');
     });
 
     const sortByNumValueCases: Array<{

@@ -282,6 +282,40 @@ const testTokenDeviceString2 = {
   },
 };
 
+const testTokenDeviceEqual = {
+  ...testTokenBreakpoint,
+  origin: {
+    name: 'breakpoint-tablet',
+  },
+  value: {
+    unit: 'Pixels',
+    measure: 0,
+    referencedTokenId: null,
+  },
+  tokenType: TokenType.dimension,
+  propertyValues: {
+    collection: 'device-tokens-id',
+    device: 'tablet',
+  },
+};
+
+const testTokenDeviceEqual2 = {
+  ...testTokenBreakpoint,
+  origin: {
+    name: 'breakpoint-mobile',
+  },
+  value: {
+    unit: 'Pixels',
+    measure: 0,
+    referencedTokenId: null,
+  },
+  tokenType: TokenType.dimension,
+  propertyValues: {
+    collection: 'device-tokens-id',
+    device: 'mobile',
+  },
+};
+
 export const exampleDeviceTokens = new Map<string, Token>();
 exampleDeviceTokens.set('stringRef1', testToken as unknown as DimensionToken);
 exampleDeviceTokens.set('stringRef2', testToken as unknown as DimensionToken);
@@ -324,3 +358,7 @@ exampleDeviceTokenLetterSpacing.set('fontRef2', testTokenDeviceLetterSpacing2 as
 export const exampleDeviceTokenString = new Map<string, Token>();
 exampleDeviceTokenString.set('fontRef1', testTokenDeviceString as unknown as StringToken);
 exampleDeviceTokenString.set('fontRef2', testTokenDeviceString2 as unknown as StringToken);
+
+export const exampleDeviceTokenEqualValue = new Map<string, Token>();
+exampleDeviceTokenEqualValue.set('equalRef1', testTokenDeviceEqual as unknown as DimensionToken);
+exampleDeviceTokenEqualValue.set('equalRef2', testTokenDeviceEqual2 as unknown as DimensionToken);
