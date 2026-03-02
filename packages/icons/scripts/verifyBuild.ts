@@ -15,7 +15,7 @@ function verifyBuild(): VerificationResult {
   const errors: string[] = [];
 
   // Check main entry points
-  const mainEntries = ['index.js', 'index.cjs', 'index.d.ts', 'icons.js', 'icons.cjs', 'icons.d.ts'];
+  const mainEntries = ['index.js', 'index.d.ts', 'icons.js', 'icons.d.ts'];
   mainEntries.forEach((file) => {
     const filePath = path.join(DIST_DIR, file);
     if (!fs.existsSync(filePath)) {
@@ -28,7 +28,7 @@ function verifyBuild(): VerificationResult {
   if (!fs.existsSync(reactDir)) {
     errors.push('Missing react directory');
   } else {
-    const reactEntries = ['index.js', 'index.cjs', 'index.d.ts'];
+    const reactEntries = ['index.js', 'index.d.ts'];
     reactEntries.forEach((file) => {
       const filePath = path.join(reactDir, file);
       if (!fs.existsSync(filePath)) {
@@ -38,7 +38,7 @@ function verifyBuild(): VerificationResult {
 
     // Check that there are react component files
     const reactFiles = fs.readdirSync(reactDir);
-    const componentFiles = reactFiles.filter((f) => f.endsWith('.js') || f.endsWith('.cjs'));
+    const componentFiles = reactFiles.filter((f) => f.endsWith('.js'));
     if (componentFiles.length === 0) {
       errors.push('No React component files found in react directory');
     }

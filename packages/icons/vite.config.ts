@@ -23,24 +23,14 @@ export default defineConfig({
       entry: getEntryPoints(),
     },
     rollupOptions: {
-      output: [
-        {
-          format: 'es',
-          dir: 'dist',
-          preserveModules: true,
-          preserveModulesRoot: '.icons-tmp',
-          exports: 'named',
-          entryFileNames: '[name].js',
-        },
-        {
-          format: 'cjs',
-          dir: 'dist',
-          preserveModules: true,
-          preserveModulesRoot: '.icons-tmp',
-          exports: 'named',
-          entryFileNames: '[name].cjs',
-        },
-      ],
+      output: {
+        format: 'es',
+        dir: 'dist',
+        preserveModules: true,
+        preserveModulesRoot: '.icons-tmp',
+        exports: 'named',
+        entryFileNames: '[name].js',
+      },
     },
     sourcemap: true,
   },

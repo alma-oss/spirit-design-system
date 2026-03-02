@@ -1,5 +1,7 @@
 # @alma-oss/spirit-icons
 
+[![ESM only](https://img.shields.io/badge/ESM-only-green)][esm-only]
+
 > Icons of Spirit Design System.
 
 ## Install
@@ -94,6 +96,7 @@ This configuration is not required if you are using the Next.js App Router.
 
 For more information, please see the [Next.js documentation][nextjs-transpile-packages].
 
+[esm-only]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 [spirit-web]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web
 [nextjs-transpile-packages]: https://nextjs.org/docs/pages/api-reference/next-config-js/transpilePackages
 [react-svgr]: https://react-svgr.com/

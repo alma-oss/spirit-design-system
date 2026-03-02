@@ -7,9 +7,6 @@
   "engines": {
     "node": ">=20"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "sideEffects": false,
   "files": [
     "dist",
@@ -28,27 +25,19 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./icons": {
       "types": "./dist/icons.d.ts",
-      "import": "./dist/icons.js",
-      "require": "./dist/icons.cjs",
-      "default": "./dist/icons.js"
+      "import": "./dist/icons.js"
     },
     "./react": {
       "types": "./dist/react/index.d.ts",
-      "import": "./dist/react/index.js",
-      "require": "./dist/react/index.cjs",
-      "default": "./dist/react/index.js"
+      "import": "./dist/react/index.js"
     },
     "./react/*": {
       "types": "./dist/react/*.d.ts",
-      "import": "./dist/react/*.js",
-      "require": "./dist/react/*.cjs",
-      "default": "./dist/react/*.js"
+      "import": "./dist/react/*.js"
     },
     "./svg/*": "./dist/svg/*.svg"
   },
