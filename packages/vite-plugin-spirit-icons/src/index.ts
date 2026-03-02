@@ -18,10 +18,12 @@ export interface SpiritIconsPluginOptions {
 
 export function spiritIconsPlugin(options?: SpiritIconsPluginOptions): Plugin {
   let root: string;
+  let outDir: string;
   return {
     name: 'vite-plugin-spirit-icons',
     configResolved(config: ResolvedConfig) {
       root = config.root;
+      outDir = config.build.outDir;
     },
     async buildStart() {
       const SVG_SRC = join(root, options?.svgDir ?? 'src/svg');
@@ -56,7 +58,7 @@ export function spiritIconsPlugin(options?: SpiritIconsPluginOptions): Plugin {
       // Copy SVG files to dist after Vite writes the bundle
       const fs = await import('fs');
       const TMP_SVG = join(root, options?.stagingDir ?? '.icons-tmp', 'svg');
-      const distSvgDir = join(root, 'dist', options?.distSvgDir ?? 'svg');
+      const distSvgDir = join(root, outDir, options?.distSvgDir ?? 'svg');
 
       if (!fs.existsSync(distSvgDir)) {
         fs.mkdirSync(distSvgDir, { recursive: true });
