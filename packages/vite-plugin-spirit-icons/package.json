@@ -27,8 +27,15 @@
       "import": "./dist/index.js"
     }
   },
-  "peerDependencies": {
-    "vite": ">=5"
+  "scripts": {
+    "build:clean": "shx rm -rf dist",
+    "build:compile": "tsup --config ./config/tsup.config.ts",
+    "build": "npm-run-all --serial build:clean build:compile",
+    "types": "tsc --noEmit",
+    "test": "npm-run-all --serial test:unit",
+    "test:unit": "jest",
+    "test:unit:watch": "yarn test:unit --watchAll",
+    "test:unit:coverage": "yarn test:unit --coverage"
   },
   "dependencies": {
     "@alma-oss/spirit-design-tokens": "4.0.3",
@@ -47,14 +54,7 @@
     "typescript": "catalog:types",
     "vite": "catalog:build"
   },
-  "scripts": {
-    "build:clean": "shx rm -rf dist",
-    "build:compile": "tsup --config ./config/tsup.config.ts",
-    "build": "npm-run-all --serial build:clean build:compile",
-    "types": "tsc --noEmit",
-    "test": "npm-run-all --serial test:unit",
-    "test:unit": "jest",
-    "test:unit:watch": "yarn test:unit --watchAll",
-    "test:unit:coverage": "yarn test:unit --coverage"
+  "peerDependencies": {
+    "vite": ">=5"
   }
 }
