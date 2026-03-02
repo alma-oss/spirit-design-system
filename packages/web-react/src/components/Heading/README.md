@@ -6,7 +6,7 @@ The Heading component provides helper classes to render headings.
 
 Use the `elementType` prop to set the HTML tag of the Heading component.
 
-```jsx
+```tsx
 <Heading elementType="h1">Heading</Heading>
 ```
 
@@ -14,7 +14,7 @@ Use the `elementType` prop to set the HTML tag of the Heading component.
 
 Use the `size` prop to set the size of the text.
 
-```jsx
+```tsx
 <Heading elementType="h1" size="large">
   Heading
 </Heading>
@@ -26,7 +26,7 @@ Use the `emphasis` prop to set the emphasis of the text.
 
 ⚠️ This prop only affects styling, not the semantics of the element.
 
-```jsx
+```tsx
 <Heading elementType="h1" emphasis="semibold">
   Semibold heading
 </Heading>
@@ -36,14 +36,14 @@ Use the `emphasis` prop to set the emphasis of the text.
 
 Use the `textAlignment` prop to set the alignment of the text.
 
-```jsx
+```tsx
 <Heading elementType="h2" textAlignment="center">Centered heading</Heading>
 <Heading elementType="h2" textAlignment="right">Right-aligned heading</Heading>
 ```
 
 You can define responsive values for the `textAlignment` prop using an object:
 
-```jsx
+```tsx
 <Heading elementType="h2" textAlignment={{ mobile: 'center', tablet: 'right', desktop: 'left' }}>
   Responsive text alignment
 </Heading>
@@ -54,7 +54,7 @@ You can define responsive values for the `textAlignment` prop using an object:
 Use the `textColor` prop to set color of the text. When undefined, the text color
 is inherited from the parent element.
 
-```jsx
+```tsx
 <Heading elementType="h2" textColor="secondary">
   Secondary heading
 </Heading>
@@ -64,7 +64,7 @@ is inherited from the parent element.
 
 Use the `textHyphens` prop to set how words should be hyphenated when text wraps across multiple lines.
 
-```jsx
+```tsx
 <Heading elementType="h2" textHyphens="auto">
   Hyphens applied automatically when text wraps across multiple lines.
 </Heading>
@@ -75,7 +75,7 @@ Use the `textHyphens` prop to set how words should be hyphenated when text wraps
 Use the `textWordBreak` prop to set how words should break when reaching the end of a line.
 It's crucial to combine it with [Text Hyphens](#text-hyphens) to maintain readability, followed by typography rules in text layouts.
 
-```jsx
+```tsx
 <Heading elementType="h2" textWordBreak="long-words">
   Allows long words to be splitted and wrapped onto the next line.
 </Heading>
@@ -85,7 +85,7 @@ It's crucial to combine it with [Text Hyphens](#text-hyphens) to maintain readab
 
 Use the `isTextBalanced` prop to enable balanced wrapping for headings and titles.
 
-```jsx
+```tsx
 <Heading elementType="h2" isTextBalanced>
   Balanced wrapping optimizes the distribution of heading text across multiple lines for better visual appeal
 </Heading>
@@ -101,7 +101,7 @@ less for Firefox).
 
 ## Full Example
 
-```jsx
+```tsx
 <Heading
   elementType="h1"
   size="large"
@@ -137,7 +137,7 @@ and [escape hatches][readme-escape-hatches].
 
 Heading classes are fabricated using `useHeadingStyleProps` hook. You can use it to create your own custom Heading component.
 
-```jsx
+```tsx
 const CustomText = (props: SpiritHeadingProps): JSX.Element => {
   const { classProps, props: modifiedProps, children } = useHeadingStyleProps(props);
 

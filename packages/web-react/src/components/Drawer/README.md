@@ -15,9 +15,7 @@ The Drawer is a composition of several subcomponents:
 
 ## Drawer
 
-```jsx
-import { Drawer } from '@alma-oss/spirit-web-react';
-
+```tsx
 const [isOpen, setOpen] = useState(false);
 
 <Drawer id="drawer-dialog-example" isOpen={isOpen} onClose={() => setOpen(false)}>
@@ -29,7 +27,7 @@ const [isOpen, setOpen] = useState(false);
 
 The `Drawer` component allows aligning the content panel horizontally to the left or right side of the screen using `alignmentX` prop. By default, the drawer content panel is aligned to the right.
 
-```jsx
+```tsx
 <Drawer id="drawer-dialog-example" isOpen={isOpen} onClose={() => setOpen(false)} alignmentX="left">
   {/* Drawer Panel goes here */}
 </Drawer>
@@ -39,7 +37,7 @@ The `Drawer` component allows aligning the content panel horizontally to the lef
 
 By default, the drawer will close when the backdrop is clicked. You can disable this behavior by setting the `closeOnBackdropClick` prop to `false`.
 
-```jsx
+```tsx
 <Drawer id="drawer-dialog-example" isOpen={isOpen} onClose={() => setOpen(false)} closeOnBackdropClick={false}>
   {/* Drawer content goes here */}
 </Drawer>
@@ -49,7 +47,7 @@ By default, the drawer will close when the backdrop is clicked. You can disable 
 
 By default, the drawer will close when the escape key is pressed. You can disable this behavior by setting the `closeOnEscapeKeyDown` prop to `false`.
 
-```jsx
+```tsx
 <Drawer id="drawer-dialog-example" isOpen={isOpen} onClose={() => setOpen(false)} closeOnEscapeKeyDown={false}>
   {/* Drawer content goes here */}
 </Drawer>
@@ -77,22 +75,20 @@ and [escape hatches][readme-escape-hatches].
 
 The `DrawerCloseButton` component is a button that closes the drawer when clicked.
 
-```jsx
-import { DrawerCloseButton } from '@alma-oss/spirit-web-react';
-
-<DrawerCloseButton />;
+```tsx
+<DrawerCloseButton />
 ```
 
 Use `color` prop to change the color variant of the button. You can also change the size of the button using the `size` prop.
 
-```jsx
+```tsx
 <DrawerCloseButton color="secondary" size="large" />
 ```
 
 Size of the icon can be changed via `iconBoxSize` prop.
 This prop accepts a number or an object with responsive values.
 
-```jsx
+```tsx
 <DrawerCloseButton iconBoxSize={20} />
 <DrawerCloseButton iconBoxSize={{ mobile: 20, tablet: 30, desktop: 40 }} />
 ```
@@ -116,10 +112,8 @@ and [escape hatches][readme-escape-hatches].
 
 The `DrawerPanel` component is a container for the content that will be displayed in the drawer.
 
-```jsx
-import { DrawerPanel } from '@alma-oss/spirit-web-react';
-
-<DrawerPanel>{/* Drawer content goes here */}</DrawerPanel>;
+```tsx
+<DrawerPanel>{/* Drawer content goes here */}</DrawerPanel>
 ```
 
 ### API
@@ -131,28 +125,30 @@ import { DrawerPanel } from '@alma-oss/spirit-web-react';
 
 ## Full Example
 
-```jsx
-import { Drawer, DrawerPanel, DrawerCloseButton } from '@alma-oss/spirit-web-react';
+```tsx
+import React, { useState } from 'react';
+import { Button, Drawer, DrawerPanel, DrawerCloseButton } from '@alma-oss/spirit-web-react';
 
-const [isOpen, setIsOpen] = useState(false);
+export const Example = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpen = () => setIsOpen(true);
+  const handleClose = () => setIsOpen(false);
 
-const handleOpen = () => setIsOpen(true);
-const handleClose = () => setIsOpen(false);
+  return (
+    <>
+      <Button onClick={handleOpen} aria-controls="drawer-example">
+        Open Drawer
+      </Button>
 
-<Button onClick={handleOpen} aria-controls="drawer-example">
-  Open Drawer
-</Button>
-
-<Drawer
-  id="drawer-example"
-  isOpen={isOpen}
-  onClose={handleClose}
->
-  <DrawerPanel>
-    <DrawerCloseButton />
-    <div>Drawer content</div>
-  </DrawerPanel>
-</Drawer>
+      <Drawer id="drawer-example" isOpen={isOpen} onClose={handleClose}>
+        <DrawerPanel>
+          <DrawerCloseButton />
+          <div>Drawer content</div>
+        </DrawerPanel>
+      </Drawer>
+    </>
+  );
+};
 ```
 
 [dictionary-color]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#color

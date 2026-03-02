@@ -2,11 +2,11 @@
 
 Pills can be used to show count or label.
 
-```jsx
+```tsx
 import { Pill } from '@alma-oss/spirit-web-react';
 ```
 
-```jsx
+```tsx
   <Pill color="selected">333</Pill>
   <Pill color="neutral">333</Pill>
   <Pill color="success">3</Pill>

@@ -5,7 +5,7 @@ Additionally, it provides a common label, helper text, and validation messages f
 
 ## Basic Usage
 
-```jsx
+```tsx
 <FieldGroup id="example-field-group" label="Label">
   {/* Form fields… */}
 </FieldGroup>
@@ -21,7 +21,7 @@ the [`web` implementation][gh-web-field-group-html] of `FieldGroup`.
 
 To render FieldGroup as required, add the `isRequired` prop:
 
-```jsx
+```tsx
 <FieldGroup id="example-field-group" label="Label" isRequired>
   {/* Form fields… */}
 </FieldGroup>
@@ -34,7 +34,7 @@ fields themselves need to be marked as required using the `isRequired` prop.
 
 To visually hide the FieldGroup label, add the `isLabelHidden` prop:
 
-```jsx
+```tsx
 <FieldGroup id="example-field-group" label="Label" isLabelHidden>
   {/* Form fields… */}
 </FieldGroup>
@@ -46,7 +46,7 @@ To visually hide the FieldGroup label, add the `isLabelHidden` prop:
 
 To render helper text, add the `helperText` prop:
 
-```jsx
+```tsx
 <FieldGroup helperText="Helper text" id="example-field-group" label="Label">
   {/* Form fields… */}
 </FieldGroup>
@@ -56,7 +56,7 @@ To render helper text, add the `helperText` prop:
 
 To make the FieldGroup component fluid, add the `isFluid` prop:
 
-```jsx
+```tsx
 <FieldGroup id="example-field-group" label="Label" isFluid>
   {/* Form fields… */}
 </FieldGroup>
@@ -66,7 +66,7 @@ To make the FieldGroup component fluid, add the `isFluid` prop:
 
 To render FieldGroup as required, add the `isDisabled` prop:
 
-```jsx
+```tsx
 <FieldGroup id="example-field-group" label="Label" isDisabled>
   {/* Form fields… */}
 </FieldGroup>
@@ -83,7 +83,7 @@ Just like any other form component in Spirit, FieldGroup implements the
 
 Validation states can be presented either by adding the `validationState` attribute.
 
-```jsx
+```tsx
 <FieldGroup
   hasValidationIcon
   id="example-field-group"

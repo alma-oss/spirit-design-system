@@ -11,7 +11,7 @@ EmptyState component is a composition of the following components:
 
 The `EmptyState` component is a main container responsible for positioning the [EmptyStateSection](#unstable-emptystatesection) components or content.
 
-```jsx
+```tsx
 <EmptyState>
   <!-- EmptyStateSection components or content go here -->
 </EmptyState>
@@ -25,7 +25,7 @@ The component is based on the [Stack][stack] component and accepts all its prope
 
 The `EmptyStateSection` component is a container for the content of each section.
 
-```jsx
+```tsx
 <EmptyStateSection>
   <!-- Content goes here -->
 </EmptyStateSection>
@@ -37,7 +37,7 @@ The component is based on the [Stack][stack] component and accepts all its prope
 
 ## Full Example
 
-```jsx
+```tsx
 <EmptyState spacing="space-900">
   <EmptyStateSection>
     <Icon name="search" isSymbol />

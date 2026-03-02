@@ -6,13 +6,13 @@ The label could be hidden and show if the textarea is required.
 
 Basic example usage:
 
-```jsx
+```tsx
 <TextArea id="text-area-default" label="Label" name="textAreaDefault" />
 ```
 
 Advanced example usage:
 
-```jsx
+```tsx
 <TextArea
   hasValidationIcon
   helperText="custom helper text"
@@ -32,7 +32,7 @@ Advanced example usage:
 
 Example with Auto-Height Adjustment
 
-```jsx
+```tsx
 <TextArea id="example" label="Label" name="example" isAutoResizing autoResizingMaxHeight={500} />
 ```
 
@@ -68,7 +68,7 @@ and [escape hatches][readme-escape-hatches].
 
 Text field classes are fabricated using `useTextAreaStyleProps` hook. You can use it to create your own custom TextArea component.
 
-```jsx
+```tsx
 const CustomTextArea = (props: SpiritTextAreaProps): JSX.Element => {
   const { classProps, props: modifiedProps } = useTextAreaStyleProps(props);
 

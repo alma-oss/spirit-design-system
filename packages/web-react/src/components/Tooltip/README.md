@@ -4,30 +4,40 @@ Tooltips are used to provide additional information about an element when the us
 
 ## Tooltip
 
-```jsx
+```tsx
+import React, { useState } from 'react';
 import { Tooltip, TooltipTrigger, TooltipPopover } from '@alma-oss/spirit-web-react';
 
-const [open, setOpen] = React.useState(false);
+export const Example = () => {
+  const [open, setOpen] = useState(false);
 
-<Tooltip id="tooltip" isOpen={open} onToggle={setOpen}>
-  <TooltipTrigger>I have a tooltip!</TooltipTrigger>
-  <TooltipPopover>Hello there!</TooltipPopover>
-</Tooltip>;
+  return (
+    <Tooltip id="tooltip" isOpen={open} onToggle={setOpen}>
+      <TooltipTrigger>I have a tooltip!</TooltipTrigger>
+      <TooltipPopover>Hello there!</TooltipPopover>
+    </Tooltip>
+  );
+};
 ```
 
 ### Dismissible
 
 To display close button, add `isDismissible` prop to the `Tooltip` component.
 
-```jsx
-import { Tooltip, TooltipTrigger, TooltipPopover, Button } from '@alma-oss/spirit-web-react';
+```tsx
+import React, { useState } from 'react';
+import { Button, Tooltip, TooltipTrigger, TooltipPopover, Button } from '@alma-oss/spirit-web-react';
 
-const [open, setOpen] = React.useState(false);
+export const Example = () => {
+  const [open, setOpen] = useState(false);
 
-<Tooltip id="tooltip-dismissible" isOpen={open} onToggle={setOpen} placement="right" isDismissible>
-  <TooltipTrigger elementType={Button}>I have a tooltip 😎</TooltipTrigger>
-  <TooltipPopover>Close me</TooltipPopover>
-</Tooltip>;
+  return (
+    <Tooltip id="tooltip-dismissible" isOpen={open} onToggle={setOpen} placement="right" isDismissible>
+      <TooltipTrigger elementType={Button}>I have a tooltip 😎</TooltipTrigger>
+      <TooltipPopover>Close me</TooltipPopover>
+    </Tooltip>
+  );
+};
 ```
 
 ### API
@@ -67,22 +77,27 @@ The `focus` trigger is useful for accessibility, showing the tooltip when users 
 
 👉 'hover' on its own will result in tooltips that cannot be triggered via the keyboard, and should only be used if alternative methods for conveying the same information for keyboard users is present.
 
-```jsx
-import { Tooltip, TooltipTrigger, TooltipPopover, Button } from '@alma-oss/spirit-web-react';
+```tsx
+import React, { useState } from 'react';
+import { Button, Tooltip, TooltipTrigger, TooltipPopover, Button } from '@alma-oss/spirit-web-react';
 
-const [open, setOpen] = React.useState(false);
+export const Example = () => {
+  const [open, setOpen] = useState(false);
 
-<Tooltip
-  id="TooltipTrigger"
-  isOpen={open}
-  onToggle={setOpen}
-  trigger={['click']} // Only `click` trigger is active now.
->
-  <TooltipTrigger elementType={Button}>I have a tooltip 😎</TooltipTrigger>
-  <TooltipPopover>
-    You can click on the link: <a href="#">Link to unknown</a>
-  </TooltipPopover>
-</Tooltip>;
+  return (
+    <Tooltip
+      id="TooltipTrigger"
+      isOpen={open}
+      onToggle={setOpen}
+      trigger={['click']} // Only `click` trigger is active now.
+    >
+      <TooltipTrigger elementType={Button}>I have a tooltip 😎</TooltipTrigger>
+      <TooltipPopover>
+        You can click on the link: <a href="#">Link to unknown</a>
+      </TooltipPopover>
+    </Tooltip>
+  );
+};
 ```
 
 ## API

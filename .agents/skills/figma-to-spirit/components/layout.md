@@ -53,7 +53,7 @@ DO NOT set these props when they match component defaults:
 
 **Examples:**
 
-```jsx
+```tsx
 // WRONG - setting default values
 <Flex direction="horizontal" alignmentX="stretch" alignmentY="stretch">
   <Button>Click me</Button>
@@ -116,7 +116,7 @@ Single-axis alignment and distribution utility for arranging elements horizontal
 
 1. **Using deprecated direction values**
 
-   ```jsx
+   ```tsx
    // WRONG - deprecated (will be removed in future versions)
    <Flex direction="row" />
    <Flex direction="column" />
@@ -130,7 +130,7 @@ Single-axis alignment and distribution utility for arranging elements horizontal
 
 2. **Setting default direction value**
 
-   ```jsx
+   ```tsx
    // WRONG - horizontal is the default, don't set it
    <Flex direction="horizontal" spacing="space-600">
      <Icon name="info" />
@@ -154,7 +154,7 @@ Single-axis alignment and distribution utility for arranging elements horizontal
 
 Check if Figma children have `w-full` (full width) before choosing alignment:
 
-```jsx
+```tsx
 // WRONG - no alignmentX, children stretch unexpectedly
 <Flex direction="vertical" spacing="space-800">
   <Button>Click me</Button>
@@ -175,7 +175,7 @@ Check if Figma children have `w-full` (full width) before choosing alignment:
 
 When Figma shows children with `w-full` or `shrink-0 w-full`, parent must use `alignmentX="stretch"`:
 
-```jsx
+```tsx
 // WRONG - alignmentX="left" prevents children from filling width
 <Flex direction="vertical" spacing="space-1000" alignmentX="left">
   <Box UNSAFE_style={{ maxWidth: "800px" }}>...</Box>  {/* Won't stretch */}
@@ -191,7 +191,7 @@ When Figma shows children with `w-full` or `shrink-0 w-full`, parent must use `a
 
 5. **Using CSS values instead of Spirit values**
 
-   ```jsx
+   ```tsx
    // WRONG
    <Flex alignmentX="flex-start" alignmentY="flex-end" />
 
@@ -201,7 +201,7 @@ When Figma shows children with `w-full` or `shrink-0 w-full`, parent must use `a
 
 6. **Using numeric spacing instead of tokens**
 
-   ```jsx
+   ```tsx
    // WRONG
    <Flex spacing={800} />
    <Flex spacing="800" />
@@ -214,7 +214,7 @@ When Figma shows children with `w-full` or `shrink-0 w-full`, parent must use `a
 
    The `get_design_context` response includes the real gap for each layout element (e.g. Tailwind `className` with `gap-[var(--global/spacing/space-700,16px)]` or `gap-[var(--global\/spacing\/space-700,16px)]`). Extract the token (e.g. `space-700`) from that response and use it for the corresponding Flex. Do not substitute a "typical" value like `space-800` when the design context clearly shows `space-700`.
 
-   ```jsx
+   ```tsx
    // WRONG - design context shows gap space-700 for Content frame
    <Flex direction="vertical" alignmentX="left" spacing="space-800">
 
@@ -226,7 +226,7 @@ When Figma shows children with `w-full` or `shrink-0 w-full`, parent must use `a
 
 Always check Figma for padding values (`pr`, `pl`, `pt`, `pb`, `px`, `py`). When a Flex needs padding, use `Flex elementType={Box}`:
 
-```jsx
+```tsx
 // WRONG - Figma shows pr-[var(--global/spacing/space-1000,32px)] but no padding applied
 <Flex direction="vertical" spacing="space-800" alignmentX="left">
   <Heading elementType="h2" marginBottom="space-0">Title</Heading>
@@ -260,7 +260,7 @@ For **horizontal** Flex (`direction="horizontal"`):
 
 ### Examples
 
-```jsx
+```tsx
 // Horizontal layout with items centered vertically
 <Flex direction="horizontal" alignmentY="center" spacing="space-600">
   <Icon name="info" />
@@ -335,7 +335,7 @@ Use `GridItem` for custom column/row spanning:
 
 1. **Nesting Flex rows inside Grid**
 
-   ```jsx
+   ```tsx
    // WRONG - Grid handles rows automatically
    <Grid cols={2}>
      <Flex direction="horizontal">
@@ -359,7 +359,7 @@ Use `GridItem` for custom column/row spanning:
 
 2. **Not setting alignmentX="stretch" for fill-width items**
 
-   ```jsx
+   ```tsx
    // WRONG - items may not fill grid cells
    <Grid cols={3}>
      <Box backgroundColor="primary">Box 1</Box>
@@ -377,7 +377,7 @@ Use `GridItem` for custom column/row spanning:
 
 3. **Using Grid for max-width centered content**
 
-   ```jsx
+   ```tsx
    // WRONG - Grid doesn't control container width
    <Grid cols={1} alignmentX="center">
      <Box>Centered content</Box>
@@ -391,7 +391,7 @@ Use `GridItem` for custom column/row spanning:
 
 ### Examples
 
-```jsx
+```tsx
 // Basic 3-column grid
 <Grid cols={3} spacing="space-800" alignmentX="stretch" alignmentY="top">
   <Card>Card 1</Card>
@@ -458,7 +458,7 @@ Vertical flow utility with consistent spacing and optional dividers.
 
 ### Examples
 
-```jsx
+```tsx
 // Simple stack with spacing
 <Stack spacing="space-800">
   <Text>Item 1</Text>
@@ -530,7 +530,7 @@ Neutral container for visual styling (background, border, padding) without layou
 
 1. **Using UNSAFE_style for width**
 
-   ```jsx
+   ```tsx
    // WRONG
    <Box UNSAFE_style={{ width: "100%" }}>Content</Box>
 
@@ -542,7 +542,7 @@ Neutral container for visual styling (background, border, padding) without layou
 
 2. **Not using elementType={Flex} when layout is needed**
 
-   ```jsx
+   ```tsx
    // WRONG - no spacing control
    <Box backgroundColor="primary" padding="space-800">
      <Heading>Title</Heading>
@@ -565,7 +565,7 @@ Neutral container for visual styling (background, border, padding) without layou
 
 3. **Guessing color tokens**
 
-   ```jsx
+   ```tsx
    // WRONG - always read exact token from Figma
    <Box backgroundColor="accent-subtle" />
 
@@ -579,7 +579,7 @@ Neutral container for visual styling (background, border, padding) without layou
 
    Do not wrap TextField (or other form controls) in a Box with `UNSAFE_style` for flex/width unless Figma explicitly shows a custom width for that control. Use the component's default width.
 
-   ```jsx
+   ```tsx
    // WRONG - unnecessary Box wrapper with custom flex
    <Flex direction="horizontal" alignmentY="center" spacing="space-600">
      <Box UNSAFE_style={{ minWidth: 0, flex: "1 1 200px" }}>
@@ -599,7 +599,7 @@ Neutral container for visual styling (background, border, padding) without layou
 
 Always check Figma for padding values (pr, pl, pt, pb, px, py):
 
-```jsx
+```tsx
 // WRONG - Figma shows pr-[var(--global/spacing/space-1000,32px)] but padding is missing
 <Flex direction="horizontal" spacing="space-800">
   <Flex direction="vertical" alignmentX="left">  {/* Missing paddingRight! */}
@@ -628,7 +628,7 @@ Always check Figma for padding values (pr, pl, pt, pb, px, py):
 
 When Figma shows an autolayout with both styling (background, border, padding) AND layout needs (spacing, alignment):
 
-```jsx
+```tsx
 <Box
   elementType={Flex}
   backgroundColor="accent-02-subtle"
@@ -650,7 +650,7 @@ When Figma shows an autolayout with both styling (background, border, padding) A
 
 When you need to add padding to a Flex component:
 
-```jsx
+```tsx
 <Flex elementType={Box} direction="vertical" spacing="space-800" padding="space-900" alignmentX="left">
   {/* Content */}
 </Flex>
@@ -671,7 +671,7 @@ When you need to add padding to a Flex component:
 
 Use `Flex elementType={Box}` to combine layout with padding:
 
-```jsx
+```tsx
 // Figma shows: autolayout with pr-[var(--global/spacing/space-1000,32px)]
 <Flex elementType={Box} direction="vertical" spacing="space-800" paddingRight="space-1000" alignmentX="left">
   <Heading elementType="h2" marginBottom="space-0">
@@ -740,7 +740,7 @@ Do not use a single Section with default container when the design has multiple 
 
    When Section uses its default container (one inner Container), do not add another Container.
 
-   ```jsx
+   ```tsx
    // WRONG - Section already includes one Container
    <Section>
      <Container>
@@ -758,7 +758,7 @@ Do not use a single Section with default container when the design has multiple 
 
 2. **Not using containerProps for Container sizing (when Section has a single container)**
 
-   ```jsx
+   ```tsx
    // WRONG
    <Section>
      <Container size="medium">
@@ -776,7 +776,7 @@ Do not use a single Section with default container when the design has multiple 
 
    The Container `size` in `containerProps` must come from the **Figma layer name**. If the layer is named "Container XLarge", use `size: "xlarge"`; if "Container Medium", use `size: "medium"`. **When the layer is "Container XLarge", omit `containerProps` entirely**—xlarge is the default Container size.
 
-   ```jsx
+   ```tsx
    // WRONG - Figma layer is named "Container XLarge" but medium was used
    <Section size="xlarge" containerProps={{ size: "medium" }}>
 
@@ -789,7 +789,7 @@ Do not use a single Section with default container when the design has multiple 
 
 ### Examples
 
-```jsx
+```tsx
 // Basic section with background
 <Section backgroundColor="secondary" size="large">
   <Heading elementType="h2">Section Title</Heading>
@@ -855,7 +855,7 @@ Responsive content wrapper that centers content and constrains width.
 
 ### Examples
 
-```jsx
+```tsx
 // Usually accessed via Section
 <Section containerProps={{ size: "large" }}>
   {/* Content constrained to "large" width */}
@@ -904,7 +904,7 @@ When Figma shows a `max-width` on a layer, choose the approach based on what the
 
 Use when the max-width applies to a main content area inside a Section:
 
-```jsx
+```tsx
 <Section size="xlarge" containerProps={{ size: 'medium' }}>
   {/* Content constrained to medium width, centered */}
 </Section>
@@ -920,7 +920,7 @@ Use `UNSAFE_style={{ maxWidth: "Xpx" }}` **only when**:
 
 **CRITICAL**: Apply UNSAFE_style to the INNERMOST wrapper that contains only the content needing the constraint:
 
-```jsx
+```tsx
 // WRONG - maxWidth on outer wrapper affects stats grid too
 <Flex
   direction="vertical"

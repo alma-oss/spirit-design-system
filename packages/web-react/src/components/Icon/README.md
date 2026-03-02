@@ -29,7 +29,7 @@ So it will not be automatically installed with `@alma-oss/spirit-web-react`.
 To ensure the `Icon` component functions as expected, wrap your application or the component tree where Icon is used with the `IconsProvider`.
 You need to pass the icon set to the provider as its value.
 
-```jsx
+```tsx
 import { Icon, IconsProvider } from '@alma-oss/spirit-web-react';
 import icons from '@alma-oss/spirit-icons/icons';
 
@@ -38,7 +38,7 @@ import icons from '@alma-oss/spirit-icons/icons';
 
 ### Example
 
-```jsx
+```tsx
 import { Icon, IconsProvider } from '@alma-oss/spirit-web-react';
 import icons from '@alma-oss/spirit-icons/icons';
 
@@ -55,7 +55,7 @@ Available colors are emotion colors, text colors, and the accent colors defined 
 
 ### Example
 
-```jsx
+```tsx
 import { Icon, IconsProvider } from '@alma-oss/spirit-web-react';
 import icons from '@alma-oss/spirit-icons/icons';
 
@@ -66,7 +66,7 @@ import icons from '@alma-oss/spirit-icons/icons';
 
 ## Full Example
 
-```jsx
+```tsx
 import { Icon, IconsProvider } from '@alma-oss/spirit-web-react';
 import icons from '@alma-oss/spirit-icons/icons';
 

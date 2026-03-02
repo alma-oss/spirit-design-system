@@ -6,7 +6,7 @@ where content needs to be organized in a uniform grid pattern.
 
 ## Basic Usage
 
-```jsx
+```tsx
 <Matrix>{/* Content items */}</Matrix>
 ```
 
@@ -23,25 +23,25 @@ accepts either a spacing token (e.g. `space-100`) or an object with [breakpoint]
 
 You can set custom spacing in the horizontal (x-axis) and vertical (y-axis) direction separately using the `spacingX` and `spacingY` props.
 
-```jsx
+```tsx
 <Matrix spacing="space-1200">{/* Content items */}</Matrix>
 ```
 
 ### Custom Responsive Spacing
 
-```jsx
+```tsx
 <Matrix spacing={{ mobile: 'space-400', tablet: 'space-800' }}>{/* Content items */}</Matrix>
 ```
 
 ### Custom Responsive Horizontal (x-Axis) Spacing
 
-```jsx
+```tsx
 <Matrix spacingX={{ mobile: 'space-400', tablet: 'space-800' }}>{/* Content items */}</Matrix>
 ```
 
 ### Custom Responsive Vertical (y-Axis) Spacing
 
-```jsx
+```tsx
 <Matrix spacingY={{ mobile: 'space-400', tablet: 'space-800' }}>{/* Content items */}</Matrix>
 ```
 
@@ -49,7 +49,7 @@ You can set custom spacing in the horizontal (x-axis) and vertical (y-axis) dire
 
 For scrollable Matrix, you can use the `ScrollView` component to wrap the `Matrix` component. This allows the content to be scrolled horizontally.
 
-```jsx
+```tsx
 <ScrollView direction="horizontal">
   <Matrix>{/* Content items */}</Matrix>
 </ScrollView>
@@ -62,7 +62,7 @@ You need to explicitly set the `itemRows` prop to specify the number of items pe
 
 By default, the number of `rows` in the `Matrix` component is automatically calculated based on the `number of items`, `itemRows`, and `cols`. The formula used is `number of items * itemRows / cols`.
 
-```jsx
+```tsx
 <Matrix cols={{ mobile: 1, tablet: 2 }} itemRows={3}>
   {/* Content items */}
 </Matrix>
@@ -70,7 +70,7 @@ By default, the number of `rows` in the `Matrix` component is automatically calc
 
 However, you can also explicitly set the `rows` prop if you want to control the number of rows manually.
 
-```jsx
+```tsx
 <Matrix cols={{ mobile: 1, tablet: 2 }} itemRows={3} rows={{ mobile: 12, tablet: 6 }}>
   {/* Content items */}
 </Matrix>

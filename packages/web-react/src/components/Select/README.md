@@ -4,7 +4,7 @@ This is React implementation of the [Select][select] component.
 
 Basic example usage:
 
-```jsx
+```tsx
 <Select id="select-default" label="Label" name="selectDefault">
   <option value="" selected>
     Placeholder
@@ -16,7 +16,7 @@ Basic example usage:
 
 Advanced example usage:
 
-```jsx
+```tsx
 <Select
   hasValidationIcon
   id="select-advanced"
@@ -66,7 +66,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 
 Select classes are fabricated using `useSelectStyleProps` hook. You can use it to create your own custom Select component.
 
-```jsx
+```tsx
 const CustomSelect = (props: SpiritSelectProps): JSX.Element => {
   const { classProps, props: modifiedProps } = useSelectStyleProps(props);
   const { styleProps, props: transferProps } = useStyleProps(restProps);

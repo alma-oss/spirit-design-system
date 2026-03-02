@@ -14,10 +14,8 @@ Timeline is a composition of several subcomponents:
 
 Timeline is the main container of the composition.
 
-```jsx
-import { Timeline } from '@alma-oss/spirit-web-react';
-
-<Timeline>{/* TimelineStep content */}</Timeline>;
+```tsx
+<Timeline>{/* TimelineStep content */}</Timeline>
 ```
 
 ℹ️ By default, Timeline uses the `<ol>` element for semantic ordered lists.
@@ -30,7 +28,7 @@ The `size` affects both the marker container dimensions and the marker content.
 
 The default size is `small`, so you can omit the prop if you want to use the default size.
 
-```jsx
+```tsx
 <Timeline size="medium">
   {/* TimelineStep content */}
 </Timeline>
@@ -42,7 +40,7 @@ The default size is `small`, so you can omit the prop if you want to use the def
 
 You can set different marker sizes for different [breakpoints][dictionary-breakpoint] using a responsive object:
 
-```jsx
+```tsx
 <Timeline size={{ mobile: 'small', tablet: 'medium', desktop: 'large' }}>{/* TimelineStep content */}</Timeline>
 ```
 
@@ -70,7 +68,7 @@ and [escape hatches][readme-escape-hatches].
 
 Individual timeline entry that contains a marker and optional content areas.
 
-```jsx
+```tsx
 <TimelineStep>
   {/* TimelineMarker */}
   {/* TimelineHeading */}
@@ -96,7 +94,7 @@ and [escape hatches][readme-escape-hatches].
 
 Container for the visual marker (number, dot, or icon). Supports multiple marker types:
 
-```jsx
+```tsx
 <TimelineMarker>1</TimelineMarker>
 ```
 
@@ -108,7 +106,7 @@ The marker includes `aria-hidden="true"` as its content is decorative and alread
 
 Currently, the TimelineMarker visually supports only numbers up to 99 (two digits).
 
-```jsx
+```tsx
 <TimelineMarker variant="number">1</TimelineMarker>
 ```
 
@@ -116,13 +114,13 @@ Currently, the TimelineMarker visually supports only numbers up to 99 (two digit
 
 Dot markers are purely visual and do not accept children.
 
-```jsx
+```tsx
 <TimelineMarker variant="dot" />
 ```
 
 #### Icon Markers
 
-```jsx
+```tsx
 <TimelineMarker variant="icon">
   <Icon name="search" />
 </TimelineMarker>
@@ -132,7 +130,7 @@ Dot markers are purely visual and do not accept children.
 
 TimelineMarker supports design token-based color props for consistent theming across background, border, and text. Background and border color props are only applied when using `variant="number"` or `variant="dot"`, while text color can be used with any marker type. Use the available color values to customize the marker's appearance.
 
-```jsx
+```tsx
 <TimelineMarker
   backgroundColor="accent-01-subtle"
   borderColor="accent-01-basic"
@@ -151,7 +149,7 @@ TimelineMarker supports design token-based color props for consistent theming ac
 
 ℹ️ When using icons as markers, `backgroundColor` and `borderColor` props are ignored, but `textColor` can still be used for any text content. Icon color can also be controlled by the Icon component's `color` prop.
 
-```jsx
+```tsx
 <TimelineMarker variant="icon">
   <Icon name="search" color="01" />
 </TimelineMarker>
@@ -183,7 +181,7 @@ and [escape hatches][readme-escape-hatches].
 
 Optional heading section for the timeline item.
 
-```jsx
+```tsx
 <TimelineHeading>
   <Heading elementType="h3" size="small" emphasis="semibold">
     Step Title
@@ -193,7 +191,7 @@ Optional heading section for the timeline item.
 
 **Timeline Heading with Link**
 
-```jsx
+```tsx
 <TimelineHeading>
   <Heading elementType="h3" size="small" emphasis="semibold">
     <Link href="#">Step Title</Link>
@@ -215,7 +213,7 @@ and [escape hatches][readme-escape-hatches].
 
 Optional main content wrapper for text, buttons, and other elements.
 
-```jsx
+```tsx
 <TimelineContent>
   <Text textColor="secondary" marginBottom="space-800">
     Step description content goes here.
@@ -238,7 +236,7 @@ and [escape hatches][readme-escape-hatches].
 
 ## Basic Usage
 
-```jsx
+```tsx
 import {
   Heading,
   Text,

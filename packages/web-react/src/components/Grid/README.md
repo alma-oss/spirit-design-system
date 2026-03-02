@@ -4,7 +4,7 @@ Use Grid to build multiple column layouts. This Grid works on twelve column syst
 
 **Custom layout**
 
-```jsx
+```tsx
 <Grid cols={{ mobile: 2, tablet: 3, desktop: 4 }}>
   <span>col 1</span>
   <span>col 2</span>
@@ -24,7 +24,7 @@ You can set custom spacing in the horizontal (x-axis) and vertical (y-axis) dire
 
 Custom spacing:
 
-```jsx
+```tsx
 <Grid spacing="space-1200">
   <!-- Grid content -->
 </Grid>
@@ -32,7 +32,7 @@ Custom spacing:
 
 Custom responsive spacing:
 
-```jsx
+```tsx
 <Grid spacing={{ mobile: 'space-400', tablet: 'space-800' }}>
   <!-- Grid content -->
 </Grid>
@@ -40,7 +40,7 @@ Custom responsive spacing:
 
 Custom horizontal (x-axis) spacing:
 
-```jsx
+```tsx
 <Grid spacingX={{ mobile: 'space-400', tablet: 'space-800' }}>
   <!-- Grid content -->
 </Grid>
@@ -48,7 +48,7 @@ Custom horizontal (x-axis) spacing:
 
 Custom vertical (y-axis) spacing:
 
-```jsx
+```tsx
 <Grid spacingY={{ mobile: 'space-400', tablet: 'space-800' }}>
   <!-- Grid content -->
 </Grid>
@@ -66,7 +66,7 @@ Both props can be set using either fixed values or objects with breakpoint-speci
 
 Horizontal alignment:
 
-```jsx
+```tsx
 <Grid alignmentX="left">
   <!-- Grid content -->
 </Grid>
@@ -74,7 +74,7 @@ Horizontal alignment:
 
 Horizontal and vertical alignment:
 
-```jsx
+```tsx
 <Grid alignmentX="left" alignmentY="top">
   <!-- Grid content -->
 </Grid>
@@ -82,7 +82,7 @@ Horizontal and vertical alignment:
 
 Responsive horizontal and vertical alignment:
 
-```jsx
+```tsx
 <Grid
   alignmentX={{ mobile: 'left', tablet: 'center', desktop: 'right' }}
   alignmentY={{ mobile: 'top', tablet: 'center', desktop: 'bottom' }}
@@ -139,7 +139,7 @@ These props control the placement of grid items within a CSS Grid layout by spec
 
 #### Grid Placement Example
 
-```jsx
+```tsx
 <GridItem
   columnStart={2}
   columnEnd={5} // or columnEnd="span 3"
@@ -160,7 +160,7 @@ These props align with their respective CSS Grid properties, providing precise c
 
 Basic example usage:
 
-```jsx
+```tsx
 <Grid>
   <GridItem columnStart={1} columnEnd={4}>
     1–4
@@ -180,7 +180,7 @@ Pass an object to props to set different values for different breakpoints. The v
 be applied from mobile to desktop and if not set for a breakpoint, the value from the
 previous breakpoint will be used.
 
-```jsx
+```tsx
 <Grid elementType="ul">
   <GridItem elementType="li" columnStart={1} columnEnd={4}>
     1–4

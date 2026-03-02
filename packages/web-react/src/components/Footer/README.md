@@ -16,7 +16,7 @@ The Footer supports several ready-to-use building blocks:
 
 This is how all supported building blocks of the Footer build up the complete composition:
 
-```jsx
+```tsx
 <Footer>
   <Container>
     {/* Grid with navigation links */}
@@ -44,7 +44,7 @@ Navigation links are structured in sections with a headline and a [Stack][stack]
 provide a semantic connection between the headline and the navigation component. Just make sure the `id` attribute of
 the `<Heading>` component matches the value of the `aria-labelledby` attribute of the `<nav>` element and all `id`s are unique.
 
-```jsx
+```tsx
 <nav aria-labelledby="footer-navigation-section">
   <Heading id="footer-navigation-section" elementType="h3" size="xsmall" emphasis="semibold" marginBottom="space-700">
     Section headline
@@ -69,7 +69,7 @@ You can use as many navigation sections like this as you need and wrap them in a
 
 This section is optional and consists of a [Grid][grid] layout with up to three (also optional) columns:
 
-```jsx
+```tsx
 <Grid
   cols={{ mobile: 1, desktop: 3 }}
   alignmentX={{ mobile: 'center', desktop: 'stretch' }}
@@ -93,7 +93,7 @@ Use the [Product Logo][product-logo] component to display the logo of your produ
 
 Use the secondary [ButtonLink][buttonlink] component to create social media links inside a [Flex][flex] container.
 
-```jsx
+```tsx
 <Flex elementType="ul" alignmentX="center" alignmentY="center">
   {/* Repeat the `<li>` block for each social media link. */}
   <li>
@@ -114,7 +114,7 @@ layout.
 
 This section is optional and consists of a [Flex][flex] layout with secondary links.
 
-```jsx
+```tsx
 <nav aria-label="Secondary links">
   <Flex
     elementType="ul"
@@ -141,7 +141,7 @@ When you have multiple distinct footers (e.g., product and corporate), you can u
 
 This pattern provides better HTML semantics and accessibility, as each section can have its own structure and styling:
 
-```jsx
+```tsx
 <footer>
   <Footer elementType="section">{/* Product footer */}</Footer>
   <section>{/* Corporate footer */}</section>
@@ -159,7 +159,7 @@ This pattern provides better HTML semantics and accessibility, as each section c
 
 You can set the text alignment of the Footer using the `textAlignment` prop.
 
-```jsx
+```tsx
 <Footer textAlignment="center">
   {/* Footer content */}
 </Footer>
@@ -170,13 +170,13 @@ You can set the text alignment of the Footer using the `textAlignment` prop.
 
 You can also define responsive values for the `textAlignment` prop using an object:
 
-```jsx
+```tsx
 <Footer textAlignment={{ mobile: 'center', tablet: 'right', desktop: 'left' }}>{/* Footer content */}</Footer>
 ```
 
 ## Full Example
 
-```jsx
+```tsx
 <Footer>
   <Container>
     {/* Grid with navigation links */}

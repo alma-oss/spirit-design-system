@@ -14,7 +14,7 @@ The `UNSTABLE_Header` is a composition of several subcomponents:
 
 The `UNSTABLE_Header` component is a main wrapper which provides mainly the visual for the Header.
 
-```jsx
+```tsx
 import { UNSTABLE_Header } from '@alma-oss/spirit-web-react';
 
 <UNSTABLE_Header>{/* Content go here */}</UNSTABLE_Header>;
@@ -22,7 +22,7 @@ import { UNSTABLE_Header } from '@alma-oss/spirit-web-react';
 
 You can set `hasBottomDivider` prop to add a bottom divider to the Header.
 
-```jsx
+```tsx
 import { UNSTABLE_Header } from '@alma-oss/spirit-web-react';
 
 <UNSTABLE_Header hasBottomDivider>{/* Content go here */}</UNSTABLE_Header>;
@@ -45,7 +45,7 @@ and [escape hatches][readme-escape-hatches].
 
 The `UNSTABLE_HeaderLogo` component is a container for the logo.
 
-```jsx
+```tsx
 import { UNSTABLE_HeaderLogo } from '@alma-oss/spirit-web-react';
 
 <UNSTABLE_HeaderLogo>{/* Content go here */}</UNSTABLE_HeaderLogo>;
@@ -55,7 +55,7 @@ It inherits the `UNSTABLE_Header` height and sets the logo wrapper height to the
 
 You can use the `ProductLogo` component inside the `UNSTABLE_HeaderLogo` component.
 
-```jsx
+```tsx
 <UNSTABLE_HeaderLogo href="#" aria-label="JobBoard homepage">
   <ProductLogo>{/* Logo go here */}</ProductLogo>
 </UNSTABLE_HeaderLogo>
@@ -81,7 +81,7 @@ This can be achieved by:
 
 Use [`Container`][web-react-container] and [`Flex`][web-react-flex] components to create a layout for the Header content.
 
-```jsx
+```tsx
 <UNSTABLE_Header>
   <Container>
     <Flex alignmentX="left" alignmentY="center">
@@ -99,7 +99,7 @@ This way you can easily modify the layout of the Header content.
 
 For example you can make the content centered by setting the `Flex` alignment properties to center.
 
-```jsx
+```tsx
 <UNSTABLE_Header>
   <Flex alignmentX="center" alignmentY="center">
     <UNSTABLE_HeaderLogo href="#" aria-label="JobBoard homepage">
@@ -111,7 +111,7 @@ For example you can make the content centered by setting the `Flex` alignment pr
 
 Or you can modify the gaps between the content by setting the `Flex` `spacing` property.
 
-```jsx
+```tsx
 <UNSTABLE_Header>
   <Container>
     <Flex alignmentX="left" alignmentY="center" spacing="space-500">
@@ -127,7 +127,7 @@ Or you can modify the gaps between the content by setting the `Flex` `spacing` p
 
 If you need the whole Header fluid you can do it by adding the `isFluid` prop to the `Container`.
 
-```jsx
+```tsx
 <UNSTABLE_Header>
   <Container isFluid>
     <Flex alignmentX="left" alignmentY="center" spacing="space-500">
@@ -148,7 +148,7 @@ action height to the same value.
 
 Use the composition mentioned above to create the layout you need.
 
-```jsx
+```tsx
 <UNSTABLE_Header>
   <Container>
     <Flex alignmentX="left" alignmentY="center" spacing="space-1000">

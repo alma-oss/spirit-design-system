@@ -4,13 +4,9 @@
 
 ### Basic
 
-```jsx
-import { Breadcrumbs } from '@alma-oss/spirit-web-react';
-```
-
 Define breadcrumb items as an array type of `BreadcrumbsItem[]`.
 
-```jsx
+```tsx
 const items = [
   {
     title: 'Root',
@@ -33,7 +29,7 @@ const items = [
 
 Simply pass the breadcrumbs array as a prop:
 
-```jsx
+```tsx
 <Breadcrumbs items={items} goBackTitle="Custom back link translation" />
 ```
 
@@ -41,7 +37,7 @@ Simply pass the breadcrumbs array as a prop:
 
 Use custom content for the ordered list as component's children instead of passing breadcrumb items array via props:
 
-```jsx
+```tsx
 <Breadcrumbs>
   {items.map((item) => (
     <li key={`BreadcrumbsItem_${item.title}`}>
@@ -70,7 +66,7 @@ and [escape hatches][readme-escape-hatches].
 
 Use the `BreadcrumbsItem` component for the ordered list as the component's children instead of passing the breadcrumb items array via props:
 
-```jsx
+```tsx
 <Breadcrumbs>
   {items.map((item, index) => (
     <BreadcrumbsItem key={`BreadcrumbsItem_${item.title}`} isCurrent={items.length === index - 1} href={item.url}>

@@ -8,7 +8,7 @@ limit using inline styles for demonstration purposes only.
 
 ### Default (Vertical)
 
-```jsx
+```tsx
 <div style={{ height: '250px' }}>
   <ScrollView>
     <p>
@@ -26,7 +26,7 @@ limit using inline styles for demonstration purposes only.
 
 ### Horizontal
 
-```jsx
+```tsx
 <ScrollView direction="horizontal">
   <p className="py-700" style={{ whiteSpace: 'nowrap' }}>
     Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
@@ -47,19 +47,19 @@ Shadows are used by default.
 
 You can use borders instead:
 
-```jsx
+```tsx
 <ScrollView overflowDecorators="borders" />
 ```
 
 Or both:
 
-```jsx
+```tsx
 <ScrollView overflowDecorators="both" />
 ```
 
 ## Hiding the Scrollbar
 
-```jsx
+```tsx
 <ScrollView isScrollbarDisabled />
 ```
 
@@ -68,7 +68,7 @@ Or both:
 Setting `hasArrows` to `true` adds arrow buttons at the start and end of the scrollable area.
 Clicking an arrow moves the viewport by `arrowsScrollStep` value in the ScrollView's direction.
 
-```jsx
+```tsx
 <ScrollView hasArrows arrowsScrollStep={200}>
   {/* scrollable content */}
 </ScrollView>
@@ -87,7 +87,7 @@ Default labels are automatically set based on the `direction` prop:
 
 You can override all labels:
 
-```jsx
+```tsx
 <ScrollView
   hasArrows
   direction="horizontal"
@@ -104,7 +104,7 @@ You can override all labels:
 
 Or override only one label:
 
-```jsx
+```tsx
 <ScrollView hasArrows direction="horizontal" ariaLabelArrows={{ start: 'Custom scroll left' }}>
   {/* scrollable content */}
 </ScrollView>

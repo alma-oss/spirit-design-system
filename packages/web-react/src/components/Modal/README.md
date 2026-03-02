@@ -37,7 +37,7 @@ Modal is a composition of several subcomponents:
 Modal establishes the top layer with a backdrop. Under the hood it uses the [`<dialog>` element][mdn-dialog] which
 provides several accessibility advantages.
 
-```jsx
+```tsx
 <Modal id="modal-example">…</Modal>
 ```
 
@@ -52,7 +52,7 @@ Modal can be aligned to the center (default), top, or bottom. These values come 
 
 Example:
 
-```jsx
+```tsx
 <Modal alignmentY="top" id="modal-example">
   …
 </Modal>
@@ -80,7 +80,7 @@ and [escape hatches][readme-escape-hatches].
 
 ModalDialog is the actual dialog window, a place for the header, body, and footer of the dialog.
 
-```jsx
+```tsx
 <ModalDialog>…</ModalDialog>
 ```
 
@@ -90,7 +90,7 @@ Modal can also contain interactive content like forms. For such cases, you may f
 element with the attribute `method="dialog"`. Buttons with `type="submit"` then [handle both][mdn-dialog-form] saving
 the state of the form and closing the dialog.
 
-```jsx
+```tsx
 <ModalDialog elementType="form" method="dialog" name="modal-example">
   …<Button type="submit">Save</Button>
 </ModalDialog>
@@ -107,7 +107,7 @@ boundaries.
 
 On mobile screens, Modal can be docked to the bottom of the viewport using the `isDockedOnMobile` option.
 
-```jsx
+```tsx
 <ModalDialog isDockedOnMobile>…</ModalDialog>
 ```
 
@@ -116,7 +116,7 @@ On mobile screens, Modal can be docked to the bottom of the viewport using the `
 By default, the docked dialog on mobile screens shrinks to fit the height of its content
 (if smaller than the viewport). Use the `isExpandedOnMobile` option to expand the dialog on mobile.
 
-```jsx
+```tsx
 <ModalDialog isDockedOnMobile isExpandedOnMobile>
   …
 </ModalDialog>
@@ -147,7 +147,7 @@ ModalHeader contains the title of the dialog and the close button.
 ℹ️ We strongly recommend providing the ModalHeader in every use case to ensure the dialog is accessible
 and allows users to easily close it.
 
-```jsx
+```tsx
 <ModalHeader>Modal Title</ModalHeader>
 ```
 
@@ -157,7 +157,7 @@ Even in cases where you don't need the title to be visible you should provide an
 accessible name for the dialog, e.g. using the `aria-label` attribute on
 `<Modal>` component:
 
-```jsx
+```tsx
 <Modal id="modal-example" aria-label="Accessible Modal Title">
   <ModalDialog>
     <ModalHeader />
@@ -170,7 +170,7 @@ accessible name for the dialog, e.g. using the `aria-label` attribute on
 
 To render the `ModalHeader` component without the close button set the `hasCloseButton` prop to false.
 
-```jsx
+```tsx
 <Modal id="modal-hidden-close-button">
   <ModalDialog>
     <ModalHeader hasCloseButton={false} />
@@ -195,7 +195,7 @@ and [escape hatches][readme-escape-hatches].
 
 ModalBody holds the actual content of the Modal.
 
-```jsx
+```tsx
 <ModalBody>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam at excepturi laudantium magnam mollitia
@@ -227,7 +227,7 @@ _actual_ order in code is followed when users tab over the interface.
 user interaction and ensure consistent spacing within the dialog. Should the ModalFooter be omitted, please ensure
 to compensate for the lost spacing by applying utility spacing classes to the ModalBody.
 
-```jsx
+```tsx
 <ModalFooter>
   <Button color="primary">Primary action</Button>
   <Button color="secondary">Secondary action</Button>
@@ -238,7 +238,7 @@ to compensate for the lost spacing by applying utility spacing classes to the Mo
 
 Optionally, you can add a description to the footer:
 
-```jsx
+```tsx
 <ModalFooter description="Optional description">…</ModalFooter>
 ```
 
@@ -252,7 +252,7 @@ accordingly:
 - `center`
 - `left`
 
-```jsx
+```tsx
 <ModalFooter alignmentX="right">…</ModalFooter>
 ```
 
@@ -272,7 +272,7 @@ and [escape hatches][readme-escape-hatches].
 
 Use a hook to open your Modal, e.g.:
 
-```jsx
+```tsx
 const [isOpen, setOpen] = useState(false);
 const toggleModal = () => setOpen(!isOpen);
 const handleClose = () => setOpen(false);
@@ -291,7 +291,7 @@ and the whole ModalDialog will scroll.
 
 Scrolling inside ModalDialog can be turned on by adding the `isScrollable` prop:
 
-```jsx
+```tsx
 <ModalDialog isScrollable>…</ModalDialog>
 ```
 
@@ -300,7 +300,7 @@ Scrolling inside ModalDialog can be turned on by adding the `isScrollable` prop:
 To make content overflow more obvious to users, you can wrap the `ModalBody` content in a [ScrollView][scroll-view] that
 takes over the responsibility for scrolling and provides visual overflow decorators, e.g.:
 
-```jsx
+```tsx
 <ModalDialog isScrollable>
   …
   <ScrollView overflowDecorators="both">
@@ -323,7 +323,7 @@ The height property falls back to the previous breakpoint using the mobile-first
 both tablet and desktop screens. The single non-object value will be used for all breakpoints.
 This is useful for Modals with dynamic content, e.g. a list of items that can be added or removed, or a multistep wizard.
 
-```jsx
+```tsx
 <ModalDialog isScrollable height="500px">
   …
 </ModalDialog>
@@ -350,7 +350,7 @@ The max height property falls back to the previous breakpoint using the mobile-f
 `maxHeight={{ tablet: '500px' }}` while not setting the `desktop` breakpoint, the value will be used for
 both tablet and desktop screens. The single non-object value will be used for all breakpoints.
 
-```jsx
+```tsx
 <ModalDialog isScrollable maxHeight="700px">
   …
 </ModalDialog>
@@ -369,7 +369,7 @@ height.
 Multiple Modals can be open at the same time. That means, you can open a Modal from another Modal, and they will display
 stacked on top of each other. The topmost Modal is always the one that is **last in the DOM**.
 
-```jsx
+```tsx
 <!-- First Modal: -->
 <Modal id="modal-first"></Modal>
 <!-- This Modal will stack up on the previous Modal: -->
@@ -382,7 +382,7 @@ stacked on top of each other. The topmost Modal is always the one that is **last
 
 When you put it all together:
 
-```jsx
+```tsx
 import {
   Button,
   Modal,

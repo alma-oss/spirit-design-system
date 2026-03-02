@@ -13,17 +13,15 @@ PricingPlan is a composition of several subcomponents:
 
 This is the main container of the composition.
 
-```jsx
-import { PricingPlan } from '@alma-oss/spirit-web-react';
-
-<PricingPlan>{/* PricingPlan content go here */}</PricingPlan>;
+```tsx
+<PricingPlan>{/* PricingPlan content go here */}</PricingPlan>
 ```
 
 ### Highlighted Pricing Plan
 
 Add `isHighlighted` prop to highlight the PricingPlan.
 
-```jsx
+```tsx
 <PricingPlan isHighlighted>{/* PricingPlan content go here */}</PricingPlan>
 ```
 
@@ -31,13 +29,11 @@ Add `isHighlighted` prop to highlight the PricingPlan.
 
 Add `hasComparableFeatures` prop and wrap all plans into the `Matrix` layout when displaying multiple plans side by side to ensure proper alignment of features across plans:
 
-```jsx
-import { PricingPlan, Matrix } from '@alma-oss/spirit-web-react';
-
+```tsx
 <Matrix>
   <PricingPlan hasComparableFeatures>{/* PricingPlan content go here */}</PricingPlan>
   <PricingPlan hasComparableFeatures>{/* PricingPlan content go here */}</PricingPlan>
-</Matrix>;
+</Matrix>
 ```
 
 👉 Head over to the [Matrix][matrix-documentation] documentation to discover how to change the number of columns and other recommendations.
@@ -61,9 +57,7 @@ and [escape hatches][readme-escape-hatches].
 The header contains the plan's title, subtitle, price, and a call-to-action button. All these elements are optional.
 On the top of it, the header can also include an optional badge and note.
 
-```jsx
-import { PricingPlanHeader } from '@alma-oss/spirit-web-react';
-
+```tsx
 <PricingPlanHeader
   action={
     <ButtonLink href="#" size="large">
@@ -75,7 +69,7 @@ import { PricingPlanHeader } from '@alma-oss/spirit-web-react';
   subtitle="Supporting text"
   price="Price Amount"
   note="Additional information"
-/>;
+/>
 ```
 
 ### Accessibility
@@ -89,7 +83,7 @@ To connect the badge and title, you need to:
 1. Provide IDs for both the badge and title elements
 2. Add `aria-labelledby` to the title element referencing both IDs
 
-```jsx
+```tsx
 <PricingPlanHeader
   badge={<span id="plan-badge">Recommended</span>}
   title={
@@ -108,7 +102,7 @@ The heading will have `aria-labelledby="plan-badge plan-title"`, so screen reade
 
 For better accessibility, it is recommended to link the action button to the plan title using `aria-labelledby`. This provides screen reader users with context about which plan the action applies to.
 
-```jsx
+```tsx
 <PricingPlanHeader
   action={
     <ButtonLink href="#" size="large" id="plan-action" aria-labelledby="plan-action plan-title">
@@ -151,9 +145,7 @@ and [escape hatches][readme-escape-hatches].
 
 The body contains the feature list. Each feature consists of a title and a description.
 
-```jsx
-import { PricingPlanBody } from '@alma-oss/spirit-web-react';
-
+```tsx
 <PricingPlanBody
   id="tier-1"
   description="Optional introductory text"
@@ -163,14 +155,12 @@ import { PricingPlanBody } from '@alma-oss/spirit-web-react';
       description: 'Feature description',
     },
   ]}
-/>;
+/>
 ```
 
 You can also set the `tooltipContent` or `modalContent` on the feature to provide additional information when the feature title is clicked.
 
-```jsx
-import { PricingPlanBody } from '@alma-oss/spirit-web-react';
-
+```tsx
 <PricingPlanBody
   id="tier-1"
   description="Optional introductory text"
@@ -193,7 +183,7 @@ import { PricingPlanBody } from '@alma-oss/spirit-web-react';
       modalContent: 'Additional information in Modal about the feature',
     },
   ]}
-/>;
+/>
 ```
 
 👉 Please note that combination of ScrollView and Tooltips may cause troubles with cropped tooltips and unwanted scrollbars.
@@ -216,10 +206,8 @@ use Modal instead.
 
 The footer is optional and can contain additional information or disclaimers.
 
-```jsx
-import { PricingPlanFooter } from '@alma-oss/spirit-web-react';
-
-<PricingPlanFooter>{/* Additional information or disclaimers */}</PricingPlanFooter>;
+```tsx
+<PricingPlanFooter>{/* Additional information or disclaimers */}</PricingPlanFooter>
 ```
 
 ### API
@@ -231,7 +219,7 @@ import { PricingPlanFooter } from '@alma-oss/spirit-web-react';
 
 ## Full Example
 
-```jsx
+```tsx
 import { PricingPlan, PricingPlanHeader, PricingPlanBody, PricingPlanFooter } from '@alma-oss/spirit-web-react';
 
 <PricingPlan isHighlighted>
@@ -267,7 +255,7 @@ There is a default number of 100 grid rows in the PricingPlan layout (see
 [Implementation Notes](#implementation-notes) to learn why). To change the
 number of grid rows, use the `rows` prop.
 
-```jsx
+```tsx
 <PricingPlan rows={50}>{/* PricingPlan content go here */}</PricingPlan>
 ```
 

@@ -2,11 +2,7 @@
 
 Alert presents feedback or important information to users.
 
-```jsx
-import { Alert } from '@alma-oss/spirit-web-react';
-```
-
-```jsx
+```tsx
 <Alert color="success">Hey! Pay attention!</Alert>
 <Alert color="informative">Hey! Pay attention!</Alert>
 <Alert color="warning">Hey! Pay attention!</Alert>
@@ -19,7 +15,7 @@ import { Alert } from '@alma-oss/spirit-web-react';
 
 To ensure links inside Alert inherit the alert's color, use the Link component with `color="inherit"`:
 
-```jsx
+```tsx
 <Alert color="success">
   See{' '}
   <Link href="/faq" color="inherit" underlined="always">

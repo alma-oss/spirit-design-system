@@ -3,7 +3,7 @@
 Skeleton is a component that can be used to indicate that the content is loading or that the content is not yet
 available.
 
-```jsx
+```tsx
 import { SkeletonText, SkeletonHeading, SkeletonShape } from '@alma-oss/spirit-web-react';
 ```
 
@@ -16,7 +16,7 @@ state to screen readers.
 
 SkeletonText defines a placeholder for loading the Text component.
 
-```jsx
+```tsx
 <SkeletonText/>
 <SkeletonText lines={2}/>
 <SkeletonText lines={2} size="small"/>
@@ -33,7 +33,7 @@ SkeletonText defines a placeholder for loading the Text component.
 
 SkeletonHeading defines a placeholder for loading the Heading component.
 
-```jsx
+```tsx
 <SkeletonHeading/>
 <SkeletonHeading lines={2}/>
 <SkeletonHeading lines={2} size="small"/>
@@ -50,7 +50,7 @@ SkeletonHeading defines a placeholder for loading the Heading component.
 
 SkeletonShape defines a placeholder for loading the Shape component.
 
-```jsx
+```tsx
 <SkeletonShape width={100} height={100}/>
 <SkeletonShape width={100} height={100} borderRadius="full"/>
 <SkeletonShape width={100} height={100} borderRadius={{ mobile: '100', tablet: '400', desktop: '500' }}/>
@@ -70,7 +70,7 @@ and [escape hatches][readme-escape-hatches].
 
 ## Full Example
 
-```jsx
+```tsx
 <Grid aria-busy="true" aria-live="polite">
   <GridItem>
     <SkeletonShape width={100} height={100} borderRadius="full" />

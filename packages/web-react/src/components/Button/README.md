@@ -4,11 +4,7 @@ Button allows users to take actions.
 
 ## Basic Usage
 
-```jsx
-import { Button } from '@alma-oss/spirit-web-react';
-```
-
-```jsx
+```tsx
 <Button color="primary">Click me</Button>
 ```
 
@@ -20,7 +16,7 @@ There are several color variants of Button to choose from:
 - plain (with a transparent background)
 - emotion colors: success, informative, warning, danger
 
-```jsx
+```tsx
 <Button>Primary</Button>
 <Button color="secondary">Secondary</Button>
 <Button color="tertiary">Tertiary</Button>
@@ -35,7 +31,7 @@ There are several color variants of Button to choose from:
 
 Button comes in three available sizes:
 
-```jsx
+```tsx
 <Button size="small">Small</Button>
 <Button>Medium</Button>
 <Button size="large">Large</Button>
@@ -45,7 +41,7 @@ Button comes in three available sizes:
 
 To insert an icon into a button, use the [Icon][readme-icon] component with proper spacing:
 
-```jsx
+```tsx
 <Button>
   <Icon name="hamburger" marginRight="space-400" />
   Menu
@@ -56,7 +52,7 @@ To insert an icon into a button, use the [Icon][readme-icon] component with prop
 
 Use the `isSymmetrical` prop when you only need a compact, icon-only button:
 
-```jsx
+```tsx
 <Button isSymmetrical>
   <Icon name="hamburger" />
   <VisuallyHidden>Menu</VisuallyHidden>
@@ -95,7 +91,7 @@ Learn more about it in the [Accessibility](#accessibility) section.
 
 Icon on mobile, text label from tablet onwards:
 
-```jsx
+```tsx
 <Button isSymmetrical={{ mobile: true, tablet: false }}>
   <Icon name="hamburger" marginRight={{ tablet: 'space-400' }} />
   <VisuallyHidden>Menu</VisuallyHidden>
@@ -107,7 +103,7 @@ Icon on mobile, text label from tablet onwards:
 
 Text label on mobile, icon from tablet onwards:
 
-```jsx
+```tsx
 <Button isSymmetrical={{ tablet: true }}>
   <Icon name="hamburger" marginRight={{ mobile: 'space-400', tablet: 'space-0' }} />
   <VisuallyHidden>Menu</VisuallyHidden>
@@ -123,7 +119,7 @@ To span a `Button` to the full width of its parent, you can use CSS utility clas
 
 Responsive on all breakpoints:
 
-```jsx
+```tsx
 <div className="d-grid">
   <Button>Full-width Button</Button>
 </div>
@@ -131,7 +127,7 @@ Responsive on all breakpoints:
 
 Full-width on mobile:
 
-```jsx
+```tsx
 <div className="d-grid d-tablet-block">
   <Button>Responsive full-width Button</Button>
 </div>
@@ -139,7 +135,7 @@ Full-width on mobile:
 
 Responsive full-width buttons with [Grid][readme-grid]:
 
-```jsx
+```tsx
 <Grid cols={{ mobile: 1, tablet: 2 }} spacing="space-1100">
   <Button>Primary responsive full-width Button</Button>
   <Button color="secondary">Secondary responsive full-width Button</Button>
@@ -166,7 +162,7 @@ for users with assistive technologies:
 
 For example, add the `aria-label` attribute to the Button:
 
-```jsx
+```tsx
 <Button isSymmetrical aria-label="Menu">
   <Icon name="hamburger" />
   <Hidden on="mobile" aria-hidden="true">
@@ -179,7 +175,7 @@ For example, add the `aria-label` attribute to the Button:
 
 Alternatively, use the [VisuallyHidden][readme-visually-hidden] component:
 
-```jsx
+```tsx
 <Button isSymmetrical>
   <Icon name="hamburger" />
   <VisuallyHidden>Menu</VisuallyHidden>
@@ -191,13 +187,20 @@ Alternatively, use the [VisuallyHidden][readme-visually-hidden] component:
 [Icon-only buttons](#icon-only-button) should be only used for familiar, easily recognizable actions.
 In other cases, consider displaying the button label in a [Tooltip][readme-tooltip]:
 
-```jsx
-const [open, setOpen] = React.useState(false);
+```tsx
+import React, { useState } from 'react';
+import { Button, Tooltip, TooltipTrigger, TooltipPopover } from '@alma-oss/spirit-web-react';
 
-<Tooltip id="tooltip" isOpen={open} onToggle={setOpen}>
-  <TooltipTrigger elementType={Button}>I have a tooltip!</TooltipTrigger>
-  <TooltipPopover>Hello there!</TooltipPopover>
-</Tooltip>;
+export const Example = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Tooltip id="tooltip" isOpen={open} onToggle={setOpen}>
+      <TooltipTrigger elementType={Button}>I have a tooltip!</TooltipTrigger>
+      <TooltipPopover>Hello there!</TooltipPopover>
+    </Tooltip>
+  );
+};
 ```
 
 👉 See the [Tooltip][readme-tooltip] documentation for more examples.
@@ -206,13 +209,17 @@ const [open, setOpen] = React.useState(false);
 
 When using a third-party component, the Button will inherit all of its attributes.
 
-```jsx
+```tsx
 import { RouterLink } from 'react-router-dom';
 import { Button } from '@alma-oss/spirit-web-react';
 
-<Button elementType={RouterLink} to="/">
-  Link to home
-</Button>;
+export const Example = () => {
+  return (
+    <Button elementType={RouterLink} to="/">
+      Link to home
+    </Button>
+  );
+};
 ```
 
 ## API

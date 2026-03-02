@@ -2,7 +2,7 @@
 
 The Box component is a simple container around content or other components.
 
-```jsx
+```tsx
 <Box>{/* Content goes here */}</Box>
 ```
 
@@ -10,7 +10,7 @@ The Box component is a simple container around content or other components.
 
 You can define border color, radius, style and width using the `borderColor`, `borderRadius`, `borderStyle` and `borderWidth` props.
 
-```jsx
+```tsx
 <Box borderColor="basic" borderRadius="200" borderWidth="100" borderStyle="dashed">
   {/* Content goes here */}
 </Box>
@@ -18,7 +18,7 @@ You can define border color, radius, style and width using the `borderColor`, `b
 
 If you need set responsive border radius, you can use an object:
 
-```jsx
+```tsx
 <Box borderRadius={{ mobile: '200', tablet: '300', desktop: '400' }}>{/* Content goes here */}</Box>
 ```
 
@@ -28,13 +28,13 @@ The borderColor, borderRadius, and borderStyle props are applied only if borderW
 
 You can define padding using the `padding` prop.
 
-```jsx
+```tsx
 <Box padding="space-200">{/* Content goes here */}</Box>
 ```
 
 It is also possible to define padding for horizontal and vertical sides using the `paddingX` and `paddingY` props.
 
-```jsx
+```tsx
 <Box paddingX="space-200" paddingY="space-300">
   {/* Content goes here */}
 </Box>
@@ -42,7 +42,7 @@ It is also possible to define padding for horizontal and vertical sides using th
 
 You can also define padding for each side using the `paddingTop`, `paddingRight`, `paddingBottom`, and `paddingLeft` props.
 
-```jsx
+```tsx
 <Box paddingTop="space-200" paddingRight="space-300" paddingBottom="space-400" paddingLeft="space-500">
   {/* Content goes here */}
 </Box>
@@ -50,7 +50,7 @@ You can also define padding for each side using the `paddingTop`, `paddingRight`
 
 Responsive values can be set for each prop using an object:
 
-```jsx
+```tsx
 <Box padding={{ mobile: 'space-200', tablet: 'space-300', desktop: 'space-400' }}>{/* Content goes here */}</Box>
 ```
 
@@ -58,7 +58,7 @@ Responsive values can be set for each prop using an object:
 
 You can define background color using the `backgroundColor` prop.
 
-```jsx
+```tsx
 <Box backgroundColor="primary">{/* Content goes here */}</Box>
 ```
 
@@ -66,14 +66,14 @@ You can define background color using the `backgroundColor` prop.
 
 You can define background gradient using the `backgroundGradient` prop.
 
-```jsx
+```tsx
 <Box backgroundGradient="primary">{/* Content goes here */}</Box>
 <Box backgroundGradient="secondary">{/* Content goes here */}</Box>
 ```
 
 Responsive values can be set for each prop using an object:
 
-```jsx
+```tsx
 <Box backgroundGradient={{ mobile: 'primary', tablet: 'secondary', desktop: 'primary' }}>{/* Content goes here */}</Box>
 ```
 
@@ -81,7 +81,7 @@ Responsive values can be set for each prop using an object:
 
 You can define text color using the `textColor` prop.
 
-```jsx
+```tsx
 <Box textColor="primary">{/* Content goes here */}</Box>
 ```
 

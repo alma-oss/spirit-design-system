@@ -40,7 +40,7 @@ Example: Figma "Body/Medium/Semibold" for a person's name → use `<Text size="m
 
 **Always use the FULL token name for accent colors.** Short forms like `accent-01` or `accent-02` will cause TypeScript errors.
 
-```jsx
+```tsx
 // WRONG - short form causes TypeScript lint error
 <Heading elementType="div" size="xlarge" textColor="accent-02">
   300K+
@@ -85,7 +85,7 @@ DO NOT set these props when they match component defaults:
 
 **Examples:**
 
-```jsx
+```tsx
 // WRONG - setting default values unnecessarily
 <Heading elementType="h2" size="medium" emphasis="bold">
   Title
@@ -165,7 +165,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
    Figma text style determines the component. Body/Medium/Semibold (and any Body\* style) must use Text, not Heading.
 
-   ```jsx
+   ```tsx
    // WRONG - Figma shows "Body/Medium/Semibold" for member name
    <Heading elementType="div" size="medium" emphasis="bold">{member.name}</Heading>
 
@@ -175,7 +175,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
 2. **Using h1-h6 for non-heading styled text**
 
-   ```jsx
+   ```tsx
    // WRONG - Statistics numbers are not actual headings
    <Heading elementType="h2" size="xlarge">1.2M+</Heading>
    <Heading elementType="h3">Active Users</Heading>
@@ -187,7 +187,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
 3. **Skipping heading levels**
 
-   ```jsx
+   ```tsx
    // WRONG - h1 directly to h3 breaks accessibility
    <Heading elementType="h1">Page Title</Heading>
    <Heading elementType="h3">Subsection</Heading>
@@ -202,7 +202,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
    The Heading `size` must match the **Figma text style name**. Heading/Large/Bold → `size="large"`; Heading/XLarge/Bold → `size="xlarge"`. Do not guess from visual appearance.
 
-   ```jsx
+   ```tsx
    // WRONG - Figma text style is Heading/Large/Bold
    <Heading elementType="h1" size="xlarge">Spirit simplifies your daily tasks.</Heading>
 
@@ -214,7 +214,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
 **CRITICAL**: Only add `marginBottom="space-0"` to elements that have siblings AFTER them. Last-child elements don't need it since there's nothing after them that would be affected by the margin. Do not add `marginBottom="space-0"` on the last child in a Flex/Stack/Grid—it is unnecessary.
 
-```jsx
+```tsx
 // WRONG - default margin on non-last element interferes with Flex spacing
 <Flex direction="vertical" spacing="space-800">
   <Heading elementType="h2">Title</Heading>
@@ -236,7 +236,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
 4. **Not setting elementType**
 
-   ```jsx
+   ```tsx
    // WRONG - elementType is required
    <Heading size="large">Title</Heading>
 
@@ -246,7 +246,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
 5. **Confusing visual size with semantic level**
 
-   ```jsx
+   ```tsx
    // The size prop controls visual appearance
    // The elementType controls semantic meaning
 
@@ -259,7 +259,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
 6. **Using short-form accent color names**
 
-   ```jsx
+   ```tsx
    // WRONG - short form "accent-02" causes TypeScript lint errors
    <Heading elementType="div" size="xlarge" textColor="accent-02">
      300K+
@@ -273,7 +273,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
 7. **Setting default prop values unnecessarily**
 
-   ```jsx
+   ```tsx
    // WRONG - size="medium" and emphasis="bold" are defaults
    <Heading elementType="h2" size="medium" emphasis="bold">
      Section Title
@@ -309,7 +309,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
 ### Examples
 
-```jsx
+```tsx
 // Page title
 <Heading elementType="h1" size="xlarge">
   Welcome to Our Platform
@@ -392,7 +392,7 @@ Utility component for rendering consistent typography for body content and inlin
 
 1. **Forgetting marginBottom="space-0" in layout components**
 
-   ```jsx
+   ```tsx
    // WRONG - default margin interferes with Flex/Stack spacing
    <Flex direction="vertical" spacing="space-600" alignmentX="left">
      <Text>First paragraph</Text>
@@ -410,7 +410,7 @@ Utility component for rendering consistent typography for body content and inlin
 
    The Text `size` must match the **Figma Body style name**. Body/Small/Regular → `size="small"`; Body/Medium/Regular → `size="medium"`. Do not use `xsmall` for Body/Small.
 
-   ```jsx
+   ```tsx
    // WRONG - Figma text style is Body/Small/Regular
    <Text size="xsmall" textColor="tertiary">By clicking Sign Up...</Text>
 
@@ -420,7 +420,7 @@ Utility component for rendering consistent typography for body content and inlin
 
 3. **Using textAlignment when parent alignment is better**
 
-   ```jsx
+   ```tsx
    // LESS IDEAL - each Text has textAlignment
    <Flex direction="vertical" alignmentX="left">
      <Text textAlignment="center" marginBottom="space-0">Line 1</Text>
@@ -438,7 +438,7 @@ Utility component for rendering consistent typography for body content and inlin
 
 4. **Using wrong elementType for semantic meaning**
 
-   ```jsx
+   ```tsx
    // WRONG - using <p> for inline text
    <Flex direction="horizontal" alignmentY="center">
      <Icon name="info" />
@@ -467,7 +467,7 @@ Utility component for rendering consistent typography for body content and inlin
 
 ### Examples
 
-```jsx
+```tsx
 // Basic paragraph
 <Text>
   This is a paragraph of body text.
@@ -523,7 +523,7 @@ Both `Heading` and `Text` components render elements (`h1-h6`, `p`) that have **
 
 **Rule**: When using `Heading` or `Text` inside `Flex`, `Grid`, or `Stack` with a `spacing` prop, always add `marginBottom="space-0"` to remove the default margin.
 
-```jsx
+```tsx
 // Pattern: Typography inside layout
 <Flex direction="vertical" spacing="space-800" alignmentX="left">
   <Heading elementType="h2" marginBottom="space-0">
@@ -549,7 +549,7 @@ Is the text a title or section header?
 
 ### Common Typography Patterns
 
-```jsx
+```tsx
 // Hero section
 <Section size="xlarge" textAlignment="center">
   <Flex direction="vertical" spacing="space-800" alignmentX="center">

@@ -2,7 +2,7 @@
 
 The ProductLogo component is used to display the logo of the product.
 
-```jsx
+```tsx
 import { ProductLogo } from '@spirit/web-react';
 
 <ProductLogo>
@@ -16,7 +16,7 @@ The content of the ProductLogo component can be an image or svg.
 
 ### Image
 
-```jsx
+```tsx
 <ProductLogo>
   <img src="path-to-logo" alt="Product Logo" height="60" width="120" />
 </ProductLogo>
@@ -30,7 +30,7 @@ image.
 
 ### SVG
 
-```jsx
+```tsx
 <ProductLogo>
   <svg width="300" height="130">
     <rect width="200" height="100" x="10" y="10" rx="20" ry="20" fill="#fff" />

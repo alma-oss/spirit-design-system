@@ -5,7 +5,7 @@ groups of information in tabbable regions.
 
 ## Tab
 
-```jsx
+```tsx
 const [selectedId, setSelectedTab] = useState(1);
 
 const selectTab = useCallback((id) => {
@@ -28,7 +28,7 @@ const selectTab = useCallback((id) => {
 
 ⚠️ Please note that mixing links with buttons in tab list is not recommended for accessibility reasons.
 
-```jsx
+```tsx
 const [selectedId, setSelectedTab] = useState(1);
 
 const selectTab = useCallback((id) => {
@@ -51,7 +51,7 @@ const selectTab = useCallback((id) => {
 
 ## Uncontrolled Tabs
 
-```jsx
+```tsx
 <UncontrolledTabs defaultSelectedTab={1}>
   <TabList>
     <TabItem forTabPane={1}>Item Selected</TabItem>
@@ -71,13 +71,13 @@ accepts either a spacing token (e.g. `space-100`) or an object with [breakpoint]
 
 Default spacing:
 
-```jsx
+```tsx
 <Tabs spacing="space-1200">{/* Tabs content */}</Tabs>
 ```
 
 Custom responsive spacing:
 
-```jsx
+```tsx
 <Tabs spacing={{ mobile: 'space-400', tablet: 'space-800' }}>{/* Tabs content */}</Tabs>
 ```
 

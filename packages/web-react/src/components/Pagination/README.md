@@ -2,7 +2,7 @@
 
 ## Example with the Current Item in the First Place
 
-```jsx
+```tsx
 <Pagination>
   <PaginationItem>
     <PaginationLink href="#" isCurrent accessibilityLabel="Current Page, Page 1" pageNumber={1} />
@@ -19,7 +19,7 @@
 
 ## Example with the Current Item in the Middle
 
-```jsx
+```tsx
 <Pagination>
   <PaginationItem>
     <PaginationLinkPrevious href="#" />
@@ -43,7 +43,7 @@
 
 ## Example with the Current Item in the Last Place
 
-```jsx
+```tsx
 <Pagination>
   <PaginationItem>
     <PaginationLinkPrevious href="#" />
@@ -60,7 +60,7 @@
 
 ## Example with the First Current Item, Centered
 
-```jsx
+```tsx
 <Pagination UNSAFE_className="text-center">
   <PaginationItem>
     <PaginationLink href="#" isCurrent accessibilityLabel="Current Page, Page 1" pageNumber={1} />
@@ -77,7 +77,7 @@
 
 ## Uncontrolled Pagination
 
-```jsx
+```tsx
 <UncontrolledPagination
   totalPages={10}
   defaultPage={5}

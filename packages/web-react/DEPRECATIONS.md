@@ -40,7 +40,7 @@ If you are using the `Stack` component with dividers, you must wrap each item in
 
 #### Migration Guide
 
-```jsx
+```tsx
 <Stack hasIntermediateDividers>
   <>Item</>
   <>Item</>
@@ -49,7 +49,7 @@ If you are using the `Stack` component with dividers, you must wrap each item in
 
 ↓
 
-```jsx
+```tsx
 <Stack hasIntermediateDividers>
   <StackItem>Item</StackItem>
   <StackItem>Item</StackItem>

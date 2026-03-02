@@ -2,18 +2,21 @@
 
 ## Usage
 
-```jsx
+```tsx
+import React, { useState } from 'react';
 import { Dropdown, DropdownTrigger, DropdownPopover } from '@alma-oss/spirit-web-react';
-```
 
-```jsx
-const [isOpen, setIsOpen] = React.useState(false);
-const onToggle = () => setIsOpen(!isOpen);
+export const Example = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const onToggle = () => setIsOpen(!isOpen);
 
-<Dropdown id="dropdown-example" isOpen={isOpen} onToggle={onToggle}>
-  <DropdownTrigger elementType="button">Trigger button</DropdownTrigger>
-  <DropdownPopover>…</DropdownPopover>
-</Dropdown>;
+  return (
+    <Dropdown id="dropdown-example" isOpen={isOpen} onToggle={onToggle}>
+      <DropdownTrigger elementType="button">Trigger button</DropdownTrigger>
+      <DropdownPopover>…</DropdownPopover>
+    </Dropdown>
+  );
+};
 ```
 
 ### Dropdown with Item
@@ -21,31 +24,38 @@ const onToggle = () => setIsOpen(!isOpen);
 Enhance your DropdownPopover by incorporating the versatile [Item][item] component.
 Explore additional examples and insights within the dedicated documentation for the [Item][item] component.
 
-```jsx
-import { useState } from 'react';
+```tsx
+import React, { useState } from 'react';
 
-const [isOpen, setIsOpen] = useState(false);
-const onToggle = () => setIsOpen(!isOpen);
+export const Example = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const onToggle = () => setIsOpen(!isOpen);
 
-<Dropdown id="dropdown-example" isOpen={isOpen} onToggle={onToggle}>
-  <DropdownTrigger elementType="button">Trigger button</DropdownTrigger>
-  <DropdownPopover>
-    <Item elementType="a" href="#" label="Item label" />
-  </DropdownPopover>
-</Dropdown>;
+  return (
+    <Dropdown id="dropdown-example" isOpen={isOpen} onToggle={onToggle}>
+      <DropdownTrigger elementType="button">Trigger button</DropdownTrigger>
+      <DropdownPopover>
+        <Item elementType="a" href="#" label="Item label" />
+      </DropdownPopover>
+    </Dropdown>
+  );
+};
 ```
 
 ### Uncontrolled Dropdown
 
-```jsx
+```tsx
 import { UncontrolledDropdown, DropdownTrigger, DropdownPopover } from '@alma-oss/spirit-web-react';
-```
 
-```jsx
-<UncontrolledDropdown id="uncontrolled-dropdown-example">
-  <DropdownTrigger elementType="button">Trigger button</DropdownTrigger>
-  <DropdownPopover>…</DropdownPopover>
-</UncontrolledDropdown>
+export const Example = () => {
+  /* … */
+  return (
+    <UncontrolledDropdown id="uncontrolled-dropdown-example">
+      <DropdownTrigger elementType="button">Trigger button</DropdownTrigger>
+      <DropdownPopover>…</DropdownPopover>
+    </UncontrolledDropdown>
+  );
+};
 ```
 
 ## API
@@ -80,7 +90,7 @@ e.g. `<Dropdown alignmentX={{ mobile: 'right', tablet: 'left', desktop: 'center'
 ℹ️ This controls only the alignment inside the wrapping `Dropdown` element. And even with alignment, the popover will still be positioned
 at edge of the `Dropdown` element and on the place defined by the placement attribute.
 
-```jsx
+```tsx
 <Dropdown alignmentX={{ mobile: 'right', tablet: 'left', desktop: 'center' }} alignmentY="center" id="#dropdown-alignment">
   <DropdownTrigger elementType={Button}>Button as anchor</DropdownTrigger>
   <DropdownPopover>

@@ -2,22 +2,26 @@
 
 React implementation of native HTML [dialog][dialog] element.
 
-```jsx
+```tsx
+import React, { useState } from 'react';
 import { Dialog } from '@alma-oss/spirit-web-react';
-```
 
-```jsx
-const [isOpen, setOpen] = useState(false);
+export const Example = () => {
+  const [isOpen, setOpen] = useState(false);
+  const toggleDialog = () => setOpen(!isOpen);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-const toggleDialog = () => setOpen(!isOpen);
-
-const handleClose = () => {
-  setOpen(false);
+  return (
+    <>
+      <button onClick={toggleDialog}>{isOpen ? 'Close Dialog' : 'Open Dialog'}</button>
+      <Dialog isOpen={isOpen} onClose={handleClose}>
+        {/* children */}
+      </Dialog>
+    </>
+  );
 };
-
-<Dialog isOpen={isOpen} onClose={handleClose}>
-  {/* children */}
-</Dialog>;
 ```
 
 ## Dialog

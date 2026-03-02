@@ -2,7 +2,7 @@
 
 The Spinner indicates something is loading.
 
-```jsx
+```tsx
 <Spinner />
 <Spinner color="secondary" />
 ```
