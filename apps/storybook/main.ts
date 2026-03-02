@@ -20,9 +20,9 @@ const config: StorybookConfig = {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
       resolve: {
+        conditions: ['development'],
         alias: {
           '@alma-oss/spirit-design-tokens': resolve(__dirname, '../../packages/design-tokens/src/js'),
-          '@alma-oss/spirit-icons': resolve(__dirname, '../../packages/icons/dist'),
         },
       },
       plugins: [
