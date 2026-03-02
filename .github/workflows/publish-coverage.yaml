@@ -1,0 +1,78 @@
+name: 📊 Publish Code Coverage
+
+on:
+  workflow_call:
+
+jobs:
+  publish:
+    name: 📊 Publish Coverage (${{ matrix.package.flag }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - flag: web
+            coverage-path: web/.coverage/lcov.info
+            carryforward: 'web-react,analytics,design-tokens,common,codemods'
+          - flag: web-react
+            coverage-path: web-react/.coverage/lcov.info
+            carryforward: 'web,analytics,design-tokens,common,codemods'
+          - flag: analytics
+            coverage-path: analytics/.coverage/lcov.info
+            carryforward: 'web,web-react,design-tokens,common,codemods'
+          - flag: common
+            coverage-path: common/.coverage/lcov.info
+            carryforward: 'web,web-react,analytics,design-tokens,codemods'
+          - flag: codemods
+            coverage-path: codemods/.coverage/lcov.info
+            carryforward: 'web,web-react,analytics,design-tokens,common'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Download Coverage Artifacts
+        id: download
+        continue-on-error: true
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
+        with:
+          name: coverage-reports
+          path: ./
+
+      - name: Check Coverage File Exists
+        id: check-file
+        if: steps.download.outcome == 'success'
+        run: |
+          if [ -f "${{ matrix.package.coverage-path }}" ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "Coverage file not found: ${{ matrix.package.coverage-path }}"
+          fi
+
+      - name: Publish to Coveralls
+        if: steps.check-file.outputs.exists == 'true'
+        continue-on-error: true
+        uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
+        with:
+          github-token: ${{ github.token }}
+          file: ${{ matrix.package.coverage-path }}
+          base-path: packages
+          flag-name: ${{ matrix.package.flag }}
+          carryforward: ${{ matrix.package.carryforward }}
+          parallel: true
+
+  finish:
+    name: Finish Code Coverage
+    needs: [publish]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    if: always()
+    steps:
+      - name: Notify Coveralls
+        continue-on-error: true
+        uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
+        with:
+          github-token: ${{ github.token }}
+          parallel-finished: true
+          carryforward: 'web,web-react,analytics,common,codemods'
