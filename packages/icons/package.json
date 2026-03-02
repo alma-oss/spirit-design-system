@@ -6,9 +6,13 @@
   "engines": {
     "node": ">=20"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
   "publishConfig": {
     "access": "public",
-    "directory": "dist",
     "provenance": true
   },
   "repository": {
@@ -17,22 +21,20 @@
     "directory": "packages/icons"
   },
   "exports": {
-    "./icons": "./icons.mjs",
-    "./react/*": "./react/*.tsx",
-    "./svg/*": "./svg/*.svg"
+    "./icons": "./dist/icons.mjs",
+    "./react/*": "./dist/react/*.tsx",
+    "./svg/*": "./dist/svg/*.svg"
   },
   "scripts": {
     "prepare:react": "node ./scripts/prepareSvgReact.js",
     "build:svg": "node ./scripts/buildSvg.js",
     "build:clean": "shx rm -rf dist",
     "build:dist": "shx mkdir -p dist/svg dist/react dist/.tmp-svg",
-    "build:copy": "shx cp -r package.json README.md dist/",
     "build:react": "svg2react-icon --typescript --no-sub-dir ./dist/.tmp-svg ./dist/react",
-    "build:react:clean": "shx rm -rf 'dist/react/**.d.ts dist/react/**.js.map dist/.tmp-svg'",
     "build:const": "node ./scripts/buildConstants.js",
     "build:prepare": "npm-run-all build:clean build:dist",
     "build": "npm-run-all --serial build:prepare build:svg prepare:react build:react build:const build:finalize",
-    "build:finalize": "npm-run-all build:react:clean build:copy",
+    "build:finalize": "shx rm -rf 'dist/react/**.d.ts dist/react/**.js.map dist/.tmp-svg'",
     "test": "npm-run-all --serial test:unit",
     "test:unit": "jest",
     "test:unit:watch": "yarn test:unit --watchAll",
