@@ -5,7 +5,7 @@ on:
 
 jobs:
   publish:
-    name: 📊 Publish Coverage (${{ matrix.package.flag }})
+    name: Publish Coverage (${{ matrix.package.flag }})
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     strategy:

@@ -86,12 +86,12 @@ check out our [Contributing Guide][contributing]! 👀
 
 See the [LICENSE][license] file for information.
 
-[alma-career]: https://github.com/lmc-eu
+[alma-career]: https://almacareer.com
 [code-quality-checks]: https://github.com/alma-oss/spirit-design-system/actions
 [code-quality-checks-svg]: https://github.com/alma-oss/spirit-design-system/actions/workflows/test.yaml/badge.svg?branch=main
 [contributing]: https://github.com/alma-oss/spirit-design-system/blob/main/CONTRIBUTING.md
-[coverage-status]: https://coveralls.io/github/lmc-eu/spirit-design-system?branch=main
-[coverage-status-svg]: https://coveralls.io/repos/github/lmc-eu/spirit-design-system/badge.svg?branch=main
+[coverage-status]: https://coveralls.io/github/alma-oss/spirit-design-system?branch=main
+[coverage-status-svg]: https://coveralls.io/repos/github/alma-oss/spirit-design-system/badge.svg?branch=main
 [corepack]: https://yarnpkg.com/corepack#installation
 [docker]: https://www.docker.com
 [docker-compose]: https://docs.docker.com/compose/
