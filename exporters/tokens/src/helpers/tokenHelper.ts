@@ -106,11 +106,20 @@ export const sortTokens = (
       const aNumMatch = value(a);
       const bNumMatch = value(b);
 
-      if (aNumMatch && bNumMatch) {
-        return parseInt(aNumMatch.toString(), 10) - parseInt(bNumMatch.toString(), 10);
+      // Convert values to numbers for comparison
+      const aNumeric = Number(aNumMatch);
+      const bNumeric = Number(bNumMatch);
+
+      // Only perform numeric comparison when both values are valid finite numbers.
+      if (Number.isFinite(aNumeric) && Number.isFinite(bNumeric)) {
+        const numericComparison = aNumeric - bNumeric;
+        if (numericComparison !== 0) {
+          return numericComparison;
+        }
       }
     }
 
+    // Fall back to alphabetical sorting when numeric comparison didn't determine order (equal or non-numeric values)
     const aCompare = tokenVariableName(a, tokenGroups, hasParentPrefix);
     const bCompare = tokenVariableName(b, tokenGroups, hasParentPrefix);
 
