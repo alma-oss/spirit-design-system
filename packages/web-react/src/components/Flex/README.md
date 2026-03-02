@@ -12,7 +12,7 @@ Direction values `row` and `column` are deprecated and will be removed in the ne
 
 Horizontal layout:
 
-```jsx
+```tsx
 <Flex>
   <div>Item 1</div>
   <div>Item 2</div>
@@ -22,7 +22,7 @@ Horizontal layout:
 
 Horizontal reversed layout:
 
-```jsx
+```tsx
 <Flex direction="horizontal-reversed">
   <div>Item 1</div>
   <div>Item 2</div>
@@ -32,7 +32,7 @@ Horizontal reversed layout:
 
 Vertical layout:
 
-```jsx
+```tsx
 <Flex direction="vertical">
   <div>Item 1</div>
   <div>Item 2</div>
@@ -42,7 +42,7 @@ Vertical layout:
 
 Usage with a list:
 
-```jsx
+```tsx
 <Flex elementType="ul" direction="vertical">
   <li>Item 1</li>
   <li>Item 2</li>
@@ -58,7 +58,7 @@ alignment API consistency.
 
 To create a responsive layout, pass an object as the value for the `direction` property, using [breakpoint][dictionary-breakpoint] keys to specify different layouts for each screen size.
 
-```jsx
+```tsx
 <Flex direction={{ mobile: 'vertical', tablet: 'horizontal' }}>
   <div>Item 1</div>
   <div>Item 2</div>
@@ -71,7 +71,7 @@ To create a responsive layout, pass an object as the value for the `direction` p
 By default, Flex items will not wrap. To enable wrapping on all breakpoints, use the
 `isWrapping` prop.
 
-```jsx
+```tsx
 <Flex isWrapping>
   <div>Item 1</div>
   <div>Item 2</div>
@@ -83,7 +83,7 @@ By default, Flex items will not wrap. To enable wrapping on all breakpoints, use
 
 To create a responsive wrapping layout, pass an object as the value for the `isWrapping` property, using breakpoint keys to specify different wrapping for each screen size.
 
-```jsx
+```tsx
 <Flex isWrapping={{ mobile: true, tablet: false }}>
   <div>Item 1</div>
   <div>Item 2</div>
@@ -107,7 +107,7 @@ center, bottom. There is also an option to align the items to the baseline. Thes
 
 Example:
 
-```jsx
+```tsx
 <Flex alignmentX="right" alignmentY="baseline">
   <div>Item 1</div>
   <div>Item 2</div>
@@ -121,7 +121,7 @@ To create a responsive alignment, pass an object as the value for the property, 
 
 Example:
 
-```jsx
+```tsx
 <Flex alignmentX={{ mobile: 'left', tablet: 'space-between' }} alignmentY={{ mobile: 'stretch', tablet: 'baseline' }}>
   <div>Item 1</div>
   <div>Item 2</div>
@@ -138,7 +138,7 @@ Alternatively, you can set custom spacing in the horizontal (x-axis) and vertica
 
 Custom spacing:
 
-```jsx
+```tsx
 <Flex spacing="space-1200">
   <div>Item 1</div>
   <div>Item 2</div>
@@ -148,7 +148,7 @@ Custom spacing:
 
 Custom responsive spacing:
 
-```jsx
+```tsx
 <Flex spacing={{ mobile: 'space-400', tablet: 'space-800' }}>
   <div>Item 1</div>
   <div>Item 2</div>
@@ -158,7 +158,7 @@ Custom responsive spacing:
 
 Custom horizontal (x-axis) spacing:
 
-```jsx
+```tsx
 <Flex spacingX={{ mobile: 'space-400', tablet: 'space-800' }}>
   <!-- Flex content -->
 </Flex>
@@ -166,7 +166,7 @@ Custom horizontal (x-axis) spacing:
 
 Custom vertical (y-axis) spacing:
 
-```jsx
+```tsx
 <Flex spacingY={{ mobile: 'space-400', tablet: 'space-800' }}>
   <!-- Flex content -->
 </Flex>

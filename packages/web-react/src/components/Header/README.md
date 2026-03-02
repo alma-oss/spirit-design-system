@@ -44,7 +44,7 @@ Without any modifier, Header is ready to contain necessary blocks in a classic
 left-to-right layout (in LTR documents). Please note it is fully transparent
 unless you specify a color variant.
 
-```jsx
+```tsx
 <Header>
   <Link href="/">
     <ProductLogo>
@@ -60,7 +60,7 @@ Currently, Header comes in two color variants: **primary** and **transparent**
 (for non-solid backgrounds like gradients or images). Use the `color` property
 to apply the desired background color to Header.
 
-```jsx
+```tsx
 <Header color="transparent">
   <Link href="/">
     <ProductLogo>
@@ -76,7 +76,7 @@ The `isSimple` modifier makes the header bar slightly shorter and aligns its
 content to the center. Use this design variant when all you need on the page is
 just branding.
 
-```jsx
+```tsx
 <Header isSimple>
   <Link href="/">
     <ProductLogo>
@@ -120,7 +120,7 @@ Slot for actions that are intended to display on mobile and tablet screens only.
 It holds the toggle button by default, but you can add as many custom elements
 as the free space in Header allows.
 
-```jsx
+```tsx
 <HeaderMobileActions dialogId="my-header-dialog" />
 ```
 
@@ -131,7 +131,7 @@ the [Header Dialog](#header-dialog) via the `dialogId` prop.
 
 You can place any custom content into the mobile actions component:
 
-```jsx
+```tsx
 <HeaderMobileActions dialogId="my-header-dialog">{/* Mobile-only actions */}</HeaderMobileActions>
 ```
 
@@ -162,7 +162,7 @@ If you need to align actions to the end of the Header, use the `isAtEnd` prop.
 desktop breakpoint**. Spirit intentionally does not provide any overflow
 control here.
 
-```jsx
+```tsx
 <HeaderDesktopActions aria-label="Main navigation">
   {/* Desktop-only actions */}
 </HeaderDesktopActions>
@@ -192,7 +192,7 @@ Navigation is designed to live in either of the action slots.
 using the [Header Dialog](#header-dialog) for other use cases such as the user
 menu.
 
-```jsx
+```tsx
 <HeaderNav>
   <HeaderNavItem>
     <HeaderLink href="/" isCurrent>
@@ -216,7 +216,7 @@ menu.
 
 Both links and buttons are supported:
 
-```jsx
+```tsx
 <HeaderNav>
   <HeaderNavItem>
     <HeaderLink href="/">Link item</HeaderLink>
@@ -232,7 +232,7 @@ Both links and buttons are supported:
 You can avoid using the [HeaderNav](#navigation) for standalone links. That way, you can combine links and buttons in
 the same container:
 
-```jsx
+```tsx
 <HeaderDesktopActions isAtEnd>
   <HeaderButton>Marian</HeaderButton>
   <Button color="primary">Sign in</Button>
@@ -295,7 +295,7 @@ Header Dialog is Spirit's solution for responsive navigation and selected use
 cases such as the user menu. Please note Header Dialog is not intended to be
 used for second-level navigation in general.
 
-```jsx
+```tsx
 const [isOpen, setOpen] = useState(false);
 
 <HeaderDialog id="my-header-dialog" isOpen={isOpen} onClose={() => setOpen(false)}>
@@ -322,7 +322,7 @@ and [escape hatches][readme-escape-hatches].
 
 HeaderDialogCloseButton contains all necessary handles to control parent dialog.
 
-```jsx
+```tsx
 <HeaderDialogCloseButton />
 ```
 
@@ -343,7 +343,7 @@ and [escape hatches][readme-escape-hatches].
 There are two slots for actions inside Header Dialog: primary actions slot and
 the optional secondary actions slot.
 
-```jsx
+```tsx
 <HeaderDialogActions aria-label="Main navigation">
   {/* Primary actions */}
 </HeaderDialogActions>
@@ -371,7 +371,7 @@ Navigation capabilities are very similar to those of Header. All principles
 apply here as well, with the only difference in component names starting with
 `HeaderDialog` instead of `Header`.
 
-```jsx
+```tsx
 <HeaderDialogNav>
   <HeaderDialogNavItem>
     <HeaderDialogLink href="/" isCurrent>
@@ -395,7 +395,7 @@ apply here as well, with the only difference in component names starting with
 
 Navigation items can be links, buttons, or just text:
 
-```jsx
+```tsx
 <HeaderDialogNav>
   <HeaderDialogNavItem>
     <HeaderDialogLink href="/">Link item</HeaderDialogLink>
@@ -476,7 +476,7 @@ and [escape hatches][readme-escape-hatches].
 This is how all supported building blocks of the Header build up the complete
 composition:
 
-```jsx
+```tsx
 <Header>
   {/* Branding */}
   <HeaderMobileActions dialogId="header-dialog-example" isOpen={isOpen} onOpen={handleOpen}>
@@ -497,7 +497,7 @@ composition:
 
 And the complete Header Dialog:
 
-```jsx
+```tsx
 <HeaderDialog id="header-dialog-example" aria-label="Menu" isOpen={isOpen} onClose={handleClose}>
   <HeaderDialogCloseButton />
   <HeaderDialogActions>
@@ -516,7 +516,7 @@ And the complete Header Dialog:
 <details>
   <summary>Show full example code of Header with responsive navigation</summary>
 
-```jsx
+```tsx
 const [isOpen, setOpen] = React.useState(false);
 
 const handleOpen = () => setOpen(true);

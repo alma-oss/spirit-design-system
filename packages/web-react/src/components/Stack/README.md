@@ -4,7 +4,7 @@
 
 Basic example usage:
 
-```jsx
+```tsx
 <Stack>
   <div>Block 1</div>
   <div>Block 2</div>
@@ -14,7 +14,7 @@ Basic example usage:
 
 Advanced example usage:
 
-```jsx
+```tsx
 <Stack elementType="ul" hasIntermediateDividers hasStartDivider hasEndDivider>
   <li>
     <div>List item 1</div>
@@ -35,19 +35,19 @@ accepts either a spacing token (e.g. `space-100`) or an object with breakpoint k
 
 Default spacing:
 
-```jsx
+```tsx
 <Stack hasSpacing>{/* Stacked content */}</Stack>
 ```
 
 Custom spacing:
 
-```jsx
+```tsx
 <Stack spacing="space-1200">{/* Stacked content */}</Stack>
 ```
 
 Custom responsive spacing:
 
-```jsx
+```tsx
 <Stack spacing={{ mobile: 'space-400', tablet: 'space-800' }}>{/* Stacked content */}</Stack>
 ```
 
@@ -75,7 +75,7 @@ When `Stack` uses `elementType="ul"` or `elementType="ol"`, `StackItem` automati
 
 Basic example usage:
 
-```jsx
+```tsx
 <Stack hasIntermediateDividers>
   <StackItem>Stack Item 1</StackItem>
   <StackItem>Stack Item 2</StackItem>
@@ -85,7 +85,7 @@ Basic example usage:
 
 Advanced example usage (with list semantics; `elementType="li"` is inherited from the Stack):
 
-```jsx
+```tsx
 <Stack elementType="ul" hasSpacing hasIntermediateDividers hasStartDivider hasEndDivider>
   <StackItem>Stack Item 1</StackItem>
   <StackItem>Stack Item 2</StackItem>

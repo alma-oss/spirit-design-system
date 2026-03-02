@@ -4,7 +4,7 @@ The Text component provides helper classes to render text.
 
 ## Basic Usage
 
-```jsx
+```tsx
 <Text>This is a text</Text>
 ```
 
@@ -12,7 +12,7 @@ The Text component provides helper classes to render text.
 
 Use the `elementType` prop to set the HTML tag of the Text component.
 
-```jsx
+```tsx
 <Text elementType="span">Text</Text>
 ```
 
@@ -20,7 +20,7 @@ Use the `elementType` prop to set the HTML tag of the Text component.
 
 Use the `size` prop to set the size of the text.
 
-```jsx
+```tsx
 <Text size="large">Text</Text>
 ```
 
@@ -30,7 +30,7 @@ Use the `emphasis` prop to set the emphasis of the text.
 
 ⚠️ This prop only affects styling, not the semantics of the element.
 
-```jsx
+```tsx
 <Text emphasis="bold">Bold text</Text>
 ```
 
@@ -38,14 +38,14 @@ Use the `emphasis` prop to set the emphasis of the text.
 
 Use the `textAlignment` prop to set the alignment of the text.
 
-```jsx
+```tsx
 <Text textAlignment="center">Centered text</Text>
 <Text textAlignment="right">Right-aligned text</Text>
 ```
 
 You can also define responsive values for the `textAlignment` prop using an object:
 
-```jsx
+```tsx
 <Text textAlignment={{ mobile: 'center', tablet: 'right', desktop: 'left' }}>Responsive text alignment</Text>
 ```
 
@@ -54,7 +54,7 @@ You can also define responsive values for the `textAlignment` prop using an obje
 Use the `textColor` prop to set color of the text. When undefined, the text color
 is inherited from the parent element.
 
-```jsx
+```tsx
 <Text textColor="secondary">Secondary text</Text>
 ```
 
@@ -62,7 +62,7 @@ is inherited from the parent element.
 
 Use the `textHyphens` prop to set how words should be hyphenated when text wraps across multiple lines.
 
-```jsx
+```tsx
 <Text textHyphens="auto">Hyphens applied automatically when text wraps across multiple lines.</Text>
 ```
 
@@ -71,7 +71,7 @@ Use the `textHyphens` prop to set how words should be hyphenated when text wraps
 Use the `textWordBreak` prop to set how words should break when reaching the end of a line.
 It's crucial to combine it with [Text Hyphens](#text-hyphens) to maintain readability, followed by typography rules in text layouts.
 
-```jsx
+```tsx
 <Text textWordBreak="break-word">Allows long words to be splitted and wrapped onto the next line.</Text>
 ```
 
@@ -79,7 +79,7 @@ It's crucial to combine it with [Text Hyphens](#text-hyphens) to maintain readab
 
 Use the `isTextBalanced` prop to enable improved text wrapping for better readability.
 
-```jsx
+```tsx
 <Text isTextBalanced>
   Text wrapping optimizes the distribution of text across multiple lines, enhancing readability and visual appeal by
   avoiding orphans and awkward line breaks in body text.
@@ -94,7 +94,7 @@ As a fallback, browsers that don't support it will use `text-wrap: balance`.
 
 ## Full Example
 
-```jsx
+```tsx
 <Text
   elementType="div"
   emphasis="bold"
@@ -130,7 +130,7 @@ and [escape hatches][readme-escape-hatches].
 
 Text classes are fabricated using `useTextStyleProps` hook. You can use it to create your own custom Text component.
 
-```jsx
+```tsx
 const CustomText = (props: SpiritTextProps): JSX.Element => {
   const { classProps, props: modifiedProps, children } = useTextStyleProps(props);
 

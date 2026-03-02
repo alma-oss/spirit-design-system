@@ -54,7 +54,7 @@ Makes a Card interactive by providing a clickable title link that stretches to c
 
 1. **Using Heading with textColor instead of CardLink when Figma shows link styling**
 
-   ```jsx
+   ```tsx
    // WRONG - Figma shows themed/link/primary/state-default color on title
    <Card>
      <CardMedia>
@@ -86,7 +86,7 @@ Makes a Card interactive by providing a clickable title link that stretches to c
 
 2. **Forgetting isHeading on CardTitle when using CardLink**
 
-   ```jsx
+   ```tsx
    // WRONG - CardTitle without isHeading when it should be a heading
    <CardTitle>
      <CardLink href="#">Card Title</CardLink>
@@ -100,7 +100,7 @@ Makes a Card interactive by providing a clickable title link that stretches to c
 
 3. **Using regular Link instead of CardLink inside Card**
 
-   ```jsx
+   ```tsx
    // WRONG - Link doesn't provide Card-level click target
    <Card>
      <CardBody>
@@ -131,7 +131,7 @@ Makes a Card interactive by providing a clickable title link that stretches to c
 
 ### Examples
 
-```jsx
+```tsx
 // Basic Card with link (Figma shows link color on title)
 <Card>
   <CardMedia>
@@ -191,7 +191,7 @@ Container for Card title content. Can render as a heading or plain container.
 
 ### Examples
 
-```jsx
+```tsx
 // Static Card title (no link)
 <CardTitle isHeading headingProps={{ size: 'large' }}>
   Static Card Title
@@ -216,7 +216,7 @@ Container for Card description/body text.
 
 ### Examples
 
-```jsx
+```tsx
 <CardDescription>This is the card description text that provides additional context.</CardDescription>
 ```
 
@@ -228,7 +228,7 @@ Container for Card description/body text.
 
 When Figma shows a Card WITHOUT link styling on the title:
 
-```jsx
+```tsx
 <Card>
   <CardMedia>
     <img src="https://picsum.photos/seed/static/400/300" alt="" />
@@ -246,7 +246,7 @@ When Figma shows a Card WITHOUT link styling on the title:
 
 When Figma shows a Card WITH link color tokens on the title (`themed/link/...`):
 
-```jsx
+```tsx
 <Card>
   <CardMedia>
     <img src="https://picsum.photos/seed/clickable/400/300" alt="" />
@@ -264,7 +264,7 @@ When Figma shows a Card WITH link color tokens on the title (`themed/link/...`):
 
 When Figma shows a Card with button actions (not title link):
 
-```jsx
+```tsx
 <Card>
   <CardBody>
     <CardTitle isHeading>Card with Actions</CardTitle>
@@ -304,7 +304,7 @@ Container for Card visual content (images, icons, IconBox) in the artwork slot.
 
 When using IconBox inside CardArtwork in a horizontal Card layout, the IconBox stretches to fill the full Card height instead of maintaining its square aspect ratio. This is especially noticeable when the Card has additional content (like CardFooter with buttons) that makes it taller.
 
-```jsx
+```tsx
 // WRONG - IconBox stretches vertically to fill CardArtwork height
 <Card direction="horizontal" isBoxed>
   <CardArtwork>
@@ -351,7 +351,7 @@ When using IconBox inside CardArtwork in a horizontal Card layout, the IconBox s
 
 2. **Expecting alignmentX to work on horizontal Cards**
 
-   ```jsx
+   ```tsx
    // WRONG - alignmentX has no effect on horizontal Card
    <Card direction="horizontal">
      <CardArtwork alignmentX="center">
@@ -371,7 +371,7 @@ When using IconBox inside CardArtwork in a horizontal Card layout, the IconBox s
 
 ### Examples
 
-```jsx
+```tsx
 // Horizontal Card with top-aligned IconBox (most common pattern)
 <Card direction="horizontal" isBoxed>
   <CardArtwork>

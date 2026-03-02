@@ -20,12 +20,10 @@ Spirit Design System provides two main approaches for truncating content:
 
 For React applications, use the `<Truncate>` component which provides programmatic text truncation.
 
-```jsx
-import { Truncate } from '@lmc-eu/spirit-web-react';
-
+```tsx
 <Truncate mode="lines" limit={1}>
   Long text content that needs to be truncated
-</Truncate>;
+</Truncate>
 ```
 
 **Available modes:**
@@ -100,7 +98,7 @@ For CSS implementations, use the utility classes:
 
 **React implementation:**
 
-```jsx
+```tsx
 <SegmentedControl label="Choose option">
   <SegmentedControlItem value="option1">
     <Truncate mode="lines" limit={1}>
@@ -142,7 +140,7 @@ For CSS implementations, use the utility classes:
 
 **React implementation:**
 
-```jsx
+```tsx
 <Breadcrumbs>
   <BreadcrumbsItem href="/">Home</BreadcrumbsItem>
   <BreadcrumbsItem href="/category">
@@ -226,7 +224,7 @@ Different languages have different average word lengths:
 
 ### Example: Language-Aware Truncation
 
-```jsx
+```tsx
 // ❌ Bad: Fixed character limit
 <Truncate mode="characters" limit={50}>
   {translatedText}
@@ -246,7 +244,7 @@ Different languages have different average word lengths:
 
 **Solution:** No truncation needed. Keep content concise by design.
 
-```jsx
+```tsx
 <Button>Submit</Button>
 <Badge color="success">Active</Badge>
 ```
@@ -257,7 +255,7 @@ Different languages have different average word lengths:
 
 **Solution:** Use single-line truncation with max-width constraint.
 
-```jsx
+```tsx
 <Truncate mode="lines" limit={1}>
   {title}
 </Truncate>
@@ -269,7 +267,7 @@ Different languages have different average word lengths:
 
 **Solution:** Use multi-line truncation with "Read more" functionality.
 
-```jsx
+```tsx
 <Truncate mode="lines" limit={3}>
   {userContent}
 </Truncate>
@@ -282,7 +280,7 @@ Different languages have different average word lengths:
 
 **Solution:** Apply truncation with consistent limits across items.
 
-```jsx
+```tsx
 {
   products.map((product) => (
     <Card key={product.id}>
@@ -300,7 +298,7 @@ Different languages have different average word lengths:
 
 **Solution:** Truncate in the middle, preserving extension.
 
-```jsx
+```tsx
 // Using CSS class
 <span className="text-truncate" title={fileName}>
   {fileName}
@@ -336,7 +334,7 @@ Always make the full content available through:
 
 For screen readers, provide complete context:
 
-```jsx
+```tsx
 <Truncate mode="lines" limit={1} aria-label={fullText}>
   {fullText}
 </Truncate>
@@ -403,7 +401,7 @@ Check these scenarios:
 
 ### 2. Using Wrong Truncation Mode
 
-```jsx
+```tsx
 // ❌ Bad: Using characters mode with HTML
 <Truncate mode="characters" limit={50}>
   <strong>Bold text</strong> won’t work
@@ -417,7 +415,7 @@ Check these scenarios:
 
 ### 3. Inconsistent Truncation Limits
 
-```jsx
+```tsx
 // ❌ Bad: Inconsistent limits in a list
 <Truncate mode="lines" limit={2}>{item1}</Truncate>
 <Truncate mode="lines" limit={3}>{item2}</Truncate>
@@ -429,7 +427,7 @@ Check these scenarios:
 
 ### 4. No Fallback for Full Content
 
-```jsx
+```tsx
 // ❌ Bad: No way to see full content
 <Truncate mode="lines" limit={2}>
   {longContent}

@@ -2,13 +2,13 @@
 
 The `SkipLink` component is used to provide a way for users to skip directly to, e.g. the main content of a page, improving accessibility for keyboard and screen reader users.
 
-```jsx
+```tsx
 <SkipLink href="#main-content">Skip to main content</SkipLink>
 ```
 
 ## Usage
 
-```jsx
+```tsx
 <body>
   <SkipLink href="#main-content">Skip to main content</SkipLink>
   {/* Other navigation elements */}
@@ -20,7 +20,7 @@ The `SkipLink` component is used to provide a way for users to skip directly to,
 
 If you need to provide multiple skip links, wrap them in a `<nav>` element:
 
-```jsx
+```tsx
 <body>
   <nav aria-label="Skip links">
     <SkipLink href="#main-content">Skip to main content</SkipLink>

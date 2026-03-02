@@ -2,7 +2,7 @@
 
 Container centers your content horizontally and sets its max-width with horizontal paddings.
 
-```jsx
+```tsx
 <Container>Content</Container>
 ```
 
@@ -10,7 +10,7 @@ Container centers your content horizontally and sets its max-width with horizont
 
 If you need a full-width container, you can use the `isFluid` prop.
 
-```jsx
+```tsx
 <Container isFluid>Content</Container>
 ```
 
@@ -18,7 +18,7 @@ If you need a full-width container, you can use the `isFluid` prop.
 
 If you need different sizes of the container, you can use the `size` prop.
 
-```jsx
+```tsx
 <Container size="small">Content</Container>
 ```
 
@@ -26,14 +26,14 @@ If you need different sizes of the container, you can use the `size` prop.
 
 You can set the text alignment of the container using the `textAlignment` prop.
 
-```jsx
+```tsx
 <Container textAlignment="center">Content</Container>
 <Container textAlignment="right">Content</Container>
 ```
 
 You can define responsive values for the `textAlignment` prop using an object:
 
-```jsx
+```tsx
 <Container textAlignment={{ mobile: 'center', tablet: 'right', desktop: 'left' }}>Responsive text alignment</Container>
 ```
 

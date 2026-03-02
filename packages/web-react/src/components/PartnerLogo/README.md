@@ -2,7 +2,7 @@
 
 PartnerLogo is a component designed to display the partner's logo (e.g. advertiser, business partner, etc.).
 
-```jsx
+```tsx
 import { PartnerLogo } from '@alma-oss/spirit-web-react';
 
 <PartnerLogo>{/* Logo goes here */}</PartnerLogo>;
@@ -12,7 +12,7 @@ import { PartnerLogo } from '@alma-oss/spirit-web-react';
 
 The PartnerLogo component is available in [sizes][dictionary-size].
 
-```jsx
+```tsx
 <PartnerLogo size="small">
   {/* Logo goes here */}
 </PartnerLogo>
@@ -28,7 +28,7 @@ The PartnerLogo component is available in [sizes][dictionary-size].
 
 To create a PartnerLogo with responsive size, pass an object as the value for the `size` property, using [breakpoint][dictionary-breakpoint] keys to specify different size for each screen size.
 
-```jsx
+```tsx
 <PartnerLogo size={{ mobile: 'small', tablet: 'medium', desktop: 'large' }}>{/* Logo goes here */}</PartnerLogo>
 ```
 
@@ -38,7 +38,7 @@ To create a PartnerLogo with responsive size, pass an object as the value for th
 
 The PartnerLogo component can be displayed without the safe area (padding). Use `hasSafeArea` prop set to `false` to disable safe area around logo.
 
-```jsx
+```tsx
 <PartnerLogo hasSafeArea={false}>{/* Logo goes here */}</PartnerLogo>
 ```
 
@@ -47,7 +47,7 @@ The PartnerLogo component can be displayed without the safe area (padding). Use 
 To adjust the PartnerLogo to the size of its container, use the `isFluid` prop. This allows the logo to scale while preserving its aspect ratio
 and ensures it remains vertically and horizontally aligned within the container.
 
-```jsx
+```tsx
 <PartnerLogo isFluid>{/* Logo goes here */}</PartnerLogo>
 ```
 
@@ -57,7 +57,7 @@ The content of the PartnerLogo component can be an image or svg.
 
 ### Image
 
-```jsx
+```tsx
 <PartnerLogo>
   <img src="path-to-logo" alt="Partner Logo" />
 </PartnerLogo>
@@ -68,7 +68,7 @@ should be present.
 
 ### SVG
 
-```jsx
+```tsx
 <PartnerLogo>
   <svg width="300" height="130">
     <title>Partner Logo</title>

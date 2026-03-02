@@ -2,10 +2,12 @@
 
 Truncate is a component that truncates text based on various criteria: lines, words, or characters.
 
-```jsx
+```tsx
 import { Truncate } from '@alma-oss/spirit-web-react';
 
-<Truncate>{/* Text go here */}</Truncate>;
+export const Example = () => {
+  return <Truncate>{/* Text go here */}</Truncate>;
+};
 ```
 
 > **ℹ️ Best Practices:**
@@ -19,7 +21,7 @@ The component supports three truncation modes using the `mode` prop:
 
 Truncate text to a specific number of lines using `mode="lines"` and `limit` props:
 
-```jsx
+```tsx
 <Truncate limit={2} mode="lines">
   {/* Text go here */}
 </Truncate>
@@ -29,7 +31,7 @@ Truncate text to a specific number of lines using `mode="lines"` and `limit` pro
 
 Truncate text to a specific number of words using `mode="words"` and `limit` props:
 
-```jsx
+```tsx
 <Truncate limit={10} mode="words">
   {/* Text go here */}
 </Truncate>
@@ -39,7 +41,7 @@ Truncate text to a specific number of words using `mode="words"` and `limit` pro
 
 Truncate text to a specific number of characters using `mode="characters"` and `limit` props:
 
-```jsx
+```tsx
 <Truncate limit={50} mode="characters">
   {/* Text go here */}
 </Truncate>
@@ -59,7 +61,7 @@ The truncation modes have different requirements for the content they can proces
 
 ✅ **Works** - Plain text with any mode:
 
-```jsx
+```tsx
 <Truncate mode="words" limit={10}>
   This is plain text that can be truncated
 </Truncate>
@@ -67,7 +69,7 @@ The truncation modes have different requirements for the content they can proces
 
 ✅ **Works** - Formatted text with `lines` mode:
 
-```jsx
+```tsx
 <Truncate mode="lines" limit={2}>
   Text with <strong>emphasis</strong> and <a href="#">links</a>
 </Truncate>
@@ -75,7 +77,7 @@ The truncation modes have different requirements for the content they can proces
 
 ❌ **Doesn't work** - Formatted text with `words` or `characters` mode:
 
-```jsx
+```tsx
 <Truncate mode="words" limit={10}>
   Text with <strong>emphasis</strong> {/* Won't truncate properly */}
 </Truncate>
@@ -85,7 +87,7 @@ The truncation modes have different requirements for the content they can proces
 
 This example demonstrates how to make truncated text expandable, allowing users to toggle between the truncated and full content.
 
-```jsx
+```tsx
 import React, { useState } from 'react';
 import { Button, Text, Truncate } from '@alma-oss/spirit-web-react';
 

@@ -10,7 +10,7 @@ Learn more about the [Button][readme-button] component in its documentation.
 
 Simple variant:
 
-```jsx
+```tsx
 <SplitButton>
   <Button>Button</Button>
   <Button>Button</Button>
@@ -19,7 +19,7 @@ Simple variant:
 
 Setting **color** for **all buttons**:
 
-```jsx
+```tsx
 <SplitButton color="secondary">
   <Button>Button</Button>
   <Button>Button</Button>
@@ -28,7 +28,7 @@ Setting **color** for **all buttons**:
 
 Setting **size** for **all buttons**:
 
-```jsx
+```tsx
 <SplitButton size="large">
   <Button>Button</Button>
   <Button>Button</Button>
@@ -41,7 +41,7 @@ You can add a Dropdown component inside a Split Button to provide additional act
 
 Learn more about the [Dropdown][readme-dropdown] component in its documentation.
 
-```jsx
+```tsx
 const [isOpen, setIsOpen] = React.useState(false);
 const onToggle = () => setIsOpen(!isOpen);
 
@@ -63,7 +63,7 @@ You can also add a tooltip to buttons, which is especially useful for buttons th
 
 Learn more about the [Tooltip][readme-tooltip] component in its documentation.
 
-```jsx
+```tsx
 const [isOpen, setIsOpen] = React.useState(false);
 
 <SplitButton>
@@ -80,7 +80,7 @@ const [isOpen, setIsOpen] = React.useState(false);
 
 ## Full Example
 
-```jsx
+```tsx
 const [isTooltipOpen, setIsTooltipOpen] = React.useState(false);
 const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 const onDropdownToggle = () => setIsOpen(!isOpen);
@@ -122,7 +122,7 @@ It is used when you want to have a button with additional actions in a dropdown 
 
 Simple variant:
 
-```jsx
+```tsx
 <UncontrolledSplitButton
   id="uncontrolled-split-button-id"
   buttonLabel="Button"
@@ -134,7 +134,7 @@ Simple variant:
 
 Full example:
 
-```jsx
+```tsx
 <UncontrolledSplitButton
   buttonIconName="check-plain"
   buttonLabel="Button"

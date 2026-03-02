@@ -7,17 +7,15 @@ Toggle is a form control that allows users to switch between two states.
 The Toggle component implements the HTML [checkbox input][mdn-checkbox] element. It uses
 the native input element and styles it to look like a toggle switch.
 
-```jsx
-import { Toggle } from '@alma-oss/spirit-web-react';
-
-<Toggle id="toggle-default" label="Toggle Label" />;
+```tsx
+<Toggle id="toggle-default" label="Toggle Label" />
 ```
 
 ## Indicators
 
 If you need to indicate the state of the toggle, you can add the `hasIndicators` prop. This will add a visual indicators to the toggle switch.
 
-```jsx
+```tsx
 <Toggle id="toggle-indicators" label="Toggle Label" hasIndicators />
 ```
 
@@ -25,25 +23,25 @@ If you need to indicate the state of the toggle, you can add the `hasIndicators`
 
 Add the `isRequired` prop to mark it as required.
 
-```jsx
+```tsx
 <Toggle id="toggle-required" label="Toggle Label" isRequired />
 ```
 
 ## Hidden Label
 
-```jsx
+```tsx
 <Toggle id="toggle-hidden-label" label="Toggle Label" isLabelHidden />
 ```
 
 ## Fluid
 
-```jsx
+```tsx
 <Toggle id="toggle-fluid" label="Toggle Label" isFluid />
 ```
 
 ## Helper Text
 
-```jsx
+```tsx
 <Toggle id="toggle-helper-text" label="Toggle Label" helperText="Helper text" />
 ```
 
@@ -51,7 +49,7 @@ Add the `isRequired` prop to mark it as required.
 
 Validation states can be presented by prop `validationState`. See Validation state [dictionary][dictionary-validation].
 
-```jsx
+```tsx
 <Toggle id="toggle-success" label="Toggle Label" validationState="success" />
 <Toggle
   hasValidationIcon
@@ -73,7 +71,7 @@ Validation states can be presented by prop `validationState`. See Validation sta
 
 You can add `isDisabled` prop to disable Toggle.
 
-```jsx
+```tsx
 <Toggle id="toggle-disabled" label="Toggle Label" isDisabled />
 ```
 
@@ -81,7 +79,7 @@ You can add `isDisabled` prop to disable Toggle.
 
 The `inputPosition` prop allows you to position the toggle switch to the `start` or `end` (default) of the label:
 
-```jsx
+```tsx
 <Toggle id="toggle-start" label="Toggle at Start" inputPosition="start" />
 <Toggle id="toggle-end" label="Toggle at End (default)" inputPosition="end" />
 ```
@@ -90,7 +88,7 @@ The `inputPosition` prop allows you to position the toggle switch to the `start`
 
 Pass an object to adjust the toggle position based on the [breakpoint][dictionary-breakpoint]:
 
-```jsx
+```tsx
 <Toggle id="toggle-responsive" label="Responsive Toggle Position" inputPosition={{ mobile: 'end', tablet: 'start' }} />
 ```
 

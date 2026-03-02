@@ -7,13 +7,13 @@ hidden or show if the input is required.
 
 Basic example usage:
 
-```jsx
+```tsx
 <TextField id="text-field-default" label="Label" name="textFieldDefault" />
 ```
 
 Advanced example usage:
 
-```jsx
+```tsx
 <TextField
   hasValidationIcon
   helperText="custom helper text"
@@ -31,7 +31,7 @@ Advanced example usage:
 
 TextField with password toggle (button to reveal the password):
 
-```jsx
+```tsx
 <TextField
   hasPasswordToggle
   id="text-field-password-toggle"
@@ -78,7 +78,7 @@ and [escape hatches][readme-escape-hatches].
 
 Text field classes are fabricated using `useTextFieldStyleProps` hook. You can use it to create your own custom TextField component.
 
-```jsx
+```tsx
 const CustomTextField = (props: SpiritTextFieldProps): JSX.Element => {
   const { classProps, props: modifiedProps } = useTextFieldStyleProps(props);
 

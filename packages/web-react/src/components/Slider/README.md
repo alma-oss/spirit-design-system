@@ -6,10 +6,7 @@ Slider is a form control that allows users to select a value from a range of val
 
 The Slider component implements the HTML [range input][mdn-range] element.
 
-```jsx
-import { useState } from 'react';
-import { Slider } from '@alma-oss/spirit-web-react';
-
+```tsx
 const [value, setValue] = useState();
 
 const handleChange = (event) => {
@@ -23,10 +20,7 @@ const handleChange = (event) => {
 
 You can specify the Slider steps and value range by setting the `min`, `max`, and `step` props.
 
-```jsx
-import { useState } from 'react';
-import { Slider } from '@alma-oss/spirit-web-react';
-
+```tsx
 const [value, setValue] = useState();
 
 const handleChange = (event) => {
@@ -42,19 +36,19 @@ const handleChange = (event) => {
 
 ## Hidden Label
 
-```jsx
+```tsx
 <Slider id="slider" label="Slider" value={value} onChange={handleChange} isLabelHidden />
 ```
 
 ## Fluid Width
 
-```jsx
+```tsx
 <Slider id="slider" label="Slider" value={value} onChange={handleChange} isFluid />
 ```
 
 ## Helper Text
 
-```jsx
+```tsx
 <Slider id="slider" label="Slider" value={value} onChange={handleChange} helperText="Helper text" />
 ```
 
@@ -62,7 +56,7 @@ const handleChange = (event) => {
 
 Validation states implement the Validation state [dictionary][dictionary-validation].
 
-```jsx
+```tsx
 <Slider
   id="slider-success"
   label="Slider"
@@ -92,7 +86,7 @@ Validation states implement the Validation state [dictionary][dictionary-validat
 
 ## Disabled State
 
-```jsx
+```tsx
 <Slider id="slider-disabled" label="Slider" value={value} onChange={handleChange} isDisabled />
 ```
 
@@ -123,10 +117,8 @@ and [escape hatches][readme-escape-hatches].
 
 ### Basic Usage
 
-```jsx
-import { UncontrolledSlider } from '@alma-oss/spirit-web-react';
-
-<UncontrolledSlider id="slider-uncontrolled" label="UncontrolledSlider" />;
+```tsx
+<UncontrolledSlider id="slider-uncontrolled" label="UncontrolledSlider" />
 ```
 
 ### API

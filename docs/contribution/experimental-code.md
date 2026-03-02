@@ -50,7 +50,7 @@ export { default as UNSTABLE_ExampleComponent } from './components/UNSTABLE_Exam
 For teams using these features, they will need to import the functionality by
 using the `UNSTABLE_` prefix. For example:
 
-```jsx
+```tsx
 import { UNSTABLE_ExampleComponent as ExampleComponent } from '@alma-oss/spirit-web-react';
 ```
 

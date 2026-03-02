@@ -4,13 +4,13 @@ The NoSsr component disables rendering of any wrapped component by server preren
 
 ## 🚀 Usage
 
-```jsx
+```tsx
 import { NoSsr } from '@alma-oss/spirit-web-react';
 ```
 
 Basic example usage:
 
-```jsx
+```tsx
 <NoSsr>This is never prerendered</NoSsr>
 ```
 

@@ -4,19 +4,19 @@ The VisuallyHidden component helps improve web accessibility by rendering its co
 
 ## 🚀 Usage
 
-```jsx
+```tsx
 import { VisuallyHidden } from '@alma-oss/spirit-web-react';
 ```
 
 Basic example usage:
 
-```jsx
+```tsx
 <VisuallyHidden>Label</VisuallyHidden>
 ```
 
 Advanced example:
 
-```jsx
+```tsx
 <VisuallyHidden elementType="div">Label</VisuallyHidden>
 ```
 

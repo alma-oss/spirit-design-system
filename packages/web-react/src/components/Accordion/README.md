@@ -7,49 +7,46 @@
 ```tsx
 import React, { useState } from 'react';
 import { Accordion, AccordionItem, AccordionHeader, AccordionContent } from '@alma-oss/spirit-web-react';
-import { AccordionOpenStateType } from '@alma-oss/spirit-web-react/types';
-```
+import { type AccordionOpenStateType } from '@alma-oss/spirit-web-react/types';
 
-```typescript
-const [openState, setOpenState] = useState<AccordionOpenStateType>(undefined);
-```
+export const Example = () => {
+  const [openState, setOpenState] = useState<AccordionOpenStateType>(undefined);
 
-```tsx
-const toggle = (id) => {
-  if (Array.isArray(openState)) {
-    if (openState.includes(id)) {
-      setOpenState(openState.filter((accordionId) => accordionId !== id));
+  const toggle = (id) => {
+    if (Array.isArray(openState)) {
+      if (openState.includes(id)) {
+        setOpenState(openState.filter((accordionId) => accordionId !== id));
+      } else {
+        setOpenState([...openState, id]);
+      }
+    } else if (openState === id) {
+      setOpenState(undefined);
     } else {
-      setOpenState([...openState, id]);
+      setOpenState(id);
     }
-  } else if (openState === id) {
-    setOpenState(undefined);
-  } else {
-    setOpenState(id);
-  }
-};
-```
+  };
 
-```tsx
-<Accordion open={openState} toggle={toggle}>
-  <AccordionItem id="accordion-item-example-0">
-    <AccordionHeader>Accordion Header</AccordionHeader>
-    <AccordionContent>Accordion Content</AccordionContent>
-  </AccordionItem>
-  <AccordionItem id="accordion-item-example-1">
-    <AccordionHeader>Accordion Header</AccordionHeader>
-    <AccordionContent>Accordion Content</AccordionContent>
-  </AccordionItem>
-  <AccordionItem id="accordion-item-example-2">
-    <AccordionHeader>Accordion Header</AccordionHeader>
-    <AccordionContent>Accordion Content</AccordionContent>
-  </AccordionItem>
-  <AccordionItem id="accordion-item-example-3">
-    <AccordionHeader>Accordion Header</AccordionHeader>
-    <AccordionContent>Accordion Content</AccordionContent>
-  </AccordionItem>
-  ...
-</Accordion>
+  return (
+    <Accordion open={openState} toggle={toggle}>
+      <AccordionItem id="accordion-item-example-0">
+        <AccordionHeader>Accordion Header</AccordionHeader>
+        <AccordionContent>Accordion Content</AccordionContent>
+      </AccordionItem>
+      <AccordionItem id="accordion-item-example-1">
+        <AccordionHeader>Accordion Header</AccordionHeader>
+        <AccordionContent>Accordion Content</AccordionContent>
+      </AccordionItem>
+      <AccordionItem id="accordion-item-example-2">
+        <AccordionHeader>Accordion Header</AccordionHeader>
+        <AccordionContent>Accordion Content</AccordionContent>
+      </AccordionItem>
+      <AccordionItem id="accordion-item-example-3">
+        <AccordionHeader>Accordion Header</AccordionHeader>
+        <AccordionContent>Accordion Content</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+};
 ```
 
 ### Default with Opened on Init
@@ -69,19 +66,21 @@ const [openState, setOpenState] = useState<AccordionOpenStateType>('');
 ```tsx
 import { UncontrolledAccordion, AccordionItem, AccordionHeader, AccordionContent } from '@alma-oss/spirit-web-react';
 import { AccordionOpenStateType } from '@alma-oss/spirit-web-react/types';
-```
 
-```tsx
-<UncontrolledAccordion stayOpen>
-  <AccordionItem id="accordion-item-example-0">
-    <AccordionHeader>Accordion Header</AccordionHeader>
-    <AccordionContent>Accordion Content</AccordionContent>
-  </AccordionItem>
-  <AccordionItem id="accordion-item-example-1">
-    <AccordionHeader>Accordion Header</AccordionHeader>
-    <AccordionContent>Accordion Content</AccordionContent>
-  </AccordionItem>
-</UncontrolledAccordion>
+export const Example = () => {
+  return (
+    <UncontrolledAccordion stayOpen>
+      <AccordionItem id="accordion-item-example-0">
+        <AccordionHeader>Accordion Header</AccordionHeader>
+        <AccordionContent>Accordion Content</AccordionContent>
+      </AccordionItem>
+      <AccordionItem id="accordion-item-example-1">
+        <AccordionHeader>Accordion Header</AccordionHeader>
+        <AccordionContent>Accordion Content</AccordionContent>
+      </AccordionItem>
+    </UncontrolledAccordion>
+  );
+};
 ```
 
 ### Uncontrolled Accordion with Default Open Value (Stay Open)

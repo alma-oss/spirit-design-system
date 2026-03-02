@@ -2,19 +2,17 @@
 
 The `Avatar` component is used to display a user's profile picture or initials.
 
-```jsx
-import { Avatar } from '@alma-oss/spirit-web-react';
-
+```tsx
 <Avatar aria-label="Profile of Jiří Bárta">
   <span aria-hidden="true">JB</span>
-</Avatar>;
+</Avatar>
 ```
 
 ## Square
 
 Add `isSquare` prop to make the avatar a square.
 
-```jsx
+```tsx
 <Avatar isSquare aria-label="Profile of Jiří Bárta">
   <span aria-hidden="true">JB</span>
 </Avatar>
@@ -24,7 +22,7 @@ Add `isSquare` prop to make the avatar a square.
 
 The Avatar component is available in all [extended sizes][dictionary-size].
 
-```jsx
+```tsx
 <Avatar aria-label="Profile of Jiří Bárta" size="xsmall">
   <span aria-hidden="true">JB</span>
 </Avatar>
@@ -46,7 +44,7 @@ The Avatar component is available in all [extended sizes][dictionary-size].
 
 You can set different avatar sizes for different [breakpoints][dictionary-breakpoint] using a responsive object:
 
-```jsx
+```tsx
 <Avatar size={{ mobile: 'xsmall', tablet: 'medium', desktop: 'xlarge' }} aria-label="Profile of Jiří Bárta">
   <svg class="Icon" width="24" height="24" aria-hidden="true">
     <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
@@ -60,7 +58,7 @@ The content of the `Avatar` component can be an image, an icon, or a text string
 
 ### Icon
 
-```jsx
+```tsx
 <Avatar size="xsmall" aria-label="Profile of Jiří Bárta">
   <Icon name="profile" />
 </Avatar>
@@ -94,7 +92,7 @@ To ensure correct Icon rendering, please refer to the [Icon component documentat
 
 Add an image, it will be resized to fit the avatar.
 
-```jsx
+```tsx
 <Avatar aria-label="Profile of Jiří Bárta">
   <img src="https://picsum.photos/id/823/162/162" alt="Jiří Bárta" aria-hidden="true" />
 </Avatar>
@@ -110,7 +108,7 @@ It is possible to use text as the content of the `Avatar` component.
 This is useful when you want to display the initials of a user. You need to
 take care of the text length and case. The rest is handled by the component.
 
-```jsx
+```tsx
 <Avatar aria-label="Profile of Jiří Bárta">
   <span aria-hidden="true">JB</span>
 </Avatar>

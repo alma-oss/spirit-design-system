@@ -4,19 +4,15 @@
 
 The ValidationText subcomponent displays validation texts for Field components like TextField, TextArea, Checkbox, FileUploader, etc.
 
-```jsx
-import { ValidationText } from '@alma-oss/spirit-web-react';
-```
-
 Basic example usage:
 
-```jsx
+```tsx
 <ValidationText UNSAFE_className="Component__validationText" validationText="Danger validation text" />
 ```
 
 Advanced example:
 
-```jsx
+```tsx
 <ValidationText
   hasValidationStateIcon
   id="component__validationText"
@@ -49,13 +45,13 @@ and [escape hatches][readme-escape-hatches].
 
 The HelperText subcomponent displays helper texts for Field components like TextField, TextArea, Checkbox, FileUploader, etc.
 
-```jsx
+```tsx
 <HelperText UNSAFE_className="Component__helperText" helperText="Helper text" />
 ```
 
 Advanced example:
 
-```jsx
+```tsx
 <HelperText
   id="component__helperText"
   UNSAFE_className="Component__helperText"
@@ -84,13 +80,13 @@ This component can be customized using various props to fit different use cases.
 
 Simple Label example:
 
-```jsx
+```tsx
 <Label>Label content</Label>
 ```
 
 ### Full Example
 
-```jsx
+```tsx
 <Label elementType="span" htmlFor="input-id">
   Label content
 </Label>

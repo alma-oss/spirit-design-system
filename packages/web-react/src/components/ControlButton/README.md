@@ -15,12 +15,10 @@ Do you need size consistency with form controls or a heavier visual? Use [Button
 
 ## Basic Usage
 
-```jsx
-import { ControlButton, Icon } from '@alma-oss/spirit-web-react';
-
+```tsx
 <ControlButton isSymmetrical aria-label="Close">
   <Icon name="close" />
-</ControlButton>;
+</ControlButton>
 ```
 
 ## Variants
@@ -29,7 +27,7 @@ import { ControlButton, Icon } from '@alma-oss/spirit-web-react';
 
 The default variant with a visible border:
 
-```jsx
+```tsx
 <ControlButton isSymmetrical aria-label="Close">
   <Icon name="close" />
 </ControlButton>
@@ -39,7 +37,7 @@ The default variant with a visible border:
 
 Remove the border by adding `isSubtle`:
 
-```jsx
+```tsx
 <ControlButton isSubtle isSymmetrical aria-label="Close">
   <Icon name="close" />
 </ControlButton>
@@ -49,7 +47,7 @@ Remove the border by adding `isSubtle`:
 
 ControlButton supports three sizes:
 
-```jsx
+```tsx
 <ControlButton size="small" isSymmetrical aria-label="Close">
   <Icon name="close" />
 </ControlButton>
@@ -70,7 +68,7 @@ Enable the expanded size scale by wrapping ControlButton in an element with the
 `spirit-feature-enable-v5-control-button-expanded-size-scale` CSS class. When enabled, the size scale
 shifts to include `xsmall` and `xlarge` sizes while remapping the existing sizes.
 
-```jsx
+```tsx
 <div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
   <ControlButton size="xsmall" isSymmetrical aria-label="Close">
     <Icon name="close" />
@@ -82,7 +80,7 @@ shifts to include `xsmall` and `xlarge` sizes while remapping the existing sizes
 
 Use the `isSymmetrical` prop to make the control button have equal width and height. This is typically used for icon-only buttons.
 
-```jsx
+```tsx
 <ControlButton isSymmetrical aria-label="Close">
   <Icon name="close" />
 </ControlButton>
@@ -90,7 +88,7 @@ Use the `isSymmetrical` prop to make the control button have equal width and hei
 
 You can define responsive values for the `isSymmetrical` prop using an object:
 
-```jsx
+```tsx
 <ControlButton isSymmetrical={{ tablet: true }} aria-label="Close">
   <Icon name="close" />
 </ControlButton>
@@ -98,7 +96,7 @@ You can define responsive values for the `isSymmetrical` prop using an object:
 
 To turn off symmetrical from a specific breakpoint onwards, set the value to `false`:
 
-```jsx
+```tsx
 <ControlButton isSymmetrical={{ mobile: true, tablet: false }} aria-label="Close">
   <Icon name="close" />
 </ControlButton>
@@ -109,7 +107,7 @@ To turn off symmetrical from a specific breakpoint onwards, set the value to `fa
 ControlButtons automatically adapt to their parent's background color using the dynamic color system.
 Set a background and text color on the parent element:
 
-```jsx
+```tsx
 <Box backgroundColor="emotion-informative-basic" textColor="emotion-informative-subtle">
   <ControlButton isSymmetrical aria-label="Close">
     <Icon name="close" />
@@ -123,7 +121,7 @@ This works with any pair of available background and text colors.
 
 For icon-only buttons, always include an accessible label using the `aria-label` attribute:
 
-```jsx
+```tsx
 <ControlButton isSymmetrical aria-label="Close dialog">
   <Icon name="close" />
 </ControlButton>
@@ -155,7 +153,7 @@ and [escape hatches][readme-escape-hatches].
 The ControlButton component can be rendered as a custom element using the `elementType` prop.
 This is useful when you need the styling of a ControlButton but the semantics of another element, such as a link:
 
-```jsx
+```tsx
 <ControlButton elementType="a" href="/close" isSymmetrical aria-label="Close">
   <Icon name="close" />
 </ControlButton>
@@ -163,12 +161,17 @@ This is useful when you need the styling of a ControlButton but the semantics of
 
 You can even use a custom component, such as a Link component from a routing library:
 
-```jsx
+```tsx
 import { Link } from 'react-router-dom';
+import { ControlButton, Icon } from '@alma-oss/spirit-web-react';
 
-<ControlButton elementType={Link} to="/close" isSymmetrical aria-label="Close">
-  <Icon name="close" />
-</ControlButton>;
+export const Example = () => {
+  return (
+    <ControlButton elementType={Link} to="/close" isSymmetrical aria-label="Close">
+      <Icon name="close" />
+    </ControlButton>
+  );
+};
 ```
 
 [button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Button/README.md

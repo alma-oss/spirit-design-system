@@ -7,7 +7,7 @@ You can choose whether to render the inner `Container` component and what size o
 or you can set your own padding values. The `Section` component also supports setting the
 background color.
 
-```jsx
+```tsx
 <Section>Content</Section>
 ```
 
@@ -15,13 +15,13 @@ background color.
 
 You can define padding using the `paddingY`, `paddingTop` or `paddingBottom` props.
 
-```jsx
+```tsx
 <Section paddingY="space-200">Content</Section>
 ```
 
 Responsive values can be set for each prop using an object:
 
-```jsx
+```tsx
 <Section paddingTop={{ mobile: 'space-200', tablet: 'space-300', desktop: 'space-400' }}>Content</Section>
 ```
 
@@ -29,7 +29,7 @@ Responsive values can be set for each prop using an object:
 
 You can define background color using the `backgroundColor` prop.
 
-```jsx
+```tsx
 <Section backgroundColor="primary">Content</Section>
 ```
 
@@ -37,7 +37,7 @@ You can define background color using the `backgroundColor` prop.
 
 Section renders inner `Container` component by default. You can disable it by setting `hasContainer` prop to `false`.
 
-```jsx
+```tsx
 <Section hasContainer={false}>Content without Container</Section>
 ```
 
@@ -45,7 +45,7 @@ Section renders inner `Container` component by default. You can disable it by se
 
 Additionally, you can pass props to the `Container` component using the `containerProps` prop.
 
-```jsx
+```tsx
 <Section containerProps={{ isFluid: true }}>Content</Section>
 ```
 
@@ -55,7 +55,7 @@ Sizes based on the Size Extended dictionary are provided.
 
 Each size sets the paddingY of the Section using utility classes.
 
-```jsx
+```tsx
 <Section size="xsmall">Content</Section>
 <Section size="small">Content</Section>
 <Section size="medium">Content</Section>
@@ -75,7 +75,7 @@ Table of sizes with their corresponding vertical padding values:
 
 You can combine the `size` prop with `paddingTop` and `paddingBottom` for more control.
 
-```jsx
+```tsx
 <Section size="medium" paddingTop={{ desktop: 'space-200' }}>
   Section with medium size and custom padding top on desktop.
 </Section>
@@ -83,7 +83,7 @@ You can combine the `size` prop with `paddingTop` and `paddingBottom` for more c
 
 However, the `paddingY` prop will override the `size` prop.
 
-```jsx
+```tsx
 <Section size="medium" paddingY={{ desktop: 'space-200' }}>
   Only the paddingY prop will be applied.
 </Section>
@@ -93,14 +93,14 @@ However, the `paddingY` prop will override the `size` prop.
 
 You can set the text alignment of the Section using the `textAlignment` prop.
 
-```jsx
+```tsx
 <Section textAlignment="center">Centered content</Section>
 <Section textAlignment="right">Right-aligned content</Section>
 ```
 
 You can define responsive values for the `textAlignment` prop using an object:
 
-```jsx
+```tsx
 <Section textAlignment={{ mobile: 'center', tablet: 'right', desktop: 'left' }}>Responsive text alignment</Section>
 ```
 

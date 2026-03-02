@@ -7,13 +7,13 @@ The label can be hidden.
 
 Basic example usage:
 
-```jsx
+```tsx
 <Radio id="radio-default" isChecked label="Label" name="radioDefault" />
 ```
 
 Advanced example usage:
 
-```jsx
+```tsx
 <Radio
   autocomplete="off"
   helperText="Helper text"
@@ -29,7 +29,7 @@ Advanced example usage:
 
 The `inputPosition` prop allows you to position the input to the `start` (default) or `end` of the label:
 
-```jsx
+```tsx
 <Radio id="radio-start" label="Input at Start (default)" inputPosition="start" />
 <Radio id="radio-end" label="Input at End" inputPosition="end" />
 ```
@@ -38,7 +38,7 @@ The `inputPosition` prop allows you to position the input to the `start` (defaul
 
 Pass an object to adjust the input position based on the [breakpoint][dictionary-breakpoint]:
 
-```jsx
+```tsx
 <Radio id="radio-responsive" label="Responsive Input Position" inputPosition={{ mobile: 'end', tablet: 'start' }} />
 ```
 
@@ -68,7 +68,7 @@ and [escape hatches][readme-escape-hatches].
 
 Text field classes are fabricated using `useRadioStyleProps` hook. You can use it to create your own custom Radio component.
 
-```jsx
+```tsx
 const CustomRadio = (props: SpiritRadioProps): JSX.Element => {
   const { id } = props;
   const { classProps, props: modifiedProps } = useRadioStyleProps(props);
@@ -80,8 +80,12 @@ const CustomRadio = (props: SpiritRadioProps): JSX.Element => {
     <div className={classProps.root}>
       <input {...modifiedProps} id={id} className={classProps.input} aria-describedby={helperTextId} />
       <div className={styleProps.text}>
-        <label className={styleProps.label} htmlFor={id}>{props.label}</label>
-        <div className={styleProps.helperText} id={helperTextId}>{props.helperText}</div>
+        <label className={styleProps.label} htmlFor={id}>
+          {props.label}
+        </label>
+        <div className={styleProps.helperText} id={helperTextId}>
+          {props.helperText}
+        </div>
       </div>
     </div>
   );

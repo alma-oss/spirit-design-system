@@ -49,7 +49,7 @@ Link Spirit CSS (see [`spirit-web` docs][web-docs] for more options):
 
 Import React components in your app:
 
-```jsx
+```tsx
 import { Button } from '@alma-oss/spirit-web-react';
 ```
 
@@ -59,12 +59,16 @@ If you want to prefix the component classes with your own namespace, you can use
 
 Check [`spirit-web` docs][web-pkg-prefixes] to learn how to prefix CSS class names.
 
-```jsx
+```tsx
 import { ClassNamePrefixProvider } from '@alma-oss/spirit-web-react/context/ClassNamePrefixContext';
 
-<ClassNamePrefixProvider value="jobs">
-  <Button>Button</Button>
-</ClassNamePrefixProvider>;
+export const Example = () => {
+  return (
+    <ClassNamePrefixProvider value="jobs">
+      <Button>Button</Button>
+    </ClassNamePrefixProvider>
+  );
+};
 ```
 
 ## Additional Attributes
@@ -136,7 +140,7 @@ The component will be hidden from the specified breakpoints up using CSS display
 
 #### Examples
 
-```jsx
+```tsx
 // Spacing examples
 <Alert marginBottom="space-100" />
 <Button marginX={{ mobile: 'space-100', tablet: 'space-200' }} />

@@ -4,13 +4,13 @@ This is React implementation of the abstract component TextFieldBase for the pur
 
 Basic example usage:
 
-```jsx
+```tsx
 <TextFieldBase id="text-field-base-default" label="Example TextFieldBase" name="textFieldBaseDefault" />
 ```
 
 Advanced example usage:
 
-```jsx
+```tsx
 <TextFieldBase
   hasValidationIcon
   helperText="custom helper text"
@@ -27,7 +27,7 @@ Advanced example usage:
 
 TextFieldBase with password toggle (button to reveal the password):
 
-```jsx
+```tsx
 <TextFieldBase
   hasPasswordToggle
   id="text-field-base-password-toggle"

@@ -2,7 +2,7 @@
 
 The `IconBox` component is a composition of the `Icon` inside the `Box` component.
 
-```jsx
+```tsx
 <IconBox name="search" />
 ```
 
@@ -10,7 +10,7 @@ The `IconBox` component is a composition of the `Icon` inside the `Box` componen
 
 You can define shape using the `shape` prop.
 
-```jsx
+```tsx
 <IconBox name="search" shape="circle" />
 ```
 
@@ -18,7 +18,7 @@ You can define shape using the `shape` prop.
 
 You can set `hasBorder` prop to render the `IconBox` without a border.
 
-```jsx
+```tsx
 <IconBox name="search" hasBorder={false} />
 ```
 
@@ -26,13 +26,13 @@ You can set `hasBorder` prop to render the `IconBox` without a border.
 
 You can define size using the `size` prop.
 
-```jsx
+```tsx
 <IconBox name="search" size="large" />
 ```
 
 You can also define responsive values for the `size` prop using an object:
 
-```jsx
+```tsx
 <IconBox name="search" size={{ mobile: 'small', tablet: 'medium', desktop: 'large' }} />
 ```
 
@@ -40,7 +40,7 @@ You can also define responsive values for the `size` prop using an object:
 
 The `color` prop defines the visual style of the IconBox by applying a combination of background color, border color, and icon color.
 
-```jsx
+```tsx
 <IconBox name="search" color="primary" />
 ```
 
@@ -50,7 +50,7 @@ Each predefined color value automatically maps to a set of design token-based st
 
 The `isSubtle` prop allows you to render the IconBox with a subtle color variant. Default value is `true`.
 
-```jsx
+```tsx
 <IconBox name="search" isSubtle={false} />
 ```
 
@@ -60,7 +60,7 @@ The `iconName` prop specifies the name of the icon to render within the IconBox.
 
 > ⚠️ Dualtone Icons are not supported. Do not try to pass the icon name with the `-dualtone` suffix.
 
-```jsx
+```tsx
 <IconBox iconName="search" />
 ```
 
@@ -77,12 +77,16 @@ When composing your own version using Box and Icon, make sure the icon behaves a
 - adding `UNSAFE_className="d-block"` directly to the Icon component, or
 - applying appropriate styling to its parent container (e.g `UNSAFE_className="d-flex"` on Box component).
 
-```jsx
+```tsx
 import { Box, Icon } from '@alma-oss/spirit-web-react';
 
-<Box backgroundColor="primary" borderRadius="200" borderWidth="100" padding="space-600">
-  <Icon name="search" UNSAFE_className="d-block" />
-</Box>;
+export const Example = () => {
+  return (
+    <Box backgroundColor="primary" borderRadius="200" borderWidth="100" padding="space-600">
+      <Icon name="search" UNSAFE_className="d-block" />
+    </Box>
+  );
+};
 ```
 
 ## API

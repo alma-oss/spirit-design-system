@@ -7,97 +7,73 @@ with `isItem` property. We do this to avoid repeating the same code and to simpl
 
 Simple Item example:
 
-```jsx
-import { Item } from '@alma-oss/spirit-web-react';
-
-<Item label="Item" />;
+```tsx
+<Item label="Item" />
 ```
 
 Item with icon example:
 
-```jsx
-import { Item } from '@alma-oss/spirit-web-react';
-
-<Item label="Item" iconName="search" />;
+```tsx
+<Item label="Item" iconName="search" />
 ```
 
 Item in selected state example (with icon only by default):
 
-```jsx
-import { Item } from '@alma-oss/spirit-web-react';
-
-<Item label="Item" isSelected />;
+```tsx
+<Item label="Item" isSelected />
 ```
 
 Item in selected state with background only:
 
-```jsx
-import { Item } from '@alma-oss/spirit-web-react';
-
-<Item label="Item" isSelected selectionDecorator="background" />;
+```tsx
+<Item label="Item" isSelected selectionDecorator="background" />
 ```
 
 Item in selected state with both background and icon:
 
-```jsx
-import { Item } from '@alma-oss/spirit-web-react';
-
-<Item label="Item" isSelected selectionDecorator="both" />;
+```tsx
+<Item label="Item" isSelected selectionDecorator="both" />
 ```
 
 Item with Helper text example:
 
-```jsx
-import { Item } from '@alma-oss/spirit-web-react';
-
-<Item label="Item" helperText="Helper text" />;
+```tsx
+<Item label="Item" helperText="Helper text" />
 ```
 
 Item in disabled state example:
 
-```jsx
-import { Item } from '@alma-oss/spirit-web-react';
-
-<Item label="Item" isDisabled />;
+```tsx
+<Item label="Item" isDisabled />
 ```
 
 Item with icon and helper text in selected state example:
 
-```jsx
-import { Item } from '@alma-oss/spirit-web-react';
-
-<Item label="Item" iconName="search" helperText="Helper text" isSelected />;
+```tsx
+<Item label="Item" iconName="search" helperText="Helper text" isSelected />
 ```
 
 Item as a link example:
 
-```jsx
-import { Item } from '@alma-oss/spirit-web-react';
-
-<Item label="Item" elementType="a" href="#" />;
+```tsx
+<Item label="Item" elementType="a" href="#" />
 ```
 
 Radio as Item:
 
-```jsx
-import { Radio } from '@alma-oss/spirit-web-react';
-
-<Radio id="radio-item" name="example" label="Radio Label" isItem />;
+```tsx
+<Radio id="radio-item" name="example" label="Radio Label" isItem />
 ```
 
 Checkbox as Item:
 
-```jsx
-import { Checkbox } from '@alma-oss/spirit-web-react';
-
-<Checkbox id="checkbox-item" name="example" label="Checkbox Label" isItem />;
+```tsx
+<Checkbox id="checkbox-item" name="example" label="Checkbox Label" isItem />
 ```
 
 Usage in [Dropdown][dropdown] component:
 
-```jsx
-import { Dropdown, DropdownTrigger, DropdownPopover, Item } from '@alma-oss/spirit-web-react';
-
+```tsx
 const [isOpen, setIsOpen] = React.useState(false);
 const onToggle = () => setIsOpen(!isOpen);
 

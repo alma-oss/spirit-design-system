@@ -16,10 +16,10 @@ The `Navigation` is a `nav` wrapper for navigation items.
 The `Navigation` component can be horizontal or vertical. Use `direction` prop to set the orientation. Default direction is `horizontal`.
 
 ```tsx
-<Navigation aria-label="Main Navigation">{/* Navigation items go here */}</Navigation>;
+<Navigation aria-label="Main Navigation">{/* Navigation items go here */}</Navigation>
 <Navigation aria-label="Main Navigation" direction="vertical">
   {/* Navigation items go here */}
-</Navigation>;
+</Navigation>
 ```
 
 It centres its children vertically, and if the children do not include `NavigationAction` components,
@@ -80,7 +80,7 @@ It has to be either `box` or `pill` variant. Default variant is `box`.
 <NavigationAction href="#">Link</NavigationAction>
 <NavigationAction href="#" variant="pill">
   Link
-</NavigationAction>;
+</NavigationAction>
 ```
 
 It can obtain `isSelected` or `isDisabled` states by adding the respective props.

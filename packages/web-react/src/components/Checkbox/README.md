@@ -7,13 +7,13 @@ The label could be hidden and show if the input is required.
 
 Basic example usage:
 
-```jsx
+```tsx
 <Checkbox id="checkbox-default" label="Label" name="checkboxDefault" />
 ```
 
 Advanced example usage:
 
-```jsx
+```tsx
 <Checkbox
   hasValidationIcon
   id="checkbox-advanced"
@@ -30,7 +30,7 @@ Advanced example usage:
 
 The `inputPosition` prop allows you to position the input to the `start` (default) or `end` of the label:
 
-```jsx
+```tsx
 <Checkbox id="checkbox-start" label="Input at Start (default)" inputPosition="start" />
 <Checkbox id="checkbox-end" label="Input at End" inputPosition="end" />
 ```
@@ -39,7 +39,7 @@ The `inputPosition` prop allows you to position the input to the `start` (defaul
 
 Pass an object to adjust the input position based on the [breakpoint][dictionary-breakpoint]:
 
-```jsx
+```tsx
 <Checkbox
   id="checkbox-responsive"
   label="Responsive Input Position"
@@ -77,7 +77,7 @@ and [escape hatches][readme-escape-hatches].
 
 Text field classes are fabricated using `useCheckboxStyleProps` hook. You can use it to create your own custom Checkbox component.
 
-```jsx
+```tsx
 const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
   const { id } = props;
   const { classProps, props: modifiedProps } = useCheckboxStyleProps(props);
@@ -87,11 +87,22 @@ const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
 
   return (
     <div className={classProps.root}>
-      <input {...modifiedProps} id={id} className={classProps.input} aria-describedby={`${validationTextId} ${helperTextId}`} />
+      <input
+        {...modifiedProps}
+        id={id}
+        className={classProps.input}
+        aria-describedby={`${validationTextId} ${helperTextId}`}
+      />
       <div className={styleProps.text}>
-        <label className={styleProps.label} htmlFor={props.id}>{props.label}</label>
-        <div className={styleProps.helperText} id={helperTextId}>{props.helperText}</div>
-        <div className={styleProps.validationText} id={validationTextId}>{props.validationText}</div>
+        <label className={styleProps.label} htmlFor={props.id}>
+          {props.label}
+        </label>
+        <div className={styleProps.helperText} id={helperTextId}>
+          {props.helperText}
+        </div>
+        <div className={styleProps.validationText} id={validationTextId}>
+          {props.validationText}
+        </div>
       </div>
     </div>
   );

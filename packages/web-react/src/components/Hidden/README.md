@@ -4,11 +4,11 @@ The Hidden component controls responsive visibility without any visual styling. 
 
 ## Basic Usage
 
-```jsx
+```tsx
 import { Hidden } from '@alma-oss/spirit-web-react';
 ```
 
-```jsx
+```tsx
 <Hidden on="mobile">Desktop and tablet only</Hidden>
 ```
 
@@ -20,7 +20,7 @@ import { Hidden } from '@alma-oss/spirit-web-react';
 
 Use the `on` prop to hide content on specific breakpoints only:
 
-```jsx
+```tsx
 <Hidden on="mobile">Desktop and tablet content</Hidden>
 <Hidden on={['mobile', 'desktop']}>Tablet only content</Hidden>
 ```
@@ -29,7 +29,7 @@ Use the `on` prop to hide content on specific breakpoints only:
 
 Use the `from` prop to hide content from a specific breakpoint and larger:
 
-```jsx
+```tsx
 <Hidden from="tablet">Mobile only content</Hidden>
 <Hidden from="desktop">Mobile and tablet content</Hidden>
 ```
@@ -38,7 +38,7 @@ Use the `from` prop to hide content from a specific breakpoint and larger:
 
 You can use both `on` and `from` together for complex visibility patterns:
 
-```jsx
+```tsx
 <Hidden on="mobile" from="desktop">
   Tablet only content
 </Hidden>
@@ -53,7 +53,7 @@ component-specific props (`on`/`from`) will take precedence.
 
 Render as any HTML element:
 
-```jsx
+```tsx
 <Hidden elementType="div" on="mobile">Content</Hidden>
 <Hidden elementType="section" from="tablet">Content</Hidden>
 ```
@@ -77,7 +77,7 @@ a separate accessible label, screen readers won't be able to access ANY version 
 
 For example, add the `aria-label` attribute to the Button:
 
-```jsx
+```tsx
 <Button aria-label="Edit">
   <Icon name="edit" hideFrom="tablet" />
   <Hidden on="mobile" aria-hidden="true">
@@ -90,7 +90,7 @@ For example, add the `aria-label` attribute to the Button:
 
 Alternatively, use the [VisuallyHidden][visually-hidden] component:
 
-```jsx
+```tsx
 <Button>
   <Icon name="edit" hideFrom="tablet" />
   <VisuallyHidden>Edit</VisuallyHidden>

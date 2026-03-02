@@ -556,7 +556,7 @@ In some cases, you can set file sizes using shorthand notations. However, these 
 [In Next.js][next-js-body-size-limit], you can specify file size limits using a shorthand like `1mb`.
 This will also be interpreted as **1,048,576 bytes (1 MiB)**:
 
-```jsx
+```tsx
 module.exports = {
   experimental: {
     serverActions: {

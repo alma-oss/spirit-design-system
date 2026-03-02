@@ -46,29 +46,33 @@ rules.unshift({
 });
 ```
 
-```jsx
+```tsx
 import Warning from '@alma-oss/spirit-icons/svg/warning.svg';
 
-<Warning />;
+export const Example = () => {
+  return <Warning />;
+};
 ```
 
 Or you can import React components directly from `@alma-oss/spirit-icons/react`.
 
 ⚠️ Beware of naming, as all React component does, they are named using **PascalCase** and `Icon` suffix.
 
-```jsx
+```tsx
 import { WarningIcon } from '@alma-oss/spirit-icons/react';
 // or
 import WarningIcon from '@alma-oss/spirit-icons/react/WarningIcon';
 
-<WarningIcon />;
+export const Example = () => {
+  return <WarningIcon />;
+};
 ```
 
 ### Icons Paths
 
 Alternatively you can use an `icons` object which consists of an icon name and SVG content. Thus you can fabricate your icon yourself.
 
-```jsx
+```tsx
 import icons from '@alma-oss/spirit-icons/icons';
 
 export const Icon = ({ name, size }) => {

@@ -2,13 +2,7 @@
 
 ## Basic Example Usage
 
-```jsx
-import { ButtonLink } from '@alma-oss/spirit-web-react';
-```
-
-```jsx
-import { ButtonLink } from '@alma-oss/spirit-web-react';
-
+```tsx
 <ButtonLink href="#" color="primary">Button primary</ButtonLink>
 <ButtonLink href="#" color="secondary">Button secondary</ButtonLink>
 <ButtonLink href="#" color="tertiary">Button tertiary</ButtonLink>
@@ -23,7 +17,7 @@ import { ButtonLink } from '@alma-oss/spirit-web-react';
 
 Use the `isSymmetrical` prop to make the button link have equal width and height. This is typically used for icon-only buttons.
 
-```jsx
+```tsx
 <ButtonLink href="#" isSymmetrical>
   <Icon name="hamburger" />
   <VisuallyHidden>Menu</VisuallyHidden>
@@ -32,7 +26,7 @@ Use the `isSymmetrical` prop to make the button link have equal width and height
 
 You can define responsive values for the `isSymmetrical` prop using an object:
 
-```jsx
+```tsx
 <ButtonLink href="#" isSymmetrical={{ tablet: true }}>
   <Icon name="hamburger" marginRight={{ mobile: 'space-400', tablet: 'space-0' }} />
   <VisuallyHidden>Menu</VisuallyHidden>
@@ -44,7 +38,7 @@ You can define responsive values for the `isSymmetrical` prop using an object:
 
 To turn off symmetrical from a specific breakpoint onwards, set the value to `false`:
 
-```jsx
+```tsx
 <ButtonLink href="#" isSymmetrical={{ mobile: true, tablet: false }}>
   <Icon name="hamburger" marginRight={{ tablet: 'space-400' }} />
   <VisuallyHidden>Menu</VisuallyHidden>
@@ -63,7 +57,7 @@ regardless of viewport size.
 
 To span a `ButtonLink` to the full width of its parent, you can use display utility classes or `Grid` to achieve the desired layout.
 
-```jsx
+```tsx
 <div className="d-grid">
   <ButtonLink href="#">Primary block-level Button</ButtonLink>
 </div>

@@ -8,7 +8,7 @@ ActionGroup component is a container component that is used to position action c
 - For desktop and tablet views, actions are positioned in a horizontal direction.
 - For mobile view, actions are positioned in a vertical layout and are stretched to the full width of the container.
 
-```jsx
+```tsx
 <ActionGroup>
   <!-- Actions components go here -->
 </ActionGroup>
@@ -30,7 +30,7 @@ These defaults can be customised as needed to suit your requirements.
 
 ### Reversed Example
 
-```jsx
+```tsx
 <ActionGroup
   direction={{ mobile: 'vertical', tablet: 'horizontal-reversed' }} // changed to 'horizontal-reversed'
   alignmentX={{ mobile: 'stretch', tablet: 'right' }} // changed to 'right'
@@ -46,7 +46,7 @@ These defaults can be customised as needed to suit your requirements.
 
 ## Full Example
 
-```jsx
+```tsx
 <ActionGroup>
   <ButtonLink href="#" color="primary">
     Primary Action

@@ -2,7 +2,7 @@
 
 The `Divider` component is used as horizontal separator of the content.
 
-```jsx
+```tsx
 <Divider />
 ```
 

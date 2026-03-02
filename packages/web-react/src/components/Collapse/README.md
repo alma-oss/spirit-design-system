@@ -4,87 +4,101 @@
 
 ### Basic
 
-```jsx
+```tsx
 import React, { useState } from 'react';
 import { Button } from '@alma-oss/spirit-web-react';
 
-// ...
+export const Example = () => {
+  const [isOpen, toggle] = useState<boolean>(true);
 
-const [isOpen, toggle] = useState<boolean>(true);
-
-<Button onClick={() => toggle(!isOpen)}>Collapse Trigger ({ isOpen ? 'Open' : 'Closed' })</Button>
-<Collapse isOpen={isOpen}>
-  ...
-</Collapse>
+  return (
+    <>
+      <Button onClick={() => toggle(!isOpen)}>Collapse Trigger ({isOpen ? 'Open' : 'Closed'})</Button>
+      <Collapse isOpen={isOpen}>…</Collapse>
+    </>
+  );
+};
 ```
 
 ### With Toggle From Hook
 
-```jsx
+```tsx
 import React, { useState } from 'react';
 import { Button, Collapse, useCollapse } from '@alma-oss/spirit-web-react';
 
-// ...
+export const Example = () => {
+  const { isOpen, toggle } = useCollapse(false);
 
-const { isOpen, toggle } = useCollapse(false);
-
-<Button onClick={() => toggle(!isOpen)}>Collapse Trigger ({ isOpen ? 'Open' : 'Closed' })</Button>
-<Collapse isOpen={isOpen}>
-  ...
-</Collapse>
+  return (
+    <>
+      <Button onClick={() => toggle(!isOpen)}>Collapse Trigger ({isOpen ? 'Open' : 'Closed'})</Button>
+      <Collapse isOpen={isOpen}>…</Collapse>
+    </>
+  );
+};
 ```
 
 ### With Toggle Handler From Hook
 
-```jsx
+```tsx
 import React, { useState } from 'react';
 import { Button, Collapse, useCollapse } from '@alma-oss/spirit-web-react';
 
-// ...
+export const Example = () => {
+  const { isOpen, toggleHandler } = useCollapse(false);
 
-const { isOpen, toggleHandler } = useCollapse(false);
-
-<Button onClick={toggleHandler}>Collapse Trigger ({ isOpen ? 'Open' : 'Closed' })</Button>
-<Collapse isOpen={isOpen}>
-  ...
-</Collapse>
+  return (
+    <>
+      <Button onClick={toggleHandler}>Collapse Trigger ({isOpen ? 'Open' : 'Closed'})</Button>
+      <Collapse isOpen={isOpen}>…</Collapse>
+    </>
+  );
+};
 ```
 
 ### Responsive
 
-```jsx
+```tsx
 import React, { useState } from 'react';
 import { Button, Collapse } from '@alma-oss/spirit-web-react';
 
-// ...
+export const Example = () => {
+  const [isOpen, toggle] = useState<boolean>(true);
 
-const [isOpen, toggle] = useState<boolean>(true);
-
-<Button hideFrom="tablet" onClick={() => toggle(!isOpen)}>
-  Collapse Trigger ({ isOpen ? 'Open' : 'Closed' })
-</Button>
-<Collapse isOpen={isOpen}>
-  ...
-</Collapse>
+  return (
+    <>
+      <Button hideFrom="tablet" onClick={() => toggle(!isOpen)}>
+        Collapse Trigger ({isOpen ? 'Open' : 'Closed'})
+      </Button>
+      <Collapse collapsibleToBreakpoint="tablet" isOpen={isOpen}>
+        …
+      </Collapse>
+    </>
+  );
+};
 ```
 
 ### Inline Expanding
 
 For inline text expansion (useful for "read more" functionality), use `elementType="span"`. This ensures the expanded content appears inline with existing text rather than on a new line.
 
-```jsx
+```tsx
 import React, { useState } from 'react';
 import { Button, Collapse } from '@alma-oss/spirit-web-react';
 
-const [isOpen, toggle] = useState < boolean > false;
+export const Example = () => {
+  const [isOpen, toggle] = useState<boolean>(false);
 
-<p>
-  This is some text that continues inline when expanded.{' '}
-  <Button onClick={() => toggle(!isOpen)}>{isOpen ? 'less' : '… more'}</Button>
-  <Collapse id="inline-collapse" isOpen={isOpen} elementType="span">
-    This additional content will appear inline with the existing text when expanded.
-  </Collapse>
-</p>;
+  return (
+    <p>
+      This is some text that continues inline when expanded.{' '}
+      <Button onClick={() => toggle(!isOpen)}>{isOpen ? 'less' : '… more'}</Button>
+      <Collapse id="inline-collapse" isOpen={isOpen} elementType="span">
+        This additional content will appear inline with the existing text when expanded.
+      </Collapse>
+    </p>
+  );
+};
 ```
 
 Important Notes:
@@ -110,37 +124,43 @@ and [escape hatches][readme-escape-hatches].
 
 ### Basic
 
-```jsx
+```tsx
 import React, { useState } from 'react';
 import { Button, UncontrolledCollapse } from '@alma-oss/spirit-web-react';
 
-// ...
-
-<UncontrolledCollapse
-  id="collapse-example"
-  renderTrigger={({ isOpen, ...restProps }) => (
-    <Button {...restProps}>Collapse Trigger ({isOpen ? 'Open' : 'Closed'})</Button>
-  )}
->
-  ...
-</UncontrolledCollapse>;
+export const Example = () => {
+  // …
+  return (
+    <UncontrolledCollapse
+      id="collapse-example"
+      renderTrigger={({ isOpen, ...restProps }) => (
+        <Button {...restProps}>Collapse Trigger ({isOpen ? 'Open' : 'Closed'})</Button>
+      )}
+    >
+      …
+    </UncontrolledCollapse>
+  );
+};
 ```
 
-```jsx
+```tsx
 import React, { useState } from 'react';
 import { Button, UncontrolledCollapse } from '@alma-oss/spirit-web-react';
 
-// ...
-
-<UncontrolledCollapse
-  id="collapse-example"
-  renderTrigger={({ isOpen, ...restProps }) => (
-    <Button {...restProps}>Collapse Trigger ({isOpen ? 'Open' : 'Closed'})</Button>
-  )}
-  hideOnCollapse
->
-  ...
-</UncontrolledCollapse>;
+export const Example = () => {
+  // …
+  return (
+    <UncontrolledCollapse
+      id="collapse-example"
+      renderTrigger={({ isOpen, ...restProps }) => (
+        <Button {...restProps}>Collapse Trigger ({isOpen ? 'Open' : 'Closed'})</Button>
+      )}
+      hideOnCollapse
+    >
+      …
+    </UncontrolledCollapse>
+  );
+};
 ```
 
 ## API

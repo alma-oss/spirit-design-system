@@ -1,10 +1,10 @@
 # Tag
 
-```jsx
+```tsx
 import { Tag } from '@alma-oss/spirit-web-react';
 ```
 
-```jsx
+```tsx
   <Tag color="neutral">Tag</Tag>
   <Tag color="success">Tag</Tag>
   <Tag color="informative">Tag</Tag>

@@ -17,11 +17,7 @@ Toast is a composition of a few subcomponents:
 The Toast component is a container responsible for positioning the [ToastBar](#toastbar) component. It is capable of
 handling even multiple toast messages at once, stacking them in a [queue](#toast-queue).
 
-```jsx
-import { Toast } from '@alma-oss/spirit-web-react';
-```
-
-```jsx
+```tsx
 <Toast>
   <!-- ToastBar components go here -->
 </Toast>
@@ -54,7 +50,7 @@ middle of the screen.
 
 Example:
 
-```jsx
+```tsx
 <Toast alignmentX="right" alignmentY="top">
   <!-- ToastBar components go here -->
 </Toast>
@@ -67,7 +63,7 @@ desktop and if not set for a breakpoint, the value from the previous breakpoint 
 
 Example:
 
-```jsx
+```tsx
 <Toast alignmentX="{{ mobile: 'center', tablet: 'right' }}" alignmentY="top">
   <!-- ToastBar components go here -->
 </Toast>
@@ -119,7 +115,7 @@ set the `isCollapsible` prop to `false`.
 
 👉 Please note that the initial scroll position is always at the **top** of the queue.
 
-```jsx
+```tsx
 <Toast isCollapsible={false}>
   <!-- ToastBar components go here -->
 </Toast>
@@ -151,19 +147,23 @@ elements.
 
 Minimum example:
 
-```jsx
+```tsx
 import { ToastBar, ToastBarMessage } from '@alma-oss/spirit-web-react';
 
-<ToastBar id="my-toast">
-  <ToastBarMessage>Message only</ToastBarMessage>
-</ToastBar>;
+export const Example = () => {
+  return (
+    <ToastBar id="my-toast">
+      <ToastBarMessage>Message only</ToastBarMessage>
+    </ToastBar>
+  );
+};
 ```
 
 ### Optional Icon
 
 An icon can be displayed in the ToastBar component, depending on the color of the ToastBar:
 
-```jsx
+```tsx
 <ToastBar id="my-toast" color="success" hasIcon>
   <ToastBarMessage>Message with icon</ToastBarMessage>
 </ToastBar>
@@ -171,7 +171,7 @@ An icon can be displayed in the ToastBar component, depending on the color of th
 
 Alternatively, a custom icon can be used:
 
-```jsx
+```tsx
 <ToastBar id="my-toast" iconName="download">
   <ToastBarMessage>Message with custom icon</ToastBarMessage>
 </ToastBar>
@@ -197,7 +197,7 @@ The content of `ToastBar` can be assembled from the following subcomponents:
 
 Usage example:
 
-```jsx
+```tsx
 <ToastBar id="my-toast" isOpen={isOpen} onClose={() => setIsOpen(false)} isDismissible>
   <ToastBarMessage>This is the main toast message.</ToastBarMessage>
 </ToastBar>
@@ -219,7 +219,7 @@ and [escape hatches][readme-escape-hatches].
 
 Usage example:
 
-```jsx
+```tsx
 <ToastBar id="my-toast" isOpen={isOpen} onClose={() => setIsOpen(false)} isDismissible>
   <ToastBarLink href="#">This is the action link.</ToastBarLink>
 </ToastBar>
@@ -249,19 +249,23 @@ Use the `color` option to change the color of the ToastBar component.
 
 For example:
 
-```jsx
-import { ToastBarMessage } from '@alma-oss/spirit-web-react';
+```tsx
+import { ToastBar, ToastBarMessage } from '@alma-oss/spirit-web-react';
 
-<ToastBar id="my-toast" color="success">
-  <ToastBarMessage>Success message</ToastBarMessage>
-</ToastBar>;
+export const Example = () => {
+  return (
+    <ToastBar id="my-toast" color="success">
+      <ToastBarMessage>Success message</ToastBarMessage>
+    </ToastBar>
+  );
+};
 ```
 
 ### Opening the ToastBar
 
 Set `isOpen` prop to `true` to open a Toast **that is present in the DOM,** e.g.:
 
-```jsx
+```tsx
 <ToastBar id="my-toast" isOpen>
   <ToastBarMessage>Opened ToastBar</ToastBarMessage>
 </ToastBar>
@@ -273,7 +277,7 @@ Set `isOpen` prop to `true` to open a Toast **that is present in the DOM,** e.g.
 
 To make the ToastBar dismissible, add the `isDismissible` prop along with a `onClose` function:
 
-```jsx
+```tsx
 <ToastBar id="my-toast" onClose={() => {}} isDismissible>
   <ToastBarMessage>Dismissible message</ToastBarMessage>
 </ToastBar>
@@ -302,63 +306,81 @@ and [escape hatches][readme-escape-hatches].
 
 ## Full Example
 
-```jsx
+```tsx
+import React, { useState } from 'react';
 import { Button, Toast, ToastBar, ToastBarMessage, ToastBarLink } from '@alma-oss/spirit-web-react';
 
-const [isOpen, setIsOpen] = useState(false);
+export const Example = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-<Button onClick={() => setIsOpen(true)} aria-expanded={isOpen} aria-controls="my-toast">
-  {buttonLabel}
-</Button>
-
-<Toast>
-  <ToastBar id="my-toast" isOpen={isOpen} onClose={() => setIsOpen(false)} isDismissible>
-    <ToastBarMessage>Toast message</ToastBarMessage>
-    <ToastBarLink href="#">Action</ToastBarLink>
-  </ToastBar>
-</Toast>
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)} aria-expanded={isOpen} aria-controls="my-toast">
+        {buttonLabel}
+      </Button>
+      <Toast>
+        <ToastBar id="my-toast" isOpen={isOpen} onClose={() => setIsOpen(false)} isDismissible>
+          <ToastBarMessage>Toast message</ToastBarMessage>
+          <ToastBarLink href="#">Action</ToastBarLink>
+        </ToastBar>
+      </Toast>
+    </>
+  );
+};
 ```
 
 ## UncontrolledToast
 
-```jsx
-import { ToastProvider, UncontrolledToast } from '@alma-oss/spirit-web-react';
-```
+```tsx
+import React from 'react';
+import { Button, ToastProvider, UncontrolledToast, useToast } from '@alma-oss/spirit-web-react';
 
-### Minimal Props
+export const Example = () => {
+  const { show } = useToast(); // must be inside ToastProvider
 
-```jsx
-const { show } = useToast(); // must be inside ToastProvider
+  /* … */
+  return (
+    <ToastProvider>
+      <Button onClick={() => show(ToastTextWithLink, 'toast-id')}>Show Toast</Button>
 
-<ToastProvider>
-  <Button type="button" onClick={() => show(ToastTextWithLink, 'toast-id')}>
-    Show Toast
-  </Button>
-
-  <UncontrolledToast />
-</ToastProvider>;
+      <UncontrolledToast />
+    </ToastProvider>
+  );
+};
 ```
 
 ### All Possible Props
 
-```jsx
-const { show } = useToast(); // must be inside ToastProvider
+```tsx
+import React from 'react';
+import { Button, ToastProvider, UncontrolledToast, useToast } from '@alma-oss/spirit-web-react';
 
-<ToastProvider>
-  <Button
-    type="button"
-    onClick={() =>
-      show('Toast message', 'toast-id', {
-        color: 'danger',
-        iconName: 'download',
-      })
-    }
-  >
-    Show Toast
-  </Button>
+export const Example = () => {
+  const { show } = useToast(); // must be inside ToastProvider
 
-  <UncontrolledToast alignmentX="right" alignmentY="top" closeLabel="Close toast" hasIcon isDismissible isCollapsible />
-</ToastProvider>;
+  return (
+    <ToastProvider>
+      <Button
+        onClick={() =>
+          show('Toast message', 'toast-id', {
+            color: 'danger',
+            iconName: 'download',
+          })
+        }
+      >
+        Show Toast
+      </Button>
+      <UncontrolledToast
+        alignmentX="right"
+        alignmentY="top"
+        closeLabel="Close toast"
+        hasIcon
+        isDismissible
+        isCollapsible
+      />
+    </ToastProvider>
+  );
+};
 ```
 
 ### `useToast` Hook
@@ -384,7 +406,7 @@ This hook returns:
 This function has two required parameters: message and ID.
 All other options are not required and can be omitted entirely.
 
-```jsx
+```tsx
 const { show } = useToast();
 
                             ┌─⫸ Message inside UncontrolledToast (required)

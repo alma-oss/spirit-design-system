@@ -19,7 +19,7 @@ Additionally, Card can be used with [CardLink](#making-the-whole-card-clickable)
 
 Card is the main container of the composition.
 
-```jsx
+```tsx
 <Card>
   {/* CardArtwork or CardMedia */}
   {/* CardBody */}
@@ -49,7 +49,7 @@ negative impact on accessibility of the Card.**
 
 Card can be displayed in a vertical, horizontal, or reversed horizontal layout.
 
-```jsx
+```tsx
 // Vertical card
 <Card direction="vertical">
   {/* … */}
@@ -75,7 +75,7 @@ Pass an object to props to set different values for different [breakpoints][dict
 be applied from mobile to desktop and if not set for a breakpoint, the value from the
 previous breakpoint will be used.
 
-```jsx
+```tsx
 <Card direction={{ mobile: 'vertical', tablet: 'horizontal', desktop: 'horizontal-reversed' }}>{/* … */}</Card>
 ```
 
@@ -83,7 +83,7 @@ previous breakpoint will be used.
 
 Card can be displayed with a border and a box shadow on hover.
 
-```jsx
+```tsx
 <Card isBoxed>{/* … */}</Card>
 ```
 
@@ -98,7 +98,7 @@ To align Card content vertically, use the `alignmentY` prop:
 - `center` — centers content vertically
 - `bottom` — aligns content to the bottom
 
-```jsx
+```tsx
 <Card direction="horizontal" alignmentY="center">
   {/* … */}
 </Card>
@@ -108,7 +108,7 @@ To align Card content vertically, use the `alignmentY` prop:
 
 Pass an object to `alignmentY` to set different values for different [breakpoints][dictionary-breakpoint].
 
-```jsx
+```tsx
 <Card
   direction={{ mobile: 'vertical', tablet: 'horizontal' }}
   alignmentY={{ mobile: 'top', tablet: 'center', desktop: 'bottom' }}
@@ -134,7 +134,7 @@ and [escape hatches][readme-escape-hatches].
 
 CardArtwork is an optional subcomponent that displays a small image or icon.
 
-```jsx
+```tsx
 <CardArtwork>
   <svg width="24" height="24" aria-hidden="true">
     <use xlink:href="/assets/icons/svg/sprite.svg#file" />
@@ -152,7 +152,7 @@ To align the artwork, use `alignmentX` prop:
 - `center`
 - `right`
 
-```jsx
+```tsx
 <CardArtwork alignmentX="center">
   <svg width="24" height="24" aria-hidden="true">
     <use xlink:href="/assets/icons/svg/sprite.svg#file" />
@@ -174,7 +174,7 @@ and [escape hatches][readme-escape-hatches].
 
 To display larger images or videos, use the CardMedia subcomponent.
 
-```jsx
+```tsx
 <CardMedia>
   <img src="https://via.placeholder.com/300x200" alt="" />
 </CardMedia>
@@ -187,7 +187,7 @@ To display larger images or videos, use the CardMedia subcomponent.
 
 Or, for a video:
 
-```jsx
+```tsx
 <CardMedia>
   <video
     src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"
@@ -215,7 +215,7 @@ the media can be even expanded [to the edges](#expanding-the-media) of the Card.
 
 For example:
 
-```jsx
+```tsx
 <CardMedia size="small">{/* … */}</CardMedia>
 ```
 
@@ -227,7 +227,7 @@ CardBody content out of the Card. In such cases, the media will be cropped to fi
 To expand the media to the full width or height of a boxed Card, use the `isExpanded` prop. This option is
 available for both vertical and horizontal (including reversed horizontal) Card layouts.
 
-```jsx
+```tsx
 <Card>
   <CardMedia isExpanded>{/* … */}</CardMedia>
   <CardBody>{/* … */}</CardBody>
@@ -237,7 +237,7 @@ available for both vertical and horizontal (including reversed horizontal) Card 
 Additionally, there is a `filledHeight` prop that expands the media to match the height of the CardBody
 content. This option works with both boxed and non-boxed Card, but is only available in the horizontal Card layout.
 
-```jsx
+```tsx
 <Card direction="horizontal">
   <CardMedia hasFilledHeight>{/* … */}</CardMedia>
   <CardBody>{/* … */}</CardBody>
@@ -257,7 +257,7 @@ Available values are based on the CSS [object-fit][mdn-object-fit] property:
 - `contain` — the media is scaled to maintain its aspect ratio while fitting within the container
 - `cover` (default) — the media is sized to maintain its aspect ratio while filling the container (may be clipped)
 
-```jsx
+```tsx
 <CardMedia fit="contain">
   <img src="https://via.placeholder.com/300x200" alt="" />
 </CardMedia>
@@ -269,7 +269,7 @@ For infographics and images with fixed aspect ratios that should not be cropped,
 
 You can set the background color of the CardMedia container using the `backgroundColor` prop.
 
-```jsx
+```tsx
 <CardMedia backgroundColor="primary">
   <img src="https://via.placeholder.com/300x200" alt="" />
 </CardMedia>
@@ -294,7 +294,7 @@ and [escape hatches][readme-escape-hatches].
 CardLogo is an optional subcomponent that displays a logo. To achieve the best visual result, use the PartnerLogo
 subcomponent.
 
-```jsx
+```tsx
 <CardLogo>
   <PartnerLogo>
     <img src="…" alt="Product Name" />
@@ -306,7 +306,7 @@ subcomponent.
 
 CardBody is the main content area of the Card.
 
-```jsx
+```tsx
 <CardBody>{/* … */}</CardBody>
 ```
 
@@ -325,7 +325,7 @@ and [escape hatches][readme-escape-hatches].
 CardTitle displays the main title of the Card. It uses the `<h4>` heading element by default, but you can use any other
 heading level that fits your document outline.
 
-```jsx
+```tsx
 <CardTitle>
   <a href="#">Card Title</a>
 </CardTitle>
@@ -333,7 +333,7 @@ heading level that fits your document outline.
 
 The CardTitle is emphasized by default. To deemphasize it, simply set the `isHeading` prop to false:
 
-```jsx
+```tsx
 <CardTitle isHeading={false}>
   <a href="#">Card Title</a>
 </CardTitle>
@@ -356,7 +356,7 @@ and [escape hatches][readme-escape-hatches].
 
 CardEyebrow is an optional subcomponent that accompanies the CardTitle.
 
-```jsx
+```tsx
 <CardEyebrow>Content options</CardEyebrow>
 <CardTitle>Card Title</CardTitle>
 ```
@@ -366,7 +366,7 @@ CardEyebrow is an optional subcomponent that accompanies the CardTitle.
 Use CardFooter for actions or any other content at the bottom of the Card. When using Cards with CardFooter in a Grid,
 the CardFooters will automatically line up.
 
-```jsx
+```tsx
 <CardFooter>{/* … */}</CardFooter>
 ```
 
@@ -393,7 +393,7 @@ and [escape hatches][readme-escape-hatches].
 
 In a typical use case, you will display multiple Cards in a [Grid][grid].
 
-```jsx
+```tsx
 <Grid cols={{ mobile: 1, tablet: 2, desktop: 3 }}>
   <Card>{/* … */}</Card>
   <Card>{/* … */}</Card>
@@ -403,7 +403,7 @@ In a typical use case, you will display multiple Cards in a [Grid][grid].
 
 Depending on your situation, you may want to use the list semantics. And it will work!
 
-```jsx
+```tsx
 <Grid cols={{ mobile: 1, tablet: 2, desktop: 3 }} elementType="ul">
   <Card elementType="li">{/* … */}</Card>
   <Card elementType="li">{/* … */}</Card>
@@ -418,7 +418,7 @@ Depending on your situation, you may want to use the list semantics. And it will
 To make the whole Card clickable, use the provided CardLink subcomponent. For best accessibility, you would typically
 wrap your CardTitle text in the CardLink component:
 
-```jsx
+```tsx
 <CardTitle>
   <CardLink href="#">Card title</CardLink>
 </CardTitle>
@@ -431,7 +431,7 @@ with the Card.
 
 If you need the text content of your CardBody remains [selectable and copyable][heydon-pickering-card], you can use the `isSelectable` prop on CardBody component:
 
-```jsx
+```tsx
 <CardBody isSelectable>
   <CardTitle>
     <CardLink href="#">Card title</CardLink>
@@ -458,7 +458,7 @@ The Card will have a single accessible link which will be announced by screen re
 However, if you cannot use the CardLink subcomponent, and you still need to make the media clickable, you can wrap the
 CardMedia image in a link:
 
-```jsx
+```tsx
 <CardMedia>
   <Link href="#" aria-hidden="true">
     <img src="https://via.placeholder.com/300x200" alt="" />
@@ -474,7 +474,7 @@ confused by too many links in the Card.
 For article previews or similar use cases, you may want to display a limited amount of text content with a “Read More”
 link. For optimum accessibility, you should only provide this in the form of a text node, not a button or a link:
 
-```jsx
+```tsx
 <CardBody>
   <CardTitle>
     <CardLink href="#">Card title</a>
@@ -493,7 +493,7 @@ This way, the Card will only have a single accessible link which will be announc
 
 When you put it all together:
 
-```jsx
+```tsx
 <Card isBoxed>
   <CardMedia>
     <img src="…" alt="" />

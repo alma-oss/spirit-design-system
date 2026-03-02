@@ -126,7 +126,7 @@ The new Dropdown has a different API.
 
 Instead of:
 
-```jsx
+```tsx
 <Dropdown id="DropdownExample" renderTrigger={({ trigger }) => <Button {...trigger}>Trigger</Button>}>
   …
 </Dropdown>
@@ -134,7 +134,7 @@ Instead of:
 
 Use:
 
-```jsx
+```tsx
 const [isOpen, setIsOpen] = React.useState(false);
 const onToggle = () => setIsOpen(!isOpen);
 
@@ -476,7 +476,7 @@ users want the advanced positioning options anyway.
 
 Instead of:
 
-```jsx
+```tsx
 <TooltipWrapper>
   <Button UNSAFE_className="TooltipTarget">I have a tooltip!</Button>
   <Tooltip>Hello there!</Tooltip>
@@ -485,7 +485,7 @@ Instead of:
 
 Use:
 
-```jsx
+```tsx
 <Tooltip
   id="Tooltip"
   // …

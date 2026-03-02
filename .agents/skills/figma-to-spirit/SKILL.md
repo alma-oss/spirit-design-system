@@ -163,7 +163,7 @@ When analyzing Figma, check if children have `w-full` (full width) or `shrink-0 
 - **If children do NOT have `w-full`** → Parent should use `alignmentX="left"` to prevent unwanted width expansion
 - **Children with both `w-full` AND `max-width`** → Parent uses `alignmentX="stretch"`, child stretches UP TO its max-width constraint
 
-```jsx
+```tsx
 // WRONG - alignmentX="left" prevents children from filling width even when Figma shows w-full
 <Flex direction="vertical" spacing="space-1000" alignmentX="left">
   <Box UNSAFE_style={{ maxWidth: "800px" }}>...</Box>  {/* Won't stretch to 800px */}
@@ -211,7 +211,7 @@ When analyzing Figma, check if children have `w-full` (full width) or `shrink-0 
 
 Heading and Text accept accent colors, but you must use the **full token name** (not short form).
 
-```jsx
+```tsx
 // WRONG - short form "accent-02" causes TypeScript lint error
 <Heading elementType="div" size="xlarge" textColor="accent-02">300K+</Heading>
 
@@ -230,7 +230,7 @@ When only one breakpoint is provided in Figma:
 1. **Identify the breakpoint** - Check Figma frame width (mobile < 768px, tablet 768-1024px, desktop > 1024px)
 2. **Add responsive props** for other breakpoints:
 
-```jsx
+```tsx
 // Grid: reduce columns on smaller screens
 <Grid cols={{ mobile: 1, tablet: 2, desktop: 4 }} />
 
@@ -430,7 +430,7 @@ Before finalizing code:
 
 **CRITICAL: Never substitute icon names with your own choices.**
 
-```jsx
+```tsx
 // WRONG - Developer substituted "semantically appropriate" icons
 <Icon name="shield-dualtone" />  // Was "placeholder" in Figma
 <Icon name="folder" />           // Was "placeholder" in Figma
@@ -455,7 +455,7 @@ The rule: If CodeConnect shows `iconName="placeholder"`, your code MUST use `ico
 
 **CRITICAL: Never use deprecated features even if they appear in older Figma files.**
 
-```jsx
+```tsx
 // WRONG - using deprecated hideOnCollapse prop
 <UncontrolledCollapse id="collapse-1" hideOnCollapse>
   Content
@@ -505,7 +505,7 @@ All prop values must come from Figma layer data (`get_design_context`, CodeConne
 - **Text colors**: Screenshot rendering may not accurately represent color tokens.
 - **Sizes**: Component sizes (e.g., Section `size`, Tag `size`) cannot be reliably read from screenshots.
 
-```jsx
+```tsx
 // WRONG - Guessed backgroundColor from screenshot appearance
 <Section backgroundColor="secondary" size="xlarge">
   <Heading elementType="h1">Title</Heading>

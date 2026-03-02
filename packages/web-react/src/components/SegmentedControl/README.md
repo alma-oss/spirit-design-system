@@ -9,7 +9,7 @@ The `SegmentedControl` is a composition of several subcomponents:
 
 ## SegmentedControl
 
-```jsx
+```tsx
 import { SegmentedControl } from '@alma-oss/spirit-web-react';
 
 <SegmentedControl name="segmented-control-example" label="Label">
@@ -25,7 +25,7 @@ For a complete usage example, see [Full Example](#full-example).
 
 You can set the design variant of the `SegmentedControl` using the `variant` prop. The default variant is `outline`.
 
-```jsx
+```tsx
 <SegmentedControl name="segmented-control-example" label="Label" variant="fill">
   <!-- SegmentedControlItems go here-->
 </SegmentedControl>
@@ -35,7 +35,7 @@ You can set the design variant of the `SegmentedControl` using the `variant` pro
 
 You can enable multiple selection by setting the `isMultiselect` prop.
 
-```jsx
+```tsx
 <SegmentedControl name="segmented-control-example" label="Label" isMultiselect>
   <!-- SegmentedControlItems go here-->
 </SegmentedControl>
@@ -45,7 +45,7 @@ You can enable multiple selection by setting the `isMultiselect` prop.
 
 To make the `SegmentedControl` adjust to the size of its container, use the `isFluid` prop.
 
-```jsx
+```tsx
 <SegmentedControl name="segmented-control-example" label="Label" isFluid>
   <!-- SegmentedControlItems go here-->
 </SegmentedControl>
@@ -71,7 +71,7 @@ and [escape hatches][readme-escape-hatches].
 
 ## Uncontrolled Segmented Control
 
-```jsx
+```tsx
 <UncontrolledSegmentedControl label="Label" name="uncontrolled-example" defaultSelectedValue="value-1" isFluid>
   <SegmentedControlItem key="item-1" id="uncontrolled-segmented-control-1" value="value-1">
     <Icon name="file" boxSize={20} />
@@ -109,7 +109,7 @@ and [escape hatches][readme-escape-hatches].
 
 The `SegmentedControlItem` component is a single item in the segmented control. It can be used to create a segmented control with multiple items.
 
-```jsx
+```tsx
 import { SegmentedControl, SegmentedControlItem } from '@alma-oss/spirit-web-react';
 
 <SegmentedControl name="segmented-control-example" label="Label">
@@ -129,7 +129,7 @@ import { SegmentedControl, SegmentedControlItem } from '@alma-oss/spirit-web-rea
 
 To disable a `SegmentedControlItem`, you can use the `isDisabled` prop.
 
-```jsx
+```tsx
 <SegmentedControl name="segmented-control-example" label="Label">
   <SegmentedControlItem id="segmented-control-item-1" value="value-1" isDisabled>
     Label
@@ -153,7 +153,7 @@ For detailed guidance on handling text truncation, translations, and multiple st
 
 A simple short text label without any icons or additional elements. We recommend wrapping the label in the `<Truncate>` component with `mode="lines"` and `limit={1}` to prevent overflow.
 
-```jsx
+```tsx
 <SegmentedControlItem id="segmented-control-item-content-example-1" value="value-1">
   <Truncate mode="lines" limit={1}>
     Label
@@ -165,7 +165,7 @@ A simple short text label without any icons or additional elements. We recommend
 
 An icon followed by a short text label. We recommend wrapping the label in the `<Truncate>` component with `mode="lines"` and `limit={1}` to prevent overflow.
 
-```jsx
+```tsx
 <SegmentedControlItem id="segmented-control-item-content-example-2" value="value-2">
   <Icon name="file" boxSize={20} />
   <Truncate mode="lines" limit={1}>
@@ -178,7 +178,7 @@ An icon followed by a short text label. We recommend wrapping the label in the `
 
 For cases where only an icon is shown visually, use `<VisuallyHidden>` component to provide an accessible label.
 
-```jsx
+```tsx
 <SegmentedControlItem id="segmented-control-item-content-example-3" value="value-3">
   <Icon name="file" boxSize={20} />
   <VisuallyHidden>Label</VisuallyHidden>
@@ -200,7 +200,7 @@ and [escape hatches][readme-escape-hatches].
 
 ## Full Example
 
-```jsx
+```tsx
 import { Icon, SegmentedControl, SegmentedControlItem, Truncate, VisuallyHidden } from '@alma-oss/spirit-web-react';
 
 const [selectedValue, setSelectedValue] = useState('value-1');
@@ -231,7 +231,7 @@ const [selectedValue, setSelectedValue] = useState('value-1');
 
 ## Usage with Tooltip
 
-```jsx
+```tsx
 const [activeTooltipIndex, setActiveTooltipIndex] = (useState < number) | (null > null);
 const [selectedValue, setSelectedValue] = useState('value-1');
 
