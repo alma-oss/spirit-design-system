@@ -17,7 +17,7 @@ These include:
 
 - [Yarn workspaces][yarn-workspaces] for handling
   dependencies across all packages
-- [Lerna][lerna] for publishing packages, tagging versions, and
+- [Lerna][lerna] and [Nx][nx] for managing the monorepo, running script, publishing packages, tagging versions, and
   more
 - [Make][make] for handling multi-technology tasks
 
@@ -61,14 +61,20 @@ Afterwards, you should be good to go!
 > Make only simplifies and utilize work with the monorepo on the root level because we are using multiple scripts across the different technologies in the project.
 > Run `make` or `make help` to see all available commands.
 
-While working on Spirit, here are some of the top-level tasks that you might want to run:
+While working on Spirit, here are tasks that you might want to run:
 
-| Command                | Usage                                                                                                |
-| ---------------------- | ---------------------------------------------------------------------------------------------------- |
-| `build`                | Uses `lerna` to run the `build` script in each package                                               |
-| `start`                | Uses `lerna` to start development environments                                                       |
-| `format`, `format:fix` | Check if files have been formatted using Prettier, format files                                      |
-| `test`                 | Uses `lerna` to run `test` script in each package (includes linting, unit testing and type checking) |
+| Command      | Level        | Usage                                                                             |
+| ------------ | ------------ | --------------------------------------------------------------------------------- |
+| `build`      | top, package | Compiles package for the production                                               |
+| `start`      | top, package | Start development server if available                                             |
+| `format`     | top          | Check if files have been formatted using Prettier                                 |
+| `format:fix` | top          | Check if files have been formatted using Prettier, fix formatting issues in files |
+| `test`       | top, package | Executes all package(s) tests (linting, types checking, and unit testing)         |
+| `test:unit`  | top, package | Executes units tests only                                                         |
+| `test:e2e`   | top          | Executes end-to-end tests only                                                    |
+| `lint`       | top, package | Executes linting using ESLint                                                     |
+| `lint:fix`   | top, package | Executes linting using ESLint , fix linting issues in files                       |
+| `types`      | top, package | Executes type checking using TypeScript Compiler                                  |
 
 In addition, you can use `yarn` to run `bin` files using the `yarn <bin>` syntax.
 For example, if you wanted to use `lerna` to run a script in every package you could do the following:
@@ -85,4 +91,5 @@ yarn lerna run build
 [lerna]: https://lerna.js.org/
 [make]: https://www.gnu.org/software/make/manual/make.html
 [monorepo]: https://en.wikipedia.org/wiki/Monorepo
+[nx]: https://nx.dev/
 [yarn-workspaces]: https://yarnpkg.com/lang/en/docs/workspaces/

@@ -13,6 +13,17 @@ This file provides AI assistants with context and guidelines for working with th
 
 Spirit Design System is an open-source design system developed by Alma Career (formerly LMC). It's a comprehensive monorepo containing React components, vanilla JS/CSS implementations, design tokens, icons, and tooling.
 
+## Working with the Codebase
+
+- This project is using `yarn` as the package manager.
+  Use `yarn` commands for installing dependencies, running scripts, and managing packages. Do not use `npm` or `pnpm`.
+- When starting working with the codebase, refer to the
+  [Getting Started section of the Development Guide][development-guide-getting-started] for base tooling
+  and repository management.
+  Always use these tools for working with packages and gaining insights into the project structure and dependencies.
+- When verifying your changes, refer to the [Common Tasks section of the Development Guide][development-guide-common-tasks]
+  for running tests and linters. Always run the appropriate tests and linters before finishing your work.
+
 ## Additional Resources
 
 For comprehensive guidelines, see:
@@ -23,4 +34,6 @@ For comprehensive guidelines, see:
 [agents-code-style]: .agents/instructions/code-style.md
 [agents-git-workflow]: .agents/instructions/git-workflow.md
 [contributing]: CONTRIBUTING.md
+[development-guide-getting-started]: docs/contribution/development.md#getting-started
+[development-guide-common-tasks]: docs/contribution/development.md#common-tasks
 [readme]: README.md
