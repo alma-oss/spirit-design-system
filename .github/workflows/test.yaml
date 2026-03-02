@@ -85,37 +85,21 @@ jobs:
         uses: ./.github/actions/setup-node
 
       - name: Unit Tests
-        run: yarn test:unit
+        run: yarn test:unit:coverage
 
-      - name: Publish Web Package Code Coverage
-        # When Nx hits its local cache, there is no generated coverage to send, e.g. do not let this crash
-        if: ${{ hashFiles('./packages/web/.coverage/lcov.info') != '' }}
-        uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
+      - name: Upload Coverage Artifacts
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
-          github-token: ${{ github.token}}
-          file: ./packages/web/.coverage/lcov.info
-          flag-name: web
-          carryforward: web-react, analytics, design-tokens, icons, common, codemods
-
-      - name: Publish Web-React Package Code Coverage
-        # When Nx hits its local cache, there is no generated coverage to send, e.g. do not let this crash
-        if: ${{ hashFiles('./packages/web-react/.coverage/lcov.info') != '' }}
-        uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
-        with:
-          github-token: ${{ github.token}}
-          file: ./packages/web-react/.coverage/lcov.info
-          flag-name: web-react
-          carryforward: web, analytics, design-tokens, icons, common, codemods
-
-      - name: Publish Analytics Package Code Coverage
-        # When Nx hits its local cache, there is no generated coverage to send, e.g. do not let this crash
-        if: ${{ hashFiles('./packages/analytics/.coverage/lcov.info') != '' }}
-        uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
-        with:
-          github-token: ${{ github.token}}
-          file: ./packages/analytics/.coverage/lcov.info
-          flag-name: analytics
-          carryforward: web, web-react, design-tokens, icons, common, codemods
+          name: coverage-reports
+          path: |
+            packages/web/.coverage/lcov.info
+            packages/web-react/.coverage/lcov.info
+            packages/analytics/.coverage/lcov.info
+            packages/common/.coverage/lcov.info
+            packages/codemods/.coverage/lcov.info
+          if-no-files-found: ignore
+          retention-days: 1
 
   format:
     name: 💅 Code Formatting
@@ -156,9 +140,15 @@ jobs:
       - name: Types Check
         run: yarn types
 
+  publish-coverage:
+    name: 📊 Publish Code Coverage
+    needs: [unit-tests]
+    if: always()
+    uses: ./.github/workflows/publish-coverage.yaml
+
   cleanup:
     name: 🧹 Cleanup
-    needs: [lint, unit-tests, types]
+    needs: [lint, unit-tests, types, publish-coverage]
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     # Ensure this job runs regardless of previous job outcomes
