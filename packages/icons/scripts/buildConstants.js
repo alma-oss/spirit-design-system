@@ -5,9 +5,11 @@ const { filterSvgFiles } = require('./shared');
 
 const svgSrcDir = path.resolve(__dirname, '../dist/svg');
 const distFile = path.resolve(__dirname, '../dist/icons.mjs');
+const { log: logMessage, warn: logWarning, error: logError } = console;
 
 const buildConstants = (srcDir, file) => {
-  fs.readdir(srcDir, (err, files) => {
+  try {
+    const files = fs.readdirSync(srcDir);
     const svgs = filterSvgFiles(files);
 
     if (svgs.length > 0) {
@@ -29,10 +31,27 @@ const buildConstants = (srcDir, file) => {
       distContent += `\n\nexport default icons;`;
 
       fs.writeFileSync(file, distContent);
+      logMessage(`Successfully created ${file} with ${svgs.length} icons`);
+
+      return true;
     }
-  });
+
+    logWarning(`No SVG files found in ${srcDir}`);
+
+    return false;
+  } catch (err) {
+    logError(`Error building icon constants: ${err instanceof Error ? err.message : String(err)}`);
+
+    return false;
+  }
 };
 
-buildConstants(svgSrcDir, distFile);
+// Only run when this script is executed directly, not when imported
+if (require.main === module) {
+  const success = buildConstants(svgSrcDir, distFile);
+  if (!success) {
+    process.exit(1);
+  }
+}
 
 module.exports = { buildConstants };
