@@ -1,12 +1,12 @@
 import path from 'path';
 
-// Mock fs before importing the module to suppress side effects from the bottom call in buildSvg.js
-const readdirMock = jest.fn((_, cb) => cb(null, []));
+// Mock fs before importing the module so tests can control filesystem interactions in buildSvg.js
+const readdirSyncMock = jest.fn(() => []);
 const readFileSyncMock = jest.fn();
 const writeFileSyncMock = jest.fn();
 
 jest.mock('fs', () => ({
-  readdir: readdirMock,
+  readdirSync: readdirSyncMock,
   readFileSync: readFileSyncMock,
   writeFileSync: writeFileSyncMock,
 }));
@@ -67,7 +67,7 @@ describe('buildSvg', () => {
     beforeEach(() => {
       jest.clearAllMocks();
       // Default side effect suppression for initial import already done; ensure fresh mocks for each test
-      (readdirMock as jest.Mock).mockImplementation((_, callback) => callback(null, []));
+      (readdirSyncMock as jest.Mock).mockImplementation(() => []);
     });
 
     it('should build sprite and write normalized SVGs', async () => {
@@ -75,7 +75,7 @@ describe('buildSvg', () => {
       const distDir = '/virtual/dist';
 
       const files = ['alpha.svg', 'beta-dualtone.svg', 'gamma-colored.svg', 'sprite.svg']; // sprite.svg should be ignored from input list
-      (readdirMock as jest.Mock).mockImplementationOnce((_, callback) => callback(null, files));
+      (readdirSyncMock as jest.Mock).mockImplementationOnce(() => files);
 
       // Provide file contents depending on file name
       (readFileSyncMock as jest.Mock).mockImplementation((filePath: string) => {
@@ -115,7 +115,7 @@ describe('buildSvg', () => {
     });
 
     it('should do nothing when only sprite.svg present (no writes expected)', async () => {
-      (readdirMock as jest.Mock).mockImplementationOnce((_, callback) => callback(null, ['sprite.svg']));
+      (readdirSyncMock as jest.Mock).mockImplementationOnce(() => ['sprite.svg']);
 
       normalizeAndCopySvg('/virtual/src', '/virtual/dist');
 

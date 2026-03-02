@@ -5,6 +5,7 @@ const { filterSvgFiles, getIconType, ICON_TYPE_DUALTONE, ICON_TYPE_COLORED } = r
 
 const svgSrcDir = path.resolve(__dirname, '../src/svg');
 const svgDistDir = path.resolve(__dirname, '../dist/svg');
+const { log: logMessage, warn: logWarning, error: logError } = console;
 
 const DUALTONE_COLOR_BACKGROUND_DEFAULT = '#F2F2F2'; // Gray95
 const DUALTONE_COLOR_BORDER_DEFAULT = '#202020'; // DarkGray
@@ -33,7 +34,8 @@ const normalizeSvgColors = (fileName, svgContent) => {
 };
 
 const normalizeAndCopySvg = (srcDir, distDir) => {
-  fs.readdir(srcDir, (err, files) => {
+  try {
+    const files = fs.readdirSync(srcDir);
     const svgs = filterSvgFiles(files);
 
     if (svgs.length > 0) {
@@ -55,11 +57,29 @@ const normalizeAndCopySvg = (srcDir, distDir) => {
       sprite += '</svg>';
 
       fs.writeFileSync(spriteDistFile, sprite);
+      logMessage(`Successfully normalized and copied ${svgs.length} SVG files`);
+
+      return true;
     }
-  });
+
+    logWarning(`No SVG files found in ${srcDir}`);
+
+    return false;
+  } catch (err) {
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    logError(`Error normalizing SVGs: ${errorMessage}`);
+
+    return false;
+  }
 };
 
-normalizeAndCopySvg(svgSrcDir, svgDistDir);
+// Only run when this script is executed directly, not when imported
+if (require.main === module) {
+  const success = normalizeAndCopySvg(svgSrcDir, svgDistDir);
+  if (!success) {
+    process.exit(1);
+  }
+}
 
 module.exports = {
   DUALTONE_COLOR_BACKGROUND_DEFAULT,
