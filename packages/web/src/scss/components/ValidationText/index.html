@@ -1,0 +1,169 @@
+{{#> web/layout/default title="ValidationText" parentPageName="Components" }}
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Validation States</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="TextField TextField--medium TextField--danger">
+        <label for="validation-text-danger" class="TextField__label">Danger</label>
+        <input type="text" id="validation-text-danger" class="TextField__input" placeholder="Placeholder" value="Filled" />
+        <div class="ValidationText ValidationText--danger">Danger validation text</div>
+      </div>
+
+      <div class="TextField TextField--medium TextField--warning">
+        <label for="validation-text-warning" class="TextField__label">Warning</label>
+        <input type="text" id="validation-text-warning" class="TextField__input" placeholder="Placeholder" value="Filled" />
+        <div class="ValidationText ValidationText--warning">Warning validation text</div>
+      </div>
+
+      <div class="TextField TextField--medium TextField--success">
+        <label for="validation-text-success" class="TextField__label">Success</label>
+        <input type="text" id="validation-text-success" class="TextField__input" placeholder="Placeholder" value="Filled" />
+        <div class="ValidationText ValidationText--success">Success validation text</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">With Icon</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      {{setVar "states" "success" "warning" "danger" }}
+      {{#each @root.states as |state|}}
+      <div class="TextField TextField--medium TextField--{{state}}">
+        <label for="validation-text-icon-{{state}}" class="TextField__label">Label</label>
+        <input type="text" id="validation-text-icon-{{state}}" class="TextField__input" placeholder="Placeholder" value="Filled" />
+        <div class="ValidationText ValidationText--{{state}}">
+          <svg class="Icon" width="20" height="20" aria-hidden="true">
+            {{#if (eq state "success")}}
+            <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+            {{else}}
+            <use xlink:href="/assets/icons/svg/sprite.svg#{{state}}" />
+            {{/if}}
+          </svg>
+          <div>This is {{state}} validation text with icon.</div>
+        </div>
+      </div>
+      {{/each}}
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">As List</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="TextField TextField--medium TextField--danger">
+        <label for="validation-text-list" class="TextField__label">Label</label>
+        <input type="text" id="validation-text-list" class="TextField__input" placeholder="Placeholder" value="Filled" />
+        <div class="ValidationText ValidationText--danger">
+          <ul>
+            <li>First validation text</li>
+            <li>Second validation text</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Disabled</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="TextField TextField--medium TextField--disabled TextField--danger">
+        <label for="validation-text-disabled" class="TextField__label">Disabled</label>
+        <input type="text" id="validation-text-disabled" class="TextField__input" placeholder="Placeholder" value="Filled" disabled />
+        <div class="ValidationText ValidationText--danger">Danger validation text (disabled)</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Inline Field (Checkbox)</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Checkbox Checkbox--inputPositionStart Checkbox--danger">
+        <input type="checkbox" id="validation-text-checkbox-danger" class="Checkbox__input" name="checkboxDanger" />
+        <div class="Checkbox__text">
+          <label class="Checkbox__label" for="validation-text-checkbox-danger">Checkbox Label</label>
+          <div class="ValidationText ValidationText--danger">Danger validation text</div>
+        </div>
+      </div>
+
+      <div class="Checkbox Checkbox--inputPositionStart Checkbox--warning">
+        <input type="checkbox" id="validation-text-checkbox-warning" class="Checkbox__input" name="checkboxWarning" />
+        <div class="Checkbox__text">
+          <label class="Checkbox__label" for="validation-text-checkbox-warning">Checkbox Label</label>
+          <div class="ValidationText ValidationText--warning">
+            <svg class="Icon" width="20" height="20" aria-hidden="true">
+              <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
+            </svg>
+            <span>Warning validation text with icon</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Item Variant (Checkbox Item)</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Checkbox Checkbox--inputPositionStart Checkbox--item Checkbox--danger">
+        <input type="checkbox" id="validation-text-checkbox-item" class="Checkbox__input" name="checkboxItem" />
+        <div class="Checkbox__text">
+          <label class="Checkbox__label" for="validation-text-checkbox-item">Checkbox Label</label>
+          <div class="ValidationText ValidationText--danger">Item variant validation text</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+{{/web/layout/default }}
