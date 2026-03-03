@@ -54,11 +54,6 @@ $_field-name: 'FileUploaderInput';
     @include accessibility.hide-text();
 }
 
-.FileUploaderInput__validationText,
-.FileUploaderInput > [data-spirit-element='validation_text'] {
-    @include form-fields-tools.validation-text();
-}
-
 // stylelint-disable selector-max-class -- We need to target inner elements in a specific component state.
 .FileUploaderInput.has-drag-and-drop .FileUploaderInput__dropZone {
     border: theme.$input-drop-zone-draggable-border;
@@ -84,11 +79,6 @@ $_field-name: 'FileUploaderInput';
 }
 
 @include form-fields-tools.input-field-validation-states($_field-name); // 2.
-
-:is(.FileUploaderInput--disabled, .FileUploaderInput.is-disabled)
-    :is(.FileUploaderInput__validationText, [data-spirit-element='validation_text']) {
-    @include form-fields-tools.validation-text-disabled();
-}
 
 // 3.
 // stylelint-disable selector-max-compound-selectors, selector-max-specificity

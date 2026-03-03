@@ -156,13 +156,13 @@
       <div class="TextArea TextArea--medium TextArea--warning">
         <label for="text-area-warning" class="Label Label--box">Label</label>
         <textarea id="text-area-warning" class="TextArea__input" name="warning" placeholder="Placeholder" aria-describedby="text-area-warning-validation-text">Filled</textarea>
-        <div class="TextArea__validationText" id="text-area-warning-validation-text">Validation text</div>
+        <div class="ValidationText ValidationText--warning" id="text-area-warning-validation-text">Validation text</div>
       </div>
 
       <div class="TextArea TextArea--medium TextArea--danger">
         <label for="text-area-danger" class="Label Label--box">Label</label>
         <textarea id="text-area-danger" class="TextArea__input" name="danger" placeholder="Placeholder" aria-describedby="text-area-danger-validation-text">Filled</textarea>
-        <div class="TextArea__validationText" id="text-area-danger-validation-text">
+        <div class="ValidationText ValidationText--danger" id="text-area-danger-validation-text">
           <ul>
             <li>Validation text</li>
             <li>Second validation text</li>
@@ -174,7 +174,7 @@
         <label for="text-area-danger-with-helper-text" class="Label Label--box Label--required">Label</label>
         <textarea id="text-area-danger-with-helper-text" class="TextArea__input" placeholder="Placeholder" name="dangerWithHelperText" required aria-describedby="text-area-danger-with-helper-text-helper-text text-area-danger-with-helper-text-validation-text">Filled</textarea>
         <div class="HelperText" id="text-area-danger-with-helper-text-helper-text">This is helper text</div>
-        <div class="TextArea__validationText" id="text-area-danger-with-helper-text-validation-text">Danger validation text</div>
+        <div class="ValidationText ValidationText--danger" id="text-area-danger-with-helper-text-validation-text">Danger validation text</div>
       </div>
 
     </div>
@@ -197,7 +197,7 @@
         >Label</label>
         <textarea id="text-area-{{state}}-with-icon" class="TextArea__input" placeholder="Placeholder" name="dangerWithHelperText" required aria-describedby="text-area-{{state}}-with-icon-validation-text">Filled</textarea>
 
-        <div class="TextArea__validationText" id="text-area-{{state}}-with-icon-validation-text">
+        <div class="ValidationText ValidationText--{{state}}" id="text-area-{{state}}-with-icon-validation-text">
           <svg width="20" height="20" aria-hidden="true">
             {{#if (eq state "success")}}
             <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />

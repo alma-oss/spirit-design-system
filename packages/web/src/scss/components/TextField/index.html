@@ -330,13 +330,13 @@
       <div class="TextField TextField--medium TextField--warning">
         <label for="text-field-warning" class="Label Label--box">Label</label>
         <input type="text" id="text-field-warning" class="TextField__input" name="warning" placeholder="Placeholder" value="Filled" aria-describedby="text-field-warning-validation-text" />
-        <div class="TextField__validationText" id="text-field-warning-validation-text">Validation text</div>
+        <div class="ValidationText ValidationText--warning" id="text-field-warning-validation-text">Validation text</div>
       </div>
 
       <div class="TextField TextField--medium TextField--danger">
         <label for="text-field-danger" class="Label Label--box">Label</label>
         <input type="text" id="text-field-danger" class="TextField__input" name="danger" placeholder="Placeholder" value="Filled" aria-describedby="text-field-danger-validation-text" />
-        <div class="TextField__validationText" id="text-field-danger-validation-text">
+        <div class="ValidationText ValidationText--danger" id="text-field-danger-validation-text">
           <ul>
             <li>Validation text</li>
             <li>Second validation text</li>
@@ -360,7 +360,7 @@
           aria-describedby="text-field-danger-with-helper-text-helper-text text-field-danger-with-helper-text-validation-text"
         />
         <div class="HelperText" id="text-field-danger-with-helper-text-helper-text">This is helper text</div>
-        <div class="TextField__validationText" id="text-field-danger-with-helper-text-validation-text">Danger validation text</div>
+        <div class="ValidationText ValidationText--danger" id="text-field-danger-with-helper-text-validation-text">Danger validation text</div>
       </div>
 
     </div>
@@ -393,7 +393,7 @@
           required
           aria-describedby="text-field-{{state}}-with-icon-validation-text"
         />
-        <div class="TextField__validationText" id="text-field-{{state}}-with-icon-validation-text">
+        <div class="ValidationText ValidationText--{{state}}" id="text-field-{{state}}-with-icon-validation-text">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
             {{#if (eq state "success")}}
             <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
@@ -495,7 +495,7 @@
               </span>
             </button>
           </div>
-          <div class="TextField__validationText">Too short</div>
+          <div class="ValidationText ValidationText--danger">Too short</div>
         </div>
         <button type="button" class="Button Button--primary Button--medium">Button</button>
       </div>
