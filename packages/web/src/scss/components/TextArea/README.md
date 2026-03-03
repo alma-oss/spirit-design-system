@@ -178,7 +178,7 @@ Counter with helper text, validation text, and validation state:
   </textarea>
   <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYTop">
     <div>
-      <div id="text-area-counter-danger-validation-text" class="TextArea__validationText">
+      <div id="text-area-counter-danger-validation-text" class="ValidationText ValidationText--danger">
         You have entered too many characters
       </div>
       <div id="text-area-counter-danger-helper-text" class="HelperText">This is helper text</div>
@@ -261,14 +261,14 @@ Validation states can be presented either by adding a CSS modifier class
 a JS interaction class when controlled by JavaScript (`has-success`,
 `has-warning`, `has-danger`). See Validation state [dictionary][dictionary-validation].
 
-- To render validation text as a list, use `<ul>` element inside of `.TextArea__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.TextArea__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
 <div class="TextArea TextArea--medium TextArea--danger">
   <label for="text-area-danger" class="Label Label--box">Label</label>
   <textarea id="text-area-danger" class="TextArea__input" name="danger" placeholder="Placeholder">Filled</textarea>
-  <div class="TextArea__validationText">Danger validation text</div>
+  <div class="ValidationText ValidationText--danger">Danger validation text</div>
 </div>
 
 <div class="TextArea TextArea--medium has-danger">
@@ -276,10 +276,10 @@ a JS interaction class when controlled by JavaScript (`has-success`,
   <textarea id="text-area-danger-has-danger" class="TextArea__input" name="hasDanger" placeholder="Placeholder">
     Filled
   </textarea>
-  <div class="TextArea__validationText">Danger validation text</div>
+  <div class="ValidationText ValidationText--danger">Danger validation text</div>
 </div>
 
-<div class="TextArea__validationText">
+<div class="ValidationText ValidationText--danger">
   <ul>
     <li>First validation text</li>
     <li>Second validation text</li>
@@ -291,7 +291,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
   <textarea id="text-area-danger-has-warning" class="TextArea__input" name="hasDanger" placeholder="Placeholder">
     Filled
   </textarea>
-  <div class="TextArea__validationText">
+  <div class="ValidationText ValidationText--warning">
     <svg width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
