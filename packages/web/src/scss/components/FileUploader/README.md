@@ -210,18 +210,18 @@ When validated on server:
 <div class="FileUploaderInput FileUploaderInput--success" data-spirit-element="wrapper">
   <!-- Label -->
   <!-- Drop zone with input -->
-  <div class="FileUploaderInput__validationText">Success Validation Text</div>
+  <div class="ValidationText ValidationText--success">Success Validation Text</div>
 </div>
 ```
 
-- To render validation text as a list, use `<ul>` element inside of `.FileUploaderInput__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.FileUploaderInput__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
 <div class="FileUploaderInput FileUploaderInput--success" data-spirit-element="wrapper">
   <!-- Label -->
   <!-- Drop zone with input -->
-  <div class="FileUploaderInput__validationText">
+  <div class="ValidationText ValidationText--success">
     <ul>
       <li>First validation text</li>
       <li>Second validation text</li>
@@ -232,7 +232,7 @@ When validated on server:
 <div class="FileUploaderInput FileUploaderInput--warning" data-spirit-element="wrapper">
   <!-- Label -->
   <!-- Drop zone with input -->
-  <div class="FileUploaderInput__validationText">
+  <div class="ValidationText ValidationText--warning">
     <svg width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
@@ -278,7 +278,9 @@ own way.**
 <div class="FileUploaderInput has-success" data-spirit-element="wrapper">
   <!-- Label -->
   <!-- Drop zone with input -->
-  <div data-spirit-element="validation_text">Success message inserted by JS</div>
+  <div class="ValidationText ValidationText--success" data-spirit-element="validation_text">
+    Success message inserted by JS
+  </div>
 </div>
 ```
 

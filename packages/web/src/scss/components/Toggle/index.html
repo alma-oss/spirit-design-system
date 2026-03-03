@@ -153,7 +153,7 @@
         <div class="Toggle__text">
           <label class="Label Label--inline Label--disabled" for="toggle-warning-helper-text-disabled">Toggle Label</label>
           <div class="HelperText HelperText--disabled" id="toggle-warning-helper-text-helper-text-disabled">Helper text</div>
-          <div class="Toggle__validationText" id="toggle-warning-helper-text-validation-text-disabled">Validation text</div>
+          <div class="ValidationText ValidationText--warning ValidationText--inline" id="toggle-warning-helper-text-validation-text-disabled">Validation text</div>
         </div>
         <input type="checkbox" id="toggle-warning-helper-text-disabled" class="Toggle__input" name="default" aria-describedby="toggle-warning-helper-text-helper-text toggle-warning-helper-text-validation-text" checked disabled />
       </div>
@@ -226,7 +226,7 @@
       <div class="Toggle Toggle--inputPositionEnd Toggle--warning">
         <div class="Toggle__text">
           <label class="Label Label--inline" for="toggle-warning">Toggle Label</label>
-          <div class="Toggle__validationText" id="toggle-warning-validation-text">Validation text</div>
+          <div class="ValidationText ValidationText--warning ValidationText--inline" id="toggle-warning-validation-text">Validation text</div>
         </div>
         <input type="checkbox" id="toggle-warning" class="Toggle__input" name="default" aria-describedby="toggle-warning-validation-text" checked />
       </div>
@@ -234,7 +234,7 @@
       <div class="Toggle Toggle--inputPositionEnd Toggle--danger">
         <div class="Toggle__text">
           <label for="toggle-danger" class="Label Label--inline">Toggle Label</label>
-          <div class="Toggle__validationText" id="toggle-danger-validation-text">
+          <div class="ValidationText ValidationText--danger ValidationText--inline" id="toggle-danger-validation-text">
             <ul>
               <li>First validation text</li>
               <li>Second validation text</li>
@@ -248,7 +248,7 @@
         <div class="Toggle__text">
           <label class="Label Label--inline" for="toggle-warning-helper-text">Toggle Label</label>
           <div class="HelperText" id="toggle-warning-helper-text-helper-text">Helper text</div>
-          <div class="Toggle__validationText" id="toggle-warning-helper-text-validation-text">Validation text</div>
+          <div class="ValidationText ValidationText--warning ValidationText--inline" id="toggle-warning-helper-text-validation-text">Validation text</div>
         </div>
         <input type="checkbox" id="toggle-warning-helper-text" class="Toggle__input" name="default" aria-describedby="toggle-warning-helper-text-helper-text toggle-warning-helper-text-validation-text" checked />
       </div>
@@ -269,7 +269,7 @@
       <div class="Toggle Toggle--{{state}}">
         <div class="Toggle__text">
           <label class="Label Label--inline" for="toggle-{{state}}-validation-icon">Toggle Label</label>
-          <div class="Toggle__validationText" id="toggle-{{state}}-validation-textIcon">
+          <div class="ValidationText ValidationText--{{state}} ValidationText--inline" id="toggle-{{state}}-validation-textIcon">
             <svg width="20" height="20" aria-hidden="true">
             {{#if (eq state "success")}}
             <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
