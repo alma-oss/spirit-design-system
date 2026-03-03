@@ -22,13 +22,4 @@ $_field-name: 'FieldGroup';
     justify-content: start;
 }
 
-.FieldGroup__validationText,
-.FieldGroup > [data-spirit-element='validation_text'] {
-    @include form-fields-tools.validation-text();
-}
-
 @include form-fields-tools.input-field-validation-states($_field-name);
-
-.FieldGroup[disabled] > :is(.FieldGroup__validationText, [data-spirit-element='validation_text']) {
-    @include form-fields-tools.validation-text-disabled();
-}
