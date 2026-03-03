@@ -17,9 +17,9 @@ $grid-columns: 12 !default;
 
 $css-variable-prefix: spirit- !default;
 
+$container-padding-desktop: 32px !default;
 $container-padding-mobile: 16px !default;
 $container-padding-tablet: 32px !default;
-$container-padding-desktop: 32px !default;
 
 $container-max-width: 1280px !default;
 
@@ -40,9 +40,9 @@ $containers: (
         max-width: $container-xlarge-max-width,
     ),
     padding: (
+        desktop: $container-padding-desktop,
         mobile: $container-padding-mobile,
         tablet: $container-padding-tablet,
-        desktop: $container-padding-desktop,
     ),
     max-width: $container-max-width,
 ) !default;

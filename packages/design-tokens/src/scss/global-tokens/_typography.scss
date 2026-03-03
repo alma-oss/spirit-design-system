@@ -5,7 +5,7 @@ $body-large-bold: (
         font-size: 18px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.5,
+        line-height: 1.33,
     ),
 ) !default;
 
@@ -15,7 +15,7 @@ $body-large-italic: (
         font-size: 18px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.5,
+        line-height: 1.33,
     ),
 ) !default;
 
@@ -25,7 +25,7 @@ $body-large-regular: (
         font-size: 18px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.5,
+        line-height: 1.33,
     ),
 ) !default;
 
@@ -35,7 +35,7 @@ $body-large-semibold: (
         font-size: 18px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.5,
+        line-height: 1.33,
     ),
 ) !default;
 
@@ -45,7 +45,7 @@ $body-medium-bold: (
         font-size: 16px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.5,
+        line-height: 1.38,
     ),
 ) !default;
 
@@ -55,7 +55,7 @@ $body-medium-italic: (
         font-size: 16px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.5,
+        line-height: 1.38,
     ),
 ) !default;
 
@@ -65,7 +65,7 @@ $body-medium-regular: (
         font-size: 16px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.5,
+        line-height: 1.38,
     ),
 ) !default;
 
@@ -75,7 +75,7 @@ $body-medium-semibold: (
         font-size: 16px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.5,
+        line-height: 1.38,
     ),
 ) !default;
 
@@ -85,7 +85,7 @@ $body-small-bold: (
         font-size: 14px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.5,
+        line-height: 1.43,
     ),
 ) !default;
 
@@ -95,7 +95,7 @@ $body-small-italic: (
         font-size: 14px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.5,
+        line-height: 1.43,
     ),
 ) !default;
 
@@ -105,7 +105,7 @@ $body-small-regular: (
         font-size: 14px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.5,
+        line-height: 1.43,
     ),
 ) !default;
 
@@ -115,7 +115,7 @@ $body-small-semibold: (
         font-size: 14px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.5,
+        line-height: 1.43,
     ),
 ) !default;
 
@@ -125,7 +125,7 @@ $body-xlarge-bold: (
         font-size: 20px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.5,
+        line-height: 1.40,
     ),
 ) !default;
 
@@ -135,7 +135,7 @@ $body-xlarge-italic: (
         font-size: 20px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.5,
+        line-height: 1.40,
     ),
 ) !default;
 
@@ -145,7 +145,7 @@ $body-xlarge-regular: (
         font-size: 20px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.5,
+        line-height: 1.40,
     ),
 ) !default;
 
@@ -155,7 +155,7 @@ $body-xlarge-semibold: (
         font-size: 20px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.5,
+        line-height: 1.40,
     ),
 ) !default;
 
@@ -165,7 +165,7 @@ $body-xsmall-bold: (
         font-size: 12px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.5,
+        line-height: 1.33,
     ),
 ) !default;
 
@@ -175,7 +175,7 @@ $body-xsmall-italic: (
         font-size: 12px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.5,
+        line-height: 1.33,
     ),
 ) !default;
 
@@ -185,7 +185,7 @@ $body-xsmall-regular: (
         font-size: 12px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.5,
+        line-height: 1.33,
     ),
 ) !default;
 
@@ -195,7 +195,7 @@ $body-xsmall-semibold: (
         font-size: 12px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.5,
+        line-height: 1.33,
     ),
 ) !default;
 
@@ -205,21 +205,21 @@ $heading-large-bold: (
         font-size: 40px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.2,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 32px,
-        font-style: normal,
-        font-weight: 700,
-        line-height: 1.2,
+        line-height: 1.20,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 40px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.2,
+        line-height: 1.20,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 32px,
+        font-style: normal,
+        font-weight: 700,
+        line-height: 1.19,
     ),
 ) !default;
 
@@ -229,21 +229,21 @@ $heading-large-italic: (
         font-size: 40px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.2,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 32px,
-        font-style: italic,
-        font-weight: 400,
-        line-height: 1.2,
+        line-height: 1.20,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 40px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.2,
+        line-height: 1.20,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 32px,
+        font-style: italic,
+        font-weight: 400,
+        line-height: 1.19,
     ),
 ) !default;
 
@@ -253,21 +253,21 @@ $heading-large-regular: (
         font-size: 40px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.2,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 32px,
-        font-style: normal,
-        font-weight: 400,
-        line-height: 1.2,
+        line-height: 1.20,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 40px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.2,
+        line-height: 1.20,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 32px,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.19,
     ),
 ) !default;
 
@@ -277,21 +277,21 @@ $heading-large-semibold: (
         font-size: 40px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.2,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 32px,
-        font-style: normal,
-        font-weight: 600,
-        line-height: 1.2,
+        line-height: 1.20,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 40px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.2,
+        line-height: 1.20,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 32px,
+        font-style: normal,
+        font-weight: 600,
+        line-height: 1.19,
     ),
 ) !default;
 
@@ -301,21 +301,21 @@ $heading-medium-bold: (
         font-size: 32px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.3,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 24px,
-        font-style: normal,
-        font-weight: 700,
-        line-height: 1.4,
+        line-height: 1.19,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 32px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.3,
+        line-height: 1.19,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 24px,
+        font-style: normal,
+        font-weight: 700,
+        line-height: 1.17,
     ),
 ) !default;
 
@@ -325,21 +325,21 @@ $heading-medium-italic: (
         font-size: 32px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.3,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 24px,
-        font-style: italic,
-        font-weight: 400,
-        line-height: 1.4,
+        line-height: 1.19,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 32px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.3,
+        line-height: 1.19,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 24px,
+        font-style: italic,
+        font-weight: 400,
+        line-height: 1.17,
     ),
 ) !default;
 
@@ -349,21 +349,21 @@ $heading-medium-regular: (
         font-size: 32px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.3,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 24px,
-        font-style: normal,
-        font-weight: 400,
-        line-height: 1.4,
+        line-height: 1.19,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 32px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.3,
+        line-height: 1.19,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 24px,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.17,
     ),
 ) !default;
 
@@ -373,21 +373,21 @@ $heading-medium-semibold: (
         font-size: 32px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.3,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 24px,
-        font-style: normal,
-        font-weight: 600,
-        line-height: 1.4,
+        line-height: 1.19,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 32px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.3,
+        line-height: 1.19,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 24px,
+        font-style: normal,
+        font-weight: 600,
+        line-height: 1.17,
     ),
 ) !default;
 
@@ -397,21 +397,21 @@ $heading-small-bold: (
         font-size: 24px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.4,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 20px,
-        font-style: normal,
-        font-weight: 700,
-        line-height: 1.4,
+        line-height: 1.17,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 24px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.4,
+        line-height: 1.17,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 20px,
+        font-style: normal,
+        font-weight: 700,
+        line-height: 1.20,
     ),
 ) !default;
 
@@ -421,21 +421,21 @@ $heading-small-italic: (
         font-size: 24px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.4,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 20px,
-        font-style: italic,
-        font-weight: 400,
-        line-height: 1.4,
+        line-height: 1.17,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 24px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.4,
+        line-height: 1.17,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 20px,
+        font-style: italic,
+        font-weight: 400,
+        line-height: 1.20,
     ),
 ) !default;
 
@@ -445,21 +445,21 @@ $heading-small-regular: (
         font-size: 24px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.4,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 20px,
-        font-style: normal,
-        font-weight: 400,
-        line-height: 1.4,
+        line-height: 1.17,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 24px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.4,
+        line-height: 1.17,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 20px,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.20,
     ),
 ) !default;
 
@@ -469,21 +469,21 @@ $heading-small-semibold: (
         font-size: 24px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.4,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 20px,
-        font-style: normal,
-        font-weight: 600,
-        line-height: 1.4,
+        line-height: 1.17,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 24px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.4,
+        line-height: 1.17,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 20px,
+        font-style: normal,
+        font-weight: 600,
+        line-height: 1.20,
     ),
 ) !default;
 
@@ -493,21 +493,21 @@ $heading-xlarge-bold: (
         font-size: 48px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.2,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 36px,
-        font-style: normal,
-        font-weight: 700,
-        line-height: 1.2,
+        line-height: 1.21,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 48px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.2,
+        line-height: 1.21,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 36px,
+        font-style: normal,
+        font-weight: 700,
+        line-height: 1.17,
     ),
 ) !default;
 
@@ -517,21 +517,21 @@ $heading-xlarge-italic: (
         font-size: 48px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.2,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 36px,
-        font-style: italic,
-        font-weight: 400,
-        line-height: 1.2,
+        line-height: 1.21,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 48px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.2,
+        line-height: 1.21,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 36px,
+        font-style: italic,
+        font-weight: 400,
+        line-height: 1.17,
     ),
 ) !default;
 
@@ -541,21 +541,21 @@ $heading-xlarge-regular: (
         font-size: 48px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.2,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 36px,
-        font-style: normal,
-        font-weight: 400,
-        line-height: 1.2,
+        line-height: 1.21,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 48px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.2,
+        line-height: 1.21,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 36px,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.17,
     ),
 ) !default;
 
@@ -565,21 +565,21 @@ $heading-xlarge-semibold: (
         font-size: 48px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.2,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 36px,
-        font-style: normal,
-        font-weight: 600,
-        line-height: 1.2,
+        line-height: 1.21,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 48px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.2,
+        line-height: 1.21,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 36px,
+        font-style: normal,
+        font-weight: 600,
+        line-height: 1.17,
     ),
 ) !default;
 
@@ -589,21 +589,21 @@ $heading-xsmall-bold: (
         font-size: 20px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.4,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 18px,
-        font-style: normal,
-        font-weight: 700,
-        line-height: 1.4,
+        line-height: 1.20,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 20px,
         font-style: normal,
         font-weight: 700,
-        line-height: 1.4,
+        line-height: 1.20,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 18px,
+        font-style: normal,
+        font-weight: 700,
+        line-height: 1.22,
     ),
 ) !default;
 
@@ -613,21 +613,21 @@ $heading-xsmall-italic: (
         font-size: 20px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.4,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 18px,
-        font-style: italic,
-        font-weight: 400,
-        line-height: 1.4,
+        line-height: 1.20,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 20px,
         font-style: italic,
         font-weight: 400,
-        line-height: 1.4,
+        line-height: 1.20,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 18px,
+        font-style: italic,
+        font-weight: 400,
+        line-height: 1.22,
     ),
 ) !default;
 
@@ -637,21 +637,21 @@ $heading-xsmall-regular: (
         font-size: 20px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.4,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 18px,
-        font-style: normal,
-        font-weight: 400,
-        line-height: 1.4,
+        line-height: 1.20,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 20px,
         font-style: normal,
         font-weight: 400,
-        line-height: 1.4,
+        line-height: 1.20,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 18px,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.22,
     ),
 ) !default;
 
@@ -661,21 +661,21 @@ $heading-xsmall-semibold: (
         font-size: 20px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.4,
-    ),
-    mobile: (
-        font-family: "'Inter', sans-serif",
-        font-size: 18px,
-        font-style: normal,
-        font-weight: 600,
-        line-height: 1.4,
+        line-height: 1.20,
     ),
     tablet: (
         font-family: "'Inter', sans-serif",
         font-size: 20px,
         font-style: normal,
         font-weight: 600,
-        line-height: 1.4,
+        line-height: 1.20,
+    ),
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 18px,
+        font-style: normal,
+        font-weight: 600,
+        line-height: 1.22,
     ),
 ) !default;
 
