@@ -154,7 +154,7 @@
           value="30"
           oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
         />
-        <div id="slider-warning-validation-text" class="Slider__validationText">
+        <div id="slider-warning-validation-text" class="ValidationText ValidationText--warning">
           Validation text
         </div>
       </div>
@@ -170,7 +170,7 @@
           value="30"
           oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
         />
-        <div id="slider-danger-validation-text" class="Slider__validationText">
+        <div id="slider-danger-validation-text" class="ValidationText ValidationText--danger">
           <ul>
             <li>First validation text</li>
             <li>Second validation text</li>
@@ -192,7 +192,7 @@
         <div id="slider-danger-with-helper-text-helper-text" class="HelperText">
           Helper text
         </div>
-        <div id="slider-danger-with-helper-text-validation-text" class="Slider__validationText">
+        <div id="slider-danger-with-helper-text-validation-text" class="ValidationText ValidationText--danger">
           Validation text
         </div>
       </div>
@@ -226,7 +226,7 @@
           value="30"
           oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
         />
-        <div id="slider-{{state}}-validation-icon-text" class="Slider__validationText">
+        <div id="slider-{{state}}-validation-icon-text" class="ValidationText ValidationText--{{state}}">
           <svg
             width="20"
             height="20"

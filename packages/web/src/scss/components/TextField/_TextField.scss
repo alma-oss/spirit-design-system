@@ -166,11 +166,6 @@ $_field-name: 'TextField';
     box-shadow: form-fields-settings.$input-focus-shadow;
 }
 
-.TextField__validationText,
-.TextField > [data-spirit-element='validation_text'] {
-    @include form-fields-tools.validation-text();
-}
-
 @include dictionaries.generate-sizes(
     $class-name: $_field-name,
     $dictionary-values: form-fields-settings.$box-field-size-dictionary,
@@ -208,8 +203,3 @@ $_field-name: 'TextField';
     cursor: cursors.$disabled;
 }
 // stylelint-enable
-
-:is(.TextField--disabled, .TextField.is-disabled)
-    > :is(.TextField__validationText, [data-spirit-element='validation_text']) {
-    @include form-fields-tools.validation-text-disabled();
-}

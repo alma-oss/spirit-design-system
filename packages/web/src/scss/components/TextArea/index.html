@@ -224,7 +224,7 @@
           placeholder="Placeholder"
           aria-describedby="text-area-warning-validation-text"
         >Filled</textarea>
-        <div class="TextArea__validationText" id="text-area-warning-validation-text">Validation text</div>
+        <div class="ValidationText ValidationText--warning" id="text-area-warning-validation-text">Validation text</div>
       </div>
 
       <div class="TextArea TextArea--medium TextArea--danger">
@@ -236,7 +236,7 @@
           placeholder="Placeholder"
           aria-describedby="text-area-danger-validation-text"
         >Filled</textarea>
-        <div class="TextArea__validationText" id="text-area-danger-validation-text">
+        <div class="ValidationText ValidationText--danger" id="text-area-danger-validation-text">
           <ul>
             <li>Validation text</li>
             <li>Second validation text</li>
@@ -255,7 +255,7 @@
           aria-describedby="text-area-danger-with-helper-text-helper-text text-area-danger-with-helper-text-validation-text"
         >Filled</textarea>
         <div id="text-area-danger-with-helper-text-helper-text" class="HelperText">This is helper text</div>
-        <div id="text-area-danger-with-helper-text-validation-text" class="TextArea__validationText">Danger validation text</div>
+        <div id="text-area-danger-with-helper-text-validation-text" class="ValidationText ValidationText--danger">Danger validation text</div>
       </div>
 
     </div>
@@ -285,7 +285,7 @@
           aria-describedby="text-area-{{state}}-with-icon-validation-text"
         >Filled</textarea>
 
-        <div class="TextArea__validationText" id="text-area-{{state}}-with-icon-validation-text">
+        <div class="ValidationText ValidationText--{{state}}" id="text-area-{{state}}-with-icon-validation-text">
           <svg
             width="20"
             height="20"
@@ -390,7 +390,7 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="TextArea TextArea--medium">
-        <label for="text-area-counter-show-only" class="Label Label--box">Show Counter with Helper Text</label>
+        <label for="text-area-counter-show-only" class="Label">Show Counter with Helper Text</label>
         <textarea
           id="text-area-counter-show-only"
           class="TextArea__input"
@@ -408,7 +408,7 @@
       </div>
 
       <div class="TextArea TextArea--medium">
-        <label for="text-area-counter-default" class="Label Label--box">Show Counter with Threshold</label>
+        <label for="text-area-counter-default" class="Label">Show Counter with Threshold</label>
         <textarea
           id="text-area-counter-default"
           class="TextArea__input"
@@ -423,7 +423,7 @@
       </div>
 
       <div class="TextArea TextArea--medium">
-        <label for="text-area-counter-min-max" class="Label Label--box">Show Counter with Threshold and Helper Text</label>
+        <label for="text-area-counter-min-max" class="Label">Show Counter with Threshold and Helper Text</label>
         <textarea
           id="text-area-counter-min-max"
           class="TextArea__input"
@@ -441,7 +441,7 @@
       </div>
 
       <div class="TextArea TextArea--medium TextArea--disabled">
-        <label for="text-area-counter-disabled" class="Label Label--box">Show Counter with Threshold, Disabled</label>
+        <label for="text-area-counter-disabled" class="Label Label--disabled">Show Counter with Threshold, Disabled</label>
         <textarea
           id="text-area-counter-disabled"
           class="TextArea__input"
@@ -457,7 +457,7 @@
       </div>
 
       <div class="TextArea TextArea--medium TextArea--danger">
-        <label for="text-area-counter-validation" class="Label Label--box">Show Counter with Threshold and Validation</label>
+        <label for="text-area-counter-validation" class="Label">Show Counter with Threshold and Validation</label>
         <textarea
           id="text-area-counter-validation"
           class="TextArea__input"
@@ -467,8 +467,9 @@
         >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut al</textarea>
         <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYTop">
           <div>
-            <div id="text-area-counter-validation-validation-text" class="TextArea__validationText">
+            <div id="text-area-counter-validation-validation-text" class="ValidationText ValidationText--danger">
               <svg
+                class="Icon"
                 width="20"
                 height="20"
                 aria-hidden="true"

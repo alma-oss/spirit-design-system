@@ -484,7 +484,7 @@
           value="Filled"
           aria-describedby="text-field-warning-validation-text"
         />
-        <div class="TextField__validationText" id="text-field-warning-validation-text">Validation text</div>
+        <div class="ValidationText ValidationText--warning" id="text-field-warning-validation-text">Validation text</div>
       </div>
 
       <div class="TextField TextField--medium TextField--danger">
@@ -498,7 +498,7 @@
           value="Filled"
           aria-describedby="text-field-danger-validation-text"
         />
-        <div class="TextField__validationText" id="text-field-danger-validation-text">
+        <div class="ValidationText ValidationText--danger" id="text-field-danger-validation-text">
           <ul>
             <li>Validation text</li>
             <li>Second validation text</li>
@@ -522,7 +522,7 @@
           aria-describedby="text-field-danger-with-helper-text-helper-text text-field-danger-with-helper-text-validation-text"
         />
         <div id="text-field-danger-with-helper-text-helper-text" class="HelperText">This is helper text</div>
-        <div id="text-field-danger-with-helper-text-validation-text" class="TextField__validationText">Danger validation text</div>
+        <div id="text-field-danger-with-helper-text-validation-text" class="ValidationText ValidationText--danger">Danger validation text</div>
       </div>
 
     </div>
@@ -555,7 +555,7 @@
           required
           aria-describedby="text-field-{{state}}-with-icon-validation-text"
         />
-        <div class="TextField__validationText" id="text-field-{{state}}-with-icon-validation-text">
+        <div class="ValidationText ValidationText--{{state}}" id="text-field-{{state}}-with-icon-validation-text">
           <svg
             class="Icon"
             width="20"
@@ -705,7 +705,7 @@
               </span>
             </button>
           </div>
-          <div class="TextField__validationText">Too short</div>
+          <div class="ValidationText ValidationText--danger">Too short</div>
         </div>
         <button type="button" class="Button Button--primary Button--medium">Button</button>
       </div>

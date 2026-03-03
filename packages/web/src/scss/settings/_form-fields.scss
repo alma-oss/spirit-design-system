@@ -31,6 +31,12 @@ $inline-field-input-border-color-checked-disabled: tokens.$disabled-background;
 $inline-field-input-border-width: tokens.$border-width-200;
 $inline-field-input-background-color-checked: tokens.$selected-state-default;
 
+// InputDetails component – Checkbox, Toggle
+// @deprecated This variable will be removed in the next major version.
+// Migration: delete variable `$input-details-text-color-state-disabled` and create a new one in InputDetails component.
+// @see https://jira.almacareer.tech/browse/DS-2496
+$input-details-text-color-state-disabled: tokens.$disabled-content;
+
 // Box field form components – TextField, TextArea, etc.
 $box-field-input-color-state-default: tokens.$form-field-filled-content;
 $box-field-input-border-width: tokens.$border-width-100;
@@ -116,3 +122,6 @@ $item-background-color-state-default: tokens.$background-interactive-state-defau
 $item-background-color-state-hover: tokens.$background-interactive-state-hover;
 $item-background-color-state-active: tokens.$background-interactive-state-active;
 $item-validation-text-typography: tokens.$body-small-semibold;
+
+// TextArea character counter
+$text-area-counter-typography-state-validation: tokens.$body-small-semibold;
