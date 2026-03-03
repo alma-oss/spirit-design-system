@@ -1,0 +1,48 @@
+// 1. Make the text selectable and allow links to be clickable in the helper and validation texts.
+// 2. Automatically apply flex layout when an icon is directly present alongside content.
+
+@use '../../tools/reset';
+@use '../../tools/typography';
+@use 'theme';
+
+.ValidationText {
+    @include typography.generate(theme.$typography);
+
+    display: block;
+    margin-top: theme.$margin-top;
+}
+
+.ValidationText > ul {
+    @include reset.list();
+}
+
+.ValidationText--danger {
+    color: theme.$color-state-danger;
+}
+
+.ValidationText--warning {
+    color: theme.$color-state-warning;
+}
+
+.ValidationText--success {
+    color: theme.$color-state-success;
+}
+
+.ValidationText--disabled {
+    color: theme.$color-state-disabled;
+}
+
+.ValidationText--item {
+    @include typography.generate(theme.$item-typography);
+}
+
+.ValidationText--inline {
+    position: relative; // 1.
+    z-index: 1; // 1.
+}
+
+// 2.
+.ValidationText:has(> svg:first-child:not(:only-child)) {
+    display: flex;
+    column-gap: theme.$icon-gap;
+}
