@@ -74,11 +74,6 @@ $_field-name: 'Select';
     @include form-fields-tools.box-field-focus-visible();
 }
 
-.Select__validationText,
-.Select > [data-spirit-element='validation_text'] {
-    @include form-fields-tools.validation-text();
-}
-
 @include dictionaries.generate-sizes(
     $class-name: $_field-name,
     $dictionary-values: form-fields-settings.$box-field-size-dictionary,
@@ -99,8 +94,4 @@ $_field-name: 'Select';
 
 :is(.Select--disabled, .Select.is-disabled) .Select__icon {
     color: form-fields-settings.$input-color-state-disabled;
-}
-
-:is(.Select--disabled, .Select.is-disabled) > :is(.Select__validationText, [data-spirit-element='validation_text']) {
-    @include form-fields-tools.validation-text-disabled();
 }
