@@ -29,6 +29,7 @@ in the Spirit Design System monorepo.
 
 | Flag                                           | Description                                     | Default | SASS flag                                       |
 | ---------------------------------------------- | ----------------------------------------------- | ------- | ----------------------------------------------- |
+| `enable-v5-control-button-expanded-size-scale` | Enable expanded size scale for ControlButton    | `false` | `$enable-v5-control-button-expanded-size-scale` |
 | `enable-v5-container-block-formatting-context` | Enforce creating a new block formatting context | `false` | `$enable-v5-container-block-formatting-context` |
 
 ## Turning on Feature Flags in SASS
