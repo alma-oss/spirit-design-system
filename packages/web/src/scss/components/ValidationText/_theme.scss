@@ -1,0 +1,10 @@
+@use '@tokens' as tokens;
+
+$typography: tokens.$body-small-semibold;
+$margin-top: tokens.$space-400;
+$icon-gap: tokens.$space-400;
+$color-state-disabled: tokens.$disabled-content;
+$color-state-success: tokens.$form-field-success;
+$color-state-warning: tokens.$form-field-warning;
+$color-state-danger: tokens.$form-field-danger;
+$item-typography: tokens.$body-small-semibold;
