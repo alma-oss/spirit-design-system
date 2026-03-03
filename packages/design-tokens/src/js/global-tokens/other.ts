@@ -17,9 +17,9 @@ export const gridColumns = '12';
 
 export const cssVariablePrefix = 'spirit-';
 
+export const containerPaddingDesktop = '32px';
 export const containerPaddingMobile = '16px';
 export const containerPaddingTablet = '32px';
-export const containerPaddingDesktop = '32px';
 
 export const containerMaxWidth = '1280px';
 
@@ -40,9 +40,9 @@ export const containers = {
     maxWidth: containerXlargeMaxWidth,
   },
   padding: {
+    desktop: containerPaddingDesktop,
     mobile: containerPaddingMobile,
     tablet: containerPaddingTablet,
-    desktop: containerPaddingDesktop,
   },
   maxWidth: containerMaxWidth,
 };
