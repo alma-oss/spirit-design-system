@@ -3,6 +3,7 @@
 
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
+@use '../../settings/feature-flags';
 @use '../../tools/breakpoint';
 @use '../../tools/dictionaries';
 @use '../../tools/reset';
@@ -42,6 +43,26 @@ $_component-name-infix: spirit-string.convert-pascal-case-to-kebab-case($_compon
     $dictionary-values: theme.$size-dictionary,
     $config: theme.$size-config
 );
+
+// @deprecated The feature flag will be removed in the next major version.
+// Migration: delete this feature flag and apply the expanded size scale by default.
+@if feature-flags.$enable-v5-control-button-expanded-size-scale {
+    @include dictionaries.generate-sizes(
+        $class-name: $_component-name,
+        $dictionary-values: theme.$expanded-size-dictionary,
+        $config: theme.$expanded-size-config
+    );
+}
+
+// @deprecated The feature flag will be removed in the next major version.
+// Migration: delete this feature flag and apply the expanded size scale by default.
+.spirit-feature-enable-v5-control-button-expanded-size-scale {
+    @include dictionaries.generate-sizes(
+        $class-name: $_component-name,
+        $dictionary-values: theme.$expanded-size-dictionary,
+        $config: theme.$expanded-size-config
+    );
+}
 
 @each $breakpoint-name, $breakpoint-value in theme.$breakpoints {
     $infix: breakpoint.get-modifier('infix', $breakpoint-name, $breakpoint-value);

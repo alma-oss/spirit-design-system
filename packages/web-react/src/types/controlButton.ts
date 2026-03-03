@@ -5,13 +5,11 @@ import type {
   ClickEvents,
   PolymorphicComponentProps,
   SingleOrResponsive,
-  SizesDictionaryType,
+  SizeExtendedDictionaryType,
   StyleProps,
 } from './shared';
 
 /** ===== BASE API ===== */
-/** @deprecated "SizesDictionaryType" fallback will be removed in the next major version. */
-export type ControlButtonSize<S> = keyof S extends never ? SizesDictionaryType : 'small' | 'medium' | 'large' | S;
 
 export interface ControlButtonBaseProps extends ChildrenProps, StyleProps, ClickEvents {}
 
@@ -24,7 +22,7 @@ export interface ControlButtonStyleProps<S = void> extends ControlButtonBaseProp
   /** Whether the button should be symmetrical. */
   isSymmetrical?: SingleOrResponsive<boolean>;
   /** The size of the button. */
-  size?: ControlButtonSize<S>;
+  size?: SizeExtendedDictionaryType | S;
 }
 
 /** ===== INTERNAL API ===== */

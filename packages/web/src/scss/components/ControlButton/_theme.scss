@@ -32,3 +32,43 @@ $size-config: (
         icon-size: 20px,
     ),
 );
+
+$expanded-size-dictionary: dictionaries.$size-extended;
+
+$expanded-size-config: (
+    xsmall: (
+        height: 16px,
+        padding-x: calc(#{tokens.$space-600} - #{$border-width}),
+        padding-y: calc(#{tokens.$space-300} - #{$border-width}),
+        typography: tokens.$body-small-regular,
+        icon-size: 12px,
+    ),
+    small: (
+        height: 20px,
+        padding-x: calc(#{tokens.$space-600} - #{$border-width}),
+        padding-y: calc(#{tokens.$space-300} - #{$border-width}),
+        typography: tokens.$body-small-regular,
+        icon-size: 16px,
+    ),
+    medium: (
+        height: 24px,
+        padding-x: calc(#{tokens.$space-600} - #{$border-width}),
+        padding-y: calc(#{tokens.$space-300} - #{$border-width}),
+        typography: tokens.$body-small-regular,
+        icon-size: 16px,
+    ),
+    large: (
+        height: 32px,
+        padding-x: calc(#{tokens.$space-700} - #{$border-width}),
+        padding-y: calc(#{tokens.$space-500} - #{$border-width}),
+        typography: tokens.$body-small-regular,
+        icon-size: 16px,
+    ),
+    xlarge: (
+        height: 40px,
+        padding-x: calc(#{tokens.$space-900} - #{$border-width}),
+        padding-y: calc(#{tokens.$space-500} - #{$border-width}),
+        typography: tokens.$body-medium-regular,
+        icon-size: 20px,
+    ),
+);

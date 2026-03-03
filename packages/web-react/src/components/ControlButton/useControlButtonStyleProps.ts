@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { useClassNamePrefix, useSymmetry } from '../../hooks';
-import { type ControlButtonSize, type ControlButtonStyleProps } from '../../types';
+import { type ControlButtonStyleProps, type SizeExtendedDictionaryType } from '../../types';
 import { applySize, compose } from '../../utils';
 
-const getControlButtonSizeClassname = <S = void>(className: string, size: ControlButtonSize<S>): string =>
-  compose(applySize<ControlButtonSize<S>>(size))(className);
+const getControlButtonSizeClassname = <S = void>(className: string, size: SizeExtendedDictionaryType | S): string =>
+  compose(applySize<SizeExtendedDictionaryType | S>(size))(className);
 
 export function useControlButtonStyleProps<S = void>(props: ControlButtonStyleProps<S>) {
   const { isDisabled, isSubtle, isSymmetrical, size, ...restProps } = props;
@@ -20,7 +20,7 @@ export function useControlButtonStyleProps<S = void>(props: ControlButtonStylePr
 
   const classProps = classNames(
     controlButtonClass,
-    getControlButtonSizeClassname(controlButtonClass, size as ControlButtonSize<S>),
+    getControlButtonSizeClassname(controlButtonClass, size as SizeExtendedDictionaryType | S),
     dynamicColorBackgroundInteractiveClass,
     accessibilityTapTargetClass,
     {

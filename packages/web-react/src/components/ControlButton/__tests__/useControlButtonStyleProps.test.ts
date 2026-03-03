@@ -61,6 +61,24 @@ describe('useControlButtonStyleProps', () => {
     expect(result.current.classProps).toBe(expectedClasses);
   });
 
+  it('should return xsmall size class', () => {
+    const props = {
+      size: 'xsmall',
+    } as SpiritControlButtonProps;
+    const { result } = renderHook(() => useControlButtonStyleProps(props));
+
+    expect(result.current.classProps).toContain('ControlButton--xsmall');
+  });
+
+  it('should return xlarge size class', () => {
+    const props = {
+      size: 'xlarge',
+    } as SpiritControlButtonProps;
+    const { result } = renderHook(() => useControlButtonStyleProps(props));
+
+    expect(result.current.classProps).toContain('ControlButton--xlarge');
+  });
+
   it('should return rest props', () => {
     const props = {
       size: 'medium',

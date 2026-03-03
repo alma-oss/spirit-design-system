@@ -64,6 +64,20 @@ ControlButton supports three sizes:
 </ControlButton>
 ```
 
+## Feature Flag: Expanded Size Scale
+
+Enable the expanded size scale by wrapping ControlButton in an element with the
+`spirit-feature-enable-v5-control-button-expanded-size-scale` CSS class. When enabled, the size scale
+shifts to include `xsmall` and `xlarge` sizes while remapping the existing sizes.
+
+```jsx
+<div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
+  <ControlButton size="xsmall" isSymmetrical aria-label="Close">
+    <Icon name="close" />
+  </ControlButton>
+</div>
+```
+
 ## Symmetrical ControlButton
 
 Use the `isSymmetrical` prop to make the control button have equal width and height. This is typically used for icon-only buttons.

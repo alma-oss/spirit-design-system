@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { Sizes } from '../../../constants';
+import { Sizes, SizesExtended } from '../../../constants';
 import { Icon } from '../../Icon';
 import ReadMe from '../README.md?raw';
 import { ControlButton } from '..';
@@ -55,7 +55,7 @@ const meta: Meta<typeof ControlButton> = {
     },
     size: {
       control: 'select',
-      options: [undefined, ...Object.values(Sizes)],
+      options: [undefined, ...Object.values(SizesExtended)],
       table: {
         defaultValue: {
           summary: Sizes.MEDIUM,
