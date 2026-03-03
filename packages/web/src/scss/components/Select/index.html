@@ -293,7 +293,7 @@
             </svg>
           </div>
         </div>
-        <div class="Select__validationText" id="select-warning-validation-text">Validation text</div>
+        <div class="ValidationText ValidationText--warning" id="select-warning-validation-text">Validation text</div>
       </div>
 
       <div class="Select Select--medium Select--danger">
@@ -309,7 +309,7 @@
             </svg>
           </div>
         </div>
-        <div class="Select__validationText" id="select-danger-validation-text">
+        <div class="ValidationText ValidationText--danger" id="select-danger-validation-text">
           <ul>
             <li>First validation text</li>
             <li>Second validation text</li>
@@ -344,7 +344,7 @@
             </svg>
           </div>
         </div>
-        <div class="Select__validationText" id="select-{{state}}-icon-validation-text">
+        <div class="ValidationText ValidationText--{{state}}" id="select-{{state}}-icon-validation-text">
           <svg width="20" height="20" aria-hidden="true">
             {{#if (eq state "success")}}
             <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />

@@ -121,8 +121,8 @@ Validation states can be presented either by adding a CSS modifier class
 a JS interaction class when controlled by JavaScript (`has-success`,
 `has-warning`, `has-danger`). See Validation state [dictionary][dictionary-validation].
 
-- To render validation text as a list, use `<ul>` element inside of `.Slider__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.Slider__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
 <div class="Slider Slider--success">
@@ -148,7 +148,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     value="30"
     oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
   />
-  <div id="slider-warning-validation-text" class="Slider__validationText">Validation text</div>
+  <div id="slider-warning-validation-text" class="ValidationText ValidationText--warning">Validation text</div>
 </div>
 
 <div class="Slider Slider--danger">
@@ -162,7 +162,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     value="30"
     oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
   />
-  <div id="slider-danger-validation-text" class="Slider__validationText">
+  <div id="slider-danger-validation-text" class="ValidationText ValidationText--danger">
     <ul>
       <li>First validation text</li>
       <li>Second validation text</li>
@@ -181,39 +181,12 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     value="30"
     oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
   />
-  <div id="slider-warning-validation-text" class="Slider__validationText">
+  <div id="slider-warning-validation-text" class="ValidationText ValidationText--warning">
     <svg width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
     <div>Validation text with icon</div>
   </div>
-</div>
-```
-
-### JavaScript-Controlled Validation Text
-
-When implementing client-side form validation, use JS interaction state classes
-(`has-success`, `has-warning`, `has-danger`) on the wrapping `<div>` element and
-render validation texts in a `<div>` with `data-spirit-element="validation_text"`
-attribute. This way your JS remains disconnected from CSS that may or may not be
-[prefixed][prefixed].
-
-**Remember this approach is only valid for vanilla JS implementation. React
-components mix CSS with JS by design and handle prefixes their own way.**
-
-```html
-<div class="Slider Slider--danger">
-  <label for="slider-danger" class="Label Label--box">Slider</label>
-  <input
-    class="Slider__input"
-    id="slider-danger"
-    aria-describedby="slider-danger-validation-text"
-    style="--slider-position: 30%"
-    type="range"
-    value="30"
-    oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
-  />
-  <div data-spirit-element="validation_text">Error message inserted by JS</div>
 </div>
 ```
 
@@ -242,4 +215,3 @@ JS interaction class when controlled by JavaScript:
 [helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [html-spec-range]: https://html.spec.whatwg.org/multipage/input.html#range-state-(type=range)
 [mdn-range]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
-[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names

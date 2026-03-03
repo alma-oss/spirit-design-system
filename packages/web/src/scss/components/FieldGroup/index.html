@@ -148,7 +148,7 @@
           <div class="docs-Box">Item</div>
           <!-- Custom items: end -->
         </div>
-        <div id="field-group-success-validation-text" class="FieldGroup__validationText">Validation text</div>
+        <div id="field-group-success-validation-text" class="ValidationText ValidationText--success">Validation text</div>
       </fieldset>
 
       <fieldset class="FieldGroup FieldGroup--warning" aria-describedby="field-group-warning-validation-text">
@@ -161,7 +161,7 @@
           <div class="docs-Box">Item</div>
           <!-- Custom items: end -->
         </div>
-        <div id="field-group-warning-validation-text" class="FieldGroup__validationText">Validation text</div>
+        <div id="field-group-warning-validation-text" class="ValidationText ValidationText--warning">Validation text</div>
       </fieldset>
 
       <fieldset class="FieldGroup FieldGroup--danger" aria-describedby="field-group-danger-validation-text">
@@ -174,7 +174,7 @@
           <div class="docs-Box">Item</div>
           <!-- Custom items: end -->
         </div>
-        <div id="field-group-danger-validation-text" class="FieldGroup__validationText">
+        <div id="field-group-danger-validation-text" class="ValidationText ValidationText--danger">
           <ul>
             <li>First validation text</li>
             <li>Second validation text</li>
@@ -206,7 +206,7 @@
           <div class="docs-Box">Item</div>
           <!-- Custom items: end -->
         </div>
-        <div id="field-group-{{state}}-validation-icon" class="FieldGroup__validationText">
+        <div id="field-group-{{state}}-validation-icon" class="ValidationText ValidationText--{{state}}">
           <svg width="20" height="20" aria-hidden="true">
             {{#if (eq state "success")}}
             <use xlink:href="/assets/icons/svg/sprite.svg#check-plain"/>
