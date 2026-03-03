@@ -199,13 +199,6 @@
             }
         }
 
-        @if $field-name != 'Checkbox' or $field-name != 'Radio' {
-            :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
-                :is(.#{$field-name}__validationText, [data-spirit-element='validation_text']) {
-                color: map.get($validation-state-value, validation-text-color);
-            }
-        }
-
         @if $field-name == 'TextArea' {
             :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
                 .#{$field-name}__counter {
