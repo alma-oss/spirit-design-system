@@ -314,9 +314,16 @@ const replaceFontName = (fontFamily: string): string => {
 };
 
 const FONT_WEIGHT_MAP: Record<string, number> = {
-  bold: 700,
+  thin: 100,
+  extralight: 200,
+  light: 300,
+  normal: 400,
   regular: 400,
+  medium: 500,
   semibold: 600,
+  bold: 700,
+  extrabold: 800,
+  black: 900,
 };
 
 const normalizeFontWeight = (fontWeightText: string): number | string => {
