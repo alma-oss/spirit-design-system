@@ -140,22 +140,22 @@ Validation states can be presented either by adding a CSS modifier class (`Field
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>
-  <div id="field-group-success-validation-text" class="FieldGroup__validationText">Validation text</div>
+  <div id="field-group-success-validation-text" class="ValidationText ValidationText--success">Validation text</div>
 </fieldset>
 ```
 
-- To render validation text as a list, use `<ul>` element inside of `.FieldGroup__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.FieldGroup__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
-<div id="field-group-danger-validation-text" class="FieldGroup__validationText">
+<div id="field-group-danger-validation-text" class="ValidationText ValidationText--danger">
   <ul>
     <li>First validation text</li>
     <li>Second validation text</li>
   </ul>
 </div>
 
-<div id="field-group-danger-validation-text" class="FieldGroup__validationText">
+<div id="field-group-danger-validation-text" class="ValidationText ValidationText--danger">
   <svg width="20" height="20" aria-hidden="true">
     <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
   </svg>
@@ -166,27 +166,6 @@ Validation states can be presented either by adding a CSS modifier class (`Field
 👉 To improve the UX for users with assistive technologies, connect the validation text to the group using the
 `aria-describedby` attribute. This way, the validation text is announced when the group receives focus.
 
-### JavaScript-Controlled Validation Text
-
-When implementing client-side form validation, use JS interaction state classes (`has-success`, `has-warning`,
-`has-danger`) on the wrapping `<fieldset>` element and render validation texts in a `<div>` or `<ul>` with
-`data-spirit-element="validation_text"` attribute. This way your JS remains disconnected from CSS that may or may not be
-[prefixed][prefixed].
-
-**Remember this approach is only valid for vanilla JS implementation. React components mix CSS with JS by design and
-handle prefixes their own way.**
-
-```html
-<fieldset class="FieldGroup FieldGroup--success" aria-describedby="field-group-success-validation-text">
-  <legend class="accessibility-hidden">Label</legend>
-  <div class="Label Label--box" aria-hidden="true">Label</div>
-  <div class="FieldGroup__fields">
-    <!-- Form fields… -->
-  </div>
-  <div id="field-group-success-validation-text" data-spirit-element="validation_text">Validation text</div>
-</fieldset>
-```
-
 👉 Consider using [`aria-live`][aria-live] attribute on the validation text element to announce validation messages to
 screen readers.
 
@@ -194,4 +173,3 @@ screen readers.
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [mdn-fieldset-disabled]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset#disabled_fieldset
-[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
