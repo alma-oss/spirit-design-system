@@ -6,7 +6,7 @@ import handlebars from 'vite-plugin-handlebars';
 // to make it work the package must be transpiled into CommonJS
 // as a workaround, we can import the file directly
 // @see: https://github.com/vitejs/vite/issues/5370
-import { SERVERS } from '../../../../packages/common/constants/servers';
+import { SERVERS } from '../../../../packages/common/src/constants/servers';
 import { getNestedDirs, mapKeys } from '../../scripts/prepareDist';
 import { getListOfIcons, getListOfNestedDirectories } from '../../scripts/utils';
 
