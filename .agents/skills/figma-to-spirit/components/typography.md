@@ -14,7 +14,11 @@ Spirit typography components for consistent text rendering. These components do 
 | **Body\*** (e.g. Body/Medium/Semibold, Body/Small/Regular) | `Text`           |
 
 - **Heading\*** text style ⇒ use **Heading** component (with appropriate `elementType`: h1–h6 for semantic headings, div/span for decorative).
-- **Figma Heading style name** is `Heading/[Size]/[Emphasis]` → map to Spirit `size` and optionally `emphasis`. Example: **Heading/Large/Bold** → `<Heading size="large">` (omit `emphasis="bold"`—it is the default). **Heading/XLarge/Bold** → `size="xlarge"`. Use the exact size from the style name (Large → `large`, XLarge → `xlarge`, etc.).
+- **Figma Heading style name** is `Heading/[Size]/[Emphasis]` → map to Spirit `size` and optionally `emphasis`. Examples:
+  - **Heading/Large/Bold** → `<Heading elementType="..." size="large">` (omit `emphasis="bold"` since bold is default)
+  - **Heading/Medium/Bold** → `<Heading elementType="...">` (omit both size and emphasis—both are defaults)
+  - **Heading/Large/Regular** → `<Heading elementType="..." size="large" emphasis="regular">` (must set emphasis when differs from default)
+  - Use the exact size from the style name (Large → `large`, XLarge → `xlarge`, etc.)
 - **Body\*** text style ⇒ use **Text** component (never use Heading for Body styles, even if the text is bold or prominent).
 - **Figma Body style name** is `Body/[Size]/[Emphasis]` → map to Spirit `size` and optionally `emphasis`. Example: **Body/Small/Regular** → `<Text size="small">` (omit emphasis if Regular is the default). **Body/Medium/Semibold** → `<Text size="medium" emphasis="semibold">`. Use the exact size from the style name (Small → `small`, Medium → `medium`, etc.); do not use `xsmall` for Body/Small.
 
@@ -63,6 +67,64 @@ Example: Figma "Body/Medium/Semibold" for a person's name → use `<Text size="m
 | `medium` | Body text (default)              |
 | `large`  | Lead paragraphs, emphasized text |
 | `xlarge` | Large headings, hero text        |
+
+## Default Values That Should Be Omitted
+
+DO NOT set these props when they match component defaults:
+
+| Component | Default Props (Omit These)                                                         |
+| --------- | ---------------------------------------------------------------------------------- |
+| Heading   | `size="medium"`, `emphasis="bold"`, `isTextBalanced={false}`                       |
+| Text      | `elementType="p"`, `size="medium"`, `emphasis="regular"`, `isTextBalanced={false}` |
+
+**Important Notes:**
+
+- **Heading `elementType` is REQUIRED** - Unlike other defaults, you must always set `elementType` (h1-h6, div, span) for accessibility and semantic HTML. This is the ONLY required prop.
+- **Text `emphasis="regular"` is default** - Only set `emphasis` when you need semibold or bold
+- **Heading `emphasis="bold"` is default** - Omit `emphasis` for bold headings; only set for regular or semibold
+
+**Examples:**
+
+```jsx
+// WRONG - setting default values unnecessarily
+<Heading elementType="h2" size="medium" emphasis="bold">
+  Title
+</Heading>
+
+// CORRECT - omit default size and emphasis
+<Heading elementType="h2">
+  Title
+</Heading>
+
+// WRONG - setting default Text props
+<Text elementType="p" size="medium" emphasis="regular">
+  Body text
+</Text>
+
+// CORRECT - omit all defaults
+<Text>
+  Body text
+</Text>
+
+// CORRECT - only set what differs from defaults
+<Text size="small" textColor="secondary">
+  Small secondary text
+</Text>
+
+<Heading elementType="h1" size="xlarge" emphasis="regular">
+  Regular-weight large heading
+</Heading>
+```
+
+### Special Case: Figma Text Styles
+
+When Figma shows:
+
+- **Heading/Medium/Bold** → `<Heading elementType="...">` (omit size and emphasis, both are defaults)
+- **Heading/Large/Bold** → `<Heading elementType="..." size="large">` (omit emphasis, bold is default)
+- **Heading/Large/Regular** → `<Heading elementType="..." size="large" emphasis="regular">` (must set emphasis when differs from default)
+- **Body/Medium/Regular** → `<Text>` (omit all, all are defaults)
+- **Body/Small/Regular** → `<Text size="small">` (omit emphasis, regular is default)
 
 ---
 
@@ -208,6 +270,32 @@ Utility component for rendering consistent typographic hierarchy and semantic he
      300K+
    </Heading>
    ```
+
+7. **Setting default prop values unnecessarily**
+
+   ```jsx
+   // WRONG - size="medium" and emphasis="bold" are defaults
+   <Heading elementType="h2" size="medium" emphasis="bold">
+     Section Title
+   </Heading>
+
+   // CORRECT - omit defaults
+   <Heading elementType="h2">
+     Section Title
+   </Heading>
+
+   // WRONG - setting all defaults on Text
+   <Text elementType="p" size="medium" emphasis="regular">
+     Body text
+   </Text>
+
+   // CORRECT - omit all defaults
+   <Text>
+     Body text
+   </Text>
+   ```
+
+   **Remember:** Only `elementType` is required on Heading (for accessibility). All other props should only be set when they differ from defaults.
 
 ### Figma Mapping
 
