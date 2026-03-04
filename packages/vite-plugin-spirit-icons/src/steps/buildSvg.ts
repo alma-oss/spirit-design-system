@@ -1,16 +1,12 @@
-const fs = require('fs');
-const path = require('path');
-const { cssVariablePrefix } = require('@alma-oss/spirit-design-tokens');
-const { filterSvgFiles, getIconType, ICON_TYPE_DUALTONE, ICON_TYPE_COLORED } = require('./shared');
+import fs from 'fs';
+import path from 'path';
+import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
+import { filterSvgFiles, getIconType, ICON_TYPE_DUALTONE, ICON_TYPE_COLORED } from './shared';
 
-const svgSrcDir = path.resolve(__dirname, '../src/svg');
-const svgDistDir = path.resolve(__dirname, '../dist/svg');
-const { log: logMessage, warn: logWarning, error: logError } = console;
+export const DUALTONE_COLOR_BACKGROUND_DEFAULT = '#F2F2F2'; // Gray95
+export const DUALTONE_COLOR_BORDER_DEFAULT = '#202020'; // DarkGray
 
-const DUALTONE_COLOR_BACKGROUND_DEFAULT = '#F2F2F2'; // Gray95
-const DUALTONE_COLOR_BORDER_DEFAULT = '#202020'; // DarkGray
-
-const normalizeSvgColors = (fileName, svgContent) => {
+export const normalizeSvgColors = (fileName: string, svgContent: string): string => {
   const iconType = getIconType(fileName);
 
   switch (iconType) {
@@ -33,8 +29,13 @@ const normalizeSvgColors = (fileName, svgContent) => {
   }
 };
 
-const normalizeAndCopySvg = (srcDir, distDir) => {
+export const normalizeAndCopySvg = (srcDir: string, distDir: string): boolean => {
   try {
+    // Ensure destination directory exists
+    if (!fs.existsSync(distDir)) {
+      fs.mkdirSync(distDir, { recursive: true });
+    }
+
     const files = fs.readdirSync(srcDir);
     const svgs = filterSvgFiles(files);
 
@@ -51,39 +52,28 @@ const normalizeAndCopySvg = (srcDir, distDir) => {
           .replace(/<svg.*(viewBox="(\d+\s){3}\d+").*>/, `<symbol id="${svg.slice(0, -4)}" $1>`)
           .replace(/<\/svg>/g, '</symbol>');
         sprite += svgSpriteContent;
-        fs.writeFileSync(path.join(svgDistPath), svgContentNormalized);
+        fs.writeFileSync(svgDistPath, svgContentNormalized);
       });
 
       sprite += '</svg>';
 
       fs.writeFileSync(spriteDistFile, sprite);
-      logMessage(`Successfully normalized and copied ${svgs.length} SVG files`);
+      console.log(`Successfully normalized and copied ${svgs.length} SVG files`);
 
       return true;
     }
 
-    logWarning(`No SVG files found in ${srcDir}`);
+    console.warn(`No SVG files found in ${srcDir}`);
 
     return false;
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : String(err);
-    logError(`Error normalizing SVGs: ${errorMessage}`);
+    console.error(`Error normalizing SVGs: ${errorMessage}`);
 
     return false;
   }
 };
 
-// Only run when this script is executed directly, not when imported
-if (require.main === module) {
-  const success = normalizeAndCopySvg(svgSrcDir, svgDistDir);
-  if (!success) {
-    process.exit(1);
-  }
-}
-
-module.exports = {
-  DUALTONE_COLOR_BACKGROUND_DEFAULT,
-  DUALTONE_COLOR_BORDER_DEFAULT,
-  normalizeSvgColors,
-  normalizeAndCopySvg,
+export const buildSvg = (srcDir: string, distDir: string): void => {
+  normalizeAndCopySvg(srcDir, distDir);
 };

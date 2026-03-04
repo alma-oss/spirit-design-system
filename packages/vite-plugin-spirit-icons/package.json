@@ -1,0 +1,60 @@
+{
+  "name": "@alma-oss/vite-plugin-spirit-icons",
+  "version": "1.0.0",
+  "description": "Vite plugin for generating Spirit Design System icons from SVG files",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alma-oss/spirit-design-system.git",
+    "directory": "packages/vite-plugin-spirit-icons"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build:clean": "shx rm -rf dist",
+    "build:compile": "tsup --config ./config/tsup.config.ts",
+    "build": "npm-run-all --serial build:clean build:compile",
+    "types": "tsc --noEmit",
+    "test": "npm-run-all --serial test:unit",
+    "test:unit": "jest",
+    "test:unit:watch": "yarn test:unit --watchAll",
+    "test:unit:coverage": "yarn test:unit --coverage"
+  },
+  "dependencies": {
+    "@alma-oss/spirit-design-tokens": "4.0.3",
+    "jsdom": "catalog:test",
+    "svg2react-icon": "catalog:script"
+  },
+  "devDependencies": {
+    "@types/jest": "catalog:types",
+    "@types/node": "catalog:types",
+    "jest": "catalog:test",
+    "jest-config-spirit": "workspace:^",
+    "npm-run-all2": "catalog:script",
+    "shx": "catalog:script",
+    "tsup": "catalog:build",
+    "tsx": "catalog:script",
+    "typescript": "catalog:types",
+    "vite": "catalog:build"
+  },
+  "peerDependencies": {
+    "vite": ">=5"
+  }
+}

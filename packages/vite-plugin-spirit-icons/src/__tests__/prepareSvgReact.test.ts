@@ -3,7 +3,7 @@ import os from 'os';
 import path from 'path';
 
 // Ensure shared.filterSvgFiles is resilient to undefined in CI fs edge cases
-jest.mock('../shared', () => {
+jest.mock('../steps/shared', () => {
   const p = require('path');
   return {
     filterSvgFiles: (fileNames: string[] | undefined) =>
@@ -13,7 +13,7 @@ jest.mock('../shared', () => {
   };
 });
 
-const { toPascalCase, prepareSvgForReactComponent } = require('../prepareSvgReact');
+import { toPascalCase, prepareSvgForReactComponent } from '../steps/prepareSvgReact';
 
 /** Wait until directory contains expected file count (polling) */
 const waitForFilesCount = async (dir: string, expectedCount: number, timeoutMs = 2000) => {

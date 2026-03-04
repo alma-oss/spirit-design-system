@@ -3,7 +3,7 @@ import os from 'os';
 import path from 'path';
 
 // Make filterSvgFiles resilient to undefined to avoid CI edge case crashes
-jest.mock('../shared', () => {
+jest.mock('../steps/shared', () => {
   const path = require('path');
   return {
     filterSvgFiles: (fileNames: string[] | undefined) =>
@@ -13,7 +13,7 @@ jest.mock('../shared', () => {
   };
 });
 
-const { buildConstants } = require('../buildConstants');
+import { buildConstants } from '../steps/buildConstants';
 
 // Helper to create a temp workspace with svg files
 const setupTemp = (svgs: Record<string, string>) => {

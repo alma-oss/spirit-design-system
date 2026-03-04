@@ -16,6 +16,7 @@ export default {
         'common',
         'design-tokens',
         'icons',
+        'vite-plugin-spirit-icons',
         'web',
         'web-react',
         // Use when committing changes/additions/removals to exact exporter

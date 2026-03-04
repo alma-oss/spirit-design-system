@@ -1,4 +1,4 @@
-import { filterSvgFiles, getIconType, ICON_TYPE_COLORED, ICON_TYPE_DUALTONE } from '../shared';
+import { filterSvgFiles, getIconType, ICON_TYPE_COLORED, ICON_TYPE_DUALTONE } from '../steps/shared';
 
 describe('shared icon helpers', () => {
   describe('filterSvgFiles', () => {

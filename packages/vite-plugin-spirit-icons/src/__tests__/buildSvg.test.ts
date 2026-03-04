@@ -1,27 +1,30 @@
 import path from 'path';
 
-// Mock fs before importing the module so tests can control filesystem interactions in buildSvg.js
-const readdirSyncMock = jest.fn(() => []);
+// Mock fs before importing the module to suppress side effects from the bottom call in buildSvg.ts
+const readdirMock = jest.fn();
 const readFileSyncMock = jest.fn();
 const writeFileSyncMock = jest.fn();
 
-jest.mock('fs', () => ({
-  readdirSync: readdirSyncMock,
-  readFileSync: readFileSyncMock,
-  writeFileSync: writeFileSyncMock,
-}));
-
+jest.mock('fs');
 jest.mock('@alma-oss/spirit-design-tokens', () => ({
   cssVariablePrefix: 'spirit-',
 }));
 
+// Import mocked modules
+import fs from 'fs';
 import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
 
-const buildSvgModule = require('../buildSvg.js');
+// Now we can safely import buildSvg after all mocks are in place
+import { normalizeSvgColors, normalizeAndCopySvg, DUALTONE_COLOR_BACKGROUND_DEFAULT, DUALTONE_COLOR_BORDER_DEFAULT } from '../steps/buildSvg';
+
+// Setup the mocks
+const mockFs = fs as jest.Mocked<typeof fs>;
+mockFs.readdirSync = readdirMock;
+mockFs.readFileSync = readFileSyncMock;
+mockFs.writeFileSync = writeFileSyncMock;
 
 describe('buildSvg', () => {
   describe('normalizeSvgColors', () => {
-    const { normalizeSvgColors, DUALTONE_COLOR_BACKGROUND_DEFAULT, DUALTONE_COLOR_BORDER_DEFAULT } = buildSvgModule;
 
     it('should replace dualtone default colors with CSS variables', () => {
       const svgName = 'user-dualtone.svg';
@@ -62,12 +65,10 @@ describe('buildSvg', () => {
   });
 
   describe('normalizeAndCopySvg', () => {
-    const { normalizeAndCopySvg } = buildSvgModule;
-
     beforeEach(() => {
       jest.clearAllMocks();
       // Default side effect suppression for initial import already done; ensure fresh mocks for each test
-      (readdirSyncMock as jest.Mock).mockImplementation(() => []);
+      (readdirMock as jest.Mock).mockReturnValue([]);
     });
 
     it('should build sprite and write normalized SVGs', async () => {
@@ -75,7 +76,7 @@ describe('buildSvg', () => {
       const distDir = '/virtual/dist';
 
       const files = ['alpha.svg', 'beta-dualtone.svg', 'gamma-colored.svg', 'sprite.svg']; // sprite.svg should be ignored from input list
-      (readdirSyncMock as jest.Mock).mockImplementationOnce(() => files);
+      (readdirMock as jest.Mock).mockReturnValueOnce(files);
 
       // Provide file contents depending on file name
       (readFileSyncMock as jest.Mock).mockImplementation((filePath: string) => {
@@ -84,7 +85,7 @@ describe('buildSvg', () => {
           return '<svg viewBox="0 0 24 24"><path fill="#000000" /></svg>';
         }
         if (name === 'beta-dualtone.svg') {
-          return `<svg viewBox="0 0 24 24"><rect fill="${buildSvgModule.DUALTONE_COLOR_BACKGROUND_DEFAULT}" /><path fill="${buildSvgModule.DUALTONE_COLOR_BORDER_DEFAULT}" /></svg>`;
+          return `<svg viewBox="0 0 24 24"><rect fill="${DUALTONE_COLOR_BACKGROUND_DEFAULT}" /><path fill="${DUALTONE_COLOR_BORDER_DEFAULT}" /></svg>`;
         }
         if (name === 'gamma-colored.svg') {
           return '<svg viewBox="0 0 24 24"><path fill="#FF0000" /><path fill="#00FF00" /></svg>';
@@ -115,7 +116,7 @@ describe('buildSvg', () => {
     });
 
     it('should do nothing when only sprite.svg present (no writes expected)', async () => {
-      (readdirSyncMock as jest.Mock).mockImplementationOnce(() => ['sprite.svg']);
+      (readdirMock as jest.Mock).mockReturnValueOnce(['sprite.svg']);
 
       normalizeAndCopySvg('/virtual/src', '/virtual/dist');
 
