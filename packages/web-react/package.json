@@ -130,8 +130,8 @@
     "figma:publish": "yarn figma connect publish",
     "figma:unpublish": "yarn figma connect unpublish",
     "exports:regenerate": "tsx ./scripts/exports.ts",
-    "prepack": "tsx ./scripts/pack.ts --strip",
-    "postpack": "tsx ./scripts/pack.ts --restore"
+    "prepack": "tsx ./scripts/exports.ts --strip-developement",
+    "postpack": "tsx ./scripts/exports.ts --restore-development"
   },
   "exports": {
     ".": {
