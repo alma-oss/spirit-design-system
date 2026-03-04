@@ -29,34 +29,48 @@ export const normalizeSvgColors = (fileName: string, svgContent: string): string
   }
 };
 
-export const normalizeAndCopySvg = (srcDir: string, distDir: string): void => {
-  // Ensure destination directory exists
-  if (!fs.existsSync(distDir)) {
-    fs.mkdirSync(distDir, { recursive: true });
-  }
+export const normalizeAndCopySvg = (srcDir: string, distDir: string): boolean => {
+  try {
+    // Ensure destination directory exists
+    if (!fs.existsSync(distDir)) {
+      fs.mkdirSync(distDir, { recursive: true });
+    }
 
-  const files = fs.readdirSync(srcDir);
-  const svgs = filterSvgFiles(files);
+    const files = fs.readdirSync(srcDir);
+    const svgs = filterSvgFiles(files);
 
-  if (svgs.length > 0) {
-    let sprite = '<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">\n';
-    const spriteDistFile = path.join(distDir, 'sprite.svg');
+    if (svgs.length > 0) {
+      let sprite = '<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">\n';
+      const spriteDistFile = path.join(distDir, 'sprite.svg');
 
-    svgs.forEach((svg) => {
-      const svgPath = path.join(srcDir, svg);
-      const svgDistPath = path.join(distDir, svg);
-      const svgContent = fs.readFileSync(svgPath, 'utf8');
-      const svgContentNormalized = normalizeSvgColors(svg, svgContent);
-      const svgSpriteContent = svgContentNormalized
-        .replace(/<svg.*(viewBox="(\d+\s){3}\d+").*>/, `<symbol id="${svg.slice(0, -4)}" $1>`)
-        .replace(/<\/svg>/g, '</symbol>');
-      sprite += svgSpriteContent;
-      fs.writeFileSync(svgDistPath, svgContentNormalized);
-    });
+      svgs.forEach((svg) => {
+        const svgPath = path.join(srcDir, svg);
+        const svgDistPath = path.join(distDir, svg);
+        const svgContent = fs.readFileSync(svgPath, 'utf8');
+        const svgContentNormalized = normalizeSvgColors(svg, svgContent);
+        const svgSpriteContent = svgContentNormalized
+          .replace(/<svg.*(viewBox="(\d+\s){3}\d+").*>/, `<symbol id="${svg.slice(0, -4)}" $1>`)
+          .replace(/<\/svg>/g, '</symbol>');
+        sprite += svgSpriteContent;
+        fs.writeFileSync(svgDistPath, svgContentNormalized);
+      });
 
-    sprite += '</svg>';
+      sprite += '</svg>';
 
-    fs.writeFileSync(spriteDistFile, sprite);
+      fs.writeFileSync(spriteDistFile, sprite);
+      console.log(`Successfully normalized and copied ${svgs.length} SVG files`);
+
+      return true;
+    }
+
+    console.warn(`No SVG files found in ${srcDir}`);
+
+    return false;
+  } catch (err) {
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    console.error(`Error normalizing SVGs: ${errorMessage}`);
+
+    return false;
   }
 };
 
