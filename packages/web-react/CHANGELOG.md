@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.4.0...@alma-oss/spirit-web-react@4.4.1) (2026-03-04)
+
+### Chores
+
+- **web-react:** typo in script flag ([d7e2fdf](https://github.com/alma-oss/spirit-design-system/commit/d7e2fdfa868fa5746bb053b2b11d73c72bc2b497))
+
 ## [4.4.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.3.0...@alma-oss/spirit-web-react@4.4.0) (2026-03-04)
 
 ### Features

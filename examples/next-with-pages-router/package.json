@@ -1,6 +1,6 @@
 {
   "name": "@alma-oss/spirit-example-next-with-pages-router",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "private": true,
   "author": "Spirit Design System Team",
   "main": "index.js",
