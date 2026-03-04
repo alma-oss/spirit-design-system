@@ -20,6 +20,8 @@ Spirit Card components for displaying content in structured, contained blocks. C
 
 If any of these are present, the Card title is meant to be a link - use `CardLink` inside `CardTitle`.
 
+**Note on Defaults:** Card `direction` defaults to `"vertical"`. Only set `direction="horizontal"` when the Card layout is explicitly horizontal in Figma. Omit the prop for vertical cards.
+
 ---
 
 ## CardLink

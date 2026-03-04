@@ -31,6 +31,55 @@ Always use full token names:
 
 Responsive format: `{ mobile: "space-400", tablet: "space-800", desktop: "space-1200" }`
 
+## Default Values That Should Be Omitted
+
+DO NOT set these props when they match component defaults:
+
+| Component | Default Props (Omit These)                                                                                                       |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Flex      | `direction="horizontal"`, `alignmentX="stretch"`, `alignmentY="stretch"`, `elementType="div"`                                    |
+| Grid      | `alignmentX="stretch"`, `alignmentY="stretch"`, `elementType="div"`                                                              |
+| Stack     | `hasSpacing={false}`, `hasIntermediateDividers={false}`, `hasStartDivider={false}`, `hasEndDivider={false}`, `elementType="div"` |
+| Box       | `borderStyle="solid"`, `elementType="div"`                                                                                       |
+| Section   | `hasContainer={true}`, `elementType="section"`                                                                                   |
+| Container | `size="xlarge"`, `isFluid={false}`                                                                                               |
+
+**Why omit defaults:**
+
+- Reduces code noise and improves readability
+- Makes actual configuration choices more obvious
+- Prevents confusion about what's explicitly set vs. default behavior
+- Follows React best practices
+
+**Examples:**
+
+```jsx
+// WRONG - setting default values
+<Flex direction="horizontal" alignmentX="stretch" alignmentY="stretch">
+  <Button>Click me</Button>
+</Flex>
+
+// CORRECT - omit defaults
+<Flex>
+  <Button>Click me</Button>
+</Flex>
+
+// WRONG - Container xlarge is default
+<Section containerProps={{ size: "xlarge" }}>
+  Content
+</Section>
+
+// CORRECT - omit containerProps when size is xlarge (default)
+<Section>
+  Content
+</Section>
+
+// CORRECT - only set containerProps when size differs from default
+<Section containerProps={{ size: "medium" }}>
+  Content
+</Section>
+```
+
 ---
 
 ## Flex
@@ -68,16 +117,40 @@ Single-axis alignment and distribution utility for arranging elements horizontal
 1. **Using deprecated direction values**
 
    ```jsx
-   // WRONG - deprecated
+   // WRONG - deprecated (will be removed in future versions)
    <Flex direction="row" />
    <Flex direction="column" />
 
-   // CORRECT
+   // CORRECT - use current values
    <Flex direction="horizontal" />
    <Flex direction="vertical" />
    ```
 
-#### Not Setting AlignmentX Correctly Based on Figma Children Width
+   **Important**: The `row`/`column` values are deprecated. Even if they appear in older Figma files or CodeConnect snippets, replace them with `horizontal`/`vertical`. This was changed in Spirit Web React v5.
+
+2. **Setting default direction value**
+
+   ```jsx
+   // WRONG - horizontal is the default, don't set it
+   <Flex direction="horizontal" spacing="space-600">
+     <Icon name="info" />
+     <Text>Label</Text>
+   </Flex>
+
+   // CORRECT - omit default direction
+   <Flex spacing="space-600">
+     <Icon name="info" />
+     <Text>Label</Text>
+   </Flex>
+
+   // CORRECT - only set direction when it differs from default
+   <Flex direction="vertical" spacing="space-600" alignmentX="left">
+     <Heading elementType="h2">Title</Heading>
+     <Text>Description</Text>
+   </Flex>
+   ```
+
+3. **Not Setting AlignmentX Correctly Based on Figma Children Width**
 
 Check if Figma children have `w-full` (full width) before choosing alignment:
 
@@ -116,7 +189,7 @@ When Figma shows children with `w-full` or `shrink-0 w-full`, parent must use `a
 </Flex>
 ```
 
-4. **Using CSS values instead of Spirit values**
+5. **Using CSS values instead of Spirit values**
 
    ```jsx
    // WRONG
@@ -126,7 +199,7 @@ When Figma shows children with `w-full` or `shrink-0 w-full`, parent must use `a
    <Flex alignmentX="left" alignmentY="bottom" />
    ```
 
-5. **Using numeric spacing instead of tokens**
+6. **Using numeric spacing instead of tokens**
 
    ```jsx
    // WRONG
@@ -137,7 +210,7 @@ When Figma shows children with `w-full` or `shrink-0 w-full`, parent must use `a
    <Flex spacing="space-800" />
    ```
 
-6. Guessing spacing instead of reading it from the design context response
+7. Guessing spacing instead of reading it from the design context response
 
    The `get_design_context` response includes the real gap for each layout element (e.g. Tailwind `className` with `gap-[var(--global/spacing/space-700,16px)]` or `gap-[var(--global\/spacing\/space-700,16px)]`). Extract the token (e.g. `space-700`) from that response and use it for the corresponding Flex. Do not substitute a "typical" value like `space-800` when the design context clearly shows `space-700`.
 

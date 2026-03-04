@@ -37,7 +37,11 @@ For detailed API references, examples, and common mistakes:
    - **Do NOT silently guess** - every unconfirmed value must be flagged
    - Common traps: Figma canvas has a gray background (not part of the design), screenshot colors are unreliable, spacing/sizes cannot be accurately read from pixels
 7. **Use https://picsum.photos/ for all image placeholders** - Format: `https://picsum.photos/seed/{identifier}/{width}/{height}`
-8. **DO NOT set props to default values** - Only set props when they differ from component defaults (check API Reference tables in component docs)
+8. **DO NOT set props to default values** - Only set props when they differ from component defaults. Common defaults to omit:
+   - **Layout**: Flex `direction="horizontal"`, `alignmentX="stretch"`, `alignmentY="stretch"`; Grid `alignmentX="stretch"`, `alignmentY="stretch"`; Box/Stack `elementType="div"`; Section `hasContainer={true}`; Container `size="xlarge"`
+   - **Typography**: Heading `size="medium"`, `emphasis="bold"`; Text `elementType="p"`, `size="medium"`, `emphasis="regular"`
+   - **Exception**: Heading `elementType` is always REQUIRED for accessibility
+   - Check component-specific documentation for complete default values
 9. **Context7 MCP is a LAST RESORT** - Only use for components not documented in this skill:
    - Call `resolve-library-id` with `@alma-oss/spirit-design-system`
    - Call `query-docs` with `/alma-oss/spirit-design-system` and the component name
@@ -48,6 +52,33 @@ For detailed API references, examples, and common mistakes:
 - Ask if there's a specific Spirit component or pattern to use
 - Wait for the user's response before proceeding
 - This prevents incorrect implementations and teaches you new patterns for future use
+
+---
+
+## ⚠️ Deprecated Props and Components
+
+**NEVER use these deprecated features in your implementations:**
+
+### Deprecated Props (Still Available but Will Be Removed)
+
+- **Button/ButtonLink: `isBlock` prop** - Deprecated with no replacement. If Figma shows a full-width button, handle via layout (e.g., wrap in Flex with `alignmentX="stretch"`) or ask the user for guidance.
+
+- **UncontrolledCollapse: `hideOnCollapse` prop** - Replaced by `isDisposable`. Always use `isDisposable` instead.
+
+### Deprecated Components
+
+- **Header component** - Use `UNSTABLE_Header` instead. If you encounter "Header" in Figma or user requests, import and use the `UNSTABLE_Header` family of components.
+
+### Already Migrated (Current Best Practices)
+
+- **Flex direction**: Use `horizontal`/`vertical` (NOT `row`/`column`) - this is the current standard.
+
+**When encountering deprecated features in Figma:**
+
+- If Figma CodeConnect shows a deprecated prop/component, inform the user and use the modern alternative
+- Never silently use deprecated features
+- Add a comment in the code explaining why you're deviating from Figma if needed
+- Suggest the user update their Figma components if they reference deprecated items
 
 ---
 
@@ -326,6 +357,8 @@ Before finalizing code:
 - \[ \] Layer names checked for size/color/variant props
 - \[ \] Spacing values read from Figma autolayout properties
 - \[ \] Color tokens read exactly from Figma layer properties
+- \[ \] **No deprecated props used** (check: isBlock, hideOnCollapse, row/column direction values)
+- \[ \] **No deprecated components used** (Header → use UNSTABLE_Header)
 
 **Layout:**
 
@@ -355,6 +388,7 @@ Before finalizing code:
 - \[ \] If Figma data was unavailable, assumptions are listed and flagged to the user
 - \[ \] Box colors/borders match Figma exactly
 - \[ \] Padding values (`pr`, `pl`, `pt`, `pb`, `px`, `py`) from Figma applied using Box props or `Flex elementType={Box}`
+- \[ \] **Default prop values omitted** (direction="horizontal", alignmentX="stretch", size="medium", elementType="div", etc.)
 
 **Cards & Links:**
 
@@ -417,7 +451,48 @@ Before finalizing code:
 
 The rule: If CodeConnect shows `iconName="placeholder"`, your code MUST use `iconName="placeholder"`. Period.
 
-### 2. Guessing Prop Values From Figma Screenshots
+### 2. Using Deprecated Props or Components
+
+**CRITICAL: Never use deprecated features even if they appear in older Figma files.**
+
+```jsx
+// WRONG - using deprecated hideOnCollapse prop
+<UncontrolledCollapse id="collapse-1" hideOnCollapse>
+  Content
+</UncontrolledCollapse>
+
+// CORRECT - use isDisposable instead
+<UncontrolledCollapse id="collapse-1" isDisposable>
+  Content
+</UncontrolledCollapse>
+
+// WRONG - using deprecated Flex direction values
+<Flex direction="row" />
+<Flex direction="column" />
+
+// CORRECT - use current direction values
+<Flex direction="horizontal" />
+<Flex direction="vertical" />
+
+// WRONG - using deprecated Button isBlock prop
+<Button isBlock>Full Width Button</Button>
+
+// CORRECT - handle full-width buttons via layout
+<Flex alignmentX="stretch">
+  <Button>Button</Button>
+</Flex>
+```
+
+**Why this is wrong:**
+
+- Deprecated props/components will be removed in future Spirit versions
+- Using them creates technical debt and maintenance burden
+- Modern alternatives provide better functionality
+- Figma files may contain outdated component versions
+
+**The rule:** Always use current, non-deprecated APIs even if Figma shows older patterns. If needed, add a comment explaining the deviation.
+
+### 3. Guessing Prop Values From Figma Screenshots
 
 Never derive prop values from how a Figma screenshot looks. Screenshots are for understanding structure only.
 
