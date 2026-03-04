@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import DocsBox from '../../../../docs/DocsBox';
 import { Grid, GridItem } from '..';

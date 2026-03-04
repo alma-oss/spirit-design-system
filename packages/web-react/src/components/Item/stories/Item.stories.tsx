@@ -1,5 +1,5 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import ReadMe from '../README.md?raw';
 import { Item } from '..';
