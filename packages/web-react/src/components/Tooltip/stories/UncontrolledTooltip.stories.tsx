@@ -1,5 +1,5 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useEffect, useRef } from 'react';
 import { Button } from '../..';
 import { Placements } from '../../../constants';

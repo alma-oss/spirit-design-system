@@ -1,5 +1,5 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { type ElementType, useState } from 'react';
 import { type AccordionOpenStateType, type SpiritAccordionProps } from '../../../types';
 import { Link } from '../../Link';

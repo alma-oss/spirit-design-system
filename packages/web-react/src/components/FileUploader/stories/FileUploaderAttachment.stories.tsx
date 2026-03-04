@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DEMO_ATTACHMENT_BASE64_IMAGE_40X52 } from '../demo/constants';
 import { type FileUploader, FileUploaderAttachment, base64ToByteArray } from '..';
 

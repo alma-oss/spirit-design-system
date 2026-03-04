@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useCallback, useState } from 'react';
 import { type TabId, type TabListProps } from '../../../types';
 import { TabContent, TabItem, TabList, TabPane, Tabs } from '..';

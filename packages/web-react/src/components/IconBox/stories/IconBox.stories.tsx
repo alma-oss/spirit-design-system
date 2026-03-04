@@ -1,6 +1,6 @@
 import { accentColors } from '@alma-oss/spirit-design-tokens';
 import { Markdown } from '@storybook/addon-docs/blocks';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import { EmotionColors, SizesExtended } from '../../../constants';
 import { IconBoxShapes } from '../constants';

@@ -1,5 +1,5 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import { fn } from 'storybook/test';
 import { type SpiritFileUploaderAttachmentProps, type SpiritFileUploaderProps } from '../../../types';
