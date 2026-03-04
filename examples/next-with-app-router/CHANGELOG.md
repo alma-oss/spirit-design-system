@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.5](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-example-next-with-app-router@0.5.4...@alma-oss/spirit-example-next-with-app-router@0.5.5) (2026-03-04)
+
+### Chores
+
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
+### Styles
+
+- **examples:** remove unexpected block statement surrounding arrow body ([972a68d](https://github.com/alma-oss/spirit-design-system/commit/972a68d4a8801338d381416fd47d47f95ffa9e94))
+
 ## [0.5.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-example-next-with-app-router@0.5.3...@alma-oss/spirit-example-next-with-app-router@0.5.4) (2026-02-20)
 
 ### Bug Fixes

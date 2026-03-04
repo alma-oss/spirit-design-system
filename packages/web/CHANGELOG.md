@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.2.0...@alma-oss/spirit-web@4.3.0) (2026-03-04)
+
+### Features
+
+- **web-react:** add 'inherit' color option to Link component to support color inheritance #DS-2372 ([6e3ade3](https://github.com/alma-oss/spirit-design-system/commit/6e3ade3d0916246bed380b82ed22dbecb3364082)), closes [#DS-2372](https://github.com/alma-oss/spirit-design-system/issues/DS-2372)
+- **web-react:** introduce unstable file uploader and attachment #DS-2403 ([a19e1a0](https://github.com/alma-oss/spirit-design-system/commit/a19e1a0d725e1c33cc5120d2e960e4323967948f)), closes [#DS-2403](https://github.com/alma-oss/spirit-design-system/issues/DS-2403)
+- **web:** add 'link-inherit' helper class to support color inheritance of link #DS-2372 ([8ac7a8e](https://github.com/alma-oss/spirit-design-system/commit/8ac7a8e346e14d164eb6c1bee071d0463c1cb207)), closes [#DS-2372](https://github.com/alma-oss/spirit-design-system/issues/DS-2372)
+- **web:** add list reset to Accordion #DS-2365 ([0f0c694](https://github.com/alma-oss/spirit-design-system/commit/0f0c6942bb2855e0423e304156333a4b9e1f3cf1)), closes [#DS-2365](https://github.com/alma-oss/spirit-design-system/issues/DS-2365)
+- **web:** add selected state background to Item #DS-2423 ([a52e8a1](https://github.com/alma-oss/spirit-design-system/commit/a52e8a1fefa5285a2d507bb2fffeccdd79295e24)), closes [#DS-2423](https://github.com/alma-oss/spirit-design-system/issues/DS-2423)
+
+### Chores
+
+- **repo:** ignore `.coverage` directory globally ([986e3f2](https://github.com/alma-oss/spirit-design-system/commit/986e3f2c8ccf3f88733eefe6266093b5e269a236))
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+- **vscode:** add vscode settings for jest extensions ([73bb896](https://github.com/alma-oss/spirit-design-system/commit/73bb8964afc0871f4e09dafb2f6b87c172504a40))
+
+### Code Refactoring
+
+- **repo:** use localName instead of tagName for element type assertions ([0fd1b52](https://github.com/alma-oss/spirit-design-system/commit/0fd1b5239566f9264af9fbf12eab10ee527b1461))
+
 ## [4.2.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.1.1...@alma-oss/spirit-web@4.2.0) (2026-02-20)
 
 ### Features

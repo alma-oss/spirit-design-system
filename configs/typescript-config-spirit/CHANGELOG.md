@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.4](https://github.com/alma-oss/spirit-design-system/compare/typescript-config-spirit@0.1.3...typescript-config-spirit@0.1.4) (2026-03-04)
+
+### Chores
+
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
 ## [0.1.3](https://github.com/alma-oss/spirit-design-system/compare/typescript-config-spirit@0.1.2...typescript-config-spirit@0.1.3) (2026-02-20)
 
 ### Documentation

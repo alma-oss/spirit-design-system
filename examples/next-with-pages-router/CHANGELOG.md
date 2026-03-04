@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.5](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-example-next-with-pages-router@0.3.4...@alma-oss/spirit-example-next-with-pages-router@0.3.5) (2026-03-04)
+
+### Chores
+
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
 ## [0.3.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-example-next-with-pages-router@0.3.3...@alma-oss/spirit-example-next-with-pages-router@0.3.4) (2026-02-20)
 
 ### Bug Fixes

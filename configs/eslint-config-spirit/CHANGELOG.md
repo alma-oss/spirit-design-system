@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.7](https://github.com/alma-oss/spirit-design-system/compare/eslint-config-spirit@0.1.6...eslint-config-spirit@0.1.7) (2026-03-04)
+
+### Chores
+
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
+### Styles
+
+- **repo:** allow `[@jest-config-loader](https://github.com/jest-config-loader)` tag in jest.config.ts files ([122864f](https://github.com/alma-oss/spirit-design-system/commit/122864f4a01d0ef1ee28b5f5c852bda083562d4b))
+
 ## [0.1.6](https://github.com/alma-oss/spirit-design-system/compare/eslint-config-spirit@0.1.5...eslint-config-spirit@0.1.6) (2026-02-20)
 
 ### Documentation

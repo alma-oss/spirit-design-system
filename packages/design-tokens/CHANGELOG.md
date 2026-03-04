@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.0.3...@alma-oss/spirit-design-tokens@4.1.0) (2026-03-04)
+
+### Features
+
+- **design-tokens:** update color and container tokens from Supernova ([20a1820](https://github.com/alma-oss/spirit-design-system/commit/20a1820b75b27f6cb5bba8927ee1a0ba5ebc76b8))
+
+### Chores
+
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
 ## [4.0.3](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.0.2...@alma-oss/spirit-design-tokens@4.0.3) (2026-02-20)
 
 ### Bug Fixes

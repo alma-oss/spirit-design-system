@@ -1,7 +1,7 @@
 {
   "name": "stylelint-config-spirit",
   "description": "Stylelint configuration for Spirit Design System",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "license": "MIT",
   "private": true,
   "keywords": [

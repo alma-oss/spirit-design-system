@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-common@0.5.3...@alma-oss/spirit-common@0.5.4) (2026-03-04)
+
+### Chores
+
+- **repo:** ignore `.coverage` directory globally ([986e3f2](https://github.com/alma-oss/spirit-design-system/commit/986e3f2c8ccf3f88733eefe6266093b5e269a236))
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
+### Styles
+
+- **repo:** remove unused `eslint-disable` directive ([02e8fb0](https://github.com/alma-oss/spirit-design-system/commit/02e8fb04cf43c2ed1cb835ba056130cb74e8f056))
+
+### Code Refactoring
+
+- **common:** move code to `src` directory and introduce `exports` entrypoints ([63895f2](https://github.com/alma-oss/spirit-design-system/commit/63895f2709eb26b7288d2d88e15f6c93384e58db))
+
 ## [0.5.3](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-common@0.5.2...@alma-oss/spirit-common@0.5.3) (2026-02-20)
 
 ### Bug Fixes

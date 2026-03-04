@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.3](https://github.com/alma-oss/spirit-design-system/compare/jest-config-spirit@0.2.2...jest-config-spirit@0.2.3) (2026-03-04)
+
+### Chores
+
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+- **vscode:** add vscode settings for jest extensions ([73bb896](https://github.com/alma-oss/spirit-design-system/commit/73bb8964afc0871f4e09dafb2f6b87c172504a40))
+
+### Styles
+
+- **repo:** remove unused `eslint-disable` directive ([02e8fb0](https://github.com/alma-oss/spirit-design-system/commit/02e8fb04cf43c2ed1cb835ba056130cb74e8f056))
+
 ## [0.2.2](https://github.com/alma-oss/spirit-design-system/compare/jest-config-spirit@0.2.1...jest-config-spirit@0.2.2) (2026-02-20)
 
 ### Bug Fixes

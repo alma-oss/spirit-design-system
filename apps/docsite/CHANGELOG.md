@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-docsite@0.1.2...@alma-oss/spirit-docsite@0.2.0) (2026-03-04)
+
+### Features
+
+- **docsite:** setup documentation site app ([da97fc8](https://github.com/alma-oss/spirit-design-system/commit/da97fc84adc76d073bdf2c872d6305f83a470378))
+
 ## [0.1.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-docsite@0.1.1...@alma-oss/spirit-docsite@0.1.2) (2026-02-20)
 
 ### Documentation

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-post-changelog@2.0.2...@alma-oss/spirit-post-changelog@2.0.3) (2026-03-04)
+
+### Chores
+
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
 ## [2.0.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-post-changelog@2.0.1...@alma-oss/spirit-post-changelog@2.0.2) (2026-02-20)
 
 ### Documentation

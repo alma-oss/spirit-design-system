@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.8](https://github.com/alma-oss/spirit-design-system/compare/prettier-config-spirit@0.1.7...prettier-config-spirit@0.1.8) (2026-03-04)
+
+### Chores
+
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
 ## [0.1.7](https://github.com/alma-oss/spirit-design-system/compare/prettier-config-spirit@0.1.6...prettier-config-spirit@0.1.7) (2026-02-20)
 
 ### Documentation

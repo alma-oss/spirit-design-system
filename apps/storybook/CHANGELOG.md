@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.3.4...@alma-oss/spirit-storybook@0.4.0) (2026-03-04)
+
+### Features
+
+- **web-react:** introduce unstable file uploader and attachment #DS-2403 ([a19e1a0](https://github.com/alma-oss/spirit-design-system/commit/a19e1a0d725e1c33cc5120d2e960e4323967948f)), closes [#DS-2403](https://github.com/alma-oss/spirit-design-system/issues/DS-2403)
+
+### Bug Fixes
+
+- **storybook:** add complete typography structure to theme ([aeda93f](https://github.com/alma-oss/spirit-design-system/commit/aeda93f6e32e6e16c64e8c9b86556992b21718b4))
+- **storybook:** add typography.fonts to theme for addon-docs compatibility ([cb9194b](https://github.com/alma-oss/spirit-design-system/commit/cb9194b2c340d601c4fc3718d38abb464418ed26))
+
+### Chores
+
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+- **storybook:** prefer development export condition if exists ([8cdc8a2](https://github.com/alma-oss/spirit-design-system/commit/8cdc8a2b0b4101b697d5bf5684066661cc531868))
+
+### Code Refactoring
+
+- **storybook:** add console warning about empty icons ([537c034](https://github.com/alma-oss/spirit-design-system/commit/537c034c100d0dacc730544d124cde05707894b7))
+- **storybook:** remove vite raw plugin in favor of build-in functionality ([1d71fc4](https://github.com/alma-oss/spirit-design-system/commit/1d71fc40e8a0cfc62cd5fefccf6b88001756c404))
+- **storybook:** remove web-react path aliases in favor of using new exports ([0a3aed5](https://github.com/alma-oss/spirit-design-system/commit/0a3aed53691c0f73d87210727029c8e989247d94))
+
 ## [0.3.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.3.3...@alma-oss/spirit-storybook@0.3.4) (2026-02-20)
 
 ### Documentation

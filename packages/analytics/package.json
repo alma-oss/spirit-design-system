@@ -1,6 +1,6 @@
 {
   "name": "@alma-oss/spirit-analytics",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Analytic tools for Spirit Design System",
   "license": "MIT",
   "engines": {

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.12](https://github.com/alma-oss/spirit-design-system/compare/stylelint-config-spirit@0.1.11...stylelint-config-spirit@0.1.12) (2026-03-04)
+
+### Chores
+
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
+### Styles
+
+- **repo:** remove unused `eslint-disable` directive ([02e8fb0](https://github.com/alma-oss/spirit-design-system/commit/02e8fb04cf43c2ed1cb835ba056130cb74e8f056))
+
 ## [0.1.11](https://github.com/alma-oss/spirit-design-system/compare/stylelint-config-spirit@0.1.10...stylelint-config-spirit@0.1.11) (2026-02-20)
 
 ### Bug Fixes

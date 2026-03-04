@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@2.0.3...@lmc-eu/spirit-demo-app@2.0.4) (2026-03-04)
+
+### Chores
+
+- **demo:** import common package from `src` directory ([31eac36](https://github.com/alma-oss/spirit-design-system/commit/31eac365d3c4c7502b1d92669127c17aaa61c5e3))
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
+### Styles
+
+- **repo:** remove unused `eslint-disable` directive ([02e8fb0](https://github.com/alma-oss/spirit-design-system/commit/02e8fb04cf43c2ed1cb835ba056130cb74e8f056))
+
 ## [2.0.3](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@2.0.2...@lmc-eu/spirit-demo-app@2.0.3) (2026-02-20)
 
 ### Documentation

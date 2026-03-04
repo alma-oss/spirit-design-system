@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-codemods@2.0.3...@alma-oss/spirit-codemods@2.0.4) (2026-03-04)
+
+### Chores
+
+- **repo:** ignore `.coverage` directory globally ([986e3f2](https://github.com/alma-oss/spirit-design-system/commit/986e3f2c8ccf3f88733eefe6266093b5e269a236))
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
+### Styles
+
+- **codemods:** do not warn about `core` and `Collection` specific types and property reassignment ([87ab88b](https://github.com/alma-oss/spirit-design-system/commit/87ab88b5f921147f3a1cf0f5ab5eabb6137ec05f))
+- **examples:** remove unexpected block statement surrounding arrow body ([972a68d](https://github.com/alma-oss/spirit-design-system/commit/972a68d4a8801338d381416fd47d47f95ffa9e94))
+- **repo:** remove unused `eslint-disable` directive ([02e8fb0](https://github.com/alma-oss/spirit-design-system/commit/02e8fb04cf43c2ed1cb835ba056130cb74e8f056))
+
 ## [2.0.3](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-codemods@2.0.2...@alma-oss/spirit-codemods@2.0.3) (2026-02-20)
 
 ### Bug Fixes

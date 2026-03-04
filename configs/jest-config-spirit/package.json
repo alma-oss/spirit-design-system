@@ -2,7 +2,7 @@
   "name": "jest-config-spirit",
   "private": true,
   "description": "Jest configuration and preset for Spirit Design System",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "license": "MIT",
   "keywords": [
     "alma-oss",

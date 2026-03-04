@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.5](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-icons@3.0.4...@alma-oss/spirit-icons@3.0.5) (2026-03-04)
+
+### Chores
+
+- **icons:** fix race condition between building constants and svgs ([a9d8751](https://github.com/alma-oss/spirit-design-system/commit/a9d8751d11dfd2633c1eb2e4681d2df1894aa1dc))
+- **icons:** publish package with dist directory ([d2a8e80](https://github.com/alma-oss/spirit-design-system/commit/d2a8e802de593cdce2257f2646396690042e0e57))
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
+### Styles
+
+- **repo:** remove unused `eslint-disable` directive ([02e8fb0](https://github.com/alma-oss/spirit-design-system/commit/02e8fb04cf43c2ed1cb835ba056130cb74e8f056))
+
 ## [3.0.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-icons@3.0.3...@alma-oss/spirit-icons@3.0.4) (2026-02-20)
 
 ### Bug Fixes

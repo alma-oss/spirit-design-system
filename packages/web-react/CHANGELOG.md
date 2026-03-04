@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.3.0...@alma-oss/spirit-web-react@4.4.0) (2026-03-04)
+
+### Features
+
+- **web-react:** add 'inherit' color option to Link component to support color inheritance #DS-2372 ([6e3ade3](https://github.com/alma-oss/spirit-design-system/commit/6e3ade3d0916246bed380b82ed22dbecb3364082)), closes [#DS-2372](https://github.com/alma-oss/spirit-design-system/issues/DS-2372)
+- **web-react:** add selectedDecorator to Item #DS-2423 ([8700434](https://github.com/alma-oss/spirit-design-system/commit/87004341fe552b16ba7665ea0a05e9f5336d7459)), closes [#DS-2423](https://github.com/alma-oss/spirit-design-system/issues/DS-2423)
+- **web-react:** inherit elementType from `Stack` to `StackItem` when list ([6898144](https://github.com/alma-oss/spirit-design-system/commit/6898144cbd01d89179dd1eeb37e0719a73f917e9))
+- **web-react:** introduce unstable file uploader and attachment #DS-2403 ([a19e1a0](https://github.com/alma-oss/spirit-design-system/commit/a19e1a0d725e1c33cc5120d2e960e4323967948f)), closes [#DS-2403](https://github.com/alma-oss/spirit-design-system/issues/DS-2403)
+
+### Bug Fixes
+
+- **web-react:** missing ref on Alert component ([6a473a5](https://github.com/alma-oss/spirit-design-system/commit/6a473a58a66b14ce27517104786a03fbb21616fb))
+
+### Documentation
+
+- **web-react:** add list element types documentation for `Accordion` #DS-2365 ([ceaeddf](https://github.com/alma-oss/spirit-design-system/commit/ceaeddf2e981d23b7611dd20b2d48f2754e085f5)), closes [#DS-2365](https://github.com/alma-oss/spirit-design-system/issues/DS-2365)
+- **web-react:** introduce Implementing From Figma section to React Readme #DS-2349 ([3866fe9](https://github.com/alma-oss/spirit-design-system/commit/3866fe957ff06565f44adc109149c7e96534e39f)), closes [#DS-2349](https://github.com/alma-oss/spirit-design-system/issues/DS-2349)
+- **web-react:** use `raw` import of markdown in stories ([efcfc84](https://github.com/alma-oss/spirit-design-system/commit/efcfc843a37a4d1aa30f742c34698a92ddc32a1a))
+- **web-react:** use MutationObserver for reliable has-drag-and-drop class removal ([c839aeb](https://github.com/alma-oss/spirit-design-system/commit/c839aeb9c495d4bf67dde1bf5a30a095b0bd8e48))
+
+### Chores
+
+- **repo:** ignore `.coverage` directory globally ([986e3f2](https://github.com/alma-oss/spirit-design-system/commit/986e3f2c8ccf3f88733eefe6266093b5e269a236))
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+- **web-react:** add missing exports for FileUpload and Attachment components ([a59a53f](https://github.com/alma-oss/spirit-design-system/commit/a59a53fe49e6688a5a0abf0186c0317bf082a14c))
+- **web-react:** migrate build system from webpack to Vite ([34c578a](https://github.com/alma-oss/spirit-design-system/commit/34c578a8c9e4239200388a8ccce0edb527b82a65))
+- **web-react:** use correct script for prepack and postpack hooks ([2c38436](https://github.com/alma-oss/spirit-design-system/commit/2c38436794b820c680abc9dd1d1f679f80ce6998))
+
+### Code Refactoring
+
+- **repo:** use localName instead of tagName for element type assertions ([0fd1b52](https://github.com/alma-oss/spirit-design-system/commit/0fd1b5239566f9264af9fbf12eab10ee527b1461))
+
+### Tests
+
+- **web-react:** introduce custom element serializer to keep readable inline snapshots ([ada04cd](https://github.com/alma-oss/spirit-design-system/commit/ada04cd30db475347574bb6c764f7289c56e767c))
+
 ## [4.3.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.2.1...@alma-oss/spirit-web-react@4.3.0) (2026-02-20)
 
 ### Features

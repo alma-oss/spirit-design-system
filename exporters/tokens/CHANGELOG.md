@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.5](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.0.4...@alma-oss/spirit-tokens-exporter@4.0.5) (2026-03-04)
+
+### Bug Fixes
+
+- **exporter-tokens:** add missing font-weight map values #DS-2449 ([0ca1943](https://github.com/alma-oss/spirit-design-system/commit/0ca1943e4cb5ab5f18dcd91e6f5cd3910d322b2b)), closes [#DS-2449](https://github.com/alma-oss/spirit-design-system/issues/DS-2449)
+- **exporter-tokens:** allow in sortByNumValue other token types ([9f58c8a](https://github.com/alma-oss/spirit-design-system/commit/9f58c8a8fc2156a0d919c3056fe1adc465da717f))
+- **exporter-tokens:** fix order in breakpoints #DS-2449 ([3abbf86](https://github.com/alma-oss/spirit-design-system/commit/3abbf866615a4ba84a9c1c97b6d9d591141edfff)), closes [#DS-2449](https://github.com/alma-oss/spirit-design-system/issues/DS-2449)
+
+### Chores
+
+- **repo:** ignore `.coverage` directory globally ([986e3f2](https://github.com/alma-oss/spirit-design-system/commit/986e3f2c8ccf3f88733eefe6266093b5e269a236))
+- **repo:** use catalog instead of package versions ([ddc85ee](https://github.com/alma-oss/spirit-design-system/commit/ddc85ee6813cfa80f69873f07fc1068aaf0a96d9))
+
 ## [4.0.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.0.3...@alma-oss/spirit-tokens-exporter@4.0.4) (2026-02-20)
 
 ### Bug Fixes
