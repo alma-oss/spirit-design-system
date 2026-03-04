@@ -5,7 +5,7 @@
   "command": {
     "version": {
       "conventionalCommits": true,
-      "changelogPreset": "./changelog-preset.config.js",
+      "changelogPreset": "@spirit/preset",
       "createRelease": "github",
       "message": "chore(release): publish",
       "ignoreChanges": ["yarn.lock"]

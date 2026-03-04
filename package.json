@@ -18,7 +18,8 @@
     "examples/*",
     "exporters/*",
     "packages/*",
-    "scripts/*"
+    "scripts/*",
+    "tools/*"
   ],
   "scripts": {
     "start": "yarn packages:start --ignore '@alma-oss/spirit-example*'",

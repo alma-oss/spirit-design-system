@@ -1,0 +1,9 @@
+{
+  "name": "@spirit/conventional-changelog-preset",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "conventional-changelog-conventionalcommits": "catalog:lint"
+  }
+}

@@ -9058,6 +9058,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@spirit/conventional-changelog-preset@workspace:tools/conventional-changelog-preset":
+  version: 0.0.0-use.local
+  resolution: "@spirit/conventional-changelog-preset@workspace:tools/conventional-changelog-preset"
+  dependencies:
+    conventional-changelog-conventionalcommits: "catalog:lint"
+  languageName: unknown
+  linkType: soft
+
 "@storybook/addon-a11y@npm:10.2.10":
   version: 10.2.10
   resolution: "@storybook/addon-a11y@npm:10.2.10"
