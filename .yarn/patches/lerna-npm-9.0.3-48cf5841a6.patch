@@ -1,0 +1,131 @@
+diff --git a/dist/index.js b/dist/index.js
+index 0860a73516147cec14807f56e381583212c9ccb1..dfed4337662d67c9f563b37eb03c9ef9c8ce150a 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -2224,6 +2224,48 @@ function diffSinceIn(committish, location, opts) {
+   return execSync2("git", args, opts);
+ }
+ var import_minimatch, import_path, import_slash, execSync2;
++
++// === YARN CATALOG RESOLUTION PATCH ===
++var _yarnCatalogsCache = Object.create(null);
++function _getYarnCatalogs(cwd) {
++  try {
++    var _fs = require('fs'), _path = require('path');
++    var dir = _path.resolve(cwd || process.cwd());
++    if (_yarnCatalogsCache[dir]) return _yarnCatalogsCache[dir];
++    var currentDir = dir, yarnrcDir = null;
++    while (true) {
++      var yarnrcPath = _path.join(currentDir, '.yarnrc.yml');
++      if (_fs.existsSync(yarnrcPath)) { yarnrcDir = currentDir; break; }
++      var parent = _path.dirname(currentDir);
++      if (parent === currentDir) break;
++      currentDir = parent;
++    }
++    var cacheKey = yarnrcDir || dir;
++    if (_yarnCatalogsCache[cacheKey]) return (_yarnCatalogsCache[dir] = _yarnCatalogsCache[cacheKey]);
++    var result = yarnrcDir ? _parseYarnCatalogs(_fs.readFileSync(_path.join(yarnrcDir, '.yarnrc.yml'), 'utf-8')) : {};
++    return (_yarnCatalogsCache[cacheKey] = _yarnCatalogsCache[dir] = result);
++  } catch (_e) { return {}; }
++}
++function _parseYarnCatalogs(content) {
++  try {
++    var yaml; try { yaml = require('js-yaml'); } catch (_e) { return {}; }
++    var doc = yaml.load(content);
++    if (!doc || typeof doc !== 'object') return {};
++    var catalogs = doc.catalogs;
++    if (!catalogs || typeof catalogs !== 'object') return {};
++    return catalogs;
++  } catch (_e2) { return {}; }
++}
++function _resolveCatalogSpec(depName, spec, location) {
++  var m = spec.match(/^catalog:(.*)$/);
++  if (!m) return spec;
++  var catalogName = m[1] || 'default';
++  var version = (_getYarnCatalogs(location) || {})[catalogName];
++  return (version && version[depName]) || spec;
++}
++// === END YARN CATALOG RESOLUTION PATCH ===
++
++
+ var init_make_diff_predicate = __esm({
+   "libs/core/src/lib/collect-updates/make-diff-predicate.ts"() {
+     "use strict";
+@@ -3261,6 +3303,7 @@ var init_create_project_graph_with_packages = __esm({
+     init_project_graph_with_packages();
+     resolvePackage = (name, version, spec, location) => {
+       spec = spec.replace(/^link:/, "file:");
++      if (/^catalog:/.test(spec)) { spec = _resolveCatalogSpec(name, spec, location); }
+       const isWorkspaceSpec = /^workspace:/.test(spec);
+       let workspaceSpec;
+       let workspaceAlias;
+@@ -6219,7 +6262,17 @@ async function npmPublish(pkg2, tarFilePath, options, conf, otpCache) {
+       manifestContent.publishConfig.tag = opts.defaultTag;
+     }
+     if (manifestContent.publishConfig) {
+-      Object.assign(opts, publishConfigToOpts(manifestContent.publishConfig));
++      const _pcOpts = publishConfigToOpts(manifestContent.publishConfig);
++      if (process.env.LERNA_NO_PROVENANCE) delete _pcOpts.provenance;
++      Object.assign(opts, _pcOpts);
++    }
++    // Resolve Yarn catalog: references in the manifest before publishing
++    { const _cdf = ['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'];
++      for (const _f of _cdf) { if (manifestContent[_f]) {
++        for (const [_d, _s] of Object.entries(manifestContent[_f])) {
++          if (/^catalog:/.test(_s)) { const _r = _resolveCatalogSpec(_d, _s, import_path14.default.dirname(pkg2.location)); if (_r !== _s) manifestContent[_f][_d] = _r; }
++        }
++      } }
+     }
+     await oidc({
+       packageName: pkg2.name,
+@@ -7503,6 +7556,7 @@ var init_package_graph = __esm({
+           Object.keys(graphDependencies).forEach((depName) => {
+             const depNode = this.get(depName);
+             let spec = graphDependencies[depName].replace(/^link:/, "file:");
++            if (/^catalog:/.test(spec)) { spec = _resolveCatalogSpec(depName, spec, currentNode.location); }
+             const isWorkspaceSpec = /^workspace:/.test(spec);
+             let fullWorkspaceSpec;
+             let workspaceAlias;
+@@ -11466,6 +11520,42 @@ var require_src3 = __commonJS({
+         }
+         await this.resolveLocalDependencyLinks();
+         await this.resolveWorkspaceDependencyLinks();
++        // Resolve Yarn catalog: references to actual semver before packing
++        // Uses Package getters (_pkg.dependencies etc.) which return this[PKG].* directly,
++        // so mutations are reflected when serialize() writes this[PKG] to disk.
++        const _depFields = ['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'];
++        const _fsp = require('fs'), _pathp = require('path');
++        for (const _pkg of this.packagesToPublish || []) {
++          let _pkgChanged = false;
++          for (const _field of _depFields) {
++            const _deps = _pkg[_field];
++            if (!_deps) continue;
++            for (const [_depName, _spec] of Object.entries(_deps)) {
++              if (/^catalog:/.test(_spec)) {
++                const _resolved = _resolveCatalogSpec(_depName, _spec, _pkg.location);
++                if (_resolved !== _spec) { _deps[_depName] = _resolved; _pkgChanged = true; }
++              }
++            }
++          }
++          // If this package publishes from a subdirectory (publishConfig.directory),
++          // also update dist/package.json so the packed tarball has resolved deps.
++          if (_pkgChanged && _pkg.contents !== _pkg.location) {
++            const _distPkgPath = _pathp.join(_pkg.contents, 'package.json');
++            if (_fsp.existsSync(_distPkgPath)) {
++              const _distPkg = JSON.parse(_fsp.readFileSync(_distPkgPath, 'utf-8'));
++              for (const _field of _depFields) {
++                if (!_distPkg[_field]) continue;
++                for (const [_depName, _spec] of Object.entries(_distPkg[_field])) {
++                  if (/^catalog:/.test(_spec)) {
++                    const _resolved = _resolveCatalogSpec(_depName, _spec, _pkg.location);
++                    if (_resolved !== _spec) _distPkg[_field][_depName] = _resolved;
++                  }
++                }
++              }
++              _fsp.writeFileSync(_distPkgPath, JSON.stringify(_distPkg, null, 2) + '\n');
++            }
++          }
++        }
+         this.annotateGitHead();
+         await this.serializeChanges();
+         await this.packUpdated();
