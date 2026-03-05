@@ -340,6 +340,12 @@ Both manual and automatic workflows are interchangeable.
 If something went wrong you can always go step-by-step through the manual process.
 Both workflows are using the same scripts and commands.
 
+### Testing Publishing Locally
+
+To verify that the Lerna catalog resolution patch correctly resolves Yarn `catalog:` references
+before releasing, you can run the local publish test against an isolated Verdaccio registry.
+See [Local Publish Testing][local-publish-testing] for full instructions.
+
 ### Release Notes
 
 Fill in a [template in Slack Canvases][release-notes-template] for the Spirit Release Notes.
@@ -381,6 +387,7 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [figma-react-guide]: https://developers.figma.com/docs/code-connect/react/
 [jest]: https://jestjs.io/
 [lerna-home]: https://lerna.js.org
+[local-publish-testing]: tools/README.md
 [netlify-preview-gist]: https://gist.github.com/adamkudrna/694f3048c1338f07375b9b8af24afe2f
 [packages]: packages/
 [prettier]: https://prettier.io/
