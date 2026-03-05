@@ -61,7 +61,7 @@
       "groupName": "build tools non-major",
       "groupSlug": "build-tools-non-major",
       "matchUpdateTypes": ["minor", "patch"],
-      "matchPackageNames": ["/^rollup/", "/^vite/", "/^webpack/", "/`^@rollup/"]
+      "matchPackageNames": ["/^rollup/", "/^vite/", "/`^@rollup/"]
     },
     {
       "groupName": "monorepo tools non-major",
