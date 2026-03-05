@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.1.0...@alma-oss/spirit-design-tokens@4.1.1) (2026-03-05)
+
+**Note:** Version bump only for package @alma-oss/spirit-design-tokens
+
 ## [4.1.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.0.3...@alma-oss/spirit-design-tokens@4.1.0) (2026-03-04)
 
 ### Features

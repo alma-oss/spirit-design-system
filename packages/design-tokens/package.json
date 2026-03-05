@@ -1,6 +1,6 @@
 {
   "name": "@alma-oss/spirit-design-tokens",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Design tokens for Spirit Design System",
   "license": "MIT",
   "engines": {

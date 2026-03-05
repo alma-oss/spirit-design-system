@@ -1,6 +1,6 @@
 {
   "name": "@alma-oss/spirit-web",
-  "version": "4.3.0",
+  "version": "4.3.1",
   "description": "CSS and vanilla JS implementation of Spirit Design System",
   "license": "MIT",
   "engines": {
@@ -53,8 +53,8 @@
     "types": "tsc"
   },
   "dependencies": {
-    "@alma-oss/spirit-design-tokens": "^4.1.0",
-    "@alma-oss/spirit-icons": "^3.0.5",
+    "@alma-oss/spirit-design-tokens": "^4.1.1",
+    "@alma-oss/spirit-icons": "^3.0.6",
     "@csstools/normalize.css": "catalog:frontend",
     "@floating-ui/dom": "catalog:frontend"
   },
