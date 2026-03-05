@@ -1,0 +1,16 @@
+# Minimal Verdaccio config for local publish testing — no npm proxy
+storage: /tmp/verdaccio-spirit-storage
+auth:
+  htpasswd:
+    file: /tmp/verdaccio-spirit-htpasswd
+uplinks: {} # No proxy to npmjs.org — packages must be published locally
+packages:
+  '@alma-oss/*':
+    access: $anonymous
+    publish: $anonymous
+  '@lmc-eu/*':
+    access: $anonymous
+    publish: $anonymous
+  '**':
+    access: $anonymous
+    publish: $anonymous
