@@ -177,7 +177,7 @@
 
 @mixin input-field-validation-states($field-name) {
     @each $validation-state-name, $validation-state-value in form-fields-settings.$validation-states {
-        @if $field-name == 'FileUploaderInput' {
+        @if $field-name == 'FileUploaderInput' or $field-name == 'UNSTABLE_FileUploadInput' {
             :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
                 > .#{$field-name}__input
                 ~ .#{$field-name}__dropZone {
