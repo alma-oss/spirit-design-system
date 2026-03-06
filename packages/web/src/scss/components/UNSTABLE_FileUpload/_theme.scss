@@ -1,0 +1,21 @@
+@use '@tokens' as tokens;
+
+$input-drop-zone-padding: tokens.$space-1000 tokens.$space-900;
+$input-drop-zone-padding-compact: tokens.$space-700 tokens.$space-800;
+$input-drop-zone-column-gap: tokens.$space-700;
+$input-drop-zone-border: tokens.$border-width-200 solid tokens.$form-field-filled-border-state-default;
+$input-drop-zone-border-color-state-dragging: tokens.$form-field-filled-border-state-selected;
+$input-drop-zone-border-color-state-hover: tokens.$form-field-filled-border-state-hover;
+$input-drop-zone-border-color-state-active: tokens.$form-field-filled-border-state-selected;
+$input-drop-zone-border-color-state-disabled: tokens.$disabled-border;
+$input-drop-zone-border-radius: tokens.$radius-300;
+$input-drop-zone-background: tokens.$form-field-filled-background-state-default;
+$input-drop-zone-background-state-hover: tokens.$form-field-filled-background-state-hover;
+$input-drop-zone-background-state-active: tokens.$form-field-filled-background-state-active;
+$input-drop-zone-background-state-disabled: tokens.$disabled-background;
+$input-drop-zone-label-typography: tokens.$body-medium-regular;
+$input-drop-zone-label-color: tokens.$text-primary;
+$input-drop-zone-label-color-disabled: tokens.$disabled-content;
+$input-drop-zone-icon-color: tokens.$text-primary;
+
+$breakpoint-tablet: tokens.$breakpoint-tablet;
