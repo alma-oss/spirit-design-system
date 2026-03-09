@@ -9244,9 +9244,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supernova-studio/client@npm:1.66.0":
-  version: 1.66.0
-  resolution: "@supernova-studio/client@npm:1.66.0"
+"@supernova-studio/client@npm:1.74.2":
+  version: 1.74.2
+  resolution: "@supernova-studio/client@npm:1.74.2"
   dependencies:
     p-queue: "npm:^8.0.1"
     prosemirror-model: "npm:^1.25.4"
@@ -9254,7 +9254,7 @@ __metadata:
     y-prosemirror: "npm:^1.3.7"
     yjs: "npm:^13.6.29"
     zod: "npm:3.25.76"
-  checksum: 10/b525597d7fb608acadfa758b114f892e28286978372d8d4215b16d42fa6ae2b03c994d3186a5a5c9bcb4ad8d4659a3eddeaa0f59f97f7bedb1dcd1f07db42251
+  checksum: 10/0955ebf3622233b8775f359e33f3224ee5b14c03e4db35070855b52348e212cae10cdb2df13f32c00ce1a2be351092dd8f792941272c80a991385bbea8d7572a
   languageName: node
   linkType: hard
 
@@ -9269,15 +9269,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supernova-studio/model@npm:1.66.0":
-  version: 1.66.0
-  resolution: "@supernova-studio/model@npm:1.66.0"
+"@supernova-studio/model@npm:1.74.2":
+  version: 1.74.2
+  resolution: "@supernova-studio/model@npm:1.74.2"
   dependencies:
     "@sindresorhus/slugify": "npm:1.1.2"
     ip-cidr: "npm:3.1.0"
     tsup: "npm:^8.5.0"
     zod: "npm:3.25.76"
-  checksum: 10/ec416101f73197533c3866aabee58d0f854b0afe5d53e7dd38ad2828779dd3ee705d60f364ba6fb7787b84306b38050ed84d6eb5df485b360b4d00663136e86b
+  checksum: 10/c4760a02ac57c66e8a628624d7c1a59a182c088c7960ac3301b10fb035d293f4b1147f6207404a6dad4d265b938835e1c3098f819d1d3ff01ad4a4a13b88be19
   languageName: node
   linkType: hard
 
@@ -9301,17 +9301,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supernovaio/sdk-exporters@npm:2.2.54":
-  version: 2.2.54
-  resolution: "@supernovaio/sdk-exporters@npm:2.2.54"
+"@supernovaio/sdk-exporters@npm:2.3.2":
+  version: 2.3.2
+  resolution: "@supernovaio/sdk-exporters@npm:2.3.2"
   dependencies:
     "@rollup/rollup-darwin-x64": "npm:4.34.6"
-    "@supernova-studio/client": "npm:1.66.0"
-    "@supernova-studio/model": "npm:1.66.0"
+    "@supernova-studio/client": "npm:1.74.2"
+    "@supernova-studio/model": "npm:1.74.2"
   dependenciesMeta:
     "@rollup/rollup-darwin-x64":
       optional: true
-  checksum: 10/134ce96d4b55e016fd5081ed4e51e7f35c9f1019426e676ac9dd46e82a2be4adc525da5c36a702214cdbee3388841426635fa53b4b9c79e83ee9af0fef8a7a42
+  checksum: 10/2133c6999e98554c5552fa46c21f1cd4d07931460ca5c7483a2f4c624a098322a8a7c3d9dc84a060488dc4cc88b5f5acedc9d904b7915d7bba4756b694c97005
   languageName: node
   linkType: hard
 
