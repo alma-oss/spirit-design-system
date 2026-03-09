@@ -142,7 +142,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
   <div class="Toggle__text">
     <label class="Label Label--inline" for="toggle-warning">Toggle Label</label>
     <div class="ValidationText ValidationText--warning ValidationText--inline" id="toggle-warning-validation-text">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
       </svg>
       <span>Validation text with icon</span>
@@ -174,7 +174,11 @@ components mix CSS with JS by design and handle prefixes their own way.**
 <div class="Toggle Toggle--inputPositionEnd has-success">
   <div class="Toggle__text">
     <label class="Label Label--inline" for="toggle-success">Toggle Label</label>
-    <div class="ValidationText ValidationText--success" id="toggle-success-validation-text" data-spirit-element="validation_text">
+    <div
+      class="ValidationText ValidationText--success"
+      id="toggle-success-validation-text"
+      data-spirit-element="validation_text"
+    >
       Validation text
     </div>
   </div>
@@ -191,7 +195,11 @@ components mix CSS with JS by design and handle prefixes their own way.**
 To render validation text as a list, use `<ul>` element inside of `<div>`.
 
 ```html
-<div class="ValidationText ValidationText--success" id="toggle-success-validation-text" data-spirit-element="validation_text">
+<div
+  class="ValidationText ValidationText--success"
+  id="toggle-success-validation-text"
+  data-spirit-element="validation_text"
+>
   <ul>
     <li>First validation text</li>
     <li>Second validation text</li>
@@ -264,7 +272,9 @@ class to render supplementary content (such as modal triggers) below the label.
     <div class="HelperText HelperText--inline" id="toggle-consent-full-helper-text">
       Please read the documents carefully before agreeing
     </div>
-    <div class="ValidationText ValidationText--danger" id="toggle-consent-full-validation-text">You must agree to continue</div>
+    <div class="ValidationText ValidationText--danger" id="toggle-consent-full-validation-text">
+      You must agree to continue
+    </div>
   </div>
   <input
     type="checkbox"

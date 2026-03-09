@@ -76,7 +76,7 @@ See Validation state [dictionary][dictionary-validation].
   <div class="Checkbox__text">
     <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
     <div class="ValidationText ValidationText--warning ValidationText--inline" id="checkbox-warning-helper-text">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
       </svg>
       <span>Warning validation text with icon</span>
@@ -200,7 +200,9 @@ Complete example showing label, details with multiple links, helper text, and va
     <div class="HelperText HelperText--inline" id="consent-full-example-helper-text">
       Please read the documents carefully before agreeing
     </div>
-    <div class="ValidationText ValidationText--danger" id="consent-full-example-validation-text">You must agree to continue</div>
+    <div class="ValidationText ValidationText--danger" id="consent-full-example-validation-text">
+      You must agree to continue
+    </div>
   </div>
 </div>
 
