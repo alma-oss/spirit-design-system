@@ -42,7 +42,7 @@ The `DrawerCloseButton` component is a button that closes the drawer when clicke
   aria-controls="my-drawer-dialog"
   aria-expanded="false"
 >
-  <svg width="24" height="24" aria-hidden="true">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#close" />
   </svg>
   <span class="accessibility-hidden">Close</span>
@@ -75,7 +75,7 @@ The `DrawerPanel` component is a container for the content that will be displaye
         data-spirit-target="#drawer-example"
         aria-controls="drawer-example"
       >
-        <svg width="24" height="24" aria-hidden="true">
+        <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use xlink:href="/icons/svg/sprite.svg#close" />
         </svg>
         <span class="accessibility-hidden">Close</span>
