@@ -126,7 +126,7 @@ CardArtwork is an optional subcomponent that displays a small image or icon.
 
 ```html
 <div class="CardArtwork CardArtwork--alignmentXLeft">
-  <svg width="24" height="24" aria-hidden="true">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
     <use xlink:href="/assets/icons/svg/sprite.svg#file" />
   </svg>
 </div>
