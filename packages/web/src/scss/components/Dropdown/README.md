@@ -15,25 +15,25 @@
   </button>
   <div class="DropdownPopover" data-spirit-placement="bottom-start" id="dropdown-default">
     <a href="#" class="d-flex mb-400">
-      <svg width="24" height="24" aria-hidden="true" class="mr-400">
+      <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
         <use xlink:href="/icons/svg/sprite.svg#info" />
       </svg>
       <span>Information</span>
     </a>
     <a href="#" class="d-flex mb-400">
-      <svg width="24" height="24" aria-hidden="true" class="mr-400">
+      <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
         <use xlink:href="/icons/svg/sprite.svg#link" />
       </svg>
       <span>Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
     </a>
     <a href="#" class="d-flex mb-400">
-      <svg width="24" height="24" aria-hidden="true" class="mr-400">
+      <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
         <use xlink:href="/icons/svg/sprite.svg#profile" />
       </svg>
       <span>Profile</span>
     </a>
     <a href="#" class="d-flex">
-      <svg width="24" height="24" aria-hidden="true" class="mr-400">
+      <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
         <use xlink:href="/icons/svg/sprite.svg#help" />
       </svg>
       <span>Help</span>
@@ -57,19 +57,19 @@
   </button>
   <div class="DropdownPopover" data-spirit-placement="top-end" id="dropdown-top-end">
     <a href="#" class="d-flex mb-400">
-      <svg width="24" height="24" aria-hidden="true" class="mr-400">
+      <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
         <use xlink:href="/icons/svg/sprite.svg#info" />
       </svg>
       <span>Information</span>
     </a>
     <a href="#" class="d-flex mb-400">
-      <svg width="24" height="24" aria-hidden="true" class="mr-400">
+      <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
         <use xlink:href="/icons/svg/sprite.svg#link" />
       </svg>
       <span>Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
     </a>
     <a href="#" class="d-flex mb-400">
-      <svg width="24" height="24" aria-hidden="true" class="mr-400">
+      <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
         <use xlink:href="/icons/svg/sprite.svg#profile" />
       </svg>
       <span>Profile</span>
