@@ -142,7 +142,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
   <div class="Toggle__text">
     <label class="Label Label--inline" for="toggle-warning">Toggle Label</label>
     <div class="ValidationText ValidationText--warning ValidationText--inline" id="toggle-warning-validation-text">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
       </svg>
       <span>Validation text with icon</span>

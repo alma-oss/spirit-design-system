@@ -198,7 +198,7 @@
         <textarea id="text-area-{{state}}-with-icon" class="TextArea__input" placeholder="Placeholder" name="dangerWithHelperText" required aria-describedby="text-area-{{state}}-with-icon-validation-text">Filled</textarea>
 
         <div class="ValidationText ValidationText--{{state}}" id="text-area-{{state}}-with-icon-validation-text">
-          <svg width="20" height="20" aria-hidden="true">
+          <svg class="Icon" width="20" height="20" aria-hidden="true">
             {{#if (eq state "success")}}
             <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
             {{else}}
