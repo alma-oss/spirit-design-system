@@ -227,7 +227,7 @@
           oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
         />
         <div id="slider-{{state}}-validation-icon-text" class="ValidationText ValidationText--{{state}}">
-          <svg width="20" height="20" aria-hidden="true">
+          <svg class="Icon" width="20" height="20" aria-hidden="true">
             {{#if (eq state "success")}}
             <use xlink:href="/assets/icons/svg/sprite.svg#check-plain"/>
             {{else}}
