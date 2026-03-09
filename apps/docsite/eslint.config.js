@@ -1,5 +1,6 @@
 import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
+import eslintNextPlugin from '@next/eslint-plugin-next';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
@@ -54,10 +55,10 @@ export default [
       '@lmc-eu/eslint-config-typescript',
       '@lmc-eu/eslint-config-typescript/react',
       '@lmc-eu/eslint-config-jest',
-      'plugin:@next/next/recommended',
       'eslint-config-spirit/prettier',
     ),
   ),
+  eslintNextPlugin.configs.recommended,
   {
     plugins: {
       'react-refresh': fixupPluginRules(reactRefresh),
