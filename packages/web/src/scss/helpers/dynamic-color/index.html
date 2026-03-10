@@ -5,327 +5,1390 @@
 {{setVar "emotionColors" "success" "informative" "warning" "danger" }}
 {{setVar "accentColors" "01" "02" }}
 
-<section class="py-900 py-tablet-1000">
-  <div class="Container">
-
-    <h2 class="docs-Heading">Border</h2>
-    <div class="docs-Stack docs-Stack--start">
-
-      <div
-        class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--cols-1 Grid--desktop--cols-3"
-        style="--grid-spacing-y: var(--spirit-space-1100);"
+<div id="dynamic-color-demo-root">
+  <section class="py-900 py-tablet-1000">
+    <div class="Container">
+      <h2 class="docs-Heading">Playground</h2>
+      <p class="mb-600">Adjust the dynamic color coefficients to see how they affect the examples. Open the controls in
+        the drawer and see the changes in the preview.</p>
+      <button
+        type="button"
+        class="Button Button--primary Button--medium mb-800"
+        data-spirit-toggle="offcanvas"
+        data-spirit-target="#dynamic-color-playground-drawer"
+        aria-controls="dynamic-color-playground-drawer"
+        aria-expanded="false"
       >
-        <div class="docs-Stack docs-Stack--stretch">
+        Open coefficient controls
+      </button>
+      <dialog
+        id="dynamic-color-playground-drawer"
+        class="Drawer Drawer--right"
+        aria-labelledby="dynamic-color-playground-heading"
+      >
+        <div class="DrawerPanel">
+          <div class="DrawerPanel__content">
+            <button
+              type="button"
+              aria-expanded="false"
+              class="Button Button--tertiary Button--medium Button--symmetrical DrawerCloseButton"
+              data-spirit-dismiss="offcanvas"
+              data-spirit-target="#dynamic-color-playground-drawer"
+              aria-controls="dynamic-color-playground-drawer"
+            >
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+              <span class="accessibility-hidden">Close</span>
+            </button>
+            <form
+              id="dynamic-color-playground-form"
+              class="docs-Stack docs-Stack--stretch p-800"
+              autocomplete="off"
+              aria-labelledby="dynamic-color-playground-heading"
+            >
+              <h3 id="dynamic-color-playground-heading">Coefficient controls</h3>
+              <div
+                class="Grid Grid--cols-1"
+                style="--grid-spacing-y: var(--spirit-space-900);"
+              >
+                <fieldset class="FieldGroup FieldGroup--fluid">
+                  <legend class="accessibility-hidden">Background state: hover</legend>
+                  <div
+                    class="FieldGroup__label"
+                    aria-hidden="true"
+                  >Background state: hover</div>
+                  <div class="FieldGroup__fields">
+                    <div class="Slider Slider--fluid">
+                      <div
+                        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
+                        style="--flex-spacing-x: var(--spirit-space-300);"
+                      >
+                        <label
+                          for="dynamic-color-lightness-delta-background-state-hover"
+                          class="Slider__label mb-0"
+                        >Lightness delta</label>
+                        <div
+                          class="Tooltip d-inline-flex"
+                          data-spirit-element="tooltip"
+                        >
+                          <button
+                            type="button"
+                            class="button-unstyled accessibility-tap-target d-inline-flex rounded-200 p-100 text-secondary"
+                            data-spirit-toggle="tooltip"
+                            data-spirit-target="#tooltip-dc-hover-lightness"
+                            aria-describedby="tooltip-dc-hover-lightness"
+                            aria-label="About lightness delta for hover"
+                          >
+                            <svg
+                              class="Icon"
+                              width="14"
+                              height="14"
+                              aria-hidden="true"
+                            >
+                              <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                            </svg>
+                            <span class="accessibility-hidden">About lightness delta for hover</span>
+                          </button>
+                          <div
+                            id="tooltip-dc-hover-lightness"
+                            class="TooltipPopover"
+                            data-spirit-placement="top"
+                          >
+                            Tunes how far the hover background moves in lightness in OKLCH (0 = almost none, 1 =
+                            strongest). Together with the lightness midpoint, light surfaces darken and dark surfaces
+                            lighten toward a middle tone.
+                            <span
+                              class="TooltipPopover__arrow"
+                              data-spirit-element="arrow"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                      <output
+                        id="dynamic-color-lightness-delta-background-state-hover-value"
+                        for="dynamic-color-lightness-delta-background-state-hover"
+                      >0.3</output>
+                      <input
+                        class="Slider__input"
+                        id="dynamic-color-lightness-delta-background-state-hover"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value="0.3"
+                        style="--slider-position: 30%"
+                        autocomplete="off"
+                        aria-describedby="dynamic-color-lightness-delta-background-state-hover-helper-text"
+                      />
+                      <div
+                        id="dynamic-color-lightness-delta-background-state-hover-helper-text"
+                        class="Slider__helperText"
+                      >
+                        Number 0–1. Lightness change; higher = stronger darken/lighten effect.
+                      </div>
+                    </div>
+                    <div class="Slider Slider--fluid">
+                      <div
+                        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
+                        style="--flex-spacing-x: var(--spirit-space-300);"
+                      >
+                        <label
+                          for="dynamic-color-chroma-scale-background-state-hover"
+                          class="Slider__label mb-0"
+                        >Chroma scale</label>
+                        <div
+                          class="Tooltip d-inline-flex"
+                          data-spirit-element="tooltip"
+                        >
+                          <button
+                            type="button"
+                            class="button-unstyled accessibility-tap-target d-inline-flex rounded-200 p-100 text-secondary"
+                            data-spirit-toggle="tooltip"
+                            data-spirit-target="#tooltip-dc-hover-chroma"
+                            aria-describedby="tooltip-dc-hover-chroma"
+                            aria-label="About chroma scale for hover"
+                          >
+                            <svg
+                              class="Icon"
+                              width="14"
+                              height="14"
+                              aria-hidden="true"
+                            >
+                              <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                            </svg>
+                            <span class="accessibility-hidden">About chroma scale for hover</span>
+                          </button>
+                          <div
+                            id="tooltip-dc-hover-chroma"
+                            class="TooltipPopover"
+                            data-spirit-placement="top"
+                          >
+                            Controls how strongly saturation changes for the hover color relative to the background.
+                            Higher values make the chroma term in the OKLCH formula more pronounced (more vivid or muted
+                            shifts, depending on background lightness).
+                            <span
+                              class="TooltipPopover__arrow"
+                              data-spirit-element="arrow"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                      <output
+                        id="dynamic-color-chroma-scale-background-state-hover-value"
+                        for="dynamic-color-chroma-scale-background-state-hover"
+                      >4</output>
+                      <input
+                        class="Slider__input"
+                        id="dynamic-color-chroma-scale-background-state-hover"
+                        type="range"
+                        min="0"
+                        max="10"
+                        step="0.5"
+                        value="4"
+                        style="--slider-position: 40%"
+                        autocomplete="off"
+                        aria-describedby="dynamic-color-chroma-scale-background-state-hover-helper-text"
+                      />
+                      <div
+                        id="dynamic-color-chroma-scale-background-state-hover-helper-text"
+                        class="Slider__helperText"
+                      >
+                        Scale 0–10. Chroma change; higher = more saturation change.
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="FieldGroup FieldGroup--fluid">
+                  <legend class="accessibility-hidden">Background state: active</legend>
+                  <div
+                    class="FieldGroup__label"
+                    aria-hidden="true"
+                  >Background state: active</div>
+                  <div class="FieldGroup__fields">
+                    <div class="Slider Slider--fluid">
+                      <div
+                        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
+                        style="--flex-spacing-x: var(--spirit-space-300);"
+                      >
+                        <label
+                          for="dynamic-color-lightness-delta-background-state-active"
+                          class="Slider__label mb-0"
+                        >Lightness delta</label>
+                        <div
+                          class="Tooltip d-inline-flex"
+                          data-spirit-element="tooltip"
+                        >
+                          <button
+                            type="button"
+                            class="button-unstyled accessibility-tap-target d-inline-flex rounded-200 p-100 text-secondary"
+                            data-spirit-toggle="tooltip"
+                            data-spirit-target="#tooltip-dc-active-lightness"
+                            aria-describedby="tooltip-dc-active-lightness"
+                            aria-label="About lightness delta for active"
+                          >
+                            <svg
+                              class="Icon"
+                              width="14"
+                              height="14"
+                              aria-hidden="true"
+                            >
+                              <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                            </svg>
+                            <span class="accessibility-hidden">About lightness delta for active</span>
+                          </button>
+                          <div
+                            id="tooltip-dc-active-lightness"
+                            class="TooltipPopover"
+                            data-spirit-placement="top"
+                          >
+                            Same idea as hover, but for the pressed/active state: how far the background lightness
+                            shifts in OKLCH when the user activates the control.
+                            <span
+                              class="TooltipPopover__arrow"
+                              data-spirit-element="arrow"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                      <output
+                        id="dynamic-color-lightness-delta-background-state-active-value"
+                        for="dynamic-color-lightness-delta-background-state-active"
+                      >0.45</output>
+                      <input
+                        class="Slider__input"
+                        id="dynamic-color-lightness-delta-background-state-active"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value="0.45"
+                        style="--slider-position: 45%"
+                        autocomplete="off"
+                        aria-describedby="dynamic-color-lightness-delta-background-state-active-helper-text"
+                      />
+                      <div
+                        id="dynamic-color-lightness-delta-background-state-active-helper-text"
+                        class="Slider__helperText"
+                      >
+                        Number 0–1. Lightness change; higher = stronger darken/lighten effect.
+                      </div>
+                    </div>
+                    <div class="Slider Slider--fluid">
+                      <div
+                        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
+                        style="--flex-spacing-x: var(--spirit-space-300);"
+                      >
+                        <label
+                          for="dynamic-color-chroma-scale-background-state-active"
+                          class="Slider__label mb-0"
+                        >Chroma scale</label>
+                        <div
+                          class="Tooltip d-inline-flex"
+                          data-spirit-element="tooltip"
+                        >
+                          <button
+                            type="button"
+                            class="button-unstyled accessibility-tap-target d-inline-flex rounded-200 p-100 text-secondary"
+                            data-spirit-toggle="tooltip"
+                            data-spirit-target="#tooltip-dc-active-chroma"
+                            aria-describedby="tooltip-dc-active-chroma"
+                            aria-label="About chroma scale for active"
+                          >
+                            <svg
+                              class="Icon"
+                              width="14"
+                              height="14"
+                              aria-hidden="true"
+                            >
+                              <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                            </svg>
+                            <span class="accessibility-hidden">About chroma scale for active</span>
+                          </button>
+                          <div
+                            id="tooltip-dc-active-chroma"
+                            class="TooltipPopover"
+                            data-spirit-placement="top"
+                          >
+                            Chroma scaling for the active (pressed) background—higher values amplify saturation changes
+                            in the dynamic color formula.
+                            <span
+                              class="TooltipPopover__arrow"
+                              data-spirit-element="arrow"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                      <output
+                        id="dynamic-color-chroma-scale-background-state-active-value"
+                        for="dynamic-color-chroma-scale-background-state-active"
+                      >4</output>
+                      <input
+                        class="Slider__input"
+                        id="dynamic-color-chroma-scale-background-state-active"
+                        type="range"
+                        min="0"
+                        max="10"
+                        step="0.5"
+                        value="4"
+                        style="--slider-position: 40%"
+                        autocomplete="off"
+                        aria-describedby="dynamic-color-chroma-scale-background-state-active-helper-text"
+                      />
+                      <div
+                        id="dynamic-color-chroma-scale-background-state-active-helper-text"
+                        class="Slider__helperText"
+                      >
+                        Scale 0–10. Chroma change; higher = more saturation change.
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="FieldGroup FieldGroup--fluid">
+                  <legend class="accessibility-hidden">Background: selected</legend>
+                  <div
+                    class="FieldGroup__label"
+                    aria-hidden="true"
+                  >Background: selected</div>
+                  <div class="FieldGroup__fields">
+                    <div class="Slider Slider--fluid">
+                      <div
+                        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
+                        style="--flex-spacing-x: var(--spirit-space-300);"
+                      >
+                        <label
+                          for="dynamic-color-lightness-delta-background-selected"
+                          class="Slider__label mb-0"
+                        >Lightness delta</label>
+                        <div
+                          class="Tooltip d-inline-flex"
+                          data-spirit-element="tooltip"
+                        >
+                          <button
+                            type="button"
+                            class="button-unstyled accessibility-tap-target d-inline-flex rounded-200 p-100 text-secondary"
+                            data-spirit-toggle="tooltip"
+                            data-spirit-target="#tooltip-dc-selected-lightness"
+                            aria-describedby="tooltip-dc-selected-lightness"
+                            aria-label="About lightness delta for selected"
+                          >
+                            <svg
+                              class="Icon"
+                              width="14"
+                              height="14"
+                              aria-hidden="true"
+                            >
+                              <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                            </svg>
+                            <span class="accessibility-hidden">About lightness delta for selected</span>
+                          </button>
+                          <div
+                            id="tooltip-dc-selected-lightness"
+                            class="TooltipPopover"
+                            data-spirit-placement="top"
+                          >
+                            Lightness shift for the selected state (e.g. current nav item). Uses the same OKLCH
+                            dynamic-color pipeline as hover/active.
+                            <span
+                              class="TooltipPopover__arrow"
+                              data-spirit-element="arrow"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                      <output
+                        id="dynamic-color-lightness-delta-background-selected-value"
+                        for="dynamic-color-lightness-delta-background-selected"
+                      >0.3</output>
+                      <input
+                        class="Slider__input"
+                        id="dynamic-color-lightness-delta-background-selected"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value="0.3"
+                        style="--slider-position: 30%"
+                        autocomplete="off"
+                        aria-describedby="dynamic-color-lightness-delta-background-selected-helper-text"
+                      />
+                      <div
+                        id="dynamic-color-lightness-delta-background-selected-helper-text"
+                        class="Slider__helperText"
+                      >
+                        Number 0–1. Lightness change; higher = stronger darken/lighten effect.
+                      </div>
+                    </div>
+                    <div class="Slider Slider--fluid">
+                      <div
+                        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
+                        style="--flex-spacing-x: var(--spirit-space-300);"
+                      >
+                        <label
+                          for="dynamic-color-chroma-scale-background-selected"
+                          class="Slider__label mb-0"
+                        >Chroma scale</label>
+                        <div
+                          class="Tooltip d-inline-flex"
+                          data-spirit-element="tooltip"
+                        >
+                          <button
+                            type="button"
+                            class="button-unstyled accessibility-tap-target d-inline-flex rounded-200 p-100 text-secondary"
+                            data-spirit-toggle="tooltip"
+                            data-spirit-target="#tooltip-dc-selected-chroma"
+                            aria-describedby="tooltip-dc-selected-chroma"
+                            aria-label="About chroma scale for selected"
+                          >
+                            <svg
+                              class="Icon"
+                              width="14"
+                              height="14"
+                              aria-hidden="true"
+                            >
+                              <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                            </svg>
+                            <span class="accessibility-hidden">About chroma scale for selected</span>
+                          </button>
+                          <div
+                            id="tooltip-dc-selected-chroma"
+                            class="TooltipPopover"
+                            data-spirit-placement="top"
+                          >
+                            Chroma scaling for the selected background color—adjusts how saturated the derived color
+                            looks versus the base background.
+                            <span
+                              class="TooltipPopover__arrow"
+                              data-spirit-element="arrow"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                      <output
+                        id="dynamic-color-chroma-scale-background-selected-value"
+                        for="dynamic-color-chroma-scale-background-selected"
+                      >4</output>
+                      <input
+                        class="Slider__input"
+                        id="dynamic-color-chroma-scale-background-selected"
+                        type="range"
+                        min="0"
+                        max="10"
+                        step="0.5"
+                        value="4"
+                        style="--slider-position: 40%"
+                        autocomplete="off"
+                        aria-describedby="dynamic-color-chroma-scale-background-selected-helper-text"
+                      />
+                      <div
+                        id="dynamic-color-chroma-scale-background-selected-helper-text"
+                        class="Slider__helperText"
+                      >
+                        Scale 0–10. Chroma change; higher = more saturation change.
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="FieldGroup FieldGroup--fluid">
+                  <legend class="accessibility-hidden">Border</legend>
+                  <div
+                    class="FieldGroup__label"
+                    aria-hidden="true"
+                  >Border</div>
+                  <div class="FieldGroup__fields">
+                    <div class="Slider Slider--fluid">
+                      <div
+                        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
+                        style="--flex-spacing-x: var(--spirit-space-300);"
+                      >
+                        <label
+                          for="dynamic-color-lightness-delta-border"
+                          class="Slider__label mb-0"
+                        >Lightness delta</label>
+                        <div
+                          class="Tooltip d-inline-flex"
+                          data-spirit-element="tooltip"
+                        >
+                          <button
+                            type="button"
+                            class="button-unstyled accessibility-tap-target d-inline-flex rounded-200 p-100 text-secondary"
+                            data-spirit-toggle="tooltip"
+                            data-spirit-target="#tooltip-dc-border-lightness"
+                            aria-describedby="tooltip-dc-border-lightness"
+                            aria-label="About lightness delta for border"
+                          >
+                            <svg
+                              class="Icon"
+                              width="14"
+                              height="14"
+                              aria-hidden="true"
+                            >
+                              <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                            </svg>
+                            <span class="accessibility-hidden">About lightness delta for border</span>
+                          </button>
+                          <div
+                            id="tooltip-dc-border-lightness"
+                            class="TooltipPopover"
+                            data-spirit-placement="top"
+                          >
+                            How much the dynamic border color shifts in lightness compared to the element's background.
+                            Higher values make the border contrast more strongly in lightness.
+                            <span
+                              class="TooltipPopover__arrow"
+                              data-spirit-element="arrow"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                      <output
+                        id="dynamic-color-lightness-delta-border-value"
+                        for="dynamic-color-lightness-delta-border"
+                      >0.75</output>
+                      <input
+                        class="Slider__input"
+                        id="dynamic-color-lightness-delta-border"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value="0.75"
+                        style="--slider-position: 75%"
+                        autocomplete="off"
+                        aria-describedby="dynamic-color-lightness-delta-border-helper-text"
+                      />
+                      <div
+                        id="dynamic-color-lightness-delta-border-helper-text"
+                        class="Slider__helperText"
+                      >
+                        Number 0–1. Lightness change; higher = stronger darken/lighten effect.
+                      </div>
+                    </div>
+                    <div class="Slider Slider--fluid">
+                      <div
+                        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
+                        style="--flex-spacing-x: var(--spirit-space-300);"
+                      >
+                        <label
+                          for="dynamic-color-chroma-scale-border"
+                          class="Slider__label mb-0"
+                        >Chroma scale</label>
+                        <div
+                          class="Tooltip d-inline-flex"
+                          data-spirit-element="tooltip"
+                        >
+                          <button
+                            type="button"
+                            class="button-unstyled accessibility-tap-target d-inline-flex rounded-200 p-100 text-secondary"
+                            data-spirit-toggle="tooltip"
+                            data-spirit-target="#tooltip-dc-border-chroma"
+                            aria-describedby="tooltip-dc-border-chroma"
+                            aria-label="About chroma scale for border"
+                          >
+                            <svg
+                              class="Icon"
+                              width="14"
+                              height="14"
+                              aria-hidden="true"
+                            >
+                              <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                            </svg>
+                            <span class="accessibility-hidden">About chroma scale for border</span>
+                          </button>
+                          <div
+                            id="tooltip-dc-border-chroma"
+                            class="TooltipPopover"
+                            data-spirit-placement="top"
+                          >
+                            Scales how saturation evolves for the dynamic border as the background changes—useful for
+                            fine-tuning colorful vs neutral borders on tinted surfaces.
+                            <span
+                              class="TooltipPopover__arrow"
+                              data-spirit-element="arrow"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                      <output
+                        id="dynamic-color-chroma-scale-border-value"
+                        for="dynamic-color-chroma-scale-border"
+                      >2</output>
+                      <input
+                        class="Slider__input"
+                        id="dynamic-color-chroma-scale-border"
+                        type="range"
+                        min="0"
+                        max="10"
+                        step="0.5"
+                        value="2"
+                        style="--slider-position: 20%"
+                        autocomplete="off"
+                        aria-describedby="dynamic-color-chroma-scale-border-helper-text"
+                      />
+                      <div
+                        id="dynamic-color-chroma-scale-border-helper-text"
+                        class="Slider__helperText"
+                      >
+                        Scale 0–10. Chroma change; higher = more saturation change.
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="FieldGroup FieldGroup--fluid">
+                  <legend class="accessibility-hidden">Formula (advanced)</legend>
+                  <div
+                    class="FieldGroup__label"
+                    aria-hidden="true"
+                  >Formula (advanced)</div>
+                  <div class="FieldGroup__fields">
+                    <div class="Slider Slider--fluid">
+                      <div
+                        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
+                        style="--flex-spacing-x: var(--spirit-space-300);"
+                      >
+                        <label
+                          for="dynamic-color-lightness-midpoint"
+                          class="Slider__label mb-0"
+                        >Lightness midpoint</label>
+                        <div
+                          class="Tooltip d-inline-flex"
+                          data-spirit-element="tooltip"
+                        >
+                          <button
+                            type="button"
+                            class="button-unstyled accessibility-tap-target d-inline-flex rounded-200 p-100 text-secondary"
+                            data-spirit-toggle="tooltip"
+                            data-spirit-target="#tooltip-dc-lightness-midpoint"
+                            aria-describedby="tooltip-dc-lightness-midpoint"
+                            aria-label="About lightness midpoint"
+                          >
+                            <svg
+                              class="Icon"
+                              width="14"
+                              height="14"
+                              aria-hidden="true"
+                            >
+                              <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                            </svg>
+                            <span class="accessibility-hidden">About lightness midpoint</span>
+                          </button>
+                          <div
+                            id="tooltip-dc-lightness-midpoint"
+                            class="TooltipPopover"
+                            data-spirit-placement="top"
+                          >
+                            Global threshold (0–1) in the OKLCH formula: colors lighter than this are treated one way
+                            and darker colors the other when computing the lightness shift. Raising it makes more of the
+                            palette behave like "dark" backgrounds for the purpose of the effect.
+                            <span
+                              class="TooltipPopover__arrow"
+                              data-spirit-element="arrow"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                      <output
+                        id="dynamic-color-lightness-midpoint-value"
+                        for="dynamic-color-lightness-midpoint"
+                      >0.8</output>
+                      <input
+                        class="Slider__input"
+                        id="dynamic-color-lightness-midpoint"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value="0.8"
+                        style="--slider-position: 80%"
+                        autocomplete="off"
+                        aria-describedby="dynamic-color-lightness-midpoint-helper-text"
+                      />
+                      <div
+                        id="dynamic-color-lightness-midpoint-helper-text"
+                        class="Slider__helperText"
+                      >
+                        Number 0–1. Light/dark threshold; higher = lighter treated as dark.
+                      </div>
+                    </div>
+                    <div class="Slider Slider--fluid">
+                      <div
+                        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
+                        style="--flex-spacing-x: var(--spirit-space-300);"
+                      >
+                        <label
+                          for="dynamic-color-chroma-lightness-midpoint"
+                          class="Slider__label mb-0"
+                        >Chroma lightness midpoint</label>
+                        <div
+                          class="Tooltip d-inline-flex"
+                          data-spirit-element="tooltip"
+                        >
+                          <button
+                            type="button"
+                            class="button-unstyled accessibility-tap-target d-inline-flex rounded-200 p-100 text-secondary"
+                            data-spirit-toggle="tooltip"
+                            data-spirit-target="#tooltip-dc-chroma-lightness-midpoint"
+                            aria-describedby="tooltip-dc-chroma-lightness-midpoint"
+                            aria-label="About chroma lightness midpoint"
+                          >
+                            <svg
+                              class="Icon"
+                              width="14"
+                              height="14"
+                              aria-hidden="true"
+                            >
+                              <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                            </svg>
+                            <span class="accessibility-hidden">About chroma lightness midpoint</span>
+                          </button>
+                          <div
+                            id="tooltip-dc-chroma-lightness-midpoint"
+                            class="TooltipPopover"
+                            data-spirit-placement="top"
+                          >
+                            Second threshold for the chroma part of the formula: it sets where the curve is neutral vs
+                            stronger. Lower values push more saturation change for colors you treat as dark in that part
+                            of the math.
+                            <span
+                              class="TooltipPopover__arrow"
+                              data-spirit-element="arrow"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                      <output
+                        id="dynamic-color-chroma-lightness-midpoint-value"
+                        for="dynamic-color-chroma-lightness-midpoint"
+                      >0.5</output>
+                      <input
+                        class="Slider__input"
+                        id="dynamic-color-chroma-lightness-midpoint"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value="0.5"
+                        style="--slider-position: 50%"
+                        autocomplete="off"
+                        aria-describedby="dynamic-color-chroma-lightness-midpoint-helper-text"
+                      />
+                      <div
+                        id="dynamic-color-chroma-lightness-midpoint-helper-text"
+                        class="Slider__helperText"
+                      >
+                        Number 0–1. Chroma threshold; lower = more saturation for dark colors.
+                      </div>
+                    </div>
+                    <div class="Slider Slider--fluid">
+                      <div
+                        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
+                        style="--flex-spacing-x: var(--spirit-space-300);"
+                      >
+                        <label
+                          for="dynamic-color-chroma-upper-limit"
+                          class="Slider__label mb-0"
+                        >Chroma upper limit</label>
+                        <div
+                          class="Tooltip d-inline-flex"
+                          data-spirit-element="tooltip"
+                        >
+                          <button
+                            type="button"
+                            class="button-unstyled accessibility-tap-target d-inline-flex rounded-200 p-100 text-secondary"
+                            data-spirit-toggle="tooltip"
+                            data-spirit-target="#tooltip-dc-chroma-upper-limit"
+                            aria-describedby="tooltip-dc-chroma-upper-limit"
+                            aria-label="About chroma upper limit"
+                          >
+                            <svg
+                              class="Icon"
+                              width="14"
+                              height="14"
+                              aria-hidden="true"
+                            >
+                              <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                            </svg>
+                            <span class="accessibility-hidden">About chroma upper limit</span>
+                          </button>
+                          <div
+                            id="tooltip-dc-chroma-upper-limit"
+                            class="TooltipPopover"
+                            data-spirit-placement="top"
+                          >
+                            Hard cap on chroma in the generated OKLCH color (up to 0.4). Increase it to allow punchier,
+                            more saturated results on dark-ish backgrounds; decrease for safer, flatter colors.
+                            <span
+                              class="TooltipPopover__arrow"
+                              data-spirit-element="arrow"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                      <output
+                        id="dynamic-color-chroma-upper-limit-value"
+                        for="dynamic-color-chroma-upper-limit"
+                      >0.2</output>
+                      <input
+                        class="Slider__input"
+                        id="dynamic-color-chroma-upper-limit"
+                        type="range"
+                        min="0"
+                        max="0.4"
+                        step="0.02"
+                        value="0.2"
+                        style="--slider-position: 50%"
+                        autocomplete="off"
+                        aria-describedby="dynamic-color-chroma-upper-limit-helper-text"
+                      />
+                      <div
+                        id="dynamic-color-chroma-upper-limit-helper-text"
+                        class="Slider__helperText"
+                      >
+                        Number 0–0.4. Higher = more saturation for dark.
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div
+                class="Stack Stack--vertical Stack--hasSpacing Stack--alignmentXStretch Stack--alignmentYStretch"
+                role="group"
+                aria-label="Playground actions"
+              >
+                <button
+                  type="button"
+                  id="dynamic-color-playground-copy-config"
+                  class="Button Button--block Button--primary Button--medium"
+                >Copy CSS config</button>
+                <button
+                  type="button"
+                  id="dynamic-color-playground-reset"
+                  class="Button Button--block Button--secondary Button--medium"
+                >Reset to defaults</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </dialog>
+    </div>
+  </section>
 
-          <h3>On Basic Background Colors</h3>
+  <section class="py-900 py-tablet-1000">
+    <div class="Container">
 
-          {{#each @root.basicColors as |color|}}
+      <h2 class="docs-Heading">Border</h2>
+      <div class="docs-Stack docs-Stack--start">
+
+        <div
+          class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--cols-1 Grid--desktop--cols-3"
+          style="--grid-spacing-y: var(--spirit-space-1100);"
+        >
+          <div class="docs-Stack docs-Stack--stretch">
+
+            <h3>On Basic Background Colors</h3>
+
+            {{#each @root.basicColors as |color|}}
             <div class="bg-{{color}} p-800">
-              <button type="button" class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border on {{color}} background
               </button>
             </div>
-          {{/each}}
+            {{/each}}
 
-          {{#each @root.neutralColors as |color|}}
+            {{#each @root.neutralColors as |color|}}
             <div class="bg-{{color}}-basic text-{{color}}-subtle p-800">
-              <button type="button" class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border on {{color}}-basic background
               </button>
             </div>
             <div class="bg-{{color}}-subtle text-{{color}}-basic p-800">
-              <button type="button" class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border on {{color}}-subtle background
               </button>
             </div>
-          {{/each}}
+            {{/each}}
 
-        </div>
-        <div class="docs-Stack docs-Stack--stretch">
+          </div>
+          <div class="docs-Stack docs-Stack--stretch">
 
-          <h3>On Emotion Colors</h3>
+            <h3>On Emotion Colors</h3>
 
-          {{#each @root.emotionColors as |color|}}
+            {{#each @root.emotionColors as |color|}}
             <div class="bg-emotion-{{color}}-basic text-emotion-{{color}}-subtle p-800">
-              <button type="button" class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border on emotion-{{color}}-basic
               </button>
             </div>
             <div class="bg-emotion-{{color}}-subtle text-emotion-{{color}}-basic p-800">
-              <button type="button" class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border on emotion-{{color}}-subtle
               </button>
             </div>
-          {{/each}}
+            {{/each}}
 
-        </div>
-        <div class="docs-Stack docs-Stack--stretch">
+          </div>
+          <div class="docs-Stack docs-Stack--stretch">
 
-          <h3>On Accent Colors</h3>
+            <h3>On Accent Colors</h3>
 
-          {{#each @root.accentColors as |color|}}
+            {{#each @root.accentColors as |color|}}
             <div class="bg-accent-{{color}}-basic text-accent-{{color}}-subtle p-800">
-              <button type="button" class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border on accent-{{color}}-basic
               </button>
             </div>
             <div class="bg-accent-{{color}}-subtle text-accent-{{color}}-basic p-800">
-              <button type="button" class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border on accent-{{color}}-subtle
               </button>
             </div>
-          {{/each}}
+            {{/each}}
 
+          </div>
         </div>
+
       </div>
 
     </div>
+  </section>
 
-  </div>
-</section>
+  <section class="py-900 py-tablet-1000">
+    <div class="Container">
 
-<section class="py-900 py-tablet-1000">
-  <div class="Container">
+      <h2 class="docs-Heading">Interactive Background</h2>
 
-    <h2 class="docs-Heading">Interactive Background</h2>
+      <div class="docs-Stack docs-Stack--start">
 
-    <div class="docs-Stack docs-Stack--start">
+        <div
+          class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--cols-1 Grid--desktop--cols-3"
+          style="--grid-spacing-y: var(--spirit-space-1100);"
+        >
+          <div class="docs-Stack docs-Stack--stretch">
 
-      <div
-        class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--cols-1 Grid--desktop--cols-3"
-        style="--grid-spacing-y: var(--spirit-space-1100);"
-      >
-        <div class="docs-Stack docs-Stack--stretch">
+            <h3>On Basic Background Colors</h3>
 
-          <h3>On Basic Background Colors</h3>
-
-          {{#each @root.basicColors as |color|}}
+            {{#each @root.basicColors as |color|}}
             <div class="bg-{{color}} p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500"
+              >
                 Button on {{color}} background
               </button>
             </div>
-          {{/each}}
+            {{/each}}
 
-          {{#each @root.neutralColors as |color|}}
+            {{#each @root.neutralColors as |color|}}
             <div class="bg-{{color}}-basic text-{{color}}-subtle p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500"
+              >
                 Button on {{color}}-basic background
               </button>
             </div>
             <div class="bg-{{color}}-subtle text-{{color}}-basic p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500"
+              >
                 Button on {{color}}-subtle background
               </button>
             </div>
-          {{/each}}
+            {{/each}}
 
-        </div>
-        <div class="docs-Stack docs-Stack--stretch">
+          </div>
+          <div class="docs-Stack docs-Stack--stretch">
 
-          <h3>On Emotion Colors</h3>
+            <h3>On Emotion Colors</h3>
 
-          {{#each @root.emotionColors as |color|}}
+            {{#each @root.emotionColors as |color|}}
             <div class="bg-emotion-{{color}}-basic text-emotion-{{color}}-subtle p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500"
+              >
                 Button on emotion-{{color}}-basic
               </button>
             </div>
             <div class="bg-emotion-{{color}}-subtle text-emotion-{{color}}-basic p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500"
+              >
                 Button on emotion-{{color}}-subtle
               </button>
             </div>
-          {{/each}}
+            {{/each}}
 
-        </div>
-        <div class="docs-Stack docs-Stack--stretch">
+          </div>
+          <div class="docs-Stack docs-Stack--stretch">
 
-          <h3>On Accent Colors</h3>
+            <h3>On Accent Colors</h3>
 
-          {{#each @root.accentColors as |color|}}
+            {{#each @root.accentColors as |color|}}
             <div class="bg-accent-{{color}}-basic text-accent-{{color}}-subtle p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500"
+              >
                 Button on accent-{{color}}-basic
               </button>
             </div>
             <div class="bg-accent-{{color}}-subtle text-accent-{{color}}-basic p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive rounded-200 px-700 py-500"
+              >
                 Button on accent-{{color}}-subtle
               </button>
             </div>
-          {{/each}}
+            {{/each}}
 
+          </div>
         </div>
+
       </div>
 
     </div>
+  </section>
 
-  </div>
-</section>
+  <section class="py-900 py-tablet-1000">
+    <div class="Container">
 
-<section class="py-900 py-tablet-1000">
-  <div class="Container">
+      <h2 class="docs-Heading">Border and Interactive Background</h2>
 
-    <h2 class="docs-Heading">Border and Interactive Background</h2>
+      <div class="docs-Stack docs-Stack--start">
 
-    <div class="docs-Stack docs-Stack--start">
+        <div
+          class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--cols-1 Grid--desktop--cols-3"
+          style="--grid-spacing-y: var(--spirit-space-1100);"
+        >
+          <div class="docs-Stack docs-Stack--stretch">
 
-      <div
-        class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--cols-1 Grid--desktop--cols-3"
-        style="--grid-spacing-y: var(--spirit-space-1100);"
-      >
-        <div class="docs-Stack docs-Stack--stretch">
+            <h3>On Basic Background Colors</h3>
 
-          <h3>On Basic Background Colors</h3>
-
-          {{#each @root.basicColors as |color|}}
+            {{#each @root.basicColors as |color|}}
             <div class="bg-{{color}} p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border and background on {{color}}
               </button>
             </div>
-          {{/each}}
+            {{/each}}
 
-          {{#each @root.neutralColors as |color|}}
+            {{#each @root.neutralColors as |color|}}
             <div class="bg-{{color}}-basic text-{{color}}-subtle p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border and background on {{color}}-basic
               </button>
             </div>
             <div class="bg-{{color}}-subtle text-{{color}}-basic p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border and background on {{color}}-subtle
               </button>
             </div>
-          {{/each}}
+            {{/each}}
 
-        </div>
-        <div class="docs-Stack docs-Stack--stretch">
+          </div>
+          <div class="docs-Stack docs-Stack--stretch">
 
-          <h3>On Emotion Colors</h3>
+            <h3>On Emotion Colors</h3>
 
-          {{#each @root.emotionColors as |color|}}
+            {{#each @root.emotionColors as |color|}}
             <div class="bg-emotion-{{color}}-basic text-emotion-{{color}}-subtle p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border and background on<br class="d-tablet-none d-desktop-block" />
                 emotion-{{color}}-basic
               </button>
             </div>
             <div class="bg-emotion-{{color}}-subtle text-emotion-{{color}}-basic p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border and background on<br class="d-tablet-none d-desktop-block" />
                 emotion-{{color}}-subtle
               </button>
             </div>
-          {{/each}}
+            {{/each}}
 
-        </div>
-        <div class="docs-Stack docs-Stack--stretch">
+          </div>
+          <div class="docs-Stack docs-Stack--stretch">
 
-          <h3>On Accent Colors</h3>
+            <h3>On Accent Colors</h3>
 
-          {{#each @root.accentColors as |color|}}
+            {{#each @root.accentColors as |color|}}
             <div class="bg-accent-{{color}}-basic text-accent-{{color}}-subtle p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border and background on<br class="d-tablet-none d-desktop-block" />
                 accent-{{color}}-basic
               </button>
             </div>
             <div class="bg-accent-{{color}}-subtle text-accent-{{color}}-basic p-800">
-              <button type="button" class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500">
+              <button
+                type="button"
+                class="button-unstyled dynamic-color-background-interactive dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
+              >
                 Border and background on<br class="d-tablet-none d-desktop-block" />
                 accent-{{color}}-subtle
               </button>
             </div>
-          {{/each}}
+            {{/each}}
 
+          </div>
         </div>
+
       </div>
 
     </div>
+  </section>
 
-  </div>
-</section>
+  <section class="py-900 py-tablet-1000">
+    <div class="Container">
 
-<section class="py-900 py-tablet-1000">
-  <div class="Container">
+      <h2 class="docs-Heading">Selected Background</h2>
 
-    <h2 class="docs-Heading">Selected Background</h2>
+      <div class="docs-Stack docs-Stack--start">
 
-    <div class="docs-Stack docs-Stack--start">
+        <div
+          class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--cols-1 Grid--desktop--cols-3"
+          style="--grid-spacing-y: var(--spirit-space-1100);"
+        >
+          <div class="docs-Stack docs-Stack--stretch">
 
-      <div
-        class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--cols-1 Grid--desktop--cols-3"
-        style="--grid-spacing-y: var(--spirit-space-1100);"
-      >
-        <div class="docs-Stack docs-Stack--stretch">
+            <h3>On Basic Background Colors</h3>
 
-          <h3>On Basic Background Colors</h3>
-
-          {{#each @root.basicColors as |color|}}
+            {{#each @root.basicColors as |color|}}
             <div class="bg-{{color}} p-800">
-              <a href="#" aria-current="page" class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500">
+              <a
+                href="#"
+                aria-current="page"
+                class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500"
+              >
                 Link on {{color}} background
               </a>
             </div>
-          {{/each}}
+            {{/each}}
 
-          {{#each @root.neutralColors as |color|}}
+            {{#each @root.neutralColors as |color|}}
             <div class="bg-{{color}}-basic text-{{color}}-subtle p-800">
-              <a href="#" aria-current="page" class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500">
+              <a
+                href="#"
+                aria-current="page"
+                class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500"
+              >
                 Link on {{color}}-basic background
               </a>
             </div>
             <div class="bg-{{color}}-subtle text-{{color}}-basic p-800">
-              <a href="#" aria-current="page" class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500">
+              <a
+                href="#"
+                aria-current="page"
+                class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500"
+              >
                 Link on {{color}}-subtle background
               </a>
             </div>
-          {{/each}}
+            {{/each}}
 
-        </div>
-        <div class="docs-Stack docs-Stack--stretch">
+          </div>
+          <div class="docs-Stack docs-Stack--stretch">
 
-          <h3>On Emotion Colors</h3>
+            <h3>On Emotion Colors</h3>
 
-          {{#each @root.emotionColors as |color|}}
+            {{#each @root.emotionColors as |color|}}
             <div class="bg-emotion-{{color}}-basic text-emotion-{{color}}-subtle p-800">
-              <a href="#" aria-current="page" class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500">
+              <a
+                href="#"
+                aria-current="page"
+                class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500"
+              >
                 Link on emotion-{{color}}-basic
               </a>
             </div>
             <div class="bg-emotion-{{color}}-subtle text-emotion-{{color}}-basic p-800">
-              <a href="#" aria-current="page" class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500">
+              <a
+                href="#"
+                aria-current="page"
+                class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500"
+              >
                 Link on emotion-{{color}}-subtle
               </a>
             </div>
-          {{/each}}
+            {{/each}}
 
-        </div>
-        <div class="docs-Stack docs-Stack--stretch">
+          </div>
+          <div class="docs-Stack docs-Stack--stretch">
 
-          <h3>On Accent Colors</h3>
+            <h3>On Accent Colors</h3>
 
-          {{#each @root.accentColors as |color|}}
+            {{#each @root.accentColors as |color|}}
             <div class="bg-accent-{{color}}-basic text-accent-{{color}}-subtle p-800">
-              <a href="#" aria-current="page" class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500">
+              <a
+                href="#"
+                aria-current="page"
+                class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500"
+              >
                 Link on accent-{{color}}-basic
               </a>
             </div>
             <div class="bg-accent-{{color}}-subtle text-accent-{{color}}-basic p-800">
-              <a href="#" aria-current="page" class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500">
+              <a
+                href="#"
+                aria-current="page"
+                class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500"
+              >
                 Link on accent-{{color}}-subtle
               </a>
             </div>
-          {{/each}}
+            {{/each}}
 
+          </div>
         </div>
+
       </div>
 
     </div>
+  </section>
 
-  </div>
-</section>
+</div>
+
+<script>
+  const prefix = '--spirit-dynamic-color-';
+  const root = document.getElementById('dynamic-color-demo-root');
+  const config = [
+    { inputId: 'dynamic-color-lightness-delta-border', valueOutputId: 'dynamic-color-lightness-delta-border-value', cssVar: prefix + 'lightness-delta-border', defaultValue: '0.75', min: 0, max: 1 },
+    { inputId: 'dynamic-color-chroma-scale-border', valueOutputId: 'dynamic-color-chroma-scale-border-value', cssVar: prefix + 'chroma-scale-border', defaultValue: '2', min: 0, max: 10 },
+    { inputId: 'dynamic-color-lightness-delta-background-state-hover', valueOutputId: 'dynamic-color-lightness-delta-background-state-hover-value', cssVar: prefix + 'lightness-delta-background-state-hover', defaultValue: '0.3', min: 0, max: 1 },
+    { inputId: 'dynamic-color-chroma-scale-background-state-hover', valueOutputId: 'dynamic-color-chroma-scale-background-state-hover-value', cssVar: prefix + 'chroma-scale-background-state-hover', defaultValue: '4', min: 0, max: 10 },
+    { inputId: 'dynamic-color-lightness-delta-background-state-active', valueOutputId: 'dynamic-color-lightness-delta-background-state-active-value', cssVar: prefix + 'lightness-delta-background-state-active', defaultValue: '0.45', min: 0, max: 1 },
+    { inputId: 'dynamic-color-chroma-scale-background-state-active', valueOutputId: 'dynamic-color-chroma-scale-background-state-active-value', cssVar: prefix + 'chroma-scale-background-state-active', defaultValue: '4', min: 0, max: 10 },
+    { inputId: 'dynamic-color-lightness-delta-background-selected', valueOutputId: 'dynamic-color-lightness-delta-background-selected-value', cssVar: prefix + 'lightness-delta-background-selected', defaultValue: '0.3', min: 0, max: 1 },
+    { inputId: 'dynamic-color-chroma-scale-background-selected', valueOutputId: 'dynamic-color-chroma-scale-background-selected-value', cssVar: prefix + 'chroma-scale-background-selected', defaultValue: '4', min: 0, max: 10 },
+    { inputId: 'dynamic-color-lightness-midpoint', valueOutputId: 'dynamic-color-lightness-midpoint-value', cssVar: prefix + 'lightness-midpoint', defaultValue: '0.8', min: 0, max: 1 },
+    { inputId: 'dynamic-color-chroma-lightness-midpoint', valueOutputId: 'dynamic-color-chroma-lightness-midpoint-value', cssVar: prefix + 'chroma-lightness-midpoint', defaultValue: '0.5', min: 0, max: 1 },
+    { inputId: 'dynamic-color-chroma-upper-limit', valueOutputId: 'dynamic-color-chroma-upper-limit-value', cssVar: prefix + 'chroma-upper-limit', defaultValue: '0.2', min: 0, max: 0.4 }
+  ];
+
+  const syncInputToRoot = (entry) => {
+    const input = document.getElementById(entry.inputId);
+    const output = document.getElementById(entry.valueOutputId);
+    if (input && output && root) {
+      const value = input.value;
+      output.textContent = value;
+      root.style.setProperty(entry.cssVar, value);
+      const { min, max } = entry;
+      const pct = min === max ? 0 : Math.round((100 * (parseFloat(value) - min)) / (max - min));
+      input.style.setProperty('--slider-position', pct + '%');
+    }
+  };
+
+  const resetToDefaults = () => {
+    config.forEach((entry) => {
+      const input = document.getElementById(entry.inputId);
+      if (input) {
+        input.value = entry.defaultValue;
+        syncInputToRoot(entry);
+      }
+    });
+  };
+
+  const showCopyFeedback = (message) => {
+    const btn = document.getElementById('dynamic-color-playground-copy-config');
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = message;
+      setTimeout(() => { btn.textContent = orig; }, 1500);
+    }
+  };
+
+  const copyConfigToClipboard = () => {
+    const lines = config.map((entry) => {
+      const input = document.getElementById(entry.inputId);
+      const value = input ? input.value : entry.defaultValue;
+      return '  ' + entry.cssVar + ': ' + value + ';';
+    });
+    const text = ':root {\n' + lines.join('\n') + '\n}';
+
+    if (typeof navigator.clipboard === 'undefined' || typeof navigator.clipboard.writeText !== 'function') {
+      showCopyFeedback('Clipboard not supported');
+      return;
+    }
+
+    navigator.clipboard.writeText(text).then(
+      () => showCopyFeedback('Copied!'),
+      () => showCopyFeedback('Copy failed')
+    );
+  };
+
+  config.forEach((entry) => {
+    const input = document.getElementById(entry.inputId);
+    if (input) {
+      syncInputToRoot(entry);
+      input.addEventListener('input', () => syncInputToRoot(entry));
+      input.addEventListener('change', () => syncInputToRoot(entry));
+    }
+  });
+
+  const resetBtn = document.getElementById('dynamic-color-playground-reset');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', resetToDefaults);
+  }
+  const copyBtn = document.getElementById('dynamic-color-playground-copy-config');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', copyConfigToClipboard);
+  }
+</script>
+
+<script type="module">
+  import Offcanvas from '../../../js/Offcanvas';
+  document.addEventListener('DOMContentLoaded', () => {
+    const drawer = document.getElementById('dynamic-color-playground-drawer');
+    if (drawer) {
+      new Offcanvas(drawer, { modal: false });
+    }
+  });
+</script>
 
 {{/web/layout/default}}
