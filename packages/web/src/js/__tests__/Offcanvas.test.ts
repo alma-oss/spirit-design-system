@@ -216,6 +216,7 @@ describe('Offcanvas', () => {
       const spyHide = jest.spyOn(offCanvas, 'hide');
 
       offCanvas.hide();
+
       expect(spyHide).toHaveBeenCalled();
       expect(spyTrigger).not.toHaveBeenCalled();
     });
@@ -251,6 +252,7 @@ describe('Offcanvas', () => {
       const offcanvas = new Offcanvas(offCanvasEl, { modal: false });
 
       await offcanvas.show(triggerEl);
+
       expect(offCanvasEl).toHaveClass('is-non-modal');
 
       await offcanvas.hide();
