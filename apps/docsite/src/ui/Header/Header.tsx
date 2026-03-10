@@ -1,9 +1,11 @@
+'use client';
+
 import { Container, Flex, UNSTABLE_Header, UNSTABLE_HeaderLogo } from '@alma-oss/spirit-web-react';
-import useIsPage from '@local/hooks/useIsPage';
 import { Menu } from '@local/ui/Menu';
 import SpiritLogo from '@local/ui/SpiritLogo';
 import NextLink from 'next/link';
 import React from 'react';
+import useIsPage from '@local/hooks/useIsPage';
 
 const Header = () => {
   const isHomePage = useIsPage('/');

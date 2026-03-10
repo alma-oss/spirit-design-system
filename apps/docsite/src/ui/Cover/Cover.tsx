@@ -1,3 +1,5 @@
+'use client';
+
 import { Button, Flex, Heading, Section } from '@alma-oss/spirit-web-react';
 import NextLink from 'next/link';
 import React from 'react';
