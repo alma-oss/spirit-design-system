@@ -7,16 +7,46 @@
 
 @use '@tokens' as tokens;
 
-// Constants for dynamic color generation are fine-tuned for the default light Spirit theme.
-// New design tokens may be added in the future to replace the constants and allow for theme-based customization.
-$_lightness-delta-border: 0.75;
-$_lightness-delta-background-state-hover: 0.3;
-$_lightness-delta-background-state-active: 0.45;
-$_lightness-delta-background-selected: 0.3;
-$_chroma-scale-border: 2;
-$_chroma-scale-background-state-hover: 4;
-$_chroma-scale-background-state-active: 4;
-$_chroma-scale-background-selected: 4;
+// Default coefficients for dynamic color generation (fine-tuned for the default light Spirit theme).
+// Overridable at runtime via the CSS custom properties referenced below.
+$_lightness-delta-border: var(--#{tokens.$css-variable-prefix}dynamic-color-lightness-delta-border, 0.75);
+$_lightness-delta-background-state-hover: var(
+    --#{tokens.$css-variable-prefix}dynamic-color-lightness-delta-background-state-hover,
+    0.3
+);
+$_lightness-delta-background-state-active: var(
+    --#{tokens.$css-variable-prefix}dynamic-color-lightness-delta-background-state-active,
+    0.45
+);
+$_lightness-delta-background-selected: var(
+    --#{tokens.$css-variable-prefix}dynamic-color-lightness-delta-background-selected,
+    0.3
+);
+$_chroma-scale-border: var(--#{tokens.$css-variable-prefix}dynamic-color-chroma-scale-border, 2);
+$_chroma-scale-background-state-hover: var(
+    --#{tokens.$css-variable-prefix}dynamic-color-chroma-scale-background-state-hover,
+    4
+);
+$_chroma-scale-background-state-active: var(
+    --#{tokens.$css-variable-prefix}dynamic-color-chroma-scale-background-state-active,
+    4
+);
+$_chroma-scale-background-selected: var(
+    --#{tokens.$css-variable-prefix}dynamic-color-chroma-scale-background-selected,
+    4
+);
+$_lightness-midpoint: var(
+    --#{tokens.$css-variable-prefix}dynamic-color-lightness-midpoint,
+    0.8
+); // number <0, 1>, light/dark threshold for lightness, higher = lighter colors are considered dark
+$_chroma-lightness-midpoint: var(
+    --#{tokens.$css-variable-prefix}dynamic-color-chroma-lightness-midpoint,
+    0.5
+); // number <0, 1>, light/dark threshold for chroma, lower = more saturation for dark colors
+$_chroma-upper-limit: var(
+    --#{tokens.$css-variable-prefix}dynamic-color-chroma-upper-limit,
+    0.2
+); // number <0, 0.4>, higher = more saturation for dark colors
 
 // Function to generate dynamic color based on an input color.
 // - The lightness term smoothly moves any color toward the mid tone `$_lightness-midpoint`, making light colors darker and dark colors lighter.
@@ -27,13 +57,13 @@ $_chroma-scale-background-selected: 4;
 //
 // Parameters are:
 // * $color: the base color to alter
-// * $lightness-delta: number <0, 1>, lightness change, higher = stronger darken/lighten effect
-// * $chroma-scale: number, chroma change, higher = more saturation change
+// * $lightness-delta: number <0, 1> or CSS custom property (e.g. var(--spirit-dynamic-color-...)),
+//   lightness change, higher = stronger darken/lighten effect; resolved at runtime when using var()
+// * $chroma-scale: number or CSS custom property, chroma change, higher = more saturation change;
+//   resolved at runtime when using var()
+// The midpoint/limit inputs used inside (e.g. $_lightness-midpoint, $_chroma-upper-limit) may also be
+// var() expressions and are resolved at runtime.
 @function alter-color($color, $lightness-delta, $chroma-scale) {
-    $_lightness-midpoint: 0.8; // number <0, 1>, light/dark threshold for lightness, higher = lighter colors are considered dark
-    $_chroma-lightness-midpoint: 0.5; // number <0, 1>, light/dark threshold for chroma, lower = more saturation for dark colors
-    $_chroma-upper-limit: 0.2; // number <0, 0.4>, higher = more saturation for dark colors
-
     @return oklch(
         from #{$color} calc(l + #{$lightness-delta} * (#{$_lightness-midpoint} - l))
             clamp(0, calc(c * (1 + #{$chroma-scale} * (l - #{$_chroma-lightness-midpoint}))), #{$_chroma-upper-limit})
