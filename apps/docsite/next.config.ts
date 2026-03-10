@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname, '../../'),
   transpilePackages: ['@alma-oss/spirit-web-react'],
   reactStrictMode: true,
+  experimental: {
+    globalNotFound: true,
+  },
   sassOptions: {
     fiber: false,
     implementation: 'sass-embedded',
