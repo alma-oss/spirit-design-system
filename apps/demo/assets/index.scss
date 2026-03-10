@@ -1,4 +1,6 @@
 @forward '@alma-oss/spirit-web/src/scss';
+@use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
+@use 'devices/devices' as tokens;
 
 // 1. Expand the page to fill the viewport height to be ready for various themes.
 // 2. Make the footer sticky.
@@ -46,7 +48,7 @@ body {
         text-decoration: none;
     }
 
-    @media (min-width: 768px) {
+    @include breakpoint.up(tokens.$breakpoint-tablet) {
         padding: var(--spirit-space-900);
     }
 }
@@ -61,11 +63,11 @@ body {
     font-weight: var(--spirit-typography-heading-small-bold-mobile-font-weight);
     line-height: var(--spirit-typography-heading-small-bold-mobile-line-height);
 
-    @media (min-width: 768px) {
+    @include breakpoint.up(tokens.$breakpoint-tablet) {
         font-size: var(--spirit-typography-heading-small-bold-tablet-font-size);
     }
 
-    @media (min-width: 1280px) {
+    @include breakpoint.up(tokens.$breakpoint-desktop) {
         font-size: var(--spirit-typography-heading-small-bold-desktop-font-size);
     }
 }
