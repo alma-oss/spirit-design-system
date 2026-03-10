@@ -2,10 +2,10 @@
 
 import { usePathname } from 'next/navigation';
 
-const useIsPage = (page: string) => {
+const useIsPage = (route: string) => {
   const pathname = usePathname();
 
-  return page === '/' ? pathname === '/' : pathname.split('/').includes(page);
+  return pathname === route;
 };
 
 export default useIsPage;

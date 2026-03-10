@@ -1,12 +1,13 @@
 'use client';
 
 import { Navigation, NavigationAction, NavigationItem } from '@alma-oss/spirit-web-react';
+import { routes } from '@local/domains/routing/routes';
+import useIsPage from '@local/hooks/useIsPage';
 import NextLink from 'next/link';
 import React from 'react';
-import useIsPage from '@local/hooks/useIsPage';
 
 const Menu = () => {
-  const isComponentsPage = useIsPage('components');
+  const isComponentsPage = useIsPage(routes.components);
 
   return (
     <Navigation aria-label="Main Navigation" hideOn={['mobile', 'tablet']}>
@@ -14,7 +15,7 @@ const Menu = () => {
         <NavigationAction
           elementType={NextLink}
           variant="pill"
-          href="/components"
+          href={routes.components}
           {...(isComponentsPage && { 'aria-current': true })}
           isSelected={isComponentsPage}
         >

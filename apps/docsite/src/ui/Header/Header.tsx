@@ -1,11 +1,12 @@
 'use client';
 
 import { Container, Flex, UNSTABLE_Header, UNSTABLE_HeaderLogo } from '@alma-oss/spirit-web-react';
+import useIsPage from '@local/hooks/useIsPage';
 import { Menu } from '@local/ui/Menu';
 import SpiritLogo from '@local/ui/SpiritLogo';
 import NextLink from 'next/link';
 import React from 'react';
-import useIsPage from '@local/hooks/useIsPage';
+import { routes } from '../../domains/routing/routes';
 
 interface HeaderProps {
   /**
@@ -36,7 +37,11 @@ const Header = ({ disableClientRouting = false }: HeaderProps) => {
     >
       <Container isFluid>
         <Flex alignmentX="left" spacingX="space-1000">
-          <UNSTABLE_HeaderLogo elementType={disableClientRouting ? 'a' : NextLink} href={routes.home} aria-label="Spirit Development Preview">
+          <UNSTABLE_HeaderLogo
+            elementType={disableClientRouting ? 'a' : NextLink}
+            href={routes.home}
+            aria-label="Spirit Development Preview"
+          >
             <SpiritLogo />
           </UNSTABLE_HeaderLogo>
           <Menu />
