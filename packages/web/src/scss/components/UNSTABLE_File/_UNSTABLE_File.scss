@@ -1,0 +1,101 @@
+// 1. @deprecated `UNSTABLE_File__validationText` will be removed with upcoming major version and replaced with separate component for validation text.
+//    @see https://jira.almacareer.tech/browse/DS-2397
+// 2. @deprecated `UNSTABLE_File__helperText` will be removed with upcoming major version and replaced with separate component for helper text.
+//    @see https://jira.almacareer.tech/browse/DS-2396
+
+@use '@tokens' as tokens;
+@use '../../settings/form-fields' as form-fields-settings;
+@use '../../tools/form-fields' as form-fields-tools;
+@use '../../tools/typography';
+@use 'theme';
+
+$_field-name: 'UNSTABLE_File';
+
+.UNSTABLE_File {
+    @include form-fields-tools.box-field-fluid();
+
+    display: flex;
+    gap: theme.$column-gap;
+    align-items: center;
+    padding: theme.$padding;
+    color: theme.$color;
+    border: theme.$border-width solid transparent;
+    border-radius: theme.$border-radius;
+    background-color: theme.$background;
+}
+
+@include form-fields-tools.input-field-validation-states($_field-name);
+
+.UNSTABLE_File__preview {
+    flex-shrink: 0;
+    width: theme.$preview-size;
+    height: theme.$preview-size;
+    overflow: hidden;
+    border-radius: theme.$preview-border-radius;
+}
+
+.UNSTABLE_File__preview:has(> svg) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: theme.$preview-background;
+}
+
+.UNSTABLE_File__preview:has(> img) {
+    position: relative;
+}
+
+.UNSTABLE_File__preview > svg {
+    width: theme.$preview-content-size;
+    height: theme.$preview-content-size;
+}
+
+.UNSTABLE_File__preview > img {
+    position: absolute;
+    top: var(--#{tokens.$css-variable-prefix}file-image-top, 0);
+    left: var(--#{tokens.$css-variable-prefix}file-image-left, 0);
+    width: var(--#{tokens.$css-variable-prefix}file-image-width, 100%);
+    height: var(--#{tokens.$css-variable-prefix}file-image-height, 100%);
+    object-fit: var(--#{tokens.$css-variable-prefix}file-image-object-fit, cover);
+    object-position: center;
+}
+
+.UNSTABLE_File__content {
+    flex: 1;
+}
+
+.UNSTABLE_File__text {
+    display: flex;
+    flex-direction: column;
+    gap: theme.$text-gap;
+}
+
+.UNSTABLE_File__name {
+    @include typography.generate(theme.$typography);
+
+    display: flex;
+    color: theme.$color;
+}
+
+// 2.
+.UNSTABLE_File__helperText {
+    @include typography.generate(theme.$helper-text-typography);
+
+    color: theme.$helper-text-color;
+}
+
+// 1.
+.UNSTABLE_File__validationText {
+    @include form-fields-tools.validation-text();
+}
+
+// 2.
+.UNSTABLE_File--disabled .UNSTABLE_File__name,
+.UNSTABLE_File--disabled .UNSTABLE_File__helperText {
+    color: form-fields-settings.$label-color-state-disabled;
+}
+
+.UNSTABLE_File--disabled > .UNSTABLE_File__preview {
+    opacity: 0.5;
+    filter: grayscale(100%);
+}

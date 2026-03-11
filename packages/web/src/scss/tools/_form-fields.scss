@@ -183,6 +183,11 @@
                 ~ .#{$field-name}__dropZone {
                 border-color: map.get($validation-state-value, input-border-color);
             }
+        } @else if $field-name == 'UNSTABLE_File' {
+            .#{$field-name}--#{$validation-state-name},
+            .#{$field-name}.has-#{$validation-state-name} {
+                border-color: map.get($validation-state-value, input-border-color);
+            }
         } @else if $field-name == 'Select' {
             :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
                 > .#{$field-name}__inputContainer
