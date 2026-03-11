@@ -1,0 +1,19 @@
+@use '@tokens' as tokens;
+
+$column-gap: tokens.$space-700;
+$padding: tokens.$space-0;
+$typography: tokens.$body-small-semibold;
+$color: tokens.$text-primary;
+$border-width: tokens.$border-width-0;
+$border-radius: tokens.$radius-0;
+$background: transparent;
+
+$preview-size: tokens.$space-1200;
+$preview-background: tokens.$background-secondary;
+$preview-border-radius: tokens.$radius-200;
+$preview-content-size: tokens.$space-800;
+
+$text-gap: tokens.$space-200;
+
+$helper-text-typography: tokens.$body-small-regular;
+$helper-text-color: tokens.$form-field-helper-text;
