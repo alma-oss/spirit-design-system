@@ -13,7 +13,7 @@ const Cover = () => (
       Development Preview
     </Heading>
 
-    <Flex direction="horizontal" alignmentX="center" alignmentY="center">
+    <Flex alignmentX="center" alignmentY="center">
       <Button elementType={NextLink} size="large" href="https://spirit.supernova-docs.io/spirit/">
         Docs
       </Button>

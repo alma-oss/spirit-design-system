@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://spiritdesignsystem.com'),
 };
 
-const RootLayout = ({ children }: { children: ReactNode }) => (
+const RootLayout = ({ children }: RootLayoutProps) => (
   <html lang="en">
     <body className={`${inter.className} antialiased`}>
       <AppProvider>{children}</AppProvider>
