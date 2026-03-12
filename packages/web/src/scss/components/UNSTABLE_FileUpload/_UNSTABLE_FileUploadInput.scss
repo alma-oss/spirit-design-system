@@ -6,52 +6,11 @@
 @use '../../tools/accessibility';
 @use '../../tools/breakpoint';
 @use '../../tools/form-fields' as form-fields-tools;
-@use '../../tools/links';
+@use '../../tools/pseudo-element';
 @use '../../tools/typography';
 @use 'theme';
 
 $_field-name: 'UNSTABLE_FileUploadInput';
-
-// @see https://jira.almacareer.tech/browse/DS-2395
-// @deprecated Will be removed in Release 5 and replaced with separate components for label.
-.UNSTABLE_FileUploadInput__label {
-    @include form-fields-tools.box-field-label();
-}
-
-.UNSTABLE_FileUploadInput__label--hidden {
-    @include form-fields-tools.label-hidden();
-}
-
-.UNSTABLE_FileUploadInput__label--required::after {
-    @include form-fields-tools.label-required();
-}
-
-.UNSTABLE_FileUploadInput--disabled > .UNSTABLE_FileUploadInput__label {
-    @include form-fields-tools.label-disabled();
-}
-
-// @see https://jira.almacareer.tech/browse/DS-2396
-// @deprecated Will be removed in Release 5 and replaced with separate components for helper text.
-.UNSTABLE_FileUploadInput__helperText {
-    @include form-fields-tools.helper-text();
-}
-
-:is(.UNSTABLE_FileUploadInput--disabled, .UNSTABLE_FileUploadInput.is-disabled) .UNSTABLE_FileUploadInput__helperText {
-    @include form-fields-tools.helper-text-disabled();
-}
-
-// @see https://jira.almacareer.tech/browse/DS-2397
-// @deprecated Will be removed in Release 5 and replaced with separate components for validation text.
-@include form-fields-tools.input-field-validation-states($_field-name);
-
-.UNSTABLE_FileUploadInput__validationText {
-    @include form-fields-tools.validation-text();
-}
-
-:is(.UNSTABLE_FileUploadInput--disabled, .UNSTABLE_FileUploadInput.is-disabled)
-    :is(.UNSTABLE_FileUploadInput__validationText) {
-    @include form-fields-tools.validation-text-disabled();
-}
 
 .UNSTABLE_FileUploadInput__input {
     @include accessibility.hide-text();
@@ -90,7 +49,7 @@ $_field-name: 'UNSTABLE_FileUploadInput';
 }
 
 .UNSTABLE_FileUploadInput__dropZoneLabel {
-    @include links.stretch(); // 1.
+    @include pseudo-element.stretch(); // 1.
     @include typography.generate(theme.$input-drop-zone-label-typography);
 
     color: theme.$input-drop-zone-label-color;
@@ -124,6 +83,8 @@ $_field-name: 'UNSTABLE_FileUploadInput';
 .UNSTABLE_FileUploadInput.is-dragging > .UNSTABLE_FileUploadInput__dropZone {
     border-color: theme.$input-drop-zone-border-color-state-dragging;
 }
+
+@include form-fields-tools.input-field-validation-states($_field-name);
 
 .UNSTABLE_FileUploadInput__dropZone--disabled,
 .UNSTABLE_FileUploadInput__dropZone--disabled .UNSTABLE_FileUploadInput__dropZoneLabel {
