@@ -117,6 +117,43 @@ Set a background and text color on the parent element:
 
 This works with any pair of available background and text colors.
 
+## Disabled State
+
+Use the `isDisabled` prop to disable a ControlButton:
+
+```tsx
+<ControlButton isSymmetrical isDisabled aria-label="Close">
+  <Icon name="close" />
+</ControlButton>
+```
+
+The `isDisabled` prop sets both the native `disabled` attribute and the `ControlButton--disabled` class,
+ensuring proper behavior. To achieve proper styles, use `color-scheme-on-disabled` class on the parent element or directly on the ControlButton.
+
+### Color Scheme for Disabled State
+
+**Parent component handles the color scheme:**
+
+```tsx
+<Box UNSAFE_className="color-scheme-on-disabled">
+  <ControlButton isSymmetrical isDisabled aria-label="Previous">
+    <Icon name="chevron-left" />
+  </ControlButton>
+  <span>Disabled content</span>
+  <ControlButton isSymmetrical isDisabled aria-label="Next">
+    <Icon name="chevron-right" />
+  </ControlButton>
+</Box>
+```
+
+**Standalone ControlButton:**
+
+```tsx
+<ControlButton isSymmetrical isDisabled aria-label="Close" UNSAFE_className="color-scheme-on-disabled">
+  <Icon name="close" />
+</ControlButton>
+```
+
 ## Accessibility
 
 For icon-only buttons, always include an accessible label using the `aria-label` attribute:
@@ -133,7 +170,7 @@ For icon-only buttons, always include an accessible label using the `aria-label`
 | --------------- | ---------------------------------- | -------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
 | `children`      | `ReactNode`                        | `null`   | ✕        | Content of the button                                                                                                 |
 | `elementType`   | `ElementType`                      | `button` | ✕        | HTML element type or React component                                                                                  |
-| `isDisabled`    | `bool`                             | `false`  | ✕        | Whether the button is disabled                                                                                        |
+| `isDisabled`    | `bool`                             | `false`  | ✕        | Whether the button is disabled, see [Disabled State](#disabled-state)                                                 |
 | `isSubtle`      | `bool`                             | `false`  | ✕        | Whether the button is in subtle variant (no border)                                                                   |
 | `isSymmetrical` | \[`bool` \| `Responsive<bool>`]    | `false`  | ✕        | Whether the button should be symmetrical, use object to set responsive values, e.g. `{ mobile: true, tablet: false }` |
 | `onClick`       | `(event: ClickEvent) => void`      | —        | ✕        | Click handler                                                                                                         |

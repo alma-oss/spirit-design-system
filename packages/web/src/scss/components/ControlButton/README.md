@@ -219,6 +219,56 @@ Symmetrical on mobile and tablet, not on desktop (combine breakpoint-specific cl
 </button>
 ```
 
+## Disabled State
+
+Use the `disabled` attribute to disable a ControlButton. This will also apply the `ControlButton--disabled` class, ensuring proper behavior.
+To achieve proper styles, use `color-scheme-on-disabled` class on the parent element or directly on the ControlButton.
+
+### Color Scheme for Disabled State
+
+**Parent component handles the color scheme:**
+
+```html
+<div class="color-scheme-on-disabled">
+  <button
+    type="button"
+    class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target"
+    aria-label="Previous"
+    disabled
+  >
+    <svg class="Icon" width="16" height="16" aria-hidden="true">
+      <use xlink:href="/icons/svg/sprite.svg#chevron-left" />
+    </svg>
+  </button>
+  <span>Disabled content</span>
+  <button
+    type="button"
+    class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target"
+    aria-label="Next"
+    disabled
+  >
+    <svg class="Icon" width="16" height="16" aria-hidden="true">
+      <use xlink:href="/icons/svg/sprite.svg#chevron-right" />
+    </svg>
+  </button>
+</div>
+```
+
+**Standalone ControlButton:**
+
+```html
+<button
+  type="button"
+  class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target color-scheme-on-disabled"
+  aria-label="Close"
+  disabled
+>
+  <svg class="Icon" width="16" height="16" aria-hidden="true">
+    <use xlink:href="/icons/svg/sprite.svg#close" />
+  </svg>
+</button>
+```
+
 ## Accessibility
 
 For icon-only buttons, always include an accessible label, for example, using

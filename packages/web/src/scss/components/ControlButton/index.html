@@ -377,4 +377,67 @@
   </div>
 </section>
 
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Disabled State</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+      <h3>Color Scheme on Parent</h3>
+
+      <div class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter p-800 color-scheme-on-disabled">
+        <button
+          type="button"
+          class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
+          aria-label="Previous"
+          disabled
+        >
+          <svg class="Icon" width="16" height="16" aria-hidden="true">
+            <use xlink:href="/assets/icons/svg/sprite.svg#chevron-left" />
+          </svg>
+        </button>
+
+        <span class="mx-400">Disabled content</span>
+
+        <button
+          type="button"
+          class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
+          aria-label="Next"
+          disabled
+        >
+          <svg class="Icon" width="16" height="16" aria-hidden="true">
+            <use xlink:href="/assets/icons/svg/sprite.svg#chevron-right" />
+          </svg>
+        </button>
+      </div>
+
+      <h3>Color Scheme on Component</h3>
+
+      <div class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter">
+        <button
+          type="button"
+          class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target color-scheme-on-disabled"
+          aria-label="Close"
+          disabled
+        >
+          <svg class="Icon" width="16" height="16" aria-hidden="true">
+            <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground dynamic-color-background-interactive dynamic-color-border accessibility-tap-target color-scheme-on-disabled"
+          aria-label="Close"
+          disabled
+        >
+          <svg class="Icon" width="16" height="16" aria-hidden="true">
+            <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 {{/web/layout/default }}
