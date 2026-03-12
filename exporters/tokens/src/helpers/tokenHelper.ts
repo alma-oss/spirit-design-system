@@ -340,20 +340,6 @@ const normalizeFontWeight = (fontWeightText: string): number | string => {
   return Number.isNaN(parsedValue) ? fontWeightText : parsedValue;
 };
 
-const calculateLineHeightRatio = (lineHeight: TypographyTokenValue['lineHeight'], baseFontSize: number) => {
-  if (!lineHeight?.measure || baseFontSize <= 0) {
-    return undefined;
-  }
-
-  if (lineHeight.unit !== PIXEL_UNIT) {
-    return undefined;
-  }
-
-  const ratio = lineHeight.measure / baseFontSize;
-
-  return ratio;
-};
-
 export const typographyValue = (
   { fontFamily, fontSize, fontWeight, lineHeight }: TypographyTokenValue,
   isItalic: boolean,
@@ -374,15 +360,14 @@ export const typographyValue = (
     fontSizeValue = `'${fontSizeMeasure}${fontSizeUnit}'`;
   }
 
-  let lineHeightRatio: number | undefined;
-  if (baseFontSize > 0) {
-    lineHeightRatio = calculateLineHeightRatio(lineHeight, baseFontSize);
-  } else if (fontSize?.measure && lineHeight?.measure && fontSize.measure > 0) {
+  let lineHeightValue: string | undefined;
+  if (fontSize?.measure && lineHeight?.measure && fontSize.measure > 0) {
     if (fontSize.unit === PIXEL_UNIT && lineHeight.unit === PIXEL_UNIT) {
-      lineHeightRatio = lineHeight.measure / fontSize.measure;
+      // Calculate unitless ratio relative to fontSize (proper CSS line-height)
+      const ratio = lineHeight.measure / fontSize.measure;
+      lineHeightValue = ratio.toFixed(2);
     }
   }
-  const lineHeightValue = lineHeightRatio !== undefined ? lineHeightRatio.toFixed(2) : undefined;
 
   const typographyObject: TypographyShape = {
     fontFamily: `${fontName}`,
