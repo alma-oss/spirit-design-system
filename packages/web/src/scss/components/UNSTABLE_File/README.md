@@ -20,7 +20,7 @@ It is a standalone component, but most often it is used in combination with the 
         <span class="UNSTABLE_File__name">
           <span class="text-truncate">Document.pdf</span>
         </span>
-        <span class="UNSTABLE_File__helperText">8,5 kB</span>
+        <span class="HelperText">8,5 kB</span>
       </div>
     </div>
     <div
@@ -128,7 +128,7 @@ Show upload progress using `.UNSTABLE_File__helperText`:
       <span class="UNSTABLE_File__name">
         <span class="text-truncate">Document.pdf</span>
       </span>
-      <div class="UNSTABLE_File__helperText">
+      <div class="HelperText">
         <div>
           <svg class="Icon animation-spin-clockwise" width="16" height="16" aria-hidden="true">
             <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
@@ -156,7 +156,7 @@ Show upload progress using `.UNSTABLE_File__helperText`:
       <span class="UNSTABLE_File__name">
         <span class="text-truncate">Document.pdf</span>
       </span>
-      <span class="UNSTABLE_File__helperText">8,5 kB</span>
+      <span class="HelperText HelperText--disabled">8,5 kB</span>
     </div>
   </div>
   <button

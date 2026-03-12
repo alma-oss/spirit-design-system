@@ -12,7 +12,7 @@ displaying chosen options as tags with a trigger button, and optional helper or 
 
 ```txt
 UNSTABLE_Picker
-├── UNSTABLE_Picker__label
+├── Label
 ├── Dropdown
 │   ├── UNSTABLE_Picker__inputContainer   role="group"
 │   │   ├── UNSTABLE_Picker__selection    role="group" (empty) · role="grid" (selected)
@@ -24,8 +24,8 @@ UNSTABLE_Picker
 │   │   └── UNSTABLE_Picker__trigger     aria-haspopup="dialog"
 │   └── DropdownPopover                  role="dialog"
 │       └── FieldGroup                   (checkboxes or custom content)
-├── UNSTABLE_Picker__helperText          (optional)
-└── UNSTABLE_Picker__validationText      (optional)
+├── HelperText                           (optional)
+└── ValidationText                       (optional)
 ```
 
 ⚠️ The DropdownPopover is rendered using absolute positioning relative to the trigger. Make sure there is
@@ -34,7 +34,7 @@ overflow its scrollable container or get clipped.
 
 ```html
 <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
-  <span class="UNSTABLE_Picker__label">Languages</span>
+  <span class="Label">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
       <div
@@ -71,7 +71,7 @@ overflow its scrollable container or get clipped.
           <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
             <input type="checkbox" id="lang-cs" class="Checkbox__input" name="language" />
             <div class="Checkbox__text">
-              <label class="Checkbox__label" for="lang-cs">Czech</label>
+              <label class="Label Label--inline" for="lang-cs">Czech</label>
             </div>
           </div>
           <!-- More checkboxes… -->
@@ -132,12 +132,12 @@ Place a hidden `<span>` with a unique `id` anywhere in the `<body>` and referenc
 
 ## Hidden Label
 
-Use the `UNSTABLE_Picker__label--hidden` modifier to visually hide the label while keeping it
+Use the `accessibility-hidden` helper to visually hide the label while keeping it
 accessible to screen readers.
 
 ```html
 <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
-  <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--hidden">Languages</span>
+  <span class="Label accessibility-hidden">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
       <!-- … -->
@@ -149,14 +149,14 @@ accessible to screen readers.
 
 ## Required
 
-Mark the Picker as required using the `UNSTABLE_Picker__label--required` modifier. This displays
+Mark the Picker as required using the `Label--required` modifier. This displays
 a red asterisk after the label text.
 
 ⚠️ The required state is only indicative and does not add any technical validation to the component.
 
 ```html
 <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
-  <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--required">Languages</span>
+  <span class="Label Label--required">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
       <!-- … -->
@@ -181,7 +181,7 @@ Each Picker size expects a matching Tag and ControlButton size inside the select
 
 ```html
 <div class="UNSTABLE_Picker UNSTABLE_Picker--large">
-  <span class="UNSTABLE_Picker__label">Languages</span>
+  <span class="Label">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
       <div role="grid" aria-label="Selected languages" class="UNSTABLE_Picker__selection">
@@ -209,13 +209,13 @@ Each Picker size expects a matching Tag and ControlButton size inside the select
 
 ## Helper Text
 
-Add supplementary information below the input using the `UNSTABLE_Picker__helperText` element.
+Add supplementary information below the input using the `HelperText` component.
 Give it a unique `id` and reference it via `aria-describedby` on the selection element so screen
 readers announce the hint when the selection area receives focus.
 
 ```html
 <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
-  <span class="UNSTABLE_Picker__label">Languages</span>
+  <span class="Label">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
       <div
@@ -230,14 +230,14 @@ readers announce the hint when the selection area receives focus.
     </div>
     <!-- … -->
   </div>
-  <div id="picker-helper-text" class="UNSTABLE_Picker__helperText">Select one or more languages</div>
+  <div id="picker-helper-text" class="HelperText">Select one or more languages</div>
 </div>
 ```
 
 ## Validation States
 
 Validation states visually communicate feedback to the user. Apply a validation modifier class on
-the root element and use `UNSTABLE_Picker__validationText` for the message. Give it a unique `id`
+the root element and use `ValidationText` component for the message. Give it a unique `id`
 and reference it via `aria-describedby` on the selection element so screen readers announce the
 message when the selection area receives focus.
 
@@ -245,7 +245,7 @@ Available validation states: `danger`, `warning`, `success`.
 
 ```html
 <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--danger">
-  <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--required">Languages</span>
+  <span class="Label Label--required">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
       <div
@@ -260,7 +260,9 @@ Available validation states: `danger`, `warning`, `success`.
     </div>
     <!-- … -->
   </div>
-  <div id="picker-validation-text" class="UNSTABLE_Picker__validationText">Please select at least one language</div>
+  <div id="picker-validation-text" class="ValidationText ValidationText--danger">
+    Please select at least one language
+  </div>
 </div>
 ```
 
@@ -272,7 +274,7 @@ area (remove buttons) to disable the Picker.
 
 ```html
 <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--disabled">
-  <span class="UNSTABLE_Picker__label">Languages</span>
+  <span class="Label Label--disabled">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
       <div role="grid" aria-label="Selected languages" class="UNSTABLE_Picker__selection">
@@ -314,7 +316,7 @@ area (remove buttons) to disable the Picker.
           <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
             <input type="checkbox" id="lang-disabled-cs" class="Checkbox__input" name="language" checked disabled />
             <div class="Checkbox__text">
-              <label class="Checkbox__label" for="lang-disabled-cs">Czech</label>
+              <label class="Label Label--inline" for="lang-disabled-cs">Czech</label>
             </div>
           </div>
           <!-- More checkboxes… -->
@@ -331,7 +333,7 @@ Use the `UNSTABLE_Picker--fluid` modifier to make the Picker span the full width
 
 ```html
 <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--fluid">
-  <span class="UNSTABLE_Picker__label">Languages</span>
+  <span class="Label">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
       <!-- … -->
