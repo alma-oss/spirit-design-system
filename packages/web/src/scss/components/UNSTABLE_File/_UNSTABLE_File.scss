@@ -1,10 +1,4 @@
-// 1. @deprecated `UNSTABLE_File__validationText` will be removed with upcoming major version and replaced with separate component for validation text.
-//    @see https://jira.almacareer.tech/browse/DS-2397
-// 2. @deprecated `UNSTABLE_File__helperText` will be removed with upcoming major version and replaced with separate component for helper text.
-//    @see https://jira.almacareer.tech/browse/DS-2396
-
 @use '@tokens' as tokens;
-@use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/typography';
 @use 'theme';
@@ -65,6 +59,8 @@ $_field-name: 'UNSTABLE_File';
 }
 
 .UNSTABLE_File__text {
+    --#{tokens.$css-variable-prefix}helper-text-margin-top: 0;
+
     display: flex;
     flex-direction: column;
     gap: theme.$text-gap;
@@ -77,22 +73,8 @@ $_field-name: 'UNSTABLE_File';
     color: theme.$color;
 }
 
-// 2.
-.UNSTABLE_File__helperText {
-    @include typography.generate(theme.$helper-text-typography);
-
-    color: theme.$helper-text-color;
-}
-
-// 1.
-.UNSTABLE_File__validationText {
-    @include form-fields-tools.validation-text();
-}
-
-// 2.
-.UNSTABLE_File--disabled .UNSTABLE_File__name,
-.UNSTABLE_File--disabled .UNSTABLE_File__helperText {
-    color: form-fields-settings.$label-color-state-disabled;
+.UNSTABLE_File--disabled .UNSTABLE_File__name {
+    color: theme.$color-state-disabled;
 }
 
 .UNSTABLE_File--disabled > .UNSTABLE_File__preview {
