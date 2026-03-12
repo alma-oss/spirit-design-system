@@ -20,6 +20,7 @@ import CardMediaSizes from './CardMediaSizes';
 import CardResponsiveCard from './CardResponsiveCard';
 import CardReversedHorizontalLayout from './CardReversedHorizontalLayout';
 import CardText from './CardText';
+import CardTitleAlternatives from './CardTitleAlternatives';
 import CardTitleOptions from './CardTitleOptions';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
@@ -54,6 +55,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Title Options">
         <CardTitleOptions />
+      </DocsSection>
+      <DocsSection title="Title with Heading or Text">
+        <CardTitleAlternatives />
       </DocsSection>
       <DocsSection title="Footer Alignment">
         <CardFooterAlignment />

@@ -352,6 +352,45 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
+#### Using Heading or Text as the Card Title
+
+You can use the [Heading][heading] or [Text][text] components instead of CardTitle when you want more control over
+typography or semantics. CardTitle is a convenience wrapper that provides:
+
+- Default primary text color
+- Bottom margin to separate the title from following content (`space-500`)
+- Optional heading-style emphasis (heading typography when `isHeading` is true, body typography when false)
+
+When using Heading or Text, you keep typography and semantics from those primitives and handle the card-specific
+styling yourself: set `textColor="primary"` and `marginBottom="space-500"` so the title matches Card’s visual rhythm.
+
+**Heading as title (heading-style):**
+
+```tsx
+<CardBody>
+  <Heading elementType="h4" size="xsmall" emphasis="semibold" textColor="primary" marginBottom="space-500">
+    <CardLink href="#">Card title</CardLink>
+  </Heading>
+  <p>Card content</p>
+</CardBody>
+```
+
+**Text as title (body-style):**
+
+```tsx
+<CardBody>
+  <Text elementType="h4" size="large" emphasis="regular" textColor="primary" marginBottom="space-500">
+    <CardLink href="#">Card title</CardLink>
+  </Text>
+  <p>Card content</p>
+</CardBody>
+```
+
+ℹ️ The `marginBottom` is needed only when the Heading or Text is followed by other content.
+
+👉 See below how to [make the whole card clickable](#making-the-whole-card-clickable) with CardLink; the same pattern
+applies whether the title wrapper is CardTitle, Heading, or Text.
+
 ### CardEyebrow
 
 CardEyebrow is an optional subcomponent that accompanies the CardTitle.
@@ -526,6 +565,7 @@ When you put it all together:
 [dictionary-intensity]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#intensity
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
+[heading]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Heading/README.md
 [heydon-pickering-card]: https://inclusive-components.design/cards/
 [hugo-giraudel-card]: https://kittygiraudel.com/2022/04/02/accessible-cards/
 [mdn-object-fit]: https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
@@ -534,3 +574,4 @@ When you put it all together:
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#api-generated-types
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Text/README.md

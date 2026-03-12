@@ -328,6 +328,39 @@ To emphasize the CardTitle, you can use the `CardTitle--heading` modifier:
 
 👉 See below how to extend the link in CardTitle to [make the whole card clickable](#making-the-whole-card-clickable).
 
+#### Using Heading or Text Helpers Instead of CardTitle
+
+You can use typography and color utility classes instead of the `CardTitle` class when you want more control over
+the title’s typography. CardTitle provides:
+
+- Default primary text color
+- Bottom margin to separate the title from following content (Card uses the `space-500` token)
+- Optional heading-style emphasis (heading typography with `CardTitle--heading`, or body typography without it)
+
+When using heading/text helpers, you need to apply the text color and bottom margin explicitly
+to match Card’s visual rhythm.
+
+**Heading-style title (matches `CardTitle--heading`):**
+
+```html
+<h4 class="typography-heading-xsmall-semibold text-primary mb-500">
+  <a href="#" class="CardLink">Card title</a>
+</h4>
+```
+
+**Body-style title (matches `CardTitle` without the heading modifier):**
+
+```html
+<h4 class="typography-body-large-regular text-primary mb-500">
+  <a href="#" class="CardLink">Card title</a>
+</h4>
+```
+
+ℹ️ The margin bottom is needed only when the heading/text is followed by other content.
+
+👉 See below how to [make the whole card clickable](#making-the-whole-card-clickable); the same CardLink pattern
+applies whether the title uses `CardTitle` or the helper classes above.
+
 ### CardEyebrow
 
 CardEyebrow is an optional subcomponent that accompanies the CardTitle.
