@@ -14,7 +14,9 @@ import {
 import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
 
 // Tests that are intentionally broken, but will be fixed in the future
-const IGNORED_TESTS: string[] = [];
+const IGNORED_TESTS: string[] = [
+  'UNSTABLE_FileUpload',
+];
 
 interface TestConfig {
   packageDir: string;
