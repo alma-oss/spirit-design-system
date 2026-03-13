@@ -31,6 +31,7 @@ const FileUploaderInput = (props: SpiritFileUploaderInputProps) => {
     linkText,
     maxFileSize = DEFAULT_FILE_SIZE_LIMIT,
     maxUploadedFiles = DEFAULT_FILE_QUEUE_LIMIT,
+    name,
     onError,
     queueLimitBehavior = 'none',
     validationState,
@@ -97,6 +98,7 @@ const FileUploaderInput = (props: SpiritFileUploaderInputProps) => {
         accept={accept}
         id={id}
         ref={inputRef}
+        name={name}
         className={classProps.input.input}
         onChange={onChange}
         multiple={isMultiple}

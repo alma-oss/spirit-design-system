@@ -56,4 +56,16 @@ describe('FileUploaderInput', () => {
     expect(element).toHaveTextContent('Upload File');
     expect(element.innerHTML).toBe('Upload <b>File</b>');
   });
+
+  it('should not have `name` attribute on root div element', () => {
+    render(<FileUploaderInput id="test-uploader" name="test-uploader" label="upload" data-testid="test" />);
+
+    const elements = screen.getAllByTestId('test');
+    const rootDiv = elements[0];
+    const input = document.querySelector('input[type="file"]') as HTMLInputElement;
+
+    expect(rootDiv).not.toHaveAttribute('name');
+    expect(rootDiv.localName).toBe('div');
+    expect(input).toHaveAttribute('name', 'test-uploader');
+  });
 });
