@@ -22,7 +22,12 @@
 
     @each $key, $values in $tokens {
         // 1.
-        $formatted-key: if(meta.type-of($key) == 'number', tokens-tools.format-numeric-key($key), $key);
+        $formatted-key: $key;
+
+        @if meta.type-of($key) == 'number' {
+            $formatted-key: tokens-tools.format-numeric-key($key);
+        }
+
         $background-basic: map.get($values, 'background-basic');
         $background-subtle: map.get($values, 'background-subtle');
         $content-basic: map.get($values, 'content-basic');
