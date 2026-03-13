@@ -10,7 +10,6 @@ describe('useTextFieldBaseStyleProps', () => {
 
     expect(result.current.classProps).toStrictEqual({
       counter: 'TextField__counter',
-      helperText: 'TextField__helperText',
       input: 'TextField__input',
       label: 'TextField__label',
       passwordToggle: 'TextField__passwordToggle',

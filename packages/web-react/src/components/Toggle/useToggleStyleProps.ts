@@ -8,7 +8,6 @@ export interface ToggleStyles<T> {
     root: string;
     label: string;
     text: string;
-    helperText: string;
     input: string;
     validationText: string;
   };
@@ -38,7 +37,6 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
   const toggleInputClass = `${toggleClass}__input`;
   const toggleInputIndicatorsClass = `${toggleInputClass}--indicators`;
   const toggleInputPositionClass = useInputPositionClass(toggleClass, inputPosition);
-  const toggleHelperTextClass = `${toggleClass}__helperText`;
   const toggleValidationTextClass = `${toggleClass}__validationText`;
 
   return {
@@ -54,10 +52,14 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
         [toggleHiddenLabelClass]: isLabelHidden,
       }),
       text: toggleTextClass,
+<<<<<<< HEAD
       helperText: toggleHelperTextClass,
       input: classNames(toggleInputClass, {
         [toggleInputIndicatorsClass]: hasIndicators,
       }),
+=======
+      input: inputClass,
+>>>>>>> 92c17dc32 (refactor(web-react): extract `HelperText` and move `useAriaIds` to shared hooks #DS-2398)
       validationText: toggleValidationTextClass,
     },
     props: { ...restProps, validationState, isDisabled, isRequired },

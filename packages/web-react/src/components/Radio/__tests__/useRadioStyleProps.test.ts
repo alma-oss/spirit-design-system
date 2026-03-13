@@ -13,7 +13,6 @@ describe('useRadioStyleProps', () => {
       text: 'Radio__text',
       input: 'Radio__input',
       label: 'Radio__label',
-      helperText: 'Radio__helperText',
     });
   });
 

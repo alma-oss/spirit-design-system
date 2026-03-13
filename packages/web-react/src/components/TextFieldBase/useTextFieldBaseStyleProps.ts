@@ -8,7 +8,6 @@ export interface TextFieldBaseStyles {
     root: string;
     label: string;
     input: string;
-    helperText: string;
     validationText: string;
     passwordToggle: string;
     passwordToggleButton: string;
@@ -23,6 +22,7 @@ export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps,
   const { isFluid, isMultiline, isLabelHidden, size, validationState, ...restProps } = props;
   const { isDisabled, isRequired } = restProps;
 
+<<<<<<< HEAD
   const textFieldBaseClass = useClassNamePrefix(isMultiline ? 'TextArea' : 'TextField');
   const textFieldBaseDisabledClass = `${textFieldBaseClass}--disabled`;
   const textFieldBaseFluidClass = `${textFieldBaseClass}--fluid`;
@@ -58,6 +58,44 @@ export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps,
       passwordToggleButton: textFieldBasePasswordToggleButtonClass,
       passwordToggleIcon: textFieldBasePasswordToggleIconClass,
       counter: textFieldBaseCounterClass,
+=======
+  const TextFieldBaseClass = useClassNamePrefix(isMultiline ? 'TextArea' : 'TextField');
+  const TextFieldBaseDisabledClass = `${TextFieldBaseClass}--disabled`;
+  const TextFieldBaseFluidClass = `${TextFieldBaseClass}--fluid`;
+  const TextFieldBaseSizeClass = `${TextFieldBaseClass}--${size}`;
+  const TextFieldBaseValidationClass = `${TextFieldBaseClass}--${validationState}`;
+  const TextFieldBaseInputClass = `${TextFieldBaseClass}__input`;
+  const TextFieldBaseLabelClass = `${TextFieldBaseClass}__label`;
+  const TextFieldBaseLabelRequiredClass = `${TextFieldBaseClass}__label--required`;
+  const TextFieldBaseLabelHiddenClass = `${TextFieldBaseClass}__label--hidden`;
+  const TextFieldBaseValidationTextClass = `${TextFieldBaseClass}__validationText`;
+  const TextFieldBasePasswordToggleClass = `${TextFieldBaseClass}__passwordToggle`;
+  const TextFieldBasePasswordToggleButtonClass = `${TextFieldBaseClass}__passwordToggle__button`;
+  const TextFieldBasePasswordToggleIconClass = `${TextFieldBaseClass}__passwordToggle__icon`;
+
+  const rootStyles = classNames(TextFieldBaseClass, {
+    [TextFieldBaseDisabledClass]: isDisabled,
+    [TextFieldBaseFluidClass]: isFluid,
+    [TextFieldBaseValidationClass]: validationState,
+    [TextFieldBaseSizeClass]: size,
+  });
+  const labelStyles = classNames(TextFieldBaseLabelClass, {
+    [TextFieldBaseLabelRequiredClass]: isRequired,
+    [TextFieldBaseLabelHiddenClass]: isLabelHidden,
+  });
+  const counterStyles = `${TextFieldBaseClass}__counter`;
+
+  return {
+    classProps: {
+      root: rootStyles,
+      label: labelStyles,
+      input: TextFieldBaseInputClass,
+      validationText: TextFieldBaseValidationTextClass,
+      passwordToggle: TextFieldBasePasswordToggleClass,
+      passwordToggleButton: TextFieldBasePasswordToggleButtonClass,
+      passwordToggleIcon: TextFieldBasePasswordToggleIconClass,
+      counter: counterStyles,
+>>>>>>> 92c17dc32 (refactor(web-react): extract `HelperText` and move `useAriaIds` to shared hooks #DS-2398)
     },
     props: {
       ...restProps,

@@ -14,7 +14,6 @@ describe('useCheckboxStyleProps', () => {
       input: 'Checkbox__input',
       label: 'Checkbox__label',
       validationText: 'Checkbox__validationText',
-      helperText: 'Checkbox__helperText',
     });
   });
 
