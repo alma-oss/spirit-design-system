@@ -72,7 +72,6 @@ describe('Toggle', () => {
     const helperText = screen.getByText('Helper Text');
 
     expect(helperText).toBeInTheDocument();
-    expect(helperText).toHaveClass('Toggle__helperText');
   });
 
   it('should have correct attribute when checked', () => {

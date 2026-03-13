@@ -1,9 +1,9 @@
-import { type ElementType, type ReactNode } from 'react';
-import { type RegisterType } from '../../hooks/useAriaIdRefs';
+import { type ElementType } from 'react';
 import {
   type ChildrenProps,
-  type PolymorphicComponentProps,
+  type RegisterType,
   type StyleProps,
+  type TransferProps,
   type ValidationTextProp,
 } from '../../types';
 
@@ -13,13 +13,5 @@ export interface FieldBaseProps {
   registerAria?: RegisterType;
 }
 
-export interface HelperTextBaseProps extends FieldBaseProps, StyleProps, ChildrenProps {
-  helperText: ReactNode;
-}
-
-export interface ValidationTextBaseProps extends FieldBaseProps, ValidationTextProp, StyleProps, ChildrenProps {}
-
-/** ===== PUBLIC API ===== */
-export type HelperTextProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, HelperTextBaseProps>;
-
-export type ValidationTextProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, ValidationTextBaseProps>;
+export interface ValidationTextProps<T extends ElementType = 'div'>
+  extends FieldProps<T>, ValidationTextProp, StyleProps, ChildrenProps, TransferProps {}
