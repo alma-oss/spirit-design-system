@@ -41,37 +41,6 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
-## HelperText
-
-The HelperText subcomponent displays helper texts for Field components like TextField, TextArea, Checkbox, FileUploader, etc.
-
-```tsx
-<HelperText UNSAFE_className="Component__helperText" helperText="Helper text" />
-```
-
-Advanced example:
-
-```tsx
-<HelperText
-  id="component__helperText"
-  UNSAFE_className="Component__helperText"
-  elementType="span"
-  helperText="Helper text"
-/>
-```
-
-### API
-
-| Name          | Type                            | Default | Required | Description                                                                                    |
-| ------------- | ------------------------------- | ------- | -------- | ---------------------------------------------------------------------------------------------- |
-| `elementType` | \[`span` \| `div`]              | `div`   | ✕        | Type of element used as main wrapper (applied only for single validation text, otherwise `ul`) |
-| `helperText`  | \[`ReactNode` \| `ReactNode[]`] | —       | ✕        | Validation text, only visible if validationState is                                            |
-| `id`          | `string`                        | —       | ✕        | Component id                                                                                   |
-
-On top of the API options, the components accept [additional attributes][readme-additional-attributes].
-If you need more control over the styling of a component, you can use [style props][readme-style-props]
-and [escape hatches][readme-escape-hatches].
-
 ## Label
 
 The `Label` component is used to associate text with a form control, such as an input, checkbox, or radio button.

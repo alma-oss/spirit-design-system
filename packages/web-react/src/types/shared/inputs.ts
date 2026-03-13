@@ -1,10 +1,36 @@
-import { type AriaRole, type ReactNode } from 'react';
-import { type InputPositions } from '../../constants';
+import { type AriaRole, type ElementType, type ReactNode } from 'react';
+import { FormFieldVariants, type InputPositions } from '../../constants';
 import { type ValidationStatesDictionaryType } from './dictionaries';
 
 export type ValidationState = ValidationStatesDictionaryType;
 
 export type ValidationTextType = ReactNode | ReactNode[];
+
+export { FormFieldVariants };
+export type FormFieldVariant = (typeof FormFieldVariants)[keyof typeof FormFieldVariants];
+
+export type RegisterParams = { add?: string; remove?: string };
+
+export type RegisterType = (params: RegisterParams) => void;
+
+export interface FormFieldElementTypeProps<E extends ElementType = 'div'> {
+  /**
+   * The HTML element or React element used to render the form field element, e.g. 'div', 'span'.
+   *
+   * @default 'div'
+   */
+  elementType?: E;
+}
+
+export interface FormFieldProps<E extends ElementType = 'div'> extends FormFieldElementTypeProps<E> {
+  id?: string;
+  registerAria?: RegisterType;
+}
+
+export interface FormFieldContextValue {
+  isDisabled?: boolean;
+  formFieldVariant?: FormFieldVariant;
+}
 
 export interface Validation {
   /** Whether the input should display its "valid" or "invalid" visual styling. */

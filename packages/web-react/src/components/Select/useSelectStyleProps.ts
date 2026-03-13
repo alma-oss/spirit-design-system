@@ -18,7 +18,6 @@ export interface UseSelectStyleReturn {
     input: string;
     icon: string;
     validationText: string;
-    helperText: string;
   };
 }
 
@@ -38,11 +37,18 @@ export const useSelectStyleProps = ({
   const selectLabelClass = `${selectClass}__label`;
   const selectLabelRequiredClass = `${selectLabelClass}--required`;
   const selectLabelHiddenClass = `${selectLabelClass}--hidden`;
+<<<<<<< HEAD
   const selectContainerClass = `${selectClass}__inputContainer`;
   const selectInputClass = `${selectClass}__input`;
   const selectIconClass = `${selectClass}__icon`;
   const selectValidationTextClass = `${selectClass}__validationText`;
   const selectHelperTextClass = `${selectClass}__helperText`;
+=======
+  const selectContainerClass = `${selectRootClass}__inputContainer`;
+  const selectInputClass = `${selectRootClass}__input`;
+  const selectIconClass = `${selectRootClass}__icon`;
+  const selectValidationTextClass = `${selectRootClass}__validationText`;
+>>>>>>> 92c17dc32 (refactor(web-react): extract `HelperText` and move `useAriaIds` to shared hooks #DS-2398)
 
   return {
     classProps: {
@@ -60,7 +66,6 @@ export const useSelectStyleProps = ({
       input: selectInputClass,
       icon: selectIconClass,
       validationText: selectValidationTextClass,
-      helperText: selectHelperTextClass,
     },
   };
 };
