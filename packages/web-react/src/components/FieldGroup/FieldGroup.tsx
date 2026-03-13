@@ -2,10 +2,12 @@
 
 import classNames from 'classnames';
 import React from 'react';
-import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { type SpiritFieldGroupProps } from '../../types';
-import { HelperText, ValidationText, useAriaIds } from '../Field';
+import { PropsProvider } from '../../context';
+import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
+import { FormFieldVariants, type SpiritFieldGroupProps } from '../../types';
+import { ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { HelperText } from '../HelperText';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { useFieldGroupStyleProps } from './useFieldGroupStyleProps';
 
@@ -36,37 +38,34 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
   });
 
   return (
-    <fieldset
-      {...transferProps}
-      {...styleProps}
-      {...ariaDescribedByProp}
-      className={classNames(classProps.root, styleProps.className)}
-      disabled={isDisabled}
-    >
-      <VisuallyHidden elementType="legend">{label}</VisuallyHidden>
-      {!isLabelHidden && (
-        <div className={classProps.label} aria-hidden="true">
-          {label}
-        </div>
-      )}
-      <div className={classProps.fields}>{children}</div>
-      <HelperText
-        UNSAFE_className={classProps.helperText}
-        id={`${id}__helperText`}
-        registerAria={register}
-        helperText={helperText}
-      />
-      {validationState && (
-        <ValidationText
-          UNSAFE_className={classProps.validationText}
-          {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-          id={`${id}__helperText`}
-          validationText={validationText}
-          registerAria={register}
-          role={validationTextRole}
-        />
-      )}
-    </fieldset>
+    <PropsProvider value={{ isDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+      <fieldset
+        {...transferProps}
+        {...styleProps}
+        {...ariaDescribedByProp}
+        className={classNames(classProps.root, styleProps.className)}
+        disabled={isDisabled}
+      >
+        <VisuallyHidden elementType="legend">{label}</VisuallyHidden>
+        {!isLabelHidden && (
+          <div className={classProps.label} aria-hidden="true">
+            {label}
+          </div>
+        )}
+        <div className={classProps.fields}>{children}</div>
+        <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
+        {validationState && (
+          <ValidationText
+            UNSAFE_className={classProps.validationText}
+            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+            id={`${id}__helperText`}
+            validationText={validationText}
+            registerAria={register}
+            role={validationTextRole}
+          />
+        )}
+      </fieldset>
+    </PropsProvider>
   );
 };
 

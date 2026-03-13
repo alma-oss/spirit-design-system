@@ -9,7 +9,6 @@ describe('useTagStyleProps', () => {
     const { result } = renderHook(() => useTextFieldBaseStyleProps(props));
 
     expect(result.current.classProps).toStrictEqual({
-      helperText: 'TextField__helperText',
       input: 'TextField__input',
       label: 'TextField__label',
       passwordToggle: 'TextField__passwordToggle',

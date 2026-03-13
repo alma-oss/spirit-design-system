@@ -47,7 +47,6 @@ export interface FileUploaderStyleReturn {
       label: string;
       input: string;
       dropLabel: string;
-      helper: string;
       link: string;
       validationText: string;
       dropZone: {
@@ -79,7 +78,6 @@ export const useFileUploaderStyleProps = (props?: FileUploaderStyleProps): FileU
   const fileUploaderInputDropLabelClass = `${fileUploaderInputClass}__dragAndDropLabel`;
   const fileUploaderInputDropZoneClass = `${fileUploaderInputClass}__dropZone`;
   const fileUploaderInputDropZoneLabelClass = `${fileUploaderInputDropZoneClass}Label`;
-  const fileUploaderInputHelperClass = `${fileUploaderInputClass}__helperText`;
   const fileUploaderInputHiddenClass = 'd-none';
   const fileUploaderInputInputClass = `${fileUploaderInputClass}__input`;
   const fileUploaderInputLabelClass = `${fileUploaderInputClass}__label`;
@@ -151,7 +149,6 @@ export const useFileUploaderStyleProps = (props?: FileUploaderStyleProps): FileU
         }),
         input: fileUploaderInputInputClass,
         dropLabel: fileUploaderInputDropLabelClass,
-        helper: fileUploaderInputHelperClass,
         link: classNames(fileUploaderInputLinkClass, ...fileUploaderInputLinkUtilityClasses),
         validationText: fileUploaderInputValidationTextClass,
         dropZone: {

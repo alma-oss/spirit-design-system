@@ -2,10 +2,12 @@
 
 import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
-import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
-import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
+import { PropsProvider } from '../../context';
+import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
+import { FormFieldVariants, type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
+import { Label, ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { HelperText } from '../HelperText';
 import { useCheckboxStyleProps } from './useCheckboxStyleProps';
 
 const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
@@ -17,6 +19,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
     id,
     isChecked,
     isDisabled,
+    isItem,
     isRequired,
     label,
     validationState,
@@ -33,41 +36,43 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
   });
 
   return (
-    <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
-      <input
-        {...otherProps}
-        {...ariaDescribedByProp}
-        type="checkbox"
-        id={id}
-        className={classProps.input}
-        disabled={isDisabled}
-        required={isRequired}
-        checked={isChecked}
-        value={value}
-        ref={ref}
-      />
-      <div className={classProps.text}>
-        <Label UNSAFE_className={classProps.label} htmlFor={id}>
-          {label}
-        </Label>
-        <HelperText
-          UNSAFE_className={classProps.helperText}
-          id={`${id}__helperText`}
-          registerAria={register}
-          helperText={helperText}
+    <PropsProvider
+      value={{
+        isDisabled,
+        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
+      }}
+    >
+      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
+        <input
+          {...otherProps}
+          {...ariaDescribedByProp}
+          type="checkbox"
+          id={id}
+          className={classProps.input}
+          disabled={isDisabled}
+          required={isRequired}
+          checked={isChecked}
+          value={value}
+          ref={ref}
         />
-        {validationState && (
-          <ValidationText
-            UNSAFE_className={classProps.validationText}
-            id={`${id}__validationText`}
-            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-            validationText={validationText}
-            registerAria={register}
-            role={validationTextRole}
-          />
-        )}
+        <div className={classProps.text}>
+          <Label UNSAFE_className={classProps.label} htmlFor={id}>
+            {label}
+          </Label>
+          <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
+          {validationState && (
+            <ValidationText
+              UNSAFE_className={classProps.validationText}
+              id={`${id}__validationText`}
+              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+              validationText={validationText}
+              registerAria={register}
+              role={validationTextRole}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </PropsProvider>
   );
 };
 
