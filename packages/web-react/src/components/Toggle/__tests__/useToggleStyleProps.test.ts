@@ -13,7 +13,6 @@ describe('useToggleStyleProps', () => {
       text: 'Toggle__text',
       input: 'Toggle__input',
       label: 'Toggle__label',
-      helperText: 'Toggle__helperText',
       validationText: 'Toggle__validationText',
     });
   });
