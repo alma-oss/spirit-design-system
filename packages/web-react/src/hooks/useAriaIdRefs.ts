@@ -1,11 +1,10 @@
 'use client';
 
 import { useCallback, useMemo, useState } from 'react';
+import { type RegisterParams, type RegisterType } from '../types';
 
 type AriaIdRefAttribute = 'aria-describedby' | 'aria-details';
 
-export type RegisterParams = { add?: string; remove?: string };
-export type RegisterType = (params: RegisterParams) => void;
 export type AriaIdRefsReturn = [Partial<Record<AriaIdRefAttribute, string>>, RegisterType];
 
 export function useAriaIdRefs(ariaAttribute: AriaIdRefAttribute, initialIds?: string): AriaIdRefsReturn {

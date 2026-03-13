@@ -1,4 +1,4 @@
-import { type RegisterType } from '../../hooks/useAriaIdRefs';
+import { type RegisterType } from '../../types/shared/inputs';
 import { type TextAreaCounterRenderProps } from '../../types/textArea';
 
 export interface CharacterCounterProps extends TextAreaCounterRenderProps {

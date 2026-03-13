@@ -1,6 +1,5 @@
 import type { ElementType, ReactNode } from 'react';
-import type { RegisterType as RegisterDetailsType } from '../hooks/useAriaIdRefs';
-import type { ChildrenProps, StyleProps } from './shared';
+import type { ChildrenProps, RegisterType as RegisterDetailsType, StyleProps } from './shared';
 
 export interface InputDetailsProps<T extends ElementType = 'div'> extends ChildrenProps, StyleProps {
   /** Details content */

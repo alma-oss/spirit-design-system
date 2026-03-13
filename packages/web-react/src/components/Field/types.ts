@@ -1,6 +1,11 @@
-import { type ElementType, type ReactNode } from 'react';
-import { type RegisterType } from '../../hooks/useAriaIdRefs';
-import { type ChildrenProps, type StyleProps, type TransferProps, type ValidationTextProp } from '../../types';
+import { type ElementType } from 'react';
+import {
+  type ChildrenProps,
+  type RegisterType,
+  type StyleProps,
+  type TransferProps,
+  type ValidationTextProp,
+} from '../../types';
 
 export interface FieldElementTypeProps<E extends ElementType = 'div'> {
   /**
@@ -14,11 +19,6 @@ export interface FieldElementTypeProps<E extends ElementType = 'div'> {
 export interface FieldProps<E extends ElementType = 'div'> extends FieldElementTypeProps<E> {
   id?: string;
   registerAria?: RegisterType;
-}
-
-export interface HelperTextProps<T extends ElementType = 'div'>
-  extends FieldProps<T>, StyleProps, ChildrenProps, TransferProps {
-  helperText: ReactNode;
 }
 
 export interface ValidationTextProps<T extends ElementType = 'div'>

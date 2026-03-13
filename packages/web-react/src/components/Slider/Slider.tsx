@@ -2,10 +2,12 @@
 
 import classNames from 'classnames';
 import React, { type CSSProperties, type ChangeEvent, type FormEvent, type ForwardedRef, forwardRef } from 'react';
+import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { type ForwardRefComponent, type SpiritSliderProps } from '../../types';
-import { HelperText, Label, ValidationText } from '../Field';
+import { FormFieldVariants, type ForwardRefComponent, type SpiritSliderProps } from '../../types';
+import { Label, ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { HelperText } from '../HelperText';
 import { SLIDER_DEFAULT_PROPS } from './constants';
 import { useSliderStyleProps } from './useSliderStyleProps';
 
@@ -55,41 +57,38 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
   };
 
   return (
-    <div {...styleProps} {...otherProps} className={classNames(classProps.root, styleProps.className)}>
-      <Label htmlFor={id} UNSAFE_className={classProps.label}>
-        {label}
-      </Label>
-      <input
-        {...ariaDescribedByProp}
-        className={classProps.input}
-        id={id}
-        onInput={handleInput}
-        style={{ [CSSVariable]: `${getSliderPosition(value)}` } as CSSProperties}
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        disabled={isDisabled}
-        ref={ref}
-      />
-      <HelperText
-        UNSAFE_className={classProps.helperText}
-        helperText={helperText}
-        id={`${id}__helperText`}
-        registerAria={register}
-      />
-      {validationState && (
-        <ValidationText
-          UNSAFE_className={classProps.validationText}
-          {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-          id={`${id}__validationText`}
-          registerAria={register}
-          validationText={validationText}
-          role={validationTextRole}
+    <PropsProvider value={{ isDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+      <div {...styleProps} {...otherProps} className={classNames(classProps.root, styleProps.className)}>
+        <Label htmlFor={id} UNSAFE_className={classProps.label}>
+          {label}
+        </Label>
+        <input
+          {...ariaDescribedByProp}
+          className={classProps.input}
+          id={id}
+          onInput={handleInput}
+          style={{ [CSSVariable]: `${getSliderPosition(value)}` } as CSSProperties}
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          disabled={isDisabled}
+          ref={ref}
         />
-      )}
-    </div>
+        <HelperText helperText={helperText} id={`${id}__helperText`} registerAria={register} />
+        {validationState && (
+          <ValidationText
+            UNSAFE_className={classProps.validationText}
+            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+            id={`${id}__validationText`}
+            registerAria={register}
+            validationText={validationText}
+            role={validationTextRole}
+          />
+        )}
+      </div>
+    </PropsProvider>
   );
 };
 
