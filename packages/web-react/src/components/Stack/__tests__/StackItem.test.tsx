@@ -36,6 +36,6 @@ describe('StackItem', () => {
     const item = screen.getByTestId('standalone');
 
     expect(item).toBeInTheDocument();
-    expect(item.tagName).toBe('DIV');
+    expect(item.localName).toBe('div');
   });
 });
