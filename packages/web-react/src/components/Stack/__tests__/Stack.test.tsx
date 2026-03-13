@@ -94,12 +94,12 @@ describe('Stack', () => {
 
     const list = screen.getByRole('list');
 
-    expect(list.tagName).toBe('UL');
+    expect(list.localName).toBe('ul');
 
     const item = screen.getByTestId('item');
 
     expect(item).toBeInTheDocument();
-    expect(item.tagName).toBe('LI');
+    expect(item.localName).toBe('li');
     expect(item).toHaveTextContent('Item');
   });
 
@@ -112,12 +112,12 @@ describe('Stack', () => {
 
     const list = screen.getByRole('list');
 
-    expect(list.tagName).toBe('OL');
+    expect(list.localName).toBe('ol');
 
     const item = screen.getByTestId('item');
 
     expect(item).toBeInTheDocument();
-    expect(item.tagName).toBe('LI');
+    expect(item.localName).toBe('li');
     expect(item).toHaveTextContent('Item');
   });
 

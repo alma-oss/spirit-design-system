@@ -58,6 +58,6 @@ describe('UNSTABLE_AttachmentImagePreview', () => {
     const root = screen.getByTestId('preview-root');
 
     expect(root).toHaveClass('Attachment__image');
-    expect(root.tagName).toBe('SPAN');
+    expect(root.localName).toBe('span');
   });
 });
