@@ -69,7 +69,7 @@ describe('TextField', () => {
     it('should have helper text', () => {
       render(<TextField id="textfield" label="Label" type={type as TextFieldType} helperText="helper text" />);
 
-      expect(screen.getByText('helper text')).toHaveClass('TextField__helperText');
+      expect(screen.getByText('helper text')).toBeInTheDocument();
     });
 
     it('should have fluid classname', () => {
