@@ -36,7 +36,6 @@ describe('Slider', () => {
     const helperTextElement = screen.getByText(helperText);
 
     expect(helperTextElement).toBeInTheDocument();
-    expect(helperTextElement).toHaveClass('Slider__helperText');
   });
 
   it('should render validation text', () => {

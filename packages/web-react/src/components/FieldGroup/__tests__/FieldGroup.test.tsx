@@ -116,7 +116,6 @@ describe('FieldGroup', () => {
     const element = screen.getByText('helper text');
 
     expect(element).toBeInTheDocument();
-    expect(element).toHaveClass('FieldGroup__helperText');
   });
 
   it('should have correct id', () => {

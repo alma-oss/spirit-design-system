@@ -10,7 +10,6 @@ export interface CheckboxStyles {
     text: string;
     label: string;
     input: string;
-    helperText: string;
     validationText: string;
   };
   /** props to be passed to the input element */
@@ -30,7 +29,6 @@ export function useCheckboxStyleProps(props: SpiritCheckboxProps): CheckboxStyle
   const checkboxLabelClass = `${checkboxClass}__label`;
   const checkboxLabelRequiredClass = `${checkboxClass}__label--required`;
   const checkboxLabelHiddenClass = `${checkboxClass}__label--hidden`;
-  const checkboxHelperTextClass = `${checkboxClass}__helperText`;
   const checkboxValidationTextClass = `${checkboxClass}__validationText`;
   const checkboxValidationClass = `${checkboxClass}--${validationState}`;
 
@@ -48,7 +46,6 @@ export function useCheckboxStyleProps(props: SpiritCheckboxProps): CheckboxStyle
         [checkboxLabelHiddenClass]: isLabelHidden,
       }),
       input: checkboxInputClass,
-      helperText: checkboxHelperTextClass,
       validationText: checkboxValidationTextClass,
     },
     props: {

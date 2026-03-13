@@ -13,7 +13,6 @@ export interface UseFieldGroupStyleReturn {
     label: string;
     fields: string;
     validationText: string;
-    helperText: string;
   };
 }
 
@@ -27,9 +26,14 @@ export const useFieldGroupStyleProps = ({
   const fieldGroupValidationClass = `${fieldGroupClass}--${validationState}`;
   const fieldGroupLabelClass = `${fieldGroupClass}__label`;
   const fieldGroupLabelRequiredClass = `${fieldGroupLabelClass}--required`;
+<<<<<<< HEAD
   const fieldGroupFieldsClass = `${fieldGroupClass}__fields`;
   const fieldGroupValidationTextClass = `${fieldGroupClass}__validationText`;
   const fieldGroupHelperTextClass = `${fieldGroupClass}__helperText`;
+=======
+  const fieldGroupFieldsClass = `${fieldGroupRootClass}__fields`;
+  const fieldGroupValidationTextClass = `${fieldGroupRootClass}__validationText`;
+>>>>>>> 92c17dc32 (refactor(web-react): extract `HelperText` and move `useAriaIds` to shared hooks #DS-2398)
 
   return {
     classProps: {
@@ -42,7 +46,6 @@ export const useFieldGroupStyleProps = ({
       }),
       fields: fieldGroupFieldsClass,
       validationText: fieldGroupValidationTextClass,
-      helperText: fieldGroupHelperTextClass,
     },
   };
 };

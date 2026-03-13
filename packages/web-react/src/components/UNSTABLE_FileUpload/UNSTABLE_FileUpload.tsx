@@ -2,10 +2,13 @@
 
 import classNames from 'classnames';
 import React, { type DragEvent, type DragEventHandler, useEffect, useState } from 'react';
+import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
+import { FormFieldVariants } from '../../types';
 import { Button } from '../Button';
-import { HelperText, Label, ValidationText } from '../Field';
+import { Label, ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
 import { type UnstableFileUploadProps } from './types';
 import { useFileUploadState } from './useFileUploadState';
@@ -100,74 +103,76 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
   }, [isDragAndDropSupportedProp]);
 
   return (
-    <div
-      {...transferProps}
-      {...styleProps}
-      {...(rootId != null && rootId !== '' ? { id: rootId } : {})}
-      className={classNames(classProps.root, styleProps.className)}
-    >
-      {hasInput && (
-        <div
-          onDragOver={onDragOverHandler}
-          onDragEnter={!isUploadInteractionDisabled && isDragAndDropSupported ? onDragEnter : undefined}
-          onDragLeave={!isUploadInteractionDisabled && isDragAndDropSupported ? onDragLeave : undefined}
-          onDrop={onDropHandler}
-          className={classProps.input.root}
-        >
-          <Label htmlFor={inputId} UNSAFE_className={classProps.input.label}>
-            {label}
-          </Label>
-          <input
-            {...ariaDescribedByProp}
-            type="file"
-            accept={accept}
-            id={inputId}
-            ref={inputRef}
-            name={name}
-            className={classProps.input.input}
-            onChange={onChange}
-            multiple={isMultiple}
-            disabled={isUploadInteractionDisabled}
-          />
-          <div ref={dropZoneRef} className={classProps.input.dropZone.root}>
-            {!isCompact && <Icon name={iconName} boxSize={28} aria-hidden="true" />}
-            <div className={classProps.input.dropZone.content}>
-              <Label htmlFor={inputId} UNSAFE_className={classProps.input.dropZone.label}>
-                {linkText}
-                {labelText && (
-                  <>
-                    {' '}
-                    <span className={classProps.input.dropLabel}>{labelText}</span>
-                  </>
-                )}
-              </Label>
-              <HelperText
-                UNSAFE_className={classProps.input.helper}
-                id={`${inputId}-helper`}
-                registerAria={register}
-                helperText={helperText}
-              />
-            </div>
-            {/* @ts-expect-error - Div cannot have type="button". This will be solved with https://jira.almacareer.tech/browse/DS-2168 */}
-            <Button aria-hidden="true" isDisabled={isUploadInteractionDisabled} elementType="div" type={null}>
-              {buttonText}
-            </Button>
-          </div>
-          {validationState && (
-            <ValidationText
-              UNSAFE_className={classProps.input.validationText}
-              elementType="div"
-              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-              id={`${inputId}-validation`}
-              validationText={validationText}
-              registerAria={register}
-              role={validationTextRole}
+    <PropsProvider value={{ isDisabled: !!isDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+      <div
+        {...transferProps}
+        {...styleProps}
+        {...(rootId != null && rootId !== '' ? { id: rootId } : {})}
+        className={classNames(classProps.root, styleProps.className)}
+      >
+        {hasInput && (
+          <div
+            onDragOver={onDragOverHandler}
+            onDragEnter={!isUploadInteractionDisabled && isDragAndDropSupported ? onDragEnter : undefined}
+            onDragLeave={!isUploadInteractionDisabled && isDragAndDropSupported ? onDragLeave : undefined}
+            onDrop={onDropHandler}
+            className={classProps.input.root}
+          >
+            <Label htmlFor={inputId} UNSAFE_className={classProps.input.label}>
+              {label}
+            </Label>
+            <input
+              {...ariaDescribedByProp}
+              type="file"
+              accept={accept}
+              id={inputId}
+              ref={inputRef}
+              name={name}
+              className={classProps.input.input}
+              onChange={onChange}
+              multiple={isMultiple}
+              disabled={isUploadInteractionDisabled}
             />
-          )}
-        </div>
-      )}
-      {children}
-    </div>
+            <div ref={dropZoneRef} className={classProps.input.dropZone.root}>
+              {!isCompact && <Icon name={iconName} boxSize={28} aria-hidden="true" />}
+              <div className={classProps.input.dropZone.content}>
+                <Label htmlFor={inputId} UNSAFE_className={classProps.input.dropZone.label}>
+                  {linkText}
+                  {labelText && (
+                    <>
+                      {' '}
+                      <span className={classProps.input.dropLabel}>{labelText}</span>
+                    </>
+                  )}
+                </Label>
+                <HelperText
+                  UNSAFE_className={classProps.input.helper}
+                  id={`${inputId}__helperText`}
+                  registerAria={register}
+                  helperText={helperText}
+                />
+              </div>
+              {/* @ts-expect-error - Div cannot have type="button". This will be solved with https://jira.almacareer.tech/browse/DS-2168 */}
+              <Button aria-hidden="true" isDisabled={isDisabled} elementType="div" type={null}>
+                {buttonText}
+              </Button>
+            </div>
+            {validationState && (
+              <ValidationText
+                UNSAFE_className={classProps.input.validationText}
+                elementType="span"
+                {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+                id={`${inputId}__validationText`}
+                validationText={validationText}
+                registerAria={register}
+                role={validationTextRole}
+              />
+            )}
+          </div>
+        )}
+        {children}
+      </div>
+    </PropsProvider>
   );
 };
 
