@@ -8,6 +8,7 @@ The component is a composition of:
 
 - [UNSTABLE_FileUpload](#unstable_fileupload-1) (wrapper)
 - [UNSTABLE_FileUploadInput](#unstable_fileuploadinput) (file picker with drop zone)
+- [UNSTABLE_File][readme-file] (optional, for displaying uploaded files)
 
 ## UNSTABLE_FileUpload
 
@@ -143,7 +144,131 @@ Add validation text and give it an `id` for `aria-describedby` when you use it:
 </div>
 ```
 
+## Displaying Uploaded Files
+
+Use [UNSTABLE_File][readme-file] to display a list of uploaded files.
+Place the file list after the `UNSTABLE_FileUpload` wrapper.
+
+👉 To provide information about file list to AT, wrap the file list in a container (`ul`) with an appropriate `aria-label` (e.g. `aria-label="Uploaded files"`).
+If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on the file list container.
+
+```html
+<div class="UNSTABLE_FileUpload mb-800">
+  <!-- UNSTABLE_FileUploadInput -->
+  <div class="UNSTABLE_FileUploadInput has-drag-and-drop">
+    <!-- ... input and drop zone ... -->
+  </div>
+</div>
+
+<!-- File list using UNSTABLE_File -->
+<ul class="Stack Stack--hasSpacing" aria-label="Uploaded files">
+  <li class="UNSTABLE_File">
+    <div class="UNSTABLE_File__preview">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
+        <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+      </svg>
+    </div>
+    <div class="UNSTABLE_File__content">
+      <div class="UNSTABLE_File__text">
+        <span class="UNSTABLE_File__name">
+          <span class="text-truncate">Document.pdf</span>
+        </span>
+        <span class="UNSTABLE_File__helperText">2.5 MB</span>
+      </div>
+    </div>
+    <div
+      class="Flex Flex--noWrap Flex--alignmentXStretch Flex--tablet--alignmentXLeft Flex--alignmentYStretch Flex--horizontal"
+      style="--flex-spacing-x: var(--spirit-space-500)"
+    >
+      <button
+        type="button"
+        class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+        aria-label="Edit file name Document.pdf"
+      >
+        <svg class="Icon" width="16" height="16" aria-hidden="true">
+          <use xlink:href="/assets/icons/svg/sprite.svg#edit" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+        aria-label="Remove file Document.pdf from list"
+      >
+        <svg class="Icon" width="16" height="16" aria-hidden="true">
+          <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+        </svg>
+      </button>
+    </div>
+  </li>
+
+  <!-- File with uploading state -->
+  <li class="UNSTABLE_File">
+    <div class="UNSTABLE_File__preview">
+      <img src="https://picsum.photos/seed/avatar1/48/48" width="48" height="48" alt="Image preview" />
+    </div>
+    <div class="UNSTABLE_File__content">
+      <div class="UNSTABLE_File__text">
+        <span class="UNSTABLE_File__name">
+          <span class="text-truncate">vacation-photo.jpg</span>
+        </span>
+        <div class="UNSTABLE_File__helperText">
+          <div>
+            <svg class="Icon animation-spin-clockwise" width="16" height="16" aria-hidden="true">
+              <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
+            </svg>
+            <span>Uploading your file…</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+      aria-label="Remove file vacation-photo.jpg from list"
+    >
+      <svg class="Icon" width="16" height="16" aria-hidden="true">
+        <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+      </svg>
+    </button>
+  </li>
+
+  <!-- File with success state -->
+  <li class="UNSTABLE_File has-success">
+    <div class="UNSTABLE_File__preview">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
+        <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+      </svg>
+    </div>
+    <div class="UNSTABLE_File__content">
+      <div class="UNSTABLE_File__text">
+        <span class="UNSTABLE_File__name">
+          <span class="text-truncate">report-2024.xlsx</span>
+        </span>
+        <div class="UNSTABLE_File__validationText">
+          <svg class="Icon" width="20" height="20" aria-hidden="true">
+            <use xlink:href="/assets/icons/svg/sprite.svg#success" />
+          </svg>
+          <div>File uploaded successfully</div>
+        </div>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+      aria-label="Remove file report-2024.xlsx from list"
+    >
+      <svg class="Icon" width="16" height="16" aria-hidden="true">
+        <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+      </svg>
+    </button>
+  </li>
+</ul>
+```
+
+See [UNSTABLE_File documentation][readme-file] for more details on file states and customization options.
+
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [mdn-accept]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
 [mdn-input-file]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
 [mdn-multiple]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#multiple
+[readme-file]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_File/README.md
