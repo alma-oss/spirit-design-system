@@ -5,7 +5,6 @@ import { ITEM_SELECTION_DECORATOR_BACKGROUND, ITEM_SELECTION_DECORATOR_BOTH, typ
 export interface ItemStyles {
   /** className props */
   classProps: {
-    helperText: string;
     icon: {
       root: string;
       start: string;
@@ -23,7 +22,6 @@ export function useItemStyleProps<P extends ItemStyleProps>(props: P): ItemStyle
   const itemClass = useClassNamePrefix('Item');
   const itemRootDisabledClass = `${itemClass}--disabled`;
   const itemRootSelectedClass = `${itemClass}--selected`;
-  const itemHelperTextClass = `${itemClass}__helperText`;
   const itemLabelClass = `${itemClass}__label`;
   const itemIconClass = `${itemClass}__icon`;
   const itemIconStartClass = `${itemIconClass}--start`;
@@ -41,7 +39,6 @@ export function useItemStyleProps<P extends ItemStyleProps>(props: P): ItemStyle
 
   return {
     classProps: {
-      helperText: itemHelperTextClass,
       icon: {
         root: itemIconClass,
         start: itemIconStartClass,

@@ -3,10 +3,12 @@
 import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { Sizes } from '../../constants';
-import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { type ForwardRefComponent, type SpiritSelectProps } from '../../types';
-import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
+import { PropsProvider } from '../../context';
+import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
+import { FormFieldVariants, type ForwardRefComponent, type SpiritSelectProps } from '../../types';
+import { Label, ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
 import { useSelectStyleProps } from './useSelectStyleProps';
 
@@ -45,43 +47,40 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
   });
 
   return (
-    <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
-      <Label htmlFor={id} UNSAFE_className={classProps.label}>
-        {label}
-      </Label>
-      <div className={classProps.container}>
-        <select
-          {...transferProps}
-          {...ariaDescribedByProp}
-          id={id}
-          className={classProps.input}
-          disabled={isDisabled}
-          required={isRequired}
-          ref={ref}
-        >
-          {children}
-        </select>
-        <div className={classProps.icon}>
-          <Icon name="chevron-down" boxSize={size === Sizes.SMALL ? 16 : 20} />
+    <PropsProvider value={{ isDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+      <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
+        <Label htmlFor={id} UNSAFE_className={classProps.label}>
+          {label}
+        </Label>
+        <div className={classProps.container}>
+          <select
+            {...transferProps}
+            {...ariaDescribedByProp}
+            id={id}
+            className={classProps.input}
+            disabled={isDisabled}
+            required={isRequired}
+            ref={ref}
+          >
+            {children}
+          </select>
+          <div className={classProps.icon}>
+            <Icon name="chevron-down" boxSize={size === Sizes.SMALL ? 16 : 20} />
+          </div>
         </div>
+        <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
+        {validationState && (
+          <ValidationText
+            UNSAFE_className={classProps.validationText}
+            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+            id={`${id}__validationText`}
+            validationText={validationText}
+            registerAria={register}
+            role={validationTextRole}
+          />
+        )}
       </div>
-      <HelperText
-        UNSAFE_className={classProps.helperText}
-        id={`${id}__helperText`}
-        registerAria={register}
-        helperText={helperText}
-      />
-      {validationState && (
-        <ValidationText
-          UNSAFE_className={classProps.validationText}
-          {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-          id={`${id}__validationText`}
-          validationText={validationText}
-          registerAria={register}
-          role={validationTextRole}
-        />
-      )}
-    </div>
+    </PropsProvider>
   );
 };
 

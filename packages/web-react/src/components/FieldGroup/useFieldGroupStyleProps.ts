@@ -13,7 +13,6 @@ export interface UseFieldGroupStyleReturn {
     label: string;
     fields: string;
     validationText: string;
-    helperText: string;
   };
 }
 
@@ -29,7 +28,6 @@ export const useFieldGroupStyleProps = ({
   const fieldGroupLabelRequiredClass = `${fieldGroupLabelClass}--required`;
   const fieldGroupFieldsClass = `${fieldGroupRootClass}__fields`;
   const fieldGroupValidationTextClass = `${fieldGroupRootClass}__validationText`;
-  const fieldGroupHelperTextClass = `${fieldGroupRootClass}__helperText`;
 
   return {
     classProps: {
@@ -42,7 +40,6 @@ export const useFieldGroupStyleProps = ({
       }),
       fields: fieldGroupFieldsClass,
       validationText: fieldGroupValidationTextClass,
-      helperText: fieldGroupHelperTextClass,
     },
   };
 };

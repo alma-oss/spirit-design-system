@@ -9,7 +9,6 @@ export interface SliderStyles {
     root: string;
     label: string;
     input: string;
-    helperText: string;
     validationText: string;
   };
   props: UseSliderStyleProps;
@@ -26,7 +25,6 @@ export function useSliderStyleProps(props: UseSliderStyleProps): SliderStyles {
   const labelClass = classNames(`${sliderClass}__label`);
   const isLabelHiddenClass = `${sliderClass}__label--hidden`;
   const inputClass = `${sliderClass}__input`;
-  const helperTextClass = `${sliderClass}__helperText`;
   const validationTextClass = `${sliderClass}__validationText`;
 
   return {
@@ -40,7 +38,6 @@ export function useSliderStyleProps(props: UseSliderStyleProps): SliderStyles {
         [isLabelHiddenClass]: isLabelHidden,
       }),
       input: inputClass,
-      helperText: helperTextClass,
       validationText: validationTextClass,
     },
     props: restProps,

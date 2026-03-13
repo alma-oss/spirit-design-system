@@ -10,7 +10,6 @@ export interface RadioStyles {
     label: string;
     input: string;
     text: string;
-    helperText: string;
   };
   /** props to be passed to the input element */
   props: RadioProps;
@@ -28,7 +27,6 @@ export function useRadioStyleProps(props: SpiritRadioProps): RadioStyles {
   const radioLabelClass = `${radioClass}__label`;
   const radioLabelHiddenClass = `${radioClass}__label--hidden`;
   const radioTextClass = `${radioClass}__text`;
-  const radioHelperTextClass = `${radioClass}__helperText`;
   const radioValidationClass = `${radioClass}--${validationState}`;
 
   const rootStyles = classNames(radioClass, {
@@ -47,7 +45,6 @@ export function useRadioStyleProps(props: SpiritRadioProps): RadioStyles {
       label: labelStyles,
       input: radioInputClass,
       text: radioTextClass,
-      helperText: radioHelperTextClass,
     },
     props: restProps,
   };

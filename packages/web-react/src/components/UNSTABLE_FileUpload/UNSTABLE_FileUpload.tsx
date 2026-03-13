@@ -2,9 +2,12 @@
 
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
-import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
+import { PropsProvider } from '../../context';
+import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
+import { FormFieldVariants } from '../../types';
+import { Label, ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
 import { type UnstableFileUploadProps } from './types';
 import { useFileUploadState } from './useFileUploadState';
@@ -69,59 +72,56 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
   }, []);
 
   return (
-    <div id={id} {...transferProps} {...styleProps} className={classNames(classProps.root, styleProps.className)}>
-      {hasInput && (
-        <div
-          onDragOver={!isDisabled && isDragAndDropSupported ? onDragOver : undefined}
-          onDragEnter={!isDisabled && isDragAndDropSupported ? onDragEnter : undefined}
-          onDragLeave={!isDisabled && isDragAndDropSupported ? onDragLeave : undefined}
-          onDrop={!isDisabled && isDragAndDropSupported ? onDrop : undefined}
-          className={classProps.input.root}
-        >
-          <Label htmlFor={inputId} UNSAFE_className={classProps.input.label}>
-            {label}
-          </Label>
-          <input
-            {...ariaDescribedByProp}
-            type="file"
-            accept={accept}
-            id={inputId}
-            ref={inputRef}
-            name={name}
-            className={classProps.input.input}
-            onChange={onChange}
-            multiple={isMultiple}
-            disabled={isDisabled}
-          />
-          <div ref={dropZoneRef} className={classProps.input.dropZone.root}>
-            <Icon name={iconName} aria-hidden="true" />
-            <Label htmlFor={inputId} UNSAFE_className={classProps.input.dropZone.label}>
-              <span className={classProps.input.link}>{linkText}</span>
-              &nbsp;
-              <span className={classProps.input.dropLabel}>{labelText}</span>
+    <PropsProvider value={{ isDisabled: !!isDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+      <div id={id} {...transferProps} {...styleProps} className={classNames(classProps.root, styleProps.className)}>
+        {hasInput && (
+          <div
+            onDragOver={!isDisabled && isDragAndDropSupported ? onDragOver : undefined}
+            onDragEnter={!isDisabled && isDragAndDropSupported ? onDragEnter : undefined}
+            onDragLeave={!isDisabled && isDragAndDropSupported ? onDragLeave : undefined}
+            onDrop={!isDisabled && isDragAndDropSupported ? onDrop : undefined}
+            className={classProps.input.root}
+          >
+            <Label htmlFor={inputId} UNSAFE_className={classProps.input.label}>
+              {label}
             </Label>
-            <HelperText
-              UNSAFE_className={classProps.input.helper}
-              id={`${inputId}__helperText`}
-              registerAria={register}
-              helperText={helperText}
+            <input
+              {...ariaDescribedByProp}
+              type="file"
+              accept={accept}
+              id={inputId}
+              ref={inputRef}
+              name={name}
+              className={classProps.input.input}
+              onChange={onChange}
+              multiple={isMultiple}
+              disabled={isDisabled}
             />
+            <div ref={dropZoneRef} className={classProps.input.dropZone.root}>
+              <Icon name={iconName} aria-hidden="true" />
+              <Label htmlFor={inputId} UNSAFE_className={classProps.input.dropZone.label}>
+                <span className={classProps.input.link}>{linkText}</span>
+                &nbsp;
+                <span className={classProps.input.dropLabel}>{labelText}</span>
+              </Label>
+              <HelperText id={`${inputId}__helperText`} registerAria={register} helperText={helperText} />
+            </div>
+            {validationState && (
+              <ValidationText
+                UNSAFE_className={classProps.input.validationText}
+                elementType="span"
+                {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+                id={`${inputId}__validationText`}
+                validationText={validationText}
+                registerAria={register}
+                role={validationTextRole}
+              />
+            )}
           </div>
-          {validationState && (
-            <ValidationText
-              UNSAFE_className={classProps.input.validationText}
-              elementType="span"
-              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-              id={`${inputId}__validationText`}
-              validationText={validationText}
-              registerAria={register}
-              role={validationTextRole}
-            />
-          )}
-        </div>
-      )}
-      {children}
-    </div>
+        )}
+        {children}
+      </div>
+    </PropsProvider>
   );
 };
 
