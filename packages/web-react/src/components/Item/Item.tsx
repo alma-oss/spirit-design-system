@@ -2,10 +2,16 @@
 
 import classNames from 'classnames';
 import React, { type ElementType } from 'react';
+import { PropsProvider } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { ITEM_SELECTION_DECORATOR_BOTH, ITEM_SELECTION_DECORATOR_ICON, type SpiritItemProps } from '../../types';
+import {
+  FormFieldVariants,
+  ITEM_SELECTION_DECORATOR_BOTH,
+  ITEM_SELECTION_DECORATOR_ICON,
+  type SpiritItemProps,
+} from '../../types';
 import { mergeStyleProps } from '../../utils';
-import { HelperText } from '../Field';
+import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
 import { useItemStyleProps } from './useItemStyleProps';
 
@@ -33,6 +39,7 @@ const Item = <E extends ElementType = 'button'>(props: SpiritItemProps<E>): JSX.
     (selectionDecorator === ITEM_SELECTION_DECORATOR_ICON || selectionDecorator === ITEM_SELECTION_DECORATOR_BOTH);
 
   return (
+<<<<<<< HEAD
     <Component {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && Component === 'button'}>
       {iconName && (
         <span className={classNames(classProps.icon.root, classProps.icon.start)}>
@@ -47,6 +54,24 @@ const Item = <E extends ElementType = 'button'>(props: SpiritItemProps<E>): JSX.
         </span>
       )}
     </Component>
+=======
+    <PropsProvider value={{ isDisabled, formFieldVariant: FormFieldVariants.ITEM }}>
+      <ElementTag {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && ElementTag === 'button'}>
+        {iconName && (
+          <span className={classNames(classProps.icon.root, classProps.icon.start)}>
+            <Icon name={iconName} />
+          </span>
+        )}
+        <span className={classProps.label}>{label}</span>
+        <HelperText elementType="span" helperText={helperText} />
+        {showSelectedIcon && (
+          <span className={classNames(classProps.icon.root, classProps.icon.end)}>
+            <Icon name="check-plain" />
+          </span>
+        )}
+      </ElementTag>
+    </PropsProvider>
+>>>>>>> 92c17dc32 (refactor(web-react): extract `HelperText` and move `useAriaIds` to shared hooks #DS-2398)
   );
 };
 

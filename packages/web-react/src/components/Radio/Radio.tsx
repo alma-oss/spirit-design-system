@@ -2,12 +2,15 @@
 
 import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
+import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { type ForwardRefComponent, type SpiritRadioProps } from '../../types';
-import { HelperText, Label } from '../Field';
+import { FormFieldVariants, type ForwardRefComponent, type SpiritRadioProps } from '../../types';
+import { Label } from '../Field';
+import { HelperText } from '../HelperText';
 import { useRadioStyleProps } from './useRadioStyleProps';
 
 const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
+  const { isItem } = props;
   const { classProps, props: modifiedProps } = useRadioStyleProps(props);
   const {
     'aria-describedby': ariaDescribedBy = '',
@@ -25,31 +28,33 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
 
   return (
-    <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
-      <input
-        {...otherProps}
-        {...ariaDescribedByProp}
-        type="radio"
-        id={id}
-        className={classProps.input}
-        disabled={isDisabled}
-        checked={isChecked}
-        onChange={onChange}
-        value={value}
-        ref={ref}
-      />
-      <div className={classProps.text}>
-        <Label UNSAFE_className={classProps.label} htmlFor={id}>
-          {label}
-        </Label>
-        <HelperText
-          UNSAFE_className={classProps.helperText}
-          id={`${id}__helperText`}
-          registerAria={register}
-          helperText={helperText}
+    <PropsProvider
+      value={{
+        isDisabled,
+        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
+      }}
+    >
+      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
+        <input
+          {...otherProps}
+          {...ariaDescribedByProp}
+          type="radio"
+          id={id}
+          className={classProps.input}
+          disabled={isDisabled}
+          checked={isChecked}
+          onChange={onChange}
+          value={value}
+          ref={ref}
         />
+        <div className={classProps.text}>
+          <Label UNSAFE_className={classProps.label} htmlFor={id}>
+            {label}
+          </Label>
+          <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
+        </div>
       </div>
-    </div>
+    </PropsProvider>
   );
 };
 

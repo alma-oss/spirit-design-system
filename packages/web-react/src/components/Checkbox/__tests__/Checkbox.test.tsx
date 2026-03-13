@@ -71,7 +71,6 @@ describe('Checkbox', () => {
     const element = screen.getByText('text');
 
     expect(element).toBeInTheDocument();
-    expect(element).toHaveClass('Checkbox__helperText');
   });
 
   it('should render label with html tags', () => {
