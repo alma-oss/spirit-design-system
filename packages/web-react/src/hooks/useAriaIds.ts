@@ -1,12 +1,9 @@
 'use client';
 
 import { useCallback, useState } from 'react';
+import { type RegisterParams, type RegisterType } from '../types';
 
-export type RegisterParams = { add?: string; remove?: string };
-export type RegisterType = (params: RegisterParams) => void;
-export type UseAriaIdsHook = (otherAriaIds?: string) => [string[], RegisterType];
-
-const useAriaIds: UseAriaIdsHook = (otherAriaIds) => {
+export const useAriaIds = (otherAriaIds?: string): [string[], RegisterType] => {
   const [ids, setIds] = useState<string[]>(otherAriaIds ? otherAriaIds.split(' ') : []);
 
   const register = useCallback(({ add, remove }: RegisterParams) => {
@@ -27,5 +24,3 @@ const useAriaIds: UseAriaIdsHook = (otherAriaIds) => {
 
   return [ids, register];
 };
-
-export default useAriaIds;

@@ -2,10 +2,12 @@
 
 import classNames from 'classnames';
 import React, { type ChangeEvent, type ForwardedRef, forwardRef, useState } from 'react';
-import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { type ForwardRefComponent, type SpiritToggleProps } from '../../types';
-import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
+import { PropsProvider } from '../../context';
+import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
+import { FormFieldVariants, type ForwardRefComponent, type SpiritToggleProps } from '../../types';
+import { Label, ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { HelperText } from '../HelperText';
 import { useToggleStyleProps } from './useToggleStyleProps';
 
 const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) => {
@@ -39,41 +41,38 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
   };
 
   return (
-    <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
-      <div className={classProps.text}>
-        <Label UNSAFE_className={classProps.label} htmlFor={id}>
-          {label}
-        </Label>
-        <HelperText
-          UNSAFE_className={classProps.helperText}
-          id={`${id}__helperText`}
-          registerAria={register}
-          helperText={helperText}
+    <PropsProvider value={{ isDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
+        <div className={classProps.text}>
+          <Label UNSAFE_className={classProps.label} htmlFor={id}>
+            {label}
+          </Label>
+          <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
+          {validationState && (
+            <ValidationText
+              UNSAFE_className={classProps.validationText}
+              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+              id={`${id}__validationText`}
+              validationText={validationText}
+              registerAria={register}
+              role={validationTextRole}
+            />
+          )}
+        </div>
+        <input
+          {...otherProps}
+          {...ariaDescribedByProp}
+          type="checkbox"
+          id={id}
+          className={classProps.input}
+          disabled={isDisabled}
+          checked={checked}
+          required={isRequired}
+          onChange={handleOnChange}
+          ref={ref}
         />
-        {validationState && (
-          <ValidationText
-            UNSAFE_className={classProps.validationText}
-            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-            id={`${id}__validationText`}
-            validationText={validationText}
-            registerAria={register}
-            role={validationTextRole}
-          />
-        )}
       </div>
-      <input
-        {...otherProps}
-        {...ariaDescribedByProp}
-        type="checkbox"
-        id={id}
-        className={classProps.input}
-        disabled={isDisabled}
-        checked={checked}
-        required={isRequired}
-        onChange={handleOnChange}
-        ref={ref}
-      />
-    </div>
+    </PropsProvider>
   );
 };
 
