@@ -262,4 +262,176 @@
 
 </section>
 
+<section class="py-900 py-tablet-1000 spirit-feature-enable-v5-control-button-expanded-size-scale">
+  <div class="Container">
+    <h2 class="docs-Heading">With File List (UNSTABLE_File)</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+      <div id="example-with-file-list" class="UNSTABLE_FileUpload">
+        <div class="UNSTABLE_FileUploadInput has-drag-and-drop">
+          <label for="file-uploader-with-list" class="UNSTABLE_FileUploadInput__label">Upload files</label>
+          <input
+            type="file"
+            id="file-uploader-with-list"
+            name="attachment-with-list"
+            class="UNSTABLE_FileUploadInput__input"
+            aria-describedby="file-uploader-with-list-helper"
+            multiple
+          />
+          <div class="UNSTABLE_FileUploadInput__dropZone">
+            <svg class="Icon" width="28" height="28" aria-hidden="true">
+              <use xlink:href="/assets/icons/svg/sprite.svg#upload" />
+            </svg>
+            <div class="UNSTABLE_FileUploadInput__dropZoneContent">
+              <label for="file-uploader-with-list" class="UNSTABLE_FileUploadInput__dropZoneLabel">
+                Upload your file <span class="UNSTABLE_FileUploadInput__dragAndDropLabel">or drag and drop here</span>
+              </label>
+              <div id="file-uploader-with-list-helper" class="UNSTABLE_FileUploadInput__helperText">
+                Max file size is 10 MB
+              </div>
+            </div>
+            <div class="Button Button--primary Button--medium" aria-hidden="true">Browse</div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="Stack Stack--hasSpacing" aria-label="Uploaded files">
+        <li class="UNSTABLE_File">
+          <div class="UNSTABLE_File__preview">
+            <svg class="Icon" width="20" height="20" aria-hidden="true">
+              <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+            </svg>
+          </div>
+          <div class="UNSTABLE_File__content">
+            <div class="UNSTABLE_File__text">
+              <span class="UNSTABLE_File__name">
+                <span class="text-truncate">Document.pdf</span>
+              </span>
+              <span class="UNSTABLE_File__helperText">2.5 MB</span>
+            </div>
+          </div>
+          <div
+            class="Flex Flex--noWrap Flex--alignmentXStretch Flex--tablet--alignmentXLeft Flex--alignmentYStretch Flex--horizontal"
+            style="--flex-spacing-x: var(--spirit-space-500)"
+          >
+            <button
+              type="button"
+              class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Edit file name Document.pdf"
+            >
+              <svg class="Icon" width="16" height="16" aria-hidden="true">
+                <use xlink:href="/assets/icons/svg/sprite.svg#edit" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Remove file Document.pdf from list"
+            >
+              <svg class="Icon" width="16" height="16" aria-hidden="true">
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+          </div>
+        </li>
+
+        <li class="UNSTABLE_File">
+          <div class="UNSTABLE_File__preview">
+            <img
+              src="https://picsum.photos/seed/upload1/48/48"
+              width="48"
+              height="48"
+              alt="Image preview"
+            />
+          </div>
+          <div class="UNSTABLE_File__content">
+            <div class="UNSTABLE_File__text">
+              <span class="UNSTABLE_File__name">
+                <span class="text-truncate">vacation-photo.jpg</span>
+              </span>
+              <div class="UNSTABLE_File__helperText">
+                <div>
+                  <svg class="Icon animation-spin-clockwise" width="16" height="16" aria-hidden="true">
+                    <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
+                  </svg>
+                  <span>Uploading your file…</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+            aria-label="Remove file vacation-photo.jpg from list"
+          >
+            <svg class="Icon" width="16" height="16" aria-hidden="true">
+              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+          </button>
+        </li>
+
+        <li class="UNSTABLE_File has-success">
+          <div class="UNSTABLE_File__preview">
+            <svg class="Icon" width="20" height="20" aria-hidden="true">
+              <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+            </svg>
+          </div>
+          <div class="UNSTABLE_File__content">
+            <div class="UNSTABLE_File__text">
+              <span class="UNSTABLE_File__name">
+                <span class="text-truncate">report-2024.xlsx</span>
+              </span>
+              <div class="UNSTABLE_File__validationText">
+                <svg class="Icon" width="20" height="20" aria-hidden="true">
+                  <use xlink:href="/assets/icons/svg/sprite.svg#success" />
+                </svg>
+                <div>File uploaded successfully</div>
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+            aria-label="Remove file report-2024.xlsx from list"
+          >
+            <svg class="Icon" width="16" height="16" aria-hidden="true">
+              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+          </button>
+        </li>
+
+        <li class="UNSTABLE_File has-danger">
+          <div class="UNSTABLE_File__preview">
+            <svg class="Icon" width="20" height="20" aria-hidden="true">
+              <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+            </svg>
+          </div>
+          <div class="UNSTABLE_File__content">
+            <div class="UNSTABLE_File__text">
+              <span class="UNSTABLE_File__name">
+                <span class="text-truncate">large-file.zip</span>
+              </span>
+              <div class="UNSTABLE_File__validationText">
+                <svg class="Icon" width="20" height="20" aria-hidden="true">
+                  <use xlink:href="/assets/icons/svg/sprite.svg#danger" />
+                </svg>
+                <div>File upload error – please retry</div>
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+            aria-label="Remove file large-file.zip from list"
+          >
+            <svg class="Icon" width="16" height="16" aria-hidden="true">
+              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 {{/web/layout/default }}
