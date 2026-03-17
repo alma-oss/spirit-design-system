@@ -5,9 +5,10 @@ import React, { type ForwardedRef, forwardRef } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
 import { FormFieldVariants, type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
-import { Label, ValidationText } from '../Field';
+import { ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { HelperText } from '../HelperText';
+import { Label } from '../Label';
 import { useCheckboxStyleProps } from './useCheckboxStyleProps';
 
 const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
@@ -20,6 +21,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
     isChecked,
     isDisabled,
     isItem,
+    isLabelHidden,
     isRequired,
     label,
     validationState,
@@ -38,8 +40,11 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
   return (
     <PropsProvider
       value={{
+        formFieldVariant: FormFieldVariants.INLINE,
         isDisabled,
-        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
+        isItem,
+        isLabelHidden,
+        isRequired,
       }}
     >
       <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
@@ -56,9 +61,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
           ref={ref}
         />
         <div className={classProps.text}>
-          <Label UNSAFE_className={classProps.label} htmlFor={id}>
-            {label}
-          </Label>
+          <Label htmlFor={id}>{label}</Label>
           <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
           {validationState && (
             <ValidationText

@@ -12,7 +12,6 @@ describe('useSliderStyleProps', () => {
     const { result } = renderHook(() => useSliderStyleProps(defaultProps));
 
     expect(result.current.classProps.root).toBe('Slider');
-    expect(result.current.classProps.label).toBe('Slider__label');
     expect(result.current.classProps.input).toBe('Slider__input');
   });
 
@@ -32,12 +31,6 @@ describe('useSliderStyleProps', () => {
     const { result } = renderHook(() => useSliderStyleProps({ ...defaultProps, validationState: 'danger' }));
 
     expect(result.current.classProps.root).toContain('Slider--danger');
-  });
-
-  it('should return hidden label class', () => {
-    const { result } = renderHook(() => useSliderStyleProps({ ...defaultProps, isLabelHidden: true }));
-
-    expect(result.current.classProps.label).toContain('Slider__label--hidden');
   });
 
   it('should return validation text class', () => {

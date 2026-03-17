@@ -14,7 +14,6 @@ describe('useFileUploadStyleProps', () => {
     expect(result.current.classProps.root).toBe('FileUploader');
     expect(result.current.classProps.input).toBeDefined();
     expect(result.current.classProps.input.root).toBe('FileUploaderInput has-drag-and-drop is-dragging');
-    expect(result.current.classProps.input.label).toBe('FileUploaderInput__label');
     expect(result.current.classProps.input.input).toBe('FileUploaderInput__input');
     expect(result.current.classProps.input.dropLabel).toBe('FileUploaderInput__dragAndDropLabel');
     expect(result.current.classProps.input.helper).toBe('FileUploaderInput__helperText');

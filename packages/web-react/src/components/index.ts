@@ -28,6 +28,7 @@ export * from './Hidden';
 export * from './Icon';
 export * from './IconBox';
 export * from './Item';
+export * from './Label';
 export * from './Link';
 export * from './Matrix';
 export * from './Modal';
