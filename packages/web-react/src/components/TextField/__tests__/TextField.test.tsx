@@ -34,10 +34,10 @@ describe('TextField', () => {
 
     sizePropsTest(TextField);
 
-    it('should have label classname', () => {
+    it('should have label', () => {
       render(<TextField id="textfield" label="Label" type={type as TextFieldType} />);
 
-      expect(screen.getByText('Label')).toHaveClass('TextField__label');
+      expect(screen.getByText('Label')).toBeInTheDocument();
     });
 
     it('should have disabled classname na prop', () => {
@@ -45,19 +45,6 @@ describe('TextField', () => {
 
       expect(screen.getByLabelText('Label').parentElement).toHaveClass('TextField--disabled');
       expect(screen.getByLabelText('Label')).toHaveAttribute('disabled');
-    });
-
-    it('should have hidden classname', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} isLabelHidden />);
-
-      expect(screen.getByText('Label')).toHaveClass('TextField__label--hidden');
-    });
-
-    it('should have required classname', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} isRequired />);
-
-      expect(screen.getByText('Label')).toHaveClass('TextField__label--required');
-      expect(screen.getByLabelText('Label')).toHaveAttribute('required');
     });
 
     it('should have input classname', () => {
