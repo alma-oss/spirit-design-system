@@ -4,12 +4,11 @@ import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { FormFieldVariants, type SpiritFileUploaderInputProps } from '../../types';
-import { ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { type SpiritFileUploaderInputProps } from '../../types';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
 import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { DEFAULT_FILE_QUEUE_LIMIT, DEFAULT_FILE_SIZE_LIMIT } from './constants';
 import { useFileUploaderInput } from './useFileUploaderInput';
 import { useFileUploaderStyleProps } from './useFileUploaderStyleProps';
@@ -34,7 +33,6 @@ const FileUploaderInput = (props: SpiritFileUploaderInputProps) => {
     linkText,
     maxFileSize = DEFAULT_FILE_SIZE_LIMIT,
     maxUploadedFiles = DEFAULT_FILE_QUEUE_LIMIT,
-    name,
     onError,
     queueLimitBehavior = 'none',
     validationState,
@@ -86,10 +84,10 @@ const FileUploaderInput = (props: SpiritFileUploaderInputProps) => {
   return (
     <PropsProvider
       value={{
-        formFieldVariant: FormFieldVariants.BOX,
         isDisabled: isInputDisabled,
         isLabelHidden,
         isRequired,
+        validationState,
       }}
     >
       <div
@@ -108,7 +106,6 @@ const FileUploaderInput = (props: SpiritFileUploaderInputProps) => {
           accept={accept}
           id={id}
           ref={inputRef}
-          name={name}
           className={classProps.input.input}
           onChange={onChange}
           multiple={isMultiple}
@@ -122,14 +119,13 @@ const FileUploaderInput = (props: SpiritFileUploaderInputProps) => {
             &nbsp;
             <span className={classProps.input.dropLabel}>{labelText}</span>
           </label>
-          <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
+          <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
         </div>
         {validationState && (
           <ValidationText
-            UNSAFE_className={classProps.input.validationText}
             elementType="span"
+            id={`${id}-validation-text`}
             {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-            id={`${id}__validationText`}
             validationText={validationText}
             registerAria={register}
             role={validationTextRole}

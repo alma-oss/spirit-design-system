@@ -9,23 +9,22 @@ export interface CheckboxStyles {
     root: string;
     text: string;
     input: string;
-    validationText: string;
   };
   /** props to be passed to the input element */
   props: CheckboxProps;
 }
 
 export function useCheckboxStyleProps(props: SpiritCheckboxProps): CheckboxStyles {
-  const { inputPosition = InputPositions.START, isItem, validationState, ...restProps } = props;
-  const { isDisabled } = restProps;
+  const { inputPosition = InputPositions.START, validationState, ...restProps } = props;
+  const { isDisabled, isItem, isLabelHidden } = restProps;
 
   const checkboxClass = useClassNamePrefix('Checkbox');
   const checkboxDisabledClass = `${checkboxClass}--disabled`;
   const checkboxItemClass = `${checkboxClass}--item`;
+  const checkboxLabelHiddenClass = `${checkboxClass}--labelHidden`;
   const checkboxInputClass = `${checkboxClass}__input`;
   const checkboxInputPositionClass = useInputPositionClass(checkboxClass, inputPosition);
   const checkboxTextClass = `${checkboxClass}__text`;
-  const checkboxValidationTextClass = `${checkboxClass}__validationText`;
   const checkboxValidationClass = `${checkboxClass}--${validationState}`;
 
   return {
@@ -34,11 +33,11 @@ export function useCheckboxStyleProps(props: SpiritCheckboxProps): CheckboxStyle
         [checkboxInputPositionClass]: checkboxInputPositionClass,
         [checkboxDisabledClass]: isDisabled,
         [checkboxItemClass]: isItem,
+        [checkboxLabelHiddenClass]: isLabelHidden,
         [checkboxValidationClass]: validationState,
       }),
       text: checkboxTextClass,
       input: checkboxInputClass,
-      validationText: checkboxValidationTextClass,
     },
     props: {
       ...restProps,
