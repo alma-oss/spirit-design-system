@@ -194,6 +194,11 @@
                 > .#{$field-name}__input {
                 border-color: map.get($validation-state-value, input-border-color);
             }
+        } @else if $field-name == 'UNSTABLE_Picker' {
+            :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
+                .#{$field-name}__inputContainer {
+                border-color: map.get($validation-state-value, input-border-color);
+            }
         } @else {
             :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
                 > .#{$field-name}__input {
@@ -248,14 +253,16 @@
     box-shadow: form-fields-settings.$input-focus-shadow;
 }
 
-@mixin box-field-disabled-input() {
+@mixin box-field-disabled-input($has-placeholder: true) {
     @include input-disabled();
 
     border-color: form-fields-settings.$input-border-color-state-disabled;
     background-color: form-fields-settings.$input-background-color-state-disabled;
 
-    &::placeholder {
-        color: form-fields-settings.$box-field-input-placeholder-color-state-disabled;
+    @if $has-placeholder {
+        &::placeholder {
+            color: form-fields-settings.$box-field-input-placeholder-color-state-disabled;
+        }
     }
 }
 
