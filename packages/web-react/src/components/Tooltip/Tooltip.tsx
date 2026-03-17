@@ -1,5 +1,6 @@
 'use client';
 
+import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
 import React, { type ElementType, forwardRef, useRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import {
@@ -63,8 +64,9 @@ const _Tooltip = <E extends ElementType = 'div'>(props: SpiritTooltipProps<E>, r
   if (tooltipElement) {
     const tooltipComputedStyle = window.getComputedStyle(tooltipElement);
     const tooltipArrowComputedStyle = tooltipArrowElement && window.getComputedStyle(tooltipArrowElement);
+    const parsedOffset = parseInt(tooltipComputedStyle.getPropertyValue(`--${cssVariablePrefix}placement-offset`), 10);
     tooltipMaxWidth = parseInt(tooltipComputedStyle.getPropertyValue('--tooltip-max-width'), 10);
-    tooltipOffset = parseInt(tooltipComputedStyle.getPropertyValue('--tooltip-offset'), 10);
+    tooltipOffset = Number.isNaN(parsedOffset) ? undefined : parsedOffset;
     tooltipCornerOffset = tooltipArrowComputedStyle
       ? parseInt(tooltipArrowComputedStyle.getPropertyValue('--tooltip-arrow-corner-offset'), 10)
       : 0;
