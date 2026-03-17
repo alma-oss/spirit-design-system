@@ -19,9 +19,7 @@ export interface FileUploadStyle {
       root: string;
       input: string;
       dropLabel: string;
-      helper: string;
       link: string;
-      validationText: string;
       dropZone: {
         root: string;
         label: string;
@@ -42,11 +40,9 @@ export const useFileUploadStyleProps = (props?: FileUploadStyleProps): FileUploa
   const fileUploadInputDropLabelClass = `${fileUploadInputClass}__dragAndDropLabel`;
   const fileUploadInputDropZoneClass = `${fileUploadInputClass}__dropZone`;
   const fileUploadInputDropZoneLabelClass = `${fileUploadInputDropZoneClass}Label`;
-  const fileUploadInputHelperClass = `${fileUploadInputClass}__helperText`;
   const fileUploadInputInputClass = `${fileUploadInputClass}__input`;
   const fileUploadInputLinkClass = `${fileUploadInputClass}__link`;
   const fileUploadInputLinkUtilityClasses = ['link-primary', 'link-underlined'];
-  const fileUploadInputValidationTextClass = `${fileUploadInputClass}__validationText`;
   const fileUploadListClass = `${fileUploadClass}List`;
 
   return {
@@ -61,9 +57,7 @@ export const useFileUploadStyleProps = (props?: FileUploadStyleProps): FileUploa
         }),
         input: fileUploadInputInputClass,
         dropLabel: fileUploadInputDropLabelClass,
-        helper: fileUploadInputHelperClass,
         link: classNames(fileUploadInputLinkClass, ...fileUploadInputLinkUtilityClasses),
-        validationText: fileUploadInputValidationTextClass,
         dropZone: {
           root: fileUploadInputDropZoneClass,
           label: fileUploadInputDropZoneLabelClass,

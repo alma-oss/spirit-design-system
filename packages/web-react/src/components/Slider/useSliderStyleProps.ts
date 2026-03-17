@@ -8,7 +8,6 @@ export interface SliderStyles {
   classProps: {
     root: string;
     input: string;
-    validationText: string;
   };
   props: UseSliderStyleProps;
 }
@@ -22,7 +21,6 @@ export function useSliderStyleProps(props: UseSliderStyleProps): SliderStyles {
   const isFluidClass = `${sliderClass}--fluid`;
   const validationStateClass = `${sliderClass}--${validationState}`;
   const inputClass = `${sliderClass}__input`;
-  const validationTextClass = `${sliderClass}__validationText`;
 
   return {
     classProps: {
@@ -32,7 +30,6 @@ export function useSliderStyleProps(props: UseSliderStyleProps): SliderStyles {
         [validationStateClass]: validationState,
       }),
       input: inputClass,
-      validationText: validationTextClass,
     },
     props: restProps,
   };

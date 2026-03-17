@@ -75,36 +75,68 @@ and [escape hatches][readme-escape-hatches].
 
 ## Custom Component
 
-Text field classes are fabricated using `useCheckboxStyleProps` hook. You can use it to create your own custom Checkbox component.
+Checkbox classes are fabricated using `useCheckboxStyleProps` hook. You can use it to create your own custom Checkbox component. Compose the standalone [HelperText][readme-helper-text], [Label][readme-label], and [ValidationText][readme-validation-text] components with `PropsProvider` and `useAriaIds` for correct styling and accessibility.
 
 ```tsx
 const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
-  const { id } = props;
+  const {
+    'aria-describedby': ariaDescribedBy = '',
+    hasValidationIcon,
+    helperText,
+    id,
+    isDisabled,
+    isItem,
+    isLabelHidden,
+    isRequired,
+    label,
+    validationState,
+    validationText,
+    ...restProps
+  } = props;
   const { classProps, props: modifiedProps } = useCheckboxStyleProps(props);
-
-  const helperTextId = `${id}-helper-text`;
-  const validationTextId = `${id}-validation-text`;
+  const { styleProps, props: transferProps } = useStyleProps(restProps);
+  const [ids, register] = useAriaIds(ariaDescribedBy);
+  const ariaDescribedByProp = useAriaDescribedBy(ids);
+  const validationTextRole = useValidationTextRole({
+    validationState,
+    validationText,
+  });
 
   return (
-    <div className={classProps.root}>
-      <input
-        {...modifiedProps}
-        id={id}
-        className={classProps.input}
-        aria-describedby={`${validationTextId} ${helperTextId}`}
-      />
-      <div className={styleProps.text}>
-        <label className={styleProps.label} htmlFor={props.id}>
-          {props.label}
-        </label>
-        <div className={styleProps.helperText} id={helperTextId}>
-          {props.helperText}
-        </div>
-        <div className={styleProps.validationText} id={validationTextId}>
-          {props.validationText}
+    <PropsProvider
+      value={{
+        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+        validationState,
+      }}
+    >
+      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
+        <input
+          {...transferProps}
+          {...ariaDescribedByProp}
+          type="checkbox"
+          id={id}
+          className={classProps.input}
+          disabled={isDisabled}
+          required={isRequired}
+        />
+        <div className={classProps.text}>
+          <Label htmlFor={id}>{label}</Label>
+          <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+          {validationState && (
+            <ValidationText
+              id={`${id}-validation-text`}
+              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+              validationText={validationText}
+              registerAria={register}
+              role={validationTextRole}
+            />
+          )}
         </div>
       </div>
-    </div>
+    </PropsProvider>
   );
 };
 ```
@@ -117,5 +149,8 @@ For detailed information see [Checkbox](https://github.com/alma-oss/spirit-desig
 [item]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Item/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/HelperText/README.md
+[readme-label]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Label/README.md
 [readme-responsive]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#responsive-props
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[readme-validation-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ValidationText/README.md

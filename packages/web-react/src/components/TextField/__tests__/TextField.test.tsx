@@ -4,12 +4,14 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   restPropsTest,
   sizePropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
   validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import { type TextFieldType } from '../../../types';
 import TextField from '../TextField';
@@ -17,6 +19,18 @@ import TextField from '../TextField';
 jest.mock('../../../hooks/useIcon');
 
 describe('TextField', () => {
+  formFieldLabelContextPropsTest({
+    renderComponent: (props) => <TextField id="textfield-context" label="Label" type="text" {...props} />,
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => <TextField id="textfield-helper-context" label="Label" type="text" {...props} />,
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => <TextField id="textfield-validation-context" label="Label" type="text" {...props} />,
+  });
+
   describe.each(['text', 'password', 'email'])('input type %s', (type) => {
     classNamePrefixProviderTest(TextField, 'TextField');
 
@@ -25,8 +39,6 @@ describe('TextField', () => {
     restPropsTest(TextField, 'input');
 
     validationStatePropsTest(TextField, 'TextField--');
-
-    validationTextPropsTest(TextField, '.TextField__validationText', type as TextFieldType);
 
     validHtmlAttributesTest(TextField);
 
@@ -53,12 +65,6 @@ describe('TextField', () => {
       expect(screen.getByLabelText('Label')).toHaveClass('TextField__input');
     });
 
-    it('should have helper text', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} helperText="helper text" />);
-
-      expect(screen.getByText('helper text')).toBeInTheDocument();
-    });
-
     it('should have fluid classname', () => {
       render(<TextField id="textfield" label="Label" type={type as TextFieldType} isFluid />);
 
@@ -69,7 +75,6 @@ describe('TextField', () => {
       render(
         <TextField
           id="textfield"
-          data-testid="test"
           label={
             <>
               TextField <b>Label</b>
@@ -79,7 +84,7 @@ describe('TextField', () => {
         />,
       );
 
-      const element = screen.getByTestId('test').previousElementSibling as HTMLElement;
+      const element = screen.getByText('Label').parentElement as HTMLElement;
 
       expect(element).toHaveTextContent('TextField Label');
       expect(element.innerHTML).toBe('TextField <b>Label</b>');
@@ -128,5 +133,22 @@ describe('TextField', () => {
       expect(screen.getByLabelText('Label')).toHaveAttribute('disabled');
       expect(screen.getByRole('switch')).toHaveAttribute('disabled');
     });
+  });
+
+  it('should render validation icon when hasValidationIcon is set', () => {
+    render(
+      <TextField
+        id="textfield-validation-icon"
+        label="Label"
+        type="text"
+        hasValidationIcon
+        validationState="danger"
+        validationText="Invalid"
+      />,
+    );
+
+    const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
+
+    expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
 });

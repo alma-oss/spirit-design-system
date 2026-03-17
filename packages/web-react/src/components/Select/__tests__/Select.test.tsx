@@ -4,19 +4,27 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   requiredPropsTest,
   restPropsTest,
   sizePropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
   validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import Select from '../Select';
 
 jest.mock('../../../hooks/useIcon');
 
 describe('Select', () => {
+  const selectChild = (
+    <option value="1" key="1">
+      Option 1
+    </option>
+  );
+
   classNamePrefixProviderTest(Select, 'Select');
 
   stylePropsTest(Select);
@@ -24,8 +32,6 @@ describe('Select', () => {
   restPropsTest(Select, 'select');
 
   validationStatePropsTest(Select, 'Select--');
-
-  validationTextPropsTest(Select, '.Select__validationText');
 
   requiredPropsTest(Select, 'combobox', 'id', 'test-select');
 
@@ -35,10 +41,34 @@ describe('Select', () => {
 
   sizePropsTest(Select);
 
+  formFieldLabelContextPropsTest({
+    renderComponent: (props) => (
+      <Select id="select-context" label="Label" {...props}>
+        {selectChild}
+      </Select>
+    ),
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => (
+      <Select id="select-helper-context" label="Label" {...props}>
+        {selectChild}
+      </Select>
+    ),
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => (
+      <Select id="select-validation-context" label="Label" {...props}>
+        {selectChild}
+      </Select>
+    ),
+  });
+
   it('should have label', () => {
     render(
       <Select id="test-select" label="Label">
-        <option value="1">Option 1</option>
+        {selectChild}
       </Select>,
     );
 
@@ -48,27 +78,17 @@ describe('Select', () => {
   it('should have input classname', () => {
     render(
       <Select id="test-select" label="Label">
-        <option value="1">Option 1</option>
+        {selectChild}
       </Select>,
     );
 
     expect(screen.getByLabelText('Label')).toHaveClass('Select__input');
   });
 
-  it('should have helper text', () => {
-    render(
-      <Select id="test-select" label="Label" helperText="helper text">
-        <option value="1">Option 1</option>
-      </Select>,
-    );
-
-    expect(screen.getByText('Label').parentElement?.lastChild).toHaveTextContent('helper text');
-  });
-
   it('should have fluid classname', () => {
     render(
       <Select id="test-select" label="Label" isFluid>
-        <option value="1">Option 1</option>
+        {selectChild}
       </Select>,
     );
 
@@ -85,7 +105,7 @@ describe('Select', () => {
           </>
         }
       >
-        <option value="1">Option 1</option>
+        {selectChild}
       </Select>,
     );
 
@@ -93,5 +113,23 @@ describe('Select', () => {
 
     expect(element).toHaveTextContent('Select Label');
     expect(element.innerHTML).toBe('Select <b>Label</b>');
+  });
+
+  it('should render validation icon when hasValidationIcon is set', () => {
+    render(
+      <Select
+        id="select-validation-icon"
+        label="Label"
+        hasValidationIcon
+        validationState="danger"
+        validationText="Invalid"
+      >
+        {selectChild}
+      </Select>,
+    );
+
+    const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
+
+    expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
 });

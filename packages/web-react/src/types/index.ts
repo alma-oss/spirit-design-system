@@ -59,4 +59,5 @@ export * from './toggle';
 export * from './tooltip';
 export * from './truncate';
 export * from './unstableHeader';
+export * from './validationText';
 export * from './visuallyHidden';

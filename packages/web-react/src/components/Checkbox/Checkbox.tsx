@@ -5,10 +5,9 @@ import React, { type ForwardedRef, forwardRef } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
 import { FormFieldVariants, type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
-import { ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { useCheckboxStyleProps } from './useCheckboxStyleProps';
 
 const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
@@ -40,11 +39,11 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
   return (
     <PropsProvider
       value={{
-        formFieldVariant: FormFieldVariants.INLINE,
+        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
         isDisabled,
-        isItem,
         isLabelHidden,
         isRequired,
+        validationState,
       }}
     >
       <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
@@ -62,11 +61,10 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
         />
         <div className={classProps.text}>
           <Label htmlFor={id}>{label}</Label>
-          <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
+          <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
           {validationState && (
             <ValidationText
-              UNSAFE_className={classProps.validationText}
-              id={`${id}__validationText`}
+              id={`${id}-validation-text`}
               {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
               validationText={validationText}
               registerAria={register}

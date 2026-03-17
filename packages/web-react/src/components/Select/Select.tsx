@@ -5,12 +5,11 @@ import React, { type ForwardedRef, forwardRef } from 'react';
 import { Sizes } from '../../constants';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
-import { FormFieldVariants, type ForwardRefComponent, type SpiritSelectProps } from '../../types';
-import { ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { type ForwardRefComponent, type SpiritSelectProps } from '../../types';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
 import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { useSelectStyleProps } from './useSelectStyleProps';
 
 const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>) => {
@@ -50,10 +49,10 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
   return (
     <PropsProvider
       value={{
-        formFieldVariant: FormFieldVariants.BOX,
         isDisabled,
         isLabelHidden,
         isRequired,
+        validationState,
       }}
     >
       <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
@@ -74,12 +73,11 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
             <Icon name="chevron-down" boxSize={size === Sizes.SMALL ? 16 : 20} />
           </div>
         </div>
-        <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
+        <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
         {validationState && (
           <ValidationText
-            UNSAFE_className={classProps.validationText}
+            id={`${id}-validation-text`}
             {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-            id={`${id}__validationText`}
             validationText={validationText}
             registerAria={register}
             role={validationTextRole}

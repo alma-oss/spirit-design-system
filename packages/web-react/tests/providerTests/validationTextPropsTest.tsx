@@ -1,7 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import React, { type ComponentType } from 'react';
 import { type TextFieldType } from '../../src';
-import { A11Y_ALERT_ROLE } from '../../src/components/Field/constants';
+import { A11Y_ALERT_ROLE } from '../../src/components/ValidationText/constants';
 
 export const validationTextPropsTest = (
   Component: ComponentType<any>,
@@ -56,7 +56,7 @@ export const validationTextPropsTest = (
 
     await waitFor(() => {
       const element = dom.container.querySelector(selector) as HTMLElement;
-      expect(element.children[0]).toContainHTML('ul');
+      expect(within(element).getByRole('list')).toBeInTheDocument();
     });
   });
 
