@@ -6,7 +6,6 @@
   document.addEventListener("DOMContentLoaded", () => {
     const radios = document.querySelectorAll('input[name="drawer-alignment"]');
     const drawer = document.getElementById("drawer-example");
-    const drawerNonModal = document.getElementById("drawer-example-non-modal");
     const backdropCheckbox = document.getElementById("drawer-is-closable-on-backdrop-click");
     const escapeKeyCheckbox = document.getElementById("drawer-is-closable-on-escape-key");
     const contentTextArea = document.getElementById("drawer-content");
@@ -17,11 +16,6 @@
       closableOnBackdropClick: backdropCheckbox.checked,
       closableOnEscapeKey: escapeKeyCheckbox.checked,
     });
-
-    // Initialize non-modal drawer: page stays interactive
-    if (drawerNonModal) {
-      new Offcanvas(drawerNonModal, { modal: false });
-    }
 
     // Handle alignment changes
     radios.forEach(radio => {
@@ -141,7 +135,7 @@
             <div class="TextArea TextArea--medium">
               <label
                 for="drawer-content"
-                class="Label Label--box"
+                class="Label"
               >Drawer content</label>
               <textarea
                 name="content"
@@ -204,57 +198,6 @@
       <!-- Drawer: end -->
 
     </div>
-  </div>
-</section>
-
-<section class="py-900 py-tablet-1000 hide-from-visual-tests">
-  <div class="Container">
-    <h2 class="docs-Heading">Non-modal Drawer</h2>
-    <button
-      type="button"
-      class="Button Button--primary Button--medium"
-      data-spirit-toggle="offcanvas"
-      data-spirit-target="#drawer-example-non-modal"
-      aria-controls="drawer-example-non-modal"
-      aria-expanded="false"
-    >
-      Open non-modal Drawer
-    </button>
-    <dialog
-      id="drawer-example-non-modal"
-      class="Drawer Drawer--left"
-      aria-label="Non-modal drawer example"
-    >
-      <div
-        class="DrawerPanel"
-        data-testid="drawer-panel-non-modal"
-      >
-        <div class="DrawerPanel__content">
-          <button
-            type="button"
-            aria-expanded="false"
-            class="Button Button--tertiary Button--medium Button--symmetrical DrawerCloseButton"
-            data-spirit-dismiss="offcanvas"
-            data-spirit-target="#drawer-example-non-modal"
-            aria-controls="drawer-example-non-modal"
-          >
-            <svg
-              class="Icon"
-              width="24"
-              height="24"
-              aria-hidden="true"
-            >
-              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-            </svg>
-            <span class="accessibility-hidden">Close</span>
-          </button>
-          <div class="p-800">
-            <p class="mb-0">This is a non-modal drawer. The main page remains clickable and scrollable. Close with the
-              button above or Escape.</p>
-          </div>
-        </div>
-      </div>
-    </dialog>
   </div>
 </section>
 
