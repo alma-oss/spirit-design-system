@@ -125,7 +125,7 @@ and [escape hatches][readme-escape-hatches].
 
 | Attribute           | Type                            | Default | Required | Description                                               |
 | ------------------- | ------------------------------- | ------- | -------- | --------------------------------------------------------- |
-| `hasValidationIcon` | `boolean`                       | `false` | ✕        | Whether to show validation icon                           |
+| `hasValidationIcon` | `bool`                          | `false` | ✕        | Whether to show validation icon                           |
 | `helperText`        | `string`                        | -       | ✕        | Custom helper text                                        |
 | `id`                | `string`                        | -       | ✓        | Input and label identification                            |
 | `isDisabled`        | `bool`                          | `false` | ✕        | Whether is the input disabled                             |
