@@ -5,8 +5,8 @@ import React, { type ForwardedRef, forwardRef } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
 import { FormFieldVariants, type ForwardRefComponent, type SpiritRadioProps } from '../../types';
-import { Label } from '../Field';
 import { HelperText } from '../HelperText';
+import { Label } from '../Label';
 import { useRadioStyleProps } from './useRadioStyleProps';
 
 const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
@@ -17,6 +17,8 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
     id,
     isChecked,
     isDisabled,
+    isItem,
+    isLabelHidden,
     label,
     onChange,
     value,
@@ -30,8 +32,10 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
   return (
     <PropsProvider
       value={{
+        formFieldVariant: FormFieldVariants.INLINE,
         isDisabled,
-        formFieldVariant: modifiedProps.isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
+        isItem,
+        isLabelHidden,
       }}
     >
       <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
@@ -48,9 +52,7 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
           ref={ref}
         />
         <div className={classProps.text}>
-          <Label UNSAFE_className={classProps.label} htmlFor={id}>
-            {label}
-          </Label>
+          <Label htmlFor={id}>{label}</Label>
           <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
         </div>
       </div>

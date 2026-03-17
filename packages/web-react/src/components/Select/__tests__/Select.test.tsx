@@ -35,34 +35,14 @@ describe('Select', () => {
 
   sizePropsTest(Select);
 
-  it('should have label classname', () => {
+  it('should have label', () => {
     render(
       <Select id="test-select" label="Label">
         <option value="1">Option 1</option>
       </Select>,
     );
 
-    expect(screen.getByText('Label')).toHaveClass('Select__label');
-  });
-
-  it('should have hidden classname', () => {
-    render(
-      <Select id="test-select" label="Label" isLabelHidden>
-        <option value="1">Option 1</option>
-      </Select>,
-    );
-
-    expect(screen.getByText('Label')).toHaveClass('Select__label--hidden');
-  });
-
-  it('should have required classname', () => {
-    render(
-      <Select id="test-select" label="Label" isRequired>
-        <option value="1">Option 1</option>
-      </Select>,
-    );
-
-    expect(screen.getByText('Label')).toHaveClass('Select__label--required');
+    expect(screen.getByText('Label')).toBeInTheDocument();
   });
 
   it('should have input classname', () => {

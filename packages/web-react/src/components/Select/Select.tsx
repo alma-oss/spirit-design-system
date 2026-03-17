@@ -6,10 +6,11 @@ import { Sizes } from '../../constants';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
 import { FormFieldVariants, type ForwardRefComponent, type SpiritSelectProps } from '../../types';
-import { Label, ValidationText } from '../Field';
+import { ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
+import { Label } from '../Label';
 import { useSelectStyleProps } from './useSelectStyleProps';
 
 const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>) => {
@@ -47,11 +48,16 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
   });
 
   return (
-    <PropsProvider value={{ isDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+    <PropsProvider
+      value={{
+        formFieldVariant: FormFieldVariants.BOX,
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+      }}
+    >
       <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
-        <Label htmlFor={id} UNSAFE_className={classProps.label}>
-          {label}
-        </Label>
+        <Label htmlFor={id}>{label}</Label>
         <div className={classProps.container}>
           <select
             {...transferProps}
