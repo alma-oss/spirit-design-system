@@ -1,7 +1,6 @@
-// 1. Box variant is used for components like TextField, TextArea, Select, etc.
-// 2. Inline variant is used for components like Checkbox, Radio, Toggle, etc.
-// 3. Item variant is used for standalone Item components (button, link, div with .Item class).
-// 4. The label is placed in the second column of the Item's grid to align with the input and helper text.
+// 1. Inline variant is used for components like Checkbox, Radio, Toggle, etc.
+// 2. Item variant is used for standalone Item components (button, link, div with .Item class).
+// 3. The label is placed in the second column of the Item's grid to align with the input and helper text.
 //    See Item component styles for more details.
 
 @use '@tokens' as tokens;
@@ -16,30 +15,29 @@
     --#{tokens.$css-variable-prefix}label-color-disabled: #{theme.$color-state-disabled};
     --#{tokens.$css-variable-prefix}label-required-color: #{theme.$required-color};
 
+    @include typography.generate(theme.$typography);
+
     display: block;
     color: var(--#{tokens.$css-variable-prefix}label-color, #{theme.$color-state-default});
 }
 
-// 1.
-.Label--box {
-    @include typography.generate(theme.$box-field-typography);
-
+.Label:not(:is(.Label--inline, .Label--item)) {
     margin-bottom: theme.$box-field-margin-bottom;
 }
 
-// 2.
+// 1.
 .Label--inline {
     @include typography.generate(theme.$inline-field-typography);
 
     cursor: cursors.$form-fields;
 }
 
-// 3.
+// 2.
 .Label--item {
     @include typography.generate(theme.$item-typography);
-    @include pseudo-element.stretch($set-root-relative: true);
+    @include pseudo-element.stretch();
 
-    grid-column: 2; // 4.
+    grid-column: 2; // 3.
 }
 
 .Label--disabled {

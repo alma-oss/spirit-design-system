@@ -58,17 +58,38 @@
         <fieldset class="border-0">
           <legend>Drawer alignment:</legend>
           <div class="Radio mr-600">
-            <input name="drawer-alignment" autocomplete="off" type="radio" id="drawer-alignment-left" class="Radio__input" value="left">
+            <input
+              name="drawer-alignment"
+              autocomplete="off"
+              type="radio"
+              id="drawer-alignment-left"
+              class="Radio__input"
+              value="left"
+            >
             <div class="Radio__text">
-              <label class="Label Label--inline" for="drawer-alignment-left">
+              <label
+                class="Label Label--inline"
+                for="drawer-alignment-left"
+              >
                 Left
               </label>
             </div>
           </div>
           <div class="Radio">
-            <input name="drawer-alignment" autocomplete="off" type="radio" id="drawer-alignment-right" class="Radio__input" value="right" checked="">
+            <input
+              name="drawer-alignment"
+              autocomplete="off"
+              type="radio"
+              id="drawer-alignment-right"
+              class="Radio__input"
+              value="right"
+              checked=""
+            >
             <div class="Radio__text">
-              <label class="Label Label--inline" for="drawer-alignment-right">
+              <label
+                class="Label Label--inline"
+                for="drawer-alignment-right"
+              >
                 Right
               </label>
             </div>
@@ -77,24 +98,51 @@
         <fieldset class="border-0">
           <div class="Stack Stack--hasSpacing">
             <div class="Checkbox">
-              <input name="is-closable-on-backdrop-click" type="checkbox" id="drawer-is-closable-on-backdrop-click" class="Checkbox__input" value="" checked="">
+              <input
+                name="is-closable-on-backdrop-click"
+                type="checkbox"
+                id="drawer-is-closable-on-backdrop-click"
+                class="Checkbox__input"
+                value=""
+                checked=""
+              >
               <div class="Checkbox__text">
-                <label class="Label Label--inline" for="drawer-is-closable-on-backdrop-click">
+                <label
+                  class="Label Label--inline"
+                  for="drawer-is-closable-on-backdrop-click"
+                >
                   Closable on Backdrop Click
                 </label>
               </div>
             </div>
             <div class="Checkbox">
-              <input name="is-closable-on-escape-key" type="checkbox" id="drawer-is-closable-on-escape-key" class="Checkbox__input" value="" checked="">
+              <input
+                name="is-closable-on-escape-key"
+                type="checkbox"
+                id="drawer-is-closable-on-escape-key"
+                class="Checkbox__input"
+                value=""
+                checked=""
+              >
               <div class="Checkbox__text">
-                <label class="Label Label--inline" for="drawer-is-closable-on-escape-key">
+                <label
+                  class="Label Label--inline"
+                  for="drawer-is-closable-on-escape-key"
+                >
                   Closable on Escape Key Down
                 </label>
               </div>
             </div>
             <div class="TextArea TextArea--medium">
-              <label for="drawer-content" class="Label Label--box">Drawer content</label>
-              <textarea name="content" class="TextArea__input" id="drawer-content">This is a Drawer content.</textarea>
+              <label
+                for="drawer-content"
+                class="Label"
+              >Drawer content</label>
+              <textarea
+                name="content"
+                class="TextArea__input"
+                id="drawer-content"
+              >This is a Drawer content.</textarea>
             </div>
           </div>
         </fieldset>
@@ -113,8 +161,15 @@
       </button>
 
       <!-- Drawer: start -->
-      <dialog id="drawer-example" class="Drawer Drawer--right" aria-label="example-basic__title">
-        <div class="DrawerPanel" data-testid="drawer-panel">
+      <dialog
+        id="drawer-example"
+        class="Drawer Drawer--right"
+        aria-label="example-basic__title"
+      >
+        <div
+          class="DrawerPanel"
+          data-testid="drawer-panel"
+        >
           <div class="DrawerPanel__content">
             <button
               type="button"
@@ -124,12 +179,20 @@
               data-spirit-target="#drawer-example"
               aria-controls="drawer-example"
             >
-              <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
             </button>
-            <div class="p-800" data-drawer-demo-content>This is a Drawer content.</div>
+            <div
+              class="p-800"
+              data-drawer-demo-content
+            >This is a Drawer content.</div>
           </div>
         </div>
       </dialog>
