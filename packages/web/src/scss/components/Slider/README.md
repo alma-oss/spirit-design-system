@@ -10,7 +10,7 @@ is required by Webkit-based browsers such as Chrome or Safari).
 
 ```html
 <div class="Slider">
-  <label for="slider-default" class="Label Label--box">Slider</label>
+  <label for="slider-default" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-default"
@@ -31,7 +31,7 @@ be updated when the slider value changes. See the [Slider Position](#slider-posi
 
 ```html
 <div class="Slider">
-  <label for="slider-steps" class="Label Label--box">Slider</label>
+  <label for="slider-steps" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-steps"
@@ -66,7 +66,7 @@ position = 100 * (value - min) / (max - min)
 
 ```html
 <div class="Slider">
-  <label for="slider-hidden-label" class="Label Label--box accessibility-hidden">Slider</label>
+  <label for="slider-hidden-label" class="Label accessibility-hidden">Slider</label>
   <input
     class="Slider__input"
     id="slider-hidden-label"
@@ -82,7 +82,7 @@ position = 100 * (value - min) / (max - min)
 
 ```html
 <div class="Slider Slider--fluid">
-  <label for="slider-fluid" class="Label Label--box">Slider</label>
+  <label for="slider-fluid" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-fluid"
@@ -100,7 +100,7 @@ To add helper text, use the [HelperText][helper-text] component:
 
 ```html
 <div class="Slider">
-  <label for="slider-helper-text" class="Label Label--box">Slider</label>
+  <label for="slider-helper-text" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-helper-text"
@@ -126,7 +126,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 
 ```html
 <div class="Slider Slider--success">
-  <label for="slider-success" class="Label Label--box">Slider</label>
+  <label for="slider-success" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-success"
@@ -138,7 +138,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div class="Slider Slider--warning">
-  <label for="slider-warning" class="Label Label--box">Slider</label>
+  <label for="slider-warning" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-warning"
@@ -152,7 +152,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div class="Slider Slider--danger">
-  <label for="slider-danger" class="Label Label--box">Slider</label>
+  <label for="slider-danger" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-danger"
@@ -171,7 +171,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div class="Slider Slider--warning">
-  <label for="slider-warning" class="Label Label--box">Slider</label>
+  <label for="slider-warning" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-warning"
@@ -198,7 +198,7 @@ JS interaction class when controlled by JavaScript:
 
 ```html
 <div class="Slider Slider--disabled">
-  <label for="slider-disabled" class="Label Label--box Label--disabled">Slider</label>
+  <label for="slider-disabled" class="Label Label--disabled">Slider</label>
   <input
     class="Slider__input"
     id="slider-disabled"
