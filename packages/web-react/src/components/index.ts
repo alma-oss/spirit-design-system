@@ -30,6 +30,7 @@ export * from './Icon';
 export * from './IconBox';
 export * from './InputDetails';
 export * from './Item';
+export * from './Label';
 export * from './Link';
 export * from './Matrix';
 export * from './Modal';
