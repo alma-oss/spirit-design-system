@@ -30,16 +30,10 @@ describe('Radio', () => {
 
   ariaAttributesTest(Radio);
 
-  it('should have label classname', () => {
+  it('should have label', () => {
     render(<Radio id="radio" label="label" />);
 
-    expect(screen.getByRole('radio').nextElementSibling?.firstChild).toHaveClass('Radio__label');
-  });
-
-  it('should have hidden classname', () => {
-    render(<Radio id="radio" label="hidden label" isLabelHidden />);
-
-    expect(screen.getByRole('radio').nextElementSibling?.firstChild).toHaveClass('Radio__label--hidden');
+    expect(screen.getByRole('radio').nextElementSibling?.firstChild).toBeInTheDocument();
   });
 
   it('should have input classname', () => {

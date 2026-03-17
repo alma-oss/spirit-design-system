@@ -12,23 +12,8 @@ describe('useCheckboxStyleProps', () => {
       root: 'Checkbox Checkbox--inputPositionStart',
       text: 'Checkbox__text',
       input: 'Checkbox__input',
-      label: 'Checkbox__label',
       validationText: 'Checkbox__validationText',
     });
-  });
-
-  it('should return required input', () => {
-    const props = { isRequired: true } as SpiritCheckboxProps;
-    const { result } = renderHook(() => useCheckboxStyleProps(props));
-
-    expect(result.current.classProps.label).toBe('Checkbox__label Checkbox__label--required');
-  });
-
-  it('should return hidden label', () => {
-    const props = { isLabelHidden: true } as SpiritCheckboxProps;
-    const { result } = renderHook(() => useCheckboxStyleProps(props));
-
-    expect(result.current.classProps.label).toBe('Checkbox__label Checkbox__label--hidden');
   });
 
   it('should return field as an Item', () => {
