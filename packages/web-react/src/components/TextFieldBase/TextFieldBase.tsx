@@ -6,17 +6,15 @@ import { Sizes } from '../../constants';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import {
-  FormFieldVariants,
   type ForwardRefComponent,
   type SpiritTextFieldBaseProps,
   type TextFieldBasePasswordToggleProps,
 } from '../../types';
 import { CharacterCounter } from '../CharacterCounter';
-import { ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import TextFieldBaseInput from './TextFieldBaseInput';
 import { useTextFieldBaseStyleProps } from './useTextFieldBaseStyleProps';
 import withPasswordToggle from './withPasswordToggle';
@@ -58,13 +56,10 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
 
   const hasTextContent = helperText || (validationState && validationText);
 
-  const helperTextElement = (
-    <HelperText id={`${id}__helper-text`} registerAria={register} helperText={helperText} />
-  );
+  const helperTextElement = <HelperText id={`${id}__helper-text`} registerAria={register} helperText={helperText} />;
 
   const validationTextElement = validationState ? (
     <ValidationText
-      UNSAFE_className={classProps.validationText}
       elementType="span"
       {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
       id={`${id}__validation-text`}
@@ -81,10 +76,10 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
   return (
     <PropsProvider
       value={{
-        formFieldVariant: FormFieldVariants.BOX,
         isDisabled,
         isLabelHidden,
         isRequired,
+        validationState,
       }}
     >
       <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>

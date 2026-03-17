@@ -31,6 +31,7 @@ export function useButtonStyleProps<T extends ElementType = 'button', C = void, 
     formFieldVariant?: unknown;
     isLabelHidden?: unknown;
     isRequired?: unknown;
+    validationState?: unknown;
   },
 ): ButtonStyles {
   const {
@@ -44,6 +45,7 @@ export function useButtonStyleProps<T extends ElementType = 'button', C = void, 
     formFieldVariant: _formFieldVariant,
     isLabelHidden: _isLabelHidden,
     isRequired: _isRequired,
+    validationState: _validationState,
     ...restProps
   } = props;
 

@@ -4,10 +4,10 @@ import classNames from 'classnames';
 import React from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { FormFieldVariants, type SpiritFieldGroupProps } from '../../types';
-import { ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { type SpiritFieldGroupProps } from '../../types';
 import { HelperText } from '../HelperText';
+import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { useFieldGroupStyleProps } from './useFieldGroupStyleProps';
 
@@ -37,7 +37,14 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
   });
 
   return (
-    <PropsProvider value={{ isDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+    <PropsProvider
+      value={{
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+        validationState,
+      }}
+    >
       <fieldset
         {...transferProps}
         {...styleProps}
@@ -47,17 +54,16 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
       >
         <VisuallyHidden elementType="legend">{label}</VisuallyHidden>
         {!isLabelHidden && (
-          <div className={classProps.label} aria-hidden="true">
+          <Label elementType="div" aria-hidden="true">
             {label}
-          </div>
+          </Label>
         )}
         <div className={classProps.fields}>{children}</div>
-        <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
+        <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
         {validationState && (
           <ValidationText
-            UNSAFE_className={classProps.validationText}
+            id={`${id}-validation-text`}
             {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-            id={`${id}__helperText`}
             validationText={validationText}
             registerAria={register}
             role={validationTextRole}

@@ -4,13 +4,11 @@ import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { FormFieldVariants } from '../../types';
 import { Button } from '../Button';
-import { ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
 import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { type UnstableFileUploadProps } from './types';
 import { useFileUploadState } from './useFileUploadState';
 import { useFileUploadStyleProps } from './useFileUploadStyleProps';
@@ -71,7 +69,8 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
     validationState,
     validationText,
   });
-  const inputId = id;
+  const inputId = `${id}-input`;
+  const rootDomId = rootId != null && rootId !== '' ? rootId : id;
 
   useEffect(() => {
     if (isDragAndDropSupportedProp !== undefined) {
@@ -83,16 +82,16 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
   return (
     <PropsProvider
       value={{
-        formFieldVariant: FormFieldVariants.BOX,
-        isDisabled: !!isDisabled,
+        isDisabled,
         isLabelHidden,
         isRequired,
+        validationState,
       }}
     >
       <div
         {...transferProps}
         {...styleProps}
-        {...(rootId != null && rootId !== '' ? { id: rootId } : {})}
+        id={rootDomId}
         className={classNames(classProps.root, styleProps.className)}
       >
         {hasInput && (
@@ -124,12 +123,7 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
                   &nbsp;
                   <span className={classProps.input.dropLabel}>{labelText}</span>
                 </label>
-                <HelperText
-                  UNSAFE_className={classProps.input.helper}
-                  id={`${inputId}__helperText`}
-                  registerAria={register}
-                  helperText={helperText}
-                />
+                <HelperText id={`${inputId}-helper-text`} registerAria={register} helperText={helperText} />
               </div>
               {/* @ts-expect-error - Div cannot have type="button". This will be solved with https://jira.almacareer.tech/browse/DS-2168 */}
               <Button aria-hidden="true" isDisabled={isDisabled} elementType="div" type={null}>
@@ -138,10 +132,9 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
             </div>
             {validationState && (
               <ValidationText
-                UNSAFE_className={classProps.input.validationText}
                 elementType="span"
+                id={`${inputId}-validation-text`}
                 {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-                id={`${inputId}__validationText`}
                 validationText={validationText}
                 registerAria={register}
                 role={validationTextRole}

@@ -19,7 +19,6 @@ describe('useFileUploaderStyleProps', () => {
     expect(result.current.classProps.input.input).toBe('FileUploaderInput__input');
     expect(result.current.classProps.input.dropLabel).toBe('FileUploaderInput__dragAndDropLabel');
     expect(result.current.classProps.input.link).toBe('FileUploaderInput__link link-primary link-underlined');
-    expect(result.current.classProps.input.validationText).toBe('FileUploaderInput__validationText');
     expect(result.current.classProps.input.dropZone).toBeDefined();
     expect(result.current.classProps.input.dropZone.root).toBe('FileUploaderInput__dropZone');
     expect(result.current.classProps.input.dropZone.label).toBe('FileUploaderInput__dropZoneLabel');

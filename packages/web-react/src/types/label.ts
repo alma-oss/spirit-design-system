@@ -1,5 +1,5 @@
 import { type ElementType, type ReactNode } from 'react';
-import { type FormFieldContextValue, type StyleProps } from './shared';
+import { type LabelStyleProps, type StyleProps } from './shared';
 
 export type LabelElementProps<E extends ElementType> = {
   /**
@@ -17,10 +17,4 @@ export interface LabelProps {
 }
 
 export interface SpiritLabelProps<T extends ElementType = 'label'>
-  extends
-    LabelElementProps<T>,
-    LabelProps,
-    StyleProps,
-    Partial<
-      Pick<FormFieldContextValue, 'isDisabled' | 'formFieldVariant' | 'isRequired' | 'isLabelHidden' | 'isItem'>
-    > {}
+  extends LabelElementProps<T>, LabelProps, StyleProps, LabelStyleProps {}

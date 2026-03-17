@@ -37,7 +37,7 @@ const _StackItem = <E extends ElementType = 'div'>(
 
   return (
     <Component {...otherProps} {...mergedStyleProps} ref={ref}>
-      <PropsProvider value={{ elementType: undefined }}>{children}</PropsProvider>
+      <PropsProvider value={{ elementType: null }}>{children}</PropsProvider>
     </Component>
   );
 };
