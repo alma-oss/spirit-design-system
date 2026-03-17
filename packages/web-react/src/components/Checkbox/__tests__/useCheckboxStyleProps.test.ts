@@ -12,7 +12,6 @@ describe('useCheckboxStyleProps', () => {
       root: 'Checkbox Checkbox--inputPositionStart',
       text: 'Checkbox__text',
       input: 'Checkbox__input',
-      validationText: 'Checkbox__validationText',
     });
   });
 

@@ -3,9 +3,11 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import {
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   restPropsTest,
   validHtmlAttributesTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import FileUploaderInput from '../FileUploaderInput';
 import '@testing-library/jest-dom';
@@ -17,12 +19,28 @@ describe('FileUploaderInput', () => {
 
   restPropsTest(FileUploaderInput, 'div');
 
-  validationTextPropsTest(FileUploaderInput, '.FileUploaderInput__validationText');
-
   validHtmlAttributesTest(FileUploaderInput);
 
+  formFieldLabelContextPropsTest({
+    renderComponent: (props) => (
+      <FileUploaderInput id="file-uploader-label-context" name="file-uploader-files" {...props} />
+    ),
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => (
+      <FileUploaderInput id="file-uploader-helper-context" name="file-uploader-files" {...props} />
+    ),
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => (
+      <FileUploaderInput id="file-uploader-validation-context" name="file-uploader-files" {...props} />
+    ),
+  });
+
   it('should have drag-and-drop class in Client component', () => {
-    render(<FileUploaderInput id="test-uploader" name="test-uploader" label="upload" data-testid="test" />);
+    render(<FileUploaderInput id="file-uploader-input" name="file-uploader-input" label="upload" data-testid="test" />);
 
     const dropZone = screen.getAllByTestId('test')[0];
 
@@ -31,7 +49,7 @@ describe('FileUploaderInput', () => {
 
   it('should not have drag-and-drop class in Server component', () => {
     const container = renderToString(
-      <FileUploaderInput id="test-uploader" name="test-uploader" label="upload" data-testid="test" />,
+      <FileUploaderInput id="file-uploader-input" name="file-uploader-input" label="upload" data-testid="test" />,
     );
 
     expect(container).not.toContain('has-drag-and-drop');
@@ -40,8 +58,8 @@ describe('FileUploaderInput', () => {
   it('should render label with html tags', () => {
     render(
       <FileUploaderInput
-        id="test-uploader"
-        name="test-uploader"
+        id="file-uploader-input"
+        name="file-uploader-input"
         label={
           <>
             Upload <b>File</b>
@@ -51,21 +69,26 @@ describe('FileUploaderInput', () => {
       />,
     );
 
-    const element = screen.getAllByTestId('test')[0].firstChild as HTMLElement;
+    const element = screen.getByText('File').parentElement as HTMLElement;
 
     expect(element).toHaveTextContent('Upload File');
     expect(element.innerHTML).toBe('Upload <b>File</b>');
   });
 
-  it('should not have `name` attribute on root div element', () => {
-    render(<FileUploaderInput id="test-uploader" name="test-uploader" label="upload" data-testid="test" />);
+  it('should render validation icon when hasValidationIcon is set', () => {
+    render(
+      <FileUploaderInput
+        id="file-uploader-validation-icon"
+        name="file-uploader-validation-icon"
+        label="upload"
+        hasValidationIcon
+        validationState="danger"
+        validationText="Invalid"
+      />,
+    );
 
-    const elements = screen.getAllByTestId('test');
-    const rootDiv = elements[0];
-    const input = document.querySelector('input[type="file"]') as HTMLInputElement;
+    const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
 
-    expect(rootDiv).not.toHaveAttribute('name');
-    expect(rootDiv.localName).toBe('div');
-    expect(input).toHaveAttribute('name', 'test-uploader');
+    expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
 });

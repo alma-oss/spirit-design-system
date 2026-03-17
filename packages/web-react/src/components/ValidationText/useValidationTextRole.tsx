@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { type ValidationState, type ValidationTextType } from '../../types/shared';
+import { type ValidationState, type ValidationTextType } from '../../types';
 import { A11Y_ALERT_ROLE } from './constants';
 
 export const useValidationTextRole = ({

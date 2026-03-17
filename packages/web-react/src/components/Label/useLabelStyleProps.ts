@@ -8,23 +8,18 @@ export interface LabelStyles {
 }
 
 export function useLabelStyleProps(props: FormFieldContextValue): LabelStyles {
-  const { formFieldVariant = FormFieldVariants.BOX, isDisabled, isRequired, isLabelHidden, isItem } = props;
+  const { formFieldVariant, isDisabled, isRequired, isLabelHidden } = props;
 
   const prefix = useClassNamePrefix('Label');
-  const boxClass = `${prefix}--box`;
   const inlineClass = `${prefix}--inline`;
   const itemClass = `${prefix}--item`;
   const requiredClass = `${prefix}--required`;
   const disabledClass = `${prefix}--disabled`;
   const hiddenClass = useClassNamePrefix('accessibility-hidden');
 
-  const isInline = formFieldVariant === FormFieldVariants.INLINE;
-  const isItemVariant = formFieldVariant === FormFieldVariants.ITEM || (isInline && isItem);
-
   const classProps = classNames(prefix, {
-    [boxClass]: formFieldVariant === FormFieldVariants.BOX,
-    [inlineClass]: isInline,
-    [itemClass]: isItemVariant,
+    [inlineClass]: formFieldVariant === FormFieldVariants.INLINE,
+    [itemClass]: formFieldVariant === FormFieldVariants.ITEM,
     [requiredClass]: isRequired,
     [disabledClass]: isDisabled,
     [hiddenClass]: isLabelHidden,
