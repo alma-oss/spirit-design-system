@@ -3,28 +3,19 @@
 import React, { type ElementType, useEffect } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type FormFieldContextValue, FormFieldVariants, type SpiritHelperTextProps } from '../../types';
+import { type FormFieldContextValue, type SpiritHelperTextProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useHelperTextStyleProps } from './useHelperTextStyleProps';
 
 const defaultProps: Partial<SpiritHelperTextProps> = {
   elementType: 'div',
-  formFieldVariant: FormFieldVariants.BOX,
   id: undefined,
   isDisabled: false,
   registerAria: undefined,
 };
 
-<<<<<<< HEAD:packages/web-react/src/components/Field/HelperText.tsx
-const HelperText = <E extends ElementType = 'div'>(props: HelperTextProps<E>) => {
-  const propsWithDefaults = { ...defaultProps, ...props };
-  const { helperText, elementType, id, registerAria, ...restProps } = propsWithDefaults;
-  const Component = elementType as ElementType;
-  const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(Component, { styleProps, transferProps });
-=======
 const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<E>) => {
-  const contextProps = (useContextProps() ?? {}) as Partial<FormFieldContextValue>;
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
   const propsWithDefaults = {
     ...defaultProps,
     isDisabled: contextProps.isDisabled,
@@ -33,7 +24,7 @@ const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<
   };
   const {
     helperText,
-    elementType: ElementTag = defaultProps.elementType as ElementType,
+    elementType: Component = defaultProps.elementType as ElementType,
     id,
     isDisabled,
     formFieldVariant,
@@ -43,14 +34,13 @@ const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<
 
   const { classProps } = useHelperTextStyleProps({ isDisabled, formFieldVariant });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, transferProps });
->>>>>>> 92c17dc32 (refactor(web-react): extract `HelperText` and move `useAriaIds` to shared hooks #DS-2398):packages/web-react/src/components/HelperText/HelperText.tsx
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, transferProps });
 
   useEffect(() => {
     helperText && registerAria?.({ add: id });
 
     return () => {
-      registerAria?.({ remove: id });
+      id && registerAria?.({ remove: id });
     };
   }, [helperText, id, registerAria]);
 
