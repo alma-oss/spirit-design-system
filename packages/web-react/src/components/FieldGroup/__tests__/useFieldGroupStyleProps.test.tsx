@@ -17,10 +17,10 @@ describe('useFieldGroupStyleProps', () => {
     expect(result.current.classProps.root).toBe('FieldGroup FieldGroup--fluid FieldGroup--danger');
   });
 
-  it('should return required class on label', () => {
-    const props: SpiritFieldGroupProps = { id: 'example-id', label: 'Label', isRequired: true };
+  it('should return fields class', () => {
+    const props: SpiritFieldGroupProps = { id: 'example-id', label: 'Label' };
     const { result } = renderHook(() => useFieldGroupStyleProps(props));
 
-    expect(result.current.classProps.label).toBe('FieldGroup__label FieldGroup__label--required');
+    expect(result.current.classProps.fields).toBe('FieldGroup__fields');
   });
 });

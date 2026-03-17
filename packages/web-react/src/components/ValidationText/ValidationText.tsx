@@ -1,33 +1,60 @@
 'use client';
 
 import React, { type ElementType, useEffect } from 'react';
+import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
+import { type FormFieldContextValue, type SpiritValidationTextProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Icon } from '../Icon';
-import { type ValidationTextProps } from './types';
 import { useValidationIcon } from './useValidationIcon';
+import { useValidationTextStyleProps } from './useValidationTextStyleProps';
 
-const defaultProps: Partial<ValidationTextProps> = {
+const defaultProps: Partial<SpiritValidationTextProps> = {
   elementType: 'div',
   id: undefined,
   registerAria: undefined,
   role: undefined,
 };
 
-const ValidationText = <E extends ElementType = 'div'>(props: ValidationTextProps<E>) => {
-  const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType, hasValidationStateIcon, id, registerAria, role, validationText, ...restProps } =
-    propsWithDefaults;
-  const Component = elementType as ElementType;
+const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTextProps<E>) => {
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
+  const propsWithDefaults = {
+    ...defaultProps,
+    formFieldVariant: contextProps.formFieldVariant,
+    isDisabled: contextProps.isDisabled,
+    ...props,
+  };
+  const {
+    elementType: Component = defaultProps.elementType as ElementType,
+    id,
+    hasValidationStateIcon,
+    registerAria,
+    role,
+    validationText,
+    formFieldVariant,
+    isDisabled,
+    ...restProps
+  } = propsWithDefaults;
+
   const validationIconName = useValidationIcon({ hasValidationStateIcon });
+  const validationStateForStyles = hasValidationStateIcon ?? contextProps.validationState;
+  const { classProps } = useValidationTextStyleProps({
+    formFieldVariant,
+    hasValidationStateIcon: validationStateForStyles,
+    isDisabled,
+  });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(Component, { styleProps, transferProps });
+  const mergedStyleProps = mergeStyleProps(Component, {
+    classProps,
+    styleProps,
+    transferProps,
+  });
 
   useEffect(() => {
     validationText && registerAria?.({ add: id });
 
     return () => {
-      registerAria?.({ remove: id });
+      id && registerAria?.({ remove: id });
     };
   }, [id, registerAria, validationText]);
 

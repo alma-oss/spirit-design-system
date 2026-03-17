@@ -13,6 +13,7 @@ import {
 import { mergeStyleProps } from '../../utils';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
+import { Label } from '../Label';
 import { useItemStyleProps } from './useItemStyleProps';
 
 const defaultProps: Partial<SpiritItemProps> = {
@@ -39,39 +40,22 @@ const Item = <E extends ElementType = 'button'>(props: SpiritItemProps<E>): JSX.
     (selectionDecorator === ITEM_SELECTION_DECORATOR_ICON || selectionDecorator === ITEM_SELECTION_DECORATOR_BOTH);
 
   return (
-<<<<<<< HEAD
-    <Component {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && Component === 'button'}>
-      {iconName && (
-        <span className={classNames(classProps.icon.root, classProps.icon.start)}>
-          <Icon name={iconName} />
-        </span>
-      )}
-      <span className={classProps.label}>{label}</span>
-      <HelperText UNSAFE_className={classProps.helperText} elementType="span" helperText={helperText} />
-      {showSelectedIcon && (
-        <span className={classNames(classProps.icon.root, classProps.icon.end)}>
-          <Icon name="check-plain" />
-        </span>
-      )}
-    </Component>
-=======
-    <PropsProvider value={{ isDisabled, formFieldVariant: FormFieldVariants.ITEM }}>
-      <ElementTag {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && ElementTag === 'button'}>
+    <PropsProvider value={{ formFieldVariant: FormFieldVariants.ITEM, isDisabled }}>
+      <Component {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && Component === 'button'}>
         {iconName && (
           <span className={classNames(classProps.icon.root, classProps.icon.start)}>
             <Icon name={iconName} />
           </span>
         )}
-        <span className={classProps.label}>{label}</span>
+        <Label elementType="span">{label}</Label>
         <HelperText elementType="span" helperText={helperText} />
         {showSelectedIcon && (
           <span className={classNames(classProps.icon.root, classProps.icon.end)}>
             <Icon name="check-plain" />
           </span>
         )}
-      </ElementTag>
+      </Component>
     </PropsProvider>
->>>>>>> 92c17dc32 (refactor(web-react): extract `HelperText` and move `useAriaIds` to shared hooks #DS-2398)
   );
 };
 

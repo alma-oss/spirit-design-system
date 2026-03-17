@@ -12,7 +12,6 @@ describe('useToggleStyleProps', () => {
       root: 'Toggle Toggle--inputPositionEnd',
       text: 'Toggle__text',
       input: 'Toggle__input',
-      validationText: 'Toggle__validationText',
     });
   });
 
