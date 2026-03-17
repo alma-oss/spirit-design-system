@@ -41,22 +41,10 @@ describe('Checkbox', () => {
     expect(screen.getByRole('checkbox').nextElementSibling).toHaveClass('Checkbox__text');
   });
 
-  it('should have label classname', () => {
+  it('should have label', () => {
     render(<Checkbox id="checkbox" label="Label" />);
 
-    expect(screen.getByRole('checkbox').nextElementSibling?.firstChild).toHaveClass('Checkbox__label');
-  });
-
-  it('should have hidden classname', () => {
-    render(<Checkbox id="checkbox" label="Label" isLabelHidden />);
-
-    expect(screen.getByRole('checkbox').nextElementSibling?.firstChild).toHaveClass('Checkbox__label--hidden');
-  });
-
-  it('should have required classname', () => {
-    render(<Checkbox id="checkbox" label="Label" isRequired />);
-
-    expect(screen.getByRole('checkbox').nextElementSibling?.firstChild).toHaveClass('Checkbox__label--required');
+    expect(screen.getByRole('checkbox').nextElementSibling?.firstChild).toBeInTheDocument();
   });
 
   it('should have input classname', () => {

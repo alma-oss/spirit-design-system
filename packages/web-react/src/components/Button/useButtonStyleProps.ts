@@ -27,7 +27,11 @@ export interface ButtonStyles {
 }
 
 export function useButtonStyleProps<T extends ElementType = 'button', C = void, S = void>(
-  props: SpiritButtonProps<T, C, S> & { formFieldVariant?: unknown },
+  props: SpiritButtonProps<T, C, S> & {
+    formFieldVariant?: unknown;
+    isLabelHidden?: unknown;
+    isRequired?: unknown;
+  },
 ): ButtonStyles {
   const {
     color,
@@ -38,6 +42,8 @@ export function useButtonStyleProps<T extends ElementType = 'button', C = void, 
     size,
     spacing,
     formFieldVariant: _formFieldVariant,
+    isLabelHidden: _isLabelHidden,
+    isRequired: _isRequired,
     ...restProps
   } = props;
 

@@ -5,9 +5,10 @@ import React, { type CSSProperties, type ChangeEvent, type FormEvent, type Forwa
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { FormFieldVariants, type ForwardRefComponent, type SpiritSliderProps } from '../../types';
-import { Label, ValidationText } from '../Field';
+import { ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { HelperText } from '../HelperText';
+import { Label } from '../Label';
 import { SLIDER_DEFAULT_PROPS } from './constants';
 import { useSliderStyleProps } from './useSliderStyleProps';
 
@@ -23,6 +24,7 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
     helperText,
     id,
     isDisabled,
+    isLabelHidden,
     label,
     max,
     min,
@@ -57,11 +59,15 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
   };
 
   return (
-    <PropsProvider value={{ isDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+    <PropsProvider
+      value={{
+        formFieldVariant: FormFieldVariants.BOX,
+        isDisabled,
+        isLabelHidden,
+      }}
+    >
       <div {...styleProps} {...otherProps} className={classNames(classProps.root, styleProps.className)}>
-        <Label htmlFor={id} UNSAFE_className={classProps.label}>
-          {label}
-        </Label>
+        <Label htmlFor={id}>{label}</Label>
         <input
           {...ariaDescribedByProp}
           className={classProps.input}

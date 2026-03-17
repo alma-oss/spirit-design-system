@@ -28,8 +28,16 @@ export interface FormFieldProps<E extends ElementType = 'div'> extends FormField
 }
 
 export interface FormFieldContextValue {
+  /** Whether the field is disabled. */
   isDisabled?: boolean;
+  /** The form field variant. */
   formFieldVariant?: FormFieldVariant;
+  /** Whether the field is required (label shows required indicator). */
+  isRequired?: boolean;
+  /** Whether the label is visually hidden but accessible. */
+  isLabelHidden?: boolean;
+  /** When true with INLINE variant, applies both inline and item label modifiers (e.g. Checkbox/Radio item). */
+  isItem?: boolean;
 }
 
 export interface Validation {

@@ -5,10 +5,11 @@ import React, { type ChangeEvent, type ForwardedRef, forwardRef, useState } from
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
 import { FormFieldVariants, type ForwardRefComponent, type SpiritToggleProps } from '../../types';
-import { Label, ValidationText } from '../Field';
+import { ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { HelperText } from '../HelperText';
 import { InputDetails } from '../InputDetails';
+import { Label } from '../Label';
 import { useToggleStyleProps } from './useToggleStyleProps';
 
 const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) => {
@@ -21,6 +22,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
     id,
     isDisabled,
     isChecked = false,
+    isLabelHidden,
     isRequired,
     label,
     helperText,
@@ -44,12 +46,17 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
   };
 
   return (
-    <PropsProvider value={{ isDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+    <PropsProvider
+      value={{
+        formFieldVariant: FormFieldVariants.INLINE,
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+      }}
+    >
       <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
         <div className={classProps.text}>
-          <Label UNSAFE_className={classProps.label} htmlFor={id}>
-            {label}
-          </Label>
+          <Label htmlFor={id}>{label}</Label>
           {details && (
             <InputDetails id={`${id}-details`} registerAriaDetails={registerDetails}>
               {details}

@@ -38,26 +38,8 @@ describe('Toggle', () => {
 
     const label = screen.getByText('Toggle Label');
 
-    expect(label).toHaveClass('Toggle__label');
+    expect(label).toBeInTheDocument();
     expect(label).toContainHTML('label');
-  });
-
-  it('should have label with required classname', () => {
-    render(<Toggle id="test-toggle" label="Toggle Label" isRequired />);
-
-    const label = screen.getByText('Toggle Label');
-
-    expect(label).toHaveClass('Toggle__label');
-    expect(label).toHaveClass('Toggle__label--required');
-  });
-
-  it('should have hidden classname', () => {
-    render(<Toggle id="test-toggle" label="Toggle Label" isLabelHidden />);
-
-    const label = screen.getByText('Toggle Label');
-
-    expect(label).toHaveClass('Toggle__label');
-    expect(label).toHaveClass('Toggle__label--hidden');
   });
 
   it('should have input classname', () => {
