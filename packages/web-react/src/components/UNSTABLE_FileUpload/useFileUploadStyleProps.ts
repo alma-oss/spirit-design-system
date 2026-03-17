@@ -17,9 +17,9 @@ export interface FileUploadStyle {
     root: string;
     input: {
       root: string;
-      label: string;
       input: string;
       dropLabel: string;
+      link: string;
       helper: string;
       validationText: string;
       dropZone: {
@@ -46,9 +46,8 @@ export const useFileUploadStyleProps = (props?: FileUploadStyleProps): FileUploa
   const fileUploadInputDropZoneLabelClass = `${fileUploadInputClass}__dropZoneLabel`;
   const fileUploadInputHelperClass = `${fileUploadInputClass}__helperText`;
   const fileUploadInputInputClass = `${fileUploadInputClass}__input`;
-  const fileUploadInputLabelClass = `${fileUploadInputClass}__label`;
-  const fileUploadInputLabelHiddenClass = `${fileUploadInputClass}__label--hidden`;
-  const fileUploadInputLabelRequiredClass = `${fileUploadInputClass}__label--required`;
+  const fileUploadInputLinkClass = `${fileUploadInputClass}__link`;
+  const fileUploadInputLinkUtilityClasses = ['link-primary', 'link-underlined'];
   const fileUploadInputValidationTextClass = `${fileUploadInputClass}__validationText`;
 
   return {
@@ -61,12 +60,9 @@ export const useFileUploadStyleProps = (props?: FileUploadStyleProps): FileUploa
           [fileUploadInputDraggingClass]: props?.isDragging,
           [fileUploadInputValidationClass]: props?.validationState,
         }),
-        label: classNames(fileUploadInputLabelClass, {
-          [fileUploadInputLabelRequiredClass]: props?.isRequired,
-          [fileUploadInputLabelHiddenClass]: props?.isLabelHidden,
-        }),
         input: fileUploadInputInputClass,
         dropLabel: fileUploadInputDropLabelClass,
+        link: classNames(fileUploadInputLinkClass, ...fileUploadInputLinkUtilityClasses),
         helper: fileUploadInputHelperClass,
         validationText: fileUploadInputValidationTextClass,
         dropZone: {
