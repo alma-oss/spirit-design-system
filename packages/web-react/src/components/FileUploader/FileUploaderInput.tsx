@@ -5,10 +5,11 @@ import React, { useEffect, useState } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { FormFieldVariants, type SpiritFileUploaderInputProps } from '../../types';
-import { Label, ValidationText } from '../Field';
+import { ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
+import { Label } from '../Label';
 import { DEFAULT_FILE_QUEUE_LIMIT, DEFAULT_FILE_SIZE_LIMIT } from './constants';
 import { useFileUploaderInput } from './useFileUploaderInput';
 import { useFileUploaderStyleProps } from './useFileUploaderStyleProps';
@@ -83,7 +84,14 @@ const FileUploaderInput = (props: SpiritFileUploaderInputProps) => {
   const isInputDisabled = isDisabled || isDisabledByQueueLimitBehavior;
 
   return (
-    <PropsProvider value={{ isDisabled: isInputDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+    <PropsProvider
+      value={{
+        formFieldVariant: FormFieldVariants.BOX,
+        isDisabled: isInputDisabled,
+        isLabelHidden,
+        isRequired,
+      }}
+    >
       <div
         {...transferProps}
         {...styleProps}
@@ -93,9 +101,7 @@ const FileUploaderInput = (props: SpiritFileUploaderInputProps) => {
         onDrop={!isDisabled && isDragAndDropSupported ? onDrop : undefined}
         className={classNames(classProps.input.root, styleProps.className)}
       >
-        <Label htmlFor={id} UNSAFE_className={classProps.input.label}>
-          {label}
-        </Label>
+        <Label htmlFor={id}>{label}</Label>
         <input
           {...ariaDescribedByProp}
           type="file"
@@ -111,11 +117,11 @@ const FileUploaderInput = (props: SpiritFileUploaderInputProps) => {
         />
         <div ref={dropZoneRef} className={classProps.input.dropZone.root}>
           <Icon name={iconName} aria-hidden="true" />
-          <Label htmlFor={id} UNSAFE_className={classProps.input.dropZone.label}>
+          <label htmlFor={id} className={classProps.input.dropZone.label}>
             <span className={classProps.input.link}>{linkText}</span>
             &nbsp;
             <span className={classProps.input.dropLabel}>{labelText}</span>
-          </Label>
+          </label>
           <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
         </div>
         {validationState && (
