@@ -6,10 +6,11 @@ import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { FormFieldVariants } from '../../types';
 import { Button } from '../Button';
-import { Label, ValidationText } from '../Field';
+import { ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
+import { Label } from '../Label';
 import { type UnstableFileUploadProps } from './types';
 import { useFileUploadState } from './useFileUploadState';
 import { useFileUploadStyleProps } from './useFileUploadStyleProps';
@@ -80,7 +81,14 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
   }, [isDragAndDropSupportedProp]);
 
   return (
-    <PropsProvider value={{ isDisabled: !!isDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+    <PropsProvider
+      value={{
+        formFieldVariant: FormFieldVariants.BOX,
+        isDisabled: !!isDisabled,
+        isLabelHidden,
+        isRequired,
+      }}
+    >
       <div
         {...transferProps}
         {...styleProps}
@@ -95,9 +103,7 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
             onDrop={!isDisabled && isDragAndDropSupported ? onDrop : undefined}
             className={classProps.input.root}
           >
-            <Label htmlFor={inputId} UNSAFE_className={classProps.input.label}>
-              {label}
-            </Label>
+            <Label htmlFor={inputId}>{label}</Label>
             <input
               {...ariaDescribedByProp}
               type="file"
@@ -113,15 +119,11 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
             <div ref={dropZoneRef} className={classProps.input.dropZone.root}>
               {!isCompact && <Icon name={iconName} boxSize={28} aria-hidden="true" />}
               <div className={classProps.input.dropZone.content}>
-                <Label htmlFor={inputId} UNSAFE_className={classProps.input.dropZone.label}>
-                  {linkText}
-                  {labelText && (
-                    <>
-                      {' '}
-                      <span className={classProps.input.dropLabel}>{labelText}</span>
-                    </>
-                  )}
-                </Label>
+                <label htmlFor={inputId} className={classProps.input.dropZone.label}>
+                  <span className={classProps.input.link}>{linkText}</span>
+                  &nbsp;
+                  <span className={classProps.input.dropLabel}>{labelText}</span>
+                </label>
                 <HelperText
                   UNSAFE_className={classProps.input.helper}
                   id={`${inputId}__helperText`}
