@@ -4,6 +4,9 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   requiredPropsTest,
   restPropsTest,
   stylePropsTest,
@@ -26,6 +29,18 @@ describe('Toggle', () => {
   validHtmlAttributesTest(Toggle);
 
   ariaAttributesTest(Toggle);
+
+  formFieldLabelContextPropsTest({
+    renderComponent: (props) => <Toggle id="toggle-context" label="Label" {...props} />,
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => <Toggle id="toggle-helper-context" label="Label" {...props} />,
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => <Toggle id="toggle-validation-context" label="Label" {...props} />,
+  });
 
   it('should have correct className', () => {
     render(<Toggle id="test-toggle" label="Toggle Label" />);
@@ -132,5 +147,21 @@ describe('Toggle', () => {
 
     expect(element).toHaveTextContent('Toggle Label');
     expect(element.innerHTML).toBe('Toggle <b>Label</b>');
+  });
+
+  it('should render validation icon when hasValidationIcon is set', () => {
+    render(
+      <Toggle
+        id="toggle-validation-icon"
+        label="Toggle Label"
+        hasValidationIcon
+        validationState="danger"
+        validationText="Invalid"
+      />,
+    );
+
+    const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
+
+    expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
 });
