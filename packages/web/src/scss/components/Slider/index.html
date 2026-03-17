@@ -9,7 +9,10 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Slider">
-        <label for="slider-default" class="Label Label--box">Slider</label>
+        <label
+          for="slider-default"
+          class="Label"
+        >Slider</label>
         <input
           class="Slider__input"
           id="slider-default"
@@ -21,7 +24,10 @@
       </div>
 
       <div class="Slider">
-        <label for="slider-steps" class="Label Label--box">Custom steps</label>
+        <label
+          for="slider-steps"
+          class="Label"
+        >Custom steps</label>
         <input
           class="Slider__input"
           id="slider-steps"
@@ -49,7 +55,10 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Slider">
-        <label for="slider-hidden-label" class="Label Label--box accessibility-hidden">Slider</label>
+        <label
+          for="slider-hidden-label"
+          class="Label accessibility-hidden"
+        >Slider</label>
         <input
           class="Slider__input"
           id="slider-hidden-label"
@@ -75,7 +84,10 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Slider">
-        <label for="slider-helper-text" class="Label Label--box">Slider</label>
+        <label
+          for="slider-helper-text"
+          class="Label"
+        >Slider</label>
         <input
           class="Slider__input"
           id="slider-helper-text"
@@ -85,7 +97,10 @@
           value="30"
           oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
         />
-        <div id="slider-helper-text-helper-text" class="HelperText">
+        <div
+          id="slider-helper-text-helper-text"
+          class="HelperText"
+        >
           Helper text
         </div>
       </div>
@@ -105,7 +120,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="Slider Slider--disabled">
-        <label for="slider-disabled" class="Label Label--box Label--disabled">Slider</label>
+        <label
+          for="slider-disabled"
+          class="Label Label--disabled"
+        >Slider</label>
         <input
           class="Slider__input"
           id="slider-disabled"
@@ -132,7 +150,10 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Slider Slider--success">
-        <label for="slider-success" class="Label Label--box">Slider</label>
+        <label
+          for="slider-success"
+          class="Label"
+        >Slider</label>
         <input
           class="Slider__input"
           id="slider-success"
@@ -144,7 +165,10 @@
       </div>
 
       <div class="Slider Slider--warning">
-        <label for="slider-warning" class="Label Label--box">Slider</label>
+        <label
+          for="slider-warning"
+          class="Label"
+        >Slider</label>
         <input
           class="Slider__input"
           id="slider-warning"
@@ -154,13 +178,19 @@
           value="30"
           oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
         />
-        <div id="slider-warning-validation-text" class="ValidationText ValidationText--warning">
+        <div
+          id="slider-warning-validation-text"
+          class="ValidationText ValidationText--warning"
+        >
           Validation text
         </div>
       </div>
 
       <div class="Slider Slider--danger">
-        <label for="slider-danger" class="Label Label--box">Slider</label>
+        <label
+          for="slider-danger"
+          class="Label"
+        >Slider</label>
         <input
           class="Slider__input"
           id="slider-danger"
@@ -170,7 +200,10 @@
           value="30"
           oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
         />
-        <div id="slider-danger-validation-text" class="ValidationText ValidationText--danger">
+        <div
+          id="slider-danger-validation-text"
+          class="ValidationText ValidationText--danger"
+        >
           <ul>
             <li>First validation text</li>
             <li>Second validation text</li>
@@ -179,7 +212,10 @@
       </div>
 
       <div class="Slider Slider--danger">
-        <label for="slider-danger-with-helper-text" class="Label Label--box">Slider</label>
+        <label
+          for="slider-danger-with-helper-text"
+          class="Label"
+        >Slider</label>
         <input
           class="Slider__input"
           id="slider-danger-with-helper-text"
@@ -189,10 +225,16 @@
           value="30"
           oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
         />
-        <div id="slider-danger-with-helper-text-helper-text" class="HelperText">
+        <div
+          id="slider-danger-with-helper-text-helper-text"
+          class="HelperText"
+        >
           Helper text
         </div>
-        <div id="slider-danger-with-helper-text-validation-text" class="ValidationText ValidationText--danger">
+        <div
+          id="slider-danger-with-helper-text-validation-text"
+          class="ValidationText ValidationText--danger"
+        >
           Validation text
         </div>
       </div>
@@ -212,8 +254,9 @@
       {{#each @root.states as |state|}}
 
       <div class="Slider Slider--{{state}}">
-        <label for="slider-{{state}}-with-validation-icon"
-               class="Label Label--box"
+        <label
+          for="slider-{{state}}-with-validation-icon"
+          class="Label"
         >
           Slider
         </label>
@@ -226,12 +269,20 @@
           value="30"
           oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
         />
-        <div id="slider-{{state}}-validation-icon-text" class="ValidationText ValidationText--{{state}}">
-          <svg class="Icon" width="20" height="20" aria-hidden="true">
+        <div
+          id="slider-{{state}}-validation-icon-text"
+          class="ValidationText ValidationText--{{state}}"
+        >
+          <svg
+            class="Icon"
+            width="20"
+            height="20"
+            aria-hidden="true"
+          >
             {{#if (eq state "success")}}
-            <use xlink:href="/assets/icons/svg/sprite.svg#check-plain"/>
+            <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
             {{else}}
-            <use xlink:href="/assets/icons/svg/sprite.svg#{{state}}"/>
+            <use xlink:href="/assets/icons/svg/sprite.svg#{{state}}" />
             {{/if}}
           </svg>
           <div>This is {{state}} validation text. Long validation text to show how it wraps.</div>
@@ -253,7 +304,10 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Slider Slider--fluid">
-        <label for="slider-fluid" class="Label Label--box">Slider</label>
+        <label
+          for="slider-fluid"
+          class="Label"
+        >Slider</label>
         <input
           class="Slider__input"
           id="slider-fluid"
