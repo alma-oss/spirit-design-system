@@ -13,7 +13,6 @@ export interface UseSelectStyleReturn {
   /** className props */
   classProps: {
     root: string;
-    label: string;
     container: string;
     input: string;
     icon: string;
@@ -24,8 +23,6 @@ export interface UseSelectStyleReturn {
 export const useSelectStyleProps = ({
   isDisabled,
   isFluid,
-  isLabelHidden,
-  isRequired,
   size,
   validationState,
 }: UseSelectStyleProps): UseSelectStyleReturn => {
@@ -34,21 +31,10 @@ export const useSelectStyleProps = ({
   const selectDisabledClass = `${selectClass}--disabled`;
   const selectSizeClass = `${selectClass}--${size}`;
   const selectValidationClass = `${selectClass}--${validationState}`;
-  const selectLabelClass = `${selectClass}__label`;
-  const selectLabelRequiredClass = `${selectLabelClass}--required`;
-  const selectLabelHiddenClass = `${selectLabelClass}--hidden`;
-<<<<<<< HEAD
   const selectContainerClass = `${selectClass}__inputContainer`;
   const selectInputClass = `${selectClass}__input`;
   const selectIconClass = `${selectClass}__icon`;
   const selectValidationTextClass = `${selectClass}__validationText`;
-  const selectHelperTextClass = `${selectClass}__helperText`;
-=======
-  const selectContainerClass = `${selectRootClass}__inputContainer`;
-  const selectInputClass = `${selectRootClass}__input`;
-  const selectIconClass = `${selectRootClass}__icon`;
-  const selectValidationTextClass = `${selectRootClass}__validationText`;
->>>>>>> 92c17dc32 (refactor(web-react): extract `HelperText` and move `useAriaIds` to shared hooks #DS-2398)
 
   return {
     classProps: {
@@ -57,10 +43,6 @@ export const useSelectStyleProps = ({
         [selectFluidClass]: isFluid,
         [selectSizeClass]: size,
         [selectValidationClass]: validationState,
-      }),
-      label: classNames(selectLabelClass, {
-        [selectLabelRequiredClass]: isRequired,
-        [selectLabelHiddenClass]: isLabelHidden,
       }),
       container: selectContainerClass,
       input: selectInputClass,
