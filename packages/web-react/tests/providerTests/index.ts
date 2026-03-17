@@ -2,6 +2,7 @@ export * from './ariaAttributesTest';
 export * from './classNamePrefixProviderTest';
 export * from './dictionaryPropsTest';
 export * from './elementTypePropsTest';
+export * from './formFieldContextPropsTest';
 export * from './itemPropsTest';
 export * from './loadingPropsTest';
 export * from './requiredPropsTest';

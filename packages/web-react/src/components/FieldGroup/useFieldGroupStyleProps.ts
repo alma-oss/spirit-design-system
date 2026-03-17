@@ -10,30 +10,18 @@ export interface UseFieldGroupStyleReturn {
   /** className props */
   classProps: {
     root: string;
-    label: string;
     fields: string;
-    validationText: string;
   };
 }
 
 export const useFieldGroupStyleProps = ({
   isFluid,
-  isRequired,
   validationState,
 }: UseFieldGroupStyleProps): UseFieldGroupStyleReturn => {
   const fieldGroupClass = useClassNamePrefix('FieldGroup');
   const fieldGroupFluidClass = `${fieldGroupClass}--fluid`;
   const fieldGroupValidationClass = `${fieldGroupClass}--${validationState}`;
-  const fieldGroupLabelClass = `${fieldGroupClass}__label`;
-  const fieldGroupLabelRequiredClass = `${fieldGroupLabelClass}--required`;
-<<<<<<< HEAD
   const fieldGroupFieldsClass = `${fieldGroupClass}__fields`;
-  const fieldGroupValidationTextClass = `${fieldGroupClass}__validationText`;
-  const fieldGroupHelperTextClass = `${fieldGroupClass}__helperText`;
-=======
-  const fieldGroupFieldsClass = `${fieldGroupRootClass}__fields`;
-  const fieldGroupValidationTextClass = `${fieldGroupRootClass}__validationText`;
->>>>>>> 92c17dc32 (refactor(web-react): extract `HelperText` and move `useAriaIds` to shared hooks #DS-2398)
 
   return {
     classProps: {
@@ -41,11 +29,7 @@ export const useFieldGroupStyleProps = ({
         [fieldGroupFluidClass]: isFluid,
         [fieldGroupValidationClass]: validationState,
       }),
-      label: classNames(fieldGroupLabelClass, {
-        [fieldGroupLabelRequiredClass]: isRequired,
-      }),
       fields: fieldGroupFieldsClass,
-      validationText: fieldGroupValidationTextClass,
     },
   };
 };
