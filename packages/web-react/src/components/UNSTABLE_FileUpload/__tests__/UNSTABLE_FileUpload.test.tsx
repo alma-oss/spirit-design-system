@@ -65,7 +65,7 @@ describe('UNSTABLE_FileUpload', () => {
         />,
       );
 
-      const labelElement = container.querySelector('.FileUploaderInput__label');
+      const labelElement = container.querySelector('label');
 
       expect(labelElement).toHaveTextContent('Upload File');
       expect(labelElement?.innerHTML).toBe('Upload <b>File</b>');

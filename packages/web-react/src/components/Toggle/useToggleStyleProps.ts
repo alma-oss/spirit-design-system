@@ -6,7 +6,6 @@ import { type SpiritToggleProps } from '../../types';
 export interface ToggleStyles<T> {
   classProps: {
     root: string;
-    label: string;
     text: string;
     input: string;
     validationText: string;
@@ -20,7 +19,6 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
     inputPosition = InputPositions.END,
     isDisabled = false,
     isFluid = false,
-    isLabelHidden = false,
     isRequired = false,
     validationState,
     ...restProps
@@ -30,10 +28,7 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
   const toggleFluidClass = `${toggleClass}--fluid`;
   const toggleDisabledClass = `${toggleClass}--disabled`;
   const toggleTextClass = `${toggleClass}__text`;
-  const toggleLabelClass = `${toggleClass}__label`;
-  const toggleHiddenLabelClass = `${toggleLabelClass}--hidden`;
   const toggleValidationClass = `${toggleClass}--${validationState}`;
-  const toggleRequiredClass = `${toggleLabelClass}--required`;
   const toggleInputClass = `${toggleClass}__input`;
   const toggleInputIndicatorsClass = `${toggleInputClass}--indicators`;
   const toggleInputPositionClass = useInputPositionClass(toggleClass, inputPosition);
@@ -45,10 +40,6 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
     [toggleDisabledClass]: isDisabled,
     [toggleValidationClass]: validationState,
   });
-  const labelClass = classNames(toggleLabelClass, {
-    [toggleRequiredClass]: isRequired,
-    [toggleHiddenLabelClass]: isLabelHidden,
-  });
   const inputClass = classNames(toggleInputClass, {
     [toggleInputIndicatorsClass]: hasIndicators,
   });
@@ -56,7 +47,6 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
   return {
     classProps: {
       root: rootClass,
-      label: labelClass,
       text: toggleTextClass,
       input: inputClass,
       validationText: toggleValidationTextClass,

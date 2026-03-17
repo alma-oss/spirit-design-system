@@ -10,7 +10,6 @@ describe('useTagStyleProps', () => {
 
     expect(result.current.classProps).toStrictEqual({
       input: 'TextField__input',
-      label: 'TextField__label',
       passwordToggle: 'TextField__passwordToggle',
       passwordToggleButton: 'TextField__passwordToggle__button',
       passwordToggleIcon: 'TextField__passwordToggle__icon',
@@ -47,18 +46,6 @@ describe('useTagStyleProps', () => {
     const { result } = renderHook(() => useTextFieldBaseStyleProps(props));
 
     expect(result.current.classProps.root).toBe('TextField TextField--disabled TextField--warning');
-  });
-
-  it('should return required hidden TextField label', () => {
-    const props = {
-      isRequired: true,
-      isLabelHidden: true,
-    } as SpiritTextFieldBaseProps;
-    const { result } = renderHook(() => useTextFieldBaseStyleProps(props));
-
-    expect(result.current.classProps.label).toBe(
-      'TextField__label TextField__label--required TextField__label--hidden',
-    );
   });
 
   it.each([Object.values(Sizes)])('should return field with size %s', (size) => {

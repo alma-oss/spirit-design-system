@@ -44,7 +44,6 @@ export interface FileUploaderStyleReturn {
     root: string;
     input: {
       root: string;
-      label: string;
       input: string;
       dropLabel: string;
       link: string;
@@ -80,9 +79,6 @@ export const useFileUploaderStyleProps = (props?: FileUploaderStyleProps): FileU
   const fileUploaderInputDropZoneLabelClass = `${fileUploaderInputDropZoneClass}Label`;
   const fileUploaderInputHiddenClass = 'd-none';
   const fileUploaderInputInputClass = `${fileUploaderInputClass}__input`;
-  const fileUploaderInputLabelClass = `${fileUploaderInputClass}__label`;
-  const fileUploaderInputLabelHiddenClass = `${fileUploaderInputClass}__label--hidden`;
-  const fileUploaderInputLabelRequiredClass = `${fileUploaderInputClass}__label--required`;
   const fileUploaderInputLinkClass = `${fileUploaderInputClass}__link`;
   const fileUploaderInputLinkUtilityClasses = ['link-primary', 'link-underlined'];
   const fileUploaderInputValidationTextClass = `${fileUploaderInputClass}__validationText`;
@@ -142,10 +138,6 @@ export const useFileUploaderStyleProps = (props?: FileUploaderStyleProps): FileU
           [fileUploaderInputDraggingClass]: props?.isDragging,
           [fileUploaderInputHiddenClass]: props?.isDropZoneHidden && props.queueLimitBehavior === 'hide',
           [fileUploaderInputValidationClass]: props?.validationState,
-        }),
-        label: classNames(fileUploaderInputLabelClass, {
-          [fileUploaderInputLabelRequiredClass]: props?.isRequired,
-          [fileUploaderInputLabelHiddenClass]: props?.isLabelHidden,
         }),
         input: fileUploaderInputInputClass,
         dropLabel: fileUploaderInputDropLabelClass,

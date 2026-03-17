@@ -11,9 +11,10 @@ import {
   type SpiritTextFieldBaseProps,
   type TextFieldBasePasswordToggleProps,
 } from '../../types';
-import { Label, ValidationText } from '../Field';
+import { ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { HelperText } from '../HelperText';
+import { Label } from '../Label';
 import TextFieldBaseInput from './TextFieldBaseInput';
 import { useTextFieldBaseStyleProps } from './useTextFieldBaseStyleProps';
 import withPasswordToggle from './withPasswordToggle';
@@ -29,6 +30,8 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
     helperText,
     id,
     isDisabled,
+    isLabelHidden,
+    isRequired,
     label,
     size = Sizes.MEDIUM,
     validationState,
@@ -38,6 +41,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
   const { classProps, props: modifiedProps } = useTextFieldBaseStyleProps({
     id,
     isDisabled,
+    isRequired,
     size,
     validationState,
     ...restProps,
@@ -51,11 +55,16 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
   });
 
   return (
-    <PropsProvider value={{ isDisabled, formFieldVariant: FormFieldVariants.BOX }}>
+    <PropsProvider
+      value={{
+        formFieldVariant: FormFieldVariants.BOX,
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+      }}
+    >
       <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
-        <Label htmlFor={id} UNSAFE_className={classProps.label}>
-          {label}
-        </Label>
+        <Label htmlFor={id}>{label}</Label>
         <TextFieldBaseInputWithPasswordToggle {...otherProps} {...ariaDescribedByProp} id={id} ref={ref} size={size} />
         <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
         {validationState && (

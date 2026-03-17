@@ -35,22 +35,10 @@ describe('TextArea', () => {
 
   sizePropsTest(TextArea);
 
-  it('should have label classname', () => {
+  it('should have label', () => {
     render(<TextArea id="textarea" label="Label" />);
 
-    expect(screen.getByText('Label')).toHaveClass('TextArea__label');
-  });
-
-  it('should have hidden classname', () => {
-    render(<TextArea id="textarea" label="Label" isLabelHidden />);
-
-    expect(screen.getByText('Label')).toHaveClass('TextArea__label--hidden');
-  });
-
-  it('should have required classname', () => {
-    render(<TextArea id="textarea" label="Label" isRequired />);
-
-    expect(screen.getByText('Label')).toHaveClass('TextArea__label--required');
+    expect(screen.getByText('Label')).toBeInTheDocument();
   });
 
   it('should have input classname', () => {
