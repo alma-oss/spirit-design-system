@@ -1,0 +1,109 @@
+// 1. Elevate interactive elements.
+
+@use 'sass:map';
+@use 'theme';
+@use '../../settings/form-fields' as form-fields-settings;
+@use '../../tools/form-fields' as form-fields-tools;
+@use '../../tools/links';
+@use '../../tools/reset';
+
+.UNSTABLE_Picker {
+    @include form-fields-tools.box-field-root();
+}
+
+.UNSTABLE_Picker__label {
+    @include form-fields-tools.box-field-label();
+}
+
+.UNSTABLE_Picker__label--hidden {
+    @include form-fields-tools.label-hidden();
+}
+
+.UNSTABLE_Picker__label--required::after {
+    @include form-fields-tools.label-required();
+}
+
+.UNSTABLE_Picker__inputContainer {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    column-gap: theme.$column-gap;
+    align-items: center;
+    width: 100%;
+    min-height: theme.$min-height;
+    padding: theme.$padding-y theme.$padding-x;
+    color: theme.$color;
+    border: theme.$border-width theme.$border-style theme.$border-color;
+    border-radius: theme.$border-radius;
+    background: theme.$background-color;
+}
+
+.UNSTABLE_Picker__inputContainer:focus-within {
+    @include form-fields-tools.box-field-focus-visible();
+}
+
+.UNSTABLE_Picker__selection {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    gap: theme.$selection-gap;
+}
+
+.UNSTABLE_Picker__selectionLabel {
+    margin-inline-start: calc(#{form-fields-settings.$box-field-input-padding-x} - #{theme.$padding-x});
+}
+
+// 1.
+.UNSTABLE_Picker__selection :where(a, button) {
+    position: relative;
+    z-index: 1;
+}
+
+.UNSTABLE_Picker__trigger {
+    @include links.stretch();
+    @include reset.button();
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.UNSTABLE_Picker__helperText {
+    @include form-fields-tools.helper-text();
+}
+
+.UNSTABLE_Picker__validationText,
+.UNSTABLE_Picker > [data-spirit-element='validation_text'] {
+    @include form-fields-tools.validation-text();
+}
+
+.UNSTABLE_Picker--fluid {
+    @include form-fields-tools.box-field-fluid();
+}
+
+@each $state-name, $state-value in form-fields-settings.$validation-states {
+    :is(.UNSTABLE_Picker--#{$state-name}, .UNSTABLE_Picker.has-#{$state-name}) .UNSTABLE_Picker__inputContainer {
+        border-color: map.get($state-value, input-border-color);
+    }
+
+    :is(.UNSTABLE_Picker--#{$state-name}, .UNSTABLE_Picker.has-#{$state-name})
+        > :is(.UNSTABLE_Picker__validationText, [data-spirit-element='validation_text']) {
+        color: map.get($state-value, validation-text-color);
+    }
+}
+
+.UNSTABLE_Picker--disabled > .UNSTABLE_Picker__label {
+    @include form-fields-tools.label-disabled();
+}
+
+.UNSTABLE_Picker--disabled .UNSTABLE_Picker__inputContainer {
+    @include form-fields-tools.box-field-disabled-input();
+}
+
+:is(.UNSTABLE_Picker--disabled) > .UNSTABLE_Picker__helperText {
+    @include form-fields-tools.helper-text-disabled();
+}
+
+:is(.UNSTABLE_Picker--disabled) > :is(.UNSTABLE_Picker__validationText, [data-spirit-element='validation_text']) {
+    @include form-fields-tools.validation-text-disabled();
+}
