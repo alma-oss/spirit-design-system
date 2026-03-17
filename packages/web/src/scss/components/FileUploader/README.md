@@ -62,7 +62,7 @@ To add helper text, use the [HelperText][helper-text] component:
 
 ```html
 <div class="FileUploaderInput" data-spirit-element="wrapper">
-  <label for="file-uploader" class="Label Label--box">Label</label>
+  <label for="file-uploader" class="Label">Label</label>
   <input
     type="file"
     id="file-uploader"
@@ -176,7 +176,7 @@ To mark the input as required, simply add the `Label--required` to the label:
 
 ```html
 <div class="FileUploaderInput" data-spirit-element="wrapper">
-  <label for="file-uploader" class="Label Label--box Label--required">Label</label>
+  <label for="file-uploader" class="Label Label--required">Label</label>
   <input
     type="file"
     id="file-uploader"
@@ -567,7 +567,7 @@ This is how all subcomponents build up the complete FileUploader:
 
   <!-- FileUploaderInput: start -->
   <div class="FileUploaderInput" data-spirit-element="wrapper">
-    <label for="file-uploader-with-attachments" class="Label Label--box">Label</label>
+    <label for="file-uploader-with-attachments" class="Label">Label</label>
     <input
       type="file"
       id="file-uploader-with-attachments"
