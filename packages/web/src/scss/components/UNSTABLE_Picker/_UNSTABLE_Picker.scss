@@ -1,0 +1,149 @@
+// 1. Elevate interactive elements.
+// 2. Suppress focus style.
+
+@use 'sass:map';
+@use '@tokens' as tokens;
+@use '../../settings/cursors';
+@use '../../settings/form-fields' as form-fields-settings;
+@use '../../tools/dictionaries';
+@use '../../tools/form-fields' as form-fields-tools;
+@use '../../tools/links';
+@use '../../tools/reset';
+@use '../../tools/string' as spirit-string;
+@use '../../tools/typography';
+@use 'theme';
+
+$_full-field-name: 'UNSTABLE_Picker';
+$_field-name: spirit-string.remove-prefix($_full-field-name, 'UNSTABLE_');
+
+.UNSTABLE_Picker {
+    @include form-fields-tools.box-field-root();
+    @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
+}
+
+// @deprecated `UNSTABLE_Picker__label` will be removed with upcoming major version and replaced with separate component for label text.
+.UNSTABLE_Picker__label {
+    @include form-fields-tools.box-field-label();
+}
+
+.UNSTABLE_Picker__label--hidden {
+    @include form-fields-tools.label-hidden();
+}
+
+.UNSTABLE_Picker__label--required::after {
+    @include form-fields-tools.label-required();
+}
+
+.UNSTABLE_Picker__inputContainer {
+    // @deprecated Remove typography fallback when form field sizes are mandatory.
+    // Migration: delete the `$fallback-config` parameter.
+    // https://jira.almacareer.tech/browse/DS-1884 — Remove deprecated typography mixin from form fields
+    @include typography.from-css-variables(
+        $infix: #{spirit-string.convert-pascal-case-to-kebab-case($_field-name)}-input,
+        $fallback-config: map.get(form-fields-settings.$box-field-size-config, medium, typography, mobile)
+    );
+
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    column-gap: theme.$column-gap;
+    align-items: center;
+    width: 100%;
+    min-height: var(
+        --#{tokens.$css-variable-prefix}#{spirit-string.convert-pascal-case-to-kebab-case($_field-name)}-input-height
+    );
+    padding: theme.$padding;
+    color: form-fields-settings.$box-field-input-placeholder-color-state-default;
+    border: form-fields-settings.$box-field-input-border-width form-fields-settings.$box-field-input-border-style
+        form-fields-settings.$input-border-color;
+    border-radius: var(--#{tokens.$css-variable-prefix}form-fields-border-radius);
+    background: form-fields-settings.$input-background-color;
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: form-fields-settings.$input-background-color-state-hover;
+        }
+    }
+
+    &:focus-within {
+        @include form-fields-tools.box-field-focus-visible();
+
+        background-color: form-fields-settings.$input-background-color-state-active;
+    }
+}
+
+.UNSTABLE_Picker__selection {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    gap: theme.$selection-gap;
+}
+
+.UNSTABLE_Picker__selectionEmpty {
+    margin-inline-start: calc(#{form-fields-settings.$box-field-input-padding-x} - #{theme.$padding});
+}
+
+// 1.
+.UNSTABLE_Picker__selection :where(a, button) {
+    position: relative;
+    z-index: 1;
+}
+
+.UNSTABLE_Picker__trigger {
+    @include links.stretch();
+    @include reset.button();
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// @deprecated `UNSTABLE_Picker__helperText` will be removed with upcoming major version and replaced with separate component for helper text.
+.UNSTABLE_Picker__helperText {
+    @include form-fields-tools.helper-text();
+}
+
+// @deprecated `UNSTABLE_Picker__validationText` will be removed with upcoming major version and replaced with separate component for validation text.
+.UNSTABLE_Picker__validationText,
+.UNSTABLE_Picker > [data-spirit-element='validation_text'] {
+    @include form-fields-tools.validation-text();
+}
+
+.UNSTABLE_Picker--fluid {
+    @include form-fields-tools.box-field-fluid();
+}
+
+@include dictionaries.generate-sizes(
+    $class-name: #{$_full-field-name},
+    $dictionary-values: form-fields-settings.$box-field-size-dictionary,
+    $config: form-fields-settings.$box-field-size-config,
+    $css-variable-infix: 'input'
+);
+@include form-fields-tools.input-field-validation-states(#{$_full-field-name});
+
+// @deprecated `UNSTABLE_Picker__label` will be removed with upcoming major version and replaced with separate component for label text.
+:is(.UNSTABLE_Picker--disabled, .UNSTABLE_Picker.is-disabled) > .UNSTABLE_Picker__label {
+    @include form-fields-tools.label-disabled();
+}
+
+:is(.UNSTABLE_Picker--disabled, .UNSTABLE_Picker.is-disabled) .UNSTABLE_Picker__trigger {
+    pointer-events: none;
+    cursor: cursors.$disabled;
+}
+
+:is(.UNSTABLE_Picker--disabled, .UNSTABLE_Picker.is-disabled) .UNSTABLE_Picker__inputContainer {
+    @include form-fields-tools.box-field-disabled-input($has-placeholder: false);
+
+    box-shadow: none; // 2.
+}
+
+// @deprecated `UNSTABLE_Picker__helperText` will be removed with upcoming major version and replaced with separate component for helper text.
+:is(.UNSTABLE_Picker--disabled, .UNSTABLE_Picker.is-disabled) > .UNSTABLE_Picker__helperText {
+    @include form-fields-tools.helper-text-disabled();
+}
+
+// @deprecated `UNSTABLE_Picker__validationText` will be removed with upcoming major version and replaced with separate component for validation text.
+:is(.UNSTABLE_Picker--disabled, .UNSTABLE_Picker.is-disabled)
+    > :is(.UNSTABLE_Picker__validationText, [data-spirit-element='validation_text']) {
+    @include form-fields-tools.validation-text-disabled();
+}
