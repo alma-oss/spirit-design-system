@@ -9,7 +9,6 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
   validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import { type TextFieldType } from '../../../types';
 import TextField from '../TextField';
@@ -25,8 +24,6 @@ describe('TextField', () => {
     restPropsTest(TextField, 'input');
 
     validationStatePropsTest(TextField, 'TextField--');
-
-    validationTextPropsTest(TextField, '.TextField__validationText', type as TextFieldType);
 
     validHtmlAttributesTest(TextField);
 

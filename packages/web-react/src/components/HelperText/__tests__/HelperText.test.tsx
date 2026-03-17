@@ -119,4 +119,18 @@ describe('HelperText', () => {
     expect(element).toHaveTextContent('Helper Text');
     expect(element.innerHTML).toBe('Helper <b>Text</b>');
   });
+
+  it('should render with id and registerAria for aria-describedby', () => {
+    const id = 'helper-aria-id';
+    const register = jest.fn();
+
+    const { unmount } = render(<HelperText id={id} registerAria={register} helperText={helperText} />);
+
+    const element = screen.getByText(helperText);
+    expect(element).toHaveAttribute('id', id);
+    expect(register).toHaveBeenCalledWith({ add: id });
+
+    unmount();
+    expect(register).toHaveBeenCalledWith({ remove: id });
+  });
 });

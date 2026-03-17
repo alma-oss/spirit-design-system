@@ -8,7 +8,6 @@ export interface ToggleStyles<T> {
     root: string;
     text: string;
     input: string;
-    validationText: string;
   };
   props: T;
 }
@@ -32,7 +31,6 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
   const toggleInputClass = `${toggleClass}__input`;
   const toggleInputIndicatorsClass = `${toggleInputClass}--indicators`;
   const toggleInputPositionClass = useInputPositionClass(toggleClass, inputPosition);
-  const toggleValidationTextClass = `${toggleClass}__validationText`;
 
   const rootClass = classNames(toggleClass, {
     [toggleInputPositionClass]: toggleInputPositionClass,
@@ -49,7 +47,6 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
       root: rootClass,
       text: toggleTextClass,
       input: inputClass,
-      validationText: toggleValidationTextClass,
     },
     props: { ...restProps, validationState, isDisabled, isRequired },
   };

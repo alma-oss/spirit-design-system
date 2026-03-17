@@ -3,13 +3,12 @@
 import React, { type ElementType, useEffect } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type FormFieldContextValue, FormFieldVariants, type SpiritHelperTextProps } from '../../types';
+import { type FormFieldContextValue, type SpiritHelperTextProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useHelperTextStyleProps } from './useHelperTextStyleProps';
 
 const defaultProps: Partial<SpiritHelperTextProps> = {
   elementType: 'div',
-  formFieldVariant: FormFieldVariants.BOX,
   id: undefined,
   isDisabled: false,
   registerAria: undefined,

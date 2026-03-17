@@ -13,6 +13,7 @@ import {
 import { mergeStyleProps } from '../../utils';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
+import { Label } from '../Label';
 import { useItemStyleProps } from './useItemStyleProps';
 
 const Item = <E extends ElementType = 'button'>(props: SpiritItemProps<E>): JSX.Element => {
@@ -40,14 +41,14 @@ const Item = <E extends ElementType = 'button'>(props: SpiritItemProps<E>): JSX.
     (selectionDecorator === ITEM_SELECTION_DECORATOR_ICON || selectionDecorator === ITEM_SELECTION_DECORATOR_BOTH);
 
   return (
-    <PropsProvider value={{ isDisabled, formFieldVariant: FormFieldVariants.ITEM }}>
+    <PropsProvider value={{ formFieldVariant: FormFieldVariants.ITEM, isDisabled }}>
       <ElementTag {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && ElementTag === 'button'}>
         {iconName && (
           <span className={classNames(classProps.icon.root, classProps.icon.start)}>
             <Icon name={iconName} />
           </span>
         )}
-        <span className={classProps.label}>{label}</span>
+        <Label elementType="span">{label}</Label>
         <HelperText elementType="span" helperText={helperText} />
         {showSelectedIcon && (
           <span className={classNames(classProps.icon.root, classProps.icon.end)}>

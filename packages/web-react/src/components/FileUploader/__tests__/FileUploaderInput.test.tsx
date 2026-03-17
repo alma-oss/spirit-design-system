@@ -1,12 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import {
-  classNamePrefixProviderTest,
-  restPropsTest,
-  validHtmlAttributesTest,
-  validationTextPropsTest,
-} from '@local/tests';
+import { classNamePrefixProviderTest, restPropsTest, validHtmlAttributesTest } from '@local/tests';
 import FileUploaderInput from '../FileUploaderInput';
 import '@testing-library/jest-dom';
 
@@ -16,8 +11,6 @@ describe('FileUploaderInput', () => {
   classNamePrefixProviderTest(FileUploaderInput, 'FileUploaderInput');
 
   restPropsTest(FileUploaderInput, 'div');
-
-  validationTextPropsTest(FileUploaderInput, '.FileUploaderInput__validationText');
 
   validHtmlAttributesTest(FileUploaderInput);
 

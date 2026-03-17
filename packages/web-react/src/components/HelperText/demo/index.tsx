@@ -1,12 +1,39 @@
+// Because there is no `dist` directory during the CI run
+
+// @ts-ignore: No declaration file -- @see https://jira.almacareer.tech/browse/DS-561
+import icons from '@alma-oss/spirit-icons/icons';
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
+import { IconsProvider } from '../../../context';
+import { Section } from '../../Section';
+import { Text } from '../../Text';
+import HelperTextCheckboxRadioItem from './HelperTextCheckboxRadioItem';
 import HelperTextDefault from './HelperTextDefault';
+import HelperTextInlineCheckbox from './HelperTextInlineCheckbox';
+import HelperTextItemComponent from './HelperTextItemComponent';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
-    <DocsSection title="Default" stackAlignment="stretch">
-      <HelperTextDefault />
-    </DocsSection>
+    <IconsProvider value={icons}>
+      <Section size="small" UNSAFE_className="hide-from-visual-tests">
+        <Text>
+          <strong>Note:</strong> For demonstration purposes and to fulfill accessibility and HTML semantics
+          requirements, all HelperText on this page are associated with related form component.
+        </Text>
+      </Section>
+      <DocsSection title="Default" stackAlignment="start">
+        <HelperTextDefault />
+      </DocsSection>
+      <DocsSection title="Inline with Checkbox" stackAlignment="start">
+        <HelperTextInlineCheckbox />
+      </DocsSection>
+      <DocsSection title="Combined with Item component" stackAlignment="start">
+        <HelperTextItemComponent />
+      </DocsSection>
+      <DocsSection title="Combined with Checkbox Item and Radio Item" stackAlignment="start">
+        <HelperTextCheckboxRadioItem />
+      </DocsSection>
+    </IconsProvider>
   </StrictMode>,
 );

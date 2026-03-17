@@ -318,14 +318,6 @@
       "require": "./dist/components/EmptyState/index.cjs",
       "default": "./dist/components/EmptyState/index.js"
     },
-    "./components/Field": {
-      "types": "./dist/components/Field/index.d.ts",
-      "development": "./src/components/Field/index.ts",
-      "production": "./dist/components/Field/index.js",
-      "import": "./dist/components/Field/index.js",
-      "require": "./dist/components/Field/index.cjs",
-      "default": "./dist/components/Field/index.js"
-    },
     "./components/FieldGroup": {
       "types": "./dist/components/FieldGroup/index.d.ts",
       "development": "./src/components/FieldGroup/index.ts",

@@ -10,7 +10,6 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
   validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import TextArea from '../TextArea';
 
@@ -26,8 +25,6 @@ describe('TextArea', () => {
   restPropsTest(TextArea, 'textarea');
 
   validationStatePropsTest(TextArea, 'TextArea--');
-
-  validationTextPropsTest(TextArea, '.TextArea__validationText');
 
   validHtmlAttributesTest(TextArea);
 

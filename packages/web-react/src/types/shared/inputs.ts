@@ -1,4 +1,4 @@
-import { type AriaRole, type ElementType, type ReactNode } from 'react';
+import type { AriaRole, ElementType, ReactNode } from 'react';
 import { FormFieldVariants, type InputPositions } from '../../constants';
 import { type ValidationStatesDictionaryType } from './dictionaries';
 
@@ -28,16 +28,16 @@ export interface FormFieldProps<E extends ElementType = 'div'> extends FormField
 }
 
 export interface FormFieldContextValue {
-  /** Whether the field is disabled. */
-  isDisabled?: boolean;
-  /** The form field variant. */
+  /** Visual variant (box, inline, item) for Label and HelperText styling. */
   formFieldVariant?: FormFieldVariant;
-  /** Whether the field is required (label shows required indicator). */
-  isRequired?: boolean;
+  /** Whether the field is disabled; affects Label and HelperText styling. */
+  isDisabled?: boolean;
   /** Whether the label is visually hidden but accessible. */
   isLabelHidden?: boolean;
-  /** When true with INLINE variant, applies both inline and item label modifiers (e.g. Checkbox/Radio item). */
-  isItem?: boolean;
+  /** Whether the field is required (label shows required indicator). */
+  isRequired?: boolean;
+  /** Current validation state; passed to ValidationText for styling. */
+  validationState?: ValidationState;
 }
 
 export interface Validation {
@@ -71,7 +71,7 @@ export interface TextInputProps extends TextInputBase {
 }
 
 export interface HelperTextProps {
-  /** If I wanted some help text */
+  /** Helper text content displayed below or near the form control. */
   helperText?: ReactNode;
 }
 

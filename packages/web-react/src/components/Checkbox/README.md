@@ -75,36 +75,66 @@ and [escape hatches][readme-escape-hatches].
 
 ## Custom Component
 
-Text field classes are fabricated using `useCheckboxStyleProps` hook. You can use it to create your own custom Checkbox component.
+Checkbox classes are fabricated using `useCheckboxStyleProps` hook. You can use it to create your own custom Checkbox component. Compose the standalone Label, HelperText, and ValidationText components with PropsProvider and useAriaIds for correct styling and accessibility.
 
 ```tsx
 const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
-  const { id } = props;
+  const {
+    'aria-describedby': ariaDescribedBy = '',
+    hasValidationIcon,
+    helperText,
+    id,
+    isDisabled,
+    isItem,
+    isRequired,
+    label,
+    validationState,
+    validationText,
+    ...restProps
+  } = props;
   const { classProps, props: modifiedProps } = useCheckboxStyleProps(props);
-
-  const helperTextId = `${id}-helper-text`;
-  const validationTextId = `${id}-validation-text`;
+  const { styleProps, props: transferProps } = useStyleProps(restProps);
+  const [ids, register] = useAriaIds(ariaDescribedBy);
+  const ariaDescribedByProp = useAriaDescribedBy(ids);
+  const validationTextRole = useValidationTextRole({
+    validationState,
+    validationText,
+  });
 
   return (
-    <div className={classProps.root}>
-      <input
-        {...modifiedProps}
-        id={id}
-        className={classProps.input}
-        aria-describedby={`${validationTextId} ${helperTextId}`}
-      />
-      <div className={styleProps.text}>
-        <label className={styleProps.label} htmlFor={props.id}>
-          {props.label}
-        </label>
-        <div className={styleProps.helperText} id={helperTextId}>
-          {props.helperText}
-        </div>
-        <div className={styleProps.validationText} id={validationTextId}>
-          {props.validationText}
+    <PropsProvider
+      value={{
+        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
+        isDisabled,
+        isRequired,
+        validationState,
+      }}
+    >
+      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
+        <input
+          {...transferProps}
+          {...ariaDescribedByProp}
+          type="checkbox"
+          id={id}
+          className={classProps.input}
+          disabled={isDisabled}
+          required={isRequired}
+        />
+        <div className={classProps.text}>
+          <Label htmlFor={id}>{label}</Label>
+          <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
+          {validationState && (
+            <ValidationText
+              id={`${id}__validationText`}
+              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+              validationText={validationText}
+              registerAria={register}
+              role={validationTextRole}
+            />
+          )}
         </div>
       </div>
-    </div>
+    </PropsProvider>
   );
 };
 ```

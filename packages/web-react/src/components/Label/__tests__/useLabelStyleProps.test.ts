@@ -7,7 +7,6 @@ describe('useLabelStyleProps', () => {
     const { result } = renderHook(() => useLabelStyleProps({}));
 
     expect(result.current.classProps).toContain('Label');
-    expect(result.current.classProps).toContain('Label--box');
   });
 
   it('should return disabled class when isDisabled is true', () => {
@@ -28,16 +27,6 @@ describe('useLabelStyleProps', () => {
     const { result } = renderHook(() => useLabelStyleProps({ formFieldVariant: FormFieldVariants.ITEM }));
 
     expect(result.current.classProps).toContain('Label');
-    expect(result.current.classProps).toContain('Label--item');
-  });
-
-  it('should return inline and item classes when formFieldVariant is inline and isItem is true', () => {
-    const { result } = renderHook(() =>
-      useLabelStyleProps({ formFieldVariant: FormFieldVariants.INLINE, isItem: true }),
-    );
-
-    expect(result.current.classProps).toContain('Label');
-    expect(result.current.classProps).toContain('Label--inline');
     expect(result.current.classProps).toContain('Label--item');
   });
 

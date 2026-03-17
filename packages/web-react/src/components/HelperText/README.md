@@ -19,25 +19,19 @@ When used inside TextField, Select, Checkbox, Radio, Toggle, Slider, FileUploade
 You can override context by passing props directly:
 
 ```tsx
-<HelperText
-  id="my-helper-text"
-  helperText="Helper text"
-  elementType="span"
-  isDisabled
-  formFieldVariant={FormFieldVariants.INLINE}
-/>
+<HelperText id="my-helper-text" helperText="Helper text" elementType="span" isDisabled formFieldVariant="inline" />
 ```
 
 ### API
 
-| Name               | Type                                                   | Default | Required | Description                                                   |
-| ------------------ | ------------------------------------------------------ | ------- | -------- | ------------------------------------------------------------- |
-| `elementType`      | `React.ElementType`                                    | `div`   | ✕        | Type of element used as main wrapper                          |
-| `formFieldVariant` | `FormFieldVariant`                                     | —       | ✕        | Visual variant; when not set, taken from parent context       |
-| `helperText`       | `ReactNode`                                            | —       | ✕        | Content to display                                            |
-| `id`               | `string`                                               | —       | ✕        | Element id (e.g. for `aria-describedby`)                      |
-| `isDisabled`       | `boolean`                                              | —       | ✕        | Disabled state; when not set, taken from parent context       |
-| `registerAria`     | `(payload: { add?: string; remove?: string }) => void` | —       | ✕        | Callback to register this element's id for `aria-describedby` |
+| Name               | Type                                                   | Default | Required | Description                                                                                             |
+| ------------------ | ------------------------------------------------------ | ------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| `elementType`      | `React.ElementType`                                    | `div`   | ✕        | Type of element used as main wrapper                                                                    |
+| `formFieldVariant` | `FormFieldVariant`                                     | —       | ✕        | Explicit visual variant (`inline`, `item`); omit for the default layout, or take it from parent context |
+| `helperText`       | `ReactNode`                                            | —       | ✓        | Content to display                                                                                      |
+| `id`               | `string`                                               | —       | ✕        | Element id (e.g. for `aria-describedby`)                                                                |
+| `isDisabled`       | `boolean`                                              | `false` | ✕        | Disabled state; when omitted, taken from parent context                                                 |
+| `registerAria`     | `(payload: { add?: string; remove?: string }) => void` | —       | ✕        | Callback to register this element's id for `aria-describedby`                                           |
 
 On top of the API options, the component accepts [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -45,9 +39,8 @@ and [escape hatches][readme-escape-hatches].
 
 ## Variants
 
-- **box**: Used by TextField, TextArea, Select, Slider, Toggle, FileUploader, FieldGroup.
-- **inline**: Used by Checkbox and Radio (non-item). Keeps helper text above the label and selectable.
-- **item**: Used by Item and by Checkbox/Radio in item variant.
+- **inline**: Used by Toggle, Checkbox, and Radio (non-item). Keeps helper text above the label and selectable.
+- **item**: Used by Item and by Checkbox or Radio in item variant.
 
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches

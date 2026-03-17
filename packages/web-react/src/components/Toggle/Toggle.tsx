@@ -5,10 +5,9 @@ import React, { type ChangeEvent, type ForwardedRef, forwardRef, useState } from
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
 import { FormFieldVariants, type ForwardRefComponent, type SpiritToggleProps } from '../../types';
-import { ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { useToggleStyleProps } from './useToggleStyleProps';
 
 const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) => {
@@ -49,6 +48,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
         isDisabled,
         isLabelHidden,
         isRequired,
+        validationState,
       }}
     >
       <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
@@ -57,9 +57,8 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
           <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
           {validationState && (
             <ValidationText
-              UNSAFE_className={classProps.validationText}
-              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
               id={`${id}__validationText`}
+              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
               validationText={validationText}
               registerAria={register}
               role={validationTextRole}

@@ -8,7 +8,6 @@ import {
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import UNSTABLE_FileUpload from '../UNSTABLE_FileUpload';
 
@@ -30,11 +29,6 @@ describe('UNSTABLE_FileUpload', () => {
 
   describe('with input (name provided)', () => {
     restPropsTest((props) => <UNSTABLE_FileUpload {...defaultPropsWithInput} {...props} />, 'div');
-
-    validationTextPropsTest(
-      (props) => <UNSTABLE_FileUpload {...defaultPropsWithInput} {...props} />,
-      '.FileUploaderInput__validationText',
-    );
 
     validHtmlAttributesTest(UNSTABLE_FileUpload, defaultPropsWithInput);
 
@@ -69,6 +63,39 @@ describe('UNSTABLE_FileUpload', () => {
 
       expect(labelElement).toHaveTextContent('Upload File');
       expect(labelElement?.innerHTML).toBe('Upload <b>File</b>');
+    });
+
+    it('should set wrapper id on root div and derive input id as {id}-input', () => {
+      const { container } = render(
+        <UNSTABLE_FileUpload id="uploader-1" name="files" label="Upload" data-testid="wrapper" />,
+      );
+
+      const wrapper = container.querySelector('#uploader-1');
+      expect(wrapper).toBeInTheDocument();
+      expect(wrapper?.tagName.toLowerCase()).toBe('div');
+
+      const input = container.querySelector('#uploader-1-input');
+      expect(input).toBeInTheDocument();
+      expect((input as HTMLInputElement).type).toBe('file');
+    });
+
+    it('should associate label with input via htmlFor and set helper/validation ids', () => {
+      const { container } = render(
+        <UNSTABLE_FileUpload
+          id="uploader-2"
+          name="files"
+          label="Upload"
+          helperText="Max 10 MB"
+          validationState="danger"
+          validationText="Error"
+        />,
+      );
+
+      const label = container.querySelector('label[for="uploader-2-input"]');
+      expect(label).toBeInTheDocument();
+
+      expect(container.querySelector('#uploader-2-input__helperText')).toHaveTextContent('Max 10 MB');
+      expect(container.querySelector('#uploader-2-input__validationText')).toHaveTextContent('Error');
     });
   });
 });

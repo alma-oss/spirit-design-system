@@ -15,7 +15,7 @@ Advanced example usage:
 
 ```tsx
 <Radio
-  autocomplete="off"
+  autoComplete="off"
   helperText="Helper text"
   id="radio-advanced"
   isChecked
@@ -66,28 +66,38 @@ and [escape hatches][readme-escape-hatches].
 
 ## Custom Component
 
-Text field classes are fabricated using `useRadioStyleProps` hook. You can use it to create your own custom Radio component.
+Radio classes are fabricated using `useRadioStyleProps` hook. You can use it to create your own custom Radio component. Compose the standalone Label and HelperText components with PropsProvider and useAriaIds for correct styling and accessibility.
 
 ```tsx
 const CustomRadio = (props: SpiritRadioProps): JSX.Element => {
-  const { id } = props;
+  const { 'aria-describedby': ariaDescribedBy = '', id, isDisabled, isItem, label, helperText, ...restProps } = props;
   const { classProps, props: modifiedProps } = useRadioStyleProps(props);
-
-  const labelId = `${id}-label`;
-  const helperTextId = `${id}-helper-text`;
+  const { styleProps, props: transferProps } = useStyleProps(restProps);
+  const [ids, register] = useAriaIds(ariaDescribedBy);
+  const ariaDescribedByProp = useAriaDescribedBy(ids);
 
   return (
-    <div className={classProps.root}>
-      <input {...modifiedProps} id={id} className={classProps.input} aria-describedby={helperTextId} />
-      <div className={styleProps.text}>
-        <label className={styleProps.label} htmlFor={id}>
-          {props.label}
-        </label>
-        <div className={styleProps.helperText} id={helperTextId}>
-          {props.helperText}
+    <PropsProvider
+      value={{
+        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
+        isDisabled,
+      }}
+    >
+      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
+        <input
+          {...transferProps}
+          {...ariaDescribedByProp}
+          type="radio"
+          id={id}
+          className={classProps.input}
+          disabled={isDisabled}
+        />
+        <div className={classProps.text}>
+          <Label htmlFor={id}>{label}</Label>
+          <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
         </div>
       </div>
-    </div>
+    </PropsProvider>
   );
 };
 ```

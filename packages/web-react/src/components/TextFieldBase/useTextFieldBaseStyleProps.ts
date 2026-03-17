@@ -7,7 +7,6 @@ export interface TextFieldBaseStyles {
   classProps: {
     root: string;
     input: string;
-    validationText: string;
     passwordToggle: string;
     passwordToggleButton: string;
     passwordToggleIcon: string;
@@ -26,7 +25,6 @@ export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps,
   const TextFieldBaseSizeClass = `${TextFieldBaseClass}--${size}`;
   const TextFieldBaseValidationClass = `${TextFieldBaseClass}--${validationState}`;
   const TextFieldBaseInputClass = `${TextFieldBaseClass}__input`;
-  const TextFieldBaseValidationTextClass = `${TextFieldBaseClass}__validationText`;
   const TextFieldBasePasswordToggleClass = `${TextFieldBaseClass}__passwordToggle`;
   const TextFieldBasePasswordToggleButtonClass = `${TextFieldBaseClass}__passwordToggle__button`;
   const TextFieldBasePasswordToggleIconClass = `${TextFieldBaseClass}__passwordToggle__icon`;
@@ -42,7 +40,6 @@ export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps,
     classProps: {
       root: rootStyles,
       input: TextFieldBaseInputClass,
-      validationText: TextFieldBaseValidationTextClass,
       passwordToggle: TextFieldBasePasswordToggleClass,
       passwordToggleButton: TextFieldBasePasswordToggleButtonClass,
       passwordToggleIcon: TextFieldBasePasswordToggleIconClass,

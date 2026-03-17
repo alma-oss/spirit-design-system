@@ -8,7 +8,6 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
   validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import FieldGroup from '../FieldGroup';
 
@@ -26,8 +25,6 @@ describe('FieldGroup', () => {
   classNamePrefixProviderTest(FieldGroup, 'FieldGroup');
 
   validationStatePropsTest(FieldGroup, 'FieldGroup--');
-
-  validationTextPropsTest(FieldGroup, '.FieldGroup__validationText');
 
   stylePropsTest(
     (props) => <FieldGroup {...props} label="Label" id="field-group-example" data-testid="test-field-group" />,
@@ -55,25 +52,11 @@ describe('FieldGroup', () => {
 
     expect(label).toHaveTextContent('Label');
 
-    const labelDiv = fieldGroup.querySelector('.FieldGroup__label') as HTMLElement;
-
-    expect(labelDiv).toHaveTextContent('Label');
-
     const list = fieldGroup.querySelector('.FieldGroup__fields') as HTMLElement;
     const items = list.querySelectorAll('div');
 
     expect(items).toHaveLength(3);
     expect(items[0]).toHaveTextContent('Item');
-  });
-
-  it('should have className isRequired', () => {
-    render(
-      <FieldGroup id="example-field-group" label="Label" isRequired>
-        {itemList}
-      </FieldGroup>,
-    );
-
-    expect(screen.getAllByText('Label')[1]).toHaveClass('FieldGroup__label--required');
   });
 
   it('should have className isDisabled', () => {
@@ -126,6 +109,33 @@ describe('FieldGroup', () => {
     );
 
     expect(screen.getByText('helper text')).toHaveAttribute('id', 'example-field-group__helperText');
+  });
+
+  it('should use distinct ids for helper and validation text and compose aria-describedby', () => {
+    render(
+      <FieldGroup
+        id="fg-aria"
+        label="Label"
+        helperText="Helper text"
+        validationState="danger"
+        validationText="Validation message"
+      >
+        {itemList}
+      </FieldGroup>,
+    );
+
+    const helperEl = screen.getByText('Helper text');
+    const validationEl = screen.getByText('Validation message');
+
+    expect(helperEl).toHaveAttribute('id', 'fg-aria__helperText');
+    expect(validationEl).toHaveAttribute('id', 'fg-aria__validationText');
+
+    const fieldset = screen.getByRole('group');
+    const describedBy = fieldset.getAttribute('aria-describedby') ?? '';
+
+    expect(describedBy).toContain('fg-aria__helperText');
+    expect(describedBy).toContain('fg-aria__validationText');
+    expect(describedBy.split(/\s+/).filter(Boolean)).toHaveLength(2);
   });
 
   it('should render with html tags', () => {

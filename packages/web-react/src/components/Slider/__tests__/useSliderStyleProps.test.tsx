@@ -32,10 +32,4 @@ describe('useSliderStyleProps', () => {
 
     expect(result.current.classProps.root).toContain('Slider--danger');
   });
-
-  it('should return validation text class', () => {
-    const { result } = renderHook(() => useSliderStyleProps({ ...defaultProps, validationText: 'Validation text' }));
-
-    expect(result.current.classProps.validationText).toBe('Slider__validationText');
-  });
 });

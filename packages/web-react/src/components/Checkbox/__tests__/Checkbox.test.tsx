@@ -10,7 +10,6 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
   validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import Checkbox from '../Checkbox';
 
@@ -27,8 +26,6 @@ describe('Checkbox', () => {
 
   validationStatePropsTest(Checkbox, 'Checkbox--');
 
-  validationTextPropsTest(Checkbox, '.Checkbox__validationText');
-
   requiredPropsTest(Checkbox, 'checkbox', 'id', 'test-checkbox');
 
   validHtmlAttributesTest(Checkbox);
@@ -44,7 +41,7 @@ describe('Checkbox', () => {
   it('should have label', () => {
     render(<Checkbox id="checkbox" label="Label" />);
 
-    expect(screen.getByRole('checkbox').nextElementSibling?.firstChild).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: 'Label' })).toBeInTheDocument();
   });
 
   it('should have input classname', () => {
@@ -73,9 +70,18 @@ describe('Checkbox', () => {
       />,
     );
 
-    const element = screen.getByRole('checkbox').nextElementSibling?.firstChild as HTMLElement;
+    expect(screen.getByRole('checkbox', { name: 'Label Text' })).toBeInTheDocument();
+  });
 
-    expect(element).toHaveTextContent('Label Text');
-    expect(element.innerHTML).toBe('Label <b>Text</b>');
+  it('should register helper and validation text ids in aria-describedby', () => {
+    render(
+      <Checkbox id="cb-aria" label="Label" helperText="Helper" validationState="danger" validationText="Invalid" />,
+    );
+
+    const input = screen.getByRole('checkbox', { name: 'Label' });
+    const describedBy = input.getAttribute('aria-describedby') ?? '';
+
+    expect(describedBy).toContain('cb-aria__helperText');
+    expect(describedBy).toContain('cb-aria__validationText');
   });
 });

@@ -33,7 +33,7 @@ describe('Radio', () => {
   it('should have label', () => {
     render(<Radio id="radio" label="label" />);
 
-    expect(screen.getByRole('radio').nextElementSibling?.firstChild).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: 'label' })).toBeInTheDocument();
   });
 
   it('should have input classname', () => {
@@ -45,7 +45,14 @@ describe('Radio', () => {
   it('should have helper text', () => {
     render(<Radio id="radio" label="Label" helperText="text" />);
 
-    expect(screen.getByRole('radio').nextElementSibling?.lastChild).toHaveTextContent('text');
+    expect(screen.getByText('text')).toBeInTheDocument();
+  });
+
+  it('should register helper text id in aria-describedby', () => {
+    render(<Radio id="radio-aria" label="Label" helperText="Helper" />);
+
+    const input = screen.getByRole('radio', { name: 'Label' });
+    expect(input.getAttribute('aria-describedby')).toContain('radio-aria__helperText');
   });
 
   it('should render label with html tags', () => {
@@ -60,9 +67,6 @@ describe('Radio', () => {
       />,
     );
 
-    const element = screen.getByRole('radio').nextElementSibling?.firstChild as HTMLElement;
-
-    expect(element).toHaveTextContent('Radio Label');
-    expect(element.innerHTML).toBe('Radio <b>Label</b>');
+    expect(screen.getByRole('radio', { name: 'Radio Label' })).toBeInTheDocument();
   });
 });

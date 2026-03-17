@@ -10,7 +10,6 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
   validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import Select from '../Select';
 
@@ -24,8 +23,6 @@ describe('Select', () => {
   restPropsTest(Select, 'select');
 
   validationStatePropsTest(Select, 'Select--');
-
-  validationTextPropsTest(Select, '.Select__validationText');
 
   requiredPropsTest(Select, 'combobox', 'id', 'test-select');
 

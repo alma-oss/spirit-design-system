@@ -3,17 +3,15 @@
 import React, { type ElementType } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type FormFieldContextValue, FormFieldVariants, type SpiritLabelProps } from '../../types';
+import { type FormFieldContextValue, type SpiritLabelProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useLabelStyleProps } from './useLabelStyleProps';
 
 const defaultProps: Partial<SpiritLabelProps> = {
   elementType: 'label',
-  formFieldVariant: FormFieldVariants.BOX,
   isDisabled: false,
   isRequired: false,
   isLabelHidden: false,
-  isItem: false,
 };
 
 const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX.Element => {
@@ -22,28 +20,25 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
     ...defaultProps,
     formFieldVariant: contextProps.formFieldVariant,
     isDisabled: contextProps.isDisabled,
-    isRequired: contextProps.isRequired,
     isLabelHidden: contextProps.isLabelHidden,
-    isItem: contextProps.isItem,
+    isRequired: contextProps.isRequired,
     ...props,
   };
   const {
     children,
     elementType: ElementTag = 'label' as ElementType,
-    htmlFor,
     for: labelFor,
-    isDisabled,
     formFieldVariant,
-    isRequired,
+    htmlFor,
+    isDisabled,
     isLabelHidden,
-    isItem,
+    isRequired,
     ...restProps
   } = propsWithDefaults;
 
   const { classProps } = useLabelStyleProps({
     formFieldVariant,
     isDisabled,
-    isItem,
     isLabelHidden,
     isRequired,
   });

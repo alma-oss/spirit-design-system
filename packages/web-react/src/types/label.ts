@@ -21,6 +21,4 @@ export interface SpiritLabelProps<T extends ElementType = 'label'>
     LabelElementProps<T>,
     LabelProps,
     StyleProps,
-    Partial<
-      Pick<FormFieldContextValue, 'isDisabled' | 'formFieldVariant' | 'isRequired' | 'isLabelHidden' | 'isItem'>
-    > {}
+    Partial<Pick<FormFieldContextValue, 'isDisabled' | 'formFieldVariant' | 'isRequired' | 'isLabelHidden'>> {}
