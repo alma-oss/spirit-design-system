@@ -32,7 +32,7 @@ The class controls appearance only: dashed border and visibility of the “or dr
 ```html
 <div class="UNSTABLE_FileUpload">
   <div class="UNSTABLE_FileUploadInput has-drag-and-drop">
-    <label for="file-uploader" class="Label Label--box">Label</label>
+    <label for="file-uploader" class="Label">Label</label>
     <input
       type="file"
       id="file-uploader"
@@ -99,7 +99,7 @@ Use the [`accept`][mdn-accept] attribute to restrict file types:
 Add `Label--required` to the label for a required indicator. Validation is up to your application:
 
 ```html
-<label for="file-uploader" class="Label Label--box Label--required">Label</label>
+<label for="file-uploader" class="Label Label--required">Label</label>
 ```
 
 ### Validation States
@@ -125,7 +125,7 @@ Add validation text and give it an `id` for `aria-describedby` when you use it:
 
 ```html
 <div class="UNSTABLE_FileUploadInput UNSTABLE_FileUploadInput--disabled">
-  <label for="file-uploader-disabled" class="Label Label--box Label--disabled">Label</label>
+  <label for="file-uploader-disabled" class="Label Label--disabled">Label</label>
   <input
     type="file"
     id="file-uploader-disabled"

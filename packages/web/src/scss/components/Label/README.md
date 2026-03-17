@@ -2,17 +2,15 @@
 
 Label is a standalone component for form field labels with consistent styling across all form components.
 
-## Variants
-
-The Label component has three variants:
-
-### Box Variant
-
-Used for box field components like [TextField][textfield], [TextArea][textarea], [Select][select], [Slider][slider], and [FileUploader][fileuploader], where the label is typically placed above the input.
+For components like [TextField][textfield], [TextArea][textarea], [Select][select], [Slider][slider], and [FileUploader][fileuploader], the label is typically placed above the input.
 
 ```html
-<label for="example-field" class="Label Label--box">Label Text</label>
+<label for="example-field" class="Label">Label Text</label>
 ```
+
+## Variants
+
+The Label component has two other variants:
 
 ### Inline Variant
 
@@ -43,7 +41,7 @@ For Checkbox or Radio with the `--item` modifier, combine both inline and item v
 Adds an asterisk (\*) after the label text to indicate a required field.
 
 ```html
-<label for="example-field" class="Label Label--box Label--required">Label Text</label>
+<label for="example-field" class="Label Label--required">Label Text</label>
 ```
 
 ### Hidden
@@ -51,7 +49,7 @@ Adds an asterisk (\*) after the label text to indicate a required field.
 Visually hides the label while keeping it accessible to screen readers.
 
 ```html
-<label for="example-field" class="Label Label--box accessibility-hidden">Label Text</label>
+<label for="example-field" class="Label accessibility-hidden">Label Text</label>
 ```
 
 ### Disabled
@@ -59,7 +57,7 @@ Visually hides the label while keeping it accessible to screen readers.
 Applies disabled styling to the label.
 
 ```html
-<label for="example-field" class="Label Label--box Label--disabled">Label Text</label>
+<label for="example-field" class="Label Label--disabled">Label Text</label>
 ```
 
 ## Examples
@@ -68,7 +66,7 @@ Applies disabled styling to the label.
 
 ```html
 <div class="TextField">
-  <label for="text-field" class="Label Label--box">Label</label>
+  <label for="text-field" class="Label">Label</label>
   <input type="text" id="text-field" class="TextField__input" />
 </div>
 ```
@@ -77,7 +75,7 @@ Applies disabled styling to the label.
 
 ```html
 <div class="TextField">
-  <label for="text-field-required" class="Label Label--box Label--required">Label</label>
+  <label for="text-field-required" class="Label Label--required">Label</label>
   <input type="text" id="text-field-required" class="TextField__input" required />
 </div>
 ```
@@ -116,7 +114,7 @@ Applies disabled styling to the label.
 
 ```html
 <div class="TextField TextField--disabled">
-  <label for="text-field-disabled" class="Label Label--box Label--disabled">Label</label>
+  <label for="text-field-disabled" class="Label Label--disabled">Label</label>
   <input type="text" id="text-field-disabled" class="TextField__input" disabled />
 </div>
 ```
