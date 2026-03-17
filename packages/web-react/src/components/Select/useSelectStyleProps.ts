@@ -16,7 +16,6 @@ export interface UseSelectStyleReturn {
     container: string;
     input: string;
     icon: string;
-    validationText: string;
   };
 }
 
@@ -34,7 +33,6 @@ export const useSelectStyleProps = ({
   const selectContainerClass = `${selectRootClass}__inputContainer`;
   const selectInputClass = `${selectRootClass}__input`;
   const selectIconClass = `${selectRootClass}__icon`;
-  const selectValidationTextClass = `${selectRootClass}__validationText`;
 
   return {
     classProps: {
@@ -47,7 +45,6 @@ export const useSelectStyleProps = ({
       container: selectContainerClass,
       input: selectInputClass,
       icon: selectIconClass,
-      validationText: selectValidationTextClass,
     },
   };
 };

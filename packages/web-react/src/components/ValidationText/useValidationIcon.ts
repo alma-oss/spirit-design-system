@@ -1,7 +1,9 @@
 import { useIconName } from '../../hooks';
-import { type ValidationTextProps } from './types';
+import { type SpiritValidationTextProps } from '../../types';
 
-export function useValidationIcon({ hasValidationStateIcon }: ValidationTextProps) {
+export function useValidationIcon({
+  hasValidationStateIcon,
+}: Pick<SpiritValidationTextProps, 'hasValidationStateIcon'>) {
   const iconNameValue = useIconName(hasValidationStateIcon as string, {
     success: 'check-plain',
     warning: 'warning',

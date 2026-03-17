@@ -15,8 +15,8 @@ export interface RadioStyles {
 }
 
 export function useRadioStyleProps(props: SpiritRadioProps): RadioStyles {
-  const { inputPosition = InputPositions.START, isItem, validationState, ...restProps } = props;
-  const { isDisabled } = restProps;
+  const { inputPosition = InputPositions.START, ...restProps } = props;
+  const { isDisabled, isLabelHidden, isItem, validationState } = restProps;
 
   const radioClass = useClassNamePrefix('Radio');
   const radioDisabledClass = `${radioClass}--disabled`;
@@ -24,6 +24,7 @@ export function useRadioStyleProps(props: SpiritRadioProps): RadioStyles {
   const radioInputClass = `${radioClass}__input`;
   const radioInputPositionClass = useInputPositionClass(radioClass, inputPosition);
   const radioTextClass = `${radioClass}__text`;
+  const radioLabelHiddenClass = `${radioClass}--labelHidden`;
   const radioValidationClass = `${radioClass}--${validationState}`;
 
   const rootStyles = classNames(radioClass, {
@@ -31,6 +32,7 @@ export function useRadioStyleProps(props: SpiritRadioProps): RadioStyles {
     [radioDisabledClass]: isDisabled,
     [radioItemClass]: isItem,
     [radioValidationClass]: validationState,
+    [radioLabelHiddenClass]: isLabelHidden,
   });
 
   return {

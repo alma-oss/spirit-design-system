@@ -4,12 +4,10 @@ import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
-import { FormFieldVariants } from '../../types';
-import { ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
 import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { type UnstableFileUploadProps } from './types';
 import { useFileUploadState } from './useFileUploadState';
 import { useFileUploadStyleProps } from './useFileUploadStyleProps';
@@ -75,10 +73,10 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
   return (
     <PropsProvider
       value={{
-        formFieldVariant: FormFieldVariants.BOX,
-        isDisabled: !!isDisabled,
+        isDisabled,
         isLabelHidden,
         isRequired,
+        validationState,
       }}
     >
       <div id={id} {...transferProps} {...styleProps} className={classNames(classProps.root, styleProps.className)}>
@@ -110,14 +108,13 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
                 &nbsp;
                 <span className={classProps.input.dropLabel}>{labelText}</span>
               </label>
-              <HelperText id={`${inputId}__helperText`} registerAria={register} helperText={helperText} />
+              <HelperText id={`${inputId}-helper-text`} registerAria={register} helperText={helperText} />
             </div>
             {validationState && (
               <ValidationText
-                UNSAFE_className={classProps.input.validationText}
                 elementType="span"
+                id={`${inputId}-validation-text`}
                 {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-                id={`${inputId}__validationText`}
                 validationText={validationText}
                 registerAria={register}
                 role={validationTextRole}

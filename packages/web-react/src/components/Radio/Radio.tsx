@@ -21,6 +21,7 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
     isLabelHidden,
     label,
     onChange,
+    validationState,
     value,
     ...restProps
   } = modifiedProps;
@@ -32,10 +33,10 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
   return (
     <PropsProvider
       value={{
-        formFieldVariant: FormFieldVariants.INLINE,
+        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
         isDisabled,
-        isItem,
         isLabelHidden,
+        validationState,
       }}
     >
       <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
@@ -53,7 +54,7 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
         />
         <div className={classProps.text}>
           <Label htmlFor={id}>{label}</Label>
-          <HelperText id={`${id}__helperText`} registerAria={register} helperText={helperText} />
+          <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
         </div>
       </div>
     </PropsProvider>

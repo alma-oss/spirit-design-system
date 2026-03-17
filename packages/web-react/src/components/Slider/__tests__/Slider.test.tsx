@@ -4,6 +4,9 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
@@ -29,6 +32,19 @@ describe('Slider', () => {
 
   ariaAttributesTest((props) => <Slider id={defaultProps.id} {...props} />);
 
+  formFieldLabelContextPropsTest({
+    includeRequired: false,
+    renderComponent: (props) => <Slider {...defaultProps} {...props} />,
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => <Slider {...defaultProps} {...props} />,
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => <Slider {...defaultProps} {...props} />,
+  });
+
   it('should render slider', () => {
     render(<Slider {...defaultProps} />);
 
@@ -37,14 +53,6 @@ describe('Slider', () => {
     expect(screen.getByLabelText(defaultProps.label)).toBeInTheDocument();
     expect(sliderElement).toBeInTheDocument();
     expect(sliderElement).toHaveValue(defaultValue.toString());
-  });
-
-  it('should render helper text', () => {
-    const helperText = 'Helper text';
-
-    render(<Slider {...defaultProps} helperText={helperText} />);
-
-    expect(screen.getByText(helperText)).toBeInTheDocument();
   });
 
   it('should render validation text', () => {
@@ -68,9 +76,17 @@ describe('Slider', () => {
       />,
     );
 
-    const element = screen.getByRole('slider').previousElementSibling as HTMLElement;
+    const element = screen.getByText('Label').parentElement as HTMLElement;
 
     expect(element).toHaveTextContent('Slider Label');
     expect(element.innerHTML).toBe('Slider <b>Label</b>');
+  });
+
+  it('should render validation icon when hasValidationIcon is set', () => {
+    render(<Slider {...defaultProps} hasValidationIcon validationState="danger" validationText="Invalid" />);
+
+    const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
+
+    expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
 });

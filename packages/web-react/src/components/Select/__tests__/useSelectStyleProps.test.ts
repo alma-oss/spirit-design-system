@@ -12,7 +12,6 @@ describe('useSelectStyleProps', () => {
       container: 'Select__inputContainer',
       input: 'Select__input',
       icon: 'Select__icon',
-      validationText: 'Select__validationText',
     });
   });
 

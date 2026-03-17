@@ -3,20 +3,19 @@
 import React, { type ElementType, useEffect } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type FormFieldContextValue, FormFieldVariants, type SpiritHelperTextProps } from '../../types';
+import { type FormFieldContextValue, type SpiritHelperTextProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useHelperTextStyleProps } from './useHelperTextStyleProps';
 
 const defaultProps: Partial<SpiritHelperTextProps> = {
   elementType: 'div',
-  formFieldVariant: FormFieldVariants.BOX,
   id: undefined,
   isDisabled: false,
   registerAria: undefined,
 };
 
 const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<E>) => {
-  const contextProps = (useContextProps() ?? {}) as Partial<FormFieldContextValue>;
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
   const propsWithDefaults = {
     ...defaultProps,
     isDisabled: contextProps.isDisabled,
@@ -41,7 +40,7 @@ const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<
     helperText && registerAria?.({ add: id });
 
     return () => {
-      registerAria?.({ remove: id });
+      id && registerAria?.({ remove: id });
     };
   }, [helperText, id, registerAria]);
 

@@ -15,7 +15,7 @@ Advanced example usage:
 
 ```tsx
 <Radio
-  autocomplete="off"
+  autoComplete="off"
   helperText="Helper text"
   id="radio-advanced"
   isChecked
@@ -50,10 +50,10 @@ Pass an object to adjust the input position based on the [breakpoint][dictionary
 | `helperText`      | `ReactNode`                                    | -       | ✕        | Helper text                                                                               |
 | `id`              | `string`                                       | -       | ✓        | Input and label identification                                                            |
 | `inputPosition`   | \[`string` \| `object`]                        | `start` | ✕        | Position of the input (`start` or `end`), supports [responsive][readme-responsive] values |
-| `isDisabled`      | `boolean`                                      | -       | ✕        | Whether is field disabled                                                                 |
-| `isChecked`       | `boolean`                                      | -       | ✕        | Whether is field checked                                                                  |
-| `isItem`          | `boolean`                                      | -       | ✕        | To render in [Item][item] mode                                                            |
-| `isLabelHidden`   | `boolean`                                      | -       | ✕        | Whether is label hidden                                                                   |
+| `isDisabled`      | `bool`                                         | -       | ✕        | Whether is field disabled                                                                 |
+| `isChecked`       | `bool`                                         | -       | ✕        | Whether is field checked                                                                  |
+| `isItem`          | `bool`                                         | -       | ✕        | To render in [Item][item] mode                                                            |
+| `isLabelHidden`   | `bool`                                         | -       | ✕        | Whether is label hidden                                                                   |
 | `label`           | `ReactNode`                                    | -       | ✕        | Label text                                                                                |
 | `name`            | `string`                                       | -       | ✕        | Input name                                                                                |
 | `ref`             | `ForwardedRef<HTMLInputElement>`               | -       | ✕        | Input element reference                                                                   |
@@ -66,28 +66,48 @@ and [escape hatches][readme-escape-hatches].
 
 ## Custom Component
 
-Text field classes are fabricated using `useRadioStyleProps` hook. You can use it to create your own custom Radio component.
+Radio classes are fabricated using `useRadioStyleProps` hook. You can use it to create your own custom Radio component. Compose the standalone Label and HelperText components with PropsProvider and useAriaIds for correct styling and accessibility.
 
 ```tsx
 const CustomRadio = (props: SpiritRadioProps): JSX.Element => {
-  const { id } = props;
-  const { classProps, props: modifiedProps } = useRadioStyleProps(props);
-
-  const labelId = `${id}-label`;
-  const helperTextId = `${id}-helper-text`;
+  const {
+    'aria-describedby': ariaDescribedBy = '',
+    helperText,
+    id,
+    isDisabled,
+    isItem,
+    isLabelHidden,
+    label,
+    ...restProps
+  } = props;
+  const { classProps } = useRadioStyleProps(props);
+  const { styleProps, props: transferProps } = useStyleProps(restProps);
+  const [ids, register] = useAriaIds(ariaDescribedBy);
+  const ariaDescribedByProp = useAriaDescribedBy(ids);
 
   return (
-    <div className={classProps.root}>
-      <input {...modifiedProps} id={id} className={classProps.input} aria-describedby={helperTextId} />
-      <div className={styleProps.text}>
-        <label className={styleProps.label} htmlFor={id}>
-          {props.label}
-        </label>
-        <div className={styleProps.helperText} id={helperTextId}>
-          {props.helperText}
+    <PropsProvider
+      value={{
+        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
+        isDisabled,
+        isLabelHidden,
+      }}
+    >
+      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
+        <input
+          {...transferProps}
+          {...ariaDescribedByProp}
+          type="radio"
+          id={id}
+          className={classProps.input}
+          disabled={isDisabled}
+        />
+        <div className={classProps.text}>
+          <Label htmlFor={id}>{label}</Label>
+          <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
         </div>
       </div>
-    </div>
+    </PropsProvider>
   );
 };
 ```

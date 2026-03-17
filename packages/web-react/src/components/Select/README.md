@@ -64,36 +64,73 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 
 ## Custom Component
 
-Select classes are fabricated using `useSelectStyleProps` hook. You can use it to create your own custom Select component.
+Select classes are fabricated using `useSelectStyleProps` hook. You can use it to create your own custom Select component. Use the standalone Label, HelperText, and ValidationText components with PropsProvider and useAriaIds for correct styling and accessibility.
 
 ```tsx
 const CustomSelect = (props: SpiritSelectProps): JSX.Element => {
-  const { classProps, props: modifiedProps } = useSelectStyleProps(props);
-  const { styleProps, props: transferProps } = useStyleProps(restProps);
-
-  const renderValidationText = useValidationText({
-    validationTextClassName: classProps.validationText,
+  const {
+    'aria-describedby': ariaDescribedBy = '',
+    children,
+    hasValidationIcon,
+    helperText,
+    id,
+    isDisabled,
+    isFluid,
+    isLabelHidden,
+    isRequired,
+    label,
+    size,
     validationState,
     validationText,
-    requireValidationState: false,
+    ...restProps
+  } = props;
+  const { classProps } = useSelectStyleProps({
+    hasValidationIcon,
+    isDisabled,
+    isFluid,
+    isLabelHidden,
+    size,
+    validationState,
+  });
+  const { styleProps, props: transferProps } = useStyleProps(restProps);
+  const [ids, register] = useAriaIds(ariaDescribedBy);
+  const ariaDescribedByProp = useAriaDescribedBy(ids);
+  const validationTextRole = useValidationTextRole({
+    validationState,
+    validationText,
   });
 
   return (
-    <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
-      <label htmlFor={id} className={classProps.label}>
-        {label}
-      </label>
-      <div className={classProps.container}>
-        <select {...transferProps} id={id} className={classProps.input} ref={ref}>
-          {children}
-        </select>
-        <div className={classProps.icon}>
-          <Icon name={iconName} />
+    <PropsProvider value={{ isDisabled, isLabelHidden, isRequired, validationState }}>
+      <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
+        <Label htmlFor={id}>{label}</Label>
+        <div className={classProps.container}>
+          <select
+            {...transferProps}
+            {...ariaDescribedByProp}
+            id={id}
+            className={classProps.input}
+            disabled={isDisabled}
+            required={isRequired}
+          >
+            {children}
+          </select>
+          <div className={classProps.icon}>
+            <Icon name="chevron-down" />
+          </div>
         </div>
+        <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+        {validationState && (
+          <ValidationText
+            id={`${id}-validation-text`}
+            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+            validationText={validationText}
+            registerAria={register}
+            role={validationTextRole}
+          />
+        )}
       </div>
-      {helperText && <div className={classProps.helperText}>{helperText}</div>}
-      {renderValidationText}
-    </div>
+    </PropsProvider>
   );
 };
 ```

@@ -4,19 +4,33 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   requiredPropsTest,
   restPropsTest,
   sizePropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
   validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import TextArea from '../TextArea';
 
 jest.mock('../../../hooks/useIcon');
 
 describe('TextArea', () => {
+  formFieldLabelContextPropsTest({
+    renderComponent: (props) => <TextArea id="textarea-context" label="Label" {...props} />,
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => <TextArea id="textarea-helper-context" label="Label" {...props} />,
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => <TextArea id="textarea-validation-context" label="Label" {...props} />,
+  });
+
   classNamePrefixProviderTest(TextArea, 'TextArea');
 
   stylePropsTest(TextArea);
@@ -26,8 +40,6 @@ describe('TextArea', () => {
   restPropsTest(TextArea, 'textarea');
 
   validationStatePropsTest(TextArea, 'TextArea--');
-
-  validationTextPropsTest(TextArea, '.TextArea__validationText');
 
   validHtmlAttributesTest(TextArea);
 
@@ -45,12 +57,6 @@ describe('TextArea', () => {
     render(<TextArea id="textarea" label="Label" />);
 
     expect(screen.getByRole('textbox')).toHaveClass('TextArea__input');
-  });
-
-  it('should have helper text', () => {
-    render(<TextArea id="textarea" label="Label" helperText="helper text" />);
-
-    expect(screen.getByRole('textbox').nextElementSibling).toHaveTextContent('helper text');
   });
 
   it('should have fluid classname', () => {
@@ -85,9 +91,25 @@ describe('TextArea', () => {
       />,
     );
 
-    const element = screen.getByRole('textbox').parentElement?.firstChild as HTMLElement;
+    const element = screen.getByText('Label').parentElement as HTMLElement;
 
     expect(element).toHaveTextContent('TextArea Label');
     expect(element.innerHTML).toBe('TextArea <b>Label</b>');
+  });
+
+  it('should render validation icon when hasValidationIcon is set', () => {
+    render(
+      <TextArea
+        id="textarea-validation-icon"
+        label="Label"
+        hasValidationIcon
+        validationState="danger"
+        validationText="Invalid"
+      />,
+    );
+
+    const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
+
+    expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
 });

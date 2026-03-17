@@ -14,7 +14,6 @@ describe('useTagStyleProps', () => {
       passwordToggleButton: 'TextField__passwordToggle__button',
       passwordToggleIcon: 'TextField__passwordToggle__icon',
       root: 'TextField',
-      validationText: 'TextField__validationText',
     });
   });
 

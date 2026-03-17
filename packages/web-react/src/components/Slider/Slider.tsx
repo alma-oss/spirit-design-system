@@ -4,11 +4,10 @@ import classNames from 'classnames';
 import React, { type CSSProperties, type ChangeEvent, type FormEvent, type ForwardedRef, forwardRef } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaIds, useStyleProps } from '../../hooks';
-import { FormFieldVariants, type ForwardRefComponent, type SpiritSliderProps } from '../../types';
-import { ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { type ForwardRefComponent, type SpiritSliderProps } from '../../types';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { SLIDER_DEFAULT_PROPS } from './constants';
 import { useSliderStyleProps } from './useSliderStyleProps';
 
@@ -62,9 +61,9 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
   return (
     <PropsProvider
       value={{
-        formFieldVariant: FormFieldVariants.BOX,
         isDisabled,
         isLabelHidden,
+        validationState,
       }}
     >
       <div {...styleProps} {...otherProps} className={classNames(classProps.root, styleProps.className)}>
@@ -83,12 +82,11 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
           disabled={isDisabled}
           ref={ref}
         />
-        <HelperText helperText={helperText} id={`${id}__helperText`} registerAria={register} />
+        <HelperText helperText={helperText} id={`${id}-helper-text`} registerAria={register} />
         {validationState && (
           <ValidationText
-            UNSAFE_className={classProps.validationText}
+            id={`${id}-validation-text`}
             {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-            id={`${id}__validationText`}
             registerAria={register}
             validationText={validationText}
             role={validationTextRole}
