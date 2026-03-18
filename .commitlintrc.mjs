@@ -1,8 +1,9 @@
+import conventionalConfig from '@alma-oss/commitlint-config';
+
 export default {
-  extends: ['@commitlint/config-conventional'],
+  extends: ['@alma-oss/commitlint-config'],
   ignores: [
-    (commit) => commit.includes('[ci-skip]'),
-    (commit) => commit.includes('Pull request'),
+    ...conventionalConfig.ignores,
     (commit) => commit.includes('Updated styles and tokens'),
   ],
   rules: {

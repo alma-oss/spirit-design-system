@@ -60,10 +60,10 @@
     "version": "yarn format:fix:changelog"
   },
   "devDependencies": {
+    "@alma-oss/commitlint-config": "catalog:lint",
     "@almacareer/remark-config": "catalog:lint",
     "@axe-core/playwright": "catalog:test",
     "@commitlint/cli": "catalog:lint",
-    "@commitlint/config-conventional": "catalog:lint",
     "@eslint/compat": "catalog:lint",
     "@eslint/eslintrc": "catalog:lint",
     "@omlet/cli": "catalog:design-tools",
