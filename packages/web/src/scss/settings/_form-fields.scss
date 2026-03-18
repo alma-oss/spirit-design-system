@@ -136,3 +136,6 @@ $item-background-color-state-active: tokens.$background-interactive-state-active
 $item-label-typography: tokens.$body-medium-semibold;
 $item-validation-text-typography: tokens.$body-small-semibold;
 $item-helper-text-typography: tokens.$body-small-regular;
+
+// TextArea character counter
+$text-area-counter-typography-state-validation: tokens.$body-small-semibold;

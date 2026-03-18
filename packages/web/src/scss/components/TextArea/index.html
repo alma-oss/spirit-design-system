@@ -35,20 +35,20 @@
 
         <div class="TextArea TextArea--small">
           <label for="text-area-size-small" class="TextArea__label">Small</label>
-          <textarea id="text-area-size-small" class="TextArea__input" name="size-small" placeholder="Placeholder"></textarea>
-          <div class="TextArea__helperText">Helper text</div>
+          <textarea id="text-area-size-small" class="TextArea__input" name="size-small" placeholder="Placeholder" aria-describedby="text-area-size-small-helper-text"></textarea>
+          <div id="text-area-size-small-helper-text" class="TextArea__helperText">Helper text</div>
         </div>
 
         <div class="TextArea TextArea--medium">
           <label for="text-area-size-medium" class="TextArea__label">Medium (default)</label>
-          <textarea id="text-area-size-medium" class="TextArea__input" name="size-medium" placeholder="Placeholder"></textarea>
-          <div class="TextArea__helperText">Helper text</div>
+          <textarea id="text-area-size-medium" class="TextArea__input" name="size-medium" placeholder="Placeholder" aria-describedby="text-area-size-medium-helper-text"></textarea>
+          <div id="text-area-size-medium-helper-text" class="TextArea__helperText">Helper text</div>
         </div>
 
         <div class="TextArea TextArea--large">
           <label for="text-area-size-large" class="TextArea__label">Large</label>
-          <textarea id="text-area-size-large" class="TextArea__input" name="size-large" placeholder="Placeholder"></textarea>
-          <div class="TextArea__helperText">Helper text</div>
+          <textarea id="text-area-size-large" class="TextArea__input" name="size-large" placeholder="Placeholder" aria-describedby="text-area-size-large-helper-text"></textarea>
+          <div id="text-area-size-large-helper-text" class="TextArea__helperText">Helper text</div>
         </div>
 
       </div>
@@ -106,8 +106,8 @@
 
       <div class="TextArea TextArea--medium">
         <label for="text-area-helper-text" class="TextArea__label">Label</label>
-        <textarea id="text-area-helper-text" class="TextArea__input" name="helperText" placeholder="Placeholder"></textarea>
-        <div class="TextArea__helperText">Helper text</div>
+        <textarea id="text-area-helper-text" class="TextArea__input" name="helperText" placeholder="Placeholder" aria-describedby="text-area-helper-text-helper"></textarea>
+        <div id="text-area-helper-text-helper" class="TextArea__helperText">Helper text</div>
       </div>
 
     </div>
@@ -172,9 +172,9 @@
 
       <div class="TextArea TextArea--medium TextArea--danger">
         <label for="text-area-danger-with-helper-text" class="TextArea__label TextArea__label--required">Label</label>
-        <textarea id="text-area-danger-with-helper-text" class="TextArea__input" placeholder="Placeholder" name="dangerWithHelperText" required>Filled</textarea>
-        <div class="TextArea__helperText">This is helper text</div>
-        <div class="TextArea__validationText">Danger validation text</div>
+        <textarea id="text-area-danger-with-helper-text" class="TextArea__input" placeholder="Placeholder" name="dangerWithHelperText" required aria-describedby="text-area-danger-with-helper-text-helper text-area-danger-with-helper-text-validation">Filled</textarea>
+        <div id="text-area-danger-with-helper-text-helper" class="TextArea__helperText">This is helper text</div>
+        <div id="text-area-danger-with-helper-text-validation" class="TextArea__validationText">Danger validation text</div>
       </div>
 
     </div>
@@ -267,6 +267,80 @@
       <div class="TextArea TextArea--medium" data-spirit-toggle="autoResize">
         <label for="text-area-auto-resize" class="TextArea__label">Label</label>
         <textarea id="text-area-auto-resize" class="TextArea__input" name="autoResize"></textarea>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Counter <span class="Tag Tag--medium Tag--subtle Tag--warning hide-from-visual-tests">Visual demo only</span></h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="TextArea TextArea--medium">
+        <label for="text-area-counter-show-only" class="TextArea__label">Show Counter with Helper Text</label>
+        <textarea id="text-area-counter-show-only" class="TextArea__input" name="counterShowOnly" placeholder="Placeholder" aria-describedby="text-area-counter-show-only-helper-text text-area-counter-show-only-message"></textarea>
+        <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYTop">
+          <div>
+            <div id="text-area-counter-show-only-helper-text" class="TextArea__helperText">Write at least 100 characters</div>
+          </div>
+          <div class="TextArea__counter" aria-hidden="true">0</div>
+        </div>
+        <div id="text-area-counter-show-only-message" class="accessibility-hidden">0 characters entered</div>
+      </div>
+
+      <div class="TextArea TextArea--medium">
+        <label for="text-area-counter-default" class="TextArea__label">Show Counter with Threshold</label>
+        <textarea id="text-area-counter-default" class="TextArea__input" name="counterDefault" placeholder="Placeholder" aria-describedby="text-area-counter-default-message"></textarea>
+        <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYTop">
+          <div class="TextArea__counter" aria-hidden="true">0/200</div>
+        </div>
+        <div id="text-area-counter-default-message" class="accessibility-hidden">You can enter up to 200 characters</div>
+      </div>
+
+      <div class="TextArea TextArea--medium">
+        <label for="text-area-counter-min-max" class="TextArea__label">Show Counter with Threshold and Helper Text</label>
+        <textarea id="text-area-counter-min-max" class="TextArea__input" name="counterMinMax" placeholder="Placeholder" aria-describedby="text-area-counter-min-max-helper-text text-area-counter-min-max-message"></textarea>
+        <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYTop">
+          <div>
+            <div id="text-area-counter-min-max-helper-text" class="TextArea__helperText">Write between 100 and 200 characters</div>
+          </div>
+          <div class="TextArea__counter" aria-hidden="true">0/200</div>
+        </div>
+        <div id="text-area-counter-min-max-message" class="accessibility-hidden">You can enter up to 200 characters</div>
+      </div>
+
+      <div class="TextArea TextArea--medium TextArea--disabled">
+        <label for="text-area-counter-disabled" class="TextArea__label">Show Counter with Threshold, Disabled</label>
+        <textarea id="text-area-counter-disabled" class="TextArea__input" name="counterDisabled" placeholder="Placeholder" disabled aria-describedby="text-area-counter-disabled-message">Disabled</textarea>
+        <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYTop">
+          <div class="TextArea__counter" aria-hidden="true">8/200</div>
+        </div>
+        <div id="text-area-counter-disabled-message" class="accessibility-hidden">192 characters remaining</div>
+      </div>
+
+      <div class="TextArea TextArea--medium TextArea--danger">
+        <label for="text-area-counter-validation" class="TextArea__label">Show Counter with Threshold and Validation</label>
+        <textarea id="text-area-counter-validation" class="TextArea__input" name="counterValidation" placeholder="Placeholder" aria-describedby="text-area-counter-validation-validation-text text-area-counter-validation-helper-text text-area-counter-validation-message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut al</textarea>
+        <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYTop">
+          <div>
+            <div id="text-area-counter-validation-validation-text" class="TextArea__validationText">
+              <svg width="20" height="20" aria-hidden="true">
+                <use xlink:href="/assets/icons/svg/sprite.svg#danger" />
+              </svg>
+              <div>You have entered too many characters</div>
+            </div>
+            <div id="text-area-counter-validation-helper-text" class="TextArea__helperText">Our support will get back to you within 24 hours</div>
+          </div>
+          <div class="TextArea__counter" aria-hidden="true">201/200</div>
+        </div>
+        <div id="text-area-counter-validation-message" class="accessibility-hidden">1 character over limit</div>
       </div>
 
     </div>
