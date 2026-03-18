@@ -4,6 +4,7 @@
 @use '../../tools/dictionaries';
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/string' as spirit-string;
+@use '../../tools/typography';
 @use 'theme';
 
 $_field-name: 'TextArea';
@@ -52,6 +53,14 @@ $_field-name: 'TextArea';
     @include form-fields-tools.helper-text();
 }
 
+.TextArea__counter {
+    @include typography.generate(theme.$counter-typography);
+
+    display: block;
+    margin-top: theme.$counter-margin-top;
+    margin-left: auto;
+}
+
 @include dictionaries.generate-sizes(
     $class-name: $_field-name,
     $dictionary-values: form-fields-settings.$box-field-size-dictionary,
@@ -70,10 +79,14 @@ $_field-name: 'TextArea';
 }
 
 :is(.TextArea--disabled, .TextArea.is-disabled)
-    > :is(.TextArea__validationText, [data-spirit-element='validation_text']) {
+    :is(.TextArea__validationText, [data-spirit-element='validation_text']) {
     @include form-fields-tools.validation-text-disabled();
 }
 
-:is(.TextArea--disabled, .TextArea.is-disabled) > :is(.TextArea__helperText) {
+:is(.TextArea--disabled, .TextArea.is-disabled) :is(.TextArea__helperText) {
     @include form-fields-tools.helper-text-disabled();
+}
+
+:is(.TextArea--disabled, .TextArea.is-disabled) .TextArea__counter {
+    color: theme.$counter-color-state-disabled;
 }
