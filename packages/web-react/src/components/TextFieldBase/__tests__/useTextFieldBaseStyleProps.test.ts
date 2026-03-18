@@ -3,12 +3,13 @@ import { Sizes } from '../../../constants';
 import { type SpiritTextFieldBaseProps } from '../../../types';
 import { useTextFieldBaseStyleProps } from '../useTextFieldBaseStyleProps';
 
-describe('useTagStyleProps', () => {
+describe('useTextFieldBaseStyleProps', () => {
   it('should return defaults', () => {
     const props = {} as SpiritTextFieldBaseProps;
     const { result } = renderHook(() => useTextFieldBaseStyleProps(props));
 
     expect(result.current.classProps).toStrictEqual({
+      counter: 'TextField__counter',
       helperText: 'TextField__helperText',
       input: 'TextField__input',
       label: 'TextField__label',

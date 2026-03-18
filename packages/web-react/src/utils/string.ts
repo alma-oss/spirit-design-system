@@ -35,6 +35,23 @@ export const kebabCaseToCamelCaseValues = (input: Record<string, string>): Recor
 };
 
 /**
+ * Normalizes a value to `string | undefined`.
+ *
+ * Returns the original value if it is already a string,
+ * `undefined` for nullish inputs, or `String(value)` for anything else.
+ *
+ * @param {unknown} value - The value to normalize.
+ * @returns {string | undefined} The normalized string value.
+ */
+export const normalizeStringValue = (value: unknown): string | undefined => {
+  if (typeof value === 'string' || value == null) {
+    return value ?? undefined;
+  }
+
+  return String(value);
+};
+
+/**
  * Converts a kebab-case string or an object with kebab-case values to camelCase.
  *
  * @param {string | Record<string, string>} input - The input to be converted.

@@ -8,6 +8,7 @@ import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import TextAreaAutoResize from './TextAreaAutoResize';
+import TextAreaCounter from './TextAreaCounter';
 import TextAreaDefault from './TextAreaDefault';
 import TextAreaDisabled from './TextAreaDisabled';
 import TextAreaFluid from './TextAreaFluid';
@@ -54,6 +55,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="AutoResize">
         <TextAreaAutoResize />
+      </DocsSection>
+      <DocsSection title="Counter">
+        <TextAreaCounter />
       </DocsSection>
     </IconsProvider>
   </StrictMode>,

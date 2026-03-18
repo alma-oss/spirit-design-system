@@ -13,6 +13,7 @@ export interface TextFieldBaseStyles {
     passwordToggle: string;
     passwordToggleButton: string;
     passwordToggleIcon: string;
+    counter: string;
   };
   /** props to be passed to the input element */
   props: Omit<TextFieldBaseProps, 'label'>;
@@ -47,6 +48,7 @@ export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps,
     [TextFieldBaseLabelRequiredClass]: isRequired,
     [TextFieldBaseLabelHiddenClass]: isLabelHidden,
   });
+  const counterStyles = `${TextFieldBaseClass}__counter`;
 
   return {
     classProps: {
@@ -58,6 +60,7 @@ export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps,
       passwordToggle: TextFieldBasePasswordToggleClass,
       passwordToggleButton: TextFieldBasePasswordToggleButtonClass,
       passwordToggleIcon: TextFieldBasePasswordToggleIconClass,
+      counter: counterStyles,
     },
     props: {
       ...restProps,

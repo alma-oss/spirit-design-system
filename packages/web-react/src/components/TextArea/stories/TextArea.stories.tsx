@@ -69,8 +69,20 @@ const meta: Meta<typeof TextArea> = {
     label: {
       control: 'text',
     },
+    counterThreshold: {
+      control: 'number',
+      description: 'Shows current/threshold counter. Prefer maxLength >= counterThreshold.',
+    },
+    hasCounter: {
+      control: 'boolean',
+      description: 'Shows count-only counter. maxLength is optional (fallback safety limit is used).',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
     maxLength: {
       control: 'number',
+      description: 'Optional. With counterThreshold, prefer maxLength >= counterThreshold.',
     },
     name: {
       control: 'text',
@@ -116,7 +128,8 @@ const meta: Meta<typeof TextArea> = {
     isLabelHidden: false,
     isRequired: false,
     label: 'Label',
-    maxLength: undefined,
+    counterThreshold: undefined,
+    hasCounter: false,
     name: 'TextArea',
     placeholder: 'Placeholder',
     rows: undefined,
