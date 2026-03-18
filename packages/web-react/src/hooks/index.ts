@@ -5,6 +5,8 @@ export * from './useCancelEvent';
 export * from './useClassNamePrefix';
 export * from './useClick';
 export * from './useClickOutside';
+export * from './useControlledModeGuard';
+export * from './useDebouncedValue';
 export * from './useDeprecationMessage';
 export * from './useDimensionStyle';
 export * from './useDragAndDrop';

@@ -25,7 +25,7 @@ describe('#debounce', () => {
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
-  it('should execute the callback after throttling is over', () => {
+  it('should execute the callback only once after rapid calls', () => {
     const callback = jest.fn();
     const debouncedCallback = debounce(callback, 200);
 
@@ -44,10 +44,36 @@ describe('#debounce', () => {
 
     debouncedCallback('test');
 
-    // Fast-forward time by 400ms
+    // Fast-forward time by 200ms
     jest.advanceTimersByTime(200);
 
     // The callback should have been called twice
     expect(callback).toHaveBeenCalledTimes(2);
+  });
+
+  it('should pass the latest arguments after rapid calls', () => {
+    const callback = jest.fn();
+    const debouncedCallback = debounce(callback, 200);
+
+    debouncedCallback('first');
+    debouncedCallback('second');
+    debouncedCallback('third');
+
+    jest.advanceTimersByTime(200);
+
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(callback).toHaveBeenCalledWith('third');
+  });
+
+  it('should cancel pending invocation when cancel is called', () => {
+    const callback = jest.fn();
+    const debouncedCallback = debounce(callback, 200);
+
+    debouncedCallback('test');
+    debouncedCallback.cancel();
+
+    jest.advanceTimersByTime(200);
+
+    expect(callback).not.toHaveBeenCalled();
   });
 });

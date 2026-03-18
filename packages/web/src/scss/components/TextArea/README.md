@@ -107,7 +107,7 @@ Validation must be handled separately (see [Validation States](#validation-state
 In the web package, counter demos are **visual only** (static markup); interactive counter behaviour
 is provided by the React package (`@spirit-design-system/web-react`).
 
-If you need to communicate a minimum length requirement, use the helper text element with a stable **`id`** and reference it from the textarea via **`aria-describedby`** (together with the screen reader counter message id when both are present):
+If you need to communicate a minimum length requirement, use the helper text element with a stable **`id`** and reference it from the textarea via **`aria-describedby`** (together with the screen readers (SR) counter message id when both are present):
 
 ```html
 <div id="text-area-example-helper" class="TextArea__helperText">Write between 100 and 200 characters</div>
@@ -189,14 +189,14 @@ Counter with helper text, validation text, and validation state:
 
 ### Counter Accessibility
 
-The counter uses a two-element pattern to provide separate visual and screen reader experiences:
+The counter uses a two-element pattern to provide separate visual and SR experiences:
 
 1. **Visible counter** (`.TextArea__counter`): Displays the compact `current/max` or count-only format (e.g. `0/200` or `0`).
-   Has `aria-hidden="true"` so screen readers ignore it, since this format is not SR-friendly.
+   Has `aria-hidden="true"` so screen readers (SR) ignore it, since this format is not SR-friendly.
 
-2. **Screen reader message** (`.accessibility-hidden`): A visually hidden element with a human-readable
-   message linked to the textarea via `aria-describedby`. When the user focuses the textarea, the screen
-   reader announces this message (e.g. "You can enter up to 200 characters" or "5 characters entered").
+2. **SR message** (`.accessibility-hidden`): A visually hidden element with a human-readable
+   message linked to the textarea via `aria-describedby`. When the user focuses the textarea, SR
+   announces this message (e.g. "You can enter up to 200 characters" or "5 characters entered").
    If there is **helper text** and/or **validation text**, give those containers stable `id` values and list
    **all** relevant ids in `aria-describedby` (order: validation, helper, counter message is a common choice).
 

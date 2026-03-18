@@ -1,19 +1,33 @@
-export const debounce = <T>(callback: (props: T) => void, delay: number) => {
-  let timeout: NodeJS.Timeout;
-  let isThrottled = false;
+export type DebouncedFunction<T> = ((args: T) => void) & { cancel: () => void };
 
-  return (args: T): void => {
-    if (!isThrottled) {
-      isThrottled = true;
+/**
+ * Returns a debounced function that invokes `callback` after `delay` ms have elapsed
+ * since the last time the debounced function was invoked.
+ *
+ * @param {Function} callback - Function to debounce.
+ * @param {number} delay - Delay in milliseconds.
+ * @returns {DebouncedFunction<T>} Debounced function with a `cancel` method.
+ */
+export const debounce = <T>(callback: (props: T) => void, delay: number): DebouncedFunction<T> => {
+  let timeout: ReturnType<typeof setTimeout> | undefined;
 
-      if (timeout) {
-        clearTimeout(timeout);
-      }
+  const debounced = ((args: T): void => {
+    if (timeout !== undefined) {
+      clearTimeout(timeout);
+    }
 
-      timeout = setTimeout(() => {
-        callback(args);
-        isThrottled = false;
-      }, delay);
+    timeout = setTimeout(() => {
+      timeout = undefined;
+      callback(args);
+    }, delay);
+  }) as DebouncedFunction<T>;
+
+  debounced.cancel = () => {
+    if (timeout !== undefined) {
+      clearTimeout(timeout);
+      timeout = undefined;
     }
   };
+
+  return debounced;
 };

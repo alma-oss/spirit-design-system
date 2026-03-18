@@ -2,6 +2,7 @@ import {
   camelCaseToKebabCase,
   kebabCaseToCamelCase,
   kebabCaseToCamelCaseValues,
+  normalizeStringValue,
   stringOrObjectKebabCaseToCamelCase,
 } from '../string';
 
@@ -43,6 +44,22 @@ describe('string', () => {
       [{ test: 'kebab-case-test' }, { test: 'kebabCaseTest' }],
     ])('should convert kebab-case object "%s" to camelCase object "%s"', (input, expected) => {
       const result = kebabCaseToCamelCaseValues(input);
+      expect(result).toEqual(expected);
+    });
+  });
+
+  describe('#normalizeStringValue', () => {
+    it.each([
+      ['hello', 'hello'],
+      ['', ''],
+      [null, undefined],
+      [undefined, undefined],
+      [42, '42'],
+      [0, '0'],
+      [true, 'true'],
+      [false, 'false'],
+    ])('should normalize %s to %s', (input, expected) => {
+      const result = normalizeStringValue(input);
       expect(result).toEqual(expected);
     });
   });

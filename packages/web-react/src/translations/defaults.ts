@@ -21,6 +21,16 @@ export const defaultLabels = {
     previous: 'Previous',
     goToPage: 'Go to page',
   },
+  textArea: {
+    counter: {
+      charactersEntered: '{count} characters entered',
+      charactersRemaining: '{count} characters remaining',
+      characterRemaining: '{count} character remaining',
+      canEnterUpTo: 'You can enter up to {maxLength} characters',
+      charactersOverLimit: '{count} characters over limit',
+      characterOverLimit: '{count} character over limit',
+    },
+  },
   textField: {
     password: {
       show: 'Show password',

@@ -6,7 +6,7 @@ import {
   type SizesDictionaryType,
   type TextInputProps,
 } from './shared';
-import { type TextAreaProps } from './textArea';
+import { type TextAreaCounterRenderProps, type TextAreaProps } from './textArea';
 import { type TextFieldProps } from './textField';
 
 export interface TextFieldBaseMultiLineProps {
@@ -14,7 +14,15 @@ export interface TextFieldBaseMultiLineProps {
   isMultiline?: boolean;
 }
 
-export type TextFieldBaseProps = ChildrenProps & TextFieldBaseMultiLineProps & (TextFieldProps | TextAreaProps);
+export interface TextFieldBaseCounterProps {
+  /** Counter render data computed by `useCharacterCounterState` (CharacterCounter / TextArea) */
+  counterProps?: TextAreaCounterRenderProps;
+}
+
+export type TextFieldBaseProps = ChildrenProps &
+  TextFieldBaseMultiLineProps &
+  TextFieldBaseCounterProps &
+  (TextFieldProps | TextAreaProps);
 
 export type SpiritTextFieldBaseProps = {
   label: ReactNode;
