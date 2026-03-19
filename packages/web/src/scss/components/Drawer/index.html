@@ -6,6 +6,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     const radios = document.querySelectorAll('input[name="drawer-alignment"]');
     const drawer = document.getElementById("drawer-example");
+    const drawerNonModal = document.getElementById("drawer-example-non-modal");
     const backdropCheckbox = document.getElementById("drawer-is-closable-on-backdrop-click");
     const escapeKeyCheckbox = document.getElementById("drawer-is-closable-on-escape-key");
     const contentTextArea = document.getElementById("drawer-content");
@@ -16,6 +17,11 @@
       closableOnBackdropClick: backdropCheckbox.checked,
       closableOnEscapeKey: escapeKeyCheckbox.checked,
     });
+
+    // Initialize non-modal drawer: page stays interactive
+    if (drawerNonModal) {
+      new Offcanvas(drawerNonModal, { modal: false });
+    }
 
     // Handle alignment changes
     radios.forEach(radio => {
@@ -58,17 +64,40 @@
         <fieldset class="border-0">
           <legend>Drawer alignment:</legend>
           <div class="Radio mr-600">
-            <input name="drawer-alignment" autocomplete="off" aria-describedby="drawer-alignment-left__helperText" type="radio" id="drawer-alignment-left" class="Radio__input" value="left">
+            <input
+              name="drawer-alignment"
+              autocomplete="off"
+              aria-describedby="drawer-alignment-left__helperText"
+              type="radio"
+              id="drawer-alignment-left"
+              class="Radio__input"
+              value="left"
+            >
             <div class="Radio__text">
-              <label class="Radio__label" for="drawer-alignment-left">
+              <label
+                class="Radio__label"
+                for="drawer-alignment-left"
+              >
                 Left
               </label>
             </div>
           </div>
           <div class="Radio">
-            <input name="drawer-alignment" autocomplete="off" aria-describedby="drawer-alignment-right__helperText" type="radio" id="drawer-alignment-right" class="Radio__input" value="right" checked="">
+            <input
+              name="drawer-alignment"
+              autocomplete="off"
+              aria-describedby="drawer-alignment-right__helperText"
+              type="radio"
+              id="drawer-alignment-right"
+              class="Radio__input"
+              value="right"
+              checked=""
+            >
             <div class="Radio__text">
-              <label class="Radio__label" for="drawer-alignment-right">
+              <label
+                class="Radio__label"
+                for="drawer-alignment-right"
+              >
                 Right
               </label>
             </div>
@@ -77,24 +106,53 @@
         <fieldset class="border-0">
           <div class="Stack Stack--hasSpacing">
             <div class="Checkbox">
-              <input name="is-closable-on-backdrop-click" aria-describedby="drawer-is-closable-on-backdrop-click__helperText" type="checkbox" id="drawer-is-closable-on-backdrop-click" class="Checkbox__input" value="" checked="">
+              <input
+                name="is-closable-on-backdrop-click"
+                aria-describedby="drawer-is-closable-on-backdrop-click__helperText"
+                type="checkbox"
+                id="drawer-is-closable-on-backdrop-click"
+                class="Checkbox__input"
+                value=""
+                checked=""
+              >
               <div class="Checkbox__text">
-                <label class="Checkbox__label" for="drawer-is-closable-on-backdrop-click">
+                <label
+                  class="Checkbox__label"
+                  for="drawer-is-closable-on-backdrop-click"
+                >
                   Closable on Backdrop Click
                 </label>
               </div>
             </div>
             <div class="Checkbox">
-              <input name="is-closable-on-escape-key" aria-describedby="drawer-is-closable-on-escape-key__helperText" type="checkbox" id="drawer-is-closable-on-escape-key" class="Checkbox__input" value="" checked="">
+              <input
+                name="is-closable-on-escape-key"
+                aria-describedby="drawer-is-closable-on-escape-key__helperText"
+                type="checkbox"
+                id="drawer-is-closable-on-escape-key"
+                class="Checkbox__input"
+                value=""
+                checked=""
+              >
               <div class="Checkbox__text">
-                <label class="Checkbox__label" for="drawer-is-closable-on-escape-key">
+                <label
+                  class="Checkbox__label"
+                  for="drawer-is-closable-on-escape-key"
+                >
                   Closable on Escape Key Down
                 </label>
               </div>
             </div>
             <div class="TextArea TextArea--medium">
-              <label for="drawer-content" class="TextArea__label">Drawer content</label>
-              <textarea name="content" class="TextArea__input" id="drawer-content">This is a Drawer content.</textarea>
+              <label
+                for="drawer-content"
+                class="TextArea__label"
+              >Drawer content</label>
+              <textarea
+                name="content"
+                class="TextArea__input"
+                id="drawer-content"
+              >This is a Drawer content.</textarea>
             </div>
           </div>
         </fieldset>
@@ -113,8 +171,15 @@
       </button>
 
       <!-- Drawer: start -->
-      <dialog id="drawer-example" class="Drawer Drawer--right" aria-label="example-basic__title">
-        <div class="DrawerPanel" data-testid="drawer-panel">
+      <dialog
+        id="drawer-example"
+        class="Drawer Drawer--right"
+        aria-label="example-basic__title"
+      >
+        <div
+          class="DrawerPanel"
+          data-testid="drawer-panel"
+        >
           <div class="DrawerPanel__content">
             <button
               type="button"
@@ -124,18 +189,83 @@
               data-spirit-target="#drawer-example"
               aria-controls="drawer-example"
             >
-              <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
             </button>
-            <div class="p-800" data-drawer-demo-content>This is a Drawer content.</div>
+            <div
+              class="p-800"
+              data-drawer-demo-content
+            >This is a Drawer content.</div>
           </div>
         </div>
       </dialog>
       <!-- Drawer: end -->
 
     </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Non-modal drawer</h2>
+    <p class="mb-600">This drawer is opened with <code>show()</code> instead of <code>showModal()</code>. The page stays
+      interactive: you can still scroll and click the content behind while the drawer is open.</p>
+    <button
+      type="button"
+      class="Button Button--primary Button--medium"
+      data-spirit-toggle="offcanvas"
+      data-spirit-target="#drawer-example-non-modal"
+      aria-controls="drawer-example-non-modal"
+      aria-expanded="false"
+    >
+      Open non-modal drawer
+    </button>
+    <p
+      id="drawer-non-modal-hint"
+      class="mt-600 mb-0"
+    >Click this text or the button above while the drawer is open to confirm the page stays interactive.</p>
+    <dialog
+      id="drawer-example-non-modal"
+      class="Drawer Drawer--left"
+      aria-label="Non-modal drawer example"
+    >
+      <div
+        class="DrawerPanel"
+        data-testid="drawer-panel-non-modal"
+      >
+        <div class="DrawerPanel__content">
+          <button
+            type="button"
+            aria-expanded="false"
+            class="Button Button--tertiary Button--medium Button--symmetrical DrawerCloseButton"
+            data-spirit-dismiss="offcanvas"
+            data-spirit-target="#drawer-example-non-modal"
+            aria-controls="drawer-example-non-modal"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+          <div class="p-800">
+            <p class="mb-0">This is a non-modal drawer. The main page remains clickable and scrollable. Close with the
+              button above or Escape.</p>
+          </div>
+        </div>
+      </div>
+    </dialog>
   </div>
 </section>
 
