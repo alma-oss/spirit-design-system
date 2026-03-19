@@ -25,21 +25,28 @@ const OFFCANVAS_BREAKPOINT = parseInt(breakpoints.desktop, 10);
 
 const VARIABLE_BREAKPOINT_DESKTOP = '--spirit-breakpoint-desktop';
 
+const CLASS_NAME_NON_MODAL = 'is-non-modal';
+
+const ARIA_ATTRIBUTE_MODAL = 'aria-modal';
+
 type Config = {
   closableOnBackdropClick: boolean;
   closableOnEscapeKey: boolean;
+  modal: boolean;
 };
 
 const Default = {
   breakpointDesktop: OFFCANVAS_BREAKPOINT,
   closableOnBackdropClick: true,
   closableOnEscapeKey: true,
+  modal: true,
 };
 
 const DefaultType = {
   breakpointDesktop: 'number',
   closableOnBackdropClick: 'boolean',
   closableOnEscapeKey: 'boolean',
+  modal: 'boolean',
 };
 
 class Offcanvas extends BaseComponent {
@@ -155,17 +162,23 @@ class Offcanvas extends BaseComponent {
     }
 
     this.element.classList.add(CLASS_NAME_OPEN);
-    this.element.showModal();
+    const isModal = (this.config as Config)?.modal === true;
+    if (isModal) {
+      this.element.showModal();
+      this.element.setAttribute(ARIA_ATTRIBUTE_MODAL, 'true');
+      this.scrollControl.disableScroll();
+    } else {
+      this.element.classList.add(CLASS_NAME_NON_MODAL);
+      this.element.show();
+      this.element.setAttribute(ARIA_ATTRIBUTE_MODAL, 'false');
+    }
     relatedTarget.setAttribute('aria-expanded', 'true');
-    this.element.setAttribute('aria-modal', 'true');
     this.element.setAttribute('role', 'dialog');
 
     this.addEventListeners();
     this.isShown = true;
 
     EventHandler.trigger(this.element, EVENT_SHOWN, { relatedTarget });
-
-    this.scrollControl.disableScroll();
   }
 
   hide() {
@@ -184,16 +197,20 @@ class Offcanvas extends BaseComponent {
 
     // Wait for transition to complete before closing
     executeAfterTransition(this.element, () => {
+      const isModal = (this.config as Config)?.modal === true;
+
       this.element.close();
-      this.element.removeAttribute('aria-modal');
+      this.element.classList.remove(CLASS_NAME_NON_MODAL);
+      this.element.removeAttribute(ARIA_ATTRIBUTE_MODAL);
       this.element.removeAttribute('role');
 
       this.removeEventListeners();
       this.isShown = false;
 
       EventHandler.trigger(this.element, EVENT_HIDDEN);
-
-      this.scrollControl.enableScroll();
+      if (isModal) {
+        this.scrollControl.enableScroll();
+      }
     });
   }
 

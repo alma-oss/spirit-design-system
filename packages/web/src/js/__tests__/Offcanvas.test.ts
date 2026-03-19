@@ -110,6 +110,40 @@ describe('Offcanvas', () => {
       await offCanvas.show(triggerEl);
     });
 
+    it('should use show() instead of showModal() when modal option is false', async () => {
+      fixtureEl.innerHTML = [
+        '<button id="btn" data-spirit-toggle="offcanvas"></button>',
+        '<dialog class="offcanvas"></dialog>',
+      ].join('');
+
+      const offCanvasEl = fixtureEl.querySelector('.offcanvas') as HTMLDialogElement;
+      const triggerEl = fixtureEl.querySelector('button') as HTMLElement;
+      const offCanvas = new Offcanvas(offCanvasEl, { modal: false });
+
+      await offCanvas.show(triggerEl);
+
+      expect(offCanvasEl.show).toHaveBeenCalled();
+      expect(offCanvasEl.showModal).not.toHaveBeenCalled();
+      expect(offCanvasEl).toHaveAttribute('aria-modal', 'false');
+      expect(offCanvasEl).toHaveClass('is-non-modal');
+    });
+
+    it('should use showModal() when modal option is true (default)', async () => {
+      fixtureEl.innerHTML = [
+        '<button id="btn" data-spirit-toggle="offcanvas"></button>',
+        '<dialog class="offcanvas"></dialog>',
+      ].join('');
+
+      const offCanvasEl = fixtureEl.querySelector('.offcanvas') as HTMLDialogElement;
+      const triggerEl = fixtureEl.querySelector('button') as HTMLElement;
+      const offCanvas = new Offcanvas(offCanvasEl);
+
+      await offCanvas.show(triggerEl);
+
+      expect(offCanvasEl.showModal).toHaveBeenCalled();
+      expect(offCanvasEl).toHaveAttribute('aria-modal', 'true');
+    });
+
     it('should not fire shown when show is prevented', async () => {
       fixtureEl.innerHTML = [
         '<button id="btn" data-spirit-toggle="offcanvas"></button>',
@@ -204,6 +238,24 @@ describe('Offcanvas', () => {
       });
 
       await offCanvas.hide();
+    });
+
+    it('should remove is-non-modal class after hide', async () => {
+      fixtureEl.innerHTML = [
+        '<button id="btn" data-spirit-toggle="offcanvas"></button>',
+        '<dialog class="offcanvas"></dialog>',
+      ].join('');
+
+      const offCanvasEl = fixtureEl.querySelector('dialog') as HTMLDialogElement;
+      const triggerEl = fixtureEl.querySelector('button') as HTMLElement;
+      const offcanvas = new Offcanvas(offCanvasEl, { modal: false });
+
+      await offcanvas.show(triggerEl);
+      expect(offCanvasEl).toHaveClass('is-non-modal');
+
+      await offcanvas.hide();
+
+      expect(offCanvasEl).not.toHaveClass('is-non-modal');
     });
 
     it('should not fire hidden when hide is prevented', async () => {

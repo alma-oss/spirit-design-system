@@ -57,6 +57,11 @@
     visibility: visible;
 }
 
+.Drawer.is-non-modal {
+    background-color: transparent;
+    pointer-events: none;
+}
+
 // 1.
 @starting-style {
     .Drawer--left[open] {

@@ -12,6 +12,7 @@
     background-color: theme.$drawer-panel-background-color;
     box-shadow: theme.$drawer-panel-shadow;
     transform: translateX(var(--#{tokens.$css-variable-prefix}drawer-translate-x));
+    pointer-events: auto;
 
     @media (prefers-reduced-motion: no-preference) {
         transition-property: transform;
