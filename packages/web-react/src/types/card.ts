@@ -8,6 +8,7 @@ import {
   type BackgroundEmotionColorsType,
   type ChildrenProps,
   type DirectionExtendedDictionaryType,
+  type PolymorphicComponentProps,
   type SingleOrResponsive,
   type StyleProps,
   type TransferProps,
@@ -100,16 +101,8 @@ export interface CardFooterProps {
 export interface SpiritCardFooterProps extends CardFooterProps, ChildrenProps, StyleProps, TransferProps {}
 
 // CardLink types
-export type CardLinkProps<E extends ElementType = 'a'> = {
-  /**
-   * The HTML element or React element used to render the Link, e.g. 'a'.
-   *
-   * @default 'a'
-   */
-  elementType?: E;
-};
+export interface CardLinkProps extends ChildrenProps, StyleProps, TransferProps {
+  href?: string;
+}
 
-export type SpiritCardLinkProps<E extends ElementType = 'a'> = CardLinkProps<E> &
-  ChildrenProps & {
-    href: string;
-  };
+export type SpiritCardLinkProps<E extends ElementType = 'a'> = PolymorphicComponentProps<E, CardLinkProps>;
