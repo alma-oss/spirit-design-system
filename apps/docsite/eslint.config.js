@@ -162,6 +162,12 @@ export default [
       // @see: https://typescript-eslint.io/rules/no-empty-interface/
       '@typescript-eslint/no-empty-interface': ['error', { allowSingleExtends: true }],
       'react/react-in-jsx-scope': 'off',
+      /**
+       * Prefer use of default function arguments instead of defaultProps.
+       *
+       * @see { @link https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/require-default-props.md }
+       */
+      'react/require-default-props': ['error', { functions: 'defaultArguments' }],
     },
   },
 ];
