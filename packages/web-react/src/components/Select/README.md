@@ -75,8 +75,11 @@ const CustomSelect = (props: SpiritSelectProps): JSX.Element => {
     helperText,
     id,
     isDisabled,
+    isFluid,
+    isLabelHidden,
     isRequired,
     label,
+    size,
     validationState,
     validationText,
     ...restProps
@@ -84,9 +87,9 @@ const CustomSelect = (props: SpiritSelectProps): JSX.Element => {
   const { classProps } = useSelectStyleProps({
     hasValidationIcon,
     isDisabled,
-    isFluid: props.isFluid,
-    isLabelHidden: props.isLabelHidden,
-    size: props.size,
+    isFluid,
+    isLabelHidden,
+    size,
     validationState,
   });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
@@ -98,7 +101,7 @@ const CustomSelect = (props: SpiritSelectProps): JSX.Element => {
   });
 
   return (
-    <PropsProvider value={{ isDisabled, isLabelHidden: props.isLabelHidden, isRequired, validationState }}>
+    <PropsProvider value={{ isDisabled, isLabelHidden, isRequired, validationState }}>
       <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
         <Label htmlFor={id}>{label}</Label>
         <div className={classProps.container}>
@@ -109,7 +112,6 @@ const CustomSelect = (props: SpiritSelectProps): JSX.Element => {
             className={classProps.input}
             disabled={isDisabled}
             required={isRequired}
-            ref={props.ref}
           >
             {children}
           </select>

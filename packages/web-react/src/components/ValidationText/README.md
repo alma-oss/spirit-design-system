@@ -37,11 +37,11 @@ When displaying validation text dynamically, set [`role="alert"`][aria-alert-rol
 
 | Name                     | Type                                                   | Default | Required | Description                                                                                                      |
 | ------------------------ | ------------------------------------------------------ | ------- | -------- | ---------------------------------------------------------------------------------------------------------------- |
-| `elementType`            | `React.ElementType`                                    | `div`   | ✕        | Element used as main wrapper. When `validationText` is an array, the component renders a `ul` inside the wrapper |
+| `elementType`            | `ElementType`                                          | `div`   | ✕        | Element used as main wrapper. When `validationText` is an array, the component renders a `ul` inside the wrapper |
 | `formFieldVariant`       | `FormFieldVariant`                                     | —       | ✕        | Explicit visual variant (`inline`, `item`); omit for the default layout, or take it from parent context          |
 | `hasValidationStateIcon` | [Validation dictionary][dictionary-validation]         | —       | ✕        | When set, shows validation icon and applies state styling (e.g. `danger`)                                        |
 | `id`                     | `string`                                               | —       | ✕        | Element id (e.g. for `aria-describedby`)                                                                         |
-| `isDisabled`             | `boolean`                                              | —       | ✕        | Disabled state; when omitted, taken from parent context                                                          |
+| `isDisabled`             | `bool`                                                 | `false` | ✕        | Disabled state; when omitted, taken from parent context                                                          |
 | `registerAria`           | `(payload: { add?: string; remove?: string }) => void` | —       | ✕        | Callback to register this element's id for `aria-describedby`                                                    |
 | `role`                   | `AriaRole`                                             | —       | ✕        | ARIA role (e.g. `alert` for dynamic validation)                                                                  |
 | `validationText`         | `ReactNode` \| `ReactNode[]`                           | —       | ✕        | Validation message or messages to display                                                                        |

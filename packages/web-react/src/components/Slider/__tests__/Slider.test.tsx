@@ -68,7 +68,7 @@ describe('Slider', () => {
       />,
     );
 
-    const element = screen.getByRole('slider').previousElementSibling as HTMLElement;
+    const element = screen.getByText('Label').parentElement as HTMLElement;
 
     expect(element).toHaveTextContent('Slider Label');
     expect(element.innerHTML).toBe('Slider <b>Label</b>');

@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React, { type ElementType } from 'react';
-import { validHtmlAttributesTest } from '@local/tests';
+import { formFieldContextPropsTest, validHtmlAttributesTest } from '@local/tests';
 import { type SpiritValidationTextProps } from '../../../types';
 import { A11Y_ALERT_ROLE } from '../constants';
 import ValidationText from '../ValidationText';
@@ -11,6 +11,12 @@ const renderValidationText = <E extends ElementType = 'div'>(props: Partial<Spir
 
 describe('ValidationText', () => {
   validHtmlAttributesTest(ValidationText);
+
+  formFieldContextPropsTest({
+    renderComponent: (props) => <ValidationText {...props} validationText="validation text" />,
+    text: 'validation text',
+    classNamePrefix: 'ValidationText',
+  });
 
   it('should render single validation text', () => {
     renderValidationText({ validationText: 'validation text' });
@@ -65,7 +71,7 @@ describe('ValidationText', () => {
   it('should render with html tags', () => {
     render(
       <ValidationText
-        id="test"
+        id="validation-text-html"
         validationText={
           <>
             validation <b>text</b>
@@ -74,7 +80,7 @@ describe('ValidationText', () => {
       />,
     );
 
-    const element = document.querySelector('#test') as HTMLElement;
+    const element = document.getElementById('validation-text-html') as HTMLElement;
 
     expect(element).toHaveTextContent('validation text');
     expect(element.innerHTML).toBe('validation <b>text</b>');

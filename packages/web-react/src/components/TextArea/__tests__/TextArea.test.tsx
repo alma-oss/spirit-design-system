@@ -82,7 +82,7 @@ describe('TextArea', () => {
       />,
     );
 
-    const element = screen.getByRole('textbox').parentElement?.firstChild as HTMLElement;
+    const element = screen.getByText('Label').parentElement as HTMLElement;
 
     expect(element).toHaveTextContent('TextArea Label');
     expect(element.innerHTML).toBe('TextArea <b>Label</b>');

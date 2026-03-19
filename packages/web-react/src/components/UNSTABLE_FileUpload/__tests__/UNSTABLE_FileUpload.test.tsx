@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import {
@@ -14,7 +14,7 @@ import UNSTABLE_FileUpload from '../UNSTABLE_FileUpload';
 jest.mock('../../../hooks/useIcon');
 
 const defaultProps = { id: 'file-uploader' };
-const defaultPropsWithInput = { id: 'test-uploader', name: 'test-uploader', label: 'upload' };
+const defaultPropsWithInput = { id: 'file-upload-input', name: 'file-upload-input', label: 'upload' };
 
 describe('UNSTABLE_FileUpload', () => {
   classNamePrefixProviderTest((props) => <UNSTABLE_FileUpload {...defaultProps} {...props} />, 'FileUploader');
@@ -47,7 +47,7 @@ describe('UNSTABLE_FileUpload', () => {
     });
 
     it('should render label with html tags', () => {
-      const { container } = render(
+      render(
         <UNSTABLE_FileUpload
           {...defaultPropsWithInput}
           label={
@@ -59,30 +59,29 @@ describe('UNSTABLE_FileUpload', () => {
         />,
       );
 
-      const labelElement = container.querySelector('label');
+      const labelElement = screen.getByText('File').parentElement as HTMLElement;
 
-      expect(labelElement).toHaveTextContent('Upload File');
-      expect(labelElement?.innerHTML).toBe('Upload <b>File</b>');
+      expect(labelElement.innerHTML).toBe('Upload <b>File</b>');
     });
 
     it('should set wrapper id on root div and derive input id as {id}-input', () => {
       const { container } = render(
-        <UNSTABLE_FileUpload id="uploader-1" name="files" label="Upload" data-testid="wrapper" />,
+        <UNSTABLE_FileUpload id="file-upload-wrapper" name="files" label="Upload" data-testid="wrapper" />,
       );
 
-      const wrapper = container.querySelector('#uploader-1');
+      const wrapper = container.querySelector('#file-upload-wrapper');
       expect(wrapper).toBeInTheDocument();
-      expect(wrapper?.tagName.toLowerCase()).toBe('div');
+      expect(wrapper?.localName).toBe('div');
 
-      const input = container.querySelector('#uploader-1-input');
+      const input = container.querySelector('#file-upload-wrapper-input');
       expect(input).toBeInTheDocument();
       expect((input as HTMLInputElement).type).toBe('file');
     });
 
     it('should associate label with input via htmlFor and set helper/validation ids', () => {
-      const { container } = render(
+      render(
         <UNSTABLE_FileUpload
-          id="uploader-2"
+          id="file-upload-with-messages"
           name="files"
           label="Upload"
           helperText="Max 10 MB"
@@ -91,11 +90,11 @@ describe('UNSTABLE_FileUpload', () => {
         />,
       );
 
-      const label = container.querySelector('label[for="uploader-2-input"]');
-      expect(label).toBeInTheDocument();
+      const label = screen.getByText('Upload', { selector: 'label' });
+      expect(label).toHaveAttribute('for', 'file-upload-with-messages-input');
 
-      expect(container.querySelector('#uploader-2-input__helperText')).toHaveTextContent('Max 10 MB');
-      expect(container.querySelector('#uploader-2-input__validationText')).toHaveTextContent('Error');
+      expect(screen.getByText('Max 10 MB')).toHaveAttribute('id', 'file-upload-with-messages-input__helperText');
+      expect(screen.getByText('Error')).toHaveAttribute('id', 'file-upload-with-messages-input__validationText');
     });
   });
 });

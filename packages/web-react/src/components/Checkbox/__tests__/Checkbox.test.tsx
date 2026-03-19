@@ -75,13 +75,19 @@ describe('Checkbox', () => {
 
   it('should register helper and validation text ids in aria-describedby', () => {
     render(
-      <Checkbox id="cb-aria" label="Label" helperText="Helper" validationState="danger" validationText="Invalid" />,
+      <Checkbox
+        id="checkbox-aria-describedby"
+        label="Label"
+        helperText="Helper"
+        validationState="danger"
+        validationText="Invalid"
+      />,
     );
 
     const input = screen.getByRole('checkbox', { name: 'Label' });
     const describedBy = input.getAttribute('aria-describedby') ?? '';
 
-    expect(describedBy).toContain('cb-aria__helperText');
-    expect(describedBy).toContain('cb-aria__validationText');
+    expect(describedBy).toContain('checkbox-aria-describedby__helperText');
+    expect(describedBy).toContain('checkbox-aria-describedby__validationText');
   });
 });

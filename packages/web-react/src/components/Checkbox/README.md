@@ -86,6 +86,7 @@ const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
     id,
     isDisabled,
     isItem,
+    isLabelHidden,
     isRequired,
     label,
     validationState,
@@ -106,6 +107,7 @@ const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
       value={{
         formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
         isDisabled,
+        isLabelHidden,
         isRequired,
         validationState,
       }}

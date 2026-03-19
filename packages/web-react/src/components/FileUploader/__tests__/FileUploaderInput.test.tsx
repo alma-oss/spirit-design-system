@@ -15,7 +15,7 @@ describe('FileUploaderInput', () => {
   validHtmlAttributesTest(FileUploaderInput);
 
   it('should have drag-and-drop class in Client component', () => {
-    render(<FileUploaderInput id="test-uploader" name="test-uploader" label="upload" data-testid="test" />);
+    render(<FileUploaderInput id="file-uploader-input" name="file-uploader-input" label="upload" data-testid="test" />);
 
     const dropZone = screen.getAllByTestId('test')[0];
 
@@ -24,7 +24,7 @@ describe('FileUploaderInput', () => {
 
   it('should not have drag-and-drop class in Server component', () => {
     const container = renderToString(
-      <FileUploaderInput id="test-uploader" name="test-uploader" label="upload" data-testid="test" />,
+      <FileUploaderInput id="file-uploader-input" name="file-uploader-input" label="upload" data-testid="test" />,
     );
 
     expect(container).not.toContain('has-drag-and-drop');
@@ -33,8 +33,8 @@ describe('FileUploaderInput', () => {
   it('should render label with html tags', () => {
     render(
       <FileUploaderInput
-        id="test-uploader"
-        name="test-uploader"
+        id="file-uploader-input"
+        name="file-uploader-input"
         label={
           <>
             Upload <b>File</b>
@@ -44,7 +44,7 @@ describe('FileUploaderInput', () => {
       />,
     );
 
-    const element = screen.getAllByTestId('test')[0].firstChild as HTMLElement;
+    const element = screen.getByText('File').parentElement as HTMLElement;
 
     expect(element).toHaveTextContent('Upload File');
     expect(element.innerHTML).toBe('Upload <b>File</b>');

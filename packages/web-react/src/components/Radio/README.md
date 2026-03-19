@@ -50,10 +50,10 @@ Pass an object to adjust the input position based on the [breakpoint][dictionary
 | `helperText`      | `ReactNode`                                    | -       | ✕        | Helper text                                                                               |
 | `id`              | `string`                                       | -       | ✓        | Input and label identification                                                            |
 | `inputPosition`   | \[`string` \| `object`]                        | `start` | ✕        | Position of the input (`start` or `end`), supports [responsive][readme-responsive] values |
-| `isDisabled`      | `boolean`                                      | -       | ✕        | Whether is field disabled                                                                 |
-| `isChecked`       | `boolean`                                      | -       | ✕        | Whether is field checked                                                                  |
-| `isItem`          | `boolean`                                      | -       | ✕        | To render in [Item][item] mode                                                            |
-| `isLabelHidden`   | `boolean`                                      | -       | ✕        | Whether is label hidden                                                                   |
+| `isDisabled`      | `bool`                                         | -       | ✕        | Whether is field disabled                                                                 |
+| `isChecked`       | `bool`                                         | -       | ✕        | Whether is field checked                                                                  |
+| `isItem`          | `bool`                                         | -       | ✕        | To render in [Item][item] mode                                                            |
+| `isLabelHidden`   | `bool`                                         | -       | ✕        | Whether is label hidden                                                                   |
 | `label`           | `ReactNode`                                    | -       | ✕        | Label text                                                                                |
 | `name`            | `string`                                       | -       | ✕        | Input name                                                                                |
 | `ref`             | `ForwardedRef<HTMLInputElement>`               | -       | ✕        | Input element reference                                                                   |
@@ -70,8 +70,17 @@ Radio classes are fabricated using `useRadioStyleProps` hook. You can use it to 
 
 ```tsx
 const CustomRadio = (props: SpiritRadioProps): JSX.Element => {
-  const { 'aria-describedby': ariaDescribedBy = '', id, isDisabled, isItem, label, helperText, ...restProps } = props;
-  const { classProps, props: modifiedProps } = useRadioStyleProps(props);
+  const {
+    'aria-describedby': ariaDescribedBy = '',
+    helperText,
+    id,
+    isDisabled,
+    isItem,
+    isLabelHidden,
+    label,
+    ...restProps
+  } = props;
+  const { classProps } = useRadioStyleProps(props);
   const { styleProps, props: transferProps } = useStyleProps(restProps);
   const [ids, register] = useAriaIds(ariaDescribedBy);
   const ariaDescribedByProp = useAriaDescribedBy(ids);
@@ -81,6 +90,7 @@ const CustomRadio = (props: SpiritRadioProps): JSX.Element => {
       value={{
         formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
         isDisabled,
+        isLabelHidden,
       }}
     >
       <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>

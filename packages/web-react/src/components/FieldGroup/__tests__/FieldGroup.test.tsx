@@ -27,8 +27,8 @@ describe('FieldGroup', () => {
   validationStatePropsTest(FieldGroup, 'FieldGroup--');
 
   stylePropsTest(
-    (props) => <FieldGroup {...props} label="Label" id="field-group-example" data-testid="test-field-group" />,
-    'test-field-group',
+    (props) => <FieldGroup {...props} label="Label" id="field-group-example" data-testid="field-group" />,
+    'field-group',
   );
 
   restPropsTest((props) => <FieldGroup {...props} label="Label" />, 'fieldset');
@@ -114,7 +114,7 @@ describe('FieldGroup', () => {
   it('should use distinct ids for helper and validation text and compose aria-describedby', () => {
     render(
       <FieldGroup
-        id="fg-aria"
+        id="field-group-aria-describedby"
         label="Label"
         helperText="Helper text"
         validationState="danger"
@@ -127,21 +127,20 @@ describe('FieldGroup', () => {
     const helperEl = screen.getByText('Helper text');
     const validationEl = screen.getByText('Validation message');
 
-    expect(helperEl).toHaveAttribute('id', 'fg-aria__helperText');
-    expect(validationEl).toHaveAttribute('id', 'fg-aria__validationText');
+    expect(helperEl).toHaveAttribute('id', 'field-group-aria-describedby__helperText');
+    expect(validationEl).toHaveAttribute('id', 'field-group-aria-describedby__validationText');
 
     const fieldset = screen.getByRole('group');
-    const describedBy = fieldset.getAttribute('aria-describedby') ?? '';
-
-    expect(describedBy).toContain('fg-aria__helperText');
-    expect(describedBy).toContain('fg-aria__validationText');
-    expect(describedBy.split(/\s+/).filter(Boolean)).toHaveLength(2);
+    expect(fieldset).toHaveAttribute(
+      'aria-describedby',
+      'field-group-aria-describedby__helperText field-group-aria-describedby__validationText',
+    );
   });
 
   it('should render with html tags', () => {
     render(
       <FieldGroup
-        id="test"
+        id="field-group-html"
         label={
           <>
             Label <b>Text</b>
@@ -152,9 +151,8 @@ describe('FieldGroup', () => {
       </FieldGroup>,
     );
 
-    const element = screen.getAllByText('Label')[1];
+    const element = screen.getAllByText('Text')[1].parentElement as HTMLElement;
 
-    expect(element).toHaveTextContent('Label Text');
     expect(element.innerHTML).toBe('Label <b>Text</b>');
   });
 });

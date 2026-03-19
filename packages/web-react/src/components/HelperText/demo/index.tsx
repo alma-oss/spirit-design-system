@@ -22,16 +22,16 @@ createRoot(document.getElementById('root') as HTMLElement).render(
           requirements, all HelperText on this page are associated with related form component.
         </Text>
       </Section>
-      <DocsSection title="Default" stackAlignment="start">
+      <DocsSection title="Default">
         <HelperTextDefault />
       </DocsSection>
-      <DocsSection title="Inline with Checkbox" stackAlignment="start">
+      <DocsSection title="Inline with Checkbox">
         <HelperTextInlineCheckbox />
       </DocsSection>
-      <DocsSection title="Combined with Item component" stackAlignment="start">
+      <DocsSection title="Combined with Item component">
         <HelperTextItemComponent />
       </DocsSection>
-      <DocsSection title="Combined with Checkbox Item and Radio Item" stackAlignment="start">
+      <DocsSection title="Combined with Checkbox Item and Radio Item">
         <HelperTextCheckboxRadioItem />
       </DocsSection>
     </IconsProvider>

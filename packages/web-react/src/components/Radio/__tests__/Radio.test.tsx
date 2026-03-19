@@ -49,10 +49,10 @@ describe('Radio', () => {
   });
 
   it('should register helper text id in aria-describedby', () => {
-    render(<Radio id="radio-aria" label="Label" helperText="Helper" />);
+    render(<Radio id="radio-aria-describedby" label="Label" helperText="Helper" />);
 
     const input = screen.getByRole('radio', { name: 'Label' });
-    expect(input.getAttribute('aria-describedby')).toContain('radio-aria__helperText');
+    expect(input.getAttribute('aria-describedby')).toContain('radio-aria-describedby__helperText');
   });
 
   it('should render label with html tags', () => {

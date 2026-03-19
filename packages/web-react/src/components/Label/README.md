@@ -26,15 +26,15 @@ You can override context by passing props directly:
 
 ### API
 
-| Name               | Type                | Default | Required | Description                                                                                             |
-| ------------------ | ------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------- |
-| `children`         | `ReactNode`         | —       | ✕        | Label content                                                                                           |
-| `elementType`      | `React.ElementType` | `label` | ✕        | Type of element used as root (e.g. `label`, `span`)                                                     |
-| `formFieldVariant` | `FormFieldVariant`  | —       | ✕        | Explicit visual variant (`inline`, `item`); omit for the default layout, or take it from parent context |
-| `for` / `htmlFor`  | `string`            | —       | ✕        | ID of the associated form control (for `elementType="label"`)                                           |
-| `isDisabled`       | `boolean`           | `false` | ✕        | Disabled state; when not set, taken from parent context                                                 |
-| `isLabelHidden`    | `boolean`           | `false` | ✕        | Visually hide label while keeping it accessible; from parent context                                    |
-| `isRequired`       | `boolean`           | `false` | ✕        | Shows required indicator; when not set, taken from parent context                                       |
+| Name               | Type               | Default | Required | Description                                                                                             |
+| ------------------ | ------------------ | ------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| `children`         | `ReactNode`        | —       | ✕        | Label content                                                                                           |
+| `elementType`      | `ElementType`      | `label` | ✕        | Type of element used as root (e.g. `label`, `span`)                                                     |
+| `formFieldVariant` | `FormFieldVariant` | —       | ✕        | Explicit visual variant (`inline`, `item`); omit for the default layout, or take it from parent context |
+| `for` / `htmlFor`  | `string`           | —       | ✕        | ID of the associated form control (for `elementType="label"`)                                           |
+| `isDisabled`       | `bool`             | `false` | ✕        | Disabled state; when not set, taken from parent context                                                 |
+| `isLabelHidden`    | `bool`             | `false` | ✕        | Visually hide label while keeping it accessible; from parent context                                    |
+| `isRequired`       | `bool`             | `false` | ✕        | Shows required indicator; when not set, taken from parent context                                       |
 
 On top of the API options, the component accepts [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -43,7 +43,7 @@ and [escape hatches][readme-escape-hatches].
 ## Variants
 
 - **inline**: Used by Checkbox, Radio, and Toggle. Label next to the input.
-- **item**: Used by Checkbox or Radio in item mode. Applies the `Label--item` modifier.
+- **item**: Used by Checkbox or Radio in item mode.
 
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches

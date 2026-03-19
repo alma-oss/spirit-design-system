@@ -66,7 +66,6 @@ describe('TextField', () => {
       render(
         <TextField
           id="textfield"
-          data-testid="test"
           label={
             <>
               TextField <b>Label</b>
@@ -76,7 +75,7 @@ describe('TextField', () => {
         />,
       );
 
-      const element = screen.getByTestId('test').previousElementSibling as HTMLElement;
+      const element = screen.getByText('Label').parentElement as HTMLElement;
 
       expect(element).toHaveTextContent('TextField Label');
       expect(element.innerHTML).toBe('TextField <b>Label</b>');

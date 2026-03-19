@@ -22,16 +22,16 @@ createRoot(document.getElementById('root') as HTMLElement).render(
           requirements, all labels on this page are associated with related form component.
         </Text>
       </Section>
-      <DocsSection title="Box Label with TextField" stackAlignment="start">
+      <DocsSection title="Box Label with TextField">
         <LabelBoxTextField />
       </DocsSection>
-      <DocsSection title="Inline Label with Checkbox" stackAlignment="start">
+      <DocsSection title="Inline Label with Checkbox">
         <LabelInlineCheckbox />
       </DocsSection>
-      <DocsSection title="Item Label with Item Component" stackAlignment="start">
+      <DocsSection title="Item Label with Item Component">
         <LabelItemComponent />
       </DocsSection>
-      <DocsSection title="Combined Label with Checkbox Item" stackAlignment="start">
+      <DocsSection title="Combined Label with Checkbox Item">
         <LabelCombinedCheckboxRadioItem />
       </DocsSection>
     </IconsProvider>

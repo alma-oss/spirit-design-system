@@ -17,22 +17,22 @@ import ValidationTextWithIcon from './ValidationTextWithIcon';
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <IconsProvider value={icons}>
-      <DocsSection title="Validation States" stackAlignment="start">
+      <DocsSection title="Validation States">
         <ValidationTextValidationStates />
       </DocsSection>
-      <DocsSection title="With Icon" stackAlignment="start">
+      <DocsSection title="With Icon">
         <ValidationTextWithIcon />
       </DocsSection>
-      <DocsSection title="As List" stackAlignment="start">
+      <DocsSection title="As List">
         <ValidationTextAsList />
       </DocsSection>
-      <DocsSection title="Disabled" stackAlignment="start">
+      <DocsSection title="Disabled">
         <ValidationTextDisabled />
       </DocsSection>
-      <DocsSection title="Inline Field (Checkbox)" stackAlignment="start">
+      <DocsSection title="Inline Field (Checkbox)">
         <ValidationTextInlineCheckbox />
       </DocsSection>
-      <DocsSection title="Item Variant (Checkbox Item)" stackAlignment="start">
+      <DocsSection title="Item Variant (Checkbox Item)">
         <ValidationTextItemVariant />
       </DocsSection>
     </IconsProvider>

@@ -10,8 +10,8 @@ import { useLabelStyleProps } from './useLabelStyleProps';
 const defaultProps: Partial<SpiritLabelProps> = {
   elementType: 'label',
   isDisabled: false,
-  isRequired: false,
   isLabelHidden: false,
+  isRequired: false,
 };
 
 const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX.Element => {

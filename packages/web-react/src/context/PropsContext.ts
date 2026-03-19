@@ -8,11 +8,14 @@ const PropsContext = createContext<PropsContextType>(null);
 
 const PropsProvider = ({ value, children }: { value: Record<string, unknown>; children: React.ReactNode }) => {
   const parentContext = useContext(PropsContext);
-  const filteredValue = Object.fromEntries(Object.entries(value).filter(([, v]) => v !== undefined)) as Record<
-    string,
-    unknown
-  >;
-  const mergedValue = parentContext ? { ...parentContext, ...filteredValue } : filteredValue;
+  const mergedValue = parentContext ? { ...parentContext } : {};
+  for (const [key, contextValue] of Object.entries(value)) {
+    if (contextValue == null) {
+      delete mergedValue[key];
+    } else {
+      mergedValue[key] = contextValue;
+    }
+  }
 
   return React.createElement(PropsContext.Provider, { value: mergedValue }, children);
 };
