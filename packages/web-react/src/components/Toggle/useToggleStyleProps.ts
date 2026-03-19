@@ -51,6 +51,6 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
       text: toggleTextClass,
       input: inputClass,
     },
-    props: { ...restProps, validationState, isDisabled, isRequired },
+    props: { ...restProps, validationState, isDisabled, isLabelHidden, isRequired },
   };
 }
