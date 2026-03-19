@@ -85,3 +85,13 @@ The `DrawerPanel` component is a container for the content that will be displaye
   </div>
 </dialog>
 ```
+
+### Non-Modal Drawer
+
+By default the Drawer is modal: it uses `showModal()` on the dialog, which traps focus and blocks interaction with the page. To open a non-modal drawer, pass `modal: false` to the Offcanvas plugin:
+
+```js
+const offcanvas = new Offcanvas(drawerElement, { modal: false });
+```
+
+The drawer panel will slide in as usual, but the rest of the page stays clickable and scrollable.
