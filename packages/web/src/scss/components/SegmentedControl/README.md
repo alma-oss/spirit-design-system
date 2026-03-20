@@ -107,7 +107,7 @@ Consider using a `Tooltip` to provide additional context for the icons.
     </svg>
     <span
       id="tooltip-label"
-      class="TooltipPopover is-hidden"
+      class="TooltipPopover is-hidden placement-bottom"
       data-spirit-placement="bottom"
       data-spirit-flip="true"
       data-spirit-flip-cross-axis="true"

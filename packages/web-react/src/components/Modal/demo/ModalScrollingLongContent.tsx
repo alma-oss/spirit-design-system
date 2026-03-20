@@ -4,7 +4,6 @@ import {
   Checkbox,
   Grid,
   GridItem,
-  Label,
   Modal,
   ModalBody,
   ModalDialog,
@@ -241,8 +240,8 @@ const ModalScrollingLongContent = () => {
                     }
                   />
                   <Grid spacingX="space-600">
-                    <Label
-                      UNSAFE_className="GridItem"
+                    <GridItem
+                      elementType="label"
                       htmlFor={`custom-height-${breakpoint}`}
                       UNSAFE_style={{
                         ['--grid-item-column-start' as string]: 1,
@@ -251,7 +250,7 @@ const ModalScrollingLongContent = () => {
                       }}
                     >
                       Height
-                    </Label>
+                    </GridItem>
                     <GridItem
                       columnStart={{ mobile: 6, tablet: 4 }}
                       columnEnd={{ mobile: 13, tablet: 7 }}
@@ -264,7 +263,7 @@ const ModalScrollingLongContent = () => {
                       className="GridItem"
                       defaultValue={heightValue.height[breakpoint]}
                       disabled={!isCustomHeightEnabled[breakpoint]}
-                      id="custom-height-mobile"
+                      id={`custom-height-${breakpoint}`}
                       max="1000"
                       min="200"
                       onChange={(event) => handleHeightChange(event, breakpoint)}
@@ -278,8 +277,8 @@ const ModalScrollingLongContent = () => {
                     />
                   </Grid>
                   <Grid spacingX="space-600">
-                    <Label
-                      UNSAFE_className="GridItem"
+                    <GridItem
+                      elementType="label"
                       htmlFor={`custom-max-height-${breakpoint}`}
                       UNSAFE_style={{
                         ['--grid-item-column-start' as string]: 1,
@@ -288,7 +287,7 @@ const ModalScrollingLongContent = () => {
                       }}
                     >
                       Max height
-                    </Label>
+                    </GridItem>
                     <GridItem
                       columnStart={{ mobile: 6, tablet: 4 }}
                       columnEnd={{ mobile: 13, tablet: 7 }}
