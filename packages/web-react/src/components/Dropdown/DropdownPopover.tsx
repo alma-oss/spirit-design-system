@@ -15,7 +15,7 @@ const DropdownPopover = (props: DropdownPopoverProps) => {
   const { id, isOpen, onToggle, fullWidthMode, placement } = useDropdownContext();
   const { classProps, props: modifiedProps } = useDropdownStyleProps({ isOpen, placement, ...rest });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const { contentProps } = useDropdownAriaProps({ id, isOpen, toggleHandler: onToggle, placement, fullWidthMode });
+  const { contentProps } = useDropdownAriaProps({ id, isOpen, toggleHandler: onToggle, fullWidthMode });
 
   return (
     <div
