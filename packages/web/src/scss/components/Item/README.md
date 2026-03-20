@@ -134,17 +134,17 @@ Checkbox as a Item:
 Usage in [Dropdown][dropdown] component:
 
 ```html
-<div class="DropdownWrapper">
+<div class="Dropdown">
   <button
     data-spirit-toggle="dropdown"
-    data-spirit-target="#dropdown-default"
+    data-spirit-target="#dropdown-item-example"
     class="Button Button--primary Button--medium"
     aria-expanded="false"
-    aria-controls="dropdown-default"
+    aria-controls="dropdown-item-example"
   >
     Button as anchor
   </button>
-  <div class="Dropdown" id="dropdown-default" data-spirit-placement="bottom-start">
+  <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-item-example">
     <a href="#" class="Item">
       <span class="Item__icon Item__icon--start">
         <svg width="24" height="24" aria-hidden="true">
