@@ -41,6 +41,9 @@ $inline-field-input-border-color-checked-disabled: tokens.$disabled-background;
 $inline-field-input-border-width: tokens.$border-width-200;
 $inline-field-input-background-color-checked: tokens.$selected-state-default;
 
+// InputDetails component – Checkbox, Toggle
+$input-details-text-color-state-disabled: tokens.$disabled-content;
+
 // Box field form components – TextField, TextArea, etc.
 $box-field-input-color-state-default: tokens.$form-field-filled-content;
 $box-field-input-border-width: tokens.$border-width-100;

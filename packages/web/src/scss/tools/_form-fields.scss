@@ -77,6 +77,10 @@
     cursor: cursors.$disabled;
 }
 
+@mixin input-details-text-disabled() {
+    --#{tokens.$css-variable-prefix}input-details-text-color: #{form-fields-settings.$input-details-text-color-state-disabled};
+}
+
 @mixin box-field-root() {
     display: inline-block;
     width: form-fields-settings.$box-field-input-width;

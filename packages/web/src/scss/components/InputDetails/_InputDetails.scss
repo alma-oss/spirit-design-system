@@ -1,0 +1,16 @@
+// 1. Make the text selectable and allow links to be clickable in the form field details.
+@use '@tokens' as tokens;
+@use '../../tools/typography';
+@use 'theme';
+
+.InputDetails {
+    @include typography.generate(theme.$typography);
+
+    position: relative; // 1.
+    z-index: 1; // 1.
+    display: flex;
+    flex-wrap: wrap;
+    gap: theme.$gap;
+    margin-top: theme.$margin-top;
+    color: var(--#{tokens.$css-variable-prefix}input-details-text-color, theme.$color);
+}

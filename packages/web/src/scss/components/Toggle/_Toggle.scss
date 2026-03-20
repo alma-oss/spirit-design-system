@@ -149,6 +149,7 @@ $_field-name: 'Toggle';
 
 .Toggle:is(.Toggle--disabled, .is-disabled) {
     @include form-fields-tools.inline-field-root-disabled();
+    @include form-fields-tools.input-details-text-disabled();
 }
 
 .Toggle:is(.Toggle--disabled, .is-disabled) .Toggle__label {

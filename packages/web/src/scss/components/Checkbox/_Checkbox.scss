@@ -95,6 +95,7 @@ $_field-name: 'Checkbox';
 
 :is(.Checkbox--disabled, .Checkbox.is-disabled) {
     @include form-fields-tools.inline-field-root-disabled();
+    @include form-fields-tools.input-details-text-disabled();
 }
 
 :is(.Checkbox--disabled, .Checkbox.is-disabled) .Checkbox__label {
