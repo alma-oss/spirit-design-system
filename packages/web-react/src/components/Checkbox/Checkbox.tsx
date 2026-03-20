@@ -6,12 +6,15 @@ import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
 import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { InputDetails } from '../InputDetails';
 import { useCheckboxStyleProps } from './useCheckboxStyleProps';
 
 const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
   const { classProps, props: modifiedProps } = useCheckboxStyleProps(props);
   const {
     'aria-describedby': ariaDescribedBy = '',
+    'aria-details': ariaDetailsAttr,
+    details,
     hasValidationIcon,
     helperText,
     id,
@@ -26,7 +29,9 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
   } = modifiedProps;
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const [ids, register] = useAriaIds(ariaDescribedBy);
+  const [detailsId, registerDetails] = useAriaIds(ariaDetailsAttr, { format: 'string' });
   const ariaDescribedByProp = useAriaDescribedBy(ids);
+  const ariaDetailsProp = detailsId ? { 'aria-details': detailsId } : {};
   const validationTextRole = useValidationTextRole({
     validationState,
     validationText,
@@ -37,6 +42,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
       <input
         {...otherProps}
         {...ariaDescribedByProp}
+        {...ariaDetailsProp}
         type="checkbox"
         id={id}
         className={classProps.input}
@@ -50,6 +56,11 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
         <Label UNSAFE_className={classProps.label} htmlFor={id}>
           {label}
         </Label>
+        {details && (
+          <InputDetails id={`${id}__details`} registerAriaDetails={registerDetails}>
+            {details}
+          </InputDetails>
+        )}
         <HelperText
           UNSAFE_className={classProps.helperText}
           id={`${id}__helperText`}

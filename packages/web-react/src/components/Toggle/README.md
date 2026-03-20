@@ -92,11 +92,78 @@ Pass an object to adjust the toggle position based on the [breakpoint][dictionar
 <Toggle id="toggle-responsive" label="Responsive Toggle Position" inputPosition={{ mobile: 'end', tablet: 'start' }} />
 ```
 
+## Consent with Details
+
+For consent scenarios where users need access to terms and conditions or privacy policies, use the `details` prop
+to render supplementary content (such as link or modal triggers) below the label.
+
+### Emphasized Label
+
+```tsx
+<Toggle
+  id="consent"
+  label={<span className="typography-body-medium-semibold">I agree to the terms and conditions</span>}
+  isRequired
+  details={
+    <Link href="#" color="inherit" underlined="always">
+      See full terms and conditions
+    </Link>
+  }
+/>
+```
+
+### Full Example
+
+```tsx
+import React, { useState } from 'react';
+import { Link, Modal, Toggle } from '@alma-oss/spirit-web-react';
+
+const Example = () => {
+  const [isTermsModalOpen, setTermsModalOpen] = useState(false);
+  const [isPrivacyModalOpen, setPrivacyModalOpen] = useState(false);
+
+  return (
+    <>
+      <Toggle
+        id="consent"
+        label="I agree to the terms and privacy policy"
+        isRequired
+        helperText="Please read the documents carefully before agreeing"
+        validationState="danger"
+        validationText="You must agree to continue"
+        details={
+          <>
+            <Link elementType="button" color="inherit" underlined="always" onClick={() => setTermsOpen(true)}>
+              See full terms and conditions
+            </Link>
+            <Link elementType="button" color="inherit" underlined="always" onClick={() => setPrivacyOpen(true)}>
+              See privacy policy
+            </Link>
+          </>
+        }
+      />
+      <Modal id="toggle-terms-modal" isOpen={isTermsModalOpen} onClose={() => setTermsModalOpen(false)}>
+        {/* Modal content */}
+      </Modal>
+      <Modal id="toggle-privacy-modal" isOpen={isPrivacyModalOpen} onClose={() => setPrivacyModalOpen(false)}>
+        {/* Modal content */}
+      </Modal>
+    </>
+  );
+};
+```
+
+**Accessibility notes:**
+
+- The `details` content is linked to the toggle via the `aria-details` attribute
+- Use `Link` component with `elementType="button"` for modal triggers (not `<a>` tags) for better accessibility
+
 ## API
 
 | Name                | Type                                           | Default | Required | Description                                                                               |
 | ------------------- | ---------------------------------------------- | ------- | -------- | ----------------------------------------------------------------------------------------- |
 | `autoComplete`      | `string`                                       | -       | ✕        | [Automated assistance in filling][autocomplete-attr]                                      |
+| `details`           | `ReactNode`                                    | —       | ✕        | Details content, typically containing modal triggers                                      |
 | `hasIndicators`     | `bool`                                         | `false` | ✕        | Whether has visual indicators                                                             |
 | `hasValidationIcon` | `bool`                                         | `false` | ✕        | Whether to show validation icon                                                           |
 | `helperText`        | `string`                                       | -       | ✕        | Helper text                                                                               |

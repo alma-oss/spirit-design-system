@@ -36,6 +36,11 @@ export interface TextInputProps extends TextInputBase {
   isFluid?: boolean;
 }
 
+export interface DetailsProps {
+  /** Content for the details section under Checkbox's or Toggle's label, typically containing modal triggers */
+  details?: ReactNode;
+}
+
 export interface HelperTextProps {
   /** If I wanted some help text */
   helperText?: ReactNode;

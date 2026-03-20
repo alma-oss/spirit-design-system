@@ -406,6 +406,14 @@
       "require": "./dist/components/IconBox/index.cjs",
       "default": "./dist/components/IconBox/index.js"
     },
+    "./components/InputDetails": {
+      "types": "./dist/components/InputDetails/index.d.ts",
+      "development": "./src/components/InputDetails/index.ts",
+      "production": "./dist/components/InputDetails/index.js",
+      "import": "./dist/components/InputDetails/index.js",
+      "require": "./dist/components/InputDetails/index.cjs",
+      "default": "./dist/components/InputDetails/index.js"
+    },
     "./components/Item": {
       "types": "./dist/components/Item/index.d.ts",
       "development": "./src/components/Item/index.ts",
