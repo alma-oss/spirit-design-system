@@ -39,7 +39,9 @@ Learn more about the [Dropdown][readme-dropdown] component in its documentation.
         <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </button>
-    <div class="DropdownPopover" data-spirit-placement="bottom-start" id="dropdown-1">Dropdown content</div>
+    <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-1">
+      Dropdown content
+    </div>
   </div>
 </div>
 ```
@@ -67,7 +69,7 @@ Learn more about the [Tooltip][readme-tooltip] component in its documentation.
     </button>
     <div
       id="tooltip-1"
-      class="TooltipPopover is-hidden"
+      class="TooltipPopover is-hidden placement-bottom-start"
       data-spirit-placement="bottom-start"
       data-spirit-flip-fallback-placements="bottom"
       data-spirit-trigger="hover"
