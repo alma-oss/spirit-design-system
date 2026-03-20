@@ -23,6 +23,7 @@ export * from './heading';
 export * from './hidden';
 export * from './icon';
 export * from './iconBox';
+export * from './inputDetails';
 export * from './item';
 export * from './label';
 export * from './link';

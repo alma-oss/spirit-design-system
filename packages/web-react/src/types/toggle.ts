@@ -2,6 +2,7 @@ import { type ChangeEvent, type ReactNode } from 'react';
 import { type LabelProps } from './label';
 import {
   type ChildrenProps,
+  type DetailsProps,
   type HelperTextProps,
   type InputBaseProps,
   type InputPositionType,
@@ -23,6 +24,7 @@ export interface ToggleProps
     RequiredProps,
     InputBaseProps,
     HelperTextProps,
+    DetailsProps,
     StyleProps,
     Validation {
   hasIndicators?: boolean;

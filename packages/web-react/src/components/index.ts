@@ -26,6 +26,7 @@ export * from './Heading';
 export * from './Hidden';
 export * from './Icon';
 export * from './IconBox';
+export * from './InputDetails';
 export * from './Item';
 export * from './Link';
 export * from './Matrix';

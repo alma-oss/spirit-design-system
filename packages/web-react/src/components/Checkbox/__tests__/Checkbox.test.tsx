@@ -91,4 +91,28 @@ describe('Checkbox', () => {
     expect(element).toHaveTextContent('Label Text');
     expect(element.innerHTML).toBe('Label <b>Text</b>');
   });
+
+  it('should render details content', () => {
+    const details = <button type="button">See terms</button>;
+    render(<Checkbox id="checkbox" label="Label" details={details} />);
+
+    expect(screen.getByRole('button', { name: 'See terms' })).toBeInTheDocument();
+  });
+
+  it('should set aria-details attribute', () => {
+    const details = <span>Details content</span>;
+    render(<Checkbox id="checkbox" label="Label" details={details} />);
+
+    const input = screen.getByRole('checkbox');
+
+    expect(input).toHaveAttribute('aria-details', 'checkbox-details');
+  });
+
+  it('should not set aria-details when no details provided', () => {
+    render(<Checkbox id="checkbox" label="Label" />);
+
+    const input = screen.getByRole('checkbox');
+
+    expect(input).not.toHaveAttribute('aria-details');
+  });
 });

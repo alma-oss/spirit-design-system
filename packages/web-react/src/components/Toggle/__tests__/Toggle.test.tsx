@@ -117,7 +117,25 @@ describe('Toggle', () => {
     expect(checkbox).toBeChecked();
   });
 
-  it('should render lavbel with html tags', () => {
+  it('should render details content', () => {
+    render(<Toggle id="test-toggle" label="Toggle Label" details="Details content" />);
+
+    expect(screen.getByText('Details content')).toBeInTheDocument();
+  });
+
+  it('should have aria-details attribute when details is provided', () => {
+    render(<Toggle id="test-toggle" label="Toggle Label" details="Details content" />);
+
+    expect(screen.getByRole('checkbox')).toHaveAttribute('aria-details', 'test-toggle-details');
+  });
+
+  it('should not render details when not provided', () => {
+    render(<Toggle id="test-toggle" label="Toggle Label" />);
+
+    expect(screen.queryByText('Details content')).not.toBeInTheDocument();
+  });
+
+  it('should render label with html tags', () => {
     render(
       <Toggle
         id="test-toggle"

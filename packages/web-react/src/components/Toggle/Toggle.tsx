@@ -6,12 +6,15 @@ import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritToggleProps } from '../../types';
 import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { InputDetails } from '../InputDetails';
 import { useToggleStyleProps } from './useToggleStyleProps';
 
 const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) => {
   const { classProps, props: modifiedProps } = useToggleStyleProps(props);
   const {
     'aria-describedby': ariaDescribedBy = '',
+    'aria-details': ariaDetailsAttr,
+    details,
     hasValidationIcon,
     id,
     isDisabled,
@@ -26,7 +29,9 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
   } = modifiedProps;
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const [ids, register] = useAriaIds(ariaDescribedBy);
+  const [detailsId, registerDetails] = useAriaIds(ariaDetailsAttr, { format: 'string' });
   const ariaDescribedByProp = useAriaDescribedBy(ids);
+  const ariaDetailsProp = detailsId ? { 'aria-details': detailsId } : {};
   const [checked, setChecked] = useState(isChecked);
   const validationTextRole = useValidationTextRole({
     validationState,
@@ -44,6 +49,11 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
         <Label UNSAFE_className={classProps.label} htmlFor={id}>
           {label}
         </Label>
+        {details && (
+          <InputDetails id={`${id}-details`} registerAriaDetails={registerDetails}>
+            {details}
+          </InputDetails>
+        )}
         <HelperText
           UNSAFE_className={classProps.helperText}
           id={`${id}__helperText`}
@@ -64,6 +74,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
       <input
         {...otherProps}
         {...ariaDescribedByProp}
+        {...ariaDetailsProp}
         type="checkbox"
         id={id}
         className={classProps.input}
