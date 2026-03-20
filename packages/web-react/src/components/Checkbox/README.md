@@ -47,11 +47,92 @@ Pass an object to adjust the input position based on the [breakpoint][dictionary
 />
 ```
 
+## Consent with Details
+
+For consent scenarios where users need access to terms and conditions or privacy policies, use the `details` prop
+to render supplementary content (such as link or modal triggers) below the label.
+
+### Emphasized Label
+
+```tsx
+<Checkbox
+  id="consent"
+  label={
+    <Text elementType="span" emphasis="semibold">
+      I agree to the terms and conditions
+    </Text>
+  }
+  isRequired
+  details={
+    <Link
+      elementType="button"
+      color="inherit"
+      underlined="always"
+      onClick={() => {
+        /* Open terms and conditions modal */
+      }}
+    >
+      See full terms and conditions
+    </Link>
+  }
+/>
+```
+
+### Full Example
+
+```tsx
+import React, { useState } from 'react';
+import { Checkbox, Link, Modal } from '@alma-oss/spirit-web-react';
+
+const Example = () => {
+  const [isTermsModalOpen, setTermsModalOpen] = useState(false);
+  const [isPrivacyModalOpen, setPrivacyModalOpen] = useState(false);
+
+  return (
+    <>
+      <Checkbox
+        id="consent"
+        label="I agree to the terms and privacy policy"
+        isRequired
+        helperText="Please read the documents carefully before agreeing"
+        validationState="danger"
+        validationText="You must agree to continue"
+        details={
+          <>
+            <Link elementType="button" color="inherit" underlined="always" onClick={() => setTermsModalOpen(true)}>
+              See full terms and conditions
+            </Link>
+            <Link elementType="button" color="inherit" underlined="always" onClick={() => setPrivacyModalOpen(true)}>
+              See privacy policy
+            </Link>
+          </>
+        }
+      />
+      <Modal id="checkbox-terms-modal" isOpen={isTermsModalOpen} onClose={() => setTermsModalOpen(false)}>
+        {/* Modal content */}
+      </Modal>
+      <Modal id="checkbox-privacy-modal" isOpen={isPrivacyModalOpen} onClose={() => setPrivacyModalOpen(false)}>
+        {/* Modal content */}
+      </Modal>
+    </>
+  );
+};
+```
+
+## Accessibility
+
+- The `details` content is linked to the checkbox via the `aria-details` attribute
+- Use `Link` component with `elementType="button"` for modal triggers (not `<a>` tags) for better accessibility
+- The `aria-details` attribute is separate from `aria-describedby`:
+  - `aria-describedby` announces essential information immediately (helper text, validation messages)
+  - `aria-details` points to supplementary content that users can explore when needed (terms links, additional info)
+
 ## API
 
 | Name                | Type                                           | Default | Required | Description                                                                               |
 | ------------------- | ---------------------------------------------- | ------- | -------- | ----------------------------------------------------------------------------------------- |
 | `autoComplete`      | `string`                                       | -       | ✕        | [Automated assistance in filling][autocomplete-attr]                                      |
+| `details`           | `ReactNode`                                    | —       | ✕        | Details content                                                                           |
 | `hasValidationIcon` | `bool`                                         | `false` | ✕        | Whether to show validation icon                                                           |
 | `helperText`        | `ReactNode`                                    | —       | ✕        | Custom helper text                                                                        |
 | `id`                | `string`                                       | -       | ✓        | Input and label identification                                                            |

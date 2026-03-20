@@ -103,7 +103,59 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
+## UseAriaIds Hook
+
+The `useAriaIds` hook manages a dynamic list of ARIA IDs used for attributes like `aria-describedby` and `aria-details`.
+Form field subcomponents (HelperText, ValidationText, [InputDetails][readme-input-details]) register their IDs through
+the returned `register` callback, and the hook provides the current list of IDs to apply on the input element.
+
+### Usage
+
+```tsx
+const [ids, register] = useAriaIds();
+```
+
+The `register` callback accepts an object with optional `add` and `remove` keys:
+
+```tsx
+register({ add: 'helper-text-id' }); // adds an ID
+register({ remove: 'helper-text-id' }); // removes an ID
+```
+
+### String Format
+
+By default, `useAriaIds` returns an array of IDs. Pass `{ format: 'string' }` to get a space-separated string
+(or `undefined` when empty) — useful for `aria-details` which needs a single string value:
+
+```tsx
+const [detailsId, registerDetails] = useAriaIds(undefined, { format: 'string' });
+// detailsId is `string | undefined`
+```
+
+### Initializing with Existing IDs
+
+Pass an existing space-separated ID string to preserve consumer-provided ARIA attributes:
+
+```tsx
+const [ids, register] = useAriaIds(props['aria-describedby']);
+```
+
+### API
+
+| Name           | Type                             | Default              | Required | Description                            |
+| -------------- | -------------------------------- | -------------------- | -------- | -------------------------------------- |
+| `otherAriaIds` | `string`                         | —                    | ✕        | Space-separated initial IDs to include |
+| `options`      | `{ format: 'list' \| 'string' }` | `{ format: 'list' }` | ✕        | Output format: array or joined string  |
+
+### Return Value
+
+| Format     | Return Type                           | Description                                   |
+| ---------- | ------------------------------------- | --------------------------------------------- |
+| `'list'`   | `[string[], RegisterType]`            | Array of IDs and register callback            |
+| `'string'` | `[string \| undefined, RegisterType]` | Joined IDs string (or undefined) and callback |
+
 [aria-alert-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/alert_role
+[readme-input-details]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/InputDetails/README.md
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches

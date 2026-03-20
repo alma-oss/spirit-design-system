@@ -7,6 +7,8 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
+import CheckboxConsentEmphasizedLabel from './CheckboxConsentEmphasizedLabel';
+import CheckboxConsentFullExample from './CheckboxConsentFullExample';
 import CheckboxDefault from './CheckboxDefault';
 import CheckboxDisabled from './CheckboxDisabled';
 import CheckboxHelperText from './CheckboxHelperText';
@@ -48,9 +50,15 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <DocsSection title="Input Position">
         <CheckboxInputPosition />
       </DocsSection>
+      <DocsSection title="Item">
+        <CheckboxItem />
+      </DocsSection>
+      <DocsSection title="Consent with Emphasized Label">
+        <CheckboxConsentEmphasizedLabel />
+      </DocsSection>
+      <DocsSection title="Consent Full Example">
+        <CheckboxConsentFullExample />
+      </DocsSection>
     </IconsProvider>
-    <DocsSection title="Item">
-      <CheckboxItem />
-    </DocsSection>
   </StrictMode>,
 );

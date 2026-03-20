@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { type LabelProps } from './label';
 import {
   type ChildrenProps,
+  type DetailsProps,
   type HelperTextProps,
   type InputBaseProps,
   type InputPositionType,
@@ -25,7 +26,8 @@ export interface CheckboxProps
     Validation,
     ValidationTextProp,
     RequiredProps,
-    HelperTextProps {
+    HelperTextProps,
+    DetailsProps {
   /** Whether the checkbox is indeterminate */
   indeterminate?: boolean;
   /** Whether the checkbox is checked */
