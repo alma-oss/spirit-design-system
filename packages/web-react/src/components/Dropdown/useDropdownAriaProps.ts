@@ -1,15 +1,8 @@
-import { Placements } from '../../constants';
-import {
-  type Booleanish,
-  type ClickEvent,
-  type DropdownFullWidthMode,
-  type PlacementDictionaryType,
-} from '../../types';
+import { type Booleanish, type ClickEvent, type DropdownFullWidthMode } from '../../types';
 
 const NAME_ARIA_EXPANDED = 'aria-expanded';
 const NAME_ARIA_CONTROLS = 'aria-controls';
 const NAME_DATA_FULLWIDTHMODE = 'data-spirit-fullwidthmode';
-const NAME_DATA_PLACEMENT = 'data-spirit-placement';
 
 export enum fullWidthModeKeys {
   'off' = 'off',
@@ -23,8 +16,6 @@ export interface UseDropdownAriaPropsProps {
   isOpen: boolean;
   /** fullWidthMode */
   fullWidthMode: DropdownFullWidthMode | undefined;
-  /** placement */
-  placement?: PlacementDictionaryType;
   /** toggle callback */
   toggleHandler: (event: ClickEvent) => void;
 }
@@ -34,7 +25,6 @@ export interface UseDropdownAriaPropsReturn {
   contentProps: {
     id: string;
     [NAME_DATA_FULLWIDTHMODE]?: keyof typeof fullWidthModeKeys | undefined;
-    [NAME_DATA_PLACEMENT]?: PlacementDictionaryType;
   };
   /** trigger returned props */
   triggerProps: {
@@ -45,7 +35,7 @@ export interface UseDropdownAriaPropsReturn {
 }
 
 export const useDropdownAriaProps = (props: UseDropdownAriaPropsProps): UseDropdownAriaPropsReturn => {
-  const { fullWidthMode, id, isOpen, placement = Placements.BOTTOM_START, toggleHandler } = props;
+  const { fullWidthMode, id, isOpen, toggleHandler } = props;
 
   const triggerProps = {
     [NAME_ARIA_EXPANDED]: isOpen,
@@ -55,7 +45,6 @@ export const useDropdownAriaProps = (props: UseDropdownAriaPropsProps): UseDropd
   const contentProps = {
     id,
     [NAME_DATA_FULLWIDTHMODE]: fullWidthMode,
-    [NAME_DATA_PLACEMENT]: placement,
   };
 
   return {
