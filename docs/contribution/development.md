@@ -34,6 +34,9 @@ For you to install all the dependencies in this project and successfully develop
 
 After you have set up all the requirements run the following command in your terminal:
 
+Before installing dependencies, export `GITHUB_TOKEN` with `read:packages`.
+Storybook depends on private `@almacareer/*` packages hosted on GitHub Packages.
+
 ```bash
 make install
 ```

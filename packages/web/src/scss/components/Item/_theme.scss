@@ -1,6 +1,10 @@
 @use '@tokens' as tokens;
+@use '../../tools/tokens' as tokens-tools;
 
 $gap: tokens.$space-500;
 $icon-color-state-default: tokens.$selected-content-basic;
 $icon-color-state-disabled: tokens.$disabled-content;
-$background-color-state-selected: tokens.$selected-background-subtle;
+$background-color-state-selected: tokens-tools.get-variable-if-exists(
+    'selected-background-subtle',
+    tokens-tools.get-variable-if-exists('selected-background-basic', tokens.$background-primary)
+);

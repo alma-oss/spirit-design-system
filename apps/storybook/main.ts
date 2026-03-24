@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { mergeConfig } from 'vite';
+import { cssSources } from './cssSources';
+import { storybookCssPlugin } from './storybookCssPlugin';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
@@ -29,6 +31,7 @@ const config: StorybookConfig = {
         react({
           jsxRuntime: 'automatic',
         }),
+        storybookCssPlugin(cssSources),
       ],
       css: {
         postcss: resolve(__dirname, 'config'),

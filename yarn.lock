@@ -253,6 +253,7 @@ __metadata:
     "@alma-oss/spirit-design-tokens": "workspace:^"
     "@alma-oss/spirit-icons": "workspace:^"
     "@alma-oss/spirit-web-react": "workspace:^"
+    "@almacareer/cyborg-design-tokens": "catalog:frontend"
     "@babel/core": "catalog:build"
     "@storybook/addon-a11y": "catalog:storybook"
     "@storybook/addon-docs": "catalog:storybook"
@@ -263,6 +264,7 @@ __metadata:
     postcss: "catalog:build"
     react: "catalog:frontend"
     react-dom: "catalog:frontend"
+    sass-embedded: "catalog:build"
     storybook: "catalog:storybook"
     typescript: "catalog:types"
     vite: "catalog:build"
@@ -423,6 +425,13 @@ __metadata:
       optional: true
   languageName: unknown
   linkType: soft
+
+"@almacareer/cyborg-design-tokens@npm:^7.0.0":
+  version: 7.8.1
+  resolution: "@almacareer/cyborg-design-tokens@npm:7.8.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40almacareer%2Fcyborg-design-tokens%2F7.8.1%2Fa94c45d4faaf8498e36152faefea33e5dcfbafaa"
+  checksum: 10/5f4921bdb5e361b8862d3ca5981d048c1a9ab3a48c7b64eeac2e3d51ee7fead08d31e00e6c26b6dd81a55a3e869194bf8fed4205343aeacfd08e3551384ef7ce
+  languageName: node
+  linkType: hard
 
 "@almacareer/remark-config@npm:0.1.0":
   version: 0.1.0
