@@ -5,6 +5,7 @@
 @use '@tokens' as tokens;
 @use '../tools/color-scheme';
 @use '../tools/map' as spirit-map;
+@use '../tools/tokens' as tokens-tools;
 @use '../tools/utilities';
 
 $accent-prefix: 'accent-';
@@ -43,8 +44,14 @@ $utilities: (
                     tertiary: tokens.$background-tertiary,
                     neutral-basic: tokens.$neutral-background-basic,
                     neutral-subtle: tokens.$neutral-background-subtle,
-                    selected-basic: tokens.$selected-background-basic,
-                    selected-subtle: tokens.$selected-background-subtle,
+                    selected-basic: tokens-tools.get-variable-if-exists(
+                            'selected-background-basic',
+                            tokens.$background-primary
+                        ),
+                    selected-subtle: tokens-tools.get-variable-if-exists(
+                            'selected-background-subtle',
+                            tokens-tools.get-variable-if-exists('selected-background-basic', tokens.$background-primary)
+                        ),
                 )
             ),
     ),
