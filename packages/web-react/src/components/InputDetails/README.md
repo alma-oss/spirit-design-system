@@ -43,6 +43,57 @@ It is used internally by [Checkbox][readme-checkbox] and [Toggle][readme-toggle]
 />
 ```
 
+## Disabled State
+
+When the parent component (Checkbox or Toggle) is disabled, the text and links inside InputDetails are automatically dimmed via a CSS custom property.
+You must manually set the `isDisabled` prop on interactive elements (Link, Button) inside the `details` prop.
+
+**Note:** The `isDisabled` prop on Link/Button components is required for proper keyboard and screen reader behavior.
+
+### With Disabled Checkbox
+
+```tsx
+<Checkbox
+  id="consent"
+  label={<span className="typography-body-medium-semibold">I agree to the terms and conditions</span>}
+  isDisabled
+  isRequired
+  details={
+    <>
+      <Text marginBottom="space-0">We want to keep you informed</Text>
+      <Link elementType="button" color="inherit" underlined="always" isDisabled>
+        See full terms and conditions
+      </Link>
+    </>
+  }
+/>
+```
+
+### With Disabled Toggle
+
+```tsx
+<Toggle
+  id="consent"
+  label="I agree to the terms and conditions"
+  isDisabled
+  isRequired
+  inputPosition="end"
+  validationState="danger"
+  helperText="Please read the documents carefully before agreeing"
+  validationText="You must agree to continue"
+  details={
+    <>
+      <Link elementType="button" color="inherit" underlined="always" isDisabled>
+        See full terms and conditions
+      </Link>
+      <Link elementType="button" color="inherit" underlined="always" isDisabled>
+        See privacy policy
+      </Link>
+    </>
+  }
+/>
+```
+
 ## Accessibility
 
 - When used inside Checkbox or Toggle, the `details` content is linked to the input via the `aria-details` attribute

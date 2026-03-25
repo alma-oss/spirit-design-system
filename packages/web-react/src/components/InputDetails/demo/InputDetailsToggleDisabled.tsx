@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from '../../Link';
 import { Toggle } from '../../Toggle';
 
-const InputDetailsWithToggleDisabled = () => (
+const InputDetailsToggleDisabled = () => (
   <Toggle
     id="input-details-toggle-disabled"
     name="consent"
@@ -26,4 +26,4 @@ const InputDetailsWithToggleDisabled = () => (
   />
 );
 
-export default InputDetailsWithToggleDisabled;
+export default InputDetailsToggleDisabled;

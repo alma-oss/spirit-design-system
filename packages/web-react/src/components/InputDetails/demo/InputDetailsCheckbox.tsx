@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Checkbox } from '../../Checkbox';
 import { Link } from '../../Link';
 import { Modal, ModalBody, ModalDialog, ModalHeader } from '../../Modal';
+import { Text } from '../../Text';
 
 const InputDetailsCheckbox = () => {
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
@@ -14,9 +15,12 @@ const InputDetailsCheckbox = () => {
         label={<span className="typography-body-medium-semibold">I agree to the terms and conditions</span>}
         isRequired
         details={
-          <Link elementType="button" color="inherit" underlined="always" onClick={() => setIsTermsModalOpen(true)}>
-            See full terms and conditions
-          </Link>
+          <>
+            <Text marginBottom="space-0">We want to keep you informed</Text>
+            <Link elementType="button" color="inherit" underlined="always" onClick={() => setIsTermsModalOpen(true)}>
+              See full terms and conditions
+            </Link>
+          </>
         }
       />
       <Modal

@@ -8,7 +8,9 @@ import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import InputDetailsCheckbox from './InputDetailsCheckbox';
-import InputDetailsWithToggle from './InputDetailsWithToggle';
+import InputDetailsCheckboxDisabled from './InputDetailsCheckboxDisabled';
+import InputDetailsToggle from './InputDetailsToggle';
+import InputDetailsToggleDisabled from './InputDetailsToggleDisabled';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
@@ -16,8 +18,14 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <DocsSection title="Usage with Checkbox" stackAlignment="start">
         <InputDetailsCheckbox />
       </DocsSection>
+      <DocsSection title="Usage with Disabled Checkbox" stackAlignment="start">
+        <InputDetailsCheckboxDisabled />
+      </DocsSection>
       <DocsSection title="Usage with Toggle" stackAlignment="start">
-        <InputDetailsWithToggle />
+        <InputDetailsToggle />
+      </DocsSection>
+      <DocsSection title="Usage with Disabled Toggle" stackAlignment="start">
+        <InputDetailsToggleDisabled />
       </DocsSection>
     </IconsProvider>
   </StrictMode>,

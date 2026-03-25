@@ -3,7 +3,7 @@ import { Link } from '../../Link';
 import { Modal, ModalBody, ModalDialog, ModalHeader } from '../../Modal';
 import { Toggle } from '../../Toggle';
 
-const InputDetailsWithToggle = () => {
+const InputDetailsToggle = () => {
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
 
@@ -61,4 +61,4 @@ const InputDetailsWithToggle = () => {
   );
 };
 
-export default InputDetailsWithToggle;
+export default InputDetailsToggle;

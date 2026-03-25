@@ -2,7 +2,7 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import InputDetailsCheckbox from '../demo/InputDetailsCheckbox';
-import InputDetailsWithToggle from '../demo/InputDetailsWithToggle';
+import InputDetailsToggle from '../demo/InputDetailsToggle';
 import ReadMe from '../README.md?raw';
 import { InputDetails } from '..';
 
@@ -46,7 +46,7 @@ export const WithCheckbox: Story = {
 
 export const WithToggle: Story = {
   name: 'Usage with Toggle',
-  render: () => <InputDetailsWithToggle />,
+  render: () => <InputDetailsToggle />,
   parameters: {
     controls: { disable: true },
   },
