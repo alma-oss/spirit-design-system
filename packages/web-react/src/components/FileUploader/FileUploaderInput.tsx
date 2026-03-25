@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type SpiritFileUploaderInputProps } from '../../types';
-import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
+import { HelperText, Label, ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { Icon } from '../Icon';
 import { DEFAULT_FILE_QUEUE_LIMIT, DEFAULT_FILE_SIZE_LIMIT } from './constants';
@@ -68,8 +68,7 @@ const FileUploaderInput = (props: SpiritFileUploaderInputProps) => {
     validationState,
   });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const [ids, register] = useAriaIds(ariaDescribedBy);
-  const ariaDescribedByProp = useAriaDescribedBy(ids);
+  const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
   const validationTextRole = useValidationTextRole({
     validationState,
     validationText,

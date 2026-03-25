@@ -122,7 +122,7 @@ You must manually set the `isDisabled` prop on interactive elements (Link, Butto
 ## Accessibility
 
 - When used inside Checkbox or Toggle, the `details` content is linked to the input via the `aria-details` attribute
-- Checkbox and Toggle use the `useAriaIds` hook internally to register the InputDetails `id` and set the `aria-details` attribute on the input element
+- Checkbox and Toggle use the `useAriaDetails` hook internally to register the InputDetails `id` and set the `aria-details` attribute on the input element
 - Use `Link` component with `elementType="button"` for modal triggers (not `<a>` tags) for better accessibility
 - The `aria-details` attribute is separate from `aria-describedby` used by helper text and validation text
   - `aria-describedby` announces essential information immediately (helper text, validation messages)

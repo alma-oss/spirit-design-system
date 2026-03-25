@@ -2,9 +2,9 @@
 
 import classNames from 'classnames';
 import React, { type ChangeEvent, type ForwardedRef, forwardRef, useState } from 'react';
-import { useAriaDescribedBy, useStyleProps } from '../../hooks';
+import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritToggleProps } from '../../types';
-import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
+import { HelperText, Label, ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { InputDetails } from '../InputDetails';
 import { useToggleStyleProps } from './useToggleStyleProps';
@@ -28,10 +28,8 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
     ...restProps
   } = modifiedProps;
   const { styleProps, props: otherProps } = useStyleProps(restProps);
-  const [ids, register] = useAriaIds(ariaDescribedBy);
-  const [detailsId, registerDetails] = useAriaIds(ariaDetailsAttr, { format: 'string' });
-  const ariaDescribedByProp = useAriaDescribedBy(ids);
-  const ariaDetailsProp = detailsId ? { 'aria-details': detailsId } : {};
+  const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
+  const [ariaDetailsProp, registerDetails] = useAriaDetails(ariaDetailsAttr);
   const [checked, setChecked] = useState(isChecked);
   const validationTextRole = useValidationTextRole({
     validationState,
