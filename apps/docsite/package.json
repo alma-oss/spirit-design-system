@@ -22,6 +22,7 @@
     "@alma-oss/spirit-web-react": "workspace:^",
     "classnames": "catalog:frontend",
     "next": "catalog:frontend",
+    "nuqs": "catalog:frontend",
     "react": "catalog:frontend",
     "react-dom": "catalog:frontend",
     "sass-embedded": "catalog:build"

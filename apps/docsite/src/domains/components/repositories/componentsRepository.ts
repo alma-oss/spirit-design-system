@@ -7,7 +7,7 @@ const getDirs = (source: string) =>
     .map((dirent) => dirent.name);
 
 export const fetchAllComponents = (): string[] => {
-  const components = getDirs(resolve('../../packages/web-react/src/components'));
+  const components = getDirs(resolve(process.cwd(), '../../packages/web-react/src/components'));
 
   return components;
 };

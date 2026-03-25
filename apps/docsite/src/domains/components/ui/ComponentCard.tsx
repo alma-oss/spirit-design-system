@@ -1,9 +1,9 @@
 'use client';
 
 import { Card, CardBody, CardLink, CardTitle } from '@alma-oss/spirit-web-react';
+import { routes } from '@local/domains/routing/routes';
 import NextLink from 'next/link';
 import React from 'react';
-import { routes } from '../../routing/routes';
 
 interface ComponentCardProps {
   component: string;
