@@ -1,19 +1,22 @@
-import { Container, Grid } from '@alma-oss/spirit-web-react';
+import { Flex, Section } from '@alma-oss/spirit-web-react';
 import { fetchAllComponents } from '@local/domains/components/repositories/componentsRepository';
-import ComponentCard from '@local/domains/components/ui/ComponentCard';
-import React from 'react';
+import ComponentList from '@local/domains/components/ui/ComponentList';
+import ComponentListSkeleton from '@local/domains/components/ui/ComponentListSkeleton';
+import ComponentSortToggle from '@local/domains/components/ui/ComponentSortToggle';
+import React, { Suspense } from 'react';
 
 const ComponentsPage = () => {
   const components: string[] = fetchAllComponents();
 
   return (
-    <Container>
-      <Grid elementType="ul" cols={{ mobile: 2, tablet: 3 }}>
-        {components.map((component) => (
-          <ComponentCard key={component} component={component} />
-        ))}
-      </Grid>
-    </Container>
+    <Section>
+      <Flex alignmentX="center" marginBottom="space-1200">
+        <ComponentSortToggle />
+      </Flex>
+      <Suspense fallback={<ComponentListSkeleton />}>
+        <ComponentList components={components} />
+      </Suspense>
+    </Section>
   );
 };
 

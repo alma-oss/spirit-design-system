@@ -58,4 +58,12 @@ describe('fetchAllComponents', () => {
       expect.any(Object),
     );
   });
+
+  it('should propagate errors when the directory cannot be read', () => {
+    readdirSyncMock.mockImplementation(() => {
+      throw new Error('ENOENT');
+    });
+
+    expect(() => fetchAllComponents()).toThrow('ENOENT');
+  });
 });
