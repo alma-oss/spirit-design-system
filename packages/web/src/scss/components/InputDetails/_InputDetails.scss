@@ -9,8 +9,9 @@
     position: relative; // 1.
     z-index: 1; // 1.
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: theme.$gap;
+    align-items: flex-start;
     margin-top: theme.$margin-top;
 
     // @deprecated This custom property will be removed in the next major version.

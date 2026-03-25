@@ -20,6 +20,7 @@
         <div class="Checkbox__text">
           <label class="Checkbox__label Checkbox__label--required" for="input-details-checkbox"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
           <div id="input-details-checkbox-details" class="InputDetails">
+            <p class="typography-body-medium-regular mb-0">We want to keep you informed</p>
             <button
               type="button"
               class="link-underlined link-inherit"
@@ -81,6 +82,109 @@
           </div>
         </div>
         <input type="checkbox" id="input-details-toggle" class="Toggle__input" name="consent" required aria-details="input-details-toggle-details" aria-describedby="consent-full-example-helper-text consent-full-example-validation-text" />
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Usage with Disabled Checkbox</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div class="Checkbox Checkbox--inputPositionStart Checkbox--disabled">
+        <input
+          type="checkbox"
+          id="input-details-checkbox-disabled"
+          class="Checkbox__input"
+          name="consent-disabled"
+          aria-details="input-details-checkbox-disabled-details"
+          required
+          disabled
+        />
+        <div class="Checkbox__text">
+          <label class="Checkbox__label Checkbox__label--required" for="input-details-checkbox-disabled"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
+          <div id="input-details-checkbox-disabled-details" class="InputDetails">
+            <p class="typography-body-medium-regular mb-0">We want to keep you informed</p>
+            <button
+              type="button"
+              class="link-underlined link-inherit"
+              data-spirit-toggle="modal"
+              data-spirit-target="#terms-modal"
+              aria-controls="terms-modal"
+              aria-expanded="false"
+              disabled
+            >
+              See full terms and conditions
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Usage with Disabled Toggle</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div class="Toggle Toggle--inputPositionEnd Toggle--disabled Toggle--danger">
+        <div class="Toggle__text">
+          <label class="Toggle__label Toggle__label--required" for="input-details-toggle-disabled">I agree to the terms and conditions</label>
+          <div id="input-details-toggle-disabled-details" class="InputDetails">
+            <button
+              type="button"
+              class="link-underlined link-inherit"
+              data-spirit-toggle="modal"
+              data-spirit-target="#terms-modal"
+              aria-controls="terms-modal"
+              aria-expanded="false"
+              disabled
+            >
+              See full terms and conditions
+            </button>
+            <button
+              type="button"
+              class="link-underlined link-inherit"
+              data-spirit-toggle="modal"
+              data-spirit-target="#privacy-modal"
+              aria-controls="privacy-modal"
+              aria-expanded="false"
+              disabled
+            >
+              See privacy policy
+            </button>
+          </div>
+          <div class="Toggle__helperText" id="input-details-toggle-disabled-helper-text">
+            Please read the documents carefully before agreeing
+          </div>
+          <div class="Toggle__validationText" id="input-details-toggle-disabled-validation-text">
+            You must agree to continue
+          </div>
+        </div>
+        <input
+          type="checkbox"
+          id="input-details-toggle-disabled"
+          class="Toggle__input"
+          name="consent-disabled"
+          required
+          disabled
+          aria-details="input-details-toggle-disabled-details"
+          aria-describedby="input-details-toggle-disabled-helper-text input-details-toggle-disabled-validation-text"
+        />
       </div>
 
     </div>
