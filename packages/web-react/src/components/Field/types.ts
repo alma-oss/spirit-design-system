@@ -1,6 +1,6 @@
 import { type ElementType, type ReactNode } from 'react';
 import { type ChildrenProps, type StyleProps, type TransferProps, type ValidationTextProp } from '../../types';
-import { type RegisterType } from './useAriaIds';
+import { type RegisterType } from './useAriaIdRefs';
 
 export interface FieldElementTypeProps<E extends ElementType = 'div'> {
   /**

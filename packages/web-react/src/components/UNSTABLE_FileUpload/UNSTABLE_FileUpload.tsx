@@ -2,8 +2,8 @@
 
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
-import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
+import { useStyleProps } from '../../hooks';
+import { HelperText, Label, ValidationText, useAriaDescribedBy } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { Icon } from '../Icon';
 import { type UnstableFileUploadProps } from './types';
@@ -56,8 +56,7 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
 
   const { styleProps, props: transferProps } = useStyleProps(restProps);
 
-  const [ids, register] = useAriaIds(ariaDescribedBy);
-  const ariaDescribedByProp = useAriaDescribedBy(ids);
+  const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
   const validationTextRole = useValidationTextRole({
     validationState,
     validationText,

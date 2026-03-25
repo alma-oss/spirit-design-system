@@ -2,9 +2,9 @@
 
 import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
-import { useAriaDescribedBy, useStyleProps } from '../../hooks';
+import { useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritRadioProps } from '../../types';
-import { HelperText, Label, useAriaIds } from '../Field';
+import { HelperText, Label, useAriaDescribedBy } from '../Field';
 import { useRadioStyleProps } from './useRadioStyleProps';
 
 const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
@@ -22,8 +22,7 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
   } = modifiedProps;
   const { styleProps, props: otherProps } = useStyleProps(restProps);
 
-  const [ids, register] = useAriaIds(ariaDescribedBy);
-  const ariaDescribedByProp = useAriaDescribedBy(ids);
+  const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
 
   return (
     <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>

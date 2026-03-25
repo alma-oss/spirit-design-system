@@ -1,6 +1,5 @@
 export * from './styleProps';
 export * from './useAlignmentClass';
-export * from './useAriaDescribedBy';
 export * from './useCancelEvent';
 export * from './useClassNamePrefix';
 export * from './useClick';
