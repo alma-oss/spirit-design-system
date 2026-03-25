@@ -103,17 +103,32 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
-## UseAriaIds Hook
+## ARIA ID Ref Hooks
 
-The `useAriaIds` hook manages a dynamic list of ARIA IDs used for attributes like `aria-describedby` and `aria-details`.
-Form field subcomponents (HelperText, ValidationText, [InputDetails][readme-input-details]) register their IDs through
-the returned `register` callback, and the hook provides the current list of IDs to apply on the input element.
+The ARIA ID ref hooks manage dynamic lists of ARIA ID references used for relationship attributes like
+`aria-describedby` and `aria-details`. Form field subcomponents (HelperText, ValidationText,
+[InputDetails][readme-input-details]) register their IDs through the returned `register` callback,
+and the hook returns ready-to-spread props for the input element.
 
-### Usage
+### useAriaDescribedBy
+
+Manages IDs for the `aria-describedby` attribute:
 
 ```tsx
-const [ids, register] = useAriaIds();
+const [ariaDescribedByProp, register] = useAriaDescribedBy(props['aria-describedby']);
+// ariaDescribedByProp is `{ 'aria-describedby': 'id1 id2' }` or `{}`
 ```
+
+### useAriaDetails
+
+Manages IDs for the `aria-details` attribute:
+
+```tsx
+const [ariaDetailsProp, registerDetails] = useAriaDetails(props['aria-details']);
+// ariaDetailsProp is `{ 'aria-details': 'id1' }` or `{}`
+```
+
+### Register Callback
 
 The `register` callback accepts an object with optional `add` and `remove` keys:
 
@@ -122,37 +137,29 @@ register({ add: 'helper-text-id' }); // adds an ID
 register({ remove: 'helper-text-id' }); // removes an ID
 ```
 
-### String Format
+### useAriaIdRefs (generic)
 
-By default, `useAriaIds` returns an array of IDs. Pass `{ format: 'string' }` to get a space-separated string
-(or `undefined` when empty) — useful for `aria-details` which needs a single string value:
-
-```tsx
-const [detailsId, registerDetails] = useAriaIds(undefined, { format: 'string' });
-// detailsId is `string | undefined`
-```
-
-### Initializing with Existing IDs
-
-Pass an existing space-separated ID string to preserve consumer-provided ARIA attributes:
+Both hooks above are convenience wrappers around the generic `useAriaIdRefs` hook:
 
 ```tsx
-const [ids, register] = useAriaIds(props['aria-describedby']);
+const [ariaProps, register] = useAriaIdRefs('aria-describedby', initialIds);
 ```
 
 ### API
 
-| Name           | Type                             | Default              | Required | Description                            |
-| -------------- | -------------------------------- | -------------------- | -------- | -------------------------------------- |
-| `otherAriaIds` | `string`                         | —                    | ✕        | Space-separated initial IDs to include |
-| `options`      | `{ format: 'list' \| 'string' }` | `{ format: 'list' }` | ✕        | Output format: array or joined string  |
+| Name            | Type                                   | Default | Required | Description                            |
+| --------------- | -------------------------------------- | ------- | -------- | -------------------------------------- |
+| `ariaAttribute` | `'aria-describedby' \| 'aria-details'` | —       | ✓        | ARIA relationship attribute to manage  |
+| `initialIds`    | `string`                               | —       | ✕        | Space-separated initial IDs to include |
 
 ### Return Value
 
-| Format     | Return Type                           | Description                                   |
-| ---------- | ------------------------------------- | --------------------------------------------- |
-| `'list'`   | `[string[], RegisterType]`            | Array of IDs and register callback            |
-| `'string'` | `[string \| undefined, RegisterType]` | Joined IDs string (or undefined) and callback |
+Returns a tuple `[AriaProps, RegisterType]`:
+
+| Index | Type           | Description                                              |
+| ----- | -------------- | -------------------------------------------------------- |
+| `0`   | `AriaProps`    | Object to spread on the input (`{}` when no IDs present) |
+| `1`   | `RegisterType` | Callback to add/remove IDs                               |
 
 [aria-alert-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/alert_role
 [readme-input-details]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/InputDetails/README.md

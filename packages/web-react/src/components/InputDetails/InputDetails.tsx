@@ -21,10 +21,14 @@ const InputDetails = <E extends ElementType = 'div'>(props: InputDetailsProps<E>
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   useEffect(() => {
-    registerAriaDetails?.({ add: id });
+    if (id) {
+      registerAriaDetails?.({ add: id });
+    }
 
     return () => {
-      registerAriaDetails?.({ remove: id });
+      if (id) {
+        registerAriaDetails?.({ remove: id });
+      }
     };
   }, [id, registerAriaDetails]);
 

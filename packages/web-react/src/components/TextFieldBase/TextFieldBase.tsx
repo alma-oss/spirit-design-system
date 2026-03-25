@@ -9,7 +9,7 @@ import {
   type SpiritTextFieldBaseProps,
   type TextFieldBasePasswordToggleProps,
 } from '../../types';
-import { HelperText, Label, ValidationText, useAriaIds } from '../Field';
+import { HelperText, Label, ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import TextFieldBaseInput from './TextFieldBaseInput';
 import { useTextFieldBaseStyleProps } from './useTextFieldBaseStyleProps';
@@ -38,8 +38,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
     ...restProps,
   });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const [ids, register] = useAriaIds(ariaDescribedBy);
-  const ariaDescribedByProp = useAriaDescribedBy(ids);
+  const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
   const validationTextRole = useValidationTextRole({
     validationState,
     validationText,
