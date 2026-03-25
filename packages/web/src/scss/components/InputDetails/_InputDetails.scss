@@ -12,5 +12,9 @@
     flex-wrap: wrap;
     gap: theme.$gap;
     margin-top: theme.$margin-top;
+
+    // @deprecated This custom property will be removed in the next major version.
+    // Migration: delete custom property `var(--#{tokens.$css-variable-prefix}input-details-text-color)`.
+    // @see https://jira.almacareer.tech/browse/DS-2496
     color: var(--#{tokens.$css-variable-prefix}input-details-text-color, theme.$color);
 }
