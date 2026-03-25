@@ -22,10 +22,10 @@ const ToastContentVariations = () => (
       <ToastBarMessage>Message with icon and action</ToastBarMessage>
       <ToastBarLink href="#">Action</ToastBarLink>
     </ToastBar>
-    <ToastBar id="dismissible" onClose={() => {}} isDismissible>
+    <ToastBar id="toast-variation-dismissible" onClose={() => {}} isDismissible>
       <ToastBarMessage>Dismissible message</ToastBarMessage>
     </ToastBar>
-    <ToastBar id="custom-icon" isDismissible iconName="download">
+    <ToastBar id="toast-variation-dismissible-icon-action" onClose={() => {}} isDismissible iconName="download">
       <ToastBarMessage>Dismissible message with custom icon and action</ToastBarMessage>
       <ToastBarLink href="#">Action</ToastBarLink>
     </ToastBar>

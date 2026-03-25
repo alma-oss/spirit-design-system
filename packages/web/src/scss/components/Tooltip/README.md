@@ -75,7 +75,7 @@ Values follow the [Placement Dictionary][dictionary-placement] (e.g. `top`, `bot
 Tooltip can be made dismissible by following these steps:
 
 1. Add `TooltipPopover--dismissible` modifier class on TooltipPopover.
-2. Add closing button with `TooltipPopover__close` class.
+2. Add ControlButton button with necessary interactive styles.
 3. Bind JS plugin using `data-spirit-dismiss="tooltip"` and `data-spirit-target`
    attributes on the closing button.
 
@@ -93,7 +93,7 @@ Tooltip can be made dismissible by following these steps:
     Close me
     <button
       type="button"
-      class="TooltipPopover__close"
+      class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target"
       data-spirit-dismiss="tooltip"
       data-spirit-target="#my-dismissible-tooltip"
       aria-controls="my-dismissible-tooltip"
