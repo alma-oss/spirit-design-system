@@ -88,10 +88,10 @@ const Example = () => {
         validationText="You must agree to continue"
         details={
           <>
-            <Link elementType="button" color="inherit" underlined="always" onClick={() => setTermsOpen(true)}>
+            <Link elementType="button" color="inherit" underlined="always" onClick={() => setTermsModalOpen(true)}>
               See full terms and conditions
             </Link>
-            <Link elementType="button" color="inherit" underlined="always" onClick={() => setPrivacyOpen(true)}>
+            <Link elementType="button" color="inherit" underlined="always" onClick={() => setPrivacyModalOpen(true)}>
               See privacy policy
             </Link>
           </>

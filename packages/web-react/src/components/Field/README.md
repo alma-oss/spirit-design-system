@@ -103,7 +103,7 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
-## useAriaIds
+## UseAriaIds Hook
 
 The `useAriaIds` hook manages a dynamic list of ARIA IDs used for attributes like `aria-describedby` and `aria-details`.
 Form field subcomponents (HelperText, ValidationText, [InputDetails][readme-input-details]) register their IDs through
