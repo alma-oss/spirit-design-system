@@ -8,7 +8,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+    "test": "npm-run-all --serial lint test:unit:coverage",
+    "test:unit": "TS_NODE_PROJECT=./tsconfig.test.json jest",
+    "test:unit:watch": "yarn test:unit --watchAll",
+    "test:unit:coverage": "yarn test:unit --coverage",
+    "types": "tsc"
   },
   "dependencies": {
     "@alma-oss/spirit-design-tokens": "workspace:^",
@@ -33,8 +38,12 @@
     "eslint-config-next": "catalog:lint",
     "eslint-config-spirit": "workspace:^",
     "globals": "catalog:lint",
+    "jest": "catalog:test",
+    "jest-config-spirit": "workspace:^",
+    "npm-run-all2": "catalog:script",
     "postcss": "catalog:build",
     "postcss-preset-env": "catalog:build",
+    "ts-node": "catalog:script",
     "typescript": "catalog:types"
   }
 }

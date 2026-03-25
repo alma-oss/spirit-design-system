@@ -18,6 +18,7 @@ const config: Config = {
     '<rootDir>/packages/icons/jest.config.ts',
     '<rootDir>/packages/codemods/jest.config.ts',
     '<rootDir>/exporters/tokens/jest.config.ts',
+    '<rootDir>/apps/docsite/jest.config.ts',
   ],
 };
 

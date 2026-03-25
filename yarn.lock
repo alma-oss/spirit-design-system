@@ -135,12 +135,16 @@ __metadata:
     eslint-config-next: "catalog:lint"
     eslint-config-spirit: "workspace:^"
     globals: "catalog:lint"
+    jest: "catalog:test"
+    jest-config-spirit: "workspace:^"
     next: "catalog:frontend"
+    npm-run-all2: "catalog:script"
     postcss: "catalog:build"
     postcss-preset-env: "catalog:build"
     react: "catalog:frontend"
     react-dom: "catalog:frontend"
     sass-embedded: "catalog:build"
+    ts-node: "catalog:script"
     typescript: "catalog:types"
   languageName: unknown
   linkType: soft
