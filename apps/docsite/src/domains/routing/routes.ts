@@ -1,5 +1,9 @@
+import { componentNameToSlug } from '../components/utils/componentSlug';
+
+const componentsPath = '/components';
+
 export const routes = {
   home: '/',
-  components: '/components',
-  component: (componentName: string) => `/components/${componentName.toLowerCase()}`,
+  components: componentsPath,
+  component: (componentName: string) => `${componentsPath}/${componentNameToSlug(componentName)}`,
 };
