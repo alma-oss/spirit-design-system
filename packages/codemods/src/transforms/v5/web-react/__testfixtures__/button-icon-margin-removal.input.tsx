@@ -13,6 +13,10 @@ export const MyComponent = () => (
       Menu
     </Button>
     <Button>
+      <Icon name="hamburger" marginRight={'space-600'} />
+      Menu
+    </Button>
+    <Button>
       <Icon name="hamburger" marginLeft="space-400" />
       Menu
     </Button>

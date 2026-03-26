@@ -16,6 +16,10 @@ export const MyComponent = () => (
       <Icon name="hamburger" />
       Menu
     </Button>
+    <Button spacing="space-600">
+      <Icon name="hamburger" />
+      Menu
+    </Button>
     <Button>
       <Icon name="hamburger" />
       Menu
