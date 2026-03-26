@@ -1,5 +1,3 @@
-// Because there is no `dist` directory during the CI run
-
 import { type StoryFn } from '@storybook/react';
 import React from 'react';
 import { Link } from '../../Link';

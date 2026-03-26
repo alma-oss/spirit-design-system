@@ -11,6 +11,10 @@
     },
     "types": {
       "dependsOn": ["@alma-oss/spirit-design-tokens:build"]
+    },
+    "lint": {
+      "cache": true,
+      "dependsOn": ["@alma-oss/spirit-icons:build", "@alma-oss/spirit-design-tokens:build"]
     }
   }
 }
