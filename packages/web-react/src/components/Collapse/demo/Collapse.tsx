@@ -1,4 +1,3 @@
-// Because there is no `dist` directory during the CI run
 /* eslint-disable react-refresh/only-export-components -- Demo file exports constants alongside components */
 import { type StoryFn } from '@storybook/react';
 import React from 'react';

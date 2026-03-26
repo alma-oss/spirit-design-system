@@ -29,6 +29,7 @@ export default [
       'static',
 
       // Skip packages that don’t need linting from root
+      'apps/docsite',
       'examples/*',
       'exporters/js',
       'exporters/scss',

@@ -23,6 +23,7 @@ export default [
       '**/build/**',
       '**/.next/**',
       '**/.coverage/**',
+      'next-env.d.ts',
 
       // # Highly recommended to re-include JavaScript dotfiles to lint them
       // # (This will cause .*rc.js to be linted by ESLint 🤘)
