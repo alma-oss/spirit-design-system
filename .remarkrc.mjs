@@ -44,6 +44,7 @@ export default {
           '^spirit-[a-z-]+',
           '`[^`]+`',
           '[a-z-]+-config-spirit',
+          '^use[A-Z]\\w+',
         ],
       },
     ],
