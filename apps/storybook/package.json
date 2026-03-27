@@ -10,13 +10,16 @@
     "directory": "apps/storybook"
   },
   "scripts": {
+    "prestart": "yarn workspace @alma-oss/spirit-icons run build",
     "start": "storybook dev --config-dir ./ --port 6006 --no-open",
+    "prebuild": "yarn workspace @alma-oss/spirit-icons run build",
     "build": "storybook build --config-dir ./ --output-dir ./build --stats-json"
   },
   "devDependencies": {
     "@alma-oss/spirit-design-tokens": "workspace:^",
     "@alma-oss/spirit-icons": "workspace:^",
     "@alma-oss/spirit-web-react": "workspace:^",
+    "@almacareer/cyborg-design-tokens": "catalog:frontend",
     "@babel/core": "catalog:build",
     "@storybook/addon-a11y": "catalog:storybook",
     "@storybook/addon-docs": "catalog:storybook",
@@ -27,6 +30,7 @@
     "postcss": "catalog:build",
     "react": "catalog:frontend",
     "react-dom": "catalog:frontend",
+    "sass-embedded": "catalog:build",
     "storybook": "catalog:storybook",
     "typescript": "catalog:types",
     "vite": "catalog:build"
