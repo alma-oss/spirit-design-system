@@ -8,19 +8,19 @@ applyTo: '**'
 
 Spirit Design System is an open-source design system developed by Alma Career (formerly LMC). It's a comprehensive monorepo containing React components, vanilla JS/CSS implementations, design tokens, icons, and tooling.
 
-## Architecture & Technologies
+### Architecture & Technologies
 
-### Core Technologies
+#### Core Technologies
 
 - **TypeScript** - Primary language for all JavaScript/React code
-- **React 19+** - Component library implementation with Next.js support
+- **React** - Component library implementation with Next.js support
 - **SCSS/Sass** - Styling with design token integration
-- **Node.js 20+** - Build tooling and development environment
+- **Node.js** - Build tooling and development environment
 - **Lerna** - Monorepo management and publishing (legacy; being phased out in favor of Nx)
 - **Yarn Workspaces** - Dependency management
 - **Nx** - Build system and task orchestration (new standard for builds and task running)
 
-### Package Structure
+#### Package Structure
 
 ```
 packages/
@@ -33,304 +33,60 @@ packages/
 └── web-react/          # React components library
 ```
 
-## Design System Principles
+## Code Review Instructions
 
-### Component Naming & Organization
+Frame findings constructively. Assume the author made a reasonable choice until proven otherwise. Use "consider" for suggestions, ask before asserting when intent is ambiguous, and lead with the fix rather than the fault. The goal is to make the code better, not to catalog what's wrong.
 
-- **BEM/SUIT CSS methodology** for CSS classes (`.Component`, `.Component--modifier`, `.Component__element`)
-- **PascalCase** for React components (`Button`, `CardHeader`, `NavigationLink`)
-- **Atomic design** structure (atoms, molecules, organisms)
-- **Semantic versioning** with careful breaking change management
+Use [Conventional Comments](https://conventionalcomments.org/) for all findings.
 
-### Styling Architecture
+### Finding Format
 
-- **Design tokens** drive all styling decisions
-- **CSS Custom Properties** for theme switching
-- **Utility classes** for spacing, typography, colors
-- **Component-scoped styles** with consistent naming
-- **Responsive design** with mobile-first approach
+```markdown
+{label} ({decorations}): {subject}
 
-### TypeScript Patterns
-
-- **Strict type safety** with comprehensive interfaces
-- **Generic components** with proper constraint typing
-- **Design token-generated types** for consistency
-- **Prop spreading** with transfer props pattern
-- **Style props** integration for consistent styling API
-
-## Component Development Guidelines
-
-### React Component Structure
-
-```typescript
-// types.ts
-// Component props interface
-export interface ButtonProps {
-  color?: ButtonColorType;
-  size?: SizeType;
-  isDisabled?: boolean;
-  // ... other props
-}
-
-// Main component interface with style props
-export interface SpiritButtonProps<T extends ElementType = 'button'>
-  extends ButtonProps,
-    SpiritPolymorphicElementProps<T, ButtonProps>,
-    StyleProps,
-    TransferProps {}
-
-// Button.tsx
-// Component implementation
-const Button = <T extends ElementType = 'button'>(props: SpiritButtonProps<T>) => {
-  const {
-    elementType: ElementTag = 'button',
-    color = 'primary',
-    size = 'medium',
-    children,
-    ...restProps
-  } = props;
-
-  const buttonProps = useButtonStyleProps(props);
-
-  return (
-    <ElementTag {...buttonProps}>
-      {children}
-    </ElementTag>
-  );
-};
-
-Button.spiritComponent = 'Button';
-export default Button;
+<details>
+  <summary>Fix: Concrete fix with code example.</summary>
+  Why: What is wrong and why it matters.
+</details>
 ```
 
-### Style Props Pattern
+`question` findings may omit the `Fix:` field because they seek clarification rather than prescribe a change.
 
-```typescript
-// useButtonStyleProps.ts
-// Use style props hooks for consistent styling
-const useButtonStyleProps = (props: SpiritButtonProps) => {
-  const { styleProps, props: otherProps } = useStyleProps(props);
+**Labels:** issue, suggestion, todo, question, thought, note, chore, praise
+**Decorations (required):** Always include at least one decoration. Use one or more of: `(blocking)` — must fix before merge; `(non-blocking)` — default and must be used when no other decoration applies; `(security)` — security concern; `(if-minor)` — fix only if change is small. Combine as needed, e.g. `(blocking, security)`.
+**Confidence rule:** Only report actionable labels (issue, suggestion, todo, chore) when highly confident. Use softer labels (question, thought, note) when uncertain. Prefer `question` over `issue` when you aren't sure whether code is intentional — ask for the rationale rather than flagging it as a defect. Never use `nitpick`.
 
-  const buttonClass = useClassNamePrefix('Button');
-  const buttonBlockClass = `${buttonClass}--block`;
-  const buttonDisabledClass = `${buttonClass}--disabled`;
-  const buttonLoadingClass = `${buttonClass}--loading`;
-  const buttonSymmetricalClass = `${buttonClass}--symmetrical`;
+### What NOT to Report
 
-  const classProps = classNames(
-    buttonClass,
-    getButtonColorClassname(buttonClass, color as ButtonColor<C>),
-    getButtonSizeClassname(buttonClass, size as ButtonSize<S>),
-    {
-      [buttonBlockClass]: isBlock && !isSymmetrical,
-      [buttonDisabledClass]: isDisabled || isLoading,
-      [buttonLoadingClass]: isLoading,
-      [buttonSymmetricalClass]: isSymmetrical && !isBlock,
-    },
-  );
+- Pre-existing issues in unchanged code (unless critical security)
+- Linter-catchable items: formatting, import order, unused variables
+- Style preferences not codified in project conventions
+- Code outside the diff scope
+- Intentional lint suppressions with explanatory comments
+- Patterns consistent with the rest of the codebase
+- Hypothetical issues without evidence ("could be a problem if...")
+- Ambiguous intent flagged as defects — when unsure whether code is intentional, use `question` to ask for clarification rather than reporting it as an `issue`
 
-  return {
-    ...otherProps,
-    ...transferProps(otherProps),
-    ...styleProps,
-    ...buttonStyleProps,
-  };
-};
-```
+### Review Dimensions
 
-### SCSS Component Structure
+Analyze all changed code across these areas:
 
-```scss
-// Component file: Button/_Button.scss
-@use 'sass:map';
-@use '@tokens' as tokens;
-@use '../../tools/spacing';
-@use '../../tools/typography';
+1. **Security** — Hardcoded credentials, SQL injection, XSS, path traversal, CSRF, auth bypasses, secrets in logs, insecure dependencies
+2. **Bugs** — Logic errors, null/undefined gaps, race conditions, resource leaks, off-by-one, boundary errors, stale closures
+3. **Silent Failures** — Empty catch blocks, swallowed errors, broad `catch(e: any)`, missing error logging, unhandled promise rejections, default fallbacks hiding bugs
+4. **Tests** — Missing coverage for critical paths, edge cases, error branches; high regression risk without tests
+5. **Types** — `any` abuse, stringly-typed APIs, exposed mutable internals, god objects (10+ fields), types that allow invalid states
+6. **Simplification** — Deep nesting (>3 levels), duplicate logic, poor naming, unnecessary abstractions, over-engineering
+7. **Guidelines** — Deviations from project conventions in [CLAUDE.md](../CLAUDE.md) or project config (imports, naming, error handling, file structure)
 
-.Button {
-  // Base styles using design tokens
-  @include typography.generate-font-classes(tokens.$body-medium-medium);
+### AI-Generated Code
 
-  padding: tokens.$space-300 tokens.$space-400;
-  border-radius: tokens.$radius-300;
-  border: tokens.$border-width-100 solid transparent;
+When reviewing AI-generated changes, additionally check for:
 
-  // State modifiers
-  @media (hover: hover) {
-    &:hover {
-      // Hover styles
-    }
-  }
-
-  &:focus-visible {
-    // Focus styles
-  }
-
-  &:disabled {
-    // Disabled styles
-  }
-}
-```
-
-## Testing Guidelines
-
-### Component Testing
-
-- **Unit tests** for component logic and props handling
-- **Snapshot tests** for component rendering
-- **Accessibility tests** using jest-axe
-- **Visual regression tests** with Playwright
-- **Interaction tests** for user behaviors
-
-### Test Structure
-
-```typescript
-import { render, screen } from '@testing-library/react';
-import { Button } from '../Button';
-
-describe('Button', () => {
-  it('should render with default props', () => {
-    render(<Button>Click me</Button>);
-
-    const button = screen.getByRole('button', { name: 'Click me' });
-
-    expect(button).toBeInTheDocument();
-    expect(button).toHaveClass('Button');
-  });
-
-  it('should apply correct size class', () => {
-    render(<Button size="small">Small button</Button>);
-
-    const button = screen.getByRole('button');
-    expect(button).toHaveClass('Button--small');
-  });
-});
-```
-
-## File Organization Patterns
-
-### Web Component Directory Structure
-
-```
-Component/
-├── _Component.scss        # Main component styles
-├── _theme.scss            # Component theme
-├── index.html             # Component demo
-├── index.scss             # Public exports
-└── README.md              # Component documentation
-```
-
-### Web React Component Directory Structure
-
-```
-Component/
-├── index.ts                 # Public exports
-├── Component.tsx           # Main component
-├── demo/                   # Demo component examples
-│   ├── index.tsx           # Export demo components
-│   ├── ComponentDefault.tsx    # Default demo
-│   └── ComponentDisabled.tsx   # Disabled state demo
-├── stories                 # Public stories
-│   ├── index.tsx           # Storybook stories
-│   └── Component.stories.tsx    # Example demo component
-├── __tests__/
-│   ├── Component.test.tsx  # Unit tests
-│   └── Component.test.tsx.snap # Snapshots
-├── useComponentStyleProps.ts # Style props hook
-├── constants.ts            # Component constants
-├── types.ts                # Component types
-└── README.md              # Component documentation
-```
-
-### Package Exports
-
-```typescript
-// Always use 'use client' directive for React components
-'use client';
-
-// Export pattern for components
-export { default as Button } from './Button';
-export { default as ButtonGroup } from './ButtonGroup';
-export * from './useButtonStyleProps';
-export * from './constants';
-
-// Re-export types
-export type { ButtonProps, SpiritButtonProps } from './types';
-```
-
-## Development Workflow
-
-### Branch Naming
-
-- `feature/DS-123-add-new-button-variant`
-- `fix/DS-456-button-accessibility-issue`
-- `docs/DS-789-update-component-documentation`
-
-### Commit Messages
-
-Follow conventional commits with Spirit-specific scopes:
-
-```
-feat(web-react): add new Button variant for destructive actions
-fix(design-tokens): update primary color token values
-docs(web): add accessibility guidelines to README
-```
-
-### Code Generation Patterns
-
-When generating new components:
-
-1. **Start with the web package**
-
-- **Create the main component directory** with necessary files
-- **Add SCSS files** with design token references
-- **Create demo HTML files** for visual testing
-- **Add README.md** with component documentation
-
-2. **Move to the web-react package**
-
-- **Create the main component file** with proper TypeScript interfaces
-- **Add style props hook** for consistent styling API
-- **Create SCSS file** with design token integration
-- **Add comprehensive tests** including accessibility
-- **Create Storybook stories** for documentation
-- **Update component exports** in index.ts files
-- **Add README.md** with component documentation
-
-## Migration & Compatibility
-
-### Breaking Changes
-
-- Provide **codemods** for breaking changes where possible
-- Update **MIGRATION.md** with upgrade paths
-- Use **deprecation warnings** before removal
-- Maintain **LTS versions** with security patches
-
-### Backward Compatibility
-
-- Use **feature flags** for experimental features
-- Provide **escape hatches** (UNSAFE_className, UNSAFE_style)
-- Maintain **consistent APIs** across versions
-- Support **multiple React versions** when possible
-
-## Build & Release
-
-### Build Process
-
-- **Design tokens** must be built first
-- **CSS compilation** with Sass and PostCSS
-- **TypeScript compilation** for multiple module formats
-- **Bundle analysis** for size optimization
-- **Type checking** across all packages
-
-### Release Strategy
-
-- **Semantic versioning** with automated changelog
-- **Coordinated releases** across all packages
-- **Pre-release testing** in staging environments
-- **Documentation updates** with each release
-
-## AI Assistant Guidelines
+- Behavioral regressions — subtle changes to existing behavior
+- Unvalidated inputs the AI trusts
+- Unnecessary complexity or gratuitous abstractions
+- Accidental architecture drift
 
 ### When Suggesting Code
 
@@ -344,18 +100,6 @@ When generating new components:
 8. **Include relevant imports** and exports
 9. **Add JSDoc comments** for complex logic
 10. **Consider performance implications** of implementations
-
-### When Creating Components
-
-1. **Start with the coding component** using HTML and SCSS
-2. **Continue with the interface design** and prop definitions
-3. **Use existing components as reference** for patterns
-4. **Implement proper polymorphic behavior** when needed
-5. **Add comprehensive TypeScript types** including generics
-6. **Include style props integration** for consistency
-7. **Consider theme compatibility** across default/on brand themes
-8. **Add proper forwarding** of refs and event handlers
-9. **Include loading and error states** when applicable
 
 ### Code Quality Standards
 
