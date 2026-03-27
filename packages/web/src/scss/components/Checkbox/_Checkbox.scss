@@ -95,6 +95,11 @@ $_field-name: 'Checkbox';
 
 :is(.Checkbox--disabled, .Checkbox.is-disabled) {
     @include form-fields-tools.inline-field-root-disabled();
+
+    // @deprecated This style will be removed in the next major version.
+    // Migration: delete mixin `form-fields-tools.input-details-text-disabled` and generate class `InputDetails--disabled`.
+    // @see https://jira.almacareer.tech/browse/DS-2496
+    @include form-fields-tools.input-details-text-disabled();
 }
 
 :is(.Checkbox--disabled, .Checkbox.is-disabled) .Checkbox__label {
