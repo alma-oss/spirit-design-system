@@ -1,0 +1,21 @@
+// 1. Make the text selectable and allow links to be clickable in the form field details.
+@use '@tokens' as tokens;
+@use '../../tools/typography';
+@use 'theme';
+
+.InputDetails {
+    @include typography.generate(theme.$typography);
+
+    position: relative; // 1.
+    z-index: 1; // 1.
+    display: flex;
+    flex-direction: column;
+    gap: theme.$gap;
+    align-items: flex-start;
+    margin-top: theme.$margin-top;
+
+    // @deprecated This custom property will be removed in the next major version.
+    // Migration: delete custom property `var(--#{tokens.$css-variable-prefix}input-details-text-color)` and create new disabled modifier.
+    // @see https://jira.almacareer.tech/browse/DS-2496
+    color: var(--#{tokens.$css-variable-prefix}input-details-text-color, theme.$color);
+}

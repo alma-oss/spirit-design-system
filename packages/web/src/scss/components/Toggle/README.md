@@ -195,6 +195,94 @@ To render validation text as a list, use `<ul>` element inside of `<div>`.
 </div>
 ```
 
+## Consent with Details
+
+For consent scenarios where users need access to terms and conditions or privacy policies, use the [`InputDetails`][readme-input-details]
+class to render supplementary content (such as modal triggers) below the label.
+
+### Emphasized Label
+
+```html
+<div class="Toggle Toggle--inputPositionEnd">
+  <div class="Toggle__text">
+    <label class="Toggle__label Toggle__label--required" for="toggle-consent-emphasized">
+      <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
+    </label>
+    <div id="toggle-consent-emphasized-details" class="InputDetails">
+      <button
+        type="button"
+        class="link-underlined link-inherit"
+        data-spirit-toggle="modal"
+        data-spirit-target="#terms-modal"
+      >
+        See full terms and conditions
+      </button>
+    </div>
+  </div>
+  <input
+    type="checkbox"
+    id="toggle-consent-emphasized"
+    class="Toggle__input"
+    name="consent"
+    required
+    aria-details="toggle-consent-emphasized-details"
+  />
+</div>
+<!-- Modal definitions -->
+```
+
+### Full Example
+
+```html
+<div class="Toggle Toggle--inputPositionEnd Toggle--danger">
+  <div class="Toggle__text">
+    <label class="Toggle__label Toggle__label--required" for="toggle-consent-full">
+      I agree to the terms and privacy policy
+    </label>
+    <div id="toggle-consent-full-details" class="InputDetails">
+      <button
+        type="button"
+        class="link-underlined link-inherit"
+        data-spirit-toggle="modal"
+        data-spirit-target="#terms-modal"
+      >
+        See full terms and conditions
+      </button>
+      <button
+        type="button"
+        class="link-underlined link-inherit"
+        data-spirit-toggle="modal"
+        data-spirit-target="#privacy-modal"
+      >
+        See privacy policy
+      </button>
+    </div>
+    <div class="Toggle__helperText" id="toggle-consent-full-helper-text">
+      Please read the documents carefully before agreeing
+    </div>
+    <div class="Toggle__validationText" id="toggle-consent-full-validation-text">You must agree to continue</div>
+  </div>
+  <input
+    type="checkbox"
+    id="toggle-consent-full"
+    class="Toggle__input"
+    name="consent"
+    required
+    aria-describedby="toggle-consent-full-helper-text toggle-consent-full-validation-text"
+    aria-details="toggle-consent-full-details"
+  />
+</div>
+<!-- Modal definitions -->
+```
+
+## Accessibility
+
+- The details content is linked to the toggle via the `aria-details` attribute
+- Use `<button>` elements with link styling (e.g., `link-underlined`, `link-inherit`), NOT `<a>` tags, for modal triggers
+- The `aria-details` attribute is separate from `aria-describedby`:
+  - `aria-describedby` announces essential information immediately (helper text, validation messages)
+  - `aria-details` points to supplementary content that users can explore when needed (terms links, additional info)
+
 ## Disabled State
 
 On top of adding the `disabled` attribute to the input, disabled Toggle needs to
@@ -241,3 +329,4 @@ Use responsive breakpoint modifiers to change input position at different screen
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [mdn-checkbox]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
 [prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[readme-input-details]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputDetails/README.md

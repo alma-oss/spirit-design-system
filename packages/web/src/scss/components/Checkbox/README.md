@@ -112,6 +112,105 @@ See Validation state [dictionary][dictionary-validation].
 </div>
 ```
 
+## Consent Checkbox with Details
+
+For consent scenarios where users need access to terms and conditions or privacy policies, use the [`InputDetails`][readme-input-details]
+element with modal triggers.
+
+### Emphasized Label
+
+Use emphasized (bold) label text to make the agreement statement more prominent:
+
+```html
+<div class="Checkbox Checkbox--inputPositionStart">
+  <input
+    type="checkbox"
+    id="consent-emphasized-label"
+    class="Checkbox__input"
+    name="consentEmphasizedLabel"
+    aria-details="consent-emphasized-label-details"
+    required
+  />
+  <div class="Checkbox__text">
+    <label class="Checkbox__label Checkbox__label--required" for="consent-emphasized-label">
+      <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
+    </label>
+    <div id="consent-emphasized-label-details" class="InputDetails">
+      <button
+        type="button"
+        class="link-underlined link-inherit"
+        data-spirit-toggle="modal"
+        data-spirit-target="#terms-modal"
+        aria-controls="terms-modal"
+        aria-expanded="false"
+      >
+        See full terms and conditions
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Modal definitions -->
+```
+
+### Full Example with Validation and Helper Text
+
+Complete example showing label, details with multiple links, helper text, and validation:
+
+```html
+<div class="Checkbox Checkbox--inputPositionStart Checkbox--danger">
+  <input
+    type="checkbox"
+    id="consent-full-example"
+    class="Checkbox__input"
+    name="consentFullExample"
+    aria-details="consent-full-example-details"
+    aria-describedby="consent-full-example-helper-text consent-full-example-validation-text"
+    required
+  />
+  <div class="Checkbox__text">
+    <label class="Checkbox__label Checkbox__label--required" for="consent-full-example">
+      I agree to the terms and privacy policy
+    </label>
+    <div id="consent-full-example-details" class="InputDetails">
+      <button
+        type="button"
+        class="link-underlined link-inherit"
+        data-spirit-toggle="modal"
+        data-spirit-target="#terms-modal"
+        aria-controls="terms-modal"
+        aria-expanded="false"
+      >
+        See full terms and conditions
+      </button>
+      <button
+        type="button"
+        class="link-underlined link-inherit"
+        data-spirit-toggle="modal"
+        data-spirit-target="#privacy-modal"
+        aria-controls="privacy-modal"
+        aria-expanded="false"
+      >
+        See privacy policy
+      </button>
+    </div>
+    <div class="Checkbox__helperText" id="consent-full-example-helper-text">
+      Please read the documents carefully before agreeing
+    </div>
+    <div class="Checkbox__validationText" id="consent-full-example-validation-text">You must agree to continue</div>
+  </div>
+</div>
+
+<!-- Modal definitions -->
+```
+
+## Accessibility
+
+- The details content is linked to the checkbox via the `aria-details` attribute
+- Use `<button>` elements with link styling (e.g., `link-underlined`, `link-inherit`), NOT `<a>` tags, for modal triggers
+- The `aria-details` attribute is separate from `aria-describedby`:
+  - `aria-describedby` announces essential information immediately (helper text, validation messages)
+  - `aria-details` points to supplementary content that users can explore when needed (terms links, additional info)
+
 ## Disabled State
 
 ```html
@@ -163,3 +262,4 @@ Use responsive breakpoint modifiers to change input position at different screen
 ```
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[readme-input-details]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputDetails/README.md
