@@ -10,10 +10,24 @@
       "dependsOn": ["^build"]
     },
     "types": {
-      "dependsOn": ["@alma-oss/spirit-design-tokens:build"]
+      "cache": true,
+      "dependsOn": ["@alma-oss/spirit-icons:build", "@alma-oss/spirit-design-tokens:build"]
     },
     "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "eslint ./",
+        "cwd": "{projectRoot}"
+      },
       "cache": true,
+      "dependsOn": ["@alma-oss/spirit-icons:build", "@alma-oss/spirit-design-tokens:build"]
+    },
+    "lint-fix": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "eslint ./ --fix",
+        "cwd": "{projectRoot}"
+      },
       "dependsOn": ["@alma-oss/spirit-icons:build", "@alma-oss/spirit-design-tokens:build"]
     }
   }
