@@ -75,7 +75,7 @@
     "eslint-plugin-prettier": "catalog:lint",
     "husky": "catalog:lint",
     "is-ci": "catalog:script",
-    "lerna": "patch:lerna@npm%3A9.0.3#~/.yarn/patches/lerna-npm-9.0.3-48cf5841a6.patch",
+    "lerna": "catalog:script",
     "lint-staged": "catalog:lint",
     "netlify-cli": "catalog:script",
     "npm-run-all2": "catalog:script",
