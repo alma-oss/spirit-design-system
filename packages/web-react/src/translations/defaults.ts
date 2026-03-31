@@ -21,6 +21,13 @@ export const defaultLabels = {
     previous: 'Previous',
     goToPage: 'Go to page',
   },
+  picker: {
+    add: 'Add',
+    removeAll: 'Remove all',
+    removeItemLabel: 'Remove {itemLabel}',
+    selectionAriaLabel: 'Selected {label}',
+    tagDescriptionText: 'Press Delete or Backspace to remove',
+  },
   textArea: {
     counter: {
       charactersEntered: '{count} characters entered',
