@@ -1,8 +1,6 @@
-diff --git a/dist/index.js b/dist/index.js
-index 0860a73516147cec14807f56e381583212c9ccb1..dfed4337662d67c9f563b37eb03c9ef9c8ce150a 100644
 --- a/dist/index.js
 +++ b/dist/index.js
-@@ -2224,6 +2224,48 @@ function diffSinceIn(committish, location, opts) {
+@@ -2228,6 +2228,47 @@
    return execSync2("git", args, opts);
  }
  var import_minimatch, import_path, import_slash, execSync2;
@@ -47,11 +45,10 @@ index 0860a73516147cec14807f56e381583212c9ccb1..dfed4337662d67c9f563b37eb03c9ef9
 +}
 +// === END YARN CATALOG RESOLUTION PATCH ===
 +
-+
  var init_make_diff_predicate = __esm({
    "libs/core/src/lib/collect-updates/make-diff-predicate.ts"() {
      "use strict";
-@@ -3261,6 +3303,7 @@ var init_create_project_graph_with_packages = __esm({
+@@ -3315,6 +3356,7 @@
      init_project_graph_with_packages();
      resolvePackage = (name, version, spec, location) => {
        spec = spec.replace(/^link:/, "file:");
@@ -59,7 +56,7 @@ index 0860a73516147cec14807f56e381583212c9ccb1..dfed4337662d67c9f563b37eb03c9ef9
        const isWorkspaceSpec = /^workspace:/.test(spec);
        let workspaceSpec;
        let workspaceAlias;
-@@ -6219,7 +6262,17 @@ async function npmPublish(pkg2, tarFilePath, options, conf, otpCache) {
+@@ -6359,7 +6401,17 @@
        manifestContent.publishConfig.tag = opts.defaultTag;
      }
      if (manifestContent.publishConfig) {
@@ -72,21 +69,13 @@ index 0860a73516147cec14807f56e381583212c9ccb1..dfed4337662d67c9f563b37eb03c9ef9
 +    { const _cdf = ['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'];
 +      for (const _f of _cdf) { if (manifestContent[_f]) {
 +        for (const [_d, _s] of Object.entries(manifestContent[_f])) {
-+          if (/^catalog:/.test(_s)) { const _r = _resolveCatalogSpec(_d, _s, import_path14.default.dirname(pkg2.location)); if (_r !== _s) manifestContent[_f][_d] = _r; }
++          if (/^catalog:/.test(_s)) { const _r = _resolveCatalogSpec(_d, _s, import_path15.default.dirname(pkg2.location)); if (_r !== _s) manifestContent[_f][_d] = _r; }
 +        }
 +      } }
      }
      await oidc({
        packageName: pkg2.name,
-@@ -7503,6 +7556,7 @@ var init_package_graph = __esm({
-           Object.keys(graphDependencies).forEach((depName) => {
-             const depNode = this.get(depName);
-             let spec = graphDependencies[depName].replace(/^link:/, "file:");
-+            if (/^catalog:/.test(spec)) { spec = _resolveCatalogSpec(depName, spec, currentNode.location); }
-             const isWorkspaceSpec = /^workspace:/.test(spec);
-             let fullWorkspaceSpec;
-             let workspaceAlias;
-@@ -11466,6 +11520,42 @@ var require_src3 = __commonJS({
+@@ -10905,6 +10957,42 @@
          }
          await this.resolveLocalDependencyLinks();
          await this.resolveWorkspaceDependencyLinks();
