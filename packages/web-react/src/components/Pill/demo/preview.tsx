@@ -10,6 +10,9 @@ export const Preview = () => (
     <DocsSection title="Colors">
       <PillColors />
     </DocsSection>
+    <DocsSection title="Subtle Colors">
+      <PillColors isSubtle />
+    </DocsSection>
     <DocsSection title="Long Text">
       <PillLongText />
     </DocsSection>
