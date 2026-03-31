@@ -10,6 +10,8 @@ export type PillColor<C> = EmotionColorNamesType<C> | PillColorsExtendedNamesTyp
 export interface PillProps<C = void> extends ChildrenProps, StyleProps {
   /** The color of the pill. */
   color?: PillColor<C>;
+  /** Whether the pill is in subtle color scheme. */
+  isSubtle?: boolean;
 }
 
 /** ===== PUBLIC API ===== */
