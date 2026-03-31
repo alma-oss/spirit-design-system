@@ -31,5 +31,8 @@
       "cache": true
     }
   },
-  "neverConnectToCloud": true
+  "neverConnectToCloud": true,
+  "tui": {
+    "enabled": false
+  }
 }
