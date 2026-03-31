@@ -22,4 +22,6 @@ export type SpiritPillProps<E extends ElementType = 'span', C = void> = AriaPill
   PillProps & {
     /** The color of the pill. */
     color?: PillColor<C>;
+    /** Whether the pill is in subtle color scheme. */
+    isSubtle?: boolean;
   };

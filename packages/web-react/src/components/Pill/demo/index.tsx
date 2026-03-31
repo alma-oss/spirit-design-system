@@ -9,6 +9,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
     <DocsSection title="Colors">
       <PillColors />
     </DocsSection>
+    <DocsSection title="Subtle Colors">
+      <PillColors isSubtle />
+    </DocsSection>
     <DocsSection title="Long Text">
       <PillLongText />
     </DocsSection>

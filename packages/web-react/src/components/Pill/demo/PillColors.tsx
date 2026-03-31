@@ -2,7 +2,11 @@ import React from 'react';
 import { DemoEmotionColors } from '../../../../docs';
 import { Pill, PillColorsExtended } from '..';
 
-const PillColors = () => {
+interface PillColorsProps {
+  isSubtle?: boolean;
+}
+
+const PillColors = ({ isSubtle = false }: PillColorsProps) => {
   const pillColors = Object.values(PillColorsExtended);
   const emotionColors = Object.values(DemoEmotionColors);
   const colors = [...pillColors, ...emotionColors];
@@ -10,7 +14,7 @@ const PillColors = () => {
   return (
     <>
       {colors.map((color) => (
-        <Pill key={color} color={color}>
+        <Pill key={color} color={color} isSubtle={isSubtle}>
           3
         </Pill>
       ))}

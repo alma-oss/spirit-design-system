@@ -1,10 +1,9 @@
-import { emotionColors } from '@alma-oss/spirit-design-tokens';
 import classNames from 'classnames';
 import { type ElementType } from 'react';
 import { Intensity } from '../../constants';
-import { ColorPrefixes } from '../../constants/colors';
 import { useClassNamePrefix } from '../../hooks';
 import { type SpiritTagProps } from '../../types';
+import { createScopedColorTokenName } from '../../utils';
 
 export interface TagStyles {
   /** className props */
@@ -18,16 +17,26 @@ const getColorClasses = (color: string | undefined, isSubtle: boolean | undefine
     return {};
   }
 
-  const isEmotionColor = Object.keys(emotionColors).includes(color);
-  const prefix = isEmotionColor ? `${ColorPrefixes.EMOTION}-` : '';
   const borderIntensity = isSubtle ? Intensity.SUBTLE : Intensity.BASIC;
   const backgroundIntensity = isSubtle ? Intensity.SUBTLE : Intensity.BASIC;
   const textIntensity = isSubtle ? Intensity.BASIC : Intensity.SUBTLE;
+  const borderColor = createScopedColorTokenName({
+    color,
+    intensity: borderIntensity,
+  });
+  const backgroundColor = createScopedColorTokenName({
+    color,
+    intensity: backgroundIntensity,
+  });
+  const textColor = createScopedColorTokenName({
+    color,
+    intensity: textIntensity,
+  });
 
   return {
-    [`border-${prefix}${color}-${borderIntensity}`]: true,
-    [`bg-${prefix}${color}-${backgroundIntensity}`]: true,
-    [`text-${prefix}${color}-${textIntensity}`]: true,
+    [`border-${borderColor}`]: true,
+    [`bg-${backgroundColor}`]: true,
+    [`text-${textColor}`]: true,
   };
 };
 
