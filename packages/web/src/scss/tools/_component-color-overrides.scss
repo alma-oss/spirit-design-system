@@ -1,0 +1,106 @@
+// Auto-discover `component-{name}-*-{suffix}` tokens and emit modifier classes
+// that override `--{prefix}local-*` CSS variables.
+//
+// Supports plain suffixes (`-content`, `-background`) and basic/subtle pairs
+// (`-content-basic` / `-content-subtle`) for the same property keys.
+
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
+@use '@tokens' as tokens;
+@use 'string' as spirit-string;
+
+$_category-prefixes: ('emotion-', 'accent-');
+
+// Remove the first matching category prefix from the infix.
+//
+// Example:
+// -strip-category-prefix('emotion-success') returns 'success'
+// -strip-category-prefix('primary') returns 'primary'
+@function -strip-category-prefix($infix) {
+    @each $category-prefix in $_category-prefixes {
+        $stripped: spirit-string.remove-prefix($infix, $category-prefix);
+
+        @if $stripped != $infix {
+            @return $stripped;
+        }
+    }
+
+    @return $infix;
+}
+
+// Check whether $string ends with $suffix.
+@function -ends-with($string, $suffix) {
+    @return string.length($suffix) == 0 or string.slice($string, string.length($string) - string.length($suffix) + 1) ==
+        $suffix;
+}
+
+// Mixin to auto-discover `component-{name}-*` tokens and emit modifier classes
+// that set `--spirit-local-*` CSS variables for each discovered property.
+//
+// Selectors always repeat the block class for specificity (e.g. `.Button.Button--primary`).
+// Subtle tokens (`-*-subtle`) produce an additional compound selector
+// (e.g. `.Pill.Pill--success.Pill--subtle`).
+//
+// Parameters are:
+// * $class-name: PascalCase component name (e.g. Pill, UNSTABLE_Foo)
+// * $property-map: token suffix key to local CSS property name,
+//   e.g. (content: color, background: background-color, border: border-color)
+// * $subtle-modifier: BEM modifier appended for subtle tokens (default: 'subtle')
+@mixin generate($class-name, $property-map, $subtle-modifier: 'subtle') {
+    $base-class-name: spirit-string.remove-prefix($class-name, 'UNSTABLE_');
+    $component-kebab: spirit-string.convert-pascal-case-to-kebab-case($base-class-name);
+    $full-prefix: 'component-#{$component-kebab}-';
+    $overrides: ();
+    $all-token-vars: meta.module-variables(tokens);
+
+    @each $var-name, $var-value in $all-token-vars {
+        $resolved-name: '#{$var-name}';
+
+        @if string.index($resolved-name, $full-prefix) == 1 {
+            @each $token-key, $css-property in $property-map {
+                $suffix: null;
+                $is-subtle: false;
+
+                @if -ends-with($resolved-name, '-#{$token-key}-subtle') {
+                    $suffix: '-#{$token-key}-subtle';
+                    $is-subtle: true;
+                } @else if -ends-with($resolved-name, '-#{$token-key}-basic') {
+                    $suffix: '-#{$token-key}-basic';
+                } @else if -ends-with($resolved-name, '-#{$token-key}') {
+                    $suffix: '-#{$token-key}';
+                }
+
+                @if $suffix {
+                    $infix: string.slice(
+                        $resolved-name,
+                        string.length($full-prefix) + 1,
+                        string.length($resolved-name) - string.length($suffix)
+                    );
+                    $modifier: -strip-category-prefix($infix);
+                    $by-subtle: map.get($overrides, $modifier) or ();
+                    $variant-props: map.get($by-subtle, $is-subtle) or ();
+                    $variant-props: map.set($variant-props, $css-property, $var-value);
+                    $by-subtle: map.set($by-subtle, $is-subtle, $variant-props);
+                    $overrides: map.set($overrides, $modifier, $by-subtle);
+                }
+            }
+        }
+    }
+
+    @each $modifier, $by-subtle in $overrides {
+        @each $is-subtle, $properties in $by-subtle {
+            $variant-selector: '.#{$class-name}.#{$class-name}--#{$modifier}';
+
+            @if $is-subtle {
+                $variant-selector: '#{$variant-selector}.#{$class-name}--#{$subtle-modifier}';
+            }
+
+            #{$variant-selector} {
+                @each $css-property, $value in $properties {
+                    --#{tokens.$css-variable-prefix}local-#{$css-property}: #{$value};
+                }
+            }
+        }
+    }
+}
