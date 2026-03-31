@@ -1,3 +1,4 @@
+import { accentColors, emotionColors } from '@alma-oss/spirit-design-tokens';
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
@@ -9,6 +10,7 @@ import {
   BorderWidths,
   TextColors,
 } from '../../../constants';
+import { type ColorSchemeType } from '../../../types';
 import {
   getAccentBackgroundColors,
   getAccentBorderColors,
@@ -19,6 +21,22 @@ import {
 } from '../../../utils';
 import Box from '../Box';
 import ReadMe from '../README.md?raw';
+
+const colorSchemeSurfaceIntensities = ['basic', 'subtle'] as const;
+
+const boxColorSchemeOptions: ColorSchemeType[] = [
+  'disabled',
+  'neutral-basic',
+  'neutral-subtle',
+  'selected-basic',
+  'selected-subtle',
+  ...(Object.keys(accentColors) as Array<keyof typeof accentColors>).flatMap((key) =>
+    colorSchemeSurfaceIntensities.map((intensity) => `accent-${key}-${intensity}` as ColorSchemeType),
+  ),
+  ...(Object.keys(emotionColors) as Array<keyof typeof emotionColors>).flatMap((key) =>
+    colorSchemeSurfaceIntensities.map((intensity) => `emotion-${key}-${intensity}` as ColorSchemeType),
+  ),
+];
 
 const accentTextColorsObject = getAccentTextColors();
 const emotionTextColorsObject = getEmotionTextColors();
@@ -170,6 +188,15 @@ const meta: Meta<typeof Box> = {
         },
       },
     },
+    colorScheme: {
+      control: 'select',
+      options: [undefined, ...boxColorSchemeOptions],
+      table: {
+        type: {
+          summary: 'ColorSchemeType',
+        },
+      },
+    },
   },
   args: {
     elementType: 'div',
@@ -185,6 +212,7 @@ const meta: Meta<typeof Box> = {
     backgroundColor: undefined,
     backgroundGradient: undefined,
     textColor: undefined,
+    colorScheme: undefined,
   },
 };
 

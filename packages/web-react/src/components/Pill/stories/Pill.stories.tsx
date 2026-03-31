@@ -24,6 +24,12 @@ const meta: Meta<typeof Pill> = {
         defaultValue: { summary: 'selected' },
       },
     },
+    isSubtle: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
     elementType: {
       control: 'text',
       table: {
@@ -35,6 +41,7 @@ const meta: Meta<typeof Pill> = {
     children: '3',
     color: PillColorsExtended.SELECTED,
     elementType: 'span',
+    isSubtle: false,
   },
 };
 

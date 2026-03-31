@@ -13,8 +13,8 @@ const ControlButtonDisabled = () => (
       elementType={Flex}
       alignmentX={{ mobile: 'center', tablet: 'left' }}
       alignmentY="center"
+      colorScheme="disabled"
       padding="space-800"
-      UNSAFE_className="color-scheme-on-disabled"
     >
       <ControlButton isSymmetrical isDisabled aria-label="Previous">
         <Icon name="chevron-left" />
