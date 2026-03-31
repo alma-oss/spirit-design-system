@@ -29,7 +29,7 @@ It is a standalone component, but most often it is used in combination with the 
     >
       <button
         type="button"
-        class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+        class="ControlButton ControlButton--large ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
         aria-label="Edit file name Document.pdf"
       >
         <svg class="Icon" width="16" height="16" aria-hidden="true">
@@ -38,7 +38,7 @@ It is a standalone component, but most often it is used in combination with the 
       </button>
       <button
         type="button"
-        class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+        class="ControlButton ControlButton--large ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
         aria-label="Remove file Document.pdf from list"
       >
         <svg class="Icon" width="16" height="16" aria-hidden="true">
@@ -161,7 +161,7 @@ Show upload progress using `HelperText` component:
   </div>
   <button
     type="button"
-    class="ControlButton ControlButton--large ControlButton--symmetrical ControlButton--disabled color-scheme-on-disabled dynamic-color-border dynamic-color-background-interactive"
+    class="ControlButton ControlButton--large ControlButton--symmetrical ControlButton--disabled ControlButton--hasBackground color-scheme-on-disabled dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
     aria-label="Remove file Document.pdf from list"
     disabled
   >

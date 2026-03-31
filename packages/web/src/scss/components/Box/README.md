@@ -6,6 +6,24 @@ The Box component is a simple container around content or other components.
 <div>Content</div>
 ```
 
+## Color Scheme
+
+Prefer color schemes for semantic surfaces and use direct utility classes as an override when needed.
+Combine `color-scheme-on-<scheme>` with `bg-color-scheme`, `text-color-scheme`, and (when using a border without an explicit token color) `border-color-scheme` so background, text, and border use the paired local tokens for that scheme.
+
+```html
+<div class="color-scheme-on-neutral-basic bg-color-scheme text-color-scheme">neutral-basic surface</div>
+<div class="color-scheme-on-selected-subtle bg-color-scheme text-color-scheme">selected-subtle surface</div>
+```
+
+```html
+<div
+  class="color-scheme-on-emotion-success-basic bg-color-scheme border-color-scheme border-solid border-100 text-color-scheme p-800"
+>
+  Border uses scheme color
+</div>
+```
+
 ## Border
 
 You can define border width, color, style using the utility classes `border-<width>`, `border-<color>`, `border-<style>`
