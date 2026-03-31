@@ -1,4 +1,6 @@
 @use '@themes' as themes;
+@use '../tools/color-scheme' as color-scheme;
 @use '../tools/themes' as themes-tools;
 
 @include themes-tools.generate($themes: themes.$themes);
+@include color-scheme.emit-color-scheme-classes(color-scheme.color-scheme-values());
