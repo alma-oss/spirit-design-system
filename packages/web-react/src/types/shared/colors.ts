@@ -4,7 +4,7 @@ import {
   type emotionColors,
   type textColors,
 } from '@alma-oss/spirit-design-tokens';
-import { type ColorPrefixes } from '../../constants';
+import { type ColorPrefixes, type ColorSchemeSurfaceIntensity } from '../../constants';
 
 export type ColorPrefixesType = (typeof ColorPrefixes)[keyof typeof ColorPrefixes];
 
@@ -46,3 +46,20 @@ export type AccentColorNamesType<C = undefined> = ComponentKeys<typeof accentCol
 export type ComponentButtonColorNamesType<C = undefined> = ComponentKeys<typeof componentColors.button, C>;
 export type EmotionColorNamesType<C = undefined> = ComponentKeys<typeof emotionColors, C>;
 export type TextColorNamesType<C = undefined> = ComponentKeys<typeof textColors, C>;
+
+type ColorSchemeSurfaceIntensityToken = (typeof ColorSchemeSurfaceIntensity)[keyof typeof ColorSchemeSurfaceIntensity];
+
+type ColorSchemeAccentSuffix<C = undefined> = {
+  [K in Extract<AccentColorNamesType<C>, string>]: `accent-${K}-${ColorSchemeSurfaceIntensityToken}`;
+}[Extract<AccentColorNamesType<C>, string>];
+
+type ColorSchemeEmotionSuffix<C = undefined> = {
+  [K in Extract<EmotionColorNamesType<C>, string>]: `emotion-${K}-${ColorSchemeSurfaceIntensityToken}`;
+}[Extract<EmotionColorNamesType<C>, string>];
+
+export type ColorSchemeType<C = undefined> =
+  | 'disabled'
+  | `neutral-${ColorSchemeSurfaceIntensityToken}`
+  | `selected-${ColorSchemeSurfaceIntensityToken}`
+  | ColorSchemeAccentSuffix<C>
+  | ColorSchemeEmotionSuffix<C>;

@@ -7,6 +7,7 @@ import BoxWithAll from './BoxWithAll';
 import BoxWithBackgroundColor from './BoxWithBackgroundColor';
 import BoxWithBackgroundGradient from './BoxWithBackgroundGradient';
 import BoxWithBorder from './BoxWithBorder';
+import BoxWithColorScheme from './BoxWithColorScheme';
 import BoxWithCustomPadding from './BoxWithCustomPadding';
 import BoxWithRadius from './BoxWithRadius';
 import BoxWithTextColor from './BoxWithTextColor';
@@ -15,6 +16,9 @@ export const Preview = () => (
   <StrictMode>
     <DocsSection title="Default">
       <BoxDefault />
+    </DocsSection>
+    <DocsSection title="With Color Scheme">
+      <BoxWithColorScheme />
     </DocsSection>
     <DocsSection title="With Custom Padding">
       <BoxWithCustomPadding />

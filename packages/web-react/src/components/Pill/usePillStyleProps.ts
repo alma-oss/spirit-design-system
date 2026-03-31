@@ -1,20 +1,30 @@
 import classNames from 'classnames';
 import { useClassNamePrefix } from '../../hooks';
 import { type PillProps } from '../../types';
+import { getColorSchemeClassName } from '../../utils';
+import { PillColorsExtended } from './constants';
 
-export interface PillStyles<C = void> {
+export interface PillStyles {
   /** className props */
   classProps: string;
   /** props to be passed to the element */
-  props: Partial<PillProps<C>>;
+  props: Partial<PillProps>;
 }
 
-export function usePillStyleProps<C = void>(props: PillProps<C>): PillStyles<C> {
-  const { color, ...modifiedProps } = props;
+export function usePillStyleProps(props: PillProps): PillStyles {
+  const { color, isSubtle, ...modifiedProps } = props;
+  const resolvedColor = color ?? PillColorsExtended.SELECTED;
 
   const pillClass = useClassNamePrefix('Pill');
-  const pillColorClass = `${pillClass}--${color}`;
-  const classProps = classNames(pillClass, { [pillColorClass]: color });
+  const pillColorClass = `${pillClass}--${resolvedColor}`;
+  const pillSubtleClass = `${pillClass}--subtle`;
+  const pillColorSchemeClass = getColorSchemeClassName({
+    color: resolvedColor as string,
+    isSubtle,
+  });
+  const classProps = classNames(pillClass, pillColorClass, pillColorSchemeClass, {
+    [pillSubtleClass]: isSubtle,
+  });
 
   return {
     classProps,
