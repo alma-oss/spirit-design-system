@@ -48,22 +48,22 @@
             </button>
             <form
               id="dynamic-color-playground-form"
-              class="docs-Stack docs-Stack--stretch p-800"
+              class="Stack Stack--hasSpacing p-800"
+              style="--stack-spacing: var(--spirit-space-900);"
               autocomplete="off"
               aria-labelledby="dynamic-color-playground-heading"
             >
               <h3 id="dynamic-color-playground-heading">Coefficient controls</h3>
               <div
-                class="Grid Grid--cols-1"
-                style="--grid-spacing-y: var(--spirit-space-900);"
+                class="Stack Stack--hasSpacing Stack--hasIntermediateDividers"
+                style="--stack-spacing: var(--spirit-space-900);"
               >
-                <fieldset class="FieldGroup FieldGroup--fluid">
-                  <legend class="accessibility-hidden">Background state: hover</legend>
+                <fieldset class="Stack Stack--hasSpacing border-0 p-0">
+                  <legend class="typography-body-medium-semibold mb-900">Background state: hover</legend>
                   <div
-                    class="FieldGroup__label"
-                    aria-hidden="true"
-                  >Background state: hover</div>
-                  <div class="FieldGroup__fields">
+                    class="Stack Stack--hasSpacing"
+                    style="--stack-spacing: var(--spirit-space-600);"
+                  >
                     <div class="Slider Slider--fluid">
                       <div
                         class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
@@ -202,15 +202,13 @@
                         Scale 0–10. Chroma change; higher = more saturation change.
                       </div>
                     </div>
-                  </div>
                 </fieldset>
-                <fieldset class="FieldGroup FieldGroup--fluid">
-                  <legend class="accessibility-hidden">Background state: active</legend>
+                <fieldset class="Stack Stack--hasSpacing border-0 p-0">
+                  <legend class="typography-body-medium-semibold mb-900">Background state: active</legend>
                   <div
-                    class="FieldGroup__label"
-                    aria-hidden="true"
-                  >Background state: active</div>
-                  <div class="FieldGroup__fields">
+                    class="Stack Stack--hasSpacing"
+                    style="--stack-spacing: var(--spirit-space-600);"
+                  >
                     <div class="Slider Slider--fluid">
                       <div
                         class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
@@ -347,15 +345,13 @@
                         Scale 0–10. Chroma change; higher = more saturation change.
                       </div>
                     </div>
-                  </div>
                 </fieldset>
-                <fieldset class="FieldGroup FieldGroup--fluid">
-                  <legend class="accessibility-hidden">Background: selected</legend>
+                <fieldset class="Stack Stack--hasSpacing border-0 p-0">
+                  <legend class="typography-body-medium-semibold mb-900">Background: selected</legend>
                   <div
-                    class="FieldGroup__label"
-                    aria-hidden="true"
-                  >Background: selected</div>
-                  <div class="FieldGroup__fields">
+                    class="Stack Stack--hasSpacing"
+                    style="--stack-spacing: var(--spirit-space-600);"
+                  >
                     <div class="Slider Slider--fluid">
                       <div
                         class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
@@ -492,15 +488,13 @@
                         Scale 0–10. Chroma change; higher = more saturation change.
                       </div>
                     </div>
-                  </div>
                 </fieldset>
-                <fieldset class="FieldGroup FieldGroup--fluid">
-                  <legend class="accessibility-hidden">Border</legend>
+                <fieldset class="Stack Stack--hasSpacing border-0 p-0">
+                  <legend class="typography-body-medium-semibold mb-900">Border</legend>
                   <div
-                    class="FieldGroup__label"
-                    aria-hidden="true"
-                  >Border</div>
-                  <div class="FieldGroup__fields">
+                    class="Stack Stack--hasSpacing"
+                    style="--stack-spacing: var(--spirit-space-600);"
+                  >
                     <div class="Slider Slider--fluid">
                       <div
                         class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
@@ -637,15 +631,13 @@
                         Scale 0–10. Chroma change; higher = more saturation change.
                       </div>
                     </div>
-                  </div>
                 </fieldset>
-                <fieldset class="FieldGroup FieldGroup--fluid">
-                  <legend class="accessibility-hidden">Formula (advanced)</legend>
+                <fieldset class="Stack Stack--hasSpacing border-0 p-0">
+                  <legend class="typography-body-medium-semibold mb-900">Common Formula (advanced)</legend>
                   <div
-                    class="FieldGroup__label"
-                    aria-hidden="true"
-                  >Formula (advanced)</div>
-                  <div class="FieldGroup__fields">
+                    class="Stack Stack--hasSpacing"
+                    style="--stack-spacing: var(--spirit-space-600);"
+                  >
                     <div class="Slider Slider--fluid">
                       <div
                         class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter mb-500"
@@ -852,7 +844,6 @@
                         Number 0–0.4. Higher = more saturation for dark.
                       </div>
                     </div>
-                  </div>
                 </fieldset>
               </div>
               <div
@@ -866,7 +857,7 @@
                   class="Button Button--block Button--primary Button--medium"
                 >Copy CSS config</button>
                 <button
-                  type="button"
+                  type="reset"
                   id="dynamic-color-playground-reset"
                   class="Button Button--block Button--secondary Button--medium"
                 >Reset to defaults</button>
@@ -894,31 +885,22 @@
 
             {{#each @root.basicColors as |color|}}
             <div class="bg-{{color}} p-800">
-              <button
-                type="button"
-                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
-              >
+              <div class="dynamic-color-border border-100 border-solid rounded-200 px-700 py-500 d-inline-block">
                 Border on {{color}} background
-              </button>
+              </div>
             </div>
             {{/each}}
 
             {{#each @root.neutralColors as |color|}}
             <div class="bg-{{color}}-basic text-{{color}}-subtle p-800">
-              <button
-                type="button"
-                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
-              >
+              <div class="dynamic-color-border border-100 border-solid rounded-200 px-700 py-500 d-inline-block">
                 Border on {{color}}-basic background
-              </button>
+              </div>
             </div>
             <div class="bg-{{color}}-subtle text-{{color}}-basic p-800">
-              <button
-                type="button"
-                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
-              >
+              <div class="dynamic-color-border border-100 border-solid rounded-200 px-700 py-500 d-inline-block">
                 Border on {{color}}-subtle background
-              </button>
+              </div>
             </div>
             {{/each}}
 
@@ -929,20 +911,14 @@
 
             {{#each @root.emotionColors as |color|}}
             <div class="bg-emotion-{{color}}-basic text-emotion-{{color}}-subtle p-800">
-              <button
-                type="button"
-                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
-              >
+              <div class="dynamic-color-border border-100 border-solid rounded-200 px-700 py-500 d-inline-block">
                 Border on emotion-{{color}}-basic
-              </button>
+              </div>
             </div>
             <div class="bg-emotion-{{color}}-subtle text-emotion-{{color}}-basic p-800">
-              <button
-                type="button"
-                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
-              >
+              <div class="dynamic-color-border border-100 border-solid rounded-200 px-700 py-500 d-inline-block">
                 Border on emotion-{{color}}-subtle
-              </button>
+              </div>
             </div>
             {{/each}}
 
@@ -953,20 +929,14 @@
 
             {{#each @root.accentColors as |color|}}
             <div class="bg-accent-{{color}}-basic text-accent-{{color}}-subtle p-800">
-              <button
-                type="button"
-                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
-              >
+              <div class="dynamic-color-border border-100 border-solid rounded-200 px-700 py-500 d-inline-block">
                 Border on accent-{{color}}-basic
-              </button>
+              </div>
             </div>
             <div class="bg-accent-{{color}}-subtle text-accent-{{color}}-basic p-800">
-              <button
-                type="button"
-                class="button-unstyled dynamic-color-border border-100 border-solid rounded-200 px-700 py-500"
-              >
+              <div class="dynamic-color-border border-100 border-solid rounded-200 px-700 py-500 d-inline-block">
                 Border on accent-{{color}}-subtle
-              </button>
+              </div>
             </div>
             {{/each}}
 
@@ -1324,16 +1294,6 @@
     }
   };
 
-  const resetToDefaults = () => {
-    config.forEach((entry) => {
-      const input = document.getElementById(entry.inputId);
-      if (input) {
-        input.value = entry.defaultValue;
-        syncInputToRoot(entry);
-      }
-    });
-  };
-
   const showCopyFeedback = (message) => {
     const btn = document.getElementById('dynamic-color-playground-copy-config');
     if (btn) {
@@ -1371,9 +1331,15 @@
     }
   });
 
-  const resetBtn = document.getElementById('dynamic-color-playground-reset');
-  if (resetBtn) {
-    resetBtn.addEventListener('click', resetToDefaults);
+  const form = document.getElementById('dynamic-color-playground-form');
+  if (form) {
+    form.addEventListener('reset', () => {
+      setTimeout(() => {
+        config.forEach((entry) => {
+          syncInputToRoot(entry);
+        });
+      }, 0);
+    });
   }
   const copyBtn = document.getElementById('dynamic-color-playground-copy-config');
   if (copyBtn) {

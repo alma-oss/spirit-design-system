@@ -163,14 +163,15 @@ class Offcanvas extends BaseComponent {
 
     this.element.classList.add(CLASS_NAME_OPEN);
     const isModal = (this.config as Config)?.modal === true;
+
     if (isModal) {
       this.element.showModal();
       this.element.setAttribute(ARIA_ATTRIBUTE_MODAL, 'true');
       this.scrollControl.disableScroll();
     } else {
-      this.element.classList.add(CLASS_NAME_NON_MODAL);
       this.element.show();
       this.element.setAttribute(ARIA_ATTRIBUTE_MODAL, 'false');
+      this.element.classList.add(CLASS_NAME_NON_MODAL);
     }
     relatedTarget.setAttribute('aria-expanded', 'true');
     this.element.setAttribute('role', 'dialog');
@@ -208,6 +209,7 @@ class Offcanvas extends BaseComponent {
       this.isShown = false;
 
       EventHandler.trigger(this.element, EVENT_HIDDEN);
+
       if (isModal) {
         this.scrollControl.enableScroll();
       }
