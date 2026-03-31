@@ -5,6 +5,7 @@ import type {
   AccentColorNamesType,
   BackgroundColorsDictionaryType,
   BoxBackgroundColorsType,
+  ColorSchemeType,
   EmotionColorNamesType,
   IntensityDictionaryType,
   TextAccentColorsType,
@@ -94,28 +95,56 @@ const getTextColor = (
   }
 };
 
+const getColorScheme = (
+  color: BackgroundColorsDictionaryType | 'neutral' | EmotionColorNamesType | AccentColorNamesType,
+  colorType: DemoColorType,
+  intensity: IntensityDictionaryType,
+): ColorSchemeType | undefined => {
+  switch (colorType) {
+    case DemoColorTypes.BASIC:
+      return undefined;
+    case DemoColorTypes.NEUTRAL:
+      return `neutral-${intensity}` as ColorSchemeType;
+    case DemoColorTypes.EMOTION:
+      return `emotion-${color}-${intensity}` as ColorSchemeType;
+    case DemoColorTypes.ACCENT:
+      return `accent-${color}-${intensity}` as ColorSchemeType;
+    default:
+      return undefined;
+  }
+};
+
 const renderRow = (
   color: BackgroundColorsDictionaryType | 'neutral' | EmotionColorNamesType | AccentColorNamesType,
   colorType: DemoColorType,
   intensity?: IntensityDictionaryType,
 ) => {
   const sizes = Object.values(Sizes);
-  const backgroundColor = intensity
-    ? getBackgroundColor(color, colorType, intensity)
-    : getBackgroundColor(color, colorType, Intensity.BASIC);
-  const textColor = intensity
-    ? getTextColor(color, colorType, intensity === Intensity.BASIC ? Intensity.SUBTLE : Intensity.BASIC)
-    : undefined;
+  const resolvedIntensity = intensity ?? Intensity.BASIC;
+  const colorScheme =
+    colorType !== DemoColorTypes.BASIC ? getColorScheme(color, colorType, resolvedIntensity) : undefined;
+
+  let backgroundColor: BoxBackgroundColorsType | undefined;
+  let textColor: TextNeutralColorsType | TextEmotionColorsType | TextAccentColorsType | undefined;
+  if (colorScheme) {
+    backgroundColor = undefined;
+    textColor = undefined;
+  } else if (intensity) {
+    backgroundColor = getBackgroundColor(color, colorType, intensity);
+    textColor = getTextColor(color, colorType, intensity === Intensity.BASIC ? Intensity.SUBTLE : Intensity.BASIC);
+  } else {
+    backgroundColor = getBackgroundColor(color, colorType, Intensity.BASIC);
+    textColor = undefined;
+  }
 
   return (
     <Box
       key={intensity || 'default'}
       alignmentX={{ mobile: 'center', tablet: 'left' }}
       alignmentY="center"
-      backgroundColor={backgroundColor}
       elementType={Flex}
       padding="space-800"
-      textColor={textColor}
+      {...(colorScheme ? { colorScheme } : { backgroundColor, textColor })}
     >
       {sizes.map((size) => (
         <Fragment key={`${size}-subtle`}>
