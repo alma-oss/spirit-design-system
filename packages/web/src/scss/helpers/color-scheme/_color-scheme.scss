@@ -1,0 +1,97 @@
+// Generates `.color-scheme-on-*` helpers: only `--local-background-color` and `--local-color`.
+// Pairing logic and token references match the former utilities map (see color-scheme-values).
+
+@use '@tokens' as tokens;
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
+@use '../../tools/map' as spirit-map;
+@use '../../tools/tokens' as tokens-tools;
+
+$_accent-prefix: 'accent-';
+$_accent-tokens-key: 'accent-colors';
+$_emotion-prefix: 'emotion-';
+$_emotion-tokens-key: 'emotion-colors';
+
+// Basic backgrounds are paired with subtle text colors and vice versa.
+@function generate-color-scheme-map($tokens-group, $prefix: '') {
+    $result: ();
+    $token-map: tokens-tools.get-variable-if-exists($tokens-group, null);
+
+    @each $key, $values in $token-map {
+        $formatted-key: $key;
+
+        @if meta.type-of($key) == 'number' {
+            $formatted-key: tokens-tools.format-numeric-key($key);
+        }
+
+        $background-basic: map.get($values, 'background-basic');
+        $background-subtle: map.get($values, 'background-subtle');
+        $content-basic: map.get($values, 'content-basic');
+        $content-subtle: map.get($values, 'content-subtle');
+
+        @if $background-basic and $content-subtle {
+            $name: $prefix + $formatted-key + '-basic';
+            $result: map.set(
+                $result,
+                string.unquote($name),
+                (
+                    background-color: $background-basic,
+                    color: $content-subtle,
+                )
+            );
+        }
+
+        @if $background-subtle and $content-basic {
+            $name: $prefix + $formatted-key + '-subtle';
+            $result: map.set(
+                $result,
+                string.unquote($name),
+                (
+                    background-color: $background-subtle,
+                    color: $content-basic,
+                )
+            );
+        }
+    }
+
+    @return $result;
+}
+
+@function color-scheme-values() {
+    @return spirit-map.merge-multiple(
+        generate-color-scheme-map($tokens-group: $_accent-tokens-key, $prefix: $_accent-prefix),
+        generate-color-scheme-map($tokens-group: $_emotion-tokens-key, $prefix: $_emotion-prefix),
+        (
+            disabled: (
+                background-color: tokens.$disabled-background,
+                color: tokens.$disabled-content,
+            ),
+            neutral-basic: (
+                background-color: tokens.$neutral-background-basic,
+                color: tokens.$neutral-content-subtle,
+            ),
+            neutral-subtle: (
+                background-color: tokens.$neutral-background-subtle,
+                color: tokens.$neutral-content-basic,
+            ),
+            selected-basic: (
+                background-color: tokens.$selected-background-basic,
+                color: tokens.$selected-content-subtle,
+            ),
+            selected-subtle: (
+                background-color: tokens.$selected-background-subtle,
+                color: tokens.$selected-content-basic,
+            ),
+        )
+    );
+}
+
+@mixin emit-color-scheme-classes($values, $class-prefix: 'color-scheme-on') {
+    @each $key, $pair in $values {
+        .#{$class-prefix}-#{$key} {
+            --#{tokens.$css-variable-prefix}local-background-color: #{map.get($pair, background-color)};
+            --#{tokens.$css-variable-prefix}local-color: #{map.get($pair, color)};
+        }
+    }
+}

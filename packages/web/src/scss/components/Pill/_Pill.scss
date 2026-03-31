@@ -1,6 +1,6 @@
 @use 'theme';
 @use '@tokens' as tokens;
-@use '../../tools/dictionaries';
+@use '../../tools/component-color-overrides';
 @use '../../tools/typography';
 
 .Pill {
@@ -11,18 +11,15 @@
     height: 1rem;
     padding: theme.$padding-y theme.$padding-x;
     text-align: center;
-    color: var(--#{tokens.$css-variable-prefix}pill-color);
+    color: var(--#{tokens.$css-variable-prefix}local-color);
     border-radius: theme.$border-radius;
-    background-color: var(--#{tokens.$css-variable-prefix}pill-background-color);
+    background-color: var(--#{tokens.$css-variable-prefix}local-background-color);
 }
 
-@include dictionaries.generate-colors(
+@include component-color-overrides.generate(
     $class-name: 'Pill',
-    $dictionary-values: theme.$color-dictionary,
-    $config: theme.$color-config
-);
-@include dictionaries.generate-colors(
-    $class-name: 'Pill',
-    $dictionary-values: theme.$color-selected-dictionary,
-    $config: theme.$color-selected-config
+    $property-map: (
+        content: color,
+        background: background-color,
+    )
 );

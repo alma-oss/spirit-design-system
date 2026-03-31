@@ -1,0 +1,55 @@
+@use 'true' as test;
+@use '../component-color-overrides' as component-color-overrides;
+
+@include test.describe('component-color-overrides generate mixin') {
+    @include test.it('should emit local variable overrides for discovered component tokens') {
+        @include test.assert() {
+            @include test.output() {
+                @include component-color-overrides.generate(
+                    $class-name: 'Button',
+                    $property-map: (
+                        content: color,
+                        border: border-color,
+                    )
+                );
+            }
+
+            @include test.expect() {
+                .Button.Button--plain {
+                    --spirit-local-border-color: var(--spirit-color-component-button-plain-border);
+                    --spirit-local-color: var(--spirit-color-component-button-plain-content);
+                }
+
+                .Button.Button--primary {
+                    --spirit-local-border-color: var(--spirit-color-component-button-primary-border);
+                    --spirit-local-color: var(--spirit-color-component-button-primary-content);
+                }
+
+                .Button.Button--secondary {
+                    --spirit-local-border-color: var(--spirit-color-component-button-secondary-border);
+                    --spirit-local-color: var(--spirit-color-component-button-secondary-content);
+                }
+
+                .Button.Button--tertiary {
+                    --spirit-local-border-color: var(--spirit-color-component-button-tertiary-border);
+                    --spirit-local-color: var(--spirit-color-component-button-tertiary-content);
+                }
+            }
+        }
+    }
+
+    @include test.it('should emit nothing when no component tokens match') {
+        @include test.assert() {
+            @include test.output() {
+                @include component-color-overrides.generate(
+                    $class-name: 'Nonexistent',
+                    $property-map: (
+                        content: color,
+                    )
+                );
+            }
+
+            @include test.expect();
+        }
+    }
+}
