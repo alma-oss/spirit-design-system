@@ -3,12 +3,12 @@
 import classNames from 'classnames';
 import React from 'react';
 import { useStyleProps } from '../../hooks';
-import { type ChildrenProps, type StyleProps } from '../../types';
+import { type SpiritDivElementProps } from '../../types';
 import { useDropdownContext } from './DropdownContext';
 import { useDropdownAriaProps } from './useDropdownAriaProps';
 import { useDropdownStyleProps } from './useDropdownStyleProps';
 
-interface DropdownPopoverProps extends ChildrenProps, StyleProps {}
+interface DropdownPopoverProps extends SpiritDivElementProps {}
 
 const DropdownPopover = (props: DropdownPopoverProps) => {
   const { children, ...rest } = props;
