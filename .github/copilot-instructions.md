@@ -41,16 +41,39 @@ Use [Conventional Comments](https://conventionalcomments.org/) for all findings.
 
 ### Finding Format
 
-```markdown
-{label} ({decorations}): {subject}
+When a code suggestion exists, place it first so reviewers see the fix immediately, and use GitHub’s PR review suggestion fence (` ```suggestion `), which allows reviewers to apply the fix with one click, but only in the "Apply suggestion" UX in PR review comments. When no code suggestion is possible, omit the code block::
+
+````markdown
+```suggestion
+{suggested code}
+```
+
+**{label} ({decorations}):** {subject}
 
 <details>
-  <summary>Fix: Concrete fix with code example.</summary>
-  Why: What is wrong and why it matters.
+  <summary>Explanation</summary>
+  <strong>Fix:</strong> {fix explanation}
+  <br />
+  <br />
+  <strong>Why:</strong> {why explanation}
+</details>
+````
+
+When there is no code suggestion:
+
+```markdown
+**{label} ({decorations}):** {subject}
+
+<details>
+  <summary>Explanation</summary>
+  <strong>Fix:</strong> {fix explanation}
+  <br />
+  <br />
+  <strong>Why:</strong> {why explanation}
 </details>
 ```
 
-`question` findings may omit the `Fix:` field because they seek clarification rather than prescribe a change.
+`question` findings may omit the `Fix:` field. Markdown does not render inside `<details>` — use HTML tags instead: inline code as `<code>{code}</code>`, code blocks as `<pre><code>{code}</code></pre>`.
 
 **Labels:** issue, suggestion, todo, question, thought, note, chore, praise
 **Decorations (required):** Always include at least one decoration. Use one or more of: `(blocking)` — must fix before merge; `(non-blocking)` — default and must be used when no other decoration applies; `(security)` — security concern; `(if-minor)` — fix only if change is small. Combine as needed, e.g. `(blocking, security)`.
