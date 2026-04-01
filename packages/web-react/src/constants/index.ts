@@ -5,5 +5,6 @@ export * from './direction';
 export * from './inputs';
 export * from './media';
 export * from './position';
+export * from './selection';
 export * from './style';
 export * from './text';
