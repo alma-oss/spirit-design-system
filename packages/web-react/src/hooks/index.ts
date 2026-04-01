@@ -19,6 +19,7 @@ export * from './useLastActiveFocus';
 export * from './useLinkClick';
 export * from './useResizeObserver';
 export * from './useScrollControl';
+export * from './useSelectionState';
 export * from './useSpacingStyle';
 export * from './useSymmetry';
 export * from './useToggle';
