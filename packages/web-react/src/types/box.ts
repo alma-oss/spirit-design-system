@@ -12,6 +12,7 @@ import {
   type BorderStylesDictionaryType,
   type BorderWidthsDictionaryType,
   type ChildrenProps,
+  type ColorSchemeType,
   type PolymorphicComponentProps,
   type SingleOrResponsive,
   type SpaceToken,
@@ -38,6 +39,8 @@ export interface BoxBaseProps extends ChildrenProps, TextColorProps, StyleProps 
   borderStyle?: BorderStylesDictionaryType;
   /** The border width of the box. */
   borderWidth?: BorderWidthsDictionaryType;
+  /** The color scheme of the box. */
+  colorScheme?: ColorSchemeType;
   /** Padding of the box. */
   padding?: SingleOrResponsive<SpaceToken>;
   /** Horizontal padding of the box. */

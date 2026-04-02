@@ -129,6 +129,31 @@ describe('Box', () => {
     expect(screen.getByText('Content')).toHaveClass('bg-primary');
   });
 
+  it('should render with color scheme', () => {
+    render(
+      <Box colorScheme="neutral-basic" data-testid="Box">
+        Content
+      </Box>,
+    );
+
+    const box = screen.getByTestId('Box');
+    expect(box).toHaveClass('color-scheme-on-neutral-basic');
+    expect(box).toHaveClass('bg-color-scheme');
+    expect(box).toHaveClass('text-color-scheme');
+  });
+
+  it('should prefer explicit background over scheme background', () => {
+    render(
+      <Box colorScheme="neutral-basic" backgroundColor="secondary" data-testid="Box">
+        Content
+      </Box>,
+    );
+
+    const box = screen.getByTestId('Box');
+    expect(box).toHaveClass('bg-secondary');
+    expect(box).not.toHaveClass('bg-color-scheme');
+  });
+
   it('should render with border radius and width', () => {
     render(
       <Box borderRadius="200" borderWidth="100" data-testid="Box">

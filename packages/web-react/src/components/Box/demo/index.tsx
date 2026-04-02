@@ -6,6 +6,7 @@ import BoxWithAll from './BoxWithAll';
 import BoxWithBackgroundColor from './BoxWithBackgroundColor';
 import BoxWithBackgroundGradient from './BoxWithBackgroundGradient';
 import BoxWithBorder from './BoxWithBorder';
+import BoxWithColorScheme from './BoxWithColorScheme';
 import BoxWithCustomPadding from './BoxWithCustomPadding';
 import BoxWithRadius from './BoxWithRadius';
 import BoxWithTextColor from './BoxWithTextColor';
@@ -32,6 +33,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
     </DocsSection>
     <DocsSection title="With Text Color">
       <BoxWithTextColor />
+    </DocsSection>
+    <DocsSection title="With Color Scheme">
+      <BoxWithColorScheme />
     </DocsSection>
     <DocsSection title="With All">
       <BoxWithAll />
