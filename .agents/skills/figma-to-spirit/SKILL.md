@@ -329,6 +329,18 @@ If you have access to browser automation tools (e.g. a browser MCP server, Playw
 
 **Note**: Always use full token names for accent colors (`accent-02-basic`, not `accent-02`). See [Typography Components](components/typography.md).
 
+### Link Text Styles
+
+In Figma, links are created by applying a text style whose name contains `link` (e.g. `Body/Medium/Link Regular`, `Body/Small/Link Regular`). A plain paragraph with such a style is the correct Figma representation of a link — it is NOT a mistake.
+
+When you encounter a text node using a `link` text style, implement it as the DS `Link` component:
+
+```tsx
+<Link href="...">Show more</Link>
+```
+
+Do not implement it as a `<p>` or `<span>` with manual underline styling.
+
 ### Link Color Tokens (CRITICAL for Card Detection)
 
 When Figma shows these color tokens on text, it indicates the element should be a **link**:
@@ -392,6 +404,7 @@ Before finalizing code:
 
 **Cards & Links:**
 
+- \[ \] Text nodes with a `link` text style (e.g. `Body/Medium/Link Regular`) implemented as DS `Link` component
 - \[ \] CardTitle with `themed/link/...` color tokens uses `CardLink` (not Heading with textColor)
 - \[ \] CardLink used inside CardTitle for clickable cards
 - \[ \] `isHeading` set on CardTitle when appropriate

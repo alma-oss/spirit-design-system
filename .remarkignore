@@ -13,3 +13,6 @@ test-results
 
 # Heading capitalization problems
 migration-*
+
+# Generated design review reports (output of the figma-design-review skill)
+design-reviews

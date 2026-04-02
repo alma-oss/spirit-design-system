@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{SUBJECT}} — Spirit AI Design Review</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAzOCAzOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzQzNzQ5XzI1NDcpIj4KPG1hc2sgaWQ9Im1hc2swXzQzNzQ5XzI1NDciIHN0eWxlPSJtYXNrLXR5cGU6bHVtaW5hbmNlIiBtYXNrVW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4PSIwIiB5PSIwIiB3aWR0aD0iMzgiIGhlaWdodD0iMzgiPgo8cGF0aCBkPSJNMzggMEgwVjM4SDM4VjBaIiBmaWxsPSJ3aGl0ZSIvPgo8L21hc2s+CjxnIG1hc2s9InVybCgjbWFzazBfNDM3NDlfMjU0NykiPgo8cGF0aCBkPSJNMCA4LjkwNjI1QzAgMy45ODc0NyAzLjk4NzQ3IDAgOC45MDYyNSAwSDI5LjA5MzhDMzQuMDEyNSAwIDM4IDMuOTg3NDcgMzggOC45MDYyNVYyOS4wOTM4QzM4IDM0LjAxMjUgMzQuMDEyNSAzOCAyOS4wOTM4IDM4SDguOTA2MjVDMy45ODc0NyAzOCAwIDM0LjAxMjUgMCAyOS4wOTM4VjguOTA2MjVaIiBmaWxsPSJ1cmwoI3BhaW50MF9saW5lYXJfNDM3NDlfMjU0NykiLz4KPHBhdGggZD0iTTI5LjA5MzggMzYuODEyNVYzOEg4LjkwNjI1VjM2LjgxMjVIMjkuMDkzOFpNMzYuODEyNSAyOS4wOTM4VjguOTA2MjVDMzYuODEyNSA0LjY0MzMgMzMuMzU2NyAxLjE4NzUgMjkuMDkzOCAxLjE4NzVIOC45MDYyNUM0LjY0MzMgMS4xODc1IDEuMTg3NSA0LjY0MzMgMS4xODc1IDguOTA2MjVWMjkuMDkzOEMxLjE4NzUgMzMuMzU2NyA0LjY0MzMgMzYuODEyNSA4LjkwNjI1IDM2LjgxMjVWMzhDMy45ODc0NyAzOCAwIDM0LjAxMjUgMCAyOS4wOTM4VjguOTA2MjVDMCAzLjk4NzQ3IDMuOTg3NDcgMCA4LjkwNjI1IDBIMjkuMDkzOEMzNC4wMTI1IDAgMzggMy45ODc0NyAzOCA4LjkwNjI1VjI5LjA5MzhDMzggMzQuMDEyNSAzNC4wMTI1IDM4IDI5LjA5MzggMzhWMzYuODEyNUMzMy4zNTY3IDM2LjgxMjUgMzYuODEyNSAzMy4zNTY3IDM2LjgxMjUgMjkuMDkzOFoiIGZpbGw9InVybCgjcGFpbnQxX2xpbmVhcl80Mzc0OV8yNTQ3KSIvPgo8cGF0aCBkPSJNMTguNzI2NSAxOS44OTdMMTMuNjU2MiAxMS4xNTU2QzEzLjgxNTcgMTAuMzA4MSAxNC4xMDIzIDkuNTM0OTkgMTQuNTE3MyA4LjgzNzUzTDE0LjUxOCA4LjgzNjVMMTQuNTE4NiA4LjgzNTQ3QzE1LjIxNzMgNy43MDE3NyAxNi4xOTI5IDYuODEwNDMgMTcuNDQwOCA2LjE2MTU1QzE4LjY4OTMgNS40ODg4NCAyMC4xMjU5IDUuMTE4NjIgMjEuNzQ3MSA1LjA0NzAzTDIxLjc1MDYgNS4wNDY4OEgyMS43NTQxQzIzLjg2MDIgNS4wNDY4OCAyNS41NzY5IDUuMjk1MyAyNi44OTcgNS43OTk3N0MyOC4yMjUzIDYuMjk4NDIgMjkuNDEzNCA2Ljg5Mjg4IDMwLjQ2MDYgNy41ODM4MUMzMC41Mjc4IDcuNjI4MDggMzAuNTUxNCA3LjcxNTQxIDMwLjUxNTcgNy43ODc0NkwyOC41NzI4IDExLjcxMjdDMjguNTMyNyAxMS43OTM4IDI4LjQzMzIgMTEuODI1IDI4LjM1MzkgMTEuNzgxNkMyNy4zNzI2IDExLjI0MzYgMjYuMzY4NCAxMC43OTk1IDI1LjM0MTEgMTAuNDQ5TDI1LjM0MDEgMTAuNDQ4NkMyNC4zNDEgMTAuMDk5NyAyMy40MDUxIDkuOTI3MDMgMjIuNTMxMiA5LjkyNzAzQzIxLjQ0MzggOS45MjcwMyAyMC42MDg3IDEwLjE0NzMgMjAuMDA4OCAxMC41Njk5QzE5LjQyMjIgMTAuOTgzMSAxOS4xMjI2IDExLjYwMjIgMTkuMTIyNiAxMi40NTUyQzE5LjEyMjYgMTMuMDIxMyAxOS4zMzggMTMuNTM2MiAxOS43ODI2IDE0LjAwNDVDMjAuMjYyNyAxNC40NjE3IDIwLjg3MTcgMTQuODc2NCAyMS42MTI0IDE1LjI0NzNDMjIuMzg0NiAxNS42MjIgMjMuMTgwMyAxNS45NjE3IDIzLjk5OTUgMTYuMjY2NEMyNC43NTk1IDE2LjU1MTcgMjUuNTA3OCAxNi44OTY0IDI2LjI0MzQgMTcuMzAwMUMyNy4wMTA2IDE3LjY4NDMgMjcuNjk0NCAxOC4xNzY4IDI4LjI5NDQgMTguNzc3MUMyOC45MDA4IDE5LjM2MDQgMjkuMzgzIDIwLjA5ODQgMjkuNzQzMiAyMC45ODc0QzMwLjEwNjYgMjEuODYxIDMwLjI4NSAyMi45MzIxIDMwLjI4NSAyNC4xOTUyQzMwLjI4NSAyNS41NDQzIDI5LjkzNTUgMjYuNzk4NyAyOS4yMzc2IDI3Ljk1NUMyOC41MzggMjkuMTE0MiAyNy41MTQ1IDMwLjA1MjQgMjYuMTc0MSAzMC43NzEzTDI2LjE3MjEgMzAuNzcyM0MyNS44ODQgMzAuOTIxNiAyNS41ODIxIDMxLjA1NDggMjUuMjY2MyAzMS4xNzE5TDIyLjY2OTQgMjYuNjk0N0MyMy4yMzAxIDI2LjUxMTMgMjMuNjg1NCAyNi4yMzAxIDI0LjA0MDUgMjUuODUzOEwyNC4wNDIgMjUuODUyMkwyNC4wNDM2IDI1Ljg1MDVDMjQuNDMwNCAyNS40NjMzIDI0LjYzMjggMjQuOTE4NyAyNC42MzI4IDI0LjE5NTJDMjQuNjMyOCAyMy43MTYzIDI0LjQ3MDkgMjMuMjgwNCAyNC4xMzk4IDIyLjg4MjdMMjQuMTM4MiAyMi44ODA2TDI0LjEzNjUgMjIuODc4NUMyMy44MjE3IDIyLjQ3MzMgMjMuMzc4OSAyMi4wOTY1IDIyLjgwMjYgMjEuNzUwM0wyMi44MDEzIDIxLjc0OTZMMjIuODAwMiAyMS43NDg4QzIyLjI0NDYgMjEuNDAxMiAyMS42MyAyMS4wOTkzIDIwLjk1NTkgMjAuODQzM0MyMC4yMzE2IDIwLjU2NjEgMTkuNDg4MiAyMC4yNTA1IDE4LjcyNjUgMTkuODk3WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEzLjU4NSAxOS44OTA2QzEzLjU4NSAxOS4zOTg4IDEzLjE4NjIgMTkgMTIuNjk0NCAxOUgxMS42NDk0QzExLjE1NzUgMTkgMTAuNzU4OCAxOS4zOTg4IDEwLjc1ODggMTkuODkwNlYyMS44NDk4QzEwLjc1ODggMjIuMzQxNyAxMC4zNiAyMi43NDA1IDkuODY4MTMgMjIuNzQwNUg4LjAxNTYzQzcuNTIzNzUgMjIuNzQwNSA3LjEyNSAyMy4xMzkyIDcuMTI1IDIzLjYzMTFWMjQuNzU5MkM3LjEyNSAyNS4yNTExIDcuNTIzNzUgMjUuNjQ5OCA4LjAxNTYzIDI1LjY0OThIOS44NjgxM0MxMC4zNiAyNS42NDk4IDEwLjc1ODggMjYuMDQ4NiAxMC43NTg4IDI2LjU0MDVWMjguNUMxMC43NTg4IDI4Ljk5MTkgMTEuMTU3NSAyOS4zOTA2IDExLjY0OTQgMjkuMzkwNkgxMi42OTQ0QzEzLjE4NjIgMjkuMzkwNiAxMy41ODUgMjguOTkxOSAxMy41ODUgMjguNVYyNi41NDA1QzEzLjU4NSAyNi4wNDg2IDEzLjk4MzggMjUuNjQ5OCAxNC40NzU2IDI1LjY0OThIMTYuMzI4MUMxNi44MiAyNS42NDk4IDE3LjIxODggMjUuMjUxMSAxNy4yMTg4IDI0Ljc1OTJWMjMuNjMxMUMxNy4yMTg4IDIzLjEzOTIgMTYuODIgMjIuNzQwNSAxNi4zMjgxIDIyLjc0MDVIMTQuNDc1NkMxMy45ODM4IDIyLjc0MDUgMTMuNTg1IDIyLjM0MTcgMTMuNTg1IDIxLjg0OThWMTkuODkwNloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik05LjQyNDMyIDMuNzcxNTJDOS42MzY4OCAzLjY0NzgzIDkuOTA5MzcgMy43MTk2OSAxMC4wMzMyIDMuOTMyMTRMMjcuNDAwNCAzMy43NjgxQzI3LjUyNCAzMy45ODA2IDI3LjQ1MjIgMzQuMjUzMSAyNy4yMzk3IDM0LjM3NjlDMjcuMDI3MyAzNC41MDA2IDI2Ljc1NDcgMzQuNDI4NyAyNi42MzA5IDM0LjIxNjNMOS4yNjM2OSA0LjM4MDM1QzkuMTQwMDMgNC4xNjc4NCA5LjIxMTkxIDMuODk1MjkgOS40MjQzMiAzLjc3MTUyWiIgZmlsbD0iI0MxQTJDMyIvPgo8L2c+CjwvZz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0icGFpbnQwX2xpbmVhcl80Mzc0OV8yNTQ3IiB4MT0iMTkiIHkxPSIwIiB4Mj0iMTkiIHkyPSIzOCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjQ0I0M0QzIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzM5MTUzQiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MV9saW5lYXJfNDM3NDlfMjU0NyIgeDE9IjE5IiB5MT0iMCIgeDI9IjE5IiB5Mj0iMzgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0id2hpdGUiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjQ0I0M0QzIi8+CjwvbGluZWFyR3JhZGllbnQ+CjxjbGlwUGF0aCBpZD0iY2xpcDBfNDM3NDlfMjU0NyI+CjxyZWN0IHdpZHRoPSIzOCIgaGVpZ2h0PSIzOCIgZmlsbD0id2hpdGUiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8L3N2Zz4K" />
+    <style>
+      :root {
+        /* Root font sizes */
+        --font-size-root-print:  14px;
+        --font-size-root-screen: 16px;
+
+        /* Font sizes (rem @ 14px print root — ≈1.14× on 16px screen root) */
+        --font-size-score:     5.143rem; /* 72px  — score number              */
+        --font-size-score-sm:  4rem;     /* 56px  — score number (mobile)     */
+        --font-size-score-pct: 2.143rem; /* 30px  — score percentage sign     */
+        --font-size-heading:   1.429rem; /* 20px  — section headings          */
+        --font-size-base:      1rem;     /* 14px  — body text                 */
+        --font-size-sm:        0.929rem; /* 13px  — content / note text       */
+        --font-size-meta:      0.857rem; /* 12px  — meta, eval-table, num     */
+        --font-size-label:     0.714rem; /* 10px  — uppercase labels, icons   */
+
+        /* Spacings (rem @ 16px screen root — ×0.875 on 14px print root) */
+        --space-hair: 0.125rem; /*  2px screen —  1.75px print */
+        --space-1:    0.25rem;  /*  4px screen —  3.5px  print */
+        --space-2:    0.375rem; /*  6px screen —  5.25px print */
+        --space-3:    0.5rem;   /*  8px screen —  7px    print */
+        --space-4:    0.75rem;  /* 12px screen — 10.5px  print */
+        --space-5:    1rem;     /* 16px screen — 14px    print */
+        --space-6:    1.25rem;  /* 20px screen — 17.5px  print */
+        --space-7:    1.5rem;   /* 24px screen — 21px    print */
+        --space-8:    1.75rem;  /* 28px screen — 24.5px  print */
+        --space-9:    2rem;     /* 32px screen — 28px    print */
+        --space-10:   2.5rem;   /* 40px screen — 35px    print */
+        --space-11:   3rem;     /* 48px screen — 42px    print */
+
+        /* Brand */
+        --color-brand-bg: #370b45;
+        --color-brand-divider: #ffffff4f;
+
+        /* Text */
+        --color-text: #1d1d27;
+        --color-text-muted: #aaa;
+        --color-text-on-dark: #fff;
+
+        /* Links */
+        --color-link: #7847ff;
+
+        /* Surfaces */
+        --color-bg: #fff;
+        --color-bg-code: #f3f3f8;
+        --color-bg-table-head: #f4f4f9;
+        --color-bg-table-stripe: #f9f9fc;
+
+        /* Borders */
+        --color-border: #e5e5e5;
+
+        /* Severity */
+        --color-critical: #dc2626;
+        --color-critical-bg: #fef2f2;
+        --color-warning: #d97706;
+        --color-warning-bg: #fffbeb;
+        --color-info: #3b82f6;
+        --color-info-bg: #eff6ff;
+        --color-pass: #16a34a;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        color: var(--color-text);
+        font-size: var(--font-size-base);
+        line-height: 1.6;
+        background: var(--color-bg);
+      }
+      @media screen {
+        html {
+          font-size: var(--font-size-root-screen);
+        }
+        main {
+          max-width: 1024px;
+          margin-inline: auto;
+          margin-top: var(--space-11);
+        }
+        .cover {
+          border-bottom: 1px solid var(--color-border);
+        }
+      }
+      a {
+        color: var(--color-link);
+        text-decoration: underline;
+      }
+      /* JIRA issue keys (DS-XXXX) must not break across lines */
+      a[href*='jira'] {
+        white-space: nowrap;
+      }
+      code {
+        background: var(--color-bg-code);
+        padding: 1px var(--space-2);
+        border-radius: 3px;
+        font-size: 94%;
+        font-family: ui-monospace, monospace;
+      }
+
+      /* ---------- Print ---------- */
+      /* Inner pages: portrait A4, top breathing margin, bottom reserved for CDP footer. */
+      @page {
+        size: A4 portrait;
+        margin-top: 20mm;
+        margin-left: 5mm;
+        margin-right: 5mm;
+        margin-bottom: 24mm;
+      }
+      /* Cover page: landscape A4, zero side/top margins for full-bleed design.
+         Bottom margin matches inner pages so content stays clear of the footer. */
+      @page cover-page {
+        size: A4 landscape;
+        margin: 0 0 16mm;
+      }
+      .cover {
+        page: cover-page;
+      }
+      @media print {
+        html { font-size: var(--font-size-root-print); }
+        .cover {
+          page-break-after: always;
+        }
+        .cover-header,
+        .cover-body {
+          break-inside: avoid;
+        }
+        .finding {
+          page-break-inside: avoid;
+        }
+        /* Cap finding screenshots so a tall image doesn't push the finding
+           past a page break that page-break-inside: avoid can't rescue. */
+        .finding-body img {
+          max-height: 70vh;
+          object-fit: contain;
+        }
+        h2, h3 {
+          page-break-after: avoid;
+        }
+      }
+
+      /* ---------- Cover ---------- */
+      /* Layout: purple header (full width) → .cover-body (eval left, overview right). */
+      .cover {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      /* Purple header — title on left, score on right */
+      .cover-header {
+        background: var(--color-brand-bg);
+        color: var(--color-text-on-dark);
+        padding: var(--space-7) var(--space-11);
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: var(--space-9);
+        flex-wrap: wrap;
+      }
+      .cover-header-logo {
+        width: auto;
+        height: 42px;
+        flex-shrink: 0;
+        margin-right: var(--space-5);
+      }
+      .cover-header-info {
+        padding-left: var(--space-9);
+        border-left: 1px solid var(--color-brand-divider);
+      }
+      .cover-header-info .label {
+        font-size: var(--font-size-label);
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        opacity: 0.7;
+        margin-bottom: var(--space-1);
+      }
+      .cover-header-info .subject {
+        font-size: var(--font-size-heading);
+        font-weight: 700;
+        line-height: 1.25;
+        margin-bottom: var(--space-2);
+      }
+      .cover-header-info .meta {
+        font-size: var(--font-size-meta);
+        opacity: 0.65;
+      }
+      .cover-header-score {
+        margin-left: auto;
+        text-align: right;
+        flex-shrink: 0;
+      }
+      .cover-header-score .score-num {
+        font-size: var(--font-size-score);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.028em;
+      }
+      .cover-header-score .score-pct {
+        font-size: var(--font-size-score-pct);
+        font-weight: 400;
+        opacity: 0.75;
+      }
+      .cover-header-score .score-label {
+        font-size: var(--font-size-label);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        opacity: 0.65;
+        margin-top: var(--space-hair);
+      }
+      /* Mobile: two-row layout — logo + score on row 1, info block on row 2 */
+      @media (width <= 767px) {
+        .cover-header {
+          padding: var(--space-5) var(--space-6);
+          gap: var(--space-5);
+        }
+        .cover-header-logo {
+          margin-right: 0;
+        }
+        .cover-header-info {
+          flex: 0 0 100%;
+          order: 3;
+          border-left: none;
+          border-top: 1px solid var(--color-brand-divider);
+          padding-left: 0;
+          padding-top: var(--space-5);
+        }
+        .cover-header-score .score-num {
+          font-size: var(--font-size-score-sm);
+        }
+      }
+      /* Print: always use single-row layout regardless of viewport */
+      @media print {
+        .cover-header {
+          flex-wrap: nowrap;
+          padding: var(--space-7) var(--space-11);
+          gap: var(--space-9);
+        }
+        .cover-header-info {
+          flex: unset;
+          order: unset;
+          border-left: 1px solid var(--color-brand-divider);
+          border-top: none;
+          padding-left: var(--space-9);
+          padding-top: 0;
+        }
+        .cover-header-score .score-num {
+          font-size: var(--font-size-score);
+        }
+      }
+      /* Default (column): eval is above, overview below. */
+      .cover-overview {
+        padding: var(--space-5) var(--space-11) var(--space-10);
+      }
+      .cover-overview-label {
+        display: none;
+      }
+      .overview-wrap {
+        position: relative;
+        display: block;
+        width: 100%;
+        line-height: 0; /* removes inline gap beneath img */
+      }
+      .overview-wrap img {
+        width: 100%;
+        height: auto;
+        padding: 0; /* pins use % of wrap — padding would offset the raster */
+      }
+      .pin {
+        position: absolute;
+        width: 2em;
+        height: 2em;
+        border-radius: 50%;
+        background: var(--color-critical);
+        color: var(--color-text-on-dark);
+        font-size: var(--font-size-label);
+        font-weight: 700;
+        line-height: 2em;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+        text-decoration: none;
+      }
+      /* Default (column): eval is first; 16px bottom gap before overview. */
+      .cover-eval {
+        padding: var(--space-6) var(--space-11) var(--space-5);
+      }
+      .eval-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: var(--font-size-meta);
+      }
+      .eval-table thead th {
+        text-align: left;
+        font-size: var(--font-size-label);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--color-text-muted);
+        padding: 0 0 var(--space-3);
+        border-bottom: 1px solid var(--color-border);
+      }
+      .eval-table td {
+        padding: var(--space-4) 0;
+        border-bottom: 1px solid var(--color-border);
+        vertical-align: middle;
+      }
+      .eval-table td:first-child {
+        width: 36px;
+      }
+      .check-icon {
+        width: 2em;
+        height: 2em;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--font-size-label);
+        font-weight: 700;
+        color: var(--color-text-on-dark);
+      }
+      .check-pass   { background: var(--color-pass); }
+      .check-fail   { background: var(--color-critical); }
+      .check-doubt  { background: var(--color-warning); }
+
+      /* Cover body: flex container for the two-column layout below the header. */
+      .cover-body {
+        display: flex;
+        flex-direction: column;
+      }
+      /* Desktop + print: .cover becomes a 3-row grid (header / body / footer),
+         body absorbs leftover height. The overview image is sized via the
+         wrap's aspect-ratio (set inline as --overview-aspect by the generator).
+         The aspect-ratio breaks the indefinite-parent-height cycle that
+         normally keeps max-height:% from resolving — with an aspect constraint
+         + both max dimensions at 100%, the wrap fits the largest rectangle
+         that preserves the image's natural ratio. The img then fills the wrap
+         exactly, so percentage-positioned pins stay aligned with features in
+         the image regardless of viewport / page size.
+         min-width/min-height:0 on the overview chain is deliberate: it removes
+         the image's intrinsic size from the body row's min-content, so a short
+         viewport (or small page) can shrink the image without the cover being
+         forced to grow to the image's natural size. The eval column's
+         min-content still sets the cover's floor, so nothing overlaps. */
+      @media (width >= 1000px) {
+        .cover {
+          min-height: 100vh;
+          display: grid;
+          grid-template-rows: auto 1fr auto;
+        }
+        .cover-body {
+          flex-direction: row;
+          align-items: stretch;
+          min-height: 0;
+        }
+        .cover-eval {
+          flex: 0 0 380px;
+          padding: var(--space-8) var(--space-7) var(--space-10) var(--space-11);
+        }
+        .cover-overview {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 0;
+          min-height: 0;
+          overflow: hidden;
+          contain: size;
+          padding: var(--space-8) var(--space-11) var(--space-10) var(--space-7);
+        }
+        .overview-wrap {
+          display: block;
+          width: auto;
+          height: auto;
+          min-width: 0;
+          min-height: 0;
+          max-width: 100%;
+          max-height: 100%;
+          aspect-ratio: var(--overview-aspect, auto);
+        }
+        .overview-wrap img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          min-width: 0;
+          min-height: 0;
+          object-fit: contain;
+        }
+      }
+      @media print {
+        .cover {
+          min-height: 100vh;
+          display: grid;
+          grid-template-rows: auto 1fr auto;
+        }
+        .cover-body {
+          flex-direction: row;
+          align-items: stretch;
+          min-height: 0;
+        }
+        .cover-eval {
+          flex: 0 0 380px;
+          padding: var(--space-8) var(--space-7) var(--space-10) var(--space-11);
+        }
+        .cover-overview {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 0;
+          min-height: 0;
+          overflow: hidden;
+          contain: size;
+          padding: var(--space-8) var(--space-11) 0 var(--space-7);
+        }
+        .overview-wrap {
+          display: block;
+          width: auto;
+          height: auto;
+          min-width: 0;
+          min-height: 0;
+          max-width: 100%;
+          max-height: 100%;
+          aspect-ratio: var(--overview-aspect, auto);
+        }
+        .overview-wrap img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          min-width: 0;
+          min-height: 0;
+          object-fit: contain;
+        }
+      }
+
+      /* ---------- Shared section layout ---------- */
+      .report-section {
+        padding: 0 var(--space-11) var(--space-11);
+      }
+      .section-heading {
+        font-size: var(--font-size-heading);
+        font-weight: 700;
+        padding-top: var(--space-10);
+        margin-bottom: var(--space-8);
+        border-top: 1px solid var(--color-border);
+      }
+      .report-section:first-of-type > .section-heading {
+        border-top: none;
+        padding-top: 0;
+      }
+      .section-label {
+        font-size: var(--font-size-label);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--color-text-muted);
+        padding: var(--space-5) 0 var(--space-3);
+        border-bottom: 1px solid var(--color-border);
+        margin-bottom: var(--space-4);
+      }
+
+      /* ---------- Findings ---------- */
+      .finding {
+        margin-bottom: var(--space-9);
+        scroll-margin-top: var(--space-9);
+      }
+      @keyframes finding-target-flash {
+        0%   { outline-color: var(--color-link); }
+        60%  { outline-color: var(--color-link); }
+        100% { outline-color: transparent; }
+      }
+      .finding:target {
+        outline: 3px solid var(--color-link);
+        outline-offset: var(--space-3);
+        border-radius: var(--space-2);
+        animation: finding-target-flash 2s ease-out forwards;
+      }
+      .finding-header {
+        display: flex;
+        align-items: center;
+        gap: var(--space-4);
+        padding: var(--space-5) var(--space-7) var(--space-5) var(--space-5);
+        border-radius: var(--space-2) var(--space-2) 0 0;
+        border-left: 4px solid transparent;
+      }
+      .finding-header.critical {
+        background: var(--color-critical-bg);
+        border-left-color: var(--color-critical);
+      }
+      .finding-header.warning {
+        background: var(--color-warning-bg);
+        border-left-color: var(--color-warning);
+      }
+      .finding-header.info {
+        background: var(--color-info-bg);
+        border-left-color: var(--color-info);
+      }
+      .finding-num {
+        width: 2em;
+        height: 2em;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--font-size-meta);
+        font-weight: 700;
+        color: var(--color-text-on-dark);
+        flex-shrink: 0;
+      }
+      .critical .finding-num {
+        background: var(--color-critical);
+      }
+      .warning .finding-num {
+        background: var(--color-warning);
+      }
+      .info .finding-num {
+        background: var(--color-info);
+      }
+      .finding-severity {
+        font-size: var(--font-size-label);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        flex-shrink: 0;
+      }
+      .critical .finding-severity {
+        color: var(--color-critical);
+      }
+      .warning .finding-severity {
+        color: var(--color-warning);
+      }
+      .info .finding-severity {
+        color: var(--color-info);
+      }
+      .finding-title {
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        color: var(--color-text);
+      }
+      .finding-body {
+        padding: var(--space-7);
+        border: 1px solid var(--color-border);
+        border-top: none;
+        border-radius: 0 0 var(--space-2) var(--space-2);
+        font-size: var(--font-size-sm);
+        line-height: 1.65;
+      }
+      .finding-body p {
+        margin-bottom: var(--space-3);
+      }
+      .finding-body p:last-child {
+        margin-bottom: 0;
+      }
+      .report-img,
+      .finding-body img {
+        max-width: 100%;
+        border: 1px solid var(--color-border);
+        border-radius: var(--space-2);
+        padding: var(--space-7);
+        background: var(--color-bg);
+        display: block;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .finding-body img {
+        margin-top: var(--space-7);
+        margin-bottom: var(--space-3);
+      }
+
+      /* ---------- Development Considerations ---------- */
+      .report-list {
+        list-style-type: upper-alpha;
+        padding-left: 1.5rem;
+      }
+      .report-list li {
+        padding-left: 0.5rem;
+        margin-bottom: var(--space-6);
+      }
+      .report-list li:last-child {
+        margin-bottom: 0;
+      }
+      .note-heading {
+        font-size: var(--font-size-sm);
+        font-weight: 700;
+        margin-bottom: var(--space-1);
+      }
+      .note-heading + p {
+        font-size: var(--font-size-sm);
+        line-height: 1.65;
+      }
+
+      /* ---------- Report tables ---------- */
+      .report-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: var(--space-1);
+      }
+      .report-table thead th {
+        text-align: left;
+        padding: var(--space-3) var(--space-4);
+        font-size: var(--font-size-label);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        background: var(--color-bg-table-head);
+        border-bottom: 2px solid var(--color-border);
+      }
+      .report-table td {
+        padding: var(--space-3) var(--space-4);
+        border-bottom: 1px solid var(--color-border);
+        font-size: var(--font-size-sm);
+      }
+      .report-table tbody tr:nth-child(even) td {
+        background: var(--color-bg-table-stripe);
+      }
+      /* JIRA column must not wrap */
+      .report-table td:last-child {
+        white-space: nowrap;
+      }
+
+      /* ---------- Cover footer (Frames Reviewed) ---------- */
+      .cover-footer {
+        padding: 0 var(--space-11) var(--space-9);
+      }
+      .cover-footer ul {
+        padding-left: 1.25rem;
+        columns: 3;
+        column-gap: 2rem;
+      }
+      .cover-footer li {
+        margin-bottom: var(--space-1);
+        font-size: var(--font-size-sm);
+        break-inside: avoid;
+      }
+      @media (width <= 1023px) {
+        .cover-footer ul { columns: 2; }
+      }
+      @media (width <= 767px) {
+        .cover-footer ul { columns: 1; }
+      }
+      @media print {
+        .cover-footer ul { columns: 3; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- COVER PAGE -->
+    <header class="cover">
+      <!-- Purple header: title + score -->
+      <div class="cover-header">
+        <!-- Spirit logo -->
+        <svg width="127" height="38" viewBox="0 0 127 38" fill="none" xmlns="http://www.w3.org/2000/svg" class="cover-header-logo">
+          <title>Spirit</title>
+          <g clip-path="url(#clip0_43749_2546)">
+            <mask id="mask0_43749_2546" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="38" height="38">
+              <path d="M38 0H0V38H38V0Z" fill="white"/>
+            </mask>
+            <g mask="url(#mask0_43749_2546)">
+              <path d="M0 8.90625C0 3.98747 3.98747 0 8.90625 0H29.0938C34.0125 0 38 3.98747 38 8.90625V29.0938C38 34.0125 34.0125 38 29.0938 38H8.90625C3.98747 38 0 34.0125 0 29.0938V8.90625Z" fill="url(#paint0_linear_43749_2546)"/>
+              <path d="M29.0938 36.8125V38H8.90625V36.8125H29.0938ZM36.8125 29.0938V8.90625C36.8125 4.6433 33.3567 1.1875 29.0938 1.1875H8.90625C4.6433 1.1875 1.1875 4.6433 1.1875 8.90625V29.0938C1.1875 33.3567 4.6433 36.8125 8.90625 36.8125V38C3.98747 38 0 34.0125 0 29.0938V8.90625C0 3.98747 3.98747 0 8.90625 0H29.0938C34.0125 0 38 3.98747 38 8.90625V29.0938C38 34.0125 34.0125 38 29.0938 38V36.8125C33.3567 36.8125 36.8125 33.3567 36.8125 29.0938Z" fill="url(#paint1_linear_43749_2546)"/>
+              <path d="M18.7265 19.897L13.6562 11.1556C13.8157 10.3081 14.1023 9.53499 14.5173 8.83753L14.518 8.8365L14.5186 8.83547C15.2173 7.70177 16.1929 6.81043 17.4408 6.16155C18.6893 5.48884 20.1259 5.11862 21.7471 5.04703L21.7506 5.04688H21.7541C23.8602 5.04688 25.5769 5.2953 26.897 5.79977C28.2253 6.29842 29.4134 6.89288 30.4606 7.58381C30.5278 7.62808 30.5514 7.71541 30.5157 7.78746L28.5728 11.7127C28.5327 11.7938 28.4332 11.825 28.3539 11.7816C27.3726 11.2436 26.3684 10.7995 25.3411 10.449L25.3401 10.4486C24.341 10.0997 23.4051 9.92703 22.5312 9.92703C21.4438 9.92703 20.6087 10.1473 20.0088 10.5699C19.4222 10.9831 19.1226 11.6022 19.1226 12.4552C19.1226 13.0213 19.338 13.5362 19.7826 14.0045C20.2627 14.4617 20.8717 14.8764 21.6124 15.2473C22.3846 15.622 23.1803 15.9617 23.9995 16.2664C24.7595 16.5517 25.5078 16.8964 26.2434 17.3001C27.0106 17.6843 27.6944 18.1768 28.2944 18.7771C28.9008 19.3604 29.383 20.0984 29.7432 20.9874C30.1066 21.861 30.285 22.9321 30.285 24.1952C30.285 25.5443 29.9355 26.7987 29.2376 27.955C28.538 29.1142 27.5145 30.0524 26.1741 30.7713L26.1721 30.7723C25.884 30.9216 25.5821 31.0548 25.2663 31.1719L22.6694 26.6947C23.2301 26.5113 23.6854 26.2301 24.0405 25.8538L24.042 25.8522L24.0436 25.8505C24.4304 25.4633 24.6328 24.9187 24.6328 24.1952C24.6328 23.7163 24.4709 23.2804 24.1398 22.8827L24.1382 22.8806L24.1365 22.8785C23.8217 22.4733 23.3789 22.0965 22.8026 21.7503L22.8013 21.7496L22.8002 21.7488C22.2446 21.4012 21.63 21.0993 20.9559 20.8433C20.2316 20.5661 19.4882 20.2505 18.7265 19.897Z" fill="white"/>
+              <path d="M13.585 19.8906C13.585 19.3988 13.1862 19 12.6944 19H11.6494C11.1575 19 10.7588 19.3988 10.7588 19.8906V21.8498C10.7588 22.3417 10.36 22.7405 9.86813 22.7405H8.01563C7.52375 22.7405 7.125 23.1392 7.125 23.6311V24.7592C7.125 25.2511 7.52375 25.6498 8.01563 25.6498H9.86813C10.36 25.6498 10.7588 26.0486 10.7588 26.5405V28.5C10.7588 28.9919 11.1575 29.3906 11.6494 29.3906H12.6944C13.1862 29.3906 13.585 28.9919 13.585 28.5V26.5405C13.585 26.0486 13.9838 25.6498 14.4756 25.6498H16.3281C16.82 25.6498 17.2188 25.2511 17.2188 24.7592V23.6311C17.2188 23.1392 16.82 22.7405 16.3281 22.7405H14.4756C13.9838 22.7405 13.585 22.3417 13.585 21.8498V19.8906Z" fill="white"/>
+              <path d="M9.42432 3.77152C9.63688 3.64783 9.90937 3.71969 10.0332 3.93214L27.4004 33.7681C27.524 33.9806 27.4522 34.2531 27.2397 34.3769C27.0273 34.5006 26.7547 34.4287 26.6309 34.2163L9.26369 4.38035C9.14003 4.16784 9.21191 3.89529 9.42432 3.77152Z" fill="#C1A2C3"/>
+            </g>
+          </g>
+          <path d="M68.06 23.42C68.06 27.564 64.756 30.28 59.52 30.28C54.284 30.28 50.924 27.508 50.56 23.056H55.908C55.964 24.96 57.224 26.164 59.408 26.164C61.228 26.164 62.432 25.464 62.432 24.204C62.432 23.336 61.564 22.692 60.388 22.468L56.72 21.768C53.5 21.152 51.372 19.276 51.372 16.028C51.372 12.276 54.676 9.644 59.184 9.644C63.972 9.644 67.416 12.388 67.724 16.728H62.376C62.236 14.908 61.004 13.732 59.24 13.732C57.672 13.732 56.72 14.572 56.72 15.664C56.72 16.56 57.616 17.092 58.68 17.288L62.572 18.044C66.156 18.744 68.06 20.508 68.06 23.42ZM85.9765 22.468C85.9765 26.836 83.3165 30.28 79.2565 30.28C77.6885 30.28 76.3445 29.72 75.1685 28.6V35.404H70.3805V14.936H74.7765V16.644C76.0085 15.356 77.4925 14.656 79.2565 14.656C83.3165 14.656 85.9765 18.156 85.9765 22.468ZM80.9925 22.468C80.9925 20.116 79.5645 18.968 78.1085 18.968C76.6245 18.968 75.2245 20.116 75.2245 22.496C75.2245 24.904 76.6525 25.968 78.1085 25.968C79.5645 25.968 80.9925 24.876 80.9925 22.468ZM93.5859 11.436C93.5859 13.004 92.3259 14.152 90.5059 14.152C88.6859 14.152 87.4259 13.004 87.4259 11.436C87.4259 9.84 88.6859 8.692 90.5059 8.692C92.3259 8.692 93.5859 9.84 93.5859 11.436ZM92.9419 30H88.1539V14.936H92.9419V30ZM100.872 23.056V30H96.0836V14.936H100.48V17.596C101.628 15.832 104.008 14.824 106.416 14.824V19.808C103.028 19.472 100.872 19.724 100.872 23.056ZM113.684 11.436C113.684 13.004 112.424 14.152 110.604 14.152C108.784 14.152 107.524 13.004 107.524 11.436C107.524 9.84 108.784 8.692 110.604 8.692C112.424 8.692 113.684 9.84 113.684 11.436ZM113.04 30H108.252V14.936H113.04V30ZM126.289 25.296V29.468C125.225 30.056 124.217 30.28 122.873 30.28C119.485 30.28 117.497 28.264 117.497 24.82V19.108H114.697V14.936H117.497V10.512H122.285V14.936H126.401V19.108H122.285V23.7C122.285 25.156 122.901 25.828 124.217 25.828C125.001 25.828 125.757 25.632 126.289 25.296Z" fill="white"/>
+          <defs>
+            <linearGradient id="paint0_linear_43749_2546" x1="19" y1="0" x2="19" y2="38" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#CB43D3"/>
+              <stop offset="1" stop-color="#39153B"/>
+            </linearGradient>
+            <linearGradient id="paint1_linear_43749_2546" x1="19" y1="0" x2="19" y2="38" gradientUnits="userSpaceOnUse">
+              <stop stop-color="white"/>
+              <stop offset="1" stop-color="#CB43D3"/>
+            </linearGradient>
+            <clipPath id="clip0_43749_2546">
+              <rect width="38" height="38" fill="white"/>
+            </clipPath>
+          </defs>
+        </svg>
+        <div class="cover-header-info">
+          <div class="label">AI Design Review</div>
+          <div class="subject">{{SUBJECT}}</div>
+          <div class="meta">{{DATE}} &nbsp;·&nbsp; {{REVIEW_TYPE}}</div>
+        </div>
+        <div class="cover-header-score">
+          <div class="score-num">{{SCORE}}<span class="score-pct">%</span></div>
+          <div class="score-label">Design Score</div>
+        </div>
+      </div>
+      <!-- Two-column body: eval (checks) left, overview (image + pins) right. -->
+      <div class="cover-body">
+        <div class="cover-eval">
+          <table class="eval-table">
+            <thead>
+              <tr>
+                <th colspan="2">Check</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{EVAL_ROWS}}
+            </tbody>
+          </table>
+        </div>
+        <div class="cover-overview">
+          <div class="cover-overview-label">Findings Overview</div>
+          <div class="overview-wrap"{{OVERVIEW_WRAP_STYLE}}>
+            <img src="overview.png" alt="Design overview" class="report-img" />
+            {{PINS}}
+          </div>
+        </div>
+      </div>
+      <!-- FRAMES REVIEWED (multi-frame only, omit block when empty) -->
+      {{FRAMES_REVIEWED}}
+    </header>
+
+    <main>
+
+      <!-- FINDINGS -->
+      <section class="report-section">
+        <h2 class="section-heading">Findings</h2>
+        {{FINDINGS}}
+      </section>
+
+      <!-- DEVELOPMENT CONSIDERATIONS -->
+      <section class="report-section">
+        <h2 class="section-heading">Development Considerations</h2>
+        <ol class="report-list">
+          {{DEV_NOTES}}
+        </ol>
+      </section>
+
+      <!-- REQUIRED DS CHANGES -->
+      <section class="report-section">
+        <h2 class="section-heading">Required DS Changes</h2>
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Change</th>
+              <th>Effort</th>
+              <th>JIRA</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{DS_CHANGES}}
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+
+  </body>
+</html>
