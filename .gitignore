@@ -55,3 +55,6 @@ nx-cloud.env
 # Dotenv
 .env*
 !.env.*.example
+
+# Design reviews
+/design-reviews/

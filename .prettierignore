@@ -70,9 +70,11 @@ makefile
 # Husky.js Files
 .husky/*
 
+# Miscellaneous
+console
+
 # Shell Scripts
 *.sh
-console
 
 # Favicon
 *.ico
