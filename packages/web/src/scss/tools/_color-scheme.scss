@@ -1,12 +1,12 @@
-// Generates `.color-scheme-on-*` helpers: only `--local-background-color` and `--local-color`.
+// Generates `.color-scheme-on-*` classes: `--local-color`, `--local-border-color`, and `--local-background-color`.
 // Pairing logic and token references match the former utilities map (see color-scheme-values).
 
 @use '@tokens' as tokens;
 @use 'sass:map';
 @use 'sass:meta';
 @use 'sass:string';
-@use '../../tools/map' as spirit-map;
-@use '../../tools/tokens' as tokens-tools;
+@use 'map' as spirit-map;
+@use 'tokens' as tokens-tools;
 
 $_accent-prefix: 'accent-';
 $_accent-tokens-key: 'accent-colors';
@@ -25,10 +25,12 @@ $_emotion-tokens-key: 'emotion-colors';
             $formatted-key: tokens-tools.format-numeric-key($key);
         }
 
-        $background-basic: map.get($values, 'background-basic');
-        $background-subtle: map.get($values, 'background-subtle');
         $content-basic: map.get($values, 'content-basic');
         $content-subtle: map.get($values, 'content-subtle');
+        $border-basic: map.get($values, 'border-basic');
+        $border-subtle: map.get($values, 'border-subtle');
+        $background-basic: map.get($values, 'background-basic');
+        $background-subtle: map.get($values, 'background-subtle');
 
         @if $background-basic and $content-subtle {
             $name: $prefix + $formatted-key + '-basic';
@@ -36,8 +38,9 @@ $_emotion-tokens-key: 'emotion-colors';
                 $result,
                 string.unquote($name),
                 (
-                    background-color: $background-basic,
                     color: $content-subtle,
+                    border-color: $border-basic,
+                    background-color: $background-basic,
                 )
             );
         }
@@ -48,8 +51,9 @@ $_emotion-tokens-key: 'emotion-colors';
                 $result,
                 string.unquote($name),
                 (
-                    background-color: $background-subtle,
                     color: $content-basic,
+                    border-color: $border-subtle,
+                    background-color: $background-subtle,
                 )
             );
         }
@@ -64,24 +68,29 @@ $_emotion-tokens-key: 'emotion-colors';
         generate-color-scheme-map($tokens-group: $_emotion-tokens-key, $prefix: $_emotion-prefix),
         (
             disabled: (
-                background-color: tokens.$disabled-background,
                 color: tokens.$disabled-content,
+                border-color: tokens.$disabled-border,
+                background-color: tokens.$disabled-background,
             ),
             neutral-basic: (
-                background-color: tokens.$neutral-background-basic,
                 color: tokens.$neutral-content-subtle,
+                border-color: tokens.$neutral-border-basic,
+                background-color: tokens.$neutral-background-basic,
             ),
             neutral-subtle: (
-                background-color: tokens.$neutral-background-subtle,
                 color: tokens.$neutral-content-basic,
+                border-color: tokens.$neutral-border-basic,
+                background-color: tokens.$neutral-background-subtle,
             ),
             selected-basic: (
-                background-color: tokens.$selected-background-basic,
                 color: tokens.$selected-content-subtle,
+                border-color: tokens.$selected-border-subtle,
+                background-color: tokens.$selected-background-basic,
             ),
             selected-subtle: (
-                background-color: tokens.$selected-background-subtle,
                 color: tokens.$selected-content-basic,
+                border-color: tokens.$selected-border-basic,
+                background-color: tokens.$selected-background-subtle,
             ),
         )
     );
@@ -90,8 +99,9 @@ $_emotion-tokens-key: 'emotion-colors';
 @mixin emit-color-scheme-classes($values, $class-prefix: 'color-scheme-on') {
     @each $key, $pair in $values {
         .#{$class-prefix}-#{$key} {
-            --#{tokens.$css-variable-prefix}local-background-color: #{map.get($pair, background-color)};
             --#{tokens.$css-variable-prefix}local-color: #{map.get($pair, color)};
+            --#{tokens.$css-variable-prefix}local-border-color: #{map.get($pair, border-color)};
+            --#{tokens.$css-variable-prefix}local-background-color: #{map.get($pair, background-color)};
         }
     }
 }

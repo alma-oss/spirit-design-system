@@ -47,6 +47,15 @@ $utilities: (
                 )
             ),
     ),
+    'background-color-without-custom-properties': (
+        responsive: false,
+        property: background-color,
+        class: bg,
+        generate-custom-properties: false,
+        values: (
+            'color-scheme': var(--#{tokens.$css-variable-prefix}local-background-color),
+        ),
+    ),
     'background-gradient': (
         responsive: true,
         property: background-image,
@@ -80,6 +89,9 @@ $utilities: (
                 ),
                 (
                     basic: tokens.$border-basic,
+                ),
+                (
+                    'color-scheme': var(--#{tokens.$css-variable-prefix}local-border-color),
                 )
             ),
     ),
@@ -288,6 +300,9 @@ $utilities: (
                     neutral-subtle: tokens.$neutral-content-subtle,
                     selected-basic: tokens.$selected-content-basic,
                     selected-subtle: tokens.$selected-content-subtle,
+                ),
+                (
+                    'color-scheme': var(--#{tokens.$css-variable-prefix}local-color),
                 )
             ),
     ),

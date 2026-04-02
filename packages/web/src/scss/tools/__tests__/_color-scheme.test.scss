@@ -8,36 +8,44 @@
             color-scheme.generate-color-scheme-map($tokens-group: 'emotion-colors', $prefix: 'emotion-'),
             (
                 emotion-danger-basic: (
-                    background-color: var(--spirit-color-emotion-danger-background-basic),
                     color: var(--spirit-color-emotion-danger-content-subtle),
+                    border-color: var(--spirit-color-emotion-danger-border-basic),
+                    background-color: var(--spirit-color-emotion-danger-background-basic),
                 ),
                 emotion-danger-subtle: (
-                    background-color: var(--spirit-color-emotion-danger-background-subtle),
                     color: var(--spirit-color-emotion-danger-content-basic),
+                    border-color: var(--spirit-color-emotion-danger-border-subtle),
+                    background-color: var(--spirit-color-emotion-danger-background-subtle),
                 ),
                 emotion-informative-basic: (
-                    background-color: var(--spirit-color-emotion-informative-background-basic),
                     color: var(--spirit-color-emotion-informative-content-subtle),
+                    border-color: var(--spirit-color-emotion-informative-border-basic),
+                    background-color: var(--spirit-color-emotion-informative-background-basic),
                 ),
                 emotion-informative-subtle: (
-                    background-color: var(--spirit-color-emotion-informative-background-subtle),
                     color: var(--spirit-color-emotion-informative-content-basic),
+                    border-color: var(--spirit-color-emotion-informative-border-subtle),
+                    background-color: var(--spirit-color-emotion-informative-background-subtle),
                 ),
                 emotion-success-basic: (
-                    background-color: var(--spirit-color-emotion-success-background-basic),
                     color: var(--spirit-color-emotion-success-content-subtle),
+                    border-color: var(--spirit-color-emotion-success-border-basic),
+                    background-color: var(--spirit-color-emotion-success-background-basic),
                 ),
                 emotion-success-subtle: (
-                    background-color: var(--spirit-color-emotion-success-background-subtle),
                     color: var(--spirit-color-emotion-success-content-basic),
+                    border-color: var(--spirit-color-emotion-success-border-subtle),
+                    background-color: var(--spirit-color-emotion-success-background-subtle),
                 ),
                 emotion-warning-basic: (
-                    background-color: var(--spirit-color-emotion-warning-background-basic),
                     color: var(--spirit-color-emotion-warning-content-subtle),
+                    border-color: var(--spirit-color-emotion-warning-border-basic),
+                    background-color: var(--spirit-color-emotion-warning-background-basic),
                 ),
                 emotion-warning-subtle: (
-                    background-color: var(--spirit-color-emotion-warning-background-subtle),
                     color: var(--spirit-color-emotion-warning-content-basic),
+                    border-color: var(--spirit-color-emotion-warning-border-subtle),
+                    background-color: var(--spirit-color-emotion-warning-background-subtle),
                 ),
             )
         );
@@ -61,8 +69,9 @@
                 @include color-scheme.emit-color-scheme-classes(
                     (
                         fixture-basic: (
-                            background-color: #f00,
                             color: #fff,
+                            border-color: #0f0,
+                            background-color: #f00,
                         ),
                     )
                 );
@@ -70,8 +79,9 @@
 
             @include test.expect() {
                 .color-scheme-on-fixture-basic {
-                    --spirit-local-background-color: #f00;
                     --spirit-local-color: #fff;
+                    --spirit-local-border-color: #0f0;
+                    --spirit-local-background-color: #f00;
                 }
             }
         }

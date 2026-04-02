@@ -31,21 +31,13 @@ $_component-name-infix: spirit-string.convert-pascal-case-to-kebab-case($_compon
     padding-inline: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-padding-x);
     padding-block: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-padding-y);
     color: var(--#{tokens.$css-variable-prefix}local-color);
-    border: theme.$border-width theme.$border-style var(--#{tokens.$css-variable-prefix}local-border-color, transparent);
+    border: theme.$border-width theme.$border-style transparent;
     border-radius: theme.$border-radius;
+    background-color: var(--#{tokens.$css-variable-prefix}local-background-color);
     user-select: none;
     cursor: cursors.$buttons;
 
     &:is(:disabled, .is-disabled, .ControlButton--disabled) {
-        // TODO This is not ideal, check with señor Adam how to handle this.
-        color: var(
-            --#{tokens.$css-variable-prefix}local-color
-        ); // TODO Increased specificity to override dynamic colors.
-
-        background-color: var(
-            --#{tokens.$css-variable-prefix}local-background-color
-        ); // TODO The bg is otherwise not set at all, should it be?
-
         pointer-events: none;
         cursor: cursors.$disabled;
     }

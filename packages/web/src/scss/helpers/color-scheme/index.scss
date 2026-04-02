@@ -1,5 +1,0 @@
-@forward 'color-scheme';
-
-@use 'color-scheme' as color-scheme;
-
-@include color-scheme.emit-color-scheme-classes(color-scheme.color-scheme-values());
