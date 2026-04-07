@@ -686,6 +686,14 @@
       "require": "./dist/components/UNSTABLE_Attachment/index.cjs",
       "default": "./dist/components/UNSTABLE_Attachment/index.js"
     },
+    "./components/UNSTABLE_File": {
+      "types": "./dist/components/UNSTABLE_File/index.d.ts",
+      "development": "./src/components/UNSTABLE_File/index.ts",
+      "production": "./dist/components/UNSTABLE_File/index.js",
+      "import": "./dist/components/UNSTABLE_File/index.js",
+      "require": "./dist/components/UNSTABLE_File/index.cjs",
+      "default": "./dist/components/UNSTABLE_File/index.js"
+    },
     "./components/UNSTABLE_FileUpload": {
       "types": "./dist/components/UNSTABLE_FileUpload/index.d.ts",
       "development": "./src/components/UNSTABLE_FileUpload/index.ts",
