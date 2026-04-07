@@ -24,30 +24,30 @@
 
 // 2.
 .link-inherit {
-    --#{tokens.$css-variable-prefix}-link-color-internal: var(--#{tokens.$css-variable-prefix}-link-color, inherit);
+    --#{tokens.$css-variable-prefix}link-color-internal: var(--#{tokens.$css-variable-prefix}link-color, inherit);
 
-    color: var(--#{tokens.$css-variable-prefix}-link-color-internal);
+    color: var(--#{tokens.$css-variable-prefix}link-color-internal);
 
     @media (hover: hover) {
         &:hover {
             color: var(
-                --#{tokens.$css-variable-prefix}-link-color-hover,
-                var(--#{tokens.$css-variable-prefix}-link-color-internal)
+                --#{tokens.$css-variable-prefix}link-color-hover,
+                var(--#{tokens.$css-variable-prefix}link-color-internal)
             );
         }
     }
 
     &:active {
         color: var(
-            --#{tokens.$css-variable-prefix}-link-color-active,
-            var(--#{tokens.$css-variable-prefix}-link-color-internal)
+            --#{tokens.$css-variable-prefix}link-color-active,
+            var(--#{tokens.$css-variable-prefix}link-color-internal)
         );
     }
 
     &:visited {
         color: var(
-            --#{tokens.$css-variable-prefix}-link-color-visited,
-            var(--#{tokens.$css-variable-prefix}-link-color-internal)
+            --#{tokens.$css-variable-prefix}link-color-visited,
+            var(--#{tokens.$css-variable-prefix}link-color-internal)
         );
     }
 }
