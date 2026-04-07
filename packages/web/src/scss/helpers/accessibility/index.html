@@ -39,8 +39,17 @@
         is not affected.
       </p>
 
-      <button type="button" class="accessibility-tap-target" aria-label="Close">
-        <svg class="Icon" width="16" height="16" aria-hidden="true">
+      <button
+        type="button"
+        class="accessibility-tap-target"
+        aria-label="Close"
+      >
+        <svg
+          class="Icon"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        >
           <use xlink:href="/assets/icons/svg/sprite.svg#close" />
         </svg>
       </button>
@@ -57,12 +66,20 @@
     <div class="docs-Stack docs-Stack--start">
       <p>Toggle display of an element inside the toggle button depending on its <code>aria</code> attribute.</p>
 
-      <button type="button" aria-expanded="false" onclick="toggleAriaAttribute(event, 'aria-expanded')">
+      <button
+        type="button"
+        aria-expanded="false"
+        onclick="toggleAriaAttribute(event, 'aria-expanded')"
+      >
         <code class="accessibility-open">aria-expanded="true"</code>
         <code class="accessibility-closed">aria-expanded="false"</code>
       </button>
 
-      <button type="button" aria-checked="false" onclick="toggleAriaAttribute(event, 'aria-checked')">
+      <button
+        type="button"
+        aria-checked="false"
+        onclick="toggleAriaAttribute(event, 'aria-checked')"
+      >
         <code class="accessibility-checked">aria-checked="true"</code>
         <code class="accessibility-unchecked">aria-checked="false"</code>
       </button>
