@@ -79,17 +79,17 @@ $_emotion-tokens-key: 'emotion-colors';
             ),
             neutral-subtle: (
                 color: tokens.$neutral-content-basic,
-                border-color: tokens.$neutral-border-basic,
+                border-color: tokens.$neutral-border-subtle,
                 background-color: tokens.$neutral-background-subtle,
             ),
             selected-basic: (
                 color: tokens.$selected-content-subtle,
-                border-color: tokens.$selected-border-subtle,
+                border-color: tokens.$selected-border-basic,
                 background-color: tokens.$selected-background-basic,
             ),
             selected-subtle: (
                 color: tokens.$selected-content-basic,
-                border-color: tokens.$selected-border-basic,
+                border-color: tokens.$selected-border-subtle,
                 background-color: tokens.$selected-background-subtle,
             ),
         )
