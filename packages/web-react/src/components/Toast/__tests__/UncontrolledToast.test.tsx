@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { validHtmlAttributesTest } from '@local/tests';
 import { type ToastLinkProps } from '../../../types';
+import { getColorSchemeClassName } from '../../../utils';
 import { ToastContext } from '../ToastContext';
 import UncontrolledToast from '../UncontrolledToast';
 
@@ -65,6 +66,7 @@ describe('UncontrolledToast', () => {
     expect(elementToast).toBeInTheDocument();
     expect(elementToastBar).toBeInTheDocument();
     expect(elementToastBar).toHaveClass('is-open ToastBar--neutral');
+    expect(elementToastBar).toHaveClass(getColorSchemeClassName({ color: 'neutral', isSubtle: false }));
     expect(elementToastBar.querySelector('.ToastBar .ToastBar__container svg')).not.toBeInTheDocument();
   });
 
@@ -87,6 +89,7 @@ describe('UncontrolledToast', () => {
     expect(elementToastBar).toBeInTheDocument();
     expect(elementToast).toHaveClass('Toast--right Toast--top');
     expect(elementToastBar).toHaveClass('ToastBar ToastBar--neutral ToastBar--dismissible is-open');
+    expect(elementToastBar).toHaveClass(getColorSchemeClassName({ color: 'neutral', isSubtle: false }));
     expect(elementToastBar.querySelector('.ToastBar__container svg')).toBeInTheDocument();
     expect(elementToastBar.querySelector('button')).toHaveTextContent('Close test');
   });
