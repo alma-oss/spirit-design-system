@@ -14,7 +14,7 @@ Render files in a list container and handle actions in your app state:
 
 The default root element is `<li>`; pair it with a list wrapper (e.g. `Stack` with `elementType="ul"`). Use `elementType` when you need a different tag (and set roles if you leave the list pattern).
 
-### Image preview
+### Image Preview
 
 Pass `previewSlot` with [`UNSTABLE_FileImagePreview`](#unstable_fileimagepreview-props) for a thumbnail:
 
@@ -28,7 +28,7 @@ Pass `previewSlot` with [`UNSTABLE_FileImagePreview`](#unstable_fileimagepreview
 />
 ```
 
-### Image preview with crop metadata
+### Image Preview with Crop Metadata
 
 When the user crops a region in the **original** image, pass **all six** numeric fields so the preview matches that crop inside the fixed-size frame. Values are in **pixels of the full source image** (`originalWidth` / `originalHeight`): top-left of the crop is `(x, y)`, size is `cropWidth` × `cropHeight`.
 
@@ -104,7 +104,7 @@ Set `hasValidationIcon` to show the status icon next to the message (same patter
 | `previewSlot`       | `ReactNode`                                    | —       | ✕        | Custom preview area (e.g. `UNSTABLE_FileImagePreview`)                                                                          |
 | `removeText`        | `string`                                       | i18n    | ✕        | Accessible name for remove (default from `attachment.remove`)                                                                   |
 | `validationState`   | [Validation dictionary][dictionary-validation] | —       | ✕        | Visual validation state (visual only)                                                                                           |
-| `validationText`    | [`ReactNode` \| `ReactNode[]`]                 | —       | ✕        | Message(s) under the name when `validationState` is set (visual only); array renders multiple lines like other field validation |
+| `validationText`    | `ReactNode` or `ReactNode[]`                   | —       | ✕        | Message(s) under the name when `validationState` is set (visual only); array renders multiple lines like other field validation |
 
 The rest of the properties are created from the default `<li>` element. [More about the element][li-element-docs]
 
