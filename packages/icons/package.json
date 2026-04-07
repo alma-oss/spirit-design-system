@@ -21,7 +21,10 @@
     "directory": "packages/icons"
   },
   "exports": {
-    "./icons": "./dist/icons.mjs",
+    "./icons": {
+      "types": "./dist/icons.d.ts",
+      "default": "./dist/icons.mjs"
+    },
     "./react/*": "./dist/react/*.tsx",
     "./svg/*": "./dist/svg/*.svg"
   },
