@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { type SpiritToastBarProps } from '../../../types';
+import { getColorSchemeClassName } from '../../../utils';
 import { useToastBarStyleProps } from '../useToastBarStyleProps';
 
 describe('useToastBarStyleProps', () => {
@@ -7,7 +8,9 @@ describe('useToastBarStyleProps', () => {
     const props = { isOpen: true } as SpiritToastBarProps;
     const { result } = renderHook(() => useToastBarStyleProps(props));
 
-    expect(result.current.classProps.root).toBe('ToastBar ToastBar--neutral');
+    expect(result.current.classProps.root).toBe(
+      `ToastBar ToastBar--neutral ${getColorSchemeClassName({ color: 'neutral', isSubtle: false })}`,
+    );
     expect(result.current.classProps.close).toBe('ToastBar__close');
     expect(result.current.classProps.link).toBe('ToastBar__link link-underlined');
     expect(result.current.classProps.content).toBe('ToastBar__content');
@@ -27,7 +30,9 @@ describe('useToastBarStyleProps', () => {
       const props = { color } as SpiritToastBarProps;
       const { result } = renderHook(() => useToastBarStyleProps(props));
 
-      expect(result.current.classProps.root).toContain(`ToastBar--${color}`);
+      expect(result.current.classProps.root).toBe(
+        `ToastBar ToastBar--${color} ${getColorSchemeClassName({ color, isSubtle: false })}`,
+      );
     },
   );
 });
