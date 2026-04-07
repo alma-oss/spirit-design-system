@@ -678,14 +678,6 @@
       "require": "./dist/components/Truncate/index.cjs",
       "default": "./dist/components/Truncate/index.js"
     },
-    "./components/UNSTABLE_Attachment": {
-      "types": "./dist/components/UNSTABLE_Attachment/index.d.ts",
-      "development": "./src/components/UNSTABLE_Attachment/index.ts",
-      "production": "./dist/components/UNSTABLE_Attachment/index.js",
-      "import": "./dist/components/UNSTABLE_Attachment/index.js",
-      "require": "./dist/components/UNSTABLE_Attachment/index.cjs",
-      "default": "./dist/components/UNSTABLE_Attachment/index.js"
-    },
     "./components/UNSTABLE_File": {
       "types": "./dist/components/UNSTABLE_File/index.d.ts",
       "development": "./src/components/UNSTABLE_File/index.ts",
