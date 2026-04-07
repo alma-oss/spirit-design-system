@@ -164,7 +164,7 @@ elements.
 Minimum example:
 
 ```html
-<div class="ToastBar ToastBar--neutral">
+<div class="ToastBar ToastBar--neutral color-scheme-on-neutral-basic">
   <div class="ToastBar__box">
     <div class="ToastBar__container">
       <div class="ToastBar__content">
@@ -180,7 +180,7 @@ Minimum example:
 An icon can be added to the ToastBar component:
 
 ```html
-<div class="ToastBar ToastBar--neutral">
+<div class="ToastBar ToastBar--neutral color-scheme-on-neutral-basic">
   <div class="ToastBar__box">
     <div class="ToastBar__container">
       <svg width="20" height="20" aria-hidden="true">
@@ -205,7 +205,7 @@ The content of `ToastBar` can be assembled from the following subcomponents:
 Usage example:
 
 ```html
-<div class="ToastBar ToastBar--neutral">
+<div class="ToastBar ToastBar--neutral color-scheme-on-neutral-basic">
   <div class="ToastBar__box">
     <div class="ToastBar__container">
       <div class="ToastBar__content">
@@ -223,7 +223,7 @@ Usage example:
 Usage example:
 
 ```html
-<div class="ToastBar ToastBar--neutral">
+<div class="ToastBar ToastBar--neutral color-scheme-on-neutral-basic">
   <div class="ToastBar__box">
     <div class="ToastBar__container">
       <div class="ToastBar__content">
@@ -242,12 +242,12 @@ said action), as it is very hard (if not impossible) to reach for users with ass
 ### Colors
 
 The ToastBar component is available in all [emotion colors][dictionary-color], plus the `neutral` variant (default).
-Use the `ToastBar--<color>` modifier class to change the color of the ToastBar component.
+Use the `ToastBar--<color>` modifier together with the matching `color-scheme-on-*-basic` helper so `--spirit-local-color` and `--spirit-local-background-color` apply to the bar.
 
 For example:
 
 ```html
-<div class="ToastBar ToastBar--success">
+<div class="ToastBar ToastBar--success color-scheme-on-emotion-success-basic">
   <div class="ToastBar__box">
     <div class="ToastBar__container">
       <div class="ToastBar__content">
@@ -286,7 +286,7 @@ To make the ToastBar dismissible, add the `ToastBar--dismissible` modifier class
 button:
 
 ```html
-<div id="my-dismissible-toast" class="ToastBar ToastBar--neutral ToastBar--dismissible">
+<div id="my-dismissible-toast" class="ToastBar ToastBar--neutral ToastBar--dismissible color-scheme-on-neutral-basic">
   <div class="ToastBar__box">
     <div class="ToastBar__container">
       <div class="ToastBar__content">
@@ -328,7 +328,10 @@ button:
 <div class="Toast Toast--bottom Toast--center" role="log">
   <div class="Toast__queue">
     <!-- ToastBar: start -->
-    <div id="my-dismissible-toast" class="ToastBar ToastBar--neutral ToastBar--dismissible is-hidden">
+    <div
+      id="my-dismissible-toast"
+      class="ToastBar ToastBar--neutral ToastBar--dismissible is-hidden color-scheme-on-neutral-basic"
+    >
       <div class="ToastBar__box">
         <div class="ToastBar__container">
           <svg width="20" height="20" aria-hidden="true">
