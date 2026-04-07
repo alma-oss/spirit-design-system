@@ -33,7 +33,6 @@ $_component-name-infix: spirit-string.convert-pascal-case-to-kebab-case($_compon
     color: var(--#{tokens.$css-variable-prefix}local-color);
     border: theme.$border-width theme.$border-style transparent;
     border-radius: theme.$border-radius;
-    background-color: var(--#{tokens.$css-variable-prefix}local-background-color);
     user-select: none;
     cursor: cursors.$buttons;
 
