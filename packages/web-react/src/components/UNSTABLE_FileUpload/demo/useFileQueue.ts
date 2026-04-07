@@ -1,28 +1,28 @@
 'use client';
 
 import { useState } from 'react';
-import { type UnstableFileMetadata } from '../../UNSTABLE_Attachment/types';
+import { type UnstableFileItemMetadata } from '../../UNSTABLE_File/types';
 
 export type FileQueueMapType = Map<string, FileQueueValueType>;
 
 export interface FileQueueValueType {
   label: string;
   previewUrl?: string;
-  meta?: UnstableFileMetadata;
+  meta?: UnstableFileItemMetadata;
 }
 
 export interface UnstableFileUploadHandlingProps {
-  addToQueue: (key: string, file: File, meta?: UnstableFileMetadata) => void;
+  addToQueue: (key: string, file: File, meta?: UnstableFileItemMetadata) => void;
   clearQueue: () => void;
   fileQueue: FileQueueMapType;
   findInQueue: (key: string) => FileQueueValueType | null;
   onDismiss: (key: string) => void;
-  updateQueue: (key: string, file: File, meta?: UnstableFileMetadata) => void;
+  updateQueue: (key: string, file: File, meta?: UnstableFileItemMetadata) => void;
 }
 
 export interface FileQueueReturn extends UnstableFileUploadHandlingProps {}
 
-function toDisplayValue(file: File, meta?: UnstableFileMetadata): FileQueueValueType {
+function toDisplayValue(file: File, meta?: UnstableFileItemMetadata): FileQueueValueType {
   const value: FileQueueValueType = { label: file.name };
   if (file.type.includes('image')) {
     value.previewUrl = URL.createObjectURL(file);
@@ -50,13 +50,13 @@ export const useFileQueue = (): FileQueueReturn => {
     });
   };
 
-  const addToQueueHandler = (key: string, file: File, meta?: UnstableFileMetadata) => {
+  const addToQueueHandler = (key: string, file: File, meta?: UnstableFileItemMetadata) => {
     setQueue((prev) => new Map(prev.set(key, toDisplayValue(file, meta))));
   };
 
   const findInQueueHandler = (key: string) => queue.get(key) || null;
 
-  const updateQueueHandler = (key: string, file: File, meta?: UnstableFileMetadata) => {
+  const updateQueueHandler = (key: string, file: File, meta?: UnstableFileItemMetadata) => {
     setQueue((prev) => {
       const newState = new Map(prev);
       const existing = newState.get(key);

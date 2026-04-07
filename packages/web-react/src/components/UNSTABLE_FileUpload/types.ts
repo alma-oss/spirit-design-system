@@ -1,14 +1,16 @@
 import { type MutableRefObject, type ReactNode } from 'react';
 import { type SpiritInputElementProps, type Validation, type ValidationTextType } from '../../types/shared';
-import { type UnstableAttachmentItem } from '../UNSTABLE_Attachment/types';
+import { type UnstableFileItem } from '../UNSTABLE_File/types';
 
 export interface UnstableFileUploadTextProps {
+  /** Label for the decorative button (opens the same file input as the drop-zone label). */
+  buttonText?: string;
   helperText?: string;
   labelText?: string;
   linkText?: string;
 }
 
-export type UnstableFileUploadAttachmentsItem = UnstableAttachmentItem;
+export type UnstableFileUploadAttachmentsItem = UnstableFileItem;
 
 export type FilesSelectedType = (files: File[]) => void;
 
@@ -21,6 +23,9 @@ export interface UnstableFileUploadInputProps
   id: string;
   inputRef?: MutableRefObject<HTMLInputElement>;
   isDisabled?: boolean;
+  isCompact?: boolean;
+  /** When set, overrides environment drag-and-drop detection (e.g. unsupported appearance in docs). */
+  isDragAndDropSupported?: boolean;
   isLabelHidden?: boolean;
   isMultiple?: boolean;
   isRequired?: boolean;
@@ -32,5 +37,6 @@ export interface UnstableFileUploadInputProps
 
 export interface UnstableFileUploadProps extends UnstableFileUploadInputProps {
   id: string;
-  isFluid?: boolean;
+  /** Optional `id` on the root `.UNSTABLE_FileUpload` wrapper (static HTML uses `example-*` ids for doc sections). */
+  rootId?: string;
 }

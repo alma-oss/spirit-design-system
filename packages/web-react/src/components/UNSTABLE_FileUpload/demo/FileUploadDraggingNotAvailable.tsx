@@ -1,33 +1,31 @@
-import React, { useEffect } from 'react';
-import { Stack } from '../..';
+import React from 'react';
 import { UNSTABLE_FileUpload } from '..';
 
-const FileUploadDraggingNotAvailable = () => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const element = document
-        .getElementById('file-uploader-dragging-not-available')
-        ?.querySelector('.has-drag-and-drop');
-      element?.classList.remove('has-drag-and-drop');
-    }, 0);
-
-    return () => clearTimeout(timer);
-  }, []);
-
+const FileUploadDraggingNotAvailable = () => (
   // ⚠️ VISUAL EXAMPLE ONLY – shows how the input looks when drag-and-drop is not supported. No files are added.
-  return (
-    <>
-      <UNSTABLE_FileUpload
-        id="file-uploader-dragging-not-available"
-        helperText="Max file size is 10 MB"
-        label="Label"
-        labelText="or drag and drop here"
-        linkText="Upload your file"
-        name="attachments"
-      />
-      <Stack aria-label="Attachments" elementType="ul" hasSpacing />
-    </>
-  );
-};
+  <div className="Grid Grid--alignmentXStretch Grid--alignmentYStretch Grid--tablet--cols-2 Grid--cols-1">
+    <UNSTABLE_FileUpload
+      rootId="example-no-drag-standard"
+      id="file-uploader-no-drag-standard"
+      helperText="Max file size is 10 MB"
+      isDragAndDropSupported={false}
+      isRequired
+      label="Label"
+      linkText="Upload your file"
+      name="attachment-no-drag-standard"
+    />
+    <UNSTABLE_FileUpload
+      rootId="example-no-drag-compact"
+      id="file-uploader-no-drag-compact"
+      helperText="Max file size is 10 MB"
+      isCompact
+      isDragAndDropSupported={false}
+      isRequired
+      label="Label"
+      linkText="Upload your file"
+      name="attachment-no-drag-compact"
+    />
+  </div>
+);
 
 export default FileUploadDraggingNotAvailable;
