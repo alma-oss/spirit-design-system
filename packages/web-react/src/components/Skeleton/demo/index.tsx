@@ -1,4 +1,3 @@
-// @ts-ignore: No declaration file -- @see https://jira.almacareer.tech/browse/DS-561
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
