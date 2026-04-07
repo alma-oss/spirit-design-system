@@ -98,4 +98,15 @@ describe('useFileUploaderDemo', () => {
     expect(result.current.items[0].id).toBe('file__my_file_name_pdf');
     expect(result.current.items[0].label).toBe('my file.name.pdf');
   });
+
+  it('should prefix item ids when itemIdPrefix is provided', () => {
+    const file = new File([''], 'doc.txt', { type: 'text/plain', lastModified: 1 });
+    const { result } = renderHook(() => useFileUploaderDemo(false, 'a-'));
+
+    act(() => {
+      result.current.onFilesSelected([file]);
+    });
+
+    expect(result.current.items[0].id).toBe('a-file__doc_txt');
+  });
 });

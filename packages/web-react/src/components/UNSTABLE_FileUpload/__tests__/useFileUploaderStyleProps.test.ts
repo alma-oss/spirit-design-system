@@ -11,19 +11,18 @@ describe('useFileUploadStyleProps', () => {
     );
 
     expect(result.current.classProps).toBeDefined();
-    expect(result.current.classProps.root).toBe('FileUploader');
+    expect(result.current.classProps.root).toBe('UNSTABLE_FileUpload');
     expect(result.current.classProps.input).toBeDefined();
-    expect(result.current.classProps.input.root).toBe('FileUploaderInput has-drag-and-drop is-dragging');
-    expect(result.current.classProps.input.label).toBe('FileUploaderInput__label');
-    expect(result.current.classProps.input.input).toBe('FileUploaderInput__input');
-    expect(result.current.classProps.input.dropLabel).toBe('FileUploaderInput__dragAndDropLabel');
-    expect(result.current.classProps.input.helper).toBe('FileUploaderInput__helperText');
-    expect(result.current.classProps.input.link).toBe('FileUploaderInput__link link-primary link-underlined');
-    expect(result.current.classProps.input.validationText).toBe('FileUploaderInput__validationText');
+    expect(result.current.classProps.input.root).toBe('UNSTABLE_FileUploadInput has-drag-and-drop is-dragging');
+    expect(result.current.classProps.input.label).toBe('UNSTABLE_FileUploadInput__label');
+    expect(result.current.classProps.input.input).toBe('UNSTABLE_FileUploadInput__input');
+    expect(result.current.classProps.input.dropLabel).toBe('UNSTABLE_FileUploadInput__dragAndDropLabel');
+    expect(result.current.classProps.input.helper).toBe('UNSTABLE_FileUploadInput__helperText');
+    expect(result.current.classProps.input.validationText).toBe('UNSTABLE_FileUploadInput__validationText');
     expect(result.current.classProps.input.dropZone).toBeDefined();
-    expect(result.current.classProps.input.dropZone.root).toBe('FileUploaderInput__dropZone');
-    expect(result.current.classProps.input.dropZone.label).toBe('FileUploaderInput__dropZoneLabel');
-    expect(result.current.classProps.list).toBe('FileUploaderList');
+    expect(result.current.classProps.input.dropZone.root).toBe('UNSTABLE_FileUploadInput__dropZone');
+    expect(result.current.classProps.input.dropZone.content).toBe('UNSTABLE_FileUploadInput__dropZoneContent');
+    expect(result.current.classProps.input.dropZone.label).toBe('UNSTABLE_FileUploadInput__dropZoneLabel');
   });
 
   it('should return disabled', () => {
@@ -33,6 +32,9 @@ describe('useFileUploadStyleProps', () => {
       }),
     );
 
-    expect(result.current.classProps.input.root).toBe('FileUploaderInput FileUploaderInput--disabled');
+    expect(result.current.classProps.input.root).toBe('UNSTABLE_FileUploadInput UNSTABLE_FileUploadInput--disabled');
+    expect(result.current.classProps.input.dropZone.root).toBe(
+      'UNSTABLE_FileUploadInput__dropZone UNSTABLE_FileUploadInput__dropZone--disabled',
+    );
   });
 });

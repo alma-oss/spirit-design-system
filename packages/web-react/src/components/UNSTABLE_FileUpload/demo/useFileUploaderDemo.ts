@@ -11,8 +11,9 @@ const fileToKey = (name: string): string => `file__${name.replace(/\./g, '_').re
  * Queue logic (key generation, clear when single file) lives only here in the demo.
  *
  * @param isMultiple - When false, selecting new files clears the queue first; when true, files are appended.
+ * @param itemIdPrefix - Prepended to generated file keys so multiple demo queues can coexist without duplicate DOM ids.
  */
-export function useFileUploaderDemo(isMultiple = false) {
+export function useFileUploaderDemo(isMultiple = false, itemIdPrefix = '') {
   const { fileQueue, addToQueue, clearQueue, onDismiss } = useFileQueue();
 
   const items: UnstableFileUploadAttachmentsItem[] = useMemo(
@@ -31,9 +32,9 @@ export function useFileUploaderDemo(isMultiple = false) {
       if (!isMultiple) {
         clearQueue();
       }
-      files.forEach((file) => addToQueue(fileToKey(file.name), file));
+      files.forEach((file) => addToQueue(`${itemIdPrefix}${fileToKey(file.name)}`, file));
     },
-    [isMultiple, clearQueue, addToQueue],
+    [isMultiple, clearQueue, addToQueue, itemIdPrefix],
   );
 
   return { items, onDismiss, onFilesSelected };

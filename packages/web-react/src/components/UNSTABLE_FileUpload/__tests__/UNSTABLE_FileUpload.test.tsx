@@ -18,7 +18,7 @@ const defaultProps = { id: 'file-uploader' };
 const defaultPropsWithInput = { id: 'test-uploader', name: 'test-uploader', label: 'upload' };
 
 describe('UNSTABLE_FileUpload', () => {
-  classNamePrefixProviderTest((props) => <UNSTABLE_FileUpload {...defaultProps} {...props} />, 'FileUploader');
+  classNamePrefixProviderTest((props) => <UNSTABLE_FileUpload {...defaultProps} {...props} />, 'UNSTABLE_FileUpload');
 
   stylePropsTest((props) => <UNSTABLE_FileUpload {...defaultProps} {...props} />);
 
@@ -33,7 +33,7 @@ describe('UNSTABLE_FileUpload', () => {
 
     validationTextPropsTest(
       (props) => <UNSTABLE_FileUpload {...defaultPropsWithInput} {...props} />,
-      '.FileUploaderInput__validationText',
+      '.UNSTABLE_FileUploadInput__validationText',
     );
 
     validHtmlAttributesTest(UNSTABLE_FileUpload, defaultPropsWithInput);
@@ -44,6 +44,14 @@ describe('UNSTABLE_FileUpload', () => {
       const inputBlock = container.querySelector('.has-drag-and-drop');
 
       expect(inputBlock).toBeInTheDocument();
+    });
+
+    it('should omit drag-and-drop class when isDragAndDropSupported is false', () => {
+      const { container } = render(
+        <UNSTABLE_FileUpload {...defaultPropsWithInput} isDragAndDropSupported={false} data-testid="test" />,
+      );
+
+      expect(container.querySelector('.has-drag-and-drop')).not.toBeInTheDocument();
     });
 
     it('should not have drag-and-drop class in Server component', () => {
@@ -65,10 +73,20 @@ describe('UNSTABLE_FileUpload', () => {
         />,
       );
 
-      const labelElement = container.querySelector('.FileUploaderInput__label');
+      const labelElement = container.querySelector('.UNSTABLE_FileUploadInput__label');
 
       expect(labelElement).toHaveTextContent('Upload File');
       expect(labelElement?.innerHTML).toBe('Upload <b>File</b>');
+    });
+
+    it('should set id on root wrapper when rootId is provided', () => {
+      const { container } = render(
+        <UNSTABLE_FileUpload {...defaultPropsWithInput} rootId="example-with-file-list" data-testid="test" />,
+      );
+
+      const root = container.querySelector('.UNSTABLE_FileUpload');
+
+      expect(root).toHaveAttribute('id', 'example-with-file-list');
     });
   });
 });

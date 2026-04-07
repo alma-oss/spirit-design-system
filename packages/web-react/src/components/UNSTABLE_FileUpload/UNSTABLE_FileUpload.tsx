@@ -3,6 +3,7 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
+import { Button } from '../Button';
 import { HelperText, Label, ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { Icon } from '../Icon';
@@ -11,10 +12,11 @@ import { useFileUploadState } from './useFileUploadState';
 import { useFileUploadStyleProps } from './useFileUploadStyleProps';
 
 const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
-  const [isDragAndDropSupported, setIsDragAndDropSupported] = useState(false);
+  const [isDragAndDropDetected, setIsDragAndDropDetected] = useState(false);
   const {
     'aria-describedby': ariaDescribedBy = '',
     accept,
+    buttonText = 'Browse',
     children,
     dropZoneRef,
     hasValidationIcon,
@@ -22,8 +24,9 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
     iconName = 'upload',
     id,
     inputRef,
+    isCompact,
     isDisabled,
-    isFluid,
+    isDragAndDropSupported: isDragAndDropSupportedProp,
     isLabelHidden,
     isMultiple,
     isRequired,
@@ -32,6 +35,7 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
     linkText,
     name,
     onFilesSelected,
+    rootId,
     validationState,
     validationText,
     ...restProps
@@ -39,16 +43,18 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
 
   const hasInput = name !== undefined;
 
+  const isDragAndDropSupported = isDragAndDropSupportedProp ?? isDragAndDropDetected;
+
   const { isDragging, onChange, onDragEnter, onDragLeave, onDragOver, onDrop } = useFileUploadState({
     onFilesSelected: hasInput ? onFilesSelected : undefined,
   });
 
   const { classProps } = useFileUploadStyleProps({
     hasValidationIcon,
+    isCompact,
     isDisabled,
     isDragAndDropSupported,
     isDragging,
-    isFluid,
     isLabelHidden,
     isRequired,
     validationState,
@@ -61,14 +67,22 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
     validationState,
     validationText,
   });
-  const inputId = `${id}-input`;
+  const inputId = id;
 
   useEffect(() => {
-    setIsDragAndDropSupported('draggable' in document.createElement('span'));
-  }, []);
+    if (isDragAndDropSupportedProp !== undefined) {
+      return;
+    }
+    setIsDragAndDropDetected('draggable' in document.createElement('span'));
+  }, [isDragAndDropSupportedProp]);
 
   return (
-    <div id={id} {...transferProps} {...styleProps} className={classNames(classProps.root, styleProps.className)}>
+    <div
+      {...transferProps}
+      {...styleProps}
+      {...(rootId != null && rootId !== '' ? { id: rootId } : {})}
+      className={classNames(classProps.root, styleProps.className)}
+    >
       {hasInput && (
         <div
           onDragOver={!isDisabled && isDragAndDropSupported ? onDragOver : undefined}
@@ -93,25 +107,35 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
             disabled={isDisabled}
           />
           <div ref={dropZoneRef} className={classProps.input.dropZone.root}>
-            <Icon name={iconName} aria-hidden="true" />
-            <Label htmlFor={inputId} UNSAFE_className={classProps.input.dropZone.label}>
-              <span className={classProps.input.link}>{linkText}</span>
-              &nbsp;
-              <span className={classProps.input.dropLabel}>{labelText}</span>
-            </Label>
-            <HelperText
-              UNSAFE_className={classProps.input.helper}
-              id={`${inputId}__helperText`}
-              registerAria={register}
-              helperText={helperText}
-            />
+            {!isCompact && <Icon name={iconName} boxSize={28} aria-hidden="true" />}
+            <div className={classProps.input.dropZone.content}>
+              <Label htmlFor={inputId} UNSAFE_className={classProps.input.dropZone.label}>
+                {linkText}
+                {labelText && (
+                  <>
+                    {' '}
+                    <span className={classProps.input.dropLabel}>{labelText}</span>
+                  </>
+                )}
+              </Label>
+              <HelperText
+                UNSAFE_className={classProps.input.helper}
+                id={`${inputId}-helper`}
+                registerAria={register}
+                helperText={helperText}
+              />
+            </div>
+            {/* @ts-expect-error - Div cannot have type="button". This will be solved with https://jira.almacareer.tech/browse/DS-2168 */}
+            <Button aria-hidden="true" isDisabled={isDisabled} elementType="div" type={null}>
+              {buttonText}
+            </Button>
           </div>
           {validationState && (
             <ValidationText
               UNSAFE_className={classProps.input.validationText}
-              elementType="span"
+              elementType="div"
               {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-              id={`${inputId}__validationText`}
+              id={`${inputId}-validation`}
               validationText={validationText}
               registerAria={register}
               role={validationTextRole}

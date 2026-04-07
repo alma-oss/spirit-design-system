@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
+import { fn } from 'storybook/test';
 import { Button, Modal, ModalBody, ModalDialog, ModalFooter, Stack } from '../../../src/components';
-import { UNSTABLE_Attachment, UNSTABLE_AttachmentImagePreview } from '../../../src/components/UNSTABLE_Attachment';
-import { useFilePreviewUrl } from '../../../src/components/UNSTABLE_Attachment/demo/useFilePreviewUrl';
+import { UNSTABLE_File, UNSTABLE_FileImagePreview } from '../../../src/components/UNSTABLE_File';
+import { useFilePreviewUrl } from '../../../src/components/UNSTABLE_File/demo/useFilePreviewUrl';
 import { UNSTABLE_FileUpload } from '../../../src/components/UNSTABLE_FileUpload';
 import { useFileQueue } from '../../../src/components/UNSTABLE_FileUpload/demo/useFileQueue';
 import type { UnstableFileUploadAttachmentsItem } from '../../../src/components/UNSTABLE_FileUpload/types';
@@ -11,7 +12,6 @@ const fileToKey = (name: string): string => `file__${name.replace(/\./g, '_').re
 
 type UNSTABLE_FileUploadCompositionType = {
   fileUploadId: string;
-  isFluid: boolean;
   accept: string;
   hasValidationIcon: boolean;
   helperText: string;
@@ -26,20 +26,33 @@ type UNSTABLE_FileUploadCompositionType = {
   name: string;
   validationState: (typeof ValidationStates)[keyof typeof ValidationStates] | undefined;
   validationText: string;
-  // Attachments list (Stack) – aria-label
+  // File list (Stack) – aria-label
   attachmentsLabel: string;
-  // UNSTABLE_Attachment props (applies to all items)
-  attachmentIconName: string;
+  // UNSTABLE_File props (applies to all rows; `file*` prefix avoids clash with FileUpload controls)
+  fileIconName: string;
+  fileHelperText: string;
+  fileHasValidationIcon: boolean;
+  fileIsDisabled: boolean;
+  fileValidationState: (typeof ValidationStates)[keyof typeof ValidationStates] | undefined;
+  fileValidationText: string;
   editText: string;
   removeText: string;
   showEditButton: boolean;
-  // UNSTABLE_AttachmentImagePreview props
+  showFileRowId: boolean;
+  // UNSTABLE_FileImagePreview props
   imageObjectFit: (typeof ObjectFit)[keyof typeof ObjectFit];
   showImagePreview: boolean;
 };
 
 export default {
   title: 'Examples/Compositions',
+  decorators: [
+    (Story) => (
+      <div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     fileUploadId: {
       control: 'text',
@@ -48,14 +61,6 @@ export default {
       table: {
         category: 'UNSTABLE_FileUpload',
         defaultValue: { summary: 'file-uploader-unstable-example' },
-      },
-    },
-    isFluid: {
-      control: 'boolean',
-      description: 'When the field is supposed to be fluid.',
-      table: {
-        category: 'UNSTABLE_FileUpload',
-        defaultValue: { summary: false },
       },
     },
     accept: {
@@ -181,21 +186,67 @@ export default {
         defaultValue: { summary: 'Attachments' },
       },
     },
-    // UNSTABLE_Attachment props
-    attachmentIconName: {
+    // UNSTABLE_File props
+    fileIconName: {
       control: 'text',
-      description: 'Icon shown when no previewSlot is provided.',
+      description: 'Icon shown when no preview slot is provided.',
       name: 'iconName',
       table: {
-        category: 'UNSTABLE_Attachment',
+        category: 'UNSTABLE_File',
         defaultValue: { summary: 'file' },
+      },
+    },
+    fileHelperText: {
+      control: 'text',
+      description: 'Secondary text under the file name on each row.',
+      name: 'helperText',
+      table: {
+        category: 'UNSTABLE_File',
+        defaultValue: { summary: '2.5 MB' },
+      },
+    },
+    fileHasValidationIcon: {
+      control: 'boolean',
+      description: 'Show validation icon in file row validation text.',
+      name: 'hasValidationIcon',
+      table: {
+        category: 'UNSTABLE_File',
+        defaultValue: { summary: false },
+      },
+    },
+    fileIsDisabled: {
+      control: 'boolean',
+      description: 'Disabled visual state and actions on each file row.',
+      name: 'isDisabled',
+      table: {
+        category: 'UNSTABLE_File',
+        defaultValue: { summary: false },
+      },
+    },
+    fileValidationState: {
+      control: 'select',
+      description: 'Validation state on each file row (visual only).',
+      name: 'validationState',
+      options: [...Object.values(ValidationStates), undefined],
+      table: {
+        category: 'UNSTABLE_File',
+        defaultValue: { summary: undefined },
+      },
+    },
+    fileValidationText: {
+      control: 'text',
+      description: 'Validation message on each file row (visible when file validationState is set).',
+      name: 'validationText',
+      table: {
+        category: 'UNSTABLE_File',
+        defaultValue: { summary: 'File validation message' },
       },
     },
     editText: {
       control: 'text',
       description: 'Edit button label.',
       table: {
-        category: 'UNSTABLE_Attachment',
+        category: 'UNSTABLE_File',
         defaultValue: { summary: 'Edit' },
       },
     },
@@ -203,35 +254,45 @@ export default {
       control: 'text',
       description: 'Remove button label.',
       table: {
-        category: 'UNSTABLE_Attachment',
+        category: 'UNSTABLE_File',
         defaultValue: { summary: 'Remove' },
       },
     },
     showEditButton: {
       control: 'boolean',
-      description: 'Show the edit button on each attachment.',
+      description: 'Show the edit button on each file row.',
       table: {
-        category: 'UNSTABLE_Attachment',
+        category: 'UNSTABLE_File',
         subcategory: 'Demo settings',
         defaultValue: { summary: false },
       },
     },
-    // UNSTABLE_AttachmentImagePreview props
+    showFileRowId: {
+      control: 'boolean',
+      description: 'Pass `id` on each `<li>` (`item.id`). Turn off to match static demos without row ids.',
+      name: 'id on row',
+      table: {
+        category: 'UNSTABLE_File',
+        subcategory: 'Demo settings',
+        defaultValue: { summary: true },
+      },
+    },
+    // UNSTABLE_FileImagePreview props
     imageObjectFit: {
       control: 'select',
       description: 'How the image fits in the preview frame.',
       options: [ObjectFit.CONTAIN, ObjectFit.COVER],
       table: {
-        category: 'UNSTABLE_AttachmentImagePreview',
+        category: 'UNSTABLE_FileImagePreview',
         defaultValue: { summary: ObjectFit.COVER },
       },
     },
     showImagePreview: {
       control: 'boolean',
-      description: 'Show image preview (preview slot) for image attachments.',
+      description: 'Show image preview (preview slot) for image files.',
       name: 'show image preview',
       table: {
-        category: 'UNSTABLE_AttachmentImagePreview',
+        category: 'UNSTABLE_FileImagePreview',
         subcategory: 'Demo settings',
         defaultValue: { summary: true },
       },
@@ -239,7 +300,12 @@ export default {
   },
   args: {
     accept: '.png,image/jpeg',
-    attachmentIconName: 'file',
+    fileIconName: 'file',
+    fileHelperText: '2.5 MB',
+    fileHasValidationIcon: false,
+    fileIsDisabled: false,
+    fileValidationState: undefined,
+    fileValidationText: 'File validation message',
     attachmentsLabel: 'Attachments',
     editText: 'Edit',
     fileUploadId: 'file-uploader-unstable-example',
@@ -248,7 +314,6 @@ export default {
     iconName: 'upload',
     imageObjectFit: ObjectFit.COVER,
     isDisabled: false,
-    isFluid: false,
     isLabelHidden: false,
     isMultiple: false,
     isRequired: false,
@@ -258,6 +323,7 @@ export default {
     name: 'attachments',
     removeText: 'Remove',
     showEditButton: false,
+    showFileRowId: true,
     showImagePreview: true,
     validationState: undefined,
     validationText: 'Validation message',
@@ -267,7 +333,12 @@ export default {
 export const UNSTABLE_FileUploadWithModalImagePreview = (args: UNSTABLE_FileUploadCompositionType) => {
   const {
     accept,
-    attachmentIconName,
+    fileIconName,
+    fileHelperText,
+    fileHasValidationIcon,
+    fileIsDisabled,
+    fileValidationState,
+    fileValidationText,
     attachmentsLabel,
     editText,
     fileUploadId,
@@ -276,7 +347,6 @@ export const UNSTABLE_FileUploadWithModalImagePreview = (args: UNSTABLE_FileUplo
     iconName,
     imageObjectFit,
     isDisabled,
-    isFluid,
     isLabelHidden,
     isMultiple,
     isRequired,
@@ -286,6 +356,7 @@ export const UNSTABLE_FileUploadWithModalImagePreview = (args: UNSTABLE_FileUplo
     name,
     removeText,
     showEditButton,
+    showFileRowId,
     showImagePreview,
     validationState,
     validationText,
@@ -337,7 +408,6 @@ export const UNSTABLE_FileUploadWithModalImagePreview = (args: UNSTABLE_FileUplo
     <Stack hasSpacing>
       <UNSTABLE_FileUpload
         id={fileUploadId}
-        isFluid={isFluid}
         accept={accept}
         hasValidationIcon={hasValidationIcon}
         helperText={helperText}
@@ -356,19 +426,24 @@ export const UNSTABLE_FileUploadWithModalImagePreview = (args: UNSTABLE_FileUplo
       />
       <Stack aria-label={attachmentsLabel} elementType="ul" hasSpacing>
         {items.map((item) => (
-          <UNSTABLE_Attachment
+          <UNSTABLE_File
             key={item.id}
             editText={editText}
-            iconName={attachmentIconName}
-            id={item.id}
+            hasValidationIcon={fileHasValidationIcon}
+            helperText={fileHelperText || undefined}
+            iconName={fileIconName}
+            {...(showFileRowId ? { id: item.id } : {})}
+            isDisabled={fileIsDisabled}
             label={item.label}
             onDismiss={() => onDismiss(item.id)}
             removeText={removeText}
-            {...(showEditButton && { onChange: () => {} })}
+            validationState={fileValidationState}
+            validationText={fileValidationText}
+            {...(showEditButton && { onChange: fn() })}
             {...(showImagePreview &&
               item.previewUrl && {
                 previewSlot: (
-                  <UNSTABLE_AttachmentImagePreview
+                  <UNSTABLE_FileImagePreview
                     imageObjectFit={imageObjectFit}
                     imagePreview={item.previewUrl}
                     label={item.label}
