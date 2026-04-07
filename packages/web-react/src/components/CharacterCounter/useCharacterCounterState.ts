@@ -1,8 +1,14 @@
 'use client';
 
 import { type ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { type StylePropsResult, useControlledModeGuard, useDebouncedValue, useStyleProps } from '../../hooks';
-import { defaultLabels, replaceTranslationParams } from '../../translations';
+import {
+  type StylePropsResult,
+  type TranslateFunction,
+  useControlledModeGuard,
+  useDebouncedValue,
+  useI18n,
+  useStyleProps,
+} from '../../hooks';
 import { type TextAreaCounterRenderProps } from '../../types';
 import { CHARACTER_COUNTER_SCREEN_READER_DEBOUNCE_MS } from './constants';
 import { type CharacterCounterProps } from './types';
@@ -39,8 +45,6 @@ export interface UseCharacterCounterResult {
   visibleCounterText: string;
 }
 
-const COUNTER_LABELS = defaultLabels.textArea.counter;
-
 /**
  * Builds the visible counter label (`current/max` or count only).
  *
@@ -54,33 +58,35 @@ const getCharacterCounterVisibleText = (currentLength: number, counterThreshold:
 /**
  * Builds the polite live-region message for assistive technologies (remaining, over limit, count-only, etc.).
  *
+ * @param t - Translation function (e.g. from `useI18n`).
  * @param currentLength - Current number of characters.
  * @param counterThreshold - When set, messages relate to this max; when omitted, only “characters entered” copy is used.
  * @returns {string} Localized screen reader string (not debounced).
  */
 const getCharacterCounterScreenReaderMessage = (
+  t: TranslateFunction,
   currentLength: number,
   counterThreshold: number | undefined,
 ): string => {
   if (counterThreshold === undefined) {
-    return replaceTranslationParams(COUNTER_LABELS.charactersEntered, { count: currentLength });
+    return t('textArea.counter.charactersEntered', { count: currentLength });
   }
 
   if (currentLength === 0) {
-    return replaceTranslationParams(COUNTER_LABELS.canEnterUpTo, { maxLength: counterThreshold });
+    return t('textArea.counter.canEnterUpTo', { maxLength: counterThreshold });
   }
 
   if (currentLength > counterThreshold) {
     const overCount = currentLength - counterThreshold;
-    const template = overCount === 1 ? COUNTER_LABELS.characterOverLimit : COUNTER_LABELS.charactersOverLimit;
+    const key = overCount === 1 ? 'textArea.counter.characterOverLimit' : 'textArea.counter.charactersOverLimit';
 
-    return replaceTranslationParams(template, { count: overCount });
+    return t(key, { count: overCount });
   }
 
   const remaining = counterThreshold - currentLength;
-  const template = remaining === 1 ? COUNTER_LABELS.characterRemaining : COUNTER_LABELS.charactersRemaining;
+  const key = remaining === 1 ? 'textArea.counter.characterRemaining' : 'textArea.counter.charactersRemaining';
 
-  return replaceTranslationParams(template, { count: remaining });
+  return t(key, { count: remaining });
 };
 
 /**
@@ -139,10 +145,11 @@ export const useCharacterCounterState = (props: UseCharacterCounterStateProps): 
 export const useCharacterCounter = (props: CharacterCounterProps): UseCharacterCounterResult => {
   const { counterThreshold, currentLength, hasCounter, id, registerAria, ...restProps } = props;
   const { styleProps, props: transferProps } = useStyleProps(restProps);
+  const { t } = useI18n();
   const isVisible = hasCounter === true || counterThreshold !== undefined;
   const screenReaderMessageId = `${id}__counterScreenReaderMessage`;
   const visibleCounterText = getCharacterCounterVisibleText(currentLength, counterThreshold);
-  const screenReaderMessage = getCharacterCounterScreenReaderMessage(currentLength, counterThreshold);
+  const screenReaderMessage = getCharacterCounterScreenReaderMessage(t, currentLength, counterThreshold);
   const debouncedScreenReaderMessage = useDebouncedValue(
     screenReaderMessage,
     CHARACTER_COUNTER_SCREEN_READER_DEBOUNCE_MS,
