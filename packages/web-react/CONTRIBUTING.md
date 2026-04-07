@@ -309,38 +309,13 @@ export const useButtonAria = (props: UseButtonAriaProps): ButtonAria => {
 
 ## Translations
 
-Centralised default labels for Spirit components. Labels are provided via the `useI18n` hook.
+Default component copy lives in **`src/translations/defaults.ts`** as nested **`defaultLabels`** (keys use `camelCase` formatting with dot notation, e.g. `common.close`, `textField.password.show`).
 
-### Structure
-
-- **`src/translations/defaults.ts`** – Nested object `defaultLabels` with all default strings. Keys use dot notation (e.g. `common.close`, `textField.password.show`).
-- The **`useI18n`** hook lives in `src/hooks/useI18n.ts` and returns a `t` function that reads from these defaults.
-
-### Usage
-
-Use the hook in any client component:
-
-```tsx
-const { t } = useI18n();
-
-t('common.close'); // 'Close'
-t('pagination.next'); // 'Next'
-t('unknown.key'); // 'unknown.key' (returns key when not found)
-```
-
-#### Params (placeholders)
-
-The `t` function accepts an optional second argument `params`: an object whose keys match placeholders in the translation. Each occurrence of `{key}` in the resolved string is replaced by `String(params[key])`.
-
-Example: if a translation were `"Page {current} of {total}"`, you would call:
-
-```tsx
-t('pagination.pageOf', { current: 1, total: 10 }); // "Page 1 of 10"
-```
-
-Current default labels do not use placeholders; this is for future keys or when overriding translations with interpolation.
+Implementation uses **`useI18n`** in `src/hooks/useI18n.ts` and optional **`I18nProvider`** in `src/context/I18nContext.tsx` (supports nested overrides and locale catalogs, then defaults). **Consumer-facing documentation** (`I18nProvider`, locale config, `useI18n`, placeholders) is in the [package README][web-react-readme].
 
 ### Adding New Keys
 
 1. Add the key to `defaultLabels` in `src/translations/defaults.ts` following the nested structure (e.g. `pagination.goToPage`, `textField.password.show`).
 2. Use the key in components via `t('your.namespace.key')`.
+
+[web-react-readme]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react/README.md

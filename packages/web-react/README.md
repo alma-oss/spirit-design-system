@@ -10,6 +10,7 @@
 
 - [Install](#install)
 - [Usage](#usage)
+- [Translations](#translations)
 - [Additional Attributes](#additional-attributes)
 - [Testing](#testing)
 - [Styling](#styling)
@@ -193,6 +194,64 @@ const MyComponent = () => {
     </RouterProvider>
   );
 };
+```
+
+## Translations
+
+Components ship with built-in English defaults. To override copy, wrap your app or a subtree with **`I18nProvider`**.
+You can pass either:
+
+- partial nested **`translations`** (same nested shape as library defaults), or
+- a locale catalog with **`locale`** + locale-keyed translations (`translations[locale]`).
+
+Missing keys always fall back to built-in defaults.
+
+```tsx
+import { I18nProvider } from '@alma-oss/spirit-web-react';
+
+function App() {
+  return (
+    <I18nProvider translations={{ common: { close: 'Zavřít' } }}>
+      <YourApp />
+    </I18nProvider>
+  );
+}
+```
+
+```tsx
+import { I18nProvider } from '@alma-oss/spirit-web-react';
+
+const translations = {
+  en: { common: { close: 'Close' } },
+  cs: { common: { close: 'Zavřít' } },
+};
+
+function App() {
+  return (
+    <I18nProvider locale="cs" translations={translations}>
+      <YourApp />
+    </I18nProvider>
+  );
+}
+```
+
+In client components, use **`useI18n`** to resolve strings. Without `I18nProvider`, `t` uses the built-in defaults only.
+
+```tsx
+import { useI18n } from '@alma-oss/spirit-web-react';
+
+const { t } = useI18n();
+
+t('common.close'); // 'Close'
+t('unknown.key'); // 'unknown.key' (returns the key when not found)
+```
+
+### Placeholders
+
+The `t` function accepts an optional second argument **`params`**: an object whose keys match `{key}` placeholders in the resolved string.
+
+```tsx
+t('textArea.counter.charactersEntered', { count: 42 });
 ```
 
 ## Additional Attributes
