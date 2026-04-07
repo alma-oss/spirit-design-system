@@ -85,16 +85,34 @@
             {{#if (eq color "selected")}}{{setVar "colorPrefix" "selected"}}{{/if}}
             <div class="Tag Tag--{{color}} Tag--subtle Tag--{{size}} border-{{@root.colorPrefix}}-subtle bg-{{@root.colorPrefix}}-subtle text-{{@root.colorPrefix}}-basic">
               <span>Tag {{color}}</span>
-              <button type="button" class="ControlButton ControlButton--{{@root.controlButtonSize}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive" aria-label="Remove Tag {{color}}">
-                <svg class="Icon" width="16" height="16" aria-hidden="true">
+              <button
+                type="button"
+                class="ControlButton ControlButton--{{@root.controlButtonSize}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+                aria-label="Remove Tag {{color}}"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
                   <use xlink:href="/assets/icons/svg/sprite.svg#close" />
                 </svg>
               </button>
             </div>
             <div class="Tag Tag--{{color}} Tag--{{size}} border-{{@root.colorPrefix}}-basic bg-{{@root.colorPrefix}}-basic text-{{@root.colorPrefix}}-subtle">
               <span>Tag {{color}}</span>
-              <button type="button" class="ControlButton ControlButton--{{@root.controlButtonSize}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive" aria-label="Remove Tag {{color}}">
-                <svg class="Icon" width="16" height="16" aria-hidden="true">
+              <button
+                type="button"
+                class="ControlButton ControlButton--{{@root.controlButtonSize}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+                aria-label="Remove Tag {{color}}"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
                   <use xlink:href="/assets/icons/svg/sprite.svg#close" />
                 </svg>
               </button>
@@ -121,16 +139,36 @@
       <span class="Tag Tag--neutral Tag--subtle Tag--small Tag--disabled">Disabled subtle</span>
       <div class="Tag Tag--neutral Tag--medium Tag--disabled">
         <span>Disabled with ControlButton</span>
-        <button type="button" class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive" aria-label="Remove Disabled" disabled>
-          <svg class="Icon" width="16" height="16" aria-hidden="true">
+        <button
+          type="button"
+          class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+          aria-label="Remove Disabled"
+          disabled
+        >
+          <svg
+            class="Icon"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
             <use xlink:href="/assets/icons/svg/sprite.svg#close" />
           </svg>
         </button>
       </div>
       <div class="Tag Tag--neutral Tag--subtle Tag--medium Tag--disabled">
         <span>Disabled subtle with ControlButton</span>
-        <button type="button" class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive" aria-label="Remove Disabled subtle" disabled>
-          <svg class="Icon" width="16" height="16" aria-hidden="true">
+        <button
+          type="button"
+          class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+          aria-label="Remove Disabled subtle"
+          disabled
+        >
+          <svg
+            class="Icon"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
             <use xlink:href="/assets/icons/svg/sprite.svg#close" />
           </svg>
         </button>

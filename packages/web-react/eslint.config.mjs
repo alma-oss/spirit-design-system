@@ -1,5 +1,6 @@
 import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
+import spiritHtml from 'eslint-config-spirit/html';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
 const compat = new FlatCompat({
@@ -42,6 +43,7 @@ export default [
       'eslint-config-spirit/prettier',
     ),
   ),
+  ...spiritHtml,
   {
     plugins: {
       'react-refresh': fixupPluginRules(reactRefresh),

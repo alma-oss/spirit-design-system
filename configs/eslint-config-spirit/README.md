@@ -91,6 +91,32 @@ They may conflict with each other.
 If switching from one to another, ensure you remove the previous style configuration
 from your ESLint setup.
 
+### HTML Templates
+
+Use `eslint-config-spirit/html` when linting static `.html` demo files (for example in Spirit web
+packages). It extends [`@html-eslint/eslint-plugin`][html-eslint] with Handlebars-aware parsing for
+`{{ … }}` in templates.
+
+```js
+import spiritHtml from 'eslint-config-spirit/html';
+
+export default spiritHtml;
+```
+
+#### HTML Style (Spirit)
+
+These rules keep demo templates consistent and easy to diff. Each item maps to an
+[`@html-eslint` rule][html-eslint-rules]; see `configs/eslint-config-spirit/html.js` for the exact
+severity and options.
+
+- Use **double quotes** for attribute values.
+- Use **2 spaces** per indentation level.
+- When a start tag has **more than two attributes**, put **each attribute on its own line** (with
+  the configured closing style for the tag).
+- **No trailing whitespace** at end of line.
+- At most **one consecutive blank line** between lines of markup.
+- Avoid **accidental padded text** (multiple spaces or tabs inside text nodes) unless intentional.
+
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
@@ -104,5 +130,7 @@ Licensed under the [MIT][license].
 [contributing]: https://github.com/alma-oss/spirit-design-system/blob/main/CONTRIBUTING.md
 [eslint-prettier]: https://prettier.io/docs/integrating-with-linters
 [eslint-stylistic]: https://eslint.style/
+[html-eslint]: https://github.com/yeonjuan/html-eslint
+[html-eslint-rules]: https://github.com/yeonjuan/html-eslint/tree/main/docs/rules
 [license]: https://github.com/alma-oss/spirit-design-system/blob/main/LICENSE.md
 [yarn]: https://yarnpkg.com/en/

@@ -49,7 +49,6 @@
   </div>
 </section>
 
-
 {{setVar "variants" "label-only" "label-icon" "icon-only" }}
 
 <section class="py-900 py-tablet-1000">
@@ -83,13 +82,21 @@
               >
                 {{#if (eq variant "label-only")}}<span class="text-truncate">Label</span>{{/if}}
                 {{#if (eq variant "icon-only")}}
-                <svg width="20" height="20" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
                   <use xlink:href="/assets/icons/svg/sprite.svg#file" />
                 </svg>
                 <span class="accessibility-hidden">Label</span>
                 {{/if}}
                 {{#if (eq variant "label-icon")}}
-                <svg width="20" height="20" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
                   <use xlink:href="/assets/icons/svg/sprite.svg#file" />
                 </svg>
                 Label
@@ -212,7 +219,11 @@
           for="segmented-control-label-stretch-{{item}}"
           class="SegmentedControlItem__label"
         >
-          <svg width="20" height="20" aria-hidden="true">
+          <svg
+            width="20"
+            height="20"
+            aria-hidden="true"
+          >
             <use xlink:href="/assets/icons/svg/sprite.svg#file" />
           </svg>
           <span class="text-truncate">Label {{item }} {{#if (eq item "2")}} - this label will be truncated{{/if}}</span>
@@ -256,7 +267,11 @@
             for="segmented-control-tooltip-js-{{item}}"
             class="SegmentedControlItem__label"
           >
-            <svg width="20" height="20" aria-hidden="true">
+            <svg
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
               <use xlink:href="/assets/icons/svg/sprite.svg#file" />
             </svg>
             <span
@@ -293,43 +308,47 @@
 
         {{#each @root.items as |item|}}
 
-          <div
-            class="Tooltip"
-            data-spirit-element="tooltip"
-            data-spirit-toggle="tooltip"
-            data-spirit-trigger="click"
-            data-spirit-target="#tooltip-icon-{{item}}"
+        <div
+          class="Tooltip"
+          data-spirit-element="tooltip"
+          data-spirit-toggle="tooltip"
+          data-spirit-trigger="click"
+          data-spirit-target="#tooltip-icon-{{item}}"
+        >
+          <input
+            type="radio"
+            id="segmented-control-label-js-{{item}}"
+            name="segmented-js-icon"
+            value="value-{{item}}"
+            class="SegmentedControlItem__input"
+            aria-labelledby="tooltip-icon-{{item}}"
+            {{#if (eq item "1")}}checked{{/if}}
           >
-            <input
-              type="radio"
-              id="segmented-control-label-js-{{item}}"
-              name="segmented-js-icon"
-              value="value-{{item}}"
-              class="SegmentedControlItem__input"
-              aria-labelledby="tooltip-icon-{{item}}"
-              {{#if (eq item "1")}}checked{{/if}}
+          <label
+            for="segmented-control-label-js-{{item}}"
+            class="SegmentedControlItem__label"
+          >
+            <svg
+              width="20"
+              height="20"
+              aria-hidden="true"
             >
-            <label
-              for="segmented-control-label-js-{{item}}"
-              class="SegmentedControlItem__label"
+              <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+            </svg>
+            <span class="accessibility-hidden">Label</span>
+            <span
+              id="tooltip-icon-{{item}}"
+              class="TooltipPopover is-hidden"
+              data-spirit-placement="bottom"
+              data-spirit-flip="true"
+              data-spirit-flip-cross-axis="true"
+              data-spirit-flip-fallback-placements="top, bottom"
             >
-              <svg width="20" height="20" aria-hidden="true">
-                <use xlink:href="/assets/icons/svg/sprite.svg#file" />
-              </svg>
-              <span class="accessibility-hidden">Label</span>
-              <span
-                id="tooltip-icon-{{item}}"
-                class="TooltipPopover is-hidden"
-                data-spirit-placement="bottom"
-                data-spirit-flip="true"
-                data-spirit-flip-cross-axis="true"
-                data-spirit-flip-fallback-placements="top, bottom"
-              >
-                Label
-                <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
-              </span>
-            </label>
-          </div>
+              Label
+              <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
+            </span>
+          </label>
+        </div>
 
         {{/each}}
 

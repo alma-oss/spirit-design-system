@@ -63,7 +63,11 @@
       </button>
 
       <!-- Modal: start -->
-      <dialog id="example-basic" class="Modal Modal--center" aria-labelledby="example-basic-title">
+      <dialog
+        id="example-basic"
+        class="Modal Modal--center"
+        aria-labelledby="example-basic-title"
+      >
 
         <!-- ModalDialog: start -->
         <article class="ModalDialog ModalDialog--expandOnMobile">
@@ -79,7 +83,12 @@
               aria-controls="example-basic"
               aria-expanded="false"
             >
-              <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
@@ -99,19 +108,41 @@
             <form onchange="setModalAlignment(event, '#example-basic')" class="mb-600">
               <div>Modal alignment:</div>
               <div class="Radio mr-600">
-                <input type="radio" id="modal-demo-alignment-top" name="modal-alignment" value="top" class="Radio__input" autocomplete="off" />
+                <input
+                  type="radio"
+                  id="modal-demo-alignment-top"
+                  name="modal-alignment"
+                  value="top"
+                  class="Radio__input"
+                  autocomplete="off"
+                />
                 <div class="Radio__text">
                   <label class="Radio__label" for="modal-demo-alignment-top">Top</label>
                 </div>
               </div>
               <div class="Radio mr-600">
-                <input type="radio" id="modal-demo-alignment-center" name="modal-alignment" value="center" class="Radio__input" autocomplete="off" checked />
+                <input
+                  type="radio"
+                  id="modal-demo-alignment-center"
+                  name="modal-alignment"
+                  value="center"
+                  class="Radio__input"
+                  autocomplete="off"
+                  checked
+                />
                 <div class="Radio__text">
                   <label class="Radio__label" for="modal-demo-alignment-center">Center</label>
                 </div>
               </div>
               <div class="Radio mr-600">
-                <input type="radio" id="modal-demo-alignment-bottom" name="modal-alignment" value="bottom" class="Radio__input" autocomplete="off" />
+                <input
+                  type="radio"
+                  id="modal-demo-alignment-bottom"
+                  name="modal-alignment"
+                  value="bottom"
+                  class="Radio__input"
+                  autocomplete="off"
+                />
                 <div class="Radio__text">
                   <label class="Radio__label" for="modal-demo-alignment-bottom">Bottom</label>
                 </div>
@@ -122,19 +153,41 @@
             <form onchange="setFooterAlignment(event, '#example-basic .ModalFooter')" class="d-none d-tablet-block mb-600">
               <div>Footer alignment (from tablet up):</div>
               <div class="Radio mr-600">
-                <input type="radio" id="footer-uniform-alignment-left" name="footer-alignment" value="left" class="Radio__input" autocomplete="off" />
+                <input
+                  type="radio"
+                  id="footer-uniform-alignment-left"
+                  name="footer-alignment"
+                  value="left"
+                  class="Radio__input"
+                  autocomplete="off"
+                />
                 <div class="Radio__text">
                   <label class="Radio__label" for="footer-uniform-alignment-left">Left</label>
                 </div>
               </div>
               <div class="Radio mr-600">
-                <input type="radio" id="footer-uniform-alignment-center" name="footer-alignment" value="center" class="Radio__input" autocomplete="off" />
+                <input
+                  type="radio"
+                  id="footer-uniform-alignment-center"
+                  name="footer-alignment"
+                  value="center"
+                  class="Radio__input"
+                  autocomplete="off"
+                />
                 <div class="Radio__text">
                   <label class="Radio__label" for="footer-uniform-alignment-center">Center</label>
                 </div>
               </div>
               <div class="Radio mr-600">
-                <input type="radio" id="footer-uniform-alignment-right" name="footer-alignment" value="right" class="Radio__input" autocomplete="off" checked />
+                <input
+                  type="radio"
+                  id="footer-uniform-alignment-right"
+                  name="footer-alignment"
+                  value="right"
+                  class="Radio__input"
+                  autocomplete="off"
+                  checked
+                />
                 <div class="Radio__text">
                   <label class="Radio__label" for="footer-uniform-alignment-right">Right</label>
                 </div>
@@ -144,19 +197,39 @@
             <!-- Modal features demo: start -->
             <form class="Stack Stack--hasSpacing">
               <div class="Checkbox">
-                <input type="checkbox" id="modal-demo-docked" class="Checkbox__input" onchange="toggleDockOnMobile('#example-basic > .ModalDialog', '#modal-demo-expanded')" autocomplete="off" />
+                <input
+                  type="checkbox"
+                  id="modal-demo-docked"
+                  class="Checkbox__input"
+                  onchange="toggleDockOnMobile('#example-basic > .ModalDialog', '#modal-demo-expanded')"
+                  autocomplete="off"
+                />
                 <div class="Checkbox__text">
                   <label class="Checkbox__label" for="modal-demo-docked">Dock on mobile</label>
                 </div>
               </div>
               <div class="Checkbox Checkbox--disabled" id="modal-demo-expanded-label">
-                <input type="checkbox" id="modal-demo-expanded" class="Checkbox__input" onchange="toggleExpandOnMobile('#example-basic > .ModalDialog')" autocomplete="off" checked disabled />
+                <input
+                  type="checkbox"
+                  id="modal-demo-expanded"
+                  class="Checkbox__input"
+                  onchange="toggleExpandOnMobile('#example-basic > .ModalDialog')"
+                  autocomplete="off"
+                  checked
+                  disabled
+                />
                 <div class="Checkbox__text">
                   <label class="Checkbox__label" for="modal-demo-expanded">Expand on mobile (docked only)</label>
                 </div>
               </div>
               <div class="Checkbox">
-                <input type="checkbox" id="modal-demo-scrolling" class="Checkbox__input" onchange="toggleScrolling('#example-basic > .ModalDialog')" autocomplete="off" />
+                <input
+                  type="checkbox"
+                  id="modal-demo-scrolling"
+                  class="Checkbox__input"
+                  onchange="toggleScrolling('#example-basic > .ModalDialog')"
+                  autocomplete="off"
+                />
                 <div class="Checkbox__text">
                   <label class="Checkbox__label" for="modal-demo-scrolling">Scrolling inside</label>
                 </div>
@@ -212,7 +285,11 @@
       </button>
 
       <!-- Modal: start -->
-      <dialog id="example-form" class="Modal Modal--center" aria-labelledby="example-form-title">
+      <dialog
+        id="example-form"
+        class="Modal Modal--center"
+        aria-labelledby="example-form-title"
+      >
 
         <!-- ModalDialog: start -->
         <form class="ModalDialog" method="dialog">
@@ -228,7 +305,12 @@
               aria-controls="example-form"
               aria-expanded="false"
             >
-              <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
@@ -241,7 +323,12 @@
             <!-- Content: start -->
             <div class="TextField TextField--medium mb-400">
               <label for="text-field" class="TextField__label">Label</label>
-              <input type="text" id="text-field" class="TextField__input" placeholder="TextField" />
+              <input
+                type="text"
+                id="text-field"
+                class="TextField__input"
+                placeholder="TextField"
+              />
             </div>
             <p>
               The primary action is a button with <code>type="submit"</code> and closes the dialog on submission.
@@ -287,7 +374,11 @@
       </button>
 
       <!-- Modal: start -->
-      <dialog id="example-dropdown" class="Modal Modal--center" aria-labelledby="example-dropdown-title">
+      <dialog
+        id="example-dropdown"
+        class="Modal Modal--center"
+        aria-labelledby="example-dropdown-title"
+      >
 
         <!-- ModalDialog: start -->
         <article class="ModalDialog ModalDialog--expandOnMobile">
@@ -303,7 +394,12 @@
               aria-controls="example-dropdown"
               aria-expanded="false"
             >
-              <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
@@ -330,7 +426,11 @@
               >
                 Dropdown
               </button>
-              <div class="DropdownPopover" data-spirit-placement="bottom-start" id="dropdown-in-modal">
+              <div
+                class="DropdownPopover"
+                data-spirit-placement="bottom-start"
+                id="dropdown-in-modal"
+              >
                 <a href="#" class="Item">
                   <span class="Item__label">Action</span>
                 </a>
@@ -405,7 +505,11 @@
       </button>
 
       <!-- Modal: start -->
-      <dialog id="example-long-content" class="Modal Modal--center" aria-labelledby="example-long-content-title">
+      <dialog
+        id="example-long-content"
+        class="Modal Modal--center"
+        aria-labelledby="example-long-content-title"
+      >
 
         <!-- ModalDialog: start -->
         <article class="ModalDialog">
@@ -423,7 +527,12 @@
               aria-controls="example-long-content"
               aria-expanded="false"
             >
-              <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
@@ -490,7 +599,11 @@
       </button>
 
       <!-- Modal: start -->
-      <dialog id="example-scrolling-modal" class="Modal Modal--center" aria-labelledby="example-scrolling-modal-title">
+      <dialog
+        id="example-scrolling-modal"
+        class="Modal Modal--center"
+        aria-labelledby="example-scrolling-modal-title"
+      >
 
         <!-- ModalDialog: start -->
         <article class="ModalDialog ModalDialog--scrollable">
@@ -508,7 +621,12 @@
               aria-controls="example-scrolling-modal"
               aria-expanded="false"
             >
-              <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
@@ -585,7 +703,11 @@
       </button>
 
       <!-- Modal: start -->
-      <dialog id="example-scroll-view" class="Modal Modal--center" aria-labelledby="example-scroll-view-title">
+      <dialog
+        id="example-scroll-view"
+        class="Modal Modal--center"
+        aria-labelledby="example-scroll-view-title"
+      >
 
         <!-- ModalDialog: start -->
         <article class="ModalDialog ModalDialog--scrollable">
@@ -603,7 +725,12 @@
               aria-controls="example-scroll-view"
               aria-expanded="false"
             >
-              <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
@@ -734,7 +861,12 @@
               aria-controls="example-custom-height"
               aria-expanded="false"
             >
-              <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
@@ -809,12 +941,20 @@
                   </div>
                 </div>
                 <div class="Grid" style="column-gap: var(--spirit-space-600)">
-                  <label for="custom-height-mobile" class="GridItem" style="--grid-item-column-start: 1; --grid-item-column-end: 6; --grid-item-column-end-tablet: 4;">
+                  <label
+                    for="custom-height-mobile"
+                    class="GridItem"
+                    style="--grid-item-column-start: 1; --grid-item-column-end: 6; --grid-item-column-end-tablet: 4;"
+                  >
                     Height
                   </label>
-                  <span id="custom-height-mobile-value" class="GridItem" style="--grid-item-column-start: 6; --grid-item-column-end: 13; --grid-item-column-start-tablet: 4; --grid-item-column-end-tablet: 7;">
-                  400 px
-                </span>
+                  <span
+                    id="custom-height-mobile-value"
+                    class="GridItem"
+                    style="--grid-item-column-start: 6; --grid-item-column-end: 13; --grid-item-column-start-tablet: 4; --grid-item-column-end-tablet: 7;"
+                  >
+                    400 px
+                  </span>
                   <input
                     type="range"
                     id="custom-height-mobile"
@@ -829,12 +969,20 @@
                   />
                 </div>
                 <div class="Grid" style="column-gap: var(--spirit-space-600)">
-                  <label for="custom-max-height-mobile" class="GridItem" style="--grid-item-column-start: 1; --grid-item-column-end: 6; --grid-item-column-end-tablet: 4;">
+                  <label
+                    for="custom-max-height-mobile"
+                    class="GridItem"
+                    style="--grid-item-column-start: 1; --grid-item-column-end: 6; --grid-item-column-end-tablet: 4;"
+                  >
                     Max height
                   </label>
-                  <span id="custom-max-height-mobile-value" class="GridItem" style="--grid-item-column-start: 6; --grid-item-column-end: 13; --grid-item-column-start-tablet: 4; --grid-item-column-end-tablet: 7;">
-                  600 px
-                </span>
+                  <span
+                    id="custom-max-height-mobile-value"
+                    class="GridItem"
+                    style="--grid-item-column-start: 6; --grid-item-column-end: 13; --grid-item-column-start-tablet: 4; --grid-item-column-end-tablet: 7;"
+                  >
+                    600 px
+                  </span>
                   <input
                     type="range"
                     id="custom-max-height-mobile"
@@ -862,16 +1010,28 @@
                     aria-labelledby="custom-height-tablet-enabled-label"
                   />
                   <div class="Checkbox__text">
-                    <label class="Checkbox__label" for="custom-height-tablet-enabled" id="custom-height-tablet-enabled-label">Tablet</label>
+                    <label
+                      class="Checkbox__label"
+                      for="custom-height-tablet-enabled"
+                      id="custom-height-tablet-enabled-label"
+                    >Tablet</label>
                   </div>
                 </div>
                 <div class="Grid" style="column-gap: var(--spirit-space-600)">
-                  <label for="custom-height-tablet" class="GridItem" style="--grid-item-column-start: 1; --grid-item-column-end: 6; --grid-item-column-end-tablet: 4;">
+                  <label
+                    for="custom-height-tablet"
+                    class="GridItem"
+                    style="--grid-item-column-start: 1; --grid-item-column-end: 6; --grid-item-column-end-tablet: 4;"
+                  >
                     Height
                   </label>
-                  <span id="custom-height-tablet-value" class="GridItem" style="--grid-item-column-start: 6; --grid-item-column-end: 13; --grid-item-column-start-tablet: 4; --grid-item-column-end-tablet: 7;">
-                  500 px
-                </span>
+                  <span
+                    id="custom-height-tablet-value"
+                    class="GridItem"
+                    style="--grid-item-column-start: 6; --grid-item-column-end: 13; --grid-item-column-start-tablet: 4; --grid-item-column-end-tablet: 7;"
+                  >
+                    500 px
+                  </span>
                   <input
                     type="range"
                     id="custom-height-tablet"
@@ -886,12 +1046,20 @@
                   />
                 </div>
                 <div class="Grid" style="column-gap: var(--spirit-space-600)">
-                  <label for="custom-max-height-tablet" class="GridItem" style="--grid-item-column-start: 1; --grid-item-column-end: 6; --grid-item-column-end-tablet: 4;">
+                  <label
+                    for="custom-max-height-tablet"
+                    class="GridItem"
+                    style="--grid-item-column-start: 1; --grid-item-column-end: 6; --grid-item-column-end-tablet: 4;"
+                  >
                     Max height
                   </label>
-                  <span id="custom-max-height-tablet-value" class="GridItem" style="--grid-item-column-start: 6; --grid-item-column-end: 13; --grid-item-column-start-tablet: 4; --grid-item-column-end-tablet: 7;">
-                  600 px
-                </span>
+                  <span
+                    id="custom-max-height-tablet-value"
+                    class="GridItem"
+                    style="--grid-item-column-start: 6; --grid-item-column-end: 13; --grid-item-column-start-tablet: 4; --grid-item-column-end-tablet: 7;"
+                  >
+                    600 px
+                  </span>
                   <input
                     type="range"
                     id="custom-max-height-tablet"
@@ -919,16 +1087,28 @@
                     aria-labelledby="custom-height-desktop-enabled-label"
                   />
                   <div class="Checkbox__text">
-                    <label class="Checkbox__label" for="custom-height-desktop-enabled" id="custom-height-desktop-enabled-label">Desktop</label>
+                    <label
+                      class="Checkbox__label"
+                      for="custom-height-desktop-enabled"
+                      id="custom-height-desktop-enabled-label"
+                    >Desktop</label>
                   </div>
                 </div>
                 <div class="Grid" style="column-gap: var(--spirit-space-600)">
-                  <label for="custom-height-desktop" class="GridItem" style="--grid-item-column-start: 1; --grid-item-column-end: 6; --grid-item-column-end-tablet: 4;">
+                  <label
+                    for="custom-height-desktop"
+                    class="GridItem"
+                    style="--grid-item-column-start: 1; --grid-item-column-end: 6; --grid-item-column-end-tablet: 4;"
+                  >
                     Height
                   </label>
-                  <span id="custom-height-desktop-value" class="GridItem" style="--grid-item-column-start: 6; --grid-item-column-end: 13; --grid-item-column-start-tablet: 4; --grid-item-column-end-tablet: 7;">
-                  600 px
-                </span>
+                  <span
+                    id="custom-height-desktop-value"
+                    class="GridItem"
+                    style="--grid-item-column-start: 6; --grid-item-column-end: 13; --grid-item-column-start-tablet: 4; --grid-item-column-end-tablet: 7;"
+                  >
+                    600 px
+                  </span>
                   <input
                     type="range"
                     id="custom-height-desktop"
@@ -943,12 +1123,20 @@
                   />
                 </div>
                 <div class="Grid" style="column-gap: var(--spirit-space-600)">
-                  <label for="custom-max-height-desktop" class="GridItem" style="--grid-item-column-start: 1; --grid-item-column-end: 6; --grid-item-column-end-tablet: 4;">
+                  <label
+                    for="custom-max-height-desktop"
+                    class="GridItem"
+                    style="--grid-item-column-start: 1; --grid-item-column-end: 6; --grid-item-column-end-tablet: 4;"
+                  >
                     Max height
                   </label>
-                  <span id="custom-max-height-desktop-value" class="GridItem" style="--grid-item-column-start: 6; --grid-item-column-end: 13; --grid-item-column-start-tablet: 4; --grid-item-column-end-tablet: 7;">
-                  600 px
-                </span>
+                  <span
+                    id="custom-max-height-desktop-value"
+                    class="GridItem"
+                    style="--grid-item-column-start: 6; --grid-item-column-end: 13; --grid-item-column-start-tablet: 4; --grid-item-column-end-tablet: 7;"
+                  >
+                    600 px
+                  </span>
                   <input
                     type="range"
                     id="custom-max-height-desktop"
@@ -1025,7 +1213,11 @@
       </button>
 
       <!-- Modal: start -->
-      <dialog id="example-stacking-parent" class="Modal Modal--center" aria-labelledby="example-stacking-parent-title">
+      <dialog
+        id="example-stacking-parent"
+        class="Modal Modal--center"
+        aria-labelledby="example-stacking-parent-title"
+      >
 
         <!-- ModalDialog: start -->
         <article class="ModalDialog">
@@ -1041,7 +1233,12 @@
               aria-controls="example-stacking-parent"
               aria-expanded="false"
             >
-              <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
@@ -1084,7 +1281,11 @@
       </dialog>
       <!-- Modal: end -->
       <!-- Modal: start -->
-      <dialog id="example-stacking-nested" class="Modal Modal--center" aria-labelledby="example-stacking-nested-title">
+      <dialog
+        id="example-stacking-nested"
+        class="Modal Modal--center"
+        aria-labelledby="example-stacking-nested-title"
+      >
 
         <!-- ModalDialog: start -->
         <article class="ModalDialog">
@@ -1100,7 +1301,12 @@
               aria-controls="example-stacking-nested"
               aria-expanded="false"
             >
-              <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
@@ -1179,7 +1385,12 @@
         Open Modal
       </button>
 
-      <dialog id="example-disabled-backdrop-click" class="Modal Modal--center" aria-labelledby="example-disabled-backdrop-click-title" data-spirit-close-on-backdrop-click="false">
+      <dialog
+        id="example-disabled-backdrop-click"
+        class="Modal Modal--center"
+        aria-labelledby="example-disabled-backdrop-click-title"
+        data-spirit-close-on-backdrop-click="false"
+      >
 
         <article class="ModalDialog ModalDialog--expandOnMobile">
 
@@ -1193,7 +1404,12 @@
               aria-controls="example-disabled-backdrop-click"
               aria-expanded="false"
             >
-              <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#close" />
               </svg>
               <span class="accessibility-hidden">Close</span>
@@ -1247,7 +1463,6 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-
       <button
         type="button"
         class="Button Button--primary Button--medium"
@@ -1260,7 +1475,13 @@
         Open Modal
       </button>
 
-      <dialog id="example-hide-close-button" class="Modal Modal--center" aria-labelledby="example-hide-close-button-title" data-spirit-close-on-backdrop-click="false" data-spirit-close-on-escape-key-down="false">
+      <dialog
+        id="example-hide-close-button"
+        class="Modal Modal--center"
+        aria-labelledby="example-hide-close-button-title"
+        data-spirit-close-on-backdrop-click="false"
+        data-spirit-close-on-escape-key-down="false"
+      >
 
         <article class="ModalDialog ModalDialog--expandOnMobile">
 

@@ -14,7 +14,11 @@
 
 <!-- Picker: empty selection template -->
 <template id="picker-selection-label-template">
-  <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true"></span>
+  <span
+    class="UNSTABLE_Picker__selectionEmpty"
+    data-spirit-element="selection-label"
+    aria-hidden="true"
+  ></span>
 </template>
 
 <!-- Picker: tag template -->
@@ -38,7 +42,12 @@
         class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
         data-tag-close
       >
-        <svg class="Icon" width="16" height="16" aria-hidden="true">
+        <svg
+          class="Icon"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        >
           <use xlink:href="/assets/icons/svg/sprite.svg#close" />
         </svg>
       </button>
@@ -83,7 +92,11 @@
               class="UNSTABLE_Picker__selection"
               data-spirit-element="selection"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
             </div>
 
             <button
@@ -190,7 +203,8 @@
         <span class="UNSTABLE_Picker__label">Languages</span>
 
         <div
-          class="Dropdown" data-spirit-toggle="picker"
+          class="Dropdown"
+          data-spirit-toggle="picker"
           data-picker-label="Languages"
         >
 
@@ -208,9 +222,14 @@
               aria-live="off"
               aria-relevant="additions"
               id="picker-lang-pre-selection"
-              class="UNSTABLE_Picker__selection" data-spirit-element="selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
             </div>
 
             <button
@@ -329,248 +348,386 @@
     <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
       <div class="Grid Grid--cols-1 Grid--desktop--cols-3">
 
-      <!-- Small -->
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--small">
+        <!-- Small -->
+        <div class="UNSTABLE_Picker UNSTABLE_Picker--small">
 
-        <span class="UNSTABLE_Picker__label">Small</span>
-
-        <div
-          class="Dropdown"
-          data-spirit-toggle="picker"
-          data-picker-label="Languages"
-          data-picker-tag-size="xsmall"
-        >
+          <span class="UNSTABLE_Picker__label">Small</span>
 
           <div
-            role="group"
-            aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="Dropdown"
+            data-spirit-toggle="picker"
+            data-picker-label="Languages"
+            data-picker-tag-size="xsmall"
           >
 
             <div
               role="group"
-              tabindex="-1"
-              aria-atomic="false"
-              aria-label="Selected languages"
-              aria-live="off"
-              aria-relevant="additions"
-              id="picker-small-selection"
-              class="UNSTABLE_Picker__selection"
-              data-spirit-element="selection"
+              aria-label="Languages"
+              class="UNSTABLE_Picker__inputContainer"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+
+              <div
+                role="group"
+                tabindex="-1"
+                aria-atomic="false"
+                aria-label="Selected languages"
+                aria-live="off"
+                aria-relevant="additions"
+                id="picker-small-selection"
+                class="UNSTABLE_Picker__selection"
+                data-spirit-element="selection"
+              >
+                <span
+                  class="UNSTABLE_Picker__selectionEmpty"
+                  data-spirit-element="selection-label"
+                  aria-hidden="true"
+                >Languages</span>
+              </div>
+
+              <button
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#picker-small"
+                class="UNSTABLE_Picker__trigger"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="picker-small"
+              >
+                <span class="accessibility-hidden">Add</span>
+                <svg
+                  class="Icon"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
             </div>
 
-            <button
-              data-spirit-toggle="dropdown"
-              data-spirit-target="#picker-small"
-              class="UNSTABLE_Picker__trigger"
-              aria-haspopup="dialog"
-              aria-expanded="false"
-              aria-controls="picker-small"
+            <div
+              role="dialog"
+              aria-modal="true"
+              class="DropdownPopover"
+              data-spirit-placement="bottom-start"
+              id="picker-small"
             >
-              <span class="accessibility-hidden">Add</span>
-              <svg class="Icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
-              </svg>
-            </button>
-          </div>
+              <fieldset class="FieldGroup FieldGroup--fluid">
+                <legend class="accessibility-hidden">Language</legend>
+                <div class="FieldGroup__fields">
 
-          <div role="dialog" aria-modal="true" class="DropdownPopover" data-spirit-placement="bottom-start" id="picker-small">
-            <fieldset class="FieldGroup FieldGroup--fluid">
-              <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
-
-                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
-                  <input type="checkbox" id="lang-small-cs" class="Checkbox__input" name="lang-small" autocomplete="off" />
-                  <div class="Checkbox__text">
-                    <label class="Checkbox__label" data-spirit-element="checkbox-label" for="lang-small-cs">Czech</label>
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-small-cs"
+                      class="Checkbox__input"
+                      name="lang-small"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-small-cs"
+                      >Czech</label>
+                    </div>
                   </div>
-                </div>
 
-                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
-                  <input type="checkbox" id="lang-small-dk" class="Checkbox__input" name="lang-small" autocomplete="off" />
-                  <div class="Checkbox__text">
-                    <label class="Checkbox__label" data-spirit-element="checkbox-label" for="lang-small-dk">Danish</label>
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-small-dk"
+                      class="Checkbox__input"
+                      name="lang-small"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-small-dk"
+                      >Danish</label>
+                    </div>
                   </div>
-                </div>
 
-                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
-                  <input type="checkbox" id="lang-small-kl" class="Checkbox__input" name="lang-small" autocomplete="off" />
-                  <div class="Checkbox__text">
-                    <label class="Checkbox__label" data-spirit-element="checkbox-label" for="lang-small-kl">Greenlandic</label>
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-small-kl"
+                      class="Checkbox__input"
+                      name="lang-small"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-small-kl"
+                      >Greenlandic</label>
+                    </div>
                   </div>
-                </div>
 
-              </div>
-            </fieldset>
+                </div>
+              </fieldset>
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+        <!-- Medium (default) -->
+        <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
 
-      <!-- Medium (default) -->
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
-
-        <span class="UNSTABLE_Picker__label">Medium (default)</span>
-
-        <div
-          class="Dropdown"
-          data-spirit-toggle="picker"
-          data-picker-label="Languages"
-          data-picker-tag-size="small"
-        >
+          <span class="UNSTABLE_Picker__label">Medium (default)</span>
 
           <div
-            role="group"
-            aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="Dropdown"
+            data-spirit-toggle="picker"
+            data-picker-label="Languages"
+            data-picker-tag-size="small"
           >
 
             <div
               role="group"
-              tabindex="-1"
-              aria-atomic="false"
-              aria-label="Selected languages"
-              aria-live="off"
-              aria-relevant="additions"
-              id="picker-medium-selection"
-              class="UNSTABLE_Picker__selection"
-              data-spirit-element="selection"
+              aria-label="Languages"
+              class="UNSTABLE_Picker__inputContainer"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+
+              <div
+                role="group"
+                tabindex="-1"
+                aria-atomic="false"
+                aria-label="Selected languages"
+                aria-live="off"
+                aria-relevant="additions"
+                id="picker-medium-selection"
+                class="UNSTABLE_Picker__selection"
+                data-spirit-element="selection"
+              >
+                <span
+                  class="UNSTABLE_Picker__selectionEmpty"
+                  data-spirit-element="selection-label"
+                  aria-hidden="true"
+                >Languages</span>
+              </div>
+
+              <button
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#picker-medium"
+                class="UNSTABLE_Picker__trigger"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="picker-medium"
+              >
+                <span class="accessibility-hidden">Add</span>
+                <svg
+                  class="Icon"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
             </div>
 
-            <button
-              data-spirit-toggle="dropdown"
-              data-spirit-target="#picker-medium"
-              class="UNSTABLE_Picker__trigger"
-              aria-haspopup="dialog"
-              aria-expanded="false"
-              aria-controls="picker-medium"
+            <div
+              role="dialog"
+              aria-modal="true"
+              class="DropdownPopover"
+              data-spirit-placement="bottom-start"
+              id="picker-medium"
             >
-              <span class="accessibility-hidden">Add</span>
-              <svg class="Icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
-              </svg>
-            </button>
-          </div>
+              <fieldset class="FieldGroup FieldGroup--fluid">
+                <legend class="accessibility-hidden">Language</legend>
+                <div class="FieldGroup__fields">
 
-          <div role="dialog" aria-modal="true" class="DropdownPopover" data-spirit-placement="bottom-start" id="picker-medium">
-            <fieldset class="FieldGroup FieldGroup--fluid">
-              <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
-
-                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
-                  <input type="checkbox" id="lang-medium-cs" class="Checkbox__input" name="lang-medium" autocomplete="off" />
-                  <div class="Checkbox__text">
-                    <label class="Checkbox__label" data-spirit-element="checkbox-label" for="lang-medium-cs">Czech</label>
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-medium-cs"
+                      class="Checkbox__input"
+                      name="lang-medium"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-medium-cs"
+                      >Czech</label>
+                    </div>
                   </div>
-                </div>
 
-                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
-                  <input type="checkbox" id="lang-medium-dk" class="Checkbox__input" name="lang-medium" autocomplete="off" />
-                  <div class="Checkbox__text">
-                    <label class="Checkbox__label" data-spirit-element="checkbox-label" for="lang-medium-dk">Danish</label>
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-medium-dk"
+                      class="Checkbox__input"
+                      name="lang-medium"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-medium-dk"
+                      >Danish</label>
+                    </div>
                   </div>
-                </div>
 
-                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
-                  <input type="checkbox" id="lang-medium-kl" class="Checkbox__input" name="lang-medium" autocomplete="off" />
-                  <div class="Checkbox__text">
-                    <label class="Checkbox__label" data-spirit-element="checkbox-label" for="lang-medium-kl">Greenlandic</label>
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-medium-kl"
+                      class="Checkbox__input"
+                      name="lang-medium"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-medium-kl"
+                      >Greenlandic</label>
+                    </div>
                   </div>
-                </div>
 
-              </div>
-            </fieldset>
+                </div>
+              </fieldset>
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+        <!-- Large -->
+        <div class="UNSTABLE_Picker UNSTABLE_Picker--large">
 
-      <!-- Large -->
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--large">
-
-        <span class="UNSTABLE_Picker__label">Large</span>
-
-        <div
-          class="Dropdown"
-          data-spirit-toggle="picker"
-          data-picker-label="Languages"
-          data-picker-tag-size="medium"
-        >
+          <span class="UNSTABLE_Picker__label">Large</span>
 
           <div
-            role="group"
-            aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="Dropdown"
+            data-spirit-toggle="picker"
+            data-picker-label="Languages"
+            data-picker-tag-size="medium"
           >
 
             <div
               role="group"
-              tabindex="-1"
-              aria-atomic="false"
-              aria-label="Selected languages"
-              aria-live="off"
-              aria-relevant="additions"
-              id="picker-large-selection"
-              class="UNSTABLE_Picker__selection"
-              data-spirit-element="selection"
+              aria-label="Languages"
+              class="UNSTABLE_Picker__inputContainer"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+
+              <div
+                role="group"
+                tabindex="-1"
+                aria-atomic="false"
+                aria-label="Selected languages"
+                aria-live="off"
+                aria-relevant="additions"
+                id="picker-large-selection"
+                class="UNSTABLE_Picker__selection"
+                data-spirit-element="selection"
+              >
+                <span
+                  class="UNSTABLE_Picker__selectionEmpty"
+                  data-spirit-element="selection-label"
+                  aria-hidden="true"
+                >Languages</span>
+              </div>
+
+              <button
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#picker-large"
+                class="UNSTABLE_Picker__trigger"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="picker-large"
+              >
+                <span class="accessibility-hidden">Add</span>
+                <svg
+                  class="Icon"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
             </div>
 
-            <button
-              data-spirit-toggle="dropdown"
-              data-spirit-target="#picker-large"
-              class="UNSTABLE_Picker__trigger"
-              aria-haspopup="dialog"
-              aria-expanded="false"
-              aria-controls="picker-large"
+            <div
+              role="dialog"
+              aria-modal="true"
+              class="DropdownPopover"
+              data-spirit-placement="bottom-start"
+              id="picker-large"
             >
-              <span class="accessibility-hidden">Add</span>
-              <svg class="Icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
-              </svg>
-            </button>
-          </div>
+              <fieldset class="FieldGroup FieldGroup--fluid">
+                <legend class="accessibility-hidden">Language</legend>
+                <div class="FieldGroup__fields">
 
-          <div role="dialog" aria-modal="true" class="DropdownPopover" data-spirit-placement="bottom-start" id="picker-large">
-            <fieldset class="FieldGroup FieldGroup--fluid">
-              <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
-
-                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
-                  <input type="checkbox" id="lang-large-cs" class="Checkbox__input" name="lang-large" autocomplete="off" />
-                  <div class="Checkbox__text">
-                    <label class="Checkbox__label" data-spirit-element="checkbox-label" for="lang-large-cs">Czech</label>
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-large-cs"
+                      class="Checkbox__input"
+                      name="lang-large"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-large-cs"
+                      >Czech</label>
+                    </div>
                   </div>
-                </div>
 
-                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
-                  <input type="checkbox" id="lang-large-dk" class="Checkbox__input" name="lang-large" autocomplete="off" />
-                  <div class="Checkbox__text">
-                    <label class="Checkbox__label" data-spirit-element="checkbox-label" for="lang-large-dk">Danish</label>
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-large-dk"
+                      class="Checkbox__input"
+                      name="lang-large"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-large-dk"
+                      >Danish</label>
+                    </div>
                   </div>
-                </div>
 
-                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
-                  <input type="checkbox" id="lang-large-kl" class="Checkbox__input" name="lang-large" autocomplete="off" />
-                  <div class="Checkbox__text">
-                    <label class="Checkbox__label" data-spirit-element="checkbox-label" for="lang-large-kl">Greenlandic</label>
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-large-kl"
+                      class="Checkbox__input"
+                      name="lang-large"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-large-kl"
+                      >Greenlandic</label>
+                    </div>
                   </div>
-                </div>
 
-              </div>
-            </fieldset>
+                </div>
+              </fieldset>
+            </div>
+
           </div>
 
         </div>
-
-      </div>
 
       </div>
     </div>
@@ -615,7 +772,11 @@
               class="UNSTABLE_Picker__selection"
               data-spirit-element="selection"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
             </div>
 
             <button
@@ -758,7 +919,11 @@
               class="UNSTABLE_Picker__selection"
               data-spirit-element="selection"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
             </div>
 
             <button
@@ -901,7 +1066,11 @@
               class="UNSTABLE_Picker__selection"
               data-spirit-element="selection"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
             </div>
 
             <button
@@ -1045,7 +1214,11 @@
               class="UNSTABLE_Picker__selection"
               data-spirit-element="selection"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
             </div>
 
             <button
@@ -1191,7 +1364,11 @@
               class="UNSTABLE_Picker__selection"
               data-spirit-element="selection"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
             </div>
 
             <button
@@ -1300,7 +1477,8 @@
         <span class="UNSTABLE_Picker__label">Languages</span>
 
         <div
-          class="Dropdown" data-spirit-toggle="picker"
+          class="Dropdown"
+          data-spirit-toggle="picker"
           data-picker-label="Languages"
         >
 
@@ -1322,7 +1500,11 @@
               class="UNSTABLE_Picker__selection"
               data-spirit-element="selection"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
             </div>
 
             <button
@@ -1455,7 +1637,11 @@
               class="UNSTABLE_Picker__selection"
               data-spirit-element="selection"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
             </div>
 
             <button
@@ -1602,7 +1788,11 @@
               class="UNSTABLE_Picker__selection"
               data-spirit-element="selection"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
             </div>
 
             <button
@@ -1615,7 +1805,12 @@
               disabled
             >
               <span class="accessibility-hidden">Add</span>
-              <svg class="Icon" width="20" height="20" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
               </svg>
             </button>
@@ -1736,7 +1931,11 @@
                 aria-describedby="picker-tag-description"
                 class="Tag Tag--selected Tag--disabled Tag--small"
               >
-                <div role="gridcell" aria-colindex="1" class="d-contents">
+                <div
+                  role="gridcell"
+                  aria-colindex="1"
+                  class="d-contents"
+                >
                   <span data-tag-label>Czech</span>
                   <button
                     type="button"
@@ -1745,7 +1944,12 @@
                     data-tag-close
                     disabled
                   >
-                    <svg class="Icon" width="16" height="16" aria-hidden="true">
+                    <svg
+                      class="Icon"
+                      width="16"
+                      height="16"
+                      aria-hidden="true"
+                    >
                       <use xlink:href="/assets/icons/svg/sprite.svg#close" />
                     </svg>
                   </button>
@@ -1759,7 +1963,11 @@
                 aria-describedby="picker-tag-description"
                 class="Tag Tag--selected Tag--disabled Tag--small"
               >
-                <div role="gridcell" aria-colindex="1" class="d-contents">
+                <div
+                  role="gridcell"
+                  aria-colindex="1"
+                  class="d-contents"
+                >
                   <span data-tag-label>Danish</span>
                   <button
                     type="button"
@@ -1768,7 +1976,12 @@
                     data-tag-close
                     disabled
                   >
-                    <svg class="Icon" width="16" height="16" aria-hidden="true">
+                    <svg
+                      class="Icon"
+                      width="16"
+                      height="16"
+                      aria-hidden="true"
+                    >
                       <use xlink:href="/assets/icons/svg/sprite.svg#close" />
                     </svg>
                   </button>
@@ -1786,7 +1999,12 @@
               disabled
             >
               <span class="accessibility-hidden">Add</span>
-              <svg class="Icon" width="20" height="20" aria-hidden="true">
+              <svg
+                class="Icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
                 <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
               </svg>
             </button>
@@ -1915,7 +2133,11 @@
               class="UNSTABLE_Picker__selection"
               data-spirit-element="selection"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Languages</span>
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
             </div>
 
             <button
@@ -2054,7 +2276,11 @@
               class="UNSTABLE_Picker__selection"
               data-spirit-element="selection"
             >
-              <span class="UNSTABLE_Picker__selectionEmpty" data-spirit-element="selection-label" aria-hidden="true">Salary</span>
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Salary</span>
             </div>
 
             <button

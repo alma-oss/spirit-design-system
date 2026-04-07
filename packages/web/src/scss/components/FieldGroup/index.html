@@ -207,7 +207,11 @@
           <!-- Custom items: end -->
         </div>
         <div id="field-group-{{state}}-validation-icon" class="FieldGroup__validationText">
-          <svg width="20" height="20" aria-hidden="true">
+          <svg
+            width="20"
+            height="20"
+            aria-hidden="true"
+          >
             {{#if (eq state "success")}}
             <use xlink:href="/assets/icons/svg/sprite.svg#check-plain"/>
             {{else}}
@@ -264,14 +268,25 @@
         <div class="FieldGroup__fields">
           <!-- Custom items: start -->
           <div class="Checkbox Checkbox--inputPositionStart">
-            <input type="checkbox" id="checkbox-default-checked" class="Checkbox__input" name="checkbox-default-checked" checked />
+            <input
+              type="checkbox"
+              id="checkbox-default-checked"
+              class="Checkbox__input"
+              name="checkbox-default-checked"
+              checked
+            />
             <div class="Checkbox__text">
               <label class="Checkbox__label" for="checkbox-default-checked">Checkbox Label</label>
             </div>
           </div>
 
           <div class="Checkbox Checkbox--inputPositionStart">
-            <input type="checkbox" id="checkbox-default" class="Checkbox__input" name="checkbox-default" />
+            <input
+              type="checkbox"
+              id="checkbox-default"
+              class="Checkbox__input"
+              name="checkbox-default"
+            />
             <div class="Checkbox__text">
               <label class="Checkbox__label" for="checkbox-default">Checkbox Label</label>
             </div>
@@ -300,14 +315,25 @@
         <div class="FieldGroup__fields">
           <!-- Custom items: start -->
           <div class="Radio Radio--inputPositionStart">
-            <input type="radio" id="radio-default-checked" class="Radio__input" name="radio-default" checked />
+            <input
+              type="radio"
+              id="radio-default-checked"
+              class="Radio__input"
+              name="radio-default"
+              checked
+            />
             <div class="Radio__text">
               <label class="Radio__label" for="radio-default-checked">Radio Label</label>
             </div>
           </div>
 
           <div class="Radio Radio--inputPositionStart">
-            <input type="radio" id="radio-default" class="Radio__input" name="radio-default" />
+            <input
+              type="radio"
+              id="radio-default"
+              class="Radio__input"
+              name="radio-default"
+            />
             <div class="Radio__text">
               <label class="Radio__label" for="radio-default">Radio Label</label>
             </div>
