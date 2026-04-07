@@ -8,6 +8,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { getColorSchemeClassName } from '../../../utils';
 import ToastBar from '../ToastBar';
 
 jest.mock('../../../hooks/useIcon');
@@ -39,6 +40,7 @@ describe('ToastBar', () => {
     expect(element).toBeInTheDocument();
     expect(element).toHaveClass('ToastBar');
     expect(element).toHaveClass('ToastBar--neutral');
+    expect(element).toHaveClass(getColorSchemeClassName({ color: 'neutral', isSubtle: false }));
   });
 
   it('should render text children', () => {
@@ -62,6 +64,7 @@ describe('ToastBar', () => {
     const element = dom.container.querySelector('div') as HTMLElement;
 
     expect(element).toHaveClass('ToastBar--danger ToastBar--dismissible');
+    expect(element).toHaveClass(getColorSchemeClassName({ color: 'danger', isSubtle: false }));
 
     const icon = dom.container.querySelector('svg') as SVGSVGElement;
 
