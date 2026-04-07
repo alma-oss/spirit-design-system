@@ -1,5 +1,4 @@
 /* istanbul ignore file -- used for demo app */
-// @ts-ignore: No declaration file -- @see https://jira.almacareer.tech/browse/DS-561
 import icons from '@alma-oss/spirit-icons/icons';
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
