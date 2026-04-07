@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useClassNamePrefix } from '../../hooks';
 import { type ToastBarProps } from '../../types';
+import { getColorSchemeClassName } from '../../utils';
 import { ToastColorsExtended } from '.';
 
 export const useToastBarStyleProps = (props: ToastBarProps) => {
@@ -15,10 +16,16 @@ export const useToastBarStyleProps = (props: ToastBarProps) => {
   const toastBarLinkUnderlinedClass = useClassNamePrefix('link-underlined');
   const toastBarColorClass = `${toastBarClass}--${color || ToastColorsExtended.NEUTRAL}`;
   const toastBarDismissibleClass = `${toastBarClass}--dismissible`;
+  const resolvedColor = color ?? ToastColorsExtended.NEUTRAL;
 
   return {
     classProps: {
-      root: classNames(toastBarClass, toastBarColorClass, isDismissible && toastBarDismissibleClass),
+      root: classNames(
+        toastBarClass,
+        toastBarColorClass,
+        isDismissible && toastBarDismissibleClass,
+        getColorSchemeClassName({ color: String(resolvedColor), isSubtle: false }),
+      ),
       box: toastBarBoxClass,
       close: toastBarCloseClass,
       container: toastBarContainerClass,
