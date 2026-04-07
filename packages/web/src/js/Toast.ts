@@ -64,6 +64,15 @@ const PROPERTY_NAME_FALLBACK_TRANSITION = 'opacity';
 type Color = keyof typeof COLOR_ICON_MAP;
 type Underlined = keyof typeof UNDERLINE_MAP;
 
+/** Matches `getColorSchemeClassName({ isSubtle: false })` for each toast color (basic surface pairing). */
+const TOAST_COLOR_SCHEME_BASIC_CLASS: Record<Color, string> = {
+  danger: 'color-scheme-on-emotion-danger-basic',
+  informative: 'color-scheme-on-emotion-informative-basic',
+  neutral: 'color-scheme-on-neutral-basic',
+  success: 'color-scheme-on-emotion-success-basic',
+  warning: 'color-scheme-on-emotion-warning-basic',
+};
+
 type Config = {
   autoCloseInterval: number;
   color: Color;
@@ -249,6 +258,7 @@ class Toast extends BaseComponent {
 
     itemElement!.setAttribute('id', config.id);
     itemElement!.setAttribute('data-spirit-color', config.color);
+    itemElement!.classList.add(TOAST_COLOR_SCHEME_BASIC_CLASS[config.color]);
 
     this.updateOrRemoveIcon(iconElement);
     this.updateOrRemoveCloseButton(closeButtonElement);
