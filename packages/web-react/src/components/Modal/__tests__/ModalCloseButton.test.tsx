@@ -36,6 +36,7 @@ describe('ModalCloseButton', () => {
     render(<ModalCloseButton label="close" id="test" isOpen onClose={() => {}} />);
 
     const buttonText = screen.getByRole('button').lastElementChild;
+
     expect(buttonText?.textContent).toBe('close');
     expect(buttonText).toHaveClass('accessibility-hidden');
   });

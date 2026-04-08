@@ -44,11 +44,13 @@ describe('useItemStyleProps', () => {
     const { result: iconResult } = renderHook(() =>
       useItemStyleProps({ isSelected: true, selectionDecorator: 'icon' } as SpiritItemProps),
     );
+
     expect(iconResult.current.classProps.root).toBe('Item');
 
     const { result: bothResult } = renderHook(() =>
       useItemStyleProps({ isSelected: true, selectionDecorator: 'both' } as SpiritItemProps),
     );
+
     expect(bothResult.current.classProps.root).toBe('Item Item--selected');
   });
 });

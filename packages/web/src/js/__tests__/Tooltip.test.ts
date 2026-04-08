@@ -131,6 +131,7 @@ describe('Tooltip', () => {
         tooltipEl.addEventListener('shown.tooltip', () => {
           expect(document.querySelector('.tooltip')).not.toBeNull();
           expect(spy).toHaveBeenCalledWith(expect.any(Object), 'mouseover', noop);
+
           document.documentElement.ontouchstart = undefined;
         });
 
@@ -204,10 +205,12 @@ describe('Tooltip', () => {
 
         setTimeout(() => {
           expect(tooltip.getTipElement()).toHaveClass('show');
+
           tooltipEl.dispatchEvent(createEvent('mouseout'));
 
           setTimeout(() => {
             expect(tooltip.getTipElement()).toHaveClass('show');
+
             tooltipEl.dispatchEvent(createEvent('mouseover'));
           }, 100);
 
@@ -282,6 +285,7 @@ describe('Tooltip', () => {
         tooltipEl.addEventListener('hidden.tooltip', () => {
           expect(document.querySelector('.tooltip')).toBeNull();
           expect(spy).toHaveBeenCalledWith(expect.any(Object), 'mouseover', noop);
+
           document.documentElement.ontouchstart = undefined;
         });
 

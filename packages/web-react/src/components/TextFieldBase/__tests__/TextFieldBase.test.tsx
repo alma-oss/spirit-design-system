@@ -27,9 +27,11 @@ describe('TextFieldBase', () => {
       const dom = render(<TextFieldBase id="textfield-base" label="Label" type={type as TextFieldType} />);
 
       const labelElement = dom.container.querySelector('label') as HTMLElement;
+
       expect(labelElement).toHaveAttribute('for', 'textfield-base');
 
       const inputElement = dom.container.querySelector('input') as HTMLElement;
+
       expect(inputElement).toHaveAttribute('id', 'textfield-base');
     });
   });

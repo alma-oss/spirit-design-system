@@ -59,6 +59,7 @@ describe('tokensTransformer', () => {
       const result = transformToMap([token]);
 
       const retrievedToken = result.get('token-1');
+
       expect(retrievedToken).toBe(token);
       expect(retrievedToken).toEqual(token);
     });

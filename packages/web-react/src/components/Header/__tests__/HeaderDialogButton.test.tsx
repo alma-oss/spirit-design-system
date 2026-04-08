@@ -28,6 +28,7 @@ describe('HeaderDialogButton', () => {
     const dom = render(<HeaderDialogButton id="test">Hello World</HeaderDialogButton>);
 
     const element = dom.container.querySelector('button') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 });

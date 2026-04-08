@@ -29,6 +29,7 @@ describe('versions', () => {
 
       const pathToFolder = '/path/to/folder';
       const version = await getVersions(pathToFolder);
+
       expect(version).toBe('^1.2.0-beta.1');
     });
 
@@ -39,6 +40,7 @@ describe('versions', () => {
 
       const pathToFolder = '/path/to/folder';
       const version = await getVersions(pathToFolder);
+
       expect(version).toBe('');
     });
 
@@ -56,6 +58,7 @@ describe('versions', () => {
 
       const pathToFolder = '/path/to/folder';
       const version = await getVersions(pathToFolder);
+
       expect(version).toBe('1.0.0');
     });
   });

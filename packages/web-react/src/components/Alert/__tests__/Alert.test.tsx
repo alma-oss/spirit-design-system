@@ -33,6 +33,7 @@ describe('Alert', () => {
     const dom = render(<Alert />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element).toHaveClass('Alert--success');
   });
 
@@ -40,6 +41,7 @@ describe('Alert', () => {
     const dom = render(<Alert>Hello World</Alert>);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 
@@ -47,6 +49,7 @@ describe('Alert', () => {
     const dom = render(<Alert>Hello World</Alert>);
 
     const element = dom.container.querySelector('svg') as SVGSVGElement;
+
     expect(element).toBeInTheDocument();
   });
 });

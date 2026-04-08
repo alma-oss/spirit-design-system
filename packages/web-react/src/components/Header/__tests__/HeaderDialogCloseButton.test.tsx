@@ -30,6 +30,7 @@ describe('HeaderDialogCloseButton', () => {
     const dom = render(<HeaderDialogCloseButton id="test" label="Hello World" />);
 
     const element = dom.container.querySelector('button') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 });

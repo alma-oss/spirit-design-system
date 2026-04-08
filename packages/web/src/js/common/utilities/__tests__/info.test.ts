@@ -29,6 +29,7 @@ describe('info', () => {
     info(falsyValue, message);
 
     expect(console.info).toHaveBeenCalledWith(`Info: ${message}`);
+
     // @ts-expect-error - mocking console.info
     console.info.mockClear();
   });

@@ -32,6 +32,7 @@ describe('warning', () => {
     warning(falsyValue, message);
 
     expect(console.warn).toHaveBeenCalledWith(`Warning: ${message}`);
+
     // @ts-expect-error - mocking console.warn
     console.warn.mockClear();
   });

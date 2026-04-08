@@ -35,6 +35,7 @@ describe('HeaderMobileActions', () => {
     );
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.textContent).toBe(`Hello World${HEADER_MENU_TOGGLE_LABEL_DEFAULT}`);
   });
 });

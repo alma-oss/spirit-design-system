@@ -28,6 +28,7 @@ describe('HeaderDialogNavItem', () => {
     const dom = render(<HeaderDialogNavItem id="test">Hello World</HeaderDialogNavItem>);
 
     const element = dom.container.querySelector('li') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 });

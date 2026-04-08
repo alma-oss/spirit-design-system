@@ -28,6 +28,7 @@ describe('Grid', () => {
     const dom = render(<GridItem>Hello World</GridItem>);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 
@@ -35,6 +36,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnStart={4} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-start')).toBe('4');
   });
 
@@ -42,6 +44,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnStart={{ mobile: 4 }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-start')).toBe('4');
   });
 
@@ -49,6 +52,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnStart={{ tablet: 4 }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-start-tablet')).toBe('4');
   });
 
@@ -56,6 +60,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnStart={{ desktop: 4 }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-start-desktop')).toBe('4');
   });
 
@@ -63,6 +68,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnEnd={4} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-end')).toBe('4');
   });
 
@@ -70,6 +76,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnEnd={{ mobile: 4 }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-end')).toBe('4');
   });
 
@@ -77,6 +84,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnEnd={{ tablet: 4 }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-end-tablet')).toBe('4');
   });
 
@@ -84,6 +92,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnEnd={{ desktop: 4 }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-end-desktop')).toBe('4');
   });
 
@@ -91,6 +100,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnEnd="span 4" />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-end')).toBe('span 4');
   });
 
@@ -98,6 +108,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnEnd={{ mobile: 'span 4' }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-end')).toBe('span 4');
   });
 
@@ -105,6 +116,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnEnd={{ tablet: 'span 4' }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-end-tablet')).toBe('span 4');
   });
 
@@ -112,6 +124,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnEnd={{ desktop: 'span 4' }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-end-desktop')).toBe('span 4');
   });
 
@@ -119,6 +132,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnStart={1} columnEnd={2} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-start')).toBe('1');
     expect(element.style.getPropertyValue('--grid-item-column-end')).toBe('2');
   });
@@ -129,6 +143,7 @@ describe('Grid', () => {
     );
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-start')).toBe('1');
     expect(element.style.getPropertyValue('--grid-item-column-start-tablet')).toBe('2');
     expect(element.style.getPropertyValue('--grid-item-column-start-desktop')).toBe('3');
@@ -141,6 +156,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowStart={4} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-start')).toBe('4');
   });
 
@@ -148,6 +164,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowStart={{ mobile: 4 }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-start')).toBe('4');
   });
 
@@ -155,6 +172,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowStart={{ tablet: 4 }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-start-tablet')).toBe('4');
   });
 
@@ -162,6 +180,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowStart={{ desktop: 4 }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-start-desktop')).toBe('4');
   });
 
@@ -169,6 +188,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowEnd={4} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-end')).toBe('4');
   });
 
@@ -176,6 +196,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowEnd={{ mobile: 4 }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-end')).toBe('4');
   });
 
@@ -183,6 +204,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowEnd={{ tablet: 4 }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-end-tablet')).toBe('4');
   });
 
@@ -190,6 +212,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowEnd={{ desktop: 4 }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-end-desktop')).toBe('4');
   });
 
@@ -197,6 +220,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowEnd="span 4" />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-end')).toBe('span 4');
   });
 
@@ -204,6 +228,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowEnd={{ mobile: 'span 4' }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-end')).toBe('span 4');
   });
 
@@ -211,6 +236,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowEnd={{ tablet: 'span 4' }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-end-tablet')).toBe('span 4');
   });
 
@@ -218,6 +244,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowEnd={{ desktop: 'span 4' }} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-end-desktop')).toBe('span 4');
   });
 
@@ -225,6 +252,7 @@ describe('Grid', () => {
     const dom = render(<GridItem rowStart={1} rowEnd={2} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-start')).toBe('1');
     expect(element.style.getPropertyValue('--grid-item-row-end')).toBe('2');
   });
@@ -235,6 +263,7 @@ describe('Grid', () => {
     );
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-row-start')).toBe('1');
     expect(element.style.getPropertyValue('--grid-item-row-start-tablet')).toBe('2');
     expect(element.style.getPropertyValue('--grid-item-row-start-desktop')).toBe('3');
@@ -247,6 +276,7 @@ describe('Grid', () => {
     const dom = render(<GridItem columnStart={1} columnEnd={2} rowStart={1} rowEnd={2} />);
 
     const element = dom.container.querySelector('div') as HTMLElement;
+
     expect(element.style.getPropertyValue('--grid-item-column-start')).toBe('1');
     expect(element.style.getPropertyValue('--grid-item-column-end')).toBe('2');
     expect(element.style.getPropertyValue('--grid-item-row-start')).toBe('1');

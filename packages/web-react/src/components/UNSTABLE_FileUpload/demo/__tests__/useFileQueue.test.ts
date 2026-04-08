@@ -118,6 +118,7 @@ describe('useFileQueue', () => {
     });
 
     const item = result.current.fileQueue.get('img1');
+
     expect(item?.label).toBe('test.png');
     expect(item?.previewUrl).toBeDefined();
     expect(typeof item?.previewUrl).toBe('string');

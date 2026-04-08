@@ -139,6 +139,7 @@ describe('Config', () => {
       };
 
       const obj = new DummyConfigClass();
+
       expect(() => {
         obj.typeCheckConfig(config);
       }).toThrow(

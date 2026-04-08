@@ -42,6 +42,7 @@ describe('ButtonLink', () => {
     render(<ButtonLink />);
 
     const element = screen.getByRole('button');
+
     expect(element).toHaveClass('Button--primary');
   });
 
@@ -49,6 +50,7 @@ describe('ButtonLink', () => {
     render(<ButtonLink isDisabled />);
 
     const element = screen.getByRole('button');
+
     expect(element).toHaveClass('Button');
     expect(element).toHaveClass('Button--disabled');
   });
@@ -57,6 +59,7 @@ describe('ButtonLink', () => {
     render(<ButtonLink isBlock />);
 
     const element = screen.getByRole('button');
+
     expect(element).toHaveClass('Button');
     expect(element).toHaveClass('Button--block');
   });
@@ -65,6 +68,7 @@ describe('ButtonLink', () => {
     render(<ButtonLink size="medium" />);
 
     const element = screen.getByRole('button');
+
     expect(element).toHaveClass('Button');
     expect(element).toHaveClass('Button--medium');
   });
@@ -73,6 +77,7 @@ describe('ButtonLink', () => {
     render(<ButtonLink>Hello World</ButtonLink>);
 
     const element = screen.getByRole('button');
+
     expect(element.textContent).toBe('Hello World');
   });
 
@@ -80,6 +85,7 @@ describe('ButtonLink', () => {
     render(<ButtonLink />);
 
     const element = screen.getByRole('button');
+
     expect(element).not.toHaveAttribute('type');
   });
 
@@ -87,6 +93,7 @@ describe('ButtonLink', () => {
     render(<ButtonLink rel="noopener" />);
 
     const element = screen.getByRole('button');
+
     expect(element).toHaveAttribute('rel', 'noopener');
   });
 
@@ -94,6 +101,7 @@ describe('ButtonLink', () => {
     render(<ButtonLink target="_blank" />);
 
     const element = screen.getByRole('button');
+
     expect(element).toHaveAttribute('target', '_blank');
   });
 });

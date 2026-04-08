@@ -16,9 +16,11 @@ describe('useDebouncedValue', () => {
     });
 
     expect(result.current).toBe('hello');
+
     act(() => {
       jest.advanceTimersByTime(500);
     });
+
     expect(result.current).toBe('hello');
   });
 
@@ -28,16 +30,19 @@ describe('useDebouncedValue', () => {
     });
 
     rerender({ value: 'b' });
+
     expect(result.current).toBe('a');
 
     act(() => {
       jest.advanceTimersByTime(199);
     });
+
     expect(result.current).toBe('a');
 
     act(() => {
       jest.advanceTimersByTime(1);
     });
+
     expect(result.current).toBe('b');
   });
 
@@ -67,6 +72,7 @@ describe('useDebouncedValue', () => {
     act(() => {
       jest.advanceTimersByTime(100);
     });
+
     expect(result.current).toBe('a');
 
     rerender({ value: 'c' });
@@ -74,11 +80,13 @@ describe('useDebouncedValue', () => {
     act(() => {
       jest.advanceTimersByTime(100);
     });
+
     expect(result.current).toBe('a');
 
     act(() => {
       jest.advanceTimersByTime(100);
     });
+
     expect(result.current).toBe('c');
   });
 
@@ -92,6 +100,7 @@ describe('useDebouncedValue', () => {
     act(() => {
       jest.advanceTimersByTime(100);
     });
+
     expect(result.current).toBe('y');
 
     rerender({ value: 'z', delay: 500 });
@@ -99,11 +108,13 @@ describe('useDebouncedValue', () => {
     act(() => {
       jest.advanceTimersByTime(100);
     });
+
     expect(result.current).toBe('y');
 
     act(() => {
       jest.advanceTimersByTime(400);
     });
+
     expect(result.current).toBe('z');
   });
 });

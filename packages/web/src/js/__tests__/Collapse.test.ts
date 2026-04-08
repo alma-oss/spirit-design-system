@@ -78,6 +78,7 @@ describe('Collapse', () => {
       expect(target).toHaveClass(CLASS_NAME_TRANSITIONING);
 
       EventHandler.trigger(target, 'transitionend');
+
       expect(target).toHaveClass(CLASS_NAME_OPEN);
     });
 

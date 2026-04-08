@@ -42,6 +42,7 @@ describe('Button', () => {
     const dom = render(<Button />);
 
     const element = dom.container.querySelector('button') as HTMLElement;
+
     expect(element).toHaveClass('Button--primary');
   });
 
@@ -49,6 +50,7 @@ describe('Button', () => {
     const dom = render(<Button>Hello World</Button>);
 
     const element = dom.container.querySelector('button') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 });

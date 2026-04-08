@@ -90,6 +90,7 @@ describe('Modal', () => {
       const modal = new Modal(modalEl);
 
       modal.show();
+
       expect(modalEl.classList.contains('is-open')).toBe(true);
 
       const event = new Event('click');

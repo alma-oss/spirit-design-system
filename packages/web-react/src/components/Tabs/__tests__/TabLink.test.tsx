@@ -25,6 +25,7 @@ describe('TabLink', () => {
     const dom = render(<TabLink href="https://www.example.com" />);
 
     const element = dom.container.querySelector('a') as HTMLElement;
+
     expect(element).toHaveClass('Tabs__link');
   });
 
@@ -36,6 +37,7 @@ describe('TabLink', () => {
     );
 
     const element = dom.container.querySelector('button') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 });

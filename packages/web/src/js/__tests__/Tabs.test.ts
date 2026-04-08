@@ -141,6 +141,7 @@ describe('Tabs', () => {
 
       triggerList[0].addEventListener('hide.tabs', (ev: MouseEvent) => {
         hideCalled = true;
+
         expect((ev.relatedTarget as HTMLElement)?.getAttribute('data-spirit-target')).toBe('#profile');
       });
 
@@ -263,6 +264,7 @@ describe('Tabs', () => {
 
       // @ts-ignore Argument of type 'Mock<any, any>' is not assignable to parameter of type 'HTMLElement'.
       tab.activate(null, spy);
+
       expect(spy).not.toHaveBeenCalled();
     });
   });
@@ -287,6 +289,7 @@ describe('Tabs', () => {
       expect(parent.getAttribute('role')).toBeNull();
       expect(tabEl.getAttribute('role')).toBeNull();
       expect(tabPanel.getAttribute('role')).toBeNull();
+
       Tabs.setInitialAttributes(parent, children);
 
       expect(parent.getAttribute('role')).toBe('tablist');
@@ -400,6 +403,7 @@ describe('Tabs', () => {
 
       tab1El.addEventListener('shown.tab', () => {
         expect(xTabs1El).toHaveClass('is-selected');
+
         tabNested2El.click();
       });
 

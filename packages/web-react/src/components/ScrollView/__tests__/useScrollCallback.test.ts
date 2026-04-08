@@ -257,6 +257,7 @@ describe('useScrollCallback', () => {
 
       // First scroll - sets up timeout
       result.current.handleScroll(100);
+
       expect(scrollTo).toHaveBeenCalledTimes(1);
       expect(scrollTo).toHaveBeenCalledWith({ left: 0, behavior: 'auto' });
 
@@ -265,6 +266,7 @@ describe('useScrollCallback', () => {
 
       // Second scroll before first completes - should clear previous timeout and set new one
       result.current.handleScroll(100);
+
       expect(scrollTo).toHaveBeenCalledTimes(2);
       expect(scrollTo).toHaveBeenCalledWith({ left: 0, behavior: 'auto' });
       // Should still have only one timer (previous was cleared, new one set)
@@ -300,6 +302,7 @@ describe('useScrollCallback', () => {
 
       // Set up a timeout by calling handleScroll
       result.current.handleScroll(100);
+
       expect(scrollTo).toHaveBeenCalled();
 
       // Verify timeout was set

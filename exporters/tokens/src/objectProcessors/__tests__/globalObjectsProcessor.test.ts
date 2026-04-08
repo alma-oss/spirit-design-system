@@ -182,8 +182,10 @@ describe('globalObjectsProcessor', () => {
       const result = addGlobalTypographyToStylesObject(stylesObject, false);
 
       expect(result).toHaveProperty('$styles');
+
       // eslint-disable-next-line dot-notation -- $styles contains special character
       const stylesObj = result['$styles'] as { [key: string]: unknown } & { moveToTheEnd?: string };
+
       expect(stylesObj).toEqual({
         'heading-xlarge-bold': '$heading-xlarge-bold',
         'body-large': '$body-large',
@@ -202,7 +204,9 @@ describe('globalObjectsProcessor', () => {
       const result = addGlobalTypographyToStylesObject(stylesObject, true);
 
       expect(result).toHaveProperty('styles');
+
       const stylesObj = result.styles as { [key: string]: unknown } & { moveToTheEnd?: string };
+
       expect(stylesObj).toEqual({
         headingXlargeBold: 'headingXlargeBold',
         bodyLarge: 'bodyLarge',
@@ -242,8 +246,10 @@ describe('globalObjectsProcessor', () => {
       const result = addGlobalTypographyToStylesObject(stylesObject, false);
 
       expect(result).toHaveProperty('$styles');
+
       // eslint-disable-next-line dot-notation -- $styles contains special character
       const stylesObj = result['$styles'] as { [key: string]: unknown };
+
       expect(stylesObj).toHaveProperty('heading-xlarge-bold');
       expect(stylesObj).not.toHaveProperty('other-token');
       expect(stylesObj).not.toHaveProperty('not-typography');

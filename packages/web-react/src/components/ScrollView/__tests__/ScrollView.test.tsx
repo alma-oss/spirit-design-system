@@ -176,6 +176,7 @@ describe('ScrollView', () => {
       // First call cancels ongoing scroll (behavior: 'auto')
       const cancelScrollKey = Object.keys(expectedScroll)[0] as 'left' | 'top';
       const cancelScroll = { [cancelScrollKey]: 0, behavior: 'auto' as const };
+
       expect(scrollTo).toHaveBeenCalledWith(cancelScroll);
 
       // Advance timer to trigger the delayed scrollTo

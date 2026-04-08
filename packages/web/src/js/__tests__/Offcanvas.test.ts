@@ -58,6 +58,7 @@ describe('Offcanvas', () => {
 
       offCanvasEl.addEventListener('shown.offcanvas', () => {
         expect(offCanvasEl).toHaveClass('is-open');
+
         const spy = jest.spyOn(offCanvas, 'hide');
 
         offCanvas.toggle(triggerEl);

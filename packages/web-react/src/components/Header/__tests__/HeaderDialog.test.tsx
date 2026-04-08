@@ -29,6 +29,7 @@ describe('HeaderDialog', () => {
     );
 
     const element = dom.container.querySelector('dialog') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 });

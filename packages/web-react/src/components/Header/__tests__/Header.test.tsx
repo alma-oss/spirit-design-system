@@ -25,6 +25,7 @@ describe('Header', () => {
     const dom = render(<Header id="test">Hello World</Header>);
 
     const element = dom.container.querySelector('header') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 });

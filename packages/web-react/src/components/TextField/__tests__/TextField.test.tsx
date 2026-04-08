@@ -120,7 +120,9 @@ describe('TextField', () => {
       const element = screen.getByLabelText('Label');
 
       expect(element).toHaveAttribute('type', 'password');
+
       fireEvent.click(screen.getByRole('switch'));
+
       expect(element).toHaveAttribute('type', 'text');
     });
 
@@ -128,7 +130,9 @@ describe('TextField', () => {
       const element = screen.getByRole('switch');
 
       expect(element).toHaveAttribute('aria-label', 'Show password');
+
       fireEvent.click(element);
+
       expect(element).toHaveAttribute('aria-label', 'Hide password');
     });
   });

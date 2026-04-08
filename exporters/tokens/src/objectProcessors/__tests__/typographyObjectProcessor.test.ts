@@ -116,7 +116,9 @@ describe('typographyObjectProcessor', () => {
       );
 
       expect(stylesObject).toHaveProperty('$heading-xlarge-bold');
+
       const typographyObj = stylesObject['$heading-xlarge-bold'] as { [key: string]: unknown };
+
       expect(typographyObj).toHaveProperty('mobile');
       // Desktop might not be present if device dimensions don't include it
       expect(Object.keys(typographyObj).length).toBeGreaterThan(0);
@@ -143,6 +145,7 @@ describe('typographyObjectProcessor', () => {
       );
 
       expect(stylesObject).toHaveProperty('$heading-xlarge-bold');
+
       const typographyObj = stylesObject['$heading-xlarge-bold'] as { [key: string]: unknown };
 
       expect(Object.keys(typographyObj).length).toBeGreaterThan(0);
@@ -165,6 +168,7 @@ describe('typographyObjectProcessor', () => {
       handleTypographyTokens(['Heading', 'XLarge', 'Bold-Italic'], token, tokenGroups, true, stylesObject, false);
 
       expect(stylesObject).toHaveProperty('$heading-xlarge-bold-italic');
+
       const typographyObj = stylesObject['$heading-xlarge-bold-italic'] as { [key: string]: unknown };
       const mobileValue = typographyObj.mobile as string;
 
