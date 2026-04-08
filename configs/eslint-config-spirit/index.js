@@ -88,5 +88,13 @@ module.exports = {
         'jsdoc/check-tag-names': 'off',
       },
     },
+    {
+      files: ['test/**', '**/*.test.*', '**/*.spec.*'],
+      rules: {
+        // Require an empty line before the first `expect` in a group
+        // @see { @link https://github.com/dangreenisrael/eslint-plugin-jest-formatting }
+        'jest-formatting/padding-around-expect-groups': 'error',
+      },
+    },
   ],
 };
