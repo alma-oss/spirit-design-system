@@ -29,32 +29,32 @@ export const useScrollViewStyleProps = ({
   isScrolledAtStart,
   overflowDecorators = SCROLL_VIEW_DEFAULT_OVERFLOW_DECORATOR,
 }: Partial<UseScrollViewStyleProps>): UseScrollViewStyleReturn => {
-  const scrollViewRootClass = useClassNamePrefix('ScrollView');
-  const scrollViewRootDirectionClass = `${scrollViewRootClass}--${direction}`;
-  const scrollViewRootScrollbarDisabledClass = `${scrollViewRootClass}--scrollbarDisabled`;
-  const scrollViewViewportClass = `${scrollViewRootClass}__viewport`;
-  const scrollViewContentClass = `${scrollViewRootClass}__content`;
-  const scrollViewOverflowDecoratorsClass = `${scrollViewRootClass}__overflowDecorators`;
-  const scrollViewRootOverflowDecoratorsClasses = {
+  const scrollViewClass = useClassNamePrefix('ScrollView');
+  const scrollViewDirectionClass = `${scrollViewClass}--${direction}`;
+  const scrollViewScrollbarDisabledClass = `${scrollViewClass}--scrollbarDisabled`;
+  const scrollViewViewportClass = `${scrollViewClass}__viewport`;
+  const scrollViewContentClass = `${scrollViewClass}__content`;
+  const scrollViewOverflowDecoratorsClass = `${scrollViewClass}__overflowDecorators`;
+  const scrollViewOverflowDecoratorsVariantClasses = {
     shadows: `${scrollViewOverflowDecoratorsClass}--shadows`,
     borders: `${scrollViewOverflowDecoratorsClass}--borders`,
     both: classNames(`${scrollViewOverflowDecoratorsClass}--shadows`, `${scrollViewOverflowDecoratorsClass}--borders`),
   };
-  const scrollViewRootOverflowDecoratorsClass = scrollViewRootOverflowDecoratorsClasses[overflowDecorators];
+  const scrollViewOverflowDecoratorsVariantClass = scrollViewOverflowDecoratorsVariantClasses[overflowDecorators];
   const scrollViewAtStartClass = 'is-scrolled-at-start';
   const scrollViewAtEndClass = 'is-scrolled-at-end';
-  const scrollViewArrowsClass = `${scrollViewRootClass}__arrows`;
+  const scrollViewArrowsClass = `${scrollViewClass}__arrows`;
 
   return {
     classProps: {
-      root: classNames(scrollViewRootClass, scrollViewRootDirectionClass, {
-        [scrollViewRootScrollbarDisabledClass]: isScrollbarDisabled,
+      root: classNames(scrollViewClass, scrollViewDirectionClass, {
+        [scrollViewScrollbarDisabledClass]: isScrollbarDisabled,
         [scrollViewAtEndClass]: isScrolledAtEnd,
         [scrollViewAtStartClass]: isScrolledAtStart,
       }),
       viewport: scrollViewViewportClass,
       content: scrollViewContentClass,
-      overflowDecorators: classNames(scrollViewOverflowDecoratorsClass, scrollViewRootOverflowDecoratorsClass),
+      overflowDecorators: classNames(scrollViewOverflowDecoratorsClass, scrollViewOverflowDecoratorsVariantClass),
       arrows: scrollViewArrowsClass,
     },
   };

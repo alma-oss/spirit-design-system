@@ -17,13 +17,11 @@ export const useUnstableHeaderStyleProps = (props: SpiritHeaderProps): HeaderSty
   const headerLogoClass = `${headerClass}Logo`;
   const headerHasBottomDividerClass = `${headerClass}--bottomDivider`;
 
-  const rootClass = classNames(headerClass, {
-    [headerHasBottomDividerClass]: hasBottomDivider,
-  });
-
   return {
     classProps: {
-      root: rootClass,
+      root: classNames(headerClass, {
+        [headerHasBottomDividerClass]: hasBottomDivider,
+      }),
       logo: headerLogoClass,
     },
     props: restProps,

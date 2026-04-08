@@ -36,16 +36,16 @@ export function useTagStyleProps<E extends ElementType = 'span', C = void, S = v
 ): TagStyles {
   const { color, isDisabled, isSubtle, size, ...modifiedProps } = props;
 
-  const TagClass = useClassNamePrefix('Tag');
-  const TagColorClass = `${TagClass}--${color}`;
-  const TagDisabledClass = `${TagClass}--disabled`;
-  const TagSizeClass = `${TagClass}--${size}`;
-  const TagSubtleClass = `${TagClass}--subtle`;
-  const classProps = classNames(TagClass, {
-    [TagColorClass]: color,
-    [TagDisabledClass]: isDisabled,
-    [TagSizeClass]: size,
-    [TagSubtleClass]: isSubtle,
+  const tagClass = useClassNamePrefix('Tag');
+  const tagColorClass = `${tagClass}--${color}`;
+  const tagDisabledClass = `${tagClass}--disabled`;
+  const tagSizeClass = `${tagClass}--${size}`;
+  const tagSubtleClass = `${tagClass}--subtle`;
+  const classProps = classNames(tagClass, {
+    [tagColorClass]: color,
+    [tagDisabledClass]: isDisabled,
+    [tagSizeClass]: size,
+    [tagSubtleClass]: isSubtle,
     ...(!isDisabled && getColorClasses(color as string | undefined, isSubtle as boolean | undefined)),
   });
 

@@ -19,11 +19,10 @@ export function useSliderStyleProps(props: UseSliderStyleProps): SliderStyles {
   const { isDisabled, isFluid, isLabelHidden, validationState, ...restProps } = props;
 
   const sliderClass = useClassNamePrefix('Slider');
-  const rootClass = classNames(sliderClass);
   const isDisabledClass = `${sliderClass}--disabled`;
   const isFluidClass = `${sliderClass}--fluid`;
   const validationStateClass = `${sliderClass}--${validationState}`;
-  const labelClass = classNames(`${sliderClass}__label`);
+  const labelClass = `${sliderClass}__label`;
   const isLabelHiddenClass = `${sliderClass}__label--hidden`;
   const inputClass = `${sliderClass}__input`;
   const helperTextClass = `${sliderClass}__helperText`;
@@ -31,7 +30,7 @@ export function useSliderStyleProps(props: UseSliderStyleProps): SliderStyles {
 
   return {
     classProps: {
-      root: classNames(rootClass, {
+      root: classNames(sliderClass, {
         [isDisabledClass]: isDisabled,
         [isFluidClass]: isFluid,
         [validationStateClass]: validationState,

@@ -30,27 +30,27 @@ export const useSelectStyleProps = ({
   size,
   validationState,
 }: UseSelectStyleProps): UseSelectStyleReturn => {
-  const selectRootClass = useClassNamePrefix('Select');
-  const selectRootFluidClass = `${selectRootClass}--fluid`;
-  const selectRootDisabledClass = `${selectRootClass}--disabled`;
-  const selectRootSizeClass = `${selectRootClass}--${size}`;
-  const selectRootValidationClass = `${selectRootClass}--${validationState}`;
-  const selectLabelClass = `${selectRootClass}__label`;
+  const selectClass = useClassNamePrefix('Select');
+  const selectFluidClass = `${selectClass}--fluid`;
+  const selectDisabledClass = `${selectClass}--disabled`;
+  const selectSizeClass = `${selectClass}--${size}`;
+  const selectValidationClass = `${selectClass}--${validationState}`;
+  const selectLabelClass = `${selectClass}__label`;
   const selectLabelRequiredClass = `${selectLabelClass}--required`;
   const selectLabelHiddenClass = `${selectLabelClass}--hidden`;
-  const selectContainerClass = `${selectRootClass}__inputContainer`;
-  const selectInputClass = `${selectRootClass}__input`;
-  const selectIconClass = `${selectRootClass}__icon`;
-  const selectValidationTextClass = `${selectRootClass}__validationText`;
-  const selectHelperTextClass = `${selectRootClass}__helperText`;
+  const selectContainerClass = `${selectClass}__inputContainer`;
+  const selectInputClass = `${selectClass}__input`;
+  const selectIconClass = `${selectClass}__icon`;
+  const selectValidationTextClass = `${selectClass}__validationText`;
+  const selectHelperTextClass = `${selectClass}__helperText`;
 
   return {
     classProps: {
-      root: classNames(selectRootClass, {
-        [selectRootDisabledClass]: isDisabled,
-        [selectRootFluidClass]: isFluid,
-        [selectRootSizeClass]: size,
-        [selectRootValidationClass]: validationState,
+      root: classNames(selectClass, {
+        [selectDisabledClass]: isDisabled,
+        [selectFluidClass]: isFluid,
+        [selectSizeClass]: size,
+        [selectValidationClass]: validationState,
       }),
       label: classNames(selectLabelClass, {
         [selectLabelRequiredClass]: isRequired,

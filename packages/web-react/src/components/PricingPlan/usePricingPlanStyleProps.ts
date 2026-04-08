@@ -74,11 +74,6 @@ export const usePricingPlanStyleProps = <T extends PricingPlanStyleProps>(props:
 
   const pricingPlanFooterClass = useClassNamePrefix('PricingPlanFooter');
 
-  const rootClassProps = classNames(pricingPlanClass, {
-    [pricingPlanComparableClass]: hasComparableFeatures,
-    [pricingPlanHighlightedClass]: isHighlighted,
-  });
-
   const pricingPlanStyle: PricingPlanCSSProperties = {};
 
   if (rows !== NUMBER_OF_PLAN_ROWS_DEFAULT) {
@@ -87,7 +82,10 @@ export const usePricingPlanStyleProps = <T extends PricingPlanStyleProps>(props:
 
   return {
     classProps: {
-      root: rootClassProps,
+      root: classNames(pricingPlanClass, {
+        [pricingPlanComparableClass]: hasComparableFeatures,
+        [pricingPlanHighlightedClass]: isHighlighted,
+      }),
       layout: pricingPlanLayoutClass,
       header: {
         root: pricingPlanHeaderClass,

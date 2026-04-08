@@ -15,17 +15,15 @@ export const useToastBarStyleProps = (props: ToastBarProps) => {
   const toastBarLinkUnderlinedClass = useClassNamePrefix('link-underlined');
   const toastBarColorClass = `${toastBarClass}--${color || ToastColorsExtended.NEUTRAL}`;
   const toastBarDismissibleClass = `${toastBarClass}--dismissible`;
-  const toastBarRootClasses = classNames(toastBarClass, toastBarColorClass, isDismissible && toastBarDismissibleClass);
-  const toastBarLinkClasses = classNames(toastBarLinkClass, toastBarLinkUnderlinedClass);
 
   return {
     classProps: {
-      root: toastBarRootClasses,
+      root: classNames(toastBarClass, toastBarColorClass, isDismissible && toastBarDismissibleClass),
       box: toastBarBoxClass,
       close: toastBarCloseClass,
       container: toastBarContainerClass,
       content: toastBarContentClass,
-      link: toastBarLinkClasses,
+      link: classNames(toastBarLinkClass, toastBarLinkUnderlinedClass),
     },
     props: restProps,
   };

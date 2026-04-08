@@ -16,20 +16,18 @@ export const useTooltipStyleProps = (props: UseTooltipStyleProps) => {
   const tooltipPopoverClass = `${tooltipClass}Popover`;
   const arrowClass = `${tooltipPopoverClass}__arrow`;
   const closeButtonClass = `${tooltipPopoverClass}__close`;
-  const rootDismissibleClass = `${tooltipPopoverClass}--dismissible`;
-  const rootHiddenClass = 'is-hidden';
+  const dismissibleClass = `${tooltipPopoverClass}--dismissible`;
+  const hiddenClass = 'is-hidden';
 
   const isHiddenClass = useMemo(() => isOpen === false, [isOpen]);
-
-  const tooltipPopoverClassName = classNames(tooltipPopoverClass, {
-    [rootDismissibleClass]: isDismissible,
-    [rootHiddenClass]: isHiddenClass,
-  });
 
   return {
     classProps: {
       rootClassName: tooltipClass,
-      popoverClassName: tooltipPopoverClassName,
+      popoverClassName: classNames(tooltipPopoverClass, {
+        [dismissibleClass]: isDismissible,
+        [hiddenClass]: isHiddenClass,
+      }),
       arrowClassName: arrowClass,
       closeButtonClassName: closeButtonClass,
     },
