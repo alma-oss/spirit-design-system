@@ -322,6 +322,7 @@ describe('stylesObjectGenerator', () => {
           undefined,
           fontSizeBaseMap,
         );
+
         expect(stylesObjectRef).toStrictEqual(expectedStyles);
       },
     );

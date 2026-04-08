@@ -28,6 +28,7 @@ describe('Visually Hidden', () => {
     const dom = render(<VisuallyHidden>Label</VisuallyHidden>);
 
     const element = dom.container.querySelector('span') as HTMLElement;
+
     expect(element.className).toBe('accessibility-hidden');
     expect(element.textContent).toBe('Label');
   });

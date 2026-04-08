@@ -89,6 +89,7 @@ describe('Base Component', () => {
     describe('dispose', () => {
       it('should dispose an component', () => {
         createInstance();
+
         expect(DummyClass.getInstance(element)).not.toBeNull();
 
         instance.dispose();

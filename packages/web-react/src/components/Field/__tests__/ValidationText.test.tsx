@@ -106,6 +106,7 @@ describe('ValidationText', () => {
       expect(screen.queryByRole('list')).toBeInTheDocument();
 
       const listItems = screen.getAllByRole('listitem');
+
       expect(listItems[0]).toHaveTextContent('updated validation text');
       expect(listItems[1]).toHaveTextContent('new validation text');
     });

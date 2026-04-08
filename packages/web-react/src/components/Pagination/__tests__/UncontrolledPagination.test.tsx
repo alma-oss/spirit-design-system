@@ -17,9 +17,11 @@ describe('UncontrolledPagination', () => {
     );
 
     const items = screen.getAllByRole('button');
+
     expect(items).toHaveLength(2);
 
     const selectedPageItem = screen.getByText('test page 5').parentElement;
+
     expect(selectedPageItem).toHaveClass('Pagination__link Pagination__link--current');
   });
 
@@ -29,6 +31,7 @@ describe('UncontrolledPagination', () => {
     );
 
     const items = screen.getAllByRole('button');
+
     expect(items).toHaveLength(1);
 
     const firstPageItem = screen.getByText('test page 1').parentElement;
@@ -44,6 +47,7 @@ describe('UncontrolledPagination', () => {
     );
 
     const items = screen.getAllByRole('button');
+
     expect(items).toHaveLength(2);
 
     const nextPageItem = screen.getByText('test page 6');

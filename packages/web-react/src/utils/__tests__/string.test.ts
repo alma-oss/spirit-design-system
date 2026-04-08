@@ -16,6 +16,7 @@ describe('string', () => {
       ['themeLightDefault', 'theme-light-default'],
     ])('should convert camelCase string "%s" to kebab-case string "%s"', (input, expected) => {
       const result = camelCaseToKebabCase(input);
+
       expect(result).toEqual(expected);
     });
   });
@@ -30,6 +31,7 @@ describe('string', () => {
       ['kebab-case-test', 'kebabCaseTest'],
     ])('should convert kebab-case string "%s" to camelCase string "%s"', (input, expected) => {
       const result = kebabCaseToCamelCase(input);
+
       expect(result).toEqual(expected);
     });
   });
@@ -44,6 +46,7 @@ describe('string', () => {
       [{ test: 'kebab-case-test' }, { test: 'kebabCaseTest' }],
     ])('should convert kebab-case object "%s" to camelCase object "%s"', (input, expected) => {
       const result = kebabCaseToCamelCaseValues(input);
+
       expect(result).toEqual(expected);
     });
   });
@@ -60,6 +63,7 @@ describe('string', () => {
       [false, 'false'],
     ])('should normalize %s to %s', (input, expected) => {
       const result = normalizeStringValue(input);
+
       expect(result).toEqual(expected);
     });
   });
@@ -80,6 +84,7 @@ describe('string', () => {
       [{ test: 'kebab-case-test' }, { test: 'kebabCaseTest' }],
     ])('should convert kebab-case object "%s" to camelCase object "%s"', (input, expected) => {
       const result = stringOrObjectKebabCaseToCamelCase(input);
+
       expect(result).toEqual(expected);
     });
   });

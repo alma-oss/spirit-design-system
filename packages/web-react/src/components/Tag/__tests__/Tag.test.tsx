@@ -34,6 +34,7 @@ describe('Tag', () => {
     const dom = render(<Tag />);
 
     const element = dom.container.querySelector('span') as HTMLElement;
+
     expect(element).toHaveClass('Tag--neutral');
   });
 
@@ -41,6 +42,7 @@ describe('Tag', () => {
     const dom = render(<Tag>Tag</Tag>);
 
     const element = dom.container.querySelector('span') as HTMLElement;
+
     expect(element.textContent).toBe('Tag');
   });
 
@@ -48,6 +50,7 @@ describe('Tag', () => {
     const dom = render(<Tag color="neutral">333</Tag>);
 
     const element = dom.container.querySelector('span') as HTMLElement;
+
     expect(element).toHaveClass('Tag--neutral');
   });
 });

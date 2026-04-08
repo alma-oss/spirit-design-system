@@ -26,6 +26,7 @@ describe('mergeStyleProps', () => {
 
     it(`should merge class names and styles for ${label}`, () => {
       const result = mergeStyleProps(component, testProps);
+
       expect(result).toEqual({
         [classNameKey]: 'unsafe-test-class test-class',
         [styleKey]: { color: 'red', backgroundColor: 'blue', '--custom-var': '10px' },
@@ -40,6 +41,7 @@ describe('mergeStyleProps', () => {
         testStyle: {},
         testCustomVar: {},
       });
+
       expect(result).toEqual({
         [classNameKey]: '',
         [styleKey]: {},
@@ -51,6 +53,7 @@ describe('mergeStyleProps', () => {
         testUnsafeClass: testProps.testUnsafeClass,
         testClass: testProps.testClass,
       });
+
       expect(result).toEqual({
         [classNameKey]: 'unsafe-test-class test-class',
         [styleKey]: {},
@@ -63,6 +66,7 @@ describe('mergeStyleProps', () => {
         testStyle: testProps.testStyle,
         testCustomVar: testProps.testCustomVar,
       });
+
       expect(result).toEqual({
         [classNameKey]: '',
         [styleKey]: { color: 'red', backgroundColor: 'blue', '--custom-var': '10px' },

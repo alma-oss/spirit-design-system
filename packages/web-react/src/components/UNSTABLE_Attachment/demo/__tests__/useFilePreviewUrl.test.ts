@@ -22,6 +22,7 @@ describe('useFilePreviewUrl', () => {
     await waitFor(() => {
       expect(result.current).toBe('blob:mock-preview-url');
     });
+
     expect(URL.createObjectURL).toHaveBeenCalledWith(file);
   });
 
@@ -48,8 +49,11 @@ describe('useFilePreviewUrl', () => {
     await waitFor(() => {
       expect(result.current).toBe('blob:mock-preview-url');
     });
+
     expect(URL.createObjectURL).toHaveBeenCalledWith(file);
+
     unmount();
+
     expect(URL.revokeObjectURL).toHaveBeenCalledWith('blob:mock-preview-url');
   });
 
@@ -72,6 +76,7 @@ describe('useFilePreviewUrl', () => {
     await waitFor(() => {
       expect(result.current).toBe('blob:url-b.png');
     });
+
     expect(URL.revokeObjectURL).toHaveBeenCalledWith('blob:url-a.png');
   });
 });

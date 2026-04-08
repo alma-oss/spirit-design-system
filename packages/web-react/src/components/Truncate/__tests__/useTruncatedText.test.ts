@@ -6,11 +6,13 @@ import { truncateByCharacters, truncateByLines, truncateByWords, useTruncatedTex
 describe('truncateByWords', () => {
   it('should truncate text by words', () => {
     const text = 'This is a very long text that should be truncated';
+
     expect(truncateByWords(text, 5)).toBe('This is a very long…');
   });
 
   it('should return original text if word count is less than limit', () => {
     const text = 'Short text';
+
     expect(truncateByWords(text, 10)).toBe('Short text');
   });
 
@@ -26,11 +28,13 @@ describe('truncateByWords', () => {
 describe('truncateByCharacters', () => {
   it('should truncate text by characters', () => {
     const text = 'This is a very long text';
+
     expect(truncateByCharacters(text, 10)).toBe('This is a …');
   });
 
   it('should return original text if character count is less than limit', () => {
     const text = 'Short';
+
     expect(truncateByCharacters(text, 10)).toBe('Short');
   });
 
@@ -42,6 +46,7 @@ describe('truncateByCharacters', () => {
 describe('truncateByLines', () => {
   it('should return original text unchanged', () => {
     const text = 'This is a text with multiple lines\nSecond line\nThird line';
+
     expect(truncateByLines(text)).toBe(text);
   });
 });
@@ -115,12 +120,15 @@ describe('useTruncatedText', () => {
     });
 
     const firstResult = result.current;
+
     expect(firstResult).toBe('This is a…');
 
     rerender({ mode: TruncateModes.WORDS, limit: 3 });
+
     expect(result.current).toBe(firstResult);
 
     rerender({ mode: TruncateModes.WORDS, limit: 4 });
+
     expect(result.current).toBe('This is a test…');
   });
 });

@@ -23,11 +23,13 @@ describe('specialCaseHelper', () => {
 describe('handleInvariantTokens', () => {
   it('should return token alias for invariant case', () => {
     const token = exampleInvariantTokens.get('radiiRef') as Token;
+
     expect(getTokenAlias(token, false)).toBe('full');
   });
 
   it('should return token alias for non-invariant case', () => {
     const token = exampleDimensionAndStringTokens.get('dimensionRef') as Token;
+
     expect(getTokenAlias(token, false)).toBe('desktop');
   });
 });

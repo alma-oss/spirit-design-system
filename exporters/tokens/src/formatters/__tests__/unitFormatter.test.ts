@@ -13,6 +13,7 @@ describe('unitFormatter', () => {
         baseFontSize: FONT_SIZE_BASE_DEFAULT,
         isFontSizeBaseToken: false,
       };
+
       expect(formatUnitValue(undefined, 'px', ctx, [])).toBeUndefined();
       expect(formatUnitValue(0, 'px', ctx, [])).toBe(0);
     });
@@ -24,6 +25,7 @@ describe('unitFormatter', () => {
         baseFontSize: FONT_SIZE_BASE_DEFAULT,
         isFontSizeBaseToken: false,
       };
+
       expect(formatUnitValue(12, undefined, ctx, [])).toBe(12);
     });
 
@@ -34,6 +36,7 @@ describe('unitFormatter', () => {
         baseFontSize: FONT_SIZE_BASE_DEFAULT,
         isFontSizeBaseToken: false,
       };
+
       expect(formatUnitValue(50, '%', ctx, [])).toBe('50%');
       expect(formatUnitValue(2, 'rem', ctx, [])).toBe('2rem');
     });
@@ -48,6 +51,7 @@ describe('unitFormatter', () => {
       const rules: UnitFormatRule[] = [
         { tokenTypes: [TokenType.fontSize], shouldConvert: () => true, converterNames: ['pxToRem'] },
       ];
+
       expect(formatUnitValue(40, 'px', ctx, rules)).toBe('2.5rem');
     });
 
@@ -61,6 +65,7 @@ describe('unitFormatter', () => {
       const rules: UnitFormatRule[] = [
         { tokenTypes: [TokenType.dimension], shouldConvert: () => true, converterNames: ['pxToRem'] },
       ];
+
       expect(formatUnitValue(40, 'px', ctx, rules)).toBe('40px');
     });
 
@@ -74,6 +79,7 @@ describe('unitFormatter', () => {
       const rules: UnitFormatRule[] = [
         { tokenTypes: [TokenType.fontSize], shouldConvert: (c) => !c.isFontSizeBaseToken, converterNames: ['pxToRem'] },
       ];
+
       expect(formatUnitValue(18, 'px', ctx, rules)).toBe('18px');
     });
   });

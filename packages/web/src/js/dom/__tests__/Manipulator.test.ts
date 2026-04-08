@@ -19,6 +19,7 @@ describe('Manipulator', () => {
       const div = fixtureEl.querySelector('div') as HTMLDivElement;
 
       Manipulator.setDataAttribute(div, 'key', 'value');
+
       expect(div.getAttribute('data-spirit-key')).toBe('value');
     });
 
@@ -28,6 +29,7 @@ describe('Manipulator', () => {
       const div = fixtureEl.querySelector('div') as HTMLDivElement;
 
       Manipulator.setDataAttribute(div, 'testKey', 'value');
+
       expect(div.getAttribute('data-spirit-test-key')).toBe('value');
     });
   });
@@ -39,6 +41,7 @@ describe('Manipulator', () => {
       const div = fixtureEl.querySelector('div') as HTMLDivElement;
 
       Manipulator.removeDataAttribute(div, 'key');
+
       expect(div.getAttribute('data-spirit-key')).toBeNull();
       expect(div.getAttribute('data-key-spirit')).toBe('postfixed');
       expect(div.getAttribute('data-key')).toBe('value');
@@ -50,6 +53,7 @@ describe('Manipulator', () => {
       const div = fixtureEl.querySelector('div') as HTMLDivElement;
 
       Manipulator.removeDataAttribute(div, 'testKey');
+
       expect(div.getAttribute('data-spirit-test-key')).toBeNull();
     });
   });
@@ -111,9 +115,11 @@ describe('Manipulator', () => {
       expect(Manipulator.getDataAttribute(div, 'test')).toBeFalsy();
 
       div.setAttribute('data-spirit-test', 'true');
+
       expect(Manipulator.getDataAttribute(div, 'test')).toBeTruthy();
 
       div.setAttribute('data-spirit-test', '1');
+
       expect(Manipulator.getDataAttribute(div, 'test')).toBe(1);
     });
 
@@ -131,9 +137,11 @@ describe('Manipulator', () => {
       };
       const dataStr = JSON.stringify(objectData);
       div.setAttribute('data-spirit-test', encodeURIComponent(dataStr));
+
       expect(Manipulator.getDataAttribute(div, 'test')).toEqual(objectData);
 
       div.setAttribute('data-spirit-test', dataStr);
+
       expect(Manipulator.getDataAttribute(div, 'test')).toEqual(objectData);
     });
   });

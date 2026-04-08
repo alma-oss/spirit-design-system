@@ -366,6 +366,7 @@ describe('useStyleUtilities hook', () => {
       // all padding props should be passed through
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const restProps = result.current.props as Record<string, any>;
+
       expect(restProps.paddingX).toBe('space-100');
       expect(restProps.paddingY).toBe('space-200');
       expect(restProps.paddingTop).toBe('space-300');

@@ -25,6 +25,7 @@ describe('HeaderNav', () => {
     const dom = render(<HeaderNav id="test">Hello World</HeaderNav>);
 
     const element = dom.container.querySelector('ul') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 });

@@ -10,6 +10,7 @@ describe('string to pascal case', () => {
     ['kebab-case-test', 'KebabCaseTest'],
   ])('should convert kebab-case string "%s" to PascalCase string "%s"', (input, expected) => {
     const result = toPascalCase(input);
+
     expect(result).toBe(expected);
   });
 });

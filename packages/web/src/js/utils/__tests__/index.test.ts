@@ -93,6 +93,7 @@ describe('Util', () => {
       const div = fixtureEl.querySelector('div') as HTMLElement;
       const spy = jest.spyOn(div, 'offsetHeight', 'get').mockReturnValue(0);
       Util.reflow(div);
+
       expect(spy).toHaveBeenCalled();
     });
   });

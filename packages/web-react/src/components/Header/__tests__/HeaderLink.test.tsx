@@ -28,6 +28,7 @@ describe('HeaderLink', () => {
     const dom = render(<HeaderLink id="test">Hello World</HeaderLink>);
 
     const element = dom.container.querySelector('a') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 });

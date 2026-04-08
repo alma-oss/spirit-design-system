@@ -31,6 +31,7 @@ describe('HeaderDialogLink', () => {
     const dom = render(<HeaderDialogLink id="test">Hello World</HeaderDialogLink>);
 
     const element = dom.container.querySelector('a') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 });

@@ -38,12 +38,14 @@ describe('useFileUploaderDemo', () => {
     act(() => {
       result.current.onFilesSelected([file1]);
     });
+
     expect(result.current.items).toHaveLength(1);
     expect(result.current.items[0].label).toBe('a.txt');
 
     act(() => {
       result.current.onFilesSelected([file2]);
     });
+
     expect(result.current.items).toHaveLength(1);
     expect(result.current.items[0].label).toBe('b.txt');
   });
@@ -56,11 +58,13 @@ describe('useFileUploaderDemo', () => {
     act(() => {
       result.current.onFilesSelected([file1]);
     });
+
     expect(result.current.items).toHaveLength(1);
 
     act(() => {
       result.current.onFilesSelected([file2]);
     });
+
     expect(result.current.items).toHaveLength(2);
     expect(result.current.items[0].label).toBe('a.txt');
     expect(result.current.items[1].label).toBe('b.txt');
@@ -73,11 +77,13 @@ describe('useFileUploaderDemo', () => {
     act(() => {
       result.current.onFilesSelected([file]);
     });
+
     expect(result.current.items).toHaveLength(1);
 
     act(() => {
       result.current.onDismiss('file__x_txt');
     });
+
     expect(result.current.items).toHaveLength(0);
   });
 

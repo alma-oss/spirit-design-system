@@ -7,6 +7,7 @@ describe('#compose', () => {
     const fn3 = (x: number) => x + 3;
 
     const composed = compose(fn1, fn2, fn3);
+
     expect(composed(1)).toBe(9);
   });
 });

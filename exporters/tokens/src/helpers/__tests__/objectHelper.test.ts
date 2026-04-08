@@ -196,11 +196,13 @@ focus,`;
   describe('getTokenAlias', () => {
     it('should return token alias for non-numeric', () => {
       const token = exampleTypographyTokens.get('typographyRef2') as Token;
+
       expect(getTokenAlias(token, false)).toBe('bold-link');
     });
 
     it('should return token alias for non-numeric with js output', () => {
       const token = exampleTypographyTokens.get('typographyRef2') as Token;
+
       expect(getTokenAlias(token, true)).toBe('boldLink');
     });
   });
@@ -228,11 +230,13 @@ focus,`;
   describe('formatTypographyName', () => {
     it('should return correct typography name', () => {
       const tokenNameParts = ['heading', 'desktop', 'xLarge', 'bold'];
+
       expect(formatTypographyName(tokenNameParts)).toBe('heading-xLarge-bold');
     });
 
     it('should return correct typography name if tokenNameParts has less than 4 items', () => {
       const tokenNameParts = ['heading', 'desktop', 'xLarge'];
+
       expect(formatTypographyName(tokenNameParts)).toBe('heading-desktop-xLarge');
     });
   });

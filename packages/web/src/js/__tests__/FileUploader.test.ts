@@ -56,6 +56,7 @@ describe('FileUploader', () => {
     const fileUploaderEl = fixtureEl.querySelector('[data-spirit-toggle="fileUploader"]') as HTMLElement;
 
     const fileUploader = new FileUploader(fileUploaderEl);
+
     expect(fileUploader.getUpdatedFileName('test')).toBe('file_xjylrx_test');
 
     jest.spyOn(global.Math, 'random').mockRestore();
@@ -71,6 +72,7 @@ describe('FileUploader', () => {
     instance.addToQueue(file1);
     instance.addToQueue(file2);
     instance.clearFileQueue();
+
     expect(instance.getFileQueue.size).toBe(0);
   });
 
@@ -109,12 +111,14 @@ describe('FileUploader', () => {
     it('should read data-spirit-max-file-size attribute and set fileSizeLimit', () => {
       const fileUploaderEl = fixtureEl.querySelector('[data-spirit-toggle="fileUploader"]') as HTMLElement;
       const fileUploaderInstance = new FileUploader(fileUploaderEl);
+
       expect(fileUploaderInstance.fileSizeLimit).toBe(5000000);
     });
 
     it('should read data-spirit-file-queue-limit attribute and set fileQueueLimit', () => {
       const fileUploaderEl = fixtureEl.querySelector('[data-spirit-toggle="fileUploader"]') as HTMLElement;
       const fileUploaderInstance = new FileUploader(fileUploaderEl);
+
       expect(fileUploaderInstance.fileQueueLimit).toBe(5);
     });
 
@@ -126,6 +130,7 @@ describe('FileUploader', () => {
       `;
       const fileUploaderEl = fixtureEl.querySelector('[data-spirit-toggle="fileUploader"]') as HTMLElement;
       const fileUploaderInstance = new FileUploader(fileUploaderEl);
+
       expect(fileUploaderInstance.fileSizeLimit).toBe(10000000); // Default file size limit
       expect(fileUploaderInstance.fileQueueLimit).toBe(1); // Default file queue limit
     });
@@ -155,11 +160,13 @@ describe('FileUploader', () => {
     describe('checkAllowedFileType()', () => {
       it('should allow a supported file type', () => {
         const file = new File(['content'], 'example.jpg', { type: 'image/jpeg' });
+
         expect(() => fileUploader.checkAllowedFileType(file)).not.toThrow();
       });
 
       it('should throw an error for an unsupported file type', () => {
         const file = new File(['content'], 'example.txt', { type: 'text/plain' });
+
         expect(() => fileUploader.checkAllowedFileType(file)).toThrow(
           `example.txt: is not a supported file. Please ensure you are uploading a supported file format`,
         );

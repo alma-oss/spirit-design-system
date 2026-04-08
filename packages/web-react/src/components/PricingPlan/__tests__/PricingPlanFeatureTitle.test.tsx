@@ -82,9 +82,11 @@ describe('PricingPlanFeatureTitle', () => {
       const tooltip = screen.getByRole('tooltip');
 
       fireEvent.click(trigger);
+
       expect(tooltip).not.toHaveClass('is-hidden');
 
       fireEvent.click(closeButton);
+
       expect(tooltip).toHaveClass('is-hidden');
     });
 
@@ -134,6 +136,7 @@ describe('PricingPlanFeatureTitle', () => {
       fireEvent.click(trigger);
 
       const modal = screen.getByRole('dialog');
+
       expect(modal).toHaveAttribute('id', 'tier-1-feature-3-modal');
     });
   });

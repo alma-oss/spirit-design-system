@@ -28,6 +28,7 @@ describe('HeaderDialogNav', () => {
     const dom = render(<HeaderDialogNav id="test">Hello World</HeaderDialogNav>);
 
     const element = dom.container.querySelector('ul') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 });

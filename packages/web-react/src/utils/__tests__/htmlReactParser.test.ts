@@ -46,6 +46,7 @@ describe('htmlReactParser', () => {
 
   it('returns string if it is not HTML', () => {
     const string = 'text';
+
     expect(htmlReactParser(string)).toBe(string);
   });
 
@@ -229,6 +230,7 @@ describe('htmlReactParser', () => {
 
     const decodedEntities = "asdf & ÿ ü '";
     const reactElement = htmlReactParser(`<i>${encodedEntities}</i>`) as JSX.Element;
+
     expect(reactElement.props.children).toBe(decodedEntities);
   });
 

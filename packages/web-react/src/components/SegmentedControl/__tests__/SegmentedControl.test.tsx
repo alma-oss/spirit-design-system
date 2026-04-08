@@ -55,11 +55,13 @@ describe('SegmentedControl', () => {
     (variant) => {
       it('should render label as visually hidden', () => {
         render(<ControlledSegmentedControl variant={variant}>Item</ControlledSegmentedControl>);
+
         expect(screen.getByText('Test label')).toBeInTheDocument();
       });
 
       it('should render children', () => {
         render(<ControlledSegmentedControl variant={variant}>Item</ControlledSegmentedControl>);
+
         expect(screen.getByText('Item')).toBeInTheDocument();
       });
 
@@ -69,6 +71,7 @@ describe('SegmentedControl', () => {
             Item
           </ControlledSegmentedControl>,
         );
+
         expect(screen.getByText('Item')).toHaveClass('SegmentedControl--fluid');
       });
 
@@ -174,6 +177,7 @@ describe('SegmentedControl', () => {
         expect(input2.checked).toBe(true);
 
         fireEvent.click(input1); // Should not change selection
+
         expect(input1.checked).toBe(false);
         expect(input2.checked).toBe(true);
       });

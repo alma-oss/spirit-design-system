@@ -88,6 +88,7 @@ describe('PolymorphicComponentProps', () => {
       render(<TestButton>Default</TestButton>);
 
       const button = screen.getByTestId('test-button');
+
       expect(button.localName).toBe('button');
     });
 

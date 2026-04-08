@@ -28,6 +28,7 @@ describe('HeaderDialogText', () => {
     const dom = render(<HeaderDialogText id="test">Hello World</HeaderDialogText>);
 
     const element = dom.container.querySelector('span') as HTMLElement;
+
     expect(element.textContent).toBe('Hello World');
   });
 });
