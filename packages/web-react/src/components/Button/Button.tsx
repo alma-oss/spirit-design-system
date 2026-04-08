@@ -28,10 +28,13 @@ const _Button = <E extends ElementType = 'button', C = void, S = void>(
   props: SpiritButtonProps<E, C, S>,
   ref: PolymorphicRef<E>,
 ) => {
-  const propsWithContext = useContextProps();
-  const propsWithDefaults = { ...defaultProps, ...props, ...propsWithContext };
-  const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
-
+  const { elementType: propsElementType } = props;
+  const contextProps = useContextProps(props);
+  const { elementType: contextElementType, children, ...restFromContext } = contextProps;
+  const elementType = (propsElementType ?? contextElementType ?? defaultProps.elementType) as ElementType;
+  const propsWithDefaults = { ...defaultProps, ...restFromContext };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- `elementType` must be omitted from `restProps`: the root tag is chosen by the polymorphic `elementType` resolved above (explicit prop, then Stack context, then default). The duplicate key from `defaultProps` inside `propsWithDefaults` is only peeled off so it is not passed to hooks or the DOM.
+  const { elementType: _elementType, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;
 
   const { buttonProps } = useButtonProps(restProps);
