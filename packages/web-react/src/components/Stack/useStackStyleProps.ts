@@ -5,23 +5,22 @@ import { type StackStyleProps } from '../../types';
 export function useStackStyleProps(props: StackStyleProps) {
   const { hasEndDivider, hasIntermediateDividers, hasSpacing, hasStartDivider, spacing, ...restProps } = props;
 
-  const StackClass = useClassNamePrefix('Stack');
-  const StackBottomDividerClass = `${StackClass}--hasEndDivider`;
-  const StackMiddleDividersClass = `${StackClass}--hasIntermediateDividers`;
-  const StackSpacingClass = `${StackClass}--hasSpacing`;
-  const StackTopDividerClass = `${StackClass}--hasStartDivider`;
-  const rootProps = classNames(StackClass, {
-    [StackBottomDividerClass]: hasEndDivider,
-    [StackMiddleDividersClass]: hasIntermediateDividers,
-    [StackSpacingClass]: hasSpacing || spacing,
-    [StackTopDividerClass]: hasStartDivider,
-  });
-  const itemProps = classNames(`${StackClass}Item`);
+  const stackClass = useClassNamePrefix('Stack');
+  const stackBottomDividerClass = `${stackClass}--hasEndDivider`;
+  const stackMiddleDividersClass = `${stackClass}--hasIntermediateDividers`;
+  const stackSpacingClass = `${stackClass}--hasSpacing`;
+  const stackTopDividerClass = `${stackClass}--hasStartDivider`;
+  const itemProps = `${stackClass}Item`;
   const stackStyle = useSpacingStyle(spacing, 'stack');
 
   return {
     classProps: {
-      root: rootProps,
+      root: classNames(stackClass, {
+        [stackBottomDividerClass]: hasEndDivider,
+        [stackMiddleDividersClass]: hasIntermediateDividers,
+        [stackSpacingClass]: hasSpacing || spacing,
+        [stackTopDividerClass]: hasStartDivider,
+      }),
       item: itemProps,
     },
     props: restProps,

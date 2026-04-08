@@ -30,12 +30,11 @@ export function useToastStyleProps(props: SpiritToastProps): ToastStyles<SpiritT
   const alignmentClasses = [...processAlignments([alignmentX, alignmentY])];
   const collapsibleClass = `${toastClass}--collapsible`;
 
-  const toastRootClass = classNames(toastClass, isCollapsible && collapsibleClass, ...alignmentClasses);
   const toastQueueClass = `${toastClass}__queue`;
 
   return {
     classProps: {
-      root: toastRootClass,
+      root: classNames(toastClass, isCollapsible && collapsibleClass, ...alignmentClasses),
       queue: toastQueueClass,
     },
     props: restProps,

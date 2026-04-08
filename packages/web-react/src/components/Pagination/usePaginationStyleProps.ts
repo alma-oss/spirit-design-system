@@ -15,14 +15,14 @@ export interface UsePaginationStyleReturn {
 }
 
 export const usePaginationStyleProps = (props?: UsePaginationStyleProps): UsePaginationStyleReturn => {
-  const paginationRootClass = useClassNamePrefix('Pagination');
-  const paginationItemClass = `${paginationRootClass}__item`;
-  const paginationLinkClass = `${paginationRootClass}__link`;
+  const paginationClass = useClassNamePrefix('Pagination');
+  const paginationItemClass = `${paginationClass}__item`;
+  const paginationLinkClass = `${paginationClass}__link`;
   const paginationLinkCurrentClass = `${paginationLinkClass}--current`;
 
   return {
     classProps: {
-      root: paginationRootClass,
+      root: paginationClass,
       item: paginationItemClass,
       link: classNames(paginationLinkClass, { [paginationLinkCurrentClass]: props?.isCurrent }),
     },

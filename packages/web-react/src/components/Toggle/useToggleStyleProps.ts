@@ -41,27 +41,23 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
   const toggleHelperTextClass = `${toggleClass}__helperText`;
   const toggleValidationTextClass = `${toggleClass}__validationText`;
 
-  const rootClass = classNames(toggleClass, {
-    [toggleInputPositionClass]: toggleInputPositionClass,
-    [toggleFluidClass]: isFluid,
-    [toggleDisabledClass]: isDisabled,
-    [toggleValidationClass]: validationState,
-  });
-  const labelClass = classNames(toggleLabelClass, {
-    [toggleRequiredClass]: isRequired,
-    [toggleHiddenLabelClass]: isLabelHidden,
-  });
-  const inputClass = classNames(toggleInputClass, {
-    [toggleInputIndicatorsClass]: hasIndicators,
-  });
-
   return {
     classProps: {
-      root: rootClass,
-      label: labelClass,
+      root: classNames(toggleClass, {
+        [toggleInputPositionClass]: toggleInputPositionClass,
+        [toggleFluidClass]: isFluid,
+        [toggleDisabledClass]: isDisabled,
+        [toggleValidationClass]: validationState,
+      }),
+      label: classNames(toggleLabelClass, {
+        [toggleRequiredClass]: isRequired,
+        [toggleHiddenLabelClass]: isLabelHidden,
+      }),
       text: toggleTextClass,
       helperText: toggleHelperTextClass,
-      input: inputClass,
+      input: classNames(toggleInputClass, {
+        [toggleInputIndicatorsClass]: hasIndicators,
+      }),
       validationText: toggleValidationTextClass,
     },
     props: { ...restProps, validationState, isDisabled, isRequired },

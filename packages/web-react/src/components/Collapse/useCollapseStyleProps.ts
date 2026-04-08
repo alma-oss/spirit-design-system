@@ -23,15 +23,13 @@ export const useCollapseStyleProps = (
   const collapseClass = useClassNamePrefix('Collapse');
   const collapseContentClass = `${collapseClass}__content`;
   const openClass = isOpen ? CLASS_NAME_OPEN : '';
-  const rootClass = classNames(collapseClass, openClass);
-
   // For span elements, don't use height-based transitions as they use display: none/inline
   const isSpanElement = elementType === 'span';
   const styleProps = isSpanElement ? {} : { height: isOpen ? collapseHeight : 0 };
 
   return {
     classProps: {
-      root: rootClass,
+      root: classNames(collapseClass, openClass),
       content: collapseContentClass,
     },
     styleProps,

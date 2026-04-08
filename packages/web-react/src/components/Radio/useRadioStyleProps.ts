@@ -31,20 +31,17 @@ export function useRadioStyleProps(props: SpiritRadioProps): RadioStyles {
   const radioHelperTextClass = `${radioClass}__helperText`;
   const radioValidationClass = `${radioClass}--${validationState}`;
 
-  const rootStyles = classNames(radioClass, {
-    [radioInputPositionClass]: radioInputPositionClass,
-    [radioDisabledClass]: isDisabled,
-    [radioItemClass]: isItem,
-    [radioValidationClass]: validationState,
-  });
-  const labelStyles = classNames(radioLabelClass, {
-    [radioLabelHiddenClass]: isLabelHidden,
-  });
-
   return {
     classProps: {
-      root: rootStyles,
-      label: labelStyles,
+      root: classNames(radioClass, {
+        [radioInputPositionClass]: radioInputPositionClass,
+        [radioDisabledClass]: isDisabled,
+        [radioItemClass]: isItem,
+        [radioValidationClass]: validationState,
+      }),
+      label: classNames(radioLabelClass, {
+        [radioLabelHiddenClass]: isLabelHidden,
+      }),
       input: radioInputClass,
       text: radioTextClass,
       helperText: radioHelperTextClass,

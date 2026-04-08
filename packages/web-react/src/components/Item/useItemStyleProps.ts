@@ -21,8 +21,8 @@ export interface ItemStyles {
 export function useItemStyleProps<P extends ItemStyleProps>(props: P): ItemStyles {
   const { isDisabled, isSelected, selectionDecorator, ...restProps } = props;
   const itemClass = useClassNamePrefix('Item');
-  const itemRootDisabledClass = `${itemClass}--disabled`;
-  const itemRootSelectedClass = `${itemClass}--selected`;
+  const itemDisabledClass = `${itemClass}--disabled`;
+  const itemSelectedClass = `${itemClass}--selected`;
   const itemHelperTextClass = `${itemClass}__helperText`;
   const itemLabelClass = `${itemClass}__label`;
   const itemIconClass = `${itemClass}__icon`;
@@ -34,11 +34,6 @@ export function useItemStyleProps<P extends ItemStyleProps>(props: P): ItemStyle
     (selectionDecorator === ITEM_SELECTION_DECORATOR_BACKGROUND ||
       selectionDecorator === ITEM_SELECTION_DECORATOR_BOTH);
 
-  const rootStyles = classNames(itemClass, {
-    [itemRootDisabledClass]: isDisabled,
-    [itemRootSelectedClass]: showSelectedBackground,
-  });
-
   return {
     classProps: {
       helperText: itemHelperTextClass,
@@ -48,7 +43,10 @@ export function useItemStyleProps<P extends ItemStyleProps>(props: P): ItemStyle
         end: itemIconEndClass,
       },
       label: itemLabelClass,
-      root: rootStyles,
+      root: classNames(itemClass, {
+        [itemDisabledClass]: isDisabled,
+        [itemSelectedClass]: showSelectedBackground,
+      }),
     },
     props: restProps,
   };

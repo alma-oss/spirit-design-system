@@ -49,22 +49,17 @@ export function useTimelineStyleProps(props?: UseTimelineStyleProps): TimelineSt
   const markerBorderClass = markerBorderColor ? markerBorderClassPrefix : '';
   const markerTextColorClass = markerTextColor ? markerTextColorClassPrefix : '';
 
-  const markerClasses = classNames(markerClass, {
-    [`${markerClass}--${markerVariant}`]: !!markerVariant,
-    [markerBackgroundClass]: shouldApplyBackgroundAndBorderColors,
-    [markerBorderClass]: shouldApplyBackgroundAndBorderColors,
-    [markerTextColorClass]: !!markerTextColor,
-  });
-
-  const sizeClassNames = generateResponsiveClassNames(timelineClass, markerSize);
-  const rootClasses = classNames(timelineClass, ...sizeClassNames);
-
   return {
     classProps: {
       content: contentClass,
       heading: headingClass,
-      marker: markerClasses,
-      root: rootClasses,
+      marker: classNames(markerClass, {
+        [`${markerClass}--${markerVariant}`]: !!markerVariant,
+        [markerBackgroundClass]: shouldApplyBackgroundAndBorderColors,
+        [markerBorderClass]: shouldApplyBackgroundAndBorderColors,
+        [markerTextColorClass]: !!markerTextColor,
+      }),
+      root: classNames(timelineClass, generateResponsiveClassNames(timelineClass, markerSize)),
       step: stepClass,
     },
     props: restProps,

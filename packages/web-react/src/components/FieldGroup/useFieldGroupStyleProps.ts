@@ -22,20 +22,20 @@ export const useFieldGroupStyleProps = ({
   isRequired,
   validationState,
 }: UseFieldGroupStyleProps): UseFieldGroupStyleReturn => {
-  const fieldGroupRootClass = useClassNamePrefix('FieldGroup');
-  const fieldGroupRootFluidClass = `${fieldGroupRootClass}--fluid`;
-  const fieldGroupRootValidationClass = `${fieldGroupRootClass}--${validationState}`;
-  const fieldGroupLabelClass = `${fieldGroupRootClass}__label`;
+  const fieldGroupClass = useClassNamePrefix('FieldGroup');
+  const fieldGroupFluidClass = `${fieldGroupClass}--fluid`;
+  const fieldGroupValidationClass = `${fieldGroupClass}--${validationState}`;
+  const fieldGroupLabelClass = `${fieldGroupClass}__label`;
   const fieldGroupLabelRequiredClass = `${fieldGroupLabelClass}--required`;
-  const fieldGroupFieldsClass = `${fieldGroupRootClass}__fields`;
-  const fieldGroupValidationTextClass = `${fieldGroupRootClass}__validationText`;
-  const fieldGroupHelperTextClass = `${fieldGroupRootClass}__helperText`;
+  const fieldGroupFieldsClass = `${fieldGroupClass}__fields`;
+  const fieldGroupValidationTextClass = `${fieldGroupClass}__validationText`;
+  const fieldGroupHelperTextClass = `${fieldGroupClass}__helperText`;
 
   return {
     classProps: {
-      root: classNames(fieldGroupRootClass, {
-        [fieldGroupRootFluidClass]: isFluid,
-        [fieldGroupRootValidationClass]: validationState,
+      root: classNames(fieldGroupClass, {
+        [fieldGroupFluidClass]: isFluid,
+        [fieldGroupValidationClass]: validationState,
       }),
       label: classNames(fieldGroupLabelClass, {
         [fieldGroupLabelRequiredClass]: isRequired,
