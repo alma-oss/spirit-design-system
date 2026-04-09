@@ -65,25 +65,14 @@ Hidden label:
 </div>
 ```
 
-Fluid width:
+## Layout
 
-```html
-<div class="TextField TextField--medium TextField--fluid">
-  <label for="text-field-fluid" class="Label">Label</label>
-  <input
-    type="text"
-    id="text-field-fluid"
-    class="TextField__input"
-    name="fluid"
-    placeholder="Placeholder"
-    value="Filled"
-  />
-</div>
-```
+TextField is fluid by default. Use parent layout components like [Grid][readme-grid], [Stack][readme-stack], or [Container][readme-container]
+to control the component width in page layouts.
 
 Helper Text:
 
-To add helper text, use the [HelperText][helper-text] component. When helper text is present, give the helper element an `id` and set `aria-describedby` on the input to that id so assistive technologies can associate the description with the field:
+To add helper text, use the [HelperText][readme-helper-text] component. When helper text is present, give the helper element an `id` and set `aria-describedby` on the input to that id so assistive technologies can associate the description with the field:
 
 ```html
 <div class="TextField TextField--medium">
@@ -154,8 +143,7 @@ element:
 ### Grid
 
 For other use cases (wider input or input with unknown value length), we
-recommend placing them inside the Grid component and using `TextField--fluid`
-modifier to fill the available space.
+recommend placing inputs inside the Grid component to control their width.
 
 ## JavaScript Plugin for Password Toggle
 
@@ -319,5 +307,8 @@ JS interaction class when controlled by JavaScript:
 👉 Please note that responsive border radius is defined by design specifications.
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
-[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

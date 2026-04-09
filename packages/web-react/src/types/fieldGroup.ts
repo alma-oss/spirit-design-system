@@ -11,7 +11,6 @@ import {
 export interface FieldGroupProps
   extends SpiritFieldGroupElementPropsWithRef, LabelProps, HelperTextProps, RequiredProps, Validation {
   isDisabled?: boolean;
-  isFluid?: boolean;
   isLabelHidden?: boolean;
   label: ReactNode;
   validationText?: ValidationTextType;

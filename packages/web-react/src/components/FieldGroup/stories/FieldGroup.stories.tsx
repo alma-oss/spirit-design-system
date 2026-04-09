@@ -105,7 +105,6 @@ const meta: Meta<typeof FieldGroup> = {
     helperText: 'Helper text',
     id: 'field-group',
     isDisabled: false,
-    isFluid: false,
     isLabelHidden: false,
     isRequired: false,
     label: 'Label',

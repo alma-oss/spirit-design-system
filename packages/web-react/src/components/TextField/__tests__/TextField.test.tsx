@@ -65,12 +65,6 @@ describe('TextField', () => {
       expect(screen.getByLabelText('Label')).toHaveClass('TextField__input');
     });
 
-    it('should have fluid classname', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} isFluid />);
-
-      expect(screen.getByLabelText('Label').parentElement).toHaveClass('TextField--fluid');
-    });
-
     it('should render label with html tags', () => {
       render(
         <TextField
