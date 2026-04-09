@@ -13,7 +13,6 @@
 $_field-name: 'Select';
 
 .Select {
-    @include form-fields-tools.box-field-root();
     @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
 }
 
@@ -64,10 +63,6 @@ $_field-name: 'Select';
     &::-ms-expand {
         display: none;
     }
-}
-
-.Select--fluid {
-    @include form-fields-tools.box-field-fluid();
 }
 
 .Select .Select__input:focus-visible {

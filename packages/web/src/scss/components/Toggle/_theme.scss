@@ -2,7 +2,6 @@
 @use '../../settings/transitions';
 @use '../../tools/units';
 
-$max-width: 21rem;
 $input-width: units.px-to-rem(44px);
 $input-height: units.px-to-rem(24px);
 $input-border-width: tokens.$border-width-100;

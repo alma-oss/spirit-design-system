@@ -11,7 +11,7 @@ const UNSTABLE_PickerGroup = ({ children, label, ...restProps }: SpiritUnstableP
   const id = pickerPopoverContext.id ? `${pickerPopoverContext.id}-group-${generatedId}` : generatedId;
 
   return (
-    <FieldGroup {...restProps} id={id} isFluid isLabelHidden label={label}>
+    <FieldGroup {...restProps} id={id} isLabelHidden label={label}>
       {children}
     </FieldGroup>
   );
