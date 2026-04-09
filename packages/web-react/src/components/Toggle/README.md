@@ -33,11 +33,9 @@ Add the `isRequired` prop to mark it as required.
 <Toggle id="toggle-hidden-label" label="Toggle Label" isLabelHidden />
 ```
 
-## Fluid
+## Layout
 
-```tsx
-<Toggle id="toggle-fluid" label="Toggle Label" isFluid />
-```
+Toggle is fluid by default. Use parent layout components such as [`Grid`][readme-grid], [`Stack`][readme-stack], or [`Container`][readme-container] to control the rendered width and positioning.
 
 ## Helper Text
 
@@ -185,7 +183,6 @@ const Example = () => {
 | `inputPosition`     | \[`string` \| `object`]                        | `end`   | ✕        | Position of the input (`start` or `end`), supports [responsive][readme-responsive] values |
 | `isChecked`         | `bool`                                         | `false` | ✕        | Whether is toggle checked                                                                 |
 | `isDisabled`        | `bool`                                         | `false` | ✕        | Whether is toggle disabled                                                                |
-| `isFluid`           | `bool`                                         | `false` | ✕        | Whether is toggle fluid                                                                   |
 | `isLabelHidden`     | `bool`                                         | `false` | ✕        | Whether is label hidden                                                                   |
 | `label`             | `ReactNode`                                    | -       | ✓        | Label text                                                                                |
 | `name`              | `string`                                       | -       | ✕        | Input name                                                                                |
@@ -203,6 +200,9 @@ and [escape hatches][readme-escape-hatches].
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [mdn-checkbox]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Container/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
 [readme-responsive]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#responsive-props
+[readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

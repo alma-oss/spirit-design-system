@@ -44,10 +44,6 @@ const meta: Meta<typeof UNSTABLE_Picker> = {
       control: 'boolean',
       table: { defaultValue: { summary: 'false' } },
     },
-    isFluid: {
-      control: 'boolean',
-      table: { defaultValue: { summary: 'false' } },
-    },
     isLabelHidden: {
       control: 'boolean',
       table: { defaultValue: { summary: 'false' } },
@@ -91,7 +87,6 @@ const meta: Meta<typeof UNSTABLE_Picker> = {
     id: PLAYGROUND_PICKER_ID,
     isAggregated: false,
     isDisabled: false,
-    isFluid: false,
     isLabelHidden: false,
     isRequired: false,
     label: 'Languages',
