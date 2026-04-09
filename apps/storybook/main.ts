@@ -9,7 +9,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const config: StorybookConfig = {
   stories: ['../../packages/**/*.mdx', '../../packages/**/*.stories.@(ts|tsx)'],
 
-  addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],
+  addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-mcp'],
 
   core: {
     disableTelemetry: true,
