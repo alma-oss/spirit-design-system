@@ -1,6 +1,5 @@
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/accessibility';
-@use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/reset';
 @use '../../tools/typography';
 @use 'theme';
@@ -17,10 +16,6 @@
     border: theme.$attachment-border;
     border-radius: theme.$attachment-border-radius;
     background-color: theme.$attachment-background;
-}
-
-.FileUploaderAttachment--fluid {
-    width: var(--file-uploader-attachment-width, 100%);
 }
 
 .FileUploaderAttachment__image {

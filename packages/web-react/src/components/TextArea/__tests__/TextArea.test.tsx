@@ -59,21 +59,15 @@ describe('TextArea', () => {
     expect(screen.getByRole('textbox')).toHaveClass('TextArea__input');
   });
 
-  it('should have fluid classname', () => {
-    render(<TextArea id="textarea" label="Label" isFluid />);
-
-    expect(screen.getByRole('textbox').parentElement).toHaveClass('TextArea--fluid');
-  });
-
   describe('autoresizing', () => {
     it('should adjust height when mounted and autoresizing is enabled', () => {
-      render(<TextArea id="textarea" label="Label" isFluid isAutoResizing />);
+      render(<TextArea id="textarea" label="Label" isAutoResizing />);
 
       expect(screen.getByRole('textbox').style.height).toBe('2px');
     });
 
     it('should not adjust height when mounted and autoresizing is not used', () => {
-      render(<TextArea id="textarea" label="Label" isFluid />);
+      render(<TextArea id="textarea" label="Label" />);
 
       expect(screen.getByRole('textbox').style.height).toBe('');
     });

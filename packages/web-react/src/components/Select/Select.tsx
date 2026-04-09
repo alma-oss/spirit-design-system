@@ -20,7 +20,6 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
     helperText,
     id,
     isDisabled,
-    isFluid,
     isLabelHidden,
     isRequired,
     label,
@@ -32,7 +31,6 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
   const { classProps } = useSelectStyleProps({
     hasValidationIcon,
     isDisabled,
-    isFluid,
     isLabelHidden,
     isRequired,
     size,

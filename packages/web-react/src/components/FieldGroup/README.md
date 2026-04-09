@@ -52,15 +52,9 @@ To render helper text, add the `helperText` prop:
 </FieldGroup>
 ```
 
-## Fluid Width
+## Layout
 
-To make the FieldGroup component fluid, add the `isFluid` prop:
-
-```tsx
-<FieldGroup id="example-field-group" label="Label" isFluid>
-  {/* Form fields… */}
-</FieldGroup>
-```
+FieldGroup is fluid by default. Use parent layout components such as `Grid`, `Stack`, or `Container` to control the rendered width and positioning.
 
 ## Disabled State
 
@@ -95,20 +89,19 @@ Validation states can be presented either by adding the `validationState` attrib
 
 ## API
 
-| Name                | Type                                           | Default | Required | Description                                                |
-| ------------------- | ---------------------------------------------- | ------- | -------- | ---------------------------------------------------------- |
-| `form`              | `string`                                       | `null`  | ✕        | Parent form ID                                             |
-| `hasValidationIcon` | `bool`                                         | `false` | ✕        | Whether to show validation icon                            |
-| `helperText`        | `ReactNode`                                    | `null`  | ✕        | Custom helper text                                         |
-| `id`                | `string`                                       | —       | ✓        | Group and label identification                             |
-| `isDisabled`        | `bool`                                         | `false` | ✕        | If true, the group is disabled                             |
-| `isFluid`           | `bool`                                         | —       | ✕        | If true, the element spans to the full width of its parent |
-| `isLabelHidden`     | `bool`                                         | `false` | ✕        | If true, label is hidden                                   |
-| `isRequired`        | `bool`                                         | `false` | ✕        | If true, the group is marked as required                   |
-| `label`             | `ReactNode`                                    | —       | ✓        | Label text                                                 |
-| `name`              | `string`                                       | `null`  | ✕        | Group name                                                 |
-| `validationState`   | [Validation dictionary][dictionary-validation] | `null`  | ✕        | Type of validation state                                   |
-| `validationText`    | \[`ReactNode` \| `ReactNode[]`]                | `null`  | ✕        | Validation text                                            |
+| Name                | Type                                           | Default | Required | Description                              |
+| ------------------- | ---------------------------------------------- | ------- | -------- | ---------------------------------------- |
+| `form`              | `string`                                       | `null`  | ✕        | Parent form ID                           |
+| `hasValidationIcon` | `bool`                                         | `false` | ✕        | Whether to show validation icon          |
+| `helperText`        | `ReactNode`                                    | `null`  | ✕        | Custom helper text                       |
+| `id`                | `string`                                       | —       | ✓        | Group and label identification           |
+| `isDisabled`        | `bool`                                         | `false` | ✕        | If true, the group is disabled           |
+| `isLabelHidden`     | `bool`                                         | `false` | ✕        | If true, label is hidden                 |
+| `isRequired`        | `bool`                                         | `false` | ✕        | If true, the group is marked as required |
+| `label`             | `ReactNode`                                    | —       | ✓        | Label text                               |
+| `name`              | `string`                                       | `null`  | ✕        | Group name                               |
+| `validationState`   | [Validation dictionary][dictionary-validation] | `null`  | ✕        | Type of validation state                 |
+| `validationText`    | \[`ReactNode` \| `ReactNode[]`]                | `null`  | ✕        | Validation text                          |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

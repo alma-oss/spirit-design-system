@@ -6,7 +6,6 @@ export interface FileUploadStyleProps extends StyleProps, Validation {
   isDisabled?: boolean;
   isDragAndDropSupported?: boolean;
   isDragging?: boolean;
-  isFluid?: boolean;
   isLabelHidden?: boolean;
   isRequired?: boolean;
 }
@@ -32,7 +31,6 @@ export interface FileUploadStyle {
 export const useFileUploadStyleProps = (props?: FileUploadStyleProps): FileUploadStyle => {
   const fileUploadClass = useClassNamePrefix('FileUploader');
   const fileUploadHasDragAndDropClass = 'has-drag-and-drop';
-  const fileUploadFluidClass = `${fileUploadClass}--fluid`;
   const fileUploadInputClass = `${fileUploadClass}Input`;
   const fileUploadInputDisabledClass = `${fileUploadInputClass}--disabled`;
   const fileUploadInputValidationClass = `${fileUploadInputClass}--${props?.validationState}`;
@@ -47,7 +45,7 @@ export const useFileUploadStyleProps = (props?: FileUploadStyleProps): FileUploa
 
   return {
     classProps: {
-      root: classNames(fileUploadClass, { [fileUploadFluidClass]: props?.isFluid }),
+      root: fileUploadClass,
       input: {
         root: classNames(fileUploadInputClass, {
           [fileUploadHasDragAndDropClass]: props?.isDragAndDropSupported,

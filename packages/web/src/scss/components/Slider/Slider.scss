@@ -114,10 +114,6 @@ $_field-name: 'Slider';
     }
 }
 
-.Slider--fluid {
-    @include form-fields-tools.box-field-fluid();
-}
-
 @include form-fields-tools.input-field-validation-states($_field-name);
 
 .Slider .Slider__input:disabled,

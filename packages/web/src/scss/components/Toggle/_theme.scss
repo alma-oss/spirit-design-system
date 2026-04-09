@@ -1,7 +1,6 @@
 @use '@tokens' as tokens;
 @use '../../settings/transitions';
 
-$max-width: 21rem;
 $input-width: 44px;
 $input-height: 24px;
 $input-border-width: tokens.$border-width-100;

@@ -35,12 +35,6 @@ const meta: Meta<typeof UNSTABLE_Attachment> = {
         defaultValue: { summary: 'li' },
       },
     },
-    isFluid: {
-      control: 'boolean',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
     label: {
       control: 'text',
     },
@@ -61,7 +55,6 @@ const meta: Meta<typeof UNSTABLE_Attachment> = {
     editText: 'Edit',
     id: 'file-uploader-attachment-example',
     iconName: 'file',
-    isFluid: false,
     label: 'File name',
     onDismiss: undefined,
     onChange: undefined,

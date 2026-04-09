@@ -86,17 +86,8 @@ To render helper text, use the [HelperText][helper-text] component:
 
 ## Fluid Width
 
-To make the FieldGroup component fluid, add the `FieldGroup--fluid` modifier class to the `<fieldset>` element.
-
-```html
-<fieldset class="FieldGroup FieldGroup--fluid">
-  <legend class="accessibility-hidden">Label</legend>
-  <div class="Label" aria-hidden="true">Label</div>
-  <div class="FieldGroup__fields">
-    <!-- Form fields… -->
-  </div>
-</fieldset>
-```
+FieldGroup is fluid by default. Use parent layout components like [Grid][grid], [Stack][stack], or [Container][container]
+to control the component width in page layouts.
 
 ## Disabled State
 
@@ -170,6 +161,9 @@ Validation states can be presented either by adding a CSS modifier class (`Field
 screen readers.
 
 [aria-live]: https://bitsofco.de/using-aria-live/
+[container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [mdn-fieldset-disabled]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset#disabled_fieldset
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md

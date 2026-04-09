@@ -11,7 +11,6 @@ import FileUploadAcceptImagesOnly from './FileUploadAcceptImagesOnly';
 import FileUploadAttachmentWithCustomAction from './FileUploadAttachmentWithCustomAction';
 import FileUploadAttachmentWithImagePreview from './FileUploadAttachmentWithImagePreview';
 import FileUploadDraggingNotAvailable from './FileUploadDraggingNotAvailable';
-import FileUploadFluidWidth from './FileUploadFluidWidth';
 import FileUploadInputDisabled from './FileUploadInputDisabled';
 import FileUploadInputMultiple from './FileUploadInputMultiple';
 import FileUploadInputValidationStates from './FileUploadInputValidationStates';
@@ -49,9 +48,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Dragging not Available" tag="Visual demo only">
         <FileUploadDraggingNotAvailable />
-      </DocsSection>
-      <DocsSection title="Fluid Width" tag="Visual demo only" stackAlignment="stretch">
-        <FileUploadFluidWidth />
       </DocsSection>
       <DocsSection title="Input with Hidden Label" tag="Visual demo only">
         <FileUploadInputWithHiddenLabel />

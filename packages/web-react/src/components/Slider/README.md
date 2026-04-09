@@ -40,11 +40,9 @@ const handleChange = (event) => {
 <Slider id="slider" label="Slider" value={value} onChange={handleChange} isLabelHidden />
 ```
 
-## Fluid Width
+## Layout
 
-```tsx
-<Slider id="slider" label="Slider" value={value} onChange={handleChange} isFluid />
-```
+Slider is fluid by default. Use parent layout components such as `Grid`, `Stack`, or `Container` to control the rendered width and positioning.
 
 ## Helper Text
 
@@ -92,22 +90,21 @@ Validation states implement the Validation state [dictionary][dictionary-validat
 
 ## API
 
-| Attribute           | Type                                           | Default | Required | Description                                               |
-| ------------------- | ---------------------------------------------- | ------- | -------- | --------------------------------------------------------- |
-| `hasValidationIcon` | `bool`                                         | `false` | ✕        | Whether to show validation icon                           |
-| `helperText`        | `string`                                       | -       | ✕        | Custom helper text                                        |
-| `id`                | `string`                                       | -       | ✓        | Input and label identification                            |
-| `isDisabled`        | `bool`                                         | `false` | ✕        | Whether is the input disabled                             |
-| `isFluid`           | `bool`                                         | `false` | ✕        | Whether the element spans to the full width of its parent |
-| `isLabelHidden`     | `bool`                                         | `false` | ✕        | Whether the label is hidden                               |
-| `label`             | `ReactNode`                                    | -       | ✓        | Label text                                                |
-| `max`               | `number`                                       | 100     | ✕        | Max value of slider input                                 |
-| `min`               | `number`                                       | 0       | ✕        | Min value of slider input                                 |
-| `onChange`          | `() => void`                                   | -       | ✓        | On input change callback                                  |
-| `step`              | `number`                                       | 1       | ✕        | Sets the stepping interval                                |
-| `validationState`   | [Validation dictionary][dictionary-validation] | -       | ✕        | Type of validation state                                  |
-| `validationText`    | \[`ReactNode` \| `ReactNode[]`]                | -       | ✕        | Validation text                                           |
-| `value`             | `number`                                       | -       | ✓        | Input value                                               |
+| Attribute           | Type                                           | Default | Required | Description                     |
+| ------------------- | ---------------------------------------------- | ------- | -------- | ------------------------------- |
+| `hasValidationIcon` | `bool`                                         | `false` | ✕        | Whether to show validation icon |
+| `helperText`        | `string`                                       | -       | ✕        | Custom helper text              |
+| `id`                | `string`                                       | -       | ✓        | Input and label identification  |
+| `isDisabled`        | `bool`                                         | `false` | ✕        | Whether is the input disabled   |
+| `isLabelHidden`     | `bool`                                         | `false` | ✕        | Whether the label is hidden     |
+| `label`             | `ReactNode`                                    | -       | ✓        | Label text                      |
+| `max`               | `number`                                       | 100     | ✕        | Max value of slider input       |
+| `min`               | `number`                                       | 0       | ✕        | Min value of slider input       |
+| `onChange`          | `() => void`                                   | -       | ✓        | On input change callback        |
+| `step`              | `number`                                       | 1       | ✕        | Sets the stepping interval      |
+| `validationState`   | [Validation dictionary][dictionary-validation] | -       | ✕        | Type of validation state        |
+| `validationText`    | \[`ReactNode` \| `ReactNode[]`]                | -       | ✕        | Validation text                 |
+| `value`             | `number`                                       | -       | ✓        | Input value                     |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -123,21 +120,20 @@ and [escape hatches][readme-escape-hatches].
 
 ### API
 
-| Attribute           | Type                            | Default | Required | Description                                               |
-| ------------------- | ------------------------------- | ------- | -------- | --------------------------------------------------------- |
-| `hasValidationIcon` | `bool`                          | `false` | ✕        | Whether to show validation icon                           |
-| `helperText`        | `string`                        | -       | ✕        | Custom helper text                                        |
-| `id`                | `string`                        | -       | ✓        | Input and label identification                            |
-| `isDisabled`        | `bool`                          | `false` | ✕        | Whether is the input disabled                             |
-| `isFluid`           | `bool`                          | `false` | ✕        | Whether the element spans to the full width of its parent |
-| `isLabelHidden`     | `bool`                          | `false` | ✕        | Whether the label is hidden                               |
-| `label`             | `ReactNode`                     | -       | ✓        | Label text                                                |
-| `max`               | `number`                        | 100     | ✕        | Max value of slider input                                 |
-| `min`               | `number`                        | 0       | ✕        | Min value of slider input                                 |
-| `onChange`          | `() => void`                    | -       | ✕        | On input change callback                                  |
-| `step`              | `number`                        | 1       | ✕        | Sets the stepping interval                                |
-| `validationText`    | \[`ReactNode` \| `ReactNode[]`] | -       | ✕        | Validation text                                           |
-| `value`             | `number`                        | 0       | ✕        | Input value                                               |
+| Attribute           | Type                            | Default | Required | Description                     |
+| ------------------- | ------------------------------- | ------- | -------- | ------------------------------- |
+| `hasValidationIcon` | `bool`                          | `false` | ✕        | Whether to show validation icon |
+| `helperText`        | `string`                        | -       | ✕        | Custom helper text              |
+| `id`                | `string`                        | -       | ✓        | Input and label identification  |
+| `isDisabled`        | `bool`                          | `false` | ✕        | Whether is the input disabled   |
+| `isLabelHidden`     | `bool`                          | `false` | ✕        | Whether the label is hidden     |
+| `label`             | `ReactNode`                     | -       | ✓        | Label text                      |
+| `max`               | `number`                        | 100     | ✕        | Max value of slider input       |
+| `min`               | `number`                        | 0       | ✕        | Min value of slider input       |
+| `onChange`          | `() => void`                    | -       | ✕        | On input change callback        |
+| `step`              | `number`                        | 1       | ✕        | Sets the stepping interval      |
+| `validationText`    | \[`ReactNode` \| `ReactNode[]`] | -       | ✕        | Validation text                 |
+| `value`             | `number`                        | 0       | ✕        | Input value                     |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

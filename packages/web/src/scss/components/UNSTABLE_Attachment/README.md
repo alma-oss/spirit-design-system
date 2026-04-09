@@ -5,7 +5,6 @@ Standalone attachment row styles. This block provides the visual layout for a si
 ## Structure
 
 - **`.Attachment`** – root (one row: icon/preview, name, optional slot, dismiss button)
-- **`.Attachment--fluid`** – modifier for full-width row
 - **`.Attachment__image`** – wrapper for preview image
 - **`.Attachment__name`** – file name (use `text-truncate` for long names)
 - **`.Attachment__slot`** – optional slot for custom actions (e.g. edit button)
@@ -32,13 +31,8 @@ Standalone attachment row styles. This block provides the visual layout for a si
 
 ## Fluid Width
 
-Add the modifier so the row stretches to the container width:
-
-```html
-<li class="Attachment Attachment--fluid">
-  <!-- ... -->
-</li>
-```
+Attachment is fluid by default. Use parent layout components like [Grid][grid], [Stack][stack], or [Container][container]
+to control the row width in page layouts.
 
 ## Preview Image
 
@@ -91,4 +85,7 @@ Add an optional slot (e.g. for an edit button) before the dismiss button:
 ```
 
 [web-react-attachment]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Attachment/README.md
+[container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixed
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md

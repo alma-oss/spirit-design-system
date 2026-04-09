@@ -13,7 +13,6 @@ import FileUploaderAttachmentWithImagePreview from './FileUploaderAttachmentWith
 import FileUploaderDefault from './FileUploaderDefault';
 import FileUploaderDraggingNotAvailable from './FileUploaderDraggingNotAvailable';
 import FileUploaderExampleOfJSControlledForm from './FileUploaderExampleOfJSControlledForm';
-import FileUploaderFluidWidth from './FileUploaderFluidWidth';
 import FileUploaderInputDisabled from './FileUploaderInputDisabled';
 import FileUploaderInputMultiple from './FileUploaderInputMultiple';
 import FileUploaderInputMultipleWithFileQueueBehaviorControl from './FileUploaderInputMultipleWithFileQueueBehaviorControl';
@@ -64,9 +63,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Dragging not Available" tag="Visual demo only">
         <FileUploaderDraggingNotAvailable />
-      </DocsSection>
-      <DocsSection title="Fluid Width" tag="Visual demo only">
-        <FileUploaderFluidWidth />
       </DocsSection>
       <DocsSection title="Example of JS-Controlled Form">
         <FileUploaderExampleOfJSControlledForm />

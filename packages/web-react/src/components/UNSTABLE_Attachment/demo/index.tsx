@@ -8,16 +8,12 @@ import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import Attachment from './Attachment';
-import FluidWidth from './FluidWidth';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <IconsProvider value={icons}>
       <DocsSection title="Attachment" tag="Visual demo only">
         <Attachment />
-      </DocsSection>
-      <DocsSection title="Fluid Width" tag="Visual demo only" stackAlignment="stretch">
-        <FluidWidth />
       </DocsSection>
     </IconsProvider>
   </StrictMode>,

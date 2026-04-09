@@ -13,28 +13,16 @@ import { useAttachmentStyleProps } from './useAttachmentStyleProps';
 const defaultProps = {
   elementType: 'li' as const,
   iconName: DEFAULT_ATTACHMENT_ICON_NAME,
-  isFluid: false,
 };
 
 const UNSTABLE_Attachment = <E extends ElementType = 'li'>(props: SpiritUnstableAttachmentProps<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { t } = useI18n();
-  const {
-    editText,
-    elementType,
-    iconName,
-    id,
-    isFluid,
-    label,
-    onDismiss,
-    onChange,
-    removeText,
-    previewSlot,
-    ...restProps
-  } = propsWithDefaults;
+  const { editText, elementType, iconName, id, label, onDismiss, onChange, removeText, previewSlot, ...restProps } =
+    propsWithDefaults;
   const resolvedEditText = editText ?? t('attachment.edit');
   const resolvedRemoveText = removeText ?? t('attachment.remove');
-  const { classProps } = useAttachmentStyleProps({ isFluid });
+  const { classProps } = useAttachmentStyleProps();
   const { styleProps, props: transferProps } = useStyleProps(restProps);
 
   const Component = elementType as ElementType;

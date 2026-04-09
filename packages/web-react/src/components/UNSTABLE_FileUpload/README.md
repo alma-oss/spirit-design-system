@@ -4,6 +4,8 @@ The UNSTABLE FileUpload is a visual-only variant of the FileUploader component.
 It provides the same visual structure and CSS classes as the original FileUploader,
 but does **not** include internal validation, form integration, or error handling.
 
+UNSTABLE_FileUpload is fluid by default. Use parent layout components such as `Grid`, `Stack`, or `Container` to control width and positioning.
+
 The user is responsible for providing their own queue management functions (`addToQueue`, `onDismiss`, etc.)
 which the component wires to the appropriate UI elements (input, drag-and-drop, dismiss buttons).
 
@@ -83,7 +85,6 @@ The consumer is responsible for setting the validation state based on their own 
 | `id`                | `string`                             | —        | ✓        | FileUpload id (used for the wrapper and the file input when input is rendered)                                                                                                                                                                                     |
 | `inputRef`          | `MutableRefObject<HTMLInputElement>` | —        | ✕        | Input element reference                                                                                                                                                                                                                                            |
 | `isDisabled`        | `bool`                               | —        | ✕        | Whether is field disabled                                                                                                                                                                                                                                          |
-| `isFluid`           | `bool`                               | —        | ✕        | When the field is supposed to be fluid                                                                                                                                                                                                                             |
 | `isLabelHidden`     | `bool`                               | —        | ✕        | Whether is input label hidden                                                                                                                                                                                                                                      |
 | `isMultiple`        | `bool`                               | —        | ✕        | When multiple files can be selected at once                                                                                                                                                                                                                        |
 | `isRequired`        | `bool`                               | —        | ✕        | Whether is field marked as required                                                                                                                                                                                                                                |

@@ -11,7 +11,6 @@ const fileToKey = (name: string): string => `file__${name.replace(/\./g, '_').re
 
 type UNSTABLE_FileUploadCompositionType = {
   fileUploadId: string;
-  isFluid: boolean;
   accept: string;
   hasValidationIcon: boolean;
   helperText: string;
@@ -48,14 +47,6 @@ export default {
       table: {
         category: 'UNSTABLE_FileUpload',
         defaultValue: { summary: 'file-uploader-unstable-example' },
-      },
-    },
-    isFluid: {
-      control: 'boolean',
-      description: 'When the field is supposed to be fluid.',
-      table: {
-        category: 'UNSTABLE_FileUpload',
-        defaultValue: { summary: false },
       },
     },
     accept: {
@@ -248,7 +239,6 @@ export default {
     iconName: 'upload',
     imageObjectFit: ObjectFit.COVER,
     isDisabled: false,
-    isFluid: false,
     isLabelHidden: false,
     isMultiple: false,
     isRequired: false,
@@ -276,7 +266,6 @@ export const UNSTABLE_FileUploadWithModalImagePreview = (args: UNSTABLE_FileUplo
     iconName,
     imageObjectFit,
     isDisabled,
-    isFluid,
     isLabelHidden,
     isMultiple,
     isRequired,
@@ -337,7 +326,6 @@ export const UNSTABLE_FileUploadWithModalImagePreview = (args: UNSTABLE_FileUplo
     <Stack hasSpacing>
       <UNSTABLE_FileUpload
         id={fileUploadId}
-        isFluid={isFluid}
         accept={accept}
         hasValidationIcon={hasValidationIcon}
         helperText={helperText}

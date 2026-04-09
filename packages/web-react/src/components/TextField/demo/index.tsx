@@ -9,7 +9,6 @@ import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import TextFieldDefault from './TextFieldDefault';
 import TextFieldDisabled from './TextFieldDisabled';
-import TextFieldFluid from './TextFieldFluid';
 import TextFieldHelperText from './TextFieldHelperText';
 import TextFieldHiddenLabel from './TextFieldHiddenLabel';
 import TextFieldInline from './TextFieldInline';
@@ -49,9 +48,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Validation Text with Icon">
         <TextFieldValidationWithIcon />
-      </DocsSection>
-      <DocsSection title="Fluid">
-        <TextFieldFluid />
       </DocsSection>
       <DocsSection title="Input Size">
         <TextFieldInputSize />

@@ -22,13 +22,12 @@ const FileUploader = (props: SpiritFileUploaderProps) => {
     fileQueue,
     findInQueue,
     id,
-    isFluid,
     onDismiss,
     updateQueue,
     ...restProps
   } = props;
 
-  const { classProps } = useFileUploaderStyleProps({ isFluid });
+  const { classProps } = useFileUploaderStyleProps();
   const { styleProps, props: transferProps } = useStyleProps(restProps);
 
   const contextValue = {

@@ -57,14 +57,8 @@ Add the `required` attribute to the input to mark it as required and add the
 
 ## Fluid
 
-```html
-<div class="Toggle Toggle--inputPositionEnd Toggle--fluid">
-  <div class="Toggle__text">
-    <label class="Label Label--inline" for="toggle-fluid">Toggle Label</label>
-  </div>
-  <input type="checkbox" id="toggle-fluid" class="Toggle__input" name="fluid" />
-</div>
-```
+Toggle is fluid by default. Use parent layout components like [Grid][grid], [Stack][stack], or [Container][container]
+to control the component width in page layouts.
 
 ## Helper Text
 
@@ -203,5 +197,8 @@ Use responsive breakpoint modifiers to change input position at different screen
 ```
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [mdn-checkbox]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md

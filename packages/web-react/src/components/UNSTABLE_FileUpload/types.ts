@@ -32,5 +32,4 @@ export interface UnstableFileUploadInputProps
 
 export interface UnstableFileUploadProps extends UnstableFileUploadInputProps {
   id: string;
-  isFluid?: boolean;
 }

@@ -67,19 +67,8 @@ Hidden label:
 
 Fluid width:
 
-```html
-<div class="TextField TextField--medium TextField--fluid">
-  <label for="text-field-fluid" class="Label">Label</label>
-  <input
-    type="text"
-    id="text-field-fluid"
-    class="TextField__input"
-    name="fluid"
-    placeholder="Placeholder"
-    value="Filled"
-  />
-</div>
-```
+TextField is fluid by default. Use parent layout components like [Grid][grid], [Stack][stack], or [Container][container]
+to control the component width in page layouts.
 
 Helper Text:
 
@@ -154,8 +143,7 @@ element:
 ### Grid
 
 For other use cases (wider input or input with unknown value length), we
-recommend placing them inside the Grid component and using `TextField--fluid`
-modifier to fill the available space.
+recommend placing inputs inside the Grid component to control their width.
 
 ## JavaScript Plugin for Password Toggle
 
@@ -319,5 +307,8 @@ JS interaction class when controlled by JavaScript:
 👉 Please note that responsive border radius is defined by design specifications.
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

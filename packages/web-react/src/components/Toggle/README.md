@@ -33,11 +33,9 @@ Add the `isRequired` prop to mark it as required.
 <Toggle id="toggle-hidden-label" label="Toggle Label" isLabelHidden />
 ```
 
-## Fluid
+## Layout
 
-```tsx
-<Toggle id="toggle-fluid" label="Toggle Label" isFluid />
-```
+Toggle is fluid by default. Use parent layout components such as `Grid`, `Stack`, or `Container` to control the rendered width and positioning.
 
 ## Helper Text
 
@@ -104,7 +102,6 @@ Pass an object to adjust the toggle position based on the [breakpoint][dictionar
 | `inputPosition`     | \[`string` \| `object`]                        | `end`   | ✕        | Position of the input (`start` or `end`), supports [responsive][readme-responsive] values |
 | `isChecked`         | `bool`                                         | `false` | ✕        | Whether is toggle checked                                                                 |
 | `isDisabled`        | `bool`                                         | `false` | ✕        | Whether is toggle disabled                                                                |
-| `isFluid`           | `bool`                                         | `false` | ✕        | Whether is toggle fluid                                                                   |
 | `isLabelHidden`     | `bool`                                         | `false` | ✕        | Whether is label hidden                                                                   |
 | `label`             | `ReactNode`                                    | -       | ✓        | Label text                                                                                |
 | `name`              | `string`                                       | -       | ✕        | Input name                                                                                |

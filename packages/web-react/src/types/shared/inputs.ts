@@ -69,10 +69,7 @@ export type InputBaseProps = {
   isDisabled?: boolean;
 };
 
-export interface TextInputProps extends TextInputBase {
-  /** Whether the width should be controlled by container */
-  isFluid?: boolean;
-}
+export type TextInputProps = TextInputBase;
 
 export interface HelperTextProps {
   /** Helper text content displayed below or near the form control. */

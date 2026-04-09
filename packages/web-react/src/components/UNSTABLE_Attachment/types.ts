@@ -30,7 +30,6 @@ export interface UnstableAttachmentBaseProps {
   editText?: string;
   iconName?: string;
   id: string;
-  isFluid?: boolean;
   label: string;
   onDismiss: () => void;
   onChange?: () => void;

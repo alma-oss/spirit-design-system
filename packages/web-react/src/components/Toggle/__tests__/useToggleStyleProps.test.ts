@@ -29,13 +29,6 @@ describe('useToggleStyleProps', () => {
     expect(result.current.classProps.root).toBe(`Toggle Toggle--inputPositionEnd Toggle--${state}`);
   });
 
-  it('should return fluid', () => {
-    const props = { id: 'toggle', label: 'text', isFluid: true } as SpiritToggleProps;
-    const { result } = renderHook(() => useToggleStyleProps(props));
-
-    expect(result.current.classProps.root).toBe('Toggle Toggle--inputPositionEnd Toggle--fluid');
-  });
-
   it('should return input with indicators', () => {
     const props = { id: 'toggle', label: 'text', hasIndicators: true } as SpiritToggleProps;
     const { result } = renderHook(() => useToggleStyleProps(props));

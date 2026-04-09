@@ -50,12 +50,8 @@ Filled</textarea
 
 Fluid width:
 
-```html
-<div class="TextArea TextArea--medium TextArea--fluid">
-  <label for="text-area-fluid" class="Label">Label</label>
-  <textarea id="text-area-fluid" class="TextArea__input" name="fluid" placeholder="Placeholder"></textarea>
-</div>
-```
+TextArea is fluid by default. Use parent layout components like [Grid][grid], [Stack][stack], or [Container][container]
+to control the component width in page layouts.
 
 Helper text:
 
@@ -87,8 +83,7 @@ The number of visible text lines for the control. Supported values are positive 
 ### Grid
 
 For other use cases (wider textarea or textarea with unknown value length), we
-recommend placing them inside the Grid component and using `TextArea--fluid`
-modifier to fill the available space.
+recommend placing textareas inside the Grid component to control their width.
 
 ## JavaScript Plugin for Auto-Resizing
 
@@ -191,5 +186,8 @@ Filled</textarea
 👉 Please note that responsive border radius is defined by design specifications.
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

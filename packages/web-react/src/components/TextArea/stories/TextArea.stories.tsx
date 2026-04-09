@@ -48,12 +48,6 @@ const meta: Meta<typeof TextArea> = {
         defaultValue: { summary: 'false' },
       },
     },
-    isFluid: {
-      control: 'boolean',
-      table: {
-        defaultValue: { summary: 'true' },
-      },
-    },
     isLabelHidden: {
       control: 'boolean',
       table: {
@@ -112,7 +106,6 @@ const meta: Meta<typeof TextArea> = {
     id: 'TextArea',
     isAutoResizing: false,
     isDisabled: false,
-    isFluid: false,
     isLabelHidden: false,
     isRequired: false,
     label: 'Label',

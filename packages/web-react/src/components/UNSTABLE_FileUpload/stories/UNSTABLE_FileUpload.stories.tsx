@@ -43,12 +43,6 @@ const meta: Meta<typeof UNSTABLE_FileUpload> = {
         defaultValue: { summary: 'false' },
       },
     },
-    isFluid: {
-      control: 'boolean',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
     isLabelHidden: {
       control: 'boolean',
       table: {
@@ -103,7 +97,6 @@ const meta: Meta<typeof UNSTABLE_FileUpload> = {
     helperText: 'Max file size is 10 MB',
     id: 'file-uploader',
     isDisabled: false,
-    isFluid: false,
     isLabelHidden: false,
     isMultiple: false,
     isRequired: false,

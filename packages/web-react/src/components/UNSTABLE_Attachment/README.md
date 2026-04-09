@@ -89,17 +89,9 @@ If `meta` is omitted or does not contain all six crop fields, the full image is 
 <UNSTABLE_Attachment key={id} id={id} onChange={() => console.log('edit clicked')} {...props} />
 ```
 
-### Fluid Width
+### Layout
 
-When the attachment list should stretch to the full width of its container (e.g. inside a fluid FileUpload), set `isFluid` on each attachment.
-
-```tsx
-<Stack aria-label="Attachments" elementType="ul" hasSpacing stackAlignment="stretch">
-  {items.map((item) => (
-    <UNSTABLE_Attachment key={item.id} id={item.id} isFluid label={item.label} onDismiss={() => onDismiss(item.id)} />
-  ))}
-</Stack>
-```
+Attachment rows are fluid by default. Use parent layout components such as `Grid`, `Stack`, or `Container` to control width and positioning.
 
 ## UNSTABLE_Attachment Props
 
@@ -109,7 +101,6 @@ When the attachment list should stretch to the full width of its container (e.g.
 | `elementType` | `ElementType` | `'li'`   | ✕        | The HTML element or React component to render. Use e.g. `"div"` when the attachment is not inside a list.                                                  |
 | `iconName`    | `string`      | `file`   | ✕        | Icon shown when no previewSlot is provided                                                                                                                 |
 | `id`          | `string`      | —        | ✓        | Attachment id                                                                                                                                              |
-| `isFluid`     | `bool`        | `false`  | ✕        | When true, the attachment row stretches to full width of its container (same as FileUploader fluid layout)                                                 |
 | `label`       | `string`      | —        | ✓        | Display name (e.g. file name)                                                                                                                              |
 | `onChange`    | `() => void`  | —        | ✕        | Callback when the edit button is clicked (no arguments); when provided, the edit button is shown                                                           |
 | `onDismiss`   | `() => void`  | —        | ✓        | Callback when the attachment should be removed (no arguments; parent typically closes over the item id)                                                    |

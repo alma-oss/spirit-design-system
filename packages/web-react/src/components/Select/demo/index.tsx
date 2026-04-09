@@ -8,7 +8,6 @@ import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import SelectDisabled from './SelectDisabled';
-import SelectFluid from './SelectFluid';
 import SelectHelperText from './SelectHelperText';
 import SelectHiddenLabel from './SelectHiddenLabel';
 import SelectPlaceholder from './SelectPlaceholder';
@@ -47,9 +46,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Validation Text with Icon">
         <SelectValidationWithIcon />
-      </DocsSection>
-      <DocsSection title="Fluid">
-        <SelectFluid />
       </DocsSection>
     </IconsProvider>
   </StrictMode>,

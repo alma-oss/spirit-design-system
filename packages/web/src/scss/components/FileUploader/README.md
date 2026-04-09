@@ -39,15 +39,8 @@ for its subcomponents:
 
 ### Fluid Width
 
-By adding the `FileUploader--fluid` modifier class, FileUploader can take up all
-the available horizontal space:
-
-```html
-<div class="FileUploader FileUploader--fluid" data-spirit-toggle="fileUploader">
-  <!-- FileUploaderInput -->
-  <!-- FileUploaderList -->
-</div>
-```
+FileUploader is fluid by default. Use parent layout components like [Grid][grid], [Stack][stack], or [Container][container]
+to control the component width in page layouts.
 
 ## FileUploaderInput
 
@@ -657,6 +650,8 @@ to the missing `name` attribute.
 Example: So if you set `name="attachments"` to the default input element, the attachments will then show `name="attachments[]"`.
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [learn-about-file-sizes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FileUploader/README.md#understanding-file-size-in-bytes
 [mdn-accept]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
@@ -664,4 +659,5 @@ Example: So if you set `name="attachments"` to the default input element, the at
 [mdn-multiple]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#multiple
 [mdn-template]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template
 [prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

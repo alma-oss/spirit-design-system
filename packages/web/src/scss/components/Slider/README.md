@@ -80,19 +80,8 @@ position = 100 * (value - min) / (max - min)
 
 ## Fluid Width
 
-```html
-<div class="Slider Slider--fluid">
-  <label for="slider-fluid" class="Label">Slider</label>
-  <input
-    class="Slider__input"
-    id="slider-fluid"
-    style="--slider-position: 30%"
-    type="range"
-    value="30"
-    oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
-  />
-</div>
-```
+Slider is fluid by default. Use parent layout components like [Grid][grid], [Stack][stack], or [Container][container]
+to control the component width in page layouts.
 
 ## Helper Text
 
@@ -212,6 +201,9 @@ JS interaction class when controlled by JavaScript:
 ```
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [html-spec-range]: https://html.spec.whatwg.org/multipage/input.html#range-state-(type=range)
 [mdn-range]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md

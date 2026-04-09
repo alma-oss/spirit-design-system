@@ -153,22 +153,8 @@ sure users give all needed details before sending the form.
 
 Fluid width:
 
-```html
-<div class="Select Select--medium Select--fluid">
-  <label for="select-fluid" class="Label">Label</label>
-  <div class="Select__inputContainer">
-    <select id="select-fluid" name="fluid" class="Select__input">
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-    </select>
-    <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
-        <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
-      </svg>
-    </div>
-  </div>
-</div>
-```
+Select is fluid by default. Use parent layout components like [Grid][grid], [Stack][stack], or [Container][container]
+to control the component width in page layouts.
 
 Usage with helper text:
 
@@ -327,4 +313,7 @@ JS interaction class when controlled by JavaScript:
 👉 Please note that responsive border radius is defined by design specifications.
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md

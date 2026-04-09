@@ -12,6 +12,7 @@ Introducing version 5 of the _spirit-web-react_ package.
 - [Component Changes](#component-changes)
   - [Collapse: `hideOnCollapse` Prop Renamed to `isDisposable`](#collapse-hideoncollapse-prop-renamed-to-isdisposable)
   - [Flex: Direction Prop Values Changed](#flex-direction-prop-values-changed)
+  - [Form Components: `isFluid` Prop Removed](#form-components-isfluid-prop-removed)
   - [Avatar: Component Name Stabilized](#avatar-component-name-stabilized)
   - [Slider: Component Name Stabilized](#slider-component-name-stabilized)
   - [EmptyState: Component Name Stabilized](#emptystate-component-name-stabilized)
@@ -64,6 +65,42 @@ Manually replace the prop values in your project.
 - `<Flex direction="row" … />` → `<Flex direction="horizontal" … />`
 - `<Flex direction="column" … />` → `<Flex direction="vertical" … />`
 - `<Flex direction={{ mobile: "column", tablet: "row" }} … />` → `<Flex direction={{ mobile: 'vertical', tablet: 'horizontal' }} … />`
+</details>
+
+### Form Components: `isFluid` Prop Removed
+
+The following form components are now fluid by default and no longer support the `isFluid` prop:
+
+- `TextField`
+- `TextArea`
+- `Select`
+- `Slider`
+- `Toggle`
+- `FieldGroup`
+- `FileUploader`
+- `UncontrolledFileUploader`
+- `UNSTABLE_FileUpload`
+- `UNSTABLE_Attachment`
+
+Use parent layout components such as `Grid`, `Stack`, or `Container` to control width and positioning.
+
+#### Migration Guide
+
+🪄 Use codemods to automatically update your codebase:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/forms-isFluid-prop-removal
+```
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Remove the `isFluid` prop from affected form components.
+
+- `<TextField id="name" label="Name" isFluid />` → `<TextField id="name" label="Name" />`
+- `<FileUploader id="files" isFluid … />` → `<FileUploader id="files" … />`
 </details>
 
 ### Avatar: Component Name Stabilized

@@ -62,7 +62,7 @@
 }
 
 @mixin box-field-root() {
-    display: inline-block;
+    display: block;
     width: form-fields-settings.$box-field-input-width;
 }
 

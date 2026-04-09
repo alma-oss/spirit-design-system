@@ -19,7 +19,6 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
     hasValidationIcon,
     id,
     isDisabled,
-    isFluid,
     isLabelHidden,
     isRequired,
     label,
@@ -28,7 +27,7 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
     ...rest
   } = props;
 
-  const { classProps } = useFieldGroupStyleProps({ hasValidationIcon, isFluid, isRequired, validationState });
+  const { classProps } = useFieldGroupStyleProps({ hasValidationIcon, isRequired, validationState });
   const { styleProps, props: transferProps } = useStyleProps(rest);
   const [ids, register] = useAriaIds(ariaDescribedBy);
   const ariaDescribedByProp = useAriaDescribedBy(ids);
