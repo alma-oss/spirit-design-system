@@ -39,13 +39,6 @@ const meta: Meta<typeof Slider> = {
         defaultValue: { summary: 'false' },
       },
     },
-    isFluid: {
-      control: 'boolean',
-      description: 'Whether the slider is fluid',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
     isLabelHidden: {
       control: 'boolean',
       description: 'Whether the label is hidden',
@@ -115,7 +108,6 @@ const meta: Meta<typeof Slider> = {
     helperText: '',
     id: 'slider',
     isDisabled: false,
-    isFluid: false,
     isLabelHidden: false,
     label: 'Label',
     max: SLIDER_DEFAULT_PROPS.max,

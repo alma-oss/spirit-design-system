@@ -85,16 +85,6 @@ describe('Select', () => {
     expect(screen.getByLabelText('Label')).toHaveClass('Select__input');
   });
 
-  it('should have fluid classname', () => {
-    render(
-      <Select id="test-select" label="Label" isFluid>
-        {selectChild}
-      </Select>,
-    );
-
-    expect(screen.getByText('Label').parentElement).toHaveClass('Select--fluid');
-  });
-
   it('should render label with html tags', () => {
     render(
       <Select
