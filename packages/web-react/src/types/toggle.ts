@@ -32,7 +32,6 @@ export interface ToggleProps
   inputPosition?: SingleOrResponsive<InputPositionType>;
   isChecked?: boolean;
   isDisabled?: boolean;
-  isFluid?: boolean;
   isLabelHidden?: boolean;
   label: ReactNode;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;

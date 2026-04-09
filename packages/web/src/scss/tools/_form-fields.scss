@@ -68,11 +68,6 @@
     --#{tokens.$css-variable-prefix}input-details-text-color: #{form-fields-settings.$input-details-text-color-state-disabled};
 }
 
-@mixin box-field-root() {
-    display: inline-block;
-    width: form-fields-settings.$box-field-input-width;
-}
-
 @mixin box-field-root-responsive-border-radius($field-name) {
     @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
         @include breakpoint.up($breakpoint-value) {

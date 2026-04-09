@@ -17,49 +17,11 @@ export interface TextFieldBaseStyles {
 }
 
 export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps, 'label'>): TextFieldBaseStyles {
-  const { isFluid, isMultiline, size, validationState, ...restProps } = props;
+  const { isMultiline, size, validationState, ...restProps } = props;
   const { isDisabled } = restProps;
 
-<<<<<<< HEAD
-  const textFieldBaseClass = useClassNamePrefix(isMultiline ? 'TextArea' : 'TextField');
-  const textFieldBaseDisabledClass = `${textFieldBaseClass}--disabled`;
-  const textFieldBaseFluidClass = `${textFieldBaseClass}--fluid`;
-  const textFieldBaseSizeClass = `${textFieldBaseClass}--${size}`;
-  const textFieldBaseValidationClass = `${textFieldBaseClass}--${validationState}`;
-  const textFieldBaseInputClass = `${textFieldBaseClass}__input`;
-  const textFieldBaseLabelClass = `${textFieldBaseClass}__label`;
-  const textFieldBaseLabelRequiredClass = `${textFieldBaseClass}__label--required`;
-  const textFieldBaseLabelHiddenClass = `${textFieldBaseClass}__label--hidden`;
-  const textFieldBaseValidationTextClass = `${textFieldBaseClass}__validationText`;
-  const textFieldBasePasswordToggleClass = `${textFieldBaseClass}__passwordToggle`;
-  const textFieldBasePasswordToggleButtonClass = `${textFieldBaseClass}__passwordToggle__button`;
-  const textFieldBasePasswordToggleIconClass = `${textFieldBaseClass}__passwordToggle__icon`;
-  const textFieldBaseHelperTextClass = `${textFieldBaseClass}__helperText`;
-  const textFieldBaseCounterClass = `${textFieldBaseClass}__counter`;
-
-  return {
-    classProps: {
-      root: classNames(textFieldBaseClass, {
-        [textFieldBaseDisabledClass]: isDisabled,
-        [textFieldBaseFluidClass]: isFluid,
-        [textFieldBaseValidationClass]: validationState,
-        [textFieldBaseSizeClass]: size,
-      }),
-      label: classNames(textFieldBaseLabelClass, {
-        [textFieldBaseLabelRequiredClass]: isRequired,
-        [textFieldBaseLabelHiddenClass]: isLabelHidden,
-      }),
-      input: textFieldBaseInputClass,
-      helperText: textFieldBaseHelperTextClass,
-      validationText: textFieldBaseValidationTextClass,
-      passwordToggle: textFieldBasePasswordToggleClass,
-      passwordToggleButton: textFieldBasePasswordToggleButtonClass,
-      passwordToggleIcon: textFieldBasePasswordToggleIconClass,
-      counter: textFieldBaseCounterClass,
-=======
   const TextFieldBaseClass = useClassNamePrefix(isMultiline ? 'TextArea' : 'TextField');
   const TextFieldBaseDisabledClass = `${TextFieldBaseClass}--disabled`;
-  const TextFieldBaseFluidClass = `${TextFieldBaseClass}--fluid`;
   const TextFieldBaseSizeClass = `${TextFieldBaseClass}--${size}`;
   const TextFieldBaseValidationClass = `${TextFieldBaseClass}--${validationState}`;
   const TextFieldBaseInputClass = `${TextFieldBaseClass}__input`;
@@ -67,23 +29,20 @@ export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps,
   const TextFieldBasePasswordToggleButtonClass = `${TextFieldBaseClass}__passwordToggle__button`;
   const TextFieldBasePasswordToggleIconClass = `${TextFieldBaseClass}__passwordToggle__icon`;
 
-  const rootStyles = classNames(TextFieldBaseClass, {
-    [TextFieldBaseDisabledClass]: isDisabled,
-    [TextFieldBaseFluidClass]: isFluid,
-    [TextFieldBaseValidationClass]: validationState,
-    [TextFieldBaseSizeClass]: size,
-  });
   const counterStyles = `${TextFieldBaseClass}__counter`;
 
   return {
     classProps: {
-      root: rootStyles,
+      root: classNames(TextFieldBaseClass, {
+        [TextFieldBaseDisabledClass]: isDisabled,
+        [TextFieldBaseValidationClass]: validationState,
+        [TextFieldBaseSizeClass]: size,
+      }),
       input: TextFieldBaseInputClass,
       passwordToggle: TextFieldBasePasswordToggleClass,
       passwordToggleButton: TextFieldBasePasswordToggleButtonClass,
       passwordToggleIcon: TextFieldBasePasswordToggleIconClass,
       counter: counterStyles,
->>>>>>> 92c17dc32 (refactor(web-react): extract `HelperText` and move `useAriaIds` to shared hooks #DS-2398)
     },
     props: {
       ...restProps,

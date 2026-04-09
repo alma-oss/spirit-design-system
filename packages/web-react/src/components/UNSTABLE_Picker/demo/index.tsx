@@ -7,7 +7,6 @@ import { UNSTABLE_PICKER_DOCS_DEMO_WRAPPER_CLASSNAME } from './constants';
 import PickerAggregated from './PickerAggregated';
 import PickerDefault from './PickerDefault';
 import PickerDisabled from './PickerDisabled';
-import PickerFluid from './PickerFluid';
 import PickerGroupedJobFilters from './PickerGroupedJobFilters';
 import PickerHelperText from './PickerHelperText';
 import PickerHiddenLabel from './PickerHiddenLabel';
@@ -48,9 +47,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
         </DocsSection>
         <DocsSection title="Disabled">
           <PickerDisabled />
-        </DocsSection>
-        <DocsSection title="Fluid">
-          <PickerFluid />
         </DocsSection>
         <DocsSection title="Salary Picker">
           <PickerSalary />

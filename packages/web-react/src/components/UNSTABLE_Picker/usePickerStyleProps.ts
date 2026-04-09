@@ -4,7 +4,6 @@ import { type SizesDictionaryType, type Validation } from '../../types';
 
 export interface UnstablePickerStyleProps<S = void> extends Validation {
   isDisabled?: boolean;
-  isFluid?: boolean;
   isLabelHidden?: boolean;
   isRequired?: boolean;
   size?: SizesDictionaryType<S>;
@@ -22,10 +21,9 @@ export interface UnstablePickerStyle {
 }
 
 export const usePickerStyleProps = (props: UnstablePickerStyleProps): UnstablePickerStyle => {
-  const { isDisabled, isFluid, size, validationState } = props;
+  const { isDisabled, size, validationState } = props;
   const pickerClass = useClassNamePrefix('UNSTABLE_Picker');
   const pickerDisabledClass = `${pickerClass}--disabled`;
-  const pickerFluidClass = `${pickerClass}--fluid`;
   const pickerSizeClass = `${pickerClass}--${size}`;
   const pickerValidationClass = `${pickerClass}--${validationState}`;
   const pickerInputContainerClass = `${pickerClass}__inputContainer`;
@@ -37,7 +35,6 @@ export const usePickerStyleProps = (props: UnstablePickerStyleProps): UnstablePi
     classProps: {
       root: classNames(pickerClass, {
         [pickerDisabledClass]: isDisabled,
-        [pickerFluidClass]: isFluid,
         [pickerSizeClass]: size,
         [pickerValidationClass]: validationState,
       }),
