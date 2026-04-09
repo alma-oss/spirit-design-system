@@ -6,6 +6,7 @@
 # This is where we will look for package.json/.nvmrc/etc.
 # If not set, defaults to the root directory.
 base = "/"
+functions = "/apps/storybook/netlify/functions/"
 
 # @see: https://docs.netlify.com/build/configure-builds/environment-variables/
 [build.environment]
@@ -41,3 +42,9 @@ for = "/*"
 [headers.values]
 # see a list of allowed values here: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
 access-control-allow-origin = "*"
+
+[[redirects]]
+from = "/mcp"
+to = "/.netlify/functions/storybook-mcp"
+status = 200
+force = true

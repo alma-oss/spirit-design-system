@@ -275,6 +275,23 @@ Netlify will also attach a link to the deploy preview to your PR so you can easi
 
 For a better UI experience when searching for the deploy preview link, you can use this [Gist with userContent.css][netlify-preview-gist].
 
+### Storybook MCP
+
+Storybook MCP is available for local Storybook development and for the public Netlify Storybook deployment.
+
+- Local MCP endpoint: `http://localhost:6006/mcp`
+- Netlify MCP endpoint: `https://spirit-design-system-storybook.netlify.app/mcp`
+
+To connect from an MCP client, use:
+
+```bash
+npx mcp-add --type http --url "http://localhost:6006/mcp" --scope project
+npx mcp-add --type http --url "https://spirit-design-system-storybook.netlify.app/mcp" --scope project
+```
+
+The Netlify endpoint is backed by a Netlify Function (`apps/storybook/netlify/functions/storybook-mcp.mjs`) that serves MCP from Storybook manifests generated in the static build. Keep this function and the `/mcp` redirect in sync when changing Storybook hosting configuration.
+See [Storybook MCP overview][storybook-mcp-overview] and [sharing guidance][storybook-mcp-sharing] for upstream details.
+
 ### End-to-End Testing
 
 For detailed information about writing and extending E2E tests, see the [E2E Testing Guidelines][e2e-testing] and [Accessibility Testing][accessibility-testing].
@@ -393,5 +410,7 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [prettier]: https://prettier.io/
 [publish-action]: https://github.com/alma-oss/spirit-design-system/actions/workflows/publish.yaml
 [release-notes-template]: https://almamedia.slack.com/docs/T0325RBAD/F08D6U6EAKH
+[storybook-mcp-overview]: https://storybook.js.org/docs/ai/mcp/overview
+[storybook-mcp-sharing]: https://storybook.js.org/docs/ai/mcp/sharing
 [typescript]: https://www.typescriptlang.org/
 [version-action]: https://github.com/alma-oss/spirit-design-system/actions/workflows/version.yaml
