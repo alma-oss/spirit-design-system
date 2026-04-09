@@ -27,7 +27,6 @@
 $_field-name: 'TextField';
 
 .TextField {
-    @include form-fields-tools.box-field-root();
     @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
 }
 
@@ -67,10 +66,6 @@ $_field-name: 'TextField';
             --text-field-input-width: #{$size}ch;
         }
     }
-}
-
-.TextField--fluid {
-    @include form-fields-tools.box-field-fluid();
 }
 
 .TextField__passwordToggle {

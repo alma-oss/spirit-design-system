@@ -10,8 +10,8 @@ export const LoginForm = () => (
     <Grid>
       <GridItem columnStart={{ mobile: 1, tablet: 5 }} columnEnd={{ mobile: -1, tablet: 9 }}>
         <Stack hasSpacing>
-          <TextField type="text" id="name" label="Name" isFluid />
-          <TextField type="password" id="password" label="Password" isFluid />
+          <TextField type="text" id="name" label="Name" />
+          <TextField type="password" id="password" label="Password" />
           <Checkbox id="keep-logged" label="Stay Logged In" />
           <Button>Login</Button>
         </Stack>

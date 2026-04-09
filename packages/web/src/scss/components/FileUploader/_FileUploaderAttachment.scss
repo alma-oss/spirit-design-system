@@ -1,6 +1,5 @@
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/accessibility';
-@use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/reset';
 @use '../../tools/typography';
 @use 'theme';
@@ -11,16 +10,12 @@
     display: flex;
     column-gap: theme.$attachment-column-gap;
     align-items: center;
-    width: var(--file-uploader-attachment-width, form-fields-settings.$box-field-input-width);
+    width: 100%;
     padding: theme.$attachment-padding;
     color: theme.$attachment-color;
     border: theme.$attachment-border;
     border-radius: theme.$attachment-border-radius;
     background-color: theme.$attachment-background;
-}
-
-.FileUploaderAttachment--fluid {
-    width: var(--file-uploader-attachment-width, 100%);
 }
 
 .FileUploaderAttachment__image {

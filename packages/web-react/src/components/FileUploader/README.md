@@ -3,6 +3,8 @@
 The FileUploader implementation is used to select files either by selecting files from the device itself,
 or by drag and drop if the device supports it. React package extends [web package][file-uploader].
 
+FileUploader and its attachments are fluid by default. Use parent layout components such as `Grid`, `Stack`, or `Container` to control width and positioning.
+
 ## Usage
 
 ### Basic
@@ -360,7 +362,6 @@ const customUpdate = (_event: MouseEvent, file: File) => {
 | `fileQueue`                           | `FileQueueMapType`                                                   | —       | ✓        | Queue of items to upload                                            |
 | `findInQueue`                         | `(key: string) => FileQueueMapType`                                  | —       | ✓        | A callback to find a particular item in the queue                   |
 | `id`                                  | `string`                                                             | —       | ✓        | FileUploader id                                                     |
-| `isFluid`                             | `bool`                                                               | —       | ✕        | When the field is supposed to be fluid                              |
 | `onDismiss`                           | `(key: string) => FileQueueMapType`                                  | —       | ✓        | A callback to delete a particular item from the queue               |
 | `updateQueue`                         | `(key: string, file: File, meta?: FileMetadata) => FileQueueMapType` | —       | ✓        | A callback to update a particular item in the queue                 |
 
@@ -489,7 +490,6 @@ via `inputProps` and `listProps`.
 | `inputName`           | `string`                                | —        | ✓        | FileUploaderInput name                                                                                                        |
 | `inputProps`          | `Partial<FileUploaderInputBaseProps>`   | —        | ✕        | Rest of FileUploaderInput props                                                                                               |
 | `isDisabled`          | `bool`                                  | —        | ✕        | Whether is field disabled                                                                                                     |
-| `isFluid`             | `bool`                                  | —        | ✕        | When the field is supposed to be fluid                                                                                        |
 | `isLabelHidden`       | `bool`                                  | —        | ✕        | Whether is input label hidden                                                                                                 |
 | `isMultiple`          | `bool`                                  | —        | ✕        | When multiple files can be selected at once                                                                                   |
 | `isRequired`          | `bool`                                  | —        | ✕        | Whether is field marked as required                                                                                           |

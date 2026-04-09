@@ -20,7 +20,6 @@ const UncontrolledFileUploader = (props: SpiritUncontrolledFileUploaderProps) =>
     inputProps,
     isLabelHidden,
     isDisabled,
-    isFluid,
     queueLimitBehavior,
     isMultiple,
     isRequired,
@@ -55,7 +54,6 @@ const UncontrolledFileUploader = (props: SpiritUncontrolledFileUploaderProps) =>
       findInQueue={findInQueue}
       updateQueue={updateQueue}
       errorMessages={errorMessages}
-      isFluid={isFluid}
       {...restProps}
     >
       <FileUploaderInput

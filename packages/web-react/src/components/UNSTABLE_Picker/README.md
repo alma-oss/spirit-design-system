@@ -209,7 +209,7 @@ export const SalaryPicker = () => {
         Salary
       </Heading>
       <Text size="small">Set your minimum expected salary.</Text>
-      <FieldGroup id="demo-picker-salary-field-group" isFluid isLabelHidden label="Salary">
+      <FieldGroup id="demo-picker-salary-field-group" isLabelHidden label="Salary">
         <Radio
           id="salary-no-limit"
           name="salary"
@@ -279,7 +279,6 @@ The trigger uses [Icon][web-react-icon-documentation] (`chevron-down` when close
 | `helperText`          | `ReactNode`                                               | —                                | ✕        | Helper text below the field                                                                  |
 | `isAggregated`        | `bool`                                                    | `false`                          | ✕        | If true, shows one summary tag instead of one tag per item                                   |
 | `isDisabled`          | `bool`                                                    | `false`                          | ✕        | Disables the picker and options                                                              |
-| `isFluid`             | `bool`                                                    | `false`                          | ✕        | Full width within the parent                                                                 |
 | `isLabelHidden`       | `bool`                                                    | `false`                          | ✕        | Visually hides the label (remains accessible)                                                |
 | `isRequired`          | `bool`                                                    | `false`                          | ✕        | Required indicator on the label (visual only)                                                |
 | `removeAllLabel`      | `string`                                                  | i18n `picker.removeAll`          | ✕        | Remove control label for aggregated tag                                                      |

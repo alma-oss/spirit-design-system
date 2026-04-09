@@ -73,7 +73,7 @@ const PickerSalary = () => {
         Salary
       </Heading>
       <Text size="small">Set your minimum expected salary.</Text>
-      <FieldGroup id="demo-picker-salary-field-group" isFluid isLabelHidden label="Salary">
+      <FieldGroup id="demo-picker-salary-field-group" isLabelHidden label="Salary">
         <Radio
           id="salary-no-limit"
           name="salary"

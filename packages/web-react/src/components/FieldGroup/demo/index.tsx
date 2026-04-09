@@ -5,7 +5,6 @@ import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import FieldGroupDefault from './FieldGroupDefault';
 import FieldGroupDisabled from './FieldGroupDisabled';
-import FieldGroupFluid from './FieldGroupFluid';
 import FieldGroupGroupedCheckboxes from './FieldGroupGroupedCheckboxes';
 import FieldGroupGroupedRadios from './FieldGroupGroupedRadios';
 import FieldGroupHelperText from './FieldGroupHelperText';
@@ -37,9 +36,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Validation Text with Icon">
         <FieldGroupValidationWithIcon />
-      </DocsSection>
-      <DocsSection title="Fluid">
-        <FieldGroupFluid />
       </DocsSection>
       <DocsSection title="Grouped Checkboxes">
         <FieldGroupGroupedCheckboxes />

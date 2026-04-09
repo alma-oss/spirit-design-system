@@ -48,18 +48,14 @@ Filled</textarea
 </div>
 ```
 
-Fluid width:
+## Layout
 
-```html
-<div class="TextArea TextArea--medium TextArea--fluid">
-  <label for="text-area-fluid" class="Label">Label</label>
-  <textarea id="text-area-fluid" class="TextArea__input" name="fluid" placeholder="Placeholder"></textarea>
-</div>
-```
+TextArea is fluid by default. Use parent layout components like [Grid][readme-grid], [Stack][readme-stack], or [Container][readme-container]
+to control the component width in page layouts.
 
 Helper text:
 
-To add helper text, use the [HelperText][helper-text] component:
+To add helper text, use the [HelperText][readme-helper-text] component:
 
 ```html
 <div class="TextArea TextArea--medium">
@@ -87,8 +83,7 @@ The number of visible text lines for the control. Supported values are positive 
 ### Grid
 
 For other use cases (wider textarea or textarea with unknown value length), we
-recommend placing them inside the Grid component and using `TextArea--fluid`
-modifier to fill the available space.
+recommend placing textareas inside the Grid component to control their width.
 
 ## JavaScript Plugin for Auto-Resizing
 
@@ -191,5 +186,8 @@ Filled</textarea
 👉 Please note that responsive border radius is defined by design specifications.
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
-[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

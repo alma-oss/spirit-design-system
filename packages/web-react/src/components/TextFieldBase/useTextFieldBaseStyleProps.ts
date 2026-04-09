@@ -17,12 +17,11 @@ export interface TextFieldBaseStyles {
 }
 
 export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps, 'label'>): TextFieldBaseStyles {
-  const { isFluid, isMultiline, size, validationState, ...restProps } = props;
+  const { isMultiline, size, validationState, ...restProps } = props;
   const { isDisabled } = restProps;
 
   const TextFieldBaseClass = useClassNamePrefix(isMultiline ? 'TextArea' : 'TextField');
   const TextFieldBaseDisabledClass = `${TextFieldBaseClass}--disabled`;
-  const TextFieldBaseFluidClass = `${TextFieldBaseClass}--fluid`;
   const TextFieldBaseSizeClass = `${TextFieldBaseClass}--${size}`;
   const TextFieldBaseValidationClass = `${TextFieldBaseClass}--${validationState}`;
   const TextFieldBaseInputClass = `${TextFieldBaseClass}__input`;
@@ -32,7 +31,6 @@ export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps,
 
   const rootStyles = classNames(TextFieldBaseClass, {
     [TextFieldBaseDisabledClass]: isDisabled,
-    [TextFieldBaseFluidClass]: isFluid,
     [TextFieldBaseValidationClass]: validationState,
     [TextFieldBaseSizeClass]: size,
   });

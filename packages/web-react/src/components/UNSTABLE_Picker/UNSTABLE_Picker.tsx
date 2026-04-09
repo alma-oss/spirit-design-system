@@ -44,7 +44,6 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     id,
     isAggregated = false,
     isDisabled = false,
-    isFluid = false,
     isLabelHidden = false,
     isOpen,
     isRequired = false,
@@ -71,7 +70,6 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
   });
   const { classProps } = usePickerStyleProps({
     isDisabled,
-    isFluid,
     isLabelHidden,
     isRequired,
     size,

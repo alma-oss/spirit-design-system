@@ -78,25 +78,14 @@ position = 100 * (value - min) / (max - min)
 </div>
 ```
 
-## Fluid Width
+## Layout
 
-```html
-<div class="Slider Slider--fluid">
-  <label for="slider-fluid" class="Label">Slider</label>
-  <input
-    class="Slider__input"
-    id="slider-fluid"
-    style="--slider-position: 30%"
-    type="range"
-    value="30"
-    oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
-  />
-</div>
-```
+Slider is fluid by default. Use parent layout components like [Grid][readme-grid], [Stack][readme-stack], or [Container][readme-container]
+to control the component width in page layouts.
 
 ## Helper Text
 
-To add helper text, use the [HelperText][helper-text] component:
+To add helper text, use the [HelperText][readme-helper-text] component:
 
 ```html
 <div class="Slider">
@@ -212,6 +201,9 @@ JS interaction class when controlled by JavaScript:
 ```
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
-[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [html-spec-range]: https://html.spec.whatwg.org/multipage/input.html#range-state-(type=range)
 [mdn-range]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
+[readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md

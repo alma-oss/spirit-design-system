@@ -7,7 +7,6 @@ import TextAreaAutoResize from './TextAreaAutoResize';
 import TextAreaCounter from './TextAreaCounter';
 import TextAreaDefault from './TextAreaDefault';
 import TextAreaDisabled from './TextAreaDisabled';
-import TextAreaFluid from './TextAreaFluid';
 import TextAreaHelperText from './TextAreaHelperText';
 import TextAreaHiddenLabel from './TextAreaHiddenLabel';
 import TextAreaInline from './TextAreaInline';
@@ -42,9 +41,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Validation Text with Icon">
         <TextAreaValidationWithIcon />
-      </DocsSection>
-      <DocsSection title="Fluid">
-        <TextAreaFluid />
       </DocsSection>
       <DocsSection title="Inline">
         <TextAreaInline />

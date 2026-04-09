@@ -1,5 +1,4 @@
 import { renderHook } from '@testing-library/react';
-import { type SpiritFieldGroupProps } from '../../../types';
 import { useFieldGroupStyleProps } from '../useFieldGroupStyleProps';
 
 describe('useFieldGroupStyleProps', () => {
@@ -10,15 +9,15 @@ describe('useFieldGroupStyleProps', () => {
     expect(result.current.classProps.root).toBe('FieldGroup');
   });
 
-  it('should return FieldGroup fluid and danger classes', () => {
-    const props: SpiritFieldGroupProps = { id: 'example-id', label: 'Label', isFluid: true, validationState: 'danger' };
+  it('should return FieldGroup danger class', () => {
+    const props = { validationState: 'danger' as const };
     const { result } = renderHook(() => useFieldGroupStyleProps(props));
 
-    expect(result.current.classProps.root).toBe('FieldGroup FieldGroup--fluid FieldGroup--danger');
+    expect(result.current.classProps.root).toBe('FieldGroup FieldGroup--danger');
   });
 
   it('should return fields class', () => {
-    const props: SpiritFieldGroupProps = { id: 'example-id', label: 'Label' };
+    const props = {};
     const { result } = renderHook(() => useFieldGroupStyleProps(props));
 
     expect(result.current.classProps.fields).toBe('FieldGroup__fields');

@@ -4,6 +4,8 @@ The UNSTABLE FileUpload is a visual-only component for selecting files.
 It follows the web contract for `UNSTABLE_FileUpload` and composes with `UNSTABLE_File`,
 but does **not** include internal validation, form integration, or error handling.
 
+UNSTABLE_FileUpload is fluid by default. Use parent layout components such as [`Grid`][readme-grid], [`Stack`][readme-stack], or [`Container`][readme-container] to control width and positioning.
+
 The user is responsible for providing their own queue management functions (`addToQueue`, `onDismiss`, etc.)
 which the component wires to the appropriate UI elements (input, drag-and-drop, dismiss buttons).
 
@@ -91,7 +93,7 @@ The consumer is responsible for setting the validation state based on their own 
 | `inputRef`               | `MutableRefObject<HTMLInputElement>` | —        | ✕        | Input element reference                                                                                                                                                                                                                                            |
 | `isCompact`              | `bool`                               | —        | ✕        | Compact drop-zone layout (`UNSTABLE_FileUploadInput__dropZone--compact`)                                                                                                                                                                                           |
 | `isDisabled`             | `bool`                               | —        | ✕        | Whether is field disabled                                                                                                                                                                                                                                          |
-| `isDragAndDropSupported` | `bool`                               | —        | ✕        | When set, overrides drag-and-drop support (dashed border / DnD handlers); use `false` for “dragging not available” examples.                                                                                                                                       |
+| `isDragAndDropSupported` | `bool`                               | —        | ✕        | When set, overrides drag-and-drop support (dashed border / DnD handlers); use `false` for "dragging not available" examples.                                                                                                                                       |
 | `isLabelHidden`          | `bool`                               | —        | ✕        | Whether is input label hidden                                                                                                                                                                                                                                      |
 | `isMultiple`             | `bool`                               | —        | ✕        | When multiple files can be selected at once                                                                                                                                                                                                                        |
 | `isRequired`             | `bool`                               | —        | ✕        | Whether is field marked as required                                                                                                                                                                                                                                |
@@ -119,10 +121,13 @@ The files list is built with the **Stack** component: use `<Stack aria-label="Up
 This component uses the `Icon` component internally. To ensure correct rendering,
 please refer to the [Icon component documentation][web-react-icon-documentation] for setup instructions.
 
-[file-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_File/README.md
 [div-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div
-[stack-docs]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md
+[file-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_File/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Container/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
+[readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[stack-docs]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md
 [web-react-icon-documentation]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#-usage

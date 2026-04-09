@@ -54,7 +54,7 @@ $box-field-input-placeholder-color-state-default: tokens.$form-field-filled-plac
 $box-field-input-placeholder-color-state-disabled: tokens.$disabled-content;
 $box-field-input-padding-x: tokens.$space-600;
 $box-field-input-padding-y: calc(#{tokens.$space-500} - #{tokens.$border-width-100});
-$box-field-input-width: 18rem;
+$box-field-input-width: 100%;
 
 $box-field-size-dictionary: dictionaries.$size;
 $box-field-size-config: (

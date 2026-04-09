@@ -80,12 +80,6 @@ const meta: Meta<typeof Select> = {
         defaultValue: { summary: 'false' },
       },
     },
-    isFluid: {
-      control: 'boolean',
-      table: {
-        defaultValue: { summary: 'true' },
-      },
-    },
     isLabelHidden: {
       control: 'boolean',
       table: {
@@ -134,7 +128,6 @@ const meta: Meta<typeof Select> = {
     helperText: 'Helper text',
     id: 'Select',
     isDisabled: false,
-    isFluid: false,
     isLabelHidden: false,
     isRequired: false,
     label: 'Label',
