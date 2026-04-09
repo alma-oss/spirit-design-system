@@ -309,13 +309,13 @@ export const useButtonAria = (props: UseButtonAriaProps): ButtonAria => {
 
 ## Translations
 
-Default component copy lives in **`src/translations/defaults.ts`** as nested **`defaultLabels`** (keys use `camelCase` formatting with dot notation, e.g. `common.close`, `textField.password.show`).
+Default component copy lives in **`src/translations/defaults.ts`** as nested **`defaultTranslations`** (keys use `camelCase` formatting with dot notation, e.g. `common.close`, `textField.password.show`).
 
 Implementation uses **`useI18n`** in `src/hooks/useI18n.ts` and optional **`I18nProvider`** in `src/context/I18nContext.tsx` (supports nested overrides and locale catalogs, then defaults). **Consumer-facing documentation** (`I18nProvider`, locale config, `useI18n`, placeholders) is in the [package README][web-react-readme].
 
 ### Adding New Keys
 
-1. Add the key to `defaultLabels` in `src/translations/defaults.ts` following the nested structure (e.g. `pagination.goToPage`, `textField.password.show`).
+1. Add the key to `defaultTranslations` in `src/translations/defaults.ts` following the nested structure (e.g. `pagination.goToPage`, `textField.password.show`).
 2. Use the key in components via `t('your.namespace.key')`.
 
 [web-react-readme]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react/README.md
