@@ -17,7 +17,6 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
     hasIndicators = false,
     inputPosition = InputPositions.END,
     isDisabled = false,
-    isFluid = false,
     isLabelHidden = false,
     isRequired = false,
     validationState,
@@ -25,7 +24,6 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
   } = props;
 
   const toggleClass = useClassNamePrefix('Toggle');
-  const toggleFluidClass = `${toggleClass}--fluid`;
   const toggleDisabledClass = `${toggleClass}--disabled`;
   const toggleLabelHiddenClass = `${toggleClass}--labelHidden`;
   const toggleTextClass = `${toggleClass}__text`;
@@ -36,7 +34,6 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
 
   const rootClass = classNames(toggleClass, {
     [toggleInputPositionClass]: toggleInputPositionClass,
-    [toggleFluidClass]: isFluid,
     [toggleDisabledClass]: isDisabled,
     [toggleLabelHiddenClass]: isLabelHidden,
     [toggleValidationClass]: validationState,

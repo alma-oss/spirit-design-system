@@ -64,7 +64,7 @@ const FooterMinimalistic = () => (
         {/* Language switch */}
         <GridItem columnStart={{ desktop: 11 }} columnEnd={{ desktop: 13 }}>
           <div className="text-desktop-right">
-            <Select id="select-language" name="selectLanguage" label="Language" isLabelHidden isFluid>
+            <Select id="select-language" name="selectLanguage" label="Language" isLabelHidden>
               <option value="en">English</option>
               <option value="cs">Čeština</option>
             </Select>

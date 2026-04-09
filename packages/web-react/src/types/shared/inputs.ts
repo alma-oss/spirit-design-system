@@ -69,10 +69,7 @@ export type InputBaseProps = {
   isDisabled?: boolean;
 };
 
-export interface TextInputProps extends TextInputBase {
-  /** Whether the width should be controlled by container */
-  isFluid?: boolean;
-}
+export type TextInputProps = TextInputBase;
 
 export interface DetailsProps {
   /** Content for the details section under Checkbox's or Toggle's label, typically containing modal triggers */

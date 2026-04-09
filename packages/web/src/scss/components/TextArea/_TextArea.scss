@@ -10,7 +10,6 @@
 $_field-name: 'TextArea';
 
 .TextArea {
-    @include form-fields-tools.box-field-root();
     @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
 }
 
@@ -22,10 +21,6 @@ $_field-name: 'TextArea';
         map.get(theme.$input-size-config, medium, height)
     );
     resize: vertical;
-}
-
-.TextArea--fluid {
-    @include form-fields-tools.box-field-fluid();
 }
 
 .TextArea > .TextArea__input:focus-visible {

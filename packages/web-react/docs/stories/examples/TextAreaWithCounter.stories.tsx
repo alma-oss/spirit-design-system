@@ -10,7 +10,6 @@ type TextAreaWithCounterType = {
   id: string;
   isAutoResizing: boolean;
   isDisabled: boolean;
-  isFluid: boolean;
   isRequired: boolean;
   label: string;
   counterThreshold: number;
@@ -50,12 +49,6 @@ export default {
       },
     },
     isDisabled: {
-      control: 'boolean',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
-    isFluid: {
       control: 'boolean',
       table: {
         defaultValue: { summary: 'false' },
@@ -128,7 +121,6 @@ export default {
     id: 'textarea-counter-example',
     isAutoResizing: true,
     isDisabled: false,
-    isFluid: false,
     isRequired: true,
     label: 'Message',
     counterThreshold: 200,

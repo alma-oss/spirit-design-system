@@ -17,7 +17,6 @@ $_full-field-name: 'UNSTABLE_Picker';
 $_field-name: spirit-string.remove-prefix($_full-field-name, 'UNSTABLE_');
 
 .UNSTABLE_Picker {
-    @include form-fields-tools.box-field-root();
     @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
 }
 

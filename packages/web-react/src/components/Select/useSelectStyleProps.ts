@@ -4,7 +4,6 @@ import { type SizesDictionaryType, type Validation } from '../../types';
 
 export interface UseSelectStyleProps<S = void> extends Validation {
   isDisabled?: boolean;
-  isFluid?: boolean;
   isLabelHidden?: boolean;
   size?: SizesDictionaryType<S>;
 }
@@ -21,12 +20,10 @@ export interface UseSelectStyleReturn {
 
 export const useSelectStyleProps = ({
   isDisabled,
-  isFluid,
   size,
   validationState,
 }: UseSelectStyleProps): UseSelectStyleReturn => {
   const selectRootClass = useClassNamePrefix('Select');
-  const selectRootFluidClass = `${selectRootClass}--fluid`;
   const selectRootDisabledClass = `${selectRootClass}--disabled`;
   const selectRootSizeClass = `${selectRootClass}--${size}`;
   const selectRootValidationClass = `${selectRootClass}--${validationState}`;
@@ -38,7 +35,6 @@ export const useSelectStyleProps = ({
     classProps: {
       root: classNames(selectRootClass, {
         [selectRootDisabledClass]: isDisabled,
-        [selectRootFluidClass]: isFluid,
         [selectRootSizeClass]: size,
         [selectRootValidationClass]: validationState,
       }),

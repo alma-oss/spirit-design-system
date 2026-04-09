@@ -4,7 +4,6 @@ import TextField from '../TextField';
 const TextFieldInputSize = () => (
   <TextField
     id="textfield-size"
-    isFluid
     label="4000 (in Roman numerals)"
     name="textfieldSize"
     placeholder="Placeholder"

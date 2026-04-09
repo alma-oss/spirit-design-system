@@ -42,12 +42,6 @@ const meta: Meta<typeof UncontrolledFileUploader> = {
         defaultValue: { summary: 'false' },
       },
     },
-    isFluid: {
-      control: 'boolean',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
     isLabelHidden: {
       control: 'boolean',
       table: {
@@ -117,7 +111,6 @@ const meta: Meta<typeof UncontrolledFileUploader> = {
     labelText: 'or drag and drop here',
     helperText: 'Max file size is 10 MB',
     isDisabled: false,
-    isFluid: false,
     isLabelHidden: false,
     isMultiple: false,
     maxUploadedFiles: 1,

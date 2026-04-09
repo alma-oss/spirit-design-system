@@ -65,7 +65,7 @@ overflow its scrollable container or get clipped.
       </button>
     </div>
     <div role="dialog" class="DropdownPopover" data-spirit-placement="bottom-start" id="picker-popover">
-      <fieldset class="FieldGroup FieldGroup--fluid">
+      <fieldset class="FieldGroup">
         <legend class="accessibility-hidden">Language</legend>
         <div class="FieldGroup__fields">
           <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
@@ -310,7 +310,7 @@ area (remove buttons) to disable the Picker.
       </button>
     </div>
     <div role="dialog" class="DropdownPopover" data-spirit-placement="bottom-start" id="picker-disabled">
-      <fieldset class="FieldGroup FieldGroup--fluid" disabled>
+      <fieldset class="FieldGroup" disabled>
         <legend class="accessibility-hidden">Language</legend>
         <div class="FieldGroup__fields">
           <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
@@ -323,22 +323,6 @@ area (remove buttons) to disable the Picker.
         </div>
       </fieldset>
     </div>
-  </div>
-</div>
-```
-
-## Fluid
-
-Use the `UNSTABLE_Picker--fluid` modifier to make the Picker span the full width of its parent.
-
-```html
-<div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--fluid">
-  <span class="Label">Languages</span>
-  <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
-      <!-- … -->
-    </div>
-    <!-- … -->
   </div>
 </div>
 ```

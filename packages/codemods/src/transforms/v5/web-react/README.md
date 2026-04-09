@@ -212,4 +212,37 @@ Responsive margin values are also converted:
 
 Note: If all values in a responsive object are `space-400`, the spacing prop is not set (default behavior).
 
+### `v5/web-react/forms-isFluid-prop-removal` — Remove `isFluid` Prop From Form Components
+
+This codemod removes the `isFluid` prop from form components that are now fluid by default.
+
+Updated components:
+
+- `FieldGroup`
+- `FileUploader`
+- `Select`
+- `Slider`
+- `TextArea`
+- `TextField`
+- `Toggle`
+- `UncontrolledFileUploader`
+- `UNSTABLE_FileUpload`
+- `UNSTABLE_Picker`
+- `UNSTABLE_UncontrolledPicker`
+
+The codemod intentionally does not touch non-form components such as `Container`, `PartnerLogo`, and `SegmentedControl`.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/forms-isFluid-prop-removal
+```
+
+#### Example
+
+```diff
+- <TextField id="name" label="Name" isFluid />
++ <TextField id="name" label="Name" />
+```
+
 [mdn-column-gap]: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/column-gap

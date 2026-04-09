@@ -37,17 +37,10 @@ for its subcomponents:
 </div>
 ```
 
-### Fluid Width
+### Layout
 
-By adding the `FileUploader--fluid` modifier class, FileUploader can take up all
-the available horizontal space:
-
-```html
-<div class="FileUploader FileUploader--fluid" data-spirit-toggle="fileUploader">
-  <!-- FileUploaderInput -->
-  <!-- FileUploaderList -->
-</div>
-```
+FileUploader is fluid by default. Use parent layout components like [Grid][readme-grid], [Stack][readme-stack], or [Container][readme-container]
+to control the component width in page layouts.
 
 ## FileUploaderInput
 
@@ -58,7 +51,7 @@ If supported by the device, FileUploaderInput automatically turns on the
 drag-and-drop functionality (signalized by the `has-drag-and-drop` state class
 on the root element).
 
-To add helper text, use the [HelperText][helper-text] component:
+To add helper text, use the [HelperText][readme-helper-text] component:
 
 ```html
 <div class="FileUploaderInput" data-spirit-element="wrapper">
@@ -657,11 +650,14 @@ to the missing `name` attribute.
 Example: So if you set `name="attachments"` to the default input element, the attachments will then show `name="attachments[]"`.
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
-[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [learn-about-file-sizes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FileUploader/README.md#understanding-file-size-in-bytes
 [mdn-accept]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
 [mdn-input-file]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
 [mdn-multiple]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#multiple
 [mdn-template]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template
 [prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

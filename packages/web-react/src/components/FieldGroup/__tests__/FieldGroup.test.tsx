@@ -108,16 +108,6 @@ describe('FieldGroup', () => {
     expect(screen.getAllByText('Label')[1]).toBeUndefined();
   });
 
-  it('should have className isFluid', () => {
-    render(
-      <FieldGroup id="example-field-group" label="Label" isFluid>
-        {itemList}
-      </FieldGroup>,
-    );
-
-    expect(screen.getByRole('group')).toHaveClass('FieldGroup--fluid');
-  });
-
   it('should have correct id', () => {
     render(
       <FieldGroup id="example-field-group" label="Label" helperText="helper text">

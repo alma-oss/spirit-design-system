@@ -13,7 +13,6 @@ describe('usePickerStyleProps', () => {
     const { result } = renderHook(() =>
       usePickerStyleProps({
         isDisabled: true,
-        isFluid: true,
         size: Sizes.SMALL,
         validationState: 'danger',
       }),
@@ -21,7 +20,6 @@ describe('usePickerStyleProps', () => {
 
     expect(result.current.classProps.root).toContain('UNSTABLE_Picker--small');
     expect(result.current.classProps.root).toContain('UNSTABLE_Picker--disabled');
-    expect(result.current.classProps.root).toContain('UNSTABLE_Picker--fluid');
     expect(result.current.classProps.root).toContain('UNSTABLE_Picker--danger');
   });
 });

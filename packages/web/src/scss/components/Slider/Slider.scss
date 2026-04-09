@@ -22,10 +22,6 @@
 
 $_field-name: 'Slider';
 
-.Slider {
-    @include form-fields-tools.box-field-root();
-}
-
 .Slider__input {
     appearance: none;
     width: 100%;
@@ -112,10 +108,6 @@ $_field-name: 'Slider';
     &:focus-visible::-moz-range-thumb {
         @include tools.thumb-focus();
     }
-}
-
-.Slider--fluid {
-    @include form-fields-tools.box-field-fluid();
 }
 
 @include form-fields-tools.input-field-validation-states($_field-name);

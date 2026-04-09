@@ -44,7 +44,6 @@ const meta: Meta<typeof Toggle> = {
     id: 'toggle',
     isRequired: false,
     isDisabled: false,
-    isFluid: false,
     isChecked: false,
     inputPosition: InputPositions.END,
     label: 'Toggle Label',
