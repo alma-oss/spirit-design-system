@@ -21,12 +21,6 @@ describe('useSliderStyleProps', () => {
     expect(result.current.classProps.root).toContain('Slider--disabled');
   });
 
-  it('should return fluid class', () => {
-    const { result } = renderHook(() => useSliderStyleProps({ ...defaultProps, isFluid: true }));
-
-    expect(result.current.classProps.root).toContain('Slider--fluid');
-  });
-
   it('should return validation state class', () => {
     const { result } = renderHook(() => useSliderStyleProps({ ...defaultProps, validationState: 'danger' }));
 

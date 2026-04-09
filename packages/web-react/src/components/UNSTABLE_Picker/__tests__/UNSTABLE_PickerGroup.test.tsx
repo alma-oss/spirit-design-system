@@ -45,7 +45,7 @@ describe('UNSTABLE_PickerGroup', () => {
 
   ariaAttributesTest(PickerGroupTest);
 
-  it('should pass isFluid, isLabelHidden, and label to FieldGroup', () => {
+  it('should pass isLabelHidden and label to FieldGroup', () => {
     renderWithPopoverContext(
       <UNSTABLE_PickerGroup label="Languages">
         <span>child</span>
@@ -55,7 +55,7 @@ describe('UNSTABLE_PickerGroup', () => {
     const group = screen.getByRole('group', { name: 'Languages' });
 
     expect(group.localName).toBe('fieldset');
-    expect(group).toHaveClass('FieldGroup', 'FieldGroup--fluid');
+    expect(group).toHaveClass('FieldGroup');
     expect(screen.getByText('child')).toBeInTheDocument();
   });
 

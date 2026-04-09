@@ -5,7 +5,6 @@ import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import SliderDefault from './SliderDefault';
 import SliderDisabled from './SliderDisabled';
-import SliderFluid from './SliderFluid';
 import SliderHelperText from './SliderHelperText';
 import SliderHiddenLabel from './SliderHiddenLabel';
 import SliderValidation from './SliderValidation';
@@ -31,9 +30,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Validation Text with Icon" stackAlignment="stretch">
         <SliderValidationWithIcon />
-      </DocsSection>
-      <DocsSection title="Fluid" stackAlignment="stretch">
-        <SliderFluid />
       </DocsSection>
     </IconsProvider>
   </StrictMode>,

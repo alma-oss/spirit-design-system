@@ -42,12 +42,6 @@ const meta: Meta<typeof TextField> = {
         defaultValue: { summary: 'false' },
       },
     },
-    isFluid: {
-      control: 'boolean',
-      table: {
-        defaultValue: { summary: 'true' },
-      },
-    },
     isLabelHidden: {
       control: 'boolean',
       table: {
@@ -109,7 +103,6 @@ const meta: Meta<typeof TextField> = {
     helperText: 'Helper text',
     id: 'TextField',
     isDisabled: false,
-    isFluid: false,
     isLabelHidden: false,
     isRequired: false,
     label: 'Label',
