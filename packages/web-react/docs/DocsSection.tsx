@@ -1,3 +1,5 @@
+'use client';
+
 import React, { type ReactNode } from 'react';
 import { Container, Section, type StyleProps, Tag, useStyleProps } from '../src';
 import { mergeStyleProps } from '../src/utils';

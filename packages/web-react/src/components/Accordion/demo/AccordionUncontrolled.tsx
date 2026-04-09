@@ -1,3 +1,5 @@
+'use client';
+
 import { type StoryFn } from '@storybook/react';
 import React from 'react';
 import { Link } from '../../Link';

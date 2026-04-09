@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { type AccordionOpenStateType } from '../../../types';
 import { Link } from '../../Link';

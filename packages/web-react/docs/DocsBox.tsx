@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames';
 import React, { type ReactNode } from 'react';
 import { type SizesDictionaryType, type StyleProps, useClassNamePrefix, useStyleProps } from '../src';
