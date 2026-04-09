@@ -11,10 +11,6 @@ $_field-name: 'Toggle';
     display: flex;
     align-items: start;
     justify-content: space-between;
-    max-width: theme.$max-width;
-}
-
-.Toggle--fluid {
     max-width: none;
 }
 

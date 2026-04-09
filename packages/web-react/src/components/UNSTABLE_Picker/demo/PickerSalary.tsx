@@ -90,7 +90,6 @@ const PickerSalary = () => {
           id="salary-textfield"
           label="Salary"
           isLabelHidden
-          isFluid
           type="number"
           value={String(fromAmount)}
           onChange={(e) => updateSalaryFromValue(e.currentTarget.value)}
@@ -98,7 +97,6 @@ const PickerSalary = () => {
         <Slider
           id="demo-picker-salary-slider"
           isLabelHidden
-          isFluid
           label="Salary"
           max={SALARY_FROM_MAX}
           min={SALARY_FROM_MIN}

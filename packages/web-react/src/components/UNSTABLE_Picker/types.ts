@@ -53,7 +53,6 @@ export interface UnstablePickerBaseProps<S = void>
   id: string;
   isAggregated?: boolean;
   isDisabled?: boolean;
-  isFluid?: boolean;
   isLabelHidden?: boolean;
   isRequired?: boolean;
   label: string;
@@ -89,7 +88,7 @@ export interface UnstablePickerTagProps extends Omit<
   removeLabel?: string;
 }
 
-export interface UnstablePickerGroupProps extends Omit<SpiritFieldGroupProps, 'id' | 'isFluid' | 'isLabelHidden'> {
+export interface UnstablePickerGroupProps extends Omit<SpiritFieldGroupProps, 'id' | 'isLabelHidden'> {
   children: ReactNode;
   label: string;
 }

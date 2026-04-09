@@ -83,15 +83,6 @@ describe('Toggle', () => {
     expect(screen.getByRole('checkbox')).toBeDisabled();
   });
 
-  it('should have correct classname if fluid', () => {
-    render(<Toggle id="test-toggle" label="Toggle Label" isFluid />);
-
-    const checkbox = screen.getByRole('checkbox');
-
-    expect(checkbox.parentElement).toHaveClass('Toggle');
-    expect(checkbox.parentElement).toHaveClass('Toggle--fluid');
-  });
-
   it('should have indicators classname', () => {
     render(<Toggle id="test-toggle" label="Toggle Label" hasIndicators />);
 

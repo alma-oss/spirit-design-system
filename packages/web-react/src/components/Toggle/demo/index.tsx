@@ -7,7 +7,6 @@ import ToggleConsentEmphasizedLabel from './ToggleConsentEmphasizedLabel';
 import ToggleConsentFullExample from './ToggleConsentFullExample';
 import ToggleDefault from './ToggleDefault';
 import ToggleDisabled from './ToggleDisabled';
-import ToggleFluid from './ToggleFluid';
 import ToggleHelperText from './ToggleHelperText';
 import ToggleHiddenLabel from './ToggleHiddenLabel';
 import ToggleIndicators from './ToggleIndicators';
@@ -30,9 +29,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Hidden Label" stackAlignment="stretch">
         <ToggleHiddenLabel />
-      </DocsSection>
-      <DocsSection title="Fluid" stackAlignment="stretch">
-        <ToggleFluid />
       </DocsSection>
       <DocsSection title="Disabled" stackAlignment="stretch">
         <ToggleDisabled />
