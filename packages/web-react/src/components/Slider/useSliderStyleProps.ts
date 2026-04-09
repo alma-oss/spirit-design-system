@@ -13,11 +13,10 @@ export interface SliderStyles {
 }
 
 export function useSliderStyleProps(props: UseSliderStyleProps): SliderStyles {
-  const { isDisabled, isFluid, validationState, ...restProps } = props;
+  const { isDisabled, validationState, ...restProps } = props;
 
   const sliderClass = useClassNamePrefix('Slider');
   const isDisabledClass = `${sliderClass}--disabled`;
-  const isFluidClass = `${sliderClass}--fluid`;
   const validationStateClass = `${sliderClass}--${validationState}`;
   const inputClass = `${sliderClass}__input`;
 
@@ -25,7 +24,6 @@ export function useSliderStyleProps(props: UseSliderStyleProps): SliderStyles {
     classProps: {
       root: classNames(sliderClass, {
         [isDisabledClass]: isDisabled,
-        [isFluidClass]: isFluid,
         [validationStateClass]: validationState,
       }),
       input: inputClass,

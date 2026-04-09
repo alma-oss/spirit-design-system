@@ -43,7 +43,6 @@ Advanced example usage:
 | `helperText`        | `string`                                       | —        | ✕        | Custom helper text              |
 | `id`                | `string`                                       | —        | ✓        | Select and label identification |
 | `isDisabled`        | `bool`                                         | —        | ✕        | Whether is field disabled       |
-| `isFluid`           | `bool`                                         | —        | ✕        | Whether is field is fluid       |
 | `isLabelHidden`     | `bool`                                         | —        | ✕        | Whether is label hidden         |
 | `isRequired`        | `bool`                                         | —        | ✕        | Whether is field required       |
 | `label`             | `ReactNode`                                    | —        | ✕        | Label text                      |
@@ -75,7 +74,6 @@ const CustomSelect = (props: SpiritSelectProps): JSX.Element => {
     helperText,
     id,
     isDisabled,
-    isFluid,
     isLabelHidden,
     isRequired,
     label,
@@ -87,7 +85,6 @@ const CustomSelect = (props: SpiritSelectProps): JSX.Element => {
   const { classProps } = useSelectStyleProps({
     hasValidationIcon,
     isDisabled,
-    isFluid,
     isLabelHidden,
     size,
     validationState,
