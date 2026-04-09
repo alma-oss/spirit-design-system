@@ -1,4 +1,4 @@
-export const defaultLabels = {
+export const defaultTranslations = {
   common: {
     close: 'Close',
     edit: 'Edit',

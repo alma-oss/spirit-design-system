@@ -2,7 +2,7 @@
 
 import { useContext } from 'react';
 import I18nContext from '../context/I18nContext';
-import { defaultLabels, replaceTranslationParams, resolveTranslationKey } from '../translations';
+import { defaultTranslations, replaceTranslationParams, resolveTranslationKey } from '../translations';
 
 export type TranslateFunction = (key: string, params?: Record<string, unknown>) => string;
 
@@ -13,7 +13,7 @@ export interface UseI18nReturn {
 /**
  * Hook that provides a translation function with built-in default labels.
  * When the app is wrapped in `I18nProvider`, `t` resolves overrides first, then defaults.
- * With no provider, behavior matches built-in {@link defaultLabels} only.
+ * With no provider, behavior matches built-in {@link defaultTranslations} only.
  *
  * The returned `t` function looks up keys (e.g. `'common.close'`) and optionally replaces
  * placeholders like `{name}` with values from the params object.
@@ -28,7 +28,7 @@ export interface UseI18nReturn {
  */
 export const useI18n = (): UseI18nReturn => {
   const mergedTranslations = useContext(I18nContext);
-  const translations = mergedTranslations ?? defaultLabels;
+  const translations = mergedTranslations ?? defaultTranslations;
 
   const t: TranslateFunction = (key, params) => {
     const translation = resolveTranslationKey(translations, key);

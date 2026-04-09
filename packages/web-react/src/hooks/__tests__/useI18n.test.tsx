@@ -4,7 +4,7 @@ import { I18nProvider, type I18nProviderProps } from '../../context/I18nContext'
 import { useI18n } from '../useI18n';
 
 jest.mock('../../translations/defaults', () => ({
-  defaultLabels: {
+  defaultTranslations: {
     common: { close: 'Close', edit: 'Edit' },
     pagination: { next: 'Next' },
     textField: { password: { show: 'Show password', hide: 'Hide password' } },

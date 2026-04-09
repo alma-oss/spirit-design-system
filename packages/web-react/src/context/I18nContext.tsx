@@ -1,13 +1,13 @@
 'use client';
 
 import React, { createContext, useMemo } from 'react';
-import { defaultLabels } from '../translations/defaults';
+import { defaultTranslations } from '../translations/defaults';
 import { mergeTranslations } from '../translations/mergeTranslations';
 import { type ChildrenProps } from '../types/shared';
 
 type TranslationTree = { [key: string]: string | TranslationTree };
 
-export type I18nTranslations = typeof defaultLabels;
+export type I18nTranslations = typeof defaultTranslations;
 
 type NestedPartial<T> = {
   [K in keyof T]?: T[K] extends string ? string : T[K] extends object ? NestedPartial<T[K]> : never;
@@ -20,7 +20,7 @@ export type I18nProviderTranslations = NestedPartial<I18nTranslations> | LocaleC
 export type I18nProviderProps = ChildrenProps & {
   /** Optional locale used when `translations` is a locale catalog. */
   locale?: string;
-  /** Partial nested labels or locale catalog merged into {@link defaultLabels}. */
+  /** Partial nested labels or locale catalog merged into {@link defaultTranslations}. */
   translations?: I18nProviderTranslations;
 };
 
@@ -31,7 +31,7 @@ const isNestedTranslations = (value: unknown): value is TranslationTree =>
   typeof value === 'object' && value !== null && !Array.isArray(value);
 
 const hasDefaultTranslationNamespace = (translations: Record<string, unknown>): boolean =>
-  Object.keys(translations).some((key) => key in defaultLabels);
+  Object.keys(translations).some((key) => key in defaultTranslations);
 
 const resolveLocalizedTranslations = (
   translations: I18nProviderTranslations | undefined,
@@ -55,10 +55,10 @@ const I18nProvider = ({ children, locale = 'en', translations }: I18nProviderPro
     const localizedTranslations = resolveLocalizedTranslations(translations, locale);
 
     if (localizedTranslations == null || Object.keys(localizedTranslations).length === 0) {
-      return defaultLabels;
+      return defaultTranslations;
     }
 
-    return mergeTranslations(defaultLabels, localizedTranslations) as I18nTranslations;
+    return mergeTranslations(defaultTranslations, localizedTranslations) as I18nTranslations;
   }, [locale, translations]);
 
   return React.createElement(I18nContext.Provider, { value }, children);
