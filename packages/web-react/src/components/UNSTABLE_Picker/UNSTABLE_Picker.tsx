@@ -3,13 +3,15 @@
 import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { MULTIPLE_SELECTION_MODE } from '../../constants';
+import { PropsProvider } from '../../context';
 import { getSelectedKeys, isSingleSelectionMode, useAriaDescribedBy, useI18n, useStyleProps } from '../../hooks';
 import { replaceTranslationParams } from '../../translations';
 import { type ForwardRefComponent } from '../../types';
 import { Dropdown, DropdownPopover } from '../Dropdown';
-import { HelperText, Label, ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
+import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { DEFAULT_SIZE } from './constants';
 import { PickerContextProvider } from './PickerContext';
@@ -198,70 +200,73 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
   );
 
   return (
-    <PickerContextProvider value={{ size, tagDescriptionId }}>
-      <div {...styleProps} className={classNames(classProps.root, styleProps.className)} {...transferProps}>
-        <Label id={labelId} UNSAFE_className={classProps.label} elementType="span">
-          {label}
-        </Label>
-        <Dropdown id={popoverId} isOpen={isOpen} onToggle={onToggle}>
-          <div role="group" aria-label={label} className={classProps.inputContainer}>
-            <div
-              ref={selectionGridRef}
-              {...ariaDescribedByProp}
-              id={selectionId}
-              role={selectedPickerItems.length ? 'grid' : 'group'}
-              aria-label={replaceTranslationParams(selectionAriaLabel, { label })}
-              aria-live="off"
-              aria-atomic={false}
-              aria-relevant="additions"
-              className={classProps.selection}
-            >
-              {selectionContent}
+    <PropsProvider
+      value={{
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+        validationState,
+      }}
+    >
+      <PickerContextProvider value={{ size, tagDescriptionId }}>
+        <div {...styleProps} className={classNames(classProps.root, styleProps.className)} {...transferProps}>
+          <Label id={labelId} elementType="span">
+            {label}
+          </Label>
+          <Dropdown id={popoverId} isOpen={isOpen} onToggle={onToggle}>
+            <div role="group" aria-label={label} className={classProps.inputContainer}>
+              <div
+                ref={selectionGridRef}
+                {...ariaDescribedByProp}
+                id={selectionId}
+                role={selectedPickerItems.length ? 'grid' : 'group'}
+                aria-label={replaceTranslationParams(selectionAriaLabel, { label })}
+                aria-live="off"
+                aria-atomic={false}
+                aria-relevant="additions"
+                className={classProps.selection}
+              >
+                {selectionContent}
+              </div>
+              <button
+                ref={triggerRef}
+                type="button"
+                className={classProps.trigger}
+                aria-haspopup="dialog"
+                aria-expanded={isOpen}
+                aria-controls={popoverId}
+                onClick={onToggle}
+                disabled={isDisabled}
+              >
+                <VisuallyHidden>{isOpen ? closeButtonLabel : addButtonLabel}</VisuallyHidden>
+                <Icon name={`chevron-${isOpen ? 'up' : 'down'}`} boxSize={20} />
+              </button>
             </div>
-            <button
-              ref={triggerRef}
-              type="button"
-              className={classProps.trigger}
-              aria-haspopup="dialog"
-              aria-expanded={isOpen}
-              aria-controls={popoverId}
-              onClick={onToggle}
-              disabled={isDisabled}
+            <DropdownPopover
+              aria-labelledby={labelId}
+              role="dialog"
+              aria-modal="true"
+              onKeyDownCapture={onPopoverKeyDownCapture}
             >
-              <VisuallyHidden>{isOpen ? closeButtonLabel : addButtonLabel}</VisuallyHidden>
-              <Icon name={`chevron-${isOpen ? 'up' : 'down'}`} boxSize={20} />
-            </button>
-          </div>
-          <DropdownPopover
-            aria-labelledby={labelId}
-            role="dialog"
-            aria-modal="true"
-            onKeyDownCapture={onPopoverKeyDownCapture}
-          >
-            <PickerPopoverContextProvider value={popoverContextValue}>{children}</PickerPopoverContextProvider>
-          </DropdownPopover>
-        </Dropdown>
-        <HelperText
-          UNSAFE_className={classProps.helperText}
-          id={`${pickerId}-helper-text`}
-          registerAria={register}
-          helperText={helperText}
-        />
-        {validationState && (
-          <ValidationText
-            UNSAFE_className={classProps.validationText}
-            id={`${pickerId}-validation-text`}
-            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-            validationText={validationText}
-            registerAria={register}
-            role={validationTextRole}
-          />
-        )}
-        <span id={tagDescriptionId} hidden>
-          {tagDescriptionText}
-        </span>
-      </div>
-    </PickerContextProvider>
+              <PickerPopoverContextProvider value={popoverContextValue}>{children}</PickerPopoverContextProvider>
+            </DropdownPopover>
+          </Dropdown>
+          <HelperText id={`${pickerId}-helper-text`} registerAria={register} helperText={helperText} />
+          {validationState && (
+            <ValidationText
+              id={`${pickerId}-validation-text`}
+              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+              validationText={validationText}
+              registerAria={register}
+              role={validationTextRole}
+            />
+          )}
+          <span id={tagDescriptionId} hidden>
+            {tagDescriptionText}
+          </span>
+        </div>
+      </PickerContextProvider>
+    </PropsProvider>
   );
 };
 
