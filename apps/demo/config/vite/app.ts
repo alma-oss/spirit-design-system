@@ -32,7 +32,10 @@ export default defineConfig({
   },
   plugins: [
     handlebars({
-      partialDirectory: [join(pathRelativeToPackageRoot, 'partials')],
+      partialDirectory: [
+        join(pathRelativeToPackageRoot, 'partials'),
+        join(pathRelativeToRepositoryRoot, 'packages/web/src/scss/components'),
+      ],
       helpers: {
         setVar: (...data) => {
           const varName = data.shift();
