@@ -711,8 +711,7 @@
       "require": "./dist/components/UNSTABLE_Header/index.cjs",
       "default": "./dist/components/UNSTABLE_Header/index.js"
     },
-    {
-      "./components/UNSTABLE_Picker": {
+    "./components/UNSTABLE_Picker": {
       "types": "./dist/components/UNSTABLE_Picker/index.d.ts",
       "development": "./src/components/UNSTABLE_Picker/index.ts",
       "production": "./dist/components/UNSTABLE_Picker/index.js",

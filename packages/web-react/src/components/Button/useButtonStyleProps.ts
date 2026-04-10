@@ -27,27 +27,9 @@ export interface ButtonStyles {
 }
 
 export function useButtonStyleProps<T extends ElementType = 'button', C = void, S = void>(
-  props: SpiritButtonProps<T, C, S> & {
-    formFieldVariant?: unknown;
-    isLabelHidden?: unknown;
-    isRequired?: unknown;
-    validationState?: unknown;
-  },
+  props: SpiritButtonProps<T, C, S>,
 ): ButtonStyles {
-  const {
-    color,
-    isBlock,
-    isDisabled,
-    isLoading,
-    isSymmetrical,
-    size,
-    spacing,
-    formFieldVariant: _formFieldVariant,
-    isLabelHidden: _isLabelHidden,
-    isRequired: _isRequired,
-    validationState: _validationState,
-    ...restProps
-  } = props;
+  const { color, isBlock, isDisabled, isLoading, isSymmetrical, size, spacing, ...restProps } = props;
 
   // @see https://jira.almacareer.tech/browse/DS-1897
   useDeprecationMessage({

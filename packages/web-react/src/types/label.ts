@@ -17,4 +17,6 @@ export interface LabelProps {
 }
 
 export interface SpiritLabelProps<T extends ElementType = 'label'>
-  extends LabelElementProps<T>, LabelProps, StyleProps, LabelStyleProps {}
+  extends LabelElementProps<T>, LabelProps, StyleProps, LabelStyleProps {
+  id?: string;
+}

@@ -125,8 +125,7 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
                 </label>
                 <HelperText id={`${inputId}-helper-text`} registerAria={register} helperText={helperText} />
               </div>
-              {/* @ts-expect-error - Div cannot have type="button". This will be solved with https://jira.almacareer.tech/browse/DS-2168 */}
-              <Button aria-hidden="true" isDisabled={isDisabled} elementType="div" type={null}>
+              <Button aria-hidden="true" isDisabled={isDisabled} elementType="div">
                 {buttonText}
               </Button>
             </div>

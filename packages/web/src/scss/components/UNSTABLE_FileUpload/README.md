@@ -171,7 +171,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
         <span class="UNSTABLE_File__name">
           <span class="text-truncate">Document.pdf</span>
         </span>
-        <span class="UNSTABLE_File__helperText">2.5 MB</span>
+        <span class="HelperText">2.5 MB</span>
       </div>
     </div>
     <div
@@ -209,7 +209,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
         <span class="UNSTABLE_File__name">
           <span class="text-truncate">vacation-photo.jpg</span>
         </span>
-        <div class="UNSTABLE_File__helperText">
+        <div class="HelperText">
           <div>
             <svg class="Icon animation-spin-clockwise" width="16" height="16" aria-hidden="true">
               <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
@@ -242,7 +242,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
         <span class="UNSTABLE_File__name">
           <span class="text-truncate">report-2024.xlsx</span>
         </span>
-        <div class="UNSTABLE_File__validationText">
+        <div class="ValidationText ValidationText--success">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
             <use xlink:href="/assets/icons/svg/sprite.svg#success" />
           </svg>

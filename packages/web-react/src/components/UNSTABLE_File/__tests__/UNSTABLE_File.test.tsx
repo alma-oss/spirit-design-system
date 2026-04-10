@@ -4,10 +4,12 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import UNSTABLE_File from '../UNSTABLE_File';
 
@@ -56,14 +58,19 @@ describe('UNSTABLE_File', () => {
 
   ariaAttributesTest(UNSTABLE_File, defaultProps);
 
-  validationTextPropsTest(
-    (props) => (
-      <ul>
-        <UNSTABLE_File {...defaultProps} validationState="success" validationText="Validation text" {...props} />
-      </ul>
-    ),
-    '.UNSTABLE_File__validationText',
-  );
+  formFieldLabelContextPropsTest({
+    includeHidden: false,
+    includeRequired: false,
+    renderComponent: (props) => <UNSTABLE_File {...defaultProps} {...props} />,
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => <UNSTABLE_File {...defaultProps} {...props} />,
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => <UNSTABLE_File {...defaultProps} {...props} />,
+  });
 
   it('should render dismiss button with accessible name', () => {
     render(
