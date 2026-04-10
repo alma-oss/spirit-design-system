@@ -2,11 +2,13 @@
 
 import classNames from 'classnames';
 import React, { type ElementType } from 'react';
+import { PropsProvider } from '../../context';
 import { useClassNamePrefix, useI18n, useStyleProps } from '../../hooks';
 import { ControlButton } from '../ControlButton';
-import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { Flex } from '../Flex';
+import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { DEFAULT_FILE_ACTION_BUTTON_ICON_NAME, DEFAULT_FILE_ICON_NAME } from './constants';
 import { type SpiritUnstableFileProps } from './types';
@@ -53,6 +55,7 @@ const UNSTABLE_File = <E extends ElementType = 'li'>(props: SpiritUnstableFilePr
     isDisabled,
   };
 
+  // TODO Fix with color-schemes
   const disabledClassNameProp = { UNSAFE_className: 'color-scheme-on-disabled' };
 
   const editActionButton = onChange ? (
@@ -72,46 +75,51 @@ const UNSTABLE_File = <E extends ElementType = 'li'>(props: SpiritUnstableFilePr
   const Component = elementType as ElementType;
 
   return (
-    <Component
-      {...transferProps}
-      {...styleProps}
-      {...(id != null && id !== '' ? { id } : {})}
-      className={classNames(classProps.root, styleProps.className)}
+    <PropsProvider
+      value={{
+        isDisabled,
+        validationState,
+      }}
     >
-      {previewSlot ?? (
-        <div className={classProps.preview}>
-          <Icon name={iconName} boxSize={20} aria-hidden="true" />
+      <Component
+        {...transferProps}
+        {...styleProps}
+        {...(id != null && id !== '' ? { id } : {})}
+        className={classNames(classProps.root, styleProps.className)}
+      >
+        {previewSlot ?? (
+          <div className={classProps.preview}>
+            <Icon name={iconName} boxSize={20} aria-hidden="true" />
+          </div>
+        )}
+        <div className={classProps.content}>
+          <div className={classProps.text}>
+            <span className={classProps.name}>
+              <span className={useClassNamePrefix('text-truncate')}>{label}</span>
+            </span>
+            <HelperText helperText={helperText} />
+            {validationState && (
+              <ValidationText
+                {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+                validationText={validationText}
+                role={validationTextRole}
+              />
+            )}
+          </div>
         </div>
-      )}
-      <div className={classProps.content}>
-        <div className={classProps.text}>
-          <span className={classProps.name}>
-            <span className={useClassNamePrefix('text-truncate')}>{label}</span>
-          </span>
-          {helperText && <div className={classProps.helperText}>{helperText}</div>}
-          {validationState && (
-            <ValidationText
-              UNSAFE_className={classProps.validationText}
-              elementType="div"
-              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-              role={validationTextRole}
-              validationText={validationText}
-            />
-          )}
-        </div>
-      </div>
-      {editActionButton && dismissActionButton ? (
-        <Flex alignmentX={{ mobile: 'stretch', tablet: 'left' }} alignmentY="stretch" spacingX="space-500">
-          {editActionButton}
-          {dismissActionButton}
-        </Flex>
-      ) : (
-        <>
-          {editActionButton}
-          {dismissActionButton}
-        </>
-      )}
-    </Component>
+        {editActionButton && dismissActionButton ? (
+          <Flex alignmentX={{ mobile: 'stretch', tablet: 'left' }} alignmentY="stretch" spacingX="space-500">
+            {editActionButton}
+            {dismissActionButton}
+          </Flex>
+        ) : (
+          <>
+            {editActionButton}
+            {dismissActionButton}
+          </>
+        )}
+      </Component>
+    </PropsProvider>
   );
 };
 

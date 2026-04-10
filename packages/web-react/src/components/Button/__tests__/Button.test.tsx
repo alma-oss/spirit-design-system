@@ -13,6 +13,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { PropsProvider } from '../../../context';
 import Button from '../Button';
 
 jest.mock('../../../hooks/useIcon');
@@ -64,5 +65,15 @@ describe('Button', () => {
     expect(element).toHaveStyle({ '--button-spacing': 'var(--spirit-space-100)' });
     expect(element).toHaveStyle({ '--button-spacing-tablet': 'var(--spirit-space-1000)' });
     expect(element).toHaveStyle({ '--button-spacing-desktop': 'var(--spirit-space-1200)' });
+  });
+
+  it('should not forward unrelated context props to DOM', () => {
+    render(
+      <PropsProvider value={{ validationState: 'danger' }}>
+        <Button>Button</Button>
+      </PropsProvider>,
+    );
+
+    expect(screen.getByRole('button')).not.toHaveAttribute('validationState');
   });
 });
