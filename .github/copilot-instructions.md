@@ -41,7 +41,11 @@ Use [Conventional Comments](https://conventionalcomments.org/) for all findings.
 
 ### Finding Format
 
-When a code suggestion exists, place it first so reviewers see the fix immediately, and use GitHub’s PR review suggestion fence (` ```suggestion `), which allows reviewers to apply the fix with one click, but only in the "Apply suggestion" UX in PR review comments. When no code suggestion is possible, omit the code block::
+When a code suggestion exists, it **must appear as the very first element** — before the label line and before the `<details>` block. Use GitHub’s PR review suggestion fence (` ```suggestion `), which allows reviewers to apply the fix with one click. When no code suggestion is possible, omit the code block.
+
+**Order is mandatory.** Do not place the label, subject, or `<details>` block before the suggestion block.
+
+Correct format when a suggestion exists:
 
 ````markdown
 ```suggestion
@@ -57,6 +61,18 @@ When a code suggestion exists, place it first so reviewers see the fix immediate
   <br />
   <strong>Why:</strong> {why explanation}
 </details>
+````
+
+Incorrect — do not do this:
+
+````markdown
+**{label} ({decorations}):** {subject}
+
+<details>…</details>
+
+```suggestion
+{suggested code}
+```
 ````
 
 When there is no code suggestion:
