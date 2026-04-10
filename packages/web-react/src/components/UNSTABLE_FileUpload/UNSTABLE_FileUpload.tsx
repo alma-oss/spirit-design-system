@@ -146,10 +146,14 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
                   &nbsp;
                   <span className={classProps.input.dropLabel}>{labelText}</span>
                 </label>
-                <HelperText id={`${inputId}-helper-text`} registerAria={register} helperText={helperText} />
+                <HelperText
+                  id={`${inputId}-helper-text`}
+                  registerAria={register}
+                  helperText={helperText}
+                  isDisabled={isUploadInteractionDisabled}
+                />
               </div>
-              {/* @ts-expect-error - Div cannot have type="button". This will be solved with https://jira.almacareer.tech/browse/DS-2168 */}
-              <Button aria-hidden="true" isDisabled={isDisabled} elementType="div" type={null}>
+              <Button aria-hidden="true" isDisabled={isUploadInteractionDisabled} elementType="div">
                 {buttonText}
               </Button>
             </div>

@@ -46,6 +46,7 @@ export const useFileUploadStyleProps = (props?: FileUploadStyleProps): FileUploa
   const fileUploadInputInputClass = `${fileUploadInputClass}__input`;
   const fileUploadInputLinkClass = `${fileUploadInputClass}__link`;
   const fileUploadInputLinkUtilityClasses = ['link-primary', 'link-underlined'];
+  const fileUploadInputLinkDisabledClass = 'link-disabled';
 
   return {
     classProps: {
@@ -59,7 +60,10 @@ export const useFileUploadStyleProps = (props?: FileUploadStyleProps): FileUploa
         }),
         input: fileUploadInputInputClass,
         dropLabel: fileUploadInputDropLabelClass,
-        link: classNames(fileUploadInputLinkClass, ...fileUploadInputLinkUtilityClasses),
+        link:
+          props?.isDisabled || props?.isUploadDisabled
+            ? fileUploadInputLinkDisabledClass
+            : classNames(fileUploadInputLinkClass, ...fileUploadInputLinkUtilityClasses),
         dropZone: {
           root: classNames(fileUploadInputDropZoneClass, {
             [fileUploadDropZoneDisabledClass]: props?.isDisabled || props?.isUploadDisabled,
