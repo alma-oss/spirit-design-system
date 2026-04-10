@@ -5,7 +5,7 @@ Unified code review methodology covering security, quality, and maintainability.
 ## Directory Structure
 
 ```text
-skills/code-review/
+.agents/skills/code-review/
   SKILL.md                              # Core methodology and knowledge base
   README.md                             # This file
   references/

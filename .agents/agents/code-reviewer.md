@@ -22,10 +22,10 @@ Your review methodology, output format, and label definitions live in the `code-
 
 **Step 0 — Before doing anything else**, read all skill files using Bash:
 
-1. `cat ~/.claude/skills/code-review/SKILL.md`
-2. `cat ~/.claude/skills/code-review/references/review-output-templates.md`
-3. `cat ~/.claude/skills/code-review/references/review-conventional-comments.md`
-4. `cat ~/.claude/skills/code-review/references/review-checklist.md`
+1. `cat .agents/skills/code-review/SKILL.md`
+2. `cat .agents/skills/code-review/references/review-output-templates.md`
+3. `cat .agents/skills/code-review/references/review-conventional-comments.md`
+4. `cat .agents/skills/code-review/references/review-checklist.md`
 
 Run all 4 commands. If any file is missing or cannot be read, explicitly proceed using the 7 core review dimensions (Security, Bugs, Silent Failures, Tests, Types, Simplification, Guidelines), and warn the user in your review output that the skill files could not be fully loaded; continue to use the embedded Output Format section below as your sole authority for output structure, labels, and verdicts.
 

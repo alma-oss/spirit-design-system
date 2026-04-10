@@ -1,3 +1,8 @@
+---
+name: code-review
+description: Comprehensive code review methodology for security, quality, and maintainability analysis. Use when reviewing code changes, PRs, or any modified files for correctness, security, and project guideline compliance.
+---
+
 # Code Review Skill
 
 Comprehensive code review methodology for security, quality, and maintainability analysis.
