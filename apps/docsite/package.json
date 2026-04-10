@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "yarn lint --fix",
-    "test": "npm-run-all --serial lint test:unit:coverage",
+    "test": "npm-run-all --serial lint test:unit:coverage types",
     "test:unit": "TS_NODE_PROJECT=./tsconfig.test.json jest",
     "test:unit:watch": "yarn test:unit --watchAll",
     "test:unit:coverage": "yarn test:unit --coverage",
