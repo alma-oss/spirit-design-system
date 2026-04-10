@@ -11,6 +11,7 @@ import { useButtonStyleProps } from './useButtonStyleProps';
 
 const defaultProps = {
   color: 'primary',
+  elementType: 'button',
   /**
    * @deprecated "isBlock" property will be removed in the next major version. Please read component's README for more information.
    * @see https://jira.almacareer.tech/browse/DS-1897
@@ -21,28 +22,31 @@ const defaultProps = {
   isSymmetrical: false,
   size: 'medium',
   type: 'button',
-  elementType: 'button',
 };
 
 const _Button = <E extends ElementType = 'button', C = void, S = void>(
   props: SpiritButtonProps<E, C, S>,
   ref: PolymorphicRef<E>,
 ) => {
-  const { elementType: propsElementType } = props;
-  const contextProps = useContextProps(props);
-  const { elementType: contextElementType, children, ...restFromContext } = contextProps;
-  const elementType = (propsElementType ?? contextElementType ?? defaultProps.elementType) as ElementType;
-  const propsWithDefaults = { ...defaultProps, ...restFromContext };
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- `elementType` must be omitted from `restProps`: the root tag is chosen by the polymorphic `elementType` resolved above (explicit prop, then Stack context, then default). The duplicate key from `defaultProps` inside `propsWithDefaults` is only peeled off so it is not passed to hooks or the DOM.
-  const { elementType: _elementType, ...restProps } = propsWithDefaults;
-  const Component = elementType as ElementType;
+  const { children, ...restFromProps } = props;
+  const contextProps = useContextProps<Partial<SpiritButtonProps<E, C, S>>>();
+  const propsWithDefaults = {
+    ...defaultProps,
+    ...restFromProps,
+    elementType: contextProps.elementType ?? restFromProps.elementType ?? defaultProps.elementType,
+    color: contextProps.color ?? restFromProps.color ?? defaultProps.color,
+    size: contextProps.size ?? restFromProps.size ?? defaultProps.size,
+    isDisabled: contextProps.isDisabled ?? restFromProps.isDisabled ?? defaultProps.isDisabled,
+    isLoading: contextProps.isLoading ?? restFromProps.isLoading ?? defaultProps.isLoading,
+    type: contextProps.type ?? restFromProps.type ?? defaultProps.type,
+  };
 
-  const { buttonProps } = useButtonProps(restProps);
-  const {
-    classProps,
-    props: modifiedProps,
-    styleProps: buttonStyleProps,
-  } = useButtonStyleProps(restProps as SpiritButtonProps<E, C, S>);
+  const { buttonProps } = useButtonProps(propsWithDefaults);
+
+  const { elementType, ...restProps } = propsWithDefaults;
+
+  const Component = elementType as ElementType;
+  const { classProps, props: modifiedProps, styleProps: buttonStyleProps } = useButtonStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, {
     classProps,
