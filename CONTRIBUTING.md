@@ -367,6 +367,8 @@ See [Local Publish Testing][local-publish-testing] for full instructions.
 
 Fill in a [template in Slack Canvases][release-notes-template] for the Spirit Release Notes.
 
+You can use `/spirit:release-notes` [skill to create a new release note][release-notes-skill] using your agent.
+
 Use the relevant messages from the `#spirit-design-system-notifications_en` Slack
 channel that are sent to this channel after the automated publish is done.
 
@@ -409,6 +411,7 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [packages]: packages/
 [prettier]: https://prettier.io/
 [publish-action]: https://github.com/alma-oss/spirit-design-system/actions/workflows/publish.yaml
+[release-notes-skill]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/release-notes/README.md
 [release-notes-template]: https://almamedia.slack.com/docs/T0325RBAD/F08D6U6EAKH
 [storybook-mcp-overview]: https://storybook.js.org/docs/ai/mcp/overview
 [storybook-mcp-sharing]: https://storybook.js.org/docs/ai/mcp/sharing
