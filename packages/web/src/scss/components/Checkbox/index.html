@@ -27,7 +27,7 @@
           name="default"
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-default">Checkbox Label</label>
+          <label class="Label Label--inline" for="checkbox-default">Checkbox Label</label>
         </div>
       </div>
 
@@ -40,7 +40,7 @@
           checked
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-default-checked">Checkbox Label</label>
+          <label class="Label Label--inline" for="checkbox-default-checked">Checkbox Label</label>
         </div>
       </div>
 
@@ -66,7 +66,7 @@
           name="indeterminate"
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-indeterminate">Checkbox Label</label>
+          <label class="Label Label--inline" for="checkbox-indeterminate">Checkbox Label</label>
         </div>
       </div>
 
@@ -93,7 +93,7 @@
           required
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label Checkbox__label--required" for="checkbox-required">Checkbox Label</label>
+          <label class="Label Label--inline Label--required" for="checkbox-required">Checkbox Label</label>
         </div>
       </div>
 
@@ -111,7 +111,7 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart">
+      <div class="Checkbox Checkbox--inputPositionStart Checkbox--labelHidden">
         <input
           type="checkbox"
           id="checkbox-hidden-label"
@@ -119,7 +119,7 @@
           name="hiddenLabel"
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label Checkbox__label--hidden" for="checkbox-hidden-label">Checkbox Label</label>
+          <label class="Label Label--inline accessibility-hidden" for="checkbox-hidden-label">Checkbox Label</label>
         </div>
       </div>
 
@@ -146,8 +146,8 @@
           aria-describedby="checkbox-helper-text-helper-text"
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-helper-text">Checkbox Label</label>
-          <div class="Checkbox__helperText" id="checkbox-helper-text-helper-text">Helper text</div>
+          <label class="Label Label--inline" for="checkbox-helper-text">Checkbox Label</label>
+          <div class="HelperText HelperText--inline" id="checkbox-helper-text-helper-text">Helper text</div>
         </div>
       </div>
 
@@ -174,7 +174,7 @@
           disabled
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-disabled">Checkbox Label</label>
+          <label class="Label Label--inline Label--disabled" for="checkbox-disabled">Checkbox Label</label>
         </div>
       </div>
 
@@ -190,8 +190,8 @@
           required
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label Checkbox__label--required" for="checkbox-disabled-helper-text">Checkbox Label</label>
-          <div class="Checkbox__helperText" id="checkbox-disabled-helper-text-helper-text">Helper text</div>
+          <label class="Label Label--inline Label--required Label--disabled" for="checkbox-disabled-helper-text">Checkbox Label</label>
+          <div class="HelperText HelperText--inline HelperText--disabled" id="checkbox-disabled-helper-text-helper-text">Helper text</div>
         </div>
       </div>
 
@@ -204,7 +204,7 @@
           disabled
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-disabled-indeterminate">Checkbox Label</label>
+          <label class="Label Label--inline Label--disabled" for="checkbox-disabled-indeterminate">Checkbox Label</label>
         </div>
       </div>
 
@@ -230,7 +230,7 @@
           name="success"
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-success">Checkbox Label</label>
+          <label class="Label Label--inline" for="checkbox-success">Checkbox Label</label>
         </div>
       </div>
 
@@ -243,8 +243,8 @@
           aria-describedby="checkbox-warning-validation-text"
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-warning">Checkbox Label</label>
-          <div class="Checkbox__validationText" id="checkbox-warning-validation-text">Warning validation text</div>
+          <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
+          <div class="ValidationText ValidationText--warning ValidationText--inline" id="checkbox-warning-validation-text">Warning validation text</div>
         </div>
       </div>
 
@@ -257,8 +257,8 @@
           aria-describedby="checkbox-danger-validation-text"
         />
         <div class="Checkbox__text">
-          <label for="checkbox-danger" class="Checkbox__label">Checkbox Label</label>
-          <div class="Checkbox__validationText" id="checkbox-danger-validation-text">
+          <label for="checkbox-danger" class="Label Label--inline">Checkbox Label</label>
+          <div class="ValidationText ValidationText--danger ValidationText--inline" id="checkbox-danger-validation-text">
             <ul>
               <li>First validation text</li>
               <li>Second validation text</li>
@@ -277,9 +277,9 @@
           checked
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-warning-helper-text">Checkbox Label</label>
-          <div class="Checkbox__helperText" id="checkbox-warning-helper-text-helper-text">Helper text</div>
-          <div class="Checkbox__validationText" id="checkbox-warning-helper-text-validation-text">Warning validation text</div>
+          <label class="Label Label--inline" for="checkbox-warning-helper-text">Checkbox Label</label>
+          <div class="HelperText HelperText--inline" id="checkbox-warning-helper-text-helper-text">Helper text</div>
+          <div class="ValidationText ValidationText--warning ValidationText--inline" id="checkbox-warning-helper-text-validation-text">Warning validation text</div>
         </div>
       </div>
 
@@ -308,9 +308,10 @@
           aria-describedby="checkbox-{{ state }}-validation-icon-validation-text"
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-{{ state }}-validation-icon">Checkbox Label</label>
-          <div class="Checkbox__validationText" id="checkbox-{{ state }}-validation-icon-validation-text">
+          <label class="Label Label--inline" for="checkbox-{{ state }}-validation-icon">Checkbox Label</label>
+          <div class="ValidationText ValidationText--{{ state }} ValidationText--inline" id="checkbox-{{ state }}-validation-icon-validation-text">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -349,7 +350,7 @@
           name="positionStart"
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-position-start">Input on Start (Default)</label>
+          <label class="Label Label--inline" for="checkbox-position-start">Input on Start (Default)</label>
         </div>
       </div>
 
@@ -361,7 +362,7 @@
           name="positionEnd"
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-position-end">Input on End</label>
+          <label class="Label Label--inline" for="checkbox-position-end">Input on End</label>
         </div>
       </div>
 
@@ -373,7 +374,7 @@
           name="positionResponsive"
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-position-responsive">Responsive Position</label>
+          <label class="Label Label--inline" for="checkbox-position-responsive">Responsive Position</label>
         </div>
       </div>
 
@@ -399,7 +400,7 @@
           name="item"
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-item-default">Checkbox Label</label>
+          <label class="Label Label--item" for="checkbox-item-default">Checkbox Label</label>
         </div>
       </div>
 
@@ -412,7 +413,7 @@
           checked
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-item-default-checked">Checkbox Label</label>
+          <label class="Label Label--item" for="checkbox-item-default-checked">Checkbox Label</label>
         </div>
       </div>
 
@@ -425,8 +426,8 @@
           aria-describedby="checkbox-item-helper-text-helper-text"
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-item-helper-text">Checkbox Label</label>
-          <div class="Checkbox__helperText" id="checkbox-item-helper-text-helper-text">Helper text</div>
+          <label class="Label Label--inline Label--item" for="checkbox-item-helper-text">Checkbox Label</label>
+          <div class="HelperText HelperText--item" id="checkbox-item-helper-text-helper-text">Helper text</div>
         </div>
       </div>
 
@@ -439,7 +440,7 @@
           disabled
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label" for="checkbox-item-disabled">Checkbox Label</label>
+          <label class="Label Label--item Label--disabled" for="checkbox-item-disabled">Checkbox Label</label>
         </div>
       </div>
 
@@ -455,8 +456,8 @@
           required
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label Checkbox__label--required" for="checkbox-item-disabled-helper-text">Checkbox Label</label>
-          <div class="Checkbox__helperText" id="checkbox-item-disabled-helper-text-helper-text">Helper text</div>
+          <label class="Label Label--inline Label--item Label--required Label--disabled" for="checkbox-item-disabled-helper-text">Checkbox Label</label>
+          <div class="HelperText HelperText--item HelperText--disabled" id="checkbox-item-disabled-helper-text-helper-text">Helper text</div>
         </div>
       </div>
 
@@ -484,7 +485,7 @@
           required
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label Checkbox__label--required" for="consent-emphasized-label"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
+          <label class="Label Label--inline Label--required" for="consent-emphasized-label"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
           <div id="consent-emphasized-label-details" class="InputDetails">
             <button
               type="button"
@@ -525,7 +526,7 @@
           required
         />
         <div class="Checkbox__text">
-          <label class="Checkbox__label Checkbox__label--required" for="consent-full-example">I agree to the terms and privacy policy</label>
+          <label class="Label Label--inline Label--required" for="consent-full-example">I agree to the terms and privacy policy</label>
           <div id="consent-full-example-details" class="InputDetails">
             <button
               type="button"
@@ -548,10 +549,10 @@
               See privacy policy
             </button>
           </div>
-          <div class="Checkbox__helperText" id="consent-full-example-helper-text">
+          <div class="HelperText" id="consent-full-example-helper-text">
             Please read the documents carefully before agreeing
           </div>
-          <div class="Checkbox__validationText" id="consent-full-example-validation-text">
+          <div class="ValidationText ValidationText--danger" id="consent-full-example-validation-text">
             You must agree to continue
           </div>
         </div>

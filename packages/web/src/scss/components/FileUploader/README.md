@@ -58,9 +58,11 @@ If supported by the device, FileUploaderInput automatically turns on the
 drag-and-drop functionality (signalized by the `has-drag-and-drop` state class
 on the root element).
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="FileUploaderInput" data-spirit-element="wrapper">
-  <label for="file-uploader" class="FileUploaderInput__label">Label</label>
+  <label for="file-uploader" class="Label">Label</label>
   <input
     type="file"
     id="file-uploader"
@@ -76,7 +78,7 @@ on the root element).
       <span class="FileUploaderInput__link link-primary link-underlined">Upload your file</span>
       <span class="FileUploaderInput__dragAndDropLabel">or drag and drop here</span>
     </label>
-    <div class="FileUploaderInput__helperText">Max file size is 10 MB</div>
+    <div class="HelperText">Max file size is 10 MB</div>
   </div>
 </div>
 ```
@@ -170,11 +172,11 @@ Microsoft Word documents:
 
 ### Required Input
 
-To mark the input as required, simply add the `FileUploaderInput__label--required` to the label:
+To mark the input as required, simply add the `Label--required` to the label:
 
 ```html
 <div class="FileUploaderInput" data-spirit-element="wrapper">
-  <label for="file-uploader" class="FileUploaderInput__label FileUploaderInput__label--required">Label</label>
+  <label for="file-uploader" class="Label Label--required">Label</label>
   <input
     type="file"
     id="file-uploader"
@@ -208,18 +210,18 @@ When validated on server:
 <div class="FileUploaderInput FileUploaderInput--success" data-spirit-element="wrapper">
   <!-- Label -->
   <!-- Drop zone with input -->
-  <div class="FileUploaderInput__validationText">Success Validation Text</div>
+  <div class="ValidationText ValidationText--success">Success Validation Text</div>
 </div>
 ```
 
-- To render validation text as a list, use `<ul>` element inside of `.FileUploaderInput__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.FileUploaderInput__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
 <div class="FileUploaderInput FileUploaderInput--success" data-spirit-element="wrapper">
   <!-- Label -->
   <!-- Drop zone with input -->
-  <div class="FileUploaderInput__validationText">
+  <div class="ValidationText ValidationText--success">
     <ul>
       <li>First validation text</li>
       <li>Second validation text</li>
@@ -230,7 +232,7 @@ When validated on server:
 <div class="FileUploaderInput FileUploaderInput--warning" data-spirit-element="wrapper">
   <!-- Label -->
   <!-- Drop zone with input -->
-  <div class="FileUploaderInput__validationText">
+  <div class="ValidationText ValidationText--warning">
     <svg width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
@@ -276,7 +278,9 @@ own way.**
 <div class="FileUploaderInput has-success" data-spirit-element="wrapper">
   <!-- Label -->
   <!-- Drop zone with input -->
-  <div data-spirit-element="validation_text">Success message inserted by JS</div>
+  <div class="ValidationText ValidationText--success" data-spirit-element="validation_text">
+    Success message inserted by JS
+  </div>
 </div>
 ```
 
@@ -563,7 +567,7 @@ This is how all subcomponents build up the complete FileUploader:
 
   <!-- FileUploaderInput: start -->
   <div class="FileUploaderInput" data-spirit-element="wrapper">
-    <label for="file-uploader-with-attachments" class="FileUploaderInput__label">Label</label>
+    <label for="file-uploader-with-attachments" class="Label">Label</label>
     <input
       type="file"
       id="file-uploader-with-attachments"
@@ -579,7 +583,7 @@ This is how all subcomponents build up the complete FileUploader:
         <span class="FileUploaderInput__link link-primary link-underlined">Upload your file</span>
         <span class="FileUploaderInput__dragAndDropLabel">or drag and drop here</span>
       </label>
-      <div class="FileUploaderInput__helperText">Max file size is 10 MB</div>
+      <div class="HelperText">Max file size is 10 MB</div>
     </div>
   </div>
   <!-- FileUploaderInput: end -->
@@ -653,6 +657,7 @@ to the missing `name` attribute.
 Example: So if you set `name="attachments"` to the default input element, the attachments will then show `name="attachments[]"`.
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [learn-about-file-sizes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FileUploader/README.md#understanding-file-size-in-bytes
 [mdn-accept]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
 [mdn-input-file]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file

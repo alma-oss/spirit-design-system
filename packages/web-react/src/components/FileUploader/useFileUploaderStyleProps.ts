@@ -44,12 +44,9 @@ export interface FileUploaderStyleReturn {
     root: string;
     input: {
       root: string;
-      label: string;
       input: string;
       dropLabel: string;
-      helper: string;
       link: string;
-      validationText: string;
       dropZone: {
         root: string;
         label: string;
@@ -79,15 +76,10 @@ export const useFileUploaderStyleProps = (props?: FileUploaderStyleProps): FileU
   const fileUploaderInputDropLabelClass = `${fileUploaderInputClass}__dragAndDropLabel`;
   const fileUploaderInputDropZoneClass = `${fileUploaderInputClass}__dropZone`;
   const fileUploaderInputDropZoneLabelClass = `${fileUploaderInputDropZoneClass}Label`;
-  const fileUploaderInputHelperClass = `${fileUploaderInputClass}__helperText`;
   const fileUploaderInputHiddenClass = 'd-none';
   const fileUploaderInputInputClass = `${fileUploaderInputClass}__input`;
-  const fileUploaderInputLabelClass = `${fileUploaderInputClass}__label`;
-  const fileUploaderInputLabelHiddenClass = `${fileUploaderInputClass}__label--hidden`;
-  const fileUploaderInputLabelRequiredClass = `${fileUploaderInputClass}__label--required`;
   const fileUploaderInputLinkClass = `${fileUploaderInputClass}__link`;
   const fileUploaderInputLinkUtilityClasses = ['link-primary', 'link-underlined'];
-  const fileUploaderInputValidationTextClass = `${fileUploaderInputClass}__validationText`;
   const fileUploaderListClass = `${fileUploaderClass}List`;
   const fileUploaderAttachmentClass = `${fileUploaderClass}Attachment`;
   const fileUploaderAttachmentNameClass = `${fileUploaderAttachmentClass}__name`;
@@ -145,15 +137,9 @@ export const useFileUploaderStyleProps = (props?: FileUploaderStyleProps): FileU
           [fileUploaderInputHiddenClass]: props?.isDropZoneHidden && props.queueLimitBehavior === 'hide',
           [fileUploaderInputValidationClass]: props?.validationState,
         }),
-        label: classNames(fileUploaderInputLabelClass, {
-          [fileUploaderInputLabelRequiredClass]: props?.isRequired,
-          [fileUploaderInputLabelHiddenClass]: props?.isLabelHidden,
-        }),
         input: fileUploaderInputInputClass,
         dropLabel: fileUploaderInputDropLabelClass,
-        helper: fileUploaderInputHelperClass,
         link: classNames(fileUploaderInputLinkClass, ...fileUploaderInputLinkUtilityClasses),
-        validationText: fileUploaderInputValidationTextClass,
         dropZone: {
           root: fileUploaderInputDropZoneClass,
           label: fileUploaderInputDropZoneLabelClass,

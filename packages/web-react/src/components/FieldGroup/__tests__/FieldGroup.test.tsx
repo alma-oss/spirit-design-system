@@ -4,11 +4,13 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
   validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import FieldGroup from '../FieldGroup';
 
@@ -27,11 +29,9 @@ describe('FieldGroup', () => {
 
   validationStatePropsTest(FieldGroup, 'FieldGroup--');
 
-  validationTextPropsTest(FieldGroup, '.FieldGroup__validationText');
-
   stylePropsTest(
-    (props) => <FieldGroup {...props} label="Label" id="field-group-example" data-testid="test-field-group" />,
-    'test-field-group',
+    (props) => <FieldGroup {...props} label="Label" id="field-group-example" data-testid="field-group" />,
+    'field-group',
   );
 
   restPropsTest((props) => <FieldGroup {...props} label="Label" />, 'fieldset');
@@ -39,6 +39,32 @@ describe('FieldGroup', () => {
   validHtmlAttributesTest(FieldGroup);
 
   ariaAttributesTest(FieldGroup);
+
+  formFieldLabelContextPropsTest({
+    includeHidden: false,
+    renderComponent: (props) => (
+      <FieldGroup id="field-group-label-context" label="Label" {...props}>
+        {itemList}
+      </FieldGroup>
+    ),
+    resolveFieldElement: () => screen.getByRole('group').querySelector('div.Label') as HTMLElement,
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => (
+      <FieldGroup id="field-group-helper-context" label="Label" {...props}>
+        {itemList}
+      </FieldGroup>
+    ),
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => (
+      <FieldGroup id="field-group-validation-context" label="Label" {...props}>
+        {itemList}
+      </FieldGroup>
+    ),
+  });
 
   it('should render items as children', () => {
     render(
@@ -55,25 +81,11 @@ describe('FieldGroup', () => {
 
     expect(label).toHaveTextContent('Label');
 
-    const labelDiv = fieldGroup.querySelector('.FieldGroup__label') as HTMLElement;
-
-    expect(labelDiv).toHaveTextContent('Label');
-
     const list = fieldGroup.querySelector('.FieldGroup__fields') as HTMLElement;
     const items = list.querySelectorAll('div');
 
     expect(items).toHaveLength(3);
     expect(items[0]).toHaveTextContent('Item');
-  });
-
-  it('should have className isRequired', () => {
-    render(
-      <FieldGroup id="example-field-group" label="Label" isRequired>
-        {itemList}
-      </FieldGroup>,
-    );
-
-    expect(screen.getAllByText('Label')[1]).toHaveClass('FieldGroup__label--required');
   });
 
   it('should have className isDisabled', () => {
@@ -106,19 +118,6 @@ describe('FieldGroup', () => {
     expect(screen.getByRole('group')).toHaveClass('FieldGroup--fluid');
   });
 
-  it('should have helper text', () => {
-    render(
-      <FieldGroup id="example-field-group" label="Label" helperText="helper text">
-        {itemList}
-      </FieldGroup>,
-    );
-
-    const element = screen.getByText('helper text');
-
-    expect(element).toBeInTheDocument();
-    expect(element).toHaveClass('FieldGroup__helperText');
-  });
-
   it('should have correct id', () => {
     render(
       <FieldGroup id="example-field-group" label="Label" helperText="helper text">
@@ -126,13 +125,40 @@ describe('FieldGroup', () => {
       </FieldGroup>,
     );
 
-    expect(screen.getByText('helper text')).toHaveAttribute('id', 'example-field-group__helperText');
+    expect(screen.getByText('helper text')).toHaveAttribute('id', 'example-field-group-helper-text');
+  });
+
+  it('should use distinct ids for helper and validation text and compose aria-describedby', () => {
+    render(
+      <FieldGroup
+        id="field-group-aria-describedby"
+        label="Label"
+        helperText="Helper text"
+        validationState="danger"
+        validationText="Validation message"
+      >
+        {itemList}
+      </FieldGroup>,
+    );
+
+    const helperEl = screen.getByText('Helper text');
+    const validationEl = screen.getByText('Validation message');
+
+    expect(helperEl).toHaveAttribute('id', 'field-group-aria-describedby-helper-text');
+    expect(validationEl).toHaveAttribute('id', 'field-group-aria-describedby-validation-text');
+
+    const fieldset = screen.getByRole('group');
+
+    expect(fieldset).toHaveAttribute(
+      'aria-describedby',
+      'field-group-aria-describedby-helper-text field-group-aria-describedby-validation-text',
+    );
   });
 
   it('should render with html tags', () => {
     render(
       <FieldGroup
-        id="test"
+        id="field-group-html"
         label={
           <>
             Label <b>Text</b>
@@ -143,9 +169,26 @@ describe('FieldGroup', () => {
       </FieldGroup>,
     );
 
-    const element = screen.getAllByText('Label')[1];
+    const element = screen.getAllByText('Text')[1].parentElement as HTMLElement;
 
-    expect(element).toHaveTextContent('Label Text');
     expect(element.innerHTML).toBe('Label <b>Text</b>');
+  });
+
+  it('should render validation icon when hasValidationIcon is set', () => {
+    render(
+      <FieldGroup
+        id="field-group-validation-icon"
+        label="Label"
+        hasValidationIcon
+        validationState="danger"
+        validationText="Invalid"
+      >
+        {itemList}
+      </FieldGroup>,
+    );
+
+    const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
+
+    expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
 });

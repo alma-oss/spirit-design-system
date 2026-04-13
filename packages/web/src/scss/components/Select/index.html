@@ -9,7 +9,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="Select Select--medium">
-        <label for="select-simple" class="Select__label">Label</label>
+        <label
+          for="select-simple"
+          class="Label"
+        >Label</label>
         <div class="Select__inputContainer">
           <select
             id="select-simple"
@@ -21,6 +24,7 @@
           </select>
           <div class="Select__icon">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -47,18 +51,23 @@
       <div class="Grid Grid--cols-1 Grid--desktop--cols-3">
 
         <div class="Select Select--small">
-          <label for="select-size-small" class="Select__label">Small</label>
+          <label
+            for="select-size-small"
+            class="Label"
+          >Small</label>
           <div class="Select__inputContainer">
             <select
               id="select-size-small"
               name="size-small"
               class="Select__input"
+              aria-describedby="select-size-small-helper-text"
             >
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
             </select>
             <div class="Select__icon">
               <svg
+                class="Icon"
                 width="16"
                 height="16"
                 aria-hidden="true"
@@ -67,22 +76,30 @@
               </svg>
             </div>
           </div>
-          <div class="Select__helperText">Helper text</div>
+          <div
+            class="HelperText"
+            id="select-size-small-helper-text"
+          >Helper text</div>
         </div>
 
         <div class="Select Select--medium">
-          <label for="select-size-medium" class="Select__label">Medium (default)</label>
+          <label
+            for="select-size-medium"
+            class="Label"
+          >Medium (default)</label>
           <div class="Select__inputContainer">
             <select
               id="select-size-medium"
               name="size-medium"
               class="Select__input"
+              aria-describedby="select-size-medium-helper-text"
             >
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
             </select>
             <div class="Select__icon">
               <svg
+                class="Icon"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -91,22 +108,30 @@
               </svg>
             </div>
           </div>
-          <div class="Select__helperText">Helper text</div>
+          <div
+            class="HelperText"
+            id="select-size-medium-helper-text"
+          >Helper text</div>
         </div>
 
         <div class="Select Select--large">
-          <label for="select-size-large" class="Select__label">Large</label>
+          <label
+            for="select-size-large"
+            class="Label"
+          >Large</label>
           <div class="Select__inputContainer">
             <select
               id="select-size-large"
               name="size-large"
               class="Select__input"
+              aria-describedby="select-size-large-helper-text"
             >
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
             </select>
             <div class="Select__icon">
               <svg
+                class="Icon"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -115,7 +140,10 @@
               </svg>
             </div>
           </div>
-          <div class="Select__helperText">Helper text</div>
+          <div
+            class="HelperText"
+            id="select-size-large-helper-text"
+          >Helper text</div>
         </div>
 
       </div>
@@ -134,7 +162,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="Select Select--medium">
-        <label for="select-required" class="Select__label Select__label--required">Label</label>
+        <label
+          for="select-required"
+          class="Label Label--required"
+        >Label</label>
         <div class="Select__inputContainer">
           <select
             id="select-required"
@@ -142,12 +173,16 @@
             class="Select__input"
             required
           >
-            <option value="" selected>Select an option</option>
+            <option
+              value=""
+              selected
+            >Select an option</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
           <div class="Select__icon">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -173,7 +208,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="Select Select--medium">
-        <label for="select-hidden-label" class="Select__label Select__label--hidden">Label</label>
+        <label
+          for="select-hidden-label"
+          class="Label accessibility-hidden"
+        >Label</label>
         <div class="Select__inputContainer">
           <select
             id="select-hidden-label"
@@ -185,6 +223,7 @@
           </select>
           <div class="Select__icon">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -210,19 +249,26 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="Select Select--medium">
-        <label for="select-placeholder" class="Select__label">Label</label>
+        <label
+          for="select-placeholder"
+          class="Label"
+        >Label</label>
         <div class="Select__inputContainer">
           <select
             id="select-placeholder"
             name="placeholder"
             class="Select__input"
           >
-            <option value="" selected>Select an option</option>
+            <option
+              value=""
+              selected
+            >Select an option</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
           <div class="Select__icon">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -234,7 +280,10 @@
       </div>
 
       <div class="Select Select--medium">
-        <label for="select-placeholder-disabled" class="Select__label Select__label--required">Label</label>
+        <label
+          for="select-placeholder-disabled"
+          class="Label Label--required"
+        >Label</label>
         <div class="Select__inputContainer">
           <select
             id="select-placeholder-disabled"
@@ -252,6 +301,7 @@
           </select>
           <div class="Select__icon">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -277,18 +327,23 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="Select Select--medium">
-        <label for="select-helper-text" class="Select__label">Label</label>
+        <label
+          for="select-helper-text"
+          class="Label"
+        >Label</label>
         <div class="Select__inputContainer">
           <select
             id="select-helper-text"
             name="helperText"
             class="Select__input"
+            aria-describedby="select-helper-text-helper-text"
           >
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
           <div class="Select__icon">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -297,7 +352,10 @@
             </svg>
           </div>
         </div>
-        <div class="Select__helperText">Helper text</div>
+        <div
+          class="HelperText"
+          id="select-helper-text-helper-text"
+        >Helper text</div>
       </div>
 
     </div>
@@ -315,7 +373,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="Select Select--medium Select--disabled">
-        <label for="select-disabled" class="Select__label">Label</label>
+        <label
+          for="select-disabled"
+          class="Label Label--disabled"
+        >Label</label>
         <div class="Select__inputContainer">
           <select
             id="select-disabled"
@@ -328,6 +389,7 @@
           </select>
           <div class="Select__icon">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -353,7 +415,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="Select Select--medium Select--success">
-        <label for="select-success" class="Select__label">Label</label>
+        <label
+          for="select-success"
+          class="Label"
+        >Label</label>
         <div class="Select__inputContainer">
           <select
             id="select-success"
@@ -365,6 +430,7 @@
           </select>
           <div class="Select__icon">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -376,18 +442,23 @@
       </div>
 
       <div class="Select Select--medium Select--warning">
-        <label for="select-warning" class="Select__label">Label</label>
+        <label
+          for="select-warning"
+          class="Label"
+        >Label</label>
         <div class="Select__inputContainer">
           <select
             id="select-warning"
             name="warning"
             class="Select__input"
+            aria-describedby="select-warning-validation-text"
           >
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
           <div class="Select__icon">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -396,22 +467,30 @@
             </svg>
           </div>
         </div>
-        <div class="Select__validationText">Validation text</div>
+        <div
+          class="ValidationText ValidationText--warning"
+          id="select-warning-validation-text"
+        >Validation text</div>
       </div>
 
       <div class="Select Select--medium Select--danger">
-        <label for="select-danger" class="Select__label">Label</label>
+        <label
+          for="select-danger"
+          class="Label"
+        >Label</label>
         <div class="Select__inputContainer">
           <select
             id="select-danger"
             name="danger"
             class="Select__input"
+            aria-describedby="select-danger-validation-text"
           >
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
           <div class="Select__icon">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -420,7 +499,10 @@
             </svg>
           </div>
         </div>
-        <div class="Select__validationText">
+        <div
+          class="ValidationText ValidationText--danger"
+          id="select-danger-validation-text"
+        >
           <ul>
             <li>First validation text</li>
             <li>Second validation text</li>
@@ -443,18 +525,23 @@
       {{#each @root.states as |state|}}
 
       <div class="Select Select--medium Select--{{state}}">
-        <label for="select-{{state}}-icon" class="Select__label">Label</label>
+        <label
+          for="select-{{state}}-icon"
+          class="Label"
+        >Label</label>
         <div class="Select__inputContainer">
           <select
             id="select-{{state}}-icon"
             name="danger"
             class="Select__input"
+            aria-describedby="select-{{state}}-icon-validation-text"
           >
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
           <div class="Select__icon">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -463,8 +550,12 @@
             </svg>
           </div>
         </div>
-        <div class="Select__validationText">
+        <div
+          class="ValidationText ValidationText--{{state}}"
+          id="select-{{state}}-icon-validation-text"
+        >
           <svg
+            class="Icon"
             width="20"
             height="20"
             aria-hidden="true"
@@ -494,7 +585,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="Select Select--medium Select--fluid">
-        <label for="select-fluid" class="Select__label">Label</label>
+        <label
+          for="select-fluid"
+          class="Label"
+        >Label</label>
         <div class="Select__inputContainer">
           <select
             id="select-fluid"
@@ -506,6 +600,7 @@
           </select>
           <div class="Select__icon">
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"

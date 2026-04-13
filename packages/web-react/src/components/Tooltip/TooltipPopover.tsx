@@ -8,6 +8,9 @@ import TooltipCloseButton from './TooltipCloseButton';
 import { useTooltipContext } from './TooltipContext';
 import { useTooltipStyleProps } from './useTooltipStyleProps';
 
+const normalizeFiniteNumber = (value?: number, fallback?: number) =>
+  typeof value === 'number' && Number.isFinite(value) ? value : fallback;
+
 const TooltipPopover = (props: TooltipPopoverProps) => {
   const { children, ...rest } = props;
   const {
@@ -28,6 +31,7 @@ const TooltipPopover = (props: TooltipPopoverProps) => {
   const { classProps, props: modifiedProps } = useTooltipStyleProps({
     isOpen,
     isDismissible,
+    placement,
     ...rest,
   });
   const { styleProps: contentStyleProps, props: contentOtherProps } = useStyleProps(modifiedProps);
@@ -66,9 +70,12 @@ const TooltipPopover = (props: TooltipPopoverProps) => {
           ? arrowEl.offsetHeight
           : (arrowEl.offsetHeight + arrowEl.offsetWidth) / 2;
 
+      const arrowX = arrow?.x;
+      const arrowY = arrow?.y;
+
       return {
-        left: arrow?.x,
-        top: arrow?.y,
+        left: normalizeFiniteNumber(arrowX),
+        top: normalizeFiniteNumber(arrowY),
         [staticSide]: offset && -Math.floor(offset), // remove 0.5 pixels values for arrow offset
       };
     }
@@ -84,13 +91,12 @@ const TooltipPopover = (props: TooltipPopoverProps) => {
       {...getFloatingProps()}
       style={{
         position,
-        top: y ?? 0,
-        left: x ?? 0,
+        top: normalizeFiniteNumber(y, 0),
+        left: normalizeFiniteNumber(x, 0),
         ...getMaxHeightAndWidth(),
         ...contentStyleProps.style,
       }}
       data-spirit-element="tooltip" // This is used to select CSS variables for maxWidth and tooltip offset
-      data-spirit-placement={placement} // This attribute is used by the CSS to position the arrow
     >
       {children}
       {renderCloseButton}

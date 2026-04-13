@@ -8,7 +8,6 @@ describe('useItemStyleProps', () => {
     const { result } = renderHook(() => useItemStyleProps(props));
 
     expect(result.current.classProps).toEqual({
-      helperText: 'Item__helperText',
       icon: {
         root: 'Item__icon',
         start: 'Item__icon--start',

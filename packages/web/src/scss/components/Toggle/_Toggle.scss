@@ -1,13 +1,12 @@
 @use 'theme';
 @use '../../settings/cursors';
-@use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/reset';
 
 $_field-name: 'Toggle';
 
 .Toggle {
-    @include form-fields-tools.inline-field-root();
+    @include form-fields-tools.inline-field-root($_field-name);
 
     display: flex;
     align-items: start;
@@ -21,19 +20,6 @@ $_field-name: 'Toggle';
 
 .Toggle__text {
     flex: 1;
-}
-
-.Toggle__label {
-    @include form-fields-tools.inline-field-label();
-    @include form-fields-tools.stretch();
-}
-
-.Toggle__label--hidden {
-    @include form-fields-tools.label-hidden();
-}
-
-.Toggle__label--required::after {
-    @include form-fields-tools.label-required();
 }
 
 .Toggle__input {
@@ -136,15 +122,6 @@ $_field-name: 'Toggle';
     background-image: theme.$input-mark-image-state-checked;
 }
 
-.Toggle__validationText,
-.Toggle > .Toggle__text > [data-spirit-element='validation_text'] {
-    @include form-fields-tools.validation-text();
-}
-
-.Toggle__helperText {
-    @include form-fields-tools.helper-text();
-}
-
 @include form-fields-tools.input-field-validation-states($_field-name);
 
 .Toggle:is(.Toggle--disabled, .is-disabled) {
@@ -154,10 +131,6 @@ $_field-name: 'Toggle';
     // Migration: delete mixin `form-fields-tools.input-details-text-disabled` and generate class `InputDetails--disabled`.
     // @see https://jira.almacareer.tech/browse/DS-2496
     @include form-fields-tools.input-details-text-disabled();
-}
-
-.Toggle:is(.Toggle--disabled, .is-disabled) .Toggle__label {
-    @include form-fields-tools.label-disabled();
 }
 
 .Toggle:is(.Toggle--disabled, .is-disabled) > .Toggle__input,
@@ -188,14 +161,6 @@ $_field-name: 'Toggle';
     &::after {
         background-image: theme.$input-mark-image-state-checked-disabled;
     }
-}
-
-.Toggle:is(.Toggle--disabled, .is-disabled) .Toggle__validationText {
-    @include form-fields-tools.validation-text-disabled();
-}
-
-.Toggle:is(.Toggle--disabled, .is-disabled) .Toggle__helperText {
-    @include form-fields-tools.helper-text-disabled();
 }
 
 @include form-fields-tools.input-position(

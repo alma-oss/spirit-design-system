@@ -1,0 +1,29 @@
+// 1. Make the text selectable and allow links to be clickable in the helper and validation texts.
+@use 'theme';
+@use '@tokens' as tokens;
+@use '../../tools/typography';
+
+.HelperText {
+    @include typography.generate(theme.$typography);
+
+    display: block;
+    grid-column-start: var(--#{tokens.$css-variable-prefix}helper-text-grid-column-start);
+    margin-top: var(--#{tokens.$css-variable-prefix}helper-text-margin-top, #{theme.$margin-top});
+    color: theme.$color-state-default;
+}
+
+.HelperText--disabled {
+    color: theme.$color-state-disabled;
+}
+
+.HelperText--item {
+    @include typography.generate(theme.$item-typography);
+
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.HelperText--inline {
+    position: relative; // 1.
+    z-index: 1; // 1.
+}

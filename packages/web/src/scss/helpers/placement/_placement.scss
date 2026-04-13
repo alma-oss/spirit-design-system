@@ -1,0 +1,21 @@
+@use '@tokens' as tokens;
+@use '../../tools/placement';
+@use '../../settings/dictionaries';
+
+$_prefix: '#{tokens.$css-variable-prefix}placement';
+
+@each $placement-value in dictionaries.$placement {
+    .placement-#{$placement-value} {
+        $arrow-placement: placement.transform($placement-value, $main-axis-inverse: true);
+
+        --#{$_prefix}-arrow-rotate: #{placement.get-arrow-rotate($arrow-placement)};
+        --#{$_prefix}-arrow-transform-origin: center;
+
+        transform-origin: placement.get-child-transform-origin($placement-value);
+    }
+
+    .placement-#{$placement-value}:not(.placement-controlled) {
+        inset: placement.get-child-inset($placement-value);
+        translate: placement.get-child-translate($_prefix, $placement-value);
+    }
+}

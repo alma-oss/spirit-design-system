@@ -1,10 +1,12 @@
 @use 'sass:map';
+@use '@tokens' as tokens;
 @use '../../tools/breakpoint';
-@use '../../tools/dictionaries';
 @use '../../tools/placement';
 @use 'theme';
 
 .DropdownPopover {
+    --#{tokens.$css-variable-prefix}placement-offset: #{theme.$offset};
+
     @include placement.child();
 
     display: none;
@@ -28,9 +30,3 @@
 .DropdownPopover.is-open {
     display: block;
 }
-
-@include dictionaries.generate-placements(
-    $class-name: 'DropdownPopover',
-    $dictionary-values: theme.$placement-dictionary,
-    $offset: theme.$offset
-);

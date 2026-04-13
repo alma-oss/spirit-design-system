@@ -4,7 +4,7 @@ Basic usage:
 
 ```html
 <div class="Select Select--medium">
-  <label for="select-simple" class="Select__label">Label</label>
+  <label for="select-simple" class="Label">Label</label>
   <div class="Select__inputContainer">
     <select id="select-simple" name="simple" class="Select__input">
       <option value="1">Option 1</option>
@@ -23,7 +23,7 @@ Sizes (please note the icon size):
 
 ```html
 <div class="Select Select--small">
-  <label for="select-size-small" class="Select__label">Small</label>
+  <label for="select-size-small" class="Label">Small</label>
   <div class="Select__inputContainer">
     <select id="select-size-small" name="size-small" class="Select__input">
       <option value="1">Option 1</option>
@@ -38,7 +38,7 @@ Sizes (please note the icon size):
 </div>
 
 <div class="Select Select--medium">
-  <label for="select-size-medium" class="Select__label">Medium (default)</label>
+  <label for="select-size-medium" class="Label">Medium (default)</label>
   <div class="Select__inputContainer">
     <select id="select-size-medium" name="size-medium" class="Select__input">
       <option value="1">Option 1</option>
@@ -53,7 +53,7 @@ Sizes (please note the icon size):
 </div>
 
 <div class="Select Select--large">
-  <label for="select-size-large" class="Select__label">Large</label>
+  <label for="select-size-large" class="Label">Large</label>
   <div class="Select__inputContainer">
     <select id="select-size-large" name="size-large" class="Select__input">
       <option value="1">Option 1</option>
@@ -72,7 +72,7 @@ Required select (requires a placeholder option):
 
 ```html
 <div class="Select Select--medium">
-  <label for="select-simple" class="Select__label Select__label--required">Label</label>
+  <label for="select-simple" class="Label Label--required">Label</label>
   <div class="Select__inputContainer">
     <select id="select-simple" name="simple" class="Select__input" required>
       <option value="" selected>Select an option</option>
@@ -92,7 +92,7 @@ Hidden label:
 
 ```html
 <div class="Select Select--medium">
-  <label for="select-hidden-label" class="Select__label Select__label--hidden">Label</label>
+  <label for="select-hidden-label" class="Label accessibility-hidden">Label</label>
   <div class="Select__inputContainer">
     <select id="select-hidden-label" name="hiddenLabel" class="Select__input">
       <option value="1">Option 1</option>
@@ -119,7 +119,7 @@ sure users give all needed details before sending the form.
 
 ```html
 <div class="Select Select--medium">
-  <label for="select-placeholder" class="Select__label">Label</label>
+  <label for="select-placeholder" class="Label">Label</label>
   <div class="Select__inputContainer">
     <select id="select-placeholder" name="placeholder" class="Select__input">
       <option value="" selected>Select option</option>
@@ -135,7 +135,7 @@ sure users give all needed details before sending the form.
 </div>
 
 <div class="Select Select--medium">
-  <label for="select-placeholder-disabled" class="Select__label Select__label--required">Label</label>
+  <label for="select-placeholder-disabled" class="Label Label--required">Label</label>
   <div class="Select__inputContainer">
     <select id="select-placeholder-disabled" name="placeholderDisabled" class="Select__input" required>
       <option value="" selected disabled>Select option (default is disabled)</option>
@@ -155,7 +155,7 @@ Fluid width:
 
 ```html
 <div class="Select Select--medium Select--fluid">
-  <label for="select-fluid" class="Select__label">Label</label>
+  <label for="select-fluid" class="Label">Label</label>
   <div class="Select__inputContainer">
     <select id="select-fluid" name="fluid" class="Select__input">
       <option value="1">Option 1</option>
@@ -172,11 +172,18 @@ Fluid width:
 
 Usage with helper text:
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="Select Select--medium">
-  <label for="select-helper-text" class="Select__label">Label</label>
+  <label for="select-helper-text" class="Label">Label</label>
   <div class="Select__inputContainer">
-    <select id="select-helper-text" name="helperText" class="Select__input">
+    <select
+      id="select-helper-text"
+      name="helperText"
+      class="Select__input"
+      aria-describedby="select-helper-text-helper-text"
+    >
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
     </select>
@@ -186,7 +193,7 @@ Usage with helper text:
       </svg>
     </div>
   </div>
-  <div class="Select__helperText">Helper text</div>
+  <div class="HelperText" id="select-helper-text-helper-text">Helper text</div>
 </div>
 ```
 
@@ -197,12 +204,12 @@ Validation states can be presented either by adding a CSS modifier class
 a JS interaction class when controlled by JavaScript (`has-success`,
 `has-warning`, `has-danger`). See Validation state [dictionary][dictionary-validation].
 
-- To render validation text as a list, use `<ul>` element inside of `.Select__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.Select__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
 <div class="Select Select--medium Select--success">
-  <label for="select-success" class="Select__label">Label</label>
+  <label for="select-success" class="Label">Label</label>
   <div class="Select__inputContainer">
     <select id="select-success" name="success" class="Select__input">
       <option value="1">Option 1</option>
@@ -217,9 +224,9 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div class="Select Select--medium Select--warning">
-  <label for="select-warning" class="Select__label">Label</label>
+  <label for="select-warning" class="Label">Label</label>
   <div class="Select__inputContainer">
-    <select id="select-warning" name="warning" class="Select__input">
+    <select id="select-warning" name="warning" class="Select__input" aria-describedby="select-warning-validation-text">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
     </select>
@@ -229,13 +236,13 @@ a JS interaction class when controlled by JavaScript (`has-success`,
       </svg>
     </div>
   </div>
-  <div class="Select__validationText">Validation text</div>
+  <div class="ValidationText ValidationText--warning" id="select-warning-validation-text">Validation text</div>
 </div>
 
 <div class="Select Select--medium Select--danger">
-  <label for="select-danger" class="Select__label">Label</label>
+  <label for="select-danger" class="Label">Label</label>
   <div class="Select__inputContainer">
-    <select id="select-danger" name="danger" class="Select__input">
+    <select id="select-danger" name="danger" class="Select__input" aria-describedby="select-danger-validation-text">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
     </select>
@@ -245,7 +252,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
       </svg>
     </div>
   </div>
-  <div class="Select__validationText">
+  <div class="ValidationText ValidationText--danger" id="select-danger-validation-text">
     <ul>
       <li>First validation text</li>
       <li>Second validation text</li>
@@ -254,9 +261,14 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div class="Select Select--medium Select--warning">
-  <label for="select-warning" class="Select__label">Label</label>
+  <label for="select-warning-icon" class="Label">Label</label>
   <div class="Select__inputContainer">
-    <select id="select-warning" name="warning" class="Select__input">
+    <select
+      id="select-warning-icon"
+      name="warning"
+      class="Select__input"
+      aria-describedby="select-warning-icon-validation-text"
+    >
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
     </select>
@@ -266,41 +278,12 @@ a JS interaction class when controlled by JavaScript (`has-success`,
       </svg>
     </div>
   </div>
-  <div class="Select__validationText">
+  <div class="ValidationText ValidationText--warning" id="select-warning-icon-validation-text">
     <svg width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
     <div>Validation text with icon</div>
   </div>
-</div>
-```
-
-### JavaScript-Controlled Validation Text
-
-When implementing client-side form validation, use JS interaction state classes
-(`has-success`, `has-warning`, `has-danger`) on the wrapping `<div>` element and
-render validation texts in a `<div>` or `<ul>` with `data-spirit-element="validation_text"`
-attribute. This way your JS remains disconnected from CSS that may or may not be
-[prefixed][prefixed].
-
-**Remember this approach is only valid for vanilla JS implementation. React
-components mix CSS with JS by design and handle prefixes their own way.**
-
-```html
-<div class="Select Select--medium has-danger">
-  <label for="select-js-validation" class="Select__label">Label</label>
-  <div class="Select__inputContainer">
-    <select id="select-js-validation" name="jsValidation" class="Select__input">
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-    </select>
-    <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
-        <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
-      </svg>
-    </div>
-  </div>
-  <div data-spirit-element="validation_text">Validation text</div>
 </div>
 ```
 
@@ -312,7 +295,7 @@ JS interaction class when controlled by JavaScript:
 
 ```html
 <div class="Select Select--medium Select--disabled">
-  <label for="select-disabled" class="Select__label">Label</label>
+  <label for="select-disabled" class="Label Label--disabled">Label</label>
   <div class="Select__inputContainer">
     <select id="select-disabled" name="disabled" class="Select__input" disabled>
       <option value="1">Option 1</option>
@@ -326,7 +309,7 @@ JS interaction class when controlled by JavaScript:
   </div>
 </div>
 <div class="Select Select--medium is-disabled">
-  <label for="select-is-disabled" class="Select__label">Label</label>
+  <label for="select-is-disabled" class="Label">Label</label>
   <div class="Select__inputContainer">
     <select id="select-is-disabled" name="isDisabled" class="Select__input" disabled>
       <option value="1">Option 1</option>
@@ -343,5 +326,5 @@ JS interaction class when controlled by JavaScript:
 
 👉 Please note that responsive border radius is defined by design specifications.
 
-[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md

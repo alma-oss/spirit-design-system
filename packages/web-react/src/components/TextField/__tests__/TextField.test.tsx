@@ -4,12 +4,14 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   restPropsTest,
   sizePropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
   validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import { type TextFieldType } from '../../../types';
 import TextField from '../TextField';
@@ -17,6 +19,18 @@ import TextField from '../TextField';
 jest.mock('../../../hooks/useIcon');
 
 describe('TextField', () => {
+  formFieldLabelContextPropsTest({
+    renderComponent: (props) => <TextField id="textfield-context" label="Label" type="text" {...props} />,
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => <TextField id="textfield-helper-context" label="Label" type="text" {...props} />,
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => <TextField id="textfield-validation-context" label="Label" type="text" {...props} />,
+  });
+
   describe.each(['text', 'password', 'email'])('input type %s', (type) => {
     classNamePrefixProviderTest(TextField, 'TextField');
 
@@ -26,18 +40,16 @@ describe('TextField', () => {
 
     validationStatePropsTest(TextField, 'TextField--');
 
-    validationTextPropsTest(TextField, '.TextField__validationText', type as TextFieldType);
-
     validHtmlAttributesTest(TextField);
 
     ariaAttributesTest(TextField);
 
     sizePropsTest(TextField);
 
-    it('should have label classname', () => {
+    it('should have label', () => {
       render(<TextField id="textfield" label="Label" type={type as TextFieldType} />);
 
-      expect(screen.getByText('Label')).toHaveClass('TextField__label');
+      expect(screen.getByText('Label')).toBeInTheDocument();
     });
 
     it('should have disabled classname na prop', () => {
@@ -47,29 +59,10 @@ describe('TextField', () => {
       expect(screen.getByLabelText('Label')).toHaveAttribute('disabled');
     });
 
-    it('should have hidden classname', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} isLabelHidden />);
-
-      expect(screen.getByText('Label')).toHaveClass('TextField__label--hidden');
-    });
-
-    it('should have required classname', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} isRequired />);
-
-      expect(screen.getByText('Label')).toHaveClass('TextField__label--required');
-      expect(screen.getByLabelText('Label')).toHaveAttribute('required');
-    });
-
     it('should have input classname', () => {
       render(<TextField id="textfield" label="Label" type={type as TextFieldType} />);
 
       expect(screen.getByLabelText('Label')).toHaveClass('TextField__input');
-    });
-
-    it('should have helper text', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} helperText="helper text" />);
-
-      expect(screen.getByText('helper text')).toHaveClass('TextField__helperText');
     });
 
     it('should have fluid classname', () => {
@@ -82,7 +75,6 @@ describe('TextField', () => {
       render(
         <TextField
           id="textfield"
-          data-testid="test"
           label={
             <>
               TextField <b>Label</b>
@@ -92,7 +84,7 @@ describe('TextField', () => {
         />,
       );
 
-      const element = screen.getByTestId('test').previousElementSibling as HTMLElement;
+      const element = screen.getByText('Label').parentElement as HTMLElement;
 
       expect(element).toHaveTextContent('TextField Label');
       expect(element.innerHTML).toBe('TextField <b>Label</b>');
@@ -145,5 +137,22 @@ describe('TextField', () => {
       expect(screen.getByLabelText('Label')).toHaveAttribute('disabled');
       expect(screen.getByRole('switch')).toHaveAttribute('disabled');
     });
+  });
+
+  it('should render validation icon when hasValidationIcon is set', () => {
+    render(
+      <TextField
+        id="textfield-validation-icon"
+        label="Label"
+        type="text"
+        hasValidationIcon
+        validationState="danger"
+        validationText="Invalid"
+      />,
+    );
+
+    const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
+
+    expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
 });

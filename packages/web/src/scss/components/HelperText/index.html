@@ -1,0 +1,262 @@
+{{#> web/layout/default title="HelperText" parentPageName="Components" }}
+
+<section class="py-1000 py-tablet-1100 hide-from-visual-tests">
+
+  <div class="Container">
+
+    <p>
+      <strong>Note:</strong> For demonstration purposes and to fulfill accessibility and HTML semantics requirements,
+      all HelperText on this page are associated with related form component.
+    </p>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Default</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="TextField TextField--medium">
+        <label
+          for="text-field-helper-text-example"
+          class="Label"
+        >Label</label>
+        <input
+          type="text"
+          id="text-field-helper-text-example"
+          class="TextField__input"
+          placeholder="Placeholder"
+          aria-describedby="text-field-helper-text-example-helper-text"
+        />
+        <div
+          class="HelperText"
+          id="text-field-helper-text-example-helper-text"
+        >Helper text</div>
+      </div>
+
+      <div class="TextField TextField--medium TextField--disabled">
+        <label
+          for="text-field-helper-text-disabled"
+          class="Label Label--disabled"
+        >Disabled Field</label>
+        <input
+          type="text"
+          id="text-field-helper-text-disabled"
+          class="TextField__input"
+          placeholder="Placeholder"
+          aria-describedby="text-field-helper-text-disabled-helper-text"
+          disabled
+        />
+        <div
+          class="HelperText HelperText--disabled"
+          id="text-field-helper-text-disabled-helper-text"
+        >Helper text</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Inline with Checkbox</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Checkbox Checkbox--inputPositionStart">
+        <input
+          type="checkbox"
+          id="checkbox-helper-text-example"
+          class="Checkbox__input"
+          aria-describedby="checkbox-helper-text-example-helper-text"
+        />
+        <div class="Checkbox__text">
+          <label
+            class="Label Label--inline"
+            for="checkbox-helper-text-example"
+          >Checkbox Label</label>
+          <div
+            class="HelperText HelperText--inline"
+            id="checkbox-helper-text-example-helper-text"
+          >Helper text</div>
+        </div>
+      </div>
+
+      <div class="Checkbox Checkbox--disabled Checkbox--inputPositionStart">
+        <input
+          type="checkbox"
+          id="checkbox-helper-text-disabled"
+          class="Checkbox__input"
+          aria-describedby="checkbox-helper-text-disabled-helper-text"
+          disabled
+        />
+        <div class="Checkbox__text">
+          <label
+            class="Label Label--inline Label--disabled"
+            for="checkbox-helper-text-disabled"
+          >Disabled Checkbox</label>
+          <div
+            class="HelperText HelperText--inline HelperText--disabled"
+            id="checkbox-helper-text-disabled-helper-text"
+          >Helper text</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Combined with Item component</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <button
+        type="button"
+        class="Item"
+      >
+        <span class="Label Label--item">Item label</span>
+        <span class="HelperText HelperText--item">Helper text</span>
+      </button>
+
+      <button
+        type="button"
+        class="Item Item--selected"
+      >
+        <span class="Label Label--item">Selected Item</span>
+        <span class="HelperText HelperText--item">Helper text</span>
+        <span class="Item__icon Item__icon--end">
+          <svg
+            class="Icon"
+            width="24"
+            height="24"
+            aria-hidden="true"
+          >
+            <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+          </svg>
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="Item Item--disabled"
+      >
+        <span class="Label Label--item Label--disabled">Item label</span>
+        <span class="HelperText HelperText--item HelperText--disabled">Helper text</span>
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Combined with Checkbox Item and Radio Item</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
+        <input
+          type="checkbox"
+          id="checkbox-item-helper-text-example"
+          class="Checkbox__input"
+          aria-describedby="checkbox-item-helper-text-example-helper-text"
+        />
+        <div class="Checkbox__text">
+          <label
+            class="Label Label--inline Label--item"
+            for="checkbox-item-helper-text-example"
+          >Checkbox Item</label>
+          <div
+            class="HelperText HelperText--item"
+            id="checkbox-item-helper-text-example-helper-text"
+          >Helper text</div>
+        </div>
+      </div>
+
+      <div class="Checkbox Checkbox--inputPositionStart Checkbox--item Checkbox--disabled">
+        <input
+          type="checkbox"
+          id="checkbox-item-helper-text-disabled"
+          class="Checkbox__input"
+          aria-describedby="checkbox-item-helper-text-disabled-helper-text"
+          disabled
+        />
+        <div class="Checkbox__text">
+          <label
+            class="Label Label--inline Label--item Label--disabled"
+            for="checkbox-item-helper-text-disabled"
+          >Disabled Checkbox Item</label>
+          <div
+            class="HelperText HelperText--item HelperText--disabled"
+            id="checkbox-item-helper-text-disabled-helper-text"
+          >Helper text</div>
+        </div>
+      </div>
+
+      <div class="Radio Radio--inputPositionStart Radio--item">
+        <input
+          type="radio"
+          id="radio-item-helper-text-example"
+          class="Radio__input"
+          name="helper-text-example"
+          aria-describedby="radio-item-helper-text-example-helper-text"
+        />
+        <div class="Radio__text">
+          <label
+            class="Label Label--inline Label--item"
+            for="radio-item-helper-text-example"
+          >Radio Item</label>
+          <div
+            class="HelperText HelperText--item"
+            id="radio-item-helper-text-example-helper-text"
+          >Helper text</div>
+        </div>
+      </div>
+
+      <div class="Radio Radio--inputPositionStart Radio--item Radio--disabled">
+        <input
+          type="radio"
+          id="radio-item-helper-text-disabled"
+          class="Radio__input"
+          name="helper-text-example-disabled"
+          aria-describedby="radio-item-helper-text-disabled-helper-text"
+          disabled
+        />
+        <div class="Radio__text">
+          <label
+            class="Label Label--inline Label--item Label--disabled"
+            for="radio-item-helper-text-disabled"
+          >Disabled Radio Item</label>
+          <div
+            class="HelperText HelperText--item HelperText--disabled"
+            id="radio-item-helper-text-disabled-helper-text"
+          >Helper text</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+{{/web/layout/default }}

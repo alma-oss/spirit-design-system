@@ -14,11 +14,9 @@ describe('useFileUploadStyleProps', () => {
     expect(result.current.classProps.root).toBe('UNSTABLE_FileUpload');
     expect(result.current.classProps.input).toBeDefined();
     expect(result.current.classProps.input.root).toBe('UNSTABLE_FileUploadInput has-drag-and-drop is-dragging');
-    expect(result.current.classProps.input.label).toBe('UNSTABLE_FileUploadInput__label');
     expect(result.current.classProps.input.input).toBe('UNSTABLE_FileUploadInput__input');
     expect(result.current.classProps.input.dropLabel).toBe('UNSTABLE_FileUploadInput__dragAndDropLabel');
-    expect(result.current.classProps.input.helper).toBe('UNSTABLE_FileUploadInput__helperText');
-    expect(result.current.classProps.input.validationText).toBe('UNSTABLE_FileUploadInput__validationText');
+    expect(result.current.classProps.input.link).toBe('UNSTABLE_FileUploadInput__link link-primary link-underlined');
     expect(result.current.classProps.input.dropZone).toBeDefined();
     expect(result.current.classProps.input.dropZone.root).toBe('UNSTABLE_FileUploadInput__dropZone');
     expect(result.current.classProps.input.dropZone.content).toBe('UNSTABLE_FileUploadInput__dropZoneContent');

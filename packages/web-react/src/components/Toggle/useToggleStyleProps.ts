@@ -6,11 +6,8 @@ import { type SpiritToggleProps } from '../../types';
 export interface ToggleStyles<T> {
   classProps: {
     root: string;
-    label: string;
     text: string;
-    helperText: string;
     input: string;
-    validationText: string;
   };
   props: T;
 }
@@ -30,26 +27,19 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
   const toggleClass = useClassNamePrefix('Toggle');
   const toggleFluidClass = `${toggleClass}--fluid`;
   const toggleDisabledClass = `${toggleClass}--disabled`;
+  const toggleLabelHiddenClass = `${toggleClass}--labelHidden`;
   const toggleTextClass = `${toggleClass}__text`;
-  const toggleLabelClass = `${toggleClass}__label`;
-  const toggleHiddenLabelClass = `${toggleLabelClass}--hidden`;
   const toggleValidationClass = `${toggleClass}--${validationState}`;
-  const toggleRequiredClass = `${toggleLabelClass}--required`;
   const toggleInputClass = `${toggleClass}__input`;
   const toggleInputIndicatorsClass = `${toggleInputClass}--indicators`;
   const toggleInputPositionClass = useInputPositionClass(toggleClass, inputPosition);
-  const toggleHelperTextClass = `${toggleClass}__helperText`;
-  const toggleValidationTextClass = `${toggleClass}__validationText`;
 
   const rootClass = classNames(toggleClass, {
     [toggleInputPositionClass]: toggleInputPositionClass,
     [toggleFluidClass]: isFluid,
     [toggleDisabledClass]: isDisabled,
+    [toggleLabelHiddenClass]: isLabelHidden,
     [toggleValidationClass]: validationState,
-  });
-  const labelClass = classNames(toggleLabelClass, {
-    [toggleRequiredClass]: isRequired,
-    [toggleHiddenLabelClass]: isLabelHidden,
   });
   const inputClass = classNames(toggleInputClass, {
     [toggleInputIndicatorsClass]: hasIndicators,
@@ -58,12 +48,9 @@ export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<Spir
   return {
     classProps: {
       root: rootClass,
-      label: labelClass,
       text: toggleTextClass,
-      helperText: toggleHelperTextClass,
       input: inputClass,
-      validationText: toggleValidationTextClass,
     },
-    props: { ...restProps, validationState, isDisabled, isRequired },
+    props: { ...restProps, validationState, isDisabled, isLabelHidden, isRequired },
   };
 }

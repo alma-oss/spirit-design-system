@@ -20,7 +20,7 @@ It is a standalone component, but most often it is used in combination with the 
         <span class="UNSTABLE_File__name">
           <span class="text-truncate">Document.pdf</span>
         </span>
-        <span class="UNSTABLE_File__helperText">8,5 kB</span>
+        <span class="HelperText">8,5 kB</span>
       </div>
     </div>
     <div
@@ -96,17 +96,17 @@ Validation states can be presented either by adding a CSS modifier class
 a JS interaction class when controlled by JavaScript (`has-success`,
 `has-warning`, `has-danger`). See Validation state [dictionary][dictionary-validation].
 
-- To render validation text as a list, use `<ul>` element inside of `.UNSTABLE_File__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.UNSTABLE_File__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `ValidationText` component.
+- To render validation text with an icon, add `<svg>` icon inside of `ValidationText` component.
 
 ### Success, Warning, and Danger States
 
-Add the appropriate validation class (`has-success`, `has-warning`, or `has-danger`) and use `.UNSTABLE_File__validationText` for the message:
+Add the appropriate validation class (`has-success`, `has-warning`, or `has-danger`) and use `ValidationText` component for the message:
 
 ```html
 <li class="UNSTABLE_File has-success">
   <!-- … preview, name … -->
-  <div class="UNSTABLE_File__validationText">
+  <div class="ValidationText ValidationText--success">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#success" />
     </svg>
@@ -118,7 +118,7 @@ Add the appropriate validation class (`has-success`, `has-warning`, or `has-dang
 
 ### Uploading State
 
-Show upload progress using `.UNSTABLE_File__helperText`:
+Show upload progress using `HelperText` component:
 
 ```html
 <li class="UNSTABLE_File">
@@ -128,7 +128,7 @@ Show upload progress using `.UNSTABLE_File__helperText`:
       <span class="UNSTABLE_File__name">
         <span class="text-truncate">Document.pdf</span>
       </span>
-      <div class="UNSTABLE_File__helperText">
+      <div class="HelperText">
         <div>
           <svg class="Icon animation-spin-clockwise" width="16" height="16" aria-hidden="true">
             <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
@@ -156,7 +156,7 @@ Show upload progress using `.UNSTABLE_File__helperText`:
       <span class="UNSTABLE_File__name">
         <span class="text-truncate">Document.pdf</span>
       </span>
-      <span class="UNSTABLE_File__helperText">8,5 kB</span>
+      <span class="HelperText HelperText--disabled">8,5 kB</span>
     </div>
   </div>
   <button

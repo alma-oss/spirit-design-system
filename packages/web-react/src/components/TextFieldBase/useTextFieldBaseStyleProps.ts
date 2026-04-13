@@ -6,10 +6,7 @@ export interface TextFieldBaseStyles {
   /** className props */
   classProps: {
     root: string;
-    label: string;
     input: string;
-    helperText: string;
-    validationText: string;
     passwordToggle: string;
     passwordToggleButton: string;
     passwordToggleIcon: string;
@@ -20,8 +17,8 @@ export interface TextFieldBaseStyles {
 }
 
 export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps, 'label'>): TextFieldBaseStyles {
-  const { isFluid, isMultiline, isLabelHidden, size, validationState, ...restProps } = props;
-  const { isDisabled, isRequired } = restProps;
+  const { isFluid, isMultiline, size, validationState, ...restProps } = props;
+  const { isDisabled } = restProps;
 
   const TextFieldBaseClass = useClassNamePrefix(isMultiline ? 'TextArea' : 'TextField');
   const TextFieldBaseDisabledClass = `${TextFieldBaseClass}--disabled`;
@@ -29,14 +26,9 @@ export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps,
   const TextFieldBaseSizeClass = `${TextFieldBaseClass}--${size}`;
   const TextFieldBaseValidationClass = `${TextFieldBaseClass}--${validationState}`;
   const TextFieldBaseInputClass = `${TextFieldBaseClass}__input`;
-  const TextFieldBaseLabelClass = `${TextFieldBaseClass}__label`;
-  const TextFieldBaseLabelRequiredClass = `${TextFieldBaseClass}__label--required`;
-  const TextFieldBaseLabelHiddenClass = `${TextFieldBaseClass}__label--hidden`;
-  const TextFieldBaseValidationTextClass = `${TextFieldBaseClass}__validationText`;
   const TextFieldBasePasswordToggleClass = `${TextFieldBaseClass}__passwordToggle`;
   const TextFieldBasePasswordToggleButtonClass = `${TextFieldBaseClass}__passwordToggle__button`;
   const TextFieldBasePasswordToggleIconClass = `${TextFieldBaseClass}__passwordToggle__icon`;
-  const TextFieldBaseHelperTextClass = `${TextFieldBaseClass}__helperText`;
 
   const rootStyles = classNames(TextFieldBaseClass, {
     [TextFieldBaseDisabledClass]: isDisabled,
@@ -44,19 +36,12 @@ export function useTextFieldBaseStyleProps(props: Omit<SpiritTextFieldBaseProps,
     [TextFieldBaseValidationClass]: validationState,
     [TextFieldBaseSizeClass]: size,
   });
-  const labelStyles = classNames(TextFieldBaseLabelClass, {
-    [TextFieldBaseLabelRequiredClass]: isRequired,
-    [TextFieldBaseLabelHiddenClass]: isLabelHidden,
-  });
   const counterStyles = `${TextFieldBaseClass}__counter`;
 
   return {
     classProps: {
       root: rootStyles,
-      label: labelStyles,
       input: TextFieldBaseInputClass,
-      helperText: TextFieldBaseHelperTextClass,
-      validationText: TextFieldBaseValidationTextClass,
       passwordToggle: TextFieldBasePasswordToggleClass,
       passwordToggleButton: TextFieldBasePasswordToggleButtonClass,
       passwordToggleIcon: TextFieldBasePasswordToggleIconClass,

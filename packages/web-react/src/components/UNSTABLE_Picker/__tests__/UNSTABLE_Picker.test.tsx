@@ -4,10 +4,12 @@ import React, { type ComponentProps } from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   restPropsTest,
   stylePropsTest,
   validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import { useToggle } from '../../../hooks';
 import {
@@ -51,7 +53,17 @@ describe('UNSTABLE_Picker', () => {
 
   validationStatePropsTest(TestPicker, 'UNSTABLE_Picker--');
 
-  validationTextPropsTest(TestPicker, '.UNSTABLE_Picker__validationText');
+  formFieldLabelContextPropsTest({
+    renderComponent: (props) => <TestPicker {...defaultProps} emptySelectionLabel="Select" {...props} />,
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => <TestPicker {...defaultProps} {...props} />,
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => <TestPicker {...defaultProps} {...props} />,
+  });
 
   it('should render selected tags and toggle items', () => {
     const onSelectionChange = jest.fn();

@@ -15,8 +15,6 @@ export interface FileStyle {
     content: string;
     text: string;
     name: string;
-    helperText: string;
-    validationText: string;
     imageCropStyles?: FileImageCropStyles;
     imageObjectFitStyles?: FileImageObjectFitStyles;
   };
@@ -40,8 +38,6 @@ export const useFileStyleProps = (props?: FileStyleProps): FileStyle => {
       content: `${fileClass}__content`,
       text: `${fileClass}__text`,
       name: `${fileClass}__name`,
-      helperText: `${fileClass}__helperText`,
-      validationText: `${fileClass}__validationText`,
       ...(hasCoordsInMeta && { imageCropStyles }),
       ...(imageObjectFitStyles && { imageObjectFitStyles }),
     },

@@ -9,14 +9,6 @@ $_field-name: 'FieldGroup';
     border: 0;
 }
 
-.FieldGroup__label {
-    @include form-fields-tools.box-field-label();
-}
-
-.FieldGroup__label--required::after {
-    @include form-fields-tools.label-required();
-}
-
 .FieldGroup__fields {
     display: grid;
     row-gap: theme.$gap;
@@ -30,25 +22,4 @@ $_field-name: 'FieldGroup';
     justify-content: start;
 }
 
-.FieldGroup__validationText,
-.FieldGroup > [data-spirit-element='validation_text'] {
-    @include form-fields-tools.validation-text();
-}
-
-.FieldGroup__helperText {
-    @include form-fields-tools.helper-text();
-}
-
 @include form-fields-tools.input-field-validation-states($_field-name);
-
-.FieldGroup[disabled] > .FieldGroup__label {
-    @include form-fields-tools.label-disabled();
-}
-
-.FieldGroup[disabled] > :is(.FieldGroup__validationText, [data-spirit-element='validation_text']) {
-    @include form-fields-tools.validation-text-disabled();
-}
-
-.FieldGroup[disabled] > .FieldGroup__helperText {
-    @include form-fields-tools.helper-text-disabled();
-}

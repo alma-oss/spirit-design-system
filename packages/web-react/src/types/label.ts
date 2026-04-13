@@ -1,5 +1,5 @@
 import { type ElementType, type ReactNode } from 'react';
-import { type StyleProps, type TransferProps } from './shared';
+import { type LabelStyleProps, type StyleProps } from './shared';
 
 export type LabelElementProps<E extends ElementType> = {
   /**
@@ -17,4 +17,6 @@ export interface LabelProps {
 }
 
 export interface SpiritLabelProps<T extends ElementType = 'label'>
-  extends LabelElementProps<T>, LabelProps, StyleProps, TransferProps {}
+  extends LabelElementProps<T>, LabelProps, StyleProps, LabelStyleProps {
+  id?: string;
+}

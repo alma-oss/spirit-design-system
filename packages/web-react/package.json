@@ -319,14 +319,6 @@
       "require": "./dist/components/EmptyState/index.cjs",
       "default": "./dist/components/EmptyState/index.js"
     },
-    "./components/Field": {
-      "types": "./dist/components/Field/index.d.ts",
-      "development": "./src/components/Field/index.ts",
-      "production": "./dist/components/Field/index.js",
-      "import": "./dist/components/Field/index.js",
-      "require": "./dist/components/Field/index.cjs",
-      "default": "./dist/components/Field/index.js"
-    },
     "./components/FieldGroup": {
       "types": "./dist/components/FieldGroup/index.d.ts",
       "development": "./src/components/FieldGroup/index.ts",
@@ -383,6 +375,14 @@
       "require": "./dist/components/Heading/index.cjs",
       "default": "./dist/components/Heading/index.js"
     },
+    "./components/HelperText": {
+      "types": "./dist/components/HelperText/index.d.ts",
+      "development": "./src/components/HelperText/index.ts",
+      "production": "./dist/components/HelperText/index.js",
+      "import": "./dist/components/HelperText/index.js",
+      "require": "./dist/components/HelperText/index.cjs",
+      "default": "./dist/components/HelperText/index.js"
+    },
     "./components/Hidden": {
       "types": "./dist/components/Hidden/index.d.ts",
       "development": "./src/components/Hidden/index.ts",
@@ -422,6 +422,14 @@
       "import": "./dist/components/Item/index.js",
       "require": "./dist/components/Item/index.cjs",
       "default": "./dist/components/Item/index.js"
+    },
+    "./components/Label": {
+      "types": "./dist/components/Label/index.d.ts",
+      "development": "./src/components/Label/index.ts",
+      "production": "./dist/components/Label/index.js",
+      "import": "./dist/components/Label/index.js",
+      "require": "./dist/components/Label/index.cjs",
+      "default": "./dist/components/Label/index.js"
     },
     "./components/Link": {
       "types": "./dist/components/Link/index.d.ts",
@@ -710,6 +718,14 @@
       "import": "./dist/components/UNSTABLE_Picker/index.js",
       "require": "./dist/components/UNSTABLE_Picker/index.cjs",
       "default": "./dist/components/UNSTABLE_Picker/index.js"
+    },
+    "./components/ValidationText": {
+      "types": "./dist/components/ValidationText/index.d.ts",
+      "development": "./src/components/ValidationText/index.ts",
+      "production": "./dist/components/ValidationText/index.js",
+      "import": "./dist/components/ValidationText/index.js",
+      "require": "./dist/components/ValidationText/index.cjs",
+      "default": "./dist/components/ValidationText/index.js"
     },
     "./components/VisuallyHidden": {
       "types": "./dist/components/VisuallyHidden/index.d.ts",

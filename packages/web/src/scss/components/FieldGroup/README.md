@@ -8,7 +8,7 @@ validation messages for all fields in the group.
 ```html
 <fieldset class="FieldGroup">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label" aria-hidden="true">Label</div>
+  <div class="Label" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>
@@ -37,14 +37,14 @@ element.
 ```html
 <fieldset class="FieldGroup">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label FieldGroup__label--required" aria-hidden="true">Label</div>
+  <div class="Label Label--required" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>
 </fieldset>
 ```
 
-⚠️ The `FieldGroup__label` element is only used to indicate visually that all fields in the group are required. The
+⚠️ The `Label` element is only used to indicate visually that all fields in the group are required. The
 individual fields themselves need to be marked as required using the `required` attribute and the corresponding
 `--required` modifier class.
 
@@ -68,16 +68,16 @@ code.
 
 ## Helper Text
 
-To render helper text, add a `<div>` element with the `FieldGroup__helperText` class.
+To render helper text, use the [HelperText][helper-text] component:
 
 ```html
 <fieldset class="FieldGroup" aria-describedby="field-group-helper-text">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label" aria-hidden="true">Label</div>
+  <div class="Label" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>
-  <div id="field-group-helper-text" class="FieldGroup__helperText">Helper text</div>
+  <div class="HelperText" id="field-group-helper-text">Helper text</div>
 </fieldset>
 ```
 
@@ -91,7 +91,7 @@ To make the FieldGroup component fluid, add the `FieldGroup--fluid` modifier cla
 ```html
 <fieldset class="FieldGroup FieldGroup--fluid">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label" aria-hidden="true">Label</div>
+  <div class="Label" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>
@@ -117,7 +117,7 @@ disabled styling on all elements.
 ```html
 <fieldset class="FieldGroup" disabled>
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label" aria-hidden="true">Label</div>
+  <div class="Label" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <div class="TextField TextField--medium TextField--disabled">
       <label for="text-field" class="TextField__label">Label</label>
@@ -136,26 +136,26 @@ Validation states can be presented either by adding a CSS modifier class (`Field
 ```html
 <fieldset class="FieldGroup FieldGroup--success" aria-describedby="field-group-success-validation-text">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label" aria-hidden="true">Label</div>
+  <div class="Label" aria-hidden="true">Label</div>
   <div class="FieldGroup__fields">
     <!-- Form fields… -->
   </div>
-  <div id="field-group-success-validation-text" class="FieldGroup__validationText">Validation text</div>
+  <div id="field-group-success-validation-text" class="ValidationText ValidationText--success">Validation text</div>
 </fieldset>
 ```
 
-- To render validation text as a list, use `<ul>` element inside of `.FieldGroup__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.FieldGroup__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
-<div id="field-group-danger-validation-text" class="FieldGroup__validationText">
+<div id="field-group-danger-validation-text" class="ValidationText ValidationText--danger">
   <ul>
     <li>First validation text</li>
     <li>Second validation text</li>
   </ul>
 </div>
 
-<div id="field-group-danger-validation-text" class="FieldGroup__validationText">
+<div id="field-group-danger-validation-text" class="ValidationText ValidationText--danger">
   <svg width="20" height="20" aria-hidden="true">
     <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
   </svg>
@@ -166,31 +166,10 @@ Validation states can be presented either by adding a CSS modifier class (`Field
 👉 To improve the UX for users with assistive technologies, connect the validation text to the group using the
 `aria-describedby` attribute. This way, the validation text is announced when the group receives focus.
 
-### JavaScript-Controlled Validation Text
-
-When implementing client-side form validation, use JS interaction state classes (`has-success`, `has-warning`,
-`has-danger`) on the wrapping `<fieldset>` element and render validation texts in a `<div>` or `<ul>` with
-`data-spirit-element="validation_text"` attribute. This way your JS remains disconnected from CSS that may or may not be
-[prefixed][prefixed].
-
-**Remember this approach is only valid for vanilla JS implementation. React components mix CSS with JS by design and
-handle prefixes their own way.**
-
-```html
-<fieldset class="FieldGroup FieldGroup--success" aria-describedby="field-group-success-validation-text">
-  <legend class="accessibility-hidden">Label</legend>
-  <div class="FieldGroup__label" aria-hidden="true">Label</div>
-  <div class="FieldGroup__fields">
-    <!-- Form fields… -->
-  </div>
-  <div id="field-group-success-validation-text" data-spirit-element="validation_text">Validation text</div>
-</fieldset>
-```
-
 👉 Consider using [`aria-live`][aria-live] attribute on the validation text element to announce validation messages to
 screen readers.
 
-[mdn-fieldset-disabled]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset#disabled_fieldset
-[dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
-[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
 [aria-live]: https://bitsofco.de/using-aria-live/
+[dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[mdn-fieldset-disabled]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset#disabled_fieldset

@@ -10,7 +10,7 @@ is required by Webkit-based browsers such as Chrome or Safari).
 
 ```html
 <div class="Slider">
-  <label for="slider-default" class="Slider__label">Slider</label>
+  <label for="slider-default" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-default"
@@ -31,7 +31,7 @@ be updated when the slider value changes. See the [Slider Position](#slider-posi
 
 ```html
 <div class="Slider">
-  <label for="slider-steps" class="Slider__label">Slider</label>
+  <label for="slider-steps" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-steps"
@@ -66,7 +66,7 @@ position = 100 * (value - min) / (max - min)
 
 ```html
 <div class="Slider">
-  <label for="slider-hidden-label" class="Slider__label Slider__label--hidden">Slider</label>
+  <label for="slider-hidden-label" class="Label accessibility-hidden">Slider</label>
   <input
     class="Slider__input"
     id="slider-hidden-label"
@@ -82,7 +82,7 @@ position = 100 * (value - min) / (max - min)
 
 ```html
 <div class="Slider Slider--fluid">
-  <label for="slider-fluid" class="Slider__label">Slider</label>
+  <label for="slider-fluid" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-fluid"
@@ -96,9 +96,11 @@ position = 100 * (value - min) / (max - min)
 
 ## Helper Text
 
+To add helper text, use the [HelperText][helper-text] component:
+
 ```html
 <div class="Slider">
-  <label for="slider-helper-text" class="Slider__label">Slider</label>
+  <label for="slider-helper-text" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-helper-text"
@@ -108,7 +110,7 @@ position = 100 * (value - min) / (max - min)
     value="30"
     oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
   />
-  <div id="slider-helper-text-helper-text" class="Slider__helperText">Helper text</div>
+  <div class="HelperText" id="slider-helper-text-helper-text">Helper text</div>
 </div>
 ```
 
@@ -119,12 +121,12 @@ Validation states can be presented either by adding a CSS modifier class
 a JS interaction class when controlled by JavaScript (`has-success`,
 `has-warning`, `has-danger`). See Validation state [dictionary][dictionary-validation].
 
-- To render validation text as a list, use `<ul>` element inside of `.Slider__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.Slider__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
 <div class="Slider Slider--success">
-  <label for="slider-success" class="Slider__label">Slider</label>
+  <label for="slider-success" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-success"
@@ -136,7 +138,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div class="Slider Slider--warning">
-  <label for="slider-warning" class="Slider__label">Slider</label>
+  <label for="slider-warning" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-warning"
@@ -146,11 +148,11 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     value="30"
     oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
   />
-  <div id="slider-warning-validation-text" class="Slider__validationText">Validation text</div>
+  <div id="slider-warning-validation-text" class="ValidationText ValidationText--warning">Validation text</div>
 </div>
 
 <div class="Slider Slider--danger">
-  <label for="slider-danger" class="Slider__label">Slider</label>
+  <label for="slider-danger" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-danger"
@@ -160,7 +162,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     value="30"
     oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
   />
-  <div id="slider-danger-validation-text" class="Slider__validationText">
+  <div id="slider-danger-validation-text" class="ValidationText ValidationText--danger">
     <ul>
       <li>First validation text</li>
       <li>Second validation text</li>
@@ -169,7 +171,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div class="Slider Slider--warning">
-  <label for="slider-warning" class="Slider__label">Slider</label>
+  <label for="slider-warning" class="Label">Slider</label>
   <input
     class="Slider__input"
     id="slider-warning"
@@ -179,39 +181,12 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     value="30"
     oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
   />
-  <div id="slider-warning-validation-text" class="Slider__validationText">
+  <div id="slider-warning-validation-text" class="ValidationText ValidationText--warning">
     <svg width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
     <div>Validation text with icon</div>
   </div>
-</div>
-```
-
-### JavaScript-Controlled Validation Text
-
-When implementing client-side form validation, use JS interaction state classes
-(`has-success`, `has-warning`, `has-danger`) on the wrapping `<div>` element and
-render validation texts in a `<div>` with `data-spirit-element="validation_text"`
-attribute. This way your JS remains disconnected from CSS that may or may not be
-[prefixed][prefixed].
-
-**Remember this approach is only valid for vanilla JS implementation. React
-components mix CSS with JS by design and handle prefixes their own way.**
-
-```html
-<div class="Slider Slider--danger">
-  <label for="slider-danger" class="Slider__label">Slider</label>
-  <input
-    class="Slider__input"
-    id="slider-danger"
-    aria-describedby="slider-danger-validation-text"
-    style="--slider-position: 30%"
-    type="range"
-    value="30"
-    oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
-  />
-  <div data-spirit-element="validation_text">Error message inserted by JS</div>
 </div>
 ```
 
@@ -223,7 +198,7 @@ JS interaction class when controlled by JavaScript:
 
 ```html
 <div class="Slider Slider--disabled">
-  <label for="slider-disabled" class="Slider__label">Slider</label>
+  <label for="slider-disabled" class="Label Label--disabled">Slider</label>
   <input
     class="Slider__input"
     id="slider-disabled"
@@ -237,6 +212,6 @@ JS interaction class when controlled by JavaScript:
 ```
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [html-spec-range]: https://html.spec.whatwg.org/multipage/input.html#range-state-(type=range)
 [mdn-range]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
-[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names

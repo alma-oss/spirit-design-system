@@ -12,17 +12,7 @@ describe('useToggleStyleProps', () => {
       root: 'Toggle Toggle--inputPositionEnd',
       text: 'Toggle__text',
       input: 'Toggle__input',
-      label: 'Toggle__label',
-      helperText: 'Toggle__helperText',
-      validationText: 'Toggle__validationText',
     });
-  });
-
-  it('should return hidden label', () => {
-    const props = { id: 'toggle', label: 'text', isLabelHidden: true } as SpiritToggleProps;
-    const { result } = renderHook(() => useToggleStyleProps(props));
-
-    expect(result.current.classProps.label).toBe('Toggle__label Toggle__label--hidden');
   });
 
   it('should return disabled', () => {
@@ -44,13 +34,6 @@ describe('useToggleStyleProps', () => {
     const { result } = renderHook(() => useToggleStyleProps(props));
 
     expect(result.current.classProps.root).toBe('Toggle Toggle--inputPositionEnd Toggle--fluid');
-  });
-
-  it('should return required', () => {
-    const props = { id: 'toggle', label: 'text', isRequired: true } as SpiritToggleProps;
-    const { result } = renderHook(() => useToggleStyleProps(props));
-
-    expect(result.current.classProps.label).toBe('Toggle__label Toggle__label--required');
   });
 
   it('should return input with indicators', () => {

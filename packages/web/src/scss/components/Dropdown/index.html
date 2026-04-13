@@ -12,7 +12,7 @@
         <div class="Grid Grid--cols-3 mx-auto" style="align-items: center; justify-items: center; max-width: 40rem;">
           <div class="GridItem" style="--grid-item-column-start: 2; --grid-item-row-start: 1">
 
-            <div class="Radio">
+            <div class="Radio Radio--labelHidden">
               <input
                 type="radio"
                 name="placement"
@@ -21,10 +21,10 @@
                 class="Radio__input"
               />
               <div class="Radio__text">
-                <label class="Radio__label Radio__label--hidden" for="placement-top-start">top-start</label>
+                <label class="Label Label--inline accessibility-hidden" for="placement-top-start">top-start</label>
               </div>
             </div>
-            <div class="Radio">
+            <div class="Radio Radio--labelHidden">
               <input
                 type="radio"
                 name="placement"
@@ -33,10 +33,10 @@
                 class="Radio__input"
               />
               <div class="Radio__text">
-                <label class="Radio__label Radio__label--hidden" for="placement-top">top</label>
+                <label class="Label Label--inline accessibility-hidden" for="placement-top">top</label>
               </div>
             </div>
-            <div class="Radio">
+            <div class="Radio Radio--labelHidden">
               <input
                 type="radio"
                 name="placement"
@@ -45,14 +45,14 @@
                 class="Radio__input"
               />
               <div class="Radio__text">
-                <label class="Radio__label Radio__label--hidden" for="placement-top-end">top-end</label>
+                <label class="Label Label--inline accessibility-hidden" for="placement-top-end">top-end</label>
               </div>
             </div>
 
           </div>
           <div class="GridItem" style="--grid-item-column-start: 2; --grid-item-row-start: 3">
 
-            <div class="Radio">
+            <div class="Radio Radio--labelHidden">
               <input
                 type="radio"
                 name="placement"
@@ -62,10 +62,10 @@
                 checked
               />
               <div class="Radio__text">
-                <label class="Radio__label Radio__label--hidden" for="placement-bottom-start">bottom-start</label>
+                <label class="Label Label--inline accessibility-hidden" for="placement-bottom-start">bottom-start</label>
               </div>
             </div>
-            <div class="Radio">
+            <div class="Radio Radio--labelHidden">
               <input
                 type="radio"
                 name="placement"
@@ -74,10 +74,10 @@
                 class="Radio__input"
               />
               <div class="Radio__text">
-                <label class="Radio__label Radio__label--hidden" for="placement-bottom">bottom</label>
+                <label class="Label Label--inline accessibility-hidden" for="placement-bottom">bottom</label>
               </div>
             </div>
-            <div class="Radio">
+            <div class="Radio Radio--labelHidden">
               <input
                 type="radio"
                 name="placement"
@@ -86,7 +86,7 @@
                 class="Radio__input"
               />
               <div class="Radio__text">
-                <label class="Radio__label Radio__label--hidden" for="placement-bottom-end">bottom-end</label>
+                <label class="Label Label--inline accessibility-hidden" for="placement-bottom-end">bottom-end</label>
               </div>
             </div>
 
@@ -102,7 +102,7 @@
             "
           >
 
-            <div class="Radio">
+            <div class="Radio Radio--labelHidden">
               <input
                 type="radio"
                 name="placement"
@@ -111,10 +111,10 @@
                 class="Radio__input"
               />
               <div class="Radio__text">
-                <label class="Radio__label Radio__label--hidden" for="placement-left-start">left-start</label>
+                <label class="Label Label--inline accessibility-hidden" for="placement-left-start">left-start</label>
               </div>
             </div>
-            <div class="Radio">
+            <div class="Radio Radio--labelHidden">
               <input
                 type="radio"
                 name="placement"
@@ -123,10 +123,10 @@
                 class="Radio__input"
               />
               <div class="Radio__text">
-                <label class="Radio__label Radio__label--hidden" for="placement-left">left</label>
+                <label class="Label Label--inline accessibility-hidden" for="placement-left">left</label>
               </div>
             </div>
-            <div class="Radio">
+            <div class="Radio Radio--labelHidden">
               <input
                 type="radio"
                 name="placement"
@@ -135,7 +135,7 @@
                 class="Radio__input"
               />
               <div class="Radio__text">
-                <label class="Radio__label Radio__label--hidden" for="placement-left-end">left-end</label>
+                <label class="Label Label--inline accessibility-hidden" for="placement-left-end">left-end</label>
               </div>
             </div>
 
@@ -151,7 +151,7 @@
             "
           >
 
-            <div class="Radio">
+            <div class="Radio Radio--labelHidden">
               <input
                 type="radio"
                 name="placement"
@@ -160,10 +160,10 @@
                 class="Radio__input"
               />
               <div class="Radio__text">
-                <label class="Radio__label Radio__label--hidden" for="placement-right-start">right-start</label>
+                <label class="Label Label--inline accessibility-hidden" for="placement-right-start">right-start</label>
               </div>
             </div>
-            <div class="Radio">
+            <div class="Radio Radio--labelHidden">
               <input
                 type="radio"
                 name="placement"
@@ -172,10 +172,10 @@
                 class="Radio__input"
               />
               <div class="Radio__text">
-                <label class="Radio__label Radio__label--hidden" for="placement-right">right</label>
+                <label class="Label Label--inline accessibility-hidden" for="placement-right">right</label>
               </div>
             </div>
-            <div class="Radio">
+            <div class="Radio Radio--labelHidden">
               <input
                 type="radio"
                 name="placement"
@@ -184,7 +184,7 @@
                 class="Radio__input"
               />
               <div class="Radio__text">
-                <label class="Radio__label Radio__label--hidden" for="placement-right-end">right-end</label>
+                <label class="Label Label--inline accessibility-hidden" for="placement-right-end">right-end</label>
               </div>
             </div>
 
@@ -204,7 +204,7 @@
                 <span id="dropdown-placements-example-text" style="white-space: nowrap">bottom-start</span>
               </button>
               <div
-                class="DropdownPopover"
+                class="DropdownPopover placement-bottom-start"
                 data-spirit-placement="bottom-start"
                 id="dropdown-placements-example"
               >
@@ -225,16 +225,21 @@
       </form>
 
       <script>
-        const radios = document.querySelectorAll('input[type="radio"]');
+        const placementRadios = document.querySelectorAll('form input[name="placement"]');
+        const dropdownPlacementsExample = document.getElementById('dropdown-placements-example');
+        const placementText = document.getElementById('dropdown-placements-example-text');
 
-        radios.forEach(radio => {
+        placementRadios.forEach((radio) => {
           radio.addEventListener('change', () => {
             const placement = radio.value;
-            const dropdown = document.getElementById('dropdown-placements-example');
-            const placementText = document.getElementById('dropdown-placements-example-text');
+            const placementClass = 'placement-' + placement;
 
-            dropdown.dataset.spiritPlacement = placement;
-            placementText.textContent = placement.split(/(?=[A-Z])/).join('-').toLowerCase();
+            Array.from(dropdownPlacementsExample.classList)
+              .filter((className) => className.startsWith('placement-'))
+              .forEach((className) => dropdownPlacementsExample.classList.remove(className));
+            dropdownPlacementsExample.classList.add(placementClass);
+            dropdownPlacementsExample.dataset.spiritPlacement = placement;
+            placementText.textContent = placement;
           });
         });
       </script>
@@ -266,7 +271,7 @@
             Button as anchor
           </button>
           <div
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom"
             data-spirit-placement="bottom"
             id="dropdown-alignment"
           >
@@ -313,7 +318,7 @@
           Button as anchor
         </button>
         <div
-          class="DropdownPopover"
+          class="DropdownPopover placement-bottom-start"
           data-spirit-placement="bottom-start"
           id="dropdown-various-items"
         >
@@ -323,6 +328,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -385,13 +391,14 @@
           Button as anchor
         </button>
         <div
-          class="DropdownPopover"
+          class="DropdownPopover placement-bottom-start"
           data-spirit-placement="bottom-start"
           id="dropdown-disabled-auto-close"
         >
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -404,6 +411,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -416,6 +424,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -428,6 +437,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -466,13 +476,14 @@
           Button as anchor
         </button>
         <div
-          class="DropdownPopover"
+          class="DropdownPopover placement-bottom-start"
           data-spirit-placement="bottom-start"
           id="dropdown-longer"
         >
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -485,6 +496,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -497,6 +509,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -509,6 +522,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -547,7 +561,7 @@
           Finibus quis imperdiet, semper imperdiet aliquam
         </button>
         <div
-          class="DropdownPopover"
+          class="DropdownPopover placement-top-start"
           data-spirit-placement="top-start"
           id="dropdown-full-width-mode-all"
           data-spirit-fullwidthmode="all"
@@ -555,6 +569,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -567,6 +582,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -579,6 +595,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -591,6 +608,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -628,7 +646,7 @@
           Finibus quis imperdiet, semper imperdiet aliquam
         </button>
         <div
-          class="DropdownPopover"
+          class="DropdownPopover placement-top-start"
           id="dropdown-full-width-mode-mobile"
           data-spirit-placement="top-start"
           data-spirit-fullwidthmode="mobile-only"
@@ -636,6 +654,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -648,6 +667,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -660,6 +680,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -672,6 +693,7 @@
           <a href="#" class="Item">
             <span class="Item__icon Item__icon--start">
               <svg
+                class="Icon"
                 width="24"
                 height="24"
                 aria-hidden="true"

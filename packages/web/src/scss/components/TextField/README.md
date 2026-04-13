@@ -4,7 +4,7 @@ Basic usage:
 
 ```html
 <div class="TextField TextField--medium">
-  <label for="text-field-default" class="TextField__label">Label</label>
+  <label for="text-field-default" class="Label">Label</label>
   <input type="text" id="text-field-default" class="TextField__input" name="default" placeholder="Placeholder" />
 </div>
 ```
@@ -13,12 +13,12 @@ Sizes:
 
 ```html
 <div class="TextField TextField--small">
-  <label for="text-field-size-small" class="TextField__label">Small</label>
+  <label for="text-field-size-small" class="Label">Small</label>
   <input type="text" id="text-field-size-small" class="TextField__input" name="size-small" placeholder="Placeholder" />
 </div>
 
 <div class="TextField TextField--medium">
-  <label for="text-field-size-medium" class="TextField__label">Medium (default)</label>
+  <label for="text-field-size-medium" class="Label">Medium (default)</label>
   <input
     type="text"
     id="text-field-size-medium"
@@ -29,7 +29,7 @@ Sizes:
 </div>
 
 <div class="TextField TextField--large">
-  <label for="text-field-size-large" class="TextField__label">Large</label>
+  <label for="text-field-size-large" class="Label">Large</label>
   <input type="text" id="text-field-size-large" class="TextField__input" name="size-large" placeholder="Placeholder" />
 </div>
 ```
@@ -38,7 +38,7 @@ Required input:
 
 ```html
 <div class="TextField TextField--medium">
-  <label for="text-field-required" class="TextField__label TextField__label--required">Label</label>
+  <label for="text-field-required" class="Label Label--required">Label</label>
   <input
     type="text"
     id="text-field-required"
@@ -54,7 +54,7 @@ Hidden label:
 
 ```html
 <div class="TextField TextField--medium">
-  <label for="text-field-hidden-label" class="TextField__label TextField__label--hidden">Label</label>
+  <label for="text-field-hidden-label" class="Label accessibility-hidden">Label</label>
   <input
     type="text"
     id="text-field-hidden-label"
@@ -69,7 +69,7 @@ Fluid width:
 
 ```html
 <div class="TextField TextField--medium TextField--fluid">
-  <label for="text-field-fluid" class="TextField__label">Label</label>
+  <label for="text-field-fluid" class="Label">Label</label>
   <input
     type="text"
     id="text-field-fluid"
@@ -83,11 +83,22 @@ Fluid width:
 
 Helper Text:
 
+To add helper text, use the [HelperText][helper-text] component. When helper text is present, give the helper element an `id` and set `aria-describedby` on the input to that id so assistive technologies can associate the description with the field:
+
 ```html
 <div class="TextField TextField--medium">
-  <label for="text-field-helper-text" class="TextField__label">Label</label>
+  <label for="text-field-helper-text" class="Label">Label</label>
   <input type="text" id="text-field-helper-text" class="TextField__input" name="helperText" placeholder="Placeholder" />
-  <div class="TextField__helperText">Helper text</div>
+  <label for="text-field-helper-text" class="TextField__label">Label</label>
+  <input
+    type="text"
+    id="text-field-helper-text"
+    class="TextField__input"
+    name="helperText"
+    placeholder="Placeholder"
+    aria-describedby="text-field-helper-text-helper-text"
+  />
+  <div class="HelperText" id="text-field-helper-text-helper-text">Helper text</div>
 </div>
 ```
 
@@ -123,11 +134,11 @@ element:
 
 ```html
 <div class="TextField TextField--medium">
-  <label for="text-field-size" class="TextField__label">4000 (in Roman numerals)</label>
+  <label for="text-field-size" class="Label">4000 (in Roman numerals)</label>
   <input type="text" size="4" id="text-field-size" class="TextField__input" name="size" placeholder="Placeholder" />
 </div>
 <div class="TextField TextField--medium">
-  <label for="text-field-size-em" class="TextField__label">4000 (in Roman numerals)</label>
+  <label for="text-field-size-em" class="Label">4000 (in Roman numerals)</label>
   <input
     type="text"
     size="4"
@@ -166,7 +177,7 @@ Then you need to add data attribute `data-spirit-toggle="password"` to the input
 
 ```html
 <div class="TextField TextField--medium">
-  <label for="text-field-password-toggle" class="TextField__label">Password Toggle</label>
+  <label for="text-field-password-toggle" class="Label">Password Toggle</label>
   <div class="TextField__passwordToggle">
     <input
       type="password"
@@ -205,12 +216,12 @@ Validation states can be presented either by adding a CSS modifier class
 a JS interaction class when controlled by JavaScript (`has-success`,
 `has-warning`, `has-danger`). See Validation state [dictionary][dictionary-validation].
 
-- To render validation text as a list, use `<ul>` element inside of `.TextField__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.TextField__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
 <div class="TextField TextField--medium TextField--success">
-  <label for="text-field-success" class="TextField__label">Label</label>
+  <label for="text-field-success" class="Label">Label</label>
   <input
     type="text"
     id="text-field-success"
@@ -222,7 +233,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div class="TextField TextField--medium TextField--warning">
-  <label for="text-field-warning" class="TextField__label">Label</label>
+  <label for="text-field-warning" class="Label">Label</label>
   <input
     type="text"
     id="text-field-warning"
@@ -231,11 +242,11 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     placeholder="Placeholder"
     value="Filled"
   />
-  <div class="TextField__validationText">Validation text</div>
+  <div class="ValidationText ValidationText--warning">Validation text</div>
 </div>
 
 <div class="TextField TextField--medium TextField--danger">
-  <label for="text-field-danger" class="TextField__label">Label</label>
+  <label for="text-field-danger" class="Label">Label</label>
   <input
     type="text"
     id="text-field-danger"
@@ -244,7 +255,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     placeholder="Placeholder"
     value="Filled"
   />
-  <div class="TextField__validationText">
+  <div class="ValidationText ValidationText--danger">
     <ul>
       <li>Validation text</li>
       <li>Second validation text</li>
@@ -253,7 +264,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div class="TextField TextField--medium TextField--warning">
-  <label for="text-field-warning-validation-icon" class="TextField__label">Label</label>
+  <label for="text-field-warning-validation-icon" class="Label">Label</label>
   <input
     type="text"
     id="text-field-warning-validation-icon"
@@ -262,38 +273,12 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     placeholder="Placeholder"
     value="Filled"
   />
-  <div class="TextField__validationText">
+  <div class="ValidationText ValidationText--warning">
     <svg width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
     <div>Validation text with icon</div>
   </div>
-</div>
-```
-
-### JavaScript-Controlled Validation Text
-
-When implementing client-side form validation, use JS interaction state classes
-(`has-success`, `has-warning`, `has-danger`) on the wrapping `<div>` element and
-render validation texts in a `<div>` or `<ul>` with `data-spirit-element="validation_text"`
-attribute. This way your JS remains disconnected from CSS that may or may not be
-[prefixed][prefixed].
-
-**Remember this approach is only valid for vanilla JS implementation. React
-components mix CSS with JS by design and handle prefixes their own way.**
-
-```html
-<div class="TextField TextField--medium has-danger">
-  <label for="text-field-has-danger" class="TextField__label">Label</label>
-  <input
-    type="text"
-    id="text-field-has-danger"
-    class="TextField__input"
-    name="hasDanger"
-    placeholder="Placeholder"
-    value="Filled"
-  />
-  <div data-spirit-element="validation_text">Error message inserted by JS</div>
 </div>
 ```
 
@@ -305,7 +290,7 @@ JS interaction class when controlled by JavaScript:
 
 ```html
 <div class="TextField TextField--medium TextField--disabled">
-  <label for="text-field-disabled" class="TextField__label">Label</label>
+  <label for="text-field-disabled" class="Label">Label</label>
   <input
     type="text"
     id="text-field-disabled"
@@ -317,7 +302,7 @@ JS interaction class when controlled by JavaScript:
 </div>
 
 <div class="TextField TextField--medium TextField--disabled">
-  <label for="text-field-disabled-filled" class="TextField__label TextField__label--required">Label</label>
+  <label for="text-field-disabled-filled" class="Label Label--required">Label</label>
   <input
     type="text"
     id="text-field-disabled-filled"
@@ -333,6 +318,6 @@ JS interaction class when controlled by JavaScript:
 
 👉 Please note that responsive border radius is defined by design specifications.
 
-[prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

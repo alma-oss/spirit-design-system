@@ -4,6 +4,9 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   requiredPropsTest,
   restPropsTest,
   stylePropsTest,
@@ -27,6 +30,18 @@ describe('Toggle', () => {
 
   ariaAttributesTest(Toggle);
 
+  formFieldLabelContextPropsTest({
+    renderComponent: (props) => <Toggle id="toggle-context" label="Label" {...props} />,
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => <Toggle id="toggle-helper-context" label="Label" {...props} />,
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => <Toggle id="toggle-validation-context" label="Label" {...props} />,
+  });
+
   it('should have correct className', () => {
     render(<Toggle id="test-toggle" label="Toggle Label" />);
 
@@ -38,26 +53,8 @@ describe('Toggle', () => {
 
     const label = screen.getByText('Toggle Label');
 
-    expect(label).toHaveClass('Toggle__label');
+    expect(label).toBeInTheDocument();
     expect(label).toContainHTML('label');
-  });
-
-  it('should have label with required classname', () => {
-    render(<Toggle id="test-toggle" label="Toggle Label" isRequired />);
-
-    const label = screen.getByText('Toggle Label');
-
-    expect(label).toHaveClass('Toggle__label');
-    expect(label).toHaveClass('Toggle__label--required');
-  });
-
-  it('should have hidden classname', () => {
-    render(<Toggle id="test-toggle" label="Toggle Label" isLabelHidden />);
-
-    const label = screen.getByText('Toggle Label');
-
-    expect(label).toHaveClass('Toggle__label');
-    expect(label).toHaveClass('Toggle__label--hidden');
   });
 
   it('should have input classname', () => {
@@ -72,7 +69,6 @@ describe('Toggle', () => {
     const helperText = screen.getByText('Helper Text');
 
     expect(helperText).toBeInTheDocument();
-    expect(helperText).toHaveClass('Toggle__helperText');
   });
 
   it('should have correct attribute when checked', () => {
@@ -151,5 +147,21 @@ describe('Toggle', () => {
 
     expect(element).toHaveTextContent('Toggle Label');
     expect(element.innerHTML).toBe('Toggle <b>Label</b>');
+  });
+
+  it('should render validation icon when hasValidationIcon is set', () => {
+    render(
+      <Toggle
+        id="toggle-validation-icon"
+        label="Toggle Label"
+        hasValidationIcon
+        validationState="danger"
+        validationText="Invalid"
+      />,
+    );
+
+    const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
+
+    expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
 });

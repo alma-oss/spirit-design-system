@@ -7,28 +7,24 @@ export interface RadioStyles {
   /** className props */
   classProps: {
     root: string;
-    label: string;
     input: string;
     text: string;
-    helperText: string;
   };
   /** props to be passed to the input element */
   props: RadioProps;
 }
 
 export function useRadioStyleProps(props: SpiritRadioProps): RadioStyles {
-  const { inputPosition = InputPositions.START, isItem, isLabelHidden, validationState, ...restProps } = props;
-  const { isDisabled } = restProps;
+  const { inputPosition = InputPositions.START, ...restProps } = props;
+  const { isDisabled, isLabelHidden, isItem, validationState } = restProps;
 
   const radioClass = useClassNamePrefix('Radio');
   const radioDisabledClass = `${radioClass}--disabled`;
   const radioItemClass = `${radioClass}--item`;
   const radioInputClass = `${radioClass}__input`;
   const radioInputPositionClass = useInputPositionClass(radioClass, inputPosition);
-  const radioLabelClass = `${radioClass}__label`;
-  const radioLabelHiddenClass = `${radioClass}__label--hidden`;
   const radioTextClass = `${radioClass}__text`;
-  const radioHelperTextClass = `${radioClass}__helperText`;
+  const radioLabelHiddenClass = `${radioClass}--labelHidden`;
   const radioValidationClass = `${radioClass}--${validationState}`;
 
   const rootStyles = classNames(radioClass, {
@@ -36,18 +32,14 @@ export function useRadioStyleProps(props: SpiritRadioProps): RadioStyles {
     [radioDisabledClass]: isDisabled,
     [radioItemClass]: isItem,
     [radioValidationClass]: validationState,
-  });
-  const labelStyles = classNames(radioLabelClass, {
     [radioLabelHiddenClass]: isLabelHidden,
   });
 
   return {
     classProps: {
       root: rootStyles,
-      label: labelStyles,
       input: radioInputClass,
       text: radioTextClass,
-      helperText: radioHelperTextClass,
     },
     props: restProps,
   };

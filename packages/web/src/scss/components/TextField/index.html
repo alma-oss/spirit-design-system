@@ -9,7 +9,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="TextField TextField--medium">
-        <label for="text-field-default" class="TextField__label">Label</label>
+        <label
+          for="text-field-default"
+          class="Label"
+        >Label</label>
         <input
           type="text"
           id="text-field-default"
@@ -20,7 +23,10 @@
       </div>
 
       <div class="TextField TextField--medium">
-        <label for="text-field-filled" class="TextField__label">Label</label>
+        <label
+          for="text-field-filled"
+          class="Label"
+        >Label</label>
         <input
           type="text"
           id="text-field-filled"
@@ -32,7 +38,10 @@
       </div>
 
       <div class="TextField TextField--medium">
-        <label for="text-field-password" class="TextField__label">Label</label>
+        <label
+          for="text-field-password"
+          class="Label"
+        >Label</label>
         <input
           type="password"
           id="text-field-password"
@@ -58,7 +67,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="TextField TextField--medium">
-        <label for="text-field-password-toggle" class="TextField__label">Password Toggle</label>
+        <label
+          for="text-field-password-toggle"
+          class="Label"
+        >Password Toggle</label>
         <div class="TextField__passwordToggle">
           <input
             type="password"
@@ -100,7 +112,10 @@
       </div>
 
       <div class="TextField TextField--medium TextField--disabled">
-        <label for="text-field-password-toggle-disabled" class="TextField__label">Password Toggle</label>
+        <label
+          for="text-field-password-toggle-disabled"
+          class="Label Label--disabled"
+        >Password Toggle</label>
         <div class="TextField__passwordToggle">
           <input
             type="password"
@@ -159,43 +174,67 @@
       <div class="Grid Grid--cols-1 Grid--desktop--cols-3">
 
         <div class="TextField TextField--small">
-          <label for="text-field-size-small" class="TextField__label">Small</label>
+          <label
+            for="text-field-size-small"
+            class="Label"
+          >Small</label>
           <input
             type="text"
             id="text-field-size-small"
             class="TextField__input"
             name="size-small"
             placeholder="Placeholder"
+            aria-describedby="text-field-size-small-helper-text"
           />
-          <div class="TextField__helperText">Helper text</div>
+          <div
+            class="HelperText"
+            id="text-field-size-small-helper-text"
+          >Helper text</div>
         </div>
 
         <div class="TextField TextField--medium">
-          <label for="text-field-size-medium" class="TextField__label">Medium (default)</label>
+          <label
+            for="text-field-size-medium"
+            class="Label"
+          >Medium (default)</label>
           <input
             type="text"
             id="text-field-size-medium"
             class="TextField__input"
             name="size-medium"
             placeholder="Placeholder"
+            aria-describedby="text-field-size-medium-helper-text"
           />
-          <div class="TextField__helperText">Helper text</div>
+          <div
+            class="HelperText"
+            id="text-field-size-medium-helper-text"
+          >Helper text</div>
         </div>
 
         <div class="TextField TextField--large">
-          <label for="text-field-size-large" class="TextField__label">Large</label>
+          <label
+            for="text-field-size-large"
+            class="Label"
+          >Large</label>
           <input
             type="text"
             id="text-field-size-large"
             class="TextField__input"
             name="size-large"
             placeholder="Placeholder"
+            aria-describedby="text-field-size-large-helper-text"
           />
-          <div class="TextField__helperText">Helper text</div>
+          <div
+            class="HelperText"
+            id="text-field-size-large-helper-text"
+          >Helper text</div>
         </div>
 
         <div class="TextField TextField--small">
-          <label for="text-field-password-toggle-size-small" class="TextField__label">Small</label>
+          <label
+            for="text-field-password-toggle-size-small"
+            class="Label"
+          >Small</label>
           <div class="TextField__passwordToggle">
             <input
               type="password"
@@ -203,6 +242,7 @@
               class="TextField__input"
               name="password-size-small"
               value="password"
+              aria-describedby="text-field-password-toggle-size-small-helper-text"
             />
             <button
               type="button"
@@ -234,11 +274,17 @@
               </span>
             </button>
           </div>
-          <div class="TextField__helperText">Helper text</div>
+          <div
+            class="HelperText"
+            id="text-field-password-toggle-size-small-helper-text"
+          >Helper text</div>
         </div>
 
         <div class="TextField TextField--medium">
-          <label for="text-field-password-toggle-size-medium" class="TextField__label">Medium (default)</label>
+          <label
+            for="text-field-password-toggle-size-medium"
+            class="Label"
+          >Medium (default)</label>
           <div class="TextField__passwordToggle">
             <input
               type="password"
@@ -246,6 +292,7 @@
               class="TextField__input"
               name="password-size-medium"
               value="password"
+              aria-describedby="text-field-password-toggle-size-medium-helper-text"
             />
             <button
               type="button"
@@ -277,11 +324,17 @@
               </span>
             </button>
           </div>
-          <div class="TextField__helperText">Helper text</div>
+          <div
+            class="HelperText"
+            id="text-field-password-toggle-size-medium-helper-text"
+          >Helper text</div>
         </div>
 
         <div class="TextField TextField--large">
-          <label for="text-field-password-toggle-size-large" class="TextField__label">Large</label>
+          <label
+            for="text-field-password-toggle-size-large"
+            class="Label"
+          >Large</label>
           <div class="TextField__passwordToggle">
             <input
               type="password"
@@ -289,6 +342,7 @@
               class="TextField__input"
               name="password-size-large"
               value="password"
+              aria-describedby="text-field-password-toggle-size-large-helper-text"
             />
             <button
               type="button"
@@ -320,7 +374,10 @@
               </span>
             </button>
           </div>
-          <div class="TextField__helperText">Helper text</div>
+          <div
+            class="HelperText"
+            id="text-field-password-toggle-size-large-helper-text"
+          >Helper text</div>
         </div>
 
       </div>
@@ -339,7 +396,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="TextField TextField--medium">
-        <label for="text-field-required" class="TextField__label TextField__label--required">Label</label>
+        <label
+          for="text-field-required"
+          class="Label Label--required"
+        >Label</label>
         <input
           type="text"
           id="text-field-required"
@@ -365,7 +425,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="TextField TextField--medium">
-        <label for="text-field-hidden-label" class="TextField__label TextField__label--hidden">Label</label>
+        <label
+          for="text-field-hidden-label"
+          class="Label accessibility-hidden"
+        >Label</label>
         <input
           type="text"
           id="text-field-hidden-label"
@@ -389,15 +452,22 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="TextField TextField--medium">
-        <label for="text-field-helper-text" class="TextField__label">Label</label>
+        <label
+          for="text-field-helper-text"
+          class="Label"
+        >Label</label>
         <input
           type="text"
           id="text-field-helper-text"
           class="TextField__input"
           name="helperText"
           placeholder="Placeholder"
+          aria-describedby="text-field-helper-text-helper-text"
         />
-        <div class="TextField__helperText">Helper text</div>
+        <div
+          class="HelperText"
+          id="text-field-helper-text-helper-text"
+        >Helper text</div>
       </div>
 
     </div>
@@ -415,7 +485,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="TextField TextField--medium TextField--disabled">
-        <label for="text-field-disabled" class="TextField__label">Label</label>
+        <label
+          for="text-field-disabled"
+          class="Label Label--disabled"
+        >Label</label>
         <input
           type="text"
           id="text-field-disabled"
@@ -427,7 +500,10 @@
       </div>
 
       <div class="TextField TextField--medium TextField--disabled">
-        <label for="text-field-disabled-filled" class="TextField__label TextField__label--required">Label</label>
+        <label
+          for="text-field-disabled-filled"
+          class="Label Label--required Label--disabled"
+        >Label</label>
         <input
           type="text"
           id="text-field-disabled-filled"
@@ -455,7 +531,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="TextField TextField--medium TextField--success">
-        <label for="text-field-success" class="TextField__label">Label</label>
+        <label
+          for="text-field-success"
+          class="Label"
+        >Label</label>
         <input
           type="text"
           id="text-field-success"
@@ -467,7 +546,10 @@
       </div>
 
       <div class="TextField TextField--medium TextField--warning">
-        <label for="text-field-warning" class="TextField__label">Label</label>
+        <label
+          for="text-field-warning"
+          class="Label"
+        >Label</label>
         <input
           type="text"
           id="text-field-warning"
@@ -475,12 +557,19 @@
           name="warning"
           placeholder="Placeholder"
           value="Filled"
+          aria-describedby="text-field-warning-validation-text"
         />
-        <div class="TextField__validationText">Validation text</div>
+        <div
+          class="ValidationText ValidationText--warning"
+          id="text-field-warning-validation-text"
+        >Validation text</div>
       </div>
 
       <div class="TextField TextField--medium TextField--danger">
-        <label for="text-field-danger" class="TextField__label">Label</label>
+        <label
+          for="text-field-danger"
+          class="Label"
+        >Label</label>
         <input
           type="text"
           id="text-field-danger"
@@ -488,8 +577,12 @@
           name="danger"
           placeholder="Placeholder"
           value="Filled"
+          aria-describedby="text-field-danger-validation-text"
         />
-        <div class="TextField__validationText">
+        <div
+          class="ValidationText ValidationText--danger"
+          id="text-field-danger-validation-text"
+        >
           <ul>
             <li>Validation text</li>
             <li>Second validation text</li>
@@ -500,7 +593,7 @@
       <div class="TextField TextField--medium TextField--danger">
         <label
           for="text-field-danger-with-helper-text"
-          class="TextField__label TextField__label--required"
+          class="Label Label--required"
         >Label</label>
         <input
           type="text"
@@ -510,9 +603,16 @@
           placeholder="Placeholder"
           value="Filled"
           required
+          aria-describedby="text-field-danger-with-helper-text-helper-text text-field-danger-with-helper-text-validation-text"
         />
-        <div class="TextField__helperText">This is helper text</div>
-        <div class="TextField__validationText">Danger validation text</div>
+        <div
+          class="HelperText"
+          id="text-field-danger-with-helper-text-helper-text"
+        >This is helper text</div>
+        <div
+          class="ValidationText ValidationText--danger"
+          id="text-field-danger-with-helper-text-validation-text"
+        >Danger validation text</div>
       </div>
 
     </div>
@@ -532,7 +632,7 @@
       <div class="TextField TextField--medium TextField--{{state}}">
         <label
           for="text-field-{{state}}-with-icon"
-          class="TextField__label TextField__label--required"
+          class="Label Label--required"
         >
           Label</label>
         <input
@@ -543,8 +643,12 @@
           placeholder="Placeholder"
           value="Filled"
           required
+          aria-describedby="text-field-{{state}}-with-icon-validation-text"
         />
-        <div class="TextField__validationText">
+        <div
+          class="ValidationText ValidationText--{{state}}"
+          id="text-field-{{state}}-with-icon-validation-text"
+        >
           <svg
             class="Icon"
             width="20"
@@ -578,7 +682,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="TextField TextField--medium TextField--fluid">
-        <label for="text-field-fluid" class="TextField__label">Label</label>
+        <label
+          for="text-field-fluid"
+          class="Label"
+        >Label</label>
         <input
           type="text"
           id="text-field-fluid"
@@ -603,7 +710,10 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="TextField TextField--medium">
-        <label for="text-field-size" class="TextField__label">4000 (in Roman numerals)</label>
+        <label
+          for="text-field-size"
+          class="Label"
+        >4000 (in Roman numerals)</label>
         <input
           type="text"
           size="4"
@@ -629,7 +739,10 @@
 
       <div style="display: flex; gap: 1rem; align-items: flex-start; max-width: 320px;">
         <div class="TextField TextField--medium">
-          <label for="text-field-inline" class="TextField__label TextField__label--hidden">Hidden Label</label>
+          <label
+            for="text-field-inline"
+            class="Label accessibility-hidden"
+          >Hidden Label</label>
           <input
             type="text"
             id="text-field-inline"
@@ -639,12 +752,18 @@
             value="Filled"
           />
         </div>
-        <button type="button" class="Button Button--primary Button--medium">Button</button>
+        <button
+          type="button"
+          class="Button Button--primary Button--medium"
+        >Button</button>
       </div>
 
       <div style="display: flex; gap: 1rem; align-items: flex-start; max-width: 320px;">
         <div class="TextField TextField--medium">
-          <label for="text-field-inline-first" class="TextField__label TextField__label--hidden">Hidden Label</label>
+          <label
+            for="text-field-inline-first"
+            class="Label accessibility-hidden"
+          >Hidden Label</label>
           <input
             type="text"
             id="text-field-inline-first"
@@ -655,7 +774,10 @@
           />
         </div>
         <div class="TextField TextField--medium TextField--danger">
-          <label for="text-field-inline-password" class="TextField__label TextField__label--hidden">Hidden Label</label>
+          <label
+            for="text-field-inline-password"
+            class="Label accessibility-hidden"
+          >Hidden Label</label>
           <div class="TextField__passwordToggle">
             <input
               type="password"
@@ -694,9 +816,12 @@
               </span>
             </button>
           </div>
-          <div class="TextField__validationText">Too short</div>
+          <div class="ValidationText ValidationText--danger">Too short</div>
         </div>
-        <button type="button" class="Button Button--primary Button--medium">Button</button>
+        <button
+          type="button"
+          class="Button Button--primary Button--medium"
+        >Button</button>
       </div>
 
     </div>

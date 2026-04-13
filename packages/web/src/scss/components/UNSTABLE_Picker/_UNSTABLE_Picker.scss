@@ -7,7 +7,7 @@
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/dictionaries';
 @use '../../tools/form-fields' as form-fields-tools;
-@use '../../tools/links';
+@use '../../tools/pseudo-element';
 @use '../../tools/reset';
 @use '../../tools/string' as spirit-string;
 @use '../../tools/typography';
@@ -19,19 +19,6 @@ $_field-name: spirit-string.remove-prefix($_full-field-name, 'UNSTABLE_');
 .UNSTABLE_Picker {
     @include form-fields-tools.box-field-root();
     @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
-}
-
-// @deprecated `UNSTABLE_Picker__label` will be removed with upcoming major version and replaced with separate component for label text.
-.UNSTABLE_Picker__label {
-    @include form-fields-tools.box-field-label();
-}
-
-.UNSTABLE_Picker__label--hidden {
-    @include form-fields-tools.label-hidden();
-}
-
-.UNSTABLE_Picker__label--required::after {
-    @include form-fields-tools.label-required();
 }
 
 .UNSTABLE_Picker__inputContainer {
@@ -90,23 +77,12 @@ $_field-name: spirit-string.remove-prefix($_full-field-name, 'UNSTABLE_');
 }
 
 .UNSTABLE_Picker__trigger {
-    @include links.stretch();
+    @include pseudo-element.stretch();
     @include reset.button();
 
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-// @deprecated `UNSTABLE_Picker__helperText` will be removed with upcoming major version and replaced with separate component for helper text.
-.UNSTABLE_Picker__helperText {
-    @include form-fields-tools.helper-text();
-}
-
-// @deprecated `UNSTABLE_Picker__validationText` will be removed with upcoming major version and replaced with separate component for validation text.
-.UNSTABLE_Picker__validationText,
-.UNSTABLE_Picker > [data-spirit-element='validation_text'] {
-    @include form-fields-tools.validation-text();
 }
 
 .UNSTABLE_Picker--fluid {
@@ -121,11 +97,6 @@ $_field-name: spirit-string.remove-prefix($_full-field-name, 'UNSTABLE_');
 );
 @include form-fields-tools.input-field-validation-states(#{$_full-field-name});
 
-// @deprecated `UNSTABLE_Picker__label` will be removed with upcoming major version and replaced with separate component for label text.
-:is(.UNSTABLE_Picker--disabled, .UNSTABLE_Picker.is-disabled) > .UNSTABLE_Picker__label {
-    @include form-fields-tools.label-disabled();
-}
-
 :is(.UNSTABLE_Picker--disabled, .UNSTABLE_Picker.is-disabled) .UNSTABLE_Picker__trigger {
     pointer-events: none;
     cursor: cursors.$disabled;
@@ -135,15 +106,4 @@ $_field-name: spirit-string.remove-prefix($_full-field-name, 'UNSTABLE_');
     @include form-fields-tools.box-field-disabled-input($has-placeholder: false);
 
     box-shadow: none; // 2.
-}
-
-// @deprecated `UNSTABLE_Picker__helperText` will be removed with upcoming major version and replaced with separate component for helper text.
-:is(.UNSTABLE_Picker--disabled, .UNSTABLE_Picker.is-disabled) > .UNSTABLE_Picker__helperText {
-    @include form-fields-tools.helper-text-disabled();
-}
-
-// @deprecated `UNSTABLE_Picker__validationText` will be removed with upcoming major version and replaced with separate component for validation text.
-:is(.UNSTABLE_Picker--disabled, .UNSTABLE_Picker.is-disabled)
-    > :is(.UNSTABLE_Picker__validationText, [data-spirit-element='validation_text']) {
-    @include form-fields-tools.validation-text-disabled();
 }

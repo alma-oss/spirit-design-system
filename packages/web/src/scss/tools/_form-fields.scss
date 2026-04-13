@@ -1,7 +1,8 @@
 // 1. Force the color to be printed as-is, without any color adjustment.
 // 2. Put the input above the stretched label.
-// 3. Set the color of the label on the root element so it can be overridden by a helper/utility class.
-// 4. Prepare for the stretched label pseudo element (the `stretch()` mixin).
+// 3. Prepare for the stretched label pseudo element (the `stretch()` mixin).
+// 4. Sets a gap between the label and input only if the label is visible,
+//    otherwise the gap will interfere the layout of multiple inline fields.
 
 @use 'sass:map';
 @use 'sass:string';
@@ -13,26 +14,6 @@
 @use 'reset';
 @use 'string' as spirit-string;
 @use 'typography';
-
-@mixin label-disabled() {
-    color: form-fields-settings.$label-color-state-disabled;
-
-    &::after {
-        color: form-fields-settings.$label-color-state-disabled;
-    }
-}
-
-@mixin label-hidden() {
-    @include accessibility.hide-text();
-}
-
-@mixin label-required() {
-    @include typography.generate(form-fields-settings.$label-required-typography);
-
-    content: '*';
-    margin-left: form-fields-settings.$label-required-margin-left;
-    color: form-fields-settings.$label-required-color;
-}
 
 @mixin input-disabled() {
     color: form-fields-settings.$input-color-state-disabled;
@@ -63,13 +44,16 @@
     color: form-fields-settings.$validation-text-color-state-disabled;
 }
 
-@mixin inline-field-root() {
-    position: relative; // 4.
+@mixin inline-field-root($inline-field-name: '') {
+    position: relative; // 3.
     display: inline-flex;
     margin-block: form-fields-settings.$inline-field-margin-y;
 
-    &:not(:has([class*='__label--hidden'])) {
-        column-gap: form-fields-settings.$inline-field-gap;
+    @if $inline-field-name != '' {
+        // 4.
+        &:not(.#{$inline-field-name}--labelHidden) {
+            column-gap: form-fields-settings.$inline-field-gap;
+        }
     }
 }
 
@@ -99,28 +83,6 @@
             );
         }
     }
-}
-
-@mixin inline-field-label() {
-    @include typography.generate(form-fields-settings.$inline-field-label-typography);
-
-    display: block;
-    color: form-fields-settings.$label-color-state-default;
-    cursor: cursors.$form-fields;
-}
-
-@mixin inline-field-label-disabled() {
-    @include label-disabled();
-
-    cursor: cursors.$disabled;
-}
-
-@mixin box-field-label() {
-    @include typography.generate(form-fields-settings.$box-field-label-typography);
-
-    display: block;
-    margin-bottom: form-fields-settings.$box-field-label-margin-bottom;
-    color: form-fields-settings.$label-color-state-default;
 }
 
 @mixin inline-field-input() {
@@ -237,13 +199,6 @@
             }
         }
 
-        @if $field-name != 'Checkbox' or $field-name != 'Radio' {
-            :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
-                :is(.#{$field-name}__validationText, [data-spirit-element='validation_text']) {
-                color: map.get($validation-state-value, validation-text-color);
-            }
-        }
-
         @if $field-name == 'TextArea' {
             :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
                 .#{$field-name}__counter {
@@ -283,7 +238,6 @@
     width: 100%;
     padding: form-fields-settings.$item-padding-y form-fields-settings.$item-padding-x;
     margin-block: 0;
-    color: form-fields-settings.$label-color-state-default; // 3.
     border-radius: form-fields-settings.$item-border-radius;
     background-color: form-fields-settings.$item-background-color-state-default;
 
@@ -304,35 +258,6 @@
 
 @mixin item-validation-text() {
     @include typography.generate(form-fields-settings.$item-validation-text-typography);
-}
-
-@mixin item-label() {
-    @include typography.generate(form-fields-settings.$item-label-typography);
-}
-
-@mixin helper-text() {
-    @include typography.generate(form-fields-settings.$helper-text-typography);
-
-    display: block;
-    margin-top: form-fields-settings.$helper-text-margin-top;
-    color: form-fields-settings.$helper-text-color-state-default;
-}
-
-@mixin helper-text-disabled() {
-    color: form-fields-settings.$helper-text-color-state-disabled;
-}
-
-@mixin item-helper-text() {
-    @include typography.generate(form-fields-settings.$item-helper-text-typography);
-}
-
-@mixin stretch($pseudo-element: before) {
-    &::#{$pseudo-element} {
-        content: '';
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-    }
 }
 
 // Generates responsive input position classes for form field components.

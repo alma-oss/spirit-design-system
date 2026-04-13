@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
@@ -13,6 +13,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { PropsProvider } from '../../../context';
 import Button from '../Button';
 
 jest.mock('../../../hooks/useIcon');
@@ -39,18 +40,40 @@ describe('Button', () => {
   elementTypePropsTest(Button);
 
   it('should have default classname', () => {
-    const dom = render(<Button />);
+    render(<Button />);
 
-    const element = dom.container.querySelector('button') as HTMLElement;
-
-    expect(element).toHaveClass('Button--primary');
+    expect(screen.getByRole('button')).toHaveClass('Button--primary');
   });
 
   it('should render text children', () => {
-    const dom = render(<Button>Hello World</Button>);
+    render(<Button>Hello World</Button>);
 
-    const element = dom.container.querySelector('button') as HTMLElement;
+    expect(screen.getByRole('button')).toHaveTextContent('Hello World');
+  });
 
-    expect(element.textContent).toBe('Hello World');
+  it('should render with custom spacing', () => {
+    render(<Button spacing="space-600">Button</Button>);
+
+    expect(screen.getByRole('button')).toHaveStyle({ '--button-spacing': 'var(--spirit-space-600)' });
+  });
+
+  it('should render with custom spacing for each breakpoint', () => {
+    render(<Button spacing={{ mobile: 'space-100', tablet: 'space-1000', desktop: 'space-1200' }}>Button</Button>);
+
+    const element = screen.getByRole('button') as HTMLElement;
+
+    expect(element).toHaveStyle({ '--button-spacing': 'var(--spirit-space-100)' });
+    expect(element).toHaveStyle({ '--button-spacing-tablet': 'var(--spirit-space-1000)' });
+    expect(element).toHaveStyle({ '--button-spacing-desktop': 'var(--spirit-space-1200)' });
+  });
+
+  it('should not forward unrelated context props to DOM', () => {
+    render(
+      <PropsProvider value={{ validationState: 'danger' }}>
+        <Button>Button</Button>
+      </PropsProvider>,
+    );
+
+    expect(screen.getByRole('button')).not.toHaveAttribute('validationState');
   });
 });

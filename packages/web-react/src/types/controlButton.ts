@@ -6,6 +6,7 @@ import type {
   PolymorphicComponentProps,
   SingleOrResponsive,
   SizeExtendedDictionaryType,
+  SpaceToken,
   StyleProps,
 } from './shared';
 
@@ -23,6 +24,8 @@ export interface ControlButtonStyleProps<S = void> extends ControlButtonBaseProp
   isSymmetrical?: SingleOrResponsive<boolean>;
   /** The size of the button. */
   size?: SizeExtendedDictionaryType | S;
+  /** Custom spacing between button content items. */
+  spacing?: SingleOrResponsive<SpaceToken>;
 }
 
 /** ===== INTERNAL API ===== */
