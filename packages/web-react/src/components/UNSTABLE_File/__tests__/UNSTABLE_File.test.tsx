@@ -135,4 +135,25 @@ describe('UNSTABLE_File', () => {
     expect(screen.getByRole('button', { name: 'Edit file' })).toBeInTheDocument();
     expect(screen.getAllByRole('button')).toHaveLength(1);
   });
+
+  it('should add color-scheme-on-disabled class to dismiss button when isDisabled is true', () => {
+    renderInList(<UNSTABLE_File {...defaultProps} removeText="Remove file" isDisabled />);
+
+    expect(screen.getByRole('button', { name: 'Remove file' })).toHaveClass('color-scheme-on-disabled');
+  });
+
+  it('should add color-scheme-on-disabled class to edit button when isDisabled is true', () => {
+    renderInList(
+      <UNSTABLE_File {...defaultProps} editText="Edit file" removeText="Remove file" onChange={() => {}} isDisabled />,
+    );
+
+    expect(screen.getByRole('button', { name: 'Edit file' })).toHaveClass('color-scheme-on-disabled');
+  });
+
+  it('should not add color-scheme-on-disabled class to action buttons when isDisabled is false', () => {
+    renderInList(<UNSTABLE_File {...defaultProps} editText="Edit file" removeText="Remove file" onChange={() => {}} />);
+
+    expect(screen.getByRole('button', { name: 'Edit file' })).not.toHaveClass('color-scheme-on-disabled');
+    expect(screen.getByRole('button', { name: 'Remove file' })).not.toHaveClass('color-scheme-on-disabled');
+  });
 });

@@ -54,15 +54,17 @@ const UNSTABLE_File = <E extends ElementType = 'li'>(props: SpiritUnstableFilePr
     isDisabled,
   };
 
+  const disabledClassNameProp = { UNSAFE_className: 'color-scheme-on-disabled' };
+
   const editActionButton = onChange ? (
-    <ControlButton {...fileRowControlButtonProps} onClick={onChange}>
+    <ControlButton {...fileRowControlButtonProps} onClick={onChange} {...(isDisabled && disabledClassNameProp)}>
       <VisuallyHidden>{resolvedEditText}</VisuallyHidden>
       <Icon name={DEFAULT_FILE_ACTION_BUTTON_ICON_NAME} boxSize={16} aria-hidden="true" />
     </ControlButton>
   ) : null;
 
   const dismissActionButton = onDismiss ? (
-    <ControlButton {...fileRowControlButtonProps} onClick={onDismiss}>
+    <ControlButton {...fileRowControlButtonProps} onClick={onDismiss} {...(isDisabled && disabledClassNameProp)}>
       <VisuallyHidden>{resolvedRemoveText}</VisuallyHidden>
       <Icon name="close" boxSize={16} aria-hidden="true" />
     </ControlButton>
