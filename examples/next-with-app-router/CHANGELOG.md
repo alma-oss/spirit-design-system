@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-example-next-with-app-router@0.5.7...@alma-oss/spirit-example-next-with-app-router@0.6.0) (2026-04-13)
+
+### Features
+
+- **nextjs:** add RouterDemo component to examples ([1adef3b](https://github.com/alma-oss/spirit-design-system/commit/1adef3b3bb46f3b07b5d093f7af28256b92319fa))
+
+### Chores
+
+- **deps:** update dependency @next/eslint-plugin-next to v16 ([d739992](https://github.com/alma-oss/spirit-design-system/commit/d739992ff85a7837a3e609350aa632df66024c78))
+
+### Styles
+
+- **web-react:** set lint dependency and remove unrelevant eslint ignores from demo files ([c760a08](https://github.com/alma-oss/spirit-design-system/commit/c760a081c5e24f3e752ec5be9afad4b75fa51ecc))
+
 ## [0.5.7](https://github.com/literat/dotfiles/compare/@alma-oss/spirit-example-next-with-app-router@0.5.6...@alma-oss/spirit-example-next-with-app-router@0.5.7) (2026-03-05)
 
 **Note:** Version bump only for package @alma-oss/spirit-example-next-with-app-router

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.7](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-icons@3.0.6...@alma-oss/spirit-icons@3.0.7) (2026-04-13)
+
+### Documentation
+
+- **web-react:** standardize README code examples #DS-2421 ([7ed66db](https://github.com/alma-oss/spirit-design-system/commit/7ed66dbf93033a1d4a49bfdb07b0d3df59ead511)), closes [#DS-2421](https://github.com/alma-oss/spirit-design-system/issues/DS-2421)
+
+### Chores
+
+- **icons:** built type declarations during build process ([cec7c08](https://github.com/alma-oss/spirit-design-system/commit/cec7c082bdf2ebec96048830ab1d9443d18e14dd)), closes [#DS-561](https://github.com/alma-oss/spirit-design-system/issues/DS-561)
+
 ## [3.0.6](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-icons@3.0.5...@alma-oss/spirit-icons@3.0.6) (2026-03-05)
 
 **Note:** Version bump only for package @alma-oss/spirit-icons

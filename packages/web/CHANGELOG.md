@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.3.1...@alma-oss/spirit-web@4.4.0) (2026-04-13)
+
+### Features
+
+- **web-react:** allow `Heading` or `Text` as card title alternative #DS-2441 ([cfc220b](https://github.com/alma-oss/spirit-design-system/commit/cfc220b4262b7be0fa0bdbb279404d53989582af)), closes [#DS-2441](https://github.com/alma-oss/spirit-design-system/issues/DS-2441)
+- **web-react:** introduce counter to textarea #DS-2300 ([6ef377d](https://github.com/alma-oss/spirit-design-system/commit/6ef377d7e30ad7dcd3166cbc343855e857fbb30d)), closes [#DS-2300](https://github.com/alma-oss/spirit-design-system/issues/DS-2300)
+- **web, web-react:** add `ControlButton` expanded size scale behind feature flag #DS-2452 ([ffbd017](https://github.com/alma-oss/spirit-design-system/commit/ffbd017ad6983a70df9f2175375ddcbce1394cf9)), closes [#DS-2452](https://github.com/alma-oss/spirit-design-system/issues/DS-2452)
+- **web, web-react:** introduce feature flag for new `Tag` appearance #DS-2455 ([5ca290f](https://github.com/alma-oss/spirit-design-system/commit/5ca290f717b964849d1b7819469dbe8bc167ec4f)), closes [#DS-2455](https://github.com/alma-oss/spirit-design-system/issues/DS-2455)
+- **web,web-react:** disabled state with ControlButton ([57d2757](https://github.com/alma-oss/spirit-design-system/commit/57d27579fe0d478f68b3793ab88a7f3604a4cbf1))
+- **web:** add color scheme utility class generation #DS-2269 ([0508057](https://github.com/alma-oss/spirit-design-system/commit/0508057a620190df99d6155acc6429b69a53ebab)), closes [#DS-2269](https://github.com/alma-oss/spirit-design-system/issues/DS-2269)
+- **web:** add FieldDetails component #DS-2454 ([1af2569](https://github.com/alma-oss/spirit-design-system/commit/1af25691bd694fcf06e53a3b71a3abf9b47c3e34)), closes [#DS-2454](https://github.com/alma-oss/spirit-design-system/issues/DS-2454)
+- **web:** introduce `UNSTABLE_Picker` component #DS-2358 ([5b2055d](https://github.com/alma-oss/spirit-design-system/commit/5b2055dc254c5046e71321b7825822b03e50fc67)), closes [#DS-2358](https://github.com/alma-oss/spirit-design-system/issues/DS-2358)
+- **web:** introduce counter to textarea #DS-2300 ([4fd7dca](https://github.com/alma-oss/spirit-design-system/commit/4fd7dca7cf1b19d32c05acf4e8e36f24b9eb070d)), closes [#DS-2300](https://github.com/alma-oss/spirit-design-system/issues/DS-2300)
+- **web:** introduce FileUpload component #DS-2400 ([15df4c8](https://github.com/alma-oss/spirit-design-system/commit/15df4c8b41192ec298ab35083c42888230ec786b)), closes [#DS-2400](https://github.com/alma-oss/spirit-design-system/issues/DS-2400)
+- **web:** introduce non-modal Dialog and Drawer ([debbf11](https://github.com/alma-oss/spirit-design-system/commit/debbf112a5122cc8f249d7d299b6c31ec4b1519f))
+- **web:** introduce UNSTABLE_File #DS-2401 ([9ac29d9](https://github.com/alma-oss/spirit-design-system/commit/9ac29d91ab4e8b733dc0ae6ae26be1fbcd4f3648)), closes [#DS-2401](https://github.com/alma-oss/spirit-design-system/issues/DS-2401)
+- **web:** make dynamic color coefficients configurable via CSS vars and add playground ([4d75a32](https://github.com/alma-oss/spirit-design-system/commit/4d75a32f2a99aa96241e5dbea61236b6126c5a41))
+
+### Bug Fixes
+
+- **web:** override `Heading` hover underline on `CardLink` ([591b347](https://github.com/alma-oss/spirit-design-system/commit/591b347095124e4f988a48244c13a92132da6ff0))
+- **web:** remove double hyphen from link CSS vars ([bc9ed23](https://github.com/alma-oss/spirit-design-system/commit/bc9ed23bbd0126fa0bc63541aaaa8043eb2a3806))
+- **web:** replace deprecated sass if() function with [@if](https://github.com/if) directive ([99e4a09](https://github.com/alma-oss/spirit-design-system/commit/99e4a0913c30a5febe0215436d04eb8754935a28))
+
+### Documentation
+
+- **web:** demonstrate usage UNSTABLE_FileUpload + UNSTABLE_File #DS-2401 ([6915539](https://github.com/alma-oss/spirit-design-system/commit/6915539a4446ee3233bf99977cf64f949412ebb2)), closes [#DS-2401](https://github.com/alma-oss/spirit-design-system/issues/DS-2401)
+- **web:** fix typo in the label's for attribute ([9a99a4d](https://github.com/alma-oss/spirit-design-system/commit/9a99a4defa09d5ca857d89b8e8183cb8fd98adc9))
+
+### Chores
+
+- **repo:** introduce HTML eslint config #DS-2492 ([3639a2e](https://github.com/alma-oss/spirit-design-system/commit/3639a2ec06dbaea4181704137af636cc30ee8e7d)), closes [#DS-2492](https://github.com/alma-oss/spirit-design-system/issues/DS-2492)
+- **web:** remove silenced deprecation for Sass `mixed-decls` ([9e67174](https://github.com/alma-oss/spirit-design-system/commit/9e67174552fbdf758025ed5fb75f0757396d7de7))
+
+### Styles
+
+- **repo:** require empty line before expect statement ([01e37c6](https://github.com/alma-oss/spirit-design-system/commit/01e37c692852a697b2768b41e0dd03e77d2a21fb))
+- **web:** migrate Sass inline `if` function to Sass block `[@if](https://github.com/if)` function ([fae3330](https://github.com/alma-oss/spirit-design-system/commit/fae3330ba4fdeaff11d50fe4623a3594edf3b012))
+
+### Code Refactoring
+
+- **web:** remove UNSTABLE_Attachment #DS-2489 ([e484fab](https://github.com/alma-oss/spirit-design-system/commit/e484fab4fca3ce29d1f7f0319d9b002acd408832)), closes [#DS-2489](https://github.com/alma-oss/spirit-design-system/issues/DS-2489)
+
 ## [4.3.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.3.0...@alma-oss/spirit-web@4.3.1) (2026-03-05)
 
 **Note:** Version bump only for package @alma-oss/spirit-web

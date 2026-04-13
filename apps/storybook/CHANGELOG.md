@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.3](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.4.2...@alma-oss/spirit-storybook@0.4.3) (2026-04-13)
+
+### Bug Fixes
+
+- **ci:** generate preview-stats.json for Chromatic TurboSnap ([68e6afa](https://github.com/alma-oss/spirit-design-system/commit/68e6afa9db7f8f726bb25f64cf221cd12c119fac))
+
+### Chores
+
+- **storybook:** add dependency on icons build when starting the storybook ([0f66511](https://github.com/alma-oss/spirit-design-system/commit/0f665119e8b9f5aebd93155e7f8b1ace16e10b38))
+
+### Styles
+
+- **repo:** remove ts ignore comments from Storybook's icons decorator ([1bb8ee5](https://github.com/alma-oss/spirit-design-system/commit/1bb8ee5c21b352e89bb552271a8d3dfaa81500f4))
+
 ## [0.4.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.4.1...@alma-oss/spirit-storybook@0.4.2) (2026-03-05)
 
 **Note:** Version bump only for package @alma-oss/spirit-storybook

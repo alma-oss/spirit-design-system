@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.6](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-analytics@2.0.5...@alma-oss/spirit-analytics@2.0.6) (2026-04-13)
+
+### Styles
+
+- **repo:** require empty line before expect statement ([01e37c6](https://github.com/alma-oss/spirit-design-system/commit/01e37c692852a697b2768b41e0dd03e77d2a21fb))
+
 ## [2.0.5](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-analytics@2.0.4...@alma-oss/spirit-analytics@2.0.5) (2026-03-05)
 
 **Note:** Version bump only for package @alma-oss/spirit-analytics

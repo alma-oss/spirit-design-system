@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.6](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.0.5...@alma-oss/spirit-tokens-exporter@4.0.6) (2026-04-13)
+
+### Bug Fixes
+
+- **exporter-tokens:** correct line-height calculation in typography ([ede7934](https://github.com/alma-oss/spirit-design-system/commit/ede7934eef47ee767db07e81ed6f246c02f735f8))
+
+### Chores
+
+- **exporter-tokens:** rebuild distribution after dependency upgrade ([586f236](https://github.com/alma-oss/spirit-design-system/commit/586f236a5d341c5deb37331cde147d5eb412ddc5))
+
+### Styles
+
+- **repo:** require empty line before expect statement ([01e37c6](https://github.com/alma-oss/spirit-design-system/commit/01e37c692852a697b2768b41e0dd03e77d2a21fb))
+
 ## [4.0.5](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.0.4...@alma-oss/spirit-tokens-exporter@4.0.5) (2026-03-04)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.5](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-common@0.5.4...@alma-oss/spirit-common@0.5.5) (2026-04-13)
+
+### Styles
+
+- **repo:** require empty line before expect statement ([01e37c6](https://github.com/alma-oss/spirit-design-system/commit/01e37c692852a697b2768b41e0dd03e77d2a21fb))
+
 ## [0.5.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-common@0.5.3...@alma-oss/spirit-common@0.5.4) (2026-03-04)
 
 ### Chores

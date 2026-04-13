@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.5.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.4.2...@alma-oss/spirit-web-react@4.5.0) (2026-04-13)
+
+### Features
+
+- **web-react:** add FieldDetails component #DS-2454 ([f4d21fc](https://github.com/alma-oss/spirit-design-system/commit/f4d21fc03e846a02768efebb805eab4e0ae2ce28)), closes [#DS-2454](https://github.com/alma-oss/spirit-design-system/issues/DS-2454)
+- **web-react:** align DropdownPopover props with standard div attributes #DS-2359 ([496f632](https://github.com/alma-oss/spirit-design-system/commit/496f6325d895aabbca27dd3a601e157c449f674f)), closes [#DS-2359](https://github.com/alma-oss/spirit-design-system/issues/DS-2359)
+- **web-react:** align UNSTABLE_FileUpload with web package #DS-2489 ([57aa680](https://github.com/alma-oss/spirit-design-system/commit/57aa6806061e8ab956cd0c14b15d416e5e69d30c)), closes [#DS-2489](https://github.com/alma-oss/spirit-design-system/issues/DS-2489)
+- **web-react:** allow `Heading` or `Text` as card title alternative #DS-2441 ([cfc220b](https://github.com/alma-oss/spirit-design-system/commit/cfc220b4262b7be0fa0bdbb279404d53989582af)), closes [#DS-2441](https://github.com/alma-oss/spirit-design-system/issues/DS-2441)
+- **web-react:** implement RouterProvider context to components ([7ad5b0b](https://github.com/alma-oss/spirit-design-system/commit/7ad5b0b2dbd153dd7cba2065682a5a3f477b2226))
+- **web-react:** introduce counter to textarea #DS-2300 ([6ef377d](https://github.com/alma-oss/spirit-design-system/commit/6ef377d7e30ad7dcd3166cbc343855e857fbb30d)), closes [#DS-2300](https://github.com/alma-oss/spirit-design-system/issues/DS-2300)
+- **web-react:** introduce Picker component #DS-2359 ([9fd982e](https://github.com/alma-oss/spirit-design-system/commit/9fd982e3fd30e22ae71a42c64ae4efbd034712f2)), closes [#DS-2359](https://github.com/alma-oss/spirit-design-system/issues/DS-2359)
+- **web-react:** introduce RouterProvider for client-side routing ([30e0845](https://github.com/alma-oss/spirit-design-system/commit/30e0845d25b3f92ea19ea31b8e678cf958007253))
+- **web-react:** introduce UNSTABLE_File #DS-2489 ([0ecdef2](https://github.com/alma-oss/spirit-design-system/commit/0ecdef29ec1549cfd0490a8128a523cf872f8343)), closes [#DS-2489](https://github.com/alma-oss/spirit-design-system/issues/DS-2489)
+- **web-react:** introduce useSelectionState hook #DS-2359 ([9fdb233](https://github.com/alma-oss/spirit-design-system/commit/9fdb23305c2863e34bf4326f304e2feb2a2a0028)), closes [#DS-2359](https://github.com/alma-oss/spirit-design-system/issues/DS-2359)
+- **web, web-react:** add `ControlButton` expanded size scale behind feature flag #DS-2452 ([ffbd017](https://github.com/alma-oss/spirit-design-system/commit/ffbd017ad6983a70df9f2175375ddcbce1394cf9)), closes [#DS-2452](https://github.com/alma-oss/spirit-design-system/issues/DS-2452)
+- **web, web-react:** introduce feature flag for new `Tag` appearance #DS-2455 ([5ca290f](https://github.com/alma-oss/spirit-design-system/commit/5ca290f717b964849d1b7819469dbe8bc167ec4f)), closes [#DS-2455](https://github.com/alma-oss/spirit-design-system/issues/DS-2455)
+- **web,web-react:** disabled state with ControlButton ([57d2757](https://github.com/alma-oss/spirit-design-system/commit/57d27579fe0d478f68b3793ab88a7f3604a4cbf1))
+
+### Bug Fixes
+
+- **web-react:** component Button elementType vs Stack PropsContext ([867829c](https://github.com/alma-oss/spirit-design-system/commit/867829cb0209bfc0556e724bb08ffc723830a564))
+- **web-react:** normalize CardLink typings to PolymorphicComponent ([03176fe](https://github.com/alma-oss/spirit-design-system/commit/03176fe0d3a32315d0edf55502ea0fa7cd5875fb))
+- **web-react:** remove name attribute from fileuploader root div #DS-1594 ([f5dd4e6](https://github.com/alma-oss/spirit-design-system/commit/f5dd4e6b7efa8978c4f7c65a82df03e9e0272885)), closes [#DS-1594](https://github.com/alma-oss/spirit-design-system/issues/DS-1594)
+
+### Documentation
+
+- **web-react:** standardize README code examples #DS-2421 ([7ed66db](https://github.com/alma-oss/spirit-design-system/commit/7ed66dbf93033a1d4a49bfdb07b0d3df59ead511)), closes [#DS-2421](https://github.com/alma-oss/spirit-design-system/issues/DS-2421)
+
+### Chores
+
+- **repo:** introduce HTML eslint config #DS-2492 ([3639a2e](https://github.com/alma-oss/spirit-design-system/commit/3639a2ec06dbaea4181704137af636cc30ee8e7d)), closes [#DS-2492](https://github.com/alma-oss/spirit-design-system/issues/DS-2492)
+- **web-react:** defined dependency on design tokens while type checking ([7c8376d](https://github.com/alma-oss/spirit-design-system/commit/7c8376d78091add503e81878258b5ea9f97d4c67))
+- **web-react:** use nx for running lint script ([e97acdd](https://github.com/alma-oss/spirit-design-system/commit/e97acdd60e9e0122dbaa2cde9c27987baa9387ca))
+
+### Styles
+
+- **repo:** require empty line before expect statement ([01e37c6](https://github.com/alma-oss/spirit-design-system/commit/01e37c692852a697b2768b41e0dd03e77d2a21fb))
+- **web-react:** remove ts ignore comments in demo files ([fecb723](https://github.com/alma-oss/spirit-design-system/commit/fecb72326f59a1f0baad252519b5c5a529a2dfc6))
+- **web-react:** set lint dependency and remove unrelevant eslint ignores from demo files ([c760a08](https://github.com/alma-oss/spirit-design-system/commit/c760a081c5e24f3e752ec5be9afad4b75fa51ecc))
+- **web-react:** use framework package instead of reanderer package in stories ([1651620](https://github.com/alma-oss/spirit-design-system/commit/16516202ee85d84cbca5785c090f369775377774))
+
+### Code Refactoring
+
+- **web-react:** remove UNSTABLE_Attachment #DS-2489 ([51872e9](https://github.com/alma-oss/spirit-design-system/commit/51872e99b5dc260761adead1b7c9c099050abef6)), closes [#DS-2489](https://github.com/alma-oss/spirit-design-system/issues/DS-2489)
+- **web-react:** unify approach to aria id references using useAriaIdRefs hook ([fdb5d9c](https://github.com/alma-oss/spirit-design-system/commit/fdb5d9ce37af6e5e9be9b2d343496bce9804cf2a))
+
+### Tests
+
+- **e2e:** update visual regression test for UNSTABLE_File ([cb2f173](https://github.com/alma-oss/spirit-design-system/commit/cb2f1734dfe411edf8cc3ec7f4d782b4b3fc68d9))
+- **web-react:** use localName instead of tagName in element assertions ([b625378](https://github.com/alma-oss/spirit-design-system/commit/b625378dc9f3cdcb84d8b086f956b199f8b7f1eb))
+
 ## [4.4.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.4.1...@alma-oss/spirit-web-react@4.4.2) (2026-03-05)
 
 **Note:** Version bump only for package @alma-oss/spirit-web-react

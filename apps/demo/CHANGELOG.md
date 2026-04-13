@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.5](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@2.0.4...@lmc-eu/spirit-demo-app@2.0.5) (2026-04-13)
+
+### Chores
+
+- **web:** remove silenced deprecation for Sass `mixed-decls` ([9e67174](https://github.com/alma-oss/spirit-design-system/commit/9e67174552fbdf758025ed5fb75f0757396d7de7))
+
+### Code Refactoring
+
+- **demo:** use breakpoint token mixins instead of hardcoded breakpoints ([24b7e6a](https://github.com/alma-oss/spirit-design-system/commit/24b7e6a3373ad44ec042d154c918b7ee13ba875a))
+
 ## [2.0.4](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@2.0.3...@lmc-eu/spirit-demo-app@2.0.4) (2026-03-04)
 
 ### Chores

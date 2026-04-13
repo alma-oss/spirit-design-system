@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.1.1...@alma-oss/spirit-design-tokens@4.1.2) (2026-04-13)
+
+### Chores
+
+- **design-tokens:** update devices, typography, spacing and other global tokens ([710dba5](https://github.com/alma-oss/spirit-design-system/commit/710dba54b1d01f200a7250353691c7c394f37ea9))
+
 ## [4.1.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.1.0...@alma-oss/spirit-design-tokens@4.1.1) (2026-03-05)
 
 **Note:** Version bump only for package @alma-oss/spirit-design-tokens

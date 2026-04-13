@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.0](https://github.com/alma-oss/spirit-design-system/compare/eslint-config-spirit@0.1.7...eslint-config-spirit@0.2.0) (2026-04-13)
+
+### Features
+
+- **eslint-config:** require an empty line before the first `expect` in a group ([388bda6](https://github.com/alma-oss/spirit-design-system/commit/388bda6fdf27a6d1e0eb298b41bbe605a223bdc5))
+
+### Chores
+
+- **repo:** introduce HTML eslint config #DS-2492 ([3639a2e](https://github.com/alma-oss/spirit-design-system/commit/3639a2ec06dbaea4181704137af636cc30ee8e7d)), closes [#DS-2492](https://github.com/alma-oss/spirit-design-system/issues/DS-2492)
+
 ## [0.1.7](https://github.com/alma-oss/spirit-design-system/compare/eslint-config-spirit@0.1.6...eslint-config-spirit@0.1.7) (2026-03-04)
 
 ### Chores
