@@ -29,7 +29,7 @@ $size-config: (
     small: map.merge(
             (
                 height: 32px,
-                min-height: 64px,
+                min-height: 62px,
                 typography: tokens.$body-small-regular,
             ),
             tokens-tools.generate-responsive-map(
@@ -43,7 +43,7 @@ $size-config: (
     medium: map.merge(
             (
                 height: 40px,
-                min-height: 80px,
+                min-height: 78px,
                 typography: tokens.$body-medium-regular,
             ),
             tokens-tools.generate-responsive-map(
@@ -57,7 +57,7 @@ $size-config: (
     large: map.merge(
             (
                 height: 48px,
-                min-height: 96px,
+                min-height: 94px,
                 typography: tokens.$body-medium-regular,
             ),
             tokens-tools.generate-responsive-map(
