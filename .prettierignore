@@ -50,6 +50,7 @@ packages/design-tokens/scss/**/*
 .yarn/plugins
 .yarn/releases
 .yarn/*.gz
+*.patch
 
 # Lock Files
 *.lock
