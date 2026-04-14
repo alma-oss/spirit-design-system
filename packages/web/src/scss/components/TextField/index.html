@@ -8,48 +8,51 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium">
+      <div>
         <label
           for="text-field-default"
           class="Label"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-default"
-          class="TextField__input"
-          name="default"
-          placeholder="Placeholder"
-        />
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="text"
+            id="text-field-default"
+            name="default"
+            placeholder="Placeholder"
+          />
+        </div>
       </div>
 
-      <div class="TextField TextField--medium">
+      <div>
         <label
           for="text-field-filled"
           class="Label"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-filled"
-          class="TextField__input"
-          name="filled"
-          placeholder="Placeholder"
-          value="Filled"
-        />
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="text"
+            id="text-field-filled"
+            name="filled"
+            placeholder="Placeholder"
+            value="Filled"
+          />
+        </div>
       </div>
 
-      <div class="TextField TextField--medium">
+      <div>
         <label
           for="text-field-password"
           class="Label"
         >Label</label>
-        <input
-          type="password"
-          id="text-field-password"
-          class="TextField__input"
-          name="password"
-          placeholder="Placeholder"
-          value="Filled"
-        />
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="password"
+            id="text-field-password"
+            name="password"
+            placeholder="Placeholder"
+            value="Filled"
+          />
+        </div>
       </div>
 
     </div>
@@ -66,95 +69,97 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium">
+      <div>
         <label
           for="text-field-password-toggle"
           class="Label"
         >Password Toggle</label>
-        <div class="TextField__passwordToggle">
+        <div class="InputContainer InputContainer--medium">
           <input
             type="password"
             id="text-field-password-toggle"
-            class="TextField__input"
             name="passwordToggle"
             placeholder="Password must be at least 6 characters long"
           />
-          <button
-            type="button"
-            class="TextField__passwordToggle__button"
-            role="switch"
-            aria-checked="false"
-            aria-label="Show password"
-            data-spirit-toggle="password"
-          >
-            <span class="TextField__passwordToggle__icon accessibility-unchecked">
-              <svg
-                class="Icon"
-                width="20"
-                height="20"
-                aria-hidden="true"
-              >
-                <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
-              </svg>
-            </span>
-            <span class="TextField__passwordToggle__icon accessibility-checked">
-              <svg
-                class="Icon"
-                width="20"
-                height="20"
-                aria-hidden="true"
-              >
-                <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
-              </svg>
-            </span>
-          </button>
+          <div class="InputAddon InputAddon--medium">
+            <button
+              type="button"
+              class="ControlButton ControlButton--medium ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              role="switch"
+              aria-checked="false"
+              aria-label="Show password"
+              data-spirit-toggle="password"
+            >
+              <span class="accessibility-unchecked">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
+                </svg>
+              </span>
+              <span class="accessibility-checked">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
+                </svg>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
 
-      <div class="TextField TextField--medium TextField--disabled">
+      <div>
         <label
           for="text-field-password-toggle-disabled"
           class="Label Label--disabled"
         >Password Toggle</label>
-        <div class="TextField__passwordToggle">
+        <div class="InputContainer InputContainer--medium InputContainer--disabled">
           <input
             type="password"
             id="text-field-password-toggle-disabled"
-            class="TextField__input"
             name="passwordToggleDisabled"
             placeholder="Password must be at least 6 characters long"
             disabled
           />
-          <button
-            type="button"
-            class="TextField__passwordToggle__button"
-            role="switch"
-            aria-checked="false"
-            aria-label="Show password"
-            data-spirit-toggle="password"
-            disabled
-          >
-            <span class="TextField__passwordToggle__icon accessibility-unchecked">
-              <svg
-                class="Icon"
-                width="20"
-                height="20"
-                aria-hidden="true"
-              >
-                <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
-              </svg>
-            </span>
-            <span class="TextField__passwordToggle__icon accessibility-checked">
-              <svg
-                class="Icon"
-                width="20"
-                height="20"
-                aria-hidden="true"
-              >
-                <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
-              </svg>
-            </span>
-          </button>
+          <div class="InputAddon InputAddon--medium">
+            <button
+              type="button"
+              class="ControlButton ControlButton--medium ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive color-scheme-on-disabled"
+              role="switch"
+              aria-checked="false"
+              aria-label="Show password"
+              data-spirit-toggle="password"
+              disabled
+            >
+              <span class="accessibility-unchecked">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
+                </svg>
+              </span>
+              <span class="accessibility-checked">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
+                </svg>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -173,106 +178,110 @@
     <div class="docs-Stack docs-Stack--stretch">
       <div class="Grid Grid--cols-1 Grid--desktop--cols-3">
 
-        <div class="TextField TextField--small">
+        <div>
           <label
             for="text-field-size-small"
             class="Label"
           >Small</label>
-          <input
-            type="text"
-            id="text-field-size-small"
-            class="TextField__input"
-            name="size-small"
-            placeholder="Placeholder"
-            aria-describedby="text-field-size-small-helper-text"
-          />
+          <div class="InputContainer InputContainer--small">
+            <input
+              type="text"
+              id="text-field-size-small"
+              name="size-small"
+              placeholder="Placeholder"
+              aria-describedby="text-field-size-small-helper-text"
+            />
+          </div>
           <div
             class="HelperText"
             id="text-field-size-small-helper-text"
           >Helper text</div>
         </div>
 
-        <div class="TextField TextField--medium">
+        <div>
           <label
             for="text-field-size-medium"
             class="Label"
           >Medium (default)</label>
-          <input
-            type="text"
-            id="text-field-size-medium"
-            class="TextField__input"
-            name="size-medium"
-            placeholder="Placeholder"
-            aria-describedby="text-field-size-medium-helper-text"
-          />
+          <div class="InputContainer InputContainer--medium">
+            <input
+              type="text"
+              id="text-field-size-medium"
+              name="size-medium"
+              placeholder="Placeholder"
+              aria-describedby="text-field-size-medium-helper-text"
+            />
+          </div>
           <div
             class="HelperText"
             id="text-field-size-medium-helper-text"
           >Helper text</div>
         </div>
 
-        <div class="TextField TextField--large">
+        <div>
           <label
             for="text-field-size-large"
             class="Label"
           >Large</label>
-          <input
-            type="text"
-            id="text-field-size-large"
-            class="TextField__input"
-            name="size-large"
-            placeholder="Placeholder"
-            aria-describedby="text-field-size-large-helper-text"
-          />
+          <div class="InputContainer InputContainer--large">
+            <input
+              type="text"
+              id="text-field-size-large"
+              name="size-large"
+              placeholder="Placeholder"
+              aria-describedby="text-field-size-large-helper-text"
+            />
+          </div>
           <div
             class="HelperText"
             id="text-field-size-large-helper-text"
           >Helper text</div>
         </div>
 
-        <div class="TextField TextField--small">
+        <div>
           <label
             for="text-field-password-toggle-size-small"
             class="Label"
           >Small</label>
-          <div class="TextField__passwordToggle">
+          <div class="InputContainer InputContainer--small">
             <input
               type="password"
               id="text-field-password-toggle-size-small"
-              class="TextField__input"
               name="password-size-small"
               value="password"
               aria-describedby="text-field-password-toggle-size-small-helper-text"
             />
-            <button
-              type="button"
-              class="TextField__passwordToggle__button"
-              role="switch"
-              aria-checked="false"
-              aria-label="Show password"
-              data-spirit-toggle="password"
-            >
-              <span class="TextField__passwordToggle__icon accessibility-unchecked">
-                <svg
-                  class="Icon"
-                  width="16"
-                  height="16"
-                  aria-hidden="true"
-                >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
-                </svg>
-              </span>
-              <span class="TextField__passwordToggle__icon accessibility-checked">
-                <svg
-                  class="Icon"
-                  width="16"
-                  height="16"
-                  aria-hidden="true"
-                >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
-                </svg>
-              </span>
-            </button>
+            <div class="InputAddon InputAddon--small">
+              <button
+                type="button"
+                class="ControlButton ControlButton--small ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+                role="switch"
+                aria-checked="false"
+                aria-label="Show password"
+                data-spirit-toggle="password"
+              >
+                <span class="accessibility-unchecked">
+                  <svg
+                    class="Icon"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
+                  </svg>
+                </span>
+                <span class="accessibility-checked">
+                  <svg
+                    class="Icon"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
+                  </svg>
+                </span>
+              </button>
+            </div>
           </div>
           <div
             class="HelperText"
@@ -280,49 +289,50 @@
           >Helper text</div>
         </div>
 
-        <div class="TextField TextField--medium">
+        <div>
           <label
             for="text-field-password-toggle-size-medium"
             class="Label"
           >Medium (default)</label>
-          <div class="TextField__passwordToggle">
+          <div class="InputContainer InputContainer--medium">
             <input
               type="password"
               id="text-field-password-toggle-size-medium"
-              class="TextField__input"
               name="password-size-medium"
               value="password"
               aria-describedby="text-field-password-toggle-size-medium-helper-text"
             />
-            <button
-              type="button"
-              class="TextField__passwordToggle__button"
-              role="switch"
-              aria-checked="false"
-              aria-label="Show password"
-              data-spirit-toggle="password"
-            >
-              <span class="TextField__passwordToggle__icon accessibility-unchecked">
-                <svg
-                  class="Icon"
-                  width="20"
-                  height="20"
-                  aria-hidden="true"
-                >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
-                </svg>
-              </span>
-              <span class="TextField__passwordToggle__icon accessibility-checked">
-                <svg
-                  class="Icon"
-                  width="20"
-                  height="20"
-                  aria-hidden="true"
-                >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
-                </svg>
-              </span>
-            </button>
+            <div class="InputAddon InputAddon--medium">
+              <button
+                type="button"
+                class="ControlButton ControlButton--medium ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+                role="switch"
+                aria-checked="false"
+                aria-label="Show password"
+                data-spirit-toggle="password"
+              >
+                <span class="accessibility-unchecked">
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
+                  </svg>
+                </span>
+                <span class="accessibility-checked">
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
+                  </svg>
+                </span>
+              </button>
+            </div>
           </div>
           <div
             class="HelperText"
@@ -330,49 +340,50 @@
           >Helper text</div>
         </div>
 
-        <div class="TextField TextField--large">
+        <div>
           <label
             for="text-field-password-toggle-size-large"
             class="Label"
           >Large</label>
-          <div class="TextField__passwordToggle">
+          <div class="InputContainer InputContainer--large">
             <input
               type="password"
               id="text-field-password-toggle-size-large"
-              class="TextField__input"
               name="password-size-large"
               value="password"
               aria-describedby="text-field-password-toggle-size-large-helper-text"
             />
-            <button
-              type="button"
-              class="TextField__passwordToggle__button"
-              role="switch"
-              aria-checked="false"
-              aria-label="Show password"
-              data-spirit-toggle="password"
-            >
-              <span class="TextField__passwordToggle__icon accessibility-unchecked">
-                <svg
-                  class="Icon"
-                  width="20"
-                  height="20"
-                  aria-hidden="true"
-                >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
-                </svg>
-              </span>
-              <span class="TextField__passwordToggle__icon accessibility-checked">
-                <svg
-                  class="Icon"
-                  width="20"
-                  height="20"
-                  aria-hidden="true"
-                >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
-                </svg>
-              </span>
-            </button>
+            <div class="InputAddon InputAddon--large">
+              <button
+                type="button"
+                class="ControlButton ControlButton--large ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+                role="switch"
+                aria-checked="false"
+                aria-label="Show password"
+                data-spirit-toggle="password"
+              >
+                <span class="accessibility-unchecked">
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
+                  </svg>
+                </span>
+                <span class="accessibility-checked">
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
+                  </svg>
+                </span>
+              </button>
+            </div>
           </div>
           <div
             class="HelperText"
@@ -395,19 +406,20 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium">
+      <div>
         <label
           for="text-field-required"
           class="Label Label--required"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-required"
-          class="TextField__input"
-          name="required"
-          placeholder="Placeholder"
-          required
-        />
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="text"
+            id="text-field-required"
+            name="required"
+            placeholder="Placeholder"
+            required
+          />
+        </div>
       </div>
 
     </div>
@@ -424,18 +436,19 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium">
+      <div>
         <label
           for="text-field-hidden-label"
           class="Label accessibility-hidden"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-hidden-label"
-          class="TextField__input"
-          name="hiddenLabel"
-          placeholder="Placeholder"
-        />
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="text"
+            id="text-field-hidden-label"
+            name="hiddenLabel"
+            placeholder="Placeholder"
+          />
+        </div>
       </div>
 
     </div>
@@ -451,19 +464,20 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium">
+      <div>
         <label
           for="text-field-helper-text"
           class="Label"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-helper-text"
-          class="TextField__input"
-          name="helperText"
-          placeholder="Placeholder"
-          aria-describedby="text-field-helper-text-helper-text"
-        />
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="text"
+            id="text-field-helper-text"
+            name="helperText"
+            placeholder="Placeholder"
+            aria-describedby="text-field-helper-text-helper-text"
+          />
+        </div>
         <div
           class="HelperText"
           id="text-field-helper-text-helper-text"
@@ -484,36 +498,38 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium TextField--disabled">
+      <div>
         <label
           for="text-field-disabled"
           class="Label Label--disabled"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-disabled"
-          class="TextField__input"
-          name="disabled"
-          placeholder="Placeholder"
-          disabled
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--disabled">
+          <input
+            type="text"
+            id="text-field-disabled"
+            name="disabled"
+            placeholder="Placeholder"
+            disabled
+          />
+        </div>
       </div>
 
-      <div class="TextField TextField--medium TextField--disabled">
+      <div>
         <label
           for="text-field-disabled-filled"
           class="Label Label--required Label--disabled"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-disabled-filled"
-          class="TextField__input"
-          name="disabledFilled"
-          placeholder="Placeholder"
-          disabled
-          required
-          value="Filled"
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--disabled">
+          <input
+            type="text"
+            id="text-field-disabled-filled"
+            name="disabledFilled"
+            placeholder="Placeholder"
+            disabled
+            required
+            value="Filled"
+          />
+        </div>
       </div>
 
     </div>
@@ -530,55 +546,58 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium TextField--success">
+      <div>
         <label
           for="text-field-success"
           class="Label"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-success"
-          class="TextField__input"
-          name="success"
-          placeholder="Placeholder"
-          value="Filled"
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--success">
+          <input
+            type="text"
+            id="text-field-success"
+            name="success"
+            placeholder="Placeholder"
+            value="Filled"
+          />
+        </div>
       </div>
 
-      <div class="TextField TextField--medium TextField--warning">
+      <div>
         <label
           for="text-field-warning"
           class="Label"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-warning"
-          class="TextField__input"
-          name="warning"
-          placeholder="Placeholder"
-          value="Filled"
-          aria-describedby="text-field-warning-validation-text"
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--warning">
+          <input
+            type="text"
+            id="text-field-warning"
+            name="warning"
+            placeholder="Placeholder"
+            value="Filled"
+            aria-describedby="text-field-warning-validation-text"
+          />
+        </div>
         <div
           class="ValidationText ValidationText--warning"
           id="text-field-warning-validation-text"
         >Validation text</div>
       </div>
 
-      <div class="TextField TextField--medium TextField--danger">
+      <div>
         <label
           for="text-field-danger"
           class="Label"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-danger"
-          class="TextField__input"
-          name="danger"
-          placeholder="Placeholder"
-          value="Filled"
-          aria-describedby="text-field-danger-validation-text"
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--danger">
+          <input
+            type="text"
+            id="text-field-danger"
+            name="danger"
+            placeholder="Placeholder"
+            value="Filled"
+            aria-describedby="text-field-danger-validation-text"
+          />
+        </div>
         <div
           class="ValidationText ValidationText--danger"
           id="text-field-danger-validation-text"
@@ -590,21 +609,22 @@
         </div>
       </div>
 
-      <div class="TextField TextField--medium TextField--danger">
+      <div>
         <label
           for="text-field-danger-with-helper-text"
           class="Label Label--required"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-danger-with-helper-text"
-          class="TextField__input"
-          name="dangerWithHelperText"
-          placeholder="Placeholder"
-          value="Filled"
-          required
-          aria-describedby="text-field-danger-with-helper-text-helper-text text-field-danger-with-helper-text-validation-text"
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--danger">
+          <input
+            type="text"
+            id="text-field-danger-with-helper-text"
+            name="dangerWithHelperText"
+            placeholder="Placeholder"
+            value="Filled"
+            required
+            aria-describedby="text-field-danger-with-helper-text-helper-text text-field-danger-with-helper-text-validation-text"
+          />
+        </div>
         <div
           class="HelperText"
           id="text-field-danger-with-helper-text-helper-text"
@@ -629,22 +649,23 @@
       {{setVar "states" "success" "warning" "danger" }}
       {{#each @root.states as |state|}}
 
-      <div class="TextField TextField--medium TextField--{{state}}">
+      <div>
         <label
           for="text-field-{{state}}-with-icon"
           class="Label Label--required"
         >
           Label</label>
-        <input
-          type="text"
-          id="text-field-{{state}}-with-icon"
-          class="TextField__input"
-          name="{{state}}WithHelperText"
-          placeholder="Placeholder"
-          value="Filled"
-          required
-          aria-describedby="text-field-{{state}}-with-icon-validation-text"
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--{{state}}">
+          <input
+            type="text"
+            id="text-field-{{state}}-with-icon"
+            name="{{state}}WithHelperText"
+            placeholder="Placeholder"
+            value="Filled"
+            required
+            aria-describedby="text-field-{{state}}-with-icon-validation-text"
+          />
+        </div>
         <div
           class="ValidationText ValidationText--{{state}}"
           id="text-field-{{state}}-with-icon-validation-text"
@@ -681,19 +702,20 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium">
+      <div>
         <label
           for="text-field-size"
           class="Label"
         >4000 (in Roman numerals)</label>
-        <input
-          type="text"
-          size="4"
-          id="text-field-size"
-          class="TextField__input"
-          name="size"
-          placeholder="Placeholder"
-        />
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="text"
+            size="4"
+            id="text-field-size"
+            name="size"
+            placeholder="Placeholder"
+          />
+        </div>
       </div>
 
     </div>
@@ -710,19 +732,20 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div style="display: flex; gap: 1rem; align-items: flex-start; max-width: 320px;">
-        <div class="TextField TextField--medium">
+        <div>
           <label
             for="text-field-inline"
             class="Label accessibility-hidden"
           >Hidden Label</label>
-          <input
-            type="text"
-            id="text-field-inline"
-            class="TextField__input"
-            name="inline"
-            placeholder="Placeholder"
-            value="Filled"
-          />
+          <div class="InputContainer InputContainer--medium">
+            <input
+              type="text"
+              id="text-field-inline"
+              name="inline"
+              placeholder="Placeholder"
+              value="Filled"
+            />
+          </div>
         </div>
         <button
           type="button"
@@ -731,62 +754,64 @@
       </div>
 
       <div style="display: flex; gap: 1rem; align-items: flex-start; max-width: 320px;">
-        <div class="TextField TextField--medium">
+        <div>
           <label
             for="text-field-inline-first"
             class="Label accessibility-hidden"
           >Hidden Label</label>
-          <input
-            type="text"
-            id="text-field-inline-first"
-            class="TextField__input"
-            name="inlineFirst"
-            placeholder="Placeholder"
-            value="Filled"
-          />
+          <div class="InputContainer InputContainer--medium">
+            <input
+              type="text"
+              id="text-field-inline-first"
+              name="inlineFirst"
+              placeholder="Placeholder"
+              value="Filled"
+            />
+          </div>
         </div>
-        <div class="TextField TextField--medium TextField--danger">
+        <div>
           <label
             for="text-field-inline-password"
             class="Label accessibility-hidden"
           >Hidden Label</label>
-          <div class="TextField__passwordToggle">
+          <div class="InputContainer InputContainer--medium InputContainer--danger">
             <input
               type="password"
               id="text-field-inline-password"
-              class="TextField__input"
               name="inlinePassword"
               value="1234"
             />
-            <button
-              type="button"
-              class="TextField__passwordToggle__button"
-              role="switch"
-              aria-checked="false"
-              aria-label="Show password"
-              data-spirit-toggle="password"
-            >
-              <span class="TextField__passwordToggle__icon accessibility-unchecked">
-                <svg
-                  class="Icon"
-                  width="20"
-                  height="20"
-                  aria-hidden="true"
-                >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
-                </svg>
-              </span>
-              <span class="TextField__passwordToggle__icon accessibility-checked">
-                <svg
-                  class="Icon"
-                  width="20"
-                  height="20"
-                  aria-hidden="true"
-                >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
-                </svg>
-              </span>
-            </button>
+            <div class="InputAddon InputAddon--medium">
+              <button
+                type="button"
+                class="ControlButton ControlButton--medium ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+                role="switch"
+                aria-checked="false"
+                aria-label="Show password"
+                data-spirit-toggle="password"
+              >
+                <span class="accessibility-unchecked">
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
+                  </svg>
+                </span>
+                <span class="accessibility-checked">
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
+                  </svg>
+                </span>
+              </button>
+            </div>
           </div>
           <div class="ValidationText ValidationText--danger">Too short</div>
         </div>
