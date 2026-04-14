@@ -65,18 +65,22 @@ Applies disabled styling to the label.
 ### Box Field Label
 
 ```html
-<div class="TextField">
+<div>
   <label for="text-field" class="Label">Label</label>
-  <input type="text" id="text-field" class="TextField__input" />
+  <div class="InputContainer InputContainer--medium">
+    <input type="text" id="text-field" />
+  </div>
 </div>
 ```
 
 ### Box Field Label with Required Indicator
 
 ```html
-<div class="TextField">
+<div>
   <label for="text-field-required" class="Label Label--required">Label</label>
-  <input type="text" id="text-field-required" class="TextField__input" required />
+  <div class="InputContainer InputContainer--medium">
+    <input type="text" id="text-field-required" required />
+  </div>
 </div>
 ```
 
@@ -113,9 +117,11 @@ Applies disabled styling to the label.
 ### Disabled Label
 
 ```html
-<div class="TextField TextField--disabled">
+<div>
   <label for="text-field-disabled" class="Label Label--disabled">Label</label>
-  <input type="text" id="text-field-disabled" class="TextField__input" disabled />
+  <div class="InputContainer InputContainer--medium InputContainer--disabled">
+    <input type="text" id="text-field-disabled" disabled />
+  </div>
 </div>
 ```
 
