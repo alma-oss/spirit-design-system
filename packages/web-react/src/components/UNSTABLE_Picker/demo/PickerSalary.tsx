@@ -3,14 +3,12 @@
 import React, { type ChangeEvent, useRef, useState } from 'react';
 import { useToggle } from '../../../hooks';
 import { Button } from '../../Button';
-import { FieldGroup } from '../../FieldGroup';
-import { Heading } from '../../Heading';
 import { Radio } from '../../Radio';
 import { Slider } from '../../Slider';
 import { Text } from '../../Text';
 import { TextField } from '../../TextField';
 import type { SpiritUnstablePickerRef } from '../types';
-import { UNSTABLE_Picker, UNSTABLE_PickerTag } from '..';
+import { UNSTABLE_Picker, UNSTABLE_PickerGroup, UNSTABLE_PickerTag } from '..';
 
 const salaryFormatter = new Intl.NumberFormat('cs-CZ');
 const formatNumber = (value: number) => salaryFormatter.format(value);
@@ -45,7 +43,6 @@ const PickerSalary = () => {
     <UNSTABLE_Picker
       id="demo-picker-salary"
       ref={pickerRef}
-      addButtonLabel="Edit"
       helperText="Set your minimum expected salary"
       isOpen={isOpen}
       label="Salary"
@@ -64,26 +61,27 @@ const PickerSalary = () => {
         );
       }}
       selectedKeys={hasSalaryLimit ? ['salary'] : []}
-      selectionAriaLabel="Selected salary"
       onSelectionChange={(keys: string[]) => {
         if (keys.length === 0) setSalary(null);
       }}
     >
-      <Heading elementType="h3" size="xsmall">
+      <Text elementType="h3" emphasis="bold">
         Salary
-      </Heading>
+      </Text>
       <Text size="small">Set your minimum expected salary.</Text>
-      <FieldGroup id="demo-picker-salary-field-group" isFluid isLabelHidden label="Salary">
+      <UNSTABLE_PickerGroup label="Salary">
         <Radio
           id="salary-no-limit"
           name="salary"
           isChecked={!hasSalaryLimit}
+          isItem
           label="No limit"
           onChange={() => setSalary(null)}
         />
         <Radio
           id="salary-from"
           name="salary"
+          isItem
           isChecked={hasSalaryLimit}
           label="From"
           onChange={() => setSalary(SALARY_FROM_DEFAULT)}
@@ -92,6 +90,7 @@ const PickerSalary = () => {
           id="salary-textfield"
           label="Salary"
           isLabelHidden
+          isFluid
           type="number"
           value={String(fromAmount)}
           onChange={(e) => updateSalaryFromValue(e.currentTarget.value)}
@@ -99,6 +98,7 @@ const PickerSalary = () => {
         <Slider
           id="demo-picker-salary-slider"
           isLabelHidden
+          isFluid
           label="Salary"
           max={SALARY_FROM_MAX}
           min={SALARY_FROM_MIN}
@@ -106,11 +106,9 @@ const PickerSalary = () => {
           value={fromAmount}
           onChange={(e: ChangeEvent<HTMLInputElement>) => updateSalaryFromValue(e.target.value)}
         />
-      </FieldGroup>
-      <div className="mt-600">
-        <Button color="primary" onClick={() => pickerRef.current?.close()}>
-          Apply
-        </Button>
+      </UNSTABLE_PickerGroup>
+      <div className="d-grid mt-600">
+        <Button onClick={() => pickerRef.current?.close()}>Apply</Button>
       </div>
     </UNSTABLE_Picker>
   );

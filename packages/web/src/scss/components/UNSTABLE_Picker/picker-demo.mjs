@@ -213,11 +213,7 @@ function initPicker(dropdownEl) {
     }
   }
 
-  const fieldset = popoverEl.querySelector('fieldset');
-
-  if (fieldset) {
-    fieldset.addEventListener('change', render);
-  }
+  popoverEl.addEventListener('change', render);
 
   render();
 }

@@ -4,9 +4,23 @@
 <script type="module">
   import { initPickers } from './picker-demo.mjs';
   import { initSalaryPicker } from './salary-picker-demo.mjs';
+  import { initPublicationTimePicker } from './publication-time-picker-demo.mjs';
 
   initPickers();
   initSalaryPicker();
+  initPublicationTimePicker();
+
+  // Apply buttons for standard pickers with confirm buttons
+  [
+    { buttonId: 'salary-apply', triggerId: 'picker-salary-trigger' },
+    { buttonId: 'demo-picker-publication-time-apply', triggerId: 'demo-picker-publication-time-trigger' },
+    { buttonId: 'job-filters-apply', triggerId: 'picker-job-filters-trigger' },
+  ].forEach(({ buttonId, triggerId }) => {
+    const btn = document.getElementById(buttonId);
+    const trigger = document.getElementById(triggerId);
+
+    if (btn && trigger) btn.addEventListener('click', () => trigger.click());
+  });
 </script>
 
 <!-- Picker: help for AT users -->
@@ -1225,7 +1239,7 @@
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-helper"
               class="UNSTABLE_Picker__trigger"
-              aria-haspopup="listbox"
+              aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-helper"
             >
@@ -1250,8 +1264,8 @@
             id="picker-helper"
           >
 
-            <fieldset class="FieldGroup FieldGroup--fluid">
-              <legend class="accessibility-hidden">Language</legend>
+            <fieldset class="FieldGroup FieldGroup--fluid" style="width: 300px">
+              <legend class="accessibility-hidden">Languages</legend>
               <div class="FieldGroup__fields">
 
                 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
@@ -1270,6 +1284,7 @@
                     >
                       Czech
                     </label>
+                    <span class="Checkbox__helperText" aria-labelledby="lang-helper-cs">Select this when the listing has no language tag.</span>
                   </div>
                 </div>
 
@@ -2284,6 +2299,7 @@
             </div>
 
             <button
+              id="picker-salary-trigger"
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-salary"
               class="UNSTABLE_Picker__trigger"
@@ -2312,14 +2328,14 @@
             id="picker-salary"
           >
 
-            <h3 class="typography-heading-xsmall-text mb-600">Salary</h3>
+            <h3 class="typography-body-medium-bold mb-600">Salary</h3>
             <p class="typography-body-small-text-regular mb-600">Set your minimum expected salary.</p>
 
             <fieldset class="FieldGroup FieldGroup--fluid">
               <legend class="accessibility-hidden">Salary</legend>
               <div class="FieldGroup__fields">
 
-                <div class="Radio Radio--inputPositionStart">
+                <div class="Radio Radio--inputPositionStart Radio--item">
                   <input
                     type="radio"
                     id="salary-no-limit"
@@ -2332,7 +2348,7 @@
                   </div>
                 </div>
 
-                <div class="Radio Radio--inputPositionStart">
+                <div class="Radio Radio--inputPositionStart Radio--item">
                   <input
                     type="radio"
                     id="salary-from"
@@ -2344,7 +2360,7 @@
                   </div>
                 </div>
 
-                <div class="TextField TextField--medium">
+                <div class="TextField TextField--fluid TextField--medium">
                   <label for="salary-textfield" class="TextField__label TextField__label--hidden">Salary</label>
                   <input
                     type="number"
@@ -2359,7 +2375,7 @@
                   />
                 </div>
 
-                <div class="Slider">
+                <div class="Slider Slider--fluid">
                   <label for="salary-slider" class="Slider__label Slider__label--hidden">Salary</label>
                   <input
                     class="Slider__input"
@@ -2391,6 +2407,402 @@
         </div>
 
         <div class="UNSTABLE_Picker__helperText">Set your minimum expected salary</div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Single with any option</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+
+        <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--hidden">Publication time</span>
+
+        <div class="Dropdown">
+
+          <div
+            role="group"
+            aria-label="Publication time"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected publication time"
+              aria-live="off"
+              aria-relevant="additions"
+              id="demo-picker-publication-time-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Publication time</span>
+            </div>
+
+            <button
+              id="demo-picker-publication-time-trigger"
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#demo-picker-publication-time"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="demo-picker-publication-time"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="demo-picker-publication-time"
+          >
+
+            <h3 class="typography-body-medium-bold mb-600">Publication time</h3>
+
+            <fieldset class="FieldGroup FieldGroup--fluid">
+              <legend class="accessibility-hidden">Publication time</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Radio Radio--inputPositionStart Radio--item">
+                  <input
+                    type="radio"
+                    id="demo-picker-publication-time-any"
+                    class="Radio__input"
+                    name="demo-picker-publication-time"
+                    value=""
+                    checked
+                  />
+                  <div class="Radio__text">
+                    <label class="Radio__label" for="demo-picker-publication-time-any">Any time</label>
+                  </div>
+                </div>
+
+                <div class="Radio Radio--inputPositionStart Radio--item">
+                  <input
+                    type="radio"
+                    id="demo-picker-publication-time-24h"
+                    class="Radio__input"
+                    name="demo-picker-publication-time"
+                    value="24h"
+                  />
+                  <div class="Radio__text">
+                    <label class="Radio__label" for="demo-picker-publication-time-24h">Last 24 hours</label>
+                  </div>
+                </div>
+
+                <div class="Radio Radio--inputPositionStart Radio--item">
+                  <input
+                    type="radio"
+                    id="demo-picker-publication-time-3d"
+                    class="Radio__input"
+                    name="demo-picker-publication-time"
+                    value="3d"
+                  />
+                  <div class="Radio__text">
+                    <label class="Radio__label" for="demo-picker-publication-time-3d">Last 3 days</label>
+                  </div>
+                </div>
+
+                <div class="Radio Radio--inputPositionStart Radio--item">
+                  <input
+                    type="radio"
+                    id="demo-picker-publication-time-1w"
+                    class="Radio__input"
+                    name="demo-picker-publication-time"
+                    value="1w"
+                  />
+                  <div class="Radio__text">
+                    <label class="Radio__label" for="demo-picker-publication-time-1w">Last week</label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+            <div class="d-grid mt-600">
+              <button
+                type="button"
+                class="Button Button--primary Button--medium"
+                id="demo-picker-publication-time-apply"
+              >
+                Apply
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Grouped sections with Button</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+
+        <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--hidden">Employment type</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Employment type"
+          data-spirit-picker-aggregate-tags
+        >
+
+          <div
+            role="group"
+            aria-label="Employment type"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected employment type"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-job-filters-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Employment type</span>
+            </div>
+
+            <button
+              id="picker-job-filters-trigger"
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-job-filters"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="picker-job-filters"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-job-filters"
+          >
+
+            <div style="width: 300px">
+
+              <h3 class="typography-body-medium-bold mb-600">Employment type</h3>
+
+              <fieldset class="FieldGroup FieldGroup--fluid mb-0">
+                <legend class="accessibility-hidden">Employment type</legend>
+                <div class="FieldGroup__fields">
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="job-filter-full"
+                      class="Checkbox__input"
+                      name="job-filters"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="job-filter-full"
+                      >
+                        Full-time
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="job-filter-part"
+                      class="Checkbox__input"
+                      name="job-filters"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="job-filter-part"
+                      >
+                        Part-time
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+
+              <hr class="Divider my-600" />
+
+              <h3 class="typography-body-medium-bold mb-600">Cooperation type</h3>
+
+              <fieldset class="FieldGroup FieldGroup--fluid mb-0">
+                <legend class="accessibility-hidden">Cooperation type</legend>
+                <div class="FieldGroup__fields">
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="job-filter-employment"
+                      class="Checkbox__input"
+                      name="job-filters"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="job-filter-employment"
+                      >
+                        Employment contract
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="job-filter-trade"
+                      class="Checkbox__input"
+                      name="job-filters"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="job-filter-trade"
+                      >
+                        Trade license (freelance)
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="job-filter-agreement"
+                      class="Checkbox__input"
+                      name="job-filters"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="job-filter-agreement"
+                      >
+                        Agreement (DPP/DPČ)
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+
+              <hr class="Divider my-600" />
+
+              <h3 class="typography-body-medium-bold mb-600">Internships</h3>
+
+              <fieldset class="FieldGroup FieldGroup--fluid">
+                <legend class="accessibility-hidden">Internships</legend>
+                <div class="FieldGroup__fields">
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="job-filter-internships"
+                      class="Checkbox__input"
+                      name="job-filters"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="job-filter-internships"
+                      >
+                        Internships, traineeships and trainee programs
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+
+            </div>
+
+            <div class="mt-600 d-grid">
+              <button
+                type="button"
+                class="Button Button--primary Button--medium"
+                id="job-filters-apply"
+              >
+                Apply
+              </button>
+            </div>
+
+          </div>
+
+        </div>
 
       </div>
 

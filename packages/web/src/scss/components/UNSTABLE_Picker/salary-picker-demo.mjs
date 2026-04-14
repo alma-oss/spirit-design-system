@@ -33,12 +33,11 @@ export function initSalaryPicker() {
     salarySlider.style.setProperty('--slider-position', `${position}%`);
   }
 
-  function resetToNoLimit() {
+  function applyNoLimitFormState() {
     salaryNoLimit.checked = true;
     salaryTextField.value = DEFAULT_SALARY;
     salarySlider.value = DEFAULT_SALARY;
     updateSliderPosition();
-    renderSalarySelection();
   }
 
   function renderSalarySelection() {
@@ -71,12 +70,14 @@ export function initSalaryPicker() {
     tag.querySelector(SELECTOR_TAG_CLOSE).addEventListener('click', function (event) {
       event.preventDefault();
       event.stopPropagation();
-      resetToNoLimit();
+      applyNoLimitFormState();
+      renderSalarySelection();
     });
     row.addEventListener('keydown', function (event) {
       if (event.key === 'Delete' || event.key === 'Backspace') {
         event.preventDefault();
-        resetToNoLimit();
+        applyNoLimitFormState();
+        renderSalarySelection();
 
         return;
       }
@@ -141,10 +142,6 @@ export function initSalaryPicker() {
     salaryTextField.value = this.value;
     updateSliderPosition();
     renderSalarySelection();
-  });
-
-  document.getElementById('salary-apply').addEventListener('click', function () {
-    salaryTriggerEl.click();
   });
 
   initPopoverBehavior(salaryTriggerEl, salaryPopoverEl);

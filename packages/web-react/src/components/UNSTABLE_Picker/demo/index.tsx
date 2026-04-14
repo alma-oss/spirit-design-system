@@ -8,10 +8,12 @@ import PickerAggregated from './PickerAggregated';
 import PickerDefault from './PickerDefault';
 import PickerDisabled from './PickerDisabled';
 import PickerFluid from './PickerFluid';
+import PickerGroupedJobFilters from './PickerGroupedJobFilters';
 import PickerHelperText from './PickerHelperText';
 import PickerHiddenLabel from './PickerHiddenLabel';
 import PickerRequired from './PickerRequired';
 import PickerSalary from './PickerSalary';
+import PickerSingle from './PickerSingle';
 import PickerSizes from './PickerSizes';
 import PickerValidationStates from './PickerValidationStates';
 
@@ -48,6 +50,12 @@ createRoot(document.getElementById('root') as HTMLElement).render(
         </DocsSection>
         <DocsSection title="Salary Picker">
           <PickerSalary />
+        </DocsSection>
+        <DocsSection title="Single with any option">
+          <PickerSingle />
+        </DocsSection>
+        <DocsSection title="Grouped sections with Button">
+          <PickerGroupedJobFilters />
         </DocsSection>
       </div>
     </IconsProvider>
