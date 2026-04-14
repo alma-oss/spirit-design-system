@@ -21,37 +21,39 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium">
+      <div>
         <label
           for="text-field-helper-text-example"
           class="Label"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-helper-text-example"
-          class="TextField__input"
-          placeholder="Placeholder"
-          aria-describedby="text-field-helper-text-example-helper-text"
-        />
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="text"
+            id="text-field-helper-text-example"
+            placeholder="Placeholder"
+            aria-describedby="text-field-helper-text-example-helper-text"
+          />
+        </div>
         <div
           class="HelperText"
           id="text-field-helper-text-example-helper-text"
         >Helper text</div>
       </div>
 
-      <div class="TextField TextField--medium TextField--disabled">
+      <div>
         <label
           for="text-field-helper-text-disabled"
           class="Label Label--disabled"
         >Disabled Field</label>
-        <input
-          type="text"
-          id="text-field-helper-text-disabled"
-          class="TextField__input"
-          placeholder="Placeholder"
-          aria-describedby="text-field-helper-text-disabled-helper-text"
-          disabled
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--disabled">
+          <input
+            type="text"
+            id="text-field-helper-text-disabled"
+            placeholder="Placeholder"
+            aria-describedby="text-field-helper-text-disabled-helper-text"
+            disabled
+          />
+        </div>
         <div
           class="HelperText HelperText--disabled"
           id="text-field-helper-text-disabled-helper-text"
