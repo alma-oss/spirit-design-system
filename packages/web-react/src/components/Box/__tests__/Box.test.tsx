@@ -137,6 +137,7 @@ describe('Box', () => {
     );
 
     const box = screen.getByTestId('Box');
+
     expect(box).toHaveClass('color-scheme-on-neutral-basic');
     expect(box).toHaveClass('bg-color-scheme');
     expect(box).toHaveClass('text-color-scheme');
@@ -150,6 +151,7 @@ describe('Box', () => {
     );
 
     const box = screen.getByTestId('Box');
+
     expect(box).toHaveClass('bg-secondary');
     expect(box).not.toHaveClass('bg-color-scheme');
   });
