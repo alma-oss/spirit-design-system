@@ -1,13 +1,13 @@
-<div class="Select Select--medium">
+<div>
   <label for="{{id}}" class="Label {{#if isLabelHidden }}accessibility-hidden{{/if}}">Theme</label>
-  <div class="Select__inputContainer">
-    <select id="{{id}}" name="theme" class="Select__input" onchange="switchTheme(event)" autocomplete="off">
+  <div class="InputContainer InputContainer--medium InputContainer--fluid">
+    <select id="{{id}}" name="theme" onchange="switchTheme(event)" autocomplete="off">
       {{#each @themes as |theme|}}
         <option value="{{theme.id}}">{{theme.name}}</option>
       {{/each}}
     </select>
-    <div class="Select__icon">
-      <svg width="24" height="24" aria-hidden="true">
+    <div class="InputAddon">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>

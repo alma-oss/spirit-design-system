@@ -263,16 +263,15 @@
         <fieldset style="border: 0;">
           <legend class="mb-500">New Toast:</legend>
           <div class="Stack Stack--hasSpacing">
-            <div class="Select Select--medium">
+            <div>
               <label
                 for="toast-color"
                 class="Label"
               >Color</label>
-              <div class="Select__inputContainer">
+              <div class="InputContainer InputContainer--medium">
                 <select
                   id="toast-color"
                   name="color"
-                  class="Select__input"
                   autocomplete="off"
                 >
                   <option value="neutral">Neutral</option>
@@ -281,8 +280,9 @@
                   <option value="danger">Danger</option>
                   <option value="informative">Informative</option>
                 </select>
-                <div class="Select__icon">
+                <div class="InputAddon">
                   <svg
+                    class="Icon"
                     width="20"
                     height="20"
                     aria-hidden="true"

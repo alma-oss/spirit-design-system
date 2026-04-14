@@ -1,7 +1,8 @@
-// 1. We pass the input arrows width if the input type is number.
-// 2. If the input has a size attribute, we calculate the width based on the input width, padding, border width and arrows width.
-// 3. We generate the input width based on the number of characters.
-// 4. Tweak the input line height of `small` Select size to align the text vertically within the input.
+// 1. For select, we need to place the input addon over the input to keep the interaction consistent.
+// 2. We pass the input arrows width if the input type is number.
+// 3. If the input has a size attribute, we calculate the width based on the input width, padding, border width and arrows width.
+// 4. We generate the input width based on the number of characters.
+// 5. Tweak the input line height of `small` Select size to align the text vertically within the input.
 
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
@@ -31,6 +32,14 @@
 
     &:has(> textarea) {
         min-height: var(--#{tokens.$css-variable-prefix}input-container-min-height);
+    }
+
+    // 1.
+    &:has(> select) {
+        --#{tokens.$css-variable-prefix}input-addon-grid-area: 1 / -1;
+
+        display: grid;
+        justify-items: end;
     }
 
     &:has(> :is(input, select, textarea):active),
@@ -82,12 +91,12 @@
 }
 
 .InputContainer > input {
-    // 1.
+    // 2.
     &:where([type='number']) {
         --#{tokens.$css-variable-prefix}input-container-input-arrows-width: #{theme.$input-number-arrows-width};
     }
 
-    // 2.
+    // 3.
     &:where([size]) {
         width: calc(
             var(--#{tokens.$css-variable-prefix}input-container-input-width) + 2 * #{theme.$input-padding-x} + 2 *
@@ -95,7 +104,7 @@
         );
     }
 
-    // 3.
+    // 4.
     @each $size in theme.$input-size-characters {
         &:where([size='#{$size}']) {
             --#{tokens.$css-variable-prefix}input-container-input-width: #{$size}ch;
@@ -103,7 +112,17 @@
     }
 }
 
-// 4.
+// 1.
+.InputContainer > select {
+    grid-area: 1 / 1;
+    width: 100%;
+    padding-inline-end: calc(
+        var(--#{tokens.$css-variable-prefix}input-addon-min-width) + #{theme.$input-padding-x} - 2 *
+            #{theme.$border-width}
+    );
+}
+
+// 5.
 .InputContainer--small:has(> select) {
     --#{tokens.$css-variable-prefix}input-container-line-height: 1.3;
 }

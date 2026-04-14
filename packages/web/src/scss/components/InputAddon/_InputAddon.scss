@@ -10,6 +10,7 @@
     @include typography.from-css-variables($infix: 'input-addon');
 
     display: flex;
+    grid-area: var(--#{tokens.$css-variable-prefix}input-addon-grid-area);
     align-items: center;
     justify-content: center;
     min-width: var(--#{tokens.$css-variable-prefix}input-addon-min-width);
@@ -18,6 +19,10 @@
 
     &:not(:has(> :is(a, button))) {
         cursor: text; // 2.
+    }
+
+    &:not(:has(:is(a, button)), label) {
+        pointer-events: none;
     }
 }
 
