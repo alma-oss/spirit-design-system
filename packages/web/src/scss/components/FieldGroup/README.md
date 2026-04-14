@@ -111,9 +111,11 @@ disabled styling on all elements.
   <legend class="accessibility-hidden">Label</legend>
   <div class="Label" aria-hidden="true">Label</div>
   <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
-    <div class="TextField TextField--medium TextField--disabled">
-      <label for="text-field" class="TextField__label">Label</label>
-      <input type="text" id="text-field" class="TextField__input" name="textField" placeholder="Placeholder" disabled />
+    <div>
+      <label for="text-field" class="Label Label--disabled">Label</label>
+      <div class="InputContainer InputContainer--medium InputContainer--disabled">
+        <input type="text" id="text-field" name="textField" placeholder="Placeholder" disabled />
+      </div>
     </div>
   </div>
 </fieldset>
