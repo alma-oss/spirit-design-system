@@ -63,16 +63,11 @@ You can combine an icon with a list of validation texts.
 Use the `ValidationText--disabled` modifier class when the associated form control is disabled.
 
 ```html
-<div class="TextField TextField--medium TextField--disabled">
-  <label for="text-field-disabled" class="TextField__label">Label</label>
-  <input
-    type="text"
-    id="text-field-disabled"
-    class="TextField__input"
-    name="disabled"
-    placeholder="Placeholder"
-    disabled
-  />
+<div>
+  <label for="text-field-disabled" class="Label Label--disabled">Label</label>
+  <div class="InputContainer InputContainer--medium InputContainer--disabled InputContainer--danger">
+    <input type="text" id="text-field-disabled" name="disabled" placeholder="Placeholder" disabled />
+  </div>
   <div class="ValidationText ValidationText--disabled ValidationText--danger">Danger validation text</div>
 </div>
 ```
@@ -112,9 +107,11 @@ ValidationText works seamlessly with Spirit form components:
 ### Box Field (FileUploader, TextArea, TextField, Select, Slider)
 
 ```html
-<div class="TextField TextField--medium TextField--danger">
-  <label for="example" class="TextField__label">Label</label>
-  <input type="text" id="example" class="TextField__input" placeholder="Placeholder" value="Filled" />
+<div>
+  <label for="example" class="Label">Label</label>
+  <div class="InputContainer InputContainer--medium InputContainer--danger">
+    <input type="text" id="example" placeholder="Placeholder" value="Filled" />
+  </div>
   <div class="ValidationText ValidationText--danger">Danger validation text</div>
 </div>
 ```
