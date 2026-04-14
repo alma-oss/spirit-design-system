@@ -5,9 +5,11 @@ HelperText is a component used to display helper text for form field components.
 ## Basic Usage
 
 ```html
-<div class="TextField TextField--medium">
-  <label for="text-field-helper-text" class="TextField__label">Label</label>
-  <input type="text" id="text-field-helper-text" class="TextField__input" name="helperText" placeholder="Placeholder" />
+<div>
+  <label for="text-field-helper-text" class="Label">Label</label>
+  <div class="InputContainer InputContainer--medium">
+    <input type="text" id="text-field-helper-text" name="helperText" placeholder="Placeholder" />
+  </div>
   <div class="HelperText">Helper text</div>
 </div>
 ```
@@ -66,16 +68,11 @@ Use the `HelperText--item` modifier when HelperText is inside an Item or inside 
 Use the `HelperText--disabled` modifier class for disabled helper text. Add it whenever the associated form control is disabled.
 
 ```html
-<div class="TextField TextField--medium TextField--disabled">
-  <label for="text-field-disabled" class="TextField__label">Label</label>
-  <input
-    type="text"
-    id="text-field-disabled"
-    class="TextField__input"
-    name="disabled"
-    placeholder="Placeholder"
-    disabled
-  />
+<div>
+  <label for="text-field-disabled" class="Label Label--disabled">Label</label>
+  <div class="InputContainer InputContainer--medium InputContainer--disabled">
+    <input type="text" id="text-field-disabled" name="disabled" placeholder="Placeholder" disabled />
+  </div>
   <div class="HelperText HelperText--disabled">Helper text</div>
 </div>
 ```
@@ -85,16 +82,17 @@ Use the `HelperText--disabled` modifier class for disabled helper text. Add it w
 When using HelperText with form inputs, associate it with the input using the `aria-describedby` attribute:
 
 ```html
-<div class="TextField TextField--medium">
-  <label for="text-field-helper-text" class="TextField__label">Label</label>
-  <input
-    type="text"
-    id="text-field-helper-text"
-    class="TextField__input"
-    name="helperText"
-    placeholder="Placeholder"
-    aria-describedby="text-field-helper-text-helper-text"
-  />
+<div>
+  <label for="text-field-helper-text" class="Label">Label</label>
+  <div class="InputContainer InputContainer--medium">
+    <input
+      type="text"
+      id="text-field-helper-text"
+      name="helperText"
+      placeholder="Placeholder"
+      aria-describedby="text-field-helper-text-helper-text"
+    />
+  </div>
   <div class="HelperText" id="text-field-helper-text-helper-text">Helper text</div>
 </div>
 ```
