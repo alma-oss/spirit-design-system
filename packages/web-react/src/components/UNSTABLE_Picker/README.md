@@ -72,6 +72,66 @@ Set `selectionMode` to `"single"`. Use the same `isOpen` / `onToggle` / `selecte
 </UNSTABLE_Picker>
 ```
 
+### Single Selection with an “Any” Option
+
+```tsx
+import React, { useRef } from 'react';
+import {
+  Button,
+  Radio,
+  Text,
+  UNSTABLE_Picker,
+  UNSTABLE_PickerGroup,
+  UNSTABLE_PickerItem,
+  useSelectionState,
+  useToggle,
+} from '@alma-oss/spirit-web-react';
+import type { SpiritUnstablePickerRef } from '@alma-oss/spirit-web-react';
+
+const PICKER_ID = 'picker-publication-time';
+const LABEL = 'Publication time';
+
+export const PublicationTimePicker = () => {
+  const [isOpen, onToggle] = useToggle(false);
+  const { selectedKeys, setSelectedKeys } = useSelectionState({
+    defaultSelectedKeys: [],
+    selectionMode: 'single',
+  });
+  const pickerRef = useRef<SpiritUnstablePickerRef>(null);
+
+  return (
+    <UNSTABLE_Picker
+      ref={pickerRef}
+      id={PICKER_ID}
+      isOpen={isOpen}
+      label={LABEL}
+      selectedKeys={selectedKeys}
+      selectionMode="single"
+      onSelectionChange={setSelectedKeys}
+      onToggle={onToggle}
+    >
+      <Text elementType="h3" emphasis="bold">
+        {LABEL}
+      </Text>
+      <UNSTABLE_PickerGroup label={LABEL}>
+        <Radio
+          id={`${PICKER_ID}-any`}
+          name={PICKER_ID}
+          isChecked={selectedKeys.length === 0}
+          isItem
+          label="Any time"
+          onChange={() => setSelectedKeys([])}
+        />
+        <UNSTABLE_PickerItem value="24h">Last 24 hours</UNSTABLE_PickerItem>
+        <UNSTABLE_PickerItem value="3d">Last 3 days</UNSTABLE_PickerItem>
+        <UNSTABLE_PickerItem value="1w">Last week</UNSTABLE_PickerItem>
+      </UNSTABLE_PickerGroup>
+      <Button onClick={() => pickerRef.current?.close()}>Apply</Button>
+    </UNSTABLE_Picker>
+  );
+};
+```
+
 ### Aggregated Tag
 
 With `isAggregated`, a **single** tag shows the field label for one selected item, or `"{label} ({count})"` for multiple selections. Removing that tag clears the whole selection.
@@ -135,20 +195,20 @@ export const LanguagePicker = () => {
 Example with custom popover content (no `UNSTABLE_PickerItem`), `renderTags`, and `ref.close()`.
 
 ```tsx
-import type { SpiritUnstablePickerRef } from '@alma-oss/spirit-web-react/components/UNSTABLE_Picker';
 import React, { useRef, useState } from 'react';
 import {
   Button,
-  FieldGroup,
   Heading,
   Radio,
   Slider,
   Text,
   TextField,
   UNSTABLE_Picker,
+  UNSTABLE_PickerGroup,
   UNSTABLE_PickerTag,
   useToggle,
 } from '@alma-oss/spirit-web-react';
+import type { SpiritUnstablePickerRef } from '@alma-oss/spirit-web-react';
 
 const salaryFormatter = new Intl.NumberFormat('cs-CZ');
 const formatNumber = (value: number) => salaryFormatter.format(value);
@@ -181,16 +241,10 @@ export const SalaryPicker = () => {
     <UNSTABLE_Picker
       id="demo-picker-salary"
       ref={pickerRef}
-      addButtonLabel="Edit"
       helperText="Set your minimum expected salary"
       isOpen={isOpen}
       label="Salary"
       onToggle={onToggle}
-      selectedKeys={hasSalaryLimit ? ['salary'] : []}
-      selectionAriaLabel="Selected salary"
-      onSelectionChange={(keys) => {
-        if (keys.length === 0) setSalary(null);
-      }}
       renderTags={({ getKeyboardGridRowProps, onRemove }) => {
         if (!hasSalaryLimit) {
           return null;
@@ -204,16 +258,21 @@ export const SalaryPicker = () => {
           />
         );
       }}
+      selectedKeys={hasSalaryLimit ? ['salary'] : []}
+      onSelectionChange={(keys) => {
+        if (keys.length === 0) setSalary(null);
+      }}
     >
       <Heading elementType="h3" size="xsmall">
         Salary
       </Heading>
       <Text size="small">Set your minimum expected salary.</Text>
-      <FieldGroup id="demo-picker-salary-field-group" isFluid isLabelHidden label="Salary">
+      <UNSTABLE_PickerGroup label="Salary">
         <Radio
           id="salary-no-limit"
           name="salary"
           isChecked={!hasSalaryLimit}
+          isItem
           label="No limit"
           onChange={() => setSalary(null)}
         />
@@ -221,6 +280,7 @@ export const SalaryPicker = () => {
           id="salary-from"
           name="salary"
           isChecked={hasSalaryLimit}
+          isItem
           label="From"
           onChange={() => setSalary(SALARY_FROM_DEFAULT)}
         />
@@ -236,16 +296,16 @@ export const SalaryPicker = () => {
           id="demo-picker-salary-slider"
           isLabelHidden
           label="Salary"
-          min={SALARY_FROM_MIN}
           max={SALARY_FROM_MAX}
+          min={SALARY_FROM_MIN}
           step={SALARY_SLIDER_STEP}
           value={fromAmount}
           onChange={(e) => updateSalaryFromValue(e.target.value)}
         />
-      </FieldGroup>
-      <Button color="primary" onClick={() => pickerRef.current?.close()}>
-        Apply
-      </Button>
+      </UNSTABLE_PickerGroup>
+      <div className="d-grid mt-600">
+        <Button onClick={() => pickerRef.current?.close()}>Apply</Button>
+      </div>
     </UNSTABLE_Picker>
   );
 };
@@ -357,6 +417,7 @@ UNSTABLE_PickerItem is one option row in the popover (picker context is required
 | ---------- | ----------- | ------- | -------- | -------------------------------------- |
 | `children` | `ReactNode` | —       | ✓        | Label shown next to the radio/checkbox |
 | `value`    | `string`    | —       | ✓        | Key used in `selectedKeys`             |
+| `name`     | `string`    | —       | ✕        | Native input `name`                    |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

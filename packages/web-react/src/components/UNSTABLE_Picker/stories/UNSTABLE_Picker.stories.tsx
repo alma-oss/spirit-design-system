@@ -1,8 +1,8 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import React, { useState } from 'react';
+import React from 'react';
 import { Sizes, ValidationStates } from '../../../constants';
-import { useToggle } from '../../../hooks';
+import { useSelectionState, useToggle } from '../../../hooks';
 import { UNSTABLE_PICKER_DOCS_DEMO_WRAPPER_CLASSNAME } from '../demo/constants';
 import { renderPickerLanguageItems } from '../demo/PickerLanguageItems';
 import ReadMe from '../README.md?raw';
@@ -110,7 +110,10 @@ export default meta;
 type Story = StoryObj<typeof UNSTABLE_Picker>;
 
 const PlaygroundStory = (args: React.ComponentProps<typeof UNSTABLE_Picker>) => {
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const { selectedKeys, setSelectedKeys } = useSelectionState({
+    defaultSelectedKeys: [],
+    selectionMode: args.selectionMode,
+  });
   const [isOpen, onToggle] = useToggle(false);
 
   return (

@@ -96,7 +96,7 @@ export interface UnstablePickerGroupProps extends Omit<SpiritFieldGroupProps, 'i
 
 export interface UnstablePickerItemProps extends Omit<
   SpiritCheckboxProps,
-  'id' | 'label' | 'isChecked' | 'isDisabled' | 'value' | 'onChange' | 'inputPosition' | 'isItem' | 'name'
+  'id' | 'label' | 'isChecked' | 'isDisabled' | 'value' | 'onChange' | 'inputPosition' | 'isItem'
 > {
   children: ReactNode;
   value: string;
