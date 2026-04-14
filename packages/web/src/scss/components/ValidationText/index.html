@@ -8,48 +8,51 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium TextField--danger">
+      <div>
         <label
           for="validation-text-danger"
           class="Label"
         >Danger</label>
-        <input
-          type="text"
-          id="validation-text-danger"
-          class="TextField__input"
-          placeholder="Placeholder"
-          value="Filled"
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--danger">
+          <input
+            type="text"
+            id="validation-text-danger"
+            placeholder="Placeholder"
+            value="Filled"
+          />
+        </div>
         <div class="ValidationText ValidationText--danger">Danger validation text</div>
       </div>
 
-      <div class="TextField TextField--medium TextField--warning">
+      <div>
         <label
           for="validation-text-warning"
           class="Label"
         >Warning</label>
-        <input
-          type="text"
-          id="validation-text-warning"
-          class="TextField__input"
-          placeholder="Placeholder"
-          value="Filled"
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--warning">
+          <input
+            type="text"
+            id="validation-text-warning"
+            placeholder="Placeholder"
+            value="Filled"
+          />
+        </div>
         <div class="ValidationText ValidationText--warning">Warning validation text</div>
       </div>
 
-      <div class="TextField TextField--medium TextField--success">
+      <div>
         <label
           for="validation-text-success"
           class="Label"
         >Success</label>
-        <input
-          type="text"
-          id="validation-text-success"
-          class="TextField__input"
-          placeholder="Placeholder"
-          value="Filled"
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--success">
+          <input
+            type="text"
+            id="validation-text-success"
+            placeholder="Placeholder"
+            value="Filled"
+          />
+        </div>
         <div class="ValidationText ValidationText--success">Success validation text</div>
       </div>
 
@@ -69,18 +72,19 @@
 
       {{setVar "states" "success" "warning" "danger" }}
       {{#each @root.states as |state|}}
-      <div class="TextField TextField--medium TextField--{{state}}">
+      <div>
         <label
           for="validation-text-icon-{{state}}"
           class="Label"
         >Label</label>
-        <input
-          type="text"
-          id="validation-text-icon-{{state}}"
-          class="TextField__input"
-          placeholder="Placeholder"
-          value="Filled"
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--{{state}}">
+          <input
+            type="text"
+            id="validation-text-icon-{{state}}"
+            placeholder="Placeholder"
+            value="Filled"
+          />
+        </div>
         <div class="ValidationText ValidationText--{{state}}">
           <svg
             class="Icon"
@@ -113,18 +117,19 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium TextField--danger">
+      <div>
         <label
           for="validation-text-list"
           class="Label"
         >Label</label>
-        <input
-          type="text"
-          id="validation-text-list"
-          class="TextField__input"
-          placeholder="Placeholder"
-          value="Filled"
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--danger">
+          <input
+            type="text"
+            id="validation-text-list"
+            placeholder="Placeholder"
+            value="Filled"
+          />
+        </div>
         <div class="ValidationText ValidationText--danger">
           <ul>
             <li>First validation text</li>
@@ -147,19 +152,20 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium TextField--disabled TextField--danger">
+      <div>
         <label
           for="validation-text-disabled"
           class="Label Label--disabled"
         >Disabled</label>
-        <input
-          type="text"
-          id="validation-text-disabled"
-          class="TextField__input"
-          placeholder="Placeholder"
-          value="Filled"
-          disabled
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--disabled InputContainer--danger">
+          <input
+            type="text"
+            id="validation-text-disabled"
+            placeholder="Placeholder"
+            value="Filled"
+            disabled
+          />
+        </div>
         <div class="ValidationText ValidationText--danger ValidationText--disabled">Danger validation text (disabled)
         </div>
       </div>

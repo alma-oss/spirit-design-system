@@ -21,58 +21,62 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="TextField TextField--medium">
+      <div>
         <label
           for="text-field-example"
           class="Label"
         >Label</label>
-        <input
-          type="text"
-          id="text-field-example"
-          class="TextField__input"
-          placeholder="Placeholder"
-        />
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="text"
+            id="text-field-example"
+            placeholder="Placeholder"
+          />
+        </div>
       </div>
 
-      <div class="TextField TextField--medium TextField--required">
+      <div>
         <label
           for="text-field-required"
           class="Label Label--required"
         >Required Field</label>
-        <input
-          type="text"
-          id="text-field-required"
-          class="TextField__input"
-          placeholder="Placeholder"
-          required
-        />
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="text"
+            id="text-field-required"
+            placeholder="Placeholder"
+            required
+          />
+        </div>
       </div>
 
-      <div class="TextField TextField--medium TextField--disabled">
+      <div>
         <label
           for="text-field-disabled"
           class="Label Label--disabled"
         >Disabled Field</label>
-        <input
-          type="text"
-          id="text-field-disabled"
-          class="TextField__input"
-          placeholder="Placeholder"
-          disabled
-        />
+        <div class="InputContainer InputContainer--medium InputContainer--disabled">
+          <input
+            type="text"
+            id="text-field-disabled"
+            placeholder="Placeholder"
+            disabled
+          />
+        </div>
       </div>
 
-      <div class="TextField TextField--medium">
+      <div>
         <label
           for="text-field-hidden"
           class="Label accessibility-hidden"
         >Hidden Label</label>
-        <input
-          type="text"
-          id="text-field-hidden"
-          class="TextField__input"
-          placeholder="Placeholder with hidden label"
-        />
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="text"
+            id="text-field-hidden"
+            placeholder="Placeholder with hidden label"
+          />
+        </div>
       </div>
 
     </div>

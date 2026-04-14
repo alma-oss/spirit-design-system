@@ -340,21 +340,22 @@
                 >Enable AutoClose</label>
               </div>
             </div>
-            <div class="TextField TextField--medium">
+            <div>
               <label
                 for="toast-auto-close-interval"
                 class="Label"
               >AutoClose interval (ms)</label>
-              <input
-                type="number"
-                min="0"
-                max="60000"
-                step="500"
-                value="3000"
-                id="toast-auto-close-interval"
-                name="auto-close-interval"
-                class="TextField__input"
-              />
+              <div class="InputContainer InputContainer--medium">
+                <input
+                  type="number"
+                  min="0"
+                  max="60000"
+                  step="500"
+                  value="3000"
+                  id="toast-auto-close-interval"
+                  name="auto-close-interval"
+                />
+              </div>
             </div>
             <div class="TextArea TextArea--medium">
               <label
@@ -428,19 +429,20 @@
       <form>
         <fieldset style="border: 0;">
           <legend class="mb-500">Virtual keyboard interaction:</legend>
-          <div class="TextField TextField--medium">
+          <div>
             <label
               for="text-field-for-focus"
               class="Label"
             >In Chrome on Android, tap into this text field to
               see how Toast position updates:</label>
-            <input
-              type="text"
-              id="text-field-for-focus"
-              class="TextField__input"
-              name="default"
-              placeholder="Tap here!"
-            />
+            <div class="InputContainer InputContainer--medium">
+              <input
+                type="text"
+                id="text-field-for-focus"
+                name="default"
+                placeholder="Tap here!"
+              />
+            </div>
           </div>
         </fieldset>
       </form>

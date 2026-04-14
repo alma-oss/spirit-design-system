@@ -1,0 +1,15 @@
+@use '@tokens' as tokens;
+@use '../../settings/dictionaries';
+
+$size-dictionary: dictionaries.$size;
+$size-config: (
+    small: (
+        typography: tokens.$body-small-semibold,
+    ),
+    medium: (
+        typography: tokens.$body-medium-semibold,
+    ),
+    large: (
+        typography: tokens.$body-medium-semibold,
+    ),
+);
