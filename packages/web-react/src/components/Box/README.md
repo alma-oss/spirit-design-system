@@ -85,6 +85,24 @@ You can define text color using the `textColor` prop.
 <Box textColor="primary">{/* Content goes here */}</Box>
 ```
 
+## Color Scheme
+
+You can apply a semantic color scheme surface using the `colorScheme` prop. For what color schemes are and how they relate to CSS classes and tokens, see [Color schemes in `web` package][web-readme-color-scheme].
+
+It adds the matching `color-scheme-on-*` class and, by default, scheme-backed `bg-color-scheme`, `text-color-scheme`, and (when `borderWidth` is greater than `0` and `borderColor` is not set) `border-color-scheme` utilities.
+
+Explicit `backgroundColor`, `backgroundGradient`, `textColor`, and `borderColor` take precedence over the corresponding scheme utilities.
+
+```tsx
+<Box colorScheme="neutral-basic">{/* Content goes here */}</Box>
+```
+
+```tsx
+<Box colorScheme="emotion-success-basic" borderWidth="100">
+  {/* Border inherits local scheme border color when borderColor is omitted */}
+</Box>
+```
+
 ## API
 
 | Name                 | Type                                                                                                                                                                                                                                                                                                              | Default | Required | Description                    |
@@ -95,6 +113,7 @@ You can define text color using the `textColor` prop.
 | `borderRadius`       | \[[BorderRadiiTokenType][readme-generated-types] \| `Responsive<BorderRadiiTokenType>`]                                                                                                                                                                                                                           | -       | ✕        | Border radius of the Box       |
 | `borderStyle`        | [Border Style dictionary][dictionary-border]                                                                                                                                                                                                                                                                      | `solid` | ✕        | Border style of the Box        |
 | `borderWidth`        | [Border Width dictionary][dictionary-border]                                                                                                                                                                                                                                                                      | -       | ✕        | Border width of the Box        |
+| `colorScheme`        | `ColorSchemeType`                                                                                                                                                                                                                                                                                                 | -       | ✕        | Semantic color scheme surface  |
 | `elementType`        | `ElementType`                                                                                                                                                                                                                                                                                                     | `div`   | ✕        | Type of element                |
 | `padding`            | \[`SpaceToken` \| `Responsive<SpaceToken>`]                                                                                                                                                                                                                                                                       | -       | ✕        | Padding of the Box             |
 | `paddingX`           | \[`SpaceToken` \| `Responsive<SpaceToken>`]                                                                                                                                                                                                                                                                       | -       | ✕        | Horizontal padding of the Box  |
@@ -117,3 +136,4 @@ and [escape hatches][readme-escape-hatches].
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[web-readme-color-scheme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#color-schemes

@@ -48,6 +48,24 @@ Given the naming convention `theme-<NAME OF THE THEME>`, you can easily switch t
 </body>
 ```
 
+### Color Schemes
+
+Spirit **color schemes** are **semantic surfaces** built from design tokens. They are not the same as the CSS [`color-scheme`][mdn-color-scheme] property
+or OS light/dark mode (`prefers-color-scheme`); they are Spirit’s own pattern for pairing foreground, background, and border colors on a subtree.
+
+#### How It Works
+
+1. **Surface class** — Put `color-scheme-on-<suffix>` on a container (for example `color-scheme-on-neutral-basic`, `color-scheme-on-emotion-success-basic`,
+   `color-scheme-on-accent-01-subtle`, or `color-scheme-on-disabled`). Each one sets **local** custom properties for content, border, and background (with the
+   Spirit CSS variable prefix), for example `--spirit-local-color` and `--spirit-local-background-color`.
+
+2. **Utilities or Components** — On the same element (or an ancestor that already has a surface class), use utilities that read those locals: `bg-color-scheme`,
+   `text-color-scheme`, and `border-color-scheme` so backgrounds, text, and borders stay on-palette without listing every token. See the [dynamic color helper demo][dynamic-color-demo] for examples.
+   Or read the color scheme directly in the component CSS classes (for example `Pill`).
+
+3. **Tokens** — Accent and emotion schemes follow the accent and emotion keys in [`spirit-design-tokens`][design-tokens-pkg]. New accents or emotions
+   in tokens translate into additional `color-scheme-on-*` classes when themes are built. Fixed keys such as `neutral-*`, `selected-*`, and `disabled` are defined alongside them in the same generator.
+
 ### Advanced Implementation in Product with Sass
 
 ❗ **Important:** Make sure you have the `sass` dependency installed in your project (`sass` is marked as optional peer dependency since you can use the pre-built distribution CSS).
@@ -266,6 +284,9 @@ See the [LICENSE][license] file for information.
 [design-tokens-load-path]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens#in-sass
 [design-tokens-color-tokens]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/src/scss/themes/_color-tokens.scss
 [design-tokens-rebranding]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens#rebranding-spirit
+[design-tokens-pkg]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens
+[dynamic-color-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/helpers/dynamic-color/index.html
+[mdn-color-scheme]: https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
 [examples]: https://spirit-design-system.netlify.app/packages/web/
 [feature-flags-docs]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/feature-flags.md
 [license]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/LICENSE.md

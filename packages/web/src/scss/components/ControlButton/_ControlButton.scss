@@ -30,6 +30,7 @@ $_component-name-infix: spirit-string.convert-pascal-case-to-kebab-case($_compon
     height: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-height);
     padding-inline: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-padding-x);
     padding-block: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-padding-y);
+    color: var(--#{tokens.$css-variable-prefix}local-color);
     border: theme.$border-width theme.$border-style transparent;
     border-radius: theme.$border-radius;
     user-select: none;

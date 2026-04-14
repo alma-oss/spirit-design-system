@@ -1,4 +1,5 @@
 import { accentColors, emotionColors, textColors } from '@alma-oss/spirit-design-tokens';
+import { ColorPrefixes } from '../constants';
 import {
   type AccentColorNamesType,
   type BackgroundAccentColorsType,
@@ -12,6 +13,29 @@ import {
   type TextEmotionColorsType,
   type TextNeutralColorsType,
 } from '../types';
+
+interface CreateScopedColorTokenNameOptions {
+  color: string;
+  intensity: string;
+}
+
+export const getColorCategory = (color: string) => {
+  if (Object.keys(accentColors).includes(color)) {
+    return ColorPrefixes.ACCENT;
+  }
+
+  if (Object.keys(emotionColors).includes(color)) {
+    return ColorPrefixes.EMOTION;
+  }
+
+  return undefined;
+};
+
+export const createColorTokenName = (color: string, intensity: string, prefix?: string): string =>
+  [prefix, color, intensity].filter(Boolean).join('-');
+
+export const createScopedColorTokenName = ({ color, intensity }: CreateScopedColorTokenNameOptions): string =>
+  createColorTokenName(color, intensity, getColorCategory(color));
 
 /**
  * Generates a color object by processing a set of colors and filtering their keys based on type.
@@ -32,7 +56,7 @@ export const generateColorsObject = <T extends string>(
   for (const [key, properties] of Object.entries(colors)) {
     for (const [property] of Object.entries(properties)) {
       if (property.startsWith(type)) {
-        const formattedValue = `${prefix}-${key}-${property.replace(type, '').toLowerCase()}`;
+        const formattedValue = createColorTokenName(key, property.replace(type, '').toLowerCase(), prefix);
         const formattedKey = formattedValue.replace(/-/g, '_').toUpperCase();
         result[formattedKey] = formattedValue;
       }

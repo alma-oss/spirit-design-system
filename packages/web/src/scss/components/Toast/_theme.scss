@@ -1,6 +1,4 @@
-@use 'sass:list';
 @use '@tokens' as tokens;
-@use '../../settings/dictionaries';
 @use '../../settings/transitions';
 
 $alignments-x: (
@@ -13,16 +11,6 @@ $alignments-y: (
     bottom: end,
 );
 $breakpoints: tokens.$breakpoints;
-
-$color-dictionary: (
-    emotion: dictionaries.$emotion-colors,
-    neutral: neutral,
-);
-
-$color-config: (
-    color: 'content-subtle',
-    background-color: 'background-basic',
-);
 
 $padding-x: tokens.$space-900;
 $padding-x-tablet: tokens.$space-1000;

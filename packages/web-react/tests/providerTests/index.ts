@@ -1,5 +1,6 @@
 export * from './ariaAttributesTest';
 export * from './classNamePrefixProviderTest';
+export * from './colorSchemePropsTest';
 export * from './dictionaryPropsTest';
 export * from './elementTypePropsTest';
 export * from './formFieldContextPropsTest';

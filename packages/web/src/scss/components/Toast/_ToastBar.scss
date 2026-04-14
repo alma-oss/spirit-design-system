@@ -7,7 +7,7 @@
 // 7. Invisible items should not take up space in the queue.
 
 @use '@tokens' as tokens;
-@use '../../tools/dictionaries';
+@use '../../tools/component-color-overrides';
 @use '../../tools/reset';
 @use '../../tools/typography';
 @use 'theme';
@@ -33,9 +33,9 @@
 .ToastBar__box {
     max-width: theme.$bar-max-width;
     padding: theme.$bar-padding;
-    color: var(--#{tokens.$css-variable-prefix}toast-bar-color);
+    color: var(--#{tokens.$css-variable-prefix}local-color);
     border-radius: theme.$bar-border-radius;
-    background-color: var(--#{tokens.$css-variable-prefix}toast-bar-background-color);
+    background-color: var(--#{tokens.$css-variable-prefix}local-background-color);
     box-shadow: theme.$bar-box-shadow;
     pointer-events: var(--toast-bar-pointer-events, initial); // 3.
 
@@ -98,11 +98,12 @@
     margin-inline-end: theme.$bar-action-margin-inline-end; // 6.
 }
 
-@include dictionaries.generate-colors(
+@include component-color-overrides.generate(
     $class-name: 'ToastBar',
-    $dictionary-values: theme.$color-dictionary,
-    $config: theme.$color-config,
-    $generate-data-attribute: true
+    $property-map: (
+        content: color,
+        background: background-color,
+    )
 );
 
 .ToastBar.is-hidden {

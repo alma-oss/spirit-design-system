@@ -10,6 +10,7 @@ import { usePillStyleProps } from './usePillStyleProps';
 const defaultProps: Partial<SpiritPillProps> = {
   color: PillColorsExtended.SELECTED,
   elementType: 'span',
+  isSubtle: false,
 };
 
 const Pill = <E extends ElementType = 'span', C = void>(props: SpiritPillProps<E, C>): JSX.Element => {

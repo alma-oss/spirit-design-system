@@ -79,4 +79,20 @@ Responsive values can be set for each prop using utility classes. For example, `
 </div>
 ```
 
+## Color Scheme
+
+Combine `color-scheme-on-<scheme>` with `bg-color-scheme`, `text-color-scheme`, and (when using a border without an explicit token color) `border-color-scheme` so background, text, and border use the paired local tokens for that scheme.
+
+```html
+<div class="color-scheme-on-neutral-basic bg-color-scheme text-color-scheme p-800">neutral-basic surface</div>
+```
+
+```html
+<div
+  class="color-scheme-on-emotion-success-basic bg-color-scheme border-color-scheme border-solid border-100 text-color-scheme p-800"
+>
+  Border uses scheme color
+</div>
+```
+
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
