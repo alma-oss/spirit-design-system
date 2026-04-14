@@ -1,0 +1,28 @@
+// 1. Align the text vertically with the input.
+// 2. Set the cursor to text to blend in with the input.
+
+@use '@tokens' as tokens;
+@use '../../tools/dictionaries';
+@use '../../tools/typography';
+@use 'theme';
+
+.InputAddon {
+    @include typography.from-css-variables($infix: 'input-addon');
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--#{tokens.$css-variable-prefix}input-addon-min-width);
+    line-height: 1; // 1.
+    color: inherit;
+
+    &:not(:has(> :is(a, button))) {
+        cursor: text; // 2.
+    }
+}
+
+@include dictionaries.generate-sizes(
+    $class-name: 'InputAddon',
+    $dictionary-values: theme.$size-dictionary,
+    $config: theme.$size-config
+);
