@@ -9400,53 +9400,54 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supernova-studio/client@npm:1.74.2":
-  version: 1.74.2
-  resolution: "@supernova-studio/client@npm:1.74.2"
+"@supernova-studio/client@npm:1.87.6":
+  version: 1.87.6
+  resolution: "@supernova-studio/client@npm:1.87.6"
   dependencies:
     p-queue: "npm:^8.0.1"
     prosemirror-model: "npm:^1.25.4"
     queue-promise: "npm:^2.2.1"
     y-prosemirror: "npm:^1.3.7"
+    y-utility: "npm:0.1.4"
     yjs: "npm:^13.6.29"
     zod: "npm:3.25.76"
-  checksum: 10/0955ebf3622233b8775f359e33f3224ee5b14c03e4db35070855b52348e212cae10cdb2df13f32c00ce1a2be351092dd8f792941272c80a991385bbea8d7572a
+  checksum: 10/82bae3b4a239a1c919e8152be2ee8a96e3b8807d88dce757627fa2119becf7a0cb71b8792a7c87cb77b81f78a6c8085e0286fde3a42d37718ae61eb782f8b11c
   languageName: node
   linkType: hard
 
-"@supernova-studio/model@npm:1.74.2":
-  version: 1.74.2
-  resolution: "@supernova-studio/model@npm:1.74.2"
+"@supernova-studio/model@npm:1.87.6":
+  version: 1.87.6
+  resolution: "@supernova-studio/model@npm:1.87.6"
   dependencies:
     "@sindresorhus/slugify": "npm:1.1.2"
     ip-cidr: "npm:3.1.0"
     tsup: "npm:^8.5.0"
     zod: "npm:3.25.76"
-  checksum: 10/c4760a02ac57c66e8a628624d7c1a59a182c088c7960ac3301b10fb035d293f4b1147f6207404a6dad4d265b938835e1c3098f819d1d3ff01ad4a4a13b88be19
+  checksum: 10/5075b02eb84b0d43c80f4d16b88b636c156796c124ccd1ecc94d213f3cce26200c2c4448f6edaad6f99a505a1a16653d854c7e117c2b7f248d831c2dd854d15e
   languageName: node
   linkType: hard
 
-"@supernovaio/export-helpers@npm:1.0.32":
-  version: 1.0.32
-  resolution: "@supernovaio/export-helpers@npm:1.0.32"
+"@supernovaio/export-helpers@npm:1.0.33":
+  version: 1.0.33
+  resolution: "@supernovaio/export-helpers@npm:1.0.33"
   dependencies:
-    "@supernovaio/sdk-exporters": "npm:2.3.2"
+    "@supernovaio/sdk-exporters": "npm:2.3.3"
     change-case: "npm:4.1.2"
-  checksum: 10/39081e837a0eb476237faa2741b0764b60e3e178a2b232ea33511d9c065ea9cfecc54be57a540f177e0f1dc65ec4201c792c31d02e2fd8513b18905802b3683b
+  checksum: 10/77574fd2a533bf547d8e1a4372d3571a0de08d69f80646ac65ee7e90d7e5d3b81c8d887a58159256d907f13c586a87386a9a8ba83999ab45cd2609f786bbb0aa
   languageName: node
   linkType: hard
 
-"@supernovaio/sdk-exporters@npm:2.3.2":
-  version: 2.3.2
-  resolution: "@supernovaio/sdk-exporters@npm:2.3.2"
+"@supernovaio/sdk-exporters@npm:2.3.3":
+  version: 2.3.3
+  resolution: "@supernovaio/sdk-exporters@npm:2.3.3"
   dependencies:
     "@rollup/rollup-darwin-x64": "npm:4.34.6"
-    "@supernova-studio/client": "npm:1.74.2"
-    "@supernova-studio/model": "npm:1.74.2"
+    "@supernova-studio/client": "npm:1.87.6"
+    "@supernova-studio/model": "npm:1.87.6"
   dependenciesMeta:
     "@rollup/rollup-darwin-x64":
       optional: true
-  checksum: 10/2133c6999e98554c5552fa46c21f1cd4d07931460ca5c7483a2f4c624a098322a8a7c3d9dc84a060488dc4cc88b5f5acedc9d904b7915d7bba4756b694c97005
+  checksum: 10/bbafd33c353545d7a65b0ff9a5b01ce1aa36695afd87af5711ce14bf58362f99c5e41096a17e2db7b884f0c67c7622e6c0a0ca5af9fb5ea37bc8a229648e4516
   languageName: node
   linkType: hard
 
@@ -24283,7 +24284,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lib0@npm:^0.2.109, lib0@npm:^0.2.99":
+"lib0@npm:^0.2.109, lib0@npm:^0.2.43, lib0@npm:^0.2.99":
   version: 0.2.117
   resolution: "lib0@npm:0.2.117"
   dependencies:
@@ -37966,6 +37967,17 @@ __metadata:
     y-protocols: ^1.0.1
     yjs: ^13.5.38
   checksum: 10/339ac18b2fa6ffeffdee73862433d3c824e2378545614e872edf61b0e578c7a0b488bcda1572ff6e890089c2a1aa84011d089993d32d9c9a4f629ebcee97a1fc
+  languageName: node
+  linkType: hard
+
+"y-utility@npm:0.1.4":
+  version: 0.1.4
+  resolution: "y-utility@npm:0.1.4"
+  dependencies:
+    lib0: "npm:^0.2.43"
+  peerDependencies:
+    yjs: ^13.5.29
+  checksum: 10/2ea7a1bbb4013722cc150a28ea4c4fe385c8e41a57382e0ed575c37c31b3fde3ad727b0ac54d01fc1271d3415f1dd97c401fc040e21a7eb7a86ec4f235d2cf7c
   languageName: node
   linkType: hard
 
