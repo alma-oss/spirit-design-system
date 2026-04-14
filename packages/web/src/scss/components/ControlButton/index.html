@@ -23,87 +23,117 @@
           <h3>On Background Colors</h3>
 
           {{#each @root.basicColors as |color|}}
-            <div
-              class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-{{color}} p-800"
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-{{color}} p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
             >
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-            </div>
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
           {{/each}}
 
           {{#each @root.neutralColors as |color|}}
-            <div
-              class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-color-scheme text-color-scheme color-scheme-on-{{color}}-basic p-800"
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-color-scheme text-color-scheme color-scheme-on-{{color}}-basic p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
             >
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-            </div>
-            <div
-              class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-color-scheme text-color-scheme color-scheme-on-{{color}}-subtle p-800"
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
             >
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-            </div>
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-color-scheme text-color-scheme color-scheme-on-{{color}}-subtle p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
           {{/each}}
 
         </div>
@@ -112,58 +142,78 @@
           <h3>On Emotion Colors</h3>
 
           {{#each @root.emotionColors as |color|}}
-            <div
-              class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-color-scheme text-color-scheme color-scheme-on-emotion-{{color}}-basic p-800"
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-color-scheme text-color-scheme color-scheme-on-emotion-{{color}}-basic p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
             >
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-            </div>
-            <div
-              class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-color-scheme text-color-scheme color-scheme-on-emotion-{{color}}-subtle p-800"
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
             >
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-            </div>
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-color-scheme text-color-scheme color-scheme-on-emotion-{{color}}-subtle p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
           {{/each}}
 
         </div>
@@ -172,58 +222,78 @@
           <h3>On Accent Colors</h3>
 
           {{#each @root.accentColors as |color|}}
-            <div
-              class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-color-scheme text-color-scheme color-scheme-on-accent-{{color}}-basic p-800"
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-color-scheme text-color-scheme color-scheme-on-accent-{{color}}-basic p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
             >
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-            </div>
-            <div
-              class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-color-scheme text-color-scheme color-scheme-on-accent-{{color}}-subtle p-800"
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
             >
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-              {{#each @root.sizes as |size|}}
-                <button
-                  type="button"
-                  class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-                  aria-label="Close dialog"
-                >
-                  <svg class="Icon" width="{{#if (eq size "large")}}20{{else}}16{{/if}}" height="{{#if (eq size "large")}}20{{else}}16{{/if}}" aria-hidden="true">
-                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-                  </svg>
-                </button>
-              {{/each}}
-            </div>
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-color-scheme text-color-scheme color-scheme-on-accent-{{color}}-subtle p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
           {{/each}}
 
         </div>
@@ -245,26 +315,36 @@
           class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-primary p-800"
         >
           {{#each @root.expandedSizes as |size|}}
-            <button
-              type="button"
-              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
-              aria-label="Close dialog"
+          <button
+            type="button"
+            class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+            aria-label="Close dialog"
+          >
+            <svg
+              class="Icon"
+              width="{{#if (eq size "xlarge")}}20{{else}}16{{/if}}"
+              height="{{#if (eq size "xlarge")}}20{{else}}16{{/if}}"
+              aria-hidden="true"
             >
-              <svg class="Icon" width="{{#if (eq size "xlarge")}}20{{else}}16{{/if}}" height="{{#if (eq size "xlarge")}}20{{else}}16{{/if}}" aria-hidden="true">
-                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-              </svg>
-            </button>
+              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+          </button>
           {{/each}}
           {{#each @root.expandedSizes as |size|}}
-            <button
-              type="button"
-              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-              aria-label="Close dialog"
+          <button
+            type="button"
+            class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+            aria-label="Close dialog"
+          >
+            <svg
+              class="Icon"
+              width="{{#if (eq size "xlarge")}}20{{else}}16{{/if}}"
+              height="{{#if (eq size "xlarge")}}20{{else}}16{{/if}}"
+              aria-hidden="true"
             >
-              <svg class="Icon" width="{{#if (eq size "xlarge")}}20{{else}}16{{/if}}" height="{{#if (eq size "xlarge")}}20{{else}}16{{/if}}" aria-hidden="true">
-                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
-              </svg>
-            </button>
+              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+          </button>
           {{/each}}
         </div>
       </div>
@@ -391,7 +471,12 @@
           aria-label="Previous"
           disabled
         >
-          <svg class="Icon" width="16" height="16" aria-hidden="true">
+          <svg
+            class="Icon"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
             <use xlink:href="/assets/icons/svg/sprite.svg#chevron-left" />
           </svg>
         </button>
@@ -404,7 +489,12 @@
           aria-label="Next"
           disabled
         >
-          <svg class="Icon" width="16" height="16" aria-hidden="true">
+          <svg
+            class="Icon"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
             <use xlink:href="/assets/icons/svg/sprite.svg#chevron-right" />
           </svg>
         </button>
@@ -419,7 +509,12 @@
           aria-label="Close"
           disabled
         >
-          <svg class="Icon" width="16" height="16" aria-hidden="true">
+          <svg
+            class="Icon"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
             <use xlink:href="/assets/icons/svg/sprite.svg#close" />
           </svg>
         </button>
@@ -430,7 +525,12 @@
           aria-label="Close"
           disabled
         >
-          <svg class="Icon" width="16" height="16" aria-hidden="true">
+          <svg
+            class="Icon"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
             <use xlink:href="/assets/icons/svg/sprite.svg#close" />
           </svg>
         </button>
