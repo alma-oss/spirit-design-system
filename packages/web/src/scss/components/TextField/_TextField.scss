@@ -22,6 +22,7 @@
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/reset';
 @use '../../tools/string' as spirit-string;
+@use '../../tools/units' as units;
 @use 'theme';
 
 $_field-name: 'TextField';
@@ -69,7 +70,8 @@ $_field-name: 'TextField';
     &[size] {
         width: calc(
             var(--text-field-input-width) + 2 * #{form-fields-settings.$box-field-input-padding-x} + 2 *
-                #{form-fields-settings.$box-field-input-border-width} + var(--text-field-arrows-width, 0px)
+                #{units.px-to-rem(form-fields-settings.$box-field-input-border-width)} +
+                var(--text-field-arrows-width, 0rem)
         );
     }
 

@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '@tokens' as tokens;
 @use '../../settings/form-fields' as form-fields-settings;
+@use '../../tools/units';
 
 $counter-typography: tokens.$body-small-regular;
 $counter-color-state-disabled: tokens.$disabled-content;
@@ -10,13 +11,13 @@ $input-size-config: map.deep-merge(
     form-fields-settings.$box-field-size-config,
     (
         small: (
-            height: 64px,
+            height: units.px-to-rem(64px),
         ),
         medium: (
-            height: 80px,
+            height: units.px-to-rem(80px),
         ),
         large: (
-            height: 96px,
+            height: units.px-to-rem(96px),
         ),
     )
 );

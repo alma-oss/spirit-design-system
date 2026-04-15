@@ -15,7 +15,9 @@ $_component-name: 'ControlButton';
 $_component-name-infix: spirit-string.convert-pascal-case-to-kebab-case($_component-name);
 
 .ControlButton {
-    --#{tokens.$css-variable-prefix}icon-size: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-icon-size);
+    --#{tokens.$css-variable-prefix}icon-composition-size: var(
+        --#{tokens.$css-variable-prefix}#{$_component-name-infix}-icon-size
+    );
 
     @include reset.button();
     @include typography.from-css-variables($infix: $_component-name-infix);

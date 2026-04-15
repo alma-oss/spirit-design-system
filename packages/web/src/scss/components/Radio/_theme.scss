@@ -1,11 +1,12 @@
 @use '@tokens' as tokens;
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../../settings/transitions';
+@use '../../tools/units';
 
 $input-border-radius: tokens.$radius-full;
-$input-size: 20px;
+$input-size: units.px-to-rem(20px);
 $input-margin: tokens.$space-200;
-$input-inner-dot-size: 10px;
+$input-inner-dot-size: units.px-to-rem(10px);
 $input-background-color: form-fields-settings.$inline-field-input-background-color-checked;
 $input-background-color-state-disabled: form-fields-settings.$input-color-state-disabled;
 $input-transition-duration: transitions.$duration-100;

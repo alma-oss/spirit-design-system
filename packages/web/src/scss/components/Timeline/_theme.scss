@@ -1,9 +1,10 @@
 @use '@tokens' as tokens;
 @use '../../settings/dictionaries';
+@use '../../tools/units';
 
 $breakpoints: tokens.$breakpoints;
 
-$timeline-max-width: 800px;
+$timeline-max-width: units.px-to-rem(800px);
 $timeline-step-gap: tokens.$space-600;
 
 $timeline-marker-border: tokens.$border-width-200 solid tokens.$border-basic;
@@ -24,21 +25,21 @@ $timeline-content-padding-top: tokens.$space-600;
 $size-dictionary: dictionaries.$size;
 $size-config: (
     small: (
-        marker-size: 32px,
-        icon-size: 20px,
-        dot-size: 10px,
+        marker-size: units.px-to-rem(32px),
+        icon-size: units.px-to-rem(20px),
+        dot-size: units.px-to-rem(10px),
         typography: tokens.$body-small-semibold,
     ),
     medium: (
-        marker-size: 40px,
-        icon-size: 24px,
-        dot-size: 12px,
+        marker-size: units.px-to-rem(40px),
+        icon-size: units.px-to-rem(24px),
+        dot-size: units.px-to-rem(12px),
         typography: tokens.$body-medium-semibold,
     ),
     large: (
-        marker-size: 56px,
-        icon-size: 28px,
-        dot-size: 16px,
+        marker-size: units.px-to-rem(56px),
+        icon-size: units.px-to-rem(28px),
+        dot-size: units.px-to-rem(16px),
         typography: tokens.$body-xlarge-semibold,
     ),
 );

@@ -2,6 +2,7 @@
 @use '@tokens' as tokens;
 @use '../../settings/dictionaries';
 @use '../../settings/transitions';
+@use '../../tools/units';
 
 $breakpoints: tokens.$breakpoints;
 
@@ -73,13 +74,13 @@ $media-vertical-size-config: (
         size: auto,
     ),
     small: (
-        size: 140px,
+        size: units.px-to-rem(140px),
     ),
     medium: (
-        size: 216px,
+        size: units.px-to-rem(216px),
     ),
     large: (
-        size: 280px,
+        size: units.px-to-rem(280px),
     ),
 );
 $media-horizontal-size-config: (
@@ -87,13 +88,13 @@ $media-horizontal-size-config: (
         size: auto,
     ),
     small: (
-        size: 120px,
+        size: units.px-to-rem(120px),
     ),
     medium: (
-        size: 180px,
+        size: units.px-to-rem(180px),
     ),
     large: (
-        size: 240px,
+        size: units.px-to-rem(240px),
     ),
 );
 

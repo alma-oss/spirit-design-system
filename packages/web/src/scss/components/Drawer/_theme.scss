@@ -3,6 +3,7 @@
 
 @use '@tokens' as tokens;
 @use '../../settings/transitions';
+@use '../../tools/units';
 
 $drawer-typography: tokens.$body-medium-semibold;
 
@@ -12,7 +13,7 @@ $drawer-transition-timing: transitions.$timing-eased-in-out;
 $drawer-backdrop-background-color: tokens.$background-backdrop;
 
 // DrawerPanel
-$drawer-panel-width: 312px; // 1.
+$drawer-panel-width: units.px-to-rem(312px); // 1.
 $drawer-panel-height: auto;
 $drawer-panel-max-height: none;
 $drawer-panel-text-color: tokens.$text-primary;

@@ -1,7 +1,8 @@
 @use '@tokens' as tokens;
 @use '../../tools/tokens' as tokens-tools;
+@use '../../tools/units';
 
-$min-width: 288px;
+$min-width: units.px-to-rem(288px);
 $rows: 100;
 $typography: tokens.$body-small-regular;
 $padding-x: tokens.$space-800;

@@ -1,4 +1,6 @@
 @use '@tokens' as tokens;
+@use '../../tools/units';
 
 $breakpoints: tokens.$breakpoints;
 $buttons-gap: tokens.$space-700;
+$section-max-width: units.px-to-rem(400px);

@@ -2,6 +2,7 @@
 @use '@tokens' as tokens;
 @use '../../settings/dictionaries';
 @use '../../settings/transitions';
+@use '../../tools/units';
 
 $alignments-x: (
     left: start,
@@ -33,8 +34,10 @@ $queue-collapse-after: 3;
 $queue-gap: tokens.$space-700;
 
 $bar-typography: tokens.$body-small-bold;
-$bar-max-width: 480px;
-$bar-max-height: 200px; // Whatever larger than the largest toast message. ⚠️ CAUTION: Affects animation timing!
+$bar-max-width: units.px-to-rem(480px);
+$bar-max-height: units.px-to-rem(
+    200px
+); // Whatever larger than the largest toast message. ⚠️ CAUTION: Affects animation timing!
 $bar-gap: tokens.$space-700;
 $bar-padding: tokens.$space-700;
 $bar-border-radius: tokens.$radius-300;

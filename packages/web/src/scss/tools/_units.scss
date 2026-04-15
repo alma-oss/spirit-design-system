@@ -1,0 +1,92 @@
+@use 'sass:math';
+@use 'sass:meta';
+@use '../settings/units' as units-settings;
+@use 'tokens' as tokens-tools;
+
+$_default-decimals: 4;
+
+// CSS `Number.prototype.toFixed`-style upper bound for decimal places.
+// Kept in sync with the JS `pxToRem` utilities (ECMAScript spec limit).
+$_max-decimals: 100;
+
+// Unitless number = px count; `px` length is normalized to that count.
+@function -length-as-unitless-px($value, $param-name) {
+    @if meta.type-of($value) != 'number' {
+        @error 'px-to-rem: #{$param-name} must be a number (px or unitless).';
+    }
+
+    @if math.unit($value) == 'px' {
+        @return math.div($value, 1px);
+    }
+
+    @if math.is-unitless($value) {
+        @return $value;
+    }
+
+    @error 'px-to-rem: #{$param-name} must be px or unitless (interpreted as px).';
+}
+
+// Returns `$value` if it's a valid decimal-places count (a unitless,
+// non-negative integer in [0, $_max-decimals]); otherwise returns
+// `$_default-decimals`. Mirrors the JS guard against values that would make
+// `toFixed` throw or produce `NaN`.
+@function -valid-decimals-or-default($value) {
+    @if meta.type-of($value) != 'number' {
+        @return $_default-decimals;
+    }
+
+    @if not math.is-unitless($value) {
+        @return $_default-decimals;
+    }
+
+    @if $value < 0 or $value > $_max-decimals {
+        @return $_default-decimals;
+    }
+
+    @if math.floor($value) != $value {
+        @return $_default-decimals;
+    }
+
+    @return $value;
+}
+
+$fallback-base-font-size: tokens-tools.get-variable-if-exists(
+    'font-size-base-mobile',
+    units-settings.$font-size-base-fallback
+);
+
+// Converts a pixel value to rem, rounded to `$decimals` fractional digits.
+// If `$base-font-size` is missing or invalid, falls back to `units-settings.$font-size-base-fallback`.
+// If `$decimals` is missing or invalid (non-integer, negative, > 100, or has a unit),
+// falls back to `$_default-decimals`.
+//
+// @param $value-px - Pixel length (`16px`) or unitless number (treated as px)
+// @param $base-font-size [$font-size-base-desktop] - Root font size in px
+// @param $decimals [4] - Decimal places used when rounding the rem ratio
+@function px-to-rem($value-px, $base-font-size: $fallback-base-font-size, $decimals: $_default-decimals) {
+    @if not $base-font-size or $base-font-size <= 0 {
+        $base-font-size: units-settings.$font-size-base-fallback;
+    }
+
+    $effective-decimals: -valid-decimals-or-default($decimals);
+
+    $value-num: -length-as-unitless-px($value-px, '$value-px');
+    $base-font-size-num: -length-as-unitless-px($base-font-size, '$base-font-size');
+    $rem-value: math.div($value-num, $base-font-size-num);
+    $rounding-factor: math.pow(10, $effective-decimals);
+    $rounded-rem: math.div(
+        math.round(($rem-value + math.div(1, 1000000000000000)) * $rounding-factor),
+        $rounding-factor
+    );
+    $normalized-rem: $rounded-rem;
+
+    @if math.abs($rounded-rem) == 0 {
+        $normalized-rem: 0;
+    }
+
+    @if $normalized-rem == 0 {
+        @return 0;
+    }
+
+    @return $normalized-rem * 1rem;
+}

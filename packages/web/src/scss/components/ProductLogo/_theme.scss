@@ -1,1 +1,3 @@
-$logo-height: 44px;
+@use '../../tools/units';
+
+$logo-height: units.px-to-rem(44px);

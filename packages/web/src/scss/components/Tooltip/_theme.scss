@@ -1,8 +1,9 @@
 @use '@tokens' as tokens;
 @use '../../settings/dictionaries';
 @use '../../settings/transitions';
+@use '../../tools/units';
 
-$max-width: 288px;
+$max-width: units.px-to-rem(288px);
 $typography: tokens.$body-medium-regular;
 $padding: tokens.$space-600 tokens.$space-700;
 $gap: tokens.$space-600;
@@ -14,8 +15,8 @@ $transition-duration: transitions.$duration-200;
 $transition-scale-ratio: transitions.$scale-ratio-small-objects;
 
 $arrow-shape: var(--#{tokens.$css-variable-prefix}tooltip-arrow-background-image-url);
-$arrow-width: 13px;
-$arrow-height: 8px;
+$arrow-width: units.px-to-rem(13px);
+$arrow-height: units.px-to-rem(8px);
 $arrow-corner-offset: tokens.$space-600;
 
 $close-button-size: tokens.$space-900;

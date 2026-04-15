@@ -73,7 +73,7 @@
         position: absolute;
         inset-inline: 0;
         bottom: 0;
-        height: 2px;
+        height: theme.$item-selected-underline-height;
         border-radius: theme.$item-selected-underline-border-radius;
         background: currentcolor;
     }
