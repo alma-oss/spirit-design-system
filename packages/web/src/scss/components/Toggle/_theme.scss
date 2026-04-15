@@ -1,9 +1,10 @@
 @use '@tokens' as tokens;
 @use '../../settings/transitions';
+@use '../../tools/units';
 
 $max-width: 21rem;
-$input-width: 44px;
-$input-height: 24px;
+$input-width: units.px-to-rem(44px);
+$input-height: units.px-to-rem(24px);
 $input-border-width: tokens.$border-width-100;
 $input-border-color: tokens.$component-toggle-unselected-border;
 $input-border-color-state-checked: tokens.$component-toggle-selected-border;
@@ -16,7 +17,7 @@ $input-background-color-state-disabled: tokens.$disabled-background;
 $input-border-radius: tokens.$radius-400;
 $input-focus-shadow: tokens.$focus-ring;
 
-$input-mark-size: 20px;
+$input-mark-size: units.px-to-rem(20px);
 $input-mark-spacing: tokens.$space-100;
 $input-mark-position-x: tokens.$space-100;
 $input-mark-position-y: tokens.$space-100;

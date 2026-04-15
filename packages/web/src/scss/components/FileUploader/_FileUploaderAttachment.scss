@@ -25,8 +25,8 @@
 
 .FileUploaderAttachment__image {
     position: relative;
-    width: 56px;
-    height: 56px;
+    width: theme.$attachment-image-size;
+    height: theme.$attachment-image-size;
     overflow: hidden;
     border: theme.$attachment-image-border;
     border-radius: theme.$attachment-image-border-radius;

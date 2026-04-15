@@ -2,8 +2,9 @@
 
 @use '@tokens' as tokens;
 @use '../../settings/dictionaries';
+@use '../../tools/units';
 
-$horizontal-height: 50px;
+$horizontal-height: units.px-to-rem(50px);
 $gap: tokens.$space-700;
 $gap-pills: tokens.$space-300;
 $vertical-gap: tokens.$space-400;
@@ -34,7 +35,7 @@ $action-stripe-background-color-state-default: transparent;
 
 $horizontal-action-stripe-background-color-state-active: tokens.$component-header-stripe-state-unselected;
 $horizontal-action-stripe-background-color-state-hover: tokens.$component-header-stripe-state-unselected;
-$horizontal-action-stripe-size: 2px;
+$horizontal-action-stripe-size: units.px-to-rem(2px);
 $horizontal-action-typography: tokens.$body-small-semibold;
 $horizontal-action-shape-variant-config: (
     box: (
@@ -50,7 +51,7 @@ $horizontal-action-shape-variant-config: (
 );
 
 $vertical-action-pill-padding-x: tokens.$space-800;
-$vertical-action-stripe-size: 4px;
+$vertical-action-stripe-size: units.px-to-rem(4px);
 $vertical-action-typography-nested: tokens.$body-medium-regular;
 $vertical-action-typography: tokens.$body-medium-semibold;
 $vertical-action-shape-variant-config: (

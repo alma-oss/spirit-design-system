@@ -1,7 +1,8 @@
 @use '@tokens' as tokens;
 @use '../../tools/tokens' as tokens-tools;
+@use '../../tools/units';
 
-$height: 72px;
+$height: units.px-to-rem(72px);
 $border-width: tokens.$border-width-100;
 $border-style: solid;
 

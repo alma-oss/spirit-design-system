@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '@tokens' as tokens;
 @use '../tools/tokens' as tokens-tools;
+@use '../tools/units';
 @use 'dictionaries';
 
 // Common for all form components
@@ -72,7 +73,7 @@ $box-field-size-dictionary: dictionaries.$size;
 $box-field-size-config: (
     small: map.merge(
             (
-                height: 32px,
+                height: units.px-to-rem(32px),
                 typography: tokens.$body-small-regular,
             ),
             tokens-tools.generate-responsive-map(
@@ -85,7 +86,7 @@ $box-field-size-config: (
         ),
     medium: map.merge(
             (
-                height: 40px,
+                height: units.px-to-rem(40px),
                 typography: tokens.$body-medium-regular,
             ),
             tokens-tools.generate-responsive-map(
@@ -98,7 +99,7 @@ $box-field-size-config: (
         ),
     large: map.merge(
             (
-                height: 48px,
+                height: units.px-to-rem(48px),
                 typography: tokens.$body-medium-regular,
             ),
             tokens-tools.generate-responsive-map(

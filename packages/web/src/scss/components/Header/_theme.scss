@@ -1,9 +1,12 @@
 @use '@tokens' as tokens;
 @use '../../settings/transitions';
+@use '../../tools/units';
 
 // Header
 $header-typography: tokens.$body-medium-semibold;
 $header-breakpoint: tokens.$breakpoint-desktop;
+$header-height: units.px-to-rem(68px);
+$header-simple-height: units.px-to-rem(60px);
 $header-padding-x: tokens.$space-1000;
 $header-gap: tokens.$space-1200;
 $header-background-color: tokens.$background-primary;
@@ -32,7 +35,7 @@ $header-link-transition-timing: transitions.$timing-eased-out;
 
 // HeaderDialog
 $header-dialog-typography: tokens.$body-medium-semibold;
-$header-dialog-width: 280px;
+$header-dialog-width: units.px-to-rem(280px);
 $header-dialog-padding: tokens.$space-900;
 $header-dialog-color: tokens.$text-primary;
 $header-dialog-background-color: tokens.$background-primary;

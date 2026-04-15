@@ -64,7 +64,7 @@ $_default-timeline-size: small; // 1.
 // Migration: delete the `.TimelineMarker` class from this selector.
 .TimelineMarker,
 .TimelineMarker--icon {
-    --#{tokens.$css-variable-prefix}icon-size: var(
+    --#{tokens.$css-variable-prefix}icon-composition-size: var(
         --#{tokens.$css-variable-prefix}timeline-icon-size,
         #{map.get(theme.$size-config, $_default-timeline-size, icon-size)}
     );

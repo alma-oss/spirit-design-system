@@ -15,7 +15,7 @@
 $_component-name: 'Button';
 
 .Button {
-    --#{tokens.$css-variable-prefix}icon-size: var(--#{tokens.$css-variable-prefix}button-icon-size);
+    --#{tokens.$css-variable-prefix}icon-composition-size: var(--#{tokens.$css-variable-prefix}button-icon-size);
 
     @include tools.responsive-border-radius();
     @include typography.from-css-variables($infix: string.to-lower-case($_component-name));

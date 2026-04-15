@@ -9,14 +9,14 @@
     flex: none;
     gap: theme.$header-gap;
     align-items: center;
-    height: 68px;
+    height: theme.$header-height;
     padding-inline: theme.$header-padding-x;
     background-color: theme.$header-background-color;
 }
 
 .Header--simple {
     justify-content: center;
-    height: 60px;
+    height: theme.$header-simple-height;
 }
 
 .Header--transparent {

@@ -1,5 +1,6 @@
 @use '@tokens' as tokens;
 @use '../../settings/transitions';
+@use '../../tools/units';
 
 $breakpoints: tokens.$breakpoints;
 $padding-x: tokens.$space-900;
@@ -16,8 +17,8 @@ $common-padding-x: tokens.$space-900;
 $common-padding-x-tablet: tokens.$space-1000;
 
 // ModalDialog
-$dialog-width: 640px;
-$dialog-width-desktop: 680px;
+$dialog-width: units.px-to-rem(640px);
+$dialog-width-desktop: units.px-to-rem(680px);
 $dialog-height: auto;
 $dialog-max-height: none;
 $dialog-text-color: tokens.$text-primary;
@@ -26,7 +27,7 @@ $dialog-background-color: tokens.$background-primary;
 $dialog-shadow: tokens.$shadow-300;
 
 $_dialog-scrollable-default-height: min-content;
-$_dialog-scrollable-default-max-height: 600px;
+$_dialog-scrollable-default-max-height: units.px-to-rem(600px);
 
 $dialog-scrollable-height: var(--modal-dialog-height, #{$_dialog-scrollable-default-height});
 $dialog-scrollable-height-tablet: var(

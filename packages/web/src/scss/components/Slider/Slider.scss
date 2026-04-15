@@ -85,7 +85,7 @@ $_field-name: 'Slider';
         @include tools.thumb();
 
         appearance: none;
-        margin-top: math.ceil(math.div(theme.$track-height, 2)) - math.div(theme.$thumb-height, 2);
+        margin-top: math.div(theme.$track-height - theme.$thumb-height, 2);
     }
 
     &:active::-webkit-slider-thumb {

@@ -1,6 +1,7 @@
 @use 'sass:list';
 @use '@tokens' as tokens;
 @use '../../settings/dictionaries';
+@use '../../tools/units';
 
 $border-width: tokens.$border-width-100;
 $border-style: solid;
@@ -55,23 +56,23 @@ $base-size-config: (
 );
 $appearance-size-config: (
     xsmall: (
-        height: 20px,
+        height: units.px-to-rem(20px),
         gap: tokens.$space-400,
     ),
     small: (
-        height: 28px,
+        height: units.px-to-rem(28px),
         gap: tokens.$space-400,
     ),
     medium: (
-        height: 34px,
+        height: units.px-to-rem(34px),
         gap: tokens.$space-400,
     ),
     large: (
-        height: 40px,
+        height: units.px-to-rem(40px),
         gap: tokens.$space-400,
     ),
     xlarge: (
-        height: 44px,
+        height: units.px-to-rem(44px),
         gap: tokens.$space-400,
     ),
 );

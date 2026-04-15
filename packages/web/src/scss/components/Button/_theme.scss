@@ -3,6 +3,7 @@
 @use '../../settings/dictionaries';
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/tokens' as tokens-tools;
+@use '../../tools/units';
 
 $border-width: tokens.$border-width-100;
 $border-style: solid;
@@ -13,9 +14,9 @@ $disabled-color: tokens.$disabled-content;
 $disabled-border-color: tokens.$disabled-border;
 $disabled-background-color: tokens.$disabled-background;
 
-$icon-size-small: 20px;
-$icon-size-medium: 20px;
-$icon-size-large: 24px;
+$icon-size-small: units.px-to-rem(20px);
+$icon-size-medium: units.px-to-rem(20px);
+$icon-size-large: units.px-to-rem(24px);
 
 $color-component-button-dictionary: (
     component-button: map.keys(map.get(tokens.$component-colors, button)),

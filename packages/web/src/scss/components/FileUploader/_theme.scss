@@ -1,4 +1,5 @@
 @use '@tokens' as tokens;
+@use '../../tools/units';
 
 $input-drop-zone-padding: tokens.$space-700;
 $input-drop-zone-column-gap: tokens.$space-700;
@@ -26,4 +27,5 @@ $attachment-border-radius: tokens.$radius-300;
 $attachment-background: tokens.$background-primary;
 $attachment-image-border: tokens.$border-width-100 solid tokens.$border-basic;
 $attachment-image-border-radius: tokens.$radius-200;
+$attachment-image-size: units.px-to-rem(56px);
 $attachment-tap-target-size: tokens.$space-1100;
