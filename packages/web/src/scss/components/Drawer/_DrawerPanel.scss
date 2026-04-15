@@ -1,11 +1,12 @@
 @use '@tokens' as tokens;
+@use '../../tools/dictionaries';
 @use 'theme';
 
 .DrawerPanel {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    width: var(--#{tokens.$css-variable-prefix}drawer-panel-width, #{theme.$drawer-panel-width});
+    width: var(--#{tokens.$css-variable-prefix}drawer-panel-width);
     height: theme.$drawer-panel-height;
     max-height: theme.$drawer-panel-max-height;
     color: theme.$drawer-panel-text-color;
@@ -20,6 +21,14 @@
         transition-timing-function: theme.$drawer-transition-timing;
     }
 }
+
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'DrawerPanel',
+    $custom-property-base-name: 'drawer-panel',
+    $properties: (
+        width: theme.$drawer-panel-width,
+    )
+);
 
 .DrawerPanel__content {
     display: flex;

@@ -6,6 +6,7 @@
 @use 'sass:string';
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
+@use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/breakpoint';
 @use '../../tools/dictionaries';
 @use '../../tools/typography';
@@ -88,6 +89,18 @@ $_component-name: 'Button';
     $class-name: $_component-name,
     $dictionary-values: theme.$size-dictionary,
     $config: theme.$size-config
+);
+@include dictionaries.generate-rem-sizes(
+    $class-name: $_component-name,
+    $dictionary-values: theme.$size-dictionary,
+    $config: form-fields-settings.$box-field-input-height-config,
+    $property-name: 'height'
+);
+@include dictionaries.generate-rem-sizes(
+    $class-name: $_component-name,
+    $dictionary-values: theme.$size-dictionary,
+    $config: theme.$icon-size-config,
+    $property-name: 'icon-size'
 );
 
 // @deprecated The `block` modifier will be removed in the next major version.

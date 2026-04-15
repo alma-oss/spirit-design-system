@@ -1,0 +1,47 @@
+@use 'true' as test;
+@use '../units';
+
+@include test.describe('px-to-rem function') {
+    @include test.it('should use the default root font size fallback setting') {
+        @include test.assert-equal(units.px-to-rem(16px), 1rem);
+        @include test.assert-equal(units.px-to-rem(24px), 1.5rem);
+    }
+
+    @include test.it('should convert whole px to rem with default ratio rounding') {
+        @include test.assert-equal(units.px-to-rem(16px, 16), 1rem);
+        @include test.assert-equal(units.px-to-rem(16px, 16px), 1rem);
+        @include test.assert-equal(units.px-to-rem(16, 16), 1rem);
+        @include test.assert-equal(units.px-to-rem(24px, 16), 1.5rem);
+        @include test.assert-equal(units.px-to-rem(20px, 16), 1.25rem);
+        @include test.assert-equal(units.px-to-rem(0, 16), 0);
+        @include test.assert-equal(units.px-to-rem(-16px, 16), -1rem);
+    }
+
+    @include test.it('should preserve precision-sensitive values with default 4-decimal rounding') {
+        @include test.assert-equal(units.px-to-rem(18px, 16), 1.125rem);
+        @include test.assert-equal(units.px-to-rem(2px, 16), 0.125rem);
+        @include test.assert-equal(units.px-to-rem(42px, 16), 2.625rem);
+        @include test.assert-equal(units.px-to-rem(58px, 16), 3.625rem);
+    }
+
+    @include test.it('should round to 4 decimal places by default') {
+        @include test.assert-equal(units.px-to-rem(1px, 3), 0.3333rem);
+        @include test.assert-equal(units.px-to-rem(2px, 3), 0.6667rem);
+    }
+
+    @include test.it('should convert sub-pixel lengths using ratio rounding') {
+        @include test.assert-equal(units.px-to-rem(16.4px, 16), 1.025rem);
+        @include test.assert-equal(units.px-to-rem(15.6px, 16), 0.975rem);
+    }
+
+    @include test.it('should convert with sub-pixel root sizes using ratio rounding') {
+        @include test.assert-equal(units.px-to-rem(16px, 16.4), 0.9756rem);
+        @include test.assert-equal(units.px-to-rem(16px, 15.6), 1.0256rem);
+    }
+
+    @include test.it('should use fallback base when base font size is missing or invalid') {
+        @include test.assert-equal(units.px-to-rem(16px, 0), 1rem);
+        @include test.assert-equal(units.px-to-rem(16px, null), 1rem);
+        @include test.assert-equal(units.px-to-rem(12, null), 0.75rem);
+    }
+}

@@ -10,8 +10,10 @@
 @use 'placement';
 @use 'reset';
 @use 'string' as spirit-string;
+@use '../settings/units' as units-settings;
 @use 'tokens' as tokens-tools;
 @use 'typography';
+@use 'units' as units;
 
 // Function to validate keys in a config map against values in a dictionary
 // Parameters are:
@@ -266,4 +268,254 @@
         $class-name-infix,
         $breakpoints
     );
+}
+
+// Default root font sizes per breakpoint from design tokens.
+//
+// @return A map `( mobile: <length>, tablet: <length>, desktop: <length> )` — values come from
+// `font-size-base-mobile`, `font-size-base-tablet`, and `font-size-base-desktop` when those tokens exist; otherwise
+// `units-settings.$font-size-base-fallback` (interpreted as px by `units.px-to-rem`). Safe to `@use` anywhere you need
+// the same defaults as `generate-rem-sizes` / `generate-rem-custom-properties`.
+@function get-font-size-base-map() {
+    $_fallback: units-settings.$font-size-base-fallback;
+    $_token-names-by-breakpoint: (
+        mobile: 'font-size-base-mobile',
+        tablet: 'font-size-base-tablet',
+        desktop: 'font-size-base-desktop',
+    );
+    $result: ();
+
+    @each $breakpoint-name, $token-variable-name in $_token-names-by-breakpoint {
+        $result: map.set(
+            $result,
+            $breakpoint-name,
+            tokens-tools.get-variable-if-exists($token-variable-name, $_fallback)
+        );
+    }
+
+    @return $result;
+}
+
+// Resolves the root font size for one breakpoint from a caller-provided map. Missing keys use the same breakpoint’s
+// entry from `get-font-size-base-map()` (aligned with rem mixins). Unknown breakpoint keys (or missing defaults) use
+// `units-settings.$font-size-base-fallback` — no separate `desktop` fallback. Generates a Sass `@warn` when that happens.
+//
+// @param $font-bases-map — map of breakpoint name → root size (e.g. `get-font-size-base-map()` or a partial override).
+// @param $breakpoint-name — key to read, typically `mobile`, `tablet`, or `desktop`.
+// @return One value (usually a `px` length from tokens, or `units-settings.$font-size-base-fallback`) suitable as the
+// base argument to `units.px-to-rem`.
+@function get-font-size-base-for-breakpoint($font-bases-map, $breakpoint-name) {
+    $font-base: map.get($font-bases-map, $breakpoint-name);
+
+    @if $font-base {
+        @return $font-base;
+    }
+
+    $defaults: get-font-size-base-map();
+    $font-base: map.get($defaults, $breakpoint-name);
+
+    @if $font-base {
+        @return $font-base;
+    }
+
+    @warn 'get-font-size-base-for-breakpoint: no root font size for breakpoint `#{$breakpoint-name}` in `$font-bases-map` '
+        + 'or in defaults from `get-font-size-base-map()`; using `units-settings.$font-size-base-fallback` '
+        + '(#{units-settings.$font-size-base-fallback}).';
+
+    @return units-settings.$font-size-base-fallback;
+}
+
+// Resolves root font sizes for the provided `$breakpoints`.
+// Returns a single root size value when all resolved breakpoint values are equal;
+// otherwise returns a map of breakpoint name -> resolved root size.
+@function -resolved-font-bases-or-single($breakpoints, $font-bases-by-breakpoint: null) {
+    $_font-bases: $font-bases-by-breakpoint;
+
+    @if not $_font-bases {
+        $_font-bases: get-font-size-base-map();
+    }
+
+    $resolved-font-bases: ();
+    $single-font-base: null;
+    $can-use-single-font-base: true;
+
+    @each $breakpoint-name, $breakpoint-value in $breakpoints {
+        $font-base: get-font-size-base-for-breakpoint($_font-bases, $breakpoint-name);
+
+        $resolved-font-bases: map.set($resolved-font-bases, $breakpoint-name, $font-base);
+
+        @if not $single-font-base {
+            $single-font-base: $font-base;
+        } @else if $single-font-base != $font-base {
+            $can-use-single-font-base: false;
+        }
+    }
+
+    @if $can-use-single-font-base {
+        @return $single-font-base;
+    }
+
+    @return $resolved-font-bases;
+}
+
+// Internal: for one class (no leading dot), defines rem-based Spirit custom properties per breakpoint from
+// `$properties`, using `get-font-size-base-for-breakpoint` and `units.px-to-rem`.
+@mixin -get-rem-custom-properties-for-selector(
+    $selector-without-dot,
+    $custom-property-base-name,
+    $properties,
+    $breakpoints,
+    $font-bases-by-breakpoint
+) {
+    $_breakpoints: (
+        mobile: 0,
+    );
+
+    @if $breakpoints {
+        $_breakpoints: $breakpoints;
+    }
+
+    $font-bases-or-single: -resolved-font-bases-or-single($_breakpoints, $font-bases-by-breakpoint);
+
+    @if meta.type-of($font-bases-or-single) != 'map' {
+        .#{$selector-without-dot} {
+            @each $property-name, $px-value in $properties {
+                $rem-value: units.px-to-rem($px-value, $font-bases-or-single);
+                --#{tokens.$css-variable-prefix}#{$custom-property-base-name}-#{$property-name}: #{$rem-value};
+            }
+        }
+    } @else {
+        @each $breakpoint-name, $breakpoint-value in $_breakpoints {
+            $font-base: map.get($font-bases-or-single, $breakpoint-name);
+
+            @include breakpoint.up($breakpoint-value) {
+                .#{$selector-without-dot} {
+                    @each $property-name, $px-value in $properties {
+                        $rem-value: units.px-to-rem($px-value, $font-base);
+                        --#{tokens.$css-variable-prefix}#{$custom-property-base-name}-#{$property-name}: #{$rem-value};
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Generates Spirit `--spirit-<base>-<suffix>` custom properties in **rem** for a **single** class selector (`$selector`
+// without a leading dot). Pass pixel lengths in `$properties` (map: suffix → `px`); each breakpoint uses the
+// matching root size from `$font-bases-by-breakpoint` or `get-font-size-base-map()`. For dictionary-driven size
+// modifiers (e.g. `.Avatar--large`), use `generate-rem-sizes` instead.
+//
+// Parameters are:
+// * `$selector` — class name **without** a leading dot (e.g. `Checkbox__input`).
+// * `$custom-property-base-name` — kebab-case segment after `tokens.$css-variable-prefix` and before each suffix from
+//   `$properties`.
+// * `$properties` — map of custom property **suffix** (last segment of the variable name) → length in `px` (or
+//   unitless, interpreted as px).
+// * `$breakpoints` — optional map of breakpoint **name** → **min-width** (`0` for mobile-first base); defaults to
+//   `( mobile: 0 )` when `null`.
+// * `$font-bases-by-breakpoint` — optional map of breakpoint **name** → root font size for `units.px-to-rem`; when
+//   `null`, uses `get-font-size-base-map()`.
+@mixin generate-rem-custom-properties(
+    $selector,
+    $custom-property-base-name,
+    $properties,
+    $breakpoints: null,
+    $font-bases-by-breakpoint: null
+) {
+    @if not $custom-property-base-name or not $properties {
+        @error 'generate-rem-custom-properties: requires $custom-property-base-name and $properties.';
+    }
+
+    @include -get-rem-custom-properties-for-selector(
+        $selector,
+        $custom-property-base-name,
+        $properties,
+        $breakpoints,
+        $font-bases-by-breakpoint
+    );
+}
+
+// Same pattern as `generate-sizes`: dictionary-driven size keys, one logical `$property-name`, rem from px per
+// breakpoint (stacked base classes + tablet/desktop infix classes).
+//
+// Parameters are:
+// * `$class-name` — PascalCase component (may include `UNSTABLE_`); drives generated BEM selectors and token base.
+// * `$dictionary-values` — list of size keys; must match the keys of `$config` (validated with
+//   `validate-config-keys`).
+// * `$config` — map of size key → length in `px` for that variant (one physical dimension per key).
+// * `$property-name` — single custom property suffix shared by all sizes (e.g. `icon-size` → `--spirit-…-icon-size`).
+// * `$css-variable-infix` — optional PascalCase infix for the CSS variable base (kebab-cased, prefixed with `-`).
+// * `$class-name-infix` — optional extra segment between `$class-name` and size/breakpoint parts in class names.
+// * `$breakpoints` — optional map of breakpoint name → min-width; defaults to `( mobile: 0 )` when `null`.
+// * `$font-bases-by-breakpoint` — optional map of breakpoint name → root font size; when `null`, uses
+//   `get-font-size-base-map()`.
+@mixin generate-rem-sizes(
+    $class-name,
+    $dictionary-values,
+    $config,
+    $property-name,
+    $css-variable-infix: '',
+    $class-name-infix: '',
+    $breakpoints: null,
+    $font-bases-by-breakpoint: null
+) {
+    @if not($class-name and $dictionary-values and $config and $property-name) {
+        @error 'generate-rem-sizes: requires $class-name, $dictionary-values, $config, and $property-name.';
+    }
+
+    @if validate-config-keys($dictionary-values, $config) {
+        $_base: spirit-string.convert-pascal-case-to-kebab-case(spirit-string.remove-prefix($class-name, 'UNSTABLE_'));
+
+        $_breakpoints: (
+            mobile: 0,
+        );
+
+        @if $breakpoints {
+            $_breakpoints: $breakpoints;
+        }
+
+        $_infix: '';
+
+        @if $css-variable-infix != '' {
+            $_infix: '-#{spirit-string.convert-pascal-case-to-kebab-case($css-variable-infix)}';
+        }
+
+        $size-custom-property-base-name: '#{$_base}#{$_infix}';
+
+        $_font-bases: $font-bases-by-breakpoint;
+
+        @if not $_font-bases {
+            $_font-bases: get-font-size-base-map();
+        }
+
+        @each $key, $px-value in $config {
+            $base-size-selector: spirit-list.to-string(($class-name, $class-name-infix, '', $key), '--');
+
+            @include -get-rem-custom-properties-for-selector(
+                $base-size-selector,
+                $size-custom-property-base-name,
+                map.set((), $property-name, $px-value),
+                $_breakpoints,
+                $_font-bases
+            );
+        }
+
+        @each $breakpoint-name, $breakpoint-value in $_breakpoints {
+            @if $breakpoint-value > 0 {
+                $breakpoint-infix: breakpoint.get-modifier(raw, $breakpoint-name, $breakpoint-value);
+                $font-base: get-font-size-base-for-breakpoint($_font-bases, $breakpoint-name);
+
+                @include breakpoint.up($breakpoint-value) {
+                    @each $key, $px-value in $config {
+                        .#{spirit-list.to-string(($class-name, $class-name-infix, $breakpoint-infix, $key), '--')} {
+                            --#{tokens.$css-variable-prefix}#{$size-custom-property-base-name}-#{$property-name}: #{units.px-to-rem(
+                                    $px-value,
+                                    $font-base
+                                )};
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

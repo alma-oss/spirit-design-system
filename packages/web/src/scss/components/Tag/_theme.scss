@@ -53,25 +53,28 @@ $base-size-config: (
         typography: tokens.$body-xlarge-semibold,
     ),
 );
+$appearance-height-config: (
+    xsmall: 20px,
+    small: 28px,
+    medium: 34px,
+    large: 40px,
+    xlarge: 44px,
+);
+
 $appearance-size-config: (
     xsmall: (
-        height: 20px,
         gap: tokens.$space-400,
     ),
     small: (
-        height: 28px,
         gap: tokens.$space-400,
     ),
     medium: (
-        height: 34px,
         gap: tokens.$space-400,
     ),
     large: (
-        height: 40px,
         gap: tokens.$space-400,
     ),
     xlarge: (
-        height: 44px,
         gap: tokens.$space-400,
     ),
 );

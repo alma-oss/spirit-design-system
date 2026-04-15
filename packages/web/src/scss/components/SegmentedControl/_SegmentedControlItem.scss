@@ -22,8 +22,11 @@
     column-gap: theme.$item-gap;
     align-items: center;
     justify-content: center;
-    min-width: theme.$item-min-width; // 4.
-    height: theme.$item-height;
+    min-width: calc(
+        #{theme.$item-padding-y * 2} + var(--#{tokens.$css-variable-prefix}segmented-control-item-label-min-width-extra)
+    ); // 4.
+
+    height: var(--#{tokens.$css-variable-prefix}segmented-control-item-label-height);
     padding-inline: theme.$item-padding-y;
     padding-block: theme.$item-padding-x;
     border-radius: theme.$item-border-radius;
@@ -57,6 +60,16 @@
         transition: inherit;
     }
 }
+
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'SegmentedControlItem__label',
+    $custom-property-base-name: 'segmented-control-item-label',
+    $properties: (
+        height: theme.$item-height,
+        min-width-extra: theme.$item-min-width-extra,
+    ),
+    $breakpoints: tokens.$breakpoints
+);
 
 .SegmentedControlItem__label > svg {
     flex-shrink: 0;

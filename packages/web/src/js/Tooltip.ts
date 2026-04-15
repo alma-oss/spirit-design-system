@@ -1,4 +1,6 @@
 import * as FloatingUI from '@floating-ui/dom';
+// eslint-disable-next-line import/no-extraneous-dependencies -- `spirit-common` is workspace-only and bundled, not a consumer dependency
+import { cssLengthToPixels } from '@alma-oss/spirit-common/utilities/cssLengthToPixels';
 import BaseComponent from './BaseComponent';
 import { EventHandler, SelectorEngine } from './dom';
 import { SpiritConfig, clickOutsideElement, enableDismissTrigger, enableToggleAutoloader } from './utils';
@@ -71,11 +73,16 @@ class Tooltip extends BaseComponent {
     this.trigger = this.getTipTooltipWrapper();
     this.arrow = this.tip.querySelector(SELECTOR_ARROW) as HTMLElement;
     this.tooltipComputedStyle = window.getComputedStyle(this.tip); // The tooltip computed style
-    this.tooltipMaxWidth = parseInt(this.tooltipComputedStyle.maxWidth, 10); // The tooltip max width
-    this.tooltipOffset = parseInt(this.tooltipComputedStyle.getPropertyValue('--tooltip-offset'), 10); // The tooltip offset
+    this.tooltipMaxWidth = cssLengthToPixels(this.tooltipComputedStyle.maxWidth);
+    this.tooltipOffset = cssLengthToPixels(this.tooltipComputedStyle.getPropertyValue('--tooltip-offset')) ?? 0;
     this.arrowCornerOffset =
-      this.arrow && parseInt(window.getComputedStyle(this.arrow).getPropertyValue('--tooltip-arrow-corner-offset'), 10); // The tooltip arrow corner offset
-    this.arrowWidth = this.arrow && parseInt(window.getComputedStyle(this.arrow).getPropertyValue('width'), 10); // The tooltip arrow width
+      this.arrow &&
+      cssLengthToPixels(window.getComputedStyle(this.arrow).getPropertyValue('--tooltip-arrow-corner-offset'));
+    this.arrowWidth =
+      this.arrow &&
+      (this.arrow.offsetWidth > 0
+        ? this.arrow.offsetWidth
+        : cssLengthToPixels(window.getComputedStyle(this.arrow).width));
 
     if (this.tip && this.trigger) {
       FloatingUI.autoUpdate(

@@ -69,10 +69,17 @@ $box-field-label-typography: tokens.$body-small-semibold;
 $box-field-label-margin-bottom: tokens.$space-400;
 
 $box-field-size-dictionary: dictionaries.$size;
+
+// Pixel heights; rem output uses device font-size-base via generate-rem-sizes in box field components.
+$box-field-input-height-config: (
+    small: 32px,
+    medium: 40px,
+    large: 48px,
+);
+
 $box-field-size-config: (
     small: map.merge(
             (
-                height: 32px,
                 typography: tokens.$body-small-regular,
             ),
             tokens-tools.generate-responsive-map(
@@ -85,7 +92,6 @@ $box-field-size-config: (
         ),
     medium: map.merge(
             (
-                height: 40px,
                 typography: tokens.$body-medium-regular,
             ),
             tokens-tools.generate-responsive-map(
@@ -98,7 +104,6 @@ $box-field-size-config: (
         ),
     large: map.merge(
             (
-                height: 48px,
                 typography: tokens.$body-medium-regular,
             ),
             tokens-tools.generate-responsive-map(

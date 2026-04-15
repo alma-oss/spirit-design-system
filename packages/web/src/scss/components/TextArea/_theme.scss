@@ -2,21 +2,14 @@
 @use '@tokens' as tokens;
 @use '../../settings/form-fields' as form-fields-settings;
 
+$input-height-config: (
+    small: 64px,
+    medium: 80px,
+    large: 96px,
+);
+
 $counter-typography: tokens.$body-small-regular;
 $counter-color-state-disabled: tokens.$disabled-content;
 $counter-margin-top: tokens.$space-400;
 
-$input-size-config: map.deep-merge(
-    form-fields-settings.$box-field-size-config,
-    (
-        small: (
-            height: 64px,
-        ),
-        medium: (
-            height: 80px,
-        ),
-        large: (
-            height: 96px,
-        ),
-    )
-);
+$input-size-config: form-fields-settings.$box-field-size-config;

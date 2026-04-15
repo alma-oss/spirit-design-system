@@ -1,5 +1,9 @@
 {
   "extends": "../../configs/typescript-config-spirit/dom",
-  "include": ["./src/**/*"],
-  "exclude": ["./node_modules", "./dist/**/*"]
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["./src/**/*", "../common/src/**/*"],
+  "exclude": ["./node_modules", "./dist/**/*", "../common/src/**/__tests__/**", "../common/src/**/*.test.ts"]
 }

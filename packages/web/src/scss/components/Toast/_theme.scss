@@ -34,7 +34,9 @@ $queue-gap: tokens.$space-700;
 
 $bar-typography: tokens.$body-small-bold;
 $bar-max-width: 480px;
-$bar-max-height: 200px; // Whatever larger than the largest toast message. ⚠️ CAUTION: Affects animation timing!
+
+// Whatever larger than the largest toast message. ⚠️ CAUTION: Affects animation timing!
+$bar-max-height: 200px;
 $bar-gap: tokens.$space-700;
 $bar-padding: tokens.$space-700;
 $bar-border-radius: tokens.$radius-300;

@@ -5,7 +5,9 @@
 // 3. Make the text selectable and allow links to be clickable in the helper and validation texts.
 
 @use 'theme';
+@use '@tokens' as tokens;
 @use '../../settings/form-fields' as form-fields-settings;
+@use '../../tools/dictionaries';
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/svg';
 
@@ -32,9 +34,9 @@ $_field-name: 'Checkbox';
     @include form-fields-tools.inline-field-input();
 
     flex-shrink: 0;
-    width: theme.$input-width;
-    height: theme.$input-width;
-    margin: theme.$input-margin;
+    width: var(--#{tokens.$css-variable-prefix}checkbox-input-size);
+    height: var(--#{tokens.$css-variable-prefix}checkbox-input-size);
+    margin: var(--#{tokens.$css-variable-prefix}checkbox-input-margin);
     border-radius: theme.$input-border-radius;
     background-position: center;
     background-size: contain;
@@ -55,6 +57,16 @@ $_field-name: 'Checkbox';
         background-image: svg.escape(theme.$input-indeterminate-mark);
     }
 }
+
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'Checkbox__input',
+    $custom-property-base-name: 'checkbox-input',
+    $properties: (
+        size: theme.$input-width,
+        margin: theme.$input-margin,
+    ),
+    $breakpoints: tokens.$breakpoints
+);
 
 .Checkbox__validationText,
 .Checkbox > .Checkbox__text > [data-spirit-element='validation_text'] {

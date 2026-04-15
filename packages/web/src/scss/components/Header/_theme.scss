@@ -3,6 +3,8 @@
 
 // Header
 $header-typography: tokens.$body-medium-semibold;
+$header-height: 68px;
+$header-height-simple: 60px;
 $header-breakpoint: tokens.$breakpoint-desktop;
 $header-padding-x: tokens.$space-1000;
 $header-gap: tokens.$space-1200;

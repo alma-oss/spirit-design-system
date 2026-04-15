@@ -3,7 +3,7 @@
 //
 // 2. Reuse already generated custom properties to allow overriding the arrow appearance live in the browser.
 
-@use 'sass:math';
+@use '@tokens' as tokens;
 @use '../../tools/dictionaries';
 @use '../../tools/placement';
 @use '../../tools/reset';
@@ -13,10 +13,13 @@
 @use 'tools';
 
 .TooltipPopover {
-    --tooltip-max-width: #{theme.$max-width};
+    --tooltip-max-width: var(--#{tokens.$css-variable-prefix}tooltip-max-width);
 
     @include placement.child();
-    @include placement.child-controlled($prefix: 'tooltip', $offset: theme.$arrow-height);
+    @include placement.child-controlled(
+        $prefix: 'tooltip',
+        $offset: var(--#{tokens.$css-variable-prefix}tooltip-arrow-height)
+    );
     @include typography.generate(theme.$typography);
 
     width: max-content;
@@ -41,8 +44,8 @@
 .TooltipPopover__arrow {
     @include placement.arrow(
         $prefix: 'tooltip',
-        $width: theme.$arrow-width,
-        $height: theme.$arrow-height,
+        $width: var(--#{tokens.$css-variable-prefix}tooltip-arrow-width),
+        $height: var(--#{tokens.$css-variable-prefix}tooltip-arrow-height),
         $corner-offset: theme.$arrow-corner-offset
     );
 
@@ -50,6 +53,16 @@
     height: var(--tooltip-arrow-height); // 2.
     background: no-repeat center/cover svg.escape(theme.$arrow-shape);
 }
+
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'TooltipPopover',
+    $custom-property-base-name: 'tooltip',
+    $properties: (
+        max-width: theme.$max-width,
+        arrow-width: theme.$arrow-width,
+        arrow-height: theme.$arrow-height,
+    )
+);
 
 .TooltipPopover__close {
     @include reset.button();
@@ -60,7 +73,9 @@
 }
 
 .TooltipPopover--dismissible {
-    --tooltip-max-width: calc(#{theme.$max-width} + #{theme.$gap} + #{theme.$close-button-size});
+    --tooltip-max-width: calc(
+        var(--#{tokens.$css-variable-prefix}tooltip-max-width) + #{theme.$gap} + #{theme.$close-button-size}
+    );
 
     display: grid;
     grid-template-columns: 1fr auto;
@@ -71,7 +86,7 @@
 @include dictionaries.generate-placements(
     $class-name: 'TooltipPopover',
     $dictionary-values: theme.$placement-dictionary,
-    $offset: theme.$arrow-height,
+    $offset: var(--#{tokens.$css-variable-prefix}tooltip-arrow-height),
     $is-controlled: true,
     $has-arrow: true
 );

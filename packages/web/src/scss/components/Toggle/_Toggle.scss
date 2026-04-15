@@ -1,6 +1,8 @@
 @use 'theme';
+@use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../settings/form-fields' as form-fields-settings;
+@use '../../tools/dictionaries';
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/reset';
 
@@ -42,8 +44,8 @@ $_field-name: 'Toggle';
     display: grid;
     flex-shrink: 0;
     grid-template-areas: 'toggle';
-    width: theme.$input-width;
-    height: theme.$input-height;
+    width: var(--#{tokens.$css-variable-prefix}toggle-input-width);
+    height: var(--#{tokens.$css-variable-prefix}toggle-input-height);
     border: theme.$input-border-width solid theme.$input-border-color;
     border-radius: theme.$input-border-radius;
     background-color: theme.$input-background-color;
@@ -59,8 +61,8 @@ $_field-name: 'Toggle';
         content: '';
         display: block;
         grid-area: toggle;
-        width: theme.$input-mark-size;
-        height: theme.$input-mark-size;
+        width: var(--#{tokens.$css-variable-prefix}toggle-input-mark-size);
+        height: var(--#{tokens.$css-variable-prefix}toggle-input-mark-size);
         margin: theme.$input-mark-spacing;
         border-radius: theme.$input-mark-border-radius;
         box-shadow: theme.$input-mark-shadow;
@@ -121,6 +123,17 @@ $_field-name: 'Toggle';
         }
     }
 }
+
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'Toggle__input',
+    $custom-property-base-name: 'toggle-input',
+    $properties: (
+        width: theme.$input-width,
+        height: theme.$input-height,
+        mark-size: theme.$input-mark-size,
+    ),
+    $breakpoints: tokens.$breakpoints
+);
 
 .Toggle__input--indicators::before,
 .Toggle__input--indicators::after {

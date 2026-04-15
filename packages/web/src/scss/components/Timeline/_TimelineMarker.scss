@@ -7,7 +7,7 @@
 
 // @deprecated We are deprecating the default timeline size in favor of the size CSS modifier class.
 // Migration: remove the default timeline size from this file. The CSS modifier class is already used in the HTML.
-$_default-timeline-size: small; // 1.
+$_default-timeline-size: theme.$default-size; // 1.
 
 .TimelineMarker {
     @include typography.from-css-variables(
@@ -20,14 +20,8 @@ $_default-timeline-size: small; // 1.
     align-self: center;
     align-items: center;
     justify-content: center;
-    width: var(
-        --#{tokens.$css-variable-prefix}timeline-marker-size,
-        #{map.get(theme.$size-config, $_default-timeline-size, marker-size)}
-    );
-    height: var(
-        --#{tokens.$css-variable-prefix}timeline-marker-size,
-        #{map.get(theme.$size-config, $_default-timeline-size, marker-size)}
-    );
+    width: var(--#{tokens.$css-variable-prefix}timeline-marker-size);
+    height: var(--#{tokens.$css-variable-prefix}timeline-marker-size);
     margin-block: theme.$timeline-marker-margin;
 }
 
@@ -45,14 +39,8 @@ $_default-timeline-size: small; // 1.
         content: '';
         position: absolute;
         inset: 0;
-        width: var(
-            --#{tokens.$css-variable-prefix}timeline-dot-size,
-            #{map.get(theme.$size-config, $_default-timeline-size, dot-size)}
-        );
-        height: var(
-            --#{tokens.$css-variable-prefix}timeline-dot-size,
-            #{map.get(theme.$size-config, $_default-timeline-size, dot-size)}
-        );
+        width: var(--#{tokens.$css-variable-prefix}timeline-dot-size);
+        height: var(--#{tokens.$css-variable-prefix}timeline-dot-size);
         margin: auto;
         border-radius: theme.$timeline-marker-dot-radius;
         background-color: currentcolor;
@@ -64,8 +52,5 @@ $_default-timeline-size: small; // 1.
 // Migration: delete the `.TimelineMarker` class from this selector.
 .TimelineMarker,
 .TimelineMarker--icon {
-    --#{tokens.$css-variable-prefix}icon-size: var(
-        --#{tokens.$css-variable-prefix}timeline-icon-size,
-        #{map.get(theme.$size-config, $_default-timeline-size, icon-size)}
-    );
+    --#{tokens.$css-variable-prefix}icon-size: var(--#{tokens.$css-variable-prefix}timeline-icon-size);
 }

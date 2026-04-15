@@ -193,6 +193,13 @@ $_field-name: 'TextField';
     $config: form-fields-settings.$box-field-size-config,
     $css-variable-infix: 'input'
 );
+@include dictionaries.generate-rem-sizes(
+    $class-name: $_field-name,
+    $dictionary-values: form-fields-settings.$box-field-size-dictionary,
+    $config: form-fields-settings.$box-field-input-height-config,
+    $property-name: 'height',
+    $css-variable-infix: 'input'
+);
 @include form-fields-tools.input-field-validation-states($_field-name);
 
 .TextField--disabled > .TextField__label {

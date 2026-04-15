@@ -14,6 +14,15 @@ $_field-name: 'TextArea';
     @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
 }
 
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'TextArea',
+    $custom-property-base-name: 'text-area-input',
+    $properties: (
+        height: map.get(theme.$input-height-config, medium),
+    ),
+    $breakpoints: tokens.$breakpoints
+);
+
 .TextArea__label {
     @include form-fields-tools.box-field-label();
 }
@@ -30,8 +39,7 @@ $_field-name: 'TextArea';
     @include form-fields-tools.box-field-input($_field-name);
 
     min-height: var(
-        --#{tokens.$css-variable-prefix}#{spirit-string.convert-pascal-case-to-kebab-case($_field-name)}-input-height,
-        map.get(theme.$input-size-config, medium, height)
+        --#{tokens.$css-variable-prefix}#{spirit-string.convert-pascal-case-to-kebab-case($_field-name)}-input-height
     );
     resize: vertical;
 }
@@ -65,6 +73,13 @@ $_field-name: 'TextArea';
     $class-name: $_field-name,
     $dictionary-values: form-fields-settings.$box-field-size-dictionary,
     $config: theme.$input-size-config,
+    $css-variable-infix: 'input'
+);
+@include dictionaries.generate-rem-sizes(
+    $class-name: $_field-name,
+    $dictionary-values: form-fields-settings.$box-field-size-dictionary,
+    $config: theme.$input-height-config,
+    $property-name: 'height',
     $css-variable-infix: 'input'
 );
 @include form-fields-tools.input-field-validation-states($_field-name);

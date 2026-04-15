@@ -21,7 +21,9 @@
 }
 
 .Alert--center {
-    grid-template-columns: auto fit-content(#{theme.$content-max-width});
+    grid-template-columns:
+        auto
+        fit-content(var(--#{tokens.$css-variable-prefix}alert-content-max-width));
     justify-content: center;
 }
 
@@ -29,6 +31,14 @@
     $class-name: 'Alert',
     $dictionary-values: theme.$color-dictionary,
     $config: theme.$color-config
+);
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'Alert--center',
+    $custom-property-base-name: 'alert',
+    $properties: (
+        content-max-width: theme.$content-max-width,
+    ),
+    $breakpoints: tokens.$breakpoints
 );
 
 // @deprecated This style will be removed in the next major version.

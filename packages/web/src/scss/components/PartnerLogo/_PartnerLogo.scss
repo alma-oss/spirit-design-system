@@ -36,6 +36,14 @@
             $config: theme.$size-config,
             $class-name-infix: $class-name-infix
         );
+        @include dictionaries.generate-rem-sizes(
+            $class-name: 'PartnerLogo',
+            $dictionary-values: theme.$size-dictionary,
+            $config: theme.$image-height-config,
+            $property-name: 'image-height',
+            $class-name-infix: $class-name-infix,
+            $breakpoints: null
+        );
     }
 }
 

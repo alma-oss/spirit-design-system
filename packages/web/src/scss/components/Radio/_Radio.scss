@@ -3,7 +3,9 @@
 // 2. Make the text selectable and allow links to be clickable in the helper text.
 
 @use 'sass:map';
+@use '@tokens' as tokens;
 @use '../../settings/form-fields' as form-fields-settings;
+@use '../../tools/dictionaries';
 @use '../../tools/form-fields' as form-fields-tools;
 @use 'theme';
 
@@ -19,8 +21,8 @@ $_field-name: 'Radio';
     display: grid;
     flex-shrink: 0;
     place-content: center;
-    width: theme.$input-size;
-    height: theme.$input-size;
+    width: var(--#{tokens.$css-variable-prefix}radio-input-size);
+    height: var(--#{tokens.$css-variable-prefix}radio-input-size);
     margin: theme.$input-margin;
     font: inherit;
     border-radius: theme.$input-border-radius;
@@ -32,8 +34,8 @@ $_field-name: 'Radio';
 
     &::before {
         content: '';
-        width: theme.$input-inner-dot-size;
-        height: theme.$input-inner-dot-size;
+        width: var(--#{tokens.$css-variable-prefix}radio-input-inner-dot-size);
+        height: var(--#{tokens.$css-variable-prefix}radio-input-inner-dot-size);
         border-radius: theme.$input-border-radius;
         background-color: theme.$input-background-color;
         transform: scale(0);
@@ -46,6 +48,16 @@ $_field-name: 'Radio';
         transform: scale(1);
     }
 }
+
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'Radio__input',
+    $custom-property-base-name: 'radio-input',
+    $properties: (
+        size: theme.$input-size,
+        inner-dot-size: theme.$input-inner-dot-size,
+    ),
+    $breakpoints: tokens.$breakpoints
+);
 
 .Radio__helperText {
     @include form-fields-tools.helper-text();

@@ -88,8 +88,9 @@
 //    b) vertical (y) alignment classes for each breakpoint.
 
 @use 'sass:map';
-@use 'sass:math';
 @use '../../tools/breakpoint';
+@use '../../tools/dictionaries';
+@use '@tokens' as tokens;
 @use 'theme';
 
 $_queue-collapsed-visible-limit: 2; // 10.
@@ -185,11 +186,11 @@ $_queue-collapsed-visible-limit: 2; // 10.
     }
 
     .Toast--#{$infix}left {
-        --toast-transform-origin-x: #{math.div(theme.$bar-max-width, 2)};
+        --toast-transform-origin-x: calc(var(--#{tokens.$css-variable-prefix}toast-bar-max-width) / 2);
     }
 
     .Toast--#{$infix}right {
-        --toast-transform-origin-x: calc(100% - #{math.div(theme.$bar-max-width, 2)});
+        --toast-transform-origin-x: calc(100% - (var(--#{tokens.$css-variable-prefix}toast-bar-max-width) / 2));
     }
 
     @include breakpoint.up($breakpoint-value) {

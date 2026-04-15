@@ -5,17 +5,21 @@ $background-color: tokens.$background-primary;
 $border-radius: tokens.$radius-200;
 $breakpoints: tokens.$breakpoints;
 $size-dictionary: dictionaries.$size;
+
+$image-height-config: (
+    small: 32px,
+    medium: 48px,
+    large: 60px,
+);
+
 $size-config: (
     small: (
-        image-height: 32px,
         padding: tokens.$space-500,
     ),
     medium: (
-        image-height: 48px,
         padding: tokens.$space-500,
     ),
     large: (
-        image-height: 60px,
         padding: tokens.$space-600,
     ),
 );

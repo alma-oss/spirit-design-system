@@ -119,6 +119,13 @@ $_field-name: spirit-string.remove-prefix($_full-field-name, 'UNSTABLE_');
     $config: form-fields-settings.$box-field-size-config,
     $css-variable-infix: 'input'
 );
+@include dictionaries.generate-rem-sizes(
+    $class-name: #{$_full-field-name},
+    $dictionary-values: form-fields-settings.$box-field-size-dictionary,
+    $config: form-fields-settings.$box-field-input-height-config,
+    $property-name: 'height',
+    $css-variable-infix: 'input'
+);
 @include form-fields-tools.input-field-validation-states(#{$_full-field-name});
 
 // @deprecated `UNSTABLE_Picker__label` will be removed with upcoming major version and replaced with separate component for label text.

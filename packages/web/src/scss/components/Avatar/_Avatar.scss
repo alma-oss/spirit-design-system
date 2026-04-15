@@ -48,3 +48,10 @@
     $config: theme.$size-config,
     $breakpoints: theme.$breakpoints
 );
+@include dictionaries.generate-rem-sizes(
+    $class-name: 'Avatar',
+    $dictionary-values: theme.$size-dictionary,
+    $config: theme.$icon-size-config,
+    $property-name: 'icon-size',
+    $breakpoints: theme.$breakpoints
+);

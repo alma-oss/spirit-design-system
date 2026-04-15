@@ -16,7 +16,7 @@
     display: grid;
     align-content: var(--toast-alignment-y);
     justify-content: var(--toast-alignment-x);
-    max-height: theme.$bar-max-height; // 1.
+    max-height: var(--#{tokens.$css-variable-prefix}toast-bar-max-height); // 1.
     transform-origin: var(--toast-transform-origin-x, center) bottom; // 2.
 
     @media (prefers-reduced-motion: no-preference) {
@@ -31,7 +31,7 @@
 }
 
 .ToastBar__box {
-    max-width: theme.$bar-max-width;
+    max-width: var(--#{tokens.$css-variable-prefix}toast-bar-max-width);
     padding: theme.$bar-padding;
     color: var(--#{tokens.$css-variable-prefix}toast-bar-color);
     border-radius: theme.$bar-border-radius;
@@ -45,6 +45,16 @@
         transition-timing-function: theme.$bar-box-transition-timing;
     }
 }
+
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'ToastBar',
+    $custom-property-base-name: 'toast',
+    $properties: (
+        bar-max-width: theme.$bar-max-width,
+        bar-max-height: theme.$bar-max-height,
+    ),
+    $breakpoints: theme.$breakpoints
+);
 
 .ToastBar:is(.ToastBar--dismissible, :has([data-spirit-dismiss='toast'])) > .ToastBar__box {
     display: grid;
