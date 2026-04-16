@@ -110,6 +110,7 @@ GitHub review comments formatted as ` ```suggestion ``` ` blocks show the **comp
 
 **Example of a mistake to avoid:**
 Reviewer suggests:
+
 ```suggestion
 <ButtonLink href={routes.homepage}>
 ```
@@ -187,6 +188,7 @@ gh api -X POST repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies
 ```
 
 **Important Notes:**
+
 - GraphQL requires the thread ID (`PRRT_*`); REST requires the numeric comment ID — they are different values
 - Each thread must be replied to individually — do NOT add a general PR comment instead
 
@@ -249,6 +251,7 @@ mutation {
 ```
 
 **When to Resolve:**
+
 - ✅ After replying with enough context to fully address the comment and no reviewer follow-up is needed
 - ❌ Keep the thread open if you're asking clarifying questions or otherwise need additional information from the reviewer
 
@@ -278,6 +281,7 @@ query {
   }
 '
 ```
+
 #### 4. Request Re-Review (only If Major Changes Made)
 
 ```bash
