@@ -7,21 +7,26 @@ Systematically address PR review comments with a structured workflow and profess
 When you receive a PR review, follow these four phases:
 
 ### 1. Analyze
+
 ```bash
 gh pr view <number>
 gh api repos/{owner}/{repo}/pulls/{number}/comments
 ```
+
 - List all comments
 - Categorize by type (bug, docs, suggestion, question)
 - Use decision framework to assess each
 
 ### 2. Implement
+
 - Group related changes into logical commits
 - Reference review comments in commit messages
 - Test changes before pushing
 
 ### 3. Communicate
+
 Use status indicators in replies:
+
 - ✅ **Fixed**: You implemented the suggestion
 - ⚠️ **Addressed**: You did part of it, with explanation
 - ❌ **Not addressed**: Declined with clear reasoning
@@ -35,6 +40,7 @@ gh api -X POST repos/{owner}/{repo}/pulls/{number}/comments/{id}/replies \
 ```
 
 ### 4. Resolve
+
 - Verify all implementation is complete
 - Only resolve conversations after fixes are done
 - Explicitly request re-review
@@ -91,17 +97,18 @@ gh api graphql -f query='
 
 Evaluate each suggestion using these criteria:
 
-| Criteria | Accept ✅ | Partial ⚠️ | Decline ❌ |
-|----------|----------|------------|-----------|
-| **Correctness** | Fixes actual issue | Partially fixes | Not an issue |
-| **Clarity** | Improves readability | Minor improvement | Subjective preference |
-| **Scope** | Within PR scope | Related concern | Out of scope |
-| **Cost/Value** | Low effort, high value | Medium effort | High effort, low value |
-| **Architecture** | Aligns with patterns | Requires discussion | Conflicts with design |
+| Criteria         | Accept ✅              | Partial ⚠️          | Decline ❌             |
+| ---------------- | ---------------------- | ------------------- | ---------------------- |
+| **Correctness**  | Fixes actual issue     | Partially fixes     | Not an issue           |
+| **Clarity**      | Improves readability   | Minor improvement   | Subjective preference  |
+| **Scope**        | Within PR scope        | Related concern     | Out of scope           |
+| **Cost/Value**   | Low effort, high value | Medium effort       | High effort, low value |
+| **Architecture** | Aligns with patterns   | Requires discussion | Conflicts with design  |
 
 ## Response Templates
 
 See `references/response-templates.md` for comprehensive examples:
+
 - Accepting suggestions
 - Declining professionally
 - Partial acceptance
@@ -111,6 +118,7 @@ See `references/response-templates.md` for comprehensive examples:
 ## GitHub Integration
 
 Use GitHub CLI (`gh`):
+
 - Command-line tool, widely known
 - Use commands shown in the quick start above
 - Good for scripting and automation

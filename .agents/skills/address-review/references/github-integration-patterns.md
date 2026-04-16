@@ -5,6 +5,7 @@ Technical reference for working with PR reviews via GitHub CLI and GitHub APIs.
 ## GitHub CLI Quick Reference
 
 ### Install & Setup
+
 ```bash
 # Install GitHub CLI (macOS)
 brew install gh
@@ -22,6 +23,7 @@ gh api rate-limit
 ### Common Commands
 
 #### View PR Information
+
 ```bash
 # View specific PR
 gh pr view <number>
@@ -37,6 +39,7 @@ gh pr view <number> --json title,body,number,state
 ```
 
 #### List Review Comments
+
 ```bash
 # Get all review comments on PR
 gh api repos/{owner}/{repo}/pulls/{number}/comments
@@ -50,6 +53,7 @@ gh api repos/{owner}/{repo}/pulls/{number}/comments --paginate
 ```
 
 #### Reply to Comments
+
 ```bash
 # Reply to a specific review comment
 gh api -X POST \
@@ -63,6 +67,7 @@ gh api -X POST \
 ```
 
 #### Add PR Comments
+
 ```bash
 # Add comment to PR (not a reply to review)
 gh pr comment <number> -b "Comment text"
@@ -81,6 +86,7 @@ EOF
 ### GraphQL Queries
 
 #### List Review Threads
+
 ```bash
 gh api graphql -f query='
   query {
@@ -113,6 +119,7 @@ gh api graphql -f query='
 ```
 
 #### Query Unresolved Threads Only
+
 ```bash
 gh api graphql -f query='
   query {
@@ -134,6 +141,7 @@ gh api graphql -f query='
 ```
 
 #### Resolve a Thread
+
 ```bash
 gh api graphql -f query='
   mutation {
@@ -148,6 +156,7 @@ gh api graphql -f query='
 ```
 
 #### Unresolve a Thread
+
 ```bash
 gh api graphql -f query='
   mutation {
@@ -164,6 +173,7 @@ gh api graphql -f query='
 ## Batch Operations
 
 ### Resolve Multiple Threads Script
+
 ```bash
 #!/bin/bash
 set -e
@@ -223,11 +233,13 @@ echo "All $count threads resolved!"
 ```
 
 ### Usage
+
 ```bash
 ./resolve-threads.sh literat awesome-agents 1
 ```
 
 ### Reply to Multiple Comments
+
 ```bash
 #!/bin/bash
 # File format: COMMENT_ID|RESPONSE_TEXT
@@ -260,6 +272,7 @@ echo "Done! Replied to $count comments."
 ```
 
 ### Usage
+
 ```bash
 # responses.txt format:
 # 2811675240|✅ Fixed: Updated filename
@@ -273,11 +286,13 @@ echo "Done! Replied to $count comments."
 ### Direct API Calls with `gh`
 
 #### Get Review Comments
+
 ```bash
 gh api repos/{owner}/{repo}/pulls/{number}/comments
 ```
 
 Response includes:
+
 - `id` - Comment ID (use for replies)
 - `body` - Comment text
 - `user.login` - Author
@@ -285,6 +300,7 @@ Response includes:
 - `line` - Line number in diff
 
 #### Create Reply
+
 ```bash
 gh api -X POST \
   repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies \
@@ -292,11 +308,13 @@ gh api -X POST \
 ```
 
 #### List Review Threads
+
 ```bash
 gh api repos/{owner}/{repo}/pulls/{number}/reviews
 ```
 
 #### Get Individual Review
+
 ```bash
 gh api repos/{owner}/{repo}/pulls/{number}/reviews/{review_id}
 ```
@@ -304,6 +322,7 @@ gh api repos/{owner}/{repo}/pulls/{number}/reviews/{review_id}
 ### Error Handling
 
 #### Handle Rate Limits
+
 ```bash
 # Check current rate limit
 gh api rate-limit --jq '.resources.core'
@@ -324,6 +343,7 @@ echo "Rate limit resets in $WAIT_TIME seconds"
 ```
 
 #### Handle API Errors
+
 ```bash
 #!/bin/bash
 set -e
@@ -342,6 +362,7 @@ fi
 ## Common Patterns
 
 ### Validate Before Operating
+
 ```bash
 # Check PR exists
 if ! gh pr view "$PR_NUMBER" > /dev/null 2>&1; then
@@ -357,6 +378,7 @@ fi
 ```
 
 ### Extract IDs From Comments
+
 ```bash
 # Get all comment IDs
 gh api repos/$OWNER/$REPO/pulls/$NUMBER/comments \
@@ -368,6 +390,7 @@ gh api repos/$OWNER/$REPO/pulls/$NUMBER/comments \
 ```
 
 ### Build Response with Variables
+
 ```bash
 COMMIT_SHA=$(git rev-parse --short HEAD)
 COMMIT_URL="https://github.com/$OWNER/$REPO/commit/$COMMIT_SHA"
@@ -382,6 +405,7 @@ gh api -X POST \
 ```
 
 ### Conditional Resolution
+
 ```bash
 # Only resolve if CI passed
 CI_STATUS=$(gh pr view "$NUMBER" \
@@ -397,6 +421,7 @@ fi
 ```
 
 ### Bulk Comment IDs From Body Search
+
 ```bash
 # Find comments matching a pattern
 gh api repos/$OWNER/$REPO/pulls/$NUMBER/comments \
@@ -410,6 +435,7 @@ gh api repos/$OWNER/$REPO/pulls/$NUMBER/comments \
 ## Troubleshooting
 
 ### "Not Authenticated"
+
 ```bash
 # Fix authentication
 gh auth login
@@ -419,6 +445,7 @@ gh auth status
 ```
 
 ### "PR Not Found" or "Access Denied"
+
 ```bash
 # Verify PR exists and you have access
 gh pr view <number>
@@ -428,6 +455,7 @@ gh pr view -R owner/repo <number>
 ```
 
 ### Rate Limit Hit
+
 ```bash
 # Check remaining quota
 gh api rate-limit
@@ -437,6 +465,7 @@ sleep 3600  # Wait 1 hour
 ```
 
 ### GraphQL Syntax Error
+
 ```bash
 # Test GraphQL query validity
 gh api graphql -f query='YOUR_QUERY_HERE'
@@ -452,6 +481,7 @@ gh api graphql -f query='
 ```
 
 ### Comment Reply Failed
+
 ```bash
 # Verify comment exists
 COMMENT_ID="123456"
@@ -465,6 +495,7 @@ gh api repos/$OWNER/$REPO/pulls/$NUMBER/comments/$COMMENT_ID
 #### ❌ CRITICAL: Never Use `gh pr comment` as a Fallback for Review Thread Replies
 
 **The Problem:**
+
 ```bash
 # WRONG! This creates a top-level PR comment, NOT a thread reply
 gh pr comment <number> -b "Your response"
@@ -474,6 +505,7 @@ This creates a general PR comment visible to everyone, not an inline reply to th
 
 **The Fix:**
 Use the correct REST endpoint with the numeric comment ID in the URL path:
+
 ```bash
 # CORRECT! This replies to the specific review thread
 gh api -X POST \
@@ -482,6 +514,7 @@ gh api -X POST \
 ```
 
 **Key Details:**
+
 - Use the numeric `comment_id` (e.g., `2833510930`), NOT the node ID (e.g., `PRRC_kwDO...`)
 - The ID goes in the URL **path**, not as a body parameter
 - No `-f in_reply_to=<id>` parameter needed—that's not valid
@@ -489,6 +522,7 @@ gh api -X POST \
 #### ❌ WRONG: Using `in_reply_to` as a Body Parameter
 
 **The Problem:**
+
 ```bash
 # WRONG! -f in_reply_to=<id> is not a valid parameter
 gh api -X POST repos/$OWNER/$REPO/pulls/$NUMBER/comments \
@@ -498,6 +532,7 @@ gh api -X POST repos/$OWNER/$REPO/pulls/$NUMBER/comments \
 
 **The Fix:**
 The ID goes in the **URL path**, not the request body:
+
 ```bash
 # CORRECT! ID is part of the endpoint URL
 gh api -X POST \
@@ -508,12 +543,14 @@ gh api -X POST \
 #### Why This Matters
 
 Review thread replies:
+
 1. **Stay attached** to the original comment they're replying to
 2. **Preserve context** — the thread shows as a conversation
 3. **Allow resolution** — threads can be marked resolved/unresolved
 4. **Notify the reviewer** — they see a direct response to their feedback
 
 Top-level PR comments (created by `gh pr comment`):
+
 1. Are **disconnected** from the thread
 2. Appear in the main PR timeline, not in the thread
 3. Don't resolve the thread
@@ -522,6 +559,7 @@ Top-level PR comments (created by `gh pr comment`):
 #### Fallback Strategy If API Methods Fail
 
 If you try GraphQL `addPullRequestReviewThreadReply` mutation and it fails:
+
 - **ALWAYS fall back to the REST `/replies` endpoint** (shown above)
 - **NEVER fall back to `gh pr comment`** — this defeats the purpose
 
@@ -545,6 +583,7 @@ gh api graphql -f query='
 ## Performance Optimization
 
 ### Pagination for Large PRs
+
 ```bash
 # Instead of --paginate for all comments (slow)
 # Use --paginate with filtering
@@ -555,6 +594,7 @@ gh api repos/$OWNER/$REPO/pulls/$NUMBER/comments \
 ```
 
 ### Batch GraphQL Queries
+
 ```bash
 # Instead of multiple separate queries, combine into one
 
@@ -579,6 +619,7 @@ gh api graphql -f query='
 ```
 
 ### Cache Results When Appropriate
+
 ```bash
 # For scripts that might run multiple times
 CACHE_FILE="/tmp/pr_comments_$PR_NUMBER.json"
@@ -607,6 +648,7 @@ fi
 ## Summary
 
 **GitHub CLI** is the primary tool for most operations:
+
 - Install: `brew install gh`
 - Authenticate: `gh auth login`
 - Fetch comments: `gh api repos/{owner}/{repo}/pulls/{number}/comments`
