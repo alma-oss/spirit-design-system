@@ -356,7 +356,7 @@ if ! gh auth status > /dev/null 2>&1; then
 fi
 ```
 
-### Extract IDs from Comments
+### Extract IDs From Comments
 ```bash
 # Get all comment IDs
 gh api repos/$OWNER/$REPO/pulls/$NUMBER/comments \
@@ -396,7 +396,7 @@ else
 fi
 ```
 
-### Bulk Comment IDs from Body Search
+### Bulk Comment IDs From Body Search
 ```bash
 # Find comments matching a pattern
 gh api repos/$OWNER/$REPO/pulls/$NUMBER/comments \
@@ -462,7 +462,7 @@ gh api repos/$OWNER/$REPO/pulls/$NUMBER/comments/$COMMENT_ID
 
 ### Common Mistakes When Replying to Review Threads
 
-#### ❌ CRITICAL: Never use `gh pr comment` as a fallback for review thread replies
+#### ❌ CRITICAL: Never Use `gh pr comment` as a Fallback for Review Thread Replies
 
 **The Problem:**
 ```bash
@@ -486,7 +486,7 @@ gh api -X POST \
 - The ID goes in the URL **path**, not as a body parameter
 - No `-f in_reply_to=<id>` parameter needed—that's not valid
 
-#### ❌ WRONG: Using `in_reply_to` as a body parameter
+#### ❌ WRONG: Using `in_reply_to` as a Body Parameter
 
 **The Problem:**
 ```bash
@@ -519,7 +519,7 @@ Top-level PR comments (created by `gh pr comment`):
 3. Don't resolve the thread
 4. Can be confusing when there are multiple threads on the same file
 
-#### Fallback Strategy if API Methods Fail
+#### Fallback Strategy If API Methods Fail
 
 If you try GraphQL `addPullRequestReviewThreadReply` mutation and it fails:
 - **ALWAYS fall back to the REST `/replies` endpoint** (shown above)

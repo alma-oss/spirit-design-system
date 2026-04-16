@@ -121,12 +121,12 @@ Execute changes systematically:
    git commit -m "Fix: Update documentation (review comment PR#1-c123)"
    ```
 
-4. **Test Changes**
+6. **Test Changes**
    - Run tests for modified code
    - Manually verify fixes work as intended
    - Check that you haven't introduced regressions
 
-5. **Update Status**
+7. **Update Status**
    - Push commits to the PR branch
    - Let checks/CI run to completion
    - Do NOT push if tests fail
@@ -136,7 +136,7 @@ Execute changes systematically:
 Reply to each review comment systematically:
 
 1. **Use Status Indicators**
-   ```
+   ```txt
    ✅ Fixed: [brief description]
    ⚠️ Addressed: [what was done, why other parts weren't]
    ❌ Not addressed: [clear rationale]
@@ -663,17 +663,17 @@ done
 
 Use this before marking PR as ready for re-review:
 
-- [ ] All comments have been reviewed and categorized
-- [ ] Decision rationale documented for each comment
-- [ ] All accepted changes implemented
-- [ ] Code changes follow project conventions
-- [ ] Tests pass locally and in CI
-- [ ] Each accepted comment has a reply
-- [ ] Declined comments have clear explanations
-- [ ] All code commits reference the review comments
-- [ ] No nested threads were missed
-- [ ] Ready for re-review comment has been posted
-- [ ] Conversations will be resolved only after re-approval
+- \[ \] All comments have been reviewed and categorized
+- \[ \] Decision rationale documented for each comment
+- \[ \] All accepted changes implemented
+- \[ \] Code changes follow project conventions
+- \[ \] Tests pass locally and in CI
+- \[ \] Each accepted comment has a reply
+- \[ \] Declined comments have clear explanations
+- \[ \] All code commits reference the review comments
+- \[ \] No nested threads were missed
+- \[ \] Ready for re-review comment has been posted
+- \[ \] Conversations will be resolved only after re-approval
 
 ## Summary
 

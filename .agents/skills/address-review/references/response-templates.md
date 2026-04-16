@@ -73,7 +73,7 @@ caching strategy for future work. For now, this PR doesn't add caching but
 doesn't block it either (we can add it later without major changes).
 ```
 
-### Implementing with Trade-off Explanation
+### Implementing with Trade-Off Explanation
 ```markdown
 ⚠️ Addressed: Added the recursive validation logic you suggested. This will
 catch deeper nesting issues. However, note that it has O(n) complexity vs
