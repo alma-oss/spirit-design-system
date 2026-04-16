@@ -1,5 +1,6 @@
 import figma from '@figma/code-connect';
 import React from 'react';
+import { Link } from '../../Link';
 import Checkbox from '../Checkbox';
 
 figma.connect(Checkbox, '<FIGMA_FILE_ID>?node-id=830%3A292', {
@@ -7,29 +8,43 @@ figma.connect(Checkbox, '<FIGMA_FILE_ID>?node-id=830%3A292', {
     indeterminate: figma.boolean('Indeterminate'),
     isChecked: figma.boolean('Selected'),
     isDisabled: figma.boolean('Disabled'),
-    helperTextProps: figma.boolean('Helper', {
-      true: figma.nestedProps('Helper text', {
-        helperText: figma.textContent('Helper text'),
-      }),
-      false: { helperText: undefined },
+    helperText: figma.boolean('Helper text', {
+      true: 'Helper text',
+      false: undefined,
     }),
-    label: figma.string('Label text'),
+    label: figma.string('Label'),
+    link: figma.boolean('Link', {
+      true: (
+        <Link elementType="button" color="inherit" underlined="always" onClick={() => {}} type="button">
+          Link
+        </Link>
+      ),
+      false: undefined,
+    }),
+    description: figma.boolean('Description', {
+      true: 'Description',
+      false: undefined,
+    }),
     validationState: figma.enum('Validation State', {
       Success: 'success',
       Warning: 'warning',
       Danger: 'danger',
     }),
-    validationTextProps: figma.nestedProps('Validation text', {
-      validationText: figma.string('Message'),
-    }),
+    validationText: 'Validation text',
   },
-  example: ({ helperTextProps, label, validationTextProps, ...props }) => (
+  example: ({ description, helperText, label, link, validationText, ...props }) => (
     <Checkbox
       {...props}
-      helperText={helperTextProps.helperText}
+      helperText={helperText}
       id="checkbox-default"
+      details={
+        <>
+          {link}
+          {description}
+        </>
+      }
       label={label}
-      validationText={validationTextProps.validationText}
+      validationText={validationText}
     />
   ),
 });

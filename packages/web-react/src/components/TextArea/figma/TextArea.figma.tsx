@@ -2,14 +2,8 @@ import figma from '@figma/code-connect';
 import React from 'react';
 import TextArea from '../TextArea';
 
-figma.connect(TextArea, '<FIGMA_FILE_ID>?node-id=2384%3A4287', {
+figma.connect(TextArea, '<FIGMA_FILE_ID>?node-id=41283%3A4546', {
   props: {
-    helperTextProps: figma.boolean('Helper', {
-      true: figma.nestedProps('Helper text', {
-        helperText: figma.textContent('Helper text'),
-      }),
-      false: { helperText: undefined },
-    }),
     isDisabled: figma.boolean('Disabled'),
     isLabelHidden: figma.boolean('Label', {
       true: false,
@@ -34,10 +28,10 @@ figma.connect(TextArea, '<FIGMA_FILE_ID>?node-id=2384%3A4287', {
       validationText: figma.string('Message'),
     }),
   },
-  example: ({ helperTextProps, labelProps, validationTextProps, ...props }) => (
+  example: ({ labelProps, validationTextProps, ...props }) => (
     <TextArea
       {...props}
-      helperText={helperTextProps.helperText}
+      helperText="Helper text"
       id="textarea-default"
       label={labelProps.label}
       validationText={validationTextProps.validationText}
