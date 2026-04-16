@@ -10,7 +10,7 @@ test-results
 .github
 playwright-report
 test-results
-.release-notes
+docs/release-notes
 
 # Heading capitalization problems
 migration-*
