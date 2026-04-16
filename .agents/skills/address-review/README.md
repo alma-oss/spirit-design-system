@@ -35,8 +35,14 @@ Use status indicators in replies:
 Reply to EVERY comment using templates (see references):
 
 ```bash
-gh api -X POST repos/{owner}/{repo}/pulls/{number}/comments/{id}/replies \
-  -f body="✅ Fixed: Implemented validation check in utils/validators.ts"
+# Recommended: GraphQL with thread ID (PRRT_*)
+gh api graphql -f query='
+mutation {
+  addPullRequestReviewThreadReply(input: {
+    pullRequestReviewThreadId: "PRRT_..."
+    body: "✅ Fixed: Implemented validation check in utils/validators.ts"
+  }) { comment { id } }
+}'
 ```
 
 ### 4. Resolve

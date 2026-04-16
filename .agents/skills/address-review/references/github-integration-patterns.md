@@ -507,7 +507,7 @@ This creates a general PR comment visible to everyone, not an inline reply to th
 Use the correct REST endpoint with the numeric comment ID in the URL path:
 
 ```bash
-# CORRECT! This replies to the specific review thread
+# CORRECT! This replies to a review comment (within its thread)
 gh api -X POST \
   repos/$OWNER/$REPO/pulls/$NUMBER/comments/$COMMENT_ID/replies \
   -f body="Your response text"

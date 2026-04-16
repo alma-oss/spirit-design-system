@@ -143,7 +143,7 @@ Execute changes systematically:
 
 Reply to each review comment systematically:
 
-1. **Use Status Indicators**
+#### 1. Use Status Indicators
 
    ```txt
    ✅ Fixed: [brief description]
@@ -152,14 +152,13 @@ Reply to each review comment systematically:
    ❓ Clarification: [ask specific question]
    ```
 
-2. **Reply to Each Review Thread Individually**
+#### 2. Reply to Each Review Thread Individually
 
-   **CRITICAL:** Always reply to review threads using GraphQL, not regular PR comments. Review threads are different from comments and require specific mutations.
+   **CRITICAL:** Always reply within the review thread — do NOT add a general PR comment instead. Two methods both work:
 
-   Using GitHub CLI with GraphQL:
+   **Recommended — GraphQL with thread ID (starts with `PRRT_`):**
 
    ```bash
-   # Reply to a specific review thread (use thread ID from Phase 1)
    gh api graphql -f query='
    mutation {
      addPullRequestReviewThreadReply(input: {
@@ -173,18 +172,24 @@ Reply to each review comment systematically:
    }'
    ```
 
-   **Important Notes:**
-   - Use the review thread ID (starts with `PRRT_`), NOT comment ID
-   - This mutation adds your reply to the existing review thread
-   - Each thread must be replied to individually - do NOT add a general PR comment instead
+   **Alternative — REST with numeric comment ID:**
 
-3. **Provide Context**
+   ```bash
+   gh api -X POST repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies \
+     -f body="✅ Fixed (commit abc123d): Description of what was fixed"
+   ```
+
+   **Important Notes:**
+   - GraphQL requires the thread ID (`PRRT_*`); REST requires the numeric comment ID — they are different values
+   - Each thread must be replied to individually — do NOT add a general PR comment instead
+
+#### 3. Provide Context
    - Link to specific commits when referencing changes
    - Quote relevant code if explaining a decision
    - Provide rationale for declined suggestions
    - Suggest alternatives when applicable
 
-4. **Response Templates** (see references for full templates)
+#### 4. Response Templates (See References for Full Templates)
 
    **Accepting:**
 
@@ -214,7 +219,7 @@ Reply to each review comment systematically:
 
 Finalize the review process:
 
-1. **Resolve Conversations After Replying**
+#### 1. Resolve Conversations After Replying
 
    **BEST PRACTICE:** Always resolve threads immediately after replying if you don't need additional information from the reviewer.
 
@@ -236,42 +241,41 @@ Finalize the review process:
    ```
 
    **When to Resolve:**
-   - ✅ After replying to comments where you've fixed the issue
-   - ✅ After replying to comments where you've explained why the suggestion isn't applicable
-   - ✅ After asking clarifying questions and providing context
-   - ❌ Only if you don't need additional information from the reviewer
+   - ✅ After replying with enough context to fully address the comment and no reviewer follow-up is needed
+   - ❌ Keep the thread open if you're asking clarifying questions or otherwise need additional information from the reviewer
 
-2. **Verify All Threads Are Handled**
-   - Check every unresolved thread has a reply or explanation
-   - Ensure all implementation is complete
-   - Verify CI/tests pass
-   - Query remaining unresolved threads to confirm all are addressed
+#### 2. Verify All Threads Are Handled
 
-3. **Query Unresolved Threads** (before declaring done)
+- Check every unresolved thread has a reply or explanation
+- Ensure all implementation is complete
+- Verify CI/tests pass
+- Query remaining unresolved threads to confirm all are addressed
 
-   ```bash
-   gh api graphql -f query='
-   query {
-     repository(owner: "owner", name: "repo") {
-       pullRequest(number: 123) {
-         reviewThreads(first: 100) {
-           edges {
-             node {
-               id
-               isResolved
-             }
-           }
-         }
-       }
-     }
-   }'
-   ```
+#### 3. Query Unresolved Threads (before Declaring Done)
 
-4. **Request Re-Review** (only if major changes made)
-   ```bash
-   gh pr comment <number> \
-     -b "I've addressed all review comments. Ready for re-review!"
-   ```
+```bash
+gh api graphql -f query='
+query {
+  repository(owner: "owner", name: "repo") {
+    pullRequest(number: 123) {
+      reviewThreads(first: 100) {
+        edges {
+          node {
+            id
+            isResolved
+          }
+        }
+      }
+    }
+  }
+'
+```
+#### 4. Request Re-Review (only If Major Changes Made)
+
+```bash
+gh pr comment <number> \
+  -b "I've addressed all review comments. Ready for re-review!"
+```
 
 ## GitHub Integration
 
@@ -573,10 +577,10 @@ EOF
    - Link commits to specific feedback items
    - Makes it easy to track what was addressed where
 
-5. **Resolve Last**
-   - Don't resolve conversations until implementation is complete
-   - Only resolve after the reviewer confirms the fix
-   - Indicates "this is done and verified"
+5. **Resolve After Reply**
+   - Resolve threads after the fix has been applied and the reply has been posted
+   - Keep the thread open if you're awaiting a response from the reviewer
+   - Indicates "this is done and doesn't need further discussion"
 
 6. **Request Re-Review Explicitly**
    - Don't assume reviewers will notice changes
@@ -715,7 +719,7 @@ Use this before marking PR as ready for re-review:
 - \[ \] All code commits reference the review comments
 - \[ \] No nested threads were missed
 - \[ \] Ready for re-review comment has been posted
-- \[ \] Conversations will be resolved only after re-approval
+- \[ \] Conversations are resolved after the fix has been applied and the reply has been posted
 
 ## Summary
 

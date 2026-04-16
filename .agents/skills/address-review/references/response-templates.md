@@ -4,11 +4,14 @@ Professional communication patterns for responding to different types of review 
 
 ## Status Indicators
 
-Always start with a clear status indicator:
+Always start with one of these clear status indicators:
 
 - ✅ **Fixed** - You implemented the suggestion
 - ⚠️ **Addressed** - You did part of it, with clear explanation of why
+- ⚠️ **Noted** - You acknowledged the feedback and captured it for follow-up
 - ❌ **Not addressed** - You're declining, with clear reasoning
+- ❌ **Not implemented** - You considered the suggestion but did not make the change
+- ❌ **Not needed** - The suggested change is unnecessary in this case, with clear reasoning
 - ❓ **Clarification** - You're asking for more information
 
 ## Accepting Suggestions
