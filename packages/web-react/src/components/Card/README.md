@@ -450,6 +450,31 @@ Depending on your situation, you may want to use the list semantics. And it will
 </Grid>
 ```
 
+## Card Article
+
+Card Article is not a standalone component, but a suggested composition of Card subcomponents designed
+for article preview use cases.
+
+```tsx
+<Grid cols={{ mobile: 1, tablet: 2 }}>
+  <Card direction="horizontal" alignmentY="center">
+    <CardMedia size="medium" isExpanded>
+      <img src="article-image.jpg" alt="" />
+    </CardMedia>
+    <CardBody>
+      <Stack spacing="space-400">
+        <CardEyebrow>Eyebrow</CardEyebrow>
+        <CardTitle>
+          <CardLink href="/article-123">Article Title</CardLink>
+        </CardTitle>
+        <Truncate limit={3}>Article excerpt…</Truncate>
+        <div class="link-primary">Read more</div>
+      </Stack>
+    </CardBody>
+  </Card>
+</Grid>
+```
+
 ## Best Practices
 
 ### Making the Whole Card Clickable
@@ -516,11 +541,13 @@ link. For optimum accessibility, you should only provide this in the form of a t
 ```tsx
 <CardBody>
   <CardTitle>
-    <CardLink href="#">Card title</a>
+    <CardLink href="#">Card title</CardLink>
   </CardTitle>
   <p>{/* … */}</p>
   {/* DON'T DO THIS */}
-  <Link href="#" underlined="always">Read more</Link>
+  <Link href="#" underlined="always">
+    Read more
+  </Link>
   {/* This is correct */}
   <div class="link-primary link-underlined">Read more</div>
 </CardBody>
