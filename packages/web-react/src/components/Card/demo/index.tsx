@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import CardAlignment from './CardAlignment';
+import CardArticle from './CardArticle';
 import CardContentOptions from './CardContentOptions';
 import CardCustom from './CardCustom';
 import CardFooterAlignment from './CardFooterAlignment';
@@ -66,6 +67,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Custom Cards">
         <CardCustom />
+      </DocsSection>
+      <DocsSection title="Article Card">
+        <CardArticle />
       </DocsSection>
     </IconsProvider>
   </StrictMode>,
