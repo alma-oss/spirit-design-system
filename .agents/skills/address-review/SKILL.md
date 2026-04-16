@@ -49,95 +49,102 @@ Start by understanding the complete scope of feedback:
 gh auth status
 ```
 
-1. **List All Review Comments**
+#### 1. List All Review Comment
 
-   ```bash
-   gh pr view <number> --comments
-   ```
+```bash
+gh pr view <number> --comments
+```
 
-2. **Categorize Comments**
-   - **Bug/Security Issues**: Actual problems that break functionality
-   - **Documentation**: Clarity, examples, or explanation improvements
-   - **Suggestions**: Non-blocking improvements or style preferences
-   - **Questions**: Clarifications about design or implementation
-   - **Praise**: Positive feedback (acknowledge and thank)
+#### 2. Categorize Comments
 
-   **For Large PRs:** If you have more than 10 comments, confirm with the user which categories to prioritize before implementing all changes.
+- **Bug/Security Issues**: Actual problems that break functionality
+- **Documentation**: Clarity, examples, or explanation improvements
+- **Suggestions**: Non-blocking improvements or style preferences
+- **Questions**: Clarifications about design or implementation
+- **Praise**: Positive feedback (acknowledge and thank)
 
-3. **Assess Each Comment**
+**For Large PRs:** If you have more than 10 comments, confirm with the user which categories to prioritize before implementing all changes.
 
-   Use this framework for every suggestion:
+#### 3. Assess Each Comment
 
-   | Criteria         | Accept ✅                    | Partial ⚠️                   | Decline ❌             |
-   | ---------------- | ---------------------------- | ---------------------------- | ---------------------- |
-   | **Correctness**  | Fixes actual bug/issue       | Partially addresses issue    | Not actually an issue  |
-   | **Clarity**      | Improves readability         | Minor improvement            | Preference/subjective  |
-   | **Scope**        | Within PR scope              | Related but separate concern | Out of scope           |
-   | **Cost/Value**   | Low effort, high value       | Medium effort                | High effort, low value |
-   | **Architecture** | Aligns with project patterns | Requires discussion          | Conflicts with design  |
+Use this framework for every suggestion:
 
-4. **Document Rationale**
-   - Write down your decision for each comment (you'll use this when replying)
-   - Note any concerns or questions to address
-   - Identify dependencies between changes
+| Criteria         | Accept ✅                    | Partial ⚠️                   | Decline ❌             |
+| ---------------- | ---------------------------- | ---------------------------- | ---------------------- |
+| **Correctness**  | Fixes actual bug/issue       | Partially addresses issue    | Not actually an issue  |
+| **Clarity**      | Improves readability         | Minor improvement            | Preference/subjective  |
+| **Scope**        | Within PR scope              | Related but separate concern | Out of scope           |
+| **Cost/Value**   | Low effort, high value       | Medium effort                | High effort, low value |
+| **Architecture** | Aligns with project patterns | Requires discussion          | Conflicts with design  |
+
+#### 4. Document Rationale
+
+- Write down your decision for each comment (you'll use this when replying)
+- Note any concerns or questions to address
+- Identify dependencies between changes
 
 ### Phase 2: Implementation
 
 Execute changes systematically:
 
-1. **Group Related Changes**
-   - Batch similar fixes into logical commits
-   - Keep unrelated changes separate
-   - One fix per commit when appropriate
+#### 1. Group Related Changes
 
-2. **Read Surrounding Code**
-   - Always review the code context before making fixes
-   - Understand why the change was suggested
-   - Check for related code that may need similar updates
-   - This prevents incomplete implementations
+- Batch similar fixes into logical commits
+- Keep unrelated changes separate
+- One fix per commit when appropriate
 
-3. **Read GitHub Suggestion Blocks in Full**
+#### 2. Read Surrounding Code
 
-   GitHub review comments formatted as ` ```suggestion ``` ` blocks show the **complete replacement** for the highlighted lines. When a suggestion exists:
-   - Read the entire suggested replacement, not just the part that prompted the comment title.
-   - Diff it mentally against the **current file content** line by line.
-   - Only declare "already applied" when **every token** of the suggestion matches the file.
+- Always review the code context before making fixes
+- Understand why the change was suggested
+- Check for related code that may need similar updates
+- This prevents incomplete implementations
 
-   **Example of a mistake to avoid:**
-   Reviewer suggests:
+#### 3. Read GitHub Suggestion Blocks in Full
 
-   ```suggestion
-   <ButtonLink href={routes.homepage}>
-   ```
+GitHub review comments formatted as ` ```suggestion ``` ` blocks show the **complete replacement** for the highlighted lines. When a suggestion exists:
 
-   Current code: `<ButtonLink href={routes.homepage} color="primary">`
-   ❌ Wrong: "href already uses routes.homepage — already applied."
-   ✅ Correct: Suggestion also removes `color="primary"` — apply that removal too.
+- Read the entire suggested replacement, not just the part that prompted the comment title.
+- Diff it mentally against the **current file content** line by line.
+- Only declare "already applied" when **every token** of the suggestion matches the file.
 
-4. **Always Ask Before Committing**
+**Example of a mistake to avoid:**
+Reviewer suggests:
+```suggestion
+<ButtonLink href={routes.homepage}>
+```
 
-   Before running any `git commit`, use `AskUserQuestion` to ask:
-   - New commit or fixup into an existing one?
-   - If fixup: which commit hash?
+Current code: `<ButtonLink href={routes.homepage} color="primary">`
+❌ Wrong: "href already uses routes.homepage — already applied."
+✅ Correct: Suggestion also removes `color="primary"` — apply that removal too.
 
-   Never run `git commit` (or `git commit --fixup`) without first getting this confirmation from the user. This respects project hooks that enforce the commit workflow.
+### 4. Always Ask Before Committing
 
-5. **Reference Review Comments**
+Before running any `git commit`, use `AskUserQuestion` to ask:
 
-   ```bash
-   # In commit message, reference the PR comment
-   git commit -m "Fix: Update documentation (review comment PR#1-c123)"
-   ```
+- New commit or fixup into an existing one?
+- If fixup: which commit hash?
 
-6. **Test Changes**
-   - Run tests for modified code
-   - Manually verify fixes work as intended
-   - Check that you haven't introduced regressions
+Never run `git commit` (or `git commit --fixup`) without first getting this confirmation from the user. This respects project hooks that enforce the commit workflow.
 
-7. **Update Status**
-   - Push commits to the PR branch
-   - Let checks/CI run to completion
-   - Do NOT push if tests fail
+#### 5. Reference Review Comments
+
+```bash
+# In commit message, reference the PR comment
+git commit -m "Fix: Update documentation (review comment PR#1-c123)"
+```
+
+#### 6. Test Changes
+
+- Run tests for modified code
+- Manually verify fixes work as intended
+- Check that you haven't introduced regressions
+
+#### 7. Update Status
+
+- Push commits to the PR branch
+- Let checks/CI run to completion
+- Do NOT push if tests fail
 
 ### Phase 3: Communication
 
@@ -145,75 +152,76 @@ Reply to each review comment systematically:
 
 #### 1. Use Status Indicators
 
-   ```txt
-   ✅ Fixed: [brief description]
-   ⚠️ Addressed: [what was done, why other parts weren't]
-   ❌ Not addressed: [clear rationale]
-   ❓ Clarification: [ask specific question]
-   ```
+```txt
+✅ Fixed: [brief description]
+⚠️ Addressed: [what was done, why other parts weren't]
+❌ Not addressed: [clear rationale]
+❓ Clarification: [ask specific question]
+```
 
 #### 2. Reply to Each Review Thread Individually
 
-   **CRITICAL:** Always reply within the review thread — do NOT add a general PR comment instead. Two methods both work:
+**CRITICAL:** Always reply within the review thread — do NOT add a general PR comment instead. Two methods both work:
 
-   **Recommended — GraphQL with thread ID (starts with `PRRT_`):**
+**Recommended — GraphQL with thread ID (starts with `PRRT_`):**
 
-   ```bash
-   gh api graphql -f query='
-   mutation {
-     addPullRequestReviewThreadReply(input: {
-       pullRequestReviewThreadId: "PRRT_kwDOFqk-Ps5vjRxb"
-       body: "✅ Fixed (commit abc123d): Description of what was fixed"
-     }) {
-       comment {
-         id
-       }
-     }
-   }'
-   ```
+```bash
+gh api graphql -f query='
+mutation {
+  addPullRequestReviewThreadReply(input: {
+    pullRequestReviewThreadId: "PRRT_kwDOFqk-Ps5vjRxb"
+    body: "✅ Fixed (commit abc123d): Description of what was fixed"
+  }) {
+    comment {
+      id
+    }
+  }
+}'
+```
 
-   **Alternative — REST with numeric comment ID:**
+**Alternative — REST with numeric comment ID:**
 
-   ```bash
-   gh api -X POST repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies \
-     -f body="✅ Fixed (commit abc123d): Description of what was fixed"
-   ```
+```bash
+gh api -X POST repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies \
+  -f body="✅ Fixed (commit abc123d): Description of what was fixed"
+```
 
-   **Important Notes:**
-   - GraphQL requires the thread ID (`PRRT_*`); REST requires the numeric comment ID — they are different values
-   - Each thread must be replied to individually — do NOT add a general PR comment instead
+**Important Notes:**
+- GraphQL requires the thread ID (`PRRT_*`); REST requires the numeric comment ID — they are different values
+- Each thread must be replied to individually — do NOT add a general PR comment instead
 
 #### 3. Provide Context
-   - Link to specific commits when referencing changes
-   - Quote relevant code if explaining a decision
-   - Provide rationale for declined suggestions
-   - Suggest alternatives when applicable
+
+- Link to specific commits when referencing changes
+- Quote relevant code if explaining a decision
+- Provide rationale for declined suggestions
+- Suggest alternatives when applicable
 
 #### 4. Response Templates (See References for Full Templates)
 
-   **Accepting:**
+**Accepting:**
 
-   ```markdown
-   ✅ Fixed: Updated documentation to clarify the implementation approach.
-   Commit: abc123d
-   ```
+```markdown
+✅ Fixed: Updated documentation to clarify the implementation approach.
+Commit: abc123d
+```
 
-   **Partial Acceptance:**
+**Partial Acceptance:**
 
-   ```markdown
-   ⚠️ Addressed: Added the validation you suggested. I kept the error
-   message generic to maintain consistency with other endpoints (see
-   similar pattern in middleware.ts:42).
-   ```
+```markdown
+⚠️ Addressed: Added the validation you suggested. I kept the error
+message generic to maintain consistency with other endpoints (see
+similar pattern in middleware.ts:42).
+```
 
-   **Declining Professionally:**
+**Declining Professionally:**
 
-   ```markdown
-   ❌ Not addressed: This is handled by the authentication middleware
-   which runs before this code. Adding additional checks here would create
-   unnecessary duplication. The auth middleware is tested separately in
-   tests/auth.test.ts.
-   ```
+```markdown
+❌ Not addressed: This is handled by the authentication middleware
+which runs before this code. Adding additional checks here would create
+unnecessary duplication. The auth middleware is tested separately in
+tests/auth.test.ts.
+```
 
 ### Phase 4: Resolution
 
@@ -221,28 +229,28 @@ Finalize the review process:
 
 #### 1. Resolve Conversations After Replying
 
-   **BEST PRACTICE:** Always resolve threads immediately after replying if you don't need additional information from the reviewer.
+**BEST PRACTICE:** Always resolve threads immediately after replying if you don't need additional information from the reviewer.
 
-   Using GitHub CLI with GraphQL:
+Using GitHub CLI with GraphQL:
 
-   ```bash
-   # Resolve a specific thread
-   gh api graphql -f query='
-   mutation {
-     resolveReviewThread(input: {
-       threadId: "PRRT_kwDOFqk-Ps5vjRxb"
-     }) {
-       thread {
-         id
-         isResolved
-       }
-     }
-   }'
-   ```
+```bash
+# Resolve a specific thread
+gh api graphql -f query='
+mutation {
+  resolveReviewThread(input: {
+    threadId: "PRRT_kwDOFqk-Ps5vjRxb"
+  }) {
+    thread {
+      id
+      isResolved
+    }
+  }
+}'
+```
 
-   **When to Resolve:**
-   - ✅ After replying with enough context to fully address the comment and no reviewer follow-up is needed
-   - ❌ Keep the thread open if you're asking clarifying questions or otherwise need additional information from the reviewer
+**When to Resolve:**
+- ✅ After replying with enough context to fully address the comment and no reviewer follow-up is needed
+- ❌ Keep the thread open if you're asking clarifying questions or otherwise need additional information from the reviewer
 
 #### 2. Verify All Threads Are Handled
 
