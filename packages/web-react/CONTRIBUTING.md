@@ -23,10 +23,17 @@ This is an example of a typical file structure of a component:
             ├── <ComponentName>.tsx — React component
             ├── index.ts — component's entry point
             ├── README.md — documentation of the component
+            ├── types.ts — optional component-local type definitions
             ├── use<ComponentName>.ts — main component's hook
             ├── use<ComponentName>AriaProps.ts — Aria component's hook
             ├── use<ComponentName>StyleProps.ts — styles and classes component's hook
-            ├── <ComponentName>.stories.tsx — component's story
+            ├── demo — component's demo files
+            │   ├── <ComponentName>Default.tsx
+            │   └── index.tsx
+            ├── figma — component's Figma code connect file
+            │   └── <ComponentName>.figma.tsx
+            ├── stories — component's Storybook stories
+            │   └── <ComponentName>.stories.tsx
             └── __tests__
                 ├── <ComponentName>.test.ts — component's test
                 ├── use<ComponentName>.test.ts — component's hook test
