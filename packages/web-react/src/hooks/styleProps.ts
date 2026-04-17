@@ -57,7 +57,7 @@ export function useStyleProps<T extends StyleProps>(
 
   const styleProps = {
     style: Object.keys(style).length > 0 ? style : undefined,
-    className: classNames(UNSAFE_className, ...styleUtilities) || undefined,
+    className: classNames(...styleUtilities, UNSAFE_className) || undefined,
   };
 
   return {

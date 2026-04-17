@@ -132,7 +132,7 @@ describe('styleProps', () => {
       ],
       [
         { margin: 'space-100', UNSAFE_className: 'm-500' },
-        { className: 'm-500 m-100', style: undefined },
+        { className: 'm-100 m-500', style: undefined },
       ],
     ])('should return correct combination of class and style', (input, expected) => {
       const { result } = renderHook(() => useStyleProps(input as StyleProps));
