@@ -1,5 +1,6 @@
 'use client';
 
+import { cssLengthToPixels } from '@alma-oss/spirit-common/utilities/cssLengthToPixels';
 import React, { type ElementType, forwardRef, useRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import {
@@ -53,22 +54,30 @@ const _Tooltip = <E extends ElementType = 'div'>(props: SpiritTooltipProps<E>, r
   const tooltipRef = useRef<HTMLDivElement>(ref);
 
   // Get `--tooltip-max-width` and `--tooltip-offset` from CSS variables
-  let tooltipMaxWidth;
-  let tooltipOffset;
-  let tooltipCornerOffset;
-  let tooltipArrowWidth;
+  let tooltipMaxWidth: number | undefined;
+  let tooltipOffset: number | undefined;
+  let tooltipCornerOffset: number | undefined;
+  let tooltipArrowWidth: number | undefined;
   const tooltipElement = tooltipRef.current?.querySelector('[data-spirit-element="tooltip"]');
   const tooltipArrowElement = tooltipElement?.querySelector('[data-spirit-element="tooltip-arrow"]');
 
   if (tooltipElement) {
     const tooltipComputedStyle = window.getComputedStyle(tooltipElement);
     const tooltipArrowComputedStyle = tooltipArrowElement && window.getComputedStyle(tooltipArrowElement);
-    tooltipMaxWidth = parseInt(tooltipComputedStyle.getPropertyValue('--tooltip-max-width'), 10);
-    tooltipOffset = parseInt(tooltipComputedStyle.getPropertyValue('--tooltip-offset'), 10);
+    const maxWidthFromVar = cssLengthToPixels(tooltipComputedStyle.getPropertyValue('--tooltip-max-width').trim());
+    tooltipMaxWidth = maxWidthFromVar ?? cssLengthToPixels(tooltipComputedStyle.maxWidth);
+
+    tooltipOffset = cssLengthToPixels(tooltipComputedStyle.getPropertyValue('--tooltip-offset')) ?? 0;
     tooltipCornerOffset = tooltipArrowComputedStyle
-      ? parseInt(tooltipArrowComputedStyle.getPropertyValue('--tooltip-arrow-corner-offset'), 10)
+      ? (cssLengthToPixels(tooltipArrowComputedStyle.getPropertyValue('--tooltip-arrow-corner-offset')) ?? 0)
       : 0;
-    tooltipArrowWidth = tooltipArrowComputedStyle ? parseInt(tooltipArrowComputedStyle.width, 10) : 0;
+
+    tooltipArrowWidth = 0;
+    if (tooltipArrowElement instanceof HTMLElement) {
+      const laidOutWidth = tooltipArrowElement.offsetWidth;
+      tooltipArrowWidth =
+        laidOutWidth > 0 ? laidOutWidth : (cssLengthToPixels(tooltipArrowComputedStyle?.width ?? '') ?? 0);
+    }
   }
 
   // Get props for the FloatingUI hook
