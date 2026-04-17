@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Box,
   Button,
@@ -16,7 +17,6 @@ import {
   Tag,
   Text,
 } from '../../../src/components';
-import React from 'react';
 
 export default {
   title: 'Examples/Layout Templates/Magazine',

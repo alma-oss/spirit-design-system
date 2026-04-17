@@ -1,5 +1,5 @@
+import React, { type CSSProperties } from 'react';
 import { Box, Button, Divider, Flex, Heading, Icon, Section, Tag, Text } from '../../../src/components';
-import React, { CSSProperties } from 'react';
 
 export default {
   title: 'Examples/Layout Templates/Pricing',

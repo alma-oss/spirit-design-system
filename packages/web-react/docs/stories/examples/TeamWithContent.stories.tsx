@@ -1,5 +1,5 @@
-import { Avatar, Container, Flex, Heading, Section, Text } from '../../../src/components';
 import React from 'react';
+import { Avatar, Container, Flex, Heading, Section, Text } from '../../../src/components';
 
 export default {
   title: 'Examples/Layout Templates/Team',

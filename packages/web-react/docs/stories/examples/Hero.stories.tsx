@@ -1,5 +1,5 @@
-import { Box, Card, CardBody, CardLink, CardTitle, Flex, Grid, Heading, Section, Text } from '../../../src/components';
 import React from 'react';
+import { Box, Card, CardBody, CardLink, CardTitle, Flex, Grid, Heading, Section, Text } from '../../../src/components';
 
 export default {
   title: 'Examples/Layout Templates/Hero',
@@ -22,22 +22,18 @@ export const WithCards = () => (
             <Heading elementType="h1" size="xlarge" marginBottom="space-0">
               With us,
               <br />
-              {"you'll find a company that suits you."}
+              you&apos;ll find a company that suits you.
             </Heading>
             <Text elementType="p" size="xlarge" textColor="secondary">
-              Browse verified company reviews from employees and use the company compass to find out where your interests
-              lie.
+              Browse verified company reviews from employees and use the company compass to find out where your
+              interests lie.
             </Text>
           </Flex>
         </Box>
 
         {/* Right: hero image */}
         <Box borderRadius="300" UNSAFE_style={{ flex: '1 0 0', height: '460px', overflow: 'hidden' }}>
-          <img
-            src={heroImage}
-            alt=""
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
+          <img src={heroImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </Box>
       </Flex>
 

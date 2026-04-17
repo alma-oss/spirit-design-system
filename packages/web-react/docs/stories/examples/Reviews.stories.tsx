@@ -1,5 +1,5 @@
-import { ActionGroup, Box, Button, Flex, Heading, Icon, Section, Tag, Text } from '../../../src/components';
 import React from 'react';
+import { ActionGroup, Box, Button, Flex, Heading, Icon, Section, Tag, Text } from '../../../src/components';
 
 export default {
   title: 'Examples/Layout Templates/Reviews',
@@ -51,7 +51,11 @@ const reviews: ReviewData[] = [
 ];
 
 const Testimonial = ({ review }: { review: ReviewData }) => (
-  <Box paddingTop="space-1100" paddingBottom="space-1100" UNSAFE_style={{ borderTop: '1px solid var(--themed/border/basic, #d9d9d9)' }}>
+  <Box
+    paddingTop="space-1100"
+    paddingBottom="space-1100"
+    UNSAFE_style={{ borderTop: '1px solid var(--themed/border/basic, #d9d9d9)' }}
+  >
     <Flex direction="vertical" spacing="space-1000" alignmentX="stretch" alignmentY="top">
       {/* Review section */}
       <Flex direction="vertical" spacing="space-800" alignmentX="stretch" alignmentY="top">
