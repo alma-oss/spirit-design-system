@@ -74,6 +74,8 @@ type(scope): description #DS-XXXX
 | `build`    | Build system changes                                    |
 | `revert`   | Reverts a previous commit                               |
 
+> **Note:** For dependency updates, use `chore` with the `deps` scope (e.g. `chore(deps): update react #DS-1234`), not `deps` as a commit type.
+
 ### Valid Scopes
 
 See the full list of valid commit scopes in [`@.commitlintrc.mjs`][commitlintrc]. This file is the source of truth for which scopes are accepted.
