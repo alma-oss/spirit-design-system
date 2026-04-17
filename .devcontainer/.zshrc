@@ -1,24 +1,49 @@
-# Prompt: green user, blue directory, reset
-PS1='%F{green}spirit-dev%f %F{blue}%~%f $ '
+# Powerlevel10k instant prompt — must be near the top of .zshrc
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-# Enable colored output
-autoload -U colors && colors
+# Oh My Zsh
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Enable colored ls and grep
+plugins=(git node yarn npm zsh-autosuggestions zsh-syntax-highlighting)
+
+source $ZSH/oh-my-zsh.sh
+
+# Persist zsh history across container restarts (SHARE_HISTORY implies append semantics)
+[[ -d /commandhistory ]] && export HISTFILE=/commandhistory/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt SHARE_HISTORY
+
+# Coloured output
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
-# Persist zsh history
-export HISTFILE=/commandhistory/.zsh_history
-export HISTSIZE=10000
-export SAVEHIST=10000
-setopt APPEND_HISTORY
-setopt SHARE_HISTORY
+# Personal aliases (mounted from host)
+[[ -f ~/.aliasses/default ]] && source ~/.aliasses/default
+[[ -f ~/.aliasses/docker ]] && source ~/.aliasses/docker
 
-# Smart completion
-autoload -Uz compinit && compinit
-zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'l:|=* r:|=*'
+# Claude Code wrapper: cc --yolo maps to --permission-mode bypassPermissions
+function cc() {
+  local args=()
+  for arg in "$@"; do
+    if [[ "$arg" == "--yolo" ]]; then
+      args+=("--permission-mode" "bypassPermissions")
+    else
+      args+=("$arg")
+    fi
+  done
+  claude "${args[@]}"
+}
 
-# Add Claude Code to PATH
+# Add Claude Code and local binaries to PATH
 export PATH="$HOME/.local/bin:$PATH"
+
+# GPG agent forwarded from host
+export GPG_TTY=$(tty)
+export GNUPGHOME="$HOME/.gnupg"
+
+# Powerlevel10k config (run `p10k configure` to regenerate)
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh

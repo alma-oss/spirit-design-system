@@ -4,7 +4,8 @@
     "dockerfile": "Dockerfile"
   },
 
-  "postCreateCommand": "corepack enable && corepack install && yarn install && yarn playwright install --with-deps chromium",
+  "initializeCommand": "gpgconf --launch gpg-agent 2>/dev/null; mkdir -p ${HOME}/.gnupg && (test -S ${HOME}/.gnupg/S.gpg-agent.extra || touch ${HOME}/.gnupg/S.gpg-agent.extra)",
+  "postCreateCommand": "cp -r /tmp/host-claude/. /home/node/.claude/ && corepack enable && corepack install && yarn install && yarn playwright install --with-deps chromium && (DOCKER_GID=$(stat -c '%g' /var/run/docker.sock 2>/dev/null) && sudo groupmod -g $DOCKER_GID docker 2>/dev/null || sudo chmod 666 /var/run/docker.sock) || true",
   "postStartCommand": "sudo chown -R $(id -u):$(id -g) /workspace/node_modules /workspace/.yarn/cache",
 
   "appPort": ["3456:3456", "6006:6006", "9323:9323"],
@@ -29,12 +30,45 @@
     "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
     "source=${localWorkspaceFolderBasename}-yarn-cache,target=${containerWorkspaceFolder}/.yarn/cache,type=volume",
     "source=claude-code-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
-    "source=claude-code-config-${devcontainerId},target=/home/node/.claude,type=volume",
-    "source=${localWorkspaceFolder}/.devcontainer/.zshrc,target=/home/node/.zshrc,type=bind"
+    "source=spirit-claude-config-${devcontainerId},target=/home/node/.claude,type=volume",
+    "source=${localEnv:HOME}/.claude,target=/tmp/host-claude,type=bind,readonly",
+    "source=${localWorkspaceFolder}/.devcontainer/.zshrc,target=/home/node/.zshrc,type=bind",
+    "source=${localWorkspaceFolder}/.devcontainer/.p10k.zsh,target=/home/node/.p10k.zsh,type=bind",
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+    "source=${localEnv:HOME}/.gnupg/S.gpg-agent.extra,target=/home/node/.gnupg/S.gpg-agent,type=bind",
+    "source=${localEnv:HOME}/.gitconfig,target=/home/node/.gitconfig,type=bind,readonly",
+    "source=${localEnv:HOME}/.aliasses,target=/home/node/.aliasses,type=bind,readonly",
+    "source=${localWorkspaceFolder}/../spirit-design-system/.git,target=${localEnv:HOME}/Work/_alma/spirit-design-system/.git,type=bind"
   ],
 
   "containerEnv": {
     "NODE_OPTIONS": "--max-old-space-size=4096",
     "CLAUDE_CONFIG_DIR": "/home/node/.claude"
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "EditorConfig.EditorConfig",
+        "stylelint.vscode-stylelint",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "eslint.validate": [
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact"
+        ],
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
   }
 }
