@@ -60,19 +60,7 @@ type(scope): description #DS-XXXX
 
 ### Types
 
-| Type       | Description                                             |
-| ---------- | ------------------------------------------------------- |
-| `feat`     | New feature                                             |
-| `fix`      | Bug fix                                                 |
-| `docs`     | Documentation only                                      |
-| `style`    | Code style (formatting, semicolons)                     |
-| `refactor` | Code change that neither fixes a bug nor adds a feature |
-| `test`     | Adding or correcting tests                              |
-| `chore`    | Maintenance tasks, dependencies                         |
-| `perf`     | Performance improvement                                 |
-| `ci`       | CI configuration changes                                |
-| `build`    | Build system changes                                    |
-| `revert`   | Reverts a previous commit                               |
+Use the same types as defined in the [Branch Naming](#branch-naming) section above.
 
 > **Note:** For dependency updates, use `chore` with the `deps` scope (e.g. `chore(deps): update react #DS-1234`), not `deps` as a commit type.
 
