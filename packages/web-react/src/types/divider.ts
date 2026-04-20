@@ -1,3 +1,4 @@
-import { type StyleProps, type TransferProps } from './shared';
+import { type ComponentPropsWithoutRef } from 'react';
+import { type StyleProps } from './shared';
 
-export interface SpiritDividerProps extends StyleProps, TransferProps {}
+export interface SpiritDividerProps extends StyleProps, Omit<ComponentPropsWithoutRef<'hr'>, 'className' | 'style'> {}

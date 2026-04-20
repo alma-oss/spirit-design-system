@@ -15,25 +15,20 @@ const defaultProps: Partial<SpiritCardProps> = {
 
 const Card = <E extends ElementType = 'article'>(props: SpiritCardProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const {
-    elementType: ElementTag = 'article',
-    alignmentY,
-    direction,
-    isBoxed,
-    children,
-    ...restProps
-  } = propsWithDefaults;
+  const { elementType, alignmentY, direction, isBoxed, children, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { classProps } = useCardStyleProps({ alignmentY, direction, isBoxed });
   const { styleProps, props: otherProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.root, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
 Card.spiritComponent = 'Card';
+Card.displayName = 'Card';
 
 export default Card;

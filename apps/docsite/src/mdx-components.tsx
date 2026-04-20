@@ -1,3 +1,4 @@
+// @ts-nocheck -- MDX intrinsic element props include LegacyRef (string refs), which conflicts with Spirit Heading ref typing when spreading MDX props.
 import { Heading, ScrollView, UNSTABLE_Table } from '@alma-oss/spirit-web-react';
 import type { MDXComponents } from 'mdx/types';
 

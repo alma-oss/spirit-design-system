@@ -1,9 +1,9 @@
 import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
 import classNames from 'classnames';
-import { type CSSProperties, type ElementType } from 'react';
+import { type CSSProperties } from 'react';
 import { DirectionAxis } from '../../constants';
 import { type DimensionCSSProperties, useClassNamePrefix, useDimensionStyle, useSpacingStyle } from '../../hooks';
-import { type DimensionType, type SpiritMatrixProps } from '../../types';
+import { type DimensionType, type MatrixProps } from '../../types';
 import { MATRIX_ROWS_DEFAULT } from './constants';
 
 export interface MatrixStyles<T> {
@@ -14,6 +14,10 @@ export interface MatrixStyles<T> {
   /** Style props for the element */
   styleProps: CSSProperties;
 }
+
+export type UseMatrixStyleProps = MatrixProps & {
+  itemsCount: number;
+};
 
 /**
  * Generates default responsive row styles for the Matrix component.
@@ -45,9 +49,7 @@ export const useDefaultResponsiveRowsStyle = (
   return style;
 };
 
-export function useMatrixStyleProps(
-  props: SpiritMatrixProps<ElementType>,
-): MatrixStyles<SpiritMatrixProps<ElementType>> {
+export function useMatrixStyleProps(props: UseMatrixStyleProps): MatrixStyles<MatrixProps> {
   const { cols, itemsCount, itemRows, rows, spacing, spacingX, spacingY, ...restProps } = props;
 
   const matrixClass = useClassNamePrefix('Matrix');
@@ -57,7 +59,7 @@ export function useMatrixStyleProps(
     ...useDimensionStyle(cols, `${matrixPrefix}-columns`),
     ...useDimensionStyle(rows, `${matrixPrefix}-rows`),
     ...useDimensionStyle(itemRows, `${matrixPrefix}-item-rows`),
-    ...useDefaultResponsiveRowsStyle(cols, rows, itemsCount as number, matrixPrefix),
+    ...useDefaultResponsiveRowsStyle(cols, rows, itemsCount, matrixPrefix),
     ...useSpacingStyle(spacing, matrixPrefix, DirectionAxis.X),
     ...useSpacingStyle(spacing, matrixPrefix, DirectionAxis.Y),
     ...useSpacingStyle(spacingX, matrixPrefix, DirectionAxis.X),

@@ -14,18 +14,20 @@ const defaultProps: Partial<SpiritPillProps> = {
 
 const Pill = <E extends ElementType = 'span', C = void>(props: SpiritPillProps<E, C>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag = 'span', children, ...restProps } = propsWithDefaults;
+  const { elementType, children, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { classProps, props: modifiedProps } = usePillStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
 Pill.spiritComponent = 'Pill';
+Pill.displayName = 'Pill';
 
 export default Pill;

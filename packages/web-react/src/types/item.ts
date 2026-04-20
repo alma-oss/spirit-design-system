@@ -1,5 +1,5 @@
 import { type ElementType, type ReactNode } from 'react';
-import { type StyleProps, type TransferProps } from './shared';
+import { type PolymorphicComponentProps, type StyleProps } from './shared';
 
 export const ITEM_SELECTION_DECORATOR_BACKGROUND = 'background';
 export const ITEM_SELECTION_DECORATOR_BOTH = 'both';
@@ -10,23 +10,14 @@ export type ItemSelectionDecorator =
   | typeof ITEM_SELECTION_DECORATOR_BOTH
   | typeof ITEM_SELECTION_DECORATOR_ICON;
 
-export interface AriaItemElementTypeProps<E extends ElementType = 'button'> {
-  /**
-   * The HTML element or React element used to render the item, e.g. 'div', 'span'.
-   *
-   * @default 'button'
-   */
-  elementType?: E;
-}
-
-export interface ItemStyleProps extends StyleProps, TransferProps {
+export interface ItemStyleProps extends StyleProps {
   isDisabled?: boolean;
   isSelected?: boolean;
   selectionDecorator?: ItemSelectionDecorator;
 }
 
-export interface SpiritItemProps<T extends ElementType = 'button'>
-  extends AriaItemElementTypeProps<T>, StyleProps, TransferProps {
+/** ===== INTERNAL API ===== */
+export interface ItemBaseProps extends StyleProps {
   helperText?: string;
   iconName?: string;
   isDisabled?: boolean;
@@ -34,3 +25,6 @@ export interface SpiritItemProps<T extends ElementType = 'button'>
   label: string | ReactNode;
   selectionDecorator?: ItemSelectionDecorator;
 }
+
+/** ===== PUBLIC API ===== */
+export type SpiritItemProps<E extends ElementType = 'button'> = PolymorphicComponentProps<E, ItemBaseProps>;

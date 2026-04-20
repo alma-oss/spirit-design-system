@@ -1,13 +1,6 @@
 import { type Placement, type Strategy } from '@floating-ui/react';
 import type { ElementType, ReactNode } from 'react';
-import type {
-  ChildrenProps,
-  ClickEvent,
-  ElementTypeProp,
-  PolymorphicComponentProps,
-  StyleProps,
-  TransferProps,
-} from './shared';
+import type { ChildrenProps, ClickEvent, PolymorphicComponentProps, SpiritDivElementProps, StyleProps } from './shared';
 
 /** ===== BASE API ===== */
 export const TOOLTIP_TRIGGER = {
@@ -58,9 +51,9 @@ export interface TooltipStyleProps extends TooltipBaseProps, TooltipState, Toolt
 export interface TooltipProps extends TooltipStyleProps {}
 
 // Sub-components receive props from JSX, but get state/handlers from context
-export interface TooltipPopoverProps extends ChildrenProps, StyleProps, TransferProps {}
-export interface TooltipTriggerProps extends StyleProps, TransferProps {
-  elementType?: ElementTypeProp;
+export interface TooltipPopoverProps extends ChildrenProps, SpiritDivElementProps {}
+
+export interface TooltipTriggerBaseProps extends StyleProps {
   children?: string | ReactNode | ((props: { isOpen: boolean }) => ReactNode);
 }
 
@@ -68,3 +61,8 @@ export interface UncontrolledTooltipProps extends TooltipStyleProps {}
 
 /** ===== PUBLIC API ===== */
 export type SpiritTooltipProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, TooltipProps>;
+
+export type TooltipTriggerProps<E extends ElementType = 'button'> = PolymorphicComponentProps<
+  E,
+  TooltipTriggerBaseProps
+>;

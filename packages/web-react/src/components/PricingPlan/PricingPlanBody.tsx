@@ -9,25 +9,27 @@ import { usePricingPlanStyleProps } from './usePricingPlanStyleProps';
 
 const defaultProps: Partial<SpiritPricingPlanBodyProps> = {
   description: undefined,
+  elementType: 'div',
   features: [],
 };
 
 const PricingPlanBody = <E extends ElementType = 'div'>(props: SpiritPricingPlanBodyProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
 
-  const { description, elementType: ElementTag = 'div', features = [], id, ...restProps } = propsWithDefaults;
+  const { description, elementType, features, id, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { classProps, props: modifiedProps } = usePricingPlanStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, {
+  const mergedStyleProps = mergeStyleProps(Component, {
     classProps: classProps.body.root,
     styleProps,
   });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       {description && <div>{description}</div>}
       <ul className={classProps.body.featureList}>
-        {features.map((feature, featureIndex) => {
+        {(features ?? []).map((feature, featureIndex) => {
           const featureItemKey = `featureItem-${featureIndex}`;
           const featureId = `${id}-feature-${featureIndex}`;
 
@@ -39,7 +41,7 @@ const PricingPlanBody = <E extends ElementType = 'div'>(props: SpiritPricingPlan
           );
         })}
       </ul>
-    </ElementTag>
+    </Component>
   );
 };
 

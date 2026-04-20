@@ -13,18 +13,20 @@ const defaultProps: Partial<SpiritCardTitleProps> = {
 
 const CardTitle = <E extends ElementType = 'h4'>(props: SpiritCardTitleProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag = 'h4', children, isHeading, ...restProps } = propsWithDefaults;
+  const { elementType, children, isHeading, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { classProps } = useCardStyleProps({ isHeading });
   const { styleProps, props: otherProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.title, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.title, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
 CardTitle.spiritComponent = 'CardTitle';
+CardTitle.displayName = 'CardTitle';
 
 export default CardTitle;

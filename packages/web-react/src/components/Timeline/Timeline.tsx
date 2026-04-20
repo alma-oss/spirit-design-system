@@ -14,18 +14,20 @@ const defaultProps: Partial<SpiritTimelineProps> = {
 
 const Timeline = <E extends ElementType = 'ol'>(props: SpiritTimelineProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag = 'ol', children, size, ...restProps } = propsWithDefaults;
+  const { elementType, children, size, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { classProps } = useTimelineStyleProps({ markerSize: size });
   const { styleProps, props: otherProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.root, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
 Timeline.spiritComponent = 'Timeline';
+Timeline.displayName = 'Timeline';
 
 export default Timeline;
