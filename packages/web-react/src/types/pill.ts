@@ -1,25 +1,16 @@
-import { type ComponentPropsWithRef, type ElementType } from 'react';
+import { type ElementType } from 'react';
 import { type PillColorsExtended } from '../components/Pill';
-import type { ChildrenProps, EmotionColorNamesType, StyleProps, TransferProps } from './shared';
+import type { ChildrenProps, EmotionColorNamesType, PolymorphicComponentProps, StyleProps } from './shared';
 
 export type PillColorsExtendedNamesType = (typeof PillColorsExtended)[keyof typeof PillColorsExtended];
 
 export type PillColor<C> = EmotionColorNamesType<C> | PillColorsExtendedNamesType | C;
 
-export interface AriaPillElementTypeProps<E extends ElementType = 'span'> {
-  /**
-   * The HTML element or React element used to render the pill, e.g. 'div', 'span'.
-   *
-   * @default 'span'
-   */
-  elementType?: E;
+/** ===== INTERNAL API ===== */
+export interface PillProps<C = void> extends ChildrenProps, StyleProps {
+  /** The color of the pill. */
+  color?: PillColor<C>;
 }
 
-export interface PillProps extends ChildrenProps, StyleProps, TransferProps {}
-
-export type SpiritPillProps<E extends ElementType = 'span', C = void> = AriaPillElementTypeProps<E> &
-  ComponentPropsWithRef<E> &
-  PillProps & {
-    /** The color of the pill. */
-    color?: PillColor<C>;
-  };
+/** ===== PUBLIC API ===== */
+export type SpiritPillProps<E extends ElementType = 'span', C = void> = PolymorphicComponentProps<E, PillProps<C>>;

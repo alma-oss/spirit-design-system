@@ -1,18 +1,8 @@
 import classNames from 'classnames';
-import { type ElementType } from 'react';
 import { useClassNamePrefix } from '../../hooks';
-import { type HeadingProps, type SpiritHeadingProps } from '../../types';
+import { type HeadingProps } from '../../types';
 
-export interface HeadingStyles<E extends ElementType> {
-  /** className props */
-  classProps: string | null;
-  /** props to be passed to the input element */
-  props: Omit<HeadingProps<E>, 'elementType'>;
-}
-
-export function useHeadingStyleProps<E extends ElementType, S = void, Emph = void>(
-  props: Omit<SpiritHeadingProps<E, S, Emph>, 'elementType'>,
-): HeadingStyles<E> {
+export function useHeadingStyleProps<S = void, Emph = void, C = void>(props: HeadingProps<S, Emph, C>) {
   const { emphasis, size, textColor, ...restProps } = props;
 
   const headingClass = useClassNamePrefix('typography-heading');

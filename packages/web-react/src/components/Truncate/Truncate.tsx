@@ -13,7 +13,8 @@ const defaultProps = {
 
 const Truncate = <E extends ElementType = 'span'>(props: SpiritTruncateProps<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { children, elementType: ElementTag = 'span', ...restProps } = propsWithDefaults;
+  const { children, elementType, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const {
     classProps,
     props: modifiedProps,
@@ -33,15 +34,16 @@ const Truncate = <E extends ElementType = 'span'>(props: SpiritTruncateProps<E>)
       ...truncateStyle,
     },
   };
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, truncateStyleProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, truncateStyleProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       {truncatedText}
-    </ElementTag>
+    </Component>
   );
 };
 
 Truncate.spiritComponent = 'Truncate';
+Truncate.displayName = 'Truncate';
 
 export default Truncate;

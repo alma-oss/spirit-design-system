@@ -1,6 +1,6 @@
-import { type SpiritDetailedHTMLProps, type StyleProps, type TransferProps } from '../../types/shared';
+import { type SpiritDetailedHTMLProps, type StyleProps } from '../../types/shared';
 
-export interface UnstableTableProps extends StyleProps, TransferProps {
+export interface UnstableTableProps extends StyleProps {
   isStriped?: boolean;
   isBordered?: boolean;
   isCompact?: boolean;

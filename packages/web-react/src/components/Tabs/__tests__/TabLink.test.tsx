@@ -30,11 +30,7 @@ describe('TabLink', () => {
   });
 
   it('should render button element', () => {
-    const dom = render(
-      <TabLink href="https://www.example.com" elementType="button">
-        Hello World
-      </TabLink>,
-    );
+    const dom = render(<TabLink elementType="button">Hello World</TabLink>);
 
     const element = dom.container.querySelector('button') as HTMLElement;
 

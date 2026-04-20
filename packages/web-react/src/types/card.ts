@@ -11,7 +11,6 @@ import {
   type PolymorphicComponentProps,
   type SingleOrResponsive,
   type StyleProps,
-  type TransferProps,
 } from './shared';
 
 export const CardSizes = {
@@ -26,28 +25,20 @@ export type CardAlignmentXType = SingleOrResponsive<NonNullable<AlignmentXDictio
 
 export type CardAlignmentYType = SingleOrResponsive<NonNullable<AlignmentYDictionaryType>>;
 
-export interface CardElementTypeProps<E extends ElementType = 'article'> {
-  /**
-   * The HTML element or React element used to render the Card, e.g. 'div'.
-   *
-   * @default 'article'
-   */
-  elementType?: E;
-}
-
 // Card types
 export type CardDirectionType =
   | NonNullable<DirectionExtendedDictionaryType>
   | { [key: string]: NonNullable<DirectionExtendedDictionaryType> };
 
-export interface CardProps<E extends ElementType = 'article'> extends CardElementTypeProps<E> {
+/** ===== INTERNAL API ===== */
+export interface CardProps extends ChildrenProps, StyleProps {
   alignmentY?: CardAlignmentYType;
   direction?: CardDirectionType;
   isBoxed?: boolean;
 }
 
-export interface SpiritCardProps<T extends ElementType = 'article'>
-  extends CardProps<T>, ChildrenProps, StyleProps, TransferProps {}
+/** ===== PUBLIC API ===== */
+export type SpiritCardProps<E extends ElementType = 'article'> = PolymorphicComponentProps<E, CardProps>;
 
 export type CardMediaBackgroundColorsType =
   | BackgroundColorsDictionaryType
@@ -64,44 +55,43 @@ export interface CardMediaProps {
   size?: CardSizesDictionaryType;
 }
 
-export interface SpiritCardMediaProps extends CardMediaProps, ChildrenProps, StyleProps, TransferProps {}
+export interface SpiritCardMediaProps extends CardMediaProps, ChildrenProps, StyleProps {}
 
 // CardLogo types
-export interface SpiritCardLogoProps extends ChildrenProps, StyleProps, TransferProps {}
+export interface SpiritCardLogoProps extends ChildrenProps, StyleProps {}
 
 // CardArtwork types
 export interface CardArtworkProps {
   alignmentX?: CardAlignmentXType;
 }
-export interface SpiritCardArtworkProps extends CardArtworkProps, ChildrenProps, StyleProps, TransferProps {}
+export interface SpiritCardArtworkProps extends CardArtworkProps, ChildrenProps, StyleProps {}
 
 // CardBody types
 export interface CardBodyProps {
   isSelectable?: boolean;
 }
 
-export interface SpiritCardBodyProps extends CardBodyProps, ChildrenProps, StyleProps, TransferProps {}
+export interface SpiritCardBodyProps extends CardBodyProps, ChildrenProps, StyleProps {}
 
 // CardEyebrow types
-export interface SpiritCardEyebrowProps extends ChildrenProps, StyleProps, TransferProps {}
+export interface SpiritCardEyebrowProps extends ChildrenProps, StyleProps {}
 
 // CardTitle types
-export interface CardTitleProps {
+export interface CardTitleProps extends ChildrenProps, StyleProps {
   isHeading?: boolean;
 }
 
-export interface SpiritCardTitleProps<T extends ElementType = 'h4'>
-  extends CardTitleProps, CardElementTypeProps<T>, ChildrenProps, StyleProps, TransferProps {}
+export type SpiritCardTitleProps<E extends ElementType = 'h4'> = PolymorphicComponentProps<E, CardTitleProps>;
 
 // CardFooter types
 export interface CardFooterProps {
   alignmentX?: CardAlignmentXType;
 }
 
-export interface SpiritCardFooterProps extends CardFooterProps, ChildrenProps, StyleProps, TransferProps {}
+export interface SpiritCardFooterProps extends CardFooterProps, ChildrenProps, StyleProps {}
 
 // CardLink types
-export interface CardLinkProps extends ChildrenProps, StyleProps, TransferProps {
+export interface CardLinkProps extends ChildrenProps, StyleProps {
   href?: string;
 }
 

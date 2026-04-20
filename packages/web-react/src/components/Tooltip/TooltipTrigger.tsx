@@ -1,30 +1,32 @@
 'use client';
 
-import React from 'react';
+import React, { type ElementType } from 'react';
 import { useStyleProps } from '../../hooks';
 import { type TooltipTriggerProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useTooltipContext } from './TooltipContext';
 
-const defaultProps: Partial<TooltipTriggerProps> = {
+const defaultProps: Partial<TooltipTriggerProps<ElementType>> = {
   elementType: 'button',
   children: null,
 };
 
-const TooltipTrigger = (props: TooltipTriggerProps) => {
+const TooltipTrigger = <E extends ElementType = 'button'>(props: TooltipTriggerProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag = 'button', children, ...restProps } = propsWithDefaults;
+  const { elementType, children, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { id, isOpen, triggerRef, getReferenceProps } = useTooltipContext();
   const { styleProps: triggerStyleProps, props: transferProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { triggerStyleProps, transferProps });
+  const mergedStyleProps = mergeStyleProps(Component, { triggerStyleProps, transferProps });
 
   return (
-    <ElementTag {...transferProps} {...mergedStyleProps} id={id} ref={triggerRef} {...getReferenceProps()}>
+    <Component {...transferProps} {...mergedStyleProps} id={id} ref={triggerRef} {...getReferenceProps()}>
       {typeof children === 'function' ? children({ isOpen }) : children}
-    </ElementTag>
+    </Component>
   );
 };
 
 TooltipTrigger.spiritComponent = 'TooltipTrigger';
+TooltipTrigger.displayName = 'TooltipTrigger';
 
 export default TooltipTrigger;

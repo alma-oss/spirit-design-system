@@ -40,5 +40,6 @@ const InputDetails = <E extends ElementType = 'div'>(props: InputDetailsProps<E>
 };
 
 InputDetails.spiritComponent = 'InputDetails';
+InputDetails.displayName = 'InputDetails';
 
 export default InputDetails;

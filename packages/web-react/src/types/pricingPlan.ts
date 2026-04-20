@@ -1,5 +1,5 @@
 import type { ElementType, ReactNode } from 'react';
-import type { ChildrenProps, RequiredProps, SpiritPolymorphicElementPropsWithRef, StyleProps } from './shared';
+import type { ChildrenProps, PolymorphicComponentProps, RequiredProps, StyleProps } from './shared';
 
 export interface PricingPlanBaseProps extends ChildrenProps, StyleProps {
   /** If pricing plan has comparable features  */
@@ -39,25 +39,22 @@ export interface PricingPlanBodyBaseProps extends StyleProps, RequiredProps {
   features?: PricingPlanFeature[];
 }
 
-export type PricingPlanProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the plan, e.g. 'div', 'a', or `RouterLink`.
-   *
-   * @default 'article'
-   */
-  elementType?: E;
-};
+export interface PricingPlanFooterBaseProps extends StyleProps, ChildrenProps {}
 
-export type SpiritPricingPlanProps<E extends ElementType = 'article'> = PricingPlanProps<E> &
-  PricingPlanBaseProps &
-  SpiritPolymorphicElementPropsWithRef<E, PricingPlanProps<E>>;
-export type SpiritPricingPlanHeaderProps<E extends ElementType = 'header'> = PricingPlanProps<E> &
-  PricingPlanHeaderBaseProps &
-  Omit<SpiritPolymorphicElementPropsWithRef<E, PricingPlanProps<E>>, 'title'>;
-export type SpiritPricingPlanBodyProps<E extends ElementType = 'div'> = PricingPlanProps<E> &
-  PricingPlanBodyBaseProps &
-  SpiritPolymorphicElementPropsWithRef<E, PricingPlanProps<E>>;
-export type SpiritPricingPlanFooterProps<E extends ElementType = 'footer'> = PricingPlanProps<E> &
-  StyleProps &
-  ChildrenProps &
-  SpiritPolymorphicElementPropsWithRef<E, PricingPlanProps<E>>;
+/** ===== PUBLIC API ===== */
+export type SpiritPricingPlanProps<E extends ElementType = 'article'> = PolymorphicComponentProps<
+  E,
+  PricingPlanBaseProps
+>;
+export type SpiritPricingPlanHeaderProps<E extends ElementType = 'header'> = PolymorphicComponentProps<
+  E,
+  PricingPlanHeaderBaseProps
+>;
+export type SpiritPricingPlanBodyProps<E extends ElementType = 'div'> = PolymorphicComponentProps<
+  E,
+  PricingPlanBodyBaseProps
+>;
+export type SpiritPricingPlanFooterProps<E extends ElementType = 'footer'> = PolymorphicComponentProps<
+  E,
+  PricingPlanFooterBaseProps
+>;

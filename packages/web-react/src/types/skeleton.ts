@@ -2,26 +2,17 @@ import { type ElementType } from 'react';
 import {
   type BorderRadiiDictionaryType,
   type ChildrenProps,
+  type PolymorphicComponentProps,
   type SingleOrResponsive,
   type SizeExtendedDictionaryType,
   type StyleProps,
-  type TransferProps,
 } from './shared';
-
-export interface AriaSkeletonElementTypeProps<E extends ElementType = 'div'> {
-  /**
-   * The HTML element or React element used to render the Skeleton, e.g. 'div', 'span'.
-   *
-   * @default 'div'
-   */
-  elementType?: E;
-}
 
 export type SkeletonSize<C> = SizeExtendedDictionaryType | C;
 
 export type SkeletonRadius<C> = SingleOrResponsive<BorderRadiiDictionaryType> | C;
 
-export interface SkeletonProps extends ChildrenProps, StyleProps, TransferProps {}
+export interface SkeletonProps extends ChildrenProps, StyleProps {}
 
 export interface SkeletonStyleProps<C = void> {
   width: number;
@@ -29,16 +20,28 @@ export interface SkeletonStyleProps<C = void> {
   borderRadius?: SkeletonRadius<C>;
 }
 
-export interface SpiritSkeletonProps<T extends ElementType = 'div', C = void>
-  extends AriaSkeletonElementTypeProps<T>, SkeletonProps {
+/** ===== INTERNAL API ===== */
+export interface SkeletonBaseProps<C = void> extends SkeletonProps {
   size?: SkeletonSize<C>;
   lines?: number;
 }
+
+/** ===== PUBLIC API ===== */
+export type SpiritSkeletonProps<E extends ElementType = 'div', C = void> = PolymorphicComponentProps<
+  E,
+  SkeletonBaseProps<C>
+>;
 
 export type SkeletonShapeStyleProps<T extends ElementType = 'div', C = void> = Pick<
   SpiritSkeletonShapeProps<T, C>,
   keyof SkeletonStyleProps<C>
 >;
 
-export interface SpiritSkeletonShapeProps<T extends ElementType = 'div', C = void>
-  extends AriaSkeletonElementTypeProps<T>, SkeletonProps, SkeletonStyleProps<C> {}
+/** ===== INTERNAL API ===== */
+export interface SkeletonShapeBaseProps<C = void> extends SkeletonProps, SkeletonStyleProps<C> {}
+
+/** ===== PUBLIC API ===== */
+export type SpiritSkeletonShapeProps<E extends ElementType = 'div', C = void> = PolymorphicComponentProps<
+  E,
+  SkeletonShapeBaseProps<C>
+>;

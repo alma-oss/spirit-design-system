@@ -1,25 +1,25 @@
 import { type ElementType, type ReactNode } from 'react';
 import { type RegisterType } from '../../hooks/useAriaIdRefs';
-import { type ChildrenProps, type StyleProps, type TransferProps, type ValidationTextProp } from '../../types';
+import {
+  type ChildrenProps,
+  type PolymorphicComponentProps,
+  type StyleProps,
+  type ValidationTextProp,
+} from '../../types';
 
-export interface FieldElementTypeProps<E extends ElementType = 'div'> {
-  /**
-   * The HTML element or React element used to render the pill, e.g. 'div', 'span'.
-   *
-   * @default 'div'
-   */
-  elementType?: E;
-}
-
-export interface FieldProps<E extends ElementType = 'div'> extends FieldElementTypeProps<E> {
+/** ===== INTERNAL API ===== */
+export interface FieldBaseProps {
   id?: string;
   registerAria?: RegisterType;
 }
 
-export interface HelperTextProps<T extends ElementType = 'div'>
-  extends FieldProps<T>, StyleProps, ChildrenProps, TransferProps {
+export interface HelperTextBaseProps extends FieldBaseProps, StyleProps, ChildrenProps {
   helperText: ReactNode;
 }
 
-export interface ValidationTextProps<T extends ElementType = 'div'>
-  extends FieldProps<T>, ValidationTextProp, StyleProps, ChildrenProps, TransferProps {}
+export interface ValidationTextBaseProps extends FieldBaseProps, ValidationTextProp, StyleProps, ChildrenProps {}
+
+/** ===== PUBLIC API ===== */
+export type HelperTextProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, HelperTextBaseProps>;
+
+export type ValidationTextProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, ValidationTextBaseProps>;

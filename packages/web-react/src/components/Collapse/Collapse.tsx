@@ -27,20 +27,16 @@ const defaultProps: Partial<SpiritCollapseProps> = {
 
 const Collapse = (props: SpiritCollapseProps) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const {
-    elementType: ElementTag = defaultProps.elementType as ElementType,
-    children,
-    transitionDuration = TRANSITION_DURATION,
-    ...restProps
-  } = propsWithDefaults;
+  const { elementType, children, transitionDuration = TRANSITION_DURATION, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
 
-  const rootElementRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
-  const collapseElementRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
+  const rootElementRef: MutableRefObject<HTMLElement | null> = useRef(null);
+  const collapseElementRef: MutableRefObject<HTMLElement | null> = useRef(null);
   const collapseHeight = useResizeHeight(collapseElementRef);
 
   const { classProps, styleProps: collapseStyleProps } = useCollapseStyleProps(
     restProps.isOpen,
-    ElementTag,
+    Component,
     collapseHeight,
   );
   const { ariaProps, props: otherProps } = useCollapseAriaProps(restProps);
@@ -52,7 +48,7 @@ const Collapse = (props: SpiritCollapseProps) => {
   };
 
   // For inline elements, when open, render content outside the collapse element
-  const isInlineElement = ElementTag === 'span';
+  const isInlineElement = Component === 'span';
   if (isInlineElement && restProps.isOpen) {
     return children;
   }
@@ -60,10 +56,10 @@ const Collapse = (props: SpiritCollapseProps) => {
   return (
     <Transition in={restProps.isOpen} nodeRef={rootElementRef} timeout={transitionDuration}>
       {(transitionState: TransitionStatus) => (
-        <ElementTag
+        <Component
           {...transferProps}
           {...ariaProps.root}
-          {...mergeStyleProps(ElementTag, {
+          {...mergeStyleProps(Component, {
             classProps: classProps.root,
             styleProps,
             collapseStyleProps: mergedCollapseStyleProps,
@@ -71,15 +67,16 @@ const Collapse = (props: SpiritCollapseProps) => {
           })}
           ref={rootElementRef}
         >
-          <ElementTag ref={collapseElementRef} className={classProps.content}>
+          <Component ref={collapseElementRef} className={classProps.content}>
             {children}
-          </ElementTag>
-        </ElementTag>
+          </Component>
+        </Component>
       )}
     </Transition>
   );
 };
 
 Collapse.spiritComponent = 'Collapse';
+Collapse.displayName = 'Collapse';
 
 export default Collapse;

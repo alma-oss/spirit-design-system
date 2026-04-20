@@ -13,15 +13,10 @@ const defaultProps: Partial<HelperTextProps> = {
 
 const HelperText = <E extends ElementType = 'div'>(props: HelperTextProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const {
-    helperText,
-    elementType: ElementTag = defaultProps.elementType as ElementType,
-    id,
-    registerAria,
-    ...restProps
-  } = propsWithDefaults;
+  const { helperText, elementType, id, registerAria, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { styleProps, transferProps });
+  const mergedStyleProps = mergeStyleProps(Component, { styleProps, transferProps });
 
   useEffect(() => {
     helperText && registerAria?.({ add: id });
@@ -33,9 +28,9 @@ const HelperText = <E extends ElementType = 'div'>(props: HelperTextProps<E>) =>
 
   if (helperText) {
     return (
-      <ElementTag {...transferProps} {...mergedStyleProps} id={id}>
+      <Component {...transferProps} {...mergedStyleProps} id={id}>
         {helperText}
-      </ElementTag>
+      </Component>
     );
   }
 
@@ -43,5 +38,6 @@ const HelperText = <E extends ElementType = 'div'>(props: HelperTextProps<E>) =>
 };
 
 HelperText.spiritComponent = 'HelperText';
+HelperText.displayName = 'HelperText';
 
 export default HelperText;

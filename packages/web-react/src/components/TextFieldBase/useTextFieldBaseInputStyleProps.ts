@@ -1,5 +1,5 @@
 import { useClassNamePrefix } from '../../hooks';
-import { type SpiritTextFieldBaseInputProps, type TextFieldBaseProps } from '../../types';
+import { type RequiredProps, type TextFieldBaseInputProps, type TextFieldBaseProps } from '../../types';
 
 export interface TextFieldBaseInputStyles {
   /** className props */
@@ -10,7 +10,9 @@ export interface TextFieldBaseInputStyles {
   props: TextFieldBaseProps;
 }
 
-export function useTextFieldBaseInputStyleProps(props: SpiritTextFieldBaseInputProps): TextFieldBaseInputStyles {
+export function useTextFieldBaseInputStyleProps(
+  props: RequiredProps & TextFieldBaseInputProps,
+): TextFieldBaseInputStyles {
   const { isMultiline, id, ...restProps } = props;
 
   const TextFieldBaseClass = useClassNamePrefix(isMultiline ? 'TextArea' : 'TextField');

@@ -8,10 +8,8 @@ import {
   type ValidationTextType,
 } from './shared';
 
-export type FieldGroupElementBaseProps = SpiritFieldGroupElementPropsWithRef;
-
 export interface FieldGroupProps
-  extends FieldGroupElementBaseProps, LabelProps, HelperTextProps, RequiredProps, Validation {
+  extends SpiritFieldGroupElementPropsWithRef, LabelProps, HelperTextProps, RequiredProps, Validation {
   isDisabled?: boolean;
   isFluid?: boolean;
   isLabelHidden?: boolean;

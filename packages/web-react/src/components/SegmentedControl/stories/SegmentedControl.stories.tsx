@@ -2,7 +2,7 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useEffect, useState } from 'react';
 import { FillVariants } from '../../../constants';
-import { type SegmentedControlProps } from '../../../types/segmentedControl';
+import { type SpiritSegmentedControlProps } from '../../../types/segmentedControl';
 import { Icon } from '../../Icon';
 import { VisuallyHidden } from '../../VisuallyHidden';
 import ReadMe from '../README.md?raw';
@@ -82,7 +82,7 @@ const meta: Meta<typeof SegmentedControl> = {
 export default meta;
 type Story = StoryObj<typeof SegmentedControl>;
 
-const SegmentedControlWithHooks = ({ name, label, children, ...args }: SegmentedControlProps) => {
+const SegmentedControlWithHooks = ({ name, label, children, ...args }: SpiritSegmentedControlProps) => {
   const defaultSingleValue = 'value-1';
   const defaultMultipleValue = ['value-1'];
 

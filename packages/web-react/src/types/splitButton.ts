@@ -3,16 +3,17 @@ import type {
   ChildrenProps,
   ComponentButtonColorNamesType,
   PlacementDictionaryType,
+  SpiritDivElementProps,
   StyleProps,
-  TransferProps,
 } from './shared';
 
-export interface SplitButtonProps extends TransferProps, StyleProps, ChildrenProps {}
+export interface SplitButtonProps extends StyleProps, ChildrenProps, Omit<SpiritDivElementProps, 'color'> {}
 
 export type SplitButtonColorType<C> = Exclude<ComponentButtonColorNamesType<C>, 'plain'>;
 
 export interface SpiritSplitButtonProps<C = void, S = void> extends SplitButtonProps {
   color?: SplitButtonColorType<C>;
+  isDisabled?: boolean;
   size?: ButtonSize<S>;
 }
 

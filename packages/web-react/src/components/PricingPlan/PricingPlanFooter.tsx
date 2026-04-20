@@ -6,17 +6,23 @@ import type { SpiritPricingPlanFooterProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { usePricingPlanStyleProps } from './usePricingPlanStyleProps';
 
+const defaultProps: Partial<SpiritPricingPlanFooterProps> = {
+  elementType: 'footer',
+};
+
 const PricingPlanFooter = <E extends ElementType = 'footer'>(props: SpiritPricingPlanFooterProps<E>) => {
-  const { children, elementType: ElementTag = 'footer', ...restProps } = props;
+  const propsWithDefaults = { ...defaultProps, ...props };
+  const { children, elementType, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
 
   const { classProps, props: modifiedProps } = usePricingPlanStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.footer, styleProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.footer, styleProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
