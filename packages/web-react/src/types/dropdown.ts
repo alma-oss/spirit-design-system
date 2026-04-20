@@ -1,4 +1,4 @@
-import { type ComponentPropsWithRef, type ElementType, type LegacyRef, type ReactNode } from 'react';
+import { type ElementType, type LegacyRef, type ReactNode } from 'react';
 import {
   type AlignmentXExtendedDictionaryType,
   type AlignmentYExtendedDictionaryType,
@@ -6,6 +6,7 @@ import {
   type ChildrenProps,
   type ClickEvent,
   type PlacementDictionaryType,
+  type PolymorphicComponentProps,
   type StyleProps,
 } from './shared';
 
@@ -57,8 +58,13 @@ export interface SpiritDropdownProps extends DropdownProps, ChildrenProps {
 
 export interface UncontrolledDropdownProps extends ChildrenProps, Omit<SpiritDropdownProps, 'isOpen' | 'onToggle'> {}
 
-export type DropdownTriggerProps<E extends ElementType> = {
-  elementType?: E;
+/** ===== INTERNAL API ===== */
+export interface DropdownTriggerBaseProps extends StyleProps {
   children: string | ReactNode | ((props: { isOpen: boolean }) => ReactNode);
-} & ComponentPropsWithRef<E> &
-  StyleProps;
+}
+
+/** ===== PUBLIC API ===== */
+export type DropdownTriggerProps<E extends ElementType = 'button'> = PolymorphicComponentProps<
+  E,
+  DropdownTriggerBaseProps
+>;

@@ -32,7 +32,7 @@ const BreadcrumbsCustom = () => {
 
         const linkParams = {
           underlined: isLastItem ? UNDERLINED_OPTIONS.HOVER : UNDERLINED_OPTIONS.ALWAYS,
-          'aria-current': isLastItem ? 'page' : undefined,
+          'aria-current': isLastItem ? ('page' as const) : undefined,
           color: isLastItem ? LinkColors.SECONDARY : LinkColors.PRIMARY,
         };
 

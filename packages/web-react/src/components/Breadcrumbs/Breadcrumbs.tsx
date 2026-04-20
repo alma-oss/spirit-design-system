@@ -14,15 +14,16 @@ const defaultProps: Partial<SpiritBreadcrumbsProps> = {
 
 const Breadcrumbs = <E extends ElementType = 'nav'>(props: SpiritBreadcrumbsProps<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { children, elementType: ElementTag = 'nav', goBackTitle, items, ...restProps } = propsWithDefaults;
+  const { children, elementType, goBackTitle, items, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { classProps, props: modifiedProps } = useBreadcrumbsStyleProps({ ...restProps });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.root, styleProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps });
 
   const isLast = (index: number, itemsCount: number) => index === itemsCount - 1;
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps} aria-label="Breadcrumb">
+    <Component {...otherProps} {...mergedStyleProps} aria-label="Breadcrumb">
       <ol>
         {children ||
           items?.map((item, index) => (
@@ -38,10 +39,11 @@ const Breadcrumbs = <E extends ElementType = 'nav'>(props: SpiritBreadcrumbsProp
             </Fragment>
           ))}
       </ol>
-    </ElementTag>
+    </Component>
   );
 };
 
 Breadcrumbs.spiritComponent = 'Breadcrumbs';
+Breadcrumbs.displayName = 'Breadcrumbs';
 
 export default Breadcrumbs;

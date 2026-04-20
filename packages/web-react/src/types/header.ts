@@ -10,7 +10,6 @@ import {
   type SpiritSpanElementProps,
   type SpiritUListElementProps,
   type StyleProps,
-  type TransferProps,
 } from './shared';
 
 /** ===== BASE API ===== */
@@ -68,11 +67,11 @@ export interface HeaderNavProps extends SpiritUListElementProps, ChildrenProps {
 export interface HeaderNavItemProps extends SpiritLItemElementProps, ChildrenProps {}
 
 /** ===== STYLE API ===== */
-export interface HeaderDialogLinkStyleProps extends ChildrenProps, StyleProps, TransferProps, RouterLinkProps {
+export interface HeaderDialogLinkStyleProps extends ChildrenProps, StyleProps, RouterLinkProps {
   isCurrent?: boolean;
 }
 
-export interface HeaderLinkStyleProps extends ChildrenProps, StyleProps, TransferProps, RouterLinkProps {
+export interface HeaderLinkStyleProps extends ChildrenProps, StyleProps, RouterLinkProps {
   isCurrent?: boolean;
 }
 

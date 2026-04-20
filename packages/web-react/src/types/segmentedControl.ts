@@ -2,8 +2,8 @@ import {
   type ChildrenProps,
   type FillVariantDictionaryType,
   type SpiritInputElementProps,
+  type SpiritSegmentedControlElementProps,
   type StyleProps,
-  type TransferProps,
 } from './shared';
 
 export interface SegmentedControlBaseProps extends SegmentedControlMultiselectProps {
@@ -18,11 +18,11 @@ export interface SegmentedControlMultiselectProps {
   isMultiselect?: boolean;
 }
 
-export interface SegmentedControlItemProps extends StyleProps, SpiritInputElementProps, ChildrenProps, TransferProps {
+export interface SegmentedControlItemProps extends StyleProps, SpiritInputElementProps, ChildrenProps {
   isDisabled?: boolean;
 }
 
-export interface SegmentedControlProps extends ChildrenProps, StyleProps, TransferProps {}
+export interface SegmentedControlProps extends ChildrenProps, StyleProps, SpiritSegmentedControlElementProps {}
 
 export interface SpiritSegmentedControlItemProps extends SegmentedControlItemProps {}
 

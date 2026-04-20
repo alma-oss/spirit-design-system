@@ -5,19 +5,21 @@ import {
   type PolymorphicComponentProps,
   type RouterLinkProps,
   type SpacingProp,
+  type SpiritButtonElementProps,
+  type SpiritDivElementProps,
+  type SpiritUListElementProps,
   type StyleProps,
-  type TransferProps,
 } from './shared';
 
 export type TabId = string | number;
 
-export type TabListProps = ChildrenProps & TransferProps;
+export type TabListProps = ChildrenProps & SpiritUListElementProps;
 
 export interface TabsOnSelectionChange {
   onSelectionChange?: (previousId: TabId, currentId?: TabId) => void;
 }
 
-export interface TabItemProps extends ChildrenProps, TransferProps, ClickEvents {
+export interface TabItemProps extends ChildrenProps, ClickEvents, Omit<SpiritButtonElementProps, 'onClick'> {
   forTabPane: TabId;
 }
 
@@ -30,7 +32,7 @@ export interface SpiritTabsProps extends SpacingProp {
   forTabPane?: TabId;
 }
 
-export interface TabsProps extends ChildrenProps, SpacingProp, TransferProps, TabsOnSelectionChange {
+export interface TabsProps extends ChildrenProps, SpacingProp, TabsOnSelectionChange {
   selectedTab: TabId;
   toggle: TabsToggler;
 }
@@ -38,7 +40,7 @@ export interface TabsProps extends ChildrenProps, SpacingProp, TransferProps, Ta
 export type TabLinkItemProps = StyleProps & HTMLProps<HTMLLIElement>;
 
 /** ===== BASE API ===== */
-export interface TabLinkBaseProps extends ChildrenProps, StyleProps, TransferProps, RouterLinkProps {}
+export interface TabLinkBaseProps extends ChildrenProps, StyleProps, RouterLinkProps {}
 
 /** ===== STYLE API ===== */
 export interface TabLinkStyleProps extends TabLinkBaseProps {
@@ -58,12 +60,12 @@ export interface TabsContextType extends SpacingProp, TabsOnSelectionChange {
   selectTab: TabsToggler;
 }
 
-export interface TabPaneProps extends ChildrenProps, TransferProps {
+export interface TabPaneProps extends ChildrenProps, Omit<SpiritDivElementProps, 'id'> {
   id: TabId;
 }
 
-export type TabContentProps = ChildrenProps & TransferProps;
+export type TabContentProps = ChildrenProps & SpiritDivElementProps;
 
-export interface UncontrolledTabsProps extends ChildrenProps, SpacingProp, TransferProps, TabsOnSelectionChange {
+export interface UncontrolledTabsProps extends ChildrenProps, SpacingProp, TabsOnSelectionChange {
   defaultSelectedTab: TabId;
 }

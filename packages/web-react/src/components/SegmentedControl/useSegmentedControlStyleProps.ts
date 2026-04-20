@@ -3,7 +3,7 @@ import { FillVariants } from '../../constants';
 import { useClassNamePrefix } from '../../hooks';
 import { type SpiritSegmentedControlProps } from '../../types/segmentedControl';
 
-export interface UseSegmentedControlStylesProps extends Omit<SpiritSegmentedControlProps, 'name'> {}
+export interface UseSegmentedControlStylesProps extends Partial<Omit<SpiritSegmentedControlProps, 'name'>> {}
 
 export interface UseSegmentedControlStylesReturn {
   /** className props */
@@ -13,7 +13,7 @@ export interface UseSegmentedControlStylesReturn {
     label: string;
   };
   /** props to be passed to the element */
-  props: Omit<SpiritSegmentedControlProps, 'name'>;
+  props: UseSegmentedControlStylesProps;
 }
 
 export const useSegmentedControlStyleProps = (

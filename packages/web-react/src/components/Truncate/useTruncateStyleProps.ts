@@ -1,20 +1,12 @@
-import { type CSSProperties, type ElementType } from 'react';
+import { type CSSProperties } from 'react';
 import { useClassNamePrefix } from '../../hooks';
-import { type SpiritTruncateProps, type TruncateMode, TruncateModes } from '../../types';
+import { TruncateModes, type TruncateProps } from '../../types';
 
 interface TruncateCSSProperties extends CSSProperties {
   '--text-truncate-lines'?: number;
 }
 
-export interface TruncateStyles<E extends ElementType> {
-  classProps: string;
-  props: SpiritTruncateProps<E>;
-  styleProps: TruncateCSSProperties;
-  effectiveMode: TruncateMode;
-  effectiveLimit?: number;
-}
-
-export const useTruncateStyleProps = <E extends ElementType>(props: SpiritTruncateProps<E>): TruncateStyles<E> => {
+export const useTruncateStyleProps = (props: TruncateProps) => {
   const { limit, mode = TruncateModes.LINES, ...restProps } = props;
 
   const truncateClassName = useClassNamePrefix(mode === TruncateModes.LINES ? 'text-truncate-multiline' : '');

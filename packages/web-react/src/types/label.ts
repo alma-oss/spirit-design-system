@@ -1,14 +1,5 @@
 import { type ElementType, type ReactNode } from 'react';
-import { type StyleProps, type TransferProps } from './shared';
-
-export type LabelElementProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the label, e.g. 'label'.
-   *
-   * @default 'label'
-   */
-  elementType?: E;
-};
+import { type PolymorphicComponentProps, type StyleProps } from './shared';
 
 export interface LabelProps {
   children?: ReactNode;
@@ -16,5 +7,10 @@ export interface LabelProps {
   for?: string;
 }
 
-export interface SpiritLabelProps<T extends ElementType = 'label'>
-  extends LabelElementProps<T>, LabelProps, StyleProps, TransferProps {}
+/** ===== INTERNAL API ===== */
+export interface LabelBaseProps extends LabelProps, StyleProps {
+  id?: string;
+}
+
+/** ===== PUBLIC API ===== */
+export type SpiritLabelProps<E extends ElementType = 'label'> = PolymorphicComponentProps<E, LabelBaseProps>;

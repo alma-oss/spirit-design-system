@@ -1,6 +1,14 @@
-import type { ChildrenProps, ContainerSizesType, StyleProps, TextAlignmentType, TransferProps } from './shared';
+import type {
+  ChildrenProps,
+  ContainerSizesType,
+  DataAttributeProps,
+  SpiritDivElementProps,
+  StyleProps,
+  TextAlignmentType,
+} from './shared';
 
-export interface ContainerProps extends ChildrenProps, ContainerTextStyleProps, StyleProps, TransferProps {}
+export interface ContainerProps
+  extends ChildrenProps, ContainerTextStyleProps, DataAttributeProps, StyleProps, SpiritDivElementProps {}
 
 export type ContainerSize<C> = ContainerSizesType | C;
 

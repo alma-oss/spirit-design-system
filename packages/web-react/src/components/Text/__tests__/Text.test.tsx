@@ -50,7 +50,7 @@ describe('Text', () => {
   it.each(textPropsDataProvider)('should have classname', (size, emphasis, expectedClassName) => {
     render(
       <Text
-        size={size as SizesDictionaryType<string> as SizeExtendedDictionaryType<string>}
+        size={size as SizesDictionaryType as SizeExtendedDictionaryType}
         emphasis={emphasis as EmphasisDictionaryType}
       >
         Text

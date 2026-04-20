@@ -1,4 +1,4 @@
-import { type FlexProps } from './flex';
-import { type ChildrenProps, type StyleProps, type TransferProps } from './shared';
+import { type ElementType } from 'react';
+import { type SpiritFlexProps } from './flex';
 
-export interface SpiritActionGroupProps extends FlexProps, ChildrenProps, StyleProps, TransferProps {}
+export type SpiritActionGroupProps<E extends ElementType = 'div'> = SpiritFlexProps<E>;

@@ -1,18 +1,12 @@
 import { type ElementType } from 'react';
 import { type LinkTarget } from './link';
-import {
-  type ChildrenProps,
-  type PolymorphicComponentProps,
-  type SpiritElementProps,
-  type StyleProps,
-  type TransferProps,
-} from './shared';
+import { type ChildrenProps, type PolymorphicComponentProps, type SpiritElementProps, type StyleProps } from './shared';
 
 /** ===== BASE API ===== */
 export interface HeaderBaseProps extends ChildrenProps, StyleProps {}
 
 /** ===== STYLE API ===== */
-export interface HeaderLogoStyleProps extends ChildrenProps, StyleProps, TransferProps {
+export interface HeaderLogoStyleProps extends ChildrenProps, StyleProps {
   /** Header's href attribute */
   href?: string;
   /** Header's target attribute */

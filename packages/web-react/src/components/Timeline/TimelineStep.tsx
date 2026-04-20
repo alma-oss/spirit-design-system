@@ -12,18 +12,20 @@ const defaultProps: Partial<SpiritTimelineStepProps> = {
 
 const TimelineStep = <E extends ElementType = 'li'>(props: SpiritTimelineStepProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag = 'li', children, ...restProps } = propsWithDefaults;
+  const { elementType, children, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { classProps } = useTimelineStyleProps();
   const { styleProps, props: otherProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.step, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.step, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
 TimelineStep.spiritComponent = 'TimelineStep';
+TimelineStep.displayName = 'TimelineStep';
 
 export default TimelineStep;

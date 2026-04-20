@@ -8,6 +8,7 @@ import type {
   BorderColorsDictionaryType,
   BorderEmotionColorsType,
   ChildrenProps,
+  PolymorphicComponentProps,
   SingleOrResponsive,
   SizesDictionaryType,
   StyleProps,
@@ -17,24 +18,6 @@ import type {
 export type TimelineBaseProps = {
   /** Size of the timeline. */
   size?: SingleOrResponsive<SizesDictionaryType>;
-};
-
-export type TimelineProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the plan, e.g. 'div', 'a', or `RouterLink`.
-   *
-   * @default 'ol'
-   */
-  elementType?: E;
-};
-
-export type TimelineStepProps<E extends ElementType> = {
-  /**
-   * The HTML element or React element used to render the plan, e.g. 'div', 'a', or `RouterLink`.
-   *
-   * @default 'li'
-   */
-  elementType?: E;
 };
 
 export type TimelineMarkerType = (typeof TIMELINE_MARKER)[keyof typeof TIMELINE_MARKER];
@@ -58,11 +41,15 @@ export interface TimelineMarkerProps {
   borderColor?: BorderAccentColorsType | BorderEmotionColorsType | BorderColorsDictionaryType;
 }
 
-export interface SpiritTimelineProps<T extends ElementType = 'ol'>
-  extends TimelineProps<T>, TimelineBaseProps, ChildrenProps, StyleProps {}
+/** ===== INTERNAL API ===== */
+export interface TimelineProps extends TimelineBaseProps, ChildrenProps, StyleProps {}
 
-export interface SpiritTimelineStepProps<T extends ElementType = 'li'>
-  extends TimelineStepProps<T>, ChildrenProps, StyleProps {}
+export interface TimelineStepProps extends ChildrenProps, StyleProps {}
+
+/** ===== PUBLIC API ===== */
+export type SpiritTimelineProps<E extends ElementType = 'ol'> = PolymorphicComponentProps<E, TimelineProps>;
+
+export type SpiritTimelineStepProps<E extends ElementType = 'li'> = PolymorphicComponentProps<E, TimelineStepProps>;
 
 export interface SpiritTimelineMarkerProps extends TimelineMarkerProps, ChildrenProps, StyleProps {}
 

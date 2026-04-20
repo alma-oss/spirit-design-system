@@ -3,30 +3,27 @@ import type {
   ChildrenProps,
   EmphasisDictionaryType,
   EmphasisProps,
+  PolymorphicComponentProps,
   SizeExtendedDictionaryType,
   SizeProps,
   StyleProps,
   TextColorProps,
   TextColorsType,
-  TransferProps,
   TypographyBaseProps,
 } from './shared';
 
-export interface TextElementTypeProps<E extends ElementType = 'p'> {
-  /**
-   * The HTML element or React element used to render the Text, e.g. 'p'.
-   *
-   * @default 'p'
-   */
-  elementType?: E;
-}
-
-export interface TextProps<T extends ElementType = 'p'>
-  extends TextElementTypeProps<T>, ChildrenProps, StyleProps, TransferProps, TypographyBaseProps {}
-
-export interface SpiritTextProps<T extends ElementType = 'p', S = void, Emph = void, C = void>
+/** ===== INTERNAL API ===== */
+export interface TextProps<S = void, Emph = void, C = void>
   extends
-    TextProps<T>,
+    ChildrenProps,
+    StyleProps,
+    TypographyBaseProps,
     SizeProps<SizeExtendedDictionaryType<S>>,
     EmphasisProps<EmphasisDictionaryType<Emph>>,
     TextColorProps<TextColorsType<C>> {}
+
+/** ===== PUBLIC API ===== */
+export type SpiritTextProps<E extends ElementType = 'p', S = void, Emph = void, C = void> = PolymorphicComponentProps<
+  E,
+  TextProps<S, Emph, C>
+>;

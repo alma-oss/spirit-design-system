@@ -59,6 +59,9 @@ export type SpiritPolymorphicElementPropsWithoutRef<E extends ElementType, P> = 
   keyof P
 >;
 
+/** Allows passing arbitrary `data-*` attributes in typed object literals. */
+export type DataAttributeProps = { [key: `data-${string}`]: unknown };
+
 export type SpiritElementBaseProps = SpiritDetailedHTMLProps<HTMLElement>;
 export type SpiritAnchorElementBaseProps = SpiritCombinedHTMLProps<HTMLButtonElement>;
 export type SpiritButtonElementBaseProps = SpiritCombinedHTMLProps<HTMLButtonElement>;
@@ -71,6 +74,7 @@ export type SpiritSpanElementBaseProps = SpiritDetailedHTMLProps<HTMLSpanElement
 export type SpiritTextAreaElementBaseProps = SpiritCombinedHTMLProps<HTMLTextAreaElement>;
 export type SpiritUListElementBaseProps = SpiritDetailedHTMLProps<HTMLUListElement>;
 export type SpiritFieldGroupElementBaseProps = SpiritDetailedHTMLProps<HTMLFieldSetElement>;
+export type SpiritSegmentedControlElementBaseProps = SpiritDetailedHTMLProps<HTMLFieldSetElement>;
 
 export type SpiritElementProps = OverloadStyleProps<SpiritElementBaseProps>;
 export type SpiritAnchorElementProps = OverloadStyleProps<SpiritAnchorElementBaseProps>;
@@ -90,6 +94,7 @@ export type SpiritTextAreaElementProps = Omit<
 >;
 export type SpiritUListElementProps = OverloadStyleProps<SpiritUListElementBaseProps>;
 export type SpiritFieldGroupElementProps = OverloadStyleProps<SpiritFieldGroupElementBaseProps>;
+export type SpiritSegmentedControlElementProps = OverloadStyleProps<SpiritSegmentedControlElementBaseProps>;
 
 export type SpiritInputElementPropsWithRef = Omit<
   SpiritInputElementProps & ComponentPropsWithRef<'input'>,
