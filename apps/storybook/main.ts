@@ -6,8 +6,18 @@ import { mergeConfig } from 'vite';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const config: StorybookConfig = {
   stories: ['../../packages/**/*.mdx', '../../packages/**/*.stories.@(ts|tsx)'],
+
+  // @see: https://storybook.js.org/docs/writing-stories/tags#custom-tags
+  tags: {
+    figma: {
+      excludeFromSidebar: isProd,
+      defaultFilterSelection: isProd ? 'exclude' : 'include',
+    },
+  },
 
   addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-mcp'],
 
