@@ -424,6 +424,31 @@ Depending on your situation, you may want to use the list semantics. And it will
 </ul>
 ```
 
+## Card Article
+
+Card Article is not a standalone component, but a suggested composition of Card subcomponents designed
+for article preview use cases.
+
+```html
+<div class="Grid Grid--cols-1 Grid--tablet--cols-2">
+  <article class="Card Card--horizontal Card--alignmentYCenter">
+    <div class="CardMedia CardMedia--medium CardMedia--expanded">
+      <div class="CardMedia__canvas">
+        <img src="article-image.jpg" alt="" />
+      </div>
+    </div>
+    <div class="CardBody">
+      <div class="CardEyebrow">Eyebrow</div>
+      <h4 class="CardTitle CardTitle--heading">
+        <a href="/article-123" class="CardLink">Article Title</a>
+      </h4>
+      <p class="text-truncate-multiline">Article excerpt…</p>
+      <div class="link-primary">Read more</div>
+    </div>
+  </article>
+</div>
+```
+
 ## Best Practices
 
 ### Making the Whole Card Clickable
