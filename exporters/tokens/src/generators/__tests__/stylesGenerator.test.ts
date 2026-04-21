@@ -39,7 +39,7 @@ describe('stylesGenerator', () => {
         hasParentPrefix: true,
         hasJsOutput: false,
         hasTokenPrefix: true,
-        expectedStyles: '$grid-spacing-desktop: 1.78rem !default;',
+        expectedStyles: '$grid-spacing-desktop: 1.7778rem !default;',
       },
       {
         token: exampleDimensionAndStringTokens.get('dimensionRef') as DimensionToken,
@@ -47,7 +47,7 @@ describe('stylesGenerator', () => {
         hasParentPrefix: false,
         hasJsOutput: false,
         hasTokenPrefix: true,
-        expectedStyles: '$desktop: 1.78rem !default;',
+        expectedStyles: '$desktop: 1.7778rem !default;',
       },
       {
         token: exampleDimensionAndStringTokens.get('stringRef') as StringToken,
@@ -83,7 +83,7 @@ describe('stylesGenerator', () => {
         hasParentPrefix: true,
         hasJsOutput: true,
         hasTokenPrefix: false,
-        expectedStyles: "export const gridSpacingDesktop = '1.78rem';",
+        expectedStyles: "export const gridSpacingDesktop = '1.7778rem';",
       },
       {
         token: exampleDimensionAndStringTokens.get('dimensionRef') as DimensionToken,
@@ -91,7 +91,7 @@ describe('stylesGenerator', () => {
         hasParentPrefix: false,
         hasJsOutput: true,
         hasTokenPrefix: false,
-        expectedStyles: "export const desktop = '1.78rem';",
+        expectedStyles: "export const desktop = '1.7778rem';",
       },
       {
         token: exampleDimensionAndStringTokens.get('stringRef') as StringToken,
@@ -116,7 +116,7 @@ describe('stylesGenerator', () => {
         hasJsOutput: false,
         hasTokenPrefix: true,
         expectedStyles:
-          '$shadow-100: 0 0.14rem 0.57rem 0 var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
+          '$shadow-100: 0 0.1429rem 0.5714rem 0 var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
         token: exampleShadowTokens.get('shadowRef') as ShadowToken,
@@ -125,7 +125,7 @@ describe('stylesGenerator', () => {
         hasJsOutput: false,
         hasTokenPrefix: false,
         expectedStyles:
-          '$shadow-100: 0 0.14rem 0.57rem 0 var(--color-shadows-shadow-100-color-01, #00000026) !default;',
+          '$shadow-100: 0 0.1429rem 0.5714rem 0 var(--color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
         token: exampleGradientTokens.get('gradientRef') as GradientToken,
@@ -177,7 +177,7 @@ describe('stylesGenerator', () => {
         hasParentPrefix: true,
         hasTokenPrefix: false,
         description: 'should generate styles from tokens',
-        expectedStyles: '$grid-columns: 12 !default;\n\n$grid-spacing-desktop: 1.78rem !default;',
+        expectedStyles: '$grid-columns: 12 !default;\n\n$grid-spacing-desktop: 1.7778rem !default;',
       },
       {
         tokens: exampleDimensionAndStringTokens,
@@ -186,7 +186,7 @@ describe('stylesGenerator', () => {
         hasParentPrefix: true,
         hasTokenPrefix: false,
         description: 'should generate styles from tokens with js output',
-        expectedStyles: "export const gridColumns = '12';\n\nexport const gridSpacingDesktop = '1.78rem';",
+        expectedStyles: "export const gridColumns = '12';\n\nexport const gridSpacingDesktop = '1.7778rem';",
       },
       {
         tokens: exampleColorsTokens,
@@ -223,7 +223,7 @@ describe('stylesGenerator', () => {
         hasTokenPrefix: true,
         description: 'should generate styles from tokens with shadows',
         expectedStyles:
-          '$shadow-100: 0 0.14rem 0.57rem 0 var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
+          '$shadow-100: 0 0.1429rem 0.5714rem 0 var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
         tokens: exampleShadowTokens,
@@ -233,7 +233,7 @@ describe('stylesGenerator', () => {
         hasTokenPrefix: false,
         description: 'should generate styles from tokens with shadows',
         expectedStyles:
-          '$shadow-100: 0 0.14rem 0.57rem 0 var(--color-shadows-shadow-100-color-01, #00000026) !default;',
+          '$shadow-100: 0 0.1429rem 0.5714rem 0 var(--color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
         tokens: exampleGradientTokens,

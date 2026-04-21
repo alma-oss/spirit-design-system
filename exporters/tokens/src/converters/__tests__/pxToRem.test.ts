@@ -4,8 +4,8 @@ describe('pxToRem', () => {
   it('should convert px to rem with default rounding and trims zeros', () => {
     expect(pxToRem(32, { baseFontSize: 16 })).toBe('2rem');
     expect(pxToRem(40, { baseFontSize: 16 })).toBe('2.5rem');
-    expect(pxToRem(1, { baseFontSize: 16 })).toBe('0.06rem'); // 0.0625 -> 0.06
-    expect(pxToRem(8, { baseFontSize: 14 })).toBe('0.57rem'); // 0.5714.. -> 0.57
+    expect(pxToRem(1, { baseFontSize: 16 })).toBe('0.0625rem');
+    expect(pxToRem(8, { baseFontSize: 14 })).toBe('0.5714rem');
   });
 
   it('should support custom decimals', () => {
