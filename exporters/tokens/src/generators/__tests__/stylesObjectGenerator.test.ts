@@ -291,11 +291,11 @@ describe('stylesObjectGenerator', () => {
           exampleRef: 'exampleRef',
           headingXlargeBold: {
             mobile:
-              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2.86rem',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.30,\n}",
+              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2.8571rem',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.30,\n}",
             tablet:
               "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2.5rem',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.30,\n}",
             desktop:
-              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2.22rem',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.30,\n}",
+              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2.2222rem',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.30,\n}",
           },
         },
         description: 'should generate per-breakpoint rem values when font-size-base differs',

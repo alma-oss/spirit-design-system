@@ -148,7 +148,7 @@ describe('unitHelper', () => {
     });
 
     it('should convert px to rem with custom base font size', () => {
-      expect(makeRelativeUnit(32, 18)).toBe('1.78rem');
+      expect(makeRelativeUnit(32, 18)).toBe('1.7778rem');
       expect(makeRelativeUnit(14, 14)).toBe('1rem');
     });
 
@@ -169,7 +169,7 @@ describe('unitHelper', () => {
 
   describe('replacePxWithRemUnits', () => {
     it('should replace px with rem in string', () => {
-      expect(replacePxWithRemUnits('0 2px 8px 0', 14)).toBe('0 0.14rem 0.57rem 0');
+      expect(replacePxWithRemUnits('0 2px 8px 0', 14)).toBe('0 0.1429rem 0.5714rem 0');
       expect(replacePxWithRemUnits('32px', 16)).toBe('2rem');
     });
 
@@ -187,7 +187,7 @@ describe('unitHelper', () => {
     });
 
     it('should handle decimal px values', () => {
-      expect(replacePxWithRemUnits('0.5px 1.5px', 16)).toBe('0.03rem 0.09rem');
+      expect(replacePxWithRemUnits('0.5px 1.5px', 16)).toBe('0.0313rem 0.0938rem');
     });
   });
 });
