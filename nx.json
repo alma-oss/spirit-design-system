@@ -34,5 +34,6 @@
   "neverConnectToCloud": true,
   "tui": {
     "enabled": false
-  }
+  },
+  "analytics": false
 }
