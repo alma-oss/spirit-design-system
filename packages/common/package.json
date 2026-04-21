@@ -29,6 +29,10 @@
     "./utilities/url": {
       "types": "./src/utilities/url.ts",
       "default": "./src/utilities/url.ts"
+    },
+    "./utilities/cssLengthToPixels": {
+      "types": "./src/utilities/cssLengthToPixels.ts",
+      "default": "./src/utilities/cssLengthToPixels.ts"
     }
   },
   "keywords": [
