@@ -1,4 +1,4 @@
-import { PX_UNIT, REM_UNIT } from '../constants';
+import { DEFAULT_DECIMALS, MAX_TO_FIXED_DIGITS, PX_UNIT, REM_UNIT } from '../constants';
 
 export type PxToRemOptions = {
   baseFontSize: number;
@@ -14,17 +14,22 @@ export type PxToRemOptions = {
  * @returns {string} The converted value in rem units
  */
 export const pxToRem = (valuePx: string | number, options: PxToRemOptions): string => {
-  const { baseFontSize, decimals = 2 } = options;
+  const { baseFontSize, decimals = DEFAULT_DECIMALS } = options;
 
   if (!baseFontSize || baseFontSize <= 0) {
     return `${valuePx}${PX_UNIT}`;
   }
 
-  const raw = Number(valuePx) / Number(baseFontSize);
-  const factor = 10 ** decimals;
-  const rounded = Math.round((raw + Number.EPSILON) * factor) / factor;
-  const normalized = Math.abs(rounded) === 0 ? 0 : rounded;
-  const pretty = normalized.toFixed(decimals).replace(/\.?0+$/, '');
+  const parsedValuePx = Number.parseFloat(String(valuePx));
+  const effectiveValuePx = Number.isFinite(parsedValuePx) ? parsedValuePx : 0;
+  const effectiveDecimals =
+    Number.isInteger(decimals) && decimals >= 0 && decimals <= MAX_TO_FIXED_DIGITS ? decimals : DEFAULT_DECIMALS;
 
-  return `${pretty}${REM_UNIT}`;
+  const remValue = effectiveValuePx / baseFontSize;
+  const roundingFactor = 10 ** effectiveDecimals;
+  const roundedRem = Math.round((remValue + Number.EPSILON) * roundingFactor) / roundingFactor;
+  const normalizedRem = Math.abs(roundedRem) === 0 ? 0 : roundedRem;
+  const formattedRem = normalizedRem.toFixed(effectiveDecimals).replace(/\.?0+$/, '');
+
+  return `${formattedRem}${REM_UNIT}`;
 };

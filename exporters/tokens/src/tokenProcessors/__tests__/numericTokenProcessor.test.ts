@@ -39,7 +39,7 @@ describe('numericTokenProcessor', () => {
 
       const result = processNumericToken(token, TokenType.dimension, ctx);
 
-      expect(result).toBe('$grid-spacing-desktop: 1.78rem !default;');
+      expect(result).toBe('$grid-spacing-desktop: 1.7778rem !default;');
     });
 
     it('should process dimension token with js output', () => {
@@ -53,7 +53,7 @@ describe('numericTokenProcessor', () => {
 
       const result = processNumericToken(token, TokenType.dimension, ctx);
 
-      expect(result).toBe("export const gridSpacingDesktop = '1.78rem';");
+      expect(result).toBe("export const gridSpacingDesktop = '1.7778rem';");
     });
 
     it('should process fontSize token', () => {
