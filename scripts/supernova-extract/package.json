@@ -1,0 +1,30 @@
+{
+  "name": "@alma-oss/spirit-supernova-extract",
+  "version": "1.0.0",
+  "description": "Extract hardcoded Supernova documentation pages to markdown for apps/docsite migration",
+  "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alma-oss/spirit-design-system.git",
+    "directory": "scripts/supernova-extract"
+  },
+  "license": "MIT",
+  "scripts": {
+    "extract": "tsx ./src/cli.ts",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "jsdom": "catalog:test",
+    "sade": "catalog:script",
+    "tsx": "catalog:script",
+    "turndown": "catalog:script",
+    "turndown-plugin-gfm": "catalog:script",
+    "yaml": "catalog:script"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:types",
+    "@types/turndown": "catalog:types",
+    "typescript": "catalog:types"
+  }
+}
