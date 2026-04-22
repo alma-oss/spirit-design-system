@@ -1,0 +1,742 @@
+{{setVar "colors" "primary" "secondary" "tertiary" }}
+{{setVar "sizes" "small" "medium" "large" }}
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Default</h2>
+    <div class="docs-Stack docs-Stack--start">
+      <div class="Grid Grid--alignmentXStretch Grid--alignmentYStretch Grid--cols-1 Grid--desktop--cols-3" style="--grid-spacing-y: var(--spirit-space-1100);">
+        {{#each @root.colors as |color|}}
+        {{#each @root.sizes as |size|}}
+        <section>
+          <h3 class="docs-Heading">Size {{ size }}, color {{ color }}</h3>
+          <div class="docs-Stack docs-Stack--start">
+            <div class="SplitButton">
+              <button type="button" class="Button Button--{{ size }} Button--{{ color }}">
+                <svg
+                  class="Icon mr-400"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+                </svg>
+                Button
+              </button>
+              <div class="Dropdown">
+                <button
+                  type="button"
+                  class="Button Button--{{ size }} Button--{{ color }}"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#dropdown-{{ color }}-{{ size }}-label-and-icon"
+                  aria-expanded="false"
+                  aria-controls="dropdown-{{ color }}-{{ size }}-label-and-icon"
+                  data-spirit-autoclose="true"
+                >
+                  More
+                  <svg
+                    class="Icon ml-400"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                  </svg>
+                </button>
+                <div
+                  class="DropdownPopover"
+                  data-spirit-placement="bottom-end"
+                  id="dropdown-{{ color }}-{{ size }}-label-and-icon"
+                >
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Information</span>
+                  </a>
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Profile</span>
+                  </a>
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#help" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Help</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="SplitButton">
+              <button type="button" class="Button Button--{{ size }} Button--{{ color }}">
+                <svg
+                  class="Icon mr-400"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+                </svg>
+                Button
+              </button>
+              <button type="button" class="Button Button--{{ size }} Button--{{ color }}">Button</button>
+              <div class="Dropdown">
+                <button
+                  type="button"
+                  class="Button Button--{{ size }} Button--{{ color }}"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#dropdown-{{ color }}-{{ size }}-more-buttons-and-icon"
+                  aria-expanded="false"
+                  aria-controls="dropdown-{{ color }}-{{ size }}-more-buttons-and-icon"
+                  data-spirit-autoclose="true"
+                >
+                  <span class="accessibility-hidden">More</span>
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                  </svg>
+                </button>
+                <div
+                  class="DropdownPopover"
+                  data-spirit-placement="bottom-end"
+                  id="dropdown-{{ color }}-{{ size }}-more-buttons-and-icon"
+                >
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Information</span>
+                  </a>
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Profile</span>
+                  </a>
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#help" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Help</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="SplitButton">
+              <button type="button" class="Button Button--{{ size }} Button--{{ color }}">
+                <svg
+                  class="Icon mr-400"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+                </svg>
+                Button
+              </button>
+              <div class="Dropdown">
+                <button
+                  type="button"
+                  class="Button Button--{{ size }} Button--{{ color }}"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#dropdown-{{ color }}-{{ size }}-button-and-icon"
+                  aria-expanded="false"
+                  aria-controls="dropdown-{{ color }}-{{ size }}-button-and-icon"
+                  data-spirit-autoclose="true"
+                >
+                  <span class="accessibility-hidden">More</span>
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                  </svg>
+                </button>
+                <div
+                  class="DropdownPopover"
+                  data-spirit-placement="bottom-end"
+                  id="dropdown-{{ color }}-{{ size }}-button-and-icon"
+                >
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Information</span>
+                  </a>
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Profile</span>
+                  </a>
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#help" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Help</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="SplitButton">
+              <button type="button" class="Button Button--{{ size }} Button--{{ color }}">
+                <span class="accessibility-hidden">Download</span>
+                <svg
+                  class="Icon"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#download" />
+                </svg>
+              </button>
+              <button type="button" class="Button Button--{{ size }} Button--{{ color }}">
+                <span class="accessibility-hidden">Edit</span>
+                <svg
+                  class="Icon"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#edit" />
+                </svg>
+              </button>
+              <button type="button" class="Button Button--{{ size }} Button--{{ color }}">
+                <span class="accessibility-hidden">Link</span>
+                <svg
+                  class="Icon"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#link" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="SplitButton">
+              <div class="Tooltip" data-spirit-element="tooltip">
+                <button
+                  type="button"
+                  class="Button Button--{{ size }} Button--{{ color }}"
+                  data-spirit-toggle="tooltip"
+                  data-spirit-target="#tooltip-button-{{ color }}-{{ size }}-left"
+                  aria-labelledby="tooltip-button-{{ color }}-{{ size }}-left"
+                >
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#download" />
+                  </svg>
+                </button>
+                <div
+                  id="tooltip-button-{{ color }}-{{ size }}-left"
+                  class="TooltipPopover is-hidden"
+                  data-spirit-placement="top"
+                  data-spirit-flip-fallback-placements="bottom"
+                  data-spirit-trigger="hover"
+                >
+                  Download
+                  <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
+                </div>
+              </div>
+              <div class="Tooltip" data-spirit-element="tooltip">
+                <button
+                  type="button"
+                  class="Button Button--{{ size }} Button--{{ color }}"
+                  data-spirit-toggle="tooltip"
+                  data-spirit-target="#tooltip-button-{{ color }}-{{ size }}-right"
+                  aria-labelledby="tooltip-button-{{ color }}-{{ size }}-left"
+                >
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#link" />
+                  </svg>
+                </button>
+                <div
+                  id="tooltip-button-{{ color }}-{{ size }}-right"
+                  class="TooltipPopover is-hidden"
+                  data-spirit-placement="top"
+                  data-spirit-flip-fallback-placements="bottom"
+                  data-spirit-trigger="hover"
+                >
+                  Share
+                  <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {{/each}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Disabled</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+      <div class="Grid Grid--alignmentXStretch Grid--alignmentYStretch Grid--cols-1 Grid--desktop--cols-3" style="--grid-spacing-y: var(--spirit-space-1100);">
+        {{#each @root.sizes as |size|}}
+        <section>
+          <h2 class="docs-Heading">Size {{ size }}</h2>
+          <div class="docs-Stack docs-Stack--start">
+            <div class="SplitButton">
+              <button
+                type="button"
+                class="Button Button--{{ size }} Button--primary"
+                disabled
+              >
+                <svg
+                  class="Icon mr-400"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+                </svg>
+                Button
+              </button>
+              <div class="Dropdown">
+                <button
+                  type="button"
+                  class="Button Button--{{ size }} Button--primary"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#dropdown-disabled-{{ size }}-label-and-icon"
+                  aria-expanded="false"
+                  aria-controls="dropdown-disabled-{{ size }}-label-and-icon"
+                  data-spirit-autoclose="true"
+                  disabled
+                >
+                  More
+                  <svg
+                    class="Icon ml-400"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                  </svg>
+                </button>
+                <div
+                  class="DropdownPopover"
+                  data-spirit-placement="bottom-end"
+                  id="dropdown-disabled-{{ size }}-label-and-icon"
+                >
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Information</span>
+                  </a>
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Profile</span>
+                  </a>
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#help" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Help</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="SplitButton">
+              <button
+                type="button"
+                class="Button Button--{{ size }} Button--primary"
+                disabled
+              >
+                <svg
+                  class="Icon mr-400"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+                </svg>
+                Button
+              </button>
+              <button
+                type="button"
+                class="Button Button--{{ size }} Button--primary"
+                disabled
+              >Button</button>
+              <div class="Dropdown">
+                <button
+                  type="button"
+                  class="Button Button--{{ size }} Button--primary"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#dropdown-disabled-{{ size }}-more-buttons-and-icon"
+                  aria-expanded="false"
+                  aria-controls="dropdown-disabled-{{ size }}-more-buttons-and-icon"
+                  data-spirit-autoclose="true"
+                  disabled
+                >
+                  <span class="accessibility-hidden">More</span>
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                  </svg>
+                </button>
+                <div
+                  class="DropdownPopover"
+                  data-spirit-placement="bottom-end"
+                  id="dropdown-disabled-{{ size }}-more-buttons-and-icon"
+                >
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Information</span>
+                  </a>
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Profile</span>
+                  </a>
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#help" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Help</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="SplitButton">
+              <button
+                type="button"
+                class="Button Button--{{ size }} Button--primary"
+                disabled
+              >
+                <svg
+                  class="Icon mr-400"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+                </svg>
+                Button
+              </button>
+              <div class="Dropdown">
+                <button
+                  type="button"
+                  class="Button Button--{{ size }} Button--primary"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#dropdown-disabled-{{ size }}-button-and-icon"
+                  aria-expanded="false"
+                  aria-controls="dropdown-disabled-{{ size }}-button-and-icon"
+                  data-spirit-autoclose="true"
+                  disabled
+                >
+                  <span class="accessibility-hidden">More</span>
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                  </svg>
+                </button>
+                <div
+                  class="DropdownPopover"
+                  data-spirit-placement="bottom-end"
+                  id="dropdown-disabled-{{ size }}-button-and-icon"
+                >
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Information</span>
+                  </a>
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Profile</span>
+                  </a>
+                  <a href="#" class="Item">
+                    <span class="Item__icon Item__icon--start">
+                      <svg
+                        class="Icon"
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#help" />
+                      </svg>
+                    </span>
+                    <span class="Item__label">Help</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="SplitButton">
+              <button
+                type="button"
+                class="Button Button--{{ size }} Button--primary"
+                disabled
+              >
+                <span class="accessibility-hidden">Download</span>
+                <svg
+                  class="Icon"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#download" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="Button Button--{{ size }} Button--primary"
+                disabled
+              >
+                <span class="accessibility-hidden">Edit</span>
+                <svg
+                  class="Icon"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#edit" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="Button Button--{{ size }} Button--primary"
+                disabled
+              >
+                <span class="accessibility-hidden">Link</span>
+                <svg
+                  class="Icon"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#link" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="SplitButton">
+              <div class="Tooltip" data-spirit-element="tooltip">
+                <button
+                  type="button"
+                  class="Button Button--{{ size }} Button--primary"
+                  data-spirit-toggle="tooltip"
+                  data-spirit-target="#tooltip-button-disabled-{{ size }}-left"
+                  aria-labelledby="tooltip-button-disabled-{{ size }}-left"
+                  disabled
+                >
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#download" />
+                  </svg>
+                </button>
+                <div
+                  id="tooltip-button-disabled-{{ size }}-left"
+                  class="TooltipPopover is-hidden"
+                  data-spirit-placement="top"
+                  data-spirit-flip-fallback-placements="bottom"
+                  data-spirit-trigger="hover"
+                >
+                  Download
+                  <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
+                </div>
+              </div>
+              <div class="Tooltip" data-spirit-element="tooltip">
+                <button
+                  type="button"
+                  class="Button Button--{{ size }} Button--primary"
+                  data-spirit-toggle="tooltip"
+                  data-spirit-target="#tooltip-button-disabled-{{ size }}-right"
+                  aria-labelledby="tooltip-button-disabled-{{ size }}-right"
+                  disabled
+                >
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#link" />
+                  </svg>
+                </button>
+                <div
+                  id="tooltip-button-disabled-{{ size }}-right"
+                  class="TooltipPopover is-hidden"
+                  data-spirit-placement="top"
+                  data-spirit-flip-fallback-placements="bottom"
+                  data-spirit-trigger="hover"
+                >
+                  Share
+                  <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,2814 @@
+<!-- Picker JavaScript interaction DEMO -->
+<script type="module">
+  import { initPickers } from './picker-demo.mjs';
+  import { initSalaryPicker } from './salary-picker-demo.mjs';
+  import { initPublicationTimePicker } from './publication-time-picker-demo.mjs';
+
+  initPickers();
+  initSalaryPicker();
+  initPublicationTimePicker();
+
+  // Apply buttons for standard pickers with confirm buttons
+  [
+    { buttonId: 'salary-apply', triggerId: 'picker-salary-trigger' },
+    { buttonId: 'demo-picker-publication-time-apply', triggerId: 'demo-picker-publication-time-trigger' },
+    { buttonId: 'job-filters-apply', triggerId: 'picker-job-filters-trigger' },
+  ].forEach(({ buttonId, triggerId }) => {
+    const btn = document.getElementById(buttonId);
+    const trigger = document.getElementById(triggerId);
+
+    if (btn && trigger) btn.addEventListener('click', () => trigger.click());
+  });
+</script>
+
+<!-- Picker: help for AT users -->
+<span id="picker-tag-description" hidden>Press Delete or Backspace to remove</span>
+
+<!-- Picker: empty selection template -->
+<template id="picker-selection-label-template">
+  <span
+    class="UNSTABLE_Picker__selectionEmpty"
+    data-spirit-element="selection-label"
+    aria-hidden="true"
+  ></span>
+</template>
+
+<!-- Picker: tag template -->
+<template id="picker-tag-template">
+  <div
+    role="row"
+    data-tag-row
+    tabindex="0"
+    aria-describedby="picker-tag-description"
+    class="Tag Tag--selected bg-selected-basic text-selected-subtle Tag--small"
+  >
+    <div
+      role="gridcell"
+      aria-colindex="1"
+      class="d-contents"
+    >
+      <span data-tag-label><!-- Tag label comes here --></span>
+      <button
+        type="button"
+        aria-label="Remove"
+        class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
+        data-tag-close
+      >
+        <svg
+          class="Icon"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        >
+          <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</template>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Default</h2>
+
+    <!-- Keyboard: roving tabindex on tags, arrow keys, Esc to close, ArrowDown to open -->
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+
+        <span class="UNSTABLE_Picker__label">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-lang-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-lang"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="picker-lang"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-lang"
+          >
+
+            <fieldset class="FieldGroup FieldGroup--fluid">
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-cs"
+                    class="Checkbox__input"
+                    name="default"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-dk"
+                    class="Checkbox__input"
+                    name="default"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-kl"
+                    class="Checkbox__input"
+                    name="default"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+
+        <span class="UNSTABLE_Picker__label">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-lang-pre-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-lang-pre"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="picker-lang-pre"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-lang-pre"
+          >
+
+            <fieldset class="FieldGroup FieldGroup--fluid">
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-pre-cs"
+                    class="Checkbox__input"
+                    name="lang-pre"
+                    autocomplete="off"
+                    checked
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-pre-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-pre-dk"
+                    class="Checkbox__input"
+                    name="lang-pre"
+                    autocomplete="off"
+                    checked
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-pre-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-pre-kl"
+                    class="Checkbox__input"
+                    name="lang-pre"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-pre-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Sizes</h2>
+
+    <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+      <div class="Grid Grid--cols-1 Grid--desktop--cols-3">
+
+        <!-- Small -->
+        <div class="UNSTABLE_Picker UNSTABLE_Picker--small">
+
+          <span class="UNSTABLE_Picker__label">Small</span>
+
+          <div
+            class="Dropdown"
+            data-spirit-toggle="picker"
+            data-picker-label="Languages"
+            data-picker-tag-size="xsmall"
+          >
+
+            <div
+              role="group"
+              aria-label="Languages"
+              class="UNSTABLE_Picker__inputContainer"
+            >
+
+              <div
+                role="group"
+                tabindex="-1"
+                aria-atomic="false"
+                aria-label="Selected languages"
+                aria-live="off"
+                aria-relevant="additions"
+                id="picker-small-selection"
+                class="UNSTABLE_Picker__selection"
+                data-spirit-element="selection"
+              >
+                <span
+                  class="UNSTABLE_Picker__selectionEmpty"
+                  data-spirit-element="selection-label"
+                  aria-hidden="true"
+                >Languages</span>
+              </div>
+
+              <button
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#picker-small"
+                class="UNSTABLE_Picker__trigger"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="picker-small"
+              >
+                <span class="accessibility-hidden">Add</span>
+                <svg
+                  class="Icon"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+            </div>
+
+            <div
+              role="dialog"
+              aria-modal="true"
+              class="DropdownPopover"
+              data-spirit-placement="bottom-start"
+              id="picker-small"
+            >
+              <fieldset class="FieldGroup FieldGroup--fluid">
+                <legend class="accessibility-hidden">Language</legend>
+                <div class="FieldGroup__fields">
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-small-cs"
+                      class="Checkbox__input"
+                      name="lang-small"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-small-cs"
+                      >Czech</label>
+                    </div>
+                  </div>
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-small-dk"
+                      class="Checkbox__input"
+                      name="lang-small"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-small-dk"
+                      >Danish</label>
+                    </div>
+                  </div>
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-small-kl"
+                      class="Checkbox__input"
+                      name="lang-small"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-small-kl"
+                      >Greenlandic</label>
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Medium (default) -->
+        <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+
+          <span class="UNSTABLE_Picker__label">Medium (default)</span>
+
+          <div
+            class="Dropdown"
+            data-spirit-toggle="picker"
+            data-picker-label="Languages"
+            data-picker-tag-size="small"
+          >
+
+            <div
+              role="group"
+              aria-label="Languages"
+              class="UNSTABLE_Picker__inputContainer"
+            >
+
+              <div
+                role="group"
+                tabindex="-1"
+                aria-atomic="false"
+                aria-label="Selected languages"
+                aria-live="off"
+                aria-relevant="additions"
+                id="picker-medium-selection"
+                class="UNSTABLE_Picker__selection"
+                data-spirit-element="selection"
+              >
+                <span
+                  class="UNSTABLE_Picker__selectionEmpty"
+                  data-spirit-element="selection-label"
+                  aria-hidden="true"
+                >Languages</span>
+              </div>
+
+              <button
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#picker-medium"
+                class="UNSTABLE_Picker__trigger"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="picker-medium"
+              >
+                <span class="accessibility-hidden">Add</span>
+                <svg
+                  class="Icon"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+            </div>
+
+            <div
+              role="dialog"
+              aria-modal="true"
+              class="DropdownPopover"
+              data-spirit-placement="bottom-start"
+              id="picker-medium"
+            >
+              <fieldset class="FieldGroup FieldGroup--fluid">
+                <legend class="accessibility-hidden">Language</legend>
+                <div class="FieldGroup__fields">
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-medium-cs"
+                      class="Checkbox__input"
+                      name="lang-medium"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-medium-cs"
+                      >Czech</label>
+                    </div>
+                  </div>
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-medium-dk"
+                      class="Checkbox__input"
+                      name="lang-medium"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-medium-dk"
+                      >Danish</label>
+                    </div>
+                  </div>
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-medium-kl"
+                      class="Checkbox__input"
+                      name="lang-medium"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-medium-kl"
+                      >Greenlandic</label>
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Large -->
+        <div class="UNSTABLE_Picker UNSTABLE_Picker--large">
+
+          <span class="UNSTABLE_Picker__label">Large</span>
+
+          <div
+            class="Dropdown"
+            data-spirit-toggle="picker"
+            data-picker-label="Languages"
+            data-picker-tag-size="medium"
+          >
+
+            <div
+              role="group"
+              aria-label="Languages"
+              class="UNSTABLE_Picker__inputContainer"
+            >
+
+              <div
+                role="group"
+                tabindex="-1"
+                aria-atomic="false"
+                aria-label="Selected languages"
+                aria-live="off"
+                aria-relevant="additions"
+                id="picker-large-selection"
+                class="UNSTABLE_Picker__selection"
+                data-spirit-element="selection"
+              >
+                <span
+                  class="UNSTABLE_Picker__selectionEmpty"
+                  data-spirit-element="selection-label"
+                  aria-hidden="true"
+                >Languages</span>
+              </div>
+
+              <button
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#picker-large"
+                class="UNSTABLE_Picker__trigger"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="picker-large"
+              >
+                <span class="accessibility-hidden">Add</span>
+                <svg
+                  class="Icon"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+            </div>
+
+            <div
+              role="dialog"
+              aria-modal="true"
+              class="DropdownPopover"
+              data-spirit-placement="bottom-start"
+              id="picker-large"
+            >
+              <fieldset class="FieldGroup FieldGroup--fluid">
+                <legend class="accessibility-hidden">Language</legend>
+                <div class="FieldGroup__fields">
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-large-cs"
+                      class="Checkbox__input"
+                      name="lang-large"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-large-cs"
+                      >Czech</label>
+                    </div>
+                  </div>
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-large-dk"
+                      class="Checkbox__input"
+                      name="lang-large"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-large-dk"
+                      >Danish</label>
+                    </div>
+                  </div>
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="lang-large-kl"
+                      class="Checkbox__input"
+                      name="lang-large"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="lang-large-kl"
+                      >Greenlandic</label>
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Aggregated Tags</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+
+        <span class="UNSTABLE_Picker__label">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+          data-spirit-picker-aggregate-tags
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-lang2-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-lang2"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="picker-lang2"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-lang2"
+          >
+
+            <fieldset class="FieldGroup FieldGroup--fluid">
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang2-cs"
+                    class="Checkbox__input"
+                    name="default2"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang2-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang2-dk"
+                    class="Checkbox__input"
+                    name="default2"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang2-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang2-kl"
+                    class="Checkbox__input"
+                    name="default2"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang2-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Hidden Label</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+
+        <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--hidden">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-hidden-label-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-hidden-label"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="picker-hidden-label"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-hidden-label"
+          >
+
+            <fieldset class="FieldGroup FieldGroup--fluid">
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-hidden-cs"
+                    class="Checkbox__input"
+                    name="hidden_label"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-hidden-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-hidden-dk"
+                    class="Checkbox__input"
+                    name="hidden_label"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-hidden-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-hidden-kl"
+                    class="Checkbox__input"
+                    name="hidden_label"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-hidden-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Required</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+
+        <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--required">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-required-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-required"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="picker-required"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-required"
+          >
+
+            <fieldset class="FieldGroup FieldGroup--fluid">
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-req-cs"
+                    class="Checkbox__input"
+                    name="required"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-req-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-req-dk"
+                    class="Checkbox__input"
+                    name="required"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-req-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-req-kl"
+                    class="Checkbox__input"
+                    name="required"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-req-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Helper Text</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+
+        <span class="UNSTABLE_Picker__label">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              aria-describedby="picker-helper-text"
+              id="picker-helper-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-helper"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="picker-helper"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-helper"
+          >
+
+            <fieldset class="FieldGroup FieldGroup--fluid" style="width: 300px">
+              <legend class="accessibility-hidden">Languages</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-helper-cs"
+                    class="Checkbox__input"
+                    name="helper"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-helper-cs"
+                    >
+                      Czech
+                    </label>
+                    <span class="Checkbox__helperText" aria-labelledby="lang-helper-cs">Select this when the listing has no language tag.</span>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-helper-dk"
+                    class="Checkbox__input"
+                    name="helper"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-helper-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-helper-kl"
+                    class="Checkbox__input"
+                    name="helper"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-helper-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+        <div id="picker-helper-text" class="UNSTABLE_Picker__helperText">Select one or more languages</div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Validation States</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--danger">
+
+        <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--required">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              aria-describedby="picker-danger-validation-text"
+              id="picker-danger-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-danger"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="picker-danger"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-danger"
+          >
+
+            <fieldset class="FieldGroup FieldGroup--fluid">
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-danger-cs"
+                    class="Checkbox__input"
+                    name="danger"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-danger-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-danger-dk"
+                    class="Checkbox__input"
+                    name="danger"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-danger-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-danger-kl"
+                    class="Checkbox__input"
+                    name="danger"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-danger-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+        <div id="picker-danger-validation-text" class="UNSTABLE_Picker__validationText">Please select at least one language</div>
+
+      </div>
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--warning">
+
+        <span class="UNSTABLE_Picker__label">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              aria-describedby="picker-warning-validation-text"
+              id="picker-warning-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-warning"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="picker-warning"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-warning"
+          >
+
+            <fieldset class="FieldGroup FieldGroup--fluid">
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-warning-cs"
+                    class="Checkbox__input"
+                    name="warning"
+                    autocomplete="off"
+                    checked
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-warning-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-warning-dk"
+                    class="Checkbox__input"
+                    name="warning"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-warning-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-warning-kl"
+                    class="Checkbox__input"
+                    name="warning"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-warning-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+        <div id="picker-warning-validation-text" class="UNSTABLE_Picker__validationText">Consider adding more languages</div>
+
+      </div>
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--success">
+
+        <span class="UNSTABLE_Picker__label">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              aria-describedby="picker-success-validation-text"
+              id="picker-success-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-success"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="picker-success"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-success"
+          >
+
+            <fieldset class="FieldGroup FieldGroup--fluid">
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-success-cs"
+                    class="Checkbox__input"
+                    name="success"
+                    autocomplete="off"
+                    checked
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-success-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-success-dk"
+                    class="Checkbox__input"
+                    name="success"
+                    autocomplete="off"
+                    checked
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-success-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-success-kl"
+                    class="Checkbox__input"
+                    name="success"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-success-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+        <div id="picker-success-validation-text" class="UNSTABLE_Picker__validationText">Great choice!</div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Disabled</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--disabled">
+
+        <span class="UNSTABLE_Picker__label">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-disabled-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-disabled"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="picker-disabled"
+              disabled
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-disabled"
+          >
+
+            <fieldset class="FieldGroup FieldGroup--fluid" disabled>
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-disabled-cs"
+                    class="Checkbox__input"
+                    name="disabled"
+                    autocomplete="off"
+                    disabled
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-disabled-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-disabled-dk"
+                    class="Checkbox__input"
+                    name="disabled"
+                    autocomplete="off"
+                    disabled
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-disabled-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-disabled-kl"
+                    class="Checkbox__input"
+                    name="disabled"
+                    autocomplete="off"
+                    disabled
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-disabled-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--disabled">
+
+        <span class="UNSTABLE_Picker__label">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="grid"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-disabled-pre-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <div
+                role="row"
+                data-tag-row
+                tabindex="-1"
+                aria-label="Czech"
+                aria-describedby="picker-tag-description"
+                class="Tag Tag--selected Tag--disabled Tag--small"
+              >
+                <div
+                  role="gridcell"
+                  aria-colindex="1"
+                  class="d-contents"
+                >
+                  <span data-tag-label>Czech</span>
+                  <button
+                    type="button"
+                    aria-label="Remove Czech"
+                    class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
+                    data-tag-close
+                    disabled
+                  >
+                    <svg
+                      class="Icon"
+                      width="16"
+                      height="16"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                role="row"
+                data-tag-row
+                tabindex="-1"
+                aria-label="Danish"
+                aria-describedby="picker-tag-description"
+                class="Tag Tag--selected Tag--disabled Tag--small"
+              >
+                <div
+                  role="gridcell"
+                  aria-colindex="1"
+                  class="d-contents"
+                >
+                  <span data-tag-label>Danish</span>
+                  <button
+                    type="button"
+                    aria-label="Remove Danish"
+                    class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
+                    data-tag-close
+                    disabled
+                  >
+                    <svg
+                      class="Icon"
+                      width="16"
+                      height="16"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-disabled-pre"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="picker-disabled-pre"
+              disabled
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-disabled-pre"
+          >
+
+            <fieldset class="FieldGroup FieldGroup--fluid" disabled>
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-disabled-pre-cs"
+                    class="Checkbox__input"
+                    name="disabled-pre"
+                    autocomplete="off"
+                    checked
+                    disabled
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-disabled-pre-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-disabled-pre-dk"
+                    class="Checkbox__input"
+                    name="disabled-pre"
+                    autocomplete="off"
+                    checked
+                    disabled
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-disabled-pre-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-disabled-pre-kl"
+                    class="Checkbox__input"
+                    name="disabled-pre"
+                    autocomplete="off"
+                    disabled
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-disabled-pre-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Fluid</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--fluid">
+
+        <span class="UNSTABLE_Picker__label">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-fluid-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-fluid"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="picker-fluid"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-fluid"
+          >
+
+            <fieldset class="FieldGroup FieldGroup--fluid">
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-fluid-cs"
+                    class="Checkbox__input"
+                    name="fluid"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-fluid-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-fluid-dk"
+                    class="Checkbox__input"
+                    name="fluid"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-fluid-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                  <input
+                    type="checkbox"
+                    id="lang-fluid-kl"
+                    class="Checkbox__input"
+                    name="fluid"
+                    autocomplete="off"
+                  />
+                  <div class="Checkbox__text">
+                    <label
+                      class="Checkbox__label"
+                      data-spirit-element="checkbox-label"
+                      for="lang-fluid-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Salary Picker</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+
+        <span class="UNSTABLE_Picker__label">Salary</span>
+
+        <div class="Dropdown">
+
+          <div
+            role="group"
+            aria-label="Salary"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected salary"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-salary-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Salary</span>
+            </div>
+
+            <button
+              id="picker-salary-trigger"
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-salary"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="picker-salary"
+            >
+              <span class="accessibility-hidden">Edit</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-salary"
+          >
+
+            <h3 class="typography-body-medium-bold mb-600">Salary</h3>
+            <p class="typography-body-small-text-regular mb-600">Set your minimum expected salary.</p>
+
+            <fieldset class="FieldGroup FieldGroup--fluid">
+              <legend class="accessibility-hidden">Salary</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Radio Radio--inputPositionStart Radio--item">
+                  <input
+                    type="radio"
+                    id="salary-no-limit"
+                    class="Radio__input"
+                    name="salary"
+                    checked
+                  />
+                  <div class="Radio__text">
+                    <label class="Radio__label" for="salary-no-limit">No limit</label>
+                  </div>
+                </div>
+
+                <div class="Radio Radio--inputPositionStart Radio--item">
+                  <input
+                    type="radio"
+                    id="salary-from"
+                    class="Radio__input"
+                    name="salary"
+                  />
+                  <div class="Radio__text">
+                    <label class="Radio__label" for="salary-from">From</label>
+                  </div>
+                </div>
+
+                <div class="TextField TextField--fluid TextField--medium">
+                  <label for="salary-textfield" class="TextField__label TextField__label--hidden">Salary</label>
+                  <input
+                    type="number"
+                    id="salary-textfield"
+                    class="TextField__input"
+                    name="salary_value"
+                    min="0"
+                    max="10000"
+                    step="100"
+                    value="3000"
+                    placeholder="0"
+                  />
+                </div>
+
+                <div class="Slider Slider--fluid">
+                  <label for="salary-slider" class="Slider__label Slider__label--hidden">Salary</label>
+                  <input
+                    class="Slider__input"
+                    id="salary-slider"
+                    style="--slider-position: 30%"
+                    type="range"
+                    min="0"
+                    max="10000"
+                    step="100"
+                    value="3000"
+                  />
+                </div>
+
+              </div>
+            </fieldset>
+
+            <div class="mt-600">
+              <button
+                type="button"
+                class="Button Button--primary Button--medium"
+                id="salary-apply"
+              >
+                Apply
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="UNSTABLE_Picker__helperText">Set your minimum expected salary</div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Single with any option</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+
+        <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--hidden">Publication time</span>
+
+        <div class="Dropdown">
+
+          <div
+            role="group"
+            aria-label="Publication time"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected publication time"
+              aria-live="off"
+              aria-relevant="additions"
+              id="demo-picker-publication-time-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Publication time</span>
+            </div>
+
+            <button
+              id="demo-picker-publication-time-trigger"
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#demo-picker-publication-time"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="demo-picker-publication-time"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="demo-picker-publication-time"
+          >
+
+            <h3 class="typography-body-medium-bold mb-600">Publication time</h3>
+
+            <fieldset class="FieldGroup FieldGroup--fluid">
+              <legend class="accessibility-hidden">Publication time</legend>
+              <div class="FieldGroup__fields">
+
+                <div class="Radio Radio--inputPositionStart Radio--item">
+                  <input
+                    type="radio"
+                    id="demo-picker-publication-time-any"
+                    class="Radio__input"
+                    name="demo-picker-publication-time"
+                    value=""
+                    checked
+                  />
+                  <div class="Radio__text">
+                    <label class="Radio__label" for="demo-picker-publication-time-any">Any time</label>
+                  </div>
+                </div>
+
+                <div class="Radio Radio--inputPositionStart Radio--item">
+                  <input
+                    type="radio"
+                    id="demo-picker-publication-time-24h"
+                    class="Radio__input"
+                    name="demo-picker-publication-time"
+                    value="24h"
+                  />
+                  <div class="Radio__text">
+                    <label class="Radio__label" for="demo-picker-publication-time-24h">Last 24 hours</label>
+                  </div>
+                </div>
+
+                <div class="Radio Radio--inputPositionStart Radio--item">
+                  <input
+                    type="radio"
+                    id="demo-picker-publication-time-3d"
+                    class="Radio__input"
+                    name="demo-picker-publication-time"
+                    value="3d"
+                  />
+                  <div class="Radio__text">
+                    <label class="Radio__label" for="demo-picker-publication-time-3d">Last 3 days</label>
+                  </div>
+                </div>
+
+                <div class="Radio Radio--inputPositionStart Radio--item">
+                  <input
+                    type="radio"
+                    id="demo-picker-publication-time-1w"
+                    class="Radio__input"
+                    name="demo-picker-publication-time"
+                    value="1w"
+                  />
+                  <div class="Radio__text">
+                    <label class="Radio__label" for="demo-picker-publication-time-1w">Last week</label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+            <div class="d-grid mt-600">
+              <button
+                type="button"
+                class="Button Button--primary Button--medium"
+                id="demo-picker-publication-time-apply"
+              >
+                Apply
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Grouped sections with Button</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+
+        <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--hidden">Employment type</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Employment type"
+          data-spirit-picker-aggregate-tags
+        >
+
+          <div
+            role="group"
+            aria-label="Employment type"
+            class="UNSTABLE_Picker__inputContainer"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected employment type"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-job-filters-selection"
+              class="UNSTABLE_Picker__selection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_Picker__selectionEmpty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Employment type</span>
+            </div>
+
+            <button
+              id="picker-job-filters-trigger"
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-job-filters"
+              class="UNSTABLE_Picker__trigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="picker-job-filters"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            class="DropdownPopover"
+            data-spirit-placement="bottom-start"
+            id="picker-job-filters"
+          >
+
+            <div style="width: 300px">
+
+              <h3 class="typography-body-medium-bold mb-600">Employment type</h3>
+
+              <fieldset class="FieldGroup FieldGroup--fluid mb-0">
+                <legend class="accessibility-hidden">Employment type</legend>
+                <div class="FieldGroup__fields">
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="job-filter-full"
+                      class="Checkbox__input"
+                      name="job-filters"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="job-filter-full"
+                      >
+                        Full-time
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="job-filter-part"
+                      class="Checkbox__input"
+                      name="job-filters"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="job-filter-part"
+                      >
+                        Part-time
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+
+              <hr class="Divider my-600" />
+
+              <h3 class="typography-body-medium-bold mb-600">Cooperation type</h3>
+
+              <fieldset class="FieldGroup FieldGroup--fluid mb-0">
+                <legend class="accessibility-hidden">Cooperation type</legend>
+                <div class="FieldGroup__fields">
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="job-filter-employment"
+                      class="Checkbox__input"
+                      name="job-filters"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="job-filter-employment"
+                      >
+                        Employment contract
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="job-filter-trade"
+                      class="Checkbox__input"
+                      name="job-filters"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="job-filter-trade"
+                      >
+                        Trade license (freelance)
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="job-filter-agreement"
+                      class="Checkbox__input"
+                      name="job-filters"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="job-filter-agreement"
+                      >
+                        Agreement (DPP/DPČ)
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+
+              <hr class="Divider my-600" />
+
+              <h3 class="typography-body-medium-bold mb-600">Internships</h3>
+
+              <fieldset class="FieldGroup FieldGroup--fluid">
+                <legend class="accessibility-hidden">Internships</legend>
+                <div class="FieldGroup__fields">
+
+                  <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
+                    <input
+                      type="checkbox"
+                      id="job-filter-internships"
+                      class="Checkbox__input"
+                      name="job-filters"
+                      autocomplete="off"
+                    />
+                    <div class="Checkbox__text">
+                      <label
+                        class="Checkbox__label"
+                        data-spirit-element="checkbox-label"
+                        for="job-filter-internships"
+                      >
+                        Internships, traineeships and trainee programs
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+
+            </div>
+
+            <div class="mt-600 d-grid">
+              <button
+                type="button"
+                class="Button Button--primary Button--medium"
+                id="job-filters-apply"
+              >
+                Apply
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Safety margin so the last DropdownPopover does not overflow the page -->
+<div class="pb-1700"></div>

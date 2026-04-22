@@ -1,0 +1,663 @@
+    <div class="docs-Stack docs-Stack--stretch">
+      <div
+        class="Grid Grid--cols-1 Grid--desktop--cols-3"
+        style="--grid-spacing-y: var(--spirit-space-1000)"
+      >
+        <section>
+          <h3>Default State</h3>
+          <ul aria-label="File attachments">
+            <li class="UNSTABLE_File">
+              <div class="UNSTABLE_File__preview">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+                </svg>
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <span class="UNSTABLE_File__helperText">8,5 kB</span>
+                </div>
+              </div>
+              <div
+                class="Flex Flex--noWrap Flex--alignmentXStretch Flex--tablet--alignmentXLeft Flex--alignmentYStretch Flex--horizontal"
+                style="--flex-spacing-x: var(--spirit-space-500)"
+              >
+                <button
+                  type="button"
+                  class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+                  aria-label="Edit file name Document.pdf"
+                >
+                  <svg
+                    class="Icon"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#edit" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+                  aria-label="Remove file Document.pdf from list"
+                >
+                  <svg
+                    class="Icon"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                  </svg>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Uploading State</h3>
+          <ul aria-label="File attachments">
+            <li class="UNSTABLE_File">
+              <div class="UNSTABLE_File__preview">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+                </svg>
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <div class="UNSTABLE_File__helperText">
+                    <div>
+                      <svg
+                        class="Icon animation-spin-clockwise"
+                        width="16"
+                        height="16"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
+                      </svg>
+                      <span>Uploading your file…</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+                aria-label="Remove file Document.pdf from list"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Disabled State</h3>
+          <ul aria-label="File attachments">
+            <li class="UNSTABLE_File UNSTABLE_File--disabled">
+              <div class="UNSTABLE_File__preview">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+                </svg>
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <span class="UNSTABLE_File__helperText">8,5 kB</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--large ControlButton--symmetrical ControlButton--disabled color-scheme-on-disabled dynamic-color-border dynamic-color-background-interactive"
+                aria-label="Remove file Document.pdf from list"
+                disabled
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Success State</h3>
+          <ul aria-label="File attachments">
+            <li class="UNSTABLE_File has-success">
+              <div class="UNSTABLE_File__preview">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+                </svg>
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <div class="UNSTABLE_File__validationText">
+                    <svg
+                      class="Icon"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+                    </svg>
+                    <div>File uploaded successfully</div>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+                aria-label="Remove file Document.pdf from list"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Warning State</h3>
+          <ul aria-label="File attachments">
+            <li class="UNSTABLE_File has-warning">
+              <div class="UNSTABLE_File__preview">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+                </svg>
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <div class="UNSTABLE_File__validationText">
+                    <svg
+                      class="Icon"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
+                    </svg>
+                    <div>Large file – may take time</div>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+                aria-label="Remove file Document.pdf from list"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Danger State</h3>
+          <ul aria-label="File attachments">
+            <li class="UNSTABLE_File has-danger">
+              <div class="UNSTABLE_File__preview">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+                </svg>
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <div class="UNSTABLE_File__validationText">
+                    <svg
+                      class="Icon"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#danger" />
+                    </svg>
+                    <div>File upload error – please retry</div>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+                aria-label="Remove file Document.pdf from list"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>No action buttons</h3>
+          <ul aria-label="File attachments">
+            <li class="UNSTABLE_File">
+              <div class="UNSTABLE_File__preview">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+                </svg>
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <span class="UNSTABLE_File__helperText">8,5 kB</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000 spirit-feature-enable-v5-control-button-expanded-size-scale">
+  <div class="Container">
+    <h2 class="docs-Heading">Image Preview Variant</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+      <div
+        class="Grid Grid--cols-1 Grid--desktop--cols-3"
+        style="--grid-spacing-y: var(--spirit-space-1000)"
+      >
+        <section>
+          <h3>Default State</h3>
+          <ul aria-label="Image attachments">
+            <li class="UNSTABLE_File">
+              <div class="UNSTABLE_File__preview">
+                <img
+                  src="https://picsum.photos/seed/avatar1/48/48"
+                  width="48"
+                  height="48"
+                  alt="Profile photo"
+                />
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <span class="UNSTABLE_File__helperText">8,5 kB</span>
+                </div>
+              </div>
+              <div
+                class="Flex Flex--noWrap Flex--alignmentXStretch Flex--tablet--alignmentXLeft Flex--alignmentYStretch Flex--horizontal"
+                style="--flex-spacing-x: var(--spirit-space-500)"
+              >
+                <button
+                  type="button"
+                  class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+                  aria-label="Edit file name Document.pdf"
+                >
+                  <svg
+                    class="Icon"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#edit" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+                  aria-label="Remove file Document.pdf from list"
+                >
+                  <svg
+                    class="Icon"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                  </svg>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Uploading State</h3>
+          <ul aria-label="Image attachments">
+            <li class="UNSTABLE_File">
+              <div class="UNSTABLE_File__preview">
+                <img
+                  src="https://picsum.photos/seed/avatar1/48/48"
+                  width="48"
+                  height="48"
+                  alt="Profile photo"
+                />
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <div class="UNSTABLE_File__helperText">
+                    <div>
+                      <svg
+                        class="Icon animation-spin-clockwise"
+                        width="16"
+                        height="16"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
+                      </svg>
+                      <span>Uploading your file…</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+                aria-label="Remove file Document.pdf from list"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Disabled State</h3>
+          <ul aria-label="Image attachments">
+            <li class="UNSTABLE_File UNSTABLE_File--disabled">
+              <div class="UNSTABLE_File__preview">
+                <img
+                  src="https://picsum.photos/seed/avatar1/48/48"
+                  width="48"
+                  height="48"
+                  alt="Profile photo"
+                />
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <span class="UNSTABLE_File__helperText">8,5 kB</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--large ControlButton--symmetrical ControlButton--disabled color-scheme-on-disabled dynamic-color-border dynamic-color-background-interactive"
+                aria-label="Remove file Document.pdf from list"
+                disabled
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Success State</h3>
+          <ul aria-label="Image attachments">
+            <li class="UNSTABLE_File has-success">
+              <div class="UNSTABLE_File__preview">
+                <img
+                  src="https://picsum.photos/seed/avatar1/48/48"
+                  width="48"
+                  height="48"
+                  alt="Profile photo"
+                />
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <div class="UNSTABLE_File__validationText">
+                    <svg
+                      class="Icon"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+                    </svg>
+                    <div>File uploaded successfully</div>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+                aria-label="Remove file Document.pdf from list"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Warning State</h3>
+          <ul aria-label="Image attachments">
+            <li class="UNSTABLE_File has-warning">
+              <div class="UNSTABLE_File__preview">
+                <img
+                  src="https://picsum.photos/seed/avatar1/48/48"
+                  width="48"
+                  height="48"
+                  alt="Profile photo"
+                />
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <div class="UNSTABLE_File__validationText">
+                    <svg
+                      class="Icon"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
+                    </svg>
+                    <div>Large file – may take time</div>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+                aria-label="Remove file Document.pdf from list"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Danger State</h3>
+          <ul aria-label="Image attachments">
+            <li class="UNSTABLE_File has-danger">
+              <div class="UNSTABLE_File__preview">
+                <img
+                  src="https://picsum.photos/seed/avatar1/48/48"
+                  width="48"
+                  height="48"
+                  alt="Profile photo"
+                />
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <div class="UNSTABLE_File__validationText">
+                    <svg
+                      class="Icon"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#danger" />
+                    </svg>
+                    <div>File upload error – please retry</div>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive"
+                aria-label="Remove file Document.pdf from list"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>No action buttons</h3>
+          <ul aria-label="Image attachments">
+            <li class="UNSTABLE_File">
+              <div class="UNSTABLE_File__preview">
+                <img
+                  src="https://picsum.photos/seed/avatar1/48/48"
+                  width="48"
+                  height="48"
+                  alt="Profile photo"
+                />
+              </div>
+              <div class="UNSTABLE_File__content">
+                <div class="UNSTABLE_File__text">
+                  <span class="UNSTABLE_File__name">
+                    <span class="text-truncate">Document.pdf</span>
+                  </span>
+                  <span class="UNSTABLE_File__helperText">8,5 kB</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
