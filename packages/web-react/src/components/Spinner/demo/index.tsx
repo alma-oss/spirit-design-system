@@ -1,24 +1,7 @@
-import icons from '@alma-oss/spirit-icons/icons';
-import React, { StrictMode } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import DocsSection from '../../../../docs/DocsSection';
-import { IconsProvider } from '../../../context';
-import SpinnerColors from './SpinnerColors';
-import SpinnerDefault from './SpinnerDefault';
-import SpinnerIconProps from './SpinnerIconProps';
+import Preview from '../preview';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <IconsProvider value={icons}>
-      <DocsSection title="Default">
-        <SpinnerDefault />
-      </DocsSection>
-      <DocsSection title="Colors">
-        <SpinnerColors />
-      </DocsSection>
-      <DocsSection title="Icon Props">
-        <SpinnerIconProps />
-      </DocsSection>
-    </IconsProvider>
-  </StrictMode>,
+  <Preview />,
 );

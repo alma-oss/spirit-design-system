@@ -1,76 +1,7 @@
-import icons from '@alma-oss/spirit-icons/icons';
-import React, { StrictMode } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import DocsSection from '../../../../docs/DocsSection';
-import { IconsProvider } from '../../../context';
-import CardAlignment from './CardAlignment';
-import CardArticle from './CardArticle';
-import CardContentOptions from './CardContentOptions';
-import CardCustom from './CardCustom';
-import CardFooterAlignment from './CardFooterAlignment';
-import CardFooterContent from './CardFooterContent';
-import CardGeneralOptions from './CardGeneralOptions';
-import CardHorizontalLayout from './CardHorizontalLayout';
-import CardLogoDemo from './CardLogo';
-import { CardMediaOptions } from './CardMediaOptions';
-import CardMediaSizes from './CardMediaSizes';
-import CardResponsiveCard from './CardResponsiveCard';
-import CardReversedHorizontalLayout from './CardReversedHorizontalLayout';
-import CardText from './CardText';
-import CardTitleAlternatives from './CardTitleAlternatives';
-import CardTitleOptions from './CardTitleOptions';
+import Preview from '../preview';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <IconsProvider value={icons}>
-      <DocsSection title="General Options">
-        <CardGeneralOptions />
-      </DocsSection>
-      <DocsSection title="Content Options">
-        <CardContentOptions />
-      </DocsSection>
-      <DocsSection title="Logo">
-        <CardLogoDemo />
-      </DocsSection>
-      <DocsSection title="Horizontal Card Layout">
-        <CardHorizontalLayout />
-      </DocsSection>
-      <DocsSection title="Reversed Horizontal Card Layout">
-        <CardReversedHorizontalLayout />
-      </DocsSection>
-      <DocsSection title="Responsive Card Layout">
-        <CardResponsiveCard />
-      </DocsSection>
-      <DocsSection title="Card Vertical Alignment">
-        <CardAlignment />
-      </DocsSection>
-      <DocsSection title="Media Options">
-        <CardMediaOptions />
-      </DocsSection>
-      <DocsSection title="Media Sizes">
-        <CardMediaSizes />
-      </DocsSection>
-      <DocsSection title="Title Options">
-        <CardTitleOptions />
-      </DocsSection>
-      <DocsSection title="Title with Heading or Text">
-        <CardTitleAlternatives />
-      </DocsSection>
-      <DocsSection title="Footer Alignment">
-        <CardFooterAlignment />
-      </DocsSection>
-      <DocsSection title="Footer Content">
-        <CardFooterContent />
-      </DocsSection>
-      <DocsSection title="Text Cards">
-        <CardText />
-      </DocsSection>
-      <DocsSection title="Custom Cards">
-        <CardCustom />
-      </DocsSection>
-      <DocsSection title="Article Card">
-        <CardArticle />
-      </DocsSection>
-    </IconsProvider>
-  </StrictMode>,
+  <Preview />,
 );

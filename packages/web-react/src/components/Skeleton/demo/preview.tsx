@@ -1,0 +1,25 @@
+'use client';
+
+import React, { StrictMode } from 'react';
+import DocsSection from '../../../../docs/DocsSection';
+import SkeletonCombined from './SkeletonCombined';
+import SkeletonHeadings from './SkeletonHeadings';
+import SkeletonShapes from './SkeletonShapes';
+import SkeletonTexts from './SkeletonTexts';
+
+export const Preview = () => (
+  <StrictMode>
+    <DocsSection title="SkeletonText" stackAlignment="stretch">
+      <SkeletonTexts />
+    </DocsSection>
+    <DocsSection title="SkeletonHeading" stackAlignment="stretch">
+      <SkeletonHeadings />
+    </DocsSection>
+    <DocsSection title="SkeletonShape" stackAlignment="stretch">
+      <SkeletonShapes />
+    </DocsSection>
+    <DocsSection title="Combined Skeletons" stackAlignment="stretch">
+      <SkeletonCombined />
+    </DocsSection>
+  </StrictMode>
+);

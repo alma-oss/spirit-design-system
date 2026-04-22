@@ -1,12 +1,7 @@
-import React, { StrictMode } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import DocsSection from '../../../../docs/DocsSection';
-import DividerDefault from './DividerDefault';
+import Preview from '../preview';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <DocsSection title="Default" stackAlignment="stretch">
-      <DividerDefault />
-    </DocsSection>
-  </StrictMode>,
+  <Preview />,
 );

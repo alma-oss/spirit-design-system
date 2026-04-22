@@ -1,24 +1,7 @@
-import React, { StrictMode } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import DocsSection from '../../../../docs/DocsSection';
-import SkeletonCombined from './SkeletonCombined';
-import SkeletonHeadings from './SkeletonHeadings';
-import SkeletonShapes from './SkeletonShapes';
-import SkeletonTexts from './SkeletonTexts';
+import Preview from '../preview';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <DocsSection title="SkeletonText" stackAlignment="stretch">
-      <SkeletonTexts />
-    </DocsSection>
-    <DocsSection title="SkeletonHeading" stackAlignment="stretch">
-      <SkeletonHeadings />
-    </DocsSection>
-    <DocsSection title="SkeletonShape" stackAlignment="stretch">
-      <SkeletonShapes />
-    </DocsSection>
-    <DocsSection title="Combined Skeletons" stackAlignment="stretch">
-      <SkeletonCombined />
-    </DocsSection>
-  </StrictMode>,
+  <Preview />,
 );
