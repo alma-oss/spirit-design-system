@@ -1,42 +1,40 @@
-import { Heading, UNSTABLE_Table } from '@alma-oss/spirit-web-react';
+import { Heading, ScrollView, UNSTABLE_Table } from '@alma-oss/spirit-web-react';
 import type { MDXComponents } from 'mdx/types';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    h1: ({ children, ...props }) => (
-      <Heading elementType="h1" size="xlarge" {...props}>
-        {children}
-      </Heading>
-    ),
+    h1: () => null,
     h2: ({ children, ...props }) => (
-      <Heading elementType="h2" size="large" {...props}>
+      <Heading elementType="h2" size="small" marginBottom="space-600" marginTop="space-1200" {...props}>
         {children}
       </Heading>
     ),
     h3: ({ children, ...props }) => (
-      <Heading elementType="h3" size="medium" {...props}>
+      <Heading elementType="h3" size="xsmall" marginBottom="space-600" marginTop="space-1200" {...props}>
         {children}
       </Heading>
     ),
     h4: ({ children, ...props }) => (
-      <Heading elementType="h4" size="small" {...props}>
+      <Heading elementType="h4" size="xsmall" marginBottom="space-600" marginTop="space-1200" {...props}>
         {children}
       </Heading>
     ),
     h5: ({ children, ...props }) => (
-      <Heading elementType="h5" size="xsmall" {...props}>
+      <Heading elementType="h5" size="xsmall" marginBottom="space-600" marginTop="space-1200" {...props}>
         {children}
       </Heading>
     ),
     h6: ({ children, ...props }) => (
-      <Heading elementType="h6" size="xsmall" {...props}>
+      <Heading elementType="h6" size="xsmall" marginBottom="space-600" marginTop="space-1200" {...props}>
         {children}
       </Heading>
     ),
     table: ({ children, ...props }) => (
-      <UNSTABLE_Table isBordered isStriped {...props}>
-        {children}
-      </UNSTABLE_Table>
+      <div className="d-grid mb-1200">
+        <ScrollView direction="horizontal" isScrollbarDisabled overflowDecorators="shadows">
+          <UNSTABLE_Table {...props}>{children}</UNSTABLE_Table>
+        </ScrollView>
+      </div>
     ),
     ...components,
   };

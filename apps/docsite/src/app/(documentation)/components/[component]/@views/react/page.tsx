@@ -20,7 +20,11 @@ const ReactTabPage = async ({ params }: ReactTabProps) => {
       `@workspace/web-react/components/${slugToComponentName(component)}/README.md`
     );
 
-    return <ReadMe />;
+    return (
+      <div className="docs-Markdown">
+        <ReadMe />
+      </div>
+    );
   } catch (error) {
     logError(`[ComponentView] Failed to load React README for "${component}":`, error);
 

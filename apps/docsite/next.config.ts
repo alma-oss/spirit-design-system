@@ -12,7 +12,7 @@ type JsonValue = string | number | boolean | JsonValue[] | { [key: string]: Json
 type StringPluginTuple = [pluginName: string, ...options: JsonValue[]];
 
 const rehypePrettyCodeOptions = {
-  theme: 'github-light',
+  theme: 'tokyo-night',
 };
 
 const mdxPluginOptions: { remarkPlugins: StringPluginTuple[]; rehypePlugins: StringPluginTuple[] } = {

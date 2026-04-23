@@ -1,6 +1,13 @@
 'use client';
 
-import { Navigation, NavigationAction, NavigationItem, Section, Flex } from '@alma-oss/spirit-web-react';
+import {
+  Container,
+  Navigation,
+  NavigationAction,
+  NavigationItem,
+  Section,
+  ScrollView,
+} from '@alma-oss/spirit-web-react';
 import { routes, componentSegments } from '@local/domains/routing/routes';
 import NextLink from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
