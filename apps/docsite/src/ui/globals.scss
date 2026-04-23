@@ -4,20 +4,17 @@
 
 // 1. Expand the page to fill the viewport height to be ready for various themes.
 // 2. Make the footer sticky.
-// 3. Not Found page: 3 children (Header, main, Footer) instead of 4, so adjust grid.
 
+// 1.
 html {
-    height: 100%; // 1.
+    height: 100%;
 }
 
+// 2.
 body {
-    min-height: 100%; // 1.
-    display: grid; // 2.
-    grid-template-rows: auto 1fr auto; // 3.
-
-    &:has(> section) {
-        grid-template-rows: auto auto 1fr auto;
-    }
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 }
 
 :root,

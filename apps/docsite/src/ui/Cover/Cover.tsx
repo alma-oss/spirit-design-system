@@ -5,7 +5,7 @@ import NextLink from 'next/link';
 import React from 'react';
 
 const Cover = () => (
-  <Section size="xlarge" textAlignment="center" backgroundColor="primary" theme="theme-light-on-brand">
+  <Section size="xlarge" textAlignment="center" backgroundColor="primary">
     <Heading elementType="h1" size="xlarge" emphasis="bold">
       Spirit Design System
     </Heading>

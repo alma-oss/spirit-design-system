@@ -1,4 +1,4 @@
-import { ButtonLink, Container, EmptyState, EmptyStateSection, Flex, Heading, Text } from '@alma-oss/spirit-web-react';
+import { ButtonLink, EmptyState, EmptyStateSection, Flex, Heading, Section, Text } from '@alma-oss/spirit-web-react';
 import { routes } from '@local/domains/routing/routes';
 import { Header, Footer } from '@local/ui';
 import { AppProvider } from '@local/ui/AppProvider';
@@ -17,8 +17,8 @@ const GlobalNotFound = () => (
     <body className={`${inter.className} antialiased`}>
       <AppProvider>
         <Header disableClientRouting />
-        <Flex elementType="main" UNSAFE_className="py-1100 pt-tablet-1600" alignmentX="center" alignmentY="center">
-          <Container>
+        <Flex elementType="main" alignmentX="center" alignmentY="center">
+          <Section size="medium">
             <EmptyState spacing="space-900">
               <EmptyStateSection>
                 <Heading elementType="h1" size="xlarge">
@@ -35,7 +35,7 @@ const GlobalNotFound = () => (
                 <ButtonLink href={routes.homepage}>Back to Homepage</ButtonLink>
               </EmptyStateSection>
             </EmptyState>
-          </Container>
+          </Section>
         </Flex>
         <Footer />
       </AppProvider>

@@ -1,7 +1,6 @@
 'use client';
 
 import { Container, Flex, UNSTABLE_Header, UNSTABLE_HeaderLogo } from '@alma-oss/spirit-web-react';
-import useIsPage from '@local/hooks/useIsPage';
 import { Menu } from '@local/ui/Menu';
 import SpiritLogo from '@local/ui/SpiritLogo';
 import NextLink from 'next/link';
@@ -25,30 +24,21 @@ interface HeaderProps {
   disableClientRouting?: boolean;
 }
 
-const Header = ({ disableClientRouting = false }: HeaderProps) => {
-  const isHomePage = useIsPage(routes.homepage);
-  const isComponentsPage = useIsPage(routes.components);
-
-  return (
-    <UNSTABLE_Header
-      theme="theme-light-on-brand"
-      {...(isComponentsPage && { UNSAFE_className: 'hide-from-visual-tests' })}
-      hasBottomDivider={isHomePage}
-    >
-      <Container isFluid>
-        <Flex alignmentX="left" spacingX="space-1000">
-          <UNSTABLE_HeaderLogo
-            elementType={disableClientRouting ? 'a' : NextLink}
-            href={routes.homepage}
-            aria-label="Spirit Development Preview"
-          >
-            <SpiritLogo />
-          </UNSTABLE_HeaderLogo>
-          <Menu />
-        </Flex>
-      </Container>
-    </UNSTABLE_Header>
-  );
-};
+const Header = ({ disableClientRouting = false }: HeaderProps) => (
+  <UNSTABLE_Header hasBottomDivider>
+    <Container isFluid>
+      <Flex alignmentX="left" spacingX="space-1000">
+        <UNSTABLE_HeaderLogo
+          elementType={disableClientRouting ? 'a' : NextLink}
+          href={routes.homepage}
+          aria-label="Spirit Development Preview"
+        >
+          <SpiritLogo />
+        </UNSTABLE_HeaderLogo>
+        <Menu />
+      </Flex>
+    </Container>
+  </UNSTABLE_Header>
+);
 
 export default Header;
