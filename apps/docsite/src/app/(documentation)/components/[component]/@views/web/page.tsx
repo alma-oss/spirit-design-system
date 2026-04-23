@@ -20,7 +20,11 @@ const WebTabPage = async ({ params }: WebTabPageProps) => {
       `@workspace/web/scss/components/${slugToComponentName(component)}/README.md`
     );
 
-    return <ReadMe />;
+    return (
+      <div className="docs-Markdown">
+        <ReadMe />
+      </div>
+    );
   } catch (error) {
     logError(`[ComponentView] Failed to load Web README for "${component}":`, error);
 
