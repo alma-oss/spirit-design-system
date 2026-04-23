@@ -9,7 +9,7 @@ const ComponentsPage = () => {
   const components: string[] = fetchAllComponents();
 
   return (
-    <Section>
+    <Section size="xlarge">
       <Flex alignmentX="center" marginBottom="space-1200">
         <ComponentSortToggle />
       </Flex>
