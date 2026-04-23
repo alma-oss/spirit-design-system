@@ -12,13 +12,15 @@
 
 .UNSTABLE_Table thead {
     text-align: left;
-    background-color: theme.$background-color-header;
 }
 
 .UNSTABLE_Table th {
     @include typography.generate(theme.$typography-header);
 
     padding: theme.$padding-cell;
+    font-variant: small-caps;
+    letter-spacing: 0.075em;
+    text-transform: lowercase;
     vertical-align: middle;
     border-bottom: theme.$border-width theme.$border-style theme.$border-color;
 }
@@ -43,7 +45,6 @@
     padding: theme.$padding-cell-compact;
 }
 
-// cSpell:ignore hoverable
 .UNSTABLE_Table--hoverable tbody tr {
     transition: background-color theme.$transition-duration theme.$transition-timing;
 }
@@ -52,7 +53,6 @@
     background-color: theme.$background-color-striped;
 }
 
-// cSpell:ignore hoverable
 .UNSTABLE_Table--hoverable tbody tr:hover {
     background-color: theme.$background-color-striped;
 }
