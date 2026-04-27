@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(ls)",
+      "Shell(cat)",
+      "Shell(echo)",
+      "Shell(pwd)",
+      "Shell(which)",
+      "Shell(find)",
+      "Shell(grep)",
+      "Shell(head)",
+      "Shell(tail)",
+      "Shell(wc)",
+      "Shell(diff)",
+      "Shell(stat)",
+      "Shell(jq)",
+      "Shell(git:status)",
+      "Shell(git:log)",
+      "Shell(git:diff)",
+      "Shell(git:branch)",
+      "Shell(git:show)",
+      "Shell(git:remote)",
+      "Shell(git:stash)",
+      "Shell(git:tag)",
+      "Shell(gh:pr)",
+      "Shell(gh:repo)",
+      "Shell(yarn)",
+      "Shell(make)"
+    ],
+    "deny": [
+      "Shell(git push --force)",
+      "Shell(git reset --hard)",
+      "Shell(git clean -fd)",
+      "Shell(git branch -D)",
+      "Shell(git:filter-branch)",
+      "Shell(git:gc)",
+      "Shell(make version)",
+      "Shell(* publish:*)",
+      "Read(~/.ssh/*)",
+      "Read(.env*)"
+    ]
+  }
+}

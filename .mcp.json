@@ -1,0 +1,52 @@
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["chrome-devtools-mcp@latest"]
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "figma": {
+      "type": "http",
+      "url": "http://127.0.0.1:3845/mcp"
+    },
+    "github": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "$GITHUB_TOKEN"
+      },
+      "type": "stdio"
+    },
+    "mcp-atlassian": {
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "JIRA_URL",
+        "-e",
+        "JIRA_PERSONAL_TOKEN",
+        "-e",
+        "JIRA_SSL_VERIFY",
+        "-e",
+        "ENABLED_TOOLS",
+        "-e",
+        "JIRA_PROJECTS_FILTER",
+        "ghcr.io/sooperset/mcp-atlassian:latest"
+      ],
+      "env": {
+        "JIRA_URL": "https://jira.almacareer.tech/",
+        "JIRA_PERSONAL_TOKEN": "$JIRA_TOKEN",
+        "JIRA_SSL_VERIFY": "true",
+        "ENABLED_TOOLS": "jira_get_issue,jira_search,jira_get_all_projects,jira_get_project_issues,jira_get_transitions,jira_search_fields,jira_get_agile_boards,jira_get_board_issues,jira_get_sprints_from_board,jira_get_sprint_issues,jira_get_issue_link_types,jira_get_project_versions,jira_create_issue,jira_update_issue,jira_add_comment,jira_transition_issue,jira_link_to_epic,jira_create_issue_link",
+        "JIRA_PROJECTS_FILTER": "DS"
+      },
+      "command": "docker",
+      "type": "stdio"
+    }
+  }
+}
