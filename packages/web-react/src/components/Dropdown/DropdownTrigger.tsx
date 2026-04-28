@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ElementType } from 'react';
-import { useStyleProps } from '../../hooks';
+import { useOpenOnArrowDown, useStyleProps } from '../../hooks';
 import { type DropdownTriggerProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useDropdownContext } from './DropdownContext';
@@ -18,11 +18,26 @@ const DropdownTrigger = <E extends ElementType = 'button'>(props: DropdownTrigge
   const { id, isOpen, onToggle, fullWidthMode, triggerRef } = useDropdownContext();
   const { classProps, props: modifiedProps } = useDropdownStyleProps({ isOpen, ...rest });
   const { styleProps: triggerStyleProps, props: transferProps } = useStyleProps(modifiedProps);
+  const { onKeyDown: onUserKeyDown, ...otherProps } = transferProps;
   const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.trigger, triggerStyleProps });
-  const { triggerProps } = useDropdownAriaProps({ id, isOpen, toggleHandler: onToggle, fullWidthMode });
+  const hasPopup = otherProps['aria-haspopup'];
+  const { triggerProps } = useDropdownAriaProps({
+    id,
+    isOpen,
+    toggleHandler: onToggle,
+    fullWidthMode,
+    hasPopup: typeof hasPopup === 'string' || typeof hasPopup === 'boolean' ? hasPopup : undefined,
+  });
+
+  const handleKeyDown = useOpenOnArrowDown({
+    isOpen,
+    onToggle,
+    onKeyDown: onUserKeyDown,
+  });
+  const mergedProps = { ...otherProps, ...triggerProps, onKeyDown: handleKeyDown };
 
   return (
-    <ElementTag {...transferProps} {...triggerProps} {...mergedStyleProps} ref={triggerRef}>
+    <ElementTag {...mergedProps} {...mergedStyleProps} ref={triggerRef}>
       {typeof children === 'function' ? children({ isOpen }) : children}
     </ElementTag>
   );

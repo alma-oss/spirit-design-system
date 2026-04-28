@@ -5,6 +5,7 @@ export * from './colorObjectGenerators';
 export * from './compose';
 export * from './debounce';
 export * from './delayedCallback';
+export * from './focusable';
 export * from './htmlReactParser';
 export * from './mergeStyleProps';
 export * from './router';
