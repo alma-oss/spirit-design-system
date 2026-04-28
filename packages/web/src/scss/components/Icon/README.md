@@ -3,7 +3,7 @@
 ## Basic Usage
 
 ```html
-<svg width="24" height="24">
+<svg width="24" height="24" style="--spirit-icon-size: 1.5rem;">
   <use xlink:href="/assets/icons/svg/sprite.svg#info" />
 </svg>
 ```
@@ -35,6 +35,14 @@ Use CSS custom properties to define the `size` of the icon.
 - `--spirit-icon-size: number{rem};`
 - `--spirit-icon-size-tablet: number{rem}`
 - `--spirit-icon-size-desktop: number{rem}`
+
+For a single (non-responsive) size, use inline style with `--spirit-icon-size`.
+
+```html
+<svg class="Icon" width="24" height="24" style="--spirit-icon-size: 1.5rem;">
+  <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+</svg>
+```
 
 The prefix `spirit-` is `css-variable-prefix` defined in the `design tokens` and can vary depending on the project.
 Always refer to your project's design tokens for the correct prefix.
