@@ -1,0 +1,32 @@
+@use '../../tools/typography';
+@use 'theme';
+
+.CharacterCounter {
+    @include typography.generate(theme.$typography);
+
+    display: block;
+    margin-top: theme.$margin-top;
+    margin-left: auto;
+}
+
+.CharacterCounter--disabled {
+    color: theme.$color-state-disabled;
+}
+
+.CharacterCounter--success,
+.CharacterCounter--warning,
+.CharacterCounter--danger {
+    @include typography.generate(theme.$typography-state-validation);
+}
+
+.CharacterCounter--success {
+    color: theme.$color-state-success;
+}
+
+.CharacterCounter--warning {
+    color: theme.$color-state-warning;
+}
+
+.CharacterCounter--danger {
+    color: theme.$color-state-danger;
+}
