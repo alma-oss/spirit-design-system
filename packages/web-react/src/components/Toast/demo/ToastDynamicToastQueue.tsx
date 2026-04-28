@@ -207,7 +207,7 @@ const ToastDynamicToastQueue = () => {
               label="Message"
               name="message"
               id="toast-message"
-              helperText="Can contain HTML."
+              helperText="Can contain HTML"
               value={messageValue}
               onChange={(e) => setMessageValue(e.currentTarget.value)}
             />
@@ -222,7 +222,7 @@ const ToastDynamicToastQueue = () => {
               label="Link"
               name="link"
               id="toast-link"
-              helperText="Can contain HTML."
+              helperText="Can contain HTML"
               value={linkValue}
               isDisabled={!isLinkFieldEnabled}
               onChange={(e) => setLinkValue(e.currentTarget.value)}
