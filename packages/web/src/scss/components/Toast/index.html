@@ -357,17 +357,22 @@
                 />
               </div>
             </div>
-            <div class="TextArea TextArea--medium">
+            <div>
               <label
                 for="toast-message"
                 class="Label"
               >Message</label>
-              <textarea
-                id="toast-message"
-                class="TextArea__input"
-                autocomplete="off"
-              >This is a new toast message.</textarea>
-              <div class="HelperText">Can contain HTML.</div>
+              <div class="InputContainer InputContainer--medium">
+                <textarea
+                  id="toast-message"
+                  autocomplete="off"
+                  aria-describedby="toast-message-helper-text"
+                >This is a new toast message.</textarea>
+              </div>
+              <div
+                id="toast-message-helper-text"
+                class="HelperText"
+              >Can contain HTML.</div>
             </div>
             <div class="Checkbox">
               <input
@@ -385,17 +390,22 @@
                 >Add link</label>
               </div>
             </div>
-            <div class="TextArea TextArea--medium">
+            <div>
               <label
                 for="toast-link"
                 class="Label"
               >Link</label>
-              <textarea
-                id="toast-link"
-                class="TextArea__input"
-                autocomplete="off"
-              >This is a toast link.</textarea>
-              <div class="HelperText">Can contain HTML.</div>
+              <div class="InputContainer InputContainer--medium">
+                <textarea
+                  id="toast-link"
+                  autocomplete="off"
+                  aria-describedby="toast-link-helper-text"
+                >This is a toast link.</textarea>
+              </div>
+              <div
+                id="toast-link-helper-text"
+                class="HelperText"
+              >Can contain HTML.</div>
             </div>
             <div>
               <button
