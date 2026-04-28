@@ -114,3 +114,6 @@ Caddyfile
 
 # Backstage Catalog Info
 catalog-info.yaml
+
+# JetBrains IDE
+.idea/
