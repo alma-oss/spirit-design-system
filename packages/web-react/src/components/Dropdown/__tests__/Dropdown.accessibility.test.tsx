@@ -9,7 +9,7 @@ describe('Dropdown accessibility', () => {
   const DropdownTest = (props: Partial<SpiritDropdownProps>) => (
     <Dropdown id="dropdown-example" onToggle={() => {}} isOpen={false} {...props}>
       <DropdownTrigger>Trigger</DropdownTrigger>
-      <DropdownPopover>Dropdown content</DropdownPopover>
+      <DropdownPopover aria-label="Dropdown">Dropdown content</DropdownPopover>
     </Dropdown>
   );
 

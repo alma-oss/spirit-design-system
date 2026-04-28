@@ -1,4 +1,5 @@
 export * from './styleProps';
+export * from './useAutoFocus';
 export * from './useAlignmentClass';
 export * from './useAriaIdRefs';
 export * from './useAriaIds';
@@ -24,4 +25,6 @@ export * from './useSelectionState';
 export * from './useSpacingStyle';
 export * from './useSymmetry';
 export * from './useToggle';
+export * from './useOverlay';
+export * from './useOpenOnArrowDown';
 export * from './useWrapClass';
