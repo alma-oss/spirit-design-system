@@ -305,3 +305,4 @@ JS interaction class when controlled by JavaScript:
 [readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [readme-input-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputContainer/README.md
 [readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
+[web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md
