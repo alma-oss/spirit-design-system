@@ -263,16 +263,15 @@
         <fieldset style="border: 0;">
           <legend class="mb-500">New Toast:</legend>
           <div class="Stack Stack--hasSpacing">
-            <div class="Select Select--medium">
+            <div>
               <label
                 for="toast-color"
                 class="Label"
               >Color</label>
-              <div class="Select__inputContainer">
+              <div class="InputContainer InputContainer--medium">
                 <select
                   id="toast-color"
                   name="color"
-                  class="Select__input"
                   autocomplete="off"
                 >
                   <option value="neutral">Neutral</option>
@@ -281,8 +280,9 @@
                   <option value="danger">Danger</option>
                   <option value="informative">Informative</option>
                 </select>
-                <div class="Select__icon">
+                <div class="InputAddon">
                   <svg
+                    class="Icon"
                     width="20"
                     height="20"
                     aria-hidden="true"
@@ -340,21 +340,22 @@
                 >Enable AutoClose</label>
               </div>
             </div>
-            <div class="TextField TextField--medium">
+            <div>
               <label
                 for="toast-auto-close-interval"
                 class="Label"
               >AutoClose interval (ms)</label>
-              <input
-                type="number"
-                min="0"
-                max="60000"
-                step="500"
-                value="3000"
-                id="toast-auto-close-interval"
-                name="auto-close-interval"
-                class="TextField__input"
-              />
+              <div class="InputContainer InputContainer--medium">
+                <input
+                  type="number"
+                  min="0"
+                  max="60000"
+                  step="500"
+                  value="3000"
+                  id="toast-auto-close-interval"
+                  name="auto-close-interval"
+                />
+              </div>
             </div>
             <div class="TextArea TextArea--medium">
               <label
@@ -428,19 +429,20 @@
       <form>
         <fieldset style="border: 0;">
           <legend class="mb-500">Virtual keyboard interaction:</legend>
-          <div class="TextField TextField--medium">
+          <div>
             <label
               for="text-field-for-focus"
               class="Label"
             >In Chrome on Android, tap into this text field to
               see how Toast position updates:</label>
-            <input
-              type="text"
-              id="text-field-for-focus"
-              class="TextField__input"
-              name="default"
-              placeholder="Tap here!"
-            />
+            <div class="InputContainer InputContainer--medium">
+              <input
+                type="text"
+                id="text-field-for-focus"
+                name="default"
+                placeholder="Tap here!"
+              />
+            </div>
           </div>
         </fieldset>
       </form>

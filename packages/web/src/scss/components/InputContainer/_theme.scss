@@ -1,0 +1,88 @@
+@use 'sass:map';
+@use '@tokens' as tokens;
+@use '../../settings/dictionaries';
+@use '../../tools/tokens' as tokens-tools;
+
+$color: tokens.$form-field-filled-content;
+$color-state-disabled: tokens.$disabled-content;
+$border-width: tokens.$border-width-100;
+$border-style: solid;
+$border-color: tokens.$form-field-filled-border-state-default;
+$border-color-state-focus: tokens.$border-focus;
+$border-color-state-disabled: tokens.$disabled-border;
+$border-radius: tokens.$radius-300;
+$background-color: tokens.$form-field-filled-background-state-default;
+$background-color-state-active: tokens.$form-field-filled-background-state-active;
+$background-color-state-hover: tokens.$form-field-filled-background-state-hover;
+$background-color-state-disabled: tokens.$disabled-background;
+$focus-shadow: tokens.$focus-ring;
+
+$input-number-arrows-width: 1.25rem;
+$input-size-characters: (2, 3, 4);
+$input-padding-x: tokens.$space-600;
+$input-padding-y: calc(#{tokens.$space-500} - #{tokens.$border-width-100});
+$input-placeholder-color: tokens.$form-field-filled-placeholder;
+$input-placeholder-color-state-disabled: tokens.$disabled-content;
+
+$size-dictionary: dictionaries.$size;
+$size-config: (
+    small: map.merge(
+            (
+                height: 32px,
+                min-height: 64px,
+                typography: tokens.$body-small-regular,
+            ),
+            tokens-tools.generate-responsive-map(
+                $property: 'border-radius',
+                $size: 'small',
+                $variable-prefix: 'form-field',
+                $token-name: 'radius',
+                $fallback: $border-radius,
+            )
+        ),
+    medium: map.merge(
+            (
+                height: 40px,
+                min-height: 80px,
+                typography: tokens.$body-medium-regular,
+            ),
+            tokens-tools.generate-responsive-map(
+                $property: 'border-radius',
+                $size: 'medium',
+                $variable-prefix: 'form-field',
+                $token-name: 'radius',
+                $fallback: $border-radius,
+            )
+        ),
+    large: map.merge(
+            (
+                height: 48px,
+                min-height: 96px,
+                typography: tokens.$body-medium-regular,
+            ),
+            tokens-tools.generate-responsive-map(
+                $property: 'border-radius',
+                $size: 'large',
+                $variable-prefix: 'form-field',
+                $token-name: 'radius',
+                $fallback: $border-radius,
+            )
+        ),
+);
+$addon-size-config: (
+    small: (
+        typography: tokens.$body-small-semibold,
+    ),
+    medium: (
+        typography: tokens.$body-medium-semibold,
+    ),
+    large: (
+        typography: tokens.$body-medium-semibold,
+    ),
+);
+
+$validation-states: (
+    success: tokens.$form-field-success,
+    warning: tokens.$form-field-warning,
+    danger: tokens.$form-field-danger,
+);

@@ -1,0 +1,418 @@
+{{#> web/layout/default title="InputAddon" parentPageName="Components" }}
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Default</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div>
+        <label
+          for="input-addon-default"
+          class="Label"
+        >Password Toggle</label>
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="password"
+            id="input-addon-default"
+            name="inputAddonDefault"
+            placeholder="Password must be at least 6 characters long"
+          />
+          <div class="InputAddon InputAddon--medium">
+            <button
+              type="button"
+              class="ControlButton ControlButton--medium ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              role="switch"
+              aria-checked="false"
+              aria-label="Show password"
+              data-spirit-toggle="password"
+            >
+              <span class="accessibility-unchecked">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
+                </svg>
+              </span>
+              <span class="accessibility-checked">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Icon</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div>
+        <label
+          for="input-addon-search-icon"
+          class="Label"
+        >Search</label>
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="search"
+            id="input-addon-search-icon"
+            name="inputAddonSearchIcon"
+            placeholder="Search"
+          />
+          <label class="InputAddon InputAddon--medium" for="input-addon-search-icon">
+            <svg
+              class="Icon"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <use xlink:href="/assets/icons/svg/sprite.svg#search" />
+            </svg>
+            <span class="accessibility-hidden">Search</span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Currency</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div>
+        <label
+          for="input-addon-currency-eur"
+          class="Label"
+        >Amount</label>
+        <div class="InputContainer InputContainer--medium">
+          <label
+            class="InputAddon InputAddon--medium"
+            for="input-addon-currency-eur"
+          >
+            <span aria-hidden="true">€</span>
+            <span class="accessibility-hidden">in EUR</span>
+          </label>
+          <input
+            type="text"
+            id="input-addon-currency-eur"
+            name="inputAddonCurrencyEur"
+            placeholder="0,00"
+            inputmode="decimal"
+            autocomplete="transaction-amount"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label
+          for="input-addon-currency-usd"
+          class="Label"
+        >Amount</label>
+        <div class="InputContainer InputContainer--medium">
+          <label
+            class="InputAddon InputAddon--medium"
+            for="input-addon-currency-usd"
+          >
+            <span aria-hidden="true">$</span>
+            <span class="accessibility-hidden">in USD</span>
+          </label>
+          <input
+            type="text"
+            id="input-addon-currency-usd"
+            name="inputAddonCurrencyUsd"
+            placeholder="0.00"
+            inputmode="decimal"
+            autocomplete="transaction-amount"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label
+          for="input-addon-currency-czk"
+          class="Label"
+        >Amount</label>
+        <div class="InputContainer InputContainer--medium">
+          <input
+            type="text"
+            id="input-addon-currency-czk"
+            name="inputAddonCurrencyCzk"
+            placeholder="0,00"
+            inputmode="decimal"
+            autocomplete="transaction-amount"
+          />
+          <label
+            class="InputAddon InputAddon--medium"
+            for="input-addon-currency-czk"
+          >
+            <span aria-hidden="true">Kč</span>
+            <span class="accessibility-hidden">in CZK</span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Multiple Addons</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div>
+        <label
+          for="input-addon-multiple"
+          class="Label"
+        >Username</label>
+        <div class="InputContainer InputContainer--medium">
+          <label class="InputAddon InputAddon--medium" for="input-addon-multiple">
+            <svg
+              class="Icon"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <use xlink:href="/assets/icons/svg/sprite.svg#link" />
+            </svg>
+            <span class="accessibility-hidden">Profile URL</span>
+          </label>
+          <label class="InputAddon InputAddon--medium" for="input-addon-multiple">
+            <span aria-hidden="true">@</span>
+            <span class="accessibility-hidden">Username</span>
+          </label>
+          <input
+            type="text"
+            id="input-addon-multiple"
+            name="inputAddonMultiple"
+            placeholder="spirit-design-system"
+          />
+          <div class="InputAddon InputAddon--medium">
+            <button
+              type="button"
+              class="ControlButton ControlButton--medium ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Clear"
+            >
+              <svg
+                class="Icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Sizes</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+      <div class="Grid Grid--cols-1 Grid--desktop--cols-3">
+
+        <div>
+          <label
+            for="input-addon-size-small"
+            class="Label"
+          >Small</label>
+          <div class="InputContainer InputContainer--small">
+            <input
+              type="password"
+              id="input-addon-size-small"
+              name="inputAddonSizeSmall"
+              value="password"
+              aria-describedby="input-addon-size-small-helper-text"
+            />
+            <div class="InputAddon InputAddon--small">
+              <button
+                type="button"
+                class="ControlButton ControlButton--small ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+                role="switch"
+                aria-checked="false"
+                aria-label="Show password"
+                data-spirit-toggle="password"
+              >
+                <span class="accessibility-unchecked">
+                  <svg
+                    class="Icon"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
+                  </svg>
+                </span>
+                <span class="accessibility-checked">
+                  <svg
+                    class="Icon"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+          <div
+            class="HelperText"
+            id="input-addon-size-small-helper-text"
+          >Helper text</div>
+        </div>
+
+        <div>
+          <label
+            for="input-addon-size-medium"
+            class="Label"
+          >Medium (default)</label>
+          <div class="InputContainer InputContainer--medium">
+            <input
+              type="password"
+              id="input-addon-size-medium"
+              name="inputAddonSizeMedium"
+              value="password"
+              aria-describedby="input-addon-size-medium-helper-text"
+            />
+            <div class="InputAddon InputAddon--medium">
+              <button
+                type="button"
+                class="ControlButton ControlButton--medium ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+                role="switch"
+                aria-checked="false"
+                aria-label="Show password"
+                data-spirit-toggle="password"
+              >
+                <span class="accessibility-unchecked">
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
+                  </svg>
+                </span>
+                <span class="accessibility-checked">
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+          <div
+            class="HelperText"
+            id="input-addon-size-medium-helper-text"
+          >Helper text</div>
+        </div>
+
+        <div>
+          <label
+            for="input-addon-size-large"
+            class="Label"
+          >Large</label>
+          <div class="InputContainer InputContainer--large">
+            <input
+              type="password"
+              id="input-addon-size-large"
+              name="inputAddonSizeLarge"
+              value="password"
+              aria-describedby="input-addon-size-large-helper-text"
+            />
+            <div class="InputAddon InputAddon--large">
+              <button
+                type="button"
+                class="ControlButton ControlButton--large ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+                role="switch"
+                aria-checked="false"
+                aria-label="Show password"
+                data-spirit-toggle="password"
+              >
+                <span class="accessibility-unchecked">
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
+                  </svg>
+                </span>
+                <span class="accessibility-checked">
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+          <div
+            class="HelperText"
+            id="input-addon-size-large-helper-text"
+          >Helper text</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+{{/web/layout/default }}

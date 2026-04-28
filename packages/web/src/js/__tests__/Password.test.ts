@@ -16,7 +16,9 @@ describe('Password', () => {
     it('should take care of element passed as a CSS selector', () => {
       fixtureEl.innerHTML = `
         <input type="password" />
-        <button aria-checked="false" aria-label="Show password" data-spirit-toggle="password"></button>
+        <div>
+          <button aria-checked="false" aria-label="Show password" data-spirit-toggle="password"></button>
+        </div>
       `;
 
       const passwordEl = fixtureEl.querySelector('[data-spirit-toggle="password"]') as HTMLElement;
@@ -30,7 +32,9 @@ describe('Password', () => {
     it('should toggle a password', async () => {
       fixtureEl.innerHTML = `
         <input type="password" />
-        <button type="button" aria-checked="false" aria-label="Show password" data-spirit-toggle="password"></button>
+        <div>
+          <button type="button" aria-checked="false" aria-label="Show password" data-spirit-toggle="password"></button>
+        </div>
       `;
 
       const showSpy = jest.spyOn(Password.prototype, 'show');
@@ -53,7 +57,9 @@ describe('Password', () => {
     it('should show a password', async () => {
       fixtureEl.innerHTML = `
         <input type="password" />
-        <button type="button" aria-checked="false" aria-label="Show password" data-spirit-toggle="password"></button>
+        <div>
+          <button type="button" aria-checked="false" aria-label="Show password" data-spirit-toggle="password"></button>
+        </div>
       `;
 
       const passwordEl = fixtureEl.querySelector('[data-spirit-toggle="password"]') as HTMLElement;
@@ -71,7 +77,9 @@ describe('Password', () => {
     it('should hide a password', async () => {
       fixtureEl.innerHTML = `
         <input type="password" />
-        <button type="button" aria-checked="true" aria-label="Hide password" data-spirit-toggle="password"></button>
+        <div>
+          <button type="button" aria-checked="true" aria-label="Hide password" data-spirit-toggle="password"></button>
+        </div>
       `;
 
       const passwordEl = fixtureEl.querySelector('[data-spirit-toggle="password"]') as HTMLElement;
