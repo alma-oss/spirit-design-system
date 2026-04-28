@@ -24,13 +24,11 @@ describe('useIconStyleProps', () => {
     });
   });
 
-  it('should return mobile size when boxSize is a number', () => {
+  it('should return empty style when boxSize is a number', () => {
     const props = { boxSize: 20, name: 'add' } as SpiritIconProps;
     const { result } = renderHook(() => useIconStyleProps(props));
 
-    expect(result.current.iconStyleProps).toEqual({
-      '--spirit-icon-size': '1.25rem',
-    });
+    expect(result.current.iconStyleProps).toEqual({});
   });
 
   it.each(Object.values(iconColors))('should have dualtone color classname %s', (color: IconColorType) => {
