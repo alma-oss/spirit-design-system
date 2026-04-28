@@ -14,7 +14,7 @@ const UncontrolledDropdown = (props: UncontrolledDropdownProps) => {
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLDivElement>();
+  const triggerRef = useRef<HTMLElement | null>(null);
 
   const { isOpen, toggleHandler: onToggle } = useDropdown({ dropdownRef, triggerRef, enableAutoClose, onAutoClose });
 

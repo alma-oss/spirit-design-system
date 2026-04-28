@@ -97,7 +97,7 @@ const DropdownWithHooks = (args: SpiritDropdownProps) => {
   return (
     <Dropdown {...args} isOpen={isOpen || isDropdownOpen} onToggle={onDropdownToggle}>
       <DropdownTrigger elementType={Button}>Button as anchor</DropdownTrigger>
-      <DropdownPopover>{children}</DropdownPopover>
+      <DropdownPopover aria-label="Dropdown">{children}</DropdownPopover>
     </Dropdown>
   );
 };

@@ -12,12 +12,12 @@ export interface UseDropdownProps {
   /** on close callback */
   onAutoClose?: (event: Event) => void;
   /** trigger element reference */
-  triggerRef: MutableRefObject<HTMLElement | undefined>;
+  triggerRef: MutableRefObject<HTMLElement | null | undefined>;
 }
 
 export interface UseDropdownReturn {
   /** collapse handler */
-  toggleHandler: (event: ClickEvent) => void;
+  toggleHandler: (event?: ClickEvent) => void;
   /** collapsed state */
   isOpen: boolean;
 }
@@ -32,8 +32,8 @@ export const useDropdown = ({
 
   const collapseHandler = () => setOpen(!open);
 
-  const toggleHandler = (event: ClickEvent) => {
-    event.preventDefault();
+  const toggleHandler = (event?: ClickEvent) => {
+    event?.preventDefault();
     collapseHandler();
   };
 

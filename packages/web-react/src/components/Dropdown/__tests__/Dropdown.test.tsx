@@ -72,6 +72,47 @@ describe('Dropdown', () => {
     expect(onToggle).toHaveBeenCalled();
   });
 
+  it('should call toggle function and focus trigger on Escape when open', () => {
+    const onToggle = jest.fn();
+    const focusSpy = jest.spyOn(HTMLElement.prototype, 'focus');
+
+    render(
+      <Dropdown id="dropdown" isOpen onToggle={onToggle}>
+        <DropdownTrigger>trigger</DropdownTrigger>
+        <DropdownPopover>Hello World</DropdownPopover>
+      </Dropdown>,
+    );
+
+    const root = screen.getByRole('button').closest('.Dropdown') as HTMLElement;
+
+    fireEvent.keyDown(root, { key: 'Escape', bubbles: true });
+
+    expect(onToggle).toHaveBeenCalledTimes(1);
+
+    return Promise.resolve().then(() => {
+      expect(focusSpy).toHaveBeenCalledTimes(1);
+
+      focusSpy.mockRestore();
+    });
+  });
+
+  it('should not call toggle on Escape when closed', () => {
+    const onToggle = jest.fn();
+
+    render(
+      <Dropdown id="dropdown" isOpen={false} onToggle={onToggle}>
+        <DropdownTrigger>trigger</DropdownTrigger>
+        <DropdownPopover>Hello World</DropdownPopover>
+      </Dropdown>,
+    );
+
+    const root = screen.getByRole('button').closest('.Dropdown') as HTMLElement;
+
+    fireEvent.keyDown(root, { key: 'Escape', bubbles: true });
+
+    expect(onToggle).not.toHaveBeenCalled();
+  });
+
   it('should not have same id on trigger and popover', () => {
     render(
       <Dropdown id="dropdown" isOpen={false} onToggle={() => {}}>
