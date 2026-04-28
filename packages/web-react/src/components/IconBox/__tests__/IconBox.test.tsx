@@ -10,6 +10,7 @@ import {
 } from '@local/tests';
 import { EmotionColors } from '../../../constants';
 import type { IconBoxColorsType, IconBoxShapeType, SizeExtendedDictionaryType } from '../../../types';
+import { pxToRem } from '../../../utils';
 import { IconBoxShapesRadii, IconBoxSizes } from '../constants';
 import IconBox from '../IconBox';
 
@@ -160,8 +161,8 @@ describe('IconBox', () => {
       expect(icon).toHaveAttribute('height', `${IconBoxSizes.small.iconSize}`);
 
       expect(icon).toHaveStyle({
-        '--spirit-icon-size-tablet': `${IconBoxSizes.medium.iconSize}px`,
-        '--spirit-icon-size-desktop': `${IconBoxSizes.large.iconSize}px`,
+        '--spirit-icon-size-tablet': pxToRem(IconBoxSizes.medium.iconSize),
+        '--spirit-icon-size-desktop': pxToRem(IconBoxSizes.large.iconSize),
       });
 
       expect(iconBox).toHaveStyle({
@@ -179,7 +180,7 @@ describe('IconBox', () => {
       expect(icon).toHaveAttribute('height', `${IconBoxSizes.small.iconSize}`);
 
       expect(icon).toHaveStyle({
-        '--spirit-icon-size-desktop': `${IconBoxSizes.large.iconSize}px`,
+        '--spirit-icon-size-desktop': pxToRem(IconBoxSizes.large.iconSize),
       });
 
       expect(iconBox).toHaveStyle({
@@ -204,8 +205,8 @@ describe('IconBox', () => {
       expect(icon).toHaveAttribute('height', `${IconBoxSizes.small.iconSize}`);
 
       expect(icon).toHaveStyle({
-        '--spirit-icon-size-tablet': `${IconBoxSizes.medium.iconSize}px`,
-        '--spirit-icon-size-desktop': `${IconBoxSizes.large.iconSize}px`,
+        '--spirit-icon-size-tablet': pxToRem(IconBoxSizes.medium.iconSize),
+        '--spirit-icon-size-desktop': pxToRem(IconBoxSizes.large.iconSize),
       });
 
       expect(iconBox).toHaveClass(`p-${IconBoxSizes.small.padding.replace('space-', '')}`);
@@ -226,7 +227,7 @@ describe('IconBox', () => {
       expect(icon).toHaveAttribute('height', `${IconBoxSizes.small.iconSize}`);
 
       expect(icon).toHaveStyle({
-        '--spirit-icon-size-tablet': `${IconBoxSizes.large.iconSize}px`,
+        '--spirit-icon-size-tablet': pxToRem(IconBoxSizes.large.iconSize),
       });
 
       expect(iconBox).toHaveStyle({
