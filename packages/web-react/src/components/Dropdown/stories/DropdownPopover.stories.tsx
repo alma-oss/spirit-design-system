@@ -51,7 +51,7 @@ export const DropdownPopoverPlayground: Story = {
   render: (args) => (
     <Dropdown id="dropdown-example" isOpen onToggle={() => {}}>
       <DropdownTrigger elementType={Button}>Button as anchor</DropdownTrigger>
-      <DropdownPopover>{args.children}</DropdownPopover>
+      <DropdownPopover aria-label="Dropdown">{args.children}</DropdownPopover>
     </Dropdown>
   ),
 };
