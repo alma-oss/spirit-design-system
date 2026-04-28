@@ -28,4 +28,32 @@ describe('DropdownTrigger', () => {
 
     expect(trigger).toHaveTextContent('Trigger');
   });
+
+  it('should have aria-haspopup="dialog" by default', () => {
+    const dom = render(<DropdownTrigger>Trigger</DropdownTrigger>);
+    const trigger = dom.container.querySelector('button') as HTMLElement;
+
+    expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
+  });
+
+  it('should allow overriding aria-haspopup', () => {
+    const dom = render(<DropdownTrigger aria-haspopup="menu">Trigger</DropdownTrigger>);
+    const trigger = dom.container.querySelector('button') as HTMLElement;
+
+    expect(trigger).toHaveAttribute('aria-haspopup', 'menu');
+  });
+
+  it('should allow boolean aria-haspopup override', () => {
+    const dom = render(<DropdownTrigger aria-haspopup>Trigger</DropdownTrigger>);
+    const trigger = dom.container.querySelector('button') as HTMLElement;
+
+    expect(trigger).toHaveAttribute('aria-haspopup', 'true');
+  });
+
+  it('should allow false aria-haspopup override', () => {
+    const dom = render(<DropdownTrigger aria-haspopup={false}>Trigger</DropdownTrigger>);
+    const trigger = dom.container.querySelector('button') as HTMLElement;
+
+    expect(trigger).toHaveAttribute('aria-haspopup', 'false');
+  });
 });

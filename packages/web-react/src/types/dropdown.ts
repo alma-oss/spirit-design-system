@@ -1,4 +1,4 @@
-import { type ElementType, type LegacyRef, type ReactNode } from 'react';
+import { type ElementType, type LegacyRef, type MutableRefObject, type ReactNode } from 'react';
 import {
   type AlignmentXExtendedDictionaryType,
   type AlignmentYExtendedDictionaryType,
@@ -49,6 +49,7 @@ export interface DropdownBaseProps extends DropdownAlignmentProps, StyleProps {
 /** Full `Dropdown` shell props (`DropdownBaseProps` plus `children` and `id`). */
 export interface DropdownProps extends DropdownBaseProps, ChildrenProps {
   id: string;
+  triggerRef?: MutableRefObject<HTMLElement | null | undefined>;
 }
 
 export interface DropdownStyleProps extends DropdownAlignmentProps, StyleProps {
