@@ -9,10 +9,10 @@ a lot of browser-specific styles and a bit of JavaScript to update the slider's 
 is required by Webkit-based browsers such as Chrome or Safari).
 
 ```html
-<div class="Slider">
+<div>
   <label for="slider-default" class="Label">Slider</label>
   <input
-    class="Slider__input"
+    class="Slider"
     id="slider-default"
     style="--slider-position: 30%"
     type="range"
@@ -30,10 +30,10 @@ You can specify the Slider steps and value range by setting the `min`, `max`, an
 be updated when the slider value changes. See the [Slider Position](#slider-position) section for more details.
 
 ```html
-<div class="Slider">
+<div>
   <label for="slider-steps" class="Label">Slider</label>
   <input
-    class="Slider__input"
+    class="Slider"
     id="slider-steps"
     style="--slider-position: calc(100% * (9 - 3) / (12 - 3))"
     type="range"
@@ -65,10 +65,10 @@ position = 100 * (value - min) / (max - min)
 ## Hidden Label
 
 ```html
-<div class="Slider">
+<div>
   <label for="slider-hidden-label" class="Label accessibility-hidden">Slider</label>
   <input
-    class="Slider__input"
+    class="Slider"
     id="slider-hidden-label"
     style="--slider-position: 30%"
     type="range"
@@ -88,10 +88,10 @@ to control the component width in page layouts.
 To add helper text, use the [HelperText][readme-helper-text] component:
 
 ```html
-<div class="Slider">
+<div>
   <label for="slider-helper-text" class="Label">Slider</label>
   <input
-    class="Slider__input"
+    class="Slider"
     id="slider-helper-text"
     aria-describedby="slider-helper-text-helper-text"
     style="--slider-position: 30%"
@@ -106,7 +106,7 @@ To add helper text, use the [HelperText][readme-helper-text] component:
 ## Validation States
 
 Validation states can be presented either by adding a CSS modifier class
-(`Slider--success`, `Slider--warning`, `Slider--danger`), or by adding
+(`ValidationText--success`, `ValidationText--warning`, `ValidationText--danger`), or by adding
 a JS interaction class when controlled by JavaScript (`has-success`,
 `has-warning`, `has-danger`). See Validation state [dictionary][dictionary-validation].
 
@@ -114,10 +114,10 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 - To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
-<div class="Slider Slider--success">
+<div>
   <label for="slider-success" class="Label">Slider</label>
   <input
-    class="Slider__input"
+    class="Slider"
     id="slider-success"
     style="--slider-position: 30%"
     type="range"
@@ -126,10 +126,10 @@ a JS interaction class when controlled by JavaScript (`has-success`,
   />
 </div>
 
-<div class="Slider Slider--warning">
+<div>
   <label for="slider-warning" class="Label">Slider</label>
   <input
-    class="Slider__input"
+    class="Slider"
     id="slider-warning"
     aria-describedby="slider-warning-validation-text"
     style="--slider-position: 30%"
@@ -140,10 +140,10 @@ a JS interaction class when controlled by JavaScript (`has-success`,
   <div id="slider-warning-validation-text" class="ValidationText ValidationText--warning">Validation text</div>
 </div>
 
-<div class="Slider Slider--danger">
+<div>
   <label for="slider-danger" class="Label">Slider</label>
   <input
-    class="Slider__input"
+    class="Slider"
     id="slider-danger"
     aria-describedby="slider-danger-validation-text"
     style="--slider-position: 30%"
@@ -159,10 +159,10 @@ a JS interaction class when controlled by JavaScript (`has-success`,
   </div>
 </div>
 
-<div class="Slider Slider--warning">
+<div>
   <label for="slider-warning" class="Label">Slider</label>
   <input
-    class="Slider__input"
+    class="Slider"
     id="slider-warning"
     aria-describedby="slider-warning-validation-text"
     style="--slider-position: 30%"
@@ -181,15 +181,11 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 
 ## Disabled State
 
-On top of adding the `disabled` attribute to the input, disabled Slider needs to
-be marked by adding `Slider--disabled` modifier class, or with `is-disabled`
-JS interaction class when controlled by JavaScript:
-
 ```html
-<div class="Slider Slider--disabled">
+<div>
   <label for="slider-disabled" class="Label Label--disabled">Slider</label>
   <input
-    class="Slider__input"
+    class="Slider"
     id="slider-disabled"
     style="--slider-position: 30%"
     type="range"

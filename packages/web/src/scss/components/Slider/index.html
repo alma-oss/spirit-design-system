@@ -8,13 +8,13 @@
 
     <div class="docs-Stack docs-Stack--stretch">
 
-      <div class="Slider">
+      <div>
         <label
           for="slider-default"
           class="Label"
         >Slider</label>
         <input
-          class="Slider__input"
+          class="Slider"
           id="slider-default"
           style="--slider-position: 30%"
           type="range"
@@ -23,13 +23,13 @@
         />
       </div>
 
-      <div class="Slider">
+      <div>
         <label
           for="slider-steps"
           class="Label"
         >Custom steps</label>
         <input
-          class="Slider__input"
+          class="Slider"
           id="slider-steps"
           style="--slider-position: calc(100% * (9 - 3) / (12 - 3))"
           type="range"
@@ -54,13 +54,13 @@
 
     <div class="docs-Stack docs-Stack--stretch">
 
-      <div class="Slider">
+      <div>
         <label
           for="slider-hidden-label"
           class="Label accessibility-hidden"
         >Slider</label>
         <input
-          class="Slider__input"
+          class="Slider"
           id="slider-hidden-label"
           style="--slider-position: 30%"
           type="range"
@@ -83,13 +83,13 @@
 
     <div class="docs-Stack docs-Stack--stretch">
 
-      <div class="Slider">
+      <div>
         <label
           for="slider-helper-text"
           class="Label"
         >Slider</label>
         <input
-          class="Slider__input"
+          class="Slider"
           id="slider-helper-text"
           aria-describedby="slider-helper-text-helper-text"
           style="--slider-position: 30%"
@@ -119,13 +119,13 @@
 
     <div class="docs-Stack docs-Stack--stretch">
 
-      <div class="Slider Slider--disabled">
+      <div>
         <label
           for="slider-disabled"
           class="Label Label--disabled"
         >Slider</label>
         <input
-          class="Slider__input"
+          class="Slider"
           id="slider-disabled"
           style="--slider-position: 30%"
           type="range"
@@ -149,13 +149,13 @@
 
     <div class="docs-Stack docs-Stack--stretch">
 
-      <div class="Slider Slider--success">
+      <div>
         <label
           for="slider-success"
           class="Label"
         >Slider</label>
         <input
-          class="Slider__input"
+          class="Slider"
           id="slider-success"
           style="--slider-position: 30%"
           type="range"
@@ -164,13 +164,13 @@
         />
       </div>
 
-      <div class="Slider Slider--warning">
+      <div>
         <label
           for="slider-warning"
           class="Label"
         >Slider</label>
         <input
-          class="Slider__input"
+          class="Slider"
           id="slider-warning"
           aria-describedby="slider-warning-validation-text"
           style="--slider-position: 30%"
@@ -186,13 +186,13 @@
         </div>
       </div>
 
-      <div class="Slider Slider--danger">
+      <div>
         <label
           for="slider-danger"
           class="Label"
         >Slider</label>
         <input
-          class="Slider__input"
+          class="Slider"
           id="slider-danger"
           aria-describedby="slider-danger-validation-text"
           style="--slider-position: 30%"
@@ -211,13 +211,13 @@
         </div>
       </div>
 
-      <div class="Slider Slider--danger">
+      <div>
         <label
           for="slider-danger-with-helper-text"
           class="Label"
         >Slider</label>
         <input
-          class="Slider__input"
+          class="Slider"
           id="slider-danger-with-helper-text"
           aria-describedby="slider-danger-with-helper-text-helper-text slider-danger-with-helper-text-validation-text"
           style="--slider-position: 30%"
@@ -253,7 +253,7 @@
       {{setVar "states" "success" "warning" "danger" }}
       {{#each @root.states as |state|}}
 
-      <div class="Slider Slider--{{state}}">
+      <div>
         <label
           for="slider-{{state}}-with-validation-icon"
           class="Label"
@@ -261,7 +261,7 @@
           Slider
         </label>
         <input
-          class="Slider__input"
+          class="Slider"
           id="slider-{{state}}-with-validation-icon"
           aria-describedby="slider-{{state}}-validation-icon-text"
           style="--slider-position: 30%"
