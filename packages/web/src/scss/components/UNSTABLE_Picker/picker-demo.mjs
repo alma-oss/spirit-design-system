@@ -245,11 +245,16 @@ export function initPopoverBehavior(triggerEl, popoverEl) {
       return;
     }
 
-    // Tab off last focusable element closes the popover (non-modal anchored dropdown pattern)
-    if (event.key === 'Tab' && !event.shiftKey) {
+    // Tab off last / Shift+Tab off first focusable element closes the popover (non-modal anchored dropdown pattern)
+    if (event.key === 'Tab') {
       const focusable = Array.from(popoverEl.querySelectorAll(SELECTOR_FOCUSABLE));
 
-      if (focusable.length > 0 && document.activeElement === focusable[focusable.length - 1]) {
+      if (event.shiftKey) {
+        if (focusable.length > 0 && document.activeElement === focusable[0]) {
+          event.preventDefault();
+          triggerEl.click();
+        }
+      } else if (focusable.length > 0 && document.activeElement === focusable[focusable.length - 1]) {
         event.preventDefault();
         triggerEl.click();
       }
