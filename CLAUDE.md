@@ -8,6 +8,7 @@ This file provides AI assistants with context and guidelines for working with th
 - [Contributing Guide][contributing]
 - [Git Workflow Guidelines][agents-git-workflow] – branch naming, commit messages, and PRs
 - [Code Style Guidelines][agents-code-style] – formatting tools and naming conventions
+- [JIRA Guidelines][agents-jira] – issue creation conventions
 
 ## Project Overview
 
@@ -38,6 +39,7 @@ For comprehensive guidelines, see:
 
 [agents-code-style]: .agents/instructions/code-style.md
 [agents-git-workflow]: .agents/instructions/git-workflow.md
+[agents-jira]: .agents/instructions/jira.md
 [contributing]: CONTRIBUTING.md
 [development-guide-getting-started]: docs/contribution/development.md#getting-started
 [development-guide-common-tasks]: docs/contribution/development.md#common-tasks
