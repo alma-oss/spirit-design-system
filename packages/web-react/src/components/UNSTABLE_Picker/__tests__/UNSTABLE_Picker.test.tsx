@@ -255,4 +255,14 @@ describe('UNSTABLE_Picker', () => {
 
     expect(screen.getByRole('button', { name: 'Add' })).toHaveAttribute('aria-expanded', 'false');
   });
+
+  it('should open popover on ArrowDown when trigger is focused', () => {
+    render(<TestPicker />);
+    const trigger = screen.getByRole('button', { name: 'Add' });
+
+    trigger.focus();
+    fireEvent.keyDown(trigger, { key: 'ArrowDown', bubbles: true });
+
+    expect(screen.getByRole('button', { name: 'Close' })).toHaveAttribute('aria-expanded', 'true');
+  });
 });

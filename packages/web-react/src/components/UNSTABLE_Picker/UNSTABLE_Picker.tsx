@@ -4,7 +4,14 @@ import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { MULTIPLE_SELECTION_MODE } from '../../constants';
 import { PropsProvider } from '../../context';
-import { getSelectedKeys, isSingleSelectionMode, useAriaDescribedBy, useI18n, useStyleProps } from '../../hooks';
+import {
+  getSelectedKeys,
+  isSingleSelectionMode,
+  useAriaDescribedBy,
+  useI18n,
+  useOpenOnArrowDown,
+  useStyleProps,
+} from '../../hooks';
 import { replaceTranslationParams } from '../../translations';
 import { type ForwardRefComponent } from '../../types';
 import { Dropdown, DropdownPopover } from '../Dropdown';
@@ -19,7 +26,6 @@ import { PickerPopoverContextProvider } from './PickerPopoverContext';
 import type { SpiritUnstablePickerProps, SpiritUnstablePickerRef } from './types';
 import UNSTABLE_PickerTag from './UNSTABLE_PickerTag';
 import { usePickerId } from './usePickerId';
-import { usePickerPopoverTabOutToTrigger } from './usePickerPopoverTabOutToTrigger';
 import { usePickerSelectionGridKeyboard } from './usePickerSelectionGridKeyboard';
 import { usePickerStyleProps } from './usePickerStyleProps';
 import {
@@ -110,10 +116,9 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
       triggerRef.current?.focus();
     });
   }, [isOpen, onToggle]);
-
-  const { onPopoverKeyDownCapture } = usePickerPopoverTabOutToTrigger({
+  const handleTriggerKeyDown = useOpenOnArrowDown({
     isOpen,
-    onClose: close,
+    onToggle,
   });
 
   const selectionGridKeyboardRowCount = getPickerSelectionGridKeyboardRowCount(selectedPickerItems.length, {
@@ -211,7 +216,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
           <Label id={labelId} elementType="span">
             {label}
           </Label>
-          <Dropdown id={popoverId} isOpen={isOpen} onToggle={onToggle}>
+          <Dropdown id={popoverId} isOpen={isOpen} onToggle={onToggle} triggerRef={triggerRef}>
             <div role="group" aria-label={label} className={classProps.inputContainer}>
               <div
                 ref={selectionGridRef}
@@ -234,18 +239,14 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
                 aria-expanded={isOpen}
                 aria-controls={popoverId}
                 onClick={onToggle}
+                onKeyDown={handleTriggerKeyDown}
                 disabled={isDisabled}
               >
                 <VisuallyHidden>{isOpen ? closeButtonLabel : addButtonLabel}</VisuallyHidden>
                 <Icon name={`chevron-${isOpen ? 'up' : 'down'}`} boxSize={20} />
               </button>
             </div>
-            <DropdownPopover
-              aria-labelledby={labelId}
-              role="dialog"
-              aria-modal="true"
-              onKeyDownCapture={onPopoverKeyDownCapture}
-            >
+            <DropdownPopover aria-labelledby={labelId}>
               <PickerPopoverContextProvider value={popoverContextValue}>{children}</PickerPopoverContextProvider>
             </DropdownPopover>
           </Dropdown>
