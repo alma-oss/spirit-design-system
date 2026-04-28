@@ -1,0 +1,56 @@
+site_name: Spirit Design System
+site_description: Open-source design system developed by Alma Career — React components, vanilla JS/CSS, design tokens, icons, and tooling.
+site_url: https://github.com/alma-oss/spirit-design-system
+
+docs_dir: docs
+
+nav:
+  - Overview: index.md
+  - Contributing:
+      - Development: contribution/development.md
+      - Accessibility Testing: contribution/accessibility-testing.md
+      - E2E Testing: contribution/e2e-testing.md
+      - Experimental Code: contribution/experimental-code.md
+      - Feature Flags: contribution/feature-flags.md
+      - Release Schedule: contribution/release-schedule.md
+  - Architecture Decisions:
+      - Overview: decisions/README.md
+      - 001 - Custom Design System: decisions/001-custom-design-system.md
+      - 002 - Node.js Version: decisions/002-node-version.md
+      - 003 - TypeScript Only: decisions/003-typescript-only.md
+      - 004 - ADR Process: decisions/004-decisions.md
+      - 005 - Postmortems: decisions/005-postmortems.md
+      - 006 - Experimental Code: decisions/006-experimental-code.md
+      - 007 - Release Names: decisions/007-release-names.md
+      - 008 - Themes: decisions/008-themes.md
+      - 009 - Tokens Structure: decisions/009-tokens-structure.md
+      - 010 - Deprecations: decisions/010-deprecations.md
+      - 011 - Component Customization: decisions/011-component-customization.md
+  - Migration Guides:
+      - Overview: migrations/README.md
+      - web-react:
+          - v1: migrations/web-react/migration-v1.md
+          - v2: migrations/web-react/migration-v2.md
+          - v3: migrations/web-react/migration-v3.md
+          - v4: migrations/web-react/migration-v4.md
+          - v5: migrations/web-react/migration-v5.md
+      - web:
+          - v1: migrations/web/migration-v1.md
+          - v2: migrations/web/migration-v2.md
+          - v3: migrations/web/migration-v3.md
+          - v4: migrations/web/migration-v4.md
+          - v5: migrations/web/migration-v5.md
+      - web-twig:
+          - v2: migrations/web-twig/migration-v2.md
+          - v3: migrations/web-twig/migration-v3.md
+          - v4: migrations/web-twig/migration-v4.md
+      - design-tokens:
+          - v4: migrations/design-tokens/migration-v4.md
+  - Postmortems:
+      - Overview: postmortems/README.md
+      - 2024-02-05 Deprecated Icon Rendering: postmortems/2024-02-05-deprecated-icon-rendering.md
+  - Content Guidelines:
+      - Truncating: content/truncating.md
+
+plugins:
+  - techdocs-core

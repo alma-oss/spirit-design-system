@@ -7,6 +7,12 @@ metadata:
   annotations:
     github.com/project-slug: alma-oss/spirit-design-system
     backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/analytics
+    ac/communication-channel: https://almamedia.slack.com/archives/C068XPSDWQN
+  links:
+    - url: https://spiritdesignsystem.com
+      title: Spirit Design System website
+    - url: https://backstage.almacareer.tech/catalog/default/component/designSystems-spiritWebReact/docs
+      title: Main Developer Documentation
   tags:
     - designsystem
     - spirit
@@ -18,6 +24,10 @@ spec:
   system: designSystems-spiritDesignSystem
   dependsOn:
     - technology:default/typescript
+    - technology:default/eslint
+    - technology:default/jest
+    - technology:default/yarn
+    - technology:default/github
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -27,6 +37,12 @@ metadata:
   annotations:
     github.com/project-slug: alma-oss/spirit-design-system
     backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/codemods
+    ac/communication-channel: https://almamedia.slack.com/archives/C068XPSDWQN
+  links:
+    - url: https://spiritdesignsystem.com
+      title: Spirit Design System website
+    - url: https://backstage.almacareer.tech/catalog/default/component/designSystems-spiritWebReact/docs
+      title: Main Developer Documentation
   tags:
     - designsystem
     - spirit
@@ -38,6 +54,10 @@ spec:
   system: designSystems-spiritDesignSystem
   dependsOn:
     - technology:default/typescript
+    - technology:default/eslint
+    - technology:default/jest
+    - technology:default/yarn
+    - technology:default/github
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -47,6 +67,12 @@ metadata:
   annotations:
     github.com/project-slug: alma-oss/spirit-design-system
     backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens
+    ac/communication-channel: https://almamedia.slack.com/archives/C068XPSDWQN
+  links:
+    - url: https://spiritdesignsystem.com
+      title: Spirit Design System website
+    - url: https://backstage.almacareer.tech/catalog/default/component/designSystems-spiritWebReact/docs
+      title: Main Developer Documentation
   tags:
     - designsystem
     - spirit
@@ -58,6 +84,9 @@ spec:
   system: designSystems-spiritDesignSystem
   dependsOn:
     - technology:default/typescript
+    - technology:default/eslint
+    - technology:default/yarn
+    - technology:default/github
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -67,6 +96,12 @@ metadata:
   annotations:
     github.com/project-slug: alma-oss/spirit-design-system
     backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/icons
+    ac/communication-channel: https://almamedia.slack.com/archives/C068XPSDWQN
+  links:
+    - url: https://spiritdesignsystem.com
+      title: Spirit Design System website
+    - url: https://backstage.almacareer.tech/catalog/default/component/designSystems-spiritWebReact/docs
+      title: Main Developer Documentation
   tags:
     - designsystem
     - spirit
@@ -78,7 +113,10 @@ spec:
   system: designSystems-spiritDesignSystem
   dependsOn:
     - technology:default/typescript
-    - technology:default/react
+    - technology:default/reactjs
+    - technology:default/jest
+    - technology:default/yarn
+    - technology:default/github
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -88,6 +126,12 @@ metadata:
   annotations:
     github.com/project-slug: alma-oss/spirit-design-system
     backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/web
+    ac/communication-channel: https://almamedia.slack.com/archives/C068XPSDWQN
+  links:
+    - url: https://spiritdesignsystem.com
+      title: Spirit Design System website
+    - url: https://backstage.almacareer.tech/catalog/default/component/designSystems-spiritWeb/docs
+      title: Main Developer Documentation
   tags:
     - designsystem
     - spirit
@@ -99,6 +143,11 @@ spec:
   system: designSystems-spiritDesignSystem
   dependsOn:
     - technology:default/typescript
+    - technology:default/javascript
+    - technology:default/eslint
+    - technology:default/jest
+    - technology:default/yarn
+    - technology:default/github
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -108,6 +157,8 @@ metadata:
   annotations:
     github.com/project-slug: alma-oss/spirit-design-system
     backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react
+    backstage.io/techdocs-ref: dir:.
+    ac/communication-channel: https://almamedia.slack.com/archives/C068XPSDWQN
   tags:
     - designsystem
     - spirit
@@ -124,5 +175,10 @@ spec:
   system: designSystems-spiritDesignSystem
   dependsOn:
     - technology:default/typescript
-    - technology:default/react
----
+    - technology:default/reactjs
+    - technology:default/javascript
+    - technology:default/eslint
+    - technology:default/jest
+    - technology:default/figma
+    - technology:default/yarn
+    - technology:default/github
