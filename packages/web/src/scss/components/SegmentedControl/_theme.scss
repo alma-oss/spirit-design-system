@@ -4,6 +4,7 @@
 @use '../../settings/cursors';
 @use '../../settings/dictionaries';
 @use '../../settings/transitions';
+
 $padding: calc(#{tokens.$space-400} - #{tokens.$border-width-100});
 $gap: tokens.$space-400;
 $border-width: tokens.$border-width-100;
