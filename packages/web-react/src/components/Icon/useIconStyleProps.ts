@@ -4,6 +4,7 @@ import { type CSSProperties } from 'react';
 import { TextColors } from '../../constants';
 import { useClassNamePrefix } from '../../hooks';
 import type { IconBoxSize, IconStyleProps, SpiritIconProps } from '../../types';
+import { pxToRem } from '../../utils';
 
 const setCustomDimension = (prefix: string, size: IconBoxSize): CSSProperties => {
   const style: CSSProperties = {};
@@ -12,7 +13,8 @@ const setCustomDimension = (prefix: string, size: IconBoxSize): CSSProperties =>
     Object.entries(size).forEach(([breakpoint, breakpointSize]) => {
       const breakpointSuffix = breakpoint === 'mobile' ? '' : `-${breakpoint}`;
 
-      (style as Record<string, string | undefined>)[`${prefix}${breakpointSuffix}`] = `${breakpointSize?.toString()}px`;
+      (style as Record<string, string | undefined>)[`${prefix}${breakpointSuffix}`] =
+        breakpointSize === undefined ? undefined : pxToRem(breakpointSize);
     });
   }
 
