@@ -22,23 +22,35 @@ $timeline-content-padding-bottom: tokens.$space-900;
 $timeline-content-padding-top: tokens.$space-600;
 
 $size-dictionary: dictionaries.$size;
+
+$default-size: small;
+
+$marker-size-config: (
+    small: 32px,
+    medium: 40px,
+    large: 56px,
+);
+
+$icon-size-config: (
+    small: 20px,
+    medium: 24px,
+    large: 28px,
+);
+
+$dot-size-config: (
+    small: 10px,
+    medium: 12px,
+    large: 16px,
+);
+
 $size-config: (
     small: (
-        marker-size: 32px,
-        icon-size: 20px,
-        dot-size: 10px,
         typography: tokens.$body-small-semibold,
     ),
     medium: (
-        marker-size: 40px,
-        icon-size: 24px,
-        dot-size: 12px,
         typography: tokens.$body-medium-semibold,
     ),
     large: (
-        marker-size: 56px,
-        icon-size: 28px,
-        dot-size: 16px,
         typography: tokens.$body-xlarge-semibold,
     ),
 );

@@ -84,8 +84,8 @@ const TooltipPopover = (props: TooltipPopoverProps) => {
       {...getFloatingProps()}
       style={{
         position,
-        top: y ?? 0,
-        left: x ?? 0,
+        top: Number.isFinite(y) ? y : 0,
+        left: Number.isFinite(x) ? x : 0,
         ...getMaxHeightAndWidth(),
         ...contentStyleProps.style,
       }}

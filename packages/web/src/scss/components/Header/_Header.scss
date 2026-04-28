@@ -1,3 +1,5 @@
+@use '@tokens' as tokens;
+@use '../../tools/dictionaries';
 @use '../../tools/typography';
 @use 'theme';
 
@@ -9,14 +11,24 @@
     flex: none;
     gap: theme.$header-gap;
     align-items: center;
-    height: 68px;
+    height: var(--#{tokens.$css-variable-prefix}header-height);
     padding-inline: theme.$header-padding-x;
     background-color: theme.$header-background-color;
 }
 
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'Header',
+    $custom-property-base-name: 'header',
+    $properties: (
+        height: theme.$header-height,
+        simple-height: theme.$header-height-simple,
+    ),
+    $breakpoints: tokens.$breakpoints
+);
+
 .Header--simple {
     justify-content: center;
-    height: 60px;
+    height: var(--#{tokens.$css-variable-prefix}header-simple-height);
 }
 
 .Header--transparent {

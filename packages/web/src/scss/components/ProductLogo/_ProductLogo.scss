@@ -1,3 +1,5 @@
+@use '@tokens' as tokens;
+@use '../../tools/dictionaries';
 @use 'theme' as theme;
 
 .ProductLogo {
@@ -5,8 +7,17 @@
     max-width: 100%;
 }
 
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'ProductLogo',
+    $custom-property-base-name: 'product-logo',
+    $properties: (
+        height: theme.$logo-height,
+    ),
+    $breakpoints: tokens.$breakpoints
+);
+
 .ProductLogo > img,
 .ProductLogo > svg {
     width: auto;
-    height: theme.$logo-height;
+    height: var(--#{tokens.$css-variable-prefix}product-logo-height);
 }

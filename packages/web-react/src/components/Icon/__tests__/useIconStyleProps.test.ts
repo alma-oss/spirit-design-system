@@ -9,9 +9,9 @@ describe('useIconStyleProps', () => {
     const { result } = renderHook(() => useIconStyleProps(props));
 
     expect(result.current.iconStyleProps).toEqual({
-      '--spirit-icon-size': '20px',
-      '--spirit-icon-size-tablet': '40px',
-      '--spirit-icon-size-desktop': '60px',
+      '--spirit-icon-size': '1.25rem',
+      '--spirit-icon-size-tablet': '2.5rem',
+      '--spirit-icon-size-desktop': '3.75rem',
     });
   });
 
@@ -20,11 +20,11 @@ describe('useIconStyleProps', () => {
     const { result } = renderHook(() => useIconStyleProps(props));
 
     expect(result.current.iconStyleProps).toEqual({
-      '--spirit-icon-size-tablet': '40px',
+      '--spirit-icon-size-tablet': '2.5rem',
     });
   });
 
-  it('should return empty when boxSize is a number', () => {
+  it('should return empty style when boxSize is a number', () => {
     const props = { boxSize: 20, name: 'add' } as SpiritIconProps;
     const { result } = renderHook(() => useIconStyleProps(props));
 

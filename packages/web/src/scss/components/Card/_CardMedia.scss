@@ -4,6 +4,7 @@
 // 3. Do not let the media push the body content out of the horizontal card.
 
 @use '@tokens' as tokens;
+@use '../../settings/dictionaries' as dictionaries-settings;
 @use '../../tools/breakpoint';
 @use '../../tools/dictionaries';
 @use 'theme';
@@ -41,16 +42,34 @@
         .Card--#{$infix}vertical > {
             @include dictionaries.generate-sizes(
                 $class-name: 'CardMedia',
-                $dictionary-values: theme.$size-dictionary,
-                $config: theme.$media-vertical-size-config
+                $dictionary-values: (
+                    auto,
+                ),
+                $config: theme.$media-auto-size-config
+            );
+            @include dictionaries.generate-rem-sizes(
+                $class-name: 'CardMedia',
+                $dictionary-values: dictionaries-settings.$size,
+                $config: theme.$media-vertical-size-config,
+                $property-name: 'size',
+                $breakpoints: null
             );
         }
 
         :is(.Card--#{$infix}horizontal, .Card--#{$infix}horizontalReversed) > {
             @include dictionaries.generate-sizes(
                 $class-name: 'CardMedia',
-                $dictionary-values: theme.$size-dictionary,
-                $config: theme.$media-horizontal-size-config
+                $dictionary-values: (
+                    auto,
+                ),
+                $config: theme.$media-auto-size-config
+            );
+            @include dictionaries.generate-rem-sizes(
+                $class-name: 'CardMedia',
+                $dictionary-values: dictionaries-settings.$size,
+                $config: theme.$media-horizontal-size-config,
+                $property-name: 'size',
+                $breakpoints: null
             );
         }
 

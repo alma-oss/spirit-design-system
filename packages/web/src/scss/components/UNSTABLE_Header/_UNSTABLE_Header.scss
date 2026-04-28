@@ -2,10 +2,10 @@
 //    for the box-sizing. The box-sizing is inherited by the children, so we need to reset it to `border-box`.
 
 @use '@tokens' as tokens;
+@use '../../tools/dictionaries';
 @use 'theme';
 
 .UNSTABLE_Header {
-    --#{tokens.$css-variable-prefix}header-height: #{theme.$height};
     --#{tokens.$css-variable-prefix}navigation-height: var(--#{tokens.$css-variable-prefix}header-height);
 
     flex: none;
@@ -13,6 +13,14 @@
     height: var(--#{tokens.$css-variable-prefix}header-height);
     background-color: theme.$background-color;
 }
+
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'UNSTABLE_Header',
+    $custom-property-base-name: 'header',
+    $properties: (
+        height: theme.$height,
+    )
+);
 
 .UNSTABLE_Header--bottomDivider {
     border-bottom: theme.$border-width theme.$border-style theme.$border-color;

@@ -3,7 +3,7 @@
 ## Basic Usage
 
 ```html
-<svg width="24" height="24">
+<svg width="24" height="24" style="--spirit-icon-size: 1.5rem;">
   <use xlink:href="/assets/icons/svg/sprite.svg#info" />
 </svg>
 ```
@@ -32,9 +32,17 @@ Available colors include `text`, `emotion`, and `accent` colors.
 
 Use CSS custom properties to define the `size` of the icon.
 
-- `--spirit-icon-size: number{px};`
-- `--spirit-icon-size-tablet: number{px}`
-- `--spirit-icon-size-desktop: number{px}`
+- `--spirit-icon-size: number{rem};`
+- `--spirit-icon-size-tablet: number{rem}`
+- `--spirit-icon-size-desktop: number{rem}`
+
+For a single (non-responsive) size, use inline style with `--spirit-icon-size`.
+
+```html
+<svg class="Icon" width="24" height="24" style="--spirit-icon-size: 1.5rem;">
+  <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+</svg>
+```
 
 The prefix `spirit-` is `css-variable-prefix` defined in the `design tokens` and can vary depending on the project.
 Always refer to your project's design tokens for the correct prefix.
@@ -50,9 +58,9 @@ If only tablet or desktop is set, width and height is used for smaller breakpoin
   width="20"
   height="20"
   style="
-    --spirit-icon-size: 20px;
-    --spirit-icon-size-tablet: 30px;
-    --spirit-icon-size-desktop: 40px;
+     --spirit-icon-size: 1.25rem;
+     --spirit-icon-size-tablet: 1.875rem;
+     --spirit-icon-size-desktop: 2.5rem;
   "
 >
   <use xlink:href="/assets/icons/svg/sprite.svg#info" />

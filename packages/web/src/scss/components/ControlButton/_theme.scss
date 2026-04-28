@@ -9,66 +9,78 @@ $border-radius: tokens.$radius-full;
 
 $size-dictionary: dictionaries.$size;
 
+$size-height-config: (
+    small: 24px,
+    medium: 32px,
+    large: 40px,
+);
+
+$size-icon-config: (
+    small: 16px,
+    medium: 16px,
+    large: 20px,
+);
+
 $size-config: (
     small: (
-        height: 24px,
         padding-x: calc(#{tokens.$space-600} - #{$border-width}),
         padding-y: calc(#{tokens.$space-300} - #{$border-width}),
         typography: tokens.$body-small-regular,
-        icon-size: 16px,
     ),
     medium: (
-        height: 32px,
         padding-x: calc(#{tokens.$space-700} - #{$border-width}),
         padding-y: calc(#{tokens.$space-500} - #{$border-width}),
         typography: tokens.$body-small-regular,
-        icon-size: 16px,
     ),
     large: (
-        height: 40px,
         padding-x: calc(#{tokens.$space-900} - #{$border-width}),
         padding-y: calc(#{tokens.$space-500} - #{$border-width}),
         typography: tokens.$body-medium-regular,
-        icon-size: 20px,
     ),
 );
 
 $expanded-size-dictionary: dictionaries.$size-extended;
 
+$expanded-size-height-config: (
+    xsmall: 16px,
+    small: 20px,
+    medium: 24px,
+    large: 32px,
+    xlarge: 40px,
+);
+
+$expanded-size-icon-config: (
+    xsmall: 12px,
+    small: 16px,
+    medium: 16px,
+    large: 16px,
+    xlarge: 20px,
+);
+
 $expanded-size-config: (
     xsmall: (
-        height: 16px,
         padding-x: calc(#{tokens.$space-600} - #{$border-width}),
         padding-y: calc(#{tokens.$space-300} - #{$border-width}),
         typography: tokens.$body-small-regular,
-        icon-size: 12px,
     ),
     small: (
-        height: 20px,
         padding-x: calc(#{tokens.$space-600} - #{$border-width}),
         padding-y: calc(#{tokens.$space-300} - #{$border-width}),
         typography: tokens.$body-small-regular,
-        icon-size: 16px,
     ),
     medium: (
-        height: 24px,
         padding-x: calc(#{tokens.$space-600} - #{$border-width}),
         padding-y: calc(#{tokens.$space-300} - #{$border-width}),
         typography: tokens.$body-small-regular,
-        icon-size: 16px,
     ),
     large: (
-        height: 32px,
         padding-x: calc(#{tokens.$space-700} - #{$border-width}),
         padding-y: calc(#{tokens.$space-500} - #{$border-width}),
         typography: tokens.$body-small-regular,
-        icon-size: 16px,
     ),
     xlarge: (
-        height: 40px,
         padding-x: calc(#{tokens.$space-900} - #{$border-width}),
         padding-y: calc(#{tokens.$space-500} - #{$border-width}),
         typography: tokens.$body-medium-regular,
-        icon-size: 20px,
     ),
 );

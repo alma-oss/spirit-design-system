@@ -1,5 +1,7 @@
+@use '@tokens' as tokens;
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/accessibility';
+@use '../../tools/dictionaries';
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/reset';
 @use '../../tools/typography';
@@ -25,12 +27,21 @@
 
 .FileUploaderAttachment__image {
     position: relative;
-    width: 56px;
-    height: 56px;
+    width: var(--#{tokens.$css-variable-prefix}file-uploader-attachment-image-size);
+    height: var(--#{tokens.$css-variable-prefix}file-uploader-attachment-image-size);
     overflow: hidden;
     border: theme.$attachment-image-border;
     border-radius: theme.$attachment-image-border-radius;
 }
+
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'FileUploaderAttachment__image',
+    $custom-property-base-name: 'file-uploader-attachment-image',
+    $properties: (
+        size: theme.$attachment-image-size,
+    ),
+    $breakpoints: tokens.$breakpoints
+);
 
 .FileUploaderAttachment__image > img {
     position: absolute;

@@ -1,6 +1,6 @@
-@use 'sass:map';
+@use '@tokens' as tokens;
+@use '../../tools/dictionaries';
 @use 'theme' as theme;
-@use '../../tools/breakpoint';
 
 .EmptyState {
     display: grid;
@@ -11,5 +11,14 @@
 .EmptyState__section {
     display: grid;
     width: 100%;
-    max-width: 400px;
+    max-width: var(--#{tokens.$css-variable-prefix}empty-state-max-width);
 }
+
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'EmptyState__section',
+    $custom-property-base-name: 'empty-state',
+    $properties: (
+        max-width: theme.$max-width,
+    ),
+    $breakpoints: theme.$breakpoints
+);

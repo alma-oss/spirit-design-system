@@ -22,13 +22,21 @@
 
     display: grid;
     grid-template-rows: repeat(var(--#{tokens.$css-variable-prefix}pricing-plan-rows, theme.$rows), auto); // 1.
-    min-width: theme.$min-width;
+    min-width: var(--#{tokens.$css-variable-prefix}pricing-plan-min-width);
     color: theme.$color;
     border: theme.$border-width solid
         var(--#{tokens.$css-variable-prefix}pricing-plan-border-color, theme.$border-color);
     border-radius: theme.$border-radius;
     background-color: var(--#{tokens.$css-variable-prefix}pricing-plan-background-color, theme.$background-color);
 }
+
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'PricingPlan',
+    $custom-property-base-name: 'pricing-plan',
+    $properties: (
+        min-width: theme.$min-width,
+    )
+);
 
 .PricingPlan__layout {
     display: grid;

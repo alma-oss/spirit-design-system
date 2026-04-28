@@ -47,7 +47,7 @@
     "lint:fix": "npm-run-all js:lint:fix css:lint:fix",
     "test": "npm-run-all test:prepare lint test:unit:coverage types",
     "test:prepare": "npm-run-all --continue-on-error build:design-tokens",
-    "test:unit": "jest",
+    "test:unit": "TS_NODE_PROJECT=./config/tsconfig.test.json jest",
     "test:unit:watch": "yarn test:unit --watchAll",
     "test:unit:coverage": "yarn test:unit --coverage",
     "types": "tsc"

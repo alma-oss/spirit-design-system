@@ -1,4 +1,6 @@
 @use 'true' as test;
+@use 'sass:map';
+@use '@tokens' as tokens;
 @use '../breakpoint';
 
 @include test.describe('up mixin from breakpoint') {
@@ -125,6 +127,8 @@
 
 @include test.describe('only mixin from breakpoint') {
     @include test.it('should output media query for first breakpoint') {
+        $tablet-breakpoint: map.get(tokens.$breakpoints, tablet);
+
         @include test.assert() {
             @include test.output() {
                 @include breakpoint.only(0) {
@@ -135,7 +139,7 @@
             }
 
             @include test.expect() {
-                @media (width < 768px) {
+                @media (width < #{$tablet-breakpoint}) {
                     .selector {
                         color: #bada55;
                     }
@@ -145,9 +149,12 @@
     }
 
     @include test.it('should output media query for middle breakpoint') {
+        $tablet-breakpoint: map.get(tokens.$breakpoints, tablet);
+        $desktop-breakpoint: map.get(tokens.$breakpoints, desktop);
+
         @include test.assert() {
             @include test.output() {
-                @include breakpoint.only(768px) {
+                @include breakpoint.only($tablet-breakpoint) {
                     .selector {
                         color: #bada55;
                     }
@@ -155,7 +162,7 @@
             }
 
             @include test.expect() {
-                @media (width >= 768px) and (width < 1280px) {
+                @media (width >= #{$tablet-breakpoint}) and (width < #{$desktop-breakpoint}) {
                     .selector {
                         color: #bada55;
                     }

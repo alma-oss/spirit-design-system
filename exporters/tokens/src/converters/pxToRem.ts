@@ -14,7 +14,7 @@ export type PxToRemOptions = {
  * @returns {string} The converted value in rem units
  */
 export const pxToRem = (valuePx: string | number, options: PxToRemOptions): string => {
-  const { baseFontSize, decimals = 2 } = options;
+  const { baseFontSize, decimals = 4 } = options;
 
   if (!baseFontSize || baseFontSize <= 0) {
     return `${valuePx}${PX_UNIT}`;

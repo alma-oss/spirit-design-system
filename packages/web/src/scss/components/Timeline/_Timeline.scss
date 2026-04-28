@@ -1,14 +1,48 @@
+@use 'sass:map';
 @use '@tokens' as tokens;
 @use 'theme';
 @use '../../tools/dictionaries';
 
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'Timeline',
+    $custom-property-base-name: 'timeline',
+    $properties: (
+        max-width: theme.$timeline-max-width,
+        marker-size: map.get(theme.$marker-size-config, theme.$default-size),
+        dot-size: map.get(theme.$dot-size-config, theme.$default-size),
+        icon-size: map.get(theme.$icon-size-config, theme.$default-size),
+    ),
+    $breakpoints: tokens.$breakpoints
+);
+
 .Timeline {
-    max-width: theme.$timeline-max-width;
+    max-width: var(--#{tokens.$css-variable-prefix}timeline-max-width);
 }
 
 @include dictionaries.generate-sizes(
     $class-name: 'Timeline',
     $dictionary-values: theme.$size-dictionary,
     $config: theme.$size-config,
+    $breakpoints: tokens.$breakpoints
+);
+@include dictionaries.generate-rem-sizes(
+    $class-name: 'Timeline',
+    $dictionary-values: theme.$size-dictionary,
+    $config: theme.$marker-size-config,
+    $property-name: 'marker-size',
+    $breakpoints: tokens.$breakpoints
+);
+@include dictionaries.generate-rem-sizes(
+    $class-name: 'Timeline',
+    $dictionary-values: theme.$size-dictionary,
+    $config: theme.$icon-size-config,
+    $property-name: 'icon-size',
+    $breakpoints: tokens.$breakpoints
+);
+@include dictionaries.generate-rem-sizes(
+    $class-name: 'Timeline',
+    $dictionary-values: theme.$size-dictionary,
+    $config: theme.$dot-size-config,
+    $property-name: 'dot-size',
     $breakpoints: tokens.$breakpoints
 );

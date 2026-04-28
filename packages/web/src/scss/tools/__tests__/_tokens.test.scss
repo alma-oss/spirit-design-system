@@ -97,9 +97,9 @@ $test-dictionary: key1, key2, key3;
         );
 
         $expected: (
-            'border-radius-mobile': 8px,
-            'border-radius-tablet': 8px,
-            'border-radius-desktop': 8px,
+            'border-radius-mobile': tokens-tools.get-variable-if-exists('form-field-medium-radius-mobile', 4px),
+            'border-radius-tablet': tokens-tools.get-variable-if-exists('form-field-medium-radius-tablet', 4px),
+            'border-radius-desktop': tokens-tools.get-variable-if-exists('form-field-medium-radius-desktop', 4px),
         );
 
         @include test.assert-equal($result, $expected);

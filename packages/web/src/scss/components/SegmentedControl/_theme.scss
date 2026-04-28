@@ -26,6 +26,7 @@ $fill-variant-dictionary: dictionaries.$fill-variants;
 
 // Item
 $item-height: 40px;
+$item-min-width-extra: 20px;
 $item-padding-x: calc(#{tokens.$space-600} - #{tokens.$border-width-100});
 $item-padding-y: tokens.$space-700;
 $item-border-radius: tokens.$radius-full;
@@ -36,7 +37,6 @@ $item-border-default: tokens.$border-width-100 solid transparent;
 $item-outline-width: tokens.$border-width-100;
 $item-disabled-cursor: cursors.$disabled;
 $item-disabled-color: tokens.$disabled-content;
-$item-min-width: ($item-padding-y * 2 + 20px); // 1.
 
 $fill-variant-config: (
     outline: (

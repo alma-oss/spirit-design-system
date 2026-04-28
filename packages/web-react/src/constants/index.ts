@@ -8,3 +8,4 @@ export * from './position';
 export * from './selection';
 export * from './style';
 export * from './text';
+export * from './units';

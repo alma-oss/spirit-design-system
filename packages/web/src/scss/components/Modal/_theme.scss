@@ -26,7 +26,7 @@ $dialog-background-color: tokens.$background-primary;
 $dialog-shadow: tokens.$shadow-300;
 
 $_dialog-scrollable-default-height: min-content;
-$_dialog-scrollable-default-max-height: 600px;
+$dialog-scrollable-default-max-height: 600px;
 
 $dialog-scrollable-height: var(--modal-dialog-height, #{$_dialog-scrollable-default-height});
 $dialog-scrollable-height-tablet: var(
@@ -38,17 +38,26 @@ $dialog-scrollable-height-desktop: var(
     var(--modal-dialog-height-tablet, var(--modal-dialog-height, #{$_dialog-scrollable-default-height}))
 );
 $dialog-scrollable-max-height: min(
-    var(--modal-dialog-max-height, #{$_dialog-scrollable-default-max-height}),
+    var(--modal-dialog-max-height, var(--#{tokens.$css-variable-prefix}modal-dialog-scrollable-default-max-height)),
     calc(100dvh - #{2 * $padding-y})
 );
 $dialog-scrollable-max-height-tablet: min(
-    var(--modal-dialog-max-height-tablet, var(--modal-dialog-max-height, #{$_dialog-scrollable-default-max-height})),
+    var(
+        --modal-dialog-max-height-tablet,
+        var(--modal-dialog-max-height, var(--#{tokens.$css-variable-prefix}modal-dialog-scrollable-default-max-height))
+    ),
     calc(100dvh - #{2 * $padding-y})
 );
 $dialog-scrollable-max-height-desktop: min(
     var(
         --modal-dialog-max-height-desktop,
-        var(--modal-dialog-max-height-tablet, var(--modal-dialog-max-height, #{$_dialog-scrollable-default-max-height}))
+        var(
+            --modal-dialog-max-height-tablet,
+            var(
+                --modal-dialog-max-height,
+                var(--#{tokens.$css-variable-prefix}modal-dialog-scrollable-default-max-height)
+            )
+        )
     ),
     calc(100dvh - #{2 * $padding-y})
 );

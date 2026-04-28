@@ -1,0 +1,50 @@
+@use 'sass:math';
+@use 'sass:meta';
+@use '../settings/units' as units-settings;
+@use 'tokens' as tokens-tools;
+
+// Unitless number = px count; `px` length is normalized to that count.
+@function -length-as-unitless-px($value, $param-name) {
+    @if meta.type-of($value) != 'number' {
+        @error 'px-to-rem: #{$param-name} must be a number (px or unitless).';
+    }
+
+    @if math.unit($value) == 'px' {
+        @return math.div($value, 1px);
+    }
+
+    @if math.is-unitless($value) {
+        @return $value;
+    }
+
+    @error 'px-to-rem: #{$param-name} must be px or unitless (interpreted as px).';
+}
+
+// Converts a pixel value to rem, rounded to `$decimals` fractional digits.
+// If `$base-font-size` is missing or invalid, falls back to `units-settings.$font-size-base-fallback`.
+//
+// @param $value-px - Pixel length (`16px`) or unitless number (treated as px)
+// @param $base-font-size [$font-size-base-desktop] - Root font size in px
+// @param $decimals [4] - Decimal places used when rounding the rem ratio
+@function px-to-rem($value-px, $base-font-size: units-settings.$font-size-base-fallback, $decimals: 4) {
+    @if not $base-font-size or $base-font-size <= 0 {
+        $base-font-size: units-settings.$font-size-base-fallback;
+    }
+
+    $value-num: -length-as-unitless-px($value-px, '$value-px');
+    $base-font-size-num: -length-as-unitless-px($base-font-size, '$base-font-size');
+    $raw: math.div($value-num, $base-font-size-num);
+    $factor: math.pow(10, $decimals);
+    $rounded: math.div(math.round(($raw + math.div(1, 1000000000000000)) * $factor), $factor);
+    $normalized: $rounded;
+
+    @if math.abs($rounded) == 0 {
+        $normalized: 0;
+    }
+
+    @if $normalized == 0 {
+        @return 0;
+    }
+
+    @return $normalized * 1rem;
+}

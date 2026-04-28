@@ -2,7 +2,7 @@
 export const bodyLargeBold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '18px',
+    fontSize: '1.125rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.33,
@@ -12,7 +12,7 @@ export const bodyLargeBold = {
 export const bodyLargeItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '18px',
+    fontSize: '1.125rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.33,
@@ -22,7 +22,7 @@ export const bodyLargeItalic = {
 export const bodyLargeRegular = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '18px',
+    fontSize: '1.125rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.33,
@@ -32,7 +32,7 @@ export const bodyLargeRegular = {
 export const bodyLargeSemibold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '18px',
+    fontSize: '1.125rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.33,
@@ -42,7 +42,7 @@ export const bodyLargeSemibold = {
 export const bodyMediumBold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '16px',
+    fontSize: '1rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.38,
@@ -52,7 +52,7 @@ export const bodyMediumBold = {
 export const bodyMediumItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '16px',
+    fontSize: '1rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.38,
@@ -62,7 +62,7 @@ export const bodyMediumItalic = {
 export const bodyMediumRegular = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '16px',
+    fontSize: '1rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.38,
@@ -72,7 +72,7 @@ export const bodyMediumRegular = {
 export const bodyMediumSemibold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '16px',
+    fontSize: '1rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.38,
@@ -82,7 +82,7 @@ export const bodyMediumSemibold = {
 export const bodySmallBold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '14px',
+    fontSize: '0.875rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.43,
@@ -92,7 +92,7 @@ export const bodySmallBold = {
 export const bodySmallItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '14px',
+    fontSize: '0.875rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.43,
@@ -102,7 +102,7 @@ export const bodySmallItalic = {
 export const bodySmallRegular = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '14px',
+    fontSize: '0.875rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.43,
@@ -112,7 +112,7 @@ export const bodySmallRegular = {
 export const bodySmallSemibold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '14px',
+    fontSize: '0.875rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.43,
@@ -122,7 +122,7 @@ export const bodySmallSemibold = {
 export const bodyXlargeBold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.40,
@@ -132,7 +132,7 @@ export const bodyXlargeBold = {
 export const bodyXlargeItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.40,
@@ -142,7 +142,7 @@ export const bodyXlargeItalic = {
 export const bodyXlargeRegular = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.40,
@@ -152,7 +152,7 @@ export const bodyXlargeRegular = {
 export const bodyXlargeSemibold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.40,
@@ -162,7 +162,7 @@ export const bodyXlargeSemibold = {
 export const bodyXsmallBold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '12px',
+    fontSize: '0.75rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.33,
@@ -172,7 +172,7 @@ export const bodyXsmallBold = {
 export const bodyXsmallItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '12px',
+    fontSize: '0.75rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.33,
@@ -182,7 +182,7 @@ export const bodyXsmallItalic = {
 export const bodyXsmallRegular = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '12px',
+    fontSize: '0.75rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.33,
@@ -192,7 +192,7 @@ export const bodyXsmallRegular = {
 export const bodyXsmallSemibold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '12px',
+    fontSize: '0.75rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.33,
@@ -202,21 +202,21 @@ export const bodyXsmallSemibold = {
 export const headingLargeBold = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '40px',
+    fontSize: '2.5rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.20,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '40px',
+    fontSize: '2.5rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.20,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '32px',
+    fontSize: '2rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.19,
@@ -226,21 +226,21 @@ export const headingLargeBold = {
 export const headingLargeItalic = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '40px',
+    fontSize: '2.5rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.20,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '40px',
+    fontSize: '2.5rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.20,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '32px',
+    fontSize: '2rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.19,
@@ -250,21 +250,21 @@ export const headingLargeItalic = {
 export const headingLargeRegular = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '40px',
+    fontSize: '2.5rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.20,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '40px',
+    fontSize: '2.5rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.20,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '32px',
+    fontSize: '2rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.19,
@@ -274,21 +274,21 @@ export const headingLargeRegular = {
 export const headingLargeSemibold = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '40px',
+    fontSize: '2.5rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.20,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '40px',
+    fontSize: '2.5rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.20,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '32px',
+    fontSize: '2rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.19,
@@ -298,21 +298,21 @@ export const headingLargeSemibold = {
 export const headingMediumBold = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '32px',
+    fontSize: '2rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.19,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '32px',
+    fontSize: '2rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.19,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '24px',
+    fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.17,
@@ -322,21 +322,21 @@ export const headingMediumBold = {
 export const headingMediumItalic = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '32px',
+    fontSize: '2rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.19,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '32px',
+    fontSize: '2rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.19,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '24px',
+    fontSize: '1.5rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.17,
@@ -346,21 +346,21 @@ export const headingMediumItalic = {
 export const headingMediumRegular = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '32px',
+    fontSize: '2rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.19,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '32px',
+    fontSize: '2rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.19,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '24px',
+    fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.17,
@@ -370,21 +370,21 @@ export const headingMediumRegular = {
 export const headingMediumSemibold = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '32px',
+    fontSize: '2rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.19,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '32px',
+    fontSize: '2rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.19,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '24px',
+    fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.17,
@@ -394,21 +394,21 @@ export const headingMediumSemibold = {
 export const headingSmallBold = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '24px',
+    fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.17,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '24px',
+    fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.17,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.20,
@@ -418,21 +418,21 @@ export const headingSmallBold = {
 export const headingSmallItalic = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '24px',
+    fontSize: '1.5rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.17,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '24px',
+    fontSize: '1.5rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.17,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.20,
@@ -442,21 +442,21 @@ export const headingSmallItalic = {
 export const headingSmallRegular = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '24px',
+    fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.17,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '24px',
+    fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.17,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.20,
@@ -466,21 +466,21 @@ export const headingSmallRegular = {
 export const headingSmallSemibold = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '24px',
+    fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.17,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '24px',
+    fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.17,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.20,
@@ -490,21 +490,21 @@ export const headingSmallSemibold = {
 export const headingXlargeBold = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '48px',
+    fontSize: '3rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.21,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '48px',
+    fontSize: '3rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.21,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '36px',
+    fontSize: '2.25rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.17,
@@ -514,21 +514,21 @@ export const headingXlargeBold = {
 export const headingXlargeItalic = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '48px',
+    fontSize: '3rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.21,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '48px',
+    fontSize: '3rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.21,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '36px',
+    fontSize: '2.25rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.17,
@@ -538,21 +538,21 @@ export const headingXlargeItalic = {
 export const headingXlargeRegular = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '48px',
+    fontSize: '3rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.21,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '48px',
+    fontSize: '3rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.21,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '36px',
+    fontSize: '2.25rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.17,
@@ -562,21 +562,21 @@ export const headingXlargeRegular = {
 export const headingXlargeSemibold = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '48px',
+    fontSize: '3rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.21,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '48px',
+    fontSize: '3rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.21,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '36px',
+    fontSize: '2.25rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.17,
@@ -586,21 +586,21 @@ export const headingXlargeSemibold = {
 export const headingXsmallBold = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.20,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.20,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '18px',
+    fontSize: '1.125rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.22,
@@ -610,21 +610,21 @@ export const headingXsmallBold = {
 export const headingXsmallItalic = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.20,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.20,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '18px',
+    fontSize: '1.125rem',
     fontStyle: 'italic',
     fontWeight: 400,
     lineHeight: 1.22,
@@ -634,21 +634,21 @@ export const headingXsmallItalic = {
 export const headingXsmallRegular = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.20,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.20,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '18px',
+    fontSize: '1.125rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.22,
@@ -658,21 +658,21 @@ export const headingXsmallRegular = {
 export const headingXsmallSemibold = {
   desktop: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.20,
   },
   tablet: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.20,
   },
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '18px',
+    fontSize: '1.125rem',
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 1.22,

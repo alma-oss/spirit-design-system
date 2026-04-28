@@ -86,7 +86,7 @@ describe('unitFormatter', () => {
 
   describe('replacePxWithRem', () => {
     it('should replace px occurrences with rem using baseFontSize and keeps other text intact', () => {
-      expect(replacePxWithRem('0 2px 8px 0', 14)).toBe('0 0.14rem 0.57rem 0');
+      expect(replacePxWithRem('0 2px 8px 0', 14)).toBe('0 0.1429rem 0.5714rem 0');
     });
 
     it('should return input unchanged when baseFontSize is invalid', () => {

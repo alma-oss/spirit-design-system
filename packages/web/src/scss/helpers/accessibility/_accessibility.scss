@@ -3,8 +3,9 @@
 
 @use '@tokens' as tokens;
 @use '../../tools/accessibility';
+@use '../../tools/units' as units;
 
-$_tap-target-size: 40px;
+$_tap-target-size: units.px-to-rem(40px);
 
 .accessibility-hidden {
     @include accessibility.hide-text();

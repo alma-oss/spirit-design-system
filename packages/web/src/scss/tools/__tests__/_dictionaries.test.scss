@@ -1,7 +1,10 @@
+@use 'sass:map';
 @use 'true' as test;
 @use '../../settings/dictionaries' as dictionaries-settings;
 @use '../../settings/links' as links-settings;
+@use '../../settings/units' as units-settings;
 @use '../dictionaries';
+@use '../tokens' as tokens-tools;
 
 @include test.describe('validate config keys function') {
     @include test.it('should not throw an error if config keys match the dictionary values') {
@@ -600,6 +603,306 @@
                     .TestSize--tablet--large {
                         --spirit-test-size-width: 20px;
                     }
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-font-size-base-map function') {
+    @include test.it('should resolve each key via token lookup with fallback') {
+        $map: dictionaries.get-font-size-base-map();
+
+        // ⚠️ External dependency: touches actual design token values.
+        @include test.assert-equal(
+            map.get($map, mobile),
+            tokens-tools.get-variable-if-exists('font-size-base-mobile', units-settings.$font-size-base-fallback)
+        );
+        @include test.assert-equal(
+            map.get($map, tablet),
+            tokens-tools.get-variable-if-exists('font-size-base-tablet', units-settings.$font-size-base-fallback)
+        );
+        @include test.assert-equal(
+            map.get($map, desktop),
+            tokens-tools.get-variable-if-exists('font-size-base-desktop', units-settings.$font-size-base-fallback)
+        );
+    }
+}
+
+@include test.describe('get-font-size-base-for-breakpoint function') {
+    @include test.it('should prefer the caller map when the breakpoint key exists') {
+        $font-bases: (
+            mobile: 20px,
+            tablet: 18px,
+            desktop: 22px,
+        );
+
+        @include test.assert-equal(dictionaries.get-font-size-base-for-breakpoint($font-bases, tablet), 18px);
+    }
+
+    @include test.it('should use defaults for a breakpoint missing from the caller map') {
+        $font-bases: (
+            mobile: 20px,
+        );
+        $defaults: dictionaries.get-font-size-base-map();
+
+        @include test.assert-equal(
+            dictionaries.get-font-size-base-for-breakpoint($font-bases, tablet),
+            map.get($defaults, tablet)
+        );
+    }
+
+    @include test.it('should return the settings fallback for unknown breakpoint keys') {
+        @include test.assert-equal(
+            dictionaries.get-font-size-base-for-breakpoint(
+                (
+                    mobile: 20px,
+                ),
+                'unknown-breakpoint'
+            ),
+            units-settings.$font-size-base-fallback
+        );
+    }
+
+    @include test.it('should return the settings fallback when caller map is empty and key is unknown') {
+        @include test.assert-equal(
+            dictionaries.get-font-size-base-for-breakpoint((), 'missing-breakpoint'),
+            units-settings.$font-size-base-fallback
+        );
+    }
+}
+
+@include test.describe('generate-rem-sizes mixin') {
+    @include test.it('should generate rem from px using the font base for each breakpoint') {
+        @include test.assert() {
+            @include test.output() {
+                @include dictionaries.generate-rem-sizes(
+                    $class-name: 'TestRemSize',
+                    $dictionary-values: (
+                        'medium',
+                    ),
+                    $config: (
+                        medium: 16px,
+                    ),
+                    $property-name: 'icon-size',
+                    $breakpoints: (
+                        'mobile': 0,
+                        'tablet': 768px,
+                        'desktop': 1280px,
+                    ),
+                    $font-bases-by-breakpoint: (
+                        mobile: 20px,
+                        tablet: 16px,
+                        desktop: 10px,
+                    )
+                );
+            }
+
+            @include test.expect() {
+                .TestRemSize--medium {
+                    --spirit-test-rem-size-icon-size: 0.8rem;
+                }
+
+                @media (width >= 768px) {
+                    .TestRemSize--medium {
+                        --spirit-test-rem-size-icon-size: 1rem;
+                    }
+                }
+
+                @media (width >= 1280px) {
+                    .TestRemSize--medium {
+                        --spirit-test-rem-size-icon-size: 1.6rem;
+                    }
+                }
+
+                @media (width >= 768px) {
+                    .TestRemSize--tablet--medium {
+                        --spirit-test-rem-size-icon-size: 1rem;
+                    }
+                }
+
+                @media (width >= 1280px) {
+                    .TestRemSize--desktop--medium {
+                        --spirit-test-rem-size-icon-size: 1.6rem;
+                    }
+                }
+            }
+        }
+    }
+
+    @include test.it('should use default token font base per breakpoint when a key is omitted from the override map') {
+        @include test.assert() {
+            @include test.output() {
+                @include dictionaries.generate-rem-sizes(
+                    $class-name: 'TestRemPartialBase',
+                    $dictionary-values: (
+                        'medium',
+                    ),
+                    $config: (
+                        medium: 16px,
+                    ),
+                    $property-name: 'icon-size',
+                    $breakpoints: (
+                        'mobile': 0,
+                        'tablet': 768px,
+                        'desktop': 1280px,
+                    ),
+                    $font-bases-by-breakpoint: (
+                        mobile: 20px,
+                    )
+                );
+            }
+
+            @include test.expect() {
+                .TestRemPartialBase--medium {
+                    --spirit-test-rem-partial-base-icon-size: 0.8rem;
+                }
+
+                @media (width >= 768px) {
+                    .TestRemPartialBase--medium {
+                        --spirit-test-rem-partial-base-icon-size: 1rem;
+                    }
+                }
+
+                @media (width >= 1280px) {
+                    .TestRemPartialBase--medium {
+                        --spirit-test-rem-partial-base-icon-size: 1rem;
+                    }
+                }
+
+                @media (width >= 768px) {
+                    .TestRemPartialBase--tablet--medium {
+                        --spirit-test-rem-partial-base-icon-size: 1rem;
+                    }
+                }
+
+                @media (width >= 1280px) {
+                    .TestRemPartialBase--desktop--medium {
+                        --spirit-test-rem-partial-base-icon-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+
+    @include test.it('should generate a single base rule when font bases are uniform') {
+        @include test.assert() {
+            @include test.output() {
+                @include dictionaries.generate-rem-sizes(
+                    $class-name: 'TestRemUniform',
+                    $dictionary-values: (
+                        'medium',
+                    ),
+                    $config: (
+                        medium: 16px,
+                    ),
+                    $property-name: 'icon-size',
+                    $breakpoints: (
+                        'mobile': 0,
+                        'tablet': 768px,
+                        'desktop': 1280px,
+                    ),
+                    $font-bases-by-breakpoint: (
+                        mobile: 16px,
+                        tablet: 16px,
+                        desktop: 16px,
+                    )
+                );
+            }
+
+            @include test.expect() {
+                .TestRemUniform--medium {
+                    --spirit-test-rem-uniform-icon-size: 1rem;
+                }
+
+                @media (width >= 768px) {
+                    .TestRemUniform--tablet--medium {
+                        --spirit-test-rem-uniform-icon-size: 1rem;
+                    }
+                }
+
+                @media (width >= 1280px) {
+                    .TestRemUniform--desktop--medium {
+                        --spirit-test-rem-uniform-icon-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('generate-rem-custom-properties mixin') {
+    @include test.it('should set rem custom properties on a selector per breakpoint') {
+        @include test.assert() {
+            @include test.output() {
+                @include dictionaries.generate-rem-custom-properties(
+                    $selector: 'TestEmit__control',
+                    $custom-property-base-name: 'test-generate',
+                    $properties: (
+                        size: 18px,
+                        margin: 3px,
+                    ),
+                    $breakpoints: (
+                        'mobile': 0,
+                        'tablet': 768px,
+                        'desktop': 1280px,
+                    ),
+                    $font-bases-by-breakpoint: (
+                        mobile: 20px,
+                        tablet: 16px,
+                        desktop: 18px,
+                    )
+                );
+            }
+
+            @include test.expect() {
+                .TestEmit__control {
+                    --spirit-test-generate-size: 0.9rem;
+                    --spirit-test-generate-margin: 0.15rem;
+                }
+
+                @media (width >= 768px) {
+                    .TestEmit__control {
+                        --spirit-test-generate-size: 1.125rem;
+                        --spirit-test-generate-margin: 0.1875rem;
+                    }
+                }
+
+                @media (width >= 1280px) {
+                    .TestEmit__control {
+                        --spirit-test-generate-size: 1rem;
+                        --spirit-test-generate-margin: 0.1667rem;
+                    }
+                }
+            }
+        }
+    }
+
+    @include test.it('should generate a single selector rule when font bases are uniform') {
+        @include test.assert() {
+            @include test.output() {
+                @include dictionaries.generate-rem-custom-properties(
+                    $selector: 'TestEmitUniform__control',
+                    $custom-property-base-name: 'test-generate-uniform',
+                    $properties: (
+                        size: 16px,
+                    ),
+                    $breakpoints: (
+                        'mobile': 0,
+                        'tablet': 768px,
+                        'desktop': 1280px,
+                    ),
+                    $font-bases-by-breakpoint: (
+                        mobile: 16px,
+                        tablet: 16px,
+                        desktop: 16px,
+                    )
+                );
+            }
+
+            @include test.expect() {
+                .TestEmitUniform__control {
+                    --spirit-test-generate-uniform-size: 1rem;
                 }
             }
         }

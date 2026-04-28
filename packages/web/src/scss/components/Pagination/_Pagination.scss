@@ -1,5 +1,7 @@
 @use 'theme';
+@use '@tokens' as tokens;
 @use '../../settings/cursors';
+@use '../../tools/dictionaries';
 @use '../../tools/reset';
 
 .Pagination {
@@ -18,7 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: theme.$item-min-width;
+    min-width: var(--#{tokens.$css-variable-prefix}pagination-link-min-width);
     height: theme.$item-height;
     padding-inline: theme.$item-padding-inline;
     font-weight: theme.$item-emphasis-font-weight;
@@ -44,6 +46,15 @@
         background-color: theme.$item-active-background-color;
     }
 }
+
+@include dictionaries.generate-rem-custom-properties(
+    $selector: 'Pagination__link',
+    $custom-property-base-name: 'pagination-link',
+    $properties: (
+        min-width: theme.$item-min-width,
+    ),
+    $breakpoints: tokens.$breakpoints
+);
 
 .Pagination__link--current,
 .Pagination__link--current:hover,

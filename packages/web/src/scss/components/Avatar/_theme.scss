@@ -11,35 +11,39 @@ $background-color: tokens.$background-primary;
 $breakpoints: tokens.$breakpoints;
 
 $size-dictionary: dictionaries.$size-extended;
+
+$icon-size-config: (
+    xsmall: 16px,
+    small: 20px,
+    medium: 24px,
+    large: 28px,
+    xlarge: 32px,
+);
+
 $size-config: (
     xsmall: (
         width: tokens.$space-900,
         height: tokens.$space-900,
-        icon-size: 16px,
         typography: tokens.$body-xsmall-bold,
     ),
     small: (
         width: tokens.$space-1000,
         height: tokens.$space-1000,
-        icon-size: 20px,
         typography: tokens.$body-small-bold,
     ),
     medium: (
         width: tokens.$space-1100,
         height: tokens.$space-1100,
-        icon-size: 24px,
         typography: tokens.$body-medium-bold,
     ),
     large: (
         width: tokens.$space-1200,
         height: tokens.$space-1200,
-        icon-size: 28px,
         typography: tokens.$body-large-bold,
     ),
     xlarge: (
         width: tokens.$space-1400,
         height: tokens.$space-1400,
-        icon-size: 32px,
         typography: tokens.$body-xlarge-bold,
     ),
 );

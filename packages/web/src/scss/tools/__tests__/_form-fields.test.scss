@@ -1,4 +1,6 @@
 @use 'true' as test;
+@use 'sass:map';
+@use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../form-fields';
@@ -58,6 +60,9 @@
     }
 
     @include test.it('should generate input-position classes with correct flex-direction') {
+        $tablet-breakpoint: map.get(tokens.$breakpoints, tablet);
+        $desktop-breakpoint: map.get(tokens.$breakpoints, desktop);
+
         @include test.assert() {
             @include test.output() {
                 @include form-fields.input-position(
@@ -80,7 +85,7 @@
                     flex-direction: row-reverse;
                 }
 
-                @media (width >= 768px) {
+                @media (width >= #{$tablet-breakpoint}) {
                     .TestComponent--tablet--inputPositionStart,
                     .TestComponent:not([class*='--inputPosition']) {
                         flex-direction: row;
@@ -91,7 +96,7 @@
                     }
                 }
 
-                @media (width >= 1280px) {
+                @media (width >= #{$desktop-breakpoint}) {
                     .TestComponent--desktop--inputPositionStart,
                     .TestComponent:not([class*='--inputPosition']) {
                         flex-direction: row;
