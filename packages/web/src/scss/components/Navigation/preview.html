@@ -1,0 +1,615 @@
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Horizontal Navigation</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div>
+        <nav class="Navigation Navigation--horizontal" aria-label="Main Navigation">
+          <ul>
+            <li class="NavigationItem NavigationItem--alignmentYCenter">
+              Item
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Vertical Navigation</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div>
+        <nav class="Navigation Navigation--vertical" aria-label="Vertical Navigation">
+          <ul>
+            <li class="NavigationItem NavigationItem--alignmentYCenter">
+              Item
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Horizontal Navigation with Box NavigationAction</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--horizontal" aria-label="Horizontal Navigation with NavigationAction">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAction NavigationAction--box">Link</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a
+              href="#"
+              class="NavigationAction NavigationAction--box NavigationAction--selected"
+              aria-current="page"
+            >Selected</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <span class="NavigationAction NavigationAction--box NavigationAction--disabled">Disabled</span>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Vertical Navigation with Box NavigationAction</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--vertical" aria-label="Vertical Navigation with NavigationAction">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAction NavigationAction--box">Link</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a
+              href="#"
+              class="NavigationAction NavigationAction--box NavigationAction--selected"
+              aria-current="page"
+            >Selected</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <span class="NavigationAction NavigationAction--box NavigationAction--disabled">Disabled</span>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Horizontal Navigation with Buttons</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--horizontal" aria-label="Horizontal Navigation with Buttons">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="Button Button--medium Button--primary">
+              Button
+            </a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="Button Button--medium Button--secondary">
+              Button
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Vertical Navigation with Buttons</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--vertical" aria-label="Vertical Navigation with Buttons">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="Button Button--medium Button--primary">
+              Button
+            </a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="Button Button--medium Button--secondary">
+              Button
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Nested Horizontal Box Navigation with Dropdown</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--horizontal" aria-label="Nested Horizontal Navigation">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAction NavigationAction--box">Link</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <div class="Dropdown Dropdown--alignmentXStretch Dropdown--alignmentYStretch">
+              <button
+                type="button"
+                class="NavigationAction NavigationAction--box"
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#dropdown-navigation"
+                aria-expanded="false"
+                aria-controls="dropdown-navigation"
+                data-spirit-autoclose="true"
+              >
+                Dropdown
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="accessibility-open"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#chevron-up" />
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="accessibility-closed"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+              <div
+                class="DropdownPopover"
+                data-spirit-placement="bottom-end"
+                id="dropdown-navigation"
+              >
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="https://www.example.com" class="Item">
+                      <span class="Item__label">My Account</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.example.com" class="Item">
+                      <span class="Item__label">Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.example.com" class="Item">
+                      <span class="Item__label">Log Out</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Nested Vertical Box Navigation with Collapse</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--vertical" aria-label="Nested Vertical Navigation">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAction NavigationAction--box">Link</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <button
+              type="button"
+              aria-expanded="true"
+              data-spirit-toggle="collapse"
+              data-spirit-target="collapse-navigation"
+              class="NavigationAction NavigationAction--box"
+            >
+              Menu
+              <svg
+                width="20"
+                height="20"
+                aria-hidden="true"
+                class="accessibility-open"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-up" />
+              </svg>
+              <svg
+                width="20"
+                height="20"
+                aria-hidden="true"
+                class="accessibility-closed"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+            <div id="collapse-navigation" class="Collapse is-open">
+              <div class="Collapse__content">
+                <ul>
+                  <li class="NavigationItem NavigationItem--alignmentYCenter">
+                    <a href="#" class="NavigationAction NavigationAction--box">Nested Link</a>
+                  </li>
+                  <li class="NavigationItem NavigationItem--alignmentYCenter">
+                    <a
+                      href="#"
+                      class="NavigationAction NavigationAction--box NavigationAction--selected"
+                      aria-current="page"
+                    >
+                      Nested Selected
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Horizontal Navigation with Pill NavigationAction</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--horizontal" aria-label="Horizontal Navigation with Pill NavigationAction">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAction NavigationAction--pill">Link</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a
+              href="#"
+              class="NavigationAction NavigationAction--pill NavigationAction--selected"
+              aria-current="page"
+            >Selected</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <span class="NavigationAction NavigationAction--pill NavigationAction--disabled">Disabled</span>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Vertical Navigation with Pill NavigationAction</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--vertical" aria-label="Vertical Navigation with Pill NavigationAction">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAction NavigationAction--pill">Link</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a
+              href="#"
+              class="NavigationAction NavigationAction--pill NavigationAction--selected"
+              aria-current="page"
+            >Selected</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <span class="NavigationAction NavigationAction--pill NavigationAction--disabled">Disabled</span>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">NavigationAvatar</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--horizontal" aria-label="NavigationAvatar">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <div class="NavigationAvatar">
+              <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                </svg>
+              </span>
+              <span class="typography-body-small-semibold">My Account</span>
+            </div>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <div class="NavigationAvatar NavigationAvatar--square">
+              <span class="Avatar Avatar--square Avatar--small" aria-label="Profile of Jiří Bárta">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                </svg>
+              </span>
+              <span class="typography-body-small-semibold">My Account</span>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">NavigationAvatar with Link</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--horizontal" aria-label="NavigationAvatar">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAvatar">
+              <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                </svg>
+              </span>
+              <span class="typography-body-small-semibold">My Account</span>
+            </a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAvatar NavigationAvatar--square">
+              <span class="Avatar Avatar--square Avatar--small" aria-label="Profile of Jiří Bárta">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                </svg>
+              </span>
+              <span class="typography-body-small-semibold">My Account</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">NavigationAvatar with Dropdown</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--horizontal" aria-label="NavigationAvatar">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYStretch">
+            <div class="Dropdown Dropdown--alignmentXStretch Dropdown--alignmentYStretch">
+              <button
+                type="button"
+                class="NavigationAvatar"
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#navigation-avatar"
+                aria-expanded="false"
+                aria-controls="navigation-avatar"
+                data-spirit-autoclose="true"
+              >
+                <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+                  <svg
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                  </svg>
+                </span>
+                <span class="typography-body-small-semibold">My Account</span>
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="accessibility-open"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#chevron-up" />
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="accessibility-closed"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+              <div
+                class="DropdownPopover"
+                data-spirit-placement="bottom-end"
+                id="navigation-avatar"
+              >
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="https://www.example.com" class="Item">
+                      <span class="Item__label">My Account</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.example.com" class="Item">
+                      <span class="Item__label">Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.example.com" class="Item">
+                      <span class="Item__label">Log Out</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYStretch">
+            <div class="Dropdown Dropdown--alignmentXStretch Dropdown--alignmentYStretch">
+              <button
+                type="button"
+                class="NavigationAvatar NavigationAvatar--square"
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#navigation-avatar-square"
+                aria-expanded="false"
+                aria-controls="navigation-avatar-square"
+                data-spirit-autoclose="true"
+              >
+                <span class="Avatar Avatar--square Avatar--small" aria-label="Profile of Jiří Bárta">
+                  <svg
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                  </svg>
+                </span>
+                <span class="typography-body-small-semibold">My Account</span>
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="accessibility-open"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#chevron-up" />
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="accessibility-closed"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+              <div
+                class="DropdownPopover"
+                data-spirit-placement="bottom-end"
+                id="navigation-avatar-square"
+              >
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="https://www.example.com" class="Item">
+                      <span class="Item__label">My Account</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.example.com" class="Item">
+                      <span class="Item__label">Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.example.com" class="Item">
+                      <span class="Item__label">Log Out</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>

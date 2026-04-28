@@ -1,0 +1,116 @@
+{{setVar "sizes" "xsmall" "small" "medium" "large" "xlarge" }}
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Default</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+    <section class="{{@root.padding}}">
+      <div class="Container">
+        <h2 class="typography-heading-xsmall-bold">Section</h2>
+      </div>
+    </section>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Predefined Sizes</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+    {{#each @root.sizes as |size|}}
+    {{#if (eq size "xsmall")}}
+    {{setVar "padding" "py-900 py-tablet-1000"}}
+    {{/if}}
+    {{#if (eq size "small")}}
+    {{setVar "padding" "py-1000 py-tablet-1100"}}
+    {{/if}}
+    {{#if (eq size "medium")}}
+    {{setVar "padding" "py-1100 py-tablet-1300"}}
+    {{/if}}
+    {{#if (eq size "large")}}
+    {{setVar "padding" "py-1200 py-tablet-1400"}}
+    {{/if}}
+    {{#if (eq size "xlarge")}}
+    {{setVar "padding" "py-1400 py-tablet-1600"}}
+    {{/if}}
+    <section class="{{@root.padding}} bg-secondary">
+      <div class="Container">
+        <h2 class="typography-heading-xsmall-bold">Section of {{size}} size</h2>
+      </div>
+    </section>
+    {{/each}}
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Custom Padding</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+    <section class="py-500 pt-desktop-1000 pb-desktop-1400 bg-secondary">
+      <div class="Container">
+        <h2 class="typography-heading-xsmall-bold">Custom Padding</h2>
+      </div>
+    </section>
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Background</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+    <section class="py-900 py-tablet-1000 bg-primary">
+      <div class="Container">
+        <h2 class="typography-heading-xsmall-bold">Primary</h2>
+      </div>
+    </section>
+    <section class="py-900 py-tablet-1000 bg-secondary">
+      <div class="Container">
+        <h2 class="typography-heading-xsmall-bold">Secondary</h2>
+      </div>
+    </section>
+    <section class="py-900 py-tablet-1000 bg-tertiary">
+      <div class="Container">
+        <h2 class="typography-heading-xsmall-bold">Tertiary</h2>
+      </div>
+    </section>
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Text Alignment</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+    <section>
+      <div class="Container">
+        <h2 class="typography-heading-xsmall-bold">Section</h2>
+      </div>
+    </section>
+    <section class="text-center">
+      <div class="Container">
+        <h2 class="typography-heading-xsmall-bold">Section</h2>
+      </div>
+    </section>
+    <section class="text-right">
+      <div class="Container">
+        <h2 class="typography-heading-xsmall-bold">Section</h2>
+      </div>
+    </section>
+  </div>
+</section>

@@ -1,16 +1,7 @@
-import icons from '@alma-oss/spirit-icons/icons';
-import React, { StrictMode } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import DocsSection from '../../../../docs/DocsSection';
-import { IconsProvider } from '../../../context';
-import DrawerDefault from './DrawerDefault';
+import Preview from '../preview';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <IconsProvider value={icons}>
-      <DocsSection title="Drawer">
-        <DrawerDefault />
-      </DocsSection>
-    </IconsProvider>
-  </StrictMode>,
+  <Preview />,
 );

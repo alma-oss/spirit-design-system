@@ -1,24 +1,7 @@
-import icons from '@alma-oss/spirit-icons/icons';
-import React, { StrictMode } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import DocsSection from '../../../../docs/DocsSection';
-import { IconsProvider } from '../../../context';
-import BreadcrumbsCurrentWithoutLink from './BreadcrumbsCurrentWithoutLink';
-import BreadcrumbsCustom from './BreadcrumbsCustom';
-import BreadcrumbsDefault from './BreadcrumbsDefault';
+import Preview from '../preview';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <IconsProvider value={icons}>
-      <DocsSection title="Default">
-        <BreadcrumbsDefault />
-      </DocsSection>
-      <DocsSection title="Custom">
-        <BreadcrumbsCustom />
-      </DocsSection>
-      <DocsSection title="Current page is not a link">
-        <BreadcrumbsCurrentWithoutLink />
-      </DocsSection>
-    </IconsProvider>
-  </StrictMode>,
+  <Preview />,
 );

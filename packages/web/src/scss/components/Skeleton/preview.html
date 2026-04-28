@@ -1,0 +1,169 @@
+{{setVar "sizes" "xsmall" "small" "medium" "large" "xlarge" }}
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">SkeletonText</h2>
+    <div class="docs-Stack docs-Stack--stretch">
+      <div class="Grid Grid--cols-1 Grid--tablet--cols-2 Grid--desktop--cols-3" style="--grid-spacing-y: var(--spirit-space-1100);">
+
+        {{#each @root.sizes as |size|}}
+        <section>
+          <h2 class="docs-Heading">Size {{size}}</h2>
+          <div class="docs-Stack docs-Stack--stretch">
+            <div class="Skeleton Skeleton--text Skeleton--{{size}}">
+              <div class="Skeleton__item" aria-hidden="true"></div>
+              <div class="Skeleton__item" aria-hidden="true"></div>
+              <div class="Skeleton__item" aria-hidden="true"></div>
+            </div>
+            <div class="Skeleton Skeleton--text Skeleton--{{size}}">
+              <div class="Skeleton__item" aria-hidden="true"></div>
+              <div class="Skeleton__item" aria-hidden="true"></div>
+            </div>
+          </div>
+        </section>
+        {{/each}}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">SkeletonHeading</h2>
+    <div class="docs-Stack docs-Stack--stretch">
+      <div class="Grid Grid--cols-1 Grid--tablet--cols-2 Grid--desktop--cols-3" style="--grid-spacing-y: var(--spirit-space-1100);">
+
+        {{#each @root.sizes as |size|}}
+        <section>
+          <h2 class="docs-Heading">Size {{size}}</h2>
+          <div class="docs-Stack docs-Stack--start">
+            <div class="Skeleton Skeleton--heading Skeleton--{{size}}">
+              <div class="Skeleton__item" aria-hidden="true"></div>
+              <div class="Skeleton__item" aria-hidden="true"></div>
+              <div class="Skeleton__item" aria-hidden="true"></div>
+            </div>
+          </div>
+        </section>
+        {{/each}}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">SkeletonShape</h2>
+    <div class="docs-Stack docs-Stack--stretch">
+      <div class="Grid Grid--cols-1 Grid--tablet--cols-2 Grid--desktop--cols-3" style="--grid-spacing-y: var(--spirit-space-1100);">
+
+        <section>
+          <h2 class="docs-Heading">Shape Square</h2>
+          <div class="docs-Stack docs-Stack--stretch">
+            <div
+              class="Skeleton Skeleton--shape"
+              style="
+              --spirit-skeleton-shape-width: 100px;
+              --spirit-skeleton-shape-height: 100px
+              "
+            >
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="docs-Heading">Shape Circle</h2>
+          <div class="docs-Stack docs-Stack--stretch">
+            <div
+              class="Skeleton Skeleton--shape"
+              style="
+              --spirit-skeleton-shape-width: 100px;
+              --spirit-skeleton-shape-height: 100px;
+              --spirit-skeleton-shape-radius: var(--spirit-radius-full)
+              "
+            >
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="docs-Heading">Shape Rectangular</h2>
+          <div class="docs-Stack docs-Stack--stretch">
+            <div
+              class="Skeleton Skeleton--shape"
+              style="
+              --spirit-skeleton-shape-width: 300px;
+              --spirit-skeleton-shape-height: 100px;
+              --spirit-skeleton-shape-radius: var(--spirit-radius-400)
+              "
+            >
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="docs-Heading">Shape Rectangular responsive radius</h2>
+          <div class="docs-Stack docs-Stack--stretch">
+            <div
+              class="Skeleton Skeleton--shape" style="
+              --spirit-skeleton-shape-width: 300px;
+              --spirit-skeleton-shape-height: 100px;
+              --spirit-skeleton-shape-radius: var(--spirit-radius-200);
+              --spirit-skeleton-shape-radius-tablet: var(--spirit-radius-400);
+              --spirit-skeleton-shape-radius-desktop: var(--spirit-radius-500);
+              "
+            >
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Combined Skeletons</h2>
+    <div class="docs-Stack docs-Stack--stretch">
+      <div
+        class="Grid Grid--cols-1 Grid--tablet--cols-2 Grid--desktop--cols-2"
+        aria-busy="true"
+        aria-live="polite"
+        style="--grid-spacing-y: var(--spirit-space-1100);"
+      >
+        <div class="GridItem">
+          <div class="Grid">
+            <div class="GridItem">
+              <div
+                class="Skeleton Skeleton--shape"
+                style="
+                --spirit-skeleton-shape-width: 100px;
+                --spirit-skeleton-shape-height: 100px;
+                --spirit-skeleton-shape-radius: var(--spirit-radius-full)
+                "
+              >
+              </div>
+            </div>
+            <div
+              class="GridItem"
+              style="
+              --grid-item-column-start: 2;
+              --grid-item-column-end: span 10;
+              "
+            >
+              <div class="Skeleton Skeleton--heading Skeleton--small mb-900">
+                <div class="Skeleton__item" aria-hidden="true"></div>
+              </div>
+              <div class="Skeleton Skeleton--text Skeleton--small">
+                <div class="Skeleton__item" aria-hidden="true"></div>
+                <div class="Skeleton__item" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

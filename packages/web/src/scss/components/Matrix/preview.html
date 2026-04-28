@@ -1,0 +1,180 @@
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Default</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div class="Matrix">
+        <div class="docs-Box">Item 1</div>
+        <div class="docs-Box">Item 2</div>
+        <div class="docs-Box">Item 3</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Stacks with Scroll View</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div
+        class="ScrollView ScrollView--horizontal"
+        data-spirit-toggle="scrollView"
+        data-spirit-direction="horizontal"
+      >
+        <div
+          class="ScrollView__viewport"
+          data-spirit-element="viewport"
+          tabindex="0"
+        >
+          <div class="ScrollView__content" data-spirit-element="content">
+
+            <div class="Matrix">
+
+              <div class="Stack Stack--hasSpacing">
+                <div class="docs-Box docs-Box--multiline">Stack 1</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum</div>
+              </div>
+
+              <div class="Stack Stack--hasSpacing">
+                <div class="docs-Box docs-Box--multiline">Stack 2</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
+              </div>
+
+              <div class="Stack Stack--hasSpacing">
+                <div class="docs-Box docs-Box--multiline">Stack 3</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="ScrollView__overflowDecorators ScrollView__overflowDecorators--shadows" aria-hidden="true"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Custom Columns and Column Gap with Scroll View</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div
+        class="ScrollView ScrollView--horizontal"
+        data-spirit-toggle="scrollView"
+        data-spirit-direction="horizontal"
+      >
+        <div
+          class="ScrollView__viewport"
+          data-spirit-element="viewport"
+          tabindex="0"
+        >
+          <div class="ScrollView__content" data-spirit-element="content">
+
+            <div
+              class="Matrix"
+              style="
+                --spirit-matrix-columns: 4;
+                --spirit-matrix-spacing-x: var(--spirit-space-1200);
+              "
+            >
+
+              <div class="Stack Stack--hasSpacing">
+                <div class="docs-Box docs-Box--multiline">Stack 1</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum</div>
+              </div>
+
+              <div class="Stack Stack--hasSpacing">
+                <div class="docs-Box docs-Box--multiline">Stack 2</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
+              </div>
+
+              <div class="Stack Stack--hasSpacing">
+                <div class="docs-Box docs-Box--multiline">Stack 3</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum</div>
+              </div>
+
+              <div class="Stack Stack--hasSpacing">
+                <div class="docs-Box docs-Box--multiline">Stack 4</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="ScrollView__overflowDecorators ScrollView__overflowDecorators--shadows" aria-hidden="true"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Responsive Custom Columns, Column Gap, and Row Gap</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div
+        class="Matrix"
+        style="
+          --my-items-count: 4;
+
+          --spirit-matrix-item-rows: 3;
+          --spirit-matrix-columns: 1;
+          --spirit-matrix-columns-tablet: 2;
+          --spirit-matrix-rows: calc(var(--spirit-matrix-item-rows) * var(--my-items-count) / var(--spirit-matrix-columns));
+          --spirit-matrix-rows-tablet: calc(var(--spirit-matrix-item-rows) * var(--my-items-count) / var(--spirit-matrix-columns-tablet));
+          --spirit-matrix-spacing-x-tablet: var(--spirit-space-1200);
+          --spirit-matrix-spacing-y: var(--spirit-space-1200);
+        "
+      >
+
+        <div class="Stack Stack--hasSpacing">
+          <div class="docs-Box docs-Box--multiline">Stack 1</div>
+          <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
+          <div class="docs-Box docs-Box--multiline">Lorem ipsum</div>
+        </div>
+
+        <div class="Stack Stack--hasSpacing">
+          <div class="docs-Box docs-Box--multiline">Stack 2</div>
+          <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+          <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
+        </div>
+
+        <div class="Stack Stack--hasSpacing">
+          <div class="docs-Box docs-Box--multiline">Stack 3</div>
+          <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
+          <div class="docs-Box docs-Box--multiline">Lorem ipsum</div>
+        </div>
+
+        <div class="Stack Stack--hasSpacing">
+          <div class="docs-Box docs-Box--multiline">Stack 4</div>
+          <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+          <div class="docs-Box docs-Box--multiline">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>

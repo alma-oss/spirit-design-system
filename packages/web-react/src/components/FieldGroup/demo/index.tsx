@@ -1,52 +1,7 @@
-import icons from '@alma-oss/spirit-icons/icons';
-import React, { StrictMode } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import DocsSection from '../../../../docs/DocsSection';
-import { IconsProvider } from '../../../context';
-import FieldGroupDefault from './FieldGroupDefault';
-import FieldGroupDisabled from './FieldGroupDisabled';
-import FieldGroupFluid from './FieldGroupFluid';
-import FieldGroupGroupedCheckboxes from './FieldGroupGroupedCheckboxes';
-import FieldGroupGroupedRadios from './FieldGroupGroupedRadios';
-import FieldGroupHelperText from './FieldGroupHelperText';
-import FieldGroupHiddenLabel from './FieldGroupHiddenLabel';
-import FieldGroupRequired from './FieldGroupRequired';
-import FieldGroupValidationState from './FieldGroupValidationState';
-import FieldGroupValidationWithIcon from './FieldGroupValidationWithIcon';
+import Preview from '../preview';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <IconsProvider value={icons}>
-      <DocsSection title="Default">
-        <FieldGroupDefault />
-      </DocsSection>
-      <DocsSection title="Required">
-        <FieldGroupRequired />
-      </DocsSection>
-      <DocsSection title="Hidden Label">
-        <FieldGroupHiddenLabel />
-      </DocsSection>
-      <DocsSection title="Helper Text">
-        <FieldGroupHelperText />
-      </DocsSection>
-      <DocsSection title="Disabled">
-        <FieldGroupDisabled />
-      </DocsSection>
-      <DocsSection title="Validation State with Validation Text">
-        <FieldGroupValidationState />
-      </DocsSection>
-      <DocsSection title="Validation Text with Icon">
-        <FieldGroupValidationWithIcon />
-      </DocsSection>
-      <DocsSection title="Fluid">
-        <FieldGroupFluid />
-      </DocsSection>
-      <DocsSection title="Grouped Checkboxes">
-        <FieldGroupGroupedCheckboxes />
-      </DocsSection>
-      <DocsSection title="Grouped Radios">
-        <FieldGroupGroupedRadios />
-      </DocsSection>
-    </IconsProvider>
-  </StrictMode>,
+  <Preview />,
 );
