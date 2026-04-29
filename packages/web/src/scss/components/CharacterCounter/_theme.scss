@@ -1,0 +1,9 @@
+@use '@tokens' as tokens;
+
+$typography: tokens.$body-small-regular;
+$typography-state-validation: tokens.$body-small-semibold;
+$color-state-success: tokens.$form-field-success;
+$color-state-warning: tokens.$form-field-warning;
+$color-state-danger: tokens.$form-field-danger;
+$color-state-disabled: tokens.$disabled-content;
+$margin-top: tokens.$space-400;
