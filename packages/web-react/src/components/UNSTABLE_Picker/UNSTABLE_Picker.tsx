@@ -19,7 +19,6 @@ import { PickerPopoverContextProvider } from './PickerPopoverContext';
 import type { SpiritUnstablePickerProps, SpiritUnstablePickerRef } from './types';
 import UNSTABLE_PickerTag from './UNSTABLE_PickerTag';
 import { usePickerId } from './usePickerId';
-import { usePickerPopoverTabOutToTrigger } from './usePickerPopoverTabOutToTrigger';
 import { usePickerSelectionGridKeyboard } from './usePickerSelectionGridKeyboard';
 import { usePickerStyleProps } from './usePickerStyleProps';
 import {
@@ -110,11 +109,6 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
       triggerRef.current?.focus();
     });
   }, [isOpen, onToggle]);
-
-  const { onPopoverKeyDownCapture } = usePickerPopoverTabOutToTrigger({
-    isOpen,
-    onClose: close,
-  });
 
   const selectionGridKeyboardRowCount = getPickerSelectionGridKeyboardRowCount(selectedPickerItems.length, {
     isAggregated,
@@ -211,7 +205,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
           <Label id={labelId} elementType="span">
             {label}
           </Label>
-          <Dropdown id={popoverId} isOpen={isOpen} onToggle={onToggle}>
+          <Dropdown id={popoverId} isOpen={isOpen} onToggle={onToggle} triggerRef={triggerRef}>
             <div role="group" aria-label={label} className={classProps.inputContainer}>
               <div
                 ref={selectionGridRef}
@@ -240,12 +234,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
                 <Icon name={`chevron-${isOpen ? 'up' : 'down'}`} boxSize={20} />
               </button>
             </div>
-            <DropdownPopover
-              aria-labelledby={labelId}
-              role="dialog"
-              aria-modal="true"
-              onKeyDownCapture={onPopoverKeyDownCapture}
-            >
+            <DropdownPopover aria-labelledby={labelId}>
               <PickerPopoverContextProvider value={popoverContextValue}>{children}</PickerPopoverContextProvider>
             </DropdownPopover>
           </Dropdown>

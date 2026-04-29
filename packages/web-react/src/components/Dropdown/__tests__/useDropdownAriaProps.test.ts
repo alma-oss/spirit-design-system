@@ -11,11 +11,13 @@ const defaultProps = {
 const defaultTriggerPropsResult = {
   'aria-expanded': true,
   'aria-controls': 'test-dropdown-id',
+  'aria-haspopup': 'dialog',
   onClick: expect.any(Function),
 };
 
 const defaultContentPropsResult = {
   id: 'test-dropdown-id',
+  role: 'dialog',
 };
 
 describe('useDropdownAriaProps', () => {
@@ -34,7 +36,10 @@ describe('useDropdownAriaProps', () => {
     const { result } = renderHook(() => useDropdownAriaProps(props));
 
     expect(result.current.triggerProps).toEqual(defaultTriggerPropsResult);
-    expect(result.current.contentProps).toEqual({ ...defaultContentPropsResult, 'data-spirit-fullwidthmode': 'all' });
+    expect(result.current.contentProps).toEqual({
+      ...defaultContentPropsResult,
+      'data-spirit-fullwidthmode': 'all',
+    });
   });
 
   it('should return correct props when isOpen is false', () => {
@@ -45,6 +50,17 @@ describe('useDropdownAriaProps', () => {
     const { result } = renderHook(() => useDropdownAriaProps(props));
 
     expect(result.current.triggerProps).toEqual({ ...defaultTriggerPropsResult, 'aria-expanded': false });
+    expect(result.current.contentProps).toEqual(defaultContentPropsResult);
+  });
+
+  it('should allow overriding aria-haspopup', () => {
+    const props = {
+      ...defaultProps,
+      hasPopup: 'menu',
+    };
+    const { result } = renderHook(() => useDropdownAriaProps(props));
+
+    expect(result.current.triggerProps).toEqual({ ...defaultTriggerPropsResult, 'aria-haspopup': 'menu' });
     expect(result.current.contentProps).toEqual(defaultContentPropsResult);
   });
 });

@@ -16,6 +16,7 @@
 .Item {
     @include form-fields.item();
 
+    position: relative;
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;

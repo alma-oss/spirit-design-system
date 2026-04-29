@@ -10,6 +10,7 @@ Introducing version 5 of the _spirit-web-react_ package.
 ## Overview
 
 - [Component Changes](#component-changes)
+  - [Dropdown: `DropdownPopover` Now Has `role="dialog"` by Default](#dropdown-dropdownpopover-now-has-roledialog-by-default)
   - [Collapse: `hideOnCollapse` Prop Renamed to `isDisposable`](#collapse-hideoncollapse-prop-renamed-to-isdisposable)
   - [Flex: Direction Prop Values Changed](#flex-direction-prop-values-changed)
   - [Form Components: `isFluid` Prop Removed](#form-components-isfluid-prop-removed)
@@ -20,6 +21,42 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [Truncate: Component Name Stabilized and `lines` Prop Changed](#truncate-component-name-stabilized-and-lines-prop-changed)
 
 ## Component Changes
+
+### Dropdown: `DropdownPopover` Now Has `role="dialog"` by Default
+
+`DropdownPopover` now renders as a non-modal anchored dialog (`role="dialog"`) by default, and
+`DropdownTrigger` now has `aria-haspopup="dialog"` by default. Keyboard behavior is applied
+automatically:
+
+- **Escape** closes the popover and returns focus to the trigger (from anywhere inside, including the trigger itself)
+- **Tab** past the last focusable element closes the popover and returns focus to the trigger
+- **Shift+Tab** before the first focusable element closes the popover and returns focus to the trigger
+- When the popover opens, focus moves automatically to the first interactive element inside it
+
+#### What you need to do
+
+1. **Add an accessible name** to every `DropdownPopover` via `aria-label` or `aria-labelledby`.
+   ARIA dialogs are required to have an accessible name:
+
+   ```tsx
+   <DropdownPopover aria-label="Options">…</DropdownPopover>
+   ```
+
+2. **Update snapshot tests** — the rendered HTML now includes `role="dialog"` on the popover and
+   `aria-haspopup="dialog"` on the trigger.
+
+3. If you were manually setting `role="dialog"` on `DropdownPopover` (e.g. as a feature-flag workaround),
+   you can now remove that explicit prop.
+
+4. If you need to **opt out** of the dialog role for a specific popover (e.g. a navigation menu), override
+   both the popover role and the trigger's `aria-haspopup` to keep them consistent:
+
+   ```tsx
+   <Dropdown …>
+     <DropdownTrigger aria-haspopup="menu" elementType="button">Trigger</DropdownTrigger>
+     <DropdownPopover role="menu">…</DropdownPopover>
+   </Dropdown>
+   ```
 
 ### Collapse: `hideOnCollapse` Prop Renamed to `isDisposable`
 
