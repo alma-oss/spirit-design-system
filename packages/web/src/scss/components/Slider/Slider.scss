@@ -20,9 +20,7 @@
 @use 'theme';
 @use 'tools';
 
-$_field-name: 'Slider';
-
-.Slider__input {
+.Slider {
     appearance: none;
     width: 100%;
     height: theme.$thumb-height;
@@ -110,10 +108,9 @@ $_field-name: 'Slider';
     }
 }
 
-@include form-fields-tools.input-field-validation-states($_field-name);
-
-.Slider .Slider__input:disabled,
-:is(.Slider--disabled, .Slider.is-disabled) .Slider__input {
+.Slider:disabled,
+.Slider--disabled,
+.Slider.is-disabled {
     --slider-track-background: #{theme.$track-background-disabled};
     --slider-track-lower-background: #{theme.$track-lower-background-disabled};
     --slider-thumb-border-width: #{theme.$thumb-border-width-state-disabled};
