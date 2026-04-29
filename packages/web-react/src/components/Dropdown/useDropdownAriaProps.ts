@@ -19,6 +19,8 @@ export interface UseDropdownAriaPropsProps {
   fullWidthMode: DropdownFullWidthMode | undefined;
   /** toggle callback */
   toggleHandler: (event?: ClickEvent) => void;
+  /** trigger's aria-haspopup override */
+  hasPopup?: string;
 }
 
 export interface UseDropdownAriaPropsReturn {
@@ -38,12 +40,12 @@ export interface UseDropdownAriaPropsReturn {
 }
 
 export const useDropdownAriaProps = (props: UseDropdownAriaPropsProps): UseDropdownAriaPropsReturn => {
-  const { fullWidthMode, id, isOpen, toggleHandler } = props;
+  const { fullWidthMode, hasPopup = 'dialog', id, isOpen, toggleHandler } = props;
 
   const triggerProps = {
     [NAME_ARIA_EXPANDED]: isOpen,
     [NAME_ARIA_CONTROLS]: String(id),
-    [NAME_ARIA_HASPOPUP]: 'dialog',
+    [NAME_ARIA_HASPOPUP]: hasPopup,
     onClick: toggleHandler,
   };
   const contentProps = {

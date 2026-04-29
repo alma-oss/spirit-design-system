@@ -19,7 +19,14 @@ const DropdownTrigger = <E extends ElementType = 'button'>(props: DropdownTrigge
   const { classProps, props: modifiedProps } = useDropdownStyleProps({ isOpen, ...rest });
   const { styleProps: triggerStyleProps, props: transferProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.trigger, triggerStyleProps });
-  const { triggerProps } = useDropdownAriaProps({ id, isOpen, toggleHandler: onToggle, fullWidthMode });
+  const hasPopup = transferProps['aria-haspopup'];
+  const { triggerProps } = useDropdownAriaProps({
+    id,
+    isOpen,
+    toggleHandler: onToggle,
+    fullWidthMode,
+    hasPopup: typeof hasPopup === 'string' ? hasPopup : undefined,
+  });
 
   return (
     <ElementTag {...transferProps} {...triggerProps} {...mergedStyleProps} ref={triggerRef}>

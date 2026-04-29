@@ -35,4 +35,11 @@ describe('DropdownTrigger', () => {
 
     expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
   });
+
+  it('should allow overriding aria-haspopup', () => {
+    const dom = render(<DropdownTrigger aria-haspopup="menu">Trigger</DropdownTrigger>);
+    const trigger = dom.container.querySelector('button') as HTMLElement;
+
+    expect(trigger).toHaveAttribute('aria-haspopup', 'menu');
+  });
 });

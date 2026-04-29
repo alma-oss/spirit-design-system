@@ -52,4 +52,15 @@ describe('useDropdownAriaProps', () => {
     expect(result.current.triggerProps).toEqual({ ...defaultTriggerPropsResult, 'aria-expanded': false });
     expect(result.current.contentProps).toEqual(defaultContentPropsResult);
   });
+
+  it('should allow overriding aria-haspopup', () => {
+    const props = {
+      ...defaultProps,
+      hasPopup: 'menu',
+    };
+    const { result } = renderHook(() => useDropdownAriaProps(props));
+
+    expect(result.current.triggerProps).toEqual({ ...defaultTriggerPropsResult, 'aria-haspopup': 'menu' });
+    expect(result.current.contentProps).toEqual(defaultContentPropsResult);
+  });
 });
