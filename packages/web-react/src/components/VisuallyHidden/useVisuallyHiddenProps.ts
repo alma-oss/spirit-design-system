@@ -1,17 +1,14 @@
-import { type ElementType } from 'react';
 import { useClassNamePrefix } from '../../hooks';
-import { type SpiritVisuallyHiddenProps, type VisuallyHiddenProps } from '../../types';
+import { type VisuallyHiddenProps } from '../../types';
 
-export interface VisuallyHiddenStyles<E extends ElementType = 'span'> {
+export interface VisuallyHiddenStyles {
   /** className props */
   classProps: string | null;
   /** props to be passed to the element */
-  props: VisuallyHiddenProps<E>;
+  props: VisuallyHiddenProps;
 }
 
-export function useVisuallyHiddenProps<E extends ElementType = 'span'>(
-  props: SpiritVisuallyHiddenProps<E>,
-): VisuallyHiddenStyles<E> {
+export function useVisuallyHiddenProps(props: VisuallyHiddenProps): VisuallyHiddenStyles {
   const { ...restProps } = props;
 
   const visuallyHiddenClass = useClassNamePrefix('accessibility-hidden');

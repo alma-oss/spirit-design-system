@@ -29,7 +29,7 @@ const NavigationAvatarWithDropdown = () => {
           onToggle={toggleDropdown}
         >
           <DropdownTrigger
-            elementType={NavigationAvatarAsDropdownTrigger as unknown as HTMLButtonElement}
+            elementType={NavigationAvatarAsDropdownTrigger}
             avatarContent={AVATAR_CONTENT}
             aria-label={AVATAR_ARIA_LABEL}
           >
@@ -48,7 +48,7 @@ const NavigationAvatarWithDropdown = () => {
           onToggle={toggleSquareDropdown}
         >
           <DropdownTrigger
-            elementType={NavigationAvatarAsDropdownTrigger as unknown as HTMLButtonElement}
+            elementType={NavigationAvatarAsDropdownTrigger}
             avatarContent={AVATAR_CONTENT}
             isSquare
             aria-label={AVATAR_ARIA_LABEL}

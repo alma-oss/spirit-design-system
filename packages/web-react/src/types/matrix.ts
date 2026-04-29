@@ -2,20 +2,11 @@ import { type ElementType } from 'react';
 import {
   type ChildrenProps,
   type GridColumns,
+  type PolymorphicComponentProps,
   type SingleOrResponsive,
   type SpaceToken,
   type StyleProps,
-  type TransferProps,
 } from './shared';
-
-export interface MatrixElementTypeProps<E extends ElementType = 'div'> {
-  /**
-   * The HTML element or React element used to render the Matrix, e.g. 'div'.
-   *
-   * @default 'div'
-   */
-  elementType?: E;
-}
 
 export interface MatrixCustomLayoutProps {
   /** Custom columns in the matrix */
@@ -32,8 +23,8 @@ export interface MatrixCustomLayoutProps {
   spacingY?: SingleOrResponsive<SpaceToken>;
 }
 
-export interface MatrixProps<T extends ElementType = 'div'>
-  extends MatrixElementTypeProps<T>, MatrixCustomLayoutProps {}
+/** ===== INTERNAL API ===== */
+export interface MatrixProps extends MatrixCustomLayoutProps, ChildrenProps, StyleProps {}
 
-export interface SpiritMatrixProps<T extends ElementType = 'div'>
-  extends MatrixProps<T>, ChildrenProps, StyleProps, TransferProps {}
+/** ===== PUBLIC API ===== */
+export type SpiritMatrixProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, MatrixProps>;

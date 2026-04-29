@@ -11,7 +11,7 @@ import {
 import { mergeStyleProps } from '../../utils';
 import { useUnstableHeaderStyleProps } from './useUnstableHeaderStyleProps';
 
-const defaultProps: Partial<HeaderLogoProps> = {
+const defaultProps: Partial<SpiritHeaderLogoProps> = {
   elementType: 'a',
 };
 

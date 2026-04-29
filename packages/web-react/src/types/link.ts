@@ -6,7 +6,6 @@ import type {
   PolymorphicComponentProps,
   RouterLinkProps,
   StyleProps,
-  TransferProps,
 } from './shared';
 
 /** ===== BASE API ===== */
@@ -24,12 +23,14 @@ export type LinkColorsExtendedNamesType = (typeof LinkColorsExtended)[keyof type
 
 export type LinkColor<C> = LinkColorsDictionaryType | LinkColorsExtendedNamesType | C;
 
-export interface LinkBaseProps extends ChildrenProps, StyleProps, TransferProps, RouterLinkProps {}
+export interface LinkBaseProps extends ChildrenProps, StyleProps, RouterLinkProps {}
 
 /** ===== STYLE API ===== */
 export interface LinkStyleProps<C = void> extends LinkBaseProps {
   /** Color of the Link */
   color?: LinkColor<C>;
+  /** Allow link to have visited style */
+  hasVisitedStyleAllowed?: boolean;
   /** When is the Link underlined */
   underlined?: UnderlineOptions;
   /** Whether is the Link disabled */

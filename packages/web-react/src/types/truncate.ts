@@ -1,5 +1,5 @@
 import { type ElementType } from 'react';
-import { type ChildrenProps, type PositiveInteger, type StyleProps } from './shared';
+import { type ChildrenProps, type PolymorphicComponentProps, type PositiveInteger, type StyleProps } from './shared';
 
 /**
  * The modes of truncation.
@@ -16,8 +16,8 @@ export const TruncateModes = {
 
 export type TruncateMode = (typeof TruncateModes)[keyof typeof TruncateModes];
 
-export interface SpiritTruncateProps<E extends ElementType> extends StyleProps, ChildrenProps {
-  elementType?: E;
+/** ===== INTERNAL API ===== */
+export interface TruncateProps extends StyleProps, ChildrenProps {
   /**
    * The limit for the truncation (lines, words, or characters).
    *
@@ -33,3 +33,6 @@ export interface SpiritTruncateProps<E extends ElementType> extends StyleProps, 
    */
   mode?: TruncateMode;
 }
+
+/** ===== PUBLIC API ===== */
+export type SpiritTruncateProps<E extends ElementType = 'span'> = PolymorphicComponentProps<E, TruncateProps>;

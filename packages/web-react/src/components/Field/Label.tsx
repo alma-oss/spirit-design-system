@@ -5,22 +5,25 @@ import { useStyleProps } from '../../hooks';
 import { type SpiritLabelProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 
+const defaultProps: Partial<SpiritLabelProps> = {
+  elementType: 'label',
+};
+
 const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX.Element => {
-  const { elementType: ElementTag = 'label', children, htmlFor, for: labelFor, ...restProps } = props;
+  const propsWithDefaults = { ...defaultProps, ...props };
+  const { elementType, children, htmlFor, for: labelFor, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { styleProps, props: otherProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { styleProps, otherProps });
 
   return (
-    <ElementTag
-      {...otherProps}
-      {...mergedStyleProps}
-      htmlFor={ElementTag === 'label' ? labelFor || htmlFor : undefined}
-    >
+    <Component {...otherProps} {...mergedStyleProps} htmlFor={Component === 'label' ? labelFor || htmlFor : undefined}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
 Label.spiritComponent = 'Label';
+Label.displayName = 'Label';
 
 export default Label;

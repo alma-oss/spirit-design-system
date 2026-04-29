@@ -14,20 +14,22 @@ const defaultProps = {
 
 const DropdownTrigger = <E extends ElementType = 'button'>(props: DropdownTriggerProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag = 'button', children, ...rest } = propsWithDefaults;
+  const { elementType, children, ...rest } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { id, isOpen, onToggle, fullWidthMode, triggerRef } = useDropdownContext();
   const { classProps, props: modifiedProps } = useDropdownStyleProps({ isOpen, ...rest });
   const { styleProps: triggerStyleProps, props: transferProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.trigger, triggerStyleProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.trigger, triggerStyleProps });
   const { triggerProps } = useDropdownAriaProps({ id, isOpen, toggleHandler: onToggle, fullWidthMode });
 
   return (
-    <ElementTag {...transferProps} {...triggerProps} {...mergedStyleProps} ref={triggerRef}>
+    <Component {...transferProps} {...triggerProps} {...mergedStyleProps} ref={triggerRef}>
       {typeof children === 'function' ? children({ isOpen }) : children}
-    </ElementTag>
+    </Component>
   );
 };
 
 DropdownTrigger.spiritComponent = 'DropdownTrigger';
+DropdownTrigger.displayName = 'DropdownTrigger';
 
 export default DropdownTrigger;

@@ -16,18 +16,12 @@ const defaultProps: Partial<ValidationTextProps> = {
 
 const ValidationText = <E extends ElementType = 'div'>(props: ValidationTextProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const {
-    elementType: ElementTag = defaultProps.elementType as ElementType,
-    id,
-    hasValidationStateIcon,
-    registerAria,
-    role,
-    validationText,
-    ...restProps
-  } = propsWithDefaults;
+  const { elementType, hasValidationStateIcon, id, registerAria, role, validationText, ...restProps } =
+    propsWithDefaults;
+  const Component = elementType as ElementType;
   const validationIconName = useValidationIcon({ hasValidationStateIcon });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { styleProps, transferProps });
+  const mergedStyleProps = mergeStyleProps(Component, { styleProps, transferProps });
 
   useEffect(() => {
     validationText && registerAria?.({ add: id });
@@ -44,7 +38,7 @@ const ValidationText = <E extends ElementType = 'div'>(props: ValidationTextProp
   const nonArrayValidationText = hasValidationStateIcon ? <div>{validationText}</div> : validationText;
 
   return (
-    <ElementTag {...transferProps} {...mergedStyleProps} id={id} role={role}>
+    <Component {...transferProps} {...mergedStyleProps} id={id} role={role}>
       {hasValidationStateIcon && <Icon name={validationIconName} boxSize={20} />}
       {Array.isArray(validationText) ? (
         <ul>
@@ -55,10 +49,11 @@ const ValidationText = <E extends ElementType = 'div'>(props: ValidationTextProp
       ) : (
         nonArrayValidationText
       )}
-    </ElementTag>
+    </Component>
   );
 };
 
 ValidationText.spiritComponent = 'ValidationText';
+ValidationText.displayName = 'ValidationText';
 
 export default ValidationText;

@@ -40,7 +40,7 @@ const MainHorizontalNavigationDropdown = () => {
       onToggle={() => setIsNavigationActionDropdownOpen(!isNavigationActionDropdownOpen)}
       placement="bottom-end"
     >
-      <DropdownTrigger elementType={NavigationActionAsDropdownTrigger as unknown as HTMLButtonElement}>
+      <DropdownTrigger elementType={NavigationActionAsDropdownTrigger}>
         Menu
         <Icon name={`chevron-${isNavigationActionDropdownOpen ? 'up' : 'down'}`} boxSize={20} />
       </DropdownTrigger>

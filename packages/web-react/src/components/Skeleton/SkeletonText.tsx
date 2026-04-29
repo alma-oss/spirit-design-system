@@ -16,10 +16,11 @@ const defaultProps: Partial<SpiritSkeletonProps> = {
 };
 const SkeletonText = <E extends ElementType = 'div', C = void>(props: SpiritSkeletonProps<E, C>): ReactElement => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag = 'div', lines, ...restProps } = propsWithDefaults;
+  const { elementType, lines, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { classProps, props: modifiedProps } = useSkeletonStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, {
+  const mergedStyleProps = mergeStyleProps(Component, {
     classProps: classProps.root,
     classPropsText: classProps.text,
     styleProps,
@@ -28,14 +29,15 @@ const SkeletonText = <E extends ElementType = 'div', C = void>(props: SpiritSkel
   const linesToRender = [...Array(lines ?? LINES_COUNT_DEFAULT).keys()];
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       {linesToRender.map((lineNumber) => (
         <SkeletonItem key={`skeleton-item-${lineNumber.toString()}`} />
       ))}
-    </ElementTag>
+    </Component>
   );
 };
 
 SkeletonText.spiritComponent = 'SkeletonText';
+SkeletonText.displayName = 'SkeletonText';
 
 export default SkeletonText;

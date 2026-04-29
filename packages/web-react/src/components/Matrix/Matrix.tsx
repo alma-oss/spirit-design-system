@@ -25,7 +25,8 @@ const defaultProps: Partial<SpiritMatrixProps> = {
 const Matrix = <E extends ElementType = 'div'>(props: SpiritMatrixProps<E>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
 
-  const { elementType: ElementTag = 'div', children, ...restProps } = propsWithDefaults;
+  const { elementType, children, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const itemsCount: number = Children.count(children);
   const {
     classProps,
@@ -36,15 +37,16 @@ const Matrix = <E extends ElementType = 'div'>(props: SpiritMatrixProps<E>) => {
     itemsCount,
   });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps, matrixStyleProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps, matrixStyleProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
 Matrix.spiritComponent = 'Matrix';
+Matrix.displayName = 'Matrix';
 
 export default Matrix;

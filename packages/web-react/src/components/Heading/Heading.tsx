@@ -16,7 +16,8 @@ const Heading = <E extends ElementType = 'h1', S = void, Emph = void>(
   props: SpiritHeadingProps<E, S, Emph>,
 ): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag, children, ...restProps } = propsWithDefaults;
+  const { elementType, children, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { classProps, props: modifiedProps } = useHeadingStyleProps({ ...restProps });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps, {
     isTextBalanced: HeadingStyleProps.isTextBalanced,
@@ -24,16 +25,16 @@ const Heading = <E extends ElementType = 'h1', S = void, Emph = void>(
     textHyphens: TextStyleProps.textHyphens,
     textWordBreak: TextStyleProps.textWordBreak,
   });
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
-    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-    <ElementTag {...(otherProps as any)} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
 Heading.spiritComponent = 'Heading';
+Heading.displayName = 'Heading';
 
 export default Heading;

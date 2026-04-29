@@ -1,17 +1,9 @@
 import { emotionColors } from '@alma-oss/spirit-design-tokens';
 import classNames from 'classnames';
-import { type ElementType } from 'react';
 import { Intensity } from '../../constants';
 import { ColorPrefixes } from '../../constants/colors';
 import { useClassNamePrefix } from '../../hooks';
-import { type SpiritTagProps } from '../../types';
-
-export interface TagStyles {
-  /** className props */
-  classProps: string;
-  /** props to be passed to the element */
-  props: Partial<SpiritTagProps>;
-}
+import { type TagProps } from '../../types';
 
 const getColorClasses = (color: string | undefined, isSubtle: boolean | undefined) => {
   if (!color) {
@@ -31,9 +23,7 @@ const getColorClasses = (color: string | undefined, isSubtle: boolean | undefine
   };
 };
 
-export function useTagStyleProps<E extends ElementType = 'span', C = void, S = void>(
-  props: SpiritTagProps<E, C, S>,
-): TagStyles {
+export function useTagStyleProps<C = void, S = void>(props: TagProps<C, S>) {
   const { color, isDisabled, isSubtle, size, ...modifiedProps } = props;
 
   const tagClass = useClassNamePrefix('Tag');
@@ -51,6 +41,6 @@ export function useTagStyleProps<E extends ElementType = 'span', C = void, S = v
 
   return {
     classProps,
-    props: modifiedProps as Partial<SpiritTagProps>,
+    props: modifiedProps,
   };
 }

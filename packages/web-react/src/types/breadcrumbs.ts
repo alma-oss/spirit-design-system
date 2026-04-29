@@ -1,5 +1,5 @@
 import { type ElementType } from 'react';
-import { type ChildrenProps, type StyleProps, type TransferProps } from './shared';
+import { type ChildrenProps, type PolymorphicComponentProps, type StyleProps } from './shared';
 
 type BreadcrumbsItem = {
   title: string;
@@ -16,21 +16,15 @@ export interface SpiritBreadcrumbsItemProps extends ChildrenProps {
   isGoBackOnly?: boolean;
 }
 
-export interface AriaBreadcrumbsElementTypeProps<E extends ElementType = 'nav'> {
-  /**
-   * The HTML element or React element used to render the breadcrumbs, e.g. 'div', 'span'.
-   *
-   * @default 'nav'
-   */
-  elementType?: E;
-}
-
-export interface BreadcrumbsStyleProps extends StyleProps, TransferProps {
+export interface BreadcrumbsStyleProps extends StyleProps {
   isGoBackOnly?: boolean;
 }
 
-export interface SpiritBreadcrumbsProps<T extends ElementType = 'nav'>
-  extends AriaBreadcrumbsElementTypeProps<T>, StyleProps, ChildrenProps {
+/** ===== INTERNAL API ===== */
+export interface BreadcrumbsProps extends StyleProps, ChildrenProps {
   goBackTitle?: string;
   items?: BreadcrumbsItems;
 }
+
+/** ===== PUBLIC API ===== */
+export type SpiritBreadcrumbsProps<E extends ElementType = 'nav'> = PolymorphicComponentProps<E, BreadcrumbsProps>;

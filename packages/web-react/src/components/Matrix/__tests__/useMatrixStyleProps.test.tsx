@@ -4,7 +4,7 @@ import { useDefaultResponsiveRowsStyle, useMatrixStyleProps } from '../useMatrix
 
 describe('useMatrixStyleProps', () => {
   it('should return default className', () => {
-    const props = {};
+    const props = { itemsCount: 0 };
     const { result } = renderHook(() => useMatrixStyleProps(props));
 
     expect(result.current.classProps).toBe('Matrix');
@@ -68,7 +68,7 @@ describe('useMatrixStyleProps', () => {
     ['rows', undefined, {}],
     ['itemRows', undefined, {}],
   ])('should return %s CSS properties', (propName, value, expectedStyle) => {
-    const props = value !== undefined ? { [propName]: value } : {};
+    const props = value !== undefined ? { [propName]: value, itemsCount: 0 } : { itemsCount: 0 };
     const { result } = renderHook(() => useMatrixStyleProps(props));
 
     expect(result.current.styleProps).toEqual(expectedStyle);

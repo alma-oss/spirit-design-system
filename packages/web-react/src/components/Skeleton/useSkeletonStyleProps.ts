@@ -1,7 +1,6 @@
 import classNames from 'classnames';
-import { type ElementType } from 'react';
 import { useClassNamePrefix } from '../../hooks';
-import { type SkeletonProps, type SpiritSkeletonProps } from '../../types';
+import { type SkeletonBaseProps, type SkeletonProps } from '../../types';
 
 export interface SkeletonStyles {
   /** className props */
@@ -15,9 +14,7 @@ export interface SkeletonStyles {
   props: SkeletonProps;
 }
 
-export function useSkeletonStyleProps<E extends ElementType = 'div', C = void>(
-  props?: SpiritSkeletonProps<E, C>,
-): SkeletonStyles {
+export function useSkeletonStyleProps<C = void>(props?: Omit<SkeletonBaseProps<C>, 'lines'>): SkeletonStyles {
   const { size, ...restProps } = props || {};
 
   const skeletonClass = useClassNamePrefix('Skeleton');

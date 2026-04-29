@@ -9,17 +9,16 @@ import { HelperText } from '../Field';
 import { Icon } from '../Icon';
 import { useItemStyleProps } from './useItemStyleProps';
 
+const defaultProps: Partial<SpiritItemProps> = {
+  elementType: 'button',
+  selectionDecorator: ITEM_SELECTION_DECORATOR_ICON,
+};
+
 const Item = <E extends ElementType = 'button'>(props: SpiritItemProps<E>): JSX.Element => {
-  const {
-    label,
-    elementType: ElementTag = 'button',
-    iconName,
-    helperText,
-    isSelected,
-    isDisabled,
-    selectionDecorator = ITEM_SELECTION_DECORATOR_ICON,
-    ...restProps
-  } = props;
+  const propsWithDefaults = { ...defaultProps, ...props };
+  const { elementType, helperText, iconName, isDisabled, isSelected, label, selectionDecorator, ...restProps } =
+    propsWithDefaults;
+  const Component = elementType as ElementType;
   const { classProps, props: modifiedProps } = useItemStyleProps({
     isSelected,
     isDisabled,
@@ -27,14 +26,14 @@ const Item = <E extends ElementType = 'button'>(props: SpiritItemProps<E>): JSX.
     ...restProps,
   });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.root, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps, otherProps });
 
   const showSelectedIcon =
     isSelected &&
     (selectionDecorator === ITEM_SELECTION_DECORATOR_ICON || selectionDecorator === ITEM_SELECTION_DECORATOR_BOTH);
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && ElementTag === 'button'}>
+    <Component {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && Component === 'button'}>
       {iconName && (
         <span className={classNames(classProps.icon.root, classProps.icon.start)}>
           <Icon name={iconName} />
@@ -47,10 +46,11 @@ const Item = <E extends ElementType = 'button'>(props: SpiritItemProps<E>): JSX.
           <Icon name="check-plain" />
         </span>
       )}
-    </ElementTag>
+    </Component>
   );
 };
 
 Item.spiritComponent = 'Item';
+Item.displayName = 'Item';
 
 export default Item;

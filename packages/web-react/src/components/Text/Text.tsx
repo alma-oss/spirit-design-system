@@ -7,7 +7,7 @@ import { type SpiritTextProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useTextStyleProps } from './useTextStyleProps';
 
-const defaultProps: Partial<SpiritTextProps> = {
+const defaultProps: Partial<SpiritTextProps<ElementType, void, void, void>> = {
   elementType: 'p',
   emphasis: Emphasis.REGULAR,
   size: SizesExtended.MEDIUM,
@@ -17,7 +17,8 @@ const Text = <E extends ElementType = 'p', S = void, Emph = void, C = void>(
   props: SpiritTextProps<E, S, Emph, C>,
 ): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType: ElementTag = 'p', children, ...restProps } = propsWithDefaults;
+  const { elementType, children, ...restProps } = propsWithDefaults;
+  const Component = elementType as ElementType;
   const { classProps, props: modifiedProps } = useTextStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps, {
     isTextBalanced: TextStyleProps.isTextBalanced,
@@ -25,15 +26,16 @@ const Text = <E extends ElementType = 'p', S = void, Emph = void, C = void>(
     textHyphens: TextStyleProps.textHyphens,
     textWordBreak: TextStyleProps.textWordBreak,
   });
-  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps}>
+    <Component {...otherProps} {...mergedStyleProps}>
       {children}
-    </ElementTag>
+    </Component>
   );
 };
 
 Text.spiritComponent = 'Text';
+Text.displayName = 'Text';
 
 export default Text;
