@@ -312,9 +312,11 @@ Radio as a Item:
 Checkbox as a Item:
 
 ```html
-<div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
-  <input type="checkbox" id="checkbox-item" class="Checkbox__input" />
-  <div class="Checkbox__text">
+<div class="Item">
+  <div class="Item__slot" role="presentation">
+    <input type="checkbox" id="checkbox-item" class="Checkbox Checkbox--item" />
+  </div>
+  <div class="Item__content" role="presentation">
     <label class="Label Label--item" for="checkbox-item">Item</label>
   </div>
 </div>
