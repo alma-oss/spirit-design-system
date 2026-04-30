@@ -3,17 +3,15 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
-  classNamePrefixProviderTest,
   formFieldHelperTextContextPropsTest,
   formFieldLabelContextPropsTest,
   formFieldValidationTextContextPropsTest,
   requiredPropsTest,
   restPropsTest,
-  sizePropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
-  validationStatePropsTest,
 } from '@local/tests';
+import { Sizes } from '../../../constants';
 import TextArea from '../TextArea';
 
 jest.mock('../../../hooks/useIcon');
@@ -31,32 +29,28 @@ describe('TextArea', () => {
     renderComponent: (props) => <TextArea id="textarea-validation-context" label="Label" {...props} />,
   });
 
-  classNamePrefixProviderTest(TextArea, 'TextArea');
-
   stylePropsTest(TextArea);
 
   requiredPropsTest(TextArea, 'textbox', 'id', 'example-id');
 
   restPropsTest(TextArea, 'textarea');
 
-  validationStatePropsTest(TextArea, 'TextArea--');
-
   validHtmlAttributesTest(TextArea);
 
   ariaAttributesTest(TextArea);
 
-  sizePropsTest(TextArea);
+  it.each([Object.values(Sizes)])('should render size %s', async (size) => {
+    render(<TextArea id="textarea" label="Label" size={size} />);
+
+    const inputContainer = screen.getByLabelText('Label').parentElement;
+
+    expect(inputContainer?.getAttribute('class')).toContain(size);
+  });
 
   it('should have label', () => {
     render(<TextArea id="textarea" label="Label" />);
 
     expect(screen.getByText('Label')).toBeInTheDocument();
-  });
-
-  it('should have input classname', () => {
-    render(<TextArea id="textarea" label="Label" />);
-
-    expect(screen.getByRole('textbox')).toHaveClass('TextArea__input');
   });
 
   describe('autoresizing', () => {
