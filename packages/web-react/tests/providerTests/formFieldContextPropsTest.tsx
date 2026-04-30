@@ -12,6 +12,8 @@ interface BaseFormFieldTestConfig {
 
 interface FormFieldContextPropsTestConfig extends BaseFormFieldTestConfig {
   classNamePrefix: string;
+  includeInlineVariant?: boolean;
+  includeItemVariant?: boolean;
   text?: string;
 }
 
@@ -104,37 +106,52 @@ const expectClassForProps = ({
 
 export const formFieldContextPropsTest = ({
   classNamePrefix,
+  includeInlineVariant = true,
+  includeItemVariant = true,
   renderComponent,
   text = DEFAULT_LABEL_TEXT,
 }: FormFieldContextPropsTestConfig) => {
   describe('prop priority (1. direct props, 2. context, 3. defaultProps)', () => {
-    it('should use default formFieldVariant when no context and no direct prop', () => {
-      renderFieldComponent(renderComponent);
-      const element = screen.getByText(text);
+    if (includeInlineVariant || includeItemVariant) {
+      it('should use default formFieldVariant when no context and no direct prop', () => {
+        renderFieldComponent(renderComponent);
+        const element = screen.getByText(text);
 
-      expect(element.className).toMatch(new RegExp(`^${classNamePrefix}\\b`));
-      expect(element.className).not.toContain(`${classNamePrefix}--inline`);
-      expect(element.className).not.toContain(`${classNamePrefix}--item`);
-    });
+        expect(element.className).toMatch(new RegExp(`^${classNamePrefix}\\b`));
 
-    it('should use context formFieldVariant when context provides it and no direct prop', () => {
-      render(<PropsProvider value={{ formFieldVariant: FormFieldVariants.INLINE }}>{renderComponent()}</PropsProvider>);
-      const element = screen.getByText(text);
+        if (includeInlineVariant) {
+          expect(element.className).not.toContain(`${classNamePrefix}--inline`);
+        }
+        if (includeItemVariant) {
+          expect(element.className).not.toContain(`${classNamePrefix}--item`);
+        }
+      });
+    }
 
-      expect(element.className).toContain(`${classNamePrefix}--inline`);
-    });
+    if (includeInlineVariant) {
+      it('should use context formFieldVariant when context provides it and no direct prop', () => {
+        render(
+          <PropsProvider value={{ formFieldVariant: FormFieldVariants.INLINE }}>{renderComponent()}</PropsProvider>,
+        );
+        const element = screen.getByText(text);
 
-    it('should use direct formFieldVariant over context (direct props override context)', () => {
-      render(
-        <PropsProvider value={{ formFieldVariant: FormFieldVariants.ITEM }}>
-          {renderComponent({ formFieldVariant: FormFieldVariants.INLINE })}
-        </PropsProvider>,
-      );
-      const element = screen.getByText(text);
+        expect(element.className).toContain(`${classNamePrefix}--inline`);
+      });
+    }
 
-      expect(element.className).toContain(`${classNamePrefix}--inline`);
-      expect(element.className).not.toContain(`${classNamePrefix}--item`);
-    });
+    if (includeInlineVariant && includeItemVariant) {
+      it('should use direct formFieldVariant over context (direct props override context)', () => {
+        render(
+          <PropsProvider value={{ formFieldVariant: FormFieldVariants.ITEM }}>
+            {renderComponent({ formFieldVariant: FormFieldVariants.INLINE })}
+          </PropsProvider>,
+        );
+        const element = screen.getByText(text);
+
+        expect(element.className).toContain(`${classNamePrefix}--inline`);
+        expect(element.className).not.toContain(`${classNamePrefix}--item`);
+      });
+    }
 
     it('should use context isDisabled when no direct prop', () => {
       render(<PropsProvider value={{ isDisabled: true }}>{renderComponent()}</PropsProvider>);
