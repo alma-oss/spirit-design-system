@@ -1,0 +1,42 @@
+// 1. Elevate interactive elements above the trigger overlay.
+
+@use '@tokens' as tokens;
+@use '../../settings/form-fields' as form-fields-settings;
+@use '../../tools/form-fields' as form-fields-tools;
+@use '../../tools/typography';
+@use 'theme';
+
+.UNSTABLE_PickerSelection {
+    @include typography.from-css-variables($infix: 'input-container');
+
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    gap: theme.$selection-gap;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: calc(
+        var(--#{tokens.$css-variable-prefix}input-container-height) - 2 *
+            #{form-fields-settings.$box-field-input-border-width}
+    );
+    padding: theme.$padding;
+}
+
+.UNSTABLE_PickerSelection__empty {
+    margin-inline-start: calc(#{form-fields-settings.$box-field-input-padding-x} - #{theme.$padding});
+    color: form-fields-settings.$box-field-input-placeholder-color-state-default;
+}
+
+// 1.
+.UNSTABLE_PickerSelection :where(a, button) {
+    position: relative;
+    z-index: 1;
+}
+
+.UNSTABLE_PickerSelection--disabled {
+    pointer-events: none;
+}
+
+.UNSTABLE_PickerSelection--disabled .UNSTABLE_PickerSelection__empty {
+    @include form-fields-tools.input-disabled();
+}

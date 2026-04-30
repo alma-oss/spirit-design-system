@@ -17,6 +17,7 @@ import { type ForwardRefComponent } from '../../types';
 import { Dropdown, DropdownPopover } from '../Dropdown';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
+import { InputContainer } from '../InputContainer';
 import { Label } from '../Label';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { VisuallyHidden } from '../VisuallyHidden';
@@ -24,7 +25,9 @@ import { DEFAULT_SIZE } from './constants';
 import { PickerContextProvider } from './PickerContext';
 import { PickerPopoverContextProvider } from './PickerPopoverContext';
 import type { SpiritUnstablePickerProps, SpiritUnstablePickerRef } from './types';
+import UNSTABLE_PickerSelection from './UNSTABLE_PickerSelection';
 import UNSTABLE_PickerTag from './UNSTABLE_PickerTag';
+import UNSTABLE_PickerTrigger from './UNSTABLE_PickerTrigger';
 import { usePickerId } from './usePickerId';
 import { usePickerSelectionGridKeyboard } from './usePickerSelectionGridKeyboard';
 import { usePickerStyleProps } from './usePickerStyleProps';
@@ -74,13 +77,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     validationState,
     validationText,
   });
-  const { classProps } = usePickerStyleProps({
-    isDisabled,
-    isLabelHidden,
-    isRequired,
-    size,
-    validationState,
-  });
+  const { classProps } = usePickerStyleProps();
   const { styleProps, props: transferProps } = useStyleProps(restProps);
   const { labelId, pickerId, popoverId, selectionId, tagDescriptionId } = usePickerId(id);
 
@@ -208,6 +205,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
         isDisabled,
         isLabelHidden,
         isRequired,
+        size,
         validationState,
       }}
     >
@@ -217,24 +215,22 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
             {label}
           </Label>
           <Dropdown id={popoverId} isOpen={isOpen} onToggle={onToggle} triggerRef={triggerRef}>
-            <div role="group" aria-label={label} className={classProps.inputContainer}>
-              <div
+            <InputContainer role="group" aria-label={label}>
+              <UNSTABLE_PickerSelection
                 ref={selectionGridRef}
                 {...ariaDescribedByProp}
                 id={selectionId}
+                isDisabled={isDisabled}
                 role={selectedPickerItems.length ? 'grid' : 'group'}
                 aria-label={replaceTranslationParams(selectionAriaLabel, { label })}
                 aria-live="off"
                 aria-atomic={false}
                 aria-relevant="additions"
-                className={classProps.selection}
               >
                 {selectionContent}
-              </div>
-              <button
+              </UNSTABLE_PickerSelection>
+              <UNSTABLE_PickerTrigger
                 ref={triggerRef}
-                type="button"
-                className={classProps.trigger}
                 aria-haspopup="dialog"
                 aria-expanded={isOpen}
                 aria-controls={popoverId}
@@ -244,8 +240,8 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
               >
                 <VisuallyHidden>{isOpen ? closeButtonLabel : addButtonLabel}</VisuallyHidden>
                 <Icon name={`chevron-${isOpen ? 'up' : 'down'}`} boxSize={20} />
-              </button>
-            </div>
+              </UNSTABLE_PickerTrigger>
+            </InputContainer>
             <DropdownPopover aria-labelledby={labelId}>
               <PickerPopoverContextProvider value={popoverContextValue}>{children}</PickerPopoverContextProvider>
             </DropdownPopover>
