@@ -137,9 +137,9 @@ It creates a stacking context so the validation text sits above the stretched la
 ### FieldGroup
 
 ```html
-<fieldset class="FieldGroup FieldGroup--danger">
+<fieldset class="border-0">
   <legend class="FieldGroup__label">Label</legend>
-  <div class="FieldGroup__fields">
+  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
     <!-- fields here -->
   </div>
   <div class="ValidationText ValidationText--danger">Danger validation text</div>

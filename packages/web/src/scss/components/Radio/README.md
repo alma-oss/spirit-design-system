@@ -5,10 +5,10 @@
 Radio buttons should be wrapped in a [FieldGroup][field-group] when used as a group:
 
 ```html
-<fieldset class="FieldGroup">
+<fieldset class="border-0">
   <legend class="accessibility-hidden">Choose an option</legend>
   <div class="FieldGroup__label" aria-hidden="true">Choose an option</div>
-  <div class="FieldGroup__fields">
+  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
     <div class="Radio Radio--inputPositionStart">
       <input type="radio" id="radio-default" class="Radio__input" name="default" />
       <div class="Radio__text">
