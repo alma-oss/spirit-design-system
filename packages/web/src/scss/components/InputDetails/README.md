@@ -8,10 +8,10 @@ It can be used internally in the form components.
 ## Usage with Checkbox
 
 ```html
-<div class="Checkbox Checkbox--inputPositionStart">
-  <input type="checkbox" id="consent" class="Checkbox__input" name="consent" aria-details="consent-details" required />
-  <div class="Checkbox__text">
-    <label class="Checkbox__label Checkbox__label--required" for="consent">I agree to the terms and conditions</label>
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="checkbox" id="consent" class="Checkbox" name="consent" aria-details="consent-details" required />
+  <div>
+    <label class="Label Label--inline Label--required" for="consent">I agree to the terms and conditions</label>
     <div id="consent-details" class="InputDetails">
       <button
         type="button"
@@ -58,18 +58,18 @@ To render the `InputDetails` component in a disabled state, add the `InputDetail
 ### With Disabled Checkbox
 
 ```html
-<div class="Checkbox Checkbox--inputPositionStart Checkbox--disabled">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="consent"
-    class="Checkbox__input"
+    class="Checkbox"
     name="consent"
     aria-details="consent-details"
     disabled
     required
   />
-  <div class="Checkbox__text">
-    <label class="Checkbox__label Checkbox__label--required" for="consent">
+  <div>
+    <label class="Label Label--inline Label--required" for="consent">
       <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
     </label>
     <div id="consent-details" class="InputDetails InputDetails--disabled">

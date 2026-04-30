@@ -110,9 +110,9 @@ ValidationText works seamlessly with Spirit form components:
 ### Inline Field (Checkbox and Toggle)
 
 ```html
-<div class="Checkbox Checkbox--inputPositionStart Checkbox--danger">
-  <input type="checkbox" id="example" class="Checkbox__input" name="example" />
-  <div class="Checkbox__text">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="checkbox" id="example" class="Checkbox Checkbox--danger" name="example" />
+  <div>
     <label class="Label Label--inline" for="example">Checkbox Label</label>
     <div class="ValidationText ValidationText--danger">Danger validation text</div>
   </div>

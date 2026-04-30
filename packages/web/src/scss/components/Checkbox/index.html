@@ -19,29 +19,33 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart">
-        <input
-          type="checkbox"
-          id="checkbox-default"
-          class="Checkbox__input"
-          name="default"
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--inline" for="checkbox-default">Checkbox Label</label>
-        </div>
-      </div>
+      <div class="Stack Stack--spacing">
 
-      <div class="Checkbox Checkbox--inputPositionStart">
-        <input
-          type="checkbox"
-          id="checkbox-default-checked"
-          class="Checkbox__input"
-          name="defaultChecked"
-          checked
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--inline" for="checkbox-default-checked">Checkbox Label</label>
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-default"
+            class="Checkbox"
+            name="default"
+          />
+          <div>
+            <label class="Label Label--inline" for="checkbox-default">Checkbox Label</label>
+          </div>
         </div>
+
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-default-checked"
+            class="Checkbox"
+            name="defaultChecked"
+            checked
+          />
+          <div>
+            <label class="Label Label--inline" for="checkbox-default-checked">Checkbox Label</label>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -58,14 +62,14 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart">
+      <div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
         <input
           type="checkbox"
           id="checkbox-indeterminate"
-          class="Checkbox__input"
+          class="Checkbox"
           name="indeterminate"
         />
-        <div class="Checkbox__text">
+        <div>
           <label class="Label Label--inline" for="checkbox-indeterminate">Checkbox Label</label>
         </div>
       </div>
@@ -84,15 +88,15 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart">
+      <div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
         <input
           type="checkbox"
           id="checkbox-required"
-          class="Checkbox__input"
+          class="Checkbox"
           name="required"
           required
         />
-        <div class="Checkbox__text">
+        <div>
           <label class="Label Label--inline Label--required" for="checkbox-required">Checkbox Label</label>
         </div>
       </div>
@@ -111,14 +115,14 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--labelHidden">
+      <div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
         <input
           type="checkbox"
           id="checkbox-hidden-label"
-          class="Checkbox__input"
+          class="Checkbox"
           name="hiddenLabel"
         />
-        <div class="Checkbox__text">
+        <div>
           <label class="Label Label--inline accessibility-hidden" for="checkbox-hidden-label">Checkbox Label</label>
         </div>
       </div>
@@ -137,15 +141,15 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart">
+      <div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
         <input
           type="checkbox"
           id="checkbox-helper-text"
-          class="Checkbox__input"
+          class="Checkbox"
           name="helperText"
           aria-describedby="checkbox-helper-text-helper-text"
         />
-        <div class="Checkbox__text">
+        <div>
           <label class="Label Label--inline" for="checkbox-helper-text">Checkbox Label</label>
           <div class="HelperText" id="checkbox-helper-text-helper-text">Helper text</div>
         </div>
@@ -165,47 +169,51 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--disabled">
-        <input
-          type="checkbox"
-          id="checkbox-disabled"
-          class="Checkbox__input"
-          name="disabled"
-          disabled
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--inline Label--disabled" for="checkbox-disabled">Checkbox Label</label>
-        </div>
-      </div>
+      <div class="Stack Stack--spacing">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--disabled">
-        <input
-          type="checkbox"
-          id="checkbox-disabled-helper-text"
-          class="Checkbox__input"
-          name="disabledWithText"
-          aria-describedby="checkbox-disabled-helper-text-helper-text"
-          disabled
-          checked
-          required
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--inline Label--required Label--disabled" for="checkbox-disabled-helper-text">Checkbox Label</label>
-          <div class="HelperText HelperText--disabled" id="checkbox-disabled-helper-text-helper-text">Helper text</div>
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-disabled"
+            class="Checkbox"
+            name="disabled"
+            disabled
+          />
+          <div>
+            <label class="Label Label--inline Label--disabled" for="checkbox-disabled">Checkbox Label</label>
+          </div>
         </div>
-      </div>
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--disabled">
-        <input
-          type="checkbox"
-          id="checkbox-disabled-indeterminate"
-          class="Checkbox__input"
-          name="disabledIndeterminate"
-          disabled
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--inline Label--disabled" for="checkbox-disabled-indeterminate">Checkbox Label</label>
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-disabled-helper-text"
+            class="Checkbox"
+            name="disabledWithText"
+            aria-describedby="checkbox-disabled-helper-text-helper-text"
+            disabled
+            checked
+            required
+          />
+          <div>
+            <label class="Label Label--inline Label--required Label--disabled" for="checkbox-disabled-helper-text">Checkbox Label</label>
+            <div class="HelperText HelperText--disabled" id="checkbox-disabled-helper-text-helper-text">Helper text</div>
+          </div>
         </div>
+
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-disabled-indeterminate"
+            class="Checkbox"
+            name="disabledIndeterminate"
+            disabled
+          />
+          <div>
+            <label class="Label Label--inline Label--disabled" for="checkbox-disabled-indeterminate">Checkbox Label</label>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -222,65 +230,69 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--success">
-        <input
-          type="checkbox"
-          id="checkbox-success"
-          class="Checkbox__input"
-          name="success"
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--inline" for="checkbox-success">Checkbox Label</label>
-        </div>
-      </div>
+      <div class="Stack Stack--spacing">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--warning">
-        <input
-          type="checkbox"
-          id="checkbox-warning"
-          class="Checkbox__input"
-          name="warning"
-          aria-describedby="checkbox-warning-validation-text"
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
-          <div class="ValidationText ValidationText--warning" id="checkbox-warning-validation-text">Warning validation text</div>
-        </div>
-      </div>
-
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--danger">
-        <input
-          type="checkbox"
-          id="checkbox-danger"
-          class="Checkbox__input"
-          name="danger"
-          aria-describedby="checkbox-danger-validation-text"
-        />
-        <div class="Checkbox__text">
-          <label for="checkbox-danger" class="Label Label--inline">Checkbox Label</label>
-          <div class="ValidationText ValidationText--danger" id="checkbox-danger-validation-text">
-            <ul>
-              <li>First validation text</li>
-              <li>Second validation text</li>
-            </ul>
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-success"
+            class="Checkbox Checkbox--success"
+            name="success"
+          />
+          <div>
+            <label class="Label Label--inline" for="checkbox-success">Checkbox Label</label>
           </div>
         </div>
-      </div>
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--warning">
-        <input
-          type="checkbox"
-          id="checkbox-warning-helper-text"
-          class="Checkbox__input"
-          name="warningWithText"
-          aria-describedby="checkbox-warning-helper-text-helper-text checkbox-warning-helper-text-validation-text"
-          checked
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--inline" for="checkbox-warning-helper-text">Checkbox Label</label>
-          <div class="HelperText" id="checkbox-warning-helper-text-helper-text">Helper text</div>
-          <div class="ValidationText ValidationText--warning" id="checkbox-warning-helper-text-validation-text">Warning validation text</div>
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-warning"
+            class="Checkbox Checkbox--warning"
+            name="warning"
+            aria-describedby="checkbox-warning-validation-text"
+          />
+          <div>
+            <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
+            <div class="ValidationText ValidationText--warning" id="checkbox-warning-validation-text">Warning validation text</div>
+          </div>
         </div>
+
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-danger"
+            class="Checkbox Checkbox--danger"
+            name="danger"
+            aria-describedby="checkbox-danger-validation-text"
+          />
+          <div>
+            <label for="checkbox-danger" class="Label Label--inline">Checkbox Label</label>
+            <div class="ValidationText ValidationText--danger" id="checkbox-danger-validation-text">
+              <ul>
+                <li>First validation text</li>
+                <li>Second validation text</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-warning-helper-text"
+            class="Checkbox Checkbox--warning"
+            name="warningWithText"
+            aria-describedby="checkbox-warning-helper-text-helper-text checkbox-warning-helper-text-validation-text"
+            checked
+          />
+          <div>
+            <label class="Label Label--inline" for="checkbox-warning-helper-text">Checkbox Label</label>
+            <div class="HelperText" id="checkbox-warning-helper-text-helper-text">Helper text</div>
+            <div class="ValidationText ValidationText--warning" id="checkbox-warning-helper-text-validation-text">Warning validation text</div>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -297,32 +309,36 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      {{setVar "states" "success" "warning" "danger" }}
-      {{#each @root.states as |state|}}
-      <div class="Checkbox Checkbox--{{ state }}">
-        <input
-          type="checkbox"
-          id="checkbox-{{ state }}-validation-icon"
-          class="Checkbox__input"
-          name="warningWithText"
-          aria-describedby="checkbox-{{ state }}-validation-icon-validation-text"
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--inline" for="checkbox-{{ state }}-validation-icon">Checkbox Label</label>
-          <div class="ValidationText ValidationText--{{ state }}" id="checkbox-{{ state }}-validation-icon-validation-text">
-            <svg
-              class="Icon"
-              width="20"
-              height="20"
-              aria-hidden="true"
-            >
-              <use href="/assets/icons/svg/sprite.svg#{{ state }}" />
-            </svg>
-            <span>This is {{ state }} validation text.</span>
+      <div class="Stack Stack--spacing">
+
+        {{setVar "states" "success" "warning" "danger" }}
+        {{#each @root.states as |state|}}
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-{{ state }}-validation-icon"
+            class="Checkbox Checkbox--{{ state }}"
+            name="warningWithText"
+            aria-describedby="checkbox-{{ state }}-validation-icon-validation-text"
+          />
+          <div>
+            <label class="Label Label--inline" for="checkbox-{{ state }}-validation-icon">Checkbox Label</label>
+            <div class="ValidationText ValidationText--{{ state }}" id="checkbox-{{ state }}-validation-icon-validation-text">
+              <svg
+                class="Icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#{{ state }}" />
+              </svg>
+              <span>This is {{ state }} validation text.</span>
+            </div>
           </div>
         </div>
+        {{/each}}
+
       </div>
-      {{/each}}
 
     </div>
 
@@ -338,40 +354,44 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart">
-        <input
-          type="checkbox"
-          id="checkbox-position-start"
-          class="Checkbox__input"
-          name="positionStart"
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--inline" for="checkbox-position-start">Input on Start (Default)</label>
-        </div>
-      </div>
+      <div class="Stack Stack--spacing">
 
-      <div class="Checkbox Checkbox--inputPositionEnd">
-        <input
-          type="checkbox"
-          id="checkbox-position-end"
-          class="Checkbox__input"
-          name="positionEnd"
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--inline" for="checkbox-position-end">Input on End</label>
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-position-start"
+            class="Checkbox"
+            name="positionStart"
+          />
+          <div>
+            <label class="Label Label--inline" for="checkbox-position-start">Input on Start (Default)</label>
+          </div>
         </div>
-      </div>
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--tablet--inputPositionEnd Checkbox--desktop--inputPositionStart">
-        <input
-          type="checkbox"
-          id="checkbox-position-responsive"
-          class="Checkbox__input"
-          name="positionResponsive"
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--inline" for="checkbox-position-responsive">Responsive Position</label>
+        <div class="Flex Flex--horizontalReversed Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-position-end"
+            class="Checkbox"
+            name="positionEnd"
+          />
+          <div>
+            <label class="Label Label--inline" for="checkbox-position-end">Input on End</label>
+          </div>
         </div>
+
+        <div class="Flex Flex--horizontal Flex--inline Flex--tablet--horizontalReversed Flex--desktop--horizontal" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-position-responsive"
+            class="Checkbox"
+            name="positionResponsive"
+          />
+          <div>
+            <label class="Label Label--inline" for="checkbox-position-responsive">Responsive Position</label>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -388,73 +408,87 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
-        <input
-          type="checkbox"
-          id="checkbox-item-default"
-          class="Checkbox__input"
-          name="item"
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--item" for="checkbox-item-default">Checkbox Label</label>
-        </div>
-      </div>
+      <div class="Stack Stack--spacing">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
-        <input
-          type="checkbox"
-          id="checkbox-item-default-checked"
-          class="Checkbox__input"
-          name="itemChecked"
-          checked
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--item" for="checkbox-item-default-checked">Checkbox Label</label>
+        <div class="Item">
+          <div class="Item__slot" role="presentation">
+            <input
+              type="checkbox"
+              id="checkbox-item-default"
+              class="Checkbox Checkbox--item"
+              name="item"
+            />
+          </div>
+          <div class="Item__content" role="presentation">
+            <label class="Label Label--item" for="checkbox-item-default">Checkbox Label</label>
+          </div>
         </div>
-      </div>
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
-        <input
-          type="checkbox"
-          id="checkbox-item-helper-text"
-          class="Checkbox__input"
-          name="itemWithText"
-          aria-describedby="checkbox-item-helper-text-helper-text"
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--item" for="checkbox-item-helper-text">Checkbox Label</label>
-          <div class="HelperText" id="checkbox-item-helper-text-helper-text">Helper text</div>
+        <div class="Item">
+          <div class="Item__slot" role="presentation">
+            <input
+              type="checkbox"
+              id="checkbox-item-default-checked"
+              class="Checkbox Checkbox--item"
+              name="itemChecked"
+              checked
+            />
+          </div>
+          <div class="Item__content" role="presentation">
+            <label class="Label Label--item" for="checkbox-item-default-checked">Checkbox Label</label>
+          </div>
         </div>
-      </div>
 
-      <div class="Checkbox Checkbox--item Checkbox--disabled">
-        <input
-          type="checkbox"
-          id="checkbox-item-disabled"
-          class="Checkbox__input"
-          name="itemDisabled"
-          disabled
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--item Label--disabled" for="checkbox-item-disabled">Checkbox Label</label>
+        <div class="Item">
+          <div class="Item__slot" role="presentation">
+            <input
+              type="checkbox"
+              id="checkbox-item-helper-text"
+              class="Checkbox Checkbox--item"
+              name="itemWithText"
+              aria-describedby="checkbox-item-helper-text-helper-text"
+            />
+          </div>
+          <div class="Item__content" role="presentation">
+            <label class="Label Label--item" for="checkbox-item-helper-text">Checkbox Label</label>
+            <div class="HelperText" id="checkbox-item-helper-text-helper-text">Helper text</div>
+          </div>
         </div>
-      </div>
 
-      <div class="Checkbox Checkbox--item Checkbox--disabled">
-        <input
-          type="checkbox"
-          id="checkbox-item-disabled-helper-text"
-          class="Checkbox__input"
-          name="itemDisabledChecked"
-          aria-describedby="checkbox-item-disabled-helper-text-helper-text"
-          disabled
-          checked
-          required
-        />
-        <div class="Checkbox__text">
-          <label class="Label Label--item Label--required Label--disabled" for="checkbox-item-disabled-helper-text">Checkbox Label</label>
-          <div class="HelperText HelperText--disabled" id="checkbox-item-disabled-helper-text-helper-text">Helper text</div>
+        <div class="Item Item--disabled">
+          <div class="Item__slot" role="presentation">
+            <input
+              type="checkbox"
+              id="checkbox-item-disabled"
+              class="Checkbox Checkbox--item"
+              name="itemDisabled"
+              disabled
+            />
+          </div>
+          <div class="Item__content" role="presentation">
+            <label class="Label Label--item Label--disabled" for="checkbox-item-disabled">Checkbox Label</label>
+          </div>
         </div>
+
+        <div class="Item Item--disabled">
+          <div class="Item__slot" role="presentation">
+            <input
+              type="checkbox"
+              id="checkbox-item-disabled-helper-text"
+              class="Checkbox Checkbox--item"
+              name="itemDisabledChecked"
+              aria-describedby="checkbox-item-disabled-helper-text-helper-text"
+              disabled
+              checked
+              required
+            />
+          </div>
+          <div class="Item__content" role="presentation">
+            <label class="Label Label--item Label--required Label--disabled" for="checkbox-item-disabled-helper-text">Checkbox Label</label>
+            <div class="HelperText HelperText--disabled" id="checkbox-item-disabled-helper-text-helper-text">Helper text</div>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -471,16 +505,16 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart">
+      <div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
         <input
           type="checkbox"
           id="consent-emphasized-label"
-          class="Checkbox__input"
+          class="Checkbox"
           name="consentEmphasizedLabel"
           aria-details="consent-emphasized-label-details"
           required
         />
-        <div class="Checkbox__text">
+        <div>
           <label class="Label Label--inline Label--required" for="consent-emphasized-label"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
           <div id="consent-emphasized-label-details" class="InputDetails">
             <button
@@ -511,17 +545,17 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--danger">
+      <div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
         <input
           type="checkbox"
           id="consent-full-example"
-          class="Checkbox__input"
+          class="Checkbox Checkbox--danger"
           name="consentFullExample"
           aria-details="consent-full-example-details"
           aria-describedby="consent-full-example-helper-text consent-full-example-validation-text"
           required
         />
-        <div class="Checkbox__text">
+        <div>
           <label class="Label Label--inline Label--required" for="consent-full-example">I agree to the terms and privacy policy</label>
           <div id="consent-full-example-details" class="InputDetails">
             <button

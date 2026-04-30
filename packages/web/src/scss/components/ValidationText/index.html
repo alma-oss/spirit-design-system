@@ -180,46 +180,50 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--danger">
-        <input
-          type="checkbox"
-          id="validation-text-checkbox-danger"
-          class="Checkbox__input"
-          name="checkboxDanger"
-        />
-        <div class="Checkbox__text">
-          <label
-            class="Label Label--inline"
-            for="validation-text-checkbox-danger"
-          >Checkbox Label</label>
-          <div class="ValidationText ValidationText--danger">Danger validation text</div>
-        </div>
-      </div>
+      <div class="Stack Stack--spacing">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--warning">
-        <input
-          type="checkbox"
-          id="validation-text-checkbox-warning"
-          class="Checkbox__input"
-          name="checkboxWarning"
-        />
-        <div class="Checkbox__text">
-          <label
-            class="Label Label--inline"
-            for="validation-text-checkbox-warning"
-          >Checkbox Label</label>
-          <div class="ValidationText ValidationText--warning">
-            <svg
-              class="Icon"
-              width="20"
-              height="20"
-              aria-hidden="true"
-            >
-              <use href="/assets/icons/svg/sprite.svg#warning" />
-            </svg>
-            <span>Warning validation text with icon</span>
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="validation-text-checkbox-danger"
+            class="Checkbox Checkbox--danger"
+            name="checkboxDanger"
+          />
+          <div>
+            <label
+              class="Label Label--inline"
+              for="validation-text-checkbox-danger"
+            >Checkbox Label</label>
+            <div class="ValidationText ValidationText--danger">Danger validation text</div>
           </div>
         </div>
+
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="validation-text-checkbox-warning"
+            class="Checkbox Checkbox--warning"
+            name="checkboxWarning"
+          />
+          <div>
+            <label
+              class="Label Label--inline"
+              for="validation-text-checkbox-warning"
+            >Checkbox Label</label>
+            <div class="ValidationText ValidationText--warning">
+              <svg
+                class="Icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#warning" />
+              </svg>
+              <span>Warning validation text with icon</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -236,14 +240,16 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--item Checkbox--danger">
-        <input
-          type="checkbox"
-          id="validation-text-checkbox-item"
-          class="Checkbox__input"
-          name="checkboxItem"
-        />
-        <div class="Checkbox__text">
+      <div class="Item">
+        <div class="Item__slot" role="presentation">
+          <input
+            type="checkbox"
+            id="validation-text-checkbox-item"
+            class="Checkbox Checkbox--item Checkbox--danger"
+            name="checkboxItem"
+          />
+        </div>
+        <div class="Item__content" role="presentation">
           <label
             class="Label Label--item"
             for="validation-text-checkbox-item"

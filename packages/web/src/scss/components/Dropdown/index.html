@@ -354,15 +354,17 @@
               <span class="Label Label--item">Item with icon</span>
             </span>
           </a>
-          <div class="Checkbox Checkbox--item">
-            <input
-              type="checkbox"
-              id="checkbox-item"
-              name="checkbox-item"
-              class="Checkbox__input"
-            />
-            <div class="Checkbox__text">
-              <label class="Checkbox__label" for="checkbox-item">Item with checkbox</label>
+          <div class="Item">
+            <div class="Item__slot" role="presentation">
+              <input
+                type="checkbox"
+                id="checkbox-item"
+                name="checkbox-item"
+                class="Checkbox Checkbox--item"
+              />
+            </div>
+            <div class="Item__content" role="presentation">
+              <label class="Label Label--item" for="checkbox-item">Item with checkbox</label>
             </div>
           </div>
           <div class="Radio Radio--item">

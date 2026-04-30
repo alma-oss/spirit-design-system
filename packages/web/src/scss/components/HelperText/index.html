@@ -74,43 +74,47 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart">
-        <input
-          type="checkbox"
-          id="checkbox-helper-text-example"
-          class="Checkbox__input"
-          aria-describedby="checkbox-helper-text-example-helper-text"
-        />
-        <div class="Checkbox__text">
-          <label
-            class="Label Label--inline"
-            for="checkbox-helper-text-example"
-          >Checkbox Label</label>
-          <div
-            class="HelperText"
-            id="checkbox-helper-text-example-helper-text"
-          >Helper text</div>
-        </div>
-      </div>
+      <div class="Stack Stack--spacing">
 
-      <div class="Checkbox Checkbox--disabled Checkbox--inputPositionStart">
-        <input
-          type="checkbox"
-          id="checkbox-helper-text-disabled"
-          class="Checkbox__input"
-          aria-describedby="checkbox-helper-text-disabled-helper-text"
-          disabled
-        />
-        <div class="Checkbox__text">
-          <label
-            class="Label Label--inline Label--disabled"
-            for="checkbox-helper-text-disabled"
-          >Disabled Checkbox</label>
-          <div
-            class="HelperText HelperText--disabled"
-            id="checkbox-helper-text-disabled-helper-text"
-          >Helper text</div>
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-helper-text-example"
+            class="Checkbox"
+            aria-describedby="checkbox-helper-text-example-helper-text"
+          />
+          <div>
+            <label
+              class="Label Label--inline"
+              for="checkbox-helper-text-example"
+            >Checkbox Label</label>
+            <div
+              class="HelperText"
+              id="checkbox-helper-text-example-helper-text"
+            >Helper text</div>
+          </div>
         </div>
+
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-helper-text-disabled"
+            class="Checkbox"
+            aria-describedby="checkbox-helper-text-disabled-helper-text"
+            disabled
+          />
+          <div>
+            <label
+              class="Label Label--inline Label--disabled"
+              for="checkbox-helper-text-disabled"
+            >Disabled Checkbox</label>
+            <div
+              class="HelperText HelperText--disabled"
+              id="checkbox-helper-text-disabled-helper-text"
+            >Helper text</div>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -181,14 +185,16 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
-        <input
-          type="checkbox"
-          id="checkbox-item-helper-text-example"
-          class="Checkbox__input"
-          aria-describedby="checkbox-item-helper-text-example-helper-text"
-        />
-        <div class="Checkbox__text">
+      <div class="Item">
+        <div class="Item__slot" role="presentation">
+          <input
+            type="checkbox"
+            id="checkbox-item-helper-text-example"
+            class="Checkbox Checkbox--item"
+            aria-describedby="checkbox-item-helper-text-example-helper-text"
+          />
+        </div>
+        <div class="Item__content" role="presentation">
           <label
             class="Label Label--item"
             for="checkbox-item-helper-text-example"
@@ -200,15 +206,17 @@
         </div>
       </div>
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--item Checkbox--disabled">
-        <input
-          type="checkbox"
-          id="checkbox-item-helper-text-disabled"
-          class="Checkbox__input"
-          aria-describedby="checkbox-item-helper-text-disabled-helper-text"
-          disabled
-        />
-        <div class="Checkbox__text">
+      <div class="Item Item--disabled">
+        <div class="Item__slot" role="presentation">
+          <input
+            type="checkbox"
+            id="checkbox-item-helper-text-disabled"
+            class="Checkbox Checkbox--item"
+            aria-describedby="checkbox-item-helper-text-disabled-helper-text"
+            disabled
+          />
+        </div>
+        <div class="Item__content" role="presentation">
           <label
             class="Label Label--item Label--disabled"
             for="checkbox-item-helper-text-disabled"

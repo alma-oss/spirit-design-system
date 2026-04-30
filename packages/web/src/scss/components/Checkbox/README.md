@@ -3,9 +3,9 @@
 ## Basic Usage
 
 ```html
-<div class="Checkbox Checkbox--inputPositionStart">
-  <input type="checkbox" id="checkbox-default" class="Checkbox__input" name="default" />
-  <div class="Checkbox__text">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="checkbox" id="checkbox-default" class="Checkbox" name="default" />
+  <div>
     <label class="Label Label--inline" for="checkbox-default">Checkbox Label</label>
   </div>
 </div>
@@ -14,9 +14,9 @@
 ## Required Input
 
 ```html
-<div class="Checkbox Checkbox--inputPositionStart">
-  <input type="checkbox" id="checkbox-required" class="Checkbox__input" name="required" required />
-  <div class="Checkbox__text">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="checkbox" id="checkbox-required" class="Checkbox" name="required" required />
+  <div>
     <label class="Label Label--inline Label--required" for="checkbox-required">Checkbox Label</label>
   </div>
 </div>
@@ -24,35 +24,35 @@
 
 ## Validation State with Validation Text
 
-See Validation state [dictionary][dictionary-validation].
+See Validation state [dictionary][dictionary-validation] and [ValidationText][readme-validation-text] component.
 
 - To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
 - To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
-<div class="Checkbox Checkbox--inputPositionStart Checkbox--warning">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="checkbox-warning"
-    class="Checkbox__input"
+    class="Checkbox Checkbox--warning"
     name="warning"
     aria-describedby="checkbox-warning-helper-text"
   />
-  <div class="Checkbox__text">
+  <div>
     <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
     <div class="ValidationText ValidationText--warning" id="checkbox-warning-helper-text">Warning validation text</div>
   </div>
 </div>
 
-<div class="Checkbox Checkbox--inputPositionStart Checkbox--danger">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="checkbox-danger"
-    class="Checkbox__input"
+    class="Checkbox Checkbox--danger"
     name="danger"
     aria-describedby="checkbox-danger-helper-text"
   />
-  <div class="Checkbox__text">
+  <div>
     <label class="Label Label--inline" for="checkbox-danger">Checkbox Label</label>
     <div class="ValidationText ValidationText--danger" id="checkbox-danger-helper-text">
       <ul>
@@ -63,15 +63,15 @@ See Validation state [dictionary][dictionary-validation].
   </div>
 </div>
 
-<div class="Checkbox Checkbox--inputPositionStart Checkbox--warning">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="checkbox-warning"
-    class="Checkbox__input"
+    class="Checkbox Checkbox--warning"
     name="warning"
     aria-describedby="checkbox-warning-helper-text"
   />
-  <div class="Checkbox__text">
+  <div>
     <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
     <div class="ValidationText ValidationText--warning" id="checkbox-warning-helper-text">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
@@ -86,9 +86,9 @@ See Validation state [dictionary][dictionary-validation].
 ## Hidden Label
 
 ```html
-<div class="Checkbox Checkbox--inputPositionStart">
-  <input type="checkbox" id="checkbox-hidden-label" class="Checkbox__input" name="hiddenLabel" required />
-  <div class="Checkbox__text">
+<div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-0);">
+  <input type="checkbox" id="checkbox-hidden-label" class="Checkbox" name="hiddenLabel" required />
+  <div>
     <label class="Label Label--inline accessibility-hidden" for="checkbox-hidden-label">Checkbox Label</label>
   </div>
 </div>
@@ -96,18 +96,18 @@ See Validation state [dictionary][dictionary-validation].
 
 ## Helper Text
 
-To add helper text, use the [HelperText][helper-text] component:
+To add helper text, use the [HelperText][readme-helper-text] component:
 
 ```html
-<div class="Checkbox">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="checkbox-helper-text"
-    class="Checkbox__input"
+    class="Checkbox"
     name="helperText"
     aria-describedby="checkbox-helper-text-helper-text"
   />
-  <div class="Checkbox__text">
+  <div>
     <label class="Label Label--inline" for="checkbox-helper-text">Checkbox Label</label>
     <div class="HelperText" id="checkbox-helper-text-helper-text">Helper text</div>
   </div>
@@ -124,16 +124,16 @@ element with modal triggers.
 Use emphasized (bold) label text to make the agreement statement more prominent:
 
 ```html
-<div class="Checkbox Checkbox--inputPositionStart">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="consent-emphasized-label"
-    class="Checkbox__input"
+    class="Checkbox"
     name="consentEmphasizedLabel"
     aria-details="consent-emphasized-label-details"
     required
   />
-  <div class="Checkbox__text">
+  <div>
     <label class="Label Label--inline Label--required" for="consent-emphasized-label">
       <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
     </label>
@@ -159,17 +159,17 @@ Use emphasized (bold) label text to make the agreement statement more prominent:
 Complete example showing label, details with multiple links, helper text, and validation:
 
 ```html
-<div class="Checkbox Checkbox--inputPositionStart Checkbox--danger">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="consent-full-example"
-    class="Checkbox__input"
+    class="Checkbox Checkbox--danger"
     name="consentFullExample"
     aria-details="consent-full-example-details"
     aria-describedby="consent-full-example-helper-text consent-full-example-validation-text"
     required
   />
-  <div class="Checkbox__text">
+  <div>
     <label class="Label Label--inline Label--required" for="consent-full-example">
       I agree to the terms and privacy policy
     </label>
@@ -198,7 +198,7 @@ Complete example showing label, details with multiple links, helper text, and va
     <div class="HelperText" id="consent-full-example-helper-text">
       Please read the documents carefully before agreeing
     </div>
-    <div class="ValidationText ValidationText--danger" id="consent-full-example-validation-text">
+    <div class="ValidationText ValidationText--danger ValidationText--inline" id="consent-full-example-validation-text">
       You must agree to continue
     </div>
   </div>
@@ -218,10 +218,10 @@ Complete example showing label, details with multiple links, helper text, and va
 ## Disabled State
 
 ```html
-<div class="Checkbox Checkbox--inputPositionStart Checkbox--disabled">
-  <input type="checkbox" id="checkbox-disabled" class="Checkbox__input" name="disabled" disabled />
-  <div class="Checkbox__text">
-    <label class="Label Label--inline" for="checkbox-disabled">Checkbox Label</label>
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="checkbox" id="checkbox-disabled" class="Checkbox" name="disabled" disabled />
+  <div>
+    <label class="Label Label--inline Label--disabled" for="checkbox-disabled">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -229,24 +229,26 @@ Complete example showing label, details with multiple links, helper text, and va
 ## As an Item
 
 ```html
-<div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
-  <input type="checkbox" id="checkbox-item-default" class="Checkbox__input" name="item" />
-  <div class="Checkbox__text">
-    <label class="Label Label--inline" for="checkbox-item-default">Checkbox Label</label>
+<div class="Item">
+  <div class="Item__slot" role="presentation">
+    <input type="checkbox" id="checkbox-item-default" class="Checkbox Checkbox--item" name="item" />
+  </div>
+  <div class="Item__content" role="presentation">
+    <label class="Label Label--item" for="checkbox-item-default">Checkbox Label</label>
   </div>
 </div>
 ```
 
 ## Input Position
 
-The input position can be set to `start` (default) or `end`.
+The input position can be set using [Flex][readme-flex] component with direction.
 
 ### Input on End
 
 ```html
-<div class="Checkbox Checkbox--inputPositionEnd">
-  <input type="checkbox" id="checkbox-position-end" class="Checkbox__input" name="position" />
-  <div class="Checkbox__text">
+<div class="Flex Flex--horizontalReversed Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="checkbox" id="checkbox-position-end" class="Checkbox" name="position" />
+  <div>
     <label class="Label Label--inline" for="checkbox-position-end">Checkbox Label</label>
   </div>
 </div>
@@ -257,14 +259,19 @@ The input position can be set to `start` (default) or `end`.
 Use responsive breakpoint modifiers to change input position at different screen sizes:
 
 ```html
-<div class="Checkbox Checkbox--tablet--inputPositionEnd">
-  <input type="checkbox" id="checkbox-position-responsive" class="Checkbox__input" name="position" />
-  <div class="Checkbox__text">
+<div
+  class="Flex Flex--horizontal Flex--inline Flex--tablet--horizontalReversed Flex--desktop--horizontal my-500"
+  style="--flex-spacing-x: var(--spirit-space-500);"
+>
+  <input type="checkbox" id="checkbox-position-responsive" class="Checkbox" name="position" />
+  <div>
     <label class="Label Label--inline" for="checkbox-position-responsive">Checkbox Label</label>
   </div>
 </div>
 ```
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
-[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Flex/README.md
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [readme-input-details]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputDetails/README.md
+[readme-validation-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ValidationText/README.md

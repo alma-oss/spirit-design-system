@@ -10,6 +10,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Dropped Support for Node.js 20](#dropped-support-for-nodejs-20)
 - [Component Changes](#component-changes)
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
+  - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
   - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
   - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
@@ -76,6 +77,64 @@ Responsive full-width with [`Grid`][readme-grid]:
 <!-- After -->
 <div class="Grid Grid--cols-1 Grid--tablet--cols-2">
   <button type="button" class="Button Button--primary Button--medium">Responsive Button</button>
+</div>
+```
+
+</details>
+
+### Checkbox: Composition Markup Changed
+
+The Checkbox component no longer provides the outer wrapper and text element classes.
+Compose checkbox rows from the `Checkbox`, `Label`, and layout utilities instead.
+
+Vertical spacing is controlled by the layout wrapper. Add margin utilities when the checkbox row owns its own spacing,
+and omit them when the row is already spaced by a parent layout such as `Stack`.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Replace the old Checkbox wrapper markup with a `Flex` row and add the required vertical spacing utility when the row is
+not already spaced by a parent layout:
+
+```html
+<!-- Before -->
+<div class="Checkbox">
+  <input type="checkbox" id="checkbox-default" class="Checkbox__input" />
+  <div class="Checkbox__text">
+    <label for="checkbox-default" class="Checkbox__label">Checkbox Label</label>
+  </div>
+</div>
+
+<!-- After -->
+<div class="Flex Flex--horizontal my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="checkbox" id="checkbox-default" class="Checkbox" />
+  <div>
+    <label for="checkbox-default" class="Label Label--inline">Checkbox Label</label>
+  </div>
+</div>
+```
+
+For item-style checkboxes, use the `Item` composition and the `Checkbox--item` and `Label--item` modifiers:
+
+```html
+<!-- Before -->
+<div class="Checkbox Checkbox--item">
+  <input type="checkbox" id="checkbox-item" class="Checkbox__input" />
+  <div class="Checkbox__text">
+    <label for="checkbox-item" class="Checkbox__label">Checkbox Label</label>
+  </div>
+</div>
+
+<!-- After -->
+<div class="Item">
+  <div class="Item__slot" role="presentation">
+    <input type="checkbox" id="checkbox-item" class="Checkbox Checkbox--item" />
+  </div>
+  <div class="Item__content" role="presentation">
+    <label for="checkbox-item" class="Label Label--item">Checkbox Label</label>
+  </div>
 </div>
 ```
 

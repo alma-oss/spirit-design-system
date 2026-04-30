@@ -150,18 +150,20 @@
                 > .#{$field-name}__input {
                 border-color: map.get($validation-state-value, input-border-color);
             }
+        } @else if $field-name == 'Checkbox' {
+            :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name}) {
+                border-color: map.get($validation-state-value, input-border-color);
+
+                &:indeterminate,
+                &:checked {
+                    background-color: map.get($validation-state-value, input-border-color);
+                }
+            }
         } @else {
             :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
                 > .#{$field-name}__input {
                 @if $field-name != 'Toggle' {
                     border-color: map.get($validation-state-value, input-border-color);
-                }
-
-                @if $field-name == 'Checkbox' {
-                    &:indeterminate,
-                    &:checked {
-                        background-color: map.get($validation-state-value, input-border-color);
-                    }
                 }
 
                 @if $field-name == 'Radio' {
