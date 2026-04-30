@@ -137,16 +137,10 @@ export const SliderPlayground: Story = {
   name: 'Slider',
   render: (args) => (
     <div
-      className="bg-cover d-flex"
+      className="d-grid"
       style={{
-        width: '40rem',
+        width: '20rem',
         maxWidth: '100%',
-        height: '10rem',
-        overflow: 'auto',
-        padding: '1.5rem',
-        flexWrap: 'nowrap',
-        justifyContent: 'center',
-        alignItems: 'center',
       }}
     >
       <SliderWithHooks {...args} />

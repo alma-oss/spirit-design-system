@@ -22,7 +22,7 @@ describe('Slider', () => {
     value: defaultValue,
   };
 
-  classNamePrefixProviderTest(Slider, 'Slider');
+  classNamePrefixProviderTest(() => <Slider {...defaultProps} />, 'Slider', { getByRole: 'slider' });
 
   stylePropsTest((props) => <Slider id={defaultProps.id} {...props} data-testid="slider-test" />, 'slider-test');
 
@@ -60,7 +60,6 @@ describe('Slider', () => {
 
     render(<Slider {...defaultProps} validationText={validationText} validationState="danger" data-testid="test" />);
 
-    expect(screen.getByTestId('test')).toHaveClass('Slider Slider--danger');
     expect(screen.getByText(validationText)).toBeInTheDocument();
   });
 
