@@ -1,11 +1,23 @@
 'use client';
 
 import React from 'react';
+import { useContextProps } from '../../context';
+import { type FormFieldContextValue } from '../../types';
+import { mergeStyleProps } from '../../utils';
 import { VisuallyHidden } from '../VisuallyHidden';
-import { type CharacterCounterProps } from './types';
+import { type SpiritCharacterCounterProps } from './types';
 import { useCharacterCounter } from './useCharacterCounterState';
+import { useCharacterCounterStyleProps } from './useCharacterCounterStyleProps';
 
-const CharacterCounter = (props: CharacterCounterProps) => {
+const CharacterCounter = (props: SpiritCharacterCounterProps) => {
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
+  const propsWithDefaults = {
+    isDisabled: contextProps.isDisabled,
+    validationState: contextProps.validationState,
+    formFieldVariant: contextProps.formFieldVariant,
+    ...props,
+  };
+  const { classProps, props: restProps } = useCharacterCounterStyleProps(propsWithDefaults);
   const {
     debouncedScreenReaderMessage,
     isVisible,
@@ -13,11 +25,12 @@ const CharacterCounter = (props: CharacterCounterProps) => {
     styleProps,
     transferProps,
     visibleCounterText,
-  } = useCharacterCounter(props);
+  } = useCharacterCounter(restProps);
+  const mergedStyleProps = mergeStyleProps('div', { classProps, styleProps, transferProps });
 
   return isVisible ? (
     <>
-      <div {...transferProps} {...styleProps} aria-hidden="true">
+      <div {...transferProps} {...mergedStyleProps} aria-hidden="true">
         {visibleCounterText}
       </div>
       <VisuallyHidden id={screenReaderMessageId} aria-live="polite" aria-atomic="true">

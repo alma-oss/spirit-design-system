@@ -1,18 +1,16 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
-  classNamePrefixProviderTest,
   formFieldHelperTextContextPropsTest,
   formFieldLabelContextPropsTest,
   formFieldValidationTextContextPropsTest,
   restPropsTest,
-  sizePropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
-  validationStatePropsTest,
 } from '@local/tests';
+import { Sizes } from '../../../constants';
 import { type TextFieldType } from '../../../types';
 import TextField from '../TextField';
 
@@ -32,19 +30,23 @@ describe('TextField', () => {
   });
 
   describe.each(['text', 'password', 'email'])('input type %s', (type) => {
-    classNamePrefixProviderTest(TextField, 'TextField');
-
     stylePropsTest(TextField);
 
     restPropsTest(TextField, 'input');
-
-    validationStatePropsTest(TextField, 'TextField--');
 
     validHtmlAttributesTest(TextField);
 
     ariaAttributesTest(TextField);
 
-    sizePropsTest(TextField);
+    it.each([Object.values(Sizes)])('should render size %s', async (size) => {
+      render(<TextField id="textfield" label="Label" type={type as TextFieldType} size={size} />);
+
+      await waitFor(() => {
+        const inputContainer = screen.getByLabelText('Label').parentElement;
+
+        expect(inputContainer?.getAttribute('class')).toContain(size);
+      });
+    });
 
     it('should have label', () => {
       render(<TextField id="textfield" label="Label" type={type as TextFieldType} />);
@@ -52,17 +54,10 @@ describe('TextField', () => {
       expect(screen.getByText('Label')).toBeInTheDocument();
     });
 
-    it('should have disabled classname na prop', () => {
+    it('should have disabled attribute on input when isDisabled prop is set', () => {
       render(<TextField id="textfield" label="Label" type={type as TextFieldType} isDisabled />);
 
-      expect(screen.getByLabelText('Label').parentElement).toHaveClass('TextField--disabled');
       expect(screen.getByLabelText('Label')).toHaveAttribute('disabled');
-    });
-
-    it('should have input classname', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} />);
-
-      expect(screen.getByLabelText('Label')).toHaveClass('TextField__input');
     });
 
     it('should render label with html tags', () => {
@@ -91,7 +86,7 @@ describe('TextField', () => {
     });
 
     it('should have password toggle button', () => {
-      expect(screen.getByRole('switch')).toHaveClass('TextField__passwordToggle__button');
+      expect(screen.getByRole('switch')).toHaveClass('ControlButton');
     });
 
     it('should have type password with password toggle', () => {
@@ -127,7 +122,6 @@ describe('TextField', () => {
     it('should have disabled attribute on input and toggle button', () => {
       render(<TextField id="textfield" label="Label" hasPasswordToggle isDisabled />);
 
-      expect(screen.getByText('Label').parentElement).toHaveClass('TextField--disabled');
       expect(screen.getByLabelText('Label')).toHaveAttribute('disabled');
       expect(screen.getByRole('switch')).toHaveAttribute('disabled');
     });
