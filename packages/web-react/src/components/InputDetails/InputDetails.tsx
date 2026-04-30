@@ -1,24 +1,38 @@
 'use client';
 
 import React, { type ElementType, useEffect } from 'react';
+import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type InputDetailsProps } from '../../types';
+import { type FormFieldContextValue, type InputDetailsProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useInputDetailsStyleProps } from './useInputDetailsStyleProps';
 
 const defaultProps: Partial<InputDetailsProps> = {
   elementType: 'div',
   id: undefined,
+  isDisabled: false,
   registerAriaDetails: undefined,
 };
 
 const InputDetails = <E extends ElementType = 'div'>(props: InputDetailsProps<E>) => {
-  const propsWithDefaults = { ...defaultProps, ...props };
-  const { classProps, props: modifiedProps } = useInputDetailsStyleProps(propsWithDefaults);
-  const { children, elementType, id, registerAriaDetails, ...restProps } = modifiedProps;
-  const { styleProps, props: otherProps } = useStyleProps(restProps);
-  const Component = (elementType || defaultProps.elementType) as ElementType;
-  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
+  const propsWithDefaults = {
+    ...defaultProps,
+    isDisabled: contextProps.isDisabled,
+    ...props,
+  };
+  const {
+    children,
+    elementType: ElementTag = defaultProps.elementType as ElementType,
+    id,
+    isDisabled,
+    registerAriaDetails,
+    ...restProps
+  } = propsWithDefaults;
+
+  const { classProps } = useInputDetailsStyleProps({ isDisabled });
+  const { styleProps, props: transferProps } = useStyleProps(restProps);
+  const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, transferProps });
 
   useEffect(() => {
     if (id) {
@@ -33,9 +47,9 @@ const InputDetails = <E extends ElementType = 'div'>(props: InputDetailsProps<E>
   }, [id, registerAriaDetails]);
 
   return (
-    <Component {...otherProps} {...mergedStyleProps} id={id}>
+    <ElementTag {...transferProps} {...mergedStyleProps} id={id}>
       {children}
-    </Component>
+    </ElementTag>
   );
 };
 

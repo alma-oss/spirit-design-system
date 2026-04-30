@@ -8,6 +8,8 @@ export interface InputDetailsProps<T extends ElementType = 'div'> extends Childr
   elementType?: T;
   /** ID of the details element */
   id?: string;
+  /** Whether the input details are disabled */
+  isDisabled?: boolean;
   /** Callback to register aria-details ID */
   registerAriaDetails?: RegisterDetailsType;
 }

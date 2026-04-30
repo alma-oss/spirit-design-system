@@ -1,19 +1,22 @@
-import type { ElementType } from 'react';
+import classNames from 'classnames';
 import { useClassNamePrefix } from '../../hooks';
-import { type InputDetailsProps } from '../../types';
 
-export interface InputDetailsStyles<T> {
-  classProps: string;
-  props: T;
+export interface InputDetailsStyleProps {
+  isDisabled?: boolean;
 }
 
-export function useInputDetailsStyleProps<E extends ElementType = 'div'>(
-  props: InputDetailsProps<E>,
-): InputDetailsStyles<InputDetailsProps<E>> {
+export interface InputDetailsStyles {
+  classProps: string;
+}
+
+export function useInputDetailsStyleProps(props: InputDetailsStyleProps): InputDetailsStyles {
+  const { isDisabled } = props;
   const inputDetailsClass = useClassNamePrefix('InputDetails');
+  const inputDetailsClassDisabled = `${inputDetailsClass}--disabled`;
 
   return {
-    classProps: inputDetailsClass,
-    props,
+    classProps: classNames(inputDetailsClass, {
+      [inputDetailsClassDisabled]: isDisabled,
+    }),
   };
 }
