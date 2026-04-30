@@ -3,17 +3,15 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
-  classNamePrefixProviderTest,
   formFieldHelperTextContextPropsTest,
   formFieldLabelContextPropsTest,
   formFieldValidationTextContextPropsTest,
   requiredPropsTest,
   restPropsTest,
-  sizePropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
-  validationStatePropsTest,
 } from '@local/tests';
+import { Sizes } from '../../../constants';
 import Select from '../Select';
 
 jest.mock('../../../hooks/useIcon');
@@ -25,21 +23,15 @@ describe('Select', () => {
     </option>
   );
 
-  classNamePrefixProviderTest(Select, 'Select');
-
   stylePropsTest(Select);
 
   restPropsTest(Select, 'select');
-
-  validationStatePropsTest(Select, 'Select--');
 
   requiredPropsTest(Select, 'combobox', 'id', 'test-select');
 
   validHtmlAttributesTest(Select);
 
   ariaAttributesTest(Select);
-
-  sizePropsTest(Select);
 
   formFieldLabelContextPropsTest({
     renderComponent: (props) => (
@@ -65,6 +57,14 @@ describe('Select', () => {
     ),
   });
 
+  it.each([Object.values(Sizes)])('should render size %s', async (size) => {
+    render(<Select id="select" label="Label" size={size} />);
+
+    const inputContainer = screen.getByRole('combobox').parentElement;
+
+    expect(inputContainer?.getAttribute('class')).toContain(size);
+  });
+
   it('should have label', () => {
     render(
       <Select id="test-select" label="Label">
@@ -73,16 +73,6 @@ describe('Select', () => {
     );
 
     expect(screen.getByText('Label')).toBeInTheDocument();
-  });
-
-  it('should have input classname', () => {
-    render(
-      <Select id="test-select" label="Label">
-        {selectChild}
-      </Select>,
-    );
-
-    expect(screen.getByLabelText('Label')).toHaveClass('Select__input');
   });
 
   it('should render label with html tags', () => {

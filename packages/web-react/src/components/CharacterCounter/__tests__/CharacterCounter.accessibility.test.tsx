@@ -56,7 +56,7 @@ describe('CharacterCounter accessibility', () => {
     it('renders screen reader message element with polite live-region attributes', () => {
       render(<CharacterCounter {...defaultProps} counterThreshold={200} />);
 
-      const screenReaderMessage = document.getElementById('counter-a11y__counterScreenReaderMessage');
+      const screenReaderMessage = document.getElementById('counter-a11y-counter-screen-reader-message');
 
       expect(screenReaderMessage).toBeInTheDocument();
       expect(screenReaderMessage).toHaveAttribute('aria-live', 'polite');
@@ -66,7 +66,7 @@ describe('CharacterCounter accessibility', () => {
     it('registers screen reader message id for aria-describedby', () => {
       render(<CharacterCounter {...defaultProps} counterThreshold={200} />);
 
-      expect(defaultProps.registerAria).toHaveBeenCalledWith({ add: 'counter-a11y__counterScreenReaderMessage' });
+      expect(defaultProps.registerAria).toHaveBeenCalledWith({ add: 'counter-a11y-counter-screen-reader-message' });
     });
 
     it('unregisters screen reader message id on unmount', () => {
@@ -74,7 +74,7 @@ describe('CharacterCounter accessibility', () => {
 
       unmount();
 
-      expect(defaultProps.registerAria).toHaveBeenCalledWith({ remove: 'counter-a11y__counterScreenReaderMessage' });
+      expect(defaultProps.registerAria).toHaveBeenCalledWith({ remove: 'counter-a11y-counter-screen-reader-message' });
     });
 
     it('does not register aria ids when counter is not visible', () => {
