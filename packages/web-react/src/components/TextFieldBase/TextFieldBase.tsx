@@ -1,53 +1,53 @@
 'use client';
 
-import classNames from 'classnames';
-import React, { type ForwardedRef, forwardRef } from 'react';
+import React, { type ElementType, type ForwardedRef, type RefObject, forwardRef } from 'react';
 import { Sizes } from '../../constants';
 import { PropsProvider } from '../../context';
-import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import {
-  type ForwardRefComponent,
-  type SpiritTextFieldBaseProps,
-  type TextFieldBasePasswordToggleProps,
-} from '../../types';
+import { useAriaDescribedBy, useI18n, useStyleProps } from '../../hooks';
+import { type ForwardRefComponent, type SpiritTextFieldBaseProps } from '../../types';
+import { mergeStyleProps } from '../../utils';
 import { CharacterCounter } from '../CharacterCounter';
+import { ControlButton } from '../ControlButton';
 import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
+import { Icon } from '../Icon';
+import { InputAddon } from '../InputAddon';
+import { InputContainer } from '../InputContainer';
 import { Label } from '../Label';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
-import TextFieldBaseInput from './TextFieldBaseInput';
-import { useTextFieldBaseStyleProps } from './useTextFieldBaseStyleProps';
-import withPasswordToggle from './withPasswordToggle';
-
-const TextFieldBaseInputWithPasswordToggle = forwardRef(
-  withPasswordToggle<TextFieldBasePasswordToggleProps>(TextFieldBaseInput),
-);
+import { usePasswordToggle } from './usePasswordToggle';
 
 const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>) => {
   const {
     'aria-describedby': ariaDescribedBy = '',
     counterProps,
+    hasPasswordToggle,
     hasValidationIcon,
     helperText,
     id,
+    inputWidth,
     isDisabled,
     isLabelHidden,
+    isMultiline,
     isRequired,
     label,
     size = Sizes.MEDIUM,
+    type,
     validationState,
     validationText,
     ...restProps
   } = props;
-  const { classProps, props: modifiedProps } = useTextFieldBaseStyleProps({
-    id,
-    isDisabled,
-    isRequired,
-    size,
-    validationState,
-    ...restProps,
-  });
-  const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
+  const { t } = useI18n();
+  const { isPasswordShown, passwordToggle } = usePasswordToggle();
+  const hasPasswordToggleAddon = Boolean(hasPasswordToggle && !isMultiline);
+  let inputType = type;
+
+  if (hasPasswordToggleAddon) {
+    inputType = isPasswordShown ? 'text' : 'password';
+  }
+
+  const { styleProps, props: inputProps } = useStyleProps(restProps);
+  const mergedStyleProps = mergeStyleProps('div', { styleProps });
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
   const validationTextRole = useValidationTextRole({
     validationState,
@@ -55,6 +55,8 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
   });
 
   const hasTextContent = helperText || (validationState && validationText);
+  const Component: ElementType = isMultiline ? 'textarea' : 'input';
+  const nativeInputType = isMultiline ? undefined : inputType;
 
   const helperTextElement = <HelperText id={`${id}__helper-text`} registerAria={register} helperText={helperText} />;
 
@@ -69,8 +71,25 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
     />
   ) : null;
 
-  const counterElement = counterProps ? (
-    <CharacterCounter {...counterProps} id={id} registerAria={register} UNSAFE_className={classProps.counter} />
+  const counterElement = counterProps ? <CharacterCounter {...counterProps} id={id} registerAria={register} /> : null;
+
+  const passwordToggleElement = hasPasswordToggleAddon ? (
+    <InputAddon>
+      <ControlButton
+        aria-checked={isPasswordShown}
+        aria-label={isPasswordShown ? t('textField.password.hide') : t('textField.password.show')}
+        data-spirit-toggle="password"
+        isDisabled={isDisabled}
+        isSubtle
+        isSymmetrical
+        role="switch"
+        size={size}
+        onClick={passwordToggle}
+        {...(isDisabled && { UNSAFE_className: 'color-scheme-on-disabled' })}
+      >
+        <Icon name={`visibility-${isPasswordShown ? 'off' : 'on'}`} boxSize={size === Sizes.SMALL ? 16 : 20} />
+      </ControlButton>
+    </InputAddon>
   ) : null;
 
   return (
@@ -79,12 +98,25 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
         isDisabled,
         isLabelHidden,
         isRequired,
+        size,
         validationState,
       }}
     >
-      <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
+      <div {...mergedStyleProps}>
         <Label htmlFor={id}>{label}</Label>
-        <TextFieldBaseInputWithPasswordToggle {...otherProps} {...ariaDescribedByProp} id={id} ref={ref} size={size} />
+        <InputContainer>
+          <Component
+            {...inputProps}
+            {...ariaDescribedByProp}
+            disabled={isDisabled}
+            id={id}
+            required={isRequired}
+            size={inputWidth}
+            type={nativeInputType}
+            ref={ref as RefObject<HTMLInputElement & HTMLTextAreaElement>}
+          />
+          {passwordToggleElement}
+        </InputContainer>
         {counterProps ? (
           <Flex direction="horizontal" isWrapping={false} alignmentX="space-between" alignmentY="top">
             {hasTextContent ? (
