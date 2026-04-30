@@ -90,7 +90,12 @@ const PickerSalary = () => {
           id="salary-textfield"
           label="Salary"
           isLabelHidden
+          name="salary_value"
           type="number"
+          min={SALARY_FROM_MIN}
+          max={SALARY_FROM_MAX}
+          step={SALARY_SLIDER_STEP}
+          placeholder="0"
           value={String(fromAmount)}
           onChange={(e) => updateSalaryFromValue(e.currentTarget.value)}
         />
