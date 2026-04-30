@@ -55,7 +55,7 @@ describe('UNSTABLE_PickerGroup', () => {
     const group = screen.getByRole('group', { name: 'Languages' });
 
     expect(group.localName).toBe('fieldset');
-    expect(group).toHaveClass('FieldGroup');
+    expect(group).toHaveClass('border-0');
     expect(screen.getByText('child')).toBeInTheDocument();
   });
 
