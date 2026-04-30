@@ -1,0 +1,55 @@
+// 1. Sized to comfortably fit the default placeholder copy ("+ Add more…", ~11 characters).
+
+@use '../../tools/form-fields' as form-fields-tools;
+@use '@tokens' as tokens;
+@use 'theme';
+
+$_field-name: 'Combobox';
+
+.UNSTABLE_Combobox {
+    --#{tokens.$css-variable-prefix}combobox-input-min-width: #{theme.$input-min-width};
+
+    @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
+}
+
+.UNSTABLE_Combobox__input {
+    flex: 0 0 var(--#{tokens.$css-variable-prefix}combobox-input-min-width); // 1.
+    min-width: var(--#{tokens.$css-variable-prefix}combobox-input-min-width); // 1.
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    border: 0;
+    background: transparent;
+    outline: 0;
+
+    &::placeholder {
+        color: var(--#{tokens.$css-variable-prefix}input-container-input-placeholder-color);
+        opacity: 1;
+    }
+}
+
+:is(.UNSTABLE_Combobox--disabled, .UNSTABLE_Combobox.is-disabled) .UNSTABLE_Combobox__input {
+    cursor: theme.$placeholder-cursor-state-disabled;
+
+    &::placeholder {
+        color: theme.$placeholder-color-state-disabled;
+    }
+}
+
+.UNSTABLE_Combobox__emptyState,
+.UNSTABLE_Combobox__loading {
+    padding: theme.$empty-state-padding;
+    color: theme.$empty-state-color;
+    user-select: none;
+    pointer-events: none;
+}
+
+.UNSTABLE_Combobox__loading {
+    display: flex;
+    gap: theme.$option-cell-gap;
+    align-items: center;
+
+    &[hidden] {
+        display: none;
+    }
+}
