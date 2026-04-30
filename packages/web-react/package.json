@@ -407,6 +407,22 @@
       "require": "./dist/components/IconBox/index.cjs",
       "default": "./dist/components/IconBox/index.js"
     },
+    "./components/InputAddon": {
+      "types": "./dist/components/InputAddon/index.d.ts",
+      "development": "./src/components/InputAddon/index.ts",
+      "production": "./dist/components/InputAddon/index.js",
+      "import": "./dist/components/InputAddon/index.js",
+      "require": "./dist/components/InputAddon/index.cjs",
+      "default": "./dist/components/InputAddon/index.js"
+    },
+    "./components/InputContainer": {
+      "types": "./dist/components/InputContainer/index.d.ts",
+      "development": "./src/components/InputContainer/index.ts",
+      "production": "./dist/components/InputContainer/index.js",
+      "import": "./dist/components/InputContainer/index.js",
+      "require": "./dist/components/InputContainer/index.cjs",
+      "default": "./dist/components/InputContainer/index.js"
+    },
     "./components/InputDetails": {
       "types": "./dist/components/InputDetails/index.d.ts",
       "development": "./src/components/InputDetails/index.ts",
