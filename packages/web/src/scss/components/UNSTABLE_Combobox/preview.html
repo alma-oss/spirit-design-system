@@ -1,0 +1,2209 @@
+<script type="module">
+  import { initComboboxes } from './combobox-demo.mjs';
+
+  initComboboxes();
+</script>
+
+<!-- Autocomplete: help for AT users -->
+<span
+  id="autocomplete-tag-description"
+  data-spirit-combobox-tag-description
+  hidden
+>Press Delete or Backspace to remove</span>
+
+<!-- Autocomplete: tag template -->
+<template id="autocomplete-tag-template">
+  <div
+    role="row"
+    data-spirit-combobox-tag-row
+    tabindex="0"
+    class="Tag Tag--selected bg-selected-basic text-selected-subtle Tag--small spirit-feature-enable-v5-tag-appearance"
+  >
+    <div
+      role="gridcell"
+      aria-colindex="1"
+      class="d-contents"
+    >
+      <span data-spirit-combobox-tag-label></span>
+      <button
+        type="button"
+        data-spirit-combobox-tag-close
+        class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target spirit-feature-enable-v5-control-button-expanded-size-scale"
+      >
+        <svg
+          class="Icon"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        >
+          <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</template>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Default</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+        <div class="Dropdown">
+
+          <label
+            class="Label"
+            id="ac-default-label"
+            for="ac-default-input"
+          >Languages</label>
+
+          <div
+            class="InputContainer InputContainer--medium"
+            role="group"
+            aria-label="Languages"
+          >
+
+            <div
+              class="UNSTABLE_ComboboxSelection"
+              role="grid"
+              id="ac-default-selection"
+              aria-label="Selected Languages"
+              aria-live="off"
+              aria-atomic="false"
+              aria-relevant="additions"
+              data-spirit-combobox-selection
+            >
+              <input
+                type="text"
+                id="ac-default-input"
+                role="combobox"
+                aria-haspopup="grid"
+                aria-expanded="false"
+                aria-controls="ac-default-listbox"
+                aria-labelledby="ac-default-label"
+                aria-autocomplete="list"
+                autocomplete="off"
+                placeholder="Languages"
+                class="UNSTABLE_Combobox__input"
+                data-spirit-combobox-input
+              />
+            </div>
+
+          </div>
+
+          <div
+            class="DropdownPopover placement-bottom-start"
+            role="grid"
+            id="ac-default-listbox"
+            aria-labelledby="ac-default-label"
+            aria-multiselectable="true"
+            data-spirit-combobox-listbox
+          >
+            <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+              <div
+                role="row"
+                id="ac-default-cs"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Czech</div>
+              </div>
+              <div
+                role="row"
+                id="ac-default-da"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Danish</div>
+              </div>
+              <div
+                role="row"
+                id="ac-default-en"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">English</div>
+              </div>
+              <div
+                role="row"
+                id="ac-default-fi"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Finnish</div>
+              </div>
+              <div
+                role="row"
+                id="ac-default-kl"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Greenlandic</div>
+              </div>
+              <div
+                role="row"
+                id="ac-default-sk"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Slovak</div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Pre-selected</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+        <div class="Dropdown">
+
+          <label
+            class="Label"
+            id="ac-pre-label"
+            for="ac-pre-input"
+          >Languages</label>
+
+          <div
+            class="InputContainer InputContainer--medium"
+            role="group"
+            aria-label="Languages"
+          >
+
+            <div
+              class="UNSTABLE_ComboboxSelection"
+              role="grid"
+              id="ac-pre-selection"
+              aria-label="Selected Languages"
+              aria-live="off"
+              aria-atomic="false"
+              aria-relevant="additions"
+              data-spirit-combobox-selection
+            >
+              <input
+                type="text"
+                id="ac-pre-input"
+                role="combobox"
+                aria-haspopup="grid"
+                aria-expanded="false"
+                aria-controls="ac-pre-listbox"
+                aria-labelledby="ac-pre-label"
+                aria-autocomplete="list"
+                autocomplete="off"
+                placeholder="Languages"
+                class="UNSTABLE_Combobox__input"
+                data-spirit-combobox-input
+              />
+            </div>
+
+          </div>
+
+          <div
+            class="DropdownPopover placement-bottom-start"
+            role="grid"
+            id="ac-pre-listbox"
+            aria-labelledby="ac-pre-label"
+            aria-multiselectable="true"
+            data-spirit-combobox-listbox
+          >
+            <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+              <div
+                role="row"
+                id="ac-pre-cs"
+                aria-selected="true"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Czech</div>
+              </div>
+              <div
+                role="row"
+                id="ac-pre-da"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Danish</div>
+              </div>
+              <div
+                role="row"
+                id="ac-pre-en"
+                aria-selected="true"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">English</div>
+              </div>
+              <div
+                role="row"
+                id="ac-pre-fi"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Finnish</div>
+              </div>
+              <div
+                role="row"
+                id="ac-pre-sk"
+                aria-selected="true"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Slovak</div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Groups</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+        <div class="Dropdown">
+
+          <label
+            class="Label"
+            id="ac-groups-label"
+            for="ac-groups-input"
+          >Location</label>
+
+          <div
+            class="InputContainer InputContainer--medium"
+            role="group"
+            aria-label="Location"
+          >
+
+            <div
+              class="UNSTABLE_ComboboxSelection"
+              role="grid"
+              id="ac-groups-selection"
+              aria-label="Selected Location"
+              aria-live="off"
+              aria-atomic="false"
+              aria-relevant="additions"
+              data-spirit-combobox-selection
+            >
+              <input
+                type="text"
+                id="ac-groups-input"
+                role="combobox"
+                aria-haspopup="grid"
+                aria-expanded="false"
+                aria-controls="ac-groups-listbox"
+                aria-labelledby="ac-groups-label"
+                aria-autocomplete="list"
+                autocomplete="off"
+                placeholder="Location"
+                class="UNSTABLE_Combobox__input"
+                data-spirit-combobox-input
+              />
+            </div>
+
+          </div>
+
+          <div
+            class="DropdownPopover placement-bottom-start"
+            role="grid"
+            id="ac-groups-listbox"
+            aria-labelledby="ac-groups-label"
+            aria-multiselectable="true"
+            data-spirit-combobox-listbox
+          >
+            <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+              <div
+                role="rowgroup"
+                aria-labelledby="ac-groups-bohemia-label"
+                data-spirit-combobox-group
+              >
+                <div
+                  id="ac-groups-bohemia-label"
+                  class="UNSTABLE_ComboboxGroup__label"
+                  aria-hidden="true"
+                >Bohemia</div>
+                <div
+                  role="row"
+                  id="ac-groups-prague"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Prague</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-groups-plzen"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Plzeň</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-groups-cb"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">České Budějovice</div>
+                </div>
+              </div>
+              <div
+                role="rowgroup"
+                aria-labelledby="ac-groups-moravia-label"
+                data-spirit-combobox-group
+              >
+                <div
+                  id="ac-groups-moravia-label"
+                  class="UNSTABLE_ComboboxGroup__label"
+                  aria-hidden="true"
+                >Moravia</div>
+                <div
+                  role="row"
+                  id="ac-groups-brno"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Brno</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-groups-olomouc"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Olomouc</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-groups-zlin"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Zlín</div>
+                </div>
+              </div>
+              <div
+                role="rowgroup"
+                aria-labelledby="ac-groups-silesia-label"
+                data-spirit-combobox-group
+              >
+                <div
+                  id="ac-groups-silesia-label"
+                  class="UNSTABLE_ComboboxGroup__label"
+                  aria-hidden="true"
+                >Silesia</div>
+                <div
+                  role="row"
+                  id="ac-groups-ostrava"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Ostrava</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-groups-opava"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Opava</div>
+                </div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Static text and dismissible options</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+        <div class="Dropdown">
+
+          <label
+            class="Label"
+            id="ac-rich-label"
+            for="ac-rich-input"
+          >Job positions</label>
+
+          <div
+            class="InputContainer InputContainer--medium"
+            role="group"
+            aria-label="Job positions"
+          >
+            <div
+              class="UNSTABLE_ComboboxSelection"
+              role="grid"
+              id="ac-rich-selection"
+              aria-label="Selected Job positions"
+              aria-live="off"
+              aria-atomic="false"
+              aria-relevant="additions"
+              data-spirit-combobox-selection
+            >
+              <input
+                type="text"
+                id="ac-rich-input"
+                role="combobox"
+                aria-haspopup="grid"
+                aria-expanded="false"
+                aria-controls="ac-rich-listbox"
+                aria-labelledby="ac-rich-label"
+                aria-autocomplete="list"
+                autocomplete="off"
+                placeholder="Job positions"
+                class="UNSTABLE_Combobox__input"
+                data-spirit-combobox-input
+              />
+            </div>
+
+          </div>
+
+          <div
+            class="DropdownPopover placement-bottom-start"
+            role="grid"
+            id="ac-rich-listbox"
+            aria-labelledby="ac-rich-label"
+            aria-multiselectable="true"
+            data-spirit-combobox-listbox
+          >
+            <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+              {{!-- Static text — not selectable, no role="option", skipped by keyboard nav --}}
+              <div class="UNSTABLE_ComboboxOption__static" aria-hidden="true">Recent searches</div>
+
+              {{!-- Dismissible options — click × to remove from the list, Delete/Backspace when active --}}
+              <div
+                role="row"
+                id="ac-rich-dismiss-1"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption UNSTABLE_ComboboxOption--dismissible"
+              >
+                <div role="gridcell">Frontend developer</div>
+                <div role="gridcell">
+                  <button
+                    type="button"
+                    class="ControlButton ControlButton--small ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target spirit-feature-enable-v5-control-button-expanded-size-scale"
+                    aria-label="Remove Frontend developer from suggestions"
+                    data-spirit-combobox-option-dismiss
+                  >
+                    <svg
+                      class="Icon"
+                      width="16"
+                      height="16"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                role="row"
+                id="ac-rich-dismiss-2"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption UNSTABLE_ComboboxOption--dismissible"
+              >
+                <div role="gridcell">Backend developer</div>
+                <div role="gridcell">
+                  <button
+                    type="button"
+                    class="ControlButton ControlButton--small ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target spirit-feature-enable-v5-control-button-expanded-size-scale"
+                    aria-label="Remove Backend developer from suggestions"
+                    data-spirit-combobox-option-dismiss
+                  >
+                    <svg
+                      class="Icon"
+                      width="16"
+                      height="16"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              {{!-- Static separator --}}
+              <div class="UNSTABLE_ComboboxOption__static" aria-hidden="true">All positions</div>
+
+              {{!-- Regular selectable options --}}
+              <div
+                role="row"
+                id="ac-rich-ux"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">UX Designer</div>
+              </div>
+              <div
+                role="row"
+                id="ac-rich-pm"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Product Manager</div>
+              </div>
+              <div
+                role="row"
+                id="ac-rich-qa"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">QA Engineer</div>
+              </div>
+              <div
+                role="row"
+                id="ac-rich-devops"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">DevOps Engineer</div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Options with icon</h2>
+
+    <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+      <div class="Grid Grid--cols-1 Grid--desktop--cols-2">
+
+        {{!-- Selectable options with leading icon --}}
+        <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+          <div class="Dropdown">
+
+            <label
+              class="Label"
+              id="ac-icon-sel-label"
+              for="ac-icon-sel-input"
+            >Job Positions</label>
+
+            <div
+              class="InputContainer InputContainer--medium"
+              role="group"
+              aria-label="Job positions"
+            >
+              <div
+                class="UNSTABLE_ComboboxSelection"
+                role="grid"
+                id="ac-icon-sel-selection"
+                aria-label="Selected Job position"
+                aria-live="off"
+                aria-atomic="false"
+                aria-relevant="additions"
+                data-spirit-combobox-selection
+              >
+                <input
+                  type="text"
+                  id="ac-icon-sel-input"
+                  role="combobox"
+                  aria-haspopup="grid"
+                  aria-expanded="false"
+                  aria-controls="ac-icon-sel-listbox"
+                  aria-labelledby="ac-icon-sel-label"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  placeholder="Job positions"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="grid"
+              id="ac-icon-sel-listbox"
+              aria-labelledby="ac-icon-sel-label"
+              aria-multiselectable="true"
+              data-spirit-combobox-listbox
+            >
+              <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+                <div
+                  role="row"
+                  id="ac-icon-sel-1"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell" class="UNSTABLE_ComboboxOption__cell">
+                    <svg
+                      class="Icon"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                    </svg>
+                    <div class="UNSTABLE_ComboboxOption__label">
+                      <div>Team Lead</div>
+                      <div class="typography-body-small-regular text-secondary">Posledních 24 hod., Plný úvazek, od 200 000 Kč, možnost práce z domova, +3 další</div>
+                      <div class="typography-body-small-regular text-emotion-success-basic">2 nové nabídky</div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-icon-sel-2"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell" class="UNSTABLE_ComboboxOption__cell">
+                    <svg
+                      class="Icon"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+                    </svg>
+                    <div class="UNSTABLE_ComboboxOption__label">
+                      <div>Developer</div>
+                      <div class="typography-body-small-regular text-secondary">Posledních 24 hod., Plný úvazek, od 200 000 Kč, možnost práce z domova, +3 další</div>
+                      <div class="typography-body-small-regular text-emotion-success-basic">2 nové nabídky</div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-icon-sel-3"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell" class="UNSTABLE_ComboboxOption__cell">
+                    <svg
+                      class="Icon"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                    </svg>
+                    <div class="UNSTABLE_ComboboxOption__label">
+                      <div>Designer</div>
+                      <div class="typography-body-small-regular text-secondary">Posledních 24 hod., Plný úvazek, od 200 000 Kč, možnost práce z domova, +3 další</div>
+                      <div class="typography-body-small-regular text-emotion-success-basic">2 nové nabídky</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {{!-- Dismissible options with leading icon --}}
+        <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+          <div class="Dropdown">
+
+            <label
+              class="Label"
+              id="ac-icon-dis-label"
+              for="ac-icon-dis-input"
+            >Job Positions (with dismissible options)</label>
+
+            <div
+              class="InputContainer InputContainer--medium"
+              role="group"
+              aria-label="Job positions (with dismissible options)"
+            >
+              <div
+                class="UNSTABLE_ComboboxSelection"
+                role="grid"
+                id="ac-icon-dis-selection"
+                aria-label="Selected Job position"
+                aria-live="off"
+                aria-atomic="false"
+                aria-relevant="additions"
+                data-spirit-combobox-selection
+              >
+                <input
+                  type="text"
+                  id="ac-icon-dis-input"
+                  role="combobox"
+                  aria-haspopup="grid"
+                  aria-expanded="false"
+                  aria-controls="ac-icon-dis-listbox"
+                  aria-labelledby="ac-icon-dis-label"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  placeholder="Job positions"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="grid"
+              id="ac-icon-dis-listbox"
+              aria-labelledby="ac-icon-dis-label"
+              aria-multiselectable="true"
+              data-spirit-combobox-listbox
+            >
+              {{!-- Tip box: appears once all dismissible options have been removed --}}
+              <div
+                class="Flex Flex--alignmentXStretch Flex--alignmentYCenter Flex--horizontal color-scheme-on-emotion-informative-subtle px-600 py-500 rounded-200"
+                aria-live="polite"
+                data-spirit-combobox-tip
+                data-spirit-combobox-tip-empty
+                hidden
+              >
+                <svg
+                  class="Icon"
+                  width="32"
+                  height="32"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                </svg>
+                <p class="mb-0"><strong>TIP</strong>: Enter the field, profession, company, or term you're looking for.</p>
+              </div>
+
+              <div class="UNSTABLE_Combobox__optionList">
+                <div
+                  role="row"
+                  id="ac-icon-dis-1"
+                  class="UNSTABLE_ComboboxOption UNSTABLE_ComboboxOption--dismissible"
+                  data-spirit-combobox-link-row
+                >
+                  <div role="gridcell" class="UNSTABLE_ComboboxOption__cell">
+                    <a
+                      href="#"
+                      tabindex="-1"
+                      class="Flex Flex--horizontal Flex--wrap Flex--alignmentXStretch Flex--alignmentYStretch link-stretched"
+                      style="--flex-spacing-x: var(--spirit-space-500);"
+                    >
+                      <svg
+                        class="Icon"
+                        width="20"
+                        height="20"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                      </svg>
+                      <div class="UNSTABLE_ComboboxOption__label">
+                        <div>Team Lead</div>
+                        <div class="typography-body-small-regular text-secondary">Posledních 24 hod., Plný úvazek, od 200 000 Kč, možnost práce z domova, +3 další</div>
+                        <div class="typography-body-small-regular text-emotion-success-basic">2 nové nabídky</div>
+                      </div>
+                    </a>
+                  </div>
+                  <div role="gridcell">
+                    <button
+                      type="button"
+                      class="ControlButton ControlButton--small ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target spirit-feature-enable-v5-control-button-expanded-size-scale"
+                      aria-label="Remove Team Lead from suggestions"
+                      data-spirit-combobox-option-dismiss
+                    >
+                      <svg
+                        class="Icon"
+                        width="16"
+                        height="16"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-icon-dis-2"
+                  class="UNSTABLE_ComboboxOption UNSTABLE_ComboboxOption--dismissible"
+                  data-spirit-combobox-link-row
+                >
+                  <div role="gridcell" class="UNSTABLE_ComboboxOption__cell">
+                    <a
+                      href="#"
+                      tabindex="-1"
+                      class="Flex Flex--horizontal Flex--wrap Flex--alignmentXStretch Flex--alignmentYStretch link-stretched"
+                      style="--flex-spacing-x: var(--spirit-space-500);"
+                    >
+                      <svg
+                        class="Icon"
+                        width="20"
+                        height="20"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+                      </svg>
+                      <div class="UNSTABLE_ComboboxOption__label">
+                        <div>Developer</div>
+                        <div class="typography-body-small-regular text-secondary">Posledních 24 hod., Plný úvazek, od 200 000 Kč, možnost práce z domova, +3 další</div>
+                        <div class="typography-body-small-regular text-emotion-success-basic">2 nové nabídky</div>
+                      </div>
+                    </a>
+                  </div>
+                  <div role="gridcell">
+                    <button
+                      type="button"
+                      class="ControlButton ControlButton--small ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target spirit-feature-enable-v5-control-button-expanded-size-scale"
+                      aria-label="Remove Developer from suggestions"
+                      data-spirit-combobox-option-dismiss
+                    >
+                      <svg
+                        class="Icon"
+                        width="16"
+                        height="16"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-icon-dis-3"
+                  class="UNSTABLE_ComboboxOption UNSTABLE_ComboboxOption--dismissible"
+                  data-spirit-combobox-link-row
+                >
+                  <div role="gridcell" class="UNSTABLE_ComboboxOption__cell">
+                    <a
+                      href="#"
+                      tabindex="-1"
+                      class="Flex Flex--horizontal Flex--wrap Flex--alignmentXStretch Flex--alignmentYStretch link-stretched"
+                      style="--flex-spacing-x: var(--spirit-space-500);"
+                    >
+                      <svg
+                        class="Icon"
+                        width="20"
+                        height="20"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+                      </svg>
+                      <div class="UNSTABLE_ComboboxOption__label">
+                        <div>Designer</div>
+                        <div class="typography-body-small-regular text-secondary">Posledních 24 hod., Plný úvazek, od 200 000 Kč, možnost práce z domova, +3 další</div>
+                        <div class="typography-body-small-regular text-emotion-success-basic">2 nové nabídky</div>
+                      </div>
+                    </a>
+                  </div>
+                  <div role="gridcell">
+                    <button
+                      type="button"
+                      class="ControlButton ControlButton--small ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target spirit-feature-enable-v5-control-button-expanded-size-scale"
+                      aria-label="Remove Designer from suggestions"
+                      data-spirit-combobox-option-dismiss
+                    >
+                      <svg
+                        class="Icon"
+                        width="16"
+                        height="16"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Sizes</h2>
+
+    <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+      <div class="Grid Grid--cols-1 Grid--desktop--cols-3">
+
+        {{!-- Small --}}
+        <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+          <div class="Dropdown">
+
+            <label
+              class="Label"
+              id="ac-small-label"
+              for="ac-small-input"
+            >Small</label>
+
+            <div
+              class="InputContainer InputContainer--small"
+              role="group"
+              aria-label="Small"
+            >
+              <div
+                class="UNSTABLE_ComboboxSelection"
+                role="grid"
+                aria-label="Selected Small"
+                aria-live="off"
+                aria-atomic="false"
+                aria-relevant="additions"
+                data-spirit-combobox-selection
+              >
+                <input
+                  type="text"
+                  id="ac-small-input"
+                  role="combobox"
+                  aria-haspopup="grid"
+                  aria-expanded="false"
+                  aria-controls="ac-small-listbox"
+                  aria-labelledby="ac-small-label"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  placeholder="Small"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="grid"
+              id="ac-small-listbox"
+              aria-labelledby="ac-small-label"
+              aria-multiselectable="true"
+              data-spirit-combobox-listbox
+            >
+              <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+                <div
+                  role="row"
+                  id="ac-small-cs"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Czech</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-small-en"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">English</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-small-sk"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Slovak</div>
+                </div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {{!-- Medium --}}
+        <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+          <div class="Dropdown">
+
+            <label
+              class="Label"
+              id="ac-medium-label"
+              for="ac-medium-input"
+            >Medium</label>
+
+            <div
+              class="InputContainer InputContainer--medium"
+              role="group"
+              aria-label="Medium"
+            >
+              <div
+                class="UNSTABLE_ComboboxSelection"
+                role="grid"
+                aria-label="Selected Medium"
+                aria-live="off"
+                aria-atomic="false"
+                aria-relevant="additions"
+                data-spirit-combobox-selection
+              >
+                <input
+                  type="text"
+                  id="ac-medium-input"
+                  role="combobox"
+                  aria-haspopup="grid"
+                  aria-expanded="false"
+                  aria-controls="ac-medium-listbox"
+                  aria-labelledby="ac-medium-label"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  placeholder="Medium"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="grid"
+              id="ac-medium-listbox"
+              aria-labelledby="ac-medium-label"
+              aria-multiselectable="true"
+              data-spirit-combobox-listbox
+            >
+              <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+                <div
+                  role="row"
+                  id="ac-medium-cs"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Czech</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-medium-en"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">English</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-medium-sk"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Slovak</div>
+                </div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {{!-- Large --}}
+        <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+          <div class="Dropdown">
+
+            <label
+              class="Label"
+              id="ac-large-label"
+              for="ac-large-input"
+            >Large</label>
+
+            <div
+              class="InputContainer InputContainer--large"
+              role="group"
+              aria-label="Large"
+            >
+              <div
+                class="UNSTABLE_ComboboxSelection"
+                role="grid"
+                aria-label="Selected Large"
+                aria-live="off"
+                aria-atomic="false"
+                aria-relevant="additions"
+                data-spirit-combobox-selection
+              >
+                <input
+                  type="text"
+                  id="ac-large-input"
+                  role="combobox"
+                  aria-haspopup="grid"
+                  aria-expanded="false"
+                  aria-controls="ac-large-listbox"
+                  aria-labelledby="ac-large-label"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  placeholder="Large"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="grid"
+              id="ac-large-listbox"
+              aria-labelledby="ac-large-label"
+              aria-multiselectable="true"
+              data-spirit-combobox-listbox
+            >
+              <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+                <div
+                  role="row"
+                  id="ac-large-cs"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Czech</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-large-en"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">English</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-large-sk"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Slovak</div>
+                </div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Helper text</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+        <div class="Dropdown">
+
+          <label
+            class="Label"
+            id="ac-helper-label"
+            for="ac-helper-input"
+          >Languages</label>
+
+          <div
+            class="InputContainer InputContainer--medium"
+            role="group"
+            aria-label="Languages"
+          >
+            <div
+              class="UNSTABLE_ComboboxSelection"
+              role="grid"
+              aria-label="Selected Languages"
+              aria-live="off"
+              aria-atomic="false"
+              aria-relevant="additions"
+              data-spirit-combobox-selection
+            >
+              <input
+                type="text"
+                id="ac-helper-input"
+                role="combobox"
+                aria-haspopup="grid"
+                aria-expanded="false"
+                aria-controls="ac-helper-listbox"
+                aria-labelledby="ac-helper-label"
+                aria-autocomplete="list"
+                autocomplete="off"
+                aria-describedby="ac-helper-text"
+                placeholder="Languages"
+                class="UNSTABLE_Combobox__input"
+                data-spirit-combobox-input
+              />
+            </div>
+          </div>
+
+          <div
+            class="DropdownPopover placement-bottom-start"
+            role="grid"
+            id="ac-helper-listbox"
+            aria-labelledby="ac-helper-label"
+            aria-multiselectable="true"
+            data-spirit-combobox-listbox
+          >
+            <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+              <div
+                role="row"
+                id="ac-helper-cs"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Czech</div>
+              </div>
+              <div
+                role="row"
+                id="ac-helper-en"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">English</div>
+              </div>
+              <div
+                role="row"
+                id="ac-helper-sk"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Slovak</div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="HelperText" id="ac-helper-text">You can select multiple languages.</div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Validation states</h2>
+
+    <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+      <div class="Grid Grid--cols-1 Grid--desktop--cols-3">
+
+        {{!-- Danger --}}
+        <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+          <div class="Dropdown">
+
+            <label
+              class="Label Label--danger"
+              id="ac-danger-label"
+              for="ac-danger-input"
+            >Languages</label>
+
+            <div
+              class="InputContainer InputContainer--medium InputContainer--danger"
+              role="group"
+              aria-label="Languages"
+            >
+              <div
+                class="UNSTABLE_ComboboxSelection"
+                role="grid"
+                aria-label="Selected Languages"
+                aria-live="off"
+                aria-atomic="false"
+                aria-relevant="additions"
+                data-spirit-combobox-selection
+              >
+                <input
+                  type="text"
+                  id="ac-danger-input"
+                  role="combobox"
+                  aria-haspopup="grid"
+                  aria-expanded="false"
+                  aria-controls="ac-danger-listbox"
+                  aria-labelledby="ac-danger-label"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  aria-describedby="ac-danger-validation"
+                  placeholder="Languages"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="grid"
+              id="ac-danger-listbox"
+              aria-labelledby="ac-danger-label"
+              aria-multiselectable="true"
+              data-spirit-combobox-listbox
+            >
+              <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+                <div
+                  role="row"
+                  id="ac-danger-cs"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Czech</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-danger-en"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">English</div>
+                </div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div
+            class="ValidationText ValidationText--danger"
+            id="ac-danger-validation"
+            role="alert"
+          >Please select at least one language.</div>
+
+        </div>
+
+        {{!-- Warning --}}
+        <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+          <div class="Dropdown">
+
+            <label
+              class="Label Label--warning"
+              id="ac-warning-label"
+              for="ac-warning-input"
+            >Languages</label>
+
+            <div
+              class="InputContainer InputContainer--medium InputContainer--warning"
+              role="group"
+              aria-label="Languages"
+            >
+              <div
+                class="UNSTABLE_ComboboxSelection"
+                role="grid"
+                aria-label="Selected Languages"
+                aria-live="off"
+                aria-atomic="false"
+                aria-relevant="additions"
+                data-spirit-combobox-selection
+              >
+                <input
+                  type="text"
+                  id="ac-warning-input"
+                  role="combobox"
+                  aria-haspopup="grid"
+                  aria-expanded="false"
+                  aria-controls="ac-warning-listbox"
+                  aria-labelledby="ac-warning-label"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  aria-describedby="ac-warning-validation"
+                  placeholder="Languages"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="grid"
+              id="ac-warning-listbox"
+              aria-labelledby="ac-warning-label"
+              aria-multiselectable="true"
+              data-spirit-combobox-listbox
+            >
+              <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+                <div
+                  role="row"
+                  id="ac-warning-cs"
+                  aria-selected="true"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Czech</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-warning-en"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">English</div>
+                </div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="ValidationText ValidationText--warning" id="ac-warning-validation">Consider selecting more languages.</div>
+
+        </div>
+
+        {{!-- Success --}}
+        <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+          <div class="Dropdown">
+
+            <label
+              class="Label Label--success"
+              id="ac-success-label"
+              for="ac-success-input"
+            >Languages</label>
+
+            <div
+              class="InputContainer InputContainer--medium InputContainer--success"
+              role="group"
+              aria-label="Languages"
+            >
+              <div
+                class="UNSTABLE_ComboboxSelection"
+                role="grid"
+                aria-label="Selected Languages"
+                aria-live="off"
+                aria-atomic="false"
+                aria-relevant="additions"
+                data-spirit-combobox-selection
+              >
+                <input
+                  type="text"
+                  id="ac-success-input"
+                  role="combobox"
+                  aria-haspopup="grid"
+                  aria-expanded="false"
+                  aria-controls="ac-success-listbox"
+                  aria-labelledby="ac-success-label"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  aria-describedby="ac-success-validation"
+                  placeholder="Languages"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="grid"
+              id="ac-success-listbox"
+              aria-labelledby="ac-success-label"
+              aria-multiselectable="true"
+              data-spirit-combobox-listbox
+            >
+              <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+                <div
+                  role="row"
+                  id="ac-success-cs"
+                  aria-selected="true"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Czech</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-success-en"
+                  aria-selected="true"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">English</div>
+                </div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="ValidationText ValidationText--success" id="ac-success-validation">Languages selected successfully.</div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Disabled</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Combobox UNSTABLE_Combobox--disabled" data-spirit-element="combobox">
+
+        <div class="Dropdown">
+
+          <label
+            class="Label Label--disabled"
+            id="ac-disabled-label"
+            for="ac-disabled-input"
+          >Languages</label>
+
+          <div
+            class="InputContainer InputContainer--medium InputContainer--disabled"
+            role="group"
+            aria-label="Languages"
+          >
+            <div
+              class="UNSTABLE_ComboboxSelection"
+              role="grid"
+              aria-label="Selected Languages"
+              aria-live="off"
+              aria-atomic="false"
+              aria-relevant="additions"
+              data-spirit-combobox-selection
+            >
+              <input
+                type="text"
+                id="ac-disabled-input"
+                role="combobox"
+                aria-haspopup="grid"
+                aria-expanded="false"
+                aria-controls="ac-disabled-listbox"
+                aria-labelledby="ac-disabled-label"
+                aria-autocomplete="list"
+                autocomplete="off"
+                placeholder="Languages"
+                class="UNSTABLE_Combobox__input"
+                disabled
+                data-spirit-combobox-input
+              />
+            </div>
+          </div>
+
+          <div
+            class="DropdownPopover placement-bottom-start"
+            role="grid"
+            id="ac-disabled-listbox"
+            aria-labelledby="ac-disabled-label"
+            aria-multiselectable="true"
+            data-spirit-combobox-listbox
+          >
+            <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+              <div
+                role="row"
+                id="ac-disabled-cs"
+                aria-selected="true"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Czech</div>
+              </div>
+              <div
+                role="row"
+                id="ac-disabled-en"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">English</div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">With addons</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+        <div class="Dropdown">
+
+          <label
+            class="Label"
+            id="ac-addons-label"
+            for="ac-addons-input"
+          >Languages</label>
+
+          <div
+            class="InputContainer InputContainer--medium"
+            role="group"
+            aria-label="Languages"
+          >
+            <div
+              class="UNSTABLE_ComboboxSelection"
+              role="grid"
+              id="ac-addons-selection"
+              aria-label="Selected Languages"
+              aria-live="off"
+              aria-atomic="false"
+              aria-relevant="additions"
+              data-spirit-combobox-selection
+            >
+              <input
+                type="text"
+                id="ac-addons-input"
+                role="combobox"
+                aria-haspopup="grid"
+                aria-expanded="false"
+                aria-controls="ac-addons-listbox"
+                aria-labelledby="ac-addons-label"
+                aria-autocomplete="list"
+                autocomplete="off"
+                placeholder="Languages"
+                class="UNSTABLE_Combobox__input"
+                data-spirit-combobox-input
+              />
+            </div>
+
+            {{!-- Clear-all addon: shown by JS when ≥1 item is selected --}}
+            <div
+              class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYStretch"
+              style="--flex-spacing-x: var(--spirit-space-0); --flex-spacing-y: var(--spirit-space-0);"
+            >
+              <div
+                class="InputAddon InputAddon--medium"
+                hidden
+                data-spirit-combobox-clear
+              >
+                <button
+                  type="button"
+                  class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target spirit-feature-enable-v5-control-button-expanded-size-scale"
+                  aria-label="Remove all"
+                >
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+                  </svg>
+                </button>
+              </div>
+
+              {{!-- Chevron addon: toggle button opens/closes the popup --}}
+              <span class="InputAddon InputAddon--medium">
+                <button
+                  type="button"
+                  class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target spirit-feature-enable-v5-control-button-expanded-size-scale"
+                  aria-label="Toggle languages suggestions"
+                  aria-expanded="false"
+                  data-spirit-toggle="combobox"
+                >
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                  </svg>
+                </button>
+              </span>
+
+            </div>
+
+          </div>
+
+          <div
+            class="DropdownPopover placement-bottom-start"
+            role="grid"
+            id="ac-addons-listbox"
+            aria-labelledby="ac-addons-label"
+            aria-multiselectable="true"
+            data-spirit-combobox-listbox
+          >
+            <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+              <div
+                role="row"
+                id="ac-addons-cs"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Czech</div>
+              </div>
+              <div
+                role="row"
+                id="ac-addons-da"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Danish</div>
+              </div>
+              <div
+                role="row"
+                id="ac-addons-en"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">English</div>
+              </div>
+              <div
+                role="row"
+                id="ac-addons-fi"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Finnish</div>
+              </div>
+              <div
+                role="row"
+                id="ac-addons-sk"
+                aria-selected="false"
+                class="UNSTABLE_ComboboxOption"
+              >
+                <div role="gridcell">Slovak</div>
+              </div>
+              <div data-spirit-combobox-empty-state hidden>
+                <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Loading state</h2>
+
+    <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+      <div class="Grid Grid--cols-1 Grid--desktop--cols-2">
+
+        {{!-- Text loading indicator --}}
+        <div
+          class="UNSTABLE_Combobox"
+          data-spirit-element="combobox"
+          data-spirit-combobox-async
+        >
+
+          <div class="Dropdown">
+
+            <label
+              class="Label"
+              id="ac-loading-text-label"
+              for="ac-loading-text-input"
+            >Languages (text)</label>
+
+            <div
+              class="InputContainer InputContainer--medium"
+              role="group"
+              aria-label="Languages"
+            >
+              <div
+                class="UNSTABLE_ComboboxSelection"
+                role="grid"
+                id="ac-loading-text-selection"
+                aria-label="Selected Languages"
+                aria-live="off"
+                aria-atomic="false"
+                aria-relevant="additions"
+                data-spirit-combobox-selection
+              >
+                <input
+                  type="text"
+                  id="ac-loading-text-input"
+                  role="combobox"
+                  aria-haspopup="grid"
+                  aria-expanded="false"
+                  aria-controls="ac-loading-text-listbox"
+                  aria-labelledby="ac-loading-text-label"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  placeholder="Languages"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="grid"
+              id="ac-loading-text-listbox"
+              aria-labelledby="ac-loading-text-label"
+              aria-multiselectable="true"
+              data-spirit-combobox-listbox
+            >
+              {{!-- Loading indicator: shown while async search is in progress --}}
+              <div
+                class="UNSTABLE_Combobox__loading"
+                role="status"
+                aria-live="polite"
+                data-spirit-combobox-loading
+                hidden
+              >Loading…</div>
+
+              <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+                <div
+                  role="row"
+                  id="ac-loading-text-cs"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Czech</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-loading-text-da"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Danish</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-loading-text-en"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">English</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-loading-text-fi"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Finnish</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-loading-text-sk"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Slovak</div>
+                </div>
+                <div data-spirit-combobox-empty-state hidden>
+                  <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {{!-- Spinner loading indicator --}}
+        <div
+          class="UNSTABLE_Combobox"
+          data-spirit-element="combobox"
+          data-spirit-combobox-async
+        >
+
+          <div class="Dropdown">
+
+            <label
+              class="Label"
+              id="ac-loading-spinner-label"
+              for="ac-loading-spinner-input"
+            >Languages (spinner)</label>
+
+            <div
+              class="InputContainer InputContainer--medium"
+              role="group"
+              aria-label="Languages"
+            >
+              <div
+                class="UNSTABLE_ComboboxSelection"
+                role="grid"
+                id="ac-loading-spinner-selection"
+                aria-label="Selected Languages"
+                aria-live="off"
+                aria-atomic="false"
+                aria-relevant="additions"
+                data-spirit-combobox-selection
+              >
+                <input
+                  type="text"
+                  id="ac-loading-spinner-input"
+                  role="combobox"
+                  aria-haspopup="grid"
+                  aria-expanded="false"
+                  aria-controls="ac-loading-spinner-listbox"
+                  aria-labelledby="ac-loading-spinner-label"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  placeholder="Languages"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="grid"
+              id="ac-loading-spinner-listbox"
+              aria-labelledby="ac-loading-spinner-label"
+              aria-multiselectable="true"
+              data-spirit-combobox-listbox
+            >
+              {{!-- Loading indicator: shown while async search is in progress --}}
+              <div
+                class="UNSTABLE_Combobox__loading"
+                role="status"
+                aria-live="polite"
+                data-spirit-combobox-loading
+                hidden
+              >
+                <svg
+                  class="Icon animation-spin-clockwise"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
+                </svg>
+                <span>Loading…</span>
+              </div>
+
+              <div class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-300);">
+                <div
+                  role="row"
+                  id="ac-loading-spinner-cs"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Czech</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-loading-spinner-da"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Danish</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-loading-spinner-en"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">English</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-loading-spinner-fi"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Finnish</div>
+                </div>
+                <div
+                  role="row"
+                  id="ac-loading-spinner-sk"
+                  aria-selected="false"
+                  class="UNSTABLE_ComboboxOption"
+                >
+                  <div role="gridcell">Slovak</div>
+                </div>
+                <div data-spirit-combobox-empty-state hidden>
+                  <div class="UNSTABLE_Combobox__emptyState">Nothing found</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Tip box with creating a custom tag</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+        <div class="Dropdown">
+
+          <label
+            class="Label"
+            id="ac-tip-label"
+            for="ac-tip-input"
+          >Job positions</label>
+
+          <div
+            class="InputContainer InputContainer--medium"
+            role="group"
+            aria-label="Job positions"
+          >
+            <div
+              class="UNSTABLE_ComboboxSelection"
+              role="grid"
+              id="ac-tip-selection"
+              aria-label="Selected Job positions"
+              aria-live="off"
+              aria-atomic="false"
+              aria-relevant="additions"
+              data-spirit-combobox-selection
+            >
+              <input
+                type="text"
+                id="ac-tip-input"
+                role="combobox"
+                aria-haspopup="grid"
+                aria-expanded="false"
+                aria-controls="ac-tip-listbox"
+                aria-labelledby="ac-tip-label"
+                aria-autocomplete="list"
+                autocomplete="off"
+                placeholder="Job positions"
+                class="UNSTABLE_Combobox__input"
+                data-spirit-combobox-input
+              />
+            </div>
+          </div>
+
+          <div
+            class="DropdownPopover placement-bottom-start"
+            role="grid"
+            id="ac-tip-listbox"
+            aria-labelledby="ac-tip-label"
+            aria-multiselectable="true"
+            data-spirit-combobox-listbox
+          >
+            {{!-- Tip box: visible on focus before the user types anything --}}
+            <div
+              class="Flex Flex--alignmentXStretch Flex--alignmentYCenter Flex--horizontal color-scheme-on-emotion-informative-subtle px-600 py-500 rounded-200"
+              aria-live="polite"
+              data-spirit-combobox-tip
+              hidden
+            >
+              <svg
+                class="Icon"
+                width="32"
+                height="32"
+                aria-hidden="true"
+              >
+                <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+              </svg>
+              <p class="mb-0"><strong>TIP</strong>: Enter the field, profession, company, or term you're looking for.</p>
+            </div>
+
+            {{!-- Search-keyword row: shown while the user is typing; selecting it adds the typed text as a tag --}}
+            <div
+              role="row"
+              id="ac-tip-search"
+              class="UNSTABLE_ComboboxOption"
+              data-spirit-combobox-search-row
+              style="display: none"
+            >
+              <div
+                role="gridcell"
+                class="UNSTABLE_ComboboxOption__cell"
+              >
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#search" />
+                </svg>
+                <div class="UNSTABLE_ComboboxOption__label">
+                  <div>„<span data-spirit-combobox-search-query></span>“&nbsp;– search for keyword</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

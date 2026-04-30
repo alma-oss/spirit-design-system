@@ -1,0 +1,22 @@
+@use '@tokens' as tokens;
+@use '../../settings/cursors';
+
+$padding: calc(#{tokens.$space-400} - #{tokens.$border-width-100});
+
+$empty-state-color: tokens.$text-secondary;
+$empty-state-padding: tokens.$space-600 tokens.$space-700;
+
+$group-label-color: tokens.$text-primary;
+$group-label-padding: tokens.$space-400 tokens.$space-600 tokens.$space-200;
+$group-label-typography: tokens.$body-medium-semibold;
+
+$option-background-color-state-active: tokens.$background-interactive-state-hover;
+$option-background-color-state-selected: tokens.$selected-background-subtle;
+$option-cell-gap: tokens.$space-500;
+$option-color-state-disabled: tokens.$disabled-content;
+$option-cursor-state-disabled: cursors.$disabled;
+$option-label-gap: tokens.$space-300;
+
+$placeholder-margin-inline-start: calc(#{tokens.$space-500} - $padding);
+
+$selection-gap: tokens.$space-300;
