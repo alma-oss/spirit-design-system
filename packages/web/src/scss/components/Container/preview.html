@@ -1,0 +1,76 @@
+{{setVar "sizes" "xsmall" "small" "medium" "large" "xlarge" }}
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Default</h2>
+  </div>
+  <div class="docs-Stack docs-Stack--stretch">
+    <div class="Container">
+      <div class="docs-Box">
+        Container
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Fluid</h2>
+  </div>
+  <div class="docs-Stack docs-Stack--stretch">
+    <div class="Container Container--fluid">
+      <div class="docs-Box">
+        Container
+      </div>
+    </div>
+  </div>
+</section>
+
+{{#each @root.sizes as |size|}}
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Size {{size}}</h2>
+  </div>
+  <div class="docs-Stack docs-Stack--stretch">
+    <div class="Container Container--{{size}}">
+      <div class="docs-Box">Container of {{size}} size</div>
+    </div>
+  </div>
+</section>
+{{/each}}
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Text Alignment</h2>
+  </div>
+  <div class="docs-Stack docs-Stack--stretch">
+    <div class="Container">
+      <div class="docs-Box">
+        Container
+      </div>
+    </div>
+    <div class="Container text-center">
+      <div class="docs-Box">
+        Container
+      </div>
+    </div>
+    <div class="Container text-right">
+      <div class="docs-Box">
+        Container
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Feature Flag: Block Formatting Context</h2>
+  </div>
+  <div class="spirit-feature-enable-v5-container-block-formatting-context">
+    <div class="Container">
+      <div class="docs-Box">
+        Container
+      </div>
+    </div>
+  </div>
+</section>

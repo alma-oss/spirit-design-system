@@ -1,0 +1,364 @@
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Horizontal Layout</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch">
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Horizontal Reversed Layout</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Flex Flex--horizontalReversed Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch">
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Vertical Layout</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <ul class="Flex Flex--vertical Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch">
+        <li class="docs-Box docs-Box--small">Item 1</li>
+        <li class="docs-Box docs-Box--small">Item 2</li>
+        <li class="docs-Box docs-Box--small">Item 3</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Responsive Layout</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Flex Flex--vertical Flex--tablet--horizontal Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch">
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Wrapping</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div class="Flex Flex--horizontal Flex--wrap Flex--alignmentXStretch Flex--alignmentYStretch">
+        {{setVar "items" 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 }}
+        {{#each @root.items}}
+        <div class="docs-Box docs-Box--small">Item {{this}}</div>
+        {{/each}}
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Horizontal Layout and Horizontal Alignment</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch">
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+      <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYStretch">
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+      <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXCenter Flex--alignmentYStretch">
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+      <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXRight Flex--alignmentYStretch">
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+      <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYStretch">
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Vertical Layout and Horizontal Alignment</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div class="Flex Flex--vertical Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch">
+        <div class="docs-Box docs-Box--small">Item 1 with long content</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+      <div class="Flex Flex--vertical Flex--noWrap Flex--alignmentXLeft Flex--alignmentYStretch">
+        <div class="docs-Box docs-Box--small">Item 1 with long content</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+      <div class="Flex Flex--vertical Flex--noWrap Flex--alignmentXCenter Flex--alignmentYStretch">
+        <div class="docs-Box docs-Box--small">Item 1 with long content</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+      <div class="Flex Flex--vertical Flex--noWrap Flex--alignmentXRight Flex--alignmentYStretch">
+        <div class="docs-Box docs-Box--small">Item 1 with long content</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Vertical Alignment</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <ul class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch">
+        <li class="docs-Box docs-Box--small">Item 1</li>
+        <li class="docs-Box docs-Box--small">Item 2<br />is taller</li>
+        <li class="docs-Box docs-Box--small">Item 3</li>
+      </ul>
+
+      <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXStretch Flex--alignmentYTop">
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2<br />is taller</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+      <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXStretch Flex--alignmentYCenter">
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2<br />is taller</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+      <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXStretch Flex--alignmentYBottom">
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2<br />is taller</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+      <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXStretch Flex--alignmentYBaseline">
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2<br />is taller</div>
+        <div class="docs-Box typography-heading-small-bold">Item 3 has bigger font size</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Responsive Alignment</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div
+        class="
+        Flex
+        Flex--horizontal
+        Flex--noWrap
+        Flex--alignmentXLeft
+        Flex--alignmentYStretch
+        Flex--tablet--alignmentXSpaceBetween
+        Flex--tablet--alignmentYBaseline
+      "
+      >
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2<br />is taller</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+      <div
+        class="
+          Flex
+          Flex--vertical
+          Flex--noWrap
+          Flex--alignmentXLeft
+          Flex--alignmentYStretch
+          Flex--tablet--alignmentXCenter
+          Flex--desktop--alignmentXRight
+        "
+      >
+        <div class="docs-Box docs-Box--small">Item 1 is longer</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Custom Spacing</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div
+        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch"
+        style="--flex-spacing-x: var(--spirit-space-1600)"
+      >
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Responsive Spacing</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div
+        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch"
+        style="--flex-spacing-x: var(--spirit-space-1000); --flex-spacing-x-tablet: var(--spirit-space-1200); --flex-spacing-x-desktop: var(--spirit-space-1600)"
+      >
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Responsive Custom Horizontal Spacing</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div
+        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch"
+        style="--flex-spacing-x: var(--spirit-space-800); --flex-spacing-x-tablet: var(--spirit-space-1000); --flex-spacing-x-desktop: var(--spirit-space-1200)"
+      >
+        <div class="docs-Box docs-Box--small">Item 1</div>
+        <div class="docs-Box docs-Box--small">Item 2</div>
+        <div class="docs-Box docs-Box--small">Item 3</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Responsive Custom Vertical Spacing</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div class="Flex Flex--horizontal Flex--wrap Flex--alignmentXStretch Flex--alignmentYStretch"
+        style="--flex-spacing-y: var(--spirit-space-800); --flex-spacing-y-tablet: var(--spirit-space-1000); --flex-spacing-y-desktop: var(--spirit-space-1200)"
+      >
+        {{setVar "items" 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 }}
+        {{#each @root.items}}
+        <div class="docs-Box docs-Box--small">Item {{this}}</div>
+        {{/each}}
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
