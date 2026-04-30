@@ -5,6 +5,7 @@ import React from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type SpiritFieldGroupProps } from '../../types';
+import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
@@ -27,7 +28,7 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
     ...rest
   } = props;
 
-  const { classProps } = useFieldGroupStyleProps({ hasValidationIcon, isRequired, validationState });
+  const { classProps } = useFieldGroupStyleProps();
   const { styleProps, props: transferProps } = useStyleProps(rest);
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
   const validationTextRole = useValidationTextRole({
@@ -57,7 +58,9 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
             {label}
           </Label>
         )}
-        <div className={classProps.fields}>{children}</div>
+        <Flex direction="vertical" alignmentX="left" spacingY="space-500">
+          {children}
+        </Flex>
         <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
         {validationState && (
           <ValidationText
