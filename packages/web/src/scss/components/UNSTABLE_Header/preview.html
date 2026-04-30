@@ -1,0 +1,823 @@
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Minimal Header</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+
+    <header class="UNSTABLE_Header">
+      <div class="Flex Flex--row Flex--noWrap Flex--alignmentXCenter Flex--alignmentYCenter">
+        <a
+          href="#"
+          aria-label="JobBoard homepage"
+          class="UNSTABLE_HeaderLogo"
+        >
+          <div class="ProductLogo">
+            {{> web/assets/jobBoardLogo }}
+          </div>
+        </a>
+      </div>
+    </header>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Full Header</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+
+    <header class="UNSTABLE_Header">
+      <div class="Container">
+        <div class="Flex Flex--row Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter">
+          <a
+            href="#"
+            aria-label="JobBoard homepage"
+            class="UNSTABLE_HeaderLogo"
+          >
+            <div class="ProductLogo">
+              {{> web/assets/jobBoardLogo }}
+            </div>
+          </a>
+        </div>
+      </div>
+    </header>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Header with Bottom Divider</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+
+    <header class="UNSTABLE_Header UNSTABLE_Header--bottomDivider">
+      <div class="Container">
+        <div class="Flex Flex--row Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter">
+          <a
+            href="#"
+            aria-label="JobBoard homepage"
+            class="UNSTABLE_HeaderLogo"
+          >
+            <div class="ProductLogo">
+              {{> web/assets/jobBoardLogo }}
+            </div>
+          </a>
+        </div>
+      </div>
+    </header>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Fluid Header</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+
+    <header class="UNSTABLE_Header">
+      <div class="Container Container--fluid">
+        <div class="Flex Flex--row Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter">
+          <a
+            href="#"
+            aria-label="JobBoard homepage"
+            class="UNSTABLE_HeaderLogo"
+          >
+            <div class="ProductLogo">
+              {{> web/assets/jobBoardLogo }}
+            </div>
+          </a>
+        </div>
+      </div>
+    </header>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">With Navigation</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+
+    <header class="UNSTABLE_Header">
+      <div class="Container">
+        <div
+          class="Flex Flex--row Flex--noWrap Flex--alignmentXLeft Flex--alignmentYStretch"
+          style="--flex-spacing-x: var(--spirit-space-1000);"
+        >
+          <a
+            href="#"
+            aria-label="JobBoard homepage"
+            class="UNSTABLE_HeaderLogo"
+          >
+            <div class="ProductLogo">
+              {{> web/assets/jobBoardLogo }}
+            </div>
+          </a>
+
+          <nav class="Navigation Navigation--horizontal d-only-mobile-none d-only-tablet-none" aria-label="Main Navigation">
+            <ul>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <a
+                  href="#"
+                  class="NavigationAction NavigationAction--box NavigationAction--selected"
+                  aria-current="page"
+                >Job Offers</a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <a href="#" class="NavigationAction NavigationAction--box">Magazine</a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <a href="#" class="NavigationAction NavigationAction--box">Contact</a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="Navigation Navigation--horizontal ml-auto" aria-label="Secondary Navigation">
+            <ul>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <button
+                  class="Button Button--tertiary Button--medium Button--symmetrical"
+                  type="button"
+                  aria-label="Search"
+                >
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#search" />
+                  </svg>
+                  <span class="accessibility-hidden">Search</span>
+                </button>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter d-only-mobile-none d-only-tablet-none">
+                <a href="#" class="NavigationAvatar">
+                  <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+                    <svg
+                      class="Icon"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#profile"/>
+                    </svg>
+                  </span>
+                  <span class="typography-body-small-semibold">My Account</span>
+                </a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter d-only-mobile-none d-only-tablet-none">
+                <a href="#" class="Button Button--secondary Button--medium">Log In</a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter d-only-mobile-none d-only-tablet-none">
+                <a href="#" class="Button Button--primary Button--medium">Post a Job</a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter d-desktop-none">
+                <button
+                  id="drawer-navigation-open-button"
+                  class="Button Button--tertiary Button--medium Button--symmetrical"
+                  type="button"
+                  aria-label="Toggle Menu"
+                  data-spirit-toggle="offcanvas"
+                  data-spirit-target="#drawer-navigation"
+                  aria-controls="drawer-navigation"
+                  aria-expanded="false"
+                >
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </nav>
+
+        </div>
+      </div>
+    </header>
+
+    <dialog
+      id="drawer-navigation"
+      class="Drawer Drawer--right"
+      aria-label="Navigation"
+    >
+      <div class="DrawerPanel">
+        <div class="DrawerPanel__content">
+          <button
+            type="button"
+            aria-expanded="false"
+            class="Button Button--tertiary Button--medium Button--symmetrical DrawerCloseButton"
+            data-spirit-dismiss="offcanvas"
+            data-spirit-target="#drawer-navigation"
+            aria-controls="drawer-navigation"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+          <div class="Stack Stack--hasSpacing Stack--hasIntermediateDividers my-900" style="--stack-spacing: var(--spirit-space-900)">
+
+            <nav class="Navigation Navigation--vertical" aria-label="Profile">
+              <ul>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="NavigationAvatar">
+                    <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+                      <svg
+                        width="20"
+                        height="20"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                      </svg>
+                    </span>
+                    <span class="typography-body-small-semibold">My Account</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            <nav class="Navigation Navigation--vertical" aria-label="Main Navigation">
+              <ul>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a
+                    href="#"
+                    class="NavigationAction NavigationAction--box NavigationAction--selected"
+                    aria-current="page"
+                  >Job Offers</a>
+                </li>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="NavigationAction NavigationAction--box">Magazine</a>
+                </li>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="NavigationAction NavigationAction--box">Contact</a>
+                </li>
+              </ul>
+            </nav>
+
+            <nav class="Navigation Navigation--vertical" aria-label="Secondary Navigation">
+              <ul>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="Button Button--secondary Button--medium">Log In</a>
+                </li>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="Button Button--primary Button--medium">Post a Job</a>
+                </li>
+              </ul>
+            </nav>
+
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">With Pill Navigation</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+
+    <header class="UNSTABLE_Header">
+      <div class="Container">
+        <div
+          class="Flex Flex--row Flex--noWrap Flex--alignmentXLeft Flex--alignmentYStretch"
+          style="--flex-spacing-x: var(--spirit-space-1000);"
+        >
+          <a
+            href="#"
+            aria-label="JobBoard homepage"
+            class="UNSTABLE_HeaderLogo"
+          >
+            <div class="ProductLogo">
+              {{> web/assets/jobBoardLogo }}
+            </div>
+          </a>
+
+          <nav class="Navigation Navigation--horizontal d-only-mobile-none d-only-tablet-none" aria-label="Main Navigation">
+            <ul>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <a
+                  href="#"
+                  class="NavigationAction NavigationAction--pill NavigationAction--selected"
+                  aria-current="page"
+                >Job Offers</a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <a href="#" class="NavigationAction NavigationAction--pill">Magazine</a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <a href="#" class="NavigationAction NavigationAction--pill">Contact</a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="Navigation Navigation--horizontal ml-auto" aria-label="Secondary Navigation">
+            <ul>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <button
+                  class="Button Button--tertiary Button--medium Button--symmetrical"
+                  type="button"
+                  aria-label="Search"
+                >
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#search" />
+                  </svg>
+                  <span class="accessibility-hidden">Search</span>
+                </button>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter d-only-mobile-none d-only-tablet-none">
+                <a href="#" class="NavigationAvatar">
+                  <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+                    <svg
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#profile"/>
+                    </svg>
+                  </span>
+                  <span class="typography-body-small-semibold">My Account</span>
+                </a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter d-only-mobile-none d-only-tablet-none">
+                <a href="#" class="Button Button--secondary Button--medium">Log In</a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter d-only-mobile-none d-only-tablet-none">
+                <a href="#" class="Button Button--primary Button--medium">Post a Job</a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter d-desktop-none">
+                <button
+                  id="drawer-navigation-pill-open-button"
+                  class="Button Button--tertiary Button--medium Button--symmetrical"
+                  type="button"
+                  aria-label="Toggle Menu"
+                  data-spirit-toggle="offcanvas"
+                  data-spirit-target="#drawer-navigation-pill"
+                  aria-controls="drawer-navigation-pill"
+                  aria-expanded="false"
+                >
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </nav>
+
+        </div>
+      </div>
+    </header>
+
+    <dialog
+      id="drawer-navigation-pill"
+      class="Drawer Drawer--right"
+      aria-label="Navigation"
+    >
+      <div class="DrawerPanel">
+        <div class="DrawerPanel__content">
+          <button
+            type="button"
+            aria-expanded="false"
+            class="Button Button--tertiary Button--medium Button--symmetrical DrawerCloseButton"
+            data-spirit-dismiss="offcanvas"
+            data-spirit-target="#drawer-navigation-pill"
+            aria-controls="drawer-navigation-pill"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+          <div class="Stack Stack--hasSpacing Stack--hasIntermediateDividers my-900" style="--stack-spacing: var(--spirit-space-900)">
+
+            <nav class="Navigation Navigation--vertical" aria-label="Profile">
+              <ul>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="NavigationAvatar">
+                    <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+                      <svg
+                        width="20"
+                        height="20"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                      </svg>
+                    </span>
+                    <span class="typography-body-small-semibold">My Account</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            <nav class="Navigation Navigation--vertical" aria-label="Main Navigation">
+              <ul>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a
+                    href="#"
+                    class="NavigationAction NavigationAction--pill NavigationAction--selected"
+                    aria-current="page"
+                  >Job Offers</a>
+                </li>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="NavigationAction NavigationAction--pill">Magazine</a>
+                </li>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="NavigationAction NavigationAction--pill">Contact</a>
+                </li>
+              </ul>
+            </nav>
+
+            <nav class="Navigation Navigation--vertical" aria-label="Secondary Navigation">
+              <ul>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="Button Button--secondary Button--medium">Log In</a>
+                </li>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="Button Button--primary Button--medium">Post a Job</a>
+                </li>
+              </ul>
+            </nav>
+
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">With Navigation and Nested Items</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+
+    <header class="UNSTABLE_Header">
+      <div class="Container">
+        <div
+          class="Flex Flex--row Flex--noWrap Flex--alignmentXLeft Flex--alignmentYStretch"
+          style="--flex-spacing-x: var(--spirit-space-1000);"
+        >
+          <a
+            href="#"
+            aria-label="JobBoard homepage"
+            class="UNSTABLE_HeaderLogo"
+          >
+            <div class="ProductLogo">
+              {{> web/assets/jobBoardLogo }}
+            </div>
+          </a>
+
+          <nav class="Navigation Navigation--horizontal d-only-mobile-none d-only-tablet-none" aria-label="Main Navigation">
+            <ul>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <a
+                  href="#"
+                  class="NavigationAction NavigationAction--box NavigationAction--selected"
+                  aria-current="page"
+                >Selected</a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <a href="#" class="NavigationAction NavigationAction--box">Link</a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <div class="Dropdown Dropdown--alignmentXStretch Dropdown--alignmentYStretch">
+                  <button
+                    type="button"
+                    class="NavigationAction NavigationAction--box"
+                    data-spirit-toggle="dropdown"
+                    data-spirit-target="#dropdown-navigation"
+                    aria-expanded="false"
+                    aria-controls="dropdown-navigation"
+                    data-spirit-autoclose="true"
+                  >
+                    Menu
+                    <svg
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                      class="accessibility-open"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#chevron-up" />
+                    </svg>
+                    <svg
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                      class="accessibility-closed"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                    </svg>
+                  </button>
+                  <div
+                    class="DropdownPopover"
+                    data-spirit-placement="bottom-end"
+                    id="dropdown-navigation"
+                  >
+                    <ul class="list-unstyled">
+                      <li>
+                        <a href="https://www.example.com" class="Item">
+                          <span class="Item__label">My Account</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.example.com" class="Item">
+                          <span class="Item__label">Settings</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.example.com" class="Item">
+                          <span class="Item__label">Log Out</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <span class="NavigationAction NavigationAction--box NavigationAction--disabled">Disabled</span>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="Navigation Navigation--horizontal ml-auto" aria-label="Secondary Navigation">
+            <ul>
+              <li class="NavigationItem NavigationItem--alignmentYCenter">
+                <button class="Button Button--tertiary Button--medium Button--symmetrical">
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#search" />
+                  </svg>
+                  <span class="accessibility-hidden">Search</span>
+                </button>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYStretch d-only-mobile-none d-only-tablet-none">
+                <div class="Dropdown Dropdown--alignmentXCenter Dropdown--alignmentYCenter">
+                  <button
+                    type="button"
+                    class="NavigationAvatar NavigationAvatar--square"
+                    data-spirit-toggle="dropdown"
+                    data-spirit-target="#dropdown-avatar"
+                    aria-expanded="false"
+                    aria-controls="dropdown-avatar"
+                    data-spirit-autoclose="true"
+                  >
+                    <span class="Avatar Avatar--square Avatar--small" aria-label="Profile of Jiří Bárta">
+                      <svg
+                        width="20"
+                        height="20"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                      </svg>
+                    </span>
+                    <span class="typography-body-small-semibold">My Account</span>
+                    <svg
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                      class="accessibility-open"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#chevron-up" />
+                    </svg>
+                    <svg
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                      class="accessibility-closed"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                    </svg>
+                  </button>
+                  <div
+                    class="DropdownPopover"
+                    data-spirit-placement="bottom-end"
+                    id="dropdown-avatar"
+                  >
+                    <ul class="list-unstyled">
+                      <li>
+                        <a href="https://www.example.com" class="Item">
+                          <span class="Item__label">My Account</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.example.com" class="Item">
+                          <span class="Item__label">Settings</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.example.com" class="Item">
+                          <span class="Item__label">Log Out</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter d-only-mobile-none d-only-tablet-none">
+                <a href="#" class="Button Button--secondary Button--medium">Log Out</a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter d-only-mobile-none d-only-tablet-none">
+                <a href="#" class="Button Button--primary Button--medium">Post a Job</a>
+              </li>
+              <li class="NavigationItem NavigationItem--alignmentYCenter d-desktop-none">
+                <button
+                  id="drawer-navigation-expanded-open-button"
+                  class="Button Button--tertiary Button--medium Button--symmetrical"
+                  type="button"
+                  aria-label="Toggle Menu"
+                  data-spirit-toggle="offcanvas"
+                  data-spirit-target="#drawer-navigation-expanded"
+                  aria-controls="drawer-navigation-expanded"
+                  aria-expanded="false"
+                >
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </nav>
+
+        </div>
+      </div>
+    </header>
+
+    <dialog
+      id="drawer-navigation-expanded"
+      class="Drawer Drawer--right"
+      aria-label="Navigation"
+    >
+      <div class="DrawerPanel">
+        <div class="DrawerPanel__content">
+          <button
+            type="button"
+            aria-expanded="false"
+            class="Button Button--tertiary Button--medium Button--symmetrical DrawerCloseButton"
+            data-spirit-dismiss="offcanvas"
+            data-spirit-target="#drawer-navigation-expanded"
+            aria-controls="drawer-navigation-expanded"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+          <div class="Stack Stack--hasSpacing Stack--hasIntermediateDividers my-900" style="--stack-spacing: var(--spirit-space-900)">
+
+            <nav class="Navigation Navigation--vertical" aria-label="Profile">
+              <ul>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="NavigationAvatar NavigationAvatar--square">
+                    <span class="Avatar Avatar--small Avatar--square" aria-label="Profile of Jiří Bárta">
+                      <svg
+                        width="20"
+                        height="20"
+                        aria-hidden="true"
+                      >
+                        <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+                      </svg>
+                    </span>
+                    <span class="typography-body-small-semibold">My Account</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            <nav class="Navigation Navigation--vertical" aria-label="Main Navigation">
+              <ul>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a
+                    href="#"
+                    class="NavigationAction NavigationAction--box NavigationAction--selected"
+                    aria-current="page"
+                  >Selected</a>
+                </li>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="NavigationAction NavigationAction--box">Link</a>
+                </li>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <button
+                    type="button"
+                    aria-expanded="false"
+                    data-spirit-toggle="collapse"
+                    data-spirit-target="collapse-navigation"
+                    class="NavigationAction NavigationAction--box"
+                  >
+                    Menu
+                    <svg
+                      width="24"
+                      height="24"
+                      aria-hidden="true"
+                      class="accessibility-open"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#chevron-up" />
+                    </svg>
+                    <svg
+                      width="24"
+                      height="24"
+                      aria-hidden="true"
+                      class="accessibility-closed"
+                    >
+                      <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                    </svg>
+                  </button>
+                  <div id="collapse-navigation" class="Collapse">
+                    <div class="Collapse__content">
+                      <ul>
+                        <li class="NavigationItem NavigationItem--alignmentYCenter">
+                          <a href="https://www.example.com" class="NavigationAction NavigationAction--box">My Account</a>
+                        </li>
+                        <li class="NavigationItem NavigationItem--alignmentYCenter">
+                          <a href="https://www.example.com" class="NavigationAction NavigationAction--box">Settings</a>
+                        </li>
+                        <li class="NavigationItem NavigationItem--alignmentYCenter">
+                          <a href="https://www.example.com" class="NavigationAction NavigationAction--box">Log Out</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <span class="NavigationAction NavigationAction--box NavigationAction--disabled">Disabled</span>
+                </li>
+              </ul>
+            </nav>
+
+            <nav class="Navigation Navigation--vertical" aria-label="Secondary Navigation">
+              <ul>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="Button Button--secondary Button--medium">Log Out</a>
+                </li>
+                <li class="NavigationItem NavigationItem--alignmentYCenter">
+                  <a href="#" class="Button Button--primary Button--medium">Post a Job</a>
+                </li>
+              </ul>
+            </nav>
+
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+  </div>
+</section>
