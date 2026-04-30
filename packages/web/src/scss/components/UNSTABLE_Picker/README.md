@@ -72,10 +72,12 @@ overflow its scrollable container or get clipped.
       <fieldset class="border-0">
         <legend class="accessibility-hidden">Language</legend>
         <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
-          <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
-            <input type="checkbox" id="lang-cs" class="Checkbox__input" name="language" />
-            <div class="Checkbox__text">
-              <label class="Label Label--inline" for="lang-cs">Czech</label>
+          <div class="Item">
+            <div class="Item__slot" role="presentation">
+              <input type="checkbox" id="lang-cs" class="Checkbox Checkbox--item" name="language" />
+            </div>
+            <div class="Item__content" role="presentation">
+              <label class="Label Label--item" for="lang-cs">Czech</label>
             </div>
           </div>
           <!-- More checkboxes… -->
@@ -421,10 +423,19 @@ inside the selection area (remove buttons) to disable the Picker.
       <fieldset class="border-0" disabled>
         <legend class="accessibility-hidden">Language</legend>
         <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
-          <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
-            <input type="checkbox" id="lang-disabled-cs" class="Checkbox__input" name="language" checked disabled />
-            <div class="Checkbox__text">
-              <label class="Label Label--inline" for="lang-disabled-cs">Czech</label>
+          <div class="Item">
+            <div class="Item__slot" role="presentation">
+              <input
+                type="checkbox"
+                id="lang-disabled-cs"
+                class="Checkbox Checkbox--item"
+                name="language"
+                checked
+                disabled
+              />
+            </div>
+            <div class="Item__content" role="presentation">
+              <label class="Label Label--item" for="lang-disabled-cs">Czech</label>
             </div>
           </div>
           <!-- More checkboxes… -->

@@ -24,7 +24,9 @@
       element.disabled = !element.disabled;
 
       if (element.type == 'checkbox') {
-        element.parentNode.classList.toggle('Checkbox--disabled');
+        const label = element.parentNode.querySelector(`label[for="${element.id}"]`);
+
+        label?.classList.toggle('Label--disabled', element.disabled);
       }
 
       if (element.type == 'radio') {
@@ -223,15 +225,15 @@
             <!-- Footer alignment demo: end -->
             <!-- Modal features demo: start -->
             <form class="Stack Stack--spacing">
-              <div class="Checkbox">
+              <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
                 <input
                   type="checkbox"
                   id="modal-demo-docked"
-                  class="Checkbox__input"
+                  class="Checkbox"
                   onchange="toggleDockOnMobile('#example-basic > .ModalDialog', '#modal-demo-expanded')"
                   autocomplete="off"
                 />
-                <div class="Checkbox__text">
+                <div>
                   <label
                     class="Label Label--inline"
                     for="modal-demo-docked"
@@ -239,34 +241,35 @@
                 </div>
               </div>
               <div
-                class="Checkbox Checkbox--disabled"
+                class="Flex Flex--horizontal Flex--inline"
                 id="modal-demo-expanded-label"
+                style="--flex-spacing-x: var(--spirit-space-500);"
               >
                 <input
                   type="checkbox"
                   id="modal-demo-expanded"
-                  class="Checkbox__input"
+                  class="Checkbox"
                   onchange="toggleExpandOnMobile('#example-basic > .ModalDialog')"
                   autocomplete="off"
                   checked
                   disabled
                 />
-                <div class="Checkbox__text">
+                <div>
                   <label
                     class="Label Label--inline Label--disabled"
                     for="modal-demo-expanded"
                   >Expand on mobile (docked only)</label>
                 </div>
               </div>
-              <div class="Checkbox">
+              <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
                 <input
                   type="checkbox"
                   id="modal-demo-scrolling"
-                  class="Checkbox__input"
+                  class="Checkbox"
                   onchange="toggleScrolling('#example-basic > .ModalDialog')"
                   autocomplete="off"
                 />
-                <div class="Checkbox__text">
+                <div>
                   <label
                     class="Label Label--inline"
                     for="modal-demo-scrolling"
@@ -1042,16 +1045,16 @@
                 style="border: 0;"
               >
                 <legend hidden>Mobile</legend>
-                <div class="Checkbox">
+                <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
                   <input
                     type="checkbox"
                     id="custom-height-mobile-enabled"
-                    class="Checkbox__input"
+                    class="Checkbox"
                     onchange="toggleCustomHeight(event, '#example-custom-height > .ModalDialog', 'mobile')"
                     checked
                     autocomplete="off"
                   />
-                  <div class="Checkbox__text">
+                  <div>
                     <label
                       class="Label Label--inline"
                       for="custom-height-mobile-enabled"
@@ -1126,17 +1129,17 @@
                 style="border: 0;"
               >
                 <legend hidden>Tablet</legend>
-                <div class="Checkbox">
+                <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
                   <input
                     type="checkbox"
                     id="custom-height-tablet-enabled"
-                    class="Checkbox__input"
+                    class="Checkbox"
                     onchange="toggleCustomHeight(event, '#example-custom-height > .ModalDialog', 'tablet')"
                     checked
                     autocomplete="off"
                     aria-labelledby="custom-height-tablet-enabled-label"
                   />
-                  <div class="Checkbox__text">
+                  <div>
                     <label
                       class="Label Label--inline"
                       for="custom-height-tablet-enabled"
@@ -1212,17 +1215,17 @@
                 style="border: 0;"
               >
                 <legend hidden>Desktop</legend>
-                <div class="Checkbox">
+                <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
                   <input
                     type="checkbox"
                     id="custom-height-desktop-enabled"
-                    class="Checkbox__input"
+                    class="Checkbox"
                     onchange="toggleCustomHeight(event, '#example-custom-height > .ModalDialog', 'desktop')"
                     checked
                     autocomplete="off"
                     aria-labelledby="custom-height-desktop-enabled-label"
                   />
-                  <div class="Checkbox__text">
+                  <div>
                     <label
                       class="Label Label--inline"
                       for="custom-height-desktop-enabled"

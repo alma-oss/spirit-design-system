@@ -35,16 +35,16 @@ Place HelperText inside the **Radio** or **Checkbox** text area:
 </div>
 
 <!-- Checkbox -->
-<div class="Checkbox Checkbox--inputPositionStart">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="checkbox-helper-text"
-    class="Checkbox__input"
+    class="Checkbox"
     name="example"
     aria-describedby="checkbox-helper-text-helper-text"
   />
-  <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-helper-text">Checkbox Label</label>
+  <div>
+    <label class="Label Label--inline" for="checkbox-helper-text">Checkbox Label</label>
     <div class="HelperText" id="checkbox-helper-text-helper-text">Helper text</div>
   </div>
 </div>

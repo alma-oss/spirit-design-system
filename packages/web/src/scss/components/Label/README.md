@@ -87,9 +87,9 @@ Applies disabled styling to the label.
 ### Inline Field Label
 
 ```html
-<div class="Checkbox">
-  <input type="checkbox" id="checkbox" class="Checkbox__input" />
-  <div class="Checkbox__text">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="checkbox" id="checkbox" class="Checkbox" />
+  <div>
     <label class="Label Label--inline" for="checkbox">Checkbox Label</label>
   </div>
 </div>
@@ -98,9 +98,11 @@ Applies disabled styling to the label.
 ### Inline Field Label with Item Modifier
 
 ```html
-<div class="Checkbox Checkbox--item">
-  <input type="checkbox" id="checkbox-item" class="Checkbox__input" />
-  <div class="Checkbox__text">
+<div class="Item">
+  <div class="Item__slot" role="presentation">
+    <input type="checkbox" id="checkbox-item" class="Checkbox Checkbox--item" />
+  </div>
+  <div class="Item__content" role="presentation">
     <label class="Label Label--item" for="checkbox-item">Checkbox Label</label>
   </div>
 </div>
