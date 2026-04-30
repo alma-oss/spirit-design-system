@@ -7,19 +7,12 @@ import {
   type RequiredProps,
   type SizesDictionaryType,
   type SpiritTextAreaElementPropsWithRef,
-  type StyleProps,
   type TextInputProps,
   type Validation,
   type ValidationTextProp,
 } from './shared';
 
 export type TextAreaElementBaseProps = Omit<SpiritTextAreaElementPropsWithRef, 'size'>;
-
-export interface TextAreaCounterRenderProps extends StyleProps {
-  counterThreshold?: number;
-  currentLength: number;
-  hasCounter?: boolean;
-}
 
 type TextAreaBaseProps<S = void> = TextAreaElementBaseProps &
   InputBaseProps &
