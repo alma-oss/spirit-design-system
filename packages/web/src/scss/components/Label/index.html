@@ -93,48 +93,52 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart">
-        <input
-          type="checkbox"
-          id="checkbox-example"
-          class="Checkbox__input"
-        />
-        <div class="Checkbox__text">
-          <label
-            class="Label Label--inline"
-            for="checkbox-example"
-          >Checkbox Label</label>
-        </div>
-      </div>
+      <div class="Stack Stack--spacing">
 
-      <div class="Checkbox Checkbox--required Checkbox--inputPositionStart">
-        <input
-          type="checkbox"
-          id="checkbox-required"
-          class="Checkbox__input"
-          required
-        />
-        <div class="Checkbox__text">
-          <label
-            class="Label Label--inline Label--required"
-            for="checkbox-required"
-          >Required Checkbox</label>
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-example"
+            class="Checkbox"
+          />
+          <div>
+            <label
+              class="Label Label--inline"
+              for="checkbox-example"
+            >Checkbox Label</label>
+          </div>
         </div>
-      </div>
 
-      <div class="Checkbox Checkbox--disabled Checkbox--inputPositionStart">
-        <input
-          type="checkbox"
-          id="checkbox-disabled"
-          class="Checkbox__input"
-          disabled
-        />
-        <div class="Checkbox__text">
-          <label
-            class="Label Label--inline Label--disabled"
-            for="checkbox-disabled"
-          >Disabled Checkbox</label>
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-required"
+            class="Checkbox"
+            required
+          />
+          <div>
+            <label
+              class="Label Label--inline Label--required"
+              for="checkbox-required"
+            >Required Checkbox</label>
+          </div>
         </div>
+
+        <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-disabled"
+            class="Checkbox"
+            disabled
+          />
+          <div>
+            <label
+              class="Label Label--inline Label--disabled"
+              for="checkbox-disabled"
+            >Disabled Checkbox</label>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -202,13 +206,15 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
-        <input
-          type="checkbox"
-          id="checkbox-item-example"
-          class="Checkbox__input"
-        />
-        <div class="Checkbox__text">
+      <div class="Item">
+        <div class="Item__slot" role="presentation">
+          <input
+            type="checkbox"
+            id="checkbox-item-example"
+            class="Checkbox Checkbox--item"
+          />
+        </div>
+        <div class="Item__content" role="presentation">
           <label
             class="Label Label--item"
             for="checkbox-item-example"
@@ -216,14 +222,16 @@
         </div>
       </div>
 
-      <div class="Checkbox Checkbox--disabled Checkbox--inputPositionStart Checkbox--item">
-        <input
-          type="checkbox"
-          id="checkbox-item-disabled"
-          class="Checkbox__input"
-          disabled
-        />
-        <div class="Checkbox__text">
+      <div class="Item Item--disabled">
+        <div class="Item__slot" role="presentation">
+          <input
+            type="checkbox"
+            id="checkbox-item-disabled"
+            class="Checkbox Checkbox--item"
+            disabled
+          />
+        </div>
+        <div class="Item__content" role="presentation">
           <label
             class="Label Label--item Label--disabled"
             for="checkbox-item-disabled"

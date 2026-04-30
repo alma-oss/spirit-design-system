@@ -8,16 +8,16 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart">
+      <div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
         <input
           type="checkbox"
           id="input-details-checkbox"
-          class="Checkbox__input"
+          class="Checkbox"
           name="consent"
           aria-details="input-details-checkbox-details"
           required
         />
-        <div class="Checkbox__text">
+        <div>
           <label class="Label Label--inline Label--required" for="input-details-checkbox"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
           <div id="input-details-checkbox-details" class="InputDetails">
             <p class="typography-body-medium-regular mb-0">We want to keep you informed</p>
@@ -49,17 +49,17 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Checkbox Checkbox--inputPositionStart Checkbox--disabled">
+      <div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
         <input
           type="checkbox"
           id="input-details-checkbox-disabled"
-          class="Checkbox__input"
+          class="Checkbox"
           name="consent-disabled"
           aria-details="input-details-checkbox-disabled-details"
           required
           disabled
         />
-        <div class="Checkbox__text">
+        <div>
           <label class="Label Label--inline Label--required Label--disabled" for="input-details-checkbox-disabled"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
           <div id="input-details-checkbox-disabled-details" class="InputDetails InputDetails--disabled">
             <p class="typography-body-medium-regular mb-0">We want to keep you informed</p>
