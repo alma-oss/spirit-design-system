@@ -66,10 +66,21 @@ It can be used internally in the form components via `details` prop.
 
 ## Disabled State
 
-When the parent component is disabled, the text and links inside InputDetails are automatically dimmed.
+Use the `isDisabled` prop to render InputDetails in a disabled state.
+When InputDetails is used inside form components (Checkbox, Toggle), this prop is set automatically from the parent disabled state.
 You must manually set the `isDisabled` prop on interactive elements (Link, Button) inside the `details` prop.
 
 **Note:** The `isDisabled` prop on Link/Button components is required for proper keyboard and screen reader behavior.
+
+### Basic Disabled InputDetails
+
+```tsx
+<InputDetails isDisabled>
+  <Link elementType="button" color="inherit" underlined="always" isDisabled>
+    See full terms and conditions
+  </Link>
+</InputDetails>
+```
 
 ### With Disabled Checkbox
 
@@ -135,6 +146,7 @@ You must manually set the `isDisabled` prop on interactive elements (Link, Butto
 | `children`            | `ReactNode`           | —       | ✓        | Content to render, such as links or modal triggers |
 | `elementType`         | `ElementType`         | `div`   | ✕        | HTML element to render as                          |
 | `id`                  | `string`              | —       | ✕        | Element ID for `aria-details` linking              |
+| `isDisabled`          | `boolean`             | `false` | ✕        | Renders disabled styles for InputDetails           |
 | `registerAriaDetails` | `RegisterDetailsType` | —       | ✕        | Callback to register/unregister `aria-details` IDs |
 
 The component accepts [additional attributes][readme-additional-attributes].

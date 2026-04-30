@@ -1,7 +1,13 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { elementTypePropsTest, restPropsTest, stylePropsTest, validHtmlAttributesTest } from '@local/tests';
+import {
+  elementTypePropsTest,
+  formFieldContextPropsTest,
+  restPropsTest,
+  stylePropsTest,
+  validHtmlAttributesTest,
+} from '@local/tests';
 import InputDetails from '../InputDetails';
 
 describe('InputDetails', () => {
@@ -12,6 +18,14 @@ describe('InputDetails', () => {
   elementTypePropsTest((props) => <InputDetails {...props}>Test content</InputDetails>);
 
   validHtmlAttributesTest((props) => <InputDetails {...props}>Test content</InputDetails>);
+
+  formFieldContextPropsTest({
+    renderComponent: (props) => <InputDetails {...props}>Content</InputDetails>,
+    text: 'Content',
+    classNamePrefix: 'InputDetails',
+    includeInlineVariant: false,
+    includeItemVariant: false,
+  });
 
   it('should render children content', () => {
     render(<InputDetails>See full terms</InputDetails>);
