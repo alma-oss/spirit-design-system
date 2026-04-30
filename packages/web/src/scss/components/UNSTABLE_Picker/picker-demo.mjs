@@ -225,9 +225,14 @@ export function initPopoverBehavior(triggerEl, popoverEl) {
     first?.focus();
   });
 
-  // Focus restoration: return focus to trigger on any close (Escape, click outside, programmatic)
+  // Focus restoration: return focus to trigger on any close (Escape, click outside, programmatic),
+  // but only if focus is still inside the popover or has fallen to body — otherwise the user has
+  // already moved focus elsewhere (e.g., clicked another picker's trigger) and we must not steal it.
   popoverEl.addEventListener(EVENT_HIDDEN, () => {
-    triggerEl.focus();
+    const activeEl = document.activeElement;
+    if (!activeEl || activeEl === document.body || popoverEl.contains(activeEl)) {
+      triggerEl.focus();
+    }
   });
 
   popoverEl.addEventListener('keydown', function (event) {

@@ -9,8 +9,8 @@ import {
   formFieldValidationTextContextPropsTest,
   restPropsTest,
   stylePropsTest,
-  validationStatePropsTest,
 } from '@local/tests';
+import { ValidationStates } from '../../../constants';
 import { useToggle } from '../../../hooks';
 import {
   type SpiritUnstablePickerRef,
@@ -51,7 +51,11 @@ describe('UNSTABLE_Picker', () => {
 
   ariaAttributesTest(TestPicker);
 
-  validationStatePropsTest(TestPicker, 'UNSTABLE_Picker--');
+  it.each(Object.values(ValidationStates))('applies %s validation class to InputContainer', (state) => {
+    render(<TestPicker validationState={state} />);
+
+    expect(screen.getByRole('group', { name: 'Languages' })).toHaveClass(`InputContainer--${state}`);
+  });
 
   formFieldLabelContextPropsTest({
     renderComponent: (props) => <TestPicker {...defaultProps} emptySelectionLabel="Select" {...props} />,
