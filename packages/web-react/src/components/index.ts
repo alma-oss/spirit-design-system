@@ -27,6 +27,8 @@ export * from './HelperText';
 export * from './Hidden';
 export * from './Icon';
 export * from './IconBox';
+export * from './InputAddon';
+export * from './InputContainer';
 export * from './InputDetails';
 export * from './Item';
 export * from './Label';

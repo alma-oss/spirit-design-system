@@ -1,6 +1,6 @@
 import type { AriaRole, ElementType, ReactNode } from 'react';
 import { FormFieldVariants, type InputPositions } from '../../constants';
-import { type ValidationStatesDictionaryType } from './dictionaries';
+import { type SizesDictionaryType, type ValidationStatesDictionaryType } from './dictionaries';
 
 export type ValidationState = ValidationStatesDictionaryType;
 
@@ -36,6 +36,8 @@ export interface FormFieldContextValue {
   isLabelHidden?: boolean;
   /** Whether the field is required (label shows required indicator). */
   isRequired?: boolean;
+  /** Shared field size for context-aware descendants (e.g. InputContainer). */
+  size?: SizesDictionaryType;
   /** Current validation state; passed to ValidationText for styling. */
   validationState?: ValidationState;
 }

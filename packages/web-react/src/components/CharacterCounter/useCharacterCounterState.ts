@@ -3,14 +3,13 @@
 import { type ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { type StylePropsResult, useControlledModeGuard, useDebouncedValue, useStyleProps } from '../../hooks';
 import { defaultLabels, replaceTranslationParams } from '../../translations';
-import { type TextAreaCounterRenderProps } from '../../types';
 import { CHARACTER_COUNTER_SCREEN_READER_DEBOUNCE_MS } from './constants';
-import { type CharacterCounterProps } from './types';
+import { type CharacterCounterProps, type SpiritCharacterCounterProps } from './types';
 
 /** Return value of the useCharacterCounterState hook */
 export interface CharacterCounterState {
   /** Props to pass to CharacterCounter, or undefined when counter is hidden */
-  counterProps: TextAreaCounterRenderProps | undefined;
+  counterProps: CharacterCounterProps | undefined;
   /** Change handler that updates internal length and calls the provided onChange */
   handleChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 }
@@ -116,7 +115,7 @@ export const useCharacterCounterState = (props: UseCharacterCounterStateProps): 
     [isControlled, isCounterVisible, onChange],
   );
 
-  const counterProps: TextAreaCounterRenderProps | undefined = isCounterVisible
+  const counterProps: CharacterCounterProps | undefined = isCounterVisible
     ? {
         counterThreshold,
         currentLength,
@@ -136,11 +135,11 @@ export const useCharacterCounterState = (props: UseCharacterCounterStateProps): 
  * @param props - Full `CharacterCounterProps` including `id` and `registerAria`.
  * @returns {UseCharacterCounterResult} Values to render the visible counter and `VisuallyHidden` live region.
  */
-export const useCharacterCounter = (props: CharacterCounterProps): UseCharacterCounterResult => {
+export const useCharacterCounter = (props: SpiritCharacterCounterProps): UseCharacterCounterResult => {
   const { counterThreshold, currentLength, hasCounter, id, registerAria, ...restProps } = props;
   const { styleProps, props: transferProps } = useStyleProps(restProps);
   const isVisible = hasCounter === true || counterThreshold !== undefined;
-  const screenReaderMessageId = `${id}__counterScreenReaderMessage`;
+  const screenReaderMessageId = `${id}-counter-screen-reader-message`;
   const visibleCounterText = getCharacterCounterVisibleText(currentLength, counterThreshold);
   const screenReaderMessage = getCharacterCounterScreenReaderMessage(currentLength, counterThreshold);
   const debouncedScreenReaderMessage = useDebouncedValue(
@@ -149,7 +148,7 @@ export const useCharacterCounter = (props: CharacterCounterProps): UseCharacterC
   );
 
   useEffect(() => {
-    if (isVisible) {
+    if (isVisible && typeof registerAria === 'function') {
       registerAria({ add: screenReaderMessageId });
 
       return () => {
