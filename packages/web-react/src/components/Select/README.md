@@ -63,7 +63,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 
 ## Custom Component
 
-Select classes are fabricated using `useSelectStyleProps` hook. You can use it to create your own custom Select component. Use the standalone Label, HelperText, and ValidationText components with PropsProvider and useAriaIds for correct styling and accessibility.
+Compose your own field using `Label`, `InputContainer`, `InputAddon`, `HelperText`, and `ValidationText`. Wrap with `PropsProvider` so size and validation flow into `InputContainer`, and use `useAriaDescribedBy` for accessible descriptions—same building blocks as `Select` itself.
 
 ```tsx
 const CustomSelect = (props: SpiritSelectProps): JSX.Element => {
@@ -82,40 +82,33 @@ const CustomSelect = (props: SpiritSelectProps): JSX.Element => {
     validationText,
     ...restProps
   } = props;
-  const { classProps } = useSelectStyleProps({
-    hasValidationIcon,
-    isDisabled,
-    isLabelHidden,
-    size,
-    validationState,
-  });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const [ids, register] = useAriaIds(ariaDescribedBy);
-  const ariaDescribedByProp = useAriaDescribedBy(ids);
+  const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
   const validationTextRole = useValidationTextRole({
     validationState,
     validationText,
   });
 
   return (
-    <PropsProvider value={{ isDisabled, isLabelHidden, isRequired, validationState }}>
-      <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
+    <PropsProvider
+      value={{
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+        size,
+        validationState,
+      }}
+    >
+      <div {...styleProps}>
         <Label htmlFor={id}>{label}</Label>
-        <div className={classProps.container}>
-          <select
-            {...transferProps}
-            {...ariaDescribedByProp}
-            id={id}
-            className={classProps.input}
-            disabled={isDisabled}
-            required={isRequired}
-          >
+        <InputContainer>
+          <select {...transferProps} {...ariaDescribedByProp} id={id} disabled={isDisabled} required={isRequired}>
             {children}
           </select>
-          <div className={classProps.icon}>
+          <InputAddon>
             <Icon name="chevron-down" />
-          </div>
-        </div>
+          </InputAddon>
+        </InputContainer>
         <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
         {validationState && (
           <ValidationText
