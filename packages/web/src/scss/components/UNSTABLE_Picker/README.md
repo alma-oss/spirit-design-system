@@ -65,9 +65,9 @@ overflow its scrollable container or get clipped.
       </button>
     </div>
     <div role="dialog" class="DropdownPopover" data-spirit-placement="bottom-start" id="picker-popover">
-      <fieldset class="FieldGroup">
+      <fieldset class="border-0">
         <legend class="accessibility-hidden">Language</legend>
-        <div class="FieldGroup__fields">
+        <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
           <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
             <input type="checkbox" id="lang-cs" class="Checkbox__input" name="language" />
             <div class="Checkbox__text">
@@ -338,9 +338,9 @@ area (remove buttons) to disable the Picker.
       </button>
     </div>
     <div role="dialog" class="DropdownPopover" data-spirit-placement="bottom-start" id="picker-disabled">
-      <fieldset class="FieldGroup" disabled>
+      <fieldset class="border-0" disabled>
         <legend class="accessibility-hidden">Language</legend>
-        <div class="FieldGroup__fields">
+        <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
           <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
             <input type="checkbox" id="lang-disabled-cs" class="Checkbox__input" name="language" checked disabled />
             <div class="Checkbox__text">
