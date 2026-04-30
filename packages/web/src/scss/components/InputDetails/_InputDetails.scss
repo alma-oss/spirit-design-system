@@ -13,9 +13,9 @@
     gap: theme.$gap;
     align-items: flex-start;
     margin-top: theme.$margin-top;
+    color: theme.$color;
+}
 
-    // @deprecated This custom property will be removed in the next major version.
-    // Migration: delete custom property `var(--#{tokens.$css-variable-prefix}input-details-text-color)` and create new disabled modifier.
-    // @see https://jira.almacareer.tech/browse/DS-2496
-    color: var(--#{tokens.$css-variable-prefix}input-details-text-color, theme.$color);
+.InputDetails--disabled {
+    color: theme.$color-state-disabled;
 }
