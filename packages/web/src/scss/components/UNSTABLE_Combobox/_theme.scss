@@ -1,0 +1,20 @@
+@use '@tokens' as tokens;
+@use '../../settings/cursors';
+
+$padding-x: tokens.$space-600;
+$padding-y: calc(#{tokens.$space-400} - #{tokens.$border-width-100});
+
+$empty-state-color: tokens.$text-secondary;
+$empty-state-padding: tokens.$space-600 tokens.$space-700;
+
+$input-min-width: 11ch;
+
+$option-cell-gap: tokens.$space-500;
+
+$placeholder-color-state-disabled: tokens.$disabled-content;
+$placeholder-cursor-state-disabled: cursors.$disabled;
+
+$selection-gap: tokens.$space-400;
+$selection-min-height: calc(
+    var(--#{tokens.$css-variable-prefix}input-container-height) - 2 * #{tokens.$border-width-100}
+);

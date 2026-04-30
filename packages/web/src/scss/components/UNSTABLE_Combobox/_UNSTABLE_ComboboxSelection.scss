@@ -1,0 +1,24 @@
+// 1. Elevate interactive elements above the trigger overlay.
+
+@use '../../tools/typography';
+@use 'theme';
+
+.UNSTABLE_ComboboxSelection {
+    @include typography.from-css-variables($infix: 'input-container');
+
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    gap: theme.$selection-gap;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: theme.$selection-min-height;
+    padding-inline: theme.$padding-x;
+    padding-block: theme.$padding-y;
+}
+
+// 1.
+.UNSTABLE_ComboboxSelection :where(a, button) {
+    position: relative;
+    z-index: 1;
+}
