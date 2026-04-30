@@ -4,6 +4,7 @@ import type {
   DropdownBaseProps,
   HelperTextProps,
   SizesDictionaryType,
+  SpiritButtonElementProps,
   SpiritCheckboxProps,
   SpiritDivElementProps,
   SpiritFieldGroupProps,
@@ -130,10 +131,18 @@ export interface UnstablePickerPopoverContextValue {
   selectionMode: UnstablePickerSelectionMode;
 }
 
+export interface UnstablePickerSelectionProps extends SpiritDivElementProps {
+  isDisabled?: boolean;
+}
+
+export interface UnstablePickerTriggerProps extends SpiritButtonElementProps {}
+
 export type SpiritUnstablePickerProps<S = void> = UnstablePickerProps<S>;
 export type SpiritUnstableUncontrolledPickerProps<S = void> = UnstableUncontrolledPickerProps<S>;
 export type SpiritUnstablePickerRenderTagsOptions = UnstablePickerRenderTagsOptions;
 export type SpiritUnstablePickerGroupProps = UnstablePickerGroupProps;
+export type SpiritUnstablePickerSelectionProps = UnstablePickerSelectionProps;
 export type SpiritUnstablePickerTagProps = UnstablePickerTagProps;
+export type SpiritUnstablePickerTriggerProps = UnstablePickerTriggerProps;
 export type SpiritUnstablePickerItemProps = UnstablePickerItemProps;
 export type SpiritUnstablePickerRef = UnstablePickerRef;

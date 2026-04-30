@@ -11,21 +11,21 @@ Picker is built on top of the [Dropdown][dropdown] component. It consists of a l
 displaying chosen options as tags with a trigger button, and optional helper or validation text.
 
 ```txt
-UNSTABLE_Picker
+UNSTABLE_Picker (no CSS class)
 ├── Label
 ├── Dropdown
-│   ├── UNSTABLE_Picker__inputContainer   role="group"
-│   │   ├── UNSTABLE_Picker__selection    role="group" (empty) · role="grid" (selected)
-│   │   │   ├── [empty]      UNSTABLE_Picker__selectionEmpty
-│   │   │   └── [selected]   Tag          role="row" (× N)
+│   ├── InputContainer                        role="group"
+│   │   ├── UNSTABLE_PickerSelection          role="group" (empty) · role="grid" (selected)
+│   │   │   ├── [empty]      UNSTABLE_PickerSelection__empty
+│   │   │   └── [selected]   Tag              role="row" (× N)
 │   │   │       └── role="gridcell"
 │   │   │           ├── tag label
-│   │   │           └── ControlButton    (remove)
-│   │   └── UNSTABLE_Picker__trigger     aria-haspopup="dialog"
-│   └── DropdownPopover                  role="dialog"
-│       └── FieldGroup                   (checkboxes or custom content)
-├── HelperText                           (optional)
-└── ValidationText                       (optional)
+│   │   │           └── ControlButton        (remove)
+│   │   └── UNSTABLE_PickerTrigger            aria-haspopup="dialog"
+│   └── DropdownPopover                       role="dialog"
+│       └── FieldGroup                        (checkboxes or custom content)
+├── HelperText                                (optional)
+└── ValidationText                            (optional)
 ```
 
 ⚠️ The DropdownPopover is rendered using absolute positioning relative to the trigger. Make sure there is
@@ -33,10 +33,10 @@ enough space below the Picker (or around it, depending on the popover placement)
 overflow its scrollable container or get clipped.
 
 ```html
-<div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+<div>
   <span class="Label">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--medium">
       <div
         role="group"
         tabindex="-1"
@@ -45,10 +45,10 @@ overflow its scrollable container or get clipped.
         aria-live="off"
         aria-relevant="additions"
         id="picker-selection"
-        class="UNSTABLE_Picker__selection"
+        class="UNSTABLE_PickerSelection"
       >
-        <!-- The .UNSTABLE_Picker__selection role switches to "grid" and selectionEmpty is replaced with Tag elements when options are selected. -->
-        <span class="UNSTABLE_Picker__selectionEmpty" aria-hidden="true">Languages</span>
+        <!-- The .UNSTABLE_PickerSelection role switches to "grid" and selectionEmpty is replaced with Tag elements when options are selected. -->
+        <span class="UNSTABLE_PickerSelection__empty" aria-hidden="true">Languages</span>
       </div>
       <button
         data-spirit-toggle="dropdown"
@@ -56,7 +56,7 @@ overflow its scrollable container or get clipped.
         aria-haspopup="dialog"
         aria-expanded="false"
         aria-controls="picker-popover"
-        class="UNSTABLE_Picker__trigger"
+        class="UNSTABLE_PickerTrigger"
       >
         <span class="accessibility-hidden">Add</span>
         <svg class="Icon" width="20" height="20" aria-hidden="true">
@@ -100,7 +100,7 @@ Place a hidden `<span>` with a unique `id` anywhere in the `<body>` and referenc
   aria-live="off"
   aria-relevant="additions"
   id="picker-selection"
-  class="UNSTABLE_Picker__selection"
+  class="UNSTABLE_PickerSelection"
 >
   <div
     role="row"
@@ -136,10 +136,10 @@ Use the `accessibility-hidden` helper to visually hide the label while keeping i
 accessible to screen readers.
 
 ```html
-<div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+<div>
   <span class="Label accessibility-hidden">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--medium">
       <!-- … -->
     </div>
     <!-- … -->
@@ -155,10 +155,10 @@ a red asterisk after the label text.
 ⚠️ The required state is only indicative and does not add any technical validation to the component.
 
 ```html
-<div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+<div>
   <span class="Label Label--required">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--medium">
       <!-- … -->
     </div>
     <!-- … -->
@@ -196,23 +196,23 @@ See the [Themes demo][picker-themes-demo].
 
 ## Sizes
 
-Use the `UNSTABLE_Picker--small`, `UNSTABLE_Picker--medium`, or `UNSTABLE_Picker--large` modifier to
-control the size of the input container. `UNSTABLE_Picker--medium` is considered the default size.
+Use the `InputContainer--small`, `InputContainer--medium`, or `InputContainer--large` modifier on
+the `InputContainer` element to control the size. `InputContainer--medium` is considered the default size.
 
-Each Picker size expects a matching Tag and ControlButton size inside the selection area:
+Each size expects a matching Tag and ControlButton size inside the selection area:
 
-| Picker modifier           | `min-height` | Tag class     | ControlButton class     |
-| ------------------------- | ------------ | ------------- | ----------------------- |
-| `UNSTABLE_Picker--small`  | 32px         | `Tag--xsmall` | `ControlButton--xsmall` |
-| `UNSTABLE_Picker--medium` | 40px         | `Tag--small`  | `ControlButton--small`  |
-| `UNSTABLE_Picker--large`  | 48px         | `Tag--medium` | `ControlButton--medium` |
+| InputContainer modifier  | `min-height` | Tag class     | ControlButton class     |
+| ------------------------ | ------------ | ------------- | ----------------------- |
+| `InputContainer--small`  | 32px         | `Tag--xsmall` | `ControlButton--xsmall` |
+| `InputContainer--medium` | 40px         | `Tag--small`  | `ControlButton--small`  |
+| `InputContainer--large`  | 48px         | `Tag--medium` | `ControlButton--medium` |
 
 ```html
-<div class="UNSTABLE_Picker UNSTABLE_Picker--large">
+<div>
   <span class="Label">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
-      <div role="grid" aria-label="Selected languages" class="UNSTABLE_Picker__selection">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--large">
+      <div role="grid" aria-label="Selected languages" class="UNSTABLE_PickerSelection">
         <div role="row" tabindex="0" aria-label="Czech" class="Tag Tag--selected Tag--medium">
           <div role="gridcell" aria-colindex="1" class="d-contents">
             <span>Czech</span>
@@ -242,15 +242,15 @@ Give it a unique `id` and reference it via `aria-describedby` on the selection e
 readers announce the hint when the selection area receives focus.
 
 ```html
-<div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+<div>
   <span class="Label">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--medium">
       <div
         role="group"
         aria-label="Selected languages"
         aria-describedby="picker-helper-text"
-        class="UNSTABLE_Picker__selection"
+        class="UNSTABLE_PickerSelection"
       >
         <!-- … -->
       </div>
@@ -265,22 +265,22 @@ readers announce the hint when the selection area receives focus.
 ## Validation States
 
 Validation states visually communicate feedback to the user. Apply a validation modifier class on
-the root element and use `ValidationText` component for the message. Give it a unique `id`
+the `InputContainer` element and use `ValidationText` component for the message. Give it a unique `id`
 and reference it via `aria-describedby` on the selection element so screen readers announce the
 message when the selection area receives focus.
 
 Available validation states: `danger`, `warning`, `success`.
 
 ```html
-<div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--danger">
+<div>
   <span class="Label Label--required">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--medium InputContainer--danger">
       <div
         role="group"
         aria-label="Selected languages"
         aria-describedby="picker-validation-text"
-        class="UNSTABLE_Picker__selection"
+        class="UNSTABLE_PickerSelection"
       >
         <!-- … -->
       </div>
@@ -296,16 +296,16 @@ Available validation states: `danger`, `warning`, `success`.
 
 ## Disabled
 
-Use the `UNSTABLE_Picker--disabled` modifier (or the `is-disabled` class) on the root element and
-the `disabled` attribute on the trigger button and all interactive elements inside the selection
-area (remove buttons) to disable the Picker.
+Add `InputContainer--disabled` on the input container, `UNSTABLE_PickerSelection--disabled` on the
+selection element, and the `disabled` attribute on the trigger button and all interactive elements
+inside the selection area (remove buttons) to disable the Picker.
 
 ```html
-<div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--disabled">
+<div>
   <span class="Label Label--disabled">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
-      <div role="grid" aria-label="Selected languages" class="UNSTABLE_Picker__selection">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--medium InputContainer--disabled">
+      <div role="grid" aria-label="Selected languages" class="UNSTABLE_PickerSelection">
         <div role="row" tabindex="0" aria-label="Czech" class="Tag Tag--selected Tag--disabled Tag--small">
           <div role="gridcell" aria-colindex="1" class="d-contents">
             <span>Czech</span>
@@ -325,7 +325,7 @@ area (remove buttons) to disable the Picker.
       <button
         data-spirit-toggle="dropdown"
         data-spirit-target="#picker-disabled"
-        class="UNSTABLE_Picker__trigger"
+        class="UNSTABLE_PickerTrigger"
         aria-haspopup="dialog"
         aria-expanded="false"
         aria-controls="picker-disabled"
@@ -403,10 +403,10 @@ When a tag is removed (via the remove button click, or Delete/Backspace key on t
 
 ### Selection Area: Dynamic Role
 
-The selection area (`UNSTABLE_Picker__selection`) uses a dynamic ARIA role:
+The selection area (`UNSTABLE_PickerSelection`) uses a dynamic ARIA role:
 
 - **Empty state** — `role="group"`: a plain grouping container with no keyboard navigation contract.
-  Its only child is the `UNSTABLE_Picker__selectionEmpty` placeholder.
+  Its only child is the `UNSTABLE_PickerSelection__empty` placeholder.
 - **Selected state** — `role="grid"`: switched by JavaScript when the first tag is added or when the
   picker renders with pre-selected values, and switched back to `group` when the last tag is removed.
 

@@ -1,0 +1,25 @@
+// 1. PickerTrigger::before (z-index: 0, from pseudo-element.stretch) fills InputContainer
+//    (position: relative), making the whole input area clickable. Selection interactive
+//    children sit above it via z-index: 1.
+
+@use '../../settings/cursors';
+@use '../../tools/pseudo-element';
+@use '../../tools/reset';
+@use 'theme';
+
+// 1.
+.UNSTABLE_PickerTrigger {
+    @include pseudo-element.stretch();
+    @include reset.button();
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline-end: theme.$padding;
+    margin-inline-start: theme.$column-gap;
+}
+
+.UNSTABLE_PickerTrigger:disabled {
+    pointer-events: none;
+    cursor: cursors.$disabled;
+}
