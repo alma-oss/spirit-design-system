@@ -2,7 +2,6 @@
 //    and therefore bloating the CSS.
 // 2. We need to set the background-color of the non-disabled Checkbox input to initial color when it is hovered
 //    or active, because we need it contrasting with the background color.
-// 3. Make the text selectable and allow links to be clickable in the helper and validation texts.
 
 @use 'theme';
 @use '../../settings/form-fields' as form-fields-settings;
@@ -12,10 +11,6 @@
 $_field-name: 'Checkbox';
 
 .Checkbox {
-    @include form-fields-tools.inline-field-root($_field-name);
-}
-
-.Checkbox__input {
     @include form-fields-tools.inline-field-input();
 
     flex-shrink: 0;
@@ -45,20 +40,8 @@ $_field-name: 'Checkbox';
 
 @include form-fields-tools.input-field-validation-states($_field-name);
 
-.Checkbox--item {
-    @include form-fields-tools.item();
-}
-
-.Checkbox--item:is(.Checkbox--disabled, .Checkbox.is-disabled) {
-    @include form-fields-tools.item-disabled();
-}
-
-:is(.Checkbox--disabled, .Checkbox.is-disabled) {
-    @include form-fields-tools.inline-field-root-disabled();
-}
-
-:is(.Checkbox--disabled, .Checkbox.is-disabled) > .Checkbox__input,
-.Checkbox > .Checkbox__input:disabled {
+:is(.Checkbox--disabled, .Checkbox.is-disabled),
+.Checkbox:disabled {
     @include form-fields-tools.input-disabled();
 
     border-color: form-fields-settings.$input-border-color-state-disabled;
@@ -80,15 +63,6 @@ $_field-name: 'Checkbox';
 }
 
 // stylelint-disable-next-line selector-max-specificity -- 2.
-.Checkbox--item:not(.Checkbox--disabled, .Checkbox.is-disabled) .Checkbox__input:is(:hover, :active):not(:checked) {
+.Checkbox--item:not(.Checkbox--disabled, .Checkbox.is-disabled):is(:hover, :active):not(:checked) {
     background-color: form-fields-settings.$input-background-color;
 }
-
-@include form-fields-tools.input-position(
-    $component-class: $_field-name,
-    $positions: (
-        'start': row,
-        'end': row-reverse,
-    ),
-    $default-position: 'start'
-);
