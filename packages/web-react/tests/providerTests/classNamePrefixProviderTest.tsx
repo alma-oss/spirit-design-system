@@ -1,9 +1,13 @@
 import { render, waitFor } from '@testing-library/react';
 import React, { type ComponentType } from 'react';
 import { ClassNamePrefixProvider } from '../../src/context/ClassNamePrefixContext';
-import getElement from '../testUtils/getElement';
+import getElement, { type GetElementTarget } from '../testUtils/getElement';
 
-export const classNamePrefixProviderTest = (Component: ComponentType<any>, className: string, testId?: string) => {
+export const classNamePrefixProviderTest = (
+  Component: ComponentType<any>,
+  className: string,
+  target?: GetElementTarget,
+) => {
   it('renders with class name prefix', async () => {
     const prefix = 'lmc';
     const dom = render(
@@ -13,7 +17,8 @@ export const classNamePrefixProviderTest = (Component: ComponentType<any>, class
     );
 
     await waitFor(() => {
-      const element = getElement(dom, testId);
+      const element = getElement(dom, target);
+
       expect(element).toHaveClass(`${prefix}-${className}`);
     });
   });
@@ -22,7 +27,8 @@ export const classNamePrefixProviderTest = (Component: ComponentType<any>, class
     const dom = render(<Component />);
 
     await waitFor(() => {
-      const element = getElement(dom, testId);
+      const element = getElement(dom, target);
+
       expect(element).toHaveClass(className);
     });
   });
