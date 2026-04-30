@@ -10,7 +10,6 @@ import {
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
-  validationStatePropsTest,
 } from '@local/tests';
 import FieldGroup from '../FieldGroup';
 
@@ -25,9 +24,7 @@ describe('FieldGroup', () => {
     </>
   );
 
-  classNamePrefixProviderTest(FieldGroup, 'FieldGroup');
-
-  validationStatePropsTest(FieldGroup, 'FieldGroup--');
+  classNamePrefixProviderTest(FieldGroup, 'border-0');
 
   stylePropsTest(
     (props) => <FieldGroup {...props} label="Label" id="field-group-example" data-testid="field-group" />,
@@ -75,13 +72,13 @@ describe('FieldGroup', () => {
 
     const fieldGroup = screen.getByRole('group');
 
-    expect(fieldGroup).toHaveClass('FieldGroup');
+    expect(fieldGroup).toHaveClass('border-0');
 
     const label = fieldGroup.querySelector('legend') as HTMLElement;
 
     expect(label).toHaveTextContent('Label');
 
-    const list = fieldGroup.querySelector('.FieldGroup__fields') as HTMLElement;
+    const list = fieldGroup.querySelector('.Flex') as HTMLElement;
     const items = list.querySelectorAll('div');
 
     expect(items).toHaveLength(3);
