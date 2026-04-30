@@ -51,8 +51,7 @@ It can be used internally in the form components.
 
 ## Disabled State
 
-When the parent component is disabled, the text and links inside InputDetails are automatically dimmed.
-You must manually add the `disabled` attribute to interactive elements (buttons, links) inside InputDetails.
+To render the `InputDetails` component in a disabled state, add the `InputDetails--disabled` modifier class to the `InputDetails` element and the `disabled` attribute to the interactive elements (buttons, links) inside InputDetails.
 
 **Note:** The `disabled` attribute on buttons and links is required for proper keyboard and screen reader behavior.
 
@@ -73,7 +72,7 @@ You must manually add the `disabled` attribute to interactive elements (buttons,
     <label class="Checkbox__label Checkbox__label--required" for="consent">
       <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
     </label>
-    <div id="consent-details" class="InputDetails">
+    <div id="consent-details" class="InputDetails InputDetails--disabled">
       <p class="typography-body-medium-regular">We want to keep you informed</p>
       <button type="button" class="link-underlined link-inherit" disabled>See full terms and conditions</button>
     </div>
@@ -87,7 +86,7 @@ You must manually add the `disabled` attribute to interactive elements (buttons,
 <div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
   <div class="Toggle__text">
     <label class="Toggle__label Toggle__label--required" for="consent">I agree to the terms and conditions</label>
-    <div id="consent-details" class="InputDetails">
+    <div id="consent-details" class="InputDetails InputDetails--disabled">
       <button type="button" class="link-underlined link-inherit" disabled>See full terms and conditions</button>
       <button type="button" class="link-underlined link-inherit" disabled>See privacy policy</button>
     </div>
