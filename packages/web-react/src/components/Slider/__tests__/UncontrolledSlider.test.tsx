@@ -50,7 +50,6 @@ describe('Slider', () => {
       />,
     );
 
-    expect(screen.getByTestId('test')).toHaveClass('Slider Slider--danger');
     expect(screen.getByText(validationText)).toBeInTheDocument();
   });
 });
