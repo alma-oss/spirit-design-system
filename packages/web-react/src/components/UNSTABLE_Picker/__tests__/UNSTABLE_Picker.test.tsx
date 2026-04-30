@@ -9,8 +9,8 @@ import {
   formFieldValidationTextContextPropsTest,
   restPropsTest,
   stylePropsTest,
-  validationStatePropsTest,
 } from '@local/tests';
+import { ValidationStates } from '../../../constants';
 import { useToggle } from '../../../hooks';
 import {
   type SpiritUnstablePickerRef,
@@ -51,7 +51,11 @@ describe('UNSTABLE_Picker', () => {
 
   ariaAttributesTest(TestPicker);
 
-  validationStatePropsTest(TestPicker, 'UNSTABLE_Picker--');
+  it.each(Object.values(ValidationStates))('applies %s validation class to InputContainer', (state) => {
+    render(<TestPicker validationState={state} />);
+
+    expect(screen.getByRole('group', { name: 'Languages' })).toHaveClass(`InputContainer--${state}`);
+  });
 
   formFieldLabelContextPropsTest({
     renderComponent: (props) => <TestPicker {...defaultProps} emptySelectionLabel="Select" {...props} />,
@@ -105,7 +109,7 @@ describe('UNSTABLE_Picker', () => {
     expect(popover).toHaveClass('theme-light-on-brand');
     expect(popover).toHaveAttribute('id', 'picker-test-picker-popover');
     expect(popover).toHaveAttribute('role', 'dialog');
-    expect(popover).toHaveAttribute('aria-modal', 'true');
+    expect(popover).not.toHaveAttribute('aria-modal');
     expect(popover).toHaveAttribute('aria-labelledby', 'picker-test-picker-label');
   });
 
@@ -115,15 +119,15 @@ describe('UNSTABLE_Picker', () => {
     const popover = screen.getByRole('dialog');
 
     expect(popover).toHaveAttribute('data-spirit-fullwidthmode', 'mobile-only');
-    expect(popover).toHaveAttribute('data-spirit-placement', 'bottom-start');
+    expect(popover).toHaveClass('placement-bottom-start');
   });
 
   it('should forward labelProps to Label', () => {
     render(<TestPicker labelProps={{ theme: 'theme-light-on-brand' }} />);
 
-    const label = screen.getByText('Languages', { selector: '.UNSTABLE_Picker__label' });
+    const label = screen.getByText('Languages', { selector: '.Label' });
 
-    expect(label).toHaveClass('theme-light-on-brand', 'UNSTABLE_Picker__label');
+    expect(label).toHaveClass('theme-light-on-brand', 'Label');
   });
 
   it('should not move focus to selection tags while popover is open', () => {

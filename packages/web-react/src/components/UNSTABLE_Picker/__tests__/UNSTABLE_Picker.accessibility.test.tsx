@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import React, { type ComponentProps } from 'react';
 import { accessibilityDisabledTest, accessibilityTest, accessibilityValidationStateTest } from '@local/tests';
 import { useToggle } from '../../../hooks';
@@ -45,11 +45,9 @@ describe('UNSTABLE_Picker accessibility', () => {
 
   describe('ARIA attributes', () => {
     it('sets outer input container group label to field label', () => {
-      const { container } = render(<PickerTest />);
-      const outerGroup = container.querySelector('.UNSTABLE_Picker__inputContainer');
+      render(<PickerTest />);
 
-      expect(outerGroup).toHaveAttribute('role', 'group');
-      expect(outerGroup).toHaveAttribute('aria-label', 'Languages');
+      expect(screen.getByRole('group', { name: 'Languages' })).toBeInTheDocument();
     });
 
     it('uses role group and default selection aria-label when nothing is selected', () => {
@@ -78,8 +76,9 @@ describe('UNSTABLE_Picker accessibility', () => {
     });
 
     it('marks empty selection placeholder as aria-hidden', () => {
-      const { container } = render(<PickerTest />);
-      const placeholder = container.querySelector('.UNSTABLE_Picker__selectionEmpty');
+      render(<PickerTest />);
+      const selection = screen.getByRole('group', { name: 'Selected Languages' });
+      const placeholder = within(selection).getByText('Languages');
 
       expect(placeholder).toHaveAttribute('aria-hidden', 'true');
     });
