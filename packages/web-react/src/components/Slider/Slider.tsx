@@ -1,6 +1,5 @@
 'use client';
 
-import classNames from 'classnames';
 import React, { type CSSProperties, type ChangeEvent, type FormEvent, type ForwardedRef, forwardRef } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
@@ -37,7 +36,6 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
   const { classProps, props: modifiedProps } = useSliderStyleProps({
     ...restProps,
     isDisabled,
-    validationState,
   });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
@@ -65,7 +63,7 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
         validationState,
       }}
     >
-      <div {...styleProps} {...otherProps} className={classNames(classProps.root, styleProps.className)}>
+      <div {...styleProps} {...otherProps}>
         <Label htmlFor={id}>{label}</Label>
         <input
           {...ariaDescribedByProp}
