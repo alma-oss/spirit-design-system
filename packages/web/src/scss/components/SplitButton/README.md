@@ -35,7 +35,7 @@ Learn more about the [Dropdown][readme-dropdown] component in its documentation.
       data-spirit-autoclose="true"
     >
       More
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </button>
@@ -63,7 +63,7 @@ Learn more about the [Tooltip][readme-tooltip] component in its documentation.
       data-spirit-target="#tooltip-1"
       aria-labelledby="tooltip-1"
     >
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#download" />
       </svg>
     </button>
