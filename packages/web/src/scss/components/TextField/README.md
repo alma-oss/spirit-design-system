@@ -183,12 +183,12 @@ Then you need to add data attribute `data-spirit-toggle="password"` to the input
       data-spirit-toggle="password"
     >
       <span class="TextField__passwordToggle__icon accessibility-unchecked">
-        <svg width="20" height="20" aria-hidden="true">
+        <svg class="Icon" width="20" height="20" aria-hidden="true">
           <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
         </svg>
       </span>
       <span class="TextField__passwordToggle__icon accessibility-checked">
-        <svg width="20" height="20" aria-hidden="true">
+        <svg class="Icon" width="20" height="20" aria-hidden="true">
           <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
         </svg>
       </span>
@@ -262,7 +262,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     value="Filled"
   />
   <div class="ValidationText ValidationText--warning">
-    <svg width="20" height="20" aria-hidden="true">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
     <div>Validation text with icon</div>

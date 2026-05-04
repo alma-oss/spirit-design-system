@@ -16,14 +16,14 @@
       <ol>
         <li class="d-flex">
           <a href="/" class="link-primary link-underlined">Spirit</a>
-          <svg width="24" height="24" aria-hidden="true">
+          <svg class="Icon" width="24" height="24" aria-hidden="true">
             <use xlink:href="/assets/icons/svg/sprite.svg#chevron-right" />
           </svg>
         </li>
         {{#if package}}
           <li class="d-flex">
             <a href="{{packageUrl}}" class="link-primary link-underlined">{{package}}</a>
-            <svg width="24" height="24" aria-hidden="true">
+            <svg class="Icon" width="24" height="24" aria-hidden="true">
               <use xlink:href="/assets/icons/svg/sprite.svg#chevron-right" />
             </svg>
           </li>
@@ -33,7 +33,7 @@
             <a href="{{#if (eq parentPageName 'Components') }}{{packageUrl}}{{else}}..{{/if}}" class="link-primary link-underlined">
               {{parentPageName}}
             </a>
-            <svg width="24" height="24" aria-hidden="true">
+            <svg class="Icon" width="24" height="24" aria-hidden="true">
               <use xlink:href="/assets/icons/svg/sprite.svg#chevron-right" />
             </svg>
           </li>
