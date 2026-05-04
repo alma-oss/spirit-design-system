@@ -99,7 +99,7 @@ Tooltip can be made dismissible by following these steps:
       aria-controls="my-dismissible-tooltip"
       aria-expanded="true"
     >
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#close" />
       </svg>
       <span class="accessibility-hidden">Close</span>

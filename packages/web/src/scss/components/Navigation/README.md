@@ -104,7 +104,7 @@ The `NavigationAvatar` is a component that is styled to be used as a navigation 
 ```html
 <a href="#" class="NavigationAvatar">
   <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
-    <svg width="20" height="20" aria-hidden="true">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
   </span>
@@ -117,7 +117,7 @@ If you want the avatar to be square, don't forget to add the `NavigationAvatar--
 ```html
 <a href="#" class="NavigationAvatar NavigationAvatar--square">
   <span class="Avatar Avatar--square Avatar--small" aria-label="Profile of Jiří Bárta">
-    <svg width="20" height="20" aria-hidden="true">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
   </span>
@@ -136,7 +136,7 @@ Available sizes: `xsmall`, `small`, `medium`, `large`, `xlarge`.
 ```html
 <a href="#" class="NavigationAvatar">
   <span class="Avatar Avatar--xsmall" aria-label="Profile of Jiří Bárta">
-    <svg width="16" height="16" aria-hidden="true">
+    <svg class="Icon" width="16" height="16" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
   </span>
@@ -149,7 +149,7 @@ You can also use responsive sizes with breakpoint-specific classes, e.g. `Avatar
 ```html
 <a href="#" class="NavigationAvatar">
   <span class="Avatar Avatar--small Avatar--tablet--medium Avatar--desktop--large" aria-label="Profile of Jiří Bárta">
-    <svg width="20" height="20" aria-hidden="true">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
   </span>
@@ -178,7 +178,7 @@ With NavigationAction and NavigationAvatar components:
     <li class="NavigationItem NavigationItem--alignmentYCenter">
       <a href="#" class="NavigationAvatar">
         <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
-          <svg width="20" height="20" aria-hidden="true">
+          <svg class="Icon" width="20" height="20" aria-hidden="true">
             <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
           </svg>
         </span>
@@ -203,7 +203,7 @@ With Buttons and NavigationAvatar:
     <li class="NavigationItem NavigationItem--alignmentYCenter">
       <a href="#" class="NavigationAvatar">
         <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
-          <svg width="20" height="20" aria-hidden="true">
+          <svg class="Icon" width="20" height="20" aria-hidden="true">
             <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
           </svg>
         </span>

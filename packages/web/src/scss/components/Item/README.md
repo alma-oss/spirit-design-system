@@ -17,7 +17,7 @@ Item with icon example:
 ```html
 <button type="button" class="Item">
   <span class="Item__icon Item__icon--start">
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#search" />
     </svg>
   </span>
@@ -33,7 +33,7 @@ Selected with icon only:
 <button type="button" class="Item">
   <span class="Item__label">Item</span>
   <span class="Item__icon Item__icon--end">
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#check-plain" />
     </svg>
   </span>
@@ -54,7 +54,7 @@ Selected with background and icon:
 <button type="button" class="Item Item--selected">
   <span class="Label Label--item">Item</span>
   <span class="Item__icon Item__icon--end">
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#check-plain" />
     </svg>
   </span>
@@ -85,14 +85,14 @@ Item with icon and helper text in selected state example:
 ```html
 <button type="button" class="Item Item--selected">
   <span class="Item__icon Item__icon--start">
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#search" />
     </svg>
   </span>
   <span class="Label Label--item">Item</span>
   <span class="HelperText HelperText--item">Helper text</span>
   <span class="Item__icon Item__icon--end">
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#check-plain" />
     </svg>
   </span>
@@ -147,7 +147,7 @@ Usage in [Dropdown][dropdown] component:
   <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-item-example">
     <a href="#" class="Item">
       <span class="Item__icon Item__icon--start">
-        <svg width="24" height="24" aria-hidden="true">
+        <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use xlink:href="/icons/svg/sprite.svg#info" />
         </svg>
       </span>

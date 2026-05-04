@@ -3,7 +3,7 @@
 ## Basic Usage
 
 ```html
-<svg width="24" height="24">
+<svg class="Icon" width="24" height="24">
   <use xlink:href="/assets/icons/svg/sprite.svg#info" />
 </svg>
 ```
