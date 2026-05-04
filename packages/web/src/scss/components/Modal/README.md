@@ -111,7 +111,7 @@ and allows users to easily close it.
     aria-controls="modal-example"
     aria-expanded="false"
   >
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#close" />
     </svg>
     <span class="accessibility-hidden">Close</span>
@@ -382,7 +382,7 @@ When you put it all together:
         aria-controls="modal-example"
         aria-expanded="false"
       >
-        <svg width="24" height="24" aria-hidden="true">
+        <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use xlink:href="/icons/svg/sprite.svg#close" />
         </svg>
         <span class="accessibility-hidden">Close</span>

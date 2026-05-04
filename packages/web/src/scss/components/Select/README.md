@@ -11,7 +11,7 @@ Basic usage:
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -30,7 +30,7 @@ Sizes (please note the icon size):
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="16" height="16" aria-hidden="true">
+      <svg class="Icon" width="16" height="16" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -45,7 +45,7 @@ Sizes (please note the icon size):
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -60,7 +60,7 @@ Sizes (please note the icon size):
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -80,7 +80,7 @@ Required select (requires a placeholder option):
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -99,7 +99,7 @@ Hidden label:
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -127,7 +127,7 @@ sure users give all needed details before sending the form.
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -143,7 +143,7 @@ sure users give all needed details before sending the form.
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -174,7 +174,7 @@ To add helper text, use the [HelperText][readme-helper-text] component:
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -202,7 +202,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -217,7 +217,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -233,7 +233,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -259,13 +259,13 @@ a JS interaction class when controlled by JavaScript (`has-success`,
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
   <div class="ValidationText ValidationText--warning" id="select-warning-icon-validation-text">
-    <svg width="20" height="20" aria-hidden="true">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
     <div>Validation text with icon</div>
@@ -288,7 +288,7 @@ JS interaction class when controlled by JavaScript:
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
@@ -302,7 +302,7 @@ JS interaction class when controlled by JavaScript:
       <option value="2">Option 2</option>
     </select>
     <div class="Select__icon">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
