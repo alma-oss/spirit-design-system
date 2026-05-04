@@ -171,7 +171,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     oninput="this.style.setProperty('--slider-position', `${Math.round((100 * this.value) / 100)}%`);"
   />
   <div id="slider-warning-validation-text" class="ValidationText ValidationText--warning">
-    <svg width="20" height="20" aria-hidden="true">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
     <div>Validation text with icon</div>

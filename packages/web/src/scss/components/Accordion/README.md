@@ -171,7 +171,7 @@ When you put it all together:
           <!-- Slot content: end -->
         </span>
         <span class="Accordion__itemIcon">
-          <svg width="24" height="24" aria-hidden="true">
+          <svg class="Icon" width="24" height="24" aria-hidden="true">
             <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
           </svg>
         </span>

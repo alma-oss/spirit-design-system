@@ -64,7 +64,7 @@ To add helper text, use the [HelperText][readme-helper-text] component:
     data-spirit-element="input"
   />
   <div class="FileUploaderInput__dropZone" data-spirit-element="dropZone">
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#upload" />
     </svg>
     <label for="file-uploader" class="FileUploaderInput__dropZoneLabel">
@@ -226,7 +226,7 @@ When validated on server:
   <!-- Label -->
   <!-- Drop zone with input -->
   <div class="ValidationText ValidationText--warning">
-    <svg width="20" height="20" aria-hidden="true">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
     <div>Warning validation text with icon</div>
@@ -320,7 +320,7 @@ truncated.
 ```html
 <li class="FileUploaderAttachment">
   <!-- File icon: -->
-  <svg width="24" height="24" aria-hidden="true">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#file" />
   </svg>
   <!-- File name: -->
@@ -330,7 +330,7 @@ truncated.
   <!-- Remove button: -->
   <button type="button" class="FileUploaderAttachment__action">
     <span class="accessibility-hidden">Remove</span>
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#close" />
     </svg>
   </button>
@@ -346,7 +346,7 @@ pick up the template and apply it on any attachments the user wants to upload.
 <div class="FileUploader" data-spirit-toggle="fileUploader">
   <template data-spirit-snippet="item">
     <li class="FileUploaderAttachment" data-spirit-populate-field="item">
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#file" />
       </svg>
       <span class="FileUploaderAttachment__name">
@@ -354,7 +354,7 @@ pick up the template and apply it on any attachments the user wants to upload.
       </span>
       <button type="button" class="FileUploaderAttachment__action" data-spirit-populate-field="button">
         <span class="accessibility-hidden">Remove</span>
-        <svg width="24" height="24" aria-hidden="true">
+        <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use xlink:href="/icons/svg/sprite.svg#close" />
         </svg>
       </button>
@@ -396,7 +396,7 @@ Full example:
   </span>
   <button type="button" class="FileUploaderAttachment__action">
     <span class="accessibility-hidden">Remove</span>
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#close" />
     </svg>
   </button>
@@ -412,7 +412,7 @@ You can add custom actions to the FileUploaderAttachment.
   <!-- Custom action: start -->
   <button type="button" class="FileUploaderAttachment__action">
     <span class="accessibility-hidden">Edit</span>
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#edit" />
     </svg>
   </button>
@@ -424,7 +424,7 @@ Full example:
 
 ```html
 <li class="FileUploaderAttachment">
-  <svg width="24" height="24" aria-hidden="true">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#file" />
   </svg>
   <span class="FileUploaderAttachment__name">
@@ -434,7 +434,7 @@ Full example:
     <!-- Custom action: start -->
     <button type="button" class="FileUploaderAttachment__action">
       <span class="accessibility-hidden">Edit</span>
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#edit" />
       </svg>
     </button>
@@ -442,7 +442,7 @@ Full example:
   </span>
   <button type="button" class="FileUploaderAttachment__action">
     <span class="accessibility-hidden">Remove</span>
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#close" />
     </svg>
   </button>
@@ -542,7 +542,7 @@ This is how all subcomponents build up the complete FileUploader:
   <!-- FileUploaderAttachment template: start -->
   <template data-spirit-snippet="item">
     <li class="FileUploaderAttachment" data-spirit-populate-field="item">
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#file" />
       </svg>
       <span class="FileUploaderAttachment__name">
@@ -550,7 +550,7 @@ This is how all subcomponents build up the complete FileUploader:
       </span>
       <button type="button" class="FileUploaderAttachment__action" data-spirit-populate-field="button">
         <span class="accessibility-hidden">Remove</span>
-        <svg width="24" height="24" aria-hidden="true">
+        <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use xlink:href="/icons/svg/sprite.svg#close" />
         </svg>
       </button>
@@ -569,7 +569,7 @@ This is how all subcomponents build up the complete FileUploader:
       data-spirit-element="input"
     />
     <div class="FileUploaderInput__dropZone" data-spirit-element="dropZone">
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#upload" />
       </svg>
       <label for="file-uploader-with-attachments" class="FileUploaderInput__dropZoneLabel">
@@ -586,7 +586,7 @@ This is how all subcomponents build up the complete FileUploader:
   <ul class="FileUploaderList" aria-labelledby="attachments" data-spirit-element="list">
     <!-- FileUploaderAttachment INSERTED BY THE JS PLUGIN: start -->
     <li class="FileUploaderAttachment">
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#file" />
       </svg>
       <span class="FileUploaderAttachment__name">
@@ -594,7 +594,7 @@ This is how all subcomponents build up the complete FileUploader:
       </span>
       <button type="button" class="FileUploaderAttachment__action">
         <span class="accessibility-hidden">Remove</span>
-        <svg width="24" height="24" aria-hidden="true">
+        <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use xlink:href="/icons/svg/sprite.svg#close" />
         </svg>
       </button>

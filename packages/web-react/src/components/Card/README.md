@@ -136,7 +136,7 @@ CardArtwork is an optional subcomponent that displays a small image or icon.
 
 ```tsx
 <CardArtwork>
-  <svg width="24" height="24" aria-hidden="true">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
     <use xlink:href="/assets/icons/svg/sprite.svg#file" />
   </svg>
 </CardArtwork>
@@ -154,7 +154,7 @@ To align the artwork, use `alignmentX` prop:
 
 ```tsx
 <CardArtwork alignmentX="center">
-  <svg width="24" height="24" aria-hidden="true">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
     <use xlink:href="/assets/icons/svg/sprite.svg#file" />
   </svg>
 </CardArtwork>

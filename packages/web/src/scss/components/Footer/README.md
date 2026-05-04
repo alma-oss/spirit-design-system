@@ -98,7 +98,7 @@ Use the secondary [Button][button] component to create social media links inside
   <li>
     <a href="https://www.example.com" class="Button Button--secondary Button--medium Button--symmetrical">
       <span class="accessibility-hidden">Facebook</span>
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#logo-facebook" />
       </svg>
     </a>
@@ -221,7 +221,7 @@ Responsive values can be defined using the `tablet` and `desktop` infixes.
         <li>
           <a href="https://www.example.com" class="Button Button--secondary Button--medium Button--symmetrical">
             <span class="accessibility-hidden">Facebook</span>
-            <svg width="24" height="24" aria-hidden="true">
+            <svg class="Icon" width="24" height="24" aria-hidden="true">
               <use xlink:href="/assets/icons/svg/sprite.svg#logo-facebook" />
             </svg>
           </a>
@@ -229,7 +229,7 @@ Responsive values can be defined using the `tablet` and `desktop` infixes.
         <li>
           <a href="https://www.example.com" class="Button Button--secondary Button--medium Button--symmetrical">
             <span class="accessibility-hidden">X</span>
-            <svg width="24" height="24" aria-hidden="true">
+            <svg class="Icon" width="24" height="24" aria-hidden="true">
               <use xlink:href="/assets/icons/svg/sprite.svg#logo-x" />
             </svg>
           </a>
@@ -237,7 +237,7 @@ Responsive values can be defined using the `tablet` and `desktop` infixes.
         <li>
           <a href="https://www.example.com" class="Button Button--secondary Button--medium Button--symmetrical">
             <span class="accessibility-hidden">YouTube</span>
-            <svg width="24" height="24" aria-hidden="true">
+            <svg class="Icon" width="24" height="24" aria-hidden="true">
               <use xlink:href="/assets/icons/svg/sprite.svg#logo-youtube" />
             </svg>
           </a>
@@ -253,7 +253,7 @@ Responsive values can be defined using the `tablet` and `desktop` infixes.
               <option value="cs">Čeština</option>
             </select>
             <div class="Select__icon">
-              <svg width="20" height="20" aria-hidden="true">
+              <svg class="Icon" width="20" height="20" aria-hidden="true">
                 <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
               </svg>
             </div>
