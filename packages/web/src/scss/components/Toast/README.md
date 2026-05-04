@@ -183,7 +183,7 @@ An icon can be added to the ToastBar component:
 <div class="ToastBar ToastBar--neutral">
   <div class="ToastBar__box">
     <div class="ToastBar__container">
-      <svg width="20" height="20" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#info" />
       </svg>
       <div class="ToastBar__content">
@@ -301,7 +301,7 @@ button:
       aria-controls="my-dismissible-toast"
       aria-expanded="true"
     >
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#close" />
       </svg>
       <span class="accessibility-hidden">Close</span>
@@ -331,7 +331,7 @@ button:
     <div id="my-dismissible-toast" class="ToastBar ToastBar--neutral ToastBar--dismissible is-hidden">
       <div class="ToastBar__box">
         <div class="ToastBar__container">
-          <svg width="20" height="20" aria-hidden="true">
+          <svg class="Icon" width="20" height="20" aria-hidden="true">
             <use xlink:href="/icons/svg/sprite.svg#info" />
           </svg>
           <div class="ToastBar__content">
@@ -346,7 +346,7 @@ button:
           aria-controls="my-dismissible-toast"
           aria-expanded="true"
         >
-          <svg width="24" height="24" aria-hidden="true">
+          <svg class="Icon" width="24" height="24" aria-hidden="true">
             <use xlink:href="/icons/svg/sprite.svg#close" />
           </svg>
           <span class="accessibility-hidden">Close</span>
@@ -374,7 +374,7 @@ the template and apply it on any toasts to be shown to the user, using the confi
       <div class="ToastBar is-hidden" data-spirit-color="neutral" data-spirit-populate-field="item">
         <div class="ToastBar__box">
           <div class="ToastBar__container">
-            <svg width="20" height="20" aria-hidden="true" data-spirit-populate-field="icon">
+            <svg class="Icon" width="20" height="20" aria-hidden="true" data-spirit-populate-field="icon">
               <use xlink:href="/icons/svg/sprite.svg#info" />
             </svg>
             <div class="ToastBar__content">
@@ -389,7 +389,7 @@ the template and apply it on any toasts to be shown to the user, using the confi
             data-spirit-dismiss="toast"
             aria-expanded="true"
           >
-            <svg width="24" height="24" aria-hidden="true">
+            <svg class="Icon" width="24" height="24" aria-hidden="true">
               <use xlink:href="/icons/svg/sprite.svg#close" />
             </svg>
             <span class="accessibility-hidden">Close</span>
