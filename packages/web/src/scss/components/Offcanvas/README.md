@@ -28,7 +28,7 @@ The `data-spirit-target` attribute accepts a CSS selector to apply the Offcanvas
   aria-controls="offcanvas-example"
   aria-expanded="false"
 >
-  <svg width="24" height="24" aria-hidden="true">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
