@@ -166,14 +166,15 @@ one or more states as ⚠️.
 
 For each visible UI element, verify it maps to an existing Spirit component:
 
-| Check                                          | What to look for                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Component instance**                         | Does the Figma layer have a Code Connect snippet? If not, it may be a custom composition or a missing DS component. **Exception:** plain `<text>` layers are not components in Figma — Spirit uses text styles (Body, Heading, etc.) for typography, not typography components. Never flag a text layer as a missing DS component. **Exception:** layout layers named `Container`, `Section`, `Stack`, or `Grid` are intentional named frames — they are not DS component instances and must not be flagged as missing components.                                                                         |
-| **Correct component**                          | Is the right DS component used? **Note:** there is no `Link` component in Figma — designers indicate links via text styles with `link` in the name (e.g. `Body/Medium/Link Regular`). This is correct design practice and must NOT be flagged as a finding. Instead, add a note to **Development Considerations** that these text layers should be implemented as the DS `Link` component in code.                                                                                                                                                                                                         |
-| **No links inside interactive element labels** | A `Link` (or link-styled text) placed inside the **label** of a form field (e.g. `TextField`, `Toggle`, `Checkbox`, `Radio`, `Select`) is a 🚨 blocker — a link nested inside a `<label>` is invalid HTML and causes serious accessibility issues. Links in **helper text** or **validation text** are acceptable, as those are plain text nodes, not interactive elements.                                                                                                                                                                                                                                |
-| **No unimplemented component features**        | Compare what the design shows for each component instance against its Code Connect output. If the design uses a variant, prop, or slot that is absent from the Code Connect snippet (e.g. a `description` text area on a `Toggle` that Code Connect never renders), the feature does not exist in the DS yet and must be added before the design can be implemented as shown. **Routing:** record it in **Development Considerations** with 🚨 severity **and** add a matching row to **Required DS Changes**. Do **not** include it in Findings — CC gaps are developer/DS work, not designer-actionable. |
-| **"NEW" suffix in layer name**                 | Layers named "XYZ NEW" signal a proposed new DS component that doesn't exist yet — flag as a required DS change.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **Deprecated components**                      | Search for a `DEPRECATIONS.md` file in the repository (e.g. `packages/web-react/DEPRECATIONS.md` in Spirit). If not found locally, fetch it from [`packages/web-react/DEPRECATIONS.md`](https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/DEPRECATIONS.md) on GitHub as a reference. Check whether any components in the design appear in that file.                                                                                                                                                                                                                           |
+| Check                                          | What to look for                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Component instance**                         | Does the Figma layer have a Code Connect snippet? If not, it may be a custom composition or a missing DS component. When no Code Connect is found, check whether the component exists in the codebase — the two cases are reported differently (see "Differentiating not-yet-Implemented From lacks-Code Connect" below). **Exception:** plain `<text>` layers are not components in Figma — Spirit uses text styles (Body, Heading, etc.) for typography, not typography components. Never flag a text layer as a missing DS component. **Exception:** layout layers named `Container`, `Section`, `Stack`, or `Grid` are intentional named frames — they are not DS component instances and must not be flagged as missing components.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| **Correct component**                          | Is the right DS component used? **Note:** there is no `Link` component in Figma — designers indicate links via text styles with `link` in the name (e.g. `Body/Medium/Link Regular`). This is correct design practice and must NOT be flagged as a finding. Instead, add a note to **Development Considerations** that these text layers should be implemented as the DS `Link` component in code.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **No links inside interactive element labels** | A `Link` (or link-styled text) placed inside the **label** of a form field (e.g. `TextField`, `Toggle`, `Checkbox`, `Radio`, `Select`) is a 🚨 blocker — a link nested inside a `<label>` is invalid HTML and causes serious accessibility issues. Links in **helper text** or **validation text** are acceptable, as those are plain text nodes, not interactive elements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **No unimplemented component features**        | Compare what the design shows for each component instance against its Code Connect output. If the design uses a variant, prop, or slot that is absent from the Code Connect snippet (e.g. a `description` text area on a `Toggle` that Code Connect never renders), the feature does not exist in the DS yet and must be added before the design can be implemented as shown. **Routing:** record it in **Development Considerations** with 🚨 severity **and** add a matching row to **Required DS Changes**. Do **not** include it in Findings — Code Connect gaps are developer/DS work, not designer-actionable. **Specialised case — form-field Enhancer / Addon slots:** for `TextField`, `Select`, and `TextArea` instances, inspect child layers inside the instance from `get_metadata`. If any child layer is named `Enhancer`, `Leading`, or `Trailing`, or is a visible icon/text node that does not appear in the Code Connect snippet, the Enhancer feature is in use. This maps to the Addon API planned for the next major version of Spirit; the current Code Connect snippet omits it. Route as ⚠️ in **Development Considerations** and add a **Required DS Changes** row (e.g. "Add Addon/Enhancer support to `TextField`"). |
+| **"NEW" suffix in layer name**                 | Layers named "XYZ NEW" signal a proposed new DS component that doesn't exist yet — flag as a required DS change.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **Deprecated components**                      | Search for a `DEPRECATIONS.md` file in the repository (e.g. `packages/web-react/DEPRECATIONS.md` in Spirit). If not found locally, fetch it from [`packages/web-react/DEPRECATIONS.md`](https://raw.githubusercontent.com/alma-oss/spirit-design-system/refs/heads/main/packages/web-react/DEPRECATIONS.md) on GitHub as a reference. Check whether any components in the design appear in that file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| **`ControlButton` nested inside `Tag`**        | When the `get_design_context` output shows a `ControlButton` Code Connect snippet that is a descendant of a `Tag` instance layer, add a **Development Considerations** ℹ️ note: from Spirit v5, `ControlButton` automatically inherits the parent `Tag`'s color scheme via `data-spirit-color-scheme` and applies the exact token set for that scheme. In the current version it uses `dynamic-color-*` CSS utility classes as a fallback, so the rendered colors may differ. This is informational — it is not designer-actionable and needs no Required DS Change.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 When a layer lacks a Code Connect snippet and its structure or name suggests it may correspond to
 a Spirit component, try to suggest a replacement:
@@ -186,6 +187,57 @@ a Spirit component, try to suggest a replacement:
 Use whichever tool is available in the current environment; skip silently if neither is. Include
 a replacement suggestion in the finding only when the match is credible. Omit a suggestion when
 results are ambiguous or the match is implausible.
+
+#### Differentiating "not yet Implemented" From "lacks Code Connect"
+
+When a Figma instance has no Code Connect snippet, the root cause is one of two very different things:
+
+- **Component exists in code but has no Code Connect binding** — the fix is to add a `.figma.tsx` Code Connect file (DS work only).
+- **Component does not exist in code at all** — the Code Connect gap is a downstream symptom; the real work is implementing the component first.
+
+To determine which case applies, grep the codebase for the component name.
+
+1. Resolve the components search path by trying the following in order, stopping at the first match:
+   1. `packages/web-react/src/components/` — Spirit's default components path
+   2. `libs/design-system/components/` — Cyborg convention
+   3. `componentsPath` value in `.agents/skills/review-figma-design/config.json` — custom override
+      (set `componentsPath` to a relative path from the repo root; `null` skips this step)
+
+   If none of the paths exist in the repository, skip the existence check and treat the component
+   as "not yet implemented".
+
+2. Grep the resolved path for the component name:
+   ```bash
+   grep -r "ComponentName" <resolved-path> --include="*.tsx" -l 2>/dev/null | head -1
+   ```
+
+Apply the result as follows:
+
+| Grep result | Case                            | Development Considerations wording                                                                                                | Required DS Changes entry              |
+| ----------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| Match found | Exists in code, no Code Connect | `🚨 \`ComponentName\` lacks Code Connect — component is implemented (path: \`packages/…\`) but has no Figma Code Connect binding` | "Add Code Connect for `ComponentName`" |
+| No match    | Not yet implemented             | `🚨 \`ComponentName\` is not yet implemented — no code equivalent exists; implement from DS primitives, then add Code Connect`    | "Implement `ComponentName`"            |
+
+**Product-specific components** (names with a product prefix such as `OPU-`, `Cyborg-`, or similar) will not be added to the Spirit DS. For these:
+
+- Keep the 🚨 severity (implementation is still blocked).
+- Change the wording to reflect that it is a product-level concern: "product-specific component not in Spirit DS; implement in the product codebase using DS primitives, then add Code Connect there."
+- Omit the Required DS Changes row (Spirit DS has no action to take).
+
+#### Cross-Frame Instance Height Consistency (multi-Frame Mode Only)
+
+After collecting `get_metadata` for all frames, build a name → heights map by recording the
+`height` attribute of every `<instance name="…">` element across all frames. For any named
+instance that appears in more than one frame with differing `height` values, flag it in
+**Findings** as ⚠️:
+
+> `<name>` has inconsistent heights across frames (Npx in "Frame A" vs Mpx in "Frame B"). Verify
+> all variants were built from the same master component and that the height difference is
+> intentional.
+
+This is especially important for custom subcomponents that stack a label above a form field:
+a small unintended height change silently misaligns an adjacent Button and cannot be seen when
+frames are reviewed in isolation.
 
 ### Step 5: Check Token Usage
 
@@ -214,6 +266,7 @@ Any `var(--...)` that does not start with one of these is invalid regardless of 
 
 - Verify `border-radius` uses `var(--global/radius/...)` tokens.
 - Verify `box-shadow` uses `var(--global/shadow/...)` or `var(--themed/shadow/...)` tokens.
+- **Border-radius in sibling form-field + Button rows:** when a `Button` instance and a form-field component (`TextField`, `Select`, `Picker`, or a custom search-input subcomponent) appear as direct siblings in the same auto-layout frame, call `get_variable_defs` on both and compare their `border-radius` variable bindings. If they reference different `--global/radius/...` tokens, or one uses a token while the other uses a hardcoded value, flag it in **Findings** as ⚠️ — the designer can fix this by attaching the matching `global/radius/...` token to the outlying component.
 
 ### Step 6: Check Icon Usage
 
@@ -478,10 +531,10 @@ If NO, reroute to **Development Considerations** (with severity) and, when DS wo
 phrases it describes the state of Figma's Code Connect panel, not anything the designer can
 change. Reroute to Development Considerations:
 
-- "has no Code Connect" / "lacks Code Connect" / "no CC binding" / "CC is missing"
-- "CC snippet" / "CC mapping" / "CC output" / "CC not updated" / "CC not connected"
+- "has no Code Connect" / "lacks Code Connect" / "no Code Connect binding" / "Code Connect is missing"
+- "Code Connect snippet" / "Code Connect mapping" / "Code Connect output" / "Code Connect not updated" / "Code Connect not connected"
 - "Code Connect outputs …" / "Code Connect emits …" / "emits `X` snippet"
-- "prop is not reflected in CC" / "`X` prop missing from Code Connect"
+- "prop is not reflected in Code Connect" / "`X` prop missing from Code Connect"
 
 **Refresh caveat** — when re-running this skill against an existing report, do NOT preserve the
 prior report's structure. Re-evaluate every pre-existing Finding against the validation gate
@@ -492,7 +545,7 @@ above; prior reviews may pre-date current routing rules.
 - `FileUpload has no Code Connect in Figma` → Dev Considerations 🚨 (+ Required DS Changes)
 - `TextArea Code Connect lacks counter prop` → Dev Considerations ⚠️ (+ Required DS Changes)
 - `Button Code Connect outputs placeholder icon name` → Dev Considerations ℹ️
-- `Attachment Item row has no CC snippet` → Dev Considerations 🚨 (+ Required DS Changes)
+- `Attachment Item row has no Code Connect snippet` → Dev Considerations 🚨 (+ Required DS Changes)
 
 - If a finding in **Findings** is already covered by a known DS ticket or in-progress work, add
   the ticket reference inline (e.g. `DS-2300`). This signals no new action is needed.
@@ -573,6 +626,8 @@ styles to reproduce the layout.
 JIRA links are filled in by Step 7 when running in the Spirit repo. In all other repos, leave
 every JIRA cell as _to be created_.
 ```
+
+**Writing style:** always write "Code Connect" in full — never abbreviate it as "CC".
 
 Development Considerations accepts two kinds of entries:
 
@@ -709,9 +764,11 @@ node .agents/skills/review-figma-design/scripts/pdf-gen.js "$CHROME" "$HTML" "$P
 ### Step 13: Flag Figma Comments (if Needed)
 
 For each issue found that requires the **designer** to make a change in Figma before dev, prepare
-proposed Figma comments. Each comment must end with ` — <user-name> (via AI)` (the current git user name,
-obtained via `git config user.name`) so the author is identifiable and the team knows the comment
-was generated automatically — the whole team shares a single Figma account.
+proposed Figma comments. Each comment must end with ` — <user-name> (via AI) [<issue-id> — <frame/canvas name>]` (the
+current git user name, obtained via `git config user.name`) so the author is identifiable, the
+team knows the comment was generated automatically, and readers can trace which review it belongs
+to — the whole team shares a single Figma account. Omit the bracketed part if no issue ID was
+provided.
 
 **Comments are sourced from Findings only.** Because Findings is strictly designer-actionable,
 every item there is a candidate comment. Items in **Development Considerations** and
@@ -723,10 +780,6 @@ Reference variables without the `var(--...)` wrapper — write `global/spacing/s
 `var(--global/spacing/space-1000)`. The same applies to all token prefixes (`device/...`,
 `global/...`, `themed/...`).
 
-Each comment body must be prefixed with the review title (`<issue-id> — <frame/canvas name>:`)
-so readers can identify which review the comment belongs to. Example:
-`DS-2475 — Reply Form: "Composition" layer uses gap: 40px …`
-
 1. **Save to file** — write `figma-comments.md` in the report output folder
    (`design-reviews/<topic-slug>/figma-comments.md`). Use this format:
 
@@ -736,13 +789,13 @@ so readers can identify which review the comment belongs to. Example:
    Figma file: `<fileKey>` (<fileName>)
    Figma page: `<pageNodeId>` (<pageName>)
 
-   - [ ] `1605:44215` — DS-2475 — Reply Form: "Composition" layer uses gap: 40px without a variable reference. Please attach a spacing variable.
+   - [ ] `1605:44215` — "Composition" layer uses gap: 40px without a variable reference. Please attach a spacing variable.
 
-     — Jane Doe (via AI)
+     — Jane Doe (via AI) [DS-2475 — Reply Form]
 
-   - [ ] `3999:14932` — DS-2475 — Reply Form: Vertical divider uses hardcoded #5c7dbf. Please attach a `themed/border/...` variable.
+   - [ ] `3999:14932` — Vertical divider uses hardcoded #5c7dbf. Please attach a `themed/border/...` variable.
 
-     — Jane Doe (via AI)
+     — Jane Doe (via AI) [DS-2475 — Reply Form]
    ```
 
    The checkbox `- [ ]` marks a pending comment; `- [x]` means posted. When a Figma URL was
@@ -789,7 +842,7 @@ curl -s -X POST "https://api.figma.com/v1/files/<fileKey>/comments" \
 - `<fileKey>` — from the `Figma file:` line in `figma-comments.md`.
 - `<pageNodeId>` — from the `Figma page:` line in `figma-comments.md`.
 - `<center_x>`, `<center_y>` — absolute center of the target node (from its bounding box).
-- `<comment text>` — the full comment including the review title prefix and signature.
+- `<comment text>` — the full comment body followed by the signature line (with the bracketed review title appended).
   Preserve the blank line before the signature: use `\n\n` in the JSON string.
 
 After a successful post (HTTP 200), flip the checkbox from `- [ ]` to `- [x]` in the file.
@@ -833,11 +886,15 @@ Before writing the final report:
 - Detached components identified (frames with DS component names) → flagged as findings
 - Modified instances: not detectable via MCP — note in report that manual verification in Figma is required
 - "NEW" layer names identified → flagged as required DS changes
+- `TextField` / `Select` / `TextArea` instances inspected for child layers (`Enhancer`, `Leading`, `Trailing`, or extra icon/text) not reflected in their Code Connect snippet → Enhancer/Addon use routed to Development Considerations ⚠️ + Required DS Changes
+- `ControlButton` nested inside `Tag` instance detected → Development Considerations ℹ️ note added about Spirit v5 color scheme inheritance vs current `dynamic-color-*` fallback
+- _(multi-frame)_ Named instance heights compared across all frames → height drift flagged in Findings as ⚠️
 - Spirit repo detected (`packages/web-react/` present) — if yes, `git log --oneline -50` checked, DS ticket references noted, JIRA column populated; if no, all JIRA cells set to _to be created_
 - Hardcoded spacing values identified → cross-referenced with Spirit scale
 - Hardcoded color values identified → flagged
 - Typography tokens verified
-- _(CC gaps)_ Every Finding passed the validation gate (Step 11): the designer can act on it alone in Figma. Code Connect gaps, CC mapping gaps, and unimplemented component features routed to **Development Considerations** (with severity) **and** **Required DS Changes** — never in Findings. When refreshing an existing report, every prior Finding was re-evaluated, not preserved as-is.
+- Radius tokens verified; sibling form-field + `Button` pairs in the same auto-layout frame compared for `border-radius` token consistency (`get_variable_defs`) → mismatch flagged in Findings as ⚠️
+- _(Code Connect gaps)_ Every Finding passed the validation gate (Step 11): the designer can act on it alone in Figma. Code Connect gaps, Code Connect mapping gaps, and unimplemented component features routed to **Development Considerations** (with severity) **and** **Required DS Changes** — never in Findings. When refreshing an existing report, every prior Finding was re-evaluated, not preserved as-is.
 - _(icons)_ Icon names verified against codebase; failures dual-routed: **Findings** with 🚨 (designer — publish asset in Figma) **and** **Development Considerations** + **Required DS Changes** (developer — add to code)
 - Output names derived per Step 10 — both modes: `design-reviews/<topic-slug>/`; multi-frame topic-slug comes from canvas name
 - Root frame (or first frame in multi-frame) saved as `overview.png`; per-finding pin percentages computed by walking the **full** parent chain (Step 10 item 7b) — verify pins are spread across the overview, not clustered
@@ -848,4 +905,4 @@ Before writing the final report:
 - HTML report written to `<report-name>.html` using the Step 11 template; cover page has score, eval table, and overview with CSS pin overlay
 - Node IDs rendered as clickable links (with URL) or hidden in `<!-- node:… -->` comments (without URL) — never as plain visible text
 - PDF generated from HTML via Chrome headless — or error printed if generation failed
-- Figma comments saved to `figma-comments.md` in the output folder (if any actionable findings exist); each comment ends with ` — <git user name>`; NOT posted without user confirmation
+- Figma comments saved to `figma-comments.md` in the output folder (if any actionable findings exist); each comment signature ends with ` — <git user name> (via AI) [<issue-id> — <frame name>]`; NOT posted without user confirmation
