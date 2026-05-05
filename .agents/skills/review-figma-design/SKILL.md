@@ -709,9 +709,11 @@ node .agents/skills/review-figma-design/scripts/pdf-gen.js "$CHROME" "$HTML" "$P
 ### Step 13: Flag Figma Comments (if Needed)
 
 For each issue found that requires the **designer** to make a change in Figma before dev, prepare
-proposed Figma comments. Each comment must end with ` — <user-name> (via AI)` (the current git user name,
-obtained via `git config user.name`) so the author is identifiable and the team knows the comment
-was generated automatically — the whole team shares a single Figma account.
+proposed Figma comments. Each comment must end with ` — <user-name> (via AI) [<issue-id> — <frame/canvas name>]` (the
+current git user name, obtained via `git config user.name`) so the author is identifiable, the
+team knows the comment was generated automatically, and readers can trace which review it belongs
+to — the whole team shares a single Figma account. Omit the bracketed part if no issue ID was
+provided.
 
 **Comments are sourced from Findings only.** Because Findings is strictly designer-actionable,
 every item there is a candidate comment. Items in **Development Considerations** and
@@ -723,10 +725,6 @@ Reference variables without the `var(--...)` wrapper — write `global/spacing/s
 `var(--global/spacing/space-1000)`. The same applies to all token prefixes (`device/...`,
 `global/...`, `themed/...`).
 
-Each comment body must be prefixed with the review title (`<issue-id> — <frame/canvas name>:`)
-so readers can identify which review the comment belongs to. Example:
-`DS-2475 — Reply Form: "Composition" layer uses gap: 40px …`
-
 1. **Save to file** — write `figma-comments.md` in the report output folder
    (`design-reviews/<topic-slug>/figma-comments.md`). Use this format:
 
@@ -736,13 +734,13 @@ so readers can identify which review the comment belongs to. Example:
    Figma file: `<fileKey>` (<fileName>)
    Figma page: `<pageNodeId>` (<pageName>)
 
-   - [ ] `1605:44215` — DS-2475 — Reply Form: "Composition" layer uses gap: 40px without a variable reference. Please attach a spacing variable.
+   - [ ] `1605:44215` — "Composition" layer uses gap: 40px without a variable reference. Please attach a spacing variable.
 
-     — Jane Doe (via AI)
+     — Jane Doe (via AI) [DS-2475 — Reply Form]
 
-   - [ ] `3999:14932` — DS-2475 — Reply Form: Vertical divider uses hardcoded #5c7dbf. Please attach a `themed/border/...` variable.
+   - [ ] `3999:14932` — Vertical divider uses hardcoded #5c7dbf. Please attach a `themed/border/...` variable.
 
-     — Jane Doe (via AI)
+     — Jane Doe (via AI) [DS-2475 — Reply Form]
    ```
 
    The checkbox `- [ ]` marks a pending comment; `- [x]` means posted. When a Figma URL was
@@ -789,7 +787,7 @@ curl -s -X POST "https://api.figma.com/v1/files/<fileKey>/comments" \
 - `<fileKey>` — from the `Figma file:` line in `figma-comments.md`.
 - `<pageNodeId>` — from the `Figma page:` line in `figma-comments.md`.
 - `<center_x>`, `<center_y>` — absolute center of the target node (from its bounding box).
-- `<comment text>` — the full comment including the review title prefix and signature.
+- `<comment text>` — the full comment body followed by the signature line (with the bracketed review title appended).
   Preserve the blank line before the signature: use `\n\n` in the JSON string.
 
 After a successful post (HTTP 200), flip the checkbox from `- [ ]` to `- [x]` in the file.
@@ -848,4 +846,4 @@ Before writing the final report:
 - HTML report written to `<report-name>.html` using the Step 11 template; cover page has score, eval table, and overview with CSS pin overlay
 - Node IDs rendered as clickable links (with URL) or hidden in `<!-- node:… -->` comments (without URL) — never as plain visible text
 - PDF generated from HTML via Chrome headless — or error printed if generation failed
-- Figma comments saved to `figma-comments.md` in the output folder (if any actionable findings exist); each comment ends with ` — <git user name>`; NOT posted without user confirmation
+- Figma comments saved to `figma-comments.md` in the output folder (if any actionable findings exist); each comment signature ends with ` — <git user name> (via AI) [<issue-id> — <frame name>]`; NOT posted without user confirmation
