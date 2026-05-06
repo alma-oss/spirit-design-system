@@ -2,11 +2,6 @@
 
 Flex is a component that allows you to create a flexible one-dimensional layout.
 
-## ⚠️ DEPRECATION NOTICE
-
-CSS modifiers `Flex--row` and `Flex--column` are deprecated and will be removed in the next major release.
-Use `Flex--horizontal` and `Flex--vertical` CSS modifiers instead.
-
 ## Basic Usage
 
 Horizontal layout:
@@ -49,7 +44,7 @@ Usage with a list:
 </ul>
 ```
 
-ℹ️ For the row layout, the Flex component uses the [`display: flex`][mdn-display-flex] CSS property. For the column
+ℹ️ For the horizontal layout, the Flex component uses the [`display: flex`][mdn-display-flex] CSS property. For the vertical
 layout, [`display: grid`][mdn-display-grid] is used because of technical advantages: better overflow control or
 alignment API consistency.
 
