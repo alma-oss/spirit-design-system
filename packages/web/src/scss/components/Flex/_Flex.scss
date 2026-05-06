@@ -49,19 +49,11 @@
             $infix: $infix
         );
 
-        // @deprecated The 'row' direction will be removed in the next major version.
-        // Migration: delete 'row' selector
-        // @see https://jira.almacareer.tech/browse/DS-1629 - Remove 'row' selector
-        .Flex--#{$infix}row,
         .Flex--#{$infix}horizontal,
         .Flex--#{$infix}horizontalReversed {
             display: flex;
         }
 
-        // @deprecated The 'row' direction will be removed in the next major version.
-        // Migration: delete 'row' selector
-        // @see https://jira.almacareer.tech/browse/DS-1629 - Remove 'row' selector
-        .Flex--#{$infix}row,
         .Flex--#{$infix}horizontal {
             flex-direction: row;
         }
@@ -70,11 +62,7 @@
             flex-direction: row-reverse;
         }
 
-        // @deprecated The 'column' direction will be removed in the next major version.
-        // Migration: delete 'column' selector
-        // @see https://jira.almacareer.tech/browse/DS-1629 - Remove 'column' selector
         // @see https://jira.almacareer.tech/browse/DS-1630 - Add 'verticalReversed' selector
-        .Flex--#{$infix}column,
         .Flex--#{$infix}vertical {
             display: grid; // 2.
         }
