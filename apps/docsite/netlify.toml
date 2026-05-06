@@ -15,7 +15,7 @@ base = "/"
 publish = "/apps/docsite/.next/"
 
 # Default build command.
-command = "yarn lerna run build --scope @alma-oss/spirit-docsite --include-dependencies"
+command = "yarn nx run @alma-oss/spirit-docsite:build"
 
 # Ignore builds on Netlify
 ignore = "node scripts/ignoreNetlifyBuilds.js"
