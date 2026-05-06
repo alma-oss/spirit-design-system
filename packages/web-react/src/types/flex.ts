@@ -11,11 +11,7 @@ import {
 } from './shared';
 
 /** ===== BASE API ===== */
-/**
- * @deprecated "row" and "column" values will be replaced in the next major version. Please use "horizontal" and "vertical" instead.
- * @see https://jira.almacareer.tech/browse/DS-1629
- */
-export type FlexDirection = DirectionExtendedDictionaryType | 'row' | 'column';
+export type FlexDirection = DirectionExtendedDictionaryType;
 export type FlexDirectionType = FlexDirection | { [key: string]: FlexDirection };
 export type FlexAlignmentXType =
   | NonNullable<AlignmentXExtendedDictionaryType>
