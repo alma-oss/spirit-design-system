@@ -34,6 +34,9 @@ export default [
       // @see: https://github.com/alma-oss/spirit-design-system/issues/2243
       '**/*.json',
 
+      // Exclude SCSS files from being linted
+      '**/*.scss',
+
       // Unformatted fixtures
       '**/{fixtures}/**/unformatted*',
       '**/__fixtures__/unformatted*',

@@ -8,6 +8,7 @@ export const restPropsTest = (Component: ComponentType<any>, selector: string) =
 
     await waitFor(() => {
       const element = dom.container.querySelector(selector) as HTMLElement;
+
       expect(element).toHaveAttribute('data-testid', testId);
     });
   });

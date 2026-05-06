@@ -12,6 +12,7 @@ export const themePropsTest = (Component: ComponentType<any>, testId?: string) =
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(DEFAULT_THEME);
     });
   });
@@ -21,6 +22,7 @@ export const themePropsTest = (Component: ComponentType<any>, testId?: string) =
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(NORMALIZED_THEME);
     });
   });

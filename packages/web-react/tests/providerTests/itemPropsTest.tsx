@@ -7,6 +7,7 @@ export const itemPropsTest = (Component: ComponentType<any>) => {
 
     await waitFor(() => {
       const element = screen.queryByTestId('test');
+
       expect(element?.parentElement?.className).toContain('--item');
     });
   });

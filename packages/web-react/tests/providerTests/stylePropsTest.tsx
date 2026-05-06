@@ -12,6 +12,7 @@ export const stylePropsTest = (Component: ComponentType<any>, testId?: string) =
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(testClassName);
     });
   });
@@ -23,6 +24,7 @@ export const stylePropsTest = (Component: ComponentType<any>, testId?: string) =
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveStyle(expectedStyle);
     });
   });
@@ -93,6 +95,7 @@ export const stylePropsTest = (Component: ComponentType<any>, testId?: string) =
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(expected.className);
     });
   });

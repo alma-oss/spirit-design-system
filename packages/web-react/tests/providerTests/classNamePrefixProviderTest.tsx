@@ -14,6 +14,7 @@ export const classNamePrefixProviderTest = (Component: ComponentType<any>, class
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(`${prefix}-${className}`);
     });
   });
@@ -23,6 +24,7 @@ export const classNamePrefixProviderTest = (Component: ComponentType<any>, class
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(className);
     });
   });

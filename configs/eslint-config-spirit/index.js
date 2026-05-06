@@ -23,7 +23,7 @@ module.exports = {
    * Disabled in:
    * @see { @link https://github.com/alma-oss/spirit-design-system/pull/2421 }
    */
-  plugins: ['promise', 'react', '@typescript-eslint', /* 'react-refresh' */],
+  plugins: ['jest-formatting', 'promise', 'react', '@typescript-eslint', /* 'react-refresh' */],
 
   rules: {
 
@@ -89,7 +89,7 @@ module.exports = {
       },
     },
     {
-      files: ['test/**', '**/*.test.*', '**/*.spec.*'],
+      files: ['test/**', 'tests/**', '**/*.test.*', '**/*.spec.*'],
       rules: {
         // Require an empty line before the first `expect` in a group
         // @see { @link https://github.com/dangreenisrael/eslint-plugin-jest-formatting }
