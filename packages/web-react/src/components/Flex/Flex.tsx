@@ -17,16 +17,7 @@ const defaultProps = {
 
 const _Flex = <E extends ElementType = 'div'>(props: SpiritFlexProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const {
-    elementType = defaultProps.elementType,
-    /**
-     * @deprecated "row" and "column" values will be removed in the next major version. Please use "horizontal" and "vertical" instead.
-     * @see https://jira.almacareer.tech/browse/DS-1629
-     */
-    direction,
-    children,
-    ...restProps
-  } = propsWithDefaults;
+  const { elementType = defaultProps.elementType, direction, children, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
 
