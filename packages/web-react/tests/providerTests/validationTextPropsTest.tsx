@@ -21,6 +21,7 @@ export const validationTextPropsTest = (
 
     await waitFor(() => {
       const element = dom.container.querySelector(selector) as HTMLElement;
+
       expect(element.textContent).toBe('text');
     });
   });
@@ -39,6 +40,7 @@ export const validationTextPropsTest = (
 
     await waitFor(() => {
       const element = screen.getByText('text') as HTMLElement;
+
       expect(element.previousElementSibling).toContainHTML('svg');
     });
   });
@@ -56,6 +58,7 @@ export const validationTextPropsTest = (
 
     await waitFor(() => {
       const element = dom.container.querySelector(selector) as HTMLElement;
+
       expect(element.children[0]).toContainHTML('ul');
     });
   });

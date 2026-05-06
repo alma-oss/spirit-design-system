@@ -7,6 +7,7 @@ export const loadingPropsTest = (Component: ComponentType<any>, selector: string
 
     await waitFor(() => {
       const element = dom.container.querySelector(selector) as HTMLElement;
+
       expect(element.getAttribute('class')).toContain('--loading');
     });
   });
@@ -16,6 +17,7 @@ export const loadingPropsTest = (Component: ComponentType<any>, selector: string
 
     await waitFor(() => {
       const element = dom.container.querySelector('svg:last-child') as SVGElement;
+
       expect(element).toHaveClass('animation-spin-clockwise');
     });
   });

@@ -12,6 +12,7 @@ export const toBeInDocumentProviderTest = (Component: ComponentType<any>, select
 
     await waitFor(() => {
       const element = testId ? screen.getByTestId(testId) : (dom.container.querySelector(selector!) as HTMLElement);
+
       expect(element).toBeInTheDocument();
     });
   });

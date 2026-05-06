@@ -9,6 +9,7 @@ export const textHyphensPropsTest = (Component: ComponentType<any>, testId?: str
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(`text-hyphens-${textHyphen}`);
     });
   });

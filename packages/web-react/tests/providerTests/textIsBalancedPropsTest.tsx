@@ -11,6 +11,7 @@ export const textIsBalancedPropsTest = async (
 
   await waitFor(() => {
     const element = getElement(dom, testId);
+
     expect(element).toHaveClass(expectedClassName);
   });
 };

@@ -9,6 +9,7 @@ export const textAlignmentPropsTest = (Component: ComponentType<any>, testId?: s
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(`text-${textAlignment}`);
     });
   });

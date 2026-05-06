@@ -30,6 +30,7 @@ export const sizePropsTest = (Component: ComponentType<any>, testId?: string) =>
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element.getAttribute('class')).toContain(size);
     });
   });
@@ -41,6 +42,7 @@ export const sizeExtendedPropsTest = (Component: ComponentType<any>, testId?: st
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element.getAttribute('class')).toContain(size);
     });
   });
@@ -52,6 +54,7 @@ export const componentButtonColorPropsTest = (Component: ComponentType<any>, pre
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(`${prefix}${color}`);
     });
   });
@@ -63,6 +66,7 @@ export const actionLinkColorPropsTest = (Component: ComponentType<any>, prefix: 
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(`${prefix}${color}`);
     });
   });
@@ -74,6 +78,7 @@ export const emotionColorPropsTest = (Component: ComponentType<any>, prefix: str
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(`${prefix}${color}`);
     });
   });
@@ -85,6 +90,7 @@ export const textColorPropsTest = (Component: ComponentType<any>, testId?: strin
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(`text-${textColor}`);
     });
   });
@@ -96,6 +102,7 @@ export const validationStatePropsTest = (Component: ComponentType<any>, prefix: 
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(`${prefix}${state}`);
     });
   });
@@ -107,6 +114,7 @@ export const alignmentXPropsTest = (Component: ComponentType<any>, prefix?: stri
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(`${prefix}--alignmentX${alignment.charAt(0).toUpperCase() + alignment.slice(1)}`);
     });
   });
@@ -118,6 +126,7 @@ export const alignmentXExtendedPropsTest = (Component: ComponentType<any>, prefi
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(`${prefix}--alignmentX${alignment.charAt(0).toUpperCase() + alignment.slice(1)}`);
     });
   });
@@ -129,6 +138,7 @@ export const alignmentYPropsTest = (Component: ComponentType<any>, prefix?: stri
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(`${prefix}--alignmentY${alignment.charAt(0).toUpperCase() + alignment.slice(1)}`);
     });
   });
@@ -140,6 +150,7 @@ export const alignmentYExtendedPropsTest = (Component: ComponentType<any>, prefi
 
     await waitFor(() => {
       const element = getElement(dom, testId);
+
       expect(element).toHaveClass(`${prefix}--alignmentY${alignment.charAt(0).toUpperCase() + alignment.slice(1)}`);
     });
   });
