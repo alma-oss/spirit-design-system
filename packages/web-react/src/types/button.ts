@@ -27,8 +27,6 @@ export interface ButtonStyleProps<C = void, S = void> extends ButtonBaseProps {
   color?: ButtonColor<C>;
   /** Whether the button is disabled. */
   isDisabled?: boolean;
-  /** Whether the button should be displayed with a block style. */
-  isBlock?: boolean;
   /** Whether the button should be in a loading state. */
   isLoading?: boolean;
   /** Whether the button should be symmetrical. */

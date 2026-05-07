@@ -43,11 +43,6 @@ const meta: Meta<typeof ButtonLink> = {
       control: 'text',
       defaultValue: 'https://www.example.com',
     },
-    isBlock: {
-      control: 'boolean',
-      description:
-        "**DEPRECATED**: The property will be deleted in the next major release. Please read component's documentation for more information.",
-    },
     isDisabled: {
       control: 'boolean',
     },
@@ -68,7 +63,6 @@ const meta: Meta<typeof ButtonLink> = {
     children: 'Click me',
     color: ComponentButtonColors.PRIMARY,
     href: 'https://www.example.com',
-    isBlock: false,
     isDisabled: false,
     isLoading: false,
     isSymmetrical: false,
