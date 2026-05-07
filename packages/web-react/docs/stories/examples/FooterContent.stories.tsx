@@ -390,7 +390,7 @@ export const FooterCompositions = (args: FooterCompositionsProps) => {
           <nav aria-label="Secondary links">
             <Flex
               elementType="ul"
-              direction={{ mobile: 'column', tablet: 'row' }}
+              direction={{ mobile: 'vertical', tablet: 'horizontal' }}
               alignmentX={{ mobile: 'stretch', tablet: 'center' }}
               spacing={{ mobile: 'space-600', tablet: 'space-900' }}
               isWrapping
