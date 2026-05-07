@@ -174,7 +174,6 @@ The complete set of component-specific props, combining all the above. This is t
 
 ```typescript
 interface ButtonProps<C = void, S = void> extends ButtonStyleProps<C, S>, ChildrenProps, ClickEvents {
-  isBlock?: boolean;
   isDisabled?: boolean;
   isLoading?: boolean;
   type?: ButtonType;
@@ -238,7 +237,6 @@ export type ButtonProps<E extends ElementType = 'button', C = void, S = void> = 
 ```typescript
 interface ButtonStyleProps {
   color?: ButtonColor;
-  isBlock?: boolean;
   size?: ButtonSize;
 }
 
