@@ -12,14 +12,7 @@ const ESM = process.env.ESM === 'true';
 let fileDestination = `spirit-web${ESM ? '.esm' : ''}`;
 let fileDirectory = ESM ? 'esm' : 'cjs';
 
-const plugins = [
-  babel({
-    // Only transpile our source code
-    exclude: 'node_modules/**',
-    // Include the helpers in the bundle, at most one copy of each
-    babelHelpers: 'bundled',
-  }),
-];
+const plugins = [];
 
 if (BUNDLE) {
   fileDestination += '.bundle';
@@ -30,19 +23,32 @@ if (BUNDLE) {
       'process.env.NODE_ENV': '"production"',
       preventAssignment: true,
     }),
-    nodeResolve(),
   );
 }
 
 plugins.push(
+  nodeResolve({
+    extensions: ['.ts', '.tsx', '.mjs', '.js', '.jsx', '.json'],
+  }),
+  // TypeScript before Babel — @see https://github.com/rollup/plugins/tree/master/packages/typescript#usage
   typescript({
-    target: 'es6',
+    tsconfig: path.resolve(__dirname, '../tsconfig.json'),
+    // Default plugin include only matches under cwd, so `../common` (unpublished `spirit-common` sources)
+    // is excluded unless we list it here with filterRoot = package root.
+    include: ['src/**/*.ts', 'src/**/*.tsx', '../common/src/**/*.ts'],
+    filterRoot: path.resolve(__dirname, '..'),
     compilerOptions: {
-      rootDir: './src',
+      // Do not set rootDir: TypeScript must include linked workspace sources (e.g. @alma-oss/spirit-common)
+      // when bundling shared utilities; a fixed ./src root causes TS6059 for those imports.
       outDir: path.resolve(__dirname, `../dist/js/${fileDirectory}`),
     },
     exclude: ['**/__tests__', '**/*.test.ts'],
     declaration: false,
+  }),
+  babel({
+    exclude: 'node_modules/**',
+    babelHelpers: 'bundled',
+    extensions: ['.ts', '.tsx', '.mjs', '.js', '.jsx', '.json'],
   }),
 );
 
