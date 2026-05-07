@@ -8,6 +8,7 @@ Introducing version 5 of the _spirit-web_ package.
 
 - [Component Changes](#component-changes)
   - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
+  - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
 
 ## Component Changes
 
@@ -23,6 +24,16 @@ Manually replace the modifier classes in your project.
 - `Flex--column` → `Flex--vertical`
 - `Flex--{breakpoint}--row` → `Flex--{breakpoint}--horizontal`
 - `Flex--{breakpoint}--column` → `Flex--{breakpoint}--vertical`
+
+### Tag: Appearance Feature Flag Removed
+
+The feature flag enabling the new `Tag` appearance was removed and the new appearance
+(`inline-flex` layout with explicit height and inside spacing) is now default.
+
+#### Migration Guide
+
+You can now safely delete the Sass variable `$enable-v5-tag-appearance` and the CSS class
+`spirit-feature-enable-v5-tag-appearance` from your project as they have no effect.
 
 ---
 
