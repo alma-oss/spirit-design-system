@@ -142,12 +142,6 @@ Responsive full-width buttons with [Grid][readme-grid]:
 </Grid>
 ```
 
-### DEPRECATION NOTICE
-
-Property `isBlock` is deprecated and will be removed in the next major release.
-
-For more information, please read the [Full-Width Button](#full-width-button) section.
-
 ## Accessibility
 
 ⚠️ **Accessibility note:** Always use `VisuallyHidden` for the accessible label and add `aria-hidden="true"` to the
@@ -247,21 +241,20 @@ Custom responsive spacing:
 
 ## API
 
-| Name            | Type                                                                                           | Default     | Required | Description                                                                                                                                 |
-| --------------- | ---------------------------------------------------------------------------------------------- | ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `children`      | `ReactNode`                                                                                    | `null`      | ✕        | Content of the Button                                                                                                                       |
-| `color`         | [ComponentButtonColorType][readme-generated-types], [EmotionColorType][readme-generated-types] | `primary`   | ✕        | Color variant                                                                                                                               |
-| `elementType`   | `ElementType`                                                                                  | `button`    | ✕        | Type of element                                                                                                                             |
-| `isBlock`       | `bool`                                                                                         | `false`     | ✕        | [**DEPRECATED**](#deprecation-notice) Span the element to the full width of its parent, see [Full-Width Button](#full-width-button) section |
-| `isDisabled`    | `bool`                                                                                         | `false`     | ✕        | If true, Button is disabled                                                                                                                 |
-| `isLoading`     | `bool`                                                                                         | `false`     | ✕        | If true, Button is in a loading state, disabled and the Spinner is visible                                                                  |
-| `isSymmetrical` | `bool` \| `Responsive<bool>`                                                                   | `false`     | ✕        | If true, Button has symmetrical dimensions, use object to set responsive values, e.g. `{ mobile: true, tablet: false }`                     |
-| `name`          | `string`                                                                                       | —           | ✕        | For use a button as a form data reference                                                                                                   |
-| `onClick`       | `(event: ClickEvent) => void`                                                                  | —           | ✕        | JS function to call on click                                                                                                                |
-| `ref`           | `ForwardedRef<HTMLButtonElement>`                                                              | —           | ✕        | Button element reference                                                                                                                    |
-| `size`          | [Size dictionary][dictionary-size]                                                             | `medium`    | ✕        | Size variant                                                                                                                                |
-| `spacing`       | `SpaceToken` \| `Responsive<SpaceToken>`                                                       | `space-400` | ✕        | Apply [custom spacing](#custom-spacing) between button content items                                                                        |
-| `type`          | `string`                                                                                       | `button`    | ✕        | Type of the Button                                                                                                                          |
+| Name            | Type                                                                                           | Default     | Required | Description                                                                                                             |
+| --------------- | ---------------------------------------------------------------------------------------------- | ----------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `children`      | `ReactNode`                                                                                    | `null`      | ✕        | Content of the Button                                                                                                   |
+| `color`         | [ComponentButtonColorType][readme-generated-types], [EmotionColorType][readme-generated-types] | `primary`   | ✕        | Color variant                                                                                                           |
+| `elementType`   | `ElementType`                                                                                  | `button`    | ✕        | Type of element                                                                                                         |
+| `isDisabled`    | `bool`                                                                                         | `false`     | ✕        | If true, Button is disabled                                                                                             |
+| `isLoading`     | `bool`                                                                                         | `false`     | ✕        | If true, Button is in a loading state, disabled and the Spinner is visible                                              |
+| `isSymmetrical` | `bool` \| `Responsive<bool>`                                                                   | `false`     | ✕        | If true, Button has symmetrical dimensions, use object to set responsive values, e.g. `{ mobile: true, tablet: false }` |
+| `name`          | `string`                                                                                       | —           | ✕        | For use a button as a form data reference                                                                               |
+| `onClick`       | `(event: ClickEvent) => void`                                                                  | —           | ✕        | JS function to call on click                                                                                            |
+| `ref`           | `ForwardedRef<HTMLButtonElement>`                                                              | —           | ✕        | Button element reference                                                                                                |
+| `size`          | [Size dictionary][dictionary-size]                                                             | `medium`    | ✕        | Size variant                                                                                                            |
+| `spacing`       | `SpaceToken` \| `Responsive<SpaceToken>`                                                       | `space-400` | ✕        | Apply [custom spacing](#custom-spacing) between button content items                                                    |
+| `type`          | `string`                                                                                       | `button`    | ✕        | Type of the Button                                                                                                      |
 
 For more information see the [Button][button] component. Button can also bear any appropriate
 attributes according to the type of element. The default element type for Button is `<button>`.
