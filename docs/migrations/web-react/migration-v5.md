@@ -19,6 +19,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [EmptyState: Component Name Stabilized](#emptystate-component-name-stabilized)
   - [Toggle: Component Name Stabilized](#toggle-component-name-stabilized)
   - [Truncate: Component Name Stabilized and `lines` Prop Changed](#truncate-component-name-stabilized-and-lines-prop-changed)
+  - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
 
 ## Component Changes
 
@@ -253,6 +254,16 @@ Manually replace the component name and prop in your project.
 - `UNSTABLE_Truncate` → `Truncate`
 - `<Truncate lines={3} … />` → `<Truncate mode="lines" limit={3} … />`
 </details>
+
+### Tag: Appearance Feature Flag Removed
+
+The feature flag enabling the new `Tag` appearance was removed and the new appearance
+(`inline-flex` layout with explicit height and inside spacing) is now default.
+
+#### Migration Guide
+
+You can now safely delete the `spirit-feature-enable-v5-tag-appearance` CSS class from any wrapper
+elements in your project as it has no effect.
 
 ---
 
