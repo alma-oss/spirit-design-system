@@ -1,10 +1,9 @@
-// 1. A design exception: no border and background for x-small Tags.
-// 2. A design exception: transparent background for subtle Tags.
+// 1. A design exception: visible border for x-small subtle Tags (the parent rule sets a
+//    transparent background via a local variable, so the border is the only visual cue).
 
 @use 'sass:map';
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
-@use '../../settings/feature-flags';
 @use '../../tools/dictionaries';
 @use '../../tools/typography';
 @use 'theme';
@@ -12,7 +11,10 @@
 .Tag {
     @include typography.from-css-variables($infix: 'tag');
 
-    display: inline-block;
+    display: inline-flex;
+    gap: var(--#{tokens.$css-variable-prefix}tag-gap);
+    align-items: center;
+    height: var(--#{tokens.$css-variable-prefix}tag-height);
     padding-inline: var(--#{tokens.$css-variable-prefix}tag-padding-x);
     padding-block: var(--#{tokens.$css-variable-prefix}tag-padding-y);
     text-align: center;
@@ -28,9 +30,15 @@
 // (utility classes `border-*`, `bg-*`, `text-*`). They will be removed in the next major version.
 // @see https://jira.almacareer.tech/browse/DS-2269
 .Tag--subtle {
+    --#{tokens.$css-variable-prefix}local-background-color: oklch(
+        from var(--#{tokens.$css-variable-prefix}tag-subtle-background-color) l c h / 0%
+    );
+
     color: var(--#{tokens.$css-variable-prefix}tag-subtle-color);
     border-color: var(--#{tokens.$css-variable-prefix}tag-subtle-border-color);
-    background-color: var(--#{tokens.$css-variable-prefix}tag-subtle-background-color);
+
+    // stylelint-disable-next-line declaration-no-important -- Override the bg-* utility class.
+    background-color: var(--#{tokens.$css-variable-prefix}local-background-color) !important;
 }
 
 // @deprecated See above.
@@ -42,81 +50,15 @@
 @include dictionaries.generate-sizes(
     $class-name: 'Tag',
     $dictionary-values: theme.$size-dictionary,
-    $config: theme.$base-size-config
+    $config: theme.$size-config
 );
 
 // 1.
 .Tag--subtle.Tag--xsmall {
-    border-color: transparent;
-
-    // stylelint-disable-next-line declaration-no-important -- Override background color utility class.
-    background-color: transparent !important;
-}
-
-// @deprecated The feature flag will be removed in the next major version.
-// Migration: delete this feature flag and apply the appearance by default.
-@if feature-flags.$enable-v5-tag-appearance {
-    @include dictionaries.generate-sizes(
-        $class-name: 'Tag',
-        $dictionary-values: theme.$size-dictionary,
-        $config: theme.$appearance-size-config
-    );
-
-    .Tag {
-        display: inline-flex;
-        gap: var(--#{tokens.$css-variable-prefix}tag-gap);
-        align-items: center;
-        height: var(--#{tokens.$css-variable-prefix}tag-height);
-    }
-
-    // 2.
-    .Tag--subtle {
-        --#{tokens.$css-variable-prefix}local-background-color: oklch(
-            from var(--#{tokens.$css-variable-prefix}tag-subtle-background-color) l c h / 0%
-        );
-
-        // stylelint-disable-next-line declaration-no-important -- Override the bg-* utility class.
-        background-color: var(--#{tokens.$css-variable-prefix}local-background-color) !important;
-    }
-
-    .Tag--subtle.Tag--xsmall {
-        border-color: var(--#{tokens.$css-variable-prefix}tag-subtle-border-color);
-    }
-}
-
-// @deprecated The feature flag will be removed in the next major version.
-// Migration: delete this feature flag and apply the appearance by default.
-.spirit-feature-enable-v5-tag-appearance {
-    @include dictionaries.generate-sizes(
-        $class-name: 'Tag',
-        $dictionary-values: theme.$size-dictionary,
-        $config: theme.$appearance-size-config
-    );
-}
-
-.spirit-feature-enable-v5-tag-appearance .Tag {
-    display: inline-flex;
-    gap: var(--#{tokens.$css-variable-prefix}tag-gap);
-    align-items: center;
-    height: var(--#{tokens.$css-variable-prefix}tag-height);
-}
-
-// 2.
-.spirit-feature-enable-v5-tag-appearance .Tag--subtle {
-    --#{tokens.$css-variable-prefix}local-background-color: oklch(
-        from var(--#{tokens.$css-variable-prefix}tag-subtle-background-color) l c h / 0%
-    );
-
-    // stylelint-disable-next-line declaration-no-important -- Override the bg-* utility class.
-    background-color: var(--#{tokens.$css-variable-prefix}local-background-color) !important;
-}
-
-// stylelint-disable-next-line selector-max-class -- Override the class combination above (1).
-.spirit-feature-enable-v5-tag-appearance .Tag--subtle.Tag--xsmall {
     border-color: var(--#{tokens.$css-variable-prefix}tag-subtle-border-color);
 }
 
-// stylelint-disable declaration-no-important -- Override the local override above (1).
+// stylelint-disable declaration-no-important -- Override the local override above.
 .Tag--disabled {
     --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background-color-disabled};
 
