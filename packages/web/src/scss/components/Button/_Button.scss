@@ -97,14 +97,6 @@ $_component-name: 'Button';
     $config: theme.$size-config
 );
 
-// @deprecated The `block` modifier will be removed in the next major version.
-// Migration: delete 'Button--block' class
-// @see https://jira.almacareer.tech/browse/DS-1897
-.Button--block {
-    display: block;
-    width: 100%;
-}
-
 @each $breakpoint-name, $breakpoint-value in theme.$breakpoints {
     $infix: breakpoint.get-modifier('infix', $breakpoint-name, $breakpoint-value);
 

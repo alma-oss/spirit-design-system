@@ -56,15 +56,6 @@ describe('ButtonLink', () => {
     expect(element).toHaveClass('Button--disabled');
   });
 
-  it('should have block classname', () => {
-    render(<ButtonLink isBlock />);
-
-    const element = screen.getByRole('button');
-
-    expect(element).toHaveClass('Button');
-    expect(element).toHaveClass('Button--block');
-  });
-
   it('should have size classname', () => {
     render(<ButtonLink size="medium" />);
 

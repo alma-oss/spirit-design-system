@@ -189,12 +189,6 @@ Responsive full-width buttons with [Grid][readme-grid]:
 </div>
 ```
 
-### DEPRECATION NOTICE
-
-The `Button--block` modifier is deprecated and will be removed in the next major release.
-
-For more information, please read the [Full-Width Button](#full-width-button) section.
-
 ## Disabled Button
 
 There are several ways to disable a Button:
