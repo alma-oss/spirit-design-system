@@ -39,11 +39,6 @@ const meta: Meta<typeof Button> = {
         defaultValue: { summary: ComponentButtonColors.PRIMARY },
       },
     },
-    isBlock: {
-      control: 'boolean',
-      description:
-        "**DEPRECATED**: The property will be deleted in the next major release. Please read component's documentation for more information.",
-    },
     isDisabled: {
       control: 'boolean',
     },
@@ -72,7 +67,6 @@ const meta: Meta<typeof Button> = {
   args: {
     children: 'Click me',
     color: ComponentButtonColors.PRIMARY,
-    isBlock: false,
     isDisabled: false,
     isLoading: false,
     isSymmetrical: false,
