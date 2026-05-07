@@ -63,18 +63,6 @@ Correct format when a suggestion exists:
 </details>
 ````
 
-Incorrect — do not do this:
-
-````markdown
-**{label} ({decorations}):** {subject}
-
-<details>…</details>
-
-```suggestion
-{suggested code}
-```
-````
-
 When there is no code suggestion:
 
 ```markdown
