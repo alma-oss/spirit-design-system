@@ -70,7 +70,7 @@ figma.connect(Footer, FOOTER_NODE_URL, {
         <nav aria-label="Secondary links">
           <Flex
             elementType="ul"
-            direction={{ mobile: 'column', tablet: 'row' }}
+            direction={{ mobile: 'vertical', tablet: 'horizontal' }}
             alignmentX={{ mobile: 'stretch', tablet: 'center' }}
             spacing={{ mobile: 'space-600', tablet: 'space-900' }}
             isWrapping
@@ -182,7 +182,7 @@ figma.connect(Footer, FOOTER_NODE_URL, {
         <nav aria-label="Secondary links">
           <Flex
             elementType="ul"
-            direction={{ mobile: 'column', tablet: 'row' }}
+            direction={{ mobile: 'vertical', tablet: 'horizontal' }}
             alignmentX={{ mobile: 'stretch', tablet: 'center' }}
             spacing={{ mobile: 'space-600', tablet: 'space-900' }}
             isWrapping

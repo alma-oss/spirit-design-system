@@ -118,7 +118,7 @@ This section is optional and consists of a [Flex][flex] layout with secondary li
 <nav aria-label="Secondary links">
   <Flex
     elementType="ul"
-    direction={{ mobile: 'column', tablet: 'row' }}
+    direction={{ mobile: 'vertical', tablet: 'horizontal' }}
     alignmentX={{ mobile: 'stretch', tablet: 'center' }}
     spacing={{ mobile: 'space-600', tablet: 'space-900' }}
     isWrapping
@@ -261,7 +261,7 @@ You can also define responsive values for the `textAlignment` prop using an obje
     <nav aria-label="Secondary links">
       <Flex
         elementType="ul"
-        direction={{ mobile: 'column', tablet: 'row' }}
+        direction={{ mobile: 'vertical', tablet: 'horizontal' }}
         alignmentX={{ mobile: 'stretch', tablet: 'center' }}
         spacing={{ mobile: 'space-600', tablet: 'space-900' }}
         isWrapping
