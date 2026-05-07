@@ -8,6 +8,10 @@
       "outputs": ["{projectRoot}/dist"],
       "cache": true,
       "dependsOn": ["^build"]
+    },
+    "types": {
+      "cache": true,
+      "dependsOn": ["@alma-oss/spirit-icons:build", "@alma-oss/spirit-design-tokens:build"]
     }
   }
 }
