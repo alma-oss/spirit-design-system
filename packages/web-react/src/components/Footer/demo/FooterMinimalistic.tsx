@@ -32,7 +32,7 @@ const FooterMinimalistic = () => (
           <nav className="text-center" aria-label="Secondary links">
             <Flex
               elementType="ul"
-              direction={{ mobile: 'column', tablet: 'row' }}
+              direction={{ mobile: 'vertical', tablet: 'horizontal' }}
               alignmentX={{ mobile: 'stretch', tablet: 'center' }}
               spacingX={{ mobile: 'space-600', tablet: 'space-900' }}
               isWrapping
