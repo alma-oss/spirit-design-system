@@ -27,51 +27,39 @@ $background-color-disabled: tokens.$disabled-background;
 $border-color-disabled: tokens.$disabled-border;
 
 $size-dictionary: dictionaries.$size-extended;
-$base-size-config: (
+$size-config: (
     xsmall: (
         padding-x: tokens.$space-500,
         padding-y: tokens.$space-200,
         typography: tokens.$body-xsmall-semibold,
+        height: units.px-to-rem(20px),
+        gap: tokens.$space-400,
     ),
     small: (
         padding-x: tokens.$space-500,
         padding-y: tokens.$space-300,
         typography: tokens.$body-small-semibold,
+        height: units.px-to-rem(28px),
+        gap: tokens.$space-400,
     ),
     medium: (
         padding-x: tokens.$space-600,
         padding-y: tokens.$space-400,
         typography: tokens.$body-medium-semibold,
+        height: units.px-to-rem(34px),
+        gap: tokens.$space-400,
     ),
     large: (
         padding-x: tokens.$space-700,
         padding-y: tokens.$space-500,
         typography: tokens.$body-large-semibold,
+        height: units.px-to-rem(40px),
+        gap: tokens.$space-400,
     ),
     xlarge: (
         padding-x: tokens.$space-700,
         padding-y: tokens.$space-500,
         typography: tokens.$body-xlarge-semibold,
-    ),
-);
-$appearance-size-config: (
-    xsmall: (
-        height: units.px-to-rem(20px),
-        gap: tokens.$space-400,
-    ),
-    small: (
-        height: units.px-to-rem(28px),
-        gap: tokens.$space-400,
-    ),
-    medium: (
-        height: units.px-to-rem(34px),
-        gap: tokens.$space-400,
-    ),
-    large: (
-        height: units.px-to-rem(40px),
-        gap: tokens.$space-400,
-    ),
-    xlarge: (
         height: units.px-to-rem(44px),
         gap: tokens.$space-400,
     ),

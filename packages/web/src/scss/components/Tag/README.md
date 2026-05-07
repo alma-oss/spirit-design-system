@@ -51,8 +51,7 @@ Tag comes in five available sizes: xsmall, small, medium, large, and xlarge.
 
 ## With ControlButton
 
-ℹ️ The `ControlButton` inside `Tag` requires the
-[expanded size scale][expanded-size-scale] and [Tag appearance](#feature-flag-appearance) features to be enabled.
+ℹ️ The `ControlButton` inside `Tag` requires the [expanded size scale][expanded-size-scale] feature to be enabled.
 
 ### ControlButton Size Matching
 
@@ -65,7 +64,7 @@ Tag comes in five available sizes: xsmall, small, medium, large, and xlarge.
 | xlarge   | medium             |
 
 ```html
-<div class="spirit-feature-enable-v5-control-button-expanded-size-scale spirit-feature-enable-v5-tag-appearance">
+<div class="spirit-feature-enable-v5-control-button-expanded-size-scale">
   <div class="Tag Tag--selected Tag--medium">
     <span>Tag label</span>
     <button
@@ -92,7 +91,7 @@ Add the `Tag--disabled` modifier to visually disable a Tag:
 Disabled Tag with `ControlButton`:
 
 ```html
-<div class="spirit-feature-enable-v5-control-button-expanded-size-scale spirit-feature-enable-v5-tag-appearance">
+<div class="spirit-feature-enable-v5-control-button-expanded-size-scale">
   <div class="Tag Tag--neutral Tag--medium Tag--disabled">
     <span>Disabled tag</span>
     <button
@@ -106,26 +105,6 @@ Disabled Tag with `ControlButton`:
       </svg>
     </button>
   </div>
-</div>
-```
-
-## Feature Flag: Appearance
-
-The Tag appearance feature flag enables the new Tag layout with explicit height and inside spacing.
-
-Enable it via a Sass variable:
-
-```scss
-@use '~@alma-oss/spirit-web/scss/settings/feature-flags' with (
-  $enable-v5-tag-appearance: true
-);
-```
-
-Or via a CSS class on any parent element:
-
-```html
-<div class="spirit-feature-enable-v5-tag-appearance">
-  <span class="Tag Tag--neutral Tag--medium">Tag</span>
 </div>
 ```
 
