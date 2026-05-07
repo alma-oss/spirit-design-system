@@ -49,8 +49,7 @@ Subtle variants:
 
 ## With ControlButton
 
-The `ControlButton` inside `Tag` requires the
-[expanded size scale][expanded-size-scale] and [Tag appearance](#feature-flag-appearance) features to be enabled.
+The `ControlButton` inside `Tag` requires the [expanded size scale][expanded-size-scale] feature to be enabled.
 
 ### ControlButton Size Matching
 
@@ -63,7 +62,7 @@ The `ControlButton` inside `Tag` requires the
 | xlarge   | medium             |
 
 ```tsx
-<div className="spirit-feature-enable-v5-control-button-expanded-size-scale spirit-feature-enable-v5-tag-appearance">
+<div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
   <Tag elementType="div" color="selected">
     <span>Tag label</span>
     <ControlButton size="small" isSymmetrical aria-label="Remove Tag label">
@@ -86,24 +85,13 @@ Use the `isDisabled` prop to visually disable a `Tag`:
 Disabled `Tag` with `ControlButton`:
 
 ```tsx
-<div className="spirit-feature-enable-v5-control-button-expanded-size-scale spirit-feature-enable-v5-tag-appearance">
+<div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
   <Tag elementType="div" isDisabled>
     <span>Disabled tag</span>
     <ControlButton size="small" isSymmetrical isDisabled aria-label="Remove Disabled tag">
       <Icon name="close" />
     </ControlButton>
   </Tag>
-</div>
-```
-
-## Feature Flag: Appearance
-
-Enable the new `Tag` layout with explicit height and inside spacing by wrapping `Tag` in an element
-with the `spirit-feature-enable-v5-tag-appearance` CSS class:
-
-```tsx
-<div className="spirit-feature-enable-v5-tag-appearance">
-  <Tag>Tag</Tag>
 </div>
 ```
 
