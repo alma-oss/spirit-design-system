@@ -157,7 +157,7 @@ metadata:
   annotations:
     github.com/project-slug: alma-oss/spirit-design-system
     backstage.io/source-location: url:https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react
-    backstage.io/techdocs-ref: dir:.
+    backstage.io/techdocs-ref: dir:../.
     ac/communication-channel: https://almamedia.slack.com/archives/C068XPSDWQN
   tags:
     - designsystem
