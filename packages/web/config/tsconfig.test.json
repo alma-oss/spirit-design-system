@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    // Reset to Node resolution for Jest compatibility
+    // @see: https://www.typescriptlang.org/tsconfig/#moduleResolution
+    "moduleResolution": "node",
+
+    // Use same module setting as dom.json for Jest environment
+    // @see: https://www.typescriptlang.org/tsconfig/#module
+    "module": "es2015"
+  },
+  "include": ["../src/**/*", "../tests/**/*", "../jest.config.ts"]
+}
