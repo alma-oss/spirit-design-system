@@ -8,12 +8,6 @@ This document lists all deprecations that will be removed in the next major vers
 
 👉 [What are deprecations?][readme-deprecations]
 
-### Button
-
-The `Button--block` modifier will be removed in the next major version.
-
-For more information, see documentation of the [Button][button] component.
-
 ### Collapse `data-spirit-is-disposable`
 
 The `data-spirit-more` attribute was removed, please use `data-spirit-is-disposable` instead.
@@ -120,7 +114,6 @@ For more information, see documentation of the [TextField][text-field] component
 <span class="TextField__passwordToggle__icon accessibility-checked"><!-- … --></span>
 ```
 
-[button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md
 [readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#deprecations
 [text-field]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/TextField/README.md
 [unstable-file-upload-web]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_FileUpload/README.md

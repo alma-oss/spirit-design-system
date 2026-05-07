@@ -19,6 +19,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [EmptyState: Component Name Stabilized](#emptystate-component-name-stabilized)
   - [Toggle: Component Name Stabilized](#toggle-component-name-stabilized)
   - [Truncate: Component Name Stabilized and `lines` Prop Changed](#truncate-component-name-stabilized-and-lines-prop-changed)
+  - [Button and ButtonLink: `isBlock` Prop Removed](#button-and-buttonlink-isblock-prop-removed)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
 
 ## Component Changes
@@ -255,6 +256,57 @@ Manually replace the component name and prop in your project.
 - `<Truncate lines={3} … />` → `<Truncate mode="lines" limit={3} … />`
 </details>
 
+### Button and ButtonLink: `isBlock` Prop Removed
+
+The deprecated `isBlock` prop has been removed from `Button` and `ButtonLink` components.
+
+To achieve full-width buttons, use CSS utility classes or the `Grid` component instead.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Remove the `isBlock` prop and use layout to achieve a full-width button instead.
+
+Responsive on all breakpoints:
+
+```tsx
+// Before
+<Button isBlock>Full-width Button</Button>
+
+// After
+<div className="d-grid">
+  <Button>Full-width Button</Button>
+</div>
+```
+
+Full-width on mobile only:
+
+```tsx
+// Before
+<Button isBlock>Full-width on mobile</Button>
+
+// After
+<div className="d-grid d-tablet-block">
+  <Button>Full-width on mobile</Button>
+</div>
+```
+
+Responsive full-width with [`Grid`][readme-grid]:
+
+```tsx
+// Before
+<Button isBlock>Responsive Button</Button>
+
+// After
+<Grid cols={{ mobile: 1, tablet: 2 }}>
+  <Button>Responsive Button</Button>
+</Grid>
+```
+
+</details>
+
 ### Tag: Appearance Feature Flag Removed
 
 The feature flag enabling the new `Tag` appearance was removed and the new appearance
@@ -271,3 +323,4 @@ Please refer back to these instructions or reach out to our team if you encounte
 
 [migration-guide-web]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/
 [readme-codemods]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/README.md
+[readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
