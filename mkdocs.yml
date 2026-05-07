@@ -11,6 +11,9 @@ site_url: https://github.com/alma-oss/spirit-design-system
 
 docs_dir: docs
 
+plugins:
+  - techdocs-core
+
 nav:
   - Overview: index.md
   - Contributing:
@@ -56,6 +59,3 @@ nav:
   - Postmortems:
       - Overview: postmortems/README.md
       - 2024-02-05 Deprecated Icon Rendering: postmortems/2024-02-05-deprecated-icon-rendering.md
-
-plugins:
-  - techdocs-core
