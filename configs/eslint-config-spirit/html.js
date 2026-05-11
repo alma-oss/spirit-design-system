@@ -65,6 +65,10 @@ module.exports = [
       // @see {@link https://github.com/yeonjuan/html-eslint/blob/main/docs/rules/no-extra-spacing-attrs.md}
       '@html-eslint/no-extra-spacing-attrs': 'off',
 
+      // Require a space before `/>` in self-closing tags (e.g. `<use xlink:href="…" />`).
+      // @see {@link https://github.com/yeonjuan/html-eslint/blob/main/docs/rules/no-extra-spacing-tags.md}
+      '@html-eslint/no-extra-spacing-tags': ['error', { enforceBeforeSelfClose: true }],
+
       // Two spaces per indentation level, consistent with JS/TS style in the repo.
       // @see {@link https://github.com/yeonjuan/html-eslint/blob/main/docs/rules/indent.md}
       '@html-eslint/indent': ['error', 2],
