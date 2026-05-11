@@ -37992,14 +37992,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-handlebars@npm:2.0.2":
-  version: 2.0.2
-  resolution: "vite-plugin-handlebars@npm:2.0.2"
+"vite-plugin-handlebars@npm:2.0.3":
+  version: 2.0.3
+  resolution: "vite-plugin-handlebars@npm:2.0.3"
   dependencies:
     handlebars: "npm:^4.7.9"
   peerDependencies:
-    vite: ^5.0.0 ^6.0.0 ^7.0.0 ^8.0.0
-  checksum: 10/b9d2da0ba3b3997a9c0ad40cdcc11c35c24a0f75ddb9b0d6197e3bac674e45e49356e4ff9545330de91359de65452b8f2bdfee864eec1d63770c117ce942994a
+    vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
+  checksum: 10/d236d8b387214e97be114922b938f757d06b17444413ddce44ddb92c0b6fd88f238acc1299e292deef24372fa292d3d832bc1aeee6a00184d074ffa3fba31808
   languageName: node
   linkType: hard
 
