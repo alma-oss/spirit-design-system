@@ -8132,6 +8132,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prettier/sync@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "@prettier/sync@npm:0.6.1"
+  dependencies:
+    make-synchronized: "npm:^0.8.0"
+  peerDependencies:
+    prettier: "*"
+  checksum: 10/2c53cd4ee718e2ebd2fb31aa5ec4773f743b9c29fcc6db6794dc3553bc87aa8fe7db47b51add6809cab655520b7550329d1cce2ca837f6f4643991eff44abad1
+  languageName: node
+  linkType: hard
+
 "@rolldown/pluginutils@npm:1.0.0-beta.27":
   version: 1.0.0-beta.27
   resolution: "@rolldown/pluginutils@npm:1.0.0-beta.27"
@@ -22970,7 +22981,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-diff@npm:30.3.0":
+"jest-diff@npm:30.3.0, jest-diff@npm:^30.2.0":
   version: 30.3.0
   resolution: "jest-diff@npm:30.3.0"
   dependencies:
@@ -22994,7 +23005,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-diff@npm:^29.2.1, jest-diff@npm:^29.7.0":
+"jest-diff@npm:^29.2.1":
   version: 29.7.0
   resolution: "jest-diff@npm:29.7.0"
   dependencies:
@@ -25313,6 +25324,13 @@ __metadata:
     promise-retry: "npm:^2.0.1"
     ssri: "npm:^13.0.0"
   checksum: 10/78da4fc1df83cb596e2bae25aa0653b8a9c6cbdd6674a104894e03be3acfcd08c70b78f06ef6407fbd6b173f6a60672480d78641e693d05eb71c09c13ee35278
+  languageName: node
+  linkType: hard
+
+"make-synchronized@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "make-synchronized@npm:0.8.0"
+  checksum: 10/e744bafcd61ee1ecabe6fb2c295ecb4b06a7bfe4e844222b80b7a5ae80a4d27ba657abc4892d1c702fa2f6ae568d8505e801c1498fe1379dd824ded5483d978c
   languageName: node
   linkType: hard
 
@@ -30302,6 +30320,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prettier@npm:^3.7.4":
+  version: 3.8.3
+  resolution: "prettier@npm:3.8.3"
+  bin:
+    prettier: bin/prettier.cjs
+  checksum: 10/4b3b12cbb29e4c96bed936e5d070167552500c18d37676fb3e0caae6199c42860662608e4dc116230698f6e2bb0267ef2548158224c92d40f188d309d72fdd6f
+  languageName: node
+  linkType: hard
+
 "pretty-format@npm:30.0.0":
   version: 30.0.0
   resolution: "pretty-format@npm:30.0.0"
@@ -33483,13 +33510,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-true@npm:8.1.0":
-  version: 8.1.0
-  resolution: "sass-true@npm:8.1.0"
+"sass-true@npm:10.1.0":
+  version: 10.1.0
+  resolution: "sass-true@npm:10.1.0"
   dependencies:
-    "@adobe/css-tools": "npm:^4.4.0"
-    jest-diff: "npm:^29.7.0"
-    lodash: "npm:^4.17.21"
+    "@prettier/sync": "npm:^0.6.1"
+    jest-diff: "npm:^30.2.0"
+    postcss: "npm:^8.5.6"
+    prettier: "npm:^3.7.4"
   peerDependencies:
     sass: ">=1.45.0"
     sass-embedded: ">=1.45.0"
@@ -33498,7 +33526,7 @@ __metadata:
       optional: true
     sass-embedded:
       optional: true
-  checksum: 10/363fe035110031106f640402aa51ff0e59acc11ee7512d9aa623761dd8a5d5dee6475ce64ba3f184c8253096d677f965116d1e4a32cb22f66d070611269dfe1c
+  checksum: 10/2203275253dd3f98fbeba96c3f89fabc413fb7fa854a4034dcf7a53496af4013ed92ab8381d6340ce2a09f9626e8a0b817160ccf99bcae812938b11766cd497e
   languageName: node
   linkType: hard
 
