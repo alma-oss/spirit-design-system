@@ -1,4 +1,5 @@
 import BaseComponent from './BaseComponent';
+import { isDevelopment } from './common/constants/environments';
 import { info, warning } from './common/utilities';
 import { EventHandler, SelectorEngine } from './dom';
 import { SpiritConfig, enableToggleAutoloader, image2Base64Preview } from './utils';
@@ -96,6 +97,13 @@ class FileUploader extends BaseComponent {
     this.fileQueue = new Map();
     this.instanceUid = FileUploader.getUid();
     this.isDisabled = this.inputElement?.disabled || false;
+
+    if (isDevelopment()) {
+      warning(
+        false,
+        'Deprecation warning (FileUploader): The FileUploader composition and its JavaScript plugin will be removed in the next major version. Use UNSTABLE_FileUpload and UNSTABLE_File instead.',
+      );
+    }
 
     this.init();
   }
