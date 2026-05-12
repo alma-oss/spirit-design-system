@@ -33,7 +33,7 @@
 }
 
 // 3.
-:is(.Avatar, .Button, .ControlButton, .TimelineMarker) .Icon {
+:is(.Avatar, .Button, .ControlButton, .InputAddon, .TimelineMarker) .Icon {
     @include responsive-properties.create-cascade(
         $property: 'width',
         $input-custom-property-base-name: '#{tokens.$css-variable-prefix}icon-composition-size',
