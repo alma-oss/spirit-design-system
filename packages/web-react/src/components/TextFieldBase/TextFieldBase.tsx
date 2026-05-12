@@ -21,6 +21,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
   const {
     'aria-describedby': ariaDescribedBy = '',
     counterProps,
+    endAddon,
     hasPasswordToggle,
     hasValidationIcon,
     helperText,
@@ -32,6 +33,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
     isRequired,
     label,
     size = Sizes.MEDIUM,
+    startAddon,
     type,
     validationState,
     validationText,
@@ -105,6 +107,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
       <div {...mergedStyleProps}>
         <Label htmlFor={id}>{label}</Label>
         <InputContainer>
+          {startAddon}
           <Component
             {...inputProps}
             {...ariaDescribedByProp}
@@ -115,6 +118,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
             type={nativeInputType}
             ref={ref as RefObject<HTMLInputElement & HTMLTextAreaElement>}
           />
+          {endAddon}
           {passwordToggleElement}
         </InputContainer>
         {counterProps ? (
