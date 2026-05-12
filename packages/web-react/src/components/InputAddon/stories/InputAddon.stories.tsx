@@ -4,6 +4,7 @@ import React from 'react';
 import { Sizes } from '../../../constants';
 import { ControlButton } from '../../ControlButton';
 import { Icon } from '../../Icon';
+import { VisuallyHidden } from '../../VisuallyHidden';
 import ReadMe from '../README.md?raw';
 import { InputAddon } from '..';
 
@@ -28,7 +29,12 @@ const meta: Meta<typeof InputAddon> = {
             <Icon name="profile" />
           </ControlButton>
         ),
-        String: <span aria-hidden="true">@</span>,
+        String: (
+          <>
+            <span aria-hidden="true">@</span>
+            <VisuallyHidden>Insert your username without the @ symbol</VisuallyHidden>
+          </>
+        ),
       },
     },
     size: {

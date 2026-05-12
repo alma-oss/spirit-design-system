@@ -3,6 +3,7 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
+import TextFieldAddons from './TextFieldAddons';
 import TextFieldDefault from './TextFieldDefault';
 import TextFieldDisabled from './TextFieldDisabled';
 import TextFieldHelperText from './TextFieldHelperText';
@@ -20,6 +21,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <TextFieldDefault />
+      </DocsSection>
+      <DocsSection title="Addons">
+        <TextFieldAddons />
       </DocsSection>
       <DocsSection title="Password Toggle">
         <TextFieldPasswordToggle />
