@@ -2,6 +2,7 @@
 
 import React, { type ElementType, forwardRef } from 'react';
 import { Sizes } from '../../constants';
+import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import {
   type ControlButtonProps,
@@ -26,7 +27,12 @@ const _ControlButton = <E extends ElementType = 'button', S = void>(
   props: SpiritControlButtonProps<E, S>,
   ref: PolymorphicRef<E>,
 ) => {
-  const propsWithDefaults = { ...defaultProps, ...props };
+  const contextProps = useContextProps<Partial<Pick<ControlButtonProps<S>, 'size'>>>();
+  const propsWithDefaults = {
+    ...defaultProps,
+    size: contextProps.size ?? defaultProps.size,
+    ...props,
+  };
   const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
