@@ -29,15 +29,10 @@ Sizes (please note the icon size):
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
     </select>
-    <<<<<<< HEAD
-    <div class="Select__icon">
-      =======
-      <div class="InputAddon">
-        >>>>>>> 5d87c5d7e (refactor(web)!: use InputAddon and InputContainer in Select #DS-1668)
-        <svg class="Icon" width="16" height="16" aria-hidden="true">
-          <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
-        </svg>
-      </div>
+    <div class="InputAddon">
+      <svg class="Icon" width="16" height="16" aria-hidden="true">
+        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+      </svg>
     </div>
   </div>
 
@@ -48,15 +43,10 @@ Sizes (please note the icon size):
         <option value="1">Option 1</option>
         <option value="2">Option 2</option>
       </select>
-      <<<<<<< HEAD
-      <div class="Select__icon">
-        =======
-        <div class="InputAddon">
-          >>>>>>> 5d87c5d7e (refactor(web)!: use InputAddon and InputContainer in Select #DS-1668)
-          <svg class="Icon" width="20" height="20" aria-hidden="true">
-            <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
-          </svg>
-        </div>
+      <div class="InputAddon">
+        <svg class="Icon" width="20" height="20" aria-hidden="true">
+          <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        </svg>
       </div>
     </div>
 
@@ -67,15 +57,10 @@ Sizes (please note the icon size):
           <option value="1">Option 1</option>
           <option value="2">Option 2</option>
         </select>
-        <<<<<<< HEAD
-        <div class="Select__icon">
-          =======
-          <div class="InputAddon">
-            >>>>>>> 5d87c5d7e (refactor(web)!: use InputAddon and InputContainer in Select #DS-1668)
-            <svg class="Icon" width="20" height="20" aria-hidden="true">
-              <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
-            </svg>
-          </div>
+        <div class="InputAddon">
+          <svg class="Icon" width="20" height="20" aria-hidden="true">
+            <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+          </svg>
         </div>
       </div>
     </div>

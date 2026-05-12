@@ -58,6 +58,43 @@ Hidden label:
 </div>
 ```
 
+## Addons
+
+Use [InputAddon][readme-input-addon] inside [InputContainer][readme-input-container] to render icons, text, symbols, or controls before or after the input. If an addon acts as a label, use `label` element with `for` pointing to the input `id`. Treat icons and symbols as decorative and include hidden text with the addon meaning:
+
+```html
+<div>
+  <label for="text-field-addon-search" class="Label">Search</label>
+  <div class="InputContainer InputContainer--medium">
+    <label class="InputAddon InputAddon--medium" for="text-field-addon-search">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
+        <use href="/assets/icons/svg/sprite.svg#search" />
+      </svg>
+      <span class="accessibility-hidden">Use search to find jobs for you</span>
+    </label>
+    <input type="text" id="text-field-addon-search" name="addonSearch" placeholder="Search" />
+  </div>
+</div>
+
+<div>
+  <label for="text-field-addon-clear" class="Label">Search</label>
+  <div class="InputContainer InputContainer--medium">
+    <input type="text" id="text-field-addon-clear" name="addonClear" placeholder="Search" value="Filled" />
+    <div class="InputAddon InputAddon--medium">
+      <button
+        type="button"
+        class="ControlButton ControlButton--medium ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+        aria-label="Clear"
+      >
+        <svg class="Icon" width="20" height="20" aria-hidden="true">
+          <use href="/assets/icons/svg/sprite.svg#close" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+```
+
 ## Layout
 
 TextField is fluid by default. Use parent layout components like [Grid][readme-grid], [Stack][readme-stack], or [Container][readme-container]
@@ -179,12 +216,12 @@ Then you need to add data attribute `data-spirit-toggle="password"` to the input
       >
         <span class="accessibility-unchecked">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
-            <use xlink:href="/assets/icons/svg/sprite.svg#visibility-on" />
+            <use href="/assets/icons/svg/sprite.svg#visibility-on" />
           </svg>
         </span>
         <span class="accessibility-checked">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
-            <use xlink:href="/assets/icons/svg/sprite.svg#visibility-off" />
+            <use href="/assets/icons/svg/sprite.svg#visibility-off" />
           </svg>
         </span>
       </button>
@@ -248,34 +285,21 @@ Validation states can be presented either by adding a CSS modifier class on
 
 <div>
   <label for="text-field-warning-validation-icon" class="Label">Label</label>
-  <<<<<<< HEAD
-  <input
-    type="text"
-    id="text-field-warning-validation-icon"
-    class="TextField__input"
-    name="danger"
-    placeholder="Placeholder"
-    value="Filled"
-  />
-  <div class="ValidationText ValidationText--warning">
-    =======
-    <div class="InputContainer InputContainer--medium InputContainer--warning">
-      <input
-        type="text"
-        id="text-field-warning-validation-icon"
-        name="warningValidationIcon"
-        placeholder="Placeholder"
-        value="Filled"
-        aria-describedby="text-field-warning-validation-icon-validation-text"
-      />
-    </div>
-    <div class="ValidationText ValidationText--warning" id="text-field-warning-validation-icon-validation-text">
-      >>>>>>> 5ca30b36c (feat(web)!: introduce InputContainer and InputAddon components #DS-1668)
-      <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
-      </svg>
-      <div>Validation text with icon</div>
-    </div>
+  <div class="InputContainer InputContainer--medium InputContainer--warning">
+    <input
+      type="text"
+      id="text-field-warning-validation-icon"
+      name="warningValidationIcon"
+      placeholder="Placeholder"
+      value="Filled"
+      aria-describedby="text-field-warning-validation-icon-validation-text"
+    />
+  </div>
+  <div class="ValidationText ValidationText--warning" id="text-field-warning-validation-icon-validation-text">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
+      <use href="/assets/icons/svg/sprite.svg#warning" />
+    </svg>
+    <div>Validation text with icon</div>
   </div>
 </div>
 ```
@@ -316,6 +340,7 @@ JS interaction class when controlled by JavaScript:
 [readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-input-addon]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputAddon/README.md
 [readme-input-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputContainer/README.md
 [readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

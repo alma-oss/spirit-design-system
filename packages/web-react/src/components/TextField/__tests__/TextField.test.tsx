@@ -12,6 +12,7 @@ import {
 } from '@local/tests';
 import { Sizes } from '../../../constants';
 import { type TextFieldType } from '../../../types';
+import { InputAddon } from '../../InputAddon';
 import TextField from '../TextField';
 
 jest.mock('../../../hooks/useIcon');
@@ -77,6 +78,81 @@ describe('TextField', () => {
 
       expect(element).toHaveTextContent('TextField Label');
       expect(element.innerHTML).toBe('TextField <b>Label</b>');
+    });
+  });
+
+  describe('addons', () => {
+    it('should render startAddon before input and endAddon after input', () => {
+      render(
+        <TextField
+          id="textfield"
+          label="Label"
+          startAddon={
+            <InputAddon elementType="label" htmlFor="textfield">
+              Start
+            </InputAddon>
+          }
+          endAddon={
+            <InputAddon elementType="label" htmlFor="textfield">
+              End
+            </InputAddon>
+          }
+        />,
+      );
+
+      const input = screen.getByLabelText('Label');
+      const children = Array.from(input.parentElement?.children ?? []);
+      const startAddon = screen.getByText('Start', { selector: '.InputAddon' });
+      const endAddon = screen.getByText('End', { selector: '.InputAddon' });
+
+      expect(children).toEqual([startAddon, input, endAddon]);
+    });
+
+    it('should render multiple addon nodes before input', () => {
+      render(
+        <TextField
+          id="textfield"
+          label="Label"
+          startAddon={
+            <>
+              <InputAddon elementType="label" htmlFor="textfield">
+                First
+              </InputAddon>
+              <InputAddon elementType="label" htmlFor="textfield">
+                Second
+              </InputAddon>
+            </>
+          }
+        />,
+      );
+
+      const input = screen.getByLabelText('Label');
+      const children = Array.from(input.parentElement?.children ?? []);
+      const firstAddon = screen.getByText('First', { selector: '.InputAddon' });
+      const secondAddon = screen.getByText('Second', { selector: '.InputAddon' });
+
+      expect(children).toEqual([firstAddon, secondAddon, input]);
+    });
+
+    it('should render endAddon before password toggle', () => {
+      render(
+        <TextField
+          id="textfield"
+          label="Label"
+          hasPasswordToggle
+          endAddon={
+            <InputAddon elementType="label" htmlFor="textfield">
+              End
+            </InputAddon>
+          }
+        />,
+      );
+
+      const input = screen.getByLabelText('Label');
+      const children = Array.from(input.parentElement?.children ?? []);
+      const endAddon = screen.getByText('End', { selector: '.InputAddon' });
+
+      expect(children).toEqual([input, endAddon, screen.getByRole('switch').parentElement]);
     });
   });
 
