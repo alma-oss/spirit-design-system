@@ -41,6 +41,34 @@ Form fields now support the `size` property. Ensure that a size is set for all f
 - `<div class="TextArea"><!-- … --></div>` → `<div class="TextArea TextArea--medium"><!-- … --></div>`
 - `<div class="TextField"><!-- … --></div>` → `<div class="TextField TextField--medium"><!-- … --></div>`
 
+### FileUploader
+
+The `FileUploader` composition (HTML/CSS classes and the `fileUploader` JavaScript plugin) is deprecated and will be removed in the next major version. Use `UNSTABLE_FileUpload` and `UNSTABLE_File` instead. The new API is visual- and composition-first; queue handling and validation are the consumer's responsibility.
+
+See [UNSTABLE_FileUpload][unstable-file-upload-web] and [UNSTABLE_File][unstable-file-web] documentation.
+
+#### Migration Guide
+
+1. Replace `FileUploader`/`FileUploaderInput`/`FileUploaderList`/`FileUploaderAttachment` markup with `UNSTABLE_FileUpload` and `UNSTABLE_File`.
+2. Remove dependency on the `fileUploader` plugin (`data-spirit-toggle="fileUploader"` and related behavior).
+3. Move queue and validation logic to your own JavaScript and keep the new components visual-first.
+
+```html
+<!-- before -->
+<div class="FileUploader" data-spirit-toggle="fileUploader">
+  <div class="FileUploaderInput" data-spirit-element="wrapper"><!-- … --></div>
+  <ul class="FileUploaderList" data-spirit-element="list">
+    <!-- … -->
+  </ul>
+</div>
+
+<!-- after -->
+<div class="UNSTABLE_FileUpload"><!-- upload input/dropzone --></div>
+<ul class="Stack" aria-label="Uploaded files">
+  <li class="UNSTABLE_File"><!-- file row --></li>
+</ul>
+```
+
 ### Header
 
 The `Header` component was removed, please use `UNSTABLE_Header` component instead.
@@ -95,3 +123,5 @@ For more information, see documentation of the [TextField][text-field] component
 [button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md
 [readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#deprecations
 [text-field]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/TextField/README.md
+[unstable-file-upload-web]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_FileUpload/README.md
+[unstable-file-web]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_File/README.md

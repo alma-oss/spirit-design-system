@@ -77,6 +77,21 @@ describe('FileUploader', () => {
   });
 
   describe('constructor', () => {
+    it('should warn about deprecation in development', () => {
+      const originalNodeEnv = process.env.NODE_ENV;
+      process.env.NODE_ENV = 'development';
+
+      const consoleWarnMock = jest.spyOn(global.console, 'warn').mockImplementation();
+
+      const fileUploader = new FileUploader(container);
+
+      expect(fileUploader).toBeInstanceOf(FileUploader);
+      expect(consoleWarnMock).toHaveBeenCalledWith(expect.stringContaining('Deprecation warning (FileUploader)'));
+
+      consoleWarnMock.mockRestore();
+      process.env.NODE_ENV = originalNodeEnv;
+    });
+
     it('should take care of element passed as a CSS selector', () => {
       fixtureEl.innerHTML = `
         <div class="FileUploader" data-spirit-toggle="fileUploader">

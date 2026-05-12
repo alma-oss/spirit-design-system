@@ -4,6 +4,23 @@ FileUploader allows users to pick one or more files to upload.
 
 > FileUploader itself actually does not upload anything to the server.
 
+## ⚠️ DEPRECATION NOTICE
+
+The `FileUploader` composition and its JavaScript plugin will be removed in the next major version. Use `UNSTABLE_FileUpload` and `UNSTABLE_File` instead.
+The new API is visual- and composition-first; queue handling and validation are the consumer's responsibility.
+
+Please see [UNSTABLE_FileUpload][unstable-file-upload-component] and [UNSTABLE_File][unstable-file-component] component documentation.
+
+[What are deprecations?][readme-deprecations]
+
+### Migration Guide
+
+Migrate from `FileUploader` to `UNSTABLE_FileUpload` + `UNSTABLE_File`:
+
+1. Replace legacy FileUploader markup/subcomponents with `UNSTABLE_*` components.
+2. Remove usage of the `fileUploader` JavaScript plugin (`data-spirit-toggle="fileUploader"`).
+3. Keep queue handling and validation in your own JavaScript and treat `UNSTABLE_*` as visual components.
+
 FileUploader is a composition of a few subcomponents:
 
 - [FileUploader](#fileuploader-1)
@@ -654,6 +671,9 @@ Example: So if you set `name="attachments"` to the default input element, the at
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [learn-about-file-sizes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FileUploader/README.md#understanding-file-size-in-bytes
+[readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#deprecations
+[unstable-file-component]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_File/README.md
+[unstable-file-upload-component]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_FileUpload/README.md
 [mdn-accept]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
 [mdn-input-file]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
 [mdn-multiple]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#multiple
