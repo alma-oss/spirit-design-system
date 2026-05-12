@@ -10,6 +10,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { PropsProvider } from '../../../context';
 import ControlButton from '../ControlButton';
 
 describe('ControlButton', () => {
@@ -38,6 +39,27 @@ describe('ControlButton', () => {
     expect(element).toHaveClass('dynamic-color-background-interactive');
     expect(element).toHaveClass('dynamic-color-border');
     expect(element).toHaveClass('accessibility-tap-target');
+  });
+
+  it('should apply size class from context when prop is not provided', () => {
+    render(
+      <PropsProvider value={{ size: 'large' }}>
+        <ControlButton />
+      </PropsProvider>,
+    );
+
+    expect(screen.getByRole('button')).toHaveClass('ControlButton', 'ControlButton--large');
+  });
+
+  it('should prefer direct size prop over context size', () => {
+    render(
+      <PropsProvider value={{ size: 'large' }}>
+        <ControlButton size="small" />
+      </PropsProvider>,
+    );
+
+    expect(screen.getByRole('button')).toHaveClass('ControlButton--small');
+    expect(screen.getByRole('button')).not.toHaveClass('ControlButton--large');
   });
 
   it('should render text children', () => {
