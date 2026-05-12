@@ -2,7 +2,7 @@
 
 import classNames from 'classnames';
 import React from 'react';
-import { useStyleProps } from '../../hooks';
+import { useDeprecationMessage, useStyleProps } from '../../hooks';
 import { type SpiritFileUploaderProps } from '../../types';
 import {
   DEFAULT_ERROR_MESSAGE_MAX_FILE_SIZE,
@@ -30,6 +30,13 @@ const FileUploader = (props: SpiritFileUploaderProps) => {
 
   const { classProps } = useFileUploaderStyleProps({ isFluid });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: true,
+    componentName: 'FileUploader',
+    customText: 'See the UNSTABLE_FileUpload and UNSTABLE_File component documentation.',
+  });
 
   const contextValue = {
     addToQueue,
