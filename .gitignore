@@ -63,3 +63,8 @@ nx-cloud.env
 !.idea/
 .idea/*
 !.idea/runConfigurations/
+
+# Claude Code — override global ignore; track only explicitly committed bits
+!.claude/
+.claude/*
+!.claude/skills
