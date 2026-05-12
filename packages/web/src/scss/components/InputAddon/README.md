@@ -62,7 +62,7 @@ Based on the size of the InputAddon, the size of the icon and text will be set t
 
 <div class="InputAddon InputAddon--large">
   <svg class="Icon" width="24" height="24" aria-hidden="true">
-    <use xlink:href="/assets/icons/svg/sprite.svg#search" />
+    <use href="/assets/icons/svg/sprite.svg#search" />
   </svg>
 </div>
 ```
@@ -100,9 +100,9 @@ Keep using a `<div class="InputAddon InputAddon--medium">` when the addon wraps 
   <input type="search" id="search" name="search" placeholder="Search" />
   <label class="InputAddon InputAddon--medium" for="search">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/assets/icons/svg/sprite.svg#search" />
+      <use href="/assets/icons/svg/sprite.svg#search" />
     </svg>
-    <span class="accessibility-hidden">Search</span>
+    <span class="accessibility-hidden">Use search to find jobs for you</span>
   </label>
 </div>
 ```
@@ -144,13 +144,13 @@ Multiple addons can be used to provide additional context or actions for the inp
 <div class="InputContainer InputContainer--medium">
   <label class="InputAddon InputAddon--medium" for="username">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/assets/icons/svg/sprite.svg#link" />
+      <use href="/assets/icons/svg/sprite.svg#link" />
     </svg>
     <span class="accessibility-hidden">Profile URL</span>
   </label>
   <label class="InputAddon InputAddon--medium" for="username">
     <span aria-hidden="true">@</span>
-    <span class="accessibility-hidden">Username</span>
+    <span class="accessibility-hidden">Insert your username without the @ symbol</span>
   </label>
   <input type="text" id="username" name="username" placeholder="spirit-design-system" />
   <div class="InputAddon InputAddon--medium">
@@ -160,7 +160,7 @@ Multiple addons can be used to provide additional context or actions for the inp
       aria-label="Clear"
     >
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+        <use href="/assets/icons/svg/sprite.svg#close" />
       </svg>
     </button>
   </div>
