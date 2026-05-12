@@ -1,17 +1,19 @@
 # TextField
 
 TextField enables the user to type in text information. It has an input, a
-label, and an optional helper text. It supports several input types like `text` or
-`password` etc. It can be disabled or have a validation state. The label can be
-hidden or show if the input is required.
+label, and optional helper text. It supports several input types like `text` and
+`password`. It can be disabled or have a validation state. The label can be
+hidden or shown while the field remains correctly marked as required.
 
-Basic example usage:
+## Usage
+
+### Basic
 
 ```tsx
 <TextField id="text-field-default" label="Label" name="textFieldDefault" />
 ```
 
-Advanced example usage:
+### Advanced
 
 ```tsx
 <TextField
@@ -29,7 +31,7 @@ Advanced example usage:
 />
 ```
 
-TextField with password toggle (button to reveal the password):
+### Password Toggle
 
 ```tsx
 <TextField
@@ -44,11 +46,100 @@ TextField with password toggle (button to reveal the password):
 />
 ```
 
+### InputAddon
+
+Use [InputAddon][readme-input-addon] with `startAddon` and `endAddon` to render
+non-input content inside the same input row. Addons are rendered as provided.
+For consistent spacing, sizing, and alignment with the input, use InputAddon as
+the wrapper for icon, symbol, and control content.
+
+`InputAddon` resolves `size` from field context, so nested `Icon` and
+`ControlButton` components use that resolved addon size by default.
+
+For non-interactive icon or symbol addons rendered as `label`, decide whether the
+visible content is decorative or semantic:
+
+- Decorative content: keep it `aria-hidden="true"` and include descriptive hidden text.
+- Semantic content: keep it exposed and do not force `aria-hidden`.
+
+#### Label-Based Search Addon
+
+```tsx
+<TextField
+  id="text-field-addon-search"
+  label="Search"
+  name="textFieldAddonSearch"
+  placeholder="Search"
+  startAddon={
+    <InputAddon elementType="label" htmlFor="text-field-addon-search">
+      <Icon name="search" />
+      <VisuallyHidden>Use search to find jobs for you</VisuallyHidden>
+    </InputAddon>
+  }
+/>
+```
+
+#### Interactive End Addon
+
+```tsx
+<TextField
+  id="text-field-addon-clear"
+  label="Search"
+  name="textFieldAddonClear"
+  placeholder="Search"
+  defaultValue="Filled"
+  endAddon={
+    <InputAddon>
+      <ControlButton isSymmetrical isSubtle>
+        <Icon name="close" />
+        <VisuallyHidden>Clear</VisuallyHidden>
+      </ControlButton>
+    </InputAddon>
+  }
+/>
+```
+
+Do not use `elementType="label"` when the addon wraps an interactive element
+such as a `button` or link.
+
+#### Multiple Addons
+
+```tsx
+<TextField
+  id="text-field-addon-multiple"
+  label="Username"
+  name="textFieldAddonMultiple"
+  placeholder="spirit-design-system"
+  size="large"
+  startAddon={
+    <>
+      <InputAddon elementType="label" htmlFor="text-field-addon-multiple">
+        <Icon name="link" />
+        <VisuallyHidden>Profile URL</VisuallyHidden>
+      </InputAddon>
+      <InputAddon elementType="label" htmlFor="text-field-addon-multiple">
+        <span aria-hidden="true">@</span>
+        <VisuallyHidden>Insert your username without the @ symbol</VisuallyHidden>
+      </InputAddon>
+    </>
+  }
+  endAddon={
+    <InputAddon>
+      <ControlButton isSymmetrical isSubtle>
+        <Icon name="close" />
+        <VisuallyHidden>Clear</VisuallyHidden>
+      </ControlButton>
+    </InputAddon>
+  }
+/>
+```
+
 ## API
 
 | Name                | Type                                                                         | Default  | Required | Description                                                             |
 | ------------------- | ---------------------------------------------------------------------------- | -------- | -------- | ----------------------------------------------------------------------- |
 | `autoComplete`      | `string`                                                                     | —        | ✕        | [Automated assistance in filling][autocomplete-attr]                    |
+| `endAddon`          | `ReactNode`                                                                  | —        | ✕        | Addon rendered after the input                                          |
 | `hasPasswordToggle` | `bool`                                                                       | —        | ✓        | If true, the `type` is set to `password` and a password toggle is shown |
 | `hasValidationIcon` | `bool`                                                                       | `false`  | ✕        | Whether to show validation icon                                         |
 | `helperText`        | `string`                                                                     | —        | ✕        | Custom helper text                                                      |
@@ -63,6 +154,7 @@ TextField with password toggle (button to reveal the password):
 | `placeholder`       | `string`                                                                     | —        | ✕        | Input placeholder                                                       |
 | `ref`               | `ForwardedRef<HTMLInputElement>`                                             | —        | ✕        | Input element reference                                                 |
 | `size`              | [Size dictionary][dictionary-size]                                           | `medium` | ✕        | Size variant                                                            |
+| `startAddon`        | `ReactNode`                                                                  | —        | ✕        | Addon rendered before the input                                         |
 | `type`              | \[`email` \| `number` \| `password` \| `search` \| `tel` \| `text` \| `url`] | `text`   | ✕        | Input type                                                              |
 | `validationState`   | [Validation dictionary][dictionary-validation]                               | —        | ✕        | Type of validation state                                                |
 | `validationText`    | \[`ReactNode` \| `ReactNode[]`]                                              | —        | ✕        | Validation text                                                         |
@@ -93,7 +185,7 @@ const CustomTextField = (props: SpiritTextFieldProps): JSX.Element => {
 };
 ```
 
-For detailed information see [TextField](https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/TextField/README.md) component.
+For detailed information see [TextField][readme-web-textfield] component.
 
 [autocomplete-attr]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
@@ -101,4 +193,6 @@ For detailed information see [TextField](https://github.com/alma-oss/spirit-desi
 [react-input]: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-input-addon]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/InputAddon/README.md
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[readme-web-textfield]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/TextField/README.md
