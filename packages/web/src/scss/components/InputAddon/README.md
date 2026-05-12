@@ -51,6 +51,22 @@ InputAddon supports the following size modifiers:
 </div>
 ```
 
+### Text and Icon Size
+
+Based on the size of the InputAddon, the size of the icon and text will be set to the size of the text in the InputAddon.
+
+```html
+<div class="InputAddon InputAddon--small">
+  <span>Small</span>
+</div>
+
+<div class="InputAddon InputAddon--large">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
+    <use xlink:href="/assets/icons/svg/sprite.svg#search" />
+  </svg>
+</div>
+```
+
 ## Variants
 
 InputAddon can render a variety of content for different use cases. Common options include:

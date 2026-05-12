@@ -7,6 +7,8 @@
 @use 'theme';
 
 .InputAddon {
+    --#{tokens.$css-variable-prefix}icon-composition-size: var(--#{tokens.$css-variable-prefix}input-addon-icon-size);
+
     @include typography.from-css-variables($infix: 'input-addon');
 
     display: flex;
