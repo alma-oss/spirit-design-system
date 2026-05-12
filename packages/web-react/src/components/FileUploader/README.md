@@ -3,6 +3,23 @@
 The FileUploader implementation is used to select files either by selecting files from the device itself,
 or by drag and drop if the device supports it. React package extends [web package][file-uploader].
 
+## ⚠️ DEPRECATION NOTICE
+
+The component and its subcomponents will be removed in the next major version. Use `UNSTABLE_FileUpload` and `UNSTABLE_File` instead.
+`UNSTABLE_FileUpload` is visual-first: queue handling, validation, and form integration are the consumer's responsibility.
+
+Please see [UNSTABLE_FileUpload][unstable-file-upload-component] and [UNSTABLE_File][unstable-file-component] component documentation.
+
+[What are deprecations?][readme-deprecations]
+
+### Migration Guide
+
+Migrate from `FileUploader` composition to `UNSTABLE_FileUpload` + `UNSTABLE_File`:
+
+1. Replace `FileUploader` / `FileUploaderInput` / `FileUploaderList` / `FileUploaderAttachment` with `UNSTABLE_*` components.
+2. Move queue logic (`addToQueue`, `findInQueue`, `onDismiss`, queue limits, duplicate checks) to your own state.
+3. Keep validation logic in your app and pass only visual validation props to `UNSTABLE_FileUpload`.
+
 ## Usage
 
 ### Basic
@@ -579,7 +596,10 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 [list-item-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li
 [next-js-body-size-limit]: https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions#bodysizelimit
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#deprecations
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[unstable-file-component]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_File/README.md
+[unstable-file-upload-component]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_FileUpload/README.md
 [web-react-icon-documentation]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#-usage
 [wiki-binary-prefixes]: https://en.wikipedia.org/wiki/Binary_prefix
