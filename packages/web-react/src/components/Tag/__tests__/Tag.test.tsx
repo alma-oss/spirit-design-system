@@ -4,6 +4,7 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  colorSchemePropsTest,
   elementTypePropsTest,
   emotionColorPropsTest,
   restPropsTest,
@@ -11,12 +12,16 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { EmotionColors } from '../../../constants';
+import { TagColorsExtended } from '../constants';
 import Tag from '../Tag';
 
 describe('Tag', () => {
   classNamePrefixProviderTest(Tag, 'Tag');
 
   emotionColorPropsTest(Tag, 'Tag--');
+
+  colorSchemePropsTest(Tag, [...Object.values(TagColorsExtended), ...Object.values(EmotionColors)]);
 
   sizeExtendedPropsTest(Tag);
 
