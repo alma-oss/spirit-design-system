@@ -29,7 +29,7 @@ const _Tag = <E extends ElementType = 'span', C = void, S = void>(
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
-    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
+    <Component {...(elementType === 'button' && { type: 'button' })} {...otherProps} {...mergedStyleProps} ref={ref}>
       {children}
     </Component>
   );
