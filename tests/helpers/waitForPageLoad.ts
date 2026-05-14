@@ -1,6 +1,26 @@
 import { Page } from '@playwright/test';
+import { VERIFICATION_INTERSTITIAL_TEXT, VERIFICATION_INTERSTITIAL_TIMEOUT_MS } from './constants';
+import { VerificationChallengeError } from './errors';
+
+const waitForPageNavigationSettled = async (page: Page): Promise<void> => {
+  // `domcontentloaded` guarantees basic DOM availability, `load` stabilizes assets for snapshots.
+  await page.waitForLoadState('domcontentloaded');
+  await page.waitForLoadState('load');
+};
+
+const throwOnVerificationInterstitial = async (page: Page): Promise<void> => {
+  const text = await page.locator('body').innerText({ timeout: VERIFICATION_INTERSTITIAL_TIMEOUT_MS });
+  const isVerificationPage = text.includes(VERIFICATION_INTERSTITIAL_TEXT);
+
+  if (isVerificationPage) {
+    throw new VerificationChallengeError(`Verification interstitial detected on ${page.url()}`);
+  }
+};
 
 export const waitForPageLoad = async (page: Page): Promise<void> => {
+  await waitForPageNavigationSettled(page);
+  await throwOnVerificationInterstitial(page);
+
   // Wait for fonts to load
   await page.evaluate(() => document.fonts.ready);
 

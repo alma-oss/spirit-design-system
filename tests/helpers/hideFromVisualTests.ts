@@ -12,4 +12,11 @@ export const hideFromVisualTests = async (page: Page): Promise<void> => {
   }, css);
   // Apply to the current page immediately
   await page.addStyleTag({ content: css });
+
+  // Verify computed style is actually applied on the current document.
+  await page.waitForFunction(() => {
+    const elements = Array.from(document.querySelectorAll('.hide-from-visual-tests'));
+
+    return elements.every((element) => getComputedStyle(element).display === 'none');
+  });
 };

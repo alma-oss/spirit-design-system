@@ -1,6 +1,12 @@
 /* eslint-disable no-console -- we need to log retry attempts for debugging */
 import { type Page, errors } from '@playwright/test';
-import { NetworkError } from './errors';
+import {
+  NETWORK_ERROR_BASE_BACKOFF_MS,
+  VERIFICATION_INTERSTITIAL_BASE_BACKOFF_MS,
+  VERIFICATION_INTERSTITIAL_TEXT,
+  VERIFICATION_INTERSTITIAL_TIMEOUT_MS,
+} from './constants';
+import { NetworkError, VerificationChallengeError } from './errors';
 
 /**
  * Network error patterns that should trigger a retry.
@@ -29,12 +35,35 @@ function isNetworkError(error: unknown): boolean {
 }
 
 /**
+ * Detects Netlify verification interstitial page.
+ * This is not the target demo page and should be retried like network flakiness.
+ */
+async function isVerificationInterstitial(page: Page): Promise<boolean> {
+  try {
+    const textContent = await page
+      .locator('body')
+      .innerText({ timeout: VERIFICATION_INTERSTITIAL_TIMEOUT_MS });
+
+    return textContent.includes(VERIFICATION_INTERSTITIAL_TEXT);
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Calculates exponential backoff delay in milliseconds.
  * @param attemptNumber - The attempt number (1-based)
- * @returns Delay in milliseconds (1000, 2000, 4000, etc.)
+ * @param error - Error that triggered retry
+ * @returns Delay in milliseconds
  */
-function getBackoffDelay(attemptNumber: number): number {
-  return 1000 * Math.pow(2, attemptNumber - 1);
+function getBackoffDelay(attemptNumber: number, error: unknown): number {
+  // Verification interstitials tend to persist longer than transient TCP resets.
+  const baseDelay =
+    error instanceof VerificationChallengeError
+      ? VERIFICATION_INTERSTITIAL_BASE_BACKOFF_MS
+      : NETWORK_ERROR_BASE_BACKOFF_MS;
+
+  return baseDelay * Math.pow(2, attemptNumber - 1);
 }
 
 interface RetryPageGotoOptions {
@@ -96,6 +125,10 @@ export async function retryPageGoto(
 
       const response = await page.goto(url, gotoOptions);
 
+      if (await isVerificationInterstitial(page)) {
+        throw new VerificationChallengeError(`Verification interstitial detected for ${url}`);
+      }
+
       if (attempt > 1) {
         console.log(`✓ Successfully navigated to ${url} on attempt ${attempt}`);
       }
@@ -107,7 +140,8 @@ export async function retryPageGoto(
       // If it's not a network error or Timeout, rethrow immediately
       if (
         !isNetworkError(error) &&
-        !(error instanceof errors.TimeoutError)
+        !(error instanceof errors.TimeoutError) &&
+        !(error instanceof VerificationChallengeError)
       ) {
         throw error;
       }
@@ -122,7 +156,7 @@ export async function retryPageGoto(
       }
 
       // Calculate backoff and log retry
-      const backoffMs = getBackoffDelay(attempt);
+      const backoffMs = getBackoffDelay(attempt, error);
       console.warn(
         `⚠ Network error on attempt ${attempt}/${retries} for ${url}: ${error}. ` +
           `Retrying in ${backoffMs}ms...`,

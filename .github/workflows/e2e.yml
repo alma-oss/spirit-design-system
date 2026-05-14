@@ -52,7 +52,6 @@ jobs:
       - name: Wait for Netlify Deploy
         uses: mmazzarolo/wait-for-netlify-action@8a7a8d8cf5b313c916d805b76cc498380062d268
         id: get-netlify-preview-url
-        continue-on-error: true
         with:
           site_id: ${{ secrets.NETLIFY_SITE_SPIRIT_DESIGN_SYSTEM }}
           max_timeout: 1
@@ -61,26 +60,29 @@ jobs:
       # The Netlify preview URL is now available
       # as `steps.get-netlify-preview-url.outputs.url`
 
-      - name: Get Site URL
-        id: get-site-url
-        env:
-          # fallback to main url if the main branch is deployed
-          NETLIFY_DEPLOYED_URL: ${{ env.PR_NUMBER && env.NETLIFY_DEPLOY_PREVIEW_URL || env.NETLIFY_MAIN_URL }}
-        run: echo "site_url=${{ env.NETLIFY_DEPLOYED_URL }}" >> "$GITHUB_OUTPUT"
-
       - name: Get Playwright Version
         id: playwright-version
         run: |
           PW_VERSION=$(yq '.catalogs.test["@playwright/test"]' .yarnrc.yml)
           echo "version=$PW_VERSION" >> $GITHUB_OUTPUT
 
+      - name: Validate Netlify URL
+        run: |
+          if [ -z "${{ steps.get-netlify-preview-url.outputs.url }}" ]; then
+            echo "Missing Netlify deploy URL output from wait-for-netlify-action."
+            exit 1
+          fi
+
       - name: Run Playwright tests
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/work \
             -w /work \
+            -e CI="true" \
             -e NODE_ENV="${{ env.NODE_ENV }}" \
-            -e WEBSITE_URL="${{ steps.get-netlify-preview-url.outcome == 'success' && steps.get-netlify-preview-url.outputs.url || steps.get-site-url.outputs.site_url }}" \
+            -e PW_WORKERS="${{ vars.PW_WORKERS || '1' }}" \
+            -e PW_PAGE_RETRIES="${{ vars.PW_PAGE_RETRIES || '5' }}" \
+            -e WEBSITE_URL="${{ steps.get-netlify-preview-url.outputs.url }}" \
             mcr.microsoft.com/playwright:v${{ steps.playwright-version.outputs.version }}-noble \
             sh -c "corepack install && corepack enable && yarn test:e2e"
 

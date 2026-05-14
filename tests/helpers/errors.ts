@@ -26,3 +26,15 @@ export class TimeoutError extends Error {
     this.name = 'TimeoutError';
   }
 }
+
+/**
+ * Represents a transient bot-protection/interstitial page returned by hosting.
+ * This page is not the target demo and must be retried or treated as infra issue.
+ */
+export class VerificationChallengeError extends Error {
+  constructor(message: string) {
+    super(message);
+
+    this.name = 'VerificationChallengeError';
+  }
+}
