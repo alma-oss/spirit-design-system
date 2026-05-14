@@ -437,7 +437,7 @@ describe('Tooltip', () => {
           <div class="Tooltip">
             <div
               id="test-tooltip"
-              class="TooltipPopover is-hidden placement-top-start placement-controlled"
+              class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-top-start placement-controlled"
               data-spirit-enable-flipping="true"
               data-spirit-enable-shifting="true"
               data-spirit-enable-sizing="true"
@@ -474,7 +474,7 @@ describe('Tooltip', () => {
           <div class="Tooltip" data-spirit-element="tooltip">
             <div
               id="test-tooltip"
-              class="TooltipPopover is-hidden placement-top-start placement-controlled"
+              class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-top-start placement-controlled"
               data-spirit-enable-flipping="true"
               data-spirit-enable-shifting="true"
               data-spirit-enable-sizing="true"
