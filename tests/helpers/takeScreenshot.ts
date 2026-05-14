@@ -7,6 +7,8 @@ interface ExtendedScreenshotOptions extends PageAssertionsToHaveScreenshotOption
 const defaultOptions: ExtendedScreenshotOptions = {
   animations: 'disabled',
   fullPage: false,
+  // Apply deterministic visual-test overrides at screenshot time.
+  stylePath: 'tests/helpers/visualTestScreenshot.css',
   // Enable SSIM-CIE94 by default for better anti-aliasing handling
   // @see: { @link: https://github.com/microsoft/playwright/issues/38159 }
   _comparator: 'ssim-cie94',
