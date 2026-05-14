@@ -25,11 +25,14 @@
     margin-bottom: theme.$box-field-margin-bottom;
 }
 
+.Label--inline,
+.Label--item {
+    cursor: cursors.$form-fields;
+}
+
 // 1.
 .Label--inline {
     @include typography.generate(theme.$inline-field-typography);
-
-    cursor: cursors.$form-fields;
 }
 
 // 2.
