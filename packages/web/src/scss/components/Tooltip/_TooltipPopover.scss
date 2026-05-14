@@ -5,6 +5,7 @@
 
 @use 'sass:math';
 @use '@tokens' as tokens;
+@use '../../tools/color-scheme';
 @use '../../tools/placement';
 @use '../../tools/reset';
 @use '../../tools/svg';
@@ -28,9 +29,9 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
     text-align: left;
     white-space: normal;
     word-break: normal;
-    color: theme.$color;
+    color: color-scheme.color();
     border-radius: theme.$border-radius;
-    background-color: theme.$background-color;
+    background-color: color-scheme.background-color();
     box-shadow: theme.$box-shadow;
     word-wrap: break-word;
 
@@ -51,7 +52,9 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
 
     width: var(--tooltip-arrow-width); // 2.
     height: var(--tooltip-arrow-height); // 2.
-    background: no-repeat center/cover svg.escape(theme.$arrow-shape);
+    background-color: inherit;
+    mask-image: svg.escape(theme.$arrow-shape);
+    mask-size: cover;
     rotate: z var(--#{$_tooltip-placement-prefix}-arrow-rotate, 0deg);
     transform-origin: var(--#{$_tooltip-placement-prefix}-arrow-transform-origin, bottom center);
 }
@@ -61,7 +64,7 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
 
     width: theme.$close-button-size;
     height: theme.$close-button-size;
-    color: theme.$color;
+    color: color-scheme.color();
 }
 
 .TooltipPopover--dismissible {
