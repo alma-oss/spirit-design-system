@@ -4,7 +4,8 @@ import classNames from 'classnames';
 import { useMemo } from 'react';
 import { useClassNamePrefix } from '../../hooks';
 import { type PlacementDictionaryType, type StyleProps } from '../../types';
-import { getPlacementClassName } from '../../utils';
+import { getColorSchemeClassName, getPlacementClassName } from '../../utils';
+import { DEFAULT_TOOLTIP_COLOR } from './constants';
 
 interface UseTooltipStyleProps extends StyleProps {
   isDismissible?: boolean;
@@ -19,6 +20,9 @@ export const useTooltipStyleProps = (props: UseTooltipStyleProps) => {
   const arrowClass = `${tooltipPopoverClass}__arrow`;
   const closeButtonClass = `${tooltipPopoverClass}__close`;
   const dismissibleClass = `${tooltipPopoverClass}--dismissible`;
+  const colorSchemeClass = getColorSchemeClassName({
+    color: DEFAULT_TOOLTIP_COLOR,
+  });
   const hiddenClass = 'is-hidden';
 
   const isHiddenClass = useMemo(() => isOpen === false, [isOpen]);
@@ -27,7 +31,7 @@ export const useTooltipStyleProps = (props: UseTooltipStyleProps) => {
   return {
     classProps: {
       rootClassName: tooltipClass,
-      popoverClassName: classNames(tooltipPopoverClass, placementClassName, {
+      popoverClassName: classNames(tooltipPopoverClass, colorSchemeClass, placementClassName, {
         [dismissibleClass]: isDismissible,
         [hiddenClass]: isHiddenClass,
       }),
