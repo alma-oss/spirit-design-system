@@ -81,6 +81,23 @@ Tag comes in five available sizes: xsmall, small, medium, large, and xlarge.
 </div>
 ```
 
+## Interactive Tag
+
+Tag can be rendered as a `<button>` or `<a>` element to make it interactive. Hover and active states apply a
+dynamically derived background color via a `::before` pseudo-element overlay.
+
+### Button
+
+```html
+<button type="button" class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic">Button tag</button>
+```
+
+### Link
+
+```html
+<a href="#" class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic">Link tag</a>
+```
+
 ## Disabled
 
 Add the `Tag--disabled` modifier to visually disable a Tag:
@@ -109,5 +126,14 @@ Disabled Tag with `ControlButton`:
 </div>
 ```
 
+Disabled link Tag:
+
+```html
+<a role="link" class="Tag Tag--neutral Tag--small Tag--disabled" aria-disabled="true">Disabled link tag</a>
+```
+
+ℹ️ Read more about this pattern at [Scott O'Hara's blog][scott-o-hara-disabling-a-link].
+
 [component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
 [expanded-size-scale]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/ControlButton/README.md#expanded-size-scale
+[scott-o-hara-disabling-a-link]: https://www.scottohara.me/blog/2021/05/28/disabled-links.html
