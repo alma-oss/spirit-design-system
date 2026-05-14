@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { type SpiritAlertProps } from '../../../types';
+import { getColorSchemeClassName } from '../../../utils';
 import { useAlertStyleProps } from '../useAlertStyleProps';
 
 describe('useAlertStyleProps', () => {
@@ -14,7 +15,9 @@ describe('useAlertStyleProps', () => {
     const props = { color } as SpiritAlertProps;
     const { result } = renderHook(() => useAlertStyleProps(props));
 
-    expect(result.current.classProps).toBe(`Alert Alert--${color}`);
+    expect(result.current.classProps).toBe(
+      `Alert Alert--${color} ${getColorSchemeClassName({ color, isSubtle: true })}`,
+    );
   });
 
   it('should return centered', () => {
