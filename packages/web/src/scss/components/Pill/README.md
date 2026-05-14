@@ -22,8 +22,6 @@ Apply the matching `color-scheme-on-*` helper to each variant:
 <span class="Pill Pill--danger color-scheme-on-emotion-danger-basic">3</span>
 ```
 
-The system allows you to override the default color scheme by configuring optional design tokens. See [Component Color Overrides][component-color-overrides] for more information.
-
 ℹ️ Even though the `Pill--<color>` modifier is not used by default, it can be used to override the color scheme when needed. See [Component Color Overrides][component-color-overrides] for more information.
 
 ### Subtle Variant
