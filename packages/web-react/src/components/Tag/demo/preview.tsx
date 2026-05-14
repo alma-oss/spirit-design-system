@@ -7,6 +7,7 @@ import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import TagDefault from './TagDefault';
 import TagDisabled from './TagDisabled';
+import TagInteractive from './TagInteractive';
 import TagWithControlButton from './TagWithControlButton';
 
 export const Preview = () => (
@@ -17,6 +18,9 @@ export const Preview = () => (
       </DocsSection>
       <DocsSection title="With ControlButton">
         <TagWithControlButton />
+      </DocsSection>
+      <DocsSection title="Interactive">
+        <TagInteractive />
       </DocsSection>
       <DocsSection title="Disabled">
         <TagDisabled />
