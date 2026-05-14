@@ -1,9 +1,7 @@
-// 1. A design exception: visible border for x-small subtle Tags (the parent rule sets a
-//    transparent background via a local variable, so the border is the only visual cue).
-
-@use 'sass:map';
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
+@use '../../tools/color-scheme';
+@use '../../tools/component-color-overrides';
 @use '../../tools/dictionaries';
 @use '../../tools/typography';
 @use 'theme';
@@ -18,58 +16,38 @@
     padding-inline: var(--#{tokens.$css-variable-prefix}tag-padding-x);
     padding-block: var(--#{tokens.$css-variable-prefix}tag-padding-y);
     text-align: center;
-    color: var(--#{tokens.$css-variable-prefix}tag-color);
+    color: color-scheme.color();
     border-width: theme.$border-width;
     border-style: theme.$border-style;
-    border-color: var(--#{tokens.$css-variable-prefix}tag-border-color);
+    border-color: color-scheme.border-color();
     border-radius: theme.$border-radius;
-    background-color: var(--#{tokens.$css-variable-prefix}tag-background-color);
+    background-color: color-scheme.background-color();
 }
 
-// @deprecated Color variant classes (`Tag--subtle`, `Tag--<color>`) are deprecated in favor of color schemes
-// (utility classes `border-*`, `bg-*`, `text-*`). They will be removed in the next major version.
-// @see https://jira.almacareer.tech/browse/DS-2269
-.Tag--subtle {
-    --#{tokens.$css-variable-prefix}local-background-color: oklch(
-        from var(--#{tokens.$css-variable-prefix}tag-subtle-background-color) l c h / 0%
-    );
-
-    color: var(--#{tokens.$css-variable-prefix}tag-subtle-color);
-    border-color: var(--#{tokens.$css-variable-prefix}tag-subtle-border-color);
-
-    // stylelint-disable-next-line declaration-no-important -- Override the bg-* utility class.
-    background-color: var(--#{tokens.$css-variable-prefix}local-background-color) !important;
-}
-
-// @deprecated See above.
-@include dictionaries.generate-colors(
-    $class-name: 'Tag',
-    $dictionary-values: theme.$color-dictionary,
-    $config: theme.$color-config
-);
 @include dictionaries.generate-sizes(
     $class-name: 'Tag',
     $dictionary-values: theme.$size-dictionary,
     $config: theme.$size-config
 );
 
-// 1.
-.Tag--subtle.Tag--xsmall {
-    border-color: var(--#{tokens.$css-variable-prefix}tag-subtle-border-color);
-}
-
-// stylelint-disable declaration-no-important -- Override the local override above.
 .Tag--disabled {
+    --#{tokens.$css-variable-prefix}local-color: #{theme.$color-disabled};
+    --#{tokens.$css-variable-prefix}local-border-color: transparent;
     --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background-color-disabled};
 
-    color: theme.$color-disabled !important;
-    border-color: transparent;
-    background-color: theme.$background-color-disabled !important;
     pointer-events: none;
     cursor: cursors.$disabled;
 }
 
 .Tag--disabled.Tag--subtle {
-    border-color: theme.$border-color-disabled;
+    --#{tokens.$css-variable-prefix}local-border-color: #{theme.$border-color-disabled};
 }
-// stylelint-enable
+
+@include component-color-overrides.generate(
+    $class-name: 'Tag',
+    $property-map: (
+        content: color,
+        background: background-color,
+        border: border-color,
+    )
+);
