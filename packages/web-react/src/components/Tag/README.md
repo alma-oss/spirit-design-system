@@ -72,6 +72,28 @@ The `ControlButton` inside `Tag` requires the [expanded size scale][expanded-siz
 </div>
 ```
 
+## Interactive Tag
+
+Tag can render as a `<button>` or `<a>` element using the `elementType` prop. Hover and active states apply a
+dynamically derived background color.
+
+### Button
+
+When `elementType="button"`, `Tag` automatically sets `type="button"` to prevent accidental form submission
+(the HTML default for `<button>` is `type="submit"`). You can override it by passing `type` explicitly.
+
+```tsx
+<Tag elementType="button">Button tag</Tag>
+```
+
+### Link
+
+```tsx
+<Tag elementType="a" href="#">
+  Link tag
+</Tag>
+```
+
 ## Disabled
 
 Use the `isDisabled` prop to visually disable a `Tag`:
@@ -94,6 +116,16 @@ Disabled `Tag` with `ControlButton`:
   </Tag>
 </div>
 ```
+
+Disabled link Tag:
+
+```tsx
+<Tag elementType="a" isDisabled role="link" aria-disabled="true">
+  Disabled link tag
+</Tag>
+```
+
+ℹ️ Read more about this pattern at [Scott O'Hara's blog][scott-o-hara-disabling-a-link].
 
 ## API
 
@@ -119,4 +151,5 @@ For detailed information see [Tag][tag] component.
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[scott-o-hara-disabling-a-link]: https://www.scottohara.me/blog/2021/05/28/disabled-links.html
 [tag]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Tag/README.md
