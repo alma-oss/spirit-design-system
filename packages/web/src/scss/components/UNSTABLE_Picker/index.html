@@ -42,7 +42,7 @@
     data-tag-row
     tabindex="0"
     aria-describedby="picker-tag-description"
-    class="Tag Tag--selected bg-selected-basic text-selected-subtle Tag--small"
+    class="Tag Tag--selected Tag--small color-scheme-on-selected-basic"
   >
     <div
       role="gridcell"
@@ -363,9 +363,9 @@
 
       <div class="theme-light-on-brand bg-primary rounded-300 p-800">
 
-        <div class="UNSTABLE_Picker UNSTABLE_Picker--medium theme-light-default">
+        <div class="theme-light-default">
 
-          <span class="UNSTABLE_Picker__label theme-light-on-brand">Languages</span>
+          <span class="Label theme-light-on-brand">Languages</span>
 
           <div
             class="Dropdown"
@@ -376,7 +376,7 @@
             <div
               role="group"
               aria-label="Languages"
-              class="UNSTABLE_Picker__inputContainer"
+              class="InputContainer InputContainer--medium"
             >
 
               <div
@@ -387,11 +387,11 @@
                 aria-live="off"
                 aria-relevant="additions"
                 id="picker-demo-picker-themes-selection"
-                class="UNSTABLE_Picker__selection"
+                class="UNSTABLE_PickerSelection"
                 data-spirit-element="selection"
               >
                 <span
-                  class="UNSTABLE_Picker__selectionEmpty"
+                  class="UNSTABLE_PickerSelection__empty"
                   data-spirit-element="selection-label"
                   aria-hidden="true"
                 >Languages</span>
@@ -400,7 +400,7 @@
               <button
                 data-spirit-toggle="dropdown"
                 data-spirit-target="#picker-demo-picker-themes-popover"
-                class="UNSTABLE_Picker__trigger"
+                class="UNSTABLE_PickerTrigger"
                 aria-haspopup="dialog"
                 aria-expanded="false"
                 aria-controls="picker-demo-picker-themes-popover"

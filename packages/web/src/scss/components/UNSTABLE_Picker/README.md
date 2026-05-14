@@ -107,7 +107,7 @@ Place a hidden `<span>` with a unique `id` anywhere in the `<body>` and referenc
     tabindex="0"
     aria-label="Czech"
     aria-describedby="picker-tag-description"
-    class="Tag Tag--selected Tag--small"
+    class="Tag Tag--selected Tag--small color-scheme-on-selected-basic"
   >
     <!-- Tag content start -->
     <div role="gridcell" aria-colindex="1" class="d-contents">
@@ -213,7 +213,12 @@ Each size expects a matching Tag and ControlButton size inside the selection are
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="InputContainer InputContainer--large">
       <div role="grid" aria-label="Selected languages" class="UNSTABLE_PickerSelection">
-        <div role="row" tabindex="0" aria-label="Czech" class="Tag Tag--selected Tag--medium">
+        <div
+          role="row"
+          tabindex="0"
+          aria-label="Czech"
+          class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic"
+        >
           <div role="gridcell" aria-colindex="1" class="d-contents">
             <span>Czech</span>
             <button
