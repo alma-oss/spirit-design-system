@@ -5,7 +5,7 @@ Bare Tooltip HTML:
 ```html
 <div class="Tooltip" data-spirit-element="tooltip">
   <button type="button" data-spirit-toggle="tooltip" data-spirit-target="#my-tooltip-basic">I have a tooltip 😎</button>
-  <div id="my-tooltip-basic" class="TooltipPopover is-hidden">
+  <div id="my-tooltip-basic" class="TooltipPopover color-scheme-on-neutral-basic is-hidden">
     Hello there!
     <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
   </div>
@@ -31,7 +31,7 @@ improved accessibility.
   <button type="button" aria-describedby="my-tooltip" data-spirit-toggle="tooltip" data-spirit-target="#my-tooltip">
     I have a tooltip 😎
   </button>
-  <div id="my-tooltip" class="TooltipPopover is-hidden">
+  <div id="my-tooltip" class="TooltipPopover color-scheme-on-neutral-basic is-hidden">
     Hello there!
     <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
   </div>
@@ -61,7 +61,7 @@ Values follow the [Placement Dictionary][dictionary-placement] (e.g. `top`, `bot
   </button>
   <div
     id="my-tooltip-placement"
-    class="TooltipPopover is-hidden placement-right-start placement-controlled"
+    class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-right-start placement-controlled"
     data-spirit-placement="right-start"
   >
     Hello there!
@@ -89,7 +89,7 @@ Tooltip can be made dismissible by following these steps:
   >
     I have a tooltip 😎
   </button>
-  <div id="my-dismissible-tooltip" class="TooltipPopover TooltipPopover--dismissible">
+  <div id="my-dismissible-tooltip" class="TooltipPopover TooltipPopover--dismissible color-scheme-on-neutral-basic">
     Close me
     <button
       type="button"
@@ -127,7 +127,7 @@ on the `.TooltipPopover__arrow` to control it.
   <button type="button" id="tooltip-trigger" data-spirit-toggle="tooltip" data-spirit-target="#my-tooltip-arrow">
     Toggle tooltip
   </button>
-  <div id="my-advanced-arrow" class="TooltipPopover">
+  <div id="my-advanced-arrow" class="TooltipPopover color-scheme-on-neutral-basic">
     Hello there!
     <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
   </div>
@@ -151,7 +151,11 @@ The `focus` trigger is useful for accessibility, showing the tooltip when users 
   <button type="button" id="tooltip-trigger" data-spirit-toggle="tooltip" data-spirit-target="#my-tooltip-trigger">
     Toggle tooltip
   </button>
-  <div id="my-tooltip-trigger" class="TooltipPopover is-hidden" data-spirit-trigger="click">
+  <div
+    id="my-tooltip-trigger"
+    class="TooltipPopover color-scheme-on-neutral-basic is-hidden"
+    data-spirit-trigger="click"
+  >
     <!-- Only `click` trigger is active now. -->
     You can click on the link:
     <a href="#">Link to unknown</a>
@@ -171,7 +175,7 @@ Advanced floating functionality is provided by JavaScript plugin and by [Floatin
   </button>
   <div
     id="my-tooltip-advanced"
-    class="TooltipPopover"
+    class="TooltipPopover color-scheme-on-neutral-basic"
     data-spirit-enable-flipping-cross-axis="true"
     data-spirit-enable-flipping="true"
     data-spirit-enable-shifting="true"
