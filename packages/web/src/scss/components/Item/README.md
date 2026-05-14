@@ -115,7 +115,7 @@ Radio as a Item:
 <div class="Radio Radio--inputPositionStart Radio--item">
   <input type="radio" id="radio-item" name="example" class="Radio__input" checked />
   <div class="Radio__text">
-    <label class="Label Label--inline Label--item" for="radio-item">Item</label>
+    <label class="Label Label--item" for="radio-item">Item</label>
   </div>
 </div>
 ```
@@ -126,7 +126,7 @@ Checkbox as a Item:
 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
   <input type="checkbox" id="checkbox-item" class="Checkbox__input" />
   <div class="Checkbox__text">
-    <label class="Label Label--inline Label--item" for="checkbox-item">Item</label>
+    <label class="Label Label--item" for="checkbox-item">Item</label>
   </div>
 </div>
 ```
