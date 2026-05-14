@@ -78,9 +78,11 @@ possibly with some additional styling:
   <a
     href="#"
     aria-current="page"
-    class="dynamic-color-background-selected link-not-underlined rounded-200 px-700 py-500"
+    class="dynamic-color-background-selected link-not-underlined text-emotion-informative-subtle rounded-200 px-700 py-500"
   >
     Selected link
   </a>
 </div>
 ```
+
+ℹ️ Always add a `text-*` utility class directly to the link element. Default link styles override colors inherited from the parent (even from the parent with a text color utility), so explicit text color must be set on the element itself to keep the text readable.
