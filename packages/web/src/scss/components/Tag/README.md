@@ -5,36 +5,37 @@ Tag is a visual label used to categorize, organize, or indicate the status of it
 ## Basic Usage
 
 ```html
-<span class="Tag Tag--neutral Tag--small">Tag</span>
+<span class="Tag Tag--neutral Tag--small color-scheme-on-neutral-basic">Tag</span>
 ```
 
 ## Color Variants
 
-⚠️ Color variant classes (`Tag--<color>`, `Tag--subtle`) are deprecated and will be removed in the next major version
-in favor of color schemes using utility classes (`border-*`, `bg-*`, `text-*`).
-See [DS-2269][ds-2269].
-
-There are several color variants of Tag to choose from: neutral, informative, success, warning, danger, and selected.
-
-Each variant also has a subtle version using the `Tag--subtle` modifier:
+`Tag` supports neutral, selected, and emotion color variants.
+Apply the matching `color-scheme-on-*` helper to each variant:
 
 ```html
-<span class="Tag Tag--neutral Tag--small">Neutral tag</span>
-<span class="Tag Tag--informative Tag--small">Informative tag</span>
-<span class="Tag Tag--success Tag--small">Success tag</span>
-<span class="Tag Tag--warning Tag--small">Warning tag</span>
-<span class="Tag Tag--danger Tag--small">Danger tag</span>
-<span class="Tag Tag--selected Tag--small">Selected tag</span>
+<span class="Tag Tag--neutral Tag--small color-scheme-on-neutral-basic">Neutral tag</span>
+<span class="Tag Tag--informative Tag--small color-scheme-on-emotion-informative-basic">Informative tag</span>
+<span class="Tag Tag--success Tag--small color-scheme-on-emotion-success-basic">Success tag</span>
+<span class="Tag Tag--warning Tag--small color-scheme-on-emotion-warning-basic">Warning tag</span>
+<span class="Tag Tag--danger Tag--small color-scheme-on-emotion-danger-basic">Danger tag</span>
+<span class="Tag Tag--selected Tag--small color-scheme-on-selected-basic">Selected tag</span>
 ```
 
-Subtle variants:
+The system allows you to override the default color scheme by configuring optional design tokens. Even though the `Tag--<color>` modifier is not used by default, it can be used to override the color scheme when needed. See [Component Color Overrides][component-color-overrides] for more information.
+
+### Subtle Variant
+
+Use the `*-subtle` color scheme class together with the `Tag--subtle` modifier when you need a softer color intensity:
 
 ```html
-<span class="Tag Tag--neutral Tag--subtle Tag--small">Neutral subtle tag</span>
-<span class="Tag Tag--informative Tag--subtle Tag--small">Informative subtle tag</span>
-<span class="Tag Tag--success Tag--subtle Tag--small">Success subtle tag</span>
-<span class="Tag Tag--warning Tag--subtle Tag--small">Warning subtle tag</span>
-<span class="Tag Tag--danger Tag--subtle Tag--small">Danger subtle tag</span>
+<span class="Tag Tag--neutral Tag--subtle Tag--small color-scheme-on-neutral-subtle">Neutral subtle tag</span>
+<span class="Tag Tag--informative Tag--subtle Tag--small color-scheme-on-emotion-informative-subtle"
+  >Informative subtle tag</span
+>
+<span class="Tag Tag--success Tag--subtle Tag--small color-scheme-on-emotion-success-subtle">Success subtle tag</span>
+<span class="Tag Tag--warning Tag--subtle Tag--small color-scheme-on-emotion-warning-subtle">Warning subtle tag</span>
+<span class="Tag Tag--danger Tag--subtle Tag--small color-scheme-on-emotion-danger-subtle">Danger subtle tag</span>
 ```
 
 ## Sizes
@@ -42,11 +43,11 @@ Subtle variants:
 Tag comes in five available sizes: xsmall, small, medium, large, and xlarge.
 
 ```html
-<span class="Tag Tag--neutral Tag--xsmall">XSmall tag</span>
-<span class="Tag Tag--neutral Tag--small">Small tag</span>
-<span class="Tag Tag--neutral Tag--medium">Medium tag</span>
-<span class="Tag Tag--neutral Tag--large">Large tag</span>
-<span class="Tag Tag--neutral Tag--xlarge">XLarge tag</span>
+<span class="Tag Tag--neutral Tag--xsmall color-scheme-on-neutral-basic">XSmall tag</span>
+<span class="Tag Tag--neutral Tag--small color-scheme-on-neutral-basic">Small tag</span>
+<span class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic">Medium tag</span>
+<span class="Tag Tag--neutral Tag--large color-scheme-on-neutral-basic">Large tag</span>
+<span class="Tag Tag--neutral Tag--xlarge color-scheme-on-neutral-basic">XLarge tag</span>
 ```
 
 ## With ControlButton
@@ -65,7 +66,7 @@ Tag comes in five available sizes: xsmall, small, medium, large, and xlarge.
 
 ```html
 <div class="spirit-feature-enable-v5-control-button-expanded-size-scale">
-  <div class="Tag Tag--selected Tag--medium">
+  <div class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic">
     <span>Tag label</span>
     <button
       type="button"
@@ -108,5 +109,5 @@ Disabled Tag with `ControlButton`:
 </div>
 ```
 
-[ds-2269]: https://jira.almacareer.tech/browse/DS-2269
+[component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
 [expanded-size-scale]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/ControlButton/README.md#expanded-size-scale
