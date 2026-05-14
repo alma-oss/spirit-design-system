@@ -55,7 +55,7 @@
 }
 
 @include test.describe('background color mixins') {
-    @include test.it('background-interactive mixin generates proper interactive states') {
+    @include test.it('background-interactive mixin generates proper interactive states on element') {
         @include test.assert() {
             @include test.output() {
                 .test-button {
@@ -77,6 +77,66 @@
                         }
 
                         &:active {
+                            background-color: var(--spirit-local-background-color-state-active);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include test.it('background-interactive mixin with $target: "::before" targets ::before') {
+        @include test.assert() {
+            @include test.output() {
+                .test-button {
+                    @include dynamic-colors.background-interactive($target: '::before');
+                }
+            }
+
+            // prettier-ignore
+            @include test.expect() {
+                .test-button {
+                    @supports (color: oklch(from red l c h)) {
+                        --spirit-local-background-color-state-hover: oklch(from var(--spirit-local-background-color) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-hover, 0.3) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-hover, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
+                        --spirit-local-background-color-state-active: oklch(from var(--spirit-local-background-color) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-active, 0.45) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-active, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
+
+                        @media (hover: hover) {
+                            &:hover::before {
+                                background-color: var(--spirit-local-background-color-state-hover);
+                            }
+                        }
+
+                        &:active::before {
+                            background-color: var(--spirit-local-background-color-state-active);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include test.it('background-interactive mixin with $target: "::after" targets ::after') {
+        @include test.assert() {
+            @include test.output() {
+                .test-button {
+                    @include dynamic-colors.background-interactive($target: '::after');
+                }
+            }
+
+            // prettier-ignore
+            @include test.expect() {
+                .test-button {
+                    @supports (color: oklch(from red l c h)) {
+                        --spirit-local-background-color-state-hover: oklch(from var(--spirit-local-background-color) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-hover, 0.3) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-hover, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
+                        --spirit-local-background-color-state-active: oklch(from var(--spirit-local-background-color) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-active, 0.45) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-active, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
+
+                        @media (hover: hover) {
+                            &:hover::after {
+                                background-color: var(--spirit-local-background-color-state-hover);
+                            }
+                        }
+
+                        &:active::after {
                             background-color: var(--spirit-local-background-color-state-active);
                         }
                     }

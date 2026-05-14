@@ -84,7 +84,9 @@ $_chroma-upper-limit: var(
 }
 
 // Mixin to generate dynamic background colors for interactive states.
-@mixin background-interactive {
+// Parameters are:
+// * $target: which element to target, e.g. a pseudo-selector: `::before`
+@mixin background-interactive($target: '') {
     @supports (color: oklch(from red l c h)) {
         --#{tokens.$css-variable-prefix}local-background-color-state-hover: #{alter-color(
                 $color: color-scheme.background-color(),
@@ -98,12 +100,12 @@ $_chroma-upper-limit: var(
             )};
 
         @media (hover: hover) {
-            &:hover {
+            &:hover#{$target} {
                 background-color: var(--#{tokens.$css-variable-prefix}local-background-color-state-hover);
             }
         }
 
-        &:active {
+        &:active#{$target} {
             background-color: var(--#{tokens.$css-variable-prefix}local-background-color-state-active);
         }
     }
