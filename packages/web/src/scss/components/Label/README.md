@@ -31,7 +31,7 @@ Used for standalone [Item][item] components (button, link, div with `.Item` clas
 For Checkbox or Radio with the `--item` modifier, combine both inline and item variants:
 
 ```html
-<label for="example-field" class="Label Label--inline Label--item">Label Text</label>
+<label for="example-field" class="Label Label--item">Label Text</label>
 ```
 
 ## Modifiers
@@ -101,7 +101,7 @@ Applies disabled styling to the label.
 <div class="Checkbox Checkbox--item">
   <input type="checkbox" id="checkbox-item" class="Checkbox__input" />
   <div class="Checkbox__text">
-    <label class="Label Label--inline Label--item" for="checkbox-item">Checkbox Label</label>
+    <label class="Label Label--item" for="checkbox-item">Checkbox Label</label>
   </div>
 </div>
 ```
