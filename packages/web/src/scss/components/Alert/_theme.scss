@@ -1,6 +1,4 @@
-@use 'sass:map';
 @use '@tokens' as tokens;
-@use '../../settings/dictionaries';
 @use '../../tools/units';
 
 $typography: tokens.$body-medium-regular;
@@ -12,13 +10,3 @@ $border-style: solid;
 $border-width: tokens.$border-width-100;
 
 $content-max-width: units.px-to-rem(800px);
-
-$color-dictionary: (
-    emotion: dictionaries.$emotion-colors,
-);
-
-$color-config: (
-    color: 'content-basic',
-    border-color: 'border-basic',
-    background-color: 'background-subtle',
-);
