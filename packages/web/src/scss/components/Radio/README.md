@@ -116,7 +116,7 @@ To add helper text, use the [HelperText][helper-text] component:
 <div class="Radio Radio--inputPositionStart Radio--item">
   <input type="radio" id="radio-item-default" class="Radio__input" name="item" />
   <div class="Radio__text">
-    <label class="Label Label--inline Label--item" for="radio-item-default">Radio Label</label>
+    <label class="Label Label--item" for="radio-item-default">Radio Label</label>
   </div>
 </div>
 ```
