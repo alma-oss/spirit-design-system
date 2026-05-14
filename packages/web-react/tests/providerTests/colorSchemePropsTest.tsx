@@ -3,23 +3,25 @@ import React, { type ComponentType } from 'react';
 import { getColorSchemeClassName } from '../../src';
 import getElement from '../testUtils/getElement';
 
-interface ColorSchemePropsTestOptions {
-  testId?: string;
-  isSubtle?: boolean;
-}
-
-type ColorSchemeComponentProps = {
-  color?: string;
+type ColorSchemeComponentProps<C extends string> = {
+  color?: C;
   isSubtle?: boolean;
 };
 
-export const colorSchemePropsTest = (
-  Component: ComponentType<ColorSchemeComponentProps>,
-  colors: string[],
-  { testId, isSubtle = false }: ColorSchemePropsTestOptions = {},
-) => {
+interface ColorSchemePropsTestOptions {
+  testId?: string;
+  isSubtle?: boolean;
+  hasSubtleProp?: boolean;
+}
+
+export function colorSchemePropsTest<C extends string, P extends object = ColorSchemeComponentProps<C>>(
+  Component: ComponentType<P>,
+  colors: readonly C[],
+  { testId, isSubtle = false, hasSubtleProp = true }: ColorSchemePropsTestOptions = {},
+): void {
   it.each(colors)('should render color scheme class for %s', async (color) => {
-    const dom = render(<Component color={color} isSubtle={isSubtle} />);
+    const props = (hasSubtleProp ? { color, isSubtle } : { color }) as P;
+    const dom = render(<Component {...props} />);
 
     await waitFor(() => {
       const element = getElement(dom, testId);
@@ -32,4 +34,4 @@ export const colorSchemePropsTest = (
       );
     });
   });
-};
+}
