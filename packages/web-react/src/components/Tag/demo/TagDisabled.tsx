@@ -12,6 +12,12 @@ const TagDisabled = () => (
     <Tag size="small" isSubtle isDisabled>
       Disabled subtle
     </Tag>
+    <Tag elementType="button" size="small" isDisabled>
+      Disabled button
+    </Tag>
+    <Tag elementType="a" size="small" isDisabled role="link" aria-disabled="true">
+      Disabled link
+    </Tag>
     <Tag elementType="div" isDisabled>
       <span>Disabled with ControlButton</span>
       <ControlButton size="small" isSymmetrical isDisabled aria-label="Remove Disabled">

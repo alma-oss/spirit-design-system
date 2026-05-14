@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
@@ -36,26 +36,46 @@ describe('Tag', () => {
   elementTypePropsTest(Tag);
 
   it('should have neutral classname', () => {
-    const dom = render(<Tag />);
+    render(<Tag>Tag</Tag>);
 
-    const element = dom.container.querySelector('span') as HTMLElement;
-
-    expect(element).toHaveClass('Tag--neutral');
+    expect(screen.getByText('Tag')).toHaveClass('Tag--neutral');
   });
 
   it('should render text children', () => {
-    const dom = render(<Tag>Tag</Tag>);
+    render(<Tag>Tag</Tag>);
 
-    const element = dom.container.querySelector('span') as HTMLElement;
-
-    expect(element.textContent).toBe('Tag');
+    expect(screen.getByText('Tag')).toBeInTheDocument();
   });
 
   it('should render neutral color', () => {
-    const dom = render(<Tag color="neutral">333</Tag>);
+    render(<Tag color="neutral">neutral tag</Tag>);
 
-    const element = dom.container.querySelector('span') as HTMLElement;
+    expect(screen.getByText('neutral tag')).toHaveClass('Tag--neutral');
+  });
 
-    expect(element).toHaveClass('Tag--neutral');
+  it('should render as button with default type="button"', () => {
+    render(<Tag elementType="button">Button tag</Tag>);
+
+    expect(screen.getByRole('button', { name: 'Button tag' })).toHaveAttribute('type', 'button');
+  });
+
+  it('should honor user-supplied type on button', () => {
+    render(
+      <Tag elementType="button" type="submit">
+        Submit tag
+      </Tag>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Submit tag' })).toHaveAttribute('type', 'submit');
+  });
+
+  it('should render as anchor', () => {
+    render(
+      <Tag elementType="a" href="/">
+        Link tag
+      </Tag>,
+    );
+
+    expect(screen.getByRole('link', { name: 'Link tag' })).toHaveAttribute('href', '/');
   });
 });
