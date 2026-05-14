@@ -20,8 +20,8 @@
             {{#if (eq color "warning")}}{{setVar "colorPrefix" "emotion-warning"}}{{/if}}
             {{#if (eq color "danger")}}{{setVar "colorPrefix" "emotion-danger"}}{{/if}}
             {{#if (eq color "selected")}}{{setVar "colorPrefix" "selected"}}{{/if}}
-            <span class="Tag Tag--{{color}} Tag--subtle Tag--{{size}} border-{{@root.colorPrefix}}-subtle bg-{{@root.colorPrefix}}-subtle text-{{@root.colorPrefix}}-basic">Tag {{color}}</span>
-            <span class="Tag Tag--{{color}} Tag--{{size}} border-{{@root.colorPrefix}}-basic bg-{{@root.colorPrefix}}-basic text-{{@root.colorPrefix}}-subtle">Tag {{color}}</span>
+            <span class="Tag Tag--{{color}} Tag--subtle Tag--{{size}} color-scheme-on-{{@root.colorPrefix}}-subtle">Tag {{color}}</span>
+            <span class="Tag Tag--{{color}} Tag--{{size}} color-scheme-on-{{@root.colorPrefix}}-basic">Tag {{color}}</span>
             {{/each}}
           </div>
         </section>
@@ -57,7 +57,7 @@
             {{#if (eq color "warning")}}{{setVar "colorPrefix" "emotion-warning"}}{{/if}}
             {{#if (eq color "danger")}}{{setVar "colorPrefix" "emotion-danger"}}{{/if}}
             {{#if (eq color "selected")}}{{setVar "colorPrefix" "selected"}}{{/if}}
-            <div class="Tag Tag--{{color}} Tag--subtle Tag--{{size}} border-{{@root.colorPrefix}}-subtle bg-{{@root.colorPrefix}}-subtle text-{{@root.colorPrefix}}-basic">
+            <div class="Tag Tag--{{color}} Tag--subtle Tag--{{size}} color-scheme-on-{{@root.colorPrefix}}-subtle">
               <span>Tag {{color}}</span>
               <button
                 type="button"
@@ -74,7 +74,7 @@
                 </svg>
               </button>
             </div>
-            <div class="Tag Tag--{{color}} Tag--{{size}} border-{{@root.colorPrefix}}-basic bg-{{@root.colorPrefix}}-basic text-{{@root.colorPrefix}}-subtle">
+            <div class="Tag Tag--{{color}} Tag--{{size}} color-scheme-on-{{@root.colorPrefix}}-basic">
               <span>Tag {{color}}</span>
               <button
                 type="button"

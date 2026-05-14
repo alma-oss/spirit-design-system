@@ -1,5 +1,5 @@
 import { render, waitFor } from '@testing-library/react';
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import { getColorSchemeClassName } from '../../src';
 import getElement from '../testUtils/getElement';
 
@@ -8,8 +8,10 @@ type ColorSchemeComponentProps<C extends string> = {
   isSubtle?: boolean;
 };
 
-export function colorSchemePropsTest<C extends string, P extends object = ColorSchemeComponentProps<C>>(
-  Component: ComponentType<P>,
+type ColorSchemeTestComponent<C extends string> = (props: ColorSchemeComponentProps<C>) => JSX.Element;
+
+export function colorSchemePropsTest<C extends string>(
+  Component: ColorSchemeTestComponent<C>,
   colors: readonly C[],
   testId?: string,
 ): void {
@@ -20,8 +22,7 @@ export function colorSchemePropsTest<C extends string, P extends object = ColorS
       [color, false],
     ]),
   )('should render color scheme class for %s with isSubtle=%s', async (color, isSubtle) => {
-    const props = { color, isSubtle } as P;
-    const dom = render(<Component {...props} />);
+    const dom = render(<Component color={color} isSubtle={isSubtle} />);
 
     await waitFor(() => {
       const element = getElement(dom, testId);
@@ -31,14 +32,13 @@ export function colorSchemePropsTest<C extends string, P extends object = ColorS
   });
 }
 
-export function colorSchemeBasicTest<C extends string, P extends object = ColorSchemeComponentProps<C>>(
-  Component: ComponentType<P>,
+export function colorSchemeBasicTest<C extends string>(
+  Component: ColorSchemeTestComponent<C>,
   colors: readonly C[],
   testId?: string,
 ): void {
   it.each(colors)('should render color scheme class for %s', async (color) => {
-    const props = { color } as P;
-    const dom = render(<Component {...props} />);
+    const dom = render(<Component color={color} />);
 
     await waitFor(() => {
       const element = getElement(dom, testId);
@@ -48,14 +48,13 @@ export function colorSchemeBasicTest<C extends string, P extends object = ColorS
   });
 }
 
-export function colorSchemeSubtleTest<C extends string, P extends object = ColorSchemeComponentProps<C>>(
-  Component: ComponentType<P>,
+export function colorSchemeSubtleTest<C extends string>(
+  Component: ColorSchemeTestComponent<C>,
   colors: readonly C[],
   testId?: string,
 ): void {
   it.each(colors)('should render color scheme class for %s', async (color) => {
-    const props = { color } as P;
-    const dom = render(<Component {...props} />);
+    const dom = render(<Component color={color} />);
 
     await waitFor(() => {
       const element = getElement(dom, testId);
