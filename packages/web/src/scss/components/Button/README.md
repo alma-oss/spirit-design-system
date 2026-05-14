@@ -298,7 +298,7 @@ In other cases, consider displaying the button label in a [Tooltip][readme-toolt
     </svg>
     <span class="accessibility-hidden">I have a tooltip!</span>
   </button>
-  <div id="my-tooltip" class="TooltipPopover">
+  <div id="my-tooltip" class="TooltipPopover color-scheme-on-neutral-basic">
     Hello there!
     <span class="Tooltip__arrow" data-spirit-element="arrow"></span>
   </div>
