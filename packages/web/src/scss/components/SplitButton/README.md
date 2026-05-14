@@ -69,7 +69,7 @@ Learn more about the [Tooltip][readme-tooltip] component in its documentation.
     </button>
     <div
       id="tooltip-1"
-      class="TooltipPopover is-hidden placement-bottom-start"
+      class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-bottom-start"
       data-spirit-placement="bottom-start"
       data-spirit-flip-fallback-placements="bottom"
       data-spirit-trigger="hover"
