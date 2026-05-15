@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-docsite@0.3.0...@alma-oss/spirit-docsite@0.4.0) (2026-05-15)
+
+### Features
+
+- **docsite:** apply Heading component to semantic html tags in markdown
+- **docsite:** create component cover with breadcrumbs
+- **docsite:** introduce homepage layout
+- **docsite:** introduce multiple views over one component
+- **docsite:** introduce syntax highlighting
+- **docsite:** load content into component views, closes [#DS-2228](https://github.com/alma-oss/spirit-design-system/issues/DS-2228)
+- **docsite:** mark unstable components
+- **docsite:** use Table component for markdown tables
+
+### Chores
+
+- **repo:** use nx run-many for building packages base on deps graph
+
+### Styles
+
+- **docsite:** run type checking as a part of test script
+
+### Code Refactoring
+
+- **docsite:** simplify and cleanup ui and layout of the docsite
+- **docsite:** update theme and enhance layout for better readability
+- **web-react:** remove TransferProps from components
+
 ## [0.3.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-docsite@0.2.2...@alma-oss/spirit-docsite@0.3.0) (2026-04-13)
 
 ### Features

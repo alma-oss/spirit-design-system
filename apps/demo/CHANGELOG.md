@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.6](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@2.0.5...@lmc-eu/spirit-demo-app@2.0.6) (2026-05-15)
+
+### Chores
+
+- **demo:** load content from preview files as partial, closes [#DS-2221](https://github.com/alma-oss/spirit-design-system/issues/DS-2221)
+
 ## [2.0.5](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@2.0.4...@lmc-eu/spirit-demo-app@2.0.5) (2026-04-13)
 
 ### Chores

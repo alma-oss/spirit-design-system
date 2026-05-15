@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/alma-oss/spirit-design-system/compare/eslint-config-spirit@0.2.0...eslint-config-spirit@0.2.1) (2026-05-15)
+
+### Chores
+
+- **repo:** enforce empty line before expect groups in tests
+
 ## [0.2.0](https://github.com/alma-oss/spirit-design-system/compare/eslint-config-spirit@0.1.7...eslint-config-spirit@0.2.0) (2026-04-13)
 
 ### Features

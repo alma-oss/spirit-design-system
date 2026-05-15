@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-common@0.5.5...@alma-oss/spirit-common@0.6.0) (2026-05-15)
+
+### Features
+
+- **common:** add cssLengthToPixels to utilities #DS-2392, closes [#DS-2392](https://github.com/alma-oss/spirit-design-system/issues/DS-2392)
+
 ## [0.5.5](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-common@0.5.4...@alma-oss/spirit-common@0.5.5) (2026-04-13)
 
 ### Styles

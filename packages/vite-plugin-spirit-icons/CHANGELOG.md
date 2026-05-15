@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.1.0 (2026-05-15)
+
+### Features
+
+- **vite-plugin-spirit-icons:** introduce package for icons build, closes [#DS-2461](https://github.com/alma-oss/spirit-design-system/issues/DS-2461)
+
 ## 1.0.0 (2026-02-27)
 
 ### Features

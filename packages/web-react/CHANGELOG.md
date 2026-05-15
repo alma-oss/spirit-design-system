@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.6.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.5.0...@alma-oss/spirit-web-react@4.6.0) (2026-05-15)
+
+### Features
+
+- **web-react:** add `I18nProvider` and merged translations #DS-2210, closes [#DS-2210](https://github.com/alma-oss/spirit-design-system/issues/DS-2210)
+- **web-react:** add Picker examples #DS-2504, closes [#DS-2504](https://github.com/alma-oss/spirit-design-system/issues/DS-2504)
+- **web-react:** introduce CardArticle in Figma Code Connect #DS-2406, closes [#DS-2406](https://github.com/alma-oss/spirit-design-system/issues/DS-2406)
+- **web-react:** introduce unstable Table component
+- **web-react:** replace px with rem #DS-2392, closes [#DS-2392](https://github.com/alma-oss/spirit-design-system/issues/DS-2392)
+
+### Bug Fixes
+
+- **web-react:** add disabled class for ControlButton when UNSTABLE_File is disabled
+- **web-react:** export ToastContext
+- **web-react:** extend Table demos to cover all web demos
+- **web-react:** fix invalid Figma Code Connect for various components
+- **web-react:** switch specificity of style utilities and escape hatches, closes [#DS-2234](https://github.com/alma-oss/spirit-design-system/issues/DS-2234)
+
+### Documentation
+
+- **web-react:** add missing files and directories to component's file hierarchy
+- **web-react:** introduce composition for Card article #DS-2406, closes [#DS-2406](https://github.com/alma-oss/spirit-design-system/issues/DS-2406)
+- **web-react:** make Accordion renderable in docsite preview, closes [#DS-2222](https://github.com/alma-oss/spirit-design-system/issues/DS-2222)
+- **web-react:** make all components renderable in docsite preview
+- **web-react:** pilot move of figma connection to stories
+
+### Chores
+
+- **repo:** enforce empty line before expect groups in tests
+
+### Styles
+
+- **web-react:** unify the notation for classes in style props hooks
+
+### Code Refactoring
+
+- **web-react:** remove TransferProps from components
+- **web-react:** rename defaultLabels to defaultTranslations #DS-2210, closes [#DS-2210](https://github.com/alma-oss/spirit-design-system/issues/DS-2210)
+
 ## [4.5.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.4.2...@alma-oss/spirit-web-react@4.5.0) (2026-04-13)
 
 ### Features

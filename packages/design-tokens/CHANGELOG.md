@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.1.2...@alma-oss/spirit-design-tokens@4.2.0) (2026-05-15)
+
+### Features
+
+- **design-tokens:** update tokens to rem #DS-2392, closes [#DS-2392](https://github.com/alma-oss/spirit-design-system/issues/DS-2392)
+
 ## [4.1.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.1.1...@alma-oss/spirit-design-tokens@4.1.2) (2026-04-13)
 
 ### Chores

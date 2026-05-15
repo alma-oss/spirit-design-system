@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.8](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-icons@3.0.7...@alma-oss/spirit-icons@3.0.8) (2026-05-15)
+
+### Code Refactoring
+
+- **icons:** migrate build scripts to typescript, closes [#DS-2461](https://github.com/alma-oss/spirit-design-system/issues/DS-2461)
+- **icons:** use vite and introduce custom vite plugin for build of icons, closes [#DS-2461](https://github.com/alma-oss/spirit-design-system/issues/DS-2461)
+- **icons:** use vite plugin instead of internal build scripts, closes [#DS-2461](https://github.com/alma-oss/spirit-design-system/issues/DS-2461)
+
 ## [3.0.7](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-icons@3.0.6...@alma-oss/spirit-icons@3.0.7) (2026-04-13)
 
 ### Documentation

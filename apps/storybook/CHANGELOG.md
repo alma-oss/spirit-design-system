@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.4.3...@alma-oss/spirit-storybook@0.5.0) (2026-05-15)
+
+### Features
+
+- **repo:** introduce storybook mcp support #DS-2526, closes [#DS-2526](https://github.com/alma-oss/spirit-design-system/issues/DS-2526)
+- **storybook:** filter out figma stories from production menu
+
 ## [0.4.3](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.4.2...@alma-oss/spirit-storybook@0.4.3) (2026-04-13)
 
 ### Bug Fixes

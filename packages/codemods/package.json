@@ -1,6 +1,6 @@
 {
   "name": "@alma-oss/spirit-codemods",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "Codemods scripts for Spirit Design System packages",
   "license": "MIT",
   "engines": {

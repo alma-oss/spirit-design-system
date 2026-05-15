@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.5.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.4.0...@alma-oss/spirit-web@4.5.0) (2026-05-15)
+
+### Features
+
+- **web-react:** add Picker examples #DS-2504, closes [#DS-2504](https://github.com/alma-oss/spirit-design-system/issues/DS-2504)
+- **web:** introduce unstable Table component
+- **web:** replace px with rem #DS-2392, closes [#DS-2392](https://github.com/alma-oss/spirit-design-system/issues/DS-2392)
+
+### Bug Fixes
+
+- **demo:** fix icon in File upload success validation text
+
+### Documentation
+
+- **web:** introduce composition for Card article #DS-2406, closes [#DS-2406](https://github.com/alma-oss/spirit-design-system/issues/DS-2406)
+- **web:** introduce composition for Card article #DS-2406, closes [#DS-2406](https://github.com/alma-oss/spirit-design-system/issues/DS-2406)
+- **web:** make Accordion renderable in docsite preview, closes [#DS-2221](https://github.com/alma-oss/spirit-design-system/issues/DS-2221)
+- **web:** make some components renderable in docsite preview
+
+### Chores
+
+- **web:** bundle linked spirit-common sources via Rollup #DS-2392, closes [#DS-2392](https://github.com/alma-oss/spirit-design-system/issues/DS-2392)
+- **web:** set correct build order when running type check
+
+### Code Refactoring
+
+- **web:** improve Table header
+
 ## [4.4.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.3.1...@alma-oss/spirit-web@4.4.0) (2026-04-13)
 
 ### Features

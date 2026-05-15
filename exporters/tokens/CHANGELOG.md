@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.0.6...@alma-oss/spirit-tokens-exporter@4.1.0) (2026-05-15)
+
+### Features
+
+- **exporter-tokens:** pxToRem decimals change to 4 #DS-2392, closes [#DS-2392](https://github.com/alma-oss/spirit-design-system/issues/DS-2392)
+
+### Chores
+
+- **exporter-tokens:** rebuild after upgrade
+- **repo:** enforce empty line before expect groups in tests
+
 ## [4.0.6](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.0.5...@alma-oss/spirit-tokens-exporter@4.0.6) (2026-04-13)
 
 ### Bug Fixes

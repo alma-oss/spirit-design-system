@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.7](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-analytics@2.0.6...@alma-oss/spirit-analytics@2.0.7) (2026-05-15)
+
+**Note:** Version bump only for package @alma-oss/spirit-analytics
+
 ## [2.0.6](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-analytics@2.0.5...@alma-oss/spirit-analytics@2.0.6) (2026-04-13)
 
 ### Styles
