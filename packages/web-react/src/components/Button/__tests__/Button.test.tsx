@@ -4,7 +4,7 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
-  colorSchemePropsTest,
+  colorSchemeBasicTest,
   componentButtonColorPropsTest,
   elementTypePropsTest,
   emotionColorPropsTest,
@@ -41,10 +41,7 @@ describe('Button', () => {
 
   elementTypePropsTest(Button);
 
-  colorSchemePropsTest(Button, Object.values(EmotionColors), {
-    isSubtle: false,
-    hasSubtleProp: false,
-  });
+  colorSchemeBasicTest(Button, Object.values(EmotionColors));
 
   it('should have default classname', () => {
     render(<Button />);

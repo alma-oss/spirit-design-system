@@ -4,7 +4,7 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
-  colorSchemePropsTest,
+  colorSchemeSubtleTest,
   elementTypePropsTest,
   emotionColorPropsTest,
   restPropsTest,
@@ -20,14 +20,11 @@ jest.mock('../../../hooks/useIcon');
 describe('Alert', () => {
   classNamePrefixProviderTest(Alert, 'Alert');
 
+  colorSchemeSubtleTest(Alert, Object.values(EmotionColors));
+
   stylePropsTest(Alert);
 
   emotionColorPropsTest(Alert, 'Alert--');
-
-  colorSchemePropsTest(Alert, Object.values(EmotionColors), {
-    isSubtle: true,
-    hasSubtleProp: false,
-  });
 
   restPropsTest(Alert, 'div');
 
