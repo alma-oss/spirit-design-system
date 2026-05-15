@@ -4,6 +4,7 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  colorSchemePropsTest,
   componentButtonColorPropsTest,
   elementTypePropsTest,
   emotionColorPropsTest,
@@ -13,6 +14,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { EmotionColors } from '../../../constants';
 import { RouterProvider } from '../../../context/RouterContext';
 import ButtonLink from '../ButtonLink';
 
@@ -38,6 +40,11 @@ describe('ButtonLink', () => {
   ariaAttributesTest(ButtonLink);
 
   elementTypePropsTest(ButtonLink);
+
+  colorSchemePropsTest(ButtonLink, Object.values(EmotionColors), {
+    isSubtle: false,
+    hasSubtleProp: false,
+  });
 
   it('should have default classname', () => {
     render(<ButtonLink />);

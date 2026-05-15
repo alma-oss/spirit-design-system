@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { type CSSProperties, type ElementType } from 'react';
 import { useClassNamePrefix, useSpacingStyle, useSymmetry } from '../../hooks';
 import { type ButtonColor, type ButtonSize, type SpacingType, type SpiritButtonProps } from '../../types';
+import { getColorSchemeClassName, getEmotionColorNames } from '../../utils';
 import { applyColor, applySize } from '../../utils/classname';
 import { compose } from '../../utils/compose';
 
@@ -11,6 +12,8 @@ const getButtonColorClassname = <C = void>(className: string, color: ButtonColor
 
 const getButtonSizeClassname = <S = void>(className: string, size: ButtonSize<S>): string =>
   compose(applySize<ButtonSize<S>>(size))(className);
+
+const emotionColorNames = getEmotionColorNames() as string[];
 
 interface ButtonCSSProperties extends CSSProperties {
   [key: string]: string | undefined | number;
@@ -29,16 +32,21 @@ export function useButtonStyleProps<T extends ElementType = 'button', C = void, 
   props: SpiritButtonProps<T, C, S>,
 ): ButtonStyles {
   const { color, isDisabled, isLoading, isSymmetrical, size, spacing, ...restProps } = props;
+  const colorAsString = String(color);
 
   const buttonClass = useClassNamePrefix('Button');
   const buttonDisabledClass = `${buttonClass}--disabled`;
   const buttonLoadingClass = `${buttonClass}--loading`;
+  const buttonColorSchemeClass = emotionColorNames.includes(colorAsString)
+    ? getColorSchemeClassName({ color: colorAsString, isSubtle: false })
+    : undefined;
 
   const { symmetricalClassName } = useSymmetry(buttonClass, isSymmetrical);
 
   const classProps = classNames(
     buttonClass,
     getButtonColorClassname(buttonClass, color as ButtonColor<C>),
+    buttonColorSchemeClass,
     getButtonSizeClassname(buttonClass, size as ButtonSize<S>),
     {
       [buttonDisabledClass]: isDisabled || isLoading,
