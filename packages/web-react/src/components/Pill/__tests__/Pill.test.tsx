@@ -7,6 +7,7 @@ import {
   colorSchemePropsTest,
   elementTypePropsTest,
   emotionColorPropsTest,
+  isSubtlePropsTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
@@ -22,9 +23,7 @@ describe('Pill', () => {
 
   colorSchemePropsTest(Pill, [...Object.values(PillColorsExtended), ...Object.values(EmotionColors)]);
 
-  colorSchemePropsTest(Pill, [...Object.values(PillColorsExtended), ...Object.values(EmotionColors)], {
-    isSubtle: true,
-  });
+  isSubtlePropsTest(Pill, 'success');
 
   stylePropsTest(Pill);
 

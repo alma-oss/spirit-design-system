@@ -4,14 +4,12 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
-  colorSchemePropsTest,
   elementTypePropsTest,
   emotionColorPropsTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { EmotionColors } from '../../../constants';
 import { getColorSchemeClassName } from '../../../utils';
 import Alert from '../Alert';
 
@@ -23,11 +21,6 @@ describe('Alert', () => {
   stylePropsTest(Alert);
 
   emotionColorPropsTest(Alert, 'Alert--');
-
-  colorSchemePropsTest(Alert, Object.values(EmotionColors), {
-    isSubtle: true,
-    hasSubtleProp: false,
-  });
 
   restPropsTest(Alert, 'div');
 

@@ -41,10 +41,7 @@ describe('ButtonLink', () => {
 
   elementTypePropsTest(ButtonLink);
 
-  colorSchemePropsTest(ButtonLink, Object.values(EmotionColors), {
-    isSubtle: false,
-    hasSubtleProp: false,
-  });
+  colorSchemePropsTest(ButtonLink, Object.values(EmotionColors));
 
   it('should have default classname', () => {
     render(<ButtonLink />);

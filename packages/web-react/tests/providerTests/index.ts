@@ -4,6 +4,7 @@ export * from './colorSchemePropsTest';
 export * from './dictionaryPropsTest';
 export * from './elementTypePropsTest';
 export * from './formFieldContextPropsTest';
+export * from './isSubtlePropsTest';
 export * from './itemPropsTest';
 export * from './loadingPropsTest';
 export * from './requiredPropsTest';

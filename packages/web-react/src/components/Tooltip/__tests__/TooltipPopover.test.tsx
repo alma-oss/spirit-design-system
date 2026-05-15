@@ -23,10 +23,7 @@ describe('TooltipPopover', () => {
 
   ariaAttributesTest(TooltipPopover);
 
-  colorSchemePropsTest(TooltipPopover, [DEFAULT_TOOLTIP_COLOR], {
-    isSubtle: false,
-    hasSubtleProp: false,
-  });
+  colorSchemePropsTest(TooltipPopover, [DEFAULT_TOOLTIP_COLOR]);
 
   it('should render tooltip popover', () => {
     const popoverText = 'TooltipPopover';

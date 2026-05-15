@@ -8,19 +8,19 @@ type ColorSchemeComponentProps<C extends string> = {
   isSubtle?: boolean;
 };
 
-export function colorSchemePropsTest<C extends string, P extends object = ColorSchemeComponentProps<C>>(
+export function isSubtlePropsTest<C extends string, P extends object = ColorSchemeComponentProps<C>>(
   Component: ComponentType<P>,
-  colors: readonly C[],
+  color: C,
   testId?: string,
 ): void {
-  it.each(colors)('should render color scheme class for %s', async (color) => {
-    const props = { color } as P;
+  it('should render subtle color scheme class', async () => {
+    const props = { color, isSubtle: true } as P;
     const dom = render(<Component {...props} />);
 
     await waitFor(() => {
       const element = getElement(dom, testId);
 
-      expect(element).toHaveClass(getColorSchemeClassName({ color, isSubtle: false }));
+      expect(element).toHaveClass(getColorSchemeClassName({ color, isSubtle: true }));
     });
   });
 }
