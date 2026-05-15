@@ -21,10 +21,18 @@ There are several color variants of Button to choose from:
 <button type="button" class="Button Button--secondary Button--medium">Secondary Button</button>
 <button type="button" class="Button Button--tertiary Button--medium">Tertiary Button</button>
 <button type="button" class="Button Button--plain Button--medium">Plain Button</button>
-<button type="button" class="Button Button--success Button--medium">Success button</button>
-<button type="button" class="Button Button--informative Button--medium">Informative button</button>
-<button type="button" class="Button Button--warning Button--medium">Warning button</button>
-<button type="button" class="Button Button--danger Button--medium">Danger button</button>
+<button type="button" class="Button Button--success Button--medium color-scheme-on-emotion-success-basic">
+  Success button
+</button>
+<button type="button" class="Button Button--informative Button--medium color-scheme-on-emotion-informative-basic">
+  Informative button
+</button>
+<button type="button" class="Button Button--warning Button--medium color-scheme-on-emotion-warning-basic">
+  Warning button
+</button>
+<button type="button" class="Button Button--danger Button--medium color-scheme-on-emotion-danger-basic">
+  Danger button
+</button>
 ```
 
 ## Sizes

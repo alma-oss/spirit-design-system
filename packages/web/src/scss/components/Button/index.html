@@ -1,6 +1,7 @@
 {{#> web/layout/default title="Button" parentPageName="Components" }}
 
-{{setVar "colors" "primary" "secondary" "tertiary" "plain" "success" "informative" "warning" "danger" }}
+{{setVar "button-colors" "primary" "secondary" "tertiary" "plain" }}
+{{setVar "emotion-colors" "success" "informative" "warning" "danger" }}
 {{setVar "sizes" "small" "medium" "large" }}
 
 <section class="py-900 py-tablet-1000">
@@ -19,7 +20,7 @@
         <section>
           <h2 class="docs-Heading">Size {{size}}</h2>
           <div class="docs-Stack docs-Stack--start">
-            {{#each @root.colors as |color|}}
+            {{#each @root.button-colors as |color|}}
             <div>
               <a
                 href="#"
@@ -42,6 +43,42 @@
               <button
                 type="button"
                 class="Button Button--{{color}} Button--{{size}} Button--symmetrical"
+              >
+                <span class="accessibility-hidden">Menu</span>
+                <svg
+                  class="Icon"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+                </svg>
+              </button>
+            </div>
+            {{/each}}
+            {{#each @root.emotion-colors as |color|}}
+            <div>
+              <a
+                href="#"
+                class="Button Button--{{color}} Button--{{size}} color-scheme-on-emotion-{{color}}-basic"
+              >Button {{color}}</a>
+              <button
+                type="button"
+                class="Button Button--{{color}} Button--{{size}} color-scheme-on-emotion-{{color}}-basic"
+              >
+                <svg
+                  class="Icon"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+                </svg>
+                Menu
+              </button>
+              <button
+                type="button"
+                class="Button Button--{{color}} Button--{{size}} Button--symmetrical color-scheme-on-emotion-{{color}}-basic"
               >
                 <span class="accessibility-hidden">Menu</span>
                 <svg
@@ -82,7 +119,7 @@
         <section>
           <h2 class="docs-Heading">Size {{size}}</h2>
           <div class="docs-Stack docs-Stack--start">
-            {{#each @root.colors as |color|}}
+            {{#each @root.button-colors as |color|}}
             <div>
               <button
                 type="button"
@@ -148,7 +185,7 @@
         <section>
           <h2 class="docs-Heading">Size {{size}}</h2>
           <div class="docs-Stack docs-Stack--start">
-            {{#each @root.colors as |color|}}
+            {{#each @root.button-colors as |color|}}
             <div>
               <a
                 href="#"
@@ -239,7 +276,7 @@
         <section>
           <h2 class="docs-Heading">Size {{size}}</h2>
           <div class="docs-Stack docs-Stack--start">
-            {{#each @root.colors as |color|}}
+            {{#each @root.button-colors as |color|}}
             <div
               class="Grid Grid--cols-1"
               style="

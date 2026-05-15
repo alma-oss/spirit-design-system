@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { type SpiritButtonProps } from '../../../types';
+import { getColorSchemeClassName } from '../../../utils';
 import { useButtonStyleProps } from '../useButtonStyleProps';
 
 describe('useButtonStyleProps', () => {
@@ -9,7 +10,14 @@ describe('useButtonStyleProps', () => {
     ['secondary', 'medium', false, false, false, 'Button Button--secondary Button--medium'],
     ['tertiary', 'medium', false, false, false, 'Button Button--tertiary Button--medium'],
     ['plain', 'medium', false, false, false, 'Button Button--plain Button--medium'],
-    ['danger', 'medium', false, false, false, 'Button Button--danger Button--medium'],
+    [
+      'danger',
+      'medium',
+      false,
+      false,
+      false,
+      `Button Button--danger ${getColorSchemeClassName({ color: 'danger', isSubtle: false })} Button--medium`,
+    ],
     ['primary', 'medium', true, false, false, 'Button Button--primary Button--medium Button--disabled'],
     ['primary', 'medium', false, true, false, 'Button Button--primary Button--medium Button--disabled Button--loading'],
     ['primary', 'medium', false, false, true, 'Button Button--primary Button--medium Button--symmetrical'],
