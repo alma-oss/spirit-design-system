@@ -46,6 +46,7 @@ export default defineConfig({
           options.data.root[varName] = data;
         },
         eq: (variable, value) => variable === value,
+        contains: (array, value) => array.includes(value),
       },
       runtimeOptions: {
         data: {

@@ -1,6 +1,7 @@
 {{#> web/layout/default title="Button" parentPageName="Components" }}
 
 {{setVar "colors" "primary" "secondary" "tertiary" "plain" "success" "informative" "warning" "danger" }}
+{{setVar "emotion-colors" "success" "informative" "warning" "danger" }}
 {{setVar "sizes" "small" "medium" "large" }}
 
 <section class="py-900 py-tablet-1000">
@@ -23,11 +24,11 @@
             <div>
               <a
                 href="#"
-                class="Button Button--{{color}} Button--{{size}}"
+                class="Button Button--{{color}} Button--{{size}}{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
               >Button {{color}}</a>
               <button
                 type="button"
-                class="Button Button--{{color}} Button--{{size}}"
+                class="Button Button--{{color}} Button--{{size}}{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
               >
                 <svg
                   class="Icon"
@@ -35,13 +36,13 @@
                   height="24"
                   aria-hidden="true"
                 >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+                  <use href="/assets/icons/svg/sprite.svg#hamburger" />
                 </svg>
                 Menu
               </button>
               <button
                 type="button"
-                class="Button Button--{{color}} Button--{{size}} Button--symmetrical"
+                class="Button Button--{{color}} Button--{{size}} Button--symmetrical{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
               >
                 <span class="accessibility-hidden">Menu</span>
                 <svg
@@ -50,7 +51,7 @@
                   height="24"
                   aria-hidden="true"
                 >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+                  <use href="/assets/icons/svg/sprite.svg#hamburger" />
                 </svg>
               </button>
             </div>
@@ -86,12 +87,12 @@
             <div>
               <button
                 type="button"
-                class="Button Button--{{color}} Button--{{size}}"
+                class="Button Button--{{color}} Button--{{size}}{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
                 disabled
               >Button {{color}}</button>
               <button
                 type="button"
-                class="Button Button--{{color}} Button--{{size}}"
+                class="Button Button--{{color}} Button--{{size}}{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
                 disabled
               >
                 <svg
@@ -100,13 +101,13 @@
                   height="24"
                   aria-hidden="true"
                 >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+                  <use href="/assets/icons/svg/sprite.svg#hamburger" />
                 </svg>
                 Menu
               </button>
               <button
                 type="button"
-                class="Button Button--{{color}} Button--{{size}} Button--symmetrical"
+                class="Button Button--{{color}} Button--{{size}} Button--symmetrical{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
                 disabled
               >
                 <span class="accessibility-hidden">Menu</span>
@@ -116,7 +117,7 @@
                   height="24"
                   aria-hidden="true"
                 >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+                  <use href="/assets/icons/svg/sprite.svg#hamburger" />
                 </svg>
               </button>
             </div>
@@ -152,7 +153,7 @@
             <div>
               <a
                 href="#"
-                class="Button Button--{{color}} Button--{{size}} Button--loading Button--disabled"
+                class="Button Button--{{color}} Button--{{size}} Button--loading Button--disabled{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
               >
                 Button {{color}}
                 <svg
@@ -161,12 +162,12 @@
                   height="24"
                   aria-hidden="true"
                 >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
+                  <use href="/assets/icons/svg/sprite.svg#spinner" />
                 </svg>
               </a>
               <button
                 type="button"
-                class="Button Button--{{color}} Button--{{size}} Button--loading"
+                class="Button Button--{{color}} Button--{{size}} Button--loading{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
                 disabled
               >
                 <svg
@@ -175,7 +176,7 @@
                   height="24"
                   aria-hidden="true"
                 >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+                  <use href="/assets/icons/svg/sprite.svg#hamburger" />
                 </svg>
                 Menu
                 <svg
@@ -184,12 +185,12 @@
                   height="24"
                   aria-hidden="true"
                 >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
+                  <use href="/assets/icons/svg/sprite.svg#spinner" />
                 </svg>
               </button>
               <button
                 type="button"
-                class="Button Button--{{color}} Button--{{size}} Button--symmetrical Button--loading"
+                class="Button Button--{{color}} Button--{{size}} Button--symmetrical Button--loading{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
                 disabled
               >
                 <span class="accessibility-hidden">Menu</span>
@@ -199,7 +200,7 @@
                   height="24"
                   aria-hidden="true"
                 >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+                  <use href="/assets/icons/svg/sprite.svg#hamburger" />
                 </svg>
                 <svg
                   class="Icon"
@@ -207,7 +208,7 @@
                   height="24"
                   aria-hidden="true"
                 >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
+                  <use href="/assets/icons/svg/sprite.svg#spinner" />
                 </svg>
               </button>
             </div>
@@ -249,11 +250,11 @@
             >
               <a
                 href="#"
-                class="Button Button--{{color}} Button--{{size}}"
+                class="Button Button--{{color}} Button--{{size}}{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
               >Button {{color}}</a>
               <button
                 type="button"
-                class="Button Button--{{color}} Button--{{size}}"
+                class="Button Button--{{color}} Button--{{size}}{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
               >
                 <svg
                   class="Icon"
@@ -261,7 +262,7 @@
                   height="24"
                   aria-hidden="true"
                 >
-                  <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+                  <use href="/assets/icons/svg/sprite.svg#hamburger" />
                 </svg>
                 Menu
               </button>
@@ -297,7 +298,7 @@
           height="24"
           aria-hidden="true"
         >
-          <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+          <use href="/assets/icons/svg/sprite.svg#hamburger" />
         </svg>
       </button>
 
@@ -311,7 +312,7 @@
           height="24"
           aria-hidden="true"
         >
-          <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+          <use href="/assets/icons/svg/sprite.svg#hamburger" />
         </svg>
         <span class="accessibility-hidden">Menu</span>
         <span
@@ -330,7 +331,7 @@
           height="24"
           aria-hidden="true"
         >
-          <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+          <use href="/assets/icons/svg/sprite.svg#hamburger" />
         </svg>
         <span class="accessibility-hidden">Menu</span>
         <span
@@ -349,7 +350,7 @@
           height="24"
           aria-hidden="true"
         >
-          <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+          <use href="/assets/icons/svg/sprite.svg#hamburger" />
         </svg>
         <span class="accessibility-hidden">Menu</span>
         <span
@@ -368,7 +369,7 @@
           height="24"
           aria-hidden="true"
         >
-          <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+          <use href="/assets/icons/svg/sprite.svg#hamburger" />
         </svg>
         <span class="accessibility-hidden">Menu</span>
         <span
@@ -387,7 +388,7 @@
           height="24"
           aria-hidden="true"
         >
-          <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+          <use href="/assets/icons/svg/sprite.svg#hamburger" />
         </svg>
         <span class="accessibility-hidden">Menu</span>
         <span
@@ -406,7 +407,7 @@
           height="24"
           aria-hidden="true"
         >
-          <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+          <use href="/assets/icons/svg/sprite.svg#hamburger" />
         </svg>
         <span class="accessibility-hidden">Menu</span>
         <span
