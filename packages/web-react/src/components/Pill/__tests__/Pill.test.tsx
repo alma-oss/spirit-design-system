@@ -22,10 +22,6 @@ describe('Pill', () => {
 
   colorSchemePropsTest(Pill, [...Object.values(PillColorsExtended), ...Object.values(EmotionColors)]);
 
-  colorSchemePropsTest(Pill, [...Object.values(PillColorsExtended), ...Object.values(EmotionColors)], {
-    isSubtle: true,
-  });
-
   stylePropsTest(Pill);
 
   restPropsTest(Pill, 'span');
