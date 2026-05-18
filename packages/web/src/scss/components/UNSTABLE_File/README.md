@@ -12,7 +12,7 @@ It is a standalone component, but most often it is used in combination with the 
   <li class="UNSTABLE_File">
     <div class="UNSTABLE_File__preview">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+        <use href="/assets/icons/svg/sprite.svg#file" />
       </svg>
     </div>
     <div class="UNSTABLE_File__content">
@@ -33,7 +33,7 @@ It is a standalone component, but most often it is used in combination with the 
         aria-label="Edit file name Document.pdf"
       >
         <svg class="Icon" width="16" height="16" aria-hidden="true">
-          <use xlink:href="/assets/icons/svg/sprite.svg#edit" />
+          <use href="/assets/icons/svg/sprite.svg#edit" />
         </svg>
       </button>
       <button
@@ -42,7 +42,7 @@ It is a standalone component, but most often it is used in combination with the 
         aria-label="Remove file Document.pdf from list"
       >
         <svg class="Icon" width="16" height="16" aria-hidden="true">
-          <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+          <use href="/assets/icons/svg/sprite.svg#close" />
         </svg>
       </button>
     </div>
@@ -108,7 +108,7 @@ Add the appropriate validation class (`has-success`, `has-warning`, or `has-dang
   <!-- … preview, name … -->
   <div class="ValidationText ValidationText--success">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/assets/icons/svg/sprite.svg#success" />
+      <use href="/assets/icons/svg/sprite.svg#success" />
     </svg>
     <div>File uploaded successfully</div>
   </div>
@@ -131,7 +131,7 @@ Show upload progress using `HelperText` component:
       <div class="HelperText">
         <div>
           <svg class="Icon animation-spin-clockwise" width="16" height="16" aria-hidden="true">
-            <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
+            <use href="/assets/icons/svg/sprite.svg#spinner" />
           </svg>
           <span>Uploading your file…</span>
         </div>
@@ -148,7 +148,7 @@ Show upload progress using `HelperText` component:
 <li class="UNSTABLE_File UNSTABLE_File--disabled">
   <div class="UNSTABLE_File__preview">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+      <use href="/assets/icons/svg/sprite.svg#file" />
     </svg>
   </div>
   <div class="UNSTABLE_File__content">
@@ -166,7 +166,7 @@ Show upload progress using `HelperText` component:
     disabled
   >
     <svg class="Icon" width="16" height="16" aria-hidden="true">
-      <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+      <use href="/assets/icons/svg/sprite.svg#close" />
     </svg>
   </button>
 </li>

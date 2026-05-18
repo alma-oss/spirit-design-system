@@ -196,7 +196,7 @@ An icon can be added to the ToastBar component:
   <div class="ToastBar__box">
     <div class="ToastBar__container">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/icons/svg/sprite.svg#info" />
+        <use href="/icons/svg/sprite.svg#info" />
       </svg>
       <div class="ToastBar__content">
         <div class="text-truncate-multiline" data-spirit-populate-field="message">Message with icon</div>
@@ -314,7 +314,7 @@ button:
       aria-expanded="true"
     >
       <svg class="Icon" width="24" height="24" aria-hidden="true">
-        <use xlink:href="/icons/svg/sprite.svg#close" />
+        <use href="/icons/svg/sprite.svg#close" />
       </svg>
       <span class="accessibility-hidden">Close</span>
     </button>
@@ -347,7 +347,7 @@ button:
       <div class="ToastBar__box">
         <div class="ToastBar__container">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
-            <use xlink:href="/icons/svg/sprite.svg#info" />
+            <use href="/icons/svg/sprite.svg#info" />
           </svg>
           <div class="ToastBar__content">
             <div class="text-truncate-multiline">Toast message</div>
@@ -362,7 +362,7 @@ button:
           aria-expanded="true"
         >
           <svg class="Icon" width="24" height="24" aria-hidden="true">
-            <use xlink:href="/icons/svg/sprite.svg#close" />
+            <use href="/icons/svg/sprite.svg#close" />
           </svg>
           <span class="accessibility-hidden">Close</span>
         </button>
@@ -390,7 +390,7 @@ the template and apply it on any toasts to be shown to the user, using the confi
         <div class="ToastBar__box">
           <div class="ToastBar__container">
             <svg class="Icon" width="20" height="20" aria-hidden="true" data-spirit-populate-field="icon">
-              <use xlink:href="/icons/svg/sprite.svg#info" />
+              <use href="/icons/svg/sprite.svg#info" />
             </svg>
             <div class="ToastBar__content">
               <div class="text-truncate-multiline" data-spirit-populate-field="message"></div>
@@ -405,7 +405,7 @@ the template and apply it on any toasts to be shown to the user, using the confi
             aria-expanded="true"
           >
             <svg class="Icon" width="24" height="24" aria-hidden="true">
-              <use xlink:href="/icons/svg/sprite.svg#close" />
+              <use href="/icons/svg/sprite.svg#close" />
             </svg>
             <span class="accessibility-hidden">Close</span>
           </button>
