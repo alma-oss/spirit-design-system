@@ -99,7 +99,7 @@ Use the secondary [Button][button] component to create social media links inside
     <a href="https://www.example.com" class="Button Button--secondary Button--medium Button--symmetrical">
       <span class="accessibility-hidden">Facebook</span>
       <svg class="Icon" width="24" height="24" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#logo-facebook" />
+        <use href="/assets/icons/svg/sprite.svg#logo-facebook" />
       </svg>
     </a>
   </li>
@@ -222,7 +222,7 @@ Responsive values can be defined using the `tablet` and `desktop` infixes.
           <a href="https://www.example.com" class="Button Button--secondary Button--medium Button--symmetrical">
             <span class="accessibility-hidden">Facebook</span>
             <svg class="Icon" width="24" height="24" aria-hidden="true">
-              <use xlink:href="/assets/icons/svg/sprite.svg#logo-facebook" />
+              <use href="/assets/icons/svg/sprite.svg#logo-facebook" />
             </svg>
           </a>
         </li>
@@ -230,7 +230,7 @@ Responsive values can be defined using the `tablet` and `desktop` infixes.
           <a href="https://www.example.com" class="Button Button--secondary Button--medium Button--symmetrical">
             <span class="accessibility-hidden">X</span>
             <svg class="Icon" width="24" height="24" aria-hidden="true">
-              <use xlink:href="/assets/icons/svg/sprite.svg#logo-x" />
+              <use href="/assets/icons/svg/sprite.svg#logo-x" />
             </svg>
           </a>
         </li>
@@ -238,7 +238,7 @@ Responsive values can be defined using the `tablet` and `desktop` infixes.
           <a href="https://www.example.com" class="Button Button--secondary Button--medium Button--symmetrical">
             <span class="accessibility-hidden">YouTube</span>
             <svg class="Icon" width="24" height="24" aria-hidden="true">
-              <use xlink:href="/assets/icons/svg/sprite.svg#logo-youtube" />
+              <use href="/assets/icons/svg/sprite.svg#logo-youtube" />
             </svg>
           </a>
         </li>
@@ -254,7 +254,7 @@ Responsive values can be defined using the `tablet` and `desktop` infixes.
             </select>
             <div class="InputAddon">
               <svg class="Icon" width="20" height="20" aria-hidden="true">
-                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+                <use href="/assets/icons/svg/sprite.svg#chevron-down" />
               </svg>
             </div>
           </div>

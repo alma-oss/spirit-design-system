@@ -52,7 +52,7 @@ To insert an icon into a button, use the [Icon][readme-icon] component. Spacing 
 ```html
 <button type="button" class="Button Button--primary Button--medium">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   Menu
 </button>
@@ -65,7 +65,7 @@ Use the `Button--symmetrical` modifier when you only need a compact, icon-only b
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--symmetrical">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
 </button>
@@ -104,7 +104,7 @@ Icon on mobile, text label from tablet onwards:
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--symmetrical Button--tablet--asymmetrical">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
   <span class="d-none d-tablet-inline" aria-hidden="true">Menu</span>
@@ -116,7 +116,7 @@ Text label on mobile, icon from tablet onwards:
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--tablet--symmetrical">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
   <span class="d-tablet-none" aria-hidden="true">Menu</span>
@@ -128,7 +128,7 @@ Text label on mobile, icon from desktop onwards:
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--desktop--symmetrical">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
   <span class="d-desktop-none" aria-hidden="true">Menu</span>
@@ -140,7 +140,7 @@ Icon on mobile and tablet, text label on desktop:
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--symmetrical Button--desktop--asymmetrical">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
   <span class="d-none d-desktop-inline" aria-hidden="true">Menu</span>
@@ -155,7 +155,7 @@ Icon on tablet only:
   class="Button Button--primary Button--medium Button--tablet--symmetrical Button--desktop--asymmetrical"
 >
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
   <span class="d-tablet-none d-desktop-inline" aria-hidden="true">Menu</span>
@@ -219,7 +219,7 @@ Loading button with a text label:
 <a href="#" class="Button Button--primary Button--medium Button--loading Button--disabled">
   Button primary
   <svg class="Icon animation-spin-clockwise" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#spinner" />
+    <use href="/icons/svg/sprite.svg#spinner" />
   </svg>
 </a>
 ```
@@ -229,11 +229,11 @@ Loading button with an icon and a text label:
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--loading" disabled>
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   Menu
   <svg class="Icon animation-spin-clockwise" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#spinner" />
+    <use href="/icons/svg/sprite.svg#spinner" />
   </svg>
 </button>
 ```
@@ -244,10 +244,10 @@ Loading button with an icon and a text label:
 <button type="button" class="Button Button--primary Button--medium Button--symmetrical Button--loading" disabled>
   <span class="accessibility-hidden">Menu</span>
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <svg class="Icon animation-spin-clockwise" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#spinner" />
+    <use href="/icons/svg/sprite.svg#spinner" />
   </svg>
 </button>
 ```
@@ -269,7 +269,7 @@ For example, add the `aria-label` attribute to the Button:
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--symmetrical" aria-label="Menu">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
 </button>
 ```
@@ -281,7 +281,7 @@ Alternatively, use the `accessibility-hidden` class:
 ```html
 <button type="button" class="Button Button--primary Button--medium Button--symmetrical">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
 </button>
@@ -302,7 +302,7 @@ In other cases, consider displaying the button label in a [Tooltip][readme-toolt
     aria-describedby="my-tooltip"
   >
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/icons/svg/sprite.svg#info" />
+      <use href="/icons/svg/sprite.svg#info" />
     </svg>
     <span class="accessibility-hidden">I have a tooltip!</span>
   </button>
@@ -326,7 +326,7 @@ Custom spacing:
 ```html
 <button type="button" class="Button Button--primary Button--medium" style="--button-spacing: var(--spirit-space-600)">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   Menu
 </button>
@@ -351,7 +351,7 @@ Custom spacing from tablet up:
   style="--button-spacing-tablet: var(--spirit-space-800)"
 >
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   Menu
 </button>
@@ -366,7 +366,7 @@ Custom spacing for each breakpoint:
   style="--button-spacing: var(--spirit-space-400); --button-spacing-tablet: var(--spirit-space-600); --button-spacing-desktop: var(--spirit-space-800)"
 >
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#hamburger" />
+    <use href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   Menu
 </button>

@@ -45,12 +45,12 @@ This helper conditionally displays content based on the `aria-checked` attribute
 <button type="button" role="switch" aria-checked="false" aria-label="Show password">
   <span class="accessibility-unchecked">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/icons/sprite.svg#visibility-on" />
+      <use href="/icons/sprite.svg#visibility-on" />
     </svg>
   </span>
   <span class="accessibility-checked">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/icons/sprite.svg#visibility-off" />
+      <use href="/icons/sprite.svg#visibility-off" />
     </svg>
   </span>
 </button>
