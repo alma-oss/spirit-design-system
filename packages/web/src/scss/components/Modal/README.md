@@ -112,7 +112,7 @@ and allows users to easily close it.
     aria-expanded="false"
   >
     <svg class="Icon" width="24" height="24" aria-hidden="true">
-      <use xlink:href="/icons/svg/sprite.svg#close" />
+      <use href="/icons/svg/sprite.svg#close" />
     </svg>
     <span class="accessibility-hidden">Close</span>
   </button>
@@ -377,7 +377,7 @@ When you put it all together:
         aria-expanded="false"
       >
         <svg class="Icon" width="24" height="24" aria-hidden="true">
-          <use xlink:href="/icons/svg/sprite.svg#close" />
+          <use href="/icons/svg/sprite.svg#close" />
         </svg>
         <span class="accessibility-hidden">Close</span>
       </button>

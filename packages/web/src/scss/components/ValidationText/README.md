@@ -23,7 +23,7 @@ To render validation text with an icon, add an `<svg>` icon as the first child.
 ```html
 <div class="ValidationText ValidationText--danger">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/assets/icons/svg/sprite.svg#danger" />
+    <use href="/assets/icons/svg/sprite.svg#danger" />
   </svg>
   <div>Danger validation text with icon</div>
 </div>
@@ -49,7 +49,7 @@ You can combine an icon with a list of validation texts.
 ```html
 <div class="ValidationText ValidationText--danger">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/assets/icons/svg/sprite.svg#danger" />
+    <use href="/assets/icons/svg/sprite.svg#danger" />
   </svg>
   <ul>
     <li>First validation text</li>

@@ -60,7 +60,7 @@ overflow its scrollable container or get clipped.
       >
         <span class="accessibility-hidden">Add</span>
         <svg class="Icon" width="20" height="20" aria-hidden="true">
-          <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
+          <use href="/icons/svg/sprite.svg#chevron-down" />
         </svg>
       </button>
     </div>
@@ -118,7 +118,7 @@ Place a hidden `<span>` with a unique `id` anywhere in the `<body>` and referenc
         class="ControlButton ControlButton--small ControlButton--symmetrical"
       >
         <svg class="Icon" width="16" height="16" aria-hidden="true">
-          <use xlink:href="/icons/svg/sprite.svg#close" />
+          <use href="/icons/svg/sprite.svg#close" />
         </svg>
       </button>
     </div>
@@ -199,7 +199,7 @@ Each size expects a matching Tag and ControlButton size inside the selection are
               class="ControlButton ControlButton--medium ControlButton--symmetrical"
             >
               <svg class="Icon" width="16" height="16" aria-hidden="true">
-                <use xlink:href="/icons/svg/sprite.svg#close" />
+                <use href="/icons/svg/sprite.svg#close" />
               </svg>
             </button>
           </div>
@@ -293,7 +293,7 @@ inside the selection area (remove buttons) to disable the Picker.
               disabled
             >
               <svg class="Icon" width="16" height="16" aria-hidden="true">
-                <use xlink:href="/icons/svg/sprite.svg#close" />
+                <use href="/icons/svg/sprite.svg#close" />
               </svg>
             </button>
           </div>
@@ -310,7 +310,7 @@ inside the selection area (remove buttons) to disable the Picker.
       >
         <span class="accessibility-hidden">Add</span>
         <svg class="Icon" width="20" height="20" aria-hidden="true">
-          <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
+          <use href="/icons/svg/sprite.svg#chevron-down" />
         </svg>
       </button>
     </div>

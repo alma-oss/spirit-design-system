@@ -172,7 +172,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
   />
   <div id="slider-warning-validation-text" class="ValidationText ValidationText--warning">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
+      <use href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
     <div>Validation text with icon</div>
   </div>

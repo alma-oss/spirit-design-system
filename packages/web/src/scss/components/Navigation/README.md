@@ -105,7 +105,7 @@ The `NavigationAvatar` is a component that is styled to be used as a navigation 
 <a href="#" class="NavigationAvatar">
   <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+      <use href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
   </span>
   <span class="typography-body-small-semibold">My Account</span>
@@ -118,7 +118,7 @@ If you want the avatar to be square, don't forget to add the `NavigationAvatar--
 <a href="#" class="NavigationAvatar NavigationAvatar--square">
   <span class="Avatar Avatar--square Avatar--small" aria-label="Profile of Jiří Bárta">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+      <use href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
   </span>
   <span class="typography-body-small-semibold">My Account</span>
@@ -137,7 +137,7 @@ Available sizes: `xsmall`, `small`, `medium`, `large`, `xlarge`.
 <a href="#" class="NavigationAvatar">
   <span class="Avatar Avatar--xsmall" aria-label="Profile of Jiří Bárta">
     <svg class="Icon" width="16" height="16" aria-hidden="true">
-      <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+      <use href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
   </span>
   <span class="typography-body-small-semibold">My Account</span>
@@ -150,7 +150,7 @@ You can also use responsive sizes with breakpoint-specific classes, e.g. `Avatar
 <a href="#" class="NavigationAvatar">
   <span class="Avatar Avatar--small Avatar--tablet--medium Avatar--desktop--large" aria-label="Profile of Jiří Bárta">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+      <use href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
   </span>
   <span class="typography-body-small-semibold">My Account</span>
@@ -179,7 +179,7 @@ With NavigationAction and NavigationAvatar components:
       <a href="#" class="NavigationAvatar">
         <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
-            <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+            <use href="/assets/icons/svg/sprite.svg#profile" />
           </svg>
         </span>
         <span class="typography-body-small-semibold">My Account</span>
@@ -204,7 +204,7 @@ With Buttons and NavigationAvatar:
       <a href="#" class="NavigationAvatar">
         <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
-            <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+            <use href="/assets/icons/svg/sprite.svg#profile" />
           </svg>
         </span>
         <span class="typography-body-small-semibold">My Account</span>

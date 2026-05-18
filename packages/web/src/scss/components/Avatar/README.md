@@ -61,7 +61,7 @@ You can set different avatar sizes for different [breakpoints][dictionary-breakp
   aria-label="Profile of Jiří Bárta"
 >
   <svg class="Icon" width="24" height="24" aria-hidden="true">
-    <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+    <use href="/assets/icons/svg/sprite.svg#profile" />
   </svg>
 </a>
 ```
@@ -75,7 +75,7 @@ The content of the `Avatar` component can be an image, an icon, or a text string
 ```html
 <div class="Avatar Avatar--medium" aria-label="Profile of Jiří Bárta">
   <svg class="Icon" width="24" height="24" aria-hidden="true">
-    <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+    <use href="/assets/icons/svg/sprite.svg#profile" />
   </svg>
 </div>
 ```

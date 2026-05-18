@@ -12,7 +12,7 @@ Basic usage:
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
@@ -31,7 +31,7 @@ Sizes (please note the icon size):
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="16" height="16" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
@@ -45,7 +45,7 @@ Sizes (please note the icon size):
       </select>
       <div class="InputAddon">
         <svg class="Icon" width="20" height="20" aria-hidden="true">
-          <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+          <use href="/assets/icons/svg/sprite.svg#chevron-down" />
         </svg>
       </div>
     </div>
@@ -59,7 +59,7 @@ Sizes (please note the icon size):
         </select>
         <div class="InputAddon">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
-            <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+            <use href="/assets/icons/svg/sprite.svg#chevron-down" />
           </svg>
         </div>
       </div>
@@ -81,7 +81,7 @@ Required select (requires a placeholder option):
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
@@ -100,7 +100,7 @@ Hidden label:
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
@@ -128,7 +128,7 @@ sure users give all needed details before sending the form.
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
@@ -144,7 +144,7 @@ sure users give all needed details before sending the form.
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
@@ -170,7 +170,7 @@ To add helper text, use the [HelperText][readme-helper-text] component:
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
@@ -198,7 +198,7 @@ or by adding a JS interaction class when controlled by JavaScript (`has-success`
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
@@ -213,7 +213,7 @@ or by adding a JS interaction class when controlled by JavaScript (`has-success`
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
@@ -229,7 +229,7 @@ or by adding a JS interaction class when controlled by JavaScript (`has-success`
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
@@ -250,13 +250,13 @@ or by adding a JS interaction class when controlled by JavaScript (`has-success`
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
   <div class="ValidationText ValidationText--warning" id="select-warning-icon-validation-text">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
+      <use href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
     <div>Validation text with icon</div>
   </div>
@@ -280,7 +280,7 @@ class when controlled by JavaScript:
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
@@ -295,7 +295,7 @@ class when controlled by JavaScript:
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </div>
   </div>
