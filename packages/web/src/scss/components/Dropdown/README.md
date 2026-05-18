@@ -16,25 +16,25 @@
   <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-default">
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#info" />
+        <use href="/icons/svg/sprite.svg#info" />
       </svg>
       <span>Information</span>
     </a>
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#link" />
+        <use href="/icons/svg/sprite.svg#link" />
       </svg>
       <span>Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
     </a>
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#profile" />
+        <use href="/icons/svg/sprite.svg#profile" />
       </svg>
       <span>Profile</span>
     </a>
     <a href="#" class="d-flex">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#help" />
+        <use href="/icons/svg/sprite.svg#help" />
       </svg>
       <span>Help</span>
     </a>
@@ -58,25 +58,25 @@
   <div class="DropdownPopover placement-top-end" data-spirit-placement="top-end" id="dropdown-top-end">
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#info" />
+        <use href="/icons/svg/sprite.svg#info" />
       </svg>
       <span>Information</span>
     </a>
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#link" />
+        <use href="/icons/svg/sprite.svg#link" />
       </svg>
       <span>Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
     </a>
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#profile" />
+        <use href="/icons/svg/sprite.svg#profile" />
       </svg>
       <span>Profile</span>
     </a>
     <a href="#" class="d-flex">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#help" />
+        <use href="/icons/svg/sprite.svg#help" />
       </svg>
       <span>Help</span>
     </a>
@@ -105,25 +105,25 @@
   >
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#info" />
+        <use href="/icons/svg/sprite.svg#info" />
       </svg>
       <span>Information</span>
     </a>
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#link" />
+        <use href="/icons/svg/sprite.svg#link" />
       </svg>
       <span>Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
     </a>
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#profile" />
+        <use href="/icons/svg/sprite.svg#profile" />
       </svg>
       <span>Profile</span>
     </a>
     <a href="#" class="d-flex">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#help" />
+        <use href="/icons/svg/sprite.svg#help" />
       </svg>
       <span>Help</span>
     </a>
@@ -152,25 +152,25 @@
   >
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#info" />
+        <use href="/icons/svg/sprite.svg#info" />
       </svg>
       <span>Information</span>
     </a>
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#link" />
+        <use href="/icons/svg/sprite.svg#link" />
       </svg>
       <span>Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
     </a>
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#profile" />
+        <use href="/icons/svg/sprite.svg#profile" />
       </svg>
       <span>Profile</span>
     </a>
     <a href="#" class="d-flex">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#help" />
+        <use href="/icons/svg/sprite.svg#help" />
       </svg>
       <span>Help</span>
     </a>
@@ -199,25 +199,25 @@
   >
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#info" />
+        <use href="/icons/svg/sprite.svg#info" />
       </svg>
       <span>Information</span>
     </a>
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#link" />
+        <use href="/icons/svg/sprite.svg#link" />
       </svg>
       <span>Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
     </a>
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#profile" />
+        <use href="/icons/svg/sprite.svg#profile" />
       </svg>
       <span>Profile</span>
     </a>
     <a href="#" class="d-flex">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
-        <use xlink:href="/icons/svg/sprite.svg#help" />
+        <use href="/icons/svg/sprite.svg#help" />
       </svg>
       <span>Help</span>
     </a>
@@ -244,7 +244,7 @@ See the [Item][item] component for more information.
     <a href="#" class="Item">
       <span class="Item__icon Item__icon--start">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
-          <use xlink:href="/icons/svg/sprite.svg#info" />
+          <use href="/icons/svg/sprite.svg#info" />
         </svg>
       </span>
       <span class="Item__label">Information</span>

@@ -10,25 +10,25 @@ Shows where the user is within the app hierarchy.
     <li class="d-none d-tablet-flex">
       <a href="#rootUrl" class="link-primary link-underlined">Root</a>
       <svg class="Icon" width="24" height="24">
-        <use xlink:href="/icons/svg/sprite.svg#chevron-right" />
+        <use href="/icons/svg/sprite.svg#chevron-right" />
       </svg>
     </li>
     <li class="d-none d-tablet-flex">
       <a href="#categoryUrl" class="link-primary link-underlined">Category</a>
       <svg class="Icon" width="24" height="24">
-        <use xlink:href="/icons/svg/sprite.svg#chevron-right" />
+        <use href="/icons/svg/sprite.svg#chevron-right" />
       </svg>
     </li>
     <li class="d-tablet-none">
       <svg class="Icon" width="24" height="24">
-        <use xlink:href="/icons/svg/sprite.svg#chevron-left" />
+        <use href="/icons/svg/sprite.svg#chevron-left" />
       </svg>
       <a href="#subcategoryUrl" class="link-primary link-underlined">Back</a>
     </li>
     <li class="d-none d-tablet-flex">
       <a href="#subcategoryUrl" class="link-primary link-underlined">Subcategory</a>
       <svg class="Icon" width="24" height="24">
-        <use xlink:href="/icons/svg/sprite.svg#chevron-right" />
+        <use href="/icons/svg/sprite.svg#chevron-right" />
       </svg>
     </li>
     <li class="d-none d-tablet-flex">
@@ -51,7 +51,7 @@ For comprehensive guidance on handling text truncation, translations, and multip
     This is a very long title of the current page
   </a>
   <svg class="Icon" width="24" height="24">
-    <use xlink:href="/icons/svg/sprite.svg#chevron-right" />
+    <use href="/icons/svg/sprite.svg#chevron-right" />
   </svg>
 </li>
 <!-- … --->

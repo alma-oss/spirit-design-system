@@ -7,6 +7,6 @@ The preferred way to display an icon from Spirit icon set is to use the `<svg>` 
 
 ```html
 <svg class="Icon" width="24" height="24" aria-hidden="true">
-  <use xlink:href="/icons/svg/sprite.svg#warning" />
+  <use href="/icons/svg/sprite.svg#warning" />
 </svg>
 ```

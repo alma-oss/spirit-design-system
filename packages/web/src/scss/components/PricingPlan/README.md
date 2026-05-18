@@ -119,7 +119,7 @@ description.
     <li class="PricingPlanBody__featureItem">
       <div class="PricingPlanBody__featureTitle">
         <svg class="Icon" width="16" height="16" aria-hidden="true">
-          <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+          <use href="/assets/icons/svg/sprite.svg#check-plain" />
         </svg>
         <div class="PricingPlanBody__featureTitleText">Feature name</div>
       </div>
@@ -170,7 +170,7 @@ The footer is optional and can contain additional information or disclaimers.
         <li class="PricingPlanBody__featureItem">
           <div class="PricingPlanBody__featureTitle">
             <svg class="Icon" width="16" height="16" aria-hidden="true">
-              <use xlink:href="/assets/icons/svg/sprite.svg#check-plain" />
+              <use href="/assets/icons/svg/sprite.svg#check-plain" />
             </svg>
             <div class="PricingPlanBody__featureTitleText">Feature name</div>
           </div>

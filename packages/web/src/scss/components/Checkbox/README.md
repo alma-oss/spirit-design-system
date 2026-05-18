@@ -77,7 +77,7 @@ See Validation state [dictionary][dictionary-validation].
     <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
     <div class="ValidationText ValidationText--warning ValidationText--inline" id="checkbox-warning-helper-text">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
+        <use href="/assets/icons/svg/sprite.svg#warning" />
       </svg>
       <span>Warning validation text with icon</span>
     </div>

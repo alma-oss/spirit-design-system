@@ -149,7 +149,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
 
 <div id="field-group-danger-validation-text" class="ValidationText ValidationText--danger">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
-    <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
+    <use href="/assets/icons/svg/sprite.svg#warning" />
   </svg>
   <div>Warning validation text with icon</div>
 </div>
