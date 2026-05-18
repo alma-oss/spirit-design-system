@@ -18,7 +18,7 @@ Item with icon example:
 <button type="button" class="Item">
   <span class="Item__icon Item__icon--start">
     <svg class="Icon" width="24" height="24" aria-hidden="true">
-      <use xlink:href="/icons/svg/sprite.svg#search" />
+      <use href="/icons/svg/sprite.svg#search" />
     </svg>
   </span>
   <span class="Label Label--item">Item</span>
@@ -34,7 +34,7 @@ Selected with icon only:
   <span class="Item__label">Item</span>
   <span class="Item__icon Item__icon--end">
     <svg class="Icon" width="24" height="24" aria-hidden="true">
-      <use xlink:href="/icons/svg/sprite.svg#check-plain" />
+      <use href="/icons/svg/sprite.svg#check-plain" />
     </svg>
   </span>
 </button>
@@ -55,7 +55,7 @@ Selected with background and icon:
   <span class="Label Label--item">Item</span>
   <span class="Item__icon Item__icon--end">
     <svg class="Icon" width="24" height="24" aria-hidden="true">
-      <use xlink:href="/icons/svg/sprite.svg#check-plain" />
+      <use href="/icons/svg/sprite.svg#check-plain" />
     </svg>
   </span>
 </button>
@@ -86,14 +86,14 @@ Item with icon and helper text in selected state example:
 <button type="button" class="Item Item--selected">
   <span class="Item__icon Item__icon--start">
     <svg class="Icon" width="24" height="24" aria-hidden="true">
-      <use xlink:href="/icons/svg/sprite.svg#search" />
+      <use href="/icons/svg/sprite.svg#search" />
     </svg>
   </span>
   <span class="Label Label--item">Item</span>
   <span class="HelperText HelperText--item">Helper text</span>
   <span class="Item__icon Item__icon--end">
     <svg class="Icon" width="24" height="24" aria-hidden="true">
-      <use xlink:href="/icons/svg/sprite.svg#check-plain" />
+      <use href="/icons/svg/sprite.svg#check-plain" />
     </svg>
   </span>
 </button>
@@ -148,7 +148,7 @@ Usage in [Dropdown][dropdown] component:
     <a href="#" class="Item">
       <span class="Item__icon Item__icon--start">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
-          <use xlink:href="/icons/svg/sprite.svg#info" />
+          <use href="/icons/svg/sprite.svg#info" />
         </svg>
       </span>
       <span class="Label Label--item">Information</span>

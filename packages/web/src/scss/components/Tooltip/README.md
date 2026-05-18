@@ -100,7 +100,7 @@ Tooltip can be made dismissible by following these steps:
       aria-expanded="true"
     >
       <svg class="Icon" width="24" height="24" aria-hidden="true">
-        <use xlink:href="/icons/svg/sprite.svg#close" />
+        <use href="/icons/svg/sprite.svg#close" />
       </svg>
       <span class="accessibility-hidden">Close</span>
     </button>
