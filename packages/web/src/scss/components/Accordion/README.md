@@ -84,7 +84,7 @@ Minimum header with a heading and an arrow icon:
   <span class="Accordion__itemSide">
     <span class="Accordion__itemIcon">
       <svg class="Icon" width="24" height="24" aria-hidden="true">
-        <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
+        <use href="/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </span>
   </span>
@@ -107,7 +107,7 @@ Optionally add a slot into the `Accordion__itemSide` element:
   </span>
   <span class="Accordion__itemIcon">
     <svg class="Icon" width="24" height="24" aria-hidden="true">
-      <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
+      <use href="/icons/svg/sprite.svg#chevron-down" />
     </svg>
   </span>
 </span>
@@ -172,7 +172,7 @@ When you put it all together:
         </span>
         <span class="Accordion__itemIcon">
           <svg class="Icon" width="24" height="24" aria-hidden="true">
-            <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
+            <use href="/icons/svg/sprite.svg#chevron-down" />
           </svg>
         </span>
       </span>
