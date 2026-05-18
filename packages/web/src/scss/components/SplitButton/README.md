@@ -36,7 +36,7 @@ Learn more about the [Dropdown][readme-dropdown] component in its documentation.
     >
       More
       <svg class="Icon" width="24" height="24" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </button>
     <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-1">
@@ -64,7 +64,7 @@ Learn more about the [Tooltip][readme-tooltip] component in its documentation.
       aria-labelledby="tooltip-1"
     >
       <svg class="Icon" width="24" height="24" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#download" />
+        <use href="/assets/icons/svg/sprite.svg#download" />
       </svg>
     </button>
     <div

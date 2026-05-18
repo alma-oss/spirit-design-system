@@ -163,7 +163,7 @@ Use the composition mentioned above to create the layout you need.
           <li>
             <button class="Button Button--tertiary Button--medium Button--symmetrical">
               <svg class="Icon" width="24" height="24" aria-hidden="true">
-                <use xlink:href="/assets/icons/svg/sprite.svg#search" />
+                <use href="/assets/icons/svg/sprite.svg#search" />
               </svg>
             </button>
           </li>

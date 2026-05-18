@@ -74,7 +74,7 @@ Tag comes in five available sizes: xsmall, small, medium, large, and xlarge.
       aria-label="Remove Tag label"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
-        <use xlink:href="/icons/svg/sprite.svg#close" />
+        <use href="/icons/svg/sprite.svg#close" />
       </svg>
     </button>
   </div>
@@ -119,7 +119,7 @@ Disabled Tag with `ControlButton`:
       disabled
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
-        <use xlink:href="/icons/svg/sprite.svg#close" />
+        <use href="/icons/svg/sprite.svg#close" />
       </svg>
     </button>
   </div>

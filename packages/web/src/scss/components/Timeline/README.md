@@ -127,7 +127,7 @@ Add `TimelineMarker--icon` modifier to control the size of marker icon.
 ```html
 <div aria-hidden="true" class="TimelineMarker TimelineMarker--icon">
   <svg class="Icon Icon--secondary" width="24" height="24">
-    <use xlink:href="/assets/icons/svg/sprite.svg#search"></use>
+    <use href="/assets/icons/svg/sprite.svg#search"></use>
   </svg>
 </div>
 ```
