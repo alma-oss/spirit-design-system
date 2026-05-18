@@ -82,6 +82,16 @@ describe('Section', () => {
     expect(screen.getByTestId('container')).toBeInTheDocument();
   });
 
+  it('should pass Container size prop', () => {
+    render(
+      <Section data-testid="section" containerProps={{ size: 'large', 'data-testid': 'container' }}>
+        Content
+      </Section>,
+    );
+
+    expect(screen.getByTestId('container')).toHaveClass('Container--large');
+  });
+
   it('should render with padding', () => {
     render(
       <Section paddingY="space-200" data-testid="section">

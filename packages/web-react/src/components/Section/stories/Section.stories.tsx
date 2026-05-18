@@ -27,7 +27,7 @@ const meta: Meta<typeof Section> = {
       control: 'object',
       table: {
         type: {
-          summary: 'ContainerProps',
+          summary: 'SpiritContainerProps',
         },
       },
     },

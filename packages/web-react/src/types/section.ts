@@ -1,5 +1,5 @@
 import { type ElementType } from 'react';
-import { type ContainerProps } from './container';
+import { type SpiritContainerProps } from './container';
 import {
   type BackgroundColorsDictionaryType,
   type ChildrenProps,
@@ -11,13 +11,16 @@ import {
   type TextAlignmentType,
 } from './shared';
 
+/** Props forwarded to the inner `Container` (excluding `children`, which `Section` supplies). */
+export type SectionContainerProps = Omit<SpiritContainerProps, 'children'>;
+
 /** ===== BASE API ===== */
 export interface SectionBaseProps extends ChildrenProps, StyleProps {}
 
 /** ===== STYLE API ===== */
 export interface SectionStyleProps<S = void> extends SectionBaseProps {
   /** Container props to pass to the container component. */
-  containerProps?: ContainerProps;
+  containerProps?: SectionContainerProps;
   /** Whether the section should have a container. */
   hasContainer?: boolean;
   /** The background color of the section. */
