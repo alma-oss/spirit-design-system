@@ -4,7 +4,7 @@ import Dropdown, { CLASSNAME_EXPANDED, CLASSNAME_OPEN } from '../Dropdown';
 const childrenHtml = `
   <a href="#" class="d-flex mb-400">
     <svg width="24" height="24" aria-hidden="true" class="mr-400">
-      <use xlink:href="/icons/svg/sprite.svg#info" />
+      <use href="/icons/svg/sprite.svg#info" />
     </svg>
     <span>Information</span>
   </a>
