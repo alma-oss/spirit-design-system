@@ -155,7 +155,7 @@ Filled</textarea
   </div>
   <div id="text-area-danger-with-icon-validation-text" class="ValidationText ValidationText--danger">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
-      <use xlink:href="/assets/icons/svg/sprite.svg#danger" />
+      <use href="/assets/icons/svg/sprite.svg#danger" />
     </svg>
     <div>Validation text with icon</div>
   </div>

@@ -25,7 +25,7 @@ ControlButtons are composed using component styles and helper classes:
   aria-label="Close"
 >
   <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#close" />
+    <use href="/icons/svg/sprite.svg#close" />
   </svg>
 </button>
 ```
@@ -56,7 +56,7 @@ parent element:
     aria-label="Close"
   >
     <svg class="Icon" width="16" height="16" aria-hidden="true">
-      <use xlink:href="/icons/svg/sprite.svg#close" />
+      <use href="/icons/svg/sprite.svg#close" />
     </svg>
   </button>
 </div>
@@ -80,7 +80,7 @@ the background visible in the default state. The modifier class reads the
   aria-label="Close"
 >
   <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#close" />
+    <use href="/icons/svg/sprite.svg#close" />
   </svg>
 </button>
 ```
@@ -99,7 +99,7 @@ visible. The border color will adapt to the background color:
   aria-label="Close"
 >
   <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#close" />
+    <use href="/icons/svg/sprite.svg#close" />
   </svg>
 </button>
 ```
@@ -137,7 +137,7 @@ while mapping the existing sizes up:
     aria-label="Close"
   >
     <svg class="Icon" width="16" height="16" aria-hidden="true">
-      <use xlink:href="/icons/svg/sprite.svg#close" />
+      <use href="/icons/svg/sprite.svg#close" />
     </svg>
   </button>
 </div>
@@ -154,7 +154,7 @@ A symmetrical control button has equal width and height, typically used with ico
   aria-label="Close"
 >
   <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#close" />
+    <use href="/icons/svg/sprite.svg#close" />
   </svg>
 </button>
 ```
@@ -172,7 +172,7 @@ Symmetrical from tablet breakpoint and up:
   aria-label="Close"
 >
   <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+    <use href="/assets/icons/svg/sprite.svg#close" />
   </svg>
 </button>
 ```
@@ -186,7 +186,7 @@ Symmetrical from desktop breakpoint and up:
   aria-label="Close"
 >
   <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+    <use href="/assets/icons/svg/sprite.svg#close" />
   </svg>
 </button>
 ```
@@ -200,7 +200,7 @@ Symmetrical on mobile, not on tablet and up (use modifier class with suffix `--a
   aria-label="Close"
 >
   <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#close" />
+    <use href="/icons/svg/sprite.svg#close" />
   </svg>
 </button>
 ```
@@ -214,7 +214,7 @@ Symmetrical on mobile and tablet, not on desktop (combine breakpoint-specific cl
   aria-label="Close"
 >
   <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#close" />
+    <use href="/icons/svg/sprite.svg#close" />
   </svg>
 </button>
 ```
@@ -237,7 +237,7 @@ To achieve proper styles, use `color-scheme-on-disabled` class on the parent ele
     disabled
   >
     <svg class="Icon" width="16" height="16" aria-hidden="true">
-      <use xlink:href="/icons/svg/sprite.svg#chevron-left" />
+      <use href="/icons/svg/sprite.svg#chevron-left" />
     </svg>
   </button>
   <span>Disabled content</span>
@@ -248,7 +248,7 @@ To achieve proper styles, use `color-scheme-on-disabled` class on the parent ele
     disabled
   >
     <svg class="Icon" width="16" height="16" aria-hidden="true">
-      <use xlink:href="/icons/svg/sprite.svg#chevron-right" />
+      <use href="/icons/svg/sprite.svg#chevron-right" />
     </svg>
   </button>
 </div>
@@ -264,7 +264,7 @@ To achieve proper styles, use `color-scheme-on-disabled` class on the parent ele
   disabled
 >
   <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#close" />
+    <use href="/icons/svg/sprite.svg#close" />
   </svg>
 </button>
 ```
@@ -285,7 +285,7 @@ Custom spacing:
   aria-label="Close"
 >
   <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#close" />
+    <use href="/icons/svg/sprite.svg#close" />
   </svg>
   Close
 </button>
@@ -311,7 +311,7 @@ Custom spacing from tablet up:
   aria-label="Close"
 >
   <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#close" />
+    <use href="/icons/svg/sprite.svg#close" />
   </svg>
   Close
 </button>
@@ -327,7 +327,7 @@ Custom spacing for each breakpoint:
   aria-label="Close"
 >
   <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use xlink:href="/icons/svg/sprite.svg#close" />
+    <use href="/icons/svg/sprite.svg#close" />
   </svg>
   Close
 </button>

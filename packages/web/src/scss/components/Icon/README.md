@@ -4,7 +4,7 @@
 
 ```html
 <svg class="Icon" width="24" height="24" style="--spirit-icon-size: 1.5rem;">
-  <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+  <use href="/assets/icons/svg/sprite.svg#info" />
 </svg>
 ```
 
@@ -24,7 +24,7 @@ Available colors include `text`, `emotion`, and `accent` colors.
 
 ```html
 <svg class="Icon Icon--success" width="24" height="24">
-  <use xlink:href="/assets/icons/svg/sprite.svg#shield-dualtone" />
+  <use href="/assets/icons/svg/sprite.svg#shield-dualtone" />
 </svg>
 ```
 
@@ -48,7 +48,7 @@ For a single (non-responsive) size, use inline style with `--spirit-icon-size`.
 
 ```html
 <svg class="Icon" width="24" height="24" style="--spirit-icon-size: 1.5rem;">
-  <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+  <use href="/assets/icons/svg/sprite.svg#info" />
 </svg>
 ```
 
@@ -71,6 +71,6 @@ If only tablet or desktop is set, width and height is used for smaller breakpoin
     --spirit-icon-size-desktop: 2.5rem;
   "
 >
-  <use xlink:href="/assets/icons/svg/sprite.svg#info" />
+  <use href="/assets/icons/svg/sprite.svg#info" />
 </svg>
 ```
