@@ -47,7 +47,7 @@ You can set different avatar sizes for different [breakpoints][dictionary-breakp
 ```tsx
 <Avatar size={{ mobile: 'xsmall', tablet: 'medium', desktop: 'xlarge' }} aria-label="Profile of Jiří Bárta">
   <svg class="Icon" width="24" height="24" aria-hidden="true">
-    <use xlink:href="/assets/icons/svg/sprite.svg#profile" />
+    <use href="/assets/icons/svg/sprite.svg#profile" />
   </svg>
 </Avatar>
 ```
