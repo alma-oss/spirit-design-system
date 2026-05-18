@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.6.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.6.0...@alma-oss/spirit-web-react@4.6.1) (2026-05-18)
+
+### Bug Fixes
+
+- **web-react:** fix type for containerProps #DS-2561, closes [#DS-2561](https://github.com/alma-oss/spirit-design-system/issues/DS-2561)
+
 ## [4.6.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.5.0...@alma-oss/spirit-web-react@4.6.0) (2026-05-15)
 
 ### Features
