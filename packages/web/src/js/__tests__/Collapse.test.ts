@@ -151,7 +151,7 @@ describe('Collapse', () => {
                 </span>
                 <span class="Accordion__itemIcon">
                   <svg width="24" height="24" aria-hidden="true">
-                    <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
+                    <use href="/icons/svg/sprite.svg#chevron-down" />
                   </svg>
                 </span>
               </span>
@@ -190,7 +190,7 @@ describe('Collapse', () => {
                 </span>
                 <span class="Accordion__itemIcon">
                   <svg width="24" height="24" aria-hidden="true">
-                    <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
+                    <use href="/icons/svg/sprite.svg#chevron-down" />
                   </svg>
                 </span>
               </span>
