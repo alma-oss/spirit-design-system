@@ -197,11 +197,13 @@ class Toast extends BaseComponent {
     const { hasIcon, iconName, color } = this.config as Config;
 
     const iconUseElement = iconElement.querySelector('use') as SVGUseElement;
-    const originalIconPath = iconUseElement!.getAttribute('xlink:href') as string;
+    const originalIconPath = (iconUseElement!.getAttribute('href') ??
+      // eslint-disable-next-line spirit/no-xlink-href -- fallback for consumers still using xlink:href in their Toast template
+      iconUseElement!.getAttribute('xlink:href')) as string;
     const iconPath = originalIconPath.substring(0, originalIconPath.indexOf('#'));
 
     if (hasIcon) {
-      iconUseElement!.setAttribute('xlink:href', `${iconPath}#${iconName || COLOR_ICON_MAP[color]}`);
+      iconUseElement!.setAttribute('href', `${iconPath}#${iconName || COLOR_ICON_MAP[color]}`);
     } else {
       iconElement!.remove();
     }
