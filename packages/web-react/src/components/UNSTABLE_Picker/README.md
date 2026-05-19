@@ -413,11 +413,12 @@ UNSTABLE_PickerItem is one option row in the popover (picker context is required
 
 ### API
 
-| Name       | Type        | Default | Required | Description                            |
-| ---------- | ----------- | ------- | -------- | -------------------------------------- |
-| `children` | `ReactNode` | —       | ✓        | Label shown next to the radio/checkbox |
-| `value`    | `string`    | —       | ✓        | Key used in `selectedKeys`             |
-| `name`     | `string`    | —       | ✕        | Native input `name`                    |
+| Name         | Type        | Default | Required | Description                            |
+| ------------ | ----------- | ------- | -------- | -------------------------------------- |
+| `children`   | `ReactNode` | —       | ✓        | Label shown next to the radio/checkbox |
+| `value`      | `string`    | —       | ✓        | Key used in `selectedKeys`             |
+| `name`       | `string`    | —       | ✕        | Native input `name`                    |
+| `helperText` | `ReactNode` | —       | ✕        | Helper text below the radio/checkbox   |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
