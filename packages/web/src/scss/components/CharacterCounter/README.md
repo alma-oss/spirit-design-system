@@ -48,7 +48,7 @@ CharacterCounter is typically used next to helper and validation text below [Tex
 ### With Helper Text and Threshold
 
 ```html
-<div class="InputContainer InputContainer--medium">
+<div class="InputContainer InputContainer--fill InputContainer--medium">
   <textarea
     id="text-area-counter-min-max"
     name="counterMinMax"
@@ -70,7 +70,7 @@ CharacterCounter is typically used next to helper and validation text below [Tex
 ### Disabled TextArea
 
 ```html
-<div class="InputContainer InputContainer--medium InputContainer--disabled">
+<div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
   <textarea
     id="text-area-counter-disabled"
     name="counterDisabled"
@@ -92,7 +92,7 @@ Disabled</textarea
 ### Validation with Counter Over Limit
 
 ```html
-<div class="InputContainer InputContainer--medium InputContainer--danger">
+<div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger">
   <textarea
     id="text-area-counter-validation"
     name="counterValidation"

@@ -247,7 +247,7 @@ Responsive values can be defined using the `tablet` and `desktop` infixes.
       <div class="text-desktop-right">
         <div>
           <label for="select-language" class="Label accessibility-hidden">Language</label>
-          <div class="InputContainer InputContainer--medium">
+          <div class="InputContainer InputContainer--fill InputContainer--medium">
             <select id="select-language" name="language">
               <option value="en">English</option>
               <option value="cs">Čeština</option>

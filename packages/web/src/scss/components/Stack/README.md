@@ -12,13 +12,13 @@ Usage with form fields:
 <div class="Stack Stack--hasSpacing">
   <div>
     <label for="textfield-stack-1" class="Label Label--required">Label</label>
-    <div class="InputContainer InputContainer--medium">
+    <div class="InputContainer InputContainer--fill InputContainer--medium">
       <input type="text" id="textfield-stack-1" placeholder="Placeholder" />
     </div>
   </div>
   <div>
     <label for="textfield-stack-2" class="Label Label--required">Label</label>
-    <div class="InputContainer InputContainer--medium">
+    <div class="InputContainer InputContainer--fill InputContainer--medium">
       <input type="text" id="textfield-stack-2" placeholder="Placeholder" />
     </div>
   </div>

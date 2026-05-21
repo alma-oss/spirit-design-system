@@ -5,10 +5,47 @@ Basic usage:
 ```html
 <div>
   <label for="select-simple" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-simple" name="simple">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
+    </select>
+    <div class="InputAddon">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
+        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+      </svg>
+    </div>
+  </div>
+</div>
+```
+
+Variants:
+
+- `InputContainer--fill` (default)
+- `InputContainer--outline`
+
+```html
+<div>
+  <label for="select-variant-fill" class="Label">Fill (default)</label>
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
+    <select id="select-variant-fill" name="variantFill">
+      <option value="">Placeholder</option>
+      <option value="1">Option 1</option>
+    </select>
+    <div class="InputAddon">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
+        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div>
+  <label for="select-variant-outline" class="Label">Outline</label>
+  <div class="InputContainer InputContainer--outline InputContainer--medium">
+    <select id="select-variant-outline" name="variantOutline">
+      <option value="">Placeholder</option>
+      <option value="1">Option 1</option>
     </select>
     <div class="InputAddon">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
@@ -24,7 +61,7 @@ Sizes (please note the icon size):
 ```html
 <div>
   <label for="select-size-small" class="Label">Small</label>
-  <div class="InputContainer InputContainer--small">
+  <div class="InputContainer InputContainer--fill InputContainer--small">
     <select id="select-size-small" name="size-small">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
@@ -38,7 +75,7 @@ Sizes (please note the icon size):
 
   <div>
     <label for="select-size-medium" class="Label">Medium (default)</label>
-    <div class="InputContainer InputContainer--medium">
+    <div class="InputContainer InputContainer--fill InputContainer--medium">
       <select id="select-size-medium" name="size-medium">
         <option value="1">Option 1</option>
         <option value="2">Option 2</option>
@@ -52,7 +89,7 @@ Sizes (please note the icon size):
 
     <div>
       <label for="select-size-large" class="Label">Large</label>
-      <div class="InputContainer InputContainer--large">
+      <div class="InputContainer InputContainer--fill InputContainer--large">
         <select id="select-size-large" name="size-large">
           <option value="1">Option 1</option>
           <option value="2">Option 2</option>
@@ -73,7 +110,7 @@ Required select (requires a placeholder option):
 ```html
 <div>
   <label for="select-required" class="Label Label--required">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-required" name="required" required>
       <option value="" selected>Select an option</option>
       <option value="1">Option 1</option>
@@ -93,7 +130,7 @@ Hidden label:
 ```html
 <div>
   <label for="select-hidden-label" class="Label accessibility-hidden">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-hidden-label" name="hiddenLabel">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
@@ -120,7 +157,7 @@ sure users give all needed details before sending the form.
 ```html
 <div>
   <label for="select-placeholder" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-placeholder" name="placeholder">
       <option value="" selected>Select an option</option>
       <option value="1">Option 1</option>
@@ -136,7 +173,7 @@ sure users give all needed details before sending the form.
 
 <div>
   <label for="select-placeholder-disabled" class="Label Label--required">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-placeholder-disabled" name="placeholderDisabled" required>
       <option value="" selected disabled>Select an option [selected & disabled]</option>
       <option value="1">Option 1</option>
@@ -163,7 +200,7 @@ To add helper text, use the [HelperText][readme-helper-text] component:
 ```html
 <div>
   <label for="select-helper-text" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-helper-text" name="helperText" aria-describedby="select-helper-text-helper-text">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
@@ -191,7 +228,7 @@ or by adding a JS interaction class when controlled by JavaScript (`has-success`
 ```html
 <div>
   <label for="select-success" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--success">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--success">
     <select id="select-success" name="success">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
@@ -206,7 +243,7 @@ or by adding a JS interaction class when controlled by JavaScript (`has-success`
 
 <div>
   <label for="select-warning" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--warning">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--warning">
     <select id="select-warning" name="warning" aria-describedby="select-warning-validation-text">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
@@ -222,7 +259,7 @@ or by adding a JS interaction class when controlled by JavaScript (`has-success`
 
 <div>
   <label for="select-danger" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--danger">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger">
     <select id="select-danger" name="danger" aria-describedby="select-danger-validation-text">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
@@ -243,7 +280,7 @@ or by adding a JS interaction class when controlled by JavaScript (`has-success`
 
 <div>
   <label for="select-warning-icon" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--warning">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--warning">
     <select id="select-warning-icon" name="warning" aria-describedby="select-warning-icon-validation-text">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
@@ -273,7 +310,7 @@ class when controlled by JavaScript:
 ```html
 <div>
   <label for="select-disabled" class="Label Label--disabled">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--disabled">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <select id="select-disabled" name="disabled" disabled>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
@@ -288,7 +325,7 @@ class when controlled by JavaScript:
 
 <div>
   <label for="select-is-disabled" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium is-disabled">
+  <div class="InputContainer InputContainer--fill InputContainer--medium is-disabled">
     <select id="select-is-disabled" name="isDisabled" disabled>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
