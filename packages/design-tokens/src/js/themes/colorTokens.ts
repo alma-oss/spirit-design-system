@@ -161,6 +161,17 @@ export const formFieldFilledPlaceholder = 'var(--spirit-color-form-field-filled-
 
 export const formFieldHelperText = 'var(--spirit-color-form-field-helper-text)';
 export const formFieldLabel = 'var(--spirit-color-form-field-label)';
+
+export const formFieldOutlineBackgroundStateActive = 'var(--spirit-color-form-field-outline-background-state-active)';
+export const formFieldOutlineBackgroundStateDefault = 'var(--spirit-color-form-field-outline-background-state-default)';
+export const formFieldOutlineBackgroundStateHover = 'var(--spirit-color-form-field-outline-background-state-hover)';
+export const formFieldOutlineBorderStateActive = 'var(--spirit-color-form-field-outline-border-state-active)';
+export const formFieldOutlineBorderStateDefault = 'var(--spirit-color-form-field-outline-border-state-default)';
+export const formFieldOutlineBorderStateHover = 'var(--spirit-color-form-field-outline-border-state-hover)';
+export const formFieldOutlineBorderStateSelected = 'var(--spirit-color-form-field-outline-border-state-selected)';
+export const formFieldOutlineContent = 'var(--spirit-color-form-field-outline-content)';
+export const formFieldOutlinePlaceholder = 'var(--spirit-color-form-field-outline-placeholder)';
+
 export const formFieldSuccess = 'var(--spirit-color-form-field-success)';
 export const formFieldWarning = 'var(--spirit-color-form-field-warning)';
 
@@ -422,6 +433,17 @@ export const formFieldColors = {
   },
   helperText: formFieldHelperText,
   label: formFieldLabel,
+  outline: {
+    backgroundStateActive: formFieldOutlineBackgroundStateActive,
+    backgroundStateDefault: formFieldOutlineBackgroundStateDefault,
+    backgroundStateHover: formFieldOutlineBackgroundStateHover,
+    borderStateActive: formFieldOutlineBorderStateActive,
+    borderStateDefault: formFieldOutlineBorderStateDefault,
+    borderStateHover: formFieldOutlineBorderStateHover,
+    borderStateSelected: formFieldOutlineBorderStateSelected,
+    content: formFieldOutlineContent,
+    placeholder: formFieldOutlinePlaceholder,
+  },
   success: formFieldSuccess,
   warning: formFieldWarning,
 };
