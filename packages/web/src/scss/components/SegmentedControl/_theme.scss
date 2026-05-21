@@ -32,12 +32,13 @@ $item-padding-y: tokens.$space-700;
 $item-border-radius: tokens.$radius-full;
 $item-label-typography: tokens.$body-small-semibold;
 $item-gap: tokens.$space-400;
+$item-icon-size: units.px-to-rem(20px);
 $item-background-hover: tokens.$background-interactive-state-hover;
 $item-border-default: tokens.$border-width-100 solid transparent;
 $item-outline-width: tokens.$border-width-100;
 $item-disabled-cursor: cursors.$disabled;
 $item-disabled-color: tokens.$disabled-content;
-$item-min-width: ($item-padding-y * 2 + units.px-to-rem(20px)); // 1.
+$item-min-width: ($item-padding-y * 2 + $item-icon-size); // 1.
 
 $fill-variant-config: (
     outline: (

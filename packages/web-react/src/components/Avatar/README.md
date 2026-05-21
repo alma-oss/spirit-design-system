@@ -46,9 +46,7 @@ You can set different avatar sizes for different [breakpoints][dictionary-breakp
 
 ```tsx
 <Avatar size={{ mobile: 'xsmall', tablet: 'medium', desktop: 'xlarge' }} aria-label="Profile of Jiří Bárta">
-  <svg class="Icon" width="24" height="24" aria-hidden="true">
-    <use href="/assets/icons/svg/sprite.svg#profile" />
-  </svg>
+  <Icon name="profile" />
 </Avatar>
 ```
 
@@ -66,6 +64,7 @@ The content of the `Avatar` component can be an image, an icon, or a text string
   <Icon name="profile" />
 </Avatar>
 <Avatar aria-label="Profile of Jiří Bárta">
+  {/* Override automatic avatar-to-icon sizing when needed */}
   <Icon name="profile" boxSize={32} />
 </Avatar>
 ```
@@ -82,7 +81,8 @@ The size of the icons is automatically adjusted according to the size of the ava
 | large       | 28px      |
 | xlarge      | 32px      |
 
-You can always override the icon size by setting the [`boxSize`][readme-icon-api] prop on the Icon component.
+The icon size is inherited from the Avatar size by default.
+If you need a custom icon size for a specific case, override it with the [`boxSize`][readme-icon-api] prop on the Icon component.
 
 ℹ️ Don't forget to add the `aria-label` attribute for accessible title.
 

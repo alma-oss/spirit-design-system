@@ -61,11 +61,24 @@ describe('Avatar', () => {
   it('should render Icon', () => {
     render(
       <Avatar title="Jiří Bárta">
-        <Icon name="profile" boxSize={20} />
+        <Icon name="profile" />
       </Avatar>,
     );
 
     expect(screen.getByTitle('Jiří Bárta').querySelector('svg')).toBeInTheDocument();
+  });
+
+  it('should render Icon with overridden size', () => {
+    render(
+      <Avatar title="Jiří Bárta">
+        <Icon name="profile" boxSize={32} />
+      </Avatar>,
+    );
+
+    const icon = screen.getByTitle('Jiří Bárta').querySelector('svg');
+
+    expect(icon).toHaveAttribute('width', '32');
+    expect(icon).toHaveAttribute('height', '32');
   });
 
   it('should render text children', () => {

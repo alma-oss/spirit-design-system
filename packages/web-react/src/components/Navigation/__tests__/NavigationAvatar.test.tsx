@@ -15,7 +15,7 @@ import NavigationAvatar from '../NavigationAvatar';
 
 jest.mock('../../../hooks/useIcon');
 
-const avatarContentMock = <Icon name="profile" boxSize={20} />;
+const avatarContentMock = <Icon name="profile" />;
 
 describe('NavigationAvatar', () => {
   classNamePrefixProviderTest(NavigationAvatar, 'NavigationAvatar');

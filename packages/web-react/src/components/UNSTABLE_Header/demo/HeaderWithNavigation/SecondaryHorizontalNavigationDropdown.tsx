@@ -37,7 +37,7 @@ const SecondaryHorizontalNavigationDropdown = ({
     >
       <DropdownTrigger
         elementType={NavigationAvatarAsDropdownTrigger}
-        avatarContent={<Icon name="profile" boxSize={20} />}
+        avatarContent={<Icon name="profile" />}
         aria-label="Profile of Jiří Bárta"
         isSquare={isSquare}
       >

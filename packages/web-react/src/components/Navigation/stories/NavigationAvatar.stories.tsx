@@ -26,7 +26,7 @@ const meta: Meta<typeof NavigationAvatar> = {
         \`icon\`, \`image\` and \`text\`. Please note the predefined options
         in this demo are not customizable.`,
       mapping: {
-        icon: <Icon name="profile" boxSize={24} />,
+        icon: <Icon name="profile" />,
         image: <img src="https://picsum.photos/id/823/162/162" alt="Jiří Bárta" aria-hidden="true" />,
         text: <span aria-hidden="true">JB</span>,
       },
