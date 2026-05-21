@@ -161,6 +161,17 @@ $form-field-filled-placeholder: var(--spirit-color-form-field-filled-placeholder
 
 $form-field-helper-text: var(--spirit-color-form-field-helper-text);
 $form-field-label: var(--spirit-color-form-field-label);
+
+$form-field-outline-background-state-active: var(--spirit-color-form-field-outline-background-state-active);
+$form-field-outline-background-state-default: var(--spirit-color-form-field-outline-background-state-default);
+$form-field-outline-background-state-hover: var(--spirit-color-form-field-outline-background-state-hover);
+$form-field-outline-border-state-active: var(--spirit-color-form-field-outline-border-state-active);
+$form-field-outline-border-state-default: var(--spirit-color-form-field-outline-border-state-default);
+$form-field-outline-border-state-hover: var(--spirit-color-form-field-outline-border-state-hover);
+$form-field-outline-border-state-selected: var(--spirit-color-form-field-outline-border-state-selected);
+$form-field-outline-content: var(--spirit-color-form-field-outline-content);
+$form-field-outline-placeholder: var(--spirit-color-form-field-outline-placeholder);
+
 $form-field-success: var(--spirit-color-form-field-success);
 $form-field-warning: var(--spirit-color-form-field-warning);
 
@@ -422,6 +433,17 @@ $form-field-colors: (
     ),
     helper-text: $form-field-helper-text,
     label: $form-field-label,
+    outline: (
+        background-state-active: $form-field-outline-background-state-active,
+        background-state-default: $form-field-outline-background-state-default,
+        background-state-hover: $form-field-outline-background-state-hover,
+        border-state-active: $form-field-outline-border-state-active,
+        border-state-default: $form-field-outline-border-state-default,
+        border-state-hover: $form-field-outline-border-state-hover,
+        border-state-selected: $form-field-outline-border-state-selected,
+        content: $form-field-outline-content,
+        placeholder: $form-field-outline-placeholder,
+    ),
     success: $form-field-success,
     warning: $form-field-warning,
 ) !default;

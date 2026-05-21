@@ -150,17 +150,28 @@ $focus-focus-ring-color-01: #d2c2ffb2 !default;
 $form-field-danger: #b60000 !default;
 
 $form-field-filled-background-state-active: #fdfdfc !default;
-$form-field-filled-background-state-default: #fdfdfc !default;
-$form-field-filled-background-state-hover: #f9f9f9 !default;
-$form-field-filled-border-state-active: #7f7f7f !default;
-$form-field-filled-border-state-default: #a5a5a5 !default;
-$form-field-filled-border-state-hover: #999 !default;
+$form-field-filled-background-state-default: #1a1b1b0d !default;
+$form-field-filled-background-state-hover: #1a1b1b14 !default;
+$form-field-filled-border-state-active: #7847ff !default;
+$form-field-filled-border-state-default: #1a1b1b8c !default;
+$form-field-filled-border-state-hover: #1a1b1b99 !default;
 $form-field-filled-border-state-selected: #7847ff !default;
 $form-field-filled-content: #202020 !default;
 $form-field-filled-placeholder: #666 !default;
 
 $form-field-helper-text: #535353 !default;
 $form-field-label: #202020 !default;
+
+$form-field-outline-background-state-active: #fff0 !default;
+$form-field-outline-background-state-default: #fff0 !default;
+$form-field-outline-background-state-hover: #1a1b1b0d !default;
+$form-field-outline-border-state-active: #7847ff !default;
+$form-field-outline-border-state-default: #1a1b1b8c !default;
+$form-field-outline-border-state-hover: #1a1b1b99 !default;
+$form-field-outline-border-state-selected: #7847ff !default;
+$form-field-outline-content: #202020 !default;
+$form-field-outline-placeholder: #666 !default;
+
 $form-field-success: #327c3f !default;
 $form-field-warning: #c26400 !default;
 
@@ -363,6 +374,15 @@ $text-tertiary: #7f7f7f !default;
     --spirit-color-form-field-filled-placeholder: #{$form-field-filled-placeholder};
     --spirit-color-form-field-helper-text: #{$form-field-helper-text};
     --spirit-color-form-field-label: #{$form-field-label};
+    --spirit-color-form-field-outline-background-state-active: #{$form-field-outline-background-state-active};
+    --spirit-color-form-field-outline-background-state-default: #{$form-field-outline-background-state-default};
+    --spirit-color-form-field-outline-background-state-hover: #{$form-field-outline-background-state-hover};
+    --spirit-color-form-field-outline-border-state-active: #{$form-field-outline-border-state-active};
+    --spirit-color-form-field-outline-border-state-default: #{$form-field-outline-border-state-default};
+    --spirit-color-form-field-outline-border-state-hover: #{$form-field-outline-border-state-hover};
+    --spirit-color-form-field-outline-border-state-selected: #{$form-field-outline-border-state-selected};
+    --spirit-color-form-field-outline-content: #{$form-field-outline-content};
+    --spirit-color-form-field-outline-placeholder: #{$form-field-outline-placeholder};
     --spirit-color-form-field-success: #{$form-field-success};
     --spirit-color-form-field-warning: #{$form-field-warning};
     --spirit-color-gradient-basic-overlay-color-01: #{$gradient-basic-overlay-color-01};
