@@ -67,7 +67,7 @@ Applies disabled styling to the label.
 ```html
 <div>
   <label for="text-field" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field" />
   </div>
 </div>
@@ -78,7 +78,7 @@ Applies disabled styling to the label.
 ```html
 <div>
   <label for="text-field-required" class="Label Label--required">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-required" required />
   </div>
 </div>
@@ -119,7 +119,7 @@ Applies disabled styling to the label.
 ```html
 <div>
   <label for="text-field-disabled" class="Label Label--disabled">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--disabled">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <input type="text" id="text-field-disabled" disabled />
   </div>
 </div>

@@ -65,7 +65,9 @@ Use the `ValidationText--disabled` modifier class when the associated form contr
 ```html
 <div>
   <label for="text-field-disabled" class="Label Label--disabled">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--disabled InputContainer--danger">
+  <div
+    class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled InputContainer--danger"
+  >
     <input type="text" id="text-field-disabled" name="disabled" placeholder="Placeholder" disabled />
   </div>
   <div class="ValidationText ValidationText--disabled ValidationText--danger">Danger validation text</div>
@@ -98,7 +100,7 @@ ValidationText works seamlessly with Spirit form components:
 ```html
 <div>
   <label for="example" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--danger">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger">
     <input type="text" id="example" placeholder="Placeholder" value="Filled" />
   </div>
   <div class="ValidationText ValidationText--danger">Danger validation text</div>
