@@ -149,18 +149,29 @@ export const focusFocusRingColor01 = '#d2c2ffb2';
 
 export const formFieldDanger = '#ec4d4d';
 
-export const formFieldFilledBackgroundStateActive = '#fff';
-export const formFieldFilledBackgroundStateDefault = '#f9f9f9';
-export const formFieldFilledBackgroundStateHover = '#f1edff';
-export const formFieldFilledBorderStateActive = '#936cff';
-export const formFieldFilledBorderStateDefault = '#ae91ff';
-export const formFieldFilledBorderStateHover = '#a07eff';
-export const formFieldFilledBorderStateSelected = '#ffbe00';
-export const formFieldFilledContent = '#202020';
-export const formFieldFilledPlaceholder = '#666';
+export const formFieldFillBackgroundStateActive = '#fff';
+export const formFieldFillBackgroundStateDefault = '#f9f9f9';
+export const formFieldFillBackgroundStateHover = '#f1edff';
+export const formFieldFillBorderStateActive = '#936cff';
+export const formFieldFillBorderStateDefault = '#ae91ff';
+export const formFieldFillBorderStateHover = '#a07eff';
+export const formFieldFillBorderStateSelected = '#ffbe00';
+export const formFieldFillContent = '#202020';
+export const formFieldFillPlaceholder = '#666';
 
 export const formFieldHelperText = '#c9b5ff';
 export const formFieldLabel = '#fff';
+
+export const formFieldOutlineBackgroundStateActive = '#fff0';
+export const formFieldOutlineBackgroundStateDefault = '#fff0';
+export const formFieldOutlineBackgroundStateHover = '#1a1b1b0d';
+export const formFieldOutlineBorderStateActive = '#7847ff';
+export const formFieldOutlineBorderStateDefault = '#ae91ff';
+export const formFieldOutlineBorderStateHover = '#1a1b1b99';
+export const formFieldOutlineBorderStateSelected = '#7847ff';
+export const formFieldOutlineContent = '#f9f9f9';
+export const formFieldOutlinePlaceholder = '#f9f9f9';
+
 export const formFieldSuccess = '#78b984';
 export const formFieldWarning = '#f6a44d';
 
@@ -201,10 +212,10 @@ export const neutralStateActive = '#535353';
 export const neutralStateDefault = '#202020';
 export const neutralStateHover = '#404040';
 
-export const selectedBackgroundBasic = '#fff';
-export const selectedBackgroundSubtle = '#fff';
-export const selectedBorderBasic = '#fff';
-export const selectedBorderSubtle = '#fff';
+export const selectedBackgroundBasic = '#a07eff';
+export const selectedBackgroundSubtle = '#fff3';
+export const selectedBorderBasic = '#fff3';
+export const selectedBorderSubtle = '#7847ff';
 export const selectedContentBasic = '#fff';
 export const selectedContentSubtle = '#3c2480';
 export const selectedStateActive = '#ffd24d';

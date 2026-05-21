@@ -149,18 +149,29 @@ export const focusFocusRingColor01 = '#d2c2ffb2';
 
 export const formFieldDanger = '#b60000';
 
-export const formFieldFilledBackgroundStateActive = '#fdfdfc';
-export const formFieldFilledBackgroundStateDefault = '#fdfdfc';
-export const formFieldFilledBackgroundStateHover = '#f9f9f9';
-export const formFieldFilledBorderStateActive = '#7f7f7f';
-export const formFieldFilledBorderStateDefault = '#a5a5a5';
-export const formFieldFilledBorderStateHover = '#999';
-export const formFieldFilledBorderStateSelected = '#7847ff';
-export const formFieldFilledContent = '#202020';
-export const formFieldFilledPlaceholder = '#666';
+export const formFieldFillBackgroundStateActive = '#fdfdfc';
+export const formFieldFillBackgroundStateDefault = '#1a1b1b0d';
+export const formFieldFillBackgroundStateHover = '#1a1b1b14';
+export const formFieldFillBorderStateActive = '#7847ff';
+export const formFieldFillBorderStateDefault = '#1a1b1b8c';
+export const formFieldFillBorderStateHover = '#1a1b1b99';
+export const formFieldFillBorderStateSelected = '#7847ff';
+export const formFieldFillContent = '#202020';
+export const formFieldFillPlaceholder = '#666';
 
 export const formFieldHelperText = '#535353';
 export const formFieldLabel = '#202020';
+
+export const formFieldOutlineBackgroundStateActive = '#fff0';
+export const formFieldOutlineBackgroundStateDefault = '#fff0';
+export const formFieldOutlineBackgroundStateHover = '#1a1b1b0d';
+export const formFieldOutlineBorderStateActive = '#7847ff';
+export const formFieldOutlineBorderStateDefault = '#1a1b1b8c';
+export const formFieldOutlineBorderStateHover = '#1a1b1b99';
+export const formFieldOutlineBorderStateSelected = '#7847ff';
+export const formFieldOutlineContent = '#202020';
+export const formFieldOutlinePlaceholder = '#666';
+
 export const formFieldSuccess = '#327c3f';
 export const formFieldWarning = '#c26400';
 

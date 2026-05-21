@@ -149,18 +149,29 @@ export const focusFocusRingColor01 = 'var(--spirit-color-focus-focus-ring-color-
 
 export const formFieldDanger = 'var(--spirit-color-form-field-danger)';
 
-export const formFieldFilledBackgroundStateActive = 'var(--spirit-color-form-field-filled-background-state-active)';
-export const formFieldFilledBackgroundStateDefault = 'var(--spirit-color-form-field-filled-background-state-default)';
-export const formFieldFilledBackgroundStateHover = 'var(--spirit-color-form-field-filled-background-state-hover)';
-export const formFieldFilledBorderStateActive = 'var(--spirit-color-form-field-filled-border-state-active)';
-export const formFieldFilledBorderStateDefault = 'var(--spirit-color-form-field-filled-border-state-default)';
-export const formFieldFilledBorderStateHover = 'var(--spirit-color-form-field-filled-border-state-hover)';
-export const formFieldFilledBorderStateSelected = 'var(--spirit-color-form-field-filled-border-state-selected)';
-export const formFieldFilledContent = 'var(--spirit-color-form-field-filled-content)';
-export const formFieldFilledPlaceholder = 'var(--spirit-color-form-field-filled-placeholder)';
+export const formFieldFillBackgroundStateActive = 'var(--spirit-color-form-field-fill-background-state-active)';
+export const formFieldFillBackgroundStateDefault = 'var(--spirit-color-form-field-fill-background-state-default)';
+export const formFieldFillBackgroundStateHover = 'var(--spirit-color-form-field-fill-background-state-hover)';
+export const formFieldFillBorderStateActive = 'var(--spirit-color-form-field-fill-border-state-active)';
+export const formFieldFillBorderStateDefault = 'var(--spirit-color-form-field-fill-border-state-default)';
+export const formFieldFillBorderStateHover = 'var(--spirit-color-form-field-fill-border-state-hover)';
+export const formFieldFillBorderStateSelected = 'var(--spirit-color-form-field-fill-border-state-selected)';
+export const formFieldFillContent = 'var(--spirit-color-form-field-fill-content)';
+export const formFieldFillPlaceholder = 'var(--spirit-color-form-field-fill-placeholder)';
 
 export const formFieldHelperText = 'var(--spirit-color-form-field-helper-text)';
 export const formFieldLabel = 'var(--spirit-color-form-field-label)';
+
+export const formFieldOutlineBackgroundStateActive = 'var(--spirit-color-form-field-outline-background-state-active)';
+export const formFieldOutlineBackgroundStateDefault = 'var(--spirit-color-form-field-outline-background-state-default)';
+export const formFieldOutlineBackgroundStateHover = 'var(--spirit-color-form-field-outline-background-state-hover)';
+export const formFieldOutlineBorderStateActive = 'var(--spirit-color-form-field-outline-border-state-active)';
+export const formFieldOutlineBorderStateDefault = 'var(--spirit-color-form-field-outline-border-state-default)';
+export const formFieldOutlineBorderStateHover = 'var(--spirit-color-form-field-outline-border-state-hover)';
+export const formFieldOutlineBorderStateSelected = 'var(--spirit-color-form-field-outline-border-state-selected)';
+export const formFieldOutlineContent = 'var(--spirit-color-form-field-outline-content)';
+export const formFieldOutlinePlaceholder = 'var(--spirit-color-form-field-outline-placeholder)';
+
 export const formFieldSuccess = 'var(--spirit-color-form-field-success)';
 export const formFieldWarning = 'var(--spirit-color-form-field-warning)';
 
@@ -409,19 +420,30 @@ export const focusColors = {
 
 export const formFieldColors = {
   danger: formFieldDanger,
-  filled: {
-    backgroundStateActive: formFieldFilledBackgroundStateActive,
-    backgroundStateDefault: formFieldFilledBackgroundStateDefault,
-    backgroundStateHover: formFieldFilledBackgroundStateHover,
-    borderStateActive: formFieldFilledBorderStateActive,
-    borderStateDefault: formFieldFilledBorderStateDefault,
-    borderStateHover: formFieldFilledBorderStateHover,
-    borderStateSelected: formFieldFilledBorderStateSelected,
-    content: formFieldFilledContent,
-    placeholder: formFieldFilledPlaceholder,
+  fill: {
+    backgroundStateActive: formFieldFillBackgroundStateActive,
+    backgroundStateDefault: formFieldFillBackgroundStateDefault,
+    backgroundStateHover: formFieldFillBackgroundStateHover,
+    borderStateActive: formFieldFillBorderStateActive,
+    borderStateDefault: formFieldFillBorderStateDefault,
+    borderStateHover: formFieldFillBorderStateHover,
+    borderStateSelected: formFieldFillBorderStateSelected,
+    content: formFieldFillContent,
+    placeholder: formFieldFillPlaceholder,
   },
   helperText: formFieldHelperText,
   label: formFieldLabel,
+  outline: {
+    backgroundStateActive: formFieldOutlineBackgroundStateActive,
+    backgroundStateDefault: formFieldOutlineBackgroundStateDefault,
+    backgroundStateHover: formFieldOutlineBackgroundStateHover,
+    borderStateActive: formFieldOutlineBorderStateActive,
+    borderStateDefault: formFieldOutlineBorderStateDefault,
+    borderStateHover: formFieldOutlineBorderStateHover,
+    borderStateSelected: formFieldOutlineBorderStateSelected,
+    content: formFieldOutlineContent,
+    placeholder: formFieldOutlinePlaceholder,
+  },
   success: formFieldSuccess,
   warning: formFieldWarning,
 };
