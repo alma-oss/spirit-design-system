@@ -7,7 +7,7 @@ const globalAttributes = [...htmlElementAttributes['*'], 'role'];
 
 // Custom attributes for specific tags which are not present in html-element-attributes library
 const customTagAttributes: Record<string, string[]> = {
-  svg: ['viewBox', 'fill', 'xmlns', 'xmlns:xlink', 'width', 'height'],
+  svg: ['viewBox', 'fill', 'xmlns', 'width', 'height'],
 };
 
 const validateHTMLAttributes = (element: HTMLElement) => {

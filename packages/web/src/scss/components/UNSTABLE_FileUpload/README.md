@@ -42,7 +42,7 @@ The class controls appearance only: dashed border and visibility of the “or dr
     />
     <div class="UNSTABLE_FileUploadInput__dropZone">
       <svg class="Icon" width="28" height="28" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#upload" />
+        <use href="/assets/icons/svg/sprite.svg#upload" />
       </svg>
       <div class="UNSTABLE_FileUploadInput__dropZoneContent">
         <label for="file-uploader" class="UNSTABLE_FileUploadInput__dropZoneLabel">
@@ -163,7 +163,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
   <li class="UNSTABLE_File">
     <div class="UNSTABLE_File__preview">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+        <use href="/assets/icons/svg/sprite.svg#file" />
       </svg>
     </div>
     <div class="UNSTABLE_File__content">
@@ -184,7 +184,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
         aria-label="Edit file name Document.pdf"
       >
         <svg class="Icon" width="16" height="16" aria-hidden="true">
-          <use xlink:href="/assets/icons/svg/sprite.svg#edit" />
+          <use href="/assets/icons/svg/sprite.svg#edit" />
         </svg>
       </button>
       <button
@@ -193,7 +193,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
         aria-label="Remove file Document.pdf from list"
       >
         <svg class="Icon" width="16" height="16" aria-hidden="true">
-          <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+          <use href="/assets/icons/svg/sprite.svg#close" />
         </svg>
       </button>
     </div>
@@ -212,7 +212,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
         <div class="HelperText">
           <div>
             <svg class="Icon animation-spin-clockwise" width="16" height="16" aria-hidden="true">
-              <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
+              <use href="/assets/icons/svg/sprite.svg#spinner" />
             </svg>
             <span>Uploading your file…</span>
           </div>
@@ -225,7 +225,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
       aria-label="Remove file vacation-photo.jpg from list"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+        <use href="/assets/icons/svg/sprite.svg#close" />
       </svg>
     </button>
   </li>
@@ -234,7 +234,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
   <li class="UNSTABLE_File has-success">
     <div class="UNSTABLE_File__preview">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#file" />
+        <use href="/assets/icons/svg/sprite.svg#file" />
       </svg>
     </div>
     <div class="UNSTABLE_File__content">
@@ -244,7 +244,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
         </span>
         <div class="ValidationText ValidationText--success">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
-            <use xlink:href="/assets/icons/svg/sprite.svg#success" />
+            <use href="/assets/icons/svg/sprite.svg#success" />
           </svg>
           <div>File uploaded successfully</div>
         </div>
@@ -256,7 +256,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
       aria-label="Remove file report-2024.xlsx from list"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+        <use href="/assets/icons/svg/sprite.svg#close" />
       </svg>
     </button>
   </li>

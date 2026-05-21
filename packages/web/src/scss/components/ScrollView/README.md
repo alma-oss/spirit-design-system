@@ -173,7 +173,7 @@ Notes:
       aria-label="Scroll up"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-up" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-up" />
       </svg>
     </button>
     <button
@@ -182,7 +182,7 @@ Notes:
       aria-label="Scroll down"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-down" />
       </svg>
     </button>
   </div>
@@ -206,7 +206,7 @@ Notes:
       aria-label="Scroll left"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-left" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-left" />
       </svg>
     </button>
     <button
@@ -215,7 +215,7 @@ Notes:
       aria-label="Scroll right"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
-        <use xlink:href="/assets/icons/svg/sprite.svg#chevron-right" />
+        <use href="/assets/icons/svg/sprite.svg#chevron-right" />
       </svg>
     </button>
   </div>
