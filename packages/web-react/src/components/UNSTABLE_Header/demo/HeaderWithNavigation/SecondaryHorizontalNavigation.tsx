@@ -24,7 +24,7 @@ const SecondaryHorizontalNavigation: FunctionComponent<SecondaryHorizontalNaviga
       </Button>
     </NavigationItem>
     <NavigationItem alignmentY="center" hideOn={['mobile', 'tablet']}>
-      <NavigationAvatar avatarContent={<Icon name="profile" boxSize={20} />} aria-label="Profile of Jiří Bárta">
+      <NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta">
         <Text elementType="span" size="small" emphasis="semibold">
           My Account
         </Text>

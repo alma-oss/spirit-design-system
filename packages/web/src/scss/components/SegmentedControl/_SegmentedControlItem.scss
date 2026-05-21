@@ -13,6 +13,8 @@
 @use 'tools';
 
 .SegmentedControlItem__label {
+    --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$item-icon-size};
+
     @include typography.generate(theme.$item-label-typography);
 
     position: relative;

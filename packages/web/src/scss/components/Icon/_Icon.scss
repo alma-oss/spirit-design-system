@@ -1,51 +1,25 @@
 // 1. Prevent shrinking when Icon is inside a flex container
-// 2. Set the icon size according to the button's size
-//    The size should be passed from the parent component, but with the current deprecated selector this is not possible.
-//    After the BC, only the '.Icon' selector will remain.
-// 3. Size of the icon from parent component
 
 @use '@tokens' as tokens;
 @use '../../tools/responsive-properties';
 @use 'theme';
 @use 'tools';
 
-// 1.
 .Icon {
-    flex-shrink: 0;
-}
-
-// @deprecated We are deprecating attribute `[style*='#{tokens.$css-variable-prefix}icon-size']` selector.
-// We will remove this attribute selectors and the `:is(…)` selector in the next major version.
-// 2.
-.Icon[style*='#{tokens.$css-variable-prefix}icon-size'] {
     @include responsive-properties.create-cascade(
         $property: 'width',
         $input-custom-property-base-name: '#{tokens.$css-variable-prefix}icon-size',
         $breakpoints: theme.$breakpoints,
-        $fallback-value: 'fit-content'
+        $fallback-value: var(--#{tokens.$css-variable-prefix}icon-composition-size, fit-content)
     );
     @include responsive-properties.create-cascade(
         $property: 'height',
         $input-custom-property-base-name: '#{tokens.$css-variable-prefix}icon-size',
         $breakpoints: theme.$breakpoints,
-        $fallback-value: 'fit-content'
+        $fallback-value: var(--#{tokens.$css-variable-prefix}icon-composition-size, fit-content)
     );
-}
 
-// 3.
-:is(.Avatar, .Button, .ControlButton, .InputAddon, .TimelineMarker) .Icon {
-    @include responsive-properties.create-cascade(
-        $property: 'width',
-        $input-custom-property-base-name: '#{tokens.$css-variable-prefix}icon-composition-size',
-        $breakpoints: theme.$breakpoints,
-        $fallback-value: 'fit-content'
-    );
-    @include responsive-properties.create-cascade(
-        $property: 'height',
-        $input-custom-property-base-name: '#{tokens.$css-variable-prefix}icon-composition-size',
-        $breakpoints: theme.$breakpoints,
-        $fallback-value: 'fit-content'
-    );
+    flex-shrink: 0; // 1.
 }
 
 @include tools.generate-variants();

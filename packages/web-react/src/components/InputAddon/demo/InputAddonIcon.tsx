@@ -11,7 +11,7 @@ const InputAddonIcon = () => (
     <InputContainer size="medium">
       <input type="search" id="input-addon-search-icon" name="inputAddonSearchIcon" placeholder="Search" />
       <InputAddon elementType="label" htmlFor="input-addon-search-icon">
-        <Icon boxSize={20} name="search" />
+        <Icon name="search" />
         <VisuallyHidden>Use search to find jobs for you</VisuallyHidden>
       </InputAddon>
     </InputContainer>
