@@ -1,0 +1,84 @@
+# 2026-05-15 Spirit Design System Release Notes
+
+📢 🚀 🎉 Ahoy, we have a new release with features and improvements. Here we go.
+
+## General Changes
+
+We've rolled out a **rem-based sizing foundation** across design tokens, `@alma-oss/spirit-web`, and `@alma-oss/spirit-web-react`, so spacing and dimensions scale more naturally with user font settings. If you consume tokens or component styles directly, review layouts after upgrading — values that were expressed in `px` now use `rem`.
+
+We've added **`I18nProvider`** in Web React so you can supply merged translations for localized component copy. **`Picker`** gets richer examples, and we fixed **`ToastContext`** export plus style-utility specificity so custom overrides behave more predictably.
+
+## News in Packages
+
+&nbsp;
+
+📦 **Web React _4.6.1_** `@alma-oss/spirit-web-react`
+
+### Features
+
+- Add `I18nProvider` and translations #DS-2210 ([7a8d1fe](https://github.com/alma-oss/spirit-design-system/commit/7a8d1fe9c14f4c4338dd4eaf0337c7973a02d592))
+- Introduce unstable `Table` component ([2be3ceb](https://github.com/alma-oss/spirit-design-system/commit/2be3ceb47b3ded6f061bcec0c820cb5cadf2d558))
+- Replace px with rem #DS-2392 ([ecd927e](https://github.com/alma-oss/spirit-design-system/commit/ecd927e9c5c6fc6ba54540453b2701c55bba682b))
+
+### Bug Fixes
+
+- Fix type for containerProps #DS-2561 ([99c34aa](https://github.com/alma-oss/spirit-design-system/commit/99c34aa1306645b049266667766dd0ea003ee128))
+- Add disabled class for `ControlButton` when `UNSTABLE_File` is disabled ([a535c53](https://github.com/alma-oss/spirit-design-system/commit/a535c534ed7462fc33387b5982cd3fbf8a2c2f8c))
+- Export `ToastContext` ([d061e48](https://github.com/alma-oss/spirit-design-system/commit/d061e48e5069f877c561cddb38ac48b43c961911))
+- Extend `Table` demos to cover all web demos ([bfb2245](https://github.com/alma-oss/spirit-design-system/commit/bfb2245dc291596613dea835c17e340ca6985db7))
+- Fix invalid Figma Code Connect for various components ([0bf4d87](https://github.com/alma-oss/spirit-design-system/commit/0bf4d87e3f2c1a0a5c81d4bfc561ef2606869e48))
+- Switch specificity of style utilities and escape hatches #DS-2234 ([5d4da74](https://github.com/alma-oss/spirit-design-system/commit/5d4da74cb4eebf781d5dcadb83a5135e635e86f7))
+
+[Full changelog](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.5.0...@alma-oss/spirit-web-react@4.6.1)
+
+&nbsp;
+
+📦 **Web _4.5.0_** `@alma-oss/spirit-web`
+
+### Features
+
+- Introduce unstable `Table` component ([bf13df1](https://github.com/alma-oss/spirit-design-system/commit/bf13df1da1594897786203f058c43fade40a57de))
+- Replace px with rem #DS-2392 ([4fb76e8](https://github.com/alma-oss/spirit-design-system/commit/4fb76e868ae68740dab2338c9fb8293f87092bd8))
+
+### Bug Fixes
+
+- Fix icon in File upload success validation text ([ca9fb28](https://github.com/alma-oss/spirit-design-system/commit/ca9fb28068410fefe656419b7f281f4feb73a6b3))
+
+[Full changelog](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.4.0...@alma-oss/spirit-web@4.5.0)
+
+&nbsp;
+
+📦 **Design Tokens _4.2.0_** `@alma-oss/spirit-design-tokens`
+
+### Features
+
+- Update tokens to rem #DS-2392 ([cb72cc3](https://github.com/alma-oss/spirit-design-system/commit/cb72cc39b51caa8f8a4ff207f299741bfee30ac6))
+
+[Full changelog](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.1.2...@alma-oss/spirit-design-tokens@4.2.0)
+
+## What's Next 🔮
+
+- **UNSTABLE_Combobox / ComboboxPicker**
+  New multi-select combobox with inline filtering for search forms (e.g. job positions, languages, locations), building on the Combobox prototype and web implementation.
+
+- **TextField addons (React)**
+  `TextField` will support `startAddon` / `endAddon` so icons, buttons, and other addons can sit inside the field, aligned with the web `InputAddon` API.
+
+- **Form fields — outline variant**
+  Box fields (`TextField`, `TextArea`, `Select`, `FileUploader`, `UNSTABLE_Picker`) will get a border-only **outline** variant alongside the default filled style.
+
+&nbsp;
+
+🎯 You can see more of our [quarterly targets outlook in Notion](https://www.notion.so/almacareer/Spirit-DS-team-Quarterly-Goals-878e92d5b74543039e513c0160fb9117).
+
+## We'd Love to Hear Your Feedback
+
+💬 If you have any idea, suggestion or request regarding the newly introduced unstable components, or if you just need help or want to report a bug or wrong behavior, please get in touch with us on our Slack channel: [#spirit-design-system-support_cs_en](https://slack.com/archives/C068XPSDWQN).
+
+&nbsp;
+
+🐙 Everything is available in our [repository on GitHub](https://github.com/alma-oss/spirit-design-system/).
+
+&nbsp;
+
+Thank you for staying with us!
