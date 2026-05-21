@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useClassNamePrefix } from '../../hooks';
-import { type FormFieldContextValue, FormFieldVariants } from '../../types';
+import { type FormFieldContextValue, FormFieldModes } from '../../types';
 
 export interface LabelStyles {
   /** className for the root element */
@@ -8,7 +8,7 @@ export interface LabelStyles {
 }
 
 export function useLabelStyleProps(props: FormFieldContextValue): LabelStyles {
-  const { formFieldVariant, isDisabled, isRequired, isLabelHidden } = props;
+  const { formFieldMode, isDisabled, isRequired, isLabelHidden } = props;
 
   const prefix = useClassNamePrefix('Label');
   const inlineClass = `${prefix}--inline`;
@@ -18,8 +18,8 @@ export function useLabelStyleProps(props: FormFieldContextValue): LabelStyles {
   const hiddenClass = useClassNamePrefix('accessibility-hidden');
 
   const classProps = classNames(prefix, {
-    [inlineClass]: formFieldVariant === FormFieldVariants.INLINE,
-    [itemClass]: formFieldVariant === FormFieldVariants.ITEM,
+    [inlineClass]: formFieldMode === FormFieldModes.INLINE,
+    [itemClass]: formFieldMode === FormFieldModes.ITEM,
     [requiredClass]: isRequired,
     [disabledClass]: isDisabled,
     [hiddenClass]: isLabelHidden,

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useClassNamePrefix } from '../../hooks';
-import { type FormFieldContextValue, FormFieldVariants } from '../../types';
+import { type FormFieldContextValue, FormFieldModes } from '../../types';
 
 export interface HelperTextStyles {
   /** className for the root element */
@@ -8,7 +8,7 @@ export interface HelperTextStyles {
 }
 
 export function useHelperTextStyleProps(props: FormFieldContextValue): HelperTextStyles {
-  const { formFieldVariant, isDisabled } = props;
+  const { formFieldMode, isDisabled } = props;
 
   const prefix = useClassNamePrefix('HelperText');
   const inlineClass = `${prefix}--inline`;
@@ -16,8 +16,8 @@ export function useHelperTextStyleProps(props: FormFieldContextValue): HelperTex
   const disabledClass = `${prefix}--disabled`;
 
   const classProps = classNames(prefix, {
-    [inlineClass]: formFieldVariant === FormFieldVariants.INLINE,
-    [itemClass]: formFieldVariant === FormFieldVariants.ITEM,
+    [inlineClass]: formFieldMode === FormFieldModes.INLINE,
+    [itemClass]: formFieldMode === FormFieldModes.ITEM,
     [disabledClass]: isDisabled,
   });
 

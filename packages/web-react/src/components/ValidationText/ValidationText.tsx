@@ -20,7 +20,7 @@ const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTe
   const contextProps = useContextProps<Partial<FormFieldContextValue>>();
   const propsWithDefaults = {
     ...defaultProps,
-    formFieldVariant: contextProps.formFieldVariant,
+    formFieldMode: contextProps.formFieldMode,
     isDisabled: contextProps.isDisabled,
     ...props,
   };
@@ -31,7 +31,7 @@ const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTe
     registerAria,
     role,
     validationText,
-    formFieldVariant,
+    formFieldMode,
     isDisabled,
     ...restProps
   } = propsWithDefaults;
@@ -39,7 +39,7 @@ const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTe
   const validationIconName = useValidationIcon({ hasValidationStateIcon });
   const validationStateForStyles = hasValidationStateIcon ?? contextProps.validationState;
   const { classProps } = useValidationTextStyleProps({
-    formFieldVariant,
+    formFieldMode,
     hasValidationStateIcon: validationStateForStyles,
     isDisabled,
   });

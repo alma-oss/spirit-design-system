@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
-import { FormFieldVariants, type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
+import { FormFieldModes, type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
 import { HelperText } from '../HelperText';
 import { InputDetails } from '../InputDetails';
 import { Label } from '../Label';
@@ -42,7 +42,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
   return (
     <PropsProvider
       value={{
-        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
+        formFieldMode: isItem ? FormFieldModes.ITEM : FormFieldModes.INLINE,
         isDisabled,
         isLabelHidden,
         isRequired,
