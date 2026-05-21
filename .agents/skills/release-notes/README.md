@@ -1,6 +1,6 @@
 # Release Notes Skill
 
-Generates a Slack Canvas–ready release notes document after each lerna publish. Reads CHANGELOG.md files, synthesizes a human-readable summary, pulls upcoming work from Jira, and writes the result to `.release-notes/`.
+Generates a Slack Canvas–ready release notes document after each lerna publish. Reads CHANGELOG.md files, synthesizes a human-readable summary, pulls upcoming work from Jira, and writes the result to `docs/release-notes/`.
 
 ## Usage
 
@@ -12,7 +12,7 @@ Run after a successful `yarn release` / lerna publish. No arguments needed — t
 
 ## Output
 
-The skill writes to `.release-notes/release-notes-YYYY-MM-DD.md` (gitignored). The file uses standard Markdown with:
+The skill writes to `docs/release-notes/YYYY-MM-DD.md` (version-controlled; see [docs/release-notes on GitHub](https://github.com/alma-oss/spirit-design-system/tree/main/docs/release-notes)). The file uses standard Markdown with:
 
 - `#` / `##` / `###` headers for document structure
 - `**bold**` for package names, What's Next headings, and prop names
@@ -62,7 +62,7 @@ The file will be parsed into native Canvas blocks with proper formatting.
 | 5    | Synthesizes a multi-paragraph General Changes summary in the team's tone of voice                         |
 | 6    | Fetches upcoming work from the active and next Jira sprint (project: DS)                                  |
 | 7    | Assembles the full document                                                                               |
-| 8    | Writes to `.release-notes/release-notes-YYYY-MM-DD.md`                                                    |
+| 8    | Writes to `docs/release-notes/YYYY-MM-DD.md`                                                              |
 
 ## Symlink Setup
 
