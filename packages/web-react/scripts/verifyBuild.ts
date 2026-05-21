@@ -82,6 +82,34 @@ for (const exportCheck of exportsToCheck) {
   }
 }
 
+// Check all exports[*].types paths from package.json
+log('\n🗂  Verifying exports subpath type declarations...');
+const exportsMap: Record<string, Record<string, string> | string> = packageJson.exports ?? {};
+const missingTypePaths: string[] = [];
+let checkedCount = 0;
+
+for (const [exportKey, exportValue] of Object.entries(exportsMap)) {
+  if (typeof exportValue === 'object' && exportValue.types) {
+    checkedCount += 1;
+    const typesPath = exportValue.types.replace(/^\.\//, '');
+    const fullTypesPath = join(DIST_DIR, '..', typesPath);
+
+    if (!existsSync(fullTypesPath)) {
+      missingTypePaths.push(`${exportKey} → ${exportValue.types}`);
+    }
+  }
+}
+
+if (missingTypePaths.length === 0) {
+  logInfo(`✓ All ${checkedCount} subpath type declarations present`);
+} else {
+  logError(`✕ ${missingTypePaths.length} of ${checkedCount} subpath type declarations missing:`);
+  for (const missing of missingTypePaths) {
+    logError(`  ✕ ${missing}`);
+  }
+  errors += missingTypePaths.length;
+}
+
 // Summary
 log(`\n${'='.repeat(50)}`);
 if (errors === 0) {
