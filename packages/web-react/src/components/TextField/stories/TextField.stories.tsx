@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { Sizes, ValidationStates } from '../../../constants';
+import { FillVariants, Sizes, ValidationStates } from '../../../constants';
 import { ControlButton } from '../../ControlButton';
 import { Icon } from '../../Icon';
 import { InputAddon } from '../../InputAddon';
@@ -97,6 +97,13 @@ const meta: Meta<typeof TextField> = {
         defaultValue: { summary: Sizes.MEDIUM },
       },
     },
+    variant: {
+      control: 'select',
+      options: [...Object.values(FillVariants), undefined],
+      table: {
+        defaultValue: { summary: FillVariants.FILL },
+      },
+    },
     startAddon: {
       control: 'select',
       options: [undefined, 'search icon', 'username prefix'],
@@ -165,6 +172,7 @@ const meta: Meta<typeof TextField> = {
     pattern: undefined,
     placeholder: 'Placeholder',
     size: Sizes.MEDIUM,
+    variant: FillVariants.FILL,
     type: 'text',
     validationState: undefined,
     validationText: 'Validation text',

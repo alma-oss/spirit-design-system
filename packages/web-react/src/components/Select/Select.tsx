@@ -24,6 +24,7 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
     isRequired,
     label,
     size = Sizes.MEDIUM,
+    variant,
     validationState,
     validationText,
     ...restProps
@@ -42,6 +43,7 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
         isLabelHidden,
         isRequired,
         size,
+        variant,
         validationState,
       }}
     >

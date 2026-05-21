@@ -11,7 +11,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { Sizes } from '../../../constants';
+import { FillVariants, Sizes } from '../../../constants';
 import Select from '../Select';
 
 jest.mock('../../../hooks/useIcon');
@@ -63,6 +63,18 @@ describe('Select', () => {
     const inputContainer = screen.getByRole('combobox').parentElement;
 
     expect(inputContainer?.getAttribute('class')).toContain(size);
+  });
+
+  it('should pass variant to InputContainer', () => {
+    render(
+      <Select id="select-variant" label="Label" variant={FillVariants.OUTLINE}>
+        {selectChild}
+      </Select>,
+    );
+
+    const inputContainer = screen.getByRole('combobox').parentElement;
+
+    expect(inputContainer).toHaveClass('InputContainer--outline');
   });
 
   it('should have label', () => {
