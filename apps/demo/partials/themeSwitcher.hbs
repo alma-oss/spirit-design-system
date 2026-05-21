@@ -1,6 +1,6 @@
 <div>
   <label for="{{id}}" class="Label {{#if isLabelHidden }}accessibility-hidden{{/if}}">Theme</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="{{id}}" name="theme" onchange="switchTheme(event)" autocomplete="off">
       {{#each @themes as |theme|}}
         <option value="{{theme.id}}">{{theme.name}}</option>

@@ -16,7 +16,7 @@ describe('AutoResize', () => {
     fixtureEl.innerHTML = `
       <div data-spirit-toggle="autoResize">
         <label for="textarea" class="Label">Label</label>
-        <div class="InputContainer InputContainer--medium">
+        <div class="InputContainer InputContainer--fill InputContainer--medium">
           <textarea id="textarea">Test content</textarea>
         </div>
       </div>
