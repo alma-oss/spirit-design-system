@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { Sizes, ValidationStates } from '../../../constants';
+import { FillVariants, Sizes, ValidationStates } from '../../../constants';
 import { useSelectionState, useToggle } from '../../../hooks';
 import { UNSTABLE_PICKER_DOCS_DEMO_WRAPPER_CLASSNAME } from '../demo/constants';
 import { renderPickerLanguageItems } from '../demo/PickerLanguageItems';
@@ -77,6 +77,11 @@ const meta: Meta<typeof UNSTABLE_Picker> = {
       description:
         'The validation text. Only visible if validationState is set. Use a string `"foo"` for single validation text or an array for multiple validation texts `["foo", "bar"]`.',
     },
+    variant: {
+      control: 'select',
+      options: [...Object.values(FillVariants), undefined],
+      table: { defaultValue: { summary: FillVariants.FILL } },
+    },
   },
   args: {
     addButtonLabel: 'Add',
@@ -98,6 +103,7 @@ const meta: Meta<typeof UNSTABLE_Picker> = {
     tagDescriptionText: 'Press Delete or Backspace to remove',
     validationState: undefined,
     validationText: 'Validation message',
+    variant: FillVariants.FILL,
   },
 };
 
@@ -105,9 +111,10 @@ export default meta;
 type Story = StoryObj<typeof UNSTABLE_Picker>;
 
 const PlaygroundStory = (args: React.ComponentProps<typeof UNSTABLE_Picker>) => {
+  const { selectionMode } = args;
   const { selectedKeys, setSelectedKeys } = useSelectionState({
     defaultSelectedKeys: [],
-    selectionMode: args.selectionMode,
+    selectionMode,
   });
   const [isOpen, onToggle] = useToggle(false);
 

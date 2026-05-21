@@ -10,7 +10,7 @@ import {
   restPropsTest,
   stylePropsTest,
 } from '@local/tests';
-import { ValidationStates } from '../../../constants';
+import { FillVariants, ValidationStates } from '../../../constants';
 import { useToggle } from '../../../hooks';
 import {
   type SpiritUnstablePickerRef,
@@ -55,6 +55,13 @@ describe('UNSTABLE_Picker', () => {
     render(<TestPicker validationState={state} />);
 
     expect(screen.getByRole('group', { name: 'Languages' })).toHaveClass(`InputContainer--${state}`);
+  });
+
+  it('applies outline variant class to InputContainer', () => {
+    render(<TestPicker variant={FillVariants.OUTLINE} />);
+
+    expect(screen.getByRole('group', { name: 'Languages' })).toHaveClass('InputContainer--outline');
+    expect(screen.getByRole('group', { name: 'Languages' })).not.toHaveClass('InputContainer--fill');
   });
 
   formFieldLabelContextPropsTest({

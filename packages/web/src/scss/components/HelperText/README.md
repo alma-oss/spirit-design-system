@@ -7,7 +7,7 @@ HelperText is a component used to display helper text for form field components.
 ```html
 <div>
   <label for="text-field-helper-text" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-helper-text" name="helperText" placeholder="Placeholder" />
   </div>
   <div class="HelperText">Helper text</div>
@@ -70,7 +70,7 @@ Use the `HelperText--disabled` modifier class for disabled helper text. Add it w
 ```html
 <div>
   <label for="text-field-disabled" class="Label Label--disabled">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--disabled">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <input type="text" id="text-field-disabled" name="disabled" placeholder="Placeholder" disabled />
   </div>
   <div class="HelperText HelperText--disabled">Helper text</div>
@@ -84,7 +84,7 @@ When using HelperText with form inputs, associate it with the input using the `a
 ```html
 <div>
   <label for="text-field-helper-text" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input
       type="text"
       id="text-field-helper-text"

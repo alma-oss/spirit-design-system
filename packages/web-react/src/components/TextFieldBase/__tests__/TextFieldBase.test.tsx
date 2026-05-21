@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { ariaAttributesTest, requiredPropsTest, validHtmlAttributesTest } from '@local/tests';
-import { Sizes } from '../../../constants';
+import { FillVariants, Sizes } from '../../../constants';
 import { type TextFieldType } from '../../../types';
 import { InputAddon } from '../../InputAddon';
 import TextFieldBase from '../TextFieldBase';
@@ -13,6 +13,16 @@ describe('TextFieldBase', () => {
   validHtmlAttributesTest(TextFieldBase);
 
   ariaAttributesTest(TextFieldBase);
+
+  it('should pass variant to InputContainer', async () => {
+    render(<TextFieldBase id="textfield-base-variant" label="Label" variant={FillVariants.OUTLINE} />);
+
+    await waitFor(() => {
+      const inputContainer = screen.getByLabelText('Label').parentElement;
+
+      expect(inputContainer).toHaveClass('InputContainer--outline');
+    });
+  });
 
   it.each([Object.values(Sizes)])('should render size %s', async (size) => {
     render(<TextFieldBase id="textfield-base" label="Label" size={size} />);

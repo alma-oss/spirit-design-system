@@ -1,10 +1,61 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { FillVariants } from '../../../constants';
 import { PropsProvider } from '../../../context';
 import InputContainer from '../InputContainer';
 
 describe('InputContainer', () => {
+  it('should apply fill variant class by default', () => {
+    render(
+      <InputContainer>
+        <span>Content</span>
+      </InputContainer>,
+    );
+
+    expect(screen.getByText('Content').parentElement).toHaveClass(
+      'InputContainer',
+      'InputContainer--fill',
+      'InputContainer--medium',
+    );
+  });
+
+  it('should apply variant class from prop', () => {
+    render(
+      <InputContainer variant={FillVariants.OUTLINE}>
+        <span>Content</span>
+      </InputContainer>,
+    );
+
+    expect(screen.getByText('Content').parentElement).toHaveClass('InputContainer', 'InputContainer--outline');
+    expect(screen.getByText('Content').parentElement).not.toHaveClass('InputContainer--fill');
+  });
+
+  it('should apply variant class from context when prop is not provided', () => {
+    render(
+      <PropsProvider value={{ variant: FillVariants.OUTLINE }}>
+        <InputContainer>
+          <span>Content</span>
+        </InputContainer>
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText('Content').parentElement).toHaveClass('InputContainer--outline');
+  });
+
+  it('should prefer direct variant prop over context variant', () => {
+    render(
+      <PropsProvider value={{ variant: FillVariants.OUTLINE }}>
+        <InputContainer variant={FillVariants.FILL}>
+          <span>Content</span>
+        </InputContainer>
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText('Content').parentElement).toHaveClass('InputContainer--fill');
+    expect(screen.getByText('Content').parentElement).not.toHaveClass('InputContainer--outline');
+  });
+
   it('should apply size class from prop', () => {
     render(
       <InputContainer size="small">
@@ -12,7 +63,11 @@ describe('InputContainer', () => {
       </InputContainer>,
     );
 
-    expect(screen.getByText('Content').parentElement).toHaveClass('InputContainer', 'InputContainer--small');
+    expect(screen.getByText('Content').parentElement).toHaveClass(
+      'InputContainer',
+      'InputContainer--fill',
+      'InputContainer--small',
+    );
   });
 
   it('should apply size class from context when prop is not provided', () => {

@@ -23,9 +23,10 @@
     display: flex;
     align-items: stretch;
     width: 100%;
-    color: theme.$color;
-    border: theme.$border-width theme.$border-style theme.$border-color;
-    background-color: theme.$background-color;
+    color: var(--#{tokens.$css-variable-prefix}input-container-color);
+    border: theme.$border-width theme.$border-style;
+    border-color: var(--#{tokens.$css-variable-prefix}input-container-border-color);
+    background-color: var(--#{tokens.$css-variable-prefix}input-container-background-color);
 
     &:has(> :where([size])) {
         width: fit-content;
@@ -55,13 +56,13 @@
 
     @media (hover: hover) {
         &:not(.InputContainer--disabled):hover {
-            background-color: theme.$background-color-state-hover;
+            background-color: var(--#{tokens.$css-variable-prefix}input-container-background-color-state-hover);
         }
     }
 
     &:not(.InputContainer--disabled):has(> :is(input, select, textarea):active),
     &:not(.InputContainer--disabled):has(> :is(input, select, textarea):focus-within) {
-        background-color: theme.$background-color-state-active;
+        background-color: var(--#{tokens.$css-variable-prefix}input-container-background-color-state-active);
     }
 
     @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
@@ -93,11 +94,11 @@
     &:last-child {
         padding-inline-end: theme.$input-padding-x;
     }
+}
 
-    &::placeholder {
-        color: theme.$input-placeholder-color;
-        opacity: 1;
-    }
+.InputContainer > :is(input, textarea)::placeholder {
+    color: var(--#{tokens.$css-variable-prefix}input-container-input-placeholder-color);
+    opacity: 1;
 }
 
 .InputContainer > textarea {
@@ -147,6 +148,11 @@
     $class-name: 'InputContainer',
     $dictionary-values: theme.$size-dictionary,
     $config: theme.$size-config
+);
+@include dictionaries.generate-variants(
+    $class-name: 'InputContainer',
+    $dictionary-values: theme.$variant-dictionary,
+    $config: theme.$variant-config
 );
 
 @each $validation-state-name, $validation-state-value in theme.$validation-states {

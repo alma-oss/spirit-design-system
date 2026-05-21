@@ -159,6 +159,7 @@ such as a `button` or link.
 | `validationState`   | [Validation dictionary][dictionary-validation]                               | —        | ✕        | Type of validation state                                                |
 | `validationText`    | \[`ReactNode` \| `ReactNode[]`]                                              | —        | ✕        | Validation text                                                         |
 | `value`             | `string`                                                                     | —        | ✕        | Input value \*                                                          |
+| `variant`           | [Fill Variants dictionary][dictionary-variant]                               | `fill`   | ✕        | InputContainer variant                                                  |
 
 (\*) When `value` is provided, the component acts as an controlled component and requires an native `onChange` handler to update the value. For more information, please read [React documentation][react-input]
 
@@ -190,6 +191,7 @@ For detailed information see [TextField][readme-web-textfield] component.
 [autocomplete-attr]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[dictionary-variant]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#variant
 [react-input]: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches

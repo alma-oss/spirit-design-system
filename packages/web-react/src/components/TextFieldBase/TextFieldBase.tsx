@@ -33,6 +33,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
     isRequired,
     label,
     size = Sizes.MEDIUM,
+    variant,
     startAddon,
     type,
     validationState,
@@ -101,6 +102,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
         isLabelHidden,
         isRequired,
         size,
+        variant,
         validationState,
       }}
     >
