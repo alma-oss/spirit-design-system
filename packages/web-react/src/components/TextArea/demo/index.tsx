@@ -14,12 +14,16 @@ import TextAreaRequired from './TextAreaRequired';
 import TextAreaSizes from './TextAreaSizes';
 import TextAreaValidation from './TextAreaValidation';
 import TextAreaValidationWithIcon from './TextAreaValidationWithIcon';
+import TextAreaVariants from './TextAreaVariants';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <TextAreaDefault />
+      </DocsSection>
+      <DocsSection title="Variants">
+        <TextAreaVariants />
       </DocsSection>
       <DocsSection title="Sizes">
         <TextAreaSizes />

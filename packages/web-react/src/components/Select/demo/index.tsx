@@ -12,12 +12,16 @@ import SelectSimple from './SelectSimple';
 import SelectSizes from './SelectSizes';
 import SelectValidation from './SelectValidation';
 import SelectValidationWithIcon from './SelectValidationWithIcon';
+import SelectVariants from './SelectVariants';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <SelectSimple />
+      </DocsSection>
+      <DocsSection title="Variants">
+        <SelectVariants />
       </DocsSection>
       <DocsSection title="Sizes">
         <SelectSizes />
