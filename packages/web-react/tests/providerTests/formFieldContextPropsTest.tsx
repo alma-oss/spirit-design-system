@@ -77,7 +77,6 @@ const DEFAULT_HELPER_TEXT = 'Helper';
 
 const DEFAULT_VALIDATION_INLINE_PROPS: TestProps = { validationState: 'danger' };
 const DEFAULT_VALIDATION_DISABLED_PROPS: TestProps = { isDisabled: true, validationState: 'danger' };
-const DEFAULT_VALIDATION_ITEM_PROPS: TestProps = { isItem: true, validationState: 'danger' };
 const DEFAULT_VALIDATION_STATE_CLASS = 'ValidationText--danger';
 const DEFAULT_VALIDATION_STATE_PROPS: TestProps = { validationState: 'danger' };
 const DEFAULT_VALIDATION_TEXT = 'Invalid';
@@ -255,34 +254,19 @@ export const formFieldValidationTextContextPropsTest = ({
   disabledProps = DEFAULT_VALIDATION_DISABLED_PROPS,
   includeDisabled = true,
   includeInline = false,
-  includeItem = false,
   inlineProps = DEFAULT_VALIDATION_INLINE_PROPS,
-  itemProps,
   labelText = DEFAULT_LABEL_TEXT,
   renderComponent,
   stateClass = DEFAULT_VALIDATION_STATE_CLASS,
   stateProps = DEFAULT_VALIDATION_STATE_PROPS,
   validationText = DEFAULT_VALIDATION_TEXT,
 }: FormFieldValidationTextContextPropsTestConfig) => {
-  const resolvedItemProps = itemProps ?? DEFAULT_VALIDATION_ITEM_PROPS;
-
   describe('validation text context propagation', () => {
     if (includeInline) {
       it('should apply inline class to nested ValidationText', () => {
         expectClassForProps({
           expectedClassName: 'ValidationText--inline',
           props: { label: labelText, validationText, ...inlineProps },
-          renderComponent,
-          text: validationText,
-        });
-      });
-    }
-
-    if (includeItem) {
-      it('should apply item class to nested ValidationText', () => {
-        expectClassForProps({
-          expectedClassName: 'ValidationText--item',
-          props: { label: labelText, validationText, ...resolvedItemProps },
           renderComponent,
           text: validationText,
         });

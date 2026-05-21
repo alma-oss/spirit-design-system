@@ -20,7 +20,6 @@ export function useValidationTextStyleProps(props: UseValidationTextStylePropsPr
   const successClass = `${prefix}--success`;
   const disabledClass = `${prefix}--disabled`;
   const inlineClass = `${prefix}--inline`;
-  const itemClass = `${prefix}--item`;
 
   const classProps = classNames(prefix, {
     [dangerClass]: hasValidationStateIcon === 'danger',
@@ -28,7 +27,6 @@ export function useValidationTextStyleProps(props: UseValidationTextStylePropsPr
     [successClass]: hasValidationStateIcon === 'success',
     [disabledClass]: isDisabled,
     [inlineClass]: formFieldMode === FormFieldModes.INLINE,
-    [itemClass]: formFieldMode === FormFieldModes.ITEM,
   });
 
   return {

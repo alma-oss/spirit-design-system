@@ -43,14 +43,4 @@ describe('useValidationTextStyleProps', () => {
 
     expect(result.current.classProps).toContain('ValidationText--inline');
   });
-
-  it('should return item class when formFieldMode is item', () => {
-    const { result } = renderHook(() =>
-      useValidationTextStyleProps({
-        formFieldMode: FormFieldModes.ITEM,
-      }),
-    );
-
-    expect(result.current.classProps).toContain('ValidationText--item');
-  });
 });

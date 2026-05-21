@@ -53,7 +53,6 @@ and [escape hatches][readme-escape-hatches].
 ## Modes
 
 - **inline**: Used by Checkbox, Radio, and Toggle (non-item).
-- **item**: Used by Checkbox or Radio in item mode, or when `formFieldMode="item"` is passed directly.
 
 [aria-alert-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/alert_role
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
