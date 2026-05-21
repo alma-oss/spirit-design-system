@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { Sizes, ValidationStates } from '../../../constants';
+import { FillVariants, Sizes, ValidationStates } from '../../../constants';
 import ReadMe from '../README.md?raw';
 import { TextArea } from '..';
 
@@ -94,6 +94,13 @@ const meta: Meta<typeof TextArea> = {
         defaultValue: { summary: Sizes.MEDIUM },
       },
     },
+    variant: {
+      control: 'select',
+      options: [...Object.values(FillVariants), undefined],
+      table: {
+        defaultValue: { summary: FillVariants.FILL },
+      },
+    },
     validationState: {
       control: 'select',
       options: [...Object.values(ValidationStates), undefined],
@@ -127,6 +134,7 @@ const meta: Meta<typeof TextArea> = {
     placeholder: 'Placeholder',
     rows: undefined,
     size: Sizes.MEDIUM,
+    variant: FillVariants.FILL,
     validationState: undefined,
     validationText: 'Validation text',
     value: undefined,

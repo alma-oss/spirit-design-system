@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { type LabelProps } from './label';
 import {
   type ChildrenProps,
+  type FillVariantDictionaryType,
   type HelperTextProps,
   type InputBaseProps,
   type RequiredProps,
@@ -29,7 +30,10 @@ type TextAreaBaseProps<S = void> = TextAreaElementBaseProps &
     isAutoResizing?: boolean;
     /** Label for the textarea, which provides context or description for the field */
     label: ReactNode;
+    /** The size of the textarea */
     size?: SizesDictionaryType<S>;
+    /** Fill variant of the textarea */
+    variant?: FillVariantDictionaryType;
   };
 
 type TextAreaCounterOffProps = {

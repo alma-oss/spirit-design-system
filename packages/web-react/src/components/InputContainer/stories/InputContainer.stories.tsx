@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { Sizes, ValidationStates } from '../../../constants';
+import { FillVariants, Sizes, ValidationStates } from '../../../constants';
 import ReadMe from '../README.md?raw';
 import { InputContainer } from '..';
 
@@ -44,6 +44,13 @@ const meta: Meta<typeof InputContainer> = {
         defaultValue: { summary: Sizes.MEDIUM },
       },
     },
+    variant: {
+      control: 'select',
+      options: [undefined, ...Object.values(FillVariants)],
+      table: {
+        defaultValue: { summary: FillVariants.FILL },
+      },
+    },
     validationState: {
       control: 'select',
       options: [undefined, ...Object.values(ValidationStates)],
@@ -53,6 +60,7 @@ const meta: Meta<typeof InputContainer> = {
     children: 'Input',
     isDisabled: false,
     size: Sizes.MEDIUM,
+    variant: FillVariants.FILL,
     validationState: undefined,
   },
 };
