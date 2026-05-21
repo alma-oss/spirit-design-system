@@ -186,7 +186,7 @@ const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
   return (
     <PropsProvider
       value={{
-        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
+        formFieldMode: isItem ? FormFieldModes.ITEM : FormFieldModes.INLINE,
         isDisabled,
         isLabelHidden,
         isRequired,
