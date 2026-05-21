@@ -41,7 +41,7 @@ const SegmentedControlItemsFactory: FunctionComponent<SegmentedControlItemsFacto
         <SegmentedControlItem key={value} id={`segmentedControl-${name}-${index + 1}`} value={value}>
           {contentVariant !== 'label-only' && (
             <>
-              <Icon name="file" boxSize={20} />
+              <Icon name="file" />
               <VisuallyHidden>Label</VisuallyHidden>
             </>
           )}

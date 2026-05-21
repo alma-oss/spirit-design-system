@@ -119,14 +119,14 @@ export const Playground: Story = {
         case 'label with icon':
           return (
             <>
-              <Icon name="file" boxSize={20} />
+              <Icon name="file" />
               {label}
             </>
           );
         case 'icon only':
           return (
             <>
-              <Icon name="file" boxSize={20} />
+              <Icon name="file" />
               <VisuallyHidden>{label}</VisuallyHidden>
             </>
           );
