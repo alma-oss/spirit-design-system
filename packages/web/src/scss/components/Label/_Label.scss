@@ -41,6 +41,7 @@
     @include pseudo-element.stretch();
 
     grid-column: 2; // 3.
+    cursor: cursors.$form-fields;
 }
 
 .Label--disabled {

@@ -16,14 +16,15 @@
     color: theme.$color-state-disabled;
 }
 
+.HelperText--inline,
+.HelperText--item {
+    position: relative; // 1.
+    z-index: 1; // 1.
+}
+
 .HelperText--item {
     @include typography.generate(theme.$item-typography);
 
     grid-column: 2;
     grid-row: 2;
-}
-
-.HelperText--inline {
-    position: relative; // 1.
-    z-index: 1; // 1.
 }

@@ -32,13 +32,14 @@
     color: theme.$color-state-disabled;
 }
 
+.ValidationText--inline,
 .ValidationText--item {
-    @include typography.generate(theme.$item-typography);
-}
-
-.ValidationText--inline {
     position: relative; // 1.
     z-index: 1; // 1.
+}
+
+.ValidationText--item {
+    @include typography.generate(theme.$item-typography);
 }
 
 // 2.
