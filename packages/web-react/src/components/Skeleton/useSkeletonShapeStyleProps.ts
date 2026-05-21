@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { type CSSProperties } from 'react';
 import { useClassNamePrefix } from '../../hooks';
 import { type SkeletonShapeBaseProps } from '../../types';
+import { pxToRem } from '../../utils';
 
 interface CustomizedCSSProperties extends CSSProperties {
   [key: string]: string | undefined | number;
@@ -13,7 +14,7 @@ const setCustomDimension = (prefix: string, size: number | undefined): Customize
 
   const propName = `--${prefix}`;
 
-  return { [propName]: `${size?.toString()}px` } as CustomizedCSSProperties;
+  return { [propName]: pxToRem(size) } as CustomizedCSSProperties;
 };
 
 const setCustomBorderRadius = (

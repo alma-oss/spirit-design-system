@@ -15,6 +15,7 @@
 - [Testing](#testing)
 - [Styling](#styling)
 - [Types Generated From Design Tokens](#types-generated-from-design-tokens)
+- [Utilities](#utilities)
 - [Controlled vs Uncontrolled Components](#controlled-vs-uncontrolled-components)
 - [Deprecations](#deprecations)
 - [Examples](#examples)
@@ -365,6 +366,24 @@ are doing so at your own risk.
 
 Please consult additional styling with [web package documentation][web-pkg-rebrand].
 
+## Utilities
+
+### `pxToRem()`
+
+`pxToRem` converts a pixel value to a `rem` string. It uses the Spirit base font size (16 px by
+default) and trims trailing decimal zeros.
+
+```ts
+import { pxToRem } from '@alma-oss/spirit-web-react/utils';
+
+pxToRem(24); // → '1.5rem'
+pxToRem('16px'); // → '1rem'
+pxToRem(14, { baseFontSize: 16, decimals: 2 }); // → '0.88rem'
+```
+
+👉 See the [px → rem conversion guide][px-to-rem-guide] for full details, including the SCSS
+equivalent and how base font sizes relate to design tokens.
+
 ## Controlled vs Uncontrolled Components
 
 - A [Controlled Component][react-controlled] is one that takes its current
@@ -476,6 +495,7 @@ See the [LICENSE][license] file for information.
 [figma-skill]: https://skills.sh/alma-oss/spirit-design-system/figma-to-spirit
 [license]: LICENSE.md
 [next-pages-router-push]: https://nextjs.org/docs/pages/api-reference/functions/use-router#routerpush
+[px-to-rem-guide]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/px-to-rem.md
 [react-controlled]: https://reactjs.org/docs/forms.html#controlled-components
 [react-uncontrolled]: https://reactjs.org/docs/uncontrolled-components.html
 [skills-docs]: https://skills.sh/docs

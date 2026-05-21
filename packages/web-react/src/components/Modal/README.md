@@ -318,16 +318,29 @@ limit.
 You can set a custom preferred height of ModalDialog using the `height` prop.
 The prop accepts any valid CSS length value, either as a string or an object with breakpoints as keys.
 
+👉 We recommend using `rem` values so the modal height scales with the user's root font-size preference.
+`px` values are also accepted but ignore the user's font-size setting.
+
+If you only have a pixel value at hand, use the [`pxToRem` utility][pxtorem-utility] to convert it:
+
+```tsx
+import { pxToRem } from '@alma-oss/spirit-web-react/utils';
+
+<ModalDialog isScrollable height={pxToRem(500)}>
+  …
+</ModalDialog>;
+```
+
 The height property falls back to the previous breakpoint using the mobile-first approach. For example, if you set
-`height={{ tablet: '500px' }}` while not setting the `desktop` breakpoint, the value will be used for
+`height={{ tablet: '31.25rem' }}` while not setting the `desktop` breakpoint, the value will be used for
 both tablet and desktop screens. The single non-object value will be used for all breakpoints.
 This is useful for Modals with dynamic content, e.g. a list of items that can be added or removed, or a multistep wizard.
 
 ```tsx
-<ModalDialog isScrollable height="500px">
+<ModalDialog isScrollable height="31.25rem">
   …
 </ModalDialog>
-<ModalDialog isScrollable height={{ mobile: '300px', tablet: '500px', desktop: '600px' }}>
+<ModalDialog isScrollable height={{ mobile: '18.75rem', tablet: '31.25rem', desktop: '37.5rem' }}>
   …
 </ModalDialog>
 ```
@@ -339,22 +352,27 @@ the viewport height. See the [Custom Max Height](#custom-max-height) section for
 
 ### Custom Max Height
 
-The default maximum height of a scrollable ModalDialog is **600 px**, as long as it can fit the viewport.
+The default maximum height of a scrollable ModalDialog is **37.5rem (600 px at the default root font size)**,
+as long as it can fit the viewport.
 
 If the viewport is smaller, scrollable ModalDialog will shrink to fit the viewport. In such case, the ModalDialog height
 will calculate as "viewport height (`100dvh`) minus 1100 spacing".
 
 You can use the `maxHeight` prop to override the default maximum height limit.
 
+👉 We recommend using `rem` values so the modal height scales with the user's root font-size preference.
+`px` values are also accepted but ignore the user's font-size setting.
+If you only have a pixel value at hand, use the [`pxToRem` utility][pxtorem-utility] to convert it.
+
 The max height property falls back to the previous breakpoint using the mobile-first approach. For example, if you set
-`maxHeight={{ tablet: '500px' }}` while not setting the `desktop` breakpoint, the value will be used for
+`maxHeight={{ tablet: '31.25rem' }}` while not setting the `desktop` breakpoint, the value will be used for
 both tablet and desktop screens. The single non-object value will be used for all breakpoints.
 
 ```tsx
-<ModalDialog isScrollable maxHeight="700px">
+<ModalDialog isScrollable maxHeight="43.75rem">
   …
 </ModalDialog>
-<ModalDialog isScrollable maxHeight={{ mobile: '500px', tablet: '700px', desktop: '800px' }}>
+<ModalDialog isScrollable maxHeight={{ mobile: '31.25rem', tablet: '43.75rem', desktop: '50rem' }}>
   …
 </ModalDialog>
 ```
@@ -431,6 +449,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 [dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [mdn-article]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article
+[pxtorem-utility]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#pxtorem
 [mdn-dialog-form]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#usage_notes
 [mdn-dialog]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 [mdn-form]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form

@@ -278,6 +278,9 @@ You can set a custom preferred height of ModalDialog using a custom property:
 - `--modal-dialog-height-tablet` for tablet screens and up.
 - `--modal-dialog-height-desktop` for desktop screens and up.
 
+👉 We recommend using `rem` values so the modal height scales with the user's root font-size preference.
+`px` values are also accepted but ignore the user's font-size setting.
+
 The custom properties fall back to the previous breakpoint using the mobile-first approach. For example, if you set
 `--modal-dialog-height-tablet` while leaving `--modal-dialog-height-desktop` unset, the value will be used for
 both tablet and desktop screens.
@@ -287,7 +290,7 @@ This is useful for Modals with dynamic content, e.g. a list of items that can be
 ```html
 <article
   class="ModalDialog ModalDialog--scrollable"
-  style="--modal-dialog-height: 400px; --modal-dialog-height-tablet: 500px; --modal-dialog-height-desktop: 600px;"
+  style="--modal-dialog-height: 25rem; --modal-dialog-height-tablet: 31.25rem; --modal-dialog-height-desktop: 37.5rem;"
 >
   <!-- … -->
 </article>
@@ -300,7 +303,7 @@ the viewport height. See the [Custom Max Height](#custom-max-height) section for
 
 ### Custom Max Height
 
-The default maximum height of a scrollable ModalDialog is **600 px**, as long as it can fit the viewport.
+The default maximum height of a scrollable ModalDialog is **37.5rem (600 px at the default root font size)**, as long as it can fit the viewport.
 
 If the viewport is smaller, scrollable ModalDialog will shrink to fit the viewport. In such case, the ModalDialog height
 will calculate as "viewport height (`100dvh`) minus 1100 spacing".
@@ -311,6 +314,9 @@ You can set a custom preferred height of ModalDialog using a custom property:
 - `--modal-dialog-max-height-tablet` for tablet screens and up.
 - `--modal-dialog-max-height-desktop` for desktop screens and up.
 
+👉 We recommend using `rem` values so the modal height scales with the user's root font-size preference.
+`px` values are also accepted but ignore the user's font-size setting.
+
 The custom properties fall back to the previous breakpoint using the mobile-first approach. For example, if you set
 `--modal-dialog-max-height-tablet` while leaving `--modal-dialog-max-height-desktop` unset, the value will be used for both tablet and
 desktop screens.
@@ -318,7 +324,7 @@ desktop screens.
 ```html
 <article
   class="ModalDialog ModalDialog--scrollable"
-  style="--modal-dialog-max-height: 300px; --modal-dialog-max-height-tablet: 400px; --modal-dialog-max-height-desktop: 500px;"
+  style="--modal-dialog-max-height: 18.75rem; --modal-dialog-max-height-tablet: 25rem; --modal-dialog-max-height-desktop: 31.25rem;"
 >
   <!-- … -->
 </article>
