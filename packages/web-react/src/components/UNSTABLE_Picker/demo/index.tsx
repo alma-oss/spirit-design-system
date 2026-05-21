@@ -16,6 +16,7 @@ import PickerSingle from './PickerSingle';
 import PickerSizes from './PickerSizes';
 import PickerThemes from './PickerThemes';
 import PickerValidationStates from './PickerValidationStates';
+import PickerVariants from './PickerVariants';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
@@ -26,6 +27,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
         </DocsSection>
         <DocsSection title="Themes">
           <PickerThemes />
+        </DocsSection>
+        <DocsSection title="Variants">
+          <PickerVariants />
         </DocsSection>
         <DocsSection title="Sizes" stackAlignment="stretch">
           <PickerSizes />

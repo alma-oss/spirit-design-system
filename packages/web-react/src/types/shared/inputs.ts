@@ -1,6 +1,10 @@
 import type { AriaRole, ElementType, ReactNode } from 'react';
 import { FormFieldModes, type InputPositions } from '../../constants';
-import { type SizesDictionaryType, type ValidationStatesDictionaryType } from './dictionaries';
+import {
+  type FillVariantDictionaryType,
+  type SizesDictionaryType,
+  type ValidationStatesDictionaryType,
+} from './dictionaries';
 
 export type ValidationState = ValidationStatesDictionaryType;
 
@@ -42,6 +46,8 @@ export interface FormFieldContextValue {
   size?: SizesDictionaryType;
   /** Current validation state; passed to ValidationText for styling. */
   validationState?: ValidationState;
+  /** Fill variant of the input for context-aware descendants. */
+  variant?: FillVariantDictionaryType;
 }
 
 export type FormFieldStyleProps = Pick<FormFieldContextValue, 'formFieldMode' | 'isDisabled'>;

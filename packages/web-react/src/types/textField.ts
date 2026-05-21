@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { type LabelProps } from './label';
 import {
   type ChildrenProps,
+  type FillVariantDictionaryType,
   type HelperTextProps,
   type InputBaseProps,
   type PasswordToggleAdornmentProp,
@@ -41,6 +42,8 @@ export interface TextFieldProps<S = void>
   size?: SizesDictionaryType<S>;
   /** The type of text field */
   type?: TextFieldType;
+  /** InputContainer variant (`fill` or `outline`). */
+  variant?: FillVariantDictionaryType;
 }
 
 export interface SpiritTextFieldProps<S = void> extends TextFieldProps<S> {

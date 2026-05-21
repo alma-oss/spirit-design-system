@@ -401,6 +401,7 @@ The trigger uses [Icon][web-react-icon-documentation] (`chevron-down` when close
 | `tagDescriptionText`  | `string`                                                  | i18n `picker.tagDescriptionText`   | ✕        | Hidden text for screen readers (tag removal hint)                                                                                                                      |
 | `validationState`     | [Validation dictionary][dictionary-validation]            | —                                  | ✕        | Validation state                                                                                                                                                       |
 | `validationText`      | `ReactNode` \| `ReactNode[]`                              | —                                  | ✕        | Validation message                                                                                                                                                     |
+| `variant`             | [Fill Variants dictionary][dictionary-variant]            | `fill`                             | ✕        | InputContainer variant                                                                                                                                                 |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -515,6 +516,7 @@ and [escape hatches][readme-escape-hatches].
 [checkbox-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Checkbox/README.md
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[dictionary-variant]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#variant
 [dropdown-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Dropdown/README.md
 [fieldgroup-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FieldGroup/README.md
 [picker-themes-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Picker/demo/PickerThemes.tsx
