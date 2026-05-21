@@ -51,6 +51,7 @@ Advanced example usage:
 | `size`              | [Size dictionary][dictionary-size]             | `medium` | ✕        | Size variant                    |
 | `validationState`   | [Validation dictionary][dictionary-validation] | —        | ✕        | Type of validation state        |
 | `validationText`    | \[`ReactNode` \| `ReactNode[]`]                | —        | ✕        | Validation text                 |
+| `variant`           | [Fill Variants dictionary][dictionary-variant] | `fill`   | ✕        | InputContainer variant          |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -129,6 +130,7 @@ For detailed information see [Select][select] component or [Select][select-eleme
 
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[dictionary-variant]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#variant
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

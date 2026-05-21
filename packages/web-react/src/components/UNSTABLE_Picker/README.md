@@ -326,31 +326,32 @@ The trigger uses [Icon][web-react-icon-documentation] (`chevron-down` when close
 
 | Name                  | Type                                                      | Default                          | Required | Description                                                                                  |
 | --------------------- | --------------------------------------------------------- | -------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| `children`            | `ReactNode`                                               | —                                | ✓        | Popover content (for example `UNSTABLE_PickerGroup` with `UNSTABLE_PickerItem`)              |
-| `id`                  | `string`                                                  | —                                | ✓        | Stable id for the picker and related elements                                                |
-| `isOpen`              | `bool`                                                    | —                                | ✓        | Popover open state                                                                           |
-| `label`               | `string`                                                  | —                                | ✓        | Visible label and accessible name for the control                                            |
-| `onToggle`            | `() => void`                                              | —                                | ✓        | Toggle callback; parent updates `isOpen`                                                     |
-| `onSelectionChange`   | `(keys: string[]) => void`                                | —                                | ✓        | Called when the selection changes                                                            |
-| `selectedKeys`        | `string[]`                                                | —                                | ✓        | Selected item values                                                                         |
 | `addButtonLabel`      | `string`                                                  | i18n `picker.add`                | ✕        | Visually hidden label for the trigger when the popover is closed                             |
+| `children`            | `ReactNode`                                               | —                                | ✓        | Popover content (for example `UNSTABLE_PickerGroup` with `UNSTABLE_PickerItem`)              |
 | `closeButtonLabel`    | `string`                                                  | i18n `common.close`              | ✕        | Visually hidden label for the trigger when the popover is open                               |
 | `emptySelectionLabel` | `string`                                                  | —                                | ✕        | Placeholder when nothing is selected; supports `{label}`                                     |
+| `hasValidationIcon`   | `bool`                                                    | `false`                          | ✕        | Whether to show the validation icon                                                          |
 | `helperText`          | `ReactNode`                                               | —                                | ✕        | Helper text below the field                                                                  |
+| `id`                  | `string`                                                  | —                                | ✓        | Stable id for the picker and related elements                                                |
 | `isAggregated`        | `bool`                                                    | `false`                          | ✕        | If true, shows one summary tag instead of one tag per item                                   |
 | `isDisabled`          | `bool`                                                    | `false`                          | ✕        | Disables the picker and options                                                              |
 | `isLabelHidden`       | `bool`                                                    | `false`                          | ✕        | Visually hides the label (remains accessible)                                                |
+| `isOpen`              | `bool`                                                    | —                                | ✓        | Popover open state                                                                           |
 | `isRequired`          | `bool`                                                    | `false`                          | ✕        | Required indicator on the label (visual only)                                                |
+| `label`               | `string`                                                  | —                                | ✓        | Visible label and accessible name for the control                                            |
+| `onSelectionChange`   | `(keys: string[]) => void`                                | —                                | ✓        | Called when the selection changes                                                            |
+| `onToggle`            | `() => void`                                              | —                                | ✓        | Toggle callback; parent updates `isOpen`                                                     |
 | `removeAllLabel`      | `string`                                                  | i18n `picker.removeAll`          | ✕        | Remove control label for aggregated tag                                                      |
 | `removeItemLabel`     | `string`                                                  | i18n `picker.removeItemLabel`    | ✕        | Template for default per-item remove control; supports `{itemLabel}`                         |
 | `renderTags`          | `(options: UnstablePickerRenderTagsOptions) => ReactNode` | —                                | ✕        | Custom selection UI; see [Custom Selection UI (renderTags)](#custom-selection-ui-rendertags) |
+| `selectedKeys`        | `string[]`                                                | —                                | ✓        | Selected item values                                                                         |
 | `selectionAriaLabel`  | `string`                                                  | i18n `picker.selectionAriaLabel` | ✕        | `aria-label` for the selection region; supports `{label}`                                    |
 | `selectionMode`       | `'single'` \| `'multiple'`                                | `multiple`                       | ✕        | Radio vs checkbox behavior for `UNSTABLE_PickerItem`                                         |
 | `size`                | [Size dictionary][dictionary-size]                        | `medium`                         | ✕        | Size of the picker shell                                                                     |
 | `tagDescriptionText`  | `string`                                                  | i18n `picker.tagDescriptionText` | ✕        | Hidden text for screen readers (tag removal hint)                                            |
-| `hasValidationIcon`   | `bool`                                                    | `false`                          | ✕        | Whether to show the validation icon                                                          |
 | `validationState`     | [Validation dictionary][dictionary-validation]            | —                                | ✕        | Validation state                                                                             |
 | `validationText`      | `ReactNode` \| `ReactNode[]`                              | —                                | ✕        | Validation message                                                                           |
+| `variant`             | [Fill Variants dictionary][dictionary-variant]            | `fill`                           | ✕        | InputContainer variant                                                                       |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -444,6 +445,7 @@ and [escape hatches][readme-escape-hatches].
 
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[dictionary-variant]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#variant
 [dropdown-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Dropdown/README.md
 [picker-web]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Picker/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes

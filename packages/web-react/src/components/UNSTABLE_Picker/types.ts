@@ -1,6 +1,7 @@
 import { type FocusEvent, type KeyboardEvent, type ReactNode } from 'react';
 import type { SelectionMode } from '../../hooks';
 import type {
+  FillVariantDictionaryType,
   HelperTextProps,
   SizesDictionaryType,
   SpiritButtonElementProps,
@@ -60,6 +61,7 @@ export interface UnstablePickerBaseProps<S = void>
   renderTags?: (options: UnstablePickerRenderTagsOptions) => ReactNode;
   selectionMode?: UnstablePickerSelectionMode;
   size?: SizesDictionaryType<S>;
+  variant?: FillVariantDictionaryType;
 }
 
 /** Popover open state is always controlled (same contract as `Dropdown`). */

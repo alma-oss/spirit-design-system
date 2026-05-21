@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ElementType } from 'react';
-import { Sizes } from '../../constants';
+import { FillVariants, Sizes } from '../../constants';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type FormFieldContextValue } from '../../types';
@@ -11,6 +11,7 @@ import { useInputContainerStyleProps } from './useInputContainerStyleProps';
 
 const defaultProps: Partial<SpiritInputContainerProps> = {
   size: Sizes.MEDIUM,
+  variant: FillVariants.FILL,
   elementType: 'div',
 };
 
@@ -19,6 +20,7 @@ const InputContainer = <E extends ElementType = 'div'>(props: SpiritInputContain
   const propsWithDefaults = {
     ...defaultProps,
     size: contextProps.size ?? defaultProps.size,
+    variant: contextProps.variant ?? defaultProps.variant,
     isDisabled: contextProps.isDisabled,
     validationState: contextProps.validationState,
     ...props,

@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react';
 import { type LabelProps } from './label';
 import {
+  type FillVariantDictionaryType,
   type HelperTextProps,
   type RequiredProps,
   type SizesDictionaryType,
@@ -20,6 +21,7 @@ export interface SelectProps<S = void>
   label: ReactNode;
   size?: SelectSizeType<S>;
   validationText?: ValidationTextType;
+  variant?: FillVariantDictionaryType;
 }
 
 export interface SpiritSelectProps<S = void> extends SelectProps<S> {}
