@@ -49,6 +49,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     children,
     closeButtonLabel = t('common.close'),
     emptySelectionLabel,
+    hasValidationIcon,
     helperText,
     id,
     isAggregated = false,
@@ -69,9 +70,9 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     selectionMode = MULTIPLE_SELECTION_MODE,
     size = DEFAULT_SIZE,
     tagDescriptionText = t('picker.tagDescriptionText'),
-    hasValidationIcon,
     validationState,
     validationText,
+    variant,
     ...restProps
   } = props;
 
@@ -209,6 +210,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
         isLabelHidden,
         isRequired,
         size,
+        variant,
         validationState,
       }}
     >

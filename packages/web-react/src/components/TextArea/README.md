@@ -106,7 +106,6 @@ an optimized experience:
 | `autoResizingMaxHeight` | `number`                                       | `400`    | ✕        | Maximum field height **in px** with automatic height control. \*                |
 | `counterThreshold`      | `number`                                       | —        | ✕        | Character threshold; shows `current/threshold` counter                          |
 | `hasCounter`            | `bool`                                         | —        | ✕        | Show character counter (count only); auto `true` with `counterThreshold`        |
-| `maxLength`             | `number`                                       | —        | ✕        | Native textarea hard cap; with `counterThreshold`, prefer `>= counterThreshold` |
 | `hasValidationIcon`     | `bool`                                         | `false`  | ✕        | Whether to show validation icon                                                 |
 | `helperText`            | `string`                                       | —        | ✕        | Custom helper text                                                              |
 | `id`                    | `string`                                       | —        | ✓        | Textarea and label identification                                               |
@@ -115,6 +114,7 @@ an optimized experience:
 | `isLabelHidden`         | `bool`                                         | —        | ✕        | Whether is label hidden                                                         |
 | `isRequired`            | `bool`                                         | —        | ✕        | Whether is field required                                                       |
 | `label`                 | `ReactNode`                                    | —        | ✓        | Label text                                                                      |
+| `maxLength`             | `number`                                       | —        | ✕        | Native textarea hard cap; with `counterThreshold`, prefer `>= counterThreshold` |
 | `name`                  | `string`                                       | —        | ✕        | Textarea name                                                                   |
 | `placeholder`           | `string`                                       | —        | ✕        | Textarea placeholder                                                            |
 | `ref`                   | `ForwardedRef<HTMLTextAreaElement>`            | —        | ✕        | Textarea element reference                                                      |
@@ -123,6 +123,7 @@ an optimized experience:
 | `validationState`       | [Validation dictionary][dictionary-validation] | —        | ✕        | Type of validation state                                                        |
 | `validationText`        | \[`ReactNode` \| `ReactNode[]`]                | —        | ✕        | Validation text                                                                 |
 | `value`                 | `string`                                       | —        | ✕        | Textarea value                                                                  |
+| `variant`               | [Fill Variants dictionary][dictionary-variant] | `fill`   | ✕        | InputContainer variant                                                          |
 
 (\*) The value is compared against the browser's `scrollHeight` (a DOM pixel measurement),
 so `px` is intentional here and cannot be replaced with `rem`.
@@ -155,6 +156,7 @@ For detailed information see [TextArea](https://github.com/alma-oss/spirit-desig
 [autocomplete-attr]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[dictionary-variant]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#variant
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

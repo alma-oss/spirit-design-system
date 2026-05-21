@@ -15,12 +15,16 @@ import TextFieldRequired from './TextFieldRequired';
 import TextFieldSizes from './TextFieldSizes';
 import TextFieldValidation from './TextFieldValidation';
 import TextFieldValidationWithIcon from './TextFieldValidationWithIcon';
+import TextFieldVariants from './TextFieldVariants';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <TextFieldDefault />
+      </DocsSection>
+      <DocsSection title="Variants">
+        <TextFieldVariants />
       </DocsSection>
       <DocsSection title="Addons">
         <TextFieldAddons />
