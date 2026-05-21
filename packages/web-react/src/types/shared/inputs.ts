@@ -1,13 +1,13 @@
 import type { AriaRole, ElementType, ReactNode } from 'react';
-import { FormFieldVariants, type InputPositions } from '../../constants';
+import { FormFieldTypes, type InputPositions } from '../../constants';
 import { type SizesDictionaryType, type ValidationStatesDictionaryType } from './dictionaries';
 
 export type ValidationState = ValidationStatesDictionaryType;
 
 export type ValidationTextType = ReactNode | ReactNode[];
 
-export { FormFieldVariants };
-export type FormFieldVariant = (typeof FormFieldVariants)[keyof typeof FormFieldVariants];
+export { FormFieldTypes };
+export type FormFieldType = (typeof FormFieldTypes)[keyof typeof FormFieldTypes];
 
 export type RegisterParams = { add?: string; remove?: string };
 
@@ -28,8 +28,8 @@ export interface FormFieldProps<E extends ElementType = 'div'> extends FormField
 }
 
 export interface FormFieldContextValue {
-  /** Visual variant (box, inline, item) for Label and HelperText styling. */
-  formFieldVariant?: FormFieldVariant;
+  /** Visual type (box, inline, item) for Label and HelperText styling. */
+  formFieldType?: FormFieldType;
   /** Whether the field is disabled; affects Label and HelperText styling. */
   isDisabled?: boolean;
   /** Whether the field is an item (Checkbox or Radio in item mode). */
@@ -44,7 +44,7 @@ export interface FormFieldContextValue {
   validationState?: ValidationState;
 }
 
-export type FormFieldStyleProps = Pick<FormFieldContextValue, 'formFieldVariant' | 'isDisabled'>;
+export type FormFieldStyleProps = Pick<FormFieldContextValue, 'formFieldType' | 'isDisabled'>;
 
 export type LabelStyleProps = FormFieldStyleProps &
   Pick<FormFieldContextValue, 'isLabelHidden' | 'isRequired' | 'isItem'>;

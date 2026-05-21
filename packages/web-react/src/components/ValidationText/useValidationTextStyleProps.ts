@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useClassNamePrefix } from '../../hooks';
-import { type FormFieldContextValue, FormFieldVariants, type ValidationState } from '../../types';
+import { type FormFieldContextValue, FormFieldTypes, type ValidationState } from '../../types';
 
 export interface ValidationTextStyles {
   /** className for the root element */
@@ -12,7 +12,7 @@ export interface UseValidationTextStylePropsProps extends FormFieldContextValue 
 }
 
 export function useValidationTextStyleProps(props: UseValidationTextStylePropsProps): ValidationTextStyles {
-  const { formFieldVariant, hasValidationStateIcon, isDisabled } = props;
+  const { formFieldType, hasValidationStateIcon, isDisabled } = props;
 
   const prefix = useClassNamePrefix('ValidationText');
   const dangerClass = `${prefix}--danger`;
@@ -27,8 +27,8 @@ export function useValidationTextStyleProps(props: UseValidationTextStylePropsPr
     [warningClass]: hasValidationStateIcon === 'warning',
     [successClass]: hasValidationStateIcon === 'success',
     [disabledClass]: isDisabled,
-    [inlineClass]: formFieldVariant === FormFieldVariants.INLINE,
-    [itemClass]: formFieldVariant === FormFieldVariants.ITEM,
+    [inlineClass]: formFieldType === FormFieldTypes.INLINE,
+    [itemClass]: formFieldType === FormFieldTypes.ITEM,
   });
 
   return {

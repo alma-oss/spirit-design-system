@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React, { type ChangeEvent, type ForwardedRef, forwardRef, useState } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
-import { FormFieldVariants, type ForwardRefComponent, type SpiritToggleProps } from '../../types';
+import { FormFieldTypes, type ForwardRefComponent, type SpiritToggleProps } from '../../types';
 import { HelperText } from '../HelperText';
 import { InputDetails } from '../InputDetails';
 import { Label } from '../Label';
@@ -47,7 +47,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
   return (
     <PropsProvider
       value={{
-        formFieldVariant: FormFieldVariants.INLINE,
+        formFieldType: FormFieldTypes.INLINE,
         isDisabled,
         isLabelHidden,
         isRequired,

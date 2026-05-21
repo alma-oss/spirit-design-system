@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { FormFieldVariants } from '../../../types';
+import { FormFieldTypes } from '../../../types';
 import { useLabelStyleProps } from '../useLabelStyleProps';
 
 describe('useLabelStyleProps', () => {
@@ -15,14 +15,14 @@ describe('useLabelStyleProps', () => {
     expect(result.current.classProps).toContain('Label--disabled');
   });
 
-  it('should return inline class when formFieldVariant is inline', () => {
-    const { result } = renderHook(() => useLabelStyleProps({ formFieldVariant: FormFieldVariants.INLINE }));
+  it('should return inline class when formFieldType is inline', () => {
+    const { result } = renderHook(() => useLabelStyleProps({ formFieldType: FormFieldTypes.INLINE }));
 
     expect(result.current.classProps).toContain('Label--inline');
   });
 
-  it('should return item class when formFieldVariant is item', () => {
-    const { result } = renderHook(() => useLabelStyleProps({ formFieldVariant: FormFieldVariants.ITEM }));
+  it('should return item class when formFieldType is item', () => {
+    const { result } = renderHook(() => useLabelStyleProps({ formFieldType: FormFieldTypes.ITEM }));
 
     expect(result.current.classProps).toContain('Label--item');
   });

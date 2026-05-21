@@ -88,7 +88,7 @@ const CustomRadio = (props: SpiritRadioProps): JSX.Element => {
   return (
     <PropsProvider
       value={{
-        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
+        formFieldType: isItem ? FormFieldTypes.ITEM : FormFieldTypes.INLINE,
         isDisabled,
         isLabelHidden,
       }}
