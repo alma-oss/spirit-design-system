@@ -40,9 +40,9 @@ describe('SkeletonShape', () => {
     const { result } = renderHook(() => useSkeletonShapeStyleProps(props));
 
     expect(result.current.skeletonShapeStyleProps).toEqual({
-      '--spirit-skeleton-shape-height': '100px',
+      '--spirit-skeleton-shape-height': '6.25rem',
       '--spirit-skeleton-shape-radius': 'var(--spirit-radius-200)',
-      '--spirit-skeleton-shape-width': '100px',
+      '--spirit-skeleton-shape-width': '6.25rem',
     });
   });
 
@@ -56,11 +56,11 @@ describe('SkeletonShape', () => {
     const { result } = renderHook(() => useSkeletonShapeStyleProps(props));
 
     expect(result.current.skeletonShapeStyleProps).toEqual({
-      '--spirit-skeleton-shape-height': '100px',
+      '--spirit-skeleton-shape-height': '6.25rem',
       '--spirit-skeleton-shape-radius': 'var(--spirit-radius-100)',
       '--spirit-skeleton-shape-radius-tablet': 'var(--spirit-radius-400)',
       '--spirit-skeleton-shape-radius-desktop': 'var(--spirit-radius-500)',
-      '--spirit-skeleton-shape-width': '100px',
+      '--spirit-skeleton-shape-width': '6.25rem',
     });
   });
 });
