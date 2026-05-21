@@ -2,7 +2,7 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import { ValidationStates } from '../../../constants';
-import { FormFieldVariants } from '../../../types';
+import { FormFieldModes } from '../../../types';
 import ReadMe from '../README.md?raw';
 import { CharacterCounter } from '..';
 
@@ -21,9 +21,9 @@ const meta: Meta<typeof CharacterCounter> = {
     currentLength: {
       control: 'number',
     },
-    formFieldVariant: {
+    formFieldMode: {
       control: 'select',
-      options: [undefined, ...Object.values(FormFieldVariants)],
+      options: [undefined, ...Object.values(FormFieldModes)],
     },
     hasCounter: {
       control: 'boolean',

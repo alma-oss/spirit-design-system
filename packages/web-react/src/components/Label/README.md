@@ -19,28 +19,28 @@ When used inside form field components such as [Checkbox][readme-checkbox], [Rad
 You can override context by passing props directly:
 
 ```tsx
-<Label htmlFor="my-input" formFieldVariant="inline" isRequired isDisabled={false} isLabelHidden={false}>
+<Label htmlFor="my-input" formFieldMode="inline" isRequired isDisabled={false} isLabelHidden={false}>
   Label text
 </Label>
 ```
 
 ### API
 
-| Name               | Type               | Default | Required | Description                                                                                                                               |
-| ------------------ | ------------------ | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `children`         | `ReactNode`        | —       | ✕        | Label content                                                                                                                             |
-| `elementType`      | `ElementType`      | `label` | ✕        | Type of element used as root (e.g. `label`, `span`)                                                                                       |
-| `formFieldVariant` | `FormFieldVariant` | —       | ✕        | Explicit visual variant (`inline`, `item`); omit for the default layout used by box form field components, or take it from parent context |
-| `for` / `htmlFor`  | `string`           | —       | ✕        | ID of the associated form control (for `elementType="label"`)                                                                             |
-| `isDisabled`       | `bool`             | `false` | ✕        | Disabled state; when not set, taken from parent context                                                                                   |
-| `isLabelHidden`    | `bool`             | `false` | ✕        | Visually hide label while keeping it accessible; from parent context                                                                      |
-| `isRequired`       | `bool`             | `false` | ✕        | Shows required indicator; when not set, taken from parent context                                                                         |
+| Name              | Type            | Default | Required | Description                                                                                                                     |
+| ----------------- | --------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `children`        | `ReactNode`     | —       | ✕        | Label content                                                                                                                   |
+| `elementType`     | `ElementType`   | `label` | ✕        | Type of element used as root (e.g. `label`, `span`)                                                                             |
+| `formFieldMode`   | `FormFieldMode` | —       | ✕        | Explicit mode (`inline`, `item`); omit for the default layout used by box form field components, or take it from parent context |
+| `for` / `htmlFor` | `string`        | —       | ✕        | ID of the associated form control (for `elementType="label"`)                                                                   |
+| `isDisabled`      | `bool`          | `false` | ✕        | Disabled state; when not set, taken from parent context                                                                         |
+| `isLabelHidden`   | `bool`          | `false` | ✕        | Visually hide label while keeping it accessible; from parent context                                                            |
+| `isRequired`      | `bool`          | `false` | ✕        | Shows required indicator; when not set, taken from parent context                                                               |
 
 On top of the API options, the component accepts [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
-## Variants
+## Modes
 
 The default layout is used by box form field components.
 
