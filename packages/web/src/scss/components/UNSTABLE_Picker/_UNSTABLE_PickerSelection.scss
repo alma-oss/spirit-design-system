@@ -24,7 +24,7 @@
 
 .UNSTABLE_PickerSelection__empty {
     margin-inline-start: calc(#{form-fields-settings.$box-field-input-padding-x} - #{theme.$padding});
-    color: form-fields-settings.$box-field-input-placeholder-color-state-default;
+    color: var(--#{tokens.$css-variable-prefix}input-container-placeholder-color);
 }
 
 // 1.

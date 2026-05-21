@@ -113,7 +113,7 @@ disabled styling on all elements.
   <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
     <div>
       <label for="text-field" class="Label Label--disabled">Label</label>
-      <div class="InputContainer InputContainer--medium InputContainer--disabled">
+      <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
         <input type="text" id="text-field" name="textField" placeholder="Placeholder" disabled />
       </div>
     </div>

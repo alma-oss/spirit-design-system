@@ -11,7 +11,7 @@ InputAddon supports the following size modifiers:
 - `InputAddon--large`
 
 ```html
-<div class="InputContainer InputContainer--small">
+<div class="InputContainer InputContainer--fill InputContainer--small">
   <input type="password" id="password-small" name="passwordSmall" value="password" />
   <div class="InputAddon InputAddon--small">
     <button
@@ -24,7 +24,7 @@ InputAddon supports the following size modifiers:
   </div>
 </div>
 
-<div class="InputContainer InputContainer--medium">
+<div class="InputContainer InputContainer--fill InputContainer--medium">
   <input type="password" id="password-medium" name="passwordMedium" value="password" />
   <div class="InputAddon InputAddon--medium">
     <button
@@ -37,7 +37,7 @@ InputAddon supports the following size modifiers:
   </div>
 </div>
 
-<div class="InputContainer InputContainer--large">
+<div class="InputContainer InputContainer--fill InputContainer--large">
   <input type="password" id="password-large" name="passwordLarge" value="password" />
   <div class="InputAddon InputAddon--large">
     <button
@@ -82,7 +82,7 @@ For full field patterns (label, helper text, validation), see for example [TextF
 When the addon has **no** interactive control (no `<button>` or `<a>`), use a `<label>` with `InputAddon` and `for` pointing at the control `id` so clicking the addon focuses the input:
 
 ```html
-<div class="InputContainer InputContainer--medium">
+<div class="InputContainer InputContainer--fill InputContainer--medium">
   <label class="InputAddon InputAddon--medium" for="amount-eur">
     <span aria-hidden="true">€</span>
     <span class="accessibility-hidden">in EUR</span>
@@ -96,7 +96,7 @@ Keep using a `<div class="InputAddon InputAddon--medium">` when the addon wraps 
 ### Icon Addon
 
 ```html
-<div class="InputContainer InputContainer--medium">
+<div class="InputContainer InputContainer--fill InputContainer--medium">
   <input type="search" id="search" name="search" placeholder="Search" />
   <label class="InputAddon InputAddon--medium" for="search">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
@@ -110,7 +110,7 @@ Keep using a `<div class="InputAddon InputAddon--medium">` when the addon wraps 
 ### Currency/Text Addon
 
 ```html
-<div class="InputContainer InputContainer--medium">
+<div class="InputContainer InputContainer--fill InputContainer--medium">
   <label class="InputAddon InputAddon--medium" for="amount">
     <span aria-hidden="true">$</span>
     <span class="accessibility-hidden">in USD</span>
@@ -122,7 +122,7 @@ Keep using a `<div class="InputAddon InputAddon--medium">` when the addon wraps 
 ### Interactive Button Addon
 
 ```html
-<div class="InputContainer InputContainer--medium">
+<div class="InputContainer InputContainer--fill InputContainer--medium">
   <input type="password" id="password" name="password" value="password" />
   <div class="InputAddon InputAddon--medium">
     <button
@@ -141,7 +141,7 @@ Keep using a `<div class="InputAddon InputAddon--medium">` when the addon wraps 
 Multiple addons can be used to provide additional context or actions for the input.
 
 ```html
-<div class="InputContainer InputContainer--medium">
+<div class="InputContainer InputContainer--fill InputContainer--medium">
   <label class="InputAddon InputAddon--medium" for="username">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use href="/assets/icons/svg/sprite.svg#link" />

@@ -3,17 +3,12 @@
 @use '../../settings/dictionaries';
 @use '../../tools/tokens' as tokens-tools;
 
-$color: tokens.$form-field-fill-content;
 $color-state-disabled: tokens.$disabled-content;
 $border-width: tokens.$border-width-100;
 $border-style: solid;
-$border-color: tokens.$form-field-fill-border-state-default;
 $border-color-state-focus: tokens.$border-focus;
 $border-color-state-disabled: tokens.$disabled-border;
 $border-radius: tokens.$radius-300;
-$background-color: tokens.$form-field-fill-background-state-default;
-$background-color-state-active: tokens.$form-field-fill-background-state-active;
-$background-color-state-hover: tokens.$form-field-fill-background-state-hover;
 $background-color-state-disabled: tokens.$disabled-background;
 $focus-shadow: tokens.$focus-ring;
 
@@ -21,8 +16,28 @@ $input-number-arrows-width: 1.25rem;
 $input-size-characters: (2, 3, 4);
 $input-padding-x: tokens.$space-600;
 $input-padding-y: calc(#{tokens.$space-500} - #{tokens.$border-width-100});
-$input-placeholder-color: tokens.$form-field-fill-placeholder;
 $input-placeholder-color-state-disabled: tokens.$disabled-content;
+
+$variant-dictionary: dictionaries.$fill-variants;
+
+$variant-config: (
+    fill: (
+        color: tokens.$form-field-fill-content,
+        border-color: tokens.$form-field-fill-border-state-default,
+        background-color: tokens.$form-field-fill-background-state-default,
+        background-color-state-hover: tokens.$form-field-fill-background-state-hover,
+        background-color-state-active: tokens.$form-field-fill-background-state-active,
+        input-placeholder-color: tokens.$form-field-fill-placeholder,
+    ),
+    outline: (
+        color: tokens.$form-field-outline-content,
+        border-color: tokens.$form-field-outline-border-state-default,
+        background-color: tokens.$form-field-outline-background-state-default,
+        background-color-state-hover: tokens.$form-field-outline-background-state-hover,
+        background-color-state-active: tokens.$form-field-outline-background-state-active,
+        input-placeholder-color: tokens.$form-field-outline-placeholder,
+    ),
+);
 
 $size-dictionary: dictionaries.$size;
 $size-config: (
