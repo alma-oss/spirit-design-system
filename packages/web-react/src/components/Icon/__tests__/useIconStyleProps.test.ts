@@ -33,6 +33,15 @@ describe('useIconStyleProps', () => {
     });
   });
 
+  it('should return icon size style with composition fallback', () => {
+    const props = { boxSize: 20, name: 'add' } as SpiritIconProps;
+    const { result } = renderHook(() => useIconStyleProps(props, true));
+
+    expect(result.current.iconStyleProps).toEqual({
+      '--spirit-icon-size': 'var(--spirit-icon-composition-size, 1.25rem)',
+    });
+  });
+
   it.each(Object.values(iconColors))('should have dualtone color classname %s', (color: IconColorType) => {
     const props: SpiritIconProps = {
       name: 'shield-dualtone',
