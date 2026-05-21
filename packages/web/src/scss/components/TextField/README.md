@@ -5,8 +5,29 @@ Basic usage:
 ```html
 <div>
   <label for="text-field-default" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-default" name="default" placeholder="Placeholder" />
+  </div>
+</div>
+```
+
+Variants:
+
+- `InputContainer--fill` (default)
+- `InputContainer--outline`
+
+```html
+<div>
+  <label for="text-field-variant-fill" class="Label">Fill (default)</label>
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
+    <input type="text" id="text-field-variant-fill" name="variantFill" placeholder="Placeholder" />
+  </div>
+</div>
+
+<div>
+  <label for="text-field-variant-outline" class="Label">Outline</label>
+  <div class="InputContainer InputContainer--outline InputContainer--medium">
+    <input type="text" id="text-field-variant-outline" name="variantOutline" placeholder="Placeholder" />
   </div>
 </div>
 ```
@@ -16,21 +37,21 @@ Sizes:
 ```html
 <div>
   <label for="text-field-size-small" class="Label">Small</label>
-  <div class="InputContainer InputContainer--small">
+  <div class="InputContainer InputContainer--fill InputContainer--small">
     <input type="text" id="text-field-size-small" name="size-small" placeholder="Placeholder" />
   </div>
 </div>
 
 <div>
   <label for="text-field-size-medium" class="Label">Medium (default)</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-size-medium" name="size-medium" placeholder="Placeholder" />
   </div>
 </div>
 
 <div>
   <label for="text-field-size-large" class="Label">Large</label>
-  <div class="InputContainer InputContainer--large">
+  <div class="InputContainer InputContainer--fill InputContainer--large">
     <input type="text" id="text-field-size-large" name="size-large" placeholder="Placeholder" />
   </div>
 </div>
@@ -41,7 +62,7 @@ Required input:
 ```html
 <div>
   <label for="text-field-required" class="Label Label--required">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-required" name="required" placeholder="Placeholder" required />
   </div>
 </div>
@@ -52,7 +73,7 @@ Hidden label:
 ```html
 <div>
   <label for="text-field-hidden-label" class="Label accessibility-hidden">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-hidden-label" name="hiddenLabel" placeholder="Placeholder" />
   </div>
 </div>
@@ -65,7 +86,7 @@ Use [InputAddon][readme-input-addon] inside [InputContainer][readme-input-contai
 ```html
 <div>
   <label for="text-field-addon-search" class="Label">Search</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <label class="InputAddon InputAddon--medium" for="text-field-addon-search">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use href="/assets/icons/svg/sprite.svg#search" />
@@ -78,7 +99,7 @@ Use [InputAddon][readme-input-addon] inside [InputContainer][readme-input-contai
 
 <div>
   <label for="text-field-addon-clear" class="Label">Search</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-addon-clear" name="addonClear" placeholder="Search" value="Filled" />
     <div class="InputAddon InputAddon--medium">
       <button
@@ -107,7 +128,7 @@ To add helper text, use the [HelperText][readme-helper-text] component. When hel
 ```html
 <div>
   <label for="text-field-helper-text" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input
       type="text"
       id="text-field-helper-text"
@@ -153,13 +174,13 @@ element:
 ```html
 <div>
   <label for="text-field-size" class="Label">4000 (in Roman numerals)</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" size="4" id="text-field-size" name="size" placeholder="Placeholder" />
   </div>
 </div>
 <div>
   <label for="text-field-size-em" class="Label">4000 (in Roman numerals)</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input
       type="text"
       size="4"
@@ -198,7 +219,7 @@ Then you need to add data attribute `data-spirit-toggle="password"` to the input
 ```html
 <div>
   <label for="text-field-password-toggle" class="Label">Password Toggle</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input
       type="password"
       id="text-field-password-toggle"
@@ -243,14 +264,14 @@ Validation states can be presented either by adding a CSS modifier class on
 ```html
 <div>
   <label for="text-field-success" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--success">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--success">
     <input type="text" id="text-field-success" name="success" placeholder="Placeholder" value="Filled" />
   </div>
 </div>
 
 <div>
   <label for="text-field-warning" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--warning">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--warning">
     <input
       type="text"
       id="text-field-warning"
@@ -265,7 +286,7 @@ Validation states can be presented either by adding a CSS modifier class on
 
 <div>
   <label for="text-field-danger" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--danger">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger">
     <input
       type="text"
       id="text-field-danger"
@@ -285,7 +306,7 @@ Validation states can be presented either by adding a CSS modifier class on
 
 <div>
   <label for="text-field-warning-validation-icon" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--warning">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--warning">
     <input
       type="text"
       id="text-field-warning-validation-icon"
@@ -313,14 +334,14 @@ JS interaction class when controlled by JavaScript:
 ```html
 <div>
   <label for="text-field-disabled" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--disabled">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <input type="text" id="text-field-disabled" name="disabled" placeholder="Placeholder" disabled />
   </div>
 </div>
 
 <div>
   <label for="text-field-disabled-filled" class="Label Label--required">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--disabled">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <input
       type="text"
       id="text-field-disabled-filled"
