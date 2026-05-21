@@ -1,0 +1,516 @@
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Minimal Header</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+
+    <header class="Header">
+      <a href="#" aria-label="JobBoard homepage">
+        <div class="ProductLogo">
+          {{> web/assets/jobBoardLogo }}
+        </div>
+      </a>
+    </header>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Header with Actions</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+
+    <!-- Header: start -->
+    <header class="Header">
+
+      <a href="#" aria-label="JobBoard homepage">
+        <div class="ProductLogo">
+          {{> web/assets/jobBoardLogo }}
+        </div>
+      </a>
+
+      <!-- HeaderMobileActions: start -->
+      <div class="HeaderMobileActions">
+        <button
+          type="button"
+          class="Button Button--secondary Button--medium Button--symmetrical"
+          data-spirit-toggle="offcanvas"
+          data-spirit-target="#header-dialog-example-1"
+          aria-controls="header-dialog-example-1"
+          aria-expanded="false"
+        >
+          <svg
+            class="Icon"
+            width="24"
+            height="24"
+            aria-hidden="true"
+          >
+            <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+          </svg>
+          <span class="accessibility-hidden">Menu</span>
+        </button>
+      </div>
+      <!-- HeaderMobileActions: end -->
+
+      <!-- HeaderDesktopActions: start -->
+      <nav class="HeaderDesktopActions" aria-label="Main navigation">
+
+        <!-- HeaderNav: start -->
+        <ul class="HeaderNav">
+          <li class="HeaderNavItem">
+            <a
+              href="#"
+              class="HeaderLink HeaderLink--current"
+              aria-current="page"
+            >Job offers</a>
+          </li>
+          <li class="HeaderNavItem">
+            <a href="#" class="HeaderLink">Part-time jobs</a>
+          </li>
+          <li class="HeaderNavItem">
+            <a href="#" class="HeaderLink">Inspiration</a>
+          </li>
+          <li class="HeaderNavItem">
+            <a href="#" class="HeaderLink">Replies</a>
+          </li>
+          <li class="HeaderNavItem">
+            <a href="#" class="HeaderLink">Employers</a>
+          </li>
+        </ul>
+        <!-- HeaderNav: end -->
+
+      </nav>
+      <!-- HeaderDesktopActions: end -->
+
+      <!-- HeaderDesktopActions: start -->
+      <nav class="HeaderDesktopActions HeaderDesktopActions--end">
+        <a href="#" class="Button Button--primary Button--medium">Sign in</a>
+        <a href="#" class="Button Button--secondary Button--medium">Enterprise</a>
+      </nav>
+      <!-- HeaderDesktopActions: end -->
+
+    </header>
+    <!-- Header: end -->
+
+    <!-- HeaderDialog: start -->
+    <dialog
+      id="header-dialog-example-1"
+      class="HeaderDialog"
+      aria-label="Menu"
+    >
+      <div class="HeaderDialog__panel">
+        <div class="HeaderDialog__content">
+
+          <!-- HeaderDialogCloseButton: start -->
+          <button
+            type="button"
+            class="HeaderDialogCloseButton"
+            data-spirit-dismiss="offcanvas"
+            data-spirit-target="#header-dialog-example-1"
+            aria-controls="header-dialog-example-1"
+            aria-expanded="false"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+          <!-- HeaderDialogCloseButton: end -->
+
+          <!-- HeaderDialogActions: start -->
+          <nav class="HeaderDialogActions HeaderDialogActions--primary" aria-label="Main navigation">
+
+            <!-- HeaderDialogNav: start -->
+            <ul class="HeaderDialogNav">
+              <li class="HeaderDialogNavItem">
+                <a
+                  href="#"
+                  class="HeaderDialogLink HeaderDialogLink--current"
+                  aria-current="page"
+                >Job offers</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Part-time jobs</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Inspiration</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Replies</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Employers</a>
+              </li>
+            </ul>
+            <!-- HeaderDialogNav: end -->
+
+          </nav>
+          <!-- HeaderDialogActions: end -->
+
+          <!-- HeaderDialogActions: start -->
+          <nav class="HeaderDialogActions HeaderDialogActions--secondary">
+            <a href="#" class="Button Button--primary Button--medium">Sign in</a>
+            <a href="#" class="Button Button--secondary Button--medium">Enterprise</a>
+          </nav>
+          <!-- HeaderDialogActions: end -->
+
+        </div>
+      </div>
+    </dialog>
+    <!-- HeaderDialog: end -->
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Header with Actions and Header Dialog</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+
+    <!-- Header: start -->
+    <header class="Header">
+
+      <a href="#" aria-label="JobBoard homepage">
+        <div class="ProductLogo">
+          {{> web/assets/jobBoardLogo }}
+        </div>
+      </a>
+
+      <!-- HeaderMobileActions: start -->
+      <div class="HeaderMobileActions">
+        <button
+          type="button"
+          class="Button Button--secondary Button--medium Button--symmetrical"
+          data-spirit-toggle="offcanvas"
+          data-spirit-target="#header-dialog-example-2-main-navigation"
+          aria-controls="header-dialog-example-2-main-navigation"
+          aria-expanded="false"
+        >
+          <svg
+            class="Icon"
+            width="24"
+            height="24"
+            aria-hidden="true"
+          >
+            <use xlink:href="/assets/icons/svg/sprite.svg#hamburger" />
+          </svg>
+          <span class="accessibility-hidden">Menu</span>
+        </button>
+      </div>
+      <!-- HeaderMobileActions: end -->
+
+      <!-- HeaderDesktopActions: start -->
+      <nav class="HeaderDesktopActions" aria-label="Main navigation">
+
+        <!-- HeaderNav: start -->
+        <ul class="HeaderNav">
+          <li class="HeaderNavItem">
+            <a
+              href="#"
+              class="HeaderLink HeaderLink--current"
+              aria-current="page"
+            >Job offers</a>
+          </li>
+          <li class="HeaderNavItem">
+            <a href="#" class="HeaderLink">Part-time jobs</a>
+          </li>
+          <li class="HeaderNavItem">
+            <a href="#" class="HeaderLink">Inspiration</a>
+          </li>
+          <li class="HeaderNavItem">
+            <a href="#" class="HeaderLink">Replies</a>
+          </li>
+          <li class="HeaderNavItem">
+            <a href="#" class="HeaderLink">Employers</a>
+          </li>
+        </ul>
+        <!-- HeaderNav: end -->
+
+      </nav>
+      <!-- HeaderDesktopActions: end -->
+
+      <!-- HeaderDesktopActions: start -->
+      <nav class="HeaderDesktopActions HeaderDesktopActions--end">
+
+        <!-- HeaderNav: start -->
+        <button
+          type="button"
+          class="HeaderLink"
+          data-spirit-toggle="offcanvas"
+          data-spirit-target="#header-dialog-example-2-user-menu"
+          aria-controls="header-dialog-example-2-user-menu"
+          aria-expanded="false"
+        >
+          Marian
+        </button>
+        <button type="button" class="Button Button--secondary Button--symmetrical Button--medium">
+          <svg
+            class="Icon"
+            width="24"
+            height="24"
+            aria-hidden="true"
+          >
+            <use xlink:href="/assets/icons/svg/sprite.svg#search" />
+          </svg>
+          <span class="accessibility-hidden">Search</span>
+        </button>
+        <!-- HeaderNav: end -->
+
+      </nav>
+      <!-- HeaderDesktopActions: end -->
+
+    </header>
+    <!-- Header: end -->
+
+    <!-- HeaderDialog: start -->
+    <dialog
+      id="header-dialog-example-2-main-navigation"
+      class="HeaderDialog"
+      aria-label="Menu"
+    >
+      <div class="HeaderDialog__panel">
+        <div class="HeaderDialog__content">
+
+          <!-- HeaderDialogCloseButton: start -->
+          <button
+            type="button"
+            class="HeaderDialogCloseButton"
+            data-spirit-dismiss="offcanvas"
+            data-spirit-target="#header-dialog-example-2-main-navigation"
+            aria-controls="header-dialog-example-2-main-navigation"
+            aria-expanded="false"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+          <!-- HeaderDialogCloseButton: end -->
+
+          <!-- HeaderDialogActions: start -->
+          <nav class="HeaderDialogActions HeaderDialogActions--primary" aria-label="Main navigation">
+
+            <!-- HeaderDialogNav: start -->
+            <ul class="HeaderDialogNav">
+              <li class="HeaderDialogNavItem">
+                <a
+                  href="#"
+                  class="HeaderDialogLink HeaderDialogLink--current"
+                  aria-current="page"
+                >Job offers</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Part-time jobs</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Inspiration</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Replies</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Employers</a>
+              </li>
+            </ul>
+            <!-- HeaderDialogNav: end -->
+
+          </nav>
+          <!-- HeaderDialogActions: end -->
+
+          <!-- HeaderDialogActions: start -->
+          <nav class="HeaderDialogActions HeaderDialogActions--secondary" aria-label="User menu">
+
+            <!-- HeaderDialogNav: start -->
+            <ul class="HeaderDialogNav">
+              <li class="HeaderDialogNavItem">
+                <span class="HeaderDialogText text-tertiary">Marian</span>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Dashboard</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Profile</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Favourites</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Notifications</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <button type="button" class="HeaderDialogLink">Sign out</button>
+              </li>
+            </ul>
+            <!-- HeaderDialogNav: end -->
+
+          </nav>
+          <!-- HeaderDialogActions: end -->
+
+        </div>
+      </div>
+    </dialog>
+    <!-- HeaderDialog: end -->
+
+    <!-- HeaderDialog: start -->
+    <dialog
+      id="header-dialog-example-2-user-menu"
+      class="HeaderDialog"
+      aria-label="User menu"
+    >
+      <div class="HeaderDialog__panel">
+        <div class="HeaderDialog__content">
+
+          <!-- HeaderDialogCloseButton: start -->
+          <button
+            type="button"
+            class="HeaderDialogCloseButton"
+            data-spirit-dismiss="offcanvas"
+            data-spirit-target="#header-dialog-example-2-user-menu"
+            aria-controls="header-dialog-example-2-user-menu"
+            aria-expanded="false"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use xlink:href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+          <!-- HeaderDialogCloseButton: end -->
+
+          <!-- HeaderDialogActions: start -->
+          <nav class="HeaderDialogActions HeaderDialogActions--primary" aria-label="User menu">
+
+            <!-- HeaderDialogNav: start -->
+            <ul class="HeaderDialogNav">
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Dashboard</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Profile</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Favourites</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <a href="#" class="HeaderDialogLink">Notifications</a>
+              </li>
+              <li class="HeaderDialogNavItem">
+                <button type="button" class="HeaderDialogLink">Sign out</button>
+              </li>
+            </ul>
+            <!-- HeaderDialogNav: end -->
+
+          </nav>
+          <!-- HeaderDialogActions: end -->
+
+        </div>
+      </div>
+    </dialog>
+    <!-- HeaderDialog: end -->
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Simple Header</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+
+    <header class="Header Header--simple">
+      <a href="#" aria-label="JobBoard homepage">
+        <div class="ProductLogo">
+          {{> web/assets/jobBoardLogo }}
+        </div>
+      </a>
+    </header>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+    <h2 class="docs-Heading">Simple Transparent Header</h2>
+  </div>
+
+  <div class="docs-Stack docs-Stack--stretch">
+
+    <div style="display: flex; flex-direction: column; justify-content: space-between; height: 300px; color: white; background: linear-gradient(121.59deg, #073256 0%, #185C95 100%);">
+
+      <header class="Header Header--transparent Header--simple">
+        <a href="#" aria-label="JobBoard homepage">
+          <div class="ProductLogo">
+            {{> web/assets/jobBoardLogoInverted }}
+          </div>
+        </a>
+      </header>
+
+      <div class="typography-heading-large-bold text-center mb-1200">Example Cover</div>
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Experimental RTL Support</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <script>
+        const toggleRtl = () => {
+          const htmlElement = document.querySelector('html');
+
+          if (htmlElement.hasAttribute('dir')) {
+            document.querySelector('html').removeAttribute('dir');
+            return;
+          }
+
+          document.querySelector('html').setAttribute('dir', 'rtl');
+        }
+      </script>
+
+      <div class="Checkbox">
+        <input
+          type="checkbox"
+          id="rtl"
+          class="Checkbox__input"
+          onclick="toggleRtl()"
+        />
+        <div class="Checkbox__text">
+          <label class="Checkbox__label" for="rtl">Switch writing mode to RTL</label>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
