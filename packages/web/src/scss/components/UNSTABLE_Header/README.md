@@ -59,7 +59,7 @@ Use [`Container`][web-container] and [`Flex`][web-flex] components to create a l
 ```html
 <header class="UNSTABLE_Header">
   <div class="Container">
-    <div class="Flex Flex--row Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter">
+    <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter">
       <a href="#" class="UNSTABLE_HeaderLogo">
         <div class="ProductLogo">
           <!-- content -->
@@ -78,7 +78,7 @@ For example you can make the content centered by setting the `Flex` alignment cl
 
 ```html
 <header class="UNSTABLE_Header">
-  <div class="Flex Flex--row Flex--noWrap Flex--alignmentXCenter Flex--alignmentYCenter">
+  <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXCenter Flex--alignmentYCenter">
     <a href="#" class="UNSTABLE_HeaderLogo">
       <div class="ProductLogo">
         <!-- content -->
@@ -94,7 +94,7 @@ Or you can modify the gaps between the content by setting the `Flex` `spacing` p
 <header class="UNSTABLE_Header">
   <div class="Container">
     <div
-      class="Flex Flex--row Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter"
+      class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter"
       style="--flex-spacing: var(--spirit-space-500);"
     >
       <a href="#" class="UNSTABLE_HeaderLogo">
@@ -114,7 +114,7 @@ If you need the whole Header fluid you can do it by adding the `Container--fluid
 ```html
 <header class="UNSTABLE_Header">
   <div class="Container Container--fluid">
-    <div class="Flex Flex--row Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter">
+    <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter">
       <a href="#" class="UNSTABLE_HeaderLogo">
         <div class="ProductLogo">
           <!-- content -->
@@ -137,7 +137,7 @@ Use the composition mentioned above to create the layout you need.
 <header class="UNSTABLE_Header">
   <div class="Container">
     <div
-      class="Flex Flex--row Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter"
+      class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXLeft Flex--alignmentYCenter"
       style="--flex-spacing-x: var(--spirit-space-1000);"
     >
       <a href="#" aria-label="JobBoard homepage" class="UNSTABLE_HeaderLogo">
@@ -162,7 +162,7 @@ Use the composition mentioned above to create the layout you need.
         <ul>
           <li>
             <button class="Button Button--tertiary Button--medium Button--symmetrical">
-              <svg width="24" height="24" aria-hidden="true">
+              <svg class="Icon" width="24" height="24" aria-hidden="true">
                 <use xlink:href="/assets/icons/svg/sprite.svg#search" />
               </svg>
             </button>

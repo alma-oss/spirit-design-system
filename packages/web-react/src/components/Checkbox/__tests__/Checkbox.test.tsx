@@ -4,13 +4,15 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   itemPropsTest,
   requiredPropsTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
   validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import Checkbox from '../Checkbox';
 
@@ -27,13 +29,23 @@ describe('Checkbox', () => {
 
   validationStatePropsTest(Checkbox, 'Checkbox--');
 
-  validationTextPropsTest(Checkbox, '.Checkbox__validationText');
-
   requiredPropsTest(Checkbox, 'checkbox', 'id', 'test-checkbox');
 
   validHtmlAttributesTest(Checkbox);
 
   ariaAttributesTest(Checkbox);
+
+  formFieldLabelContextPropsTest({
+    renderComponent: (props) => <Checkbox id="checkbox-context" label="Label" {...props} />,
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => <Checkbox id="checkbox-helper-context" label="Label" {...props} />,
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => <Checkbox id="checkbox-validation-context" label="Label" {...props} />,
+  });
 
   it('should have text classname', () => {
     render(<Checkbox id="checkbox" label="Label" />);
@@ -41,22 +53,10 @@ describe('Checkbox', () => {
     expect(screen.getByRole('checkbox').nextElementSibling).toHaveClass('Checkbox__text');
   });
 
-  it('should have label classname', () => {
+  it('should have label', () => {
     render(<Checkbox id="checkbox" label="Label" />);
 
-    expect(screen.getByRole('checkbox').nextElementSibling?.firstChild).toHaveClass('Checkbox__label');
-  });
-
-  it('should have hidden classname', () => {
-    render(<Checkbox id="checkbox" label="Label" isLabelHidden />);
-
-    expect(screen.getByRole('checkbox').nextElementSibling?.firstChild).toHaveClass('Checkbox__label--hidden');
-  });
-
-  it('should have required classname', () => {
-    render(<Checkbox id="checkbox" label="Label" isRequired />);
-
-    expect(screen.getByRole('checkbox').nextElementSibling?.firstChild).toHaveClass('Checkbox__label--required');
+    expect(screen.getByRole('checkbox', { name: 'Label' })).toBeInTheDocument();
   });
 
   it('should have input classname', () => {
@@ -71,7 +71,6 @@ describe('Checkbox', () => {
     const element = screen.getByText('text');
 
     expect(element).toBeInTheDocument();
-    expect(element).toHaveClass('Checkbox__helperText');
   });
 
   it('should render label with html tags', () => {
@@ -86,10 +85,41 @@ describe('Checkbox', () => {
       />,
     );
 
-    const element = screen.getByRole('checkbox').nextElementSibling?.firstChild as HTMLElement;
+    expect(screen.getByRole('checkbox', { name: 'Label Text' })).toBeInTheDocument();
+  });
 
-    expect(element).toHaveTextContent('Label Text');
-    expect(element.innerHTML).toBe('Label <b>Text</b>');
+  it('should register helper and validation text ids in aria-describedby', () => {
+    render(
+      <Checkbox
+        id="checkbox-aria-describedby"
+        label="Label"
+        helperText="Helper"
+        validationState="danger"
+        validationText="Invalid"
+      />,
+    );
+
+    const input = screen.getByRole('checkbox', { name: 'Label' });
+    const describedBy = input.getAttribute('aria-describedby') ?? '';
+
+    expect(describedBy).toContain('checkbox-aria-describedby-helper-text');
+    expect(describedBy).toContain('checkbox-aria-describedby-validation-text');
+  });
+
+  it('should render validation icon when hasValidationIcon is set', () => {
+    render(
+      <Checkbox
+        id="checkbox-validation-icon"
+        label="Label"
+        hasValidationIcon
+        validationState="danger"
+        validationText="Invalid"
+      />,
+    );
+
+    const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
+
+    expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
 
   it('should render details content', () => {

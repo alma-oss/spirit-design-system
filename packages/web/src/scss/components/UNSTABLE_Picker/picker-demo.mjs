@@ -225,9 +225,14 @@ export function initPopoverBehavior(triggerEl, popoverEl) {
     first?.focus();
   });
 
-  // Focus restoration: return focus to trigger on any close (Escape, click outside, programmatic)
+  // Focus restoration: return focus to trigger on any close (Escape, click outside, programmatic),
+  // but only if focus is still inside the popover or has fallen to body — otherwise the user has
+  // already moved focus elsewhere (e.g., clicked another picker's trigger) and we must not steal it.
   popoverEl.addEventListener(EVENT_HIDDEN, () => {
-    triggerEl.focus();
+    const activeEl = document.activeElement;
+    if (!activeEl || activeEl === document.body || popoverEl.contains(activeEl)) {
+      triggerEl.focus();
+    }
   });
 
   popoverEl.addEventListener('keydown', function (event) {
@@ -241,11 +246,16 @@ export function initPopoverBehavior(triggerEl, popoverEl) {
       return;
     }
 
-    // Tab off last focusable element closes the popover (non-modal anchored dropdown pattern)
-    if (event.key === 'Tab' && !event.shiftKey) {
+    // Tab off last / Shift+Tab off first focusable element closes the popover (non-modal anchored dropdown pattern)
+    if (event.key === 'Tab') {
       const focusable = Array.from(popoverEl.querySelectorAll(SELECTOR_FOCUSABLE));
 
-      if (focusable.length > 0 && document.activeElement === focusable[focusable.length - 1]) {
+      if (event.shiftKey) {
+        if (focusable.length > 0 && document.activeElement === focusable[0]) {
+          event.preventDefault();
+          triggerEl.click();
+        }
+      } else if (focusable.length > 0 && document.activeElement === focusable[focusable.length - 1]) {
         event.preventDefault();
         triggerEl.click();
       }

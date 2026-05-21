@@ -1,88 +1,70 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
-  classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   restPropsTest,
-  sizePropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
-  validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
+import { Sizes } from '../../../constants';
 import { type TextFieldType } from '../../../types';
+import { InputAddon } from '../../InputAddon';
 import TextField from '../TextField';
 
 jest.mock('../../../hooks/useIcon');
 
 describe('TextField', () => {
-  describe.each(['text', 'password', 'email'])('input type %s', (type) => {
-    classNamePrefixProviderTest(TextField, 'TextField');
+  formFieldLabelContextPropsTest({
+    renderComponent: (props) => <TextField id="textfield-context" label="Label" type="text" {...props} />,
+  });
 
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => <TextField id="textfield-helper-context" label="Label" type="text" {...props} />,
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => <TextField id="textfield-validation-context" label="Label" type="text" {...props} />,
+  });
+
+  describe.each(['text', 'password', 'email'])('input type %s', (type) => {
     stylePropsTest(TextField);
 
     restPropsTest(TextField, 'input');
-
-    validationStatePropsTest(TextField, 'TextField--');
-
-    validationTextPropsTest(TextField, '.TextField__validationText', type as TextFieldType);
 
     validHtmlAttributesTest(TextField);
 
     ariaAttributesTest(TextField);
 
-    sizePropsTest(TextField);
+    it.each([Object.values(Sizes)])('should render size %s', async (size) => {
+      render(<TextField id="textfield" label="Label" type={type as TextFieldType} size={size} />);
 
-    it('should have label classname', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} />);
+      await waitFor(() => {
+        const inputContainer = screen.getByLabelText('Label').parentElement;
 
-      expect(screen.getByText('Label')).toHaveClass('TextField__label');
+        expect(inputContainer?.getAttribute('class')).toContain(size);
+      });
     });
 
-    it('should have disabled classname na prop', () => {
+    it('should have label', () => {
+      render(<TextField id="textfield" label="Label" type={type as TextFieldType} />);
+
+      expect(screen.getByText('Label')).toBeInTheDocument();
+    });
+
+    it('should have disabled attribute on input when isDisabled prop is set', () => {
       render(<TextField id="textfield" label="Label" type={type as TextFieldType} isDisabled />);
 
-      expect(screen.getByLabelText('Label').parentElement).toHaveClass('TextField--disabled');
       expect(screen.getByLabelText('Label')).toHaveAttribute('disabled');
-    });
-
-    it('should have hidden classname', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} isLabelHidden />);
-
-      expect(screen.getByText('Label')).toHaveClass('TextField__label--hidden');
-    });
-
-    it('should have required classname', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} isRequired />);
-
-      expect(screen.getByText('Label')).toHaveClass('TextField__label--required');
-      expect(screen.getByLabelText('Label')).toHaveAttribute('required');
-    });
-
-    it('should have input classname', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} />);
-
-      expect(screen.getByLabelText('Label')).toHaveClass('TextField__input');
-    });
-
-    it('should have helper text', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} helperText="helper text" />);
-
-      expect(screen.getByText('helper text')).toHaveClass('TextField__helperText');
-    });
-
-    it('should have fluid classname', () => {
-      render(<TextField id="textfield" label="Label" type={type as TextFieldType} isFluid />);
-
-      expect(screen.getByLabelText('Label').parentElement).toHaveClass('TextField--fluid');
     });
 
     it('should render label with html tags', () => {
       render(
         <TextField
           id="textfield"
-          data-testid="test"
           label={
             <>
               TextField <b>Label</b>
@@ -92,10 +74,85 @@ describe('TextField', () => {
         />,
       );
 
-      const element = screen.getByTestId('test').previousElementSibling as HTMLElement;
+      const element = screen.getByText('Label').parentElement as HTMLElement;
 
       expect(element).toHaveTextContent('TextField Label');
       expect(element.innerHTML).toBe('TextField <b>Label</b>');
+    });
+  });
+
+  describe('addons', () => {
+    it('should render startAddon before input and endAddon after input', () => {
+      render(
+        <TextField
+          id="textfield"
+          label="Label"
+          startAddon={
+            <InputAddon elementType="label" htmlFor="textfield">
+              Start
+            </InputAddon>
+          }
+          endAddon={
+            <InputAddon elementType="label" htmlFor="textfield">
+              End
+            </InputAddon>
+          }
+        />,
+      );
+
+      const input = screen.getByLabelText('Label');
+      const children = Array.from(input.parentElement?.children ?? []);
+      const startAddon = screen.getByText('Start', { selector: '.InputAddon' });
+      const endAddon = screen.getByText('End', { selector: '.InputAddon' });
+
+      expect(children).toEqual([startAddon, input, endAddon]);
+    });
+
+    it('should render multiple addon nodes before input', () => {
+      render(
+        <TextField
+          id="textfield"
+          label="Label"
+          startAddon={
+            <>
+              <InputAddon elementType="label" htmlFor="textfield">
+                First
+              </InputAddon>
+              <InputAddon elementType="label" htmlFor="textfield">
+                Second
+              </InputAddon>
+            </>
+          }
+        />,
+      );
+
+      const input = screen.getByLabelText('Label');
+      const children = Array.from(input.parentElement?.children ?? []);
+      const firstAddon = screen.getByText('First', { selector: '.InputAddon' });
+      const secondAddon = screen.getByText('Second', { selector: '.InputAddon' });
+
+      expect(children).toEqual([firstAddon, secondAddon, input]);
+    });
+
+    it('should render endAddon before password toggle', () => {
+      render(
+        <TextField
+          id="textfield"
+          label="Label"
+          hasPasswordToggle
+          endAddon={
+            <InputAddon elementType="label" htmlFor="textfield">
+              End
+            </InputAddon>
+          }
+        />,
+      );
+
+      const input = screen.getByLabelText('Label');
+      const children = Array.from(input.parentElement?.children ?? []);
+      const endAddon = screen.getByText('End', { selector: '.InputAddon' });
+
+      expect(children).toEqual([input, endAddon, screen.getByRole('switch').parentElement]);
     });
   });
 
@@ -105,7 +162,7 @@ describe('TextField', () => {
     });
 
     it('should have password toggle button', () => {
-      expect(screen.getByRole('switch')).toHaveClass('TextField__passwordToggle__button');
+      expect(screen.getByRole('switch')).toHaveClass('ControlButton');
     });
 
     it('should have type password with password toggle', () => {
@@ -141,9 +198,25 @@ describe('TextField', () => {
     it('should have disabled attribute on input and toggle button', () => {
       render(<TextField id="textfield" label="Label" hasPasswordToggle isDisabled />);
 
-      expect(screen.getByText('Label').parentElement).toHaveClass('TextField--disabled');
       expect(screen.getByLabelText('Label')).toHaveAttribute('disabled');
       expect(screen.getByRole('switch')).toHaveAttribute('disabled');
     });
+  });
+
+  it('should render validation icon when hasValidationIcon is set', () => {
+    render(
+      <TextField
+        id="textfield-validation-icon"
+        label="Label"
+        type="text"
+        hasValidationIcon
+        validationState="danger"
+        validationText="Invalid"
+      />,
+    );
+
+    const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
+
+    expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
 });

@@ -4,7 +4,8 @@
 // 2. Reuse already generated custom properties to allow overriding the arrow appearance live in the browser.
 
 @use 'sass:math';
-@use '../../tools/dictionaries';
+@use '@tokens' as tokens;
+@use '../../tools/color-scheme';
 @use '../../tools/placement';
 @use '../../tools/reset';
 @use '../../tools/svg';
@@ -12,11 +13,14 @@
 @use 'theme';
 @use 'tools';
 
+$_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
+
 .TooltipPopover {
     --tooltip-max-width: #{theme.$max-width};
+    --#{$_tooltip-placement-prefix}-offset: #{theme.$arrow-height};
 
     @include placement.child();
-    @include placement.child-controlled($prefix: 'tooltip', $offset: theme.$arrow-height);
+    @include placement.child-controlled($prefix: $_tooltip-placement-prefix, $offset: theme.$arrow-height);
     @include typography.generate(theme.$typography);
 
     width: max-content;
@@ -25,9 +29,9 @@
     text-align: left;
     white-space: normal;
     word-break: normal;
-    color: theme.$color;
+    color: color-scheme.color();
     border-radius: theme.$border-radius;
-    background-color: theme.$background-color;
+    background-color: color-scheme.background-color();
     box-shadow: theme.$box-shadow;
     word-wrap: break-word;
 
@@ -48,7 +52,11 @@
 
     width: var(--tooltip-arrow-width); // 2.
     height: var(--tooltip-arrow-height); // 2.
-    background: no-repeat center/cover svg.escape(theme.$arrow-shape);
+    background-color: inherit;
+    mask-image: svg.escape(theme.$arrow-shape);
+    mask-size: cover;
+    rotate: z var(--#{$_tooltip-placement-prefix}-arrow-rotate, 0deg);
+    transform-origin: var(--#{$_tooltip-placement-prefix}-arrow-transform-origin, bottom center);
 }
 
 .TooltipPopover__close {
@@ -56,7 +64,7 @@
 
     width: theme.$close-button-size;
     height: theme.$close-button-size;
-    color: theme.$color;
+    color: color-scheme.color();
 }
 
 .TooltipPopover--dismissible {
@@ -67,14 +75,6 @@
     column-gap: theme.$gap;
     align-items: center;
 }
-
-@include dictionaries.generate-placements(
-    $class-name: 'TooltipPopover',
-    $dictionary-values: theme.$placement-dictionary,
-    $offset: theme.$arrow-height,
-    $is-controlled: true,
-    $has-arrow: true
-);
 
 // Controlled visibility
 .TooltipPopover.is-hidden {

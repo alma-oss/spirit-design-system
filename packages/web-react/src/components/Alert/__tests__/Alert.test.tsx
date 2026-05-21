@@ -4,18 +4,23 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  colorSchemeSubtleTest,
   elementTypePropsTest,
   emotionColorPropsTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { EmotionColors } from '../../../constants';
+import { getColorSchemeClassName } from '../../../utils';
 import Alert from '../Alert';
 
 jest.mock('../../../hooks/useIcon');
 
 describe('Alert', () => {
   classNamePrefixProviderTest(Alert, 'Alert');
+
+  colorSchemeSubtleTest(Alert, Object.values(EmotionColors));
 
   stylePropsTest(Alert);
 
@@ -34,7 +39,7 @@ describe('Alert', () => {
 
     const element = dom.container.querySelector('div') as HTMLElement;
 
-    expect(element).toHaveClass('Alert--success');
+    expect(element).toHaveClass('Alert--success', getColorSchemeClassName({ color: 'success', isSubtle: true }));
   });
 
   it('should render text children', () => {

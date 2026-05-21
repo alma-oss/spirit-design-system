@@ -12,18 +12,18 @@
         type="button"
         class="Item"
       >
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item">Item label</span>
       </button>
 
       <a
         href="https://www.example.com"
         class="Item"
       >
-        <span class="Item__label">Item label as link</span>
+        <span class="Label Label--item">Item label as link</span>
       </a>
 
       <div class="Item">
-        <span class="Item__label">Item label as div</span>
+        <span class="Label Label--item">Item label as div</span>
       </div>
 
     </div>
@@ -48,9 +48,10 @@
           type="button"
           class="Item"
         >
-          <span class="Item__label">Item label</span>
+          <span class="Label Label--item">Item label</span>
           <span class="Item__icon Item__icon--end">
             <svg
+              class="Icon"
               width="24"
               height="24"
               aria-hidden="true"
@@ -70,7 +71,7 @@
           type="button"
           class="Item Item--selected"
         >
-          <span class="Item__label">Item label</span>
+          <span class="Label Label--item">Item label</span>
         </button>
 
       </div>
@@ -83,9 +84,10 @@
           type="button"
           class="Item Item--selected"
         >
-          <span class="Item__label">Item label</span>
+          <span class="Label Label--item">Item label</span>
           <span class="Item__icon Item__icon--end">
             <svg
+              class="Icon"
               width="24"
               height="24"
               aria-hidden="true"
@@ -115,16 +117,17 @@
         type="button"
         class="Item Item--disabled"
       >
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item Label--disabled">Item label</span>
       </button>
 
       <button
         type="button"
-        class="Item Item--disabled"
+        class="Item Item--disabled Item--selected"
       >
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item Label--disabled">Item label</span>
         <span class="Item__icon Item__icon--end">
           <svg
+            class="Icon"
             width="24"
             height="24"
             aria-hidden="true"
@@ -152,18 +155,19 @@
         type="button"
         class="Item"
       >
-        <span class="Item__label">Item label</span>
-        <span class="Item__helperText">Helper text</span>
+        <span class="Label Label--item">Item label</span>
+        <span class="HelperText HelperText--item">Helper text</span>
       </button>
 
       <button
         type="button"
-        class="Item"
+        class="Item Item--selected"
       >
-        <span class="Item__label">Item label</span>
-        <span class="Item__helperText">Helper text</span>
+        <span class="Label Label--item">Item label</span>
+        <span class="HelperText HelperText--item">Helper text</span>
         <span class="Item__icon Item__icon--end">
           <svg
+            class="Icon"
             width="24"
             height="24"
             aria-hidden="true"
@@ -177,18 +181,19 @@
         type="button"
         class="Item Item--disabled"
       >
-        <span class="Item__label">Item label</span>
-        <span class="Item__helperText">Helper text</span>
+        <span class="Label Label--item Label--disabled">Item label</span>
+        <span class="HelperText HelperText--item HelperText--disabled">Helper text</span>
       </button>
 
       <button
         type="button"
-        class="Item Item--disabled"
+        class="Item Item--disabled Item--selected"
       >
-        <span class="Item__label">Item label</span>
-        <span class="Item__helperText">Helper text</span>
+        <span class="Label Label--item Label--disabled">Item label</span>
+        <span class="HelperText HelperText--item HelperText--disabled">Helper text</span>
         <span class="Item__icon Item__icon--end">
           <svg
+            class="Icon"
             width="24"
             height="24"
             aria-hidden="true"
@@ -217,6 +222,7 @@
       >
         <span class="Item__icon Item__icon--start">
           <svg
+            class="Icon"
             width="24"
             height="24"
             aria-hidden="true"
@@ -224,15 +230,16 @@
             <use xlink:href="/assets/icons/svg/sprite.svg#search" />
           </svg>
         </span>
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item">Item label</span>
       </button>
 
       <button
         type="button"
-        class="Item"
+        class="Item Item--selected"
       >
         <span class="Item__icon Item__icon--start">
           <svg
+            class="Icon"
             width="24"
             height="24"
             aria-hidden="true"
@@ -240,9 +247,10 @@
             <use xlink:href="/assets/icons/svg/sprite.svg#search" />
           </svg>
         </span>
-        <span class="Item__label">Item label</span>
+        <span class="Label Label--item">Item label</span>
         <span class="Item__icon Item__icon--end">
           <svg
+            class="Icon"
             width="24"
             height="24"
             aria-hidden="true"
@@ -274,7 +282,7 @@
         />
         <div class="Checkbox__text">
           <label
-            class="Checkbox__label"
+            class="Label Label--item"
             for="checkbox-item"
           >Checkbox Item</label>
         </div>
@@ -303,7 +311,7 @@
         />
         <div class="Radio__text">
           <label
-            class="Radio__label"
+            class="Label Label--item"
             for="radio-item"
           >Radio Item</label>
         </div>

@@ -29,7 +29,7 @@
 <!-- Picker: empty selection template -->
 <template id="picker-selection-label-template">
   <span
-    class="UNSTABLE_Picker__selectionEmpty"
+    class="UNSTABLE_PickerSelection__empty"
     data-spirit-element="selection-label"
     aria-hidden="true"
   ></span>
@@ -42,7 +42,7 @@
     data-tag-row
     tabindex="0"
     aria-describedby="picker-tag-description"
-    class="Tag Tag--selected bg-selected-basic text-selected-subtle Tag--small"
+    class="Tag Tag--selected Tag--small color-scheme-on-selected-basic"
   >
     <div
       role="gridcell"
@@ -77,11 +77,11 @@
 
     <!-- Keyboard: roving tabindex on tags, arrow keys, Esc to close, ArrowDown to open -->
 
-    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-control-button-expanded-size-scale">
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+      <div>
 
-        <span class="UNSTABLE_Picker__label">Languages</span>
+        <span class="Label">Languages</span>
 
         <div
           class="Dropdown"
@@ -92,7 +92,7 @@
           <div
             role="group"
             aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium"
           >
 
             <div
@@ -103,11 +103,11 @@
               aria-live="off"
               aria-relevant="additions"
               id="picker-lang-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Languages</span>
@@ -116,7 +116,7 @@
             <button
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-lang"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-lang"
@@ -137,14 +137,14 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-lang"
           >
 
-            <fieldset class="FieldGroup FieldGroup--fluid">
+            <fieldset class="border-0">
               <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
+              <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                   <input
@@ -156,7 +156,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-cs"
                     >
@@ -175,7 +175,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-dk"
                     >
@@ -194,7 +194,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-kl"
                     >
@@ -212,9 +212,9 @@
 
       </div>
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+      <div>
 
-        <span class="UNSTABLE_Picker__label">Languages</span>
+        <span class="Label">Languages</span>
 
         <div
           class="Dropdown"
@@ -225,7 +225,7 @@
           <div
             role="group"
             aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium"
           >
 
             <div
@@ -236,11 +236,11 @@
               aria-live="off"
               aria-relevant="additions"
               id="picker-lang-pre-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Languages</span>
@@ -249,7 +249,7 @@
             <button
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-lang-pre"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="listbox"
               aria-expanded="false"
               aria-controls="picker-lang-pre"
@@ -270,14 +270,14 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-lang-pre"
           >
 
-            <fieldset class="FieldGroup FieldGroup--fluid">
+            <fieldset class="border-0">
               <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
+              <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                   <input
@@ -290,7 +290,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-pre-cs"
                     >
@@ -310,7 +310,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-pre-dk"
                     >
@@ -329,7 +329,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-pre-kl"
                     >
@@ -359,13 +359,13 @@
 
     <h2 class="docs-Heading">Sizes</h2>
 
-    <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-control-button-expanded-size-scale">
       <div class="Grid Grid--cols-1 Grid--desktop--cols-3">
 
         <!-- Small -->
-        <div class="UNSTABLE_Picker UNSTABLE_Picker--small">
+        <div>
 
-          <span class="UNSTABLE_Picker__label">Small</span>
+          <span class="Label">Small</span>
 
           <div
             class="Dropdown"
@@ -377,7 +377,7 @@
             <div
               role="group"
               aria-label="Languages"
-              class="UNSTABLE_Picker__inputContainer"
+              class="InputContainer InputContainer--small"
             >
 
               <div
@@ -388,11 +388,11 @@
                 aria-live="off"
                 aria-relevant="additions"
                 id="picker-small-selection"
-                class="UNSTABLE_Picker__selection"
+                class="UNSTABLE_PickerSelection"
                 data-spirit-element="selection"
               >
                 <span
-                  class="UNSTABLE_Picker__selectionEmpty"
+                  class="UNSTABLE_PickerSelection__empty"
                   data-spirit-element="selection-label"
                   aria-hidden="true"
                 >Languages</span>
@@ -401,7 +401,7 @@
               <button
                 data-spirit-toggle="dropdown"
                 data-spirit-target="#picker-small"
-                class="UNSTABLE_Picker__trigger"
+                class="UNSTABLE_PickerTrigger"
                 aria-haspopup="dialog"
                 aria-expanded="false"
                 aria-controls="picker-small"
@@ -422,13 +422,13 @@
             <div
               role="dialog"
               aria-modal="true"
-              class="DropdownPopover"
+              class="DropdownPopover placement-bottom-start"
               data-spirit-placement="bottom-start"
               id="picker-small"
             >
-              <fieldset class="FieldGroup FieldGroup--fluid">
+              <fieldset class="border-0">
                 <legend class="accessibility-hidden">Language</legend>
-                <div class="FieldGroup__fields">
+                <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                   <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                     <input
@@ -440,7 +440,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="lang-small-cs"
                       >Czech</label>
@@ -457,7 +457,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="lang-small-dk"
                       >Danish</label>
@@ -474,7 +474,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="lang-small-kl"
                       >Greenlandic</label>
@@ -490,9 +490,9 @@
         </div>
 
         <!-- Medium (default) -->
-        <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+        <div>
 
-          <span class="UNSTABLE_Picker__label">Medium (default)</span>
+          <span class="Label">Medium (default)</span>
 
           <div
             class="Dropdown"
@@ -504,7 +504,7 @@
             <div
               role="group"
               aria-label="Languages"
-              class="UNSTABLE_Picker__inputContainer"
+              class="InputContainer InputContainer--medium"
             >
 
               <div
@@ -515,11 +515,11 @@
                 aria-live="off"
                 aria-relevant="additions"
                 id="picker-medium-selection"
-                class="UNSTABLE_Picker__selection"
+                class="UNSTABLE_PickerSelection"
                 data-spirit-element="selection"
               >
                 <span
-                  class="UNSTABLE_Picker__selectionEmpty"
+                  class="UNSTABLE_PickerSelection__empty"
                   data-spirit-element="selection-label"
                   aria-hidden="true"
                 >Languages</span>
@@ -528,7 +528,7 @@
               <button
                 data-spirit-toggle="dropdown"
                 data-spirit-target="#picker-medium"
-                class="UNSTABLE_Picker__trigger"
+                class="UNSTABLE_PickerTrigger"
                 aria-haspopup="dialog"
                 aria-expanded="false"
                 aria-controls="picker-medium"
@@ -549,13 +549,13 @@
             <div
               role="dialog"
               aria-modal="true"
-              class="DropdownPopover"
+              class="DropdownPopover placement-bottom-start"
               data-spirit-placement="bottom-start"
               id="picker-medium"
             >
-              <fieldset class="FieldGroup FieldGroup--fluid">
+              <fieldset class="border-0">
                 <legend class="accessibility-hidden">Language</legend>
-                <div class="FieldGroup__fields">
+                <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                   <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                     <input
@@ -567,7 +567,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="lang-medium-cs"
                       >Czech</label>
@@ -584,7 +584,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="lang-medium-dk"
                       >Danish</label>
@@ -601,7 +601,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="lang-medium-kl"
                       >Greenlandic</label>
@@ -617,9 +617,9 @@
         </div>
 
         <!-- Large -->
-        <div class="UNSTABLE_Picker UNSTABLE_Picker--large">
+        <div>
 
-          <span class="UNSTABLE_Picker__label">Large</span>
+          <span class="Label">Large</span>
 
           <div
             class="Dropdown"
@@ -631,7 +631,7 @@
             <div
               role="group"
               aria-label="Languages"
-              class="UNSTABLE_Picker__inputContainer"
+              class="InputContainer InputContainer--large"
             >
 
               <div
@@ -642,11 +642,11 @@
                 aria-live="off"
                 aria-relevant="additions"
                 id="picker-large-selection"
-                class="UNSTABLE_Picker__selection"
+                class="UNSTABLE_PickerSelection"
                 data-spirit-element="selection"
               >
                 <span
-                  class="UNSTABLE_Picker__selectionEmpty"
+                  class="UNSTABLE_PickerSelection__empty"
                   data-spirit-element="selection-label"
                   aria-hidden="true"
                 >Languages</span>
@@ -655,7 +655,7 @@
               <button
                 data-spirit-toggle="dropdown"
                 data-spirit-target="#picker-large"
-                class="UNSTABLE_Picker__trigger"
+                class="UNSTABLE_PickerTrigger"
                 aria-haspopup="dialog"
                 aria-expanded="false"
                 aria-controls="picker-large"
@@ -676,13 +676,13 @@
             <div
               role="dialog"
               aria-modal="true"
-              class="DropdownPopover"
+              class="DropdownPopover placement-bottom-start"
               data-spirit-placement="bottom-start"
               id="picker-large"
             >
-              <fieldset class="FieldGroup FieldGroup--fluid">
+              <fieldset class="border-0">
                 <legend class="accessibility-hidden">Language</legend>
-                <div class="FieldGroup__fields">
+                <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                   <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                     <input
@@ -694,7 +694,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="lang-large-cs"
                       >Czech</label>
@@ -711,7 +711,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="lang-large-dk"
                       >Danish</label>
@@ -728,7 +728,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="lang-large-kl"
                       >Greenlandic</label>
@@ -756,11 +756,11 @@
 
     <h2 class="docs-Heading">Aggregated Tags</h2>
 
-    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-control-button-expanded-size-scale">
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+      <div>
 
-        <span class="UNSTABLE_Picker__label">Languages</span>
+        <span class="Label">Languages</span>
 
         <div
           class="Dropdown"
@@ -772,7 +772,7 @@
           <div
             role="group"
             aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium"
           >
 
             <div
@@ -783,11 +783,11 @@
               aria-live="off"
               aria-relevant="additions"
               id="picker-lang2-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Languages</span>
@@ -796,7 +796,7 @@
             <button
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-lang2"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="listbox"
               aria-expanded="false"
               aria-controls="picker-lang2"
@@ -817,14 +817,14 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-lang2"
           >
 
-            <fieldset class="FieldGroup FieldGroup--fluid">
+            <fieldset class="border-0">
               <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
+              <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                   <input
@@ -836,7 +836,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang2-cs"
                     >
@@ -855,7 +855,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang2-dk"
                     >
@@ -874,7 +874,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang2-kl"
                     >
@@ -904,11 +904,11 @@
 
     <h2 class="docs-Heading">Hidden Label</h2>
 
-    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-control-button-expanded-size-scale">
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+      <div>
 
-        <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--hidden">Languages</span>
+        <span class="Label accessibility-hidden">Languages</span>
 
         <div
           class="Dropdown"
@@ -919,7 +919,7 @@
           <div
             role="group"
             aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium"
           >
 
             <div
@@ -930,11 +930,11 @@
               aria-live="off"
               aria-relevant="additions"
               id="picker-hidden-label-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Languages</span>
@@ -943,7 +943,7 @@
             <button
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-hidden-label"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="listbox"
               aria-expanded="false"
               aria-controls="picker-hidden-label"
@@ -964,14 +964,14 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-hidden-label"
           >
 
-            <fieldset class="FieldGroup FieldGroup--fluid">
+            <fieldset class="border-0">
               <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
+              <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                   <input
@@ -983,7 +983,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-hidden-cs"
                     >
@@ -1002,7 +1002,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-hidden-dk"
                     >
@@ -1021,7 +1021,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-hidden-kl"
                     >
@@ -1051,11 +1051,11 @@
 
     <h2 class="docs-Heading">Required</h2>
 
-    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-control-button-expanded-size-scale">
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+      <div>
 
-        <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--required">Languages</span>
+        <span class="Label Label--required">Languages</span>
 
         <div
           class="Dropdown"
@@ -1066,7 +1066,7 @@
           <div
             role="group"
             aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium"
           >
 
             <div
@@ -1077,11 +1077,11 @@
               aria-live="off"
               aria-relevant="additions"
               id="picker-required-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Languages</span>
@@ -1090,7 +1090,7 @@
             <button
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-required"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="listbox"
               aria-expanded="false"
               aria-controls="picker-required"
@@ -1111,14 +1111,14 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-required"
           >
 
-            <fieldset class="FieldGroup FieldGroup--fluid">
+            <fieldset class="border-0">
               <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
+              <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                   <input
@@ -1130,7 +1130,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-req-cs"
                     >
@@ -1149,7 +1149,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-req-dk"
                     >
@@ -1168,7 +1168,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-req-kl"
                     >
@@ -1198,11 +1198,11 @@
 
     <h2 class="docs-Heading">Helper Text</h2>
 
-    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-control-button-expanded-size-scale">
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+      <div>
 
-        <span class="UNSTABLE_Picker__label">Languages</span>
+        <span class="Label">Languages</span>
 
         <div
           class="Dropdown"
@@ -1213,7 +1213,7 @@
           <div
             role="group"
             aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium"
           >
 
             <div
@@ -1225,11 +1225,11 @@
               aria-relevant="additions"
               aria-describedby="picker-helper-text"
               id="picker-helper-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Languages</span>
@@ -1238,8 +1238,8 @@
             <button
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-helper"
-              class="UNSTABLE_Picker__trigger"
-              aria-haspopup="dialog"
+              class="UNSTABLE_PickerTrigger"
+              aria-haspopup="listbox"
               aria-expanded="false"
               aria-controls="picker-helper"
             >
@@ -1259,14 +1259,14 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-helper"
           >
 
-            <fieldset class="FieldGroup FieldGroup--fluid" style="width: 300px">
-              <legend class="accessibility-hidden">Languages</legend>
-              <div class="FieldGroup__fields">
+            <fieldset class="border-0">
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                   <input
@@ -1278,13 +1278,13 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-helper-cs"
                     >
                       Czech
                     </label>
-                    <span class="Checkbox__helperText" aria-labelledby="lang-helper-cs">Select this when the listing has no language tag.</span>
+                    <span class="HelperText" aria-labelledby="lang-helper-cs">Select this when the listing has no language tag.</span>
                   </div>
                 </div>
 
@@ -1298,7 +1298,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-helper-dk"
                     >
@@ -1317,7 +1317,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-helper-kl"
                     >
@@ -1333,7 +1333,7 @@
 
         </div>
 
-        <div id="picker-helper-text" class="UNSTABLE_Picker__helperText">Select one or more languages</div>
+        <div id="picker-helper-text" class="HelperText">Select one or more languages</div>
 
       </div>
 
@@ -1349,11 +1349,11 @@
 
     <h2 class="docs-Heading">Validation States</h2>
 
-    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-control-button-expanded-size-scale">
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--danger">
+      <div>
 
-        <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--required">Languages</span>
+        <span class="Label Label--required">Languages</span>
 
         <div
           class="Dropdown"
@@ -1364,7 +1364,7 @@
           <div
             role="group"
             aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium InputContainer--danger"
           >
 
             <div
@@ -1376,11 +1376,11 @@
               aria-relevant="additions"
               aria-describedby="picker-danger-validation-text"
               id="picker-danger-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Languages</span>
@@ -1389,7 +1389,7 @@
             <button
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-danger"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="listbox"
               aria-expanded="false"
               aria-controls="picker-danger"
@@ -1410,14 +1410,14 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-danger"
           >
 
-            <fieldset class="FieldGroup FieldGroup--fluid">
+            <fieldset class="border-0">
               <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
+              <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                   <input
@@ -1429,7 +1429,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-danger-cs"
                     >
@@ -1448,7 +1448,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-danger-dk"
                     >
@@ -1467,7 +1467,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-danger-kl"
                     >
@@ -1483,13 +1483,13 @@
 
         </div>
 
-        <div id="picker-danger-validation-text" class="UNSTABLE_Picker__validationText">Please select at least one language</div>
+        <div id="picker-danger-validation-text" class="ValidationText ValidationText--danger">Please select at least one language</div>
 
       </div>
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--warning">
+      <div>
 
-        <span class="UNSTABLE_Picker__label">Languages</span>
+        <span class="Label">Languages</span>
 
         <div
           class="Dropdown"
@@ -1500,7 +1500,7 @@
           <div
             role="group"
             aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium InputContainer--warning"
           >
 
             <div
@@ -1512,11 +1512,11 @@
               aria-relevant="additions"
               aria-describedby="picker-warning-validation-text"
               id="picker-warning-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Languages</span>
@@ -1525,7 +1525,7 @@
             <button
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-warning"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="listbox"
               aria-expanded="false"
               aria-controls="picker-warning"
@@ -1546,14 +1546,14 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-warning"
           >
 
-            <fieldset class="FieldGroup FieldGroup--fluid">
+            <fieldset class="border-0">
               <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
+              <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                   <input
@@ -1566,7 +1566,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-warning-cs"
                     >
@@ -1585,7 +1585,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-warning-dk"
                     >
@@ -1604,7 +1604,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-warning-kl"
                     >
@@ -1620,13 +1620,13 @@
 
         </div>
 
-        <div id="picker-warning-validation-text" class="UNSTABLE_Picker__validationText">Consider adding more languages</div>
+        <div id="picker-warning-validation-text" class="ValidationText ValidationText--warning">Consider adding more languages</div>
 
       </div>
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--success">
+      <div>
 
-        <span class="UNSTABLE_Picker__label">Languages</span>
+        <span class="Label">Languages</span>
 
         <div
           class="Dropdown"
@@ -1637,7 +1637,7 @@
           <div
             role="group"
             aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium InputContainer--success"
           >
 
             <div
@@ -1649,11 +1649,11 @@
               aria-relevant="additions"
               aria-describedby="picker-success-validation-text"
               id="picker-success-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Languages</span>
@@ -1662,7 +1662,7 @@
             <button
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-success"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="listbox"
               aria-expanded="false"
               aria-controls="picker-success"
@@ -1683,14 +1683,14 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-success"
           >
 
-            <fieldset class="FieldGroup FieldGroup--fluid">
+            <fieldset class="border-0">
               <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
+              <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                   <input
@@ -1703,7 +1703,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-success-cs"
                     >
@@ -1723,7 +1723,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-success-dk"
                     >
@@ -1742,7 +1742,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-success-kl"
                     >
@@ -1758,7 +1758,7 @@
 
         </div>
 
-        <div id="picker-success-validation-text" class="UNSTABLE_Picker__validationText">Great choice!</div>
+        <div id="picker-success-validation-text" class="ValidationText ValidationText--success">Great choice!</div>
 
       </div>
 
@@ -1774,11 +1774,11 @@
 
     <h2 class="docs-Heading">Disabled</h2>
 
-    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-control-button-expanded-size-scale">
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--disabled">
+      <div>
 
-        <span class="UNSTABLE_Picker__label">Languages</span>
+        <span class="Label Label--disabled">Languages</span>
 
         <div
           class="Dropdown"
@@ -1789,7 +1789,7 @@
           <div
             role="group"
             aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium InputContainer--disabled"
           >
 
             <div
@@ -1800,11 +1800,11 @@
               aria-live="off"
               aria-relevant="additions"
               id="picker-disabled-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection UNSTABLE_PickerSelection--disabled"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Languages</span>
@@ -1813,7 +1813,7 @@
             <button
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-disabled"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-disabled"
@@ -1833,14 +1833,14 @@
 
           <div
             role="dialog"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-disabled"
           >
 
-            <fieldset class="FieldGroup FieldGroup--fluid" disabled>
+            <fieldset class="border-0" disabled>
               <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
+              <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                   <input
@@ -1853,7 +1853,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-disabled-cs"
                     >
@@ -1873,7 +1873,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-disabled-dk"
                     >
@@ -1893,7 +1893,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-disabled-kl"
                     >
@@ -1911,9 +1911,9 @@
 
       </div>
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--disabled">
+      <div>
 
-        <span class="UNSTABLE_Picker__label">Languages</span>
+        <span class="Label Label--disabled">Languages</span>
 
         <div
           class="Dropdown"
@@ -1924,7 +1924,7 @@
           <div
             role="group"
             aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium InputContainer--disabled"
           >
 
             <div
@@ -1935,7 +1935,7 @@
               aria-live="off"
               aria-relevant="additions"
               id="picker-disabled-pre-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <div
@@ -2007,7 +2007,7 @@
             <button
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-disabled-pre"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-disabled-pre"
@@ -2027,14 +2027,14 @@
 
           <div
             role="dialog"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-disabled-pre"
           >
 
-            <fieldset class="FieldGroup FieldGroup--fluid" disabled>
+            <fieldset class="border-0" disabled>
               <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
+              <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                   <input
@@ -2048,7 +2048,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-disabled-pre-cs"
                     >
@@ -2069,7 +2069,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-disabled-pre-dk"
                     >
@@ -2089,7 +2089,7 @@
                   />
                   <div class="Checkbox__text">
                     <label
-                      class="Checkbox__label"
+                      class="Label Label--item"
                       data-spirit-element="checkbox-label"
                       for="lang-disabled-pre-kl"
                     >
@@ -2117,167 +2117,20 @@
 
   <div class="Container">
 
-    <h2 class="docs-Heading">Fluid</h2>
-
-    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
-
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium UNSTABLE_Picker--fluid">
-
-        <span class="UNSTABLE_Picker__label">Languages</span>
-
-        <div
-          class="Dropdown"
-          data-spirit-toggle="picker"
-          data-picker-label="Languages"
-        >
-
-          <div
-            role="group"
-            aria-label="Languages"
-            class="UNSTABLE_Picker__inputContainer"
-          >
-
-            <div
-              role="group"
-              tabindex="-1"
-              aria-atomic="false"
-              aria-label="Selected languages"
-              aria-live="off"
-              aria-relevant="additions"
-              id="picker-fluid-selection"
-              class="UNSTABLE_Picker__selection"
-              data-spirit-element="selection"
-            >
-              <span
-                class="UNSTABLE_Picker__selectionEmpty"
-                data-spirit-element="selection-label"
-                aria-hidden="true"
-              >Languages</span>
-            </div>
-
-            <button
-              data-spirit-toggle="dropdown"
-              data-spirit-target="#picker-fluid"
-              class="UNSTABLE_Picker__trigger"
-              aria-haspopup="listbox"
-              aria-expanded="false"
-              aria-controls="picker-fluid"
-            >
-              <span class="accessibility-hidden">Add</span>
-              <svg
-                class="Icon"
-                viewBox="0 0 24 24"
-                width="20"
-                height="20"
-                aria-hidden="true"
-              >
-                <use xlink:href="/assets/icons/svg/sprite.svg#chevron-down" />
-              </svg>
-            </button>
-          </div>
-
-          <div
-            role="dialog"
-            aria-modal="true"
-            class="DropdownPopover"
-            data-spirit-placement="bottom-start"
-            id="picker-fluid"
-          >
-
-            <fieldset class="FieldGroup FieldGroup--fluid">
-              <legend class="accessibility-hidden">Language</legend>
-              <div class="FieldGroup__fields">
-
-                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
-                  <input
-                    type="checkbox"
-                    id="lang-fluid-cs"
-                    class="Checkbox__input"
-                    name="fluid"
-                    autocomplete="off"
-                  />
-                  <div class="Checkbox__text">
-                    <label
-                      class="Checkbox__label"
-                      data-spirit-element="checkbox-label"
-                      for="lang-fluid-cs"
-                    >
-                      Czech
-                    </label>
-                  </div>
-                </div>
-
-                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
-                  <input
-                    type="checkbox"
-                    id="lang-fluid-dk"
-                    class="Checkbox__input"
-                    name="fluid"
-                    autocomplete="off"
-                  />
-                  <div class="Checkbox__text">
-                    <label
-                      class="Checkbox__label"
-                      data-spirit-element="checkbox-label"
-                      for="lang-fluid-dk"
-                    >
-                      Danish
-                    </label>
-                  </div>
-                </div>
-
-                <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
-                  <input
-                    type="checkbox"
-                    id="lang-fluid-kl"
-                    class="Checkbox__input"
-                    name="fluid"
-                    autocomplete="off"
-                  />
-                  <div class="Checkbox__text">
-                    <label
-                      class="Checkbox__label"
-                      data-spirit-element="checkbox-label"
-                      for="lang-fluid-kl"
-                    >
-                      Greenlandic
-                    </label>
-                  </div>
-                </div>
-
-              </div>
-            </fieldset>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<section class="py-900 py-tablet-1000">
-
-  <div class="Container">
-
     <h2 class="docs-Heading">Salary Picker</h2>
 
-    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-control-button-expanded-size-scale">
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+      <div>
 
-        <span class="UNSTABLE_Picker__label">Salary</span>
+        <span class="Label">Salary</span>
 
         <div class="Dropdown">
 
           <div
             role="group"
             aria-label="Salary"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium"
           >
 
             <div
@@ -2288,11 +2141,11 @@
               aria-live="off"
               aria-relevant="additions"
               id="picker-salary-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Salary</span>
@@ -2302,7 +2155,7 @@
               id="picker-salary-trigger"
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-salary"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-salary"
@@ -2323,17 +2176,17 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-salary"
           >
 
-            <h3 class="typography-body-medium-bold mb-600">Salary</h3>
-            <p class="typography-body-small-text-regular mb-600">Set your minimum expected salary.</p>
+            <h3 class="typography-body-medium-bold">Salary</h3>
+            <p class="typography-body-small-regular">Set your minimum expected salary.</p>
 
-            <fieldset class="FieldGroup FieldGroup--fluid">
+            <fieldset class="border-0">
               <legend class="accessibility-hidden">Salary</legend>
-              <div class="FieldGroup__fields">
+              <div class="Flex Flex--vertical Flex--noWrap Flex--alignmentXLeft Flex--alignmentYStretch" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Radio Radio--inputPositionStart Radio--item">
                   <input
@@ -2344,7 +2197,7 @@
                     checked
                   />
                   <div class="Radio__text">
-                    <label class="Radio__label" for="salary-no-limit">No limit</label>
+                    <label class="Label Label--item" for="salary-no-limit">No limit</label>
                   </div>
                 </div>
 
@@ -2356,29 +2209,30 @@
                     name="salary"
                   />
                   <div class="Radio__text">
-                    <label class="Radio__label" for="salary-from">From</label>
+                    <label class="Label Label--item" for="salary-from">From</label>
                   </div>
                 </div>
 
-                <div class="TextField TextField--fluid TextField--medium">
-                  <label for="salary-textfield" class="TextField__label TextField__label--hidden">Salary</label>
-                  <input
-                    type="number"
-                    id="salary-textfield"
-                    class="TextField__input"
-                    name="salary_value"
-                    min="0"
-                    max="10000"
-                    step="100"
-                    value="3000"
-                    placeholder="0"
-                  />
+                <div>
+                  <label for="salary-textfield" class="Label accessibility-hidden">Salary</label>
+                  <div class="InputContainer InputContainer--medium">
+                    <input
+                      type="number"
+                      id="salary-textfield"
+                      name="salary_value"
+                      min="0"
+                      max="10000"
+                      step="100"
+                      value="3000"
+                      placeholder="0"
+                    />
+                  </div>
                 </div>
 
-                <div class="Slider Slider--fluid">
-                  <label for="salary-slider" class="Slider__label Slider__label--hidden">Salary</label>
+                <div>
+                  <label for="salary-slider" class="Label accessibility-hidden">Salary</label>
                   <input
-                    class="Slider__input"
+                    class="Slider"
                     id="salary-slider"
                     style="--slider-position: 30%"
                     type="range"
@@ -2392,7 +2246,7 @@
               </div>
             </fieldset>
 
-            <div class="mt-600">
+            <div class="d-grid mt-600">
               <button
                 type="button"
                 class="Button Button--primary Button--medium"
@@ -2406,7 +2260,7 @@
 
         </div>
 
-        <div class="UNSTABLE_Picker__helperText">Set your minimum expected salary</div>
+        <div class="HelperText">Set your minimum expected salary</div>
 
       </div>
 
@@ -2422,18 +2276,18 @@
 
     <h2 class="docs-Heading">Single with any option</h2>
 
-    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-control-button-expanded-size-scale">
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+      <div>
 
-        <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--hidden">Publication time</span>
+        <span class="Label accessibility-hidden">Publication time</span>
 
         <div class="Dropdown">
 
           <div
             role="group"
             aria-label="Publication time"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium"
           >
 
             <div
@@ -2444,11 +2298,11 @@
               aria-live="off"
               aria-relevant="additions"
               id="demo-picker-publication-time-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Publication time</span>
@@ -2458,7 +2312,7 @@
               id="demo-picker-publication-time-trigger"
               data-spirit-toggle="dropdown"
               data-spirit-target="#demo-picker-publication-time"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="demo-picker-publication-time"
@@ -2479,16 +2333,16 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="demo-picker-publication-time"
           >
 
             <h3 class="typography-body-medium-bold mb-600">Publication time</h3>
 
-            <fieldset class="FieldGroup FieldGroup--fluid">
+            <fieldset class="border-0">
               <legend class="accessibility-hidden">Publication time</legend>
-              <div class="FieldGroup__fields">
+              <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                 <div class="Radio Radio--inputPositionStart Radio--item">
                   <input
@@ -2500,7 +2354,7 @@
                     checked
                   />
                   <div class="Radio__text">
-                    <label class="Radio__label" for="demo-picker-publication-time-any">Any time</label>
+                    <label class="Label Label--item" for="demo-picker-publication-time-any">Any time</label>
                   </div>
                 </div>
 
@@ -2513,7 +2367,7 @@
                     value="24h"
                   />
                   <div class="Radio__text">
-                    <label class="Radio__label" for="demo-picker-publication-time-24h">Last 24 hours</label>
+                    <label class="Label Label--item" for="demo-picker-publication-time-24h">Last 24 hours</label>
                   </div>
                 </div>
 
@@ -2526,7 +2380,7 @@
                     value="3d"
                   />
                   <div class="Radio__text">
-                    <label class="Radio__label" for="demo-picker-publication-time-3d">Last 3 days</label>
+                    <label class="Label Label--item" for="demo-picker-publication-time-3d">Last 3 days</label>
                   </div>
                 </div>
 
@@ -2539,7 +2393,7 @@
                     value="1w"
                   />
                   <div class="Radio__text">
-                    <label class="Radio__label" for="demo-picker-publication-time-1w">Last week</label>
+                    <label class="Label Label--item" for="demo-picker-publication-time-1w">Last week</label>
                   </div>
                 </div>
 
@@ -2574,11 +2428,11 @@
 
     <h2 class="docs-Heading">Grouped sections with Button</h2>
 
-    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-control-button-expanded-size-scale">
 
-      <div class="UNSTABLE_Picker UNSTABLE_Picker--medium">
+      <div>
 
-        <span class="UNSTABLE_Picker__label UNSTABLE_Picker__label--hidden">Employment type</span>
+        <span class="Label accessibility-hidden">Employment type</span>
 
         <div
           class="Dropdown"
@@ -2590,7 +2444,7 @@
           <div
             role="group"
             aria-label="Employment type"
-            class="UNSTABLE_Picker__inputContainer"
+            class="InputContainer InputContainer--medium"
           >
 
             <div
@@ -2601,11 +2455,11 @@
               aria-live="off"
               aria-relevant="additions"
               id="picker-job-filters-selection"
-              class="UNSTABLE_Picker__selection"
+              class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
               <span
-                class="UNSTABLE_Picker__selectionEmpty"
+                class="UNSTABLE_PickerSelection__empty"
                 data-spirit-element="selection-label"
                 aria-hidden="true"
               >Employment type</span>
@@ -2615,7 +2469,7 @@
               id="picker-job-filters-trigger"
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-job-filters"
-              class="UNSTABLE_Picker__trigger"
+              class="UNSTABLE_PickerTrigger"
               aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-job-filters"
@@ -2636,7 +2490,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover"
+            class="DropdownPopover placement-bottom-start"
             data-spirit-placement="bottom-start"
             id="picker-job-filters"
           >
@@ -2645,9 +2499,9 @@
 
               <h3 class="typography-body-medium-bold mb-600">Employment type</h3>
 
-              <fieldset class="FieldGroup FieldGroup--fluid mb-0">
+              <fieldset class="border-0 mb-0">
                 <legend class="accessibility-hidden">Employment type</legend>
-                <div class="FieldGroup__fields">
+                <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                   <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                     <input
@@ -2659,7 +2513,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="job-filter-full"
                       >
@@ -2678,7 +2532,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="job-filter-part"
                       >
@@ -2694,9 +2548,9 @@
 
               <h3 class="typography-body-medium-bold mb-600">Cooperation type</h3>
 
-              <fieldset class="FieldGroup FieldGroup--fluid mb-0">
+              <fieldset class="border-0 mb-0">
                 <legend class="accessibility-hidden">Cooperation type</legend>
-                <div class="FieldGroup__fields">
+                <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                   <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                     <input
@@ -2708,7 +2562,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="job-filter-employment"
                       >
@@ -2727,7 +2581,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="job-filter-trade"
                       >
@@ -2746,7 +2600,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="job-filter-agreement"
                       >
@@ -2762,9 +2616,9 @@
 
               <h3 class="typography-body-medium-bold mb-600">Internships</h3>
 
-              <fieldset class="FieldGroup FieldGroup--fluid">
+              <fieldset class="border-0">
                 <legend class="accessibility-hidden">Internships</legend>
-                <div class="FieldGroup__fields">
+                <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
 
                   <div class="Checkbox Checkbox--inputPositionStart Checkbox--item" data-spirit-element="checkbox">
                     <input
@@ -2776,7 +2630,7 @@
                     />
                     <div class="Checkbox__text">
                       <label
-                        class="Checkbox__label"
+                        class="Label Label--item"
                         data-spirit-element="checkbox-label"
                         for="job-filter-internships"
                       >

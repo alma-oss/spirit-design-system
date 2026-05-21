@@ -10,13 +10,17 @@ Usage with form fields:
 
 ```html
 <div class="Stack Stack--hasSpacing">
-  <div class="TextField TextField--medium">
-    <label for="textfield-stack-1" class="TextField__label TextField__label--required">Label</label>
-    <input type="text" id="textfield-stack-1" class="TextField__input" placeholder="Placeholder" />
+  <div>
+    <label for="textfield-stack-1" class="Label Label--required">Label</label>
+    <div class="InputContainer InputContainer--medium">
+      <input type="text" id="textfield-stack-1" placeholder="Placeholder" />
+    </div>
   </div>
-  <div class="TextField TextField--medium">
-    <label for="textfield-stack-2" class="TextField__label TextField__label--required">Label</label>
-    <input type="text" id="textfield-stack-2" class="TextField__input" placeholder="Placeholder" />
+  <div>
+    <label for="textfield-stack-2" class="Label Label--required">Label</label>
+    <div class="InputContainer InputContainer--medium">
+      <input type="text" id="textfield-stack-2" placeholder="Placeholder" />
+    </div>
   </div>
 </div>
 ```

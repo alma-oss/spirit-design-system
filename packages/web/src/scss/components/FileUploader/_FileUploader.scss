@@ -1,11 +1,5 @@
-@use '../../tools/form-fields' as form-fields-tools;
+@use '@tokens' as tokens;
 
 .FileUploader {
-    @include form-fields-tools.box-field-root();
-}
-
-.FileUploader--fluid {
-    --file-uploader-attachment-width: 100%;
-
-    @include form-fields-tools.box-field-fluid();
+    --#{tokens.$css-variable-prefix}helper-text-grid-column-start: 2;
 }

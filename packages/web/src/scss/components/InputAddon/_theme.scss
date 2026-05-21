@@ -1,0 +1,19 @@
+@use '@tokens' as tokens;
+@use '../../settings/dictionaries';
+@use '../../tools/units';
+
+$size-dictionary: dictionaries.$size;
+$size-config: (
+    small: (
+        typography: tokens.$body-small-semibold,
+        icon-size: units.px-to-rem(16px),
+    ),
+    medium: (
+        typography: tokens.$body-medium-semibold,
+        icon-size: units.px-to-rem(20px),
+    ),
+    large: (
+        typography: tokens.$body-medium-semibold,
+        icon-size: units.px-to-rem(20px),
+    ),
+);

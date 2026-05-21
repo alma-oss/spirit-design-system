@@ -12,16 +12,7 @@ describe('useRadioStyleProps', () => {
       root: 'Radio Radio--inputPositionStart',
       text: 'Radio__text',
       input: 'Radio__input',
-      label: 'Radio__label',
-      helperText: 'Radio__helperText',
     });
-  });
-
-  it('should return hidden label', () => {
-    const props = { id: 'radio', label: 'text', isLabelHidden: true } as SpiritRadioProps;
-    const { result } = renderHook(() => useRadioStyleProps(props));
-
-    expect(result.current.classProps.label).toBe('Radio__label Radio__label--hidden');
   });
 
   it('should return disabled', () => {

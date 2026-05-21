@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useClassNamePrefix } from '../../hooks';
 import { type AlertBaseProps, type AlertProps } from '../../types';
+import { getColorSchemeClassName } from '../../utils';
 
 export interface AlertStyle {
   /** className props */
@@ -15,13 +16,14 @@ export function useAlertStyleProps<C = void>(props: AlertProps<C>): AlertStyle {
   const alertClass = useClassNamePrefix('Alert');
   const alertColorClass = `${alertClass}--${color}`;
   const alertCenteredClass = `${alertClass}--center`;
-  const classProps = classNames(alertClass, {
-    [alertColorClass]: color,
-    [alertCenteredClass]: isCentered,
-  });
+  const alertColorSchemeClass = getColorSchemeClassName({ color: String(color), isSubtle: true });
 
   return {
-    classProps,
+    classProps: classNames(alertClass, {
+      [alertColorClass]: color,
+      [alertColorSchemeClass]: color,
+      [alertCenteredClass]: isCentered,
+    }),
     props: modifiedProps,
   };
 }

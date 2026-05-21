@@ -153,7 +153,7 @@ and `aria-controls` attributes.
   aria-controls="my-header-dialog"
   aria-expanded="false"
 >
-  <svg width="24" height="24" aria-hidden="true">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#hamburger" />
   </svg>
   <span class="accessibility-hidden">Menu</span>
@@ -267,7 +267,7 @@ Close button closes the Header Dialog using our Off-canvas JavaScript plugin.
   aria-controls="my-header-dialog"
   aria-expanded="false"
 >
-  <svg width="24" height="24" aria-hidden="true">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#close" />
   </svg>
   <span class="accessibility-hidden">Close</span>
@@ -382,7 +382,7 @@ And the complete Header Dialog:
       aria-controls="header-dialog-example-1"
       aria-expanded="false"
     >
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#hamburger" />
       </svg>
       <span class="accessibility-hidden">Menu</span>
@@ -436,7 +436,7 @@ And the complete Header Dialog:
         aria-controls="header-dialog-example-1"
         aria-expanded="false"
       >
-        <svg width="24" height="24" aria-hidden="true">
+        <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use xlink:href="/icons/svg/sprite.svg#close" />
         </svg>
         <span class="accessibility-hidden">Close</span>

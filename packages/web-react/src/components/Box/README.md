@@ -6,9 +6,32 @@ The Box component is a simple container around content or other components.
 <Box>{/* Content goes here */}</Box>
 ```
 
+## Color Scheme
+
+Use the `colorScheme` prop as the preferred way to apply a semantic surface with matching background, text, and border behavior.
+For what color schemes are and how they relate to CSS classes and tokens, see [Color schemes in `web` package][web-readme-color-scheme].
+
+It adds the matching `color-scheme-on-*` class and, by default, scheme-backed `bg-color-scheme`, `text-color-scheme`, and (when `borderWidth` is greater than `0` and `borderColor` is not set) `border-color-scheme` utilities.
+
+Explicit `backgroundColor`, `backgroundGradient`, `textColor`, and `borderColor` take precedence over the corresponding scheme utilities.
+
+```tsx
+<Box colorScheme="neutral-basic">{/* Content goes here */}</Box>
+```
+
+```tsx
+<Box colorScheme="selected-subtle">{/* Content goes here */}</Box>
+```
+
+```tsx
+<Box colorScheme="emotion-success-basic" borderWidth="100">
+  {/* Border inherits local scheme border color when borderColor is omitted */}
+</Box>
+```
+
 ## Border
 
-You can define border color, radius, style and width using the `borderColor`, `borderRadius`, `borderStyle` and `borderWidth` props.
+You can define border color, radius, style and width using the `borderColor`, `borderRadius`, `borderStyle` and `borderWidth` props. Use it to override the border color of a color scheme or to set a custom border color.
 
 ```tsx
 <Box borderColor="basic" borderRadius="200" borderWidth="100" borderStyle="dashed">
@@ -56,7 +79,7 @@ Responsive values can be set for each prop using an object:
 
 ## Background Color
 
-You can define background color using the `backgroundColor` prop.
+You can define background color using the `backgroundColor`. Use it to override the background color of a color scheme or to set a custom background color.
 
 ```tsx
 <Box backgroundColor="primary">{/* Content goes here */}</Box>
@@ -64,7 +87,7 @@ You can define background color using the `backgroundColor` prop.
 
 ## Background Gradient
 
-You can define background gradient using the `backgroundGradient` prop.
+You can define background gradient using the `backgroundGradient`.
 
 ```tsx
 <Box backgroundGradient="primary">{/* Content goes here */}</Box>
@@ -79,7 +102,7 @@ Responsive values can be set for each prop using an object:
 
 ## Text Color
 
-You can define text color using the `textColor` prop.
+You can define text color using the `textColor` prop. Use it to override the text color of a color scheme or to set a custom text color.
 
 ```tsx
 <Box textColor="primary">{/* Content goes here */}</Box>
@@ -95,6 +118,7 @@ You can define text color using the `textColor` prop.
 | `borderRadius`       | \[[BorderRadiiTokenType][readme-generated-types] \| `Responsive<BorderRadiiTokenType>`]                                                                                                                                                                                                                           | -       | ✕        | Border radius of the Box       |
 | `borderStyle`        | [Border Style dictionary][dictionary-border]                                                                                                                                                                                                                                                                      | `solid` | ✕        | Border style of the Box        |
 | `borderWidth`        | [Border Width dictionary][dictionary-border]                                                                                                                                                                                                                                                                      | -       | ✕        | Border width of the Box        |
+| `colorScheme`        | `ColorSchemeType`                                                                                                                                                                                                                                                                                                 | -       | ✕        | Semantic color scheme surface  |
 | `elementType`        | `ElementType`                                                                                                                                                                                                                                                                                                     | `div`   | ✕        | Type of element                |
 | `padding`            | \[`SpaceToken` \| `Responsive<SpaceToken>`]                                                                                                                                                                                                                                                                       | -       | ✕        | Padding of the Box             |
 | `paddingX`           | \[`SpaceToken` \| `Responsive<SpaceToken>`]                                                                                                                                                                                                                                                                       | -       | ✕        | Horizontal padding of the Box  |
@@ -117,3 +141,4 @@ and [escape hatches][readme-escape-hatches].
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[web-readme-color-scheme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#color-schemes

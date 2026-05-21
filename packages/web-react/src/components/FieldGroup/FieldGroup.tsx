@@ -2,10 +2,13 @@
 
 import classNames from 'classnames';
 import React from 'react';
+import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type SpiritFieldGroupProps } from '../../types';
-import { HelperText, ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { Flex } from '../Flex';
+import { HelperText } from '../HelperText';
+import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { useFieldGroupStyleProps } from './useFieldGroupStyleProps';
 
@@ -17,7 +20,6 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
     hasValidationIcon,
     id,
     isDisabled,
-    isFluid,
     isLabelHidden,
     isRequired,
     label,
@@ -26,7 +28,7 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
     ...rest
   } = props;
 
-  const { classProps } = useFieldGroupStyleProps({ hasValidationIcon, isFluid, isRequired, validationState });
+  const { classProps } = useFieldGroupStyleProps();
   const { styleProps, props: transferProps } = useStyleProps(rest);
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
   const validationTextRole = useValidationTextRole({
@@ -35,37 +37,42 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
   });
 
   return (
-    <fieldset
-      {...transferProps}
-      {...styleProps}
-      {...ariaDescribedByProp}
-      className={classNames(classProps.root, styleProps.className)}
-      disabled={isDisabled}
+    <PropsProvider
+      value={{
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+        validationState,
+      }}
     >
-      <VisuallyHidden elementType="legend">{label}</VisuallyHidden>
-      {!isLabelHidden && (
-        <div className={classProps.label} aria-hidden="true">
-          {label}
-        </div>
-      )}
-      <div className={classProps.fields}>{children}</div>
-      <HelperText
-        UNSAFE_className={classProps.helperText}
-        id={`${id}__helperText`}
-        registerAria={register}
-        helperText={helperText}
-      />
-      {validationState && (
-        <ValidationText
-          UNSAFE_className={classProps.validationText}
-          {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-          id={`${id}__helperText`}
-          validationText={validationText}
-          registerAria={register}
-          role={validationTextRole}
-        />
-      )}
-    </fieldset>
+      <fieldset
+        {...transferProps}
+        {...styleProps}
+        {...ariaDescribedByProp}
+        className={classNames(classProps.root, styleProps.className)}
+        disabled={isDisabled}
+      >
+        <VisuallyHidden elementType="legend">{label}</VisuallyHidden>
+        {!isLabelHidden && (
+          <Label elementType="div" aria-hidden="true">
+            {label}
+          </Label>
+        )}
+        <Flex direction="vertical" alignmentX="left" spacingY="space-500">
+          {children}
+        </Flex>
+        <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+        {validationState && (
+          <ValidationText
+            id={`${id}-validation-text`}
+            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+            validationText={validationText}
+            registerAria={register}
+            role={validationTextRole}
+          />
+        )}
+      </fieldset>
+    </PropsProvider>
   );
 };
 

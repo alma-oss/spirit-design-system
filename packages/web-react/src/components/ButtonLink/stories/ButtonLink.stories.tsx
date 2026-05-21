@@ -27,7 +27,7 @@ const meta: Meta<typeof ButtonLink> = {
         '<Icon />': <Icon name="profile" />,
         '<Icon /> Text': (
           <>
-            <Icon name="profile" marginRight="space-400" /> Text
+            <Icon name="profile" /> Text
           </>
         ),
       },
@@ -42,11 +42,6 @@ const meta: Meta<typeof ButtonLink> = {
     href: {
       control: 'text',
       defaultValue: 'https://www.example.com',
-    },
-    isBlock: {
-      control: 'boolean',
-      description:
-        "**DEPRECATED**: The property will be deleted in the next major release. Please read component's documentation for more information.",
     },
     isDisabled: {
       control: 'boolean',
@@ -68,7 +63,6 @@ const meta: Meta<typeof ButtonLink> = {
     children: 'Click me',
     color: ComponentButtonColors.PRIMARY,
     href: 'https://www.example.com',
-    isBlock: false,
     isDisabled: false,
     isLoading: false,
     isSymmetrical: false,

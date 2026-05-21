@@ -3,9 +3,9 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
+import TextFieldAddons from './TextFieldAddons';
 import TextFieldDefault from './TextFieldDefault';
 import TextFieldDisabled from './TextFieldDisabled';
-import TextFieldFluid from './TextFieldFluid';
 import TextFieldHelperText from './TextFieldHelperText';
 import TextFieldHiddenLabel from './TextFieldHiddenLabel';
 import TextFieldInline from './TextFieldInline';
@@ -21,6 +21,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <TextFieldDefault />
+      </DocsSection>
+      <DocsSection title="Addons">
+        <TextFieldAddons />
       </DocsSection>
       <DocsSection title="Password Toggle">
         <TextFieldPasswordToggle />
@@ -45,9 +48,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Validation Text with Icon">
         <TextFieldValidationWithIcon />
-      </DocsSection>
-      <DocsSection title="Fluid">
-        <TextFieldFluid />
       </DocsSection>
       <DocsSection title="Input Size">
         <TextFieldInputSize />

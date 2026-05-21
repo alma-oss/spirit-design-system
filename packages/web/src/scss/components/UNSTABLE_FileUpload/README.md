@@ -32,7 +32,7 @@ The class controls appearance only: dashed border and visibility of the “or dr
 ```html
 <div class="UNSTABLE_FileUpload">
   <div class="UNSTABLE_FileUploadInput has-drag-and-drop">
-    <label for="file-uploader" class="UNSTABLE_FileUploadInput__label">Label</label>
+    <label for="file-uploader" class="Label">Label</label>
     <input
       type="file"
       id="file-uploader"
@@ -48,7 +48,7 @@ The class controls appearance only: dashed border and visibility of the “or dr
         <label for="file-uploader" class="UNSTABLE_FileUploadInput__dropZoneLabel">
           Upload your file <span class="UNSTABLE_FileUploadInput__dragAndDropLabel">or drag and drop here</span>
         </label>
-        <div id="file-uploader-helper" class="UNSTABLE_FileUploadInput__helperText">Max file size is 10 MB</div>
+        <div id="file-uploader-helper" class="HelperText">Max file size is 10 MB</div>
       </div>
       <div class="Button Button--primary Button--medium" aria-hidden="true">Browse</div>
     </div>
@@ -96,12 +96,10 @@ Use the [`accept`][mdn-accept] attribute to restrict file types:
 
 ### Required Label
 
-Add `UNSTABLE_FileUploadInput__label--required` to the label for a required indicator. Validation is up to your application:
+Add `Label--required` to the label for a required indicator. Validation is up to your application:
 
 ```html
-<label for="file-uploader" class="UNSTABLE_FileUploadInput__label UNSTABLE_FileUploadInput__label--required"
-  >Label</label
->
+<label for="file-uploader" class="Label Label--required">Label</label>
 ```
 
 ### Validation States
@@ -113,12 +111,12 @@ Add validation text and give it an `id` for `aria-describedby` when you use it:
 ```html
 <div class="UNSTABLE_FileUploadInput UNSTABLE_FileUploadInput--success">
   <!-- Label, input, drop zone -->
-  <div id="file-uploader-validation" class="UNSTABLE_FileUploadInput__validationText">Success validation text</div>
+  <div id="file-uploader-validation" class="ValidationText ValidationText--success">Success validation text</div>
 </div>
 ```
 
-- For a list of messages, use `<ul>` inside `.UNSTABLE_FileUploadInput__validationText`.
-- For an icon, place an `<svg>` inside `.UNSTABLE_FileUploadInput__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ### Disabled State
 
@@ -127,7 +125,7 @@ Add validation text and give it an `id` for `aria-describedby` when you use it:
 
 ```html
 <div class="UNSTABLE_FileUploadInput UNSTABLE_FileUploadInput--disabled">
-  <label for="file-uploader-disabled" class="UNSTABLE_FileUploadInput__label">Label</label>
+  <label for="file-uploader-disabled" class="Label Label--disabled">Label</label>
   <input
     type="file"
     id="file-uploader-disabled"
@@ -138,7 +136,7 @@ Add validation text and give it an `id` for `aria-describedby` when you use it:
   />
   <div class="UNSTABLE_FileUploadInput__dropZone UNSTABLE_FileUploadInput__dropZone--disabled">
     <!-- ... -->
-    <div id="file-uploader-disabled-helper" class="UNSTABLE_FileUploadInput__helperText">Max file size is 10 MB</div>
+    <div id="file-uploader-disabled-helper" class="HelperText HelperText--disabled">Max file size is 10 MB</div>
     <div class="Button Button--primary Button--medium Button--disabled" aria-hidden="true">Browse</div>
   </div>
 </div>
@@ -173,7 +171,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
         <span class="UNSTABLE_File__name">
           <span class="text-truncate">Document.pdf</span>
         </span>
-        <span class="UNSTABLE_File__helperText">2.5 MB</span>
+        <span class="HelperText">2.5 MB</span>
       </div>
     </div>
     <div
@@ -211,7 +209,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
         <span class="UNSTABLE_File__name">
           <span class="text-truncate">vacation-photo.jpg</span>
         </span>
-        <div class="UNSTABLE_File__helperText">
+        <div class="HelperText">
           <div>
             <svg class="Icon animation-spin-clockwise" width="16" height="16" aria-hidden="true">
               <use xlink:href="/assets/icons/svg/sprite.svg#spinner" />
@@ -244,7 +242,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
         <span class="UNSTABLE_File__name">
           <span class="text-truncate">report-2024.xlsx</span>
         </span>
-        <div class="UNSTABLE_File__validationText">
+        <div class="ValidationText ValidationText--success">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
             <use xlink:href="/assets/icons/svg/sprite.svg#success" />
           </svg>

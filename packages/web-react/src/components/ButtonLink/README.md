@@ -28,7 +28,7 @@ You can define responsive values for the `isSymmetrical` prop using an object:
 
 ```tsx
 <ButtonLink href="#" isSymmetrical={{ tablet: true }}>
-  <Icon name="hamburger" marginRight={{ mobile: 'space-400', tablet: 'space-0' }} />
+  <Icon name="hamburger" />
   <VisuallyHidden>Menu</VisuallyHidden>
   <Hidden from="tablet" aria-hidden="true">
     Menu
@@ -40,7 +40,7 @@ To turn off symmetrical from a specific breakpoint onwards, set the value to `fa
 
 ```tsx
 <ButtonLink href="#" isSymmetrical={{ mobile: true, tablet: false }}>
-  <Icon name="hamburger" marginRight={{ tablet: 'space-400' }} />
+  <Icon name="hamburger" />
   <VisuallyHidden>Menu</VisuallyHidden>
   <Hidden on="mobile" aria-hidden="true">
     Menu
@@ -73,28 +73,21 @@ To span a `ButtonLink` to the full width of its parent, you can use display util
 </Grid>
 ```
 
-### DEPRECATION NOTICE
-
-Property `isBlock` is deprecated and will be removed in the next major release.
-
-For more information, please read the section [How to Make a Fluid ButtonLink](#how-to-make-a-fluid-buttonlink).
-
 ### API
 
-| Name            | Type                                                                                          | Default   | Required | Description                                                                                                                                                           |
-| --------------- | --------------------------------------------------------------------------------------------- | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `children`      | `ReactNode`                                                                                   | `null`    | ✕        | Content of the ButtonLink                                                                                                                                             |
-| `color`         | [Component Button dictionary][dictionary-color], [Emotion Color dictionary][dictionary-color] | `primary` | ✕        | Color variant                                                                                                                                                         |
-| `elementType`   | `ElementType`                                                                                 | `a`       | ✕        | Type of element                                                                                                                                                       |
-| `href`          | `string`                                                                                      | —         | ✓        | Link URL                                                                                                                                                              |
-| `isBlock`       | `bool`                                                                                        | `false`   | ✕        | [**DEPRECATED**](#deprecation-notice) Span the element to the full width of its parent, see [How to Make a Fluid ButtonLink](#how-to-make-a-fluid-buttonlink) section |
-| `isDisabled`    | `bool`                                                                                        | `false`   | ✕        | If true, ButtonLink is disabled                                                                                                                                       |
-| `isLoading`     | `bool`                                                                                        | `false`   | ✕        | If true, ButtonLink is in a loading state, disabled and the Spinner is visible                                                                                        |
-| `isSymmetrical` | `bool` \| `Responsive<bool>`                                                                  | `false`   | ✕        | If true, ButtonLink has symmetrical dimensions, use object to set responsive values, e.g. `{ mobile: true, tablet: false }`                                           |
-| `onClick`       | `(event: ClickEvent) => void`                                                                 | —         | ✕        | JS function to call on click                                                                                                                                          |
-| `ref`           | `ForwardedRef<HTMLAnchorElement>`                                                             | —         | ✕        | Anchor element reference                                                                                                                                              |
-| `size`          | [Size dictionary][dictionary-size]                                                            | `medium`  | ✕        | Size variant                                                                                                                                                          |
-| `target`        | `string`                                                                                      | `null`    | ✕        | Link target                                                                                                                                                           |
+| Name            | Type                                                                                          | Default   | Required | Description                                                                                                                 |
+| --------------- | --------------------------------------------------------------------------------------------- | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `children`      | `ReactNode`                                                                                   | `null`    | ✕        | Content of the ButtonLink                                                                                                   |
+| `color`         | [Component Button dictionary][dictionary-color], [Emotion Color dictionary][dictionary-color] | `primary` | ✕        | Color variant                                                                                                               |
+| `elementType`   | `ElementType`                                                                                 | `a`       | ✕        | Type of element                                                                                                             |
+| `href`          | `string`                                                                                      | —         | ✓        | Link URL                                                                                                                    |
+| `isDisabled`    | `bool`                                                                                        | `false`   | ✕        | If true, ButtonLink is disabled                                                                                             |
+| `isLoading`     | `bool`                                                                                        | `false`   | ✕        | If true, ButtonLink is in a loading state, disabled and the Spinner is visible                                              |
+| `isSymmetrical` | `bool` \| `Responsive<bool>`                                                                  | `false`   | ✕        | If true, ButtonLink has symmetrical dimensions, use object to set responsive values, e.g. `{ mobile: true, tablet: false }` |
+| `onClick`       | `(event: ClickEvent) => void`                                                                 | —         | ✕        | JS function to call on click                                                                                                |
+| `ref`           | `ForwardedRef<HTMLAnchorElement>`                                                             | —         | ✕        | Anchor element reference                                                                                                    |
+| `size`          | [Size dictionary][dictionary-size]                                                            | `medium`  | ✕        | Size variant                                                                                                                |
+| `target`        | `string`                                                                                      | `null`    | ✕        | Link target                                                                                                                 |
 
 For more information see [Button][button] component. ButtonLink also contain all the appropriate
 attributes according to the type of element.

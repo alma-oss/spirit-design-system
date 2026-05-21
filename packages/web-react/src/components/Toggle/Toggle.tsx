@@ -2,11 +2,13 @@
 
 import classNames from 'classnames';
 import React, { type ChangeEvent, type ForwardedRef, forwardRef, useState } from 'react';
+import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
-import { type ForwardRefComponent, type SpiritToggleProps } from '../../types';
-import { HelperText, Label, ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { FormFieldVariants, type ForwardRefComponent, type SpiritToggleProps } from '../../types';
+import { HelperText } from '../HelperText';
 import { InputDetails } from '../InputDetails';
+import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { useToggleStyleProps } from './useToggleStyleProps';
 
 const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) => {
@@ -19,6 +21,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
     id,
     isDisabled,
     isChecked = false,
+    isLabelHidden,
     isRequired,
     label,
     helperText,
@@ -42,47 +45,49 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
   };
 
   return (
-    <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
-      <div className={classProps.text}>
-        <Label UNSAFE_className={classProps.label} htmlFor={id}>
-          {label}
-        </Label>
-        {details && (
-          <InputDetails id={`${id}-details`} registerAriaDetails={registerDetails}>
-            {details}
-          </InputDetails>
-        )}
-        <HelperText
-          UNSAFE_className={classProps.helperText}
-          id={`${id}__helperText`}
-          registerAria={register}
-          helperText={helperText}
+    <PropsProvider
+      value={{
+        formFieldVariant: FormFieldVariants.INLINE,
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+        validationState,
+      }}
+    >
+      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
+        <div className={classProps.text}>
+          <Label htmlFor={id}>{label}</Label>
+          {details && (
+            <InputDetails id={`${id}-details`} registerAriaDetails={registerDetails}>
+              {details}
+            </InputDetails>
+          )}
+          <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+          {validationState && (
+            <ValidationText
+              id={`${id}-validation-text`}
+              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+              validationText={validationText}
+              registerAria={register}
+              role={validationTextRole}
+            />
+          )}
+        </div>
+        <input
+          {...otherProps}
+          {...ariaDescribedByProp}
+          {...ariaDetailsProp}
+          type="checkbox"
+          id={id}
+          className={classProps.input}
+          disabled={isDisabled}
+          checked={checked}
+          required={isRequired}
+          onChange={handleOnChange}
+          ref={ref}
         />
-        {validationState && (
-          <ValidationText
-            UNSAFE_className={classProps.validationText}
-            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-            id={`${id}__validationText`}
-            validationText={validationText}
-            registerAria={register}
-            role={validationTextRole}
-          />
-        )}
       </div>
-      <input
-        {...otherProps}
-        {...ariaDescribedByProp}
-        {...ariaDetailsProp}
-        type="checkbox"
-        id={id}
-        className={classProps.input}
-        disabled={isDisabled}
-        checked={checked}
-        required={isRequired}
-        onChange={handleOnChange}
-        ref={ref}
-      />
-    </div>
+    </PropsProvider>
   );
 };
 

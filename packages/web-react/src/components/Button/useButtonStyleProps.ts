@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import { warning } from '../../common/utilities';
-import { useClassNamePrefix, useDeprecationMessage, useSymmetry } from '../../hooks';
-import { type ButtonColor, type ButtonSize, type ButtonStyleProps } from '../../types';
+import { type CSSProperties, type ElementType } from 'react';
+import { useClassNamePrefix, useSpacingStyle, useSymmetry } from '../../hooks';
+import { type ButtonColor, type ButtonSize, type SpacingType, type SpiritButtonProps } from '../../types';
+import { getColorSchemeClassName, getEmotionColorNames } from '../../utils';
 import { applyColor, applySize } from '../../utils/classname';
 import { compose } from '../../utils/compose';
 
@@ -12,46 +13,55 @@ const getButtonColorClassname = <C = void>(className: string, color: ButtonColor
 const getButtonSizeClassname = <S = void>(className: string, size: ButtonSize<S>): string =>
   compose(applySize<ButtonSize<S>>(size))(className);
 
-export function useButtonStyleProps<C = void, S = void>(props: ButtonStyleProps<C, S>) {
-  const { color, isBlock, isDisabled, isLoading, isSymmetrical, size, ...restProps } = props;
+const emotionColorNames = getEmotionColorNames() as string[];
 
-  // @see https://jira.almacareer.tech/browse/DS-1897
-  useDeprecationMessage({
-    method: 'custom',
-    trigger: !!isBlock,
-    componentName: 'Button',
-    customText:
-      "The `isBlock` property will be deleted in the next major release. Please read component's documentation for more information.",
-  });
+interface ButtonCSSProperties extends CSSProperties {
+  [key: string]: string | undefined | number;
+}
+
+export interface ButtonStyles {
+  /** className props */
+  classProps: string;
+  /** Props for the button element */
+  props: SpiritButtonProps;
+  /** Style props for the element */
+  styleProps: ButtonCSSProperties;
+}
+
+export function useButtonStyleProps<T extends ElementType = 'button', C = void, S = void>(
+  props: SpiritButtonProps<T, C, S>,
+): ButtonStyles {
+  const { color, isDisabled, isLoading, isSymmetrical, size, spacing, ...restProps } = props;
+  const colorAsString = String(color);
 
   const buttonClass = useClassNamePrefix('Button');
-  const buttonBlockClass = `${buttonClass}--block`;
   const buttonDisabledClass = `${buttonClass}--disabled`;
   const buttonLoadingClass = `${buttonClass}--loading`;
+  const buttonColorSchemeClass = emotionColorNames.includes(colorAsString)
+    ? getColorSchemeClassName({ color: colorAsString, isSubtle: false })
+    : undefined;
 
-  const { isSymmetricalActive, symmetricalClassName } = useSymmetry(buttonClass, isSymmetrical);
-
-  if (isBlock && isSymmetricalActive) {
-    warning(false, 'isBlock and isSymmetrical props are mutually exclusive');
-  }
-
-  // @deprecated "isBlock" will be removed in the next major version. Please read component's documentation for more information.
-  const shouldApplyBlock = () => isBlock && !isSymmetricalActive;
+  const { symmetricalClassName } = useSymmetry(buttonClass, isSymmetrical);
 
   const classProps = classNames(
     buttonClass,
     getButtonColorClassname(buttonClass, color as ButtonColor<C>),
+    buttonColorSchemeClass,
     getButtonSizeClassname(buttonClass, size as ButtonSize<S>),
     {
-      [buttonBlockClass]: shouldApplyBlock(),
       [buttonDisabledClass]: isDisabled || isLoading,
       [buttonLoadingClass]: isLoading,
     },
     symmetricalClassName,
   );
 
+  const buttonStyle: ButtonCSSProperties = {
+    ...(useSpacingStyle(spacing as SpacingType, 'button') as ButtonCSSProperties),
+  };
+
   return {
     classProps,
     props: restProps,
+    styleProps: buttonStyle,
   };
 }

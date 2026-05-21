@@ -32,7 +32,7 @@ const FooterMinimalistic = () => (
           <nav className="text-center" aria-label="Secondary links">
             <Flex
               elementType="ul"
-              direction={{ mobile: 'column', tablet: 'row' }}
+              direction={{ mobile: 'vertical', tablet: 'horizontal' }}
               alignmentX={{ mobile: 'stretch', tablet: 'center' }}
               spacingX={{ mobile: 'space-600', tablet: 'space-900' }}
               isWrapping
@@ -64,7 +64,7 @@ const FooterMinimalistic = () => (
         {/* Language switch */}
         <GridItem columnStart={{ desktop: 11 }} columnEnd={{ desktop: 13 }}>
           <div className="text-desktop-right">
-            <Select id="select-language" name="selectLanguage" label="Language" isLabelHidden isFluid>
+            <Select id="select-language" name="selectLanguage" label="Language" isLabelHidden>
               <option value="en">English</option>
               <option value="cs">Čeština</option>
             </Select>

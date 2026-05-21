@@ -2,11 +2,13 @@
 
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
+import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { Button } from '../Button';
-import { HelperText, Label, ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
+import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { type UnstableFileUploadProps } from './types';
 import { useFileUploadState } from './useFileUploadState';
 import { useFileUploadStyleProps } from './useFileUploadStyleProps';
@@ -67,7 +69,8 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
     validationState,
     validationText,
   });
-  const inputId = id;
+  const inputId = `${id}-input`;
+  const rootDomId = rootId != null && rootId !== '' ? rootId : id;
 
   useEffect(() => {
     if (isDragAndDropSupportedProp !== undefined) {
@@ -77,74 +80,70 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
   }, [isDragAndDropSupportedProp]);
 
   return (
-    <div
-      {...transferProps}
-      {...styleProps}
-      {...(rootId != null && rootId !== '' ? { id: rootId } : {})}
-      className={classNames(classProps.root, styleProps.className)}
+    <PropsProvider
+      value={{
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+        validationState,
+      }}
     >
-      {hasInput && (
-        <div
-          onDragOver={!isDisabled && isDragAndDropSupported ? onDragOver : undefined}
-          onDragEnter={!isDisabled && isDragAndDropSupported ? onDragEnter : undefined}
-          onDragLeave={!isDisabled && isDragAndDropSupported ? onDragLeave : undefined}
-          onDrop={!isDisabled && isDragAndDropSupported ? onDrop : undefined}
-          className={classProps.input.root}
-        >
-          <Label htmlFor={inputId} UNSAFE_className={classProps.input.label}>
-            {label}
-          </Label>
-          <input
-            {...ariaDescribedByProp}
-            type="file"
-            accept={accept}
-            id={inputId}
-            ref={inputRef}
-            name={name}
-            className={classProps.input.input}
-            onChange={onChange}
-            multiple={isMultiple}
-            disabled={isDisabled}
-          />
-          <div ref={dropZoneRef} className={classProps.input.dropZone.root}>
-            {!isCompact && <Icon name={iconName} boxSize={28} aria-hidden="true" />}
-            <div className={classProps.input.dropZone.content}>
-              <Label htmlFor={inputId} UNSAFE_className={classProps.input.dropZone.label}>
-                {linkText}
-                {labelText && (
-                  <>
-                    {' '}
-                    <span className={classProps.input.dropLabel}>{labelText}</span>
-                  </>
-                )}
-              </Label>
-              <HelperText
-                UNSAFE_className={classProps.input.helper}
-                id={`${inputId}-helper`}
-                registerAria={register}
-                helperText={helperText}
-              />
-            </div>
-            {/* @ts-expect-error - Div cannot have type="button". This will be solved with https://jira.almacareer.tech/browse/DS-2168 */}
-            <Button aria-hidden="true" isDisabled={isDisabled} elementType="div" type={null}>
-              {buttonText}
-            </Button>
-          </div>
-          {validationState && (
-            <ValidationText
-              UNSAFE_className={classProps.input.validationText}
-              elementType="div"
-              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-              id={`${inputId}-validation`}
-              validationText={validationText}
-              registerAria={register}
-              role={validationTextRole}
+      <div
+        {...transferProps}
+        {...styleProps}
+        id={rootDomId}
+        className={classNames(classProps.root, styleProps.className)}
+      >
+        {hasInput && (
+          <div
+            onDragOver={!isDisabled && isDragAndDropSupported ? onDragOver : undefined}
+            onDragEnter={!isDisabled && isDragAndDropSupported ? onDragEnter : undefined}
+            onDragLeave={!isDisabled && isDragAndDropSupported ? onDragLeave : undefined}
+            onDrop={!isDisabled && isDragAndDropSupported ? onDrop : undefined}
+            className={classProps.input.root}
+          >
+            <Label htmlFor={inputId}>{label}</Label>
+            <input
+              {...ariaDescribedByProp}
+              type="file"
+              accept={accept}
+              id={inputId}
+              ref={inputRef}
+              name={name}
+              className={classProps.input.input}
+              onChange={onChange}
+              multiple={isMultiple}
+              disabled={isDisabled}
             />
-          )}
-        </div>
-      )}
-      {children}
-    </div>
+            <div ref={dropZoneRef} className={classProps.input.dropZone.root}>
+              {!isCompact && <Icon name={iconName} boxSize={28} aria-hidden="true" />}
+              <div className={classProps.input.dropZone.content}>
+                <label htmlFor={inputId} className={classProps.input.dropZone.label}>
+                  <span className={classProps.input.link}>{linkText}</span>
+                  &nbsp;
+                  <span className={classProps.input.dropLabel}>{labelText}</span>
+                </label>
+                <HelperText id={`${inputId}-helper-text`} registerAria={register} helperText={helperText} />
+              </div>
+              <Button aria-hidden="true" isDisabled={isDisabled} elementType="div">
+                {buttonText}
+              </Button>
+            </div>
+            {validationState && (
+              <ValidationText
+                elementType="span"
+                id={`${inputId}-validation-text`}
+                {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+                validationText={validationText}
+                registerAria={register}
+                role={validationTextRole}
+              />
+            )}
+          </div>
+        )}
+        {children}
+      </div>
+    </PropsProvider>
   );
 };
 

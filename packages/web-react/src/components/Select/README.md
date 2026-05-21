@@ -43,7 +43,6 @@ Advanced example usage:
 | `helperText`        | `string`                                       | —        | ✕        | Custom helper text              |
 | `id`                | `string`                                       | —        | ✓        | Select and label identification |
 | `isDisabled`        | `bool`                                         | —        | ✕        | Whether is field disabled       |
-| `isFluid`           | `bool`                                         | —        | ✕        | Whether is field is fluid       |
 | `isLabelHidden`     | `bool`                                         | —        | ✕        | Whether is label hidden         |
 | `isRequired`        | `bool`                                         | —        | ✕        | Whether is field required       |
 | `label`             | `ReactNode`                                    | —        | ✕        | Label text                      |
@@ -64,36 +63,64 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 
 ## Custom Component
 
-Select classes are fabricated using `useSelectStyleProps` hook. You can use it to create your own custom Select component.
+Compose your own field using `Label`, `InputContainer`, `InputAddon`, `HelperText`, and `ValidationText`. Wrap with `PropsProvider` so size and validation flow into `InputContainer`, and use `useAriaDescribedBy` for accessible descriptions—same building blocks as `Select` itself.
 
 ```tsx
 const CustomSelect = (props: SpiritSelectProps): JSX.Element => {
-  const { classProps, props: modifiedProps } = useSelectStyleProps(props);
-  const { styleProps, props: transferProps } = useStyleProps(restProps);
-
-  const renderValidationText = useValidationText({
-    validationTextClassName: classProps.validationText,
+  const {
+    'aria-describedby': ariaDescribedBy = '',
+    children,
+    hasValidationIcon,
+    helperText,
+    id,
+    isDisabled,
+    isLabelHidden,
+    isRequired,
+    label,
+    size,
     validationState,
     validationText,
-    requireValidationState: false,
+    ...restProps
+  } = props;
+  const { styleProps, props: transferProps } = useStyleProps(restProps);
+  const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
+  const validationTextRole = useValidationTextRole({
+    validationState,
+    validationText,
   });
 
   return (
-    <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
-      <label htmlFor={id} className={classProps.label}>
-        {label}
-      </label>
-      <div className={classProps.container}>
-        <select {...transferProps} id={id} className={classProps.input} ref={ref}>
-          {children}
-        </select>
-        <div className={classProps.icon}>
-          <Icon name={iconName} />
-        </div>
+    <PropsProvider
+      value={{
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+        size,
+        validationState,
+      }}
+    >
+      <div {...styleProps}>
+        <Label htmlFor={id}>{label}</Label>
+        <InputContainer>
+          <select {...transferProps} {...ariaDescribedByProp} id={id} disabled={isDisabled} required={isRequired}>
+            {children}
+          </select>
+          <InputAddon>
+            <Icon name="chevron-down" />
+          </InputAddon>
+        </InputContainer>
+        <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+        {validationState && (
+          <ValidationText
+            id={`${id}-validation-text`}
+            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+            validationText={validationText}
+            registerAria={register}
+            role={validationTextRole}
+          />
+        )}
       </div>
-      {helperText && <div className={classProps.helperText}>{helperText}</div>}
-      {renderValidationText}
-    </div>
+    </PropsProvider>
   );
 };
 ```

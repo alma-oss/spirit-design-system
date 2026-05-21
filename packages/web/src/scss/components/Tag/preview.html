@@ -20,33 +20,9 @@
             {{#if (eq color "warning")}}{{setVar "colorPrefix" "emotion-warning"}}{{/if}}
             {{#if (eq color "danger")}}{{setVar "colorPrefix" "emotion-danger"}}{{/if}}
             {{#if (eq color "selected")}}{{setVar "colorPrefix" "selected"}}{{/if}}
-            <span class="Tag Tag--{{color}} Tag--subtle Tag--{{size}} border-{{@root.colorPrefix}}-subtle bg-{{@root.colorPrefix}}-subtle text-{{@root.colorPrefix}}-basic">Tag {{color}}</span>
-            <span class="Tag Tag--{{color}} Tag--{{size}} border-{{@root.colorPrefix}}-basic bg-{{@root.colorPrefix}}-basic text-{{@root.colorPrefix}}-subtle">Tag {{color}}</span>
+            <span class="Tag Tag--{{color}} Tag--subtle Tag--{{size}} color-scheme-on-{{@root.colorPrefix}}-subtle">Tag {{color}}</span>
+            <span class="Tag Tag--{{color}} Tag--{{size}} color-scheme-on-{{@root.colorPrefix}}-basic">Tag {{color}}</span>
             {{/each}}
-          </div>
-        </section>
-        {{/each}}
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-<section class="py-900 py-tablet-1000">
-
-  <div class="Container">
-
-    <h2 class="docs-Heading">Feature Flag: Appearance</h2>
-
-    <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance">
-      <div class="Grid Grid--cols-1 Grid--tablet--cols-3 Grid--desktop--cols-5" style="--grid-spacing-y: var(--spirit-space-1100);">
-        {{#each @root.sizes as |size|}}
-        <section>
-          <h3 class="docs-Heading">Size {{size}}</h3>
-          <div class="docs-Stack docs-Stack--start">
-            <span class="Tag Tag--neutral Tag--subtle Tag--{{size}} border-neutral-subtle bg-neutral-subtle text-neutral-basic">Tag subtle</span>
-            <span class="Tag Tag--neutral Tag--{{size}} border-neutral-basic bg-neutral-basic text-neutral-subtle">Tag</span>
           </div>
         </section>
         {{/each}}
@@ -81,7 +57,7 @@
             {{#if (eq color "warning")}}{{setVar "colorPrefix" "emotion-warning"}}{{/if}}
             {{#if (eq color "danger")}}{{setVar "colorPrefix" "emotion-danger"}}{{/if}}
             {{#if (eq color "selected")}}{{setVar "colorPrefix" "selected"}}{{/if}}
-            <div class="Tag Tag--{{color}} Tag--subtle Tag--{{size}} border-{{@root.colorPrefix}}-subtle bg-{{@root.colorPrefix}}-subtle text-{{@root.colorPrefix}}-basic">
+            <div class="Tag Tag--{{color}} Tag--subtle Tag--{{size}} color-scheme-on-{{@root.colorPrefix}}-subtle">
               <span>Tag {{color}}</span>
               <button
                 type="button"
@@ -98,7 +74,7 @@
                 </svg>
               </button>
             </div>
-            <div class="Tag Tag--{{color}} Tag--{{size}} border-{{@root.colorPrefix}}-basic bg-{{@root.colorPrefix}}-basic text-{{@root.colorPrefix}}-subtle">
+            <div class="Tag Tag--{{color}} Tag--{{size}} color-scheme-on-{{@root.colorPrefix}}-basic">
               <span>Tag {{color}}</span>
               <button
                 type="button"

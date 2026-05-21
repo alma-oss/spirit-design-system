@@ -4,6 +4,7 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  colorSchemeBasicTest,
   componentButtonColorPropsTest,
   elementTypePropsTest,
   emotionColorPropsTest,
@@ -13,6 +14,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { EmotionColors } from '../../../constants';
 import { RouterProvider } from '../../../context/RouterContext';
 import ButtonLink from '../ButtonLink';
 
@@ -39,6 +41,8 @@ describe('ButtonLink', () => {
 
   elementTypePropsTest(ButtonLink);
 
+  colorSchemeBasicTest(ButtonLink, Object.values(EmotionColors));
+
   it('should have default classname', () => {
     render(<ButtonLink />);
 
@@ -54,15 +58,6 @@ describe('ButtonLink', () => {
 
     expect(element).toHaveClass('Button');
     expect(element).toHaveClass('Button--disabled');
-  });
-
-  it('should have block classname', () => {
-    render(<ButtonLink isBlock />);
-
-    const element = screen.getByRole('button');
-
-    expect(element).toHaveClass('Button');
-    expect(element).toHaveClass('Button--block');
   });
 
   it('should have size classname', () => {

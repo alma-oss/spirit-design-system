@@ -6,7 +6,7 @@
 <div class="Checkbox Checkbox--inputPositionStart">
   <input type="checkbox" id="checkbox-default" class="Checkbox__input" name="default" />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-default">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-default">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -17,7 +17,7 @@
 <div class="Checkbox Checkbox--inputPositionStart">
   <input type="checkbox" id="checkbox-required" class="Checkbox__input" name="required" required />
   <div class="Checkbox__text">
-    <label class="Checkbox__label Checkbox__label--required" for="checkbox-required">Checkbox Label</label>
+    <label class="Label Label--inline Label--required" for="checkbox-required">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -26,8 +26,8 @@
 
 See Validation state [dictionary][dictionary-validation].
 
-- To render validation text as a list, use `<ul>` element inside of `.Checkbox__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.Checkbox__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
 <div class="Checkbox Checkbox--inputPositionStart Checkbox--warning">
@@ -39,8 +39,10 @@ See Validation state [dictionary][dictionary-validation].
     aria-describedby="checkbox-warning-helper-text"
   />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-warning">Checkbox Label</label>
-    <div class="Checkbox__validationText" id="checkbox-warning-helper-text">Warning validation text</div>
+    <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
+    <div class="ValidationText ValidationText--warning ValidationText--inline" id="checkbox-warning-helper-text">
+      Warning validation text
+    </div>
   </div>
 </div>
 
@@ -53,8 +55,8 @@ See Validation state [dictionary][dictionary-validation].
     aria-describedby="checkbox-danger-helper-text"
   />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-danger">Checkbox Label</label>
-    <div class="Checkbox__validationText" id="checkbox-danger-helper-text">
+    <label class="Label Label--inline" for="checkbox-danger">Checkbox Label</label>
+    <div class="ValidationText ValidationText--danger ValidationText--inline" id="checkbox-danger-helper-text">
       <ul>
         <li>First validation text</li>
         <li>Second validation text</li>
@@ -72,9 +74,9 @@ See Validation state [dictionary][dictionary-validation].
     aria-describedby="checkbox-warning-helper-text"
   />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-warning">Checkbox Label</label>
-    <div class="Checkbox__validationText" id="checkbox-warning-helper-text">
-      <svg width="20" height="20" aria-hidden="true">
+    <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
+    <div class="ValidationText ValidationText--warning ValidationText--inline" id="checkbox-warning-helper-text">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
       </svg>
       <span>Warning validation text with icon</span>
@@ -89,12 +91,14 @@ See Validation state [dictionary][dictionary-validation].
 <div class="Checkbox Checkbox--inputPositionStart">
   <input type="checkbox" id="checkbox-hidden-label" class="Checkbox__input" name="hiddenLabel" required />
   <div class="Checkbox__text">
-    <label class="Checkbox__label Checkbox__label--hidden" for="checkbox-hidden-label">Checkbox Label</label>
+    <label class="Label Label--inline accessibility-hidden" for="checkbox-hidden-label">Checkbox Label</label>
   </div>
 </div>
 ```
 
 ## Helper Text
+
+To add helper text, use the [HelperText][helper-text] component:
 
 ```html
 <div class="Checkbox">
@@ -106,8 +110,8 @@ See Validation state [dictionary][dictionary-validation].
     aria-describedby="checkbox-helper-text-helper-text"
   />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-helper-text">Checkbox Label</label>
-    <div class="Checkbox__helperText" id="checkbox-helper-text-helper-text">Helper text</div>
+    <label class="Label Label--inline" for="checkbox-helper-text">Checkbox Label</label>
+    <div class="HelperText HelperText--inline" id="checkbox-helper-text-helper-text">Helper text</div>
   </div>
 </div>
 ```
@@ -132,7 +136,7 @@ Use emphasized (bold) label text to make the agreement statement more prominent:
     required
   />
   <div class="Checkbox__text">
-    <label class="Checkbox__label Checkbox__label--required" for="consent-emphasized-label">
+    <label class="Label Label--inline Label--required" for="consent-emphasized-label">
       <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
     </label>
     <div id="consent-emphasized-label-details" class="InputDetails">
@@ -168,7 +172,7 @@ Complete example showing label, details with multiple links, helper text, and va
     required
   />
   <div class="Checkbox__text">
-    <label class="Checkbox__label Checkbox__label--required" for="consent-full-example">
+    <label class="Label Label--inline Label--required" for="consent-full-example">
       I agree to the terms and privacy policy
     </label>
     <div id="consent-full-example-details" class="InputDetails">
@@ -193,10 +197,12 @@ Complete example showing label, details with multiple links, helper text, and va
         See privacy policy
       </button>
     </div>
-    <div class="Checkbox__helperText" id="consent-full-example-helper-text">
+    <div class="HelperText HelperText--inline" id="consent-full-example-helper-text">
       Please read the documents carefully before agreeing
     </div>
-    <div class="Checkbox__validationText" id="consent-full-example-validation-text">You must agree to continue</div>
+    <div class="ValidationText ValidationText--danger" id="consent-full-example-validation-text">
+      You must agree to continue
+    </div>
   </div>
 </div>
 
@@ -217,7 +223,7 @@ Complete example showing label, details with multiple links, helper text, and va
 <div class="Checkbox Checkbox--inputPositionStart Checkbox--disabled">
   <input type="checkbox" id="checkbox-disabled" class="Checkbox__input" name="disabled" disabled />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-disabled">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-disabled">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -228,7 +234,7 @@ Complete example showing label, details with multiple links, helper text, and va
 <div class="Checkbox Checkbox--inputPositionStart Checkbox--item">
   <input type="checkbox" id="checkbox-item-default" class="Checkbox__input" name="item" />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-item-default">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-item-default">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -243,7 +249,7 @@ The input position can be set to `start` (default) or `end`.
 <div class="Checkbox Checkbox--inputPositionEnd">
   <input type="checkbox" id="checkbox-position-end" class="Checkbox__input" name="position" />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-position-end">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-position-end">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -256,10 +262,11 @@ Use responsive breakpoint modifiers to change input position at different screen
 <div class="Checkbox Checkbox--tablet--inputPositionEnd">
   <input type="checkbox" id="checkbox-position-responsive" class="Checkbox__input" name="position" />
   <div class="Checkbox__text">
-    <label class="Checkbox__label" for="checkbox-position-responsive">Checkbox Label</label>
+    <label class="Label Label--inline" for="checkbox-position-responsive">Checkbox Label</label>
   </div>
 </div>
 ```
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [readme-input-details]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputDetails/README.md

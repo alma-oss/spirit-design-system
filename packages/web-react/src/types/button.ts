@@ -10,6 +10,7 @@ import type {
   RouterLinkProps,
   SingleOrResponsive,
   SizesDictionaryType,
+  SpaceToken,
   StyleProps,
 } from './shared';
 
@@ -26,14 +27,14 @@ export interface ButtonStyleProps<C = void, S = void> extends ButtonBaseProps {
   color?: ButtonColor<C>;
   /** Whether the button is disabled. */
   isDisabled?: boolean;
-  /** Whether the button should be displayed with a block style. */
-  isBlock?: boolean;
   /** Whether the button should be in a loading state. */
   isLoading?: boolean;
   /** Whether the button should be symmetrical. */
   isSymmetrical?: SingleOrResponsive<boolean>;
   /** The size of the button. */
   size?: ButtonSize<S>;
+  /** Custom spacing between button content items. */
+  spacing?: SingleOrResponsive<SpaceToken>;
 }
 
 /** Style props for link-styled buttons (`ButtonLink`, pagination prev/next); includes router integration. */

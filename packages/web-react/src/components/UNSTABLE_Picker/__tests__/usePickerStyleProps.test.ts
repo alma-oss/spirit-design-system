@@ -1,32 +1,19 @@
 import { renderHook } from '@testing-library/react';
-import { Sizes } from '../../../constants';
 import { usePickerStyleProps } from '../usePickerStyleProps';
 
 describe('usePickerStyleProps', () => {
   it('should return base classes', () => {
-    const { result } = renderHook(() => usePickerStyleProps({}));
+    const { result } = renderHook(() => usePickerStyleProps());
 
     expect(result.current.classProps.root).toBe('UNSTABLE_Picker');
-    expect(result.current.classProps.label).toBe('UNSTABLE_Picker__label');
+    expect(result.current.classProps.selection).toBe('UNSTABLE_PickerSelection');
+    expect(result.current.classProps.selectionEmpty).toBe('UNSTABLE_PickerSelection__empty');
+    expect(result.current.classProps.trigger).toBe('UNSTABLE_PickerTrigger');
   });
 
-  it('should include all modifiers', () => {
-    const { result } = renderHook(() =>
-      usePickerStyleProps({
-        isDisabled: true,
-        isFluid: true,
-        isLabelHidden: true,
-        isRequired: true,
-        size: Sizes.SMALL,
-        validationState: 'danger',
-      }),
-    );
+  it('should add disabled modifier to selection when isDisabled is true', () => {
+    const { result } = renderHook(() => usePickerStyleProps({ isDisabled: true }));
 
-    expect(result.current.classProps.root).toContain('UNSTABLE_Picker--small');
-    expect(result.current.classProps.root).toContain('UNSTABLE_Picker--disabled');
-    expect(result.current.classProps.root).toContain('UNSTABLE_Picker--fluid');
-    expect(result.current.classProps.root).toContain('UNSTABLE_Picker--danger');
-    expect(result.current.classProps.label).toContain('UNSTABLE_Picker__label--hidden');
-    expect(result.current.classProps.label).toContain('UNSTABLE_Picker__label--required');
+    expect(result.current.classProps.selection).toBe('UNSTABLE_PickerSelection UNSTABLE_PickerSelection--disabled');
   });
 });

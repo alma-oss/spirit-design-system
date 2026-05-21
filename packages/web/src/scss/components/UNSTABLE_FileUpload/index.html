@@ -16,10 +16,16 @@
         {{#each @root.variants as |variant|}}
         <div>
           <div class="docs-Stack docs-Stack--start">
-            {{#if (eq variant "standard")}}<h3>Default</h3>{{else}}<h3>Compact</h3>{{/if}}
-            <div id="example-{{variant}}" class="UNSTABLE_FileUpload">
+            <h3>{{#if (eq variant "standard")}}Default{{else}}Compact{{/if}}</h3>
+            <div
+              id="example-{{variant}}"
+              class="UNSTABLE_FileUpload"
+            >
               <div class="UNSTABLE_FileUploadInput has-drag-and-drop">
-                <label for="file-uploader-{{variant}}" class="UNSTABLE_FileUploadInput__label UNSTABLE_FileUploadInput__label--required">Label</label>
+                <label
+                  for="file-uploader-{{variant}}"
+                  class="Label Label--required"
+                >Label</label>
                 <input
                   type="file"
                   id="file-uploader-{{variant}}"
@@ -27,7 +33,9 @@
                   class="UNSTABLE_FileUploadInput__input"
                   aria-describedby="file-uploader-{{variant}}-helper"
                 />
-                <div class="UNSTABLE_FileUploadInput__dropZone{{#if (eq variant "compact")}} UNSTABLE_FileUploadInput__dropZone--compact{{/if}}">
+                <div
+                  class="UNSTABLE_FileUploadInput__dropZone{{#if (eq variant "compact")}} UNSTABLE_FileUploadInput__dropZone--compact{{/if}}"
+                >
                   {{#if (eq variant "standard")}}
                   <svg
                     class="Icon"
@@ -39,12 +47,22 @@
                   </svg>
                   {{/if}}
                   <div class="UNSTABLE_FileUploadInput__dropZoneContent">
-                    <label for="file-uploader-{{variant}}" class="UNSTABLE_FileUploadInput__dropZoneLabel">
-                      Upload your file <span class="UNSTABLE_FileUploadInput__dragAndDropLabel">or drag and drop here</span>
+                    <label
+                      for="file-uploader-{{variant}}"
+                      class="UNSTABLE_FileUploadInput__dropZoneLabel"
+                    >
+                      Upload your file <span class="UNSTABLE_FileUploadInput__dragAndDropLabel">or drag and drop
+                        here</span>
                     </label>
-                    <div id="file-uploader-{{variant}}-helper" class="UNSTABLE_FileUploadInput__helperText">Max file size is 10 MB</div>
+                    <div
+                      id="file-uploader-{{variant}}-helper"
+                      class="HelperText"
+                    >Max file size is 10 MB</div>
                   </div>
-                  <div class="Button Button--primary Button--medium" aria-hidden="true">Browse</div>
+                  <div
+                    class="Button Button--primary Button--medium"
+                    aria-hidden="true"
+                  >Browse</div>
                 </div>
               </div>
             </div>
@@ -71,9 +89,15 @@
       <div class="Grid Grid--alignmentXStretch Grid--alignmentYStretch Grid--tablet--cols-2 Grid--cols-1">
         {{#each @root.variants as |variant|}}
         <div>
-          <div id="example-validation-{{variant}}-{{state}}" class="UNSTABLE_FileUpload">
+          <div
+            id="example-validation-{{variant}}-{{state}}"
+            class="UNSTABLE_FileUpload"
+          >
             <div class="UNSTABLE_FileUploadInput UNSTABLE_FileUploadInput--{{state}} has-drag-and-drop">
-              <label for="file-uploader-{{variant}}-{{state}}" class="UNSTABLE_FileUploadInput__label">Label</label>
+              <label
+                for="file-uploader-{{variant}}-{{state}}"
+                class="Label"
+              >Label</label>
               <input
                 type="file"
                 id="file-uploader-{{variant}}-{{state}}"
@@ -81,7 +105,9 @@
                 class="UNSTABLE_FileUploadInput__input"
                 aria-describedby="file-uploader-{{variant}}-{{state}}-helper file-uploader-{{variant}}-{{state}}-validation"
               />
-              <div class="UNSTABLE_FileUploadInput__dropZone{{#if (eq variant "compact")}} UNSTABLE_FileUploadInput__dropZone--compact{{/if}}">
+              <div
+                class="UNSTABLE_FileUploadInput__dropZone{{#if (eq variant "compact")}} UNSTABLE_FileUploadInput__dropZone--compact{{/if}}"
+              >
                 {{#if (eq variant "standard")}}
                 <svg
                   class="Icon"
@@ -93,14 +119,27 @@
                 </svg>
                 {{/if}}
                 <div class="UNSTABLE_FileUploadInput__dropZoneContent">
-                  <label for="file-uploader-{{variant}}-{{state}}" class="UNSTABLE_FileUploadInput__dropZoneLabel">
-                    Upload your file <span class="UNSTABLE_FileUploadInput__dragAndDropLabel">or drag and drop here</span>
+                  <label
+                    for="file-uploader-{{variant}}-{{state}}"
+                    class="UNSTABLE_FileUploadInput__dropZoneLabel"
+                  >
+                    Upload your file <span class="UNSTABLE_FileUploadInput__dragAndDropLabel">or drag and drop
+                      here</span>
                   </label>
-                  <div id="file-uploader-{{variant}}-{{state}}-helper" class="UNSTABLE_FileUploadInput__helperText">Max file size is 10 MB</div>
+                  <div
+                    id="file-uploader-{{variant}}-{{state}}-helper"
+                    class="HelperText"
+                  >Max file size is 10 MB</div>
                 </div>
-                <div class="Button Button--primary Button--medium" aria-hidden="true">Browse</div>
+                <div
+                  class="Button Button--primary Button--medium"
+                  aria-hidden="true"
+                >Browse</div>
               </div>
-              <div id="file-uploader-{{variant}}-{{state}}-validation" class="UNSTABLE_FileUploadInput__validationText">
+              <div
+                id="file-uploader-{{variant}}-{{state}}-validation"
+                class="ValidationText ValidationText--{{state}}"
+              >
                 {{#if (eq state "danger")}}
                 <ul>
                   <li>This is {{state}} validation text.</li>
@@ -132,9 +171,15 @@
       <div class="Grid Grid--alignmentXStretch Grid--alignmentYStretch Grid--tablet--cols-2 Grid--cols-1">
         {{#each @root.variants as |variant|}}
         <div>
-          <div id="example-validation-icon-{{variant}}-{{state}}" class="UNSTABLE_FileUpload">
+          <div
+            id="example-validation-icon-{{variant}}-{{state}}"
+            class="UNSTABLE_FileUpload"
+          >
             <div class="UNSTABLE_FileUploadInput UNSTABLE_FileUploadInput--{{state}} has-drag-and-drop">
-              <label for="file-uploader-icon-{{variant}}-{{state}}" class="UNSTABLE_FileUploadInput__label UNSTABLE_FileUploadInput__label--required">Label</label>
+              <label
+                for="file-uploader-icon-{{variant}}-{{state}}"
+                class="Label Label--required"
+              >Label</label>
               <input
                 type="file"
                 id="file-uploader-icon-{{variant}}-{{state}}"
@@ -142,7 +187,9 @@
                 class="UNSTABLE_FileUploadInput__input"
                 aria-describedby="file-uploader-icon-{{variant}}-{{state}}-helper file-uploader-icon-{{variant}}-{{state}}-validation"
               />
-              <div class="UNSTABLE_FileUploadInput__dropZone{{#if (eq variant "compact")}} UNSTABLE_FileUploadInput__dropZone--compact{{/if}}">
+              <div
+                class="UNSTABLE_FileUploadInput__dropZone{{#if (eq variant "compact")}} UNSTABLE_FileUploadInput__dropZone--compact{{/if}}"
+              >
                 {{#if (eq variant "standard")}}
                 <svg
                   class="Icon"
@@ -154,14 +201,27 @@
                 </svg>
                 {{/if}}
                 <div class="UNSTABLE_FileUploadInput__dropZoneContent">
-                  <label for="file-uploader-icon-{{variant}}-{{state}}" class="UNSTABLE_FileUploadInput__dropZoneLabel">
-                    Upload your file <span class="UNSTABLE_FileUploadInput__dragAndDropLabel">or drag and drop here</span>
+                  <label
+                    for="file-uploader-icon-{{variant}}-{{state}}"
+                    class="UNSTABLE_FileUploadInput__dropZoneLabel"
+                  >
+                    Upload your file <span class="UNSTABLE_FileUploadInput__dragAndDropLabel">or drag and drop
+                      here</span>
                   </label>
-                  <div id="file-uploader-icon-{{variant}}-{{state}}-helper" class="UNSTABLE_FileUploadInput__helperText">Max file size is 10 MB</div>
+                  <div
+                    id="file-uploader-icon-{{variant}}-{{state}}-helper"
+                    class="HelperText"
+                  >Max file size is 10 MB</div>
                 </div>
-                <div class="Button Button--primary Button--medium" aria-hidden="true">Browse</div>
+                <div
+                  class="Button Button--primary Button--medium"
+                  aria-hidden="true"
+                >Browse</div>
               </div>
-              <div id="file-uploader-icon-{{variant}}-{{state}}-validation" class="UNSTABLE_FileUploadInput__validationText">
+              <div
+                id="file-uploader-icon-{{variant}}-{{state}}-validation"
+                class="ValidationText ValidationText--{{state}}"
+              >
                 <svg
                   class="Icon"
                   width="20"
@@ -200,9 +260,15 @@
         {{#each @root.variants as |variant|}}
         <div>
           <div class="docs-Stack docs-Stack--start">
-            <div id="example-disabled-{{variant}}" class="UNSTABLE_FileUpload">
+            <div
+              id="example-disabled-{{variant}}"
+              class="UNSTABLE_FileUpload"
+            >
               <div class="UNSTABLE_FileUploadInput UNSTABLE_FileUploadInput--disabled">
-                <label for="file-uploader-disabled-{{variant}}" class="UNSTABLE_FileUploadInput__label UNSTABLE_FileUploadInput__label--required">Label</label>
+                <label
+                  for="file-uploader-disabled-{{variant}}"
+                  class="Label Label--required Label--disabled"
+                >Label</label>
                 <input
                   type="file"
                   id="file-uploader-disabled-{{variant}}"
@@ -211,7 +277,9 @@
                   aria-describedby="file-uploader-disabled-{{variant}}-helper"
                   disabled
                 />
-                <div class="UNSTABLE_FileUploadInput__dropZone{{#if (eq variant "compact")}} UNSTABLE_FileUploadInput__dropZone--compact{{/if}} UNSTABLE_FileUploadInput__dropZone--disabled">
+                <div
+                  class="UNSTABLE_FileUploadInput__dropZone{{#if (eq variant "compact")}} UNSTABLE_FileUploadInput__dropZone--compact{{/if}} UNSTABLE_FileUploadInput__dropZone--disabled"
+                >
                   {{#if (eq variant "standard")}}
                   <svg
                     class="Icon"
@@ -223,12 +291,22 @@
                   </svg>
                   {{/if}}
                   <div class="UNSTABLE_FileUploadInput__dropZoneContent">
-                    <label for="file-uploader-disabled-{{variant}}" class="UNSTABLE_FileUploadInput__dropZoneLabel">
-                      Upload your file <span class="UNSTABLE_FileUploadInput__dragAndDropLabel">or drag and drop here</span>
+                    <label
+                      for="file-uploader-disabled-{{variant}}"
+                      class="UNSTABLE_FileUploadInput__dropZoneLabel"
+                    >
+                      Upload your file <span class="UNSTABLE_FileUploadInput__dragAndDropLabel">or drag and drop
+                        here</span>
                     </label>
-                    <div id="file-uploader-disabled-{{variant}}-helper" class="UNSTABLE_FileUploadInput__helperText">Max file size is 10 MB</div>
+                    <div
+                      id="file-uploader-disabled-{{variant}}-helper"
+                      class="HelperText HelperText--disabled"
+                    >Max file size is 10 MB</div>
                   </div>
-                  <div class="Button Button--primary Button--medium Button--disabled" aria-hidden="true">Browse</div>
+                  <div
+                    class="Button Button--primary Button--medium Button--disabled"
+                    aria-hidden="true"
+                  >Browse</div>
                 </div>
               </div>
             </div>
@@ -256,9 +334,15 @@
         {{#each @root.variants as |variant|}}
         <div>
           <div class="docs-Stack docs-Stack--start">
-            <div id="example-no-drag-{{variant}}" class="UNSTABLE_FileUpload">
+            <div
+              id="example-no-drag-{{variant}}"
+              class="UNSTABLE_FileUpload"
+            >
               <div class="UNSTABLE_FileUploadInput">
-                <label for="file-uploader-no-drag-{{variant}}" class="UNSTABLE_FileUploadInput__label UNSTABLE_FileUploadInput__label--required">Label</label>
+                <label
+                  for="file-uploader-no-drag-{{variant}}"
+                  class="Label Label--required"
+                >Label</label>
                 <input
                   type="file"
                   id="file-uploader-no-drag-{{variant}}"
@@ -266,7 +350,9 @@
                   class="UNSTABLE_FileUploadInput__input"
                   aria-describedby="file-uploader-no-drag-{{variant}}-helper"
                 />
-                <div class="UNSTABLE_FileUploadInput__dropZone{{#if (eq variant "compact")}} UNSTABLE_FileUploadInput__dropZone--compact{{/if}}">
+                <div
+                  class="UNSTABLE_FileUploadInput__dropZone{{#if (eq variant "compact")}} UNSTABLE_FileUploadInput__dropZone--compact{{/if}}"
+                >
                   {{#if (eq variant "standard")}}
                   <svg
                     class="Icon"
@@ -278,12 +364,21 @@
                   </svg>
                   {{/if}}
                   <div class="UNSTABLE_FileUploadInput__dropZoneContent">
-                    <label for="file-uploader-no-drag-{{variant}}" class="UNSTABLE_FileUploadInput__dropZoneLabel">
+                    <label
+                      for="file-uploader-no-drag-{{variant}}"
+                      class="UNSTABLE_FileUploadInput__dropZoneLabel"
+                    >
                       Upload your file
                     </label>
-                    <div id="file-uploader-no-drag-{{variant}}-helper" class="UNSTABLE_FileUploadInput__helperText">Max file size is 10 MB</div>
+                    <div
+                      id="file-uploader-no-drag-{{variant}}-helper"
+                      class="HelperText"
+                    >Max file size is 10 MB</div>
                   </div>
-                  <div class="Button Button--primary Button--medium" aria-hidden="true">Browse</div>
+                  <div
+                    class="Button Button--primary Button--medium"
+                    aria-hidden="true"
+                  >Browse</div>
                 </div>
               </div>
             </div>
@@ -305,7 +400,7 @@
     <div class="docs-Stack docs-Stack--stretch">
       <div id="example-with-file-list" class="UNSTABLE_FileUpload">
         <div class="UNSTABLE_FileUploadInput has-drag-and-drop">
-          <label for="file-uploader-with-list" class="UNSTABLE_FileUploadInput__label">Upload files</label>
+          <label for="file-uploader-with-list" class="Label">Upload files</label>
           <input
             type="file"
             id="file-uploader-with-list"
@@ -327,7 +422,7 @@
               <label for="file-uploader-with-list" class="UNSTABLE_FileUploadInput__dropZoneLabel">
                 Upload your file <span class="UNSTABLE_FileUploadInput__dragAndDropLabel">or drag and drop here</span>
               </label>
-              <div id="file-uploader-with-list-helper" class="UNSTABLE_FileUploadInput__helperText">
+              <div id="file-uploader-with-list-helper" class="HelperText">
                 Max file size is 10 MB
               </div>
             </div>
@@ -353,7 +448,7 @@
               <span class="UNSTABLE_File__name">
                 <span class="text-truncate">Document.pdf</span>
               </span>
-              <span class="UNSTABLE_File__helperText">2.5 MB</span>
+              <span class="HelperText">2.5 MB</span>
             </div>
           </div>
           <div
@@ -405,7 +500,7 @@
               <span class="UNSTABLE_File__name">
                 <span class="text-truncate">vacation-photo.jpg</span>
               </span>
-              <div class="UNSTABLE_File__helperText">
+              <div class="HelperText">
                 <div>
                   <svg
                     class="Icon animation-spin-clockwise"
@@ -452,7 +547,7 @@
               <span class="UNSTABLE_File__name">
                 <span class="text-truncate">report-2024.xlsx</span>
               </span>
-              <div class="UNSTABLE_File__validationText">
+              <div class="ValidationText ValidationText--success">
                 <svg
                   class="Icon"
                   width="20"
@@ -497,7 +592,7 @@
               <span class="UNSTABLE_File__name">
                 <span class="text-truncate">large-file.zip</span>
               </span>
-              <div class="UNSTABLE_File__validationText">
+              <div class="ValidationText ValidationText--danger">
                 <svg
                   class="Icon"
                   width="20"

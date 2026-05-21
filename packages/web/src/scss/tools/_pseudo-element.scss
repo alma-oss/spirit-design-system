@@ -1,0 +1,12 @@
+@mixin stretch($pseudo-element: before, $set-root-relative: false) {
+    @if $set-root-relative {
+        position: relative;
+    }
+
+    &::#{$pseudo-element} {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
+}

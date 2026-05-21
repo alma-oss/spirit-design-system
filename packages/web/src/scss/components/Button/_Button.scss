@@ -7,7 +7,10 @@
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../tools/breakpoint';
+@use '../../tools/color-scheme';
+@use '../../tools/component-color-overrides';
 @use '../../tools/dictionaries';
+@use '../../tools/responsive-properties';
 @use '../../tools/typography';
 @use 'theme';
 @use 'tools';
@@ -19,6 +22,12 @@ $_component-name: 'Button';
 
     @include tools.responsive-border-radius();
     @include typography.from-css-variables($infix: string.to-lower-case($_component-name));
+    @include responsive-properties.create-cascade(
+        $property: 'column-gap',
+        $input-custom-property-base-name: 'button-spacing',
+        $breakpoints: theme.$breakpoints,
+        $fallback-value: theme.$column-gap
+    );
 
     display: inline-flex;
     align-items: center;
@@ -29,10 +38,10 @@ $_component-name: 'Button';
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
-    color: var(--#{tokens.$css-variable-prefix}button-color);
+    color: color-scheme.color();
     border-width: theme.$border-width;
     border-style: theme.$border-style;
-    border-color: var(--#{tokens.$css-variable-prefix}button-border-color);
+    border-color: color-scheme.border-color();
     border-start-start-radius: var(
         --#{tokens.$css-variable-prefix}button-border-start-start-radius,
         var(--#{tokens.$css-variable-prefix}button-border-radius)
@@ -49,7 +58,7 @@ $_component-name: 'Button';
         --#{tokens.$css-variable-prefix}button-border-end-end-radius,
         var(--#{tokens.$css-variable-prefix}button-border-radius)
     );
-    background-color: var(--#{tokens.$css-variable-prefix}button-background-color);
+    background-color: color-scheme.background-color();
     user-select: none;
     cursor: cursors.$buttons;
 
@@ -57,15 +66,15 @@ $_component-name: 'Button';
     &:active,
     &:focus {
         text-decoration: none;
-        color: var(--#{tokens.$css-variable-prefix}button-color);
+        color: color-scheme.color();
     }
 
     &:hover {
-        background-color: var(--#{tokens.$css-variable-prefix}button-background-color-state-hover);
+        background-color: color-scheme.background-color-state-hover();
     }
 
     &:active {
-        background-color: var(--#{tokens.$css-variable-prefix}button-background-color-state-active);
+        background-color: color-scheme.background-color-state-active();
     }
 
     &:is(:disabled, .is-disabled, .Button--disabled) {
@@ -74,29 +83,21 @@ $_component-name: 'Button';
     }
 }
 
-@include dictionaries.generate-colors(
-    $class-name: $_component-name,
-    $dictionary-values: theme.$color-component-button-dictionary,
-    $config: theme.$color-action-button-config
-);
-@include dictionaries.generate-colors(
-    $class-name: $_component-name,
-    $dictionary-values: theme.$color-emotion-dictionary,
-    $config: theme.$color-emotion-config
+@include component-color-overrides.generate(
+    $class-name: 'Button',
+    $property-map: (
+        content: color,
+        border: border-color,
+        state-default: background-color,
+        state-hover: background-color-state-hover,
+        state-active: background-color-state-active,
+    )
 );
 @include dictionaries.generate-sizes(
     $class-name: $_component-name,
     $dictionary-values: theme.$size-dictionary,
     $config: theme.$size-config
 );
-
-// @deprecated The `block` modifier will be removed in the next major version.
-// Migration: delete 'Button--block' class
-// @see https://jira.almacareer.tech/browse/DS-1897
-.Button--block {
-    display: block;
-    width: 100%;
-}
 
 @each $breakpoint-name, $breakpoint-value in theme.$breakpoints {
     $infix: breakpoint.get-modifier('infix', $breakpoint-name, $breakpoint-value);
@@ -120,15 +121,15 @@ $_component-name: 'Button';
 }
 
 .Button:is(:disabled, .is-disabled, .Button--disabled):not(.Button--loading) {
-    --#{tokens.$css-variable-prefix}button-color: #{theme.$disabled-color};
-    --#{tokens.$css-variable-prefix}button-border-color: #{theme.$disabled-border-color};
-    --#{tokens.$css-variable-prefix}button-background-color: #{theme.$disabled-background-color};
+    --#{tokens.$css-variable-prefix}local-color: #{theme.$disabled-color};
+    --#{tokens.$css-variable-prefix}local-border-color: #{theme.$disabled-border-color};
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$disabled-background-color};
 }
 
 // We need to override the default disabled styles for plain buttons, because we want them to be still plain.
 .Button--plain:is(:disabled, .is-disabled, .Button--disabled):not(.Button--loading) {
-    --#{tokens.$css-variable-prefix}button-border-color: transparent;
-    --#{tokens.$css-variable-prefix}button-background-color: transparent;
+    --#{tokens.$css-variable-prefix}local-border-color: transparent;
+    --#{tokens.$css-variable-prefix}local-background-color: transparent;
 }
 
 .Button.Button--loading {
@@ -149,6 +150,6 @@ $_component-name: 'Button';
     position: absolute;
     top: 50%;
     left: 50%;
-    color: var(--#{tokens.$css-variable-prefix}button-color);
+    color: color-scheme.color();
     transform: translate(-50%, -50%);
 }

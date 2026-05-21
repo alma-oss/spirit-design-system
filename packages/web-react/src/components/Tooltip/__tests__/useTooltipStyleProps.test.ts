@@ -7,6 +7,7 @@ describe('useTooltipStyleProps', () => {
     const { result } = renderHook(() => useTooltipStyleProps({} as TooltipStyleProps));
 
     expect(result.current.classProps.rootClassName).toBe('Tooltip');
+    expect(result.current.classProps.popoverClassName).toBe('TooltipPopover color-scheme-on-neutral-basic');
     expect(result.current.classProps.arrowClassName).toBe('TooltipPopover__arrow');
     expect(result.current.classProps.closeButtonClassName).toBe('TooltipPopover__close');
   });
@@ -14,6 +15,13 @@ describe('useTooltipStyleProps', () => {
   it('should return dismissible class', () => {
     const { result } = renderHook(() => useTooltipStyleProps({ isDismissible: true } as TooltipStyleProps));
 
-    expect(result.current.classProps.popoverClassName).toBe('TooltipPopover TooltipPopover--dismissible');
+    expect(result.current.classProps.popoverClassName).toContain('TooltipPopover--dismissible');
+  });
+
+  it('should return placement classes when placement is provided', () => {
+    const { result } = renderHook(() => useTooltipStyleProps({ placement: 'top-start' } as TooltipStyleProps));
+
+    expect(result.current.classProps.popoverClassName).toContain('placement-top-start');
+    expect(result.current.classProps.popoverClassName).toContain('placement-controlled');
   });
 });

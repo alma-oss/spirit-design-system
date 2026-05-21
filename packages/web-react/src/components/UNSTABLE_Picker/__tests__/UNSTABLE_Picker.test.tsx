@@ -4,11 +4,13 @@ import React, { type ComponentProps } from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   restPropsTest,
   stylePropsTest,
-  validationStatePropsTest,
-  validationTextPropsTest,
 } from '@local/tests';
+import { ValidationStates } from '../../../constants';
 import { useToggle } from '../../../hooks';
 import {
   type SpiritUnstablePickerRef,
@@ -49,9 +51,23 @@ describe('UNSTABLE_Picker', () => {
 
   ariaAttributesTest(TestPicker);
 
-  validationStatePropsTest(TestPicker, 'UNSTABLE_Picker--');
+  it.each(Object.values(ValidationStates))('applies %s validation class to InputContainer', (state) => {
+    render(<TestPicker validationState={state} />);
 
-  validationTextPropsTest(TestPicker, '.UNSTABLE_Picker__validationText');
+    expect(screen.getByRole('group', { name: 'Languages' })).toHaveClass(`InputContainer--${state}`);
+  });
+
+  formFieldLabelContextPropsTest({
+    renderComponent: (props) => <TestPicker {...defaultProps} emptySelectionLabel="Select" {...props} />,
+  });
+
+  formFieldHelperTextContextPropsTest({
+    renderComponent: (props) => <TestPicker {...defaultProps} {...props} />,
+  });
+
+  formFieldValidationTextContextPropsTest({
+    renderComponent: (props) => <TestPicker {...defaultProps} {...props} />,
+  });
 
   it('should render selected tags and toggle items', () => {
     const onSelectionChange = jest.fn();
@@ -242,5 +258,15 @@ describe('UNSTABLE_Picker', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Close' }));
 
     expect(screen.getByRole('button', { name: 'Add' })).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('should open popover on ArrowDown when trigger is focused', () => {
+    render(<TestPicker />);
+    const trigger = screen.getByRole('button', { name: 'Add' });
+
+    trigger.focus();
+    fireEvent.keyDown(trigger, { key: 'ArrowDown', bubbles: true });
+
+    expect(screen.getByRole('button', { name: 'Close' })).toHaveAttribute('aria-expanded', 'true');
   });
 });

@@ -1,4 +1,4 @@
-import { type ElementType, type LegacyRef, type ReactNode } from 'react';
+import { type ElementType, type LegacyRef, type MutableRefObject, type ReactNode } from 'react';
 import {
   type AlignmentXExtendedDictionaryType,
   type AlignmentYExtendedDictionaryType,
@@ -45,6 +45,7 @@ export interface DropdownProps extends DropdownAlignmentProps, ChildrenProps, St
 
 export interface DropdownStyleProps extends DropdownAlignmentProps, StyleProps {
   isOpen?: boolean;
+  placement?: PlacementDictionaryType;
 }
 
 export interface SpiritDropdownProps extends DropdownProps, ChildrenProps {
@@ -54,6 +55,7 @@ export interface SpiritDropdownProps extends DropdownProps, ChildrenProps {
   onAutoClose?: (event: Event) => void;
   isOpen: boolean;
   onToggle: () => void;
+  triggerRef?: MutableRefObject<HTMLElement | null | undefined>;
 }
 
 export interface UncontrolledDropdownProps extends ChildrenProps, Omit<SpiritDropdownProps, 'isOpen' | 'onToggle'> {}

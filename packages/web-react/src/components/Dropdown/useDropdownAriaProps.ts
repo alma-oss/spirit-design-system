@@ -1,15 +1,10 @@
-import { Placements } from '../../constants';
-import {
-  type Booleanish,
-  type ClickEvent,
-  type DropdownFullWidthMode,
-  type PlacementDictionaryType,
-} from '../../types';
+import { type Booleanish, type ClickEvent, type DropdownFullWidthMode } from '../../types';
 
-const NAME_ARIA_EXPANDED = 'aria-expanded';
 const NAME_ARIA_CONTROLS = 'aria-controls';
+const NAME_ARIA_EXPANDED = 'aria-expanded';
+const NAME_ARIA_HASPOPUP = 'aria-haspopup';
 const NAME_DATA_FULLWIDTHMODE = 'data-spirit-fullwidthmode';
-const NAME_DATA_PLACEMENT = 'data-spirit-placement';
+const DIALOG_ROLE = 'dialog';
 
 export enum fullWidthModeKeys {
   'off' = 'off',
@@ -23,39 +18,41 @@ export interface UseDropdownAriaPropsProps {
   isOpen: boolean;
   /** fullWidthMode */
   fullWidthMode: DropdownFullWidthMode | undefined;
-  /** placement */
-  placement?: PlacementDictionaryType;
   /** toggle callback */
-  toggleHandler: (event: ClickEvent) => void;
+  toggleHandler: (event?: ClickEvent) => void;
+  /** trigger's aria-haspopup override */
+  hasPopup?: Booleanish | string;
 }
 
 export interface UseDropdownAriaPropsReturn {
   /** content returned props */
   contentProps: {
     id: string;
+    role: string;
     [NAME_DATA_FULLWIDTHMODE]?: keyof typeof fullWidthModeKeys | undefined;
-    [NAME_DATA_PLACEMENT]?: PlacementDictionaryType;
   };
   /** trigger returned props */
   triggerProps: {
     [NAME_ARIA_EXPANDED]: Booleanish;
     [NAME_ARIA_CONTROLS]: string;
-    onClick: (event: ClickEvent) => void;
+    [NAME_ARIA_HASPOPUP]: Booleanish | string;
+    onClick: (event?: ClickEvent) => void;
   };
 }
 
 export const useDropdownAriaProps = (props: UseDropdownAriaPropsProps): UseDropdownAriaPropsReturn => {
-  const { fullWidthMode, id, isOpen, placement = Placements.BOTTOM_START, toggleHandler } = props;
+  const { fullWidthMode, hasPopup = DIALOG_ROLE, id, isOpen, toggleHandler } = props;
 
   const triggerProps = {
     [NAME_ARIA_EXPANDED]: isOpen,
     [NAME_ARIA_CONTROLS]: String(id),
+    [NAME_ARIA_HASPOPUP]: hasPopup,
     onClick: toggleHandler,
   };
   const contentProps = {
     id,
+    role: DIALOG_ROLE,
     [NAME_DATA_FULLWIDTHMODE]: fullWidthMode,
-    [NAME_DATA_PLACEMENT]: placement,
   };
 
   return {

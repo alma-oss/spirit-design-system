@@ -329,6 +329,26 @@ export default nextConfig;
 
 </details>
 
+### Component Color Overrides
+
+To override the default color scheme for a component, you can add tokens with the following pattern:
+`component-<component-name>-<token-name>-<suffix>`.
+
+For example, to override the default subtle color of the [`Pill`][readme-web-pill] component in the `emotion-success` color, you can add the following token:
+
+```text
+component/pill/emotion-success-content-subtle
+```
+
+or to change the `emotion-success` (not subtle) variant completely, you can add the following tokens:
+
+```text
+component/pill/emotion-success-background-basic
+component/pill/emotion-success-content-subtle
+```
+
+These tokens are optional and they generate new classes for the component.
+
 ## FAQ
 
 <details>
@@ -428,8 +448,9 @@ values. This way, you can switch between themes without changing your components
 
 See the [LICENSE](LICENSE.md) file for information.
 
+[readme-web-pill]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Pill/README.md
+[sass-embedded]: https://sass-lang.com/documentation/breaking-changes/legacy-js-api/#bundlers
 [spirit-figma]: https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/
 [spirit-supernova]: https://spirit.design/
 [supernova]: https://spirit.supernova-docs.io
 [web-docs]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web#readme
-[sass-embedded]: https://sass-lang.com/documentation/breaking-changes/legacy-js-api/#bundlers

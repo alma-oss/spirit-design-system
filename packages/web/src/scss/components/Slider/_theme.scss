@@ -1,8 +1,6 @@
 @use '@tokens' as tokens;
 @use '../../settings/transitions';
 
-$padding: tokens.$space-500;
-$row-gap: tokens.$space-700;
 $transition-duration: transitions.$duration-100;
 $transition-timing: transitions.$timing-eased-out;
 

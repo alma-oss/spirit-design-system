@@ -28,16 +28,9 @@ const meta: Meta<typeof FileUploader> = {
     id: {
       control: 'text',
     },
-    isFluid: {
-      control: 'boolean',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
   },
   args: {
     id: 'file-uploader',
-    isFluid: false,
     findInQueue: fn(),
     onDismiss: fn(),
     updateQueue: fn(),

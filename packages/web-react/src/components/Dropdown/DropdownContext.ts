@@ -10,9 +10,9 @@ type DropdownContextType = {
   fullWidthMode?: keyof typeof fullWidthModeKeys;
   id: string;
   isOpen: boolean;
-  onToggle: (event: ClickEvent) => void;
+  onToggle: (event?: ClickEvent) => void;
   placement?: PlacementDictionaryType;
-  triggerRef: MutableRefObject<HTMLElement | undefined>;
+  triggerRef: MutableRefObject<HTMLElement | null | undefined>;
 };
 
 const defaultContext: DropdownContextType = {
@@ -22,13 +22,21 @@ const defaultContext: DropdownContextType = {
   isOpen: false,
   onToggle: () => {},
   placement: Placements.BOTTOM_START,
-  triggerRef: { current: undefined },
+  triggerRef: { current: null },
 };
 
 const DropdownContext = createContext<DropdownContextType>(defaultContext);
 const DropdownProvider = DropdownContext.Provider;
 const DropdownConsumer = DropdownContext.Consumer;
-const useDropdownContext = (): DropdownContextType => useContext(DropdownContext);
+
+const useDropdownContext = (): DropdownContextType & { placement: PlacementDictionaryType } => {
+  const ctx = useContext(DropdownContext);
+
+  return {
+    ...ctx,
+    placement: ctx.placement ?? defaultContext.placement,
+  };
+};
 
 export default DropdownContext;
 export { DropdownConsumer, DropdownProvider, useDropdownContext };

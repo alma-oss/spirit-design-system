@@ -27,7 +27,7 @@ const meta: Meta<typeof Button> = {
         '<Icon />': <Icon name="profile" />,
         '<Icon /> Text': (
           <>
-            <Icon name="profile" marginRight="space-400" /> Text
+            <Icon name="profile" /> Text
           </>
         ),
       },
@@ -38,11 +38,6 @@ const meta: Meta<typeof Button> = {
       table: {
         defaultValue: { summary: ComponentButtonColors.PRIMARY },
       },
-    },
-    isBlock: {
-      control: 'boolean',
-      description:
-        "**DEPRECATED**: The property will be deleted in the next major release. Please read component's documentation for more information.",
     },
     isDisabled: {
       control: 'boolean',
@@ -59,6 +54,11 @@ const meta: Meta<typeof Button> = {
       control: 'select',
       options: [...Object.values(Sizes)],
     },
+    spacing: {
+      control: 'object',
+      description:
+        'Custom spacing between button content items. Can be a spacing token (e.g. "space-400") or an object with breakpoint keys.',
+    },
     type: {
       control: 'select',
       options: ['button', 'submit', 'reset'],
@@ -67,7 +67,6 @@ const meta: Meta<typeof Button> = {
   args: {
     children: 'Click me',
     color: ComponentButtonColors.PRIMARY,
-    isBlock: false,
     isDisabled: false,
     isLoading: false,
     isSymmetrical: false,

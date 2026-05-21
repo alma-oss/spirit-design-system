@@ -5,10 +5,7 @@ import { Icon } from '../../Icon';
 import { Tag } from '..';
 
 const TagDisabled = () => (
-  <DocsStack
-    stackAlignment="start"
-    UNSAFE_className="spirit-feature-enable-v5-control-button-expanded-size-scale spirit-feature-enable-v5-tag-appearance"
-  >
+  <DocsStack stackAlignment="start" UNSAFE_className="spirit-feature-enable-v5-control-button-expanded-size-scale">
     <Tag size="small" isDisabled>
       Disabled
     </Tag>

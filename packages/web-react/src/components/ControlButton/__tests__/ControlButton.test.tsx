@@ -10,6 +10,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { PropsProvider } from '../../../context';
 import ControlButton from '../ControlButton';
 
 describe('ControlButton', () => {
@@ -40,6 +41,27 @@ describe('ControlButton', () => {
     expect(element).toHaveClass('accessibility-tap-target');
   });
 
+  it('should apply size class from context when prop is not provided', () => {
+    render(
+      <PropsProvider value={{ size: 'large' }}>
+        <ControlButton />
+      </PropsProvider>,
+    );
+
+    expect(screen.getByRole('button')).toHaveClass('ControlButton', 'ControlButton--large');
+  });
+
+  it('should prefer direct size prop over context size', () => {
+    render(
+      <PropsProvider value={{ size: 'large' }}>
+        <ControlButton size="small" />
+      </PropsProvider>,
+    );
+
+    expect(screen.getByRole('button')).toHaveClass('ControlButton--small');
+    expect(screen.getByRole('button')).not.toHaveClass('ControlButton--large');
+  });
+
   it('should render text children', () => {
     render(<ControlButton>Close</ControlButton>);
 
@@ -68,5 +90,25 @@ describe('ControlButton', () => {
 
     expect(element).toHaveClass('ControlButton--disabled');
     expect(element).toBeDisabled();
+  });
+
+  it('should render with custom spacing', () => {
+    render(<ControlButton spacing="space-600">Close</ControlButton>);
+
+    expect(screen.getByRole('button')).toHaveStyle({ '--control-button-spacing': 'var(--spirit-space-600)' });
+  });
+
+  it('should render with custom spacing for each breakpoint', () => {
+    render(
+      <ControlButton spacing={{ mobile: 'space-100', tablet: 'space-1000', desktop: 'space-1200' }}>
+        Close
+      </ControlButton>,
+    );
+
+    const element = screen.getByRole('button') as HTMLElement;
+
+    expect(element).toHaveStyle({ '--control-button-spacing': 'var(--spirit-space-100)' });
+    expect(element).toHaveStyle({ '--control-button-spacing-tablet': 'var(--spirit-space-1000)' });
+    expect(element).toHaveStyle({ '--control-button-spacing-desktop': 'var(--spirit-space-1200)' });
   });
 });

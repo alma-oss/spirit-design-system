@@ -54,17 +54,10 @@ for its subcomponents:
 </div>
 ```
 
-### Fluid Width
+### Layout
 
-By adding the `FileUploader--fluid` modifier class, FileUploader can take up all
-the available horizontal space:
-
-```html
-<div class="FileUploader FileUploader--fluid" data-spirit-toggle="fileUploader">
-  <!-- FileUploaderInput -->
-  <!-- FileUploaderList -->
-</div>
-```
+FileUploader is fluid by default. Use parent layout components like [Grid][readme-grid], [Stack][readme-stack], or [Container][readme-container]
+to control the component width in page layouts.
 
 ## FileUploaderInput
 
@@ -75,9 +68,11 @@ If supported by the device, FileUploaderInput automatically turns on the
 drag-and-drop functionality (signalized by the `has-drag-and-drop` state class
 on the root element).
 
+To add helper text, use the [HelperText][readme-helper-text] component:
+
 ```html
 <div class="FileUploaderInput" data-spirit-element="wrapper">
-  <label for="file-uploader" class="FileUploaderInput__label">Label</label>
+  <label for="file-uploader" class="Label">Label</label>
   <input
     type="file"
     id="file-uploader"
@@ -86,14 +81,14 @@ on the root element).
     data-spirit-element="input"
   />
   <div class="FileUploaderInput__dropZone" data-spirit-element="dropZone">
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#upload" />
     </svg>
     <label for="file-uploader" class="FileUploaderInput__dropZoneLabel">
       <span class="FileUploaderInput__link link-primary link-underlined">Upload your file</span>
       <span class="FileUploaderInput__dragAndDropLabel">or drag and drop here</span>
     </label>
-    <div class="FileUploaderInput__helperText">Max file size is 10 MB</div>
+    <div class="HelperText">Max file size is 10 MB</div>
   </div>
 </div>
 ```
@@ -187,11 +182,11 @@ Microsoft Word documents:
 
 ### Required Input
 
-To mark the input as required, simply add the `FileUploaderInput__label--required` to the label:
+To mark the input as required, simply add the `Label--required` to the label:
 
 ```html
 <div class="FileUploaderInput" data-spirit-element="wrapper">
-  <label for="file-uploader" class="FileUploaderInput__label FileUploaderInput__label--required">Label</label>
+  <label for="file-uploader" class="Label Label--required">Label</label>
   <input
     type="file"
     id="file-uploader"
@@ -225,18 +220,18 @@ When validated on server:
 <div class="FileUploaderInput FileUploaderInput--success" data-spirit-element="wrapper">
   <!-- Label -->
   <!-- Drop zone with input -->
-  <div class="FileUploaderInput__validationText">Success Validation Text</div>
+  <div class="ValidationText ValidationText--success">Success Validation Text</div>
 </div>
 ```
 
-- To render validation text as a list, use `<ul>` element inside of `.FileUploaderInput__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.FileUploaderInput__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
 <div class="FileUploaderInput FileUploaderInput--success" data-spirit-element="wrapper">
   <!-- Label -->
   <!-- Drop zone with input -->
-  <div class="FileUploaderInput__validationText">
+  <div class="ValidationText ValidationText--success">
     <ul>
       <li>First validation text</li>
       <li>Second validation text</li>
@@ -247,8 +242,8 @@ When validated on server:
 <div class="FileUploaderInput FileUploaderInput--warning" data-spirit-element="wrapper">
   <!-- Label -->
   <!-- Drop zone with input -->
-  <div class="FileUploaderInput__validationText">
-    <svg width="20" height="20" aria-hidden="true">
+  <div class="ValidationText ValidationText--warning">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
     </svg>
     <div>Warning validation text with icon</div>
@@ -293,7 +288,9 @@ own way.**
 <div class="FileUploaderInput has-success" data-spirit-element="wrapper">
   <!-- Label -->
   <!-- Drop zone with input -->
-  <div data-spirit-element="validation_text">Success message inserted by JS</div>
+  <div class="ValidationText ValidationText--success" data-spirit-element="validation_text">
+    Success message inserted by JS
+  </div>
 </div>
 ```
 
@@ -340,7 +337,7 @@ truncated.
 ```html
 <li class="FileUploaderAttachment">
   <!-- File icon: -->
-  <svg width="24" height="24" aria-hidden="true">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#file" />
   </svg>
   <!-- File name: -->
@@ -350,7 +347,7 @@ truncated.
   <!-- Remove button: -->
   <button type="button" class="FileUploaderAttachment__action">
     <span class="accessibility-hidden">Remove</span>
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#close" />
     </svg>
   </button>
@@ -366,7 +363,7 @@ pick up the template and apply it on any attachments the user wants to upload.
 <div class="FileUploader" data-spirit-toggle="fileUploader">
   <template data-spirit-snippet="item">
     <li class="FileUploaderAttachment" data-spirit-populate-field="item">
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#file" />
       </svg>
       <span class="FileUploaderAttachment__name">
@@ -374,7 +371,7 @@ pick up the template and apply it on any attachments the user wants to upload.
       </span>
       <button type="button" class="FileUploaderAttachment__action" data-spirit-populate-field="button">
         <span class="accessibility-hidden">Remove</span>
-        <svg width="24" height="24" aria-hidden="true">
+        <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use xlink:href="/icons/svg/sprite.svg#close" />
         </svg>
       </button>
@@ -416,7 +413,7 @@ Full example:
   </span>
   <button type="button" class="FileUploaderAttachment__action">
     <span class="accessibility-hidden">Remove</span>
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#close" />
     </svg>
   </button>
@@ -432,7 +429,7 @@ You can add custom actions to the FileUploaderAttachment.
   <!-- Custom action: start -->
   <button type="button" class="FileUploaderAttachment__action">
     <span class="accessibility-hidden">Edit</span>
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#edit" />
     </svg>
   </button>
@@ -444,7 +441,7 @@ Full example:
 
 ```html
 <li class="FileUploaderAttachment">
-  <svg width="24" height="24" aria-hidden="true">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
     <use xlink:href="/icons/svg/sprite.svg#file" />
   </svg>
   <span class="FileUploaderAttachment__name">
@@ -454,7 +451,7 @@ Full example:
     <!-- Custom action: start -->
     <button type="button" class="FileUploaderAttachment__action">
       <span class="accessibility-hidden">Edit</span>
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#edit" />
       </svg>
     </button>
@@ -462,7 +459,7 @@ Full example:
   </span>
   <button type="button" class="FileUploaderAttachment__action">
     <span class="accessibility-hidden">Remove</span>
-    <svg width="24" height="24" aria-hidden="true">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
       <use xlink:href="/icons/svg/sprite.svg#close" />
     </svg>
   </button>
@@ -562,7 +559,7 @@ This is how all subcomponents build up the complete FileUploader:
   <!-- FileUploaderAttachment template: start -->
   <template data-spirit-snippet="item">
     <li class="FileUploaderAttachment" data-spirit-populate-field="item">
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#file" />
       </svg>
       <span class="FileUploaderAttachment__name">
@@ -570,7 +567,7 @@ This is how all subcomponents build up the complete FileUploader:
       </span>
       <button type="button" class="FileUploaderAttachment__action" data-spirit-populate-field="button">
         <span class="accessibility-hidden">Remove</span>
-        <svg width="24" height="24" aria-hidden="true">
+        <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use xlink:href="/icons/svg/sprite.svg#close" />
         </svg>
       </button>
@@ -580,7 +577,7 @@ This is how all subcomponents build up the complete FileUploader:
 
   <!-- FileUploaderInput: start -->
   <div class="FileUploaderInput" data-spirit-element="wrapper">
-    <label for="file-uploader-with-attachments" class="FileUploaderInput__label">Label</label>
+    <label for="file-uploader-with-attachments" class="Label">Label</label>
     <input
       type="file"
       id="file-uploader-with-attachments"
@@ -589,14 +586,14 @@ This is how all subcomponents build up the complete FileUploader:
       data-spirit-element="input"
     />
     <div class="FileUploaderInput__dropZone" data-spirit-element="dropZone">
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#upload" />
       </svg>
       <label for="file-uploader-with-attachments" class="FileUploaderInput__dropZoneLabel">
         <span class="FileUploaderInput__link link-primary link-underlined">Upload your file</span>
         <span class="FileUploaderInput__dragAndDropLabel">or drag and drop here</span>
       </label>
-      <div class="FileUploaderInput__helperText">Max file size is 10 MB</div>
+      <div class="HelperText">Max file size is 10 MB</div>
     </div>
   </div>
   <!-- FileUploaderInput: end -->
@@ -606,7 +603,7 @@ This is how all subcomponents build up the complete FileUploader:
   <ul class="FileUploaderList" aria-labelledby="attachments" data-spirit-element="list">
     <!-- FileUploaderAttachment INSERTED BY THE JS PLUGIN: start -->
     <li class="FileUploaderAttachment">
-      <svg width="24" height="24" aria-hidden="true">
+      <svg class="Icon" width="24" height="24" aria-hidden="true">
         <use xlink:href="/icons/svg/sprite.svg#file" />
       </svg>
       <span class="FileUploaderAttachment__name">
@@ -614,7 +611,7 @@ This is how all subcomponents build up the complete FileUploader:
       </span>
       <button type="button" class="FileUploaderAttachment__action">
         <span class="accessibility-hidden">Remove</span>
-        <svg width="24" height="24" aria-hidden="true">
+        <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use xlink:href="/icons/svg/sprite.svg#close" />
         </svg>
       </button>
@@ -679,4 +676,8 @@ Example: So if you set `name="attachments"` to the default input element, the at
 [mdn-multiple]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#multiple
 [mdn-template]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template
 [prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

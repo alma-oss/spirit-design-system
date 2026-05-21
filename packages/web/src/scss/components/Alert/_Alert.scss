@@ -1,6 +1,6 @@
 @use 'theme';
-@use '@tokens' as tokens;
-@use '../../tools/dictionaries';
+@use '../../tools/color-scheme';
+@use '../../tools/component-color-overrides';
 @use '../../tools/typography';
 
 .Alert {
@@ -12,12 +12,12 @@
     justify-content: flex-start;
     width: 100%;
     padding: theme.$padding;
-    color: var(--#{tokens.$css-variable-prefix}alert-color);
+    color: color-scheme.color();
     border-width: theme.$border-width;
     border-style: theme.$border-style;
-    border-color: var(--#{tokens.$css-variable-prefix}alert-border-color);
+    border-color: color-scheme.border-color();
     border-radius: theme.$border-radius;
-    background-color: var(--#{tokens.$css-variable-prefix}alert-background-color);
+    background-color: color-scheme.background-color();
 }
 
 .Alert--center {
@@ -25,25 +25,11 @@
     justify-content: center;
 }
 
-@include dictionaries.generate-colors(
+@include component-color-overrides.generate(
     $class-name: 'Alert',
-    $dictionary-values: theme.$color-dictionary,
-    $config: theme.$color-config
+    $property-map: (
+        content: color,
+        border: border-color,
+        background: background-color,
+    )
 );
-
-// @deprecated This style will be removed in the next major version.
-// Migration: delete '.Alert :where(a)' styles
-// @see https://jira.almacareer.tech/browse/DS-2379
-.Alert :where(a) {
-    color: var(--#{tokens.$css-variable-prefix}alert-color);
-
-    @media (hover: hover) {
-        &:hover {
-            color: var(--#{tokens.$css-variable-prefix}alert-color);
-        }
-    }
-
-    &:active {
-        color: var(--#{tokens.$css-variable-prefix}alert-color);
-    }
-}

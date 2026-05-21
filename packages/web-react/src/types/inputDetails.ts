@@ -1,6 +1,10 @@
 import type { ElementType, ReactNode } from 'react';
-import type { RegisterType as RegisterDetailsType } from '../hooks/useAriaIdRefs';
-import type { ChildrenProps, PolymorphicComponentProps, StyleProps } from './shared';
+import type {
+  ChildrenProps,
+  PolymorphicComponentProps,
+  RegisterType as RegisterDetailsType,
+  StyleProps,
+} from './shared';
 
 /** ===== INTERNAL API ===== */
 export interface InputDetailsBaseProps extends ChildrenProps, StyleProps {
@@ -8,6 +12,8 @@ export interface InputDetailsBaseProps extends ChildrenProps, StyleProps {
   children: ReactNode;
   /** ID of the details element */
   id?: string;
+  /** Whether the input details are disabled */
+  isDisabled?: boolean;
   /** Callback to register aria-details ID */
   registerAriaDetails?: RegisterDetailsType;
 }

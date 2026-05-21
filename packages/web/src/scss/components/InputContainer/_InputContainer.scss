@@ -1,0 +1,176 @@
+// 1. Create a stacking context so that ControlButtons inside Tags (z-index: 1) do not escape
+//    into the page stacking context and overlap DropdownPopovers of neighboring Pickers.
+// 2. For select, we need to place the input addon over the input to keep the interaction consistent.
+// 3. We pass the input arrows width if the input type is number.
+// 4. If the input has a size attribute, we calculate the width based on the input width, padding, border width and arrows width.
+// 5. We generate the input width based on the number of characters.
+// 6. Tweak the input line height of `small` Select size to align the text vertically within the input.
+
+@use '@tokens' as tokens;
+@use '../../settings/cursors';
+@use '../../tools/breakpoint';
+@use '../../tools/dictionaries';
+@use '../../tools/typography';
+@use 'theme';
+
+.InputContainer {
+    --#{tokens.$css-variable-prefix}input-addon-min-width: calc(
+        var(--#{tokens.$css-variable-prefix}input-container-height) - 2 * #{theme.$border-width}
+    );
+
+    position: relative;
+    isolation: isolate; // 1.
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    color: theme.$color;
+    border: theme.$border-width theme.$border-style theme.$border-color;
+    background-color: theme.$background-color;
+
+    &:has(> :where([size])) {
+        width: fit-content;
+    }
+
+    &:has(> :is(input, select)) {
+        height: var(--#{tokens.$css-variable-prefix}input-container-height);
+    }
+
+    &:has(> textarea) {
+        min-height: var(--#{tokens.$css-variable-prefix}input-container-min-height);
+    }
+
+    // 2.
+    &:has(> select) {
+        --#{tokens.$css-variable-prefix}input-addon-grid-area: 1 / -1;
+
+        display: grid;
+        justify-items: end;
+    }
+
+    &:focus-within {
+        border-color: theme.$border-color-state-focus;
+        outline: 0;
+        box-shadow: theme.$focus-shadow;
+    }
+
+    @media (hover: hover) {
+        &:not(.InputContainer--disabled):hover {
+            background-color: theme.$background-color-state-hover;
+        }
+    }
+
+    &:not(.InputContainer--disabled):has(> :is(input, select, textarea):active),
+    &:not(.InputContainer--disabled):has(> :is(input, select, textarea):focus-within) {
+        background-color: theme.$background-color-state-active;
+    }
+
+    @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
+        @include breakpoint.up($breakpoint-value) {
+            border-radius: var(--#{tokens.$css-variable-prefix}input-container-border-radius-#{$breakpoint-name});
+        }
+    }
+}
+
+.InputContainer > :is(input, select, textarea) {
+    @include typography.from-css-variables($infix: 'input-container');
+
+    appearance: none;
+    flex-grow: 1;
+    height: 100%;
+    padding-block: theme.$input-padding-y;
+    color: inherit;
+    border: none;
+    border-radius: inherit;
+    background: none;
+    outline: none;
+}
+
+.InputContainer > :is(input, textarea) {
+    &:first-child {
+        padding-inline-start: theme.$input-padding-x;
+    }
+
+    &:last-child {
+        padding-inline-end: theme.$input-padding-x;
+    }
+
+    &::placeholder {
+        color: theme.$input-placeholder-color;
+        opacity: 1;
+    }
+}
+
+.InputContainer > textarea {
+    min-height: inherit;
+    resize: vertical;
+}
+
+.InputContainer > input {
+    // 3.
+    &:where([type='number']) {
+        --#{tokens.$css-variable-prefix}input-container-input-arrows-width: #{theme.$input-number-arrows-width};
+    }
+
+    // 4.
+    &:where([size]) {
+        width: calc(
+            var(--#{tokens.$css-variable-prefix}input-container-input-width) + 2 * #{theme.$input-padding-x} + 2 *
+                #{theme.$border-width} + var(--#{tokens.$css-variable-prefix}input-container-input-arrows-width, 0px)
+        );
+    }
+
+    // 5.
+    @each $size in theme.$input-size-characters {
+        &:where([size='#{$size}']) {
+            --#{tokens.$css-variable-prefix}input-container-input-width: #{$size}ch;
+        }
+    }
+}
+
+// 2.
+.InputContainer > select {
+    grid-area: 1 / 1;
+    width: 100%;
+    padding-inline: theme.$input-padding-x
+        calc(
+            var(--#{tokens.$css-variable-prefix}input-addon-min-width) + #{theme.$input-padding-x} - 2 *
+                #{theme.$border-width}
+        );
+}
+
+// 6.
+.InputContainer--small:has(> select) {
+    --#{tokens.$css-variable-prefix}input-container-line-height: 1.3;
+}
+
+@include dictionaries.generate-sizes(
+    $class-name: 'InputContainer',
+    $dictionary-values: theme.$size-dictionary,
+    $config: theme.$size-config
+);
+
+@each $validation-state-name, $validation-state-value in theme.$validation-states {
+    .InputContainer--#{$validation-state-name},
+    .InputContainer--#{$validation-state-name}:has(> :is(input, select, textarea):focus-visible) {
+        border-color: $validation-state-value;
+    }
+}
+
+.InputContainer--disabled {
+    color: theme.$color-state-disabled;
+    border-color: theme.$border-color-state-disabled;
+    background-color: theme.$background-color-state-disabled;
+}
+
+.InputContainer--disabled:focus-within {
+    border-color: theme.$border-color-state-disabled;
+    box-shadow: none;
+}
+
+.InputContainer--disabled > :is(input, select, textarea) {
+    cursor: cursors.$disabled;
+}
+
+.InputContainer--disabled > :is(input, textarea)::placeholder {
+    color: theme.$input-placeholder-color-state-disabled;
+}

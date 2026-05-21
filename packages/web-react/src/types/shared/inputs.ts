@@ -1,10 +1,53 @@
-import { type AriaRole, type ReactNode } from 'react';
-import { type InputPositions } from '../../constants';
-import { type ValidationStatesDictionaryType } from './dictionaries';
+import type { AriaRole, ElementType, ReactNode } from 'react';
+import { FormFieldVariants, type InputPositions } from '../../constants';
+import { type SizesDictionaryType, type ValidationStatesDictionaryType } from './dictionaries';
 
 export type ValidationState = ValidationStatesDictionaryType;
 
 export type ValidationTextType = ReactNode | ReactNode[];
+
+export { FormFieldVariants };
+export type FormFieldVariant = (typeof FormFieldVariants)[keyof typeof FormFieldVariants];
+
+export type RegisterParams = { add?: string; remove?: string };
+
+export type RegisterType = (params: RegisterParams) => void;
+
+export interface FormFieldElementTypeProps<E extends ElementType = 'div'> {
+  /**
+   * The HTML element or React element used to render the form field element, e.g. 'div', 'span'.
+   *
+   * @default 'div'
+   */
+  elementType?: E;
+}
+
+export interface FormFieldProps<E extends ElementType = 'div'> extends FormFieldElementTypeProps<E> {
+  id?: string;
+  registerAria?: RegisterType;
+}
+
+export interface FormFieldContextValue {
+  /** Visual variant (box, inline, item) for Label and HelperText styling. */
+  formFieldVariant?: FormFieldVariant;
+  /** Whether the field is disabled; affects Label and HelperText styling. */
+  isDisabled?: boolean;
+  /** Whether the field is an item (Checkbox or Radio in item mode). */
+  isItem?: boolean;
+  /** Whether the label is visually hidden but accessible. */
+  isLabelHidden?: boolean;
+  /** Whether the field is required (label shows required indicator). */
+  isRequired?: boolean;
+  /** Shared field size for context-aware descendants (e.g. InputContainer). */
+  size?: SizesDictionaryType;
+  /** Current validation state; passed to ValidationText for styling. */
+  validationState?: ValidationState;
+}
+
+export type FormFieldStyleProps = Pick<FormFieldContextValue, 'formFieldVariant' | 'isDisabled'>;
+
+export type LabelStyleProps = FormFieldStyleProps &
+  Pick<FormFieldContextValue, 'isLabelHidden' | 'isRequired' | 'isItem'>;
 
 export interface Validation {
   /** Whether the input should display its "valid" or "invalid" visual styling. */
@@ -31,10 +74,7 @@ export type InputBaseProps = {
   isDisabled?: boolean;
 };
 
-export interface TextInputProps extends TextInputBase {
-  /** Whether the width should be controlled by container */
-  isFluid?: boolean;
-}
+export type TextInputProps = TextInputBase;
 
 export interface DetailsProps {
   /** Content for the details section under Checkbox's or Toggle's label, typically containing modal triggers */
@@ -42,7 +82,7 @@ export interface DetailsProps {
 }
 
 export interface HelperTextProps {
-  /** If I wanted some help text */
+  /** Helper text content displayed below or near the form control. */
   helperText?: ReactNode;
 }
 

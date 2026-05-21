@@ -1,5 +1,5 @@
 import { type ElementType, type ReactNode } from 'react';
-import { type PolymorphicComponentProps, type StyleProps } from './shared';
+import { type LabelStyleProps, type PolymorphicComponentProps, type StyleProps } from './shared';
 
 export interface LabelProps {
   children?: ReactNode;
@@ -8,7 +8,7 @@ export interface LabelProps {
 }
 
 /** ===== INTERNAL API ===== */
-export interface LabelBaseProps extends LabelProps, StyleProps {
+export interface LabelBaseProps extends LabelProps, LabelStyleProps, StyleProps {
   id?: string;
 }
 

@@ -5,8 +5,10 @@
 @use '../../settings/cursors';
 @use '../../settings/feature-flags';
 @use '../../tools/breakpoint';
+@use '../../tools/color-scheme';
 @use '../../tools/dictionaries';
 @use '../../tools/reset';
+@use '../../tools/responsive-properties';
 @use '../../tools/string' as spirit-string;
 @use '../../tools/typography';
 @use 'theme';
@@ -21,10 +23,17 @@ $_component-name-infix: spirit-string.convert-pascal-case-to-kebab-case($_compon
 
     @include reset.button();
     @include typography.from-css-variables($infix: $_component-name-infix);
+    @include responsive-properties.create-cascade(
+        $property: 'column-gap',
+        $input-custom-property-base-name: 'control-button-spacing',
+        $breakpoints: theme.$breakpoints,
+        $fallback-value: theme.$column-gap
+    );
 
     height: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-height);
     padding-inline: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-padding-x);
     padding-block: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-padding-y);
+    color: color-scheme.color();
     border: theme.$border-width theme.$border-style transparent;
     border-radius: theme.$border-radius;
     user-select: none;
@@ -37,7 +46,7 @@ $_component-name-infix: spirit-string.convert-pascal-case-to-kebab-case($_compon
 }
 
 .ControlButton--hasBackground {
-    background-color: var(--#{tokens.$css-variable-prefix}local-background-color);
+    background-color: color-scheme.background-color();
 }
 
 @include dictionaries.generate-sizes(

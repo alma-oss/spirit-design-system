@@ -2,12 +2,6 @@
 
 Flex is a component that allows you to create a flexible one-dimensional layout.
 
-## ⚠️ DEPRECATION NOTICE
-
-Direction values `row` and `column` are deprecated and will be removed in the next major release. Use `horizontal` and `vertical` values instead.
-
-[What are deprecations?][readme-deprecations]
-
 ## Basic Usage
 
 Horizontal layout:
@@ -174,16 +168,16 @@ Custom vertical (y-axis) spacing:
 
 ## API
 
-| Name          | Type                                                                                      | Default      | Required | Description                                                                                                                                                                                                                |
-| ------------- | ----------------------------------------------------------------------------------------- | ------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `alignmentX`  | \[[AlignmentXExtended dictionary][dictionary-alignment] \| `object`]                      | `stretch`    | ✕        | Apply horizontal alignment of items, use an object to set responsive values, e.g. `{ mobile: 'left', tablet: 'center', desktop: 'right' }`                                                                                 |
-| `alignmentY`  | \[[AlignmentYExtended dictionary][dictionary-alignment] \| `object`]                      | `stretch`    | ✕        | Apply vertical alignment of items, use an object to set responsive values, e.g. `{ mobile: 'top', tablet: 'center', desktop: 'bottom' }`                                                                                   |
-| `direction`   | \[[DirectionExtended dictionary][dictionary-direction] \| `row` \| `column` \| `object` ] | `horizontal` | ✕        | [**DEPRECATED**][readme-deprecations] Row and column will be removed in favor of `DirectionExtended`; Direction of the items, use an object to set responsive values, e.g. `{ mobile: 'horizontal', desktop: 'vertical' }` |
-| `elementType` | HTML element                                                                              | `div`        | ✕        | Element type to use for the Grid                                                                                                                                                                                           |
-| `isWrapping`  | \[ `bool` \| `object` ]                                                                   | `false`      | ✕        | Whether items will wrap, use an object to set responsive values, e.g. `{ mobile: true, tablet: true, desktop: false }`                                                                                                     |
-| `spacing`     | \[`SpaceToken` \| `Responsive<SpaceToken>`]                                               | —            | ✕        | Apply [custom spacing](#custom-spacing) in both horizontal and vertical directions between items                                                                                                                           |
-| `spacingX`    | \[`SpaceToken` \| `Responsive<SpaceToken>`]                                               | —            | ✕        | Apply horizontal [custom spacing](#custom-spacing) between items                                                                                                                                                           |
-| `spacingY`    | \[`SpaceToken` \| `Responsive<SpaceToken>`]                                               | —            | ✕        | Apply vertical [custom spacing](#custom-spacing) between items                                                                                                                                                             |
+| Name          | Type                                                                 | Default      | Required | Description                                                                                                                                |
+| ------------- | -------------------------------------------------------------------- | ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `alignmentX`  | \[[AlignmentXExtended dictionary][dictionary-alignment] \| `object`] | `stretch`    | ✕        | Apply horizontal alignment of items, use an object to set responsive values, e.g. `{ mobile: 'left', tablet: 'center', desktop: 'right' }` |
+| `alignmentY`  | \[[AlignmentYExtended dictionary][dictionary-alignment] \| `object`] | `stretch`    | ✕        | Apply vertical alignment of items, use an object to set responsive values, e.g. `{ mobile: 'top', tablet: 'center', desktop: 'bottom' }`   |
+| `direction`   | \[[DirectionExtended dictionary][dictionary-direction] \| `object`]  | `horizontal` | ✕        | Direction of the items, use an object to set responsive values, e.g. `{ mobile: 'horizontal', desktop: 'vertical' }`                       |
+| `elementType` | HTML element                                                         | `div`        | ✕        | Element type to use for the Flex                                                                                                           |
+| `isWrapping`  | \[ `bool` \| `object` ]                                              | `false`      | ✕        | Whether items will wrap, use an object to set responsive values, e.g. `{ mobile: true, tablet: true, desktop: false }`                     |
+| `spacing`     | \[`SpaceToken` \| `Responsive<SpaceToken>`]                          | —            | ✕        | Apply [custom spacing](#custom-spacing) in both horizontal and vertical directions between items                                           |
+| `spacingX`    | \[`SpaceToken` \| `Responsive<SpaceToken>`]                          | —            | ✕        | Apply horizontal [custom spacing](#custom-spacing) between items                                                                           |
+| `spacingY`    | \[`SpaceToken` \| `Responsive<SpaceToken>`]                          | —            | ✕        | Apply vertical [custom spacing](#custom-spacing) between items                                                                             |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -195,6 +189,5 @@ and [escape hatches][readme-escape-hatches].
 [mdn-display-flex]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout
 [mdn-display-grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
-[readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#deprecations
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

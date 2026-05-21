@@ -77,7 +77,7 @@ export const UncontrolledDropdownPlayground: Story = {
   render: (args) => (
     <UncontrolledDropdown {...args}>
       <DropdownTrigger elementType={Button}>Button as anchor</DropdownTrigger>
-      <DropdownPopover>{args.children}</DropdownPopover>
+      <DropdownPopover aria-label="Dropdown">{args.children}</DropdownPopover>
     </UncontrolledDropdown>
   ),
 };

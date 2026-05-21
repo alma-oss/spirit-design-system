@@ -1,14 +1,16 @@
 'use client';
 
-import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { Sizes } from '../../constants';
+import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritSelectProps } from '../../types';
-import { HelperText, Label, ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
-import { useSelectStyleProps } from './useSelectStyleProps';
+import { InputAddon } from '../InputAddon';
+import { InputContainer } from '../InputContainer';
+import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
 
 const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>) => {
   const {
@@ -18,7 +20,6 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
     helperText,
     id,
     isDisabled,
-    isFluid,
     isLabelHidden,
     isRequired,
     label,
@@ -27,15 +28,6 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
     validationText,
     ...restProps
   } = props;
-  const { classProps } = useSelectStyleProps({
-    hasValidationIcon,
-    isDisabled,
-    isFluid,
-    isLabelHidden,
-    isRequired,
-    size,
-    validationState,
-  });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
   const validationTextRole = useValidationTextRole({
@@ -44,43 +36,44 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
   });
 
   return (
-    <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
-      <Label htmlFor={id} UNSAFE_className={classProps.label}>
-        {label}
-      </Label>
-      <div className={classProps.container}>
-        <select
-          {...transferProps}
-          {...ariaDescribedByProp}
-          id={id}
-          className={classProps.input}
-          disabled={isDisabled}
-          required={isRequired}
-          ref={ref}
-        >
-          {children}
-        </select>
-        <div className={classProps.icon}>
-          <Icon name="chevron-down" boxSize={size === Sizes.SMALL ? 16 : 20} />
-        </div>
+    <PropsProvider
+      value={{
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+        size,
+        validationState,
+      }}
+    >
+      <div {...styleProps}>
+        <Label htmlFor={id}>{label}</Label>
+        <InputContainer>
+          <select
+            {...transferProps}
+            {...ariaDescribedByProp}
+            id={id}
+            disabled={isDisabled}
+            required={isRequired}
+            ref={ref}
+          >
+            {children}
+          </select>
+          <InputAddon>
+            <Icon name="chevron-down" boxSize={size === Sizes.SMALL ? 16 : 20} />
+          </InputAddon>
+        </InputContainer>
+        <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+        {validationState && (
+          <ValidationText
+            id={`${id}-validation-text`}
+            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+            validationText={validationText}
+            registerAria={register}
+            role={validationTextRole}
+          />
+        )}
       </div>
-      <HelperText
-        UNSAFE_className={classProps.helperText}
-        id={`${id}__helperText`}
-        registerAria={register}
-        helperText={helperText}
-      />
-      {validationState && (
-        <ValidationText
-          UNSAFE_className={classProps.validationText}
-          {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
-          id={`${id}__validationText`}
-          validationText={validationText}
-          registerAria={register}
-          role={validationTextRole}
-        />
-      )}
-    </div>
+    </PropsProvider>
   );
 };
 

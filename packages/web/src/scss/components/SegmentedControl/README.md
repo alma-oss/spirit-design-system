@@ -76,7 +76,7 @@ Consider using a `Tooltip` to provide additional context for the icons.
 ```html
 <input type="radio" id="segmented-control-label" name="segmented" value="value" class="SegmentedControlItem__input" />
 <label for="segmented-control-label" class="SegmentedControlItem__label">
-  <svg width="20" height="20" aria-hidden="true">
+  <svg class="Icon" width="20" height="20" aria-hidden="true">
     <use xlink:href="/assets/icons/svg/sprite.svg#file"></use>
   </svg>
   <span class="accessibility-hidden">Label</span>
@@ -102,12 +102,12 @@ Consider using a `Tooltip` to provide additional context for the icons.
     aria-labelledby="tooltip-label"
   />
   <label for="segmented-control-tooltip" class="SegmentedControlItem__label">
-    <svg width="20" height="20" aria-hidden="true">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use xlink:href="/assets/icons/svg/sprite.svg#file" />
     </svg>
     <span
       id="tooltip-label"
-      class="TooltipPopover is-hidden"
+      class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-bottom"
       data-spirit-placement="bottom"
       data-spirit-flip="true"
       data-spirit-flip-cross-axis="true"
@@ -140,7 +140,7 @@ For detailed guidance on handling text truncation, translations, and multiple st
 ```html
 <input type="radio" id="segmented-control-label" name="segmented" value="value" class="SegmentedControlItem__input" />
 <label for="segmented-control-label" class="SegmentedControlItem__label">
-  <svg width="20" height="20" aria-hidden="true">
+  <svg class="Icon" width="20" height="20" aria-hidden="true">
     <use xlink:href="/assets/icons/svg/sprite.svg#file"></use>
   </svg>
   <span class="text-truncate">Label</span>

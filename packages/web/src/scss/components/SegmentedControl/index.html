@@ -83,6 +83,7 @@
                 {{#if (eq variant "label-only")}}<span class="text-truncate">Label</span>{{/if}}
                 {{#if (eq variant "icon-only")}}
                 <svg
+                  class="Icon"
                   width="20"
                   height="20"
                   aria-hidden="true"
@@ -93,6 +94,7 @@
                 {{/if}}
                 {{#if (eq variant "label-icon")}}
                 <svg
+                  class="Icon"
                   width="20"
                   height="20"
                   aria-hidden="true"
@@ -220,6 +222,7 @@
           class="SegmentedControlItem__label"
         >
           <svg
+            class="Icon"
             width="20"
             height="20"
             aria-hidden="true"
@@ -268,6 +271,7 @@
             class="SegmentedControlItem__label"
           >
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -276,7 +280,7 @@
             </svg>
             <span
               id="tooltip-label-{{item}}"
-              class="TooltipPopover is-hidden"
+              class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-bottom"
               data-spirit-placement="bottom"
               data-spirit-flip="true"
               data-spirit-flip-cross-axis="true"
@@ -329,6 +333,7 @@
             class="SegmentedControlItem__label"
           >
             <svg
+              class="Icon"
               width="20"
               height="20"
               aria-hidden="true"
@@ -338,7 +343,7 @@
             <span class="accessibility-hidden">Label</span>
             <span
               id="tooltip-icon-{{item}}"
-              class="TooltipPopover is-hidden"
+              class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-bottom"
               data-spirit-placement="bottom"
               data-spirit-flip="true"
               data-spirit-flip-cross-axis="true"

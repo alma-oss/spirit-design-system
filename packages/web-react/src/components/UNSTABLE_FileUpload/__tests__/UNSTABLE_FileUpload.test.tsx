@@ -1,21 +1,23 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  formFieldHelperTextContextPropsTest,
+  formFieldLabelContextPropsTest,
+  formFieldValidationTextContextPropsTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
-  validationTextPropsTest,
 } from '@local/tests';
 import UNSTABLE_FileUpload from '../UNSTABLE_FileUpload';
 
 jest.mock('../../../hooks/useIcon');
 
 const defaultProps = { id: 'file-uploader' };
-const defaultPropsWithInput = { id: 'test-uploader', name: 'test-uploader', label: 'upload' };
+const defaultPropsWithInput = { id: 'file-upload-input', name: 'file-upload-input', label: 'upload' };
 
 describe('UNSTABLE_FileUpload', () => {
   classNamePrefixProviderTest((props) => <UNSTABLE_FileUpload {...defaultProps} {...props} />, 'UNSTABLE_FileUpload');
@@ -31,12 +33,22 @@ describe('UNSTABLE_FileUpload', () => {
   describe('with input (name provided)', () => {
     restPropsTest((props) => <UNSTABLE_FileUpload {...defaultPropsWithInput} {...props} />, 'div');
 
-    validationTextPropsTest(
-      (props) => <UNSTABLE_FileUpload {...defaultPropsWithInput} {...props} />,
-      '.UNSTABLE_FileUploadInput__validationText',
-    );
-
     validHtmlAttributesTest(UNSTABLE_FileUpload, defaultPropsWithInput);
+
+    formFieldLabelContextPropsTest({
+      renderComponent: (props) => <UNSTABLE_FileUpload {...defaultPropsWithInput} {...props} />,
+      labelText: 'upload',
+    });
+
+    formFieldHelperTextContextPropsTest({
+      renderComponent: (props) => <UNSTABLE_FileUpload {...defaultPropsWithInput} {...props} />,
+      labelText: 'upload',
+    });
+
+    formFieldValidationTextContextPropsTest({
+      renderComponent: (props) => <UNSTABLE_FileUpload {...defaultPropsWithInput} {...props} />,
+      labelText: 'upload',
+    });
 
     it('should have drag-and-drop class in Client component', () => {
       const { container } = render(<UNSTABLE_FileUpload {...defaultPropsWithInput} data-testid="test" />);
@@ -61,7 +73,7 @@ describe('UNSTABLE_FileUpload', () => {
     });
 
     it('should render label with html tags', () => {
-      const { container } = render(
+      render(
         <UNSTABLE_FileUpload
           {...defaultPropsWithInput}
           label={
@@ -73,10 +85,62 @@ describe('UNSTABLE_FileUpload', () => {
         />,
       );
 
-      const labelElement = container.querySelector('.UNSTABLE_FileUploadInput__label');
+      const labelElement = screen.getByText('File').parentElement as HTMLElement;
 
-      expect(labelElement).toHaveTextContent('Upload File');
-      expect(labelElement?.innerHTML).toBe('Upload <b>File</b>');
+      expect(labelElement.innerHTML).toBe('Upload <b>File</b>');
+    });
+
+    it('should set wrapper id on root div and derive input id as {id}-input', () => {
+      render(<UNSTABLE_FileUpload id="file-upload-wrapper" name="files" label="Upload" data-testid="wrapper" />);
+
+      const wrapper = screen.getByTestId('wrapper');
+
+      expect(wrapper).toBeInTheDocument();
+      expect(wrapper).toHaveAttribute('id', 'file-upload-wrapper');
+      expect(wrapper?.localName).toBe('div');
+
+      const input = screen.getByLabelText('Upload');
+
+      expect(input).toBeInTheDocument();
+      expect(input).toHaveAttribute('id', 'file-upload-wrapper-input');
+      expect((input as HTMLInputElement).type).toBe('file');
+    });
+
+    it('should associate label with input via htmlFor and set helper/validation ids', () => {
+      render(
+        <UNSTABLE_FileUpload
+          id="file-upload-with-messages"
+          name="files"
+          label="Upload"
+          helperText="Max 10 MB"
+          validationState="danger"
+          validationText="Error"
+        />,
+      );
+
+      const label = screen.getByText('Upload');
+
+      expect(label).toHaveAttribute('for', 'file-upload-with-messages-input');
+
+      expect(screen.getByText('Max 10 MB')).toHaveAttribute('id', 'file-upload-with-messages-input-helper-text');
+      expect(screen.getByText('Error')).toHaveAttribute('id', 'file-upload-with-messages-input-validation-text');
+    });
+
+    it('should render validation icon when hasValidationIcon is set', () => {
+      render(
+        <UNSTABLE_FileUpload
+          id="file-upload-validation-icon"
+          name="files"
+          label="Upload"
+          hasValidationIcon
+          validationState="danger"
+          validationText="Invalid"
+        />,
+      );
+
+      const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
+
+      expect(validationRoot.querySelector('svg')).toBeInTheDocument();
     });
 
     it('should set id on root wrapper when rootId is provided', () => {

@@ -62,6 +62,16 @@ ControlButton supports three sizes:
 </ControlButton>
 ```
 
+### Size Source and Precedence
+
+ControlButton resolves `size` in this order:
+
+1. direct `size` prop on ControlButton
+2. `size` from parent `PropsProvider` context
+3. default `medium` size
+
+This lets composed components share size through context while standalone usage can still set size explicitly.
+
 ## Feature Flag: Expanded Size Scale
 
 Enable the expanded size scale by wrapping ControlButton in an element with the
@@ -154,6 +164,29 @@ ensuring proper behavior. To achieve proper styles, use `color-scheme-on-disable
 </ControlButton>
 ```
 
+## Custom Spacing
+
+You can use the `spacing` prop to apply custom spacing between control button content items (icons and text). The prop
+accepts either a spacing token (e.g. `space-600`) or an object with breakpoint keys and spacing token values.
+
+Custom spacing:
+
+```jsx
+<ControlButton spacing="space-600" aria-label="Close">
+  <Icon name="close" />
+  Close
+</ControlButton>
+```
+
+Custom responsive spacing:
+
+```jsx
+<ControlButton spacing={{ mobile: 'space-400', tablet: 'space-600', desktop: 'space-800' }} aria-label="Close">
+  <Icon name="close" />
+  Close
+</ControlButton>
+```
+
 ## Accessibility
 
 For icon-only buttons, always include an accessible label using the `aria-label` attribute:
@@ -166,17 +199,18 @@ For icon-only buttons, always include an accessible label using the `aria-label`
 
 ## API
 
-| Name            | Type                               | Default  | Required | Description                                                                                                           |
-| --------------- | ---------------------------------- | -------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
-| `children`      | `ReactNode`                        | `null`   | ✕        | Content of the button                                                                                                 |
-| `elementType`   | `ElementType`                      | `button` | ✕        | HTML element type or React component                                                                                  |
-| `isDisabled`    | `bool`                             | `false`  | ✕        | Whether the button is disabled, see [Disabled State](#disabled-state)                                                 |
-| `isSubtle`      | `bool`                             | `false`  | ✕        | Whether the button is in subtle variant (no border)                                                                   |
-| `isSymmetrical` | \[`bool` \| `Responsive<bool>`]    | `false`  | ✕        | Whether the button should be symmetrical, use object to set responsive values, e.g. `{ mobile: true, tablet: false }` |
-| `onClick`       | `(event: ClickEvent) => void`      | —        | ✕        | Click handler                                                                                                         |
-| `ref`           | `ForwardedRef<HTMLButtonElement>`  | —        | ✕        | Button element reference                                                                                              |
-| `size`          | [Size dictionary][dictionary-size] | `medium` | ✕        | Size of the button                                                                                                    |
-| `type`          | \[`button` \| `submit` \| `reset`] | `button` | ✕        | Type of the button                                                                                                    |
+| Name            | Type                                        | Default     | Required | Description                                                                                                           |
+| --------------- | ------------------------------------------- | ----------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
+| `children`      | `ReactNode`                                 | `null`      | ✕        | Content of the button                                                                                                 |
+| `elementType`   | `ElementType`                               | `button`    | ✕        | HTML element type or React component                                                                                  |
+| `isDisabled`    | `bool`                                      | `false`     | ✕        | Whether the button is disabled, see [Disabled State](#disabled-state)                                                 |
+| `isSubtle`      | `bool`                                      | `false`     | ✕        | Whether the button is in subtle variant (no border)                                                                   |
+| `isSymmetrical` | \[`bool` \| `Responsive<bool>`]             | `false`     | ✕        | Whether the button should be symmetrical, use object to set responsive values, e.g. `{ mobile: true, tablet: false }` |
+| `onClick`       | `(event: ClickEvent) => void`               | —           | ✕        | Click handler                                                                                                         |
+| `ref`           | `ForwardedRef<HTMLButtonElement>`           | —           | ✕        | Button element reference                                                                                              |
+| `size`          | [Size dictionary][dictionary-size]          | `medium`    | ✕        | Size of the button; overrides context when provided                                                                   |
+| `spacing`       | \[`SpaceToken` \| `Responsive<SpaceToken>`] | `space-400` | ✕        | Apply [custom spacing](#custom-spacing) between control button content items                                          |
+| `type`          | \[`button` \| `submit` \| `reset`]          | `button`    | ✕        | Type of the button                                                                                                    |
 
 Check the web implementation of the [ControlButton][web-control-button] component for more information.
 Depending on `elementType`, more props and attributes may be passed to the component.

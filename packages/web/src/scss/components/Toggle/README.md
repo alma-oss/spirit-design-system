@@ -10,7 +10,7 @@ the native input element and styles it to look like a toggle switch.
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-default">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-default">Toggle Label</label>
   </span>
   <input type="checkbox" id="toggle-default" class="Toggle__input" name="default" />
 </div>
@@ -24,7 +24,7 @@ modifier class to the input. This will add a visual indicators to the toggle swi
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-indicators">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-indicators">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-indicators" class="Toggle__input Toggle__input--indicators" name="default" />
 </div>
@@ -33,12 +33,12 @@ modifier class to the input. This will add a visual indicators to the toggle swi
 ## Required
 
 Add the `required` attribute to the input to mark it as required and add the
-`Toggle__label--required` modifier class to the label to indicate the state.
+`Label--required` modifier class to the label to indicate the state.
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
   <div class="Toggle__text">
-    <label class="Toggle__label Toggle__label--required" for="toggle-required">Toggle Label</label>
+    <label class="Label Label--inline Label--required" for="toggle-required">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-required" class="Toggle__input" name="required" required />
 </div>
@@ -49,30 +49,26 @@ Add the `required` attribute to the input to mark it as required and add the
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
   <div class="Toggle__text">
-    <label class="Toggle__label Toggle__label--hidden" for="toggle-hidden-label">Toggle Label</label>
+    <label class="Label Label--inline accessibility-hidden" for="toggle-hidden-label">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-hidden-label" class="Toggle__input" name="hidden-label" />
 </div>
 ```
 
-## Fluid
+## Layout
 
-```html
-<div class="Toggle Toggle--inputPositionEnd Toggle--fluid">
-  <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-fluid">Toggle Label</label>
-  </div>
-  <input type="checkbox" id="toggle-fluid" class="Toggle__input" name="fluid" />
-</div>
-```
+Toggle is fluid by default. Use parent layout components like [Grid][readme-grid], [Stack][readme-stack], or [Container][readme-container]
+to control the component width in page layouts.
 
 ## Helper Text
+
+To add helper text, use the [HelperText][readme-helper-text] component:
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-helper-text">Toggle Label</label>
-    <div class="Toggle__helperText" id="toggle-helper-text-helper-text">Helper text</div>
+    <label class="Label Label--inline" for="toggle-helper-text">Toggle Label</label>
+    <div class="HelperText" id="toggle-helper-text-helper-text">Helper text</div>
   </div>
   <input
     type="checkbox"
@@ -91,21 +87,23 @@ Validation states can be presented either by adding a CSS modifier class
 a JS interaction class when controlled by JavaScript (`has-success`,
 `has-warning`, `has-danger`). See Validation state [dictionary][dictionary-validation].
 
-- To render validation text as a list, use `<ul>` element inside of `.Toggle__validationText`.
-- To render validation text with an icon, add `<svg>` icon inside of `.Toggle__validationText`.
+- To render validation text as a list, use `<ul>` element inside of `.ValidationText`.
+- To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd Toggle--success">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-success">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-success">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-success" class="Toggle__input" name="default" />
 </div>
 
 <div class="Toggle Toggle--inputPositionEnd Toggle--warning">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-warning">Toggle Label</label>
-    <div class="Toggle__validationText" id="toggle-warning-validation-text">Validation text</div>
+    <label class="Label Label--inline" for="toggle-warning">Toggle Label</label>
+    <div class="ValidationText ValidationText--warning ValidationText--inline" id="toggle-warning-validation-text">
+      Validation text
+    </div>
   </div>
   <input
     type="checkbox"
@@ -119,8 +117,8 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 
 <div class="Toggle Toggle--inputPositionEnd Toggle--danger">
   <div class="Toggle__text">
-    <label for="toggle-danger" class="Toggle__label">Toggle Label</label>
-    <ul class="Toggle__validationText" id="toggle-danger-validation-text">
+    <label for="toggle-danger" class="Label Label--inline">Toggle Label</label>
+    <ul class="ValidationText ValidationText--danger ValidationText--inline" id="toggle-danger-validation-text">
       <li>First validation text</li>
       <li>Second validation text</li>
     </ul>
@@ -136,9 +134,9 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 
 <div class="Toggle Toggle--inputPositionEnd Toggle--warning">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-warning">Toggle Label</label>
-    <div class="Toggle__validationText" id="toggle-warning-validation-text">
-      <svg width="20" height="20" aria-hidden="true">
+    <label class="Label Label--inline" for="toggle-warning">Toggle Label</label>
+    <div class="ValidationText ValidationText--warning ValidationText--inline" id="toggle-warning-validation-text">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use xlink:href="/assets/icons/svg/sprite.svg#warning" />
       </svg>
       <span>Validation text with icon</span>
@@ -169,8 +167,12 @@ components mix CSS with JS by design and handle prefixes their own way.**
 ```html
 <div class="Toggle Toggle--inputPositionEnd has-success">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-success">Toggle Label</label>
-    <div class="Toggle__validationText" id="toggle-success-validation-text" data-spirit-element="validation_text">
+    <label class="Label Label--inline" for="toggle-success">Toggle Label</label>
+    <div
+      class="ValidationText ValidationText--success"
+      id="toggle-success-validation-text"
+      data-spirit-element="validation_text"
+    >
       Validation text
     </div>
   </div>
@@ -187,7 +189,11 @@ components mix CSS with JS by design and handle prefixes their own way.**
 To render validation text as a list, use `<ul>` element inside of `<div>`.
 
 ```html
-<div class="Toggle__validationText" id="toggle-success-validation-text" data-spirit-element="validation_text">
+<div
+  class="ValidationText ValidationText--success"
+  id="toggle-success-validation-text"
+  data-spirit-element="validation_text"
+>
   <ul>
     <li>First validation text</li>
     <li>Second validation text</li>
@@ -205,7 +211,7 @@ class to render supplementary content (such as modal triggers) below the label.
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
   <div class="Toggle__text">
-    <label class="Toggle__label Toggle__label--required" for="toggle-consent-emphasized">
+    <label class="Label Label--inline Label--required" for="toggle-consent-emphasized">
       <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
     </label>
     <div id="toggle-consent-emphasized-details" class="InputDetails">
@@ -236,7 +242,7 @@ class to render supplementary content (such as modal triggers) below the label.
 ```html
 <div class="Toggle Toggle--inputPositionEnd Toggle--danger">
   <div class="Toggle__text">
-    <label class="Toggle__label Toggle__label--required" for="toggle-consent-full">
+    <label class="Label Label--inline Label--required" for="toggle-consent-full">
       I agree to the terms and privacy policy
     </label>
     <div id="toggle-consent-full-details" class="InputDetails">
@@ -257,10 +263,12 @@ class to render supplementary content (such as modal triggers) below the label.
         See privacy policy
       </button>
     </div>
-    <div class="Toggle__helperText" id="toggle-consent-full-helper-text">
+    <div class="HelperText HelperText--inline" id="toggle-consent-full-helper-text">
       Please read the documents carefully before agreeing
     </div>
-    <div class="Toggle__validationText" id="toggle-consent-full-validation-text">You must agree to continue</div>
+    <div class="ValidationText ValidationText--danger" id="toggle-consent-full-validation-text">
+      You must agree to continue
+    </div>
   </div>
   <input
     type="checkbox"
@@ -292,7 +300,7 @@ JS interaction class when controlled by JavaScript:
 ```html
 <div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-disabled">Toggle Label</label>
+    <label class="Label Label--inline Label--disabled" for="toggle-disabled">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-disabled" class="Toggle__input" name="default" disabled />
 </div>
@@ -307,7 +315,7 @@ The input position can be set to `end` (default) or `start`.
 ```html
 <div class="Toggle Toggle--inputPositionStart">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-position-start">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-position-start">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-position-start" class="Toggle__input" name="position" />
 </div>
@@ -320,7 +328,7 @@ Use responsive breakpoint modifiers to change input position at different screen
 ```html
 <div class="Toggle Toggle--tablet--inputPositionStart">
   <div class="Toggle__text">
-    <label class="Toggle__label" for="toggle-position-responsive">Toggle Label</label>
+    <label class="Label Label--inline" for="toggle-position-responsive">Toggle Label</label>
   </div>
   <input type="checkbox" id="toggle-position-responsive" class="Toggle__input" name="position" />
 </div>
@@ -329,4 +337,8 @@ Use responsive breakpoint modifiers to change input position at different screen
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [mdn-checkbox]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
 [prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [readme-input-details]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputDetails/README.md
+[readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md

@@ -1,46 +1,55 @@
 'use client';
 
-import classNames from 'classnames';
-import React, { type ForwardedRef, forwardRef } from 'react';
+import React, { type ElementType, type ForwardedRef, type RefObject, forwardRef } from 'react';
 import { Sizes } from '../../constants';
-import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import {
-  type ForwardRefComponent,
-  type SpiritTextFieldBaseProps,
-  type TextFieldBasePasswordToggleProps,
-} from '../../types';
+import { PropsProvider } from '../../context';
+import { useAriaDescribedBy, useI18n, useStyleProps } from '../../hooks';
+import { type ForwardRefComponent, type SpiritTextFieldBaseProps } from '../../types';
+import { mergeStyleProps } from '../../utils';
 import { CharacterCounter } from '../CharacterCounter';
-import { HelperText, Label, ValidationText } from '../Field';
-import { useValidationTextRole } from '../Field/useValidationTextRole';
+import { ControlButton } from '../ControlButton';
 import { Flex } from '../Flex';
-import TextFieldBaseInput from './TextFieldBaseInput';
-import { useTextFieldBaseStyleProps } from './useTextFieldBaseStyleProps';
-import withPasswordToggle from './withPasswordToggle';
-
-const TextFieldBaseInputWithPasswordToggle = forwardRef(
-  withPasswordToggle<TextFieldBasePasswordToggleProps>(TextFieldBaseInput),
-);
+import { HelperText } from '../HelperText';
+import { Icon } from '../Icon';
+import { InputAddon } from '../InputAddon';
+import { InputContainer } from '../InputContainer';
+import { Label } from '../Label';
+import { ValidationText, useValidationTextRole } from '../ValidationText';
+import { usePasswordToggle } from './usePasswordToggle';
 
 const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>) => {
   const {
     'aria-describedby': ariaDescribedBy = '',
     counterProps,
+    endAddon,
+    hasPasswordToggle,
     hasValidationIcon,
     helperText,
     id,
+    inputWidth,
+    isDisabled,
+    isLabelHidden,
+    isMultiline,
+    isRequired,
     label,
     size = Sizes.MEDIUM,
+    startAddon,
+    type,
     validationState,
     validationText,
     ...restProps
   } = props;
-  const { classProps, props: modifiedProps } = useTextFieldBaseStyleProps({
-    id,
-    size,
-    validationState,
-    ...restProps,
-  });
-  const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
+  const { t } = useI18n();
+  const { isPasswordShown, passwordToggle } = usePasswordToggle();
+  const hasPasswordToggleAddon = Boolean(hasPasswordToggle && !isMultiline);
+  let inputType = type;
+
+  if (hasPasswordToggleAddon) {
+    inputType = isPasswordShown ? 'text' : 'password';
+  }
+
+  const { styleProps, props: inputProps } = useStyleProps(restProps);
+  const mergedStyleProps = mergeStyleProps('div', { styleProps });
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
   const validationTextRole = useValidationTextRole({
     validationState,
@@ -48,19 +57,13 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
   });
 
   const hasTextContent = helperText || (validationState && validationText);
+  const Component: ElementType = isMultiline ? 'textarea' : 'input';
+  const nativeInputType = isMultiline ? undefined : inputType;
 
-  const helperTextElement = (
-    <HelperText
-      UNSAFE_className={classProps.helperText}
-      id={`${id}__helper-text`}
-      registerAria={register}
-      helperText={helperText}
-    />
-  );
+  const helperTextElement = <HelperText id={`${id}__helper-text`} registerAria={register} helperText={helperText} />;
 
   const validationTextElement = validationState ? (
     <ValidationText
-      UNSAFE_className={classProps.validationText}
       elementType="span"
       {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
       id={`${id}__validation-text`}
@@ -70,35 +73,74 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
     />
   ) : null;
 
-  const counterElement = counterProps ? (
-    <CharacterCounter {...counterProps} id={id} registerAria={register} UNSAFE_className={classProps.counter} />
+  const counterElement = counterProps ? <CharacterCounter {...counterProps} id={id} registerAria={register} /> : null;
+
+  const passwordToggleElement = hasPasswordToggleAddon ? (
+    <InputAddon>
+      <ControlButton
+        aria-checked={isPasswordShown}
+        aria-label={isPasswordShown ? t('textField.password.hide') : t('textField.password.show')}
+        data-spirit-toggle="password"
+        isDisabled={isDisabled}
+        isSubtle
+        isSymmetrical
+        role="switch"
+        size={size}
+        onClick={passwordToggle}
+        {...(isDisabled && { UNSAFE_className: 'color-scheme-on-disabled' })}
+      >
+        <Icon name={`visibility-${isPasswordShown ? 'off' : 'on'}`} boxSize={size === Sizes.SMALL ? 16 : 20} />
+      </ControlButton>
+    </InputAddon>
   ) : null;
 
   return (
-    <div {...styleProps} className={classNames(classProps.root, styleProps.className)}>
-      <Label htmlFor={id} UNSAFE_className={classProps.label}>
-        {label}
-      </Label>
-      <TextFieldBaseInputWithPasswordToggle {...otherProps} {...ariaDescribedByProp} id={id} ref={ref} size={size} />
-      {counterProps ? (
-        <Flex direction="horizontal" isWrapping={false} alignmentX="space-between" alignmentY="top">
-          {hasTextContent ? (
-            <div>
-              {/* In counter layout, put validation first so the status message stays visually closest to the counter row. */}
-              {validationTextElement}
-              {helperTextElement}
-            </div>
-          ) : null}
-          {counterElement}
-        </Flex>
-      ) : (
-        <>
-          {/* Without counter, keep the default field text flow: helper first, then validation. */}
-          {helperTextElement}
-          {validationTextElement}
-        </>
-      )}
-    </div>
+    <PropsProvider
+      value={{
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+        size,
+        validationState,
+      }}
+    >
+      <div {...mergedStyleProps}>
+        <Label htmlFor={id}>{label}</Label>
+        <InputContainer>
+          {startAddon}
+          <Component
+            {...inputProps}
+            {...ariaDescribedByProp}
+            disabled={isDisabled}
+            id={id}
+            required={isRequired}
+            size={inputWidth}
+            type={nativeInputType}
+            ref={ref as RefObject<HTMLInputElement & HTMLTextAreaElement>}
+          />
+          {endAddon}
+          {passwordToggleElement}
+        </InputContainer>
+        {counterProps ? (
+          <Flex direction="horizontal" isWrapping={false} alignmentX="space-between" alignmentY="top">
+            {hasTextContent ? (
+              <div>
+                {/* In counter layout, put validation first so the status message stays visually closest to the counter row. */}
+                {validationTextElement}
+                {helperTextElement}
+              </div>
+            ) : null}
+            {counterElement}
+          </Flex>
+        ) : (
+          <>
+            {/* Without counter, keep the default field text flow: helper first, then validation. */}
+            {helperTextElement}
+            {validationTextElement}
+          </>
+        )}
+      </div>
+    </PropsProvider>
   );
 };
 
