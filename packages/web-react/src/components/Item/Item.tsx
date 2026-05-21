@@ -5,7 +5,7 @@ import React, { type ElementType } from 'react';
 import { PropsProvider } from '../../context';
 import { useStyleProps } from '../../hooks';
 import {
-  FormFieldVariants,
+  FormFieldTypes,
   ITEM_SELECTION_DECORATOR_BOTH,
   ITEM_SELECTION_DECORATOR_ICON,
   type SpiritItemProps,
@@ -40,7 +40,7 @@ const Item = <E extends ElementType = 'button'>(props: SpiritItemProps<E>): JSX.
     (selectionDecorator === ITEM_SELECTION_DECORATOR_ICON || selectionDecorator === ITEM_SELECTION_DECORATOR_BOTH);
 
   return (
-    <PropsProvider value={{ formFieldVariant: FormFieldVariants.ITEM, isDisabled }}>
+    <PropsProvider value={{ formFieldType: FormFieldTypes.ITEM, isDisabled }}>
       <Component {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && Component === 'button'}>
         {iconName && (
           <span className={classNames(classProps.icon.root, classProps.icon.start)}>

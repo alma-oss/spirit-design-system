@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { FormFieldVariants } from '../../../types';
+import { FormFieldTypes } from '../../../types';
 import { useHelperTextStyleProps } from '../useHelperTextStyleProps';
 
 describe('useHelperTextStyleProps', () => {
@@ -15,21 +15,21 @@ describe('useHelperTextStyleProps', () => {
     expect(result.current.classProps).toBe('HelperText HelperText--disabled');
   });
 
-  it('should return inline class when formFieldVariant is inline', () => {
-    const { result } = renderHook(() => useHelperTextStyleProps({ formFieldVariant: FormFieldVariants.INLINE }));
+  it('should return inline class when formFieldType is inline', () => {
+    const { result } = renderHook(() => useHelperTextStyleProps({ formFieldType: FormFieldTypes.INLINE }));
 
     expect(result.current.classProps).toBe('HelperText HelperText--inline');
   });
 
-  it('should return item class when formFieldVariant is item', () => {
-    const { result } = renderHook(() => useHelperTextStyleProps({ formFieldVariant: FormFieldVariants.ITEM }));
+  it('should return item class when formFieldType is item', () => {
+    const { result } = renderHook(() => useHelperTextStyleProps({ formFieldType: FormFieldTypes.ITEM }));
 
     expect(result.current.classProps).toBe('HelperText HelperText--item');
   });
 
   it('should return disabled and inline classes when both are set', () => {
     const { result } = renderHook(() =>
-      useHelperTextStyleProps({ isDisabled: true, formFieldVariant: FormFieldVariants.INLINE }),
+      useHelperTextStyleProps({ isDisabled: true, formFieldType: FormFieldTypes.INLINE }),
     );
 
     expect(result.current.classProps).toContain('HelperText');
@@ -39,7 +39,7 @@ describe('useHelperTextStyleProps', () => {
 
   it('should return disabled and item classes when both are set', () => {
     const { result } = renderHook(() =>
-      useHelperTextStyleProps({ isDisabled: true, formFieldVariant: FormFieldVariants.ITEM }),
+      useHelperTextStyleProps({ isDisabled: true, formFieldType: FormFieldTypes.ITEM }),
     );
 
     expect(result.current.classProps).toContain('HelperText');

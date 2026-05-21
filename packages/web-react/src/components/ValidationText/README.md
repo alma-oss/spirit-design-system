@@ -25,7 +25,7 @@ You can override context by passing props directly:
   elementType="span"
   hasValidationStateIcon="danger"
   isDisabled={false}
-  formFieldVariant="inline"
+  formFieldType="inline"
 />
 ```
 
@@ -35,25 +35,25 @@ When displaying validation text dynamically, set [`role="alert"`][aria-alert-rol
 
 ### API
 
-| Name                     | Type                                                   | Default | Required | Description                                                                                                                               |
-| ------------------------ | ------------------------------------------------------ | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `elementType`            | `ElementType`                                          | `div`   | ✕        | Element used as main wrapper. When `validationText` is an array, the component renders a `ul` inside the wrapper                          |
-| `formFieldVariant`       | `FormFieldVariant`                                     | —       | ✕        | Explicit visual variant (`inline`, `item`); omit for the default layout used by box form field components, or take it from parent context |
-| `hasValidationStateIcon` | [Validation dictionary][dictionary-validation]         | —       | ✕        | When set, shows validation icon and applies state styling (e.g. `danger`)                                                                 |
-| `id`                     | `string`                                               | —       | ✕        | Element id (e.g. for `aria-describedby`)                                                                                                  |
-| `isDisabled`             | `bool`                                                 | `false` | ✕        | Disabled state; when omitted, taken from parent context                                                                                   |
-| `registerAria`           | `(payload: { add?: string; remove?: string }) => void` | —       | ✕        | Callback to register this element's id for `aria-describedby`                                                                             |
-| `role`                   | `AriaRole`                                             | —       | ✕        | ARIA role (e.g. `alert` for dynamic validation)                                                                                           |
-| `validationText`         | `ReactNode` \| `ReactNode[]`                           | —       | ✕        | Validation message or messages to display                                                                                                 |
+| Name                     | Type                                                   | Default | Required | Description                                                                                                                            |
+| ------------------------ | ------------------------------------------------------ | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `elementType`            | `ElementType`                                          | `div`   | ✕        | Element used as main wrapper. When `validationText` is an array, the component renders a `ul` inside the wrapper                       |
+| `formFieldType`          | `FormFieldType`                                        | —       | ✕        | Explicit visual type (`inline`, `item`); omit for the default layout used by box form field components, or take it from parent context |
+| `hasValidationStateIcon` | [Validation dictionary][dictionary-validation]         | —       | ✕        | When set, shows validation icon and applies state styling (e.g. `danger`)                                                              |
+| `id`                     | `string`                                               | —       | ✕        | Element id (e.g. for `aria-describedby`)                                                                                               |
+| `isDisabled`             | `bool`                                                 | `false` | ✕        | Disabled state; when omitted, taken from parent context                                                                                |
+| `registerAria`           | `(payload: { add?: string; remove?: string }) => void` | —       | ✕        | Callback to register this element's id for `aria-describedby`                                                                          |
+| `role`                   | `AriaRole`                                             | —       | ✕        | ARIA role (e.g. `alert` for dynamic validation)                                                                                        |
+| `validationText`         | `ReactNode` \| `ReactNode[]`                           | —       | ✕        | Validation message or messages to display                                                                                              |
 
 On top of the API options, the component accepts [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
-## Variants
+## Types
 
 - **inline**: Used by Checkbox, Radio, and Toggle (non-item).
-- **item**: Used by Checkbox or Radio in item variant, or when `formFieldVariant="item"` is passed directly.
+- **item**: Used by Checkbox or Radio in item type, or when `formFieldType="item"` is passed directly.
 
 [aria-alert-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/alert_role
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation

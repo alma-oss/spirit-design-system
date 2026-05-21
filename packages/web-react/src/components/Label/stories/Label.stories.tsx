@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { FormFieldVariants } from '../../../types';
+import { FormFieldTypes } from '../../../types';
 import ReadMe from '../README.md?raw';
 import { Label } from '..';
 
@@ -23,9 +23,9 @@ const meta: Meta<typeof Label> = {
         defaultValue: { summary: 'label' },
       },
     },
-    formFieldVariant: {
+    formFieldType: {
       control: 'select',
-      options: Object.values(FormFieldVariants),
+      options: Object.values(FormFieldTypes),
     },
     htmlFor: {
       control: 'text',

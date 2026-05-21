@@ -7,7 +7,7 @@ import { IconsProvider } from '../../../context';
 import ValidationTextAsList from './ValidationTextAsList';
 import ValidationTextDisabled from './ValidationTextDisabled';
 import ValidationTextInlineCheckbox from './ValidationTextInlineCheckbox';
-import ValidationTextItemVariant from './ValidationTextItemVariant';
+import ValidationTextItemType from './ValidationTextItemType';
 import ValidationTextValidationStates from './ValidationTextValidationStates';
 import ValidationTextWithIcon from './ValidationTextWithIcon';
 
@@ -29,8 +29,8 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <DocsSection title="Inline Field (Checkbox)">
         <ValidationTextInlineCheckbox />
       </DocsSection>
-      <DocsSection title="Item Variant (Checkbox Item)">
-        <ValidationTextItemVariant />
+      <DocsSection title="Item Type (Checkbox Item)">
+        <ValidationTextItemType />
       </DocsSection>
     </IconsProvider>
   </StrictMode>,

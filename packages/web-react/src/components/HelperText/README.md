@@ -19,28 +19,28 @@ When used inside form field components such as [Checkbox][readme-checkbox], [Rad
 You can override context by passing props directly:
 
 ```tsx
-<HelperText id="my-helper-text" helperText="Helper text" elementType="span" isDisabled formFieldVariant="inline" />
+<HelperText id="my-helper-text" helperText="Helper text" elementType="span" isDisabled formFieldType="inline" />
 ```
 
 ### API
 
-| Name               | Type                                                   | Default | Required | Description                                                                                                                               |
-| ------------------ | ------------------------------------------------------ | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `elementType`      | `ElementType`                                          | `div`   | ✕        | Type of element used as main wrapper                                                                                                      |
-| `formFieldVariant` | `FormFieldVariant`                                     | —       | ✕        | Explicit visual variant (`inline`, `item`); omit for the default layout used by box form field components, or take it from parent context |
-| `helperText`       | `ReactNode`                                            | —       | ✓        | Content to display                                                                                                                        |
-| `id`               | `string`                                               | —       | ✕        | Element id (e.g. for `aria-describedby`)                                                                                                  |
-| `isDisabled`       | `bool`                                                 | `false` | ✕        | Disabled state; when omitted, taken from parent context                                                                                   |
-| `registerAria`     | `(payload: { add?: string; remove?: string }) => void` | —       | ✕        | Callback to register this element's id for `aria-describedby`                                                                             |
+| Name            | Type                                                   | Default | Required | Description                                                                                                                            |
+| --------------- | ------------------------------------------------------ | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `elementType`   | `ElementType`                                          | `div`   | ✕        | Type of element used as main wrapper                                                                                                   |
+| `formFieldType` | `FormFieldType`                                        | —       | ✕        | Explicit visual type (`inline`, `item`); omit for the default layout used by box form field components, or take it from parent context |
+| `helperText`    | `ReactNode`                                            | —       | ✓        | Content to display                                                                                                                     |
+| `id`            | `string`                                               | —       | ✕        | Element id (e.g. for `aria-describedby`)                                                                                               |
+| `isDisabled`    | `bool`                                                 | `false` | ✕        | Disabled state; when omitted, taken from parent context                                                                                |
+| `registerAria`  | `(payload: { add?: string; remove?: string }) => void` | —       | ✕        | Callback to register this element's id for `aria-describedby`                                                                          |
 
 On top of the API options, the component accepts [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
-## Variants
+## Types
 
 - **inline**: Used by Checkbox, Radio, and Toggle (non-item). Keeps helper text above the label and selectable.
-- **item**: Used by Item and by Checkbox or Radio in item variant.
+- **item**: Used by Item and by Checkbox or Radio in item type.
 
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-checkbox]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Checkbox/README.md

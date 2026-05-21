@@ -1,4 +1,4 @@
-export const FormFieldVariants = {
+export const FormFieldTypes = {
   INLINE: 'inline',
   ITEM: 'item',
 } as const;
