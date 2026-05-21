@@ -1,0 +1,88 @@
+name: 🎉 Release
+
+on:
+  push:
+    branches:
+      - alpha
+      - beta
+      - next
+      - main
+
+env:
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+  CURRENT_DATE: $(date +%Y-%m-%d)
+
+jobs:
+  release-branch:
+    name: 🌱 Release Branch
+    runs-on: ubuntu-latest
+
+    outputs:
+      release-branch: ${{ steps.create-branch.outputs.release-branch }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create Release Branch
+        id: create-branch
+        run: |
+          RELEASE_BRANCH="release/${{ env.BRANCH_NAME }}-${{ env.CURRENT_DATE }}"
+          git checkout -b $RELEASE_BRANCH
+          git push --set-upstream origin $RELEASE_BRANCH
+          echo "release-branch=$RELEASE_BRANCH" >> $GITHUB_OUTPUT
+
+  version:
+    name: 🔢 Version
+    runs-on: ubuntu-latest
+
+    needs: release-branch
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release-branch.outputs.release-branch }}
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Configure Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn --immutable --inline-builds
+
+      - name: Create Version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.email "release-bot@almacareer.com"
+          git config --global user.name "Release Bot"
+
+          if [ "${{ env.BRANCH_NAME }}" == "alpha" ]; then
+            make preversion preid=alpha
+          elif [ "${{ env.BRANCH_NAME }}" == "beta" ]; then
+            make preversion preid=beta
+          elif [ "${{ env.BRANCH_NAME }}" == "next" ]; then
+            make preversion preid=canary
+          elif [ "${{ env.BRANCH_NAME }}" == "main" ]; then
+            make version
+          fi
+
+          make preversion preid=alpha
+
+          git push --set-upstream origin ${{ needs.release-branch.outputs.release-branch }} && git push --tags
+
+      - name: Create Pull Request
+        run: |
+          gh pr create \
+            -B ${{ env.BRANCH_NAME }} \
+            -H ${{ needs.release-branch.outputs.release-branch }} \
+            --title '🎉 Release' \
+            --body 'Automated release PR for ${{ env.BRANCH_NAME }}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
