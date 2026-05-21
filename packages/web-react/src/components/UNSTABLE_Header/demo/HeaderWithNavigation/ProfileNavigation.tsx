@@ -10,11 +10,7 @@ interface ProfileNavigationProps {
 const ProfileNavigation = ({ isSquare = false }: ProfileNavigationProps) => (
   <Navigation aria-label="Profile" direction="vertical">
     <NavigationItem alignmentY="left">
-      <NavigationAvatar
-        avatarContent={<Icon name="profile" boxSize={20} />}
-        aria-label="Profile of Jiří Bárta"
-        isSquare={isSquare}
-      >
+      <NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta" isSquare={isSquare}>
         <Text elementType="span" size="small" emphasis="semibold">
           My Account
         </Text>

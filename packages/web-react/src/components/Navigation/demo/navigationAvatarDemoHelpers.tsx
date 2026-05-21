@@ -6,7 +6,7 @@ import { Text } from '../../Text';
 import NavigationAvatar from '../NavigationAvatar';
 
 // Shared constants
-export const AVATAR_CONTENT = <Icon name="profile" boxSize={20} />;
+export const AVATAR_CONTENT = <Icon name="profile" />;
 export const AVATAR_ARIA_LABEL = 'Profile of Jiří Bárta';
 export const AVATAR_TEXT = (
   <Text elementType="span" size="small" emphasis="semibold">

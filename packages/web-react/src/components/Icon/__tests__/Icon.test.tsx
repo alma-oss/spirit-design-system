@@ -40,6 +40,12 @@ describe('Icon', () => {
     it('should have aria', () => {
       expect(screen.getByTestId('test-icon')).toHaveAttribute('aria-hidden', 'true');
     });
+
+    it('should have composition size fallback', () => {
+      expect(screen.getByTestId('test-icon')).toHaveStyle({
+        '--spirit-icon-size': 'var(--spirit-icon-composition-size, 1.5rem)',
+      });
+    });
   });
 
   describe('custom width and height', () => {
@@ -55,6 +61,12 @@ describe('Icon', () => {
 
     it('should have height', () => {
       expect(screen.getByTestId('test-icon')).toHaveAttribute('height', boxSize.toString());
+    });
+
+    it('should have custom size style', () => {
+      expect(screen.getByTestId('test-icon')).toHaveStyle({
+        '--spirit-icon-size': '2.0625rem',
+      });
     });
   });
 
