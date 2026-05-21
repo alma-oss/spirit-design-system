@@ -29,31 +29,31 @@ figma.connect(SegmentedControl, SEGMENTED_CONTROL_NODE_URL, {
   example: (props) => (
     <SegmentedControl {...props}>
       <SegmentedControlItem id="segmented-control-full-example-item-1" value="value-1">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
       </SegmentedControlItem>
       <SegmentedControlItem id="segmented-control-full-example-item-2" value="value-2">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
       </SegmentedControlItem>
       <SegmentedControlItem id="segmented-control-full-example-item-3" value="value-3">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
       </SegmentedControlItem>
       <SegmentedControlItem id="segmented-control-full-example-item-4" value="value-4">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
       </SegmentedControlItem>
       <SegmentedControlItem id="segmented-control-full-example-item-5" value="value-5">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
@@ -70,25 +70,25 @@ figma.connect(SegmentedControl, SEGMENTED_CONTROL_NODE_URL, {
   example: (props) => (
     <SegmentedControl {...props}>
       <SegmentedControlItem id="segmented-control-full-example-item-1" value="value-1">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
       </SegmentedControlItem>
       <SegmentedControlItem id="segmented-control-full-example-item-2" value="value-2">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
       </SegmentedControlItem>
       <SegmentedControlItem id="segmented-control-full-example-item-3" value="value-3">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
       </SegmentedControlItem>
       <SegmentedControlItem id="segmented-control-full-example-item-4" value="value-4">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
@@ -105,19 +105,19 @@ figma.connect(SegmentedControl, SEGMENTED_CONTROL_NODE_URL, {
   example: (props) => (
     <SegmentedControl {...props}>
       <SegmentedControlItem id="segmented-control-full-example-item-1" value="value-1">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
       </SegmentedControlItem>
       <SegmentedControlItem id="segmented-control-full-example-item-2" value="value-2">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
       </SegmentedControlItem>
       <SegmentedControlItem id="segmented-control-full-example-item-3" value="value-3">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
@@ -134,13 +134,13 @@ figma.connect(SegmentedControl, SEGMENTED_CONTROL_NODE_URL, {
   example: (props) => (
     <SegmentedControl {...props}>
       <SegmentedControlItem id="segmented-control-full-example-item-1" value="value-1">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>
       </SegmentedControlItem>
       <SegmentedControlItem id="segmented-control-full-example-item-2" value="value-2">
-        <Icon name="placeholder" boxSize={20} />
+        <Icon name="placeholder" />
         <Truncate mode="lines" limit={1}>
           Label
         </Truncate>

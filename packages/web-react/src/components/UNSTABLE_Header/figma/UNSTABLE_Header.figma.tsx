@@ -45,10 +45,7 @@ const HeaderWithNavigationLoggedIn = ({ itemVariant }: { itemVariant: Navigation
             </Navigation>
             <Navigation marginLeft="auto" aria-label="Secondary Navigation">
               <NavigationItem alignmentY="center" hideOn={['mobile', 'tablet']}>
-                <NavigationAvatar
-                  avatarContent={<Icon name="profile" boxSize={20} />}
-                  aria-label="Profile of Jiří Bárta"
-                >
+                <NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta">
                   <Text elementType="span" size="small" emphasis="semibold">
                     My Account
                   </Text>
@@ -78,11 +75,7 @@ const HeaderWithNavigationLoggedIn = ({ itemVariant }: { itemVariant: Navigation
           <Stack hasIntermediateDividers hasSpacing marginY="space-900" spacing="space-900">
             <Navigation aria-label="Profile" direction="vertical">
               <NavigationItem alignmentY="left">
-                <NavigationAvatar
-                  avatarContent={<Icon name="profile" boxSize={20} />}
-                  aria-label="Profile of Jiří Bárta"
-                  isSquare
-                >
+                <NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta" isSquare>
                   <Text elementType="span" size="small" emphasis="semibold">
                     My Account
                   </Text>
