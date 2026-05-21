@@ -40,25 +40,6 @@
         }
     }
 
-    @include test.it('should not add position relative by default') {
-        @include test.assert() {
-            @include test.output() {
-                .test {
-                    @include pseudo-element.stretch();
-                }
-            }
-
-            @include test.expect() {
-                .test::before {
-                    content: '';
-                    position: absolute;
-                    inset: 0;
-                    z-index: 0;
-                }
-            }
-        }
-    }
-
     @include test.it('should not add position relative when explicitly disabled') {
         @include test.assert() {
             @include test.output() {
@@ -119,6 +100,25 @@
                     position: absolute;
                     inset: 0;
                     z-index: 0;
+                }
+            }
+        }
+    }
+
+    @include test.it('should apply custom z-index') {
+        @include test.assert() {
+            @include test.output() {
+                .test {
+                    @include pseudo-element.stretch($z-index: -1);
+                }
+            }
+
+            @include test.expect() {
+                .test::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: -1;
                 }
             }
         }
