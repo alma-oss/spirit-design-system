@@ -3,11 +3,11 @@
 
 $input-drop-zone-padding: tokens.$space-700;
 $input-drop-zone-column-gap: tokens.$space-700;
-$input-drop-zone-border: tokens.$border-width-200 solid tokens.$form-field-filled-border-state-default;
-$input-drop-zone-draggable-border: tokens.$border-width-200 dashed tokens.$form-field-filled-border-state-default;
-$input-drop-zone-dragging-border: tokens.$border-width-200 dashed tokens.$form-field-filled-border-state-selected;
-$input-drop-zone-border-color-state-hover: tokens.$form-field-filled-border-state-hover;
-$input-drop-zone-border-color-state-active: tokens.$form-field-filled-border-state-active;
+$input-drop-zone-border: tokens.$border-width-200 solid tokens.$form-field-fill-border-state-default;
+$input-drop-zone-draggable-border: tokens.$border-width-200 dashed tokens.$form-field-fill-border-state-default;
+$input-drop-zone-dragging-border: tokens.$border-width-200 dashed tokens.$form-field-fill-border-state-selected;
+$input-drop-zone-border-color-state-hover: tokens.$form-field-fill-border-state-hover;
+$input-drop-zone-border-color-state-active: tokens.$form-field-fill-border-state-active;
 $input-drop-zone-border-radius: tokens.$radius-300;
 $input-drop-zone-background: tokens.$background-interactive-state-default;
 $input-drop-zone-background-state-hover: tokens.$background-interactive-state-hover;
