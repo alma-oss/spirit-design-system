@@ -7,8 +7,31 @@ TextArea is a multiline field built from native `textarea` wrapped by [InputCont
 ```html
 <div>
   <label for="text-area-default" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-default" name="default" placeholder="Placeholder"></textarea>
+  </div>
+</div>
+```
+
+## Variants
+
+TextArea supports the following variant modifiers on `InputContainer`:
+
+- `InputContainer--fill` (default)
+- `InputContainer--outline`
+
+```html
+<div>
+  <label for="text-area-variant-fill" class="Label">Fill (default)</label>
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
+    <textarea id="text-area-variant-fill" name="variantFill" placeholder="Placeholder"></textarea>
+  </div>
+</div>
+
+<div>
+  <label for="text-area-variant-outline" class="Label">Outline</label>
+  <div class="InputContainer InputContainer--outline InputContainer--medium">
+    <textarea id="text-area-variant-outline" name="variantOutline" placeholder="Placeholder"></textarea>
   </div>
 </div>
 ```
@@ -24,21 +47,21 @@ TextArea supports the following size modifiers on `InputContainer`:
 ```html
 <div>
   <label for="text-area-size-small" class="Label">Small</label>
-  <div class="InputContainer InputContainer--small">
+  <div class="InputContainer InputContainer--fill InputContainer--small">
     <textarea id="text-area-size-small" name="sizeSmall" placeholder="Placeholder"></textarea>
   </div>
 </div>
 
 <div>
   <label for="text-area-size-medium" class="Label">Medium (default)</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-size-medium" name="sizeMedium" placeholder="Placeholder"></textarea>
   </div>
 </div>
 
 <div>
   <label for="text-area-size-large" class="Label">Large</label>
-  <div class="InputContainer InputContainer--large">
+  <div class="InputContainer InputContainer--fill InputContainer--large">
     <textarea id="text-area-size-large" name="sizeLarge" placeholder="Placeholder"></textarea>
   </div>
 </div>
@@ -49,7 +72,7 @@ TextArea supports the following size modifiers on `InputContainer`:
 ```html
 <div>
   <label for="text-area-required" class="Label Label--required">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-required" name="required" placeholder="Placeholder" required></textarea>
   </div>
 </div>
@@ -60,7 +83,7 @@ TextArea supports the following size modifiers on `InputContainer`:
 ```html
 <div>
   <label for="text-area-hidden-label" class="Label accessibility-hidden">Hidden Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-hidden-label" name="hiddenLabel" placeholder="Placeholder"></textarea>
   </div>
 </div>
@@ -78,7 +101,7 @@ To add helper text, use [HelperText][readme-helper-text] and connect it with `ar
 ```html
 <div>
   <label for="text-area-helper-text" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea
       id="text-area-helper-text"
       name="helperText"
@@ -101,14 +124,14 @@ Use validation modifiers on `InputContainer`:
 ```html
 <div>
   <label for="text-area-success" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--success">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--success">
     <textarea id="text-area-success" name="success" placeholder="Placeholder">Filled</textarea>
   </div>
 </div>
 
 <div>
   <label for="text-area-warning" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--warning">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--warning">
     <textarea
       id="text-area-warning"
       name="warning"
@@ -123,7 +146,7 @@ Filled</textarea
 
 <div>
   <label for="text-area-danger" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--danger">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger">
     <textarea
       id="text-area-danger"
       name="danger"
@@ -143,7 +166,7 @@ Filled</textarea
 
 <div>
   <label for="text-area-danger-with-icon" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--danger">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger">
     <textarea
       id="text-area-danger-with-icon"
       name="dangerWithIcon"
@@ -171,14 +194,14 @@ Use the `InputContainer--disabled` modifier and `disabled` attribute on textarea
 ```html
 <div>
   <label for="text-area-disabled" class="Label Label--disabled">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--disabled">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <textarea id="text-area-disabled" name="disabled" placeholder="Placeholder" disabled></textarea>
   </div>
 </div>
 
 <div>
   <label for="text-area-disabled-filled" class="Label Label--required Label--disabled">Label</label>
-  <div class="InputContainer InputContainer--medium InputContainer--disabled">
+  <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <textarea id="text-area-disabled-filled" name="disabledFilled" disabled required>Filled</textarea>
   </div>
 </div>
@@ -195,7 +218,7 @@ The visible number of lines is controlled by the native `rows` attribute (suppor
 ```html
 <div>
   <label for="text-area-rows" class="Label">Label</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-rows" name="rows" rows="3"></textarea>
   </div>
 </div>
@@ -220,7 +243,7 @@ Then add `data-spirit-toggle="autoResize"` in the wrapping `<div>`:
 ```html
 <div data-spirit-toggle="autoResize">
   <label for="text-area-auto-resize" class="Label">Label of auto-resizing TextArea</label>
-  <div class="InputContainer InputContainer--medium">
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-auto-resize" name="autoResize"></textarea>
   </div>
 </div>

@@ -36,7 +36,7 @@ overflow its scrollable container or get clipped.
 <div>
   <span class="Label">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="InputContainer InputContainer--medium">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--medium">
       <div
         role="group"
         tabindex="-1"
@@ -139,7 +139,7 @@ accessible to screen readers.
 <div>
   <span class="Label accessibility-hidden">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="InputContainer InputContainer--medium">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--medium">
       <!-- … -->
     </div>
     <!-- … -->
@@ -158,7 +158,36 @@ a red asterisk after the label text.
 <div>
   <span class="Label Label--required">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="InputContainer InputContainer--medium">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--medium">
+      <!-- … -->
+    </div>
+    <!-- … -->
+  </div>
+</div>
+```
+
+## Variants
+
+Picker supports the following variant modifiers on `InputContainer`:
+
+- `InputContainer--fill` (default)
+- `InputContainer--outline`
+
+```html
+<div>
+  <span class="Label">Fill (default)</span>
+  <div class="Dropdown">
+    <div role="group" aria-label="Fill (default)" class="InputContainer InputContainer--fill InputContainer--medium">
+      <!-- … -->
+    </div>
+    <!-- … -->
+  </div>
+</div>
+
+<div>
+  <span class="Label">Outline</span>
+  <div class="Dropdown">
+    <div role="group" aria-label="Outline" class="InputContainer InputContainer--outline InputContainer--medium">
       <!-- … -->
     </div>
     <!-- … -->
@@ -211,7 +240,7 @@ Each size expects a matching Tag and ControlButton size inside the selection are
 <div>
   <span class="Label">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="InputContainer InputContainer--large">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--large">
       <div role="grid" aria-label="Selected languages" class="UNSTABLE_PickerSelection">
         <div
           role="row"
@@ -250,7 +279,7 @@ readers announce the hint when the selection area receives focus.
 <div>
   <span class="Label">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="InputContainer InputContainer--medium">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--medium">
       <div
         role="group"
         aria-label="Selected languages"
@@ -280,7 +309,11 @@ Available validation states: `danger`, `warning`, `success`.
 <div>
   <span class="Label Label--required">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="InputContainer InputContainer--medium InputContainer--danger">
+    <div
+      role="group"
+      aria-label="Languages"
+      class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger"
+    >
       <div
         role="group"
         aria-label="Selected languages"
@@ -309,7 +342,11 @@ inside the selection area (remove buttons) to disable the Picker.
 <div>
   <span class="Label Label--disabled">Languages</span>
   <div class="Dropdown">
-    <div role="group" aria-label="Languages" class="InputContainer InputContainer--medium InputContainer--disabled">
+    <div
+      role="group"
+      aria-label="Languages"
+      class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled"
+    >
       <div role="grid" aria-label="Selected languages" class="UNSTABLE_PickerSelection">
         <div role="row" tabindex="0" aria-label="Czech" class="Tag Tag--selected Tag--disabled Tag--small">
           <div role="gridcell" aria-colindex="1" class="d-contents">
