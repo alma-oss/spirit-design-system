@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React, { type ReactElement } from 'react';
 import { PropsProvider } from '../../src/context';
-import { FormFieldVariants } from '../../src/types';
+import { FormFieldModes } from '../../src/types';
 
 type TestProps = Record<string, unknown>;
 type RenderComponent = (props?: TestProps) => ReactElement;
@@ -12,8 +12,8 @@ interface BaseFormFieldTestConfig {
 
 interface FormFieldContextPropsTestConfig extends BaseFormFieldTestConfig {
   classNamePrefix: string;
-  includeInlineVariant?: boolean;
-  includeItemVariant?: boolean;
+  includeInlineMode?: boolean;
+  includeItemMode?: boolean;
   text?: string;
 }
 
@@ -36,14 +36,14 @@ interface FormFieldLabelContextPropsTestConfig extends BaseFormFieldTestConfig {
   requiredProps?: TestProps;
 }
 
-interface VariantContextProps {
+interface TypeContextProps {
   disabledProps?: TestProps;
   inlineProps?: TestProps;
   itemProps?: TestProps;
 }
 
-interface FormFieldHelperTextContextPropsTestConfig extends BaseFormFieldTestConfig, VariantContextProps {
-  /** When false, skip inline class test (parents without `formFieldVariant` in context). @default false */
+interface FormFieldHelperTextContextPropsTestConfig extends BaseFormFieldTestConfig, TypeContextProps {
+  /** When false, skip inline class test (parents without `formFieldMode` in context). @default false */
   includeInline?: boolean;
   /** When false, skip item class test. @default false */
   includeItem?: boolean;
@@ -53,10 +53,10 @@ interface FormFieldHelperTextContextPropsTestConfig extends BaseFormFieldTestCon
   labelText?: string;
 }
 
-interface FormFieldValidationTextContextPropsTestConfig extends BaseFormFieldTestConfig, VariantContextProps {
+interface FormFieldValidationTextContextPropsTestConfig extends BaseFormFieldTestConfig, TypeContextProps {
   /** When false, skip disabled validation text test. @default true */
   includeDisabled?: boolean;
-  /** When false, skip inline class test (parents without `formFieldVariant` in context). @default false */
+  /** When false, skip inline class test (parents without `formFieldMode` in context). @default false */
   includeInline?: boolean;
   /** When false, skip item class test. @default false */
   includeItem?: boolean;
@@ -106,44 +106,42 @@ const expectClassForProps = ({
 
 export const formFieldContextPropsTest = ({
   classNamePrefix,
-  includeInlineVariant = true,
-  includeItemVariant = true,
+  includeInlineMode = true,
+  includeItemMode = true,
   renderComponent,
   text = DEFAULT_LABEL_TEXT,
 }: FormFieldContextPropsTestConfig) => {
   describe('prop priority (1. direct props, 2. context, 3. defaultProps)', () => {
-    if (includeInlineVariant || includeItemVariant) {
-      it('should use default formFieldVariant when no context and no direct prop', () => {
+    if (includeInlineMode || includeItemMode) {
+      it('should use default formFieldMode when no context and no direct prop', () => {
         renderFieldComponent(renderComponent);
         const element = screen.getByText(text);
 
         expect(element.className).toMatch(new RegExp(`^${classNamePrefix}\\b`));
 
-        if (includeInlineVariant) {
+        if (includeInlineMode) {
           expect(element.className).not.toContain(`${classNamePrefix}--inline`);
         }
-        if (includeItemVariant) {
+        if (includeItemMode) {
           expect(element.className).not.toContain(`${classNamePrefix}--item`);
         }
       });
     }
 
-    if (includeInlineVariant) {
-      it('should use context formFieldVariant when context provides it and no direct prop', () => {
-        render(
-          <PropsProvider value={{ formFieldVariant: FormFieldVariants.INLINE }}>{renderComponent()}</PropsProvider>,
-        );
+    if (includeInlineMode) {
+      it('should use context formFieldMode when context provides it and no direct prop', () => {
+        render(<PropsProvider value={{ formFieldMode: FormFieldModes.INLINE }}>{renderComponent()}</PropsProvider>);
         const element = screen.getByText(text);
 
         expect(element.className).toContain(`${classNamePrefix}--inline`);
       });
     }
 
-    if (includeInlineVariant && includeItemVariant) {
-      it('should use direct formFieldVariant over context (direct props override context)', () => {
+    if (includeInlineMode && includeItemMode) {
+      it('should use direct formFieldMode over context (direct props override context)', () => {
         render(
-          <PropsProvider value={{ formFieldVariant: FormFieldVariants.ITEM }}>
-            {renderComponent({ formFieldVariant: FormFieldVariants.INLINE })}
+          <PropsProvider value={{ formFieldMode: FormFieldModes.ITEM }}>
+            {renderComponent({ formFieldMode: FormFieldModes.INLINE })}
           </PropsProvider>,
         );
         const element = screen.getByText(text);

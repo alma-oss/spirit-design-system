@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { FormFieldVariants, type ForwardRefComponent, type SpiritRadioProps } from '../../types';
+import { FormFieldModes, type ForwardRefComponent, type SpiritRadioProps } from '../../types';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
 import { useRadioStyleProps } from './useRadioStyleProps';
@@ -32,7 +32,7 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
   return (
     <PropsProvider
       value={{
-        formFieldVariant: isItem ? FormFieldVariants.ITEM : FormFieldVariants.INLINE,
+        formFieldMode: isItem ? FormFieldModes.ITEM : FormFieldModes.INLINE,
         isDisabled,
         isLabelHidden,
         validationState,
