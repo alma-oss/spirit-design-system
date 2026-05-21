@@ -23,6 +23,7 @@ const dtsPlugin = dts({
   tsconfigPath: './config/tsconfig.prod.json',
   include: ['src/**/*'],
   exclude: ['**/__tests__/**', '**/stories/**', '**/demo/', '**/figma/'],
+  entryRoot: 'src',
   compilerOptions: {
     preserveConstEnums: true,
   },
