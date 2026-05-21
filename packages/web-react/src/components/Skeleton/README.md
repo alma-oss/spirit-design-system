@@ -56,13 +56,24 @@ SkeletonShape defines a placeholder for loading the Shape component.
 <SkeletonShape width={100} height={100} borderRadius={{ mobile: '100', tablet: '400', desktop: '500' }}/>
 ```
 
+### Shape Size Units
+
+The `width` and `height` props accept values **in px** (as a plain number, without the unit suffix).
+The component converts them to `rem` internally using the Spirit base font size (16 px by default),
+so the shape scales with the user's root font-size preference.
+
+```tsx
+// 100 px → '6.25rem' at the default 16 px base
+<SkeletonShape width={100} height={100} />
+```
+
 ### API
 
 | Name           | Type                                        | Default | Required | Description                                                                                                       |
 | -------------- | ------------------------------------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
 | `borderRadius` | [Radius dictionary][radius-size] \ `object` | `400`   | ✕        | Border radius variant, use object to set responsive values, e.g. { mobile: '200', tablet: '300', desktop: '400' } |
-| `width`        | `number`                                    | ✕       | ✓        | Specifies the width of an shape                                                                                   |
-| `height`       | `number`                                    | ✕       | ✓        | Specifies the height of an shape                                                                                  |
+| `width`        | `number`                                    | ✕       | ✓        | Width of the shape **in px** (converted to `rem` internally)                                                      |
+| `height`       | `number`                                    | ✕       | ✓        | Height of the shape **in px** (converted to `rem` internally)                                                     |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
