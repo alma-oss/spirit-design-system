@@ -103,7 +103,7 @@ an optimized experience:
 | Name                    | Type                                           | Default  | Required | Description                                                                     |
 | ----------------------- | ---------------------------------------------- | -------- | -------- | ------------------------------------------------------------------------------- |
 | `autoComplete`          | `string`                                       | -        | ✕        | [Automated assistance in filling][autocomplete-attr]                            |
-| `autoResizingMaxHeight` | `number`                                       | `400`    | ✕        | Maximum field height with automatic height control                              |
+| `autoResizingMaxHeight` | `number`                                       | `400`    | ✕        | Maximum field height **in px** with automatic height control. \*                |
 | `counterThreshold`      | `number`                                       | —        | ✕        | Character threshold; shows `current/threshold` counter                          |
 | `hasCounter`            | `bool`                                         | —        | ✕        | Show character counter (count only); auto `true` with `counterThreshold`        |
 | `maxLength`             | `number`                                       | —        | ✕        | Native textarea hard cap; with `counterThreshold`, prefer `>= counterThreshold` |
@@ -123,6 +123,9 @@ an optimized experience:
 | `validationState`       | [Validation dictionary][dictionary-validation] | —        | ✕        | Type of validation state                                                        |
 | `validationText`        | \[`ReactNode` \| `ReactNode[]`]                | —        | ✕        | Validation text                                                                 |
 | `value`                 | `string`                                       | —        | ✕        | Textarea value                                                                  |
+
+(\*) The value is compared against the browser's `scrollHeight` (a DOM pixel measurement),
+so `px` is intentional here and cannot be replaced with `rem`.
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

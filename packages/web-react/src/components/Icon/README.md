@@ -76,14 +76,28 @@ import icons from '@alma-oss/spirit-icons/icons';
 </IconsProvider>;
 ```
 
+## Box Size Units
+
+The `boxSize` prop accepts values **in px** (as a plain number, without the unit suffix).
+The component converts them to `rem` internally using the Spirit base font size (16 px by default),
+so the icon scales with the user's root font-size preference.
+
+```tsx
+// 24 px → '1.5rem' at the default 16 px base
+<Icon name="info" boxSize={24} />
+
+// Responsive: 20 px mobile, 30 px tablet, 40 px desktop
+<Icon name="info" boxSize={{ mobile: 20, tablet: 30, desktop: 40 }} />
+```
+
 ## API
 
-| Name      | Type                                                                                                                                                 | Default      | Required | Description                                                                                           |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------- | ----------------------------------------------------------------------------------------------------- |
-| `boxSize` | \[`number` \| `Responsive<number>`]                                                                                                                  | 24           | ✕        | Size of the icon, use object to set responsive values, e.g. `{ mobile: 20, tablet: 30, desktop: 40 }` |
-| `color`   | \[[AccentColorNamesType][readme-generated-types] \| [EmotionColorNamesType][readme-generated-types] \| [TextColorNamesType][readme-generated-types]] | `primary` \* | ✕        | Color of the dualtone icon                                                                            |
-| `name`    | `string`                                                                                                                                             | —            | ✓        | Name of the icon                                                                                      |
-| `title`   | `string`                                                                                                                                             | —            | ✕        | Title of the icon                                                                                     |
+| Name      | Type                                                                                                                                                 | Default      | Required | Description                                                                                                                                        |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `boxSize` | \[`number` \| `Responsive<number>`]                                                                                                                  | 24           | ✕        | Size of the icon **in px** — converted to `rem` internally. Use an object to set responsive values, e.g. `{ mobile: 20, tablet: 30, desktop: 40 }` |
+| `color`   | \[[AccentColorNamesType][readme-generated-types] \| [EmotionColorNamesType][readme-generated-types] \| [TextColorNamesType][readme-generated-types]] | `primary` \* | ✕        | Color of the dualtone icon                                                                                                                         |
+| `name`    | `string`                                                                                                                                             | —            | ✓        | Name of the icon                                                                                                                                   |
+| `title`   | `string`                                                                                                                                             | —            | ✕        | Title of the icon                                                                                                                                  |
 
 (\*) The default color "Primary" is used only for dualtone icons. For single-tone icons, the default color is inherited from the parent element.
 
