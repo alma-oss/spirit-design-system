@@ -1,6 +1,6 @@
 {
   "name": "@alma-oss/spirit-web",
-  "version": "4.5.0",
+  "version": "4.6.0",
   "description": "CSS and vanilla JS implementation of Spirit Design System",
   "license": "MIT",
   "engines": {

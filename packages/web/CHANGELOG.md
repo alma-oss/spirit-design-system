@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.6.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.5.0...@alma-oss/spirit-web@4.6.0) (2026-05-21)
+
+### Features
+
+- **web:** deprecate FileUploader component and subcomponents #DS-2444, closes [#DS-2444](https://github.com/alma-oss/spirit-design-system/issues/DS-2444)
+
 ## [4.5.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.4.0...@alma-oss/spirit-web@4.5.0) (2026-05-15)
 
 ### Features

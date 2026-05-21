@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.7.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.6.1...@alma-oss/spirit-web-react@4.7.0) (2026-05-21)
+
+### Features
+
+- **web-react:** deprecate FileUploader component and subcomponents #DS-2444, closes [#DS-2444](https://github.com/alma-oss/spirit-design-system/issues/DS-2444)
+
+### Documentation
+
+- **web-react:** update missing prop on PickerItem
+
+### Chores
+
+- **web-react:** fix subpath type declarations not resolving, closes [#DS-2561](https://github.com/alma-oss/spirit-design-system/issues/DS-2561)
+
 ## [4.6.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.6.0...@alma-oss/spirit-web-react@4.6.1) (2026-05-18)
 
 ### Bug Fixes
