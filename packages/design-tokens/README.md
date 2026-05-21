@@ -14,10 +14,11 @@
 4. [Basic Usage](#basic-usage)
    1. [In Sass](#in-sass)
    2. [In JavaScript](#in-javascript)
-5. [Rebranding Spirit](#rebranding-spirit)
+5. [Units — `rem`](#units--rem)
+6. [Rebranding Spirit](#rebranding-spirit)
    1. [Using Your Design Tokens with TypeScript](#using-your-design-tokens-with-typescript)
-6. [FAQ](#faq)
-7. [License](#license)
+7. [FAQ](#faq)
+8. [License](#license)
 
 ## Available Design Tokens
 
@@ -228,6 +229,34 @@ const desktopBreakpoint = SpiritDesignTokens.breakpoints.desktop;
 
 The structure is the same as in Sass.
 
+## Units — `rem`
+
+All numeric Spirit design tokens (spacing, typography, radii, shadows) are expressed in `rem` units
+relative to the root font size, which defaults to **16 px**.
+
+```js
+import { space700, space1000 } from '@alma-oss/spirit-design-tokens';
+
+console.log(space700); // → '1rem'  (= 16 px at default root size)
+console.log(space1000); // → '2rem'  (= 32 px at default root size)
+```
+
+```scss
+@use '@tokens' as tokens;
+
+.MyComponent {
+  margin-bottom: tokens.$space-700; // → 1rem
+}
+```
+
+The base font size used during token export is defined per device in `fontSizeBaseMobile`,
+`fontSizeBaseTablet`, and `fontSizeBaseDesktop` (all `16px` by default). If you change your
+project's root font size, all `rem` token values will scale accordingly — this is intentional
+and keeps the layout proportional to the user's font-size preference.
+
+For a full explanation of how the conversion works and what utilities are available in Spirit
+packages, see the [px → rem conversion guide][px-to-rem-guide].
+
 ## Rebranding Spirit
 
 The system is designed to be easily rebranded. To do so, you need to provide
@@ -428,8 +457,9 @@ values. This way, you can switch between themes without changing your components
 
 See the [LICENSE](LICENSE.md) file for information.
 
+[px-to-rem-guide]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/px-to-rem.md
+[sass-embedded]: https://sass-lang.com/documentation/breaking-changes/legacy-js-api/#bundlers
 [spirit-figma]: https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/
 [spirit-supernova]: https://spirit.design/
 [supernova]: https://spirit.supernova-docs.io
 [web-docs]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web#readme
-[sass-embedded]: https://sass-lang.com/documentation/breaking-changes/legacy-js-api/#bundlers

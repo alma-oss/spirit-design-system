@@ -227,6 +227,16 @@ Spirit Design System is also available on CDN:
 
 👉 Consider using a specific version instead of `latest` in production.
 
+## Units — `rem`
+
+Spirit primarily uses `rem` for layout-related sizing — spacing, typography, radii, and shadows
+are expressed in `rem` relative to a **16 px** root font size. Intentional `px` exceptions exist
+for values that must not scale with the root font size, such as border widths and
+visually-hidden utility techniques.
+
+👉 See the [px → rem conversion guide][px-to-rem-guide] for full details, including the SCSS
+`px-to-rem()` function available internally and how the base font size relates to design tokens.
+
 ## Rebranding
 
 Design tokens enable quick and easy rebranding of Spirit Sass components and styles.
@@ -270,4 +280,5 @@ See the [LICENSE][license] file for information.
 [feature-flags-docs]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/feature-flags.md
 [license]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/LICENSE.md
 [postcss-prefix-selector]: https://www.npmjs.com/package/postcss-prefix-selector
+[px-to-rem-guide]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/px-to-rem.md
 [vite]: https://vitejs.dev
