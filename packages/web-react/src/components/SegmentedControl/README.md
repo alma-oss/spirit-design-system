@@ -74,13 +74,13 @@ and [escape hatches][readme-escape-hatches].
 ```tsx
 <UncontrolledSegmentedControl label="Label" name="uncontrolled-example" defaultSelectedValue="value-1" isFluid>
   <SegmentedControlItem key="item-1" id="uncontrolled-segmented-control-1" value="value-1">
-    <Icon name="file" boxSize={20} />
+    <Icon name="file" />
     <Truncate mode="lines" limit={1}>
       Item 1 Label
     </Truncate>
   </SegmentedControlItem>
   <SegmentedControlItem key="item-2" id="uncontrolled-segmented-control-2" value="value-2">
-    <Icon name="file" boxSize={20} />
+    <Icon name="file" />
     <Truncate mode="lines" limit={1}>
       Item 2 Label
     </Truncate>
@@ -165,9 +165,13 @@ A simple short text label without any icons or additional elements. We recommend
 
 An icon followed by a short text label. We recommend wrapping the label in the `<Truncate>` component with `mode="lines"` and `limit={1}` to prevent overflow.
 
+Icon size is handled by SegmentedControl styles by default, so you do not need to pass `boxSize` for common usage.
+
+If you need a custom icon size for a specific case, override it with the [`boxSize`][readme-icon-api] prop on the Icon component.
+
 ```tsx
 <SegmentedControlItem id="segmented-control-item-content-example-2" value="value-2">
-  <Icon name="file" boxSize={20} />
+  <Icon name="file" />
   <Truncate mode="lines" limit={1}>
     Label
   </Truncate>
@@ -180,7 +184,7 @@ For cases where only an icon is shown visually, use `<VisuallyHidden>` component
 
 ```tsx
 <SegmentedControlItem id="segmented-control-item-content-example-3" value="value-3">
-  <Icon name="file" boxSize={20} />
+  <Icon name="file" />
   <VisuallyHidden>Label</VisuallyHidden>
 </SegmentedControlItem>
 ```
@@ -217,13 +221,13 @@ const [selectedValue, setSelectedValue] = useState('value-1');
     </Truncate>
   </SegmentedControlItem>
   <SegmentedControlItem id="segmented-control-full-example-item-2" value="value-2">
-    <Icon name="file" boxSize={20} />
+    <Icon name="file" />
     <Truncate mode="lines" limit={1}>
       Label 2
     </Truncate>
   </SegmentedControlItem>
   <SegmentedControlItem id="segmented-control-full-example-item-3" value="value-3">
-    <Icon name="file" boxSize={20} />
+    <Icon name="file" />
     <VisuallyHidden>Label 3</VisuallyHidden>
   </SegmentedControlItem>
 </SegmentedControl>;
@@ -247,7 +251,7 @@ const [selectedValue, setSelectedValue] = useState('value-1');
     onToggle={() => setActiveTooltipIndex(activeTooltipIndex === 0 ? null : 0)}
   >
     <TooltipTrigger elementType={SegmentedControlItem} value="value-1" id="segmented-control-tooltip-1">
-      <Icon name="file" boxSize={20} />
+      <Icon name="file" />
       <TooltipPopover>Label 1</TooltipPopover>
     </TooltipTrigger>
   </Tooltip>
@@ -257,7 +261,7 @@ const [selectedValue, setSelectedValue] = useState('value-1');
     onToggle={() => setActiveTooltipIndex(activeTooltipIndex === 1 ? null : 1)}
   >
     <TooltipTrigger elementType={SegmentedControlItem} value="value-2" id="segmented-control-tooltip-2">
-      <Icon name="file" boxSize={20} />
+      <Icon name="file" />
     </TooltipTrigger>
     <TooltipPopover>Label 2</TooltipPopover>
   </Tooltip>
@@ -267,5 +271,6 @@ const [selectedValue, setSelectedValue] = useState('value-1');
 [dictionary-variant]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#variant
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-icon-api]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#api
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [truncation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/TRUNCATING.md#segmented-control

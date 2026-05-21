@@ -119,7 +119,7 @@ and [escape hatches][readme-escape-hatches].
 The `NavigationAvatar` is a component that is styled to be used as a navigation action with an avatar.
 
 ```tsx
-<NavigationAvatar avatarContent={<Icon name="profile" boxSize={20} />} aria-label="Profile of Jiří Bárta">
+<NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta">
   <Text elementType="span" size="small" emphasis="semibold">
     My Account
   </Text>
@@ -129,7 +129,7 @@ The `NavigationAvatar` is a component that is styled to be used as a navigation 
 If you want the avatar to be square, don't forget to add the `isSquare` prop to the `NavigationAvatar` component.
 
 ```tsx
-<NavigationAvatar avatarContent={<Icon name="profile" boxSize={20} />} isSquare aria-label="Profile of Jiří Bárta">
+<NavigationAvatar avatarContent={<Icon name="profile" />} isSquare aria-label="Profile of Jiří Bárta">
   <Text elementType="span" size="small" emphasis="semibold">
     My Account
   </Text>
@@ -145,11 +145,7 @@ The avatar inside `NavigationAvatar` can have different sizes. Use the `avatarSi
 Available sizes: `xsmall`, `small`, `medium`, `large`, `xlarge`.
 
 ```tsx
-<NavigationAvatar
-  avatarContent={<Icon name="profile" boxSize={16} />}
-  avatarSize="xsmall"
-  aria-label="Profile of Jiří Bárta"
->
+<NavigationAvatar avatarContent={<Icon name="profile" />} avatarSize="xsmall" aria-label="Profile of Jiří Bárta">
   <Text elementType="span" size="small" emphasis="semibold">
     My Account
   </Text>
@@ -160,7 +156,7 @@ You can also use responsive sizes with a responsive object, e.g. `avatarSize={{ 
 
 ```tsx
 <NavigationAvatar
-  avatarContent={<Icon name="profile" boxSize={20} />}
+  avatarContent={<Icon name="profile" />}
   avatarSize={{ mobile: 'small', tablet: 'medium', desktop: 'large' }}
   aria-label="Profile of Jiří Bárta"
 >
@@ -207,7 +203,7 @@ With NavigationAction/NavigationAvatar components:
     <NavigationAction href="#">Link</NavigationAction>
   </NavigationItem>
   <NavigationItem>
-    <NavigationAvatar avatarContent={<Icon name="profile" boxSize={20} />} aria-label="Profile of Jiří Bárta">
+    <NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta">
       <Text elementType="span" size="small" emphasis="semibold">
         My Account
       </Text>

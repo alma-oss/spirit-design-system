@@ -89,7 +89,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
         onClick={passwordToggle}
         {...(isDisabled && { UNSAFE_className: 'color-scheme-on-disabled' })}
       >
-        <Icon name={`visibility-${isPasswordShown ? 'off' : 'on'}`} boxSize={size === Sizes.SMALL ? 16 : 20} />
+        <Icon name={`visibility-${isPasswordShown ? 'off' : 'on'}`} />
       </ControlButton>
     </InputAddon>
   ) : null;
