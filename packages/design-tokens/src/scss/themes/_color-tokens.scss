@@ -149,15 +149,15 @@ $focus-focus-ring-color-01: var(--spirit-color-focus-focus-ring-color-01);
 
 $form-field-danger: var(--spirit-color-form-field-danger);
 
-$form-field-filled-background-state-active: var(--spirit-color-form-field-filled-background-state-active);
-$form-field-filled-background-state-default: var(--spirit-color-form-field-filled-background-state-default);
-$form-field-filled-background-state-hover: var(--spirit-color-form-field-filled-background-state-hover);
-$form-field-filled-border-state-active: var(--spirit-color-form-field-filled-border-state-active);
-$form-field-filled-border-state-default: var(--spirit-color-form-field-filled-border-state-default);
-$form-field-filled-border-state-hover: var(--spirit-color-form-field-filled-border-state-hover);
-$form-field-filled-border-state-selected: var(--spirit-color-form-field-filled-border-state-selected);
-$form-field-filled-content: var(--spirit-color-form-field-filled-content);
-$form-field-filled-placeholder: var(--spirit-color-form-field-filled-placeholder);
+$form-field-fill-background-state-active: var(--spirit-color-form-field-fill-background-state-active);
+$form-field-fill-background-state-default: var(--spirit-color-form-field-fill-background-state-default);
+$form-field-fill-background-state-hover: var(--spirit-color-form-field-fill-background-state-hover);
+$form-field-fill-border-state-active: var(--spirit-color-form-field-fill-border-state-active);
+$form-field-fill-border-state-default: var(--spirit-color-form-field-fill-border-state-default);
+$form-field-fill-border-state-hover: var(--spirit-color-form-field-fill-border-state-hover);
+$form-field-fill-border-state-selected: var(--spirit-color-form-field-fill-border-state-selected);
+$form-field-fill-content: var(--spirit-color-form-field-fill-content);
+$form-field-fill-placeholder: var(--spirit-color-form-field-fill-placeholder);
 
 $form-field-helper-text: var(--spirit-color-form-field-helper-text);
 $form-field-label: var(--spirit-color-form-field-label);
@@ -420,16 +420,16 @@ $focus-colors: (
 
 $form-field-colors: (
     danger: $form-field-danger,
-    filled: (
-        background-state-active: $form-field-filled-background-state-active,
-        background-state-default: $form-field-filled-background-state-default,
-        background-state-hover: $form-field-filled-background-state-hover,
-        border-state-active: $form-field-filled-border-state-active,
-        border-state-default: $form-field-filled-border-state-default,
-        border-state-hover: $form-field-filled-border-state-hover,
-        border-state-selected: $form-field-filled-border-state-selected,
-        content: $form-field-filled-content,
-        placeholder: $form-field-filled-placeholder,
+    fill: (
+        background-state-active: $form-field-fill-background-state-active,
+        background-state-default: $form-field-fill-background-state-default,
+        background-state-hover: $form-field-fill-background-state-hover,
+        border-state-active: $form-field-fill-border-state-active,
+        border-state-default: $form-field-fill-border-state-default,
+        border-state-hover: $form-field-fill-border-state-hover,
+        border-state-selected: $form-field-fill-border-state-selected,
+        content: $form-field-fill-content,
+        placeholder: $form-field-fill-placeholder,
     ),
     helper-text: $form-field-helper-text,
     label: $form-field-label,
