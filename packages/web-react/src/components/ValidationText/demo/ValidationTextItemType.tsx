@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Checkbox } from '../../Checkbox';
 
-const ValidationTextItemVariant = () => {
+const ValidationTextItemType = () => {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
@@ -11,11 +11,11 @@ const ValidationTextItemVariant = () => {
       label="Checkbox Label"
       isItem
       validationState="danger"
-      validationText="Item variant validation text"
+      validationText="Item mode validation text"
       isChecked={isChecked}
       onChange={() => setIsChecked(!isChecked)}
     />
   );
 };
 
-export default ValidationTextItemVariant;
+export default ValidationTextItemType;
