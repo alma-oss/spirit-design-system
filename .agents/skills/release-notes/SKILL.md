@@ -193,10 +193,11 @@ Thank you for staying with us!
 
 ### Step 8 — Write the Output File
 
-1. Ensure `.release-notes/` directory exists (create it if not).
-2. Write the document to `.release-notes/release-notes-{YYYY-MM-DD}.md`.
+1. Ensure `docs/release-notes/` directory exists (create it if not).
+2. Write the document to `docs/release-notes/{YYYY-MM-DD}.md` (same date as the document title; see `docs/release-notes/2026-04-13.md` for naming).
 3. Print the full file path to the terminal.
 4. Remind the user to review the ⚠️ warnings (if any) before pasting into Slack Canvas.
+5. Commit the file to the repository so it is published under [docs/release-notes](https://github.com/alma-oss/spirit-design-system/tree/main/docs/release-notes).
 
 ---
 
