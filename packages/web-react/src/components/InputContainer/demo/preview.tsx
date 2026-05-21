@@ -7,11 +7,15 @@ import InputContainerDisabled from './InputContainerDisabled';
 import InputContainerInputSize from './InputContainerInputSize';
 import InputContainerSizes from './InputContainerSizes';
 import InputContainerValidation from './InputContainerValidation';
+import InputContainerVariants from './InputContainerVariants';
 
 export const Preview = () => (
   <StrictMode>
     <DocsSection title="Default">
       <InputContainerDefault />
+    </DocsSection>
+    <DocsSection title="Variants">
+      <InputContainerVariants />
     </DocsSection>
     <DocsSection title="Sizes">
       <InputContainerSizes />

@@ -13,8 +13,9 @@ export interface InputContainerStyles {
 export function useInputContainerStyleProps<E extends ElementType = 'div'>(
   props: SpiritInputContainerProps<E>,
 ): InputContainerStyles {
-  const { size, isDisabled, validationState, ...restProps } = props;
+  const { size, variant, isDisabled, validationState, ...restProps } = props;
   const inputContainerClass = useClassNamePrefix('InputContainer');
+  const inputContainerVariantClass = variant ? `${inputContainerClass}--${variant}` : null;
   const inputContainerSizeClass = `${inputContainerClass}--${size}`;
   const inputContainerDisabledClass = `${inputContainerClass}--disabled`;
   const inputContainerValidationClass = validationState ? `${inputContainerClass}--${validationState}` : null;
@@ -22,6 +23,7 @@ export function useInputContainerStyleProps<E extends ElementType = 'div'>(
   return {
     classProps: classNames(
       inputContainerClass,
+      inputContainerVariantClass,
       {
         [inputContainerSizeClass]: size,
         [inputContainerDisabledClass]: isDisabled,
