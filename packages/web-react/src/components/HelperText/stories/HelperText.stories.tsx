@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { FormFieldVariants } from '../../../types';
+import { FormFieldModes } from '../../../types';
 import ReadMe from '../README.md?raw';
 import { HelperText } from '..';
 
@@ -24,9 +24,9 @@ const meta: Meta<typeof HelperText> = {
     helperText: {
       control: 'text',
     },
-    formFieldVariant: {
+    formFieldMode: {
       control: 'select',
-      options: Object.values(FormFieldVariants),
+      options: Object.values(FormFieldModes),
     },
   },
   args: {
