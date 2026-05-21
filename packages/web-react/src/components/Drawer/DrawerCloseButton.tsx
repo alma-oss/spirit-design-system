@@ -7,14 +7,12 @@ import { useI18n, useStyleProps } from '../../hooks';
 import { type DrawerCloseButtonProps } from '../../types';
 import { Button } from '../Button';
 import { Icon } from '../Icon';
-import { DEFAULT_BOX_SIZE } from '../Icon/constants';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { useDrawerContext } from './DrawerContext';
 import { useDrawerStyleProps } from './useDrawerStyleProps';
 
 const defaultProps: Partial<DrawerCloseButtonProps> = {
   color: ComponentButtonColors.TERTIARY,
-  iconBoxSize: DEFAULT_BOX_SIZE,
   size: Sizes.MEDIUM,
 };
 

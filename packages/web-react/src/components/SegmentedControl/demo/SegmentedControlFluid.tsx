@@ -24,7 +24,7 @@ const SegmentedControlFluid = () => {
           id={`segmented-control-label-stretch-${index + 1}`}
           value={`value-${index + 1}`}
         >
-          <Icon name="file" boxSize={20} />
+          <Icon name="file" />
           {index === 1 ? (
             <Truncate mode="lines" limit={1}>
               {label}

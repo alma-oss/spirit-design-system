@@ -35,7 +35,7 @@ const SegmentedControlWithTooltipAndLargerItemSet = () => {
               id={id}
               aria-label={`Label Item ${index + 1}`}
             >
-              <Icon name="file" boxSize={20} />
+              <Icon name="file" />
             </TooltipTrigger>
             <TooltipPopover>Label</TooltipPopover>
           </Tooltip>

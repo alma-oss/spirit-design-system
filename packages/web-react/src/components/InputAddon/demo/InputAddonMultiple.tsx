@@ -13,7 +13,7 @@ const InputAddonMultiple = () => (
     <Label htmlFor={INPUT_ID}>Username</Label>
     <InputContainer size="medium">
       <InputAddon elementType="label" htmlFor={INPUT_ID}>
-        <Icon boxSize={20} name="link" />
+        <Icon name="link" />
       </InputAddon>
       <InputAddon elementType="label" htmlFor={INPUT_ID}>
         <span aria-hidden="true">@</span>
