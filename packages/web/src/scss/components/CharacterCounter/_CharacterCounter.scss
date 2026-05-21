@@ -13,12 +13,6 @@
     color: theme.$color-state-disabled;
 }
 
-.CharacterCounter--success,
-.CharacterCounter--warning,
-.CharacterCounter--danger {
-    @include typography.generate(theme.$typography-state-validation);
-}
-
 .CharacterCounter--success {
     color: theme.$color-state-success;
 }

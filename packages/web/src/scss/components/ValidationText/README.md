@@ -72,17 +72,6 @@ Use the `ValidationText--disabled` modifier class when the associated form contr
 </div>
 ```
 
-## Item Variant
-
-Use the `ValidationText--item` modifier class when ValidationText is inside an Item variant (e.g., `Checkbox--item`, `Radio--item`).
-
-```html
-<button type="button" class="Item Item--danger">
-  <span class="Item__label">Item Label</span>
-  <span class="ValidationText ValidationText--item ValidationText--danger">Item validation text</span>
-</button>
-```
-
 ## Usage with Form Components
 
 ValidationText works seamlessly with Spirit form components:
