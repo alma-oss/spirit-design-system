@@ -1,3 +1,4 @@
+export * from './disclosure';
 export * from './styleProps';
 export * from './useAlignmentClass';
 export * from './useAriaIdRefs';
