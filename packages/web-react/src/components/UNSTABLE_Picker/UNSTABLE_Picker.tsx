@@ -11,7 +11,7 @@ import { HelperText, Label, ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
-import { DEFAULT_SIZE } from './constants';
+import { DEFAULT_POPOVER_PROPS, DEFAULT_SIZE } from './constants';
 import { PickerContextProvider } from './PickerContext';
 import { PickerPopoverContextProvider } from './PickerPopoverContext';
 import type { SpiritUnstablePickerProps, SpiritUnstablePickerRef } from './types';
@@ -46,9 +46,12 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     isLabelHidden = false,
     isOpen,
     isRequired = false,
+    dropdownProps,
     label,
+    labelProps,
     onSelectionChange,
     onToggle,
+    popoverProps = DEFAULT_POPOVER_PROPS,
     removeAllLabel = t('picker.removeAll'),
     renderTags,
     selectedKeys,
@@ -200,10 +203,15 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
   return (
     <PickerContextProvider value={{ size, tagDescriptionId }}>
       <div {...styleProps} className={classNames(classProps.root, styleProps.className)} {...transferProps}>
-        <Label id={labelId} UNSAFE_className={classProps.label} elementType="span">
+        <Label
+          {...labelProps}
+          id={labelId}
+          elementType="span"
+          UNSAFE_className={classNames(classProps.label, labelProps?.UNSAFE_className)}
+        >
           {label}
         </Label>
-        <Dropdown id={popoverId} isOpen={isOpen} onToggle={onToggle}>
+        <Dropdown {...dropdownProps} id={popoverId} isOpen={isOpen} onToggle={onToggle}>
           <div role="group" aria-label={label} className={classProps.inputContainer}>
             <div
               ref={selectionGridRef}
@@ -233,6 +241,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
             </button>
           </div>
           <DropdownPopover
+            {...popoverProps}
             aria-labelledby={labelId}
             role="dialog"
             aria-modal="true"

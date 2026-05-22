@@ -77,6 +77,43 @@ describe('UNSTABLE_Picker', () => {
     expect(screen.getByRole('checkbox', { name: 'Czech' })).toBeInTheDocument();
   });
 
+  it('should apply default popover theme to DropdownPopover', () => {
+    render(<TestPicker />);
+    fireEvent.click(screen.getByRole('button', { name: 'Add' }));
+
+    expect(screen.getByRole('dialog')).toHaveClass('theme-light-default');
+  });
+
+  it('should forward popoverProps to DropdownPopover', () => {
+    render(<TestPicker popoverProps={{ theme: 'theme-light-on-brand' }} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Add' }));
+
+    const popover = screen.getByRole('dialog');
+
+    expect(popover).toHaveClass('theme-light-on-brand');
+    expect(popover).toHaveAttribute('id', 'picker-test-picker-popover');
+    expect(popover).toHaveAttribute('role', 'dialog');
+    expect(popover).toHaveAttribute('aria-modal', 'true');
+    expect(popover).toHaveAttribute('aria-labelledby', 'picker-test-picker-label');
+  });
+
+  it('should forward dropdownProps to Dropdown', () => {
+    render(<TestPicker dropdownProps={{ fullWidthMode: 'mobile-only', placement: 'bottom-start' }} />);
+
+    const popover = screen.getByRole('dialog');
+
+    expect(popover).toHaveAttribute('data-spirit-fullwidthmode', 'mobile-only');
+    expect(popover).toHaveAttribute('data-spirit-placement', 'bottom-start');
+  });
+
+  it('should forward labelProps to Label', () => {
+    render(<TestPicker labelProps={{ theme: 'theme-light-on-brand' }} />);
+
+    const label = screen.getByText('Languages', { selector: '.UNSTABLE_Picker__label' });
+
+    expect(label).toHaveClass('theme-light-on-brand', 'UNSTABLE_Picker__label');
+  });
+
   it('should not move focus to selection tags while popover is open', () => {
     const onSelectionChange = jest.fn();
     const StatefulPicker = () => {

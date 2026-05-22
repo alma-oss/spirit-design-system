@@ -39,7 +39,15 @@ export interface DropdownAlignmentProps {
   alignmentY?: DropdownAlignmentYType;
 }
 
-export interface DropdownProps extends DropdownAlignmentProps, ChildrenProps, StyleProps {
+export interface DropdownBaseProps extends DropdownAlignmentProps, StyleProps {
+  enableAutoClose?: boolean;
+  fullWidthMode?: DropdownFullWidthMode;
+  onAutoClose?: (event: Event) => void;
+  placement?: PlacementDictionaryType;
+}
+
+/** Full `Dropdown` shell props (`DropdownBaseProps` plus `children` and `id`). */
+export interface DropdownProps extends DropdownBaseProps, ChildrenProps {
   id: string;
 }
 
@@ -47,16 +55,12 @@ export interface DropdownStyleProps extends DropdownAlignmentProps, StyleProps {
   isOpen?: boolean;
 }
 
-export interface SpiritDropdownProps extends DropdownProps, ChildrenProps {
-  enableAutoClose?: boolean;
-  placement?: PlacementDictionaryType;
-  fullWidthMode?: DropdownFullWidthMode;
-  onAutoClose?: (event: Event) => void;
+export interface UncontrolledDropdownProps extends DropdownProps {}
+
+export interface SpiritDropdownProps extends DropdownProps {
   isOpen: boolean;
   onToggle: () => void;
 }
-
-export interface UncontrolledDropdownProps extends ChildrenProps, Omit<SpiritDropdownProps, 'isOpen' | 'onToggle'> {}
 
 /** ===== INTERNAL API ===== */
 export interface DropdownTriggerBaseProps extends StyleProps {
