@@ -60,7 +60,7 @@ overflow its scrollable container or get clipped.
       >
         <span class="accessibility-hidden">Add</span>
         <svg class="Icon" width="20" height="20" aria-hidden="true">
-          <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
+          <use href="/icons/svg/sprite.svg#chevron-down" />
         </svg>
       </button>
     </div>
@@ -118,7 +118,7 @@ Place a hidden `<span>` with a unique `id` anywhere in the `<body>` and referenc
         class="ControlButton ControlButton--small ControlButton--symmetrical"
       >
         <svg class="Icon" width="16" height="16" aria-hidden="true">
-          <use xlink:href="/icons/svg/sprite.svg#close" />
+          <use href="/icons/svg/sprite.svg#close" />
         </svg>
       </button>
     </div>
@@ -166,6 +166,34 @@ a red asterisk after the label text.
 </div>
 ```
 
+## Themes
+
+The picker trigger, its label, and the popover can each use a different [theme][themes-docs] utility class:
+
+- **`theme-light-default`** on `.UNSTABLE_Picker` — selection area and trigger (the field control).
+- **`theme-light-on-brand`** on `.UNSTABLE_Picker__label` — visible label above the field (set this when the label sits on a different surface than the field, for example a brand header).
+- **`theme-light-default`** on `.DropdownPopover` — dropdown panel with options.
+
+On a **Light on Brand** surface, keep the label on-brand and use **Light Default** for the field and popover:
+
+```html
+<div class="theme-light-on-brand bg-primary rounded-300 p-800">
+  <div class="UNSTABLE_Picker UNSTABLE_Picker--medium theme-light-default">
+    <span class="UNSTABLE_Picker__label theme-light-on-brand">Languages</span>
+    <div class="Dropdown">
+      <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
+        <!-- … -->
+      </div>
+      <div role="dialog" class="DropdownPopover theme-light-default" id="picker-demo-picker-themes-popover">
+        <!-- … -->
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+See the [Themes demo][picker-themes-demo].
+
 ## Sizes
 
 Use the `UNSTABLE_Picker--small`, `UNSTABLE_Picker--medium`, or `UNSTABLE_Picker--large` modifier to
@@ -194,7 +222,7 @@ Each Picker size expects a matching Tag and ControlButton size inside the select
               class="ControlButton ControlButton--medium ControlButton--symmetrical"
             >
               <svg class="Icon" width="16" height="16" aria-hidden="true">
-                <use xlink:href="/icons/svg/sprite.svg#close" />
+                <use href="/icons/svg/sprite.svg#close" />
               </svg>
             </button>
           </div>
@@ -286,7 +314,7 @@ area (remove buttons) to disable the Picker.
               disabled
             >
               <svg class="Icon" width="16" height="16" aria-hidden="true">
-                <use xlink:href="/icons/svg/sprite.svg#close" />
+                <use href="/icons/svg/sprite.svg#close" />
               </svg>
             </button>
           </div>
@@ -303,7 +331,7 @@ area (remove buttons) to disable the Picker.
       >
         <span class="accessibility-hidden">Add</span>
         <svg class="Icon" width="20" height="20" aria-hidden="true">
-          <use xlink:href="/icons/svg/sprite.svg#chevron-down" />
+          <use href="/icons/svg/sprite.svg#chevron-down" />
         </svg>
       </button>
     </div>
@@ -487,4 +515,6 @@ Popover API is strongly recommended.
 [dropdown]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Dropdown/README.md
 [mdn-dialog-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/dialog_role
 [mdn-grid-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/grid_role
+[picker-themes-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Picker/index.html
 [react-aria]: https://react-aria.adobe.com/Select
+[themes-docs]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#themes

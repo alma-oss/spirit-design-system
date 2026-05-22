@@ -15,6 +15,7 @@ import PickerRequired from './PickerRequired';
 import PickerSalary from './PickerSalary';
 import PickerSingle from './PickerSingle';
 import PickerSizes from './PickerSizes';
+import PickerThemes from './PickerThemes';
 import PickerValidationStates from './PickerValidationStates';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
@@ -23,6 +24,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <div className={`${UNSTABLE_PICKER_DOCS_DEMO_WRAPPER_CLASSNAME} pb-1700`}>
         <DocsSection title="Default">
           <PickerDefault />
+        </DocsSection>
+        <DocsSection title="Themes">
+          <PickerThemes />
         </DocsSection>
         <DocsSection title="Sizes" stackAlignment="stretch">
           <PickerSizes />

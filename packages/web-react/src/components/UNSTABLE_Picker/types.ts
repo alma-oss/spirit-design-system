@@ -1,12 +1,14 @@
 import { type FocusEvent, type KeyboardEvent, type ReactNode } from 'react';
 import type { SelectionMode } from '../../hooks';
 import type {
+  DropdownBaseProps,
   HelperTextProps,
   SizesDictionaryType,
   SpiritCheckboxProps,
   SpiritDivElementProps,
   SpiritFieldGroupProps,
   SpiritTagProps,
+  StyleProps,
   Validation,
   ValidationTextProp,
 } from '../../types';
@@ -57,6 +59,12 @@ export interface UnstablePickerBaseProps<S = void>
   isLabelHidden?: boolean;
   isRequired?: boolean;
   label: string;
+  /** Props for the inner `Dropdown`. */
+  dropdownProps?: DropdownBaseProps;
+  /** Props for the inner `Label` (style props; `UNSAFE_className` is merged with picker classes). */
+  labelProps?: StyleProps;
+  /** Props for the inner `DropdownPopover`. */
+  popoverProps?: StyleProps;
   renderTags?: (options: UnstablePickerRenderTagsOptions) => ReactNode;
   selectionMode?: UnstablePickerSelectionMode;
   size?: SizesDictionaryType<S>;
