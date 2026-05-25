@@ -24,7 +24,7 @@
     "system"
   ],
   "scripts": {
-    "test": "node --test __tests__/html.test.cjs"
+    "test": "node --test"
   },
   "peerDependencies": {
     "eslint": "^8.0.0 || ^9.0.0"
