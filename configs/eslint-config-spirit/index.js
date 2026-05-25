@@ -26,7 +26,6 @@ module.exports = {
   plugins: ['jest-formatting', 'promise', 'react', '@typescript-eslint', /* 'react-refresh' */],
 
   rules: {
-
     /**
      * Set sorting of imports
      *
