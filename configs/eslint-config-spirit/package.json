@@ -6,6 +6,7 @@
   "type": "commonjs",
   "exports": {
     ".": "./index.js",
+    "./rules": "./rules.js",
     "./prettier": "./prettier.js",
     "./style": "./style.js",
     "./html": "./html.js"
