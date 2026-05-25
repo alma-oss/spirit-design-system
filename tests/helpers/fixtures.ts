@@ -1,5 +1,7 @@
 import { test as base } from '@playwright/test';
 
+const PAGE_RETRIES_FALLBACK = 3;
+
 /**
  * Custom fixture types for extended test functionality.
  */
@@ -26,12 +28,7 @@ interface CustomFixtures {
  * ```
  */
 export const test = base.extend<CustomFixtures>({
-  // Define the pageRetries fixture by reading from test configuration
-  pageRetries: async ({}, use, testInfo) => {
-    // Read pageRetries from the project configuration
-    const retries = (testInfo.project.use as any).pageRetries;
-    await use(retries);
-  },
+  pageRetries: [PAGE_RETRIES_FALLBACK, { option: true }],
 });
 
 // Re-export expect for convenience (so tests can import from this file)
