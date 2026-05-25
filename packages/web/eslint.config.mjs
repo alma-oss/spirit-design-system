@@ -1,6 +1,7 @@
 import { fixupConfigRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 import spiritHtml from 'eslint-config-spirit/html';
+import spiritRules from 'eslint-config-spirit/rules';
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
@@ -40,6 +41,7 @@ export default [
     compat.extends('eslint-config-spirit', '@lmc-eu/eslint-config-typescript', 'eslint-config-spirit/prettier'),
   ),
   ...spiritHtml,
+  ...spiritRules,
   {
     languageOptions: {
       parserOptions: {
