@@ -41,9 +41,9 @@ Use [Conventional Comments](https://conventionalcomments.org/) for all findings.
 
 ### Finding Format
 
-When a code suggestion exists, it **must appear as the very first element** — before the label line and before the `<details>` block. Use GitHub’s PR review suggestion fence (` ```suggestion `), which allows reviewers to apply the fix with one click. When no code suggestion is possible, omit the code block.
+**Produce a GitHub suggestion fence (` ```suggestion `) for every finding where the fix is a concrete code or text change.** This allows the reviewer to apply the fix with one click. Only omit the suggestion block when the fix cannot be expressed as a line-level edit (e.g. "delete this whole file" or "rethink the architecture").
 
-**Order is mandatory.** Do not place the label, subject, or `<details>` block before the suggestion block.
+**The suggestion block is always the first element in the comment — before the label line and before the `<details>` block. Nothing comes before it. Start typing the suggestion fence immediately, with no preceding text.**
 
 Correct format when a suggestion exists:
 
