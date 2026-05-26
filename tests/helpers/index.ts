@@ -7,3 +7,4 @@ export * from './hideFromVisualTests';
 export * from './retryPageGoto';
 export * from './takeScreenshot';
 export * from './waitForPageLoad';
+export * from './runDemoPageTests';
