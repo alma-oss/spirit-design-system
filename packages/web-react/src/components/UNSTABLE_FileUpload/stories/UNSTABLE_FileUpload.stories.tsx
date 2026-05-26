@@ -83,6 +83,12 @@ const meta: Meta<typeof UNSTABLE_FileUpload> = {
         defaultValue: { summary: 'false' },
       },
     },
+    isUploadDisabled: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
     label: {
       control: 'text',
     },
@@ -136,6 +142,7 @@ const meta: Meta<typeof UNSTABLE_FileUpload> = {
     isLabelHidden: false,
     isMultiple: false,
     isRequired: false,
+    isUploadDisabled: false,
     label: 'Label',
     labelText: 'or drag and drop here',
     linkText: 'Upload your file(s)',

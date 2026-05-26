@@ -9,6 +9,7 @@ export interface FileUploadStyleProps extends StyleProps, Validation {
   isDragging?: boolean;
   isLabelHidden?: boolean;
   isRequired?: boolean;
+  isUploadDisabled?: boolean;
 }
 
 export interface FileUploadStyle {
@@ -71,7 +72,7 @@ export const useFileUploadStyleProps = (props?: FileUploadStyleProps): FileUploa
         validationText: fileUploadInputValidationTextClass,
         dropZone: {
           root: classNames(fileUploadInputDropZoneClass, {
-            [fileUploadDropZoneDisabledClass]: props?.isDisabled,
+            [fileUploadDropZoneDisabledClass]: props?.isDisabled || props?.isUploadDisabled,
             [fileUploadDropZoneCompactClass]: props?.isCompact,
           }),
           content: fileUploadInputDropZoneContentClass,

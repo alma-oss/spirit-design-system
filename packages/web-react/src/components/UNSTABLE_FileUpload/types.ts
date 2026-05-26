@@ -22,13 +22,14 @@ export interface UnstableFileUploadInputProps
   iconName?: string;
   id: string;
   inputRef?: MutableRefObject<HTMLInputElement>;
-  isDisabled?: boolean;
   isCompact?: boolean;
+  isDisabled?: boolean;
   /** When set, overrides environment drag-and-drop detection (e.g. unsupported appearance in docs). */
   isDragAndDropSupported?: boolean;
   isLabelHidden?: boolean;
   isMultiple?: boolean;
   isRequired?: boolean;
+  isUploadDisabled?: boolean;
   label?: ReactNode;
   name: string;
   onFilesSelected?: FilesSelectedType;

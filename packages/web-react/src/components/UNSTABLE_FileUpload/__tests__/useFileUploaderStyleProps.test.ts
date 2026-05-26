@@ -37,4 +37,17 @@ describe('useFileUploadStyleProps', () => {
       'UNSTABLE_FileUploadInput__dropZone UNSTABLE_FileUploadInput__dropZone--disabled',
     );
   });
+
+  it('should return upload disabled drop zone only', () => {
+    const { result } = renderHook(() =>
+      useFileUploadStyleProps({
+        isUploadDisabled: true,
+      }),
+    );
+
+    expect(result.current.classProps.input.root).toBe('UNSTABLE_FileUploadInput');
+    expect(result.current.classProps.input.dropZone.root).toBe(
+      'UNSTABLE_FileUploadInput__dropZone UNSTABLE_FileUploadInput__dropZone--disabled',
+    );
+  });
 });
