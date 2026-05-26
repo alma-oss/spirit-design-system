@@ -36,7 +36,12 @@ $_field-name: 'UNSTABLE_FileUploadInput';
     @include form-fields-tools.helper-text();
 }
 
-:is(.UNSTABLE_FileUploadInput--disabled, .UNSTABLE_FileUploadInput.is-disabled) .UNSTABLE_FileUploadInput__helperText {
+:is(
+        .UNSTABLE_FileUploadInput--disabled,
+        .UNSTABLE_FileUploadInput.is-disabled,
+        .UNSTABLE_FileUploadInput__dropZone--disabled
+    )
+    .UNSTABLE_FileUploadInput__helperText {
     @include form-fields-tools.helper-text-disabled();
 }
 

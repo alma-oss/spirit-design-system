@@ -144,6 +144,35 @@ Add validation text and give it an `id` for `aria-describedby` when you use it:
 </div>
 ```
 
+### Upload Disabled (Interaction-Only)
+
+Use this mode when only upload interactions should be disabled (file picker + drop zone), while the outer field does not use the full disabled root styling.
+
+- Add the `disabled` attribute to the input.
+- Add `UNSTABLE_FileUploadInput__dropZone--disabled` to the drop zone.
+- Keep `UNSTABLE_FileUploadInput--disabled` off the root.
+
+```html
+<div class="UNSTABLE_FileUploadInput has-drag-and-drop">
+  <label for="file-uploader-upload-disabled" class="UNSTABLE_FileUploadInput__label">Label</label>
+  <input
+    type="file"
+    id="file-uploader-upload-disabled"
+    name="attachment-upload-disabled"
+    class="UNSTABLE_FileUploadInput__input"
+    disabled
+    aria-describedby="file-uploader-upload-disabled-helper"
+  />
+  <div class="UNSTABLE_FileUploadInput__dropZone UNSTABLE_FileUploadInput__dropZone--disabled">
+    <!-- ... -->
+    <div id="file-uploader-upload-disabled-helper" class="UNSTABLE_FileUploadInput__helperText">
+      Max file size is 10 MB
+    </div>
+    <div class="Button Button--primary Button--medium Button--disabled" aria-hidden="true">Browse</div>
+  </div>
+</div>
+```
+
 ## Displaying Uploaded Files
 
 Use [UNSTABLE_File][readme-file] to display a list of uploaded files.
