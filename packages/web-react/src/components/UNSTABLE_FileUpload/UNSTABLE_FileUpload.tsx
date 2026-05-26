@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { type DragEvent, type DragEventHandler, useEffect, useState } from 'react';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { Button } from '../Button';
 import { HelperText, Label, ValidationText } from '../Field';
@@ -30,6 +30,7 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
     isLabelHidden,
     isMultiple,
     isRequired,
+    isUploadDisabled,
     label,
     labelText,
     linkText,
@@ -42,6 +43,7 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
   } = props;
 
   const hasInput = name !== undefined;
+  const isUploadInteractionDisabled = isDisabled || isUploadDisabled;
 
   const isDragAndDropSupported = isDragAndDropSupportedProp ?? isDragAndDropDetected;
 
@@ -57,6 +59,7 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
     isDragging,
     isLabelHidden,
     isRequired,
+    isUploadDisabled,
     validationState,
   });
 
@@ -68,6 +71,26 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
     validationText,
   });
   const inputId = id;
+  const onDisabledDropGuard = (event: DragEvent<HTMLDivElement>) => {
+    const { dataTransfer } = event;
+
+    if (dataTransfer) {
+      dataTransfer.dropEffect = 'none';
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+  };
+  let onDragOverHandler: DragEventHandler<HTMLDivElement> | undefined;
+  let onDropHandler: DragEventHandler<HTMLDivElement> | undefined;
+
+  if (isUploadInteractionDisabled) {
+    onDragOverHandler = onDisabledDropGuard;
+    onDropHandler = onDisabledDropGuard;
+  } else if (isDragAndDropSupported) {
+    onDragOverHandler = onDragOver;
+    onDropHandler = onDrop;
+  }
 
   useEffect(() => {
     if (isDragAndDropSupportedProp !== undefined) {
@@ -85,10 +108,10 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
     >
       {hasInput && (
         <div
-          onDragOver={!isDisabled && isDragAndDropSupported ? onDragOver : undefined}
-          onDragEnter={!isDisabled && isDragAndDropSupported ? onDragEnter : undefined}
-          onDragLeave={!isDisabled && isDragAndDropSupported ? onDragLeave : undefined}
-          onDrop={!isDisabled && isDragAndDropSupported ? onDrop : undefined}
+          onDragOver={onDragOverHandler}
+          onDragEnter={!isUploadInteractionDisabled && isDragAndDropSupported ? onDragEnter : undefined}
+          onDragLeave={!isUploadInteractionDisabled && isDragAndDropSupported ? onDragLeave : undefined}
+          onDrop={onDropHandler}
           className={classProps.input.root}
         >
           <Label htmlFor={inputId} UNSAFE_className={classProps.input.label}>
@@ -104,7 +127,7 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
             className={classProps.input.input}
             onChange={onChange}
             multiple={isMultiple}
-            disabled={isDisabled}
+            disabled={isUploadInteractionDisabled}
           />
           <div ref={dropZoneRef} className={classProps.input.dropZone.root}>
             {!isCompact && <Icon name={iconName} boxSize={28} aria-hidden="true" />}
@@ -126,7 +149,7 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
               />
             </div>
             {/* @ts-expect-error - Div cannot have type="button". This will be solved with https://jira.almacareer.tech/browse/DS-2168 */}
-            <Button aria-hidden="true" isDisabled={isDisabled} elementType="div" type={null}>
+            <Button aria-hidden="true" isDisabled={isUploadInteractionDisabled} elementType="div" type={null}>
               {buttonText}
             </Button>
           </div>

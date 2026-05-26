@@ -9,6 +9,7 @@ import FileUploadInputValidationStates from './FileUploadInputValidationStates';
 import FileUploadInputValidationWithIcon from './FileUploadInputValidationWithIcon';
 import FileUploadInputWithAttachment from './FileUploadInputWithAttachment';
 import FileUploadSimple from './FileUploadSimple';
+import FileUploadUploadDisabled from './FileUploadUploadDisabled';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
@@ -25,6 +26,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
         </DocsSection>
         <DocsSection title="Input Disabled" tag="Visual demo only" stackAlignment="start">
           <FileUploadInputDisabled />
+        </DocsSection>
+        <DocsSection title="Upload Interactions Disabled" tag="Visual demo only" stackAlignment="start">
+          <FileUploadUploadDisabled />
         </DocsSection>
         <DocsSection title="Dragging not Available" tag="Visual demo only" stackAlignment="start">
           <FileUploadDraggingNotAvailable />
