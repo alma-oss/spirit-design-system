@@ -1,8 +1,9 @@
 import React from 'react';
+import { Grid } from '../../Grid';
 import { UNSTABLE_FileUpload } from '..';
 
 const FileUploadInputDisabled = () => (
-  <div className="Grid Grid--alignmentXStretch Grid--alignmentYStretch Grid--tablet--cols-2 Grid--cols-1">
+  <Grid cols={{ mobile: 1, tablet: 2 }}>
     <UNSTABLE_FileUpload
       rootId="example-disabled-standard"
       id="file-uploader-disabled-standard"
@@ -26,7 +27,7 @@ const FileUploadInputDisabled = () => (
       isDisabled
       isRequired
     />
-  </div>
+  </Grid>
 );
 
 export default FileUploadInputDisabled;

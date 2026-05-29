@@ -1,9 +1,10 @@
 import React from 'react';
+import { Grid } from '../../Grid';
 import { UNSTABLE_FileUpload } from '..';
 
 const FileUploadDraggingNotAvailable = () => (
   // ⚠️ VISUAL EXAMPLE ONLY – shows how the input looks when drag-and-drop is not supported. No files are added.
-  <div className="Grid Grid--alignmentXStretch Grid--alignmentYStretch Grid--tablet--cols-2 Grid--cols-1">
+  <Grid cols={{ mobile: 1, tablet: 2 }}>
     <UNSTABLE_FileUpload
       rootId="example-no-drag-standard"
       id="file-uploader-no-drag-standard"
@@ -25,7 +26,7 @@ const FileUploadDraggingNotAvailable = () => (
       linkText="Upload your file"
       name="attachment-no-drag-compact"
     />
-  </div>
+  </Grid>
 );
 
 export default FileUploadDraggingNotAvailable;

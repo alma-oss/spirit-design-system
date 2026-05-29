@@ -1,5 +1,6 @@
 import React from 'react';
 import { ValidationStates } from '../../../constants';
+import { Grid } from '../../Grid';
 import { UNSTABLE_FileUpload } from '..';
 
 const FileUploadInputValidationWithIcon = () => {
@@ -8,10 +9,7 @@ const FileUploadInputValidationWithIcon = () => {
   return (
     <>
       {states.map((state) => (
-        <div
-          key={`file-uploader-${state}-validation-icon`}
-          className="Grid Grid--alignmentXStretch Grid--alignmentYStretch Grid--tablet--cols-2 Grid--cols-1"
-        >
+        <Grid key={`file-uploader-${state}-validation-icon`} cols={{ mobile: 1, tablet: 2 }}>
           <UNSTABLE_FileUpload
             rootId={`example-validation-icon-standard-${state}`}
             id={`file-uploader-icon-standard-${state}`}
@@ -39,7 +37,7 @@ const FileUploadInputValidationWithIcon = () => {
             hasValidationIcon
             isRequired
           />
-        </div>
+        </Grid>
       ))}
     </>
   );
