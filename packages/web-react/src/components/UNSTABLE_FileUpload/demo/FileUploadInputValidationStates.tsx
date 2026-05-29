@@ -1,5 +1,6 @@
 import React from 'react';
 import { ValidationStates } from '../../../constants';
+import { Grid } from '../../Grid';
 import { UNSTABLE_FileUpload } from '..';
 
 const states = Object.values(ValidationStates);
@@ -7,10 +8,7 @@ const states = Object.values(ValidationStates);
 const FileUploadInputValidationStates = () => (
   <>
     {states.map((state) => (
-      <div
-        key={state}
-        className="Grid Grid--alignmentXStretch Grid--alignmentYStretch Grid--tablet--cols-2 Grid--cols-1"
-      >
+      <Grid key={state} cols={{ mobile: 1, tablet: 2 }}>
         <UNSTABLE_FileUpload
           rootId={`example-validation-standard-${state}`}
           id={`file-uploader-standard-${state}`}
@@ -42,7 +40,7 @@ const FileUploadInputValidationStates = () => (
           }
           validationState={state}
         />
-      </div>
+      </Grid>
     ))}
   </>
 );

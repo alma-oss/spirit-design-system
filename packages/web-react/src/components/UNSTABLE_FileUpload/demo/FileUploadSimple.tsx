@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Stack } from '../..';
+import { Grid } from '../../Grid';
+import { Stack } from '../../Stack';
 import { UNSTABLE_File, UNSTABLE_FileImagePreview } from '../../UNSTABLE_File';
 import { UNSTABLE_FileUpload } from '..';
 import { useFileQueue } from './useFileQueue';
@@ -72,7 +73,7 @@ const SimpleUploadColumn = ({ title, inputId, isCompact, name, rootId }: SimpleU
 };
 
 const FileUploadSimple = () => (
-  <div className="Grid Grid--alignmentXStretch Grid--alignmentYStretch Grid--tablet--cols-2 Grid--cols-1">
+  <Grid cols={{ mobile: 1, tablet: 2 }}>
     <div>
       <SimpleUploadColumn
         title="Default"
@@ -90,7 +91,7 @@ const FileUploadSimple = () => (
         isCompact
       />
     </div>
-  </div>
+  </Grid>
 );
 
 export default FileUploadSimple;

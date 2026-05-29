@@ -1,12 +1,12 @@
 import React from 'react';
-import { Stack } from '../..';
 import { Icon } from '../../Icon';
+import { Stack } from '../../Stack';
 import { UNSTABLE_File, UNSTABLE_FileImagePreview } from '../../UNSTABLE_File';
 import { UNSTABLE_FileUpload } from '..';
 import { visualOnlyNoopOnDismiss } from './visualOnlyContext';
 
 const FileUploadInputWithAttachment = () => (
-  <div className="docs-Stack docs-Stack--stretch">
+  <Stack hasSpacing>
     <UNSTABLE_FileUpload
       rootId="example-with-file-list"
       id="file-uploader-with-list"
@@ -57,7 +57,7 @@ const FileUploadInputWithAttachment = () => (
         onDismiss={visualOnlyNoopOnDismiss}
       />
     </Stack>
-  </div>
+  </Stack>
 );
 
 export default FileUploadInputWithAttachment;
