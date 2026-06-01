@@ -1,20 +1,62 @@
 {{#> web/layout/default title="Animations" parentPageName="Helpers" }}
 
+<script>
+  const restartAnimation = (elementId, className) => {
+    const element = document.getElementById(elementId);
+
+    if (!element) {
+      return;
+    }
+
+    element.classList.remove(className);
+    void element.offsetWidth;
+    element.classList.add(className);
+  }
+</script>
+
 <section class="py-900 py-tablet-1000">
 
   <div class="Container">
 
-    <h2 class="docs-Heading">Animations</h2>
+    <h2 class="docs-Heading">Spin</h2>
 
     <div class="docs-Stack docs-Stack--start">
 
       <svg
-        class="animation-spin-clockwise"
+        class="Icon animation-spin-clockwise"
         width="24"
         height="24"
       >
-        <use xlink:href="/assets/icons/svg/sprite.svg#reload" />
+        <use href="/assets/icons/svg/sprite.svg#reload" />
       </svg>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Shake</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <p
+        id="shake-animation-example"
+        class="animation-shake"
+      >
+        Example text with a subtle shake animation.
+      </p>
+
+      <button
+        type="button"
+        onclick="restartAnimation('shake-animation-example', 'animation-shake')"
+      >
+        Restart shake animation
+      </button>
 
     </div>
 

@@ -1,5 +1,6 @@
 $_spin-duration: 1s;
 $_spin-easing: linear;
+$_shake-easing: ease-in-out;
 
 @keyframes spin {
     0% {
@@ -11,6 +12,29 @@ $_spin-easing: linear;
     }
 }
 
-.animation-spin-clockwise {
-    animation: spin $_spin-duration $_spin-easing infinite;
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(calc(-1 * var(--animation-shake-distance, 2px)));
+    }
+
+    40%,
+    80% {
+        transform: translateX(var(--animation-shake-distance, 2px));
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .animation-spin-clockwise {
+        animation: spin $_spin-duration $_spin-easing infinite;
+    }
+
+    .animation-shake {
+        animation: shake var(--animation-shake-duration, 0.4s) $_shake-easing var(--animation-shake-iterations, 2);
+    }
 }
