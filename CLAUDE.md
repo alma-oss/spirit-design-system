@@ -36,9 +36,9 @@ For comprehensive guidelines, see:
 - `docs/contribution/` - Development and contribution guides
 - `docs/decisions/` - Architecture decision records
 
-[agents-code-style]: .agents/instructions/code-style.md
-[agents-git-workflow]: .agents/instructions/git-workflow.md
-[contributing]: CONTRIBUTING.md
-[development-guide-getting-started]: docs/contribution/development.md#getting-started
-[development-guide-common-tasks]: docs/contribution/development.md#common-tasks
-[readme]: README.md
+[agents-code-style]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/instructions/code-style.md
+[agents-git-workflow]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/instructions/git-workflow.md
+[contributing]: https://github.com/alma-oss/spirit-design-system/blob/main/CONTRIBUTING.md
+[development-guide-getting-started]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/development.md#getting-started
+[development-guide-common-tasks]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/development.md#common-tasks
+[readme]: https://github.com/alma-oss/spirit-design-system/blob/main/README.md
