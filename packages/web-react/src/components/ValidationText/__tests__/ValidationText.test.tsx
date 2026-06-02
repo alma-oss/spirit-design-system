@@ -1,16 +1,31 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React, { type ElementType } from 'react';
-import { formFieldContextPropsTest, validHtmlAttributesTest } from '@local/tests';
-import { type SpiritValidationTextProps } from '../../../types';
+import {
+  elementTypePropsTest,
+  formFieldContextPropsTest,
+  restPropsTest,
+  stylePropsTest,
+  validHtmlAttributesTest,
+} from '@local/tests';
+import { PropsProvider } from '../../../context';
+import { FormFieldModes, type SpiritValidationTextProps } from '../../../types';
 import { A11Y_ALERT_ROLE } from '../constants';
 import ValidationText from '../ValidationText';
+
+jest.mock('../../../hooks/useIcon');
 
 const renderValidationText = <E extends ElementType = 'div'>(props: Partial<SpiritValidationTextProps<E>>) =>
   render(<ValidationText {...props} />);
 
 describe('ValidationText', () => {
   validHtmlAttributesTest(ValidationText);
+
+  stylePropsTest((props) => <ValidationText {...props} validationText="validation text" />);
+
+  restPropsTest((props) => <ValidationText {...props} validationText="validation text" />, 'div');
+
+  elementTypePropsTest((props) => <ValidationText {...props} validationText="validation text" />, 'span');
 
   formFieldContextPropsTest({
     renderComponent: (props) => <ValidationText {...props} validationText="validation text" />,
@@ -27,6 +42,12 @@ describe('ValidationText', () => {
     expect(element).not.toHaveAttribute('role', A11Y_ALERT_ROLE);
   });
 
+  it('should not render without validation text', () => {
+    const { container } = renderValidationText({});
+
+    expect(container).toBeEmptyDOMElement();
+  });
+
   it('should render single validation text without alert role', () => {
     renderValidationText({ validationText: 'validation text' });
 
@@ -40,6 +61,46 @@ describe('ValidationText', () => {
     });
 
     expect(screen.getByText('validation text')).toHaveAttribute('role', A11Y_ALERT_ROLE);
+  });
+
+  it('should render validation state icon and class when hasValidationStateIcon is set', () => {
+    renderValidationText({
+      validationText: 'validation text',
+      hasValidationStateIcon: 'danger',
+    });
+
+    const element = screen.getByText('validation text').parentElement as HTMLElement;
+
+    expect(element).toHaveClass('ValidationText', 'ValidationText--danger');
+    expect(element.querySelector('svg')).toHaveClass('Icon');
+    expect(element.querySelector('svg')).toHaveAttribute('width', '20');
+  });
+
+  it('should use context validation state for styles without rendering icon', () => {
+    render(
+      <PropsProvider value={{ validationState: 'warning' }}>
+        <ValidationText validationText="validation text" />
+      </PropsProvider>,
+    );
+
+    const element = screen.getByText('validation text');
+
+    expect(element).toHaveClass('ValidationText--warning');
+    expect(element.querySelector('svg')).not.toBeInTheDocument();
+  });
+
+  it('should use direct validation state icon over context validation state for styles', () => {
+    render(
+      <PropsProvider value={{ validationState: 'warning' }}>
+        <ValidationText validationText="validation text" hasValidationStateIcon="success" />
+      </PropsProvider>,
+    );
+
+    const element = screen.getByText('validation text').parentElement as HTMLElement;
+
+    expect(element).toHaveClass('ValidationText--success');
+    expect(element).not.toHaveClass('ValidationText--warning');
+    expect(element.querySelector('svg')).toHaveClass('Icon');
   });
 
   it('should render multiple validation texts without alert role', () => {
@@ -69,6 +130,24 @@ describe('ValidationText', () => {
     expect(screen.getByRole('list').parentElement).toContainHTML('span');
   });
 
+  it('should render as default div element when elementType is undefined', () => {
+    renderValidationText({
+      validationText: 'validation text',
+      elementType: undefined,
+    });
+
+    expect(screen.getByText('validation text').tagName).toBe('DIV');
+  });
+
+  it('should render inline mode from direct prop', () => {
+    renderValidationText({
+      validationText: 'validation text',
+      formFieldMode: FormFieldModes.INLINE,
+    });
+
+    expect(screen.getByText('validation text')).toHaveClass('ValidationText--inline');
+  });
+
   it('should render with html tags', () => {
     render(
       <ValidationText
@@ -85,6 +164,39 @@ describe('ValidationText', () => {
 
     expect(element).toHaveTextContent('validation text');
     expect(element.innerHTML).toBe('validation <b>text</b>');
+  });
+
+  it('should render with id and registerAria for aria-describedby', () => {
+    const id = 'validation-text-aria-describedby';
+    const register = jest.fn();
+
+    const { unmount } = renderValidationText({
+      id,
+      registerAria: register,
+      validationText: 'validation text',
+    });
+
+    const element = screen.getByText('validation text');
+
+    expect(element).toHaveAttribute('id', id);
+    expect(register).toHaveBeenCalledWith({ add: id });
+
+    unmount();
+
+    expect(register).toHaveBeenCalledWith({ remove: id });
+  });
+
+  it('should register aria when validation text appears after initial render', () => {
+    const id = 'validation-text-lazy-aria-describedby';
+    const register = jest.fn();
+
+    const { rerender } = renderValidationText({ id, registerAria: register });
+
+    expect(register).not.toHaveBeenCalled();
+
+    rerender(<ValidationText id={id} registerAria={register} validationText="validation text" />);
+
+    expect(register).toHaveBeenCalledWith({ add: id });
   });
 
   describe('when rendering multiple validation texts', () => {
