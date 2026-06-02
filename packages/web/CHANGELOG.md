@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.7.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.6.0...@alma-oss/spirit-web@4.7.0) (2026-06-02)
+
+### Features
+
+- **web, web-react:** add popoverProps and labelProps to Picker #DS-2568, closes [#DS-2568](https://github.com/alma-oss/spirit-design-system/issues/DS-2568)
+
+### Styles
+
+- **web:** reformat html due to empty spaces
+
 ## [4.6.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.5.0...@alma-oss/spirit-web@4.6.0) (2026-05-21)
 
 ### Features

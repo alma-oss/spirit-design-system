@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.8.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.7.0...@alma-oss/spirit-web-react@4.8.0) (2026-06-02)
+
+### Features
+
+- **web, web-react:** add popoverProps and labelProps to Picker #DS-2568, closes [#DS-2568](https://github.com/alma-oss/spirit-design-system/issues/DS-2568)
+
+### Code Refactoring
+
+- **web-react:** use Grid and Stack in `UNSTABLE_FileUpload` demos
+
 ## [4.7.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.6.1...@alma-oss/spirit-web-react@4.7.0) (2026-05-21)
 
 ### Features

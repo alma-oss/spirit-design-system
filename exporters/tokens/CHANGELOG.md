@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.1.0...@alma-oss/spirit-tokens-exporter@4.1.1) (2026-06-02)
+
+### Chores
+
+- **exporter-tokens:** rebuild after supernova.io upgrade
+
 ## [4.1.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.0.6...@alma-oss/spirit-tokens-exporter@4.1.0) (2026-05-15)
 
 ### Features

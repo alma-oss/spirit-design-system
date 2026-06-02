@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.0](https://github.com/alma-oss/spirit-design-system/compare/eslint-config-spirit@0.2.1...eslint-config-spirit@0.3.0) (2026-06-02)
+
+### Features
+
+- **eslint-config:** require space before self close
+
 ## [0.2.1](https://github.com/alma-oss/spirit-design-system/compare/eslint-config-spirit@0.2.0...eslint-config-spirit@0.2.1) (2026-05-15)
 
 ### Chores
