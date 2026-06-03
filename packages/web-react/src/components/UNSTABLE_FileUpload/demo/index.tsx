@@ -14,7 +14,7 @@ import FileUploadUploadDisabled from './FileUploadUploadDisabled';
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <IconsProvider value={icons}>
-      <div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
+      <>
         <DocsSection title="FileUpload" stackAlignment="start">
           <FileUploadSimple />
         </DocsSection>
@@ -36,7 +36,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
         <DocsSection title="With File List (UNSTABLE_File)" tag="Visual demo only" stackAlignment="stretch">
           <FileUploadInputWithAttachment />
         </DocsSection>
-      </div>
+      </>
     </IconsProvider>
   </StrictMode>,
 );

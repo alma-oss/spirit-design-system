@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import DocsStack from '../../../../docs/DocsStack';
 import { Grid } from '../../Grid';
 import { Stack } from '../../Stack';
 import { UNSTABLE_File, UNSTABLE_FileImagePreview } from '../../UNSTABLE_File';
@@ -30,45 +31,43 @@ const SimpleUploadColumn = ({ title, inputId, isCompact, name, rootId }: SimpleU
   };
 
   return (
-    <div>
-      <div className="docs-Stack docs-Stack--start">
-        <h3>{title}</h3>
-        <Stack hasSpacing>
-          <UNSTABLE_FileUpload
-            rootId={rootId}
-            id={inputId}
-            helperText="Max file size is 10 MB"
-            isCompact={isCompact}
-            isRequired
-            label="Label"
-            labelText="or drag and drop here"
-            linkText="Upload your file"
-            name={name}
-            onFilesSelected={handleFilesSelected}
-          />
-          <Stack aria-label="Uploaded files" elementType="ul" hasSpacing>
-            {Array.from(fileQueue.entries()).map(([key, item]) => (
-              <UNSTABLE_File
-                key={key}
-                id={key}
-                label={item.label}
-                removeText={`Remove ${item.label} from list`}
-                onDismiss={() => onDismiss(key)}
-                previewSlot={
-                  item.previewUrl ? (
-                    <UNSTABLE_FileImagePreview
-                      imagePreview={item.previewUrl}
-                      label={`Preview of ${item.label}`}
-                      meta={item.meta}
-                    />
-                  ) : undefined
-                }
-              />
-            ))}
-          </Stack>
+    <DocsStack stackAlignment="start">
+      <h3>{title}</h3>
+      <UNSTABLE_FileUpload
+        rootId={rootId}
+        id={inputId}
+        helperText="Max file size is 10 MB"
+        isCompact={isCompact}
+        isRequired
+        label="Label"
+        labelText="or drag and drop here"
+        linkText="Upload your file"
+        name={name}
+        onFilesSelected={handleFilesSelected}
+      />
+      {fileQueue.size > 0 && (
+        <Stack aria-label="Uploaded files" elementType="ul" hasSpacing>
+          {Array.from(fileQueue.entries()).map(([key, item]) => (
+            <UNSTABLE_File
+              key={key}
+              id={key}
+              label={item.label}
+              removeText={`Remove ${item.label} from list`}
+              onDismiss={() => onDismiss(key)}
+              previewSlot={
+                item.previewUrl ? (
+                  <UNSTABLE_FileImagePreview
+                    imagePreview={item.previewUrl}
+                    label={`Preview of ${item.label}`}
+                    meta={item.meta}
+                  />
+                ) : undefined
+              }
+            />
+          ))}
         </Stack>
-      </div>
-    </div>
+      )}
+    </DocsStack>
   );
 };
 
