@@ -31,6 +31,7 @@ ignore = "node scripts/ignoreNetlifyBuilds.js"
 ignore = """\
     git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF \
     ./packages/web-react/ \
+    ./apps/demo/ \
     ./packages/web/ \
     ./.github/workflows/ \
     """
