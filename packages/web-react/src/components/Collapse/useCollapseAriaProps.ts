@@ -1,27 +1,28 @@
-import { useDeprecationMessage } from '../../hooks';
-import { type BaseCollapseProps, type Booleanish, type CollapseProps } from '../../types';
-
-const ATTRIBUTE_ARIA_EXPANDED = 'aria-expanded';
-const ATTRIBUTE_ARIA_CONTROLS = 'aria-controls';
-const ATTRIBUTE_DATA_BREAKPOINT = 'data-spirit-breakpoint';
+import { type DisclosureAria, type DisclosureState, useDeprecationMessage, useDisclosureAria } from '../../hooks';
+import { type BaseCollapseProps, type CollapseProps } from '../../types';
 
 export interface CollapseAria {
   ariaProps: {
-    /** wrapper returned props */
-    root: {
-      [ATTRIBUTE_DATA_BREAKPOINT]: CollapseProps['collapsibleToBreakpoint'];
-    };
     /** trigger returned props */
-    trigger: {
-      [ATTRIBUTE_ARIA_EXPANDED]: Booleanish;
-      [ATTRIBUTE_ARIA_CONTROLS]: string;
-    };
+    trigger: DisclosureAria['triggerProps'];
+    /** panel returned props */
+    panel: DisclosureAria['panelProps'];
   };
   props: BaseCollapseProps;
 }
 
 export const useCollapseAriaProps = (props: CollapseProps): CollapseAria => {
-  const { isOpen, collapsibleToBreakpoint, ...modifiedProps } = props;
+  const { isOpen, ...modifiedProps } = props;
+
+  const state: DisclosureState = {
+    isExpanded: isOpen ?? false,
+    setExpanded: () => {},
+    expand: () => {},
+    collapse: () => {},
+    toggle: () => {},
+  };
+
+  const { triggerProps, panelProps } = useDisclosureAria({ id: modifiedProps.id }, state);
 
   useDeprecationMessage({
     method: 'custom',
@@ -32,13 +33,8 @@ export const useCollapseAriaProps = (props: CollapseProps): CollapseAria => {
 
   return {
     ariaProps: {
-      root: {
-        [ATTRIBUTE_DATA_BREAKPOINT]: collapsibleToBreakpoint,
-      },
-      trigger: {
-        [ATTRIBUTE_ARIA_EXPANDED]: isOpen,
-        [ATTRIBUTE_ARIA_CONTROLS]: String(modifiedProps.id),
-      },
+      trigger: triggerProps,
+      panel: panelProps,
     },
     props: modifiedProps,
   };
