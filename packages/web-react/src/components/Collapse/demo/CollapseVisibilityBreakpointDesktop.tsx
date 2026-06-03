@@ -1,17 +1,17 @@
 import React from 'react';
+import { useDisclosureState } from '../../../hooks/disclosure';
 import { ButtonLink } from '../../Button';
 import Collapse from '../Collapse';
-import { useCollapse } from '../useCollapse';
 
 const CollapseVisibilityBreakpointDesktop = () => {
-  const { isOpen: isOpenDesktop, toggleHandler: toggleHandlerDesktop } = useCollapse(false);
+  const { isExpanded, toggle } = useDisclosureState({ defaultExpanded: false });
 
   return (
     <>
-      <ButtonLink onClick={toggleHandlerDesktop} size="medium" hideFrom="desktop">
+      <ButtonLink onClick={toggle} size="medium" hideFrom="desktop">
         Collapse trigger
       </ButtonLink>
-      <Collapse id="collapse-visibility-breakpoint-desktop-id" isOpen={isOpenDesktop} collapsibleToBreakpoint="desktop">
+      <Collapse id="collapse-visibility-breakpoint-desktop-id" isOpen={isExpanded} collapsibleToBreakpoint="desktop">
         Elementum luctus ultrices, ultrices quam metus a lorem sollicitudin lorem fringilla curabitur felis a, sed urna
         consectetur maximus. Imperdiet donec, elit condimentum dolor ut accumsan congue nulla ut id ante vel arcu, lorem
         fringilla interdum pulvinar nullam. Curabitur interdum, semper donec dui et tempus fusce vitae ornare risus
