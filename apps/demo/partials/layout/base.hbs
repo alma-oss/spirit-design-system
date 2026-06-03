@@ -37,15 +37,71 @@
         themes.push('{{theme.id}}');
       {{/each}}
 
-      const switchTheme = (event) => {
-        const targetElement = document.body;
-        const theme = event.target.value;
+      const THEME_STORAGE_KEY = 'spirit-demo-theme';
 
-        themes.forEach((theme) => {
-          targetElement.classList.remove(`theme-${theme}`);
-        });
-        targetElement.classList.add(`theme-${theme}`);
+      const readStoredTheme = () => {
+        try {
+          return localStorage.getItem(THEME_STORAGE_KEY);
+        } catch (error) {
+          console.error('Failed to read theme from localStorage', error);
+          return null;
+        }
       };
+
+      const storeTheme = (theme) => {
+        try {
+          localStorage.setItem(THEME_STORAGE_KEY, theme);
+        } catch (error) {
+          console.error('Failed to store theme in localStorage', error);
+        }
+      };
+
+      const isThemeAvailable = (theme, availableThemes) => availableThemes.includes(theme);
+
+      let appliedTheme = null;
+
+      const applyTheme = (theme, availableThemes) => {
+        if (!isThemeAvailable(theme, availableThemes)) {
+          return;
+        }
+        // Apply on <html> so the theme is in effect before <body> is parsed (prevents FOUC).
+        const targetElement = document.documentElement;
+        if (appliedTheme) {
+          targetElement.classList.remove(`theme-${appliedTheme}`);
+        }
+        targetElement.classList.add(`theme-${theme}`);
+        appliedTheme = theme;
+      };
+
+      const syncSelects = (theme) => {
+        document.querySelectorAll('[data-theme-switcher]').forEach((select) => {
+          select.value = theme;
+        });
+      };
+
+      const switchTheme = (event) => {
+        const theme = event.currentTarget.value;
+        if (!isThemeAvailable(theme, themes)) {
+          return;
+        }
+        applyTheme(theme, themes);
+        storeTheme(theme);
+        syncSelects(theme);
+      };
+
+      // Apply the persisted theme synchronously, before the browser paints the body.
+      const storedTheme = readStoredTheme();
+      if (storedTheme) {
+        applyTheme(storedTheme, themes);
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const currentTheme = readStoredTheme();
+        if (!currentTheme || !isThemeAvailable(currentTheme, themes)) {
+          return;
+        }
+        syncSelects(currentTheme);
+      });
 
       const allowedOriginPattern = /^https:\/\/([a-zA-Z0-9-]+\.)*supernova-docs\.io$/;
 
