@@ -7,7 +7,7 @@ Variants:
 ```html
 <div class="Alert Alert--success color-scheme-on-emotion-success-subtle">
   <svg class="Icon" width="24" height="24">
-    <use href="/icons/svg/sprite.svg#info" />
+    <use href="/icons/svg/sprite.svg#success" />
   </svg>
   <div>We sent you an activation link to email <strong>spirit@lmc.eu</strong>.</div>
 </div>
@@ -39,7 +39,7 @@ Variants:
 
 <div class="Alert Alert--success Alert--center color-scheme-on-emotion-success-subtle">
   <svg class="Icon" width="24" height="24">
-    <use href="/icons/svg/sprite.svg#info" />
+    <use href="/icons/svg/sprite.svg#success" />
   </svg>
   <div>We sent you an activation link to email <strong>spirit@lmc.eu</strong>.</div>
 </div>
