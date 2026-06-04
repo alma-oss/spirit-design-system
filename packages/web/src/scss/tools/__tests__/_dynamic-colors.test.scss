@@ -25,28 +25,11 @@
                 }
             }
 
+            // prettier-ignore
             @include test.expect() {
                 @supports (color: oklch(from red l c h)) {
                     .test-element {
-                        border-color: oklch(
-                            from var(--spirit-local-background-color)
-                                calc(
-                                    l + var(--spirit-dynamic-color-lightness-delta-border, 0.75) *
-                                        (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)
-                                )
-                                clamp(
-                                    0,
-                                    calc(
-                                        c *
-                                            (
-                                                1 + var(--spirit-dynamic-color-chroma-scale-border, 2) *
-                                                    (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))
-                                            )
-                                    ),
-                                    var(--spirit-dynamic-color-chroma-upper-limit, 0.2)
-                                )
-                                h/100%
-                        );
+                        border-color: var(--spirit-local-border-color-subtle, oklch(from var(--spirit-local-background-color, var(--spirit-color-background-primary)) calc(l + var(--spirit-dynamic-color-lightness-delta-border, 0.75) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-border, 2) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%));
                     }
                 }
             }
@@ -67,8 +50,8 @@
             @include test.expect() {
                 .test-button {
                     @supports (color: oklch(from red l c h)) {
-                        --spirit-local-background-color-state-hover: oklch(from var(--spirit-local-background-color) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-hover, 0.3) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-hover, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
-                        --spirit-local-background-color-state-active: oklch(from var(--spirit-local-background-color) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-active, 0.45) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-active, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
+                        --spirit-local-background-color-state-hover: oklch(from var(--spirit-local-background-color, var(--spirit-color-background-primary)) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-hover, 0.3) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-hover, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
+                        --spirit-local-background-color-state-active: oklch(from var(--spirit-local-background-color, var(--spirit-color-background-primary)) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-active, 0.45) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-active, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
 
                         @media (hover: hover) {
                             &:hover {
@@ -97,8 +80,8 @@
             @include test.expect() {
                 .test-button {
                     @supports (color: oklch(from red l c h)) {
-                        --spirit-local-background-color-state-hover: oklch(from var(--spirit-local-background-color) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-hover, 0.3) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-hover, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
-                        --spirit-local-background-color-state-active: oklch(from var(--spirit-local-background-color) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-active, 0.45) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-active, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
+                        --spirit-local-background-color-state-hover: oklch(from var(--spirit-local-background-color, var(--spirit-color-background-primary)) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-hover, 0.3) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-hover, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
+                        --spirit-local-background-color-state-active: oklch(from var(--spirit-local-background-color, var(--spirit-color-background-primary)) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-active, 0.45) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-active, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
 
                         @media (hover: hover) {
                             &:hover::before {
@@ -127,8 +110,8 @@
             @include test.expect() {
                 .test-button {
                     @supports (color: oklch(from red l c h)) {
-                        --spirit-local-background-color-state-hover: oklch(from var(--spirit-local-background-color) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-hover, 0.3) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-hover, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
-                        --spirit-local-background-color-state-active: oklch(from var(--spirit-local-background-color) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-active, 0.45) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-active, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
+                        --spirit-local-background-color-state-hover: oklch(from var(--spirit-local-background-color, var(--spirit-color-background-primary)) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-hover, 0.3) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-hover, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
+                        --spirit-local-background-color-state-active: oklch(from var(--spirit-local-background-color, var(--spirit-color-background-primary)) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-active, 0.45) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-active, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
 
                         @media (hover: hover) {
                             &:hover::after {
@@ -153,28 +136,11 @@
                 }
             }
 
+            // prettier-ignore
             @include test.expect() {
                 @supports (color: oklch(from red l c h)) {
                     .test-element {
-                        background-color: oklch(
-                            from var(--spirit-local-background-color)
-                                calc(
-                                    l + var(--spirit-dynamic-color-lightness-delta-background-selected, 0.3) *
-                                        (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)
-                                )
-                                clamp(
-                                    0,
-                                    calc(
-                                        c *
-                                            (
-                                                1 + var(--spirit-dynamic-color-chroma-scale-background-selected, 4) *
-                                                    (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))
-                                            )
-                                    ),
-                                    var(--spirit-dynamic-color-chroma-upper-limit, 0.2)
-                                )
-                                h/100%
-                        );
+                        background-color: var(--spirit-local-background-color-state-selected, oklch(from var(--spirit-local-background-color, var(--spirit-color-background-primary)) calc(l + var(--spirit-dynamic-color-lightness-delta-background-selected, 0.3) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-selected, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%));
                     }
                 }
             }

@@ -1,12 +1,26 @@
 // When oklch() is supported by the browser, we can use it to generate dynamic colors.
-// Dynamic colors are based on the `--spirit-local-background-color` variable, which is set by utility classes like
-// `bg-secondary` or `bg-emotion-success-basic`. If `--spirit-local-background-color` is not available, transparent
-// color is used by the browser.
+// Dynamic colors are based on the `--spirit-local-background-color` variable, which is set by color scheme classes
+// (e.g. `color-scheme-on-emotion-success-basic`) or background utility classes (e.g. `bg-secondary`). When neither is
+// applied higher in the DOM, the helpers fall back to the `$background-primary` token so they always produce a usable
+// color.
+//
+// Dynamic colors first try to apply the matching color scheme token and only fall back to a computed color when no
+// appropriate token is found. The exceptions to this rule are:
+//
+// 1. For interactive states, the background color is always computed so the resulting color does not diverge too much
+//    from the background. Hover/active color scheme tokens do exist, but they do not differentiate between the basic
+//    and subtle variant — there is just a single pair of them.
+// 2. When a color scheme is present, borders always use its subtle border color — whether the scheme is a basic or
+//    subtle variant — so the border stands out on a basic background.
 //
 // @see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch
 
 @use '@tokens' as tokens;
 @use 'color-scheme';
+
+// Base background color the dynamic colors are derived from. Falls back to the primary background token so the helpers
+// keep working even when no color scheme or background utility set `--…local-background-color` higher in the DOM.
+$_background-color: color-scheme.background-color(tokens.$background-primary);
 
 // Default coefficients for dynamic color generation (fine-tuned for the default light Spirit theme).
 // Overridable at runtime via the CSS custom properties referenced below.
@@ -75,10 +89,13 @@ $_chroma-upper-limit: var(
 // Mixin to generate dynamic border color.
 @mixin border {
     @supports (color: oklch(from red l c h)) {
-        border-color: alter-color(
-            $color: color-scheme.background-color(),
-            $lightness-delta: $_lightness-delta-border,
-            $chroma-scale: $_chroma-scale-border
+        // 2.
+        border-color: color-scheme.border-color-subtle(
+            alter-color(
+                $color: $_background-color,
+                $lightness-delta: $_lightness-delta-border,
+                $chroma-scale: $_chroma-scale-border
+            )
         );
     }
 }
@@ -88,25 +105,26 @@ $_chroma-upper-limit: var(
 // * $target: which element to target, e.g. a pseudo-selector: `::before`
 @mixin background-interactive($target: '') {
     @supports (color: oklch(from red l c h)) {
+        // 1.
         --#{tokens.$css-variable-prefix}local-background-color-state-hover: #{alter-color(
-                $color: color-scheme.background-color(),
+                $color: $_background-color,
                 $lightness-delta: $_lightness-delta-background-state-hover,
                 $chroma-scale: $_chroma-scale-background-state-hover
             )};
         --#{tokens.$css-variable-prefix}local-background-color-state-active: #{alter-color(
-                $color: color-scheme.background-color(),
+                $color: $_background-color,
                 $lightness-delta: $_lightness-delta-background-state-active,
                 $chroma-scale: $_chroma-scale-background-state-active
             )};
 
         @media (hover: hover) {
             &:hover#{$target} {
-                background-color: var(--#{tokens.$css-variable-prefix}local-background-color-state-hover);
+                background-color: color-scheme.background-color-state-hover();
             }
         }
 
         &:active#{$target} {
-            background-color: var(--#{tokens.$css-variable-prefix}local-background-color-state-active);
+            background-color: color-scheme.background-color-state-active();
         }
     }
 }
@@ -114,10 +132,12 @@ $_chroma-upper-limit: var(
 // Mixin to generate dynamic background color for selected items.
 @mixin background-selected {
     @supports (color: oklch(from red l c h)) {
-        background-color: alter-color(
-            $color: color-scheme.background-color(),
-            $lightness-delta: $_lightness-delta-background-selected,
-            $chroma-scale: $_chroma-scale-background-selected
+        background-color: color-scheme.background-color-state-selected(
+            alter-color(
+                $color: $_background-color,
+                $lightness-delta: $_lightness-delta-background-selected,
+                $chroma-scale: $_chroma-scale-background-selected
+            )
         );
     }
 }
