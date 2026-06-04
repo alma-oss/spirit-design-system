@@ -40,9 +40,7 @@ See Validation state [dictionary][dictionary-validation].
   />
   <div class="Checkbox__text">
     <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
-    <div class="ValidationText ValidationText--warning ValidationText--inline" id="checkbox-warning-helper-text">
-      Warning validation text
-    </div>
+    <div class="ValidationText ValidationText--warning" id="checkbox-warning-helper-text">Warning validation text</div>
   </div>
 </div>
 
@@ -56,7 +54,7 @@ See Validation state [dictionary][dictionary-validation].
   />
   <div class="Checkbox__text">
     <label class="Label Label--inline" for="checkbox-danger">Checkbox Label</label>
-    <div class="ValidationText ValidationText--danger ValidationText--inline" id="checkbox-danger-helper-text">
+    <div class="ValidationText ValidationText--danger" id="checkbox-danger-helper-text">
       <ul>
         <li>First validation text</li>
         <li>Second validation text</li>
@@ -75,7 +73,7 @@ See Validation state [dictionary][dictionary-validation].
   />
   <div class="Checkbox__text">
     <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
-    <div class="ValidationText ValidationText--warning ValidationText--inline" id="checkbox-warning-helper-text">
+    <div class="ValidationText ValidationText--warning" id="checkbox-warning-helper-text">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use href="/assets/icons/svg/sprite.svg#warning" />
       </svg>
