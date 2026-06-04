@@ -49,6 +49,8 @@ export type FormFieldStyleProps = Pick<FormFieldContextValue, 'formFieldMode' | 
 export type LabelStyleProps = FormFieldStyleProps &
   Pick<FormFieldContextValue, 'isLabelHidden' | 'isRequired' | 'isItem'>;
 
+export type ValidationTextStyleProps = Pick<FormFieldContextValue, 'isDisabled'>;
+
 export interface Validation {
   /** Whether the input should display its "valid" or "invalid" visual styling. */
   validationState?: ValidationState;
