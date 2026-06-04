@@ -32,6 +32,7 @@ packages/*/build
 /test-results/
 /playwright-report/
 /playwright/.cache/
+.playwright-mcp/
 
 # Narwall Nx
 # Use `nc-cloud.env ` to store the `NX_CLOUD_ACCESS_TOKEN` for connection to the Nx Cloud.
