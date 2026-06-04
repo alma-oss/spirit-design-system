@@ -5,7 +5,7 @@ export function useValidationIcon({
   hasValidationStateIcon,
 }: Pick<SpiritValidationTextProps, 'hasValidationStateIcon'>) {
   const iconNameValue = useIconName(hasValidationStateIcon as string, {
-    success: 'check-plain',
+    success: 'success',
     warning: 'warning',
     danger: 'danger',
   });
