@@ -1,5 +1,4 @@
 import { renderHook } from '@testing-library/react';
-import { FormFieldModes } from '../../../types';
 import { useValidationTextStyleProps } from '../useValidationTextStyleProps';
 
 describe('useValidationTextStyleProps', () => {
@@ -32,15 +31,5 @@ describe('useValidationTextStyleProps', () => {
     const { result } = renderHook(() => useValidationTextStyleProps({ isDisabled: true }));
 
     expect(result.current.classProps).toContain('ValidationText--disabled');
-  });
-
-  it('should return inline class when formFieldMode is inline', () => {
-    const { result } = renderHook(() =>
-      useValidationTextStyleProps({
-        formFieldMode: FormFieldModes.INLINE,
-      }),
-    );
-
-    expect(result.current.classProps).toContain('ValidationText--inline');
   });
 });

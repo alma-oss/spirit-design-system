@@ -86,8 +86,8 @@ ValidationText works seamlessly with Spirit form components:
 
 **Inline Fields:**
 
-- [Checkbox][checkbox] — Single checkbox (use with `ValidationText--inline` modifier)
-- [Toggle][toggle] — Toggle switch (use with `ValidationText--inline` modifier)
+- [Checkbox][checkbox] — Single checkbox
+- [Toggle][toggle] — Toggle switch
 
 **Field Groups:**
 
@@ -107,15 +107,12 @@ ValidationText works seamlessly with Spirit form components:
 
 ### Inline Field (Checkbox and Toggle)
 
-Use the `ValidationText--inline` modifier class when ValidationText is inside an inline field (Checkbox and Toggle).
-It creates a stacking context so the validation text sits above the stretched label, keeping the text selectable and links clickable.
-
 ```html
 <div class="Checkbox Checkbox--inputPositionStart Checkbox--danger">
   <input type="checkbox" id="example" class="Checkbox__input" name="example" />
   <div class="Checkbox__text">
     <label class="Label Label--inline" for="example">Checkbox Label</label>
-    <div class="ValidationText ValidationText--danger ValidationText--inline">Danger validation text</div>
+    <div class="ValidationText ValidationText--danger">Danger validation text</div>
   </div>
 </div>
 ```

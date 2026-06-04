@@ -9,7 +9,7 @@ import {
   validHtmlAttributesTest,
 } from '@local/tests';
 import { PropsProvider } from '../../../context';
-import { FormFieldModes, type SpiritValidationTextProps } from '../../../types';
+import { type SpiritValidationTextProps } from '../../../types';
 import { A11Y_ALERT_ROLE } from '../constants';
 import ValidationText from '../ValidationText';
 
@@ -30,6 +30,8 @@ describe('ValidationText', () => {
   formFieldContextPropsTest({
     renderComponent: (props) => <ValidationText {...props} validationText="validation text" />,
     text: 'validation text',
+    includeInlineMode: false,
+    includeItemMode: false,
     classNamePrefix: 'ValidationText',
   });
 
@@ -137,15 +139,6 @@ describe('ValidationText', () => {
     });
 
     expect(screen.getByText('validation text').tagName).toBe('DIV');
-  });
-
-  it('should render inline mode from direct prop', () => {
-    renderValidationText({
-      validationText: 'validation text',
-      formFieldMode: FormFieldModes.INLINE,
-    });
-
-    expect(screen.getByText('validation text')).toHaveClass('ValidationText--inline');
   });
 
   it('should render with html tags', () => {
