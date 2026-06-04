@@ -10,49 +10,49 @@ describe('useControlButtonStyleProps', () => {
       false,
       false,
       false,
-      'ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border',
+      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border',
     ],
     [
       'small',
       false,
       false,
       false,
-      'ControlButton ControlButton--small dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border',
+      'ControlButton ControlButton--small text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border',
     ],
     [
       'large',
       false,
       false,
       false,
-      'ControlButton ControlButton--large dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border',
+      'ControlButton ControlButton--large text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border',
     ],
     [
       'medium',
       true,
       false,
       false,
-      'ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target ControlButton--disabled ControlButton--hasBackground dynamic-color-border',
+      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--disabled ControlButton--hasBackground dynamic-color-border',
     ],
     [
       'medium',
       false,
       true,
       false,
-      'ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target',
+      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target',
     ],
     [
       'medium',
       false,
       false,
       true,
-      'ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical',
+      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical',
     ],
     [
       'medium',
       true,
       true,
       true,
-      'ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target ControlButton--disabled ControlButton--symmetrical',
+      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--disabled ControlButton--symmetrical',
     ],
   ])('should return classes', (size, isDisabled, isSubtle, isSymmetrical, expectedClasses) => {
     const props = { size, isDisabled, isSubtle, isSymmetrical } as SpiritControlButtonProps;
@@ -107,7 +107,7 @@ describe('useControlButtonStyleProps', () => {
     const { result } = renderHook(() => useControlButtonStyleProps(props));
 
     expect(result.current.classProps).toBe(
-      'ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical',
+      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical',
     );
   });
 
@@ -119,7 +119,7 @@ describe('useControlButtonStyleProps', () => {
     const { result } = renderHook(() => useControlButtonStyleProps(props));
 
     expect(result.current.classProps).toBe(
-      'ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical ControlButton--tablet--asymmetrical ControlButton--desktop--symmetrical',
+      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical ControlButton--tablet--asymmetrical ControlButton--desktop--symmetrical',
     );
   });
 
@@ -131,7 +131,7 @@ describe('useControlButtonStyleProps', () => {
     const { result } = renderHook(() => useControlButtonStyleProps(props));
 
     expect(result.current.classProps).toBe(
-      'ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--tablet--symmetrical ControlButton--desktop--symmetrical',
+      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--tablet--symmetrical ControlButton--desktop--symmetrical',
     );
   });
 
@@ -143,7 +143,7 @@ describe('useControlButtonStyleProps', () => {
     const { result } = renderHook(() => useControlButtonStyleProps(props));
 
     expect(result.current.classProps).toBe(
-      'ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border',
+      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border',
     );
   });
 
