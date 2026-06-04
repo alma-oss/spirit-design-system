@@ -13,7 +13,7 @@ describe('useAlertIcon', () => {
   it.each([
     // color, expected icon name
     ['informative', 'info'],
-    ['success', 'check-plain'],
+    ['success', 'success'],
     ['warning', 'warning'],
     ['danger', 'danger'],
   ])('should return icons based on color', (color, iconName) => {
