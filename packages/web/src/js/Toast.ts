@@ -35,7 +35,7 @@ const COLOR_ICON_MAP = {
   danger: 'danger',
   informative: 'info',
   neutral: 'info',
-  success: 'check-plain',
+  success: 'success',
   warning: 'warning',
 };
 

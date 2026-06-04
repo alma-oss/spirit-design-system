@@ -29,13 +29,13 @@ The `underlined="always"` prop is recommended for accessibility to ensure links 
 
 ## Default Icons According to Color Variant
 
-| Color name    | Icon name     |
-| ------------- | ------------- |
-| `danger`      | `danger`      |
-| `default`     | `info`        |
-| `informative` | `info`        |
-| `success`     | `check-plain` |
-| `warning`     | `warning`     |
+| Color name    | Icon name |
+| ------------- | --------- |
+| `danger`      | `danger`  |
+| `default`     | `info`    |
+| `informative` | `info`    |
+| `success`     | `success` |
+| `warning`     | `warning` |
 
 ## API
 

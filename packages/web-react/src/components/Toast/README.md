@@ -188,13 +188,13 @@ Alternatively, a custom icon can be used:
 
 #### Default Icons According to Color Variant
 
-| Color name    | Icon name     |
-| ------------- | ------------- |
-| `danger`      | `danger`      |
-| `informative` | `info`        |
-| `neutral`     | `info`        |
-| `success`     | `check-plain` |
-| `warning`     | `warning`     |
+| Color name    | Icon name |
+| ------------- | --------- |
+| `danger`      | `danger`  |
+| `informative` | `info`    |
+| `neutral`     | `info`    |
+| `success`     | `success` |
+| `warning`     | `warning` |
 
 ### ToastBar Components
 
