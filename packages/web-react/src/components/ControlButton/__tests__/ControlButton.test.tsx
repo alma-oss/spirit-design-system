@@ -39,6 +39,7 @@ describe('ControlButton', () => {
     expect(element).toHaveClass('dynamic-color-background-interactive');
     expect(element).toHaveClass('dynamic-color-border');
     expect(element).toHaveClass('accessibility-tap-target');
+    expect(element).toHaveClass('text-color-scheme');
   });
 
   it('should apply size class from context when prop is not provided', () => {
