@@ -1,7 +1,7 @@
 # ControlButton
 
 ControlButton is ideal for interfaces where buttons aren't meant to draw a lot of attention.
-It uses a lighter visual design than [Button][button] and adapts to its background color context.
+It uses a lighter visual design than [Button][button] and reacts to the color scheme of its surroundings.
 
 ## When to Use ControlButton
 
@@ -112,20 +112,30 @@ To turn off symmetrical from a specific breakpoint onwards, set the value to `fa
 </ControlButton>
 ```
 
-## Adapting to Background Colors
+## Reacting to Color Schemes
 
-ControlButtons automatically adapt to their parent's background color using the dynamic color system.
-Set a background and text color on the parent element:
+ControlButton reacts to the color scheme of its context. Set a `colorScheme` on a parent element and
+the button derives its colors from that scheme using the dynamic color system:
 
 ```tsx
-<Box backgroundColor="emotion-informative-basic" textColor="emotion-informative-subtle">
+<Box colorScheme="emotion-informative-basic">
   <ControlButton isSymmetrical aria-label="Close">
     <Icon name="close" />
   </ControlButton>
 </Box>
 ```
 
-This works with any pair of available background and text colors.
+This works with any available color scheme.
+
+ControlButton reads these values from the active color scheme:
+
+- **content color** (`--spirit-local-color`) — the icon and text color
+- **background color** (`--spirit-local-background-color`) — visible in the default variant, hidden with `isSubtle`
+- **subtle border color** (`--spirit-local-border-color-subtle`) — visible in the default variant, hidden with `isSubtle`
+
+ControlButton always uses the **subtle** border color so the border stands out on a basic background, and it
+**computes** the interactive (hover and active) state colors from the background color instead of reading them from
+the scheme.
 
 ## Disabled State
 
@@ -138,7 +148,8 @@ Use the `isDisabled` prop to disable a ControlButton:
 ```
 
 The `isDisabled` prop sets both the native `disabled` attribute and the `ControlButton--disabled` class,
-ensuring proper behavior. To achieve proper styles, use `color-scheme-on-disabled` class on the parent element or directly on the ControlButton.
+ensuring proper behavior. To achieve proper styles, use the `color-scheme-on-disabled` class on the parent element or
+directly on the ControlButton.
 
 ### Color Scheme for Disabled State
 

@@ -31,12 +31,16 @@ export function useControlButtonStyleProps<T extends ElementType = 'button', S =
   const dynamicColorBackgroundInteractiveClass = useClassNamePrefix('dynamic-color-background-interactive');
   const dynamicColorBorderClass = useClassNamePrefix('dynamic-color-border');
   const accessibilityTapTargetClass = useClassNamePrefix('accessibility-tap-target');
+  // Baked in so the content always picks up the active color scheme — including when the scheme is applied on the
+  // ControlButton itself (e.g. `color-scheme-on-disabled`), where there is no parent to provide the content color.
+  const textColorSchemeClass = useClassNamePrefix('text-color-scheme');
 
   const { symmetricalClassName } = useSymmetry(controlButtonClass, isSymmetrical);
 
   const classProps = classNames(
     controlButtonClass,
     getControlButtonSizeClassname(controlButtonClass, size as SizeExtendedDictionaryType | S),
+    textColorSchemeClass,
     dynamicColorBackgroundInteractiveClass,
     accessibilityTapTargetClass,
     {

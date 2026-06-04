@@ -1,7 +1,7 @@
 # ControlButton
 
 ControlButton is ideal for interfaces where buttons aren't meant to draw a lot of attention.
-It uses a lighter visual design than [Button][button] and adapts to its background color context.
+It uses a lighter visual design than [Button][button] and reacts to the color scheme of its surroundings.
 
 ## When to Use ControlButton
 
@@ -32,7 +32,7 @@ ControlButtons are composed using component styles and helper classes:
 
 ### Required Helper Classes
 
-- `dynamic-color-background-interactive` — Provides hover/active states that adapt to the parent background
+- `dynamic-color-background-interactive` — Provides hover/active states that adapt to the active color scheme
 
 ### Recommended Classes
 
@@ -40,16 +40,16 @@ ControlButtons are composed using component styles and helper classes:
 
 ### Optional Classes
 
-- `dynamic-color-border` — Adapts the border color to the parent background
+- `dynamic-color-border` — Adapts the border color to the active color scheme
 
-## Adapting to Background Colors
+## Reacting to Color Schemes
 
-ControlButtons automatically adapt to their parents' background color using the
-[dynamic color system][dynamic-color]. Set a background and text color on the
-parent element:
+ControlButton reacts to the color scheme of its context. Apply a `color-scheme-on-*` class to a
+parent element (or directly to the ControlButton) and the button derives its colors from that scheme
+using the [dynamic color system][dynamic-color]:
 
 ```html
-<div class="bg-emotion-informative-basic text-emotion-informative-subtle">
+<div class="color-scheme-on-emotion-informative-basic">
   <button
     type="button"
     class="ControlButton ControlButton--medium dynamic-color-background-interactive accessibility-tap-target"
@@ -62,7 +62,17 @@ parent element:
 </div>
 ```
 
-This works with any pair of available background and text colors.
+This works with any available color scheme.
+
+ControlButton reads these values from the active color scheme:
+
+- **content color** (`--spirit-local-color`) — the icon and text color
+- **background color** (`--spirit-local-background-color`) — visible with the `ControlButton--hasBackground` modifier
+- **subtle border color** (`--spirit-local-border-color-subtle`) — visible with the `dynamic-color-border` helper
+
+ControlButton always uses the **subtle** border color so the border stands out on a basic background, and it
+**computes** the interactive (hover and active) state colors from the background color instead of reading them from
+the scheme.
 
 ## Variants
 
@@ -70,8 +80,8 @@ This works with any pair of available background and text colors.
 
 Add the `ControlButton--hasBackground` modifier class to the button to make
 the background visible in the default state. The modifier class reads the
-`--spirit-local-background-color` CSS variable which is typically provided by
-`bg-*` utility class.
+`--spirit-local-background-color` CSS variable which is provided by the active
+color scheme (e.g. a `color-scheme-on-*` class).
 
 ```html
 <button
@@ -222,7 +232,8 @@ Symmetrical on mobile and tablet, not on desktop (combine breakpoint-specific cl
 ## Disabled State
 
 Use the `disabled` attribute to disable a ControlButton. This will also apply the `ControlButton--disabled` class, ensuring proper behavior.
-To achieve proper styles, use `color-scheme-on-disabled` class on the parent element or directly on the ControlButton.
+To achieve proper styles, use the `color-scheme-on-disabled` class on the parent element, or directly on the
+ControlButton together with the `text-color-scheme` utility class so its content color is applied.
 
 ### Color Scheme for Disabled State
 
@@ -259,7 +270,7 @@ To achieve proper styles, use `color-scheme-on-disabled` class on the parent ele
 ```html
 <button
   type="button"
-  class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target color-scheme-on-disabled"
+  class="ControlButton ControlButton--medium ControlButton--symmetrical color-scheme-on-disabled text-color-scheme dynamic-color-background-interactive accessibility-tap-target"
   aria-label="Close"
   disabled
 >
