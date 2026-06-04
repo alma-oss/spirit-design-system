@@ -15,7 +15,7 @@ describe('useToastIcon', () => {
     ['danger', 'danger'],
     ['informative', 'info'],
     ['neutral', 'info'],
-    ['success', 'check-plain'],
+    ['success', 'success'],
     ['warning', 'warning'],
   ])('danger alert should return warning icon', (color, iconName) => {
     const props = { color } as Partial<SpiritToastBarProps>;
