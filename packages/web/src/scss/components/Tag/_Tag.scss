@@ -4,7 +4,6 @@
 @use '../../tools/component-color-overrides';
 @use '../../tools/dictionaries';
 @use '../../tools/dynamic-colors';
-@use '../../tools/pseudo-element';
 @use '../../tools/reset';
 @use '../../tools/typography';
 @use 'theme';
@@ -63,15 +62,7 @@
 );
 
 .Tag:is(a, button) {
-    @include pseudo-element.stretch($set-root-relative: true, $z-index: -1);
-    @include dynamic-colors.background-interactive($target: '::before');
-
-    z-index: 0;
-
-    &::before {
-        border-radius: calc(#{theme.$border-radius} - #{theme.$border-width});
-        background-color: transparent;
-    }
+    @include dynamic-colors.background-interactive();
 }
 
 .Tag:is(a) {
