@@ -4,6 +4,7 @@
  * The xlink:href attribute was deprecated in SVG 2.0 in favor of plain `href`.
  * This rule detects its usage across:
  *   - JSX attributes (xlink:href="..." or xlinkHref="...")
+ *   - HTML attributes (xlink:href="...") via @html-eslint/parser
  *   - String/template literals containing xlink:href (e.g. in dangerouslySetInnerHTML or raw HTML)
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/xlink:href
@@ -28,6 +29,8 @@ const rule = {
         "Deprecated SVG attribute 'xlink:href' found. Use 'href' instead.",
       jsxCamelCaseAttr:
         "Deprecated SVG attribute 'xlinkHref' (camelCase form of xlink:href) found. Use 'href' instead.",
+      htmlNamespacedAttr:
+        "Deprecated SVG attribute 'xlink:href' found. Use 'href' instead.",
       stringLiteral:
         "Deprecated SVG attribute 'xlink:href' found in string. Use 'href' instead.",
     },
@@ -113,6 +116,24 @@ const rule = {
       TemplateLiteral(node) {
         for (const quasi of node.quasis) {
           checkStringForXlinkHref(node, quasi.value.raw);
+        }
+      },
+
+      // ── HTML (via @html-eslint/parser) ───────────────
+      Attribute(node) {
+        const key = node && node.key;
+        if (
+          key &&
+          typeof key.value === "string" &&
+          key.value.toLowerCase() === "xlink:href"
+        ) {
+          context.report({
+            node,
+            messageId: "htmlNamespacedAttr",
+            fix(fixer) {
+              return fixer.replaceText(key, "href");
+            },
+          });
         }
       },
     };

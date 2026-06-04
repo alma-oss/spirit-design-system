@@ -2,6 +2,7 @@
 
 const { describe, it } = require('node:test');
 const { RuleTester } = require('eslint');
+const htmlParser = require('@html-eslint/parser');
 const rule = require('../no-xlink-href');
 
 RuleTester.describe = describe;
@@ -13,6 +14,12 @@ const tester = new RuleTester({
     parserOptions: {
       ecmaFeatures: { jsx: true },
     },
+  },
+});
+
+const htmlTester = new RuleTester({
+  languageOptions: {
+    parser: htmlParser,
   },
 });
 
@@ -76,6 +83,26 @@ tester.run('no-xlink-href', rule, {
     {
       code: "const svg = `<image xlink:href=\"${src}\" />`",
       errors: [{ messageId: 'stringLiteral' }],
+    },
+  ],
+});
+
+htmlTester.run('no-xlink-href (html)', rule, {
+  valid: [
+    { code: `<svg><use href="#icon"></use></svg>` },
+    { code: `<a href="/somewhere">link</a>` },
+  ],
+
+  invalid: [
+    {
+      code: `<svg><use xlink:href="#icon"></use></svg>`,
+      errors: [{ messageId: 'htmlNamespacedAttr' }],
+      output: `<svg><use href="#icon"></use></svg>`,
+    },
+    {
+      code: `<svg><image xlink:href="photo.png" /></svg>`,
+      errors: [{ messageId: 'htmlNamespacedAttr' }],
+      output: `<svg><image href="photo.png" /></svg>`,
     },
   ],
 });
