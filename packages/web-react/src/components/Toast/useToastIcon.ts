@@ -9,7 +9,7 @@ export function useToastIcon({ color, iconName }: Partial<SpiritToastBarProps>) 
       danger: 'danger',
       informative: 'info',
       neutral: 'info',
-      success: 'check-plain',
+      success: 'success',
       warning: 'warning',
     },
     DEFAULT_TOAST_COLOR,

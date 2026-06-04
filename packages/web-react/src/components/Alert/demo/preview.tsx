@@ -18,7 +18,7 @@ export const Preview = () => (
       <DocsSection title="Alert Centered" stackAlignment="stretch">
         <AlertCentered />
       </DocsSection>
-      <DocsSection title="Alert Icons" stackAlignment="stretch">
+      <DocsSection title="Alert with Custom Icons" stackAlignment="stretch">
         <AlertIcons />
       </DocsSection>
     </IconsProvider>

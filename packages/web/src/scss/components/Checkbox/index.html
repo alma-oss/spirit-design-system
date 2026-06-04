@@ -316,11 +316,7 @@
               height="20"
               aria-hidden="true"
             >
-              {{#if (eq state "success")}}
-              <use href="/assets/icons/svg/sprite.svg#check-plain" />
-              {{else}}
               <use href="/assets/icons/svg/sprite.svg#{{ state }}" />
-              {{/if}}
             </svg>
             <span>This is {{ state }} validation text.</span>
           </div>
