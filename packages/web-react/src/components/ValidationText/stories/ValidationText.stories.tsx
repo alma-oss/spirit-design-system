@@ -2,7 +2,6 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import { ValidationStates } from '../../../constants';
-import { FormFieldModes } from '../../../types';
 import ReadMe from '../README.md?raw';
 import { ValidationText } from '..';
 
@@ -20,10 +19,6 @@ const meta: Meta<typeof ValidationText> = {
       table: {
         defaultValue: { summary: 'div' },
       },
-    },
-    formFieldMode: {
-      control: 'select',
-      options: Object.values(FormFieldModes),
     },
     isDisabled: {
       control: 'boolean',

@@ -101,9 +101,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 <div class="Toggle Toggle--inputPositionEnd Toggle--warning">
   <div class="Toggle__text">
     <label class="Label Label--inline" for="toggle-warning">Toggle Label</label>
-    <div class="ValidationText ValidationText--warning ValidationText--inline" id="toggle-warning-validation-text">
-      Validation text
-    </div>
+    <div class="ValidationText ValidationText--warning" id="toggle-warning-validation-text">Validation text</div>
   </div>
   <input
     type="checkbox"
@@ -118,7 +116,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 <div class="Toggle Toggle--inputPositionEnd Toggle--danger">
   <div class="Toggle__text">
     <label for="toggle-danger" class="Label Label--inline">Toggle Label</label>
-    <ul class="ValidationText ValidationText--danger ValidationText--inline" id="toggle-danger-validation-text">
+    <ul class="ValidationText ValidationText--danger" id="toggle-danger-validation-text">
       <li>First validation text</li>
       <li>Second validation text</li>
     </ul>
@@ -135,7 +133,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 <div class="Toggle Toggle--inputPositionEnd Toggle--warning">
   <div class="Toggle__text">
     <label class="Label Label--inline" for="toggle-warning">Toggle Label</label>
-    <div class="ValidationText ValidationText--warning ValidationText--inline" id="toggle-warning-validation-text">
+    <div class="ValidationText ValidationText--warning" id="toggle-warning-validation-text">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use href="/assets/icons/svg/sprite.svg#warning" />
       </svg>
