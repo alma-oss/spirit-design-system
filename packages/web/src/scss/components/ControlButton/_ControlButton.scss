@@ -1,5 +1,8 @@
 // 1. Mobile breakpoint does not have an infix and we do not need asymmetrical classes for it, because the
 //    default is already asymmetrical.
+// 2. Setting the background color this way is not systematic (ControlButton does not set any other colors), but we
+//    cannot use the existing `.bg-color-scheme` utility class which applies !important and thus would prevent
+//    `.dynamic-color-background-interactive` (which does not apply !important) from working.
 
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
@@ -33,7 +36,6 @@ $_component-name-infix: spirit-string.convert-pascal-case-to-kebab-case($_compon
     height: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-height);
     padding-inline: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-padding-x);
     padding-block: var(--#{tokens.$css-variable-prefix}#{$_component-name-infix}-padding-y);
-    color: color-scheme.color();
     border: theme.$border-width theme.$border-style transparent;
     border-radius: theme.$border-radius;
     user-select: none;
@@ -45,6 +47,7 @@ $_component-name-infix: spirit-string.convert-pascal-case-to-kebab-case($_compon
     }
 }
 
+// 2.
 .ControlButton--hasBackground {
     background-color: color-scheme.background-color();
 }
