@@ -10,6 +10,7 @@
                 emotion-danger-basic: (
                     color: var(--spirit-color-emotion-danger-content-subtle),
                     border-color: var(--spirit-color-emotion-danger-border-basic),
+                    border-color-subtle: var(--spirit-color-emotion-danger-border-subtle),
                     background-color: var(--spirit-color-emotion-danger-background-basic),
                     background-color-state-hover: var(--spirit-color-emotion-danger-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-danger-state-active),
@@ -17,6 +18,7 @@
                 emotion-danger-subtle: (
                     color: var(--spirit-color-emotion-danger-content-basic),
                     border-color: var(--spirit-color-emotion-danger-border-subtle),
+                    border-color-subtle: var(--spirit-color-emotion-danger-border-subtle),
                     background-color: var(--spirit-color-emotion-danger-background-subtle),
                     background-color-state-hover: var(--spirit-color-emotion-danger-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-danger-state-active),
@@ -24,6 +26,7 @@
                 emotion-informative-basic: (
                     color: var(--spirit-color-emotion-informative-content-subtle),
                     border-color: var(--spirit-color-emotion-informative-border-basic),
+                    border-color-subtle: var(--spirit-color-emotion-informative-border-subtle),
                     background-color: var(--spirit-color-emotion-informative-background-basic),
                     background-color-state-hover: var(--spirit-color-emotion-informative-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-informative-state-active),
@@ -31,6 +34,7 @@
                 emotion-informative-subtle: (
                     color: var(--spirit-color-emotion-informative-content-basic),
                     border-color: var(--spirit-color-emotion-informative-border-subtle),
+                    border-color-subtle: var(--spirit-color-emotion-informative-border-subtle),
                     background-color: var(--spirit-color-emotion-informative-background-subtle),
                     background-color-state-hover: var(--spirit-color-emotion-informative-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-informative-state-active),
@@ -38,6 +42,7 @@
                 emotion-success-basic: (
                     color: var(--spirit-color-emotion-success-content-subtle),
                     border-color: var(--spirit-color-emotion-success-border-basic),
+                    border-color-subtle: var(--spirit-color-emotion-success-border-subtle),
                     background-color: var(--spirit-color-emotion-success-background-basic),
                     background-color-state-hover: var(--spirit-color-emotion-success-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-success-state-active),
@@ -45,6 +50,7 @@
                 emotion-success-subtle: (
                     color: var(--spirit-color-emotion-success-content-basic),
                     border-color: var(--spirit-color-emotion-success-border-subtle),
+                    border-color-subtle: var(--spirit-color-emotion-success-border-subtle),
                     background-color: var(--spirit-color-emotion-success-background-subtle),
                     background-color-state-hover: var(--spirit-color-emotion-success-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-success-state-active),
@@ -52,6 +58,7 @@
                 emotion-warning-basic: (
                     color: var(--spirit-color-emotion-warning-content-subtle),
                     border-color: var(--spirit-color-emotion-warning-border-basic),
+                    border-color-subtle: var(--spirit-color-emotion-warning-border-subtle),
                     background-color: var(--spirit-color-emotion-warning-background-basic),
                     background-color-state-hover: var(--spirit-color-emotion-warning-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-warning-state-active),
@@ -59,6 +66,7 @@
                 emotion-warning-subtle: (
                     color: var(--spirit-color-emotion-warning-content-basic),
                     border-color: var(--spirit-color-emotion-warning-border-subtle),
+                    border-color-subtle: var(--spirit-color-emotion-warning-border-subtle),
                     background-color: var(--spirit-color-emotion-warning-background-subtle),
                     background-color-state-hover: var(--spirit-color-emotion-warning-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-warning-state-active),
@@ -99,6 +107,32 @@
                     --spirit-local-border-color: #0f0;
                     --spirit-local-background-color: #f00;
                 }
+            }
+        }
+    }
+}
+
+@include test.describe('background-color function') {
+    @include test.it('should return the local background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.background-color();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.background-color(#f00);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color, #f00);
             }
         }
     }

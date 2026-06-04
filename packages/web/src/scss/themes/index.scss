@@ -1,5 +1,5 @@
 @use '@themes' as themes;
-@use '../tools/color-scheme' as color-scheme;
+@use '../tools/color-scheme';
 @use '../tools/themes' as themes-tools;
 
 @include themes-tools.generate($themes: themes.$themes);
