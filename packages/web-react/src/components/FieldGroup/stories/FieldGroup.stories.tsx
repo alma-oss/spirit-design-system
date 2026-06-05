@@ -15,7 +15,7 @@ const meta: Meta<typeof FieldGroup> = {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,
     },
-    controls: { exclude: ['hasValidationStateIcon'] },
+    controls: { exclude: ['validationStateIcon'] },
   },
   argTypes: {
     children: {

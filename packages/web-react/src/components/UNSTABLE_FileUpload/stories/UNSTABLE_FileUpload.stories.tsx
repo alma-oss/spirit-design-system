@@ -24,7 +24,7 @@ const meta: Meta<typeof UNSTABLE_FileUpload> = {
       page: () => <Markdown>{ReadMe}</Markdown>,
     },
     controls: {
-      exclude: ['hasValidationStateIcon', 'onFilesSelected', 'dropZoneRef', 'inputRef', 'children'],
+      exclude: ['validationStateIcon', 'onFilesSelected', 'dropZoneRef', 'inputRef', 'children'],
     },
   },
   argTypes: {

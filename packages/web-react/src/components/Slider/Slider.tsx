@@ -83,7 +83,7 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
         {validationState && (
           <ValidationText
             id={`${id}-validation-text`}
-            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+            {...(hasValidationIcon && { validationStateIcon: validationState })}
             registerAria={register}
             validationText={validationText}
             role={validationTextRole}

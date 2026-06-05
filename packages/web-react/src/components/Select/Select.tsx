@@ -66,7 +66,7 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
         {validationState && (
           <ValidationText
             id={`${id}-validation-text`}
-            {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+            {...(hasValidationIcon && { validationStateIcon: validationState })}
             validationText={validationText}
             registerAria={register}
             role={validationTextRole}

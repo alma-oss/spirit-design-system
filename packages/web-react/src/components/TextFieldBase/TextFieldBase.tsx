@@ -65,7 +65,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
   const validationTextElement = validationState ? (
     <ValidationText
       elementType="span"
-      {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+      {...(hasValidationIcon && { validationStateIcon: validationState })}
       id={`${id}__validation-text`}
       validationText={validationText}
       registerAria={register}

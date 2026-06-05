@@ -12,7 +12,7 @@ const meta: Meta<typeof Toggle> = {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,
     },
-    controls: { exclude: ['hasValidationStateIcon'] },
+    controls: { exclude: ['validationStateIcon'] },
   },
   argTypes: {
     validationState: {
