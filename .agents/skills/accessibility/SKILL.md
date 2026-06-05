@@ -1,13 +1,11 @@
 ---
 name: spirit:accessibility
 description: >-
-  Accessibility (a11y) review knowledge for the Spirit Design System — semantics, ARIA, keyboard
-  operability, focus management, contrast, and the repo's a11y test infrastructure. A first-class
-  lens for a design system. Loaded by the accessibility reviewer; standalone-invokable when reviewing
-  only a11y. Use when reviewing or building accessible Spirit components.
+  Audit and improve web accessibility, semantics, ARIA, keyboard
+  operability, focus management, contrast, following WCAG 2.2 guidelines. Use when asked to "improve accessibility", "a11y audit", "WCAG compliance", "screen reader support", "keyboard navigation", or "make accessible".
 ---
 
-# Accessibility (Spirit)
+# Accessibility
 
 Accessibility is a primary review lens for Spirit — design-system components are consumed everywhere,
 so an a11y regression multiplies. Target **WCAG 2.1 AA** (the repo baseline; 2.2 is the direction of
