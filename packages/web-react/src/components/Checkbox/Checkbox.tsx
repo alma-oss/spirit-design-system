@@ -74,7 +74,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
           {validationState && (
             <ValidationText
               id={`${id}-validation-text`}
-              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+              {...(hasValidationIcon && { validationStateIcon: validationState })}
               validationText={validationText}
               registerAria={register}
               role={validationTextRole}

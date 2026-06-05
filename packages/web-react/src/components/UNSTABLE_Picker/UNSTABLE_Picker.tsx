@@ -253,7 +253,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
           {validationState && (
             <ValidationText
               id={`${pickerId}-validation-text`}
-              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+              {...(hasValidationIcon && { validationStateIcon: validationState })}
               validationText={validationText}
               registerAria={register}
               role={validationTextRole}

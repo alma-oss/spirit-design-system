@@ -63,10 +63,10 @@ describe('ValidationText', () => {
     expect(screen.getByText('validation text')).toHaveAttribute('role', A11Y_ALERT_ROLE);
   });
 
-  it('should render validation state icon and class when hasValidationStateIcon is set', () => {
+  it('should render validation state icon and class when validationStateIcon is set', () => {
     renderValidationText({
       validationText: 'validation text',
-      hasValidationStateIcon: 'danger',
+      validationStateIcon: 'danger',
     });
 
     const element = screen.getByText('validation text').parentElement as HTMLElement;
@@ -92,7 +92,7 @@ describe('ValidationText', () => {
   it('should use direct validation state icon over context validation state for styles', () => {
     render(
       <PropsProvider value={{ validationState: 'warning' }}>
-        <ValidationText validationText="validation text" hasValidationStateIcon="success" />
+        <ValidationText validationText="validation text" validationStateIcon="success" />
       </PropsProvider>,
     );
 

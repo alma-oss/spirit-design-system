@@ -161,7 +161,7 @@ const UNSTABLE_FileUpload = (props: UnstableFileUploadProps) => {
               <ValidationText
                 elementType="span"
                 id={`${inputId}-validation-text`}
-                {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+                {...(hasValidationIcon && { validationStateIcon: validationState })}
                 validationText={validationText}
                 registerAria={register}
                 role={validationTextRole}

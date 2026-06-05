@@ -25,15 +25,15 @@ const meta: Meta<typeof ValidationText> = {
       control: 'select',
       options: Object.values(FormFieldModes),
     },
-    hasValidationStateIcon: {
-      control: 'select',
-      options: Object.values(ValidationStates),
-    },
     isDisabled: {
       control: 'boolean',
     },
     role: {
       control: 'text',
+    },
+    validationStateIcon: {
+      control: 'select',
+      options: Object.values(ValidationStates),
     },
     validationText: {
       control: 'text',
@@ -41,10 +41,10 @@ const meta: Meta<typeof ValidationText> = {
   },
   args: {
     elementType: 'div',
-    hasValidationStateIcon: 'danger',
     id: 'validation-text',
     isDisabled: false,
     role: 'alert',
+    validationStateIcon: 'danger',
     validationText: 'Danger validation text',
   },
 };
