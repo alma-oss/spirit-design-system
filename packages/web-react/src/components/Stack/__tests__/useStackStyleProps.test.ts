@@ -6,15 +6,9 @@ describe('useStackStyleProps', () => {
   it.each([
     // hasEndDivider, hasIntermediateDividers, hasSpacing, hasStartDivider, expectedClasses
     [false, false, false, false, 'Stack'],
-    [false, true, true, false, 'Stack Stack--hasIntermediateDividers Stack--hasSpacing'],
-    [false, false, true, false, 'Stack Stack--hasSpacing'],
-    [
-      true,
-      true,
-      true,
-      true,
-      'Stack Stack--hasEndDivider Stack--hasIntermediateDividers Stack--hasSpacing Stack--hasStartDivider',
-    ],
+    [false, true, true, false, 'Stack Stack--intermediateDividers Stack--spacing'],
+    [false, false, true, false, 'Stack Stack--spacing'],
+    [true, true, true, true, 'Stack Stack--endDivider Stack--intermediateDividers Stack--spacing Stack--startDivider'],
   ])(
     'should return classes',
     (hasEndDivider, hasIntermediateDividers, hasSpacing, hasStartDivider, expectedClasses) => {
