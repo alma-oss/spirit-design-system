@@ -6,10 +6,10 @@ export function useStackStyleProps(props: StackStyleProps) {
   const { hasEndDivider, hasIntermediateDividers, hasSpacing, hasStartDivider, spacing, ...restProps } = props;
 
   const stackClass = useClassNamePrefix('Stack');
-  const stackBottomDividerClass = `${stackClass}--hasEndDivider`;
-  const stackMiddleDividersClass = `${stackClass}--hasIntermediateDividers`;
-  const stackSpacingClass = `${stackClass}--hasSpacing`;
-  const stackTopDividerClass = `${stackClass}--hasStartDivider`;
+  const stackBottomDividerClass = `${stackClass}--endDivider`;
+  const stackMiddleDividersClass = `${stackClass}--intermediateDividers`;
+  const stackSpacingClass = `${stackClass}--spacing`;
+  const stackTopDividerClass = `${stackClass}--startDivider`;
   const itemProps = `${stackClass}Item`;
   const stackStyle = useSpacingStyle(spacing, 'stack');
 

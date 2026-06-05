@@ -36,17 +36,17 @@ Matrix to align multiple [Stack][stack] layouts:
 
 ```html
 <div class="Matrix">
-  <div class="Stack Stack--hasSpacing">
+  <div class="Stack Stack--spacing">
     <div>Stack 1</div>
     <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
     <div>Lorem ipsum</div>
   </div>
-  <div class="Stack Stack--hasSpacing">
+  <div class="Stack Stack--spacing">
     <div>Stack 2</div>
     <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
     <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
   </div>
-  <div class="Stack Stack--hasSpacing">
+  <div class="Stack Stack--spacing">
     <div>Stack 3</div>
     <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>
     <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</div>

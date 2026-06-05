@@ -49,7 +49,7 @@ describe('Stack', () => {
   it('should render with spacing', () => {
     render(<Stack data-testid="stack" hasSpacing />);
 
-    expect(screen.getByTestId('stack')).toHaveClass('Stack--hasSpacing');
+    expect(screen.getByTestId('stack')).toHaveClass('Stack--spacing');
   });
 
   it('should render with custom spacing', () => {
@@ -57,7 +57,7 @@ describe('Stack', () => {
 
     const element = screen.getByTestId('stack');
 
-    expect(element).toHaveClass('Stack--hasSpacing');
+    expect(element).toHaveClass('Stack--spacing');
     expect(element).toHaveStyle({ '--stack-spacing': 'var(--spirit-space-1000)' });
   });
 
@@ -68,7 +68,7 @@ describe('Stack', () => {
 
     const element = screen.getByTestId('stack');
 
-    expect(element).toHaveClass('Stack--hasSpacing');
+    expect(element).toHaveClass('Stack--spacing');
     expect(element).toHaveStyle({ '--stack-spacing': 'var(--spirit-space-100)' });
     expect(element).toHaveStyle({ '--stack-spacing-tablet': 'var(--spirit-space-1000)' });
     expect(element).toHaveStyle({ '--stack-spacing-desktop': 'var(--spirit-space-1200)' });
@@ -79,7 +79,7 @@ describe('Stack', () => {
 
     const element = screen.getByTestId('stack');
 
-    expect(element).toHaveClass('Stack--hasSpacing');
+    expect(element).toHaveClass('Stack--spacing');
     expect(element).toHaveStyle({ '--stack-spacing-tablet': 'var(--spirit-space-1000)' });
     expect(element).not.toHaveStyle({ '--stack-spacing': 'var(--spirit-space-100)' });
     expect(element).not.toHaveStyle({ '--stack-spacing-desktop': 'var(--spirit-space-1200)' });

@@ -177,7 +177,7 @@ Use [UNSTABLE_File][readme-file] to display a list of uploaded files.
 Place the file list after the `UNSTABLE_FileUpload` wrapper.
 
 👉 To provide information about file list to AT, wrap the file list in a container (`ul`) with an appropriate `aria-label` (e.g. `aria-label="Uploaded files"`).
-If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on the file list container.
+If you need a vertical spacing, you can use `Stack` with `Stack--spacing` on the file list container.
 
 ```html
 <div class="UNSTABLE_FileUpload mb-800">
@@ -188,7 +188,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--hasSpacing` on 
 </div>
 
 <!-- File list using UNSTABLE_File -->
-<ul class="Stack Stack--hasSpacing" aria-label="Uploaded files">
+<ul class="Stack Stack--spacing" aria-label="Uploaded files">
   <li class="UNSTABLE_File">
     <div class="UNSTABLE_File__preview">
       <svg class="Icon" width="20" height="20" aria-hidden="true">

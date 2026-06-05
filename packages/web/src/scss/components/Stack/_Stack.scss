@@ -8,7 +8,7 @@
     display: grid;
 }
 
-.Stack--hasSpacing {
+.Stack--spacing {
     @include responsive-properties.create-cascade(
         $property: 'gap',
         $input-custom-property-base-name: 'stack-spacing',
@@ -17,9 +17,9 @@
     );
 }
 
-.Stack--hasSpacing.Stack--hasStartDivider,
-.Stack--hasSpacing.Stack--hasEndDivider,
-.Stack--hasSpacing.Stack--hasIntermediateDividers {
+.Stack--spacing.Stack--startDivider,
+.Stack--spacing.Stack--endDivider,
+.Stack--spacing.Stack--intermediateDividers {
     gap: 0;
 }
 
@@ -30,48 +30,48 @@
     margin-block: 0;
 }
 
-.Stack--hasIntermediateDividers > *:not(.StackItem) {
+.Stack--intermediateDividers > *:not(.StackItem) {
     border-block-start: theme.$border;
 }
 
-.Stack--hasSpacing.Stack--hasStartDivider > *:not(.StackItem),
-.Stack--hasSpacing.Stack--hasEndDivider > *:not(.StackItem) {
+.Stack--spacing.Stack--startDivider > *:not(.StackItem),
+.Stack--spacing.Stack--endDivider > *:not(.StackItem) {
     padding-block: calc(var(--stack-spacing-internal) / 2);
 }
 
-.Stack--hasSpacing.Stack--hasIntermediateDividers > *:not(.StackItem) {
+.Stack--spacing.Stack--intermediateDividers > *:not(.StackItem) {
     padding-block: var(--stack-spacing-internal);
 }
 // stylelint-enable
 
-.Stack--hasSpacing.Stack--hasStartDivider > :not(.StackItem):first-child,
-.Stack--hasSpacing.Stack--hasEndDivider > :not(.StackItem):first-child,
-.Stack--hasSpacing.Stack--hasIntermediateDividers > :not(.StackItem):first-child {
+.Stack--spacing.Stack--startDivider > :not(.StackItem):first-child,
+.Stack--spacing.Stack--endDivider > :not(.StackItem):first-child,
+.Stack--spacing.Stack--intermediateDividers > :not(.StackItem):first-child {
     padding-block-start: 0;
 }
 
-.Stack--hasSpacing.Stack--hasStartDivider > :not(.StackItem):last-child,
-.Stack--hasSpacing.Stack--hasEndDivider > :not(.StackItem):last-child,
-.Stack--hasSpacing.Stack--hasIntermediateDividers > :not(.StackItem):last-child {
+.Stack--spacing.Stack--startDivider > :not(.StackItem):last-child,
+.Stack--spacing.Stack--endDivider > :not(.StackItem):last-child,
+.Stack--spacing.Stack--intermediateDividers > :not(.StackItem):last-child {
     padding-block-end: 0;
 }
 
-.Stack--hasIntermediateDividers > :not(.StackItem):first-child {
+.Stack--intermediateDividers > :not(.StackItem):first-child {
     border-block-start: none;
 }
 
-.Stack--hasStartDivider > :not(.StackItem):first-child {
+.Stack--startDivider > :not(.StackItem):first-child {
     border-block-start: theme.$border;
 }
 
-.Stack--hasEndDivider > :not(.StackItem):last-child {
+.Stack--endDivider > :not(.StackItem):last-child {
     border-block-end: theme.$border;
 }
 
-.Stack--hasSpacing.Stack--hasStartDivider > :not(.StackItem):first-child {
+.Stack--spacing.Stack--startDivider > :not(.StackItem):first-child {
     padding-block-start: var(--stack-spacing-internal);
 }
 
-.Stack--hasSpacing.Stack--hasEndDivider > :not(.StackItem):last-child {
+.Stack--spacing.Stack--endDivider > :not(.StackItem):last-child {
     padding-block-end: var(--stack-spacing-internal);
 }
