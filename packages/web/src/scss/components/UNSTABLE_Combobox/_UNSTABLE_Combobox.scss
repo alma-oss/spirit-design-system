@@ -1,3 +1,5 @@
+// 1. Sized to comfortably fit the default placeholder copy ("+ Add more…", ~11 characters).
+
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/string' as spirit-string;
 @use '@tokens' as tokens;
@@ -12,16 +14,9 @@ $_field-name: spirit-string.remove-prefix($_full-field-name, 'UNSTABLE_');
     @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
 }
 
-// TODO: Consider widening `.InputContainer > input` in InputContainer itself so it
-// targets any input child and removes the need for this combobox-local override.
-// Tracked separately so the broader change can be reviewed against Picker / Select / TextField.
-//
-// The input's `flex-basis` and `min-width` are driven by a CSS variable so the placeholder
-// (e.g. "+ Add more…") always fits on the row no matter how long it is — and so consumers can
-// override the width when their placeholder copy differs.
 .UNSTABLE_Combobox__input {
-    flex: 1 0 var(--#{tokens.$css-variable-prefix}combobox-input-min-width);
-    min-width: var(--#{tokens.$css-variable-prefix}combobox-input-min-width);
+    flex: 0 0 var(--#{tokens.$css-variable-prefix}combobox-input-min-width); // 1.
+    min-width: var(--#{tokens.$css-variable-prefix}combobox-input-min-width); // 1.
     padding: 0;
     padding-inline-start: theme.$placeholder-padding-inline-start;
     font: inherit;

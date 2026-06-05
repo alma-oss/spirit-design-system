@@ -17,7 +17,7 @@ filterable option list.
 │   ├── Label
 │   ├── InputContainer                                role="group"
 │   │   └── .UNSTABLE_ComboboxSelection               (flex wrapper)
-│   │       ├── role="grid" · display:contents        · aria-live="off"
+│   │       ├── role="grid"                           aria-live="off"
 │   │       │   └── Tag                               role="row" (× N selected)
 │   │       │       └── role="gridcell"
 │   │       │           ├── tag label
@@ -25,7 +25,7 @@ filterable option list.
 │   │       └── input[role="combobox"]                (inline, always last child)
 │   └── DropdownPopover
 │       └── Stack                                     role="grid" · aria-multiselectable="true"
-│           └── .UNSTABLE_ComboboxOption              role="row" (× N options)
+│           └── .Item                                 role="row" (× N options)
 │               └── role="gridcell"
 ├── ValidationText                                    (optional)
 └── HelperText                                        (optional)
@@ -43,7 +43,7 @@ sure there is enough space below the Combobox (or around it, depending on the po
 the popover does not overflow its scrollable container or get clipped.
 
 ```html
-<div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+<div class="UNSTABLE_Combobox">
   <div class="Dropdown">
     <label class="Label" id="combobox-label" for="combobox-input">Languages</label>
     <div class="InputContainer InputContainer--medium" role="group" aria-label="Languages">
@@ -56,7 +56,6 @@ the popover does not overflow its scrollable container or get clipped.
           aria-live="off"
           aria-atomic="false"
           aria-relevant="additions"
-          data-spirit-combobox-selection
         ></div>
         <input
           type="text"
@@ -70,11 +69,10 @@ the popover does not overflow its scrollable container or get clipped.
           autocomplete="off"
           placeholder="Languages"
           class="UNSTABLE_Combobox__input"
-          data-spirit-combobox-input
         />
       </div>
     </div>
-    <div class="DropdownPopover placement-bottom-start" data-spirit-combobox-listbox>
+    <div class="DropdownPopover placement-bottom-start">
       <div
         class="Stack Stack--hasSpacing"
         style="--stack-spacing: var(--spirit-space-300);"
@@ -83,15 +81,15 @@ the popover does not overflow its scrollable container or get clipped.
         aria-labelledby="combobox-label"
         aria-multiselectable="true"
       >
-        <div role="row" id="opt-cs" aria-selected="false" class="UNSTABLE_ComboboxOption">
-          <div role="gridcell">Czech</div>
+        <div role="row" id="opt-cs" aria-selected="false" class="Item">
+          <div role="gridcell"><span class="Label Label--item">Czech</span></div>
         </div>
-        <div role="row" id="opt-en" aria-selected="false" class="UNSTABLE_ComboboxOption">
-          <div role="gridcell">English</div>
+        <div role="row" id="opt-en" aria-selected="false" class="Item">
+          <div role="gridcell"><span class="Label Label--item">English</span></div>
         </div>
         <!-- More options… -->
       </div>
-      <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+      <div role="status" aria-live="polite" class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
     </div>
   </div>
 </div>
@@ -99,39 +97,31 @@ the popover does not overflow its scrollable container or get clipped.
 
 ### Placeholder and Add-More Affordance
 
-The input's `placeholder` carries the "add more" hint visually. The JS swaps the placeholder text
-according to selection state:
+The input's `placeholder` carries the "add more" hint visually:
 
 - **No selection**: placeholder shows the field label (e.g. `placeholder="Languages"`).
-- **≥ 1 tag selected and not all options selected**: placeholder reads `+ Add more…`.
-- **All options selected**: placeholder is cleared — there is nothing left to add.
-
-Because placeholders are unreliable for assistive technology, the JS also injects a
-visually-hidden `<span class="accessibility-hidden">Add more {fieldLabel}</span>` next to the input
-and links it via `aria-describedby` whenever the "+ Add more…" hint is shown. Selection count
-remains announced through the input's `aria-label`.
+- **≥ 1 tag selected**: placeholder reads `+ Add more…`.
 
 The input's minimum width is driven by the `--spirit-combobox-input-min-width` CSS variable
 (default `11ch`, sized for `+ Add more…`). Override it on the root element to fit a different
 placeholder string without truncation or unexpected wrapping:
 
 ```html
-<div class="UNSTABLE_Combobox" style="--spirit-combobox-input-min-width: 18ch;" data-spirit-element="combobox">
+<div class="UNSTABLE_Combobox" style="--spirit-combobox-input-min-width: 18ch;">
   <!-- … -->
 </div>
 ```
 
 👉 Be aware that the input's placeholder has some limitations, mostly related to the accessibility.
-For more information, please follow this article [Don’t Use The Placeholder Attribute][smashing-magazine-placeholder].
+For more information, please follow this article [Don't Use The Placeholder Attribute][smashing-magazine-placeholder].
 
 ## Pre-Selected Options
 
-Set `aria-selected="true"` on any option row to pre-select it on page load. The demo script reads
-the initial selection state and renders the corresponding tags immediately.
+Set `aria-selected="true"` on any option row to pre-select it on page load.
 
 ```html
-<div role="row" id="opt-cs" aria-selected="true" class="UNSTABLE_ComboboxOption">
-  <div role="gridcell">Czech</div>
+<div role="row" id="opt-cs" aria-selected="true" class="Item">
+  <div role="gridcell"><span class="Label Label--item">Czech</span></div>
 </div>
 ```
 
@@ -153,19 +143,18 @@ Add supplementary information below the Dropdown using the `HelperText` componen
 when the user focuses the field.
 
 ```html
-<div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+<div class="UNSTABLE_Combobox">
   <div class="Dropdown">
     <label class="Label" id="combobox-label" for="combobox-input">Languages</label>
     <div class="InputContainer InputContainer--medium" role="group" aria-label="Languages">
       <div class="UNSTABLE_ComboboxSelection">
-        <div role="grid" … class="d-contents" data-spirit-combobox-selection></div>
+        <div role="grid" … class="d-contents"></div>
         <input
           type="text"
           id="combobox-input"
           role="combobox"
           aria-describedby="combobox-helper"
           class="UNSTABLE_Combobox__input"
-          data-spirit-combobox-input
           <!-- … -->
         />
       </div>
@@ -186,19 +175,18 @@ the `InputContainer` element and use `ValidationText` for the message, placing i
 Available validation states: `danger`, `warning`, `success`.
 
 ```html
-<div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+<div class="UNSTABLE_Combobox">
   <div class="Dropdown">
     <label class="Label Label--danger" id="combobox-label" for="combobox-input">Languages</label>
     <div class="InputContainer InputContainer--medium InputContainer--danger" role="group" aria-label="Languages">
       <div class="UNSTABLE_ComboboxSelection">
-        <div role="grid" … class="d-contents" data-spirit-combobox-selection></div>
+        <div role="grid" … class="d-contents"></div>
         <input
           type="text"
           id="combobox-input"
           role="combobox"
           aria-describedby="combobox-validation"
           class="UNSTABLE_Combobox__input"
-          data-spirit-combobox-input
           <!-- … -->
         />
       </div>
@@ -217,19 +205,18 @@ Add `UNSTABLE_Combobox--disabled` on the root element, `InputContainer--disabled
 and the `disabled` attribute on the input to disable the Combobox.
 
 ```html
-<div class="UNSTABLE_Combobox UNSTABLE_Combobox--disabled" data-spirit-element="combobox">
+<div class="UNSTABLE_Combobox UNSTABLE_Combobox--disabled">
   <div class="Dropdown">
     <label class="Label Label--disabled" id="combobox-label" for="combobox-input">Languages</label>
     <div class="InputContainer InputContainer--medium InputContainer--disabled" role="group" aria-label="Languages">
       <div class="UNSTABLE_ComboboxSelection">
-        <div role="grid" … class="d-contents" data-spirit-combobox-selection></div>
+        <div role="grid" … class="d-contents"></div>
         <input
           type="text"
           id="combobox-input"
           role="combobox"
           class="UNSTABLE_Combobox__input"
           disabled
-          data-spirit-combobox-input
           <!-- … -->
         />
       </div>
@@ -239,13 +226,9 @@ and the `disabled` attribute on the input to disable the Combobox.
 </div>
 ```
 
-Pre-selected options (`aria-selected="true"`) are still rendered as disabled tags, so the field
-reflects the current state even though the user cannot edit it.
-
 ## With Addon
 
-Place a clear-all `InputAddon` after the selection wrapper, inside the `InputContainer`. The demo
-script reveals it whenever at least one tag is selected and clears the entire selection on click.
+Place a clear-all `InputAddon` after the selection wrapper, inside the `InputContainer`.
 
 ```html
 <div class="InputContainer InputContainer--medium" role="group" aria-label="Languages">
@@ -253,8 +236,7 @@ script reveals it whenever at least one tag is selected and clears the entire se
     <!-- … selection grid and input … -->
   </div>
 
-  <!-- Clear-all addon: shown by JS when ≥1 item is selected -->
-  <div class="InputAddon InputAddon--medium" hidden data-spirit-combobox-clear>
+  <div class="InputAddon InputAddon--medium" hidden>
     <button
       type="button"
       class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground"
@@ -268,66 +250,43 @@ script reveals it whenever at least one tag is selected and clears the entire se
 </div>
 ```
 
-## Async / Loading State
+## Auxiliary Content in the Popup
 
-Add `data-spirit-combobox-async` to the root element to enable async mode. Include a loading
-indicator element with `data-spirit-combobox-loading` inside the popover — the script shows it
-during a simulated 600 ms delay and hides options while loading.
+The `Stack` element inside `DropdownPopover` carries `role="grid"`, which only permits
+`role="row"` as direct owned elements (see [WAI-ARIA `grid` role][w3-aria-grid]). Any content
+that is not an option row — empty state, loading indicator, tip, or other custom content — must
+therefore be placed as a **sibling of the Stack**, not inside it.
+
+### Empty State
+
+Show a message when no options match the current query. Place it alongside the Stack:
 
 ```html
-<div class="UNSTABLE_Combobox" data-spirit-element="combobox" data-spirit-combobox-async>
-  <div class="Dropdown">
-    <!-- … -->
-    <div class="DropdownPopover placement-bottom-start" …>
-      <div class="UNSTABLE_Combobox__loading" role="status" aria-live="polite" data-spirit-combobox-loading hidden>
-        Loading…
-      </div>
-      <!-- option list … -->
-    </div>
+<div class="DropdownPopover placement-bottom-start">
+  <div class="Stack Stack--hasSpacing" role="grid" …>
+    <!-- option rows -->
+  </div>
+  <div role="status" aria-live="polite" class="UNSTABLE_Combobox__emptyState" hidden>
+    Nothing found
   </div>
 </div>
 ```
 
-## JavaScript Interaction
+### Loading State
 
-The HTML/CSS prototype includes a demo JavaScript that implements the interactive behavior described below.
+Include a loading indicator alongside the option list. The `UNSTABLE_Combobox__loading` element
+is hidden by default:
 
-### Filtering
-
-As the user types, option rows whose label does not match the query are hidden with
-`display: none`. Matching text is highlighted: the matching portion renders at regular weight
-while the surrounding text is bolded. When a query is cleared, options are fully restored.
-
-### Roving Tabindex on Tags
-
-The tag selection grid uses roving `tabindex`:
-
-- Only the last tag has `tabindex="0"` (the active tab stop). All others have `tabindex="-1"`.
-- Arrow Left/Up and Arrow Right/Down move focus to the previous/next tag. Navigation wraps around.
-- Home and End move focus to the first and last tag, respectively.
-- When a tag row receives focus, its remove button becomes focusable (`tabindex="0"`).
-
-### Tag Removal and Focus Recovery
-
-When a tag is removed (remove button click or Delete/Backspace on the focused tag row):
-
-1. The corresponding option row is deselected (`aria-selected="false"`) and the selection re-renders.
-2. Focus moves to the tag that now occupies the same index, or the previous tag if the last one was removed.
-3. If no tags remain, focus returns to the input.
-
-### Keyboard Interaction
-
-| Key                            | Action                                                        |
-| ------------------------------ | ------------------------------------------------------------- |
-| Arrow Down / Arrow Up          | Opens popup (if closed); moves active row down / up           |
-| Home                           | Moves active row to the first visible option                  |
-| End                            | Moves active row to the last visible option                   |
-| Enter / Space                  | Toggles selection of the active option row                    |
-| Escape                         | Closes the popup                                              |
-| Tab                            | Closes the popup and moves browser focus to the next element  |
-| Arrow Left / Right / Up / Down | In selection grid: moves focus between tags (roving tabindex) |
-| Home / End                     | In selection grid: moves focus to first / last tag            |
-| Delete / Backspace             | On focused tag row: removes the tag                           |
+```html
+<div class="DropdownPopover placement-bottom-start">
+  <div class="UNSTABLE_Combobox__loading" role="status" aria-live="polite" hidden>
+    Loading…
+  </div>
+  <div class="Stack Stack--hasSpacing" role="grid" …>
+    <!-- option rows -->
+  </div>
+</div>
+```
 
 ## Accessibility
 
@@ -340,17 +299,31 @@ of the grid div so that `role="combobox"` is not a direct descendant of `role="g
 
 ### Popup: `role="grid"` with `aria-multiselectable`
 
-The `DropdownPopover` element only handles popover positioning and is referenced by JS via
-`data-spirit-combobox-listbox`. The inner `Stack` element carries the grid semantics
-(`role="grid"`, `aria-multiselectable="true"`, the popup `id`, and `aria-labelledby`) — that is
-where the `role="row"` option children actually live. Auxiliary children of the popover (like the
-loading indicator) sit alongside the Stack so they are not interpreted as grid rows.
+The `DropdownPopover` element only handles popover positioning. The inner `Stack` element carries
+the grid semantics (`role="grid"`, `aria-multiselectable="true"`, the popup `id`, and
+`aria-labelledby`) — that is where the `role="row"` option children actually live. Auxiliary
+children of the popover (like the loading indicator) sit alongside the Stack so they are not
+interpreted as grid rows.
 
 The `<input role="combobox">` manages `aria-expanded`, `aria-controls`, and
 `aria-activedescendant` to wire the input to the popup grid in accordance with the ARIA
 combobox pattern.
 
 For more information about the ARIA combobox pattern, please follow this article [Editable Combobox with Grid Popup Example][w3-combobox-grid-popup].
+
+### Popup: Custom Content
+
+Any other supplementary content that is not selectable should be placed outside the `role="grid"` Stack:
+
+```html
+<div class="DropdownPopover placement-bottom-start">
+  <div class="Stack Stack--hasSpacing" role="grid" …>
+    <!-- option rows -->
+  </div>
+  <!-- custom content here, never inside the Stack -->
+  <div>Tip: You can create a new tag</div>
+</div>
+```
 
 ### ARIA Attributes
 
@@ -373,4 +346,5 @@ For more information about the ARIA combobox pattern, please follow this article
 
 [dropdown]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Dropdown/README.md
 [smashing-magazine-placeholder]: https://www.smashingmagazine.com/2018/06/placeholder-attribute/
+[w3-aria-grid]: https://www.w3.org/TR/wai-aria/#grid
 [w3-combobox-grid-popup]: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/grid-combo/

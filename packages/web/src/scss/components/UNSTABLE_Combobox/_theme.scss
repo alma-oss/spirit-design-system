@@ -7,15 +7,9 @@ $padding: calc(#{tokens.$space-400} - #{tokens.$border-width-100});
 $empty-state-color: tokens.$text-secondary;
 $empty-state-padding: tokens.$space-600 tokens.$space-700;
 
-// Sized to comfortably fit the default placeholder copy ("+ Add more…", ~11 characters).
-// Consumers can override per-instance via the `--spirit-combobox-input-min-width` CSS variable.
 $input-min-width: 11ch;
 
-$option-background-color-state-active: tokens.$background-interactive-state-hover;
-$option-background-color-state-selected: tokens.$selected-background-subtle;
 $option-cell-gap: tokens.$space-500;
-$option-color-state-disabled: tokens.$disabled-content;
-$option-cursor-state-disabled: cursors.$disabled;
 
 $placeholder-color-state-default: tokens.$form-field-filled-placeholder;
 $placeholder-color-state-disabled: tokens.$disabled-content;

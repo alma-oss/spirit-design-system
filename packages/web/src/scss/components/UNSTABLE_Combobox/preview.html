@@ -6,13 +6,13 @@
 
 <!-- Autocomplete: help for AT users -->
 <span
-  id="autocomplete-tag-description"
+  id="combobox-tag-description"
   data-spirit-combobox-tag-description
   hidden
 >Press Delete or Backspace to remove</span>
 
 <!-- Autocomplete: tag template -->
-<template id="autocomplete-tag-template">
+<template id="combobox-tag-template">
   <div
     role="row"
     data-spirit-combobox-tag-row
@@ -48,7 +48,7 @@
 
     <h2 class="docs-Heading">Default</h2>
 
-    <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
 
       <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
 
@@ -56,8 +56,8 @@
 
           <label
             class="Label"
-            id="ac-default-label"
-            for="ac-default-input"
+            id="combobox-default-label"
+            for="combobox-default-input"
           >Languages</label>
 
           <div
@@ -69,7 +69,7 @@
             <div class="UNSTABLE_ComboboxSelection">
               <div
                 role="grid"
-                id="ac-default-selection"
+                id="combobox-default-selection"
                 class="d-contents"
                 aria-label="Selected Languages"
                 aria-live="off"
@@ -79,12 +79,11 @@
               ></div>
               <input
                 type="text"
-                id="ac-default-input"
+                id="combobox-default-input"
                 role="combobox"
                 aria-haspopup="grid"
                 aria-expanded="false"
-                aria-controls="ac-default-listbox"
-                aria-labelledby="ac-default-label"
+                aria-controls="combobox-default-listbox"
                 aria-autocomplete="list"
                 autocomplete="off"
                 placeholder="Languages"
@@ -103,61 +102,177 @@
               class="Stack Stack--hasSpacing"
               style="--stack-spacing: var(--spirit-space-300);"
               role="grid"
-              id="ac-default-listbox"
-              aria-labelledby="ac-default-label"
+              id="combobox-default-listbox"
+              aria-labelledby="combobox-default-label"
               aria-multiselectable="true"
             >
               <div
                 role="row"
-                id="ac-default-cs"
+                id="combobox-default-cs"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">Czech</div>
+                <div role="gridcell"><span class="Label Label--item">Czech</span></div>
               </div>
               <div
                 role="row"
-                id="ac-default-da"
+                id="combobox-default-da"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">Danish</div>
+                <div role="gridcell"><span class="Label Label--item">Danish</span></div>
               </div>
               <div
                 role="row"
-                id="ac-default-en"
+                id="combobox-default-en"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">English</div>
+                <div role="gridcell"><span class="Label Label--item">English</span></div>
               </div>
               <div
                 role="row"
-                id="ac-default-fi"
+                id="combobox-default-fi"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">Finnish</div>
+                <div role="gridcell"><span class="Label Label--item">Finnish</span></div>
               </div>
               <div
                 role="row"
-                id="ac-default-kl"
+                id="combobox-default-kl"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">Greenlandic</div>
+                <div role="gridcell"><span class="Label Label--item">Greenlandic</span></div>
               </div>
               <div
                 role="row"
-                id="ac-default-sk"
+                id="combobox-default-sk"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">Slovak</div>
+                <div role="gridcell"><span class="Label Label--item">Slovak</span></div>
               </div>
             </div>
 
-            <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+            <div
+              data-spirit-combobox-empty-state
+              role="status"
+              aria-live="polite"
+              class="UNSTABLE_Combobox__emptyState"
+              hidden
+            >Nothing found</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+        <div class="Dropdown">
+
+          <label
+            class="Label"
+            id="combobox-pre-label"
+            for="combobox-pre-input"
+          >Languages</label>
+
+          <div
+            class="InputContainer InputContainer--medium"
+            role="group"
+            aria-label="Languages"
+          >
+
+            <div class="UNSTABLE_ComboboxSelection">
+              <div
+                role="grid"
+                id="combobox-pre-selection"
+                class="d-contents"
+                aria-label="Selected Languages"
+                aria-live="off"
+                aria-atomic="false"
+                aria-relevant="additions"
+                data-spirit-combobox-selection
+              ></div>
+              <input
+                type="text"
+                id="combobox-pre-input"
+                role="combobox"
+                aria-haspopup="grid"
+                aria-expanded="false"
+                aria-controls="combobox-pre-listbox"
+                aria-autocomplete="list"
+                autocomplete="off"
+                placeholder="Languages"
+                class="UNSTABLE_Combobox__input"
+                data-spirit-combobox-input
+              />
+            </div>
+
+          </div>
+
+          <div
+            class="DropdownPopover placement-bottom-start"
+            data-spirit-combobox-listbox
+          >
+            <div
+              class="Stack Stack--hasSpacing"
+              style="--stack-spacing: var(--spirit-space-300);"
+              role="grid"
+              id="combobox-pre-listbox"
+              aria-labelledby="combobox-pre-label"
+              aria-multiselectable="true"
+            >
+              <div
+                role="row"
+                id="combobox-pre-cs"
+                aria-selected="true"
+                class="Item"
+              >
+                <div role="gridcell"><span class="Label Label--item">Czech</span></div>
+              </div>
+              <div
+                role="row"
+                id="combobox-pre-da"
+                aria-selected="false"
+                class="Item"
+              >
+                <div role="gridcell"><span class="Label Label--item">Danish</span></div>
+              </div>
+              <div
+                role="row"
+                id="combobox-pre-en"
+                aria-selected="true"
+                class="Item"
+              >
+                <div role="gridcell"><span class="Label Label--item">English</span></div>
+              </div>
+              <div
+                role="row"
+                id="combobox-pre-fi"
+                aria-selected="false"
+                class="Item"
+              >
+                <div role="gridcell"><span class="Label Label--item">Finnish</span></div>
+              </div>
+              <div
+                role="row"
+                id="combobox-pre-sk"
+                aria-selected="true"
+                class="Item"
+              >
+                <div role="gridcell"><span class="Label Label--item">Slovak</span></div>
+              </div>
+            </div>
+
+            <div
+              data-spirit-combobox-empty-state
+              role="status"
+              aria-live="polite"
+              class="UNSTABLE_Combobox__emptyState"
+              hidden
+            >Nothing found</div>
           </div>
 
         </div>
@@ -171,113 +286,126 @@
 <section class="py-900 py-tablet-1000">
   <div class="Container">
 
-    <h2 class="docs-Heading">Pre-selected</h2>
+    <h2 class="docs-Heading">Themes</h2>
 
-    <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
 
-      <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+      <div class="theme-light-on-brand bg-primary rounded-300 p-800">
 
-        <div class="Dropdown">
+        <div class="theme-light-default">
 
-          <label
-            class="Label"
-            id="ac-pre-label"
-            for="ac-pre-input"
-          >Languages</label>
+          <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
 
-          <div
-            class="InputContainer InputContainer--medium"
-            role="group"
-            aria-label="Languages"
-          >
+            <div class="Dropdown">
 
-            <div class="UNSTABLE_ComboboxSelection">
+              <label
+                class="Label theme-light-on-brand"
+                id="combobox-themes-label"
+                for="combobox-themes-input"
+              >Languages</label>
+
               <div
-                role="grid"
-                id="ac-pre-selection"
-                class="d-contents"
-                aria-label="Selected Languages"
-                aria-live="off"
-                aria-atomic="false"
-                aria-relevant="additions"
-                data-spirit-combobox-selection
-              ></div>
-              <input
-                type="text"
-                id="ac-pre-input"
-                role="combobox"
-                aria-haspopup="grid"
-                aria-expanded="false"
-                aria-controls="ac-pre-listbox"
-                aria-labelledby="ac-pre-label"
-                aria-autocomplete="list"
-                autocomplete="off"
-                placeholder="Languages"
-                class="UNSTABLE_Combobox__input"
-                data-spirit-combobox-input
-              />
+                class="InputContainer InputContainer--medium"
+                role="group"
+                aria-label="Languages"
+              >
+
+                <div class="UNSTABLE_ComboboxSelection">
+                  <div
+                    role="grid"
+                    id="combobox-themes-selection"
+                    class="d-contents"
+                    aria-label="Selected Languages"
+                    aria-live="off"
+                    aria-atomic="false"
+                    aria-relevant="additions"
+                    data-spirit-combobox-selection
+                  ></div>
+                  <input
+                    type="text"
+                    id="combobox-themes-input"
+                    role="combobox"
+                    aria-haspopup="grid"
+                    aria-expanded="false"
+                    aria-controls="combobox-themes-listbox"
+                    aria-autocomplete="list"
+                    autocomplete="off"
+                    placeholder="Languages"
+                    class="UNSTABLE_Combobox__input"
+                    data-spirit-combobox-input
+                  />
+                </div>
+
+              </div>
+
+              <div
+                class="DropdownPopover placement-bottom-start theme-light-default"
+                data-spirit-combobox-listbox
+              >
+                <div
+                  class="Stack Stack--hasSpacing"
+                  style="--stack-spacing: var(--spirit-space-300);"
+                  role="grid"
+                  id="combobox-themes-listbox"
+                  aria-labelledby="combobox-themes-label"
+                  aria-multiselectable="true"
+                >
+                  <div
+                    role="row"
+                    id="combobox-themes-cs"
+                    aria-selected="true"
+                    class="Item"
+                  >
+                    <div role="gridcell"><span class="Label Label--item">Czech</span></div>
+                  </div>
+                  <div
+                    role="row"
+                    id="combobox-themes-da"
+                    aria-selected="false"
+                    class="Item"
+                  >
+                    <div role="gridcell"><span class="Label Label--item">Danish</span></div>
+                  </div>
+                  <div
+                    role="row"
+                    id="combobox-themes-en"
+                    aria-selected="true"
+                    class="Item"
+                  >
+                    <div role="gridcell"><span class="Label Label--item">English</span></div>
+                  </div>
+                  <div
+                    role="row"
+                    id="combobox-themes-fi"
+                    aria-selected="false"
+                    class="Item"
+                  >
+                    <div role="gridcell"><span class="Label Label--item">Finnish</span></div>
+                  </div>
+                  <div
+                    role="row"
+                    id="combobox-themes-sk"
+                    aria-selected="false"
+                    class="Item"
+                  >
+                    <div role="gridcell"><span class="Label Label--item">Slovak</span></div>
+                  </div>
+                </div>
+
+                <div
+                  data-spirit-combobox-empty-state
+                  role="status"
+                  aria-live="polite"
+                  class="UNSTABLE_Combobox__emptyState"
+                  hidden
+                >Nothing found</div>
+              </div>
+
             </div>
-
-          </div>
-
-          <div
-            class="DropdownPopover placement-bottom-start"
-            data-spirit-combobox-listbox
-          >
-            <div
-              class="Stack Stack--hasSpacing"
-              style="--stack-spacing: var(--spirit-space-300);"
-              role="grid"
-              id="ac-pre-listbox"
-              aria-labelledby="ac-pre-label"
-              aria-multiselectable="true"
-            >
-              <div
-                role="row"
-                id="ac-pre-cs"
-                aria-selected="true"
-                class="UNSTABLE_ComboboxOption"
-              >
-                <div role="gridcell">Czech</div>
-              </div>
-              <div
-                role="row"
-                id="ac-pre-da"
-                aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
-              >
-                <div role="gridcell">Danish</div>
-              </div>
-              <div
-                role="row"
-                id="ac-pre-en"
-                aria-selected="true"
-                class="UNSTABLE_ComboboxOption"
-              >
-                <div role="gridcell">English</div>
-              </div>
-              <div
-                role="row"
-                id="ac-pre-fi"
-                aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
-              >
-                <div role="gridcell">Finnish</div>
-              </div>
-              <div
-                role="row"
-                id="ac-pre-sk"
-                aria-selected="true"
-                class="UNSTABLE_ComboboxOption"
-              >
-                <div role="gridcell">Slovak</div>
-              </div>
-            </div>
-
-            <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
           </div>
 
         </div>
+
       </div>
 
     </div>
@@ -300,8 +428,8 @@
 
             <label
               class="Label"
-              id="ac-small-label"
-              for="ac-small-input"
+              id="combobox-small-label"
+              for="combobox-small-input"
             >Small</label>
 
             <div
@@ -312,7 +440,7 @@
               <div class="UNSTABLE_ComboboxSelection">
                 <div
                   role="grid"
-                  id="ac-small-selection"
+                  id="combobox-small-selection"
                   class="d-contents"
                   aria-label="Selected Small"
                   aria-live="off"
@@ -322,12 +450,11 @@
                 ></div>
                 <input
                   type="text"
-                  id="ac-small-input"
+                  id="combobox-small-input"
                   role="combobox"
                   aria-haspopup="grid"
                   aria-expanded="false"
-                  aria-controls="ac-small-listbox"
-                  aria-labelledby="ac-small-label"
+                  aria-controls="combobox-small-listbox"
                   aria-autocomplete="list"
                   autocomplete="off"
                   placeholder="Small"
@@ -345,37 +472,43 @@
                 class="Stack Stack--hasSpacing"
                 style="--stack-spacing: var(--spirit-space-300);"
                 role="grid"
-                id="ac-small-listbox"
-                aria-labelledby="ac-small-label"
+                id="combobox-small-listbox"
+                aria-labelledby="combobox-small-label"
                 aria-multiselectable="true"
               >
                 <div
                   role="row"
-                  id="ac-small-cs"
+                  id="combobox-small-cs"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Czech</div>
+                  <div role="gridcell"><span class="Label Label--item">Czech</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-small-en"
+                  id="combobox-small-en"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">English</div>
+                  <div role="gridcell"><span class="Label Label--item">English</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-small-sk"
+                  id="combobox-small-sk"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Slovak</div>
+                  <div role="gridcell"><span class="Label Label--item">Slovak</span></div>
                 </div>
               </div>
 
-              <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
             </div>
 
           </div>
@@ -388,8 +521,8 @@
 
             <label
               class="Label"
-              id="ac-medium-label"
-              for="ac-medium-input"
+              id="combobox-medium-label"
+              for="combobox-medium-input"
             >Medium</label>
 
             <div
@@ -400,7 +533,7 @@
               <div class="UNSTABLE_ComboboxSelection">
                 <div
                   role="grid"
-                  id="ac-medium-selection"
+                  id="combobox-medium-selection"
                   class="d-contents"
                   aria-label="Selected Medium"
                   aria-live="off"
@@ -410,12 +543,11 @@
                 ></div>
                 <input
                   type="text"
-                  id="ac-medium-input"
+                  id="combobox-medium-input"
                   role="combobox"
                   aria-haspopup="grid"
                   aria-expanded="false"
-                  aria-controls="ac-medium-listbox"
-                  aria-labelledby="ac-medium-label"
+                  aria-controls="combobox-medium-listbox"
                   aria-autocomplete="list"
                   autocomplete="off"
                   placeholder="Medium"
@@ -433,37 +565,43 @@
                 class="Stack Stack--hasSpacing"
                 style="--stack-spacing: var(--spirit-space-300);"
                 role="grid"
-                id="ac-medium-listbox"
-                aria-labelledby="ac-medium-label"
+                id="combobox-medium-listbox"
+                aria-labelledby="combobox-medium-label"
                 aria-multiselectable="true"
               >
                 <div
                   role="row"
-                  id="ac-medium-cs"
+                  id="combobox-medium-cs"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Czech</div>
+                  <div role="gridcell"><span class="Label Label--item">Czech</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-medium-en"
+                  id="combobox-medium-en"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">English</div>
+                  <div role="gridcell"><span class="Label Label--item">English</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-medium-sk"
+                  id="combobox-medium-sk"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Slovak</div>
+                  <div role="gridcell"><span class="Label Label--item">Slovak</span></div>
                 </div>
               </div>
 
-              <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
             </div>
 
           </div>
@@ -476,8 +614,8 @@
 
             <label
               class="Label"
-              id="ac-large-label"
-              for="ac-large-input"
+              id="combobox-large-label"
+              for="combobox-large-input"
             >Large</label>
 
             <div
@@ -488,7 +626,7 @@
               <div class="UNSTABLE_ComboboxSelection">
                 <div
                   role="grid"
-                  id="ac-large-selection"
+                  id="combobox-large-selection"
                   class="d-contents"
                   aria-label="Selected Large"
                   aria-live="off"
@@ -498,12 +636,11 @@
                 ></div>
                 <input
                   type="text"
-                  id="ac-large-input"
+                  id="combobox-large-input"
                   role="combobox"
                   aria-haspopup="grid"
                   aria-expanded="false"
-                  aria-controls="ac-large-listbox"
-                  aria-labelledby="ac-large-label"
+                  aria-controls="combobox-large-listbox"
                   aria-autocomplete="list"
                   autocomplete="off"
                   placeholder="Large"
@@ -521,37 +658,43 @@
                 class="Stack Stack--hasSpacing"
                 style="--stack-spacing: var(--spirit-space-300);"
                 role="grid"
-                id="ac-large-listbox"
-                aria-labelledby="ac-large-label"
+                id="combobox-large-listbox"
+                aria-labelledby="combobox-large-label"
                 aria-multiselectable="true"
               >
                 <div
                   role="row"
-                  id="ac-large-cs"
+                  id="combobox-large-cs"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Czech</div>
+                  <div role="gridcell"><span class="Label Label--item">Czech</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-large-en"
+                  id="combobox-large-en"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">English</div>
+                  <div role="gridcell"><span class="Label Label--item">English</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-large-sk"
+                  id="combobox-large-sk"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Slovak</div>
+                  <div role="gridcell"><span class="Label Label--item">Slovak</span></div>
                 </div>
               </div>
 
-              <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
             </div>
 
           </div>
@@ -566,7 +709,7 @@
 <section class="py-900 py-tablet-1000">
   <div class="Container">
 
-    <h2 class="docs-Heading">Helper text</h2>
+    <h2 class="docs-Heading">Helper Text</h2>
 
     <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
 
@@ -576,8 +719,8 @@
 
           <label
             class="Label"
-            id="ac-helper-label"
-            for="ac-helper-input"
+            id="combobox-helper-label"
+            for="combobox-helper-input"
           >Languages</label>
 
           <div
@@ -588,7 +731,7 @@
             <div class="UNSTABLE_ComboboxSelection">
               <div
                 role="grid"
-                id="ac-helper-selection"
+                id="combobox-helper-selection"
                 class="d-contents"
                 aria-label="Selected Languages"
                 aria-live="off"
@@ -598,15 +741,14 @@
               ></div>
               <input
                 type="text"
-                id="ac-helper-input"
+                id="combobox-helper-input"
                 role="combobox"
                 aria-haspopup="grid"
                 aria-expanded="false"
-                aria-controls="ac-helper-listbox"
-                aria-labelledby="ac-helper-label"
+                aria-controls="combobox-helper-listbox"
                 aria-autocomplete="list"
                 autocomplete="off"
-                aria-describedby="ac-helper-text"
+                aria-describedby="combobox-helper-text"
                 placeholder="Languages"
                 class="UNSTABLE_Combobox__input"
                 data-spirit-combobox-input
@@ -622,42 +764,48 @@
               class="Stack Stack--hasSpacing"
               style="--stack-spacing: var(--spirit-space-300);"
               role="grid"
-              id="ac-helper-listbox"
-              aria-labelledby="ac-helper-label"
+              id="combobox-helper-listbox"
+              aria-labelledby="combobox-helper-label"
               aria-multiselectable="true"
             >
               <div
                 role="row"
-                id="ac-helper-cs"
+                id="combobox-helper-cs"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">Czech</div>
+                <div role="gridcell"><span class="Label Label--item">Czech</span></div>
               </div>
               <div
                 role="row"
-                id="ac-helper-en"
+                id="combobox-helper-en"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">English</div>
+                <div role="gridcell"><span class="Label Label--item">English</span></div>
               </div>
               <div
                 role="row"
-                id="ac-helper-sk"
+                id="combobox-helper-sk"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">Slovak</div>
+                <div role="gridcell"><span class="Label Label--item">Slovak</span></div>
               </div>
             </div>
 
-            <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+            <div
+              data-spirit-combobox-empty-state
+              role="status"
+              aria-live="polite"
+              class="UNSTABLE_Combobox__emptyState"
+              hidden
+            >Nothing found</div>
           </div>
 
         </div>
 
-        <div class="HelperText" id="ac-helper-text">You can select multiple languages.</div>
+        <div class="HelperText" id="combobox-helper-text">You can select multiple languages.</div>
 
       </div>
 
@@ -669,7 +817,7 @@
 <section class="py-900 py-tablet-1000">
   <div class="Container">
 
-    <h2 class="docs-Heading">Validation states</h2>
+    <h2 class="docs-Heading">Validation States</h2>
 
     <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
       <div class="Grid Grid--cols-1 Grid--desktop--cols-3">
@@ -681,8 +829,8 @@
 
             <label
               class="Label Label--danger"
-              id="ac-danger-label"
-              for="ac-danger-input"
+              id="combobox-danger-label"
+              for="combobox-danger-input"
             >Languages</label>
 
             <div
@@ -693,7 +841,7 @@
               <div class="UNSTABLE_ComboboxSelection">
                 <div
                   role="grid"
-                  id="ac-danger-selection"
+                  id="combobox-danger-selection"
                   class="d-contents"
                   aria-label="Selected Languages"
                   aria-live="off"
@@ -703,15 +851,14 @@
                 ></div>
                 <input
                   type="text"
-                  id="ac-danger-input"
+                  id="combobox-danger-input"
                   role="combobox"
                   aria-haspopup="grid"
                   aria-expanded="false"
-                  aria-controls="ac-danger-listbox"
-                  aria-labelledby="ac-danger-label"
+                  aria-controls="combobox-danger-listbox"
                   aria-autocomplete="list"
                   autocomplete="off"
-                  aria-describedby="ac-danger-validation"
+                  aria-describedby="combobox-danger-validation"
                   placeholder="Languages"
                   class="UNSTABLE_Combobox__input"
                   data-spirit-combobox-input
@@ -727,36 +874,42 @@
                 class="Stack Stack--hasSpacing"
                 style="--stack-spacing: var(--spirit-space-300);"
                 role="grid"
-                id="ac-danger-listbox"
-                aria-labelledby="ac-danger-label"
+                id="combobox-danger-listbox"
+                aria-labelledby="combobox-danger-label"
                 aria-multiselectable="true"
               >
                 <div
                   role="row"
-                  id="ac-danger-cs"
+                  id="combobox-danger-cs"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Czech</div>
+                  <div role="gridcell"><span class="Label Label--item">Czech</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-danger-en"
+                  id="combobox-danger-en"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">English</div>
+                  <div role="gridcell"><span class="Label Label--item">English</span></div>
                 </div>
               </div>
 
-              <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
             </div>
 
           </div>
 
           <div
             class="ValidationText ValidationText--danger"
-            id="ac-danger-validation"
+            id="combobox-danger-validation"
             role="alert"
           >Please select at least one language.</div>
 
@@ -769,8 +922,8 @@
 
             <label
               class="Label Label--warning"
-              id="ac-warning-label"
-              for="ac-warning-input"
+              id="combobox-warning-label"
+              for="combobox-warning-input"
             >Languages</label>
 
             <div
@@ -781,7 +934,7 @@
               <div class="UNSTABLE_ComboboxSelection">
                 <div
                   role="grid"
-                  id="ac-warning-selection"
+                  id="combobox-warning-selection"
                   class="d-contents"
                   aria-label="Selected Languages"
                   aria-live="off"
@@ -791,15 +944,14 @@
                 ></div>
                 <input
                   type="text"
-                  id="ac-warning-input"
+                  id="combobox-warning-input"
                   role="combobox"
                   aria-haspopup="grid"
                   aria-expanded="false"
-                  aria-controls="ac-warning-listbox"
-                  aria-labelledby="ac-warning-label"
+                  aria-controls="combobox-warning-listbox"
                   aria-autocomplete="list"
                   autocomplete="off"
-                  aria-describedby="ac-warning-validation"
+                  aria-describedby="combobox-warning-validation"
                   placeholder="Languages"
                   class="UNSTABLE_Combobox__input"
                   data-spirit-combobox-input
@@ -815,34 +967,40 @@
                 class="Stack Stack--hasSpacing"
                 style="--stack-spacing: var(--spirit-space-300);"
                 role="grid"
-                id="ac-warning-listbox"
-                aria-labelledby="ac-warning-label"
+                id="combobox-warning-listbox"
+                aria-labelledby="combobox-warning-label"
                 aria-multiselectable="true"
               >
                 <div
                   role="row"
-                  id="ac-warning-cs"
+                  id="combobox-warning-cs"
                   aria-selected="true"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Czech</div>
+                  <div role="gridcell"><span class="Label Label--item">Czech</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-warning-en"
+                  id="combobox-warning-en"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">English</div>
+                  <div role="gridcell"><span class="Label Label--item">English</span></div>
                 </div>
               </div>
 
-              <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
             </div>
 
           </div>
 
-          <div class="ValidationText ValidationText--warning" id="ac-warning-validation">Consider selecting more languages.</div>
+          <div class="ValidationText ValidationText--warning" id="combobox-warning-validation">Consider selecting more languages.</div>
 
         </div>
 
@@ -853,8 +1011,8 @@
 
             <label
               class="Label Label--success"
-              id="ac-success-label"
-              for="ac-success-input"
+              id="combobox-success-label"
+              for="combobox-success-input"
             >Languages</label>
 
             <div
@@ -865,7 +1023,7 @@
               <div class="UNSTABLE_ComboboxSelection">
                 <div
                   role="grid"
-                  id="ac-success-selection"
+                  id="combobox-success-selection"
                   class="d-contents"
                   aria-label="Selected Languages"
                   aria-live="off"
@@ -875,15 +1033,14 @@
                 ></div>
                 <input
                   type="text"
-                  id="ac-success-input"
+                  id="combobox-success-input"
                   role="combobox"
                   aria-haspopup="grid"
                   aria-expanded="false"
-                  aria-controls="ac-success-listbox"
-                  aria-labelledby="ac-success-label"
+                  aria-controls="combobox-success-listbox"
                   aria-autocomplete="list"
                   autocomplete="off"
-                  aria-describedby="ac-success-validation"
+                  aria-describedby="combobox-success-validation"
                   placeholder="Languages"
                   class="UNSTABLE_Combobox__input"
                   data-spirit-combobox-input
@@ -899,34 +1056,40 @@
                 class="Stack Stack--hasSpacing"
                 style="--stack-spacing: var(--spirit-space-300);"
                 role="grid"
-                id="ac-success-listbox"
-                aria-labelledby="ac-success-label"
+                id="combobox-success-listbox"
+                aria-labelledby="combobox-success-label"
                 aria-multiselectable="true"
               >
                 <div
                   role="row"
-                  id="ac-success-cs"
+                  id="combobox-success-cs"
                   aria-selected="true"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Czech</div>
+                  <div role="gridcell"><span class="Label Label--item">Czech</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-success-en"
+                  id="combobox-success-en"
                   aria-selected="true"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">English</div>
+                  <div role="gridcell"><span class="Label Label--item">English</span></div>
                 </div>
               </div>
 
-              <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
             </div>
 
           </div>
 
-          <div class="ValidationText ValidationText--success" id="ac-success-validation">Languages selected successfully.</div>
+          <div class="ValidationText ValidationText--success" id="combobox-success-validation">Languages selected successfully.</div>
 
         </div>
 
@@ -951,8 +1114,8 @@
 
             <label
               class="Label Label--disabled"
-              id="ac-disabled-label"
-              for="ac-disabled-input"
+              id="combobox-disabled-label"
+              for="combobox-disabled-input"
             >Languages (empty)</label>
 
             <div
@@ -963,7 +1126,7 @@
               <div class="UNSTABLE_ComboboxSelection">
                 <div
                   role="grid"
-                  id="ac-disabled-selection"
+                  id="combobox-disabled-selection"
                   class="d-contents"
                   aria-label="Selected Languages"
                   aria-live="off"
@@ -973,12 +1136,11 @@
                 ></div>
                 <input
                   type="text"
-                  id="ac-disabled-input"
+                  id="combobox-disabled-input"
                   role="combobox"
                   aria-haspopup="grid"
                   aria-expanded="false"
-                  aria-controls="ac-disabled-listbox"
-                  aria-labelledby="ac-disabled-label"
+                  aria-controls="combobox-disabled-listbox"
                   aria-autocomplete="list"
                   autocomplete="off"
                   placeholder="Languages"
@@ -997,29 +1159,35 @@
                 class="Stack Stack--hasSpacing"
                 style="--stack-spacing: var(--spirit-space-300);"
                 role="grid"
-                id="ac-disabled-listbox"
-                aria-labelledby="ac-disabled-label"
+                id="combobox-disabled-listbox"
+                aria-labelledby="combobox-disabled-label"
                 aria-multiselectable="true"
               >
                 <div
                   role="row"
-                  id="ac-disabled-cs"
+                  id="combobox-disabled-cs"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Czech</div>
+                  <div role="gridcell"><span class="Label Label--item">Czech</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-disabled-en"
+                  id="combobox-disabled-en"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">English</div>
+                  <div role="gridcell"><span class="Label Label--item">English</span></div>
                 </div>
               </div>
 
-              <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
             </div>
 
           </div>
@@ -1032,8 +1200,8 @@
 
             <label
               class="Label Label--disabled"
-              id="ac-disabled-pre-label"
-              for="ac-disabled-pre-input"
+              id="combobox-disabled-pre-label"
+              for="combobox-disabled-pre-input"
             >Languages (with selection)</label>
 
             <div
@@ -1044,7 +1212,7 @@
               <div class="UNSTABLE_ComboboxSelection">
                 <div
                   role="grid"
-                  id="ac-disabled-pre-selection"
+                  id="combobox-disabled-pre-selection"
                   class="d-contents"
                   aria-label="Selected Languages"
                   aria-live="off"
@@ -1054,12 +1222,11 @@
                 ></div>
                 <input
                   type="text"
-                  id="ac-disabled-pre-input"
+                  id="combobox-disabled-pre-input"
                   role="combobox"
                   aria-haspopup="grid"
                   aria-expanded="false"
-                  aria-controls="ac-disabled-pre-listbox"
-                  aria-labelledby="ac-disabled-pre-label"
+                  aria-controls="combobox-disabled-pre-listbox"
                   aria-autocomplete="list"
                   autocomplete="off"
                   placeholder="Languages"
@@ -1078,37 +1245,43 @@
                 class="Stack Stack--hasSpacing"
                 style="--stack-spacing: var(--spirit-space-300);"
                 role="grid"
-                id="ac-disabled-pre-listbox"
-                aria-labelledby="ac-disabled-pre-label"
+                id="combobox-disabled-pre-listbox"
+                aria-labelledby="combobox-disabled-pre-label"
                 aria-multiselectable="true"
               >
                 <div
                   role="row"
-                  id="ac-disabled-pre-cs"
+                  id="combobox-disabled-pre-cs"
                   aria-selected="true"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Czech</div>
+                  <div role="gridcell"><span class="Label Label--item">Czech</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-disabled-pre-en"
+                  id="combobox-disabled-pre-en"
                   aria-selected="true"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">English</div>
+                  <div role="gridcell"><span class="Label Label--item">English</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-disabled-pre-sk"
+                  id="combobox-disabled-pre-sk"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Slovak</div>
+                  <div role="gridcell"><span class="Label Label--item">Slovak</span></div>
                 </div>
               </div>
 
-              <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
             </div>
 
           </div>
@@ -1123,7 +1296,7 @@
 <section class="py-900 py-tablet-1000">
   <div class="Container">
 
-    <h2 class="docs-Heading">With addon</h2>
+    <h2 class="docs-Heading">With Addon</h2>
 
     <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
 
@@ -1133,8 +1306,8 @@
 
           <label
             class="Label"
-            id="ac-addon-label"
-            for="ac-addon-input"
+            id="combobox-addon-label"
+            for="combobox-addon-input"
           >Languages</label>
 
           <div
@@ -1145,7 +1318,7 @@
             <div class="UNSTABLE_ComboboxSelection">
               <div
                 role="grid"
-                id="ac-addon-selection"
+                id="combobox-addon-selection"
                 class="d-contents"
                 aria-label="Selected Languages"
                 aria-live="off"
@@ -1155,12 +1328,11 @@
               ></div>
               <input
                 type="text"
-                id="ac-addon-input"
+                id="combobox-addon-input"
                 role="combobox"
                 aria-haspopup="grid"
                 aria-expanded="false"
-                aria-controls="ac-addon-listbox"
-                aria-labelledby="ac-addon-label"
+                aria-controls="combobox-addon-listbox"
                 aria-autocomplete="list"
                 autocomplete="off"
                 placeholder="Languages"
@@ -1201,53 +1373,59 @@
               class="Stack Stack--hasSpacing"
               style="--stack-spacing: var(--spirit-space-300);"
               role="grid"
-              id="ac-addon-listbox"
-              aria-labelledby="ac-addon-label"
+              id="combobox-addon-listbox"
+              aria-labelledby="combobox-addon-label"
               aria-multiselectable="true"
             >
               <div
                 role="row"
-                id="ac-addon-cs"
+                id="combobox-addon-cs"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">Czech</div>
+                <div role="gridcell"><span class="Label Label--item">Czech</span></div>
               </div>
               <div
                 role="row"
-                id="ac-addon-da"
+                id="combobox-addon-da"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">Danish</div>
+                <div role="gridcell"><span class="Label Label--item">Danish</span></div>
               </div>
               <div
                 role="row"
-                id="ac-addon-en"
+                id="combobox-addon-en"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">English</div>
+                <div role="gridcell"><span class="Label Label--item">English</span></div>
               </div>
               <div
                 role="row"
-                id="ac-addon-fi"
+                id="combobox-addon-fi"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">Finnish</div>
+                <div role="gridcell"><span class="Label Label--item">Finnish</span></div>
               </div>
               <div
                 role="row"
-                id="ac-addon-sk"
+                id="combobox-addon-sk"
                 aria-selected="false"
-                class="UNSTABLE_ComboboxOption"
+                class="Item"
               >
-                <div role="gridcell">Slovak</div>
+                <div role="gridcell"><span class="Label Label--item">Slovak</span></div>
               </div>
             </div>
 
-            <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+            <div
+              data-spirit-combobox-empty-state
+              role="status"
+              aria-live="polite"
+              class="UNSTABLE_Combobox__emptyState"
+              hidden
+            >Nothing found</div>
           </div>
 
         </div>
@@ -1261,7 +1439,7 @@
 <section class="py-900 py-tablet-1000">
   <div class="Container">
 
-    <h2 class="docs-Heading">Loading state</h2>
+    <h2 class="docs-Heading">Loading State</h2>
 
     <div class="docs-Stack docs-Stack--stretch spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
       <div class="Grid Grid--cols-1 Grid--desktop--cols-2">
@@ -1277,8 +1455,8 @@
 
             <label
               class="Label"
-              id="ac-loading-text-label"
-              for="ac-loading-text-input"
+              id="combobox-loading-text-label"
+              for="combobox-loading-text-input"
             >Languages (text)</label>
 
             <div
@@ -1289,7 +1467,7 @@
               <div class="UNSTABLE_ComboboxSelection">
                 <div
                   role="grid"
-                  id="ac-loading-text-selection"
+                  id="combobox-loading-text-selection"
                   class="d-contents"
                   aria-label="Selected Languages"
                   aria-live="off"
@@ -1299,12 +1477,11 @@
                 ></div>
                 <input
                   type="text"
-                  id="ac-loading-text-input"
+                  id="combobox-loading-text-input"
                   role="combobox"
                   aria-haspopup="grid"
                   aria-expanded="false"
-                  aria-controls="ac-loading-text-listbox"
-                  aria-labelledby="ac-loading-text-label"
+                  aria-controls="combobox-loading-text-listbox"
                   aria-autocomplete="list"
                   autocomplete="off"
                   placeholder="Languages"
@@ -1331,53 +1508,59 @@
                 class="Stack Stack--hasSpacing"
                 style="--stack-spacing: var(--spirit-space-300);"
                 role="grid"
-                id="ac-loading-text-listbox"
-                aria-labelledby="ac-loading-text-label"
+                id="combobox-loading-text-listbox"
+                aria-labelledby="combobox-loading-text-label"
                 aria-multiselectable="true"
               >
                 <div
                   role="row"
-                  id="ac-loading-text-cs"
+                  id="combobox-loading-text-cs"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Czech</div>
+                  <div role="gridcell"><span class="Label Label--item">Czech</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-loading-text-da"
+                  id="combobox-loading-text-da"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Danish</div>
+                  <div role="gridcell"><span class="Label Label--item">Danish</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-loading-text-en"
+                  id="combobox-loading-text-en"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">English</div>
+                  <div role="gridcell"><span class="Label Label--item">English</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-loading-text-fi"
+                  id="combobox-loading-text-fi"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Finnish</div>
+                  <div role="gridcell"><span class="Label Label--item">Finnish</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-loading-text-sk"
+                  id="combobox-loading-text-sk"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Slovak</div>
+                  <div role="gridcell"><span class="Label Label--item">Slovak</span></div>
                 </div>
               </div>
 
-              <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
             </div>
 
           </div>
@@ -1394,8 +1577,8 @@
 
             <label
               class="Label"
-              id="ac-loading-spinner-label"
-              for="ac-loading-spinner-input"
+              id="combobox-loading-spinner-label"
+              for="combobox-loading-spinner-input"
             >Languages (spinner)</label>
 
             <div
@@ -1406,7 +1589,7 @@
               <div class="UNSTABLE_ComboboxSelection">
                 <div
                   role="grid"
-                  id="ac-loading-spinner-selection"
+                  id="combobox-loading-spinner-selection"
                   class="d-contents"
                   aria-label="Selected Languages"
                   aria-live="off"
@@ -1416,12 +1599,11 @@
                 ></div>
                 <input
                   type="text"
-                  id="ac-loading-spinner-input"
+                  id="combobox-loading-spinner-input"
                   role="combobox"
                   aria-haspopup="grid"
                   aria-expanded="false"
-                  aria-controls="ac-loading-spinner-listbox"
-                  aria-labelledby="ac-loading-spinner-label"
+                  aria-controls="combobox-loading-spinner-listbox"
                   aria-autocomplete="list"
                   autocomplete="off"
                   placeholder="Languages"
@@ -1458,59 +1640,144 @@
                 class="Stack Stack--hasSpacing"
                 style="--stack-spacing: var(--spirit-space-300);"
                 role="grid"
-                id="ac-loading-spinner-listbox"
-                aria-labelledby="ac-loading-spinner-label"
+                id="combobox-loading-spinner-listbox"
+                aria-labelledby="combobox-loading-spinner-label"
                 aria-multiselectable="true"
               >
                 <div
                   role="row"
-                  id="ac-loading-spinner-cs"
+                  id="combobox-loading-spinner-cs"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Czech</div>
+                  <div role="gridcell"><span class="Label Label--item">Czech</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-loading-spinner-da"
+                  id="combobox-loading-spinner-da"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Danish</div>
+                  <div role="gridcell"><span class="Label Label--item">Danish</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-loading-spinner-en"
+                  id="combobox-loading-spinner-en"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">English</div>
+                  <div role="gridcell"><span class="Label Label--item">English</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-loading-spinner-fi"
+                  id="combobox-loading-spinner-fi"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Finnish</div>
+                  <div role="gridcell"><span class="Label Label--item">Finnish</span></div>
                 </div>
                 <div
                   role="row"
-                  id="ac-loading-spinner-sk"
+                  id="combobox-loading-spinner-sk"
                   aria-selected="false"
-                  class="UNSTABLE_ComboboxOption"
+                  class="Item"
                 >
-                  <div role="gridcell">Slovak</div>
+                  <div role="gridcell"><span class="Label Label--item">Slovak</span></div>
                 </div>
               </div>
 
-              <div data-spirit-combobox-empty-state class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
             </div>
 
           </div>
         </div>
 
       </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Custom Content</h2>
+
+    <div class="docs-Stack docs-Stack--start spirit-feature-enable-v5-tag-appearance spirit-feature-enable-v5-control-button-expanded-size-scale">
+
+      <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+        <div class="Dropdown">
+
+          <label
+            class="Label"
+            id="combobox-tip-label"
+            for="combobox-tip-input"
+          >Languages</label>
+
+          <div
+            class="InputContainer InputContainer--medium"
+            role="group"
+            aria-label="Languages"
+          >
+            <div class="UNSTABLE_ComboboxSelection">
+              <div
+                role="grid"
+                id="combobox-tip-selection"
+                class="d-contents"
+                aria-label="Selected Languages"
+                aria-live="off"
+                aria-atomic="false"
+                aria-relevant="additions"
+                data-spirit-combobox-selection
+              ></div>
+              <input
+                type="text"
+                id="combobox-tip-input"
+                role="combobox"
+                aria-haspopup="grid"
+                aria-expanded="false"
+                aria-controls="combobox-tip-listbox"
+                aria-autocomplete="list"
+                autocomplete="off"
+                placeholder="Languages"
+                class="UNSTABLE_Combobox__input"
+                data-spirit-combobox-input
+              />
+            </div>
+          </div>
+
+          <div
+            class="DropdownPopover placement-bottom-start"
+            data-spirit-combobox-listbox
+          >
+            <div class="color-scheme-on-neutral-subtle bg-color-scheme text-color-scheme rounded-300 p-600">
+              <div
+                class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter"
+                style="--flex-spacing-x: var(--spirit-space-400);"
+              >
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#search" />
+                </svg>
+                <span>Type to find what you're looking for…</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
 
   </div>

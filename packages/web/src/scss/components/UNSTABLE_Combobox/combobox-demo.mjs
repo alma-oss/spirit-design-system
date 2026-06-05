@@ -30,7 +30,7 @@ const SELECTOR_LOADING = '[data-spirit-combobox-loading]';
 const ATTR_ACTIVE = 'data-spirit-combobox-active';
 const ATTR_ASYNC = 'data-spirit-combobox-async';
 
-const ID_TAG_TEMPLATE = 'autocomplete-tag-template';
+const ID_TAG_TEMPLATE = 'combobox-tag-template';
 
 // Simulated async search delay (ms) — used only by instances with data-spirit-combobox-async
 const ASYNC_DELAY_MS = 600;
@@ -53,6 +53,11 @@ function clearActive(popupEl) {
   popupEl.querySelectorAll(`[${ATTR_ACTIVE}]`).forEach((el) => el.removeAttribute(ATTR_ACTIVE));
 }
 
+function setRowSelected(rowEl, selected) {
+  rowEl.setAttribute('aria-selected', selected ? 'true' : 'false');
+  rowEl.classList.toggle('Item--selected', selected);
+}
+
 function setActive(inputEl, rowEl) {
   const popupEl = document.getElementById(inputEl.getAttribute('aria-controls'));
 
@@ -72,79 +77,7 @@ function setActive(inputEl, rowEl) {
 function getRowLabel(rowEl) {
   const firstCell = rowEl.querySelector(SELECTOR_GRIDCELL);
 
-  if (!firstCell) return rowEl.textContent.trim();
-
-  // After highlighting, firstCell contains two spans (formatted + accessibility-hidden).
-  return firstCell.dataset.originalText ?? firstCell.textContent.trim();
-}
-
-/**
- * Highlights the portion of `targetEl`'s text that matches `query`.
- * The matching substring renders at regular weight; surrounding text is bold.
- * When `query` is empty the original plain text is restored.
- *
- * When a match exists, the formatted markup is wrapped in a <span aria-hidden="true">
- * so screen readers ignore it. A sibling <span class="accessibility-hidden"> carrying
- * the original plain text is added so screen readers announce the unformatted label.
- *
- * @param targetEl
- * @param query
- */
-function highlightLabel(targetEl, query) {
-  if (!targetEl) return;
-
-  if (!('originalText' in targetEl.dataset)) {
-    targetEl.dataset.originalText = targetEl.textContent;
-  }
-
-  const original = targetEl.dataset.originalText;
-
-  if (!query) {
-    targetEl.textContent = original;
-
-    return;
-  }
-
-  const matchIdx = original.toLowerCase().indexOf(query.toLowerCase());
-
-  if (matchIdx === -1) {
-    targetEl.textContent = original;
-
-    return;
-  }
-
-  const before = original.slice(0, matchIdx);
-  const match = original.slice(matchIdx, matchIdx + query.length);
-  const after = original.slice(matchIdx + query.length);
-
-  const formattedSpan = document.createElement('span');
-
-  formattedSpan.setAttribute('aria-hidden', 'true');
-
-  if (before) {
-    const strong = document.createElement('strong');
-
-    strong.textContent = before;
-    formattedSpan.appendChild(strong);
-  }
-
-  formattedSpan.appendChild(document.createTextNode(match));
-
-  if (after) {
-    const strong = document.createElement('strong');
-
-    strong.textContent = after;
-    formattedSpan.appendChild(strong);
-  }
-
-  const hiddenSpan = document.createElement('span');
-
-  hiddenSpan.className = 'accessibility-hidden';
-  hiddenSpan.textContent = original;
-
-  targetEl.innerHTML = '';
-  targetEl.appendChild(formattedSpan);
-  targetEl.appendChild(hiddenSpan);
+  return firstCell ? firstCell.textContent.trim() : rowEl.textContent.trim();
 }
 
 // ─── Tag management ───────────────────────────────────────────────────────────
@@ -253,14 +186,12 @@ function removeFocusedTag(row, selectionEl, onRemove) {
 
 function filterRows(popupEl, query) {
   const normalised = query.trim().toLowerCase();
-  const rawQuery = query.trim();
 
   getRows(popupEl).forEach((row) => {
     const label = getRowLabel(row);
     const matches = !normalised || label.toLowerCase().includes(normalised);
 
     row.style.display = matches ? '' : 'none';
-    highlightLabel(row.querySelector(SELECTOR_GRIDCELL), rawQuery);
   });
 
   const emptyState = popupEl.querySelector(SELECTOR_EMPTY_STATE);
@@ -322,6 +253,7 @@ function initCombobox(comboboxEl) {
     .filter((row) => row.getAttribute('aria-selected') === 'true')
     .forEach((row) => {
       if (row.id) selectedIds.push(row.id);
+      row.classList.add('Item--selected');
     });
 
   // ── Selection rendering ───────────────────────────────────────────────────
@@ -379,17 +311,7 @@ function initCombobox(comboboxEl) {
       );
     }
 
-    // Placeholder is the only visual cue for the "add more" affordance:
-    //   - no selection      → field label (e.g. "Languages")
-    //   - some selected     → "+ Add more…"
-    //   - all selected      → empty (nothing left to add)
-    if (totalSelected === 0) {
-      inputEl.placeholder = fieldLabel;
-    } else if (allSelected) {
-      inputEl.placeholder = '';
-    } else {
-      inputEl.placeholder = '+ Add more…';
-    }
+    inputEl.placeholder = totalSelected === 0 ? fieldLabel : '+ Add more…';
 
     addMoreHelper.hidden = !showAddMore;
     setAddMoreDescribed(showAddMore);
@@ -404,7 +326,7 @@ function initCombobox(comboboxEl) {
         label,
         selectionEl,
         () => {
-          rowEl.setAttribute('aria-selected', 'false');
+          setRowSelected(rowEl, false);
           const idx = selectedIds.indexOf(id);
 
           if (idx !== -1) selectedIds.splice(idx, 1);
@@ -436,7 +358,7 @@ function initCombobox(comboboxEl) {
 
     const isSelected = rowEl.getAttribute('aria-selected') === 'true';
 
-    rowEl.setAttribute('aria-selected', isSelected ? 'false' : 'true');
+    setRowSelected(rowEl, !isSelected);
 
     if (isSelected) {
       const idx = selectedIds.indexOf(rowEl.id);
@@ -604,7 +526,7 @@ function initCombobox(comboboxEl) {
       event.preventDefault();
       event.stopPropagation();
 
-      getRows(popupEl).forEach((row) => row.setAttribute('aria-selected', 'false'));
+      getRows(popupEl).forEach((row) => setRowSelected(row, false));
       selectedIds.length = 0;
       renderSelection();
       inputEl.focus();
