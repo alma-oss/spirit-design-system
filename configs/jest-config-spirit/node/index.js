@@ -36,7 +36,7 @@ export const config = {
 
   // An array of regexp pattern strings that are matched against all file paths before executing the test.
   // https://jestjs.io/docs/configuration#coveragepathignorepatterns-arraystring
-  coveragePathIgnorePatterns: ['__fixtures__', '.*.stories.*', '.*.figma.*', '/stories/.*', '/figma/.*', '/demo/.*', 'bin'],
+  coveragePathIgnorePatterns: ['__fixtures__', '__testfixtures__', '.*.stories.*', '.*.figma.*', '/stories/.*', '/figma/.*', '/demo/.*', 'bin'],
 
   // A list of reporter names that Jest uses when writing coverage reports. Any istanbul reporter can be used.
   // https://jestjs.io/docs/configuration#coveragereporters-arraystring--string-options
