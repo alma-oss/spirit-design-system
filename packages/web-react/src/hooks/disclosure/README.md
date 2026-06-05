@@ -1,6 +1,6 @@
 # Disclosure
 
-Disclosures are moments that open up on a page and reveal additional information related to the source it is triggered from.
+[Disclosures][disclosure-pattern] are moments that open up on a page and reveal additional information related to the source it is triggered from.
 
 ## Features
 
@@ -72,4 +72,5 @@ const Disclosure = (props) => {
 <Disclosure title="Summary">Details.</Disclosure>;
 ```
 
+[disclosure-pattern]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/disclosures.md
 [hidden-until-found]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/hidden#the_hidden_until_found_state
