@@ -41,9 +41,9 @@ describe('ScrollView accessibility', () => {
     expect(results).toHaveNoAxeViolations();
   });
 
-  it('should be accessible with arrows', async () => {
+  it('should be accessible with controls', async () => {
     await testScrollViewAccessibility(
-      <ScrollView hasArrows ariaLabelArrows={{ start: 'Previous', end: 'Next' }}>
+      <ScrollView hasControls ariaLabelControls={{ start: 'Previous', end: 'Next' }}>
         {scrollViewContent}
       </ScrollView>,
     );

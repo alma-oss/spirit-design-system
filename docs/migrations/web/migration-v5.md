@@ -9,6 +9,7 @@ Introducing version 5 of the _spirit-web_ package.
 - [Component Changes](#component-changes)
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
   - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
+  - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Stack: Modifier Classes Without `has` Prefix](#stack-modifier-classes-without-has-prefix)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
 
@@ -77,6 +78,29 @@ Manually replace the modifier classes in your project.
 - `Flex--column` → `Flex--vertical`
 - `Flex--{breakpoint}--row` → `Flex--{breakpoint}--horizontal`
 - `Flex--{breakpoint}--column` → `Flex--{breakpoint}--vertical`
+
+### ScrollView: Arrows Renamed to Controls
+
+ScrollView scroll navigation markup was renamed from “arrows” to “controls”.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Manually replace the BEM class in your project.
+
+- `ScrollView__arrows` → `ScrollView__controls`
+
+If you customized internal Sass variables in your project, rename them as well:
+
+- `$start-shadow-size-arrow` → `$start-shadow-size-controls`
+- `$start-shadow-initial-offset-arrow` → `$start-shadow-initial-offset-controls`
+- `$end-shadow-size-arrow` → `$end-shadow-size-controls`
+- `$end-shadow-initial-offset-arrow` → `$end-shadow-initial-offset-controls`
+- `$arrow-spacing` → `$controls-spacing`
+
+</details>
 
 ### Stack: Modifier Classes Without `has` Prefix
 

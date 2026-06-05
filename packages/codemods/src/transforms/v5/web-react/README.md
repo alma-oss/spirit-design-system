@@ -212,6 +212,32 @@ Responsive margin values are also converted:
 
 Note: If all values in a responsive object are `space-400`, the spacing prop is not set (default behavior).
 
+### `v5/web-react/scrollview-arrows-to-controls` — ScrollView Arrows Renamed to Controls
+
+This codemod updates ScrollView-related props, subcomponents, hooks, types, and constants after the arrows-to-controls rename.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/scrollview-arrows-to-controls
+```
+
+#### Example
+
+```diff
+- import { ScrollView, ScrollViewArrows, useScrollViewArrows } from '@alma-oss/spirit-web-react';
++ import { ScrollView, ScrollViewControls, useScrollViewControls } from '@alma-oss/spirit-web-react';
+…
+- const { arrows } = useScrollViewArrows(true);
++ const { controls } = useScrollViewControls(true);
+…
+- <ScrollView hasArrows arrowsScrollStep={200} ariaLabelArrows={labels} … />
++ <ScrollView hasControls controlsScrollStep={200} ariaLabelControls={labels} … />
+…
+- <ScrollViewArrows ariaLabelArrows={labels} … />
++ <ScrollViewControls ariaLabelControls={labels} … />
+```
+
 ### `v5/web-react/forms-isFluid-prop-removal` — Remove `isFluid` Prop From Form Components
 
 This codemod removes the `isFluid` prop from form components that are now fluid by default.
