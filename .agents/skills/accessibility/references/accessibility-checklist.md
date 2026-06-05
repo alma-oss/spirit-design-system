@@ -102,9 +102,10 @@ Map severity to the repo's review framing so triage is consistent:
 
 ## Testing
 
-web-react keeps shared accessibility tests under `tests/accessibilityTests/` and per-component
-`*.accessibility.test.tsx`; web has SCSS a11y tooling under `scss/tools/_accessibility.scss`. A new
-or changed interactive component without an accessibility test is a `todo`.
+web-react keeps shared accessibility tests under `packages/web-react/tests/accessibilityTests/` and
+per-component `packages/web-react/src/components/<Component>/__tests__/*.accessibility.test.tsx`; web
+has SCSS a11y tooling under `packages/web/src/scss/tools/_accessibility.scss`. A new or changed
+interactive component without an accessibility test is a `todo`.
 
 These complement — they do not replace — `eslint-plugin-jsx-a11y` (static) and manual checks. For a
 quick automated pass against a running page or Storybook story:

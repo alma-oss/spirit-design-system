@@ -75,10 +75,10 @@ redundant entry (`3.3.7`), and accessible authentication (`3.3.8`).
 
 ## Tests
 
-- web-react keeps shared accessibility tests under `tests/accessibilityTests/` and per-component
-  `*.accessibility.test.tsx`. A new or changed interactive component without an accessibility test is
-  a `todo`.
-- web has SCSS a11y tooling under `scss/tools/_accessibility.scss`.
+- web-react keeps shared accessibility tests under `packages/web-react/tests/accessibilityTests/` and
+  per-component `packages/web-react/src/components/<Component>/__tests__/*.accessibility.test.tsx`. A
+  new or changed interactive component without an accessibility test is a `todo`.
+- web has SCSS a11y tooling under `packages/web/src/scss/tools/_accessibility.scss`.
 
 ## References
 

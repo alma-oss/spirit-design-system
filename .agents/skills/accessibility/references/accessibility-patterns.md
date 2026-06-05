@@ -85,7 +85,9 @@ A focused element must not be fully hidden behind a sticky header/footer. Reserv
 `scroll-margin` so it scrolls into the clear.
 
 ```scss
-:focus {
+@use '@tokens' as tokens;
+
+:focus-visible {
   scroll-margin-top: var(--#{tokens.$css-variable-prefix}sticky-header-height, 80px);
   scroll-margin-bottom: 60px;
 }
@@ -130,7 +132,7 @@ related controls with `fieldset`/`legend`.
 ```tsx
 // ✅ Explicit association
 <label htmlFor="first-name">First name</label>
-<input id="first-name" name="firstName" type="text" autocomplete="given-name" />
+<input id="first-name" name="firstName" type="text" autoComplete="given-name" />
 
 // ✅ Grouping
 <fieldset>
