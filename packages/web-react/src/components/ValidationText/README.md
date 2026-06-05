@@ -12,7 +12,7 @@ import { ValidationText } from '@alma-oss/spirit-web-react';
 <ValidationText validationText="Danger validation text" />
 ```
 
-When used inside form field components such as [Checkbox][readme-checkbox], [Radio][readme-radio], [TextField][readme-textfield], or [Toggle][readme-toggle], the parent provides context so the correct variant and disabled state are applied automatically. Validation state can also be taken from the parent context for styling, but the icon is rendered only when `hasValidationStateIcon` is set.
+When used inside form field components such as [Checkbox][readme-checkbox], [Radio][readme-radio], [TextField][readme-textfield], or [Toggle][readme-toggle], the parent provides context so the correct variant and disabled state are applied automatically. Validation state can also be taken from the parent context for styling, but the icon is rendered only when `validationStateIcon` is set. When composing fields manually, pass `validationStateIcon` from the field's `validationState` when `hasValidationIcon` is enabled — the same pattern built-in form fields use.
 
 ## With Explicit Props
 
@@ -21,11 +21,11 @@ You can override context by passing props directly:
 ```tsx
 <ValidationText
   id="my-validation-text"
-  validationText="Danger validation text"
   elementType="span"
-  hasValidationStateIcon="danger"
-  isDisabled={false}
   formFieldMode="inline"
+  isDisabled={false}
+  validationStateIcon="danger"
+  validationText="Danger validation text"
 />
 ```
 
@@ -35,16 +35,16 @@ When displaying validation text dynamically, set [`role="alert"`][aria-alert-rol
 
 ### API
 
-| Name                     | Type                                                   | Default | Required | Description                                                                                                                     |
-| ------------------------ | ------------------------------------------------------ | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `elementType`            | `ElementType`                                          | `div`   | ✕        | Element used as main wrapper. When `validationText` is an array, the component renders a `ul` inside the wrapper                |
-| `formFieldMode`          | `FormFieldMode`                                        | —       | ✕        | Explicit mode (`inline`, `item`); omit for the default layout used by box form field components, or take it from parent context |
-| `hasValidationStateIcon` | [Validation dictionary][dictionary-validation]         | —       | ✕        | When set, shows validation icon and applies state styling (e.g. `danger`)                                                       |
-| `id`                     | `string`                                               | —       | ✕        | Element id (e.g. for `aria-describedby`)                                                                                        |
-| `isDisabled`             | `bool`                                                 | `false` | ✕        | Disabled state; when omitted, taken from parent context                                                                         |
-| `registerAria`           | `(payload: { add?: string; remove?: string }) => void` | —       | ✕        | Callback to register this element's id for `aria-describedby`                                                                   |
-| `role`                   | `AriaRole`                                             | —       | ✕        | ARIA role (e.g. `alert` for dynamic validation)                                                                                 |
-| `validationText`         | `ReactNode` \| `ReactNode[]`                           | —       | ✕        | Validation message or messages to display                                                                                       |
+| Name                  | Type                                                   | Default | Required | Description                                                                                                                     |
+| --------------------- | ------------------------------------------------------ | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `elementType`         | `ElementType`                                          | `div`   | ✕        | Element used as main wrapper. When `validationText` is an array, the component renders a `ul` inside the wrapper                |
+| `formFieldMode`       | `FormFieldMode`                                        | —       | ✕        | Explicit mode (`inline`, `item`); omit for the default layout used by box form field components, or take it from parent context |
+| `id`                  | `string`                                               | —       | ✕        | Element id (e.g. for `aria-describedby`)                                                                                        |
+| `isDisabled`          | `bool`                                                 | `false` | ✕        | Disabled state; when omitted, taken from parent context                                                                         |
+| `registerAria`        | `(payload: { add?: string; remove?: string }) => void` | —       | ✕        | Callback to register this element's id for `aria-describedby`                                                                   |
+| `role`                | `AriaRole`                                             | —       | ✕        | ARIA role (e.g. `alert` for dynamic validation)                                                                                 |
+| `validationStateIcon` | [Validation dictionary][dictionary-validation]         | —       | ✕        | When set, shows validation icon and applies state styling (e.g. `danger`)                                                       |
+| `validationText`      | `ReactNode` \| `ReactNode[]`                           | —       | ✕        | Validation message or messages to display                                                                                       |
 
 On top of the API options, the component accepts [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

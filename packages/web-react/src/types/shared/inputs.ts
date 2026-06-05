@@ -91,8 +91,8 @@ export interface ValidationTextProp {
   role?: AriaRole;
   /** The validation text to display. */
   validationText?: ValidationTextType;
-  /** Whether the validation state icon should be displayed, and specify which type. */
-  hasValidationStateIcon?: ValidationState;
+  /** Validation state that controls icon display and styling (e.g. `danger`, `warning`, `success`). */
+  validationStateIcon?: ValidationState;
 }
 
 export interface RequiredProps {

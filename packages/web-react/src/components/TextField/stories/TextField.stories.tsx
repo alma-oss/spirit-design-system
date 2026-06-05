@@ -16,7 +16,7 @@ const meta: Meta<typeof TextField> = {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,
     },
-    controls: { exclude: ['hasValidationStateIcon'] },
+    controls: { exclude: ['validationStateIcon'] },
   },
   argTypes: {
     autoComplete: {
