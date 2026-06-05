@@ -10,45 +10,45 @@ import {
 } from '@local/tests';
 import { Direction } from '../../../constants';
 import {
-  SCROLL_VIEW_ARROWS_LABEL_HORIZONTAL_END,
-  SCROLL_VIEW_ARROWS_LABEL_HORIZONTAL_START,
-  SCROLL_VIEW_ARROWS_LABEL_VERTICAL_END,
-  SCROLL_VIEW_ARROWS_LABEL_VERTICAL_START,
+  SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_END,
+  SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_START,
+  SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_END,
+  SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_START,
 } from '../constants';
-import ScrollViewArrows from '../ScrollViewArrows';
+import ScrollViewControls from '../ScrollViewControls';
 
 jest.mock('../../../hooks/useIcon');
 
-describe('ScrollViewArrows', () => {
-  classNamePrefixProviderTest(ScrollViewArrows, 'ScrollView__arrows');
+describe('ScrollViewControls', () => {
+  classNamePrefixProviderTest(ScrollViewControls, 'ScrollView__controls');
 
-  stylePropsTest((props) => <ScrollViewArrows {...props} />);
+  stylePropsTest((props) => <ScrollViewControls {...props} />);
 
-  restPropsTest(ScrollViewArrows, 'div');
+  restPropsTest(ScrollViewControls, 'div');
 
-  validHtmlAttributesTest(ScrollViewArrows);
+  validHtmlAttributesTest(ScrollViewControls);
 
-  ariaAttributesTest(ScrollViewArrows);
+  ariaAttributesTest(ScrollViewControls);
 
-  it('should render horizontal arrows with correct icons and labels', () => {
+  it('should render horizontal controls with correct icons and labels', () => {
     const viewportRef = createRef<HTMLDivElement>();
 
-    render(<ScrollViewArrows direction={Direction.HORIZONTAL} scrollStep={100} viewportRef={viewportRef} />);
+    render(<ScrollViewControls direction={Direction.HORIZONTAL} scrollStep={100} viewportRef={viewportRef} />);
 
-    expect(screen.getByRole('button', { name: SCROLL_VIEW_ARROWS_LABEL_HORIZONTAL_START })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: SCROLL_VIEW_ARROWS_LABEL_HORIZONTAL_END })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_START })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_END })).toBeInTheDocument();
   });
 
-  it('should render vertical arrows with correct icons and labels', () => {
+  it('should render vertical controls with correct icons and labels', () => {
     const viewportRef = createRef<HTMLDivElement>();
 
-    render(<ScrollViewArrows direction={Direction.VERTICAL} scrollStep={80} viewportRef={viewportRef} />);
+    render(<ScrollViewControls direction={Direction.VERTICAL} scrollStep={80} viewportRef={viewportRef} />);
 
-    expect(screen.getByRole('button', { name: SCROLL_VIEW_ARROWS_LABEL_VERTICAL_START })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: SCROLL_VIEW_ARROWS_LABEL_VERTICAL_END })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_START })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_END })).toBeInTheDocument();
   });
 
-  it('should call scrollTo with correct values for horizontal arrows', () => {
+  it('should call scrollTo with correct values for horizontal controls', () => {
     const scrollTo = jest.fn();
     const viewportRef = {
       current: {
@@ -61,9 +61,9 @@ describe('ScrollViewArrows', () => {
 
     jest.useFakeTimers();
 
-    render(<ScrollViewArrows direction={Direction.HORIZONTAL} scrollStep={50} viewportRef={viewportRef} />);
+    render(<ScrollViewControls direction={Direction.HORIZONTAL} scrollStep={50} viewportRef={viewportRef} />);
 
-    fireEvent.click(screen.getByLabelText(SCROLL_VIEW_ARROWS_LABEL_HORIZONTAL_END));
+    fireEvent.click(screen.getByLabelText(SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_END));
 
     // First call cancels ongoing scroll (behavior: 'auto')
     expect(scrollTo).toHaveBeenCalledWith({ left: 0, behavior: 'auto' });
@@ -78,7 +78,7 @@ describe('ScrollViewArrows', () => {
     scrollTo.mockClear();
     viewportRef.current!.scrollLeft = 50;
 
-    fireEvent.click(screen.getByLabelText(SCROLL_VIEW_ARROWS_LABEL_HORIZONTAL_START));
+    fireEvent.click(screen.getByLabelText(SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_START));
 
     // Cancel ongoing scroll
     expect(scrollTo).toHaveBeenCalledWith({ left: 50, behavior: 'auto' });
@@ -91,7 +91,7 @@ describe('ScrollViewArrows', () => {
     jest.useRealTimers();
   });
 
-  it('should call scrollTo with correct values for vertical arrows', () => {
+  it('should call scrollTo with correct values for vertical controls', () => {
     const scrollTo = jest.fn();
     const viewportRef = {
       current: {
@@ -104,9 +104,9 @@ describe('ScrollViewArrows', () => {
 
     jest.useFakeTimers();
 
-    render(<ScrollViewArrows direction={Direction.VERTICAL} scrollStep={40} viewportRef={viewportRef} />);
+    render(<ScrollViewControls direction={Direction.VERTICAL} scrollStep={40} viewportRef={viewportRef} />);
 
-    fireEvent.click(screen.getByLabelText(SCROLL_VIEW_ARROWS_LABEL_VERTICAL_END));
+    fireEvent.click(screen.getByLabelText(SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_END));
 
     // First call cancels ongoing scroll (behavior: 'auto')
     expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'auto' });
@@ -121,7 +121,7 @@ describe('ScrollViewArrows', () => {
     scrollTo.mockClear();
     viewportRef.current!.scrollTop = 40;
 
-    fireEvent.click(screen.getByLabelText(SCROLL_VIEW_ARROWS_LABEL_VERTICAL_START));
+    fireEvent.click(screen.getByLabelText(SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_START));
 
     // Cancel ongoing scroll
     expect(scrollTo).toHaveBeenCalledWith({ top: 40, behavior: 'auto' });
@@ -138,27 +138,27 @@ describe('ScrollViewArrows', () => {
     const viewportRef = createRef<HTMLDivElement>();
 
     render(
-      <ScrollViewArrows
+      <ScrollViewControls
         direction={Direction.HORIZONTAL}
         scrollStep={100}
         viewportRef={viewportRef}
-        data-testid="arrows-test"
+        data-testid="controls-test"
       />,
     );
 
-    expect(screen.getByTestId('arrows-test')).toHaveClass('ScrollView__arrows');
+    expect(screen.getByTestId('controls-test')).toHaveClass('ScrollView__controls');
   });
 
-  describe('arrow labels', () => {
-    it('should render arrows with custom horizontal labels from ariaLabelArrows prop', () => {
+  describe('control labels', () => {
+    it('should render controls with custom horizontal labels from ariaLabelControls prop', () => {
       const viewportRef = createRef<HTMLDivElement>();
 
       render(
-        <ScrollViewArrows
+        <ScrollViewControls
           direction={Direction.HORIZONTAL}
           scrollStep={100}
           viewportRef={viewportRef}
-          ariaLabelArrows={{ start: 'Custom Left', end: 'Custom Right' }}
+          ariaLabelControls={{ start: 'Custom Left', end: 'Custom Right' }}
         />,
       );
 
@@ -166,15 +166,15 @@ describe('ScrollViewArrows', () => {
       expect(screen.getByRole('button', { name: 'Custom Right' })).toBeInTheDocument();
     });
 
-    it('should render arrows with custom vertical labels from ariaLabelArrows prop', () => {
+    it('should render controls with custom vertical labels from ariaLabelControls prop', () => {
       const viewportRef = createRef<HTMLDivElement>();
 
       render(
-        <ScrollViewArrows
+        <ScrollViewControls
           direction={Direction.VERTICAL}
           scrollStep={100}
           viewportRef={viewportRef}
-          ariaLabelArrows={{ top: 'Custom Up', bottom: 'Custom Down' }}
+          ariaLabelControls={{ top: 'Custom Up', bottom: 'Custom Down' }}
         />,
       );
 

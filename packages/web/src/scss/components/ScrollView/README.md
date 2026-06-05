@@ -144,19 +144,19 @@ You can customize the shadows by overriding the following CSS variables:
 --scroll-view-end-shadow-background: linear-gradient(to top, #9400d3 0%, #9400d300 100%);
 ```
 
-## Arrow Controls
+## Scroll Controls
 
-You can optionally add arrow controls that appear when the content can be scrolled. Add a `ScrollView__arrows` container as a direct child of `ScrollView` and place two buttons inside. The controls are automatically positioned and shown/hidden based on scroll position.
+You can optionally add scroll controls that appear when the content can be scrolled. Add a `ScrollView__controls` container as a direct child of `ScrollView` and place two buttons inside. The controls are automatically positioned and shown/hidden based on scroll position.
 
-⚠️ Please note: The ScrollView component does not include JavaScript functionality for the arrow controls. You will need to implement the logic to handle scrolling when the arrows are clicked.
+⚠️ Please note: The ScrollView component does not include JavaScript functionality for the scroll controls. You will need to implement the logic to handle scrolling when the controls are clicked.
 
 Notes:
 
-- Arrows are overlayed and only become visible when the container is scrolled away from the corresponding edge.
-- When arrows are present, overflow shadow sizes adjust automatically to accommodate the controls.
+- Controls are overlaid and only become visible when the container is scrolled away from the corresponding edge.
+- When controls are present, overflow shadow sizes adjust automatically to accommodate the controls.
 - Use descriptive `aria-label` values: "Scroll up/down" for vertical, "Scroll left/right" for horizontal.
 
-### Vertical Arrows
+### Vertical Controls
 
 ```html
 <div class="ScrollView ScrollView--vertical" data-spirit-toggle="scrollView" data-spirit-direction="vertical">
@@ -166,7 +166,7 @@ Notes:
     </div>
   </div>
   <div class="ScrollView__overflowDecorators ScrollView__overflowDecorators--shadows" aria-hidden="true"></div>
-  <div class="ScrollView__arrows">
+  <div class="ScrollView__controls">
     <button
       type="button"
       class="ControlButton ControlButton--small ControlButton--symmetrical ControlButton--hasBackground accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
@@ -189,7 +189,7 @@ Notes:
 </div>
 ```
 
-### Horizontal Arrows
+### Horizontal Controls
 
 ```html
 <div class="ScrollView ScrollView--horizontal" data-spirit-toggle="scrollView" data-spirit-direction="horizontal">
@@ -199,7 +199,7 @@ Notes:
     </div>
   </div>
   <div class="ScrollView__overflowDecorators ScrollView__overflowDecorators--shadows" aria-hidden="true"></div>
-  <div class="ScrollView__arrows">
+  <div class="ScrollView__controls">
     <button
       type="button"
       class="ControlButton ControlButton--small ControlButton--symmetrical ControlButton--hasBackground accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"

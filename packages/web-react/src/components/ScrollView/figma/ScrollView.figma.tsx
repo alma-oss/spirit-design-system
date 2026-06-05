@@ -7,7 +7,7 @@ figma.connect(ScrollView, '<FIGMA_FILE_ID>?node-id=35163%3A22653', {
     direction: figma.enum('Direction', {
       Horizontal: 'horizontal',
     }),
-    hasArrows: figma.boolean('Arrows'),
+    hasControls: figma.boolean('Controls'),
   },
   example: (props) => (
     <ScrollView {...props}>

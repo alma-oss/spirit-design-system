@@ -3,28 +3,28 @@
 import React from 'react';
 import { isDirectionHorizontal } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import { type SpiritScrollViewArrowsProps } from '../../types';
+import { type SpiritScrollViewControlsProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { ControlButton } from '../ControlButton';
 import { Icon } from '../Icon';
 import { useScrollCallback } from './useScrollCallback';
-import { useScrollViewArrows } from './useScrollViewArrows';
+import { useScrollViewControls } from './useScrollViewControls';
 import { useScrollViewStyleProps } from './useScrollViewStyleProps';
 
-const ScrollViewArrows = (props: SpiritScrollViewArrowsProps) => {
-  const { ariaLabelArrows, direction, scrollStep, viewportRef, ...restProps } = props;
+const ScrollViewControls = (props: SpiritScrollViewControlsProps) => {
+  const { ariaLabelControls, direction, scrollStep, viewportRef, ...restProps } = props;
   const { classProps } = useScrollViewStyleProps({
     direction,
   });
   const { styleProps, props: otherProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps('button', { classProps: classProps.arrows, styleProps });
+  const mergedStyleProps = mergeStyleProps('button', { classProps: classProps.controls, styleProps });
   const isHorizontal = isDirectionHorizontal(direction);
-  const { arrows } = useScrollViewArrows(isHorizontal, ariaLabelArrows, scrollStep);
+  const { controls } = useScrollViewControls(isHorizontal, ariaLabelControls, scrollStep);
   const { handleScroll } = useScrollCallback({ viewportRef, direction });
 
   return (
     <div {...otherProps} {...mergedStyleProps}>
-      {arrows.map(({ icon, label, step }) => (
+      {controls.map(({ icon, label, step }) => (
         <ControlButton key={icon} aria-label={label} onClick={() => handleScroll(step)} size="small" isSymmetrical>
           <Icon name={icon} />
         </ControlButton>
@@ -33,6 +33,6 @@ const ScrollViewArrows = (props: SpiritScrollViewArrowsProps) => {
   );
 };
 
-ScrollViewArrows.spiritComponent = 'ScrollViewArrows';
+ScrollViewControls.spiritComponent = 'ScrollViewControls';
 
-export default ScrollViewArrows;
+export default ScrollViewControls;

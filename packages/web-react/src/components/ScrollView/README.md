@@ -63,20 +63,20 @@ Or both:
 <ScrollView isScrollbarDisabled />
 ```
 
-## ScrollView Arrows
+## ScrollView Controls
 
-Setting `hasArrows` to `true` adds arrow buttons at the start and end of the scrollable area.
-Clicking an arrow moves the viewport by `arrowsScrollStep` value in the ScrollView's direction.
+Setting `hasControls` to `true` adds scroll control buttons at the start and end of the scrollable area.
+Clicking a control moves the viewport by `controlsScrollStep` value in the ScrollView's direction.
 
 ```tsx
-<ScrollView hasArrows arrowsScrollStep={200}>
+<ScrollView hasControls controlsScrollStep={200}>
   {/* scrollable content */}
 </ScrollView>
 ```
 
-### Custom Arrow Labels
+### Custom Control Labels
 
-You can customize the arrow button labels using the `ariaLabelArrows` prop.
+You can customize the control button labels using the `ariaLabelControls` prop.
 Note that these labels are not visually displayed — they are used for accessibility purposes only.
 All properties (`top`, `bottom`, `start`, `end`) are optional, and you can define any combination of them.
 
@@ -89,9 +89,9 @@ You can override all labels:
 
 ```tsx
 <ScrollView
-  hasArrows
+  hasControls
   direction="horizontal"
-  ariaLabelArrows={{
+  ariaLabelControls={{
     start: 'Custom scroll left',
     end: 'Custom scroll right',
     top: 'Custom scroll up',
@@ -105,22 +105,22 @@ You can override all labels:
 Or override only one label:
 
 ```tsx
-<ScrollView hasArrows direction="horizontal" ariaLabelArrows={{ start: 'Custom scroll left' }}>
+<ScrollView hasControls direction="horizontal" ariaLabelControls={{ start: 'Custom scroll left' }}>
   {/* scrollable content */}
 </ScrollView>
 ```
 
 ## ScrollView Props
 
-| Name                  | Type                                                              | Default    | Required | Description                                   |
-| --------------------- | ----------------------------------------------------------------- | ---------- | -------- | --------------------------------------------- |
-| `ariaLabelArrows`     | `{ top?: string, bottom?: string, start?: string; end?: string }` | —          | ✕        | Custom accessibility labels for arrow buttons |
-| `arrowsScrollStep`    | `number`                                                          | `300`      | ✕        | Scroll step for arrows (pixels)               |
-| `children`            | `ReactNode`                                                       | —          | ✓        | ScrollView children's nodes                   |
-| `direction`           | \[`horizontal` \| `vertical`]                                     | `vertical` | ✕        | Direction of the wrapper                      |
-| `hasArrows`           | `bool`                                                            | `false`    | ✕        | If true, arrows are displayed                 |
-| `isScrollbarDisabled` | `bool`                                                            | `false`    | ✕        | If true, the Scrollbar is disabled            |
-| `overflowDecorators`  | \[`borders` \| `shadows` \| `both`]                               | `shadows`  | ✕        | ScrollView overflow decorators                |
+| Name                  | Type                                                              | Default    | Required | Description                                     |
+| --------------------- | ----------------------------------------------------------------- | ---------- | -------- | ----------------------------------------------- |
+| `ariaLabelControls`   | `{ top?: string, bottom?: string, start?: string; end?: string }` | —          | ✕        | Custom accessibility labels for control buttons |
+| `controlsScrollStep`  | `number`                                                          | `300`      | ✕        | Scroll step for controls (pixels)               |
+| `children`            | `ReactNode`                                                       | —          | ✓        | ScrollView children's nodes                     |
+| `direction`           | \[`horizontal` \| `vertical`]                                     | `vertical` | ✕        | Direction of the wrapper                        |
+| `hasControls`         | `bool`                                                            | `false`    | ✕        | If true, controls are displayed                 |
+| `isScrollbarDisabled` | `bool`                                                            | `false`    | ✕        | If true, the Scrollbar is disabled              |
+| `overflowDecorators`  | \[`borders` \| `shadows` \| `both`]                               | `shadows`  | ✕        | ScrollView overflow decorators                  |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

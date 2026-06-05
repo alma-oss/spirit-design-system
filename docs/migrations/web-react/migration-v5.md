@@ -20,6 +20,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [Toggle: Component Name Stabilized](#toggle-component-name-stabilized)
   - [Truncate: Component Name Stabilized and `lines` Prop Changed](#truncate-component-name-stabilized-and-lines-prop-changed)
   - [Button and ButtonLink: `isBlock` Prop Removed](#button-and-buttonlink-isblock-prop-removed)
+  - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
 
 ## Component Changes
@@ -304,6 +305,55 @@ Responsive full-width with [`Grid`][readme-grid]:
   <Button>Responsive Button</Button>
 </Grid>
 ```
+
+</details>
+
+### ScrollView: Arrows Renamed to Controls
+
+ScrollView scroll navigation was renamed from “arrows” to “controls” across props, subcomponents, hooks, and exported constants.
+
+#### Migration Guide
+
+🪄 Use codemods to automatically update your codebase:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/scrollview-arrows-to-controls
+```
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Manually replace the props, component names, hooks, and constants in your project.
+
+**ScrollView props:**
+
+- `<ScrollView hasArrows … />` → `<ScrollView hasControls … />`
+- `<ScrollView arrowsScrollStep={200} … />` → `<ScrollView controlsScrollStep={200} … />`
+- `<ScrollView ariaLabelArrows={…} … />` → `<ScrollView ariaLabelControls={…} … />`
+
+**ScrollViewControls subcomponent (formerly `ScrollViewArrows`):**
+
+- `ScrollViewArrows` → `ScrollViewControls`
+- `<ScrollViewArrows ariaLabelArrows={…} … />` → `<ScrollViewControls ariaLabelControls={…} … />`
+
+**Hooks and types:**
+
+- `useScrollViewArrows` → `useScrollViewControls`
+- `{ arrows }` return value → `{ controls }`
+- `ScrollViewArrowsAriaLabelType` → `ScrollViewControlsAriaLabelType`
+- `ScrollViewArrowsScrollStepType` → `ScrollViewControlsScrollStepType`
+- `SpiritScrollViewArrowsProps` → `SpiritScrollViewControlsProps`
+- `UseScrollViewArrowsReturn` → `UseScrollViewControlsReturn`
+
+**Constants:**
+
+- `SCROLL_VIEW_ARROWS_LABEL_*` → `SCROLL_VIEW_CONTROLS_LABEL_*`
+
+**Style props from `useScrollViewStyleProps`:**
+
+- `classProps.arrows` → `classProps.controls`
 
 </details>
 

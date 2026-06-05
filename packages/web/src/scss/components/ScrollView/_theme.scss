@@ -6,15 +6,15 @@ $border-style: solid;
 $border-color: tokens.$border-basic;
 
 $start-shadow-size: tokens.$space-700;
-$start-shadow-size-arrow: tokens.$space-1300;
+$start-shadow-size-controls: tokens.$space-1300;
 $start-shadow-initial-offset: -1 * transitions.$shift-distance-medium;
-$start-shadow-initial-offset-arrow: -1 * transitions.$shift-distance-large;
+$start-shadow-initial-offset-controls: -1 * transitions.$shift-distance-large;
 $start-shadow-background: tokens.$gradient-basic-overlay;
 
 $end-shadow-size: tokens.$space-700;
-$end-shadow-size-arrow: tokens.$space-1300;
+$end-shadow-size-controls: tokens.$space-1300;
 $end-shadow-initial-offset: -1 * transitions.$shift-distance-medium;
-$end-shadow-initial-offset-arrow: -1 * transitions.$shift-distance-large;
+$end-shadow-initial-offset-controls: -1 * transitions.$shift-distance-large;
 $end-shadow-background: tokens.$gradient-basic-overlay;
 
-$arrow-spacing: tokens.$space-700;
+$controls-spacing: tokens.$space-700;

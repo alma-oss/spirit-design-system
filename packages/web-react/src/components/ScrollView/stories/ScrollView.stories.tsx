@@ -13,7 +13,7 @@ const meta: Meta<typeof ScrollView> = {
     },
   },
   argTypes: {
-    ariaLabelArrows: {
+    ariaLabelControls: {
       control: 'select',
       options: [
         'default',
@@ -24,7 +24,7 @@ const meta: Meta<typeof ScrollView> = {
         'custom-top',
         'custom-bottom',
       ],
-      description: `Labels for the scroll arrows, mainly for accessibility purposes. In the real code you can
+      description: `Labels for the scroll controls, mainly for accessibility purposes. In the real code you can
         pass in any object with \`start\`/\`end\` properties for horizontal direction or \`top\`/\`bottom\` properties for vertical direction.
         In this demo we have predefined options: \`default\`, \`custom-both-horizontal\`, \`custom-both-vertical\`, \`custom-start\`, \`custom-end\`, \`custom-top\`, and \`custom-bottom\`.
         Please note the predefined options in this demo are not customizable.`,
@@ -50,12 +50,6 @@ const meta: Meta<typeof ScrollView> = {
         'custom-bottom': {
           bottom: 'Custom scroll down',
         },
-      },
-    },
-    arrowsScrollStep: {
-      control: 'number',
-      table: {
-        defaultValue: { summary: '300' },
       },
     },
     children: {
@@ -151,6 +145,12 @@ const meta: Meta<typeof ScrollView> = {
         ),
       },
     },
+    controlsScrollStep: {
+      control: 'number',
+      table: {
+        defaultValue: { summary: '300' },
+      },
+    },
     direction: {
       control: 'select',
       options: ['horizontal', 'vertical'],
@@ -158,7 +158,7 @@ const meta: Meta<typeof ScrollView> = {
         defaultValue: { summary: 'vertical' },
       },
     },
-    hasArrows: {
+    hasControls: {
       control: 'boolean',
       table: {
         defaultValue: { summary: 'false' },
@@ -179,11 +179,11 @@ const meta: Meta<typeof ScrollView> = {
     },
   },
   args: {
-    ariaLabelArrows: undefined,
-    arrowsScrollStep: 300,
+    ariaLabelControls: undefined,
     children: 'vertical',
+    controlsScrollStep: 300,
     direction: 'vertical',
-    hasArrows: false,
+    hasControls: false,
     isScrollbarDisabled: false,
     overflowDecorators: 'shadows',
   },
