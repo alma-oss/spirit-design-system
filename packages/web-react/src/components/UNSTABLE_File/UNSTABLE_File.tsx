@@ -103,7 +103,7 @@ const UNSTABLE_File = <E extends ElementType = 'li'>(props: SpiritUnstableFilePr
             <HelperText helperText={helperText} />
             {validationState && (
               <ValidationText
-                {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+                {...(hasValidationIcon && { validationStateIcon: validationState })}
                 validationText={validationText}
                 role={validationTextRole}
               />

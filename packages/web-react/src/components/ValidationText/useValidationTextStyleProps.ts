@@ -8,11 +8,11 @@ export interface ValidationTextStyles {
 }
 
 export interface UseValidationTextStylePropsProps extends FormFieldContextValue {
-  hasValidationStateIcon?: ValidationState;
+  validationStateIcon?: ValidationState;
 }
 
 export function useValidationTextStyleProps(props: UseValidationTextStylePropsProps): ValidationTextStyles {
-  const { formFieldMode, hasValidationStateIcon, isDisabled } = props;
+  const { formFieldMode, validationStateIcon, isDisabled } = props;
 
   const prefix = useClassNamePrefix('ValidationText');
   const dangerClass = `${prefix}--danger`;
@@ -22,9 +22,9 @@ export function useValidationTextStyleProps(props: UseValidationTextStylePropsPr
   const inlineClass = `${prefix}--inline`;
 
   const classProps = classNames(prefix, {
-    [dangerClass]: hasValidationStateIcon === 'danger',
-    [warningClass]: hasValidationStateIcon === 'warning',
-    [successClass]: hasValidationStateIcon === 'success',
+    [dangerClass]: validationStateIcon === 'danger',
+    [warningClass]: validationStateIcon === 'warning',
+    [successClass]: validationStateIcon === 'success',
     [disabledClass]: isDisabled,
     [inlineClass]: formFieldMode === FormFieldModes.INLINE,
   });

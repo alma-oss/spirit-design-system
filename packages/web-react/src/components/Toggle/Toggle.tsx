@@ -66,7 +66,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
           {validationState && (
             <ValidationText
               id={`${id}-validation-text`}
-              {...(hasValidationIcon && { hasValidationStateIcon: validationState })}
+              {...(hasValidationIcon && { validationStateIcon: validationState })}
               validationText={validationText}
               registerAria={register}
               role={validationTextRole}

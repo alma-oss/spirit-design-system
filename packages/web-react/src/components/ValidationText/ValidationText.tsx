@@ -27,7 +27,7 @@ const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTe
   const {
     elementType: Component = defaultProps.elementType as ElementType,
     id,
-    hasValidationStateIcon,
+    validationStateIcon,
     registerAria,
     role,
     validationText,
@@ -36,11 +36,11 @@ const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTe
     ...restProps
   } = propsWithDefaults;
 
-  const validationIconName = useValidationIcon({ hasValidationStateIcon });
-  const validationStateForStyles = hasValidationStateIcon ?? contextProps.validationState;
+  const validationIconName = useValidationIcon({ validationStateIcon });
+  const validationStateForStyles = validationStateIcon ?? contextProps.validationState;
   const { classProps } = useValidationTextStyleProps({
     formFieldMode,
-    hasValidationStateIcon: validationStateForStyles,
+    validationStateIcon: validationStateForStyles,
     isDisabled,
   });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
@@ -62,11 +62,11 @@ const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTe
     return null;
   }
 
-  const nonArrayValidationText = hasValidationStateIcon ? <div>{validationText}</div> : validationText;
+  const nonArrayValidationText = validationStateIcon ? <div>{validationText}</div> : validationText;
 
   return (
     <Component {...transferProps} {...mergedStyleProps} id={id} role={role}>
-      {hasValidationStateIcon && <Icon name={validationIconName} boxSize={20} />}
+      {validationStateIcon && <Icon name={validationIconName} boxSize={20} />}
       {Array.isArray(validationText) ? (
         <ul>
           {validationText.map((item) => (
