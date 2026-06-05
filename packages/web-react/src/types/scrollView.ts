@@ -4,30 +4,30 @@ import { type ChildrenProps, type DirectionDictionaryType, type StyleProps } fro
 export type ScrollViewDirectionType = DirectionDictionaryType;
 export type ScrollViewOverflowDecoratorsType = 'borders' | 'shadows' | 'both';
 
-export type ScrollViewArrowsAriaLabelType = {
+export type ScrollViewControlsAriaLabelType = {
   top?: string;
   bottom?: string;
   start?: string;
   end?: string;
 };
 
-export type ScrollViewArrowsScrollStepType = number;
+export type ScrollViewControlsScrollStepType = number;
 
-interface ScrollViewArrowsBaseProps {
-  ariaLabelArrows?: ScrollViewArrowsAriaLabelType;
+interface ScrollViewControlsBaseProps {
+  ariaLabelControls?: ScrollViewControlsAriaLabelType;
   direction: ScrollViewDirectionType;
-  scrollStep: ScrollViewArrowsScrollStepType;
+  scrollStep: ScrollViewControlsScrollStepType;
   viewportRef: RefObject<HTMLDivElement>;
 }
 
 export interface ScrollViewBaseProps extends ChildrenProps, StyleProps {
-  ariaLabelArrows?: ScrollViewArrowsAriaLabelType;
-  arrowsScrollStep?: ScrollViewArrowsScrollStepType;
+  ariaLabelControls?: ScrollViewControlsAriaLabelType;
+  controlsScrollStep?: ScrollViewControlsScrollStepType;
   direction?: ScrollViewDirectionType;
-  hasArrows?: boolean;
+  hasControls?: boolean;
   isScrollbarDisabled?: boolean;
   overflowDecorators?: ScrollViewOverflowDecoratorsType;
 }
 
 export interface SpiritScrollViewProps extends ScrollViewBaseProps {}
-export interface SpiritScrollViewArrowsProps extends ScrollViewArrowsBaseProps {}
+export interface SpiritScrollViewControlsProps extends ScrollViewControlsBaseProps {}

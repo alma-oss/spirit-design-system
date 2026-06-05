@@ -5,17 +5,17 @@ import React, { useRef } from 'react';
 import { useStyleProps } from '../../hooks';
 import { type SpiritScrollViewProps } from '../../types';
 import { SCROLL_VIEW_DEFAULT_DIRECTION, SCROLL_VIEW_DEFAULT_OVERFLOW_DECORATOR } from './constants';
-import ScrollViewArrows from './ScrollViewArrows';
+import ScrollViewControls from './ScrollViewControls';
 import { useScrollPosition } from './useScrollPosition';
 import { useScrollViewStyleProps } from './useScrollViewStyleProps';
 
 const ScrollView = (props: SpiritScrollViewProps) => {
   const {
-    ariaLabelArrows,
-    arrowsScrollStep = 300,
+    ariaLabelControls,
+    controlsScrollStep = 300,
     children,
     direction = SCROLL_VIEW_DEFAULT_DIRECTION,
-    hasArrows = false,
+    hasControls = false,
     isScrollbarDisabled,
     overflowDecorators = SCROLL_VIEW_DEFAULT_OVERFLOW_DECORATOR,
     ...restProps
@@ -52,11 +52,11 @@ const ScrollView = (props: SpiritScrollViewProps) => {
       </div>
       <div className={classProps.overflowDecorators} aria-hidden="true" />
 
-      {hasArrows && (
-        <ScrollViewArrows
-          ariaLabelArrows={ariaLabelArrows}
+      {hasControls && (
+        <ScrollViewControls
+          ariaLabelControls={ariaLabelControls}
           direction={direction}
-          scrollStep={arrowsScrollStep}
+          scrollStep={controlsScrollStep}
           viewportRef={viewportReference}
         />
       )}

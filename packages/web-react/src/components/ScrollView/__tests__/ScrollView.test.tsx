@@ -12,8 +12,8 @@ import { Direction } from '../../../constants';
 import { type ScrollViewDirectionType, type ScrollViewOverflowDecoratorsType } from '../../../types';
 import {
   SCROLL_CANCEL_DELAY,
-  SCROLL_VIEW_ARROWS_LABEL_HORIZONTAL_END,
-  SCROLL_VIEW_ARROWS_LABEL_VERTICAL_END,
+  SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_END,
+  SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_END,
 } from '../constants';
 import ScrollView from '../ScrollView';
 
@@ -113,14 +113,14 @@ describe('ScrollView', () => {
     expect(screen.getByTestId('scroll-test')).toHaveClass('ScrollView ScrollView--scrollbarDisabled');
   });
 
-  it('should render arrows when hasArrows is true', () => {
+  it('should render controls when hasControls is true', () => {
     render(
-      <ScrollView hasArrows data-testid="scroll-test">
+      <ScrollView hasControls data-testid="scroll-test">
         Content
       </ScrollView>,
     );
 
-    expect(screen.getByTestId('scroll-test').lastElementChild).toHaveClass('ScrollView__arrows');
+    expect(screen.getByTestId('scroll-test').lastElementChild).toHaveClass('ScrollView__controls');
   });
 
   it.each([
@@ -128,7 +128,7 @@ describe('ScrollView', () => {
       direction: Direction.HORIZONTAL,
       scrollStep: 100,
       contentStyle: { width: '1000px' },
-      arrowLabel: SCROLL_VIEW_ARROWS_LABEL_HORIZONTAL_END,
+      controlLabel: SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_END,
       viewportProps: {
         scrollLeft: 0,
         scrollWidth: 1000,
@@ -140,7 +140,7 @@ describe('ScrollView', () => {
       direction: Direction.VERTICAL,
       scrollStep: 80,
       contentStyle: { height: '1000px' },
-      arrowLabel: SCROLL_VIEW_ARROWS_LABEL_VERTICAL_END,
+      controlLabel: SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_END,
       viewportProps: {
         scrollTop: 0,
         scrollHeight: 1000,
@@ -149,16 +149,16 @@ describe('ScrollView', () => {
       expectedScroll: { top: 80 },
     },
   ])(
-    'should scroll by given scroll step when arrow is clicked ($direction)',
-    ({ direction, scrollStep, contentStyle, arrowLabel, viewportProps, expectedScroll }) => {
+    'should scroll by given scroll step when control is clicked ($direction)',
+    ({ direction, scrollStep, contentStyle, controlLabel, viewportProps, expectedScroll }) => {
       render(
-        <ScrollView hasArrows direction={direction} arrowsScrollStep={scrollStep} data-testid="scroll">
+        <ScrollView hasControls direction={direction} controlsScrollStep={scrollStep} data-testid="scroll">
           <div style={contentStyle}>Content</div>
         </ScrollView>,
       );
 
       const viewport = screen.getByTestId('scroll').firstElementChild as HTMLElement;
-      const arrow = screen.getByRole('button', { name: arrowLabel });
+      const control = screen.getByRole('button', { name: controlLabel });
 
       const scrollTo = jest.fn();
       viewport.scrollTo = scrollTo;
@@ -171,7 +171,7 @@ describe('ScrollView', () => {
 
       jest.useFakeTimers();
 
-      arrow?.click();
+      control?.click();
 
       // First call cancels ongoing scroll (behavior: 'auto')
       const cancelScrollKey = Object.keys(expectedScroll)[0] as 'left' | 'top';
@@ -189,15 +189,15 @@ describe('ScrollView', () => {
     },
   );
 
-  it('should not render arrows when hasArrows is false', () => {
+  it('should not render controls when hasControls is false', () => {
     render(<ScrollView>Content</ScrollView>);
 
     expect(screen.queryAllByRole('button')).toHaveLength(0);
   });
 
-  it('should use custom arrow labels (vertical)', () => {
+  it('should use custom control labels (vertical)', () => {
     render(
-      <ScrollView hasArrows ariaLabelArrows={{ top: 'Custom top label', bottom: 'Custom bottom label' }}>
+      <ScrollView hasControls ariaLabelControls={{ top: 'Custom top label', bottom: 'Custom bottom label' }}>
         <div style={{ height: '1000px' }}>Content</div>
       </ScrollView>,
     );
@@ -206,12 +206,12 @@ describe('ScrollView', () => {
     expect(screen.getByRole('button', { name: 'Custom bottom label' })).toBeInTheDocument();
   });
 
-  it('should use custom arrow labels (horizontal)', () => {
+  it('should use custom control labels (horizontal)', () => {
     render(
       <ScrollView
-        hasArrows
+        hasControls
         direction="horizontal"
-        ariaLabelArrows={{ start: 'Custom start label', end: 'Custom end label' }}
+        ariaLabelControls={{ start: 'Custom start label', end: 'Custom end label' }}
       >
         <div style={{ width: '1000px' }}>Content</div>
       </ScrollView>,

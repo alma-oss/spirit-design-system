@@ -2,7 +2,7 @@
 
 import { type MutableRefObject, useCallback, useEffect, useRef } from 'react';
 import { Position, isDirectionHorizontal } from '../../constants';
-import { type ScrollViewArrowsScrollStepType, type ScrollViewDirectionType } from '../../types';
+import { type ScrollViewControlsScrollStepType, type ScrollViewDirectionType } from '../../types';
 import { SCROLL_CANCEL_DELAY } from './constants';
 
 export interface UseScrollCallbackProps {
@@ -11,7 +11,7 @@ export interface UseScrollCallbackProps {
 }
 
 export interface UseScrollCallbackReturn {
-  handleScroll: (step: ScrollViewArrowsScrollStepType) => void;
+  handleScroll: (step: ScrollViewControlsScrollStepType) => void;
 }
 
 export const useScrollCallback = ({ viewportRef, direction }: UseScrollCallbackProps): UseScrollCallbackReturn => {
@@ -28,7 +28,7 @@ export const useScrollCallback = ({ viewportRef, direction }: UseScrollCallbackP
   );
 
   const handleScroll = useCallback(
-    (step: ScrollViewArrowsScrollStepType) => {
+    (step: ScrollViewControlsScrollStepType) => {
       if (!viewportRef.current) {
         return;
       }
