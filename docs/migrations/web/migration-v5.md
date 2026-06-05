@@ -9,6 +9,7 @@ Introducing version 5 of the _spirit-web_ package.
 - [Component Changes](#component-changes)
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
   - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
+  - [Stack: Modifier Classes Without `has` Prefix](#stack-modifier-classes-without-has-prefix)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
 
 ## Component Changes
@@ -76,6 +77,33 @@ Manually replace the modifier classes in your project.
 - `Flex--column` → `Flex--vertical`
 - `Flex--{breakpoint}--row` → `Flex--{breakpoint}--horizontal`
 - `Flex--{breakpoint}--column` → `Flex--{breakpoint}--vertical`
+
+### Stack: Modifier Classes Without `has` Prefix
+
+Stack CSS modifier classes no longer use the `has` verb prefix, consistent with other Spirit modifiers.
+
+#### Migration Guide
+
+Manually replace the modifier classes in your project.
+
+- `Stack--hasSpacing` → `Stack--spacing`
+- `Stack--hasIntermediateDividers` → `Stack--intermediateDividers`
+- `Stack--hasStartDivider` → `Stack--startDivider`
+- `Stack--hasEndDivider` → `Stack--endDivider`
+
+```html
+<!-- Before -->
+<ul class="Stack Stack--hasSpacing Stack--hasIntermediateDividers Stack--hasStartDivider Stack--hasEndDivider">
+  <li class="StackItem">Item 1</li>
+  <li class="StackItem">Item 2</li>
+</ul>
+
+<!-- After -->
+<ul class="Stack Stack--spacing Stack--intermediateDividers Stack--startDivider Stack--endDivider">
+  <li class="StackItem">Item 1</li>
+  <li class="StackItem">Item 2</li>
+</ul>
+```
 
 ### Tag: Appearance Feature Flag Removed
 
