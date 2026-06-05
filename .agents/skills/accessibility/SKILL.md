@@ -8,9 +8,13 @@ description: >-
 # Accessibility
 
 Accessibility is a primary review lens for Spirit — design-system components are consumed everywhere,
-so an a11y regression multiplies. Target **WCAG 2.1 AA** (the repo baseline; 2.2 is the direction of
-travel). Spans React (`.tsx`), vanilla HTML, and SCSS. Pairs with `spirit:html` for semantics and
-`spirit:design-system` for the focus-ring/contrast tokens.
+so an a11y regression multiplies. Target **WCAG 2.2 AA**. Spans React (`.tsx`), vanilla HTML, and
+SCSS.
+
+WCAG is organized around four principles — content must be **P**erceivable, **O**perable,
+**U**nderstandable, and **R**obust — across three conformance levels (A, **AA** ← our target, AAA).
+The sections below map to how the work shows up in Spirit; WCAG success-criterion numbers (e.g.
+`2.5.8`) are cited inline so a finding can point at the exact criterion.
 
 A **blocking** finding is appropriate when a change removes or breaks accessibility that previously
 worked (keyboard trap, lost focus, missing accessible name on an interactive control).
@@ -18,22 +22,24 @@ worked (keyboard trap, lost focus, missing accessible name on an interactive con
 ## Semantics First, ARIA Second
 
 - Prefer native semantic elements (`button`, `a`, `input`, `nav`, `ul`) over `div`/`span` with
-  added ARIA. ARIA is a fallback, not a default. See `spirit:html`.
+  added ARIA. ARIA is a fallback, not a default.
 - **No redundant or conflicting ARIA** — e.g. `role="button"` on a `<button>`, or an `aria-label`
   that contradicts visible text.
 - Every interactive control needs an **accessible name** (visible label, `aria-label`, or
-  `aria-labelledby`). Icon-only controls must have a name.
+  `aria-labelledby`) — name/role/value (`4.1.2`). Icon-only controls must have a name.
 
 ## Keyboard & Focus
 
-- All interactive elements must be **operable by keyboard** (Tab to reach, Enter/Space to activate,
-  Escape to dismiss overlays where expected).
-- **No keyboard traps**; focus order follows visual order.
+- All interactive elements must be **operable by keyboard** (`2.1.1`): Tab to reach, Enter/Space to
+  activate, Escape to dismiss overlays where expected.
+- **No keyboard traps** (`2.1.2`); focus order follows visual order (`2.4.3`).
 - **Manage focus** for overlays/dialogs/menus: move focus in on open, restore it on close, and trap
   it within modal surfaces.
-- **Visible focus indicator** — never remove the focus outline without an equivalent; use the
-  design system's `focus-ring` token (see `spirit:design-system`). `:focus-visible`
-  is preferred over `:focus` for pointer interactions.
+- **Visible focus indicator** (`2.4.7`) — never remove the focus outline without an equivalent; use
+  the design system's focus-ring token. `:focus-visible` is preferred over `:focus` for pointer
+  interactions.
+- **Focus not obscured** (`2.4.11`, new in 2.2) — when an element takes focus it must not be fully
+  hidden by sticky headers/footers or overlapping panels; reserve space with `scroll-margin`.
 
 ## Forms
 
@@ -44,9 +50,14 @@ worked (keyboard trap, lost focus, missing accessible name on an interactive con
 
 ## Visual & Motion
 
-- **Color is not the only signal** — state/meaning must also be conveyed non-visually.
-- Contrast must meet AA; rely on the design tokens, which are designed to pass.
-- Respect `prefers-reduced-motion` for animation.
+- **Color is not the only signal** (`1.4.1`) — state/meaning must also be conveyed non-visually.
+- Contrast must meet AA (`1.4.3`: 4.5:1 text, 3:1 large text & UI components); rely on the design
+  tokens, which are designed to pass.
+- **Target size** (`2.5.8`, new in 2.2) — interactive targets are at least 24×24 CSS px, unless an
+  inline link, browser-sized, or sufficiently spaced. Aim larger (44×44) for primary actions.
+- **Dragging movements** (`2.5.7`, new in 2.2) — any drag action has a single-pointer alternative
+  (e.g. buttons, an input).
+- Respect `prefers-reduced-motion` for animation (`2.3.3`).
 
 ## Content for Assistive Tech
 
@@ -54,7 +65,13 @@ worked (keyboard trap, lost focus, missing accessible name on an interactive con
   which removes content from the accessibility tree.
 - Decorative images/icons are hidden from AT (`aria-hidden`/empty `alt`); meaningful ones have text
   alternatives.
-- Dynamic updates that must be announced use an appropriate live region.
+- Dynamic updates that must be announced use an appropriate live region (`4.1.3`).
+
+## Beyond the Component
+
+A few new 2.2 success criteria are **application-level** and rarely actionable on an isolated
+component — note them for consumers but don't force them onto a primitive: consistent help (`3.2.6`),
+redundant entry (`3.3.7`), and accessible authentication (`3.3.8`).
 
 ## Tests
 
@@ -63,8 +80,11 @@ worked (keyboard trap, lost focus, missing accessible name on an interactive con
   a `todo`.
 - web has SCSS a11y tooling under `scss/tools/_accessibility.scss`.
 
-## Checklist
+## References
 
-`references/accessibility-checklist.md` — the detailed, actionable checklist (keyboard, screen
-readers, visual, forms, content, ARIA live regions, and common anti-patterns). The
-`accessibility-reviewer` applies it.
+- `references/accessibility-checklist.md` — the detailed, actionable checklist (keyboard, screen
+  readers, visual, forms, content, ARIA live regions, common anti-patterns, impact prioritization,
+  and automated-testing commands). The `accessibility-reviewer` applies it.
+- `references/accessibility-patterns.md` — worked, Spirit-adapted code patterns (icon-button names,
+  `:focus-visible` with the `focus-ring` token, error fields, live regions, modal focus management,
+  form labels, reduced motion, the new 2.2 patterns, and screen-reader command shortcuts).
