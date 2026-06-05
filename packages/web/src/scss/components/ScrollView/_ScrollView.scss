@@ -8,7 +8,7 @@
 //    - Overflow decorators are positioned absolutely over the `.ScrollView`, with auto `z-index` (this is
 //      important!), and with `overflow: hidden` to clip the shadows (ie. its pseudo elements) when offset is applied.
 //    - The `.ScrollView__viewport` remains interactive thanks to `pointer-events: none` on overflow decorators.
-//    - The `.ScrollView__arrows` are positioned absolutely over the `.ScrollView__overflowDecorators`.
+//    - The `.ScrollView__controls` are positioned absolutely over the `.ScrollView__overflowDecorators`.
 //
 // 3. Make the `.ScrollView__content`'s bounding rectangle spread beyond the part visible through `.ScrollView__viewport`.
 //
@@ -137,9 +137,9 @@
     transform: translateY(#{theme.$start-shadow-initial-offset});
 }
 
-.ScrollView--vertical:where(:has(> .ScrollView__arrows)) > .ScrollView__overflowDecorators--shadows::before {
-    height: theme.$start-shadow-size-arrow;
-    transform: translateY(#{theme.$start-shadow-initial-offset-arrow});
+.ScrollView--vertical:where(:has(> .ScrollView__controls)) > .ScrollView__overflowDecorators--shadows::before {
+    height: theme.$start-shadow-size-controls;
+    transform: translateY(#{theme.$start-shadow-initial-offset-controls});
 }
 
 .ScrollView--vertical > .ScrollView__overflowDecorators--shadows::after {
@@ -149,9 +149,9 @@
     transform: translateY(#{-1 * theme.$end-shadow-initial-offset});
 }
 
-.ScrollView--vertical:where(:has(> .ScrollView__arrows)) > .ScrollView__overflowDecorators--shadows::after {
-    height: theme.$end-shadow-size-arrow;
-    transform: translateY(#{-1 * theme.$end-shadow-initial-offset-arrow});
+.ScrollView--vertical:where(:has(> .ScrollView__controls)) > .ScrollView__overflowDecorators--shadows::after {
+    height: theme.$end-shadow-size-controls;
+    transform: translateY(#{-1 * theme.$end-shadow-initial-offset-controls});
 }
 
 .ScrollView--horizontal > .ScrollView__overflowDecorators::before,
@@ -184,9 +184,9 @@
     transform: translateX(#{theme.$start-shadow-initial-offset});
 }
 
-.ScrollView--horizontal:where(:has(> .ScrollView__arrows)) > .ScrollView__overflowDecorators--shadows::before {
-    width: theme.$start-shadow-size-arrow;
-    transform: translateX(#{theme.$start-shadow-initial-offset-arrow});
+.ScrollView--horizontal:where(:has(> .ScrollView__controls)) > .ScrollView__overflowDecorators--shadows::before {
+    width: theme.$start-shadow-size-controls;
+    transform: translateX(#{theme.$start-shadow-initial-offset-controls});
 }
 
 .ScrollView--horizontal > .ScrollView__overflowDecorators--shadows::after {
@@ -196,12 +196,12 @@
     transform: translateX(#{-1 * theme.$end-shadow-initial-offset});
 }
 
-.ScrollView--horizontal:where(:has(> .ScrollView__arrows)) > .ScrollView__overflowDecorators--shadows::after {
-    width: theme.$end-shadow-size-arrow;
-    transform: translateX(#{-1 * theme.$end-shadow-initial-offset-arrow});
+.ScrollView--horizontal:where(:has(> .ScrollView__controls)) > .ScrollView__overflowDecorators--shadows::after {
+    width: theme.$end-shadow-size-controls;
+    transform: translateX(#{-1 * theme.$end-shadow-initial-offset-controls});
 }
 
-.ScrollView__arrows {
+.ScrollView__controls {
     position: absolute;
     inset: 0;
     z-index: 3; // 2.
@@ -211,13 +211,13 @@
     pointer-events: none;
 }
 
-.ScrollView--vertical > .ScrollView__arrows {
+.ScrollView--vertical > .ScrollView__controls {
     flex-direction: column;
 }
 
-.ScrollView__arrows > :first-child,
-.ScrollView__arrows > :last-child {
-    margin: theme.$arrow-spacing;
+.ScrollView__controls > :first-child,
+.ScrollView__controls > :last-child {
+    margin: theme.$controls-spacing;
     visibility: hidden;
     opacity: 0;
     pointer-events: auto;
@@ -226,9 +226,9 @@
 }
 
 .is-scrolled-at-start > .ScrollView__overflowDecorators::before,
-.is-scrolled-at-start > .ScrollView__arrows > :first-child,
+.is-scrolled-at-start > .ScrollView__controls > :first-child,
 .is-scrolled-at-end > .ScrollView__overflowDecorators::after,
-.is-scrolled-at-end > .ScrollView__arrows > :last-child {
+.is-scrolled-at-end > .ScrollView__controls > :last-child {
     visibility: visible;
     opacity: 1;
     transform: translate(0, 0);

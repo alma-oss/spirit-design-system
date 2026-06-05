@@ -22,7 +22,7 @@ export const renameComponent = (
 ) => {
   const importStatements = root.find(j.ImportDeclaration, {
     source: {
-      value: (value: string) => /^@lmc-eu\/spirit-web-react(\/.*)?$/.test(value),
+      value: (value: string) => /^@alma-oss\/spirit-web-react(\/.*)?$/.test(value),
     },
   });
 
