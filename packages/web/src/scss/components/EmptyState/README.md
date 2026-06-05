@@ -14,7 +14,7 @@ EmptyState component is a composition of the following components:
 The `EmptyState` component is a main container responsible for positioning the [EmptyStateSection](#unstable-emptystatesection) components or content.
 
 ```html
-<div class="Stack Stack--hasSpacing EmptyState" style="--stack-spacing: var(--spirit-space-700);">
+<div class="Stack Stack--spacing EmptyState" style="--stack-spacing: var(--spirit-space-700);">
   <!-- EmptyStateSection components or content go here -->
 </div>
 ```
@@ -36,9 +36,9 @@ This component is based on the [Stack][stack] component and accepts all its vari
 ### Full Example
 
 ```html
-<div class="Stack Stack--hasSpacing EmptyState" style="--stack-spacing: var(--spirit-space-700);">
+<div class="Stack Stack--spacing EmptyState" style="--stack-spacing: var(--spirit-space-700);">
   <div class="Stack EmptyState__section">Placeholder</div>
-  <div class="Stack Stack--hasSpacing EmptyState__section" style="--stack-spacing: var(--spirit-space-500);">
+  <div class="Stack Stack--spacing EmptyState__section" style="--stack-spacing: var(--spirit-space-500);">
     <h2 class="typography-heading-xsmall-bold">Headline</h2>
     <p color="secondary" class="typography-body-medium-text-regular">Description</p>
   </div>
