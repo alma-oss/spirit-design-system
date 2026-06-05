@@ -18,7 +18,7 @@ export interface UseScrollViewStyleReturn {
     viewport: string;
     content: string;
     overflowDecorators: string;
-    arrows: string;
+    controls: string;
   };
 }
 
@@ -43,7 +43,7 @@ export const useScrollViewStyleProps = ({
   const scrollViewOverflowDecoratorsVariantClass = scrollViewOverflowDecoratorsVariantClasses[overflowDecorators];
   const scrollViewAtStartClass = 'is-scrolled-at-start';
   const scrollViewAtEndClass = 'is-scrolled-at-end';
-  const scrollViewArrowsClass = `${scrollViewClass}__arrows`;
+  const scrollViewControlsClass = `${scrollViewClass}__controls`;
 
   return {
     classProps: {
@@ -55,7 +55,7 @@ export const useScrollViewStyleProps = ({
       viewport: scrollViewViewportClass,
       content: scrollViewContentClass,
       overflowDecorators: classNames(scrollViewOverflowDecoratorsClass, scrollViewOverflowDecoratorsVariantClass),
-      arrows: scrollViewArrowsClass,
+      controls: scrollViewControlsClass,
     },
   };
 };

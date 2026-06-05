@@ -8,7 +8,7 @@ It uses a lighter visual design than [Button][button] and reacts to the color sc
 Use **ControlButton** for:
 
 - **Close buttons** in modals, dialogs, and notifications
-- **Navigation controls** like ScrollView arrows or carousel controls
+- **Navigation controls** like ScrollView controls or carousel controls
 - **Icon-only actions** that need minimal visual weight
 
 Do you need size consistency with form controls or a heavier visual? Use

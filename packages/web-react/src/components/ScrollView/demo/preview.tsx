@@ -9,10 +9,10 @@ import ScrollViewDefault from './ScrollViewDefault';
 import ScrollViewHiddenScrollbar from './ScrollViewHiddenScrollbar';
 import ScrollViewHorizontal from './ScrollViewHorizontal';
 import ScrollViewHorizontalBreakout from './ScrollViewHorizontalBreakout';
-import ScrollViewHorizontalWithArrows from './ScrollViewHorizontalWithArrows';
-import ScrollViewHorizontalWithArrowsAndHiddenScrollbar from './ScrollViewHorizontalWithArrowsAndHiddenScrollbar';
+import ScrollViewHorizontalWithControls from './ScrollViewHorizontalWithControls';
+import ScrollViewHorizontalWithControlsAndHiddenScrollbar from './ScrollViewHorizontalWithControlsAndHiddenScrollbar';
 import ScrollViewOverflowDecorators from './ScrollViewOverflowDecorators';
-import ScrollViewVerticalWithArrows from './ScrollViewVerticalWithArrows';
+import ScrollViewVerticalWithControls from './ScrollViewVerticalWithControls';
 
 export const Preview = () => (
   <StrictMode>
@@ -32,14 +32,14 @@ export const Preview = () => (
       <DocsSection title="Hidden Scrollbar">
         <ScrollViewHiddenScrollbar />
       </DocsSection>
-      <DocsSection title="Horizontal Scrolling with Arrows">
-        <ScrollViewHorizontalWithArrows />
+      <DocsSection title="Horizontal Scrolling with Controls">
+        <ScrollViewHorizontalWithControls />
       </DocsSection>
-      <DocsSection title="Horizontal Scrolling with Arrows and Hidden Scrollbar">
-        <ScrollViewHorizontalWithArrowsAndHiddenScrollbar />
+      <DocsSection title="Horizontal Scrolling with Controls and Hidden Scrollbar">
+        <ScrollViewHorizontalWithControlsAndHiddenScrollbar />
       </DocsSection>
-      <DocsSection title="Vertical Scrolling with Arrows">
-        <ScrollViewVerticalWithArrows />
+      <DocsSection title="Vertical Scrolling with Controls">
+        <ScrollViewVerticalWithControls />
       </DocsSection>
     </IconsProvider>
   </StrictMode>
