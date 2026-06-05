@@ -266,9 +266,7 @@ Show a message when no options match the current query. Place it alongside the S
   <div class="Stack Stack--hasSpacing" role="grid" …>
     <!-- option rows -->
   </div>
-  <div role="status" aria-live="polite" class="UNSTABLE_Combobox__emptyState" hidden>
-    Nothing found
-  </div>
+  <div role="status" aria-live="polite" class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
 </div>
 ```
 
@@ -279,9 +277,7 @@ is hidden by default:
 
 ```html
 <div class="DropdownPopover placement-bottom-start">
-  <div class="UNSTABLE_Combobox__loading" role="status" aria-live="polite" hidden>
-    Loading…
-  </div>
+  <div class="UNSTABLE_Combobox__loading" role="status" aria-live="polite" hidden>Loading…</div>
   <div class="Stack Stack--hasSpacing" role="grid" …>
     <!-- option rows -->
   </div>
