@@ -9,7 +9,7 @@ Stack is a component that allows you to compose elements vertically.
 Usage with form fields:
 
 ```html
-<div class="Stack Stack--hasSpacing">
+<div class="Stack Stack--spacing">
   <div>
     <label for="textfield-stack-1" class="Label Label--required">Label</label>
     <div class="InputContainer InputContainer--medium">
@@ -43,22 +43,22 @@ Usage with a list:
 
 ## Variants
 
-⚠ `Stack--hasSpacing` with dividers uses the CSS `padding` property to be able to create dividers using the `border` property.
+⚠ `Stack--spacing` with dividers uses the CSS `padding` property to be able to create dividers using the `border` property.
 It is recommended to wrap the direct descendants of the `Stack` component to the proper HTML element.
 Otherwise, the applied spacing via vertical padding could break the visual view of the children's items.
 
-`Stack--hasSpacing` without dividers uses the CSS `gap` property.
+`Stack--spacing` without dividers uses the CSS `gap` property.
 
 ### Spacing Between Items
 
-👉 The vertical spacing between items is applied via `Stack--hasSpacing`. The size corresponds with the value of the design token `$space-600`.
+👉 The vertical spacing between items is applied via `Stack--spacing`. The size corresponds with the value of the design token `$space-600`.
 In case you need another spacing, please use utility classes or add custom-defined styles to the direct descendants.
 Keep in mind, that spacing is applied by the `gap` property or by `padding` property in case of dividers.
 
 Usage with spacing:
 
 ```html
-<ul class="Stack Stack--hasSpacing">
+<ul class="Stack Stack--spacing">
   <li>
     <div>Block 1</div>
   </li>
@@ -78,7 +78,7 @@ Usage with spacing:
 Usage with middle dividers:
 
 ```html
-<ul class="Stack Stack--hasIntermediateDividers">
+<ul class="Stack Stack--intermediateDividers">
   <li class="StackItem">
     <div>Block 1</div>
   </li>
@@ -94,7 +94,7 @@ Usage with middle dividers:
 Usage with inner and outer dividers:
 
 ```html
-<ul class="Stack Stack--hasIntermediateDividers Stack--hasStartDivider Stack--hasEndDivider">
+<ul class="Stack Stack--intermediateDividers Stack--startDivider Stack--endDivider">
   <li class="StackItem">
     <div>Block 1</div>
   </li>
@@ -112,7 +112,7 @@ Usage with inner and outer dividers:
 Usage with combination of spacing and dividers:
 
 ```html
-<ul class="Stack Stack--hasSpacing Stack--hasIntermediateDividers Stack--hasStartDivider Stack--hasEndDivider">
+<ul class="Stack Stack--spacing Stack--intermediateDividers Stack--startDivider Stack--endDivider">
   <li class="StackItem">
     <div>Block 1</div>
   </li>
@@ -127,12 +127,12 @@ Usage with combination of spacing and dividers:
 
 ## Custom Spacing
 
-Use CSS custom properties to define custom spacing between items in `Stack--hasSpacing`. Set the `--stack-spacing`
+Use CSS custom properties to define custom spacing between items in `Stack--spacing`. Set the `--stack-spacing`
 property to one of spacing token values defined on the `:root` element, e.g. `--stack-spacing: var(--spirit-space-800)`.
 This will set the spacing to `var(--spirit-space-800)` for all breakpoints.
 
 ```html
-<ul class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-1200)">
+<ul class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-1200)">
   <li>
     <div>Block 1</div>
   </li>
@@ -158,7 +158,7 @@ breakpoint the default spacing will be used.
 Custom spacing from tablet up:
 
 ```html
-<ul class="Stack Stack--hasSpacing" style="--stack-spacing-tablet: var(--spirit-space-1200)">
+<ul class="Stack Stack--spacing" style="--stack-spacing-tablet: var(--spirit-space-1200)">
   <li>
     <div>Block 1</div>
   </li>
@@ -175,7 +175,7 @@ Custom spacing for each breakpoint:
 
 ```html
 <ul
-  class="Stack Stack--hasSpacing"
+  class="Stack Stack--spacing"
   style="--stack-spacing: var(--spirit-space-800); --stack-spacing-tablet: var(--spirit-space-1000); --stack-spacing-desktop: var(--spirit-space-1200)"
 >
   <li>
@@ -194,7 +194,7 @@ Custom spacing works with dividers too.
 
 ```html
 <ul
-  class="Stack Stack--hasSpacing Stack--hasIntermediateDividers Stack--hasStartDivider Stack--hasEndDivider"
+  class="Stack Stack--spacing Stack--intermediateDividers Stack--startDivider Stack--endDivider"
   style="--stack-spacing: var(--spirit-space-800)"
 >
   <li class="StackItem">

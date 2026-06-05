@@ -46,7 +46,7 @@ the `<h3>` element matches the value of the `aria-labelledby` attribute of the `
 ```html
 <nav aria-labelledby="footer-navigation-section">
   <h3 class="typography-heading-xsmall-semibold mb-700" id="footer-navigation-section">Section headline</h3>
-  <ul class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-600)">
+  <ul class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-600)">
     <li>
       <a href="https://www.example.com">Link</a>
     </li>
@@ -183,7 +183,7 @@ Responsive values can be defined using the `tablet` and `desktop` infixes.
       <!-- Repeat the `<nav>` block as many times as needed. -->
       <nav aria-labelledby="footer-navigation-section">
         <h3 class="typography-heading-xsmall-semibold mb-700" id="footer-navigation-section">Section headline</h3>
-        <ul class="Stack Stack--hasSpacing" style="--stack-spacing: var(--spirit-space-600)">
+        <ul class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-600)">
           <li>
             <a href="https://www.example.com">Link</a>
           </li>
