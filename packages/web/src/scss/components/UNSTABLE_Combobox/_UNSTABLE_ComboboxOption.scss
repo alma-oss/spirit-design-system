@@ -1,16 +1,11 @@
-// 1. Dismiss button gridcell stacks above any overlay (e.g. the chevron label).
-// 2. Ensures the cell fills available space in both selectable and
-//    dismissible variants; in the dismissible case it pushes the close button to the end.
-@use '@tokens' as tokens;
 @use '../../tools/form-fields' as form-fields-tools;
-@use '../../tools/typography';
 @use 'theme';
 
 .UNSTABLE_ComboboxOption {
     @include form-fields-tools.item();
 
     display: flex;
-    gap: tokens.$space-500;
+    gap: theme.$option-cell-gap;
     align-items: center;
     width: 100%;
     user-select: none;
@@ -30,51 +25,4 @@
         pointer-events: none;
         cursor: theme.$option-cursor-state-disabled;
     }
-}
-
-.UNSTABLE_ComboboxOption--dismissible {
-    justify-content: space-between;
-}
-
-// 1.
-.UNSTABLE_ComboboxOption--dismissible [role='gridcell']:last-child {
-    position: relative;
-    z-index: 1;
-    display: inline-flex;
-}
-
-.UNSTABLE_ComboboxOption__cell {
-    position: relative;
-    display: flex;
-    flex: 1; // 2.
-    gap: theme.$option-cell-gap;
-    align-items: flex-start;
-}
-
-.UNSTABLE_ComboboxOption--dismissible .UNSTABLE_ComboboxOption__cell > a {
-    text-decoration: none;
-    color: inherit;
-
-    &:hover {
-        text-decoration: none;
-        color: inherit;
-    }
-}
-
-.UNSTABLE_ComboboxOption__label {
-    display: flex;
-    flex-direction: column;
-    gap: theme.$option-label-gap;
-}
-
-.UNSTABLE_ComboboxGroup__label,
-.UNSTABLE_ComboboxOption__static {
-    display: block;
-    padding: theme.$group-label-padding;
-    color: theme.$group-label-color;
-    user-select: none;
-}
-
-.UNSTABLE_ComboboxGroup__label {
-    @include typography.generate(theme.$group-label-typography);
 }

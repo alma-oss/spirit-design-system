@@ -9,41 +9,26 @@
 //   - Manage aria-activedescendant for keyboard navigation (points to role="row" in the popup grid)
 //   - Clear-all button: deselect all rows, remove all tags
 //   - Popover open/close: Escape, click-outside, Tab-out
-//   - Dismissible rows: click × button or Delete/Backspace on active row removes from list
+//   - Hide the "+ Add more…" affordance when every option is already selected
 
 // ─── Selectors ───────────────────────────────────────────────────────────────
 
 const SELECTOR_COMBOBOX = '[data-spirit-element="combobox"]';
 const SELECTOR_INPUT = '[data-spirit-combobox-input]';
 const SELECTOR_POPUP = '[data-spirit-combobox-listbox]';
-const SELECTOR_ROW = '[role="row"]:not([data-spirit-combobox-tag-row])'; // popup rows only (not tag rows)
+const SELECTOR_ROW = '[role="row"]:not([data-spirit-combobox-tag-row])';
 const SELECTOR_GRIDCELL = '[role="gridcell"]';
-const SELECTOR_GROUP = '[role="rowgroup"][data-spirit-combobox-group]';
 const SELECTOR_SELECTION = '[data-spirit-combobox-selection]';
 const SELECTOR_CLEAR = '[data-spirit-combobox-clear]';
 const SELECTOR_TAG_ROW = '[data-spirit-combobox-tag-row]';
 const SELECTOR_TAG_CLOSE = '[data-spirit-combobox-tag-close]';
 const SELECTOR_TAG_LABEL = '[data-spirit-combobox-tag-label]';
 const SELECTOR_TAG_DESCRIPTION = '[data-spirit-combobox-tag-description]';
-const SELECTOR_OPTION_DISMISS = '[data-spirit-combobox-option-dismiss]';
 const SELECTOR_EMPTY_STATE = '[data-spirit-combobox-empty-state]';
-const SELECTOR_OPTION_LABEL = '.UNSTABLE_ComboboxOption__label';
-const SELECTOR_OPTION_LIST = '.UNSTABLE_Combobox__optionList';
 const SELECTOR_LOADING = '[data-spirit-combobox-loading]';
-const SELECTOR_TIP = '[data-spirit-combobox-tip]';
-
-const CLASS_OPTION_CELL = 'UNSTABLE_ComboboxOption__cell';
-const CLASS_OPTION_DISMISSIBLE = 'UNSTABLE_ComboboxOption--dismissible';
 
 const ATTR_ACTIVE = 'data-spirit-combobox-active';
 const ATTR_ASYNC = 'data-spirit-combobox-async';
-const ATTR_LINK_ROW = 'data-spirit-combobox-link-row';
-const ATTR_SEARCH_ROW = 'data-spirit-combobox-search-row';
-const ATTR_TIP_EMPTY = 'data-spirit-combobox-tip-empty';
-
-const SELECTOR_SEARCH_QUERY = '[data-spirit-combobox-search-query]';
-
-const SELECTOR_TOGGLE = '[data-spirit-toggle="combobox"]';
 
 const ID_TAG_TEMPLATE = 'autocomplete-tag-template';
 
@@ -52,27 +37,12 @@ const ASYNC_DELAY_MS = 600;
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
-/**
- * Returns all role="row" elements inside the popup grid (excludes tag rows).
- *
- * @param popupEl
- */
 function getRows(popupEl) {
   return Array.from(popupEl.querySelectorAll(SELECTOR_ROW));
 }
 
-/**
- * Returns visible (not display:none, not inside a hidden rowgroup) rows.
- *
- * @param popupEl
- */
 function getVisibleRows(popupEl) {
-  return getRows(popupEl).filter((row) => {
-    if (row.style.display === 'none') return false;
-    const group = row.closest('[role="rowgroup"]');
-
-    return !group || !group.hidden;
-  });
+  return getRows(popupEl).filter((row) => row.style.display !== 'none');
 }
 
 function getActiveRow(popupEl) {
@@ -99,62 +69,13 @@ function setActive(inputEl, rowEl) {
   inputEl.setAttribute('aria-activedescendant', rowEl.id);
 }
 
-// ─── Row label helper ─────────────────────────────────────────────────────────
-
-/**
- * Returns the text label of a popup row (first gridcell text content).
- *
- * @param rowEl
- */
 function getRowLabel(rowEl) {
   const firstCell = rowEl.querySelector(SELECTOR_GRIDCELL);
 
   if (!firstCell) return rowEl.textContent.trim();
 
-  // Icon option: label is only the first child of .UNSTABLE_ComboboxOption__label,
-  // not the full cell text which also includes description and note lines.
-  if (firstCell.classList.contains(CLASS_OPTION_CELL)) {
-    const labelEl = firstCell.querySelector(SELECTOR_OPTION_LABEL);
-    const target = labelEl?.firstElementChild;
-
-    if (target) {
-      // Use originalText when highlight has been applied to avoid reading both
-      // the aria-hidden formatted span and the accessibility-hidden plain-text span.
-      return target.dataset.originalText ?? target.textContent.trim();
-    }
-
-    return firstCell.textContent.trim();
-  }
-
-  // Same rationale: after highlighting, firstCell contains two spans.
+  // After highlighting, firstCell contains two spans (formatted + accessibility-hidden).
   return firstCell.dataset.originalText ?? firstCell.textContent.trim();
-}
-
-/**
- * Returns the DOM element whose text content should be highlighted.
- *
- * Two structural variants are supported:
- * - Simple / dismissible: the first gridcell contains the label as a direct
- * text node — the gridcell element itself is the target.
- * - Icon option: the first gridcell uses display:flex (set via inline style)
- * and contains an <svg> followed by a wrapper <div>. The label sits in the
- * first child element of that wrapper.
- *
- * @param rowEl
- */
-function getHighlightTarget(rowEl) {
-  const firstCell = rowEl.querySelector(SELECTOR_GRIDCELL);
-
-  if (!firstCell) return null;
-
-  if (firstCell.classList.contains(CLASS_OPTION_CELL)) {
-    // Icon variant: <svg> + <div class="UNSTABLE_ComboboxOption__label"><div>Label</div>…</div>
-    const labelEl = firstCell.querySelector(SELECTOR_OPTION_LABEL);
-
-    return labelEl ? labelEl.firstElementChild : null;
-  }
-
-  return firstCell;
 }
 
 /**
@@ -172,7 +93,6 @@ function getHighlightTarget(rowEl) {
 function highlightLabel(targetEl, query) {
   if (!targetEl) return;
 
-  // Persist original text on first call so we can restore it later.
   if (!('originalText' in targetEl.dataset)) {
     targetEl.dataset.originalText = targetEl.textContent;
   }
@@ -197,7 +117,6 @@ function highlightLabel(targetEl, query) {
   const match = original.slice(matchIdx, matchIdx + query.length);
   const after = original.slice(matchIdx + query.length);
 
-  // Build the visually formatted span (hidden from AT).
   const formattedSpan = document.createElement('span');
 
   formattedSpan.setAttribute('aria-hidden', 'true');
@@ -218,7 +137,6 @@ function highlightLabel(targetEl, query) {
     formattedSpan.appendChild(strong);
   }
 
-  // Build the AT-only span with the original plain text.
   const hiddenSpan = document.createElement('span');
 
   hiddenSpan.className = 'accessibility-hidden';
@@ -231,7 +149,7 @@ function highlightLabel(targetEl, query) {
 
 // ─── Tag management ───────────────────────────────────────────────────────────
 
-function createTag(label, selectionEl, onRemove) {
+function createTag(label, selectionEl, onRemove, { disabled = false } = {}) {
   const template = document.getElementById(ID_TAG_TEMPLATE);
 
   if (!template) {
@@ -243,7 +161,9 @@ function createTag(label, selectionEl, onRemove) {
 
   const fragment = template.content.cloneNode(true);
   const row = fragment.querySelector(SELECTOR_TAG_ROW);
-  const tagDescriptionId = selectionEl.closest(SELECTOR_COMBOBOX)?.querySelector(SELECTOR_TAG_DESCRIPTION)?.id;
+  // The tag description is a single shared element placed outside every combobox;
+  // resolve it from the document, not from within the combobox.
+  const tagDescriptionId = document.querySelector(SELECTOR_TAG_DESCRIPTION)?.id;
 
   row.setAttribute('aria-label', label);
   row.setAttribute('tabindex', '-1');
@@ -258,6 +178,16 @@ function createTag(label, selectionEl, onRemove) {
 
   closeBtn.setAttribute('aria-label', `Remove ${label}`);
   closeBtn.setAttribute('tabindex', '-1');
+
+  if (disabled) {
+    // Disabled tag: drop the selected color scheme in favor of the disabled visual state and
+    // disable the close button so it cannot be activated while the combobox is non-interactive.
+    row.classList.remove('color-scheme-on-selected-basic');
+    row.classList.add('Tag--disabled');
+    closeBtn.disabled = true;
+
+    return fragment;
+  }
 
   row.addEventListener('focus', () => closeBtn.setAttribute('tabindex', '0'));
   row.addEventListener('blur', () => closeBtn.setAttribute('tabindex', '-1'));
@@ -326,89 +256,19 @@ function filterRows(popupEl, query) {
   const rawQuery = query.trim();
 
   getRows(popupEl).forEach((row) => {
-    if (row.hasAttribute(ATTR_SEARCH_ROW)) return; // visibility managed by syncSearchRow
-
     const label = getRowLabel(row);
     const matches = !normalised || label.toLowerCase().includes(normalised);
 
     row.style.display = matches ? '' : 'none';
-    highlightLabel(getHighlightTarget(row), rawQuery);
+    highlightLabel(row.querySelector(SELECTOR_GRIDCELL), rawQuery);
   });
 
-  // Hide rowgroups when all their rows are hidden
-  popupEl.querySelectorAll(SELECTOR_GROUP).forEach((group) => {
-    const anyVisible = Array.from(group.querySelectorAll(SELECTOR_ROW)).some((row) => row.style.display !== 'none');
-
-    group.hidden = !anyVisible;
-  });
-
-  // Show/hide empty state message
   const emptyState = popupEl.querySelector(SELECTOR_EMPTY_STATE);
   const anyVisible = getVisibleRows(popupEl).length > 0;
 
   if (emptyState) {
     emptyState.hidden = anyVisible;
   }
-}
-
-// ─── Tip box ─────────────────────────────────────────────────────────────────
-
-/**
- * Shows the tip box based on its mode:
- * - Default tip (no ATTR_TIP_EMPTY): visible when popup is open and input is empty.
- *   Hides the option list while the tip is shown.
- * - Empty tip (ATTR_TIP_EMPTY present): visible only when all rows have been dismissed.
- *   Option list is hidden only after all rows are gone.
- *
- * @param comboboxEl
- * @param inputEl
- * @param popupEl
- */
-/**
- * Shows or hides the search-keyword row and keeps its label in sync with the current query.
- * The row lets users "search for" whatever they typed instead of picking a suggestion.
- *
- * @param comboboxEl
- * @param inputEl
- */
-function syncSearchRow(comboboxEl, inputEl) {
-  const row = comboboxEl.querySelector(`[${ATTR_SEARCH_ROW}]`);
-
-  if (!row) return;
-
-  const query = inputEl.value.trim();
-
-  row.style.display = query ? '' : 'none';
-
-  if (query) {
-    const queryEl = row.querySelector(SELECTOR_SEARCH_QUERY);
-
-    if (queryEl) queryEl.textContent = query;
-
-    row.setAttribute('aria-label', `${query} – search for keyword`);
-  }
-}
-
-function syncTip(comboboxEl, inputEl, popupEl) {
-  const tipEl = comboboxEl.querySelector(SELECTOR_TIP);
-
-  if (!tipEl) return;
-
-  const isOpen = popupEl.classList.contains('is-open');
-  const hasValue = inputEl.value.length > 0;
-  const noRows = getRows(popupEl).length === 0;
-  const isEmptyTip = tipEl.hasAttribute(ATTR_TIP_EMPTY);
-  const showTip = isOpen && (isEmptyTip ? noRows : !hasValue);
-
-  tipEl.hidden = !showTip;
-  // Use inline style to guarantee hiding even when utility CSS classes (e.g. Flex)
-  // set display:flex and would otherwise override the [hidden] attribute.
-  tipEl.style.display = showTip ? '' : 'none';
-
-  // Hide option list / empty state when tip is visible
-  popupEl.querySelectorAll(`${SELECTOR_OPTION_LIST}, ${SELECTOR_EMPTY_STATE}`).forEach((el) => {
-    el.style.display = showTip ? 'none' : '';
-  });
 }
 
 // ─── Loading state ────────────────────────────────────────────────────────────
@@ -420,7 +280,6 @@ function setLoading(comboboxEl, popupEl, isLoading) {
 
   loadingEl.hidden = !isLoading;
 
-  // Hide rows and empty state while loading; restore visibility after
   popupEl.querySelectorAll(`${SELECTOR_ROW}, ${SELECTOR_EMPTY_STATE}`).forEach((el) => {
     el.style.display = isLoading ? 'none' : '';
   });
@@ -447,11 +306,10 @@ function initCombobox(comboboxEl) {
   const popupEl = comboboxEl.querySelector(SELECTOR_POPUP);
   const selectionEl = comboboxEl.querySelector(SELECTOR_SELECTION);
   const clearBtn = comboboxEl.querySelector(SELECTOR_CLEAR);
-  const toggleBtn = comboboxEl.querySelector(SELECTOR_TOGGLE);
 
   if (!inputEl || !popupEl || !selectionEl) return;
-  if (inputEl.disabled) return;
 
+  const isDisabled = inputEl.disabled;
   const isAsync = comboboxEl.hasAttribute(ATTR_ASYNC);
   let asyncTimer = null;
 
@@ -459,9 +317,6 @@ function initCombobox(comboboxEl) {
   // Pre-selected rows are populated in DOM order on init; subsequent toggles
   // append/remove from this list so the tag order reflects when items were selected.
   const selectedIds = [];
-
-  // Free-text search terms selected via the search-keyword row (not tied to any popup row).
-  const selectedSearchTerms = [];
 
   getRows(popupEl)
     .filter((row) => row.getAttribute('aria-selected') === 'true')
@@ -473,26 +328,43 @@ function initCombobox(comboboxEl) {
 
   const fieldLabel = inputEl.placeholder;
 
-  // Visible "add more" affordance — inserted directly before the input in the flex layout.
-  const addMoreEl = document.createElement('span');
+  // Visually-hidden helper paired with the input via aria-describedby so screen readers
+  // get the same hint that sighted users see via the placeholder ("+ Add more…").
+  // Placeholders are unreliable for assistive technology, so we mirror the intent here.
+  const addMoreHelper = document.createElement('span');
+  const addMoreHelperId = `${inputEl.id}-add-more-helper`;
 
-  addMoreEl.className = 'UNSTABLE_Combobox__addMore';
-  addMoreEl.setAttribute('aria-hidden', 'true');
-  addMoreEl.textContent = '+ Add more\u2026';
-  addMoreEl.hidden = true;
-  inputEl.insertAdjacentElement('beforebegin', addMoreEl);
+  addMoreHelper.className = 'accessibility-hidden';
+  addMoreHelper.id = addMoreHelperId;
+  addMoreHelper.textContent = `Add more ${fieldLabel}`;
+  addMoreHelper.hidden = true;
+  inputEl.insertAdjacentElement('afterend', addMoreHelper);
 
-  function syncAddMore() {
-    addMoreEl.hidden =
-      selectedIds.length + selectedSearchTerms.length === 0 ||
-      document.activeElement === inputEl ||
-      inputEl.value !== '';
+  function allOptionsSelected() {
+    const totalRows = getRows(popupEl).length;
+
+    return totalRows > 0 && selectedIds.length >= totalRows;
+  }
+
+  function setAddMoreDescribed(active) {
+    const current = (inputEl.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
+    const next = active
+      ? Array.from(new Set([...current, addMoreHelperId]))
+      : current.filter((id) => id !== addMoreHelperId);
+
+    if (next.length) {
+      inputEl.setAttribute('aria-describedby', next.join(' '));
+    } else {
+      inputEl.removeAttribute('aria-describedby');
+    }
   }
 
   function renderSelection() {
     selectionEl.querySelectorAll(SELECTOR_TAG_ROW).forEach((row) => row.remove());
 
-    const totalSelected = selectedIds.length + selectedSearchTerms.length;
+    const totalSelected = selectedIds.length;
+    const allSelected = allOptionsSelected();
+    const showAddMore = totalSelected > 0 && !allSelected;
 
     if (clearBtn) {
       clearBtn.hidden = totalSelected === 0;
@@ -507,41 +379,41 @@ function initCombobox(comboboxEl) {
       );
     }
 
-    // Show the "add more" span and hide the native placeholder when items are selected
-    // (placeholder is reserved for the field label, not for instructions).
-    syncAddMore();
-    inputEl.placeholder = totalSelected === 0 ? fieldLabel : '';
+    // Placeholder is the only visual cue for the "add more" affordance:
+    //   - no selection      → field label (e.g. "Languages")
+    //   - some selected     → "+ Add more…"
+    //   - all selected      → empty (nothing left to add)
+    if (totalSelected === 0) {
+      inputEl.placeholder = fieldLabel;
+    } else if (allSelected) {
+      inputEl.placeholder = '';
+    } else {
+      inputEl.placeholder = '+ Add more…';
+    }
 
-    // Render search-term tags (free-text selections from the search-keyword row).
-    selectedSearchTerms.forEach((term) => {
-      const tag = createTag(term, selectionEl, () => {
-        const i = selectedSearchTerms.indexOf(term);
+    addMoreHelper.hidden = !showAddMore;
+    setAddMoreDescribed(showAddMore);
 
-        if (i !== -1) selectedSearchTerms.splice(i, 1);
-        renderSelection();
-      });
-
-      if (tag) selectionEl.insertBefore(tag, addMoreEl);
-    });
-
-    // Render option tags (selections from popup rows).
     selectedIds.forEach((id) => {
       const rowEl = document.getElementById(id);
 
       if (!rowEl) return;
 
       const label = getRowLabel(rowEl);
-      const tag = createTag(label, selectionEl, () => {
-        rowEl.setAttribute('aria-selected', 'false');
-        const idx = selectedIds.indexOf(id);
+      const tag = createTag(
+        label,
+        selectionEl,
+        () => {
+          rowEl.setAttribute('aria-selected', 'false');
+          const idx = selectedIds.indexOf(id);
 
-        if (idx !== -1) selectedIds.splice(idx, 1);
-        renderSelection();
-      });
+          if (idx !== -1) selectedIds.splice(idx, 1);
+          renderSelection();
+        },
+        { disabled: isDisabled },
+      );
 
-      // Insert each tag before addMoreEl so the span always stays immediately
-      // before the input: [tags…][addMoreEl][inputEl].
-      if (tag) selectionEl.insertBefore(tag, addMoreEl);
+      if (tag) selectionEl.appendChild(tag);
     });
 
     const tagRows = Array.from(selectionEl.querySelectorAll(SELECTOR_TAG_ROW));
@@ -549,19 +421,12 @@ function initCombobox(comboboxEl) {
     tagRows.forEach((row, i) => row.setAttribute('tabindex', i === tagRows.length - 1 ? '0' : '-1'));
   }
 
-  // ── Search-term selection ─────────────────────────────────────────────────
-
-  function selectSearchTerm() {
-    const term = inputEl.value.trim();
-
-    if (!term || selectedSearchTerms.includes(term)) return;
-
-    selectedSearchTerms.push(term);
+  // Disabled instances keep their initial aria-selected rows but stay non-interactive;
+  // render the tags so the field reflects its selected state, then skip listeners.
+  if (isDisabled) {
     renderSelection();
-    inputEl.value = '';
-    syncSearchRow(comboboxEl, inputEl);
-    setLoading(comboboxEl, popupEl, false);
-    filterRows(popupEl, '');
+
+    return;
   }
 
   // ── Row toggle ────────────────────────────────────────────────────────────
@@ -583,7 +448,6 @@ function initCombobox(comboboxEl) {
 
     renderSelection();
     inputEl.value = '';
-    syncSearchRow(comboboxEl, inputEl);
     setLoading(comboboxEl, popupEl, false);
     filterRows(popupEl, '');
   }
@@ -592,22 +456,17 @@ function initCombobox(comboboxEl) {
 
   function open() {
     openPopup(inputEl, popupEl);
-    syncTip(comboboxEl, inputEl, popupEl);
-    syncSearchRow(comboboxEl, inputEl);
-    toggleBtn?.setAttribute('aria-expanded', 'true');
   }
 
   function close() {
     clearTimeout(asyncTimer);
     setLoading(comboboxEl, popupEl, false);
     closePopup(inputEl, popupEl);
-    syncTip(comboboxEl, inputEl, popupEl);
-    toggleBtn?.setAttribute('aria-expanded', 'false');
   }
 
   // ── Event listeners ───────────────────────────────────────────────────────
 
-  // Container click focuses input (click-through from selectionEmpty / selectionAddMore)
+  // Container click focuses input (click-through from selection area)
   const containerEl = inputEl.closest('[role="group"]') || inputEl.parentElement;
 
   containerEl.addEventListener('click', (event) => {
@@ -622,18 +481,11 @@ function initCombobox(comboboxEl) {
     }
   });
 
-  inputEl.addEventListener('focus', () => {
-    addMoreEl.hidden = true;
-    open();
-  });
-  inputEl.addEventListener('blur', () => syncAddMore());
+  inputEl.addEventListener('focus', () => open());
   inputEl.addEventListener('click', () => open());
 
   inputEl.addEventListener('input', () => {
-    syncAddMore();
     open();
-    syncTip(comboboxEl, inputEl, popupEl);
-    syncSearchRow(comboboxEl, inputEl);
     clearActive(popupEl);
     inputEl.removeAttribute('aria-activedescendant');
 
@@ -711,51 +563,12 @@ function initCombobox(comboboxEl) {
       return;
     }
 
-    if (event.key === 'ArrowRight') {
-      // Move focus from label cell into dismiss button of active row (if dismissible)
-      const active = getActiveRow(popupEl);
-
-      if (active?.classList.contains(CLASS_OPTION_DISMISSIBLE)) {
-        event.preventDefault();
-        const dismissBtn = active.querySelector(SELECTOR_OPTION_DISMISS);
-
-        if (dismissBtn) dismissBtn.focus();
-      }
-
-      return;
-    }
-
     if (event.key === 'Enter' || event.key === ' ') {
       const active = getActiveRow(popupEl);
 
       if (active) {
         event.preventDefault();
-
-        if (active.hasAttribute(ATTR_SEARCH_ROW)) {
-          selectSearchTerm();
-        } else if (active.hasAttribute(ATTR_LINK_ROW)) {
-          // Follow the link inside the row instead of toggling selection.
-          active.querySelector('a')?.click();
-        } else {
-          toggleRow(active);
-        }
-      }
-    }
-
-    // Delete / Backspace: dismiss active dismissible row (when input is empty)
-    if ((event.key === 'Delete' || event.key === 'Backspace') && inputEl.value === '') {
-      const active = getActiveRow(popupEl);
-
-      if (active?.classList.contains(CLASS_OPTION_DISMISSIBLE)) {
-        event.preventDefault();
-        const idx = selectedIds.indexOf(active.id);
-
-        if (idx !== -1) selectedIds.splice(idx, 1);
-        active.remove();
-        renderSelection();
-        syncTip(comboboxEl, inputEl, popupEl);
-        clearActive(popupEl);
-        inputEl.removeAttribute('aria-activedescendant');
+        toggleRow(active);
       }
     }
   });
@@ -763,46 +576,20 @@ function initCombobox(comboboxEl) {
   // ── Popup mouse events ────────────────────────────────────────────────────
 
   popupEl.addEventListener('mousedown', (event) => {
-    // Dismiss button: remove row from list entirely
-    const dismissBtn = event.target.closest(SELECTOR_OPTION_DISMISS);
-
-    if (dismissBtn) {
-      event.preventDefault();
-      event.stopPropagation();
-      const row = dismissBtn.closest('[role="row"]');
-
-      if (row) {
-        const idx = selectedIds.indexOf(row.id);
-
-        if (idx !== -1) selectedIds.splice(idx, 1);
-        row.remove();
-        renderSelection();
-        syncTip(comboboxEl, inputEl, popupEl);
-      }
-
-      return;
-    }
-
     const row = event.target.closest('[role="row"]');
 
     if (!row || !popupEl.contains(row)) return;
 
-    // Link rows navigate on click — do not prevent default or toggle selection.
-    if (row.hasAttribute(ATTR_LINK_ROW)) return;
-
     event.preventDefault(); // Keep focus on input
-
-    if (row.hasAttribute(ATTR_SEARCH_ROW)) {
-      selectSearchTerm();
-    } else {
-      toggleRow(row);
-    }
+    toggleRow(row);
   });
 
   popupEl.addEventListener('mousemove', (event) => {
     const row = event.target.closest('[role="row"]');
 
-    if (row && popupEl.contains(row)) setActive(inputEl, row);
+    if (row && popupEl.contains(row)) {
+      setActive(inputEl, row);
+    }
   });
 
   popupEl.addEventListener('mouseleave', () => {
@@ -819,23 +606,8 @@ function initCombobox(comboboxEl) {
 
       getRows(popupEl).forEach((row) => row.setAttribute('aria-selected', 'false'));
       selectedIds.length = 0;
-      selectedSearchTerms.length = 0;
       renderSelection();
       inputEl.focus();
-    });
-  }
-
-  // ── Chevron toggle ────────────────────────────────────────────────────────
-
-  if (toggleBtn) {
-    toggleBtn.addEventListener('mousedown', (event) => {
-      event.preventDefault(); // keep focus on input; prevent blur → close race
-      if (popupEl.classList.contains('is-open')) {
-        close();
-      } else {
-        inputEl.focus();
-        open();
-      }
     });
   }
 

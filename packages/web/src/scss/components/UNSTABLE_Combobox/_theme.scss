@@ -1,22 +1,29 @@
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
+@use '../../settings/form-fields' as form-fields-settings;
 
 $padding: calc(#{tokens.$space-400} - #{tokens.$border-width-100});
 
 $empty-state-color: tokens.$text-secondary;
 $empty-state-padding: tokens.$space-600 tokens.$space-700;
 
-$group-label-color: tokens.$text-primary;
-$group-label-padding: tokens.$space-400 tokens.$space-600 tokens.$space-200;
-$group-label-typography: tokens.$body-medium-semibold;
+// Sized to comfortably fit the default placeholder copy ("+ Add more…", ~11 characters).
+// Consumers can override per-instance via the `--spirit-combobox-input-min-width` CSS variable.
+$input-min-width: 11ch;
 
 $option-background-color-state-active: tokens.$background-interactive-state-hover;
 $option-background-color-state-selected: tokens.$selected-background-subtle;
 $option-cell-gap: tokens.$space-500;
 $option-color-state-disabled: tokens.$disabled-content;
 $option-cursor-state-disabled: cursors.$disabled;
-$option-label-gap: tokens.$space-300;
 
-$placeholder-margin-inline-start: calc(#{tokens.$space-500} - $padding);
+$placeholder-color-state-default: tokens.$form-field-filled-placeholder;
+$placeholder-color-state-disabled: tokens.$disabled-content;
+$placeholder-cursor-state-disabled: cursors.$disabled;
+$placeholder-padding-inline-start: calc(#{tokens.$space-500} - $padding);
 
 $selection-gap: tokens.$space-300;
+$selection-min-height: calc(
+    var(--#{tokens.$css-variable-prefix}input-container-height) - 2 *
+        #{form-fields-settings.$box-field-input-border-width}
+);

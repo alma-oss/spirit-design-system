@@ -1,14 +1,5 @@
-// 1. Removes the input from the flex flow while `addMore` element is visible so it does
-//    not contribute to the line's minimum width — wrapping is determined solely
-//    by addMore's own width. On focus `addMore` element hides
-//    and the input rejoins the flex flow at its normal flex: 1 0 6ch sizing.
-
-@use '../../settings/cursors';
-@use '../../settings/form-fields' as form-fields-settings;
-@use '../../settings/transitions';
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/string' as spirit-string;
-@use '../../tools/typography';
 @use '@tokens' as tokens;
 @use 'theme';
 
@@ -16,52 +7,41 @@ $_full-field-name: 'UNSTABLE_Combobox';
 $_field-name: spirit-string.remove-prefix($_full-field-name, 'UNSTABLE_');
 
 .UNSTABLE_Combobox {
-    @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
+    --#{tokens.$css-variable-prefix}combobox-input-min-width: #{theme.$input-min-width};
 
-    width: 100%;
+    @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
 }
 
+// TODO: Consider widening `.InputContainer > input` in InputContainer itself so it
+// targets any input child and removes the need for this combobox-local override.
+// Tracked separately so the broader change can be reviewed against Picker / Select / TextField.
+//
+// The input's `flex-basis` and `min-width` are driven by a CSS variable so the placeholder
+// (e.g. "+ Add more…") always fits on the row no matter how long it is — and so consumers can
+// override the width when their placeholder copy differs.
 .UNSTABLE_Combobox__input {
-    flex: 1 0 6ch;
-    min-width: 6ch;
+    flex: 1 0 var(--#{tokens.$css-variable-prefix}combobox-input-min-width);
+    min-width: var(--#{tokens.$css-variable-prefix}combobox-input-min-width);
     padding: 0;
+    padding-inline-start: theme.$placeholder-padding-inline-start;
     font: inherit;
+    color: inherit;
     border: 0;
     background: transparent;
     outline: 0;
 
     &::placeholder {
-        padding-inline-start: theme.$placeholder-margin-inline-start;
-        color: form-fields-settings.$box-field-input-placeholder-color-state-default;
+        color: theme.$placeholder-color-state-default;
         opacity: 1;
     }
 }
 
-.UNSTABLE_Combobox__addMore {
-    color: form-fields-settings.$box-field-input-placeholder-color-state-default;
-    user-select: none;
-    pointer-events: none;
-}
-
-// 1.
-.UNSTABLE_Combobox__addMore:not([hidden]) + .UNSTABLE_Combobox__input {
-    position: absolute;
-}
-
 :is(.UNSTABLE_Combobox--disabled, .UNSTABLE_Combobox.is-disabled) .UNSTABLE_Combobox__input {
-    cursor: cursors.$disabled;
+    cursor: theme.$placeholder-cursor-state-disabled;
 
     &::placeholder {
-        color: form-fields-settings.$box-field-input-placeholder-color-state-disabled;
+        color: theme.$placeholder-color-state-disabled;
     }
-}
-
-[data-spirit-toggle='combobox'] .Icon {
-    transition: transform transitions.$duration-200 transitions.$timing-eased-in-out;
-}
-
-[data-spirit-toggle='combobox'][aria-expanded='true'] .Icon {
-    transform: rotate(180deg);
 }
 
 .UNSTABLE_Combobox__emptyState,
