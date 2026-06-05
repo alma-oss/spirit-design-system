@@ -1,59 +1,84 @@
 # Code Review Skill
 
-Unified code review methodology covering security, quality, and maintainability.
+Multi-perspective, agentic code review for the Spirit Design System. An inline orchestrator gathers
+context, fans out to perspective reviewers, runs the cross-implementation consistency check itself,
+then merges and reports findings.
+
+## How to Run
+
+```text
+/spirit:code-review  [#<PR> | --local] [--post] [--conventional-comments] [--only <perspective>]
+```
+
+| Mode               | Trigger                               | Diff source                                            |
+| ------------------ | ------------------------------------- | ------------------------------------------------------ |
+| PR review          | `/spirit:code-review #123`            | `gh pr diff 123`                                       |
+| Local branch       | `/spirit:code-review --local`         | `git diff main...HEAD`                                 |
+| Auto-detect        | `/spirit:code-review`                 | staged → unstaged → branch diff                        |
+| Single perspective | `/spirit:code-review --only frontend` | as above, one reviewer (`frontend` or `accessibility`) |
+
+Flags: `--post` publishes to the PR (off by default), `--conventional-comments` overlays CC labels
+(off by default).
+
+## Architecture
+
+```text
+command code-review  →  spirit:code-review skill (orchestrator, inline — must NOT fork)
+  Phase 0  gather context → Review Brief (diff, stack detection, Jira, existing comments)
+  Phase 1  fan out perspective reviewer subagents in parallel
+  Phase 2  run consistency check, merge, deduplicate, cross-reference, format, verdict, optional --post
+
+perspective reviewers (.agents/agents/, read-only, spawned + standalone-runnable)
+  frontend-reviewer (web + web-react)        accessibility-reviewer
+
+knowledge skills (.agents/skills/, loaded by `cat`, standalone-runnable)
+  design-system   conventional-comments   performance-optimization
+  react   typescript   scss   html   accessibility
+
+reference files (.agents/skills/code-review/references/, loaded by `cat`)
+  methodology.md            shared review philosophy + finding format
+  consistency-checklist.md  web↔web-react parity — applied by the orchestrator across the whole PR
+```
+
+The orchestrator must run **inline (non-forked)** so it can spawn the reviewer subagents — a forked
+context cannot spawn further subagents. Reviewers load their knowledge by `cat`-ing the relevant
+files, which keeps everything portable across Claude Code and Cursor.
+
+## Separation of Concerns
+
+- **`references/methodology.md`** — review philosophy, false-positive rules, finding format, dedup,
+  verdicts. The shared "how to review and report" contract every reviewer follows.
+- **`references/consistency-checklist.md`** — web↔web-react parity, leftovers, README/demo sync.
+  Applied by the orchestrator, which sees the whole PR.
+- **`spirit:performance-optimization`** — measure-first workflow plus the bundle/render/style
+  checklist for frontend code; applied by the `frontend-reviewer`.
+- **`spirit:design-system`** — Spirit tokens, theming, conventions; loaded by every reviewer.
+- **technology skills** (`react`, `typescript`, `scss`, `html`) and **`accessibility`** — the
+  per-lens knowledge. Each is standalone-runnable, so you can apply a single lens directly.
+- **`conventional-comments`** — opt-in label overlay, off by default.
 
 ## Directory Structure
 
 ```text
-.agents/skills/code-review/
-  SKILL.md                              # Core methodology and knowledge base
-  README.md                             # This file
-  references/
-    review-checklist.md                 # Flat checkbox checklist by dimension
-    review-conventional-comments.md     # Conventional Comments label definitions and rules
-    review-output-templates.md          # Output format templates
+.agents/
+  commands/code-review.md            # inline (non-forked) launcher
+  agents/                            # perspective reviewer subagents
+    frontend-reviewer.md
+    accessibility-reviewer.md
+  skills/
+    code-review/                     # this orchestrator skill
+      SKILL.md  README.md  IMPLEMENTATION-PLAN.md
+      references/
+        methodology.md
+        consistency-checklist.md
+    performance-optimization/        # perf workflow + performance-checklist.md
+    design-system/                   # always-loaded Spirit base
+    react/  typescript/  scss/  html/  accessibility/
+    conventional-comments/           # opt-in CC overlay
 ```
 
-## Usage Modes
+## Status
 
-| Mode             | Trigger              | Diff Source                      |
-| ---------------- | -------------------- | -------------------------------- |
-| **PR Review**    | `/review #123`       | `gh pr diff 123`                 |
-| **Local Branch** | `/review --local`    | `git diff main...HEAD`           |
-| **Auto-detect**  | `/review`            | Staged > unstaged > branch diff  |
-| **Thorough**     | `/review --thorough` | Same as above, 3 parallel passes |
-
-## Conventional Comments Labels
-
-| Label      | Intent                                     | Blocking                           |
-| ---------- | ------------------------------------------ | ---------------------------------- |
-| issue      | A problem that must or should be addressed | Yes (with `(blocking)` decoration) |
-| suggestion | Improvement or better approach             | No                                 |
-| todo       | Required follow-up task                    | No                                 |
-| question   | Seeking clarification                      | No                                 |
-| thought    | Observation for consideration              | No                                 |
-| note       | Informational highlight                    | No                                 |
-| chore      | Maintenance or cleanup                     | No                                 |
-| praise     | Positive feedback                          | No                                 |
-
-See `references/review-conventional-comments.md` for full definitions, decorations, and scoring rules.
-
-## Review Dimensions
-
-1. **Project Guidelines Compliance** — Conventions from CLAUDE.md
-2. **Bug Detection** — Logic errors, null handling, race conditions
-3. **Security** — Injection, XSS, auth, secrets, CSRF
-4. **Silent Failure Detection** — Empty catches, swallowed errors
-5. **Test Coverage Analysis** — Behavioral coverage gaps
-6. **Type Design Quality** — Invariants, encapsulation, anti-patterns
-7. **Code Simplification** — Nesting, naming, redundancy
-
-## Verdicts
-
-- **APPROVE** — No `issue` or `todo` findings
-- **COMMENT** — Has `issue` or `todo` findings but none `(blocking)`
-- **REQUEST CHANGES** — Any `(blocking)` finding present
-
-## Full Reference
-
-See [SKILL.md](./SKILL.md) for the complete methodology, code examples, framework-specific checks, and output specifications.
+This is the Claude Code adapter. The Cursor adapter (a custom command + `.cursor/agents/` pointing at
+the same knowledge skills and reference files) is planned. See
+[IMPLEMENTATION-PLAN.md](./IMPLEMENTATION-PLAN.md) for the full plan and remaining steps.
