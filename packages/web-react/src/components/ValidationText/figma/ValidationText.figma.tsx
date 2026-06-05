@@ -15,7 +15,7 @@ figma.connect(ValidationText, '<FIGMA_FILE_ID>?node-id=26437%3A2033', {
 figma.connect(ValidationText, '<FIGMA_FILE_ID>?node-id=26437%3A2033', {
   props: {
     ...commonProps,
-    hasValidationStateIcon: figma.enum('Type', {
+    validationStateIcon: figma.enum('Type', {
       Danger: 'danger',
       Warning: 'warning',
       Success: 'success',

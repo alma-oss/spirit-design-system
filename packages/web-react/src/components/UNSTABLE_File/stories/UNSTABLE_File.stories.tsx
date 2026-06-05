@@ -33,7 +33,7 @@ const meta = {
       page: () => <Markdown>{ReadMe}</Markdown>,
     },
     controls: {
-      exclude: ['hasValidationStateIcon', 'previewSlot', 'onChange'],
+      exclude: ['validationStateIcon', 'previewSlot', 'onChange'],
     },
   },
   argTypes: {

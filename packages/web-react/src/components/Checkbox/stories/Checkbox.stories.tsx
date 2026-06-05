@@ -12,7 +12,7 @@ const meta: Meta<typeof Checkbox> = {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,
     },
-    controls: { exclude: ['hasValidationStateIcon'] },
+    controls: { exclude: ['validationStateIcon'] },
   },
   argTypes: {
     autoComplete: {
