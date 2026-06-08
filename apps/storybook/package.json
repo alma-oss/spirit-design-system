@@ -29,6 +29,7 @@
     "postcss": "catalog:build",
     "react": "catalog:frontend",
     "react-dom": "catalog:frontend",
+    "react-image-crop": "catalog:frontend",
     "storybook": "catalog:storybook",
     "typescript": "catalog:types",
     "vite": "catalog:build"

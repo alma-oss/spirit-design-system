@@ -293,6 +293,7 @@ __metadata:
     postcss: "catalog:build"
     react: "catalog:frontend"
     react-dom: "catalog:frontend"
+    react-image-crop: "catalog:frontend"
     storybook: "catalog:storybook"
     typescript: "catalog:types"
     vite: "catalog:build"
@@ -32035,6 +32036,15 @@ __metadata:
   peerDependencies:
     react: ^19.1.1
   checksum: 10/9005415d2175b1f1eb4a544ad04afb29691bb7b6dd43bbdaa09932146b310b73bd4552bc772ad78fa481f409eada1560cf887606c83c1a53a922c1e30f1b3a34
+  languageName: node
+  linkType: hard
+
+"react-image-crop@npm:11.0.10":
+  version: 11.0.10
+  resolution: "react-image-crop@npm:11.0.10"
+  peerDependencies:
+    react: ">=16.13.1"
+  checksum: 10/5f38841ec89ac346a69e9bc3460eec71ccb8e154ef7364e7d8f87f902f6ecde2746dfd887230826d3d4fbe23314aa20cd19f80061bd9d3772d4464ba020987b8
   languageName: node
   linkType: hard
 
