@@ -18,6 +18,7 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
   const contextProps = useContextProps<Partial<FormFieldContextValue>>();
   const propsWithDefaults = {
     ...defaultProps,
+    elementType: contextProps.elementType,
     formFieldMode: contextProps.formFieldMode,
     isDisabled: contextProps.isDisabled,
     isLabelHidden: contextProps.isLabelHidden,

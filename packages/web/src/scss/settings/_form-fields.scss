@@ -112,6 +112,7 @@ $validation-states: (
 // Item variant
 $item-padding-x: tokens.$space-700;
 $item-padding-y: tokens.$space-500;
+$item-color-state-disabled: tokens.$disabled-content;
 $item-border-radius: tokens.$radius-200;
 $item-background-color-state-default: tokens.$background-interactive-state-default;
 $item-background-color-state-hover: tokens.$background-interactive-state-hover;

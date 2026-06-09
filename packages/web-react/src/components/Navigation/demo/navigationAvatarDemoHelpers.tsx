@@ -2,6 +2,7 @@ import React, { type ReactElement, forwardRef } from 'react';
 import { type PolymorphicRef, type SpiritNavigationAvatarProps } from '../../../types';
 import { Icon } from '../../Icon';
 import { Item } from '../../Item';
+import { Label } from '../../Label';
 import { Text } from '../../Text';
 import NavigationAvatar from '../NavigationAvatar';
 
@@ -17,9 +18,15 @@ export const AVATAR_TEXT = (
 // Shared dropdown items
 export const DROPDOWN_ITEMS = (
   <>
-    <Item elementType="a" href="#" label="My Account" />
-    <Item elementType="a" href="#" label="Settings" />
-    <Item elementType="a" href="#" label="Log out" />
+    <Item elementType="a" href="#">
+      <Label>My Account</Label>
+    </Item>
+    <Item elementType="a" href="#">
+      <Label>Settings</Label>
+    </Item>
+    <Item elementType="a" href="#">
+      <Label>Log out</Label>
+    </Item>
   </>
 );
 

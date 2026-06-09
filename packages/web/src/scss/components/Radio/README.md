@@ -105,7 +105,7 @@ To add helper text, use the [HelperText][helper-text] component:
   />
   <div class="Radio__text">
     <label class="Label Label--inline" for="radio-helper-text" for="radio-helper-text">Radio Label</label>
-    <div class="HelperText HelperText--inline" id="radio-helper-text-helper-text">Helper text</div>
+    <div class="HelperText" id="radio-helper-text-helper-text">Helper text</div>
   </div>
 </div>
 ```
@@ -134,7 +134,7 @@ To add helper text, use the [HelperText][helper-text] component:
   />
   <div class="Radio__text">
     <label class="Label Label--inline" for="radio-item-helper-text">Radio Label</label>
-    <div class="HelperText HelperText--item" id="radio-item-helper-text-helper-text">Helper text</div>
+    <div class="HelperText" id="radio-item-helper-text-helper-text">Helper text</div>
   </div>
 </div>
 ```

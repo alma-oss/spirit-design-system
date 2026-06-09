@@ -270,7 +270,7 @@ class to render supplementary content (such as modal triggers) below the label.
         See privacy policy
       </button>
     </div>
-    <div class="HelperText HelperText--inline" id="toggle-consent-full-helper-text">
+    <div class="HelperText" id="toggle-consent-full-helper-text">
       Please read the documents carefully before agreeing
     </div>
     <div class="ValidationText ValidationText--danger" id="toggle-consent-full-validation-text">

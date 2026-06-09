@@ -155,17 +155,21 @@
         type="button"
         class="Item"
       >
-        <span class="Label Label--item">Item label</span>
+        <span class="Item__content" role="presentation">
+          <span class="Label Label--item">Item label</span>
+        </span>
       </button>
 
       <button
         type="button"
-        class="Item Item--selected"
+        class="Item color-scheme-on-selected-subtle"
       >
-        <span class="Label Label--item">Selected Item</span>
-        <span class="Item__icon Item__icon--end">
+        <span class="Item__content" role="presentation">
+          <span class="Label Label--item">Selected Item</span>
+        </span>
+        <span class="Item__slot" role="presentation">
           <svg
-            class="Icon"
+            class="Icon Icon--selected"
             width="24"
             height="24"
             aria-hidden="true"
@@ -177,9 +181,11 @@
 
       <button
         type="button"
-        class="Item Item--disabled"
+        class="Item disabled"
       >
-        <span class="Label Label--item Label--disabled">Disabled Item</span>
+        <span class="Item__content" role="presentation">
+          <span class="Label Label--item Label--disabled">Disabled Item</span>
+        </span>
       </button>
 
     </div>

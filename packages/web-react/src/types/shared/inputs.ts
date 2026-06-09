@@ -32,7 +32,9 @@ export interface FormFieldProps<E extends ElementType = 'div'> extends FormField
 }
 
 export interface FormFieldContextValue {
-  /** Mode (inline, item) for Label and HelperText styling. */
+  /** Element type inherited by context-aware form-field descendants. */
+  elementType?: ElementType;
+  /** Mode (inline, item) for Label styling and form-field context parity. */
   formFieldMode?: FormFieldMode;
   /** Whether the field is disabled; affects Label and HelperText styling. */
   isDisabled?: boolean;

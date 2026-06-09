@@ -1,6 +1,6 @@
 @use '@tokens' as tokens;
+@use '../../settings/dictionaries';
 
+$alignment-y-dictionary: dictionaries.$alignments-y;
+$breakpoints: tokens.$breakpoints;
 $gap: tokens.$space-500;
-$icon-color-state-default: tokens.$selected-content-basic;
-$icon-color-state-disabled: tokens.$disabled-content;
-$background-color-state-selected: tokens.$selected-background-subtle;

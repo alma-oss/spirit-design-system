@@ -1,5 +1,6 @@
 import React from 'react';
 import { Item } from '../../Item';
+import { Label } from '../../Label';
 import UncontrolledSplitButton from '../UncontrolledSplitButton';
 
 const UncontrolledSplitButtonDemo = () => (
@@ -17,8 +18,12 @@ const UncontrolledSplitButtonDemo = () => (
     isDropdownTriggerLabelHidden
     size="large"
   >
-    <Item label="Item 1" />
-    <Item label="Item 2" />
+    <Item>
+      <Label>Item 1</Label>
+    </Item>
+    <Item>
+      <Label>Item 2</Label>
+    </Item>
   </UncontrolledSplitButton>
 );
 
