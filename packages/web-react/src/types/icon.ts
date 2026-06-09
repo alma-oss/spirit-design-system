@@ -6,10 +6,16 @@ import {
   type SingleOrResponsive,
   type StyleProps,
   type TextColorNamesType,
+  type TextSelectedColorNamesType,
 } from './shared';
 
 export type IconBoxSize = SingleOrResponsive<number>;
-export type IconColorType = TextColorNamesType | EmotionColorNamesType | AccentColorNamesType;
+export type IconColorType =
+  | TextColorNamesType
+  | EmotionColorNamesType
+  | AccentColorNamesType
+  | TextSelectedColorNamesType;
+
 export interface IconStyleProps extends SVGAttributes<SVGElement> {
   /** Size of the icon */
   boxSize?: IconBoxSize;

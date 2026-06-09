@@ -11,7 +11,7 @@
 ## Color
 
 You can change the icon color by using the CSS class name `Icon--{color}`.
-Available colors include `text`, `emotion`, and `accent` colors.
+Available colors include `text`, `emotion`, `selected`, and `accent` colors.
 
 - `Icon--primary`
 - `Icon--secondary`
@@ -20,6 +20,7 @@ Available colors include `text`, `emotion`, and `accent` colors.
 - `Icon--informative`
 - `Icon--success`
 - `Icon--warning`
+- `Icon--selected`
 - `Icon--{accent-color-name}`
 
 ```html
