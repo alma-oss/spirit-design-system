@@ -96,6 +96,16 @@ describe('useIconStyleProps', () => {
     expect(result.current.classProps).toContain('Icon--primary');
   });
 
+  it('should have selected color classname when selected color is defined for regular icon', () => {
+    const props: SpiritIconProps = {
+      name: 'file',
+      color: 'selected',
+    };
+    const { result } = renderHook(() => useIconStyleProps(props));
+
+    expect(result.current.classProps).toContain('Icon--selected');
+  });
+
   it.each(Object.values(iconColors))('should have dualtone color classname %s', (color: IconColorType) => {
     const props: SpiritIconProps = {
       name: 'shield-dualtone',
