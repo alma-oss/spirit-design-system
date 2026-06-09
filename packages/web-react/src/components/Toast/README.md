@@ -30,6 +30,13 @@ The wrapping Toast container has the [`role="log"`][mdn-role-log] attribute set 
 container as they happen. In order for this to work, the Toast component **must be present in the DOM** on the initial
 page load, even when empty.
 
+### Stacking
+
+The Toast container uses the [Popover API][mdn-popover] with `popover="manual"` and calls `showPopover()` on mount to
+promote it to the browser top layer without a z-index.
+
+👉 Modals and other top-layer overlays opened later still stack above the Toast container.
+
 ### Alignment
 
 The Toast component is positioned at the bottom of the screen by default. It is also fixed to the bottom of the screen,
@@ -454,6 +461,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [icon-package]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/icons
 [mdn-aria-live]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-live
+[mdn-popover]: https://developer.mozilla.org/en-US/docs/Web/API/Popover_API
 [mdn-role-log]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/log_role
 [react-uncontrolled]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#controlled-vs-uncontrolled-components
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes

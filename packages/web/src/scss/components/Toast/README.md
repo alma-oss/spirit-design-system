@@ -29,7 +29,7 @@ The Toast component is a container responsible for positioning the [ToastBar](#t
 handling even multiple toast messages at once, stacking them in a [queue](#toast-queue).
 
 ```html
-<div class="Toast" role="log">
+<div class="Toast" popover="manual" role="log">
   <div class="Toast__queue">
     <!-- ToastBar components go here -->
   </div>
@@ -39,13 +39,21 @@ handling even multiple toast messages at once, stacking them in a [queue](#toast
 ### Accessibility
 
 The wrapping Toast container has the [`role="log"`][mdn-role-log] attribute set (which results in an implicit
-[`aria-live`][mdn-aria-live] value of `polite`). Assistive technologies then announce any **dynamic changes** inside the
-container as they happen. In order for this to work, the Toast component **must be present in the DOM** on the initial
-page load, even when empty.
+[`aria-live`][mdn-aria-live] value of `polite`) and `popover="manual"` for [stacking](#stacking). Assistive technologies
+then announce any **dynamic changes** inside the container as they happen. In order for this to work, the Toast component
+**must be present in the DOM** on the initial page load, even when empty.
 
 👉 Unless you are absolutely sure that your toast messages are critical to interrupt the user, you should not change the
 (implicit) `polite` value of the [`aria-live`][mdn-aria-live] attribute. When set to `assertive`, assistive technologies
 immediately notify the user, potentially clearing the speech queue of previous updates.
+
+### Stacking
+
+The Toast container uses the [Popover API][mdn-popover] with `popover="manual"` to promote it to the browser top layer.
+Spirit JavaScript calls `showPopover()` on page load for every `.Toast[popover="manual"]` element, so the container stays visible
+even when the queue is empty.
+
+👉 Modals and other top-layer overlays opened later still stack above the Toast container.
 
 ### Alignment
 
@@ -73,7 +81,7 @@ middle of the screen.
 Example:
 
 ```html
-<div class="Toast Toast--top Toast--right" role="log">
+<div class="Toast Toast--top Toast--right" popover="manual" role="log">
   <div class="Toast__queue">
     <!-- ToastBar components go here -->
   </div>
@@ -89,7 +97,7 @@ modifiers to change the alignment of the Toast component starting on a specific 
 Example:
 
 ```html
-<div class="Toast Toast--bottom Toast--center Toast--tablet--right" role="log">
+<div class="Toast Toast--bottom Toast--center Toast--tablet--right" popover="manual" role="log">
   <div class="Toast__queue">
     <!-- ToastBar components go here -->
   </div>
@@ -142,7 +150,7 @@ hold up to 3 ToastBar components. When the queue is full, the oldest ToastBar co
 the queue and are only accessible by closing the newer ones.
 
 ```html
-<div class="Toast Toast--collapsible" role="log">
+<div class="Toast Toast--collapsible" popover="manual" role="log">
   <div class="Toast__queue">
     <!-- ToastBar components go here -->
   </div>
@@ -184,7 +192,7 @@ An icon can be added to the ToastBar component:
   <div class="ToastBar__box">
     <div class="ToastBar__container">
       <svg width="20" height="20" aria-hidden="true">
-        <use xlink:href="/icons/svg/sprite.svg#info" />
+        <use href="/icons/svg/sprite.svg#info" />
       </svg>
       <div class="ToastBar__content">
         <div class="text-truncate-multiline" data-spirit-populate-field="message">Message with icon</div>
@@ -302,7 +310,7 @@ button:
       aria-expanded="true"
     >
       <svg width="24" height="24" aria-hidden="true">
-        <use xlink:href="/icons/svg/sprite.svg#close" />
+        <use href="/icons/svg/sprite.svg#close" />
       </svg>
       <span class="accessibility-hidden">Close</span>
     </button>
@@ -325,14 +333,14 @@ button:
 </button>
 
 <!-- Toast: start -->
-<div class="Toast Toast--bottom Toast--center" role="log">
+<div class="Toast Toast--bottom Toast--center" popover="manual" role="log">
   <div class="Toast__queue">
     <!-- ToastBar: start -->
     <div id="my-dismissible-toast" class="ToastBar ToastBar--neutral ToastBar--dismissible is-hidden">
       <div class="ToastBar__box">
         <div class="ToastBar__container">
           <svg width="20" height="20" aria-hidden="true">
-            <use xlink:href="/icons/svg/sprite.svg#info" />
+            <use href="/icons/svg/sprite.svg#info" />
           </svg>
           <div class="ToastBar__content">
             <div class="text-truncate-multiline">Toast message</div>
@@ -347,7 +355,7 @@ button:
           aria-expanded="true"
         >
           <svg width="24" height="24" aria-hidden="true">
-            <use xlink:href="/icons/svg/sprite.svg#close" />
+            <use href="/icons/svg/sprite.svg#close" />
           </svg>
           <span class="accessibility-hidden">Close</span>
         </button>
@@ -367,7 +375,7 @@ The `<template>` tag must be inserted anywhere inside the Toast container. Our J
 the template and apply it on any toasts to be shown to the user, using the configuration provided.
 
 ```html
-<div id="toast-example" class="Toast Toast--bottom Toast--center" role="log">
+<div id="toast-example" class="Toast Toast--bottom Toast--center" popover="manual" role="log">
   <div class="Toast__queue" data-spirit-element="toast-queue">
     <!-- This is the template for new ToastBar components: -->
     <template data-spirit-snippet="item">
@@ -375,7 +383,7 @@ the template and apply it on any toasts to be shown to the user, using the confi
         <div class="ToastBar__box">
           <div class="ToastBar__container">
             <svg width="20" height="20" aria-hidden="true" data-spirit-populate-field="icon">
-              <use xlink:href="/icons/svg/sprite.svg#info" />
+              <use href="/icons/svg/sprite.svg#info" />
             </svg>
             <div class="ToastBar__content">
               <div class="text-truncate-multiline" data-spirit-populate-field="message"></div>
@@ -390,7 +398,7 @@ the template and apply it on any toasts to be shown to the user, using the confi
             aria-expanded="true"
           >
             <svg width="24" height="24" aria-hidden="true">
-              <use xlink:href="/icons/svg/sprite.svg#close" />
+              <use href="/icons/svg/sprite.svg#close" />
             </svg>
             <span class="accessibility-hidden">Close</span>
           </button>
@@ -465,6 +473,7 @@ toast.hide();
 ```
 
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
+[mdn-popover]: https://developer.mozilla.org/en-US/docs/Web/API/Popover_API
 [mdn-role-log]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/log_role
 [mdn-aria-live]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-live
 [mdn-template]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template
