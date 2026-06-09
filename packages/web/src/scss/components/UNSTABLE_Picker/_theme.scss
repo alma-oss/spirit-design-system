@@ -1,5 +1,7 @@
 @use '@tokens' as tokens;
 
-$padding: calc(#{tokens.$space-400} - #{tokens.$border-width-100});
 $column-gap: tokens.$space-600;
-$selection-gap: tokens.$space-300;
+$padding-x: tokens.$space-600;
+$padding-y: calc(#{tokens.$space-400} - #{tokens.$border-width-100});
+
+$selection-gap: tokens.$space-400;
