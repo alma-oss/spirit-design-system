@@ -58,6 +58,11 @@ start:
 	@$(PKG_MANAGER) run start --scope @alma-oss/spirit-$(pkg)
 endif
 
+bootstrap: ## Start from scratch
+	make install
+	make build
+	make start
+
 ## —— Testing 🚦 ——————————————————————————————————————————————————————————————
 
 format: ## Checks code formatting of all packages
