@@ -121,6 +121,27 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/scrollview-arrows-to-con
 + <ScrollViewControls ariaLabelControls={labels} … />
 ```
 
+### `v5/web-react/item-props` — Update Item Props to the New Composable API
+
+This codemod updates `Item` usage for the new composable API.
+It adds `elementType="button"` where the old implicit button default was used, migrates `iconName` to `startSlot`, converts `label` and `helperText` props to `Label` and `HelperText` children, and replaces selected icon behavior from `selectionDecorator` with explicit `endSlot` content where possible.
+When migrating a selected item with `iconName`, it also sets the generated start icon to `color="selected"` unless the item is disabled; dynamic disabled expressions generate a conditional `color` prop.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/item-props
+```
+
+#### Example
+
+```diff
+- <Item label="Item label" iconName="search" isSelected />
++ <Item elementType="button" startSlot={<Icon name="search" color="selected" />} endSlot={<Icon name="check-plain" />} isSelected>
++   <Label elementType="span">Item label</Label>
++ </Item>
+```
+
 ### `v5/web-react/forms-isFluid-prop-removal` — Remove `isFluid` Prop From Form Components
 
 This codemod removes the `isFluid` prop from form components that are now fluid by default.
