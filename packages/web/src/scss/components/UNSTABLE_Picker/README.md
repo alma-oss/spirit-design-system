@@ -223,6 +223,40 @@ On a **Light on Brand** surface, keep the label on-brand and use **Light Default
 
 See the [Themes demo][picker-themes-demo].
 
+## Dropdown and DropdownPopover
+
+Customise the inner `Dropdown` and `DropdownPopover` elements directly using CSS utility classes
+and data attributes. The picker does not set these itself, so any values you add are applied as-is.
+
+- **`DropdownPopover` element** — add a theme utility class (for example `theme-light-default`;
+  this is the default) to control the panel theme.
+- **`data-spirit-placement`** on `.DropdownPopover` — controls where the popover anchors relative
+  to the trigger (for example `bottom-start`).
+- **`data-spirit-fullwidthmode`** on `.DropdownPopover` — stretches the popover to the field width
+  (`off` · `mobile-only` · `all`).
+
+The following example positions the popover at `bottom-start` and expands it to full field width:
+
+```html
+<div>
+  <span class="Label">Languages</span>
+  <div class="Dropdown">
+    <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--medium">
+      <!-- … -->
+    </div>
+    <div
+      role="dialog"
+      class="DropdownPopover theme-light-default"
+      data-spirit-placement="bottom-start"
+      data-spirit-fullwidthmode="all"
+      id="picker-example"
+    >
+      <!-- … -->
+    </div>
+  </div>
+</div>
+```
+
 ## Sizes
 
 Use the `InputContainer--small`, `InputContainer--medium`, or `InputContainer--large` modifier on

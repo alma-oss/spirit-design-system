@@ -2,6 +2,7 @@
 //    (position: relative), making the whole input area clickable. Selection interactive
 //    children sit above it via z-index: 1.
 
+@use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../tools/pseudo-element';
 @use '../../tools/reset';
@@ -15,8 +16,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-inline-end: theme.$padding;
-    margin-inline-start: theme.$column-gap;
+    padding-inline: theme.$padding-x;
+    color: var(--#{tokens.$css-variable-prefix}input-container-input-placeholder-color);
+    border-radius: inherit;
+
+    &::before {
+        border-radius: inherit;
+    }
+
+    &:focus-visible::before {
+        outline: inherit;
+    }
 }
 
 .UNSTABLE_PickerTrigger:disabled {
