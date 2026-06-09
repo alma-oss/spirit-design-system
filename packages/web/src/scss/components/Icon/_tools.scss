@@ -10,6 +10,7 @@
 @function generate-dualtone-color-variants() {
     $accent-variants: ();
     $emotion-variants: ();
+    $selected-variants: ();
     $text-variants: ();
     $result: ();
 
@@ -56,11 +57,19 @@
         );
     }
 
+    $selected-variants: (
+        selected: (
+            background-color: tokens.$selected-background-subtle,
+            border: tokens.$selected-content-basic,
+        ),
+    );
+
     $result: map-tools.merge-multiple(
         $result,
         (
             'accent': $accent-variants,
             'emotion': $emotion-variants,
+            'selected': $selected-variants,
             'text': $text-variants,
         )
     );

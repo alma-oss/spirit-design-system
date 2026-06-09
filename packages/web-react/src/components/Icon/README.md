@@ -51,7 +51,7 @@ import icons from '@alma-oss/spirit-icons/icons';
 ## Color
 
 You can change the color of the icon by using the `color` attribute.
-Available colors are emotion colors, text colors, and the accent colors defined in your design tokens.
+Available colors are emotion colors, text colors, selected color, and the accent colors defined in your design tokens.
 
 ### Example
 
@@ -92,12 +92,12 @@ so the icon scales with the user's root font-size preference.
 
 ## API
 
-| Name      | Type                                                                                                                                                 | Default      | Required | Description                                                                                                                                        |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `boxSize` | \[`number` \| `Responsive<number>`]                                                                                                                  | 24           | ✕        | Size of the icon **in px** — converted to `rem` internally. Use an object to set responsive values, e.g. `{ mobile: 20, tablet: 30, desktop: 40 }` |
-| `color`   | \[[AccentColorNamesType][readme-generated-types] \| [EmotionColorNamesType][readme-generated-types] \| [TextColorNamesType][readme-generated-types]] | `primary` \* | ✕        | Color of the dualtone icon                                                                                                                         |
-| `name`    | `string`                                                                                                                                             | —            | ✓        | Name of the icon                                                                                                                                   |
-| `title`   | `string`                                                                                                                                             | —            | ✕        | Title of the icon                                                                                                                                  |
+| Name      | Type                                                                                                                                                               | Default      | Required | Description                                                                                                                                        |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `boxSize` | \[`number` \| `Responsive<number>`]                                                                                                                                | 24           | ✕        | Size of the icon **in px** — converted to `rem` internally. Use an object to set responsive values, e.g. `{ mobile: 20, tablet: 30, desktop: 40 }` |
+| `color`   | \[[AccentColorNamesType][readme-generated-types] \| [EmotionColorNamesType][readme-generated-types] \| [TextColorNamesType][readme-generated-types] \| `selected`] | `primary` \* | ✕        | Color of the icon                                                                                                                                  |
+| `name`    | `string`                                                                                                                                                           | —            | ✓        | Name of the icon                                                                                                                                   |
+| `title`   | `string`                                                                                                                                                           | —            | ✕        | Title of the icon                                                                                                                                  |
 
 (\*) The default color "Primary" is used only for dualtone icons. For single-tone icons, the default color is inherited from the parent element.
 

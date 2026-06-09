@@ -55,7 +55,7 @@
   <div class="Container">
     <h2 class="docs-Heading">Colors</h2>
 
-    <div class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--desktop--cols-3 Grid--cols-1">
+    <div class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--desktop--cols-4 Grid--cols-1">
       <div class="docs-Stack docs-Stack--start">
         <h3>Text Colors</h3>
         {{#each @root.textColors as |color|}}
@@ -71,6 +71,20 @@
           {{color}}
         </div>
         {{/each}}
+      </div>
+      <div class="docs-Stack docs-Stack--start">
+        <h3>Selected Color</h3>
+        <div class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--horizontal">
+          <svg
+            class="Icon Icon--selected"
+            width="24"
+            height="24"
+            style="--spirit-icon-size: 1.5rem;"
+          >
+            <use href="/assets/icons/svg/sprite.svg#file" />
+          </svg>
+          selected
+        </div>
       </div>
       <div class="docs-Stack docs-Stack--start">
         <h3>Accent Colors</h3>
@@ -114,7 +128,7 @@
   <div class="Container">
     <h2 class="docs-Heading">Dualtone Colors</h2>
 
-    <div class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--desktop--cols-3 Grid--cols-1">
+    <div class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--cols-1 Grid--desktop--cols-4">
       <div class="docs-Stack docs-Stack--start">
         <h3>Text Colors</h3>
         {{#each @root.textColors as |color|}}
@@ -130,6 +144,20 @@
           {{color}}
         </div>
         {{/each}}
+      </div>
+      <div class="docs-Stack docs-Stack--start">
+        <h3>Selected Color</h3>
+        <div class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--horizontal">
+          <svg
+            class="Icon Icon--selected"
+            width="24"
+            height="24"
+            style="--spirit-icon-size: 1.5rem;"
+          >
+            <use href="/assets/icons/svg/sprite.svg#folder-dualtone" />
+          </svg>
+          selected
+        </div>
       </div>
       <div class="docs-Stack docs-Stack--start">
         <h3>Accent Colors</h3>
