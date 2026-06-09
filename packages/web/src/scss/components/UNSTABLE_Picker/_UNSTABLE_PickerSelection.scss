@@ -19,12 +19,13 @@
         var(--#{tokens.$css-variable-prefix}input-container-height) - 2 *
             #{form-fields-settings.$box-field-input-border-width}
     );
-    padding: theme.$padding;
+    padding-inline-start: theme.$padding-x;
+    padding-block: theme.$padding-y;
 }
 
 .UNSTABLE_PickerSelection__empty {
-    margin-inline-start: calc(#{form-fields-settings.$box-field-input-padding-x} - #{theme.$padding});
-    color: var(--#{tokens.$css-variable-prefix}input-container-placeholder-color);
+    margin-inline-start: calc(#{form-fields-settings.$box-field-input-padding-x} - #{theme.$padding-x});
+    color: var(--#{tokens.$css-variable-prefix}input-container-input-placeholder-color);
 }
 
 // 1.
