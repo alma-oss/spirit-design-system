@@ -242,12 +242,14 @@ See the [Item][item] component for more information.
   </button>
   <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-default">
     <a href="#" class="Item">
-      <span class="Item__icon Item__icon--start">
+      <span class="Item__slot" role="presentation">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#info" />
         </svg>
       </span>
-      <span class="Item__label">Information</span>
+      <span class="Item__content" role="presentation">
+        <span class="Label Label--item">Information</span>
+      </span>
     </a>
   </div>
 </div>

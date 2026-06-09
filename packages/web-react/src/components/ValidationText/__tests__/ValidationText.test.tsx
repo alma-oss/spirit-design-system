@@ -35,6 +35,26 @@ describe('ValidationText', () => {
     classNamePrefix: 'ValidationText',
   });
 
+  it('should use context elementType when no direct prop', () => {
+    render(
+      <PropsProvider value={{ elementType: 'span' }}>
+        <ValidationText validationText="validation text" />
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText('validation text').localName).toBe('span');
+  });
+
+  it('should use direct elementType over context', () => {
+    render(
+      <PropsProvider value={{ elementType: 'span' }}>
+        <ValidationText elementType="p" validationText="validation text" />
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText('validation text').localName).toBe('p');
+  });
+
   it('should render single validation text', () => {
     renderValidationText({ validationText: 'validation text' });
 

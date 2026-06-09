@@ -20,6 +20,7 @@ const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTe
   const contextProps = useContextProps<Partial<FormFieldContextValue>>();
   const propsWithDefaults = {
     ...defaultProps,
+    elementType: contextProps.elementType,
     isDisabled: contextProps.isDisabled,
     ...props,
   };

@@ -1,6 +1,9 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
+import { ControlButton } from '../../ControlButton';
+import { Icon } from '../../Icon';
+import { Label } from '../../Label';
 import ReadMe from '../README.md?raw';
 import { Item } from '..';
 
@@ -13,17 +16,15 @@ const meta: Meta<typeof Item> = {
     },
   },
   argTypes: {
+    alignmentY: {
+      control: 'select',
+      options: ['top', 'center', 'bottom'],
+    },
     elementType: {
       control: 'text',
       table: {
-        defaultValue: { summary: 'button' },
+        defaultValue: { summary: 'div' },
       },
-    },
-    helperText: {
-      control: 'text',
-    },
-    iconName: {
-      control: 'text',
     },
     isDisabled: {
       control: 'boolean',
@@ -37,20 +38,35 @@ const meta: Meta<typeof Item> = {
         defaultValue: { summary: 'false' },
       },
     },
-    selectionDecorator: {
+    children: {
+      control: false,
+    },
+    startSlot: {
       control: 'select',
-      options: ['icon', 'background', 'both'],
-      table: {
-        defaultValue: { summary: 'icon' },
+      options: ['None', 'Search icon'],
+      mapping: {
+        None: undefined,
+        'Search icon': <Icon name="search" />,
       },
     },
-    label: {
-      control: 'text',
+    endSlot: {
+      control: 'select',
+      options: ['None', 'Check icon', 'Remove button'],
+      mapping: {
+        None: undefined,
+        'Check icon': <Icon name="check-plain" color="selected" />,
+        'Remove button': (
+          <ControlButton isSymmetrical size="small" aria-label="Remove item">
+            <Icon name="close" />
+          </ControlButton>
+        ),
+      },
     },
   },
   args: {
-    elementType: 'button',
-    label: 'Item label',
+    children: <Label>Item label</Label>,
+    startSlot: 'None',
+    endSlot: 'None',
   },
 };
 

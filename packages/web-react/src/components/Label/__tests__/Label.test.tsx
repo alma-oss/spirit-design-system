@@ -36,6 +36,26 @@ describe('Label', () => {
     expect(screen.getByText(label)).toBeInTheDocument();
   });
 
+  it('should use context elementType when no direct prop', () => {
+    render(
+      <PropsProvider value={{ elementType: 'span' }}>
+        <Label>Text</Label>
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText('Text').localName).toBe('span');
+  });
+
+  it('should use direct elementType over context', () => {
+    render(
+      <PropsProvider value={{ elementType: 'span' }}>
+        <Label elementType="strong">Text</Label>
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText('Text').localName).toBe('strong');
+  });
+
   it('should use context isRequired and isLabelHidden when no direct prop', () => {
     render(
       <PropsProvider value={{ isRequired: true, isLabelHidden: true }}>

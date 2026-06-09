@@ -17,6 +17,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
   - [Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed](#header-unstable_header-stabilized-previous-header-css-removed)
+  - [Item: Composable Content and Slots](#item-composable-content-and-slots)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
   - [Disabled Utility for Color-Scheme Components](#disabled-utility-for-color-scheme-components)
   - [Toggle: Input Before Label in HTML](#toggle-input-before-label-in-html)
@@ -248,6 +249,92 @@ If you were using the previous `Header` with its sub-components (`.HeaderNav`, `
 `.HeaderMobileActions`, etc.), the composition can vary significantly depending on your use case.
 See [Header README][readme-header] for the current `Header` implementation and composition examples.
 
+### Item: Composable Content and Slots
+
+Item markup was restructured around explicit `Item__content` and `Item__slot` wrappers. Labels, helper text,
+icons, and selection indicators are no longer positioned by Item-specific grid styles — compose them inside
+`Item__content` and `Item__slot` instead.
+
+#### What Changed
+
+| Before                                                  | After                                                                                       |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `Item__icon Item__icon--start` / `Item__icon--end`      | `Item__slot`                                                                                |
+| `Item__label` or direct `Label` / `HelperText` children | `Item__content` wrapping label and supporting text                                          |
+| `HelperText HelperText--item`                           | `HelperText` inside `Item__content`                                                         |
+| Selected trailing icon without `Icon--selected`         | Trailing icon in `Item__slot` with `Icon--selected` when selected                           |
+| `Item--selected` selected background                    | `color-scheme-on-selected-subtle` selected background                                       |
+| Implicit `<button>` as the only documented root         | Use `<div class="Item">` for static rows; choose `<button>` or `<a>` explicitly when needed |
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+1. Wrap the main label and supporting text in `Item__content` with `role="presentation"`.
+2. Replace `Item__icon` with `Item__slot` (`role="presentation"`).
+3. Remove the `HelperText--item` modifier; place plain `HelperText` inside `Item__content`.
+4. Add `Icon--selected` to trailing selection icons and use `color-scheme-on-selected-subtle` when the background should show.
+5. Use a non-interactive `<div class="Item">` for static or composed rows; keep `<button>` or `<a>` only when the whole row is a single action.
+
+Simple item:
+
+```html
+<!-- Before -->
+<button type="button" class="Item">
+  <span class="Label Label--item">Item</span>
+</button>
+
+<!-- After -->
+<div class="Item">
+  <span class="Item__content" role="presentation">
+    <span class="Label Label--item">Item</span>
+  </span>
+</div>
+```
+
+Item with icon and helper text:
+
+```html
+<!-- Before -->
+<button type="button" class="Item Item--selected">
+  <span class="Item__icon Item__icon--start">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
+      <use href="/icons/svg/sprite.svg#search" />
+    </svg>
+  </span>
+  <span class="Label Label--item">Item</span>
+  <span class="HelperText HelperText--item">Helper text</span>
+  <span class="Item__icon Item__icon--end">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
+      <use href="/icons/svg/sprite.svg#check-plain" />
+    </svg>
+  </span>
+</button>
+
+<!-- After -->
+<button type="button" class="Item color-scheme-on-selected-subtle">
+  <span class="Item__slot" role="presentation">
+    <svg class="Icon Icon--selected" width="24" height="24" aria-hidden="true">
+      <use href="/icons/svg/sprite.svg#search" />
+    </svg>
+  </span>
+  <span class="Item__content" role="presentation">
+    <span class="Label Label--item">Item</span>
+    <span class="HelperText">Helper text</span>
+  </span>
+  <span class="Item__slot" role="presentation">
+    <svg class="Icon Icon--selected" width="24" height="24" aria-hidden="true">
+      <use href="/icons/svg/sprite.svg#check-plain" />
+    </svg>
+  </span>
+</button>
+```
+
+See [Item README][readme-item] for disabled state, vertical alignment, accessibility, and composed-row patterns.
+
+</details>
+
 ### ControlButton: Expanded Size Scale Feature Flag Removed
 
 The feature flag enabling the expanded size scale was removed and the expanded size scale is now default.
@@ -382,3 +469,4 @@ Please refer back to these instructions or reach out to our team if you encounte
 
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [readme-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Header/README.md
+[readme-item]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Item/README.md

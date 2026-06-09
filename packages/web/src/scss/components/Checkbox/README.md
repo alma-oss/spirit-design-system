@@ -109,7 +109,7 @@ To add helper text, use the [HelperText][helper-text] component:
   />
   <div class="Checkbox__text">
     <label class="Label Label--inline" for="checkbox-helper-text">Checkbox Label</label>
-    <div class="HelperText HelperText--inline" id="checkbox-helper-text-helper-text">Helper text</div>
+    <div class="HelperText" id="checkbox-helper-text-helper-text">Helper text</div>
   </div>
 </div>
 ```
@@ -195,7 +195,7 @@ Complete example showing label, details with multiple links, helper text, and va
         See privacy policy
       </button>
     </div>
-    <div class="HelperText HelperText--inline" id="consent-full-example-helper-text">
+    <div class="HelperText" id="consent-full-example-helper-text">
       Please read the documents carefully before agreeing
     </div>
     <div class="ValidationText ValidationText--danger" id="consent-full-example-validation-text">

@@ -6,6 +6,7 @@ import {
   DropdownPopover,
   DropdownTrigger,
   Item,
+  Label,
   Modal,
   ModalBody,
   ModalDialog,
@@ -214,9 +215,15 @@ const ModalDefault = () => {
                 Dropdown
               </DropdownTrigger>
               <DropdownPopover>
-                <Item elementType="a" href="#" label="Action" />
-                <Item elementType="a" href="#" label="Another action" />
-                <Item elementType="a" href="#" label="Something else here" />
+                <Item elementType="a" href="#">
+                  <Label>Action</Label>
+                </Item>
+                <Item elementType="a" href="#">
+                  <Label>Another action</Label>
+                </Item>
+                <Item elementType="a" href="#">
+                  <Label>Something else here</Label>
+                </Item>
               </DropdownPopover>
             </Dropdown>
           </ModalBody>

@@ -21,6 +21,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
   - [Header: `UNSTABLE_Header` has been stabilized and renamed to `Header`, previous implementation has been removed](#header-stabilization-of-unstable_header-to-header-previous-implementation-removed)
+  - [Item: Composable Content and Slots](#item-composable-content-and-slots)
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
 
@@ -402,6 +403,89 @@ See [Header README][readme-header] for full composition examples.
 
 ---
 
+### Item: Composable Content and Slots
+
+`Item` no longer accepts `label`, `helperText`, `iconName`, or `selectionDecorator` props. Compose labels,
+helper text, validation text, icons, and selection indicators with `children`, `startSlot`, and `endSlot`
+instead.
+
+`Item` now renders as a `div` by default. Set `elementType="button"` or `elementType="a"` when button or
+link semantics are required.
+
+#### What Changed
+
+| Before                                              | After                                                                |
+| --------------------------------------------------- | -------------------------------------------------------------------- |
+| `label` prop                                        | `children` with `Label`                                              |
+| `helperText` prop                                   | `children` with `HelperText`                                         |
+| `iconName` prop                                     | `startSlot={<Icon name="…" />}`                                      |
+| `selectionDecorator` (`icon`, `background`, `both`) | `isSelected` plus explicit `endSlot` icon when needed                |
+| Implicit `button` default                           | `div` default; set `elementType="button"` explicitly for button rows |
+
+#### Migration Guide
+
+🪄 Use codemods to automatically update your codebase:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/item-props
+```
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+The codemod adds `elementType="button"` where the old implicit button default was used, migrates `iconName`
+to `startSlot`, converts `label` and `helperText` to `Label` and `HelperText` children, and replaces
+`selectionDecorator` with explicit `endSlot` content where possible.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+**Removed props:**
+
+- `label` → `<Label>…</Label>` in `children`
+- `helperText` → `<HelperText helperText="…" />` in `children`
+- `iconName` → `startSlot={<Icon name="…" />}`
+- `selectionDecorator` → compose `isSelected` and `endSlot` explicitly
+
+**`selectionDecorator` mapping:**
+
+- omitted or `"icon"` → trailing check icon in `endSlot` when selected
+- `"background"` → `isSelected` only
+- `"both"` → `isSelected` plus trailing check icon in `endSlot`
+
+```tsx
+// Before
+<Item label="Item" iconName="search" helperText="Helper text" isSelected />
+
+// After
+<Item
+  elementType="button"
+  startSlot={<Icon name="search" color="selected" />}
+  endSlot={<Icon name="check-plain" color="selected" />}
+  isSelected
+>
+  <Label>Item</Label>
+  <HelperText helperText="Helper text" />
+</Item>
+```
+
+```tsx
+// Before
+<Item label="Item" isSelected selectionDecorator="background" />
+
+// After
+<Item elementType="button" isSelected>
+  <Label>Item</Label>
+</Item>
+```
+
+`isDisabled` still applies the native `disabled` attribute on `elementType="button"` only. For
+`elementType="a"`, `role="option"`, or other non-button roots, add `aria-disabled` explicitly.
+See [Item README][readme-item] for examples.
+
+</details>
+
+---
+
 ### Stack: Wrap Direct Children in `StackItem` When Using Dividers
 
 The CSS fallback that allowed arbitrary direct children (elements that are not `StackItem`) to receive divider styling has been removed.
@@ -511,3 +595,4 @@ Please refer back to these instructions or reach out to our team if you encounte
 [readme-file-upload]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FileUpload/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
 [readme-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Header/README.md
+[readme-item]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Item/README.md

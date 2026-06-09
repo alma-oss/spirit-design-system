@@ -6,6 +6,7 @@ import { Button } from '../../Button';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../../Dropdown';
 import { Icon } from '../../Icon';
 import { Item } from '../../Item';
+import { Label } from '../../Label';
 import { Tooltip, TooltipPopover, TooltipTrigger } from '../../Tooltip';
 import { VisuallyHidden } from '../../VisuallyHidden';
 import SplitButton from '../SplitButton';
@@ -14,7 +15,9 @@ import { dropdownContent } from './constants';
 const DropdownContent = () => (
   <>
     {dropdownContent.map(({ icon, text }) => (
-      <Item key={icon} label={text} elementType="a" iconName={icon} href={`#${icon}`} />
+      <Item key={icon} elementType="a" startSlot={<Icon name={icon} />} href={`#${icon}`}>
+        <Label>{text}</Label>
+      </Item>
     ))}
   </>
 );

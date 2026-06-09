@@ -8,6 +8,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { PropsProvider } from '../../../context';
 import HelperText from '../HelperText';
 
 describe('HelperText', () => {
@@ -25,6 +26,28 @@ describe('HelperText', () => {
     renderComponent: (props) => <HelperText {...props} helperText={helperText} />,
     text: helperText,
     classNamePrefix: 'HelperText',
+    includeInlineMode: false,
+    includeItemMode: false,
+  });
+
+  it('should use context elementType when no direct prop', () => {
+    render(
+      <PropsProvider value={{ elementType: 'span' }}>
+        <HelperText helperText={helperText} />
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText(helperText).localName).toBe('span');
+  });
+
+  it('should use direct elementType over context', () => {
+    render(
+      <PropsProvider value={{ elementType: 'span' }}>
+        <HelperText elementType="p" helperText={helperText} />
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText(helperText).localName).toBe('p');
   });
 
   it('should render helper text', () => {

@@ -14,9 +14,9 @@ HelperText is a component used to display helper text for form field components.
 </div>
 ```
 
-### Inline (Radio, Checkbox)
+### Radio and Checkbox
 
-Use the `HelperText--inline` modifier when HelperText is inside a **Radio** or **Checkbox** (non-item variant). It creates a stacking context so the helper text sits above the stretched label, keeping the text selectable and links clickable.
+Place HelperText inside the **Radio** or **Checkbox** text area:
 
 ```html
 <!-- Radio -->
@@ -30,7 +30,7 @@ Use the `HelperText--inline` modifier when HelperText is inside a **Radio** or *
   />
   <div class="Radio__text">
     <label class="Radio__label" for="radio-helper-text">Radio Label</label>
-    <div class="HelperText HelperText--inline" id="radio-helper-text-helper-text">Helper text</div>
+    <div class="HelperText" id="radio-helper-text-helper-text">Helper text</div>
   </div>
 </div>
 
@@ -45,21 +45,21 @@ Use the `HelperText--inline` modifier when HelperText is inside a **Radio** or *
   />
   <div class="Checkbox__text">
     <label class="Checkbox__label" for="checkbox-helper-text">Checkbox Label</label>
-    <div class="HelperText HelperText--inline" id="checkbox-helper-text-helper-text">Helper text</div>
+    <div class="HelperText" id="checkbox-helper-text-helper-text">Helper text</div>
   </div>
 </div>
 ```
 
-Do not use `HelperText--inline` for the item variant; use `HelperText--item` there instead.
-
 ### Item
 
-Use the `HelperText--item` modifier when HelperText is inside an Item or inside a Checkbox/Radio with the item variant (`Checkbox--item`, `Radio--item`):
+Place HelperText inside `Item__content`, including in Checkbox/Radio item variants (`Checkbox--item`, `Radio--item`):
 
 ```html
 <button type="button" class="Item">
-  <span class="Item__label">Item label</span>
-  <span class="HelperText HelperText--item">Helper text</span>
+  <span class="Item__content" role="presentation">
+    <span class="Label Label--item">Item label</span>
+    <span class="HelperText">Helper text</span>
+  </span>
 </button>
 ```
 

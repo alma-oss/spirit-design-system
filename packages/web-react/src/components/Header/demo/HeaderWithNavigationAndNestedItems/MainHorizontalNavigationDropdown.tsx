@@ -3,6 +3,7 @@ import { type PolymorphicRef, type SpiritNavigationActionProps } from '../../../
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../../../Dropdown';
 import { Icon } from '../../../Icon';
 import { Item } from '../../../Item';
+import { Label } from '../../../Label';
 import { NavigationAction } from '../../../Navigation';
 
 const _NavigationActionAsDropdownTrigger = <E extends ElementType = 'a'>(
@@ -17,13 +18,19 @@ const NavigationActionAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNa
 export const DropdownPopoverContent = () => (
   <ul className="list-unstyled">
     <li>
-      <Item elementType="a" label="My Account" href="https://www.example.com" />
+      <Item elementType="a" href="https://www.example.com">
+        <Label>My Account</Label>
+      </Item>
     </li>
     <li>
-      <Item elementType="a" label="Settings" href="https://www.example.com" />
+      <Item elementType="a" href="https://www.example.com">
+        <Label>Settings</Label>
+      </Item>
     </li>
     <li>
-      <Item elementType="a" label="Log Out" href="https://www.example.com" />
+      <Item elementType="a" href="https://www.example.com">
+        <Label>Log Out</Label>
+      </Item>
     </li>
   </ul>
 );

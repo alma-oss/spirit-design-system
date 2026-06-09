@@ -110,7 +110,9 @@ Applies disabled styling to the label.
 
 ```html
 <button type="button" class="Item">
-  <span class="Label Label--item">Item label</span>
+  <span class="Item__content" role="presentation">
+    <span class="Label Label--item">Item label</span>
+  </span>
 </button>
 ```
 
