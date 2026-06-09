@@ -1,11 +1,23 @@
 import React from 'react';
+import { Icon } from '../../Icon';
 import { Item } from '../../Item';
+import { Label } from '../../Label';
+import HelperText from '../HelperText';
+
+const itemContent = (label: string) => (
+  <>
+    <Label>{label}</Label>
+    <HelperText helperText="Helper text" />
+  </>
+);
 
 const HelperTextItemComponent = () => (
   <>
-    <Item label="Item label" helperText="Helper text" />
-    <Item label="Selected Item" helperText="Helper text" isSelected selectionDecorator="both" />
-    <Item label="Item label" helperText="Helper text" isDisabled />
+    <Item>{itemContent('Item label')}</Item>
+    <Item endSlot={<Icon name="check-plain" color="selected" />} isSelected>
+      {itemContent('Selected Item')}
+    </Item>
+    <Item isDisabled>{itemContent('Item label')}</Item>
   </>
 );
 

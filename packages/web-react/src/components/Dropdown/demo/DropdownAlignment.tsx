@@ -3,6 +3,7 @@ import { Box } from '../../Box';
 import { Button } from '../../Button';
 import { Grid } from '../../Grid';
 import { Item } from '../../Item';
+import { Label } from '../../Label';
 import Dropdown from '../Dropdown';
 import DropdownPopover from '../DropdownPopover';
 import DropdownTrigger from '../DropdownTrigger';
@@ -23,9 +24,15 @@ const DropdownAlignment = () => {
       >
         <DropdownTrigger elementType={Button}>Button as anchor</DropdownTrigger>
         <DropdownPopover>
-          <Item elementType="a" href="#" label="Action" />
-          <Item elementType="a" href="#" label="Another action" />
-          <Item elementType="a" href="#" label="Something else here" />
+          <Item elementType="a" href="#">
+            <Label>Action</Label>
+          </Item>
+          <Item elementType="a" href="#">
+            <Label>Another action</Label>
+          </Item>
+          <Item elementType="a" href="#">
+            <Label>Something else here</Label>
+          </Item>
         </DropdownPopover>
       </Dropdown>
       <Box paddingX="space-800" paddingY="space-1300" backgroundColor="tertiary" UNSAFE_className="text-center">

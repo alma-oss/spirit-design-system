@@ -87,7 +87,7 @@
             for="checkbox-helper-text-example"
           >Checkbox Label</label>
           <div
-            class="HelperText HelperText--inline"
+            class="HelperText"
             id="checkbox-helper-text-example-helper-text"
           >Helper text</div>
         </div>
@@ -107,7 +107,7 @@
             for="checkbox-helper-text-disabled"
           >Disabled Checkbox</label>
           <div
-            class="HelperText HelperText--inline HelperText--disabled"
+            class="HelperText HelperText--disabled"
             id="checkbox-helper-text-disabled-helper-text"
           >Helper text</div>
         </div>
@@ -131,19 +131,23 @@
         type="button"
         class="Item"
       >
-        <span class="Label Label--item">Item label</span>
-        <span class="HelperText HelperText--item">Helper text</span>
+        <span class="Item__content" role="presentation">
+          <span class="Label Label--item">Item label</span>
+          <span class="HelperText">Helper text</span>
+        </span>
       </button>
 
       <button
         type="button"
-        class="Item Item--selected"
+        class="Item color-scheme-on-selected-subtle"
       >
-        <span class="Label Label--item">Selected Item</span>
-        <span class="HelperText HelperText--item">Helper text</span>
-        <span class="Item__icon Item__icon--end">
+        <span class="Item__content" role="presentation">
+          <span class="Label Label--item">Selected Item</span>
+          <span class="HelperText">Helper text</span>
+        </span>
+        <span class="Item__slot" role="presentation">
           <svg
-            class="Icon"
+            class="Icon Icon--selected"
             width="24"
             height="24"
             aria-hidden="true"
@@ -155,10 +159,12 @@
 
       <button
         type="button"
-        class="Item Item--disabled"
+        class="Item disabled"
       >
-        <span class="Label Label--item Label--disabled">Item label</span>
-        <span class="HelperText HelperText--item HelperText--disabled">Helper text</span>
+        <span class="Item__content" role="presentation">
+          <span class="Label Label--item Label--disabled">Item label</span>
+          <span class="HelperText HelperText--disabled">Helper text</span>
+        </span>
       </button>
 
     </div>
@@ -188,7 +194,7 @@
             for="checkbox-item-helper-text-example"
           >Checkbox Item</label>
           <div
-            class="HelperText HelperText--item"
+            class="HelperText"
             id="checkbox-item-helper-text-example-helper-text"
           >Helper text</div>
         </div>
@@ -208,7 +214,7 @@
             for="checkbox-item-helper-text-disabled"
           >Disabled Checkbox Item</label>
           <div
-            class="HelperText HelperText--item HelperText--disabled"
+            class="HelperText HelperText--disabled"
             id="checkbox-item-helper-text-disabled-helper-text"
           >Helper text</div>
         </div>
@@ -228,7 +234,7 @@
             for="radio-item-helper-text-example"
           >Radio Item</label>
           <div
-            class="HelperText HelperText--item"
+            class="HelperText"
             id="radio-item-helper-text-example-helper-text"
           >Helper text</div>
         </div>
@@ -249,7 +255,7 @@
             for="radio-item-helper-text-disabled"
           >Disabled Radio Item</label>
           <div
-            class="HelperText HelperText--item HelperText--disabled"
+            class="HelperText HelperText--disabled"
             id="radio-item-helper-text-disabled-helper-text"
           >Helper text</div>
         </div>

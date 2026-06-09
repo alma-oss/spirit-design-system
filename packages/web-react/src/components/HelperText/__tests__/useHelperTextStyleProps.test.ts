@@ -15,35 +15,17 @@ describe('useHelperTextStyleProps', () => {
     expect(result.current.classProps).toBe('HelperText HelperText--disabled');
   });
 
-  it('should return inline class when formFieldMode is inline', () => {
-    const { result } = renderHook(() => useHelperTextStyleProps({ formFieldMode: FormFieldModes.INLINE }));
-
-    expect(result.current.classProps).toBe('HelperText HelperText--inline');
-  });
-
-  it('should return item class when formFieldMode is item', () => {
-    const { result } = renderHook(() => useHelperTextStyleProps({ formFieldMode: FormFieldModes.ITEM }));
-
-    expect(result.current.classProps).toBe('HelperText HelperText--item');
-  });
-
-  it('should return disabled and inline classes when both are set', () => {
+  it('should return disabled class when formFieldMode is inline', () => {
     const { result } = renderHook(() =>
       useHelperTextStyleProps({ isDisabled: true, formFieldMode: FormFieldModes.INLINE }),
     );
 
-    expect(result.current.classProps).toContain('HelperText');
-    expect(result.current.classProps).toContain('HelperText--disabled');
-    expect(result.current.classProps).toContain('HelperText--inline');
+    expect(result.current.classProps).toBe('HelperText HelperText--disabled');
   });
 
-  it('should return disabled and item classes when both are set', () => {
-    const { result } = renderHook(() =>
-      useHelperTextStyleProps({ isDisabled: true, formFieldMode: FormFieldModes.ITEM }),
-    );
+  it('should not return item class when formFieldMode is item', () => {
+    const { result } = renderHook(() => useHelperTextStyleProps({ formFieldMode: FormFieldModes.ITEM }));
 
-    expect(result.current.classProps).toContain('HelperText');
-    expect(result.current.classProps).toContain('HelperText--disabled');
-    expect(result.current.classProps).toContain('HelperText--item');
+    expect(result.current.classProps).toBe('HelperText');
   });
 });

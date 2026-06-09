@@ -1,6 +1,9 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 import { Checkbox } from '../../Checkbox';
+import { HelperText } from '../../HelperText';
+import { Icon } from '../../Icon';
+import { Label } from '../../Label';
 import { Radio } from '../../Radio';
 import Item from '../Item';
 
@@ -23,7 +26,12 @@ figma.connect(Item, ITEM_NODE_URL, {
   variant: {
     Type: 'Single select',
   },
-  example: ({ helperTextProps, ...props }) => <Item {...props} helperText={helperTextProps.helperText} />,
+  example: ({ helperTextProps, label, ...props }) => (
+    <Item {...props}>
+      <Label>{label}</Label>
+      {helperTextProps.helperText && <HelperText helperText={helperTextProps.helperText} />}
+    </Item>
+  ),
 });
 
 figma.connect(Item, ITEM_NODE_URL, {
@@ -60,7 +68,13 @@ figma.connect(Item, ITEM_NODE_URL, {
   variant: {
     Type: 'Single select+Icon',
   },
-  example: ({ helperTextProps, iconProps, ...props }) => (
-    <Item {...props} helperText={helperTextProps.helperText} iconName={iconProps.name} />
+  example: ({ helperTextProps, iconProps, label, ...props }) => (
+    <Item
+      {...props}
+      startSlot={<Icon name={iconProps.name} color={props.isSelected && !props.isDisabled ? 'selected' : undefined} />}
+    >
+      <Label>{label}</Label>
+      {helperTextProps.helperText && <HelperText helperText={helperTextProps.helperText} />}
+    </Item>
   ),
 });
