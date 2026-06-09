@@ -46,7 +46,7 @@ the popover does not overflow its scrollable container or get clipped.
 <div class="UNSTABLE_Combobox">
   <div class="Dropdown">
     <label class="Label" id="combobox-label" for="combobox-input">Languages</label>
-    <div class="InputContainer InputContainer--medium" role="group" aria-label="Languages">
+    <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
       <div class="UNSTABLE_ComboboxSelection">
         <div
           role="grid"
@@ -74,7 +74,7 @@ the popover does not overflow its scrollable container or get clipped.
     </div>
     <div class="DropdownPopover placement-bottom-start">
       <div
-        class="Stack Stack--hasSpacing"
+        class="Stack Stack--spacing"
         style="--stack-spacing: var(--spirit-space-300);"
         role="grid"
         id="combobox-listbox"
@@ -125,13 +125,42 @@ Set `aria-selected="true"` on any option row to pre-select it on page load.
 </div>
 ```
 
+## Variants
+
+Combobox supports the following variant modifiers on `InputContainer`:
+
+- `InputContainer--fill` (default)
+- `InputContainer--outline`
+
+```html
+<div class="UNSTABLE_Combobox">
+  <div class="Dropdown">
+    <label class="Label" id="combobox-label" for="combobox-input">Fill (default)</label>
+    <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Fill (default)">
+      <!-- … -->
+    </div>
+    <!-- … -->
+  </div>
+</div>
+
+<div class="UNSTABLE_Combobox">
+  <div class="Dropdown">
+    <label class="Label" id="combobox-label" for="combobox-input">Outline</label>
+    <div class="InputContainer InputContainer--outline InputContainer--medium" role="group" aria-label="Outline">
+      <!-- … -->
+    </div>
+    <!-- … -->
+  </div>
+</div>
+```
+
 ## Sizes
 
 Use the `InputContainer--small`, `InputContainer--medium`, or `InputContainer--large` modifier on
 the `InputContainer` element to control the size. `InputContainer--medium` is the default.
 
 ```html
-<div class="InputContainer InputContainer--large" role="group" aria-label="Languages">
+<div class="InputContainer InputContainer--fill InputContainer--large" role="group" aria-label="Languages">
   <!-- … -->
 </div>
 ```
@@ -146,7 +175,7 @@ when the user focuses the field.
 <div class="UNSTABLE_Combobox">
   <div class="Dropdown">
     <label class="Label" id="combobox-label" for="combobox-input">Languages</label>
-    <div class="InputContainer InputContainer--medium" role="group" aria-label="Languages">
+    <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
       <div class="UNSTABLE_ComboboxSelection">
         <div role="grid" … class="d-contents"></div>
         <input
@@ -178,7 +207,7 @@ Available validation states: `danger`, `warning`, `success`.
 <div class="UNSTABLE_Combobox">
   <div class="Dropdown">
     <label class="Label Label--danger" id="combobox-label" for="combobox-input">Languages</label>
-    <div class="InputContainer InputContainer--medium InputContainer--danger" role="group" aria-label="Languages">
+    <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger" role="group" aria-label="Languages">
       <div class="UNSTABLE_ComboboxSelection">
         <div role="grid" … class="d-contents"></div>
         <input
@@ -208,7 +237,7 @@ and the `disabled` attribute on the input to disable the Combobox.
 <div class="UNSTABLE_Combobox UNSTABLE_Combobox--disabled">
   <div class="Dropdown">
     <label class="Label Label--disabled" id="combobox-label" for="combobox-input">Languages</label>
-    <div class="InputContainer InputContainer--medium InputContainer--disabled" role="group" aria-label="Languages">
+    <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled" role="group" aria-label="Languages">
       <div class="UNSTABLE_ComboboxSelection">
         <div role="grid" … class="d-contents"></div>
         <input
@@ -231,7 +260,7 @@ and the `disabled` attribute on the input to disable the Combobox.
 Place a clear-all `InputAddon` after the selection wrapper, inside the `InputContainer`.
 
 ```html
-<div class="InputContainer InputContainer--medium" role="group" aria-label="Languages">
+<div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
   <div class="UNSTABLE_ComboboxSelection">
     <!-- … selection grid and input … -->
   </div>
@@ -263,7 +292,7 @@ Show a message when no options match the current query. Place it alongside the S
 
 ```html
 <div class="DropdownPopover placement-bottom-start">
-  <div class="Stack Stack--hasSpacing" role="grid" …>
+  <div class="Stack Stack--spacing" role="grid" …>
     <!-- option rows -->
   </div>
   <div role="status" aria-live="polite" class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
@@ -278,7 +307,7 @@ is hidden by default:
 ```html
 <div class="DropdownPopover placement-bottom-start">
   <div class="UNSTABLE_Combobox__loading" role="status" aria-live="polite" hidden>Loading…</div>
-  <div class="Stack Stack--hasSpacing" role="grid" …>
+  <div class="Stack Stack--spacing" role="grid" …>
     <!-- option rows -->
   </div>
 </div>
@@ -313,7 +342,7 @@ Any other supplementary content that is not selectable should be placed outside 
 
 ```html
 <div class="DropdownPopover placement-bottom-start">
-  <div class="Stack Stack--hasSpacing" role="grid" …>
+  <div class="Stack Stack--spacing" role="grid" …>
     <!-- option rows -->
   </div>
   <!-- custom content here, never inside the Stack -->

@@ -11,7 +11,7 @@ $input-min-width: 11ch;
 
 $option-cell-gap: tokens.$space-500;
 
-$placeholder-color-state-default: tokens.$form-field-filled-placeholder;
+$placeholder-color-state-default: tokens.$form-field-fill-placeholder;
 $placeholder-color-state-disabled: tokens.$disabled-content;
 $placeholder-cursor-state-disabled: cursors.$disabled;
 $placeholder-padding-inline-start: calc(#{tokens.$space-500} - $padding);
