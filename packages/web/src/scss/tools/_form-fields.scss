@@ -235,6 +235,7 @@
 }
 
 @mixin item-disabled() {
+    color: form-fields-settings.$item-color-state-disabled;
     background-color: form-fields-settings.$item-background-color-state-default;
 }
 

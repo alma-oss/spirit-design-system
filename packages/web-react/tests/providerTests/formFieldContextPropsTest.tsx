@@ -38,15 +38,9 @@ interface FormFieldLabelContextPropsTestConfig extends BaseFormFieldTestConfig {
 
 interface TypeContextProps {
   disabledProps?: TestProps;
-  inlineProps?: TestProps;
-  itemProps?: TestProps;
 }
 
 interface FormFieldHelperTextContextPropsTestConfig extends BaseFormFieldTestConfig, TypeContextProps {
-  /** When false, skip inline class test (parents without `formFieldMode` in context). @default false */
-  includeInline?: boolean;
-  /** When false, skip item class test. @default false */
-  includeItem?: boolean;
   /** Text of the helper text. @default 'Helper' */
   helperText?: string;
   /** Text of the label. @default 'Label' */
@@ -56,10 +50,6 @@ interface FormFieldHelperTextContextPropsTestConfig extends BaseFormFieldTestCon
 interface FormFieldValidationTextContextPropsTestConfig extends BaseFormFieldTestConfig, TypeContextProps {
   /** When false, skip disabled validation text test. @default true */
   includeDisabled?: boolean;
-  /** When false, skip inline class test (parents without `formFieldMode` in context). @default false */
-  includeInline?: boolean;
-  /** When false, skip item class test. @default false */
-  includeItem?: boolean;
   labelText?: string;
   stateClass?: string;
   stateProps?: TestProps;
@@ -71,8 +61,6 @@ const DEFAULT_LABEL_REQUIRED_PROPS: TestProps = { isRequired: true };
 const DEFAULT_LABEL_TEXT = 'Label';
 
 const DEFAULT_HELPER_DISABLED_PROPS: TestProps = { isDisabled: true };
-const DEFAULT_HELPER_INLINE_PROPS: TestProps = {};
-const DEFAULT_HELPER_ITEM_PROPS: TestProps = { isItem: true };
 const DEFAULT_HELPER_TEXT = 'Helper';
 
 const DEFAULT_VALIDATION_DISABLED_PROPS: TestProps = { isDisabled: true, validationState: 'danger' };
@@ -206,38 +194,10 @@ export const formFieldLabelContextPropsTest = ({
 export const formFieldHelperTextContextPropsTest = ({
   disabledProps = DEFAULT_HELPER_DISABLED_PROPS,
   helperText = DEFAULT_HELPER_TEXT,
-  includeInline = false,
-  includeItem = false,
-  inlineProps = DEFAULT_HELPER_INLINE_PROPS,
-  itemProps,
   labelText = DEFAULT_LABEL_TEXT,
   renderComponent,
 }: FormFieldHelperTextContextPropsTestConfig) => {
-  const resolvedItemProps = itemProps ?? DEFAULT_HELPER_ITEM_PROPS;
-
   describe('helper text context propagation', () => {
-    if (includeInline) {
-      it('should apply inline class to nested HelperText', () => {
-        expectClassForProps({
-          expectedClassName: 'HelperText--inline',
-          props: { label: labelText, helperText, ...inlineProps },
-          renderComponent,
-          text: helperText,
-        });
-      });
-    }
-
-    if (includeItem) {
-      it('should apply item class to nested HelperText', () => {
-        expectClassForProps({
-          expectedClassName: 'HelperText--item',
-          props: { label: labelText, helperText, ...resolvedItemProps },
-          renderComponent,
-          text: helperText,
-        });
-      });
-    }
-
     it('should apply disabled class to nested HelperText', () => {
       expectClassForProps({
         expectedClassName: 'HelperText--disabled',

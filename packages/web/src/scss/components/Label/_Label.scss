@@ -1,7 +1,5 @@
 // 1. Inline variant is used for components like Checkbox, Radio, Toggle, etc.
 // 2. Item variant is used for standalone Item components (button, link, div with .Item class).
-// 3. The label is placed in the second column of the Item's grid to align with the input and helper text.
-//    See Item component styles for more details.
 
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
@@ -39,8 +37,6 @@
 .Label--item {
     @include typography.generate(theme.$item-typography);
     @include pseudo-element.stretch();
-
-    grid-column: 2; // 3.
 }
 
 .Label--disabled {

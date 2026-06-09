@@ -55,7 +55,9 @@ export const Example = () => {
     <Dropdown id="dropdown-example" isOpen={isOpen} onToggle={onToggle}>
       <DropdownTrigger elementType="button">Trigger button</DropdownTrigger>
       <DropdownPopover aria-label="Options">
-        <Item elementType="a" href="#" label="Item label" />
+        <Item elementType="a" href="#">
+          <Label>Item label</Label>
+        </Item>
       </DropdownPopover>
     </Dropdown>
   );

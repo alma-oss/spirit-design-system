@@ -1,19 +1,27 @@
 import React from 'react';
+import { Icon } from '../../Icon';
+import { Label } from '../../Label';
 import Item from '../Item';
 
 const ItemSelected = () => (
   <>
     <div>
-      <h3>Icon only (default)</h3>
-      <Item label="Item label" isSelected />
+      <h3>Background</h3>
+      <Item elementType="button" isSelected>
+        <Label>Item label</Label>
+      </Item>
     </div>
     <div>
-      <h3>Background only</h3>
-      <Item label="Item label" isSelected selectionDecorator="background" />
+      <h3>Icon</h3>
+      <Item elementType="button" endSlot={<Icon name="check-plain" color="selected" />}>
+        <Label>Item label</Label>
+      </Item>
     </div>
     <div>
       <h3>Background and icon</h3>
-      <Item label="Item label" isSelected selectionDecorator="both" />
+      <Item elementType="button" endSlot={<Icon name="check-plain" color="selected" />} isSelected>
+        <Label>Item label</Label>
+      </Item>
     </div>
   </>
 );

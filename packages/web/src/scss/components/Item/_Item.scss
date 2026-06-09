@@ -1,11 +1,15 @@
-// 1. Make the icon span two rows to spread over the whole Item vertically and make it centered.
+// 1. Only for `disabled` state we change the text color to the disabled color. We keep the background color as is.
+// 2. Keep interactive controls in any slot (e.g. a remove button or link) clickable above a
+//    stretched overlay that spans the whole Item, by lifting them into their own stacking context.
 
-@use 'sass:map';
 @use 'theme';
 @use '../../settings/cursors';
+@use '../../settings/form-fields' as form-fields-settings;
+@use '../../tools/breakpoint';
+@use '../../tools/color-scheme';
+@use '../../tools/dictionaries';
 @use '../../tools/form-fields';
 @use '../../tools/reset';
-@use '../../tools/typography';
 
 .Item:where(button) {
     @include reset.button();
@@ -17,50 +21,63 @@
     @include form-fields.item();
 
     position: relative;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    isolation: isolate;
+    display: flex;
+    gap: theme.$gap;
     align-items: center;
-
-    @media (hover: hover) {
-        &:hover {
-            text-decoration: none;
-        }
-    }
+    background-color: color-scheme.background-color(form-fields-settings.$item-background-color-state-default);
 
     &:active,
     &:has(:active) {
         text-decoration: none;
     }
+
+    &:active {
+        background-color: color-scheme.background-color(form-fields-settings.$item-background-color-state-active);
+    }
+
+    @media (hover: hover) {
+        &:hover {
+            text-decoration: none;
+            background-color: color-scheme.background-color(form-fields-settings.$item-background-color-state-hover);
+        }
+    }
+
+    &[role='option'] {
+        cursor: cursors.$buttons;
+    }
 }
 
-.Item__icon {
+// 1.
+.Item.disabled {
+    color: color-scheme.color();
+    background-color: form-fields-settings.$item-background-color-state-default;
+}
+
+.Item__content {
+    display: grid;
+    flex: 1;
+}
+
+.Item__slot {
     display: flex;
-    grid-row: span 2; // 1.
-    color: theme.$icon-color-state-default;
 }
 
-.Item__icon--start {
-    grid-column: 1;
-    margin-inline-end: theme.$gap;
+// 2.
+.Item__slot :where(a, button) {
+    position: relative;
+    z-index: 1;
 }
 
-.Item__icon--end {
-    grid-column: 3;
-    margin-inline-start: theme.$gap;
-}
+@each $breakpoint-name, $breakpoint-value in theme.$breakpoints {
+    $infix: breakpoint.get-modifier('infix', $breakpoint-name, $breakpoint-value);
 
-.Item--disabled {
-    @include form-fields.item-disabled();
-
-    user-select: none;
-    pointer-events: none;
-    cursor: cursors.$disabled;
-}
-
-.Item--disabled .Item__icon {
-    color: theme.$icon-color-state-disabled;
-}
-
-.Item--selected:not(.Item--disabled) {
-    background-color: theme.$background-color-state-selected;
+    @include breakpoint.up($breakpoint-value) {
+        @include dictionaries.generate-alignments(
+            $class-name: 'Item',
+            $dictionary-values: theme.$alignment-y-dictionary,
+            $axis: 'y',
+            $infix: $infix
+        );
+    }
 }

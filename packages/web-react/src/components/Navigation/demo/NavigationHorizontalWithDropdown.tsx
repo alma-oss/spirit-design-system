@@ -5,6 +5,7 @@ import DropdownPopover from '../../Dropdown/DropdownPopover';
 import DropdownTrigger from '../../Dropdown/DropdownTrigger';
 import { Icon } from '../../Icon';
 import { Item } from '../../Item';
+import { Label } from '../../Label';
 import Navigation from '../Navigation';
 import NavigationAction from '../NavigationAction';
 import NavigationItem from '../NavigationItem';
@@ -39,9 +40,15 @@ const NavigationHorizontalWithDropdown = () => {
             <Icon name={`chevron-${isNavigationActionDropdownOpen ? 'up' : 'down'}`} boxSize={20} />
           </DropdownTrigger>
           <DropdownPopover>
-            <Item elementType="a" href="#" label="My Account" />
-            <Item elementType="a" href="#" label="Settings" />
-            <Item elementType="a" href="#" label="Log out" />
+            <Item elementType="a" href="#">
+              <Label>My Account</Label>
+            </Item>
+            <Item elementType="a" href="#">
+              <Label>Settings</Label>
+            </Item>
+            <Item elementType="a" href="#">
+              <Label>Log out</Label>
+            </Item>
           </DropdownPopover>
         </Dropdown>
       </NavigationItem>

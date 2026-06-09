@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from '../../Button';
 import { Checkbox } from '../../Checkbox';
+import { Icon } from '../../Icon';
 import { Item } from '../../Item';
+import { Label } from '../../Label';
 import { Radio } from '../../Radio';
 import Dropdown from '../Dropdown';
 import DropdownPopover from '../DropdownPopover';
@@ -15,8 +17,12 @@ const DropdownVariousItems = () => {
     <Dropdown id="dropdown-various-items" isOpen={isOpen} onToggle={onToggle}>
       <DropdownTrigger elementType={Button}>Button as anchor</DropdownTrigger>
       <DropdownPopover>
-        <Item elementType="a" href="#" label="Plain text" />
-        <Item elementType="a" href="#" label="Item with icon" iconName="info" />
+        <Item elementType="a" href="#">
+          <Label>Plain text</Label>
+        </Item>
+        <Item elementType="a" startSlot={<Icon name="info" />} href="#">
+          <Label>Item with icon</Label>
+        </Item>
         <Checkbox id="checkbox-item" label="Item with checkbox" isItem />
         <Radio id="radio-item" label="Item with radio" isItem isChecked />
       </DropdownPopover>
