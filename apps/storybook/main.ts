@@ -15,7 +15,7 @@ const config: StorybookConfig = {
   tags: {
     figma: {
       excludeFromSidebar: isProd,
-      defaultFilterSelection: isProd ? 'exclude' : 'include',
+      ...(isProd && { defaultFilterSelection: 'exclude' as const }),
     },
   },
 
