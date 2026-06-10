@@ -8,8 +8,13 @@
 }
 
 .Navigation--vertical,
-.Navigation--vertical > ul {
+.Navigation--vertical > ul,
+.Navigation--vertical > ul ul {
     display: grid;
+}
+
+.Navigation--vertical > ul ul {
+    padding-top: theme.$vertical-gap;
 }
 
 .Navigation--horizontal:has(.NavigationAction) {
@@ -26,10 +31,11 @@
     gap: theme.$gap-pills;
 }
 
-.Navigation--vertical:has(.NavigationAction) > ul {
+.Navigation--vertical:has(.NavigationAction) > ul,
+.Navigation--vertical:has(.NavigationAction) > ul ul {
     gap: theme.$vertical-gap;
 }
 
-.Navigation > ul {
+.Navigation ul {
     @include reset.list();
 }

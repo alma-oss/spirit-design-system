@@ -1,4 +1,6 @@
-// 1. We don't want to add inline padding to nested NavigationItems
+// 1. We don't want to add inline padding to nested NavigationItems.
+// 2. Nested sub-items should not add inline item padding.
+// 3. Sub-item text indentation works for structurally nested items.
 
 @use '../../tools/dictionaries';
 @use 'theme';
@@ -24,4 +26,14 @@
     &:not(& .NavigationItem) {
         padding-inline: theme.$vertical-item-padding-x;
     }
+}
+
+// stylelint-disable-next-line selector-max-compound-selectors -- 2.
+.Navigation--vertical > ul ul > li {
+    padding-inline-start: 0;
+}
+
+// stylelint-disable-next-line selector-max-compound-selectors -- 3.
+.Navigation--vertical > ul ul > li .NavigationAction {
+    padding-inline-start: theme.$vertical-sub-item-padding-inline-start;
 }
