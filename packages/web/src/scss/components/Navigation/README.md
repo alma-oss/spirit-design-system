@@ -68,6 +68,17 @@ stretches its content vertically.
 </li>
 ```
 
+### Sub-Items
+
+Second-level entries are recognized structurally when they are nested in subnavigation (`ul` inside a parent item).
+Sub-items are indented and do not render slot icons.
+
+```html
+<li class="NavigationItem NavigationItem--alignmentYCenter">
+  <a href="#" class="NavigationAction NavigationAction--box">Nested item</a>
+</li>
+```
+
 ## Navigation Action
 
 The `NavigationAction` is a component that is styled to be used as a navigation action.
@@ -80,13 +91,13 @@ It has to be either `box` or `pill` variant.
 ```
 
 It can obtain `selected` or `disabled` states by adding the respective classes. The selected visual state
-is also turned on by the `aria-expanded` attribute.
+is turned on by the `NavigationAction--selected` class.
 
 ```html
 <a class="NavigationAction NavigationAction--box NavigationAction--selected" href="#" aria-current="page"
   >Selected Link</a
 >
-<button class="NavigationAction NavigationAction--box" type="button" aria-expanded="true">Expanded Aria Button</button>
+<button class="NavigationAction NavigationAction--box" type="button" aria-expanded="true">Expanded Category</button>
 <span class="NavigationAction NavigationAction--box NavigationAction--disabled">Disabled Link</span>
 ```
 
@@ -96,6 +107,38 @@ is also turned on by the `aria-expanded` attribute.
 
 If the `box` variant of `NavigationAction` is inside a [`Header`][web-header] component, it will
 inherit the height of the `Header`.
+
+### Navigation Action Slots
+
+Use `NavigationAction__slot` wrappers to render optional content around the action text.
+Slots can contain any markup (icon, badge, pill, custom layout).
+
+```html
+<a href="#" class="NavigationAction NavigationAction--box">
+  <span class="NavigationAction__slot">
+    <svg width="20" height="20" aria-hidden="true" class="Icon">
+      <use href="/assets/icons/svg/sprite.svg#profile" />
+    </svg>
+  </span>
+  Dashboard
+  <span class="NavigationAction__slot">
+    <svg width="20" height="20" aria-hidden="true" class="Icon">
+      <use href="/assets/icons/svg/sprite.svg#chevron-right" />
+    </svg>
+  </span>
+</a>
+```
+
+### Open Category State
+
+Expanded category triggers in vertical navigation get the open visual state automatically from the
+`aria-expanded="true"` attribute. This state is visually different from `NavigationAction--selected`.
+When the trigger is driven by the [`Collapse`][web-collapse] JavaScript plugin, `aria-expanded` is kept
+in sync for you.
+
+```html
+<button type="button" class="NavigationAction NavigationAction--box" aria-expanded="true">Menu</button>
+```
 
 ## Navigation Avatar
 
@@ -214,4 +257,5 @@ With Buttons and NavigationAvatar:
 </nav>
 ```
 
+[web-collapse]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Collapse/README.md
 [web-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Header/README.md
