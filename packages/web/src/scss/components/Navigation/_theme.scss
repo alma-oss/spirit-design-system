@@ -10,12 +10,14 @@ $gap-pills: tokens.$space-300;
 $vertical-gap: tokens.$space-400;
 
 $vertical-item-padding-x: tokens.$space-700;
+$vertical-sub-item-padding-inline-start: tokens.$space-1200;
 
 $item-alignment-dictionary: center, stretch; // 1.
 
 $action-background-color-state-active: tokens.$component-navigation-item-background-state-active;
 $action-background-color-state-default: tokens.$component-navigation-item-background-state-default;
 $action-background-color-state-hover: tokens.$component-navigation-item-background-state-hover;
+$action-background-color-state-open: tokens.$neutral-background-subtle;
 $action-background-color-state-selected: tokens.$component-navigation-item-background-state-selected;
 
 $action-color-state-active: tokens.$component-navigation-item-state-active;
@@ -27,6 +29,8 @@ $action-color-state-selected: tokens.$component-navigation-item-state-selected;
 $action-gap: tokens.$space-700;
 
 $action-shape-variant-dictionary: dictionaries.$shape-variants;
+
+$action-slot-icon-size: units.px-to-rem(20px);
 
 $action-stripe-background-color-selected-state-active: tokens.$component-navigation-item-stripe-state-selected;
 $action-stripe-background-color-selected-state-default: tokens.$component-navigation-item-stripe-state-selected;
@@ -50,8 +54,6 @@ $horizontal-action-shape-variant-config: (
     ),
 );
 
-$vertical-action-pill-padding-x: tokens.$space-800;
-$vertical-action-stripe-size: units.px-to-rem(4px);
 $vertical-action-typography-nested: tokens.$body-medium-regular;
 $vertical-action-typography: tokens.$body-medium-semibold;
 $vertical-action-shape-variant-config: (
