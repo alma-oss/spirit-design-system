@@ -384,6 +384,25 @@ If you relied on the previous heights, shift the `size` prop up to keep the same
 - `<ControlButton size="large" … />` → `<ControlButton size="xlarge" … />`
 </details>
 
+### Navigation: Slots, Open State, and Removed Selected Indicator
+
+`NavigationAction` now supports `startSlot`/`endSlot` props for optional content around the label. Expanded
+category triggers in vertical navigation get the open visual state automatically from the
+`aria-expanded="true"` attribute. The vertical selected-state indicator (the active stripe in the `box`
+variant) was removed.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+- Migrate from manually appending icons in `NavigationAction` children to the `startSlot` and `endSlot` props.
+- For expanded category triggers, set `aria-expanded="true"` on the action to get the open visual state.
+- For second-level items, use structural nesting and keep icons on parent category actions only.
+- If you relied on the vertical selected-state indicator, note that it has been removed; selection is now
+communicated through the action's background and color only.
+</details>
+
 ---
 
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
