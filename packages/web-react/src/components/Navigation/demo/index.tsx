@@ -13,9 +13,11 @@ import NavigationHorizontalWithDropdown from './NavigationHorizontalWithDropdown
 import NavigationHorizontalWithPillAction from './NavigationHorizontalWithPillAction';
 import NavigationVertical from './NavigationVertical';
 import NavigationVerticalWithBoxAction from './NavigationVerticalWithBoxAction';
+import NavigationVerticalWithBoxActionAndStartIcons from './NavigationVerticalWithBoxActionAndStartIcons';
 import NavigationVerticalWithButtons from './NavigationVerticalWithButtons';
 import NavigationVerticalWithCollapse from './NavigationVerticalWithCollapse';
 import NavigationVerticalWithPillAction from './NavigationVerticalWithPillAction';
+import NavigationVerticalWithPillActionAndStartIcons from './NavigationVerticalWithPillActionAndStartIcons';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
@@ -32,6 +34,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <DocsSection title="Vertical Navigation with Box NavigationAction" stackAlignment="stretch">
         <NavigationVerticalWithBoxAction />
       </DocsSection>
+      <DocsSection title="Vertical Navigation with Box NavigationAction and Start/End Slots" stackAlignment="stretch">
+        <NavigationVerticalWithBoxActionAndStartIcons />
+      </DocsSection>
       <DocsSection title="Horizontal Navigation with Buttons" stackAlignment="stretch">
         <NavigationHorizontalWithButtons />
       </DocsSection>
@@ -41,7 +46,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <DocsSection title="Nested Horizontal Box Navigation with Dropdown" stackAlignment="stretch">
         <NavigationHorizontalWithDropdown />
       </DocsSection>
-      <DocsSection title="Nested Vertical Box Navigation with Collapse" stackAlignment="stretch">
+      <DocsSection title="Vertical Subnavigation: Open Parent and Selected Child" stackAlignment="stretch">
         <NavigationVerticalWithCollapse />
       </DocsSection>
       <DocsSection title="Horizontal Navigation with Pill NavigationAction" stackAlignment="stretch">
@@ -49,6 +54,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Vertical Navigation with Pill NavigationAction" stackAlignment="stretch">
         <NavigationVerticalWithPillAction />
+      </DocsSection>
+      <DocsSection title="Vertical Navigation with Pill NavigationAction and Start/End Slots" stackAlignment="stretch">
+        <NavigationVerticalWithPillActionAndStartIcons />
       </DocsSection>
       <DocsSection title="NavigationAvatar" stackAlignment="stretch">
         <NavigationAvatarBasic />

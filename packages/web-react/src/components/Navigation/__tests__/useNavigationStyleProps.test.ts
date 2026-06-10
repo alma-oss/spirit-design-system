@@ -25,6 +25,7 @@ describe('useNavigationStyleProps', () => {
     expect(result.current.classProps.action).toBe('NavigationAction NavigationAction--box');
     expect(result.current.classProps.avatar).toBe('NavigationAvatar');
     expect(result.current.classProps.item).toBe('NavigationItem NavigationItem--alignmentYCenter');
+    expect(result.current.classProps.slot).toBe('NavigationAction__slot');
   });
 
   it.each(navigationActionVariantDataProvider)(
