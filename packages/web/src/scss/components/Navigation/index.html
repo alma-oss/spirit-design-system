@@ -116,6 +116,90 @@
 
   <div class="Container">
 
+    <h2 class="docs-Heading">Vertical Navigation with Box NavigationAction and Start/End Slots</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--vertical" aria-label="Vertical Navigation with Box NavigationAction and Start/End Slots">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAction NavigationAction--box">
+              <span class="NavigationAction__slot">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="Icon"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#profile" />
+                </svg>
+              </span>
+              <span class="text-word-break-long-words">Link</span>
+              <span class="NavigationAction__slot">
+                <span class="Pill Pill--informative color-scheme-on-emotion-informative-basic">12</span>
+              </span>
+            </a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a
+              href="#"
+              class="NavigationAction NavigationAction--box NavigationAction--selected"
+              aria-current="page"
+            >
+              <span class="NavigationAction__slot">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="Icon"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#profile" />
+                </svg>
+              </span>
+              <span class="text-word-break-long-words">Selected</span>
+              <span class="NavigationAction__slot">
+                <span class="Tag Tag--informative Tag--small color-scheme-on-emotion-informative-basic">New</span>
+              </span>
+            </a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <span class="NavigationAction NavigationAction--box NavigationAction--disabled">
+              <span class="NavigationAction__slot">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="Icon"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#profile" />
+                </svg>
+              </span>
+              <span class="text-word-break-long-words">Disabled</span>
+              <span class="NavigationAction__slot">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="Icon"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#lock" />
+                </svg>
+              </span>
+            </span>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
     <h2 class="docs-Heading">Horizontal Navigation with Buttons</h2>
 
     <div class="docs-Stack docs-Stack--stretch">
@@ -250,14 +334,17 @@
 
   <div class="Container">
 
-    <h2 class="docs-Heading">Nested Vertical Box Navigation with Collapse</h2>
+    <h2 class="docs-Heading">Vertical Subnavigation: Open Parent and Selected Child</h2>
 
     <div class="docs-Stack docs-Stack--stretch">
 
       <nav class="Navigation Navigation--vertical" aria-label="Nested Vertical Navigation">
         <ul>
           <li class="NavigationItem NavigationItem--alignmentYCenter">
-            <a href="#" class="NavigationAction NavigationAction--box">Link</a>
+            <a href="#" class="NavigationAction NavigationAction--box">Home</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAction NavigationAction--box">My projects</a>
           </li>
           <li class="NavigationItem NavigationItem--alignmentYCenter">
             <button
@@ -267,29 +354,31 @@
               data-spirit-target="collapse-navigation"
               class="NavigationAction NavigationAction--box"
             >
-              Menu
-              <svg
-                width="20"
-                height="20"
-                aria-hidden="true"
-                class="Icon accessibility-open"
-              >
-                <use href="/assets/icons/svg/sprite.svg#chevron-up" />
-              </svg>
-              <svg
-                width="20"
-                height="20"
-                aria-hidden="true"
-                class="Icon accessibility-closed"
-              >
-                <use href="/assets/icons/svg/sprite.svg#chevron-down" />
-              </svg>
+              <span class="text-word-break-long-words">My bucket</span>
+              <span class="NavigationAction__slot">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="Icon accessibility-open"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#chevron-up" />
+                </svg>
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="Icon accessibility-closed"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </span>
             </button>
             <div id="collapse-navigation" class="Collapse is-open">
               <div class="Collapse__content">
                 <ul>
                   <li class="NavigationItem NavigationItem--alignmentYCenter">
-                    <a href="#" class="NavigationAction NavigationAction--box">Nested Link</a>
+                    <a href="#" class="NavigationAction NavigationAction--box">Webdesign 2026</a>
                   </li>
                   <li class="NavigationItem NavigationItem--alignmentYCenter">
                     <a
@@ -297,7 +386,12 @@
                       class="NavigationAction NavigationAction--box NavigationAction--selected"
                       aria-current="page"
                     >
-                      Nested Selected
+                      Jobs.cz inspiration
+                    </a>
+                  </li>
+                  <li class="NavigationItem NavigationItem--alignmentYCenter">
+                    <a href="#" class="NavigationAction NavigationAction--box">
+                      Prace.cz illustrations
                     </a>
                   </li>
                 </ul>
@@ -367,6 +461,90 @@
           </li>
           <li class="NavigationItem NavigationItem--alignmentYCenter">
             <span class="NavigationAction NavigationAction--pill NavigationAction--disabled">Disabled</span>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Vertical Navigation with Pill NavigationAction and Start/End Slots</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <nav class="Navigation Navigation--vertical" aria-label="Vertical Navigation with Pill NavigationAction and Start/End Slots">
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAction NavigationAction--pill">
+              <span class="NavigationAction__slot">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="Icon"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#profile" />
+                </svg>
+              </span>
+              <span class="text-word-break-long-words">Link</span>
+              <span class="NavigationAction__slot">
+                <span class="Tag Tag--informative Tag--small color-scheme-on-emotion-informative-basic">Team</span>
+              </span>
+            </a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a
+              href="#"
+              class="NavigationAction NavigationAction--pill NavigationAction--selected"
+              aria-current="page"
+            >
+              <span class="NavigationAction__slot">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="Icon"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#profile" />
+                </svg>
+              </span>
+              <span class="text-word-break-long-words">Selected</span>
+              <span class="NavigationAction__slot">
+                <span class="Pill Pill--informative color-scheme-on-emotion-informative-basic">3</span>
+              </span>
+            </a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <span class="NavigationAction NavigationAction--pill NavigationAction--disabled">
+              <span class="NavigationAction__slot">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="Icon"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#profile" />
+                </svg>
+              </span>
+              <span class="text-word-break-long-words">Disabled</span>
+              <span class="NavigationAction__slot">
+                <svg
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                  class="Icon"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#lock" />
+                </svg>
+              </span>
+            </span>
           </li>
         </ul>
       </nav>
