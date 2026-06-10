@@ -23,7 +23,13 @@ const _NavigationAction = <E extends ElementType = 'a'>(
   ref: PolymorphicRef<E>,
 ) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType = defaultProps.elementType as ElementType, children, ...restProps } = propsWithDefaults;
+  const {
+    elementType = defaultProps.elementType as ElementType,
+    children,
+    startSlot,
+    endSlot,
+    ...restProps
+  } = propsWithDefaults;
   const ElementTag = propsWithDefaults.isDisabled ? 'span' : elementType;
 
   const { navigationActionProps } = useNavigationActionProps(propsWithDefaults);
@@ -33,7 +39,9 @@ const _NavigationAction = <E extends ElementType = 'a'>(
 
   return (
     <ElementTag {...otherProps} {...navigationActionProps} {...mergedStyleProps} ref={ref}>
-      {children}
+      {startSlot != null && <span className={classProps.slot}>{startSlot}</span>}
+      <span className="text-word-break-long-words">{children}</span>
+      {endSlot != null && <span className={classProps.slot}>{endSlot}</span>}
     </ElementTag>
   );
 };

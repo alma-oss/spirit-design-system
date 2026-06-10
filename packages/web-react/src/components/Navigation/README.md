@@ -59,6 +59,17 @@ stretches its content vertically.
 </NavigationItem>
 ```
 
+### Sub-Items
+
+Second-level navigation entries are recognized structurally when they are nested in subnavigation
+(`ul` inside a parent item). Sub-items are indented and do not render `NavigationAction` `startSlot` and `endSlot`.
+
+```tsx
+<NavigationItem>
+  <NavigationAction href="#">Nested item</NavigationAction>
+</NavigationItem>
+```
+
 ### API
 
 | Name         | Type                       | Default  | Required | Description                        |
@@ -97,18 +108,50 @@ It can obtain `isSelected` or `isDisabled` states by adding the respective props
 If the `NavigationAction` is inside a [`Header`][web-react-header] component, it will
 inherit the height of the `Header`.
 
+### Navigation Action Slots
+
+Use `startSlot` and `endSlot` props to render optional content around the `NavigationAction` label.
+The slots accept any `ReactNode`, for example `Icon`, `Tag`, `Pill`, or custom layouts.
+
+When you pass an `Icon` without an explicit `boxSize`, `NavigationAction` ensures the correct size is set.
+
+```tsx
+<NavigationAction href="#" startSlot={<Icon name="profile" />} endSlot={<Icon name="chevron-right" />}>
+  Dashboard
+</NavigationAction>
+```
+
+### Open Category State
+
+Expanded category triggers in vertical navigation get the open visual state automatically from the
+`aria-expanded="true"` attribute. This state is intentionally different from the selected state
+(`isSelected`). Set `aria-expanded` on the trigger action to reflect whether the category is expanded.
+
+```tsx
+<NavigationAction
+  elementType="button"
+  aria-expanded="true"
+  startSlot={<Icon name="folder-dualtone" />}
+  endSlot={<Icon name="chevron-up" />}
+>
+  Menu
+</NavigationAction>
+```
+
 ### API
 
-| Name          | Type                                           | Default | Required | Description                     |
-| ------------- | ---------------------------------------------- | ------- | -------- | ------------------------------- |
-| `children`    | \[`string` \| `ReactNode`]                     | `null`  | ✓        | Content of the NavigationAction |
-| `elementType` | `ElementType`                                  | `a`     | ✕        | Type of element used as         |
-| `href`        | `string`                                       | -       | ✕        | URL of the link                 |
-| `isDisabled`  | `bool`                                         | `false` | ✕        | Whether the action is disabled  |
-| `isSelected`  | `bool`                                         | `false` | ✕        | Whether the action is selected  |
-| `ref`         | `ForwardedRef<HTMLAnchorElement>`              | —       | ✕        | Anchor element reference        |
-| `target`      | `string`                                       | `null`  | ✕        | Link target                     |
-| `variant`     | [Shape Variant Dictionary][dictionary-variant] | `box`   | ✕        | Variant of the NavigationAction |
+| Name          | Type                                           | Default | Required | Description                               |
+| ------------- | ---------------------------------------------- | ------- | -------- | ----------------------------------------- |
+| `children`    | \[`string` \| `ReactNode`]                     | `null`  | ✓        | Content of the NavigationAction           |
+| `elementType` | `ElementType`                                  | `a`     | ✕        | Type of element used as                   |
+| `endSlot`     | `ReactNode`                                    | `null`  | ✕        | Optional content rendered after children  |
+| `href`        | `string`                                       | -       | ✕        | URL of the link                           |
+| `isDisabled`  | `bool`                                         | `false` | ✕        | Whether the action is disabled            |
+| `isSelected`  | `bool`                                         | `false` | ✕        | Whether the action is selected            |
+| `ref`         | `ForwardedRef<HTMLAnchorElement>`              | —       | ✕        | Anchor element reference                  |
+| `startSlot`   | `ReactNode`                                    | `null`  | ✕        | Optional content rendered before children |
+| `target`      | `string`                                       | `null`  | ✕        | Link target                               |
+| `variant`     | [Shape Variant Dictionary][dictionary-variant] | `box`   | ✕        | Variant of the NavigationAction           |
 
 The components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
