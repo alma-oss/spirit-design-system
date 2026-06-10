@@ -5,7 +5,7 @@ import MainHorizontalNavigationDropdown from './MainHorizontalNavigationDropdown
 export const MainHorizontalNavigation = () => (
   <Navigation aria-label="Main Navigation" hideOn={['mobile', 'tablet']}>
     <NavigationItem>
-      <NavigationAction href="#" isSelected>
+      <NavigationAction href="#" aria-current="page" isSelected>
         Selected
       </NavigationAction>
     </NavigationItem>

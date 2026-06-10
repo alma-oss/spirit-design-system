@@ -17,7 +17,7 @@ export const MainNavigation = ({
     {...(isDirectionHorizontal(direction) ? { hideOn: ['mobile', 'tablet'] } : {})}
   >
     <NavigationItem>
-      <NavigationAction href="#" variant={variant} isSelected>
+      <NavigationAction href="#" variant={variant} aria-current="page" isSelected>
         Job Offers
       </NavigationAction>
     </NavigationItem>

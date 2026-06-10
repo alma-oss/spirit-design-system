@@ -6,9 +6,11 @@ import {
   type AlignmentYExtendedDictionaryType,
   type ChildrenProps,
   type DirectionDictionaryType,
+  type EndSlotProps,
   type ShapeVariantDictionaryType,
   type SizeExtendedDictionaryType,
   type SpiritPolymorphicElementPropsWithRef,
+  type StartSlotProps,
   type StyleProps,
 } from './shared';
 
@@ -16,7 +18,7 @@ type NonNullableShapeVariant = NonNullable<ShapeVariantDictionaryType>;
 
 export type NavigationActionVariantsType = NonNullableShapeVariant | Record<string, NonNullableShapeVariant>;
 
-export interface NavigationActionBaseProps extends ChildrenProps, StyleProps {
+export interface NavigationActionBaseProps extends ChildrenProps, StyleProps, StartSlotProps, EndSlotProps {
   /** NavigationAction's href attribute */
   href?: string;
   /** Whether is the NavigationAction disabled */

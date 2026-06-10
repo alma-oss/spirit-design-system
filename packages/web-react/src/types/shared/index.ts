@@ -19,6 +19,7 @@ export * from './refs';
 export * from './responsive';
 export * from './router';
 export * from './sizes';
+export * from './slots';
 export * from './style';
 export * from './text';
 export * from './tokens';

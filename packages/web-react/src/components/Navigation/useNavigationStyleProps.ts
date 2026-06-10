@@ -24,6 +24,7 @@ export interface UseNavigationStyleReturn {
     action: string;
     avatar: string;
     item: string;
+    slot: string;
   };
   props: SpiritNavigationItemProps | SpiritNavigationActionProps;
 }
@@ -48,6 +49,7 @@ export const useNavigationStyleProps = ({
   const navigationActionVariantClass = `${navigationActionClass}--${variant}`;
 
   const navigationAvatarSquareClass = `${navigationAvatarClass}--square`;
+  const navigationActionSlotClass = `${navigationActionClass}__slot`;
 
   const navigationItemClasses = classNames(navigationItemClass, {
     [useAlignmentClass(navigationItemClass, alignmentY as AlignmentPropertyType, 'alignmentY')]: alignmentY,
@@ -63,6 +65,7 @@ export const useNavigationStyleProps = ({
       [navigationAvatarSquareClass]: isSquare,
     }),
     item: navigationItemClasses,
+    slot: navigationActionSlotClass,
   };
 
   return {

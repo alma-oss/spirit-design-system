@@ -10,7 +10,7 @@ const DrawerWithNavigation = () => {
   return (
     <Navigation aria-label="Main Navigation" direction="vertical">
       <NavigationItem>
-        <NavigationAction href="#" isSelected>
+        <NavigationAction href="#" aria-current="page" isSelected>
           Selected
         </NavigationAction>
       </NavigationItem>
@@ -18,9 +18,13 @@ const DrawerWithNavigation = () => {
         <NavigationAction href="#">Link</NavigationAction>
       </NavigationItem>
       <NavigationItem>
-        <NavigationAction elementType="button" aria-expanded={isCollapseOpen} onClick={toggleCollapseHandler}>
+        <NavigationAction
+          elementType="button"
+          aria-expanded={isCollapseOpen}
+          onClick={toggleCollapseHandler}
+          endSlot={<Icon name={`chevron-${isCollapseOpen ? 'up' : 'down'}`} />}
+        >
           Menu
-          <Icon name={`chevron-${isCollapseOpen ? 'up' : 'down'}`} />
         </NavigationAction>
         <CollapseNavigation isOpen={isCollapseOpen} />
       </NavigationItem>
