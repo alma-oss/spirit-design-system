@@ -9,27 +9,21 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Toggle Toggle--inputPositionEnd">
-        <div class="Toggle__text">
-          <label
-            class="Label Label--inline"
-            for="toggle-default"
-          >Toggle Label</label>
-        </div>
         <input
           type="checkbox"
           id="toggle-default"
           class="Toggle__input"
           name="default"
         />
-      </div>
-
-      <div class="Toggle Toggle--inputPositionEnd">
         <div class="Toggle__text">
           <label
             class="Label Label--inline"
-            for="toggle-default-checked"
+            for="toggle-default"
           >Toggle Label</label>
         </div>
+      </div>
+
+      <div class="Toggle Toggle--inputPositionEnd">
         <input
           type="checkbox"
           id="toggle-default-checked"
@@ -37,6 +31,12 @@
           name="default"
           checked
         />
+        <div class="Toggle__text">
+          <label
+            class="Label Label--inline"
+            for="toggle-default-checked"
+          >Toggle Label</label>
+        </div>
       </div>
 
     </div>
@@ -54,27 +54,21 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Toggle Toggle--inputPositionEnd">
-        <div class="Toggle__text">
-          <label
-            class="Label Label--inline"
-            for="toggle-indicators"
-          >Toggle Label</label>
-        </div>
         <input
           type="checkbox"
           id="toggle-indicators"
           class="Toggle__input Toggle__input--indicators"
           name="default"
         />
-      </div>
-
-      <div class="Toggle Toggle--inputPositionEnd">
         <div class="Toggle__text">
           <label
             class="Label Label--inline"
-            for="toggle-indicators-checked"
+            for="toggle-indicators"
           >Toggle Label</label>
         </div>
+      </div>
+
+      <div class="Toggle Toggle--inputPositionEnd">
         <input
           type="checkbox"
           id="toggle-indicators-checked"
@@ -82,6 +76,12 @@
           name="default"
           checked
         />
+        <div class="Toggle__text">
+          <label
+            class="Label Label--inline"
+            for="toggle-indicators-checked"
+          >Toggle Label</label>
+        </div>
       </div>
 
     </div>
@@ -99,12 +99,6 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Toggle Toggle--inputPositionEnd">
-        <div class="Toggle__text">
-          <label
-            class="Label Label--inline Label--required"
-            for="toggle-required"
-          >Toggle Label</label>
-        </div>
         <input
           type="checkbox"
           id="toggle-required"
@@ -112,6 +106,12 @@
           name="default"
           required
         />
+        <div class="Toggle__text">
+          <label
+            class="Label Label--inline Label--required"
+            for="toggle-required"
+          >Toggle Label</label>
+        </div>
       </div>
 
     </div>
@@ -129,18 +129,18 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Toggle Toggle--inputPositionEnd">
-        <div class="Toggle__text">
-          <label
-            class="Label Label--inline accessibility-hidden"
-            for="toggle-hidden-label"
-          >Toggle Label</label>
-        </div>
         <input
           type="checkbox"
           id="toggle-hidden-label"
           class="Toggle__input"
           name="default"
         />
+        <div class="Toggle__text">
+          <label
+            class="Label Label--inline accessibility-hidden"
+            for="toggle-hidden-label"
+          >Toggle Label</label>
+        </div>
       </div>
 
     </div>
@@ -158,12 +158,6 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
-        <div class="Toggle__text">
-          <label
-            class="Label Label--inline Label--disabled"
-            for="toggle-default-disabled"
-          >Toggle Label</label>
-        </div>
         <input
           type="checkbox"
           id="toggle-default-disabled"
@@ -171,15 +165,15 @@
           name="default"
           disabled
         />
-      </div>
-
-      <div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
         <div class="Toggle__text">
           <label
             class="Label Label--inline Label--disabled"
-            for="toggle-default-checked-disabled"
+            for="toggle-default-disabled"
           >Toggle Label</label>
         </div>
+      </div>
+
+      <div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
         <input
           type="checkbox"
           id="toggle-default-checked-disabled"
@@ -188,9 +182,23 @@
           checked
           disabled
         />
+        <div class="Toggle__text">
+          <label
+            class="Label Label--inline Label--disabled"
+            for="toggle-default-checked-disabled"
+          >Toggle Label</label>
+        </div>
       </div>
 
       <div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
+        <input
+          type="checkbox"
+          id="toggle-helper-text-disabled"
+          class="Toggle__input"
+          name="default"
+          aria-describedby="toggle-helper-text-disabled-helper-text"
+          disabled
+        />
         <div class="Toggle__text">
           <label
             class="Label Label--inline Label--disabled"
@@ -201,17 +209,18 @@
             id="toggle-helper-text-disabled-helper-text"
           >Helper text</div>
         </div>
-        <input
-          type="checkbox"
-          id="toggle-helper-text-disabled"
-          class="Toggle__input"
-          name="default"
-          aria-describedby="toggle-helper-text-disabled-helper-text"
-          disabled
-        />
       </div>
 
       <div class="Toggle Toggle--warning Toggle--disabled">
+        <input
+          type="checkbox"
+          id="toggle-warning-helper-text-disabled"
+          class="Toggle__input"
+          name="default"
+          aria-describedby="toggle-warning-helper-text-helper-text-disabled toggle-warning-helper-text-validation-text-disabled"
+          checked
+          disabled
+        />
         <div class="Toggle__text">
           <label
             class="Label Label--inline Label--disabled"
@@ -226,24 +235,9 @@
             id="toggle-warning-helper-text-validation-text-disabled"
           >Validation text</div>
         </div>
-        <input
-          type="checkbox"
-          id="toggle-warning-helper-text-disabled"
-          class="Toggle__input"
-          name="default"
-          aria-describedby="toggle-warning-helper-text-helper-text toggle-warning-helper-text-validation-text"
-          checked
-          disabled
-        />
       </div>
 
       <div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
-        <div class="Toggle__text">
-          <label
-            class="Label Label--inline Label--disabled"
-            for="toggle-indicators-disabled"
-          >Toggle Label</label>
-        </div>
         <input
           type="checkbox"
           id="toggle-indicators-disabled"
@@ -251,15 +245,15 @@
           name="default"
           disabled
         />
-      </div>
-
-      <div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
         <div class="Toggle__text">
           <label
             class="Label Label--inline Label--disabled"
-            for="toggle-indicators-disabled-checked"
+            for="toggle-indicators-disabled"
           >Toggle Label</label>
         </div>
+      </div>
+
+      <div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
         <input
           type="checkbox"
           id="toggle-indicators-disabled-checked"
@@ -268,6 +262,12 @@
           disabled
           checked
         />
+        <div class="Toggle__text">
+          <label
+            class="Label Label--inline Label--disabled"
+            for="toggle-indicators-disabled-checked"
+          >Toggle Label</label>
+        </div>
       </div>
 
     </div>
@@ -285,6 +285,13 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Toggle Toggle--inputPositionEnd">
+        <input
+          type="checkbox"
+          id="toggle-helper-text"
+          class="Toggle__input"
+          name="default"
+          aria-describedby="toggle-helper-text-helper-text"
+        />
         <div class="Toggle__text">
           <label
             class="Label Label--inline"
@@ -295,16 +302,17 @@
             id="toggle-helper-text-helper-text"
           >Helper text</div>
         </div>
-        <input
-          type="checkbox"
-          id="toggle-helper-text"
-          class="Toggle__input"
-          name="default"
-          aria-describedby="toggle-helper-text-helper-text"
-        />
       </div>
 
       <div class="Toggle Toggle--inputPositionEnd">
+        <input
+          type="checkbox"
+          id="toggle-helper-text-checked"
+          class="Toggle__input"
+          name="default"
+          aria-describedby="toggle-helper-text-checked-helper-text"
+          checked
+        />
         <div class="Toggle__text">
           <label
             class="Label Label--inline"
@@ -315,14 +323,6 @@
             id="toggle-helper-text-checked-helper-text"
           >Helper text</div>
         </div>
-        <input
-          type="checkbox"
-          id="toggle-helper-text-checked"
-          class="Toggle__input"
-          name="default"
-          aria-describedby="toggle-helper-text-checked-helper-text"
-          checked
-        />
       </div>
 
     </div>
@@ -340,21 +340,29 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Toggle Toggle--inputPositionEnd Toggle--success">
-        <div class="Toggle__text">
-          <label
-            class="Label Label--inline"
-            for="toggle-success"
-          >Toggle Label</label>
-        </div>
         <input
           type="checkbox"
           id="toggle-success"
           class="Toggle__input"
           name="default"
         />
+        <div class="Toggle__text">
+          <label
+            class="Label Label--inline"
+            for="toggle-success"
+          >Toggle Label</label>
+        </div>
       </div>
 
       <div class="Toggle Toggle--inputPositionEnd Toggle--warning">
+        <input
+          type="checkbox"
+          id="toggle-warning"
+          class="Toggle__input"
+          name="default"
+          aria-describedby="toggle-warning-validation-text"
+          checked
+        />
         <div class="Toggle__text">
           <label
             class="Label Label--inline"
@@ -365,17 +373,16 @@
             id="toggle-warning-validation-text"
           >Validation text</div>
         </div>
-        <input
-          type="checkbox"
-          id="toggle-warning"
-          class="Toggle__input"
-          name="default"
-          aria-describedby="toggle-warning-validation-text"
-          checked
-        />
       </div>
 
       <div class="Toggle Toggle--inputPositionEnd Toggle--danger">
+        <input
+          type="checkbox"
+          id="toggle-danger"
+          class="Toggle__input"
+          name="default"
+          aria-describedby="toggle-danger-validation-text"
+        />
         <div class="Toggle__text">
           <label
             for="toggle-danger"
@@ -391,16 +398,17 @@
             </ul>
           </div>
         </div>
-        <input
-          type="checkbox"
-          id="toggle-danger"
-          class="Toggle__input"
-          name="default"
-          aria-describedby="toggle-danger-validation-text"
-        />
       </div>
 
       <div class="Toggle Toggle--inputPositionEnd Toggle--warning">
+        <input
+          type="checkbox"
+          id="toggle-warning-helper-text"
+          class="Toggle__input"
+          name="default"
+          aria-describedby="toggle-warning-helper-text-helper-text toggle-warning-helper-text-validation-text"
+          checked
+        />
         <div class="Toggle__text">
           <label
             class="Label Label--inline"
@@ -415,14 +423,6 @@
             id="toggle-warning-helper-text-validation-text"
           >Validation text</div>
         </div>
-        <input
-          type="checkbox"
-          id="toggle-warning-helper-text"
-          class="Toggle__input"
-          name="default"
-          aria-describedby="toggle-warning-helper-text-helper-text toggle-warning-helper-text-validation-text"
-          checked
-        />
       </div>
 
     </div>
@@ -438,7 +438,15 @@
       {{setVar "states" "success" "warning" "danger" }}
       {{#each @root.states as |state|}}
 
-      <div class="Toggle Toggle--{{state}}">
+      <div class="Toggle Toggle--{{state}} Toggle--inputPositionEnd">
+        <input
+          type="checkbox"
+          id="toggle-{{state}}-validation-icon"
+          class="Toggle__input"
+          name="default"
+          aria-describedby="toggle-{{state}}-validation-text-icon"
+          checked
+        />
         <div class="Toggle__text">
           <label
             class="Label Label--inline"
@@ -446,7 +454,7 @@
           >Toggle Label</label>
           <div
             class="ValidationText ValidationText--{{state}}"
-            id="toggle-{{state}}-validation-textIcon"
+            id="toggle-{{state}}-validation-text-icon"
           >
             <svg
               class="Icon"
@@ -459,14 +467,6 @@
             <span>This is {{state}} validation text. Long validation text to show how it wraps.</span>
           </div>
         </div>
-        <input
-          type="checkbox"
-          id="toggle-{{state}}-validation-icon"
-          class="Toggle__input"
-          name="default"
-          aria-describedby="toggle-{{state}}-validation-text-icon"
-          checked
-        />
       </div>
 
       {{/each}}
@@ -484,48 +484,48 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Toggle Toggle--inputPositionStart">
-        <div class="Toggle__text">
-          <label
-            class="Label Label--inline"
-            for="toggle-position-start"
-          >Input on Start</label>
-        </div>
         <input
           type="checkbox"
           id="toggle-position-start"
           class="Toggle__input"
           name="positionStart"
         />
-      </div>
-
-      <div class="Toggle Toggle--inputPositionEnd">
         <div class="Toggle__text">
           <label
             class="Label Label--inline"
-            for="toggle-position-end"
-          >Input on End (Default)</label>
+            for="toggle-position-start"
+          >Input on Start</label>
         </div>
+      </div>
+
+      <div class="Toggle Toggle--inputPositionEnd">
         <input
           type="checkbox"
           id="toggle-position-end"
           class="Toggle__input"
           name="positionEnd"
         />
-      </div>
-
-      <div class="Toggle Toggle--inputPositionEnd Toggle--tablet--inputPositionStart Toggle--desktop--inputPositionEnd">
         <div class="Toggle__text">
           <label
             class="Label Label--inline"
-            for="toggle-position-responsive"
-          >Responsive Position</label>
+            for="toggle-position-end"
+          >Input on End (Default)</label>
         </div>
+      </div>
+
+      <div class="Toggle Toggle--inputPositionEnd Toggle--tablet--inputPositionStart Toggle--desktop--inputPositionEnd">
         <input
           type="checkbox"
           id="toggle-position-responsive"
           class="Toggle__input"
           name="positionResponsive"
         />
+        <div class="Toggle__text">
+          <label
+            class="Label Label--inline"
+            for="toggle-position-responsive"
+          >Responsive Position</label>
+        </div>
       </div>
 
     </div>
@@ -543,6 +543,14 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Toggle Toggle--inputPositionEnd">
+        <input
+          type="checkbox"
+          id="toggle-consent-emphasized-label"
+          class="Toggle__input"
+          name="consent"
+          required
+          aria-details="toggle-consent-emphasized-label-details"
+        />
         <div class="Toggle__text">
           <label class="Label Label--inline Label--required" for="toggle-consent-emphasized-label"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
           <div id="toggle-consent-emphasized-label-details" class="InputDetails">
@@ -558,14 +566,6 @@
             </button>
           </div>
         </div>
-        <input
-          type="checkbox"
-          id="toggle-consent-emphasized-label"
-          class="Toggle__input"
-          name="consent"
-          required
-          aria-details="toggle-consent-emphasized-label-details"
-        />
       </div>
 
     </div>
@@ -583,6 +583,15 @@
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Toggle Toggle--inputPositionEnd Toggle--danger">
+        <input
+          type="checkbox"
+          id="toggle-consent-full-example"
+          class="Toggle__input"
+          name="consent"
+          required
+          aria-describedby="toggle-consent-full-example-helper-text toggle-consent-full-example-validation-text"
+          aria-details="toggle-consent-full-example-details"
+        />
         <div class="Toggle__text">
           <label class="Label Label--inline Label--required" for="toggle-consent-full-example">I agree to the terms and privacy policy</label>
           <div id="toggle-consent-full-example-details" class="InputDetails">
@@ -610,15 +619,6 @@
           <div class="HelperText" id="toggle-consent-full-example-helper-text">Please read the documents carefully before agreeing</div>
           <div class="ValidationText ValidationText--danger" id="toggle-consent-full-example-validation-text">You must agree to continue</div>
         </div>
-        <input
-          type="checkbox"
-          id="toggle-consent-full-example"
-          class="Toggle__input"
-          name="consent"
-          required
-          aria-describedby="toggle-consent-full-example-helper-text toggle-consent-full-example-validation-text"
-          aria-details="toggle-consent-full-example-details"
-        />
       </div>
 
     </div>

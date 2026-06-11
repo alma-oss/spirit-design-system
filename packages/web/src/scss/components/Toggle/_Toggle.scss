@@ -154,11 +154,4 @@ $_field-name: 'Toggle';
     }
 }
 
-@include form-fields-tools.input-position(
-    $component-class: $_field-name,
-    $positions: (
-        'start': row-reverse,
-        'end': row,
-    ),
-    $default-position: 'end'
-);
+@include form-fields-tools.input-position($component-class: $_field-name, $default-position: 'end');

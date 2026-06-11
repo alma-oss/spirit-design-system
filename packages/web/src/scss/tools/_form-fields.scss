@@ -246,13 +246,14 @@
 // Creates modifier classes (e.g., `.Component--inputPositionStart`, `.Component--tablet--inputPositionEnd`)
 // that control flex-direction to position the input element relative to its label.
 //
-// @deprecated The $positions parameter will be removed when the order of input and label in Toggle HTML are unified.
-// Also, we will make the position modifier classes mandatory in the next version, so the `$default-selector` logic can
-// be deleted.
-// Migration: Remove the $positions parameter here and from the mixin calls. The default
-// ('start': row, 'end': row-reverse) will become the only option. Delete the `$default-selector` logic.
-// https://jira.almacareer.tech/browse/DS-2322
-@mixin input-position($component-class, $positions: ('start': row, 'end': row-reverse), $default-position: 'start') {
+// @deprecated We will make the position modifier classes mandatory in the next version, so the `$default-selector`
+// logic can be deleted.
+@mixin input-position($component-class, $default-position: 'start') {
+    $positions: (
+        'start': row,
+        'end': row-reverse,
+    );
+
     @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
         $infix: breakpoint.get-modifier('infix', $breakpoint-name, $breakpoint-value);
 
