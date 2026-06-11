@@ -6,6 +6,10 @@
 //    c) The `height` property is set to `100lvh` to spread the container over the entire viewport so the toast messages
 //       (and their shadows) are not clipped, even during dynamic viewport changes (again, using the `dvh` unit would
 //       lead to sluggish scrolling on mobile devices).
+//    d) The `z-index` property ensures toasts render above page content. It is exposed as a CSS custom property
+//       (`--spirit-toast-z-index`) so consumers can adjust stacking when needed. Temporary workaround until Toast
+//       uses the Popover API top layer — remove with DS-2602.
+//       @see https://jira.almacareer.tech/browse/DS-2602
 //
 // 2. Use grid layout to control horizontal (x) and vertical (y) alignment of the messages.
 //
@@ -89,6 +93,7 @@
 
 @use 'sass:map';
 @use 'sass:math';
+@use '@tokens' as tokens;
 @use '../../tools/breakpoint';
 @use 'theme';
 
@@ -101,6 +106,7 @@ $_queue-collapsed-visible-limit: 2; // 10.
     position: fixed; // 1.
     inset-inline: 0; // 1.a
     inset-block: var(--toast-inset-top, 0) var(--toast-inset-bottom, 0); // 1.b
+    z-index: var(--#{tokens.$css-variable-prefix}toast-z-index, #{theme.$z-index}); // 1.d
     display: grid; // 2.
     justify-content: var(--toast-alignment-x); // 2.a
     height: 100lvh; // 1.c
