@@ -31,8 +31,9 @@ It can be used internally in the form components.
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
+  <input type="checkbox" id="consent" class="Toggle__input" name="consent" required aria-details="consent-details" />
   <div class="Toggle__text">
-    <label class="Toggle__label Toggle__label--required" for="consent">I agree to the terms and conditions</label>
+    <label class="Label Label--inline Label--required" for="consent">I agree to the terms and conditions</label>
     <div id="consent-details" class="InputDetails">
       <button
         type="button"
@@ -44,7 +45,6 @@ It can be used internally in the form components.
       </button>
     </div>
   </div>
-  <input type="checkbox" id="consent" class="Toggle__input" name="consent" required aria-details="consent-details" />
 </div>
 <!-- Modal definitions -->
 ```
@@ -84,13 +84,6 @@ To render the `InputDetails` component in a disabled state, add the `InputDetail
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
-  <div class="Toggle__text">
-    <label class="Toggle__label Toggle__label--required" for="consent">I agree to the terms and conditions</label>
-    <div id="consent-details" class="InputDetails InputDetails--disabled">
-      <button type="button" class="link-underlined link-inherit" disabled>See full terms and conditions</button>
-      <button type="button" class="link-underlined link-inherit" disabled>See privacy policy</button>
-    </div>
-  </div>
   <input
     type="checkbox"
     id="consent"
@@ -100,6 +93,13 @@ To render the `InputDetails` component in a disabled state, add the `InputDetail
     required
     aria-details="consent-details"
   />
+  <div class="Toggle__text">
+    <label class="Label Label--inline Label--required" for="consent">I agree to the terms and conditions</label>
+    <div id="consent-details" class="InputDetails InputDetails--disabled">
+      <button type="button" class="link-underlined link-inherit" disabled>See full terms and conditions</button>
+      <button type="button" class="link-underlined link-inherit" disabled>See privacy policy</button>
+    </div>
+  </div>
 </div>
 ```
 

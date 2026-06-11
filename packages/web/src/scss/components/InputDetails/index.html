@@ -93,6 +93,15 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="Toggle Toggle--inputPositionEnd Toggle--danger">
+        <input
+          type="checkbox"
+          id="input-details-toggle"
+          class="Toggle__input"
+          name="consent"
+          required
+          aria-details="input-details-toggle-details"
+          aria-describedby="consent-full-example-helper-text consent-full-example-validation-text"
+        />
         <div class="Toggle__text">
           <label class="Label Label--inline Label--required" for="input-details-toggle">I agree to the terms and conditions</label>
           <div id="input-details-toggle-details" class="InputDetails">
@@ -124,15 +133,6 @@
             You must agree to continue
           </div>
         </div>
-        <input
-          type="checkbox"
-          id="input-details-toggle"
-          class="Toggle__input"
-          name="consent"
-          required
-          aria-details="input-details-toggle-details"
-          aria-describedby="consent-full-example-helper-text consent-full-example-validation-text"
-        />
       </div>
 
     </div>
@@ -150,6 +150,16 @@
     <div class="docs-Stack docs-Stack--start">
 
       <div class="Toggle Toggle--inputPositionEnd Toggle--disabled Toggle--danger">
+        <input
+          type="checkbox"
+          id="input-details-toggle-disabled"
+          class="Toggle__input"
+          name="consent-disabled"
+          required
+          disabled
+          aria-details="input-details-toggle-disabled-details"
+          aria-describedby="input-details-toggle-disabled-helper-text input-details-toggle-disabled-validation-text"
+        />
         <div class="Toggle__text">
           <label class="Label Label--inline Label--required Label--disabled" for="input-details-toggle-disabled">I agree to the terms and conditions</label>
           <div id="input-details-toggle-disabled-details" class="InputDetails InputDetails--disabled">
@@ -183,16 +193,6 @@
             You must agree to continue
           </div>
         </div>
-        <input
-          type="checkbox"
-          id="input-details-toggle-disabled"
-          class="Toggle__input"
-          name="consent-disabled"
-          required
-          disabled
-          aria-details="input-details-toggle-disabled-details"
-          aria-describedby="input-details-toggle-disabled-helper-text input-details-toggle-disabled-validation-text"
-        />
       </div>
 
     </div>

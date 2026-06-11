@@ -15,6 +15,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
   - [Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed](#header-unstable_header-stabilized-previous-header-css-removed)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
+  - [Toggle: Input Before Label in HTML](#toggle-input-before-label-in-html)
 
 ## Component Changes
 
@@ -239,6 +240,41 @@ active stripe in the `box` variant) was removed.
 - For second-level items, use structural nesting and keep slot icons on parent category actions only.
 - If you relied on the vertical selected-state indicator, note that it has been removed; selection is now
 communicated through the action's background and color only.
+</details>
+
+### Toggle: Input Before Label in HTML
+
+Toggle markup now places the `<input class="Toggle__input">` element **before** the
+`<div class="Toggle__text">` block, matching Checkbox and Radio. Visual layout and
+`inputPosition` modifier classes are unchanged.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Swap the order of the input and text wrapper in your Toggle HTML.
+
+```html
+<!-- Before -->
+<div class="Toggle Toggle--inputPositionEnd">
+  <div class="Toggle__text">
+    <label class="Label Label--inline" for="toggle">Toggle Label</label>
+  </div>
+  <input type="checkbox" id="toggle" class="Toggle__input" name="toggle" />
+</div>
+
+<!-- After -->
+<div class="Toggle Toggle--inputPositionEnd">
+  <input type="checkbox" id="toggle" class="Toggle__input" name="toggle" />
+  <div class="Toggle__text">
+    <label class="Label Label--inline" for="toggle">Toggle Label</label>
+  </div>
+</div>
+```
+
+If you provided any custom CSS depending on the order of Toggle children, you will need to update it.
+
 </details>
 
 ---
