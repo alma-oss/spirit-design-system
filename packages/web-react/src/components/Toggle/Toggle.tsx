@@ -55,6 +55,19 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
       }}
     >
       <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
+        <input
+          {...otherProps}
+          {...ariaDescribedByProp}
+          {...ariaDetailsProp}
+          type="checkbox"
+          id={id}
+          className={classProps.input}
+          disabled={isDisabled}
+          checked={checked}
+          required={isRequired}
+          onChange={handleOnChange}
+          ref={ref}
+        />
         <div className={classProps.text}>
           <Label htmlFor={id}>{label}</Label>
           {details && (
@@ -73,19 +86,6 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
             />
           )}
         </div>
-        <input
-          {...otherProps}
-          {...ariaDescribedByProp}
-          {...ariaDetailsProp}
-          type="checkbox"
-          id={id}
-          className={classProps.input}
-          disabled={isDisabled}
-          checked={checked}
-          required={isRequired}
-          onChange={handleOnChange}
-          ref={ref}
-        />
       </div>
     </PropsProvider>
   );
