@@ -57,6 +57,12 @@ describe('Toggle', () => {
     expect(label).toContainHTML('label');
   });
 
+  it('should have text classname', () => {
+    render(<Toggle id="test-toggle" label="Toggle Label" />);
+
+    expect(screen.getByRole('checkbox').nextElementSibling).toHaveClass('Toggle__text');
+  });
+
   it('should have input classname', () => {
     render(<Toggle id="test-toggle" label="Toggle Label" />);
 
@@ -134,10 +140,11 @@ describe('Toggle', () => {
       />,
     );
 
-    const element = screen.getByRole('checkbox').previousElementSibling?.firstChild as HTMLElement;
+    const textWrapper = screen.getByRole('checkbox').nextElementSibling as HTMLElement;
+    const label = textWrapper.querySelector('label') as HTMLElement;
 
-    expect(element).toHaveTextContent('Toggle Label');
-    expect(element.innerHTML).toBe('Toggle <b>Label</b>');
+    expect(label).toHaveTextContent('Toggle Label');
+    expect(label.innerHTML).toBe('Toggle <b>Label</b>');
   });
 
   it('should render validation icon when hasValidationIcon is set', () => {
