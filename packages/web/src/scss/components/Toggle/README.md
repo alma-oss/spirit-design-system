@@ -9,10 +9,10 @@ the native input element and styles it to look like a toggle switch.
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
+  <input type="checkbox" id="toggle-default" class="Toggle__input" name="default" />
   <div class="Toggle__text">
     <label class="Label Label--inline" for="toggle-default">Toggle Label</label>
-  </span>
-  <input type="checkbox" id="toggle-default" class="Toggle__input" name="default" />
+  </div>
 </div>
 ```
 
@@ -23,10 +23,10 @@ modifier class to the input. This will add a visual indicators to the toggle swi
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
+  <input type="checkbox" id="toggle-indicators" class="Toggle__input Toggle__input--indicators" name="default" />
   <div class="Toggle__text">
     <label class="Label Label--inline" for="toggle-indicators">Toggle Label</label>
   </div>
-  <input type="checkbox" id="toggle-indicators" class="Toggle__input Toggle__input--indicators" name="default" />
 </div>
 ```
 
@@ -37,10 +37,10 @@ Add the `required` attribute to the input to mark it as required and add the
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
+  <input type="checkbox" id="toggle-required" class="Toggle__input" name="required" required />
   <div class="Toggle__text">
     <label class="Label Label--inline Label--required" for="toggle-required">Toggle Label</label>
   </div>
-  <input type="checkbox" id="toggle-required" class="Toggle__input" name="required" required />
 </div>
 ```
 
@@ -48,10 +48,10 @@ Add the `required` attribute to the input to mark it as required and add the
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
+  <input type="checkbox" id="toggle-hidden-label" class="Toggle__input" name="hidden-label" />
   <div class="Toggle__text">
     <label class="Label Label--inline accessibility-hidden" for="toggle-hidden-label">Toggle Label</label>
   </div>
-  <input type="checkbox" id="toggle-hidden-label" class="Toggle__input" name="hidden-label" />
 </div>
 ```
 
@@ -66,10 +66,6 @@ To add helper text, use the [HelperText][readme-helper-text] component:
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
-  <div class="Toggle__text">
-    <label class="Label Label--inline" for="toggle-helper-text">Toggle Label</label>
-    <div class="HelperText" id="toggle-helper-text-helper-text">Helper text</div>
-  </div>
   <input
     type="checkbox"
     id="toggle-helper-text"
@@ -77,6 +73,10 @@ To add helper text, use the [HelperText][readme-helper-text] component:
     name="helper-text"
     aria-describedby="toggle-helper-text-helper-text"
   />
+  <div class="Toggle__text">
+    <label class="Label Label--inline" for="toggle-helper-text">Toggle Label</label>
+    <div class="HelperText" id="toggle-helper-text-helper-text">Helper text</div>
+  </div>
 </div>
 ```
 
@@ -92,17 +92,13 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd Toggle--success">
+  <input type="checkbox" id="toggle-success" class="Toggle__input" name="default" />
   <div class="Toggle__text">
     <label class="Label Label--inline" for="toggle-success">Toggle Label</label>
   </div>
-  <input type="checkbox" id="toggle-success" class="Toggle__input" name="default" />
 </div>
 
 <div class="Toggle Toggle--inputPositionEnd Toggle--warning">
-  <div class="Toggle__text">
-    <label class="Label Label--inline" for="toggle-warning">Toggle Label</label>
-    <div class="ValidationText ValidationText--warning" id="toggle-warning-validation-text">Validation text</div>
-  </div>
   <input
     type="checkbox"
     id="toggle-warning"
@@ -111,16 +107,13 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     aria-describedby="toggle-warning-validation-text"
     checked
   />
+  <div class="Toggle__text">
+    <label class="Label Label--inline" for="toggle-warning">Toggle Label</label>
+    <div class="ValidationText ValidationText--warning" id="toggle-warning-validation-text">Validation text</div>
+  </div>
 </div>
 
 <div class="Toggle Toggle--inputPositionEnd Toggle--danger">
-  <div class="Toggle__text">
-    <label for="toggle-danger" class="Label Label--inline">Toggle Label</label>
-    <ul class="ValidationText ValidationText--danger" id="toggle-danger-validation-text">
-      <li>First validation text</li>
-      <li>Second validation text</li>
-    </ul>
-  </div>
   <input
     type="checkbox"
     id="toggle-danger"
@@ -128,9 +121,24 @@ a JS interaction class when controlled by JavaScript (`has-success`,
     name="default"
     aria-describedby="toggle-danger-validation-text"
   />
+  <div class="Toggle__text">
+    <label for="toggle-danger" class="Label Label--inline">Toggle Label</label>
+    <ul class="ValidationText ValidationText--danger" id="toggle-danger-validation-text">
+      <li>First validation text</li>
+      <li>Second validation text</li>
+    </ul>
+  </div>
 </div>
 
 <div class="Toggle Toggle--inputPositionEnd Toggle--warning">
+  <input
+    type="checkbox"
+    id="toggle-warning"
+    class="Toggle__input"
+    name="default"
+    aria-describedby="toggle-warning-validation-text"
+    checked
+  />
   <div class="Toggle__text">
     <label class="Label Label--inline" for="toggle-warning">Toggle Label</label>
     <div class="ValidationText ValidationText--warning" id="toggle-warning-validation-text">
@@ -140,14 +148,6 @@ a JS interaction class when controlled by JavaScript (`has-success`,
       <span>Validation text with icon</span>
     </div>
   </div>
-  <input
-    type="checkbox"
-    id="toggle-warning"
-    class="Toggle__input"
-    name="default"
-    aria-describedby="toggle-warning-validation-text"
-    checked
-  />
 </div>
 ```
 
@@ -164,6 +164,13 @@ components mix CSS with JS by design and handle prefixes their own way.**
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd has-success">
+  <input
+    type="checkbox"
+    id="toggle-success"
+    class="Toggle__input"
+    name="default"
+    aria-describedby="toggle-success-validation-text"
+  />
   <div class="Toggle__text">
     <label class="Label Label--inline" for="toggle-success">Toggle Label</label>
     <div
@@ -174,13 +181,6 @@ components mix CSS with JS by design and handle prefixes their own way.**
       Validation text
     </div>
   </div>
-  <input
-    type="checkbox"
-    id="toggle-success"
-    class="Toggle__input"
-    name="default"
-    aria-describedby="toggle-success-validation-text"
-  />
 </div>
 ```
 
@@ -208,6 +208,14 @@ class to render supplementary content (such as modal triggers) below the label.
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd">
+  <input
+    type="checkbox"
+    id="toggle-consent-emphasized"
+    class="Toggle__input"
+    name="consent"
+    required
+    aria-details="toggle-consent-emphasized-details"
+  />
   <div class="Toggle__text">
     <label class="Label Label--inline Label--required" for="toggle-consent-emphasized">
       <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
@@ -223,14 +231,6 @@ class to render supplementary content (such as modal triggers) below the label.
       </button>
     </div>
   </div>
-  <input
-    type="checkbox"
-    id="toggle-consent-emphasized"
-    class="Toggle__input"
-    name="consent"
-    required
-    aria-details="toggle-consent-emphasized-details"
-  />
 </div>
 <!-- Modal definitions -->
 ```
@@ -239,6 +239,15 @@ class to render supplementary content (such as modal triggers) below the label.
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd Toggle--danger">
+  <input
+    type="checkbox"
+    id="toggle-consent-full"
+    class="Toggle__input"
+    name="consent"
+    required
+    aria-describedby="toggle-consent-full-helper-text toggle-consent-full-validation-text"
+    aria-details="toggle-consent-full-details"
+  />
   <div class="Toggle__text">
     <label class="Label Label--inline Label--required" for="toggle-consent-full">
       I agree to the terms and privacy policy
@@ -268,15 +277,6 @@ class to render supplementary content (such as modal triggers) below the label.
       You must agree to continue
     </div>
   </div>
-  <input
-    type="checkbox"
-    id="toggle-consent-full"
-    class="Toggle__input"
-    name="consent"
-    required
-    aria-describedby="toggle-consent-full-helper-text toggle-consent-full-validation-text"
-    aria-details="toggle-consent-full-details"
-  />
 </div>
 <!-- Modal definitions -->
 ```
@@ -297,10 +297,10 @@ JS interaction class when controlled by JavaScript:
 
 ```html
 <div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
+  <input type="checkbox" id="toggle-disabled" class="Toggle__input" name="default" disabled />
   <div class="Toggle__text">
     <label class="Label Label--inline Label--disabled" for="toggle-disabled">Toggle Label</label>
   </div>
-  <input type="checkbox" id="toggle-disabled" class="Toggle__input" name="default" disabled />
 </div>
 ```
 
@@ -312,10 +312,10 @@ The input position can be set to `end` (default) or `start`.
 
 ```html
 <div class="Toggle Toggle--inputPositionStart">
+  <input type="checkbox" id="toggle-position-start" class="Toggle__input" name="position" />
   <div class="Toggle__text">
     <label class="Label Label--inline" for="toggle-position-start">Toggle Label</label>
   </div>
-  <input type="checkbox" id="toggle-position-start" class="Toggle__input" name="position" />
 </div>
 ```
 
@@ -325,10 +325,10 @@ Use responsive breakpoint modifiers to change input position at different screen
 
 ```html
 <div class="Toggle Toggle--tablet--inputPositionStart">
+  <input type="checkbox" id="toggle-position-responsive" class="Toggle__input" name="position" />
   <div class="Toggle__text">
     <label class="Label Label--inline" for="toggle-position-responsive">Toggle Label</label>
   </div>
-  <input type="checkbox" id="toggle-position-responsive" class="Toggle__input" name="position" />
 </div>
 ```
 

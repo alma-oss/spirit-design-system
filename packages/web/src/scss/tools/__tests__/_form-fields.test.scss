@@ -45,14 +45,7 @@
 
         @include test.assert() {
             @include test.output() {
-                @include form-fields.input-position(
-                    $component-class: 'TestComponent',
-                    $positions: (
-                        'start': row,
-                        'end': row-reverse,
-                    ),
-                    $default-position: 'start'
-                );
+                @include form-fields.input-position($component-class: 'TestComponent', $default-position: 'start');
             }
 
             @include test.expect() {
