@@ -92,6 +92,15 @@ keyboard. The Toast component tries to find the best position to be visible usin
    }
    ```
 
+### Stacking Order
+
+The default stacking order is `1000`. Override it with `--spirit-toast-z-index` on the `Toast` component via
+[`UNSAFE_style`][readme-escape-hatches] when needed:
+
+```tsx
+<Toast UNSAFE_style={{ '--spirit-toast-z-index': 1100 }}>{/* ToastBar components go here */}</Toast>
+```
+
 ### Toast Queue
 
 When multiple ToastBar components are present, they stack up in a queue, separated by a gap. The ToastBar components are

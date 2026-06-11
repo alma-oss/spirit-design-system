@@ -119,6 +119,18 @@ keyboard. The Toast component tries to find the best position to be visible usin
    }
    ```
 
+### Stacking Order
+
+The default stacking order is `1000`. Override it with `--spirit-toast-z-index` on the `.Toast` element when needed:
+
+```html
+<div class="Toast" style="--spirit-toast-z-index: 1100" role="log">
+  <div class="Toast__queue">
+    <!-- ToastBar components go here -->
+  </div>
+</div>
+```
+
 ### Toast Queue
 
 When multiple ToastBar components are present, they stack up in a queue, separated by a gap. The ToastBar components are
