@@ -83,11 +83,4 @@ $_field-name: 'Radio';
     background-color: form-fields-settings.$input-background-color;
 }
 
-@include form-fields-tools.input-position(
-    $component-class: $_field-name,
-    $positions: (
-        'start': row,
-        'end': row-reverse,
-    ),
-    $default-position: 'start'
-);
+@include form-fields-tools.input-position($component-class: $_field-name, $default-position: 'start');
