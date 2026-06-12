@@ -20,7 +20,7 @@ UNSTABLE_Combobox
 ├── Dropdown
 │   ├── Label
 │   ├── InputContainer                                role="group"
-│   │   └── UNSTABLE_ComboboxSelection               (wrapper)
+│   │   └── UNSTABLE_ComboboxSelection                (wrapper)
 │   │       ├── role="grid"                           aria-live="off"
 │   │       │   └── Tag                               role="row" (× N selected)
 │   │       │       └── role="gridcell"
@@ -115,7 +115,7 @@ The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two
 
 ### Placeholder and Add-More Affordance
 
-The input's `placeholder` carries the "add more" hint visually:
+The input's `placeholder` can carry the "add more" hint visually:
 
 - **No selection**: placeholder shows the field label (e.g. `placeholder="Languages"`).
 - **≥ 1 tag selected**: placeholder reads `+ Add more…`.
