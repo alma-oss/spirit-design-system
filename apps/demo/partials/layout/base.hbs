@@ -95,15 +95,8 @@
       const storedTheme = readStoredTheme();
       if (storedTheme) {
         applyTheme(storedTheme, themes);
+        document.addEventListener('readystatechange', () => syncSelects(storedTheme));
       }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const currentTheme = readStoredTheme();
-        if (!currentTheme || !isThemeAvailable(currentTheme, themes)) {
-          return;
-        }
-        syncSelects(currentTheme);
-      });
 
       const allowedOriginPattern = /^https:\/\/([a-zA-Z0-9-]+\.)*supernova-docs\.io$/;
 
