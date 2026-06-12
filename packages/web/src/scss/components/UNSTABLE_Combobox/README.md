@@ -41,10 +41,6 @@ The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two
 2. The text input. Because `role="combobox"` cannot be a direct descendant of `role="grid"`, the
    input lives outside the grid div.
 
-⚠️ The DropdownPopover is rendered using absolute positioning relative to the Dropdown wrapper. Make
-sure there is enough space below the Combobox (or around it, depending on the popover placement) so
-the popover does not overflow its scrollable container or get clipped.
-
 ```html
 <div class="UNSTABLE_Combobox">
   <div class="Dropdown">
@@ -302,13 +298,36 @@ Place a clear-all `InputAddon` after the selection wrapper, inside the `InputCon
 </div>
 ```
 
-## Full Width
+## Dropdown and DropdownPopover
 
-By default, the `DropdownPopover` width is determined by its content. Add `data-spirit-fullwidthmode="all"`
-to make the popover fill the width of the `Dropdown` wrapper (i.e. match the input width).
+Customise the inner `Dropdown` and `DropdownPopover` elements directly using CSS utility classes
+and data attributes. The combobox does not set these itself, so any values you add are applied as-is.
+
+- **`DropdownPopover` element** — add a theme utility class (for example `theme-light-default`;
+  this is the default) to control the panel theme.
+- **`data-spirit-placement`** on `.DropdownPopover` — controls where the popover anchors relative
+  to the input (for example `bottom-start`).
+- **`data-spirit-fullwidthmode`** on `.DropdownPopover` — stretches the popover to the field width
+  (`off` · `mobile-only` · `all`).
+
+The following example positions the popover at `bottom-start` and expands it to full field width:
 
 ```html
-<div class="DropdownPopover placement-bottom-start" data-spirit-fullwidthmode="all" …><!-- … --></div>
+<div class="UNSTABLE_Combobox">
+  <div class="Dropdown">
+    <label class="Label" id="combobox-label" for="combobox-input">Languages</label>
+    <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
+      <!-- … -->
+    </div>
+    <div
+      class="DropdownPopover placement-bottom-start"
+      data-spirit-placement="bottom-start"
+      data-spirit-fullwidthmode="all"
+    >
+      <!-- … -->
+    </div>
+  </div>
+</div>
 ```
 
 ## Auxiliary Content in the Popover
