@@ -274,7 +274,13 @@ function initCombobox(comboboxEl) {
       );
     }
 
-    inputEl.placeholder = totalSelected === 0 ? fieldLabel : !allSelected ? '+ Add more…' : '';
+    if (totalSelected === 0) {
+      inputEl.placeholder = fieldLabel;
+    } else if (!allSelected) {
+      inputEl.placeholder = '+ Add more…';
+    } else {
+      inputEl.placeholder = '';
+    }
 
     addMoreHelper.hidden = !showAddMore;
     setAddMoreDescribed(showAddMore);
@@ -456,8 +462,6 @@ function initCombobox(comboboxEl) {
 
       // Move physical focus to the first (↓) or last (↑) visible row.
       focusRow(event.key === 'ArrowDown' ? visible[0] : visible[visible.length - 1]);
-
-      return;
     }
   });
 
@@ -473,6 +477,7 @@ function initCombobox(comboboxEl) {
       event.preventDefault();
       close();
       inputEl.focus(); // relatedTarget is inside combobox → focus listener won't re-open
+
       return;
     }
 
@@ -484,6 +489,7 @@ function initCombobox(comboboxEl) {
       } else {
         close(); // let Tab continue to the next element
       }
+
       return;
     }
 
@@ -491,6 +497,7 @@ function initCombobox(comboboxEl) {
       event.preventDefault();
       // Stay on the last item (no wrap).
       if (currentIndex < visible.length - 1) focusRow(visible[currentIndex + 1]);
+
       return;
     }
 
@@ -503,24 +510,28 @@ function initCombobox(comboboxEl) {
         inputEl.removeAttribute('aria-activedescendant');
         inputEl.focus();
       }
+
       return;
     }
 
     if (event.key === 'Home') {
       event.preventDefault();
       focusRow(visible[0]);
+
       return;
     }
 
     if (event.key === 'End') {
       event.preventDefault();
       focusRow(visible[visible.length - 1]);
+
       return;
     }
 
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       toggleRow(focused);
+
       return;
     }
 

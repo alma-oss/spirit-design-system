@@ -56,8 +56,8 @@ The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two
           aria-atomic="false"
           aria-relevant="additions"
         >
-          <div role="row" tabindex="0" class="Tag Tag--selected Tag--small color-scheme-on-selected-basic">
-            <div role="gridcell" aria-colindex="1" class="d-contents">
+          <div role="row" class="Tag Tag--selected Tag--small color-scheme-on-selected-basic">
+            <div role="gridcell" class="d-contents">
               <span>Spanish</span>
               <button
                 type="button"
