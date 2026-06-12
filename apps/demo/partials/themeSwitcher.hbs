@@ -13,4 +13,9 @@
     </div>
   </div>
 </div>
+<script>
+  if (storedTheme && isThemeAvailable(storedTheme, themes)) {
+    document.getElementById('{{id}}').value = storedTheme;
+  }
+</script>
 
