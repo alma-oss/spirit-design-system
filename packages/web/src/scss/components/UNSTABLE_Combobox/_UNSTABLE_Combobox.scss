@@ -1,12 +1,10 @@
 // 1. Sized to comfortably fit the default placeholder copy ("+ Add more…", ~11 characters).
 
 @use '../../tools/form-fields' as form-fields-tools;
-@use '../../tools/string' as spirit-string;
 @use '@tokens' as tokens;
 @use 'theme';
 
-$_full-field-name: 'UNSTABLE_Combobox';
-$_field-name: spirit-string.remove-prefix($_full-field-name, 'UNSTABLE_');
+$_field-name: 'Combobox';
 
 .UNSTABLE_Combobox {
     --#{tokens.$css-variable-prefix}combobox-input-min-width: #{theme.$input-min-width};
@@ -18,7 +16,6 @@ $_field-name: spirit-string.remove-prefix($_full-field-name, 'UNSTABLE_');
     flex: 0 0 var(--#{tokens.$css-variable-prefix}combobox-input-min-width); // 1.
     min-width: var(--#{tokens.$css-variable-prefix}combobox-input-min-width); // 1.
     padding: 0;
-    padding-inline-start: theme.$placeholder-padding-inline-start;
     font: inherit;
     color: inherit;
     border: 0;
@@ -26,7 +23,7 @@ $_field-name: spirit-string.remove-prefix($_full-field-name, 'UNSTABLE_');
     outline: 0;
 
     &::placeholder {
-        color: theme.$placeholder-color-state-default;
+        color: var(--#{tokens.$css-variable-prefix}input-container-input-placeholder-color);
         opacity: 1;
     }
 }

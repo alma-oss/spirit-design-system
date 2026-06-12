@@ -1,12 +1,14 @@
 // ⚠️ AI-GENERATED CODE, DO NOT COPY-PASTE.
 
+import Dropdown from '../../../js/Dropdown';
+
 // UNSTABLE_Combobox — demo interaction script
 //
 // Responsibilities:
 //   - Filter grid rows as the user types
 //   - Toggle aria-selected on rows (click or Enter/Space)
 //   - Render/remove Tag rows in the selection grid
-//   - Manage aria-activedescendant for keyboard navigation (points to role="row" in the popup grid)
+//   - Keyboard navigation: Arrow keys move physical focus into the popover; aria-activedescendant tracks the active row
 //   - Clear-all button: deselect all rows, remove all tags
 //   - Popover open/close: Escape, click-outside, Tab-out
 //   - Hide the "+ Add more…" affordance when every option is already selected
@@ -27,7 +29,6 @@ const SELECTOR_TAG_DESCRIPTION = '[data-spirit-combobox-tag-description]';
 const SELECTOR_EMPTY_STATE = '[data-spirit-combobox-empty-state]';
 const SELECTOR_LOADING = '[data-spirit-combobox-loading]';
 
-const ATTR_ACTIVE = 'data-spirit-combobox-active';
 const ATTR_ASYNC = 'data-spirit-combobox-async';
 
 const ID_TAG_TEMPLATE = 'combobox-tag-template';
@@ -45,33 +46,9 @@ function getVisibleRows(popupEl) {
   return getRows(popupEl).filter((row) => row.style.display !== 'none');
 }
 
-function getActiveRow(popupEl) {
-  return popupEl.querySelector(`[${ATTR_ACTIVE}="true"]`);
-}
-
-function clearActive(popupEl) {
-  popupEl.querySelectorAll(`[${ATTR_ACTIVE}]`).forEach((el) => el.removeAttribute(ATTR_ACTIVE));
-}
-
 function setRowSelected(rowEl, selected) {
   rowEl.setAttribute('aria-selected', selected ? 'true' : 'false');
   rowEl.classList.toggle('Item--selected', selected);
-}
-
-function setActive(inputEl, rowEl) {
-  const popupEl = document.getElementById(inputEl.getAttribute('aria-controls'));
-
-  clearActive(popupEl);
-
-  if (!rowEl) {
-    inputEl.removeAttribute('aria-activedescendant');
-
-    return;
-  }
-
-  rowEl.setAttribute(ATTR_ACTIVE, 'true');
-  rowEl.scrollIntoView({ block: 'nearest' });
-  inputEl.setAttribute('aria-activedescendant', rowEl.id);
 }
 
 function getRowLabel(rowEl) {
@@ -216,20 +193,6 @@ function setLoading(comboboxEl, popupEl, isLoading) {
   });
 }
 
-// ─── Popup open/close ─────────────────────────────────────────────────────────
-
-function openPopup(inputEl, popupEl) {
-  popupEl.classList.add('is-open');
-  inputEl.setAttribute('aria-expanded', 'true');
-}
-
-function closePopup(inputEl, popupEl) {
-  popupEl.classList.remove('is-open');
-  inputEl.setAttribute('aria-expanded', 'false');
-  clearActive(popupEl);
-  inputEl.removeAttribute('aria-activedescendant');
-}
-
 // ─── Init per instance ───────────────────────────────────────────────────────
 
 function initCombobox(comboboxEl) {
@@ -311,7 +274,7 @@ function initCombobox(comboboxEl) {
       );
     }
 
-    inputEl.placeholder = totalSelected === 0 ? fieldLabel : '+ Add more…';
+    inputEl.placeholder = totalSelected === 0 ? fieldLabel : !allSelected ? '+ Add more…' : '';
 
     addMoreHelper.hidden = !showAddMore;
     setAddMoreDescribed(showAddMore);
@@ -351,6 +314,24 @@ function initCombobox(comboboxEl) {
     return;
   }
 
+  // Wire up the Dropdown plugin for popup open/close so events and state flow through
+  // the same channel as Picker and other Dropdown-based components.
+  // ID is assigned dynamically so the HTML does not need to change.
+  const listboxId = inputEl.getAttribute('aria-controls');
+
+  if (!popupEl.id) popupEl.id = `${inputEl.id}-popover`;
+  inputEl.dataset.spiritTarget = `#${popupEl.id}`;
+
+  // Dropdown.getOptions() reads autoClose from dataset.spiritAutoclose, not from the constructor
+  // config. Set it on the element so that Dropdown's built-in outside-click handler is disabled —
+  // the combobox manages its own click-outside close logic below.
+  inputEl.dataset.spiritAutoclose = 'false';
+
+  const dropdown = new Dropdown(inputEl);
+
+  // Make popup option rows keyboard-focusable so physical focus can move into the popover.
+  getRows(popupEl).forEach((row) => row.setAttribute('tabindex', '-1'));
+
   // ── Row toggle ────────────────────────────────────────────────────────────
 
   function toggleRow(rowEl) {
@@ -377,13 +358,27 @@ function initCombobox(comboboxEl) {
   // ── Popover helpers ───────────────────────────────────────────────────────
 
   function open() {
-    openPopup(inputEl, popupEl);
+    dropdown.show();
+    // Dropdown.updateTriggerElement sets aria-controls to the data-spirit-target CSS selector
+    // (e.g. "#combobox-input-popover") which is wrong for ARIA combobox — aria-controls must be
+    // a plain IDREF pointing to the role="grid" listbox, not the DropdownPopover container.
+    inputEl.setAttribute('aria-controls', listboxId);
+  }
+
+  // Focus a popup row and maintain aria-activedescendant on the input for AT.
+  function focusRow(rowEl) {
+    if (!rowEl) return;
+    rowEl.focus();
+    rowEl.scrollIntoView({ block: 'nearest' });
+    inputEl.setAttribute('aria-activedescendant', rowEl.id);
   }
 
   function close() {
     clearTimeout(asyncTimer);
     setLoading(comboboxEl, popupEl, false);
-    closePopup(inputEl, popupEl);
+    dropdown.hide();
+    inputEl.setAttribute('aria-controls', listboxId);
+    inputEl.removeAttribute('aria-activedescendant');
   }
 
   // ── Event listeners ───────────────────────────────────────────────────────
@@ -398,18 +393,24 @@ function initCombobox(comboboxEl) {
   });
 
   document.addEventListener('click', (event) => {
-    if (!comboboxEl.contains(event.target)) {
+    // Use composedPath instead of contains() so that clicks on elements removed from the DOM
+    // during the event (e.g. a tag's close button that triggers renderSelection()) still
+    // correctly register as "inside the combobox" and do not close the popup.
+    if (!event.composedPath().includes(comboboxEl)) {
       close();
     }
   });
 
-  inputEl.addEventListener('focus', () => open());
+  inputEl.addEventListener('focus', (event) => {
+    // Do not re-open when focus returns from a popup row or tag (keyboard navigation
+    // moving back to the input should not reopen a popup that was just closed).
+    if (event.relatedTarget && comboboxEl.contains(event.relatedTarget)) return;
+    open();
+  });
   inputEl.addEventListener('click', () => open());
 
   inputEl.addEventListener('input', () => {
     open();
-    clearActive(popupEl);
-    inputEl.removeAttribute('aria-activedescendant');
 
     if (isAsync && inputEl.value.trim()) {
       clearTimeout(asyncTimer);
@@ -427,6 +428,7 @@ function initCombobox(comboboxEl) {
 
   // ── Keyboard navigation ───────────────────────────────────────────────────
 
+  // Input: Escape/Tab close; ArrowDown/Up move physical focus into the popover.
   inputEl.addEventListener('keydown', (event) => {
     const isOpen = popupEl.classList.contains('is-open');
 
@@ -452,46 +454,82 @@ function initCombobox(comboboxEl) {
 
       if (!visible.length) return;
 
-      const current = getActiveRow(popupEl);
-      const currentIndex = visible.indexOf(current);
-      let nextIndex;
+      // Move physical focus to the first (↓) or last (↑) visible row.
+      focusRow(event.key === 'ArrowDown' ? visible[0] : visible[visible.length - 1]);
 
-      if (event.key === 'ArrowDown') {
-        nextIndex = current ? (currentIndex + 1) % visible.length : 0;
+      return;
+    }
+  });
+
+  // Popover: keyboard navigation while physical focus is on a popup row.
+  popupEl.addEventListener('keydown', (event) => {
+    const visible = getVisibleRows(popupEl);
+    const focused = document.activeElement;
+    const currentIndex = visible.indexOf(focused);
+
+    if (currentIndex === -1) return; // focus is not on a visible popup row
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      close();
+      inputEl.focus(); // relatedTarget is inside combobox → focus listener won't re-open
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      if (event.shiftKey) {
+        event.preventDefault();
+        close();
+        inputEl.focus();
       } else {
-        nextIndex = current ? (currentIndex - 1 + visible.length) % visible.length : visible.length - 1;
+        close(); // let Tab continue to the next element
       }
+      return;
+    }
 
-      setActive(inputEl, visible[nextIndex]);
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      // Stay on the last item (no wrap).
+      if (currentIndex < visible.length - 1) focusRow(visible[currentIndex + 1]);
+      return;
+    }
 
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (currentIndex > 0) {
+        focusRow(visible[currentIndex - 1]);
+      } else {
+        // First item: return focus to the input (focus listener won't re-open).
+        inputEl.removeAttribute('aria-activedescendant');
+        inputEl.focus();
+      }
       return;
     }
 
     if (event.key === 'Home') {
       event.preventDefault();
-      const visible = getVisibleRows(popupEl);
-
-      setActive(inputEl, visible[0] || null);
-
+      focusRow(visible[0]);
       return;
     }
 
     if (event.key === 'End') {
       event.preventDefault();
-      const visible = getVisibleRows(popupEl);
-
-      setActive(inputEl, visible[visible.length - 1] || null);
-
+      focusRow(visible[visible.length - 1]);
       return;
     }
 
     if (event.key === 'Enter' || event.key === ' ') {
-      const active = getActiveRow(popupEl);
+      event.preventDefault();
+      toggleRow(focused);
+      return;
+    }
 
-      if (active) {
-        event.preventDefault();
-        toggleRow(active);
-      }
+    // Printable character: return focus to input so the user can continue filtering.
+    if (event.key.length === 1 && !event.ctrlKey && !event.altKey && !event.metaKey) {
+      inputEl.value += event.key;
+      inputEl.removeAttribute('aria-activedescendant');
+      inputEl.focus();
+      filterRows(popupEl, inputEl.value);
     }
   });
 
@@ -504,19 +542,6 @@ function initCombobox(comboboxEl) {
 
     event.preventDefault(); // Keep focus on input
     toggleRow(row);
-  });
-
-  popupEl.addEventListener('mousemove', (event) => {
-    const row = event.target.closest('[role="row"]');
-
-    if (row && popupEl.contains(row)) {
-      setActive(inputEl, row);
-    }
-  });
-
-  popupEl.addEventListener('mouseleave', () => {
-    clearActive(popupEl);
-    inputEl.removeAttribute('aria-activedescendant');
   });
 
   // ── Clear all ────────────────────────────────────────────────────────────

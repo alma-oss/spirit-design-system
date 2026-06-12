@@ -5,6 +5,10 @@
 Combobox is a form control that allows users to filter a list of options by typing and selecting multiple
 items, displaying the selected values as removable tags.
 
+> **JS interaction is not part of Spirit.** There is a demo-only example
+> showing one possible interaction pattern. In your project, implement the keyboard handling,
+> filtering, and selection management to match your own requirements and framework.
+
 ## Basic Usage
 
 Combobox is built on top of the [Dropdown][dropdown] component. It consists of a label, an input
@@ -12,11 +16,11 @@ container holding the tag selection grid with an inline text input, and a dropdo
 filterable option list.
 
 ```txt
-.UNSTABLE_Combobox
+UNSTABLE_Combobox
 ├── Dropdown
 │   ├── Label
 │   ├── InputContainer                                role="group"
-│   │   └── .UNSTABLE_ComboboxSelection               (flex wrapper)
+│   │   └── UNSTABLE_ComboboxSelection               (wrapper)
 │   │       ├── role="grid"                           aria-live="off"
 │   │       │   └── Tag                               role="row" (× N selected)
 │   │       │       └── role="gridcell"
@@ -25,18 +29,17 @@ filterable option list.
 │   │       └── input[role="combobox"]                (inline, always last child)
 │   └── DropdownPopover
 │       └── Stack                                     role="grid" · aria-multiselectable="true"
-│           └── .Item                                 role="row" (× N options)
+│           └── Item                                  role="row" (× N options)
 │               └── role="gridcell"
 ├── ValidationText                                    (optional)
 └── HelperText                                        (optional)
 ```
 
-The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a flex container holding two siblings:
+The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two siblings:
 
-1. A `role="grid"` div with `display: contents` — its tag rows participate in the parent flex layout
-   while still being semantically grouped as a grid for assistive technology.
+1. A `role="grid"` div — its tag rows are semantically grouped as a grid for assistive technology.
 2. The text input. Because `role="combobox"` cannot be a direct descendant of `role="grid"`, the
-   input lives outside the grid div as a flex sibling.
+   input lives outside the grid div.
 
 ⚠️ The DropdownPopover is rendered using absolute positioning relative to the Dropdown wrapper. Make
 sure there is enough space below the Combobox (or around it, depending on the popover placement) so
@@ -56,7 +59,23 @@ the popover does not overflow its scrollable container or get clipped.
           aria-live="off"
           aria-atomic="false"
           aria-relevant="additions"
-        ></div>
+        >
+          <div role="row" tabindex="0" class="Tag Tag--selected Tag--small color-scheme-on-selected-basic">
+            <div role="gridcell" aria-colindex="1" class="d-contents">
+              <span>Spanish</span>
+              <button
+                type="button"
+                class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
+                aria-label="Remove Spanish"
+                tabindex="-1"
+              >
+                <svg class="Icon" width="16" height="16" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
         <input
           type="text"
           id="combobox-input"
@@ -81,6 +100,9 @@ the popover does not overflow its scrollable container or get clipped.
         aria-labelledby="combobox-label"
         aria-multiselectable="true"
       >
+        <div role="row" id="opt-cs" aria-selected="true" class="Item">
+          <div role="gridcell"><span class="Label Label--item">Spanish</span></div>
+        </div>
         <div role="row" id="opt-cs" aria-selected="false" class="Item">
           <div role="gridcell"><span class="Label Label--item">Czech</span></div>
         </div>
@@ -177,14 +199,14 @@ when the user focuses the field.
     <label class="Label" id="combobox-label" for="combobox-input">Languages</label>
     <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
       <div class="UNSTABLE_ComboboxSelection">
-        <div role="grid" … class="d-contents"></div>
+        <div role="grid" … class="d-contents"><!-- … --></div>
         <input
           type="text"
           id="combobox-input"
           role="combobox"
           aria-describedby="combobox-helper"
           class="UNSTABLE_Combobox__input"
-          <!-- … -->
+          …
         />
       </div>
     </div>
@@ -207,16 +229,20 @@ Available validation states: `danger`, `warning`, `success`.
 <div class="UNSTABLE_Combobox">
   <div class="Dropdown">
     <label class="Label Label--danger" id="combobox-label" for="combobox-input">Languages</label>
-    <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger" role="group" aria-label="Languages">
+    <div
+      class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger"
+      role="group"
+      aria-label="Languages"
+    >
       <div class="UNSTABLE_ComboboxSelection">
-        <div role="grid" … class="d-contents"></div>
+        <div role="grid" … class="d-contents"><!-- … --></div>
         <input
           type="text"
           id="combobox-input"
           role="combobox"
           aria-describedby="combobox-validation"
           class="UNSTABLE_Combobox__input"
-          <!-- … -->
+          …
         />
       </div>
     </div>
@@ -237,17 +263,14 @@ and the `disabled` attribute on the input to disable the Combobox.
 <div class="UNSTABLE_Combobox UNSTABLE_Combobox--disabled">
   <div class="Dropdown">
     <label class="Label Label--disabled" id="combobox-label" for="combobox-input">Languages</label>
-    <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled" role="group" aria-label="Languages">
+    <div
+      class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled"
+      role="group"
+      aria-label="Languages"
+    >
       <div class="UNSTABLE_ComboboxSelection">
-        <div role="grid" … class="d-contents"></div>
-        <input
-          type="text"
-          id="combobox-input"
-          role="combobox"
-          class="UNSTABLE_Combobox__input"
-          disabled
-          <!-- … -->
-        />
+        <div role="grid" … class="d-contents"><!-- … --></div>
+        <input type="text" id="combobox-input" role="combobox" class="UNSTABLE_Combobox__input" disabled … />
       </div>
     </div>
     <div class="DropdownPopover placement-bottom-start" …><!-- … --></div>
@@ -279,7 +302,16 @@ Place a clear-all `InputAddon` after the selection wrapper, inside the `InputCon
 </div>
 ```
 
-## Auxiliary Content in the Popup
+## Full Width
+
+By default, the `DropdownPopover` width is determined by its content. Add `data-spirit-fullwidthmode="all"`
+to make the popover fill the width of the `Dropdown` wrapper (i.e. match the input width).
+
+```html
+<div class="DropdownPopover placement-bottom-start" data-spirit-fullwidthmode="all" …><!-- … --></div>
+```
+
+## Auxiliary Content in the Popover
 
 The `Stack` element inside `DropdownPopover` carries `role="grid"`, which only permits
 `role="row"` as direct owned elements (see [WAI-ARIA `grid` role][w3-aria-grid]). Any content
@@ -317,26 +349,26 @@ is hidden by default:
 
 ### Selection Area: Nested `role="grid"`
 
-The `.UNSTABLE_ComboboxSelection` wrapper is a flex container and carries no ARIA role; the inner
-`role="grid"` div with `display: contents` provides the grid semantics (keyboard navigation contract
-with roving `tabindex`, support for interactive content inside rows). The input sits as a sibling
-of the grid div so that `role="combobox"` is not a direct descendant of `role="grid"`.
+The `.UNSTABLE_ComboboxSelection` wrapper carries no ARIA role; the inner `role="grid"` div provides
+the grid semantics (keyboard navigation contract with roving `tabindex`, support for interactive
+content inside rows). The input sits as a sibling of the grid div so that `role="combobox"` is not
+a direct descendant of `role="grid"`.
 
-### Popup: `role="grid"` with `aria-multiselectable`
+### Popover: `role="grid"` with `aria-multiselectable`
 
 The `DropdownPopover` element only handles popover positioning. The inner `Stack` element carries
-the grid semantics (`role="grid"`, `aria-multiselectable="true"`, the popup `id`, and
+the grid semantics (`role="grid"`, `aria-multiselectable="true"`, the popover `id`, and
 `aria-labelledby`) — that is where the `role="row"` option children actually live. Auxiliary
 children of the popover (like the loading indicator) sit alongside the Stack so they are not
 interpreted as grid rows.
 
 The `<input role="combobox">` manages `aria-expanded`, `aria-controls`, and
-`aria-activedescendant` to wire the input to the popup grid in accordance with the ARIA
+`aria-activedescendant` to wire the input to the popover grid in accordance with the ARIA
 combobox pattern.
 
 For more information about the ARIA combobox pattern, please follow this article [Editable Combobox with Grid Popup Example][w3-combobox-grid-popup].
 
-### Popup: Custom Content
+### Popover: Custom Content
 
 Any other supplementary content that is not selectable should be placed outside the `role="grid"` Stack:
 
@@ -350,6 +382,27 @@ Any other supplementary content that is not selectable should be placed outside 
 </div>
 ```
 
+### Keyboard Interaction
+
+| Key                            | Context           | Action                                                                               |
+| ------------------------------ | ----------------- | ------------------------------------------------------------------------------------ |
+| Arrow Down                     | Text input        | Opens the popover (if closed); moves focus to the first visible option               |
+| Arrow Up                       | Text input        | Opens the popover (if closed); moves focus to the last visible option                |
+| Arrow Down                     | Option in popover | Moves focus to the next option; stays on the last option (no wrap)                   |
+| Arrow Up                       | Option in popover | Moves focus to the previous option; returns focus to the input from the first option |
+| Home                           | Option in popover | Moves focus to the first visible option                                              |
+| End                            | Option in popover | Moves focus to the last visible option                                               |
+| Space, Enter                   | Option in popover | Toggles selection of the focused option                                              |
+| Escape                         | Text input        | Closes the popover                                                                   |
+| Escape                         | Option in popover | Closes the popover; returns focus to the input                                       |
+| Tab                            | Option in popover | Closes the popover; moves focus to the next focusable element                        |
+| Shift + Tab                    | Option in popover | Closes the popover; returns focus to the input                                       |
+| Any printable character        | Option in popover | Returns focus to the input; appends the character; filters the list                  |
+| Arrow Left / Right / Up / Down | Tag               | Moves focus between tags (roving tabindex)                                           |
+| Home                           | Tag               | Moves focus to the first tag                                                         |
+| End                            | Tag               | Moves focus to the last tag                                                          |
+| Delete, Backspace              | Tag               | Removes the focused tag                                                              |
+
 ### ARIA Attributes
 
 | Attribute               | Element              | Purpose                                                             |
@@ -360,12 +413,12 @@ Any other supplementary content that is not selectable should be placed outside 
 | `role="gridcell"`       | Tag / option cell    | Contains the label and interactive controls                         |
 | `aria-live="off"`       | Selection inner grid | Announces added tags to screen readers without interrupting         |
 | `role="combobox"`       | Text input           | Identifies the text input as a combobox                             |
-| `aria-haspopup="grid"`  | Text input           | Indicates the input controls a grid popup                           |
-| `aria-expanded`         | Text input           | Indicates whether the popup is open                                 |
-| `aria-controls`         | Text input           | Points to the popup grid element                                    |
+| `aria-haspopup="grid"`  | Text input           | Indicates the input controls a grid popover                         |
+| `aria-expanded`         | Text input           | Indicates whether the popover is open                               |
+| `aria-controls`         | Text input           | Points to the popover grid element                                  |
 | `aria-autocomplete`     | Text input           | Set to `"list"` to indicate filtered suggestions                    |
 | `aria-activedescendant` | Text input           | Points to the currently active option row                           |
-| `aria-multiselectable`  | Popup grid (Stack)   | Indicates multiple rows can be selected simultaneously              |
+| `aria-multiselectable`  | Popover grid (Stack) | Indicates multiple rows can be selected simultaneously              |
 | `aria-selected`         | Option row           | Marks whether the option is currently selected                      |
 | `aria-describedby`      | Tag / text input     | Links to the removal instruction / helper text / validation message |
 

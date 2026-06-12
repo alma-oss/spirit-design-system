@@ -5,6 +5,10 @@
 Picker is a form control that allows users to select one or more options from a dropdown and displays the
 selected values as tags.
 
+> **JS interaction is not part of Spirit.** There is a demo-only example
+> showing one possible interaction pattern. In your project, implement the keyboard handling,
+> filtering, and selection management to match your own requirements and framework.
+
 ## Basic Usage
 
 Picker is built on top of the [Dropdown][dropdown] component. It consists of a label, an input container
