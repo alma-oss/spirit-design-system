@@ -63,10 +63,6 @@ For detailed API references, examples, and common mistakes:
 
 - **UncontrolledCollapse: `hideOnCollapse` prop** - Replaced by `isDisposable`. Always use `isDisposable` instead.
 
-### Deprecated Components
-
-- **Header component** - Use `UNSTABLE_Header` instead. If you encounter "Header" in Figma or user requests, import and use the `UNSTABLE_Header` family of components.
-
 ### Already Migrated (Current Best Practices)
 
 - **Flex direction**: Use `horizontal`/`vertical` (NOT `row`/`column`) - this is the current standard.
@@ -368,7 +364,7 @@ Before finalizing code:
 - \[ \] Spacing values read from Figma autolayout properties
 - \[ \] Color tokens read exactly from Figma layer properties
 - \[ \] **No deprecated props used** (check: hideOnCollapse, row/column direction values)
-- \[ \] **No deprecated components used** (Header → use UNSTABLE_Header)
+- \[ \] **No deprecated components used** (check: hideOnCollapse, row/column direction values)
 
 **Layout:**
 
