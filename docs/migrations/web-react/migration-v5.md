@@ -17,6 +17,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [Button and ButtonLink: `isBlock` Prop Removed](#button-and-buttonlink-isblock-prop-removed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
+  - [Header: `UNSTABLE_Header` has been stabilized and renamed to `Header`, previous implementation has been removed](#header-stabilization-of-unstable_header-to-header-previous-implementation-removed)
 
 ## Component Changes
 
@@ -249,10 +250,59 @@ The feature flag enabling the new `Tag` appearance was removed and the new appea
 You can now safely delete the `spirit-feature-enable-v5-tag-appearance` CSS class from any wrapper
 elements in your project as it has no effect.
 
+### Header: Stabilization of `UNSTABLE_Header` to `Header`, Previous Implementation Removed
+
+`UNSTABLE_Header` and `UNSTABLE_HeaderLogo` have been stabilized and renamed to `Header` and `HeaderLogo`.
+The previous `Header` component (with `HeaderNav`, `HeaderDialog`, `HeaderMobileActions`, etc.) has been **removed**.
+
+#### Migration from `UNSTABLE_Header` to `Header`
+
+We provide a codemod to automatically rename `UNSTABLE_Header` → `Header` and `UNSTABLE_HeaderLogo` → `HeaderLogo`
+in your imports and JSX:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/header-unstable-to-stable
+```
+
+<details>
+<summary>Manual Migration</summary>
+
+**Rename imports and JSX tags:**
+
+```diff
+- import { UNSTABLE_Header, UNSTABLE_HeaderLogo } from '@alma-oss/spirit-web-react';
++ import { Header, HeaderLogo } from '@alma-oss/spirit-web-react';
+
+- <UNSTABLE_Header hasBottomDivider>
+-   <UNSTABLE_HeaderLogo href="/">Logo</UNSTABLE_HeaderLogo>
+- </UNSTABLE_Header>
++ <Header hasBottomDivider>
++   <HeaderLogo href="/">Logo</HeaderLogo>
++ </Header>
+```
+
+**Rename TypeScript types:**
+
+```diff
+- import { UnstableHeaderProps, SpiritHeaderLogoProps } from '@alma-oss/spirit-web-react';
++ import { HeaderProps, SpiritHeaderLogoProps } from '@alma-oss/spirit-web-react';
+```
+
+</details>
+
+#### Migrating from the Previous `Header`
+
+If you were using the previous `Header` with its sub-components (`HeaderNav`, `HeaderDialog`,
+`HeaderMobileActions`, etc.), migrate to a composition using the current `Header`, `Navigation`,
+and `Drawer` components.
+
+See [Header README][readme-header] for full composition examples.
+
 ---
 
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
 
-[migration-guide-web]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/
+[migration-guide-web]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md
 [readme-codemods]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
+[readme-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Header/README.md

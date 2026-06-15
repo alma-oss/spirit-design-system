@@ -1,6 +1,6 @@
 'use client';
 
-import { Container, Flex, UNSTABLE_Header, UNSTABLE_HeaderLogo } from '@alma-oss/spirit-web-react';
+import { Container, Flex, Header as SpiritHeader, HeaderLogo } from '@alma-oss/spirit-web-react';
 import { Menu } from '@local/ui/Menu';
 import SpiritLogo from '@local/ui/SpiritLogo';
 import NextLink from 'next/link';
@@ -25,20 +25,20 @@ interface HeaderProps {
 }
 
 const Header = ({ disableClientRouting = false }: HeaderProps) => (
-  <UNSTABLE_Header hasBottomDivider>
+  <SpiritHeader hasBottomDivider>
     <Container isFluid>
       <Flex alignmentX="left" spacingX="space-1000">
-        <UNSTABLE_HeaderLogo
+        <HeaderLogo
           elementType={disableClientRouting ? 'a' : NextLink}
           href={routes.homepage}
           aria-label="Spirit Development Preview"
         >
           <SpiritLogo />
-        </UNSTABLE_HeaderLogo>
+        </HeaderLogo>
         <Menu />
       </Flex>
     </Container>
-  </UNSTABLE_Header>
+  </SpiritHeader>
 );
 
 export default Header;
