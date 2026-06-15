@@ -1,9 +1,0 @@
-@use '@tokens' as tokens;
-@use '../../tools/units';
-
-$height: units.px-to-rem(72px);
-$border-width: tokens.$border-width-100;
-$border-style: solid;
-
-$border-color: tokens.$component-header-border;
-$background-color: tokens.$component-header-background;

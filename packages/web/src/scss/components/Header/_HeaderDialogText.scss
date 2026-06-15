@@ -1,9 +1,0 @@
-@use 'theme';
-
-.HeaderDialogText {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    padding: theme.$header-dialog-text-padding-y theme.$header-dialog-text-padding-x;
-}
