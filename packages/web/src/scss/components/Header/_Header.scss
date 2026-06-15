@@ -1,24 +1,24 @@
-@use '../../tools/typography';
+// 1. In order to have the border be outside of the height of the header, we need to use `content-box`
+//    for the box-sizing. The box-sizing is inherited by the children, so we need to reset it to `border-box`.
+
+@use '@tokens' as tokens;
 @use 'theme';
 
-// @deprecated Will be removed in the next major version.
 .Header {
-    @include typography.generate(theme.$header-typography);
+    --#{tokens.$css-variable-prefix}header-height: #{theme.$height};
+    --#{tokens.$css-variable-prefix}navigation-height: var(--#{tokens.$css-variable-prefix}header-height);
 
-    display: flex;
     flex: none;
-    gap: theme.$header-gap;
-    align-items: center;
-    height: theme.$header-height;
-    padding-inline: theme.$header-padding-x;
-    background-color: theme.$header-background-color;
+    box-sizing: content-box; // 1.
+    height: var(--#{tokens.$css-variable-prefix}header-height);
+    background-color: theme.$background-color;
 }
 
-.Header--simple {
-    justify-content: center;
-    height: theme.$header-simple-height;
+.Header--bottomDivider {
+    border-bottom: theme.$border-width theme.$border-style theme.$border-color;
 }
 
-.Header--transparent {
-    background-color: transparent;
+// stylelint-disable-next-line selector-max-universal -- 1.
+.Header > * {
+    box-sizing: border-box;
 }
