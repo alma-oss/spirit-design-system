@@ -28,7 +28,7 @@ export const COMPONENT_CATEGORIES: Record<string, string[]> = {
   'Media and Icons': ['Icon', 'IconBox', 'PartnerLogo', 'ProductLogo'],
   Navigation: ['Breadcrumbs', 'Dropdown', 'Navigation', 'Pagination', 'SegmentedControl', 'Tabs'],
   Overlays: ['Dialog', 'Drawer', 'Modal'],
-  Structure: ['Footer', 'Header', 'UNSTABLE_Header'],
+  Structure: ['Footer', 'Header'],
   Typography: ['Heading', 'Text'],
   Utilities: ['Hidden', 'NoSsr', 'Truncate', 'VisuallyHidden'],
 };
