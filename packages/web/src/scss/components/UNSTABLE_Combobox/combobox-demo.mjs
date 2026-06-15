@@ -439,8 +439,6 @@ function initCombobox(comboboxEl) {
   // Wire up the Dropdown plugin for popup open/close so events and state flow through
   // the same channel as Picker and other Dropdown-based components.
   // ID is assigned dynamically so the HTML does not need to change.
-  const listboxId = inputEl.getAttribute('aria-controls');
-
   if (!popupEl.id) popupEl.id = `${inputEl.id}-popover`;
   inputEl.dataset.spiritTarget = `#${popupEl.id}`;
 
@@ -448,6 +446,11 @@ function initCombobox(comboboxEl) {
   // config. Set it on the element so that Dropdown's built-in outside-click handler is disabled —
   // the combobox manages its own click-outside close logic below.
   inputEl.dataset.spiritAutoclose = 'false';
+
+  // Let Dropdown own the Escape key (close + return focus to the input). Arrow keys stay with the
+  // combobox: Dropdown's keyboard handler ignores them on input triggers, and the combobox needs
+  // its own roving focus + aria-activedescendant navigation.
+  inputEl.dataset.spiritDropdownKeyboard = 'true';
 
   const dropdown = new Dropdown(inputEl);
 
@@ -483,12 +486,6 @@ function initCombobox(comboboxEl) {
 
   function open() {
     dropdown.show();
-    // Dropdown.updateTriggerElement sets aria-controls to the data-spirit-target CSS selector
-    // (e.g. "#combobox-input-popover") which is wrong for ARIA combobox — aria-controls must be
-    // a plain IDREF pointing to the options widget, not the DropdownPopover container.
-    if (listboxId) {
-      inputEl.setAttribute('aria-controls', listboxId);
-    }
   }
 
   function clearVisualActiveControls() {
@@ -590,16 +587,21 @@ function initCombobox(comboboxEl) {
     inputEl.focus();
   }
 
-  function close() {
+  // Combobox-specific teardown that the generic Dropdown.hide() does not perform. Hanging it off the
+  // hide event means it runs no matter how the popover is closed — including Dropdown's own Escape.
+  popupEl.addEventListener('hide.dropdown', () => {
     clearTimeout(asyncTimer);
     setLoading(comboboxEl, popupEl, false);
-    dropdown.hide();
-    if (listboxId) {
-      inputEl.setAttribute('aria-controls', listboxId);
-    }
     inputEl.removeAttribute('aria-activedescendant');
     clearVisualActiveControls();
     activeNestedControlIndex = null;
+  });
+
+  function close() {
+    // The hide.dropdown listener performs the combobox-specific teardown (async timer, loading
+    // state, aria-activedescendant, visual active state) so it runs for every close path,
+    // including Dropdown's Escape.
+    dropdown.hide();
   }
 
   // ── Event listeners ───────────────────────────────────────────────────────
@@ -652,12 +654,7 @@ function initCombobox(comboboxEl) {
     const isOpen = popupEl.classList.contains('is-open');
     const hasActiveDescendant = Boolean(inputEl.getAttribute('aria-activedescendant'));
 
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      close();
-
-      return;
-    }
+    // Escape is handled by the Dropdown plugin (close + return focus to the input).
 
     if (event.key === 'Tab') {
       close();
