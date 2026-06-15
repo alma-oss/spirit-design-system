@@ -30,10 +30,6 @@ We are providing a [codemod][codemod-flex] to assist with this change.
 - `<Flex direction="column" />` → `<Flex direction="vertical" />`
 - `<Flex direction={{ mobile: 'column', tablet: 'row' }} />` → `<Flex direction={{ mobile: 'vertical', tablet: 'horizontal' }} />`
 
-### Header
-
-The `Header` component is deprecated, please use the `UNSTABLE_Header` component instead.
-
 ### FileUploader
 
 The `FileUploader` component and its subcomponents are deprecated. Use `UNSTABLE_FileUpload` and `UNSTABLE_File` instead. `UNSTABLE_FileUpload` is visual-first; you own queue handling, validation, and form integration.

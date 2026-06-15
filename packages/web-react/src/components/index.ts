@@ -66,7 +66,6 @@ export * from './Tooltip';
 export * from './Truncate';
 export * from './UNSTABLE_File';
 export * from './UNSTABLE_FileUpload';
-export * from './UNSTABLE_Header';
 export * from './UNSTABLE_Picker';
 export * from './UNSTABLE_Table';
 export * from './ValidationText';

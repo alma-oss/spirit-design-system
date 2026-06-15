@@ -3,39 +3,26 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import { ProductLogo } from '../../ProductLogo';
 import { defaultSvgLogo } from '../../ProductLogo/demo/ProductLogoDefault';
-import Header from '../Header';
 import HeaderLogo from '../HeaderLogo';
 import ReadMe from '../README.md?raw';
 
-const meta: Meta<typeof Header> = {
+const meta: Meta<typeof HeaderLogo> = {
   title: 'Components/Header',
-  component: Header,
+  component: HeaderLogo,
   parameters: {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,
     },
   },
-  argTypes: {
-    hasBottomDivider: {
-      control: 'boolean',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
-  },
   args: {
-    hasBottomDivider: false,
-    children: (
-      <HeaderLogo href="/" aria-label="JobBoard homepage">
-        <ProductLogo>{defaultSvgLogo}</ProductLogo>
-      </HeaderLogo>
-    ),
+    children: <ProductLogo>{defaultSvgLogo}</ProductLogo>,
+    'aria-label': 'JobBoard homepage',
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof Header>;
+type Story = StoryObj<typeof HeaderLogo>;
 
-export const Playground: Story = {
-  name: 'Header',
+export const HeaderLogoPlayground: Story = {
+  name: 'HeaderLogo',
 };

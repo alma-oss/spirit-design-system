@@ -94,7 +94,7 @@ It can obtain `isSelected` or `isDisabled` states by adding the respective props
 
 ℹ️ Please note that in the `isDisabled` state the `NavigationAction` will be a `span` tag.
 
-If the `NavigationAction` is inside a [`UNSTABLE_Header`][web-react-unstable-header] component, it will
+If the `NavigationAction` is inside a [`Header`][web-react-header] component, it will
 inherit the height of the `Header`.
 
 ### API
@@ -234,4 +234,4 @@ With Buttons:
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
-[web-react-unstable-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Header/README.md
+[web-react-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Header/README.md
