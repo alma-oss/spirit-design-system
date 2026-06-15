@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
@@ -13,19 +13,28 @@ import Header from '../Header';
 describe('Header', () => {
   classNamePrefixProviderTest(Header, 'Header');
 
-  stylePropsTest((props) => <Header {...props} data-testid="header-test" />, 'header-test');
+  stylePropsTest(Header);
 
-  restPropsTest((props) => <Header {...props} />, 'header');
+  restPropsTest(Header, 'header');
 
   validHtmlAttributesTest(Header);
 
   ariaAttributesTest(Header);
 
-  it('should render text children', () => {
-    const dom = render(<Header id="test">Hello World</Header>);
+  it('should have default classname', () => {
+    render(<Header>Content</Header>);
 
-    const element = dom.container.querySelector('header') as HTMLElement;
+    const header = screen.getByRole('banner');
 
-    expect(element.textContent).toBe('Hello World');
+    expect(header).toHaveClass('Header');
+  });
+
+  it('should have bottom divider classname', () => {
+    render(<Header hasBottomDivider>Content</Header>);
+
+    const header = screen.getByRole('banner');
+
+    expect(header).toHaveClass('Header');
+    expect(header).toHaveClass('Header--bottomDivider');
   });
 });

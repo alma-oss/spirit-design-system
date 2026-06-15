@@ -719,14 +719,6 @@
       "require": "./dist/components/UNSTABLE_FileUpload/index.cjs",
       "default": "./dist/components/UNSTABLE_FileUpload/index.js"
     },
-    "./components/UNSTABLE_Header": {
-      "types": "./dist/components/UNSTABLE_Header/index.d.ts",
-      "development": "./src/components/UNSTABLE_Header/index.ts",
-      "production": "./dist/components/UNSTABLE_Header/index.js",
-      "import": "./dist/components/UNSTABLE_Header/index.js",
-      "require": "./dist/components/UNSTABLE_Header/index.cjs",
-      "default": "./dist/components/UNSTABLE_Header/index.js"
-    },
     "./components/UNSTABLE_Picker": {
       "types": "./dist/components/UNSTABLE_Picker/index.d.ts",
       "development": "./src/components/UNSTABLE_Picker/index.ts",
