@@ -1,16 +1,17 @@
 import React from 'react';
-import { Link } from '../../Link';
+import { Flex } from '../../Flex';
 import { ProductLogo } from '../../ProductLogo';
-import { Header } from '..';
-import JobBoardLogo from './JobBoardLogo';
+import { defaultSvgLogo } from '../../ProductLogo/demo/ProductLogoDefault';
+import Header from '../Header';
+import HeaderLogo from '../HeaderLogo';
 
 const HeaderMinimal = () => (
   <Header>
-    <Link href="/">
-      <ProductLogo>
-        <JobBoardLogo />
-      </ProductLogo>
-    </Link>
+    <Flex alignmentX="center" alignmentY="center">
+      <HeaderLogo href="#" aria-label="JobBoard homepage">
+        <ProductLogo>{defaultSvgLogo}</ProductLogo>
+      </HeaderLogo>
+    </Flex>
   </Header>
 );
 
