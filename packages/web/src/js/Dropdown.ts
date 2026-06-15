@@ -1,5 +1,7 @@
 import BaseComponent from './BaseComponent';
+import { EVENT_KEY_ESCAPE, KEY_ARROW_DOWN, KEY_ARROW_UP } from './constants';
 import EventHandler from './dom/EventHandler';
+import { getNextActiveElement, isVisible } from './dom/getNextActiveElement';
 import SelectorEngine from './dom/SelectorEngine';
 import { clickOutsideElement, enableToggleTrigger, SpiritConfig } from './utils';
 import { SpiritElement } from './types';
@@ -10,6 +12,8 @@ interface DropdownStateProps {
 
 interface DropdownOptionsProps {
   autoClose: boolean;
+  keyboard: boolean;
+  menuItemsSelector: string | null;
 }
 
 const NAME = 'dropdown';
@@ -40,7 +44,13 @@ class Dropdown extends BaseComponent {
     };
     this.options = {
       autoClose: true,
+      keyboard: false,
+      menuItemsSelector: null,
     };
+
+    if (this.getOptions().keyboard) {
+      this.addKeyboardListeners();
+    }
   }
 
   static get NAME() {
@@ -54,6 +64,14 @@ class Dropdown extends BaseComponent {
 
     if (optionsAutoClose) {
       options.autoClose = optionsAutoClose !== 'false';
+    }
+
+    if (dataset?.spiritDropdownKeyboard) {
+      options.keyboard = dataset.spiritDropdownKeyboard !== 'false';
+    }
+
+    if (dataset?.spiritDropdownItems) {
+      options.menuItemsSelector = dataset.spiritDropdownItems;
     }
 
     return options;
@@ -81,7 +99,18 @@ class Dropdown extends BaseComponent {
   updateTriggerElement(open: boolean = this.state.open) {
     this.element.classList.toggle(CLASSNAME_EXPANDED, open);
     this.element.setAttribute(ARIA_EXPANDED_ATTRIBUTE, open);
-    this.element.setAttribute(ARIA_CONTROLS_ATTRIBUTE, this.element.dataset.spiritTarget);
+
+    // Only derive aria-controls from data-spirit-target when the consumer has not provided one.
+    // Components such as Combobox point aria-controls at a specific descendant (the listbox) rather
+    // than the popover container, so an author-supplied value must be preserved. When we do set it,
+    // strip the leading "#" so the value is a valid IDREF rather than a CSS selector.
+    if (!this.element.hasAttribute(ARIA_CONTROLS_ATTRIBUTE)) {
+      const target = this.element.dataset.spiritTarget;
+
+      if (target) {
+        this.element.setAttribute(ARIA_CONTROLS_ATTRIBUTE, target.replace(/^#/, ''));
+      }
+    }
   }
 
   updateTargetElement(open: boolean = this.state.open) {
@@ -127,8 +156,92 @@ class Dropdown extends BaseComponent {
       this.show();
     }
   }
+
+  // Keyboard envelope ported from Bootstrap's `dataApiKeydownHandler`: ArrowUp/ArrowDown open the
+  // popover and move focus through the menu items, Escape closes it and returns focus to the trigger.
+  // Arrow keys are intentionally ignored when the trigger is an input/textarea (e.g. Combobox), which
+  // owns its own arrow navigation; Escape still applies there.
+  // @see https://github.com/twbs/bootstrap/blob/main/js/src/dropdown.js
+  onKeydown = (event: KeyboardEvent) => {
+    const target = event.target as HTMLElement;
+    const isInput = /input|textarea/i.test(target.tagName);
+    const isEscapeEvent = event.key === EVENT_KEY_ESCAPE;
+    const isUpOrDownEvent = event.key === KEY_ARROW_UP || event.key === KEY_ARROW_DOWN;
+
+    if (!isUpOrDownEvent && !isEscapeEvent) {
+      return;
+    }
+
+    if (isInput && !isEscapeEvent) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (isUpOrDownEvent) {
+      if (!this.state.open) {
+        this.show();
+      }
+      this.selectMenuItem(event);
+
+      return;
+    }
+
+    if (this.state.open) {
+      this.hide();
+      this.element.focus();
+    }
+  };
+
+  selectMenuItem(event: KeyboardEvent) {
+    const { menuItemsSelector } = this.getOptions();
+
+    if (!menuItemsSelector || !this.target) {
+      return;
+    }
+
+    const items = SelectorEngine.findAll(menuItemsSelector, this.target).filter(isVisible);
+
+    if (!items.length) {
+      return;
+    }
+
+    const activeElement = event.target as HTMLElement;
+
+    getNextActiveElement(items, activeElement, event.key === KEY_ARROW_DOWN, !items.includes(activeElement)).focus();
+  }
+
+  addKeyboardListeners() {
+    EventHandler.on(this.element, 'keydown', this.onKeydown);
+
+    if (this.target) {
+      EventHandler.on(this.target, 'keydown', this.onKeydown);
+    }
+  }
+
+  dispose() {
+    EventHandler.off(this.element, 'keydown', this.onKeydown);
+
+    if (this.target) {
+      EventHandler.off(this.target, 'keydown', this.onKeydown);
+    }
+
+    super.dispose();
+  }
 }
 
 enableToggleTrigger(Dropdown, 'toggle', 'trigger');
+
+// Dropdown instances are created lazily on the first trigger click. Keyboard-enabled dropdowns must
+// exist before any click so they can be opened from the keyboard, so eagerly instantiate those here
+// (the constructor wires up the keydown listeners). The selector is narrow, so this does not eagerly
+// instantiate every dropdown on the page.
+EventHandler.on(window, 'DOMContentLoaded', () => {
+  SelectorEngine.findAll(
+    `[data-spirit-toggle="${NAME}"][data-spirit-dropdown-keyboard]:not([data-spirit-dropdown-keyboard="false"])`,
+  ).forEach((toggle) => {
+    Dropdown.getOrCreateInstance(toggle);
+  });
+});
 
 export default Dropdown;
