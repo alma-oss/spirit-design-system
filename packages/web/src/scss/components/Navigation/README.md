@@ -94,7 +94,7 @@ is also turned on by the `aria-expanded` attribute.
 
 ℹ️ Please note that in the `disabled` state the `NavigationAction` should not be an `a` tag.
 
-If the `box` variant of `NavigationAction` is inside a [`UNSTABLE_Header`][web-unstable-header] component, it will
+If the `box` variant of `NavigationAction` is inside a [`Header`][web-header] component, it will
 inherit the height of the `Header`.
 
 ## Navigation Avatar
@@ -214,4 +214,4 @@ With Buttons and NavigationAvatar:
 </nav>
 ```
 
-[web-unstable-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Header/README.md
+[web-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Header/README.md

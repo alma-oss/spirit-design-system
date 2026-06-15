@@ -1,9 +1,0 @@
-// 1. While other elements get spacing inside action slots, the nav needs to take up the whole width of the pane.
-
-@use 'theme';
-
-.HeaderDialogNav {
-    margin-inline: -1 * theme.$header-dialog-actions-padding-x; // 1.
-    margin-bottom: 0;
-    list-style: none;
-}
