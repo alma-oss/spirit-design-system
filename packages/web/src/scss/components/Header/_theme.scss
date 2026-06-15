@@ -1,63 +1,8 @@
 @use '@tokens' as tokens;
-@use '../../settings/transitions';
 @use '../../tools/units';
 
-// Header
-$header-typography: tokens.$body-medium-semibold;
-$header-breakpoint: tokens.$breakpoint-desktop;
-$header-height: units.px-to-rem(68px);
-$header-simple-height: units.px-to-rem(60px);
-$header-padding-x: tokens.$space-1000;
-$header-gap: tokens.$space-1200;
-$header-background-color: tokens.$background-primary;
-
-// HeaderMobileActions
-$header-mobile-actions-gap: tokens.$space-700;
-
-// HeaderDesktopActions
-$header-desktop-actions-gap: tokens.$space-900;
-
-// HeaderLink
-$header-link-padding-x: tokens.$space-700;
-$header-link-padding-y: tokens.$space-600;
-$header-link-color: tokens.$link-primary-state-default;
-$header-link-background-color: tokens.$background-interactive-state-default;
-$header-link-color-state-hover: tokens.$link-primary-state-hover;
-$header-link-background-color-state-hover: tokens.$background-interactive-state-hover;
-$header-link-color-state-active: tokens.$link-primary-state-active;
-$header-link-background-color-state-active: tokens.$background-interactive-state-active;
-$header-link-color-current: tokens.$selected-state-default;
-$header-link-background-color-current: tokens.$background-interactive-state-active;
-$header-link-current-border-thickness: tokens.$border-width-200;
-$header-link-current-border-color: tokens.$selected-state-default;
-$header-link-transition-duration: transitions.$duration-200;
-$header-link-transition-timing: transitions.$timing-eased-out;
-
-// HeaderDialog
-$header-dialog-typography: tokens.$body-medium-semibold;
-$header-dialog-width: units.px-to-rem(280px);
-$header-dialog-padding: tokens.$space-900;
-$header-dialog-color: tokens.$text-primary;
-$header-dialog-background-color: tokens.$background-primary;
-$header-dialog-shadow: tokens.$shadow-400;
-$header-dialog-transition-duration: transitions.$duration-200;
-$header-dialog-transition-timing: transitions.$timing-eased-in-out;
-$header-dialog-backdrop-background-color: tokens.$background-backdrop;
-
-// HeaderDialogCloseButton
-$header-dialog-close-button-size: tokens.$space-1200;
-$header-dialog-close-button-color: inherit;
-
-// HeaderDialogActions
-$header-dialog-actions-padding-x: $header-dialog-padding;
-$header-dialog-actions-padding-y: tokens.$space-1100;
-$header-dialog-actions-gap: tokens.$space-900;
-
-// HeaderDialogLink
-$header-dialog-link-padding-x: $header-dialog-actions-padding-x;
-$header-dialog-link-padding-y: tokens.$space-600;
-$header-dialog-link-current-border-thickness: tokens.$border-width-200;
-
-// HeaderDialogText
-$header-dialog-text-padding-x: $header-dialog-actions-padding-x;
-$header-dialog-text-padding-y: $header-dialog-link-padding-y;
+$height: units.px-to-rem(72px);
+$border-width: tokens.$border-width-100;
+$border-style: solid;
+$border-color: tokens.$component-header-border;
+$background-color: tokens.$component-header-background;

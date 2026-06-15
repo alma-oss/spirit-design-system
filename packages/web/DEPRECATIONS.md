@@ -63,10 +63,6 @@ See [UNSTABLE_FileUpload][unstable-file-upload-web] and [UNSTABLE_File][unstable
 </ul>
 ```
 
-### Header
-
-The `Header` component was removed, please use `UNSTABLE_Header` component instead.
-
 ### Skeleton
 
 The check for the existence of the `skeleton-gradient` token will be removed. Ensure that the skeleton-gradient token is properly set up in your project, as if you import all components, the project will not run without it.
