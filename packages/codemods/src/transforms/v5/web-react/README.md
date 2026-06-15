@@ -154,4 +154,29 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/forms-isFluid-prop-remov
 + <TextField id="name" label="Name" />
 ```
 
+### `v5/web-react/header-unstable-to-stable` — Rename `UNSTABLE_Header` to `Header` and `UNSTABLE_HeaderLogo` to `HeaderLogo`
+
+This codemod renames `UNSTABLE_Header` and `UNSTABLE_HeaderLogo` to their stable names `Header` and `HeaderLogo`.
+It also updates type identifiers (`UnstableHeaderProps` → `HeaderProps`) and the hook (`useUnstableHeaderStyleProps` → `useHeaderStyleProps`).
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/header-unstable-to-stable
+```
+
+#### Example
+
+```diff
+- import { UNSTABLE_Header, UNSTABLE_HeaderLogo } from '@alma-oss/spirit-web-react';
++ import { Header, HeaderLogo } from '@alma-oss/spirit-web-react';
+
+- <UNSTABLE_Header hasBottomDivider>
+-   <UNSTABLE_HeaderLogo href="/">Logo</UNSTABLE_HeaderLogo>
+- </UNSTABLE_Header>
++ <Header hasBottomDivider>
++   <HeaderLogo href="/">Logo</HeaderLogo>
++ </Header>
+```
+
 [mdn-column-gap]: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/column-gap
