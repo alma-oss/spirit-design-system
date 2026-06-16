@@ -1,84 +1,78 @@
-@use 'sass:map';
-@use 'sass:meta';
 @use '@tokens' as tokens;
 @use '../../tools/breakpoint';
 @use '../../tools/responsive-properties';
 @use 'theme';
 @use 'tools';
 
-// @deprecated We are deprecating `gradient-skeleton` token check.
-// In the next major version, we can be sure the required token will be present so no check will be needed.
-@if map.has-key(meta.module-variables(tokens), 'gradient-skeleton') {
-    .Skeleton {
-        width: 100%;
-    }
+.Skeleton {
+    width: 100%;
+}
 
-    .Skeleton--text {
-        @include tools.generate-item-sizes(
-            $class-name: 'Skeleton',
-            $sizes: tools.generate-text-sizes(theme.$sizes-body, 'mobile')
-        );
-    }
+.Skeleton--text {
+    @include tools.generate-item-sizes(
+        $class-name: 'Skeleton',
+        $sizes: tools.generate-text-sizes(theme.$sizes-body, 'mobile')
+    );
+}
 
-    .Skeleton--heading {
-        @each $breakpoint-name, $breakpoint-value in theme.$breakpoints {
-            @include breakpoint.up($breakpoint-value) {
-                @include tools.generate-item-sizes(
-                    $class-name: 'Skeleton',
-                    $sizes: tools.generate-text-sizes(theme.$sizes-heading, $breakpoint-name)
-                );
-            }
+.Skeleton--heading {
+    @each $breakpoint-name, $breakpoint-value in theme.$breakpoints {
+        @include breakpoint.up($breakpoint-value) {
+            @include tools.generate-item-sizes(
+                $class-name: 'Skeleton',
+                $sizes: tools.generate-text-sizes(theme.$sizes-heading, $breakpoint-name)
+            );
         }
     }
+}
 
-    .Skeleton--shape {
-        @include responsive-properties.create-cascade(
-            $property: 'border-radius',
-            $input-custom-property-base-name: '#{tokens.$css-variable-prefix}skeleton-shape-radius',
-            $breakpoints: theme.$breakpoints,
-            $fallback-value: theme.$shape-default-border-radius
-        );
+.Skeleton--shape {
+    @include responsive-properties.create-cascade(
+        $property: 'border-radius',
+        $input-custom-property-base-name: '#{tokens.$css-variable-prefix}skeleton-shape-radius',
+        $breakpoints: theme.$breakpoints,
+        $fallback-value: theme.$shape-default-border-radius
+    );
 
-        display: inline-flex;
-        flex-shrink: 0;
-        width: var(--#{tokens.$css-variable-prefix}skeleton-shape-width);
-        height: var(--#{tokens.$css-variable-prefix}skeleton-shape-height);
-        border: theme.$shape-border-width solid theme.$shape-border-color;
+    display: inline-flex;
+    flex-shrink: 0;
+    width: var(--#{tokens.$css-variable-prefix}skeleton-shape-width);
+    height: var(--#{tokens.$css-variable-prefix}skeleton-shape-height);
+    border: theme.$shape-border-width solid theme.$shape-border-color;
+}
+
+.Skeleton__item,
+.Skeleton--shape {
+    background: theme.$item-gradient;
+    background-size: 600% 600%;
+
+    @media (prefers-reduced-motion: no-preference) {
+        animation: skeleton-loading 2.5s infinite;
+    }
+}
+
+.Skeleton--text > .Skeleton__item,
+.Skeleton--heading > .Skeleton__item {
+    display: block;
+    width: 100%;
+    height: var(--#{tokens.$css-variable-prefix}skeleton-height, #{theme.$typography-default-height});
+    border-radius: theme.$typography-border-radius;
+
+    &:not(:last-child) {
+        margin-bottom: theme.$margin-bottom;
     }
 
-    .Skeleton__item,
-    .Skeleton--shape {
-        background: theme.$item-gradient;
-        background-size: 600% 600%;
+    &:last-child:not(:only-child) {
+        width: 80%;
+    }
+}
 
-        @media (prefers-reduced-motion: no-preference) {
-            animation: skeleton-loading 2.5s infinite;
-        }
+@keyframes skeleton-loading {
+    0% {
+        background-position: 100% 50%;
     }
 
-    .Skeleton--text > .Skeleton__item,
-    .Skeleton--heading > .Skeleton__item {
-        display: block;
-        width: 100%;
-        height: var(--#{tokens.$css-variable-prefix}skeleton-height, #{theme.$typography-default-height});
-        border-radius: theme.$typography-border-radius;
-
-        &:not(:last-child) {
-            margin-bottom: theme.$margin-bottom;
-        }
-
-        &:last-child:not(:only-child) {
-            width: 80%;
-        }
-    }
-
-    @keyframes skeleton-loading {
-        0% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background-position: 0 50%;
-        }
+    100% {
+        background-position: 0 50%;
     }
 }

@@ -54,9 +54,7 @@ $loading-color-dictionary-overrides: (
     ),
 );
 
-// @deprecated We are deprecating `buttons` token check.
-// In the next major version, we can be sure the required token will be present so no check will be needed.
-$size-dictionary: tokens-tools.get-variable-keys-if-exists('buttons', dictionaries.$size);
+$size-dictionary: map.keys(tokens.$buttons);
 
 $size-config: map.deep-merge(
     form-fields-settings.$box-field-size-config,
