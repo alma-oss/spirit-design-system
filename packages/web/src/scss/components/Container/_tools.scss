@@ -1,6 +1,5 @@
 @use 'sass:map';
 @use '../../tools/breakpoint';
-@use '../../tools/tokens' as tokens-tools;
 
 @mixin paddings($paddings, $breakpoints) {
     @each $name, $breakpoint in $breakpoints {
@@ -8,10 +7,4 @@
             --container-padding-inline: #{map.get($paddings, $name)};
         }
     }
-}
-
-// @deprecated We are deprecating the default max width, it will be removed with next major version.
-// Apart from that, we are also deprecating the 'get-size' function and the usage of the 'get-variable-if-exists' function. In the next major version, we can be sure the required tokens will be present so no check will be needed.
-@function get-size($size, $default-size) {
-    @return ('max-width': tokens-tools.get-variable-if-exists('container-#{$size}-max-width', $default-size));
 }

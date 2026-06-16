@@ -1,12 +1,9 @@
 @use '@tokens' as tokens;
-@use '../../tools/tokens' as tokens-tools;
 @use '../../tools/units';
 
 $height: units.px-to-rem(72px);
 $border-width: tokens.$border-width-100;
 $border-style: solid;
 
-// @deprecated We are deprecating the usage of the 'get-variable-if-exists' function.
-// In the next major version, we can be sure the required token will be present so no check will be needed.
-$border-color: tokens-tools.get-variable-if-exists('component-header-border', tokens.$border-basic);
+$border-color: tokens.$component-header-border;
 $background-color: tokens.$component-header-background;
