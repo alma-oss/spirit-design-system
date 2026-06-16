@@ -63,16 +63,17 @@ $component-button-tertiary-state-hover: var(--spirit-color-component-button-tert
 
 $component-header-background: var(--spirit-color-component-header-background);
 $component-header-border: var(--spirit-color-component-header-border);
-$component-header-item-background-state-active: var(--spirit-color-component-header-item-background-state-active);
-$component-header-item-background-state-default: var(--spirit-color-component-header-item-background-state-default);
-$component-header-item-background-state-hover: var(--spirit-color-component-header-item-background-state-hover);
-$component-header-item-background-state-selected: var(--spirit-color-component-header-item-background-state-selected);
-$component-header-item-state-active: var(--spirit-color-component-header-item-state-active);
-$component-header-item-state-default: var(--spirit-color-component-header-item-state-default);
-$component-header-item-state-hover: var(--spirit-color-component-header-item-state-hover);
-$component-header-item-state-selected: var(--spirit-color-component-header-item-state-selected);
-$component-header-stripe-state-selected: var(--spirit-color-component-header-stripe-state-selected);
-$component-header-stripe-state-unselected: var(--spirit-color-component-header-stripe-state-unselected);
+
+$component-navigation-item-background-state-active: var(--spirit-color-component-navigation-item-background-state-active);
+$component-navigation-item-background-state-default: var(--spirit-color-component-navigation-item-background-state-default);
+$component-navigation-item-background-state-hover: var(--spirit-color-component-navigation-item-background-state-hover);
+$component-navigation-item-background-state-selected: var(--spirit-color-component-navigation-item-background-state-selected);
+$component-navigation-item-state-active: var(--spirit-color-component-navigation-item-state-active);
+$component-navigation-item-state-default: var(--spirit-color-component-navigation-item-state-default);
+$component-navigation-item-state-hover: var(--spirit-color-component-navigation-item-state-hover);
+$component-navigation-item-state-selected: var(--spirit-color-component-navigation-item-state-selected);
+$component-navigation-item-stripe-state-selected: var(--spirit-color-component-navigation-item-stripe-state-selected);
+$component-navigation-item-stripe-state-unselected: var(--spirit-color-component-navigation-item-stripe-state-unselected);
 
 $component-pagination-selected-border: var(--spirit-color-component-pagination-selected-border);
 $component-pagination-selected-content: var(--spirit-color-component-pagination-selected-content);
@@ -316,16 +317,18 @@ $component-colors: (
     header: (
         background: $component-header-background,
         border: $component-header-border,
-        item-background-state-active: $component-header-item-background-state-active,
-        item-background-state-default: $component-header-item-background-state-default,
-        item-background-state-hover: $component-header-item-background-state-hover,
-        item-background-state-selected: $component-header-item-background-state-selected,
-        item-state-active: $component-header-item-state-active,
-        item-state-default: $component-header-item-state-default,
-        item-state-hover: $component-header-item-state-hover,
-        item-state-selected: $component-header-item-state-selected,
-        stripe-state-selected: $component-header-stripe-state-selected,
-        stripe-state-unselected: $component-header-stripe-state-unselected,
+    ),
+    navigation: (
+        item-background-state-active: $component-navigation-item-background-state-active,
+        item-background-state-default: $component-navigation-item-background-state-default,
+        item-background-state-hover: $component-navigation-item-background-state-hover,
+        item-background-state-selected: $component-navigation-item-background-state-selected,
+        item-state-active: $component-navigation-item-state-active,
+        item-state-default: $component-navigation-item-state-default,
+        item-state-hover: $component-navigation-item-state-hover,
+        item-state-selected: $component-navigation-item-state-selected,
+        item-stripe-state-selected: $component-navigation-item-stripe-state-selected,
+        item-stripe-state-unselected: $component-navigation-item-stripe-state-unselected,
     ),
     pagination: (
         selected-border: $component-pagination-selected-border,

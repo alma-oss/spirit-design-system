@@ -63,16 +63,17 @@ export const componentButtonTertiaryStateHover = 'var(--spirit-color-component-b
 
 export const componentHeaderBackground = 'var(--spirit-color-component-header-background)';
 export const componentHeaderBorder = 'var(--spirit-color-component-header-border)';
-export const componentHeaderItemBackgroundStateActive = 'var(--spirit-color-component-header-item-background-state-active)';
-export const componentHeaderItemBackgroundStateDefault = 'var(--spirit-color-component-header-item-background-state-default)';
-export const componentHeaderItemBackgroundStateHover = 'var(--spirit-color-component-header-item-background-state-hover)';
-export const componentHeaderItemBackgroundStateSelected = 'var(--spirit-color-component-header-item-background-state-selected)';
-export const componentHeaderItemStateActive = 'var(--spirit-color-component-header-item-state-active)';
-export const componentHeaderItemStateDefault = 'var(--spirit-color-component-header-item-state-default)';
-export const componentHeaderItemStateHover = 'var(--spirit-color-component-header-item-state-hover)';
-export const componentHeaderItemStateSelected = 'var(--spirit-color-component-header-item-state-selected)';
-export const componentHeaderStripeStateSelected = 'var(--spirit-color-component-header-stripe-state-selected)';
-export const componentHeaderStripeStateUnselected = 'var(--spirit-color-component-header-stripe-state-unselected)';
+
+export const componentNavigationItemBackgroundStateActive = 'var(--spirit-color-component-navigation-item-background-state-active)';
+export const componentNavigationItemBackgroundStateDefault = 'var(--spirit-color-component-navigation-item-background-state-default)';
+export const componentNavigationItemBackgroundStateHover = 'var(--spirit-color-component-navigation-item-background-state-hover)';
+export const componentNavigationItemBackgroundStateSelected = 'var(--spirit-color-component-navigation-item-background-state-selected)';
+export const componentNavigationItemStateActive = 'var(--spirit-color-component-navigation-item-state-active)';
+export const componentNavigationItemStateDefault = 'var(--spirit-color-component-navigation-item-state-default)';
+export const componentNavigationItemStateHover = 'var(--spirit-color-component-navigation-item-state-hover)';
+export const componentNavigationItemStateSelected = 'var(--spirit-color-component-navigation-item-state-selected)';
+export const componentNavigationItemStripeStateSelected = 'var(--spirit-color-component-navigation-item-stripe-state-selected)';
+export const componentNavigationItemStripeStateUnselected = 'var(--spirit-color-component-navigation-item-stripe-state-unselected)';
 
 export const componentPaginationSelectedBorder = 'var(--spirit-color-component-pagination-selected-border)';
 export const componentPaginationSelectedContent = 'var(--spirit-color-component-pagination-selected-content)';
@@ -316,16 +317,18 @@ export const componentColors = {
   header: {
     background: componentHeaderBackground,
     border: componentHeaderBorder,
-    itemBackgroundStateActive: componentHeaderItemBackgroundStateActive,
-    itemBackgroundStateDefault: componentHeaderItemBackgroundStateDefault,
-    itemBackgroundStateHover: componentHeaderItemBackgroundStateHover,
-    itemBackgroundStateSelected: componentHeaderItemBackgroundStateSelected,
-    itemStateActive: componentHeaderItemStateActive,
-    itemStateDefault: componentHeaderItemStateDefault,
-    itemStateHover: componentHeaderItemStateHover,
-    itemStateSelected: componentHeaderItemStateSelected,
-    stripeStateSelected: componentHeaderStripeStateSelected,
-    stripeStateUnselected: componentHeaderStripeStateUnselected,
+  },
+  navigation: {
+    itemBackgroundStateActive: componentNavigationItemBackgroundStateActive,
+    itemBackgroundStateDefault: componentNavigationItemBackgroundStateDefault,
+    itemBackgroundStateHover: componentNavigationItemBackgroundStateHover,
+    itemBackgroundStateSelected: componentNavigationItemBackgroundStateSelected,
+    itemStateActive: componentNavigationItemStateActive,
+    itemStateDefault: componentNavigationItemStateDefault,
+    itemStateHover: componentNavigationItemStateHover,
+    itemStateSelected: componentNavigationItemStateSelected,
+    itemStripeStateSelected: componentNavigationItemStripeStateSelected,
+    itemStripeStateUnselected: componentNavigationItemStripeStateUnselected,
   },
   pagination: {
     selectedBorder: componentPaginationSelectedBorder,
