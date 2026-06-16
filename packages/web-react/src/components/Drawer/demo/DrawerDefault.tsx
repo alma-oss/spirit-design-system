@@ -49,23 +49,23 @@ const DrawerDefault = () => {
         <Box elementType="fieldset" borderWidth="0">
           <Stack hasSpacing>
             <Checkbox
-              name="is-closable-on-backdrop-click"
               id="drawer-is-closable-on-backdrop-click"
-              label="Closable on Backdrop Click"
               isChecked={isClosableOnBackdropClick}
+              label="Closable on Backdrop Click"
+              name="is-closable-on-backdrop-click"
               onChange={() => setIsClosableOnBackdropClick(!isClosableOnBackdropClick)}
             />
             <Checkbox
-              name="is-closable-on-escape-key"
               id="drawer-is-closable-on-escape-key"
-              label="Closable on Escape Key Down"
               isChecked={isClosableOnEscapeKey}
+              label="Closable on Escape Key Down"
+              name="is-closable-on-escape-key"
               onChange={() => setIsClosableOnEscapeKey(!isClosableOnEscapeKey)}
             />
             <TextArea
+              id="drawer-content"
               label="Drawer content"
               name="content"
-              id="drawer-content"
               value={content}
               onChange={(e) => setContent(e.currentTarget.value)}
             />

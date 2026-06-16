@@ -14,6 +14,7 @@ Introducing version 5 of the _spirit-web-react_ package.
 - [Component Changes](#component-changes)
   - [Dropdown: `DropdownPopover` Now Has `role="dialog"` by Default](#dropdown-dropdownpopover-now-has-roledialog-by-default)
   - [Collapse: `hideOnCollapse` Prop Renamed to `isDisposable`](#collapse-hideoncollapse-prop-renamed-to-isdisposable)
+  - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
   - [Flex: Direction Prop Values Changed](#flex-direction-prop-values-changed)
   - [Form Components: `isFluid` Prop Removed](#form-components-isfluid-prop-removed)
   - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
@@ -46,7 +47,7 @@ automatically:
 - **Shift+Tab** before the first focusable element closes the popover and returns focus to the trigger
 - When the popover opens, focus moves automatically to the first interactive element inside it
 
-#### What you need to do
+#### What You Need to Do
 
 1. **Add an accessible name** to every `DropdownPopover` via `aria-label` or `aria-labelledby`.
    ARIA dialogs are required to have an accessible name:
@@ -91,6 +92,51 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/collapse-isDisposable-pr
 Manually replace the prop in your project.
 
 - `<UncontrolledCollapse hideOnCollapse … />` → `<UncontrolledCollapse isDisposable … />`
+</details>
+
+### Checkbox: Composition Markup Changed
+
+Checkbox now composes its layout from Spirit components and applies the `Checkbox` class directly to the input.
+Vertical spacing is no longer applied by default.
+
+When Checkbox is rendered outside a `Stack` with `hasSpacing`, add `marginY="space-500"` to preserve the previous
+default vertical spacing. Omit it when the row is already spaced by a parent layout such as `Stack` with `hasSpacing`.
+
+#### Migration Guide
+
+🪄 Use codemods to automatically update your codebase:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/checkbox-margin-y
+```
+
+The codemod adds `marginY="space-500"` to Checkbox instances outside `Stack` with `hasSpacing`.
+It skips checkboxes that already define `marginY`, `margin`, `marginTop`, or `marginBottom`, and item-style checkboxes
+with `isItem`.
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Add Checkbox vertical spacing when the row is not already spaced by a parent layout:
+
+```tsx
+// Before
+<Checkbox id="checkbox-default" label="Checkbox Label" />
+
+// After
+<Checkbox id="checkbox-default" label="Checkbox Label" marginY="space-500" />
+```
+
+Inside `Stack` with `hasSpacing`, no extra spacing is needed:
+
+```tsx
+<Stack hasSpacing>
+  <Checkbox id="checkbox-default" label="Checkbox Label" />
+</Stack>
+```
+
 </details>
 
 ### Flex: Direction Prop Values Changed

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Stack } from '../../Stack';
 import Checkbox from '../Checkbox';
 
 const CheckboxDisabled = () => {
@@ -9,7 +10,7 @@ const CheckboxDisabled = () => {
   }, [checkboxRef]);
 
   return (
-    <>
+    <Stack hasSpacing>
       <Checkbox id="checkbox-disabled" name="checkboxDisabled" label="Checkbox Label" isDisabled />
       <Checkbox
         id="checkbox-disabled-helper-text"
@@ -27,7 +28,7 @@ const CheckboxDisabled = () => {
         isDisabled
         ref={checkboxRef}
       />
-    </>
+    </Stack>
   );
 };
 

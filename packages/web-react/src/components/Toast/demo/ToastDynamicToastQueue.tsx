@@ -95,6 +95,7 @@ const ToastDynamicToastQueue = () => {
           <Checkbox
             name="is-collapsible"
             id="toast-is-collapsible"
+            marginY="space-500"
             label="Collapsible"
             isChecked={isCollapsible}
             onChange={() => setIsCollapsible(!isCollapsible)}
