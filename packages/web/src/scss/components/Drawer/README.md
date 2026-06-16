@@ -5,8 +5,8 @@ The Drawer component is a container that slides in from side of the screen. It c
 The Drawer is a composition of several subcomponents:
 
 - [Drawer](#drawer)
-  - [DrawerCloseButton](#drawerclosebutton)
   - [DrawerPanel](#drawerpanel)
+    - [ControlButton](#close-button)
 
 👉 The animation effect of this component is dependent on the
 `prefers-reduced-motion` media query.
@@ -29,36 +29,40 @@ The `Drawer` component allows aligning the content panel horizontally to the lef
 </dialog>
 ```
 
-## DrawerCloseButton
+## DrawerPanel
 
-The `DrawerCloseButton` component is a button that closes the drawer when clicked.
+The `DrawerPanel` component is a container for the content that will be displayed in the drawer.
+Should there be any spacing around the content of `DrawerPanel`, you need to provide it yourself.
+
+```html
+<div class="DrawerPanel">
+  <div class="DrawerPanel__header">
+    <!-- Close button goes here -->
+  </div>
+  <div class="DrawerPanel__content">
+    <!-- Drawer content goes here -->
+  </div>
+</div>
+```
+
+## Close Button
+
+Close button is a [ControlButton][control-button] that closes the drawer when clicked.
 
 ```html
 <button
   type="button"
-  class="Button Button--tertiary Button--medium Button--symmetrical DrawerCloseButton"
+  class="ControlButton ControlButton--large text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
   data-spirit-dismiss="offcanvas"
   data-spirit-target="#my-drawer-dialog"
   aria-controls="my-drawer-dialog"
   aria-expanded="false"
 >
-  <svg class="Icon" width="24" height="24" aria-hidden="true">
+  <svg class="Icon" width="16" height="16" aria-hidden="true">
     <use href="/icons/svg/sprite.svg#close" />
   </svg>
   <span class="accessibility-hidden">Close</span>
 </button>
-```
-
-## DrawerPanel
-
-The `DrawerPanel` component is a container for the content that will be displayed in the drawer.
-
-```html
-<div class="DrawerPanel">
-  <div class="DrawerPanel__content">
-    <!-- Drawer content goes here -->
-  </div>
-</div>
 ```
 
 ## Full Example
@@ -66,20 +70,22 @@ The `DrawerPanel` component is a container for the content that will be displaye
 ```html
 <dialog id="drawer-example" class="Drawer Drawer--right">
   <div class="DrawerPanel">
-    <div class="DrawerPanel__content">
+    <div class="DrawerPanel__header">
       <button
         type="button"
-        aria-expanded="false"
-        class="Button Button--tertiary Button--medium Button--symmetrical DrawerCloseButton"
+        class="ControlButton ControlButton--large text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
         data-spirit-dismiss="offcanvas"
-        data-spirit-target="#drawer-example"
-        aria-controls="drawer-example"
+        data-spirit-target="#my-drawer-dialog"
+        aria-controls="my-drawer-dialog"
+        aria-expanded="false"
       >
-        <svg class="Icon" width="24" height="24" aria-hidden="true">
+        <svg class="Icon" width="16" height="16" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#close" />
         </svg>
         <span class="accessibility-hidden">Close</span>
       </button>
+    </div>
+    <div class="DrawerPanel__content">
       <!-- Drawer content goes here  -->
     </div>
   </div>
@@ -95,3 +101,5 @@ const offcanvas = new Offcanvas(drawerElement, { modal: false });
 ```
 
 The drawer panel will slide in as usual, but the rest of the page stays clickable and scrollable.
+
+[control-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ControlButton/README.md

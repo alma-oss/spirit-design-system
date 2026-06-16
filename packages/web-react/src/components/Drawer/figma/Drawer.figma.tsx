@@ -8,8 +8,7 @@ figma.connect(Drawer, '<FIGMA_FILE_ID>?node-id=27293%3A7890', {
   props: {},
   example: (props) => (
     <Drawer id="drawer-example" isOpen onClose={() => {}} {...props}>
-      <DrawerPanel>
-        <DrawerCloseButton />
+      <DrawerPanel closeButton={<DrawerCloseButton />}>
         <div>Drawer content</div>
       </DrawerPanel>
     </Drawer>
