@@ -47,6 +47,12 @@ describe('Link', () => {
     expect(screen.getByRole('link')).toHaveTextContent('Test');
   });
 
+  it('should render stretched link', () => {
+    render(<Link href="/" isStretched />);
+
+    expect(screen.getByRole('link')).toHaveClass('link-stretched');
+  });
+
   describe('RouterProvider integration', () => {
     const renderWithRouter = (ui: ReactElement, navigate: jest.Mock) =>
       render(<RouterProvider navigate={navigate}>{ui}</RouterProvider>);

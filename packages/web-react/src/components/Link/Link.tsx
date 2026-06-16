@@ -7,9 +7,10 @@ import { mergeStyleProps } from '../../utils';
 import { useLinkStyleProps } from './useLinkStyleProps';
 
 const defaultProps = {
-  elementType: 'a',
   color: 'primary',
+  elementType: 'a',
   hasVisitedStyleAllowed: false,
+  isStretched: false,
   underlined: 'hover',
 };
 
