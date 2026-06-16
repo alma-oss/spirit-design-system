@@ -23,6 +23,25 @@ npx @lmc-eu/spirit-codemods -p <path> -t v5/web-react/collapse-isDisposable-prop
 + <UncontrolledCollapse isDisposable … />
 ```
 
+### `v5/web-react/checkbox-margin-y` — Add Checkbox Vertical Spacing Outside Stack
+
+This codemod adds `marginY="space-500"` to `Checkbox` components that are not rendered inside `Stack` with `hasSpacing`.
+It skips checkboxes that already define `marginY`, `margin`, `marginTop`, or `marginBottom`, and item-style checkboxes with `isItem`.
+This preserves the previous default vertical spacing after Checkbox stopped applying it internally.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/checkbox-margin-y
+```
+
+#### Example
+
+```diff
+- <Checkbox id="checkbox-default" label="Checkbox Label" />
++ <Checkbox id="checkbox-default" label="Checkbox Label" marginY="space-500" />
+```
+
 ### `v5/web-react/flex-direction-values` - Replace Flex Direction Prop Values `row` with `horizontal` and `column` with `vertical`
 
 This codemod updates `direction` values of `Flex` component by replacing `row` to `horizontal` and `column` to `vertical`.

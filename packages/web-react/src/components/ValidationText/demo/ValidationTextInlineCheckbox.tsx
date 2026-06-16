@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Checkbox } from '../../Checkbox';
+import { Stack } from '../../Stack';
 
 const ValidationTextInlineCheckbox = () => {
   const [isCheckedDanger, setIsCheckedDanger] = useState(false);
   const [isCheckedWarning, setIsCheckedWarning] = useState(false);
 
   return (
-    <>
+    <Stack hasSpacing>
       <Checkbox
         id="validation-text-checkbox-danger"
         name="checkboxDanger"
@@ -26,7 +27,7 @@ const ValidationTextInlineCheckbox = () => {
         isChecked={isCheckedWarning}
         onChange={() => setIsCheckedWarning(!isCheckedWarning)}
       />
-    </>
+    </Stack>
   );
 };
 

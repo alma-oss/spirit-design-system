@@ -3,7 +3,7 @@
 import React, { type ElementType } from 'react';
 import { PropsProvider, useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { FormFieldModes, type SpiritItemProps } from '../../types';
+import { type FormFieldContextValue, FormFieldModes, type SpiritItemProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useItemStyleProps } from './useItemStyleProps';
 
@@ -12,18 +12,18 @@ const defaultProps: Partial<SpiritItemProps> = {
 };
 
 const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Element => {
-  const { elementType: propsElementType } = props;
-  const contextProps = useContextProps(props);
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
   const {
     children,
-    elementType: contextElementType,
+    elementType: propsElementType,
     endSlot,
-    isDisabled,
+    isDisabled: propsIsDisabled,
     isSelected,
     startSlot,
     ...restProps
-  } = contextProps;
-  const elementType = propsElementType ?? contextElementType ?? defaultProps.elementType;
+  } = props;
+  const isDisabled = propsIsDisabled ?? contextProps.isDisabled;
+  const elementType = propsElementType ?? contextProps.elementType ?? defaultProps.elementType;
   const Component = elementType as ElementType;
   const { classProps, props: modifiedProps } = useItemStyleProps({
     isSelected,

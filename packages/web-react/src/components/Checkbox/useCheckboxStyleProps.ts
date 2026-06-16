@@ -1,44 +1,48 @@
 import classNames from 'classnames';
-import { InputPositions } from '../../constants';
-import { useClassNamePrefix, useInputPositionClass } from '../../hooks';
-import { type CheckboxProps, type SpiritCheckboxProps } from '../../types';
+import { DirectionExtended, InputPositions } from '../../constants';
+import { useClassNamePrefix } from '../../hooks';
+import { type CheckboxProps, type FlexDirectionType, type SpiritCheckboxProps } from '../../types';
 
 export interface CheckboxStyles {
   /** className props */
   classProps: {
-    root: string;
-    text: string;
     input: string;
   };
+  /** Direction props to be passed to the Flex element */
+  direction: FlexDirectionType;
   /** props to be passed to the input element */
   props: CheckboxProps;
 }
 
+function inputPositionToFlexDirection(inputPosition: SpiritCheckboxProps['inputPosition']): FlexDirectionType {
+  if (typeof inputPosition === 'object') {
+    return Object.fromEntries(
+      Object.entries(inputPosition).map(([breakpoint, position]) => [
+        breakpoint,
+        position === InputPositions.END ? DirectionExtended.HORIZONTAL_REVERSED : DirectionExtended.HORIZONTAL,
+      ]),
+    ) as FlexDirectionType;
+  }
+
+  return inputPosition === InputPositions.END ? DirectionExtended.HORIZONTAL_REVERSED : DirectionExtended.HORIZONTAL;
+}
+
 export function useCheckboxStyleProps(props: SpiritCheckboxProps): CheckboxStyles {
   const { inputPosition = InputPositions.START, validationState, ...restProps } = props;
-  const { isDisabled, isItem, isLabelHidden } = restProps;
+  const { isItem } = restProps;
 
   const checkboxClass = useClassNamePrefix('Checkbox');
-  const checkboxDisabledClass = `${checkboxClass}--disabled`;
   const checkboxItemClass = `${checkboxClass}--item`;
-  const checkboxLabelHiddenClass = `${checkboxClass}--labelHidden`;
-  const checkboxInputClass = `${checkboxClass}__input`;
-  const checkboxInputPositionClass = useInputPositionClass(checkboxClass, inputPosition);
-  const checkboxTextClass = `${checkboxClass}__text`;
   const checkboxValidationClass = `${checkboxClass}--${validationState}`;
 
   return {
     classProps: {
-      root: classNames(checkboxClass, {
-        [checkboxInputPositionClass]: checkboxInputPositionClass,
-        [checkboxDisabledClass]: isDisabled,
-        [checkboxItemClass]: isItem,
-        [checkboxLabelHiddenClass]: isLabelHidden,
+      input: classNames(checkboxClass, {
         [checkboxValidationClass]: validationState,
+        [checkboxItemClass]: isItem,
       }),
-      text: checkboxTextClass,
-      input: checkboxInputClass,
     },
+    direction: inputPositionToFlexDirection(inputPosition),
     props: {
       ...restProps,
       validationState,

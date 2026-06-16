@@ -1,18 +1,21 @@
 'use client';
 
-import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
 import { FormFieldModes, type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
+import { type FlexDirectionType } from '../../types/flex';
+import { mergeStyleProps } from '../../utils';
+import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { InputDetails } from '../InputDetails';
+import { Item } from '../Item';
 import { Label } from '../Label';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { useCheckboxStyleProps } from './useCheckboxStyleProps';
 
 const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
-  const { classProps, props: modifiedProps } = useCheckboxStyleProps(props);
+  const { classProps, direction, props: modifiedProps } = useCheckboxStyleProps(props);
   const {
     'aria-describedby': ariaDescribedBy = '',
     'aria-details': ariaDetailsAttr,
@@ -39,6 +42,45 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
     validationText,
   });
 
+  const checkboxInput = (
+    <input
+      {...otherProps}
+      {...ariaDescribedByProp}
+      {...ariaDetailsProp}
+      type="checkbox"
+      id={id}
+      className={classProps.input}
+      disabled={isDisabled}
+      required={isRequired}
+      checked={isChecked}
+      value={value}
+      ref={ref}
+    />
+  );
+
+  const checkboxText = (
+    <>
+      <Label elementType="label" htmlFor={id}>
+        {label}
+      </Label>
+      {details && (
+        <InputDetails id={`${id}-details`} registerAriaDetails={registerDetails}>
+          {details}
+        </InputDetails>
+      )}
+      <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+      {validationState && (
+        <ValidationText
+          id={`${id}-validation-text`}
+          {...(hasValidationIcon && { validationStateIcon: validationState })}
+          validationText={validationText}
+          registerAria={register}
+          role={validationTextRole}
+        />
+      )}
+    </>
+  );
+
   return (
     <PropsProvider
       value={{
@@ -49,39 +91,21 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
         validationState,
       }}
     >
-      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
-        <input
-          {...otherProps}
-          {...ariaDescribedByProp}
-          {...ariaDetailsProp}
-          type="checkbox"
-          id={id}
-          className={classProps.input}
-          disabled={isDisabled}
-          required={isRequired}
-          checked={isChecked}
-          value={value}
-          ref={ref}
-        />
-        <div className={classProps.text}>
-          <Label htmlFor={id}>{label}</Label>
-          {details && (
-            <InputDetails id={`${id}-details`} registerAriaDetails={registerDetails}>
-              {details}
-            </InputDetails>
-          )}
-          <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
-          {validationState && (
-            <ValidationText
-              id={`${id}-validation-text`}
-              {...(hasValidationIcon && { validationStateIcon: validationState })}
-              validationText={validationText}
-              registerAria={register}
-              role={validationTextRole}
-            />
-          )}
-        </div>
-      </div>
+      {isItem ? (
+        <Item isDisabled={isDisabled} startSlot={checkboxInput} {...mergeStyleProps(Item, { styleProps })}>
+          {checkboxText}
+        </Item>
+      ) : (
+        <Flex
+          direction={direction as FlexDirectionType}
+          isInline
+          spacingX={isLabelHidden ? 'space-0' : 'space-500'}
+          {...mergeStyleProps(Flex, { styleProps })}
+        >
+          {checkboxInput}
+          <div>{checkboxText}</div>
+        </Flex>
+      )}
     </PropsProvider>
   );
 };
