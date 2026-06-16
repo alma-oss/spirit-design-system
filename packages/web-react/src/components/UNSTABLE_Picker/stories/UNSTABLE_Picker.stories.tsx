@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import { FillVariants, Sizes, ValidationStates } from '../../../constants';
 import { useSelectionState, useToggle } from '../../../hooks';
-import { UNSTABLE_PICKER_DOCS_DEMO_WRAPPER_CLASSNAME } from '../demo/constants';
 import { renderPickerLanguageItems } from '../demo/PickerLanguageItems';
 import ReadMe from '../README.md?raw';
 import { UNSTABLE_Picker, UNSTABLE_PickerGroup, UNSTABLE_UncontrolledPicker } from '..';
@@ -13,13 +12,6 @@ const PLAYGROUND_PICKER_ID = 'story-picker-playground';
 const meta: Meta<typeof UNSTABLE_Picker> = {
   title: 'Experimental/UNSTABLE_Picker',
   component: UNSTABLE_Picker,
-  decorators: [
-    (Story) => (
-      <div className={UNSTABLE_PICKER_DOCS_DEMO_WRAPPER_CLASSNAME}>
-        <Story />
-      </div>
-    ),
-  ],
   parameters: {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,

@@ -21,13 +21,6 @@ type UNSTABLE_FileStoryArgs = UnstableFileProps & {
 const meta = {
   title: 'Experimental/UNSTABLE_File',
   component: UNSTABLE_File,
-  decorators: [
-    (Story) => (
-      <div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
-        <Story />
-      </div>
-    ),
-  ],
   parameters: {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,

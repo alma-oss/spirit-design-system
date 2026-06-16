@@ -169,7 +169,7 @@ Notes:
   <div class="ScrollView__controls">
     <button
       type="button"
-      class="ControlButton ControlButton--small ControlButton--symmetrical ControlButton--hasBackground accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+      class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
       aria-label="Scroll up"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
@@ -178,7 +178,7 @@ Notes:
     </button>
     <button
       type="button"
-      class="ControlButton ControlButton--small ControlButton--symmetrical ControlButton--hasBackground accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+      class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
       aria-label="Scroll down"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
@@ -202,7 +202,7 @@ Notes:
   <div class="ScrollView__controls">
     <button
       type="button"
-      class="ControlButton ControlButton--small ControlButton--symmetrical ControlButton--hasBackground accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+      class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
       aria-label="Scroll left"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
@@ -211,7 +211,7 @@ Notes:
     </button>
     <button
       type="button"
-      class="ControlButton ControlButton--small ControlButton--symmetrical ControlButton--hasBackground accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+      class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
       aria-label="Scroll right"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
