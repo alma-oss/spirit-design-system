@@ -1,33 +1,17 @@
-// 1. Add fallbacks in case the timeline size is not defined in HTML (i.e. keep previous behavior).
-
-@use 'sass:map';
 @use '@tokens' as tokens;
 @use '../../tools/typography';
 @use 'theme';
 
-// @deprecated We are deprecating the default timeline size in favor of the size CSS modifier class.
-// Migration: remove the default timeline size from this file. The CSS modifier class is already used in the HTML.
-$_default-timeline-size: small; // 1.
-
 .TimelineMarker {
-    @include typography.from-css-variables(
-        $infix: 'timeline',
-        $fallback-config: map.get(theme.$size-config, $_default-timeline-size, typography, mobile)
-    );
+    @include typography.from-css-variables($infix: 'timeline');
 
     display: flex;
     grid-area: marker;
     align-self: center;
     align-items: center;
     justify-content: center;
-    width: var(
-        --#{tokens.$css-variable-prefix}timeline-marker-size,
-        #{map.get(theme.$size-config, $_default-timeline-size, marker-size)}
-    );
-    height: var(
-        --#{tokens.$css-variable-prefix}timeline-marker-size,
-        #{map.get(theme.$size-config, $_default-timeline-size, marker-size)}
-    );
+    width: var(--#{tokens.$css-variable-prefix}timeline-marker-size);
+    height: var(--#{tokens.$css-variable-prefix}timeline-marker-size);
     margin-block: theme.$timeline-marker-margin;
 }
 
@@ -45,27 +29,14 @@ $_default-timeline-size: small; // 1.
         content: '';
         position: absolute;
         inset: 0;
-        width: var(
-            --#{tokens.$css-variable-prefix}timeline-dot-size,
-            #{map.get(theme.$size-config, $_default-timeline-size, dot-size)}
-        );
-        height: var(
-            --#{tokens.$css-variable-prefix}timeline-dot-size,
-            #{map.get(theme.$size-config, $_default-timeline-size, dot-size)}
-        );
+        width: var(--#{tokens.$css-variable-prefix}timeline-dot-size);
+        height: var(--#{tokens.$css-variable-prefix}timeline-dot-size);
         margin: auto;
         border-radius: theme.$timeline-marker-dot-radius;
         background-color: currentcolor;
     }
 }
 
-// @deprecated The `.TimelineMarker` class in this selector is deprecated.
-// In the next major version, we can be sure the required `.TimelineMarker--icon` class will be present so no backward compatibility will be needed.
-// Migration: delete the `.TimelineMarker` class from this selector.
-.TimelineMarker,
 .TimelineMarker--icon {
-    --#{tokens.$css-variable-prefix}icon-composition-size: var(
-        --#{tokens.$css-variable-prefix}timeline-icon-size,
-        #{map.get(theme.$size-config, $_default-timeline-size, icon-size)}
-    );
+    --#{tokens.$css-variable-prefix}icon-composition-size: var(--#{tokens.$css-variable-prefix}timeline-icon-size);
 }
