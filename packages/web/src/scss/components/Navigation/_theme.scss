@@ -13,28 +13,28 @@ $vertical-item-padding-x: tokens.$space-700;
 
 $item-alignment-dictionary: center, stretch; // 1.
 
-$action-background-color-state-active: tokens.$component-header-item-background-state-active;
-$action-background-color-state-default: tokens.$component-header-item-background-state-default;
-$action-background-color-state-hover: tokens.$component-header-item-background-state-hover;
-$action-background-color-state-selected: tokens.$component-header-item-background-state-selected;
+$action-background-color-state-active: tokens.$component-navigation-item-background-state-active;
+$action-background-color-state-default: tokens.$component-navigation-item-background-state-default;
+$action-background-color-state-hover: tokens.$component-navigation-item-background-state-hover;
+$action-background-color-state-selected: tokens.$component-navigation-item-background-state-selected;
 
-$action-color-state-active: tokens.$component-header-item-state-active;
-$action-color-state-default: tokens.$component-header-item-state-default;
+$action-color-state-active: tokens.$component-navigation-item-state-active;
+$action-color-state-default: tokens.$component-navigation-item-state-default;
 $action-color-state-disabled: tokens.$disabled-content;
-$action-color-state-hover: tokens.$component-header-item-state-hover;
-$action-color-state-selected: tokens.$component-header-item-state-selected;
+$action-color-state-hover: tokens.$component-navigation-item-state-hover;
+$action-color-state-selected: tokens.$component-navigation-item-state-selected;
 
 $action-gap: tokens.$space-700;
 
 $action-shape-variant-dictionary: dictionaries.$shape-variants;
 
-$action-stripe-background-color-selected-state-active: tokens.$component-header-stripe-state-selected;
-$action-stripe-background-color-selected-state-default: tokens.$component-header-stripe-state-selected;
-$action-stripe-background-color-selected-state-hover: tokens.$component-header-stripe-state-selected;
+$action-stripe-background-color-selected-state-active: tokens.$component-navigation-item-stripe-state-selected;
+$action-stripe-background-color-selected-state-default: tokens.$component-navigation-item-stripe-state-selected;
+$action-stripe-background-color-selected-state-hover: tokens.$component-navigation-item-stripe-state-selected;
 $action-stripe-background-color-state-default: transparent;
 
-$horizontal-action-stripe-background-color-state-active: tokens.$component-header-stripe-state-unselected;
-$horizontal-action-stripe-background-color-state-hover: tokens.$component-header-stripe-state-unselected;
+$horizontal-action-stripe-background-color-state-active: tokens.$component-navigation-item-stripe-state-unselected;
+$horizontal-action-stripe-background-color-state-hover: tokens.$component-navigation-item-stripe-state-unselected;
 $horizontal-action-stripe-size: units.px-to-rem(2px);
 $horizontal-action-typography: tokens.$body-small-semibold;
 $horizontal-action-shape-variant-config: (
@@ -72,15 +72,15 @@ $avatar-padding-y: tokens.$space-400;
 $avatar-padding-end: tokens.$space-600;
 $avatar-padding-start: tokens.$space-500;
 
-$avatar-color-state-default: tokens.$component-header-item-state-default;
-$avatar-color-state-hover: tokens.$component-header-item-state-hover;
-$avatar-color-state-active: tokens.$component-header-item-state-active;
-$avatar-color-state-selected: tokens.$component-header-item-state-selected;
+$avatar-color-state-default: tokens.$component-navigation-item-state-default;
+$avatar-color-state-hover: tokens.$component-navigation-item-state-hover;
+$avatar-color-state-active: tokens.$component-navigation-item-state-active;
+$avatar-color-state-selected: tokens.$component-navigation-item-state-selected;
 
 $avatar-border-radius: tokens.$radius-full;
 $avatar-border-radius-square: tokens.$radius-200;
 
-$avatar-background-color-state-default: tokens.$component-header-item-background-state-default;
-$avatar-background-color-state-hover: tokens.$component-header-item-background-state-hover;
-$avatar-background-color-state-active: tokens.$component-header-item-background-state-active;
-$avatar-background-color-state-selected: tokens.$component-header-item-background-state-selected;
+$avatar-background-color-state-default: tokens.$component-navigation-item-background-state-default;
+$avatar-background-color-state-hover: tokens.$component-navigation-item-background-state-hover;
+$avatar-background-color-state-active: tokens.$component-navigation-item-background-state-active;
+$avatar-background-color-state-selected: tokens.$component-navigation-item-background-state-selected;
