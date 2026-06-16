@@ -64,25 +64,24 @@
 <!-- Drawer: start -->
 <dialog id="off-canvas-navigation" class="Drawer Drawer--right" aria-label="Menu">
   <div class="DrawerPanel">
-    <div class="DrawerPanel__content">
-
-      <!-- DrawerCloseButton: start -->
+    <div class="DrawerPanel__header">
       <button
         type="button"
-        class="Button Button--tertiary Button--medium Button--symmetrical DrawerCloseButton"
+        class="ControlButton ControlButton--large ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
         data-spirit-dismiss="off-canvas-navigation"
         data-spirit-target="#off-canvas-navigation"
         aria-controls="off-canvas-navigation"
         aria-expanded="false"
       >
-        <svg class="Icon" width="24" height="24" aria-hidden="true">
+        <svg class="Icon" width="16" height="16" aria-hidden="true">
           <use href="/assets/icons/svg/sprite.svg#close" />
         </svg>
         <span class="accessibility-hidden">Close</span>
       </button>
-      <!-- DrawerCloseButton: end -->
+    </div>
+    <div class="DrawerPanel__content">
 
-      <div class="Stack Stack--spacing my-900" style="--stack-spacing: var(--spirit-space-1200)">
+      <div class="Stack Stack--spacing mb-900" style="--stack-spacing: var(--spirit-space-1200)">
         <!-- Drawer Main Navigation: start -->
         <nav class="Navigation Navigation--vertical" aria-label="Main Navigation">
           <ul>

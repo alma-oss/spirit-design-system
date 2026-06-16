@@ -84,9 +84,8 @@ const DrawerDefault = () => {
         closeOnBackdropClick={isClosableOnBackdropClick}
         closeOnEscapeKeyDown={isClosableOnEscapeKey}
       >
-        <DrawerPanel data-testid="drawer-panel">
-          <DrawerCloseButton />
-          <div className="p-800">{content}</div>
+        <DrawerPanel data-testid="drawer-panel" closeButton={<DrawerCloseButton />}>
+          <div className="px-700 pb-900">{content}</div>
         </DrawerPanel>
       </Drawer>
     </>

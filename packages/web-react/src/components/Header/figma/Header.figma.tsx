@@ -70,9 +70,8 @@ const HeaderWithNavigationLoggedIn = ({ itemVariant }: { itemVariant: Navigation
       </Header>
 
       <Drawer id="drawer-navigation-expanded" isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        <DrawerPanel>
-          <DrawerCloseButton />
-          <Stack hasIntermediateDividers hasSpacing marginY="space-900" spacing="space-900">
+        <DrawerPanel closeButton={<DrawerCloseButton />}>
+          <Stack hasIntermediateDividers hasSpacing marginBottom="space-900" spacing="space-900">
             <StackItem>
               <Navigation aria-label="Profile" direction="vertical">
                 <NavigationItem alignmentY="left">
@@ -175,9 +174,8 @@ const HeaderWithNavigationLoggedOut = ({ itemVariant }: { itemVariant: Navigatio
       </Header>
 
       <Drawer id="drawer-navigation-expanded" isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        <DrawerPanel>
-          <DrawerCloseButton />
-          <Stack hasIntermediateDividers hasSpacing marginY="space-900" spacing="space-900">
+        <DrawerPanel closeButton={<DrawerCloseButton />}>
+          <Stack hasIntermediateDividers hasSpacing marginBottom="space-900" spacing="space-900">
             <StackItem>
               <Navigation aria-label="Main Navigation" direction="vertical">
                 <NavigationItem>

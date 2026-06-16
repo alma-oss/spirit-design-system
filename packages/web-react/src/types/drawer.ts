@@ -1,11 +1,9 @@
-import { type ComponentPropsWithRef, type ElementType, type SyntheticEvent } from 'react';
+import { type ComponentPropsWithRef, type ElementType, type ReactNode, type SyntheticEvent } from 'react';
 import { type AlignmentX } from '../constants';
-import { type ButtonColor, type ButtonSize } from './button';
-import { type IconBoxSize } from './icon';
+import { type SpiritControlButtonProps } from './controlButton';
 import {
   type ChildrenProps,
   type OmittedExtendedUnsafeStyleProps,
-  type SpiritButtonElementProps,
   type SpiritDialogElementProps,
   type StyleProps,
 } from './shared';
@@ -21,18 +19,17 @@ export type DrawerPanelHandlingProps = {
   closeOnEscapeKeyDown?: boolean;
 };
 
-export interface DrawerCloseButtonProps<C = void, S = void> extends Omit<
-  SpiritButtonElementProps,
-  'children' | 'color' | 'size'
+export interface DrawerCloseButtonProps extends Omit<
+  SpiritControlButtonProps<'button'>,
+  'children' | 'isSymmetrical' | 'size'
 > {
-  color?: ButtonColor<C>;
-  iconBoxSize?: IconBoxSize;
   label?: string;
-  size?: ButtonSize<S>;
 }
 
 export type DrawerPanelBaseProps<E extends ElementType = DrawerPanelElementType> = {
   elementType?: E;
+  /** The close button rendered automatically inside the panel header. */
+  closeButton?: ReactNode;
 } & ChildrenProps &
   StyleProps;
 

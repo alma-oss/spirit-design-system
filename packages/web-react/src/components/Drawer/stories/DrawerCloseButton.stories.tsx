@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { AlignmentX, ComponentButtonColors, EmotionColors, Sizes } from '../../../constants';
+import { AlignmentX } from '../../../constants';
 import { defaultTranslations } from '../../../translations/defaults';
 import Drawer from '../Drawer';
 import DrawerCloseButton from '../DrawerCloseButton';
@@ -17,35 +17,14 @@ const meta: Meta<typeof DrawerCloseButton> = {
     },
   },
   argTypes: {
-    color: {
-      control: 'select',
-      options: [...Object.values(ComponentButtonColors), ...Object.values(EmotionColors), undefined],
-      table: {
-        defaultValue: { summary: ComponentButtonColors.TERTIARY },
-      },
-    },
-    iconBoxSize: {
-      control: 'object',
-      table: {
-        defaultValue: { summary: '24' },
-      },
-    },
     label: {
       control: 'text',
       table: {
         defaultValue: { summary: defaultTranslations.common.close },
       },
     },
-    size: {
-      control: 'select',
-      options: [...Object.values(Sizes)],
-      table: {
-        defaultValue: { summary: Sizes.MEDIUM },
-      },
-    },
   },
   args: {
-    color: ComponentButtonColors.TERTIARY,
     label: defaultTranslations.common.close,
   },
 };
@@ -64,8 +43,7 @@ export const DrawerCloseButtonPlayground: Story = {
       closeOnBackdropClick={false}
       closeOnEscapeKeyDown={false}
     >
-      <DrawerPanel>
-        <DrawerCloseButton {...args} />
+      <DrawerPanel closeButton={<DrawerCloseButton {...args} />}>
         <div className="p-800">Drawer content</div>
       </DrawerPanel>
     </Drawer>
