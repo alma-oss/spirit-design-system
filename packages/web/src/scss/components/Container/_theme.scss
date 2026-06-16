@@ -1,12 +1,8 @@
 @use 'sass:map';
 @use '@tokens' as tokens;
-@use '../../settings/dictionaries';
-@use '../../tools/tokens' as tokens-tools;
 @use 'tools';
 
-// @deprecated We are deprecating the default max width, it will be removed with next major version.
-// Apart from that, we are also deprecating the 'get-size' function and the usage of the 'get-variable-if-exists' function. In the next major version, we can be sure the required tokens will be present so no check will be needed.
-$container-max-width: tokens-tools.get-variable-if-exists('container-xlarge-max-width', tokens.$container-max-width);
+$container-max-width: tokens.$container-xlarge-max-width;
 $container-paddings: map.get(tokens.$containers, padding);
 $container-breakpoints: tokens.$breakpoints;
 
@@ -21,7 +17,7 @@ $size-config: ();
     $size-config: map.merge(
         $size-config,
         (
-            $size: tools.get-size($size, $container-max-width),
+            $size: map.get($container-size-tokens, $size),
         )
     );
 }
