@@ -33,9 +33,15 @@ const HeaderWithNavigationAndNestedItems = () => {
       </Header>
 
       <Drawer id="drawer-navigation-expanded" isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        <DrawerPanel>
-          <DrawerCloseButton />
-          <Stack hasIntermediateDividers hasSpacing marginY="space-900" spacing="space-900">
+        <DrawerPanel closeButton={<DrawerCloseButton />}>
+          <Stack
+            hasStartDivider
+            hasIntermediateDividers
+            hasEndDivider
+            hasSpacing
+            marginBottom="space-900"
+            spacing="space-900"
+          >
             <StackItem>
               <ProfileNavigation isSquare />
             </StackItem>

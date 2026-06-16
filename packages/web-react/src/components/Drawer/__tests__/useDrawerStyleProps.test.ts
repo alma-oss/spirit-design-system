@@ -7,8 +7,8 @@ describe('useDrawerStyleProps', () => {
 
     expect(result.current.classProps.root).toBe('Drawer Drawer--right');
     expect(result.current.classProps.panel).toBe('DrawerPanel');
+    expect(result.current.classProps.header).toBe('DrawerPanel__header');
     expect(result.current.classProps.content).toBe('DrawerPanel__content');
-    expect(result.current.classProps.closeButton).toBe('DrawerCloseButton');
   });
 
   it('should return custom alignment', () => {

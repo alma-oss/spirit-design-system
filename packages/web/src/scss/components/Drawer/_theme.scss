@@ -19,8 +19,6 @@ $drawer-panel-max-height: none;
 $drawer-panel-text-color: tokens.$text-primary;
 $drawer-panel-background-color: tokens.$background-primary;
 $drawer-panel-shadow: tokens.$shadow-400;
-
-// DrawerCloseButton
-$drawer-close-button-size: tokens.$space-1200;
-$drawer-close-button-padding-x: tokens.$space-900;
-$drawer-close-button-padding-y: tokens.$space-700;
+$drawer-panel-header-gap: tokens.$space-700;
+$drawer-panel-header-padding-x: tokens.$space-700;
+$drawer-panel-header-padding-y: tokens.$space-900;

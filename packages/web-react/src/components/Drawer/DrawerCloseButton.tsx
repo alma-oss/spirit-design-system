@@ -1,46 +1,31 @@
 'use client';
 
-import classNames from 'classnames';
 import React from 'react';
-import { ComponentButtonColors, Sizes } from '../../constants';
-import { useI18n, useStyleProps } from '../../hooks';
+import { useI18n } from '../../hooks';
 import { type DrawerCloseButtonProps } from '../../types';
-import { Button } from '../Button';
+import { ControlButton } from '../ControlButton';
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { useDrawerContext } from './DrawerContext';
-import { useDrawerStyleProps } from './useDrawerStyleProps';
-
-const defaultProps: Partial<DrawerCloseButtonProps> = {
-  color: ComponentButtonColors.TERTIARY,
-  size: Sizes.MEDIUM,
-};
 
 const DrawerCloseButton = (props: DrawerCloseButtonProps) => {
-  const propsWithDefaults = { ...defaultProps, ...props };
-  const { color, iconBoxSize, label, size, ...restProps } = propsWithDefaults;
+  const { label, ...restProps } = props;
   const { t } = useI18n();
   const closeLabel = label ?? t('common.close');
   const { id, isOpen, onClose } = useDrawerContext();
 
-  const { classProps } = useDrawerStyleProps();
-  const { styleProps, props: otherProps } = useStyleProps(restProps);
-
   return (
-    <Button
-      {...otherProps}
+    <ControlButton
+      {...restProps}
       aria-expanded={isOpen}
       aria-controls={id}
       onClick={onClose}
-      color={color}
-      size={size}
-      UNSAFE_className={classNames(classProps.closeButton, styleProps.className)}
-      UNSAFE_style={styleProps.style}
       isSymmetrical
+      size="large"
     >
-      <Icon name="close" boxSize={iconBoxSize} />
+      <Icon name="close" />
       <VisuallyHidden>{closeLabel}</VisuallyHidden>
-    </Button>
+    </ControlButton>
   );
 };
 
