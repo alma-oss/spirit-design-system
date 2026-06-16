@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Stack } from '../../Stack';
 import Checkbox from '../Checkbox';
 
 const CheckboxInputPosition = () => {
@@ -7,7 +8,7 @@ const CheckboxInputPosition = () => {
   const [isResponsiveChecked, setResponsiveChecked] = useState(false);
 
   return (
-    <>
+    <Stack hasSpacing>
       <Checkbox
         id="checkbox-input-position-start"
         name="checkboxInputPositionStart"
@@ -31,7 +32,7 @@ const CheckboxInputPosition = () => {
         isChecked={isResponsiveChecked}
         onChange={() => setResponsiveChecked(!isResponsiveChecked)}
       />
-    </>
+    </Stack>
   );
 };
 

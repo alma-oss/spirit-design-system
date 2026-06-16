@@ -1,12 +1,13 @@
 import React from 'react';
 import { ValidationStates } from '../../../constants';
+import { Stack } from '../../Stack';
 import Checkbox from '../Checkbox';
 
 const CheckboxValidationWithIcon = () => {
   const states = Object.values(ValidationStates);
 
   return (
-    <>
+    <Stack hasSpacing>
       {states.map((state) => (
         <Checkbox
           id={`checkbox-${state}-validation-icon`}
@@ -18,7 +19,7 @@ const CheckboxValidationWithIcon = () => {
           hasValidationIcon
         />
       ))}
-    </>
+    </Stack>
   );
 };
 

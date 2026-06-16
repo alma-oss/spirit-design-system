@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Stack } from '../../Stack';
 import Checkbox from '../Checkbox';
 
 const CheckboxItem = () => {
@@ -7,7 +8,7 @@ const CheckboxItem = () => {
   const [isCheckedItemHelperText, setIsCheckedItemHelperText] = useState(false);
 
   return (
-    <>
+    <Stack hasSpacing>
       <Checkbox
         id="checkbox-item-default"
         name="checkboxItemDefault"
@@ -48,7 +49,7 @@ const CheckboxItem = () => {
         isRequired
         isChecked
       />
-    </>
+    </Stack>
   );
 };
 

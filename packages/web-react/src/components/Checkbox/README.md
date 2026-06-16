@@ -156,15 +156,19 @@ and [escape hatches][readme-escape-hatches].
 
 ## Custom Component
 
-Checkbox classes are fabricated using `useCheckboxStyleProps` hook. You can use it to create your own custom Checkbox component. Compose the standalone [HelperText][readme-helper-text], [Label][readme-label], and [ValidationText][readme-validation-text] components with `PropsProvider` and `useAriaIds` for correct styling and accessibility.
+Checkbox classes are fabricated using `useCheckboxStyleProps` hook. You can use it to create your own custom Checkbox component. Compose the standalone [HelperText][readme-helper-text], [Label][readme-label], and [ValidationText][readme-validation-text] components with `PropsProvider`, `useAriaDescribedBy`, and `useAriaDetails` for correct styling and accessibility.
 
 ```tsx
 const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
+  const { classProps, direction, props: modifiedProps } = useCheckboxStyleProps(props);
   const {
     'aria-describedby': ariaDescribedBy = '',
+    'aria-details': ariaDetailsAttr,
+    details,
     hasValidationIcon,
     helperText,
     id,
+    isChecked,
     isDisabled,
     isItem,
     isLabelHidden,
@@ -172,16 +176,51 @@ const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
     label,
     validationState,
     validationText,
+    value,
     ...restProps
-  } = props;
-  const { classProps, props: modifiedProps } = useCheckboxStyleProps(props);
+  } = modifiedProps;
   const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const [ids, register] = useAriaIds(ariaDescribedBy);
-  const ariaDescribedByProp = useAriaDescribedBy(ids);
-  const validationTextRole = useValidationTextRole({
-    validationState,
-    validationText,
-  });
+  const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
+  const [ariaDetailsProp, registerDetails] = useAriaDetails(ariaDetailsAttr);
+  const validationTextRole = useValidationTextRole({ validationState, validationText });
+
+  const input = (
+    <input
+      {...transferProps}
+      {...ariaDescribedByProp}
+      {...ariaDetailsProp}
+      type="checkbox"
+      id={id}
+      className={classProps.input}
+      disabled={isDisabled}
+      required={isRequired}
+      checked={isChecked}
+      value={value}
+    />
+  );
+  const content = (
+    <>
+      <Label elementType="label" htmlFor={id}>
+        {label}
+      </Label>
+      {details && (
+        <InputDetails id={`${id}-details`} registerAriaDetails={registerDetails}>
+          {details}
+        </InputDetails>
+      )}
+      <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+      {validationState && (
+        <ValidationText
+          id={`${id}-validation-text`}
+          {...(hasValidationIcon && { validationStateIcon: validationState })}
+          validationText={validationText}
+          registerAria={register}
+          role={validationTextRole}
+        />
+      )}
+    </>
+  );
+  const rootStyleProps = mergeStyleProps(Flex, { styleProps });
 
   return (
     <PropsProvider
@@ -193,42 +232,29 @@ const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
         validationState,
       }}
     >
-      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
-        <input
-          {...transferProps}
-          {...ariaDescribedByProp}
-          type="checkbox"
-          id={id}
-          className={classProps.input}
-          disabled={isDisabled}
-          required={isRequired}
-        />
-        <div className={classProps.text}>
-          <Label htmlFor={id}>{label}</Label>
-          <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
-          {validationState && (
-            <ValidationText
-              id={`${id}-validation-text`}
-              {...(hasValidationIcon && { validationStateIcon: validationState })}
-              validationText={validationText}
-              registerAria={register}
-              role={validationTextRole}
-            />
-          )}
-        </div>
-      </div>
+      {isItem ? (
+        <Item {...rootStyleProps} startSlot={input} isDisabled={isDisabled}>
+          {content}
+        </Item>
+      ) : (
+        <Flex {...rootStyleProps} direction={direction} spacingX={isLabelHidden ? 'space-0' : 'space-500'}>
+          {input}
+          <div>{content}</div>
+        </Flex>
+      )}
     </PropsProvider>
   );
 };
 ```
 
-For detailed information see [Checkbox](https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Checkbox/README.md) component
+For detailed information see the [Checkbox][readme-checkbox] component.
 
 [autocomplete-attr]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [item]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Item/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-checkbox]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Checkbox/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/HelperText/README.md
 [readme-label]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Label/README.md

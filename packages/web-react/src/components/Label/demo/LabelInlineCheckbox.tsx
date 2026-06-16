@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Checkbox } from '../../Checkbox';
+import { Stack } from '../../Stack';
 
 const LabelInlineCheckbox = () => {
   const [isCheckedDefault, setIsCheckedDefault] = useState(false);
@@ -7,7 +8,7 @@ const LabelInlineCheckbox = () => {
   const [isCheckedDisabled, setIsCheckedDisabled] = useState(false);
 
   return (
-    <>
+    <Stack hasSpacing>
       <Checkbox
         id="checkbox-example"
         name="checkboxExample"
@@ -31,7 +32,7 @@ const LabelInlineCheckbox = () => {
         isChecked={isCheckedDisabled}
         onChange={() => setIsCheckedDisabled(!isCheckedDisabled)}
       />
-    </>
+    </Stack>
   );
 };
 

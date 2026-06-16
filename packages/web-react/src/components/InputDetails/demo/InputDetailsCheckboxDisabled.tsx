@@ -7,6 +7,7 @@ const InputDetailsCheckboxDisabled = () => (
   <Checkbox
     id="input-details-checkbox-disabled"
     name="consent"
+    marginY="space-500"
     label={
       <Text elementType="span" emphasis="semibold">
         I agree to the terms and conditions

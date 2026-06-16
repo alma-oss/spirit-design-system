@@ -17,6 +17,7 @@ const CheckboxConsentFullExample = () => {
       <Checkbox
         id="consent-full-example"
         name="consentFullExample"
+        marginY="space-500"
         label="I agree to the terms and privacy policy"
         isRequired
         helperText="Please read the documents carefully before agreeing"

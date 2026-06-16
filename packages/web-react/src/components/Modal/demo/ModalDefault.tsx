@@ -141,26 +141,26 @@ const ModalDefault = () => {
               <Checkbox
                 autoComplete="off"
                 id="modal-uniform-docked"
+                isChecked={isDockedOnMobile}
                 label="Dock on mobile"
                 name="modal-uniform-docked"
-                isChecked={isDockedOnMobile}
                 onChange={handleDockedOnMobileChange}
               />
               <Checkbox
                 autoComplete="off"
                 id="modal-uniform-expanded"
+                isChecked={isExpandedOnMobile}
                 isDisabled={!isDockedOnMobile}
                 label="Expand on mobile (docked only)"
                 name="modal-uniform-expanded"
-                isChecked={isExpandedOnMobile}
                 onChange={handleExpandedOnMobileChange}
               />
               <Checkbox
                 autoComplete="off"
                 id="modal-uniform-non-scrolling"
+                isChecked={isScrollable}
                 label="Scrolling inside"
                 name="modal-uniform-non-scrolling"
-                isChecked={isScrollable}
                 onChange={handleScrollableChange}
               />
             </Stack>

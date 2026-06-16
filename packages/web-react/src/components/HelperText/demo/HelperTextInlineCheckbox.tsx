@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Checkbox } from '../../Checkbox';
+import { Stack } from '../../Stack';
 
 const HelperTextInlineCheckbox = () => {
   const [isCheckedDefault, setIsCheckedDefault] = useState(false);
   const [isCheckedDisabled, setIsCheckedDisabled] = useState(false);
 
   return (
-    <>
+    <Stack hasSpacing>
       <Checkbox
         id="checkbox-helper-text-example"
         name="checkboxHelperTextExample"
@@ -24,7 +25,7 @@ const HelperTextInlineCheckbox = () => {
         isChecked={isCheckedDisabled}
         onChange={() => setIsCheckedDisabled(!isCheckedDisabled)}
       />
-    </>
+    </Stack>
   );
 };
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Stack } from '../../Stack';
 import Checkbox from '../Checkbox';
 
 const CheckboxValidation = () => {
@@ -8,7 +9,7 @@ const CheckboxValidation = () => {
   const [isCheckedWarningHelperText, setIsCheckedWarningHelperText] = useState(true);
 
   return (
-    <>
+    <Stack hasSpacing>
       <Checkbox
         id="checkbox-success"
         name="checkboxSuccess"
@@ -45,7 +46,7 @@ const CheckboxValidation = () => {
         isChecked={isCheckedWarningHelperText}
         onChange={() => setIsCheckedWarningHelperText(!isCheckedWarningHelperText)}
       />
-    </>
+    </Stack>
   );
 };
 
