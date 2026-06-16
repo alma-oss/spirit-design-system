@@ -4,7 +4,7 @@ import { Drawer, DrawerCloseButton, DrawerPanel } from '../../Drawer';
 import { Flex } from '../../Flex';
 import { ProductLogo } from '../../ProductLogo';
 import { defaultSvgLogo } from '../../ProductLogo/demo/ProductLogoDefault';
-import { Stack } from '../../Stack';
+import { Stack, StackItem } from '../../Stack';
 import Header from '../Header';
 import HeaderLogo from '../HeaderLogo';
 import { ProfileNavigation } from './HeaderWithNavigation/index';
@@ -36,9 +36,15 @@ const HeaderWithNavigationAndNestedItems = () => {
         <DrawerPanel>
           <DrawerCloseButton />
           <Stack hasIntermediateDividers hasSpacing marginY="space-900" spacing="space-900">
-            <ProfileNavigation isSquare />
-            <MainVerticalNavigation />
-            <SecondaryVerticalNavigation />
+            <StackItem>
+              <ProfileNavigation isSquare />
+            </StackItem>
+            <StackItem>
+              <MainVerticalNavigation />
+            </StackItem>
+            <StackItem>
+              <SecondaryVerticalNavigation />
+            </StackItem>
           </Stack>
         </DrawerPanel>
       </Drawer>
