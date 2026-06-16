@@ -39,7 +39,12 @@ const DropdownTrigger = <E extends ElementType = 'button'>(props: DropdownTrigge
   const mergedProps = { ...otherProps, ...triggerProps, onKeyDown: handleKeyDown };
 
   return (
-    <ContextPropsProvider value={{ tag: { elementType: 'button' } }}>
+    <ContextPropsProvider
+      value={{
+        navigationAvatar: { elementType: 'button' },
+        tag: { elementType: 'button' },
+      }}
+    >
       <Component {...mergedProps} {...mergedStyleProps} ref={triggerRef}>
         {typeof children === 'function' ? children({ isOpen }) : children}
       </Component>

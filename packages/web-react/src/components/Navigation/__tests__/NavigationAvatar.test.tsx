@@ -10,6 +10,8 @@ import {
   validHtmlAttributesTest,
 } from '@local/tests';
 import { SizesExtended } from '../../../constants';
+import { ContextPropsProvider } from '../../../context';
+import { Dropdown, DropdownPopover, DropdownTrigger } from '../../Dropdown';
 import { Icon } from '../../Icon';
 import NavigationAvatar from '../NavigationAvatar';
 
@@ -73,6 +75,54 @@ describe('NavigationAvatar', () => {
     );
 
     expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  it('should apply navigationAvatar props from context when direct props are not provided', () => {
+    render(
+      <ContextPropsProvider value={{ navigationAvatar: { elementType: 'button' } }}>
+        <NavigationAvatar avatarContent={avatarContentMock}>Content</NavigationAvatar>
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  it('should prefer direct navigationAvatar props over context props', () => {
+    render(
+      <ContextPropsProvider value={{ navigationAvatar: { elementType: 'button' } }}>
+        <NavigationAvatar avatarContent={avatarContentMock} elementType="div">
+          Content
+        </NavigationAvatar>
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Content').localName).toBe('div');
+  });
+
+  it('should not consume props from a different namespace', () => {
+    render(
+      <ContextPropsProvider value={{ tag: { elementType: 'button' } }}>
+        <NavigationAvatar avatarContent={avatarContentMock} href="/">
+          Content
+        </NavigationAvatar>
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByRole('link')).toBeInTheDocument();
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+  });
+
+  it('should render as a button when used as DropdownTrigger', () => {
+    render(
+      <Dropdown id="navigation-avatar-dropdown" isOpen={false} onToggle={jest.fn()}>
+        <DropdownTrigger elementType={NavigationAvatar} avatarContent={avatarContentMock} aria-label="Profile">
+          Content
+        </DropdownTrigger>
+        <DropdownPopover>Options</DropdownPopover>
+      </Dropdown>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Profile' })).toHaveClass('NavigationAvatar');
   });
 
   it.each(Object.values(SizesExtended))('should render %s size avatar', (size) => {

@@ -130,6 +130,10 @@ at edge of the `Dropdown` element and on the place defined by the placement attr
 | `children`    | \[`string` \| `ReactNode`] | —        | ✓        | Content of trigger element       |
 | `elementType` | \[`string` \| `ReactNode`] | `button` | ✕        | Element type of dropdown trigger |
 
+When `elementType` is a composed component such as `Tag` or `NavigationAvatar`, `DropdownTrigger` provides
+`elementType="button"` through that component's context namespace. A direct `elementType` prop on the composed
+component overrides the context default.
+
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
