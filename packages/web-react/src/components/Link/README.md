@@ -82,6 +82,20 @@ You can allow the link to have visited state style with the `hasVisitedStyleAllo
 </Link>
 ```
 
+## Stretched
+
+Use the `isStretched` prop to stretch the clickable area of the link over its nearest positioned ancestor. The position style should be usually set by the parent component or you need to set it manually.
+
+```tsx
+<Box UNSAFE_style={{ position: 'relative' }}>
+  The{' '}
+  <Link href="/" isStretched>
+    stretched link
+  </Link>{' '}
+  makes this whole box clickable.
+</Box>
+```
+
 ## API
 
 | Name                     | Type                                      | Default   | Required | Description                      |
@@ -91,6 +105,7 @@ You can allow the link to have visited state style with the `hasVisitedStyleAllo
 | `hasVisitedStyleAllowed` | `bool`                                    | `false`   | ✕        | Allow link to have visited style |
 | `href`                   | `string`                                  | —         | ✕        | Link's href attribute            |
 | `isDisabled`             | `bool`                                    | `false`   | ✕        | Whether is the link disabled     |
+| `isStretched`            | `bool`                                    | `false`   | ✕        | Whether the link is stretched    |
 | `ref`                    | `ForwardedRef<HTMLAnchorElement>`         | —         | ✕        | Link element reference           |
 | `underlined`             | `hover` \| `always` \| `never`            | `hover`   | ✕        | When is the link underlined      |
 

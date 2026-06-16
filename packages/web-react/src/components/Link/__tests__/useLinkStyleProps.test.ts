@@ -32,6 +32,13 @@ describe('useLinkStyleProps', () => {
     expect(result.current.classProps).toContain('link-allow-visited-style');
   });
 
+  it('should return link-stretched class', () => {
+    const props = { isStretched: true } as SpiritLinkProps;
+    const { result } = renderHook(() => useLinkStyleProps(props));
+
+    expect(result.current.classProps).toContain('link-stretched');
+  });
+
   it('should return link-inherit class', () => {
     const props = { color: 'inherit' } as SpiritLinkProps;
     const { result } = renderHook(() => useLinkStyleProps(props));
