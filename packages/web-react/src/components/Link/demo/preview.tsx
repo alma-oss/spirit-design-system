@@ -5,6 +5,7 @@ import DocsSection from '../../../../docs/DocsSection';
 import LinkColors from './LinkColors';
 import LinkDefault from './LinkDefault';
 import LinkDisabled from './LinkDisabled';
+import LinkStretched from './LinkStretched';
 import LinkUnderlined from './LinkUnderlined';
 import LinkVisited from './LinkVisited';
 import LinkVisitedDisabled from './LinkVisitedDisabled';
@@ -22,6 +23,9 @@ export const Preview = () => (
     </DocsSection>
     <DocsSection title="Underlined">
       <LinkUnderlined />
+    </DocsSection>
+    <DocsSection title="Stretched">
+      <LinkStretched />
     </DocsSection>
     <DocsSection title="Visited">
       <LinkVisited />
