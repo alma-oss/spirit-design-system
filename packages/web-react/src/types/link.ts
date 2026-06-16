@@ -31,10 +31,12 @@ export interface LinkStyleProps<C = void> extends LinkBaseProps {
   color?: LinkColor<C>;
   /** Allow link to have visited style */
   hasVisitedStyleAllowed?: boolean;
-  /** When is the Link underlined */
-  underlined?: UnderlineOptions;
   /** Whether is the Link disabled */
   isDisabled?: boolean;
+  /** Whether the Link is stretched to fill its nearest positioned ancestor */
+  isStretched?: boolean;
+  /** When is the Link underlined */
+  underlined?: UnderlineOptions;
 }
 
 /** ===== INTERNAL API ===== */
