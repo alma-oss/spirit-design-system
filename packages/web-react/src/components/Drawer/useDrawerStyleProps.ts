@@ -14,8 +14,8 @@ export interface UseDrawerStylesReturn {
   classProps: {
     root: string;
     panel: string;
+    header: string;
     content: string;
-    closeButton: string;
   };
 }
 
@@ -28,16 +28,16 @@ export const useDrawerStyleProps = (props: UseDrawerStylesProps = {}): UseDrawer
     right: `${drawerClass}--right`,
   };
   const drawerPanelClass = `${drawerClass}Panel`;
+  const drawerPanelHeaderClass = `${drawerPanelClass}__header`;
   const drawerContentClass = `${drawerPanelClass}__content`;
-  const drawerCloseButtonClass = `${drawerClass}CloseButton`;
 
   const classProps = {
     root: classNames(drawerClass, drawerAlignXClasses[drawerAlignmentX], {
       [CLASS_NAME_OPEN]: isOpen,
     }),
     panel: drawerPanelClass,
+    header: drawerPanelHeaderClass,
     content: drawerContentClass,
-    closeButton: drawerCloseButtonClass,
   };
 
   return {

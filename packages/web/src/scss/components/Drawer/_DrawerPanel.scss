@@ -21,6 +21,14 @@
     }
 }
 
+.DrawerPanel__header {
+    display: flex;
+    column-gap: theme.$drawer-panel-header-gap;
+    justify-content: flex-end;
+    padding-inline: theme.$drawer-panel-header-padding-x;
+    padding-block: theme.$drawer-panel-header-padding-y;
+}
+
 .DrawerPanel__content {
     display: flex;
     flex-grow: 1;

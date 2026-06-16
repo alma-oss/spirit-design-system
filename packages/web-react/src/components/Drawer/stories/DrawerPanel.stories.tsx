@@ -26,12 +26,8 @@ const meta: Meta<typeof DrawerPanel> = {
   },
   args: {
     elementType: 'div',
-    children: (
-      <>
-        <DrawerCloseButton />
-        <div className="p-800">Drawer content</div>
-      </>
-    ),
+    closeButton: <DrawerCloseButton />,
+    children: <div className="p-800">Drawer content</div>,
   },
 };
 
@@ -41,7 +37,7 @@ type Story = StoryObj<typeof DrawerPanel>;
 export const DrawerPanelPlayground: Story = {
   name: 'DrawerPanel',
   render: (args) => {
-    const { elementType, children } = args as Partial<DrawerPanelProps>;
+    const { elementType, children, closeButton } = args as Partial<DrawerPanelProps>;
 
     return (
       <Drawer
@@ -52,7 +48,9 @@ export const DrawerPanelPlayground: Story = {
         closeOnBackdropClick={false}
         closeOnEscapeKeyDown={false}
       >
-        <DrawerPanel elementType={elementType}>{children}</DrawerPanel>
+        <DrawerPanel elementType={elementType} closeButton={closeButton}>
+          {children}
+        </DrawerPanel>
       </Drawer>
     );
   },
