@@ -2,9 +2,10 @@
 
 import React, { type ElementType, forwardRef } from 'react';
 import { Sizes } from '../../constants';
+import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import {
-  type NavigationAvatarProps,
+  type NavigationAvatarBaseProps,
   type PolymorphicComponent,
   type PolymorphicRef,
   type SpiritNavigationAvatarProps,
@@ -23,15 +24,17 @@ const _NavigationAvatar = <E extends ElementType = 'a'>(
   props: SpiritNavigationAvatarProps<E>,
   ref: PolymorphicRef<E>,
 ) => {
-  const propsWithDefaults = { ...defaultProps, ...props };
   const {
-    elementType: ElementTag = defaultProps.elementType as ElementType,
+    elementType: propsElementType,
     avatarContent,
     avatarSize = defaultProps.avatarSize,
     isSquare,
     children,
     ...restProps
-  } = propsWithDefaults;
+  } = props;
+  const contextProps = useContextProps<Partial<SpiritNavigationAvatarProps<E>>>();
+  const elementType = propsElementType ?? contextProps.elementType ?? defaultProps.elementType;
+  const ElementTag = elementType as ElementType;
 
   const { classProps, props: modifiedProps } = useNavigationStyleProps({ isSquare, ...restProps });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
@@ -49,7 +52,7 @@ const _NavigationAvatar = <E extends ElementType = 'a'>(
 
 const NavigationAvatar = forwardRef<HTMLAnchorElement, SpiritNavigationAvatarProps<'a'>>(
   _NavigationAvatar as never,
-) as unknown as PolymorphicComponent<'a', NavigationAvatarProps<ElementType>>;
+) as unknown as PolymorphicComponent<'a', NavigationAvatarBaseProps>;
 
 NavigationAvatar.spiritComponent = 'NavigationAvatar';
 NavigationAvatar.displayName = 'NavigationAvatar';

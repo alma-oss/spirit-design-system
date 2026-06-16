@@ -5,14 +5,9 @@ import DropdownPopover from '../../Dropdown/DropdownPopover';
 import DropdownTrigger from '../../Dropdown/DropdownTrigger';
 import { Icon } from '../../Icon';
 import Navigation from '../Navigation';
+import NavigationAvatar from '../NavigationAvatar';
 import NavigationItem from '../NavigationItem';
-import {
-  AVATAR_ARIA_LABEL,
-  AVATAR_CONTENT,
-  AVATAR_TEXT,
-  DROPDOWN_ITEMS,
-  NavigationAvatarAsDropdownTrigger,
-} from './navigationAvatarDemoHelpers';
+import { AVATAR_ARIA_LABEL, AVATAR_CONTENT, AVATAR_TEXT, DROPDOWN_ITEMS } from './navigationAvatarDemoHelpers';
 
 const NavigationAvatarWithDropdown = () => {
   const [isDropdownOpen, toggleDropdown] = useToggle();
@@ -28,11 +23,7 @@ const NavigationAvatarWithDropdown = () => {
           isOpen={isDropdownOpen}
           onToggle={toggleDropdown}
         >
-          <DropdownTrigger
-            elementType={NavigationAvatarAsDropdownTrigger}
-            avatarContent={AVATAR_CONTENT}
-            aria-label={AVATAR_ARIA_LABEL}
-          >
+          <DropdownTrigger elementType={NavigationAvatar} avatarContent={AVATAR_CONTENT} aria-label={AVATAR_ARIA_LABEL}>
             {AVATAR_TEXT}
             <Icon name={`chevron-${isDropdownOpen ? 'up' : 'down'}`} />
           </DropdownTrigger>
@@ -48,7 +39,7 @@ const NavigationAvatarWithDropdown = () => {
           onToggle={toggleSquareDropdown}
         >
           <DropdownTrigger
-            elementType={NavigationAvatarAsDropdownTrigger}
+            elementType={NavigationAvatar}
             avatarContent={AVATAR_CONTENT}
             isSquare
             aria-label={AVATAR_ARIA_LABEL}
