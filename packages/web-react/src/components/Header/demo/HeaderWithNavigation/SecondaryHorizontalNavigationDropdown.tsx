@@ -1,18 +1,8 @@
-import React, { type ReactElement, forwardRef, useState } from 'react';
-import { type PolymorphicRef, type SpiritNavigationAvatarProps } from '../../../../types';
+import React, { type ReactElement, useState } from 'react';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../../../Dropdown';
 import { Icon } from '../../../Icon';
 import { NavigationAvatar } from '../../../Navigation';
 import { DropdownPopoverContent } from '../HeaderWithNavigationAndNestedItems/MainHorizontalNavigationDropdown';
-
-const _NavigationAvatarAsDropdownTrigger = (
-  props: SpiritNavigationAvatarProps<'button'>,
-  ref: PolymorphicRef<'button'>,
-) => <NavigationAvatar {...props} elementType="button" ref={ref} />;
-
-const NavigationAvatarAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNavigationAvatarProps<'button'>>(
-  _NavigationAvatarAsDropdownTrigger,
-);
 
 type SecondaryHorizontalNavigationDropdownProps = {
   id: string;
@@ -35,7 +25,7 @@ const SecondaryHorizontalNavigationDropdown = ({
       placement="bottom-end"
     >
       <DropdownTrigger
-        elementType={NavigationAvatarAsDropdownTrigger}
+        elementType={NavigationAvatar}
         avatarContent={<Icon name="profile" />}
         aria-label="Profile of Jiří Bárta"
         isSquare={isSquare}
