@@ -63,16 +63,17 @@ export const componentButtonTertiaryStateHover = '#e5e5e5';
 
 export const componentHeaderBackground = '#fdfdfc';
 export const componentHeaderBorder = '#e5e5e5';
-export const componentHeaderItemBackgroundStateActive = '#f1edff';
-export const componentHeaderItemBackgroundStateDefault = '#fff0';
-export const componentHeaderItemBackgroundStateHover = '#f8f6ff';
-export const componentHeaderItemBackgroundStateSelected = '#f8f6ff';
-export const componentHeaderItemStateActive = '#4e2ea6';
-export const componentHeaderItemStateDefault = '#404040';
-export const componentHeaderItemStateHover = '#6039cc';
-export const componentHeaderItemStateSelected = '#6039cc';
-export const componentHeaderStripeStateSelected = '#ffbe00';
-export const componentHeaderStripeStateUnselected = '#e4daff';
+
+export const componentNavigationItemBackgroundStateActive = '#f1edff';
+export const componentNavigationItemBackgroundStateDefault = '#fff0';
+export const componentNavigationItemBackgroundStateHover = '#f8f6ff';
+export const componentNavigationItemBackgroundStateSelected = '#f8f6ff';
+export const componentNavigationItemStateActive = '#4e2ea6';
+export const componentNavigationItemStateDefault = '#404040';
+export const componentNavigationItemStateHover = '#6039cc';
+export const componentNavigationItemStateSelected = '#6039cc';
+export const componentNavigationItemStripeStateSelected = '#ffbe00';
+export const componentNavigationItemStripeStateUnselected = '#e4daff';
 
 export const componentPaginationSelectedBorder = '#7847ff';
 export const componentPaginationSelectedContent = '#fdfdfc';
