@@ -14,6 +14,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
   - [Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed](#header-unstable_header-stabilized-previous-header-css-removed)
+  - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
 
 ## Component Changes
 
@@ -196,6 +197,30 @@ The `--spirit-header-height` CSS variable is still set by `.Header` and can be u
 If you were using the previous `Header` with its sub-components (`.HeaderNav`, `.HeaderDialog`,
 `.HeaderMobileActions`, etc.), the composition can vary significantly depending on your use case.
 See [Header README][readme-header] for the current `Header` implementation and composition examples.
+
+### ControlButton: Expanded Size Scale Feature Flag Removed
+
+The feature flag enabling the expanded size scale was removed and the expanded size scale is now default.
+`ControlButton` now ships five sizes (`xsmall`, `small`, `medium`, `large`, `xlarge`) and the existing
+sizes were remapped to smaller heights:
+
+| CSS Class               | Height before | Height now |
+| ----------------------- | ------------- | ---------- |
+| `ControlButton--xsmall` | —             | 16px       |
+| `ControlButton--small`  | 24px          | 20px       |
+| `ControlButton--medium` | 32px          | 24px       |
+| `ControlButton--large`  | 40px          | 32px       |
+| `ControlButton--xlarge` | —             | 40px       |
+
+#### Migration Guide
+
+You can now safely delete the Sass variable `$enable-v5-control-button-expanded-size-scale` and the CSS
+class `spirit-feature-enable-v5-control-button-expanded-size-scale` from your project as they have no
+effect.
+
+This is a **visual breaking change** — if you relied on the previous heights, shift the size modifier up
+to keep the same rendering: `ControlButton--small` → `ControlButton--medium`,
+`ControlButton--medium` → `ControlButton--large`, and `ControlButton--large` → `ControlButton--xlarge`.
 
 ---
 
