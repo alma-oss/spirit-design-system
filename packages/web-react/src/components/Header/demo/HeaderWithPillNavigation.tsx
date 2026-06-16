@@ -4,7 +4,7 @@ import { Drawer, DrawerCloseButton, DrawerPanel } from '../../Drawer';
 import { Flex } from '../../Flex';
 import { ProductLogo } from '../../ProductLogo';
 import { defaultSvgLogo } from '../../ProductLogo/demo/ProductLogoDefault';
-import { Stack } from '../../Stack';
+import { Stack, StackItem } from '../../Stack';
 import Header from '../Header';
 import HeaderLogo from '../HeaderLogo';
 import {
@@ -35,9 +35,15 @@ const HeaderWithPillNavigation = () => {
         <DrawerPanel>
           <DrawerCloseButton />
           <Stack hasIntermediateDividers hasSpacing marginY="space-900" spacing="space-900">
-            <ProfileNavigation />
-            <MainNavigation direction="vertical" variant="pill" />
-            <SecondaryVerticalNavigation />
+            <StackItem>
+              <ProfileNavigation />
+            </StackItem>
+            <StackItem>
+              <MainNavigation direction="vertical" variant="pill" />
+            </StackItem>
+            <StackItem>
+              <SecondaryVerticalNavigation />
+            </StackItem>
           </Stack>
         </DrawerPanel>
       </Drawer>
