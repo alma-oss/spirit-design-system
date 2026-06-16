@@ -52,8 +52,6 @@ Tag comes in five available sizes: xsmall, small, medium, large, and xlarge.
 
 ## With ControlButton
 
-ℹ️ The `ControlButton` inside `Tag` requires the [expanded size scale][expanded-size-scale] feature to be enabled.
-
 ### ControlButton Size Matching
 
 | Tag Size | ControlButton Size |
@@ -65,19 +63,17 @@ Tag comes in five available sizes: xsmall, small, medium, large, and xlarge.
 | xlarge   | medium             |
 
 ```html
-<div class="spirit-feature-enable-v5-control-button-expanded-size-scale">
-  <div class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic">
-    <span>Tag label</span>
-    <button
-      type="button"
-      class="ControlButton ControlButton--small ControlButton--symmetrical"
-      aria-label="Remove Tag label"
-    >
-      <svg class="Icon" width="16" height="16" aria-hidden="true">
-        <use href="/icons/svg/sprite.svg#close" />
-      </svg>
-    </button>
-  </div>
+<div class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic">
+  <span>Tag label</span>
+  <button
+    type="button"
+    class="ControlButton ControlButton--small ControlButton--symmetrical"
+    aria-label="Remove Tag label"
+  >
+    <svg class="Icon" width="16" height="16" aria-hidden="true">
+      <use href="/icons/svg/sprite.svg#close" />
+    </svg>
+  </button>
 </div>
 ```
 
@@ -109,20 +105,18 @@ Add the `Tag--disabled` modifier to visually disable a Tag:
 Disabled Tag with `ControlButton`:
 
 ```html
-<div class="spirit-feature-enable-v5-control-button-expanded-size-scale">
-  <div class="Tag Tag--neutral Tag--medium Tag--disabled">
-    <span>Disabled tag</span>
-    <button
-      type="button"
-      class="ControlButton ControlButton--small ControlButton--symmetrical"
-      aria-label="Remove Disabled tag"
-      disabled
-    >
-      <svg class="Icon" width="16" height="16" aria-hidden="true">
-        <use href="/icons/svg/sprite.svg#close" />
-      </svg>
-    </button>
-  </div>
+<div class="Tag Tag--neutral Tag--medium Tag--disabled">
+  <span>Disabled tag</span>
+  <button
+    type="button"
+    class="ControlButton ControlButton--small ControlButton--symmetrical"
+    aria-label="Remove Disabled tag"
+    disabled
+  >
+    <svg class="Icon" width="16" height="16" aria-hidden="true">
+      <use href="/icons/svg/sprite.svg#close" />
+    </svg>
+  </button>
 </div>
 ```
 
@@ -135,5 +129,4 @@ Disabled link Tag:
 ℹ️ Read more about this pattern at [Scott O'Hara's blog][scott-o-hara-disabling-a-link].
 
 [component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
-[expanded-size-scale]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/ControlButton/README.md#expanded-size-scale
 [scott-o-hara-disabling-a-link]: https://www.scottohara.me/blog/2021/05/28/disabled-links.html

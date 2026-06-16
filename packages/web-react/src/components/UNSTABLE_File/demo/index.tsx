@@ -10,17 +10,15 @@ import FileTruncatedLabel from './FileTruncatedLabel';
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <IconsProvider value={icons}>
-      <div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
-        <DocsSection title="File Icon Variant" stackAlignment="stretch">
-          <FileIconVariant />
-        </DocsSection>
-        <DocsSection title="Image Preview Variant" stackAlignment="stretch">
-          <FileImagePreviewVariant />
-        </DocsSection>
-        <DocsSection title="Label Truncation" stackAlignment="stretch">
-          <FileTruncatedLabel />
-        </DocsSection>
-      </div>
+      <DocsSection title="File Icon Variant" stackAlignment="stretch">
+        <FileIconVariant />
+      </DocsSection>
+      <DocsSection title="Image Preview Variant" stackAlignment="stretch">
+        <FileImagePreviewVariant />
+      </DocsSection>
+      <DocsSection title="Label Truncation" stackAlignment="stretch">
+        <FileTruncatedLabel />
+      </DocsSection>
     </IconsProvider>
   </StrictMode>,
 );

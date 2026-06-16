@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { DemoColorTypes } from '../../../../docs';
-import { Intensity, Sizes } from '../../../constants';
+import { Intensity, SizesExtended } from '../../../constants';
 import type {
   AccentColorNamesType,
   BackgroundColorsDictionaryType,
@@ -119,7 +119,7 @@ const renderRow = (
   colorType: DemoColorType,
   intensity?: IntensityDictionaryType,
 ) => {
-  const sizes = Object.values(Sizes);
+  const sizes = Object.values(SizesExtended);
   const resolvedIntensity = intensity ?? Intensity.BASIC;
   const colorScheme =
     colorType !== DemoColorTypes.BASIC ? getColorScheme(color, colorType, resolvedIntensity) : undefined;
@@ -138,29 +138,34 @@ const renderRow = (
   }
 
   return (
-    <Box
-      key={intensity || 'default'}
-      alignmentX={{ mobile: 'center', tablet: 'left' }}
-      alignmentY="center"
-      elementType={Flex}
-      padding="space-800"
-      {...(colorScheme ? { colorScheme } : { backgroundColor, textColor })}
-    >
-      {sizes.map((size) => (
-        <Fragment key={`${size}-subtle`}>
-          <ControlButton size={size} isSymmetrical isSubtle aria-label="Close dialog">
+    <Fragment key={intensity || 'default'}>
+      <Box
+        alignmentX={{ mobile: 'center', tablet: 'left' }}
+        alignmentY="center"
+        elementType={Flex}
+        padding="space-800"
+        {...(colorScheme ? { colorScheme } : { backgroundColor, textColor })}
+      >
+        {sizes.map((size) => (
+          <ControlButton key={`${size}-subtle`} size={size} isSymmetrical isSubtle aria-label="Close dialog">
             <Icon name="close" />
           </ControlButton>
-        </Fragment>
-      ))}
-      {sizes.map((size) => (
-        <Fragment key={`${size}-bordered`}>
-          <ControlButton size={size} isSymmetrical aria-label="Close dialog">
+        ))}
+      </Box>
+      <Box
+        alignmentX={{ mobile: 'center', tablet: 'left' }}
+        alignmentY="center"
+        elementType={Flex}
+        padding="space-800"
+        {...(colorScheme ? { colorScheme } : { backgroundColor, textColor })}
+      >
+        {sizes.map((size) => (
+          <ControlButton key={`${size}-bordered`} size={size} isSymmetrical aria-label="Close dialog">
             <Icon name="close" />
           </ControlButton>
-        </Fragment>
-      ))}
-    </Box>
+        ))}
+      </Box>
+    </Fragment>
   );
 };
 

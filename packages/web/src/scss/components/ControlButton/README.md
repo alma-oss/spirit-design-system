@@ -118,40 +118,13 @@ visible. The border color will adapt to the background color:
 
 The following sizes are available:
 
-| Size   | CSS Class               | Icon Size |
-| ------ | ----------------------- | --------- |
-| Small  | `ControlButton--small`  | 16px      |
-| Medium | `ControlButton--medium` | 16px      |
-| Large  | `ControlButton--large`  | 20px      |
-
-## Feature Flag: Expanded Size Scale
-
-Enable the expanded size scale using the `spirit-feature-enable-v5-control-button-expanded-size-scale`
-CSS class on a parent element or using the `$enable-v5-control-button-expanded-size-scale` Sass flag.
-When enabled, the size scale shifts to include two additional smaller sizes (`xsmall` and `small`)
-while mapping the existing sizes up:
-
 | Size   | CSS Class               | Height | Icon Size |
 | ------ | ----------------------- | ------ | --------- |
-| XSmall | `ControlButton--xsmall` | 16px   | 16px      |
+| XSmall | `ControlButton--xsmall` | 16px   | 12px      |
 | Small  | `ControlButton--small`  | 20px   | 16px      |
 | Medium | `ControlButton--medium` | 24px   | 16px      |
 | Large  | `ControlButton--large`  | 32px   | 16px      |
 | XLarge | `ControlButton--xlarge` | 40px   | 20px      |
-
-```html
-<div class="spirit-feature-enable-v5-control-button-expanded-size-scale">
-  <button
-    type="button"
-    class="ControlButton ControlButton--xsmall ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target"
-    aria-label="Close"
-  >
-    <svg class="Icon" width="16" height="16" aria-hidden="true">
-      <use href="/icons/svg/sprite.svg#close" />
-    </svg>
-  </button>
-</div>
-```
 
 ## Symmetrical ControlButton
 
