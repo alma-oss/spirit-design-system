@@ -32,9 +32,8 @@ const HeaderWithPillNavigation = () => {
       </Header>
 
       <Drawer id="drawer-navigation-pill" isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        <DrawerPanel>
-          <DrawerCloseButton />
-          <Stack hasIntermediateDividers hasSpacing marginY="space-900" spacing="space-900">
+        <DrawerPanel closeButton={<DrawerCloseButton />}>
+          <Stack hasIntermediateDividers hasSpacing marginBottom="space-900" spacing="space-900">
             <StackItem>
               <ProfileNavigation />
             </StackItem>

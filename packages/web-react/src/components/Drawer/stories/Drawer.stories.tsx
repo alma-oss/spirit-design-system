@@ -85,8 +85,7 @@ const DrawerWithHooks = (args: SpiritDrawerProps) => {
         closeOnBackdropClick={closeOnBackdropClick}
         closeOnEscapeKeyDown={closeOnEscapeKeyDown}
       >
-        <DrawerPanel>
-          <DrawerCloseButton />
+        <DrawerPanel closeButton={<DrawerCloseButton />}>
           <div className="p-800">Drawer content</div>
         </DrawerPanel>
       </Drawer>
