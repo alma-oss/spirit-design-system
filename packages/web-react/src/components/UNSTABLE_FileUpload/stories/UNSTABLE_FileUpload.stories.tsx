@@ -12,13 +12,6 @@ import { UNSTABLE_FileUpload } from '..';
 const meta: Meta<typeof UNSTABLE_FileUpload> = {
   title: 'Experimental/UNSTABLE_FileUpload',
   component: UNSTABLE_FileUpload,
-  decorators: [
-    (Story) => (
-      <div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
-        <Story />
-      </div>
-    ),
-  ],
   parameters: {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,

@@ -20,11 +20,7 @@ const controlButtonSizeMap: Record<string, SizeExtendedDictionaryType> = {
 };
 
 const TagWithControlButton = () => (
-  <Grid
-    cols={{ mobile: 1, tablet: 3, desktop: 5 }}
-    spacingY="space-1100"
-    UNSAFE_className="spirit-feature-enable-v5-control-button-expanded-size-scale"
-  >
+  <Grid cols={{ mobile: 1, tablet: 3, desktop: 5 }} spacingY="space-1100">
     {sizes.map((size) => (
       <DocsSection key={size} container="none" hasPadding={false} title={`Size ${size}`}>
         {colors.map((color) => (

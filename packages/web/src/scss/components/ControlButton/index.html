@@ -4,8 +4,7 @@
 {{setVar "neutralColors" "neutral" }}
 {{setVar "emotionColors" "success" "informative" "warning" "danger" }}
 {{setVar "accentColors" "01" "02" }}
-{{setVar "sizes" "small" "medium" "large" }}
-{{setVar "expandedSizes" "xsmall" "small" "medium" "large" "xlarge" }}
+{{setVar "sizes" "xsmall" "small" "medium" "large" "xlarge" }}
 
 <section class="py-900 py-tablet-1000">
   <div class="Container">
@@ -34,14 +33,18 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
               </svg>
             </button>
             {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-{{color}} p-800"
+          >
             {{#each @root.sizes as |size|}}
             <button
               type="button"
@@ -50,8 +53,8 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
@@ -73,14 +76,18 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
               </svg>
             </button>
             {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-{{color}}-basic bg-color-scheme text-color-scheme p-800"
+          >
             {{#each @root.sizes as |size|}}
             <button
               type="button"
@@ -89,8 +96,8 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
@@ -109,14 +116,18 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
               </svg>
             </button>
             {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-{{color}}-subtle bg-color-scheme text-color-scheme p-800"
+          >
             {{#each @root.sizes as |size|}}
             <button
               type="button"
@@ -125,8 +136,8 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
@@ -153,14 +164,18 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
               </svg>
             </button>
             {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-emotion-{{color}}-basic bg-color-scheme text-color-scheme p-800"
+          >
             {{#each @root.sizes as |size|}}
             <button
               type="button"
@@ -169,8 +184,8 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
@@ -189,14 +204,18 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
               </svg>
             </button>
             {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-emotion-{{color}}-subtle bg-color-scheme text-color-scheme p-800"
+          >
             {{#each @root.sizes as |size|}}
             <button
               type="button"
@@ -205,8 +224,8 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
@@ -233,14 +252,18 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
               </svg>
             </button>
             {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-accent-{{color}}-basic bg-color-scheme text-color-scheme p-800"
+          >
             {{#each @root.sizes as |size|}}
             <button
               type="button"
@@ -249,8 +272,8 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
@@ -269,14 +292,18 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
               </svg>
             </button>
             {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-accent-{{color}}-subtle bg-color-scheme text-color-scheme p-800"
+          >
             {{#each @root.sizes as |size|}}
             <button
               type="button"
@@ -285,8 +312,8 @@
             >
               <svg
                 class="Icon"
-                width="{{#if (eq size "large")}}20{{else}}16{{/if}}"
-                height="{{#if (eq size "large")}}20{{else}}16{{/if}}"
+                width="16"
+                height="16"
                 aria-hidden="true"
               >
                 <use href="/assets/icons/svg/sprite.svg#close" />
@@ -296,56 +323,6 @@
           </div>
           {{/each}}
 
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-<section class="py-900 py-tablet-1000">
-  <div class="Container">
-    <h2 class="docs-Heading">Feature Flag: Expanded Size Scale</h2>
-
-    <div class="docs-Stack docs-Stack--start">
-
-      <div class="spirit-feature-enable-v5-control-button-expanded-size-scale">
-        <div
-          class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-primary p-800"
-        >
-          {{#each @root.expandedSizes as |size|}}
-          <button
-            type="button"
-            class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
-            aria-label="Close dialog"
-          >
-            <svg
-              class="Icon"
-              width="{{#if (eq size "xlarge")}}20{{else}}16{{/if}}"
-              height="{{#if (eq size "xlarge")}}20{{else}}16{{/if}}"
-              aria-hidden="true"
-            >
-              <use href="/assets/icons/svg/sprite.svg#close" />
-            </svg>
-          </button>
-          {{/each}}
-          {{#each @root.expandedSizes as |size|}}
-          <button
-            type="button"
-            class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-            aria-label="Close dialog"
-          >
-            <svg
-              class="Icon"
-              width="{{#if (eq size "xlarge")}}20{{else}}16{{/if}}"
-              height="{{#if (eq size "xlarge")}}20{{else}}16{{/if}}"
-              aria-hidden="true"
-            >
-              <use href="/assets/icons/svg/sprite.svg#close" />
-            </svg>
-          </button>
-          {{/each}}
         </div>
       </div>
 

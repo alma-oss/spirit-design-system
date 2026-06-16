@@ -46,13 +46,6 @@ type UNSTABLE_FileUploadCompositionType = {
 
 export default {
   title: 'Examples/Compositions',
-  decorators: [
-    (Story) => (
-      <div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
-        <Story />
-      </div>
-    ),
-  ],
   argTypes: {
     fileUploadId: {
       control: 'text',

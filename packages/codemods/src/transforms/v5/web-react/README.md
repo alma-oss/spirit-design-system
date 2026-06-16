@@ -211,5 +211,36 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/stack-wrap-children-in-s
 + </Stack>
 ```
 
+### `v5/web-react/control-button-size-scale` — Shift `ControlButton` `size` Values Up by One Step
+
+This codemod remaps the `size` prop of the `ControlButton` component to keep the previous rendered heights after the expanded size scale became the default: `small` → `medium`, `medium` → `large`, and `large` → `xlarge`. The `xsmall` and `xlarge` values are left untouched.
+
+Because the previous default `size` was `medium`, a `ControlButton` with no `size` prop is given an explicit `size="large"` so it keeps its original height.
+
+⚠️ Run this codemod **only if you relied on the previous `ControlButton` heights**. It is a visual change and shifts every `ControlButton` `size` up by one step regardless of intent, so review the result afterwards.
+
+ℹ️ A `ControlButton` that uses a JSX spread (e.g. `<ControlButton {...props} />`) is skipped, since the spread might already provide a `size`. Review those cases manually. The same applies if you set the `size` through a `PropsProvider` context instead of the prop directly.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/control-button-size-scale
+```
+
+#### Example
+
+```diff
+- <ControlButton … />
+- <ControlButton size="small" … />
+- <ControlButton size="medium" … />
+- <ControlButton size="large" … />
+- <ControlButton size={{ mobile: "small", tablet: "large" }} … />
++ <ControlButton size="large" … />
++ <ControlButton size="medium" … />
++ <ControlButton size="large" … />
++ <ControlButton size="xlarge" … />
++ <ControlButton size={{ mobile: 'medium', tablet: 'xlarge' }} … />
+```
+
 [mdn-column-gap]: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/column-gap
 [migration-guide-web-v5-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md#stack-wrap-direct-children-in-stackitem-when-using-dividers
