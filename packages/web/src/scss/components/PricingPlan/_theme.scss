@@ -1,5 +1,4 @@
 @use '@tokens' as tokens;
-@use '../../tools/tokens' as tokens-tools;
 @use '../../tools/units';
 
 $min-width: units.px-to-rem(288px);
@@ -40,17 +39,6 @@ $footer-rows: 1;
 $footer-padding-top: tokens.$space-700;
 $footer-padding-bottom: tokens.$space-900;
 
-// @deprecated We are deprecating the usage of the 'get-variable-if-exists' function.
-// In the next major version, we can be sure the required token will be present so no check will be needed.
-$highlighted-border-color: tokens-tools.get-variable-if-exists(
-    'component-pricing-plan-highlighted-border',
-    tokens.$emotion-informative-border-basic
-);
-$highlighted-background-color: tokens-tools.get-variable-if-exists(
-    'component-pricing-plan-highlighted-background',
-    tokens.$emotion-informative-background-subtle
-);
-$highlighted-body-feature-icon-color: tokens-tools.get-variable-if-exists(
-    'component-pricing-plan-highlighted-content',
-    tokens.$emotion-informative-content-basic
-);
+$highlighted-border-color: tokens.$component-pricing-plan-highlighted-border;
+$highlighted-background-color: tokens.$component-pricing-plan-highlighted-background;
+$highlighted-body-feature-icon-color: tokens.$component-pricing-plan-highlighted-content;
