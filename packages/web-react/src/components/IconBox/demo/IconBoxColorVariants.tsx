@@ -19,6 +19,7 @@ const IconBoxColorVariants = () => {
         <Checkbox
           id="checkbox-subtle"
           name="checkboxSubtle"
+          marginY="space-500"
           label="Subtle variant"
           isChecked={isSubtle}
           onChange={() => setIsSubtle(!isSubtle)}

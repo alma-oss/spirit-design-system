@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Stack } from '../../Stack';
 import Checkbox from '../Checkbox';
 
 const CheckboxDefault = () => {
@@ -6,7 +7,7 @@ const CheckboxDefault = () => {
   const [isSecondCheckboxChecked, setSecondCheckboxChecked] = useState(true);
 
   return (
-    <>
+    <Stack hasSpacing>
       <Checkbox
         id="checkbox-default"
         name="checkboxDefault"
@@ -21,7 +22,7 @@ const CheckboxDefault = () => {
         isChecked={isSecondCheckboxChecked}
         onChange={() => setSecondCheckboxChecked(!isSecondCheckboxChecked)}
       />
-    </>
+    </Stack>
   );
 };
 

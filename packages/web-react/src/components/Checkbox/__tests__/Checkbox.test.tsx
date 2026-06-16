@@ -7,27 +7,22 @@ import {
   formFieldHelperTextContextPropsTest,
   formFieldLabelContextPropsTest,
   formFieldValidationTextContextPropsTest,
-  itemPropsTest,
   requiredPropsTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
-  validationStatePropsTest,
 } from '@local/tests';
+import { ValidationStates } from '../../../constants';
 import Checkbox from '../Checkbox';
 
 jest.mock('../../../hooks/useIcon');
 
 describe('Checkbox', () => {
-  classNamePrefixProviderTest(Checkbox, 'Checkbox');
-
-  itemPropsTest(Checkbox);
+  classNamePrefixProviderTest(Checkbox, 'Checkbox', { getByRole: 'checkbox' });
 
   stylePropsTest(Checkbox);
 
   restPropsTest(Checkbox, 'input');
-
-  validationStatePropsTest(Checkbox, 'Checkbox--');
 
   requiredPropsTest(Checkbox, 'checkbox', 'id', 'test-checkbox');
 
@@ -47,10 +42,10 @@ describe('Checkbox', () => {
     renderComponent: (props) => <Checkbox id="checkbox-validation-context" label="Label" {...props} />,
   });
 
-  it('should have text classname', () => {
+  it('should render inline layout', () => {
     render(<Checkbox id="checkbox" label="Label" />);
 
-    expect(screen.getByRole('checkbox').nextElementSibling).toHaveClass('Checkbox__text');
+    expect(screen.getByRole('checkbox').parentElement).toHaveClass('Flex', 'Flex--horizontal');
   });
 
   it('should have label', () => {
@@ -62,7 +57,23 @@ describe('Checkbox', () => {
   it('should have input classname', () => {
     render(<Checkbox id="checkbox" label="Label" />);
 
-    expect(screen.getByRole('checkbox')).toHaveClass('Checkbox__input');
+    expect(screen.getByRole('checkbox')).toHaveClass('Checkbox');
+  });
+
+  it.each(Object.values(ValidationStates))('should have %s validation classname on input', (state) => {
+    render(<Checkbox id="checkbox" label="Label" validationState={state} />);
+
+    expect(screen.getByRole('checkbox')).toHaveClass(`Checkbox--${state}`);
+  });
+
+  it('should render field as an Item', () => {
+    render(<Checkbox id="checkbox-item" label="Label" isItem />);
+
+    const input = screen.getByRole('checkbox', { name: 'Label' });
+
+    expect(input).toHaveClass('Checkbox', 'Checkbox--item');
+    expect(input.parentElement).toHaveClass('Item__slot');
+    expect(input.parentElement?.parentElement).toHaveClass('Item');
   });
 
   it('should have helper text', () => {

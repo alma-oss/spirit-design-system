@@ -17,6 +17,7 @@ const CheckboxConsentEmphasizedLabel = () => {
       <Checkbox
         id="consent-emphasized-label"
         name="consentEmphasizedLabel"
+        marginY="space-500"
         label={
           <Text elementType="span" emphasis="semibold">
             I agree to the terms and conditions
