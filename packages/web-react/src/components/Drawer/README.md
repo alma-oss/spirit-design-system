@@ -5,8 +5,8 @@ The Drawer component is a container that slides in from side of the screen. It c
 The Drawer is a composition of several subcomponents:
 
 - [Drawer](#drawer)
-  - [DrawerCloseButton](#drawerclosebutton)
   - [DrawerPanel](#drawerpanel)
+    - [DrawerCloseButton](#close-button)
 
 ## Accessibility Guidelines
 
@@ -71,57 +71,46 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
-## DrawerCloseButton
+## DrawerPanel
 
-The `DrawerCloseButton` component is a button that closes the drawer when clicked.
+The `DrawerPanel` component is a container for the content that will be displayed in the drawer.
+Should there be any spacing around the content of `DrawerPanel`, you need to provide it yourself.
+
+Pass the `DrawerCloseButton` through the `closeButton` prop; it is rendered automatically inside the
+panel header. The `children` are rendered in the panel content area.
+
+```tsx
+<DrawerPanel closeButton={<DrawerCloseButton />}>{/* Drawer content goes here */}</DrawerPanel>
+```
+
+### API
+
+| Name          | Type          | Default | Required | Description                                      |
+| ------------- | ------------- | ------- | -------- | ------------------------------------------------ |
+| `children`    | `ReactNode`   | —       | ✕        | Children node rendered in the panel content area |
+| `closeButton` | `ReactNode`   | —       | ✕        | Close button rendered inside the panel header    |
+| `elementType` | `ElementType` | `div`   | ✕        | Type of element used as drawer panel             |
+
+## Close Button
+
+`DrawerCloseButton` is a [ControlButton][control-button] that closes the drawer when clicked.
+It reads the drawer context to wire up `aria-controls`, `aria-expanded`, and the `onClick` handler automatically.
 
 ```tsx
 <DrawerCloseButton />
 ```
 
-Use `color` prop to change the color variant of the button. You can also change the size of the button using the `size` prop.
-
-```tsx
-<DrawerCloseButton color="secondary" size="large" />
-```
-
-Size of the icon can be changed via `iconBoxSize` prop.
-This prop accepts a number or an object with responsive values.
-
-```tsx
-<DrawerCloseButton iconBoxSize={20} />
-<DrawerCloseButton iconBoxSize={{ mobile: 20, tablet: 30, desktop: 40 }} />
-```
-
 ### API
 
-| Name          | Type                                                                                                     | Default    | Required | Description                                                                                           |
-| ------------- | -------------------------------------------------------------------------------------------------------- | ---------- | -------- | ----------------------------------------------------------------------------------------------------- |
-| `color`       | \[[Component Button Color dictionary][dictionary-color] \| [Emotion Color dictionary][dictionary-color]] | `tertiary` | ✕        | Color variant                                                                                         |
-| `iconBoxSize` | \[`number` \| `Responsive<number>` ]                                                                     | 24         | ✕        | Size of the icon, use object to set responsive values, e.g. `{ mobile: 20, tablet: 30, desktop: 40 }` |
-| `label`       | `string`                                                                                                 | `Close`    | ✕        | Label of the drawer close button                                                                      |
-| `size`        | [Size dictionary][dictionary-size]                                                                       | `medium`   | ✕        | Size of the drawer close button                                                                       |
+| Name    | Type     | Default | Required | Description                    |
+| ------- | -------- | ------- | -------- | ------------------------------ |
+| `label` | `string` | `Close` | ✕        | Accessible label of the button |
 
 The component further inherits properties from the [`<button>`][mdn-button-element] element.
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
-
-## DrawerPanel
-
-The `DrawerPanel` component is a container for the content that will be displayed in the drawer.
-
-```tsx
-<DrawerPanel>{/* Drawer content goes here */}</DrawerPanel>
-```
-
-### API
-
-| Name          | Type          | Default | Required | Description                          |
-| ------------- | ------------- | ------- | -------- | ------------------------------------ |
-| `children`    | `ReactNode`   | —       | ✕        | Children node                        |
-| `elementType` | `ElementType` | `div`   | ✕        | Type of element used as drawer panel |
 
 ## Full Example
 
@@ -141,8 +130,7 @@ export const Example = () => {
       </Button>
 
       <Drawer id="drawer-example" isOpen={isOpen} onClose={handleClose}>
-        <DrawerPanel>
-          <DrawerCloseButton />
+        <DrawerPanel closeButton={<DrawerCloseButton />}>
           <div>Drawer content</div>
         </DrawerPanel>
       </Drawer>
@@ -151,8 +139,7 @@ export const Example = () => {
 };
 ```
 
-[dictionary-color]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#color
-[dictionary-size]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#size
+[control-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ControlButton/README.md
 [mdn-button-element]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
 [mdn-dialog-element]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes

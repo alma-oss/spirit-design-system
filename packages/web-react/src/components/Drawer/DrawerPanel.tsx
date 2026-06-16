@@ -15,7 +15,7 @@ const _DrawerPanel = <E extends ElementType = DrawerPanelElementType>(
   props: DrawerPanelProps<E>,
   ref: PolymorphicRef<E>,
 ) => {
-  const { elementType = 'div', children, ...restProps } = props;
+  const { elementType = 'div', children, closeButton, ...restProps } = props;
 
   const Component = elementType as ElementType;
 
@@ -25,6 +25,7 @@ const _DrawerPanel = <E extends ElementType = DrawerPanelElementType>(
 
   return (
     <Component {...(otherProps as HTMLAttributes<HTMLElement>)} {...mergedStyleProps} ref={ref}>
+      {closeButton && <div className={classProps.header}>{closeButton}</div>}
       <div className={classProps.content}>{children}</div>
     </Component>
   );
