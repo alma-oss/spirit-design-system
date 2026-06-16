@@ -37,6 +37,12 @@ const meta: Meta<typeof Link> = {
         defaultValue: { summary: 'false' },
       },
     },
+    isStretched: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
     target: {
       control: 'select',
       options: ['_blank', '_self', '_parent', '_top', undefined],
@@ -58,6 +64,7 @@ const meta: Meta<typeof Link> = {
     elementType: 'a',
     href: 'https://www.example.com',
     isDisabled: false,
+    isStretched: false,
     target: '_blank',
     underlined: undefined,
     hasVisitedStyleAllowed: false,
