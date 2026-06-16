@@ -45,9 +45,13 @@ Remove the border by adding `isSubtle`:
 
 ## Sizes
 
-ControlButton supports three sizes:
+ControlButton supports five sizes: `xsmall`, `small`, `medium`, `large`, and `xlarge`.
 
 ```tsx
+<ControlButton size="xsmall" isSymmetrical aria-label="Close">
+  <Icon name="close" />
+</ControlButton>
+
 <ControlButton size="small" isSymmetrical aria-label="Close">
   <Icon name="close" />
 </ControlButton>
@@ -58,6 +62,10 @@ ControlButton supports three sizes:
 </ControlButton>
 
 <ControlButton size="large" isSymmetrical aria-label="Close">
+  <Icon name="close" />
+</ControlButton>
+
+<ControlButton size="xlarge" isSymmetrical aria-label="Close">
   <Icon name="close" />
 </ControlButton>
 ```
@@ -71,20 +79,6 @@ ControlButton resolves `size` in this order:
 3. default `medium` size
 
 This lets composed components share size through context while standalone usage can still set size explicitly.
-
-## Feature Flag: Expanded Size Scale
-
-Enable the expanded size scale by wrapping ControlButton in an element with the
-`spirit-feature-enable-v5-control-button-expanded-size-scale` CSS class. When enabled, the size scale
-shifts to include `xsmall` and `xlarge` sizes while remapping the existing sizes.
-
-```tsx
-<div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
-  <ControlButton size="xsmall" isSymmetrical aria-label="Close">
-    <Icon name="close" />
-  </ControlButton>
-</div>
-```
 
 ## Symmetrical ControlButton
 

@@ -9,35 +9,12 @@ $border-style: solid;
 $border-radius: tokens.$radius-full;
 $column-gap: tokens.$space-400;
 
-$size-dictionary: dictionaries.$size;
+$size-dictionary: dictionaries.$size-extended;
 
+// NOTE: When a `ControlButton` is composed inside an `InputAddon`, these per-size `icon-size` values
+// override the icon sizes defined by `InputAddon`, so InputAddon's Figma icon sizes are not applied.
+// This is a known design inconsistency, tracked in DS-2644.
 $size-config: (
-    small: (
-        height: units.px-to-rem(24px),
-        padding-x: calc(#{tokens.$space-600} - #{$border-width}),
-        padding-y: calc(#{tokens.$space-300} - #{$border-width}),
-        typography: tokens.$body-small-regular,
-        icon-size: units.px-to-rem(16px),
-    ),
-    medium: (
-        height: units.px-to-rem(32px),
-        padding-x: calc(#{tokens.$space-700} - #{$border-width}),
-        padding-y: calc(#{tokens.$space-500} - #{$border-width}),
-        typography: tokens.$body-small-regular,
-        icon-size: units.px-to-rem(16px),
-    ),
-    large: (
-        height: units.px-to-rem(40px),
-        padding-x: calc(#{tokens.$space-900} - #{$border-width}),
-        padding-y: calc(#{tokens.$space-500} - #{$border-width}),
-        typography: tokens.$body-medium-regular,
-        icon-size: units.px-to-rem(20px),
-    ),
-);
-
-$expanded-size-dictionary: dictionaries.$size-extended;
-
-$expanded-size-config: (
     xsmall: (
         height: units.px-to-rem(16px),
         padding-x: calc(#{tokens.$space-600} - #{$border-width}),

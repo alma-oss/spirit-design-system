@@ -49,8 +49,6 @@ Subtle variants:
 
 ## With ControlButton
 
-The `ControlButton` inside `Tag` requires the [expanded size scale][expanded-size-scale] feature to be enabled.
-
 ### ControlButton Size Matching
 
 | Tag Size | ControlButton Size |
@@ -62,14 +60,12 @@ The `ControlButton` inside `Tag` requires the [expanded size scale][expanded-siz
 | xlarge   | medium             |
 
 ```tsx
-<div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
-  <Tag elementType="div" color="selected">
-    <span>Tag label</span>
-    <ControlButton size="small" isSymmetrical aria-label="Remove Tag label">
-      <Icon name="close" />
-    </ControlButton>
-  </Tag>
-</div>
+<Tag elementType="div" color="selected">
+  <span>Tag label</span>
+  <ControlButton size="small" isSymmetrical aria-label="Remove Tag label">
+    <Icon name="close" />
+  </ControlButton>
+</Tag>
 ```
 
 ## Interactive Tag
@@ -107,14 +103,12 @@ Use the `isDisabled` prop to visually disable a `Tag`:
 Disabled `Tag` with `ControlButton`:
 
 ```tsx
-<div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
-  <Tag elementType="div" isDisabled>
-    <span>Disabled tag</span>
-    <ControlButton size="small" isSymmetrical isDisabled aria-label="Remove Disabled tag">
-      <Icon name="close" />
-    </ControlButton>
-  </Tag>
-</div>
+<Tag elementType="div" isDisabled>
+  <span>Disabled tag</span>
+  <ControlButton size="small" isSymmetrical isDisabled aria-label="Remove Disabled tag">
+    <Icon name="close" />
+  </ControlButton>
+</Tag>
 ```
 
 Disabled link Tag:
@@ -146,7 +140,6 @@ and [escape hatches][readme-escape-hatches].
 For detailed information see [Tag][tag] component.
 
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#size
-[expanded-size-scale]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ControlButton/README.md#feature-flag-expanded-size-scale
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens

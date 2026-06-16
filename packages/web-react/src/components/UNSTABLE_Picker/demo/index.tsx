@@ -3,7 +3,6 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
-import { UNSTABLE_PICKER_DOCS_DEMO_WRAPPER_CLASSNAME } from './constants';
 import PickerAggregated from './PickerAggregated';
 import PickerDefault from './PickerDefault';
 import PickerDisabled from './PickerDisabled';
@@ -21,7 +20,8 @@ import PickerVariants from './PickerVariants';
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <IconsProvider value={icons}>
-      <div className={`${UNSTABLE_PICKER_DOCS_DEMO_WRAPPER_CLASSNAME} pb-1700`}>
+      {/* Extra bottom padding so the last Picker's dropdown popover fits within the viewport. */}
+      <div style={{ paddingBottom: 500 }}>
         <DocsSection title="Default">
           <PickerDefault />
         </DocsSection>

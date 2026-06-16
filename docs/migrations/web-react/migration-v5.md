@@ -19,6 +19,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
   - [Header: `UNSTABLE_Header` has been stabilized and renamed to `Header`, previous implementation has been removed](#header-stabilization-of-unstable_header-to-header-previous-implementation-removed)
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
+  - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
 
 ## Component Changes
 
@@ -335,6 +336,52 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/stack-wrap-children-in-s
 
 When `Stack` has `elementType="ul"` or `elementType="ol"`, `StackItem` defaults to `elementType="li"` automatically.
 
+</details>
+
+---
+
+### ControlButton: Expanded Size Scale Feature Flag Removed
+
+The feature flag enabling the expanded size scale was removed and the expanded size scale is now default.
+`ControlButton` now accepts five `size` values by default — `xsmall`, `small`, `medium`, `large`, and
+`xlarge` — and the existing sizes were remapped to smaller heights:
+
+| `size`   | Height before | Height now |
+| -------- | ------------- | ---------- |
+| `xsmall` | —             | 16px       |
+| `small`  | 24px          | 20px       |
+| `medium` | 32px          | 24px       |
+| `large`  | 40px          | 32px       |
+| `xlarge` | —             | 40px       |
+
+#### Migration Guide
+
+🪄 Use codemods to automatically update your codebase:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/control-button-size-scale
+```
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+⚠️ This is a **visual breaking change**, so run the codemod only if you relied on the previous heights. It
+shifts every `ControlButton` `size` up by one step to keep the same rendering, so review the result and
+update snapshot tests accordingly.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+You can now safely delete the `spirit-feature-enable-v5-control-button-expanded-size-scale` CSS class
+from any wrapper elements in your project as it has no effect.
+
+If you relied on the previous heights, shift the `size` prop up to keep the same rendering: `small` →
+`medium`, `medium` → `large`, and `large` → `xlarge`. An omitted `size` (previously `medium`) becomes
+`large`.
+
+- `<ControlButton … />` → `<ControlButton size="large" … />`
+- `<ControlButton size="small" … />` → `<ControlButton size="medium" … />`
+- `<ControlButton size="medium" … />` → `<ControlButton size="large" … />`
+- `<ControlButton size="large" … />` → `<ControlButton size="xlarge" … />`
 </details>
 
 ---

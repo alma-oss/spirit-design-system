@@ -9,14 +9,12 @@ import FileImagePreviewVariant from './FileImagePreviewVariant';
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <IconsProvider value={icons}>
-      <div className="spirit-feature-enable-v5-control-button-expanded-size-scale">
-        <DocsSection title="File Icon Variant" stackAlignment="stretch">
-          <FileIconVariant />
-        </DocsSection>
-        <DocsSection title="Image Preview Variant" stackAlignment="stretch">
-          <FileImagePreviewVariant />
-        </DocsSection>
-      </div>
+      <DocsSection title="File Icon Variant" stackAlignment="stretch">
+        <FileIconVariant />
+      </DocsSection>
+      <DocsSection title="Image Preview Variant" stackAlignment="stretch">
+        <FileImagePreviewVariant />
+      </DocsSection>
     </IconsProvider>
   </StrictMode>,
 );

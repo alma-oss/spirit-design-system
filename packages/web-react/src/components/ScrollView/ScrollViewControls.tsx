@@ -25,7 +25,7 @@ const ScrollViewControls = (props: SpiritScrollViewControlsProps) => {
   return (
     <div {...otherProps} {...mergedStyleProps}>
       {controls.map(({ icon, label, step }) => (
-        <ControlButton key={icon} aria-label={label} onClick={() => handleScroll(step)} size="small" isSymmetrical>
+        <ControlButton key={icon} aria-label={label} onClick={() => handleScroll(step)} isSymmetrical>
           <Icon name={icon} />
         </ControlButton>
       ))}
