@@ -10,7 +10,7 @@ import { Link } from '../../Link';
 import { ProductLogo } from '../../ProductLogo';
 import { defaultSvgLogo } from '../../ProductLogo/demo/ProductLogoDefault';
 import { Select } from '../../Select';
-import { Stack } from '../../Stack';
+import { Stack, StackItem } from '../../Stack';
 import { VisuallyHidden } from '../../VisuallyHidden';
 import Footer from '../Footer';
 
@@ -129,45 +129,49 @@ figma.connect(Footer, FOOTER_NODE_URL, {
     <Footer>
       <Container>
         <Stack spacing="space-1200" hasIntermediateDividers>
-          <Grid cols={{ mobile: 1, tablet: 2, desktop: 4 }} spacing="space-1000">
-            <nav aria-labelledby="footer-navigation-section-1">
-              <Heading
-                id="footer-navigation-section-1"
-                elementType="h3"
-                size="xsmall"
-                emphasis="semibold"
-                marginBottom="space-700"
-              >
-                Section headline
-              </Heading>
-              <Stack elementType="ul" spacing="space-600" hasSpacing>
-                <li>
-                  <Link href="https://www.example.com">Link</Link>
-                </li>
-                <li>
-                  <Link href="https://www.example.com">Link</Link>
-                </li>
-                <li>
-                  <Link href="https://www.example.com">Link</Link>
-                </li>
-              </Stack>
-            </nav>
-          </Grid>
+          <StackItem>
+            <Grid cols={{ mobile: 1, tablet: 2, desktop: 4 }} spacing="space-1000">
+              <nav aria-labelledby="footer-navigation-section-1">
+                <Heading
+                  id="footer-navigation-section-1"
+                  elementType="h3"
+                  size="xsmall"
+                  emphasis="semibold"
+                  marginBottom="space-700"
+                >
+                  Section headline
+                </Heading>
+                <Stack elementType="ul" spacing="space-600" hasSpacing>
+                  <li>
+                    <Link href="https://www.example.com">Link</Link>
+                  </li>
+                  <li>
+                    <Link href="https://www.example.com">Link</Link>
+                  </li>
+                  <li>
+                    <Link href="https://www.example.com">Link</Link>
+                  </li>
+                </Stack>
+              </nav>
+            </Grid>
+          </StackItem>
 
-          {showRow2}
+          {showRow2 && <StackItem>{showRow2}</StackItem>}
 
-          <Grid
-            cols={{ mobile: 1, desktop: 3 }}
-            alignmentX={{ mobile: 'center', desktop: 'stretch' }}
-            alignmentY="center"
-            spacing="space-1100"
-          >
-            {logo}
-            {socialIcons}
-            {language}
-          </Grid>
+          <StackItem>
+            <Grid
+              cols={{ mobile: 1, desktop: 3 }}
+              alignmentX={{ mobile: 'center', desktop: 'stretch' }}
+              alignmentY="center"
+              spacing="space-1100"
+            >
+              {logo}
+              {socialIcons}
+              {language}
+            </Grid>
+          </StackItem>
 
-          {secondaryLinks}
+          {secondaryLinks && <StackItem>{secondaryLinks}</StackItem>}
         </Stack>
       </Container>
     </Footer>
@@ -241,34 +245,36 @@ figma.connect(Footer, FOOTER_NODE_URL, {
     <Footer>
       <Container>
         <Stack spacing="space-1200" hasIntermediateDividers>
-          <Grid cols={{ mobile: 1, tablet: 2, desktop: 4 }} spacing="space-1000">
-            <nav aria-labelledby="footer-navigation-section-1">
-              <Heading
-                id="footer-navigation-section-1"
-                elementType="h3"
-                size="xsmall"
-                emphasis="semibold"
-                marginBottom="space-700"
-              >
-                Section headline
-              </Heading>
-              <Stack elementType="ul" spacing="space-600" hasSpacing>
-                <li>
-                  <Link href="https://www.example.com">Link</Link>
-                </li>
-                <li>
-                  <Link href="https://www.example.com">Link</Link>
-                </li>
-                <li>
-                  <Link href="https://www.example.com">Link</Link>
-                </li>
-              </Stack>
-            </nav>
-          </Grid>
+          <StackItem>
+            <Grid cols={{ mobile: 1, tablet: 2, desktop: 4 }} spacing="space-1000">
+              <nav aria-labelledby="footer-navigation-section-1">
+                <Heading
+                  id="footer-navigation-section-1"
+                  elementType="h3"
+                  size="xsmall"
+                  emphasis="semibold"
+                  marginBottom="space-700"
+                >
+                  Section headline
+                </Heading>
+                <Stack elementType="ul" spacing="space-600" hasSpacing>
+                  <li>
+                    <Link href="https://www.example.com">Link</Link>
+                  </li>
+                  <li>
+                    <Link href="https://www.example.com">Link</Link>
+                  </li>
+                  <li>
+                    <Link href="https://www.example.com">Link</Link>
+                  </li>
+                </Stack>
+              </nav>
+            </Grid>
+          </StackItem>
 
-          {showRow2}
+          {showRow2 && <StackItem>{showRow2}</StackItem>}
 
-          {secondaryLinks}
+          {secondaryLinks && <StackItem>{secondaryLinks}</StackItem>}
         </Stack>
       </Container>
     </Footer>
