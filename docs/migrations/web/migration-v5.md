@@ -11,6 +11,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Stack: Modifier Classes Without `has` Prefix](#stack-modifier-classes-without-has-prefix)
+  - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
   - [Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed](#header-unstable_header-stabilized-previous-header-css-removed)
 
@@ -125,6 +126,29 @@ Manually replace the modifier classes in your project.
 
 <!-- After -->
 <ul class="Stack Stack--spacing Stack--intermediateDividers Stack--startDivider Stack--endDivider">
+  <li class="StackItem">Item 1</li>
+  <li class="StackItem">Item 2</li>
+</ul>
+```
+
+### Stack: Wrap Direct Children in `StackItem` When Using Dividers
+
+The CSS fallback that allowed direct children without the `StackItem` class to receive divider styling has been removed.
+If your `Stack` uses `Stack--intermediateDividers`, `Stack--startDivider`, or `Stack--endDivider`, each direct child must carry the `StackItem` class.
+
+#### Migration Guide
+
+Add the `StackItem` class to each direct child of a divider Stack:
+
+```html
+<!-- Before -->
+<ul class="Stack Stack--intermediateDividers">
+  <li>Item 1</li>
+  <li>Item 2</li>
+</ul>
+
+<!-- After -->
+<ul class="Stack Stack--intermediateDividers">
   <li class="StackItem">Item 1</li>
   <li class="StackItem">Item 2</li>
 </ul>
