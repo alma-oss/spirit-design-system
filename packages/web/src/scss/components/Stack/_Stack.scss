@@ -23,55 +23,8 @@
     gap: 0;
 }
 
-// @deprecated StackItem selectors have been moved to their own file.
-// Migration: delete everything below this comment
 // stylelint-disable selector-max-universal -- Remove any margins from all direct descendants regardless of their type.
 .Stack > *:not(.StackItem) {
     margin-block: 0;
 }
-
-.Stack--intermediateDividers > *:not(.StackItem) {
-    border-block-start: theme.$border;
-}
-
-.Stack--spacing.Stack--startDivider > *:not(.StackItem),
-.Stack--spacing.Stack--endDivider > *:not(.StackItem) {
-    padding-block: calc(var(--stack-spacing-internal) / 2);
-}
-
-.Stack--spacing.Stack--intermediateDividers > *:not(.StackItem) {
-    padding-block: var(--stack-spacing-internal);
-}
 // stylelint-enable
-
-.Stack--spacing.Stack--startDivider > :not(.StackItem):first-child,
-.Stack--spacing.Stack--endDivider > :not(.StackItem):first-child,
-.Stack--spacing.Stack--intermediateDividers > :not(.StackItem):first-child {
-    padding-block-start: 0;
-}
-
-.Stack--spacing.Stack--startDivider > :not(.StackItem):last-child,
-.Stack--spacing.Stack--endDivider > :not(.StackItem):last-child,
-.Stack--spacing.Stack--intermediateDividers > :not(.StackItem):last-child {
-    padding-block-end: 0;
-}
-
-.Stack--intermediateDividers > :not(.StackItem):first-child {
-    border-block-start: none;
-}
-
-.Stack--startDivider > :not(.StackItem):first-child {
-    border-block-start: theme.$border;
-}
-
-.Stack--endDivider > :not(.StackItem):last-child {
-    border-block-end: theme.$border;
-}
-
-.Stack--spacing.Stack--startDivider > :not(.StackItem):first-child {
-    padding-block-start: var(--stack-spacing-internal);
-}
-
-.Stack--spacing.Stack--endDivider > :not(.StackItem):last-child {
-    padding-block-end: var(--stack-spacing-internal);
-}
