@@ -72,28 +72,6 @@ For details, see [UNSTABLE_FileUpload][unstable-file-upload] and [UNSTABLE_File]
 </Stack>
 ```
 
-### Stack
-
-If you are using the `Stack` component with dividers, you must wrap each item inside the `Stack` component with a `StackItem` component.
-
-#### Migration Guide
-
-```tsx
-<Stack hasIntermediateDividers>
-  <>Item</>
-  <>Item</>
-</Stack>
-```
-
-↓
-
-```tsx
-<Stack hasIntermediateDividers>
-  <StackItem>Item</StackItem>
-  <StackItem>Item</StackItem>
-</Stack>
-```
-
 [codemod-collapse]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v4/web-react/README.md#v4web-reactcollapse-isdisposable-prop--uncontrolledcollapse-hideoncollapse-to-isdisposable-prop-change
 [codemod-flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v4/web-react/README.md#v4web-reactflex-direction-values---flex-direction-prop-values-row-to-horizontal-and-column-to-vertical
 [readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#deprecations
