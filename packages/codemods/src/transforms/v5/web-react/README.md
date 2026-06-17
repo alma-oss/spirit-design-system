@@ -179,4 +179,37 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/header-unstable-to-stabl
 + </Header>
 ```
 
+### `v5/web-react/stack-wrap-children-in-stack-item` — Wrap `Stack` Children in `StackItem` When Using Dividers
+
+This codemod wraps direct children of `Stack` components that use dividers (`hasIntermediateDividers`, `hasStartDivider`, `hasEndDivider`) in a `StackItem` component.
+JSX fragments are replaced with `StackItem`; other JSX elements are wrapped inside `StackItem`.
+If `StackItem` is not already imported, it is added to the existing `@alma-oss/spirit-web-react` import.
+
+> **Note:** Expression-container children (e.g. `{condition && <Item />}`, `{/* comments */}`) are intentionally not transformed and may require manual adjustment.
+
+ℹ️ This codemod handles JSX-level transformations. If you use the `Stack` HTML class directly (vanilla CSS), update your markup manually — see the [migration guide][migration-guide-web-v5-stack].
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/stack-wrap-children-in-stack-item
+```
+
+#### Example
+
+```diff
+- import { Stack } from '@alma-oss/spirit-web-react';
++ import { Stack, StackItem } from '@alma-oss/spirit-web-react';
+
+- <Stack hasIntermediateDividers>
+-   <>Item 1</>
+-   <>Item 2</>
+- </Stack>
++ <Stack hasIntermediateDividers>
++   <StackItem>Item 1</StackItem>
++   <StackItem>Item 2</StackItem>
++ </Stack>
+```
+
 [mdn-column-gap]: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/column-gap
+[migration-guide-web-v5-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md#stack-wrap-direct-children-in-stackitem-when-using-dividers
