@@ -18,6 +18,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
   - [Header: `UNSTABLE_Header` has been stabilized and renamed to `Header`, previous implementation has been removed](#header-stabilization-of-unstable_header-to-header-previous-implementation-removed)
+  - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
 
 ## Component Changes
 
@@ -297,6 +298,42 @@ If you were using the previous `Header` with its sub-components (`HeaderNav`, `H
 and `Drawer` components.
 
 See [Header README][readme-header] for full composition examples.
+
+---
+
+### Stack: Wrap Direct Children in `StackItem` When Using Dividers
+
+The CSS fallback that allowed arbitrary direct children (elements that are not `StackItem`) to receive divider styling has been removed.
+If your `Stack` uses `hasIntermediateDividers`, `hasStartDivider`, or `hasEndDivider`, you must wrap each direct child in a `StackItem` component.
+
+We provide a codemod to automate the wrapping:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/stack-wrap-children-in-stack-item
+```
+
+<details>
+<summary>Manual Migration</summary>
+
+**Wrap each direct child of a divider Stack in `StackItem` and add the import:**
+
+```diff
+- import { Stack } from '@alma-oss/spirit-web-react';
++ import { Stack, StackItem } from '@alma-oss/spirit-web-react';
+
+- <Stack hasIntermediateDividers>
+-   <>Item 1</>
+-   <>Item 2</>
+- </Stack>
++ <Stack hasIntermediateDividers>
++   <StackItem>Item 1</StackItem>
++   <StackItem>Item 2</StackItem>
++ </Stack>
+```
+
+When `Stack` has `elementType="ul"` or `elementType="ol"`, `StackItem` defaults to `elementType="li"` automatically.
+
+</details>
 
 ---
 
