@@ -67,28 +67,6 @@ See [UNSTABLE_FileUpload][unstable-file-upload-web] and [UNSTABLE_File][unstable
 
 The check for the existence of the `skeleton-gradient` token will be removed. Ensure that the skeleton-gradient token is properly set up in your project, as if you import all components, the project will not run without it.
 
-### Stack
-
-If you are using the `Stack` component with dividers, you must wrap each item inside the `Stack` component with a `StackItem` component.
-
-#### Migration Guide
-
-```html
-<div class="Stack Stack--hasIntermediateDividers">
-  <div>Item</div>
-  <div>Item</div>
-</div>
-```
-
-↓
-
-```html
-<div class="Stack Stack--hasIntermediateDividers">
-  <div class="StackItem">Item</div>
-  <div class="StackItem">Item</div>
-</div>
-```
-
 ### TextField
 
 The `TextField__passwordToggle__icon--*` modifiers are deprecated in favor of new
