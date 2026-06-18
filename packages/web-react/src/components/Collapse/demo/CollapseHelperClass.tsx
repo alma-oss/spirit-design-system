@@ -1,10 +1,10 @@
 import React from 'react';
+import { useDisclosureState } from '../../../hooks/disclosure';
 import { Button } from '../../Button';
 import Collapse from '../Collapse';
-import { useCollapse } from '../useCollapse';
 
 const CollapseHelperClass = () => {
-  const { isOpen, toggleHandler } = useCollapse(false);
+  const { isExpanded, toggle } = useDisclosureState({ defaultExpanded: false });
 
   return (
     <>
@@ -17,7 +17,7 @@ const CollapseHelperClass = () => {
         posuere tristique bibendum aliquam. In donec dolor ut, imperdiet quam fermentum molestie vulputate scelerisque
         ac nec, tortor mi orci sollicitudin elementum.
       </p>
-      <Collapse id="collapse-helper-class-id" isOpen={isOpen}>
+      <Collapse id="collapse-helper-class-id" isOpen={isExpanded}>
         Aliquam varius, consequat posuere a lacinia mauris eu tellus condimentum ut id ante, accumsan vehicula nulla
         neque. Mauris mi orci, in donec nullam odio leo sapien et vehicula nunc a lacinia, fermentum arcu ullamcorper
         posuere. Mauris euismod, ac nec ante fermentum praesent nisi commodo neque placerat, vivamus dui et tempus
@@ -26,11 +26,11 @@ const CollapseHelperClass = () => {
         bibendum nunc aenean facilisis. Phasellus euismod, donec sem odio ligula praesent finibus nibh convallis,
         tristique aliquam sed id tortor sem lobortis.
       </Collapse>
-      <Button onClick={toggleHandler} aria-expanded={isOpen}>
+      <Button onClick={toggle} aria-expanded={isExpanded}>
         <span className="accessibility-open">Show less</span>
         <span className="accessibility-closed">Show more</span>
       </Button>
-      <a href="#" role="button" onClick={toggleHandler} aria-expanded={isOpen}>
+      <a href="#" role="button" onClick={toggle} aria-expanded={isExpanded}>
         <span className="accessibility-open">Show less</span>
         <span className="accessibility-closed">Show more</span>
       </a>

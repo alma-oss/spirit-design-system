@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
+import { useDisclosureState } from '../../hooks';
 import { type SpiritUncontrolledCollapseProps } from '../../types';
 import Collapse from './Collapse';
-import { useCollapse } from './useCollapse';
 import { useCollapseAriaProps } from './useCollapseAriaProps';
 
 const defaultProps = {
@@ -20,19 +20,19 @@ const UncontrolledCollapse = (props: SpiritUncontrolledCollapseProps) => {
     renderTrigger,
     ...restProps
   } = propsWithDefaults;
-  const { isOpen, toggleHandler } = useCollapse(restProps.isOpen);
-  const { ariaProps } = useCollapseAriaProps({ ...restProps, isOpen });
+  const { isExpanded, toggle } = useDisclosureState({ defaultExpanded: restProps.isOpen });
+  const { ariaProps } = useCollapseAriaProps({ ...restProps, isOpen: isExpanded });
 
   const isDisposed = hideOnCollapse || isDisposable;
 
   const triggerRenderHandler = () => {
-    const showTrigger = isDisposed ? !(isDisposed && isOpen) : true;
+    const showTrigger = isDisposed ? !(isDisposed && isExpanded) : true;
 
     return renderTrigger && showTrigger
       ? renderTrigger({
-          isOpen,
-          onClick: toggleHandler,
+          isOpen: isExpanded,
           ...ariaProps.trigger,
+          onClick: toggle,
         })
       : null;
   };
@@ -40,10 +40,10 @@ const UncontrolledCollapse = (props: SpiritUncontrolledCollapseProps) => {
   return (
     <>
       {triggerRenderHandler()}
-      {isDisposed && isOpen ? (
+      {isDisposed && isExpanded ? (
         children
       ) : (
-        <Collapse {...restProps} isOpen={isOpen}>
+        <Collapse {...restProps} isOpen={isExpanded}>
           {children}
         </Collapse>
       )}

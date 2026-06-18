@@ -1,8 +1,9 @@
 /* eslint-disable react-refresh/only-export-components -- Demo file exports constants alongside components */
 import { type StoryFn } from '@storybook/react';
 import React from 'react';
+import { useDisclosureState } from '../../../hooks/disclosure';
 import { Button } from '../../Button';
-import { Collapse, useCollapse } from '../index';
+import { Collapse } from '../index';
 
 export const content = (
   <>
@@ -32,13 +33,13 @@ export const CollapseTrigger = ({ isOpen, ...rest }: any) => (
 );
 
 const Story: StoryFn<typeof Collapse> = () => {
-  const { isOpen, toggleHandler } = useCollapse(false);
+  const { isExpanded, toggle } = useDisclosureState({ defaultExpanded: false });
 
   return (
     <div>
       {content}
-      <CollapseTrigger isOpen={isOpen} onClick={toggleHandler} />
-      <Collapse id="collapse-id" isOpen={isOpen}>
+      <CollapseTrigger isOpen={isExpanded} onClick={toggle} />
+      <Collapse id="collapse-id" isOpen={isExpanded}>
         {content}
       </Collapse>
     </div>

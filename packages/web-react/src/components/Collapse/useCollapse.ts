@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useDeprecationMessage, useDisclosureState } from '../../hooks';
 import { type ClickEvent } from '../../types';
 
 export interface CollapseReturn {
@@ -12,17 +12,30 @@ export interface CollapseReturn {
   isOpen: boolean;
 }
 
+/**
+ * @deprecated Use `useDisclosureState` from `@alma-oss/spirit-web-react` instead.
+ * This hook will be removed in the next major version.
+ * @param defaultOpenState - Initial open state of the collapse.
+ */
 export const useCollapse = (defaultOpenState: boolean): CollapseReturn => {
-  const [isOpen, toggle] = useState<boolean>(defaultOpenState);
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: true,
+    componentName: 'useCollapse',
+    customText:
+      '`useCollapse` is deprecated and will be removed in the next major version. Use `useDisclosureState` instead.',
+  });
+
+  const { isExpanded, toggle } = useDisclosureState({ defaultExpanded: defaultOpenState });
 
   const toggleHandler = (event: ClickEvent) => {
     event.preventDefault();
-    toggle(!isOpen);
+    toggle();
   };
 
   return {
     toggleHandler,
     toggle,
-    isOpen,
+    isOpen: isExpanded,
   };
 };

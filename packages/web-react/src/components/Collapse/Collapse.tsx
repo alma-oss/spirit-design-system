@@ -27,7 +27,13 @@ const defaultProps: Partial<SpiritCollapseProps> = {
 
 const Collapse = (props: SpiritCollapseProps) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType, children, transitionDuration = TRANSITION_DURATION, ...restProps } = propsWithDefaults;
+  const {
+    elementType,
+    children,
+    transitionDuration = TRANSITION_DURATION,
+    collapsibleToBreakpoint,
+    ...restProps
+  } = propsWithDefaults;
   const Component = elementType as ElementType;
 
   const rootElementRef: MutableRefObject<HTMLElement | null> = useRef(null);
@@ -58,7 +64,8 @@ const Collapse = (props: SpiritCollapseProps) => {
       {(transitionState: TransitionStatus) => (
         <Component
           {...transferProps}
-          {...ariaProps.root}
+          data-spirit-breakpoint={collapsibleToBreakpoint}
+          {...ariaProps.panel}
           {...mergeStyleProps(Component, {
             classProps: classProps.root,
             styleProps,

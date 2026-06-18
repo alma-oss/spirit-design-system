@@ -1,15 +1,15 @@
 import React from 'react';
+import { useDisclosureState } from '../../../hooks/disclosure';
 import { Button } from '../../Button';
 import Collapse from '../Collapse';
-import { useCollapse } from '../useCollapse';
 
 const CollapseOpenOnInit = () => {
-  const { isOpen, toggleHandler } = useCollapse(true);
+  const { isExpanded, toggle } = useDisclosureState({ defaultExpanded: true });
 
   return (
     <>
-      <Button onClick={toggleHandler}>Collapse trigger</Button>
-      <Collapse id="collapse-open-on-init-id" isOpen={isOpen}>
+      <Button onClick={toggle}>Collapse trigger</Button>
+      <Collapse id="collapse-open-on-init-id" isOpen={isExpanded}>
         Cras dictum ante, mollis ollicitudin proin bibendum nec commodo consequat fusce ante, consequat venenatis
         suscipit odio morbi. Dolor sit amet porta, placerat tristique sit amet ligula nisl risus et vehicula, suscipit
         accumsan nunc curabitur. Et neque, augue ut nulla a sed porta scelerisque proin, elit sapien lacinia felis.

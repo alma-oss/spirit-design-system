@@ -1,15 +1,15 @@
 import React from 'react';
+import { useDisclosureState } from '../../../hooks/disclosure';
 import { Button, ButtonLink } from '../../Button';
 import Collapse from '../Collapse';
-import { useCollapse } from '../useCollapse';
 
 const CollapseMultipleTriggers = () => {
-  const { isOpen, toggleHandler } = useCollapse(false);
+  const { isExpanded, toggle } = useDisclosureState({ defaultExpanded: false });
 
   return (
     <>
-      <Button onClick={toggleHandler}>Collapse trigger</Button>
-      <Collapse id="collapse-multiple-triggers-id" isOpen={isOpen}>
+      <Button onClick={toggle}>Collapse trigger</Button>
+      <Collapse id="collapse-multiple-triggers-id" isOpen={isExpanded}>
         Aliquam varius, consequat posuere a lacinia mauris eu tellus condimentum ut id ante, accumsan vehicula nulla
         neque. Mauris mi orci, in donec nullam odio leo sapien et vehicula nunc a lacinia, fermentum arcu ullamcorper
         posuere. Mauris euismod, ac nec ante fermentum praesent nisi commodo neque placerat, vivamus dui et tempus
@@ -18,10 +18,10 @@ const CollapseMultipleTriggers = () => {
         bibendum nunc aenean facilisis. Phasellus euismod, donec sem odio ligula praesent finibus nibh convallis,
         tristique aliquam sed id tortor sem lobortis.
       </Collapse>
-      <Button onClick={toggleHandler} color="secondary">
+      <Button onClick={toggle} color="secondary">
         Secondary trigger
       </Button>{' '}
-      <ButtonLink onClick={toggleHandler} aria-expanded={isOpen} color="tertiary">
+      <ButtonLink onClick={toggle} aria-expanded={isExpanded} color="tertiary">
         Tertiary trigger
       </ButtonLink>
     </>
