@@ -16,6 +16,7 @@ const ToggleConsentFullExample = () => {
     <>
       <Toggle
         id="consent-full-example"
+        marginY="space-500"
         name="consentFullExample"
         label="I agree to the terms and privacy policy"
         isRequired

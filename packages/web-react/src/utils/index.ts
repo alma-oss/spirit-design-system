@@ -9,6 +9,7 @@ export * from './getColorSchemeClassName';
 export * from './getPlacementClassName';
 export * from './htmlReactParser';
 export * from './inputPositionToFlexDirection';
+export * from './inputPositionToFlexAlignmentX';
 export * from './mergeStyleProps';
 export * from './pxToRem';
 export * from './router';

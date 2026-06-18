@@ -1,50 +1,34 @@
 import classNames from 'classnames';
 import { InputPositions } from '../../constants';
-import { useClassNamePrefix, useInputPositionClass } from '../../hooks';
-import { type SpiritToggleProps } from '../../types';
+import { useClassNamePrefix } from '../../hooks';
+import { type FlexAlignmentXType, type FlexDirectionType, type SpiritToggleProps } from '../../types';
+import { inputPositionToFlexAlignmentX, inputPositionToFlexDirection } from '../../utils';
 
 export interface ToggleStyles<T> {
   classProps: {
-    root: string;
-    text: string;
     input: string;
   };
+  /** Horizontal alignment props to be passed to the Flex element */
+  alignmentX: FlexAlignmentXType;
+  /** Direction props to be passed to the Flex element */
+  direction: FlexDirectionType;
   props: T;
 }
 
 export function useToggleStyleProps(props: SpiritToggleProps): ToggleStyles<SpiritToggleProps> {
-  const {
-    hasIndicators = false,
-    inputPosition = InputPositions.END,
-    isDisabled = false,
-    isLabelHidden = false,
-    isRequired = false,
-    validationState,
-    ...restProps
-  } = props;
+  const { hasIndicators = false, inputPosition = InputPositions.END, ...restProps } = props;
 
   const toggleClass = useClassNamePrefix('Toggle');
-  const toggleDisabledClass = `${toggleClass}--disabled`;
-  const toggleLabelHiddenClass = `${toggleClass}--labelHidden`;
-  const toggleTextClass = `${toggleClass}__text`;
-  const toggleValidationClass = `${toggleClass}--${validationState}`;
-  const toggleInputClass = `${toggleClass}__input`;
-  const toggleInputIndicatorsClass = `${toggleInputClass}--indicators`;
-  const toggleInputPositionClass = useInputPositionClass(toggleClass, inputPosition);
+  const toggleIndicatorsClass = `${toggleClass}--indicators`;
 
   return {
     classProps: {
-      root: classNames(toggleClass, {
-        [toggleInputPositionClass]: toggleInputPositionClass,
-        [toggleDisabledClass]: isDisabled,
-        [toggleLabelHiddenClass]: isLabelHidden,
-        [toggleValidationClass]: validationState,
-      }),
-      text: toggleTextClass,
-      input: classNames(toggleInputClass, {
-        [toggleInputIndicatorsClass]: hasIndicators,
+      input: classNames(toggleClass, {
+        [toggleIndicatorsClass]: hasIndicators,
       }),
     },
-    props: { ...restProps, validationState, isDisabled, isLabelHidden, isRequired },
+    alignmentX: inputPositionToFlexAlignmentX(inputPosition),
+    direction: inputPositionToFlexDirection(inputPosition),
+    props: restProps,
   };
 }
