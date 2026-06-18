@@ -161,7 +161,7 @@ Show upload progress using `HelperText` component:
   </div>
   <button
     type="button"
-    class="ControlButton ControlButton--large ControlButton--symmetrical ControlButton--disabled ControlButton--hasBackground color-scheme-on-disabled text-color-scheme dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
+    class="ControlButton ControlButton--large ControlButton--symmetrical ControlButton--hasBackground text-color-scheme dynamic-color-border dynamic-color-background-interactive accessibility-tap-target disabled"
     aria-label="Remove file Document.pdf from list"
     disabled
   >

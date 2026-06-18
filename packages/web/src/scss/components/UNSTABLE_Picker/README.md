@@ -386,7 +386,7 @@ inside the selection area (remove buttons) to disable the Picker.
       class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled"
     >
       <div role="grid" aria-label="Selected languages" class="UNSTABLE_PickerSelection">
-        <div role="row" tabindex="0" aria-label="Czech" class="Tag Tag--selected Tag--disabled Tag--small">
+        <div role="row" tabindex="0" aria-label="Czech" class="Tag Tag--selected Tag--small disabled">
           <div role="gridcell" aria-colindex="1" class="d-contents">
             <span>Czech</span>
             <button

@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { CLASS_NAME_DISABLED } from '../../constants';
 import { useClassNamePrefix } from '../../hooks';
 import { type TagProps } from '../../types';
 import { getColorSchemeClassName } from '../../utils';
@@ -15,7 +16,6 @@ export function useTagStyleProps<C = void, S = void>(props: TagProps<C, S>) {
 
   const tagClass = useClassNamePrefix('Tag');
   const tagColorClass = `${tagClass}--${color}`;
-  const tagDisabledClass = `${tagClass}--disabled`;
   const tagSizeClass = `${tagClass}--${size}`;
   const tagSubtleClass = `${tagClass}--subtle`;
   const tagColorSchemeClass = color && !isDisabled ? getColorSchemeClassName({ color: color as string, isSubtle }) : '';
@@ -28,7 +28,7 @@ export function useTagStyleProps<C = void, S = void>(props: TagProps<C, S>) {
       },
       tagColorSchemeClass,
       {
-        [tagDisabledClass]: isDisabled,
+        [CLASS_NAME_DISABLED]: isDisabled,
         [tagSizeClass]: size,
         [tagSubtleClass]: isSubtle,
       },

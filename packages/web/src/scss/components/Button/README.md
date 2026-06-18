@@ -199,12 +199,12 @@ Responsive full-width buttons with [Grid][readme-grid]:
 
 ## Disabled Button
 
-There are several ways to disable a Button:
+Use the native `disabled` attribute together with the `disabled` utility class for disabled colors and pointer
+interaction.
 
 ```html
-<button type="button" class="Button Button--primary Button--medium" disabled>Disabled Button</button>
-<button type="button" class="Button Button--primary Button--medium is-disabled">Disabled Button</button>
-<button type="button" class="Button Button--primary Button--medium Button--disabled">Disabled Button</button>
+<button type="button" class="Button Button--primary Button--medium disabled" disabled>Disabled Button</button>
+<a href="#" class="Button Button--primary Button--medium disabled" aria-disabled="true">Disabled Link</a>
 ```
 
 ## Loading Button
@@ -216,7 +216,7 @@ Use the `Button--loading` modifier to show a loading spinner inside the button.
 Loading button with a text label:
 
 ```html
-<a href="#" class="Button Button--primary Button--medium Button--loading Button--disabled">
+<a href="#" class="Button Button--primary Button--medium Button--loading">
   Button primary
   <svg class="Icon animation-spin-clockwise" width="20" height="20" aria-hidden="true">
     <use href="/icons/svg/sprite.svg#spinner" />

@@ -204,19 +204,38 @@ Symmetrical on mobile and tablet, not on desktop (combine breakpoint-specific cl
 
 ## Disabled State
 
-Use the `disabled` attribute to disable a ControlButton. This will also apply the `ControlButton--disabled` class, ensuring proper behavior.
-To achieve proper styles, use the `color-scheme-on-disabled` class on the parent element, or directly on the
-ControlButton together with the `text-color-scheme` utility class so its content color is applied.
+Use the `disabled` attribute together with the `disabled` utility class for disabled colors and pointer interaction.
+Add the `text-color-scheme` utility class on the ControlButton so its content color is applied, including when the
+`disabled` utility overrides color tokens.
+
+Unlike the `color-scheme-on-disabled` helper on a parent element, the `disabled` utility uses `!important` to override
+color variants and also sets disabled cursors.
 
 ### Color Scheme for Disabled State
 
-**Parent component handles the color scheme:**
+**Standalone ControlButton:**
+
+```html
+<button
+  type="button"
+  class="ControlButton ControlButton--medium ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target disabled"
+  aria-label="Close"
+  disabled
+>
+  <svg class="Icon" width="16" height="16" aria-hidden="true">
+    <use href="/icons/svg/sprite.svg#close" />
+  </svg>
+</button>
+```
+
+**Disabled context with other content** — use `color-scheme-on-disabled` on a parent element to style surrounding
+disabled content. ControlButton still needs the `disabled` utility and `text-color-scheme` on itself:
 
 ```html
 <div class="color-scheme-on-disabled">
   <button
     type="button"
-    class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target"
+    class="ControlButton ControlButton--medium ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target disabled"
     aria-label="Previous"
     disabled
   >
@@ -227,7 +246,7 @@ ControlButton together with the `text-color-scheme` utility class so its content
   <span>Disabled content</span>
   <button
     type="button"
-    class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive accessibility-tap-target"
+    class="ControlButton ControlButton--medium ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target disabled"
     aria-label="Next"
     disabled
   >
@@ -236,21 +255,6 @@ ControlButton together with the `text-color-scheme` utility class so its content
     </svg>
   </button>
 </div>
-```
-
-**Standalone ControlButton:**
-
-```html
-<button
-  type="button"
-  class="ControlButton ControlButton--medium ControlButton--symmetrical color-scheme-on-disabled text-color-scheme dynamic-color-background-interactive accessibility-tap-target"
-  aria-label="Close"
-  disabled
->
-  <svg class="Icon" width="16" height="16" aria-hidden="true">
-    <use href="/icons/svg/sprite.svg#close" />
-  </svg>
-</button>
 ```
 
 ## Custom Spacing

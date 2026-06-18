@@ -42,8 +42,8 @@ describe('useButtonStyleProps', () => {
       false,
       `Button Button--warning ${getColorSchemeClassName({ color: 'warning', isSubtle: false })} Button--medium`,
     ],
-    ['primary', 'medium', true, false, false, 'Button Button--primary Button--medium Button--disabled'],
-    ['primary', 'medium', false, true, false, 'Button Button--primary Button--medium Button--disabled Button--loading'],
+    ['primary', 'medium', true, false, false, 'Button Button--primary Button--medium disabled'],
+    ['primary', 'medium', false, true, false, 'Button Button--primary Button--medium Button--loading'],
     ['primary', 'medium', false, false, true, 'Button Button--primary Button--medium Button--symmetrical'],
   ])('should return classes', (color, size, isDisabled, isLoading, isSymmetrical, expectedClasses) => {
     const props = { color, isDisabled, isLoading, isSymmetrical, size } as SpiritButtonProps;
