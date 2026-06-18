@@ -10,6 +10,7 @@ export { default as ScrollView } from './ScrollView';
 export { default as SegmentedControl } from './SegmentedControl';
 export { default as Tabs } from './Tabs';
 export { default as Toast } from './Toast';
+export { showToastContainer } from './ToastContainer';
 export { default as Tooltip } from './Tooltip';
 export * from './constants';
 export * from './dom';

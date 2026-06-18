@@ -12,6 +12,7 @@ import ScrollView from './ScrollView';
 import SegmentedControl from './SegmentedControl';
 import Tabs from './Tabs';
 import Toast from './Toast';
+import { showToastContainer } from './ToastContainer';
 import Tooltip from './Tooltip';
 import * as utils from './utils';
 
@@ -28,6 +29,7 @@ export default {
   SegmentedControl,
   Tabs,
   Toast,
+  showToastContainer,
   Tooltip,
   constants,
   dom,

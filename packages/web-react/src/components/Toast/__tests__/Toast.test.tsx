@@ -10,6 +10,20 @@ import {
 } from '@local/tests';
 import Toast from '../Toast';
 
+const restorePrototypeProperty = <T extends keyof HTMLElement>(
+  property: T,
+  originalValue: HTMLElement[T] | undefined,
+) => {
+  if (typeof originalValue === 'undefined') {
+    delete (HTMLElement.prototype as unknown as Record<string, unknown>)[property as string];
+  } else {
+    Object.defineProperty(HTMLElement.prototype, property, {
+      configurable: true,
+      value: originalValue,
+    });
+  }
+};
+
 describe('Toast', () => {
   classNamePrefixProviderTest(Toast, 'Toast');
 
@@ -27,6 +41,52 @@ describe('Toast', () => {
     const element = dom.container.querySelector('div') as HTMLElement;
 
     expect(element).toHaveClass('Toast Toast--center Toast--bottom');
+    expect(element).toHaveAttribute('popover', 'manual');
+    expect(element).toHaveAttribute('role', 'log');
+  });
+
+  it('should call showPopover on mount when supported and popover is closed', () => {
+    const showPopover = jest.fn();
+    const originalShowPopover = HTMLElement.prototype.showPopover;
+    const originalMatches = HTMLElement.prototype.matches;
+
+    Object.defineProperty(HTMLElement.prototype, 'showPopover', {
+      configurable: true,
+      value: showPopover,
+    });
+    Object.defineProperty(HTMLElement.prototype, 'matches', {
+      configurable: true,
+      value: jest.fn().mockReturnValue(false),
+    });
+
+    render(<Toast />);
+
+    expect(showPopover).toHaveBeenCalledTimes(1);
+
+    restorePrototypeProperty('showPopover', originalShowPopover);
+    restorePrototypeProperty('matches', originalMatches);
+  });
+
+  it('should not call showPopover on mount when popover is already open', () => {
+    const showPopover = jest.fn();
+    const originalShowPopover = HTMLElement.prototype.showPopover;
+    const originalMatches = HTMLElement.prototype.matches;
+
+    Object.defineProperty(HTMLElement.prototype, 'showPopover', {
+      configurable: true,
+      value: showPopover,
+    });
+    Object.defineProperty(HTMLElement.prototype, 'matches', {
+      configurable: true,
+      value: jest.fn().mockReturnValue(true),
+    });
+
+    render(<Toast />);
+
+    expect(showPopover).not.toHaveBeenCalled();
+
+    restorePrototypeProperty('showPopover', originalShowPopover);
+    restorePrototypeProperty('matches', originalMatches);
   });
 
   it('should render with custom alignments', () => {

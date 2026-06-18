@@ -27,7 +27,13 @@
       </fieldset>
       <!-- Toast show and hide demo: end -->
 
-      <div class="Toast Toast--top Toast--center" role="log">
+      <!-- eslint-disable @html-eslint/use-baseline -- popover is Baseline Newly available; supported in Spirit target browsers -->
+      <div
+        class="Toast Toast--top Toast--center"
+        popover="manual"
+        role="log"
+      >
+        <!-- eslint-enable @html-eslint/use-baseline -->
         <div class="Toast__queue">
 
           <div id="my-hidden-dismissible-toast" class="ToastBar ToastBar--warning ToastBar--dismissible is-hidden">
@@ -386,11 +392,14 @@
       </form>
       <!-- Toast and virtual keyboard demo: end -->
 
+      <!-- eslint-disable @html-eslint/use-baseline -- popover is Baseline Newly available; supported in Spirit target browsers -->
       <div
         id="toast-example"
         class="Toast Toast--bottom Toast--center Toast--collapsible"
+        popover="manual"
         role="log"
       >
+        <!-- eslint-enable @html-eslint/use-baseline -->
         <div class="Toast__queue" data-spirit-element="toast-queue">
 
           <template data-spirit-snippet="item">
