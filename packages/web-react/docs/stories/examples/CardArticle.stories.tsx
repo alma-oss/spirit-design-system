@@ -11,8 +11,7 @@ import {
   Stack,
   Truncate,
 } from '../../../src/components';
-import { CardSizes } from '../../../src/types';
-import { type GridColumns } from '../../../src/types';
+import { CardSizes, type GridColumns } from '../../../src/types';
 
 type CardArticleCompositionProps = {
   contentText: string;

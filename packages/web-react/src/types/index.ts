@@ -14,7 +14,6 @@ export * from './divider';
 export * from './drawer';
 export * from './dropdown';
 export * from './fieldGroup';
-export * from './fileUploader';
 export * from './flex';
 export * from './footer';
 export * from './grid';
