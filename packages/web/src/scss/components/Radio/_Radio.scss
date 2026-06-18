@@ -9,10 +9,6 @@
 $_field-name: 'Radio';
 
 .Radio {
-    @include form-fields-tools.inline-field-root($_field-name);
-}
-
-.Radio__input {
     @include form-fields-tools.inline-field-input();
 
     display: grid;
@@ -48,22 +44,8 @@ $_field-name: 'Radio';
 
 @include form-fields-tools.input-field-validation-states($_field-name);
 
-.Radio--item {
-    @include form-fields-tools.item();
-}
-
-.Radio--item:is(.Radio--disabled, .Radio.is-disabled),
-.Radio--item:has(.Radio__input:disabled) {
-    @include form-fields-tools.item-disabled();
-}
-
 :is(.Radio--disabled, .Radio.is-disabled),
-.Radio:has(.Radio__input:disabled) {
-    @include form-fields-tools.inline-field-root-disabled();
-}
-
-:is(.Radio--disabled, .Radio.is-disabled) > .Radio__input,
-.Radio > .Radio__input:disabled {
+.Radio:disabled {
     @include form-fields-tools.input-disabled();
 
     border-color: form-fields-settings.$input-border-color-state-disabled;
@@ -79,8 +61,6 @@ $_field-name: 'Radio';
 }
 
 // stylelint-disable-next-line selector-max-specificity -- 1.
-.Radio--item:not(.Radio--disabled, .Radio.is-disabled) .Radio__input:is(:hover, :active):not(:checked, :disabled) {
+.Radio--item:not(.Radio--disabled, .Radio.is-disabled):is(:hover, :active):not(:checked, :disabled) {
     background-color: form-fields-settings.$input-background-color;
 }
-
-@include form-fields-tools.input-position($component-class: $_field-name, $default-position: 'start');

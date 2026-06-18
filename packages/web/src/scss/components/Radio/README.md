@@ -9,9 +9,9 @@ Radio buttons should be wrapped in a [FieldGroup][field-group] when used as a gr
   <legend class="accessibility-hidden">Choose an option</legend>
   <div class="FieldGroup__label" aria-hidden="true">Choose an option</div>
   <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
-    <div class="Radio Radio--inputPositionStart">
-      <input type="radio" id="radio-default" class="Radio__input" name="default" />
-      <div class="Radio__text">
+    <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+      <input type="radio" id="radio-default" class="Radio" name="default" />
+      <div>
         <label class="Label Label--inline" for="radio-default">Radio Label</label>
       </div>
     </div>
@@ -22,9 +22,9 @@ Radio buttons should be wrapped in a [FieldGroup][field-group] when used as a gr
 For a single Radio button example:
 
 ```html
-<div class="Radio">
-  <input type="radio" id="radio-default" class="Radio__input" name="default" />
-  <div class="Radio__text">
+<div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="radio" id="radio-default" class="Radio" name="default" />
+  <div>
     <label class="Label Label--inline" for="radio-default">Radio Label</label>
   </div>
 </div>
@@ -33,9 +33,9 @@ For a single Radio button example:
 ## Selected State
 
 ```html
-<div class="Radio">
-  <input type="radio" id="radio-default-checked" class="Radio__input" name="default" checked />
-  <div class="Radio__text">
+<div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="radio" id="radio-default-checked" class="Radio" name="default" checked />
+  <div>
     <label class="Label Label--inline" for="radio-default-checked">Radio Label</label>
   </div>
 </div>
@@ -44,9 +44,9 @@ For a single Radio button example:
 ## Disabled State
 
 ```html
-<div class="Radio Radio--inputPositionStart Radio--disabled">
-  <input type="radio" id="radio-disabled" class="Radio__input" name="default" disabled />
-  <div class="Radio__text">
+<div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="radio" id="radio-disabled" class="Radio" name="default" disabled />
+  <div>
     <label class="Label Label--inline Label--disabled" for="radio-disabled">Radio Label</label>
   </div>
 </div>
@@ -55,9 +55,9 @@ For a single Radio button example:
 ## Hidden Label
 
 ```html
-<div class="Radio Radio--inputPositionStart Radio--labelHidden">
-  <input type="radio" id="radio-hidden-label" class="Radio__input" name="default" />
-  <div class="Radio__text">
+<div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-0);">
+  <input type="radio" id="radio-hidden-label" class="Radio" name="default" />
+  <div>
     <label class="Label Label--inline accessibility-hidden" for="radio-hidden-label">Radio Label</label>
   </div>
 </div>
@@ -68,43 +68,45 @@ For a single Radio button example:
 See Validation state [dictionary][dictionary-validation].
 
 ```html
-<div class="Radio Radio--inputPositionStart Radio--success">
-  <input type="radio" id="radio-success" class="Radio__input" name="validation" />
-  <div class="Radio__text">
-    <label class="Label Label--inline" for="radio-success">Radio Label</label>
+<div class="Stack Stack--spacing">
+  <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+    <input type="radio" id="radio-success" class="Radio Radio--success" name="validation" />
+    <div>
+      <label class="Label Label--inline" for="radio-success">Radio Label</label>
+    </div>
   </div>
-</div>
 
-<div class="Radio Radio--inputPositionStart Radio--warning">
-  <input type="radio" id="radio-warning" class="Radio__input" name="validation" />
-  <div class="Radio__text">
-    <label class="Label Label--inline" for="radio-warning">Radio Label</label>
+  <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+    <input type="radio" id="radio-warning" class="Radio Radio--warning" name="validation" />
+    <div>
+      <label class="Label Label--inline" for="radio-warning">Radio Label</label>
+    </div>
   </div>
-</div>
 
-<div class="Radio Radio--inputPositionStart Radio--danger">
-  <input type="radio" id="radio-danger" class="Radio__input" name="validation" />
-  <div class="Radio__text">
-    <label class="Label Label--inline" for="radio-danger" for="radio-danger">Radio Label</label>
+  <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+    <input type="radio" id="radio-danger" class="Radio Radio--danger" name="validation" />
+    <div>
+      <label class="Label Label--inline" for="radio-danger">Radio Label</label>
+    </div>
   </div>
 </div>
 ```
 
 ## Helper Text
 
-To add helper text, use the [HelperText][helper-text] component:
+To add helper text, use the [HelperText][readme-helper-text] component:
 
 ```html
-<div class="Radio">
+<div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="radio"
     id="radio-helper-text"
-    class="Radio__input"
+    class="Radio"
     name="helperText"
     aria-describedby="radio-helper-text-helper-text"
   />
-  <div class="Radio__text">
-    <label class="Label Label--inline" for="radio-helper-text" for="radio-helper-text">Radio Label</label>
+  <div>
+    <label class="Label Label--inline" for="radio-helper-text">Radio Label</label>
     <div class="HelperText" id="radio-helper-text-helper-text">Helper text</div>
   </div>
 </div>
@@ -112,28 +114,34 @@ To add helper text, use the [HelperText][helper-text] component:
 
 ## As an Item
 
+Use the [Item][readme-item] component to render Radio in item mode:
+
 ```html
-<div class="Radio Radio--inputPositionStart Radio--item">
-  <input type="radio" id="radio-item-default" class="Radio__input" name="item" />
-  <div class="Radio__text">
+<div class="Item">
+  <div class="Item__slot" role="presentation">
+    <input type="radio" id="radio-item-default" class="Radio Radio--item" name="item" />
+  </div>
+  <div class="Item__content" role="presentation">
     <label class="Label Label--item" for="radio-item-default">Radio Label</label>
   </div>
 </div>
 ```
 
-## As an Item Wrapped with Helper Text
+### As an Item with Helper Text
 
 ```html
-<div class="Radio Radio--inputPositionStart Radio--item">
-  <input
-    type="radio"
-    id="radio-item-helper-text"
-    class="Radio__input"
-    name="item"
-    aria-describedby="radio-item-helper-text-helper-text"
-  />
-  <div class="Radio__text">
-    <label class="Label Label--inline" for="radio-item-helper-text">Radio Label</label>
+<div class="Item">
+  <div class="Item__slot" role="presentation">
+    <input
+      type="radio"
+      id="radio-item-helper-text"
+      class="Radio Radio--item"
+      name="item"
+      aria-describedby="radio-item-helper-text-helper-text"
+    />
+  </div>
+  <div class="Item__content" role="presentation">
+    <label class="Label Label--item" for="radio-item-helper-text">Radio Label</label>
     <div class="HelperText" id="radio-item-helper-text-helper-text">Helper text</div>
   </div>
 </div>
@@ -141,14 +149,14 @@ To add helper text, use the [HelperText][helper-text] component:
 
 ## Input Position
 
-The input position can be set to `start` (default) or `end`.
+The input position can be set using [Flex][readme-flex] component with direction.
 
 ### Input on End
 
 ```html
-<div class="Radio Radio--inputPositionEnd">
-  <input type="radio" id="radio-position-end" class="Radio__input" name="position" />
-  <div class="Radio__text">
+<div class="Flex Flex--horizontalReversed Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="radio" id="radio-position-end" class="Radio" name="position" />
+  <div>
     <label class="Label Label--inline" for="radio-position-end">Radio Label</label>
   </div>
 </div>
@@ -159,9 +167,12 @@ The input position can be set to `start` (default) or `end`.
 Use responsive breakpoint modifiers to change input position at different screen sizes:
 
 ```html
-<div class="Radio Radio--tablet--inputPositionEnd">
-  <input type="radio" id="radio-position-responsive" class="Radio__input" name="position" />
-  <div class="Radio__text">
+<div
+  class="Flex Flex--horizontal Flex--inline Flex--tablet--horizontalReversed Flex--desktop--horizontal"
+  style="--flex-spacing-x: var(--spirit-space-500);"
+>
+  <input type="radio" id="radio-position-responsive" class="Radio" name="position" />
+  <div>
     <label class="Label Label--inline" for="radio-position-responsive">Radio Label</label>
   </div>
 </div>
@@ -169,4 +180,6 @@ Use responsive breakpoint modifiers to change input position at different screen
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [field-group]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/FieldGroup/README.md
-[helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Flex/README.md
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-item]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Item/README.md

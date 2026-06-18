@@ -56,41 +56,43 @@
       <form class="mb-600">
         <fieldset class="border-0">
           <legend>Drawer alignment:</legend>
-          <div class="Radio mr-600">
-            <input
-              name="drawer-alignment"
-              autocomplete="off"
-              type="radio"
-              id="drawer-alignment-left"
-              class="Radio__input"
-              value="left"
-            >
-            <div class="Radio__text">
-              <label
-                class="Label Label--inline"
-                for="drawer-alignment-left"
-              >
-                Left
-              </label>
+          <div class="my-500">
+            <div class="Flex Flex--horizontal Flex--inline mr-600" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                name="drawer-alignment"
+                autocomplete="off"
+                type="radio"
+                id="drawer-alignment-left"
+                class="Radio"
+                value="left"
+              />
+              <div>
+                <label
+                  class="Label Label--inline"
+                  for="drawer-alignment-left"
+                >
+                  Left
+                </label>
+              </div>
             </div>
-          </div>
-          <div class="Radio">
-            <input
-              name="drawer-alignment"
-              autocomplete="off"
-              type="radio"
-              id="drawer-alignment-right"
-              class="Radio__input"
-              value="right"
-              checked=""
-            >
-            <div class="Radio__text">
-              <label
-                class="Label Label--inline"
-                for="drawer-alignment-right"
+            <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                name="drawer-alignment"
+                autocomplete="off"
+                type="radio"
+                id="drawer-alignment-right"
+                class="Radio"
+                value="right"
+                checked=""
               >
-                Right
-              </label>
+              <div>
+                <label
+                  class="Label Label--inline"
+                  for="drawer-alignment-right"
+                >
+                  Right
+                </label>
+              </div>
             </div>
           </div>
         </fieldset>
