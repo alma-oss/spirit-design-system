@@ -20,48 +20,47 @@ import PickerVariants from './PickerVariants';
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <IconsProvider value={icons}>
-      {/* Extra bottom padding so the last Picker's dropdown popover fits within the viewport. */}
-      <div style={{ paddingBottom: 500 }}>
-        <DocsSection title="Default">
-          <PickerDefault />
-        </DocsSection>
-        <DocsSection title="Themes">
-          <PickerThemes />
-        </DocsSection>
-        <DocsSection title="Variants">
-          <PickerVariants />
-        </DocsSection>
-        <DocsSection title="Sizes" stackAlignment="stretch">
-          <PickerSizes />
-        </DocsSection>
-        <DocsSection title="Aggregated Tags">
-          <PickerAggregated />
-        </DocsSection>
-        <DocsSection title="Hidden Label">
-          <PickerHiddenLabel />
-        </DocsSection>
-        <DocsSection title="Required">
-          <PickerRequired />
-        </DocsSection>
-        <DocsSection title="Helper Text">
-          <PickerHelperText />
-        </DocsSection>
-        <DocsSection title="Validation States">
-          <PickerValidationStates />
-        </DocsSection>
-        <DocsSection title="Disabled">
-          <PickerDisabled />
-        </DocsSection>
-        <DocsSection title="Salary Picker">
-          <PickerSalary />
-        </DocsSection>
-        <DocsSection title="Single with any option">
-          <PickerSingle />
-        </DocsSection>
-        <DocsSection title="Grouped sections with Button">
-          <PickerGroupedJobFilters />
-        </DocsSection>
-      </div>
+      <DocsSection title="Default">
+        <PickerDefault />
+      </DocsSection>
+      <DocsSection title="Themes">
+        <PickerThemes />
+      </DocsSection>
+      <DocsSection title="Variants">
+        <PickerVariants />
+      </DocsSection>
+      <DocsSection title="Sizes" stackAlignment="stretch">
+        <PickerSizes />
+      </DocsSection>
+      <DocsSection title="Aggregated Tags">
+        <PickerAggregated />
+      </DocsSection>
+      <DocsSection title="Hidden Label">
+        <PickerHiddenLabel />
+      </DocsSection>
+      <DocsSection title="Required">
+        <PickerRequired />
+      </DocsSection>
+      <DocsSection title="Helper Text">
+        <PickerHelperText />
+      </DocsSection>
+      <DocsSection title="Validation States">
+        <PickerValidationStates />
+      </DocsSection>
+      <DocsSection title="Disabled">
+        <PickerDisabled />
+      </DocsSection>
+      <DocsSection title="Salary Picker">
+        <PickerSalary />
+      </DocsSection>
+      <DocsSection title="Single with any option">
+        <PickerSingle />
+      </DocsSection>
+      <DocsSection title="Grouped sections with Button">
+        <PickerGroupedJobFilters />
+      </DocsSection>
+      {/* Safety margin so the last DropdownPopover does not overflow the page */}
+      <div style={{ paddingBottom: 500 }} className="hide-from-visual-tests" />
     </IconsProvider>
   </StrictMode>,
 );
