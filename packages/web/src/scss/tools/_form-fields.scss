@@ -134,12 +134,12 @@
 
 @mixin input-field-validation-states($field-name) {
     @each $validation-state-name, $validation-state-value in form-fields-settings.$validation-states {
-        @if $field-name == 'FileUploaderInput' or $field-name == 'UNSTABLE_FileUploadInput' {
+        @if $field-name == 'FileUploadInput' {
             :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
                 > :where(.#{$field-name}__input ~ .#{$field-name}__dropZone) {
                 border-color: map.get($validation-state-value, input-border-color);
             }
-        } @else if $field-name == 'UNSTABLE_File' {
+        } @else if $field-name == 'File' {
             .#{$field-name}--#{$validation-state-name},
             .#{$field-name}.has-#{$validation-state-name} {
                 border-color: map.get($validation-state-value, input-border-color);
