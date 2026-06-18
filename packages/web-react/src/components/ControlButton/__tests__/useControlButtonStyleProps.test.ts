@@ -31,7 +31,7 @@ describe('useControlButtonStyleProps', () => {
       true,
       false,
       false,
-      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--disabled ControlButton--hasBackground dynamic-color-border',
+      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border disabled',
     ],
     [
       'medium',
@@ -52,7 +52,7 @@ describe('useControlButtonStyleProps', () => {
       true,
       true,
       true,
-      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--disabled ControlButton--symmetrical',
+      'ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target disabled ControlButton--symmetrical',
     ],
   ])('should return classes', (size, isDisabled, isSubtle, isSymmetrical, expectedClasses) => {
     const props = { size, isDisabled, isSubtle, isSymmetrical } as SpiritControlButtonProps;

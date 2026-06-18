@@ -55,18 +55,15 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
     isDisabled,
   };
 
-  // TODO Fix with color-schemes
-  const disabledClassNameProp = { UNSAFE_className: 'color-scheme-on-disabled' };
-
   const editActionButton = onChange ? (
-    <ControlButton {...fileRowControlButtonProps} onClick={onChange} {...(isDisabled && disabledClassNameProp)}>
+    <ControlButton {...fileRowControlButtonProps} onClick={onChange}>
       <VisuallyHidden>{resolvedEditText}</VisuallyHidden>
       <Icon name={DEFAULT_FILE_ACTION_BUTTON_ICON_NAME} boxSize={16} aria-hidden="true" />
     </ControlButton>
   ) : null;
 
   const dismissActionButton = onDismiss ? (
-    <ControlButton {...fileRowControlButtonProps} onClick={onDismiss} {...(isDisabled && disabledClassNameProp)}>
+    <ControlButton {...fileRowControlButtonProps} onClick={onDismiss}>
       <VisuallyHidden>{resolvedRemoveText}</VisuallyHidden>
       <Icon name="close" boxSize={16} aria-hidden="true" />
     </ControlButton>

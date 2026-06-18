@@ -87,12 +87,12 @@
             <div>
               <button
                 type="button"
-                class="Button Button--{{color}} Button--{{size}}{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
+                class="Button Button--{{color}} Button--{{size}} disabled{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
                 disabled
               >Button {{color}}</button>
               <button
                 type="button"
-                class="Button Button--{{color}} Button--{{size}}{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
+                class="Button Button--{{color}} Button--{{size}} disabled{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
                 disabled
               >
                 <svg
@@ -107,7 +107,7 @@
               </button>
               <button
                 type="button"
-                class="Button Button--{{color}} Button--{{size}} Button--symmetrical{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
+                class="Button Button--{{color}} Button--{{size}} Button--symmetrical disabled{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
                 disabled
               >
                 <span class="accessibility-hidden">Menu</span>
@@ -153,7 +153,7 @@
             <div>
               <a
                 href="#"
-                class="Button Button--{{color}} Button--{{size}} Button--loading Button--disabled{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
+                class="Button Button--{{color}} Button--{{size}} Button--loading{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
               >
                 Button {{color}}
                 <svg

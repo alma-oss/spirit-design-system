@@ -76,11 +76,6 @@ $_component-name: 'Button';
     &:active {
         background-color: color-scheme.background-color-state-active();
     }
-
-    &:is(:disabled, .is-disabled, .Button--disabled) {
-        pointer-events: none;
-        cursor: cursors.$disabled;
-    }
 }
 
 @include component-color-overrides.generate(
@@ -120,22 +115,20 @@ $_component-name: 'Button';
     }
 }
 
-.Button:is(:disabled, .is-disabled, .Button--disabled):not(.Button--loading) {
-    --#{tokens.$css-variable-prefix}local-color: #{theme.$disabled-color};
-    --#{tokens.$css-variable-prefix}local-border-color: #{theme.$disabled-border-color};
-    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$disabled-background-color};
-}
-
 // We need to override the default disabled styles for plain buttons, because we want them to be still plain.
-.Button--plain:is(:disabled, .is-disabled, .Button--disabled):not(.Button--loading) {
-    --#{tokens.$css-variable-prefix}local-border-color: transparent;
-    --#{tokens.$css-variable-prefix}local-background-color: transparent;
+// stylelint-disable declaration-no-important, selector-max-class
+.Button.Button--plain.disabled {
+    --#{tokens.$css-variable-prefix}local-border-color: transparent !important;
+    --#{tokens.$css-variable-prefix}local-background-color: transparent !important;
 }
+// stylelint-enable
 
 .Button.Button--loading {
     position: relative;
     overflow: hidden; // 1.
     color: transparent;
+    pointer-events: none;
+    cursor: cursors.$disabled;
 
     &:hover,
     &:focus,

@@ -44,6 +44,6 @@ describe('useTagStyleProps', () => {
     } as SpiritTagProps;
     const { result } = renderHook(() => useTagStyleProps(props));
 
-    expect(result.current.classProps).toBe('Tag Tag--neutral Tag--disabled');
+    expect(result.current.classProps).toBe('Tag Tag--neutral disabled');
   });
 });

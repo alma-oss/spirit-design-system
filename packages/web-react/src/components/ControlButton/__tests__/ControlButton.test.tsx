@@ -89,7 +89,7 @@ describe('ControlButton', () => {
 
     const element = screen.getByRole('button');
 
-    expect(element).toHaveClass('ControlButton--disabled');
+    expect(element).toHaveClass('disabled');
     expect(element).toBeDisabled();
   });
 
