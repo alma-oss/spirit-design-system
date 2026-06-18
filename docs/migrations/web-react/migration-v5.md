@@ -14,6 +14,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [Collapse: `hideOnCollapse` Prop Renamed to `isDisposable`](#collapse-hideoncollapse-prop-renamed-to-isdisposable)
   - [Flex: Direction Prop Values Changed](#flex-direction-prop-values-changed)
   - [Form Components: `isFluid` Prop Removed](#form-components-isfluid-prop-removed)
+  - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
   - [Button and ButtonLink: `isBlock` Prop Removed](#button-and-buttonlink-isblock-prop-removed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
@@ -115,9 +116,7 @@ The following form components are now fluid by default and no longer support the
 - `Slider`
 - `Toggle`
 - `FieldGroup`
-- `FileUploader`
-- `UncontrolledFileUploader`
-- `UNSTABLE_FileUpload`
+- `FileUpload`
 - `UNSTABLE_Picker`
 - `UNSTABLE_UncontrolledPicker`
 
@@ -139,7 +138,96 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/forms-isFluid-prop-remov
 Remove the `isFluid` prop from affected form components.
 
 - `<TextField id="name" label="Name" isFluid />` → `<TextField id="name" label="Name" />`
-- `<FileUploader id="files" isFluid … />` → `<FileUploader id="files" … />`
+</details>
+
+### FileUpload and File: Stabilized (FileUploader Removed)
+
+`UNSTABLE_FileUpload` and `UNSTABLE_File` (including `UNSTABLE_FileImagePreview`) are now stable as `FileUpload`, `File`, and `FileImagePreview`.
+
+The `FileUploader` compound component and its subcomponents (`FileUploaderInput`, `FileUploaderList`, `FileUploaderAttachment`, `UncontrolledFileUploader`) were removed in v5. Use `FileUpload` + `File` instead.
+
+`FileUpload` is visual-first: queue handling, validation, and form integration are your responsibility.
+
+#### Migration Guide
+
+🪄 Use codemods to automatically update your codebase:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/unstable-fileupload-component-name
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/unstable-file-component-name
+```
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+**Stabilized component names:**
+
+- `UNSTABLE_FileUpload` → `FileUpload`
+- `UNSTABLE_File` → `File`
+- `UNSTABLE_FileImagePreview` → `FileImagePreview`
+- `UnstableFileUploadProps` → `FileUploadProps`
+- `UnstableFileItem` → `FileItem`
+
+**FileUploader → FileUpload / File:**
+
+1. Replace the `FileUploader` composition with `FileUpload` for the upload input and `File` for each uploaded file row.
+2. Move queue logic (`addToQueue`, `onDismiss`, duplicate checks, limits) to your application state.
+3. Keep validation in your app and pass only visual validation props to `FileUpload`.
+
+**Basic example:**
+
+```tsx
+// Before
+const { fileQueue, addToQueue, clearQueue, onDismiss } = useFileQueue();
+
+<FileUploader
+  id="file-uploader"
+  fileQueue={fileQueue}
+  addToQueue={addToQueue}
+  onDismiss={onDismiss}
+  clearQueue={clearQueue}
+>
+  <FileUploaderInput id="file-uploader-input" name="attachments" label="Label" inputUploadText="Upload your file(s)" />
+  <FileUploaderList
+    id="file-uploader-list"
+    inputName="attachments"
+    label="Attachments"
+    attachmentComponent={(props) => <FileUploaderAttachment key={props.id} {...props} />}
+  />
+</FileUploader>;
+
+// After
+const [items, setItems] = useState<FileItem[]>([]);
+
+const onFilesSelected = (files: File[]) => {
+  setItems((current) => [...current, ...files.map((file) => ({ id: file.name, label: file.name }))]);
+};
+
+const onDismiss = (id: string) => {
+  setItems((current) => current.filter((item) => item.id !== id));
+};
+
+<Stack hasSpacing>
+  <FileUpload
+    id="file-upload"
+    name="attachments"
+    label="Label"
+    inputUploadText="Upload your file(s)"
+    inputDragAndDropText="or drag and drop here"
+    onFilesSelected={onFilesSelected}
+  />
+  <Stack elementType="ul" aria-label="Uploaded files" hasSpacing>
+    {items.map((item) => (
+      <File key={item.id} id={item.id} label={item.label} onDismiss={() => onDismiss(item.id)} />
+    ))}
+  </Stack>
+</Stack>;
+```
+
+For image previews, validation states, and edit actions, see the [File][readme-file] and [FileUpload][readme-file-upload] component documentation.
+
 </details>
 
 ### Button and ButtonLink: `isBlock` Prop Removed
@@ -409,5 +497,7 @@ Please refer back to these instructions or reach out to our team if you encounte
 
 [migration-guide-web]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md
 [readme-codemods]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/README.md
+[readme-file]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/File/README.md
+[readme-file-upload]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FileUpload/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
 [readme-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Header/README.md
