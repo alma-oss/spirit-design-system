@@ -2,6 +2,17 @@ name: 📊 Publish Code Coverage
 
 on:
   workflow_call:
+    inputs:
+      compare-ref:
+        description: 'PR base branch to compare coverage against'
+        required: false
+        type: string
+        default: ''
+      compare-sha:
+        description: 'PR base commit SHA to compare coverage against'
+        required: false
+        type: string
+        default: ''
 
 jobs:
   publish:
@@ -60,6 +71,8 @@ jobs:
           base-path: packages
           flag-name: ${{ matrix.package.flag }}
           carryforward: ${{ matrix.package.carryforward }}
+          compare-ref: ${{ inputs.compare-ref }}
+          compare-sha: ${{ inputs.compare-sha }}
           parallel: true
 
   finish:
