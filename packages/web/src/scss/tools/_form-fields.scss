@@ -170,9 +170,7 @@
         } @else {
             :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
                 > .#{$field-name}__input {
-                @if $field-name != 'Toggle' {
-                    border-color: map.get($validation-state-value, input-border-color);
-                }
+                border-color: map.get($validation-state-value, input-border-color);
             }
         }
 

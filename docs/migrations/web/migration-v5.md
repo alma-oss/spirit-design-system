@@ -12,6 +12,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
   - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
   - [Radio: Composition Markup Changed](#radio-composition-markup-changed)
+  - [Toggle: Composition Markup Changed](#toggle-composition-markup-changed)
   - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
   - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
@@ -195,6 +196,54 @@ For item-style radios, use the `Item` composition and the `Radio--item` and `Lab
     <label for="radio-item" class="Label Label--item">Radio Label</label>
   </div>
 </div>
+```
+
+</details>
+
+### Toggle: Composition Markup Changed
+
+The Toggle component no longer provides the outer wrapper and text element classes.
+Compose toggle rows from the `Toggle`, `Label`, and layout utilities instead.
+
+Add margin utilities when the row owns its own spacing, and omit them when the row is already spaced by a parent layout such as `Stack`.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Replace the old Toggle wrapper markup with a `Flex` row and add the required vertical spacing utility when the row is
+not already spaced by a parent layout:
+
+```html
+<!-- Before -->
+<div class="Toggle Toggle--inputPositionEnd">
+  <div class="Toggle__text">
+    <label for="toggle-default" class="Label Label--inline">Toggle Label</label>
+  </div>
+  <input type="checkbox" id="toggle-default" class="Toggle__input" />
+</div>
+
+<!-- After -->
+<div
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween my-500"
+  style="--flex-spacing-x: var(--spirit-space-500);"
+>
+  <input type="checkbox" id="toggle-default" class="Toggle" />
+  <div>
+    <label for="toggle-default" class="Label Label--inline">Toggle Label</label>
+  </div>
+</div>
+```
+
+For toggles with indicators, move `Toggle__input--indicators` to `Toggle--indicators` on the input:
+
+```html
+<!-- Before -->
+<input type="checkbox" class="Toggle__input Toggle__input--indicators" />
+
+<!-- After -->
+<input type="checkbox" class="Toggle Toggle--indicators" />
 ```
 
 </details>

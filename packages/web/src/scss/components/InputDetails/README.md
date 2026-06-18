@@ -30,9 +30,12 @@ It can be used internally in the form components.
 ## Usage with Toggle
 
 ```html
-<div class="Toggle Toggle--inputPositionEnd">
-  <input type="checkbox" id="consent" class="Toggle__input" name="consent" required aria-details="consent-details" />
-  <div class="Toggle__text">
+<div
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween my-500"
+  style="--flex-spacing-x: var(--spirit-space-500);"
+>
+  <input type="checkbox" id="consent" class="Toggle" name="consent" required aria-details="consent-details" />
+  <div>
     <label class="Label Label--inline Label--required" for="consent">I agree to the terms and conditions</label>
     <div id="consent-details" class="InputDetails">
       <button
@@ -83,18 +86,15 @@ To render the `InputDetails` component in a disabled state, add the `InputDetail
 ### With Disabled Toggle
 
 ```html
-<div class="Toggle Toggle--inputPositionEnd Toggle--disabled">
-  <input
-    type="checkbox"
-    id="consent"
-    class="Toggle__input"
-    name="consent"
-    disabled
-    required
-    aria-details="consent-details"
-  />
-  <div class="Toggle__text">
-    <label class="Label Label--inline Label--required" for="consent">I agree to the terms and conditions</label>
+<div
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween my-500"
+  style="--flex-spacing-x: var(--spirit-space-500);"
+>
+  <input type="checkbox" id="consent" class="Toggle" name="consent" disabled required aria-details="consent-details" />
+  <div>
+    <label class="Label Label--inline Label--required Label--disabled" for="consent"
+      >I agree to the terms and conditions</label
+    >
     <div id="consent-details" class="InputDetails InputDetails--disabled">
       <button type="button" class="link-underlined link-inherit" disabled>See full terms and conditions</button>
       <button type="button" class="link-underlined link-inherit" disabled>See privacy policy</button>
