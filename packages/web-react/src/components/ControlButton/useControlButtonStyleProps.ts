@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { type CSSProperties, type ElementType } from 'react';
+import { CLASS_NAME_DISABLED } from '../../constants';
 import { useClassNamePrefix, useSpacingStyle, useSymmetry } from '../../hooks';
 import { type SizeExtendedDictionaryType, type SpacingType, type SpiritControlButtonProps } from '../../types';
 import { applySize, compose } from '../../utils';
@@ -27,12 +28,11 @@ export function useControlButtonStyleProps<T extends ElementType = 'button', S =
 
   const controlButtonClass = useClassNamePrefix('ControlButton');
   const controlButtonBackgroundClass = `${controlButtonClass}--hasBackground`;
-  const controlButtonDisabledClass = `${controlButtonClass}--disabled`;
   const dynamicColorBackgroundInteractiveClass = useClassNamePrefix('dynamic-color-background-interactive');
   const dynamicColorBorderClass = useClassNamePrefix('dynamic-color-border');
   const accessibilityTapTargetClass = useClassNamePrefix('accessibility-tap-target');
-  // Baked in so the content always picks up the active color scheme — including when the scheme is applied on the
-  // ControlButton itself (e.g. `color-scheme-on-disabled`), where there is no parent to provide the content color.
+  // Baked in so the content always picks up the active color scheme — including when the `disabled` utility is applied
+  // on the ControlButton itself, where there is no parent to provide the content color.
   const textColorSchemeClass = useClassNamePrefix('text-color-scheme');
 
   const { symmetricalClassName } = useSymmetry(controlButtonClass, isSymmetrical);
@@ -44,9 +44,9 @@ export function useControlButtonStyleProps<T extends ElementType = 'button', S =
     dynamicColorBackgroundInteractiveClass,
     accessibilityTapTargetClass,
     {
-      [controlButtonDisabledClass]: isDisabled,
       [controlButtonBackgroundClass]: !isSubtle,
       [dynamicColorBorderClass]: !isSubtle,
+      [CLASS_NAME_DISABLED]: isDisabled,
     },
     symmetricalClassName,
   );

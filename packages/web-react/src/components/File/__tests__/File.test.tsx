@@ -139,24 +139,24 @@ describe('File', () => {
     expect(screen.getAllByRole('button')).toHaveLength(1);
   });
 
-  it('should add color-scheme-on-disabled class to dismiss button when isDisabled is true', () => {
+  it('should add disabled class to dismiss button when isDisabled is true', () => {
     renderInList(<File {...defaultProps} removeText="Remove file" isDisabled />);
 
-    expect(screen.getByRole('button', { name: 'Remove file' })).toHaveClass('color-scheme-on-disabled');
+    expect(screen.getByRole('button', { name: 'Remove file' })).toHaveClass('disabled');
   });
 
-  it('should add color-scheme-on-disabled class to edit button when isDisabled is true', () => {
+  it('should add disabled class to edit button when isDisabled is true', () => {
     renderInList(
       <File {...defaultProps} editText="Edit file" removeText="Remove file" onChange={() => {}} isDisabled />,
     );
 
-    expect(screen.getByRole('button', { name: 'Edit file' })).toHaveClass('color-scheme-on-disabled');
+    expect(screen.getByRole('button', { name: 'Edit file' })).toHaveClass('disabled');
   });
 
-  it('should not add color-scheme-on-disabled class to action buttons when isDisabled is false', () => {
+  it('should not add disabled class to action buttons when isDisabled is false', () => {
     renderInList(<File {...defaultProps} editText="Edit file" removeText="Remove file" onChange={() => {}} />);
 
-    expect(screen.getByRole('button', { name: 'Edit file' })).not.toHaveClass('color-scheme-on-disabled');
-    expect(screen.getByRole('button', { name: 'Remove file' })).not.toHaveClass('color-scheme-on-disabled');
+    expect(screen.getByRole('button', { name: 'Edit file' })).not.toHaveClass('disabled');
+    expect(screen.getByRole('button', { name: 'Remove file' })).not.toHaveClass('disabled');
   });
 });

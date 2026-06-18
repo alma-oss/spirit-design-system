@@ -1,5 +1,4 @@
 @use '@tokens' as tokens;
-@use '../../settings/cursors';
 @use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/dictionaries';
@@ -36,19 +35,8 @@
     $config: theme.$size-config
 );
 
-.Tag--disabled {
-    --#{tokens.$css-variable-prefix}local-color: #{theme.$color-disabled};
-    --#{tokens.$css-variable-prefix}local-border-color: #{theme.$border-color-disabled};
-    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background-color-disabled};
-
-    user-select: none;
-    pointer-events: none;
-    cursor: cursors.$disabled;
-}
-
-// Keep --local-background-color at the disabled value so dynamic-color-border
-// inside the Tag can derive correctly; override the visual background directly.
-.Tag--disabled.Tag--subtle {
+// Subtle tags stay visually transparent when disabled; the `.disabled` utility sets color tokens.
+.Tag--subtle.disabled {
     background-color: transparent;
 }
 

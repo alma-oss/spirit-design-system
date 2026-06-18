@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { type CSSProperties, type ElementType } from 'react';
+import { CLASS_NAME_DISABLED } from '../../constants';
 import { useClassNamePrefix, useSpacingStyle, useSymmetry } from '../../hooks';
 import { type ButtonColor, type ButtonSize, type SpacingType, type SpiritButtonProps } from '../../types';
 import { getColorSchemeClassName, getEmotionColorNames } from '../../utils';
@@ -35,7 +36,6 @@ export function useButtonStyleProps<T extends ElementType = 'button', C = void, 
   const colorAsString = String(color);
 
   const buttonClass = useClassNamePrefix('Button');
-  const buttonDisabledClass = `${buttonClass}--disabled`;
   const buttonLoadingClass = `${buttonClass}--loading`;
   const buttonColorSchemeClass = emotionColorNames.includes(colorAsString)
     ? getColorSchemeClassName({ color: colorAsString, isSubtle: false })
@@ -49,7 +49,7 @@ export function useButtonStyleProps<T extends ElementType = 'button', C = void, 
     buttonColorSchemeClass,
     getButtonSizeClassname(buttonClass, size as ButtonSize<S>),
     {
-      [buttonDisabledClass]: isDisabled || isLoading,
+      [CLASS_NAME_DISABLED]: isDisabled && !isLoading,
       [buttonLoadingClass]: isLoading,
     },
     symmetricalClassName,

@@ -18,6 +18,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
   - [Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed](#header-unstable_header-stabilized-previous-header-css-removed)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
+  - [Disabled Utility for Color-Scheme Components](#disabled-utility-for-color-scheme-components)
   - [Toggle: Input Before Label in HTML](#toggle-input-before-label-in-html)
 
 ## General Changes
@@ -270,6 +271,56 @@ effect.
 This is a **visual breaking change** — if you relied on the previous heights, shift the size modifier up
 to keep the same rendering: `ControlButton--small` → `ControlButton--medium`,
 `ControlButton--medium` → `ControlButton--large`, and `ControlButton--large` → `ControlButton--xlarge`.
+
+### Disabled Utility for Color-Scheme Components
+
+The `--disabled` BEM modifier classes were removed from `Button`, `ControlButton`, and `Tag`. Use the global
+`disabled` utility class together with the native `disabled` attribute (or `aria-disabled="true"` for links).
+
+The `disabled` utility sets disabled color tokens with `!important`, blocks pointer interaction, and applies disabled
+cursors. Loading buttons keep `Button--loading` only and must not use the `disabled` utility.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Replace the component `--disabled` modifier with the `disabled` utility class and keep the native disabled state on
+interactive elements.
+
+```html
+<!-- Before -->
+<button type="button" class="Button Button--primary Button--medium Button--disabled" disabled>Disabled Button</button>
+<span class="Tag Tag--neutral Tag--small Tag--disabled">Disabled tag</span>
+
+<!-- After -->
+<button type="button" class="Button Button--primary Button--medium disabled" disabled>Disabled Button</button>
+<span class="Tag Tag--neutral Tag--small disabled">Disabled tag</span>
+```
+
+For `ControlButton`, add the `text-color-scheme` utility on the button itself so content colors apply when disabled:
+
+```html
+<!-- Before -->
+<button
+  type="button"
+  class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--disabled"
+  disabled
+>
+  …
+</button>
+
+<!-- After -->
+<button
+  type="button"
+  class="ControlButton ControlButton--medium ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target disabled"
+  disabled
+>
+  …
+</button>
+```
+
+</details>
 
 ### Navigation: Slots, Open State, and Removed Selected Indicator
 

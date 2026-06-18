@@ -32,11 +32,11 @@ const ControlButtonDisabled = () => (
     <h3>Color Scheme on Component</h3>
 
     <Box elementType={Flex} alignmentX={{ mobile: 'center', tablet: 'left' }} alignmentY="center">
-      <ControlButton isSymmetrical isSubtle isDisabled aria-label="Close" UNSAFE_className="color-scheme-on-disabled">
+      <ControlButton isSymmetrical isSubtle isDisabled aria-label="Close">
         <Icon name="close" />
       </ControlButton>
 
-      <ControlButton isSymmetrical isDisabled aria-label="Close" UNSAFE_className="color-scheme-on-disabled">
+      <ControlButton isSymmetrical isDisabled aria-label="Close">
         <Icon name="close" />
       </ControlButton>
     </Box>

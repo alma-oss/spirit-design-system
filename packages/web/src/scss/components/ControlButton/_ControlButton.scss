@@ -39,11 +39,6 @@ $_component-name-infix: spirit-string.convert-pascal-case-to-kebab-case($_compon
     border-radius: theme.$border-radius;
     user-select: none;
     cursor: cursors.$buttons;
-
-    &:is(:disabled, .is-disabled, .ControlButton--disabled) {
-        pointer-events: none;
-        cursor: cursors.$disabled;
-    }
 }
 
 // 2.

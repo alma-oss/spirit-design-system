@@ -141,16 +141,30 @@ Use the `isDisabled` prop to disable a ControlButton:
 </ControlButton>
 ```
 
-The `isDisabled` prop sets both the native `disabled` attribute and the `ControlButton--disabled` class,
-ensuring proper behavior. To achieve proper styles, use the `color-scheme-on-disabled` class on the parent element or
-directly on the ControlButton.
+The `isDisabled` prop sets the native `disabled` attribute (for `button` elements) and applies the `disabled` utility
+class for disabled colors and pointer interaction.
 
 ### Color Scheme for Disabled State
 
-**Parent component handles the color scheme:**
+The `isDisabled` prop applies the `disabled` utility class and `text-color-scheme` so ControlButton gets disabled
+colors, pointer interaction blocking, and cursor styling without relying on a parent color scheme.
+
+Unlike the `colorScheme` prop, the `disabled` utility uses `!important` to override color variants and also sets
+disabled cursors.
+
+**Standalone ControlButton:**
 
 ```tsx
-<Box UNSAFE_className="color-scheme-on-disabled">
+<ControlButton isSymmetrical isDisabled aria-label="Close">
+  <Icon name="close" />
+</ControlButton>
+```
+
+**Disabled context with other content** — use `colorScheme="disabled"` on a parent `Box` to style surrounding
+disabled content. ControlButton still applies its own disabled styling via `isDisabled`:
+
+```tsx
+<Box colorScheme="disabled">
   <ControlButton isSymmetrical isDisabled aria-label="Previous">
     <Icon name="chevron-left" />
   </ControlButton>
@@ -159,14 +173,6 @@ directly on the ControlButton.
     <Icon name="chevron-right" />
   </ControlButton>
 </Box>
-```
-
-**Standalone ControlButton:**
-
-```tsx
-<ControlButton isSymmetrical isDisabled aria-label="Close" UNSAFE_className="color-scheme-on-disabled">
-  <Icon name="close" />
-</ControlButton>
 ```
 
 ## Custom Spacing

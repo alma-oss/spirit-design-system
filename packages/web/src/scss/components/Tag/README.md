@@ -96,20 +96,20 @@ dynamically derived background color via a `::before` pseudo-element overlay.
 
 ## Disabled
 
-Add the `Tag--disabled` modifier to visually disable a Tag:
+Use the `disabled` utility class for disabled colors and pointer interaction. For interactive elements, combine with the native `disabled` attribute or `aria-disabled="true"` for links.
 
 ```html
-<span class="Tag Tag--neutral Tag--small Tag--disabled">Disabled tag</span>
+<span class="Tag Tag--neutral Tag--small disabled">Disabled tag</span>
 ```
 
 Disabled Tag with `ControlButton`:
 
 ```html
-<div class="Tag Tag--neutral Tag--medium Tag--disabled">
+<div class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic disabled">
   <span>Disabled tag</span>
   <button
     type="button"
-    class="ControlButton ControlButton--small ControlButton--symmetrical"
+    class="ControlButton ControlButton--small ControlButton--symmetrical disabled"
     aria-label="Remove Disabled tag"
     disabled
   >
@@ -123,7 +123,7 @@ Disabled Tag with `ControlButton`:
 Disabled link Tag:
 
 ```html
-<a role="link" class="Tag Tag--neutral Tag--small Tag--disabled" aria-disabled="true">Disabled link tag</a>
+<a role="link" class="Tag Tag--neutral Tag--small disabled" aria-disabled="true">Disabled link tag</a>
 ```
 
 ℹ️ Read more about this pattern at [Scott O'Hara's blog][scott-o-hara-disabling-a-link].
