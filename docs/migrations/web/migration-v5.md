@@ -9,6 +9,7 @@ Introducing version 5 of the _spirit-web_ package.
 - [Component Changes](#component-changes)
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
   - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
+  - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Stack: Modifier Classes Without `has` Prefix](#stack-modifier-classes-without-has-prefix)
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
@@ -82,6 +83,45 @@ Manually replace the modifier classes in your project.
 - `Flex--column` → `Flex--vertical`
 - `Flex--{breakpoint}--row` → `Flex--{breakpoint}--horizontal`
 - `Flex--{breakpoint}--column` → `Flex--{breakpoint}--vertical`
+
+### FileUpload and File: Stabilized (FileUploader Removed)
+
+`UNSTABLE_FileUpload` and `UNSTABLE_File` CSS classes are now stable as `FileUpload`, `FileUploadInput`, and `File`.
+
+The `FileUploader` composition (HTML/CSS classes and the `fileUploader` JavaScript plugin) was removed in v5. Use `FileUpload` and `File` instead.
+
+#### Migration Guide
+
+Manually replace the class names in your project.
+
+- `UNSTABLE_FileUpload` → `FileUpload`
+- `UNSTABLE_FileUploadInput` → `FileUploadInput`
+- `UNSTABLE_File` → `File`
+
+<details>
+  <summary>🔧 Manual Migration Steps (FileUploader → FileUpload / File)</summary>
+
+1. Replace `FileUploader`/`FileUploaderInput`/`FileUploaderList`/`FileUploaderAttachment` markup with `FileUpload` and `File`.
+2. Remove dependency on the `fileUploader` plugin (`data-spirit-toggle="fileUploader"` and related behavior).
+3. Move queue and validation logic to your own JavaScript.
+
+```html
+<!-- Before -->
+<div class="FileUploader" data-spirit-toggle="fileUploader">
+  <div class="FileUploaderInput" data-spirit-element="wrapper"><!-- … --></div>
+  <ul class="FileUploaderList" data-spirit-element="list">
+    <!-- … -->
+  </ul>
+</div>
+
+<!-- After -->
+<div class="FileUpload"><!-- upload input/dropzone --></div>
+<ul class="Stack Stack--spacing" aria-label="Uploaded files">
+  <li class="File"><!-- file row --></li>
+</ul>
+```
+
+</details>
 
 ### ScrollView: Arrows Renamed to Controls
 
