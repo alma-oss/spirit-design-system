@@ -1,24 +1,10 @@
 @use 'theme';
 @use '../../settings/cursors';
 @use '../../tools/form-fields' as form-fields-tools;
-@use '../../tools/reset';
 
 $_field-name: 'Toggle';
 
 .Toggle {
-    @include form-fields-tools.inline-field-root($_field-name);
-
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    max-width: none;
-}
-
-.Toggle__text {
-    flex: 1;
-}
-
-.Toggle__input {
     @include form-fields-tools.inline-field-input();
 
     display: grid;
@@ -104,28 +90,22 @@ $_field-name: 'Toggle';
     }
 }
 
-.Toggle__input--indicators::before,
-.Toggle__input--indicators::after {
+.Toggle--indicators::before,
+.Toggle--indicators::after {
     background-size: 100%;
     background-color: transparent;
 }
 
-.Toggle__input--indicators::before {
+.Toggle--indicators::before {
     background-image: theme.$input-mark-image;
 }
 
-.Toggle__input--indicators::after {
+.Toggle--indicators::after {
     background-image: theme.$input-mark-image-state-checked;
 }
 
-@include form-fields-tools.input-field-validation-states($_field-name);
-
-.Toggle:is(.Toggle--disabled, .is-disabled) {
-    @include form-fields-tools.inline-field-root-disabled();
-}
-
-.Toggle:is(.Toggle--disabled, .is-disabled) > .Toggle__input,
-.Toggle > .Toggle__input:disabled {
+:is(.Toggle--disabled, .Toggle.is-disabled),
+.Toggle:disabled {
     @include form-fields-tools.input-disabled();
 
     border-color: theme.$input-border-color-state-disabled;
@@ -138,20 +118,15 @@ $_field-name: 'Toggle';
     }
 }
 
-.Toggle:is(.Toggle--disabled, .is-disabled) > .Toggle__input--indicators,
-.Toggle > .Toggle__input--indicators:disabled {
-    &::before,
-    &::after {
-        background-color: transparent;
-    }
-
+.Toggle--indicators:disabled,
+:is(.Toggle--disabled, .Toggle.is-disabled).Toggle--indicators {
     &::before {
         background-image: theme.$input-mark-image-state-disabled;
+        background-color: transparent;
     }
 
     &::after {
         background-image: theme.$input-mark-image-state-checked-disabled;
+        background-color: transparent;
     }
 }
-
-@include form-fields-tools.input-position($component-class: $_field-name, $default-position: 'end');
