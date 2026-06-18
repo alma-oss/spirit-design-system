@@ -14,7 +14,8 @@
 @forward 'Drawer';
 @forward 'Dropdown';
 @forward 'EmptyState';
-@forward 'FileUploader';
+@forward 'File';
+@forward 'FileUpload';
 @forward 'Flex';
 @forward 'Grid';
 @forward 'Header';
@@ -49,7 +50,5 @@
 @forward 'Tooltip';
 @forward 'ValidationText';
 @forward 'UNSTABLE_Combobox';
-@forward 'UNSTABLE_File';
-@forward 'UNSTABLE_FileUpload';
 @forward 'UNSTABLE_Picker';
 @forward 'UNSTABLE_Table';
