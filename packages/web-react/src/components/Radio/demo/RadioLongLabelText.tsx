@@ -8,6 +8,6 @@ const RadioLongLabelText = () => {
   any unexpected breakage or misalignment. Ensuring proper spacing and alignment for multiline labels is essential for
   creating a consistent and user-friendly interface across different screen sizes and resolutions.`;
 
-  return <Radio id="radio-long-label" label={labelText} name="radioLongLabel" />;
+  return <Radio id="radio-long-label" marginY="space-500" label={labelText} name="radioLongLabel" />;
 };
 export default RadioLongLabelText;

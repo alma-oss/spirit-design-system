@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Stack } from '../../Stack';
 import Radio from '../Radio';
 
 const RadioDefault = () => {
@@ -9,7 +10,7 @@ const RadioDefault = () => {
   };
 
   return (
-    <>
+    <Stack hasSpacing>
       <Radio
         id="radio-default"
         label="Radio Label"
@@ -25,7 +26,7 @@ const RadioDefault = () => {
         isChecked={selectedRadio === 'radio-default-checked'}
         onChange={() => handleChange('radio-default-checked')}
       />
-    </>
+    </Stack>
   );
 };
 

@@ -1,44 +1,39 @@
 import classNames from 'classnames';
 import { InputPositions } from '../../constants';
-import { useClassNamePrefix, useInputPositionClass } from '../../hooks';
-import { type RadioProps, type SpiritRadioProps } from '../../types';
+import { useClassNamePrefix } from '../../hooks';
+import { type FlexDirectionType, type RadioProps, type SpiritRadioProps } from '../../types';
+import { inputPositionToFlexDirection } from '../../utils';
 
 export interface RadioStyles {
   /** className props */
   classProps: {
-    root: string;
     input: string;
-    text: string;
   };
+  /** Direction props to be passed to the Flex element */
+  direction: FlexDirectionType;
   /** props to be passed to the input element */
   props: RadioProps;
 }
 
 export function useRadioStyleProps(props: SpiritRadioProps): RadioStyles {
-  const { inputPosition = InputPositions.START, ...restProps } = props;
-  const { isDisabled, isLabelHidden, isItem, validationState } = restProps;
+  const { inputPosition = InputPositions.START, validationState, ...restProps } = props;
+  const { isItem } = restProps;
 
   const radioClass = useClassNamePrefix('Radio');
-  const radioDisabledClass = `${radioClass}--disabled`;
   const radioItemClass = `${radioClass}--item`;
-  const radioInputClass = `${radioClass}__input`;
-  const radioInputPositionClass = useInputPositionClass(radioClass, inputPosition);
-  const radioTextClass = `${radioClass}__text`;
-  const radioLabelHiddenClass = `${radioClass}--labelHidden`;
   const radioValidationClass = `${radioClass}--${validationState}`;
 
   return {
     classProps: {
-      root: classNames(radioClass, {
-        [radioInputPositionClass]: radioInputPositionClass,
-        [radioDisabledClass]: isDisabled,
-        [radioItemClass]: isItem,
-        [radioLabelHiddenClass]: isLabelHidden,
+      input: classNames(radioClass, {
         [radioValidationClass]: validationState,
+        [radioItemClass]: isItem,
       }),
-      input: radioInputClass,
-      text: radioTextClass,
     },
-    props: restProps,
+    direction: inputPositionToFlexDirection(inputPosition),
+    props: {
+      ...restProps,
+      validationState,
+    },
   };
 }

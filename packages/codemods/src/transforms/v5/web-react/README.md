@@ -42,6 +42,25 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/checkbox-margin-y
 + <Checkbox id="checkbox-default" label="Checkbox Label" marginY="space-500" />
 ```
 
+### `v5/web-react/radio-margin-y` — Add Radio Vertical Spacing Outside Stack
+
+This codemod adds `marginY="space-500"` to `Radio` components that are not rendered inside `Stack` with `hasSpacing`.
+It skips radios that already define `marginY`, `margin`, `marginTop`, or `marginBottom`, and item-style radios with `isItem`.
+This preserves the previous default vertical spacing after Radio stopped applying it internally.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/radio-margin-y
+```
+
+#### Example
+
+```diff
+- <Radio id="radio-default" label="Radio Label" />
++ <Radio id="radio-default" label="Radio Label" marginY="space-500" />
+```
+
 ### `v5/web-react/flex-direction-values` - Replace Flex Direction Prop Values `row` with `horizontal` and `column` with `vertical`
 
 This codemod updates `direction` values of `Flex` component by replacing `row` to `horizontal` and `column` to `vertical`.
