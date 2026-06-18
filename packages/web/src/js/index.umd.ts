@@ -4,7 +4,6 @@ import Collapse from './Collapse';
 import * as constants from './constants';
 import * as dom from './dom';
 import Dropdown from './Dropdown';
-import FileUploader from './FileUploader';
 import Modal from './Modal';
 import Offcanvas from './Offcanvas';
 import Password from './Password';
@@ -20,7 +19,6 @@ export default {
   BaseComponent,
   Collapse,
   Dropdown,
-  FileUploader,
   Modal,
   Offcanvas,
   Password,

@@ -3,9 +3,9 @@
 @use '../../tools/typography';
 @use 'theme';
 
-$_field-name: 'UNSTABLE_File';
+$_field-name: 'File';
 
-.UNSTABLE_File {
+.File {
     @include form-fields-tools.box-field-fluid();
 
     display: flex;
@@ -20,7 +20,7 @@ $_field-name: 'UNSTABLE_File';
 
 @include form-fields-tools.input-field-validation-states($_field-name);
 
-.UNSTABLE_File__preview {
+.File__preview {
     flex-shrink: 0;
     width: theme.$preview-size;
     height: theme.$preview-size;
@@ -28,23 +28,23 @@ $_field-name: 'UNSTABLE_File';
     border-radius: theme.$preview-border-radius;
 }
 
-.UNSTABLE_File__preview:has(> svg) {
+.File__preview:has(> svg) {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: theme.$preview-background;
 }
 
-.UNSTABLE_File__preview:has(> img) {
+.File__preview:has(> img) {
     position: relative;
 }
 
-.UNSTABLE_File__preview > svg {
+.File__preview > svg {
     width: theme.$preview-content-size;
     height: theme.$preview-content-size;
 }
 
-.UNSTABLE_File__preview > img {
+.File__preview > img {
     position: absolute;
     top: var(--#{tokens.$css-variable-prefix}file-image-top, 0);
     left: var(--#{tokens.$css-variable-prefix}file-image-left, 0);
@@ -54,11 +54,11 @@ $_field-name: 'UNSTABLE_File';
     object-position: center;
 }
 
-.UNSTABLE_File__content {
+.File__content {
     flex: 1;
 }
 
-.UNSTABLE_File__text {
+.File__text {
     --#{tokens.$css-variable-prefix}helper-text-margin-top: 0;
 
     display: flex;
@@ -66,18 +66,18 @@ $_field-name: 'UNSTABLE_File';
     gap: theme.$text-gap;
 }
 
-.UNSTABLE_File__name {
+.File__name {
     @include typography.generate(theme.$typography);
 
     display: flex;
     color: theme.$color;
 }
 
-.UNSTABLE_File--disabled .UNSTABLE_File__name {
+.File--disabled .File__name {
     color: theme.$color-state-disabled;
 }
 
-.UNSTABLE_File--disabled > .UNSTABLE_File__preview {
+.File--disabled > .File__preview {
     opacity: 0.5;
     filter: grayscale(100%);
 }
