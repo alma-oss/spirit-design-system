@@ -20,16 +20,16 @@ Place HelperText inside the **Radio** or **Checkbox** text area:
 
 ```html
 <!-- Radio -->
-<div class="Radio Radio--inputPositionStart">
+<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="radio"
     id="radio-helper-text"
-    class="Radio__input"
+    class="Radio"
     name="example"
     aria-describedby="radio-helper-text-helper-text"
   />
-  <div class="Radio__text">
-    <label class="Radio__label" for="radio-helper-text">Radio Label</label>
+  <div>
+    <label class="Label Label--inline" for="radio-helper-text">Radio Label</label>
     <div class="HelperText" id="radio-helper-text-helper-text">Helper text</div>
   </div>
 </div>
