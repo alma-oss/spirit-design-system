@@ -1,7 +1,3 @@
-@use '../../../../packages/web/src/scss/settings/feature-flags' with (
-    $enable-v5-container-block-formatting-context: true
-);
-
 @forward '../../../../packages/web/src/scss/themes';
 @forward '../../../../packages/web/src/scss/foundation';
 @forward '../../../../packages/web/src/scss/components';
