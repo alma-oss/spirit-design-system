@@ -4,7 +4,6 @@ import React, { type ForwardedRef, forwardRef } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
 import { FormFieldModes, type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
-import { type FlexDirectionType } from '../../types/flex';
 import { mergeStyleProps } from '../../utils';
 import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
@@ -97,7 +96,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
         </Item>
       ) : (
         <Flex
-          direction={direction as FlexDirectionType}
+          direction={direction}
           isInline
           spacingX={isLabelHidden ? 'space-0' : 'space-500'}
           {...mergeStyleProps(Flex, { styleProps })}

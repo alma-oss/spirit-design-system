@@ -1,10 +1,11 @@
 'use client';
 
-import classNames from 'classnames';
 import React, { type ChangeEvent, type ForwardedRef, forwardRef, useState } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
 import { FormFieldModes, type ForwardRefComponent, type SpiritToggleProps } from '../../types';
+import { mergeStyleProps } from '../../utils';
+import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { InputDetails } from '../InputDetails';
 import { Label } from '../Label';
@@ -12,7 +13,7 @@ import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { useToggleStyleProps } from './useToggleStyleProps';
 
 const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) => {
-  const { classProps, props: modifiedProps } = useToggleStyleProps(props);
+  const { alignmentX, classProps, direction, props: modifiedProps } = useToggleStyleProps(props);
   const {
     'aria-describedby': ariaDescribedBy = '',
     'aria-details': ariaDetailsAttr,
@@ -54,7 +55,13 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
         validationState,
       }}
     >
-      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
+      <Flex
+        alignmentX={alignmentX}
+        direction={direction}
+        isInline
+        spacingX={isLabelHidden ? 'space-0' : 'space-500'}
+        {...mergeStyleProps(Flex, { styleProps })}
+      >
         <input
           {...otherProps}
           {...ariaDescribedByProp}
@@ -68,8 +75,10 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
           onChange={handleOnChange}
           ref={ref}
         />
-        <div className={classProps.text}>
-          <Label htmlFor={id}>{label}</Label>
+        <div>
+          <Label elementType="label" htmlFor={id}>
+            {label}
+          </Label>
           {details && (
             <InputDetails id={`${id}-details`} registerAriaDetails={registerDetails}>
               {details}
@@ -86,7 +95,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
             />
           )}
         </div>
-      </div>
+      </Flex>
     </PropsProvider>
   );
 };

@@ -1,12 +1,13 @@
 import React from 'react';
 import { ValidationStates } from '../../../constants';
+import { Stack } from '../../Stack';
 import Toggle from '../Toggle';
 
 const ToggleValidationWithIcon = () => {
   const states = Object.values(ValidationStates);
 
   return (
-    <>
+    <Stack hasSpacing>
       {states.map((state) => (
         <Toggle
           id={`toggle-${state}-validation-icon`}
@@ -19,7 +20,7 @@ const ToggleValidationWithIcon = () => {
           key={`toggle-${state}-validation-icon`}
         />
       ))}
-    </>
+    </Stack>
   );
 };
 

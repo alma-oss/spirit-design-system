@@ -16,6 +16,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [Collapse: `hideOnCollapse` Prop Renamed to `isDisposable`](#collapse-hideoncollapse-prop-renamed-to-isdisposable)
   - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
   - [Radio: Composition Markup Changed](#radio-composition-markup-changed)
+  - [Toggle: Composition Markup Changed](#toggle-composition-markup-changed)
   - [Flex: Direction Prop Values Changed](#flex-direction-prop-values-changed)
   - [Form Components: `isFluid` Prop Removed](#form-components-isfluid-prop-removed)
   - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
@@ -180,6 +181,50 @@ Inside `Stack` with `hasSpacing`, no extra spacing is needed:
 ```tsx
 <Stack hasSpacing>
   <Radio id="radio-default" label="Radio Label" />
+</Stack>
+```
+
+</details>
+
+### Toggle: Composition Markup Changed
+
+Toggle now composes its layout from Spirit components and applies the `Toggle` class directly to the input.
+Vertical spacing is no longer applied by default.
+
+When Toggle is rendered outside a `Stack` with `hasSpacing`, add `marginY="space-500"` to preserve the previous
+default vertical spacing. Omit it when the row is already spaced by a parent layout such as `Stack` with `hasSpacing`.
+
+#### Migration Guide
+
+🪄 Use codemods to automatically update your codebase:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/toggle-margin-y
+```
+
+The codemod adds `marginY="space-500"` to Toggle instances outside `Stack` with `hasSpacing`.
+It skips toggles that already define `marginY`, `margin`, `marginTop`, or `marginBottom`.
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Add Toggle vertical spacing when the row is not already spaced by a parent layout:
+
+```tsx
+// Before
+<Toggle id="toggle-default" label="Toggle Label" />
+
+// After
+<Toggle id="toggle-default" label="Toggle Label" marginY="space-500" />
+```
+
+Inside `Stack` with `hasSpacing`, no extra spacing is needed:
+
+```tsx
+<Stack hasSpacing>
+  <Toggle id="toggle-default" label="Toggle Label" />
 </Stack>
 ```
 

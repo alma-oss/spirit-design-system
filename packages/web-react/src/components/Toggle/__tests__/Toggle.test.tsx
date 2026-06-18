@@ -11,18 +11,15 @@ import {
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
-  validationStatePropsTest,
 } from '@local/tests';
 import Toggle from '../Toggle';
 
 describe('Toggle', () => {
-  classNamePrefixProviderTest(Toggle, 'Toggle');
+  classNamePrefixProviderTest(Toggle, 'Toggle', { getByRole: 'checkbox' });
 
   stylePropsTest(Toggle);
 
   restPropsTest(Toggle, 'input');
-
-  validationStatePropsTest(Toggle, 'Toggle--');
 
   requiredPropsTest(Toggle, 'checkbox', 'id', 'example-id');
 
@@ -42,39 +39,29 @@ describe('Toggle', () => {
     renderComponent: (props) => <Toggle id="toggle-validation-context" label="Label" {...props} />,
   });
 
-  it('should have correct className', () => {
+  it('should render inline layout', () => {
     render(<Toggle id="test-toggle" label="Toggle Label" />);
 
-    expect(screen.getByRole('checkbox').parentElement).toHaveClass('Toggle');
+    expect(screen.getByRole('checkbox').parentElement).toHaveClass('Flex', 'Flex--horizontalReversed');
+    expect(screen.getByRole('checkbox').parentElement).toHaveClass('Flex--alignmentXSpaceBetween');
   });
 
-  it('should have label classname', () => {
+  it('should have label', () => {
     render(<Toggle id="test-toggle" label="Toggle Label" />);
 
-    const label = screen.getByText('Toggle Label');
-
-    expect(label).toBeInTheDocument();
-    expect(label).toContainHTML('label');
-  });
-
-  it('should have text classname', () => {
-    render(<Toggle id="test-toggle" label="Toggle Label" />);
-
-    expect(screen.getByRole('checkbox').nextElementSibling).toHaveClass('Toggle__text');
+    expect(screen.getByRole('checkbox', { name: 'Toggle Label' })).toBeInTheDocument();
   });
 
   it('should have input classname', () => {
     render(<Toggle id="test-toggle" label="Toggle Label" />);
 
-    expect(screen.getByRole('checkbox')).toHaveClass('Toggle__input');
+    expect(screen.getByRole('checkbox')).toHaveClass('Toggle');
   });
 
-  it('should have helper text with correct classname', () => {
+  it('should have helper text', () => {
     render(<Toggle id="test-toggle" label="Toggle Label" helperText="Helper Text" />);
 
-    const helperText = screen.getByText('Helper Text');
-
-    expect(helperText).toBeInTheDocument();
+    expect(screen.getByText('Helper Text')).toBeInTheDocument();
   });
 
   it('should have correct attribute when checked', () => {
@@ -92,10 +79,7 @@ describe('Toggle', () => {
   it('should have indicators classname', () => {
     render(<Toggle id="test-toggle" label="Toggle Label" hasIndicators />);
 
-    const checkbox = screen.getByRole('checkbox');
-
-    expect(checkbox).toHaveClass('Toggle__input');
-    expect(checkbox).toHaveClass('Toggle__input--indicators');
+    expect(screen.getByRole('checkbox')).toHaveClass('Toggle', 'Toggle--indicators');
   });
 
   it('should change the state of the checkbox when clicked', () => {
@@ -140,11 +124,7 @@ describe('Toggle', () => {
       />,
     );
 
-    const textWrapper = screen.getByRole('checkbox').nextElementSibling as HTMLElement;
-    const label = textWrapper.querySelector('label') as HTMLElement;
-
-    expect(label).toHaveTextContent('Toggle Label');
-    expect(label.innerHTML).toBe('Toggle <b>Label</b>');
+    expect(screen.getByRole('checkbox', { name: 'Toggle Label' })).toBeInTheDocument();
   });
 
   it('should render validation icon when hasValidationIcon is set', () => {

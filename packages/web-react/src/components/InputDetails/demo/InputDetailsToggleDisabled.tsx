@@ -5,6 +5,7 @@ import { Toggle } from '../../Toggle';
 const InputDetailsToggleDisabled = () => (
   <Toggle
     id="input-details-toggle-disabled"
+    marginY="space-500"
     name="consent"
     label="I agree to the terms and conditions"
     isDisabled
