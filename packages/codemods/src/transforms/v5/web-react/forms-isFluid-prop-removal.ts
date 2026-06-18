@@ -10,9 +10,6 @@ const TARGET_COMPONENTS = new Set([
   'Slider',
   'Toggle',
   'FieldGroup',
-  'FileUploader',
-  'UncontrolledFileUploader',
-  'UNSTABLE_FileUpload',
   'UNSTABLE_Picker',
   'UNSTABLE_UncontrolledPicker',
 ]);
