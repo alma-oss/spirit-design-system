@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Stack } from '../../Stack';
 import Toggle from '../Toggle';
 
 const ToggleInputPosition = () => {
@@ -7,7 +8,7 @@ const ToggleInputPosition = () => {
   const [isResponsiveChecked, setResponsiveChecked] = useState(false);
 
   return (
-    <>
+    <Stack hasSpacing>
       <Toggle
         id="toggle-input-position-start"
         name="toggleInputPositionStart"
@@ -31,7 +32,7 @@ const ToggleInputPosition = () => {
         isChecked={isResponsiveChecked}
         onChange={() => setResponsiveChecked(!isResponsiveChecked)}
       />
-    </>
+    </Stack>
   );
 };
 

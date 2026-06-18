@@ -195,6 +195,100 @@ The components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
+## Custom Component
+
+Toggle classes are fabricated using `useToggleStyleProps` hook. You can use it to create your own custom Toggle component. Compose the standalone [HelperText][readme-helper-text], [Label][readme-label], [InputDetails][readme-input-details], and [ValidationText][readme-validation-text] components with `PropsProvider`, `useAriaDescribedBy`, and `useAriaDetails` for correct styling and accessibility.
+
+```tsx
+const CustomToggle = (props: SpiritToggleProps): JSX.Element => {
+  const { classProps, direction, props: modifiedProps } = useToggleStyleProps(props);
+  const {
+    'aria-describedby': ariaDescribedBy = '',
+    'aria-details': ariaDetailsAttr,
+    details,
+    hasValidationIcon,
+    helperText,
+    id,
+    isChecked,
+    isDisabled,
+    isLabelHidden,
+    isRequired,
+    label,
+    onChange,
+    validationState,
+    validationText,
+    ...restProps
+  } = modifiedProps;
+  const { styleProps, props: transferProps } = useStyleProps(restProps);
+  const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
+  const [ariaDetailsProp, registerDetails] = useAriaDetails(ariaDetailsAttr);
+  const validationTextRole = useValidationTextRole({ validationState, validationText });
+
+  const input = (
+    <input
+      {...transferProps}
+      {...ariaDescribedByProp}
+      {...ariaDetailsProp}
+      type="checkbox"
+      id={id}
+      className={classProps.input}
+      disabled={isDisabled}
+      required={isRequired}
+      checked={isChecked}
+      onChange={onChange}
+    />
+  );
+  const content = (
+    <>
+      <Label elementType="label" htmlFor={id}>
+        {label}
+      </Label>
+      {details && (
+        <InputDetails id={`${id}-details`} registerAriaDetails={registerDetails}>
+          {details}
+        </InputDetails>
+      )}
+      <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+      {validationState && (
+        <ValidationText
+          id={`${id}-validation-text`}
+          {...(hasValidationIcon && { validationStateIcon: validationState })}
+          validationText={validationText}
+          registerAria={register}
+          role={validationTextRole}
+        />
+      )}
+    </>
+  );
+  const rootStyleProps = mergeStyleProps(Flex, { styleProps });
+
+  return (
+    <PropsProvider
+      value={{
+        formFieldMode: FormFieldModes.INLINE,
+        isDisabled,
+        isLabelHidden,
+        isRequired,
+        validationState,
+      }}
+    >
+      <Flex
+        {...rootStyleProps}
+        alignmentX={alignmentX}
+        direction={direction}
+        isInline
+        spacingX={isLabelHidden ? 'space-0' : 'space-500'}
+      >
+        {input}
+        <div>{content}</div>
+      </Flex>
+    </PropsProvider>
+  );
+};
+```
+
+For detailed information see the [Toggle][readme-toggle] component.
+
 [autocomplete-attr]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
@@ -203,6 +297,11 @@ and [escape hatches][readme-escape-hatches].
 [readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Container/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/HelperText/README.md
+[readme-input-details]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/InputDetails/README.md
+[readme-label]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Label/README.md
 [readme-responsive]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#responsive-props
 [readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[readme-toggle]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Toggle/README.md
+[readme-validation-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ValidationText/README.md
