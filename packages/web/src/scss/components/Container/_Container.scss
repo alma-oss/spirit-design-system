@@ -2,7 +2,6 @@
 //    which contains its floats and prevents margin collapsing.
 
 @use '@tokens' as tokens;
-@use '../../settings/feature-flags';
 @use '../../tools/dictionaries';
 @use 'theme';
 @use 'tools';
@@ -10,15 +9,10 @@
 .Container {
     @include tools.paddings(theme.$container-paddings, theme.$container-breakpoints);
 
+    display: flow-root; // 1.
     width: 100%;
     padding-inline: var(--container-padding-inline);
     margin-inline: auto;
-
-    // @deprecated The feature flag will be removed in the next major version.
-    // Migration: delete this feature flag and apply the flow-root display property by default.
-    @if feature-flags.$enable-v5-container-block-formatting-context {
-        display: flow-root; // 1.
-    }
 }
 
 @include dictionaries.generate-sizes(
@@ -29,10 +23,4 @@
 
 .Container:not(.Container--fluid) {
     max-width: var(--#{tokens.$css-variable-prefix}container-max-width, #{theme.$container-max-width});
-}
-
-// @deprecated The feature flag will be removed in the next major version.
-// Migration: delete this feature flag and apply the flow-root display property by default.
-.spirit-feature-enable-v5-container-block-formatting-context .Container {
-    display: flow-root; // 1.
 }
