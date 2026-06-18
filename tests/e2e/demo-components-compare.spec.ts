@@ -1,9 +1,7 @@
 import { runDemoPageTests } from '../helpers';
 
 // Tests that are intentionally broken, but will be fixed in the future
-const IGNORED_TESTS: string[] = [
-  'UNSTABLE_FileUpload',
-];
+const IGNORED_TESTS: string[] = [];
 
 const testConfigs = [
   {
