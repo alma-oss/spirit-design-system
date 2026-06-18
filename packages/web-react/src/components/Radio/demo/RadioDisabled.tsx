@@ -1,8 +1,9 @@
 import React from 'react';
+import { Stack } from '../../Stack';
 import Radio from '../Radio';
 
 const RadioDisabled = () => (
-  <>
+  <Stack hasSpacing>
     <Radio id="radio-disabled" isDisabled label="Radio Label" name="radioDisabled" />
 
     <Radio
@@ -13,7 +14,7 @@ const RadioDisabled = () => (
       label="Radio Label"
       name="radioDisabledHelperText"
     />
-  </>
+  </Stack>
 );
 
 export default RadioDisabled;

@@ -23,35 +23,37 @@ const FooterTextAlignment = () => {
         <Box elementType="form" marginBottom="space-600">
           <Box elementType="fieldset" borderWidth="0">
             <legend>Please choose text alignment:</legend>
-            <Radio
-              id="footer-alignment-left"
-              marginRight="space-600"
-              label="Left"
-              value="left"
-              name="text-alignment"
-              autoComplete="off"
-              isChecked={textAlignment === TextAlignments.LEFT}
-              onChange={handleTextAlignChange}
-            />{' '}
-            <Radio
-              id="footer-alignment-center"
-              marginRight="space-600"
-              label="Center"
-              value="center"
-              name="text-alignment"
-              autoComplete="off"
-              isChecked={textAlignment === TextAlignments.CENTER}
-              onChange={handleTextAlignChange}
-            />{' '}
-            <Radio
-              id="footer-alignment-right"
-              label="Right"
-              value="right"
-              name="text-alignment"
-              autoComplete="off"
-              isChecked={textAlignment === TextAlignments.RIGHT}
-              onChange={handleTextAlignChange}
-            />
+            <div className="my-500">
+              <Radio
+                id="footer-alignment-left"
+                marginRight="space-600"
+                label="Left"
+                value="left"
+                name="text-alignment"
+                autoComplete="off"
+                isChecked={textAlignment === TextAlignments.LEFT}
+                onChange={handleTextAlignChange}
+              />{' '}
+              <Radio
+                id="footer-alignment-center"
+                marginRight="space-600"
+                label="Center"
+                value="center"
+                name="text-alignment"
+                autoComplete="off"
+                isChecked={textAlignment === TextAlignments.CENTER}
+                onChange={handleTextAlignChange}
+              />{' '}
+              <Radio
+                id="footer-alignment-right"
+                label="Right"
+                value="right"
+                name="text-alignment"
+                autoComplete="off"
+                isChecked={textAlignment === TextAlignments.RIGHT}
+                onChange={handleTextAlignChange}
+              />
+            </div>
           </Box>
         </Box>
       </Container>

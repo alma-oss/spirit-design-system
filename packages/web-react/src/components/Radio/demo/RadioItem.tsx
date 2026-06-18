@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { Stack } from '../../Stack';
 import Radio from '../Radio';
 
 const RadioItem = () => {
   const [selectedRadio, setSelectedRadio] = useState('radio-item-default-checked');
 
   return (
-    <>
+    <Stack hasSpacing>
       <Radio
         id="radio-item-default"
         isItem
@@ -45,7 +46,7 @@ const RadioItem = () => {
         name="itemDisabled"
         isChecked
       />
-    </>
+    </Stack>
   );
 };
 
