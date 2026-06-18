@@ -103,55 +103,59 @@ const ToastDynamicToastQueue = () => {
         </fieldset>
         <fieldset style={{ border: 0 }}>
           <legend>Vertical alignment:</legend>
-          <Radio
-            name="alignmentY"
-            isChecked={alignmentY === 'top'}
-            onChange={handleAlignmentYChange}
-            id="alignmentY-top"
-            label="Top"
-            value="top"
-            marginRight="space-600"
-          />{' '}
-          <Radio
-            name="alignmentY"
-            isChecked={alignmentY === 'bottom'}
-            onChange={handleAlignmentYChange}
-            id="alignmentY-bottom"
-            label="Bottom"
-            value="bottom"
-            marginRight="space-600"
-          />
+          <div className="my-500">
+            <Radio
+              name="alignmentY"
+              isChecked={alignmentY === 'top'}
+              onChange={handleAlignmentYChange}
+              id="alignmentY-top"
+              label="Top"
+              value="top"
+              marginRight="space-600"
+            />{' '}
+            <Radio
+              name="alignmentY"
+              isChecked={alignmentY === 'bottom'}
+              onChange={handleAlignmentYChange}
+              id="alignmentY-bottom"
+              label="Bottom"
+              value="bottom"
+              marginRight="space-600"
+            />
+          </div>
         </fieldset>
 
         <fieldset style={{ border: 0 }}>
           <legend>Horizontal alignment:</legend>
-          <Radio
-            name="alignmentX"
-            isChecked={alignmentX === 'left'}
-            onChange={handleAlignmentXChange}
-            id="alignmentX-left"
-            label="Left"
-            value="left"
-            marginRight="space-600"
-          />{' '}
-          <Radio
-            name="alignmentX"
-            isChecked={alignmentX === 'center'}
-            onChange={handleAlignmentXChange}
-            id="alignmentX-center"
-            label="Center"
-            value="center"
-            marginRight="space-600"
-          />{' '}
-          <Radio
-            name="alignmentX"
-            isChecked={alignmentX === 'right'}
-            onChange={handleAlignmentXChange}
-            id="alignmentX-right"
-            label="Right"
-            value="right"
-            marginRight="space-600"
-          />
+          <div className="my-500">
+            <Radio
+              name="alignmentX"
+              isChecked={alignmentX === 'left'}
+              onChange={handleAlignmentXChange}
+              id="alignmentX-left"
+              label="Left"
+              value="left"
+              marginRight="space-600"
+            />{' '}
+            <Radio
+              name="alignmentX"
+              isChecked={alignmentX === 'center'}
+              onChange={handleAlignmentXChange}
+              id="alignmentX-center"
+              label="Center"
+              value="center"
+              marginRight="space-600"
+            />{' '}
+            <Radio
+              name="alignmentX"
+              isChecked={alignmentX === 'right'}
+              onChange={handleAlignmentXChange}
+              id="alignmentX-right"
+              label="Right"
+              value="right"
+              marginRight="space-600"
+            />
+          </div>
         </fieldset>
       </form>
 

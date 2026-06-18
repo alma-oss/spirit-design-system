@@ -73,69 +73,73 @@ const ModalDefault = () => {
             </p>
             <form className="mb-600">
               <div>Modal alignment:</div>
-              <Radio
-                id="modal-alignment-top"
-                marginRight="space-600"
-                label="Top"
-                value="top"
-                name="modal-alignment"
-                autoComplete="off"
-                isChecked={modalAlign === AlignmentY.TOP}
-                onChange={handleModalAlignChange}
-              />{' '}
-              <Radio
-                id="modal-alignment-center"
-                marginRight="space-600"
-                label="Center"
-                value="center"
-                name="modal-alignment"
-                autoComplete="off"
-                isChecked={modalAlign === AlignmentY.CENTER}
-                onChange={handleModalAlignChange}
-              />{' '}
-              <Radio
-                id="modal-alignment-bottom"
-                marginRight="space-600"
-                label="Bottom"
-                value="bottom"
-                name="modal-alignment"
-                autoComplete="off"
-                isChecked={modalAlign === AlignmentY.BOTTOM}
-                onChange={handleModalAlignChange}
-              />
+              <div className="my-500">
+                <Radio
+                  id="modal-alignment-top"
+                  marginRight="space-600"
+                  label="Top"
+                  value="top"
+                  name="modal-alignment"
+                  autoComplete="off"
+                  isChecked={modalAlign === AlignmentY.TOP}
+                  onChange={handleModalAlignChange}
+                />{' '}
+                <Radio
+                  id="modal-alignment-center"
+                  marginRight="space-600"
+                  label="Center"
+                  value="center"
+                  name="modal-alignment"
+                  autoComplete="off"
+                  isChecked={modalAlign === AlignmentY.CENTER}
+                  onChange={handleModalAlignChange}
+                />{' '}
+                <Radio
+                  id="modal-alignment-bottom"
+                  marginRight="space-600"
+                  label="Bottom"
+                  value="bottom"
+                  name="modal-alignment"
+                  autoComplete="off"
+                  isChecked={modalAlign === AlignmentY.BOTTOM}
+                  onChange={handleModalAlignChange}
+                />
+              </div>
             </form>
             <form className="d-none d-tablet-block mb-600">
               <div>Footer alignment (from tablet up):</div>
-              <Radio
-                id="footer-alignment-left"
-                marginRight="space-600"
-                label="Left"
-                value="left"
-                name="footer-alignment"
-                autoComplete="off"
-                isChecked={footerAlign === AlignmentX.LEFT}
-                onChange={handleFooterAlignChange}
-              />{' '}
-              <Radio
-                id="footer-alignment-center"
-                marginRight="space-600"
-                label="Center"
-                value="center"
-                name="footer-alignment"
-                autoComplete="off"
-                isChecked={footerAlign === AlignmentX.CENTER}
-                onChange={handleFooterAlignChange}
-              />{' '}
-              <Radio
-                id="footer-alignment-right"
-                marginRight="space-600"
-                label="Right"
-                value="right"
-                name="footer-alignment"
-                autoComplete="off"
-                isChecked={footerAlign === AlignmentX.RIGHT}
-                onChange={handleFooterAlignChange}
-              />
+              <div className="my-500">
+                <Radio
+                  id="footer-alignment-left"
+                  marginRight="space-600"
+                  label="Left"
+                  value="left"
+                  name="footer-alignment"
+                  autoComplete="off"
+                  isChecked={footerAlign === AlignmentX.LEFT}
+                  onChange={handleFooterAlignChange}
+                />{' '}
+                <Radio
+                  id="footer-alignment-center"
+                  marginRight="space-600"
+                  label="Center"
+                  value="center"
+                  name="footer-alignment"
+                  autoComplete="off"
+                  isChecked={footerAlign === AlignmentX.CENTER}
+                  onChange={handleFooterAlignChange}
+                />{' '}
+                <Radio
+                  id="footer-alignment-right"
+                  marginRight="space-600"
+                  label="Right"
+                  value="right"
+                  name="footer-alignment"
+                  autoComplete="off"
+                  isChecked={footerAlign === AlignmentX.RIGHT}
+                  onChange={handleFooterAlignChange}
+                />
+              </div>
             </form>
             <Stack hasSpacing elementType="form">
               <Checkbox

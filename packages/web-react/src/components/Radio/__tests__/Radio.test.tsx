@@ -6,25 +6,20 @@ import {
   classNamePrefixProviderTest,
   formFieldHelperTextContextPropsTest,
   formFieldLabelContextPropsTest,
-  itemPropsTest,
   requiredPropsTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
-  validationStatePropsTest,
 } from '@local/tests';
+import { ValidationStates } from '../../../constants';
 import Radio from '../Radio';
 
 describe('Radio', () => {
-  classNamePrefixProviderTest(Radio, 'Radio');
-
-  itemPropsTest(Radio);
+  classNamePrefixProviderTest(Radio, 'Radio', { getByRole: 'radio' });
 
   stylePropsTest(Radio);
 
   restPropsTest(Radio, 'input');
-
-  validationStatePropsTest(Radio, 'Radio--');
 
   requiredPropsTest(Radio, 'radio', 'id', 'example-id');
 
@@ -41,6 +36,12 @@ describe('Radio', () => {
     renderComponent: (props) => <Radio id="radio-helper-context" label="Label" {...props} />,
   });
 
+  it('should render inline layout', () => {
+    render(<Radio id="radio" label="label" />);
+
+    expect(screen.getByRole('radio').parentElement).toHaveClass('Flex', 'Flex--horizontal');
+  });
+
   it('should have label', () => {
     render(<Radio id="radio" label="label" />);
 
@@ -50,7 +51,23 @@ describe('Radio', () => {
   it('should have input classname', () => {
     render(<Radio id="radio" label="label" />);
 
-    expect(screen.getByRole('radio')).toHaveClass('Radio__input');
+    expect(screen.getByRole('radio')).toHaveClass('Radio');
+  });
+
+  it.each(Object.values(ValidationStates))('should have %s validation classname on input', (state) => {
+    render(<Radio id="radio" label="label" validationState={state} />);
+
+    expect(screen.getByRole('radio')).toHaveClass(`Radio--${state}`);
+  });
+
+  it('should render field as an Item', () => {
+    render(<Radio id="radio-item" label="Label" isItem />);
+
+    const input = screen.getByRole('radio', { name: 'Label' });
+
+    expect(input).toHaveClass('Radio', 'Radio--item');
+    expect(input.parentElement).toHaveClass('Item__slot');
+    expect(input.parentElement?.parentElement).toHaveClass('Item');
   });
 
   it('should have helper text', () => {
