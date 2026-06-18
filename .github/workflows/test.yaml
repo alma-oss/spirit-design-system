@@ -1,12 +1,17 @@
 name: 🔍 Code Quality Checks
 
 on:
-  # Run this workflow on push to branches only (not tags)
+  # Post-merge CI on main; pull_request covers everything else (including PRs into release branches)
   push:
     branches:
-      - '**'
+      - main
+  pull_request:
   schedule:
     - cron: '0 9 * * *' # every day at 9:00
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref_name }}
+  cancel-in-progress: true
 
 permissions:
   actions: write
@@ -145,14 +150,17 @@ jobs:
     needs: [unit-tests]
     if: always()
     uses: ./.github/workflows/publish-coverage.yaml
+    with:
+      # Only populated on pull_request events; empty on direct pushes (existing branch-tracking behavior)
+      compare-ref: ${{ github.base_ref }}
+      compare-sha: ${{ github.event.pull_request.base.sha }}
 
   cleanup:
     name: 🧹 Cleanup
-    needs: [lint, unit-tests, types, publish-coverage]
+    needs: [install-build, lint, unit-tests, types, publish-coverage]
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-    # Ensure this job runs regardless of previous job outcomes
-    if: always()
+    if: always() && needs.install-build.result == 'success'
 
     steps:
       - name: Checkout
