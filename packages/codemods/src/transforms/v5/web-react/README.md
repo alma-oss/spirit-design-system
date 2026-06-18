@@ -61,6 +61,25 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/radio-margin-y
 + <Radio id="radio-default" label="Radio Label" marginY="space-500" />
 ```
 
+### `v5/web-react/toggle-margin-y` — Add Toggle Vertical Spacing Outside Stack
+
+This codemod adds `marginY="space-500"` to `Toggle` components that are not rendered inside `Stack` with `hasSpacing`.
+It skips toggles that already define `marginY`, `margin`, `marginTop`, or `marginBottom`.
+This preserves the previous default vertical spacing after Toggle stopped applying it internally.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/toggle-margin-y
+```
+
+#### Example
+
+```diff
+- <Toggle id="toggle-default" label="Toggle Label" />
++ <Toggle id="toggle-default" label="Toggle Label" marginY="space-500" />
+```
+
 ### `v5/web-react/flex-direction-values` - Replace Flex Direction Prop Values `row` with `horizontal` and `column` with `vertical`
 
 This codemod updates `direction` values of `Flex` component by replacing `row` to `horizontal` and `column` to `vertical`.

@@ -1,8 +1,9 @@
 import React from 'react';
+import { Stack } from '../../Stack';
 import Toggle from '../Toggle';
 
 const ToggleValidation = () => (
-  <>
+  <Stack hasSpacing>
     <Toggle id="toggle-success" label="Toggle Label" validationState="success" />
     <Toggle
       id="toggle-warning"
@@ -28,7 +29,7 @@ const ToggleValidation = () => (
       name="default"
       isChecked
     />
-  </>
+  </Stack>
 );
 
 export default ToggleValidation;
