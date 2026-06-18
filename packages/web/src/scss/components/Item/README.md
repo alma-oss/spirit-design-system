@@ -301,9 +301,11 @@ Non-interactive root:
 Radio as a Item:
 
 ```html
-<div class="Radio Radio--inputPositionStart Radio--item">
-  <input type="radio" id="radio-item" name="example" class="Radio__input" checked />
-  <div class="Radio__text">
+<div class="Item">
+  <div class="Item__slot" role="presentation">
+    <input type="radio" id="radio-item" name="example" class="Radio Radio--item" checked />
+  </div>
+  <div class="Item__content" role="presentation">
     <label class="Label Label--item" for="radio-item">Item</label>
   </div>
 </div>

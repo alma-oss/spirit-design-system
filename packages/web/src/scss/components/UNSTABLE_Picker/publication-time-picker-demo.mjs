@@ -37,7 +37,7 @@ function renderPublicationTimeSelection(selectionEl, popoverEl) {
   const radio = getCheckedRadio(popoverEl);
   selectionEl.setAttribute('role', 'grid');
 
-  const radioLabel = radio.closest('.Radio')?.querySelector('.Radio__label')?.textContent?.trim() ?? radio.value;
+  const radioLabel = radio.closest('.Radio')?.querySelector('.Label')?.textContent?.trim() ?? radio.value;
   const tag = document.getElementById(ID_TAG_TEMPLATE).content.cloneNode(true);
   const row = tag.querySelector(SELECTOR_TAG_ROW);
 

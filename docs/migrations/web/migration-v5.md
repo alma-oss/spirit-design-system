@@ -11,6 +11,7 @@ Introducing version 5 of the _spirit-web_ package.
 - [Component Changes](#component-changes)
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
   - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
+  - [Radio: Composition Markup Changed](#radio-composition-markup-changed)
   - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
   - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
@@ -134,6 +135,64 @@ For item-style checkboxes, use the `Item` composition and the `Checkbox--item` a
   </div>
   <div class="Item__content" role="presentation">
     <label for="checkbox-item" class="Label Label--item">Checkbox Label</label>
+  </div>
+</div>
+```
+
+</details>
+
+### Radio: Composition Markup Changed
+
+The Radio component no longer provides the outer wrapper and text element classes.
+Compose radio rows from the `Radio`, `Label`, and layout utilities instead.
+
+Vertical spacing is controlled by the layout wrapper. Add margin utilities when the radio row owns its own spacing,
+and omit them when the row is already spaced by a parent layout such as `Stack`.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Replace the old Radio wrapper markup with a `Flex` row and add the required vertical spacing utility when the row is
+not already spaced by a parent layout:
+
+```html
+<!-- Before -->
+<div class="Radio">
+  <input type="radio" id="radio-default" class="Radio__input" />
+  <div class="Radio__text">
+    <label for="radio-default" class="Label Label--inline">Radio Label</label>
+  </div>
+</div>
+
+<!-- After -->
+<div class="Flex Flex--horizontal my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="radio" id="radio-default" class="Radio" />
+  <div>
+    <label for="radio-default" class="Label Label--inline">Radio Label</label>
+  </div>
+</div>
+```
+
+For item-style radios, use the `Item` composition and the `Radio--item` and `Label--item` modifiers:
+
+```html
+<!-- Before -->
+<div class="Radio Radio--item">
+  <input type="radio" id="radio-item" class="Radio__input" />
+  <div class="Radio__text">
+    <label for="radio-item" class="Label Label--item">Radio Label</label>
+  </div>
+</div>
+
+<!-- After -->
+<div class="Item">
+  <div class="Item__slot" role="presentation">
+    <input type="radio" id="radio-item" class="Radio Radio--item" />
+  </div>
+  <div class="Item__content" role="presentation">
+    <label for="radio-item" class="Label Label--item">Radio Label</label>
   </div>
 </div>
 ```

@@ -239,14 +239,16 @@
         </div>
       </div>
 
-      <div class="Radio Radio--inputPositionStart Radio--item">
-        <input
-          type="radio"
-          id="radio-item-example"
-          class="Radio__input"
-          name="example"
-        />
-        <div class="Radio__text">
+      <div class="Item">
+        <div class="Item__slot" role="presentation">
+          <input
+            type="radio"
+            id="radio-item-example"
+            class="Radio Radio--item"
+            name="example"
+          />
+        </div>
+        <div class="Item__content" role="presentation">
           <label
             class="Label Label--item"
             for="radio-item-example"
@@ -254,15 +256,17 @@
         </div>
       </div>
 
-      <div class="Radio Radio--disabled Radio--inputPositionStart Radio--item">
-        <input
-          type="radio"
-          id="radio-item-disabled"
-          class="Radio__input"
-          name="example-disabled"
-          disabled
-        />
-        <div class="Radio__text">
+      <div class="Item Item--disabled">
+        <div class="Item__slot" role="presentation">
+          <input
+            type="radio"
+            id="radio-item-disabled"
+            class="Radio Radio--item"
+            name="example-disabled"
+            disabled
+          />
+        </div>
+        <div class="Item__content" role="presentation">
           <label
             class="Label Label--item Label--disabled"
             for="radio-item-disabled"
