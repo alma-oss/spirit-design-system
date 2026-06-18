@@ -11,6 +11,7 @@ on:
 permissions:
   actions: write
   contents: read
+  pull-requests: read
 
 env:
   NX_BRANCH: ${{ github.event.number || github.ref_name }}
@@ -140,19 +141,48 @@ jobs:
       - name: Types Check
         run: yarn types
 
-  publish-coverage:
-    name: 📊 Publish Code Coverage
+  resolve-coverage-base:
+    name: Resolve Coverage Base
     needs: [unit-tests]
     if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      compare-ref: ${{ steps.resolve.outputs.ref }}
+      compare-sha: ${{ steps.resolve.outputs.sha }}
+    steps:
+      - name: Resolve open PR base branch
+        id: resolve
+        run: |
+          PR_JSON=$(gh pr list \
+            --head "${{ github.repository_owner }}:${{ github.ref_name }}" \
+            --state open \
+            --json baseRefName,baseRefOid \
+            --jq '.[0] // empty')
+
+          REF=$(echo "$PR_JSON" | jq -r '.baseRefName // empty')
+          SHA=$(echo "$PR_JSON" | jq -r '.baseRefOid // empty')
+
+          echo "ref=${REF}" >> "$GITHUB_OUTPUT"
+          echo "sha=${SHA}" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  publish-coverage:
+    name: 📊 Publish Code Coverage
+    needs: [unit-tests, resolve-coverage-base]
+    if: always()
     uses: ./.github/workflows/publish-coverage.yaml
+    with:
+      compare-ref: ${{ needs.resolve-coverage-base.outputs.compare-ref }}
+      compare-sha: ${{ needs.resolve-coverage-base.outputs.compare-sha }}
 
   cleanup:
     name: 🧹 Cleanup
-    needs: [lint, unit-tests, types, publish-coverage]
+    needs: [install-build, lint, unit-tests, types, publish-coverage, resolve-coverage-base]
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-    # Ensure this job runs regardless of previous job outcomes
-    if: always()
+    if: always() && needs.install-build.result == 'success'
 
     steps:
       - name: Checkout
