@@ -25,25 +25,27 @@ const DrawerDefault = () => {
       <Box elementType="form" marginBottom="space-600">
         <Box elementType="fieldset" borderWidth="0">
           <legend>Drawer alignment:</legend>
-          <Radio
-            id="drawer-alignment-left"
-            marginRight="space-600"
-            label="Left"
-            value="left"
-            name="drawer-alignment"
-            autoComplete="off"
-            isChecked={drawerAlign === AlignmentX.LEFT}
-            onChange={handleDrawerAlignChange}
-          />{' '}
-          <Radio
-            id="drawer-alignment-right"
-            label="Right"
-            value="right"
-            name="drawer-alignment"
-            autoComplete="off"
-            isChecked={drawerAlign === AlignmentX.RIGHT}
-            onChange={handleDrawerAlignChange}
-          />
+          <div className="my-500">
+            <Radio
+              id="drawer-alignment-left"
+              marginRight="space-600"
+              label="Left"
+              value="left"
+              name="drawer-alignment"
+              autoComplete="off"
+              isChecked={drawerAlign === AlignmentX.LEFT}
+              onChange={handleDrawerAlignChange}
+            />{' '}
+            <Radio
+              id="drawer-alignment-right"
+              label="Right"
+              value="right"
+              name="drawer-alignment"
+              autoComplete="off"
+              isChecked={drawerAlign === AlignmentX.RIGHT}
+              onChange={handleDrawerAlignChange}
+            />
+          </div>
         </Box>
 
         <Box elementType="fieldset" borderWidth="0">

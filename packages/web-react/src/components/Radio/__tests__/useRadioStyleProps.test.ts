@@ -9,53 +9,47 @@ describe('useRadioStyleProps', () => {
     const { result } = renderHook(() => useRadioStyleProps(props));
 
     expect(result.current.classProps).toEqual({
-      root: 'Radio Radio--inputPositionStart',
-      text: 'Radio__text',
-      input: 'Radio__input',
+      input: 'Radio',
     });
-  });
-
-  it('should return disabled', () => {
-    const props = { id: 'radio', label: 'text', isDisabled: true } as SpiritRadioProps;
-    const { result } = renderHook(() => useRadioStyleProps(props));
-
-    expect(result.current.classProps.root).toBe('Radio Radio--inputPositionStart Radio--disabled');
+    expect(result.current.direction).toBe('horizontal');
   });
 
   it('should return field as an Item', () => {
     const props = { id: 'radio', label: 'text', isItem: true } as SpiritRadioProps;
     const { result } = renderHook(() => useRadioStyleProps(props));
 
-    expect(result.current.classProps.root).toBe('Radio Radio--inputPositionStart Radio--item');
+    expect(result.current.classProps.input).toBe('Radio Radio--item');
   });
 
-  it.each([Object.values(ValidationStates)])('should return field with %s', (state) => {
+  it.each(Object.values(ValidationStates))('should return field with %s', (state) => {
     const props = { validationState: state } as SpiritRadioProps;
     const { result } = renderHook(() => useRadioStyleProps(props));
 
-    expect(result.current.classProps.root).toBe(`Radio Radio--inputPositionStart Radio--${state}`);
+    expect(result.current.classProps.input).toBe(`Radio Radio--${state}`);
   });
 
   it('should return field with inputPosition start', () => {
     const props = { inputPosition: 'start' } as SpiritRadioProps;
     const { result } = renderHook(() => useRadioStyleProps(props));
 
-    expect(result.current.classProps.root).toBe('Radio Radio--inputPositionStart');
+    expect(result.current.direction).toBe('horizontal');
   });
 
   it('should return field with inputPosition end', () => {
     const props = { inputPosition: 'end' } as SpiritRadioProps;
     const { result } = renderHook(() => useRadioStyleProps(props));
 
-    expect(result.current.classProps.root).toBe('Radio Radio--inputPositionEnd');
+    expect(result.current.direction).toBe('horizontal-reversed');
   });
 
   it('should return field with responsive inputPosition', () => {
     const props = { inputPosition: { mobile: 'start', tablet: 'end', desktop: 'start' } } as SpiritRadioProps;
     const { result } = renderHook(() => useRadioStyleProps(props));
 
-    expect(result.current.classProps.root).toBe(
-      'Radio Radio--inputPositionStart Radio--tablet--inputPositionEnd Radio--desktop--inputPositionStart',
-    );
+    expect(result.current.direction).toEqual({
+      mobile: 'horizontal',
+      tablet: 'horizontal-reversed',
+      desktop: 'horizontal',
+    });
   });
 });

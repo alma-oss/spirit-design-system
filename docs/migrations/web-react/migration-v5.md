@@ -15,6 +15,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [Dropdown: `DropdownPopover` Now Has `role="dialog"` by Default](#dropdown-dropdownpopover-now-has-roledialog-by-default)
   - [Collapse: `hideOnCollapse` Prop Renamed to `isDisposable`](#collapse-hideoncollapse-prop-renamed-to-isdisposable)
   - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
+  - [Radio: Composition Markup Changed](#radio-composition-markup-changed)
   - [Flex: Direction Prop Values Changed](#flex-direction-prop-values-changed)
   - [Form Components: `isFluid` Prop Removed](#form-components-isfluid-prop-removed)
   - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
@@ -134,6 +135,51 @@ Inside `Stack` with `hasSpacing`, no extra spacing is needed:
 ```tsx
 <Stack hasSpacing>
   <Checkbox id="checkbox-default" label="Checkbox Label" />
+</Stack>
+```
+
+</details>
+
+### Radio: Composition Markup Changed
+
+Radio now composes its layout from Spirit components and applies the `Radio` class directly to the input.
+Vertical spacing is no longer applied by default.
+
+When Radio is rendered outside a `Stack` with `hasSpacing`, add `marginY="space-500"` to preserve the previous
+default vertical spacing. Omit it when the row is already spaced by a parent layout such as `Stack` with `hasSpacing`.
+
+#### Migration Guide
+
+🪄 Use codemods to automatically update your codebase:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/radio-margin-y
+```
+
+The codemod adds `marginY="space-500"` to Radio instances outside `Stack` with `hasSpacing`.
+It skips radios that already define `marginY`, `margin`, `marginTop`, or `marginBottom`, and item-style radios
+with `isItem`.
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Add Radio vertical spacing when the row is not already spaced by a parent layout:
+
+```tsx
+// Before
+<Radio id="radio-default" label="Radio Label" />
+
+// After
+<Radio id="radio-default" label="Radio Label" marginY="space-500" />
+```
+
+Inside `Stack` with `hasSpacing`, no extra spacing is needed:
+
+```tsx
+<Stack hasSpacing>
+  <Radio id="radio-default" label="Radio Label" />
 </Stack>
 ```
 

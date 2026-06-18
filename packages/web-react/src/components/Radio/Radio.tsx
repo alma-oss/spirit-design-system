@@ -1,16 +1,18 @@
 'use client';
 
-import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { FormFieldModes, type ForwardRefComponent, type SpiritRadioProps } from '../../types';
+import { mergeStyleProps } from '../../utils';
+import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
+import { Item } from '../Item';
 import { Label } from '../Label';
 import { useRadioStyleProps } from './useRadioStyleProps';
 
 const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
-  const { classProps, props: modifiedProps } = useRadioStyleProps(props);
+  const { classProps, direction, props: modifiedProps } = useRadioStyleProps(props);
   const {
     'aria-describedby': ariaDescribedBy = '',
     helperText,
@@ -29,6 +31,30 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
 
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
 
+  const radioInput = (
+    <input
+      {...otherProps}
+      {...ariaDescribedByProp}
+      type="radio"
+      id={id}
+      className={classProps.input}
+      disabled={isDisabled}
+      checked={isChecked}
+      onChange={onChange}
+      value={value}
+      ref={ref}
+    />
+  );
+
+  const radioText = (
+    <>
+      <Label elementType="label" htmlFor={id}>
+        {label}
+      </Label>
+      <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+    </>
+  );
+
   return (
     <PropsProvider
       value={{
@@ -38,24 +64,21 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
         validationState,
       }}
     >
-      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
-        <input
-          {...otherProps}
-          {...ariaDescribedByProp}
-          type="radio"
-          id={id}
-          className={classProps.input}
-          disabled={isDisabled}
-          checked={isChecked}
-          onChange={onChange}
-          value={value}
-          ref={ref}
-        />
-        <div className={classProps.text}>
-          <Label htmlFor={id}>{label}</Label>
-          <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
-        </div>
-      </div>
+      {isItem ? (
+        <Item isDisabled={isDisabled} startSlot={radioInput} {...mergeStyleProps(Item, { styleProps })}>
+          {radioText}
+        </Item>
+      ) : (
+        <Flex
+          direction={direction}
+          isInline
+          spacingX={isLabelHidden ? 'space-0' : 'space-500'}
+          {...mergeStyleProps(Flex, { styleProps })}
+        >
+          {radioInput}
+          <div>{radioText}</div>
+        </Flex>
+      )}
     </PropsProvider>
   );
 };

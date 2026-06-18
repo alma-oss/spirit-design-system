@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { Stack } from '../../Stack';
 import Radio from '../Radio';
 
 const RadioValidation = () => {
   const [selectedRadio, setSelectedRadio] = useState('radio-warning-helper-text');
 
   return (
-    <>
+    <Stack hasSpacing>
       <Radio
         id="radio-success"
         label="Radio Label"
@@ -42,7 +43,7 @@ const RadioValidation = () => {
         isChecked={selectedRadio === 'radio-warning-helper-text'}
         onChange={() => setSelectedRadio('radio-warning-helper-text')}
       />
-    </>
+    </Stack>
   );
 };
 

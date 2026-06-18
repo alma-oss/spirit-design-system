@@ -66,24 +66,50 @@ and [escape hatches][readme-escape-hatches].
 
 ## Custom Component
 
-Radio classes are fabricated using `useRadioStyleProps` hook. You can use it to create your own custom Radio component. Compose the standalone Label and HelperText components with PropsProvider and useAriaIds for correct styling and accessibility.
+Radio classes are fabricated using `useRadioStyleProps` hook. You can use it to create your own custom Radio component. Compose the standalone [HelperText][readme-helper-text] and [Label][readme-label] components with `PropsProvider` and `useAriaDescribedBy` for correct styling and accessibility.
 
 ```tsx
 const CustomRadio = (props: SpiritRadioProps): JSX.Element => {
+  const { classProps, direction, props: modifiedProps } = useRadioStyleProps(props);
   const {
     'aria-describedby': ariaDescribedBy = '',
     helperText,
     id,
+    isChecked,
     isDisabled,
     isItem,
     isLabelHidden,
     label,
+    onChange,
+    validationState,
+    value,
     ...restProps
-  } = props;
-  const { classProps } = useRadioStyleProps(props);
+  } = modifiedProps;
   const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const [ids, register] = useAriaIds(ariaDescribedBy);
-  const ariaDescribedByProp = useAriaDescribedBy(ids);
+  const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
+
+  const input = (
+    <input
+      {...transferProps}
+      {...ariaDescribedByProp}
+      type="radio"
+      id={id}
+      className={classProps.input}
+      disabled={isDisabled}
+      checked={isChecked}
+      onChange={onChange}
+      value={value}
+    />
+  );
+  const content = (
+    <>
+      <Label elementType="label" htmlFor={id}>
+        {label}
+      </Label>
+      <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+    </>
+  );
+  const rootStyleProps = mergeStyleProps(Flex, { styleProps });
 
   return (
     <PropsProvider
@@ -91,28 +117,25 @@ const CustomRadio = (props: SpiritRadioProps): JSX.Element => {
         formFieldMode: isItem ? FormFieldModes.ITEM : FormFieldModes.INLINE,
         isDisabled,
         isLabelHidden,
+        validationState,
       }}
     >
-      <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
-        <input
-          {...transferProps}
-          {...ariaDescribedByProp}
-          type="radio"
-          id={id}
-          className={classProps.input}
-          disabled={isDisabled}
-        />
-        <div className={classProps.text}>
-          <Label htmlFor={id}>{label}</Label>
-          <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
-        </div>
-      </div>
+      {isItem ? (
+        <Item {...rootStyleProps} startSlot={input} isDisabled={isDisabled}>
+          {content}
+        </Item>
+      ) : (
+        <Flex {...rootStyleProps} direction={direction} isInline spacingX={isLabelHidden ? 'space-0' : 'space-500'}>
+          {input}
+          <div>{content}</div>
+        </Flex>
+      )}
     </PropsProvider>
   );
 };
 ```
 
-For detailed information see [Radio](https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Radio/README.md) component
+For detailed information see the [Radio][readme-radio] component.
 
 [autocomplete-attr]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
@@ -120,5 +143,8 @@ For detailed information see [Radio](https://github.com/alma-oss/spirit-design-s
 [item]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Item/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/HelperText/README.md
+[readme-label]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Label/README.md
+[readme-radio]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Radio/README.md
 [readme-responsive]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#responsive-props
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
