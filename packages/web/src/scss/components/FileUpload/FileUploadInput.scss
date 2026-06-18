@@ -10,13 +10,13 @@
 @use '../../tools/typography';
 @use 'theme';
 
-$_field-name: 'UNSTABLE_FileUploadInput';
+$_field-name: 'FileUploadInput';
 
-.UNSTABLE_FileUploadInput__input {
+.FileUploadInput__input {
     @include accessibility.hide-text();
 }
 
-.UNSTABLE_FileUploadInput__dropZone {
+.FileUploadInput__dropZone {
     position: relative; // 1.
     display: grid;
     grid-template-columns: auto;
@@ -31,7 +31,7 @@ $_field-name: 'UNSTABLE_FileUploadInput';
     background-color: theme.$input-drop-zone-background;
 }
 
-.UNSTABLE_FileUploadInput__dropZone--compact {
+.FileUploadInput__dropZone--compact {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2, auto);
     justify-content: left;
@@ -48,7 +48,7 @@ $_field-name: 'UNSTABLE_FileUploadInput';
     }
 }
 
-.UNSTABLE_FileUploadInput__dropZoneLabel {
+.FileUploadInput__dropZoneLabel {
     @include pseudo-element.stretch(); // 1.
     @include typography.generate(theme.$input-drop-zone-label-typography);
 
@@ -56,43 +56,43 @@ $_field-name: 'UNSTABLE_FileUploadInput';
     cursor: cursors.$form-fields;
 }
 
-.UNSTABLE_FileUploadInput:not(.has-drag-and-drop) .UNSTABLE_FileUploadInput__dragAndDropLabel {
+.FileUploadInput:not(.has-drag-and-drop) .FileUploadInput__dragAndDropLabel {
     display: none;
 }
 
-.UNSTABLE_FileUploadInput__dropZone:hover {
+.FileUploadInput__dropZone:hover {
     border-color: theme.$input-drop-zone-border-color-state-hover;
     background-color: theme.$input-drop-zone-background-state-hover;
 }
 
-.UNSTABLE_FileUploadInput__input:where(:active) ~ .UNSTABLE_FileUploadInput__dropZone {
+.FileUploadInput__input:where(:active) ~ .FileUploadInput__dropZone {
     border-color: theme.$input-drop-zone-border-color-state-active;
     background-color: theme.$input-drop-zone-background-state-active;
 }
 
-.UNSTABLE_FileUploadInput__input:where(:focus-visible) ~ .UNSTABLE_FileUploadInput__dropZone {
+.FileUploadInput__input:where(:focus-visible) ~ .FileUploadInput__dropZone {
     box-shadow: form-fields-settings.$input-focus-shadow;
 }
 
 // stylelint-disable-next-line selector-max-class -- 2.
-.UNSTABLE_FileUploadInput.has-drag-and-drop > .UNSTABLE_FileUploadInput__dropZone {
+.FileUploadInput.has-drag-and-drop > .FileUploadInput__dropZone {
     border-style: dashed;
 }
 
 // stylelint-disable-next-line selector-max-class -- 2.
-.UNSTABLE_FileUploadInput.is-dragging > .UNSTABLE_FileUploadInput__dropZone {
+.FileUploadInput.is-dragging > .FileUploadInput__dropZone {
     border-color: theme.$input-drop-zone-border-color-state-dragging;
 }
 
 @include form-fields-tools.input-field-validation-states($_field-name);
 
-.UNSTABLE_FileUploadInput__dropZone--disabled,
-.UNSTABLE_FileUploadInput__dropZone--disabled .UNSTABLE_FileUploadInput__dropZoneLabel {
+.FileUploadInput__dropZone--disabled,
+.FileUploadInput__dropZone--disabled .FileUploadInput__dropZoneLabel {
     color: theme.$input-drop-zone-label-color-disabled;
     cursor: cursors.$disabled;
 }
 
-.UNSTABLE_FileUploadInput > .UNSTABLE_FileUploadInput__dropZone--disabled {
+.FileUploadInput > .FileUploadInput__dropZone--disabled {
     border-style: dashed;
     border-color: theme.$input-drop-zone-border-color-state-disabled;
     background-color: theme.$input-drop-zone-background-state-disabled;

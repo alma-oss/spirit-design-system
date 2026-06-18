@@ -2,7 +2,6 @@ export { default as AutoResize } from './AutoResize';
 export { default as BaseComponent } from './BaseComponent';
 export { default as Collapse } from './Collapse';
 export { default as Dropdown } from './Dropdown';
-export { default as FileUploader } from './FileUploader';
 export { default as Modal } from './Modal';
 export { default as Offcanvas } from './Offcanvas';
 export { default as Password } from './Password';

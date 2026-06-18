@@ -1,23 +1,23 @@
-# UNSTABLE File
+# File
 
 This block provides the visual layout for a single file item in a file list.
-It is a standalone component, but most often it is used in combination with the [UNSTABLE_FileUpload][readme-file-upload] component.
+It is a standalone component, but most often it is used in combination with the [FileUpload][readme-file-upload] component.
 
 ## Basic Example with File Icon
 
-⚠️ UNSTABLE_File is a list item (`<li>`), so it should be wrapped in a `<ul>` element:
+⚠️ File is a list item (`<li>`), so it should be wrapped in a `<ul>` element:
 
 ```html
 <ul aria-label="Uploaded files">
-  <li class="UNSTABLE_File">
-    <div class="UNSTABLE_File__preview">
+  <li class="File">
+    <div class="File__preview">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use href="/assets/icons/svg/sprite.svg#file" />
       </svg>
     </div>
-    <div class="UNSTABLE_File__content">
-      <div class="UNSTABLE_File__text">
-        <span class="UNSTABLE_File__name">
+    <div class="File__content">
+      <div class="File__text">
+        <span class="File__name">
           <span class="text-truncate">Document.pdf</span>
         </span>
         <span class="HelperText">8,5 kB</span>
@@ -52,11 +52,11 @@ It is a standalone component, but most often it is used in combination with the 
 
 ## Image Preview
 
-Use an `<img>` element inside `.UNSTABLE_File__preview` for image attachments:
+Use an `<img>` element inside `.File__preview` for image attachments:
 
 ```html
-<li class="UNSTABLE_File">
-  <div class="UNSTABLE_File__preview">
+<li class="File">
+  <div class="File__preview">
     <img src="https://picsum.photos/seed/avatar1/48/48" width="48" height="48" alt="Profile photo" />
   </div>
   <!-- … same content and actions as above … -->
@@ -73,7 +73,7 @@ The image can be positioned/cropped via CSS custom properties:
 
 ```html
 <li
-  class="UNSTABLE_File"
+  class="File"
   style="
     --spirit-file-image-top: -10px;
     --spirit-file-image-left: -20px;
@@ -82,7 +82,7 @@ The image can be positioned/cropped via CSS custom properties:
     --spirit-file-image-object-fit: cover;
   "
 >
-  <div class="UNSTABLE_File__preview">
+  <div class="File__preview">
     <img src="https://picsum.photos/seed/avatar1/48/48" width="48" height="48" alt="Profile photo" />
   </div>
   <!-- … same content and actions as above … -->
@@ -92,7 +92,7 @@ The image can be positioned/cropped via CSS custom properties:
 ## Validation States
 
 Validation states can be presented either by adding a CSS modifier class
-(`UNSTABLE_File--success`, `UNSTABLE_File--warning`, `UNSTABLE_File--danger`), or by adding
+(`File--success`, `File--warning`, `File--danger`), or by adding
 a JS interaction class when controlled by JavaScript (`has-success`,
 `has-warning`, `has-danger`). See Validation state [dictionary][dictionary-validation].
 
@@ -104,7 +104,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 Add the appropriate validation class (`has-success`, `has-warning`, or `has-danger`) and use `ValidationText` component for the message:
 
 ```html
-<li class="UNSTABLE_File has-success">
+<li class="File has-success">
   <!-- … preview, name … -->
   <div class="ValidationText ValidationText--success">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
@@ -121,11 +121,11 @@ Add the appropriate validation class (`has-success`, `has-warning`, or `has-dang
 Show upload progress using `HelperText` component:
 
 ```html
-<li class="UNSTABLE_File">
+<li class="File">
   <!-- … preview … -->
-  <div class="UNSTABLE_File__content">
-    <div class="UNSTABLE_File__text">
-      <span class="UNSTABLE_File__name">
+  <div class="File__content">
+    <div class="File__text">
+      <span class="File__name">
         <span class="text-truncate">Document.pdf</span>
       </span>
       <div class="HelperText">
@@ -145,15 +145,15 @@ Show upload progress using `HelperText` component:
 ## Disabled State
 
 ```html
-<li class="UNSTABLE_File UNSTABLE_File--disabled">
-  <div class="UNSTABLE_File__preview">
+<li class="File File--disabled">
+  <div class="File__preview">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use href="/assets/icons/svg/sprite.svg#file" />
     </svg>
   </div>
-  <div class="UNSTABLE_File__content">
-    <div class="UNSTABLE_File__text">
-      <span class="UNSTABLE_File__name">
+  <div class="File__content">
+    <div class="File__text">
+      <span class="File__name">
         <span class="text-truncate">Document.pdf</span>
       </span>
       <span class="HelperText HelperText--disabled">8,5 kB</span>
@@ -173,4 +173,4 @@ Show upload progress using `HelperText` component:
 ```
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
-[readme-file-upload]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_FileUpload/README.md
+[readme-file-upload]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/FileUpload/README.md

@@ -1,26 +1,26 @@
-# UNSTABLE_FileUpload
+# FileUpload
 
-UNSTABLE_FileUpload allows users to pick one or more files via a native file input and an optional drop zone.
+FileUpload allows users to pick one or more files via a native file input and an optional drop zone.
 
 > It does not upload files to the server or manage a file queue; implement that in your application.
 
 The component is a composition of:
 
-- [UNSTABLE_FileUpload](#unstable_fileupload-1) (wrapper)
-- [UNSTABLE_FileUploadInput](#unstable_fileuploadinput) (file picker with drop zone)
-- [UNSTABLE_File][readme-file] (optional, for displaying uploaded files)
+- [FileUpload](#fileupload-1) (wrapper)
+- [FileUploadInput](#fileuploadinput) (file picker with drop zone)
+- [File][readme-file] (optional, for displaying uploaded files)
 
-## UNSTABLE_FileUpload
+## FileUpload
 
 Wrapper that provides spacing for the file input block:
 
 ```html
-<div class="UNSTABLE_FileUpload">
-  <!-- UNSTABLE_FileUploadInput -->
+<div class="FileUpload">
+  <!-- FileUploadInput -->
 </div>
 ```
 
-## UNSTABLE_FileUploadInput
+## FileUploadInput
 
 File picker built around the native HTML [file `input`][mdn-input-file].
 Add the `has-drag-and-drop` class when the environment supports drag-and-drop
@@ -30,23 +30,23 @@ The class controls appearance only: dashed border and visibility of the “or dr
 ### Basic Structure
 
 ```html
-<div class="UNSTABLE_FileUpload">
-  <div class="UNSTABLE_FileUploadInput has-drag-and-drop">
+<div class="FileUpload">
+  <div class="FileUploadInput has-drag-and-drop">
     <label for="file-uploader" class="Label">Label</label>
     <input
       type="file"
       id="file-uploader"
       name="attachment"
-      class="UNSTABLE_FileUploadInput__input"
+      class="FileUploadInput__input"
       aria-describedby="file-uploader-helper"
     />
-    <div class="UNSTABLE_FileUploadInput__dropZone">
+    <div class="FileUploadInput__dropZone">
       <svg class="Icon" width="28" height="28" aria-hidden="true">
         <use href="/assets/icons/svg/sprite.svg#upload" />
       </svg>
-      <div class="UNSTABLE_FileUploadInput__dropZoneContent">
-        <label for="file-uploader" class="UNSTABLE_FileUploadInput__dropZoneLabel">
-          Upload your file <span class="UNSTABLE_FileUploadInput__dragAndDropLabel">or drag and drop here</span>
+      <div class="FileUploadInput__dropZoneContent">
+        <label for="file-uploader" class="FileUploadInput__dropZoneLabel">
+          Upload your file <span class="FileUploadInput__dragAndDropLabel">or drag and drop here</span>
         </label>
         <div id="file-uploader-helper" class="HelperText">Max file size is 10 MB</div>
       </div>
@@ -61,11 +61,11 @@ The class controls appearance only: dashed border and visibility of the “or dr
 
 ### Compact Variant
 
-Add `UNSTABLE_FileUploadInput__dropZone--compact` to the drop zone for a more compact layout:
+Add `FileUploadInput__dropZone--compact` to the drop zone for a more compact layout:
 
 ```html
-<div class="UNSTABLE_FileUploadInput__dropZone UNSTABLE_FileUploadInput__dropZone--compact">
-  <div class="UNSTABLE_FileUploadInput__dropZoneContent">
+<div class="FileUploadInput__dropZone FileUploadInput__dropZone--compact">
+  <div class="FileUploadInput__dropZoneContent">
     <!-- label + helper text -->
   </div>
   <div class="Button Button--primary Button--medium" aria-hidden="true">Browse</div>
@@ -77,7 +77,7 @@ Add `UNSTABLE_FileUploadInput__dropZone--compact` to the drop zone for a more co
 Use the native [`multiple`][mdn-multiple] attribute:
 
 ```html
-<input type="file" id="file-uploader" name="attachment" class="UNSTABLE_FileUploadInput__input" multiple />
+<input type="file" id="file-uploader" name="attachment" class="FileUploadInput__input" multiple />
 ```
 
 ### Allowed File Types
@@ -85,13 +85,7 @@ Use the native [`multiple`][mdn-multiple] attribute:
 Use the [`accept`][mdn-accept] attribute to restrict file types:
 
 ```html
-<input
-  type="file"
-  id="file-uploader"
-  name="attachment"
-  class="UNSTABLE_FileUploadInput__input"
-  accept=".pdf,application/pdf"
-/>
+<input type="file" id="file-uploader" name="attachment" class="FileUploadInput__input" accept=".pdf,application/pdf" />
 ```
 
 ### Required Label
@@ -104,12 +98,12 @@ Add `Label--required` to the label for a required indicator. Validation is up to
 
 ### Validation States
 
-Follow the [Validation state dictionary][dictionary-validation]. Use modifier classes on the root `UNSTABLE_FileUploadInput`: `UNSTABLE_FileUploadInput--success`, `UNSTABLE_FileUploadInput--warning`, `UNSTABLE_FileUploadInput--danger`.
+Follow the [Validation state dictionary][dictionary-validation]. Use modifier classes on the root `FileUploadInput`: `FileUploadInput--success`, `FileUploadInput--warning`, `FileUploadInput--danger`.
 
 Add validation text and give it an `id` for `aria-describedby` when you use it:
 
 ```html
-<div class="UNSTABLE_FileUploadInput UNSTABLE_FileUploadInput--success">
+<div class="FileUploadInput FileUploadInput--success">
   <!-- Label, input, drop zone -->
   <div id="file-uploader-validation" class="ValidationText ValidationText--success">Success validation text</div>
 </div>
@@ -121,20 +115,20 @@ Add validation text and give it an `id` for `aria-describedby` when you use it:
 ### Disabled State
 
 - Add the `disabled` attribute to the input.
-- Add `UNSTABLE_FileUploadInput--disabled` to the root and `UNSTABLE_FileUploadInput__dropZone--disabled` to the drop zone so styling reflects the disabled state:
+- Add `FileUploadInput--disabled` to the root and `FileUploadInput__dropZone--disabled` to the drop zone so styling reflects the disabled state:
 
 ```html
-<div class="UNSTABLE_FileUploadInput UNSTABLE_FileUploadInput--disabled">
+<div class="FileUploadInput FileUploadInput--disabled">
   <label for="file-uploader-disabled" class="Label Label--disabled">Label</label>
   <input
     type="file"
     id="file-uploader-disabled"
     name="attachment"
-    class="UNSTABLE_FileUploadInput__input"
+    class="FileUploadInput__input"
     disabled
     aria-describedby="file-uploader-disabled-helper"
   />
-  <div class="UNSTABLE_FileUploadInput__dropZone UNSTABLE_FileUploadInput__dropZone--disabled">
+  <div class="FileUploadInput__dropZone FileUploadInput__dropZone--disabled">
     <!-- ... -->
     <div id="file-uploader-disabled-helper" class="HelperText HelperText--disabled">Max file size is 10 MB</div>
     <div class="Button Button--primary Button--medium Button--disabled" aria-hidden="true">Browse</div>
@@ -147,25 +141,23 @@ Add validation text and give it an `id` for `aria-describedby` when you use it:
 Use this mode when only upload interactions should be disabled (file picker + drop zone), while the outer field does not use the full disabled root styling.
 
 - Add the `disabled` attribute to the input.
-- Add `UNSTABLE_FileUploadInput__dropZone--disabled` to the drop zone.
-- Keep `UNSTABLE_FileUploadInput--disabled` off the root.
+- Add `FileUploadInput__dropZone--disabled` to the drop zone.
+- Keep `FileUploadInput--disabled` off the root.
 
 ```html
-<div class="UNSTABLE_FileUploadInput has-drag-and-drop">
-  <label for="file-uploader-upload-disabled" class="UNSTABLE_FileUploadInput__label">Label</label>
+<div class="FileUploadInput has-drag-and-drop">
+  <label for="file-uploader-upload-disabled" class="FileUploadInput__label">Label</label>
   <input
     type="file"
     id="file-uploader-upload-disabled"
     name="attachment-upload-disabled"
-    class="UNSTABLE_FileUploadInput__input"
+    class="FileUploadInput__input"
     disabled
     aria-describedby="file-uploader-upload-disabled-helper"
   />
-  <div class="UNSTABLE_FileUploadInput__dropZone UNSTABLE_FileUploadInput__dropZone--disabled">
+  <div class="FileUploadInput__dropZone FileUploadInput__dropZone--disabled">
     <!-- ... -->
-    <div id="file-uploader-upload-disabled-helper" class="UNSTABLE_FileUploadInput__helperText">
-      Max file size is 10 MB
-    </div>
+    <div id="file-uploader-upload-disabled-helper" class="FileUploadInput__helperText">Max file size is 10 MB</div>
     <div class="Button Button--primary Button--medium Button--disabled" aria-hidden="true">Browse</div>
   </div>
 </div>
@@ -173,31 +165,31 @@ Use this mode when only upload interactions should be disabled (file picker + dr
 
 ## Displaying Uploaded Files
 
-Use [UNSTABLE_File][readme-file] to display a list of uploaded files.
-Place the file list after the `UNSTABLE_FileUpload` wrapper.
+Use [File][readme-file] to display a list of uploaded files.
+Place the file list after the `FileUpload` wrapper.
 
 👉 To provide information about file list to AT, wrap the file list in a container (`ul`) with an appropriate `aria-label` (e.g. `aria-label="Uploaded files"`).
 If you need a vertical spacing, you can use `Stack` with `Stack--spacing` on the file list container.
 
 ```html
-<div class="UNSTABLE_FileUpload mb-800">
-  <!-- UNSTABLE_FileUploadInput -->
-  <div class="UNSTABLE_FileUploadInput has-drag-and-drop">
+<div class="FileUpload mb-800">
+  <!-- FileUploadInput -->
+  <div class="FileUploadInput has-drag-and-drop">
     <!-- ... input and drop zone ... -->
   </div>
 </div>
 
-<!-- File list using UNSTABLE_File -->
+<!-- File list using File -->
 <ul class="Stack Stack--spacing" aria-label="Uploaded files">
-  <li class="UNSTABLE_File">
-    <div class="UNSTABLE_File__preview">
+  <li class="File">
+    <div class="File__preview">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use href="/assets/icons/svg/sprite.svg#file" />
       </svg>
     </div>
-    <div class="UNSTABLE_File__content">
-      <div class="UNSTABLE_File__text">
-        <span class="UNSTABLE_File__name">
+    <div class="File__content">
+      <div class="File__text">
+        <span class="File__name">
           <span class="text-truncate">Document.pdf</span>
         </span>
         <span class="HelperText">2.5 MB</span>
@@ -229,13 +221,13 @@ If you need a vertical spacing, you can use `Stack` with `Stack--spacing` on the
   </li>
 
   <!-- File with uploading state -->
-  <li class="UNSTABLE_File">
-    <div class="UNSTABLE_File__preview">
+  <li class="File">
+    <div class="File__preview">
       <img src="https://picsum.photos/seed/avatar1/48/48" width="48" height="48" alt="Image preview" />
     </div>
-    <div class="UNSTABLE_File__content">
-      <div class="UNSTABLE_File__text">
-        <span class="UNSTABLE_File__name">
+    <div class="File__content">
+      <div class="File__text">
+        <span class="File__name">
           <span class="text-truncate">vacation-photo.jpg</span>
         </span>
         <div class="HelperText">
@@ -260,15 +252,15 @@ If you need a vertical spacing, you can use `Stack` with `Stack--spacing` on the
   </li>
 
   <!-- File with success state -->
-  <li class="UNSTABLE_File has-success">
-    <div class="UNSTABLE_File__preview">
+  <li class="File has-success">
+    <div class="File__preview">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use href="/assets/icons/svg/sprite.svg#file" />
       </svg>
     </div>
-    <div class="UNSTABLE_File__content">
-      <div class="UNSTABLE_File__text">
-        <span class="UNSTABLE_File__name">
+    <div class="File__content">
+      <div class="File__text">
+        <span class="File__name">
           <span class="text-truncate">report-2024.xlsx</span>
         </span>
         <div class="ValidationText ValidationText--success">
@@ -292,10 +284,10 @@ If you need a vertical spacing, you can use `Stack` with `Stack--spacing` on the
 </ul>
 ```
 
-See [UNSTABLE_File documentation][readme-file] for more details on file states and customization options.
+See [File documentation][readme-file] for more details on file states and customization options.
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [mdn-accept]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
 [mdn-input-file]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
 [mdn-multiple]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#multiple
-[readme-file]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_File/README.md
+[readme-file]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/File/README.md

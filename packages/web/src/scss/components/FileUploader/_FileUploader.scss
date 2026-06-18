@@ -1,5 +1,0 @@
-@use '@tokens' as tokens;
-
-.FileUploader {
-    --#{tokens.$css-variable-prefix}helper-text-grid-column-start: 2;
-}
