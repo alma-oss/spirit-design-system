@@ -6,11 +6,6 @@ $border-width: tokens.$border-width-100;
 $border-style: solid;
 $border-radius: tokens.$radius-300;
 
-// Disabled
-$color-disabled: tokens.$disabled-content;
-$background-color-disabled: tokens.$disabled-background;
-$border-color-disabled: tokens.$disabled-border;
-
 $size-dictionary: dictionaries.$size-extended;
 $size-config: (
     xsmall: (

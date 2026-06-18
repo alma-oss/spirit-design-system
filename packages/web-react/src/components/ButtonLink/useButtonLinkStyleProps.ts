@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { CLASS_NAME_DISABLED } from '../../constants';
 import { useClassNamePrefix, useSymmetry } from '../../hooks';
 import { type ButtonColor, type ButtonLinkStyleProps, type ButtonSize } from '../../types';
 import { getColorSchemeClassName, getEmotionColorNames } from '../../utils';
@@ -19,7 +20,6 @@ export function useButtonLinkStyleProps<C = void, S = void>(props: Omit<ButtonLi
   const colorAsString = String(color);
 
   const buttonClass = useClassNamePrefix('Button');
-  const buttonDisabledClass = `${buttonClass}--disabled`;
   const buttonLoadingClass = `${buttonClass}--loading`;
   const buttonLinkColorSchemeClass = emotionColorNames.includes(colorAsString)
     ? getColorSchemeClassName({ color: colorAsString, isSubtle: false })
@@ -33,7 +33,7 @@ export function useButtonLinkStyleProps<C = void, S = void>(props: Omit<ButtonLi
     buttonLinkColorSchemeClass,
     getButtonLinkSizeClassname(buttonClass, size as ButtonSize<S>),
     {
-      [buttonDisabledClass]: isDisabled || isLoading,
+      [CLASS_NAME_DISABLED]: isDisabled && !isLoading,
       [buttonLoadingClass]: isLoading,
     },
     symmetricalClassName,

@@ -93,7 +93,7 @@ function createTag(label, selectionEl, onRemove, { disabled = false } = {}) {
     // Disabled tag: drop the selected color scheme in favor of the disabled visual state and
     // disable the close button so it cannot be activated while the combobox is non-interactive.
     row.classList.remove('color-scheme-on-selected-basic');
-    row.classList.add('Tag--disabled');
+    row.classList.add('disabled');
     closeBtn.disabled = true;
 
     return fragment;

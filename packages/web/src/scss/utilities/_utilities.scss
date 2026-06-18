@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use '@tokens' as tokens;
+@use '../settings/cursors';
 @use '../settings/utilities' as utilities-settings;
 @use '../tools/breakpoint';
 @use '../tools/utilities';
@@ -29,13 +30,27 @@
     }
 }
 
+// stylelint-disable declaration-no-important -- Utilities are always !important.
 // @deprecated We are introducing this fallback until Firefox implements the `text-wrap: pretty` property.
 // Migration: Once fixed in Firefox, remove this fallback.
 // Firefox issue: https://bugzilla.mozilla.org/show_bug.cgi?id=1960910
 // Interop issue: https://github.com/web-platform-tests/interop/issues/1136
 .text-wrap-pretty {
     @supports not (text-wrap: pretty) {
-        // stylelint-disable-next-line declaration-no-important -- Utilities are always !important.
         text-wrap: balance !important;
     }
 }
+
+.disabled {
+    --#{tokens.$css-variable-prefix}local-color: #{tokens.$disabled-content} !important;
+    --#{tokens.$css-variable-prefix}local-border-color: #{tokens.$disabled-border} !important;
+    --#{tokens.$css-variable-prefix}local-border-color-subtle: #{tokens.$disabled-border} !important;
+    --#{tokens.$css-variable-prefix}local-background-color: #{tokens.$disabled-background} !important;
+    --#{tokens.$css-variable-prefix}local-background-color-state-hover: #{tokens.$disabled-background} !important;
+    --#{tokens.$css-variable-prefix}local-background-color-state-active: #{tokens.$disabled-background} !important;
+
+    user-select: none !important;
+    pointer-events: none !important;
+    cursor: cursors.$disabled !important;
+}
+// stylelint-enable

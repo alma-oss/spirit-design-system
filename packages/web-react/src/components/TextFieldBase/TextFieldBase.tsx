@@ -88,7 +88,6 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
         role="switch"
         size={size}
         onClick={passwordToggle}
-        {...(isDisabled && { UNSAFE_className: 'color-scheme-on-disabled' })}
       >
         <Icon name={`visibility-${isPasswordShown ? 'off' : 'on'}`} />
       </ControlButton>
