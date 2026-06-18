@@ -242,5 +242,45 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/control-button-size-scal
 + <ControlButton size={{ mobile: 'medium', tablet: 'xlarge' }} … />
 ```
 
+### `v5/web-react/unstable-fileupload-component-name` — Stabilize `UNSTABLE_FileUpload` to `FileUpload`
+
+This codemod renames `UNSTABLE_FileUpload` imports and JSX tags to `FileUpload`, updates related type names, and renames `linkText` → `inputUploadText` and `labelText` → `inputDragAndDropText` on `FileUpload` JSX props.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/unstable-fileupload-component-name
+```
+
+#### Example
+
+```diff
+- import { UNSTABLE_FileUpload, type UnstableFileUploadProps } from '@alma-oss/spirit-web-react';
++ import { FileUpload, type FileUploadProps } from '@alma-oss/spirit-web-react';
+…
+- <UNSTABLE_FileUpload id="upload" name="attachments" linkText="Upload your file(s)" labelText="or drag and drop here" … />
++ <FileUpload id="upload" name="attachments" inputUploadText="Upload your file(s)" inputDragAndDropText="or drag and drop here" … />
+```
+
+### `v5/web-react/unstable-file-component-name` — Stabilize `UNSTABLE_File` to `File`
+
+This codemod renames `UNSTABLE_File` and `UNSTABLE_FileImagePreview` imports and JSX tags to `File` and `FileImagePreview`, and updates related type names.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/unstable-file-component-name
+```
+
+#### Example
+
+```diff
+- import { UNSTABLE_File, UNSTABLE_FileImagePreview, type UnstableFileItem } from '@alma-oss/spirit-web-react';
++ import { File, FileImagePreview, type FileItem } from '@alma-oss/spirit-web-react';
+…
+- <UNSTABLE_File id="file-1" label="file.pdf" … />
++ <File id="file-1" label="file.pdf" … />
+```
+
 [mdn-column-gap]: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/column-gap
 [migration-guide-web-v5-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md#stack-wrap-direct-children-in-stackitem-when-using-dividers
