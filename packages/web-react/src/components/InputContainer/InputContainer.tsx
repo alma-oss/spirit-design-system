@@ -16,7 +16,7 @@ const defaultProps: Partial<SpiritInputContainerProps> = {
 };
 
 const InputContainer = <E extends ElementType = 'div'>(props: SpiritInputContainerProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>({}, 'inputContainer');
   const propsWithDefaults = {
     ...defaultProps,
     size: contextProps.size ?? defaultProps.size,

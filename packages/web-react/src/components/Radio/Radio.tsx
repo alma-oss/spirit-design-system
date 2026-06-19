@@ -60,9 +60,11 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
     <PropsProvider
       value={{
         isDisabled,
-        isItem,
-        isLabelHidden,
-        validationState,
+    label: { isItem, isLabelHidden },
+    helperText: {},
+        // Radio does not render a `ValidationText`, but the state is forwarded for
+        // consistency with the other field providers (and any future validation UI).
+        validationText: { validationState },
       }}
     >
       {isItem ? (

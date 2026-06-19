@@ -34,7 +34,13 @@ const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Ele
   const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps, otherProps });
 
   return (
-    <PropsProvider value={{ elementType: 'span', isDisabled, isItem: true }}>
+    <PropsProvider
+      value={{
+        isDisabled,
+        label: { elementType: 'span', isItem: true },
+        helperText: { elementType: 'span' },
+      }}
+    >
       <Component {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && Component === 'button'}>
         {startSlot && (
           <span className={classProps.slot} role="presentation">

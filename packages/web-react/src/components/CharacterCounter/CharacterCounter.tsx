@@ -10,7 +10,7 @@ import { useCharacterCounter } from './useCharacterCounterState';
 import { useCharacterCounterStyleProps } from './useCharacterCounterStyleProps';
 
 const CharacterCounter = (props: SpiritCharacterCounterProps) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>({}, 'characterCounter');
   const propsWithDefaults = {
     isDisabled: contextProps.isDisabled,
     validationState: contextProps.validationState,

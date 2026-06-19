@@ -27,7 +27,7 @@ const _ControlButton = <E extends ElementType = 'button', S = void>(
   props: SpiritControlButtonProps<E, S>,
   ref: PolymorphicRef<E>,
 ) => {
-  const contextProps = useContextProps<Partial<Pick<ControlButtonProps<S>, 'size'>>>();
+  const contextProps = useContextProps<Partial<Pick<ControlButtonProps<S>, 'size'>>>({}, 'controlButton');
   const propsWithDefaults = {
     ...defaultProps,
     size: contextProps.size ?? defaultProps.size,

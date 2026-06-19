@@ -16,7 +16,7 @@ const defaultProps: Partial<SpiritLabelProps> = {
 };
 
 const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX.Element => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>({}, 'label');
   const propsWithDefaults = {
     ...defaultProps,
     elementType: contextProps.elementType,

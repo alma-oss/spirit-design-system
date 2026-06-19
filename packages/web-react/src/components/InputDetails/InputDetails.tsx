@@ -15,7 +15,7 @@ const defaultProps: Partial<InputDetailsProps> = {
 };
 
 const InputDetails = <E extends ElementType = 'div'>(props: InputDetailsProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>({}, 'inputDetails');
   const propsWithDefaults = {
     ...defaultProps,
     isDisabled: contextProps.isDisabled,

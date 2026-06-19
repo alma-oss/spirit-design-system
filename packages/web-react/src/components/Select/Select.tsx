@@ -42,11 +42,11 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
     <PropsProvider
       value={{
         isDisabled,
-        isLabelHidden,
         isRequired,
-        size,
-        variant,
-        validationState,
+        label: { isLabelHidden },
+        inputContainer: { size, variant, validationState },
+        inputAddon: { size },
+        validationText: { validationState },
       }}
     >
       <Stack {...mergeStyleProps(Stack, { styleProps })} spacing="space-400">

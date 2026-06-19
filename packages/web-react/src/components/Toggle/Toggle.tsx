@@ -50,9 +50,10 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
     <PropsProvider
       value={{
         isDisabled,
-        isLabelHidden,
         isRequired,
-        validationState,
+        label: { formFieldMode: FormFieldModes.INLINE, isLabelHidden },
+        helperText: { formFieldMode: FormFieldModes.INLINE },
+        validationText: { validationState },
       }}
     >
       <Flex
