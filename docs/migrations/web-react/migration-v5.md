@@ -9,6 +9,8 @@ Introducing version 5 of the _spirit-web-react_ package.
 
 ## Overview
 
+- [General Changes](#general-changes)
+  - [Dropped Support for Node.js 20](#dropped-support-for-nodejs-20)
 - [Component Changes](#component-changes)
   - [Dropdown: `DropdownPopover` Now Has `role="dialog"` by Default](#dropdown-dropdownpopover-now-has-roledialog-by-default)
   - [Collapse: `hideOnCollapse` Prop Renamed to `isDisposable`](#collapse-hideoncollapse-prop-renamed-to-isdisposable)
@@ -21,6 +23,14 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [Header: `UNSTABLE_Header` has been stabilized and renamed to `Header`, previous implementation has been removed](#header-stabilization-of-unstable_header-to-header-previous-implementation-removed)
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
+
+## General Changes
+
+### Dropped Support for Node.js 20
+
+The Node.js v20 is no longer supported. The minimum required Node.js version is 22.
+
+> ℹ️ See also the [migration guide of the _spirit-web_ package][migration-guide-web] for the same Node.js requirement.
 
 ## Component Changes
 

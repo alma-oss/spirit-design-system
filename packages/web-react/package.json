@@ -4,7 +4,7 @@
   "description": "React implementation of Spirit Design System components",
   "license": "MIT",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "sideEffects": false,
   "files": [

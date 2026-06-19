@@ -6,6 +6,8 @@ Introducing version 5 of the _spirit-web_ package.
 
 ## Overview
 
+- [General Changes](#general-changes)
+  - [Dropped Support for Node.js 20](#dropped-support-for-nodejs-20)
 - [Component Changes](#component-changes)
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
   - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
@@ -17,6 +19,12 @@ Introducing version 5 of the _spirit-web_ package.
   - [Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed](#header-unstable_header-stabilized-previous-header-css-removed)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
   - [Toggle: Input Before Label in HTML](#toggle-input-before-label-in-html)
+
+## General Changes
+
+### Dropped Support for Node.js 20
+
+The Node.js v20 is no longer supported. The minimum required Node.js version is 22.
 
 ## Component Changes
 
