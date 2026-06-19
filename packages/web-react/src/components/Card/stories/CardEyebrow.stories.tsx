@@ -46,9 +46,7 @@ export const CardEyebrowPlayground: Story = {
         <Card isBoxed>
           <CardMedia isExpanded>{MEDIA_IMAGE}</CardMedia>
           <CardLogo>
-            <PartnerLogo size="medium" hasSafeArea>
-              {LOGO}
-            </PartnerLogo>
+            <PartnerLogo>{LOGO}</PartnerLogo>
           </CardLogo>
           <CardBody>
             <CardEyebrow>{children}</CardEyebrow>

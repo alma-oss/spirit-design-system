@@ -31,10 +31,10 @@ const CardContentOptions = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter>
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </CardFooter>
@@ -43,9 +43,7 @@ const CardContentOptions = () => (
     <Card isBoxed>
       <CardMedia>{MEDIA_IMAGE}</CardMedia>
       <CardLogo>
-        <PartnerLogo size="medium" hasSafeArea>
-          {LOGO}
-        </PartnerLogo>
+        <PartnerLogo>{LOGO}</PartnerLogo>
       </CardLogo>
       <CardBody isSelectable>
         <CardEyebrow>Content options</CardEyebrow>
@@ -60,10 +58,10 @@ const CardContentOptions = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter>
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </CardFooter>
@@ -86,10 +84,10 @@ const CardContentOptions = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter>
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </CardFooter>
@@ -112,10 +110,10 @@ const CardContentOptions = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter>
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </CardFooter>
@@ -137,10 +135,10 @@ const CardContentOptions = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter>
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </CardFooter>

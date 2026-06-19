@@ -60,9 +60,7 @@ export const CardLinkPlayground: Story = {
         <Card>
           <CardMedia isExpanded>{MEDIA_IMAGE}</CardMedia>
           <CardLogo>
-            <PartnerLogo size="medium" hasSafeArea>
-              {LOGO}
-            </PartnerLogo>
+            <PartnerLogo>{LOGO}</PartnerLogo>
           </CardLogo>
           <CardBody>
             <CardEyebrow>Card eyebrow</CardEyebrow>
