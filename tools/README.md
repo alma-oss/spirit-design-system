@@ -30,7 +30,7 @@ resulting `.tgz` tarball, reporting whether any unresolved `catalog:` references
 
 ## Prerequisites
 
-- **Node.js ≥ 20**
+- **Node.js ≥ 22**
 - **`jq`** (used for JSON inspection of tarballs)
 - **`tar`** (used to extract `package.json` from tarballs)
 - **`curl`** (used for health-checking Verdaccio startup)
