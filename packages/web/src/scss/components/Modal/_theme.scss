@@ -63,7 +63,7 @@ $dialog-docked-scrollable-height: var(--modal-dialog-height, #{$_dialog-scrollab
 $dialog-docked-scrollable-max-height: $dialog-docked-expanded-min-height;
 
 // ModalHeader
-$header-gap: tokens.$space-500;
+$header-gap: tokens.$space-900;
 $header-padding-top: tokens.$space-900;
 $header-padding-top-tablet: tokens.$space-1000;
 $header-padding-bottom: tokens.$space-700;
