@@ -12,6 +12,7 @@ const defaultProps = {
   alignmentY: AlignmentYExtended.STRETCH,
   direction: DirectionExtended.HORIZONTAL,
   elementType: 'div',
+  isInline: false,
   isWrapping: false,
 };
 

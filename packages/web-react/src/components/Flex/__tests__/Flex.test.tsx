@@ -108,6 +108,12 @@ describe('Flex', () => {
     expect(screen.getByTestId(testId)).toHaveClass('Flex--wrap Flex--tablet--noWrap Flex--desktop--wrap');
   });
 
+  it('should have inline class name', () => {
+    render(<Flex isInline data-testid={testId} />);
+
+    expect(screen.getByTestId(testId)).toHaveClass('Flex--inline');
+  });
+
   it('should have custom elementType', () => {
     render(<Flex elementType="ul" />);
 
