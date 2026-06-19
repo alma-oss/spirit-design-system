@@ -4,7 +4,7 @@
   "description": "Codemods scripts for Spirit Design System packages",
   "license": "MIT",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "keywords": [
     "spirit",
