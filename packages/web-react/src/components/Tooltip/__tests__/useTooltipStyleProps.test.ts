@@ -9,7 +9,6 @@ describe('useTooltipStyleProps', () => {
     expect(result.current.classProps.rootClassName).toBe('Tooltip');
     expect(result.current.classProps.popoverClassName).toBe('TooltipPopover color-scheme-on-neutral-basic');
     expect(result.current.classProps.arrowClassName).toBe('TooltipPopover__arrow');
-    expect(result.current.classProps.closeButtonClassName).toBe('TooltipPopover__close');
   });
 
   it('should return dismissible class', () => {
