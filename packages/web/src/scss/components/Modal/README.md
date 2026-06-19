@@ -105,7 +105,7 @@ and allows users to easily close it.
   <h2 id="modal-example-title" class="ModalHeader__title">Modal Title</h2>
   <button
     type="button"
-    class="Button Button--tertiary Button--symmetrical Button--medium"
+    class="ControlButton ControlButton--xlarge ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
     data-spirit-dismiss="modal"
     data-spirit-target="#modal-example"
     aria-controls="modal-example"
@@ -376,7 +376,7 @@ When you put it all together:
       <h2 id="modal-example-title" class="ModalHeader__title">Modal Title</h2>
       <button
         type="button"
-        class="Button Button--tertiary Button--symmetrical Button--medium"
+        class="ControlButton ControlButton--xlarge ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
         data-spirit-dismiss="modal"
         data-spirit-target="#modal-example"
         aria-controls="modal-example"
