@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
@@ -69,5 +69,33 @@ describe('ToastBar', () => {
     const icon = dom.container.querySelector('svg') as SVGSVGElement;
 
     expect(icon).toBeInTheDocument();
+  });
+
+  it('should render dismiss button and call onClose when clicked', () => {
+    const onClose = jest.fn();
+
+    render(
+      <ToastBar id="test" isDismissible closeLabel="Close toast" onClose={onClose}>
+        Hello World
+      </ToastBar>,
+    );
+
+    const closeButton = screen.getByRole('button', { name: 'Close toast' });
+
+    expect(closeButton).toBeInTheDocument();
+
+    fireEvent.click(closeButton);
+
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not render dismiss button when not dismissible', () => {
+    render(
+      <ToastBar id="test" closeLabel="Close toast">
+        Hello World
+      </ToastBar>,
+    );
+
+    expect(screen.queryByRole('button', { name: 'Close toast' })).not.toBeInTheDocument();
   });
 });

@@ -9,7 +9,6 @@ export const useToastBarStyleProps = (props: ToastBarProps) => {
 
   const toastBarClass = useClassNamePrefix('ToastBar');
   const toastBarBoxClass = `${toastBarClass}__box`;
-  const toastBarCloseClass = `${toastBarClass}__close`;
   const toastBarContainerClass = `${toastBarClass}__container`;
   const toastBarContentClass = `${toastBarClass}__content`;
   const toastBarLinkClass = `${toastBarClass}__link`;
@@ -27,7 +26,6 @@ export const useToastBarStyleProps = (props: ToastBarProps) => {
         getColorSchemeClassName({ color: String(resolvedColor), isSubtle: false }),
       ),
       box: toastBarBoxClass,
-      close: toastBarCloseClass,
       container: toastBarContainerClass,
       content: toastBarContentClass,
       link: classNames(toastBarLinkClass, toastBarLinkUnderlinedClass),
