@@ -71,19 +71,19 @@ describe('SplitButton', () => {
     expect(screen.getByText('Button')).toHaveClass('Button--small');
   });
 
-  it('should override color and size from SplitButton when Button has different values', () => {
-    const color = 'secondary';
-    const size = 'small';
-
+  it("should prefer the Button's own color and size over the SplitButton context", () => {
     render(
-      <SplitButton color={color} size={size}>
+      <SplitButton color="secondary" size="small">
         <Button color="tertiary" size="large">
           Button
         </Button>
       </SplitButton>,
     );
 
-    expect(screen.getByText('Button')).toHaveClass(`Button--${color}`);
-    expect(screen.getByText('Button')).toHaveClass(`Button--${size}`);
+    // Direct props are strongest in the cascade (global < namespace < direct).
+    expect(screen.getByText('Button')).toHaveClass('Button--tertiary');
+    expect(screen.getByText('Button')).toHaveClass('Button--large');
+    expect(screen.getByText('Button')).not.toHaveClass('Button--secondary');
+    expect(screen.getByText('Button')).not.toHaveClass('Button--small');
   });
 });

@@ -80,7 +80,7 @@ describe('ValidationText', () => {
 
   it('should use context validation state for styles without rendering icon', () => {
     render(
-      <PropsProvider value={{ validationState: 'warning' }}>
+      <PropsProvider value={{ validationText: { validationState: 'warning' } }}>
         <ValidationText validationText="validation text" />
       </PropsProvider>,
     );
@@ -93,7 +93,7 @@ describe('ValidationText', () => {
 
   it('should use direct validation state icon over context validation state for styles', () => {
     render(
-      <PropsProvider value={{ validationState: 'warning' }}>
+      <PropsProvider value={{ validationText: { validationState: 'warning' } }}>
         <ValidationText validationText="validation text" validationStateIcon="success" />
       </PropsProvider>,
     );

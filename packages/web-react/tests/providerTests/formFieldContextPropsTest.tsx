@@ -109,6 +109,9 @@ export const formFieldContextPropsTest = ({
   renderComponent,
   text = DEFAULT_LABEL_TEXT,
 }: FormFieldContextPropsTestConfig) => {
+  // The namespace equals the component name with a lowercased first letter (e.g. `Label` → `label`).
+  const namespace = classNamePrefix.charAt(0).toLowerCase() + classNamePrefix.slice(1);
+
   describe('prop priority (1. direct props, 2. context, 3. defaultProps)', () => {
     if (includeInlineMode || includeItemMode) {
       it('should use default formFieldMode when no context and no direct prop', () => {
@@ -128,7 +131,11 @@ export const formFieldContextPropsTest = ({
 
     if (includeInlineMode) {
       it('should use context formFieldMode when context provides it and no direct prop', () => {
-        render(<PropsProvider value={{ formFieldMode: FormFieldModes.INLINE }}>{renderComponent()}</PropsProvider>);
+        render(
+          <PropsProvider value={{ [namespace]: { formFieldMode: FormFieldModes.INLINE } }}>
+            {renderComponent()}
+          </PropsProvider>,
+        );
         const element = screen.getByText(text);
 
         expect(element.className).toContain(`${classNamePrefix}--inline`);
@@ -138,7 +145,7 @@ export const formFieldContextPropsTest = ({
     if (includeInlineMode && includeItemMode) {
       it('should use direct formFieldMode over context (direct props override context)', () => {
         render(
-          <PropsProvider value={{ formFieldMode: FormFieldModes.ITEM }}>
+          <PropsProvider value={{ [namespace]: { formFieldMode: FormFieldModes.ITEM } }}>
             {renderComponent({ formFieldMode: FormFieldModes.INLINE })}
           </PropsProvider>,
         );
