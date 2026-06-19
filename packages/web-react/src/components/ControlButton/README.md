@@ -75,7 +75,7 @@ ControlButton supports five sizes: `xsmall`, `small`, `medium`, `large`, and `xl
 ControlButton resolves `size` in this order:
 
 1. direct `size` prop on ControlButton
-2. `size` from parent `PropsProvider` context
+2. `size` from parent `ContextPropsProvider` context
 3. default `medium` size
 
 This lets composed components share size through context while standalone usage can still set size explicitly.

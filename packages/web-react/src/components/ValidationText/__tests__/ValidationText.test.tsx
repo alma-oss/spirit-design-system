@@ -8,7 +8,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { PropsProvider } from '../../../context';
+import { ContextPropsProvider } from '../../../context';
 import { type SpiritValidationTextProps } from '../../../types';
 import { A11Y_ALERT_ROLE } from '../constants';
 import ValidationText from '../ValidationText';
@@ -35,9 +35,9 @@ describe('ValidationText', () => {
 
   it('should use context elementType when no direct prop', () => {
     render(
-      <PropsProvider value={{ elementType: 'span' }}>
+      <ContextPropsProvider value={{ validationText: { elementType: 'span' } }}>
         <ValidationText validationText="validation text" />
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText('validation text').localName).toBe('span');
@@ -45,9 +45,9 @@ describe('ValidationText', () => {
 
   it('should use direct elementType over context', () => {
     render(
-      <PropsProvider value={{ elementType: 'span' }}>
+      <ContextPropsProvider value={{ validationText: { elementType: 'span' } }}>
         <ValidationText elementType="p" validationText="validation text" />
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText('validation text').localName).toBe('p');
@@ -98,9 +98,9 @@ describe('ValidationText', () => {
 
   it('should use context validation state for styles without rendering icon', () => {
     render(
-      <PropsProvider value={{ validationState: 'warning' }}>
+      <ContextPropsProvider value={{ validationText: { validationState: 'warning' } }}>
         <ValidationText validationText="validation text" />
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     const element = screen.getByText('validation text');
@@ -111,9 +111,9 @@ describe('ValidationText', () => {
 
   it('should use direct validation state icon over context validation state for styles', () => {
     render(
-      <PropsProvider value={{ validationState: 'warning' }}>
+      <ContextPropsProvider value={{ validationText: { validationState: 'warning' } }}>
         <ValidationText validationText="validation text" validationStateIcon="success" />
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     const element = screen.getByText('validation text').parentElement as HTMLElement;

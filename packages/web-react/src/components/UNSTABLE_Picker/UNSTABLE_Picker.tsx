@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { MULTIPLE_SELECTION_MODE } from '../../constants';
-import { PropsProvider } from '../../context';
+import { FormFieldsContext, ContextPropsProvider, UniversalProvider } from '../../context';
 import {
   getSelectedKeys,
   isSingleSelectionMode,
@@ -208,7 +208,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
   );
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         isDisabled,
         isLabelHidden,
@@ -271,8 +271,8 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
             {tagDescriptionText}
           </span>
         </div>
-      </PickerContextProvider>
-    </PropsProvider>
+      </UniversalProvider>
+    </ContextPropsProvider>
   );
 };
 

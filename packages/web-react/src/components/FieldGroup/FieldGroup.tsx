@@ -2,7 +2,7 @@
 
 import classNames from 'classnames';
 import React from 'react';
-import { PropsProvider } from '../../context';
+import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type SpiritFieldGroupProps } from '../../types';
 import { Flex } from '../Flex';
@@ -38,7 +38,7 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
   });
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         isDisabled,
         isLabelHidden,
@@ -75,7 +75,7 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
           )}
         </Stack>
       </fieldset>
-    </PropsProvider>
+    </ContextPropsProvider>
   );
 };
 

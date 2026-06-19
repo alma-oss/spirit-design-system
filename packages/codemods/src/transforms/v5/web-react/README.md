@@ -286,7 +286,7 @@ Because the previous default `size` was `medium`, a `ControlButton` with no `siz
 
 ⚠️ Run this codemod **only if you relied on the previous `ControlButton` heights**. It is a visual change and shifts every `ControlButton` `size` up by one step regardless of intent, so review the result afterwards.
 
-ℹ️ A `ControlButton` that uses a JSX spread (e.g. `<ControlButton {...props} />`) is skipped, since the spread might already provide a `size`. Review those cases manually. The same applies if you set the `size` through a `PropsProvider` context instead of the prop directly.
+ℹ️ A `ControlButton` that uses a JSX spread (e.g. `<ControlButton {...props} />`) is skipped, since the spread might already provide a `size`. Review those cases manually. The same applies if you set the `size` through a `ContextPropsProvider` context instead of the prop directly.
 
 #### Usage
 
@@ -317,7 +317,7 @@ new recommended size mapping: `small` → `xsmall`, `medium` → `small`. The `x
 
 ℹ️ A `ControlButton` that uses a JSX spread (e.g. `<ControlButton {...props} />`) inside a `Tag` is
 skipped, since the spread might already provide a `size`. Review those cases manually. The same applies
-if you set the `size` through a `PropsProvider` context instead of the prop directly.
+if you set the `size` through a `ContextPropsProvider` context instead of the prop directly.
 
 #### Usage
 

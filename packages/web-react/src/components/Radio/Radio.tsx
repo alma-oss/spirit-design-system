@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ForwardedRef, forwardRef } from 'react';
-import { PropsProvider } from '../../context';
+import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritRadioProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -57,7 +57,7 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
   );
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         isDisabled,
         isItem,
@@ -80,7 +80,7 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
           <Stack spacing="space-400">{radioText}</Stack>
         </Flex>
       )}
-    </PropsProvider>
+    </ContextPropsProvider>
   );
 };
 

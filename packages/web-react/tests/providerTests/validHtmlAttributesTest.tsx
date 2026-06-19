@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import { htmlElementAttributes } from 'html-element-attributes';
 import React, { type ComponentType } from 'react';
+import { ContextPropsProvider } from '../../src/context';
 import { getComponentName } from '../testUtils/getComponentName';
 
 const globalAttributes = [...htmlElementAttributes['*'], 'role'];
@@ -40,4 +41,15 @@ export const validHtmlAttributesTest = (Component: ComponentType<any>, props: ob
     const { container } = render(<Component {...props} />);
     validateHTMLForComponent(container);
   });
+
+  if (options.globalProps) {
+    test(`should not leak global props onto ${componentName}'s rendered HTML`, () => {
+      const { container } = render(
+        <ContextPropsProvider value={options.globalProps as Record<string, unknown>}>
+          <Component {...props} />
+        </ContextPropsProvider>,
+      );
+      validateHTMLForComponent(container);
+    });
+  }
 };

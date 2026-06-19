@@ -2,7 +2,7 @@
 
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { Sizes } from '../../constants';
-import { PropsProvider } from '../../context';
+import { FormFieldsContext, ContextPropsProvider, UniversalProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritSelectProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -39,7 +39,7 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
   });
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         isDisabled,
         isLabelHidden,
@@ -49,35 +49,37 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
         validationState,
       }}
     >
-      <Stack {...mergeStyleProps(Stack, { styleProps })} spacing="space-400">
-        <Label htmlFor={id}>{label}</Label>
-        <InputContainer>
-          <select
-            {...transferProps}
-            {...ariaDescribedByProp}
-            id={id}
-            disabled={isDisabled}
-            required={isRequired}
-            ref={ref}
-          >
-            {children}
-          </select>
-          <InputAddon>
-            <Icon name="chevron-down" boxSize={size === Sizes.SMALL ? 16 : 20} />
-          </InputAddon>
-        </InputContainer>
-        <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
-        {validationState && (
-          <ValidationText
-            id={`${id}-validation-text`}
-            {...(hasValidationIcon && { validationStateIcon: validationState })}
-            validationText={validationText}
-            registerAria={register}
-            role={validationTextRole}
-          />
-        )}
-      </Stack>
-    </PropsProvider>
+      <UniversalProvider values={[[FormFieldsContext, { size }]]}>
+        <Stack {...mergeStyleProps(Stack, { styleProps })} spacing="space-400">
+          <Label htmlFor={id}>{label}</Label>
+          <InputContainer>
+            <select
+              {...transferProps}
+              {...ariaDescribedByProp}
+              id={id}
+              disabled={isDisabled}
+              required={isRequired}
+              ref={ref}
+            >
+              {children}
+            </select>
+            <InputAddon>
+              <Icon name="chevron-down" boxSize={size === Sizes.SMALL ? 16 : 20} />
+            </InputAddon>
+          </InputContainer>
+          <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+          {validationState && (
+            <ValidationText
+              id={`${id}-validation-text`}
+              {...(hasValidationIcon && { validationStateIcon: validationState })}
+              validationText={validationText}
+              registerAria={register}
+              role={validationTextRole}
+            />
+          )}
+        </Stack>
+      </UniversalProvider>
+    </ContextPropsProvider>
   );
 };
 

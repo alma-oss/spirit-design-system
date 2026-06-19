@@ -66,7 +66,7 @@ and [escape hatches][readme-escape-hatches].
 
 ## Custom Component
 
-Radio classes are fabricated using `useRadioStyleProps` hook. You can use it to create your own custom Radio component. Compose the standalone [HelperText][readme-helper-text] and [Label][readme-label] components with `PropsProvider` and `useAriaDescribedBy` for correct styling and accessibility.
+Radio classes are fabricated using `useRadioStyleProps` hook. You can use it to create your own custom Radio component. Compose the standalone [HelperText][readme-helper-text] and [Label][readme-label] components with `ContextPropsProvider` and `useAriaDescribedBy` for correct styling and accessibility.
 
 ```tsx
 const CustomRadio = (props: SpiritRadioProps): JSX.Element => {
@@ -112,7 +112,7 @@ const CustomRadio = (props: SpiritRadioProps): JSX.Element => {
   const rootStyleProps = mergeStyleProps(Flex, { styleProps });
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         formFieldMode: isItem ? FormFieldModes.ITEM : FormFieldModes.INLINE,
         isDisabled,
@@ -130,7 +130,7 @@ const CustomRadio = (props: SpiritRadioProps): JSX.Element => {
           <div>{content}</div>
         </Flex>
       )}
-    </PropsProvider>
+    </ContextPropsProvider>
   );
 };
 ```

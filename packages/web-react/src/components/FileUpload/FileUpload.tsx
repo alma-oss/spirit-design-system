@@ -2,7 +2,7 @@
 
 import classNames from 'classnames';
 import React, { type DragEvent, type DragEventHandler, useEffect, useState } from 'react';
-import { PropsProvider } from '../../context';
+import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { Button } from '../Button';
 import { HelperText } from '../HelperText';
@@ -103,7 +103,7 @@ const FileUpload = (props: FileUploadProps) => {
   }, [isDragAndDropSupportedProp]);
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         isDisabled,
         isLabelHidden,
@@ -172,7 +172,7 @@ const FileUpload = (props: FileUploadProps) => {
         )}
         {children}
       </div>
-    </PropsProvider>
+    </ContextPropsProvider>
   );
 };
 

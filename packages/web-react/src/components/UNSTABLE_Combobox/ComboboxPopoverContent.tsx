@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type FocusEvent, type MouseEvent, type ReactNode, type RefObject } from 'react';
-import { PropsProvider } from '../../context';
+import { ContextPropsProvider } from '../../context';
 import type { StyleProps } from '../../types';
 import { DropdownPopover } from '../Dropdown';
 import { Stack } from '../Stack';
@@ -58,7 +58,7 @@ const ComboboxPopoverContent = (props: ComboboxPopoverContentProps) => {
 
   return (
     // Field-level label props must not reach the popover content, options render their own labels.
-    <PropsProvider value={{ isRequired: null, isLabelHidden: null }}>
+    <ContextPropsProvider value={{ isRequired: null, label: { isLabelHidden: null } }}>
       {/* Pure aria-activedescendant: DOM focus stays on the filter input. */}
       <DropdownPopover enableAutoFocus={false} {...popoverProps} aria-labelledby={labelId}>
         {isLoading && (
@@ -93,7 +93,7 @@ const ComboboxPopoverContent = (props: ComboboxPopoverContentProps) => {
         )}
         {auxiliaryContent}
       </DropdownPopover>
-    </PropsProvider>
+    </ContextPropsProvider>
   );
 };
 

@@ -29,6 +29,14 @@ export interface ChildrenProps {
   children?: ReactNode | string;
 }
 
+export interface ContextProps {
+  /**
+   * Overrides the component's default namespace when reading props from the surrounding
+   * `ContextPropsProvider`.
+   */
+  propsContext?: string;
+}
+
 export interface ElementTypeProps<E extends ElementType = 'div'> {
   /**
    * The HTML element or React element used to render the component.

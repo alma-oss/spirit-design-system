@@ -15,7 +15,7 @@ import {
   validHtmlAttributesTest,
 } from '@local/tests';
 import { EmotionColors } from '../../../constants';
-import { PropsProvider } from '../../../context';
+import { ContextPropsProvider } from '../../../context';
 import Button from '../Button';
 
 jest.mock('../../../hooks/useIcon');
@@ -73,9 +73,9 @@ describe('Button', () => {
 
   it('should not forward unrelated context props to DOM', () => {
     render(
-      <PropsProvider value={{ validationState: 'danger' }}>
+      <ContextPropsProvider value={{ validationState: 'danger' }}>
         <Button>Button</Button>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByRole('button')).not.toHaveAttribute('validationState');

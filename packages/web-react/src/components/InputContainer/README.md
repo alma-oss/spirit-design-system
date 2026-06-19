@@ -19,13 +19,13 @@ import { InputContainer } from '@alma-oss/spirit-web-react';
 InputContainer resolves `size` in this order:
 
 1. direct `size` prop on InputContainer
-2. `size` from parent `PropsProvider` context (e.g. from TextFieldBase)
+2. `size` from parent `ContextPropsProvider` context (e.g. from TextFieldBase)
 
 This lets standalone usage set size explicitly while composed form-field components
 can share size through context.
 
 The same precedence applies to `variant`, `isDisabled`, and `validationState` (for example from
-`TextFieldBase` via `PropsProvider`).
+`TextFieldBase` via `ContextPropsProvider`).
 
 ## Variants
 

@@ -9,7 +9,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { PropsProvider } from '../../../context';
+import { ContextPropsProvider } from '../../../context';
 import Label from '../Label';
 
 describe('Label', () => {
@@ -38,9 +38,9 @@ describe('Label', () => {
 
   it('should use context elementType when no direct prop', () => {
     render(
-      <PropsProvider value={{ elementType: 'span' }}>
+      <ContextPropsProvider value={{ label: { elementType: 'span' } }}>
         <Label>Text</Label>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText('Text').localName).toBe('span');
@@ -48,9 +48,9 @@ describe('Label', () => {
 
   it('should use direct elementType over context', () => {
     render(
-      <PropsProvider value={{ elementType: 'span' }}>
+      <ContextPropsProvider value={{ label: { elementType: 'span' } }}>
         <Label elementType="strong">Text</Label>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText('Text').localName).toBe('strong');
@@ -58,9 +58,9 @@ describe('Label', () => {
 
   it('should use context isRequired and isLabelHidden when no direct prop', () => {
     render(
-      <PropsProvider value={{ isRequired: true, isLabelHidden: true }}>
+      <ContextPropsProvider value={{ isRequired: true, label: { isLabelHidden: true } }}>
         <Label>Text</Label>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     const element = screen.getByText('Text');
