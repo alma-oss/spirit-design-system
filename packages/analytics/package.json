@@ -4,7 +4,7 @@
   "description": "Analytic tools for Spirit Design System",
   "license": "MIT",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "keywords": [
     "cli",

@@ -10877,12 +10877,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.19.41":
-  version: 20.19.41
-  resolution: "@types/node@npm:20.19.41"
+"@types/node@npm:22.19.21":
+  version: 22.19.21
+  resolution: "@types/node@npm:22.19.21"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10/5eb38cabe687130093681fe35e2ee2230c0717ee44a784881229c8ea9ecfb3626be87edb3940c9b60886dc93b5cb5c66a58a4ff44f1de3936e6af92b65a029b2
+  checksum: 10/3767b914ea4ec2f05dfa541b90e20bf580ab671feae8459c49f67eddd6c18f1d178d054a0836d3928f53e3049e84c0c7ee64630c20980941202ba5ecfd731e56
   languageName: node
   linkType: hard
 

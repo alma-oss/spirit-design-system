@@ -4,7 +4,7 @@
   "description": "Vite plugin for generating Spirit Design System icons from SVG files",
   "license": "MIT",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "type": "module",
   "files": [
