@@ -9,6 +9,7 @@ import CardContentOptions from './CardContentOptions';
 import CardCustom from './CardCustom';
 import CardFooterAlignment from './CardFooterAlignment';
 import CardFooterContent from './CardFooterContent';
+import CardFooterDivider from './CardFooterDivider';
 import CardGeneralOptions from './CardGeneralOptions';
 import CardHorizontalLayout from './CardHorizontalLayout';
 import CardLogoDemo from './CardLogo';
@@ -61,6 +62,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Footer Content">
         <CardFooterContent />
+      </DocsSection>
+      <DocsSection title="Footer with Divider">
+        <CardFooterDivider />
       </DocsSection>
       <DocsSection title="Text Cards">
         <CardText />

@@ -46,11 +46,14 @@ $layouts-boxed: (
 
 $alignment-y-dictionary: dictionaries.$alignments-y;
 
-$gap: tokens.$space-900;
-$gap-dense: tokens.$space-700;
+$gap: tokens.$space-800;
+
+$media-vertical-margin-bottom: tokens.$space-900;
+$logo-vertical-margin-bottom: tokens.$space-600;
 
 $padding: tokens.$space-700;
-$padding-tablet: tokens.$space-900;
+$padding-tablet: tokens.$space-800;
+$padding-condensed: tokens.$space-700;
 
 $typography: tokens.$body-medium-regular;
 
@@ -105,9 +108,9 @@ $logo-border-color: tokens.$border-basic;
 $logo-border-radius: tokens.$radius-200;
 $logo-background-color: tokens.$background-primary;
 
-$eyebrow-typography: tokens.$body-small-semibold;
+$eyebrow-typography: tokens.$eyebrow;
 $eyebrow-color: tokens.$text-tertiary;
-$eyebrow-margin-bottom: tokens.$space-300;
+$eyebrow-margin-bottom: tokens.$space-500;
 
 $title-typography: tokens.$body-large-regular;
 $title-heading-typography: tokens.$heading-xsmall-semibold;
@@ -115,4 +118,6 @@ $title-color: tokens.$text-primary;
 $title-margin-bottom: tokens.$space-500;
 
 $footer-alignment-dictionary: dictionaries.$alignments-x;
-$footer-gap: tokens.$space-700;
+$footer-gap: tokens.$space-600;
+$footer-divider-border-color: $border-color;
+$footer-divider-margin-top: tokens.$space-700;

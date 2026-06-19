@@ -36,15 +36,22 @@ const meta: Meta<typeof CardFooter> = {
       control: 'object',
       description: 'Content to display in the CardFooter.',
     },
+    hasDivider: {
+      control: 'boolean',
+      description: 'Renders a full-width divider line above the footer.',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
   },
   args: {
     alignmentX: AlignmentX.LEFT,
     children: (
       <>
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </>
@@ -65,9 +72,7 @@ export const CardFooterPlayground: Story = {
         <Card isBoxed>
           <CardMedia isExpanded>{MEDIA_IMAGE}</CardMedia>
           <CardLogo>
-            <PartnerLogo size="medium" hasSafeArea>
-              {LOGO}
-            </PartnerLogo>
+            <PartnerLogo>{LOGO}</PartnerLogo>
           </CardLogo>
           <CardBody>
             <CardEyebrow>Card Title</CardEyebrow>

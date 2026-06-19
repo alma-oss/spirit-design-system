@@ -48,15 +48,15 @@ const CardFooterContent = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter>
-        <ButtonLink href="#" color="plain" isSymmetrical>
+        <ButtonLink href="#" color="plain" isSymmetrical size="small">
           <VisuallyHidden>Add</VisuallyHidden>
           <Icon name="add" />
         </ButtonLink>
-        <ButtonLink href="#" color="plain" isSymmetrical>
+        <ButtonLink href="#" color="plain" isSymmetrical size="small">
           <VisuallyHidden>Edit</VisuallyHidden>
           <Icon name="edit" />
         </ButtonLink>
-        <ButtonLink href="#" color="plain" isSymmetrical>
+        <ButtonLink href="#" color="plain" isSymmetrical size="small">
           <VisuallyHidden>Help</VisuallyHidden>
           <Icon name="help" />
         </ButtonLink>

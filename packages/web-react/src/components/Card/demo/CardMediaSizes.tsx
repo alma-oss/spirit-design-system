@@ -28,10 +28,10 @@ const CardMediaSizes = () => (
           </p>
         </CardBody>
         <CardFooter>
-          <ButtonLink href="#" color="primary">
+          <ButtonLink href="#" color="primary" size="small">
             Primary
           </ButtonLink>
-          <ButtonLink href="#" color="secondary">
+          <ButtonLink href="#" color="secondary" size="small">
             Secondary
           </ButtonLink>
         </CardFooter>
@@ -49,10 +49,10 @@ const CardMediaSizes = () => (
           <p>Lorem ipsum dolor sit amet.</p>
         </CardBody>
         <CardFooter>
-          <ButtonLink href="#" color="primary">
+          <ButtonLink href="#" color="primary" size="small">
             Primary
           </ButtonLink>
-          <ButtonLink href="#" color="secondary">
+          <ButtonLink href="#" color="secondary" size="small">
             Secondary
           </ButtonLink>
         </CardFooter>
@@ -70,10 +70,10 @@ const CardMediaSizes = () => (
           <p>Lorem ipsum dolor sit amet.</p>
         </CardBody>
         <CardFooter>
-          <ButtonLink href="#" color="primary">
+          <ButtonLink href="#" color="primary" size="small">
             Primary
           </ButtonLink>
-          <ButtonLink href="#" color="secondary">
+          <ButtonLink href="#" color="secondary" size="small">
             Secondary
           </ButtonLink>
         </CardFooter>
@@ -91,10 +91,10 @@ const CardMediaSizes = () => (
           <p>Lorem ipsum dolor sit amet.</p>
         </CardBody>
         <CardFooter>
-          <ButtonLink href="#" color="primary">
+          <ButtonLink href="#" color="primary" size="small">
             Primary
           </ButtonLink>
-          <ButtonLink href="#" color="secondary">
+          <ButtonLink href="#" color="secondary" size="small">
             Secondary
           </ButtonLink>
         </CardFooter>
@@ -116,10 +116,10 @@ const CardMediaSizes = () => (
           {/* End user content */}
         </CardBody>
         <CardFooter>
-          <ButtonLink href="#" color="primary">
+          <ButtonLink href="#" color="primary" size="small">
             Primary
           </ButtonLink>
-          <ButtonLink href="#" color="secondary">
+          <ButtonLink href="#" color="secondary" size="small">
             Secondary
           </ButtonLink>
         </CardFooter>
@@ -139,10 +139,10 @@ const CardMediaSizes = () => (
           {/* End user content */}
         </CardBody>
         <CardFooter>
-          <ButtonLink href="#" color="primary">
+          <ButtonLink href="#" color="primary" size="small">
             Primary
           </ButtonLink>
-          <ButtonLink href="#" color="secondary">
+          <ButtonLink href="#" color="secondary" size="small">
             Secondary
           </ButtonLink>
         </CardFooter>
@@ -162,10 +162,10 @@ const CardMediaSizes = () => (
           {/* End user content */}
         </CardBody>
         <CardFooter>
-          <ButtonLink href="#" color="primary">
+          <ButtonLink href="#" color="primary" size="small">
             Primary
           </ButtonLink>
-          <ButtonLink href="#" color="secondary">
+          <ButtonLink href="#" color="secondary" size="small">
             Secondary
           </ButtonLink>
         </CardFooter>
@@ -185,10 +185,10 @@ const CardMediaSizes = () => (
           {/* End user content */}
         </CardBody>
         <CardFooter>
-          <ButtonLink href="#" color="primary">
+          <ButtonLink href="#" color="primary" size="small">
             Primary
           </ButtonLink>
-          <ButtonLink href="#" color="secondary">
+          <ButtonLink href="#" color="secondary" size="small">
             Secondary
           </ButtonLink>
         </CardFooter>

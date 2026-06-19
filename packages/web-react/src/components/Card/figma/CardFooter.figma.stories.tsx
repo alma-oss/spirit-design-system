@@ -40,8 +40,10 @@ export const FigmaCardFooterButtons: Story = {
   name: 'CardFooter Buttons',
   render: (props) => (
     <CardFooter {...props}>
-      <Button>Button</Button>
-      <Button color="secondary">Button</Button>
+      <Button size="small">Button</Button>
+      <Button color="secondary" size="small">
+        Button
+      </Button>
     </CardFooter>
   ),
 };
