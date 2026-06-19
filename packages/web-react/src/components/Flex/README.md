@@ -48,6 +48,18 @@ Usage with a list:
 layout, [`display: grid`][mdn-display-grid] is used because of technical advantages: better overflow control or
 alignment API consistency.
 
+## Inline Layout
+
+Use the `isInline` prop to render the Flex container as an inline-level box. For horizontal layouts, this sets
+[`display: inline-flex`][mdn-display-inline-flex]. For vertical layouts, this sets [`display: inline-grid`][mdn-display-inline-grid].
+
+```tsx
+<Flex isInline>
+  <div>Item 1</div>
+  <div>Item 2</div>
+</Flex>
+```
+
 ## Responsive Direction
 
 To create a responsive layout, pass an object as the value for the `direction` property, using [breakpoint][dictionary-breakpoint] keys to specify different layouts for each screen size.
@@ -174,6 +186,7 @@ Custom vertical (y-axis) spacing:
 | `alignmentY`  | \[[AlignmentYExtended dictionary][dictionary-alignment] \| `object`] | `stretch`    | ✕        | Apply vertical alignment of items, use an object to set responsive values, e.g. `{ mobile: 'top', tablet: 'center', desktop: 'bottom' }`   |
 | `direction`   | \[[DirectionExtended dictionary][dictionary-direction] \| `object`]  | `horizontal` | ✕        | Direction of the items, use an object to set responsive values, e.g. `{ mobile: 'horizontal', desktop: 'vertical' }`                       |
 | `elementType` | HTML element                                                         | `div`        | ✕        | Element type to use for the Flex                                                                                                           |
+| `isInline`    | `bool`                                                               | `false`      | ✕        | Whether the Flex container is rendered as an inline-level box                                                                              |
 | `isWrapping`  | \[ `bool` \| `object` ]                                              | `false`      | ✕        | Whether items will wrap, use an object to set responsive values, e.g. `{ mobile: true, tablet: true, desktop: false }`                     |
 | `spacing`     | \[`SpaceToken` \| `Responsive<SpaceToken>`]                          | —            | ✕        | Apply [custom spacing](#custom-spacing) in both horizontal and vertical directions between items                                           |
 | `spacingX`    | \[`SpaceToken` \| `Responsive<SpaceToken>`]                          | —            | ✕        | Apply horizontal [custom spacing](#custom-spacing) between items                                                                           |
@@ -188,6 +201,8 @@ and [escape hatches][readme-escape-hatches].
 [dictionary-direction]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#direction
 [mdn-display-flex]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout
 [mdn-display-grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout
+[mdn-display-inline-flex]: https://developer.mozilla.org/en-US/docs/Web/CSS/display#inline-flex
+[mdn-display-inline-grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/display#inline-grid
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

@@ -54,6 +54,11 @@
             display: flex;
         }
 
+        .Flex--#{$infix}horizontal.Flex--inline,
+        .Flex--#{$infix}horizontalReversed.Flex--inline {
+            display: inline-flex;
+        }
+
         .Flex--#{$infix}horizontal {
             flex-direction: row;
         }
@@ -65,6 +70,10 @@
         // @see https://jira.almacareer.tech/browse/DS-1630 - Add 'verticalReversed' selector
         .Flex--#{$infix}vertical {
             display: grid; // 2.
+        }
+
+        .Flex--#{$infix}vertical.Flex--inline {
+            display: inline-grid;
         }
 
         .Flex--#{$infix}wrap {
