@@ -19,9 +19,10 @@ export interface FlexStyle<T> {
 }
 
 export function useFlexStyleProps(props: FlexStyleProps): FlexStyle<FlexStyleProps> {
-  const { alignmentX, alignmentY, direction, spacing, spacingX, spacingY, isWrapping, ...restProps } = props;
+  const { alignmentX, alignmentY, direction, spacing, spacingX, spacingY, isInline, isWrapping, ...restProps } = props;
 
   const flexClass = useClassNamePrefix('Flex');
+  const inlineClass = `${flexClass}--inline`;
 
   const flexStyle = {
     ...useSpacingStyle(spacing as SpacingType, 'flex', DirectionAxis.X),
@@ -33,6 +34,7 @@ export function useFlexStyleProps(props: FlexStyleProps): FlexStyle<FlexStylePro
   const directionClass = generateStylePropsClassNames(flexClass, stringOrObjectKebabCaseToCamelCase(direction!));
 
   const classes = classNames(flexClass, useWrapClass(flexClass, isWrapping), {
+    [inlineClass]: isInline,
     [useAlignmentClass(flexClass, alignmentX as FlexAlignmentXType, 'alignmentX')]: alignmentX,
     [useAlignmentClass(flexClass, alignmentY as FlexAlignmentYType, 'alignmentY')]: alignmentY,
     [directionClass]: direction,

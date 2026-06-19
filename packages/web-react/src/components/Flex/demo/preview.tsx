@@ -6,6 +6,7 @@ import FlexCustomSpacing from './FlexCustomSpacing';
 import FlexHorizontalLayout from './FlexHorizontalLayout';
 import FlexHorizontalLayoutHorizontalAlignment from './FlexHorizontalLayoutHorizontalAlignment';
 import FlexHorizontalReversedLayout from './FlexHorizontalReversedLayout';
+import FlexInlineLayout from './FlexInlineLayout';
 import FlexResponsiveAlignment from './FlexResponsiveAlignment';
 import FlexResponsiveCustomHorizontalSpacing from './FlexResponsiveCustomHorizontalSpacing';
 import FlexResponsiveCustomVerticalSpacing from './FlexResponsiveCustomVerticalSpacing';
@@ -26,6 +27,9 @@ export const Preview = () => (
     </DocsSection>
     <DocsSection title="Vertical Layout">
       <FlexVerticalLayout />
+    </DocsSection>
+    <DocsSection title="Inline Layout">
+      <FlexInlineLayout />
     </DocsSection>
     <DocsSection title="Responsive Layout">
       <FlexResponsiveLayout />

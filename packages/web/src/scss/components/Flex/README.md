@@ -48,6 +48,18 @@ Usage with a list:
 layout, [`display: grid`][mdn-display-grid] is used because of technical advantages: better overflow control or
 alignment API consistency.
 
+## Inline Layout
+
+Use the `Flex--inline` modifier to render the Flex container as an inline-level box. For horizontal layouts, this sets
+[`display: inline-flex`][mdn-display-inline-flex]. For vertical layouts, this sets [`display: inline-grid`][mdn-display-inline-grid].
+
+```html
+<div class="Flex Flex--horizontal Flex--inline Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+```
+
 ## Responsive Direction
 
 To create a responsive layout, use the `tablet` and `desktop` infixes, e.g. `Flex--tablet--horizontal` or `Flex--desktop--vertical`.
@@ -209,7 +221,9 @@ Custom spacing for each breakpoint:
 </div>
 ```
 
+[dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [mdn-display-flex]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout
 [mdn-display-grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout
-[dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
+[mdn-display-inline-flex]: https://developer.mozilla.org/en-US/docs/Web/CSS/display#inline-flex
+[mdn-display-inline-grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/display#inline-grid

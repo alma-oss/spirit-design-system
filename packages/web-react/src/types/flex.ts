@@ -28,6 +28,7 @@ export interface FlexStyleProps extends FlexBaseProps {
   alignmentX?: FlexAlignmentXType;
   alignmentY?: FlexAlignmentYType;
   direction?: FlexDirectionType;
+  isInline?: boolean;
   isWrapping?: FlexWrapType;
   /** Custom spacing between items */
   spacing?: SingleOrResponsive<SpaceToken>;

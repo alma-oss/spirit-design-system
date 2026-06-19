@@ -7,6 +7,7 @@ describe('useFlexStyleProps', () => {
     // props, expectedClasses
     [{}, 'Flex Flex--noWrap'],
     [{ isWrapping: true }, 'Flex Flex--wrap'],
+    [{ isInline: true }, 'Flex Flex--noWrap Flex--inline'],
     [
       {
         isWrapping: { mobile: true, tablet: false, desktop: true },
