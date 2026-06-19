@@ -13,7 +13,7 @@ import ModalCloseButton from '../ModalCloseButton';
 jest.mock('../../../hooks/useIcon');
 
 describe('ModalCloseButton', () => {
-  classNamePrefixProviderTest(ModalCloseButton, 'Button');
+  classNamePrefixProviderTest(ModalCloseButton, 'ControlButton');
 
   stylePropsTest(ModalCloseButton);
 
@@ -44,13 +44,13 @@ describe('ModalCloseButton', () => {
   it('should be symmetrical', () => {
     render(<ModalCloseButton label="close" id="test" isOpen onClose={() => {}} />);
 
-    expect(screen.getByRole('button')).toHaveClass('Button--symmetrical');
+    expect(screen.getByRole('button')).toHaveClass('ControlButton--symmetrical');
   });
 
-  it('should have tertiary color', () => {
+  it('should have xlarge size', () => {
     render(<ModalCloseButton label="close" id="test" isOpen onClose={() => {}} />);
 
-    expect(screen.getByRole('button')).toHaveClass('Button--tertiary');
+    expect(screen.getByRole('button')).toHaveClass('ControlButton--xlarge');
   });
 
   it('should handle on close click', () => {
