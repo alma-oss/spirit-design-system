@@ -11,7 +11,6 @@ describe('useToastBarStyleProps', () => {
     expect(result.current.classProps.root).toBe(
       `ToastBar ToastBar--neutral ${getColorSchemeClassName({ color: 'neutral', isSubtle: false })}`,
     );
-    expect(result.current.classProps.close).toBe('ToastBar__close');
     expect(result.current.classProps.link).toBe('ToastBar__link link-underlined');
     expect(result.current.classProps.content).toBe('ToastBar__content');
     expect(result.current.classProps.container).toBe('ToastBar__container');

@@ -50,10 +50,6 @@ export interface ToastLinkProps<E extends ElementType = 'a'> extends ToastBarHan
   target?: LinkTarget;
 }
 
-export interface ToastCloseButtonProps extends ToastBarHandlingProps, SpiritToastBarProps {
-  label?: string;
-}
-
 export interface UncontrolledToastProps extends ChildrenProps, StyleProps {
   alignmentX?: 'left' | 'center' | 'right';
   alignmentY?: 'top' | 'bottom';
