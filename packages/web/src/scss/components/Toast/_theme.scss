@@ -38,7 +38,6 @@ $bar-content-gap: tokens.$space-600;
 $bar-message-gap-x: tokens.$space-900;
 $bar-message-gap-y: tokens.$space-600;
 $bar-action-margin-inline-end: tokens.$space-500;
-$bar-close-padding: tokens.$space-300;
 
 // ⚠️ Keep the slowest transition in sync with `js/Toast.ts`.
 $bar-transition-delay-margin: transitions.$duration-300;
