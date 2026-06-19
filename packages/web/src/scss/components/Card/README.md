@@ -390,6 +390,24 @@ following CSS modifiers:
 - `CardFooter--alignmentXCenter`
 - `CardFooter--alignmentXRight`
 
+### Footer Divider
+
+Use the `CardFooterDivider` element together with the `CardFooter--hasDivider` modifier to render a full-width
+divider line above the footer. The divider spans the entire width of the card (including padding areas in boxed
+cards) and the modifier adds spacing between the divider and the footer content.
+
+Place `CardFooterDivider` immediately before the `<footer>` element as a direct child of `Card`:
+
+```html
+<article class="Card Card--vertical Card--boxed">
+  <!-- CardBody, CardMedia, etc. -->
+  <div class="CardFooterDivider" aria-hidden="true"></div>
+  <footer class="CardFooter CardFooter--hasDivider CardFooter--alignmentXLeft">
+    <!-- … -->
+  </footer>
+</article>
+```
+
 ## Card Grid
 
 In a typical use case, you will display multiple Cards in a [Grid][grid].

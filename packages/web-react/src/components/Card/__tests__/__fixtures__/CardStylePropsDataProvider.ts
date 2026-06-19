@@ -14,6 +14,7 @@ export const defaultExpectedClasses = {
   body: 'CardBody',
   eyebrow: 'CardEyebrow',
   footer: 'CardFooter',
+  footerDivider: 'CardFooterDivider',
   link: 'CardLink',
   logo: 'CardLogo',
   media: 'CardMedia',
@@ -136,6 +137,16 @@ export const textPropsDataProvider: TextPropsDataProviderType[] = [
     expected: {
       classProps: generateExpectedClassProps({
         title: `${defaultExpectedClasses.title} ${defaultExpectedClasses.title}--heading`,
+      }),
+    },
+  },
+
+  {
+    props: { hasDivider: true },
+    description: 'return correct classProps for footer with divider',
+    expected: {
+      classProps: generateExpectedClassProps({
+        footer: `${defaultExpectedClasses.footer} ${defaultExpectedClasses.footer}--hasDivider`,
       }),
     },
   },

@@ -93,9 +93,7 @@ export const CardMediaPlayground: Story = {
       <Card isBoxed marginBottom="space-1200">
         <CardMedia {...args}>{MEDIA_IMAGE}</CardMedia>
         <CardLogo>
-          <PartnerLogo size="medium" hasSafeArea>
-            {LOGO}
-          </PartnerLogo>
+          <PartnerLogo>{LOGO}</PartnerLogo>
         </CardLogo>
         <CardBody>
           <CardEyebrow>Card eyebrow</CardEyebrow>
