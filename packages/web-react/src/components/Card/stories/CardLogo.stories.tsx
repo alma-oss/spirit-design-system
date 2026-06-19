@@ -32,11 +32,7 @@ const meta: Meta<typeof CardLogo> = {
     },
   },
   args: {
-    children: (
-      <PartnerLogo size="medium" hasSafeArea>
-        {LOGO}
-      </PartnerLogo>
-    ),
+    children: <PartnerLogo>{LOGO}</PartnerLogo>,
   },
 };
 

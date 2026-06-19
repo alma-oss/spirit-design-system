@@ -21,10 +21,10 @@ const CardFooterAlignment = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter>
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </CardFooter>
@@ -40,10 +40,10 @@ const CardFooterAlignment = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter alignmentX="center">
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </CardFooter>
@@ -59,10 +59,10 @@ const CardFooterAlignment = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter alignmentX="right">
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </CardFooter>

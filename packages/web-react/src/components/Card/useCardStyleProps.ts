@@ -14,6 +14,7 @@ export interface UseCardStyleProps {
   direction?: CardDirectionType;
   footerAlignmentX?: CardAlignmentXType;
   hasFilledHeight?: boolean;
+  hasDivider?: boolean;
   isBoxed?: boolean;
   isExpanded?: boolean;
   isHeading?: boolean;
@@ -28,6 +29,7 @@ export interface UseCardStylePropsReturn {
     body: string;
     eyebrow: string;
     footer: string;
+    footerDivider: string;
     link: string;
     logo: string;
     media: string;
@@ -44,6 +46,7 @@ export function useCardStyleProps(props?: UseCardStyleProps): UseCardStylePropsR
     direction,
     footerAlignmentX,
     hasFilledHeight,
+    hasDivider,
     isBoxed,
     isExpanded,
     isHeading,
@@ -61,6 +64,9 @@ export function useCardStyleProps(props?: UseCardStyleProps): UseCardStylePropsR
   const titleClass = `${cardClass}Title`;
 
   const bodyIsSelectableClass = `${bodyClass}--selectable`;
+
+  const footerHasDividerClass = `${footerClass}--hasDivider`;
+  const footerDividerClass = `${footerClass}Divider`;
 
   const isBoxedClass = `${cardClass}--boxed`;
   const mediaCanvasClass = `${mediaClass}__canvas`;
@@ -80,7 +86,9 @@ export function useCardStyleProps(props?: UseCardStyleProps): UseCardStylePropsR
       eyebrow: eyebrowClass,
       footer: classNames(footerClass, {
         [useAlignmentClass(footerClass, footerAlignmentX!, 'alignmentX')]: footerAlignmentX,
+        [footerHasDividerClass]: hasDivider,
       }),
+      footerDivider: footerDividerClass,
       link: linkClass,
       logo: logoClass,
       media: classNames(mediaClass, mediaSizeClass, {

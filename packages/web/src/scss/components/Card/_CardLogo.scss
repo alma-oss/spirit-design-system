@@ -26,7 +26,7 @@
             --#{tokens.$css-variable-prefix}card-logo-grid-area: media;
             --#{tokens.$css-variable-prefix}card-logo-place-self: end;
             --#{tokens.$css-variable-prefix}card-logo-margin-right: #{theme.$logo-offset-horizontal};
-            --#{tokens.$css-variable-prefix}card-logo-margin-bottom: 0;
+            --#{tokens.$css-variable-prefix}card-logo-margin-bottom: #{theme.$logo-vertical-margin-bottom};
         }
 
         :is(.Card--#{$infix}horizontal, .Card--#{$infix}horizontalReversed) > .CardLogo {

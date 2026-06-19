@@ -27,3 +27,14 @@
     $dictionary-values: theme.$footer-alignment-dictionary,
     $axis: 'x'
 );
+
+.CardFooterDivider {
+    grid-column: 1 / -1;
+    grid-row: footer-start;
+    height: 0;
+    border-top: theme.$border-width theme.$border-style theme.$footer-divider-border-color;
+}
+
+.CardFooter--hasDivider {
+    margin-top: theme.$footer-divider-margin-top;
+}

@@ -41,10 +41,10 @@ const CardGeneralOptions = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter>
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </CardFooter>
@@ -62,8 +62,12 @@ const CardGeneralOptions = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter>
-        <Button color="primary">Primary</Button>
-        <Button color="secondary">Secondary</Button>
+        <Button color="primary" size="small">
+          Primary
+        </Button>
+        <Button color="secondary" size="small">
+          Secondary
+        </Button>
       </CardFooter>
     </Card>
   </Grid>
