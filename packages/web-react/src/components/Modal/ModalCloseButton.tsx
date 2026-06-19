@@ -3,7 +3,7 @@
 import React from 'react';
 import { useI18n } from '../../hooks';
 import { type ModalCloseButtonProps } from '../../types';
-import { Button } from '../Button';
+import { ControlButton } from '../ControlButton';
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
 
@@ -12,10 +12,17 @@ const ModalCloseButton = ({ label, onClose, id, isOpen, ...restProps }: ModalClo
   const closeLabel = label ?? t('common.close');
 
   return (
-    <Button {...restProps} isSymmetrical color="tertiary" onClick={onClose} aria-expanded={isOpen} aria-controls={id}>
+    <ControlButton
+      {...restProps}
+      isSymmetrical
+      size="xlarge"
+      onClick={onClose}
+      aria-expanded={isOpen}
+      aria-controls={id}
+    >
       <Icon name="close" />
       <VisuallyHidden>{closeLabel}</VisuallyHidden>
-    </Button>
+    </ControlButton>
   );
 };
 
