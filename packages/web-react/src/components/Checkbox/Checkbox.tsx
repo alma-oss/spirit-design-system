@@ -39,14 +39,16 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
     validationText,
   });
 
+  const formFieldMode = isItem ? FormFieldModes.ITEM : FormFieldModes.INLINE;
+
   return (
     <PropsProvider
       value={{
-        formFieldMode: isItem ? FormFieldModes.ITEM : FormFieldModes.INLINE,
         isDisabled,
-        isLabelHidden,
         isRequired,
-        validationState,
+        label: { formFieldMode, isLabelHidden },
+        helperText: { formFieldMode },
+        validationText: { validationState },
       }}
     >
       <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>

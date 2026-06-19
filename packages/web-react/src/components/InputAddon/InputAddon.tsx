@@ -15,7 +15,7 @@ const defaultProps: Partial<SpiritInputAddonProps> = {
 };
 
 const InputAddon = <E extends ElementType = 'div'>(props: SpiritInputAddonProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>({}, 'inputAddon');
   const propsWithDefaults = {
     ...defaultProps,
     size: contextProps.size ?? defaultProps.size,

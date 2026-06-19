@@ -7,6 +7,7 @@ import type {
   ComponentButtonColorNamesType,
   EmotionColorNamesType,
   PolymorphicComponentProps,
+  PropsContextProps,
   RouterLinkProps,
   SingleOrResponsive,
   SizesDictionaryType,
@@ -19,7 +20,7 @@ export type ButtonColor<C> = ComponentButtonColorNamesType<C> | EmotionColorName
 /** @deprecated "SizesDictionaryType" fallback will be removed in the next major version. */
 export type ButtonSize<S> = keyof S extends never ? SizesDictionaryType : ButtonSizesType | S;
 
-export interface ButtonBaseProps extends ChildrenProps, StyleProps, ClickEvents {}
+export interface ButtonBaseProps extends ChildrenProps, StyleProps, ClickEvents, PropsContextProps {}
 
 /** ===== STYLE API ===== */
 export interface ButtonStyleProps<C = void, S = void> extends ButtonBaseProps {

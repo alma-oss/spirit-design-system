@@ -80,4 +80,25 @@ describe('Button', () => {
 
     expect(screen.getByRole('button')).not.toHaveAttribute('validationState');
   });
+
+  it('should consume the default `button` namespace from context', () => {
+    render(
+      <PropsProvider value={{ button: { color: 'secondary' } }}>
+        <Button>Button</Button>
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText('Button')).toHaveClass('Button--secondary');
+  });
+
+  it('should override the default namespace via the propsContext prop', () => {
+    render(
+      <PropsProvider value={{ button: { color: 'secondary' }, header: { color: 'tertiary' } }}>
+        <Button propsContext="header">Button</Button>
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText('Button')).toHaveClass('Button--tertiary');
+    expect(screen.getByText('Button')).not.toHaveClass('Button--secondary');
+  });
 });

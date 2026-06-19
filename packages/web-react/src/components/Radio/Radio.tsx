@@ -28,14 +28,17 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
   const { styleProps, props: otherProps } = useStyleProps(restProps);
 
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
+  const formFieldMode = isItem ? FormFieldModes.ITEM : FormFieldModes.INLINE;
 
   return (
     <PropsProvider
       value={{
-        formFieldMode: isItem ? FormFieldModes.ITEM : FormFieldModes.INLINE,
         isDisabled,
-        isLabelHidden,
-        validationState,
+        label: { formFieldMode, isLabelHidden },
+        helperText: { formFieldMode },
+        // Radio does not render a `ValidationText`, but the state is forwarded for
+        // consistency with the other field providers (and any future validation UI).
+        validationText: { validationState },
       }}
     >
       <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>

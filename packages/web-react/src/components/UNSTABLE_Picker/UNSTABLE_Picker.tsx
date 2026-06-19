@@ -207,11 +207,10 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     <PropsProvider
       value={{
         isDisabled,
-        isLabelHidden,
         isRequired,
-        size,
-        variant,
-        validationState,
+        label: { isLabelHidden },
+        inputContainer: { size, variant, validationState },
+        validationText: { validationState },
       }}
     >
       <PickerContextProvider value={{ size, tagDescriptionId }}>

@@ -23,8 +23,13 @@ const _Button = <E extends ElementType = 'button', C = void, S = void>(
   props: SpiritButtonProps<E, C, S>,
   ref: PolymorphicRef<E>,
 ) => {
-  const { children, ...restFromProps } = props;
-  const contextProps = useContextProps<Partial<SpiritButtonProps<E, C, S>>>();
+  const { children, propsContext, ...restFromProps } = props;
+  // Pass `propsContext` so a per-instance override can replace the default `button` namespace.
+  // Only named keys are read from context, so global props (e.g. `isRequired`) never reach the DOM.
+  const contextProps = useContextProps<Partial<SpiritButtonProps<E, C, S>>>(
+    { ...restFromProps, propsContext } as Partial<SpiritButtonProps<E, C, S>>,
+    'button',
+  );
   const propsWithDefaults = {
     ...defaultProps,
     ...restFromProps,

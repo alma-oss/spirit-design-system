@@ -40,7 +40,13 @@ const Item = <E extends ElementType = 'button'>(props: SpiritItemProps<E>): JSX.
     (selectionDecorator === ITEM_SELECTION_DECORATOR_ICON || selectionDecorator === ITEM_SELECTION_DECORATOR_BOTH);
 
   return (
-    <PropsProvider value={{ formFieldMode: FormFieldModes.ITEM, isDisabled }}>
+    <PropsProvider
+      value={{
+        isDisabled,
+        label: { formFieldMode: FormFieldModes.ITEM },
+        helperText: { formFieldMode: FormFieldModes.ITEM },
+      }}
+    >
       <Component {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && Component === 'button'}>
         {iconName && (
           <span className={classNames(classProps.icon.root, classProps.icon.start)}>

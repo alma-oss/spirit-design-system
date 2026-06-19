@@ -15,7 +15,7 @@ const defaultProps: Partial<SpiritHelperTextProps> = {
 };
 
 const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>({}, 'helperText');
   const propsWithDefaults = {
     ...defaultProps,
     isDisabled: contextProps.isDisabled,

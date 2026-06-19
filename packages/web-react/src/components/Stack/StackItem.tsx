@@ -20,10 +20,9 @@ const _StackItem = <E extends ElementType = 'div'>(
   props: SpiritStackItemProps<E>,
   ref: PolymorphicRef<E>,
 ): JSX.Element => {
-  const { elementType: propsElementType } = props;
-  const contextProps = useContextProps(props);
+  const contextProps = useContextProps(props, 'stackItem');
   const { children, elementType: contextElementType, ...restProps } = contextProps;
-  const elementType = propsElementType ?? contextElementType ?? defaultProps.elementType;
+  const elementType = contextElementType ?? defaultProps.elementType;
 
   const Component = elementType as ElementType;
 
@@ -37,7 +36,7 @@ const _StackItem = <E extends ElementType = 'div'>(
 
   return (
     <Component {...otherProps} {...mergedStyleProps} ref={ref}>
-      <PropsProvider value={{ elementType: null }}>{children}</PropsProvider>
+      <PropsProvider value={{ stackItem: { elementType: null } }}>{children}</PropsProvider>
     </Component>
   );
 };

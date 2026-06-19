@@ -29,6 +29,17 @@ export interface ChildrenProps {
   children?: ReactNode | string;
 }
 
+export interface PropsContextProps {
+  /**
+   * Overrides the component's default namespace when reading props from the surrounding
+   * `PropsProvider`.
+   *
+   * Analogous to Adobe Spectrum's `slot` prop: it addresses which namespace of the context
+   * value this instance should consume.
+   */
+  propsContext?: string;
+}
+
 export interface ElementTypeProps<E extends ElementType = 'div'> {
   /**
    * The HTML element or React element used to render the component.

@@ -38,7 +38,7 @@ describe('Label', () => {
 
   it('should use context isRequired and isLabelHidden when no direct prop', () => {
     render(
-      <PropsProvider value={{ isRequired: true, isLabelHidden: true }}>
+      <PropsProvider value={{ isRequired: true, label: { isLabelHidden: true } }}>
         <Label>Text</Label>
       </PropsProvider>,
     );

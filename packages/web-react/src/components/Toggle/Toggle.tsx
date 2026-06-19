@@ -47,11 +47,11 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
   return (
     <PropsProvider
       value={{
-        formFieldMode: FormFieldModes.INLINE,
         isDisabled,
-        isLabelHidden,
         isRequired,
-        validationState,
+        label: { formFieldMode: FormFieldModes.INLINE, isLabelHidden },
+        helperText: { formFieldMode: FormFieldModes.INLINE },
+        validationText: { validationState },
       }}
     >
       <div style={styleProps.style} className={classNames(classProps.root, styleProps.className)}>
