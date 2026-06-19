@@ -59,14 +59,6 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
     transform-origin: var(--#{$_tooltip-placement-prefix}-arrow-transform-origin, bottom center);
 }
 
-.TooltipPopover__close {
-    @include reset.button();
-
-    width: theme.$close-button-size;
-    height: theme.$close-button-size;
-    color: color-scheme.color();
-}
-
 .TooltipPopover--dismissible {
     --tooltip-max-width: calc(#{theme.$max-width} + #{theme.$gap} + #{theme.$close-button-size});
 
