@@ -7,7 +7,6 @@
 @use '@tokens' as tokens;
 @use '../../tools/color-scheme';
 @use '../../tools/placement';
-@use '../../tools/reset';
 @use '../../tools/svg';
 @use '../../tools/typography';
 @use 'theme';
@@ -57,14 +56,6 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
     mask-size: cover;
     rotate: z var(--#{$_tooltip-placement-prefix}-arrow-rotate, 0deg);
     transform-origin: var(--#{$_tooltip-placement-prefix}-arrow-transform-origin, bottom center);
-}
-
-.TooltipPopover__close {
-    @include reset.button();
-
-    width: theme.$close-button-size;
-    height: theme.$close-button-size;
-    color: color-scheme.color();
 }
 
 .TooltipPopover--dismissible {

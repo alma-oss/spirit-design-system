@@ -18,7 +18,6 @@ export const useTooltipStyleProps = (props: UseTooltipStyleProps) => {
   const tooltipClass = useClassNamePrefix('Tooltip');
   const tooltipPopoverClass = `${tooltipClass}Popover`;
   const arrowClass = `${tooltipPopoverClass}__arrow`;
-  const closeButtonClass = `${tooltipPopoverClass}__close`;
   const dismissibleClass = `${tooltipPopoverClass}--dismissible`;
   const colorSchemeClass = getColorSchemeClassName({
     color: DEFAULT_TOOLTIP_COLOR,
@@ -36,7 +35,6 @@ export const useTooltipStyleProps = (props: UseTooltipStyleProps) => {
         [hiddenClass]: isHiddenClass,
       }),
       arrowClassName: arrowClass,
-      closeButtonClassName: closeButtonClass,
     },
     props: modifiedProps,
   };
