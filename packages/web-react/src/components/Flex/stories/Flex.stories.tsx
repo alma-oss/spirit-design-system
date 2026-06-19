@@ -42,6 +42,12 @@ const meta: Meta<typeof Flex> = {
         defaultValue: { summary: 'div' },
       },
     },
+    isInline: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
     isWrapping: {
       control: 'boolean',
       table: {
@@ -63,6 +69,7 @@ const meta: Meta<typeof Flex> = {
     alignmentY: undefined,
     direction: DirectionExtended.HORIZONTAL,
     elementType: 'div',
+    isInline: false,
     isWrapping: false,
     spacing: {
       mobile: 'space-600',
