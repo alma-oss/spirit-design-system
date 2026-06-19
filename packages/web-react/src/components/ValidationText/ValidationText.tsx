@@ -17,7 +17,7 @@ const defaultProps: Partial<SpiritValidationTextProps> = {
 };
 
 const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTextProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
+  const contextProps = useContextProps<Partial<FormFieldContextValue>>({}, 'validationText');
   const propsWithDefaults = {
     ...defaultProps,
     isDisabled: contextProps.isDisabled,

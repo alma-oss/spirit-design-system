@@ -59,8 +59,8 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
     <PropsProvider
       value={{
         isDisabled,
-        isLabelHidden,
-        validationState,
+        label: { isLabelHidden },
+        validationText: { validationState },
       }}
     >
       <div {...styleProps} {...otherProps}>
