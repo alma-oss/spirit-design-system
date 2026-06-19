@@ -5,9 +5,10 @@ import React, { type MutableRefObject, useRef } from 'react';
 import { Transition, type TransitionStatus } from 'react-transition-group';
 import { useI18n, useStyleProps } from '../../hooks';
 import { type SpiritToastBarProps } from '../../types';
+import { ControlButton } from '../ControlButton';
 import { Icon } from '../Icon';
+import { VisuallyHidden } from '../VisuallyHidden';
 import { DEFAULT_TOAST_COLOR, ICON_BOX_SIZE, TRANSITIONING_STYLES, TRANSITION_DURATION } from './constants';
-import ToastCloseButton from './ToastCloseButton';
 import { useToastBarStyleProps } from './useToastBarStyleProps';
 import { useToastIcon } from './useToastIcon';
 
@@ -50,13 +51,12 @@ const ToastBar = (props: SpiritToastBarProps) => {
               {(hasIcon || iconName) && <Icon name={toastIconName} boxSize={ICON_BOX_SIZE} />}
               <div className={classProps.content}>{children}</div>
             </div>
-            <ToastCloseButton
-              id={id}
-              isOpen={isOpen}
-              closeLabel={resolvedCloseLabel}
-              onClose={onClose}
-              isDismissible={isDismissible}
-            />
+            {isDismissible && onClose && (
+              <ControlButton isSymmetrical size="large" onClick={onClose} aria-expanded={isOpen} aria-controls={id}>
+                <Icon name="close" />
+                <VisuallyHidden>{resolvedCloseLabel}</VisuallyHidden>
+              </ControlButton>
+            )}
           </div>
         </div>
       )}
