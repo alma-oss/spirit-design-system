@@ -14,11 +14,11 @@ import {
   Text,
   Toggle,
 } from '../../../src/components';
-import { UNSTABLE_File, UNSTABLE_FileImagePreview } from '../../../src/components/UNSTABLE_File';
-import { useFilePreviewUrl } from '../../../src/components/UNSTABLE_File/demo/useFilePreviewUrl';
-import { UNSTABLE_FileUpload } from '../../../src/components/UNSTABLE_FileUpload';
-import { useFileQueue } from '../../../src/components/UNSTABLE_FileUpload/demo/useFileQueue';
-import type { UnstableFileUploadAttachmentsItem } from '../../../src/components/UNSTABLE_FileUpload/types';
+import { File as FileAttachment, FileImagePreview } from '../../../src/components/File';
+import { useFilePreviewUrl } from '../../../src/components/File/demo/useFilePreviewUrl';
+import { FileUpload } from '../../../src/components/FileUpload';
+import { useFileQueue } from '../../../src/components/FileUpload/demo/useFileQueue';
+import type { FileUploadAttachmentsItem } from '../../../src/components/FileUpload/types';
 
 const ASPECT_RATIO = 1; // 1:1
 const MIN_WIDTH_PX = 100;
@@ -60,7 +60,7 @@ export const FileUploaderWithModalImageCrop = () => {
     [],
   );
 
-  const items: UnstableFileUploadAttachmentsItem[] = useMemo(
+  const items: FileUploadAttachmentsItem[] = useMemo(
     () =>
       Array.from(fileQueue.entries(), ([id, value]) => ({
         id,
@@ -237,21 +237,20 @@ export const FileUploaderWithModalImageCrop = () => {
           isChecked={simulateError}
           inputPosition="start"
           onChange={(e) => setSimulateError(e.target.checked)}
-          isFluid
         />
         <Text textColor="emotion-informative-basic">
           💡 Drop multiple files to see validation; drop them again while the error is visible to trigger a shake
           animation.
         </Text>
       </Box>
-      <UNSTABLE_FileUpload
+      <FileUpload
         id="file-uploader-react-image-crop"
         accept=".png,image/jpeg"
         helperText="Max file size is 10 MB"
         isUploadDisabled={items.length > 0}
         label="Label"
-        labelText="or drag and drop here"
-        linkText="Upload your file"
+        inputUploadText="or drag and drop here"
+        inputDragAndDropText="Upload your file"
         name="attachments"
         onFilesSelected={onFilesSelected}
         {...(fileError && { validationState: 'danger' })}
@@ -276,7 +275,7 @@ export const FileUploaderWithModalImageCrop = () => {
           const isError = uploadState === 'error';
 
           return (
-            <UNSTABLE_File
+            <FileAttachment
               key={item.id}
               id={item.id}
               isDisabled={isUploading}
@@ -307,7 +306,7 @@ export const FileUploaderWithModalImageCrop = () => {
               })}
               {...(item.previewUrl && {
                 previewSlot: (
-                  <UNSTABLE_FileImagePreview
+                  <FileImagePreview
                     imageObjectFit="contain"
                     imagePreview={item.previewUrl}
                     label={`Preview of ${item.label}`}
