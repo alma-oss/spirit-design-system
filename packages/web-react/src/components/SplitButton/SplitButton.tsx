@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { ComponentButtonColors, Sizes } from '../../constants';
-import { PropsProvider } from '../../context';
+import { ContextPropsProvider } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type SpiritSplitButtonProps } from '../../types';
 import { useSplitButtonStyleProps } from './useSplitButtonStyleProps';
@@ -20,11 +20,16 @@ const SplitButton = (props: SpiritSplitButtonProps) => {
   const { styleProps, props: otherProps } = useStyleProps(restProps);
 
   return (
-    <PropsProvider value={{ color, size, isDisabled }}>
+    <ContextPropsProvider
+      value={{
+        isDisabled,
+        button: { color, size },
+      }}
+    >
       <div {...styleProps} {...otherProps} className={classNames(classProps, styleProps.className)}>
         {children}
       </div>
-    </PropsProvider>
+    </ContextPropsProvider>
   );
 };
 

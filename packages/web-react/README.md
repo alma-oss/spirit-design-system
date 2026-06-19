@@ -275,6 +275,109 @@ If the component sets a value for any of these attributes, the value passed in w
 
 Most components also accept native HTML attributes based on the component's element type.
 
+## Shared and Inherited Props
+
+Some components pick up prop values from an ancestor component instead of (or in addition to) props passed to
+them directly — for example, a `Label` nested inside a `TextField` automatically becomes disabled when the
+`TextField` is disabled, without you passing `isDisabled` to the `Label` yourself. This section explains the two
+mechanisms that make this work — namespaced props via `ContextPropsProvider`, and group contexts — and how they combine.
+
+### Global Props
+
+A fixed set of props — `isDisabled`, `isRequired`, `validationState` — cascade to **every** descendant component
+automatically, regardless of that component's namespace (see below). Set them once on a producer component (eg.
+`TextFieldBase`) and every nested `Label`, `HelperText`, `ValidationText`, etc. picks them up without further wiring.
+
+### Namespaced Props
+
+Most other shared props are namespaced: a producer component provides a `ContextPropsProvider` value keyed by the
+namespace of the component it targets, and only a consumer reading that namespace receives it.
+
+```tsx
+<ContextPropsProvider value={{ label: { isLabelHidden: true } }}>
+  {/* Only a component reading the "label" namespace picks up isLabelHidden */}
+</ContextPropsProvider>
+```
+
+Each consuming component's default namespace is the camelCase form of its own name — e.g. `Label` reads from
+`label`, `HelperText` from `helperText`, `InputContainer` from `inputContainer`, and `StackItem` from `stackItem`.
+
+### Overriding the Namespace with `propsContext`
+
+A consumer can read from a different namespace than its default by passing the `propsContext` prop, which lets
+you re-target props intended for a different component:
+
+```tsx
+<ContextPropsProvider value={{ button: { color: 'danger' } }}>
+  {/* This Label reads the "button" namespace instead of its default "label" namespace */}
+  <Label propsContext="button">Delete</Label>
+</ContextPropsProvider>
+```
+
+### Precedence
+
+Where more than one source provides the same prop, precedence is (low to high):
+
+**global props < namespace props < direct props**
+
+```tsx
+<ContextPropsProvider value={{ isDisabled: true, label: { isLabelHidden: true } }}>
+  {/* isLabelHidden is inherited, but the direct prop below still wins over isDisabled */}
+  <Label isDisabled={false}>Name</Label>
+</ContextPropsProvider>
+```
+
+### How `ContextPropsProvider` Merges Values
+
+`ContextPropsProvider` cascades into whatever its parent already provided — it does not replace the whole inherited
+value. Top-level (global) keys replace the inherited value for that key; namespace keys merge one level deep with
+the inherited namespace object, so a nested provider can add or override individual namespace props without
+clobbering sibling props set by an ancestor. Setting a key to `null`/`undefined` removes it from what's inherited.
+
+```tsx
+<ContextPropsProvider value={{ label: { isLabelHidden: true } }}>
+  <ContextPropsProvider value={{ label: { isStretched: true } }}>
+    {/* Label here inherits both isLabelHidden and isStretched */}
+  </ContextPropsProvider>
+</ContextPropsProvider>
+```
+
+### Group Contexts (Shared Values Outside a Namespace)
+
+A handful of related components share a single value — such as `size` or `elementType` — through a dedicated
+"group" context rather than through `ContextPropsProvider`. Unlike the closed set of global props, joining a group
+context is opt-in and open: any component, including one defined in your own app, can join a group simply by
+reading the context itself and merging the value in.
+
+```tsx
+import { FormFieldsContext } from '@alma-oss/spirit-web-react';
+import { useContext } from 'react';
+
+const { size } = useContext(FormFieldsContext) ?? {};
+```
+
+A producer provides one or more group contexts at once via the `Provider` helper:
+
+```tsx
+<Provider values={[[FormFieldsContext, { size: 'small' }]]}>{/* descendants can read FormFieldsContext */}</Provider>
+```
+
+The existing group contexts are:
+
+| Context                 | Shared value  | Consumers                                       | Producers                                    |
+| ----------------------- | ------------- | ----------------------------------------------- | -------------------------------------------- |
+| `FormFieldsContext`     | `size`        | `InputAddon`, `InputContainer`, `ControlButton` | `TextFieldBase`, `UNSTABLE_Picker`, `Select` |
+| `InlineElementsContext` | `elementType` | `Label`, `HelperText`, `ValidationText`         | `Item`, `Stack`, `StackItem`                 |
+| `ListItemsContext`      | `elementType` | `Item`, `StackItem`                             | `Stack`, `StackItem`                         |
+
+`InlineElementsContext` and `ListItemsContext` both carry an `elementType`, but they answer different questions
+and are read by disjoint components: `ListItemsContext` tells `Item`/`StackItem` what element type _they_
+themselves should render as (e.g. `li` inside a `ul` `Stack`), while `InlineElementsContext` tells their inline
+content (`Label`, `HelperText`, `ValidationText`) what element type _it_ should render as (e.g. `span` inside an
+`Item`). They're kept separate so a component never accidentally reads a value that was meant for its own
+descendants — `Item` provides `InlineElementsContext: { elementType: 'span' }` for its children without also
+seeing that value applied to itself.
+
 ## Testing
 
 ### End-to-End Testing

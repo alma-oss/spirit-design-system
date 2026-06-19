@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import React, { type ReactElement } from 'react';
-import { PropsProvider } from '../../src/context';
+import { ContextPropsProvider } from '../../src/context';
 
 type TestProps = Record<string, unknown>;
 type RenderComponent = (props?: TestProps) => ReactElement;
@@ -94,14 +94,14 @@ export const formFieldContextPropsTest = ({
 }: FormFieldContextPropsTestConfig) => {
   describe('prop priority (1. direct props, 2. context, 3. defaultProps)', () => {
     it('should use context isDisabled when no direct prop', () => {
-      render(<PropsProvider value={{ isDisabled: true }}>{renderComponent()}</PropsProvider>);
+      render(<ContextPropsProvider value={{ isDisabled: true }}>{renderComponent()}</ContextPropsProvider>);
       const element = screen.getByText(text);
 
       expect(element.className).toContain(`${classNamePrefix}--disabled`);
     });
 
     it('should use direct isDisabled over context (direct props override context)', () => {
-      render(<PropsProvider value={{ isDisabled: true }}>{renderComponent({ isDisabled: false })}</PropsProvider>);
+      render(<ContextPropsProvider value={{ isDisabled: true }}>{renderComponent({ isDisabled: false })}</ContextPropsProvider>);
       const element = screen.getByText(text);
 
       expect(element.className).not.toContain(`${classNamePrefix}--disabled`);

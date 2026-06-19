@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { FillVariants } from '../../../constants';
-import { PropsProvider } from '../../../context';
+import { ContextPropsProvider } from '../../../context';
 import InputContainer from '../InputContainer';
 
 describe('InputContainer', () => {
@@ -35,11 +35,11 @@ describe('InputContainer', () => {
 
   it('should apply variant class from context when prop is not provided', () => {
     render(
-      <PropsProvider value={{ variant: FillVariants.OUTLINE }}>
+      <ContextPropsProvider value={{ inputContainer: { variant: FillVariants.OUTLINE } }}>
         <InputContainer>
           <span>Content</span>
         </InputContainer>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText('Content').parentElement).toHaveClass('InputContainer--outline');
@@ -47,11 +47,11 @@ describe('InputContainer', () => {
 
   it('should prefer direct variant prop over context variant', () => {
     render(
-      <PropsProvider value={{ variant: FillVariants.OUTLINE }}>
+      <ContextPropsProvider value={{ inputContainer: { variant: FillVariants.OUTLINE } }}>
         <InputContainer variant={FillVariants.FILL}>
           <span>Content</span>
         </InputContainer>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     const element = screen.getByText('Content').parentElement;
@@ -76,11 +76,11 @@ describe('InputContainer', () => {
 
   it('should apply size class from context when prop is not provided', () => {
     render(
-      <PropsProvider value={{ size: 'large' }}>
+      <ContextPropsProvider value={{ inputContainer: { size: 'large' } }}>
         <InputContainer>
           <span>Content</span>
         </InputContainer>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText('Content').parentElement).toHaveClass('InputContainer', 'InputContainer--large');
@@ -88,11 +88,11 @@ describe('InputContainer', () => {
 
   it('should prefer direct size prop over context size', () => {
     render(
-      <PropsProvider value={{ size: 'large' }}>
+      <ContextPropsProvider value={{ inputContainer: { size: 'large' } }}>
         <InputContainer size="medium">
           <span>Content</span>
         </InputContainer>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText('Content').parentElement).toHaveClass('InputContainer', 'InputContainer--medium');
@@ -111,11 +111,11 @@ describe('InputContainer', () => {
 
   it('should apply disabled class from context when prop is not provided', () => {
     render(
-      <PropsProvider value={{ isDisabled: true }}>
+      <ContextPropsProvider value={{ isDisabled: true }}>
         <InputContainer>
           <span>Content</span>
         </InputContainer>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText('Content').parentElement).toHaveClass('InputContainer', 'InputContainer--disabled');
@@ -123,11 +123,11 @@ describe('InputContainer', () => {
 
   it('should prefer direct isDisabled prop over context', () => {
     render(
-      <PropsProvider value={{ isDisabled: true }}>
+      <ContextPropsProvider value={{ isDisabled: true }}>
         <InputContainer isDisabled={false}>
           <span>Content</span>
         </InputContainer>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText('Content').parentElement).not.toHaveClass('InputContainer--disabled');
@@ -145,11 +145,11 @@ describe('InputContainer', () => {
 
   it('should apply validation state class from context when prop is not provided', () => {
     render(
-      <PropsProvider value={{ validationState: 'danger' }}>
+      <ContextPropsProvider value={{ inputContainer: { validationState: 'danger' } }}>
         <InputContainer>
           <span>Content</span>
         </InputContainer>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText('Content').parentElement).toHaveClass('InputContainer', 'InputContainer--danger');
@@ -157,11 +157,11 @@ describe('InputContainer', () => {
 
   it('should prefer direct validationState prop over context', () => {
     render(
-      <PropsProvider value={{ validationState: 'danger' }}>
+      <ContextPropsProvider value={{ inputContainer: { validationState: 'danger' } }}>
         <InputContainer validationState="warning">
           <span>Content</span>
         </InputContainer>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText('Content').parentElement).toHaveClass('InputContainer--warning');

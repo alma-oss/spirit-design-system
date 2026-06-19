@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ChangeEvent, type ForwardedRef, forwardRef, useState } from 'react';
-import { PropsProvider } from '../../context';
+import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritToggleProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -47,7 +47,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
   };
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         isDisabled,
         isLabelHidden,
@@ -96,7 +96,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
           )}
         </Stack>
       </Flex>
-    </PropsProvider>
+    </ContextPropsProvider>
   );
 };
 

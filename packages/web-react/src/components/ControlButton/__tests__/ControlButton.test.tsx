@@ -10,7 +10,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { PropsProvider } from '../../../context';
+import { ContextPropsProvider } from '../../../context';
 import ControlButton from '../ControlButton';
 
 describe('ControlButton', () => {
@@ -44,9 +44,9 @@ describe('ControlButton', () => {
 
   it('should apply size class from context when prop is not provided', () => {
     render(
-      <PropsProvider value={{ size: 'large' }}>
+      <ContextPropsProvider value={{ controlButton: { size: 'large' } }}>
         <ControlButton />
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByRole('button')).toHaveClass('ControlButton', 'ControlButton--large');
@@ -54,9 +54,9 @@ describe('ControlButton', () => {
 
   it('should prefer direct size prop over context size', () => {
     render(
-      <PropsProvider value={{ size: 'large' }}>
+      <ContextPropsProvider value={{ controlButton: { size: 'large' } }}>
         <ControlButton size="small" />
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByRole('button')).toHaveClass('ControlButton--small');

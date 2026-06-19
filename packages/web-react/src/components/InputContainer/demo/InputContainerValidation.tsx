@@ -1,5 +1,5 @@
 import React from 'react';
-import { PropsProvider } from '../../../context';
+import { ContextPropsProvider } from '../../../context';
 import { Label } from '../../Label';
 import { Stack } from '../../Stack';
 import { ValidationText } from '../../ValidationText';
@@ -8,7 +8,9 @@ import InputContainer from '../InputContainer';
 const InputContainerValidation = () => (
   <>
     <Stack spacing="space-400">
-      <PropsProvider value={{ validationState: 'warning' }}>
+      <ContextPropsProvider
+        value={{ inputContainer: { validationState: 'warning' }, validationText: { validationState: 'warning' } }}
+      >
         <Label htmlFor="input-container-warning">Warning</Label>
         <InputContainer>
           <input
@@ -20,11 +22,13 @@ const InputContainerValidation = () => (
           />
         </InputContainer>
         <ValidationText id="input-container-warning-validation-text" validationText="Validation text" />
-      </PropsProvider>
+      </ContextPropsProvider>
     </Stack>
 
     <Stack spacing="space-400">
-      <PropsProvider value={{ validationState: 'danger' }}>
+      <ContextPropsProvider
+        value={{ inputContainer: { validationState: 'danger' }, validationText: { validationState: 'danger' } }}
+      >
         <Label htmlFor="input-container-danger">Danger</Label>
         <InputContainer>
           <input
@@ -40,7 +44,7 @@ const InputContainerValidation = () => (
           id="input-container-danger-validation-text"
           validationText={['Validation text', 'Second validation text']}
         />
-      </PropsProvider>
+      </ContextPropsProvider>
     </Stack>
   </>
 );

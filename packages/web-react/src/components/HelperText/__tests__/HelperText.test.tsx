@@ -8,7 +8,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { PropsProvider } from '../../../context';
+import { ContextPropsProvider } from '../../../context';
 import HelperText from '../HelperText';
 
 describe('HelperText', () => {
@@ -30,9 +30,9 @@ describe('HelperText', () => {
 
   it('should use context elementType when no direct prop', () => {
     render(
-      <PropsProvider value={{ elementType: 'span' }}>
+      <ContextPropsProvider value={{ helperText: { elementType: 'span' } }}>
         <HelperText helperText={helperText} />
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText(helperText).localName).toBe('span');
@@ -40,9 +40,9 @@ describe('HelperText', () => {
 
   it('should use direct elementType over context', () => {
     render(
-      <PropsProvider value={{ elementType: 'span' }}>
+      <ContextPropsProvider value={{ helperText: { elementType: 'span' } }}>
         <HelperText elementType="p" helperText={helperText} />
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText(helperText).localName).toBe('p');

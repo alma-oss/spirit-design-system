@@ -33,7 +33,7 @@ Do **not** use `elementType="label"` when the addon wraps a `<button>` or `<a>`.
 InputAddon resolves `size` in this order:
 
 1. direct `size` prop on InputAddon
-2. `size` from parent `PropsProvider` context (e.g. from TextFieldBase)
+2. `size` from parent `ContextPropsProvider` context (e.g. from TextFieldBase)
 3. default `medium` size
 
 This keeps addon content visually aligned with the surrounding InputContainer in composed form-field components,

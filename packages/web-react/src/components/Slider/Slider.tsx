@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type CSSProperties, type ChangeEvent, type FormEvent, type ForwardedRef, forwardRef } from 'react';
-import { PropsProvider } from '../../context';
+import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritSliderProps } from '../../types';
 import { HelperText } from '../HelperText';
@@ -57,7 +57,7 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
   };
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         isDisabled,
         isLabelHidden,
@@ -93,7 +93,7 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
           )}
         </Stack>
       </div>
-    </PropsProvider>
+    </ContextPropsProvider>
   );
 };
 

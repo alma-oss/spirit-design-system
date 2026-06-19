@@ -2,7 +2,7 @@
 
 import classNames from 'classnames';
 import React, { type ElementType } from 'react';
-import { PropsProvider } from '../../context';
+import { ContextPropsProvider } from '../../context';
 import { useI18n, useStyleProps } from '../../hooks';
 import { CloseButton } from '../CloseButton';
 import { ControlButton } from '../ControlButton';
@@ -71,7 +71,7 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
   const Component = elementType as ElementType;
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         isDisabled,
         validationState,
@@ -117,7 +117,7 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
           </>
         )}
       </Component>
-    </PropsProvider>
+    </ContextPropsProvider>
   );
 };
 

@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { PropsProvider } from '../../../context';
+import { validHtmlAttributesTest } from '@local/tests';
+import { ContextPropsProvider } from '../../../context';
 import InputAddon from '../InputAddon';
 
 describe('InputAddon', () => {
@@ -29,11 +30,11 @@ describe('InputAddon', () => {
 
   it('should apply size class from context when prop is not provided', () => {
     render(
-      <PropsProvider value={{ size: 'large' }}>
+      <ContextPropsProvider value={{ inputAddon: { size: 'large' } }}>
         <InputAddon>
           <span>Addon content</span>
         </InputAddon>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     expect(screen.getByText('Addon content').parentElement).toHaveClass('InputAddon--large');
@@ -41,11 +42,11 @@ describe('InputAddon', () => {
 
   it('should prefer direct size prop over context size', () => {
     render(
-      <PropsProvider value={{ size: 'large' }}>
+      <ContextPropsProvider value={{ inputAddon: { size: 'large' } }}>
         <InputAddon size="medium">
           <span>Addon content</span>
         </InputAddon>
-      </PropsProvider>,
+      </ContextPropsProvider>,
     );
 
     const { parentElement } = screen.getByText('Addon content');

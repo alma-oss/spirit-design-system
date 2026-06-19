@@ -218,7 +218,7 @@ and [escape hatches][readme-escape-hatches].
 
 ## Custom Component
 
-Toggle classes are fabricated using `useToggleStyleProps` hook. You can use it to create your own custom Toggle component. Compose the standalone [HelperText][readme-helper-text], [Label][readme-label], [InputDetails][readme-input-details], and [ValidationText][readme-validation-text] components with `PropsProvider`, `useAriaDescribedBy`, and `useAriaDetails` for correct styling and accessibility.
+Toggle classes are fabricated using `useToggleStyleProps` hook. You can use it to create your own custom Toggle component. Compose the standalone [HelperText][readme-helper-text], [Label][readme-label], [InputDetails][readme-input-details], and [ValidationText][readme-validation-text] components with `ContextPropsProvider`, `useAriaDescribedBy`, and `useAriaDetails` for correct styling and accessibility.
 
 ```tsx
 const CustomToggle = (props: SpiritToggleProps): JSX.Element => {
@@ -284,7 +284,7 @@ const CustomToggle = (props: SpiritToggleProps): JSX.Element => {
   const rootStyleProps = mergeStyleProps(Flex, { styleProps });
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         formFieldMode: FormFieldModes.INLINE,
         isDisabled,
@@ -303,7 +303,7 @@ const CustomToggle = (props: SpiritToggleProps): JSX.Element => {
         {input}
         <div>{content}</div>
       </Flex>
-    </PropsProvider>
+    </ContextPropsProvider>
   );
 };
 ```

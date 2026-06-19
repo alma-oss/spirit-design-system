@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ForwardedRef, forwardRef } from 'react';
-import { PropsProvider } from '../../context';
+import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -82,7 +82,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
   );
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         isDisabled,
         isItem,
@@ -106,7 +106,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
           <Stack spacing="space-400">{checkboxText}</Stack>
         </Flex>
       )}
-    </PropsProvider>
+    </ContextPropsProvider>
   );
 };
 

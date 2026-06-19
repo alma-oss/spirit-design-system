@@ -176,7 +176,7 @@ and [escape hatches][readme-escape-hatches].
 
 ## Custom Component
 
-Checkbox classes are fabricated using `useCheckboxStyleProps` hook. You can use it to create your own custom Checkbox component. Compose the standalone [HelperText][readme-helper-text], [Label][readme-label], and [ValidationText][readme-validation-text] components with `PropsProvider`, `useAriaDescribedBy`, and `useAriaDetails` for correct styling and accessibility.
+Checkbox classes are fabricated using `useCheckboxStyleProps` hook. You can use it to create your own custom Checkbox component. Compose the standalone [HelperText][readme-helper-text], [Label][readme-label], and [ValidationText][readme-validation-text] components with `ContextPropsProvider`, `useAriaDescribedBy`, and `useAriaDetails` for correct styling and accessibility.
 
 ```tsx
 const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
@@ -243,7 +243,7 @@ const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
   const rootStyleProps = mergeStyleProps(Flex, { styleProps });
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         formFieldMode: isItem ? FormFieldModes.ITEM : FormFieldModes.INLINE,
         isDisabled,
@@ -262,7 +262,7 @@ const CustomCheckbox = (props: SpiritCheckboxProps): JSX.Element => {
           <div>{content}</div>
         </Flex>
       )}
-    </PropsProvider>
+    </ContextPropsProvider>
   );
 };
 ```

@@ -2,7 +2,7 @@
 
 import React, { type ElementType, type ForwardedRef, type RefObject, forwardRef } from 'react';
 import { Sizes } from '../../constants';
-import { PropsProvider } from '../../context';
+import { FormFieldsContext, ContextPropsProvider, UniversalProvider } from '../../context';
 import { useAriaDescribedBy, useI18n, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritTextFieldBaseProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -95,7 +95,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
   ) : null;
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         isDisabled,
         isLabelHidden,
@@ -105,43 +105,45 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
         validationState,
       }}
     >
-      <Stack {...mergeStyleProps(Stack, { styleProps })} spacing="space-400">
-        <Label htmlFor={id}>{label}</Label>
-        <InputContainer>
-          {startAddon}
-          <Component
-            {...inputProps}
-            {...ariaDescribedByProp}
-            disabled={isDisabled}
-            id={id}
-            required={isRequired}
-            size={inputWidth}
-            type={nativeInputType}
-            ref={ref as RefObject<HTMLInputElement & HTMLTextAreaElement>}
-          />
-          {endAddon}
-          {passwordToggleElement}
-        </InputContainer>
-        {counterProps ? (
-          <Flex isWrapping={false} alignmentX="space-between" alignmentY="top">
-            {hasTextContent ? (
-              <Stack spacing="space-400">
-                {/* In counter layout, put validation first so the status message stays visually closest to the counter row. */}
-                {validationTextElement}
-                {helperTextElement}
-              </Stack>
-            ) : null}
-            {counterElement}
-          </Flex>
-        ) : (
-          <>
-            {/* Without counter, keep the default field text flow: helper first, then validation. */}
-            {helperTextElement}
-            {validationTextElement}
-          </>
-        )}
-      </Stack>
-    </PropsProvider>
+      <UniversalProvider values={[[FormFieldsContext, { size }]]}>
+        <Stack {...mergeStyleProps(Stack, { styleProps })} spacing="space-400">
+          <Label htmlFor={id}>{label}</Label>
+          <InputContainer>
+            {startAddon}
+            <Component
+              {...inputProps}
+              {...ariaDescribedByProp}
+              disabled={isDisabled}
+              id={id}
+              required={isRequired}
+              size={inputWidth}
+              type={nativeInputType}
+              ref={ref as RefObject<HTMLInputElement & HTMLTextAreaElement>}
+            />
+            {endAddon}
+            {passwordToggleElement}
+          </InputContainer>
+          {counterProps ? (
+            <Flex isWrapping={false} alignmentX="space-between" alignmentY="top">
+              {hasTextContent ? (
+                <Stack spacing="space-400">
+                  {/* In counter layout, put validation first so the status message stays visually closest to the counter row. */}
+                  {validationTextElement}
+                  {helperTextElement}
+                </Stack>
+              ) : null}
+              {counterElement}
+            </Flex>
+          ) : (
+            <>
+              {/* Without counter, keep the default field text flow: helper first, then validation. */}
+              {helperTextElement}
+              {validationTextElement}
+            </>
+          )}
+        </Stack>
+      </UniversalProvider>
+    </ContextPropsProvider>
   );
 };
 

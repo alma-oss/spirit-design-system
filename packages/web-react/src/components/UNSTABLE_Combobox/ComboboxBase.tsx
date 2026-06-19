@@ -10,7 +10,7 @@ import React, {
   useMemo,
   useRef,
 } from 'react';
-import { PropsProvider } from '../../context';
+import { FormFieldsContext, ContextPropsProvider, UniversalProvider } from '../../context';
 import { useAriaDescribedBy, useI18n, useSelectionGridKeyboard, useStyleProps } from '../../hooks';
 import { replaceTranslationParams } from '../../translations';
 import { Dropdown } from '../Dropdown';
@@ -254,7 +254,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
   const shouldRenderOptions = optionsRole != null && (hasOptionChildren || hasEmptyState);
 
   return (
-    <PropsProvider
+    <ContextPropsProvider
       value={{
         isDisabled,
         isLabelHidden,
@@ -264,7 +264,12 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
         validationState,
       }}
     >
-      <ComboboxContextProvider value={{ size, tagDescriptionId }}>
+      <UniversalProvider
+        values={[
+          [FormFieldsContext, { size }],
+          [ComboboxContext, { size, tagDescriptionId }],
+        ]}
+      >
         <div
           ref={rootRef}
           {...styleProps}
@@ -361,8 +366,8 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
             {tagDescriptionText}
           </span>
         </div>
-      </ComboboxContextProvider>
-    </PropsProvider>
+      </UniversalProvider>
+    </ContextPropsProvider>
   );
 };
 

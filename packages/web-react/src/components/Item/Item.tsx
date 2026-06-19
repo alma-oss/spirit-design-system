@@ -1,7 +1,13 @@
 'use client';
 
-import React, { type ElementType } from 'react';
-import { PropsProvider, useContextProps } from '../../context';
+import React, { type ElementType, useContext } from 'react';
+import {
+  InlineElementsContext,
+  ListItemsContext,
+  ContextPropsProvider,
+  UniversalProvider,
+  useContextProps,
+} from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type FormFieldContextValue, type SpiritItemProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -34,23 +40,34 @@ const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Ele
   const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps, otherProps });
 
   return (
-    <PropsProvider value={{ elementType: 'span', isDisabled, isItem: true }}>
-      <Component {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && Component === 'button'}>
-        {startSlot && (
-          <span className={classProps.slot} role="presentation">
-            {startSlot}
+    <ContextPropsProvider
+      value={{
+        isDisabled,
+        label: { isStretched: true },
+      }}
+    >
+      <UniversalProvider values={[[InlineElementsContext, { elementType: 'span' }]]}>
+        <Component
+          {...filterDOMProps(otherProps)}
+          {...mergedStyleProps}
+          disabled={!!isDisabled && Component === 'button'}
+        >
+          {startSlot && (
+            <span className={classProps.slot} role="presentation">
+              {startSlot}
+            </span>
+          )}
+          <span className={classProps.content} role="presentation">
+            {children}
           </span>
-        )}
-        <span className={classProps.content} role="presentation">
-          {children}
-        </span>
-        {endSlot && (
-          <span className={classProps.slot} role="presentation">
-            {endSlot}
-          </span>
-        )}
-      </Component>
-    </PropsProvider>
+          {endSlot && (
+            <span className={classProps.slot} role="presentation">
+              {endSlot}
+            </span>
+          )}
+        </Component>
+      </UniversalProvider>
+    </ContextPropsProvider>
   );
 };
 
