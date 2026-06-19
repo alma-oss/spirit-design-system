@@ -37,6 +37,7 @@
 
 .Card--boxed {
     --#{tokens.$css-variable-prefix}card-padding: #{theme.$padding}; // 5.d
+    --#{tokens.$css-variable-prefix}card-padding-condensed: #{theme.$padding-condensed}; // 5.d
 
     border: theme.$border-width theme.$border-style theme.$border-color;
     border-radius: theme.$border-radius;
@@ -117,6 +118,11 @@
             &:has(.CardMedia:not(:only-child)) {
                 --#{tokens.$css-variable-prefix}card-padding-shorthand: 0 0
                     var(--#{tokens.$css-variable-prefix}card-padding);
+            }
+
+            &:has(.CardFooterDivider + .CardFooter--hasDivider) {
+                --#{tokens.$css-variable-prefix}card-padding-shorthand: 0 0
+                    var(--#{tokens.$css-variable-prefix}card-padding-condensed);
             }
         }
 

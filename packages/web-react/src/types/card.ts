@@ -86,6 +86,7 @@ export type SpiritCardTitleProps<E extends ElementType = 'h4'> = PolymorphicComp
 // CardFooter types
 export interface CardFooterProps {
   alignmentX?: CardAlignmentXType;
+  hasDivider?: boolean;
 }
 
 export interface SpiritCardFooterProps extends CardFooterProps, ChildrenProps, StyleProps {}

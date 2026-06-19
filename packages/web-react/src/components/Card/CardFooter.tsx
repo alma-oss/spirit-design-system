@@ -13,14 +13,17 @@ const defaultProps: Partial<SpiritCardFooterProps> = {
 
 const CardFooter = (props: SpiritCardFooterProps) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { children, alignmentX, ...restProps } = propsWithDefaults;
-  const { classProps } = useCardStyleProps({ footerAlignmentX: alignmentX });
+  const { children, alignmentX, hasDivider, ...restProps } = propsWithDefaults;
+  const { classProps } = useCardStyleProps({ footerAlignmentX: alignmentX, hasDivider });
   const { styleProps, props: otherProps } = useStyleProps(restProps);
 
   return (
-    <footer {...otherProps} className={classNames(classProps.footer, styleProps.className)} style={styleProps.style}>
-      {children}
-    </footer>
+    <>
+      {hasDivider && <div className={classProps.footerDivider} aria-hidden="true" />}
+      <footer {...otherProps} className={classNames(classProps.footer, styleProps.className)} style={styleProps.style}>
+        {children}
+      </footer>
+    </>
   );
 };
 

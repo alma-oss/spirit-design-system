@@ -58,7 +58,11 @@
             --#{tokens.$css-variable-prefix}card-media-canvas-width: auto;
             --#{tokens.$css-variable-prefix}card-media-canvas-height: var(--spirit-card-media-size);
             --#{tokens.$css-variable-prefix}card-media-align-self: initial;
-            --#{tokens.$css-variable-prefix}card-media-margin-bottom: #{theme.$gap-dense};
+            --#{tokens.$css-variable-prefix}card-media-margin-bottom: #{theme.$gap};
+        }
+
+        .Card--#{$infix}vertical:has(.CardLogo) > .CardMedia {
+            --#{tokens.$css-variable-prefix}card-media-margin-bottom: #{theme.$media-vertical-margin-bottom};
         }
 
         :is(.Card--#{$infix}horizontal, .Card--#{$infix}horizontalReversed) > .CardMedia {

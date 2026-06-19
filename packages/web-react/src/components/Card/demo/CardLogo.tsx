@@ -17,9 +17,7 @@ const CardLogoDemo = () => (
     <Card>
       <CardMedia>{MEDIA_IMAGE}</CardMedia>
       <CardLogo>
-        <PartnerLogo size="medium" hasSafeArea>
-          {LOGO}
-        </PartnerLogo>
+        <PartnerLogo>{LOGO}</PartnerLogo>
       </CardLogo>
       <CardBody>
         <CardEyebrow>Logo</CardEyebrow>
@@ -34,10 +32,10 @@ const CardLogoDemo = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter>
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </CardFooter>
@@ -46,9 +44,7 @@ const CardLogoDemo = () => (
     <Card isBoxed>
       <CardMedia>{MEDIA_IMAGE}</CardMedia>
       <CardLogo>
-        <PartnerLogo size="medium" hasSafeArea>
-          {LOGO}
-        </PartnerLogo>
+        <PartnerLogo>{LOGO}</PartnerLogo>
       </CardLogo>
       <CardBody>
         <CardEyebrow>Logo</CardEyebrow>
@@ -63,10 +59,10 @@ const CardLogoDemo = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter>
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </CardFooter>
@@ -75,9 +71,7 @@ const CardLogoDemo = () => (
     <Card isBoxed>
       <CardMedia isExpanded>{MEDIA_IMAGE}</CardMedia>
       <CardLogo>
-        <PartnerLogo size="medium" hasSafeArea>
-          {LOGO}
-        </PartnerLogo>
+        <PartnerLogo>{LOGO}</PartnerLogo>
       </CardLogo>
       <CardBody>
         <CardEyebrow>Logo</CardEyebrow>
@@ -92,10 +86,10 @@ const CardLogoDemo = () => (
         {/* End user content */}
       </CardBody>
       <CardFooter>
-        <ButtonLink href="#" color="primary">
+        <ButtonLink href="#" color="primary" size="small">
           Primary
         </ButtonLink>
-        <ButtonLink href="#" color="secondary">
+        <ButtonLink href="#" color="secondary" size="small">
           Secondary
         </ButtonLink>
       </CardFooter>

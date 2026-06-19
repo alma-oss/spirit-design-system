@@ -35,4 +35,16 @@ describe('CardFooter', () => {
 
     expect(screen.getByRole('contentinfo')).toHaveTextContent('Hello World');
   });
+
+  it('should render divider div when hasDivider is true', () => {
+    const { container } = render(<CardFooter hasDivider />);
+
+    expect(container.querySelector('.CardFooterDivider')).toBeInTheDocument();
+  });
+
+  it('should apply hasDivider class to footer when hasDivider is true', () => {
+    render(<CardFooter hasDivider />);
+
+    expect(screen.getByRole('contentinfo')).toHaveClass('CardFooter--hasDivider');
+  });
 });

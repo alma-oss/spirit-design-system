@@ -418,11 +418,29 @@ following `alignmentX` prop values:
 - `center`
 - `right`
 
+### Footer Divider
+
+Use the `hasDivider` prop to render a full-width divider line above the footer. The divider spans the entire
+width of the card (including padding areas in boxed cards) and automatically adds spacing between the divider and the
+footer content.
+
+```tsx
+<Card isBoxed>
+  {/* CardMedia, CardBody, etc. */}
+  <CardFooter hasDivider>
+    <Tag isSubtle size="small">
+      2 open positions
+    </Tag>
+  </CardFooter>
+</Card>
+```
+
 ### API
 
-| Name         | Type                                          | Default | Required | Description                 |
-| ------------ | --------------------------------------------- | ------- | -------- | --------------------------- |
-| `alignmentX` | [AlignmentX dictionary][dictionary-alignment] | `left`  | ✕        | Alignment of footer content |
+| Name         | Type                                          | Default | Required | Description                                        |
+| ------------ | --------------------------------------------- | ------- | -------- | -------------------------------------------------- |
+| `alignmentX` | [AlignmentX dictionary][dictionary-alignment] | `left`  | ✕        | Alignment of footer content                        |
+| `hasDivider` | `bool`                                        | `false` | ✕        | Renders a full-width divider line above the footer |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -577,8 +595,8 @@ When you put it all together:
     <p>Card content</p>
   </CardBody>
   <CardFooter>
-    <ButtonLink>Primary</ButtonLink>
-    <ButtonLink>Secondary</ButtonLink>
+    <ButtonLink size="small">Primary</ButtonLink>
+    <ButtonLink size="small">Secondary</ButtonLink>
   </CardFooter>
 </Card>
 ```
