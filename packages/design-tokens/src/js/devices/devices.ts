@@ -11,10 +11,6 @@ export const formFieldSmallRadiusDesktop = '0.5rem';
 export const formFieldSmallRadiusMobile = '0.5rem';
 export const formFieldSmallRadiusTablet = '0.5rem';
 
-export const fontSizeBaseDesktop = '16px';
-export const fontSizeBaseMobile = '16px';
-export const fontSizeBaseTablet = '16px';
-
 export const buttonLargeRadiusDesktop = '624.9375rem';
 export const buttonLargeRadiusMobile = '624.9375rem';
 export const buttonLargeRadiusTablet = '624.9375rem';
@@ -35,19 +31,83 @@ export const typographyBodyXsmallFontSizeDesktop = '0.75rem';
 export const typographyBodyXsmallFontSizeMobile = '0.75rem';
 export const typographyBodyXsmallFontSizeTablet = '0.75rem';
 
+export const typographyLabelXsmallFontSizeDesktop = '0.75rem';
+export const typographyLabelXsmallFontSizeMobile = '0.75rem';
+export const typographyLabelXsmallFontSizeTablet = '0.75rem';
+
+export const typographyActionSmallFontSizeDesktop = '0.875rem';
+export const typographyActionSmallFontSizeMobile = '0.875rem';
+export const typographyActionSmallFontSizeTablet = '0.875rem';
+
 export const typographyBodySmallFontSizeDesktop = '0.875rem';
 export const typographyBodySmallFontSizeMobile = '0.875rem';
 export const typographyBodySmallFontSizeTablet = '0.875rem';
+
+export const typographyCaptionFontSizeDesktop = '0.875rem';
+export const typographyCaptionFontSizeMobile = '0.875rem';
+export const typographyCaptionFontSizeTablet = '0.875rem';
+
+export const typographyCodeSmallFontSizeDesktop = '0.875rem';
+export const typographyCodeSmallFontSizeMobile = '0.875rem';
+export const typographyCodeSmallFontSizeTablet = '0.875rem';
+
+export const typographyEyebrowFontSizeDesktop = '0.875rem';
+export const typographyEyebrowFontSizeMobile = '0.875rem';
+export const typographyEyebrowFontSizeTablet = '0.875rem';
+
+export const typographyInputSmallFontSizeDesktop = '0.875rem';
+export const typographyInputSmallFontSizeMobile = '0.875rem';
+export const typographyInputSmallFontSizeTablet = '0.875rem';
+
+export const typographyLabelSmallFontSizeDesktop = '0.875rem';
+export const typographyLabelSmallFontSizeMobile = '0.875rem';
+export const typographyLabelSmallFontSizeTablet = '0.875rem';
+
+export const fontSizeBaseDesktop = '16px';
+export const fontSizeBaseMobile = '16px';
+export const fontSizeBaseTablet = '16px';
+
+export const typographyActionMediumFontSizeDesktop = '1rem';
+export const typographyActionMediumFontSizeMobile = '1rem';
+export const typographyActionMediumFontSizeTablet = '1rem';
 
 export const typographyBodyMediumFontSizeDesktop = '1rem';
 export const typographyBodyMediumFontSizeMobile = '1rem';
 export const typographyBodyMediumFontSizeTablet = '1rem';
 
+export const typographyCodeMediumFontSizeDesktop = '1rem';
+export const typographyCodeMediumFontSizeMobile = '1rem';
+export const typographyCodeMediumFontSizeTablet = '1rem';
+
+export const typographyInputMediumFontSizeDesktop = '1rem';
+export const typographyInputMediumFontSizeMobile = '1rem';
+export const typographyInputMediumFontSizeTablet = '1rem';
+
+export const typographyLabelMediumFontSizeDesktop = '1rem';
+export const typographyLabelMediumFontSizeMobile = '1rem';
+export const typographyLabelMediumFontSizeTablet = '1rem';
+
+export const typographyActionLargeFontSizeDesktop = '1.125rem';
+export const typographyActionLargeFontSizeMobile = '1.125rem';
+export const typographyActionLargeFontSizeTablet = '1.125rem';
+
 export const typographyBodyLargeFontSizeDesktop = '1.125rem';
 export const typographyBodyLargeFontSizeMobile = '1.125rem';
 export const typographyBodyLargeFontSizeTablet = '1.125rem';
 
+export const typographyCodeLargeFontSizeDesktop = '1.125rem';
+export const typographyCodeLargeFontSizeMobile = '1.125rem';
+export const typographyCodeLargeFontSizeTablet = '1.125rem';
+
 export const typographyHeadingXsmallFontSizeMobile = '1.125rem';
+
+export const typographyInputLargeFontSizeDesktop = '1.125rem';
+export const typographyInputLargeFontSizeMobile = '1.125rem';
+export const typographyInputLargeFontSizeTablet = '1.125rem';
+
+export const typographyLabelLargeFontSizeDesktop = '1.125rem';
+export const typographyLabelLargeFontSizeMobile = '1.125rem';
+export const typographyLabelLargeFontSizeTablet = '1.125rem';
 
 export const typographyBodyXlargeFontSizeDesktop = '1.25rem';
 export const typographyBodyXlargeFontSizeMobile = '1.25rem';
@@ -57,6 +117,10 @@ export const typographyHeadingSmallFontSizeMobile = '1.25rem';
 
 export const typographyHeadingXsmallFontSizeDesktop = '1.25rem';
 export const typographyHeadingXsmallFontSizeTablet = '1.25rem';
+
+export const typographyLabelXlargeFontSizeDesktop = '1.25rem';
+export const typographyLabelXlargeFontSizeMobile = '1.25rem';
+export const typographyLabelXlargeFontSizeTablet = '1.25rem';
 
 export const typographyHeadingMediumFontSizeMobile = '1.5rem';
 
@@ -73,40 +137,116 @@ export const typographyHeadingXlargeFontSizeMobile = '2.25rem';
 export const typographyHeadingLargeFontSizeDesktop = '2.5rem';
 export const typographyHeadingLargeFontSizeTablet = '2.5rem';
 
+export const typographyDisplaySmallFontSizeDesktop = '3rem';
+export const typographyDisplaySmallFontSizeMobile = '3rem';
+export const typographyDisplaySmallFontSizeTablet = '3rem';
+
 export const typographyHeadingXlargeFontSizeDesktop = '3rem';
 export const typographyHeadingXlargeFontSizeTablet = '3rem';
 
-export const typographyBodyXsmallLineHeightDesktop = '1rem';
-export const typographyBodyXsmallLineHeightMobile = '1rem';
-export const typographyBodyXsmallLineHeightTablet = '1rem';
+export const typographyDisplayMediumFontSizeDesktop = '3.5rem';
+export const typographyDisplayMediumFontSizeMobile = '3.5rem';
+export const typographyDisplayMediumFontSizeTablet = '3.5rem';
+
+export const typographyDisplayLargeFontSizeDesktop = '4.75rem';
+export const typographyDisplayLargeFontSizeMobile = '4.75rem';
+export const typographyDisplayLargeFontSizeTablet = '4.75rem';
+
+export const typographyActionSmallLineHeightDesktop = '1rem';
+export const typographyActionSmallLineHeightMobile = '1rem';
+export const typographyActionSmallLineHeightTablet = '1rem';
+
+export const typographyLabelSmallLineHeightDesktop = '1rem';
+export const typographyLabelSmallLineHeightMobile = '1rem';
+export const typographyLabelSmallLineHeightTablet = '1rem';
+
+export const typographyLabelXsmallLineHeightDesktop = '1rem';
+export const typographyLabelXsmallLineHeightMobile = '1rem';
+export const typographyLabelXsmallLineHeightTablet = '1rem';
+
+export const typographyActionMediumLineHeightDesktop = '1.25rem';
+export const typographyActionMediumLineHeightMobile = '1.25rem';
+export const typographyActionMediumLineHeightTablet = '1.25rem';
 
 export const typographyBodySmallLineHeightDesktop = '1.25rem';
 export const typographyBodySmallLineHeightMobile = '1.25rem';
 export const typographyBodySmallLineHeightTablet = '1.25rem';
 
-export const typographyBodyMediumLineHeightDesktop = '1.375rem';
-export const typographyBodyMediumLineHeightMobile = '1.375rem';
-export const typographyBodyMediumLineHeightTablet = '1.375rem';
+export const typographyBodyXsmallLineHeightDesktop = '1.25rem';
+export const typographyBodyXsmallLineHeightMobile = '1.25rem';
+export const typographyBodyXsmallLineHeightTablet = '1.25rem';
+
+export const typographyCaptionLineHeightDesktop = '1.25rem';
+export const typographyCaptionLineHeightMobile = '1.25rem';
+export const typographyCaptionLineHeightTablet = '1.25rem';
+
+export const typographyCodeSmallLineHeightDesktop = '1.25rem';
+export const typographyCodeSmallLineHeightMobile = '1.25rem';
+export const typographyCodeSmallLineHeightTablet = '1.25rem';
+
+export const typographyEyebrowLineHeightDesktop = '1.25rem';
+export const typographyEyebrowLineHeightMobile = '1.25rem';
+export const typographyEyebrowLineHeightTablet = '1.25rem';
+
+export const typographyInputSmallLineHeightDesktop = '1.25rem';
+export const typographyInputSmallLineHeightMobile = '1.25rem';
+export const typographyInputSmallLineHeightTablet = '1.25rem';
+
+export const typographyLabelMediumLineHeightDesktop = '1.25rem';
+export const typographyLabelMediumLineHeightMobile = '1.25rem';
+export const typographyLabelMediumLineHeightTablet = '1.25rem';
 
 export const typographyHeadingXsmallLineHeightMobile = '1.375rem';
 
-export const typographyBodyLargeLineHeightDesktop = '1.5rem';
-export const typographyBodyLargeLineHeightMobile = '1.5rem';
-export const typographyBodyLargeLineHeightTablet = '1.5rem';
+export const typographyActionLargeLineHeightDesktop = '1.5rem';
+export const typographyActionLargeLineHeightMobile = '1.5rem';
+export const typographyActionLargeLineHeightTablet = '1.5rem';
+
+export const typographyBodyMediumLineHeightDesktop = '1.5rem';
+export const typographyBodyMediumLineHeightMobile = '1.5rem';
+export const typographyBodyMediumLineHeightTablet = '1.5rem';
+
+export const typographyCodeMediumLineHeightDesktop = '1.5rem';
+export const typographyCodeMediumLineHeightMobile = '1.5rem';
+export const typographyCodeMediumLineHeightTablet = '1.5rem';
 
 export const typographyHeadingSmallLineHeightMobile = '1.5rem';
 
 export const typographyHeadingXsmallLineHeightDesktop = '1.5rem';
 export const typographyHeadingXsmallLineHeightTablet = '1.5rem';
 
-export const typographyBodyXlargeLineHeightDesktop = '1.75rem';
-export const typographyBodyXlargeLineHeightMobile = '1.75rem';
-export const typographyBodyXlargeLineHeightTablet = '1.75rem';
+export const typographyInputMediumLineHeightDesktop = '1.5rem';
+export const typographyInputMediumLineHeightMobile = '1.5rem';
+export const typographyInputMediumLineHeightTablet = '1.5rem';
+
+export const typographyLabelLargeLineHeightDesktop = '1.5rem';
+export const typographyLabelLargeLineHeightMobile = '1.5rem';
+export const typographyLabelLargeLineHeightTablet = '1.5rem';
+
+export const typographyBodyLargeLineHeightDesktop = '1.75rem';
+export const typographyBodyLargeLineHeightMobile = '1.75rem';
+export const typographyBodyLargeLineHeightTablet = '1.75rem';
+
+export const typographyCodeLargeLineHeightDesktop = '1.75rem';
+export const typographyCodeLargeLineHeightMobile = '1.75rem';
+export const typographyCodeLargeLineHeightTablet = '1.75rem';
 
 export const typographyHeadingMediumLineHeightMobile = '1.75rem';
 
 export const typographyHeadingSmallLineHeightDesktop = '1.75rem';
 export const typographyHeadingSmallLineHeightTablet = '1.75rem';
+
+export const typographyInputLargeLineHeightDesktop = '1.75rem';
+export const typographyInputLargeLineHeightMobile = '1.75rem';
+export const typographyInputLargeLineHeightTablet = '1.75rem';
+
+export const typographyLabelXlargeLineHeightDesktop = '1.75rem';
+export const typographyLabelXlargeLineHeightMobile = '1.75rem';
+export const typographyLabelXlargeLineHeightTablet = '1.75rem';
+
+export const typographyBodyXlargeLineHeightDesktop = '2rem';
+export const typographyBodyXlargeLineHeightMobile = '2rem';
+export const typographyBodyXlargeLineHeightTablet = '2rem';
 
 export const typographyHeadingLargeLineHeightMobile = '2.375rem';
 
@@ -118,8 +258,32 @@ export const typographyHeadingXlargeLineHeightMobile = '2.625rem';
 export const typographyHeadingLargeLineHeightDesktop = '3rem';
 export const typographyHeadingLargeLineHeightTablet = '3rem';
 
+export const typographyDisplaySmallLineHeightDesktop = '3.5rem';
+export const typographyDisplaySmallLineHeightMobile = '3.5rem';
+export const typographyDisplaySmallLineHeightTablet = '3.5rem';
+
 export const typographyHeadingXlargeLineHeightDesktop = '3.625rem';
 export const typographyHeadingXlargeLineHeightTablet = '3.625rem';
+
+export const typographyDisplayMediumLineHeightDesktop = '4.25rem';
+export const typographyDisplayMediumLineHeightMobile = '4.25rem';
+export const typographyDisplayMediumLineHeightTablet = '4.25rem';
+
+export const typographyDisplayLargeLineHeightDesktop = '5.375rem';
+export const typographyDisplayLargeLineHeightMobile = '5.375rem';
+export const typographyDisplayLargeLineHeightTablet = '5.375rem';
+
+export const typographyActionLargeLetterSpacingDesktop = 0;
+export const typographyActionLargeLetterSpacingMobile = 0;
+export const typographyActionLargeLetterSpacingTablet = 0;
+
+export const typographyActionMediumLetterSpacingDesktop = 0;
+export const typographyActionMediumLetterSpacingMobile = 0;
+export const typographyActionMediumLetterSpacingTablet = 0;
+
+export const typographyActionSmallLetterSpacingDesktop = 0;
+export const typographyActionSmallLetterSpacingMobile = 0;
+export const typographyActionSmallLetterSpacingTablet = 0;
 
 export const typographyBodyLargeLetterSpacingDesktop = 0;
 export const typographyBodyLargeLetterSpacingMobile = 0;
@@ -141,6 +305,38 @@ export const typographyBodyXsmallLetterSpacingDesktop = 0;
 export const typographyBodyXsmallLetterSpacingMobile = 0;
 export const typographyBodyXsmallLetterSpacingTablet = 0;
 
+export const typographyCaptionLetterSpacingDesktop = 0;
+export const typographyCaptionLetterSpacingMobile = 0;
+export const typographyCaptionLetterSpacingTablet = 0;
+
+export const typographyCodeLargeLetterSpacingDesktop = 0;
+export const typographyCodeLargeLetterSpacingMobile = 0;
+export const typographyCodeLargeLetterSpacingTablet = 0;
+
+export const typographyCodeMediumLetterSpacingDesktop = 0;
+export const typographyCodeMediumLetterSpacingMobile = 0;
+export const typographyCodeMediumLetterSpacingTablet = 0;
+
+export const typographyCodeSmallLetterSpacingDesktop = 0;
+export const typographyCodeSmallLetterSpacingMobile = 0;
+export const typographyCodeSmallLetterSpacingTablet = 0;
+
+export const typographyDisplayLargeLetterSpacingDesktop = 0;
+export const typographyDisplayLargeLetterSpacingMobile = 0;
+export const typographyDisplayLargeLetterSpacingTablet = 0;
+
+export const typographyDisplayMediumLetterSpacingDesktop = 0;
+export const typographyDisplayMediumLetterSpacingMobile = 0;
+export const typographyDisplayMediumLetterSpacingTablet = 0;
+
+export const typographyDisplaySmallLetterSpacingDesktop = 0;
+export const typographyDisplaySmallLetterSpacingMobile = 0;
+export const typographyDisplaySmallLetterSpacingTablet = 0;
+
+export const typographyEyebrowLetterSpacingDesktop = 0;
+export const typographyEyebrowLetterSpacingMobile = 0;
+export const typographyEyebrowLetterSpacingTablet = 0;
+
 export const typographyHeadingLargeLetterSpacingDesktop = 0;
 export const typographyHeadingLargeLetterSpacingMobile = 0;
 export const typographyHeadingLargeLetterSpacingTablet = 0;
@@ -160,6 +356,38 @@ export const typographyHeadingXlargeLetterSpacingTablet = 0;
 export const typographyHeadingXsmallLetterSpacingDesktop = 0;
 export const typographyHeadingXsmallLetterSpacingMobile = 0;
 export const typographyHeadingXsmallLetterSpacingTablet = 0;
+
+export const typographyInputLargeLetterSpacingDesktop = 0;
+export const typographyInputLargeLetterSpacingMobile = 0;
+export const typographyInputLargeLetterSpacingTablet = 0;
+
+export const typographyInputMediumLetterSpacingDesktop = 0;
+export const typographyInputMediumLetterSpacingMobile = 0;
+export const typographyInputMediumLetterSpacingTablet = 0;
+
+export const typographyInputSmallLetterSpacingDesktop = 0;
+export const typographyInputSmallLetterSpacingMobile = 0;
+export const typographyInputSmallLetterSpacingTablet = 0;
+
+export const typographyLabelLargeLetterSpacingDesktop = 0;
+export const typographyLabelLargeLetterSpacingMobile = 0;
+export const typographyLabelLargeLetterSpacingTablet = 0;
+
+export const typographyLabelMediumLetterSpacingDesktop = 0;
+export const typographyLabelMediumLetterSpacingMobile = 0;
+export const typographyLabelMediumLetterSpacingTablet = 0;
+
+export const typographyLabelSmallLetterSpacingDesktop = 0;
+export const typographyLabelSmallLetterSpacingMobile = 0;
+export const typographyLabelSmallLetterSpacingTablet = 0;
+
+export const typographyLabelXlargeLetterSpacingDesktop = 0;
+export const typographyLabelXlargeLetterSpacingMobile = 0;
+export const typographyLabelXlargeLetterSpacingTablet = 0;
+
+export const typographyLabelXsmallLetterSpacingDesktop = 0;
+export const typographyLabelXsmallLetterSpacingMobile = 0;
+export const typographyLabelXsmallLetterSpacingTablet = 0;
 
 export const formFields = {
   large: {
@@ -185,12 +413,6 @@ export const formFields = {
   },
 };
 
-export const fontSizeBases = {
-  desktop: fontSizeBaseDesktop,
-  mobile: fontSizeBaseMobile,
-  tablet: fontSizeBaseTablet,
-};
-
 export const buttons = {
   large: {
     radius: {
@@ -213,12 +435,6 @@ export const buttons = {
       tablet: buttonSmallRadiusTablet,
     },
   },
-};
-
-export const breakpoints = {
-  mobile: breakpointMobile,
-  tablet: breakpointTablet,
-  desktop: breakpointDesktop,
 };
 
 export const typographys = {
@@ -309,6 +525,286 @@ export const typographys = {
       },
     },
   },
+  label: {
+    xsmall: {
+      fontSize: {
+        desktop: typographyLabelXsmallFontSizeDesktop,
+        mobile: typographyLabelXsmallFontSizeMobile,
+        tablet: typographyLabelXsmallFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyLabelXsmallLineHeightDesktop,
+        mobile: typographyLabelXsmallLineHeightMobile,
+        tablet: typographyLabelXsmallLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyLabelXsmallLetterSpacingDesktop,
+        mobile: typographyLabelXsmallLetterSpacingMobile,
+        tablet: typographyLabelXsmallLetterSpacingTablet,
+      },
+    },
+    small: {
+      fontSize: {
+        desktop: typographyLabelSmallFontSizeDesktop,
+        mobile: typographyLabelSmallFontSizeMobile,
+        tablet: typographyLabelSmallFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyLabelSmallLineHeightDesktop,
+        mobile: typographyLabelSmallLineHeightMobile,
+        tablet: typographyLabelSmallLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyLabelSmallLetterSpacingDesktop,
+        mobile: typographyLabelSmallLetterSpacingMobile,
+        tablet: typographyLabelSmallLetterSpacingTablet,
+      },
+    },
+    medium: {
+      fontSize: {
+        desktop: typographyLabelMediumFontSizeDesktop,
+        mobile: typographyLabelMediumFontSizeMobile,
+        tablet: typographyLabelMediumFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyLabelMediumLineHeightDesktop,
+        mobile: typographyLabelMediumLineHeightMobile,
+        tablet: typographyLabelMediumLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyLabelMediumLetterSpacingDesktop,
+        mobile: typographyLabelMediumLetterSpacingMobile,
+        tablet: typographyLabelMediumLetterSpacingTablet,
+      },
+    },
+    large: {
+      fontSize: {
+        desktop: typographyLabelLargeFontSizeDesktop,
+        mobile: typographyLabelLargeFontSizeMobile,
+        tablet: typographyLabelLargeFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyLabelLargeLineHeightDesktop,
+        mobile: typographyLabelLargeLineHeightMobile,
+        tablet: typographyLabelLargeLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyLabelLargeLetterSpacingDesktop,
+        mobile: typographyLabelLargeLetterSpacingMobile,
+        tablet: typographyLabelLargeLetterSpacingTablet,
+      },
+    },
+    xlarge: {
+      fontSize: {
+        desktop: typographyLabelXlargeFontSizeDesktop,
+        mobile: typographyLabelXlargeFontSizeMobile,
+        tablet: typographyLabelXlargeFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyLabelXlargeLineHeightDesktop,
+        mobile: typographyLabelXlargeLineHeightMobile,
+        tablet: typographyLabelXlargeLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyLabelXlargeLetterSpacingDesktop,
+        mobile: typographyLabelXlargeLetterSpacingMobile,
+        tablet: typographyLabelXlargeLetterSpacingTablet,
+      },
+    },
+  },
+  action: {
+    small: {
+      fontSize: {
+        desktop: typographyActionSmallFontSizeDesktop,
+        mobile: typographyActionSmallFontSizeMobile,
+        tablet: typographyActionSmallFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyActionSmallLineHeightDesktop,
+        mobile: typographyActionSmallLineHeightMobile,
+        tablet: typographyActionSmallLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyActionSmallLetterSpacingDesktop,
+        mobile: typographyActionSmallLetterSpacingMobile,
+        tablet: typographyActionSmallLetterSpacingTablet,
+      },
+    },
+    medium: {
+      fontSize: {
+        desktop: typographyActionMediumFontSizeDesktop,
+        mobile: typographyActionMediumFontSizeMobile,
+        tablet: typographyActionMediumFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyActionMediumLineHeightDesktop,
+        mobile: typographyActionMediumLineHeightMobile,
+        tablet: typographyActionMediumLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyActionMediumLetterSpacingDesktop,
+        mobile: typographyActionMediumLetterSpacingMobile,
+        tablet: typographyActionMediumLetterSpacingTablet,
+      },
+    },
+    large: {
+      fontSize: {
+        desktop: typographyActionLargeFontSizeDesktop,
+        mobile: typographyActionLargeFontSizeMobile,
+        tablet: typographyActionLargeFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyActionLargeLineHeightDesktop,
+        mobile: typographyActionLargeLineHeightMobile,
+        tablet: typographyActionLargeLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyActionLargeLetterSpacingDesktop,
+        mobile: typographyActionLargeLetterSpacingMobile,
+        tablet: typographyActionLargeLetterSpacingTablet,
+      },
+    },
+  },
+  caption: {
+    fontSize: {
+      desktop: typographyCaptionFontSizeDesktop,
+      mobile: typographyCaptionFontSizeMobile,
+      tablet: typographyCaptionFontSizeTablet,
+    },
+    lineHeight: {
+      desktop: typographyCaptionLineHeightDesktop,
+      mobile: typographyCaptionLineHeightMobile,
+      tablet: typographyCaptionLineHeightTablet,
+    },
+    letterSpacing: {
+      desktop: typographyCaptionLetterSpacingDesktop,
+      mobile: typographyCaptionLetterSpacingMobile,
+      tablet: typographyCaptionLetterSpacingTablet,
+    },
+  },
+  code: {
+    small: {
+      fontSize: {
+        desktop: typographyCodeSmallFontSizeDesktop,
+        mobile: typographyCodeSmallFontSizeMobile,
+        tablet: typographyCodeSmallFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyCodeSmallLineHeightDesktop,
+        mobile: typographyCodeSmallLineHeightMobile,
+        tablet: typographyCodeSmallLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyCodeSmallLetterSpacingDesktop,
+        mobile: typographyCodeSmallLetterSpacingMobile,
+        tablet: typographyCodeSmallLetterSpacingTablet,
+      },
+    },
+    medium: {
+      fontSize: {
+        desktop: typographyCodeMediumFontSizeDesktop,
+        mobile: typographyCodeMediumFontSizeMobile,
+        tablet: typographyCodeMediumFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyCodeMediumLineHeightDesktop,
+        mobile: typographyCodeMediumLineHeightMobile,
+        tablet: typographyCodeMediumLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyCodeMediumLetterSpacingDesktop,
+        mobile: typographyCodeMediumLetterSpacingMobile,
+        tablet: typographyCodeMediumLetterSpacingTablet,
+      },
+    },
+    large: {
+      fontSize: {
+        desktop: typographyCodeLargeFontSizeDesktop,
+        mobile: typographyCodeLargeFontSizeMobile,
+        tablet: typographyCodeLargeFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyCodeLargeLineHeightDesktop,
+        mobile: typographyCodeLargeLineHeightMobile,
+        tablet: typographyCodeLargeLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyCodeLargeLetterSpacingDesktop,
+        mobile: typographyCodeLargeLetterSpacingMobile,
+        tablet: typographyCodeLargeLetterSpacingTablet,
+      },
+    },
+  },
+  eyebrow: {
+    fontSize: {
+      desktop: typographyEyebrowFontSizeDesktop,
+      mobile: typographyEyebrowFontSizeMobile,
+      tablet: typographyEyebrowFontSizeTablet,
+    },
+    lineHeight: {
+      desktop: typographyEyebrowLineHeightDesktop,
+      mobile: typographyEyebrowLineHeightMobile,
+      tablet: typographyEyebrowLineHeightTablet,
+    },
+    letterSpacing: {
+      desktop: typographyEyebrowLetterSpacingDesktop,
+      mobile: typographyEyebrowLetterSpacingMobile,
+      tablet: typographyEyebrowLetterSpacingTablet,
+    },
+  },
+  input: {
+    small: {
+      fontSize: {
+        desktop: typographyInputSmallFontSizeDesktop,
+        mobile: typographyInputSmallFontSizeMobile,
+        tablet: typographyInputSmallFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyInputSmallLineHeightDesktop,
+        mobile: typographyInputSmallLineHeightMobile,
+        tablet: typographyInputSmallLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyInputSmallLetterSpacingDesktop,
+        mobile: typographyInputSmallLetterSpacingMobile,
+        tablet: typographyInputSmallLetterSpacingTablet,
+      },
+    },
+    medium: {
+      fontSize: {
+        desktop: typographyInputMediumFontSizeDesktop,
+        mobile: typographyInputMediumFontSizeMobile,
+        tablet: typographyInputMediumFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyInputMediumLineHeightDesktop,
+        mobile: typographyInputMediumLineHeightMobile,
+        tablet: typographyInputMediumLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyInputMediumLetterSpacingDesktop,
+        mobile: typographyInputMediumLetterSpacingMobile,
+        tablet: typographyInputMediumLetterSpacingTablet,
+      },
+    },
+    large: {
+      fontSize: {
+        desktop: typographyInputLargeFontSizeDesktop,
+        mobile: typographyInputLargeFontSizeMobile,
+        tablet: typographyInputLargeFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyInputLargeLineHeightDesktop,
+        mobile: typographyInputLargeLineHeightMobile,
+        tablet: typographyInputLargeLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyInputLargeLetterSpacingDesktop,
+        mobile: typographyInputLargeLetterSpacingMobile,
+        tablet: typographyInputLargeLetterSpacingTablet,
+      },
+    },
+  },
   heading: {
     xsmall: {
       fontSize: {
@@ -396,4 +892,69 @@ export const typographys = {
       },
     },
   },
+  display: {
+    small: {
+      fontSize: {
+        desktop: typographyDisplaySmallFontSizeDesktop,
+        mobile: typographyDisplaySmallFontSizeMobile,
+        tablet: typographyDisplaySmallFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyDisplaySmallLineHeightDesktop,
+        mobile: typographyDisplaySmallLineHeightMobile,
+        tablet: typographyDisplaySmallLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyDisplaySmallLetterSpacingDesktop,
+        mobile: typographyDisplaySmallLetterSpacingMobile,
+        tablet: typographyDisplaySmallLetterSpacingTablet,
+      },
+    },
+    medium: {
+      fontSize: {
+        desktop: typographyDisplayMediumFontSizeDesktop,
+        mobile: typographyDisplayMediumFontSizeMobile,
+        tablet: typographyDisplayMediumFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyDisplayMediumLineHeightDesktop,
+        mobile: typographyDisplayMediumLineHeightMobile,
+        tablet: typographyDisplayMediumLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyDisplayMediumLetterSpacingDesktop,
+        mobile: typographyDisplayMediumLetterSpacingMobile,
+        tablet: typographyDisplayMediumLetterSpacingTablet,
+      },
+    },
+    large: {
+      fontSize: {
+        desktop: typographyDisplayLargeFontSizeDesktop,
+        mobile: typographyDisplayLargeFontSizeMobile,
+        tablet: typographyDisplayLargeFontSizeTablet,
+      },
+      lineHeight: {
+        desktop: typographyDisplayLargeLineHeightDesktop,
+        mobile: typographyDisplayLargeLineHeightMobile,
+        tablet: typographyDisplayLargeLineHeightTablet,
+      },
+      letterSpacing: {
+        desktop: typographyDisplayLargeLetterSpacingDesktop,
+        mobile: typographyDisplayLargeLetterSpacingMobile,
+        tablet: typographyDisplayLargeLetterSpacingTablet,
+      },
+    },
+  },
+};
+
+export const breakpoints = {
+  mobile: breakpointMobile,
+  tablet: breakpointTablet,
+  desktop: breakpointDesktop,
+};
+
+export const fontSizeBases = {
+  desktop: fontSizeBaseDesktop,
+  mobile: fontSizeBaseMobile,
+  tablet: fontSizeBaseTablet,
 };
