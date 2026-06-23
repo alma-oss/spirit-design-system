@@ -2,6 +2,7 @@ import React from 'react';
 import { DemoButtonComponentColors, DemoEmotionColors, DocsSection } from '../../../../docs';
 import { Sizes } from '../../../constants';
 import { type ButtonStyleProps } from '../../../types';
+import { Flex } from '../../Flex';
 import { Icon } from '../../Icon';
 import { VisuallyHidden } from '../../VisuallyHidden';
 import ButtonLink from '../ButtonLink';
@@ -17,7 +18,7 @@ const ButtonLinkDemoFactory = ({ ...props }: ButtonStyleProps) => {
       {sizes.map((size) => (
         <DocsSection key={size} title={`Size ${size}`} container="none" hasPadding={false}>
           {colors.map((color) => (
-            <div key={color}>
+            <Flex key={color} direction="horizontal" alignmentX="left" spacing="space-300" isWrapping>
               <ButtonLink href="#" size={size} color={color} {...props}>
                 {`Button ${color}`}
               </ButtonLink>{' '}
@@ -29,7 +30,7 @@ const ButtonLinkDemoFactory = ({ ...props }: ButtonStyleProps) => {
                 <Icon name="link" />
                 <VisuallyHidden>Link</VisuallyHidden>
               </ButtonLink>
-            </div>
+            </Flex>
           ))}
         </DocsSection>
       ))}

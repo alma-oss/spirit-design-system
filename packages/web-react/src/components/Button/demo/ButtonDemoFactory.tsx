@@ -3,6 +3,7 @@ import { DemoButtonComponentColors, DemoEmotionColors } from '../../../../docs/c
 import DocsSection from '../../../../docs/DocsSection';
 import { Sizes } from '../../../constants';
 import { type ButtonStyleProps } from '../../../types';
+import { Flex } from '../../Flex';
 import { Icon } from '../../Icon';
 import { VisuallyHidden } from '../../VisuallyHidden';
 import Button from '../Button';
@@ -18,7 +19,7 @@ const ButtonDemoFactory = ({ ...props }: ButtonStyleProps) => {
       {sizes.map((size) => (
         <DocsSection key={size} title={`Size ${size}`} container="none" hasPadding={false}>
           {colors.map((color) => (
-            <div key={color}>
+            <Flex key={color} direction="horizontal" alignmentX="left" spacing="space-300" isWrapping>
               <Button elementType="a" href="#" size={size} color={color} {...props}>
                 {`Button ${color}`}
               </Button>{' '}
@@ -30,7 +31,7 @@ const ButtonDemoFactory = ({ ...props }: ButtonStyleProps) => {
                 <Icon name="hamburger" />
                 <VisuallyHidden>Menu</VisuallyHidden>
               </Button>
-            </div>
+            </Flex>
           ))}
         </DocsSection>
       ))}
