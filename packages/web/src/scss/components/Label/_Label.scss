@@ -29,13 +29,7 @@
 }
 
 // 1.
-.Label--inline {
-    @include typography.generate(theme.$inline-field-typography);
-}
-
-// 2.
 .Label--item {
-    @include typography.generate(theme.$item-typography);
     @include pseudo-element.stretch();
 }
 
