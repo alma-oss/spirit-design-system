@@ -5,15 +5,15 @@
 $size-dictionary: dictionaries.$size;
 $size-config: (
     small: (
-        typography: tokens.$body-small-semibold,
+        typography: tokens.$input-small,
         icon-size: units.px-to-rem(16px),
     ),
     medium: (
-        typography: tokens.$body-medium-semibold,
+        typography: tokens.$input-medium,
         icon-size: units.px-to-rem(20px),
     ),
     large: (
-        typography: tokens.$body-medium-semibold,
-        icon-size: units.px-to-rem(20px),
+        typography: tokens.$input-large,
+        icon-size: units.px-to-rem(24px),
     ),
 );
