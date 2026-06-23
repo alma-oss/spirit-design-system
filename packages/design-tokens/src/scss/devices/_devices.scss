@@ -11,10 +11,6 @@ $form-field-small-radius-desktop: 0.5rem !default;
 $form-field-small-radius-mobile: 0.5rem !default;
 $form-field-small-radius-tablet: 0.5rem !default;
 
-$font-size-base-desktop: 16px !default;
-$font-size-base-mobile: 16px !default;
-$font-size-base-tablet: 16px !default;
-
 $button-large-radius-desktop: 624.9375rem !default;
 $button-large-radius-mobile: 624.9375rem !default;
 $button-large-radius-tablet: 624.9375rem !default;
@@ -35,19 +31,83 @@ $typography-body-xsmall-font-size-desktop: 0.75rem !default;
 $typography-body-xsmall-font-size-mobile: 0.75rem !default;
 $typography-body-xsmall-font-size-tablet: 0.75rem !default;
 
+$typography-label-xsmall-font-size-desktop: 0.75rem !default;
+$typography-label-xsmall-font-size-mobile: 0.75rem !default;
+$typography-label-xsmall-font-size-tablet: 0.75rem !default;
+
+$typography-action-small-font-size-desktop: 0.875rem !default;
+$typography-action-small-font-size-mobile: 0.875rem !default;
+$typography-action-small-font-size-tablet: 0.875rem !default;
+
 $typography-body-small-font-size-desktop: 0.875rem !default;
 $typography-body-small-font-size-mobile: 0.875rem !default;
 $typography-body-small-font-size-tablet: 0.875rem !default;
+
+$typography-caption-font-size-desktop: 0.875rem !default;
+$typography-caption-font-size-mobile: 0.875rem !default;
+$typography-caption-font-size-tablet: 0.875rem !default;
+
+$typography-code-small-font-size-desktop: 0.875rem !default;
+$typography-code-small-font-size-mobile: 0.875rem !default;
+$typography-code-small-font-size-tablet: 0.875rem !default;
+
+$typography-eyebrow-font-size-desktop: 0.875rem !default;
+$typography-eyebrow-font-size-mobile: 0.875rem !default;
+$typography-eyebrow-font-size-tablet: 0.875rem !default;
+
+$typography-input-small-font-size-desktop: 0.875rem !default;
+$typography-input-small-font-size-mobile: 0.875rem !default;
+$typography-input-small-font-size-tablet: 0.875rem !default;
+
+$typography-label-small-font-size-desktop: 0.875rem !default;
+$typography-label-small-font-size-mobile: 0.875rem !default;
+$typography-label-small-font-size-tablet: 0.875rem !default;
+
+$font-size-base-desktop: 16px !default;
+$font-size-base-mobile: 16px !default;
+$font-size-base-tablet: 16px !default;
+
+$typography-action-medium-font-size-desktop: 1rem !default;
+$typography-action-medium-font-size-mobile: 1rem !default;
+$typography-action-medium-font-size-tablet: 1rem !default;
 
 $typography-body-medium-font-size-desktop: 1rem !default;
 $typography-body-medium-font-size-mobile: 1rem !default;
 $typography-body-medium-font-size-tablet: 1rem !default;
 
+$typography-code-medium-font-size-desktop: 1rem !default;
+$typography-code-medium-font-size-mobile: 1rem !default;
+$typography-code-medium-font-size-tablet: 1rem !default;
+
+$typography-input-medium-font-size-desktop: 1rem !default;
+$typography-input-medium-font-size-mobile: 1rem !default;
+$typography-input-medium-font-size-tablet: 1rem !default;
+
+$typography-label-medium-font-size-desktop: 1rem !default;
+$typography-label-medium-font-size-mobile: 1rem !default;
+$typography-label-medium-font-size-tablet: 1rem !default;
+
+$typography-action-large-font-size-desktop: 1.125rem !default;
+$typography-action-large-font-size-mobile: 1.125rem !default;
+$typography-action-large-font-size-tablet: 1.125rem !default;
+
 $typography-body-large-font-size-desktop: 1.125rem !default;
 $typography-body-large-font-size-mobile: 1.125rem !default;
 $typography-body-large-font-size-tablet: 1.125rem !default;
 
+$typography-code-large-font-size-desktop: 1.125rem !default;
+$typography-code-large-font-size-mobile: 1.125rem !default;
+$typography-code-large-font-size-tablet: 1.125rem !default;
+
 $typography-heading-xsmall-font-size-mobile: 1.125rem !default;
+
+$typography-input-large-font-size-desktop: 1.125rem !default;
+$typography-input-large-font-size-mobile: 1.125rem !default;
+$typography-input-large-font-size-tablet: 1.125rem !default;
+
+$typography-label-large-font-size-desktop: 1.125rem !default;
+$typography-label-large-font-size-mobile: 1.125rem !default;
+$typography-label-large-font-size-tablet: 1.125rem !default;
 
 $typography-body-xlarge-font-size-desktop: 1.25rem !default;
 $typography-body-xlarge-font-size-mobile: 1.25rem !default;
@@ -57,6 +117,10 @@ $typography-heading-small-font-size-mobile: 1.25rem !default;
 
 $typography-heading-xsmall-font-size-desktop: 1.25rem !default;
 $typography-heading-xsmall-font-size-tablet: 1.25rem !default;
+
+$typography-label-xlarge-font-size-desktop: 1.25rem !default;
+$typography-label-xlarge-font-size-mobile: 1.25rem !default;
+$typography-label-xlarge-font-size-tablet: 1.25rem !default;
 
 $typography-heading-medium-font-size-mobile: 1.5rem !default;
 
@@ -73,40 +137,116 @@ $typography-heading-xlarge-font-size-mobile: 2.25rem !default;
 $typography-heading-large-font-size-desktop: 2.5rem !default;
 $typography-heading-large-font-size-tablet: 2.5rem !default;
 
+$typography-display-small-font-size-desktop: 3rem !default;
+$typography-display-small-font-size-mobile: 3rem !default;
+$typography-display-small-font-size-tablet: 3rem !default;
+
 $typography-heading-xlarge-font-size-desktop: 3rem !default;
 $typography-heading-xlarge-font-size-tablet: 3rem !default;
 
-$typography-body-xsmall-line-height-desktop: 1rem !default;
-$typography-body-xsmall-line-height-mobile: 1rem !default;
-$typography-body-xsmall-line-height-tablet: 1rem !default;
+$typography-display-medium-font-size-desktop: 3.5rem !default;
+$typography-display-medium-font-size-mobile: 3.5rem !default;
+$typography-display-medium-font-size-tablet: 3.5rem !default;
+
+$typography-display-large-font-size-desktop: 4.75rem !default;
+$typography-display-large-font-size-mobile: 4.75rem !default;
+$typography-display-large-font-size-tablet: 4.75rem !default;
+
+$typography-action-small-line-height-desktop: 1rem !default;
+$typography-action-small-line-height-mobile: 1rem !default;
+$typography-action-small-line-height-tablet: 1rem !default;
+
+$typography-label-small-line-height-desktop: 1rem !default;
+$typography-label-small-line-height-mobile: 1rem !default;
+$typography-label-small-line-height-tablet: 1rem !default;
+
+$typography-label-xsmall-line-height-desktop: 1rem !default;
+$typography-label-xsmall-line-height-mobile: 1rem !default;
+$typography-label-xsmall-line-height-tablet: 1rem !default;
+
+$typography-action-medium-line-height-desktop: 1.25rem !default;
+$typography-action-medium-line-height-mobile: 1.25rem !default;
+$typography-action-medium-line-height-tablet: 1.25rem !default;
 
 $typography-body-small-line-height-desktop: 1.25rem !default;
 $typography-body-small-line-height-mobile: 1.25rem !default;
 $typography-body-small-line-height-tablet: 1.25rem !default;
 
-$typography-body-medium-line-height-desktop: 1.375rem !default;
-$typography-body-medium-line-height-mobile: 1.375rem !default;
-$typography-body-medium-line-height-tablet: 1.375rem !default;
+$typography-body-xsmall-line-height-desktop: 1.25rem !default;
+$typography-body-xsmall-line-height-mobile: 1.25rem !default;
+$typography-body-xsmall-line-height-tablet: 1.25rem !default;
+
+$typography-caption-line-height-desktop: 1.25rem !default;
+$typography-caption-line-height-mobile: 1.25rem !default;
+$typography-caption-line-height-tablet: 1.25rem !default;
+
+$typography-code-small-line-height-desktop: 1.25rem !default;
+$typography-code-small-line-height-mobile: 1.25rem !default;
+$typography-code-small-line-height-tablet: 1.25rem !default;
+
+$typography-eyebrow-line-height-desktop: 1.25rem !default;
+$typography-eyebrow-line-height-mobile: 1.25rem !default;
+$typography-eyebrow-line-height-tablet: 1.25rem !default;
+
+$typography-input-small-line-height-desktop: 1.25rem !default;
+$typography-input-small-line-height-mobile: 1.25rem !default;
+$typography-input-small-line-height-tablet: 1.25rem !default;
+
+$typography-label-medium-line-height-desktop: 1.25rem !default;
+$typography-label-medium-line-height-mobile: 1.25rem !default;
+$typography-label-medium-line-height-tablet: 1.25rem !default;
 
 $typography-heading-xsmall-line-height-mobile: 1.375rem !default;
 
-$typography-body-large-line-height-desktop: 1.5rem !default;
-$typography-body-large-line-height-mobile: 1.5rem !default;
-$typography-body-large-line-height-tablet: 1.5rem !default;
+$typography-action-large-line-height-desktop: 1.5rem !default;
+$typography-action-large-line-height-mobile: 1.5rem !default;
+$typography-action-large-line-height-tablet: 1.5rem !default;
+
+$typography-body-medium-line-height-desktop: 1.5rem !default;
+$typography-body-medium-line-height-mobile: 1.5rem !default;
+$typography-body-medium-line-height-tablet: 1.5rem !default;
+
+$typography-code-medium-line-height-desktop: 1.5rem !default;
+$typography-code-medium-line-height-mobile: 1.5rem !default;
+$typography-code-medium-line-height-tablet: 1.5rem !default;
 
 $typography-heading-small-line-height-mobile: 1.5rem !default;
 
 $typography-heading-xsmall-line-height-desktop: 1.5rem !default;
 $typography-heading-xsmall-line-height-tablet: 1.5rem !default;
 
-$typography-body-xlarge-line-height-desktop: 1.75rem !default;
-$typography-body-xlarge-line-height-mobile: 1.75rem !default;
-$typography-body-xlarge-line-height-tablet: 1.75rem !default;
+$typography-input-medium-line-height-desktop: 1.5rem !default;
+$typography-input-medium-line-height-mobile: 1.5rem !default;
+$typography-input-medium-line-height-tablet: 1.5rem !default;
+
+$typography-label-large-line-height-desktop: 1.5rem !default;
+$typography-label-large-line-height-mobile: 1.5rem !default;
+$typography-label-large-line-height-tablet: 1.5rem !default;
+
+$typography-body-large-line-height-desktop: 1.75rem !default;
+$typography-body-large-line-height-mobile: 1.75rem !default;
+$typography-body-large-line-height-tablet: 1.75rem !default;
+
+$typography-code-large-line-height-desktop: 1.75rem !default;
+$typography-code-large-line-height-mobile: 1.75rem !default;
+$typography-code-large-line-height-tablet: 1.75rem !default;
 
 $typography-heading-medium-line-height-mobile: 1.75rem !default;
 
 $typography-heading-small-line-height-desktop: 1.75rem !default;
 $typography-heading-small-line-height-tablet: 1.75rem !default;
+
+$typography-input-large-line-height-desktop: 1.75rem !default;
+$typography-input-large-line-height-mobile: 1.75rem !default;
+$typography-input-large-line-height-tablet: 1.75rem !default;
+
+$typography-label-xlarge-line-height-desktop: 1.75rem !default;
+$typography-label-xlarge-line-height-mobile: 1.75rem !default;
+$typography-label-xlarge-line-height-tablet: 1.75rem !default;
+
+$typography-body-xlarge-line-height-desktop: 2rem !default;
+$typography-body-xlarge-line-height-mobile: 2rem !default;
+$typography-body-xlarge-line-height-tablet: 2rem !default;
 
 $typography-heading-large-line-height-mobile: 2.375rem !default;
 
@@ -118,8 +258,32 @@ $typography-heading-xlarge-line-height-mobile: 2.625rem !default;
 $typography-heading-large-line-height-desktop: 3rem !default;
 $typography-heading-large-line-height-tablet: 3rem !default;
 
+$typography-display-small-line-height-desktop: 3.5rem !default;
+$typography-display-small-line-height-mobile: 3.5rem !default;
+$typography-display-small-line-height-tablet: 3.5rem !default;
+
 $typography-heading-xlarge-line-height-desktop: 3.625rem !default;
 $typography-heading-xlarge-line-height-tablet: 3.625rem !default;
+
+$typography-display-medium-line-height-desktop: 4.25rem !default;
+$typography-display-medium-line-height-mobile: 4.25rem !default;
+$typography-display-medium-line-height-tablet: 4.25rem !default;
+
+$typography-display-large-line-height-desktop: 5.375rem !default;
+$typography-display-large-line-height-mobile: 5.375rem !default;
+$typography-display-large-line-height-tablet: 5.375rem !default;
+
+$typography-action-large-letter-spacing-desktop: 0 !default;
+$typography-action-large-letter-spacing-mobile: 0 !default;
+$typography-action-large-letter-spacing-tablet: 0 !default;
+
+$typography-action-medium-letter-spacing-desktop: 0 !default;
+$typography-action-medium-letter-spacing-mobile: 0 !default;
+$typography-action-medium-letter-spacing-tablet: 0 !default;
+
+$typography-action-small-letter-spacing-desktop: 0 !default;
+$typography-action-small-letter-spacing-mobile: 0 !default;
+$typography-action-small-letter-spacing-tablet: 0 !default;
 
 $typography-body-large-letter-spacing-desktop: 0 !default;
 $typography-body-large-letter-spacing-mobile: 0 !default;
@@ -141,6 +305,38 @@ $typography-body-xsmall-letter-spacing-desktop: 0 !default;
 $typography-body-xsmall-letter-spacing-mobile: 0 !default;
 $typography-body-xsmall-letter-spacing-tablet: 0 !default;
 
+$typography-caption-letter-spacing-desktop: 0 !default;
+$typography-caption-letter-spacing-mobile: 0 !default;
+$typography-caption-letter-spacing-tablet: 0 !default;
+
+$typography-code-large-letter-spacing-desktop: 0 !default;
+$typography-code-large-letter-spacing-mobile: 0 !default;
+$typography-code-large-letter-spacing-tablet: 0 !default;
+
+$typography-code-medium-letter-spacing-desktop: 0 !default;
+$typography-code-medium-letter-spacing-mobile: 0 !default;
+$typography-code-medium-letter-spacing-tablet: 0 !default;
+
+$typography-code-small-letter-spacing-desktop: 0 !default;
+$typography-code-small-letter-spacing-mobile: 0 !default;
+$typography-code-small-letter-spacing-tablet: 0 !default;
+
+$typography-display-large-letter-spacing-desktop: 0 !default;
+$typography-display-large-letter-spacing-mobile: 0 !default;
+$typography-display-large-letter-spacing-tablet: 0 !default;
+
+$typography-display-medium-letter-spacing-desktop: 0 !default;
+$typography-display-medium-letter-spacing-mobile: 0 !default;
+$typography-display-medium-letter-spacing-tablet: 0 !default;
+
+$typography-display-small-letter-spacing-desktop: 0 !default;
+$typography-display-small-letter-spacing-mobile: 0 !default;
+$typography-display-small-letter-spacing-tablet: 0 !default;
+
+$typography-eyebrow-letter-spacing-desktop: 0 !default;
+$typography-eyebrow-letter-spacing-mobile: 0 !default;
+$typography-eyebrow-letter-spacing-tablet: 0 !default;
+
 $typography-heading-large-letter-spacing-desktop: 0 !default;
 $typography-heading-large-letter-spacing-mobile: 0 !default;
 $typography-heading-large-letter-spacing-tablet: 0 !default;
@@ -160,6 +356,38 @@ $typography-heading-xlarge-letter-spacing-tablet: 0 !default;
 $typography-heading-xsmall-letter-spacing-desktop: 0 !default;
 $typography-heading-xsmall-letter-spacing-mobile: 0 !default;
 $typography-heading-xsmall-letter-spacing-tablet: 0 !default;
+
+$typography-input-large-letter-spacing-desktop: 0 !default;
+$typography-input-large-letter-spacing-mobile: 0 !default;
+$typography-input-large-letter-spacing-tablet: 0 !default;
+
+$typography-input-medium-letter-spacing-desktop: 0 !default;
+$typography-input-medium-letter-spacing-mobile: 0 !default;
+$typography-input-medium-letter-spacing-tablet: 0 !default;
+
+$typography-input-small-letter-spacing-desktop: 0 !default;
+$typography-input-small-letter-spacing-mobile: 0 !default;
+$typography-input-small-letter-spacing-tablet: 0 !default;
+
+$typography-label-large-letter-spacing-desktop: 0 !default;
+$typography-label-large-letter-spacing-mobile: 0 !default;
+$typography-label-large-letter-spacing-tablet: 0 !default;
+
+$typography-label-medium-letter-spacing-desktop: 0 !default;
+$typography-label-medium-letter-spacing-mobile: 0 !default;
+$typography-label-medium-letter-spacing-tablet: 0 !default;
+
+$typography-label-small-letter-spacing-desktop: 0 !default;
+$typography-label-small-letter-spacing-mobile: 0 !default;
+$typography-label-small-letter-spacing-tablet: 0 !default;
+
+$typography-label-xlarge-letter-spacing-desktop: 0 !default;
+$typography-label-xlarge-letter-spacing-mobile: 0 !default;
+$typography-label-xlarge-letter-spacing-tablet: 0 !default;
+
+$typography-label-xsmall-letter-spacing-desktop: 0 !default;
+$typography-label-xsmall-letter-spacing-mobile: 0 !default;
+$typography-label-xsmall-letter-spacing-tablet: 0 !default;
 
 $form-fields: (
     large: (
@@ -183,12 +411,6 @@ $form-fields: (
             tablet: $form-field-small-radius-tablet,
         ),
     ),
-) !default;
-
-$font-size-bases: (
-    desktop: $font-size-base-desktop,
-    mobile: $font-size-base-mobile,
-    tablet: $font-size-base-tablet,
 ) !default;
 
 $buttons: (
@@ -309,6 +531,286 @@ $typographys: (
             ),
         ),
     ),
+    label: (
+        xsmall: (
+            font-size: (
+                desktop: $typography-label-xsmall-font-size-desktop,
+                mobile: $typography-label-xsmall-font-size-mobile,
+                tablet: $typography-label-xsmall-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-label-xsmall-line-height-desktop,
+                mobile: $typography-label-xsmall-line-height-mobile,
+                tablet: $typography-label-xsmall-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-label-xsmall-letter-spacing-desktop,
+                mobile: $typography-label-xsmall-letter-spacing-mobile,
+                tablet: $typography-label-xsmall-letter-spacing-tablet,
+            ),
+        ),
+        small: (
+            font-size: (
+                desktop: $typography-label-small-font-size-desktop,
+                mobile: $typography-label-small-font-size-mobile,
+                tablet: $typography-label-small-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-label-small-line-height-desktop,
+                mobile: $typography-label-small-line-height-mobile,
+                tablet: $typography-label-small-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-label-small-letter-spacing-desktop,
+                mobile: $typography-label-small-letter-spacing-mobile,
+                tablet: $typography-label-small-letter-spacing-tablet,
+            ),
+        ),
+        medium: (
+            font-size: (
+                desktop: $typography-label-medium-font-size-desktop,
+                mobile: $typography-label-medium-font-size-mobile,
+                tablet: $typography-label-medium-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-label-medium-line-height-desktop,
+                mobile: $typography-label-medium-line-height-mobile,
+                tablet: $typography-label-medium-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-label-medium-letter-spacing-desktop,
+                mobile: $typography-label-medium-letter-spacing-mobile,
+                tablet: $typography-label-medium-letter-spacing-tablet,
+            ),
+        ),
+        large: (
+            font-size: (
+                desktop: $typography-label-large-font-size-desktop,
+                mobile: $typography-label-large-font-size-mobile,
+                tablet: $typography-label-large-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-label-large-line-height-desktop,
+                mobile: $typography-label-large-line-height-mobile,
+                tablet: $typography-label-large-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-label-large-letter-spacing-desktop,
+                mobile: $typography-label-large-letter-spacing-mobile,
+                tablet: $typography-label-large-letter-spacing-tablet,
+            ),
+        ),
+        xlarge: (
+            font-size: (
+                desktop: $typography-label-xlarge-font-size-desktop,
+                mobile: $typography-label-xlarge-font-size-mobile,
+                tablet: $typography-label-xlarge-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-label-xlarge-line-height-desktop,
+                mobile: $typography-label-xlarge-line-height-mobile,
+                tablet: $typography-label-xlarge-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-label-xlarge-letter-spacing-desktop,
+                mobile: $typography-label-xlarge-letter-spacing-mobile,
+                tablet: $typography-label-xlarge-letter-spacing-tablet,
+            ),
+        ),
+    ),
+    action: (
+        small: (
+            font-size: (
+                desktop: $typography-action-small-font-size-desktop,
+                mobile: $typography-action-small-font-size-mobile,
+                tablet: $typography-action-small-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-action-small-line-height-desktop,
+                mobile: $typography-action-small-line-height-mobile,
+                tablet: $typography-action-small-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-action-small-letter-spacing-desktop,
+                mobile: $typography-action-small-letter-spacing-mobile,
+                tablet: $typography-action-small-letter-spacing-tablet,
+            ),
+        ),
+        medium: (
+            font-size: (
+                desktop: $typography-action-medium-font-size-desktop,
+                mobile: $typography-action-medium-font-size-mobile,
+                tablet: $typography-action-medium-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-action-medium-line-height-desktop,
+                mobile: $typography-action-medium-line-height-mobile,
+                tablet: $typography-action-medium-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-action-medium-letter-spacing-desktop,
+                mobile: $typography-action-medium-letter-spacing-mobile,
+                tablet: $typography-action-medium-letter-spacing-tablet,
+            ),
+        ),
+        large: (
+            font-size: (
+                desktop: $typography-action-large-font-size-desktop,
+                mobile: $typography-action-large-font-size-mobile,
+                tablet: $typography-action-large-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-action-large-line-height-desktop,
+                mobile: $typography-action-large-line-height-mobile,
+                tablet: $typography-action-large-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-action-large-letter-spacing-desktop,
+                mobile: $typography-action-large-letter-spacing-mobile,
+                tablet: $typography-action-large-letter-spacing-tablet,
+            ),
+        ),
+    ),
+    caption: (
+        font-size: (
+            desktop: $typography-caption-font-size-desktop,
+            mobile: $typography-caption-font-size-mobile,
+            tablet: $typography-caption-font-size-tablet,
+        ),
+        line-height: (
+            desktop: $typography-caption-line-height-desktop,
+            mobile: $typography-caption-line-height-mobile,
+            tablet: $typography-caption-line-height-tablet,
+        ),
+        letter-spacing: (
+            desktop: $typography-caption-letter-spacing-desktop,
+            mobile: $typography-caption-letter-spacing-mobile,
+            tablet: $typography-caption-letter-spacing-tablet,
+        ),
+    ),
+    code: (
+        small: (
+            font-size: (
+                desktop: $typography-code-small-font-size-desktop,
+                mobile: $typography-code-small-font-size-mobile,
+                tablet: $typography-code-small-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-code-small-line-height-desktop,
+                mobile: $typography-code-small-line-height-mobile,
+                tablet: $typography-code-small-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-code-small-letter-spacing-desktop,
+                mobile: $typography-code-small-letter-spacing-mobile,
+                tablet: $typography-code-small-letter-spacing-tablet,
+            ),
+        ),
+        medium: (
+            font-size: (
+                desktop: $typography-code-medium-font-size-desktop,
+                mobile: $typography-code-medium-font-size-mobile,
+                tablet: $typography-code-medium-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-code-medium-line-height-desktop,
+                mobile: $typography-code-medium-line-height-mobile,
+                tablet: $typography-code-medium-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-code-medium-letter-spacing-desktop,
+                mobile: $typography-code-medium-letter-spacing-mobile,
+                tablet: $typography-code-medium-letter-spacing-tablet,
+            ),
+        ),
+        large: (
+            font-size: (
+                desktop: $typography-code-large-font-size-desktop,
+                mobile: $typography-code-large-font-size-mobile,
+                tablet: $typography-code-large-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-code-large-line-height-desktop,
+                mobile: $typography-code-large-line-height-mobile,
+                tablet: $typography-code-large-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-code-large-letter-spacing-desktop,
+                mobile: $typography-code-large-letter-spacing-mobile,
+                tablet: $typography-code-large-letter-spacing-tablet,
+            ),
+        ),
+    ),
+    eyebrow: (
+        font-size: (
+            desktop: $typography-eyebrow-font-size-desktop,
+            mobile: $typography-eyebrow-font-size-mobile,
+            tablet: $typography-eyebrow-font-size-tablet,
+        ),
+        line-height: (
+            desktop: $typography-eyebrow-line-height-desktop,
+            mobile: $typography-eyebrow-line-height-mobile,
+            tablet: $typography-eyebrow-line-height-tablet,
+        ),
+        letter-spacing: (
+            desktop: $typography-eyebrow-letter-spacing-desktop,
+            mobile: $typography-eyebrow-letter-spacing-mobile,
+            tablet: $typography-eyebrow-letter-spacing-tablet,
+        ),
+    ),
+    input: (
+        small: (
+            font-size: (
+                desktop: $typography-input-small-font-size-desktop,
+                mobile: $typography-input-small-font-size-mobile,
+                tablet: $typography-input-small-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-input-small-line-height-desktop,
+                mobile: $typography-input-small-line-height-mobile,
+                tablet: $typography-input-small-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-input-small-letter-spacing-desktop,
+                mobile: $typography-input-small-letter-spacing-mobile,
+                tablet: $typography-input-small-letter-spacing-tablet,
+            ),
+        ),
+        medium: (
+            font-size: (
+                desktop: $typography-input-medium-font-size-desktop,
+                mobile: $typography-input-medium-font-size-mobile,
+                tablet: $typography-input-medium-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-input-medium-line-height-desktop,
+                mobile: $typography-input-medium-line-height-mobile,
+                tablet: $typography-input-medium-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-input-medium-letter-spacing-desktop,
+                mobile: $typography-input-medium-letter-spacing-mobile,
+                tablet: $typography-input-medium-letter-spacing-tablet,
+            ),
+        ),
+        large: (
+            font-size: (
+                desktop: $typography-input-large-font-size-desktop,
+                mobile: $typography-input-large-font-size-mobile,
+                tablet: $typography-input-large-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-input-large-line-height-desktop,
+                mobile: $typography-input-large-line-height-mobile,
+                tablet: $typography-input-large-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-input-large-letter-spacing-desktop,
+                mobile: $typography-input-large-letter-spacing-mobile,
+                tablet: $typography-input-large-letter-spacing-tablet,
+            ),
+        ),
+    ),
     heading: (
         xsmall: (
             font-size: (
@@ -396,4 +898,63 @@ $typographys: (
             ),
         ),
     ),
+    display: (
+        small: (
+            font-size: (
+                desktop: $typography-display-small-font-size-desktop,
+                mobile: $typography-display-small-font-size-mobile,
+                tablet: $typography-display-small-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-display-small-line-height-desktop,
+                mobile: $typography-display-small-line-height-mobile,
+                tablet: $typography-display-small-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-display-small-letter-spacing-desktop,
+                mobile: $typography-display-small-letter-spacing-mobile,
+                tablet: $typography-display-small-letter-spacing-tablet,
+            ),
+        ),
+        medium: (
+            font-size: (
+                desktop: $typography-display-medium-font-size-desktop,
+                mobile: $typography-display-medium-font-size-mobile,
+                tablet: $typography-display-medium-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-display-medium-line-height-desktop,
+                mobile: $typography-display-medium-line-height-mobile,
+                tablet: $typography-display-medium-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-display-medium-letter-spacing-desktop,
+                mobile: $typography-display-medium-letter-spacing-mobile,
+                tablet: $typography-display-medium-letter-spacing-tablet,
+            ),
+        ),
+        large: (
+            font-size: (
+                desktop: $typography-display-large-font-size-desktop,
+                mobile: $typography-display-large-font-size-mobile,
+                tablet: $typography-display-large-font-size-tablet,
+            ),
+            line-height: (
+                desktop: $typography-display-large-line-height-desktop,
+                mobile: $typography-display-large-line-height-mobile,
+                tablet: $typography-display-large-line-height-tablet,
+            ),
+            letter-spacing: (
+                desktop: $typography-display-large-letter-spacing-desktop,
+                mobile: $typography-display-large-letter-spacing-mobile,
+                tablet: $typography-display-large-letter-spacing-tablet,
+            ),
+        ),
+    ),
+) !default;
+
+$font-size-bases: (
+    desktop: $font-size-base-desktop,
+    mobile: $font-size-base-mobile,
+    tablet: $font-size-base-tablet,
 ) !default;
