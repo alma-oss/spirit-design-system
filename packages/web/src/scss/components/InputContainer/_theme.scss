@@ -2,6 +2,7 @@
 @use '@tokens' as tokens;
 @use '../../settings/dictionaries';
 @use '../../tools/tokens' as tokens-tools;
+@use '../../tools/units';
 
 $color-state-disabled: tokens.$disabled-content;
 $border-width: tokens.$border-width-100;
@@ -17,6 +18,8 @@ $input-size-characters: (2, 3, 4);
 $input-padding-x: tokens.$space-600;
 $input-padding-y: calc(#{tokens.$space-500} - #{tokens.$border-width-100});
 $input-placeholder-color-state-disabled: tokens.$disabled-content;
+
+$textarea-padding-y: calc(#{tokens.$space-700} - #{tokens.$border-width-100});
 
 $variant-dictionary: dictionaries.$fill-variants;
 
@@ -43,9 +46,9 @@ $size-dictionary: dictionaries.$size;
 $size-config: (
     small: map.merge(
             (
-                height: 32px,
-                min-height: 62px,
-                typography: tokens.$body-small-regular,
+                height: units.px-to-rem(40px),
+                min-height: units.px-to-rem(64px),
+                typography: tokens.$input-small,
             ),
             tokens-tools.generate-responsive-map(
                 $property: 'border-radius',
@@ -57,9 +60,9 @@ $size-config: (
         ),
     medium: map.merge(
             (
-                height: 40px,
-                min-height: 78px,
-                typography: tokens.$body-medium-regular,
+                height: units.px-to-rem(48px),
+                min-height: units.px-to-rem(80px),
+                typography: tokens.$input-medium,
             ),
             tokens-tools.generate-responsive-map(
                 $property: 'border-radius',
@@ -71,9 +74,9 @@ $size-config: (
         ),
     large: map.merge(
             (
-                height: 48px,
-                min-height: 94px,
-                typography: tokens.$body-medium-regular,
+                height: units.px-to-rem(56px),
+                min-height: units.px-to-rem(96px),
+                typography: tokens.$input-large,
             ),
             tokens-tools.generate-responsive-map(
                 $property: 'border-radius',
@@ -83,17 +86,6 @@ $size-config: (
                 $fallback: $border-radius,
             )
         ),
-);
-$addon-size-config: (
-    small: (
-        typography: tokens.$body-small-semibold,
-    ),
-    medium: (
-        typography: tokens.$body-medium-semibold,
-    ),
-    large: (
-        typography: tokens.$body-medium-semibold,
-    ),
 );
 
 $validation-states: (

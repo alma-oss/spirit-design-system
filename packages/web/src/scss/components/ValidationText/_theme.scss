@@ -1,6 +1,6 @@
 @use '@tokens' as tokens;
 
-$typography: tokens.$body-small-regular;
+$typography: tokens.$caption;
 $margin-top: tokens.$space-400;
 $icon-gap: tokens.$space-400;
 $color-state-disabled: tokens.$disabled-content;
