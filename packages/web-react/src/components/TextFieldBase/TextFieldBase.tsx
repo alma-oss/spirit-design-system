@@ -123,7 +123,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
           {passwordToggleElement}
         </InputContainer>
         {counterProps ? (
-          <Flex direction="horizontal" isWrapping={false} alignmentX="space-between" alignmentY="top">
+          <Flex isWrapping={false} alignmentX="space-between" alignmentY="top">
             {hasTextContent ? (
               <div>
                 {/* In counter layout, put validation first so the status message stays visually closest to the counter row. */}
