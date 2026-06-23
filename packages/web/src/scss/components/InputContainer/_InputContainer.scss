@@ -4,7 +4,6 @@
 // 3. We pass the input arrows width if the input type is number.
 // 4. If the input has a size attribute, we calculate the width based on the input width, padding, border width and arrows width.
 // 5. We generate the input width based on the number of characters.
-// 6. Tweak the input line height of `small` Select size to align the text vertically within the input.
 
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
@@ -81,7 +80,6 @@
     appearance: none;
     flex-grow: 1;
     height: 100%;
-    padding-block: theme.$input-padding-y;
     color: inherit;
     border: none;
     border-radius: inherit;
@@ -90,6 +88,8 @@
 }
 
 .InputContainer > :is(input, textarea) {
+    padding-block: theme.$input-padding-y;
+
     &:first-child {
         padding-inline-start: var(--#{tokens.$css-variable-prefix}input-container-input-padding-x);
     }
@@ -106,6 +106,7 @@
 
 .InputContainer > textarea {
     min-height: inherit;
+    padding-block: theme.$textarea-input-padding-y;
     resize: vertical;
 }
 
@@ -143,11 +144,6 @@
                 var(--#{tokens.$css-variable-prefix}input-container-input-padding-x) - 2 *
                 var(--#{tokens.$css-variable-prefix}input-container-border-width)
         );
-}
-
-// 6.
-.InputContainer--small:has(> select) {
-    --#{tokens.$css-variable-prefix}input-container-line-height: 1.3;
 }
 
 @include dictionaries.generate-sizes(
