@@ -59,6 +59,7 @@ nx-cloud.env
 
 # Design reviews
 /design-reviews/
+.agents/skills/*/config.json
 
 # JetBrains IDE — ignore everything except shared run configurations
 !.idea/
