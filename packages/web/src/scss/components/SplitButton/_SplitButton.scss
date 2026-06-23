@@ -1,4 +1,5 @@
 // 1. Non-zero values work only when the default Button border radius is a bit smaller than its height. In other words, it doesn't work when Buttons use the full radius.
+// 2. Buttons inside a SplitButton should not have a min-width.
 
 @use 'sass:map';
 @use '@tokens' as tokens;
@@ -7,6 +8,7 @@
 .SplitButton {
     --#{tokens.$css-variable-prefix}split-button-gap: #{-1 * theme.$border-width};
     --#{tokens.$css-variable-prefix}split-button-inner-border-radius: #{theme.$inner-border-radius}; // 1.
+    --#{tokens.$css-variable-prefix}button-min-width: auto; // 2.
 
     display: flex;
 }
