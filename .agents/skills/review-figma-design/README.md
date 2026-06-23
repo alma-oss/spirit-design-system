@@ -137,9 +137,16 @@ access tokens**.
 When installed in a repository, the skill reads `.agents/skills/review-figma-design/config.json`
 for local overrides:
 
-| Key         | Default | Description                                                                                                                                                                        |
-| ----------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `iconsPath` | `null`  | Custom icon search path (relative to the current working directory). Used as a fallback when neither `packages/icons/src/` nor `libs/design-icons/` exists. Set to `null` to skip. |
+| Key              | Default | Description                                                                                                                                                                                                        |
+| ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `componentsPath` | `null`  | Custom component search path (relative to the current working directory). Used as a fallback when neither `packages/web-react/src/components/` nor `libs/design-system/components/` exists. Set to `null` to skip. |
+| `iconsPath`      | `null`  | Custom icon search path (relative to the current working directory). Used as a fallback when neither `packages/icons/src/` nor `libs/design-icons/` exists. Set to `null` to skip.                                 |
+
+The skill resolves the components path in this order:
+
+1. `packages/web-react/src/components/` — Spirit default
+2. `libs/design-system/components/` — Cyborg convention
+3. `componentsPath` from `config.json` — custom override
 
 The skill resolves the icon path in this order:
 
