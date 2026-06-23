@@ -12,7 +12,7 @@ const ButtonLinkFluid = () => {
   const colors = [...buttonColors, ...emotionColors];
 
   return (
-    <Grid cols={{ mobile: 1, desktop: 3 }} spacingY="space-1100">
+    <Grid cols={{ mobile: 1, desktop: 3 }} spacingX="space-300" spacingY="space-1100">
       {sizes.map((size) => (
         <DocsSection key={size} title={`Size ${size}`} container="none" hasPadding={false}>
           {colors.map((color) => (

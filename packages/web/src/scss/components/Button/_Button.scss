@@ -32,6 +32,10 @@ $_component-name: 'Button';
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-width: var(
+        --#{tokens.$css-variable-prefix}button-min-width,
+        calc(2 * #{var(--#{tokens.$css-variable-prefix}button-height)})
+    );
     height: var(--#{tokens.$css-variable-prefix}button-height);
     padding-inline: var(--#{tokens.$css-variable-prefix}button-padding-x);
     padding-block: var(--#{tokens.$css-variable-prefix}button-padding-y);
@@ -100,6 +104,7 @@ $_component-name: 'Button';
     @include breakpoint.up($breakpoint-value) {
         .Button--#{$infix}symmetrical {
             flex: none;
+            min-width: auto;
             aspect-ratio: 1;
             padding-inline: 0;
         }
@@ -108,6 +113,10 @@ $_component-name: 'Button';
         @if $infix != '' {
             .Button--#{$infix}asymmetrical {
                 flex: auto;
+                min-width: var(
+                    --#{tokens.$css-variable-prefix}button-min-width,
+                    calc(2 * #{var(--#{tokens.$css-variable-prefix}button-height)})
+                );
                 aspect-ratio: auto;
                 padding-inline: var(--#{tokens.$css-variable-prefix}button-padding-x);
             }

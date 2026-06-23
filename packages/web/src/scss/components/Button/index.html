@@ -14,14 +14,14 @@
 
       <div
         class="Grid Grid--cols-1 Grid--desktop--cols-3"
-        style="--grid-spacing-y: var(--spirit-space-1100);"
+        style="--grid-spacing-x: var(--spirit-space-300); --grid-spacing-y: var(--spirit-space-1100);"
       >
         {{#each @root.sizes as |size|}}
         <section>
           <h2 class="docs-Heading">Size {{size}}</h2>
           <div class="docs-Stack docs-Stack--start">
             {{#each @root.colors as |color|}}
-            <div>
+            <div class="Flex Flex--horizontal Flex--alignmentXLeft Flex--alignmentYStretch Flex--wrap" style="--flex-spacing-x: var(--spirit-space-300); --flex-spacing-y: var(--spirit-space-300);">
               <a
                 href="#"
                 class="Button Button--{{color}} Button--{{size}}{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
@@ -77,14 +77,14 @@
 
       <div
         class="Grid Grid--cols-1 Grid--desktop--cols-3"
-        style="--grid-spacing-y: var(--spirit-space-1100);"
+        style="--grid-spacing-x: var(--spirit-space-300); --grid-spacing-y: var(--spirit-space-1100);"
       >
         {{#each @root.sizes as |size|}}
         <section>
           <h2 class="docs-Heading">Size {{size}}</h2>
           <div class="docs-Stack docs-Stack--start">
             {{#each @root.colors as |color|}}
-            <div>
+            <div class="Flex Flex--horizontal Flex--alignmentXLeft Flex--alignmentYStretch Flex--wrap" style="--flex-spacing-x: var(--spirit-space-300); --flex-spacing-y: var(--spirit-space-300);">
               <button
                 type="button"
                 class="Button Button--{{color}} Button--{{size}} disabled{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
@@ -143,14 +143,14 @@
 
       <div
         class="Grid Grid--cols-1 Grid--desktop--cols-3"
-        style="--grid-spacing-y: var(--spirit-space-1100);"
+        style="--grid-spacing-x: var(--spirit-space-300); --grid-spacing-y: var(--spirit-space-1100);"
       >
         {{#each @root.sizes as |size|}}
         <section>
           <h2 class="docs-Heading">Size {{size}}</h2>
           <div class="docs-Stack docs-Stack--start">
             {{#each @root.colors as |color|}}
-            <div>
+            <div class="Flex Flex--horizontal Flex--alignmentXLeft Flex--alignmentYStretch Flex--wrap" style="--flex-spacing-x: var(--spirit-space-300); --flex-spacing-y: var(--spirit-space-300);">
               <a
                 href="#"
                 class="Button Button--{{color}} Button--{{size}} Button--loading{{#if (contains @root.emotion-colors color)}} color-scheme-on-emotion-{{color}}-basic{{/if}}"
@@ -234,7 +234,7 @@
 
       <div
         class="Grid Grid--cols-1 Grid--desktop--cols-3"
-        style="--grid-spacing-y: var(--spirit-space-1100);"
+        style="--grid-spacing-x: var(--spirit-space-300); --grid-spacing-y: var(--spirit-space-1100);"
       >
         {{#each @root.sizes as |size|}}
         <section>
