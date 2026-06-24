@@ -229,6 +229,16 @@ $body-xsmall-semibold: (
     ),
 ) !default;
 
+$caption: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 0.875rem,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.25,
+    ),
+) !default;
+
 $code-large-bold: (
     mobile: (
         font-family: "'Roboto Mono', sans-serif",
@@ -316,6 +326,16 @@ $display-small: (
         font-style: normal,
         font-weight: 700,
         line-height: 1.17,
+    ),
+) !default;
+
+$eyebrow: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 0.875rem,
+        font-style: normal,
+        font-weight: 600,
+        line-height: 1.25,
     ),
 ) !default;
 

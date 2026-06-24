@@ -229,6 +229,16 @@ export const bodyXsmallSemibold = {
   },
 };
 
+export const caption = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '0.875rem',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 1.25,
+  },
+};
+
 export const codeLargeBold = {
   mobile: {
     fontFamily: "'Roboto Mono', sans-serif",
@@ -316,6 +326,16 @@ export const displaySmall = {
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 1.17,
+  },
+};
+
+export const eyebrow = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '0.875rem',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    lineHeight: 1.25,
   },
 };
 
