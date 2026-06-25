@@ -7,6 +7,7 @@ import { DRAWER_ALIGNMENT_DEFAULT } from './constants';
 export interface UseDrawerStylesProps extends DrawerPanelProps {
   drawerAlignmentX?: DrawerAlignmentXType;
   isOpen?: boolean;
+  hasSpacing?: boolean;
 }
 
 export interface UseDrawerStylesReturn {
@@ -20,7 +21,7 @@ export interface UseDrawerStylesReturn {
 }
 
 export const useDrawerStyleProps = (props: UseDrawerStylesProps = {}): UseDrawerStylesReturn => {
-  const { drawerAlignmentX = DRAWER_ALIGNMENT_DEFAULT, isOpen = false } = props;
+  const { drawerAlignmentX = DRAWER_ALIGNMENT_DEFAULT, isOpen = false, hasSpacing = false } = props;
 
   const drawerClass = useClassNamePrefix('Drawer');
   const drawerAlignXClasses: Record<DrawerAlignmentXType, string> = {
@@ -37,7 +38,9 @@ export const useDrawerStyleProps = (props: UseDrawerStylesProps = {}): UseDrawer
     }),
     panel: drawerPanelClass,
     header: drawerPanelHeaderClass,
-    content: drawerContentClass,
+    content: classNames(drawerContentClass, {
+      [`${drawerContentClass}--hasSpacing`]: hasSpacing,
+    }),
   };
 
   return {

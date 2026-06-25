@@ -17,4 +17,10 @@ describe('useDrawerStyleProps', () => {
     expect(result.current.classProps.root).toBe('Drawer Drawer--left');
     expect(result.current.classProps.panel).toBe('DrawerPanel');
   });
+
+  it('should return the content spacing modifier when hasSpacing is set', () => {
+    const { result } = renderHook(() => useDrawerStyleProps({ hasSpacing: true }));
+
+    expect(result.current.classProps.content).toBe('DrawerPanel__content DrawerPanel__content--hasSpacing');
+  });
 });

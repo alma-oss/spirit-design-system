@@ -6,6 +6,8 @@ import { Box } from '../../Box';
 import Drawer from '../Drawer';
 import DrawerCloseButton from '../DrawerCloseButton';
 import DrawerPanel from '../DrawerPanel';
+import DrawerPanelContent from '../DrawerPanelContent';
+import DrawerPanelHeader from '../DrawerPanelHeader';
 
 const DrawerDefault = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -84,8 +86,11 @@ const DrawerDefault = () => {
         closeOnBackdropClick={isClosableOnBackdropClick}
         closeOnEscapeKeyDown={isClosableOnEscapeKey}
       >
-        <DrawerPanel data-testid="drawer-panel" closeButton={<DrawerCloseButton />}>
-          <div className="px-700 pb-900">{content}</div>
+        <DrawerPanel data-testid="drawer-panel">
+          <DrawerPanelHeader>
+            <DrawerCloseButton />
+          </DrawerPanelHeader>
+          <DrawerPanelContent hasSpacing>{content}</DrawerPanelContent>
         </DrawerPanel>
       </Drawer>
     </>

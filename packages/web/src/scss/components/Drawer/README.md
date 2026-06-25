@@ -32,14 +32,16 @@ The `Drawer` component allows aligning the content panel horizontally to the lef
 ## DrawerPanel
 
 The `DrawerPanel` component is a container for the content that will be displayed in the drawer.
-Should there be any spacing around the content of `DrawerPanel`, you need to provide it yourself.
+
+By default `.DrawerPanel__content` has no inner spacing. Add the `DrawerPanel__content--hasSpacing` modifier
+to apply inner spacing consistent with `.DrawerPanel__header`, so you don't have to add it yourself.
 
 ```html
 <div class="DrawerPanel">
   <div class="DrawerPanel__header">
     <!-- Close button goes here -->
   </div>
-  <div class="DrawerPanel__content">
+  <div class="DrawerPanel__content DrawerPanel__content--hasSpacing">
     <!-- Drawer content goes here -->
   </div>
 </div>
@@ -85,7 +87,7 @@ Close button is a [ControlButton][control-button] that closes the drawer when cl
         <span class="accessibility-hidden">Close</span>
       </button>
     </div>
-    <div class="DrawerPanel__content">
+    <div class="DrawerPanel__content DrawerPanel__content--hasSpacing">
       <!-- Drawer content goes here  -->
     </div>
   </div>

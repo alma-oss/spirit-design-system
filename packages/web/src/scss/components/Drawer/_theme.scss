@@ -22,3 +22,5 @@ $drawer-panel-shadow: tokens.$shadow-400;
 $drawer-panel-header-gap: tokens.$space-700;
 $drawer-panel-header-padding-x: tokens.$space-700;
 $drawer-panel-header-padding-y: tokens.$space-900;
+$drawer-panel-content-padding-x: $drawer-panel-header-padding-x;
+$drawer-panel-content-padding-y: $drawer-panel-header-padding-y;

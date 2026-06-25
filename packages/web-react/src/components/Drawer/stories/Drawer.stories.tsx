@@ -8,6 +8,8 @@ import { Button } from '../../Button';
 import Drawer from '../Drawer';
 import DrawerCloseButton from '../DrawerCloseButton';
 import DrawerPanel from '../DrawerPanel';
+import DrawerPanelContent from '../DrawerPanelContent';
+import DrawerPanelHeader from '../DrawerPanelHeader';
 import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof Drawer> = {
@@ -85,8 +87,11 @@ const DrawerWithHooks = (args: SpiritDrawerProps) => {
         closeOnBackdropClick={closeOnBackdropClick}
         closeOnEscapeKeyDown={closeOnEscapeKeyDown}
       >
-        <DrawerPanel closeButton={<DrawerCloseButton />}>
-          <div className="p-800">Drawer content</div>
+        <DrawerPanel>
+          <DrawerPanelHeader>
+            <DrawerCloseButton />
+          </DrawerPanelHeader>
+          <DrawerPanelContent hasSpacing>Drawer content</DrawerPanelContent>
         </DrawerPanel>
       </Drawer>
     </>

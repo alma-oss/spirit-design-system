@@ -36,3 +36,8 @@
     overflow-y: auto;
     overscroll-behavior: contain;
 }
+
+.DrawerPanel__content--hasSpacing {
+    padding-inline: theme.$drawer-panel-content-padding-x;
+    padding-block: theme.$drawer-panel-content-padding-y;
+}

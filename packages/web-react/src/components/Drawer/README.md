@@ -6,7 +6,9 @@ The Drawer is a composition of several subcomponents:
 
 - [Drawer](#drawer)
   - [DrawerPanel](#drawerpanel)
-    - [DrawerCloseButton](#close-button)
+    - [DrawerPanelHeader](#drawerpanelheader)
+      - [DrawerCloseButton](#close-button)
+    - [DrawerPanelContent](#drawerpanelcontent)
 
 ## Accessibility Guidelines
 
@@ -74,22 +76,66 @@ and [escape hatches][readme-escape-hatches].
 ## DrawerPanel
 
 The `DrawerPanel` component is a container for the content that will be displayed in the drawer.
-Should there be any spacing around the content of `DrawerPanel`, you need to provide it yourself.
-
-Pass the `DrawerCloseButton` through the `closeButton` prop; it is rendered automatically inside the
-panel header. The `children` are rendered in the panel content area.
+It is composed from the `DrawerPanelHeader` and `DrawerPanelContent` sub-components.
 
 ```tsx
-<DrawerPanel closeButton={<DrawerCloseButton />}>{/* Drawer content goes here */}</DrawerPanel>
+<DrawerPanel>
+  <DrawerPanelHeader>
+    <DrawerCloseButton />
+  </DrawerPanelHeader>
+  <DrawerPanelContent hasSpacing>{/* Drawer content goes here */}</DrawerPanelContent>
+</DrawerPanel>
 ```
 
 ### API
 
-| Name          | Type          | Default | Required | Description                                      |
-| ------------- | ------------- | ------- | -------- | ------------------------------------------------ |
-| `children`    | `ReactNode`   | —       | ✕        | Children node rendered in the panel content area |
-| `closeButton` | `ReactNode`   | —       | ✕        | Close button rendered inside the panel header    |
-| `elementType` | `ElementType` | `div`   | ✕        | Type of element used as drawer panel             |
+| Name          | Type          | Default | Required | Description                          |
+| ------------- | ------------- | ------- | -------- | ------------------------------------ |
+| `children`    | `ReactNode`   | —       | ✕        | Children node                        |
+| `elementType` | `ElementType` | `div`   | ✕        | Type of element used as drawer panel |
+
+## DrawerPanelHeader
+
+The `DrawerPanelHeader` component is a container rendered at the top of the `DrawerPanel`.
+It is typically used to hold the `DrawerCloseButton`.
+
+```tsx
+<DrawerPanelHeader>
+  <DrawerCloseButton />
+</DrawerPanelHeader>
+```
+
+### API
+
+| Name       | Type        | Default | Required | Description   |
+| ---------- | ----------- | ------- | -------- | ------------- |
+| `children` | `ReactNode` | —       | ✕        | Children node |
+
+On top of the API options, the components accept [additional attributes][readme-additional-attributes].
+If you need more control over the styling of a component, you can use [style props][readme-style-props]
+and [escape hatches][readme-escape-hatches].
+
+## DrawerPanelContent
+
+The `DrawerPanelContent` component is a container for the main content of the `DrawerPanel`.
+
+By default it has no inner spacing. Set the `hasSpacing` prop to apply inner spacing consistent with
+`DrawerPanelHeader`, so you don't have to add it yourself.
+
+```tsx
+<DrawerPanelContent hasSpacing>{/* Drawer content goes here */}</DrawerPanelContent>
+```
+
+### API
+
+| Name         | Type        | Default | Required | Description                                               |
+| ------------ | ----------- | ------- | -------- | --------------------------------------------------------- |
+| `children`   | `ReactNode` | —       | ✕        | Children node                                             |
+| `hasSpacing` | `bool`      | `false` | ✕        | Whether the content has inner spacing matching the header |
+
+On top of the API options, the components accept [additional attributes][readme-additional-attributes].
+If you need more control over the styling of a component, you can use [style props][readme-style-props]
+and [escape hatches][readme-escape-hatches].
 
 ## Close Button
 
@@ -116,7 +162,14 @@ and [escape hatches][readme-escape-hatches].
 
 ```tsx
 import React, { useState } from 'react';
-import { Button, Drawer, DrawerPanel, DrawerCloseButton } from '@alma-oss/spirit-web-react';
+import {
+  Button,
+  Drawer,
+  DrawerPanel,
+  DrawerPanelHeader,
+  DrawerPanelContent,
+  DrawerCloseButton,
+} from '@alma-oss/spirit-web-react';
 
 export const Example = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -130,8 +183,11 @@ export const Example = () => {
       </Button>
 
       <Drawer id="drawer-example" isOpen={isOpen} onClose={handleClose}>
-        <DrawerPanel closeButton={<DrawerCloseButton />}>
-          <div>Drawer content</div>
+        <DrawerPanel>
+          <DrawerPanelHeader>
+            <DrawerCloseButton />
+          </DrawerPanelHeader>
+          <DrawerPanelContent hasSpacing>Drawer content</DrawerPanelContent>
         </DrawerPanel>
       </Drawer>
     </>

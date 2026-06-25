@@ -6,6 +6,8 @@ import { type DrawerPanelProps } from '../../../types';
 import Drawer from '../Drawer';
 import DrawerCloseButton from '../DrawerCloseButton';
 import DrawerPanel from '../DrawerPanel';
+import DrawerPanelContent from '../DrawerPanelContent';
+import DrawerPanelHeader from '../DrawerPanelHeader';
 import ReadMe from '../README.md?raw';
 
 const meta: Meta<typeof DrawerPanel> = {
@@ -26,8 +28,6 @@ const meta: Meta<typeof DrawerPanel> = {
   },
   args: {
     elementType: 'div',
-    closeButton: <DrawerCloseButton />,
-    children: <div className="p-800">Drawer content</div>,
   },
 };
 
@@ -37,7 +37,7 @@ type Story = StoryObj<typeof DrawerPanel>;
 export const DrawerPanelPlayground: Story = {
   name: 'DrawerPanel',
   render: (args) => {
-    const { elementType, children, closeButton } = args as Partial<DrawerPanelProps>;
+    const { elementType } = args as Partial<DrawerPanelProps>;
 
     return (
       <Drawer
@@ -48,8 +48,11 @@ export const DrawerPanelPlayground: Story = {
         closeOnBackdropClick={false}
         closeOnEscapeKeyDown={false}
       >
-        <DrawerPanel elementType={elementType} closeButton={closeButton}>
-          {children}
+        <DrawerPanel elementType={elementType}>
+          <DrawerPanelHeader>
+            <DrawerCloseButton />
+          </DrawerPanelHeader>
+          <DrawerPanelContent hasSpacing>Drawer content</DrawerPanelContent>
         </DrawerPanel>
       </Drawer>
     );
