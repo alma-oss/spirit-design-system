@@ -1,15 +1,10 @@
 // 1. Sized to comfortably fit the default placeholder copy ("+ Add more…", ~11 characters).
 
-@use '../../tools/form-fields' as form-fields-tools;
 @use '@tokens' as tokens;
 @use 'theme';
 
-$_field-name: 'Combobox';
-
 .UNSTABLE_Combobox {
     --#{tokens.$css-variable-prefix}combobox-input-min-width: #{theme.$input-min-width};
-
-    @include form-fields-tools.box-field-root-responsive-border-radius($_field-name);
 }
 
 .UNSTABLE_Combobox__input {
