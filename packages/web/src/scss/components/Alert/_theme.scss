@@ -1,9 +1,10 @@
 @use '@tokens' as tokens;
 @use '../../tools/units';
 
-$typography: tokens.$body-medium-regular;
+$typography: tokens.$caption;
 
-$gap: tokens.$space-700;
+$gap: tokens.$space-600;
+$icon-size: units.px-to-rem(20px);
 $padding: tokens.$space-700;
 $border-radius: tokens.$radius-300;
 $border-style: solid;

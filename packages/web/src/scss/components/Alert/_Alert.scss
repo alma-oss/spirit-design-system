@@ -1,9 +1,12 @@
-@use 'theme';
+@use '@tokens' as tokens;
 @use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/typography';
+@use 'theme';
 
 .Alert {
+    --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$icon-size};
+
     @include typography.generate(theme.$typography);
 
     display: grid;
