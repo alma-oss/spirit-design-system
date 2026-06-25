@@ -1,76 +1,13 @@
 // 1. Force the color to be printed as-is, without any color adjustment.
 // 2. Put the input above the stretched label.
-// 3. Prepare for the stretched label pseudo element (the `stretch()` mixin).
-// 4. Sets a gap between the label and input only if the label is visible,
-//    otherwise the gap will interfere the layout of multiple inline fields.
 
 @use 'sass:map';
-@use 'sass:string';
-@use '@tokens' as tokens;
 @use '../settings/cursors';
 @use '../settings/form-fields' as form-fields-settings;
-@use '../tools/breakpoint';
-@use 'accessibility';
-@use 'reset';
-@use 'string' as spirit-string;
-@use 'typography';
 
 @mixin input-disabled() {
     color: form-fields-settings.$input-color-state-disabled;
     cursor: cursors.$disabled;
-}
-
-@mixin validation-text() {
-    @include typography.generate(form-fields-settings.$validation-text-typography);
-
-    display: block;
-    margin-top: form-fields-settings.$validation-text-margin-top;
-
-    & > ul {
-        @include reset.list();
-    }
-
-    & > svg {
-        flex-shrink: 0;
-    }
-
-    &:has(> svg:first-child:not(:only-child)) {
-        display: flex;
-        column-gap: form-fields-settings.$validation-text-icon-gap;
-    }
-}
-
-@mixin validation-text-disabled() {
-    color: form-fields-settings.$validation-text-color-state-disabled;
-}
-
-@mixin inline-field-root($inline-field-name: '') {
-    position: relative; // 3.
-    display: inline-flex;
-    margin-block: form-fields-settings.$inline-field-margin-y;
-
-    @if $inline-field-name != '' {
-        // 4.
-        &:not(.#{$inline-field-name}--labelHidden) {
-            column-gap: form-fields-settings.$inline-field-gap;
-        }
-    }
-}
-
-@mixin inline-field-root-disabled() {
-    cursor: cursors.$disabled;
-}
-
-@mixin box-field-root-responsive-border-radius($field-name) {
-    @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
-        @include breakpoint.up($breakpoint-value) {
-            --#{tokens.$css-variable-prefix}form-fields-border-radius: var(
-                --#{tokens.$css-variable-prefix}#{spirit-string.convert-pascal-case-to-kebab-case(
-                        $field-name
-                    )}-input-border-radius-#{$breakpoint-name}
-            );
-        }
-    }
 }
 
 @mixin inline-field-input() {
@@ -97,41 +34,6 @@
     }
 }
 
-@mixin box-field-input($field-name) {
-    // @deprecated Remove typography fallback when form field sizes are mandatory.
-    // Migration: delete the `$fallback-config` parameter.
-    // https://jira.almacareer.tech/browse/DS-1884 — Remove deprecated typography mixin from form fields
-    @include typography.from-css-variables(
-        $infix: #{spirit-string.convert-pascal-case-to-kebab-case($field-name)}-input,
-        $fallback-config: map.get(form-fields-settings.$box-field-size-config, medium, typography, mobile)
-    );
-
-    display: block;
-    width: 100%;
-    padding: form-fields-settings.$box-field-input-padding-y form-fields-settings.$box-field-input-padding-x;
-    color: form-fields-settings.$box-field-input-color-state-default;
-    border: form-fields-settings.$box-field-input-border-width form-fields-settings.$box-field-input-border-style
-        form-fields-settings.$input-border-color;
-    border-radius: var(--#{tokens.$css-variable-prefix}form-fields-border-radius);
-    background: form-fields-settings.$input-background-color;
-
-    &::placeholder {
-        color: form-fields-settings.$box-field-input-placeholder-color-state-default;
-        opacity: 1;
-    }
-
-    @media (hover: hover) {
-        &:hover {
-            background-color: form-fields-settings.$input-background-color-state-hover;
-        }
-    }
-
-    &:active,
-    &:focus-within {
-        background-color: form-fields-settings.$input-background-color-state-active;
-    }
-}
-
 @mixin input-field-validation-states($field-name) {
     @each $validation-state-name, $validation-state-value in form-fields-settings.$validation-states {
         @if $field-name == 'FileUploadInput' {
@@ -142,12 +44,6 @@
         } @else if $field-name == 'File' {
             .#{$field-name}--#{$validation-state-name},
             .#{$field-name}.has-#{$validation-state-name} {
-                border-color: map.get($validation-state-value, input-border-color);
-            }
-        } @else if $field-name == 'Select' {
-            :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
-                > .#{$field-name}__inputContainer
-                > .#{$field-name}__input {
                 border-color: map.get($validation-state-value, input-border-color);
             }
         } @else if $field-name == 'Checkbox' {
@@ -165,112 +61,6 @@
 
                 &::before {
                     background-color: map.get($validation-state-value, input-border-color);
-                }
-            }
-        } @else {
-            :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
-                > .#{$field-name}__input {
-                border-color: map.get($validation-state-value, input-border-color);
-            }
-        }
-
-        @if $field-name == 'TextField' {
-            :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
-                .#{$field-name}__passwordToggle
-                > .#{$field-name}__input
-                ~ .#{$field-name}__passwordToggle__button::before {
-                border-color: map.get($validation-state-value, input-border-color);
-            }
-        }
-
-        @if $field-name == 'TextArea' {
-            :is(.#{$field-name}--#{$validation-state-name}, .#{$field-name}.has-#{$validation-state-name})
-                .#{$field-name}__counter {
-                @include typography.generate(form-fields-settings.$text-area-counter-typography-state-validation);
-
-                color: map.get($validation-state-value, validation-text-color);
-            }
-        }
-    }
-}
-
-@mixin box-field-fluid() {
-    width: 100%;
-}
-
-@mixin box-field-focus-visible() {
-    border-color: form-fields-settings.$box-field-input-border-color-focus;
-    outline: 0;
-    box-shadow: form-fields-settings.$input-focus-shadow;
-}
-
-@mixin box-field-disabled-input($has-placeholder: true) {
-    @include input-disabled();
-
-    border-color: form-fields-settings.$input-border-color-state-disabled;
-    background-color: form-fields-settings.$input-background-color-state-disabled;
-
-    @if $has-placeholder {
-        &::placeholder {
-            color: form-fields-settings.$box-field-input-placeholder-color-state-disabled;
-        }
-    }
-}
-
-@mixin item() {
-    align-items: center;
-    width: 100%;
-    padding: form-fields-settings.$item-padding-y form-fields-settings.$item-padding-x;
-    margin-block: 0;
-    border-radius: form-fields-settings.$item-border-radius;
-    background-color: form-fields-settings.$item-background-color-state-default;
-
-    @media (hover: hover) {
-        &:hover {
-            background-color: form-fields-settings.$item-background-color-state-hover;
-        }
-    }
-
-    &:active {
-        background-color: form-fields-settings.$item-background-color-state-active;
-    }
-}
-
-@mixin item-disabled() {
-    color: form-fields-settings.$item-color-state-disabled;
-    background-color: form-fields-settings.$item-background-color-state-default;
-}
-
-@mixin item-validation-text() {
-    @include typography.generate(form-fields-settings.$item-validation-text-typography);
-}
-
-// Generates responsive input position classes for form field components.
-// Creates modifier classes (e.g., `.Component--inputPositionStart`, `.Component--tablet--inputPositionEnd`)
-// that control flex-direction to position the input element relative to its label.
-//
-// @deprecated We will make the position modifier classes mandatory in the next version, so the `$default-selector`
-// logic can be deleted.
-@mixin input-position($component-class, $default-position: 'start') {
-    $positions: (
-        'start': row,
-        'end': row-reverse,
-    );
-
-    @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
-        $infix: breakpoint.get-modifier('infix', $breakpoint-name, $breakpoint-value);
-
-        @include breakpoint.up($breakpoint-value) {
-            @each $position, $direction in $positions {
-                $default-selector: null;
-
-                @if $position == $default-position {
-                    $default-selector: '.#{$component-class}:not([class*="--inputPosition"])';
-                }
-
-                .#{$component-class}--#{$infix}#{spirit-string.convert-kebab-case-to-camel-case(input-position-#{$position})},
-                #{$default-selector} {
-                    flex-direction: $direction;
                 }
             }
         }

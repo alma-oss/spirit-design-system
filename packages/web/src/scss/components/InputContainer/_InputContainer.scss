@@ -14,8 +14,11 @@
 @use 'theme';
 
 .InputContainer {
+    --#{tokens.$css-variable-prefix}input-container-border-width: #{theme.$border-width};
+    --#{tokens.$css-variable-prefix}input-container-input-padding-x: #{theme.$input-padding-x};
     --#{tokens.$css-variable-prefix}input-addon-min-width: calc(
-        var(--#{tokens.$css-variable-prefix}input-container-height) - 2 * #{theme.$border-width}
+        var(--#{tokens.$css-variable-prefix}input-container-height) - 2 *
+            var(--#{tokens.$css-variable-prefix}input-container-border-width)
     );
 
     position: relative;
@@ -24,7 +27,8 @@
     align-items: stretch;
     width: 100%;
     color: var(--#{tokens.$css-variable-prefix}input-container-color);
-    border: theme.$border-width theme.$border-style var(--#{tokens.$css-variable-prefix}input-container-border-color);
+    border: var(--#{tokens.$css-variable-prefix}input-container-border-width) theme.$border-style
+        var(--#{tokens.$css-variable-prefix}input-container-border-color);
     background-color: var(--#{tokens.$css-variable-prefix}input-container-background-color);
 
     &:has(> :where([size])) {
@@ -87,11 +91,11 @@
 
 .InputContainer > :is(input, textarea) {
     &:first-child {
-        padding-inline-start: theme.$input-padding-x;
+        padding-inline-start: var(--#{tokens.$css-variable-prefix}input-container-input-padding-x);
     }
 
     &:last-child {
-        padding-inline-end: theme.$input-padding-x;
+        padding-inline-end: var(--#{tokens.$css-variable-prefix}input-container-input-padding-x);
     }
 }
 
@@ -114,8 +118,10 @@
     // 4.
     &:where([size]) {
         width: calc(
-            var(--#{tokens.$css-variable-prefix}input-container-input-width) + 2 * #{theme.$input-padding-x} + 2 *
-                #{theme.$border-width} + var(--#{tokens.$css-variable-prefix}input-container-input-arrows-width, 0px)
+            var(--#{tokens.$css-variable-prefix}input-container-input-width) + 2 *
+                var(--#{tokens.$css-variable-prefix}input-container-input-padding-x) + 2 *
+                var(--#{tokens.$css-variable-prefix}input-container-border-width) +
+                var(--#{tokens.$css-variable-prefix}input-container-input-arrows-width, 0px)
         );
     }
 
@@ -131,10 +137,11 @@
 .InputContainer > select {
     grid-area: 1 / 1;
     width: 100%;
-    padding-inline: theme.$input-padding-x
+    padding-inline: var(--#{tokens.$css-variable-prefix}input-container-input-padding-x)
         calc(
-            var(--#{tokens.$css-variable-prefix}input-addon-min-width) + #{theme.$input-padding-x} - 2 *
-                #{theme.$border-width}
+            var(--#{tokens.$css-variable-prefix}input-addon-min-width) +
+                var(--#{tokens.$css-variable-prefix}input-container-input-padding-x) - 2 *
+                var(--#{tokens.$css-variable-prefix}input-container-border-width)
         );
 }
 
