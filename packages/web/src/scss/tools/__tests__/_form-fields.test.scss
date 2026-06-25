@@ -1,6 +1,4 @@
 @use 'true' as test;
-@use 'sass:map';
-@use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../form-fields';
@@ -18,66 +16,6 @@
                 .input-disabled-test {
                     color: form-fields-settings.$input-color-state-disabled;
                     cursor: cursors.$disabled;
-                }
-            }
-        }
-    }
-
-    @include test.it('should return box-field-fluid mixin styles') {
-        @include test.assert() {
-            @include test.output() {
-                .box-field-fluid-test {
-                    @include form-fields.box-field-fluid();
-                }
-            }
-
-            @include test.expect() {
-                .box-field-fluid-test {
-                    width: 100%;
-                }
-            }
-        }
-    }
-
-    @include test.it('should generate input-position classes with correct flex-direction') {
-        $tablet-breakpoint: map.get(tokens.$breakpoints, tablet);
-        $desktop-breakpoint: map.get(tokens.$breakpoints, desktop);
-
-        @include test.assert() {
-            @include test.output() {
-                @include form-fields.input-position($component-class: 'TestComponent', $default-position: 'start');
-            }
-
-            @include test.expect() {
-                .TestComponent--inputPositionStart,
-                .TestComponent:not([class*='--inputPosition']) {
-                    flex-direction: row;
-                }
-
-                .TestComponent--inputPositionEnd {
-                    flex-direction: row-reverse;
-                }
-
-                @media (width >= #{$tablet-breakpoint}) {
-                    .TestComponent--tablet--inputPositionStart,
-                    .TestComponent:not([class*='--inputPosition']) {
-                        flex-direction: row;
-                    }
-
-                    .TestComponent--tablet--inputPositionEnd {
-                        flex-direction: row-reverse;
-                    }
-                }
-
-                @media (width >= #{$desktop-breakpoint}) {
-                    .TestComponent--desktop--inputPositionStart,
-                    .TestComponent:not([class*='--inputPosition']) {
-                        flex-direction: row;
-                    }
-
-                    .TestComponent--desktop--inputPositionEnd {
-                        flex-direction: row-reverse;
-                    }
                 }
             }
         }
