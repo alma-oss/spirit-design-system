@@ -135,7 +135,7 @@ describe('PricingPlanBody', () => {
     render(<PricingPlanBody id="tier-1" features={features} />);
 
     const tooltipTrigger = screen.getByText('Feature with tooltip');
-    const tooltipCloseButton = screen.getByRole('button', { name: 'close' });
+    const tooltipCloseButton = screen.getByRole('button', { name: 'Close' });
 
     fireEvent.click(tooltipTrigger);
 

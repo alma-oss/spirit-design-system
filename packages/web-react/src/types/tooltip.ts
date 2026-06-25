@@ -1,6 +1,6 @@
 import { type Placement, type Strategy } from '@floating-ui/react';
 import type { ElementType, ReactNode } from 'react';
-import type { ChildrenProps, ClickEvent, PolymorphicComponentProps, SpiritDivElementProps, StyleProps } from './shared';
+import type { ChildrenProps, PolymorphicComponentProps, SpiritDivElementProps, StyleProps } from './shared';
 
 /** ===== BASE API ===== */
 export const TOOLTIP_TRIGGER = {
@@ -13,11 +13,6 @@ export const TOOLTIP_TRIGGER = {
 } as const;
 
 export type TooltipTriggerType = 'click' | 'hover' | 'focus' | 'manual';
-
-export interface TooltipCloseButtonProps extends StyleProps {
-  onClick?: (event: ClickEvent) => void;
-  label?: string;
-}
 
 export interface TooltipState {
   isOpen?: boolean;
