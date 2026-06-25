@@ -18,7 +18,9 @@ It is a standalone component, but most often it is used in combination with the 
     <div class="UNSTABLE_File__content">
       <div class="UNSTABLE_File__text">
         <span class="UNSTABLE_File__name">
-          <span class="text-truncate">Document.pdf</span>
+          <span class="text-truncate-multiline text-word-break-long-words" style="--text-truncate-lines: 1;">
+            Document.pdf
+          </span>
         </span>
         <span class="UNSTABLE_File__helperText">8,5 kB</span>
       </div>
@@ -126,7 +128,9 @@ Show upload progress using `.UNSTABLE_File__helperText`:
   <div class="UNSTABLE_File__content">
     <div class="UNSTABLE_File__text">
       <span class="UNSTABLE_File__name">
-        <span class="text-truncate">Document.pdf</span>
+        <span class="text-truncate-multiline text-word-break-long-words" style="--text-truncate-lines: 1;">
+          Document.pdf
+        </span>
       </span>
       <div class="UNSTABLE_File__helperText">
         <div>
@@ -154,7 +158,9 @@ Show upload progress using `.UNSTABLE_File__helperText`:
   <div class="UNSTABLE_File__content">
     <div class="UNSTABLE_File__text">
       <span class="UNSTABLE_File__name">
-        <span class="text-truncate">Document.pdf</span>
+        <span class="text-truncate-multiline text-word-break-long-words" style="--text-truncate-lines: 1;">
+          Document.pdf
+        </span>
       </span>
       <span class="UNSTABLE_File__helperText">8,5 kB</span>
     </div>
