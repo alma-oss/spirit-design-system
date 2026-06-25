@@ -1,8 +1,4 @@
-@use 'sass:map';
 @use '@tokens' as tokens;
-@use '../tools/tokens' as tokens-tools;
-@use '../tools/units';
-@use 'dictionaries';
 
 // Common for all form components
 $input-color-state-disabled: tokens.$disabled-content;
@@ -16,108 +12,21 @@ $input-border-color-warning: tokens.$form-field-warning;
 $input-border-color-danger: tokens.$form-field-danger;
 $input-border-color-state-disabled: tokens.$disabled-border;
 $input-focus-shadow: tokens.$focus-ring;
-$validation-text-typography: tokens.$body-small-semibold;
-$validation-text-margin-top: tokens.$space-400;
-$validation-text-icon-gap: tokens.$space-400;
-$validation-text-color-state-disabled: tokens.$disabled-content;
-$validation-text-color-success: tokens.$form-field-success;
-$validation-text-color-warning: tokens.$form-field-warning;
-$validation-text-color-danger: tokens.$form-field-danger;
 
 // Inline field form components – Checkbox, Radio, etc.
-$inline-field-gap: tokens.$space-500;
-$inline-field-margin-y: tokens.$space-500;
 $inline-field-input-border-color-checked: tokens.$form-field-fill-border-state-selected;
 $inline-field-input-border-color-checked-disabled: tokens.$disabled-background;
 $inline-field-input-border-width: tokens.$border-width-200;
 $inline-field-input-background-color-checked: tokens.$selected-state-default;
 
-// Box field form components – TextField, TextArea, etc.
-$box-field-input-color-state-default: tokens.$form-field-fill-content;
-$box-field-input-border-width: tokens.$border-width-100;
-$box-field-input-border-style: solid;
-$box-field-input-border-color-focus: tokens.$border-focus;
-$box-field-input-focus-shadow: tokens.$focus-ring;
-
-// @deprecated Remove typography fallback when form field sizes are mandatory.
-// Migration: delete the `$box-field-input-fallback-typography` variable.
-// https://jira.almacareer.tech/browse/DS-1884 — Remove deprecated typography mixin from form fields
-$box-field-input-fallback-typography: tokens.$body-medium-regular;
-
-$box-field-input-border-radius: tokens.$radius-300;
-$box-field-input-placeholder-color-state-default: tokens.$form-field-fill-placeholder;
-$box-field-input-placeholder-color-state-disabled: tokens.$disabled-content;
-$box-field-input-padding-x: tokens.$space-600;
-$box-field-input-padding-y: calc(#{tokens.$space-500} - #{tokens.$border-width-100});
-$box-field-input-width: 100%;
-
-$box-field-size-dictionary: dictionaries.$size;
-$box-field-size-config: (
-    small: map.merge(
-            (
-                height: units.px-to-rem(32px),
-                typography: tokens.$body-small-regular,
-            ),
-            tokens-tools.generate-responsive-map(
-                $property: 'border-radius',
-                $size: 'small',
-                $variable-prefix: 'form-field',
-                $token-name: 'radius',
-                $fallback: $box-field-input-border-radius,
-            )
-        ),
-    medium: map.merge(
-            (
-                height: units.px-to-rem(40px),
-                typography: tokens.$body-medium-regular,
-            ),
-            tokens-tools.generate-responsive-map(
-                $property: 'border-radius',
-                $size: 'medium',
-                $variable-prefix: 'form-field',
-                $token-name: 'radius',
-                $fallback: $box-field-input-border-radius,
-            )
-        ),
-    large: map.merge(
-            (
-                height: units.px-to-rem(48px),
-                typography: tokens.$body-medium-regular,
-            ),
-            tokens-tools.generate-responsive-map(
-                $property: 'border-radius',
-                $size: 'large',
-                $variable-prefix: 'form-field',
-                $token-name: 'radius',
-                $fallback: $box-field-input-border-radius,
-            )
-        ),
-);
-
 $validation-states: (
     success: (
         input-border-color: $input-border-color-success,
-        validation-text-color: $validation-text-color-success,
     ),
     warning: (
         input-border-color: $input-border-color-warning,
-        validation-text-color: $validation-text-color-warning,
     ),
     danger: (
         input-border-color: $input-border-color-danger,
-        validation-text-color: $validation-text-color-danger,
     ),
 );
-
-// Item variant
-$item-padding-x: tokens.$space-700;
-$item-padding-y: tokens.$space-500;
-$item-color-state-disabled: tokens.$disabled-content;
-$item-border-radius: tokens.$radius-200;
-$item-background-color-state-default: tokens.$background-interactive-state-default;
-$item-background-color-state-hover: tokens.$background-interactive-state-hover;
-$item-background-color-state-active: tokens.$background-interactive-state-active;
-$item-validation-text-typography: tokens.$body-small-semibold;
-
-// TextArea character counter
-$text-area-counter-typography-state-validation: tokens.$body-small-semibold;

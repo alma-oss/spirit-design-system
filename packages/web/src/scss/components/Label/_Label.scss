@@ -20,7 +20,7 @@
 }
 
 .Label:not(:is(.Label--inline, .Label--item)) {
-    margin-bottom: theme.$box-field-margin-bottom;
+    margin-bottom: theme.$margin-bottom;
 }
 
 .Label--inline,

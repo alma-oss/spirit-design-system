@@ -1,5 +1,3 @@
-@use '../../tools/form-fields' as form-fields-tools;
-
 .FileUpload {
-    @include form-fields-tools.box-field-fluid();
+    width: 100%;
 }
