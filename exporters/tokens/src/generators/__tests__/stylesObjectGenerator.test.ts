@@ -1,4 +1,4 @@
-import { Token, TokenGroup, TypographyToken, TypographyTokenValue } from '@supernovaio/sdk-exporters';
+import { Token, TokenGroup, TokenType, TypographyToken, TypographyTokenValue } from '@supernovaio/sdk-exporters';
 import { exampleColorsTokens } from '../../../tests/fixtures/exampleColorTokens';
 import {
   exampleDeviceUpdatedTokens,
@@ -30,6 +30,50 @@ const tokenGroups: Array<TokenGroup> = exampleGroups;
 jest.mock('../../../config', () => ({
   exportConfiguration: sampleConfigurationDefault,
 }));
+
+const flatCaptionTypographyToken = {
+  id: 'typographyFlatCaption',
+  name: 'Caption',
+  tokenType: TokenType.typography,
+  parentGroupId: '3',
+  origin: {
+    name: 'Caption',
+  },
+  value: {
+    fontSize: { unit: 'Pixels', measure: 14, referencedTokenId: null },
+    lineHeight: { unit: 'Pixels', measure: 20, referencedTokenId: null },
+    fontFamily: { text: 'Inter' },
+    fontWeight: { text: 'Regular' },
+    textDecoration: { value: 'None' },
+    textCase: { value: 'Original' },
+    letterSpacing: { unit: 'Pixels', measure: 0 },
+    paragraphIndent: { unit: 'Pixels', measure: 0 },
+    paragraphSpacing: { unit: 'Pixels', measure: 0 },
+    referencedTokenId: null,
+  },
+} as TypographyToken;
+
+const flatEyebrowTypographyToken = {
+  id: 'typographyFlatEyebrow',
+  name: 'Eyebrow',
+  tokenType: TokenType.typography,
+  parentGroupId: '3',
+  origin: {
+    name: 'Eyebrow',
+  },
+  value: {
+    fontSize: { unit: 'Pixels', measure: 12, referencedTokenId: null },
+    lineHeight: { unit: 'Pixels', measure: 16, referencedTokenId: null },
+    fontFamily: { text: 'Inter' },
+    fontWeight: { text: 'Bold' },
+    textDecoration: { value: 'None' },
+    textCase: { value: 'Uppercase' },
+    letterSpacing: { unit: 'Pixels', measure: 0 },
+    paragraphIndent: { unit: 'Pixels', measure: 0 },
+    paragraphSpacing: { unit: 'Pixels', measure: 0 },
+    referencedTokenId: null,
+  },
+} as TypographyToken;
 
 describe('stylesObjectGenerator', () => {
   describe('generateStylesObjectFromTokens', () => {
@@ -171,6 +215,78 @@ describe('stylesObjectGenerator', () => {
       );
 
       expect(styles).toStrictEqual(expectedStyles);
+    });
+
+    it('should generate flat typography tokens and include them in styles', () => {
+      const styles = generateStylesObjectFromTokens(
+        [flatCaptionTypographyToken],
+        tokenGroups,
+        true,
+        false,
+        false,
+        undefined,
+        undefined,
+        undefined,
+      );
+
+      expect(styles).toStrictEqual({
+        $caption: {
+          mobile:
+            '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 14px,\nfont-style: normal,\nfont-weight: 400,\nline-height: 1.43,\n)',
+        },
+        $styles: {
+          caption: '$caption',
+          moveToTheEnd: 'true',
+        },
+      });
+    });
+
+    it('should generate flat typography tokens and include them in styles (JS output)', () => {
+      const styles = generateStylesObjectFromTokens(
+        [flatCaptionTypographyToken],
+        tokenGroups,
+        true,
+        true,
+        false,
+        undefined,
+        undefined,
+        undefined,
+      );
+
+      expect(styles).toStrictEqual({
+        caption: {
+          mobile:
+            "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '14px',\nfontStyle: 'normal',\nfontWeight: 400,\nlineHeight: 1.43,\n}",
+        },
+        styles: {
+          caption: 'caption',
+          moveToTheEnd: 'true',
+        },
+      });
+    });
+
+    it('should generate flat eyebrow typography token and include it in styles', () => {
+      const styles = generateStylesObjectFromTokens(
+        [flatEyebrowTypographyToken],
+        tokenGroups,
+        true,
+        false,
+        false,
+        undefined,
+        undefined,
+        undefined,
+      );
+
+      expect(styles).toStrictEqual({
+        $eyebrow: {
+          mobile:
+            '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 12px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.33,\n)',
+        },
+        $styles: {
+          eyebrow: '$eyebrow',
+          moveToTheEnd: 'true',
+        },
+      });
     });
   });
 
