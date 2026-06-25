@@ -1,5 +1,3 @@
-// 1. Width of the icon and padding.
-
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../settings/dictionaries';
@@ -27,18 +25,18 @@ $fill-variant-dictionary: dictionaries.$fill-variants;
 
 // Item
 $item-height: units.px-to-rem(40px);
-$item-padding-x: calc(#{tokens.$space-600} - #{tokens.$border-width-100});
+$item-padding-x: tokens.$space-600;
 $item-padding-y: tokens.$space-700;
 $item-border-radius: tokens.$radius-full;
-$item-label-typography: tokens.$body-small-semibold;
-$item-gap: tokens.$space-400;
-$item-icon-size: units.px-to-rem(20px);
+$item-label-typography: tokens.$action-small;
+$item-gap: tokens.$space-500;
+$item-icon-size: units.px-to-rem(16px);
 $item-background-hover: tokens.$background-interactive-state-hover;
 $item-border-default: tokens.$border-width-100 solid transparent;
 $item-outline-width: tokens.$border-width-100;
 $item-disabled-cursor: cursors.$disabled;
 $item-disabled-color: tokens.$disabled-content;
-$item-min-width: ($item-padding-y * 2 + $item-icon-size); // 1.
+$item-min-width: 2 + $item-height;
 
 $fill-variant-config: (
     outline: (
