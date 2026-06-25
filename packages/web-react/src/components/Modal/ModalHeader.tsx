@@ -2,9 +2,9 @@
 
 import classNames from 'classnames';
 import React from 'react';
-import { useI18n, useStyleProps } from '../../hooks';
+import { useStyleProps } from '../../hooks';
 import { type ModalHeaderProps } from '../../types';
-import ModalCloseButton from './ModalCloseButton';
+import { CloseButton } from '../CloseButton';
 import { useModalContext } from './ModalContext';
 import { useModalStyleProps } from './useModalStyleProps';
 
@@ -15,8 +15,6 @@ const defaultProps: ModalHeaderProps = {
 const ModalHeader = (props: ModalHeaderProps) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { children, closeLabel, hasCloseButton, ...restProps } = propsWithDefaults;
-  const { t } = useI18n();
-  const resolvedCloseLabel = closeLabel ?? t('common.close');
   const { classProps } = useModalStyleProps();
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const { id, isOpen, onClose } = useModalContext();
@@ -28,7 +26,9 @@ const ModalHeader = (props: ModalHeaderProps) => {
           {children}
         </h2>
       )}
-      {hasCloseButton && <ModalCloseButton id={id} isOpen={isOpen} label={resolvedCloseLabel} onClose={onClose} />}
+      {hasCloseButton && (
+        <CloseButton size="xlarge" aria-expanded={isOpen} aria-controls={id} label={closeLabel} onClick={onClose} />
+      )}
     </header>
   );
 };

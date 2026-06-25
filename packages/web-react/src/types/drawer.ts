@@ -1,6 +1,5 @@
 import { type ComponentPropsWithRef, type ElementType, type ReactNode, type SyntheticEvent } from 'react';
 import { type AlignmentX } from '../constants';
-import { type SpiritControlButtonProps } from './controlButton';
 import {
   type ChildrenProps,
   type OmittedExtendedUnsafeStyleProps,
@@ -18,13 +17,6 @@ export type DrawerPanelHandlingProps = {
   closeOnBackdropClick?: boolean;
   closeOnEscapeKeyDown?: boolean;
 };
-
-export interface DrawerCloseButtonProps extends Omit<
-  SpiritControlButtonProps<'button'>,
-  'children' | 'isSymmetrical' | 'size'
-> {
-  label?: string;
-}
 
 export type DrawerPanelBaseProps<E extends ElementType = DrawerPanelElementType> = {
   elementType?: E;

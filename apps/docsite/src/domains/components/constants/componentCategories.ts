@@ -6,7 +6,7 @@ export const SORT_OPTIONS = {
 export type SortOption = (typeof SORT_OPTIONS)[keyof typeof SORT_OPTIONS];
 
 export const COMPONENT_CATEGORIES: Record<string, string[]> = {
-  Actions: ['ActionGroup', 'Button', 'ButtonLink', 'ControlButton', 'Link', 'SkipLink', 'SplitButton'],
+  Actions: ['ActionGroup', 'Button', 'ButtonLink', 'CloseButton', 'ControlButton', 'Link', 'SkipLink', 'SplitButton'],
   Content: ['Accordion', 'Avatar', 'Card', 'EmptyState', 'Item', 'Pill', 'PricingPlan', 'Tag', 'Timeline'],
   Feedback: ['Alert', 'Skeleton', 'Spinner', 'Toast', 'Tooltip'],
   Forms: [

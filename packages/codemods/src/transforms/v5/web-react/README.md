@@ -360,5 +360,37 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/unstable-file-component-
 + <File id="file-1" label="file.pdf" … />
 ```
 
+### `v5/web-react/close-buttons-to-close-button` — Replace Component-Specific Close Buttons with `CloseButton`
+
+The component-specific `DrawerCloseButton`, `ModalCloseButton`, and `TooltipCloseButton` components have been removed in favor of the single shared [`CloseButton`][close-button] component. This codemod migrates all three to `CloseButton`, remapping their props to the underlying ARIA / `ControlButton` contract and updating the imports.
+
+`ModalCloseButton` and `TooltipCloseButton` are migrated fully — their wiring is available at the call site.
+
+ℹ️ `DrawerCloseButton` took its `onClick`, `aria-controls`, and `aria-expanded` from the drawer context, which is not available at the call site, so the codemod **scaffolds** it: it emits a `CloseButton` with `size="large"` and `TODO_drawerIsOpen` / `TODO_drawerId` / `TODO_drawerOnClose` placeholder identifiers. These are intentionally undefined, so your build fails until you replace them with the drawer's open state, `id`, and `onClose` handler. See the [migration guide][migration-guide-web-react-v5-close-buttons].
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/close-buttons-to-close-button
+```
+
+#### Example
+
+```diff
+- import { Drawer, DrawerCloseButton, DrawerPanel, Modal, ModalCloseButton, Tooltip, TooltipCloseButton } from '@alma-oss/spirit-web-react';
++ import { Drawer, DrawerPanel, Modal, Tooltip, CloseButton } from '@alma-oss/spirit-web-react';
+…
+- <DrawerPanel closeButton={<DrawerCloseButton />}>
++ <DrawerPanel closeButton={<CloseButton size="large" aria-expanded={TODO_drawerIsOpen} aria-controls={TODO_drawerId} onClick={TODO_drawerOnClose} />}>
+…
+- <ModalCloseButton id={id} isOpen={isOpen} onClose={onClose} label="Close" />
++ <CloseButton size="xlarge" aria-controls={id} aria-expanded={isOpen} onClick={onClose} label="Close" />
+…
+- <TooltipCloseButton onClick={onClose} label="Close" />
++ <CloseButton aria-expanded="true" onClick={onClose} label="Close" />
+```
+
+[close-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/CloseButton/README.md
 [mdn-column-gap]: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/column-gap
+[migration-guide-web-react-v5-close-buttons]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web-react/migration-v5.md#close-buttons-unified-into-closebutton
 [migration-guide-web-v5-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md#stack-wrap-direct-children-in-stackitem-when-using-dividers

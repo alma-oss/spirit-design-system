@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import { AlignmentX } from '../../../constants';
 import { type DrawerPanelProps } from '../../../types';
+import { CloseButton } from '../../CloseButton';
 import Drawer from '../Drawer';
-import DrawerCloseButton from '../DrawerCloseButton';
 import DrawerPanel from '../DrawerPanel';
 import ReadMe from '../README.md?raw';
 
@@ -26,7 +26,7 @@ const meta: Meta<typeof DrawerPanel> = {
   },
   args: {
     elementType: 'div',
-    closeButton: <DrawerCloseButton />,
+    closeButton: <CloseButton size="large" aria-expanded aria-controls="drawer-panel-demo" onClick={() => {}} />,
     children: <div className="p-800">Drawer content</div>,
   },
 };

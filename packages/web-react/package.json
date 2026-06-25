@@ -255,6 +255,14 @@
       "require": "./dist/components/Checkbox/index.cjs",
       "default": "./dist/components/Checkbox/index.js"
     },
+    "./components/CloseButton": {
+      "types": "./dist/components/CloseButton/index.d.ts",
+      "development": "./src/components/CloseButton/index.ts",
+      "production": "./dist/components/CloseButton/index.js",
+      "import": "./dist/components/CloseButton/index.js",
+      "require": "./dist/components/CloseButton/index.cjs",
+      "default": "./dist/components/CloseButton/index.js"
+    },
     "./components/Collapse": {
       "types": "./dist/components/Collapse/index.d.ts",
       "development": "./src/components/Collapse/index.ts",
