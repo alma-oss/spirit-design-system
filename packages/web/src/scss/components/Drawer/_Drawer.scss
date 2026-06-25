@@ -9,7 +9,7 @@
 .Drawer {
     --#{tokens.$css-variable-prefix}drawer-translate-x: 0%;
 
-    @include typography.generate(theme.$drawer-typography);
+    @include typography.generate(theme.$typography);
 
     all: unset;
     position: fixed;
@@ -21,7 +21,7 @@
     height: 100%;
     max-height: none;
     border: none;
-    background-color: theme.$drawer-backdrop-background-color;
+    background-color: theme.$backdrop-background-color;
     visibility: hidden;
 
     &::backdrop {
@@ -31,10 +31,10 @@
     @media (prefers-reduced-motion: no-preference) {
         /* stylelint-disable declaration-property-value-disallowed-list -- 1. */
         transition:
-            display theme.$drawer-transition-duration allow-discrete,
-            overlay theme.$drawer-transition-duration allow-discrete,
-            visibility theme.$drawer-transition-duration,
-            opacity theme.$drawer-transition-duration;
+            display theme.$transition-duration allow-discrete,
+            overlay theme.$transition-duration allow-discrete,
+            visibility theme.$transition-duration,
+            opacity theme.$transition-duration;
         /* stylelint-enable declaration-property-value-disallowed-list */
     }
 }

@@ -28,6 +28,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
   - [Close Buttons Unified Into `CloseButton`](#close-buttons-unified-into-closebutton)
+  - [DrawerPanel: Restructured with Sub-components](#drawerpanel-restructured-with-sub-components)
 
 ## General Changes
 
@@ -725,22 +726,23 @@ communicated through the action's background and color only.
 
 ### Close Buttons Unified Into `CloseButton`
 
-The component-specific close buttons — `DrawerCloseButton`, `ModalCloseButton`, and `TooltipCloseButton` — have
-been **removed** in favor of the single shared [`CloseButton`][readme-close-button] component. Their prop types
-(`DrawerCloseButtonProps`, `ModalCloseButtonProps`, `TooltipCloseButtonProps`) were removed as well.
+The component-specific close buttons — `ModalCloseButton` and `TooltipCloseButton` — have been **removed** in
+favor of the single shared [`CloseButton`][readme-close-button] component. Their prop types
+(`ModalCloseButtonProps`, `TooltipCloseButtonProps`) were removed as well.
 
 The Modal and Tooltip close buttons are rendered internally (through `ModalHeader`'s `hasCloseButton` and
-`TooltipPopover`'s `isDismissible`), so most projects only need to migrate direct usages and `DrawerCloseButton`.
+`TooltipPopover`'s `isDismissible`), so most projects only need to migrate direct usages.
 
-| Removed                    | Replacement                                                                                                                                 |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<ModalCloseButton … />`   | `<CloseButton size="xlarge" aria-controls={id} aria-expanded={isOpen} onClick={onClose} … />`                                               |
-| `<TooltipCloseButton … />` | `<CloseButton aria-expanded="true" onClick={onClose} … />`                                                                                  |
-| `<DrawerCloseButton />`    | `<CloseButton size="large" aria-controls={id} aria-expanded={isOpen} onClick={onClose} … />` (codemod scaffolds with `TODO_*` placeholders) |
+`DrawerCloseButton` was also removed — see [DrawerPanel: Restructured with Sub-components](#drawerpanel-restructured-with-sub-components) for the complete Drawer migration.
+
+| Removed                    | Replacement                                                                                   |
+| -------------------------- | --------------------------------------------------------------------------------------------- |
+| `<ModalCloseButton … />`   | `<CloseButton size="xlarge" aria-controls={id} aria-expanded={isOpen} onClick={onClose} … />` |
+| `<TooltipCloseButton … />` | `<CloseButton aria-expanded="true" onClick={onClose} … />`                                    |
 
 #### Migration Guide
 
-🪄 Use codemods to migrate all three close buttons:
+🪄 Use codemods to migrate:
 
 ```sh
 npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/close-buttons-to-close-button
@@ -748,31 +750,8 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/close-buttons-to-close-b
 
 👉 See [Codemods documentation][readme-codemods] for more details.
 
-ℹ️ `ModalCloseButton` and `TooltipCloseButton` are migrated fully. `DrawerCloseButton` took its `onClick`,
-`aria-controls`, and `aria-expanded` from the drawer context, which is unavailable at the call site, so the
-codemod **scaffolds** it: it emits a `CloseButton size="large"` with `TODO_drawerIsOpen`, `TODO_drawerId`, and
-`TODO_drawerOnClose` placeholder identifiers. They are intentionally undefined — your build fails until you
-replace them with the drawer's open state, `id`, and `onClose` handler (see below).
-
 <details>
   <summary>🔧 Manual Migration Steps</summary>
-
-**`DrawerCloseButton`** — the codemod replaces it with a scaffolded `CloseButton` carrying `TODO_*` placeholder
-identifiers. Finish the migration by replacing each placeholder with the drawer's real open state, `id`, and
-`onClose` handler:
-
-```diff
-  <Drawer id="my-drawer" isOpen={isOpen} onClose={handleClose}>
-    <DrawerPanel
-      closeButton={
--       <CloseButton size="large" aria-expanded={TODO_drawerIsOpen} aria-controls={TODO_drawerId} onClick={TODO_drawerOnClose} />
-+       <CloseButton size="large" aria-expanded={isOpen} aria-controls="my-drawer" onClick={handleClose} />
-      }
-    >
-      {/* … */}
-    </DrawerPanel>
-  </Drawer>
-```
 
 **`ModalCloseButton`** — only if you used it directly; `ModalHeader` still renders it for you via `hasCloseButton`:
 
@@ -793,11 +772,71 @@ identifiers. Finish the migration by replacing each placeholder with the drawer'
 
 ---
 
+### DrawerPanel: Restructured with Sub-components
+
+`DrawerCloseButton` has been removed. The panel's interior is now structured with two explicit sub-components:
+
+- **`DrawerPanelHeader`** — renders the top bar; place the close button (and any title) here.
+- **`DrawerPanelBody`** — renders the scrollable body; accepts `hasSpacing` for built-in padding.
+
+Additionally, `<Drawer>` now requires an `aria-label` so the underlying `<dialog>` element has an accessible name.
+
+| Removed                       | Replacement                                                   |
+| ----------------------------- | ------------------------------------------------------------- |
+| `<DrawerCloseButton />`       | `<CloseButton size="large" … />` inside `<DrawerPanelHeader>` |
+| `hasSpacing` on `DrawerPanel` | `hasSpacing` on `DrawerPanelBody`                             |
+
+#### Migration Guide
+
+🪄 Use the codemod to migrate automatically:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/drawer-panel-close-button-composition
+```
+
+ℹ️ The codemod replaces `DrawerCloseButton` with a scaffolded `CloseButton size="large"` carrying
+`TODO_drawerIsOpen`, `TODO_drawerId`, and `TODO_drawerOnClose` placeholder identifiers. They are intentionally
+undefined — your build fails until you replace them with the drawer's open state, `id`, and `onClose` handler.
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+```diff
+- <Drawer id="my-drawer" isOpen={isOpen} onClose={handleClose}>
++ <Drawer id="my-drawer" isOpen={isOpen} onClose={handleClose} aria-label="Navigation">
+    <DrawerPanel
+-     closeButton={<DrawerCloseButton />}
+-     hasSpacing
+    >
++     <DrawerPanelHeader>
++       <CloseButton size="large" aria-expanded={isOpen} aria-controls="my-drawer" onClick={handleClose} />
++     </DrawerPanelHeader>
++     <DrawerPanelBody hasSpacing>
+        {/* drawer body */}
++     </DrawerPanelBody>
+    </DrawerPanel>
+  </Drawer>
+```
+
+Update your imports:
+
+```diff
+- import { Drawer, DrawerCloseButton, DrawerPanel } from '@alma-oss/spirit-web-react';
++ import { CloseButton, Drawer, DrawerPanel, DrawerPanelHeader, DrawerPanelBody } from '@alma-oss/spirit-web-react';
+```
+
+</details>
+
+---
+
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
 
 [migration-guide-web]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md
 [readme-close-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/CloseButton/README.md
 [readme-codemods]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/README.md
+[readme-drawer]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Drawer/README.md
 [readme-file]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/File/README.md
 [readme-file-upload]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FileUpload/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md

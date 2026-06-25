@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CloseButton } from '../../CloseButton';
 import { Container } from '../../Container';
-import { Drawer, DrawerPanel } from '../../Drawer';
+import { Drawer, DrawerPanel, DrawerPanelBody, DrawerPanelHeader } from '../../Drawer';
 import { Flex } from '../../Flex';
 import { ProductLogo } from '../../ProductLogo';
 import { defaultSvgLogo } from '../../ProductLogo/demo/ProductLogoDefault';
@@ -32,28 +32,34 @@ const HeaderWithPillNavigation = () => {
         </Container>
       </Header>
 
-      <Drawer id="drawer-navigation-pill" isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        <DrawerPanel
-          closeButton={
+      <Drawer
+        id="drawer-navigation-pill"
+        isOpen={isDrawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        aria-label="Navigation"
+      >
+        <DrawerPanel>
+          <DrawerPanelHeader>
             <CloseButton
               size="large"
               aria-expanded={isDrawerOpen}
               aria-controls="drawer-navigation-pill"
               onClick={() => setDrawerOpen(false)}
             />
-          }
-        >
-          <Stack hasIntermediateDividers hasSpacing marginBottom="space-900" spacing="space-900">
-            <StackItem>
-              <ProfileNavigation />
-            </StackItem>
-            <StackItem>
-              <MainNavigation direction="vertical" variant="pill" />
-            </StackItem>
-            <StackItem>
-              <SecondaryVerticalNavigation />
-            </StackItem>
-          </Stack>
+          </DrawerPanelHeader>
+          <DrawerPanelBody>
+            <Stack hasIntermediateDividers hasSpacing marginBottom="space-900" spacing="space-900">
+              <StackItem>
+                <ProfileNavigation />
+              </StackItem>
+              <StackItem>
+                <MainNavigation direction="vertical" variant="pill" />
+              </StackItem>
+              <StackItem>
+                <SecondaryVerticalNavigation />
+              </StackItem>
+            </Stack>
+          </DrawerPanelBody>
         </DrawerPanel>
       </Drawer>
     </>

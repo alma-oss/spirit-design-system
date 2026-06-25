@@ -6,6 +6,8 @@ import { Box } from '../../Box';
 import { CloseButton } from '../../CloseButton';
 import Drawer from '../Drawer';
 import DrawerPanel from '../DrawerPanel';
+import DrawerPanelBody from '../DrawerPanelBody';
+import DrawerPanelHeader from '../DrawerPanelHeader';
 
 const DrawerDefault = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -83,21 +85,20 @@ const DrawerDefault = () => {
         id="example-basic"
         isOpen={isDrawerOpen}
         onClose={handleDrawerClose}
+        aria-label="Drawer"
         closeOnBackdropClick={isClosableOnBackdropClick}
         closeOnEscapeKeyDown={isClosableOnEscapeKey}
       >
-        <DrawerPanel
-          data-testid="drawer-panel"
-          closeButton={
+        <DrawerPanel data-testid="drawer-panel">
+          <DrawerPanelHeader>
             <CloseButton
               size="large"
               aria-expanded={isDrawerOpen}
               aria-controls="example-basic"
               onClick={handleDrawerClose}
             />
-          }
-        >
-          <div className="px-700 pb-900">{content}</div>
+          </DrawerPanelHeader>
+          <DrawerPanelBody hasSpacing>{content}</DrawerPanelBody>
         </DrawerPanel>
       </Drawer>
     </>
