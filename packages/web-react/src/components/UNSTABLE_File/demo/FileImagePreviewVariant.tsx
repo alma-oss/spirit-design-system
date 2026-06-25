@@ -95,7 +95,7 @@ const FileImagePreviewVariant = () => (
       </ul>
     </section>
     <section>
-      <h3>No action buttons</h3>
+      <h3>No Action Buttons</h3>
       <ul aria-label="Image attachments">
         <UNSTABLE_File
           label="Document.pdf"

@@ -2,12 +2,13 @@
 
 import classNames from 'classnames';
 import React, { type ElementType } from 'react';
-import { useClassNamePrefix, useI18n, useStyleProps } from '../../hooks';
+import { useI18n, useStyleProps } from '../../hooks';
 import { ControlButton } from '../ControlButton';
 import { ValidationText } from '../Field';
 import { useValidationTextRole } from '../Field/useValidationTextRole';
 import { Flex } from '../Flex';
 import { Icon } from '../Icon';
+import { Truncate } from '../Truncate';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { DEFAULT_FILE_ACTION_BUTTON_ICON_NAME, DEFAULT_FILE_ICON_NAME } from './constants';
 import { type SpiritUnstableFileProps } from './types';
@@ -87,7 +88,9 @@ const UNSTABLE_File = <E extends ElementType = 'li'>(props: SpiritUnstableFilePr
       <div className={classProps.content}>
         <div className={classProps.text}>
           <span className={classProps.name}>
-            <span className={useClassNamePrefix('text-truncate')}>{label}</span>
+            <Truncate limit={1} UNSAFE_className="text-word-break-long-words">
+              {label}
+            </Truncate>
           </span>
           {helperText && <div className={classProps.helperText}>{helperText}</div>}
           {validationState && (

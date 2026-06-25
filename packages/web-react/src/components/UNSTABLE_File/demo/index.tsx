@@ -5,6 +5,7 @@ import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import FileIconVariant from './FileIconVariant';
 import FileImagePreviewVariant from './FileImagePreviewVariant';
+import FileTruncatedLabel from './FileTruncatedLabel';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
@@ -15,6 +16,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
         </DocsSection>
         <DocsSection title="Image Preview Variant" stackAlignment="stretch">
           <FileImagePreviewVariant />
+        </DocsSection>
+        <DocsSection title="Label Truncation" stackAlignment="stretch">
+          <FileTruncatedLabel />
         </DocsSection>
       </div>
     </IconsProvider>
