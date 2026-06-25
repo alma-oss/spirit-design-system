@@ -36,29 +36,13 @@ describe('DrawerPanel', () => {
     expect(screen.getByTestId('test')).toHaveClass('DrawerPanel');
   });
 
-  it('should render with correct class for content', () => {
-    render(<DrawerPanel data-testid="test">Test content</DrawerPanel>);
-
-    expect(screen.getByText('Test content')).toHaveClass('DrawerPanel__content');
-    expect(screen.getByText('Test content')).toContainHTML('div');
-  });
-
-  it('should render the close button inside the panel header', () => {
+  it('should render children directly without wrapper', () => {
     render(
-      <DrawerPanel data-testid="test" closeButton={<button type="button">Close</button>}>
-        Test content
+      <DrawerPanel data-testid="test">
+        <span>Test content</span>
       </DrawerPanel>,
     );
 
-    const closeButton = screen.getByRole('button', { name: 'Close' });
-
-    expect(closeButton).toBeInTheDocument();
-    expect(closeButton.parentElement).toHaveClass('DrawerPanel__header');
-  });
-
-  it('should not render the panel header when no close button is provided', () => {
-    const { container } = render(<DrawerPanel data-testid="test">Test content</DrawerPanel>);
-
-    expect(container.querySelector('.DrawerPanel__header')).not.toBeInTheDocument();
+    expect(screen.getByText('Test content').parentElement).toHaveClass('DrawerPanel');
   });
 });

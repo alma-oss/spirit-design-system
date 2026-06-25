@@ -1,0 +1,9 @@
+@use 'theme';
+
+.DrawerPanelHeader {
+    display: flex;
+    column-gap: theme.$panel-header-gap;
+    justify-content: flex-end;
+    padding-inline: theme.$panel-header-padding-x;
+    padding-block: theme.$panel-header-padding-y;
+}

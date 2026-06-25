@@ -11,16 +11,7 @@ const MODAL_ATTRIBUTE_RENAMES: Record<string, string> = {
   onClose: 'onClick',
 };
 
-// DrawerCloseButton took its wiring from the drawer context, which is unavailable at the call site.
-// The codemod scaffolds the props with `TODO_`-prefixed placeholder identifiers so the build fails
-// until the user finishes the wiring (replacing them with the drawer's open state, id, and handler).
-const DRAWER_TODO_ATTRIBUTES: Array<[name: string, placeholder: string]> = [
-  ['aria-expanded', 'TODO_drawerIsOpen'],
-  ['aria-controls', 'TODO_drawerId'],
-  ['onClick', 'TODO_drawerOnClose'],
-];
-
-const REMOVED_COMPONENTS = new Set(['DrawerCloseButton', 'ModalCloseButton', 'TooltipCloseButton']);
+const REMOVED_COMPONENTS = new Set(['ModalCloseButton', 'TooltipCloseButton']);
 
 const hasAttribute = (attributes: (JSXAttribute | JSXSpreadAttribute)[], name: string): boolean =>
   attributes.some(
@@ -43,7 +34,6 @@ const transform = (fileInfo: FileInfo, api: API) => {
   }
 
   // Resolve the local names the removed components are imported under (handles aliasing).
-  const drawerLocalNames = new Set<string>();
   const modalLocalNames = new Set<string>();
   const tooltipLocalNames = new Set<string>();
 
@@ -52,10 +42,6 @@ const transform = (fileInfo: FileInfo, api: API) => {
       if (specifier.type === 'ImportSpecifier' && specifier.imported.type === 'Identifier') {
         const importedName = specifier.imported.name;
         const localName = specifier.local?.name ?? importedName;
-
-        if (importedName === 'DrawerCloseButton') {
-          drawerLocalNames.add(localName);
-        }
 
         if (importedName === 'ModalCloseButton') {
           modalLocalNames.add(localName);
@@ -68,7 +54,7 @@ const transform = (fileInfo: FileInfo, api: API) => {
     });
   });
 
-  if (drawerLocalNames.size === 0 && modalLocalNames.size === 0 && tooltipLocalNames.size === 0) {
+  if (modalLocalNames.size === 0 && tooltipLocalNames.size === 0) {
     return fileInfo.source;
   }
 
@@ -81,29 +67,14 @@ const transform = (fileInfo: FileInfo, api: API) => {
       return;
     }
 
-    const isDrawer = drawerLocalNames.has(name.name);
     const isModal = modalLocalNames.has(name.name);
     const isTooltip = tooltipLocalNames.has(name.name);
 
-    if (!isDrawer && !isModal && !isTooltip) {
+    if (!isModal && !isTooltip) {
       return;
     }
 
     const attributes = path.node.attributes ?? [];
-
-    if (isDrawer) {
-      if (!hasAttribute(attributes, 'size')) {
-        attributes.unshift(j.jsxAttribute(j.jsxIdentifier('size'), j.stringLiteral('large')));
-      }
-
-      DRAWER_TODO_ATTRIBUTES.forEach(([attributeName, placeholder]) => {
-        if (!hasAttribute(attributes, attributeName)) {
-          attributes.push(
-            j.jsxAttribute(j.jsxIdentifier(attributeName), j.jsxExpressionContainer(j.identifier(placeholder))),
-          );
-        }
-      });
-    }
 
     if (isModal) {
       attributes.forEach((attribute) => {

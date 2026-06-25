@@ -4,7 +4,7 @@ import { type NavigationActionVariantsType } from '../../../types';
 import { Button, ButtonLink } from '../../Button';
 import { CloseButton } from '../../CloseButton';
 import { Container } from '../../Container';
-import { Drawer, DrawerPanel } from '../../Drawer';
+import { Drawer, DrawerPanel, DrawerPanelBody, DrawerPanelHeader } from '../../Drawer';
 import { Flex } from '../../Flex';
 import { Icon } from '../../Icon';
 import { Navigation, NavigationAction, NavigationAvatar, NavigationItem } from '../../Navigation';
@@ -70,58 +70,68 @@ const HeaderWithNavigationLoggedIn = ({ itemVariant }: { itemVariant: Navigation
         </Container>
       </Header>
 
-      <Drawer id="drawer-navigation-expanded" isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        <DrawerPanel
-          closeButton={
+      <Drawer
+        id="drawer-navigation-expanded"
+        isOpen={isDrawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        aria-label="Navigation"
+      >
+        <DrawerPanel>
+          <DrawerPanelHeader>
             <CloseButton
               size="large"
               aria-expanded={isDrawerOpen}
               aria-controls="drawer-navigation-expanded"
               onClick={() => setDrawerOpen(false)}
             />
-          }
-        >
-          <Stack hasIntermediateDividers hasSpacing marginBottom="space-900" spacing="space-900">
-            <StackItem>
-              <Navigation aria-label="Profile" direction="vertical">
-                <NavigationItem alignmentY="left">
-                  <NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta" isSquare>
-                    <Text elementType="span" size="small" emphasis="semibold">
-                      My Account
-                    </Text>
-                  </NavigationAvatar>
-                </NavigationItem>
-              </Navigation>
-            </StackItem>
-            <StackItem>
-              <Navigation aria-label="Main Navigation" direction="vertical">
-                <NavigationItem>
-                  <NavigationAction href="#" isSelected variant={itemVariant}>
-                    Selected
-                  </NavigationAction>
-                </NavigationItem>
-                <NavigationItem>
-                  <NavigationAction href="#" variant={itemVariant}>
-                    Link
-                  </NavigationAction>
-                </NavigationItem>
-                <NavigationItem>
-                  <NavigationAction href="#" isDisabled variant={itemVariant}>
-                    Disabled
-                  </NavigationAction>
-                </NavigationItem>
-              </Navigation>
-            </StackItem>
-            <StackItem>
-              <Navigation aria-label="Secondary Navigation" direction="vertical">
-                <NavigationItem>
-                  <ButtonLink href="#" color="secondary">
-                    Log Out
-                  </ButtonLink>
-                </NavigationItem>
-              </Navigation>
-            </StackItem>
-          </Stack>
+          </DrawerPanelHeader>
+          <DrawerPanelBody>
+            <Stack hasIntermediateDividers hasSpacing marginBottom="space-900" spacing="space-900">
+              <StackItem>
+                <Navigation aria-label="Profile" direction="vertical">
+                  <NavigationItem alignmentY="left">
+                    <NavigationAvatar
+                      avatarContent={<Icon name="profile" />}
+                      aria-label="Profile of Jiří Bárta"
+                      isSquare
+                    >
+                      <Text elementType="span" size="small" emphasis="semibold">
+                        My Account
+                      </Text>
+                    </NavigationAvatar>
+                  </NavigationItem>
+                </Navigation>
+              </StackItem>
+              <StackItem>
+                <Navigation aria-label="Main Navigation" direction="vertical">
+                  <NavigationItem>
+                    <NavigationAction href="#" isSelected variant={itemVariant}>
+                      Selected
+                    </NavigationAction>
+                  </NavigationItem>
+                  <NavigationItem>
+                    <NavigationAction href="#" variant={itemVariant}>
+                      Link
+                    </NavigationAction>
+                  </NavigationItem>
+                  <NavigationItem>
+                    <NavigationAction href="#" isDisabled variant={itemVariant}>
+                      Disabled
+                    </NavigationAction>
+                  </NavigationItem>
+                </Navigation>
+              </StackItem>
+              <StackItem>
+                <Navigation aria-label="Secondary Navigation" direction="vertical">
+                  <NavigationItem>
+                    <ButtonLink href="#" color="secondary">
+                      Log Out
+                    </ButtonLink>
+                  </NavigationItem>
+                </Navigation>
+              </StackItem>
+            </Stack>
+          </DrawerPanelBody>
         </DrawerPanel>
       </Drawer>
     </>
@@ -183,50 +193,56 @@ const HeaderWithNavigationLoggedOut = ({ itemVariant }: { itemVariant: Navigatio
         </Container>
       </Header>
 
-      <Drawer id="drawer-navigation-expanded" isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        <DrawerPanel
-          closeButton={
+      <Drawer
+        id="drawer-navigation-expanded"
+        isOpen={isDrawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        aria-label="Navigation"
+      >
+        <DrawerPanel>
+          <DrawerPanelHeader>
             <CloseButton
               size="large"
               aria-expanded={isDrawerOpen}
               aria-controls="drawer-navigation-expanded"
               onClick={() => setDrawerOpen(false)}
             />
-          }
-        >
-          <Stack hasIntermediateDividers hasSpacing marginBottom="space-900" spacing="space-900">
-            <StackItem>
-              <Navigation aria-label="Main Navigation" direction="vertical">
-                <NavigationItem>
-                  <NavigationAction href="#" isSelected variant={itemVariant}>
-                    Selected
-                  </NavigationAction>
-                </NavigationItem>
-                <NavigationItem>
-                  <NavigationAction href="#" variant={itemVariant}>
-                    Link
-                  </NavigationAction>
-                </NavigationItem>
-                <NavigationItem>
-                  <NavigationAction href="#" isDisabled variant={itemVariant}>
-                    Disabled
-                  </NavigationAction>
-                </NavigationItem>
-              </Navigation>
-            </StackItem>
-            <StackItem>
-              <Navigation aria-label="Secondary Navigation" direction="vertical">
-                <NavigationItem>
-                  <ButtonLink href="#" color="secondary">
-                    Register
-                  </ButtonLink>
-                </NavigationItem>
-                <NavigationItem>
-                  <ButtonLink href="#">Log In</ButtonLink>
-                </NavigationItem>
-              </Navigation>
-            </StackItem>
-          </Stack>
+          </DrawerPanelHeader>
+          <DrawerPanelBody>
+            <Stack hasIntermediateDividers hasSpacing marginBottom="space-900" spacing="space-900">
+              <StackItem>
+                <Navigation aria-label="Main Navigation" direction="vertical">
+                  <NavigationItem>
+                    <NavigationAction href="#" isSelected variant={itemVariant}>
+                      Selected
+                    </NavigationAction>
+                  </NavigationItem>
+                  <NavigationItem>
+                    <NavigationAction href="#" variant={itemVariant}>
+                      Link
+                    </NavigationAction>
+                  </NavigationItem>
+                  <NavigationItem>
+                    <NavigationAction href="#" isDisabled variant={itemVariant}>
+                      Disabled
+                    </NavigationAction>
+                  </NavigationItem>
+                </Navigation>
+              </StackItem>
+              <StackItem>
+                <Navigation aria-label="Secondary Navigation" direction="vertical">
+                  <NavigationItem>
+                    <ButtonLink href="#" color="secondary">
+                      Register
+                    </ButtonLink>
+                  </NavigationItem>
+                  <NavigationItem>
+                    <ButtonLink href="#">Log In</ButtonLink>
+                  </NavigationItem>
+                </Navigation>
+              </StackItem>
+            </Stack>
+          </DrawerPanelBody>
         </DrawerPanel>
       </Drawer>
     </>

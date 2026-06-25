@@ -5,34 +5,18 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    width: var(--#{tokens.$css-variable-prefix}drawer-panel-width, #{theme.$drawer-panel-width});
-    height: theme.$drawer-panel-height;
-    max-height: theme.$drawer-panel-max-height;
-    color: theme.$drawer-panel-text-color;
-    background-color: theme.$drawer-panel-background-color;
-    box-shadow: theme.$drawer-panel-shadow;
+    width: var(--#{tokens.$css-variable-prefix}drawer-panel-width, #{theme.$panel-width});
+    height: theme.$panel-height;
+    max-height: theme.$panel-max-height;
+    color: theme.$panel-text-color;
+    background-color: theme.$panel-background-color;
+    box-shadow: theme.$panel-shadow;
     transform: translateX(var(--#{tokens.$css-variable-prefix}drawer-translate-x));
     pointer-events: auto;
 
     @media (prefers-reduced-motion: no-preference) {
         transition-property: transform;
-        transition-duration: theme.$drawer-transition-duration;
-        transition-timing-function: theme.$drawer-transition-timing;
+        transition-duration: theme.$transition-duration;
+        transition-timing-function: theme.$transition-timing;
     }
-}
-
-.DrawerPanel__header {
-    display: flex;
-    column-gap: theme.$drawer-panel-header-gap;
-    justify-content: flex-end;
-    padding-inline: theme.$drawer-panel-header-padding-x;
-    padding-block: theme.$drawer-panel-header-padding-y;
-}
-
-.DrawerPanel__content {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    overflow-y: auto;
-    overscroll-behavior: contain;
 }

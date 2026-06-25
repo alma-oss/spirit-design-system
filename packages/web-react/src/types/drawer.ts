@@ -1,9 +1,10 @@
-import { type ComponentPropsWithRef, type ElementType, type ReactNode, type SyntheticEvent } from 'react';
+import { type ComponentPropsWithRef, type ElementType, type SyntheticEvent } from 'react';
 import { type AlignmentX } from '../constants';
 import {
   type ChildrenProps,
   type OmittedExtendedUnsafeStyleProps,
   type SpiritDialogElementProps,
+  type SpiritDivElementProps,
   type StyleProps,
 } from './shared';
 
@@ -20,13 +21,18 @@ export type DrawerPanelHandlingProps = {
 
 export type DrawerPanelBaseProps<E extends ElementType = DrawerPanelElementType> = {
   elementType?: E;
-  /** The close button rendered automatically inside the panel header. */
-  closeButton?: ReactNode;
 } & ChildrenProps &
   StyleProps;
 
 export type DrawerPanelProps<E extends ElementType = DrawerPanelElementType> = DrawerPanelBaseProps<E> &
   OmittedExtendedUnsafeStyleProps<ComponentPropsWithRef<E>, keyof DrawerPanelBaseProps<E>>;
+
+export interface DrawerPanelHeaderProps extends SpiritDivElementProps, ChildrenProps {}
+
+export interface DrawerPanelBodyProps extends SpiritDivElementProps, ChildrenProps {
+  /** Whether the content has inner spacing consistent with the panel header. */
+  hasSpacing?: boolean;
+}
 
 export interface DrawerBaseProps extends Omit<SpiritDialogElementProps, 'id'>, DrawerPanelHandlingProps, ChildrenProps {
   alignmentX?: DrawerAlignmentXType;

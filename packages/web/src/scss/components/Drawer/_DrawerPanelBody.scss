@@ -1,0 +1,14 @@
+@use 'theme';
+
+.DrawerPanelBody {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.DrawerPanelBody--spacing {
+    padding-inline: theme.$panel-body-padding-x;
+    padding-block-end: theme.$panel-body-padding-y;
+}
