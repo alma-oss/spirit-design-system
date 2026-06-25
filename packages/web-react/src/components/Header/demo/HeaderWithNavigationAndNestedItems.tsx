@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CloseButton } from '../../CloseButton';
 import { Container } from '../../Container';
-import { Drawer, DrawerPanel } from '../../Drawer';
+import { Drawer, DrawerPanel, DrawerPanelBody, DrawerPanelHeader } from '../../Drawer';
 import { Flex } from '../../Flex';
 import { ProductLogo } from '../../ProductLogo';
 import { defaultSvgLogo } from '../../ProductLogo/demo/ProductLogoDefault';
@@ -33,35 +33,41 @@ const HeaderWithNavigationAndNestedItems = () => {
         </Container>
       </Header>
 
-      <Drawer id="drawer-navigation-expanded" isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        <DrawerPanel
-          closeButton={
+      <Drawer
+        id="drawer-navigation-expanded"
+        isOpen={isDrawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        aria-label="Navigation"
+      >
+        <DrawerPanel>
+          <DrawerPanelHeader>
             <CloseButton
               size="large"
               aria-expanded={isDrawerOpen}
               aria-controls="drawer-navigation-expanded"
               onClick={() => setDrawerOpen(false)}
             />
-          }
-        >
-          <Stack
-            hasStartDivider
-            hasIntermediateDividers
-            hasEndDivider
-            hasSpacing
-            marginBottom="space-900"
-            spacing="space-900"
-          >
-            <StackItem>
-              <ProfileNavigation isSquare />
-            </StackItem>
-            <StackItem>
-              <MainVerticalNavigation />
-            </StackItem>
-            <StackItem>
-              <SecondaryVerticalNavigation />
-            </StackItem>
-          </Stack>
+          </DrawerPanelHeader>
+          <DrawerPanelBody>
+            <Stack
+              hasStartDivider
+              hasIntermediateDividers
+              hasEndDivider
+              hasSpacing
+              marginBottom="space-900"
+              spacing="space-900"
+            >
+              <StackItem>
+                <ProfileNavigation isSquare />
+              </StackItem>
+              <StackItem>
+                <MainVerticalNavigation />
+              </StackItem>
+              <StackItem>
+                <SecondaryVerticalNavigation />
+              </StackItem>
+            </Stack>
+          </DrawerPanelBody>
         </DrawerPanel>
       </Drawer>
     </>

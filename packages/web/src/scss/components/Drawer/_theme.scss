@@ -5,20 +5,23 @@
 @use '../../settings/transitions';
 @use '../../tools/units';
 
-$drawer-typography: tokens.$body-medium-semibold;
+$typography: tokens.$body-medium-semibold;
+$transition-duration: transitions.$duration-200;
+$transition-timing: transitions.$timing-eased-in-out;
+$backdrop-background-color: tokens.$background-backdrop;
 
-// Transition
-$drawer-transition-duration: transitions.$duration-200;
-$drawer-transition-timing: transitions.$timing-eased-in-out;
-$drawer-backdrop-background-color: tokens.$background-backdrop;
+$panel-width: units.px-to-rem(312px); // 1.
+$panel-height: auto;
+$panel-max-height: none;
+$panel-text-color: tokens.$text-primary;
+$panel-background-color: tokens.$background-primary;
+$panel-shadow: tokens.$shadow-400;
 
-// DrawerPanel
-$drawer-panel-width: units.px-to-rem(312px); // 1.
-$drawer-panel-height: auto;
-$drawer-panel-max-height: none;
-$drawer-panel-text-color: tokens.$text-primary;
-$drawer-panel-background-color: tokens.$background-primary;
-$drawer-panel-shadow: tokens.$shadow-400;
-$drawer-panel-header-gap: tokens.$space-700;
-$drawer-panel-header-padding-x: tokens.$space-700;
-$drawer-panel-header-padding-y: tokens.$space-900;
+$common-padding-x: tokens.$space-700;
+
+$panel-header-gap: tokens.$space-700;
+$panel-header-padding-x: $common-padding-x;
+$panel-header-padding-y: tokens.$space-900;
+
+$panel-body-padding-x: $common-padding-x;
+$panel-body-padding-y: tokens.$space-900;
