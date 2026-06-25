@@ -33,6 +33,20 @@ export const createGlobalTypographyObject = (typographyKeys: Array<string>) => {
   return typographyKeys.reduce(typographyGroupReducer, {});
 };
 
+const hasTypographyDeclaration = (value: unknown, hasJsOutput: boolean): boolean => {
+  const typographyProperty = hasJsOutput ? 'fontFamily' : 'font-family';
+
+  if (typeof value === 'string') {
+    return value.includes(typographyProperty);
+  }
+
+  if (typeof value === 'object' && value !== null) {
+    return Object.values(value).some((nestedValue) => hasTypographyDeclaration(nestedValue, hasJsOutput));
+  }
+
+  return false;
+};
+
 export const addGlobalColorsToStylesObject = (
   stylesObject: StylesObjectType,
   hasJsOutput: boolean,
@@ -55,7 +69,9 @@ export const addGlobalTypographyToStylesObject = (
   stylesObject: StylesObjectType,
   hasJsOutput: boolean,
 ): StylesObjectType => {
-  const typographyKeys = Object.keys(stylesObject).filter((key) => key.includes('heading') || key.includes('body'));
+  const typographyKeys = Object.entries(stylesObject)
+    .filter(([, value]) => hasTypographyDeclaration(value, hasJsOutput))
+    .map(([key]) => key);
 
   if (typographyKeys.length === 0) {
     return stylesObject;

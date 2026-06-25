@@ -280,6 +280,11 @@ export const handleTypographyTokens = (
     const modifiedPart = index === 0 ? tokenName : part;
 
     if (index === reducedNameParts.length - 1) {
+      const targetObject =
+        index === 0
+          ? ((currentObject[modifiedPart] = currentObject[modifiedPart] || {}) as StylesObjectType)
+          : currentObject;
+
       if (shouldCreateVariations) {
         const deviceKeys = collectDeviceKeys(deviceTypographyValues, fontSizeBaseMap);
 
@@ -298,13 +303,13 @@ export const handleTypographyTokens = (
           }
 
           const deviceBaseFontSize = shouldConvertToRem ? getFontSizeBaseForBreakpoint(fontSizeBaseMap!, device) : 0;
-          currentObject[device] = typographyValue(deviceValue, isItalic, hasJsOutput, deviceBaseFontSize);
+          targetObject[device] = typographyValue(deviceValue, isItalic, hasJsOutput, deviceBaseFontSize);
         }
 
         return;
       }
 
-      currentObject[breakpoint] = typographyValue(typographyToken.value, isItalic, hasJsOutput, baseFontSize);
+      targetObject[breakpoint] = typographyValue(typographyToken.value, isItalic, hasJsOutput, baseFontSize);
     } else {
       currentObject[modifiedPart] = currentObject[modifiedPart] || {};
       currentObject = currentObject[modifiedPart] as StylesObjectType;
