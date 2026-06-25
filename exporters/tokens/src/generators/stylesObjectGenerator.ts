@@ -38,7 +38,7 @@ export const createStylesObjectStructureFromTokenNameParts = (
   let tokenNameParts: string[] = token.origin?.name?.split('/') || [];
 
   if (tokenNameParts.length <= 1) {
-    if (devicePart) {
+    if (devicePart || tokenType === TokenType.typography) {
       tokenNameParts = [tokenName];
     } else {
       return stylesObjectRef;
