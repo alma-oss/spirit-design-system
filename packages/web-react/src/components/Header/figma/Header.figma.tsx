@@ -2,8 +2,9 @@ import figma from '@figma/code-connect';
 import React, { useState } from 'react';
 import { type NavigationActionVariantsType } from '../../../types';
 import { Button, ButtonLink } from '../../Button';
+import { CloseButton } from '../../CloseButton';
 import { Container } from '../../Container';
-import { Drawer, DrawerCloseButton, DrawerPanel } from '../../Drawer';
+import { Drawer, DrawerPanel } from '../../Drawer';
 import { Flex } from '../../Flex';
 import { Icon } from '../../Icon';
 import { Navigation, NavigationAction, NavigationAvatar, NavigationItem } from '../../Navigation';
@@ -70,7 +71,16 @@ const HeaderWithNavigationLoggedIn = ({ itemVariant }: { itemVariant: Navigation
       </Header>
 
       <Drawer id="drawer-navigation-expanded" isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        <DrawerPanel closeButton={<DrawerCloseButton />}>
+        <DrawerPanel
+          closeButton={
+            <CloseButton
+              size="large"
+              aria-expanded={isDrawerOpen}
+              aria-controls="drawer-navigation-expanded"
+              onClick={() => setDrawerOpen(false)}
+            />
+          }
+        >
           <Stack hasIntermediateDividers hasSpacing marginBottom="space-900" spacing="space-900">
             <StackItem>
               <Navigation aria-label="Profile" direction="vertical">
@@ -174,7 +184,16 @@ const HeaderWithNavigationLoggedOut = ({ itemVariant }: { itemVariant: Navigatio
       </Header>
 
       <Drawer id="drawer-navigation-expanded" isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        <DrawerPanel closeButton={<DrawerCloseButton />}>
+        <DrawerPanel
+          closeButton={
+            <CloseButton
+              size="large"
+              aria-expanded={isDrawerOpen}
+              aria-controls="drawer-navigation-expanded"
+              onClick={() => setDrawerOpen(false)}
+            />
+          }
+        >
           <Stack hasIntermediateDividers hasSpacing marginBottom="space-900" spacing="space-900">
             <StackItem>
               <Navigation aria-label="Main Navigation" direction="vertical">

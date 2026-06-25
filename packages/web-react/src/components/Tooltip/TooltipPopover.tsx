@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React, { useMemo } from 'react';
 import { useStyleProps } from '../../hooks';
 import { type TooltipPopoverProps } from '../../types';
-import TooltipCloseButton from './TooltipCloseButton';
+import { CloseButton } from '../CloseButton';
 import { useTooltipContext } from './TooltipContext';
 import { useTooltipStyleProps } from './useTooltipStyleProps';
 
@@ -37,7 +37,7 @@ const TooltipPopover = (props: TooltipPopoverProps) => {
   const { styleProps: contentStyleProps, props: contentOtherProps } = useStyleProps(modifiedProps);
 
   const renderCloseButton = useMemo(
-    () => isDismissible && <TooltipCloseButton onClick={() => onToggle(false)} label="close" />,
+    () => isDismissible && <CloseButton aria-expanded="true" onClick={() => onToggle(false)} />,
     [isDismissible, onToggle],
   );
 

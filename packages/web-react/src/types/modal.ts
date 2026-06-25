@@ -16,11 +16,6 @@ export type ModalDialogHandlingProps = {
   closeOnEscapeKeyDown?: boolean;
 };
 
-export interface ModalCloseButtonProps extends ModalDialogHandlingProps {
-  id: string;
-  label?: string;
-}
-
 export type ModalDialogBaseProps<E extends ElementType = 'article'> = {
   elementType?: E;
   isDockedOnMobile?: boolean;

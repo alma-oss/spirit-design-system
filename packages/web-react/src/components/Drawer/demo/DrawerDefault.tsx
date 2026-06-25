@@ -3,8 +3,8 @@ import { Button, Checkbox, Radio, Stack, TextArea } from '../..';
 import { AlignmentX } from '../../../constants';
 import { type DrawerAlignmentXType } from '../../../types';
 import { Box } from '../../Box';
+import { CloseButton } from '../../CloseButton';
 import Drawer from '../Drawer';
-import DrawerCloseButton from '../DrawerCloseButton';
 import DrawerPanel from '../DrawerPanel';
 
 const DrawerDefault = () => {
@@ -86,7 +86,17 @@ const DrawerDefault = () => {
         closeOnBackdropClick={isClosableOnBackdropClick}
         closeOnEscapeKeyDown={isClosableOnEscapeKey}
       >
-        <DrawerPanel data-testid="drawer-panel" closeButton={<DrawerCloseButton />}>
+        <DrawerPanel
+          data-testid="drawer-panel"
+          closeButton={
+            <CloseButton
+              size="large"
+              aria-expanded={isDrawerOpen}
+              aria-controls="example-basic"
+              onClick={handleDrawerClose}
+            />
+          }
+        >
           <div className="px-700 pb-900">{content}</div>
         </DrawerPanel>
       </Drawer>
