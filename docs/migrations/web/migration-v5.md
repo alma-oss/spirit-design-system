@@ -24,6 +24,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
   - [Disabled Utility for Color-Scheme Components](#disabled-utility-for-color-scheme-components)
   - [Toggle: Input Before Label in HTML](#toggle-input-before-label-in-html)
+  - [DrawerPanel: Restructured with Sub-components](#drawerpanel-restructured-with-sub-components)
 
 ## General Changes
 
@@ -632,8 +633,43 @@ If you provided any custom CSS depending on the order of Toggle children, you wi
 
 ---
 
+### DrawerPanel: Restructured with Sub-components
+
+The `DrawerPanel` interior has been restructured. The old `DrawerPanel__content` element — which previously
+wrapped both the close button and the drawer body — has been replaced by two explicit sub-components:
+`DrawerPanelHeader` for the close button and `DrawerPanelBody` for the scrollable body.
+
+| Old class              | New classes                             |
+| ---------------------- | --------------------------------------- |
+| `DrawerPanel__content` | `DrawerPanelHeader` + `DrawerPanelBody` |
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+```diff
+  <div class="DrawerPanel">
+-   <div class="DrawerPanel__content">
+-     <!-- close button -->
+-     <!-- drawer body -->
+-   </div>
++   <header class="DrawerPanelHeader">
++     <!-- close button -->
++   </header>
++   <div class="DrawerPanelBody">
++     <!-- drawer body -->
++   </div>
+  </div>
+```
+
+</details>
+
+---
+
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
 
+[readme-drawer]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Drawer/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [readme-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Header/README.md
 [readme-item]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Item/README.md
