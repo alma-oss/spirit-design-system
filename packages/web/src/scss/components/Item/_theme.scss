@@ -4,3 +4,10 @@
 $alignment-y-dictionary: dictionaries.$alignments-y;
 $breakpoints: tokens.$breakpoints;
 $gap: tokens.$space-500;
+$padding-x: tokens.$space-700;
+$padding-y: tokens.$space-500;
+
+$background-color-state-active: tokens.$background-interactive-state-active;
+$background-color-state-default: tokens.$background-interactive-state-default;
+$background-color-state-hover: tokens.$background-interactive-state-hover;
+$border-radius: tokens.$radius-200;

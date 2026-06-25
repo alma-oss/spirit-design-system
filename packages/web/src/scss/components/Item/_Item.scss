@@ -4,11 +4,9 @@
 
 @use 'theme';
 @use '../../settings/cursors';
-@use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/breakpoint';
 @use '../../tools/color-scheme';
 @use '../../tools/dictionaries';
-@use '../../tools/form-fields';
 @use '../../tools/reset';
 
 .Item:where(button) {
@@ -18,28 +16,29 @@
 }
 
 .Item {
-    @include form-fields.item();
-
     position: relative;
     isolation: isolate;
     display: flex;
     gap: theme.$gap;
     align-items: center;
-    background-color: color-scheme.background-color(form-fields-settings.$item-background-color-state-default);
+    width: 100%;
+    padding: theme.$padding-y theme.$padding-x;
+    margin-block: 0;
+    border-radius: theme.$border-radius;
+    background-color: color-scheme.background-color(theme.$background-color-state-default);
 
-    &:active,
     &:has(:active) {
         text-decoration: none;
     }
 
     &:active {
-        background-color: color-scheme.background-color(form-fields-settings.$item-background-color-state-active);
+        background-color: color-scheme.background-color(theme.$background-color-state-active);
     }
 
     @media (hover: hover) {
         &:hover {
             text-decoration: none;
-            background-color: color-scheme.background-color(form-fields-settings.$item-background-color-state-hover);
+            background-color: color-scheme.background-color(theme.$background-color-state-hover);
         }
     }
 
@@ -51,7 +50,7 @@
 // 1.
 .Item.disabled {
     color: color-scheme.color();
-    background-color: form-fields-settings.$item-background-color-state-default;
+    background-color: theme.$background-color-state-default;
 }
 
 .Item__content {

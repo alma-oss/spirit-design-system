@@ -1,7 +1,6 @@
 // 1. Elevate interactive elements above the trigger overlay.
 
 @use '@tokens' as tokens;
-@use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/typography';
 @use 'theme';
@@ -17,14 +16,16 @@
     box-sizing: border-box;
     min-height: calc(
         var(--#{tokens.$css-variable-prefix}input-container-height) - 2 *
-            #{form-fields-settings.$box-field-input-border-width}
+            var(--#{tokens.$css-variable-prefix}input-container-border-width)
     );
     padding-inline-start: theme.$padding-x;
     padding-block: theme.$padding-y;
 }
 
 .UNSTABLE_PickerSelection__empty {
-    margin-inline-start: calc(#{form-fields-settings.$box-field-input-padding-x} - #{theme.$padding-x});
+    margin-inline-start: calc(
+        var(--#{tokens.$css-variable-prefix}input-container-input-padding-x) - #{theme.$padding-x}
+    );
     color: var(--#{tokens.$css-variable-prefix}input-container-input-placeholder-color);
 }
 
