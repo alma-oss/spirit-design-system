@@ -6,7 +6,7 @@ The Drawer is a composition of several subcomponents:
 
 - [Drawer](#drawer)
   - [DrawerPanel](#drawerpanel)
-    - [DrawerCloseButton](#close-button)
+    - [CloseButton](#closebutton)
 
 ## Accessibility Guidelines
 
@@ -75,13 +75,35 @@ and [escape hatches][readme-escape-hatches].
 
 The `DrawerPanel` component is a container for the content that will be displayed in the drawer.
 Should there be any spacing around the content of `DrawerPanel`, you need to provide it yourself.
+The `children` are rendered in the panel content area, and the `closeButton` is rendered automatically
+inside the panel header.
 
-Pass the `DrawerCloseButton` through the `closeButton` prop; it is rendered automatically inside the
-panel header. The `children` are rendered in the panel content area.
+### CloseButton
+
+Pass the shared [`CloseButton`][close-button] through the `closeButton` prop. It is **not** wired up
+automatically, so provide:
+
+- `onClick` — your drawer's `onClose` handler
+- `aria-controls` — the drawer's `id`
+- `aria-expanded` — the drawer's open state
+- `size="large"` — to match the drawer close-button size
 
 ```tsx
-<DrawerPanel closeButton={<DrawerCloseButton />}>{/* Drawer content goes here */}</DrawerPanel>
+<DrawerPanel
+  closeButton={
+    <CloseButton
+      size="large"
+      aria-expanded={isOpen}
+      aria-controls="drawer-dialog-example"
+      onClick={() => setOpen(false)}
+    />
+  }
+>
+  {/* Drawer content goes here */}
+</DrawerPanel>
 ```
+
+See the [`CloseButton`][close-button] documentation for its full API.
 
 ### API
 
@@ -91,32 +113,11 @@ panel header. The `children` are rendered in the panel content area.
 | `closeButton` | `ReactNode`   | —       | ✕        | Close button rendered inside the panel header    |
 | `elementType` | `ElementType` | `div`   | ✕        | Type of element used as drawer panel             |
 
-## Close Button
-
-`DrawerCloseButton` is a [ControlButton][control-button] that closes the drawer when clicked.
-It reads the drawer context to wire up `aria-controls`, `aria-expanded`, and the `onClick` handler automatically.
-
-```tsx
-<DrawerCloseButton />
-```
-
-### API
-
-| Name    | Type     | Default | Required | Description                    |
-| ------- | -------- | ------- | -------- | ------------------------------ |
-| `label` | `string` | `Close` | ✕        | Accessible label of the button |
-
-The component further inherits properties from the [`<button>`][mdn-button-element] element.
-
-On top of the API options, the components accept [additional attributes][readme-additional-attributes].
-If you need more control over the styling of a component, you can use [style props][readme-style-props]
-and [escape hatches][readme-escape-hatches].
-
 ## Full Example
 
 ```tsx
 import React, { useState } from 'react';
-import { Button, Drawer, DrawerPanel, DrawerCloseButton } from '@alma-oss/spirit-web-react';
+import { Button, CloseButton, Drawer, DrawerPanel } from '@alma-oss/spirit-web-react';
 
 export const Example = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -130,7 +131,11 @@ export const Example = () => {
       </Button>
 
       <Drawer id="drawer-example" isOpen={isOpen} onClose={handleClose}>
-        <DrawerPanel closeButton={<DrawerCloseButton />}>
+        <DrawerPanel
+          closeButton={
+            <CloseButton size="large" aria-expanded={isOpen} aria-controls="drawer-example" onClick={handleClose} />
+          }
+        >
           <div>Drawer content</div>
         </DrawerPanel>
       </Drawer>
@@ -139,8 +144,7 @@ export const Example = () => {
 };
 ```
 
-[control-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ControlButton/README.md
-[mdn-button-element]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
+[close-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/CloseButton/README.md
 [mdn-dialog-element]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches

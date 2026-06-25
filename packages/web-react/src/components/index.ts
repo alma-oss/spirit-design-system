@@ -8,6 +8,7 @@ export * from './Button';
 export * from './Card';
 export * from './CharacterCounter';
 export * from './Checkbox';
+export * from './CloseButton';
 export * from './Collapse';
 export * from './Container';
 export * from './ControlButton';

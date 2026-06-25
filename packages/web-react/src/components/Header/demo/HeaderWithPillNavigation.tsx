@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { CloseButton } from '../../CloseButton';
 import { Container } from '../../Container';
-import { Drawer, DrawerCloseButton, DrawerPanel } from '../../Drawer';
+import { Drawer, DrawerPanel } from '../../Drawer';
 import { Flex } from '../../Flex';
 import { ProductLogo } from '../../ProductLogo';
 import { defaultSvgLogo } from '../../ProductLogo/demo/ProductLogoDefault';
@@ -32,7 +33,16 @@ const HeaderWithPillNavigation = () => {
       </Header>
 
       <Drawer id="drawer-navigation-pill" isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        <DrawerPanel closeButton={<DrawerCloseButton />}>
+        <DrawerPanel
+          closeButton={
+            <CloseButton
+              size="large"
+              aria-expanded={isDrawerOpen}
+              aria-controls="drawer-navigation-pill"
+              onClick={() => setDrawerOpen(false)}
+            />
+          }
+        >
           <Stack hasIntermediateDividers hasSpacing marginBottom="space-900" spacing="space-900">
             <StackItem>
               <ProfileNavigation />

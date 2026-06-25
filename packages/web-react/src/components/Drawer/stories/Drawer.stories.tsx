@@ -5,8 +5,8 @@ import { fn } from 'storybook/test';
 import { AlignmentX } from '../../../constants';
 import { type SpiritDrawerProps } from '../../../types';
 import { Button } from '../../Button';
+import { CloseButton } from '../../CloseButton';
 import Drawer from '../Drawer';
-import DrawerCloseButton from '../DrawerCloseButton';
 import DrawerPanel from '../DrawerPanel';
 import ReadMe from '../README.md?raw';
 
@@ -85,7 +85,16 @@ const DrawerWithHooks = (args: SpiritDrawerProps) => {
         closeOnBackdropClick={closeOnBackdropClick}
         closeOnEscapeKeyDown={closeOnEscapeKeyDown}
       >
-        <DrawerPanel closeButton={<DrawerCloseButton />}>
+        <DrawerPanel
+          closeButton={
+            <CloseButton
+              size="large"
+              aria-expanded={isDrawerOpen}
+              aria-controls="example-basic"
+              onClick={handleDrawerClose}
+            />
+          }
+        >
           <div className="p-800">Drawer content</div>
         </DrawerPanel>
       </Drawer>

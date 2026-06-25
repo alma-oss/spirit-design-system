@@ -78,7 +78,7 @@ describe('PricingPlanFeatureTitle', () => {
 
     it('should hide tooltip on close button click', () => {
       const trigger = screen.getByRole('button', { name: 'Feature with Tooltip' });
-      const closeButton = screen.getByRole('button', { name: 'close' });
+      const closeButton = screen.getByRole('button', { name: 'Close' });
       const tooltip = screen.getByRole('tooltip');
 
       fireEvent.click(trigger);
