@@ -3,17 +3,15 @@
 import classNames from 'classnames';
 import React, { type MutableRefObject, useRef } from 'react';
 import { Transition, type TransitionStatus } from 'react-transition-group';
-import { useI18n, useStyleProps } from '../../hooks';
+import { useStyleProps } from '../../hooks';
 import { type SpiritToastBarProps } from '../../types';
-import { ControlButton } from '../ControlButton';
+import { CloseButton } from '../CloseButton';
 import { Icon } from '../Icon';
-import { VisuallyHidden } from '../VisuallyHidden';
 import { DEFAULT_TOAST_COLOR, ICON_BOX_SIZE, TRANSITIONING_STYLES, TRANSITION_DURATION } from './constants';
 import { useToastBarStyleProps } from './useToastBarStyleProps';
 import { useToastIcon } from './useToastIcon';
 
 const ToastBar = (props: SpiritToastBarProps) => {
-  const { t } = useI18n();
   const {
     id,
     children,
@@ -26,7 +24,6 @@ const ToastBar = (props: SpiritToastBarProps) => {
     onClose = () => {},
     ...restProps
   } = props;
-  const resolvedCloseLabel = closeLabel ?? t('common.close');
   const rootElementRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const toastIconName = useToastIcon({ color, iconName });
   const { classProps, props: modifiedProps } = useToastBarStyleProps({
@@ -52,10 +49,13 @@ const ToastBar = (props: SpiritToastBarProps) => {
               <div className={classProps.content}>{children}</div>
             </div>
             {isDismissible && onClose && (
-              <ControlButton isSymmetrical size="large" onClick={onClose} aria-expanded={isOpen} aria-controls={id}>
-                <Icon name="close" />
-                <VisuallyHidden>{resolvedCloseLabel}</VisuallyHidden>
-              </ControlButton>
+              <CloseButton
+                size="large"
+                onClick={onClose}
+                aria-expanded={isOpen}
+                aria-controls={id}
+                label={closeLabel}
+              />
             )}
           </div>
         </div>

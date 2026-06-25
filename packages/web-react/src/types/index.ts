@@ -7,6 +7,7 @@ export * from './breadcrumbs';
 export * from './button';
 export * from './card';
 export * from './checkbox';
+export * from './closeButton';
 export * from './collapse';
 export * from './container';
 export * from './controlButton';
