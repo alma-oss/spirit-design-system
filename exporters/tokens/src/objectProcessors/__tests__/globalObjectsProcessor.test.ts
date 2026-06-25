@@ -172,10 +172,13 @@ describe('globalObjectsProcessor', () => {
   });
 
   describe('addGlobalTypographyToStylesObject', () => {
+    const scssTypographyValue = '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 16px,\n)';
+    const jsTypographyValue = '{\nfontFamily: "\'Inter\', sans-serif",\nfontSize: 16,\n}';
+
     it('should add global typography object when typography keys exist (SCSS)', () => {
       const stylesObject: StylesObjectType = {
-        '$heading-xlarge-bold': { mobile: 'value' } as StylesObjectType,
-        '$body-large': { mobile: 'value' } as StylesObjectType,
+        '$heading-xlarge-bold': { mobile: scssTypographyValue } as StylesObjectType,
+        '$body-large': { mobile: scssTypographyValue } as StylesObjectType,
         '$other-token': 'value',
       };
 
@@ -196,8 +199,8 @@ describe('globalObjectsProcessor', () => {
 
     it('should add global typography object when typography keys exist (JS)', () => {
       const stylesObject: StylesObjectType = {
-        headingXlargeBold: { mobile: 'value' } as StylesObjectType,
-        bodyLarge: { mobile: 'value' } as StylesObjectType,
+        headingXlargeBold: { mobile: jsTypographyValue } as StylesObjectType,
+        bodyLarge: { mobile: jsTypographyValue } as StylesObjectType,
         otherToken: 'value',
       };
 
@@ -236,9 +239,10 @@ describe('globalObjectsProcessor', () => {
       expect(result).toEqual({});
     });
 
-    it('should only match keys with heading or body', () => {
+    it('should match keys by typography declaration regardless of group name', () => {
       const stylesObject: StylesObjectType = {
-        '$heading-xlarge-bold': { mobile: 'value' } as StylesObjectType,
+        '$heading-xlarge-bold': { mobile: scssTypographyValue } as StylesObjectType,
+        $caption: { mobile: scssTypographyValue } as StylesObjectType,
         '$other-token': 'value',
         '$not-typography': 'value',
       };
@@ -251,6 +255,7 @@ describe('globalObjectsProcessor', () => {
       const stylesObj = result['$styles'] as { [key: string]: unknown };
 
       expect(stylesObj).toHaveProperty('heading-xlarge-bold');
+      expect(stylesObj).toHaveProperty('caption');
       expect(stylesObj).not.toHaveProperty('other-token');
       expect(stylesObj).not.toHaveProperty('not-typography');
     });
