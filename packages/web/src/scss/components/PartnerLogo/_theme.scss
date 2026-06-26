@@ -1,5 +1,6 @@
 @use '@tokens' as tokens;
 @use '../../settings/dictionaries';
+@use '../../tools/units';
 
 $background-color: tokens.$background-primary;
 $border-radius: tokens.$radius-200;
@@ -7,15 +8,15 @@ $breakpoints: tokens.$breakpoints;
 $size-dictionary: dictionaries.$size;
 $size-config: (
     small: (
-        image-height: 32px,
+        image-height: units.px-to-rem(32px),
         padding: tokens.$space-500,
     ),
     medium: (
-        image-height: 48px,
+        image-height: units.px-to-rem(48px),
         padding: tokens.$space-500,
     ),
     large: (
-        image-height: 60px,
+        image-height: units.px-to-rem(60px),
         padding: tokens.$space-600,
     ),
 );
