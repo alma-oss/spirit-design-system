@@ -19,7 +19,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-default"
             >Toggle Label</label>
           </div>
@@ -35,7 +35,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-default-checked"
             >Toggle Label</label>
           </div>
@@ -68,7 +68,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-indicators"
             >Toggle Label</label>
           </div>
@@ -84,7 +84,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-indicators-checked"
             >Toggle Label</label>
           </div>
@@ -116,7 +116,7 @@
         />
         <div>
           <label
-            class="Label Label--inline Label--required"
+            class="Label Label--required cursor-pointer"
             for="toggle-required"
           >Toggle Label</label>
         </div>
@@ -145,7 +145,7 @@
         />
         <div>
           <label
-            class="Label Label--inline accessibility-hidden"
+            class="Label accessibility-hidden"
             for="toggle-hidden-label"
           >Toggle Label</label>
         </div>
@@ -177,7 +177,7 @@
           />
           <div>
             <label
-              class="Label Label--inline Label--disabled"
+              class="Label Label--disabled"
               for="toggle-default-disabled"
             >Toggle Label</label>
           </div>
@@ -194,7 +194,7 @@
           />
           <div>
             <label
-              class="Label Label--inline Label--disabled"
+              class="Label Label--disabled"
               for="toggle-default-checked-disabled"
             >Toggle Label</label>
           </div>
@@ -209,9 +209,9 @@
             aria-describedby="toggle-helper-text-disabled-helper-text"
             disabled
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline Label--disabled"
+              class="Label Label--disabled"
               for="toggle-helper-text-disabled"
             >Toggle Label</label>
             <div
@@ -231,9 +231,9 @@
             checked
             disabled
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline Label--disabled"
+              class="Label Label--disabled"
               for="toggle-warning-helper-text-disabled"
             >Toggle Label</label>
             <div
@@ -257,7 +257,7 @@
           />
           <div>
             <label
-              class="Label Label--inline Label--disabled"
+              class="Label Label--disabled"
               for="toggle-indicators-disabled"
             >Toggle Label</label>
           </div>
@@ -274,7 +274,7 @@
           />
           <div>
             <label
-              class="Label Label--inline Label--disabled"
+              class="Label Label--disabled"
               for="toggle-indicators-disabled-checked"
             >Toggle Label</label>
           </div>
@@ -306,9 +306,9 @@
             name="default"
             aria-describedby="toggle-helper-text-helper-text"
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-helper-text"
             >Toggle Label</label>
             <div
@@ -327,9 +327,9 @@
             aria-describedby="toggle-helper-text-checked-helper-text"
             checked
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-helper-text-checked"
             >Toggle Label</label>
             <div
@@ -366,7 +366,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-success"
             >Toggle Label</label>
           </div>
@@ -381,9 +381,9 @@
             aria-describedby="toggle-warning-validation-text"
             checked
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-warning"
             >Toggle Label</label>
             <div
@@ -401,10 +401,10 @@
             name="default"
             aria-describedby="toggle-danger-validation-text"
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
               for="toggle-danger"
-              class="Label Label--inline"
+              class="Label cursor-pointer"
             >Toggle Label</label>
             <div
               class="ValidationText ValidationText--danger"
@@ -427,9 +427,9 @@
             aria-describedby="toggle-warning-helper-text-helper-text toggle-warning-helper-text-validation-text"
             checked
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-warning-helper-text"
             >Toggle Label</label>
             <div
@@ -467,9 +467,9 @@
             class="Toggle Toggle--{{ state }}"
             checked
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-{{state}}-validation-icon"
             >Toggle Label</label>
             <div
@@ -516,7 +516,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-position-start"
             >Input on Start</label>
           </div>
@@ -531,7 +531,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-position-end"
             >Input on End (Default)</label>
           </div>
@@ -546,7 +546,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="toggle-position-responsive"
             >Responsive Position</label>
           </div>
@@ -578,7 +578,7 @@
           aria-details="toggle-consent-emphasized-label-details"
         />
         <div>
-          <label class="Label Label--inline Label--required" for="toggle-consent-emphasized-label"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
+          <label class="Label Label--required cursor-pointer" for="toggle-consent-emphasized-label"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
           <div id="toggle-consent-emphasized-label-details" class="InputDetails">
             <button
               type="button"
@@ -618,8 +618,8 @@
           aria-describedby="toggle-consent-full-example-helper-text toggle-consent-full-example-validation-text"
           aria-details="toggle-consent-full-example-details"
         />
-        <div>
-          <label class="Label Label--inline Label--required" for="toggle-consent-full-example">I agree to the terms and privacy policy</label>
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+          <label class="Label Label--required cursor-pointer" for="toggle-consent-full-example">I agree to the terms and privacy policy</label>
           <div id="toggle-consent-full-example-details" class="InputDetails">
             <button
               type="button"

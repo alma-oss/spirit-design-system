@@ -3,12 +3,13 @@ import { Grid } from '../../Grid';
 import { HelperText } from '../../HelperText';
 import { InputContainer } from '../../InputContainer';
 import { Label } from '../../Label';
+import { Stack } from '../../Stack';
 import InputAddon from '../InputAddon';
 import PasswordToggleAddonButton from './PasswordToggleAddonButton';
 
 const InputAddonSizes = () => (
-  <Grid cols={{ mobile: 1, desktop: 3 }}>
-    <div>
+  <Grid cols={{ mobile: 1, desktop: 3 }} alignmentY="top">
+    <Stack spacing="space-400">
       <Label htmlFor="input-addon-size-small">Small</Label>
       <InputContainer size="small">
         <input
@@ -23,8 +24,8 @@ const InputAddonSizes = () => (
         </InputAddon>
       </InputContainer>
       <HelperText id="input-addon-size-small-helper-text" helperText="Helper text" />
-    </div>
-    <div>
+    </Stack>
+    <Stack spacing="space-400">
       <Label htmlFor="input-addon-size-medium">Medium (default)</Label>
       <InputContainer size="medium">
         <input
@@ -39,8 +40,8 @@ const InputAddonSizes = () => (
         </InputAddon>
       </InputContainer>
       <HelperText id="input-addon-size-medium-helper-text" helperText="Helper text" />
-    </div>
-    <div>
+    </Stack>
+    <Stack spacing="space-400">
       <Label htmlFor="input-addon-size-large">Large</Label>
       <InputContainer size="large">
         <input
@@ -55,7 +56,7 @@ const InputAddonSizes = () => (
         </InputAddon>
       </InputContainer>
       <HelperText id="input-addon-size-large-helper-text" helperText="Helper text" />
-    </div>
+    </Stack>
   </Grid>
 );
 

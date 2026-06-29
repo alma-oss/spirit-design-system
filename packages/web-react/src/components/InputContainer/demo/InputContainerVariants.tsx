@@ -4,6 +4,7 @@ import { FillVariants } from '../../../constants';
 import { Box } from '../../Box';
 import { Grid } from '../../Grid';
 import { Label } from '../../Label';
+import { Stack } from '../../Stack';
 import InputContainer from '../InputContainer';
 
 type BackgroundVariant = {
@@ -32,7 +33,7 @@ const InputContainerVariants = () => (
         <DocsStack>
           <h3>{label}</h3>
 
-          <div>
+          <Stack spacing="space-400">
             <Label htmlFor={`input-container-variant-fill-${id}`}>Fill (default)</Label>
             <InputContainer>
               <input
@@ -42,9 +43,9 @@ const InputContainerVariants = () => (
                 placeholder="Placeholder"
               />
             </InputContainer>
-          </div>
+          </Stack>
 
-          <div>
+          <Stack spacing="space-400">
             <Label htmlFor={`input-container-variant-outline-${id}`}>Outline</Label>
             <InputContainer variant={FillVariants.OUTLINE}>
               <input
@@ -54,7 +55,7 @@ const InputContainerVariants = () => (
                 placeholder="Placeholder"
               />
             </InputContainer>
-          </div>
+          </Stack>
         </DocsStack>
       </Box>
     ))}

@@ -5,7 +5,7 @@ TextArea is a multiline field built from native `textarea` wrapped by [InputCont
 ## Basic Usage
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-default" class="Label">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-default" name="default" placeholder="Placeholder"></textarea>
@@ -21,14 +21,14 @@ TextArea supports the following variant modifiers on `InputContainer`:
 - `InputContainer--outline`
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-variant-fill" class="Label">Fill (default)</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-variant-fill" name="variantFill" placeholder="Placeholder"></textarea>
   </div>
 </div>
 
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-variant-outline" class="Label">Outline</label>
   <div class="InputContainer InputContainer--outline InputContainer--medium">
     <textarea id="text-area-variant-outline" name="variantOutline" placeholder="Placeholder"></textarea>
@@ -45,21 +45,21 @@ TextArea supports the following size modifiers on `InputContainer`:
 - `InputContainer--large`
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-size-small" class="Label">Small</label>
   <div class="InputContainer InputContainer--fill InputContainer--small">
     <textarea id="text-area-size-small" name="sizeSmall" placeholder="Placeholder"></textarea>
   </div>
 </div>
 
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-size-medium" class="Label">Medium (default)</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-size-medium" name="sizeMedium" placeholder="Placeholder"></textarea>
   </div>
 </div>
 
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-size-large" class="Label">Large</label>
   <div class="InputContainer InputContainer--fill InputContainer--large">
     <textarea id="text-area-size-large" name="sizeLarge" placeholder="Placeholder"></textarea>
@@ -70,7 +70,7 @@ TextArea supports the following size modifiers on `InputContainer`:
 ## Required Label
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-required" class="Label Label--required">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-required" name="required" placeholder="Placeholder" required></textarea>
@@ -81,7 +81,7 @@ TextArea supports the following size modifiers on `InputContainer`:
 ## Hidden Label
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-hidden-label" class="Label accessibility-hidden">Hidden Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-hidden-label" name="hiddenLabel" placeholder="Placeholder"></textarea>
@@ -99,7 +99,7 @@ to control the component width in page layouts.
 To add helper text, use [HelperText][readme-helper-text] and connect it with `aria-describedby`.
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-helper-text" class="Label">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea
@@ -122,14 +122,14 @@ Use validation modifiers on `InputContainer`:
 - `InputContainer--danger`
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-success" class="Label">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--success">
     <textarea id="text-area-success" name="success" placeholder="Placeholder">Filled</textarea>
   </div>
 </div>
 
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-warning" class="Label">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--warning">
     <textarea
@@ -144,7 +144,7 @@ Filled</textarea
   <div id="text-area-warning-validation-text" class="ValidationText ValidationText--warning">Validation text</div>
 </div>
 
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-danger" class="Label">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger">
     <textarea
@@ -164,7 +164,7 @@ Filled</textarea
   </div>
 </div>
 
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-danger-with-icon" class="Label">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger">
     <textarea
@@ -192,14 +192,14 @@ To render validation text as a list, use `<ul>` inside `.ValidationText`. To ren
 Use the `InputContainer--disabled` modifier and `disabled` attribute on textarea:
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-disabled" class="Label Label--disabled">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <textarea id="text-area-disabled" name="disabled" placeholder="Placeholder" disabled></textarea>
   </div>
 </div>
 
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-disabled-filled" class="Label Label--required Label--disabled">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <textarea id="text-area-disabled-filled" name="disabledFilled" disabled required>Filled</textarea>
@@ -216,7 +216,7 @@ There are several ways to adjust the textarea size:
 The visible number of lines is controlled by the native `rows` attribute (supported values are positive integers from `3` up).
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-area-rows" class="Label">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-rows" name="rows" rows="3"></textarea>
@@ -241,7 +241,7 @@ Please consult the [main README][web-readme] for how to include JavaScript plugi
 Then add `data-spirit-toggle="autoResize"` in the wrapping `<div>`:
 
 ```html
-<div data-spirit-toggle="autoResize">
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);" data-spirit-toggle="autoResize">
   <label for="text-area-auto-resize" class="Label">Label of auto-resizing TextArea</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <textarea id="text-area-auto-resize" name="autoResize"></textarea>
