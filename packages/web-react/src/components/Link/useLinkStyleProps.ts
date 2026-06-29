@@ -10,14 +10,14 @@ export function useLinkStyleProps<C = void>(props: Omit<LinkStyleProps<C>, 'rout
   const linkDisabledClass = `${linkClass}-disabled`;
   const linkUnderlinedClass = `${linkClass}-underlined`;
   const linkNotUnderlinedClass = `${linkClass}-not-underlined`;
-  const linkStretchedClass = `${linkClass}-stretched`;
+  const elementStretchedClass = useClassNamePrefix('element-stretched');
   const linkVisitedStyleAllowedClass = `${linkClass}-allow-visited-style`;
 
   const className = classNames(linkColorClass, {
     [linkDisabledClass]: isDisabled,
     [linkUnderlinedClass]: underlined === UNDERLINED_OPTIONS.ALWAYS,
     [linkNotUnderlinedClass]: underlined === UNDERLINED_OPTIONS.NEVER,
-    [linkStretchedClass]: isStretched,
+    [elementStretchedClass]: isStretched,
     [linkVisitedStyleAllowedClass]: hasVisitedStyleAllowed,
   });
 

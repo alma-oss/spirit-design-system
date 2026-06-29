@@ -4,8 +4,7 @@
 // 4. Allow link underline everywhere, except for headings in default state.
 // 5. Allow link to obtain the visited state style
 // 6. Disable pointer and text decoration changes for "disabled" links (intended for link-like `<button>` elements).
-// 7. Allow link stretching over the closest element with `position: relative`.
-// 8. Disable link underline everywhere.
+// 7. Disable link underline everywhere.
 
 @use 'sass:list';
 @use 'sass:map';
@@ -14,7 +13,6 @@
 @use '../../settings/dictionaries' as dictionaries-settings;
 @use '../../settings/links' as links-settings;
 @use '../../tools/dictionaries';
-@use '../../tools/pseudo-element';
 
 // 1.
 @include dictionaries.prepare-button-links(list.append(links-settings.$colors, 'inherit'));
@@ -84,11 +82,6 @@
 // stylelint-enable selector-no-qualifying-type
 
 // 7.
-.link-stretched {
-    @include pseudo-element.stretch();
-}
-
-// 8.
 // stylelint-disable selector-no-qualifying-type -- Increase specificity to override button variant styles.
 :is(.link-not-underlined, button.link-not-underlined),
 :is(.link-not-underlined, button.link-not-underlined):is(:hover, :focus, :active) {
