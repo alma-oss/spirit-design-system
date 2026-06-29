@@ -1,7 +1,6 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { FormFieldModes } from '../../../types';
 import ReadMe from '../README.md?raw';
 import { Label } from '..';
 
@@ -23,9 +22,8 @@ const meta: Meta<typeof Label> = {
         defaultValue: { summary: 'label' },
       },
     },
-    formFieldMode: {
-      control: 'select',
-      options: Object.values(FormFieldModes),
+    hasPointerCursor: {
+      control: 'boolean',
     },
     htmlFor: {
       control: 'text',
@@ -43,6 +41,7 @@ const meta: Meta<typeof Label> = {
   args: {
     children: 'Label text',
     elementType: 'label',
+    hasPointerCursor: false,
     htmlFor: 'example-input',
     isDisabled: false,
     isLabelHidden: false,

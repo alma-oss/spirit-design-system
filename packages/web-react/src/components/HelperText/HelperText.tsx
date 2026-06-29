@@ -20,7 +20,6 @@ const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<
     ...defaultProps,
     elementType: contextProps.elementType,
     isDisabled: contextProps.isDisabled,
-    formFieldMode: contextProps.formFieldMode,
     ...props,
   };
   const {
@@ -28,12 +27,11 @@ const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<
     elementType: Component = defaultProps.elementType as ElementType,
     id,
     isDisabled,
-    formFieldMode,
     registerAria,
     ...restProps
   } = propsWithDefaults;
 
-  const { classProps } = useHelperTextStyleProps({ isDisabled, formFieldMode });
+  const { classProps } = useHelperTextStyleProps({ isDisabled });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, transferProps });
 

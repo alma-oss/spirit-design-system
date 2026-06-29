@@ -19,6 +19,7 @@ import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
 import { InputContainer } from '../InputContainer';
 import { Label } from '../Label';
+import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { DEFAULT_POPOVER_PROPS, DEFAULT_SIZE } from './constants';
@@ -216,51 +217,53 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     >
       <PickerContextProvider value={{ size, tagDescriptionId }}>
         <div {...styleProps} className={classNames(classProps.root, styleProps.className)} {...transferProps}>
-          <Label {...labelProps} id={labelId} elementType="span">
-            {label}
-          </Label>
-          <Dropdown {...dropdownProps} id={popoverId} isOpen={isOpen} onToggle={onToggle} triggerRef={triggerRef}>
-            <InputContainer role="group" aria-label={label}>
-              <UNSTABLE_PickerSelection
-                ref={selectionGridRef}
-                {...ariaDescribedByProp}
-                id={selectionId}
-                isDisabled={isDisabled}
-                role={selectedPickerItems.length ? 'grid' : 'group'}
-                aria-label={replaceTranslationParams(selectionAriaLabel, { label })}
-                aria-live="off"
-                aria-atomic={false}
-                aria-relevant="additions"
-              >
-                {selectionContent}
-              </UNSTABLE_PickerSelection>
-              <UNSTABLE_PickerTrigger
-                ref={triggerRef}
-                aria-haspopup="dialog"
-                aria-expanded={isOpen}
-                aria-controls={popoverId}
-                onClick={onToggle}
-                onKeyDown={handleTriggerKeyDown}
-                disabled={isDisabled}
-              >
-                <VisuallyHidden>{isOpen ? closeButtonLabel : addButtonLabel}</VisuallyHidden>
-                <Icon name={`chevron-${isOpen ? 'up' : 'down'}`} boxSize={20} />
-              </UNSTABLE_PickerTrigger>
-            </InputContainer>
-            <DropdownPopover {...popoverProps} aria-labelledby={labelId}>
-              <PickerPopoverContextProvider value={popoverContextValue}>{children}</PickerPopoverContextProvider>
-            </DropdownPopover>
-          </Dropdown>
-          <HelperText id={`${pickerId}-helper-text`} registerAria={register} helperText={helperText} />
-          {validationState && (
-            <ValidationText
-              id={`${pickerId}-validation-text`}
-              {...(hasValidationIcon && { validationStateIcon: validationState })}
-              validationText={validationText}
-              registerAria={register}
-              role={validationTextRole}
-            />
-          )}
+          <Stack spacing="space-400">
+            <Label {...labelProps} id={labelId} elementType="span">
+              {label}
+            </Label>
+            <Dropdown {...dropdownProps} id={popoverId} isOpen={isOpen} onToggle={onToggle} triggerRef={triggerRef}>
+              <InputContainer role="group" aria-label={label}>
+                <UNSTABLE_PickerSelection
+                  ref={selectionGridRef}
+                  {...ariaDescribedByProp}
+                  id={selectionId}
+                  isDisabled={isDisabled}
+                  role={selectedPickerItems.length ? 'grid' : 'group'}
+                  aria-label={replaceTranslationParams(selectionAriaLabel, { label })}
+                  aria-live="off"
+                  aria-atomic={false}
+                  aria-relevant="additions"
+                >
+                  {selectionContent}
+                </UNSTABLE_PickerSelection>
+                <UNSTABLE_PickerTrigger
+                  ref={triggerRef}
+                  aria-haspopup="dialog"
+                  aria-expanded={isOpen}
+                  aria-controls={popoverId}
+                  onClick={onToggle}
+                  onKeyDown={handleTriggerKeyDown}
+                  disabled={isDisabled}
+                >
+                  <VisuallyHidden>{isOpen ? closeButtonLabel : addButtonLabel}</VisuallyHidden>
+                  <Icon name={`chevron-${isOpen ? 'up' : 'down'}`} boxSize={20} />
+                </UNSTABLE_PickerTrigger>
+              </InputContainer>
+              <DropdownPopover {...popoverProps} aria-labelledby={labelId}>
+                <PickerPopoverContextProvider value={popoverContextValue}>{children}</PickerPopoverContextProvider>
+              </DropdownPopover>
+            </Dropdown>
+            <HelperText id={`${pickerId}-helper-text`} registerAria={register} helperText={helperText} />
+            {validationState && (
+              <ValidationText
+                id={`${pickerId}-validation-text`}
+                {...(hasValidationIcon && { validationStateIcon: validationState })}
+                validationText={validationText}
+                registerAria={register}
+                role={validationTextRole}
+              />
+            )}
+          </Stack>
           <span id={tagDescriptionId} hidden>
             {tagDescriptionText}
           </span>
