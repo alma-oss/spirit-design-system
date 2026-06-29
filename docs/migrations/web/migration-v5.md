@@ -10,6 +10,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Dropped Support for Node.js 20](#dropped-support-for-nodejs-20)
   - [Color Schemes](#color-schemes)
   - [Form Fields: Composition Markup Changed](#form-fields-composition-markup-changed)
+  - [Helper: `link-stretched` Renamed to `element-stretched`](#helper-link-stretched-renamed-to-element-stretched)
 - [Component Changes](#component-changes)
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
   - [Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding)
@@ -106,6 +107,27 @@ See [TextField README][readme-textfield], [InputAddon README][readme-input-addon
 [InputDetails README][readme-input-details] for full examples.
 
 </details>
+### Helper: `link-stretched` Renamed to `element-stretched`
+
+The `.link-stretched` helper class has been replaced by the more general `.element-stretched` utility.
+Both classes apply a pseudo-element that expands the clickable area of an element to fill its nearest
+positioned ancestor, but the new name reflects that the utility is not limited to links.
+
+The class now lives in `helpers/elements/` instead of `helpers/links/`.
+
+#### Migration Guide
+
+Replace every occurrence of `link-stretched` with `element-stretched`.
+
+```html
+<!-- Before -->
+<a href="/product/123" class="link-primary link-stretched">Product name</a>
+
+<!-- After -->
+<a href="/product/123" class="link-primary element-stretched">Product name</a>
+```
+
+The parent element must still have `position: relative` for the stretch to take effect.
 
 ## Component Changes
 
