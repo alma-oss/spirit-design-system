@@ -4,7 +4,7 @@ import { Icon } from '../../Icon';
 import { File, FileImagePreview } from '..';
 
 const noop = () => {};
-const imagePreview = 'https://picsum.photos/seed/avatar1/48/48';
+const imagePreview = 'https://picsum.photos/seed/avatar1/44/44';
 
 const FileImagePreviewVariant = () => (
   <Grid cols={{ mobile: 1, desktop: 3 }} spacingY="space-1000">

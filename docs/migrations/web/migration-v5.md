@@ -18,6 +18,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Radio: Composition Markup Changed](#radio-composition-markup-changed)
   - [Toggle: Composition Markup Changed](#toggle-composition-markup-changed)
   - [Collapse: `data-spirit-more` Removed, Use `data-spirit-is-disposable`](#collapse-data-spirit-more-removed-use-data-spirit-is-disposable)
+  - [Form Field Components: Vertical Spacing Removed](#form-field-components-vertical-spacing-removed)
   - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
   - [Success State Icons Renamed from `check-plain` to `success`](#success-state-icons-renamed-from-check-plain-to-success)
   - [FieldGroup: Component Styles Removed](#fieldgroup-component-styles-removed)
@@ -230,12 +231,12 @@ Replace the old Checkbox wrapper markup with a `Flex` row and add `py-500` verti
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox-default" class="Checkbox" />
   <div>
-    <label for="checkbox-default" class="Label Label--inline">Checkbox Label</label>
+    <label for="checkbox-default" class="Label cursor-pointer">Checkbox Label</label>
   </div>
 </div>
 ```
 
-For item-style checkboxes, use the `Item` composition and the `Checkbox--item` and `Label--item` modifiers:
+For item-style checkboxes, use the `Item` composition and the `Checkbox--item` modifier:
 
 ```html
 <!-- Before -->
@@ -252,7 +253,7 @@ For item-style checkboxes, use the `Item` composition and the `Checkbox--item` a
     <input type="checkbox" id="checkbox-item" class="Checkbox Checkbox--item" />
   </div>
   <div class="Item__content" role="presentation">
-    <label for="checkbox-item" class="Label Label--item">Checkbox Label</label>
+    <label for="checkbox-item" class="Label element-stretched cursor-pointer">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -287,12 +288,12 @@ Replace the old Radio wrapper markup with a `Flex` row and add `py-500` vertical
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="radio" id="radio-default" class="Radio" />
   <div>
-    <label for="radio-default" class="Label Label--inline">Radio Label</label>
+    <label for="radio-default" class="Label cursor-pointer">Radio Label</label>
   </div>
 </div>
 ```
 
-For item-style radios, use the `Item` composition and the `Radio--item` and `Label--item` modifiers:
+For item-style radios, use the `Item` composition and the `Radio--item` modifier:
 
 ```html
 <!-- Before -->
@@ -309,7 +310,7 @@ For item-style radios, use the `Item` composition and the `Radio--item` and `Lab
     <input type="radio" id="radio-item" class="Radio Radio--item" />
   </div>
   <div class="Item__content" role="presentation">
-    <label for="radio-item" class="Label Label--item">Radio Label</label>
+    <label for="radio-item" class="Label element-stretched cursor-pointer">Radio Label</label>
   </div>
 </div>
 ```
@@ -347,7 +348,7 @@ Replace the old Toggle wrapper markup with a `Flex` row and add `py-500` vertica
 >
   <input type="checkbox" id="toggle-default" class="Toggle" />
   <div>
-    <label for="toggle-default" class="Label Label--inline">Toggle Label</label>
+    <label for="toggle-default" class="Label cursor-pointer">Toggle Label</label>
   </div>
 </div>
 ```
@@ -363,6 +364,41 @@ For toggles with indicators, move `Toggle__input--indicators` to `Toggle--indica
 ```
 
 </details>
+
+### Form Field Components: Vertical Spacing Removed
+
+`Label`, `HelperText`, and `ValidationText` no longer carry their own `margin-top` or `margin-bottom`.
+Previously those margins provided automatic spacing inside form field compositions.
+If you compose custom fields from these components directly (without using Spirit's built-in field
+components such as `TextField`, `Checkbox`, or `FileUploadInput`), you must now provide spacing
+explicitly via a layout wrapper.
+
+#### Migration Guide
+
+Wrap your field parts in a `Stack` with the appropriate spacing token:
+
+```html
+<!-- Before — spacing came from Label/HelperText/ValidationText margins -->
+<label for="my-input" class="Label">Label</label>
+<div class="InputContainer InputContainer--fill InputContainer--medium">
+  <input type="text" id="my-input" />
+</div>
+<div class="HelperText">Helper text</div>
+<div class="ValidationText ValidationText--danger">Error text</div>
+
+<!-- After — wrap in Stack to restore spacing -->
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+  <label for="my-input" class="Label">Label</label>
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
+    <input type="text" id="my-input" />
+  </div>
+  <div class="HelperText">Helper text</div>
+  <div class="ValidationText ValidationText--danger">Error text</div>
+</div>
+```
+
+Use `--stack-spacing: var(--spirit-space-400)` for the gap between the label and its helper/validation
+text inside the text area (e.g. inside a Radio or Checkbox row), or `--stack-spacing: var(--spirit-space-500)` for the gap between the label and the input container.
 
 ### Flex: Direction Modifier Classes Changed
 
@@ -699,7 +735,7 @@ Simple item:
 <!-- After -->
 <div class="Item">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
+    <span class="Label element-stretched">Item</span>
   </span>
 </div>
 ```
@@ -731,7 +767,7 @@ Item with icon and helper text:
     </svg>
   </span>
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
+    <span class="Label element-stretched">Item</span>
     <span class="HelperText">Helper text</span>
   </span>
   <span class="Item__slot" role="presentation">
@@ -865,7 +901,7 @@ Swap the order of the input and text wrapper in your Toggle HTML.
 <div class="Toggle Toggle--inputPositionEnd">
   <input type="checkbox" id="toggle" class="Toggle__input" name="toggle" />
   <div class="Toggle__text">
-    <label class="Label Label--inline" for="toggle">Toggle Label</label>
+    <label class="Label cursor-pointer" for="toggle">Toggle Label</label>
   </div>
 </div>
 ```

@@ -180,7 +180,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--spacing` on the
 </div>
 
 <!-- File list using File -->
-<ul class="Stack Stack--spacing" aria-label="Uploaded files">
+<ul class="Stack Stack--spacing" aria-label="Uploaded files" style="--stack-spacing: var(--spirit-space-800);">
   <li class="File">
     <div class="File__preview">
       <svg class="Icon" width="20" height="20" aria-hidden="true">

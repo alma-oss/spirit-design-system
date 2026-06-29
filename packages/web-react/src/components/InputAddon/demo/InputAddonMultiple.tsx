@@ -3,13 +3,14 @@ import { ControlButton } from '../../ControlButton';
 import { Icon } from '../../Icon';
 import { InputContainer } from '../../InputContainer';
 import { Label } from '../../Label';
+import { Stack } from '../../Stack';
 import { VisuallyHidden } from '../../VisuallyHidden';
 import InputAddon from '../InputAddon';
 
 const INPUT_ID = 'input-addon-multiple';
 
 const InputAddonMultiple = () => (
-  <div>
+  <Stack spacing="space-400">
     <Label htmlFor={INPUT_ID}>Username</Label>
     <InputContainer size="medium">
       <InputAddon elementType="label" htmlFor={INPUT_ID}>
@@ -26,7 +27,7 @@ const InputAddonMultiple = () => (
         </ControlButton>
       </InputAddon>
     </InputContainer>
-  </div>
+  </Stack>
 );
 
 export default InputAddonMultiple;

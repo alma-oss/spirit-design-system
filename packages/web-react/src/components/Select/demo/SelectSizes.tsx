@@ -4,7 +4,7 @@ import Select from '../Select';
 import ChildrenNode from './ChildrenNode';
 
 const SelectSizes = () => (
-  <Grid cols={{ mobile: 1, desktop: 3 }}>
+  <Grid cols={{ mobile: 1, desktop: 3 }} alignmentY="top">
     <Select id="select-simple-small" name="selectSizeSmall" label="Small" size="small" helperText="Helper text">
       <ChildrenNode />
     </Select>

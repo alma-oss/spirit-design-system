@@ -18,7 +18,7 @@ Files are rendered in a **Stack** (with `elementType="ul"` and `aria-label="Uplo
 To show the file input and drop zone, pass `name` (and typically `label`, `inputUploadText`, `inputDragAndDropText`, and optionally `buttonText` for the decorative button). When `name` is omitted, only the wrapper is rendered (e.g. for layout or when you only show the uploaded files list).
 
 ```tsx
-<Stack hasSpacing>
+<Stack spacing="space-800">
   <FileUpload
     id="file-uploader-example"
     name="attachments"
@@ -44,7 +44,7 @@ Validation states can be displayed visually, but no validation logic is included
 The consumer is responsible for setting the validation state based on their own logic.
 
 ```tsx
-<Stack hasSpacing>
+<Stack spacing="space-800">
   <FileUpload
     id="file-uploader-1"
     name="attachments"

@@ -14,10 +14,10 @@ The Label component has two other variants:
 
 ### Inline Variant
 
-Used for inline field components like [Checkbox][checkbox], [Radio][radio], and [Toggle][toggle], where the label is typically placed next to the input.
+Used for inline field components like [Checkbox][checkbox], [Radio][radio], and [Toggle][toggle], where the label is typically placed next to the input. Add the `cursor-pointer` helper class to show a pointer cursor.
 
 ```html
-<label for="example-field" class="Label Label--inline">Label Text</label>
+<label for="example-field" class="Label cursor-pointer">Label Text</label>
 ```
 
 ### Item Variant
@@ -25,13 +25,13 @@ Used for inline field components like [Checkbox][checkbox], [Radio][radio], and 
 Used for standalone [Item][item] components (button, link, div with `.Item` class).
 
 ```html
-<span class="Label Label--item">Item label</span>
+<span class="Label element-stretched">Item label</span>
 ```
 
-For Checkbox or Radio with the `--item` modifier, combine both inline and item variants:
+For Checkbox or Radio in item mode, use the item variant with the `element-stretched` helper class:
 
 ```html
-<label for="example-field" class="Label Label--item">Label Text</label>
+<label for="example-field" class="Label element-stretched">Label Text</label>
 ```
 
 ## Modifiers
@@ -90,7 +90,7 @@ Applies disabled styling to the label.
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox" class="Checkbox" />
   <div>
-    <label class="Label Label--inline" for="checkbox">Checkbox Label</label>
+    <label class="Label cursor-pointer" for="checkbox">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -103,7 +103,7 @@ Applies disabled styling to the label.
     <input type="checkbox" id="checkbox-item" class="Checkbox Checkbox--item" />
   </div>
   <div class="Item__content" role="presentation">
-    <label class="Label Label--item" for="checkbox-item">Checkbox Label</label>
+    <label class="Label element-stretched" for="checkbox-item">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -113,7 +113,7 @@ Applies disabled styling to the label.
 ```html
 <button type="button" class="Item">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item label</span>
+    <span class="Label element-stretched">Item label</span>
   </span>
 </button>
 ```

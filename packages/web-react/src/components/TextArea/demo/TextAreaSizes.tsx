@@ -3,7 +3,7 @@ import { Grid } from '../../Grid';
 import TextArea from '../TextArea';
 
 const TextAreaSizes = () => (
-  <Grid cols={{ mobile: 1, desktop: 3 }}>
+  <Grid cols={{ mobile: 1, desktop: 3 }} alignmentY="top">
     <TextArea
       id="text-area-size-small"
       label="Small"
