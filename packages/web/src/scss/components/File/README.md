@@ -29,7 +29,7 @@ It is a standalone component, but most often it is used in combination with the 
     >
       <button
         type="button"
-        class="ControlButton ControlButton--large ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
+        class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
         aria-label="Edit file name Document.pdf"
       >
         <svg class="Icon" width="16" height="16" aria-hidden="true">
@@ -38,7 +38,7 @@ It is a standalone component, but most often it is used in combination with the 
       </button>
       <button
         type="button"
-        class="ControlButton ControlButton--large ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
+        class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
         aria-label="Remove file Document.pdf from list"
       >
         <svg class="Icon" width="16" height="16" aria-hidden="true">
@@ -57,7 +57,7 @@ Use an `<img>` element inside `.File__preview` for image attachments:
 ```html
 <li class="File">
   <div class="File__preview">
-    <img src="https://picsum.photos/seed/avatar1/48/48" width="48" height="48" alt="Profile photo" />
+    <img src="https://picsum.photos/seed/avatar1/44/44" width="44" height="44" alt="Profile photo" />
   </div>
   <!-- … same content and actions as above … -->
 </li>
@@ -83,7 +83,7 @@ The image can be positioned/cropped via CSS custom properties:
   "
 >
   <div class="File__preview">
-    <img src="https://picsum.photos/seed/avatar1/48/48" width="48" height="48" alt="Profile photo" />
+    <img src="https://picsum.photos/seed/avatar1/44/44" width="44" height="44" alt="Profile photo" />
   </div>
   <!-- … same content and actions as above … -->
 </li>
@@ -161,7 +161,7 @@ Show upload progress using `HelperText` component:
   </div>
   <button
     type="button"
-    class="ControlButton ControlButton--large ControlButton--symmetrical ControlButton--hasBackground text-color-scheme dynamic-color-border dynamic-color-background-interactive accessibility-tap-target disabled"
+    class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground text-color-scheme dynamic-color-border dynamic-color-background-interactive accessibility-tap-target disabled"
     aria-label="Remove file Document.pdf from list"
     disabled
   >
