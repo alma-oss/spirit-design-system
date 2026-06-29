@@ -6,7 +6,7 @@ import { FileUpload } from '..';
 import { visualOnlyNoopOnDismiss } from './visualOnlyContext';
 
 const FileUploadInputWithAttachment = () => (
-  <Stack hasSpacing>
+  <Stack spacing="space-800">
     <FileUpload
       rootId="example-with-file-list"
       id="file-uploader-with-list"

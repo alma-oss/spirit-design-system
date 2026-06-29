@@ -29,7 +29,7 @@
             name="default"
           />
           <div>
-            <label class="Label Label--inline" for="checkbox-default">Checkbox Label</label>
+            <label class="Label cursor-pointer" for="checkbox-default">Checkbox Label</label>
           </div>
         </div>
 
@@ -42,7 +42,7 @@
             checked
           />
           <div>
-            <label class="Label Label--inline" for="checkbox-default-checked">Checkbox Label</label>
+            <label class="Label cursor-pointer" for="checkbox-default-checked">Checkbox Label</label>
           </div>
         </div>
 
@@ -70,7 +70,7 @@
           name="indeterminate"
         />
         <div>
-          <label class="Label Label--inline" for="checkbox-indeterminate">Checkbox Label</label>
+          <label class="Label cursor-pointer" for="checkbox-indeterminate">Checkbox Label</label>
         </div>
       </div>
 
@@ -97,7 +97,7 @@
           required
         />
         <div>
-          <label class="Label Label--inline Label--required" for="checkbox-required">Checkbox Label</label>
+          <label class="Label Label--required cursor-pointer" for="checkbox-required">Checkbox Label</label>
         </div>
       </div>
 
@@ -123,7 +123,7 @@
           name="hiddenLabel"
         />
         <div>
-          <label class="Label Label--inline accessibility-hidden" for="checkbox-hidden-label">Checkbox Label</label>
+          <label class="Label accessibility-hidden" for="checkbox-hidden-label">Checkbox Label</label>
         </div>
       </div>
 
@@ -149,8 +149,8 @@
           name="helperText"
           aria-describedby="checkbox-helper-text-helper-text"
         />
-        <div>
-          <label class="Label Label--inline" for="checkbox-helper-text">Checkbox Label</label>
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+          <label class="Label cursor-pointer" for="checkbox-helper-text">Checkbox Label</label>
           <div class="HelperText" id="checkbox-helper-text-helper-text">Helper text</div>
         </div>
       </div>
@@ -180,7 +180,7 @@
             disabled
           />
           <div>
-            <label class="Label Label--inline Label--disabled" for="checkbox-disabled">Checkbox Label</label>
+            <label class="Label Label--disabled" for="checkbox-disabled">Checkbox Label</label>
           </div>
         </div>
 
@@ -195,8 +195,8 @@
             checked
             required
           />
-          <div>
-            <label class="Label Label--inline Label--required Label--disabled" for="checkbox-disabled-helper-text">Checkbox Label</label>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+            <label class="Label Label--required Label--disabled" for="checkbox-disabled-helper-text">Checkbox Label</label>
             <div class="HelperText HelperText--disabled" id="checkbox-disabled-helper-text-helper-text">Helper text</div>
           </div>
         </div>
@@ -210,7 +210,7 @@
             disabled
           />
           <div>
-            <label class="Label Label--inline Label--disabled" for="checkbox-disabled-indeterminate">Checkbox Label</label>
+            <label class="Label Label--disabled" for="checkbox-disabled-indeterminate">Checkbox Label</label>
           </div>
         </div>
 
@@ -240,7 +240,7 @@
             name="success"
           />
           <div>
-            <label class="Label Label--inline" for="checkbox-success">Checkbox Label</label>
+            <label class="Label cursor-pointer" for="checkbox-success">Checkbox Label</label>
           </div>
         </div>
 
@@ -252,8 +252,8 @@
             name="warning"
             aria-describedby="checkbox-warning-validation-text"
           />
-          <div>
-            <label class="Label Label--inline" for="checkbox-warning">Checkbox Label</label>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+            <label class="Label cursor-pointer" for="checkbox-warning">Checkbox Label</label>
             <div class="ValidationText ValidationText--warning" id="checkbox-warning-validation-text">Warning validation text</div>
           </div>
         </div>
@@ -266,8 +266,8 @@
             name="danger"
             aria-describedby="checkbox-danger-validation-text"
           />
-          <div>
-            <label for="checkbox-danger" class="Label Label--inline">Checkbox Label</label>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+            <label for="checkbox-danger" class="Label cursor-pointer">Checkbox Label</label>
             <div class="ValidationText ValidationText--danger" id="checkbox-danger-validation-text">
               <ul>
                 <li>First validation text</li>
@@ -286,8 +286,8 @@
             aria-describedby="checkbox-warning-helper-text-helper-text checkbox-warning-helper-text-validation-text"
             checked
           />
-          <div>
-            <label class="Label Label--inline" for="checkbox-warning-helper-text">Checkbox Label</label>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+            <label class="Label cursor-pointer" for="checkbox-warning-helper-text">Checkbox Label</label>
             <div class="HelperText" id="checkbox-warning-helper-text-helper-text">Helper text</div>
             <div class="ValidationText ValidationText--warning" id="checkbox-warning-helper-text-validation-text">Warning validation text</div>
           </div>
@@ -321,8 +321,8 @@
             name="warningWithText"
             aria-describedby="checkbox-{{ state }}-validation-icon-validation-text"
           />
-          <div>
-            <label class="Label Label--inline" for="checkbox-{{ state }}-validation-icon">Checkbox Label</label>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+            <label class="Label cursor-pointer" for="checkbox-{{ state }}-validation-icon">Checkbox Label</label>
             <div class="ValidationText ValidationText--{{ state }}" id="checkbox-{{ state }}-validation-icon-validation-text">
               <svg
                 class="Icon"
@@ -364,7 +364,7 @@
             name="positionStart"
           />
           <div>
-            <label class="Label Label--inline" for="checkbox-position-start">Input on Start (Default)</label>
+            <label class="Label cursor-pointer" for="checkbox-position-start">Input on Start (Default)</label>
           </div>
         </div>
 
@@ -376,7 +376,7 @@
             name="positionEnd"
           />
           <div>
-            <label class="Label Label--inline" for="checkbox-position-end">Input on End</label>
+            <label class="Label cursor-pointer" for="checkbox-position-end">Input on End</label>
           </div>
         </div>
 
@@ -388,7 +388,7 @@
             name="positionResponsive"
           />
           <div>
-            <label class="Label Label--inline" for="checkbox-position-responsive">Responsive Position</label>
+            <label class="Label cursor-pointer" for="checkbox-position-responsive">Responsive Position</label>
           </div>
         </div>
 
@@ -420,7 +420,7 @@
             />
           </div>
           <div class="Item__content" role="presentation">
-            <label class="Label Label--item" for="checkbox-item-default">Checkbox Label</label>
+            <label class="Label element-stretched cursor-pointer" for="checkbox-item-default">Checkbox Label</label>
           </div>
         </div>
 
@@ -435,7 +435,7 @@
             />
           </div>
           <div class="Item__content" role="presentation">
-            <label class="Label Label--item" for="checkbox-item-default-checked">Checkbox Label</label>
+            <label class="Label element-stretched cursor-pointer" for="checkbox-item-default-checked">Checkbox Label</label>
           </div>
         </div>
 
@@ -450,8 +450,10 @@
             />
           </div>
           <div class="Item__content" role="presentation">
-            <label class="Label Label--item" for="checkbox-item-helper-text">Checkbox Label</label>
-            <div class="HelperText" id="checkbox-item-helper-text-helper-text">Helper text</div>
+            <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+              <label class="Label element-stretched cursor-pointer" for="checkbox-item-helper-text">Checkbox Label</label>
+              <div class="HelperText" id="checkbox-item-helper-text-helper-text">Helper text</div>
+            </div>
           </div>
         </div>
 
@@ -466,7 +468,7 @@
             />
           </div>
           <div class="Item__content" role="presentation">
-            <label class="Label Label--item Label--disabled" for="checkbox-item-disabled">Checkbox Label</label>
+            <label class="Label element-stretched Label--disabled" for="checkbox-item-disabled">Checkbox Label</label>
           </div>
         </div>
 
@@ -484,8 +486,10 @@
             />
           </div>
           <div class="Item__content" role="presentation">
-            <label class="Label Label--item Label--required Label--disabled" for="checkbox-item-disabled-helper-text">Checkbox Label</label>
-            <div class="HelperText HelperText--disabled" id="checkbox-item-disabled-helper-text-helper-text">Helper text</div>
+            <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+              <label class="Label element-stretched Label--required Label--disabled" for="checkbox-item-disabled-helper-text">Checkbox Label</label>
+              <div class="HelperText HelperText--disabled" id="checkbox-item-disabled-helper-text-helper-text">Helper text</div>
+            </div>
           </div>
         </div>
 
@@ -515,7 +519,7 @@
           required
         />
         <div>
-          <label class="Label Label--inline Label--required" for="consent-emphasized-label"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
+          <label class="Label Label--required cursor-pointer" for="consent-emphasized-label"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
           <div id="consent-emphasized-label-details" class="InputDetails">
             <button
               type="button"
@@ -555,8 +559,8 @@
           aria-describedby="consent-full-example-helper-text consent-full-example-validation-text"
           required
         />
-        <div>
-          <label class="Label Label--inline Label--required" for="consent-full-example">I agree to the terms and privacy policy</label>
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+          <label class="Label Label--required cursor-pointer" for="consent-full-example">I agree to the terms and privacy policy</label>
           <div id="consent-full-example-details" class="InputDetails">
             <button
               type="button"

@@ -1,12 +1,13 @@
 import React from 'react';
 import { PropsProvider } from '../../../context';
 import { Label } from '../../Label';
+import { Stack } from '../../Stack';
 import { ValidationText } from '../../ValidationText';
 import InputContainer from '../InputContainer';
 
 const InputContainerValidation = () => (
   <>
-    <div>
+    <Stack spacing="space-400">
       <PropsProvider value={{ validationState: 'warning' }}>
         <Label htmlFor="input-container-warning">Warning</Label>
         <InputContainer>
@@ -20,9 +21,9 @@ const InputContainerValidation = () => (
         </InputContainer>
         <ValidationText id="input-container-warning-validation-text" validationText="Validation text" />
       </PropsProvider>
-    </div>
+    </Stack>
 
-    <div>
+    <Stack spacing="space-400">
       <PropsProvider value={{ validationState: 'danger' }}>
         <Label htmlFor="input-container-danger">Danger</Label>
         <InputContainer>
@@ -40,7 +41,7 @@ const InputContainerValidation = () => (
           validationText={['Validation text', 'Second validation text']}
         />
       </PropsProvider>
-    </div>
+    </Stack>
   </>
 );
 
