@@ -1,0 +1,8 @@
+// 1. Allow element stretching over the closest element with `position: relative`.
+
+@use '../../tools/pseudo-element';
+
+// 1.
+.element-stretched {
+    @include pseudo-element.stretch();
+}
