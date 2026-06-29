@@ -3,7 +3,7 @@
 import React, { type ElementType } from 'react';
 import { PropsProvider, useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type FormFieldContextValue, FormFieldModes, type SpiritItemProps } from '../../types';
+import { type FormFieldContextValue, type SpiritItemProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useItemStyleProps } from './useItemStyleProps';
 
@@ -34,7 +34,7 @@ const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Ele
   const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps, otherProps });
 
   return (
-    <PropsProvider value={{ elementType: 'span', formFieldMode: FormFieldModes.ITEM, isDisabled }}>
+    <PropsProvider value={{ elementType: 'span', isDisabled, isItem: true }}>
       <Component {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && Component === 'button'}>
         {startSlot && (
           <span className={classProps.slot} role="presentation">

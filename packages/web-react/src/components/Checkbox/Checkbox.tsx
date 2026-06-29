@@ -3,13 +3,14 @@
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
-import { FormFieldModes, type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
+import { type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { InputDetails } from '../InputDetails';
 import { Item } from '../Item';
 import { Label } from '../Label';
+import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { useCheckboxStyleProps } from './useCheckboxStyleProps';
 
@@ -59,7 +60,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
 
   const checkboxText = (
     <>
-      <Label elementType="label" htmlFor={id}>
+      <Label htmlFor={id} hasPointerCursor>
         {label}
       </Label>
       {details && (
@@ -83,8 +84,8 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
   return (
     <PropsProvider
       value={{
-        formFieldMode: isItem ? FormFieldModes.ITEM : FormFieldModes.INLINE,
         isDisabled,
+        isItem,
         isLabelHidden,
         isRequired,
         validationState,
@@ -92,7 +93,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
     >
       {isItem ? (
         <Item isDisabled={isDisabled} startSlot={checkboxInput} {...mergeStyleProps(Item, { styleProps })}>
-          {checkboxText}
+          <Stack spacing="space-400">{checkboxText}</Stack>
         </Item>
       ) : (
         <Flex
@@ -102,7 +103,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
           {...mergeStyleProps(Flex, { styleProps })}
         >
           {checkboxInput}
-          <div>{checkboxText}</div>
+          <Stack spacing="space-400">{checkboxText}</Stack>
         </Flex>
       )}
     </PropsProvider>

@@ -5,8 +5,8 @@
     @include typography.generate(theme.$typography);
 
     display: block;
-    margin-top: theme.$margin-top;
     margin-left: auto;
+    color: theme.$color-state-default;
 }
 
 .CharacterCounter--disabled {

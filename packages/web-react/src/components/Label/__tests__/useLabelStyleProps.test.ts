@@ -1,9 +1,8 @@
 import { renderHook } from '@testing-library/react';
-import { FormFieldModes } from '../../../types';
 import { useLabelStyleProps } from '../useLabelStyleProps';
 
 describe('useLabelStyleProps', () => {
-  it('should return default Label and box class', () => {
+  it('should return default Label class', () => {
     const { result } = renderHook(() => useLabelStyleProps({}));
 
     expect(result.current.classProps).toContain('Label');
@@ -15,16 +14,16 @@ describe('useLabelStyleProps', () => {
     expect(result.current.classProps).toContain('Label--disabled');
   });
 
-  it('should return inline class when formFieldMode is inline', () => {
-    const { result } = renderHook(() => useLabelStyleProps({ formFieldMode: FormFieldModes.INLINE }));
+  it('should return cursor-pointer class when hasPointerCursor is true', () => {
+    const { result } = renderHook(() => useLabelStyleProps({ hasPointerCursor: true }));
 
-    expect(result.current.classProps).toContain('Label--inline');
+    expect(result.current.classProps).toContain('cursor-pointer');
   });
 
-  it('should return item class when formFieldMode is item', () => {
-    const { result } = renderHook(() => useLabelStyleProps({ formFieldMode: FormFieldModes.ITEM }));
+  it('should return element-stretched class when isStretched is true', () => {
+    const { result } = renderHook(() => useLabelStyleProps({ isStretched: true }));
 
-    expect(result.current.classProps).toContain('Label--item');
+    expect(result.current.classProps).toContain('element-stretched');
   });
 
   it('should return required class when isRequired is true', () => {

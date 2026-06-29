@@ -7,7 +7,6 @@
 
     display: block;
     grid-column-start: var(--#{tokens.$css-variable-prefix}helper-text-grid-column-start);
-    margin-top: var(--#{tokens.$css-variable-prefix}helper-text-margin-top, #{theme.$margin-top});
     color: theme.$color-state-default;
 }
 

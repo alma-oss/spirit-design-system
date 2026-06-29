@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import React, { type ReactElement } from 'react';
 import { PropsProvider } from '../../src/context';
-import { FormFieldModes } from '../../src/types';
 
 type TestProps = Record<string, unknown>;
 type RenderComponent = (props?: TestProps) => ReactElement;
@@ -12,8 +11,6 @@ interface BaseFormFieldTestConfig {
 
 interface FormFieldContextPropsTestConfig extends BaseFormFieldTestConfig {
   classNamePrefix: string;
-  includeInlineMode?: boolean;
-  includeItemMode?: boolean;
   text?: string;
 }
 
@@ -92,51 +89,10 @@ const expectClassForProps = ({
 
 export const formFieldContextPropsTest = ({
   classNamePrefix,
-  includeInlineMode = true,
-  includeItemMode = true,
   renderComponent,
   text = DEFAULT_LABEL_TEXT,
 }: FormFieldContextPropsTestConfig) => {
   describe('prop priority (1. direct props, 2. context, 3. defaultProps)', () => {
-    if (includeInlineMode || includeItemMode) {
-      it('should use default formFieldMode when no context and no direct prop', () => {
-        renderFieldComponent(renderComponent);
-        const element = screen.getByText(text);
-
-        expect(element.className).toMatch(new RegExp(`^${classNamePrefix}\\b`));
-
-        if (includeInlineMode) {
-          expect(element.className).not.toContain(`${classNamePrefix}--inline`);
-        }
-        if (includeItemMode) {
-          expect(element.className).not.toContain(`${classNamePrefix}--item`);
-        }
-      });
-    }
-
-    if (includeInlineMode) {
-      it('should use context formFieldMode when context provides it and no direct prop', () => {
-        render(<PropsProvider value={{ formFieldMode: FormFieldModes.INLINE }}>{renderComponent()}</PropsProvider>);
-        const element = screen.getByText(text);
-
-        expect(element.className).toContain(`${classNamePrefix}--inline`);
-      });
-    }
-
-    if (includeInlineMode && includeItemMode) {
-      it('should use direct formFieldMode over context (direct props override context)', () => {
-        render(
-          <PropsProvider value={{ formFieldMode: FormFieldModes.ITEM }}>
-            {renderComponent({ formFieldMode: FormFieldModes.INLINE })}
-          </PropsProvider>,
-        );
-        const element = screen.getByText(text);
-
-        expect(element.className).toContain(`${classNamePrefix}--inline`);
-        expect(element.className).not.toContain(`${classNamePrefix}--item`);
-      });
-    }
-
     it('should use context isDisabled when no direct prop', () => {
       render(<PropsProvider value={{ isDisabled: true }}>{renderComponent()}</PropsProvider>);
       const element = screen.getByText(text);

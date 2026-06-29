@@ -9,6 +9,7 @@ import { useLabelStyleProps } from './useLabelStyleProps';
 
 const defaultProps: Partial<SpiritLabelProps> = {
   elementType: 'label',
+  hasPointerCursor: false,
   isDisabled: false,
   isLabelHidden: false,
   isRequired: false,
@@ -19,8 +20,8 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
   const propsWithDefaults = {
     ...defaultProps,
     elementType: contextProps.elementType,
-    formFieldMode: contextProps.formFieldMode,
     isDisabled: contextProps.isDisabled,
+    isStretched: contextProps.isItem,
     isLabelHidden: contextProps.isLabelHidden,
     isRequired: contextProps.isRequired,
     ...props,
@@ -29,17 +30,19 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
     children,
     elementType: ElementTag = 'label' as ElementType,
     for: labelFor,
-    formFieldMode,
+    hasPointerCursor,
     htmlFor,
     isDisabled,
+    isStretched,
     isLabelHidden,
     isRequired,
     ...restProps
   } = propsWithDefaults;
 
   const { classProps } = useLabelStyleProps({
-    formFieldMode,
+    hasPointerCursor,
     isDisabled,
+    isStretched,
     isLabelHidden,
     isRequired,
   });
