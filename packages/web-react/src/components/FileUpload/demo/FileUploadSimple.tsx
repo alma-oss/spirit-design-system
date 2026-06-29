@@ -45,7 +45,7 @@ const SimpleUploadColumn = ({ title, inputId, isCompact, name, rootId }: SimpleU
         onFilesSelected={handleFilesSelected}
       />
       {fileQueue.size > 0 && (
-        <Stack aria-label="Uploaded files" elementType="ul" hasSpacing>
+        <Stack aria-label="Uploaded files" elementType="ul" spacing="space-700">
           {Array.from(fileQueue.entries()).map(([key, item]) => (
             <File
               key={key}

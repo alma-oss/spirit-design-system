@@ -17,7 +17,7 @@ const FileUploadInputWithAttachment = () => (
       name="attachment-with-list"
       isMultiple
     />
-    <Stack aria-label="Uploaded files" elementType="ul" hasSpacing>
+    <Stack aria-label="Uploaded files" elementType="ul" spacing="space-700">
       <File
         label="Document.pdf"
         helperText="2.5 MB"
