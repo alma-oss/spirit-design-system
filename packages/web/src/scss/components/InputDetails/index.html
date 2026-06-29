@@ -18,7 +18,7 @@
           required
         />
         <div>
-          <label class="Label Label--inline Label--required" for="input-details-checkbox"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
+          <label class="Label cursor-pointer Label--required" for="input-details-checkbox">I agree to the terms and conditions</label>
           <div id="input-details-checkbox-details" class="InputDetails">
             <p class="typography-body-medium-regular mb-0">We want to keep you informed</p>
             <button
@@ -60,7 +60,7 @@
           disabled
         />
         <div>
-          <label class="Label Label--inline Label--required Label--disabled" for="input-details-checkbox-disabled"><span class="typography-body-medium-semibold">I agree to the terms and conditions</span></label>
+          <label class="Label cursor-pointer Label--required Label--disabled" for="input-details-checkbox-disabled">I agree to the terms and conditions</label>
           <div id="input-details-checkbox-disabled-details" class="InputDetails InputDetails--disabled">
             <p class="typography-body-medium-regular mb-0">We want to keep you informed</p>
             <button
@@ -102,8 +102,8 @@
           aria-details="input-details-toggle-details"
           aria-describedby="consent-full-example-helper-text consent-full-example-validation-text"
         />
-        <div>
-          <label class="Label Label--inline Label--required" for="input-details-toggle">I agree to the terms and conditions</label>
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+          <label class="Label cursor-pointer Label--required" for="input-details-toggle">I agree to the terms and conditions</label>
           <div id="input-details-toggle-details" class="InputDetails">
             <button
               type="button"
@@ -160,8 +160,8 @@
           aria-details="input-details-toggle-disabled-details"
           aria-describedby="input-details-toggle-disabled-helper-text input-details-toggle-disabled-validation-text"
         />
-        <div>
-          <label class="Label Label--inline Label--required Label--disabled" for="input-details-toggle-disabled">I agree to the terms and conditions</label>
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+          <label class="Label Label--required Label--disabled" for="input-details-toggle-disabled">I agree to the terms and conditions</label>
           <div id="input-details-toggle-disabled-details" class="InputDetails InputDetails--disabled">
             <button
               type="button"

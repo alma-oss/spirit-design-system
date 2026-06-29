@@ -2,11 +2,12 @@ import React from 'react';
 import { Icon } from '../../Icon';
 import { InputContainer } from '../../InputContainer';
 import { Label } from '../../Label';
+import { Stack } from '../../Stack';
 import { VisuallyHidden } from '../../VisuallyHidden';
 import InputAddon from '../InputAddon';
 
 const InputAddonIcon = () => (
-  <div>
+  <Stack spacing="space-400">
     <Label htmlFor="input-addon-search-icon">Search</Label>
     <InputContainer size="medium">
       <input type="search" id="input-addon-search-icon" name="inputAddonSearchIcon" placeholder="Search" />
@@ -15,7 +16,7 @@ const InputAddonIcon = () => (
         <VisuallyHidden>Use search to find jobs for you</VisuallyHidden>
       </InputAddon>
     </InputContainer>
-  </div>
+  </Stack>
 );
 
 export default InputAddonIcon;

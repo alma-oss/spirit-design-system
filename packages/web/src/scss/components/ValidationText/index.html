@@ -8,7 +8,7 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div>
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="validation-text-danger"
           class="Label"
@@ -24,7 +24,7 @@
         <div class="ValidationText ValidationText--danger">Danger validation text</div>
       </div>
 
-      <div>
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="validation-text-warning"
           class="Label"
@@ -40,7 +40,7 @@
         <div class="ValidationText ValidationText--warning">Warning validation text</div>
       </div>
 
-      <div>
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="validation-text-success"
           class="Label"
@@ -72,7 +72,7 @@
 
       {{setVar "states" "success" "warning" "danger" }}
       {{#each @root.states as |state|}}
-      <div>
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="validation-text-icon-{{state}}"
           class="Label"
@@ -113,7 +113,7 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div>
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="validation-text-list"
           class="Label"
@@ -148,7 +148,7 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div>
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="validation-text-disabled"
           class="Label Label--disabled"
@@ -189,9 +189,9 @@
             class="Checkbox Checkbox--danger"
             name="checkboxDanger"
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="validation-text-checkbox-danger"
             >Checkbox Label</label>
             <div class="ValidationText ValidationText--danger">Danger validation text</div>
@@ -205,9 +205,9 @@
             class="Checkbox Checkbox--warning"
             name="checkboxWarning"
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="validation-text-checkbox-warning"
             >Checkbox Label</label>
             <div class="ValidationText ValidationText--warning">
@@ -250,11 +250,13 @@
           />
         </div>
         <div class="Item__content" role="presentation">
-          <label
-            class="Label Label--item"
-            for="validation-text-checkbox-item"
-          >Checkbox Label</label>
-          <div class="ValidationText ValidationText--danger">Item mode validation text</div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+            <label
+              class="Label element-stretched cursor-pointer"
+              for="validation-text-checkbox-item"
+            >Checkbox Label</label>
+            <div class="ValidationText ValidationText--danger">Item mode validation text</div>
+          </div>
         </div>
       </div>
 

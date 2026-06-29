@@ -1,12 +1,13 @@
 import React from 'react';
 import { InputContainer } from '../../InputContainer';
 import { Label } from '../../Label';
+import { Stack } from '../../Stack';
 import { VisuallyHidden } from '../../VisuallyHidden';
 import InputAddon from '../InputAddon';
 
 const InputAddonCurrency = () => (
   <>
-    <div>
+    <Stack spacing="space-400">
       <Label htmlFor="input-addon-currency-eur">Amount</Label>
       <InputContainer size="medium">
         <InputAddon elementType="label" htmlFor="input-addon-currency-eur">
@@ -22,9 +23,9 @@ const InputAddonCurrency = () => (
           autoComplete="transaction-amount"
         />
       </InputContainer>
-    </div>
+    </Stack>
 
-    <div>
+    <Stack spacing="space-400">
       <Label htmlFor="input-addon-currency-usd">Amount</Label>
       <InputContainer size="medium">
         <InputAddon elementType="label" htmlFor="input-addon-currency-usd">
@@ -40,9 +41,9 @@ const InputAddonCurrency = () => (
           autoComplete="transaction-amount"
         />
       </InputContainer>
-    </div>
+    </Stack>
 
-    <div>
+    <Stack spacing="space-400">
       <Label htmlFor="input-addon-currency-czk">Amount</Label>
       <InputContainer size="medium">
         <input
@@ -58,7 +59,7 @@ const InputAddonCurrency = () => (
           <VisuallyHidden>in CZK</VisuallyHidden>
         </InputAddon>
       </InputContainer>
-    </div>
+    </Stack>
   </>
 );
 

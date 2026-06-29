@@ -21,7 +21,7 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div>
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="text-field-helper-text-example"
           class="Label"
@@ -40,7 +40,7 @@
         >Helper text</div>
       </div>
 
-      <div>
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="text-field-helper-text-disabled"
           class="Label Label--disabled"
@@ -83,9 +83,9 @@
             class="Checkbox"
             aria-describedby="checkbox-helper-text-example-helper-text"
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="checkbox-helper-text-example"
             >Checkbox Label</label>
             <div
@@ -103,9 +103,9 @@
             aria-describedby="checkbox-helper-text-disabled-helper-text"
             disabled
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline Label--disabled"
+              class="Label Label--disabled"
               for="checkbox-helper-text-disabled"
             >Disabled Checkbox</label>
             <div
@@ -136,7 +136,7 @@
         class="Item"
       >
         <span class="Item__content" role="presentation">
-          <span class="Label Label--item">Item label</span>
+          <span class="Label element-stretched cursor-pointer">Item label</span>
           <span class="HelperText">Helper text</span>
         </span>
       </button>
@@ -146,7 +146,7 @@
         class="Item color-scheme-on-selected-subtle"
       >
         <span class="Item__content" role="presentation">
-          <span class="Label Label--item">Selected Item</span>
+          <span class="Label element-stretched cursor-pointer">Selected Item</span>
           <span class="HelperText">Helper text</span>
         </span>
         <span class="Item__slot" role="presentation">
@@ -166,7 +166,7 @@
         class="Item disabled"
       >
         <span class="Item__content" role="presentation">
-          <span class="Label Label--item Label--disabled">Item label</span>
+          <span class="Label element-stretched Label--disabled">Item label</span>
           <span class="HelperText HelperText--disabled">Helper text</span>
         </span>
       </button>
@@ -195,14 +195,16 @@
           />
         </div>
         <div class="Item__content" role="presentation">
-          <label
-            class="Label Label--item"
-            for="checkbox-item-helper-text-example"
-          >Checkbox Item</label>
-          <div
-            class="HelperText"
-            id="checkbox-item-helper-text-example-helper-text"
-          >Helper text</div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+            <label
+              class="Label element-stretched cursor-pointer"
+              for="checkbox-item-helper-text-example"
+            >Checkbox Item</label>
+            <div
+              class="HelperText"
+              id="checkbox-item-helper-text-example-helper-text"
+            >Helper text</div>
+          </div>
         </div>
       </div>
 
@@ -217,14 +219,16 @@
           />
         </div>
         <div class="Item__content" role="presentation">
-          <label
-            class="Label Label--item Label--disabled"
-            for="checkbox-item-helper-text-disabled"
-          >Disabled Checkbox Item</label>
-          <div
-            class="HelperText HelperText--disabled"
-            id="checkbox-item-helper-text-disabled-helper-text"
-          >Helper text</div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+            <label
+              class="Label element-stretched Label--disabled"
+              for="checkbox-item-helper-text-disabled"
+            >Disabled Checkbox Item</label>
+            <div
+              class="HelperText HelperText--disabled"
+              id="checkbox-item-helper-text-disabled-helper-text"
+            >Helper text</div>
+          </div>
         </div>
       </div>
 
@@ -239,14 +243,16 @@
           />
         </div>
         <div class="Item__content" role="presentation">
-          <label
-            class="Label Label--item"
-            for="radio-item-helper-text-example"
-          >Radio Item</label>
-          <div
-            class="HelperText"
-            id="radio-item-helper-text-example-helper-text"
-          >Helper text
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+            <label
+              class="Label element-stretched cursor-pointer"
+              for="radio-item-helper-text-example"
+            >Radio Item</label>
+            <div
+              class="HelperText"
+              id="radio-item-helper-text-example-helper-text"
+            >Helper text
+            </div>
           </div>
         </div>
       </div>
@@ -263,14 +269,16 @@
           />
         </div>
         <div class="Item__content" role="presentation">
-          <label
-            class="Label Label--item Label--disabled"
-            for="radio-item-helper-text-disabled"
-          >Disabled Radio Item</label>
-          <div
-            class="HelperText HelperText--disabled"
-            id="radio-item-helper-text-disabled-helper-text"
-          >Helper text
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+            <label
+              class="Label element-stretched Label--disabled"
+              for="radio-item-helper-text-disabled"
+            >Disabled Radio Item</label>
+            <div
+              class="HelperText HelperText--disabled"
+              id="radio-item-helper-text-disabled-helper-text"
+            >Helper text
+            </div>
           </div>
         </div>
       </div>

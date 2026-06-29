@@ -13,11 +13,7 @@ const InputDetailsCheckbox = () => {
         id="input-details-checkbox"
         name="consent"
         marginY="space-500"
-        label={
-          <Text elementType="span" emphasis="semibold">
-            I agree to the terms and conditions
-          </Text>
-        }
+        label="I agree to the terms and conditions"
         isRequired
         details={
           <>

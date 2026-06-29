@@ -13,7 +13,7 @@ const PICKER_SIZE_DEMOS = [
 ] as const;
 
 const PickerSizes = () => (
-  <Grid cols={{ mobile: 1, desktop: 3 }}>
+  <Grid cols={{ mobile: 1, desktop: 3 }} alignmentY="top">
     {PICKER_SIZE_DEMOS.map(({ label, size }) => (
       <UNSTABLE_UncontrolledPicker
         key={size}

@@ -3,7 +3,7 @@ import { Grid } from '../../Grid';
 import TextField from '../TextField';
 
 const TextFieldSizes = () => (
-  <Grid cols={{ mobile: 1, desktop: 3 }}>
+  <Grid cols={{ mobile: 1, desktop: 3 }} alignmentY="top">
     <TextField
       helperText="Helper text"
       id="text-field-size-small"
