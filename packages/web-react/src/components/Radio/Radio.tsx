@@ -3,12 +3,13 @@
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
-import { FormFieldModes, type ForwardRefComponent, type SpiritRadioProps } from '../../types';
+import { type ForwardRefComponent, type SpiritRadioProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { Item } from '../Item';
 import { Label } from '../Label';
+import { Stack } from '../Stack';
 import { useRadioStyleProps } from './useRadioStyleProps';
 
 const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
@@ -48,7 +49,7 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
 
   const radioText = (
     <>
-      <Label elementType="label" htmlFor={id}>
+      <Label htmlFor={id} hasPointerCursor>
         {label}
       </Label>
       <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
@@ -58,15 +59,15 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
   return (
     <PropsProvider
       value={{
-        formFieldMode: isItem ? FormFieldModes.ITEM : FormFieldModes.INLINE,
         isDisabled,
+        isItem,
         isLabelHidden,
         validationState,
       }}
     >
       {isItem ? (
         <Item isDisabled={isDisabled} startSlot={radioInput} {...mergeStyleProps(Item, { styleProps })}>
-          {radioText}
+          <Stack spacing="space-400">{radioText}</Stack>
         </Item>
       ) : (
         <Flex
@@ -76,7 +77,7 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
           {...mergeStyleProps(Flex, { styleProps })}
         >
           {radioInput}
-          <div>{radioText}</div>
+          <Stack spacing="space-400">{radioText}</Stack>
         </Flex>
       )}
     </PropsProvider>

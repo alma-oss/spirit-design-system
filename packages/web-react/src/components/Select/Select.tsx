@@ -5,11 +5,13 @@ import { Sizes } from '../../constants';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritSelectProps } from '../../types';
+import { mergeStyleProps } from '../../utils';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
 import { InputAddon } from '../InputAddon';
 import { InputContainer } from '../InputContainer';
 import { Label } from '../Label';
+import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 
 const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>) => {
@@ -47,7 +49,7 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
         validationState,
       }}
     >
-      <div {...styleProps}>
+      <Stack {...mergeStyleProps(Stack, { styleProps })} spacing="space-400">
         <Label htmlFor={id}>{label}</Label>
         <InputContainer>
           <select
@@ -74,7 +76,7 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
             role={validationTextRole}
           />
         )}
-      </div>
+      </Stack>
     </PropsProvider>
   );
 };
