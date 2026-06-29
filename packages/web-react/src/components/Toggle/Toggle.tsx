@@ -3,12 +3,13 @@
 import React, { type ChangeEvent, type ForwardedRef, forwardRef, useState } from 'react';
 import { PropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
-import { FormFieldModes, type ForwardRefComponent, type SpiritToggleProps } from '../../types';
+import { type ForwardRefComponent, type SpiritToggleProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { InputDetails } from '../InputDetails';
 import { Label } from '../Label';
+import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { useToggleStyleProps } from './useToggleStyleProps';
 
@@ -48,7 +49,6 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
   return (
     <PropsProvider
       value={{
-        formFieldMode: FormFieldModes.INLINE,
         isDisabled,
         isLabelHidden,
         isRequired,
@@ -75,8 +75,8 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
           onChange={handleOnChange}
           ref={ref}
         />
-        <div>
-          <Label elementType="label" htmlFor={id}>
+        <Stack spacing="space-400">
+          <Label htmlFor={id} hasPointerCursor>
             {label}
           </Label>
           {details && (
@@ -94,7 +94,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
               role={validationTextRole}
             />
           )}
-        </div>
+        </Stack>
       </Flex>
     </PropsProvider>
   );

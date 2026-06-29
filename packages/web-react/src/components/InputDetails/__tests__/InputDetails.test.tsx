@@ -23,8 +23,6 @@ describe('InputDetails', () => {
     renderComponent: (props) => <InputDetails {...props}>Content</InputDetails>,
     text: 'Content',
     classNamePrefix: 'InputDetails',
-    includeInlineMode: false,
-    includeItemMode: false,
   });
 
   it('should render children content', () => {

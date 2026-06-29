@@ -30,8 +30,6 @@ describe('ValidationText', () => {
   formFieldContextPropsTest({
     renderComponent: (props) => <ValidationText {...props} validationText="validation text" />,
     text: 'validation text',
-    includeInlineMode: false,
-    includeItemMode: false,
     classNamePrefix: 'ValidationText',
   });
 
