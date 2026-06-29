@@ -51,7 +51,7 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
   });
 
   const fileRowControlButtonProps = {
-    size: 'large' as const,
+    size: 'medium' as const,
     isSymmetrical: true as const,
     isDisabled,
   };

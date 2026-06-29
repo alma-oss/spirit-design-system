@@ -28,7 +28,7 @@ To show the file input and drop zone, pass `name` (and typically `label`, `input
     helperText="Max file size is 10 MB"
     onFilesSelected={onFilesSelected}
   />
-  <Stack aria-label="Uploaded files" elementType="ul" hasSpacing>
+  <Stack aria-label="Uploaded files" elementType="ul" spacing="space-700">
     {items.map((item) => (
       <File key={item.id} id={item.id} label={item.label} helperText="2.5 MB" onDismiss={() => onDismiss(item.id)} />
     ))}
@@ -52,7 +52,7 @@ The consumer is responsible for setting the validation state based on their own 
     validationState="success"
     validationText="Validation message"
   />
-  <Stack aria-label="Uploaded files" elementType="ul" hasSpacing />
+  <Stack aria-label="Uploaded files" elementType="ul" spacing="space-700" />
   <FileUpload
     id="file-uploader-2"
     name="attachments"
@@ -61,7 +61,7 @@ The consumer is responsible for setting the validation state based on their own 
     validationState="success"
     validationText="Validation message"
   />
-  <Stack aria-label="Uploaded files" elementType="ul" hasSpacing />
+  <Stack aria-label="Uploaded files" elementType="ul" spacing="space-700" />
   <FileUpload
     id="file-uploader-3"
     name="attachments"
@@ -69,7 +69,7 @@ The consumer is responsible for setting the validation state based on their own 
     validationState="success"
     validationText={['Validation message', 'Second validation message']}
   />
-  <Stack aria-label="Uploaded files" elementType="ul" hasSpacing />
+  <Stack aria-label="Uploaded files" elementType="ul" spacing="space-700" />
 </Stack>
 ```
 
@@ -109,7 +109,7 @@ and [escape hatches][readme-escape-hatches].
 > ⚠️ We don't use the `required` attribute on the input element. This is because it triggers the browser's default validation, which can block form submission.
 > Instead, the component opens the system file dialog and the consumer manages the file(s) (e.g. via `onFilesSelected`).
 
-The files list is built with the **Stack** component: use `<Stack aria-label="Uploaded files" elementType="ul" hasSpacing>` and render file items from [File][readme-file] as its children. See [Stack documentation][stack-docs] for Stack props.
+The files list is built with the **Stack** component: use `<Stack aria-label="Uploaded files" elementType="ul" spacing="space-700">` and render file items from [File][readme-file] as its children. See [Stack documentation][stack-docs] for Stack props.
 
 ## Icons
 
