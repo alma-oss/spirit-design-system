@@ -1,11 +1,12 @@
 import React from 'react';
 import { InputContainer } from '../../InputContainer';
 import { Label } from '../../Label';
+import { Stack } from '../../Stack';
 import InputAddon from '../InputAddon';
 import PasswordToggleAddonButton from './PasswordToggleAddonButton';
 
 const InputAddonDefault = () => (
-  <div>
+  <Stack spacing="space-400">
     <Label htmlFor="input-addon-default">Password Toggle</Label>
     <InputContainer size="medium">
       <input
@@ -18,7 +19,7 @@ const InputAddonDefault = () => (
         <PasswordToggleAddonButton size="medium" />
       </InputAddon>
     </InputContainer>
-  </div>
+  </Stack>
 );
 
 export default InputAddonDefault;

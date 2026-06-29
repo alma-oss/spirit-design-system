@@ -21,7 +21,7 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div>
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="text-field-example"
           class="Label"
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <div>
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="text-field-required"
           class="Label Label--required"
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <div>
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="text-field-disabled"
           class="Label Label--disabled"
@@ -65,7 +65,7 @@
         </div>
       </div>
 
-      <div>
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="text-field-hidden"
           class="Label accessibility-hidden"
@@ -103,7 +103,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="checkbox-example"
             >Checkbox Label</label>
           </div>
@@ -118,7 +118,7 @@
           />
           <div>
             <label
-              class="Label Label--inline Label--required"
+              class="Label cursor-pointer Label--required"
               for="checkbox-required"
             >Required Checkbox</label>
           </div>
@@ -133,7 +133,7 @@
           />
           <div>
             <label
-              class="Label Label--inline Label--disabled"
+              class="Label cursor-pointer Label--disabled"
               for="checkbox-disabled"
             >Disabled Checkbox</label>
           </div>
@@ -160,7 +160,7 @@
         class="Item"
       >
         <span class="Item__content" role="presentation">
-          <span class="Label Label--item">Item label</span>
+          <span class="Label element-stretched cursor-pointer">Item label</span>
         </span>
       </button>
 
@@ -169,7 +169,7 @@
         class="Item color-scheme-on-selected-subtle bg-color-scheme"
       >
         <span class="Item__content" role="presentation">
-          <span class="Label Label--item">Selected Item</span>
+          <span class="Label element-stretched cursor-pointer">Selected Item</span>
         </span>
         <span class="Item__slot" role="presentation">
           <svg
@@ -188,7 +188,7 @@
         class="Item disabled text-color-scheme"
       >
         <span class="Item__content" role="presentation">
-          <span class="Label Label--item Label--disabled">Disabled Item</span>
+          <span class="Label element-stretched Label--disabled">Disabled Item</span>
         </span>
       </button>
 
@@ -216,7 +216,7 @@
         </div>
         <div class="Item__content" role="presentation">
           <label
-            class="Label Label--item"
+            class="Label element-stretched cursor-pointer"
             for="checkbox-item-example"
           >Checkbox Item</label>
         </div>
@@ -233,7 +233,7 @@
         </div>
         <div class="Item__content" role="presentation">
           <label
-            class="Label Label--item Label--disabled"
+            class="Label element-stretched Label--disabled"
             for="checkbox-item-disabled"
           >Disabled Checkbox Item</label>
         </div>
@@ -250,7 +250,7 @@
         </div>
         <div class="Item__content" role="presentation">
           <label
-            class="Label Label--item"
+            class="Label element-stretched cursor-pointer"
             for="radio-item-example"
           >Radio Item</label>
         </div>
@@ -268,7 +268,7 @@
         </div>
         <div class="Item__content" role="presentation">
           <label
-            class="Label Label--item Label--disabled"
+            class="Label element-stretched Label--disabled"
             for="radio-item-disabled"
           >Disabled Radio Item</label>
         </div>

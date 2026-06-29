@@ -17,22 +17,23 @@ filterable option list.
 
 ```txt
 UNSTABLE_Combobox
-├── Dropdown
-│   ├── Label
-│   ├── InputContainer                                role="group"
-│   │   └── UNSTABLE_ComboboxSelection                (wrapper)
-│   │       ├── role="grid"                           aria-live="off"
-│   │       │   └── Tag                               role="row" (× N selected)
-│   │       │       └── role="gridcell"
-│   │       │           ├── tag label
-│   │       │           └── ControlButton             (remove)
-│   │       └── input[role="combobox"]                (inline, always last child)
-│   └── DropdownPopover
-│       └── Stack                                     role="grid" · aria-multiselectable="true"
-│           └── Item                                  role="row" (× N options)
-│               └── role="gridcell"
-├── ValidationText                                    (optional)
-└── HelperText                                        (optional)
+└── Stack                                             space-400
+    ├── Label
+    ├── Dropdown
+    │   ├── InputContainer                            role="group"
+    │   │   └── UNSTABLE_ComboboxSelection            (wrapper)
+    │   │       ├── role="grid"                       aria-live="off"
+    │   │       │   └── Tag                           role="row" (× N selected)
+    │   │       │       └── role="gridcell"
+    │   │       │           ├── tag label
+    │   │       │           └── ControlButton         (remove)
+    │   │       └── input[role="combobox"]            (inline, always last child)
+    │   └── DropdownPopover
+    │       └── Stack                                 role="grid" · aria-multiselectable="true"
+    │           └── Item                              role="row" (× N options)
+    │               └── role="gridcell"
+    ├── HelperText                                    (optional)
+    └── ValidationText                                (optional)
 ```
 
 The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two siblings:
@@ -43,71 +44,73 @@ The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two
 
 ```html
 <div class="UNSTABLE_Combobox">
-  <div class="Dropdown">
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
     <label class="Label" id="combobox-label" for="combobox-input">Languages</label>
-    <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
-      <div class="UNSTABLE_ComboboxSelection">
-        <div
-          role="grid"
-          id="combobox-selection"
-          class="d-contents"
-          aria-label="Selected Languages"
-          aria-live="off"
-          aria-atomic="false"
-          aria-relevant="additions"
-        >
-          <div role="row" class="Tag Tag--selected Tag--small color-scheme-on-selected-basic">
-            <div role="gridcell" class="d-contents">
-              <span>Spanish</span>
-              <button
-                type="button"
-                class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
-                aria-label="Remove Spanish"
-                tabindex="-1"
-              >
-                <svg class="Icon" width="16" height="16" aria-hidden="true">
-                  <use href="/assets/icons/svg/sprite.svg#close" />
-                </svg>
-              </button>
+    <div class="Dropdown">
+      <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
+        <div class="UNSTABLE_ComboboxSelection">
+          <div
+            role="grid"
+            id="combobox-selection"
+            class="d-contents"
+            aria-label="Selected Languages"
+            aria-live="off"
+            aria-atomic="false"
+            aria-relevant="additions"
+          >
+            <div role="row" class="Tag Tag--selected Tag--small color-scheme-on-selected-basic">
+              <div role="gridcell" class="d-contents">
+                <span>Spanish</span>
+                <button
+                  type="button"
+                  class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
+                  aria-label="Remove Spanish"
+                  tabindex="-1"
+                >
+                  <svg class="Icon" width="16" height="16" aria-hidden="true">
+                    <use href="/assets/icons/svg/sprite.svg#close" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
+          <input
+            type="text"
+            id="combobox-input"
+            role="combobox"
+            aria-haspopup="grid"
+            aria-expanded="false"
+            aria-controls="combobox-listbox"
+            aria-labelledby="combobox-label"
+            aria-autocomplete="list"
+            autocomplete="off"
+            placeholder="Languages"
+            class="UNSTABLE_Combobox__input"
+          />
         </div>
-        <input
-          type="text"
-          id="combobox-input"
-          role="combobox"
-          aria-haspopup="grid"
-          aria-expanded="false"
-          aria-controls="combobox-listbox"
+      </div>
+      <div class="DropdownPopover placement-bottom-start">
+        <div
+          class="Stack Stack--spacing"
+          style="--stack-spacing: var(--spirit-space-300);"
+          role="grid"
+          id="combobox-listbox"
           aria-labelledby="combobox-label"
-          aria-autocomplete="list"
-          autocomplete="off"
-          placeholder="Languages"
-          class="UNSTABLE_Combobox__input"
-        />
+          aria-multiselectable="true"
+        >
+          <div role="row" id="opt-cs" aria-selected="true" class="Item">
+            <div role="gridcell"><span class="Label element-stretched cursor-pointer">Spanish</span></div>
+          </div>
+          <div role="row" id="opt-cs" aria-selected="false" class="Item">
+            <div role="gridcell"><span class="Label element-stretched cursor-pointer">Czech</span></div>
+          </div>
+          <div role="row" id="opt-en" aria-selected="false" class="Item">
+            <div role="gridcell"><span class="Label element-stretched cursor-pointer">English</span></div>
+          </div>
+          <!-- More options… -->
+        </div>
+        <div role="status" aria-live="polite" class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
       </div>
-    </div>
-    <div class="DropdownPopover placement-bottom-start">
-      <div
-        class="Stack Stack--spacing"
-        style="--stack-spacing: var(--spirit-space-300);"
-        role="grid"
-        id="combobox-listbox"
-        aria-labelledby="combobox-label"
-        aria-multiselectable="true"
-      >
-        <div role="row" id="opt-cs" aria-selected="true" class="Item">
-          <div role="gridcell"><span class="Label Label--item">Spanish</span></div>
-        </div>
-        <div role="row" id="opt-cs" aria-selected="false" class="Item">
-          <div role="gridcell"><span class="Label Label--item">Czech</span></div>
-        </div>
-        <div role="row" id="opt-en" aria-selected="false" class="Item">
-          <div role="gridcell"><span class="Label Label--item">English</span></div>
-        </div>
-        <!-- More options… -->
-      </div>
-      <div role="status" aria-live="polite" class="UNSTABLE_Combobox__emptyState" hidden>Nothing found</div>
     </div>
   </div>
 </div>
@@ -139,7 +142,7 @@ Set `aria-selected="true"` on any option row to pre-select it on page load.
 
 ```html
 <div role="row" id="opt-cs" aria-selected="true" class="Item">
-  <div role="gridcell"><span class="Label Label--item">Czech</span></div>
+  <div role="gridcell"><span class="Label element-stretched cursor-pointer">Czech</span></div>
 </div>
 ```
 
@@ -152,22 +155,26 @@ Combobox supports the following variant modifiers on `InputContainer`:
 
 ```html
 <div class="UNSTABLE_Combobox">
-  <div class="Dropdown">
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
     <label class="Label" id="combobox-label" for="combobox-input">Fill (default)</label>
-    <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Fill (default)">
+    <div class="Dropdown">
+      <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Fill (default)">
+        <!-- … -->
+      </div>
       <!-- … -->
     </div>
-    <!-- … -->
   </div>
 </div>
 
 <div class="UNSTABLE_Combobox">
-  <div class="Dropdown">
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
     <label class="Label" id="combobox-label" for="combobox-input">Outline</label>
-    <div class="InputContainer InputContainer--outline InputContainer--medium" role="group" aria-label="Outline">
+    <div class="Dropdown">
+      <div class="InputContainer InputContainer--outline InputContainer--medium" role="group" aria-label="Outline">
+        <!-- … -->
+      </div>
       <!-- … -->
     </div>
-    <!-- … -->
   </div>
 </div>
 ```
@@ -191,24 +198,26 @@ when the user focuses the field.
 
 ```html
 <div class="UNSTABLE_Combobox">
-  <div class="Dropdown">
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
     <label class="Label" id="combobox-label" for="combobox-input">Languages</label>
-    <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
-      <div class="UNSTABLE_ComboboxSelection">
-        <div role="grid" … class="d-contents"><!-- … --></div>
-        <input
-          type="text"
-          id="combobox-input"
-          role="combobox"
-          aria-describedby="combobox-helper"
-          class="UNSTABLE_Combobox__input"
-          …
-        />
+    <div class="Dropdown">
+      <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
+        <div class="UNSTABLE_ComboboxSelection">
+          <div role="grid" … class="d-contents"><!-- … --></div>
+          <input
+            type="text"
+            id="combobox-input"
+            role="combobox"
+            aria-describedby="combobox-helper"
+            class="UNSTABLE_Combobox__input"
+            …
+          />
+        </div>
       </div>
+      <div class="DropdownPopover placement-bottom-start" …><!-- … --></div>
     </div>
-    <div class="DropdownPopover placement-bottom-start" …><!-- … --></div>
+    <div id="combobox-helper" class="HelperText">You can select multiple languages.</div>
   </div>
-  <div id="combobox-helper" class="HelperText">You can select multiple languages.</div>
 </div>
 ```
 
@@ -223,29 +232,31 @@ Available validation states: `danger`, `warning`, `success`.
 
 ```html
 <div class="UNSTABLE_Combobox">
-  <div class="Dropdown">
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
     <label class="Label Label--danger" id="combobox-label" for="combobox-input">Languages</label>
-    <div
-      class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger"
-      role="group"
-      aria-label="Languages"
-    >
-      <div class="UNSTABLE_ComboboxSelection">
-        <div role="grid" … class="d-contents"><!-- … --></div>
-        <input
-          type="text"
-          id="combobox-input"
-          role="combobox"
-          aria-describedby="combobox-validation"
-          class="UNSTABLE_Combobox__input"
-          …
-        />
+    <div class="Dropdown">
+      <div
+        class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger"
+        role="group"
+        aria-label="Languages"
+      >
+        <div class="UNSTABLE_ComboboxSelection">
+          <div role="grid" … class="d-contents"><!-- … --></div>
+          <input
+            type="text"
+            id="combobox-input"
+            role="combobox"
+            aria-describedby="combobox-validation"
+            class="UNSTABLE_Combobox__input"
+            …
+          />
+        </div>
       </div>
+      <div class="DropdownPopover placement-bottom-start" …><!-- … --></div>
     </div>
-    <div class="DropdownPopover placement-bottom-start" …><!-- … --></div>
-  </div>
-  <div id="combobox-validation" class="ValidationText ValidationText--danger" role="alert">
-    Please select at least one language.
+    <div id="combobox-validation" class="ValidationText ValidationText--danger" role="alert">
+      Please select at least one language.
+    </div>
   </div>
 </div>
 ```
@@ -257,19 +268,21 @@ and the `disabled` attribute on the input to disable the Combobox.
 
 ```html
 <div class="UNSTABLE_Combobox UNSTABLE_Combobox--disabled">
-  <div class="Dropdown">
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
     <label class="Label Label--disabled" id="combobox-label" for="combobox-input">Languages</label>
-    <div
-      class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled"
-      role="group"
-      aria-label="Languages"
-    >
-      <div class="UNSTABLE_ComboboxSelection">
-        <div role="grid" … class="d-contents"><!-- … --></div>
-        <input type="text" id="combobox-input" role="combobox" class="UNSTABLE_Combobox__input" disabled … />
+    <div class="Dropdown">
+      <div
+        class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled"
+        role="group"
+        aria-label="Languages"
+      >
+        <div class="UNSTABLE_ComboboxSelection">
+          <div role="grid" … class="d-contents"><!-- … --></div>
+          <input type="text" id="combobox-input" role="combobox" class="UNSTABLE_Combobox__input" disabled … />
+        </div>
       </div>
+      <div class="DropdownPopover placement-bottom-start" …><!-- … --></div>
     </div>
-    <div class="DropdownPopover placement-bottom-start" …><!-- … --></div>
   </div>
 </div>
 ```
@@ -287,7 +300,7 @@ Place a clear-all `InputAddon` after the selection wrapper, inside the `InputCon
   <div class="InputAddon InputAddon--medium" hidden>
     <button
       type="button"
-      class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground"
+      class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground text-color-scheme"
       aria-label="Remove all"
     >
       <svg class="Icon" width="20" height="20" aria-hidden="true">
@@ -314,17 +327,19 @@ The following example positions the popover at `bottom-start` and expands it to 
 
 ```html
 <div class="UNSTABLE_Combobox">
-  <div class="Dropdown">
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
     <label class="Label" id="combobox-label" for="combobox-input">Languages</label>
-    <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
-      <!-- … -->
-    </div>
-    <div
-      class="DropdownPopover placement-bottom-start"
-      data-spirit-placement="bottom-start"
-      data-spirit-fullwidthmode="all"
-    >
-      <!-- … -->
+    <div class="Dropdown">
+      <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
+        <!-- … -->
+      </div>
+      <div
+        class="DropdownPopover placement-bottom-start"
+        data-spirit-placement="bottom-start"
+        data-spirit-fullwidthmode="all"
+      >
+        <!-- … -->
+      </div>
     </div>
   </div>
 </div>
