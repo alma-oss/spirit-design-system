@@ -1,4 +1,4 @@
-export const DEFAULT_FILE_IMAGE_DIMENSION = 48;
+export const DEFAULT_FILE_IMAGE_DIMENSION = 44;
 
 export const DEFAULT_FILE_ICON_NAME = 'file';
 
