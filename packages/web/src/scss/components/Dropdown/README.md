@@ -248,7 +248,7 @@ See the [Item][item] component for more information.
         </svg>
       </span>
       <span class="Item__content" role="presentation">
-        <span class="Label Label--item">Information</span>
+        <span class="Label element-stretched cursor-pointer">Information</span>
       </span>
     </a>
   </div>

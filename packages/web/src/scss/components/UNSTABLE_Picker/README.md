@@ -15,7 +15,7 @@ Picker is built on top of the [Dropdown][dropdown] component. It consists of a l
 displaying chosen options as tags with a trigger button, and optional helper or validation text.
 
 ```txt
-UNSTABLE_Picker (no CSS class)
+Stack                                         space-400
 ├── Label
 ├── Dropdown
 │   ├── InputContainer                        role="group"
@@ -37,7 +37,7 @@ enough space below the Picker (or around it, depending on the popover placement)
 overflow its scrollable container or get clipped.
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <span class="Label">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--medium">
@@ -77,7 +77,7 @@ overflow its scrollable container or get clipped.
               <input type="checkbox" id="lang-cs" class="Checkbox Checkbox--item" name="language" />
             </div>
             <div class="Item__content" role="presentation">
-              <label class="Label Label--item" for="lang-cs">Czech</label>
+              <label class="Label element-stretched cursor-pointer" for="lang-cs">Czech</label>
             </div>
           </div>
           <!-- More checkboxes… -->
@@ -142,7 +142,7 @@ Use the `accessibility-hidden` helper to visually hide the label while keeping i
 accessible to screen readers.
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <span class="Label accessibility-hidden">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--medium">
@@ -161,7 +161,7 @@ a red asterisk after the label text.
 ⚠️ The required state is only indicative and does not add any technical validation to the component.
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <span class="Label Label--required">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--medium">
@@ -180,7 +180,7 @@ Picker supports the following variant modifiers on `InputContainer`:
 - `InputContainer--outline`
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <span class="Label">Fill (default)</span>
   <div class="Dropdown">
     <div role="group" aria-label="Fill (default)" class="InputContainer InputContainer--fill InputContainer--medium">
@@ -190,7 +190,7 @@ Picker supports the following variant modifiers on `InputContainer`:
   </div>
 </div>
 
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <span class="Label">Outline</span>
   <div class="Dropdown">
     <div role="group" aria-label="Outline" class="InputContainer InputContainer--outline InputContainer--medium">
@@ -205,21 +205,21 @@ Picker supports the following variant modifiers on `InputContainer`:
 
 The picker trigger, its label, and the popover can each use a different [theme][themes-docs] utility class:
 
-- **`theme-light-default`** on `.UNSTABLE_Picker` — selection area and trigger (the field control).
-- **`theme-light-on-brand`** on `.UNSTABLE_Picker__label` — visible label above the field (set this when the label sits on a different surface than the field, for example a brand header).
+- **`theme-light-default`** on the Stack wrapper — selection area and trigger (the field control).
+- **`theme-light-on-brand`** on the `Label` — visible label above the field (set this when the label sits on a different surface than the field, for example a brand header).
 - **`theme-light-default`** on `.DropdownPopover` — dropdown panel with options.
 
 On a **Light on Brand** surface, keep the label on-brand and use **Light Default** for the field and popover:
 
 ```html
 <div class="theme-light-on-brand bg-primary rounded-300 p-800">
-  <div class="UNSTABLE_Picker UNSTABLE_Picker--medium theme-light-default">
-    <span class="UNSTABLE_Picker__label theme-light-on-brand">Languages</span>
+  <div class="theme-light-default Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+    <span class="Label theme-light-on-brand">Languages</span>
     <div class="Dropdown">
-      <div role="group" aria-label="Languages" class="UNSTABLE_Picker__inputContainer">
+      <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--medium">
         <!-- … -->
       </div>
-      <div role="dialog" class="DropdownPopover theme-light-default" id="picker-demo-picker-themes-popover">
+      <div role="dialog" class="DropdownPopover theme-light-default" id="picker-popover">
         <!-- … -->
       </div>
     </div>
@@ -244,7 +244,7 @@ and data attributes. The picker does not set these itself, so any values you add
 The following example positions the popover at `bottom-start` and expands it to full field width:
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <span class="Label">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--medium">
@@ -277,7 +277,7 @@ Each size expects a specific Tag and ControlButton size inside the selection are
 | `InputContainer--large`  | 48px         | `Tag--medium` | `ControlButton--xsmall` |
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <span class="Label">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--large">
@@ -316,7 +316,7 @@ Give it a unique `id` and reference it via `aria-describedby` on the selection e
 readers announce the hint when the selection area receives focus.
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <span class="Label">Languages</span>
   <div class="Dropdown">
     <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--medium">
@@ -346,7 +346,7 @@ message when the selection area receives focus.
 Available validation states: `danger`, `warning`, `success`.
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <span class="Label Label--required">Languages</span>
   <div class="Dropdown">
     <div
@@ -379,7 +379,7 @@ selection element, and the `disabled` attribute on the trigger button and all in
 inside the selection area (remove buttons) to disable the Picker.
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <span class="Label Label--disabled">Languages</span>
   <div class="Dropdown">
     <div
@@ -435,7 +435,7 @@ inside the selection area (remove buttons) to disable the Picker.
               />
             </div>
             <div class="Item__content" role="presentation">
-              <label class="Label Label--item" for="lang-disabled-cs">Czech</label>
+              <label class="Label element-stretched cursor-pointer" for="lang-disabled-cs">Czech</label>
             </div>
           </div>
           <!-- More checkboxes… -->

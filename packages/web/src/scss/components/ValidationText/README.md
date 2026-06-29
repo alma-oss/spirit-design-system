@@ -63,7 +63,7 @@ You can combine an icon with a list of validation texts.
 Use the `ValidationText--disabled` modifier class when the associated form control is disabled.
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="text-field-disabled" class="Label Label--disabled">Label</label>
   <div
     class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled InputContainer--danger"
@@ -98,7 +98,7 @@ ValidationText works seamlessly with Spirit form components:
 ### Box Field (FileUploader, TextArea, TextField, Select, Slider)
 
 ```html
-<div>
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
   <label for="example" class="Label">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger">
     <input type="text" id="example" placeholder="Placeholder" value="Filled" />
@@ -112,8 +112,8 @@ ValidationText works seamlessly with Spirit form components:
 ```html
 <div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="example" class="Checkbox Checkbox--danger" name="example" />
-  <div>
-    <label class="Label Label--inline" for="example">Checkbox Label</label>
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+    <label class="Label" for="example">Checkbox Label</label>
     <div class="ValidationText ValidationText--danger">Danger validation text</div>
   </div>
 </div>

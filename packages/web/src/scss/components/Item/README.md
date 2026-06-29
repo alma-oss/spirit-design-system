@@ -12,7 +12,7 @@ accessibility tree. Learn more about it in the [Accessibility](#accessibility) s
 ```html
 <div class="Item">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
+    <span class="Label element-stretched">Item</span>
   </span>
 </div>
 ```
@@ -27,7 +27,7 @@ Button:
 ```html
 <button type="button" class="Item">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
+    <span class="Label element-stretched">Item</span>
   </span>
 </button>
 ```
@@ -37,7 +37,7 @@ Link:
 ```html
 <a href="#" class="Item">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
+    <span class="Label element-stretched">Item</span>
   </span>
 </a>
 ```
@@ -56,7 +56,7 @@ Selected with background only:
 ```html
 <button type="button" class="Item color-scheme-on-selected-subtle">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
+    <span class="Label element-stretched">Item</span>
   </span>
 </button>
 ```
@@ -66,7 +66,7 @@ Selected with icon only:
 ```html
 <button type="button" class="Item">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
+    <span class="Label element-stretched">Item</span>
   </span>
   <span class="Item__slot" role="presentation">
     <svg class="Icon Icon--selected" width="24" height="24" aria-hidden="true">
@@ -81,7 +81,7 @@ Selected with background and icon:
 ```html
 <button type="button" class="Item color-scheme-on-selected-subtle">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
+    <span class="Label element-stretched">Item</span>
   </span>
   <span class="Item__slot" role="presentation">
     <svg class="Icon Icon--selected" width="24" height="24" aria-hidden="true">
@@ -106,7 +106,7 @@ Leading icon:
     </svg>
   </span>
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
+    <span class="Label element-stretched">Item</span>
   </span>
 </button>
 ```
@@ -121,7 +121,7 @@ Leading icon, trailing selected icon, and selected background:
     </svg>
   </span>
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
+    <span class="Label element-stretched">Item</span>
   </span>
   <span class="Item__slot" role="presentation">
     <svg class="Icon Icon--selected" width="24" height="24" aria-hidden="true">
@@ -144,9 +144,11 @@ or other inline content.
     </svg>
   </span>
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Project Alpha</span>
-    <span class="HelperText">Team workspace</span>
-    <span class="typography-body-small-regular text-emotion-success-basic">3 updates</span>
+    <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+      <span class="Label element-stretched">Project Alpha</span>
+      <span class="HelperText">Team workspace</span>
+      <span class="typography-body-small-regular text-emotion-success-basic">3 updates</span>
+    </div>
   </span>
 </div>
 ```
@@ -156,8 +158,10 @@ Item with helper text:
 ```html
 <button type="button" class="Item">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
-    <span class="HelperText">Helper text</span>
+    <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+      <span class="Label element-stretched">Item</span>
+      <span class="HelperText">Helper text</span>
+    </div>
   </span>
 </button>
 ```
@@ -194,7 +198,7 @@ Icon-only controls need an accessible name such as `aria-label`.
 ```html
 <div class="Item">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Dismissible item</span>
+    <span class="Label element-stretched">Dismissible item</span>
   </span>
   <span class="Item__slot" role="presentation">
     <button
@@ -222,7 +226,7 @@ and render a stretched link inside `Item__content`:
   </span>
   <span class="Item__content" role="presentation">
     <span class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-300);">
-      <a href="#malir-pokoj" class="link-inherit link-not-underlined link-stretched">Malíř pokojů</a>
+      <a href="#malir-pokoj" class="link-inherit link-not-underlined element-stretched">Malíř pokojů</a>
       <span class="HelperText">Plný úvazek</span>
     </span>
   </span>
@@ -253,8 +257,10 @@ and `Item__content` should align differently on the cross axis.
     </svg>
   </span>
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
-    <span class="HelperText">Additional helper text makes the content taller than the icon.</span>
+    <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+      <span class="Label element-stretched">Item</span>
+      <span class="HelperText">Additional helper text makes the content taller than the icon.</span>
+    </div>
   </span>
 </button>
 ```
@@ -269,7 +275,7 @@ Button:
 ```html
 <button type="button" class="Item disabled" disabled>
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item Label--disabled">Item</span>
+    <span class="Label element-stretched Label--disabled">Item</span>
   </span>
 </button>
 ```
@@ -279,7 +285,7 @@ Link:
 ```html
 <a href="#" class="Item disabled" aria-disabled="true">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item Label--disabled">Item</span>
+    <span class="Label element-stretched Label--disabled">Item</span>
   </span>
 </a>
 ```
@@ -291,7 +297,7 @@ Non-interactive root:
 ```html
 <div class="Item disabled" aria-disabled="true">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item Label--disabled">Item</span>
+    <span class="Label element-stretched Label--disabled">Item</span>
   </span>
 </div>
 ```
@@ -306,7 +312,7 @@ Radio as a Item:
     <input type="radio" id="radio-item" name="example" class="Radio Radio--item" checked />
   </div>
   <div class="Item__content" role="presentation">
-    <label class="Label Label--item" for="radio-item">Item</label>
+    <label class="Label element-stretched" for="radio-item">Item</label>
   </div>
 </div>
 ```
@@ -319,7 +325,7 @@ Checkbox as a Item:
     <input type="checkbox" id="checkbox-item" class="Checkbox Checkbox--item" />
   </div>
   <div class="Item__content" role="presentation">
-    <label class="Label Label--item" for="checkbox-item">Item</label>
+    <label class="Label element-stretched" for="checkbox-item">Item</label>
   </div>
 </div>
 ```
@@ -347,7 +353,7 @@ Usage in the [Dropdown][dropdown] component:
         </svg>
       </span>
       <span class="Item__content" role="presentation">
-        <span class="Label Label--item">Information</span>
+        <span class="Label element-stretched">Information</span>
       </span>
     </a>
   </div>
@@ -360,7 +366,7 @@ Choose the Item root semantics according to what the row does:
 
 - Use a non-interactive `<div class="Item">` for static content, status rows, or visual-only rows that are not directly actionable.
 - Use `<button type="button" class="Item">` only when the whole row triggers one button-like action and the row has no other interactive descendants.
-- Use `<a class="Item">` for a single link-like row. For composed rows, keep the Item root non-interactive and render a link inside `Item__content`; `link-stretched` can make the whole visual row clickable without nesting a link around other controls.
+- Use `<a class="Item">` for a single link-like row. For composed rows, keep the Item root non-interactive and render a link inside `Item__content`; `element-stretched` can make the whole visual row clickable without nesting a link around other controls.
 - When `Item__slot` contains an interactive control, do not render the Item root as a `<button>` or `<a>`. Keep the root non-interactive, or use the grid pattern below when the row exposes multiple actions. Icon-only remove controls need an accessible name such as `aria-label`.
 - Use `role="grid"`, `role="row"`, and `role="gridcell"` when a row has multiple interactive cells or actions that should be navigated as a structured row. In this pattern, the Item itself can be `role="presentation"` and the cell content owns the interactive semantics.
 - `color-scheme-on-selected-subtle` is visual only. It does not imply `aria-selected`, `aria-current`, or a widget role. The parent widget owns those semantics because listbox options, menu items, grid rows, and links all use different markup.
@@ -374,7 +380,7 @@ The parent widget must implement the keyboard interaction contract for the chose
 ```html
 <div class="Item color-scheme-on-selected-subtle" role="option" aria-selected="true">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--item">Item</span>
+    <span class="Label element-stretched">Item</span>
   </span>
 </div>
 ```
@@ -387,7 +393,7 @@ The grid role requires a keyboard navigation contract implemented in JavaScript:
   <div class="Item" role="row">
     <span class="Item__content" role="presentation">
       <span role="gridcell">
-        <a href="#project-alpha" class="link-stretched">Project Alpha</a>
+        <a href="#project-alpha" class="element-stretched">Project Alpha</a>
       </span>
     </span>
     <span class="Item__slot" role="presentation">

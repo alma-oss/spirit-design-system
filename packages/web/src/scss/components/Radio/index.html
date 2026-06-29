@@ -19,7 +19,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="radio-default"
             >Radio Label</label>
           </div>
@@ -35,7 +35,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="radio-default-checked"
             >Radio Label</label>
           </div>
@@ -66,7 +66,7 @@
         />
         <div>
           <label
-            class="Label Label--inline"
+            class="Label cursor-pointer"
             for="radio-long-label"
           >
             This is an example of a very long label text for a radio button. It is specifically designed to test how
@@ -104,7 +104,7 @@
         />
         <div>
           <label
-            class="Label Label--inline accessibility-hidden"
+            class="Label accessibility-hidden"
             for="radio-hidden-label"
           >Radio Label</label>
         </div>
@@ -132,9 +132,9 @@
           name="helperText"
           aria-describedby="radio-helper-text-helper-text"
         />
-        <div>
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
           <label
-            class="Label Label--inline"
+            class="Label cursor-pointer"
             for="radio-helper-text"
           >Radio Label</label>
           <div
@@ -171,7 +171,7 @@
           />
           <div>
             <label
-              class="Label Label--inline Label--disabled"
+              class="Label Label--disabled"
               for="radio-disabled"
             >Radio Label</label>
           </div>
@@ -187,9 +187,9 @@
             disabled
             checked
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline Label--disabled"
+              class="Label Label--disabled"
               for="radio-disabled-helper-text"
             >Radio Label</label>
             <div
@@ -227,7 +227,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="radio-success"
             >Radio Label</label>
           </div>
@@ -242,7 +242,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="radio-warning"
             >Radio Label</label>
           </div>
@@ -257,7 +257,7 @@
           />
           <div>
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="radio-danger"
             >Radio Label</label>
           </div>
@@ -272,9 +272,9 @@
             aria-describedby="radio-warning-helper-text-helper-text"
             checked
           />
-          <div>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <label
-              class="Label Label--inline"
+              class="Label cursor-pointer"
               for="radio-warning-helper-text"
             >Radio Label</label>
             <div
@@ -303,40 +303,42 @@
 
       <fieldset class="border-0">
         <legend class="accessibility-hidden">Input on Start (Default)</legend>
-        <div
-          class="Label"
-          aria-hidden="true"
-        >Input on Start (Default)</div>
-        <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
-          <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
-            <input
-              type="radio"
-              id="radio-position-start-1"
-              class="Radio"
-              name="positionStart"
-              value="option1"
-              checked
-            />
-            <div>
-              <label
-                class="Label Label--inline"
-                for="radio-position-start-1"
-              >Option 1</label>
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+          <div
+            class="Label cursor-pointer"
+            aria-hidden="true"
+          >Input on Start (Default)</div>
+          <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+            <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="radio"
+                id="radio-position-start-1"
+                class="Radio"
+                name="positionStart"
+                value="option1"
+                checked
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="radio-position-start-1"
+                >Option 1</label>
+              </div>
             </div>
-          </div>
-          <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
-            <input
-              type="radio"
-              id="radio-position-start-2"
-              class="Radio"
-              name="positionStart"
-              value="option2"
-            />
-            <div>
-              <label
-                class="Label Label--inline"
-                for="radio-position-start-2"
-              >Option 2</label>
+            <div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="radio"
+                id="radio-position-start-2"
+                class="Radio"
+                name="positionStart"
+                value="option2"
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="radio-position-start-2"
+                >Option 2</label>
+              </div>
             </div>
           </div>
         </div>
@@ -344,40 +346,42 @@
 
       <fieldset class="border-0">
         <legend class="accessibility-hidden">Input on End</legend>
-        <div
-          class="Label"
-          aria-hidden="true"
-        >Input on End</div>
-        <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
-          <div class="Flex Flex--horizontalReversed Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
-            <input
-              type="radio"
-              id="radio-position-end-1"
-              class="Radio"
-              name="positionEnd"
-              value="option1"
-              checked
-            />
-            <div>
-              <label
-                class="Label Label--inline"
-                for="radio-position-end-1"
-              >Option 1</label>
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+          <div
+            class="Label cursor-pointer"
+            aria-hidden="true"
+          >Input on End</div>
+          <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+            <div class="Flex Flex--horizontalReversed Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="radio"
+                id="radio-position-end-1"
+                class="Radio"
+                name="positionEnd"
+                value="option1"
+                checked
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="radio-position-end-1"
+                >Option 1</label>
+              </div>
             </div>
-          </div>
-          <div class="Flex Flex--horizontalReversed Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
-            <input
-              type="radio"
-              id="radio-position-end-2"
-              class="Radio"
-              name="positionEnd"
-              value="option2"
-            />
-            <div>
-              <label
-                class="Label Label--inline"
-                for="radio-position-end-2"
-              >Option 2</label>
+            <div class="Flex Flex--horizontalReversed Flex--inline" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="radio"
+                id="radio-position-end-2"
+                class="Radio"
+                name="positionEnd"
+                value="option2"
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="radio-position-end-2"
+                >Option 2</label>
+              </div>
             </div>
           </div>
         </div>
@@ -385,40 +389,42 @@
 
       <fieldset class="border-0">
         <legend class="accessibility-hidden">Responsive Position</legend>
-        <div
-          class="Label"
-          aria-hidden="true"
-        >Responsive Position</div>
-        <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
-          <div class="Flex Flex--horizontal Flex--inline Flex--tablet--horizontalReversed Flex--desktop--horizontal" style="--flex-spacing-x: var(--spirit-space-500);">
-            <input
-              type="radio"
-              id="radio-position-responsive-1"
-              class="Radio"
-              name="positionResponsive"
-              value="option1"
-              checked
-            />
-            <div>
-              <label
-                class="Label Label--inline"
-                for="radio-position-responsive-1"
-              >Option 1</label>
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+          <div
+            class="Label cursor-pointer"
+            aria-hidden="true"
+          >Responsive Position</div>
+          <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+            <div class="Flex Flex--horizontal Flex--inline Flex--tablet--horizontalReversed Flex--desktop--horizontal" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="radio"
+                id="radio-position-responsive-1"
+                class="Radio"
+                name="positionResponsive"
+                value="option1"
+                checked
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="radio-position-responsive-1"
+                >Option 1</label>
+              </div>
             </div>
-          </div>
-          <div class="Flex Flex--horizontal Flex--inline Flex--tablet--horizontalReversed Flex--desktop--horizontal" style="--flex-spacing-x: var(--spirit-space-500);">
-            <input
-              type="radio"
-              id="radio-position-responsive-2"
-              class="Radio"
-              name="positionResponsive"
-              value="option2"
-            />
-            <div>
-              <label
-                class="Label Label--inline"
-                for="radio-position-responsive-2"
-              >Option 2</label>
+            <div class="Flex Flex--horizontal Flex--inline Flex--tablet--horizontalReversed Flex--desktop--horizontal" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="radio"
+                id="radio-position-responsive-2"
+                class="Radio"
+                name="positionResponsive"
+                value="option2"
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="radio-position-responsive-2"
+                >Option 2</label>
+              </div>
             </div>
           </div>
         </div>
@@ -451,7 +457,7 @@
           </div>
           <div class="Item__content" role="presentation">
             <label
-              class="Label Label--item"
+              class="Label element-stretched cursor-pointer"
               for="radio-item-default"
             >Radio Label</label>
           </div>
@@ -469,7 +475,7 @@
           </div>
           <div class="Item__content" role="presentation">
             <label
-              class="Label Label--item"
+              class="Label element-stretched cursor-pointer"
               for="radio-item-default-checked"
             >Radio Label</label>
           </div>
@@ -486,14 +492,16 @@
             />
           </div>
           <div class="Item__content" role="presentation">
-            <label
-              class="Label Label--item"
-              for="radio-item-helper-text"
-            >Radio Label</label>
-            <div
-              class="HelperText"
-              id="radio-item-helper-text-helper-text"
-            >Helper text
+            <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+              <label
+                class="Label element-stretched cursor-pointer"
+                for="radio-item-helper-text"
+              >Radio Label</label>
+              <div
+                class="HelperText"
+                id="radio-item-helper-text-helper-text"
+              >Helper text
+              </div>
             </div>
           </div>
         </div>
@@ -510,7 +518,7 @@
           </div>
           <div class="Item__content" role="presentation">
             <label
-              class="Label Label--item Label--disabled"
+              class="Label element-stretched Label--disabled"
               for="radio-item-disabled"
             >Radio Label</label>
           </div>
@@ -529,14 +537,16 @@
             />
           </div>
           <div class="Item__content" role="presentation">
-            <label
-              class="Label Label--item Label--disabled"
-              for="radio-item-disabled-helper-text"
-            >Radio Label</label>
-            <div
-              class="HelperText HelperText--disabled"
-              id="radio-item-disabled-helper-text-helper-text"
-            >Helper text
+            <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+              <label
+                class="Label element-stretched Label--disabled"
+                for="radio-item-disabled-helper-text"
+              >Radio Label</label>
+              <div
+                class="HelperText HelperText--disabled"
+                id="radio-item-disabled-helper-text-helper-text"
+              >Helper text
+              </div>
             </div>
           </div>
         </div>
