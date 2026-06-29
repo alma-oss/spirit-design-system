@@ -6,6 +6,7 @@ import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritSliderProps } from '../../types';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
+import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { SLIDER_DEFAULT_PROPS } from './constants';
 import { useSliderStyleProps } from './useSliderStyleProps';
@@ -64,31 +65,33 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
       }}
     >
       <div {...styleProps} {...otherProps}>
-        <Label htmlFor={id}>{label}</Label>
-        <input
-          {...ariaDescribedByProp}
-          className={classProps.input}
-          id={id}
-          onInput={handleInput}
-          style={{ [CSSVariable]: `${getSliderPosition(value)}` } as CSSProperties}
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          disabled={isDisabled}
-          ref={ref}
-        />
-        <HelperText helperText={helperText} id={`${id}-helper-text`} registerAria={register} />
-        {validationState && (
-          <ValidationText
-            id={`${id}-validation-text`}
-            {...(hasValidationIcon && { validationStateIcon: validationState })}
-            registerAria={register}
-            validationText={validationText}
-            role={validationTextRole}
+        <Stack spacing="space-400">
+          <Label htmlFor={id}>{label}</Label>
+          <input
+            {...ariaDescribedByProp}
+            className={classProps.input}
+            id={id}
+            onInput={handleInput}
+            style={{ [CSSVariable]: `${getSliderPosition(value)}` } as CSSProperties}
+            type="range"
+            min={min}
+            max={max}
+            step={step}
+            value={value}
+            disabled={isDisabled}
+            ref={ref}
           />
-        )}
+          <HelperText helperText={helperText} id={`${id}-helper-text`} registerAria={register} />
+          {validationState && (
+            <ValidationText
+              id={`${id}-validation-text`}
+              {...(hasValidationIcon && { validationStateIcon: validationState })}
+              registerAria={register}
+              validationText={validationText}
+              role={validationTextRole}
+            />
+          )}
+        </Stack>
       </div>
     </PropsProvider>
   );

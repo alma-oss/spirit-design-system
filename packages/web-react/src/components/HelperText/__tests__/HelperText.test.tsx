@@ -26,8 +26,6 @@ describe('HelperText', () => {
     renderComponent: (props) => <HelperText {...props} helperText={helperText} />,
     text: helperText,
     classNamePrefix: 'HelperText',
-    includeInlineMode: false,
-    includeItemMode: false,
   });
 
   it('should use context elementType when no direct prop', () => {

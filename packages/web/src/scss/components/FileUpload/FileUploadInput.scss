@@ -12,6 +12,11 @@
 
 $_field-name: 'FileUploadInput';
 
+.FileUploadInput {
+    display: grid;
+    gap: theme.$spacing;
+}
+
 .FileUploadInput__input {
     @include accessibility.hide-text();
 }

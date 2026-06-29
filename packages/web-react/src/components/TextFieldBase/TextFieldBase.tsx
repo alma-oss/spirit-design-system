@@ -14,6 +14,7 @@ import { Icon } from '../Icon';
 import { InputAddon } from '../InputAddon';
 import { InputContainer } from '../InputContainer';
 import { Label } from '../Label';
+import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { usePasswordToggle } from './usePasswordToggle';
 
@@ -50,7 +51,6 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
   }
 
   const { styleProps, props: inputProps } = useStyleProps(restProps);
-  const mergedStyleProps = mergeStyleProps('div', { styleProps });
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
   const validationTextRole = useValidationTextRole({
     validationState,
@@ -105,7 +105,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
         validationState,
       }}
     >
-      <div {...mergedStyleProps}>
+      <Stack {...mergeStyleProps(Stack, { styleProps })} spacing="space-400">
         <Label htmlFor={id}>{label}</Label>
         <InputContainer>
           {startAddon}
@@ -125,11 +125,11 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
         {counterProps ? (
           <Flex isWrapping={false} alignmentX="space-between" alignmentY="top">
             {hasTextContent ? (
-              <div>
+              <Stack spacing="space-400">
                 {/* In counter layout, put validation first so the status message stays visually closest to the counter row. */}
                 {validationTextElement}
                 {helperTextElement}
-              </div>
+              </Stack>
             ) : null}
             {counterElement}
           </Flex>
@@ -140,7 +140,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
             {validationTextElement}
           </>
         )}
-      </div>
+      </Stack>
     </PropsProvider>
   );
 };

@@ -8,6 +8,7 @@ import { type SpiritFieldGroupProps } from '../../types';
 import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
+import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { useFieldGroupStyleProps } from './useFieldGroupStyleProps';
@@ -53,24 +54,26 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
         disabled={isDisabled}
       >
         <VisuallyHidden elementType="legend">{label}</VisuallyHidden>
-        {!isLabelHidden && (
-          <Label elementType="div" aria-hidden="true">
-            {label}
-          </Label>
-        )}
-        <Flex direction="vertical" alignmentX="left" spacingY="space-500">
-          {children}
-        </Flex>
-        <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
-        {validationState && (
-          <ValidationText
-            id={`${id}-validation-text`}
-            {...(hasValidationIcon && { validationStateIcon: validationState })}
-            validationText={validationText}
-            registerAria={register}
-            role={validationTextRole}
-          />
-        )}
+        <Stack spacing="space-400">
+          {!isLabelHidden && (
+            <Label elementType="div" aria-hidden="true">
+              {label}
+            </Label>
+          )}
+          <Flex direction="vertical" alignmentX="left" spacingY="space-500">
+            {children}
+          </Flex>
+          <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />
+          {validationState && (
+            <ValidationText
+              id={`${id}-validation-text`}
+              {...(hasValidationIcon && { validationStateIcon: validationState })}
+              validationText={validationText}
+              registerAria={register}
+              role={validationTextRole}
+            />
+          )}
+        </Stack>
       </fieldset>
     </PropsProvider>
   );

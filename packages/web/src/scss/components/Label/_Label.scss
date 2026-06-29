@@ -1,10 +1,9 @@
-// 1. Inline variant is used for components like Checkbox, Radio, Toggle, etc.
-// 2. Item variant is used for standalone Item components (button, link, div with .Item class).
+// 1. Set a higher specificity to override the `cursor-pointer` helper class.
+//    This can be removed once Label uses `disabled` scheme.
 
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../tools/accessibility';
-@use '../../tools/pseudo-element';
 @use '../../tools/typography';
 @use 'theme';
 
@@ -19,21 +18,8 @@
     color: var(--#{tokens.$css-variable-prefix}label-color, #{theme.$color-state-default});
 }
 
-.Label:not(:is(.Label--inline, .Label--item)) {
-    margin-bottom: theme.$margin-bottom;
-}
-
-.Label--inline,
-.Label--item {
-    cursor: cursors.$form-fields;
-}
-
 // 1.
-.Label--item {
-    @include pseudo-element.stretch();
-}
-
-.Label--disabled {
+.Label.Label--disabled {
     color: var(--#{tokens.$css-variable-prefix}label-color-disabled, #{theme.$color-state-disabled});
     cursor: cursors.$disabled;
 }

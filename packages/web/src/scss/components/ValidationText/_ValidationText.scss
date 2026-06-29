@@ -8,7 +8,6 @@
     @include typography.generate(theme.$typography);
 
     display: block;
-    margin-top: theme.$margin-top;
 }
 
 .ValidationText > ul {
