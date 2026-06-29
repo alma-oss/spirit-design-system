@@ -1,5 +1,5 @@
 import type { AriaRole, ElementType, ReactNode } from 'react';
-import { FormFieldModes, type InputPositions } from '../../constants';
+import { type InputPositions } from '../../constants';
 import {
   type FillVariantDictionaryType,
   type SizesDictionaryType,
@@ -9,9 +9,6 @@ import {
 export type ValidationState = ValidationStatesDictionaryType;
 
 export type ValidationTextType = ReactNode | ReactNode[];
-
-export { FormFieldModes };
-export type FormFieldMode = (typeof FormFieldModes)[keyof typeof FormFieldModes];
 
 export type RegisterParams = { add?: string; remove?: string };
 
@@ -34,8 +31,6 @@ export interface FormFieldProps<E extends ElementType = 'div'> extends FormField
 export interface FormFieldContextValue {
   /** Element type inherited by context-aware form-field descendants. */
   elementType?: ElementType;
-  /** Mode (inline, item) for Label styling and form-field context parity. */
-  formFieldMode?: FormFieldMode;
   /** Whether the field is disabled; affects Label and HelperText styling. */
   isDisabled?: boolean;
   /** Whether the field is an item (Checkbox or Radio in item mode). */
@@ -52,10 +47,15 @@ export interface FormFieldContextValue {
   variant?: FillVariantDictionaryType;
 }
 
-export type FormFieldStyleProps = Pick<FormFieldContextValue, 'formFieldMode' | 'isDisabled'>;
+export type FormFieldStyleProps = Pick<FormFieldContextValue, 'isDisabled'>;
 
 export type LabelStyleProps = FormFieldStyleProps &
-  Pick<FormFieldContextValue, 'isLabelHidden' | 'isRequired' | 'isItem'>;
+  Pick<FormFieldContextValue, 'isLabelHidden' | 'isRequired'> & {
+    /** Whether the label should show a pointer cursor (e.g. next to Checkbox, Radio, Toggle). */
+    hasPointerCursor?: boolean;
+    /** Whether the label uses the element-stretched helper (item mode). */
+    isStretched?: boolean;
+  };
 
 export type ValidationTextStyleProps = Pick<FormFieldContextValue, 'isDisabled'>;
 

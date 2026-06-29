@@ -14,7 +14,6 @@ const CharacterCounter = (props: SpiritCharacterCounterProps) => {
   const propsWithDefaults = {
     isDisabled: contextProps.isDisabled,
     validationState: contextProps.validationState,
-    formFieldMode: contextProps.formFieldMode,
     ...props,
   };
   const { classProps, props: restProps } = useCharacterCounterStyleProps(propsWithDefaults);

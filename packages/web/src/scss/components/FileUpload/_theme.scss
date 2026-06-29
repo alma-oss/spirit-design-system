@@ -1,5 +1,6 @@
 @use '@tokens' as tokens;
 
+$spacing: tokens.$space-400;
 $input-drop-zone-padding: tokens.$space-1000 tokens.$space-900;
 $input-drop-zone-padding-compact: tokens.$space-700 tokens.$space-800;
 $input-drop-zone-column-gap: tokens.$space-700;

@@ -1,4 +1,4 @@
-import type { FormFieldMode, RegisterType, StyleProps, ValidationState } from '../../types/shared';
+import type { RegisterType, StyleProps, ValidationState } from '../../types/shared';
 
 export interface CharacterCounterProps extends StyleProps {
   /** Character threshold shown after the slash in the counter (e.g. `5/200`); implicitly enables the counter */
@@ -12,8 +12,6 @@ export interface CharacterCounterProps extends StyleProps {
 export interface SpiritCharacterCounterProps extends CharacterCounterProps {
   /** ID of the associated textarea, used to generate the screen reader message element ID */
   id: string;
-  /** Mode from form field context (inline / item) */
-  formFieldMode?: FormFieldMode;
   /** Whether the character counter is disabled */
   isDisabled?: boolean;
   /** Callback to register/unregister aria-describedBy IDs */
