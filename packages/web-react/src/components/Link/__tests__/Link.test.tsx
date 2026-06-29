@@ -50,7 +50,7 @@ describe('Link', () => {
   it('should render stretched link', () => {
     render(<Link href="/" isStretched />);
 
-    expect(screen.getByRole('link')).toHaveClass('link-stretched');
+    expect(screen.getByRole('link')).toHaveClass('element-stretched');
   });
 
   describe('RouterProvider integration', () => {
