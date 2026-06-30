@@ -4,7 +4,7 @@
 @use '../../tools/units';
 
 $max-width: units.px-to-rem(288px);
-$typography: tokens.$body-medium-regular;
+$typography: tokens.$caption;
 $padding: tokens.$space-600 tokens.$space-700;
 $gap: tokens.$space-600;
 $border-radius: tokens.$radius-300;
