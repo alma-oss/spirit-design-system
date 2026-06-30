@@ -163,9 +163,7 @@ The `NavigationAvatar` is a component that is styled to be used as a navigation 
 
 ```tsx
 <NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta">
-  <Text elementType="span" size="small" emphasis="semibold">
-    My Account
-  </Text>
+  <span className="typography-action-small">My Account</span>
 </NavigationAvatar>
 ```
 
@@ -173,9 +171,7 @@ If you want the avatar to be square, don't forget to add the `isSquare` prop to 
 
 ```tsx
 <NavigationAvatar avatarContent={<Icon name="profile" />} isSquare aria-label="Profile of Jiří Bárta">
-  <Text elementType="span" size="small" emphasis="semibold">
-    My Account
-  </Text>
+  <span className="typography-action-small">My Account</span>
 </NavigationAvatar>
 ```
 
@@ -189,9 +185,7 @@ Available sizes: `xsmall`, `small`, `medium`, `large`, `xlarge`.
 
 ```tsx
 <NavigationAvatar avatarContent={<Icon name="profile" />} avatarSize="xsmall" aria-label="Profile of Jiří Bárta">
-  <Text elementType="span" size="small" emphasis="semibold">
-    My Account
-  </Text>
+  <span className="typography-action-small">My Account</span>
 </NavigationAvatar>
 ```
 
@@ -203,9 +197,7 @@ You can also use responsive sizes with a responsive object, e.g. `avatarSize={{ 
   avatarSize={{ mobile: 'small', tablet: 'medium', desktop: 'large' }}
   aria-label="Profile of Jiří Bárta"
 >
-  <Text elementType="span" size="small" emphasis="semibold">
-    My Account
-  </Text>
+  <span className="typography-action-small">My Account</span>
 </NavigationAvatar>
 ```
 

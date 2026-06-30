@@ -151,7 +151,7 @@ The `NavigationAvatar` is a component that is styled to be used as a navigation 
       <use href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
   </span>
-  <span class="typography-body-small-semibold">My Account</span>
+  <span class="typography-action-small">My Account</span>
 </a>
 ```
 
@@ -164,7 +164,7 @@ If you want the avatar to be square, don't forget to add the `NavigationAvatar--
       <use href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
   </span>
-  <span class="typography-body-small-semibold">My Account</span>
+  <span class="typography-action-small">My Account</span>
 </a>
 ```
 
@@ -183,7 +183,7 @@ Available sizes: `xsmall`, `small`, `medium`, `large`, `xlarge`.
       <use href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
   </span>
-  <span class="typography-body-small-semibold">My Account</span>
+  <span class="typography-action-small">My Account</span>
 </a>
 ```
 
@@ -196,7 +196,7 @@ You can also use responsive sizes with breakpoint-specific classes, e.g. `Avatar
       <use href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
   </span>
-  <span class="typography-body-small-semibold">My Account</span>
+  <span class="typography-action-small">My Account</span>
 </a>
 ```
 
@@ -225,7 +225,7 @@ With NavigationAction and NavigationAvatar components:
             <use href="/assets/icons/svg/sprite.svg#profile" />
           </svg>
         </span>
-        <span class="typography-body-small-semibold">My Account</span>
+        <span class="typography-action-small">My Account</span>
       </a>
     </li>
   </ul>
@@ -250,7 +250,7 @@ With Buttons and NavigationAvatar:
             <use href="/assets/icons/svg/sprite.svg#profile" />
           </svg>
         </span>
-        <span class="typography-body-small-semibold">My Account</span>
+        <span class="typography-action-small">My Account</span>
       </a>
     </li>
   </ul>
