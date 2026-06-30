@@ -10,9 +10,8 @@ import {
   JSXOpeningElement,
   JSXSpreadAttribute,
 } from 'jscodeshift';
-import { removeParentheses } from '../../../helpers';
+import { removeParentheses, createImportSourceMatcher, getImportSources } from '../../../helpers';
 
-const SPIRIT_WEB_REACT_MODULE = /^@alma-oss\/spirit-web-react(\/.*)?$/;
 const ITEM_COMPONENT = 'Item';
 const CHECK_ICON_NAME = 'check-plain';
 
@@ -65,14 +64,18 @@ const isTargetElement = (element: JSXOpeningElement, { namedImports, namespaceIm
   return Boolean(objectName && propertyName === ITEM_COMPONENT && namespaceImports.has(objectName));
 };
 
-const getItemImports = (j: API['jscodeshift'], root: Collection): SpiritImports => {
+const getItemImports = (
+  j: API['jscodeshift'],
+  root: Collection,
+  isSpiritImport: (value: string) => boolean,
+): SpiritImports => {
   const namedImports = new Set<string>();
   const namespaceImports = new Set<string>();
 
   root
     .find(j.ImportDeclaration, {
       source: {
-        value: (value: string) => SPIRIT_WEB_REACT_MODULE.test(value),
+        value: (value: string) => isSpiritImport(value),
       },
     })
     .forEach((path) => {
@@ -101,9 +104,14 @@ const getItemImports = (j: API['jscodeshift'], root: Collection): SpiritImports 
   return { namedImports, namespaceImports };
 };
 
-const addNamedImport = (j: API['jscodeshift'], root: Collection, importedName: string): string => {
+const addNamedImport = (
+  j: API['jscodeshift'],
+  root: Collection,
+  importedName: string,
+  isSpiritImport: (value: string) => boolean,
+): string => {
   const importDeclarations = root.find(j.ImportDeclaration, {
-    source: { value: (value: string) => SPIRIT_WEB_REACT_MODULE.test(value) },
+    source: { value: (value: string) => isSpiritImport(value) },
   });
   let localName = importedName;
   let sourceValue = '@alma-oss/spirit-web-react';
@@ -389,10 +397,11 @@ const shouldAddEndSlot = (selectionDecoratorAttribute: JSXAttribute | undefined,
   return false;
 };
 
-const transform = (fileInfo: FileInfo, api: API) => {
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
-  const itemImports = getItemImports(j, root);
+  const isSpiritImport = createImportSourceMatcher(getImportSources(options));
+  const itemImports = getItemImports(j, root, isSpiritImport);
 
   if (itemImports.namedImports.size === 0 && itemImports.namespaceImports.size === 0) {
     return fileInfo.source;
@@ -425,9 +434,11 @@ const transform = (fileInfo: FileInfo, api: API) => {
     shouldImportHelperText ||= Boolean(helperTextAttribute);
   });
 
-  const iconLocalName = shouldImportIcon ? addNamedImport(j, root, 'Icon') : 'Icon';
-  const labelLocalName = shouldImportLabel ? addNamedImport(j, root, 'Label') : 'Label';
-  const helperTextLocalName = shouldImportHelperText ? addNamedImport(j, root, 'HelperText') : 'HelperText';
+  const iconLocalName = shouldImportIcon ? addNamedImport(j, root, 'Icon', isSpiritImport) : 'Icon';
+  const labelLocalName = shouldImportLabel ? addNamedImport(j, root, 'Label', isSpiritImport) : 'Label';
+  const helperTextLocalName = shouldImportHelperText
+    ? addNamedImport(j, root, 'HelperText', isSpiritImport)
+    : 'HelperText';
 
   root.find(j.JSXElement).forEach((path) => {
     const { openingElement } = path.node;

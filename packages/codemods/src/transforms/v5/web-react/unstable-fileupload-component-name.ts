@@ -1,5 +1,5 @@
 import { API, FileInfo, Identifier, JSXAttribute, JSXOpeningElement, JSXSpreadAttribute } from 'jscodeshift';
-import { removeParentheses } from '../../../helpers';
+import { getImportSources, removeParentheses } from '../../../helpers';
 import { renameComponent } from '../../../helpers/renameComponent';
 
 const FILE_UPLOAD_COMPONENTS = new Set(['UNSTABLE_FileUpload', 'FileUpload']);
@@ -30,9 +30,10 @@ const renameFileUploadJsxAttributes = (attributes: (JSXAttribute | JSXSpreadAttr
   });
 };
 
-const transform = (fileInfo: FileInfo, api: API) => {
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
+  const importSources = getImportSources(options);
 
   root.find(j.JSXOpeningElement).forEach((path) => {
     const element = path.node as JSXOpeningElement;
@@ -42,7 +43,7 @@ const transform = (fileInfo: FileInfo, api: API) => {
     }
   });
 
-  renameComponent(j, root, 'UNSTABLE_FileUpload', 'FileUpload');
+  renameComponent(j, root, 'UNSTABLE_FileUpload', 'FileUpload', importSources);
 
   root.find(j.Identifier).forEach((path) => {
     const newName = IDENTIFIER_RENAMES[path.node.name];

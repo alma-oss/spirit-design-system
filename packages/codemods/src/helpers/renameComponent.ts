@@ -1,4 +1,5 @@
 import core, { Collection, JSXClosingElement, JSXIdentifier, JSXOpeningElement } from 'jscodeshift';
+import { createImportSourceMatcher, getImportSources } from './spiritWebReactImport';
 
 /**
  * Renames a component - updating import statements and JSX tags.
@@ -11,6 +12,7 @@ import core, { Collection, JSXClosingElement, JSXIdentifier, JSXOpeningElement }
  * @param {Collection} root - The root collection of the jscodeshift AST to search and modify.
  * @param {string} componentName - The name of the component to rename.
  * @param {string} newComponentName - The new name to replace the old component name with.
+ * @param {string[]} importSources - Import sources to match.
  *
  * @returns {void} - This function modifies the AST in place and does not return a value.
  */
@@ -19,10 +21,13 @@ export const renameComponent = (
   root: Collection,
   componentName: string,
   newComponentName: string,
+  importSources: string[] = getImportSources(),
 ) => {
+  const isSpiritImport = createImportSourceMatcher(importSources);
+
   const importStatements = root.find(j.ImportDeclaration, {
     source: {
-      value: (value: string) => /^@alma-oss\/spirit-web-react(\/.*)?$/.test(value),
+      value: (value: string) => isSpiritImport(value),
     },
   });
 

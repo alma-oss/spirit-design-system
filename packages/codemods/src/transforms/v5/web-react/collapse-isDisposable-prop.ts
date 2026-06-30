@@ -1,14 +1,15 @@
 import { API, FileInfo } from 'jscodeshift';
-import { removeParentheses } from '../../../helpers';
+import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
 
-const transform = (fileInfo: FileInfo, api: API) => {
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
+  const isSpiritImport = createImportSourceMatcher(getImportSources(options));
 
   // Find import statements for the specific module and Button specifier
   const importStatements = root.find(j.ImportDeclaration, {
     source: {
-      value: (value: string) => /^@lmc-eu\/spirit-web-react(\/.*)?$/.test(value),
+      value: (value: string) => isSpiritImport(value),
     },
   });
 

@@ -1,16 +1,17 @@
 import { API, FileInfo, JSXExpressionContainer } from 'jscodeshift';
-import { removeParentheses } from '../../../helpers';
+import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
 
 const DEFAULT_SPACING = 'space-400';
 
-const transform = (fileInfo: FileInfo, api: API) => {
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
+  const isSpiritImport = createImportSourceMatcher(getImportSources(options));
 
   // Find import statements for the specific module
   const importStatements = root.find(j.ImportDeclaration, {
     source: {
-      value: (value: string) => /^@(alma-oss)\/spirit-web-react(\/.*)?$/.test(value),
+      value: (value: string) => isSpiritImport(value),
     },
   });
 
