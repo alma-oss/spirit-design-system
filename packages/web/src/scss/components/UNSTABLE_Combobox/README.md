@@ -61,7 +61,7 @@ The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two
               <span>Spanish</span>
               <button
                 type="button"
-                class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
+                class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
                 aria-label="Remove Spanish"
                 tabindex="-1"
               >

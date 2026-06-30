@@ -23,6 +23,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [Button and ButtonLink: `isBlock` Prop Removed](#button-and-buttonlink-isblock-prop-removed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
+  - [Tag: `ControlButton` Size Mapping Updated](#tag-controlbutton-size-mapping-updated)
   - [Header: `UNSTABLE_Header` has been stabilized and renamed to `Header`, previous implementation has been removed](#header-stabilization-of-unstable_header-to-header-previous-implementation-removed)
   - [Item: Composable Content and Slots](#item-composable-content-and-slots)
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
@@ -487,6 +488,50 @@ The feature flag enabling the new `Tag` appearance was removed and the new appea
 
 You can now safely delete the `spirit-feature-enable-v5-tag-appearance` CSS class from any wrapper
 elements in your project as it has no effect.
+
+### Tag: `ControlButton` Size Mapping Updated
+
+The recommended `ControlButton` size to use inside a `Tag` has changed to better align with the
+updated size scale. The previous guidance mapped Tag sizes to larger `ControlButton` values; the new
+mapping uses smaller ones:
+
+| Tag Size | Previous `ControlButton` Size | New `ControlButton` Size |
+| -------- | ----------------------------- | ------------------------ |
+| xsmall   | xsmall                        | xsmall (unchanged)       |
+| small    | small                         | xsmall                   |
+| medium   | small                         | xsmall                   |
+| large    | medium                        | small                    |
+| xlarge   | medium                        | small                    |
+
+#### Migration Guide
+
+🪄 Use codemods to automatically update your codebase:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/tag-controlbutton-size
+```
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+<details>
+<summary>🔧 Manual Migration Steps</summary>
+
+Update the `size` prop on any `ControlButton` nested inside a `Tag`:
+
+```diff
+  <Tag elementType="div" size="medium" color="selected">
+    <span>Tag label</span>
+-   <ControlButton size="small" isSymmetrical aria-label="Remove Tag label">…</ControlButton>
++   <ControlButton size="xsmall" isSymmetrical aria-label="Remove Tag label">…</ControlButton>
+  </Tag>
+  <Tag elementType="div" size="large" color="selected">
+    <span>Tag label</span>
+-   <ControlButton size="medium" isSymmetrical aria-label="Remove Tag label">…</ControlButton>
++   <ControlButton size="small" isSymmetrical aria-label="Remove Tag label">…</ControlButton>
+  </Tag>
+```
+
+</details>
 
 ### Header: Stabilization of `UNSTABLE_Header` to `Header`, Previous Implementation Removed
 

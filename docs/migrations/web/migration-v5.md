@@ -19,6 +19,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Stack: Modifier Classes Without `has` Prefix](#stack-modifier-classes-without-has-prefix)
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
+  - [Tag: `ControlButton` Size Mapping Updated](#tag-controlbutton-size-mapping-updated)
   - [Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed](#header-unstable_header-stabilized-previous-header-css-removed)
   - [Item: Composable Content and Slots](#item-composable-content-and-slots)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
@@ -382,6 +383,45 @@ The feature flag enabling the new `Tag` appearance was removed and the new appea
 
 You can now safely delete the Sass variable `$enable-v5-tag-appearance` and the CSS class
 `spirit-feature-enable-v5-tag-appearance` from your project as they have no effect.
+
+### Tag: `ControlButton` Size Mapping Updated
+
+The recommended `ControlButton` size to use inside a `Tag` has changed to better align with the
+updated size scale. The previous guidance mapped Tag sizes to larger `ControlButton` values; the new
+mapping uses smaller ones:
+
+| Tag class     | Previous `ControlButton` class | New `ControlButton` class           |
+| ------------- | ------------------------------ | ----------------------------------- |
+| `Tag--xsmall` | `ControlButton--xsmall`        | `ControlButton--xsmall` (unchanged) |
+| `Tag--small`  | `ControlButton--small`         | `ControlButton--xsmall`             |
+| `Tag--medium` | `ControlButton--small`         | `ControlButton--xsmall`             |
+| `Tag--large`  | `ControlButton--medium`        | `ControlButton--small`              |
+| `Tag--xlarge` | `ControlButton--medium`        | `ControlButton--small`              |
+
+#### Migration Guide
+
+Update the `ControlButton--*` modifier class on any `ControlButton` nested inside a `Tag`:
+
+```diff
+  <div class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic">
+    <span>Tag label</span>
+    <button
+      type="button"
+-     class="ControlButton ControlButton--small ControlButton--symmetrical"
++     class="ControlButton ControlButton--xsmall ControlButton--symmetrical"
+      aria-label="Remove Tag label"
+    >…</button>
+  </div>
+  <div class="Tag Tag--selected Tag--large color-scheme-on-selected-basic">
+    <span>Tag label</span>
+    <button
+      type="button"
+-     class="ControlButton ControlButton--medium ControlButton--symmetrical"
++     class="ControlButton ControlButton--small ControlButton--symmetrical"
+      aria-label="Remove Tag label"
+    >…</button>
+  </div>
+```
 
 ### Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed
 
