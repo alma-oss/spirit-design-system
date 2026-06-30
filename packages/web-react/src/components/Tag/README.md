@@ -49,20 +49,20 @@ Subtle variants:
 
 ## With ControlButton
 
-### ControlButton Size Matching
+### ControlButton Size Mapping
 
 | Tag Size | ControlButton Size |
 | -------- | ------------------ |
 | xsmall   | xsmall             |
-| small    | small              |
-| medium   | small              |
-| large    | medium             |
-| xlarge   | medium             |
+| small    | xsmall             |
+| medium   | xsmall             |
+| large    | small              |
+| xlarge   | small              |
 
 ```tsx
 <Tag elementType="div" color="selected">
   <span>Tag label</span>
-  <ControlButton size="small" isSymmetrical aria-label="Remove Tag label">
+  <ControlButton size="xsmall" isSymmetrical aria-label="Remove Tag label">
     <Icon name="close" />
   </ControlButton>
 </Tag>
@@ -105,7 +105,7 @@ Disabled `Tag` with `ControlButton`:
 ```tsx
 <Tag elementType="div" isDisabled>
   <span>Disabled tag</span>
-  <ControlButton size="small" isSymmetrical isDisabled aria-label="Remove Disabled tag">
+  <ControlButton size="xsmall" isSymmetrical isDisabled aria-label="Remove Disabled tag">
     <Icon name="close" />
   </ControlButton>
 </Tag>

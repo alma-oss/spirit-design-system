@@ -42,9 +42,10 @@
     <div class="docs-Stack docs-Stack--stretch">
       <div class="Grid Grid--cols-1 Grid--tablet--cols-3 Grid--desktop--cols-5" style="--grid-spacing-y: var(--spirit-space-1100);">
         {{#each @root.sizes as |size|}}
-        {{#if (eq size "medium")}}{{setVar "controlButtonSize" "small"}}
-        {{else if (eq size "large")}}{{setVar "controlButtonSize" "medium"}}
-        {{else if (eq size "xlarge")}}{{setVar "controlButtonSize" "medium"}}
+        {{#if (eq size "small")}}{{setVar "controlButtonSize" "xsmall"}}
+        {{else if (eq size "medium")}}{{setVar "controlButtonSize" "xsmall"}}
+        {{else if (eq size "large")}}{{setVar "controlButtonSize" "small"}}
+        {{else if (eq size "xlarge")}}{{setVar "controlButtonSize" "small"}}
         {{else}}{{setVar "controlButtonSize" size}}
         {{/if}}
         <section>
@@ -173,7 +174,7 @@
         <span>Disabled with ControlButton</span>
         <button
           type="button"
-          class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+          class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
           aria-label="Remove Disabled"
           disabled
         >
@@ -191,7 +192,7 @@
         <span>Disabled subtle with ControlButton</span>
         <button
           type="button"
-          class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+          class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
           aria-label="Remove Disabled subtle"
           disabled
         >
