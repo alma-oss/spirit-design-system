@@ -1,7 +1,5 @@
 import { API, FileInfo, JSXAttribute, JSXIdentifier, JSXSpreadAttribute } from 'jscodeshift';
-import { removeParentheses } from '../../../helpers';
-
-const SPIRIT_WEB_REACT_MODULE = /^@alma-oss\/spirit-web-react(\/.*)?$/;
+import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
 
 // ModalCloseButton received the close handling through dedicated props; CloseButton uses the
 // underlying ControlButton/ARIA contract instead.
@@ -19,13 +17,14 @@ const hasAttribute = (attributes: (JSXAttribute | JSXSpreadAttribute)[], name: s
       attribute.type === 'JSXAttribute' && attribute.name.type === 'JSXIdentifier' && attribute.name.name === name,
   );
 
-const transform = (fileInfo: FileInfo, api: API) => {
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
+  const isSpiritImport = createImportSourceMatcher(getImportSources(options));
 
   const spiritImports = root.find(j.ImportDeclaration, {
     source: {
-      value: (value: string) => SPIRIT_WEB_REACT_MODULE.test(value),
+      value: (value: string) => isSpiritImport(value),
     },
   });
 
@@ -58,6 +57,7 @@ const transform = (fileInfo: FileInfo, api: API) => {
     return fileInfo.source;
   }
 
+  const removedLocalNames = new Set([...modalLocalNames, ...tooltipLocalNames]);
   let usesCloseButton = false;
 
   root.find(j.JSXOpeningElement).forEach((path) => {
@@ -102,7 +102,7 @@ const transform = (fileInfo: FileInfo, api: API) => {
   });
 
   root.find(j.JSXClosingElement).forEach((path) => {
-    if (path.node.name.type === 'JSXIdentifier' && REMOVED_COMPONENTS.has(path.node.name.name)) {
+    if (path.node.name.type === 'JSXIdentifier' && removedLocalNames.has(path.node.name.name)) {
       (path.node.name as JSXIdentifier).name = 'CloseButton';
     }
   });
@@ -111,7 +111,10 @@ const transform = (fileInfo: FileInfo, api: API) => {
     return fileInfo.source;
   }
 
-  const isCloseButtonAlreadyImported = root.find(j.ImportSpecifier, { imported: { name: 'CloseButton' } }).length > 0;
+  const isCloseButtonAlreadyImported =
+    spiritImports.find(j.ImportSpecifier, {
+      imported: { name: 'CloseButton' },
+    }).length > 0;
 
   // Drop the removed close-button specifiers from the Spirit imports.
   spiritImports.forEach((path) => {

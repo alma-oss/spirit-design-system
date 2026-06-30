@@ -67,6 +67,7 @@
     "eslint": "catalog:lint",
     "eslint-config-spirit": "workspace:^",
     "jest": "catalog:test",
+    "npm-run-all2": "catalog:script",
     "shx": "catalog:script",
     "tsup": "catalog:build",
     "typescript": "catalog:types"

@@ -2,8 +2,11 @@ import { $ } from 'execa';
 import sade from 'sade';
 import { fs, path } from 'zx';
 import { _dirname, errorMessage, logMessage } from './helpers';
+import { resolveImportSources } from './helpers/resolveImportSources';
 
 const packageJson = fs.readJsonSync(path.resolve(_dirname, './package.json'));
+
+export { resolveImportSources } from './helpers/resolveImportSources';
 
 export default async function cli(args: string[]) {
   sade('spirit-codemods', true)
@@ -17,7 +20,7 @@ export default async function cli(args: string[]) {
       '-s, --import-sources',
       'Additional import sources to match (comma-separated). Defaults to @alma-oss/spirit-web-react',
     )
-    .example('-s @almacareer/cyborg-design-system')
+    .example('-s @org/design-system')
     .option('-e, --extensions', 'Extensions to look for when transforming files, default: ts,tsx,js,jsx')
     .example('-e ts, tsx, js, jsx')
     .option('-i, --ignore', 'Ignore files or directories, default: **/node_modules/**')
@@ -28,6 +31,7 @@ export default async function cli(args: string[]) {
       const defaultExtensions = 'ts,tsx,js,jsx';
       const defaultIgnore = '**/node_modules/**';
       const defaultParser = 'tsx';
+      const resolvedImportSources = resolveImportSources(args, importSources);
 
       if (!codePath || !fs.existsSync(codePath)) {
         errorMessage(codePath);
@@ -58,15 +62,14 @@ export default async function cli(args: string[]) {
         parser || defaultParser,
       ];
 
-      if (importSources) {
-        jscodeshiftArgs.push('--importSources', importSources);
+      if (resolvedImportSources) {
+        jscodeshiftArgs.push('--importSources', resolvedImportSources);
       }
 
       jscodeshiftArgs.push(codePath);
 
-      const { stdout } = await $({ stdio: 'pipe' })`jscodeshift ${jscodeshiftArgs}`;
+      const { stdout } = await $({ stdio: 'pipe' })('jscodeshift', jscodeshiftArgs);
 
-      // stdout object from jscodeshift
       logMessage(stdout);
 
       process.exit(0);

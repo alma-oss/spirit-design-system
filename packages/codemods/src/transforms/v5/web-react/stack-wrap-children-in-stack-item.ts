@@ -1,5 +1,5 @@
 import { API, FileInfo, Identifier } from 'jscodeshift';
-import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
+import { createImportSourceMatcher, finishTransform, getImportSources } from '../../../helpers';
 
 const DIVIDER_PROPS = new Set(['hasIntermediateDividers', 'hasStartDivider', 'hasEndDivider']);
 
@@ -26,7 +26,7 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
     return fileInfo.source;
   }
 
-  let needsStackItemImport = false;
+  let hasChanges = false;
 
   root
     .find(j.JSXElement, {
@@ -53,7 +53,7 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
           return child;
         }
 
-        needsStackItemImport = true;
+        hasChanges = true;
 
         const innerChildren = child.type === 'JSXFragment' ? child.children : [child];
 
@@ -65,7 +65,7 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
       });
     });
 
-  if (needsStackItemImport) {
+  if (hasChanges) {
     const stackItemAlreadyImported =
       importStatements.find(j.ImportSpecifier, {
         imported: { type: 'Identifier', name: 'StackItem' },
@@ -83,7 +83,7 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
     }
   }
 
-  return removeParentheses(root.toSource({ quote: 'single' }));
+  return finishTransform(fileInfo, root, hasChanges, { quote: 'single' });
 };
 
 export default transform;

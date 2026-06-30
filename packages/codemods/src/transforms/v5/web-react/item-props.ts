@@ -10,7 +10,7 @@ import {
   JSXOpeningElement,
   JSXSpreadAttribute,
 } from 'jscodeshift';
-import { removeParentheses, createImportSourceMatcher, getImportSources } from '../../../helpers';
+import { createImportSourceMatcher, finishTransform, getImportSources } from '../../../helpers';
 
 const ITEM_COMPONENT = 'Item';
 const CHECK_ICON_NAME = 'check-plain';
@@ -109,7 +109,7 @@ const addNamedImport = (
   root: Collection,
   importedName: string,
   isSpiritImport: (value: string) => boolean,
-): string => {
+): { localName: string; added: boolean } => {
   const importDeclarations = root.find(j.ImportDeclaration, {
     source: { value: (value: string) => isSpiritImport(value) },
   });
@@ -142,14 +142,14 @@ const addNamedImport = (
   });
 
   if (localName !== importedName) {
-    return localName;
+    return { localName, added: false };
   }
 
   const hasImport =
     importDeclarations.find(j.ImportSpecifier, { imported: { type: 'Identifier', name: importedName } }).length > 0;
 
   if (hasImport) {
-    return localName;
+    return { localName, added: false };
   }
 
   if (importDeclarationForSpecifier) {
@@ -157,14 +157,14 @@ const addNamedImport = (
       path.node.specifiers = [...(path.node.specifiers ?? []), j.importSpecifier(j.identifier(importedName))];
     });
 
-    return localName;
+    return { localName, added: true };
   }
 
   importDeclarations
     .at(0)
     .insertAfter(j.importDeclaration([j.importSpecifier(j.identifier(importedName))], j.stringLiteral(sourceValue)));
 
-  return localName;
+  return { localName, added: true };
 };
 
 const resolveBooleanAttributeState = (attribute: JSXAttribute | undefined): BooleanAttributeState => {
@@ -434,11 +434,23 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
     shouldImportHelperText ||= Boolean(helperTextAttribute);
   });
 
-  const iconLocalName = shouldImportIcon ? addNamedImport(j, root, 'Icon', isSpiritImport) : 'Icon';
-  const labelLocalName = shouldImportLabel ? addNamedImport(j, root, 'Label', isSpiritImport) : 'Label';
-  const helperTextLocalName = shouldImportHelperText
+  let hasChanges = false;
+
+  const iconImport = shouldImportIcon
+    ? addNamedImport(j, root, 'Icon', isSpiritImport)
+    : { localName: 'Icon', added: false };
+  const labelImport = shouldImportLabel
+    ? addNamedImport(j, root, 'Label', isSpiritImport)
+    : { localName: 'Label', added: false };
+  const helperTextImport = shouldImportHelperText
     ? addNamedImport(j, root, 'HelperText', isSpiritImport)
-    : 'HelperText';
+    : { localName: 'HelperText', added: false };
+
+  hasChanges ||= iconImport.added || labelImport.added || helperTextImport.added;
+
+  const iconLocalName = iconImport.localName;
+  const labelLocalName = labelImport.localName;
+  const helperTextLocalName = helperTextImport.localName;
 
   root.find(j.JSXElement).forEach((path) => {
     const { openingElement } = path.node;
@@ -454,12 +466,14 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
     const isSelectedAttribute = getAttribute(openingElement, 'isSelected');
     const isDisabledAttribute = getAttribute(openingElement, 'isDisabled');
     const children: JSXElement[] = [];
+    let elementChanged = false;
 
     if (!hasAttribute(openingElement, 'elementType')) {
       openingElement.attributes = [
         j.jsxAttribute(j.jsxIdentifier('elementType'), j.stringLiteral('button')),
         ...(openingElement.attributes ?? []),
       ];
+      elementChanged = true;
     }
 
     if (
@@ -478,32 +492,45 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
           ),
         ),
       );
+      elementChanged = true;
     }
 
     if (iconNameAttribute && !hasAttribute(openingElement, 'startSlot')) {
       openingElement.attributes?.unshift(
         j.jsxAttribute(j.jsxIdentifier('startSlot'), createIconElement(j, iconNameAttribute.value, iconLocalName)),
       );
+      elementChanged = true;
     }
 
     if (labelAttribute) {
       children.push(createLabelElement(j, labelAttribute.value, labelLocalName));
+      elementChanged = true;
     }
 
     if (helperTextAttribute) {
       children.push(createHelperTextElement(j, helperTextAttribute.value, helperTextLocalName));
+      elementChanged = true;
     }
 
+    const attributesBeforeRemoval = openingElement.attributes?.length ?? 0;
     removeAttributes(openingElement, ['iconName', 'label', 'helperText', 'selectionDecorator']);
+    if ((openingElement.attributes?.length ?? 0) !== attributesBeforeRemoval) {
+      elementChanged = true;
+    }
 
     if (children.length > 0) {
       openingElement.selfClosing = false;
       path.node.closingElement = j.jsxClosingElement(openingElement.name);
       path.node.children = [...children, ...(path.node.children ?? [])];
+      elementChanged = true;
+    }
+
+    if (elementChanged) {
+      hasChanges = true;
     }
   });
 
-  return removeParentheses(root.toSource());
+  return finishTransform(fileInfo, root, hasChanges);
 };
 
 export default transform;
