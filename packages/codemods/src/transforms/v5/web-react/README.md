@@ -305,6 +305,37 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/control-button-size-scal
 + <ControlButton size={{ mobile: 'medium', tablet: 'xlarge' }} … />
 ```
 
+### `v5/web-react/tag-controlbutton-size` — Update `ControlButton` `size` Inside `Tag`
+
+This codemod updates the `size` prop of `ControlButton` components nested inside `Tag` to match the
+new recommended size mapping: `small` → `xsmall`, `medium` → `small`. The `xsmall` value and any
+`ControlButton` outside a `Tag` are left untouched.
+
+ℹ️ A `ControlButton` that uses a JSX spread (e.g. `<ControlButton {...props} />`) inside a `Tag` is
+skipped, since the spread might already provide a `size`. Review those cases manually. The same applies
+if you set the `size` through a `PropsProvider` context instead of the prop directly.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/tag-controlbutton-size
+```
+
+#### Example
+
+```diff
+  <Tag elementType="div" size="medium" color="selected">
+    <span>Tag label</span>
+-   <ControlButton size="small" … />
++   <ControlButton size="xsmall" … />
+  </Tag>
+  <Tag elementType="div" size="large" color="selected">
+    <span>Tag label</span>
+-   <ControlButton size="medium" … />
++   <ControlButton size="small" … />
+  </Tag>
+```
+
 ### `v5/web-react/unstable-fileupload-component-name` — Stabilize `UNSTABLE_FileUpload` to `FileUpload`
 
 This codemod renames `UNSTABLE_FileUpload` imports and JSX tags to `FileUpload`, updates related type names, and renames `linkText` → `inputUploadText` and `labelText` → `inputDragAndDropText` on `FileUpload` JSX props.
