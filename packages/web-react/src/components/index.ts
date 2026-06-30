@@ -7,6 +7,7 @@ export * from './Box';
 export * from './Breadcrumbs';
 export * from './Button';
 export * from './Card';
+export * from './CaptionText';
 export * from './CharacterCounter';
 export * from './Checkbox';
 export * from './CloseButton';
