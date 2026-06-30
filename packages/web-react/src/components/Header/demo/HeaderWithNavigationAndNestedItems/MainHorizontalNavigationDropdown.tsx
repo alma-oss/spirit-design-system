@@ -49,7 +49,7 @@ const MainHorizontalNavigationDropdown = () => {
     >
       <DropdownTrigger elementType={NavigationActionAsDropdownTrigger}>
         Menu
-        <Icon name={`chevron-${isNavigationActionDropdownOpen ? 'up' : 'down'}`} boxSize={20} />
+        <Icon name={`chevron-${isNavigationActionDropdownOpen ? 'up' : 'down'}`} />
       </DropdownTrigger>
       <DropdownPopover>
         <DropdownPopoverContent />

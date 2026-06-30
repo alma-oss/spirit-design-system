@@ -4,7 +4,6 @@ import { Button } from '../../../Button';
 import { ButtonLink } from '../../../ButtonLink';
 import { Icon } from '../../../Icon';
 import { Navigation, NavigationAvatar, NavigationItem } from '../../../Navigation';
-import { Text } from '../../../Text';
 import { VisuallyHidden } from '../../../VisuallyHidden';
 
 interface SecondaryHorizontalNavigationProps {
@@ -25,9 +24,7 @@ const SecondaryHorizontalNavigation: FunctionComponent<SecondaryHorizontalNaviga
     </NavigationItem>
     <NavigationItem alignmentY="center" hideOn={['mobile', 'tablet']}>
       <NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta">
-        <Text elementType="span" size="small" emphasis="semibold">
-          My Account
-        </Text>
+        My Account
       </NavigationAvatar>
     </NavigationItem>
     <NavigationItem hideOn={['mobile', 'tablet']}>

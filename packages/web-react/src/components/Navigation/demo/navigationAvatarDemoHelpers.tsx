@@ -3,17 +3,12 @@ import { type PolymorphicRef, type SpiritNavigationAvatarProps } from '../../../
 import { Icon } from '../../Icon';
 import { Item } from '../../Item';
 import { Label } from '../../Label';
-import { Text } from '../../Text';
 import NavigationAvatar from '../NavigationAvatar';
 
 // Shared constants
 export const AVATAR_CONTENT = <Icon name="profile" />;
 export const AVATAR_ARIA_LABEL = 'Profile of Jiří Bárta';
-export const AVATAR_TEXT = (
-  <Text elementType="span" size="small" emphasis="semibold">
-    My Account
-  </Text>
-);
+export const AVATAR_TEXT = 'My Account';
 
 // Shared dropdown items
 export const DROPDOWN_ITEMS = (
