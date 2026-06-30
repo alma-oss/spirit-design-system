@@ -69,6 +69,7 @@ __metadata:
     filedirname: "catalog:script"
     jest: "catalog:test"
     jscodeshift: "catalog:script"
+    npm-run-all2: "catalog:script"
     sade: "catalog:script"
     shx: "catalog:script"
     tsup: "catalog:build"

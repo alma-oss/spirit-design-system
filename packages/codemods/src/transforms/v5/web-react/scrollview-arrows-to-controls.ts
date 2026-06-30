@@ -7,7 +7,7 @@ import {
   JSXOpeningElement,
   JSXSpreadAttribute,
 } from 'jscodeshift';
-import { removeParentheses, createImportSourceMatcher, getImportSources } from '../../../helpers';
+import { finishTransform, createImportSourceMatcher, getImportSources, getOwnRecordValue } from '../../../helpers';
 import { renameComponent } from '../../../helpers/renameComponent';
 
 const IDENTIFIER_RENAMES: Record<string, string> = {
@@ -52,18 +52,23 @@ const isScrollViewElement = (
   );
 };
 
-const renameJsxAttributes = (attributes: (JSXAttribute | JSXSpreadAttribute)[] | undefined) => {
+const renameJsxAttributes = (attributes: (JSXAttribute | JSXSpreadAttribute)[] | undefined): boolean => {
+  let changed = false;
+
   attributes?.forEach((attribute) => {
     if (attribute.type !== 'JSXAttribute' || attribute.name.type !== 'JSXIdentifier') {
       return;
     }
 
-    const newName = SCROLL_VIEW_PROP_RENAMES[attribute.name.name];
+    const newName = getOwnRecordValue(SCROLL_VIEW_PROP_RENAMES, attribute.name.name);
 
     if (newName) {
       attribute.name.name = newName;
+      changed = true;
     }
   });
+
+  return changed;
 };
 
 const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
@@ -84,12 +89,14 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
     return fileInfo.source;
   }
 
+  let hasChanges = false;
+
   hasSpiritWebReactImport.forEach((path) => {
     path.node.specifiers?.forEach((specifier) => {
       if (specifier.type === 'ImportSpecifier' && specifier.imported.type === 'Identifier') {
         const importedName = specifier.imported.name;
         const localName = specifier.local?.name ?? importedName;
-        const renamedImportedName = IDENTIFIER_RENAMES[importedName];
+        const renamedImportedName = getOwnRecordValue(IDENTIFIER_RENAMES, importedName);
 
         if (renamedImportedName) {
           specifier.imported.name = renamedImportedName;
@@ -99,6 +106,8 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
           } else if (specifier.local.name === importedName) {
             specifier.local.name = renamedImportedName;
           }
+
+          hasChanges = true;
         }
 
         if (SCROLL_VIEW_COMPONENTS.has(importedName) || SCROLL_VIEW_COMPONENTS.has(renamedImportedName ?? '')) {
@@ -113,10 +122,11 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
   });
 
   root.find(j.Identifier).forEach((path) => {
-    const newName = IDENTIFIER_RENAMES[path.node.name];
+    const newName = getOwnRecordValue(IDENTIFIER_RENAMES, path.node.name);
 
     if (newName) {
       (path.node as Identifier).name = newName;
+      hasChanges = true;
     }
   });
 
@@ -125,7 +135,9 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
       return;
     }
 
-    renameJsxAttributes(path.node.attributes);
+    if (renameJsxAttributes(path.node.attributes)) {
+      hasChanges = true;
+    }
   });
 
   root
@@ -140,6 +152,7 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
 
       if (object.type === 'Identifier' && object.name === 'classProps') {
         (path.node.property as Identifier).name = 'controls';
+        hasChanges = true;
       }
     });
 
@@ -161,6 +174,8 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
           if (property.value.type === 'Identifier' && property.value.name === 'arrows') {
             property.value.name = 'controls';
           }
+
+          hasChanges = true;
         }
       });
     }
@@ -169,17 +184,20 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
   if (root.find(j.Identifier, { name: 'useScrollViewControls' }).length > 0) {
     root.find(j.Identifier, { name: 'arrows' }).forEach((path) => {
       (path.node as Identifier).name = 'controls';
+      hasChanges = true;
     });
   }
 
-  renameComponent(j, root, 'ScrollViewArrows', 'ScrollViewControls', importSources);
+  if (renameComponent(j, root, 'ScrollViewArrows', 'ScrollViewControls', importSources)) {
+    hasChanges = true;
+  }
 
   if (namedImports.has('ScrollViewArrows')) {
     namedImports.delete('ScrollViewArrows');
     namedImports.add('ScrollViewControls');
   }
 
-  return removeParentheses(root.toSource({ quote: 'double' }));
+  return finishTransform(fileInfo, root, hasChanges, { quote: 'double' });
 };
 
 export default transform;
