@@ -121,7 +121,7 @@ Place a hidden `<span>` with a unique `id` anywhere in the `<body>` and referenc
       <button
         type="button"
         aria-label="Remove Czech"
-        class="ControlButton ControlButton--small ControlButton--symmetrical"
+        class="ControlButton ControlButton--xsmall ControlButton--symmetrical"
       >
         <svg class="Icon" width="16" height="16" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#close" />
@@ -268,13 +268,13 @@ The following example positions the popover at `bottom-start` and expands it to 
 Use the `InputContainer--small`, `InputContainer--medium`, or `InputContainer--large` modifier on
 the `InputContainer` element to control the size. `InputContainer--medium` is considered the default size.
 
-Each size expects a matching Tag and ControlButton size inside the selection area:
+Each size expects a specific Tag and ControlButton size inside the selection area:
 
 | InputContainer modifier  | `min-height` | Tag class     | ControlButton class     |
 | ------------------------ | ------------ | ------------- | ----------------------- |
 | `InputContainer--small`  | 32px         | `Tag--xsmall` | `ControlButton--xsmall` |
-| `InputContainer--medium` | 40px         | `Tag--small`  | `ControlButton--small`  |
-| `InputContainer--large`  | 48px         | `Tag--medium` | `ControlButton--medium` |
+| `InputContainer--medium` | 40px         | `Tag--small`  | `ControlButton--xsmall` |
+| `InputContainer--large`  | 48px         | `Tag--medium` | `ControlButton--xsmall` |
 
 ```html
 <div>
@@ -293,7 +293,7 @@ Each size expects a matching Tag and ControlButton size inside the selection are
             <button
               type="button"
               aria-label="Remove Czech"
-              class="ControlButton ControlButton--medium ControlButton--symmetrical"
+              class="ControlButton ControlButton--xsmall ControlButton--symmetrical"
             >
               <svg class="Icon" width="16" height="16" aria-hidden="true">
                 <use href="/icons/svg/sprite.svg#close" />
@@ -394,7 +394,7 @@ inside the selection area (remove buttons) to disable the Picker.
             <button
               type="button"
               aria-label="Remove Czech"
-              class="ControlButton ControlButton--small ControlButton--symmetrical"
+              class="ControlButton ControlButton--xsmall ControlButton--symmetrical"
               disabled
             >
               <svg class="Icon" width="16" height="16" aria-hidden="true">

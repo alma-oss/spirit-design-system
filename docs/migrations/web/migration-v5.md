@@ -26,6 +26,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
   - [Alert: Deprecated Link Color Styles Removed](#alert-deprecated-link-color-styles-removed)
+  - [Tag: `ControlButton` Size Mapping Updated](#tag-controlbutton-size-mapping-updated)
   - [Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed](#header-unstable_header-stabilized-previous-header-css-removed)
   - [Item: Composable Content and Slots](#item-composable-content-and-slots)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
@@ -563,6 +564,45 @@ remain distinguishable from surrounding text:
 ```
 
 See [Alert README][readme-alert] for the full links-in-alert pattern.
+
+### Tag: `ControlButton` Size Mapping Updated
+
+The recommended `ControlButton` size to use inside a `Tag` has changed to better align with the
+updated size scale. The previous guidance mapped Tag sizes to larger `ControlButton` values; the new
+mapping uses smaller ones:
+
+| Tag class     | Previous `ControlButton` class | New `ControlButton` class           |
+| ------------- | ------------------------------ | ----------------------------------- |
+| `Tag--xsmall` | `ControlButton--xsmall`        | `ControlButton--xsmall` (unchanged) |
+| `Tag--small`  | `ControlButton--small`         | `ControlButton--xsmall`             |
+| `Tag--medium` | `ControlButton--small`         | `ControlButton--xsmall`             |
+| `Tag--large`  | `ControlButton--medium`        | `ControlButton--small`              |
+| `Tag--xlarge` | `ControlButton--medium`        | `ControlButton--small`              |
+
+#### Migration Guide
+
+Update the `ControlButton--*` modifier class on any `ControlButton` nested inside a `Tag`:
+
+```diff
+  <div class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic">
+    <span>Tag label</span>
+    <button
+      type="button"
+-     class="ControlButton ControlButton--small ControlButton--symmetrical"
++     class="ControlButton ControlButton--xsmall ControlButton--symmetrical"
+      aria-label="Remove Tag label"
+    >…</button>
+  </div>
+  <div class="Tag Tag--selected Tag--large color-scheme-on-selected-basic">
+    <span>Tag label</span>
+    <button
+      type="button"
+-     class="ControlButton ControlButton--medium ControlButton--symmetrical"
++     class="ControlButton ControlButton--small ControlButton--symmetrical"
+      aria-label="Remove Tag label"
+    >…</button>
+  </div>
+```
 
 ### Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed
 
