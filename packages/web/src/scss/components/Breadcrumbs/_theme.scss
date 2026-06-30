@@ -1,4 +1,5 @@
 @use '@tokens' as tokens;
+@use '../../tools/units';
 
 $breakpoints: tokens.$breakpoints;
 
@@ -7,3 +8,5 @@ $color: tokens.$text-secondary;
 
 $gap-mobile-up: tokens.$space-300;
 $gap-tablet-up: tokens.$space-500;
+
+$icon-size: units.px-to-rem(20px);
