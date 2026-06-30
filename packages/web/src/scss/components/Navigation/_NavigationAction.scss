@@ -1,8 +1,7 @@
-// 1. We want specific typography for nested items in the Navigation component.
-// 2. We want the selected and open states to override the hover and active states.
-// 3. Nested sub-item slots are hidden via structural nesting.
-// 4. Keep open parent gray when a selected sub-item is present.
-// 5. Label may be wrapped in a span; use display: contents so flex gap still applies between label text, slots, and icons.
+// 1. We want the selected and open states to override the hover and active states.
+// 2. Nested sub-item slots are hidden via structural nesting.
+// 3. Keep open parent gray when a selected sub-item is present.
+// 4. Label may be wrapped in a span; use display: contents so flex gap still applies between label text, slots, and icons.
 
 @use '@tokens' as tokens;
 @use '../../tools/dictionaries';
@@ -15,8 +14,6 @@
 }
 
 .NavigationAction {
-    --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$action-slot-icon-size};
-
     position: relative;
     display: flex;
     gap: theme.$action-gap;
@@ -48,7 +45,7 @@
     background-color: theme.$action-stripe-background-color-state-default;
 }
 
-// 5.
+// 4.
 .NavigationAction > span:not(.NavigationAction__slot) {
     display: contents;
 }
@@ -58,7 +55,7 @@
     align-items: center;
 }
 
-// stylelint-disable-next-line selector-max-compound-selectors -- 3.
+// stylelint-disable-next-line selector-max-compound-selectors -- 2.
 .Navigation--vertical > ul ul .NavigationAction__slot {
     display: none;
 }
@@ -68,6 +65,8 @@
 }
 
 .Navigation--horizontal {
+    --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$horizontal-action-slot-icon-size};
+
     @include dictionaries.generate-variants(
         $class-name: 'NavigationAction',
         $dictionary-values: theme.$action-shape-variant-dictionary,
@@ -76,19 +75,13 @@
 }
 
 .Navigation--vertical {
+    --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$vertical-action-slot-icon-size};
+
     @include dictionaries.generate-variants(
         $class-name: 'NavigationAction',
         $dictionary-values: theme.$action-shape-variant-dictionary,
         $config: theme.$vertical-action-shape-variant-config
     );
-}
-
-// stylelint-disable-next-line selector-max-compound-selectors, selector-max-specificity -- 1.
-.Navigation--vertical
-    > ul
-    ul
-    .NavigationAction:not(:is(.NavigationAction--selected, .NavigationAction[aria-expanded='true'])) {
-    @include typography.generate(theme.$vertical-action-typography-nested);
 }
 
 .NavigationAction--selected {
@@ -103,7 +96,7 @@
     background-color: theme.$action-background-color-state-open;
 }
 
-// stylelint-disable-next-line selector-max-specificity, selector-max-class -- 4.
+// stylelint-disable-next-line selector-max-specificity, selector-max-class -- 3.
 .Navigation--vertical .NavigationItem:has(> .NavigationAction--selected) > .NavigationAction[aria-expanded='true'] {
     color: theme.$action-color-state-default;
     background-color: theme.$action-background-color-state-open;
@@ -146,7 +139,7 @@
     background-color: theme.$horizontal-action-stripe-background-color-state-active;
 }
 
-// stylelint-disable selector-max-specificity, selector-max-class -- 2.
+// stylelint-disable selector-max-specificity, selector-max-class -- 1.
 .Navigation--horizontal .NavigationAction--box.NavigationAction--selected {
     @media (hover: hover) {
         &:hover::after {
