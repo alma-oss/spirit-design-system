@@ -191,6 +191,14 @@
       "require": "./dist/components/ActionGroup/index.cjs",
       "default": "./dist/components/ActionGroup/index.js"
     },
+    "./components/ActionText": {
+      "types": "./dist/components/ActionText/index.d.ts",
+      "development": "./src/components/ActionText/index.ts",
+      "production": "./dist/components/ActionText/index.js",
+      "import": "./dist/components/ActionText/index.js",
+      "require": "./dist/components/ActionText/index.cjs",
+      "default": "./dist/components/ActionText/index.js"
+    },
     "./components/Alert": {
       "types": "./dist/components/Alert/index.d.ts",
       "development": "./src/components/Alert/index.ts",
