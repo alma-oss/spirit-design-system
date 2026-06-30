@@ -1,16 +1,21 @@
 @use '@tokens' as tokens;
+@use '../../tools/units';
 
-$accordion-item-background-color-state-default: tokens.$background-interactive-state-default;
-$accordion-item-background-color-state-hover: tokens.$background-interactive-state-hover;
-$accordion-item-background-color-state-active: tokens.$background-interactive-state-active;
-$accordion-header-typography: tokens.$body-medium-regular;
-$accordion-header-typography-active: tokens.$body-medium-bold;
-$accordion-header-typography-color: tokens.$text-primary;
-$accordion-header-gap: tokens.$space-600;
-$accordion-header-padding-y: tokens.$space-900;
-$accordion-header-padding-x: tokens.$space-700;
-$accordion-border-radius: tokens.$radius-200;
-$accordion-divider-color: tokens.$border-basic;
-$accordion-divider-width: tokens.$border-width-100;
-$accordion-divider-style: solid;
-$accordion-content-padding-bottom: tokens.$space-700;
+$item-background-color-state-default: tokens.$background-interactive-state-default;
+$item-background-color-state-hover: tokens.$background-interactive-state-hover;
+$item-background-color-state-active: tokens.$background-interactive-state-active;
+$item-icon-size: units.px-to-rem(20px);
+
+$header-typography: tokens.$label-medium;
+$header-typography-color: tokens.$text-primary;
+$header-gap: tokens.$space-600;
+$header-padding-y: tokens.$space-900;
+$header-padding-x: tokens.$space-700;
+
+$border-radius: tokens.$radius-200;
+
+$divider-color: tokens.$border-basic;
+$divider-width: tokens.$border-width-100;
+$divider-style: solid;
+
+$content-padding-bottom: tokens.$space-700;
