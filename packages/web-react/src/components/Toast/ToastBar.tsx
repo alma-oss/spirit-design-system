@@ -52,7 +52,7 @@ const ToastBar = (props: SpiritToastBarProps) => {
               <div className={classProps.content}>{children}</div>
             </div>
             {isDismissible && onClose && (
-              <ControlButton isSymmetrical size="large" onClick={onClose} aria-expanded={isOpen} aria-controls={id}>
+              <ControlButton isSymmetrical onClick={onClose} aria-expanded={isOpen} aria-controls={id}>
                 <Icon name="close" />
                 <VisuallyHidden>{resolvedCloseLabel}</VisuallyHidden>
               </ControlButton>
