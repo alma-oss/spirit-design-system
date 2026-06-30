@@ -1,10 +1,13 @@
 @use 'sass:map';
-@use 'theme';
+@use '@tokens' as tokens;
 @use '../../tools/breakpoint';
 @use '../../tools/svg';
 @use '../../tools/typography';
+@use 'theme';
 
 .Breadcrumbs {
+    --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$icon-size};
+
     @include typography.generate(theme.$typography);
 
     width: 100%;
