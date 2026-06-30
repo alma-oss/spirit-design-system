@@ -2,11 +2,13 @@
 @use 'sass:map';
 @use '@tokens' as tokens;
 @use '../../settings/dictionaries';
+@use '../../tools/units';
 
-$typography: tokens.$body-xsmall-bold;
+$typography: tokens.$label-xsmall;
 $padding-x: tokens.$space-300;
 $padding-y: tokens.$space-0;
 $border-radius: tokens.$radius-400;
+$size: units.px-to-rem(20px);
 
 $color-dictionary: (
     emotion: dictionaries.$emotion-colors,
