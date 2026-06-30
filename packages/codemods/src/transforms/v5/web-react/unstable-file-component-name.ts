@@ -1,5 +1,5 @@
 import { API, FileInfo, Identifier } from 'jscodeshift';
-import { removeParentheses } from '../../../helpers';
+import { removeParentheses, getImportSources } from '../../../helpers';
 import { renameComponent } from '../../../helpers/renameComponent';
 
 const IDENTIFIER_RENAMES: Record<string, string> = {
@@ -17,12 +17,13 @@ const IDENTIFIER_RENAMES: Record<string, string> = {
   UnstableFileProps: 'FileProps',
 };
 
-const transform = (fileInfo: FileInfo, api: API) => {
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
+  const importSources = getImportSources(options);
 
-  renameComponent(j, root, 'UNSTABLE_FileImagePreview', 'FileImagePreview');
-  renameComponent(j, root, 'UNSTABLE_File', 'File');
+  renameComponent(j, root, 'UNSTABLE_FileImagePreview', 'FileImagePreview', importSources);
+  renameComponent(j, root, 'UNSTABLE_File', 'File', importSources);
 
   root.find(j.Identifier).forEach((path) => {
     const newName = IDENTIFIER_RENAMES[path.node.name];
