@@ -17,6 +17,7 @@
 // 7. The button pseudo element (2) is stacked behind the button text.
 // 8. Decorative border after the last item in the open state.
 
+@use '@tokens' as tokens;
 @use 'sass:map';
 @use 'theme';
 @use '../../tools/typography';
@@ -29,22 +30,22 @@
 .Accordion__itemHeader {
     position: relative; // 2.
     display: flex;
-    gap: theme.$accordion-header-gap;
+    gap: theme.$header-gap;
     align-items: flex-start;
     justify-content: space-between;
     width: 100%;
-    padding: theme.$accordion-header-padding-y theme.$accordion-header-padding-x;
+    padding: theme.$header-padding-y theme.$header-padding-x;
     margin-bottom: 0;
-    border-radius: theme.$accordion-border-radius;
+    border-radius: theme.$border-radius;
 
     // 1
     &::before {
         content: '';
         position: absolute;
-        inset-inline: theme.$accordion-header-padding-x;
+        inset-inline: theme.$header-padding-x;
         top: 0;
         z-index: 1;
-        border-bottom: theme.$accordion-divider-width theme.$accordion-divider-style theme.$accordion-divider-color;
+        border-bottom: theme.$divider-width theme.$divider-style theme.$divider-color;
     }
 
     @media (hover: hover) {
@@ -55,14 +56,18 @@
     }
 }
 
+.Accordion__itemIcon {
+    --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$item-icon-size};
+}
+
 .Accordion__itemToggle {
     @include reset.button();
-    @include typography.generate(theme.$accordion-header-typography);
+    @include typography.generate(theme.$header-typography);
 
     z-index: 0; // 7.
     flex: initial;
     text-align: left;
-    color: theme.$accordion-header-typography-color;
+    color: theme.$header-typography-color;
     -webkit-tap-highlight-color: transparent;
 
     // 2.
@@ -71,12 +76,8 @@
         position: absolute;
         inset: 0;
         z-index: -1; // 7.
-        border-radius: theme.$accordion-border-radius;
-        background-color: theme.$accordion-item-background-color-state-default; // 3.a
-    }
-
-    &[aria-expanded='true'] {
-        @include typography.generate(theme.$accordion-header-typography-active);
+        border-radius: theme.$border-radius;
+        background-color: theme.$item-background-color-state-default; // 3.a
     }
 
     // stylelint-disable-next-line selector-max-class -- We want to control the icon based on header state.
@@ -89,7 +90,7 @@
     // 3.b
     // stylelint-disable-next-line selector-max-specificity -- High specificity to target the background pseudo element (2).
     .Accordion__itemHeader:hover .Accordion__itemToggle:first-of-type::before {
-        background-color: theme.$accordion-item-background-color-state-hover;
+        background-color: theme.$item-background-color-state-hover;
     }
 }
 
@@ -97,14 +98,14 @@
     // 3.c
     // stylelint-disable-next-line selector-max-specificity -- High specificity to override the hover state selector 3.b.
     .Accordion__itemHeader .Accordion__itemToggle:active:first-of-type::before {
-        background-color: theme.$accordion-item-background-color-state-active;
+        background-color: theme.$item-background-color-state-active;
     }
 }
 
 .Accordion__itemSide,
 .Accordion__itemSlot {
     display: flex;
-    gap: theme.$accordion-header-gap;
+    gap: theme.$header-gap;
     align-items: center;
     justify-content: space-between;
 }
@@ -119,7 +120,7 @@
 }
 
 .Accordion__content {
-    padding-bottom: theme.$accordion-content-padding-bottom;
+    padding-bottom: theme.$content-padding-bottom;
 }
 
 // 8.
@@ -129,8 +130,8 @@
     &::after {
         content: '';
         position: absolute;
-        inset-inline: theme.$accordion-header-padding-x;
+        inset-inline: theme.$header-padding-x;
         top: 100%;
-        border-bottom: theme.$accordion-divider-width theme.$accordion-divider-style theme.$accordion-divider-color;
+        border-bottom: theme.$divider-width theme.$divider-style theme.$divider-color;
     }
 }
