@@ -7,7 +7,7 @@ import { replaceTranslationParams } from '../../translations';
 import { ControlButton } from '../ControlButton';
 import { Icon } from '../Icon';
 import { Tag } from '../Tag';
-import { PICKER_NESTED_SIZE_MAP } from './constants';
+import { PICKER_NESTED_CONTROL_BUTTON_SIZE_MAP, PICKER_NESTED_SIZE_MAP } from './constants';
 import { usePickerContext } from './PickerContext';
 import type { SpiritUnstablePickerTagProps } from './types';
 import { getNodeText } from './utils';
@@ -62,7 +62,7 @@ const UNSTABLE_PickerTag = ({
           isDisabled={isDisabled}
           isSymmetrical
           onClick={onRemove}
-          size={PICKER_NESTED_SIZE_MAP[size]}
+          size={PICKER_NESTED_CONTROL_BUTTON_SIZE_MAP[size]}
           {...(tagKeyboardProps && { tabIndex: tagKeyboardProps.removeButtonTabIndex })}
         >
           <Icon name="close" />

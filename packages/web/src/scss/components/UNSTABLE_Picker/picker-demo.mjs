@@ -11,7 +11,7 @@ const ATTRIBUTE_DATA_TARGET = 'data-spirit-target';
 const ATTRIBUTE_AGGREGATE_TAGS = 'data-spirit-picker-aggregate-tags';
 
 const CLASSNAME_TAG_SIZE_DEFAULT = 'Tag--small';
-const CLASSNAME_CONTROL_BUTTON_SIZE_DEFAULT = 'ControlButton--small';
+const CLASSNAME_CONTROL_BUTTON_SIZE_DEFAULT = 'ControlButton--xsmall';
 
 const SELECTOR_PICKER = '[data-spirit-toggle="picker"]';
 const SELECTOR_DROPDOWN_TRIGGER = '[data-spirit-toggle="dropdown"]';
@@ -30,8 +30,8 @@ const EVENT_HIDDEN = 'hidden.dropdown';
 
 const TAG_SIZES = {
   xsmall: { tagSizeClass: 'Tag--xsmall', controlButtonSizeClass: 'ControlButton--xsmall' },
-  small: { tagSizeClass: 'Tag--small', controlButtonSizeClass: 'ControlButton--small' },
-  medium: { tagSizeClass: 'Tag--medium', controlButtonSizeClass: 'ControlButton--medium' },
+  small: { tagSizeClass: 'Tag--small', controlButtonSizeClass: 'ControlButton--xsmall' },
+  medium: { tagSizeClass: 'Tag--medium', controlButtonSizeClass: 'ControlButton--xsmall' },
 };
 
 function createSelectionLabel(text) {

@@ -20,13 +20,13 @@ const TagDisabled = () => (
     </Tag>
     <Tag elementType="div" isDisabled>
       <span>Disabled with ControlButton</span>
-      <ControlButton size="small" isSymmetrical isDisabled aria-label="Remove Disabled">
+      <ControlButton size="xsmall" isSymmetrical isDisabled aria-label="Remove Disabled">
         <Icon name="close" />
       </ControlButton>
     </Tag>
     <Tag elementType="div" isSubtle isDisabled>
       <span>Disabled subtle with ControlButton</span>
-      <ControlButton size="small" isSymmetrical isDisabled aria-label="Remove Disabled subtle">
+      <ControlButton size="xsmall" isSymmetrical isDisabled aria-label="Remove Disabled subtle">
         <Icon name="close" />
       </ControlButton>
     </Tag>

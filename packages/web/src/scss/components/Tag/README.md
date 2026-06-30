@@ -52,22 +52,22 @@ Tag comes in five available sizes: xsmall, small, medium, large, and xlarge.
 
 ## With ControlButton
 
-### ControlButton Size Matching
+### ControlButton Size Mapping
 
 | Tag Size | ControlButton Size |
 | -------- | ------------------ |
 | xsmall   | xsmall             |
-| small    | small              |
-| medium   | small              |
-| large    | medium             |
-| xlarge   | medium             |
+| small    | xsmall             |
+| medium   | xsmall             |
+| large    | small              |
+| xlarge   | small              |
 
 ```html
 <div class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic">
   <span>Tag label</span>
   <button
     type="button"
-    class="ControlButton ControlButton--small ControlButton--symmetrical"
+    class="ControlButton ControlButton--xsmall ControlButton--symmetrical"
     aria-label="Remove Tag label"
   >
     <svg class="Icon" width="16" height="16" aria-hidden="true">
@@ -109,7 +109,7 @@ Disabled Tag with `ControlButton`:
   <span>Disabled tag</span>
   <button
     type="button"
-    class="ControlButton ControlButton--small ControlButton--symmetrical disabled"
+    class="ControlButton ControlButton--xsmall ControlButton--symmetrical disabled"
     aria-label="Remove Disabled tag"
     disabled
   >
