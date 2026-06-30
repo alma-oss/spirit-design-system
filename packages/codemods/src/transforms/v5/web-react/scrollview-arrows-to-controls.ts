@@ -7,10 +7,8 @@ import {
   JSXOpeningElement,
   JSXSpreadAttribute,
 } from 'jscodeshift';
-import { removeParentheses } from '../../../helpers';
+import { removeParentheses, createImportSourceMatcher, getImportSources } from '../../../helpers';
 import { renameComponent } from '../../../helpers/renameComponent';
-
-const SPIRIT_WEB_REACT_MODULE = /^@alma-oss\/spirit-web-react(\/.*)?$/;
 
 const IDENTIFIER_RENAMES: Record<string, string> = {
   useScrollViewArrows: 'useScrollViewControls',
@@ -68,15 +66,17 @@ const renameJsxAttributes = (attributes: (JSXAttribute | JSXSpreadAttribute)[] |
   });
 };
 
-const transform = (fileInfo: FileInfo, api: API) => {
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
+  const importSources = getImportSources(options);
+  const isSpiritImport = createImportSourceMatcher(importSources);
   const namedImports = new Set<string>();
   const namespaceImports = new Set<string>();
 
   const hasSpiritWebReactImport = root.find(j.ImportDeclaration, {
     source: {
-      value: (value: string) => SPIRIT_WEB_REACT_MODULE.test(value),
+      value: (value: string) => isSpiritImport(value),
     },
   });
 
@@ -172,7 +172,7 @@ const transform = (fileInfo: FileInfo, api: API) => {
     });
   }
 
-  renameComponent(j, root, 'ScrollViewArrows', 'ScrollViewControls');
+  renameComponent(j, root, 'ScrollViewArrows', 'ScrollViewControls', importSources);
 
   if (namedImports.has('ScrollViewArrows')) {
     namedImports.delete('ScrollViewArrows');

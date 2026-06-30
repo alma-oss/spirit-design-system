@@ -1,8 +1,6 @@
 import { API, FileInfo, Identifier } from 'jscodeshift';
-import { removeParentheses } from '../../../helpers';
+import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
 import { renameComponent } from '../../../helpers/renameComponent';
-
-const SPIRIT_WEB_REACT_MODULE = /^@alma-oss\/spirit-web-react(\/.*)?$/;
 
 const IDENTIFIER_RENAMES: Record<string, string> = {
   UNSTABLE_Header: 'Header',
@@ -11,18 +9,20 @@ const IDENTIFIER_RENAMES: Record<string, string> = {
   useUnstableHeaderStyleProps: 'useHeaderStyleProps',
 };
 
-const transform = (fileInfo: FileInfo, api: API) => {
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
+  const importSources = getImportSources(options);
+  const isSpiritImport = createImportSourceMatcher(importSources);
 
   // Rename JSX component tags and their import specifiers
-  renameComponent(j, root, 'UNSTABLE_Header', 'Header');
-  renameComponent(j, root, 'UNSTABLE_HeaderLogo', 'HeaderLogo');
+  renameComponent(j, root, 'UNSTABLE_Header', 'Header', importSources);
+  renameComponent(j, root, 'UNSTABLE_HeaderLogo', 'HeaderLogo', importSources);
 
   // Rename TypeScript type identifiers and hook imports
   const importStatements = root.find(j.ImportDeclaration, {
     source: {
-      value: (value: string) => SPIRIT_WEB_REACT_MODULE.test(value),
+      value: (value: string) => isSpiritImport(value),
     },
   });
 
