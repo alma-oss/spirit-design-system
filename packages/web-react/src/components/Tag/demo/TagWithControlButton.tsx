@@ -13,10 +13,10 @@ const colors = [TagColorsExtended.NEUTRAL, ...emotionColors, TagColorsExtended.S
 
 const controlButtonSizeMap: Record<string, SizeExtendedDictionaryType> = {
   [SizesExtended.XSMALL]: SizesExtended.XSMALL,
-  [SizesExtended.SMALL]: SizesExtended.SMALL,
-  [SizesExtended.MEDIUM]: SizesExtended.SMALL,
-  [SizesExtended.LARGE]: SizesExtended.MEDIUM,
-  [SizesExtended.XLARGE]: SizesExtended.MEDIUM,
+  [SizesExtended.SMALL]: SizesExtended.XSMALL,
+  [SizesExtended.MEDIUM]: SizesExtended.XSMALL,
+  [SizesExtended.LARGE]: SizesExtended.SMALL,
+  [SizesExtended.XLARGE]: SizesExtended.SMALL,
 };
 
 const TagWithControlButton = () => (
