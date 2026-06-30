@@ -6,9 +6,11 @@
 .Pill {
     @include typography.generate(theme.$typography);
 
-    display: inline-block;
-    min-width: 1rem;
-    height: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: theme.$size;
+    height: theme.$size;
     padding: theme.$padding-y theme.$padding-x;
     text-align: center;
     color: color-scheme.color();
