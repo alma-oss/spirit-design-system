@@ -9,6 +9,6 @@ $link-color-state-hover: tokens.$link-secondary-state-hover;
 $link-color-state-active: tokens.$link-secondary-state-active;
 $link-color-state-selected: $link-color-state-active;
 $spacing-fallback: tokens.$space-900;
-$item-typography: tokens.$body-medium-semibold;
+$item-typography: tokens.$label-medium;
 $item-selected-underline-height: units.px-to-rem(2px);
 $item-selected-underline-border-radius: tokens.$radius-100;
