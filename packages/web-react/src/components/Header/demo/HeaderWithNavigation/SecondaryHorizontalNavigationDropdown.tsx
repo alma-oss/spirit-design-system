@@ -3,7 +3,6 @@ import { type PolymorphicRef, type SpiritNavigationAvatarProps } from '../../../
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../../../Dropdown';
 import { Icon } from '../../../Icon';
 import { NavigationAvatar } from '../../../Navigation';
-import { Text } from '../../../Text';
 import { DropdownPopoverContent } from '../HeaderWithNavigationAndNestedItems/MainHorizontalNavigationDropdown';
 
 const _NavigationAvatarAsDropdownTrigger = (
@@ -41,10 +40,8 @@ const SecondaryHorizontalNavigationDropdown = ({
         aria-label="Profile of Jiří Bárta"
         isSquare={isSquare}
       >
-        <Text elementType="span" size="small" emphasis="semibold">
-          My Account
-        </Text>
-        <Icon name={`chevron-${isAvatarDropdownOpen ? 'up' : 'down'}`} boxSize={20} />
+        My Account
+        <Icon name={`chevron-${isAvatarDropdownOpen ? 'up' : 'down'}`} />
       </DropdownTrigger>
       <DropdownPopover>
         <DropdownPopoverContent />

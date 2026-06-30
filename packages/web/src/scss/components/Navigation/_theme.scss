@@ -26,11 +26,9 @@ $action-color-state-disabled: tokens.$disabled-content;
 $action-color-state-hover: tokens.$component-navigation-item-state-hover;
 $action-color-state-selected: tokens.$component-navigation-item-state-selected;
 
-$action-gap: tokens.$space-700;
+$action-gap: tokens.$space-500;
 
 $action-shape-variant-dictionary: dictionaries.$shape-variants;
-
-$action-slot-icon-size: units.px-to-rem(20px);
 
 $action-stripe-background-color-selected-state-active: tokens.$component-navigation-item-stripe-state-selected;
 $action-stripe-background-color-selected-state-default: tokens.$component-navigation-item-stripe-state-selected;
@@ -40,7 +38,7 @@ $action-stripe-background-color-state-default: transparent;
 $horizontal-action-stripe-background-color-state-active: tokens.$component-navigation-item-stripe-state-unselected;
 $horizontal-action-stripe-background-color-state-hover: tokens.$component-navigation-item-stripe-state-unselected;
 $horizontal-action-stripe-size: units.px-to-rem(2px);
-$horizontal-action-typography: tokens.$body-small-semibold;
+$horizontal-action-typography: tokens.$action-small;
 $horizontal-action-shape-variant-config: (
     box: (
         padding-x: tokens.$space-700,
@@ -53,9 +51,9 @@ $horizontal-action-shape-variant-config: (
         border-radius: tokens.$radius-full,
     ),
 );
+$horizontal-action-slot-icon-size: units.px-to-rem(16px);
 
-$vertical-action-typography-nested: tokens.$body-medium-regular;
-$vertical-action-typography: tokens.$body-medium-semibold;
+$vertical-action-typography: tokens.$action-medium;
 $vertical-action-shape-variant-config: (
     box: (
         padding-x: tokens.$space-700,
@@ -68,11 +66,12 @@ $vertical-action-shape-variant-config: (
         border-radius: tokens.$radius-full,
     ),
 );
+$vertical-action-slot-icon-size: units.px-to-rem(20px);
 
 $avatar-gap: tokens.$space-500;
-$avatar-padding-y: tokens.$space-400;
-$avatar-padding-end: tokens.$space-600;
-$avatar-padding-start: tokens.$space-500;
+$avatar-padding-y: tokens.$space-300;
+$avatar-padding-end: tokens.$space-700;
+$avatar-padding-start: tokens.$space-300;
 
 $avatar-color-state-default: tokens.$component-navigation-item-state-default;
 $avatar-color-state-hover: tokens.$component-navigation-item-state-hover;
@@ -86,3 +85,4 @@ $avatar-background-color-state-default: tokens.$component-navigation-item-backgr
 $avatar-background-color-state-hover: tokens.$component-navigation-item-background-state-hover;
 $avatar-background-color-state-active: tokens.$component-navigation-item-background-state-active;
 $avatar-background-color-state-selected: tokens.$component-navigation-item-background-state-selected;
+$avatar-typography: tokens.$action-small;
