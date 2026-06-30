@@ -29,6 +29,7 @@ Other optional arguments include:
 
 - `-v`/`--version` - Displays current version
 - `-h`/`--help` - Displays this message
+- `-s`/`--import-sources` - Additional import sources to match (comma-separated). By default, codemods match `@alma-oss/spirit-web-react`. Use this flag for wrapper re-export packages.
 - `-e`/`--extensions` - Extensions of the transformed files, default: `ts,tsx,js,jsx`
 - `--parser` - Parser to use (babel, ts, tsx, flow), default: `tsx`
 - `--ignore` - Ignore files or directories, default: `**/node_modules/**`
@@ -37,6 +38,12 @@ For example, this could be the command you will run:
 
 ```shell
 npx @alma-oss/spirit-codemods -p ./src -t v2/web-react/fileuploader-prop-names -e js,jsx --parser babel
+```
+
+When your app imports Spirit components through a wrapper package, pass `-s` with the wrapper import source:
+
+```shell
+npx @alma-oss/spirit-codemods -p ./src -s @almacareer/cyborg-design-system -t v5/web-react/checkbox-margin-y
 ```
 
 ## Available Scripts

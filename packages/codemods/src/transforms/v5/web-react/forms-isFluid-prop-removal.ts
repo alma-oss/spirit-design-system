@@ -1,7 +1,5 @@
 import { API, FileInfo, JSXAttribute, JSXMemberExpression, JSXOpeningElement, JSXSpreadAttribute } from 'jscodeshift';
-import { removeParentheses } from '../../../helpers';
-
-const SPIRIT_WEB_REACT_MODULE = /^@(alma-oss|lmc-eu)\/spirit-web-react(\/.*)?$/;
+import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
 
 const TARGET_COMPONENTS = new Set([
   'TextField',
@@ -48,16 +46,17 @@ const removeIsFluidAttribute = (attributes: (JSXAttribute | JSXSpreadAttribute)[
   });
 };
 
-const transform = (fileInfo: FileInfo, api: API) => {
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
+  const isSpiritImport = createImportSourceMatcher(getImportSources(options));
   const namedImports = new Set<string>();
   const namespaceImports = new Set<string>();
 
   root
     .find(j.ImportDeclaration, {
       source: {
-        value: (value: string) => SPIRIT_WEB_REACT_MODULE.test(value),
+        value: (value: string) => isSpiritImport(value),
       },
     })
     .forEach((path) => {
