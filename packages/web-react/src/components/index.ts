@@ -1,5 +1,6 @@
 export * from './Accordion';
 export * from './ActionGroup';
+export * from './ActionText';
 export * from './Alert';
 export * from './Avatar';
 export * from './Box';
