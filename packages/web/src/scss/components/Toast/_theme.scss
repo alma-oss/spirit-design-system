@@ -25,7 +25,7 @@ $z-index: 1000;
 $queue-collapse-after: 3;
 $queue-gap: tokens.$space-700;
 
-$bar-typography: tokens.$body-small-bold;
+$bar-typography: tokens.$caption;
 $bar-max-width: units.px-to-rem(480px);
 $bar-max-height: units.px-to-rem(
     200px
@@ -38,6 +38,7 @@ $bar-content-gap: tokens.$space-600;
 $bar-message-gap-x: tokens.$space-900;
 $bar-message-gap-y: tokens.$space-600;
 $bar-action-margin-inline-end: tokens.$space-500;
+$bar-container-icon-size: units.px-to-rem(20px);
 
 // ⚠️ Keep the slowest transition in sync with `js/Toast.ts`.
 $bar-transition-delay-margin: transitions.$duration-300;
