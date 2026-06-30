@@ -1,7 +1,5 @@
 import { API, FileInfo, Identifier, JSXAttribute, JSXElement, JSXIdentifier, JSXSpreadAttribute } from 'jscodeshift';
-import { removeParentheses } from '../../../helpers';
-
-const SPIRIT_WEB_REACT_MODULE = /^@alma-oss\/spirit-web-react(\/.*)?$/;
+import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
 
 // DrawerCloseButton took its wiring from the drawer context, which is unavailable at the call site.
 // The codemod scaffolds the props with `TODO_`-prefixed placeholder identifiers so the build fails
@@ -23,99 +21,115 @@ const hasAttr = (attributes: (JSXAttribute | JSXSpreadAttribute)[], name: string
     (attr) => attr.type === 'JSXAttribute' && attr.name.type === 'JSXIdentifier' && attr.name.name === name,
   );
 
-const transform = (fileInfo: FileInfo, api: API) => {
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
+  const isSpiritImport = createImportSourceMatcher(getImportSources(options));
 
   const spiritImports = root.find(j.ImportDeclaration, {
-    source: { value: (value: string) => SPIRIT_WEB_REACT_MODULE.test(value) },
+    source: { value: (value: string) => isSpiritImport(value) },
   });
 
   if (spiritImports.length === 0) {
     return fileInfo.source;
   }
 
-  const drawerPanelImport = spiritImports.find(j.ImportSpecifier, {
-    imported: { type: 'Identifier', name: 'DrawerPanel' },
+  const drawerPanelLocalNames = new Set<string>();
+  const drawerCloseButtonLocalNames = new Set<string>();
+
+  spiritImports.forEach((importPath) => {
+    importPath.node.specifiers?.forEach((specifier) => {
+      if (specifier.type === 'ImportSpecifier' && specifier.imported.type === 'Identifier') {
+        const importedName = specifier.imported.name;
+        const localName = specifier.local?.name ?? importedName;
+
+        if (importedName === 'DrawerPanel') {
+          drawerPanelLocalNames.add(localName);
+        }
+
+        if (importedName === 'DrawerCloseButton') {
+          drawerCloseButtonLocalNames.add(localName);
+        }
+      }
+    });
   });
 
-  if (drawerPanelImport.length === 0) {
+  if (drawerPanelLocalNames.size === 0) {
     return fileInfo.source;
   }
 
   let modified = false;
   let hadDrawerCloseButton = false;
 
-  root
-    .find(j.JSXElement, {
-      openingElement: { name: { type: 'JSXIdentifier', name: 'DrawerPanel' } },
-    })
-    .forEach((path) => {
-      const { openingElement } = path.node;
-      const attrs = (openingElement.attributes ?? []) as (JSXAttribute | JSXSpreadAttribute)[];
+  root.find(j.JSXElement).forEach((path) => {
+    const { openingElement } = path.node;
 
-      const closeButtonAttr = findAttr(attrs, 'closeButton');
-      if (!closeButtonAttr) return;
+    if (openingElement.name.type !== 'JSXIdentifier' || !drawerPanelLocalNames.has(openingElement.name.name)) {
+      return;
+    }
 
-      openingElement.attributes = attrs.filter(
-        (attr) =>
-          !(attr.type === 'JSXAttribute' && attr.name.type === 'JSXIdentifier' && attr.name.name === 'closeButton'),
-      );
+    const attrs = (openingElement.attributes ?? []) as (JSXAttribute | JSXSpreadAttribute)[];
 
-      const closeButtonValue =
-        closeButtonAttr.value?.type === 'JSXExpressionContainer' &&
-        closeButtonAttr.value.expression.type !== 'JSXEmptyExpression'
-          ? closeButtonAttr.value.expression
-          : null;
+    const closeButtonAttr = findAttr(attrs, 'closeButton');
+    if (!closeButtonAttr) return;
 
-      // If the closeButton value is a DrawerCloseButton, replace it with a scaffolded CloseButton.
-      if (
-        closeButtonValue?.type === 'JSXElement' &&
-        closeButtonValue.openingElement.name.type === 'JSXIdentifier' &&
-        closeButtonValue.openingElement.name.name === 'DrawerCloseButton'
-      ) {
-        const cbAttrs = (closeButtonValue.openingElement.attributes ?? []) as (JSXAttribute | JSXSpreadAttribute)[];
+    openingElement.attributes = attrs.filter(
+      (attr) =>
+        !(attr.type === 'JSXAttribute' && attr.name.type === 'JSXIdentifier' && attr.name.name === 'closeButton'),
+    );
 
-        if (!hasAttr(cbAttrs, 'size')) {
-          cbAttrs.unshift(j.jsxAttribute(j.jsxIdentifier('size'), j.stringLiteral('large')));
-        }
+    const closeButtonValue =
+      closeButtonAttr.value?.type === 'JSXExpressionContainer' &&
+      closeButtonAttr.value.expression.type !== 'JSXEmptyExpression'
+        ? closeButtonAttr.value.expression
+        : null;
 
-        DRAWER_TODO_ATTRIBUTES.forEach(([attrName, placeholder]) => {
-          if (!hasAttr(cbAttrs, attrName)) {
-            cbAttrs.push(
-              j.jsxAttribute(j.jsxIdentifier(attrName), j.jsxExpressionContainer(j.identifier(placeholder))),
-            );
-          }
-        });
+    // If the closeButton value is a DrawerCloseButton, replace it with a scaffolded CloseButton.
+    if (
+      closeButtonValue?.type === 'JSXElement' &&
+      closeButtonValue.openingElement.name.type === 'JSXIdentifier' &&
+      drawerCloseButtonLocalNames.has(closeButtonValue.openingElement.name.name)
+    ) {
+      const cbAttrs = (closeButtonValue.openingElement.attributes ?? []) as (JSXAttribute | JSXSpreadAttribute)[];
 
-        closeButtonValue.openingElement.attributes = cbAttrs;
-        (closeButtonValue.openingElement.name as JSXIdentifier).name = 'CloseButton';
-        if (closeButtonValue.closingElement) {
-          (closeButtonValue.closingElement.name as JSXIdentifier).name = 'CloseButton';
-        }
-
-        hadDrawerCloseButton = true;
+      if (!hasAttr(cbAttrs, 'size')) {
+        cbAttrs.unshift(j.jsxAttribute(j.jsxIdentifier('size'), j.stringLiteral('large')));
       }
 
-      const headerChildren: NonNullable<JSXElement['children']> = closeButtonValue
-        ? [closeButtonValue as NonNullable<JSXElement['children']>[number]]
-        : [];
+      DRAWER_TODO_ATTRIBUTES.forEach(([attrName, placeholder]) => {
+        if (!hasAttr(cbAttrs, attrName)) {
+          cbAttrs.push(j.jsxAttribute(j.jsxIdentifier(attrName), j.jsxExpressionContainer(j.identifier(placeholder))));
+        }
+      });
 
-      const headerElement = j.jsxElement(
-        j.jsxOpeningElement(j.jsxIdentifier('DrawerPanelHeader'), []),
-        j.jsxClosingElement(j.jsxIdentifier('DrawerPanelHeader')),
-        headerChildren,
-      );
+      closeButtonValue.openingElement.attributes = cbAttrs;
+      (closeButtonValue.openingElement.name as JSXIdentifier).name = 'CloseButton';
+      if (closeButtonValue.closingElement) {
+        (closeButtonValue.closingElement.name as JSXIdentifier).name = 'CloseButton';
+      }
 
-      const bodyElement = j.jsxElement(
-        j.jsxOpeningElement(j.jsxIdentifier('DrawerPanelBody'), []),
-        j.jsxClosingElement(j.jsxIdentifier('DrawerPanelBody')),
-        path.node.children ?? [],
-      );
+      hadDrawerCloseButton = true;
+    }
 
-      path.node.children = [headerElement, bodyElement];
-      modified = true;
-    });
+    const headerChildren: NonNullable<JSXElement['children']> = closeButtonValue
+      ? [closeButtonValue as NonNullable<JSXElement['children']>[number]]
+      : [];
+
+    const headerElement = j.jsxElement(
+      j.jsxOpeningElement(j.jsxIdentifier('DrawerPanelHeader'), []),
+      j.jsxClosingElement(j.jsxIdentifier('DrawerPanelHeader')),
+      headerChildren,
+    );
+
+    const bodyElement = j.jsxElement(
+      j.jsxOpeningElement(j.jsxIdentifier('DrawerPanelBody'), []),
+      j.jsxClosingElement(j.jsxIdentifier('DrawerPanelBody')),
+      path.node.children ?? [],
+    );
+
+    path.node.children = [headerElement, bodyElement];
+    modified = true;
+  });
 
   if (!modified) {
     return fileInfo.source;

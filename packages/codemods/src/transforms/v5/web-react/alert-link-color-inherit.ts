@@ -1,16 +1,15 @@
 import { API, FileInfo, JSXOpeningElement } from 'jscodeshift';
-import { removeParentheses } from '../../../helpers';
-
-const SPIRIT_WEB_REACT_MODULE = /^@alma-oss\/spirit-web-react(\/.*)?$/;
+import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
 
 const hasColorAttribute = (openingElement: JSXOpeningElement): boolean =>
   (openingElement.attributes ?? []).some(
     (attr) => attr.type === 'JSXAttribute' && attr.name.type === 'JSXIdentifier' && attr.name.name === 'color',
   );
 
-const transform = (fileInfo: FileInfo, api: API) => {
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
+  const isSpiritImport = createImportSourceMatcher(getImportSources(options));
   let hasChanges = false;
 
   const alertLocalNames = new Set<string>();
@@ -19,7 +18,7 @@ const transform = (fileInfo: FileInfo, api: API) => {
   root
     .find(j.ImportDeclaration, {
       source: {
-        value: (value: string) => SPIRIT_WEB_REACT_MODULE.test(value),
+        value: (value: string) => isSpiritImport(value),
       },
     })
     .forEach((path) => {

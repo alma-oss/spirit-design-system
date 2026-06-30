@@ -40,10 +40,16 @@ For example, this could be the command you will run:
 npx @alma-oss/spirit-codemods -p ./src -t v2/web-react/fileuploader-prop-names -e js,jsx --parser babel
 ```
 
-When your app imports Spirit components through a wrapper package, pass `-s` with the wrapper import source:
+When your app imports Spirit components through a wrapper package, pass `-s` with the wrapper import source. Quote the value in zsh/bash so `@` is not mishandled:
 
 ```shell
-npx @alma-oss/spirit-codemods -p ./src -s @almacareer/cyborg-design-system -t v5/web-react/checkbox-margin-y
+npx @alma-oss/spirit-codemods -p ./src -s "@org/design-system" -t v5/web-react/flex-direction-values
+```
+
+Equivalent forms:
+
+```shell
+npx @alma-oss/spirit-codemods -p ./src --import-sources=@org/design-system -t v5/web-react/flex-direction-values
 ```
 
 ## Available Scripts

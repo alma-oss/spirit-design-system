@@ -19,6 +19,7 @@ Links that already have any `color` prop are left untouched.
 
 ```sh
 npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/alert-link-color-inherit
+npx @alma-oss/spirit-codemods -p <path> -s "@org/design-system" -t v5/web-react/alert-link-color-inherit
 ```
 
 #### Example
@@ -56,6 +57,7 @@ It does not change `hasValidationIcon` on form field components such as `TextFie
 
 ```sh
 npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/validation-state-icon-prop
+npx @alma-oss/spirit-codemods -p <path> -s "@org/design-system" -t v5/web-react/validation-state-icon-prop
 ```
 
 #### Example
@@ -68,11 +70,13 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/validation-state-icon-pr
 ### `v5/web-react/flex-direction-values` - Replace Flex Direction Prop Values `row` with `horizontal` and `column` with `vertical`
 
 This codemod updates `direction` values of `Flex` component by replacing `row` to `horizontal` and `column` to `vertical`.
+Only updates `Flex` imported from `@alma-oss/spirit-web-react` or additional `-s` import sources. Files with no matching import or no `direction` changes are left unchanged — including plain `.ts` files without JSX.
 
 #### Usage
 
 ```sh
 npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/flex-direction-values
+npx @alma-oss/spirit-codemods -p <path> -s "@org/design-system" -t v5/web-react/flex-direction-values
 ```
 
 #### Example
@@ -388,6 +392,7 @@ The component-specific `DrawerCloseButton`, `ModalCloseButton`, and `TooltipClos
 
 ```sh
 npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/close-buttons-to-close-button
+npx @alma-oss/spirit-codemods -p <path> -s "@org/design-system" -t v5/web-react/close-buttons-to-close-button
 ```
 
 #### Example

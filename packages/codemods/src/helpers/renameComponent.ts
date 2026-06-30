@@ -22,8 +22,9 @@ export const renameComponent = (
   componentName: string,
   newComponentName: string,
   importSources: string[] = getImportSources(),
-) => {
+): boolean => {
   const isSpiritImport = createImportSourceMatcher(importSources);
+  let hasChanges = false;
 
   const importStatements = root.find(j.ImportDeclaration, {
     source: {
@@ -42,6 +43,8 @@ export const renameComponent = (
 
     // Check if 'componentName' specifier is present
     if (componentSpecifier.length > 0) {
+      hasChanges = true;
+
       // Find opening tags for 'componentName' components
       root
         .find<JSXOpeningElement>(j.JSXOpeningElement, {
@@ -86,4 +89,6 @@ export const renameComponent = (
       });
     }
   }
+
+  return hasChanges;
 };
