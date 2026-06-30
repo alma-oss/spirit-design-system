@@ -1,5 +1,5 @@
 import { API, FileInfo, Identifier } from 'jscodeshift';
-import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
+import { createImportSourceMatcher, finishTransform, getImportSources, getOwnRecordValue } from '../../../helpers';
 import { renameComponent } from '../../../helpers/renameComponent';
 
 const IDENTIFIER_RENAMES: Record<string, string> = {
@@ -14,31 +14,45 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
   const root = j(fileInfo.source);
   const importSources = getImportSources(options);
   const isSpiritImport = createImportSourceMatcher(importSources);
+  let hasChanges = false;
 
-  // Rename JSX component tags and their import specifiers
-  renameComponent(j, root, 'UNSTABLE_Header', 'Header', importSources);
-  renameComponent(j, root, 'UNSTABLE_HeaderLogo', 'HeaderLogo', importSources);
+  if (renameComponent(j, root, 'UNSTABLE_Header', 'Header', importSources)) {
+    hasChanges = true;
+  }
 
-  // Rename TypeScript type identifiers and hook imports
+  if (renameComponent(j, root, 'UNSTABLE_HeaderLogo', 'HeaderLogo', importSources)) {
+    hasChanges = true;
+  }
+
   const importStatements = root.find(j.ImportDeclaration, {
     source: {
       value: (value: string) => isSpiritImport(value),
     },
   });
 
+  if (importStatements.length === 0) {
+    return fileInfo.source;
+  }
+
   importStatements.forEach((importPath) => {
     importPath.node.specifiers?.forEach((specifier) => {
       if (
         specifier.type === 'ImportSpecifier' &&
         specifier.imported.type === 'Identifier' &&
-        IDENTIFIER_RENAMES[specifier.imported.name]
+        getOwnRecordValue(IDENTIFIER_RENAMES, specifier.imported.name)
       ) {
         const oldName = specifier.imported.name;
-        const newName = IDENTIFIER_RENAMES[oldName];
-        (specifier.imported as Identifier).name = newName;
-        // If the local alias matches the old name, update it too
-        if (specifier.local?.type === 'Identifier' && specifier.local.name === oldName) {
-          (specifier.local as Identifier).name = newName;
+        const newName = getOwnRecordValue(IDENTIFIER_RENAMES, oldName);
+
+        if (newName) {
+          (specifier.imported as Identifier).name = newName;
+
+          // If the local alias matches the old name, update it too
+          if (specifier.local?.type === 'Identifier' && specifier.local.name === oldName) {
+            (specifier.local as Identifier).name = newName;
+          }
+
+          hasChanges = true;
         }
       }
     });
@@ -48,13 +62,14 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
   root
     .find(j.Identifier, (node: Identifier) => Object.keys(IDENTIFIER_RENAMES).includes(node.name))
     .forEach((path) => {
-      const newName = IDENTIFIER_RENAMES[path.node.name];
+      const newName = getOwnRecordValue(IDENTIFIER_RENAMES, path.node.name);
       if (newName) {
         path.node.name = newName;
+        hasChanges = true;
       }
     });
 
-  return removeParentheses(root.toSource({ quote: 'single' }));
+  return finishTransform(fileInfo, root, hasChanges, { quote: 'single' });
 };
 
 export default transform;

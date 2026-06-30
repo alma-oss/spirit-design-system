@@ -5,17 +5,16 @@ const transform = (fileInfo: FileInfo, api: API) => {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
 
-  // The previous default size was `medium`, so an omitted `size` has to be remapped too
   const PREVIOUS_DEFAULT_SIZE = 'medium';
 
-  // Define the mapping from old size values to the remapped (one step larger) ones
   const sizeMap: { [key: string]: string } = {
     small: 'medium',
     medium: 'large',
     large: 'xlarge',
   };
 
-  // Find all ControlButton components
+  let hasChanges = false;
+
   root.find(j.JSXOpeningElement, { name: { type: 'JSXIdentifier', name: 'ControlButton' } }).forEach((elementPath) => {
     const { attributes } = elementPath.node;
 
@@ -27,13 +26,12 @@ const transform = (fileInfo: FileInfo, api: API) => {
       (attribute) => attribute.type === 'JSXAttribute' && attribute.name.name === 'size',
     );
 
-    // Without an explicit `size`, the previous default (`medium`) was applied. Add the remapped value
-    // unless a spread attribute might already provide `size`.
     if (!sizeAttribute) {
       const hasSpreadAttribute = attributes.some((attribute) => attribute.type === 'JSXSpreadAttribute');
 
       if (!hasSpreadAttribute) {
         attributes.push(j.jsxAttribute(j.jsxIdentifier('size'), j.stringLiteral(sizeMap[PREVIOUS_DEFAULT_SIZE])));
+        hasChanges = true;
       }
 
       return;
@@ -43,16 +41,13 @@ const transform = (fileInfo: FileInfo, api: API) => {
       return;
     }
 
-    // Handle string literal values
     if (sizeAttribute.value.type === 'StringLiteral') {
       const newValue = sizeMap[sizeAttribute.value.value];
       if (newValue) {
         sizeAttribute.value = j.stringLiteral(newValue);
+        hasChanges = true;
       }
-    }
-
-    // Handle responsive object values
-    else if (
+    } else if (
       sizeAttribute.value.type === 'JSXExpressionContainer' &&
       sizeAttribute.value.expression.type === 'ObjectExpression'
     ) {
@@ -66,23 +61,24 @@ const transform = (fileInfo: FileInfo, api: API) => {
         ) {
           const oldValue = property.value.value;
 
-          // Update the value if it matches a key in sizeMap
           if (oldValue in sizeMap) {
-            // Manually create a single-quoted Literal
             property.value = j.literal(sizeMap[oldValue]);
-            // We need single quotes in object values
             // @ts-expect-error extra is not defined on Literal
             property.value.extra = {
               raw: `'${sizeMap[oldValue]}'`,
               rawValue: sizeMap[oldValue],
             };
+            hasChanges = true;
           }
         }
       });
     }
   });
 
-  // Convert the transformed code to source with double quotes for strings
+  if (!hasChanges) {
+    return fileInfo.source;
+  }
+
   return removeParentheses(root.toSource({ quote: 'double' }));
 };
 

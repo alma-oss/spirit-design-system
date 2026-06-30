@@ -1,65 +1,130 @@
-import { API, FileInfo } from 'jscodeshift';
-import { removeParentheses } from '../../../helpers';
+import { API, ASTPath, FileInfo, JSXAttribute, JSXMemberExpression, JSXOpeningElement } from 'jscodeshift';
+import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
 
-const transform = (fileInfo: FileInfo, api: API) => {
-  const j = api.jscodeshift;
-  const root = j(fileInfo.source);
+const DIRECTION_MAP: Record<string, string> = {
+  row: 'horizontal',
+  column: 'vertical',
+};
 
-  // Define the mapping from old direction values to new ones
-  const directionMap: { [key: string]: string } = {
-    row: 'horizontal',
-    column: 'vertical',
-  };
+const isImportedFlexElement = (
+  element: JSXOpeningElement,
+  flexNamedImports: Set<string>,
+  namespaceImports: Set<string>,
+): boolean => {
+  if (element.name.type === 'JSXIdentifier') {
+    return flexNamedImports.has(element.name.name);
+  }
 
-  // Find all Flex components
-  root
-    .find(j.JSXOpeningElement, { name: { type: 'JSXIdentifier', name: 'Flex' } })
-    .find(j.JSXAttribute, { name: { type: 'JSXIdentifier', name: 'direction' } })
-    .forEach((attributePath) => {
-      const attribute = attributePath.node;
+  if (element.name.type !== 'JSXMemberExpression') {
+    return false;
+  }
 
-      if (attribute.value) {
-        // Handle string literal values
-        if (attribute.value.type === 'StringLiteral') {
-          const newValue = directionMap[attribute.value.value];
-          if (newValue) {
-            attribute.value = j.stringLiteral(newValue);
-          }
-        }
+  const memberExpression = element.name as JSXMemberExpression;
+  const objectName = memberExpression.object.type === 'JSXIdentifier' ? memberExpression.object.name : undefined;
+  const propertyName = memberExpression.property.type === 'JSXIdentifier' ? memberExpression.property.name : undefined;
 
-        // Handle object values
-        else if (
-          attribute.value.type === 'JSXExpressionContainer' &&
-          attribute.value.expression.type === 'ObjectExpression'
-        ) {
-          const objectExpression = attribute.value.expression;
+  return Boolean(objectName && propertyName === 'Flex' && namespaceImports.has(objectName));
+};
 
-          objectExpression.properties.forEach((property) => {
-            if (
-              property.type === 'ObjectProperty' &&
-              (property.key.type === 'Identifier' || property.key.type === 'Literal') &&
-              property.value.type === 'StringLiteral'
-            ) {
-              const oldValue = property.value.value;
+const updateDirectionAttribute = (j: API['jscodeshift'], attribute: JSXAttribute): boolean => {
+  if (!attribute.value) {
+    return false;
+  }
 
-              // Update the value if it matches a key in directionMap
-              if (oldValue in directionMap) {
-                // Manually create a single-quoted Literal
-                property.value = j.literal(directionMap[oldValue]);
-                // We need single quotes in object values
-                // @ts-expect-error extra is not defined on Literal
-                property.value.extra = {
-                  raw: `'${directionMap[oldValue]}'`,
-                  rawValue: directionMap[oldValue],
-                };
-              }
-            }
-          });
+  let hasChanges = false;
+
+  if (attribute.value.type === 'StringLiteral') {
+    const newValue = DIRECTION_MAP[attribute.value.value];
+
+    if (newValue) {
+      attribute.value = j.stringLiteral(newValue);
+      hasChanges = true;
+    }
+
+    return hasChanges;
+  }
+
+  if (attribute.value.type === 'JSXExpressionContainer' && attribute.value.expression.type === 'ObjectExpression') {
+    attribute.value.expression.properties.forEach((property) => {
+      if (
+        property.type === 'ObjectProperty' &&
+        (property.key.type === 'Identifier' || property.key.type === 'Literal') &&
+        property.value.type === 'StringLiteral'
+      ) {
+        const oldValue = property.value.value;
+
+        if (oldValue in DIRECTION_MAP) {
+          property.value = j.literal(DIRECTION_MAP[oldValue]);
+          // @ts-expect-error extra is not defined on Literal
+          property.value.extra = {
+            raw: `'${DIRECTION_MAP[oldValue]}'`,
+            rawValue: DIRECTION_MAP[oldValue],
+          };
+          hasChanges = true;
         }
       }
     });
+  }
 
-  // Convert the transformed code to source with double quotes for strings
+  return hasChanges;
+};
+
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
+  const j = api.jscodeshift;
+  const root = j(fileInfo.source);
+  const isSpiritImport = createImportSourceMatcher(getImportSources(options));
+  const flexNamedImports = new Set<string>();
+  const namespaceImports = new Set<string>();
+
+  root
+    .find(j.ImportDeclaration, {
+      source: {
+        value: (value: string) => isSpiritImport(value),
+      },
+    })
+    .forEach((importPath) => {
+      importPath.node.specifiers?.forEach((specifier) => {
+        if (
+          specifier.type === 'ImportSpecifier' &&
+          specifier.imported.type === 'Identifier' &&
+          specifier.imported.name === 'Flex'
+        ) {
+          flexNamedImports.add(specifier.local?.name ?? specifier.imported.name);
+        }
+
+        if (specifier.type === 'ImportNamespaceSpecifier' && specifier.local?.name) {
+          namespaceImports.add(specifier.local.name);
+        }
+      });
+    });
+
+  if (flexNamedImports.size === 0 && namespaceImports.size === 0) {
+    return fileInfo.source;
+  }
+
+  let hasChanges = false;
+
+  root.find(j.JSXOpeningElement).forEach((elementPath: ASTPath<JSXOpeningElement>) => {
+    if (!isImportedFlexElement(elementPath.node, flexNamedImports, namespaceImports)) {
+      return;
+    }
+
+    elementPath.node.attributes?.forEach((attribute) => {
+      if (
+        attribute.type === 'JSXAttribute' &&
+        attribute.name.type === 'JSXIdentifier' &&
+        attribute.name.name === 'direction' &&
+        updateDirectionAttribute(j, attribute)
+      ) {
+        hasChanges = true;
+      }
+    });
+  });
+
+  if (!hasChanges) {
+    return fileInfo.source;
+  }
+
   return removeParentheses(root.toSource({ quote: 'double' }));
 };
 
