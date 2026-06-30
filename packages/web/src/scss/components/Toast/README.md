@@ -307,7 +307,7 @@ button:
     </div>
     <button
       type="button"
-      class="ControlButton ControlButton--large text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+      class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
       data-spirit-dismiss="toast"
       data-spirit-target="#my-dismissible-toast"
       aria-controls="my-dismissible-toast"
@@ -356,7 +356,7 @@ button:
         </div>
         <button
           type="button"
-          class="ControlButton ControlButton--large text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+          class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
           data-spirit-dismiss="toast"
           aria-controls="my-dismissible-toast"
           aria-expanded="true"
@@ -399,7 +399,7 @@ the template and apply it on any toasts to be shown to the user, using the confi
           </div>
           <button
             type="button"
-            class="ControlButton ControlButton--large text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+            class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
             data-spirit-populate-field="close-button"
             data-spirit-dismiss="toast"
             aria-expanded="true"

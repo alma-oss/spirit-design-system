@@ -6,6 +6,7 @@
 // 6. Add margin to the action to separate it from the dismiss button.
 // 7. Invisible items should not take up space in the queue.
 
+@use '@tokens' as tokens;
 @use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/typography';
@@ -52,6 +53,10 @@
     align-items: start;
 }
 
+.ToastBar__container {
+    --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$bar-container-icon-size};
+}
+
 .ToastBar__container:has(> svg:first-child) {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -71,7 +76,8 @@
 }
 
 .ToastBar__link {
-    font-weight: 400;
+    @include typography.generate(theme.$bar-typography);
+
     color: inherit;
 
     &:hover,
