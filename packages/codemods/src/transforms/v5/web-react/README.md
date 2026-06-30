@@ -13,7 +13,7 @@ This codemod updates the `UncontrolledCollapse` component by replacing the `hide
 #### Usage
 
 ```sh
-npx @lmc-eu/spirit-codemods -p <path> -t v5/web-react/collapse-isDisposable-prop
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/collapse-isDisposable-prop
 ```
 
 #### Example
@@ -87,7 +87,7 @@ This codemod updates `direction` values of `Flex` component by replacing `row` t
 #### Usage
 
 ```sh
-npx @lmc-eu/spirit-codemods -p <path> -t v5/web-react/flex-direction-values
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/flex-direction-values
 ```
 
 #### Example

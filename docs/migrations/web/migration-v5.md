@@ -8,12 +8,19 @@ Introducing version 5 of the _spirit-web_ package.
 
 - [General Changes](#general-changes)
   - [Dropped Support for Node.js 20](#dropped-support-for-nodejs-20)
+  - [SVG Sprites: `xlink:href` → `href`](#svg-sprites-xlinkhref--href)
 - [Component Changes](#component-changes)
+  - [Form Fields: TextField, TextArea, Select, Slider, and FieldGroup Decomposed](#form-fields-textfield-textarea-select-slider-and-fieldgroup-decomposed)
+  - [Collapse: `data-spirit-more` → `data-spirit-is-disposable`](#collapse-data-spirit-more--data-spirit-is-disposable)
+  - [Button and ControlButton: Automatic Icon Spacing](#button-and-controlbutton-automatic-icon-spacing)
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
   - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
   - [Radio: Composition Markup Changed](#radio-composition-markup-changed)
   - [Toggle: Composition Markup Changed](#toggle-composition-markup-changed)
+  - [Inline Controls: Input Class Renames](#inline-controls-input-class-renames)
   - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
+  - [Dropdown and Tooltip: Placement Helpers](#dropdown-and-tooltip-placement-helpers)
+  - [Color Scheme Helpers](#color-scheme-helpers)
   - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Stack: Modifier Classes Without `has` Prefix](#stack-modifier-classes-without-has-prefix)
@@ -23,7 +30,12 @@ Introducing version 5 of the _spirit-web_ package.
   - [Item: Composable Content and Slots](#item-composable-content-and-slots)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
   - [Disabled Utility for Color-Scheme Components](#disabled-utility-for-color-scheme-components)
-  - [Toggle: Input Before Label in HTML](#toggle-input-before-label-in-html)
+  - [ValidationText and Icon Visual Changes](#validationtext-and-icon-visual-changes)
+  - [Icon: Composition Size Inheritance](#icon-composition-size-inheritance)
+  - [Close Buttons Use `ControlButton`](#close-buttons-use-controlbutton)
+  - [Navigation: Slots, Open State, and Removed Selected Indicator](#navigation-slots-open-state-and-removed-selected-indicator)
+  - [Container: Block Formatting Context Default](#container-block-formatting-context-default)
+  - [Other Sass and JavaScript Removals](#other-sass-and-javascript-removals)
 
 ## General Changes
 
@@ -31,7 +43,183 @@ Introducing version 5 of the _spirit-web_ package.
 
 The Node.js v20 is no longer supported. The minimum required Node.js version is 22.
 
+### SVG Sprites: `xlink:href` → `href`
+
+SVG `<use>` elements in Spirit demos and components now use the standard `href` attribute instead of the deprecated `xlink:href`.
+
+#### Migration Guide
+
+Replace sprite references in your HTML and JSX:
+
+```html
+<!-- Before -->
+<use xlink:href="/icons/svg/sprite.svg#search" />
+
+<!-- After -->
+<use href="/icons/svg/sprite.svg#search" />
+```
+
+In React, replace `xlinkHref` with `href` on `<use>` elements.
+
 ## Component Changes
+
+### Form Fields: TextField, TextArea, Select, Slider, and FieldGroup Decomposed
+
+The largest markup change in v5 is the decomposition of box-style form fields. The monolithic `TextField`, `TextArea`, `Select`, and `Slider` SCSS components and their BEM classes (`TextField__*`, `Select__*`, `TextArea__*`, `Slider__input`, `FieldGroup__*`) were removed. Compose fields from standalone primitives instead:
+
+- [`Label`][readme-label]
+- [`InputContainer`][readme-input-container] with `InputContainer--fill` or `InputContainer--outline`
+- [`InputAddon`][readme-input-addon] for trailing icons, select chevrons, or password toggles
+- [`HelperText`][readme-helper-text]
+- [`ValidationText`][readme-validation-text]
+- [`CharacterCounter`][readme-character-counter] for TextArea counters
+- Layout utilities (`Flex`, `Stack`, `Grid`, `Container`) for width and spacing
+
+**What breaks:** Custom CSS targeting removed BEM classes, Sass `@use` of removed component entry points, and fluid modifiers (`TextField--fluid`, `Select--fluid`, `TextArea--fluid`).
+
+#### TextField
+
+```html
+<!-- Before -->
+<div class="TextField TextField--medium">
+  <label for="name" class="TextField__label">Label</label>
+  <input type="text" id="name" class="TextField__input" placeholder="Placeholder" />
+</div>
+
+<!-- After -->
+<div>
+  <label for="name" class="Label">Label</label>
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
+    <input type="text" id="name" name="name" placeholder="Placeholder" />
+  </div>
+</div>
+```
+
+Control width with parent layout (`Grid`, `Stack`, `Container`) or `--spirit-input-container-input-width` on `InputContainer`. See [TextField README][readme-textfield].
+
+#### Select
+
+```html
+<!-- Before -->
+<div class="Select Select--medium">
+  <label for="country" class="Select__label">Country</label>
+  <div class="Select__inputWrapper">
+    <select id="country" class="Select__input">
+      …
+    </select>
+  </div>
+</div>
+
+<!-- After -->
+<div>
+  <label for="country" class="Label">Country</label>
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
+    <select id="country" name="country">
+      …
+    </select>
+    <label class="InputAddon InputAddon--medium" for="country" aria-hidden="true">
+      <svg class="Icon" width="20" height="20" aria-hidden="true">
+        <use href="/icons/svg/sprite.svg#chevron-down" />
+      </svg>
+    </label>
+  </div>
+</div>
+```
+
+See [Select README][readme-select].
+
+#### Slider
+
+```html
+<!-- Before -->
+<div class="Slider">
+  <label for="volume" class="Slider__label">Volume</label>
+  <input type="range" id="volume" class="Slider__input" />
+</div>
+
+<!-- After -->
+<div>
+  <label for="volume" class="Label">Volume</label>
+  <input type="range" id="volume" class="Slider" style="--slider-position: 30%" />
+</div>
+```
+
+See [Slider README][readme-slider].
+
+#### FieldGroup
+
+FieldGroup SCSS was removed. Use semantic `<fieldset>` markup with `Label`, `Flex`, `HelperText`, and `ValidationText`:
+
+```html
+<!-- Before -->
+<fieldset class="FieldGroup">
+  <legend class="FieldGroup__label">Label</legend>
+  <div class="FieldGroup__fields">…</div>
+</fieldset>
+
+<!-- After -->
+<fieldset class="border-0">
+  <legend class="accessibility-hidden">Label</legend>
+  <div class="Label" aria-hidden="true">Label</div>
+  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+    <!-- composed form fields -->
+  </div>
+</fieldset>
+```
+
+See [FieldGroup README][readme-fieldgroup].
+
+#### Password Toggle
+
+The `TextField__passwordToggle*` markup was replaced by `InputAddon` + `ControlButton`. Place `data-spirit-toggle="password"` on the **button**, not the input:
+
+```html
+<div class="InputContainer InputContainer--fill InputContainer--medium">
+  <input type="password" id="password" name="password" />
+  <div class="InputAddon InputAddon--medium">
+    <button
+      type="button"
+      class="ControlButton ControlButton--medium ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+      role="switch"
+      aria-checked="false"
+      aria-label="Show password"
+      data-spirit-toggle="password"
+    >
+      <span class="accessibility-unchecked"><!-- visibility-on icon --></span>
+      <span class="accessibility-checked"><!-- visibility-off icon --></span>
+    </button>
+  </div>
+</div>
+```
+
+See [TextField README — JavaScript Plugin for Password Toggle][readme-textfield-password-toggle].
+
+#### InputDetails Disabled State
+
+When supplementary content below a checkbox or toggle label is disabled, add `InputDetails--disabled` to the `InputDetails` wrapper and the native `disabled` attribute on interactive children inside it. See [InputDetails README][readme-input-details].
+
+### Collapse: `data-spirit-more` → `data-spirit-is-disposable`
+
+The deprecated `data-spirit-more` attribute on Collapse triggers was removed. Use `data-spirit-is-disposable` instead.
+
+```html
+<!-- Before -->
+<button data-spirit-toggle="collapse" data-spirit-target="#collapse" data-spirit-more>… more</button>
+
+<!-- After -->
+<button data-spirit-toggle="collapse" data-spirit-target="#collapse" data-spirit-is-disposable>… more</button>
+```
+
+### Button and ControlButton: Automatic Icon Spacing
+
+`Button` and `ControlButton` now set spacing between child icons and text via `column-gap`. Remove manual margin utilities (`mx-*`, `me-*`, etc.) from icons inside buttons.
+
+For non-default spacing, set the CSS custom property on the button:
+
+- `--button-spacing` on `Button`
+- `--control-button-spacing` on `ControlButton`
+
+See [Button README — Custom Spacing][readme-button-spacing] and [ControlButton README — Custom Spacing][readme-control-button-spacing].
 
 ### Button: `Button--block` Modifier Removed
 
@@ -248,6 +436,16 @@ For toggles with indicators, move `Toggle__input--indicators` to `Toggle--indica
 
 </details>
 
+### Inline Controls: Input Class Renames
+
+When using inline Checkbox, Radio, or Toggle markup, the input element class changed from `Component__input` to the component name:
+
+| Component | Before            | After      |
+| --------- | ----------------- | ---------- |
+| Checkbox  | `Checkbox__input` | `Checkbox` |
+| Radio     | `Radio__input`    | `Radio`    |
+| Toggle    | `Toggle__input`   | `Toggle`   |
+
 ### Flex: Direction Modifier Classes Changed
 
 The `Flex--row` and `Flex--column` CSS modifier classes were removed. Use `Flex--horizontal` and `Flex--vertical` instead.
@@ -260,6 +458,28 @@ Manually replace the modifier classes in your project.
 - `Flex--column` → `Flex--vertical`
 - `Flex--{breakpoint}--row` → `Flex--{breakpoint}--horizontal`
 - `Flex--{breakpoint}--column` → `Flex--{breakpoint}--vertical`
+
+### Dropdown and Tooltip: Placement Helpers
+
+Component-specific placement modifiers on `DropdownPopover` and `TooltipPopover` were replaced by shared [placement helpers][readme-placement-helpers]. Add the matching `placement-*` class to the popover element (for example `placement-bottom-start`, `placement-top-end`). You can keep `data-spirit-placement` for scripting.
+
+For JavaScript-controlled Tooltip positioning, add `placement-controlled` to the popover.
+
+```html
+<!-- Before -->
+<div class="DropdownPopover DropdownPopover--placementBottomStart" data-spirit-placement="bottom-start">…</div>
+
+<!-- After -->
+<div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start">…</div>
+```
+
+### Color Scheme Helpers
+
+Several components now require [color-scheme helpers][readme-color-schemes] (`color-scheme-on-*` classes) when you build custom Sass bundles instead of importing the full CSS bundle. Affected components include `Alert`, emotion `Button`, `Tag`, `ToastBar`, and `TooltipPopover`.
+
+Load the color-scheme helper partial or full bundle when theming these components.
+
+**ToastBar custom CSS:** Replace legacy `--spirit-toast-bar-*` variables with local color variables and color-scheme helper classes. See [ToastBar README][readme-toastbar].
 
 ### FileUpload and File: Stabilized (FileUploader Removed)
 
@@ -576,6 +796,20 @@ For `ControlButton`, add the `text-color-scheme` utility on the button itself so
 
 </details>
 
+### ValidationText and Icon Visual Changes
+
+- **`ValidationText--inline` removed** — use the default block `ValidationText` below the field or compose layout with utilities.
+- **Success validation icon** — use the `success` icon instead of `check-plain` when rendering validation icons manually.
+- **Form field validation** — validation state modifiers live on `InputContainer` (`InputContainer--success`, etc.) or JS classes (`has-success`, etc.), not on removed `TextField__*` wrappers.
+
+### Icon: Composition Size Inheritance
+
+Icons inside composed components (buttons, tags, navigation items, etc.) inherit size from the parent unless you set an explicit `width`/`height` on the SVG or use Icon size modifiers. Update custom CSS and visual snapshots that assumed a fixed default icon size.
+
+### Close Buttons Use `ControlButton`
+
+Drawer, Modal, Toast, and Tooltip close buttons now render `ControlButton` markup and classes instead of legacy close-button BEM. Update custom CSS and snapshots that targeted old close-button selectors.
+
 ### Navigation: Slots, Open State, and Removed Selected Indicator
 
 `NavigationAction` now supports `NavigationAction__slot` wrappers for optional content around the
@@ -595,45 +829,41 @@ active stripe in the `box` variant) was removed.
 communicated through the action's background and color only.
 </details>
 
-### Toggle: Input Before Label in HTML
+### Container: Block Formatting Context Default
 
-Toggle markup now places the `<input class="Toggle__input">` element **before** the
-`<div class="Toggle__text">` block, matching Checkbox and Radio. Visual layout and
-`inputPosition` modifier classes are unchanged.
+The `SPIRIT_FEATURE_CONTAINER_BLOCK_FORMATTING_CONTEXT` feature flag was removed. `Container` always creates a block formatting context. Remove the flag from your build configuration.
 
-#### Migration Guide
+### Other Sass and JavaScript Removals
 
-<details>
-  <summary>🔧 Manual Migration Steps</summary>
-
-Swap the order of the input and text wrapper in your Toggle HTML.
-
-```html
-<!-- Before -->
-<div class="Toggle Toggle--inputPositionEnd">
-  <div class="Toggle__text">
-    <label class="Label Label--inline" for="toggle">Toggle Label</label>
-  </div>
-  <input type="checkbox" id="toggle" class="Toggle__input" name="toggle" />
-</div>
-
-<!-- After -->
-<div class="Toggle Toggle--inputPositionEnd">
-  <input type="checkbox" id="toggle" class="Toggle__input" name="toggle" />
-  <div class="Toggle__text">
-    <label class="Label Label--inline" for="toggle">Toggle Label</label>
-  </div>
-</div>
-```
-
-If you provided any custom CSS depending on the order of Toggle children, you will need to update it.
-
-</details>
+| Removed                                                      | Migration                                                                                                                   |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| `Alert` link styles                                          | Use standard link utilities or custom styles                                                                                |
+| Skeleton `gradient-skeleton` token fallback                  | Use current skeleton tokens from design tokens                                                                              |
+| Public SCSS deprecation fallbacks for removed form-field BEM | Migrate to composed primitives (see [Form Fields](#form-fields-textfield-textarea-select-slider-and-fieldgroup-decomposed)) |
 
 ---
 
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
 
+[readme-alert]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Alert/README.md
+[readme-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md
+[readme-button-spacing]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md#custom-spacing
+[readme-character-counter]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/CharacterCounter/README.md
+[readme-color-schemes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/helpers/_color-schemes.scss
+[readme-control-button-spacing]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ControlButton/README.md#custom-spacing
+[readme-fieldgroup]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/FieldGroup/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [readme-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Header/README.md
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-input-addon]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputAddon/README.md
+[readme-input-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputContainer/README.md
+[readme-input-details]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputDetails/README.md
 [readme-item]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Item/README.md
+[readme-label]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Label/README.md
+[readme-placement-helpers]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/helpers/_placement.scss
+[readme-select]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Select/README.md
+[readme-slider]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Slider/README.md
+[readme-textfield]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/TextField/README.md
+[readme-textfield-password-toggle]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/TextField/README.md#javascript-plugin-for-password-toggle
+[readme-toastbar]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ToastBar/README.md
+[readme-validation-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ValidationText/README.md

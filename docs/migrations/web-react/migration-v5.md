@@ -7,26 +7,37 @@ Introducing version 5 of the _spirit-web-react_ package.
 > ℹ️ Don't forget to check the [migration guide of the _spirit-web_ package][migration-guide-web] for general changes in
 > available feature flags, CSS, and other changes that might affect your project.
 
+> ℹ️ Several v5 changes affect **rendered CSS classes and DOM order** even when React prop names stay the same. When updating snapshot tests or custom CSS, also read these web guide sections: [Form Fields][migration-web-form-fields], [Color Scheme Helpers][migration-web-color-schemes], [ValidationText and Icon Visual Changes][migration-web-validation-icon], [Stack modifier classes][migration-web-stack-modifiers], and [Close Buttons Use `ControlButton`][migration-web-close-buttons].
+
 ## Overview
 
 - [General Changes](#general-changes)
   - [Dropped Support for Node.js 20](#dropped-support-for-nodejs-20)
+  - [Removed Exports and Types](#removed-exports-and-types)
 - [Component Changes](#component-changes)
   - [Dropdown: `DropdownPopover` Now Has `role="dialog"` by Default](#dropdown-dropdownpopover-now-has-roledialog-by-default)
   - [Collapse: `hideOnCollapse` Prop Renamed to `isDisposable`](#collapse-hideoncollapse-prop-renamed-to-isdisposable)
   - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
   - [Radio: Composition Markup Changed](#radio-composition-markup-changed)
   - [Toggle: Composition Markup Changed](#toggle-composition-markup-changed)
+  - [Toggle: Rendered DOM Order](#toggle-rendered-dom-order)
   - [Flex: Direction Prop Values Changed](#flex-direction-prop-values-changed)
   - [Form Components: `isFluid` Prop Removed](#form-components-isfluid-prop-removed)
   - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
+  - [Button, ButtonLink, and ControlButton: Automatic Icon Spacing](#button-buttonlink-and-controlbutton-automatic-icon-spacing)
   - [Button and ButtonLink: `isBlock` Prop Removed](#button-and-buttonlink-isblock-prop-removed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
   - [Header: `UNSTABLE_Header` has been stabilized and renamed to `Header`, previous implementation has been removed](#header-stabilization-of-unstable_header-to-header-previous-implementation-removed)
   - [Item: Composable Content and Slots](#item-composable-content-and-slots)
+  - [Stack: Rendered CSS Class Names](#stack-rendered-css-class-names)
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
+  - [Disabled and Color-Scheme Class Rendering](#disabled-and-color-scheme-class-rendering)
+  - [ValidationText API and Visual Changes](#validationtext-api-and-visual-changes)
+  - [Icon: Composition Size Inheritance](#icon-composition-size-inheritance)
+  - [Close Buttons Use `ControlButton`](#close-buttons-use-controlbutton)
+  - [Navigation: Slots, Open State, and Removed Selected Indicator](#navigation-slots-open-state-and-removed-selected-indicator)
 
 ## General Changes
 
@@ -35,6 +46,22 @@ Introducing version 5 of the _spirit-web-react_ package.
 The Node.js v20 is no longer supported. The minimum required Node.js version is 22.
 
 > ℹ️ See also the [migration guide of the _spirit-web_ package][migration-guide-web] for the same Node.js requirement.
+
+### Removed Exports and Types
+
+The following symbols were **removed** from `@alma-oss/spirit-web-react` in v5. TypeScript builds that still import them will fail at compile time:
+
+| Removed                                                                                        | Replacement / action                                         |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `FileUploader`, `FileUploaderInput`, `FileUploaderList`, `FileUploaderAttachment`              | `FileUpload` + `File`                                        |
+| `UncontrolledFileUploader`                                                                     | `FileUpload` with your own state                             |
+| `UNSTABLE_FileUpload`, `UnstableFileUploadProps`                                               | `FileUpload`, `FileUploadProps`                              |
+| `UNSTABLE_File`, `UNSTABLE_FileImagePreview`, `UnstableFileItem`                               | `File`, `FileImagePreview`, `FileItem`                       |
+| `UNSTABLE_Header`, `UNSTABLE_HeaderLogo`, `UnstableHeaderProps`, `useUnstableHeaderStyleProps` | `Header`, `HeaderLogo`, `HeaderProps`, `useHeaderStyleProps` |
+| Previous `Header` subcomponents (`HeaderNav`, `HeaderDialog`, `HeaderMobileActions`, etc.)     | Compose with current `Header`, `Navigation`, and `Drawer`    |
+| Other stabilized `UNSTABLE_*` component names                                                  | Stable names without the `UNSTABLE_` prefix                  |
+
+If you deep-import from internal paths (for example `Field/` utilities), verify those paths still exist after upgrading.
 
 ## Component Changes
 
@@ -230,6 +257,10 @@ Inside `Stack` with `hasSpacing`, no extra spacing is needed:
 
 </details>
 
+### Toggle: Rendered DOM Order
+
+`Toggle` now renders the native `<input>` **before** the label content in the DOM, matching Checkbox and Radio. The `inputPosition` prop still controls visual layout via Flex, but snapshot tests and custom CSS that depended on the previous child order need updating.
+
 ### Flex: Direction Prop Values Changed
 
 The `direction` prop values in `Flex` component were changed from `row`/`column` to `horizontal`/`vertical`.
@@ -318,6 +349,13 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/unstable-file-component-
 - `UnstableFileUploadProps` → `FileUploadProps`
 - `UnstableFileItem` → `FileItem`
 
+**`FileUpload` prop renames** (also handled by the `unstable-fileupload-component-name` codemod):
+
+- `linkText` → `inputUploadText`
+- `labelText` → `inputDragAndDropText`
+
+Review optional text props (`inputDragAndDropText`, validation text props, etc.) when migrating from `FileUploaderInput`.
+
 **FileUploader → FileUpload / File:**
 
 1. Replace the `FileUploader` composition with `FileUpload` for the upload input and `File` for each uploaded file row.
@@ -375,6 +413,47 @@ const onDismiss = (id: string) => {
 ```
 
 For image previews, validation states, and edit actions, see the [File][readme-file] and [FileUpload][readme-file-upload] component documentation.
+
+</details>
+
+### Button, ButtonLink, and ControlButton: Automatic Icon Spacing
+
+`Button`, `ButtonLink`, and `ControlButton` now set spacing between child icons and text via `column-gap`. Remove `marginRight`, `marginLeft`, and `marginX` from `Icon` children inside these components.
+
+For non-default spacing, use the `spacing` prop on the button component.
+
+#### Migration Guide
+
+🪄 Use codemods to automatically update your codebase:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/button-icon-margin-removal
+```
+
+👉 See [Codemods documentation][readme-codemods] and the [web guide section on automatic icon spacing][migration-web-button-spacing] for CSS custom property details.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+```tsx
+// Before
+<Button>
+  <Icon name="hamburger" marginRight="space-400" />
+  Menu
+</Button>
+
+// After
+<Button>
+  <Icon name="hamburger" />
+  Menu
+</Button>
+
+// Custom spacing preserved via spacing prop
+<Button spacing="space-600">
+  <Icon name="hamburger" />
+  Menu
+</Button>
+```
 
 </details>
 
@@ -623,6 +702,19 @@ See [Item README][readme-item] for examples.
 
 ---
 
+### Stack: Rendered CSS Class Names
+
+React `Stack` prop names are unchanged (`hasSpacing`, `hasIntermediateDividers`, etc.), but the rendered CSS classes no longer use the `has` prefix. Update snapshot tests and custom selectors accordingly:
+
+| Rendered class before            | Rendered class now            |
+| -------------------------------- | ----------------------------- |
+| `Stack--hasSpacing`              | `Stack--spacing`              |
+| `Stack--hasIntermediateDividers` | `Stack--intermediateDividers` |
+| `Stack--hasStartDivider`         | `Stack--startDivider`         |
+| `Stack--hasEndDivider`           | `Stack--endDivider`           |
+
+See also the [web guide Stack modifier section][migration-web-stack-modifiers].
+
 ### Stack: Wrap Direct Children in `StackItem` When Using Dividers
 
 The CSS fallback that allowed arbitrary direct children (elements that are not `StackItem`) to receive divider styling has been removed.
@@ -703,6 +795,38 @@ If you relied on the previous heights, shift the `size` prop up to keep the same
 - `<ControlButton size="large" … />` → `<ControlButton size="xlarge" … />`
 </details>
 
+### Disabled and Color-Scheme Class Rendering
+
+Several components now render the global `disabled` utility class instead of component-specific `--disabled` modifiers, and color-scheme components add `color-scheme-on-*` helper classes in their output. Affected components include `Button`, `ButtonLink`, `Tag`, `Item`, `Alert`, `ToastBar`, `TooltipPopover`, `Pill`, and `ControlButton`.
+
+**What breaks:** Snapshot tests and custom CSS targeting old class names such as `Button--disabled` or missing color-scheme helpers.
+
+**Migration:** Update selectors to match new output and ensure the matching [web color-scheme helpers][migration-web-color-schemes] are loaded in your CSS bundle.
+
+### ValidationText API and Visual Changes
+
+- **`hasValidationStateIcon` removed** — use `validationStateIcon` on standalone `ValidationText` instead. Built-in form fields still accept `hasValidationIcon` and pass `validationStateIcon` internally.
+- **Inline / form-field mode removed** — `ValidationText` no longer has a separate inline variant; compose layout with parent components or utilities.
+- **Success icon** — validation success now uses the `success` icon instead of `check-plain`.
+
+```tsx
+// Before (standalone ValidationText)
+<ValidationText validationText="Error" hasValidationStateIcon validationState="danger" />
+
+// After
+<ValidationText validationText="Error" validationStateIcon="danger" />
+```
+
+### Icon: Composition Size Inheritance
+
+`Icon` components without an explicit `boxSize` (or explicit SVG dimensions) inherit size from their parent composition context. Update snapshots and custom CSS that assumed a fixed default icon size.
+
+### Close Buttons Use `ControlButton`
+
+`DrawerCloseButton`, `ModalCloseButton`, dismissible `ToastBar` close actions, and `TooltipCloseButton` now render `ControlButton` markup and classes. Update snapshot tests and custom CSS that targeted legacy close-button class names.
+
+See the [web guide close-button section][migration-web-close-buttons].
+
 ### Navigation: Slots, Open State, and Removed Selected Indicator
 
 `NavigationAction` now supports `startSlot`/`endSlot` props for optional content around the label. Expanded
@@ -727,6 +851,12 @@ communicated through the action's background and color only.
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
 
 [migration-guide-web]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md
+[migration-web-button-spacing]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md#button-and-controlbutton-automatic-icon-spacing
+[migration-web-close-buttons]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md#close-buttons-use-controlbutton
+[migration-web-color-schemes]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md#color-scheme-helpers
+[migration-web-form-fields]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md#form-fields-textfield-textarea-select-slider-and-fieldgroup-decomposed
+[migration-web-stack-modifiers]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md#stack-modifier-classes-without-has-prefix
+[migration-web-validation-icon]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md#validationtext-and-icon-visual-changes
 [readme-codemods]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/README.md
 [readme-file]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/File/README.md
 [readme-file-upload]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FileUpload/README.md
