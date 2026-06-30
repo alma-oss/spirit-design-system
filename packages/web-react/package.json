@@ -255,6 +255,14 @@
       "require": "./dist/components/Card/index.cjs",
       "default": "./dist/components/Card/index.js"
     },
+    "./components/CaptionText": {
+      "types": "./dist/components/CaptionText/index.d.ts",
+      "development": "./src/components/CaptionText/index.ts",
+      "production": "./dist/components/CaptionText/index.js",
+      "import": "./dist/components/CaptionText/index.js",
+      "require": "./dist/components/CaptionText/index.cjs",
+      "default": "./dist/components/CaptionText/index.js"
+    },
     "./components/Checkbox": {
       "types": "./dist/components/Checkbox/index.d.ts",
       "development": "./src/components/Checkbox/index.ts",
