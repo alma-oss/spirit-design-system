@@ -9,7 +9,6 @@ import { Icon } from '../../Icon';
 import { Navigation, NavigationAction, NavigationAvatar, NavigationItem } from '../../Navigation';
 import { ProductLogo } from '../../ProductLogo';
 import { Stack, StackItem } from '../../Stack';
-import { Text } from '../../Text';
 import Header from '../Header';
 import HeaderLogo from '../HeaderLogo';
 
@@ -46,9 +45,7 @@ const HeaderWithNavigationLoggedIn = ({ itemVariant }: { itemVariant: Navigation
             <Navigation marginLeft="auto" aria-label="Secondary Navigation">
               <NavigationItem alignmentY="center" hideOn={['mobile', 'tablet']}>
                 <NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta">
-                  <Text elementType="span" size="small" emphasis="semibold">
-                    My Account
-                  </Text>
+                  My Account
                 </NavigationAvatar>
               </NavigationItem>
               <NavigationItem hideOn="desktop">
@@ -76,9 +73,7 @@ const HeaderWithNavigationLoggedIn = ({ itemVariant }: { itemVariant: Navigation
               <Navigation aria-label="Profile" direction="vertical">
                 <NavigationItem alignmentY="left">
                   <NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta" isSquare>
-                    <Text elementType="span" size="small" emphasis="semibold">
-                      My Account
-                    </Text>
+                    My Account
                   </NavigationAvatar>
                 </NavigationItem>
               </Navigation>

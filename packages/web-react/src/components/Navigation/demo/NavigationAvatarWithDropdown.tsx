@@ -34,7 +34,7 @@ const NavigationAvatarWithDropdown = () => {
             aria-label={AVATAR_ARIA_LABEL}
           >
             {AVATAR_TEXT}
-            <Icon name={`chevron-${isDropdownOpen ? 'up' : 'down'}`} boxSize={20} />
+            <Icon name={`chevron-${isDropdownOpen ? 'up' : 'down'}`} />
           </DropdownTrigger>
           <DropdownPopover>{DROPDOWN_ITEMS}</DropdownPopover>
         </Dropdown>
@@ -54,7 +54,7 @@ const NavigationAvatarWithDropdown = () => {
             aria-label={AVATAR_ARIA_LABEL}
           >
             {AVATAR_TEXT}
-            <Icon name={`chevron-${isSquareDropdownOpen ? 'up' : 'down'}`} boxSize={20} />
+            <Icon name={`chevron-${isSquareDropdownOpen ? 'up' : 'down'}`} />
           </DropdownTrigger>
           <DropdownPopover>{DROPDOWN_ITEMS}</DropdownPopover>
         </Dropdown>
