@@ -37,7 +37,7 @@ const NavigationHorizontalWithDropdown = () => {
         >
           <DropdownTrigger elementType={NavigationActionAsDropdownTrigger}>
             Dropdown
-            <Icon name={`chevron-${isNavigationActionDropdownOpen ? 'up' : 'down'}`} boxSize={20} />
+            <Icon name={`chevron-${isNavigationActionDropdownOpen ? 'up' : 'down'}`} />
           </DropdownTrigger>
           <DropdownPopover>
             <Item elementType="a" href="#">

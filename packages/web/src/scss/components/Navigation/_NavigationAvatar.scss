@@ -12,6 +12,8 @@
 }
 
 .NavigationAvatar {
+    @include typography.generate(theme.$avatar-typography);
+
     display: flex;
     gap: theme.$avatar-gap;
     align-items: center;
