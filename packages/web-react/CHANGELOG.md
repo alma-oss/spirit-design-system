@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.9.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.8.0...@alma-oss/spirit-web-react@4.9.0) (2026-07-01)
+
+### Features
+
+- **web-react:** convert `SkeletonShape` width/height output from px to rem #DS-2393, closes [#DS-2393](https://github.com/alma-oss/spirit-design-system/issues/DS-2393)
+- **web-react:** support interaction-only upload disabled mode
+
+### Bug Fixes
+
+- **web-react:** fix truncation of UNSTABLE_File's label #DS-2658, closes [#DS-2658](https://github.com/alma-oss/spirit-design-system/issues/DS-2658)
+- **web:** fix `Toast` z-index with css variable override #DS-2579, closes [#DS-2579](https://github.com/alma-oss/spirit-design-system/issues/DS-2579)
+
+### Documentation
+
+- **repo:** add px-to-rem conversion guide and update package READMEs #DS-2393, closes [#DS-2393](https://github.com/alma-oss/spirit-design-system/issues/DS-2393)
+- **storybook:** introduce file upload composition #DS-2577, closes [#DS-2577](https://github.com/alma-oss/spirit-design-system/issues/DS-2577)
+- **web-react:** document rem usage in `Icon`, `Skeleton`, `Modal`, `TextArea` #DS-2393, closes [#DS-2393](https://github.com/alma-oss/spirit-design-system/issues/DS-2393)
+
 ## [4.8.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.7.0...@alma-oss/spirit-web-react@4.8.0) (2026-06-02)
 
 ### Features

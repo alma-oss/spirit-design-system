@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-docsite@0.4.3...@alma-oss/spirit-docsite@0.4.4) (2026-07-01)
+
+**Note:** Version bump only for package @alma-oss/spirit-docsite
+
 ## [0.4.3](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-docsite@0.4.2...@alma-oss/spirit-docsite@0.4.3) (2026-06-02)
 
 **Note:** Version bump only for package @alma-oss/spirit-docsite

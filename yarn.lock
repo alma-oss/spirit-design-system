@@ -103,7 +103,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@alma-oss/spirit-design-tokens@npm:^4.2.1, @alma-oss/spirit-design-tokens@workspace:^, @alma-oss/spirit-design-tokens@workspace:packages/design-tokens":
+"@alma-oss/spirit-design-tokens@npm:^4.2.2, @alma-oss/spirit-design-tokens@workspace:^, @alma-oss/spirit-design-tokens@workspace:packages/design-tokens":
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-design-tokens@workspace:packages/design-tokens"
   dependencies:
@@ -412,7 +412,7 @@ __metadata:
   resolution: "@alma-oss/spirit-web@workspace:packages/web"
   dependencies:
     "@alma-oss/spirit-common": "workspace:^"
-    "@alma-oss/spirit-design-tokens": "npm:^4.2.1"
+    "@alma-oss/spirit-design-tokens": "npm:^4.2.2"
     "@alma-oss/spirit-icons": "npm:^3.0.8"
     "@babel/core": "catalog:build"
     "@csstools/normalize.css": "catalog:frontend"

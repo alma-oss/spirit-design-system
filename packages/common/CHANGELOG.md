@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-common@0.6.1...@alma-oss/spirit-common@0.6.2) (2026-07-01)
+
+### Documentation
+
+- **repo:** add px-to-rem conversion guide and update package READMEs #DS-2393, closes [#DS-2393](https://github.com/alma-oss/spirit-design-system/issues/DS-2393)
+
 ## [0.6.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-common@0.6.0...@alma-oss/spirit-common@0.6.1) (2026-06-02)
 
 **Note:** Version bump only for package @alma-oss/spirit-common

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.2.1...@alma-oss/spirit-design-tokens@4.2.2) (2026-07-01)
+
+### Documentation
+
+- **repo:** add px-to-rem conversion guide and update package READMEs #DS-2393, closes [#DS-2393](https://github.com/alma-oss/spirit-design-system/issues/DS-2393)
+
 ## [4.2.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.2.0...@alma-oss/spirit-design-tokens@4.2.1) (2026-06-02)
 
 **Note:** Version bump only for package @alma-oss/spirit-design-tokens

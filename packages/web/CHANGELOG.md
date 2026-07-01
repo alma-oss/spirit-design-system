@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.8.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.7.0...@alma-oss/spirit-web@4.8.0) (2026-07-01)
+
+### Features
+
+- **web:** add shake animation helper with demo controls #DS-2564, closes [#DS-2564](https://github.com/alma-oss/spirit-design-system/issues/DS-2564)
+- **web:** add upload-disabled file upload state
+
+### Bug Fixes
+
+- **web:** fix `Toast` z-index with css variable override #DS-2579, closes [#DS-2579](https://github.com/alma-oss/spirit-design-system/issues/DS-2579)
+- **web:** fix truncation of UNSTABLE_File's label #DS-2658, closes [#DS-2658](https://github.com/alma-oss/spirit-design-system/issues/DS-2658)
+
+### Documentation
+
+- **repo:** add px-to-rem conversion guide and update package READMEs #DS-2393, closes [#DS-2393](https://github.com/alma-oss/spirit-design-system/issues/DS-2393)
+- **web:** update `Skeleton` and `Modal` docs and demo to use rem #DS-2393, closes [#DS-2393](https://github.com/alma-oss/spirit-design-system/issues/DS-2393)
+
 ## [4.7.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.6.0...@alma-oss/spirit-web@4.7.0) (2026-06-02)
 
 ### Features

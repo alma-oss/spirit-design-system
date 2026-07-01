@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.5.3...@alma-oss/spirit-storybook@0.5.4) (2026-07-01)
+
+### Bug Fixes
+
+- **storybook:** show all stories in dev sidebar
+
+### Documentation
+
+- **storybook:** introduce file upload composition #DS-2577, closes [#DS-2577](https://github.com/alma-oss/spirit-design-system/issues/DS-2577)
+
 ## [0.5.3](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.5.2...@alma-oss/spirit-storybook@0.5.3) (2026-06-02)
 
 **Note:** Version bump only for package @alma-oss/spirit-storybook

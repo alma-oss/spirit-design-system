@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@2.0.6...@lmc-eu/spirit-demo-app@2.1.0) (2026-07-01)
+
+### Features
+
+- **demo:** persist theme switcher selection across navigation
+
+### Chores
+
+- **ci:** include demo app in netlify deploy preview triggers
+
 ## [2.0.6](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@2.0.5...@lmc-eu/spirit-demo-app@2.0.6) (2026-05-15)
 
 ### Chores
