@@ -50,7 +50,7 @@ const ToastBar = (props: SpiritToastBarProps) => {
             </div>
             {isDismissible && onClose && (
               <CloseButton
-                size="large"
+                size="medium"
                 onClick={onClose}
                 aria-expanded={isOpen}
                 aria-controls={id}
