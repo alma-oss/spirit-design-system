@@ -95,14 +95,6 @@
         applyTheme(storedTheme, themes);
       }
 
-      document.addEventListener('DOMContentLoaded', () => {
-        const currentTheme = readStoredTheme();
-        if (!currentTheme || !isThemeAvailable(currentTheme, themes)) {
-          return;
-        }
-        syncSelects(currentTheme);
-      });
-
       const allowedOriginPattern = /^https:\/\/([a-zA-Z0-9-]+\.)*supernova-docs\.io$/;
 
       // Hide elements with hide-from-visual-tests class in Supernova component preview via postMessage
