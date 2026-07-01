@@ -39,8 +39,8 @@ jobs:
 
       - name: Setup git config
         run: |
-          git config user.name "alma-design-system-bot"
-          git config user.email "team-design-system@almacareer.com"
+          git config user.name "Pavel Klibani"
+          git config user.email "pavel.klibani@almamedia.com"
 
       - name: List affected packages
         run: |
