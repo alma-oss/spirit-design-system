@@ -45,20 +45,13 @@ Hide button when collapse
 
 ## Trigger Attributes
 
-| Name                        | Type     | Default    | Required | Description                                                                                                         |
-| --------------------------- | -------- | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------- |
-| `aria-controls`             | `string` | —          | ✕        | Aria controls state (auto)                                                                                          |
-| `aria-expanded`             | `string` | —          | ✕        | Aria expanded state (auto)                                                                                          |
-| `data-spirit-is-disposable` | `bool`   | —          | ✕        | For hide on collapse as more trigger                                                                                |
-| `data-spirit-more`          | `bool`   | —          | ✕        | [**DEPRECATED**][readme-deprecations] in favor of `data-spirit-is-disposable`; For hide on collapse as more trigger |
-| `data-spirit-target`        | `string` | —          | ✓        | Target selector                                                                                                     |
-| `data-spirit-toggle`        | `string` | `collapse` | ✓        | Iterable selector                                                                                                   |
-
-### ⚠️ DEPRECATION NOTICE
-
-Data attribute `data-spirit-more` is deprecated and will be removed in the next major release. Use `data-spirit-is-disposable` attribute instead.
-
-[What are deprecations?][readme-deprecations]
+| Name                        | Type     | Default    | Required | Description                          |
+| --------------------------- | -------- | ---------- | -------- | ------------------------------------ |
+| `aria-controls`             | `string` | —          | ✕        | Aria controls state (auto)           |
+| `aria-expanded`             | `string` | —          | ✕        | Aria expanded state (auto)           |
+| `data-spirit-is-disposable` | `bool`   | —          | ✕        | For hide on collapse as more trigger |
+| `data-spirit-target`        | `string` | —          | ✓        | Target selector                      |
+| `data-spirit-toggle`        | `string` | `collapse` | ✓        | Iterable selector                    |
 
 ## Wrapper Attributes
 
@@ -130,5 +123,4 @@ Please consult [main package README][web-readme] for how to include JavaScript p
 Or feel free to write controlling scripts yourself.
 
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
-[readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#deprecations
 [web-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md

@@ -10,7 +10,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { type SpiritBoxProps } from '../../../types';
+import { type BoxProps } from '../../../types';
 import Box from '../Box';
 
 const dataProvider = [
@@ -100,7 +100,7 @@ const dataProvider = [
   },
 ];
 
-const BoxPrefixTestComponent = ({ children }: SpiritBoxProps) => <Box backgroundColor="primary">{children}</Box>;
+const BoxPrefixTestComponent = ({ children }: BoxProps) => <Box backgroundColor="primary">{children}</Box>;
 
 describe('Box', () => {
   classNamePrefixProviderTest(BoxPrefixTestComponent, 'bg-primary');
