@@ -9,12 +9,16 @@ Introducing version 5 of the _spirit-web_ package.
 - [General Changes](#general-changes)
   - [Dropped Support for Node.js 20](#dropped-support-for-nodejs-20)
   - [Color Schemes](#color-schemes)
+  - [Form Fields: Composition Markup Changed](#form-fields-composition-markup-changed)
 - [Component Changes](#component-changes)
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
   - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
   - [Radio: Composition Markup Changed](#radio-composition-markup-changed)
   - [Toggle: Composition Markup Changed](#toggle-composition-markup-changed)
+  - [Collapse: `data-spirit-more` Removed, Use `data-spirit-is-disposable`](#collapse-data-spirit-more-removed-use-data-spirit-is-disposable)
   - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
+  - [Success State Icons Renamed from `check-plain` to `success`](#success-state-icons-renamed-from-check-plain-to-success)
+  - [FieldGroup: Component Styles Removed](#fieldgroup-component-styles-removed)
   - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Stack: Modifier Classes Without `has` Prefix](#stack-modifier-classes-without-has-prefix)
@@ -25,6 +29,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Item: Composable Content and Slots](#item-composable-content-and-slots)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
   - [Disabled Utility for Color-Scheme Components](#disabled-utility-for-color-scheme-components)
+  - [Navigation: Slots, Open State, and Removed Selected Indicator](#navigation-slots-open-state-and-removed-selected-indicator)
   - [Toggle: Input Before Label in HTML](#toggle-input-before-label-in-html)
   - [DrawerPanel: Restructured with Sub-components](#drawerpanel-restructured-with-sub-components)
 
@@ -39,6 +44,65 @@ The Node.js v20 is no longer supported. The minimum required Node.js version is 
 Multiple components now use color scheme utility classes (`color-scheme-on-*`) for surface colors
 instead of component-specific color modifiers. This affects: Box, Button, ControlButton, Item, Pill, Tag, Toast, and Tooltip.
 See [Color Schemes][decision-color-schemes] for the utility class naming and pairing logic.
+
+### Form Fields: Composition Markup Changed
+
+Form fields no longer use the monolithic `TextField`, `Select`, or `TextArea` wrapper markup.
+Compose fields from `Label`, `InputContainer`, `InputAddon`, `HelperText`, `ValidationText`, and `InputDetails` instead.
+
+Supported `InputContainer` variants:
+
+- `InputContainer--fill` (default)
+- `InputContainer--outline`
+
+Supported sizes: `InputContainer--small`, `InputContainer--medium`, `InputContainer--large`.
+
+When helper text, validation text, or `InputDetails` content should appear disabled, add the
+`InputDetails--disabled` modifier to the `InputDetails` wrapper.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+```html
+<!-- Before -->
+<div class="TextField TextField--medium">
+  <label for="text-field-default" class="TextField__label">Label</label>
+  <input type="text" id="text-field-default" class="TextField__input" name="default" placeholder="Placeholder" />
+</div>
+
+<!-- After -->
+<div>
+  <label for="text-field-default" class="Label">Label</label>
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
+    <input type="text" id="text-field-default" name="default" placeholder="Placeholder" />
+  </div>
+</div>
+```
+
+For fields with addons (icons, buttons), wrap the input and addon inside `InputContainer` and place each addon in
+`InputAddon`.
+
+When supplementary details should look disabled:
+
+```html
+<!-- Before -->
+<div id="consent-details" class="InputDetails">
+  <button type="button" class="link-underlined link-inherit" disabled>See terms</button>
+</div>
+
+<!-- After -->
+<div id="consent-details" class="InputDetails InputDetails--disabled">
+  <button type="button" class="link-underlined link-inherit" disabled>See terms</button>
+</div>
+```
+
+See [TextField README][readme-textfield], [InputAddon README][readme-input-addon], [Label README][readme-label],
+[HelperText README][readme-helper-text], [ValidationText README][readme-validation-text], and
+[InputDetails README][readme-input-details] for full examples.
+
+</details>
 
 ## Component Changes
 
@@ -269,6 +333,69 @@ Manually replace the modifier classes in your project.
 - `Flex--column` → `Flex--vertical`
 - `Flex--{breakpoint}--row` → `Flex--{breakpoint}--horizontal`
 - `Flex--{breakpoint}--column` → `Flex--{breakpoint}--vertical`
+
+### Collapse: `data-spirit-more` Removed, Use `data-spirit-is-disposable`
+
+The `data-spirit-more` attribute was removed from Collapse triggers. Use `data-spirit-is-disposable` instead.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Replace the attribute on collapse triggers:
+
+```html
+<!-- Before -->
+<button type="button" data-spirit-toggle="collapse" data-spirit-target="collapse" data-spirit-more>More</button>
+
+<!-- After -->
+<button type="button" data-spirit-toggle="collapse" data-spirit-target="collapse" data-spirit-is-disposable>
+  More
+</button>
+```
+
+</details>
+
+### Success State Icons Renamed from `check-plain` to `success`
+
+Success validation and status icons now use the `success` sprite icon instead of `check-plain`.
+This affects `ValidationText`, `Alert`, and `Toast` in success states. Selection indicators on `Item`, `PricingPlan`, and similar components still use `check-plain`.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Update custom sprite references in success validation or status states:
+
+```html
+<!-- Before -->
+<svg class="Icon" width="24" height="24" aria-hidden="true">
+  <use href="/icons/svg/sprite.svg#check-plain" />
+</svg>
+
+<!-- After (success validation/status only) -->
+<svg class="Icon" width="24" height="24" aria-hidden="true">
+  <use href="/icons/svg/sprite.svg#success" />
+</svg>
+```
+
+</details>
+
+### FieldGroup: Component Styles Removed
+
+The `FieldGroup` component styles were removed. Compose grouped fields with `Flex` and border utilities instead.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Replace `FieldGroup` markup with a `Flex` row and a border utility on the group wrapper.
+See [FieldGroup README][readme-fieldgroup] for current composition examples.
+
+</details>
 
 ### FileUpload and File: Stabilized (FileUploader Removed)
 
@@ -703,9 +830,19 @@ wrapped both the close button and the drawer body — has been replaced by two e
 
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
 
+> ℹ️ If you override design tokens in your project, see the [design tokens v5 migration guide][migration-guide-design-tokens].
+
 [decision-color-schemes]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/012-color-schemes.md
+[migration-guide-design-tokens]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/design-tokens/migration-v5.md
 [readme-alert]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Alert/README.md
 [readme-drawer]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Drawer/README.md
+[readme-fieldgroup]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/FieldGroup/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [readme-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Header/README.md
+[readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
+[readme-input-addon]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputAddon/README.md
+[readme-input-details]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputDetails/README.md
 [readme-item]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Item/README.md
+[readme-label]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Label/README.md
+[readme-textfield]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/TextField/README.md
+[readme-validation-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ValidationText/README.md
