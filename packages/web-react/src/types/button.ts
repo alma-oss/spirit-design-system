@@ -9,15 +9,13 @@ import type {
   PolymorphicComponentProps,
   RouterLinkProps,
   SingleOrResponsive,
-  SizesDictionaryType,
   SpaceToken,
   StyleProps,
 } from './shared';
 
 /** ===== BASE API ===== */
 export type ButtonColor<C> = ComponentButtonColorNamesType<C> | EmotionColorNamesType<C>;
-/** @deprecated "SizesDictionaryType" fallback will be removed in the next major version. */
-export type ButtonSize<S> = keyof S extends never ? SizesDictionaryType : ButtonSizesType | S;
+export type ButtonSize<S> = keyof S extends never ? ButtonSizesType : ButtonSizesType | S;
 
 export interface ButtonBaseProps extends ChildrenProps, StyleProps, ClickEvents {}
 

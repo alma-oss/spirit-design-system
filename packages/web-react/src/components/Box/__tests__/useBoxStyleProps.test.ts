@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react';
-import { type SpiritBoxProps } from '../../../types';
+import { type BoxProps } from '../../../types';
 import { useBoxStyleProps } from '../useBoxStyleProps';
 
 describe('useBoxStyleProps', () => {
   it('should return defaults', () => {
-    const props: SpiritBoxProps = {};
+    const props: BoxProps = {};
     const { result } = renderHook(() => useBoxStyleProps(props));
 
     expect(result.current.classProps).toBe('');
@@ -13,13 +13,13 @@ describe('useBoxStyleProps', () => {
   // handle `|| {}` fallback branch
   it('should return defaults with props `{}` fallback', () => {
     const props = undefined;
-    const { result } = renderHook(() => useBoxStyleProps(props as unknown as SpiritBoxProps));
+    const { result } = renderHook(() => useBoxStyleProps(props as unknown as BoxProps));
 
     expect(result.current.classProps).toBe('');
   });
 
   it('should return background classProps', () => {
-    const props: SpiritBoxProps = {
+    const props: BoxProps = {
       backgroundColor: 'secondary',
     };
     const { result } = renderHook(() => useBoxStyleProps(props));
@@ -28,7 +28,7 @@ describe('useBoxStyleProps', () => {
   });
 
   it('should return border color classProps', () => {
-    const props: SpiritBoxProps = {
+    const props: BoxProps = {
       borderColor: 'basic',
       borderWidth: '100',
       borderStyle: 'solid',
@@ -39,7 +39,7 @@ describe('useBoxStyleProps', () => {
   });
 
   it('should return border style classProps', () => {
-    const props: SpiritBoxProps = {
+    const props: BoxProps = {
       borderStyle: 'dashed',
       borderWidth: '100',
     };
@@ -49,7 +49,7 @@ describe('useBoxStyleProps', () => {
   });
 
   it('should return text color classProps', () => {
-    const props: SpiritBoxProps = {
+    const props: BoxProps = {
       textColor: 'primary',
     };
     const { result } = renderHook(() => useBoxStyleProps(props));
@@ -58,7 +58,7 @@ describe('useBoxStyleProps', () => {
   });
 
   it('should return color scheme classProps', () => {
-    const props: SpiritBoxProps = {
+    const props: BoxProps = {
       colorScheme: 'neutral-basic',
     };
     const { result } = renderHook(() => useBoxStyleProps(props));
@@ -67,7 +67,7 @@ describe('useBoxStyleProps', () => {
   });
 
   it('should use scheme border color when border is set and borderColor is omitted', () => {
-    const props: SpiritBoxProps = {
+    const props: BoxProps = {
       colorScheme: 'emotion-success-basic',
       borderWidth: '100',
       borderStyle: 'solid',
@@ -80,7 +80,7 @@ describe('useBoxStyleProps', () => {
   });
 
   it('should prefer explicit backgroundColor over scheme background', () => {
-    const props: SpiritBoxProps = {
+    const props: BoxProps = {
       colorScheme: 'neutral-basic',
       backgroundColor: 'primary',
     };
@@ -90,7 +90,7 @@ describe('useBoxStyleProps', () => {
   });
 
   it('should prefer explicit textColor over scheme text', () => {
-    const props: SpiritBoxProps = {
+    const props: BoxProps = {
       colorScheme: 'neutral-basic',
       textColor: 'secondary',
     };
@@ -100,7 +100,7 @@ describe('useBoxStyleProps', () => {
   });
 
   it('should prefer explicit borderColor over scheme border', () => {
-    const props: SpiritBoxProps = {
+    const props: BoxProps = {
       colorScheme: 'neutral-basic',
       borderWidth: '100',
       borderStyle: 'solid',
@@ -114,7 +114,7 @@ describe('useBoxStyleProps', () => {
   });
 
   it('should omit scheme background when backgroundGradient is set', () => {
-    const props: SpiritBoxProps = {
+    const props: BoxProps = {
       colorScheme: 'neutral-basic',
       backgroundGradient: 'primary',
     };

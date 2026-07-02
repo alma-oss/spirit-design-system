@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { type ElementType } from 'react';
 import { BorderColors } from '../../constants';
 import { useClassNamePrefix } from '../../hooks';
-import { type SpiritBoxProps } from '../../types';
+import { type BoxProps } from '../../types';
 
 export interface UseBoxStyleProps<E> {
   /** className props */
@@ -12,8 +12,8 @@ export interface UseBoxStyleProps<E> {
 }
 
 export const useBoxStyleProps = (
-  props: Partial<SpiritBoxProps<ElementType>>,
-): UseBoxStyleProps<Partial<SpiritBoxProps<ElementType>>> => {
+  props: Partial<BoxProps<ElementType>>,
+): UseBoxStyleProps<Partial<BoxProps<ElementType>>> => {
   const { backgroundColor, borderColor, borderStyle, borderWidth, colorScheme, textColor, ...restProps } = props || {};
 
   const schemeRootClass = useClassNamePrefix(colorScheme ? `color-scheme-on-${colorScheme}` : '');
