@@ -20,6 +20,8 @@ export function useItemStyleProps<P extends ItemStyleProps>(props: P): ItemStyle
   const { alignmentY, isDisabled, isSelected, ...restProps } = props;
   const itemClass = useClassNamePrefix('Item');
   const itemSelectedColorSchemeClass = getColorSchemeClassName({ color: 'selected', isSubtle: true });
+  const bgColorSchemeClass = useClassNamePrefix('bg-color-scheme');
+  const textColorSchemeClass = useClassNamePrefix('text-color-scheme');
   const itemContentClass = `${itemClass}__content`;
   const itemSlotClass = `${itemClass}__slot`;
 
@@ -30,6 +32,8 @@ export function useItemStyleProps<P extends ItemStyleProps>(props: P): ItemStyle
         [useAlignmentClass(itemClass, alignmentY as ItemAlignmentYType, 'alignmentY')]: alignmentY,
         [CLASS_NAME_DISABLED]: isDisabled,
         [itemSelectedColorSchemeClass]: isSelected,
+        [bgColorSchemeClass]: isSelected && !isDisabled,
+        [textColorSchemeClass]: isDisabled,
       }),
       slot: itemSlotClass,
     },

@@ -1,5 +1,4 @@
-// 1. Only for `disabled` state we change the text color to the disabled color. We keep the background color as is.
-// 2. Keep interactive controls in any slot (e.g. a remove button or link) clickable above a
+// 1. Keep interactive controls in any slot (e.g. a remove button or link) clickable above a
 //    stretched overlay that spans the whole Item, by lifting them into their own stacking context.
 
 @use 'theme';
@@ -25,32 +24,26 @@
     padding: theme.$padding-y theme.$padding-x;
     margin-block: 0;
     border-radius: theme.$border-radius;
-    background-color: color-scheme.background-color(theme.$background-color-state-default);
+    background-color: theme.$background-color-state-default;
 
     &:has(:active) {
         text-decoration: none;
     }
 
     &:active {
-        background-color: color-scheme.background-color(theme.$background-color-state-active);
+        background-color: theme.$background-color-state-active;
     }
 
     @media (hover: hover) {
         &:hover {
             text-decoration: none;
-            background-color: color-scheme.background-color(theme.$background-color-state-hover);
+            background-color: theme.$background-color-state-hover;
         }
     }
 
     &[role='option'] {
         cursor: cursors.$buttons;
     }
-}
-
-// 1.
-.Item.disabled {
-    color: color-scheme.color();
-    background-color: theme.$background-color-state-default;
 }
 
 .Item__content {
@@ -62,7 +55,7 @@
     display: flex;
 }
 
-// 2.
+// 1.
 .Item__slot :where(a, button) {
     position: relative;
     z-index: 1;

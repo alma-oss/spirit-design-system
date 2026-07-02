@@ -465,7 +465,7 @@ icons, and selection indicators are no longer positioned by Item-specific grid s
 | `Item__label` or direct `Label` / `HelperText` children | `Item__content` wrapping label and supporting text                                          |
 | `HelperText HelperText--item`                           | `HelperText` inside `Item__content`                                                         |
 | Selected trailing icon without `Icon--selected`         | Trailing icon in `Item__slot` with `Icon--selected` when selected                           |
-| `Item--selected` selected background                    | `color-scheme-on-selected-subtle` selected background                                       |
+| `Item--selected` selected background                    | `color-scheme-on-selected-subtle` and `bg-color-scheme` selected background                 |
 | Implicit `<button>` as the only documented root         | Use `<div class="Item">` for static rows; choose `<button>` or `<a>` explicitly when needed |
 
 #### Migration Guide
@@ -476,7 +476,7 @@ icons, and selection indicators are no longer positioned by Item-specific grid s
 1. Wrap the main label and supporting text in `Item__content` with `role="presentation"`.
 2. Replace `Item__icon` with `Item__slot` (`role="presentation"`).
 3. Remove the `HelperText--item` modifier; place plain `HelperText` inside `Item__content`.
-4. Add `Icon--selected` to trailing selection icons and use `color-scheme-on-selected-subtle` when the background should show.
+4. Add `Icon--selected` to trailing selection icons and use `color-scheme-on-selected-subtle` and `bg-color-scheme` when the background should show.
 5. Use a non-interactive `<div class="Item">` for static or composed rows; keep `<button>` or `<a>` only when the whole row is a single action.
 
 Simple item:
