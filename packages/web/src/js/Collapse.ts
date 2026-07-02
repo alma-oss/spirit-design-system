@@ -43,9 +43,7 @@ class Collapse extends BaseComponent {
       : null;
     this.meta = {
       id: this.element.dataset.spiritTarget,
-      isDisposable:
-        !!(this.element.dataset.spiritIsDisposable || this.element.dataset.spiritIsDisposable === '') ||
-        !!(this.element.dataset.spiritMore || this.element.dataset.spiritMore === ''), // Deprecated - remove on next major release
+      isDisposable: !!(this.element.dataset.spiritIsDisposable || this.element.dataset.spiritIsDisposable === ''),
       parent: this.target?.dataset.spiritParent,
       triggerParent: this.element && this.element.parentElement,
     };

@@ -78,7 +78,3 @@ Fixed `px` values ignore the user's root font-size setting and break this consis
 ```
 
 ⚠️ Make sure that you have properly set up the `skeleton-gradient` token in your project. Without it, Skeleton will not be available.
-
-### ⚠️ DEPRECATION NOTICE
-
-The check for the existence of the `skeleton-gradient` token is deprecated and will be removed in the next major release. Ensure that the `skeleton-gradient` token is properly set up in your project, as if you import all components, the project will not run without it.

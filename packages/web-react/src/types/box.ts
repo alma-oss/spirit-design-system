@@ -59,5 +59,4 @@ export interface BoxBaseProps extends ChildrenProps, TextColorProps, StyleProps 
 
 export type BoxProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, BoxBaseProps>;
 
-/** @deprecated Use BoxProps instead */
 export type SpiritBoxProps<E extends ElementType = 'div'> = BoxProps<E>;
