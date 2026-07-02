@@ -13,7 +13,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [Dropped Support for Node.js 20](#dropped-support-for-nodejs-20)
 - [Component Changes](#component-changes)
   - [Dropdown: `DropdownPopover` Now Has `role="dialog"` by Default](#dropdown-dropdownpopover-now-has-roledialog-by-default)
-  - [Collapse: `hideOnCollapse` Prop Renamed to `isDisposable`](#collapse-hideoncollapse-prop-renamed-to-isdisposable)
+  - [Collapse: `hideOnCollapse` Prop Removed, Use `isDisposable`](#collapse-hideoncollapse-prop-removed-use-isdisposable)
   - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
   - [Radio: Composition Markup Changed](#radio-composition-markup-changed)
   - [Toggle: Composition Markup Changed](#toggle-composition-markup-changed)
@@ -24,11 +24,15 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Alert: Deprecated Link Color Styles Removed](#alert-deprecated-link-color-styles-removed)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
-  - [Header: `UNSTABLE_Header` has been stabilized and renamed to `Header`, previous implementation has been removed](#header-stabilization-of-unstable_header-to-header-previous-implementation-removed)
+  - [Header: Stabilized as `Header`](#header-stabilization-of-unstable_header-to-header-previous-implementation-removed)
   - [Item: Composable Content and Slots](#item-composable-content-and-slots)
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
   - [Close Buttons Unified Into `CloseButton`](#close-buttons-unified-into-closebutton)
+  - [Button, ButtonLink, and ControlButton: Icon Spacing via `spacing` Prop](#button-buttonlink-and-controlbutton-icon-spacing-via-spacing-prop)
+  - [ValidationText: `hasValidationStateIcon` Renamed to `validationStateIcon`](#validationtext-hasvalidationstateicon-renamed-to-validationstateicon)
+  - [Success State Icons Renamed from `check-plain` to `success`](#success-state-icons-renamed-from-check-plain-to-success)
+  - [Navigation: Slots, Open State, and Removed Selected Indicator](#navigation-slots-open-state-and-removed-selected-indicator)
   - [DrawerPanel: Restructured with Sub-components](#drawerpanel-restructured-with-sub-components)
 
 ## General Changes
@@ -38,6 +42,7 @@ Introducing version 5 of the _spirit-web-react_ package.
 The Node.js v20 is no longer supported. The minimum required Node.js version is 22.
 
 > ℹ️ See also the [migration guide of the _spirit-web_ package][migration-guide-web] for the same Node.js requirement.
+> If you override design tokens, see the [design tokens v5 migration guide][migration-guide-design-tokens].
 
 ## Component Changes
 
@@ -77,9 +82,9 @@ automatically:
    </Dropdown>
    ```
 
-### Collapse: `hideOnCollapse` Prop Renamed to `isDisposable`
+### Collapse: `hideOnCollapse` Prop Removed, Use `isDisposable`
 
-The `hideOnCollapse` prop in `UncontrolledCollapse` component was renamed to `isDisposable`.
+The `hideOnCollapse` prop was removed from `UncontrolledCollapse`. Use `isDisposable` instead.
 
 #### Migration Guide
 
@@ -320,6 +325,8 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/unstable-file-component-
 - `UNSTABLE_FileImagePreview` → `FileImagePreview`
 - `UnstableFileUploadProps` → `FileUploadProps`
 - `UnstableFileItem` → `FileItem`
+- `linkText` → `inputUploadText`
+- `labelText` → `inputDragAndDropText`
 
 **FileUploader → FileUpload / File:**
 
@@ -748,6 +755,97 @@ If you relied on the previous heights, shift the `size` prop up to keep the same
 - `<ControlButton size="large" … />` → `<ControlButton size="xlarge" … />`
 </details>
 
+### Button, ButtonLink, and ControlButton: Icon Spacing via `spacing` Prop
+
+`Button`, `ButtonLink`, and `ControlButton` now set spacing between their children automatically using `column-gap`.
+Remove manual margin props from child `Icon` components and use the `spacing` prop on the button when you need a non-default gap.
+
+#### Migration Guide
+
+🪄 Use codemods to automatically update your codebase:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/button-icon-margin-removal
+```
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Remove `marginRight`, `marginLeft`, and `marginX` from `Icon` children inside buttons.
+When the previous margin was not the default (`space-400`), set `spacing` on the button instead.
+
+```tsx
+// Before
+<Button>
+  <Icon name="hamburger" marginRight="space-600" />
+  Menu
+</Button>
+
+// After
+<Button spacing="space-600">
+  <Icon name="hamburger" />
+  Menu
+</Button>
+```
+
+</details>
+
+### ValidationText: `hasValidationStateIcon` Renamed to `validationStateIcon`
+
+The `hasValidationStateIcon` prop on standalone `ValidationText` was renamed to `validationStateIcon`.
+
+#### Migration Guide
+
+🪄 Use codemods to automatically update your codebase:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/validation-state-icon-prop
+```
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Rename the prop wherever you pass it directly to `ValidationText`:
+
+```tsx
+// Before
+<ValidationText validationText="Saved successfully." hasValidationStateIcon="success" />
+
+// After
+<ValidationText validationText="Saved successfully." validationStateIcon="success" />
+```
+
+Form field components still expose `hasValidationIcon`; they map it to `validationStateIcon` on `ValidationText` internally.
+
+</details>
+
+### Success State Icons Renamed from `check-plain` to `success`
+
+Components that render a success validation or status icon now use the `success` icon instead of `check-plain`.
+This affects `ValidationText`, `Alert`, and `Toast` when `validationState` or equivalent is `success`.
+Selection indicators on `Item`, `PricingPlan`, and similar components still use `check-plain`.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Update custom icon names in success validation or status states:
+
+```tsx
+// Before
+<Icon name="check-plain" />
+
+// After (success validation/status only)
+<Icon name="success" />
+```
+
+</details>
+
 ### Navigation: Slots, Open State, and Removed Selected Indicator
 
 `NavigationAction` now supports `startSlot`/`endSlot` props for optional content around the label. Expanded
@@ -876,6 +974,7 @@ Update your imports:
 
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
 
+[migration-guide-design-tokens]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/design-tokens/migration-v5.md
 [migration-guide-web]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md
 [readme-alert]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Alert/README.md
 [readme-close-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/CloseButton/README.md
