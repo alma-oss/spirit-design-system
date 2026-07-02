@@ -8,7 +8,7 @@ const CheckboxInputPosition = () => {
   const [isResponsiveChecked, setResponsiveChecked] = useState(false);
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       <Checkbox
         id="checkbox-input-position-start"
         name="checkboxInputPositionStart"

@@ -104,46 +104,40 @@ Manually replace the prop in your project.
 - `<UncontrolledCollapse hideOnCollapse … />` → `<UncontrolledCollapse isDisposable … />`
 </details>
 
+### Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding
+
+Non-item Checkbox, Radio, and Toggle rows previously used vertical **margin** for default row spacing (for example
+`marginY="space-500"` on the component, or `my-500` on a vanilla `Flex` wrapper).
+
+`Stack` with `hasSpacing` resets vertical margin on direct children so gap-based spacing between items stays
+predictable. Margin on these rows inside a spaced Stack was therefore often removed — row spacing could disappear in
+stacked lists.
+
+Checkbox, Radio, and Toggle now apply vertical **padding** on the layout wrapper (`py-500`) instead. Padding is not
+reset by Stack, so spacing stays consistent inside and outside stacked layouts.
+
+**What to do:** Review your Checkbox, Radio, and Toggle usages and remove any `marginY="space-500"` you added
+manually. For vanilla HTML/SCSS markup, replace `my-500` with `py-500` on the row wrapper. When stacking multiple
+rows, use `<Stack>` **without** `hasSpacing` — the built-in padding already provides row spacing; combining
+`hasSpacing` with these components adds redundant gap on top of padding. See
+[Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding][migration-guide-web-vertical-spacing] in the
+_spirit-web_ migration guide for HTML examples.
+
 ### Checkbox: Composition Markup Changed
 
 Checkbox now composes its layout from Spirit components and applies the `Checkbox` class directly to the input.
-Vertical spacing is no longer applied by default.
-
-When Checkbox is rendered outside a `Stack` with `hasSpacing`, add `marginY="space-500"` to preserve the previous
-default vertical spacing. Omit it when the row is already spaced by a parent layout such as `Stack` with `hasSpacing`.
-
-#### Migration Guide
-
-🪄 Use codemods to automatically update your codebase:
-
-```sh
-npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/checkbox-margin-y
-```
-
-The codemod adds `marginY="space-500"` to Checkbox instances outside `Stack` with `hasSpacing`.
-It skips checkboxes that already define `marginY`, `margin`, `marginTop`, or `marginBottom`, and item-style checkboxes
-with `isItem`.
-
-👉 See [Codemods documentation][readme-codemods] for more details.
+Built-in `py-500` padding on the non-item wrapper replaces the previous margin-based spacing — see
+[Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding).
 
 <details>
   <summary>🔧 Manual Migration Steps</summary>
 
-Add Checkbox vertical spacing when the row is not already spaced by a parent layout:
+Stack multiple rows with plain `Stack` — do not add `hasSpacing` (built-in padding already spaces rows):
 
 ```tsx
-// Before
-<Checkbox id="checkbox-default" label="Checkbox Label" />
-
-// After
-<Checkbox id="checkbox-default" label="Checkbox Label" marginY="space-500" />
-```
-
-Inside `Stack` with `hasSpacing`, no extra spacing is needed:
-
-```tsx
-<Stack hasSpacing>
+<Stack>
   <Checkbox id="checkbox-default" label="Checkbox Label" />
+  <Checkbox id="checkbox-default-checked" label="Checkbox Label" isChecked />
 </Stack>
 ```
 
@@ -152,43 +146,18 @@ Inside `Stack` with `hasSpacing`, no extra spacing is needed:
 ### Radio: Composition Markup Changed
 
 Radio now composes its layout from Spirit components and applies the `Radio` class directly to the input.
-Vertical spacing is no longer applied by default.
-
-When Radio is rendered outside a `Stack` with `hasSpacing`, add `marginY="space-500"` to preserve the previous
-default vertical spacing. Omit it when the row is already spaced by a parent layout such as `Stack` with `hasSpacing`.
-
-#### Migration Guide
-
-🪄 Use codemods to automatically update your codebase:
-
-```sh
-npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/radio-margin-y
-```
-
-The codemod adds `marginY="space-500"` to Radio instances outside `Stack` with `hasSpacing`.
-It skips radios that already define `marginY`, `margin`, `marginTop`, or `marginBottom`, and item-style radios
-with `isItem`.
-
-👉 See [Codemods documentation][readme-codemods] for more details.
+Built-in `py-500` padding on the non-item wrapper replaces the previous margin-based spacing — see
+[Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding).
 
 <details>
   <summary>🔧 Manual Migration Steps</summary>
 
-Add Radio vertical spacing when the row is not already spaced by a parent layout:
+Stack multiple rows with plain `Stack` — do not add `hasSpacing` (built-in padding already spaces rows):
 
 ```tsx
-// Before
-<Radio id="radio-default" label="Radio Label" />
-
-// After
-<Radio id="radio-default" label="Radio Label" marginY="space-500" />
-```
-
-Inside `Stack` with `hasSpacing`, no extra spacing is needed:
-
-```tsx
-<Stack hasSpacing>
+<Stack>
   <Radio id="radio-default" label="Radio Label" />
+  <Radio id="radio-default-checked" label="Radio Label" isChecked />
 </Stack>
 ```
 
@@ -197,42 +166,18 @@ Inside `Stack` with `hasSpacing`, no extra spacing is needed:
 ### Toggle: Composition Markup Changed
 
 Toggle now composes its layout from Spirit components and applies the `Toggle` class directly to the input.
-Vertical spacing is no longer applied by default.
-
-When Toggle is rendered outside a `Stack` with `hasSpacing`, add `marginY="space-500"` to preserve the previous
-default vertical spacing. Omit it when the row is already spaced by a parent layout such as `Stack` with `hasSpacing`.
-
-#### Migration Guide
-
-🪄 Use codemods to automatically update your codebase:
-
-```sh
-npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/toggle-margin-y
-```
-
-The codemod adds `marginY="space-500"` to Toggle instances outside `Stack` with `hasSpacing`.
-It skips toggles that already define `marginY`, `margin`, `marginTop`, or `marginBottom`.
-
-👉 See [Codemods documentation][readme-codemods] for more details.
+Built-in `py-500` padding on the wrapper replaces the previous margin-based spacing — see
+[Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding).
 
 <details>
   <summary>🔧 Manual Migration Steps</summary>
 
-Add Toggle vertical spacing when the row is not already spaced by a parent layout:
+Stack multiple rows with plain `Stack` — do not add `hasSpacing` (built-in padding already spaces rows):
 
 ```tsx
-// Before
-<Toggle id="toggle-default" label="Toggle Label" />
-
-// After
-<Toggle id="toggle-default" label="Toggle Label" marginY="space-500" />
-```
-
-Inside `Stack` with `hasSpacing`, no extra spacing is needed:
-
-```tsx
-<Stack hasSpacing>
+<Stack>
   <Toggle id="toggle-default" label="Toggle Label" />
+  <Toggle id="toggle-default-checked" label="Toggle Label" isChecked />
 </Stack>
 ```
 
@@ -976,6 +921,7 @@ Please refer back to these instructions or reach out to our team if you encounte
 
 [migration-guide-design-tokens]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/design-tokens/migration-v5.md
 [migration-guide-web]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md
+[migration-guide-web-vertical-spacing]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md#checkbox-radio-and-toggle-vertical-spacing-uses-padding
 [readme-alert]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Alert/README.md
 [readme-close-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/CloseButton/README.md
 [readme-codemods]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/README.md

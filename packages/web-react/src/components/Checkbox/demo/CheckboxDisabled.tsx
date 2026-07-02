@@ -10,7 +10,7 @@ const CheckboxDisabled = () => {
   }, [checkboxRef]);
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       <Checkbox id="checkbox-disabled" name="checkboxDisabled" label="Checkbox Label" isDisabled />
       <Checkbox
         id="checkbox-disabled-helper-text"

@@ -16,7 +16,6 @@ const ToggleConsentEmphasizedLabel = () => {
     <>
       <Toggle
         id="consent-emphasized-label"
-        marginY="space-500"
         name="consentEmphasizedLabel"
         label={
           <Text elementType="span" emphasis="semibold">

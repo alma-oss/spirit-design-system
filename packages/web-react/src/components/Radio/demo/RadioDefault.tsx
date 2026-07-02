@@ -10,7 +10,7 @@ const RadioDefault = () => {
   };
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       <Radio
         id="radio-default"
         label="Radio Label"

@@ -87,7 +87,7 @@ Applies disabled styling to the label.
 ### Inline Field Label
 
 ```html
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox" class="Checkbox" />
   <div>
     <label class="Label Label--inline" for="checkbox">Checkbox Label</label>

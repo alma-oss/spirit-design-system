@@ -44,6 +44,20 @@ describe('Toggle', () => {
 
     expect(screen.getByRole('checkbox').parentElement).toHaveClass('Flex', 'Flex--horizontalReversed');
     expect(screen.getByRole('checkbox').parentElement).toHaveClass('Flex--alignmentXSpaceBetween');
+    expect(screen.getByRole('checkbox').parentElement).toHaveClass('py-500');
+  });
+
+  it('should keep py-500 padding when UNSAFE_className is provided', () => {
+    render(<Toggle id="test-toggle" label="Toggle Label" UNSAFE_className="foo" />);
+
+    expect(screen.getByRole('checkbox').parentElement).toHaveClass(
+      'Flex',
+      'Flex--horizontalReversed',
+      'Flex--inline',
+      'Flex--alignmentXSpaceBetween',
+      'py-500',
+      'foo',
+    );
   });
 
   it('should have label', () => {

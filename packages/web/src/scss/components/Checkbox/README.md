@@ -3,7 +3,7 @@
 ## Basic Usage
 
 ```html
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox-default" class="Checkbox" name="default" />
   <div>
     <label class="Label Label--inline" for="checkbox-default">Checkbox Label</label>
@@ -14,7 +14,7 @@
 ## Required Input
 
 ```html
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox-required" class="Checkbox" name="required" required />
   <div>
     <label class="Label Label--inline Label--required" for="checkbox-required">Checkbox Label</label>
@@ -30,7 +30,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
 - To render validation text with an icon, add `<svg>` icon inside of `.ValidationText`.
 
 ```html
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="checkbox-warning"
@@ -44,7 +44,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
   </div>
 </div>
 
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="checkbox-danger"
@@ -63,7 +63,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
   </div>
 </div>
 
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="checkbox-warning"
@@ -86,7 +86,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
 ## Hidden Label
 
 ```html
-<div class="Flex Flex--horizontal Flex--inline" style="--flex-spacing-x: var(--spirit-space-0);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-0);">
   <input type="checkbox" id="checkbox-hidden-label" class="Checkbox" name="hiddenLabel" required />
   <div>
     <label class="Label Label--inline accessibility-hidden" for="checkbox-hidden-label">Checkbox Label</label>
@@ -99,7 +99,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
 To add helper text, use the [HelperText][readme-helper-text] component:
 
 ```html
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="checkbox-helper-text"
@@ -124,7 +124,7 @@ element with modal triggers.
 Use emphasized (bold) label text to make the agreement statement more prominent:
 
 ```html
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="consent-emphasized-label"
@@ -159,7 +159,7 @@ Use emphasized (bold) label text to make the agreement statement more prominent:
 Complete example showing label, details with multiple links, helper text, and validation:
 
 ```html
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="consent-full-example"
@@ -218,7 +218,7 @@ Complete example showing label, details with multiple links, helper text, and va
 ## Disabled State
 
 ```html
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox-disabled" class="Checkbox" name="disabled" disabled />
   <div>
     <label class="Label Label--inline Label--disabled" for="checkbox-disabled">Checkbox Label</label>
@@ -246,7 +246,7 @@ The input position can be set using [Flex][readme-flex] component with direction
 ### Input on End
 
 ```html
-<div class="Flex Flex--horizontalReversed Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontalReversed Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox-position-end" class="Checkbox" name="position" />
   <div>
     <label class="Label Label--inline" for="checkbox-position-end">Checkbox Label</label>
@@ -260,7 +260,7 @@ Use responsive breakpoint modifiers to change input position at different screen
 
 ```html
 <div
-  class="Flex Flex--horizontal Flex--inline Flex--tablet--horizontalReversed Flex--desktop--horizontal my-500"
+  class="Flex Flex--horizontal Flex--inline Flex--tablet--horizontalReversed Flex--desktop--horizontal py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input type="checkbox" id="checkbox-position-responsive" class="Checkbox" name="position" />
