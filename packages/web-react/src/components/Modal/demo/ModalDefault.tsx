@@ -141,7 +141,7 @@ const ModalDefault = () => {
                 />
               </div>
             </form>
-            <Stack hasSpacing elementType="form">
+            <Stack elementType="form">
               <Checkbox
                 autoComplete="off"
                 id="modal-uniform-docked"

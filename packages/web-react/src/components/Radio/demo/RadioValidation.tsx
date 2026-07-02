@@ -6,7 +6,7 @@ const RadioValidation = () => {
   const [selectedRadio, setSelectedRadio] = useState('radio-warning-helper-text');
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       <Radio
         id="radio-success"
         label="Radio Label"

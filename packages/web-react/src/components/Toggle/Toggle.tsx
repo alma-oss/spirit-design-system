@@ -60,7 +60,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
         direction={direction}
         isInline
         spacingX={isLabelHidden ? 'space-0' : 'space-500'}
-        {...mergeStyleProps(Flex, { styleProps })}
+        {...mergeStyleProps(Flex, { styleProps, UNSAFE_className: 'py-500' })}
       >
         <input
           {...otherProps}

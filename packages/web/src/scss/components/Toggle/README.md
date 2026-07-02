@@ -9,7 +9,7 @@ the native input element and styles it to look like a toggle switch.
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input type="checkbox" id="toggle-default" class="Toggle" name="default" />
@@ -26,7 +26,7 @@ modifier class to the input. This will add visual indicators to the toggle switc
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input type="checkbox" id="toggle-indicators" class="Toggle Toggle--indicators" name="default" />
@@ -43,7 +43,7 @@ Add the `required` attribute to the input to mark it as required and add the
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input type="checkbox" id="toggle-required" class="Toggle" name="required" required />
@@ -57,7 +57,7 @@ Add the `required` attribute to the input to mark it as required and add the
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-0);"
 >
   <input type="checkbox" id="toggle-hidden-label" class="Toggle" name="hidden-label" />
@@ -78,7 +78,7 @@ To add helper text, use the [HelperText][readme-helper-text] component:
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input
@@ -104,7 +104,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input type="checkbox" id="toggle-success" class="Toggle Toggle--success" name="default" />
@@ -114,7 +114,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
 </div>
 
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input
@@ -132,7 +132,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
 </div>
 
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input
@@ -165,7 +165,7 @@ components mix CSS with JS by design and handle prefixes their own way.**
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input
@@ -197,7 +197,7 @@ class to render supplementary content (such as modal triggers) below the label.
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input
@@ -231,7 +231,7 @@ class to render supplementary content (such as modal triggers) below the label.
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input
@@ -288,7 +288,7 @@ class to render supplementary content (such as modal triggers) below the label.
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input type="checkbox" id="toggle-disabled" class="Toggle" name="default" disabled />
@@ -306,7 +306,7 @@ The input position can be set using [Flex][readme-flex] direction and horizontal
 
 ```html
 <div
-  class="Flex Flex--horizontal Flex--inline Flex--alignmentXStretch"
+  class="Flex Flex--horizontal Flex--inline Flex--alignmentXStretch py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input type="checkbox" id="toggle-position-start" class="Toggle" name="position" />
@@ -320,7 +320,7 @@ The input position can be set using [Flex][readme-flex] direction and horizontal
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input type="checkbox" id="toggle-position-end" class="Toggle" name="position" />
@@ -336,7 +336,7 @@ Use responsive breakpoint modifiers to change input position at different screen
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween Flex--tablet--horizontal Flex--tablet--alignmentXStretch Flex--desktop--horizontalReversed Flex--desktop--alignmentXSpaceBetween"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween Flex--tablet--horizontal Flex--tablet--alignmentXStretch Flex--desktop--horizontalReversed Flex--desktop--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input type="checkbox" id="toggle-position-responsive" class="Toggle" name="position" />

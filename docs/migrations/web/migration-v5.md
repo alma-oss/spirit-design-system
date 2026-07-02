@@ -12,6 +12,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Form Fields: Composition Markup Changed](#form-fields-composition-markup-changed)
 - [Component Changes](#component-changes)
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
+  - [Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding)
   - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
   - [Radio: Composition Markup Changed](#radio-composition-markup-changed)
   - [Toggle: Composition Markup Changed](#toggle-composition-markup-changed)
@@ -157,21 +158,40 @@ Responsive full-width with [`Grid`][readme-grid]:
 
 </details>
 
+### Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding
+
+Non-item Checkbox, Radio, and Toggle rows previously set their own vertical **margin** for default row spacing.
+
+`Stack` with spacing (`Stack--spacing`) resets vertical margin on direct children (`margin-block: 0`) so gap-based
+spacing between items stays predictable. Margin on checkbox, radio, or toggle rows inside a spaced Stack was therefore
+often removed — row spacing could disappear in stacked lists.
+
+These rows now use vertical **padding** on the layout wrapper (`py-500`) instead. Padding is not reset by Stack, so
+spacing stays consistent inside and outside stacked layouts.
+
+#### Migration Guide
+
+Review your Checkbox, Radio, and Toggle usages and remove any `my-500` on row wrappers — use `py-500` instead. When
+stacking multiple checkbox, radio, or toggle rows alone, use `Stack` **without** `Stack--spacing` — the built-in
+padding already provides row spacing; combining `Stack--spacing` with these rows adds redundant gap on top of padding.
+When mixing these rows with other form fields (for example inside [FieldGroup][readme-fieldgroup]), you may still want
+`Stack--spacing` or vertical Flex spacing so every field gets consistent gap — unlike React FieldGroup, the web
+FieldGroup does not add spacing between children by default.
+
 ### Checkbox: Composition Markup Changed
 
 The Checkbox component no longer provides the outer wrapper and text element classes.
 Compose checkbox rows from the `Checkbox`, `Label`, and layout utilities instead.
 
-Vertical spacing is controlled by the layout wrapper. Add margin utilities when the checkbox row owns its own spacing,
-and omit them when the row is already spaced by a parent layout such as `Stack`.
+See also [Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding)
+for more details about Checkbox vertical spacing.
 
 #### Migration Guide
 
 <details>
   <summary>🔧 Manual Migration Steps</summary>
 
-Replace the old Checkbox wrapper markup with a `Flex` row and add the required vertical spacing utility when the row is
-not already spaced by a parent layout:
+Replace the old Checkbox wrapper markup with a `Flex` row and add `py-500` vertical padding on the wrapper:
 
 ```html
 <!-- Before -->
@@ -183,7 +203,7 @@ not already spaced by a parent layout:
 </div>
 
 <!-- After -->
-<div class="Flex Flex--horizontal my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox-default" class="Checkbox" />
   <div>
     <label for="checkbox-default" class="Label Label--inline">Checkbox Label</label>
@@ -220,16 +240,15 @@ For item-style checkboxes, use the `Item` composition and the `Checkbox--item` a
 The Radio component no longer provides the outer wrapper and text element classes.
 Compose radio rows from the `Radio`, `Label`, and layout utilities instead.
 
-Vertical spacing is controlled by the layout wrapper. Add margin utilities when the radio row owns its own spacing,
-and omit them when the row is already spaced by a parent layout such as `Stack`.
+See also [Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding)
+for more details about Radio vertical spacing.
 
 #### Migration Guide
 
 <details>
   <summary>🔧 Manual Migration Steps</summary>
 
-Replace the old Radio wrapper markup with a `Flex` row and add the required vertical spacing utility when the row is
-not already spaced by a parent layout:
+Replace the old Radio wrapper markup with a `Flex` row and add `py-500` vertical padding on the wrapper:
 
 ```html
 <!-- Before -->
@@ -241,7 +260,7 @@ not already spaced by a parent layout:
 </div>
 
 <!-- After -->
-<div class="Flex Flex--horizontal my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="radio" id="radio-default" class="Radio" />
   <div>
     <label for="radio-default" class="Label Label--inline">Radio Label</label>
@@ -278,15 +297,15 @@ For item-style radios, use the `Item` composition and the `Radio--item` and `Lab
 The Toggle component no longer provides the outer wrapper and text element classes.
 Compose toggle rows from the `Toggle`, `Label`, and layout utilities instead.
 
-Add margin utilities when the row owns its own spacing, and omit them when the row is already spaced by a parent layout such as `Stack`.
+See also [Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding)
+for more details about Toggle vertical spacing.
 
 #### Migration Guide
 
 <details>
   <summary>🔧 Manual Migration Steps</summary>
 
-Replace the old Toggle wrapper markup with a `Flex` row and add the required vertical spacing utility when the row is
-not already spaced by a parent layout:
+Replace the old Toggle wrapper markup with a `Flex` row and add `py-500` vertical padding on the wrapper:
 
 ```html
 <!-- Before -->
@@ -299,7 +318,7 @@ not already spaced by a parent layout:
 
 <!-- After -->
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween my-500"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input type="checkbox" id="toggle-default" class="Toggle" />

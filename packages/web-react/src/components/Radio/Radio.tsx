@@ -73,7 +73,7 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
           direction={direction}
           isInline
           spacingX={isLabelHidden ? 'space-0' : 'space-500'}
-          {...mergeStyleProps(Flex, { styleProps })}
+          {...mergeStyleProps(Flex, { styleProps, UNSAFE_className: 'py-500' })}
         >
           {radioInput}
           <div>{radioText}</div>

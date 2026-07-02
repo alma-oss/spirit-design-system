@@ -6,7 +6,7 @@ const RadioItem = () => {
   const [selectedRadio, setSelectedRadio] = useState('radio-item-default-checked');
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       <Radio
         id="radio-item-default"
         isItem

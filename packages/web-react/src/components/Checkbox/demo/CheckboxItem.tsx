@@ -8,7 +8,7 @@ const CheckboxItem = () => {
   const [isCheckedItemHelperText, setIsCheckedItemHelperText] = useState(false);
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       <Checkbox
         id="checkbox-item-default"
         name="checkboxItemDefault"

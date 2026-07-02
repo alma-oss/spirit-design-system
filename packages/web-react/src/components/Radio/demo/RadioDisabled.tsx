@@ -3,7 +3,7 @@ import { Stack } from '../../Stack';
 import Radio from '../Radio';
 
 const RadioDisabled = () => (
-  <Stack hasSpacing>
+  <Stack>
     <Radio id="radio-disabled" isDisabled label="Radio Label" name="radioDisabled" />
 
     <Radio
