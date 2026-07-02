@@ -37,7 +37,7 @@ This codemod updates the `UncontrolledCollapse` component by replacing the `hide
 #### Usage
 
 ```sh
-npx @lmc-eu/spirit-codemods -p <path> -t v5/web-react/collapse-isDisposable-prop
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/collapse-isDisposable-prop
 ```
 
 #### Example
@@ -45,6 +45,24 @@ npx @lmc-eu/spirit-codemods -p <path> -t v5/web-react/collapse-isDisposable-prop
 ```diff
 - <UncontrolledCollapse hideOnCollapse … />
 + <UncontrolledCollapse isDisposable … />
+```
+
+### `v5/web-react/validation-state-icon-prop` — ValidationText `hasValidationStateIcon` to `validationStateIcon` Prop Change
+
+This codemod updates standalone `ValidationText` usage by replacing the `hasValidationStateIcon` prop with `validationStateIcon`.
+It does not change `hasValidationIcon` on form field components such as `TextField` or `Checkbox`.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/validation-state-icon-prop
+```
+
+#### Example
+
+```diff
+- <ValidationText validationText="Saved successfully." hasValidationStateIcon="success" />
++ <ValidationText validationText="Saved successfully." validationStateIcon="success" />
 ```
 
 ### `v5/web-react/checkbox-margin-y` — Add Checkbox Vertical Spacing Outside Stack
@@ -111,7 +129,7 @@ This codemod updates `direction` values of `Flex` component by replacing `row` t
 #### Usage
 
 ```sh
-npx @lmc-eu/spirit-codemods -p <path> -t v5/web-react/flex-direction-values
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/flex-direction-values
 ```
 
 #### Example
