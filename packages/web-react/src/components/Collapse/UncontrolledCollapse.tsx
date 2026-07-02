@@ -12,21 +12,12 @@ const defaultProps = {
 
 const UncontrolledCollapse = (props: SpiritUncontrolledCollapseProps) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const {
-    children,
-    /** @deprecated "hideOnCollapse" property will be replaced in the next major version. Please use "isDisposable" instead. */
-    hideOnCollapse,
-    isDisposable,
-    renderTrigger,
-    ...restProps
-  } = propsWithDefaults;
+  const { children, isDisposable, renderTrigger, ...restProps } = propsWithDefaults;
   const { isOpen, toggleHandler } = useCollapse(restProps.isOpen);
   const { ariaProps } = useCollapseAriaProps({ ...restProps, isOpen });
 
-  const isDisposed = hideOnCollapse || isDisposable;
-
   const triggerRenderHandler = () => {
-    const showTrigger = isDisposed ? !(isDisposed && isOpen) : true;
+    const showTrigger = isDisposable ? !(isDisposable && isOpen) : true;
 
     return renderTrigger && showTrigger
       ? renderTrigger({
@@ -40,7 +31,7 @@ const UncontrolledCollapse = (props: SpiritUncontrolledCollapseProps) => {
   return (
     <>
       {triggerRenderHandler()}
-      {isDisposed && isOpen ? (
+      {isDisposable && isOpen ? (
         children
       ) : (
         <Collapse {...restProps} isOpen={isOpen}>
