@@ -59,6 +59,7 @@ For each kept entry:
 - Wrap every **component name** (PascalCase, e.g. `Picker`, `ControlButton`, `UNSTABLE_File`) and every **hook/utility name** (camelCase with `use` prefix or similar, e.g. `useSelectionState`) in backticks.
 - Wrap every **prop name** or **HTML attribute name** (e.g. `elementType`, `name`) in **bold** instead of backticks.
 - Package names (e.g. `@alma-oss/spirit-web-react`) are always in backticks — including in the package header line.
+- Normalize common acronyms when copying from CHANGELOG: `css` → `CSS`, `html` → `HTML`, etc.
 
 ---
 
@@ -113,12 +114,14 @@ Where:
 
 ### Step 5 — Synthesize the General Changes Summary
 
-Write 2–3 short paragraphs (not a list, not a single block of text) that summarize the release. Each paragraph covers one theme — e.g. new components, framework-specific additions, feature flags or breaking changes. Use a blank line between paragraphs.
+Write 1–2 short paragraphs (not a list, not a single block of text) that summarize the release. For smaller releases, one paragraph (~3 sentences) is enough. Each paragraph covers one theme — e.g. new components, feature flags or breaking changes. Use a blank line between paragraphs when there are two.
 
 - What was the overarching theme or focus?
 - What are the 1–2 most impactful additions for consumers?
 - If any UNSTABLE components were introduced or stabilized, mention it.
 - If there are breaking changes or security improvements, call them out as a separate sentence or short paragraph — do not bury them.
+- **Omit internal migrations** (px→rem, refactors) from the narrative — they belong in the package changelog, not the newsletter summary.
+- **Do not split by framework** — avoid phrases like "vanilla web", "vanilla side", or "both React and web"; describe features uniformly.
 
 **Tone of voice:**
 
@@ -178,7 +181,7 @@ Use this exact structure with Unicode emoji:
 
 ## We'd Love to Hear Your Feedback
 
-💬 If you have any idea, suggestion or request regarding the newly introduced unstable components, or if you just need help or want to report a bug or wrong behavior, please get in touch with us on our Slack channel: [#spirit-design-system-support_cs_en](https://slack.com/archives/C068XPSDWQN).
+💬 If you have any ideas, suggestions, or requests regarding the newly introduced unstable components, or if you just need help or want to report a bug or wrong behavior, please get in touch with us on our Slack channel: [#spirit-design-system-support_cs_en](https://slack.com/archives/C068XPSDWQN).
 
 &nbsp;
 
@@ -238,7 +241,7 @@ This release brings significant expansion to form and file handling capabilities
 
 ## We'd Love to Hear Your Feedback
 
-💬 If you have any idea, suggestion or request...
+💬 If you have any ideas, suggestions, or requests...
 
 🐙 Everything is available in our [repository on GitHub](https://github.com/alma-oss/spirit-design-system/).
 
