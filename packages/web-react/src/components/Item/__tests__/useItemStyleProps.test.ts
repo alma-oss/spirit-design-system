@@ -18,7 +18,7 @@ describe('useItemStyleProps', () => {
     const props = { isSelected: true } as SpiritItemProps;
     const { result } = renderHook(() => useItemStyleProps(props));
 
-    expect(result.current.classProps.root).toBe('Item color-scheme-on-selected-subtle');
+    expect(result.current.classProps.root).toBe('Item color-scheme-on-selected-subtle bg-color-scheme');
   });
 
   it('should return item with non-default vertical alignment', () => {
@@ -41,14 +41,14 @@ describe('useItemStyleProps', () => {
     const props = { isDisabled: true } as SpiritItemProps;
     const { result } = renderHook(() => useItemStyleProps(props));
 
-    expect(result.current.classProps.root).toBe('Item disabled');
+    expect(result.current.classProps.root).toBe('Item disabled text-color-scheme');
   });
 
   it('should return disabled selected item', () => {
     const props = { isDisabled: true, isSelected: true } as SpiritItemProps;
     const { result } = renderHook(() => useItemStyleProps(props));
 
-    expect(result.current.classProps.root).toBe('Item disabled color-scheme-on-selected-subtle');
+    expect(result.current.classProps.root).toBe('Item disabled color-scheme-on-selected-subtle text-color-scheme');
   });
 
   it('should not pass style props to returned props', () => {

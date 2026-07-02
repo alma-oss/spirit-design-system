@@ -46,15 +46,15 @@ Link:
 
 ## Selected State
 
-Use `color-scheme-on-selected-subtle` when the item itself should have the selected background.
-For stronger selected surfaces, use `color-scheme-on-selected-basic`.
+Use `color-scheme-on-selected-subtle` and `bg-color-scheme` when the item itself should have the selected background.
+For stronger selected surfaces, use `color-scheme-on-selected-basic` and `bg-color-scheme`.
 These color schemes do not render a checkmark or recolor slot icons on their own. If the selected state needs an icon,
 render it in `Item__slot` and add `Icon--selected` to the `Icon`.
 
 Selected with background only:
 
 ```html
-<button type="button" class="Item color-scheme-on-selected-subtle">
+<button type="button" class="Item color-scheme-on-selected-subtle bg-color-scheme">
   <span class="Item__content" role="presentation">
     <span class="Label Label--item">Item</span>
   </span>
@@ -79,7 +79,7 @@ Selected with icon only:
 Selected with background and icon:
 
 ```html
-<button type="button" class="Item color-scheme-on-selected-subtle">
+<button type="button" class="Item color-scheme-on-selected-subtle bg-color-scheme">
   <span class="Item__content" role="presentation">
     <span class="Label Label--item">Item</span>
   </span>
@@ -114,7 +114,7 @@ Leading icon:
 Leading icon, trailing selected icon, and selected background:
 
 ```html
-<button type="button" class="Item color-scheme-on-selected-subtle">
+<button type="button" class="Item color-scheme-on-selected-subtle bg-color-scheme">
   <span class="Item__slot" role="presentation">
     <svg class="Icon Icon--selected" width="24" height="24" aria-hidden="true">
       <use href="/icons/svg/sprite.svg#search" />
@@ -137,7 +137,7 @@ Compose richer rows inside `Item__content` with [HelperText][helper-text], typog
 or other inline content.
 
 ```html
-<div class="Item color-scheme-on-selected-subtle">
+<div class="Item color-scheme-on-selected-subtle bg-color-scheme">
   <span class="Item__slot" role="presentation">
     <svg class="Icon Icon--selected" width="24" height="24" aria-hidden="true">
       <use href="/icons/svg/sprite.svg#folder-dualtone" />
@@ -261,13 +261,15 @@ and `Item__content` should align differently on the cross axis.
 
 ## Disabled State
 
-The `.disabled` utility styles the disabled appearance only. Add the native `disabled` attribute on `<button>` yourself.
+The `disabled` and `text-color-scheme` utility classes style the disabled appearance only. Add the native `disabled` attribute on `<button>` yourself.
 For `<a>`, `role="option"`, or other non-button roots, add `aria-disabled="true"` explicitly.
+
+Do not add `bg-color-scheme` to the selected disabled Item.
 
 Button:
 
 ```html
-<button type="button" class="Item disabled" disabled>
+<button type="button" class="Item disabled text-color-scheme" disabled>
   <span class="Item__content" role="presentation">
     <span class="Label Label--item Label--disabled">Item</span>
   </span>
@@ -277,7 +279,7 @@ Button:
 Link:
 
 ```html
-<a href="#" class="Item disabled" aria-disabled="true">
+<a href="#" class="Item disabled text-color-scheme" aria-disabled="true">
   <span class="Item__content" role="presentation">
     <span class="Label Label--item Label--disabled">Item</span>
   </span>
@@ -289,7 +291,7 @@ Link:
 Non-interactive root:
 
 ```html
-<div class="Item disabled" aria-disabled="true">
+<div class="Item disabled text-color-scheme" aria-disabled="true">
   <span class="Item__content" role="presentation">
     <span class="Label Label--item Label--disabled">Item</span>
   </span>
@@ -366,13 +368,13 @@ Choose the Item root semantics according to what the row does:
 - `color-scheme-on-selected-subtle` is visual only. It does not imply `aria-selected`, `aria-current`, or a widget role. The parent widget owns those semantics because listbox options, menu items, grid rows, and links all use different markup.
 - Decorative slot icons should use `aria-hidden="true"` or the documented Icon conventions. `Icon--selected` is visual only and must not replace the ARIA state.
 - Inline text highlighting with `<strong>` is fine for visual emphasis, but it does not announce selection or activation state.
-- The `.disabled` utility styles the disabled appearance only. Add the native `disabled` attribute on `<button>` yourself. For `<a>`, `role="option"`, or other non-button roots, add `aria-disabled="true"` explicitly. See [Disabled State](#disabled-state).
+- The `disabled` and `text-color-scheme` utility classes style the disabled appearance only. Add the native `disabled` attribute on `<button>` yourself. For `<a>`, `role="option"`, or other non-button roots, add `aria-disabled="true"` explicitly. See [Disabled State](#disabled-state).
 
 For a listbox-like parent, add [`option`][mdn-option-role] semantics and selected state explicitly.
 The parent widget must implement the keyboard interaction contract for the chosen role:
 
 ```html
-<div class="Item color-scheme-on-selected-subtle" role="option" aria-selected="true">
+<div class="Item color-scheme-on-selected-subtle bg-color-scheme" role="option" aria-selected="true">
   <span class="Item__content" role="presentation">
     <span class="Label Label--item">Item</span>
   </span>
