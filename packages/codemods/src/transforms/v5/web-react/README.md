@@ -6,6 +6,30 @@ You can find instructions on how to run these codemods in the main package [READ
 
 ## Included Scripts
 
+### `v5/web-react/alert-link-color-inherit` — Add `color="inherit"` to `Link` Inside `Alert`
+
+This codemod adds `color="inherit"` to every `Link` component that is a descendant of an `Alert`
+component and does not already have a `color` prop set. This restores the previous behavior where
+links inside `Alert` automatically inherited the alert's content color, which was removed when
+`Alert` migrated to color scheme utility classes.
+
+Links that already have any `color` prop are left untouched.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/alert-link-color-inherit
+```
+
+#### Example
+
+```diff
+  <Alert color="success">
+-   See <Link href="/faq">FAQ</Link> for more info.
++   See <Link href="/faq" color="inherit">FAQ</Link> for more info.
+  </Alert>
+```
+
 ### `v5/web-react/collapse-isDisposable-prop` — UncontrolledCollapse `hideOnCollapse` to `isDisposable` Prop Change
 
 This codemod updates the `UncontrolledCollapse` component by replacing the `hideOnCollapse` prop with a new `isDisposable` prop.
