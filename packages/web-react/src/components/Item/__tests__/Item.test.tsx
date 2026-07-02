@@ -134,7 +134,8 @@ describe('Item', () => {
 
     const element = screen.getByText('Item label').closest('.Item') as HTMLElement;
 
-    expect(element).toHaveClass('color-scheme-on-selected-subtle');
+    expect(element).toHaveClass('color-scheme-on-selected-subtle', 'bg-color-scheme');
+    expect(element).not.toHaveClass('text-color-scheme');
     expect(element.querySelectorAll('.Item__slot')).toHaveLength(0);
   });
 
@@ -147,7 +148,8 @@ describe('Item', () => {
 
     const element = screen.getByText('Item label').closest('.Item') as HTMLElement;
 
-    expect(element).toHaveClass('disabled', 'color-scheme-on-selected-subtle');
+    expect(element).toHaveClass('disabled', 'color-scheme-on-selected-subtle', 'text-color-scheme');
+    expect(element).not.toHaveClass('bg-color-scheme');
   });
 
   it('should render end slot', () => {
@@ -171,7 +173,7 @@ describe('Item', () => {
 
     const element = screen.getByText('Item label').closest('.Item') as HTMLElement;
 
-    expect(element).toHaveClass('color-scheme-on-selected-subtle');
+    expect(element).toHaveClass('color-scheme-on-selected-subtle', 'bg-color-scheme');
     expect(element.querySelector('.Item__slot')).toContainElement(screen.getByTestId('end-slot'));
   });
 
@@ -180,7 +182,8 @@ describe('Item', () => {
 
     const element = screen.getByText('Item label').closest('.Item') as HTMLElement;
 
-    expect(element).toHaveClass('disabled');
+    expect(element).toHaveClass('disabled', 'text-color-scheme');
+    expect(element).not.toHaveClass('bg-color-scheme');
     expect(element).not.toHaveAttribute('disabled');
   });
 
