@@ -70,4 +70,19 @@ Variants:
 </div>
 ```
 
+## Links in Alert
+
+To ensure links inside Alert match the alert's content color, add the `link-inherit` class to
+each link or button element. Use `link-underlined` as well for accessibility so links are
+distinguishable from surrounding text:
+
+```html
+<div class="Alert Alert--success color-scheme-on-emotion-success-subtle">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
+    <use href="/icons/svg/sprite.svg#success" />
+  </svg>
+  <div>See <a href="/faq" class="link-inherit link-underlined">FAQ</a> for more info.</div>
+</div>
+```
+
 [component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
