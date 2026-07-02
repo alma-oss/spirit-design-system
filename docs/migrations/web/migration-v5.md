@@ -8,6 +8,7 @@ Introducing version 5 of the _spirit-web_ package.
 
 - [General Changes](#general-changes)
   - [Dropped Support for Node.js 20](#dropped-support-for-nodejs-20)
+  - [Color Schemes](#color-schemes)
 - [Component Changes](#component-changes)
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
   - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
@@ -19,6 +20,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Stack: Modifier Classes Without `has` Prefix](#stack-modifier-classes-without-has-prefix)
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
+  - [Alert: Deprecated Link Color Styles Removed](#alert-deprecated-link-color-styles-removed)
   - [Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed](#header-unstable_header-stabilized-previous-header-css-removed)
   - [Item: Composable Content and Slots](#item-composable-content-and-slots)
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
@@ -31,6 +33,12 @@ Introducing version 5 of the _spirit-web_ package.
 ### Dropped Support for Node.js 20
 
 The Node.js v20 is no longer supported. The minimum required Node.js version is 22.
+
+### Color Schemes
+
+Multiple components now use color scheme utility classes (`color-scheme-on-*`) for surface colors
+instead of component-specific color modifiers. This affects: Box, Button, ControlButton, Item, Pill, Tag, Toast, and Tooltip.
+See [Color Schemes][decision-color-schemes] for the utility class naming and pairing logic.
 
 ## Component Changes
 
@@ -384,6 +392,32 @@ The feature flag enabling the new `Tag` appearance was removed and the new appea
 You can now safely delete the Sass variable `$enable-v5-tag-appearance` and the CSS class
 `spirit-feature-enable-v5-tag-appearance` from your project as they have no effect.
 
+### Alert: Deprecated Link Color Styles Removed
+
+The deprecated `.Alert :where(a)` CSS rule that forced links inside `Alert` to inherit the
+alert's content color has been removed. Links inside `Alert` now use the default link color
+from your project styles.
+
+#### Migration Guide
+
+If your project relies on links inside `Alert` matching the alert's content color, add the
+`link-inherit` class to each link or button element. Use `link-underlined` as well so links
+remain distinguishable from surrounding text:
+
+```html
+<!-- Before -->
+<div class="Alert Alert--success">
+  <div>See <a href="/faq">FAQ</a> for more info.</div>
+</div>
+
+<!-- After -->
+<div class="Alert Alert--success">
+  <div>See <a href="/faq" class="link-inherit link-underlined">FAQ</a> for more info.</div>
+</div>
+```
+
+See [Alert README][readme-alert] for the full links-in-alert pattern.
+
 ### Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed
 
 The `UNSTABLE_Header` CSS classes have been stabilized and renamed. The previous `Header` component CSS
@@ -669,6 +703,8 @@ wrapped both the close button and the drawer body — has been replaced by two e
 
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
 
+[decision-color-schemes]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/012-color-schemes.md
+[readme-alert]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Alert/README.md
 [readme-drawer]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Drawer/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [readme-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Header/README.md
