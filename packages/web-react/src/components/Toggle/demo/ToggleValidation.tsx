@@ -3,7 +3,7 @@ import { Stack } from '../../Stack';
 import Toggle from '../Toggle';
 
 const ToggleValidation = () => (
-  <Stack hasSpacing>
+  <Stack>
     <Toggle id="toggle-success" label="Toggle Label" validationState="success" />
     <Toggle
       id="toggle-warning"

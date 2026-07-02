@@ -8,7 +8,7 @@ It can be used internally in the form components.
 ## Usage with Checkbox
 
 ```html
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="consent" class="Checkbox" name="consent" aria-details="consent-details" required />
   <div>
     <label class="Label Label--inline Label--required" for="consent">I agree to the terms and conditions</label>
@@ -31,7 +31,7 @@ It can be used internally in the form components.
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween my-500"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input type="checkbox" id="consent" class="Toggle" name="consent" required aria-details="consent-details" />
@@ -61,7 +61,7 @@ To render the `InputDetails` component in a disabled state, add the `InputDetail
 ### With Disabled Checkbox
 
 ```html
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="consent"
@@ -87,7 +87,7 @@ To render the `InputDetails` component in a disabled state, add the `InputDetail
 
 ```html
 <div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween my-500"
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
   <input type="checkbox" id="consent" class="Toggle" name="consent" disabled required aria-details="consent-details" />

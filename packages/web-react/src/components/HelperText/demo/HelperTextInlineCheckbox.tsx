@@ -7,7 +7,7 @@ const HelperTextInlineCheckbox = () => {
   const [isCheckedDisabled, setIsCheckedDisabled] = useState(false);
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       <Checkbox
         id="checkbox-helper-text-example"
         name="checkboxHelperTextExample"

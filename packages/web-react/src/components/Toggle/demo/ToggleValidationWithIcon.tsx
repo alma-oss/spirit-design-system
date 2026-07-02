@@ -7,7 +7,7 @@ const ToggleValidationWithIcon = () => {
   const states = Object.values(ValidationStates);
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       {states.map((state) => (
         <Toggle
           id={`toggle-${state}-validation-icon`}

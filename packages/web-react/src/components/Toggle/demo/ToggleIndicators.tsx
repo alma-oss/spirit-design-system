@@ -3,7 +3,7 @@ import { Stack } from '../../Stack';
 import Toggle from '../Toggle';
 
 const ToggleIndicators = () => (
-  <Stack hasSpacing>
+  <Stack>
     <Toggle id="toggle-indicators" label="Toggle Label" name="default" hasIndicators />
     <Toggle id="toggle-indicators-checked" label="Toggle Label" name="default" isChecked hasIndicators />
   </Stack>

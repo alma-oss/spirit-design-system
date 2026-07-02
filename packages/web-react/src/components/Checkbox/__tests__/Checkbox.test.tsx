@@ -74,6 +74,25 @@ describe('Checkbox', () => {
     expect(input).toHaveClass('Checkbox', 'Checkbox--item');
     expect(input.parentElement).toHaveClass('Item__slot');
     expect(input.parentElement?.parentElement).toHaveClass('Item');
+    expect(input.parentElement?.parentElement).not.toHaveClass('py-500');
+  });
+
+  it('should apply py-500 padding on non-item wrapper', () => {
+    render(<Checkbox id="checkbox" label="Label" />);
+
+    expect(screen.getByRole('checkbox').parentElement).toHaveClass('py-500');
+  });
+
+  it('should keep py-500 padding when UNSAFE_className is provided', () => {
+    render(<Checkbox id="checkbox" label="Label" UNSAFE_className="foo" />);
+
+    expect(screen.getByRole('checkbox').parentElement).toHaveClass(
+      'Flex',
+      'Flex--horizontal',
+      'Flex--inline',
+      'py-500',
+      'foo',
+    );
   });
 
   it('should have helper text', () => {

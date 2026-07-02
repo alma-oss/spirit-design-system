@@ -8,7 +8,7 @@ const ToggleInputPosition = () => {
   const [isResponsiveChecked, setResponsiveChecked] = useState(false);
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       <Toggle
         id="toggle-input-position-start"
         name="toggleInputPositionStart"

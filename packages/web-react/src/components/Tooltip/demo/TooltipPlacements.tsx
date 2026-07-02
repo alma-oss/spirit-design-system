@@ -85,7 +85,7 @@ const TooltipPlacements = () => {
           rowStart={2}
           UNSAFE_style={{ display: 'flex', flexDirection: 'column', justifySelf: 'start' }}
         >
-          <Stack hasSpacing>
+          <Stack>
             <Radio
               name="placement"
               isChecked={placement === 'left-start'}
@@ -120,7 +120,7 @@ const TooltipPlacements = () => {
           rowStart={2}
           UNSAFE_style={{ display: 'flex', flexDirection: 'column', justifySelf: 'end' }}
         >
-          <Stack hasSpacing>
+          <Stack>
             <Radio
               name="placement"
               isChecked={placement === 'right-start'}

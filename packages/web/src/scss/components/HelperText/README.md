@@ -20,7 +20,7 @@ Place HelperText inside the **Radio** or **Checkbox** text area:
 
 ```html
 <!-- Radio -->
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="radio"
     id="radio-helper-text"
@@ -35,7 +35,7 @@ Place HelperText inside the **Radio** or **Checkbox** text area:
 </div>
 
 <!-- Checkbox -->
-<div class="Flex Flex--horizontal Flex--inline my-500" style="--flex-spacing-x: var(--spirit-space-500);">
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input
     type="checkbox"
     id="checkbox-helper-text"

@@ -7,7 +7,7 @@ const ValidationTextInlineCheckbox = () => {
   const [isCheckedWarning, setIsCheckedWarning] = useState(false);
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       <Checkbox
         id="validation-text-checkbox-danger"
         name="checkboxDanger"

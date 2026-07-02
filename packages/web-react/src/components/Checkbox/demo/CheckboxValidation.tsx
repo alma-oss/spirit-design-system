@@ -9,7 +9,7 @@ const CheckboxValidation = () => {
   const [isCheckedWarningHelperText, setIsCheckedWarningHelperText] = useState(true);
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       <Checkbox
         id="checkbox-success"
         name="checkboxSuccess"

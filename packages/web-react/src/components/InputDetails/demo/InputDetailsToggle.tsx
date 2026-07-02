@@ -11,7 +11,6 @@ const InputDetailsToggle = () => {
     <>
       <Toggle
         id="input-details-toggle"
-        marginY="space-500"
         name="consent"
         label="I agree to the terms and conditions"
         isRequired

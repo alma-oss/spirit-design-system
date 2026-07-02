@@ -8,7 +8,7 @@ const LabelInlineCheckbox = () => {
   const [isCheckedDisabled, setIsCheckedDisabled] = useState(false);
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       <Checkbox
         id="checkbox-example"
         name="checkboxExample"

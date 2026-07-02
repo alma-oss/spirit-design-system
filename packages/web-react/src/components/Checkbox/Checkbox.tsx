@@ -99,7 +99,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
           direction={direction}
           isInline
           spacingX={isLabelHidden ? 'space-0' : 'space-500'}
-          {...mergeStyleProps(Flex, { styleProps })}
+          {...mergeStyleProps(Flex, { styleProps, UNSAFE_className: 'py-500' })}
         >
           {checkboxInput}
           <div>{checkboxText}</div>
