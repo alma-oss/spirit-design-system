@@ -268,7 +268,7 @@ class to render supplementary content (such as modal triggers) below the label.
     <div class="HelperText" id="toggle-consent-full-helper-text">
       Please read the documents carefully before agreeing
     </div>
-    <div class="ValidationText ValidationText--danger ValidationText--inline" id="toggle-consent-full-validation-text">
+    <div class="ValidationText ValidationText--danger" id="toggle-consent-full-validation-text">
       You must agree to continue
     </div>
   </div>

@@ -198,7 +198,7 @@ Complete example showing label, details with multiple links, helper text, and va
     <div class="HelperText" id="consent-full-example-helper-text">
       Please read the documents carefully before agreeing
     </div>
-    <div class="ValidationText ValidationText--danger ValidationText--inline" id="consent-full-example-validation-text">
+    <div class="ValidationText ValidationText--danger" id="consent-full-example-validation-text">
       You must agree to continue
     </div>
   </div>
