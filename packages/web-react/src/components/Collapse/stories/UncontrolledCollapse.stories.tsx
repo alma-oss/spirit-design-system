@@ -26,13 +26,6 @@ const meta: Meta<UncontrolledCollapsePlaygroundType> = {
         defaultValue: { summary: 'div' },
       },
     },
-    hideOnCollapse: {
-      control: 'boolean',
-      description: '**DEPRECATED** in favor of `isDisposable`; Hides button when content is displayed',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
     isDisposable: {
       control: 'boolean',
       description: 'Hides trigger when content is displayed',
@@ -64,7 +57,6 @@ const meta: Meta<UncontrolledCollapsePlaygroundType> = {
   },
   args: {
     elementType: 'div',
-    hideOnCollapse: false,
     id: 'collapse-example',
     isDisposable: false,
     isOpen: false,
