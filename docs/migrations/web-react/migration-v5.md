@@ -22,6 +22,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
   - [Button and ButtonLink: `isBlock` Prop Removed](#button-and-buttonlink-isblock-prop-removed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
+  - [Alert: Deprecated Link Color Styles Removed](#alert-deprecated-link-color-styles-removed)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
   - [Header: `UNSTABLE_Header` has been stabilized and renamed to `Header`, previous implementation has been removed](#header-stabilization-of-unstable_header-to-header-previous-implementation-removed)
   - [Item: Composable Content and Slots](#item-composable-content-and-slots)
@@ -480,6 +481,48 @@ Manually replace the props, component names, hooks, and constants in your projec
 
 </details>
 
+### Alert: Deprecated Link Color Styles Removed
+
+The deprecated automatic link color inheritance inside `Alert` has been removed. Links inside
+`Alert` now use the default link color from your project styles.
+
+#### Migration Guide
+
+🪄 Use codemods to automatically add `color="inherit"` to `Link` components inside `Alert`:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/alert-link-color-inherit
+```
+
+👉 See [Codemods documentation][readme-codemods] for more details.
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+If your project relies on links inside `Alert` matching the alert's content color, use the
+`Link` component with `color="inherit"`. Add `underlined="always"` so links remain
+distinguishable from surrounding text:
+
+```tsx
+// Before
+<Alert color="success">
+  See <a href="/faq">FAQ</a> for more info.
+</Alert>
+
+// After
+<Alert color="success">
+  See{' '}
+  <Link href="/faq" color="inherit" underlined="always">
+    FAQ
+  </Link>{' '}
+  for more info.
+</Alert>
+```
+
+See [Alert README][readme-alert] for the full links-in-alert pattern.
+
+</details>
+
 ### Tag: Appearance Feature Flag Removed
 
 The feature flag enabling the new `Tag` appearance was removed and the new appearance
@@ -834,6 +877,7 @@ Update your imports:
 Please refer back to these instructions or reach out to our team if you encounter any issues during migration.
 
 [migration-guide-web]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/migrations/web/migration-v5.md
+[readme-alert]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Alert/README.md
 [readme-close-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/CloseButton/README.md
 [readme-codemods]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/README.md
 [readme-drawer]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Drawer/README.md
