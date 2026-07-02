@@ -373,19 +373,19 @@
             <div class="Item__content" role="presentation">
               <label class="Label element-stretched cursor-pointer" for="checkbox-item">Item with checkbox</label>
             </div>
-            <div class="Item">
-              <div class="Item__slot" role="presentation">
-                <input
-                  type="radio"
-                  id="radio-item"
-                  name="radio-item"
-                  class="Radio Radio--item"
-                  checked
-                />
-              </div>
-              <div class="Item__content" role="presentation">
-                <label class="Label element-stretched cursor-pointer" for="radio-item">Item with radio</label>
-              </div>
+          </div>
+          <div class="Item">
+            <div class="Item__slot" role="presentation">
+              <input
+                type="radio"
+                id="radio-item"
+                name="radio-item"
+                class="Radio Radio--item"
+                checked
+              />
+            </div>
+            <div class="Item__content" role="presentation">
+              <label class="Label element-stretched cursor-pointer" for="radio-item">Item with radio</label>
             </div>
           </div>
 
@@ -393,380 +393,384 @@
 
       </div>
 
+    </div>
+
+  </div>
+
 </section>
 
-      <section class="py-900 py-tablet-1000">
+<section class="py-900 py-tablet-1000">
 
-        <div class="Container">
+  <div class="Container">
 
-          <h2 class="docs-Heading">Usage with disabled auto close</h2>
+    <h2 class="docs-Heading">Usage with disabled auto close</h2>
 
-          <div class="docs-Stack docs-Stack--start">
+    <div class="docs-Stack docs-Stack--start">
 
-            <div class="Dropdown">
-              <button
-                type="button"
-                data-spirit-toggle="dropdown"
-                data-spirit-target="#dropdown-disabled-auto-close"
-                class="Button Button--primary Button--medium"
-                aria-expanded="false"
-                aria-controls="dropdown-disabled-auto-close"
-                data-spirit-autoclose="false"
+      <div class="Dropdown">
+        <button
+          type="button"
+          data-spirit-toggle="dropdown"
+          data-spirit-target="#dropdown-disabled-auto-close"
+          class="Button Button--primary Button--medium"
+          aria-expanded="false"
+          aria-controls="dropdown-disabled-auto-close"
+          data-spirit-autoclose="false"
+        >
+          Button as anchor
+        </button>
+        <div
+          class="DropdownPopover placement-bottom-start"
+          data-spirit-placement="bottom-start"
+          id="dropdown-disabled-auto-close"
+        >
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
               >
-                Button as anchor
-              </button>
-              <div
-                class="DropdownPopover placement-bottom-start"
-                data-spirit-placement="bottom-start"
-                id="dropdown-disabled-auto-close"
+                <use href="/assets/icons/svg/sprite.svg#info" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Information</span>
+            </span>
+          </a>
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
               >
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#info" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Information</span>
-                  </span>
-                </a>
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#link" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
-                  </span>
-                </a>
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#profile" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Profile</span>
-                  </span>
-                </a>
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#help" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Help</span>
-                  </span>
-                </a>
-              </div>
-            </div>
-
-          </div>
-
+                <use href="/assets/icons/svg/sprite.svg#link" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
+            </span>
+          </a>
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#profile" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Profile</span>
+            </span>
+          </a>
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#help" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Help</span>
+            </span>
+          </a>
         </div>
+      </div>
 
-      </section>
+    </div>
 
-      <section class="py-900 py-tablet-1000">
+  </div>
 
-        <div class="Container">
+</section>
 
-          <h2 class="docs-Heading">Longer content</h2>
+<section class="py-900 py-tablet-1000">
 
-          <div class="docs-Stack docs-Stack--start">
+  <div class="Container">
 
-            <div class="Dropdown">
-              <button
-                type="button"
-                data-spirit-toggle="dropdown"
-                data-spirit-target="#dropdown-longer"
-                class="Button Button--primary Button--medium"
-                aria-expanded="false"
-                aria-controls="dropdown-longer"
+    <h2 class="docs-Heading">Longer content</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Dropdown">
+        <button
+          type="button"
+          data-spirit-toggle="dropdown"
+          data-spirit-target="#dropdown-longer"
+          class="Button Button--primary Button--medium"
+          aria-expanded="false"
+          aria-controls="dropdown-longer"
+        >
+          Button as anchor
+        </button>
+        <div
+          class="DropdownPopover placement-bottom-start"
+          data-spirit-placement="bottom-start"
+          id="dropdown-longer"
+        >
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
               >
-                Button as anchor
-              </button>
-              <div
-                class="DropdownPopover placement-bottom-start"
-                data-spirit-placement="bottom-start"
-                id="dropdown-longer"
+                <use href="/assets/icons/svg/sprite.svg#info" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
+            </span>
+          </a>
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
               >
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#info" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
-                  </span>
-                </a>
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#link" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Nulla condimentum, purus commodo cursus non nulla rhoncus</span>
-                  </span>
-                </a>
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#profile" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Mauris nunc, elementum enim in lacinia vitae quam placerat sem, euismod accumsan</span>
-                  </span>
-                </a>
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#help" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Donec dui, nunc dui vel varius libero molestie nibh nunc</span>
-                  </span>
-                </a>
-              </div>
-            </div>
-
-          </div>
-
+                <use href="/assets/icons/svg/sprite.svg#link" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Nulla condimentum, purus commodo cursus non nulla rhoncus</span>
+            </span>
+          </a>
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#profile" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Mauris nunc, elementum enim in lacinia vitae quam placerat sem, euismod accumsan</span>
+            </span>
+          </a>
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#help" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Donec dui, nunc dui vel varius libero molestie nibh nunc</span>
+            </span>
+          </a>
         </div>
+      </div>
 
-      </section>
+    </div>
 
-      <section class="py-900 py-tablet-1000">
+  </div>
 
-        <div class="Container">
+</section>
 
-          <h2 class="docs-Heading">Full-width mode 'all'</h2>
+<section class="py-900 py-tablet-1000">
 
-          <div class="docs-Stack docs-Stack--start">
+  <div class="Container">
 
-            <div class="Dropdown">
-              <button
-                type="button"
-                data-spirit-toggle="dropdown"
-                data-spirit-target="#dropdown-full-width-mode-all"
-                class="Button Button--primary Button--medium"
-                aria-expanded="false"
-                aria-controls="dropdown-full-width-mode-all"
+    <h2 class="docs-Heading">Full-width mode 'all'</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Dropdown">
+        <button
+          type="button"
+          data-spirit-toggle="dropdown"
+          data-spirit-target="#dropdown-full-width-mode-all"
+          class="Button Button--primary Button--medium"
+          aria-expanded="false"
+          aria-controls="dropdown-full-width-mode-all"
+        >
+          Finibus quis imperdiet, semper imperdiet aliquam
+        </button>
+        <div
+          class="DropdownPopover placement-top-start"
+          data-spirit-placement="top-start"
+          id="dropdown-full-width-mode-all"
+          data-spirit-fullwidthmode="all"
+        >
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
               >
-                Finibus quis imperdiet, semper imperdiet aliquam
-              </button>
-              <div
-                class="DropdownPopover placement-top-start"
-                data-spirit-placement="top-start"
-                id="dropdown-full-width-mode-all"
-                data-spirit-fullwidthmode="all"
+                <use href="/assets/icons/svg/sprite.svg#info" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Information</span>
+            </span>
+          </a>
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
               >
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#info" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Information</span>
-                  </span>
-                </a>
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#link" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
-                  </span>
-                </a>
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#profile" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Profile</span>
-                  </span>
-                </a>
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#help" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Help</span>
-                  </span>
-                </a>
-              </div>
-            </div>
-
-          </div>
-
+                <use href="/assets/icons/svg/sprite.svg#link" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
+            </span>
+          </a>
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#profile" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Profile</span>
+            </span>
+          </a>
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#help" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Help</span>
+            </span>
+          </a>
         </div>
-      </section>
+      </div>
 
-      <section class="py-900 py-tablet-1000">
+    </div>
 
-        <div class="Container">
+  </div>
+</section>
 
-          <h2 class="docs-Heading">Full-width mode 'mobile-only'</h2>
+<section class="py-900 py-tablet-1000">
 
-          <div class="docs-Stack docs-Stack--start">
+  <div class="Container">
 
-            <div class="Dropdown">
-              <button
-                type="button"
-                data-spirit-toggle="dropdown"
-                data-spirit-target="#dropdown-full-width-mode-mobile"
-                class="Button Button--primary Button--medium"
-                aria-expanded="false"
-                aria-controls="dropdown-full-width-mode-mobile"
+    <h2 class="docs-Heading">Full-width mode 'mobile-only'</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Dropdown">
+        <button
+          type="button"
+          data-spirit-toggle="dropdown"
+          data-spirit-target="#dropdown-full-width-mode-mobile"
+          class="Button Button--primary Button--medium"
+          aria-expanded="false"
+          aria-controls="dropdown-full-width-mode-mobile"
+        >
+          Finibus quis imperdiet, semper imperdiet aliquam
+        </button>
+        <div
+          class="DropdownPopover placement-top-start"
+          id="dropdown-full-width-mode-mobile"
+          data-spirit-placement="top-start"
+          data-spirit-fullwidthmode="mobile-only"
+        >
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
               >
-                Finibus quis imperdiet, semper imperdiet aliquam
-              </button>
-              <div
-                class="DropdownPopover placement-top-start"
-                id="dropdown-full-width-mode-mobile"
-                data-spirit-placement="top-start"
-                data-spirit-fullwidthmode="mobile-only"
+                <use href="/assets/icons/svg/sprite.svg#info" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Information</span>
+            </span>
+          </a>
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
               >
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#info" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Information</span>
-                  </span>
-                </a>
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#link" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
-                  </span>
-                </a>
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#profile" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Profile</span>
-                  </span>
-                </a>
-                <a href="#" class="Item">
-                  <span class="Item__slot" role="presentation">
-                    <svg
-                      class="Icon"
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#help" />
-                    </svg>
-                  </span>
-                  <span class="Item__content" role="presentation">
-                    <span class="Label element-stretched cursor-pointer">Help</span>
-                  </span>
-                </a>
-              </div>
-            </div>
-
-          </div>
-
+                <use href="/assets/icons/svg/sprite.svg#link" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Bibendum aliquam, fusce integer sit amet congue non nulla aliquet enim</span>
+            </span>
+          </a>
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#profile" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Profile</span>
+            </span>
+          </a>
+          <a href="#" class="Item">
+            <span class="Item__slot" role="presentation">
+              <svg
+                class="Icon"
+                width="24"
+                height="24"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#help" />
+              </svg>
+            </span>
+            <span class="Item__content" role="presentation">
+              <span class="Label element-stretched cursor-pointer">Help</span>
+            </span>
+          </a>
         </div>
+      </div>
 
-      </section>
+    </div>
 
-      {{/web/layout/default }}
+  </div>
+
+</section>
+
+{{/web/layout/default }}
