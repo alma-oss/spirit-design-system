@@ -7,7 +7,7 @@ const CheckboxDefault = () => {
   const [isSecondCheckboxChecked, setSecondCheckboxChecked] = useState(true);
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       <Checkbox
         id="checkbox-default"
         name="checkboxDefault"

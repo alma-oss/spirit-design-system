@@ -68,6 +68,25 @@ describe('Radio', () => {
     expect(input).toHaveClass('Radio', 'Radio--item');
     expect(input.parentElement).toHaveClass('Item__slot');
     expect(input.parentElement?.parentElement).toHaveClass('Item');
+    expect(input.parentElement?.parentElement).not.toHaveClass('py-500');
+  });
+
+  it('should apply py-500 padding on non-item wrapper', () => {
+    render(<Radio id="radio" label="Label" />);
+
+    expect(screen.getByRole('radio').parentElement).toHaveClass('py-500');
+  });
+
+  it('should keep py-500 padding when UNSAFE_className is provided', () => {
+    render(<Radio id="radio" label="Label" UNSAFE_className="foo" />);
+
+    expect(screen.getByRole('radio').parentElement).toHaveClass(
+      'Flex',
+      'Flex--horizontal',
+      'Flex--inline',
+      'py-500',
+      'foo',
+    );
   });
 
   it('should have helper text', () => {

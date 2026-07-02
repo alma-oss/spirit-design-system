@@ -222,7 +222,6 @@ const ModalScrollingLongContent = () => {
               ).map(([breakpoint, { marginBottom, className }]) => (
                 <Stack
                   elementType="fieldset"
-                  hasSpacing
                   key={breakpoint}
                   marginBottom={marginBottom as Partial<Record<string, SpaceToken>>}
                   UNSAFE_className={className}

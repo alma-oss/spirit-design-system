@@ -7,7 +7,7 @@ const CheckboxValidationWithIcon = () => {
   const states = Object.values(ValidationStates);
 
   return (
-    <Stack hasSpacing>
+    <Stack>
       {states.map((state) => (
         <Checkbox
           id={`checkbox-${state}-validation-icon`}

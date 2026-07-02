@@ -85,7 +85,7 @@ const DropdownPlacements = () => {
           </div>
         </GridItem>
         <GridItem columnStart={1} rowStart={2} UNSAFE_style={{ justifySelf: 'start' }}>
-          <Stack hasSpacing>
+          <Stack>
             <Radio
               name="placement"
               isChecked={placement === 'left-start'}
@@ -116,7 +116,7 @@ const DropdownPlacements = () => {
           </Stack>
         </GridItem>
         <GridItem columnStart={3} rowStart={2} UNSAFE_style={{ justifySelf: 'end' }}>
-          <Stack hasSpacing>
+          <Stack>
             <Radio
               name="placement"
               isChecked={placement === 'right-start'}
