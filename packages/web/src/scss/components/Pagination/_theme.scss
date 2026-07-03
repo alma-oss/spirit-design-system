@@ -1,28 +1,28 @@
-@use 'sass:map';
 @use '@tokens' as tokens;
 @use '../../tools/units';
 
+$typography: tokens.$action-small;
+
 $item-gap: tokens.$space-300;
 $item-min-width: units.px-to-rem(40px);
-$item-height: 2.5em; /* It is in relative units due to possible resizing of the system font. */
+$item-height: units.px-to-rem(40px);
 $item-padding-inline: tokens.$space-600;
-$item-emphasis-font-weight: map.get(tokens.$body-medium-bold, 'mobile', 'font-weight');
 $item-border-width: tokens.$border-width-100;
 $item-border-style: solid;
 $item-border-radius: tokens.$radius-full;
 
-$item-default-color: tokens.$component-button-secondary-content;
-$item-default-border-color: tokens.$component-button-secondary-border;
-$item-default-background-color: tokens.$component-button-secondary-state-default;
+$item-default-color: tokens.$component-pagination-unselected-content;
+$item-default-border-color: tokens.$component-pagination-unselected-border;
+$item-default-background-color: tokens.$component-pagination-unselected-state-default;
 
-$item-active-color: tokens.$component-button-secondary-content;
-$item-active-border-color: tokens.$component-button-secondary-border;
-$item-active-background-color: tokens.$component-button-secondary-state-active;
+$item-active-color: tokens.$component-pagination-unselected-content;
+$item-active-border-color: tokens.$component-pagination-unselected-border;
+$item-active-background-color: tokens.$component-pagination-unselected-state-active;
 
-$item-hover-color: tokens.$component-button-secondary-content;
-$item-hover-border-color: tokens.$component-button-secondary-border;
-$item-hover-background-color: tokens.$component-button-secondary-state-hover;
+$item-hover-color: tokens.$component-pagination-unselected-content;
+$item-hover-border-color: tokens.$component-pagination-unselected-border;
+$item-hover-background-color: tokens.$component-pagination-unselected-state-hover;
 
-$item-selected-color: tokens.$component-button-primary-content;
-$item-selected-border-color: tokens.$component-button-primary-border;
-$item-selected-background-color: tokens.$component-button-primary-state-default;
+$item-selected-color: tokens.$component-pagination-selected-content;
+$item-selected-border-color: tokens.$component-pagination-selected-border;
+$item-selected-background-color: tokens.$component-pagination-selected-state-default;
