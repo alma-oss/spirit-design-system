@@ -25,6 +25,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
   - [Disabled Utility for Color-Scheme Components](#disabled-utility-for-color-scheme-components)
   - [Toggle: Input Before Label in HTML](#toggle-input-before-label-in-html)
+  - [Pagination: Previous and Next Links Use Small Button](#pagination-previous-and-next-links-use-small-button)
 
 ## General Changes
 
@@ -667,6 +668,38 @@ Swap the order of the input and text wrapper in your Toggle HTML.
 ```
 
 If you provided any custom CSS depending on the order of Toggle children, you will need to update it.
+
+</details>
+
+### Pagination: Previous and Next Links Use Small Button
+
+The previous and next navigation links in Pagination now use `Button--small` instead of
+`Button--medium`. This aligns the arrow buttons with the height of the page number items.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Replace `Button--medium` with `Button--small` on the previous and next navigation links.
+
+```html
+<!-- Before -->
+<a href="#" class="Button Button--secondary Button--medium Button--symmetrical">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
+    <use href="/icons/svg/sprite.svg#chevron-left" />
+  </svg>
+  <span class="accessibility-hidden">Previous</span>
+</a>
+
+<!-- After -->
+<a href="#" class="Button Button--secondary Button--small Button--symmetrical">
+  <svg class="Icon" width="24" height="24" aria-hidden="true">
+    <use href="/icons/svg/sprite.svg#chevron-left" />
+  </svg>
+  <span class="accessibility-hidden">Previous</span>
+</a>
+```
 
 </details>
 
