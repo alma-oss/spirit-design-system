@@ -22,7 +22,7 @@ const _PaginationButtonLink = <E extends ElementType = 'a'>(
   };
 
   return (
-    <ButtonLink color="secondary" isSymmetrical {...restProps} ref={ref}>
+    <ButtonLink color="secondary" size="small" isSymmetrical {...restProps} ref={ref}>
       <Icon name={iconType[direction]} />
       <VisuallyHidden>{directionLabel}</VisuallyHidden>
     </ButtonLink>

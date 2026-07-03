@@ -36,7 +36,7 @@ First item selected:
       </a>
     </li>
     <li class="Pagination__item">
-      <a href="#" class="Button Button--secondary Button--symmetrical">
+      <a href="#" class="Button Button--secondary Button--small Button--symmetrical">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#chevron-right" />
         </svg>
@@ -53,7 +53,7 @@ Middle item selected:
 <nav role="navigation" aria-label="Page navigation">
   <ul class="Pagination">
     <li class="Pagination__item">
-      <a href="#" class="Button Button--secondary Button--symmetrical">
+      <a href="#" class="Button Button--secondary Button--small Button--symmetrical">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#chevron-left" />
         </svg>
@@ -91,7 +91,7 @@ Middle item selected:
       </a>
     </li>
     <li class="Pagination__item">
-      <a href="#" class="Button Button--secondary Button--symmetrical">
+      <a href="#" class="Button Button--secondary Button--small Button--symmetrical">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#chevron-right" />
         </svg>
@@ -108,7 +108,7 @@ Last item selected:
 <nav role="navigation" aria-label="Page navigation">
   <ul class="Pagination">
     <li class="Pagination__item">
-      <a href="#" class="Button Button--secondary Button--symmetrical">
+      <a href="#" class="Button Button--secondary Button--small Button--symmetrical">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#chevron-left" />
         </svg>

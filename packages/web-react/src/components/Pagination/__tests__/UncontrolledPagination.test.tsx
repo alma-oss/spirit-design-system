@@ -38,7 +38,7 @@ describe('UncontrolledPagination', () => {
     const lastItemPage = container.querySelector('.Button--symmetrical');
 
     expect(firstPageItem).toHaveClass('Pagination__link Pagination__link--current');
-    expect(lastItemPage).toHaveClass('Button Button--secondary Button--medium Button--symmetrical');
+    expect(lastItemPage).toHaveClass('Button Button--secondary Button--small Button--symmetrical');
   });
 
   it('calls the onPageChange function when an item is clicked', () => {

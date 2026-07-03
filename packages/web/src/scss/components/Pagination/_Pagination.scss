@@ -1,6 +1,7 @@
 @use 'theme';
 @use '../../settings/cursors';
 @use '../../tools/reset';
+@use '../../tools/typography';
 
 .Pagination {
     display: inline-flex;
@@ -14,6 +15,7 @@
 
 .Pagination__link {
     @include reset.button();
+    @include typography.generate(theme.$typography);
 
     display: flex;
     align-items: center;
@@ -21,7 +23,6 @@
     min-width: theme.$item-min-width;
     height: theme.$item-height;
     padding-inline: theme.$item-padding-inline;
-    font-weight: theme.$item-emphasis-font-weight;
     color: theme.$item-default-color;
     border-width: theme.$item-border-width;
     border-style: theme.$item-border-style;
