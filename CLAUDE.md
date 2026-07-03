@@ -29,6 +29,23 @@ Spirit Design System is an open-source design system developed by Alma Career (f
 - When verifying your changes, refer to the [Common Tasks section of the Development Guide][development-guide-common-tasks]
   for running tests and linters. Always run the appropriate tests and linters before finishing your work.
 
+## Breaking Changes
+
+Every breaking change must have:
+
+1. An entry (TOC + section) in both `docs/migrations/web/migration-v5.md` and `docs/migrations/web-react/migration-v5.md`.
+2. A codemod at `packages/codemods/src/transforms/v5/web-react/<name>.ts` with `__testfixtures__/<name>.input.tsx`, `<name>.output.tsx`, and `__tests__/<name>.test.ts`.
+
+### Migration Guides
+
+- Only document stable → stable migrations. Never include intermediate unreleased API states (e.g., a prop that existed only between two unreleased BC changes).
+- After squashing multiple BC changes into one section, verify that every item in the "Removed" table actually existed in a stable release.
+
+### Codemods
+
+- Generate output fixtures with `npx jscodeshift --dry --print -t <transform> <input>` — never hand-write them.
+  jscodeshift's exact whitespace, blank lines between top-level declarations, and import ordering must match the fixture; any deviation causes the test to fail.
+
 ## Additional Resources
 
 For comprehensive guidelines, see:
