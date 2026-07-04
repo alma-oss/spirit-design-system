@@ -62,6 +62,6 @@ $_field-name: 'Checkbox';
 }
 
 // stylelint-disable-next-line selector-max-specificity -- 2.
-.Checkbox--item:not(.Checkbox--disabled, .Checkbox.is-disabled):is(:hover, :active):not(:checked) {
+.Checkbox--item:not(.Checkbox--disabled, .Checkbox.is-disabled):is(:hover, :active):not(:checked, :disabled) {
     background-color: form-fields-settings.$input-background-color;
 }

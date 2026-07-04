@@ -78,15 +78,17 @@ $_field-name: 'Toggle';
     }
 
     @media (hover: hover) {
-        &:hover,
-        &:active {
+        // stylelint-disable selector-max-specificity
+        &:not(:disabled, .Toggle--disabled, .Toggle.is-disabled):hover,
+        &:not(:disabled, .Toggle--disabled, .Toggle.is-disabled):active {
             background-color: theme.$input-background-color-state-hover;
         }
 
-        &:checked:hover,
-        &:checked:active {
+        &:checked:not(:disabled, .Toggle--disabled, .Toggle.is-disabled):hover,
+        &:checked:not(:disabled, .Toggle--disabled, .Toggle.is-disabled):active {
             background-color: theme.$input-background-color-state-checked-hover;
         }
+        // stylelint-enable selector-max-specificity
     }
 }
 
