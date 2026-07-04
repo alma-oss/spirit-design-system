@@ -19,7 +19,7 @@ $input-padding-x: tokens.$space-600;
 $input-padding-y: calc(#{tokens.$space-500} - #{tokens.$border-width-100});
 $input-placeholder-color-state-disabled: tokens.$disabled-content;
 
-$textarea-padding-y: calc(#{tokens.$space-700} - #{tokens.$border-width-100});
+$textarea-padding: calc(#{tokens.$space-700} - #{tokens.$border-width-100});
 
 $variant-dictionary: dictionaries.$fill-variants;
 
