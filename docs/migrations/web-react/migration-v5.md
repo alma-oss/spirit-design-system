@@ -35,6 +35,7 @@ Introducing version 5 of the _spirit-web-react_ package.
   - [Success State Icons Renamed from `check-plain` to `success`](#success-state-icons-renamed-from-check-plain-to-success)
   - [Navigation: Slots, Open State, and Removed Selected Indicator](#navigation-slots-open-state-and-removed-selected-indicator)
   - [DrawerPanel: Restructured with Sub-components](#drawerpanel-restructured-with-sub-components)
+  - [Checkbox and Toggle: Emphasized Label No Longer Documented](#checkbox-and-toggle-emphasized-label-no-longer-documented)
 
 ## General Changes
 
@@ -957,6 +958,53 @@ Update your imports:
 - import { Drawer, DrawerCloseButton, DrawerPanel } from '@alma-oss/spirit-web-react';
 + import { CloseButton, Drawer, DrawerPanel, DrawerPanelHeader, DrawerPanelBody } from '@alma-oss/spirit-web-react';
 ```
+
+</details>
+
+### Checkbox and Toggle: Emphasized Label No Longer Documented
+
+The "Emphasized Label" pattern — passing a `<Text emphasis="semibold">` element as the `label` prop of `Checkbox` or `Toggle` — is no longer documented.
+
+`Label` already applies `label-medium` typography. Wrapping the label in a `Text` component with a different emphasis
+overrides those styles and can cause the label text to misalign vertically relative to the input control.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Replace the `Text`-wrapped label with a plain string:
+
+```diff
+- <Checkbox
+-   id="consent"
+-   label={
+-     <Text elementType="span" emphasis="semibold">
+-       I agree to the terms and conditions
+-     </Text>
+-   }
+-   isRequired
+- />
++ <Checkbox id="consent" label="I agree to the terms and conditions" isRequired />
+```
+
+The same applies to `Toggle`:
+
+```diff
+- <Toggle
+-   id="consent"
+-   label={
+-     <Text elementType="span" emphasis="semibold">
+-       I agree to the terms and conditions
+-     </Text>
+-   }
+-   isRequired
+- />
++ <Toggle id="consent" label="I agree to the terms and conditions" isRequired />
+```
+
+Search your project for `Checkbox` and `Toggle` usages where the `label` prop
+receives a `<Text>` (or any other element) with custom typography and replace them with plain strings.
 
 </details>
 
