@@ -1,12 +1,13 @@
-{{#> web/layout/default title="Checkbox" parentPageName="Components" }}
-
 <script>
   const inputs = ['checkbox-indeterminate', 'checkbox-disabled-indeterminate'];
 
   window.addEventListener('DOMContentLoaded', function () {
     inputs.forEach(function (input) {
       const checkbox = document.getElementById(input);
-      checkbox.indeterminate = true;
+
+      if (checkbox instanceof HTMLInputElement) {
+        checkbox.indeterminate = true;
+      }
     });
   });
 </script>
@@ -505,46 +506,6 @@
 
   <div class="Container">
 
-    <h2 class="docs-Heading">Consent with Emphasized Label</h2>
-
-    <div class="docs-Stack docs-Stack--start">
-
-      <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
-        <input
-          type="checkbox"
-          id="consent-emphasized-label"
-          class="Checkbox"
-          name="consentEmphasizedLabel"
-          aria-details="consent-emphasized-label-details"
-          required
-        />
-        <div>
-          <label class="Label Label--required cursor-pointer" for="consent-emphasized-label">I agree to the terms and conditions</label>
-          <div id="consent-emphasized-label-details" class="InputDetails">
-            <button
-              type="button"
-              class="link-underlined link-inherit"
-              data-spirit-toggle="modal"
-              data-spirit-target="#terms-modal"
-              aria-controls="terms-modal"
-              aria-expanded="false"
-            >
-              See full terms and conditions
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<section class="py-900 py-tablet-1000">
-
-  <div class="Container">
-
     <h2 class="docs-Heading">Consent Full Example</h2>
 
     <div class="docs-Stack docs-Stack--start">
@@ -617,7 +578,7 @@
           height="24"
           aria-hidden="true"
         >
-          <use href="/icons/svg/sprite.svg#close" />
+          <use href="/assets/icons/svg/sprite.svg#close" />
         </svg>
         <span class="accessibility-hidden">Close</span>
       </button>
@@ -650,7 +611,7 @@
           height="24"
           aria-hidden="true"
         >
-          <use href="/icons/svg/sprite.svg#close" />
+          <use href="/assets/icons/svg/sprite.svg#close" />
         </svg>
         <span class="accessibility-hidden">Close</span>
       </button>
@@ -664,5 +625,3 @@
     </div>
   </article>
 </dialog>
-
-{{/web/layout/default }}
