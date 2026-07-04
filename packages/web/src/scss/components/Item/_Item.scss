@@ -30,12 +30,12 @@
         text-decoration: none;
     }
 
-    &:active {
+    &:not(.Item--disabled, .disabled, :disabled):active {
         background-color: theme.$background-color-state-active;
     }
 
     @media (hover: hover) {
-        &:hover {
+        &:not(.Item--disabled, .disabled, :disabled):hover {
             text-decoration: none;
             background-color: theme.$background-color-state-hover;
         }
