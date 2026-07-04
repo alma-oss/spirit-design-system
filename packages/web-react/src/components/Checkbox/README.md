@@ -52,32 +52,6 @@ Pass an object to adjust the input position based on the [breakpoint][dictionary
 For consent scenarios where users need access to terms and conditions or privacy policies, use the `details` prop
 to render supplementary content (such as link or modal triggers) below the label.
 
-### Emphasized Label
-
-```tsx
-<Checkbox
-  id="consent"
-  label={
-    <Text elementType="span" emphasis="semibold">
-      I agree to the terms and conditions
-    </Text>
-  }
-  isRequired
-  details={
-    <Link
-      elementType="button"
-      color="inherit"
-      underlined="always"
-      onClick={() => {
-        /* Open terms and conditions modal */
-      }}
-    >
-      See full terms and conditions
-    </Link>
-  }
-/>
-```
-
 ### Full Example
 
 ```tsx

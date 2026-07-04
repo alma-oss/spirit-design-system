@@ -87,11 +87,7 @@ You must manually set the `isDisabled` prop on interactive elements (Link, Butto
 ```tsx
 <Checkbox
   id="consent"
-  label={
-    <Text elementType="span" emphasis="semibold">
-      I agree to the terms and conditions
-    </Text>
-  }
+  label="I agree to the terms and conditions"
   isDisabled
   isRequired
   details={

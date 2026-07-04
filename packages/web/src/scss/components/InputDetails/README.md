@@ -72,9 +72,7 @@ To render the `InputDetails` component in a disabled state, add the `InputDetail
     required
   />
   <div>
-    <label class="Label cursor-pointer Label--required" for="consent">
-      <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
-    </label>
+    <label class="Label cursor-pointer Label--required" for="consent">I agree to the terms and conditions</label>
     <div id="consent-details" class="InputDetails InputDetails--disabled">
       <p class="typography-body-medium-regular">We want to keep you informed</p>
       <button type="button" class="link-underlined link-inherit" disabled>See full terms and conditions</button>

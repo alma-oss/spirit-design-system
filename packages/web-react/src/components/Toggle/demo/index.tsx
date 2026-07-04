@@ -3,7 +3,6 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
-import ToggleConsentEmphasizedLabel from './ToggleConsentEmphasizedLabel';
 import ToggleConsentFullExample from './ToggleConsentFullExample';
 import ToggleDefault from './ToggleDefault';
 import ToggleDisabled from './ToggleDisabled';
@@ -44,9 +43,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </DocsSection>
       <DocsSection title="Input Position" stackAlignment="stretch">
         <ToggleInputPosition />
-      </DocsSection>
-      <DocsSection title="Consent with Emphasized Label" stackAlignment="stretch">
-        <ToggleConsentEmphasizedLabel />
       </DocsSection>
       <DocsSection title="Consent Full Example" stackAlignment="stretch">
         <ToggleConsentFullExample />

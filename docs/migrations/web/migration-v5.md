@@ -37,6 +37,7 @@ Introducing version 5 of the _spirit-web_ package.
   - [Toggle: Input Before Label in HTML](#toggle-input-before-label-in-html)
   - [Pagination: Previous and Next Links Use Small Button](#pagination-previous-and-next-links-use-small-button)
   - [DrawerPanel: Restructured with Sub-components](#drawerpanel-restructured-with-sub-components)
+  - [Checkbox and Toggle: Emphasized Label No Longer Documented](#checkbox-and-toggle-emphasized-label-no-longer-documented)
 
 ## General Changes
 
@@ -973,6 +974,36 @@ wrapped both the close button and the drawer body — has been replaced by two e
 +   </div>
   </div>
 ```
+
+</details>
+
+### Checkbox and Toggle: Emphasized Label No Longer Documented
+
+The "Emphasized Label" pattern — wrapping label text in a `<span class="typography-body-medium-semibold">`
+(or any other `typography-*` utility) inside a `Label` — is no longer documented for Checkbox and Toggle.
+
+`Label` already applies `label-medium` typography. Nesting a different typography utility inside the label
+overrides those styles and can push the label text out of vertical alignment with the input control.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Remove the inner `<span class="typography-*">` wrapper and pass the label text directly to the `Label`:
+
+```html
+<!-- Before -->
+<label class="Label Label--required cursor-pointer" for="consent">
+  <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
+</label>
+
+<!-- After -->
+<label class="Label Label--required cursor-pointer" for="consent">I agree to the terms and conditions</label>
+```
+
+Search your project for `Label` elements that contain a `<span>` with a `typography-*` class and replace them with plain label text.
+Pay special attention to consent checkboxes and toggles, where this pattern was most commonly used.
 
 </details>
 

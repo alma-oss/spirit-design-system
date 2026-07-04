@@ -119,41 +119,6 @@ To add helper text, use the [HelperText][readme-helper-text] component:
 For consent scenarios where users need access to terms and conditions or privacy policies, use the [`InputDetails`][readme-input-details]
 element with modal triggers.
 
-### Emphasized Label
-
-Use emphasized (bold) label text to make the agreement statement more prominent:
-
-```html
-<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
-  <input
-    type="checkbox"
-    id="consent-emphasized-label"
-    class="Checkbox"
-    name="consentEmphasizedLabel"
-    aria-details="consent-emphasized-label-details"
-    required
-  />
-  <div>
-    <label class="Label Label--required cursor-pointer" for="consent-emphasized-label">
-      <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
-    </label>
-    <div id="consent-emphasized-label-details" class="InputDetails">
-      <button
-        type="button"
-        class="link-underlined link-inherit"
-        data-spirit-toggle="modal"
-        data-spirit-target="#terms-modal"
-        aria-controls="terms-modal"
-        aria-expanded="false"
-      >
-        See full terms and conditions
-      </button>
-    </div>
-  </div>
-</div>
-<!-- Modal definitions -->
-```
-
 ### Full Example with Validation and Helper Text
 
 Complete example showing label, details with multiple links, helper text, and validation:

@@ -193,40 +193,6 @@ components mix CSS with JS by design and handle prefixes their own way.**
 For consent scenarios where users need access to terms and conditions or privacy policies, use the [`InputDetails`][readme-input-details]
 class to render supplementary content (such as modal triggers) below the label.
 
-### Emphasized Label
-
-```html
-<div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
-  style="--flex-spacing-x: var(--spirit-space-500);"
->
-  <input
-    type="checkbox"
-    id="toggle-consent-emphasized"
-    class="Toggle"
-    name="consent"
-    required
-    aria-details="toggle-consent-emphasized-details"
-  />
-  <div>
-    <label class="Label Label--required cursor-pointer" for="toggle-consent-emphasized">
-      <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
-    </label>
-    <div id="toggle-consent-emphasized-details" class="InputDetails">
-      <button
-        type="button"
-        class="link-underlined link-inherit"
-        data-spirit-toggle="modal"
-        data-spirit-target="#terms-modal"
-      >
-        See full terms and conditions
-      </button>
-    </div>
-  </div>
-</div>
-<!-- Modal definitions -->
-```
-
 ### Full Example
 
 ```html
