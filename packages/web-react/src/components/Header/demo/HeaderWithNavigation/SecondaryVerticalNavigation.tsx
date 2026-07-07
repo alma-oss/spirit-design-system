@@ -5,12 +5,14 @@ import { Navigation, NavigationItem } from '../../../Navigation';
 const SecondaryVerticalNavigation = () => (
   <Navigation aria-label="Secondary Navigation" direction="vertical">
     <NavigationItem>
-      <ButtonLink href="#" color="secondary">
+      <ButtonLink href="#" color="secondary" size="small">
         Log In
       </ButtonLink>
     </NavigationItem>
     <NavigationItem>
-      <ButtonLink href="#">Post a Job</ButtonLink>
+      <ButtonLink href="#" size="small">
+        Post a Job
+      </ButtonLink>
     </NavigationItem>
   </Navigation>
 );

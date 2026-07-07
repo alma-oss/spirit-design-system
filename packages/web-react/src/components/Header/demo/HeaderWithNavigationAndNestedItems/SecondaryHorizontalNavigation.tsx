@@ -14,7 +14,7 @@ interface SecondaryHorizontalNavigationProps {
 const SecondaryHorizontalNavigation: FunctionComponent<SecondaryHorizontalNavigationProps> = ({ handleOpenDrawer }) => (
   <Navigation marginLeft="auto" aria-label="Secondary Navigation">
     <NavigationItem>
-      <Button color="tertiary" isSymmetrical>
+      <Button color="tertiary" size="small" isSymmetrical>
         <Icon name="search" />
         <VisuallyHidden>Search</VisuallyHidden>
       </Button>
@@ -23,12 +23,14 @@ const SecondaryHorizontalNavigation: FunctionComponent<SecondaryHorizontalNaviga
       <SecondaryHorizontalNavigationDropdown id="dropdown-avatar" isSquare />
     </NavigationItem>
     <NavigationItem hideOn={['mobile', 'tablet']}>
-      <ButtonLink href="#" color="secondary">
+      <ButtonLink href="#" color="secondary" size="small">
         Log Out
       </ButtonLink>
     </NavigationItem>
     <NavigationItem hideOn={['mobile', 'tablet']}>
-      <ButtonLink href="#">Post a Job</ButtonLink>
+      <ButtonLink href="#" size="small">
+        Post a Job
+      </ButtonLink>
     </NavigationItem>
     <NavigationItem hideOn="desktop">
       <Button
@@ -38,6 +40,7 @@ const SecondaryHorizontalNavigation: FunctionComponent<SecondaryHorizontalNaviga
         aria-controls="drawer-navigation-expanded"
         aria-expanded="false"
         onClick={handleOpenDrawer}
+        size="small"
         isSymmetrical
       >
         <Icon name="hamburger" />
