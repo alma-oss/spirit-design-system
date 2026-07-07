@@ -64,6 +64,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     onSelectionChange,
     onToggle,
     popoverProps = DEFAULT_POPOVER_PROPS,
+    tagProps,
     removeAllLabel = t('picker.removeAll'),
     renderTags,
     selectedKeys,
@@ -164,6 +165,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     if (isAggregated) {
       return (
         <UNSTABLE_PickerTag
+          {...tagProps}
           tagKeyboardProps={getKeyboardGridRowProps(0)}
           isDisabled={isDisabled}
           label={aggregatedTagLabel}
@@ -175,6 +177,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
 
     return selectedPickerItems.map((item, index) => (
       <UNSTABLE_PickerTag
+        {...tagProps}
         key={item.value}
         tagKeyboardProps={getKeyboardGridRowProps(index)}
         isDisabled={isDisabled}

@@ -66,6 +66,8 @@ export interface UnstablePickerBaseProps<S = void>
   labelProps?: StyleProps;
   /** Props for the inner `DropdownPopover`. */
   popoverProps?: StyleProps;
+  /** Props for the inner `Tag` elements (style props; `UNSAFE_className` is merged with tag classes). */
+  tagProps?: StyleProps;
   renderTags?: (options: UnstablePickerRenderTagsOptions) => ReactNode;
   selectionMode?: UnstablePickerSelectionMode;
   size?: SizesDictionaryType<S>;
