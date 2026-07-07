@@ -265,6 +265,43 @@ describe('tokenHelper', () => {
 
       expect(tokenValue).toBe(expectedTypographyValue);
     });
+
+    it.each([
+      {
+        fontSize: 10,
+        lineHeight: 14,
+        expectedLineHeight: '1.4',
+      },
+      {
+        fontSize: 10_000,
+        lineHeight: 14_454,
+        expectedLineHeight: '1.4454',
+      },
+      {
+        fontSize: 14,
+        lineHeight: 20,
+        expectedLineHeight: '1.4286',
+      },
+      {
+        fontSize: 12,
+        lineHeight: 12,
+        expectedLineHeight: '1',
+      },
+    ])('should format line-height as $expectedLineHeight', ({ fontSize, lineHeight, expectedLineHeight }) => {
+      const tokenValue = typographyValue(
+        {
+          fontFamily: { text: 'Inter' },
+          fontSize: { unit: 'Pixels', measure: fontSize, referencedTokenId: null },
+          lineHeight: { unit: 'Pixels', measure: lineHeight, referencedTokenId: null },
+          fontWeight: { text: 'Regular' },
+          referencedTokenId: null,
+        } as unknown as TypographyToken['value'],
+        false,
+        false,
+      );
+
+      expect(tokenValue).toContain(`line-height: ${expectedLineHeight}`);
+    });
   });
 
   describe('filterExcludedTokens', () => {

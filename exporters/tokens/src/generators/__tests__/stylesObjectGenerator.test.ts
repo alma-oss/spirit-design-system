@@ -126,7 +126,7 @@ describe('stylesObjectGenerator', () => {
         expectedStyles: {
           '$heading-xlarge-bold': {
             mobile:
-              '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 40px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.30,\n)',
+              '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 40px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.3,\n)',
           },
           $styles: {
             'heading-xlarge-bold': '$heading-xlarge-bold',
@@ -145,7 +145,7 @@ describe('stylesObjectGenerator', () => {
           },
           headingXlargeBold: {
             mobile:
-              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '40px',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.30,\n}",
+              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '40px',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.3,\n}",
           },
         },
         description: 'should generate object from typography tokens with js output',
@@ -232,7 +232,7 @@ describe('stylesObjectGenerator', () => {
       expect(styles).toStrictEqual({
         $caption: {
           mobile:
-            '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 14px,\nfont-style: normal,\nfont-weight: 400,\nline-height: 1.43,\n)',
+            '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 14px,\nfont-style: normal,\nfont-weight: 400,\nline-height: 1.4286,\n)',
         },
         $styles: {
           caption: '$caption',
@@ -256,7 +256,7 @@ describe('stylesObjectGenerator', () => {
       expect(styles).toStrictEqual({
         caption: {
           mobile:
-            "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '14px',\nfontStyle: 'normal',\nfontWeight: 400,\nlineHeight: 1.43,\n}",
+            "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '14px',\nfontStyle: 'normal',\nfontWeight: 400,\nlineHeight: 1.4286,\n}",
         },
         styles: {
           caption: 'caption',
@@ -280,7 +280,7 @@ describe('stylesObjectGenerator', () => {
       expect(styles).toStrictEqual({
         $eyebrow: {
           mobile:
-            '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 12px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.33,\n)',
+            '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 12px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.3333,\n)',
         },
         $styles: {
           eyebrow: '$eyebrow',
@@ -325,14 +325,14 @@ describe('stylesObjectGenerator', () => {
         expectedObject: {
           '$heading-xlarge-bold': {
             mobile:
-              '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 40px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.30,\n)',
+              '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 40px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.3,\n)',
           },
         },
         description: 'should create object structure from typography token',
         stylesObjectRef: {
           '$heading-xlarge-bold': {
             mobile:
-              '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 2rem,\nfont-style: normal,\nfont-weight: 500,\nline-height: 1.00,\n)',
+              '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 2rem,\nfont-style: normal,\nfont-weight: 500,\nline-height: 1,\n)',
           },
         } as StylesObjectType,
         hasJsOutput: false,
@@ -342,14 +342,14 @@ describe('stylesObjectGenerator', () => {
         expectedObject: {
           headingXlargeBold: {
             mobile:
-              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '40px',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.30,\n}",
+              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '40px',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.3,\n}",
           },
         },
         description: 'should create object structure from typography token with js output',
         stylesObjectRef: {
           headingXlargeBold: {
             mobile:
-              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2rem',\nfontStyle: 'normal',\nfontWeight: 500,\nlineHeight: 1.00,\n}",
+              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2rem',\nfontStyle: 'normal',\nfontWeight: 500,\nlineHeight: 1,\n}",
           },
         } as StylesObjectType,
         hasJsOutput: true,
@@ -380,7 +380,7 @@ describe('stylesObjectGenerator', () => {
         expectedStyles: {
           '$heading-xlarge-bold': {
             mobile:
-              '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 40px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.30,\n)',
+              '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 40px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.3,\n)',
           },
           exampleRef: 'exampleRef',
         },
@@ -394,7 +394,7 @@ describe('stylesObjectGenerator', () => {
           exampleRef: 'exampleRef',
           headingXlargeBold: {
             mobile:
-              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '40px',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.30,\n}",
+              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '40px',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.3,\n}",
           },
         },
         description: 'should generate object from typography tokens with js output',
@@ -407,11 +407,11 @@ describe('stylesObjectGenerator', () => {
           exampleRef: 'exampleRef',
           headingXlargeBold: {
             mobile:
-              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2.8571rem',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.30,\n}",
+              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2.8571rem',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.3,\n}",
             tablet:
-              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2.5rem',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.30,\n}",
+              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2.5rem',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.3,\n}",
             desktop:
-              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2.2222rem',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.30,\n}",
+              "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '2.2222rem',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.3,\n}",
           },
         },
         description: 'should generate per-breakpoint rem values when font-size-base differs',
