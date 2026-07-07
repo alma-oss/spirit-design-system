@@ -137,6 +137,29 @@ describe('UNSTABLE_Picker', () => {
     expect(label).toHaveClass('theme-light-on-brand', 'Label');
   });
 
+  it('should forward tagProps to Tag elements', () => {
+    render(<TestPicker selectedKeys={['cs', 'dk']} tagProps={{ UNSAFE_className: 'custom-tag-class' }} />);
+
+    const tags = screen.getAllByRole('row');
+
+    tags.forEach((tag) => {
+      expect(tag).toHaveClass('custom-tag-class');
+    });
+  });
+
+  it('should not apply tagProps when renderTags is used', () => {
+    render(
+      <TestPicker
+        selectedKeys={['cs']}
+        tagProps={{ UNSAFE_className: 'custom-tag-class' }}
+        renderTags={() => <div data-testid="custom-tags">Custom tags</div>}
+      />,
+    );
+
+    expect(screen.getByTestId('custom-tags')).toBeInTheDocument();
+    expect(screen.queryByRole('row')).not.toBeInTheDocument();
+  });
+
   it('should not move focus to selection tags while popover is open', () => {
     const onSelectionChange = jest.fn();
     const StatefulPicker = () => {

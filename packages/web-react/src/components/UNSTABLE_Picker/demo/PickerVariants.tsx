@@ -13,6 +13,9 @@ type BackgroundVariant = {
   label: string;
   backgroundColor: 'primary' | 'secondary' | 'tertiary';
   theme?: 'theme-light-on-brand';
+  tagProps?: {
+    UNSAFE_className: string;
+  };
 };
 
 const BACKGROUND_VARIANTS: BackgroundVariant[] = [
@@ -23,13 +26,14 @@ const BACKGROUND_VARIANTS: BackgroundVariant[] = [
     id: 'theme-light-on-brand-bg-primary',
     label: 'On Light On Brand Theme With Primary Background',
     backgroundColor: 'primary',
+    tagProps: { UNSAFE_className: 'bg-accent-01-subtle' },
     theme: 'theme-light-on-brand',
   },
 ];
 
 const PickerVariants = () => (
   <Grid cols={{ mobile: 1, tablet: 2, desktop: 4 }}>
-    {BACKGROUND_VARIANTS.map(({ id, label, backgroundColor, theme }) => (
+    {BACKGROUND_VARIANTS.map(({ id, label, backgroundColor, tagProps, theme }) => (
       <Box key={id} backgroundColor={backgroundColor} padding="space-800" textColor="primary" theme={theme}>
         <DocsStack>
           <h3>{label}</h3>
@@ -42,6 +46,7 @@ const PickerVariants = () => (
             id={`demo-picker-variant-outline-${id}`}
             label="Outline"
             variant={FillVariants.OUTLINE}
+            tagProps={tagProps}
           >
             <UNSTABLE_PickerGroup label="Languages">{renderPickerLanguageItems()}</UNSTABLE_PickerGroup>
           </UNSTABLE_UncontrolledPicker>

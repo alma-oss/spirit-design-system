@@ -263,6 +263,25 @@ The following example positions the popover at `bottom-start` and expands it to 
 </div>
 ```
 
+## Tag Customization
+
+Add extra HTML attributes (for example `data-*` or custom `class`) directly to each Tag `div` element
+inside the selection area. The picker does not restrict which attributes you place on the Tag element,
+so anything you add is applied as-is.
+
+```html
+<div
+  role="row"
+  tabindex="0"
+  aria-label="Czech"
+  aria-describedby="picker-tag-description"
+  data-my-attr="value"
+  class="Tag Tag--selected Tag--small color-scheme-on-selected-basic bg-accent-01-subtle"
+>
+  <!-- Tag content -->
+</div>
+```
+
 ## Sizes
 
 Use the `InputContainer--small`, `InputContainer--medium`, or `InputContainer--large` modifier on
