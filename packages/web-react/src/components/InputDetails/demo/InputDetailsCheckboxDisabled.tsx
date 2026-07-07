@@ -1,7 +1,6 @@
 import React from 'react';
 import { Checkbox } from '../../Checkbox';
 import { Link } from '../../Link';
-import { Text } from '../../Text';
 
 const InputDetailsCheckboxDisabled = () => (
   <Checkbox
@@ -12,7 +11,7 @@ const InputDetailsCheckboxDisabled = () => (
     isRequired
     details={
       <>
-        <Text marginBottom="space-0">We want to keep you informed</Text>
+        <span>We want to keep you informed</span>
         <Link elementType="button" color="inherit" underlined="always" isDisabled>
           See full terms and conditions
         </Link>
