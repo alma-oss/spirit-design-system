@@ -49,7 +49,7 @@ font-family: "'Inter', sans-serif",
 font-size: 2.5rem,
 font-style: italic,
 font-weight: 700,
-line-height: 1.30,
+line-height: 1.3,
 )`;
 
 export const expectedTypographyWithFontReplacement = `(
@@ -57,5 +57,5 @@ font-family: "'Replaced-font', replaced-substitute-font",
 font-size: 2.5rem,
 font-style: italic,
 font-weight: 700,
-line-height: 1.30,
+line-height: 1.3,
 )`;
