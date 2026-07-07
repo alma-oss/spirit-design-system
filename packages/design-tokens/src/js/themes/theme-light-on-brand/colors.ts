@@ -19,6 +19,46 @@ export const accent02StateActive = '#936cff';
 export const accent02StateDefault = '#ae91ff';
 export const accent02StateHover = '#a07eff';
 
+export const accent03BackgroundBasic = '#47ceff';
+export const accent03BackgroundSubtle = '#f6fdff';
+export const accent03BorderBasic = '#47ceff';
+export const accent03BorderSubtle = '#daf0ff';
+export const accent03ContentBasic = '#39a0cc';
+export const accent03ContentSubtle = '#f6fdff';
+export const accent03StateActive = '#40c0ef';
+export const accent03StateDefault = '#47ceff';
+export const accent03StateHover = '#45c8f8';
+
+export const accent04BackgroundBasic = '#73877b';
+export const accent04BackgroundSubtle = '#f9fff6';
+export const accent04BorderBasic = '#b1cfbd';
+export const accent04BorderSubtle = '#def6e7';
+export const accent04ContentBasic = '#92ac9c';
+export const accent04ContentSubtle = '#f9fff6';
+export const accent04StateActive = '#4a554e';
+export const accent04StateDefault = '#73877b';
+export const accent04StateHover = '#5c6961';
+
+export const accent05BackgroundBasic = '#73877b';
+export const accent05BackgroundSubtle = '#f9fff6';
+export const accent05BorderBasic = '#b1cfbd';
+export const accent05BorderSubtle = '#def6e7';
+export const accent05ContentBasic = '#92ac9c';
+export const accent05ContentSubtle = '#f9fff6';
+export const accent05StateActive = '#4a554e';
+export const accent05StateDefault = '#73877b';
+export const accent05StateHover = '#5c6961';
+
+export const accent06BackgroundBasic = '#73877b';
+export const accent06BackgroundSubtle = '#f9fff6';
+export const accent06BorderBasic = '#b1cfbd';
+export const accent06BorderSubtle = '#def6e7';
+export const accent06ContentBasic = '#92ac9c';
+export const accent06ContentSubtle = '#f9fff6';
+export const accent06StateActive = '#4a554e';
+export const accent06StateDefault = '#73877b';
+export const accent06StateHover = '#5c6961';
+
 export const backgroundBackdrop = '#1a1b1b80';
 
 export const backgroundInteractiveStateActive = '#ffffff1a';
