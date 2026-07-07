@@ -19,6 +19,46 @@ $accent-02-state-active: var(--spirit-color-accent-02-state-active);
 $accent-02-state-default: var(--spirit-color-accent-02-state-default);
 $accent-02-state-hover: var(--spirit-color-accent-02-state-hover);
 
+$accent-03-background-basic: var(--spirit-color-accent-03-background-basic);
+$accent-03-background-subtle: var(--spirit-color-accent-03-background-subtle);
+$accent-03-border-basic: var(--spirit-color-accent-03-border-basic);
+$accent-03-border-subtle: var(--spirit-color-accent-03-border-subtle);
+$accent-03-content-basic: var(--spirit-color-accent-03-content-basic);
+$accent-03-content-subtle: var(--spirit-color-accent-03-content-subtle);
+$accent-03-state-active: var(--spirit-color-accent-03-state-active);
+$accent-03-state-default: var(--spirit-color-accent-03-state-default);
+$accent-03-state-hover: var(--spirit-color-accent-03-state-hover);
+
+$accent-04-background-basic: var(--spirit-color-accent-04-background-basic);
+$accent-04-background-subtle: var(--spirit-color-accent-04-background-subtle);
+$accent-04-border-basic: var(--spirit-color-accent-04-border-basic);
+$accent-04-border-subtle: var(--spirit-color-accent-04-border-subtle);
+$accent-04-content-basic: var(--spirit-color-accent-04-content-basic);
+$accent-04-content-subtle: var(--spirit-color-accent-04-content-subtle);
+$accent-04-state-active: var(--spirit-color-accent-04-state-active);
+$accent-04-state-default: var(--spirit-color-accent-04-state-default);
+$accent-04-state-hover: var(--spirit-color-accent-04-state-hover);
+
+$accent-05-background-basic: var(--spirit-color-accent-05-background-basic);
+$accent-05-background-subtle: var(--spirit-color-accent-05-background-subtle);
+$accent-05-border-basic: var(--spirit-color-accent-05-border-basic);
+$accent-05-border-subtle: var(--spirit-color-accent-05-border-subtle);
+$accent-05-content-basic: var(--spirit-color-accent-05-content-basic);
+$accent-05-content-subtle: var(--spirit-color-accent-05-content-subtle);
+$accent-05-state-active: var(--spirit-color-accent-05-state-active);
+$accent-05-state-default: var(--spirit-color-accent-05-state-default);
+$accent-05-state-hover: var(--spirit-color-accent-05-state-hover);
+
+$accent-06-background-basic: var(--spirit-color-accent-06-background-basic);
+$accent-06-background-subtle: var(--spirit-color-accent-06-background-subtle);
+$accent-06-border-basic: var(--spirit-color-accent-06-border-basic);
+$accent-06-border-subtle: var(--spirit-color-accent-06-border-subtle);
+$accent-06-content-basic: var(--spirit-color-accent-06-content-basic);
+$accent-06-content-subtle: var(--spirit-color-accent-06-content-subtle);
+$accent-06-state-active: var(--spirit-color-accent-06-state-active);
+$accent-06-state-default: var(--spirit-color-accent-06-state-default);
+$accent-06-state-hover: var(--spirit-color-accent-06-state-hover);
+
 $background-backdrop: var(--spirit-color-background-backdrop);
 
 $background-interactive-state-active: var(--spirit-color-background-interactive-state-active);
@@ -257,6 +297,50 @@ $accent-colors: (
         state-active: $accent-02-state-active,
         state-default: $accent-02-state-default,
         state-hover: $accent-02-state-hover,
+    ),
+    03: (
+        background-basic: $accent-03-background-basic,
+        background-subtle: $accent-03-background-subtle,
+        border-basic: $accent-03-border-basic,
+        border-subtle: $accent-03-border-subtle,
+        content-basic: $accent-03-content-basic,
+        content-subtle: $accent-03-content-subtle,
+        state-active: $accent-03-state-active,
+        state-default: $accent-03-state-default,
+        state-hover: $accent-03-state-hover,
+    ),
+    04: (
+        background-basic: $accent-04-background-basic,
+        background-subtle: $accent-04-background-subtle,
+        border-basic: $accent-04-border-basic,
+        border-subtle: $accent-04-border-subtle,
+        content-basic: $accent-04-content-basic,
+        content-subtle: $accent-04-content-subtle,
+        state-active: $accent-04-state-active,
+        state-default: $accent-04-state-default,
+        state-hover: $accent-04-state-hover,
+    ),
+    05: (
+        background-basic: $accent-05-background-basic,
+        background-subtle: $accent-05-background-subtle,
+        border-basic: $accent-05-border-basic,
+        border-subtle: $accent-05-border-subtle,
+        content-basic: $accent-05-content-basic,
+        content-subtle: $accent-05-content-subtle,
+        state-active: $accent-05-state-active,
+        state-default: $accent-05-state-default,
+        state-hover: $accent-05-state-hover,
+    ),
+    06: (
+        background-basic: $accent-06-background-basic,
+        background-subtle: $accent-06-background-subtle,
+        border-basic: $accent-06-border-basic,
+        border-subtle: $accent-06-border-subtle,
+        content-basic: $accent-06-content-basic,
+        content-subtle: $accent-06-content-subtle,
+        state-active: $accent-06-state-active,
+        state-default: $accent-06-state-default,
+        state-hover: $accent-06-state-hover,
     ),
 ) !default;
 

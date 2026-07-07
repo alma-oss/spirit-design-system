@@ -19,6 +19,46 @@ export const accent02StateActive = 'var(--spirit-color-accent-02-state-active)';
 export const accent02StateDefault = 'var(--spirit-color-accent-02-state-default)';
 export const accent02StateHover = 'var(--spirit-color-accent-02-state-hover)';
 
+export const accent03BackgroundBasic = 'var(--spirit-color-accent-03-background-basic)';
+export const accent03BackgroundSubtle = 'var(--spirit-color-accent-03-background-subtle)';
+export const accent03BorderBasic = 'var(--spirit-color-accent-03-border-basic)';
+export const accent03BorderSubtle = 'var(--spirit-color-accent-03-border-subtle)';
+export const accent03ContentBasic = 'var(--spirit-color-accent-03-content-basic)';
+export const accent03ContentSubtle = 'var(--spirit-color-accent-03-content-subtle)';
+export const accent03StateActive = 'var(--spirit-color-accent-03-state-active)';
+export const accent03StateDefault = 'var(--spirit-color-accent-03-state-default)';
+export const accent03StateHover = 'var(--spirit-color-accent-03-state-hover)';
+
+export const accent04BackgroundBasic = 'var(--spirit-color-accent-04-background-basic)';
+export const accent04BackgroundSubtle = 'var(--spirit-color-accent-04-background-subtle)';
+export const accent04BorderBasic = 'var(--spirit-color-accent-04-border-basic)';
+export const accent04BorderSubtle = 'var(--spirit-color-accent-04-border-subtle)';
+export const accent04ContentBasic = 'var(--spirit-color-accent-04-content-basic)';
+export const accent04ContentSubtle = 'var(--spirit-color-accent-04-content-subtle)';
+export const accent04StateActive = 'var(--spirit-color-accent-04-state-active)';
+export const accent04StateDefault = 'var(--spirit-color-accent-04-state-default)';
+export const accent04StateHover = 'var(--spirit-color-accent-04-state-hover)';
+
+export const accent05BackgroundBasic = 'var(--spirit-color-accent-05-background-basic)';
+export const accent05BackgroundSubtle = 'var(--spirit-color-accent-05-background-subtle)';
+export const accent05BorderBasic = 'var(--spirit-color-accent-05-border-basic)';
+export const accent05BorderSubtle = 'var(--spirit-color-accent-05-border-subtle)';
+export const accent05ContentBasic = 'var(--spirit-color-accent-05-content-basic)';
+export const accent05ContentSubtle = 'var(--spirit-color-accent-05-content-subtle)';
+export const accent05StateActive = 'var(--spirit-color-accent-05-state-active)';
+export const accent05StateDefault = 'var(--spirit-color-accent-05-state-default)';
+export const accent05StateHover = 'var(--spirit-color-accent-05-state-hover)';
+
+export const accent06BackgroundBasic = 'var(--spirit-color-accent-06-background-basic)';
+export const accent06BackgroundSubtle = 'var(--spirit-color-accent-06-background-subtle)';
+export const accent06BorderBasic = 'var(--spirit-color-accent-06-border-basic)';
+export const accent06BorderSubtle = 'var(--spirit-color-accent-06-border-subtle)';
+export const accent06ContentBasic = 'var(--spirit-color-accent-06-content-basic)';
+export const accent06ContentSubtle = 'var(--spirit-color-accent-06-content-subtle)';
+export const accent06StateActive = 'var(--spirit-color-accent-06-state-active)';
+export const accent06StateDefault = 'var(--spirit-color-accent-06-state-default)';
+export const accent06StateHover = 'var(--spirit-color-accent-06-state-hover)';
+
 export const backgroundBackdrop = 'var(--spirit-color-background-backdrop)';
 
 export const backgroundInteractiveStateActive = 'var(--spirit-color-background-interactive-state-active)';
@@ -257,6 +297,50 @@ export const accentColors = {
     stateActive: accent02StateActive,
     stateDefault: accent02StateDefault,
     stateHover: accent02StateHover,
+  },
+  '03': {
+    backgroundBasic: accent03BackgroundBasic,
+    backgroundSubtle: accent03BackgroundSubtle,
+    borderBasic: accent03BorderBasic,
+    borderSubtle: accent03BorderSubtle,
+    contentBasic: accent03ContentBasic,
+    contentSubtle: accent03ContentSubtle,
+    stateActive: accent03StateActive,
+    stateDefault: accent03StateDefault,
+    stateHover: accent03StateHover,
+  },
+  '04': {
+    backgroundBasic: accent04BackgroundBasic,
+    backgroundSubtle: accent04BackgroundSubtle,
+    borderBasic: accent04BorderBasic,
+    borderSubtle: accent04BorderSubtle,
+    contentBasic: accent04ContentBasic,
+    contentSubtle: accent04ContentSubtle,
+    stateActive: accent04StateActive,
+    stateDefault: accent04StateDefault,
+    stateHover: accent04StateHover,
+  },
+  '05': {
+    backgroundBasic: accent05BackgroundBasic,
+    backgroundSubtle: accent05BackgroundSubtle,
+    borderBasic: accent05BorderBasic,
+    borderSubtle: accent05BorderSubtle,
+    contentBasic: accent05ContentBasic,
+    contentSubtle: accent05ContentSubtle,
+    stateActive: accent05StateActive,
+    stateDefault: accent05StateDefault,
+    stateHover: accent05StateHover,
+  },
+  '06': {
+    backgroundBasic: accent06BackgroundBasic,
+    backgroundSubtle: accent06BackgroundSubtle,
+    borderBasic: accent06BorderBasic,
+    borderSubtle: accent06BorderSubtle,
+    contentBasic: accent06ContentBasic,
+    contentSubtle: accent06ContentSubtle,
+    stateActive: accent06StateActive,
+    stateDefault: accent06StateDefault,
+    stateHover: accent06StateHover,
   },
 };
 
