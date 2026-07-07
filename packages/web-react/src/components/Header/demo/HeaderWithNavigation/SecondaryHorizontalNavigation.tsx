@@ -17,7 +17,7 @@ const SecondaryHorizontalNavigation: FunctionComponent<SecondaryHorizontalNaviga
 }) => (
   <Navigation marginLeft="auto" aria-label="Secondary Navigation">
     <NavigationItem>
-      <Button color="tertiary" isSymmetrical>
+      <Button color="tertiary" size="small" isSymmetrical>
         <Icon name="search" />
         <VisuallyHidden>Search</VisuallyHidden>
       </Button>
@@ -28,12 +28,14 @@ const SecondaryHorizontalNavigation: FunctionComponent<SecondaryHorizontalNaviga
       </NavigationAvatar>
     </NavigationItem>
     <NavigationItem hideOn={['mobile', 'tablet']}>
-      <ButtonLink href="#" color="secondary">
+      <ButtonLink href="#" color="secondary" size="small">
         Log In
       </ButtonLink>
     </NavigationItem>
     <NavigationItem hideOn={['mobile', 'tablet']}>
-      <ButtonLink href="#">Post a Job</ButtonLink>
+      <ButtonLink href="#" size="small">
+        Post a Job
+      </ButtonLink>
     </NavigationItem>
     <NavigationItem hideOn="desktop">
       <Button
@@ -43,6 +45,7 @@ const SecondaryHorizontalNavigation: FunctionComponent<SecondaryHorizontalNaviga
         aria-controls={id}
         aria-expanded="false"
         onClick={handleOpenDrawer}
+        size="small"
         isSymmetrical
       >
         <Icon name="hamburger" />
