@@ -92,7 +92,7 @@ You must manually set the `isDisabled` prop on interactive elements (Link, Butto
   isRequired
   details={
     <>
-      <Text marginBottom="space-0">We want to keep you informed</Text>
+      <span>We want to keep you informed</span>
       <Link elementType="button" color="inherit" underlined="always" isDisabled>
         See full terms and conditions
       </Link>
