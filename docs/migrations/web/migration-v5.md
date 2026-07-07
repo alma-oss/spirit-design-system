@@ -7,49 +7,49 @@ Introducing version 5 of the _spirit-web_ package.
 ## Overview
 
 - [General Changes](#general-changes)
-  - [Dropped Support for Node.js 20](#dropped-support-for-nodejs-20)
   - [Color Schemes](#color-schemes)
+  - [Dropped Support for Node.js 20](#dropped-support-for-nodejs-20)
   - [Form Fields: Composition Markup Changed](#form-fields-composition-markup-changed)
   - [Helper: `link-stretched` Renamed to `element-stretched`](#helper-link-stretched-renamed-to-element-stretched)
 - [Component Changes](#component-changes)
+  - [Alert: Deprecated Link Color Styles Removed](#alert-deprecated-link-color-styles-removed)
   - [Button: `Button--block` Modifier Removed](#button-button--block-modifier-removed)
   - [Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding)
   - [Checkbox: Composition Markup Changed](#checkbox-composition-markup-changed)
-  - [Radio: Composition Markup Changed](#radio-composition-markup-changed)
-  - [Toggle: Composition Markup Changed](#toggle-composition-markup-changed)
+  - [Checkbox and Toggle: Emphasized Label No Longer Documented](#checkbox-and-toggle-emphasized-label-no-longer-documented)
   - [Collapse: `data-spirit-more` Removed, Use `data-spirit-is-disposable`](#collapse-data-spirit-more-removed-use-data-spirit-is-disposable)
-  - [Form Field Components: Vertical Spacing Removed](#form-field-components-vertical-spacing-removed)
-  - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
-  - [Success State Icons Renamed from `check-plain` to `success`](#success-state-icons-renamed-from-check-plain-to-success)
+  - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
+  - [Disabled Utility for Color-Scheme Components](#disabled-utility-for-color-scheme-components)
+  - [DrawerPanel: Restructured with Sub-components](#drawerpanel-restructured-with-sub-components)
   - [FieldGroup: Component Styles Removed](#fieldgroup-component-styles-removed)
   - [FileUpload and File: Stabilized (FileUploader Removed)](#fileupload-and-file-stabilized-fileuploader-removed)
+  - [Flex: Direction Modifier Classes Changed](#flex-direction-modifier-classes-changed)
+  - [Form Field Components: Vertical Spacing Removed](#form-field-components-vertical-spacing-removed)
+  - [Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed](#header-unstable_header-stabilized-previous-header-css-removed)
+  - [Item: Composable Content and Slots](#item-composable-content-and-slots)
+  - [Navigation: Slots, Open State, and Removed Selected Indicator](#navigation-slots-open-state-and-removed-selected-indicator)
+  - [Pagination: Previous and Next Links Use Small Button](#pagination-previous-and-next-links-use-small-button)
+  - [Radio: Composition Markup Changed](#radio-composition-markup-changed)
   - [ScrollView: Arrows Renamed to Controls](#scrollview-arrows-renamed-to-controls)
   - [Stack: Modifier Classes Without `has` Prefix](#stack-modifier-classes-without-has-prefix)
   - [Stack: Wrap Direct Children in `StackItem` When Using Dividers](#stack-wrap-direct-children-in-stackitem-when-using-dividers)
+  - [Success State Icons Renamed from `check-plain` to `success`](#success-state-icons-renamed-from-check-plain-to-success)
   - [Tag: Appearance Feature Flag Removed](#tag-appearance-feature-flag-removed)
-  - [Alert: Deprecated Link Color Styles Removed](#alert-deprecated-link-color-styles-removed)
   - [Tag: `ControlButton` Size Mapping Updated](#tag-controlbutton-size-mapping-updated)
-  - [Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed](#header-unstable_header-stabilized-previous-header-css-removed)
-  - [Item: Composable Content and Slots](#item-composable-content-and-slots)
-  - [ControlButton: Expanded Size Scale Feature Flag Removed](#controlbutton-expanded-size-scale-feature-flag-removed)
-  - [Disabled Utility for Color-Scheme Components](#disabled-utility-for-color-scheme-components)
-  - [Navigation: Slots, Open State, and Removed Selected Indicator](#navigation-slots-open-state-and-removed-selected-indicator)
+  - [Toggle: Composition Markup Changed](#toggle-composition-markup-changed)
   - [Toggle: Input Before Label in HTML](#toggle-input-before-label-in-html)
-  - [Pagination: Previous and Next Links Use Small Button](#pagination-previous-and-next-links-use-small-button)
-  - [DrawerPanel: Restructured with Sub-components](#drawerpanel-restructured-with-sub-components)
-  - [Checkbox and Toggle: Emphasized Label No Longer Documented](#checkbox-and-toggle-emphasized-label-no-longer-documented)
 
 ## General Changes
-
-### Dropped Support for Node.js 20
-
-The Node.js v20 is no longer supported. The minimum required Node.js version is 22.
 
 ### Color Schemes
 
 Multiple components now use color scheme utility classes (`color-scheme-on-*`) for surface colors
 instead of component-specific color modifiers. This affects: Box, Button, ControlButton, Item, Pill, Tag, Toast, and Tooltip.
 See [Color Schemes][decision-color-schemes] for the utility class naming and pairing logic.
+
+### Dropped Support for Node.js 20
+
+The Node.js v20 is no longer supported. The minimum required Node.js version is 22.
 
 ### Form Fields: Composition Markup Changed
 
@@ -109,6 +109,7 @@ See [TextField README][readme-textfield], [InputAddon README][readme-input-addon
 [InputDetails README][readme-input-details] for full examples.
 
 </details>
+
 ### Helper: `link-stretched` Renamed to `element-stretched`
 
 The `.link-stretched` helper class has been replaced by the more general `.element-stretched` utility.
@@ -132,6 +133,32 @@ Replace every occurrence of `link-stretched` with `element-stretched`.
 The parent element must still have `position: relative` for the stretch to take effect.
 
 ## Component Changes
+
+### Alert: Deprecated Link Color Styles Removed
+
+The deprecated `.Alert :where(a)` CSS rule that forced links inside `Alert` to inherit the
+alert's content color has been removed. Links inside `Alert` now use the default link color
+from your project styles.
+
+#### Migration Guide
+
+If your project relies on links inside `Alert` matching the alert's content color, add the
+`link-inherit` class to each link or button element. Use `link-underlined` as well so links
+remain distinguishable from surrounding text:
+
+```html
+<!-- Before -->
+<div class="Alert Alert--success">
+  <div>See <a href="/faq">FAQ</a> for more info.</div>
+</div>
+
+<!-- After -->
+<div class="Alert Alert--success">
+  <div>See <a href="/faq" class="link-inherit link-underlined">FAQ</a> for more info.</div>
+</div>
+```
+
+See [Alert README][readme-alert] for the full links-in-alert pattern.
 
 ### Button: `Button--block` Modifier Removed
 
@@ -261,158 +288,52 @@ For item-style checkboxes, use the `Item` composition and the `Checkbox--item` m
 
 </details>
 
-### Radio: Composition Markup Changed
+### Checkbox and Toggle: Emphasized Label No Longer Documented
 
-The Radio component no longer provides the outer wrapper and text element classes.
-Compose radio rows from the `Radio`, `Label`, and layout utilities instead.
+The "Emphasized Label" pattern — passing a `<Text emphasis="semibold">` element as the `label` prop of `Checkbox` or `Toggle` — is no longer documented.
 
-See also [Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding)
-for more details about Radio vertical spacing.
-
-#### Migration Guide
-
-<details>
-  <summary>🔧 Manual Migration Steps</summary>
-
-Replace the old Radio wrapper markup with a `Flex` row and add `py-500` vertical padding on the wrapper:
-
-```html
-<!-- Before -->
-<div class="Radio">
-  <input type="radio" id="radio-default" class="Radio__input" />
-  <div class="Radio__text">
-    <label for="radio-default" class="Label Label--inline">Radio Label</label>
-  </div>
-</div>
-
-<!-- After -->
-<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
-  <input type="radio" id="radio-default" class="Radio" />
-  <div>
-    <label for="radio-default" class="Label cursor-pointer">Radio Label</label>
-  </div>
-</div>
-```
-
-For item-style radios, use the `Item` composition and the `Radio--item` modifier:
-
-```html
-<!-- Before -->
-<div class="Radio Radio--item">
-  <input type="radio" id="radio-item" class="Radio__input" />
-  <div class="Radio__text">
-    <label for="radio-item" class="Label Label--item">Radio Label</label>
-  </div>
-</div>
-
-<!-- After -->
-<div class="Item">
-  <div class="Item__slot" role="presentation">
-    <input type="radio" id="radio-item" class="Radio Radio--item" />
-  </div>
-  <div class="Item__content" role="presentation">
-    <label for="radio-item" class="Label element-stretched cursor-pointer">Radio Label</label>
-  </div>
-</div>
-```
-
-</details>
-
-### Toggle: Composition Markup Changed
-
-The Toggle component no longer provides the outer wrapper and text element classes.
-Compose toggle rows from the `Toggle`, `Label`, and layout utilities instead.
-
-See also [Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding)
-for more details about Toggle vertical spacing.
+`Label` already applies `label-medium` typography. Wrapping the label in a `Text` component with a different emphasis
+overrides those styles and can cause the label text to misalign vertically relative to the input control.
 
 #### Migration Guide
 
 <details>
   <summary>🔧 Manual Migration Steps</summary>
 
-Replace the old Toggle wrapper markup with a `Flex` row and add `py-500` vertical padding on the wrapper:
+Replace the `Text`-wrapped label with a plain string:
 
-```html
-<!-- Before -->
-<div class="Toggle Toggle--inputPositionEnd">
-  <div class="Toggle__text">
-    <label for="toggle-default" class="Label Label--inline">Toggle Label</label>
-  </div>
-  <input type="checkbox" id="toggle-default" class="Toggle__input" />
-</div>
-
-<!-- After -->
-<div
-  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
-  style="--flex-spacing-x: var(--spirit-space-500);"
->
-  <input type="checkbox" id="toggle-default" class="Toggle" />
-  <div>
-    <label for="toggle-default" class="Label cursor-pointer">Toggle Label</label>
-  </div>
-</div>
+```diff
+- <Checkbox
+-   id="consent"
+-   label={
+-     <Text elementType="span" emphasis="semibold">
+-       I agree to the terms and conditions
+-     </Text>
+-   }
+-   isRequired
+- />
++ <Checkbox id="consent" label="I agree to the terms and conditions" isRequired />
 ```
 
-For toggles with indicators, move `Toggle__input--indicators` to `Toggle--indicators` on the input:
+The same applies to `Toggle`:
 
-```html
-<!-- Before -->
-<input type="checkbox" class="Toggle__input Toggle__input--indicators" />
-
-<!-- After -->
-<input type="checkbox" class="Toggle Toggle--indicators" />
+```diff
+- <Toggle
+-   id="consent"
+-   label={
+-     <Text elementType="span" emphasis="semibold">
+-       I agree to the terms and conditions
+-     </Text>
+-   }
+-   isRequired
+- />
++ <Toggle id="consent" label="I agree to the terms and conditions" isRequired />
 ```
+
+Search your project for `Checkbox` and `Toggle` usages where the `label` prop
+receives a `<Text>` (or any other element) with custom typography and replace them with plain strings.
 
 </details>
-
-### Form Field Components: Vertical Spacing Removed
-
-`Label`, `HelperText`, and `ValidationText` no longer carry their own `margin-top` or `margin-bottom`.
-Previously those margins provided automatic spacing inside form field compositions.
-If you compose custom fields from these components directly (without using Spirit's built-in field
-components such as `TextField`, `Checkbox`, or `FileUploadInput`), you must now provide spacing
-explicitly via a layout wrapper.
-
-#### Migration Guide
-
-Wrap your field parts in a `Stack` with the appropriate spacing token:
-
-```html
-<!-- Before — spacing came from Label/HelperText/ValidationText margins -->
-<label for="my-input" class="Label">Label</label>
-<div class="InputContainer InputContainer--fill InputContainer--medium">
-  <input type="text" id="my-input" />
-</div>
-<div class="HelperText">Helper text</div>
-<div class="ValidationText ValidationText--danger">Error text</div>
-
-<!-- After — wrap in Stack to restore spacing -->
-<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="my-input" class="Label">Label</label>
-  <div class="InputContainer InputContainer--fill InputContainer--medium">
-    <input type="text" id="my-input" />
-  </div>
-  <div class="HelperText">Helper text</div>
-  <div class="ValidationText ValidationText--danger">Error text</div>
-</div>
-```
-
-Use `--stack-spacing: var(--spirit-space-400)` for the gap between the label and its helper/validation
-text inside the text area (e.g. inside a Radio or Checkbox row), or `--stack-spacing: var(--spirit-space-500)` for the gap between the label and the input container.
-
-### Flex: Direction Modifier Classes Changed
-
-The `Flex--row` and `Flex--column` CSS modifier classes were removed. Use `Flex--horizontal` and `Flex--vertical` instead.
-
-#### Migration Guide
-
-Manually replace the modifier classes in your project.
-
-- `Flex--row` → `Flex--horizontal`
-- `Flex--column` → `Flex--vertical`
-- `Flex--{breakpoint}--row` → `Flex--{breakpoint}--horizontal`
-- `Flex--{breakpoint}--column` → `Flex--{breakpoint}--vertical`
 
 ### Collapse: `data-spirit-more` Removed, Use `data-spirit-is-disposable`
 
@@ -437,28 +358,108 @@ Replace the attribute on collapse triggers:
 
 </details>
 
-### Success State Icons Renamed from `check-plain` to `success`
+### ControlButton: Expanded Size Scale Feature Flag Removed
 
-Success validation and status icons now use the `success` sprite icon instead of `check-plain`.
-This affects `ValidationText`, `Alert`, and `Toast` in success states. Selection indicators on `Item`, `PricingPlan`, and similar components still use `check-plain`.
+The feature flag enabling the expanded size scale was removed and the expanded size scale is now default.
+`ControlButton` now ships five sizes (`xsmall`, `small`, `medium`, `large`, `xlarge`) and the existing
+sizes were remapped to smaller heights:
+
+| CSS Class               | Height before | Height now |
+| ----------------------- | ------------- | ---------- |
+| `ControlButton--xsmall` | —             | 16px       |
+| `ControlButton--small`  | 24px          | 20px       |
+| `ControlButton--medium` | 32px          | 24px       |
+| `ControlButton--large`  | 40px          | 32px       |
+| `ControlButton--xlarge` | —             | 40px       |
+
+#### Migration Guide
+
+You can now safely delete the Sass variable `$enable-v5-control-button-expanded-size-scale` and the CSS
+class `spirit-feature-enable-v5-control-button-expanded-size-scale` from your project as they have no
+effect.
+
+This is a **visual breaking change** — if you relied on the previous heights, shift the size modifier up
+to keep the same rendering: `ControlButton--small` → `ControlButton--medium`,
+`ControlButton--medium` → `ControlButton--large`, and `ControlButton--large` → `ControlButton--xlarge`.
+
+### Disabled Utility for Color-Scheme Components
+
+The `--disabled` BEM modifier classes were removed from `Button`, `ControlButton`, and `Tag`. Use the global
+`disabled` utility class together with the native `disabled` attribute (or `aria-disabled="true"` for links).
+
+The `disabled` utility sets disabled color tokens with `!important`, blocks pointer interaction, and applies disabled
+cursors. Loading buttons keep `Button--loading` only and must not use the `disabled` utility.
 
 #### Migration Guide
 
 <details>
   <summary>🔧 Manual Migration Steps</summary>
 
-Update custom sprite references in success validation or status states:
+Replace the component `--disabled` modifier with the `disabled` utility class and keep the native disabled state on
+interactive elements.
 
 ```html
 <!-- Before -->
-<svg class="Icon" width="24" height="24" aria-hidden="true">
-  <use href="/icons/svg/sprite.svg#check-plain" />
-</svg>
+<button type="button" class="Button Button--primary Button--medium Button--disabled" disabled>Disabled Button</button>
+<span class="Tag Tag--neutral Tag--small Tag--disabled">Disabled tag</span>
 
-<!-- After (success validation/status only) -->
-<svg class="Icon" width="24" height="24" aria-hidden="true">
-  <use href="/icons/svg/sprite.svg#success" />
-</svg>
+<!-- After -->
+<button type="button" class="Button Button--primary Button--medium disabled" disabled>Disabled Button</button>
+<span class="Tag Tag--neutral Tag--small disabled">Disabled tag</span>
+```
+
+For `ControlButton`, add the `text-color-scheme` utility on the button itself so content colors apply when disabled:
+
+```html
+<!-- Before -->
+<button
+  type="button"
+  class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--disabled"
+  disabled
+>
+  …
+</button>
+
+<!-- After -->
+<button
+  type="button"
+  class="ControlButton ControlButton--medium ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target disabled"
+  disabled
+>
+  …
+</button>
+```
+
+</details>
+
+### DrawerPanel: Restructured with Sub-components
+
+The `DrawerPanel` interior has been restructured. The old `DrawerPanel__content` element — which previously
+wrapped both the close button and the drawer body — has been replaced by two explicit sub-components:
+`DrawerPanelHeader` for the close button and `DrawerPanelBody` for the scrollable body.
+
+| Old class              | New classes                             |
+| ---------------------- | --------------------------------------- |
+| `DrawerPanel__content` | `DrawerPanelHeader` + `DrawerPanelBody` |
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+```diff
+  <div class="DrawerPanel">
+-   <div class="DrawerPanel__content">
+-     <!-- close button -->
+-     <!-- drawer body -->
+-   </div>
++   <header class="DrawerPanelHeader">
++     <!-- close button -->
++   </header>
++   <div class="DrawerPanelBody">
++     <!-- drawer body -->
++   </div>
+  </div>
 ```
 
 </details>
@@ -516,153 +517,53 @@ Manually replace the class names in your project.
 
 </details>
 
-### ScrollView: Arrows Renamed to Controls
+### Flex: Direction Modifier Classes Changed
 
-ScrollView scroll navigation markup was renamed from “arrows” to “controls”.
-
-#### Migration Guide
-
-<details>
-  <summary>🔧 Manual Migration Steps</summary>
-
-Manually replace the BEM class in your project.
-
-- `ScrollView__arrows` → `ScrollView__controls`
-
-If you customized internal Sass variables in your project, rename them as well:
-
-- `$start-shadow-size-arrow` → `$start-shadow-size-controls`
-- `$start-shadow-initial-offset-arrow` → `$start-shadow-initial-offset-controls`
-- `$end-shadow-size-arrow` → `$end-shadow-size-controls`
-- `$end-shadow-initial-offset-arrow` → `$end-shadow-initial-offset-controls`
-- `$arrow-spacing` → `$controls-spacing`
-
-</details>
-
-### Stack: Modifier Classes Without `has` Prefix
-
-Stack CSS modifier classes no longer use the `has` verb prefix, consistent with other Spirit modifiers.
+The `Flex--row` and `Flex--column` CSS modifier classes were removed. Use `Flex--horizontal` and `Flex--vertical` instead.
 
 #### Migration Guide
 
 Manually replace the modifier classes in your project.
 
-- `Stack--hasSpacing` → `Stack--spacing`
-- `Stack--hasIntermediateDividers` → `Stack--intermediateDividers`
-- `Stack--hasStartDivider` → `Stack--startDivider`
-- `Stack--hasEndDivider` → `Stack--endDivider`
+- `Flex--row` → `Flex--horizontal`
+- `Flex--column` → `Flex--vertical`
+- `Flex--{breakpoint}--row` → `Flex--{breakpoint}--horizontal`
+- `Flex--{breakpoint}--column` → `Flex--{breakpoint}--vertical`
 
-```html
-<!-- Before -->
-<ul class="Stack Stack--hasSpacing Stack--hasIntermediateDividers Stack--hasStartDivider Stack--hasEndDivider">
-  <li class="StackItem">Item 1</li>
-  <li class="StackItem">Item 2</li>
-</ul>
+### Form Field Components: Vertical Spacing Removed
 
-<!-- After -->
-<ul class="Stack Stack--spacing Stack--intermediateDividers Stack--startDivider Stack--endDivider">
-  <li class="StackItem">Item 1</li>
-  <li class="StackItem">Item 2</li>
-</ul>
-```
-
-### Stack: Wrap Direct Children in `StackItem` When Using Dividers
-
-The CSS fallback that allowed direct children without the `StackItem` class to receive divider styling has been removed.
-If your `Stack` uses `Stack--intermediateDividers`, `Stack--startDivider`, or `Stack--endDivider`, each direct child must carry the `StackItem` class.
+`Label`, `HelperText`, and `ValidationText` no longer carry their own `margin-top` or `margin-bottom`.
+Previously those margins provided automatic spacing inside form field compositions.
+If you compose custom fields from these components directly (without using Spirit's built-in field
+components such as `TextField`, `Checkbox`, or `FileUploadInput`), you must now provide spacing
+explicitly via a layout wrapper.
 
 #### Migration Guide
 
-Add the `StackItem` class to each direct child of a divider Stack:
+Wrap your field parts in a `Stack` with the appropriate spacing token:
 
 ```html
-<!-- Before -->
-<ul class="Stack Stack--intermediateDividers">
-  <li>Item 1</li>
-  <li>Item 2</li>
-</ul>
-
-<!-- After -->
-<ul class="Stack Stack--intermediateDividers">
-  <li class="StackItem">Item 1</li>
-  <li class="StackItem">Item 2</li>
-</ul>
-```
-
-### Tag: Appearance Feature Flag Removed
-
-The feature flag enabling the new `Tag` appearance was removed and the new appearance
-(`inline-flex` layout with explicit height and inside spacing) is now default.
-
-#### Migration Guide
-
-You can now safely delete the Sass variable `$enable-v5-tag-appearance` and the CSS class
-`spirit-feature-enable-v5-tag-appearance` from your project as they have no effect.
-
-### Alert: Deprecated Link Color Styles Removed
-
-The deprecated `.Alert :where(a)` CSS rule that forced links inside `Alert` to inherit the
-alert's content color has been removed. Links inside `Alert` now use the default link color
-from your project styles.
-
-#### Migration Guide
-
-If your project relies on links inside `Alert` matching the alert's content color, add the
-`link-inherit` class to each link or button element. Use `link-underlined` as well so links
-remain distinguishable from surrounding text:
-
-```html
-<!-- Before -->
-<div class="Alert Alert--success">
-  <div>See <a href="/faq">FAQ</a> for more info.</div>
+<!-- Before — spacing came from Label/HelperText/ValidationText margins -->
+<label for="my-input" class="Label">Label</label>
+<div class="InputContainer InputContainer--fill InputContainer--medium">
+  <input type="text" id="my-input" />
 </div>
+<div class="HelperText">Helper text</div>
+<div class="ValidationText ValidationText--danger">Error text</div>
 
-<!-- After -->
-<div class="Alert Alert--success">
-  <div>See <a href="/faq" class="link-inherit link-underlined">FAQ</a> for more info.</div>
+<!-- After — wrap in Stack to restore spacing -->
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+  <label for="my-input" class="Label">Label</label>
+  <div class="InputContainer InputContainer--fill InputContainer--medium">
+    <input type="text" id="my-input" />
+  </div>
+  <div class="HelperText">Helper text</div>
+  <div class="ValidationText ValidationText--danger">Error text</div>
 </div>
 ```
 
-See [Alert README][readme-alert] for the full links-in-alert pattern.
-
-### Tag: `ControlButton` Size Mapping Updated
-
-The recommended `ControlButton` size to use inside a `Tag` has changed to better align with the
-updated size scale. The previous guidance mapped Tag sizes to larger `ControlButton` values; the new
-mapping uses smaller ones:
-
-| Tag class     | Previous `ControlButton` class | New `ControlButton` class           |
-| ------------- | ------------------------------ | ----------------------------------- |
-| `Tag--xsmall` | `ControlButton--xsmall`        | `ControlButton--xsmall` (unchanged) |
-| `Tag--small`  | `ControlButton--small`         | `ControlButton--xsmall`             |
-| `Tag--medium` | `ControlButton--small`         | `ControlButton--xsmall`             |
-| `Tag--large`  | `ControlButton--medium`        | `ControlButton--small`              |
-| `Tag--xlarge` | `ControlButton--medium`        | `ControlButton--small`              |
-
-#### Migration Guide
-
-Update the `ControlButton--*` modifier class on any `ControlButton` nested inside a `Tag`:
-
-```diff
-  <div class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic">
-    <span>Tag label</span>
-    <button
-      type="button"
--     class="ControlButton ControlButton--small ControlButton--symmetrical"
-+     class="ControlButton ControlButton--xsmall ControlButton--symmetrical"
-      aria-label="Remove Tag label"
-    >…</button>
-  </div>
-  <div class="Tag Tag--selected Tag--large color-scheme-on-selected-basic">
-    <span>Tag label</span>
-    <button
-      type="button"
--     class="ControlButton ControlButton--medium ControlButton--symmetrical"
-+     class="ControlButton ControlButton--small ControlButton--symmetrical"
-      aria-label="Remove Tag label"
-    >…</button>
-  </div>
-```
+Use `--stack-spacing: var(--spirit-space-400)` for the gap between the label and its helper/validation
+text inside the text area (e.g. inside a Radio or Checkbox row), or `--stack-spacing: var(--spirit-space-500)` for the gap between the label and the input container.
 
 ### Header: `UNSTABLE_Header` Stabilized, Previous `Header` CSS Removed
 
@@ -783,80 +684,6 @@ See [Item README][readme-item] for disabled state, vertical alignment, accessibi
 
 </details>
 
-### ControlButton: Expanded Size Scale Feature Flag Removed
-
-The feature flag enabling the expanded size scale was removed and the expanded size scale is now default.
-`ControlButton` now ships five sizes (`xsmall`, `small`, `medium`, `large`, `xlarge`) and the existing
-sizes were remapped to smaller heights:
-
-| CSS Class               | Height before | Height now |
-| ----------------------- | ------------- | ---------- |
-| `ControlButton--xsmall` | —             | 16px       |
-| `ControlButton--small`  | 24px          | 20px       |
-| `ControlButton--medium` | 32px          | 24px       |
-| `ControlButton--large`  | 40px          | 32px       |
-| `ControlButton--xlarge` | —             | 40px       |
-
-#### Migration Guide
-
-You can now safely delete the Sass variable `$enable-v5-control-button-expanded-size-scale` and the CSS
-class `spirit-feature-enable-v5-control-button-expanded-size-scale` from your project as they have no
-effect.
-
-This is a **visual breaking change** — if you relied on the previous heights, shift the size modifier up
-to keep the same rendering: `ControlButton--small` → `ControlButton--medium`,
-`ControlButton--medium` → `ControlButton--large`, and `ControlButton--large` → `ControlButton--xlarge`.
-
-### Disabled Utility for Color-Scheme Components
-
-The `--disabled` BEM modifier classes were removed from `Button`, `ControlButton`, and `Tag`. Use the global
-`disabled` utility class together with the native `disabled` attribute (or `aria-disabled="true"` for links).
-
-The `disabled` utility sets disabled color tokens with `!important`, blocks pointer interaction, and applies disabled
-cursors. Loading buttons keep `Button--loading` only and must not use the `disabled` utility.
-
-#### Migration Guide
-
-<details>
-  <summary>🔧 Manual Migration Steps</summary>
-
-Replace the component `--disabled` modifier with the `disabled` utility class and keep the native disabled state on
-interactive elements.
-
-```html
-<!-- Before -->
-<button type="button" class="Button Button--primary Button--medium Button--disabled" disabled>Disabled Button</button>
-<span class="Tag Tag--neutral Tag--small Tag--disabled">Disabled tag</span>
-
-<!-- After -->
-<button type="button" class="Button Button--primary Button--medium disabled" disabled>Disabled Button</button>
-<span class="Tag Tag--neutral Tag--small disabled">Disabled tag</span>
-```
-
-For `ControlButton`, add the `text-color-scheme` utility on the button itself so content colors apply when disabled:
-
-```html
-<!-- Before -->
-<button
-  type="button"
-  class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--disabled"
-  disabled
->
-  …
-</button>
-
-<!-- After -->
-<button
-  type="button"
-  class="ControlButton ControlButton--medium ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target disabled"
-  disabled
->
-  …
-</button>
-```
-
-</details>
-
 ### Navigation: Slots, Open State, and Removed Selected Indicator
 
 `NavigationAction` now supports `NavigationAction__slot` wrappers for optional content around the
@@ -874,41 +701,6 @@ active stripe in the `box` variant) was removed.
 - For second-level items, use structural nesting and keep slot icons on parent category actions only.
 - If you relied on the vertical selected-state indicator, note that it has been removed; selection is now
 communicated through the action's background and color only.
-</details>
-
-### Toggle: Input Before Label in HTML
-
-Toggle markup now places the `<input class="Toggle__input">` element **before** the
-`<div class="Toggle__text">` block, matching Checkbox and Radio. Visual layout and
-`inputPosition` modifier classes are unchanged.
-
-#### Migration Guide
-
-<details>
-  <summary>🔧 Manual Migration Steps</summary>
-
-Swap the order of the input and text wrapper in your Toggle HTML.
-
-```html
-<!-- Before -->
-<div class="Toggle Toggle--inputPositionEnd">
-  <div class="Toggle__text">
-    <label class="Label Label--inline" for="toggle">Toggle Label</label>
-  </div>
-  <input type="checkbox" id="toggle" class="Toggle__input" name="toggle" />
-</div>
-
-<!-- After -->
-<div class="Toggle Toggle--inputPositionEnd">
-  <input type="checkbox" id="toggle" class="Toggle__input" name="toggle" />
-  <div class="Toggle__text">
-    <label class="Label cursor-pointer" for="toggle">Toggle Label</label>
-  </div>
-</div>
-```
-
-If you provided any custom CSS depending on the order of Toggle children, you will need to update it.
-
 </details>
 
 ### Pagination: Previous and Next Links Use Small Button
@@ -943,67 +735,291 @@ Replace `Button--medium` with `Button--small` on the previous and next navigatio
 
 </details>
 
----
+### Radio: Composition Markup Changed
 
-### DrawerPanel: Restructured with Sub-components
+The Radio component no longer provides the outer wrapper and text element classes.
+Compose radio rows from the `Radio`, `Label`, and layout utilities instead.
 
-The `DrawerPanel` interior has been restructured. The old `DrawerPanel__content` element — which previously
-wrapped both the close button and the drawer body — has been replaced by two explicit sub-components:
-`DrawerPanelHeader` for the close button and `DrawerPanelBody` for the scrollable body.
-
-| Old class              | New classes                             |
-| ---------------------- | --------------------------------------- |
-| `DrawerPanel__content` | `DrawerPanelHeader` + `DrawerPanelBody` |
+See also [Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding)
+for more details about Radio vertical spacing.
 
 #### Migration Guide
 
 <details>
   <summary>🔧 Manual Migration Steps</summary>
 
-```diff
-  <div class="DrawerPanel">
--   <div class="DrawerPanel__content">
--     <!-- close button -->
--     <!-- drawer body -->
--   </div>
-+   <header class="DrawerPanelHeader">
-+     <!-- close button -->
-+   </header>
-+   <div class="DrawerPanelBody">
-+     <!-- drawer body -->
-+   </div>
+Replace the old Radio wrapper markup with a `Flex` row and add `py-500` vertical padding on the wrapper:
+
+```html
+<!-- Before -->
+<div class="Radio">
+  <input type="radio" id="radio-default" class="Radio__input" />
+  <div class="Radio__text">
+    <label for="radio-default" class="Label Label--inline">Radio Label</label>
   </div>
+</div>
+
+<!-- After -->
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="radio" id="radio-default" class="Radio" />
+  <div>
+    <label for="radio-default" class="Label cursor-pointer">Radio Label</label>
+  </div>
+</div>
+```
+
+For item-style radios, use the `Item` composition and the `Radio--item` modifier:
+
+```html
+<!-- Before -->
+<div class="Radio Radio--item">
+  <input type="radio" id="radio-item" class="Radio__input" />
+  <div class="Radio__text">
+    <label for="radio-item" class="Label Label--item">Radio Label</label>
+  </div>
+</div>
+
+<!-- After -->
+<div class="Item">
+  <div class="Item__slot" role="presentation">
+    <input type="radio" id="radio-item" class="Radio Radio--item" />
+  </div>
+  <div class="Item__content" role="presentation">
+    <label for="radio-item" class="Label element-stretched cursor-pointer">Radio Label</label>
+  </div>
+</div>
 ```
 
 </details>
 
-### Checkbox and Toggle: Emphasized Label No Longer Documented
+### ScrollView: Arrows Renamed to Controls
 
-The "Emphasized Label" pattern — wrapping label text in a `<span class="typography-body-medium-semibold">`
-(or any other `typography-*` utility) inside a `Label` — is no longer documented for Checkbox and Toggle.
-
-`Label` already applies `label-medium` typography. Nesting a different typography utility inside the label
-overrides those styles and can push the label text out of vertical alignment with the input control.
+ScrollView scroll navigation markup was renamed from "arrows" to "controls".
 
 #### Migration Guide
 
 <details>
   <summary>🔧 Manual Migration Steps</summary>
 
-Remove the inner `<span class="typography-*">` wrapper and pass the label text directly to the `Label`:
+Manually replace the BEM class in your project.
+
+- `ScrollView__arrows` → `ScrollView__controls`
+
+If you customized internal Sass variables in your project, rename them as well:
+
+- `$start-shadow-size-arrow` → `$start-shadow-size-controls`
+- `$start-shadow-initial-offset-arrow` → `$start-shadow-initial-offset-controls`
+- `$end-shadow-size-arrow` → `$end-shadow-size-controls`
+- `$end-shadow-initial-offset-arrow` → `$end-shadow-initial-offset-controls`
+- `$arrow-spacing` → `$controls-spacing`
+
+</details>
+
+### Stack: Modifier Classes Without `has` Prefix
+
+Stack CSS modifier classes no longer use the `has` verb prefix, consistent with other Spirit modifiers.
+
+#### Migration Guide
+
+Manually replace the modifier classes in your project.
+
+- `Stack--hasSpacing` → `Stack--spacing`
+- `Stack--hasIntermediateDividers` → `Stack--intermediateDividers`
+- `Stack--hasStartDivider` → `Stack--startDivider`
+- `Stack--hasEndDivider` → `Stack--endDivider`
 
 ```html
 <!-- Before -->
-<label class="Label Label--required cursor-pointer" for="consent">
-  <span class="typography-body-medium-semibold">I agree to the terms and conditions</span>
-</label>
+<ul class="Stack Stack--hasSpacing Stack--hasIntermediateDividers Stack--hasStartDivider Stack--hasEndDivider">
+  <li class="StackItem">Item 1</li>
+  <li class="StackItem">Item 2</li>
+</ul>
 
 <!-- After -->
-<label class="Label Label--required cursor-pointer" for="consent">I agree to the terms and conditions</label>
+<ul class="Stack Stack--spacing Stack--intermediateDividers Stack--startDivider Stack--endDivider">
+  <li class="StackItem">Item 1</li>
+  <li class="StackItem">Item 2</li>
+</ul>
 ```
 
-Search your project for `Label` elements that contain a `<span>` with a `typography-*` class and replace them with plain label text.
-Pay special attention to consent checkboxes and toggles, where this pattern was most commonly used.
+### Stack: Wrap Direct Children in `StackItem` When Using Dividers
+
+The CSS fallback that allowed direct children without the `StackItem` class to receive divider styling has been removed.
+If your `Stack` uses `Stack--intermediateDividers`, `Stack--startDivider`, or `Stack--endDivider`, each direct child must carry the `StackItem` class.
+
+#### Migration Guide
+
+Add the `StackItem` class to each direct child of a divider Stack:
+
+```html
+<!-- Before -->
+<ul class="Stack Stack--intermediateDividers">
+  <li>Item 1</li>
+  <li>Item 2</li>
+</ul>
+
+<!-- After -->
+<ul class="Stack Stack--intermediateDividers">
+  <li class="StackItem">Item 1</li>
+  <li class="StackItem">Item 2</li>
+</ul>
+```
+
+### Success State Icons Renamed from `check-plain` to `success`
+
+Success validation and status icons now use the `success` sprite icon instead of `check-plain`.
+This affects `ValidationText`, `Alert`, and `Toast` in success states. Selection indicators on `Item`, `PricingPlan`, and similar components still use `check-plain`.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Update custom sprite references in success validation or status states:
+
+```html
+<!-- Before -->
+<svg class="Icon" width="24" height="24" aria-hidden="true">
+  <use href="/icons/svg/sprite.svg#check-plain" />
+</svg>
+
+<!-- After (success validation/status only) -->
+<svg class="Icon" width="24" height="24" aria-hidden="true">
+  <use href="/icons/svg/sprite.svg#success" />
+</svg>
+```
+
+</details>
+
+### Tag: Appearance Feature Flag Removed
+
+The feature flag enabling the new `Tag` appearance was removed and the new appearance
+(`inline-flex` layout with explicit height and inside spacing) is now default.
+
+#### Migration Guide
+
+You can now safely delete the Sass variable `$enable-v5-tag-appearance` and the CSS class
+`spirit-feature-enable-v5-tag-appearance` from your project as they have no effect.
+
+### Tag: `ControlButton` Size Mapping Updated
+
+The recommended `ControlButton` size to use inside a `Tag` has changed to better align with the
+updated size scale. The previous guidance mapped Tag sizes to larger `ControlButton` values; the new
+mapping uses smaller ones:
+
+| Tag class     | Previous `ControlButton` class | New `ControlButton` class           |
+| ------------- | ------------------------------ | ----------------------------------- |
+| `Tag--xsmall` | `ControlButton--xsmall`        | `ControlButton--xsmall` (unchanged) |
+| `Tag--small`  | `ControlButton--small`         | `ControlButton--xsmall`             |
+| `Tag--medium` | `ControlButton--small`         | `ControlButton--xsmall`             |
+| `Tag--large`  | `ControlButton--medium`        | `ControlButton--small`              |
+| `Tag--xlarge` | `ControlButton--medium`        | `ControlButton--small`              |
+
+#### Migration Guide
+
+Update the `ControlButton--*` modifier class on any `ControlButton` nested inside a `Tag`:
+
+```diff
+  <div class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic">
+    <span>Tag label</span>
+    <button
+      type="button"
+-     class="ControlButton ControlButton--small ControlButton--symmetrical"
++     class="ControlButton ControlButton--xsmall ControlButton--symmetrical"
+      aria-label="Remove Tag label"
+    >…</button>
+  </div>
+  <div class="Tag Tag--selected Tag--large color-scheme-on-selected-basic">
+    <span>Tag label</span>
+    <button
+      type="button"
+-     class="ControlButton ControlButton--medium ControlButton--symmetrical"
++     class="ControlButton ControlButton--small ControlButton--symmetrical"
+      aria-label="Remove Tag label"
+    >…</button>
+  </div>
+```
+
+### Toggle: Composition Markup Changed
+
+The Toggle component no longer provides the outer wrapper and text element classes.
+Compose toggle rows from the `Toggle`, `Label`, and layout utilities instead.
+
+See also [Checkbox, Radio, and Toggle: Vertical Spacing Uses Padding](#checkbox-radio-and-toggle-vertical-spacing-uses-padding)
+for more details about Toggle vertical spacing.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Replace the old Toggle wrapper markup with a `Flex` row and add `py-500` vertical padding on the wrapper:
+
+```html
+<!-- Before -->
+<div class="Toggle Toggle--inputPositionEnd">
+  <div class="Toggle__text">
+    <label for="toggle-default" class="Label Label--inline">Toggle Label</label>
+  </div>
+  <input type="checkbox" id="toggle-default" class="Toggle__input" />
+</div>
+
+<!-- After -->
+<div
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
+  style="--flex-spacing-x: var(--spirit-space-500);"
+>
+  <input type="checkbox" id="toggle-default" class="Toggle" />
+  <div>
+    <label for="toggle-default" class="Label cursor-pointer">Toggle Label</label>
+  </div>
+</div>
+```
+
+For toggles with indicators, move `Toggle__input--indicators` to `Toggle--indicators` on the input:
+
+```html
+<!-- Before -->
+<input type="checkbox" class="Toggle__input Toggle__input--indicators" />
+
+<!-- After -->
+<input type="checkbox" class="Toggle Toggle--indicators" />
+```
+
+</details>
+
+### Toggle: Input Before Label in HTML
+
+Toggle markup now places the `<input class="Toggle__input">` element **before** the
+`<div class="Toggle__text">` block, matching Checkbox and Radio. Visual layout and
+`inputPosition` modifier classes are unchanged.
+
+#### Migration Guide
+
+<details>
+  <summary>🔧 Manual Migration Steps</summary>
+
+Swap the order of the input and text wrapper in your Toggle HTML.
+
+```html
+<!-- Before -->
+<div class="Toggle Toggle--inputPositionEnd">
+  <div class="Toggle__text">
+    <label class="Label Label--inline" for="toggle">Toggle Label</label>
+  </div>
+  <input type="checkbox" id="toggle" class="Toggle__input" name="toggle" />
+</div>
+
+<!-- After -->
+<div class="Toggle Toggle--inputPositionEnd">
+  <input type="checkbox" id="toggle" class="Toggle__input" name="toggle" />
+  <div class="Toggle__text">
+    <label class="Label cursor-pointer" for="toggle">Toggle Label</label>
+  </div>
+</div>
+```
+
+If you provided any custom CSS depending on the order of Toggle children, you will need to update it.
 
 </details>
 

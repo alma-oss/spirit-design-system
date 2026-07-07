@@ -10,11 +10,36 @@ Introducing version 5 of the _spirit-design-tokens_ package.
 ## Overview
 
 - [Token Renames](#token-renames)
-  - [Navigation Item Tokens Renamed from `header-item`](#navigation-item-tokens-renamed-from-header-item)
   - [Form Field Fill Tokens Renamed from `filled`](#form-field-fill-tokens-renamed-from-filled)
+  - [Navigation Item Tokens Renamed from `header-item`](#navigation-item-tokens-renamed-from-header-item)
   - [Pagination Tokens Added (`component-pagination-*`)](#pagination-tokens-added-component-pagination-)
 
 ## Token Renames
+
+### Form Field Fill Tokens Renamed from `filled`
+
+Form field fill tokens were renamed from `form-field-filled-*` to `form-field-fill-*`.
+New `form-field-outline-*` tokens were added for the outline variant.
+
+#### Migration Guide
+
+Update SCSS variables and CSS custom properties in your theme overrides:
+
+| Before                                        | After                                       |
+| --------------------------------------------- | ------------------------------------------- |
+| `$form-field-filled-background-state-active`  | `$form-field-fill-background-state-active`  |
+| `$form-field-filled-background-state-default` | `$form-field-fill-background-state-default` |
+| `$form-field-filled-background-state-hover`   | `$form-field-fill-background-state-hover`   |
+| `$form-field-filled-border-state-active`      | `$form-field-fill-border-state-active`      |
+| `$form-field-filled-border-state-default`     | `$form-field-fill-border-state-default`     |
+| `$form-field-filled-border-state-hover`       | `$form-field-fill-border-state-hover`       |
+| `$form-field-filled-border-state-selected`    | `$form-field-fill-border-state-selected`    |
+| `$form-field-filled-content`                  | `$form-field-fill-content`                  |
+| `$form-field-filled-placeholder`              | `$form-field-fill-placeholder`              |
+
+CSS custom properties:
+
+- `--spirit-color-form-field-filled-*` → `--spirit-color-form-field-fill-*`
 
 ### Navigation Item Tokens Renamed from `header-item`
 
@@ -45,31 +70,6 @@ CSS custom properties follow the same pattern:
 JavaScript exports were renamed accordingly, for example:
 
 - `componentHeaderItemStateDefault` → `componentNavigationItemStateDefault`
-
-### Form Field Fill Tokens Renamed from `filled`
-
-Form field fill tokens were renamed from `form-field-filled-*` to `form-field-fill-*`.
-New `form-field-outline-*` tokens were added for the outline variant.
-
-#### Migration Guide
-
-Update SCSS variables and CSS custom properties in your theme overrides:
-
-| Before                                        | After                                       |
-| --------------------------------------------- | ------------------------------------------- |
-| `$form-field-filled-background-state-active`  | `$form-field-fill-background-state-active`  |
-| `$form-field-filled-background-state-default` | `$form-field-fill-background-state-default` |
-| `$form-field-filled-background-state-hover`   | `$form-field-fill-background-state-hover`   |
-| `$form-field-filled-border-state-active`      | `$form-field-fill-border-state-active`      |
-| `$form-field-filled-border-state-default`     | `$form-field-fill-border-state-default`     |
-| `$form-field-filled-border-state-hover`       | `$form-field-fill-border-state-hover`       |
-| `$form-field-filled-border-state-selected`    | `$form-field-fill-border-state-selected`    |
-| `$form-field-filled-content`                  | `$form-field-fill-content`                  |
-| `$form-field-filled-placeholder`              | `$form-field-fill-placeholder`              |
-
-CSS custom properties:
-
-- `--spirit-color-form-field-filled-*` → `--spirit-color-form-field-fill-*`
 
 ### Pagination Tokens Added (`component-pagination-*`)
 
