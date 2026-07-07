@@ -12,7 +12,13 @@ import {
   TypographyTokenValue,
 } from '@supernovaio/sdk-exporters';
 import { exportConfiguration } from '../../config';
-import { FONT_SIZE_BASE_DEFAULT, PIXEL_UNIT, PX_UNIT, TYPOGRAPHY_SUBSTITUTE_FONT } from '../constants';
+import {
+  DEFAULT_DECIMALS,
+  FONT_SIZE_BASE_DEFAULT,
+  PIXEL_UNIT,
+  PX_UNIT,
+  TYPOGRAPHY_SUBSTITUTE_FONT,
+} from '../constants';
 import { getDeviceAlias, getDeviceTokenValue } from './deviceHelpers';
 import { toCamelCase } from './stringHelper';
 import { makeRelativeUnit } from './unitHelper';
@@ -365,7 +371,7 @@ export const typographyValue = (
     if (fontSize.unit === PIXEL_UNIT && lineHeight.unit === PIXEL_UNIT) {
       // Calculate unitless ratio relative to fontSize (proper CSS line-height)
       const ratio = lineHeight.measure / fontSize.measure;
-      lineHeightValue = ratio.toFixed(2);
+      lineHeightValue = parseFloat(ratio.toFixed(DEFAULT_DECIMALS)).toString();
     }
   }
 
