@@ -58,6 +58,9 @@
 
 .Accordion__itemIcon {
     --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$item-icon-size};
+
+    display: flex;
+    align-items: center;
 }
 
 .Accordion__itemToggle {
