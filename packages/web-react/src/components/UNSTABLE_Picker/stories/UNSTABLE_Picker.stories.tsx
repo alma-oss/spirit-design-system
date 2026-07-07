@@ -59,6 +59,7 @@ const meta: Meta<typeof UNSTABLE_Picker> = {
       table: { defaultValue: { summary: Sizes.MEDIUM } },
     },
     tagDescriptionText: { control: 'text' },
+    tagProps: { control: 'object' },
     validationState: {
       control: 'select',
       options: [...Object.values(ValidationStates), undefined],
