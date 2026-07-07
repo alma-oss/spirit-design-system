@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import { fn } from 'storybook/test';
 import { Button, Modal, ModalBody, ModalDialog, ModalFooter, Stack } from '../../../src/components';
-import { File, FileImagePreview } from '../../../src/components/File';
+import { File as FileAttachment, FileImagePreview } from '../../../src/components/File';
 import { useFilePreviewUrl } from '../../../src/components/File/demo/useFilePreviewUrl';
 import { FileUpload } from '../../../src/components/FileUpload';
 import { useFileQueue } from '../../../src/components/FileUpload/demo/useFileQueue';
 import type { FileUploadAttachmentsItem } from '../../../src/components/FileUpload/types';
 import { ObjectFit, ValidationStates } from '../../../src/constants';
 
+const EMPTY_FILE = new File([], '');
 const fileToKey = (name: string): string => `file__${name.replace(/\./g, '_').replace(/\s/g, '_')}`;
 
 type FileUploadCompositionType = {
@@ -357,7 +358,7 @@ export const FileUploadWithModalImagePreview = (args: FileUploadCompositionType)
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [fileToPreview, setFileToPreview] = useState<File | null>(null);
-  const previewUrl = useFilePreviewUrl(fileToPreview ?? new File([], ''));
+  const previewUrl = useFilePreviewUrl(fileToPreview ?? EMPTY_FILE);
   const { fileQueue, addToQueue, onDismiss } = useFileQueue();
 
   const items: FileUploadAttachmentsItem[] = useMemo(
@@ -419,7 +420,7 @@ export const FileUploadWithModalImagePreview = (args: FileUploadCompositionType)
       />
       <Stack aria-label={attachmentsLabel} elementType="ul" hasSpacing>
         {items.map((item) => (
-          <File
+          <FileAttachment
             key={item.id}
             editText={editText}
             hasValidationIcon={fileHasValidationIcon}
