@@ -9,9 +9,10 @@ major versions of the Spirit Design System.
 | v0            | End of Life | 2021-09-20      | 2021-09-20   | 2023-07-21        | 2024-06-10  |
 | v1 🌟 Aura    | End of Life | 2023-07-21      | 2023-07-21   | 2024-06-10        | 2024-10-17  |
 | v2 🍃 Breeze  | End of Life | 2024-06-10      | 2024-06-10   | 2024-11-25        | 2026-01-08  |
-| v3 ✨ Charm   | Maintenance | 2024-10-17      | 2024-11-25   | 2026-01-08        | -/-         |
-| v4 🌈 Divine  | Active      | 2025-12-15      | 2026-01-08   | -/-               | -/-         |
-| v5 💫 Essence | Unreleased  | -/-             | -/-          | -/-               | -/-         |
+| v3 ✨ Charm   | End of Life | 2024-10-17      | 2024-11-25   | 2026-01-08        | 2026-07-08  |
+| v4 🌈 Divine  | Maintenance | 2025-12-15      | 2026-01-08   | 2026-07-08        | -/-         |
+| v5 💫 Essence | Active      | 2026-07-08      | 2026-07-08   | -/-               | -/-         |
+| v6 🔥 Flame   | Unreleased  | -/-             | -/-          | -/-               | -/-         |
 
 > Dates are subject to change
 
