@@ -154,7 +154,7 @@ const FileUpload = (props: FileUploadProps) => {
                   isDisabled={isUploadInteractionDisabled}
                 />
               </div>
-              <Button aria-hidden="true" isDisabled={isUploadInteractionDisabled} elementType="div">
+              <Button aria-hidden="true" isDisabled={isUploadInteractionDisabled} elementType="div" size="small">
                 {buttonText}
               </Button>
             </div>
