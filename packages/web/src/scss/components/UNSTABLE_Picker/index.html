@@ -137,7 +137,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-lang"
           >
@@ -276,7 +276,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-lang-pre"
           >
@@ -537,7 +537,11 @@
 
           <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <span class="Label">Fill (default)</span>
-            <div class="Dropdown" data-picker-label="Fill (default)">
+            <div
+              class="Dropdown"
+              data-spirit-toggle="picker"
+              data-picker-label="Fill (default)"
+            >
               <div
                 role="group"
                 aria-label="Fill (default)"
@@ -561,10 +565,12 @@
                   >Fill (default)</span>
                 </div>
                 <button
-                  type="button"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#picker-variant-fill-bg-primary-popover"
                   class="UNSTABLE_PickerTrigger"
-                  aria-haspopup="listbox"
+                  aria-haspopup="dialog"
                   aria-expanded="false"
+                  aria-controls="picker-variant-fill-bg-primary-popover"
                 >
                   <span class="accessibility-hidden">Add</span>
                   <svg
@@ -578,12 +584,96 @@
                   </svg>
                 </button>
               </div>
+
+              <div
+                role="dialog"
+                aria-modal="true"
+                class="DropdownPopover placement-bottom-start theme-light-default"
+                data-spirit-placement="bottom-start"
+                id="picker-variant-fill-bg-primary-popover"
+              >
+                <fieldset class="border-0">
+                  <legend class="accessibility-hidden">Languages</legend>
+                  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-fill-bg-primary-cs"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-fill-bg-primary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-fill-bg-primary-cs"
+                        >
+                          Czech
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-fill-bg-primary-dk"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-fill-bg-primary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-fill-bg-primary-dk"
+                        >
+                          Danish
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-fill-bg-primary-kl"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-fill-bg-primary"
+                          autocomplete="off"
+                        
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-fill-bg-primary-kl"
+                        >
+                          Greenlandic
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
             </div>
           </div>
 
           <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <span class="Label">Outline</span>
-            <div class="Dropdown" data-picker-label="Outline">
+            <div
+              class="Dropdown"
+              data-spirit-toggle="picker"
+              data-picker-label="Outline"
+            >
               <div
                 role="group"
                 aria-label="Outline"
@@ -607,10 +697,12 @@
                   >Outline</span>
                 </div>
                 <button
-                  type="button"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#picker-variant-outline-bg-primary-popover"
                   class="UNSTABLE_PickerTrigger"
-                  aria-haspopup="listbox"
+                  aria-haspopup="dialog"
                   aria-expanded="false"
+                  aria-controls="picker-variant-outline-bg-primary-popover"
                 >
                   <span class="accessibility-hidden">Add</span>
                   <svg
@@ -624,6 +716,86 @@
                   </svg>
                 </button>
               </div>
+
+              <div
+                role="dialog"
+                aria-modal="true"
+                class="DropdownPopover placement-bottom-start theme-light-default"
+                data-spirit-placement="bottom-start"
+                id="picker-variant-outline-bg-primary-popover"
+              >
+                <fieldset class="border-0">
+                  <legend class="accessibility-hidden">Languages</legend>
+                  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-outline-bg-primary-cs"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-outline-bg-primary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-outline-bg-primary-cs"
+                        >
+                          Czech
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-outline-bg-primary-dk"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-outline-bg-primary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-outline-bg-primary-dk"
+                        >
+                          Danish
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-outline-bg-primary-kl"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-outline-bg-primary"
+                          autocomplete="off"
+                        
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-outline-bg-primary-kl"
+                        >
+                          Greenlandic
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
             </div>
           </div>
         </div>
@@ -635,7 +807,11 @@
 
           <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <span class="Label">Fill (default)</span>
-            <div class="Dropdown" data-picker-label="Fill (default)">
+            <div
+              class="Dropdown"
+              data-spirit-toggle="picker"
+              data-picker-label="Fill (default)"
+            >
               <div
                 role="group"
                 aria-label="Fill (default)"
@@ -659,10 +835,12 @@
                   >Fill (default)</span>
                 </div>
                 <button
-                  type="button"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#picker-variant-fill-bg-secondary-popover"
                   class="UNSTABLE_PickerTrigger"
-                  aria-haspopup="listbox"
+                  aria-haspopup="dialog"
                   aria-expanded="false"
+                  aria-controls="picker-variant-fill-bg-secondary-popover"
                 >
                   <span class="accessibility-hidden">Add</span>
                   <svg
@@ -676,12 +854,96 @@
                   </svg>
                 </button>
               </div>
+
+              <div
+                role="dialog"
+                aria-modal="true"
+                class="DropdownPopover placement-bottom-start theme-light-default"
+                data-spirit-placement="bottom-start"
+                id="picker-variant-fill-bg-secondary-popover"
+              >
+                <fieldset class="border-0">
+                  <legend class="accessibility-hidden">Languages</legend>
+                  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-fill-bg-secondary-cs"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-fill-bg-secondary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-fill-bg-secondary-cs"
+                        >
+                          Czech
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-fill-bg-secondary-dk"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-fill-bg-secondary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-fill-bg-secondary-dk"
+                        >
+                          Danish
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-fill-bg-secondary-kl"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-fill-bg-secondary"
+                          autocomplete="off"
+                        
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-fill-bg-secondary-kl"
+                        >
+                          Greenlandic
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
             </div>
           </div>
 
           <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <span class="Label">Outline</span>
-            <div class="Dropdown" data-picker-label="Outline">
+            <div
+              class="Dropdown"
+              data-spirit-toggle="picker"
+              data-picker-label="Outline"
+            >
               <div
                 role="group"
                 aria-label="Outline"
@@ -705,10 +967,12 @@
                   >Outline</span>
                 </div>
                 <button
-                  type="button"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#picker-variant-outline-bg-secondary-popover"
                   class="UNSTABLE_PickerTrigger"
-                  aria-haspopup="listbox"
+                  aria-haspopup="dialog"
                   aria-expanded="false"
+                  aria-controls="picker-variant-outline-bg-secondary-popover"
                 >
                   <span class="accessibility-hidden">Add</span>
                   <svg
@@ -722,6 +986,86 @@
                   </svg>
                 </button>
               </div>
+
+              <div
+                role="dialog"
+                aria-modal="true"
+                class="DropdownPopover placement-bottom-start theme-light-default"
+                data-spirit-placement="bottom-start"
+                id="picker-variant-outline-bg-secondary-popover"
+              >
+                <fieldset class="border-0">
+                  <legend class="accessibility-hidden">Languages</legend>
+                  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-outline-bg-secondary-cs"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-outline-bg-secondary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-outline-bg-secondary-cs"
+                        >
+                          Czech
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-outline-bg-secondary-dk"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-outline-bg-secondary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-outline-bg-secondary-dk"
+                        >
+                          Danish
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-outline-bg-secondary-kl"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-outline-bg-secondary"
+                          autocomplete="off"
+                        
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-outline-bg-secondary-kl"
+                        >
+                          Greenlandic
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
             </div>
           </div>
         </div>
@@ -733,7 +1077,11 @@
 
           <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <span class="Label">Fill (default)</span>
-            <div class="Dropdown" data-picker-label="Fill (default)">
+            <div
+              class="Dropdown"
+              data-spirit-toggle="picker"
+              data-picker-label="Fill (default)"
+            >
               <div
                 role="group"
                 aria-label="Fill (default)"
@@ -757,10 +1105,12 @@
                   >Fill (default)</span>
                 </div>
                 <button
-                  type="button"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#picker-variant-fill-bg-tertiary-popover"
                   class="UNSTABLE_PickerTrigger"
-                  aria-haspopup="listbox"
+                  aria-haspopup="dialog"
                   aria-expanded="false"
+                  aria-controls="picker-variant-fill-bg-tertiary-popover"
                 >
                   <span class="accessibility-hidden">Add</span>
                   <svg
@@ -774,12 +1124,96 @@
                   </svg>
                 </button>
               </div>
+
+              <div
+                role="dialog"
+                aria-modal="true"
+                class="DropdownPopover placement-bottom-start theme-light-default"
+                data-spirit-placement="bottom-start"
+                id="picker-variant-fill-bg-tertiary-popover"
+              >
+                <fieldset class="border-0">
+                  <legend class="accessibility-hidden">Languages</legend>
+                  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-fill-bg-tertiary-cs"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-fill-bg-tertiary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-fill-bg-tertiary-cs"
+                        >
+                          Czech
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-fill-bg-tertiary-dk"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-fill-bg-tertiary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-fill-bg-tertiary-dk"
+                        >
+                          Danish
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-fill-bg-tertiary-kl"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-fill-bg-tertiary"
+                          autocomplete="off"
+                        
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-fill-bg-tertiary-kl"
+                        >
+                          Greenlandic
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
             </div>
           </div>
 
           <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <span class="Label">Outline</span>
-            <div class="Dropdown" data-picker-label="Outline">
+            <div
+              class="Dropdown"
+              data-spirit-toggle="picker"
+              data-picker-label="Outline"
+            >
               <div
                 role="group"
                 aria-label="Outline"
@@ -803,10 +1237,12 @@
                   >Outline</span>
                 </div>
                 <button
-                  type="button"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#picker-variant-outline-bg-tertiary-popover"
                   class="UNSTABLE_PickerTrigger"
-                  aria-haspopup="listbox"
+                  aria-haspopup="dialog"
                   aria-expanded="false"
+                  aria-controls="picker-variant-outline-bg-tertiary-popover"
                 >
                   <span class="accessibility-hidden">Add</span>
                   <svg
@@ -820,6 +1256,86 @@
                   </svg>
                 </button>
               </div>
+
+              <div
+                role="dialog"
+                aria-modal="true"
+                class="DropdownPopover placement-bottom-start theme-light-default"
+                data-spirit-placement="bottom-start"
+                id="picker-variant-outline-bg-tertiary-popover"
+              >
+                <fieldset class="border-0">
+                  <legend class="accessibility-hidden">Languages</legend>
+                  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-outline-bg-tertiary-cs"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-outline-bg-tertiary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-outline-bg-tertiary-cs"
+                        >
+                          Czech
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-outline-bg-tertiary-dk"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-outline-bg-tertiary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-outline-bg-tertiary-dk"
+                        >
+                          Danish
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-outline-bg-tertiary-kl"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-outline-bg-tertiary"
+                          autocomplete="off"
+                        
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-outline-bg-tertiary-kl"
+                        >
+                          Greenlandic
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
             </div>
           </div>
         </div>
@@ -831,7 +1347,11 @@
 
           <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <span class="Label">Fill (default)</span>
-            <div class="Dropdown" data-picker-label="Fill (default)">
+            <div
+              class="Dropdown"
+              data-spirit-toggle="picker"
+              data-picker-label="Fill (default)"
+            >
               <div
                 role="group"
                 aria-label="Fill (default)"
@@ -855,10 +1375,12 @@
                   >Fill (default)</span>
                 </div>
                 <button
-                  type="button"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#picker-variant-fill-theme-light-on-brand-bg-primary-popover"
                   class="UNSTABLE_PickerTrigger"
-                  aria-haspopup="listbox"
+                  aria-haspopup="dialog"
                   aria-expanded="false"
+                  aria-controls="picker-variant-fill-theme-light-on-brand-bg-primary-popover"
                 >
                   <span class="accessibility-hidden">Add</span>
                   <svg
@@ -872,12 +1394,97 @@
                   </svg>
                 </button>
               </div>
+
+              <div
+                role="dialog"
+                aria-modal="true"
+                class="DropdownPopover placement-bottom-start theme-light-default"
+                data-spirit-placement="bottom-start"
+                id="picker-variant-fill-theme-light-on-brand-bg-primary-popover"
+              >
+                <fieldset class="border-0">
+                  <legend class="accessibility-hidden">Languages</legend>
+                  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-fill-theme-light-on-brand-bg-primary-cs"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-fill-theme-light-on-brand-bg-primary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-fill-theme-light-on-brand-bg-primary-cs"
+                        >
+                          Czech
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-fill-theme-light-on-brand-bg-primary-dk"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-fill-theme-light-on-brand-bg-primary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-fill-theme-light-on-brand-bg-primary-dk"
+                        >
+                          Danish
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-fill-theme-light-on-brand-bg-primary-kl"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-fill-theme-light-on-brand-bg-primary"
+                          autocomplete="off"
+                        
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-fill-theme-light-on-brand-bg-primary-kl"
+                        >
+                          Greenlandic
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
             </div>
           </div>
 
           <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
             <span class="Label">Outline</span>
-            <div class="Dropdown" data-picker-label="Outline">
+            <div
+              class="Dropdown"
+              data-spirit-toggle="picker"
+              data-picker-label="Outline"
+              data-picker-tag-class="bg-accent-01-subtle"
+            >
               <div
                 role="group"
                 aria-label="Outline"
@@ -901,10 +1508,12 @@
                   >Outline</span>
                 </div>
                 <button
-                  type="button"
+                  data-spirit-toggle="dropdown"
+                  data-spirit-target="#picker-variant-outline-theme-light-on-brand-bg-primary-popover"
                   class="UNSTABLE_PickerTrigger"
-                  aria-haspopup="listbox"
+                  aria-haspopup="dialog"
                   aria-expanded="false"
+                  aria-controls="picker-variant-outline-theme-light-on-brand-bg-primary-popover"
                 >
                   <span class="accessibility-hidden">Add</span>
                   <svg
@@ -918,12 +1527,92 @@
                   </svg>
                 </button>
               </div>
+
+              <div
+                role="dialog"
+                aria-modal="true"
+                class="DropdownPopover placement-bottom-start theme-light-default"
+                data-spirit-placement="bottom-start"
+                id="picker-variant-outline-theme-light-on-brand-bg-primary-popover"
+              >
+                <fieldset class="border-0">
+                  <legend class="accessibility-hidden">Languages</legend>
+                  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-outline-theme-light-on-brand-bg-primary-cs"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-outline-theme-light-on-brand-bg-primary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-outline-theme-light-on-brand-bg-primary-cs"
+                        >
+                          Czech
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-outline-theme-light-on-brand-bg-primary-dk"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-outline-theme-light-on-brand-bg-primary"
+                          autocomplete="off"
+                          checked
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-outline-theme-light-on-brand-bg-primary-dk"
+                        >
+                          Danish
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="Item" data-spirit-element="checkbox">
+                      <div class="Item__slot" role="presentation">
+                        <input
+                          type="checkbox"
+                          id="picker-variant-outline-theme-light-on-brand-bg-primary-kl"
+                          class="Checkbox Checkbox--item"
+                          name="picker-variant-outline-theme-light-on-brand-bg-primary"
+                          autocomplete="off"
+                        
+                        />
+                      </div>
+                      <div class="Item__content" role="presentation">
+                        <label
+                          class="Label element-stretched cursor-pointer"
+                          data-spirit-element="checkbox-label"
+                          for="picker-variant-outline-theme-light-on-brand-bg-primary-kl"
+                        >
+                          Greenlandic
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-    </div>
+    </div> </div>
 
   </div>
 
@@ -998,7 +1687,7 @@
             <div
               role="dialog"
               aria-modal="true"
-              class="DropdownPopover placement-bottom-start"
+              class="DropdownPopover placement-bottom-start theme-light-default"
               data-spirit-placement="bottom-start"
               id="picker-small"
             >
@@ -1131,7 +1820,7 @@
             <div
               role="dialog"
               aria-modal="true"
-              class="DropdownPopover placement-bottom-start"
+              class="DropdownPopover placement-bottom-start theme-light-default"
               data-spirit-placement="bottom-start"
               id="picker-medium"
             >
@@ -1264,7 +1953,7 @@
             <div
               role="dialog"
               aria-modal="true"
-              class="DropdownPopover placement-bottom-start"
+              class="DropdownPopover placement-bottom-start theme-light-default"
               data-spirit-placement="bottom-start"
               id="picker-large"
             >
@@ -1411,7 +2100,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-lang2"
           >
@@ -1564,7 +2253,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-hidden-label"
           >
@@ -1717,7 +2406,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-required"
           >
@@ -1871,7 +2560,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-helper"
           >
@@ -2028,7 +2717,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-danger"
           >
@@ -2170,7 +2859,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-warning"
           >
@@ -2313,7 +3002,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-success"
           >
@@ -2469,7 +3158,7 @@
 
           <div
             role="dialog"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-disabled"
           >
@@ -2570,7 +3259,7 @@
           >
 
             <div
-              role="grid"
+              role="group"
               tabindex="-1"
               aria-atomic="false"
               aria-label="Selected languages"
@@ -2580,70 +3269,11 @@
               class="UNSTABLE_PickerSelection"
               data-spirit-element="selection"
             >
-              <div
-                role="row"
-                data-tag-row
-                tabindex="-1"
-                aria-label="Czech"
-                aria-describedby="picker-tag-description"
-                class="Tag Tag--selected Tag--small color-scheme-on-selected-basic disabled"
-              >
-                <div
-                  role="gridcell"
-                  aria-colindex="1"
-                  class="d-contents"
-                >
-                  <span data-tag-label>Czech</span>
-                  <button
-                    type="button"
-                    aria-label="Remove Czech"
-                    class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target disabled"
-                    data-tag-close
-                    disabled
-                  >
-                    <svg
-                      class="Icon"
-                      width="16"
-                      height="16"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#close" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div
-                role="row"
-                data-tag-row
-                tabindex="-1"
-                aria-label="Danish"
-                aria-describedby="picker-tag-description"
-                class="Tag Tag--selected Tag--small color-scheme-on-selected-basic disabled"
-              >
-                <div
-                  role="gridcell"
-                  aria-colindex="1"
-                  class="d-contents"
-                >
-                  <span data-tag-label>Danish</span>
-                  <button
-                    type="button"
-                    aria-label="Remove Danish"
-                    class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target disabled"
-                    data-tag-close
-                    disabled
-                  >
-                    <svg
-                      class="Icon"
-                      width="16"
-                      height="16"
-                      aria-hidden="true"
-                    >
-                      <use href="/assets/icons/svg/sprite.svg#close" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
+              <span
+                class="UNSTABLE_PickerSelection__empty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
             </div>
 
             <button
@@ -2669,7 +3299,7 @@
 
           <div
             role="dialog"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-disabled-pre"
           >
@@ -2824,7 +3454,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-salary"
           >
@@ -2985,7 +3615,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="demo-picker-publication-time"
           >
@@ -3150,7 +3780,7 @@
           <div
             role="dialog"
             aria-modal="true"
-            class="DropdownPopover placement-bottom-start"
+            class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-job-filters"
           >
