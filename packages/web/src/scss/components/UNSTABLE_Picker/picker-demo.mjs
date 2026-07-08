@@ -49,7 +49,7 @@ function getCheckboxLabel(checkbox) {
   return label ? label.textContent.trim() : '';
 }
 
-function createTag(tagLabel, selectionEl, onClose, sizeConfig) {
+function createTag(tagLabel, selectionEl, onClose, sizeConfig, tagClass, isDisabled) {
   const tag = document.getElementById(ID_TAG_TEMPLATE).content.cloneNode(true);
   const row = tag.querySelector(SELECTOR_TAG_ROW);
 
@@ -67,6 +67,21 @@ function createTag(tagLabel, selectionEl, onClose, sizeConfig) {
     row.classList.add(sizeConfig.tagSizeClass);
     removeButton.classList.remove(CLASSNAME_CONTROL_BUTTON_SIZE_DEFAULT);
     removeButton.classList.add(sizeConfig.controlButtonSizeClass);
+  }
+
+  if (tagClass) {
+    tagClass
+      .split(' ')
+      .filter(Boolean)
+      .forEach((className) => row.classList.add(className));
+  }
+
+  if (isDisabled) {
+    row.classList.add('disabled');
+    removeButton.classList.add('disabled');
+    removeButton.setAttribute('disabled', '');
+
+    return tag;
   }
 
   row.addEventListener('focus', () => removeButton.setAttribute('tabindex', '0'));
@@ -152,11 +167,12 @@ function initPicker(dropdownEl) {
   const triggerEl = dropdownEl.querySelector(SELECTOR_DROPDOWN_TRIGGER);
 
   if (!selectionEl || !popoverEl) return;
-  if (triggerEl?.disabled) return;
 
   const label = dropdownEl.dataset.pickerLabel || '';
   const aggregateTags = dropdownEl.hasAttribute(ATTRIBUTE_AGGREGATE_TAGS);
   const tagSizeKey = dropdownEl.dataset.pickerTagSize;
+  const tagClass = dropdownEl.dataset.pickerTagClass || '';
+  const isDisabled = Boolean(triggerEl?.disabled);
   const sizeConfig = (tagSizeKey && TAG_SIZES[tagSizeKey]) || null;
   const getCheckboxes = () => Array.from(popoverEl.querySelectorAll(SELECTOR_CHECKBOX_INPUT));
   const getChecked = () => getCheckboxes().filter((checkbox) => checkbox.checked);
@@ -188,6 +204,8 @@ function initPicker(dropdownEl) {
           render();
         },
         sizeConfig,
+        tagClass,
+        isDisabled,
       );
       selectionEl.appendChild(tag);
     } else {
@@ -201,6 +219,8 @@ function initPicker(dropdownEl) {
             render();
           },
           sizeConfig,
+          tagClass,
+          isDisabled,
         );
         selectionEl.appendChild(tag);
       });
@@ -209,11 +229,13 @@ function initPicker(dropdownEl) {
     const allRows = selectionEl.querySelectorAll(SELECTOR_TAG_ROW);
 
     if (allRows.length > 0) {
-      allRows[allRows.length - 1].setAttribute('tabindex', '0');
+      allRows[allRows.length - 1].setAttribute('tabindex', isDisabled ? '-1' : '0');
     }
   }
 
-  popoverEl.addEventListener('change', render);
+  if (!isDisabled) {
+    popoverEl.addEventListener('change', render);
+  }
 
   render();
 }
