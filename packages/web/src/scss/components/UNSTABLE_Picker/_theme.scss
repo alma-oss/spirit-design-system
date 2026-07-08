@@ -3,5 +3,6 @@
 $column-gap: tokens.$space-600;
 $padding-x: tokens.$space-600;
 $padding-y: calc(#{tokens.$space-400} - #{tokens.$border-width-100});
+$color-state-disabled: tokens.$disabled-content;
 
 $selection-gap: tokens.$space-400;
