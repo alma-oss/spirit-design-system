@@ -263,6 +263,14 @@
       "require": "./dist/components/CaptionText/index.cjs",
       "default": "./dist/components/CaptionText/index.js"
     },
+    "./components/CharacterCounter": {
+      "types": "./dist/components/CharacterCounter/index.d.ts",
+      "development": "./src/components/CharacterCounter/index.ts",
+      "production": "./dist/components/CharacterCounter/index.js",
+      "import": "./dist/components/CharacterCounter/index.js",
+      "require": "./dist/components/CharacterCounter/index.cjs",
+      "default": "./dist/components/CharacterCounter/index.js"
+    },
     "./components/Checkbox": {
       "types": "./dist/components/Checkbox/index.d.ts",
       "development": "./src/components/Checkbox/index.ts",
