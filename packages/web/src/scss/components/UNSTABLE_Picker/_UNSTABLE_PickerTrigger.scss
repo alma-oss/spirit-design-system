@@ -30,6 +30,7 @@
 }
 
 .UNSTABLE_PickerTrigger:disabled {
+    color: theme.$color-state-disabled;
     pointer-events: none;
     cursor: cursors.$disabled;
 }
