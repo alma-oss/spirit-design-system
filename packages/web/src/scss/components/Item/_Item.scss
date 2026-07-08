@@ -1,12 +1,13 @@
 // 1. Keep interactive controls in any slot (e.g. a remove button or link) clickable above a
 //    stretched overlay that spans the whole Item, by lifting them into their own stacking context.
 
-@use 'theme';
+@use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../tools/breakpoint';
 @use '../../tools/color-scheme';
 @use '../../tools/dictionaries';
 @use '../../tools/reset';
+@use 'theme';
 
 .Item:where(button) {
     @include reset.button();
@@ -49,9 +50,12 @@
 .Item__content {
     display: grid;
     flex: 1;
+    row-gap: theme.$content-gap;
 }
 
 .Item__slot {
+    --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$slot-icon-size};
+
     display: flex;
 }
 
