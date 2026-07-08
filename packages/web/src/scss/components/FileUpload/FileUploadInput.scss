@@ -53,6 +53,12 @@ $_field-name: 'FileUploadInput';
     }
 }
 
+.FileUploadInput__dropZoneContent {
+    display: flex;
+    flex-direction: column;
+    gap: theme.$input-drop-zone-content-gap;
+}
+
 .FileUploadInput__dropZoneLabel {
     @include pseudo-element.stretch(); // 1.
     @include typography.generate(theme.$input-drop-zone-label-typography);

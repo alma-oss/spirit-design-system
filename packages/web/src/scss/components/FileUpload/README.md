@@ -50,7 +50,7 @@ The class controls appearance only: dashed border and visibility of the “or dr
         </label>
         <div id="file-uploader-helper" class="HelperText">Max file size is 10 MB</div>
       </div>
-      <div class="Button Button--primary Button--medium" aria-hidden="true">Browse</div>
+      <div class="Button Button--primary Button--small" aria-hidden="true">Browse</div>
     </div>
   </div>
 </div>
@@ -68,7 +68,7 @@ Add `FileUploadInput__dropZone--compact` to the drop zone for a more compact lay
   <div class="FileUploadInput__dropZoneContent">
     <!-- label + helper text -->
   </div>
-  <div class="Button Button--primary Button--medium" aria-hidden="true">Browse</div>
+  <div class="Button Button--primary Button--small" aria-hidden="true">Browse</div>
 </div>
 ```
 
@@ -131,7 +131,7 @@ Add validation text and give it an `id` for `aria-describedby` when you use it:
   <div class="FileUploadInput__dropZone FileUploadInput__dropZone--disabled">
     <!-- ... -->
     <div id="file-uploader-disabled-helper" class="HelperText HelperText--disabled">Max file size is 10 MB</div>
-    <div class="Button Button--primary Button--medium Button--disabled" aria-hidden="true">Browse</div>
+    <div class="Button Button--primary Button--small" aria-hidden="true">Browse</div>
   </div>
 </div>
 ```
@@ -158,7 +158,7 @@ Use this mode when only upload interactions should be disabled (file picker + dr
   <div class="FileUploadInput__dropZone FileUploadInput__dropZone--disabled">
     <!-- ... -->
     <div id="file-uploader-upload-disabled-helper" class="FileUploadInput__helperText">Max file size is 10 MB</div>
-    <div class="Button Button--primary Button--medium Button--disabled" aria-hidden="true">Browse</div>
+    <div class="Button Button--primary Button--small" aria-hidden="true">Browse</div>
   </div>
 </div>
 ```
