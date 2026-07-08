@@ -38,13 +38,18 @@ const PickerVariants = () => (
         <DocsStack>
           <h3>{label}</h3>
 
-          <UNSTABLE_UncontrolledPicker id={`demo-picker-variant-fill-${id}`} label="Fill (default)">
+          <UNSTABLE_UncontrolledPicker
+            id={`demo-picker-variant-fill-${id}`}
+            label="Fill (default)"
+            defaultSelectedKeys={['cs', 'dk']}
+          >
             <UNSTABLE_PickerGroup label="Languages">{renderPickerLanguageItems()}</UNSTABLE_PickerGroup>
           </UNSTABLE_UncontrolledPicker>
 
           <UNSTABLE_UncontrolledPicker
             id={`demo-picker-variant-outline-${id}`}
             label="Outline"
+            defaultSelectedKeys={['cs', 'dk']}
             variant={FillVariants.OUTLINE}
             tagProps={tagProps}
           >
