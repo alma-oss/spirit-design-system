@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.0](https://github.com/alma-oss/spirit-design-system/compare/eslint-config-spirit@0.3.0...eslint-config-spirit@0.4.0) (2026-07-08)
+
+### Features
+
+- **eslint-config-spirit:** add no-xlink-href ESLint rule
+- **eslint-config-spirit:** expose rules as self-registering flat config
+- **eslint-config:** enable `spirit/no-xlink-href` lint rule for HTML files
+
+### Tests
+
+- **eslint-config-spirit:** add tests for no-xlink-href rule
+
 ## [0.3.0](https://github.com/alma-oss/spirit-design-system/compare/eslint-config-spirit@0.2.1...eslint-config-spirit@0.3.0) (2026-06-02)
 
 ### Features

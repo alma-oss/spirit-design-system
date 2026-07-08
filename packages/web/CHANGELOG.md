@@ -3,6 +3,280 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.8.0...@alma-oss/spirit-web@5.0.0) (2026-07-08)
+
+### ⚠ BREAKING CHANGES
+
+- **web:** align Item with design changes #DS-2554
+- **web:** set proper disabled color of the icon in the UNSTABLE_PickerTrigger
+- **web,web-react:** align File and FileUpload with design changes #DS-2554
+- **web:** do not apply styles for pseudo-classes if Checkbox, Toggle or Item is disabled
+- **web:** keep same padding in both axes of the TextArea
+- **web:** enlarge gap between icon and label in the Item
+- **web:** fix invalid paths to the close icon
+- **web,web-react:** drop examples with emphasized label in the Toggle and Checkbox
+- **web,web-react:** remove formFieldMode and vertical spacing from form field components
+- **web,web-react:** replace `link-stretched` with `element-stretched` helper class #DS-2653
+- **web:** align inline form field components with new typography tokens #DS-2554
+- **web,web-react:** align File and FileUpload with design changes #DS-2554
+- **web:** align form field components with new typography tokens #DS-2554
+- **web:** align Pagination with new design #DS-2554
+- **web:** align `Tag` with new design #DS-2554
+- **web:** align `Tabs` with new design #DS-2554
+- **web:** align `Navigation` with new design #DS-2554
+- **web:** align `Breadcrumbs` with new design #DS-2554
+- **web:** align `Tooltip` with new design #DS-2554
+- **web:** align `Toast` with new design #DS-2554
+- **web:** align SegmentedControl sizes with action typography tokens #DS-2554
+- **web:** align Alert sizes with caption typography tokens #DS-2554
+- **web:** align `Avatar` with new design #DS-2554
+- **web:** align `Pill` with new design #DS-2554
+- **web:** align `Accordion` with new design #DS-2554
+- **web:** align `Button` sizes with action typography tokens #DS-2554
+- **web,web-react:** Spacings in Checkbox, Radio and Toggle are
+  now set using padding utility. Review all your usages.
+- **web,web-react:** the `closeButton` prop on `DrawerPanel` is removed.
+  Compose the panel from `DrawerPanelHeader` and `DrawerPanelContent`
+  instead.
+- **web:** Remove several styles from Toggle.
+- **web,web-react:** replace `TooltipCloseButton` button with `ControlButton`
+- **web,web-react:** replace `ToastBar` close button with `ControlButton` #DS-2216
+- **web,web-react:** replace `Button` with `ControlButton` in `ModalCloseButton` #DS-2216
+- **web,web-react:** replace `DrawerCloseButton` with `ControlButton` in `Drawer` #DS-2216
+- **web:** Remove several styles from Radio.
+- **web:** Remove several styles from Checkbox.
+- **web,web-react:** Item no longer accepts label, helperText, iconName,
+  or selectionDecorator props. Use children with startSlot/endSlot
+  and compose Label, HelperText, ValidationText, and Icon explicitly.
+- **web,web-react:** Item now renders as a div by default instead of a button.
+  Set elementType="button" when button semantics are needed.
+- **web,web-react:** The web Item markup now uses Item**content
+  and Item**slot instead of Item\_\_icon and grid-positioned Label/HelperText item styles.
+- **web,web-react:** `--disabled` modifier classes are removed from the migrated components — consumers
+  should apply the disabled utility class alongside the native disabled attribute.
+- **repo:** drop support for Node.js v20 and require Node.js v22 #DS-2597
+- **web:** Remove FileUploader SCSS/JS plugin and stabilize
+  UNSTABLE_FileUpload and UNSTABLE_File as FileUpload and File.
+- **web:** unify toggle html order with checkbox #DS-2322
+- **web:** removed indicator for selected state in vertical navigation
+- **web:** remove enable-v5-container-block-formatting-context feature flag
+- **web,web-react:** `ControlButton` now uses the expanded size scale by default.
+  The existing `small`/`medium`/`large` sizes are remapped to smaller heights and
+  `xsmall`/`xlarge` are added. Remove the
+  `spirit-feature-enable-v5-control-button-expanded-size-scale` CSS class and the
+  `$enable-v5-control-button-expanded-size-scale` Sass flag from your project; to
+  keep the previous rendering, shift the size up (`small` → `medium`,
+  `medium` → `large`, `large` → `xlarge`).
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+- **web:** remove Stack StackItem backwards-compat CSS #DS-2639
+- **design-tokens,web:** rename component tokens from `header` to `navigation` #DS-2589
+- **web:** stabilize UNSTABLE_Header and remove deprecated Header scss
+- **web:** remove unblocked SCSS deprecations #DS-2633
+- **web:** replace `get-variable-if-exists` with relevant token #DS-2633
+- **web:** update `UNSTABLE_Picker` design #DS-2503
+- **web,web-react:** rename ScrollView's arrows to controls #DS-2271
+- **web:** All `InputContainer` elements now require either
+  `InputContainer--fill` or `InputContainer--outline` modifier.
+- **design-tokens,web:** Filled tokens are now renamed to fill.
+- **web,web-react:** The `ValidationText--inline` modifier and `formFieldMode`
+  handling in `ValidationText` have been removed. Use default `ValidationText`
+  styling for Checkbox and Toggle validation messages.
+- **web,web-react:** drop has prefix from Stack CSS modifiers #DS-1916
+- **web,web-react:** derive `ControlButton` colors from color scheme #DS-2591
+- **web:** derive dynamic colors from color schemes #DS-2590
+- **web,web-react:** replace check-plain with success icon for success state #DS-2098
+- **web:** Visual BC of all form fields
+- **web,web-react:** If Icon component parent sets Icon size, it is used.
+  Icon `boxSize` overrides this value.
+- **web,web-react:** `.Tag--<color>` and `.Tag--subtle` CSS rules are no
+  longer emitted. Consumers must apply a `color-scheme-on-*` class (the
+  React component does this automatically).
+- **web,web-react:** web `Button` emotion variants now require color-scheme
+  helper classes for surface colors in markup examples.
+- **web,web-react:** TooltipPopover now requires color-scheme helper for surface colors
+- **web,web-react:** web `Alert` variants now require color-scheme classes for surface colors.
+- **web,web-react:** use `InputContainer` in `UNSTABLE_Picker` #DS-564
+- **web,web-react:** remove deprecated `isBlock` prop from Button and ButtonLink #DS-1897
+- **web:** dictionaries.generate-colors for ToastBar is removed. Migrate
+  custom CSS or overrides from --spirit-toast-bar-\* to locals and color-scheme helpers.
+- **web:** Remove color-scheme from the utilities settings and move generation to
+  helpers/color-scheme. Consumers must import the color-scheme helper entry (or the updated
+  main bundle) instead of relying on utilities-only builds for color-scheme classes. Pill and
+  ControlButton use the new component token override mixin.
+- **web:** TextArea now uses InputContainer instead of a custom component.
+  CharacterCounter component is now a standalone component.
+- **web:** Remove most of the Select styles.
+- **web:** Refactor TextField to use InputContainer and InputAddon instead
+  of it's own styles. Use ControlButton for Password Toggle.
+- **web:** Remove all FieldGroup styles.
+- **web,web-react:** The new `Tag` appearance (`inline-flex` layout with explicit
+  height and inside spacing) is now default. Delete the `$enable-v5-tag-appearance`
+  Sass variable and the `spirit-feature-enable-v5-tag-appearance` CSS class from
+  your project — they have no effect. See the Tag: Appearance Feature Flag Removed
+  sections in the web and web-react package Migration Guides to version 5.
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+- **web,web-react:** remove deprecated `row` direction value from `Flex` #DS-1629
+- **web:** Remove `.Slider__input` and replace it with `.Slider`.
+- **web:** require `InputDetails--disabled` for disabled details #DS-2496
+- **web:** Remove Dropdown and Tooltip placement modificators. Introduce placement helpers.
+- **web:** replace custom validation text with ValidationText component #DS-2397
+- **web,demo:** replace custom label elements with Label component #DS-2395
+- **web:** Button gaps are now set automatically, so the margins inside should be removed.
+
+### Features
+
+- **web,web-react:** add Flex--inline modifier and isInline prop
+- **web,web-react:** add support for selected color variant in Icon component
+- **web,web-react:** align Card with new design #DS-2576 #DS-2554, closes [#DS-2576](https://github.com/alma-oss/spirit-design-system/issues/DS-2576) [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web,web-react:** align File and FileUpload with design changes #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web,web-react:** align File and FileUpload with design changes #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web,web-react:** derive `ControlButton` colors from color scheme #DS-2591, closes [#DS-2591](https://github.com/alma-oss/spirit-design-system/issues/DS-2591)
+- **web,web-react:** drop `Tag` appearance feature flag #DS-2456, closes [#DS-2456](https://github.com/alma-oss/spirit-design-system/issues/DS-2456)
+- **web,web-react:** expose `DrawerPanel` composition sub-components #DS-2656, closes [#DS-2656](https://github.com/alma-oss/spirit-design-system/issues/DS-2656)
+- **web,web-react:** introduce `tagProps` for customizing Tag elements in the Picker
+- **web,web-react:** introduce startAddon and endAddon props on TextField #DS-2549, closes [#DS-2549](https://github.com/alma-oss/spirit-design-system/issues/DS-2549)
+- **web,web-react:** make `Tag` interactive via `elementType="button"` / `"a"` #DS-2456, closes [#DS-2456](https://github.com/alma-oss/spirit-design-system/issues/DS-2456)
+- **web,web-react:** make form components fluid by default
+- **web,web-react:** migrate `Alert` to color schemes
+- **web,web-react:** migrate `Button` and `ButtonLink` to color schemes
+- **web,web-react:** migrate `Tag` to color schemes #DS-2456, closes [#DS-2456](https://github.com/alma-oss/spirit-design-system/issues/DS-2456)
+- **web,web-react:** migrate `TooltipPopover` to neutral color-scheme
+- **web,web-react:** remove `ControlButton` expanded size scale feature flag #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+- **web,web-react:** remove deprecated `isBlock` prop from Button and ButtonLink #DS-1897, closes [#DS-1897](https://github.com/alma-oss/spirit-design-system/issues/DS-1897)
+- **web,web-react:** replace `Button` with `ControlButton` in `ModalCloseButton` #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+- **web,web-react:** replace `DrawerCloseButton` with `ControlButton` in `Drawer` #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+- **web,web-react:** replace `ToastBar` close button with `ControlButton` #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+- **web,web-react:** replace `TooltipCloseButton` button with `ControlButton`
+- **web,web-react:** replace check-plain with success icon for success state #DS-2098, closes [#DS-2098](https://github.com/alma-oss/spirit-design-system/issues/DS-2098)
+- **web:** add color-scheme scss helpers and pill component overrides
+- **web:** align `Accordion` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align `Avatar` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align `Breadcrumbs` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align `Button` sizes with action typography tokens #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align `Navigation` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align `Pill` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align `Tabs` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align `Tag` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align `Toast` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align `Tooltip` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align Alert sizes with caption typography tokens #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align form field components with new typography tokens #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align inline form field components with new typography tokens #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align Item with design changes #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align Pagination with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align SegmentedControl sizes with action typography tokens #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** derive dynamic colors from color schemes #DS-2590, closes [#DS-2590](https://github.com/alma-oss/spirit-design-system/issues/DS-2590)
+- **web:** drop FieldGroup styles and use Flex and border utility #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web:** enable spirit/no-xlink-href lint rule
+- **web:** extract helperText css to separate component #DS-2396, closes [#DS-2396](https://github.com/alma-oss/spirit-design-system/issues/DS-2396)
+- **web:** introduce `cursor-pointer` helper class #DS-2653, closes [#DS-2653](https://github.com/alma-oss/spirit-design-system/issues/DS-2653)
+- **web:** introduce `element-stretched` helper class #DS-2653, closes [#DS-2653](https://github.com/alma-oss/spirit-design-system/issues/DS-2653)
+- **web:** introduce auto gap in Button and ControlButton #DS-2344, closes [#DS-2344](https://github.com/alma-oss/spirit-design-system/issues/DS-2344)
+- **web:** introduce InputContainer and InputAddon components #DS-1668, closes [#DS-1668](https://github.com/alma-oss/spirit-design-system/issues/DS-1668)
+- **web:** introduce Label component #DS-2395, closes [#DS-2395](https://github.com/alma-oss/spirit-design-system/issues/DS-2395)
+- **web:** introduce NavigationItem slots #DS-2523, closes [#DS-2523](https://github.com/alma-oss/spirit-design-system/issues/DS-2523)
+- **web:** introduce UNSTABLE_Combobox #DS-1609, closes [#DS-1609](https://github.com/alma-oss/spirit-design-system/issues/DS-1609)
+- **web:** introduce ValidationText component #DS-2397, closes [#DS-2397](https://github.com/alma-oss/spirit-design-system/issues/DS-2397)
+- **web:** migrate ToastBar to color schemes
+- **web:** require `InputDetails--disabled` for disabled details #DS-2496, closes [#DS-2496](https://github.com/alma-oss/spirit-design-system/issues/DS-2496)
+- **web:** set default Icon size in InputAddon #DS-2549, closes [#DS-2549](https://github.com/alma-oss/spirit-design-system/issues/DS-2549)
+- **web:** set proper disabled color of the icon in the UNSTABLE_PickerTrigger
+- **web:** simplify Slider styles #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web:** stabilize FileUpload and File, remove FileUploader #DS-2592, closes [#DS-2592](https://github.com/alma-oss/spirit-design-system/issues/DS-2592)
+- **web:** stabilize UNSTABLE_Header and remove deprecated Header scss
+- **web:** unify CSS placement in Dropdown and Tooltip #DS-1104, closes [#DS-1104](https://github.com/alma-oss/spirit-design-system/issues/DS-1104)
+- **web:** update `UNSTABLE_Picker` design #DS-2503, closes [#DS-2503](https://github.com/alma-oss/spirit-design-system/issues/DS-2503)
+- **web:** update design tokens
+- **web:** use responsive units for PartnerLogo's image
+
+### Bug Fixes
+
+- **design-tokens,web:** rename Form Field Filled tokens to Fill #DS-2502, closes [#DS-2502](https://github.com/alma-oss/spirit-design-system/issues/DS-2502)
+- **web,web-react:** dropdown placement default in context and modal placement demo
+- **web,web-react:** make File, FileUpload and Picker work with detached form subcomponents
+- **web,web-react:** simplify Item SCSS and use utility classes for bg and text
+- **web,web-react:** use padding for Checkbox, Radio, and Toggle vertical spacings
+- **web:** add missing `.Icon` class to SVG sprite elements
+- **web:** add position relative to Item
+- **web:** close dropdown when moving focus up in picker demo
+- **web:** do not apply styles for pseudo-classes if Checkbox, Toggle or Item is disabled
+- **web:** enlarge gap between icon and label in the Item
+- **web:** keep same padding in both axes of the TextArea
+- **web:** make `box` variant default of `Label` component and update demos
+- **web:** remove unused mixins and variables
+- **web:** update typography in ValidationText to use regular weight #DS-2472, closes [#DS-2472](https://github.com/alma-oss/spirit-design-system/issues/DS-2472)
+- **web:** vertically center icon in Accordion item
+
+### Documentation
+
+- **repo:** complete v5 migration audit before release merge
+- **repo:** document inherit link migration in the Alert #DS-2379, closes [#DS-2379](https://github.com/alma-oss/spirit-design-system/issues/DS-2379)
+- **web, web-react:** update form field components docs #DS-2653, closes [#DS-2653](https://github.com/alma-oss/spirit-design-system/issues/DS-2653)
+- **web,web-react:** do not apply typography styles on the text inside InputDetails
+- **web,web-react:** drop examples with emphasized label in the Toggle and Checkbox
+- **web,web-react:** update picker demo tags
+- **web,web-react:** use small buttons in the Header
+- **web:** add action typography demo #DS-2663, closes [#DS-2663](https://github.com/alma-oss/spirit-design-system/issues/DS-2663)
+- **web:** add caption typography demo #DS-2664, closes [#DS-2664](https://github.com/alma-oss/spirit-design-system/issues/DS-2664)
+- **web:** add demo with new typography styles
+- **web:** add HelperText component demo page #DS-2396, closes [#DS-2396](https://github.com/alma-oss/spirit-design-system/issues/DS-2396)
+- **web:** add Icon class to all svg elements in component demos
+- **web:** add missing space before self-closing tag in SVG elements
+- **web:** fix HTML structure in the Dropdown demo
+- **web:** fix inconsistent spacing in `Picker` demo
+- **web:** fix invalid paths to the close icon
+- **web:** remove `link-inverted` from Tooltip demo
+- **web:** replace deprecated xlink:href with href in component demos, closes [#DS-2487](https://github.com/alma-oss/spirit-design-system/issues/DS-2487)
+- **web:** update design tokens
+- **web:** update Label demo page
+
+### Chores
+
+- **repo:** drop support for Node.js v20 and require Node.js v22 #DS-2597, closes [#DS-2597](https://github.com/alma-oss/spirit-design-system/issues/DS-2597)
+
+### Code Refactoring
+
+- **demo:** wrap Stack children in StackItem #DS-2639, closes [#DS-2639](https://github.com/alma-oss/spirit-design-system/issues/DS-2639)
+- **design-tokens,web:** rename component tokens from `header` to `navigation` #DS-2589, closes [#DS-2589](https://github.com/alma-oss/spirit-design-system/issues/DS-2589)
+- **repo:** replace deprecated Flex's direction values in Footer demos #DS-1629, closes [#DS-1629](https://github.com/alma-oss/spirit-design-system/issues/DS-1629)
+- **web,demo:** replace custom label elements with Label component #DS-2395, closes [#DS-2395](https://github.com/alma-oss/spirit-design-system/issues/DS-2395)
+- **web,web-react:** compose Item content with slots #DS-2586, closes [#DS-2586](https://github.com/alma-oss/spirit-design-system/issues/DS-2586)
+- **web,web-react:** drop has prefix from Stack CSS modifiers #DS-1916, closes [#DS-1916](https://github.com/alma-oss/spirit-design-system/issues/DS-1916)
+- **web,web-react:** remove deprecated `row` direction value from `Flex` #DS-1629, closes [#DS-1629](https://github.com/alma-oss/spirit-design-system/issues/DS-1629)
+- **web,web-react:** remove formFieldMode and vertical spacing from form field components
+- **web,web-react:** remove inline modifier from `ValidationText` components
+- **web,web-react:** remove stale deprecation leftovers
+- **web,web-react:** rename ScrollView's arrows to controls #DS-2271, closes [#DS-2271](https://github.com/alma-oss/spirit-design-system/issues/DS-2271)
+- **web,web-react:** replace `link-stretched` with `element-stretched` helper class #DS-2653, closes [#DS-2653](https://github.com/alma-oss/spirit-design-system/issues/DS-2653)
+- **web,web-react:** the Icon now inherits composition size if it not overrides it itself
+- **web,web-react:** use `InputContainer` in `UNSTABLE_Picker` #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web,web-react:** use disabled utility for disabled color-scheme states #DS-2468, closes [#DS-2468](https://github.com/alma-oss/spirit-design-system/issues/DS-2468)
+- **web:** introduce fill and outline variants to form fields #DS-2502, closes [#DS-2502](https://github.com/alma-oss/spirit-design-system/issues/DS-2502)
+- **web:** make `Label--item` self-contained and drop redundant `Label--inline`
+- **web:** remove enable-v5-container-block-formatting-context feature flag
+- **web:** remove needless pseudo-element from interactive `Tag`
+- **web:** remove Stack StackItem backwards-compat CSS #DS-2639, closes [#DS-2639](https://github.com/alma-oss/spirit-design-system/issues/DS-2639)
+- **web:** remove unblocked SCSS deprecations #DS-2633, closes [#DS-2633](https://github.com/alma-oss/spirit-design-system/issues/DS-2633)
+- **web:** replace `get-variable-if-exists` with relevant token #DS-2633, closes [#DS-2633](https://github.com/alma-oss/spirit-design-system/issues/DS-2633)
+- **web:** replace custom validation text with ValidationText component #DS-2397, closes [#DS-2397](https://github.com/alma-oss/spirit-design-system/issues/DS-2397)
+- **web:** replace deprecated xlink:href with href in Toast, closes [#DS-2487](https://github.com/alma-oss/spirit-design-system/issues/DS-2487)
+- **web:** switch Checkbox to composition and move its styles to the input only #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web:** switch Radio to composition and move its styles to the input only #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web:** switch Toggle to composition and move its styles to the input only #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web:** unify toggle html order with checkbox #DS-2322, closes [#DS-2322](https://github.com/alma-oss/spirit-design-system/issues/DS-2322)
+- **web:** use InputAddon and InputContainer in Select #DS-1668, closes [#DS-1668](https://github.com/alma-oss/spirit-design-system/issues/DS-1668)
+- **web:** use InputContainer in TextArea #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web:** use Label, HelperText and ValidationText in FileUpload, File and Picker
+
+### Tests
+
+- **web:** add visual snapshot tests for CSS helpers
+- **web:** replace deprecated xlink:href with href in test fixtures, closes [#DS-2487](https://github.com/alma-oss/spirit-design-system/issues/DS-2487)
+
 ## [4.8.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.7.0...@alma-oss/spirit-web@4.8.0) (2026-07-01)
 
 ### Features

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-analytics@2.0.8...@alma-oss/spirit-analytics@3.0.0) (2026-07-08)
+
+### ⚠ BREAKING CHANGES
+
+- **repo:** drop support for Node.js v20 and require Node.js v22 #DS-2597
+
+### Chores
+
+- **repo:** drop support for Node.js v20 and require Node.js v22 #DS-2597, closes [#DS-2597](https://github.com/alma-oss/spirit-design-system/issues/DS-2597)
+
 ## [2.0.8](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-analytics@2.0.7...@alma-oss/spirit-analytics@2.0.8) (2026-06-02)
 
 **Note:** Version bump only for package @alma-oss/spirit-analytics

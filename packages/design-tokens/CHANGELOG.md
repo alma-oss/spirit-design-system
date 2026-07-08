@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.2.2...@alma-oss/spirit-design-tokens@5.0.0) (2026-07-08)
+
+### ⚠ BREAKING CHANGES
+
+- **repo:** drop support for Node.js v20 and require Node.js v22 #DS-2597
+- **design-tokens,web:** rename component tokens from `header` to `navigation` #DS-2589
+- **design-tokens,web:** Filled tokens are now renamed to fill.
+
+### Features
+
+- **design-tokens:** add new typography styles #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **design-tokens:** introduce Form Field Outline tokens
+- **design-tokens:** update design tokens
+
+### Bug Fixes
+
+- **design-tokens,web:** rename Form Field Filled tokens to Fill #DS-2502, closes [#DS-2502](https://github.com/alma-oss/spirit-design-system/issues/DS-2502)
+
+### Documentation
+
+- **design-tokens:** document color scheme tokens in readme
+
+### Chores
+
+- **repo:** drop support for Node.js v20 and require Node.js v22 #DS-2597, closes [#DS-2597](https://github.com/alma-oss/spirit-design-system/issues/DS-2597)
+
+### Code Refactoring
+
+- **design-tokens,web:** rename component tokens from `header` to `navigation` #DS-2589, closes [#DS-2589](https://github.com/alma-oss/spirit-design-system/issues/DS-2589)
+
 ## [4.2.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.2.1...@alma-oss/spirit-design-tokens@4.2.2) (2026-07-01)
 
 ### Documentation

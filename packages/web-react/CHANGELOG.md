@@ -3,6 +3,211 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.9.0...@alma-oss/spirit-web-react@5.0.0) (2026-07-08)
+
+### ⚠ BREAKING CHANGES
+
+- **web,web-react:** align File and FileUpload with design changes #DS-2554
+- **web,web-react:** drop examples with emphasized label in the Toggle and Checkbox
+- **web,web-react:** remove formFieldMode and vertical spacing from form field components
+- **web,web-react:** replace `link-stretched` with `element-stretched` helper class #DS-2653
+- **web,web-react:** align File and FileUpload with design changes #DS-2554
+- **web:** align Pagination with new design #DS-2554
+- **web-react:** align `Toast` with new design #DS-2554
+- **web:** align `Tag` with new design #DS-2554
+- **web:** align `Navigation` with new design #DS-2554
+- **web:** align `Button` sizes with action typography tokens #DS-2554
+- **web,web-react:** Spacings in Checkbox, Radio and Toggle are
+  now set using padding utility. Review all your usages.
+- **web-react:** remove `hideOnCollapse` from `UncontrolledCollapse`
+- **web,web-react:** the `closeButton` prop on `DrawerPanel` is removed.
+  Compose the panel from `DrawerPanelHeader` and `DrawerPanelContent`
+  instead.
+- **web-react:** `DrawerCloseButton`, `ModalCloseButton`, `TooltipCloseButton`, and
+  their prop types are removed. Use `CloseButton` instead.
+- **web-react:** Toggle now requires explicit margin management when used within Stack components.
+- **web,web-react:** replace `TooltipCloseButton` button with `ControlButton`
+- **web,web-react:** replace `ToastBar` close button with `ControlButton` #DS-2216
+- **web,web-react:** replace `Button` with `ControlButton` in `ModalCloseButton` #DS-2216
+- **web,web-react:** replace `DrawerCloseButton` with `ControlButton` in `Drawer` #DS-2216
+- **web-react:** Radio now requires explicit margin management when used within Stack components.
+- **web-react:** Checkbox now requires explicit margin management
+  when used within Stack components.
+- **web,web-react:** Item no longer accepts label, helperText, iconName,
+  or selectionDecorator props. Use children with startSlot/endSlot
+  and compose Label, HelperText, ValidationText, and Icon explicitly.
+- **web,web-react:** Item now renders as a div by default instead of a button.
+  Set elementType="button" when button semantics are needed.
+- **web,web-react:** The web Item markup now uses Item**content
+  and Item**slot instead of Item\_\_icon and grid-positioned Label/HelperText item styles.
+- **web,web-react:** `--disabled` modifier classes are removed from the migrated components — consumers
+  should apply the disabled utility class alongside the native disabled attribute.
+- **repo:** drop support for Node.js v20 and require Node.js v22 #DS-2597
+- **web-react:** Remove FileUploader compound component and stabilize
+  UNSTABLE_FileUpload and UNSTABLE_File as FileUpload and File.
+- **web-react:** removed indicator for selected state in vertical navigation
+- **web,web-react:** `ControlButton` now uses the expanded size scale by default.
+  The existing `small`/`medium`/`large` sizes are remapped to smaller heights and
+  `xsmall`/`xlarge` are added. Remove the
+  `spirit-feature-enable-v5-control-button-expanded-size-scale` CSS class and the
+  `$enable-v5-control-button-expanded-size-scale` Sass flag from your project; to
+  keep the previous rendering, shift the size up (`small` → `medium`,
+  `medium` → `large`, `large` → `xlarge`).
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+- **web-react:** remove Stack StackItem deprecation notice #DS-2639
+- **web-react:** stabilize UNSTABLE_Header and remove deprecated Header
+- **web,web-react:** rename ScrollView's arrows to controls #DS-2271
+- **web,web-react:** The `ValidationText--inline` modifier and `formFieldMode`
+  handling in `ValidationText` have been removed. Use default `ValidationText`
+  styling for Checkbox and Toggle validation messages.
+- **web-react:** rename hasValidationStateIcon to validationStateIcon #DS-2490
+- **web,web-react:** drop has prefix from Stack CSS modifiers #DS-1916
+- **web,web-react:** derive `ControlButton` colors from color scheme #DS-2591
+- **web,web-react:** replace check-plain with success icon for success state #DS-2098
+- **web:** Visual BC of all form fields
+- **web,web-react:** If Icon component parent sets Icon size, it is used.
+  Icon `boxSize` overrides this value.
+- **web,web-react:** `.Tag--<color>` and `.Tag--subtle` CSS rules are no
+  longer emitted. Consumers must apply a `color-scheme-on-*` class (the
+  React component does this automatically).
+- **web,web-react:** web `Button` emotion variants now require color-scheme
+  helper classes for surface colors in markup examples.
+- **web,web-react:** TooltipPopover now requires color-scheme helper for surface colors
+- **web,web-react:** web `Alert` variants now require color-scheme classes for surface colors.
+- **web,web-react:** use `InputContainer` in `UNSTABLE_Picker` #DS-564
+- **web,web-react:** remove deprecated `isBlock` prop from Button and ButtonLink #DS-1897
+- **web:** TextArea now uses InputContainer instead of a custom component.
+  CharacterCounter component is now a standalone component.
+- **web,web-react:** The new `Tag` appearance (`inline-flex` layout with explicit
+  height and inside spacing) is now default. Delete the `$enable-v5-tag-appearance`
+  Sass variable and the `spirit-feature-enable-v5-tag-appearance` CSS class from
+  your project — they have no effect. See the Tag: Appearance Feature Flag Removed
+  sections in the web and web-react package Migration Guides to version 5.
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+- **web,web-react:** remove deprecated `row` direction value from `Flex` #DS-1629
+
+### Features
+
+- **demo:** stabilize Header component references
+- **web-react:** add `CloseButton` and remove component-specific close buttons #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+- **web-react:** add color scheme classes to ToastBar
+- **web-react:** add color scheme utilities and update pill and tag
+- **web-react:** add dropdown popover keyboard support #DS-2501, closes [#DS-2501](https://github.com/alma-oss/spirit-design-system/issues/DS-2501)
+- **web-react:** add isStretched prop to extend clickable area of Link
+- **web-react:** align `Toast` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web-react:** allow ControlButton size inheritance #DS-2549, closes [#DS-2549](https://github.com/alma-oss/spirit-design-system/issues/DS-2549)
+- **web-react:** enable spirit/no-xlink-href lint rule
+- **web-react:** introduce `ActionText` component #DS-2663, closes [#DS-2663](https://github.com/alma-oss/spirit-design-system/issues/DS-2663)
+- **web-react:** introduce `CaptionText` component #DS-2664, closes [#DS-2664](https://github.com/alma-oss/spirit-design-system/issues/DS-2664)
+- **web-react:** introduce `spacing` prop for Button, ButtonLink & ControlButton to set gap #DS-2344, closes [#DS-2344](https://github.com/alma-oss/spirit-design-system/issues/DS-2344)
+- **web-react:** introduce NavigationItem slots #DS-2523, closes [#DS-2523](https://github.com/alma-oss/spirit-design-system/issues/DS-2523)
+- **web-react:** introduce outline variant to form fields #DS-2502, closes [#DS-2502](https://github.com/alma-oss/spirit-design-system/issues/DS-2502)
+- **web-react:** rename hasValidationStateIcon to validationStateIcon #DS-2490, closes [#DS-2490](https://github.com/alma-oss/spirit-design-system/issues/DS-2490)
+- **web-react:** stabilize FileUpload and File, remove FileUploader #DS-2592, closes [#DS-2592](https://github.com/alma-oss/spirit-design-system/issues/DS-2592)
+- **web-react:** stabilize UNSTABLE_Header and remove deprecated Header
+- **web-react:** update Checkbox component to use composition
+- **web-react:** update Radio component to use composition #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web-react:** update Toggle component to use composition #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web-react:** use placement helpers in Dropdown and Tooltip #DS-1104, closes [#DS-1104](https://github.com/alma-oss/spirit-design-system/issues/DS-1104)
+- **web,web-react:** add Flex--inline modifier and isInline prop
+- **web,web-react:** add support for selected color variant in Icon component
+- **web,web-react:** align Card with new design #DS-2576 #DS-2554, closes [#DS-2576](https://github.com/alma-oss/spirit-design-system/issues/DS-2576) [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web,web-react:** align File and FileUpload with design changes #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web,web-react:** align File and FileUpload with design changes #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web,web-react:** derive `ControlButton` colors from color scheme #DS-2591, closes [#DS-2591](https://github.com/alma-oss/spirit-design-system/issues/DS-2591)
+- **web,web-react:** drop `Tag` appearance feature flag #DS-2456, closes [#DS-2456](https://github.com/alma-oss/spirit-design-system/issues/DS-2456)
+- **web,web-react:** expose `DrawerPanel` composition sub-components #DS-2656, closes [#DS-2656](https://github.com/alma-oss/spirit-design-system/issues/DS-2656)
+- **web,web-react:** introduce `tagProps` for customizing Tag elements in the Picker
+- **web,web-react:** introduce startAddon and endAddon props on TextField #DS-2549, closes [#DS-2549](https://github.com/alma-oss/spirit-design-system/issues/DS-2549)
+- **web,web-react:** make `Tag` interactive via `elementType="button"` / `"a"` #DS-2456, closes [#DS-2456](https://github.com/alma-oss/spirit-design-system/issues/DS-2456)
+- **web,web-react:** make form components fluid by default
+- **web,web-react:** migrate `Alert` to color schemes
+- **web,web-react:** migrate `Button` and `ButtonLink` to color schemes
+- **web,web-react:** migrate `Tag` to color schemes #DS-2456, closes [#DS-2456](https://github.com/alma-oss/spirit-design-system/issues/DS-2456)
+- **web,web-react:** migrate `TooltipPopover` to neutral color-scheme
+- **web,web-react:** remove `ControlButton` expanded size scale feature flag #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+- **web,web-react:** remove deprecated `isBlock` prop from Button and ButtonLink #DS-1897, closes [#DS-1897](https://github.com/alma-oss/spirit-design-system/issues/DS-1897)
+- **web,web-react:** replace `Button` with `ControlButton` in `ModalCloseButton` #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+- **web,web-react:** replace `DrawerCloseButton` with `ControlButton` in `Drawer` #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+- **web,web-react:** replace `ToastBar` close button with `ControlButton` #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+- **web,web-react:** replace `TooltipCloseButton` button with `ControlButton`
+- **web,web-react:** replace check-plain with success icon for success state #DS-2098, closes [#DS-2098](https://github.com/alma-oss/spirit-design-system/issues/DS-2098)
+- **web:** align `Button` sizes with action typography tokens #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align `Navigation` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align `Tag` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+- **web:** align Pagination with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+
+### Bug Fixes
+
+- **web-react:** fix `File` naming collision in modal image preview story
+- **web-react:** placement offset from CSS variable and guard Floating UI coords in Tooltip
+- **web-react:** resolve type error in `UncontrolledSplitButton` icon name prop
+- **web-react:** unify ButtonLink demos with Button
+- **web-react:** use correct generic type E instead of T in Button and ControlButton
+- **web,web-react:** dropdown placement default in context and modal placement demo
+- **web,web-react:** make File, FileUpload and Picker work with detached form subcomponents
+- **web,web-react:** simplify Item SCSS and use utility classes for bg and text
+- **web,web-react:** use padding for Checkbox, Radio, and Toggle vertical spacings
+- **web:** add missing `.Icon` class to SVG sprite elements
+- **web:** update typography in ValidationText to use regular weight #DS-2472, closes [#DS-2472](https://github.com/alma-oss/spirit-design-system/issues/DS-2472)
+
+### Documentation
+
+- **repo:** complete v5 migration audit before release merge
+- update references and migration guides for Header stabilization
+- **web-react:** make FieldGroup radio and checkbox demos interactive
+- **web-react:** replace deprecated xlink:href with href in component docs, closes [#DS-2487](https://github.com/alma-oss/spirit-design-system/issues/DS-2487)
+- **web, web-react:** update form field components docs #DS-2653, closes [#DS-2653](https://github.com/alma-oss/spirit-design-system/issues/DS-2653)
+- **web,web-react:** do not apply typography styles on the text inside InputDetails
+- **web,web-react:** drop examples with emphasized label in the Toggle and Checkbox
+- **web,web-react:** update picker demo tags
+- **web,web-react:** use small buttons in the Header
+- **web:** fix inconsistent spacing in `Picker` demo
+
+### Chores
+
+- **repo:** drop support for Node.js v20 and require Node.js v22 #DS-2597, closes [#DS-2597](https://github.com/alma-oss/spirit-design-system/issues/DS-2597)
+
+### Code Refactoring
+
+- **demo:** remove ContainerBlockFormattingContext demo
+- **demo:** wrap Stack children in StackItem #DS-2639, closes [#DS-2639](https://github.com/alma-oss/spirit-design-system/issues/DS-2639)
+- **repo:** replace deprecated Flex's direction values in Footer demos #DS-1629, closes [#DS-1629](https://github.com/alma-oss/spirit-design-system/issues/DS-1629)
+- **web-react:** align `InputDetails` disabled state with context #DS-2496, closes [#DS-2496](https://github.com/alma-oss/spirit-design-system/issues/DS-2496)
+- **web-react:** extract `HelperText` and move `useAriaIds` to shared hooks #DS-2398, closes [#DS-2398](https://github.com/alma-oss/spirit-design-system/issues/DS-2398)
+- **web-react:** introduce standalone `ValidationText` and update all components #DS-2398, closes [#DS-2398](https://github.com/alma-oss/spirit-design-system/issues/DS-2398)
+- **web-react:** remove `hideOnCollapse` from `UncontrolledCollapse`
+- **web-react:** remove Stack StackItem deprecation notice #DS-2639, closes [#DS-2639](https://github.com/alma-oss/spirit-design-system/issues/DS-2639)
+- **web-react:** rename formFieldVariant to formFieldMode across components
+- **web-react:** standalone `Label`, merge context without spreading to DOM #DS-2398, closes [#DS-2398](https://github.com/alma-oss/spirit-design-system/issues/DS-2398)
+- **web-react:** unify toggle dom order with checkbox #DS-2322, closes [#DS-2322](https://github.com/alma-oss/spirit-design-system/issues/DS-2322)
+- **web-react:** use Flex and utilities instead of own FieldGroup styles #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web-react:** use InputContainer and InputAddon in form fields #DS-2548, closes [#DS-2548](https://github.com/alma-oss/spirit-design-system/issues/DS-2548)
+- **web-react:** use updated Slider styles #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web,web-react:** compose Item content with slots #DS-2586, closes [#DS-2586](https://github.com/alma-oss/spirit-design-system/issues/DS-2586)
+- **web,web-react:** drop has prefix from Stack CSS modifiers #DS-1916, closes [#DS-1916](https://github.com/alma-oss/spirit-design-system/issues/DS-1916)
+- **web,web-react:** remove deprecated `row` direction value from `Flex` #DS-1629, closes [#DS-1629](https://github.com/alma-oss/spirit-design-system/issues/DS-1629)
+- **web,web-react:** remove formFieldMode and vertical spacing from form field components
+- **web,web-react:** remove inline modifier from `ValidationText` components
+- **web,web-react:** remove stale deprecation leftovers
+- **web,web-react:** rename ScrollView's arrows to controls #DS-2271, closes [#DS-2271](https://github.com/alma-oss/spirit-design-system/issues/DS-2271)
+- **web,web-react:** replace `link-stretched` with `element-stretched` helper class #DS-2653, closes [#DS-2653](https://github.com/alma-oss/spirit-design-system/issues/DS-2653)
+- **web,web-react:** the Icon now inherits composition size if it not overrides it itself
+- **web,web-react:** use `InputContainer` in `UNSTABLE_Picker` #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web,web-react:** use disabled utility for disabled color-scheme states #DS-2468, closes [#DS-2468](https://github.com/alma-oss/spirit-design-system/issues/DS-2468)
+- **web:** use InputContainer in TextArea #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+
+### Tests
+
+- **demo:** use stabilized File Upload components in React Image Crop demo
+- **web-react:** expand ValidationText test coverage
+- **web-react:** remove deprecated xmlns:xlink from valid SVG attributes, closes [#DS-2487](https://github.com/alma-oss/spirit-design-system/issues/DS-2487)
+- **web-react:** simplify `colorSchemePropsTest` — one prop per test
+
 ## [4.9.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.8.0...@alma-oss/spirit-web-react@4.9.0) (2026-07-01)
 
 ### Features

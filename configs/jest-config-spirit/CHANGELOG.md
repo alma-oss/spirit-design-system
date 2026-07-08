@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.4](https://github.com/alma-oss/spirit-design-system/compare/jest-config-spirit@0.2.3...jest-config-spirit@0.2.4) (2026-07-08)
+
+### Tests
+
+- **codemods:** add renameComponent tests and exclude fixtures from coverage
+
 ## [0.2.3](https://github.com/alma-oss/spirit-design-system/compare/jest-config-spirit@0.2.2...jest-config-spirit@0.2.3) (2026-03-04)
 
 ### Chores

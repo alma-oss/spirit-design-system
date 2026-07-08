@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-docsite@0.4.4...@alma-oss/spirit-docsite@0.5.0) (2026-07-08)
+
+### ⚠ BREAKING CHANGES
+
+- **web-react:** `DrawerCloseButton`, `ModalCloseButton`, `TooltipCloseButton`, and
+  their prop types are removed. Use `CloseButton` instead.
+- **web-react:** Remove FileUploader compound component and stabilize
+  UNSTABLE_FileUpload and UNSTABLE_File as FileUpload and File.
+
+### Features
+
+- **web-react:** add `CloseButton` and remove component-specific close buttons #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+- **web-react:** stabilize FileUpload and File, remove FileUploader #DS-2592, closes [#DS-2592](https://github.com/alma-oss/spirit-design-system/issues/DS-2592)
+
+### Documentation
+
+- update references and migration guides for Header stabilization
+
+### Code Refactoring
+
+- **docsite:** replace deprecated xlink:href with href in config, closes [#DS-2487](https://github.com/alma-oss/spirit-design-system/issues/DS-2487)
+
 ## [0.4.4](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-docsite@0.4.3...@alma-oss/spirit-docsite@0.4.4) (2026-07-01)
 
 **Note:** Version bump only for package @alma-oss/spirit-docsite

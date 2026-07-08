@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@2.1.0...@lmc-eu/spirit-demo-app@3.0.0) (2026-07-08)
+
+### ⚠ BREAKING CHANGES
+
+- **web,web-react:** the `closeButton` prop on `DrawerPanel` is removed.
+  Compose the panel from `DrawerPanelHeader` and `DrawerPanelContent`
+  instead.
+- **web,web-react:** replace `DrawerCloseButton` with `ControlButton` in `Drawer` #DS-2216
+- **web:** All `InputContainer` elements now require either
+  `InputContainer--fill` or `InputContainer--outline` modifier.
+- **web,web-react:** drop has prefix from Stack CSS modifiers #DS-1916
+- **web,web-react:** `.Tag--<color>` and `.Tag--subtle` CSS rules are no
+  longer emitted. Consumers must apply a `color-scheme-on-*` class (the
+  React component does this automatically).
+- **web,web-react:** web `Button` emotion variants now require color-scheme
+  helper classes for surface colors in markup examples.
+- **web:** TextArea now uses InputContainer instead of a custom component.
+  CharacterCounter component is now a standalone component.
+- **web:** Remove most of the Select styles.
+- **web,demo:** replace custom label elements with Label component #DS-2395
+
+### Features
+
+- **demo:** stabilize Header component references
+- **web,web-react:** expose `DrawerPanel` composition sub-components #DS-2656, closes [#DS-2656](https://github.com/alma-oss/spirit-design-system/issues/DS-2656)
+- **web,web-react:** make form components fluid by default
+- **web,web-react:** migrate `Button` and `ButtonLink` to color schemes
+- **web,web-react:** migrate `Tag` to color schemes #DS-2456, closes [#DS-2456](https://github.com/alma-oss/spirit-design-system/issues/DS-2456)
+- **web,web-react:** replace `DrawerCloseButton` with `ControlButton` in `Drawer` #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+
+### Bug Fixes
+
+- **web:** add missing `.Icon` class to SVG sprite elements
+
+### Documentation
+
+- **web, web-react:** update form field components docs #DS-2653, closes [#DS-2653](https://github.com/alma-oss/spirit-design-system/issues/DS-2653)
+
+### Chores
+
+- **demo:** load new fonts
+
+### Code Refactoring
+
+- **demo:** replace deprecated xlink:href with href in config, closes [#DS-2487](https://github.com/alma-oss/spirit-design-system/issues/DS-2487)
+- **repo:** replace deprecated Flex's direction values in Footer demos #DS-1629, closes [#DS-1629](https://github.com/alma-oss/spirit-design-system/issues/DS-1629)
+- **web,demo:** replace custom label elements with Label component #DS-2395, closes [#DS-2395](https://github.com/alma-oss/spirit-design-system/issues/DS-2395)
+- **web,web-react:** drop has prefix from Stack CSS modifiers #DS-1916, closes [#DS-1916](https://github.com/alma-oss/spirit-design-system/issues/DS-1916)
+- **web:** introduce fill and outline variants to form fields #DS-2502, closes [#DS-2502](https://github.com/alma-oss/spirit-design-system/issues/DS-2502)
+- **web:** use InputAddon and InputContainer in Select #DS-1668, closes [#DS-1668](https://github.com/alma-oss/spirit-design-system/issues/DS-1668)
+- **web:** use InputContainer in TextArea #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+
+### Tests
+
+- **web:** add visual snapshot tests for CSS helpers
+
 ## [2.1.0](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@2.0.6...@lmc-eu/spirit-demo-app@2.1.0) (2026-07-01)
 
 ### Features

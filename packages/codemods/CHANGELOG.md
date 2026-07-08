@@ -3,6 +3,75 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-codemods@2.0.8...@alma-oss/spirit-codemods@3.0.0) (2026-07-08)
+
+### ⚠ BREAKING CHANGES
+
+- **web:** align `Tag` with new design #DS-2554
+- **web,web-react:** Spacings in Checkbox, Radio and Toggle are
+  now set using padding utility. Review all your usages.
+- **web,web-react:** the `closeButton` prop on `DrawerPanel` is removed.
+  Compose the panel from `DrawerPanelHeader` and `DrawerPanelContent`
+  instead.
+- **web-react:** `DrawerCloseButton`, `ModalCloseButton`, `TooltipCloseButton`, and
+  their prop types are removed. Use `CloseButton` instead.
+- **web-react:** Toggle now requires explicit margin management when used within Stack components.
+- **web-react:** Radio now requires explicit margin management when used within Stack components.
+- **web-react:** Checkbox now requires explicit margin management
+  when used within Stack components.
+- **repo:** drop support for Node.js v20 and require Node.js v22 #DS-2597
+- **web,web-react:** `ControlButton` now uses the expanded size scale by default.
+  The existing `small`/`medium`/`large` sizes are remapped to smaller heights and
+  `xsmall`/`xlarge` are added. Remove the
+  `spirit-feature-enable-v5-control-button-expanded-size-scale` CSS class and the
+  `$enable-v5-control-button-expanded-size-scale` Sass flag from your project; to
+  keep the previous rendering, shift the size up (`small` → `medium`,
+  `medium` → `large`, `large` → `xlarge`).
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+- **web,web-react:** rename ScrollView's arrows to controls #DS-2271
+
+### Features
+
+- **codemods:** add `validation-state-icon-prop` codemod for `ValidationText`
+- **codemods:** add FileUpload and File stabilization codemods #DS-2592, closes [#DS-2592](https://github.com/alma-oss/spirit-design-system/issues/DS-2592)
+- **codemods:** add Stack StackItem wrapping codemod for v5 #DS-2639, closes [#DS-2639](https://github.com/alma-oss/spirit-design-system/issues/DS-2639)
+- **codemods:** add support for additional import sources in codemods
+- **codemods:** add v5 UNSTABLE_Header to Header rename codemod
+- **codemods:** enhance codemods with new utility functions and import source handling
+- **codemods:** introduce codemod to remove margins from Icons from Button components #DS-2344, closes [#DS-2344](https://github.com/alma-oss/spirit-design-system/issues/DS-2344)
+- **codemods:** introduce codemod to transfer Item to new structure #DS-2586, closes [#DS-2586](https://github.com/alma-oss/spirit-design-system/issues/DS-2586)
+- **web-react:** add `CloseButton` and remove component-specific close buttons #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+- **web-react:** update Checkbox component to use composition
+- **web-react:** update Radio component to use composition #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web-react:** update Toggle component to use composition #DS-564, closes [#DS-564](https://github.com/alma-oss/spirit-design-system/issues/DS-564)
+- **web,web-react:** expose `DrawerPanel` composition sub-components #DS-2656, closes [#DS-2656](https://github.com/alma-oss/spirit-design-system/issues/DS-2656)
+- **web,web-react:** make form components fluid by default
+- **web,web-react:** remove `ControlButton` expanded size scale feature flag #DS-2216, closes [#DS-2216](https://github.com/alma-oss/spirit-design-system/issues/DS-2216)
+- **web:** align `Tag` with new design #DS-2554, closes [#DS-2554](https://github.com/alma-oss/spirit-design-system/issues/DS-2554)
+
+### Bug Fixes
+
+- **web,web-react:** use padding for Checkbox, Radio, and Toggle vertical spacings
+
+### Documentation
+
+- **repo:** document inherit link migration in the Alert #DS-2379, closes [#DS-2379](https://github.com/alma-oss/spirit-design-system/issues/DS-2379)
+
+### Chores
+
+- **codemods:** remove obsolete v5 stabilization codemods
+- **repo:** drop support for Node.js v20 and require Node.js v22 #DS-2597, closes [#DS-2597](https://github.com/alma-oss/spirit-design-system/issues/DS-2597)
+
+### Code Refactoring
+
+- **web,web-react:** rename ScrollView's arrows to controls #DS-2271, closes [#DS-2271](https://github.com/alma-oss/spirit-design-system/issues/DS-2271)
+
+### Tests
+
+- **codemods:** add renameComponent tests and exclude fixtures from coverage
+
 ## [2.0.8](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-codemods@2.0.7...@alma-oss/spirit-codemods@2.0.8) (2026-06-02)
 
 **Note:** Version bump only for package @alma-oss/spirit-codemods
