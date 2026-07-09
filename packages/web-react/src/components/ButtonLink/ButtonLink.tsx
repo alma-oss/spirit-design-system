@@ -34,9 +34,13 @@ const _ButtonLink = <E extends ElementType = 'a', C = void, S = void>(
   const Component = elementType as ElementType;
 
   const { buttonLinkProps } = useButtonLinkProps(propsWithDefaults);
-  const { classProps, props: modifiedProps } = useButtonLinkStyleProps(restProps);
+  const { classProps, props: modifiedProps, styleProps: buttonLinkStyleProps } = useButtonLinkStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
+  const mergedStyleProps = mergeStyleProps(Component, {
+    classProps,
+    styleProps: { ...buttonLinkStyleProps, ...styleProps },
+    otherProps,
+  });
 
   const handleClick = useLinkClick({
     ...restProps,

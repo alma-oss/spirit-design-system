@@ -1,7 +1,8 @@
 import classNames from 'classnames';
+import { type CSSProperties } from 'react';
 import { CLASS_NAME_DISABLED } from '../../constants';
-import { useClassNamePrefix, useSymmetry } from '../../hooks';
-import { type ButtonColor, type ButtonLinkStyleProps, type ButtonSize } from '../../types';
+import { useClassNamePrefix, useSpacingStyle, useSymmetry } from '../../hooks';
+import { type ButtonColor, type ButtonLinkStyleProps, type ButtonSize, type SpacingType } from '../../types';
 import { getColorSchemeClassName, getEmotionColorNames } from '../../utils';
 import { applyColor, applySize } from '../../utils/classname';
 import { compose } from '../../utils/compose';
@@ -15,8 +16,21 @@ const getButtonLinkSizeClassname = <S = void>(className: string, size: ButtonSiz
 
 const emotionColorNames = getEmotionColorNames() as string[];
 
+interface ButtonLinkCSSProperties extends CSSProperties {
+  [key: string]: string | undefined | number;
+}
+
+export interface ButtonLinkStyles {
+  /** className props */
+  classProps: string;
+  /** Props for the button link element */
+  props: ButtonLinkStyleProps;
+  /** Style props for the element */
+  styleProps: ButtonLinkCSSProperties;
+}
+
 export function useButtonLinkStyleProps<C = void, S = void>(props: Omit<ButtonLinkStyleProps<C, S>, 'routerOptions'>) {
-  const { color, isDisabled, isLoading, isSymmetrical, size, ...restProps } = props;
+  const { color, isDisabled, isLoading, isSymmetrical, size, spacing, ...restProps } = props;
   const colorAsString = String(color);
 
   const buttonClass = useClassNamePrefix('Button');
@@ -39,8 +53,13 @@ export function useButtonLinkStyleProps<C = void, S = void>(props: Omit<ButtonLi
     symmetricalClassName,
   );
 
+  const buttonLinkStyle: ButtonLinkCSSProperties = {
+    ...(useSpacingStyle(spacing as SpacingType, 'button') as ButtonLinkCSSProperties),
+  };
+
   return {
     classProps,
     props: restProps,
+    styleProps: buttonLinkStyle,
   };
 }
