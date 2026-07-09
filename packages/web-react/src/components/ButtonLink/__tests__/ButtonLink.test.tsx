@@ -43,6 +43,14 @@ describe('ButtonLink', () => {
 
   colorSchemeBasicTest(ButtonLink, Object.values(EmotionColors));
 
+  it('should apply spacing style', () => {
+    render(<ButtonLink spacing="space-600" />);
+
+    const element = screen.getByRole('button');
+
+    expect(element).toHaveStyle({ '--button-spacing': 'var(--spirit-space-600)' });
+  });
+
   it('should have default classname', () => {
     render(<ButtonLink />);
 

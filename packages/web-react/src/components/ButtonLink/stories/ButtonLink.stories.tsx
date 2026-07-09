@@ -58,6 +58,11 @@ const meta: Meta<typeof ButtonLink> = {
       control: 'select',
       options: [...Object.values(Sizes)],
     },
+    spacing: {
+      control: 'object',
+      description:
+        'Custom spacing between button link content items. Can be a spacing token (e.g. "space-400") or an object with breakpoint keys.',
+    },
   },
   args: {
     children: 'Click me',
