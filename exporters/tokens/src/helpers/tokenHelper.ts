@@ -14,6 +14,7 @@ import {
 import { exportConfiguration } from '../../config';
 import {
   DEFAULT_DECIMALS,
+  FONT_REPLACEMENT_COUNT,
   FONT_SIZE_BASE_DEFAULT,
   PIXEL_UNIT,
   PX_UNIT,
@@ -269,7 +270,7 @@ const prepareReplacements = (configuration: Record<string, unknown>, name: strin
  * @returns {Array<{ search: string; replace: string }>} - An array of objects with `search` and `replace` keys.
  */
 const getReplacements = (configuration: Record<string, unknown>, name: string) => {
-  const replacements: Array<{ search: string; replace: string }> = [...Array(5)].map(
+  const replacements: Array<{ search: string; replace: string }> = [...Array(FONT_REPLACEMENT_COUNT)].map(
     (_, i) => prepareReplacements(configuration, name, i) as { search: string; replace: string },
   );
 
@@ -346,6 +347,55 @@ const normalizeFontWeight = (fontWeightText: string): number | string => {
   return Number.isNaN(parsedValue) ? fontWeightText : parsedValue;
 };
 
+type FontWeightReplacementRule = {
+  fontName: string;
+  searchWeight: number;
+  replaceWeight: number;
+};
+
+const getFontWeightReplacementRules = (configuration: Record<string, unknown>): FontWeightReplacementRule[] => {
+  const fontReplacements = getReplacements(configuration, 'Font');
+  const fontWeightReplacements = getReplacements(configuration, 'FontWeight');
+
+  return fontReplacements.flatMap((fontRule, index) => {
+    const fontName = fontRule.search.trim();
+    const searchWeight = fontWeightReplacements[index]?.search.trim() ?? '';
+    const replaceWeight = fontWeightReplacements[index]?.replace.trim() ?? '';
+
+    if (!fontName || !searchWeight || !replaceWeight) {
+      return [];
+    }
+
+    return [
+      {
+        fontName,
+        searchWeight: Number(searchWeight),
+        replaceWeight: Number(replaceWeight),
+      },
+    ];
+  });
+};
+
+const applyFontWeightReplacement = (
+  fontFamily: string,
+  normalizedWeight: number | string,
+  configuration: Record<string, unknown>,
+): number | string => {
+  if (typeof normalizedWeight !== 'number') {
+    return normalizedWeight;
+  }
+
+  const fontName = fontFamily.trim();
+
+  for (const rule of getFontWeightReplacementRules(configuration)) {
+    if (fontName === rule.fontName && normalizedWeight === rule.searchWeight) {
+      return rule.replaceWeight;
+    }
+  }
+
+  return normalizedWeight;
+};
+
 export const typographyValue = (
   { fontFamily, fontSize, fontWeight, lineHeight }: TypographyTokenValue,
   isItalic: boolean,
@@ -356,7 +406,11 @@ export const typographyValue = (
   const fontSizeUnit = fontSize?.unit === PIXEL_UNIT ? PX_UNIT : fontSize?.unit || '';
   const fontSizeMeasure = fontSize?.measure ?? 0;
   const italicFromWeight = fontWeight?.text?.toLowerCase().includes('italic');
-  const fontWeightValue = normalizeFontWeight(fontWeight.text);
+  const fontWeightValue = applyFontWeightReplacement(
+    fontFamily.text,
+    normalizeFontWeight(fontWeight.text),
+    getExportConfiguration(),
+  );
 
   let fontSizeValue: string;
   if (fontSizeUnit === PX_UNIT && fontSizeMeasure > 0 && baseFontSize > 0) {

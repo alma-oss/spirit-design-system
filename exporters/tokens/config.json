@@ -11,7 +11,7 @@
     "type": "string",
     "default": "",
     "title": "Search",
-    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
+    "description": "Specify the font name to search for in the fontFamily attribute. Also used as the font name when replacing font-weight in the same group. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
     "category": "1. Replace font"
   },
   {
@@ -23,11 +23,29 @@
     "category": "1. Replace font"
   },
   {
+    "key": "searchFontWeight1",
+    "type": "enum",
+    "options": ["", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    "default": "",
+    "title": "Search font weight",
+    "description": "When set together with replace font weight, typography tokens using the searched font name with this weight will have their font-weight replaced.",
+    "category": "1. Replace font"
+  },
+  {
+    "key": "replaceFontWeight1",
+    "type": "enum",
+    "options": ["", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    "default": "",
+    "title": "Replace font weight",
+    "description": "The font-weight value that will replace the searched weight when the font name matches.",
+    "category": "1. Replace font"
+  },
+  {
     "key": "searchFont2",
     "type": "string",
     "default": "",
     "title": "Search",
-    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
+    "description": "Specify the font name to search for in the fontFamily attribute. Also used as the font name when replacing font-weight in the same group. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
     "category": "2. Replace font"
   },
   {
@@ -39,11 +57,29 @@
     "category": "2. Replace font"
   },
   {
+    "key": "searchFontWeight2",
+    "type": "enum",
+    "options": ["", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    "default": "",
+    "title": "Search font weight",
+    "description": "When set together with replace font weight, typography tokens using the searched font name with this weight will have their font-weight replaced.",
+    "category": "2. Replace font"
+  },
+  {
+    "key": "replaceFontWeight2",
+    "type": "enum",
+    "options": ["", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    "default": "",
+    "title": "Replace font weight",
+    "description": "The font-weight value that will replace the searched weight when the font name matches.",
+    "category": "2. Replace font"
+  },
+  {
     "key": "searchFont3",
     "type": "string",
     "default": "",
     "title": "Search",
-    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
+    "description": "Specify the font name to search for in the fontFamily attribute. Also used as the font name when replacing font-weight in the same group. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
     "category": "3. Replace font"
   },
   {
@@ -55,11 +91,29 @@
     "category": "3. Replace font"
   },
   {
+    "key": "searchFontWeight3",
+    "type": "enum",
+    "options": ["", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    "default": "",
+    "title": "Search font weight",
+    "description": "When set together with replace font weight, typography tokens using the searched font name with this weight will have their font-weight replaced.",
+    "category": "3. Replace font"
+  },
+  {
+    "key": "replaceFontWeight3",
+    "type": "enum",
+    "options": ["", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    "default": "",
+    "title": "Replace font weight",
+    "description": "The font-weight value that will replace the searched weight when the font name matches.",
+    "category": "3. Replace font"
+  },
+  {
     "key": "searchFont4",
     "type": "string",
     "default": "",
     "title": "Search",
-    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
+    "description": "Specify the font name to search for in the fontFamily attribute. Also used as the font name when replacing font-weight in the same group. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
     "category": "4. Replace font"
   },
   {
@@ -71,11 +125,29 @@
     "category": "4. Replace font"
   },
   {
+    "key": "searchFontWeight4",
+    "type": "enum",
+    "options": ["", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    "default": "",
+    "title": "Search font weight",
+    "description": "When set together with replace font weight, typography tokens using the searched font name with this weight will have their font-weight replaced.",
+    "category": "4. Replace font"
+  },
+  {
+    "key": "replaceFontWeight4",
+    "type": "enum",
+    "options": ["", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    "default": "",
+    "title": "Replace font weight",
+    "description": "The font-weight value that will replace the searched weight when the font name matches.",
+    "category": "4. Replace font"
+  },
+  {
     "key": "searchFont5",
     "type": "string",
     "default": "",
     "title": "Search",
-    "description": "Specify the font name to search for in the fontFamily attribute. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
+    "description": "Specify the font name to search for in the fontFamily attribute. Also used as the font name when replacing font-weight in the same group. More in README.md https://github.com/alma-oss/spirit-design-system/tree/main/exporters/tokens#font-family-replacement",
     "category": "5. Replace font"
   },
   {
@@ -84,6 +156,24 @@
     "default": "",
     "title": "Replace",
     "description": "Specify the font name that will replace the searched font in the fontFamily attribute.",
+    "category": "5. Replace font"
+  },
+  {
+    "key": "searchFontWeight5",
+    "type": "enum",
+    "options": ["", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    "default": "",
+    "title": "Search font weight",
+    "description": "When set together with replace font weight, typography tokens using the searched font name with this weight will have their font-weight replaced.",
+    "category": "5. Replace font"
+  },
+  {
+    "key": "replaceFontWeight5",
+    "type": "enum",
+    "options": ["", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    "default": "",
+    "title": "Replace font weight",
+    "description": "The font-weight value that will replace the searched weight when the font name matches.",
     "category": "5. Replace font"
   }
 ]

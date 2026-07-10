@@ -59,3 +59,11 @@ font-style: italic,
 font-weight: 700,
 line-height: 1.3,
 )`;
+
+export const expectedTypographyWithFontWeightReplacement = `(
+font-family: "'Inter', sans-serif",
+font-size: 2.5rem,
+font-style: italic,
+font-weight: 400,
+line-height: 1.3,
+)`;

@@ -23,3 +23,4 @@ export const TOKEN_COLLECTION_PROPERTY_NAME = 'Collection';
 export const TOKEN_COLLECTION_THEMES_NAME = 'Theme tokens';
 export const TYPOGRAPHY_KEY = 'styles';
 export const TYPOGRAPHY_SUBSTITUTE_FONT = 'sans-serif';
+export const FONT_REPLACEMENT_COUNT = 5;
