@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@5.0.0...@alma-oss/spirit-web-react@5.1.0) (2026-07-13)
+
+### Features
+
+- **web-react:** introduce `spacing` prop for ButtonLink to set gap #DS-2344, closes [#DS-2344](https://github.com/alma-oss/spirit-design-system/issues/DS-2344)
+
+### Bug Fixes
+
+- **web-react:** add missing export of the CharacterCounter component
+- **web, web-react:** use stretch alignment for FieldGroup children flex wrap
+
+### Chores
+
+- **repo:** remove ai co-author trailers from changelogs #DS-2670, closes [#DS-2670](https://github.com/alma-oss/spirit-design-system/issues/DS-2670)
+
 ## [5.0.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@4.9.0...@alma-oss/spirit-web-react@5.0.0) (2026-07-08)
 
 ### ⚠ BREAKING CHANGES

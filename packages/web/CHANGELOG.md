@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@5.0.0...@alma-oss/spirit-web@5.0.1) (2026-07-13)
+
+### Bug Fixes
+
+- **web, web-react:** use stretch alignment for FieldGroup children flex wrap
+
+### Chores
+
+- **repo:** remove ai co-author trailers from changelogs #DS-2670, closes [#DS-2670](https://github.com/alma-oss/spirit-design-system/issues/DS-2670)
+
 ## [5.0.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@4.8.0...@alma-oss/spirit-web@5.0.0) (2026-07-08)
 
 ### ⚠ BREAKING CHANGES

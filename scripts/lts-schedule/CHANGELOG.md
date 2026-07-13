@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-lts-schedule@2.1.1...@alma-oss/spirit-lts-schedule@2.1.2) (2026-07-13)
+
+### Documentation
+
+- **repo:** update release schedule with v5 status
+
 ## [2.1.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-lts-schedule@2.1.0...@alma-oss/spirit-lts-schedule@2.1.1) (2026-03-04)
 
 ### Chores

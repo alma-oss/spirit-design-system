@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.2.0...@alma-oss/spirit-tokens-exporter@4.3.0) (2026-07-13)
+
+### Features
+
+- **exporter-tokens:** include radius tokens in devices config
+
+### Chores
+
+- **exporter-tokens:** update exporter.cjs
+
 ## [4.2.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.1.1...@alma-oss/spirit-tokens-exporter@4.2.0) (2026-07-08)
 
 ### Features

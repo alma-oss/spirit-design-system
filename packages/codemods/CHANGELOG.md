@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-codemods@3.0.0...@alma-oss/spirit-codemods@3.0.1) (2026-07-13)
+
+### Chores
+
+- **repo:** remove ai co-author trailers from changelogs #DS-2670, closes [#DS-2670](https://github.com/alma-oss/spirit-design-system/issues/DS-2670)
+
 ## [3.0.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-codemods@2.0.8...@alma-oss/spirit-codemods@3.0.0) (2026-07-08)
 
 ### ⚠ BREAKING CHANGES
