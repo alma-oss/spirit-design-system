@@ -28,8 +28,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   keep the previous rendering, shift the size up (`small` → `medium`,
   `medium` → `large`, `large` → `xlarge`).
 
-Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
-
 - **web,web-react:** rename ScrollView's arrows to controls #DS-2271
 
 ### Features

@@ -68,8 +68,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   keep the previous rendering, shift the size up (`small` → `medium`,
   `medium` → `large`, `large` → `xlarge`).
 
-Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
-
 - **web:** remove Stack StackItem backwards-compat CSS #DS-2639
 - **design-tokens,web:** rename component tokens from `header` to `navigation` #DS-2589
 - **web:** stabilize UNSTABLE_Header and remove deprecated Header scss
@@ -116,8 +114,6 @@ Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
   Sass variable and the `spirit-feature-enable-v5-tag-appearance` CSS class from
   your project — they have no effect. See the Tag: Appearance Feature Flag Removed
   sections in the web and web-react package Migration Guides to version 5.
-
-Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 
 - **web,web-react:** remove deprecated `row` direction value from `Flex` #DS-1629
 - **web:** Remove `.Slider__input` and replace it with `.Slider`.
