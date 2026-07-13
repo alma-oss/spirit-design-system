@@ -1,0 +1,992 @@
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Static Toast</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <!-- Toast show and hide demo: start -->
+      <fieldset
+        id="toast-in-dom-toggle"
+        class="mb-0"
+        style="border: 0;"
+      >
+        <legend class="mb-500">Show hidden toast in the DOM:</legend>
+        <button
+          class="Button Button--medium Button--primary"
+          data-spirit-toggle="toast"
+          data-spirit-target="#my-hidden-dismissible-toast"
+          onclick="this.setAttribute('disabled', 'disabled')"
+          aria-expanded="false"
+        >
+          Show
+        </button>
+      </fieldset>
+      <!-- Toast show and hide demo: end -->
+
+      <div
+        class="Toast Toast--top Toast--center"
+        role="log"
+      >
+        <div class="Toast__queue">
+
+          <div
+            id="my-hidden-dismissible-toast"
+            class="ToastBar ToastBar--warning ToastBar--dismissible is-hidden color-scheme-on-emotion-warning-basic"
+          >
+            <div class="ToastBar__box">
+              <div class="ToastBar__container">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#warning" />
+                </svg>
+                <div class="ToastBar__content">
+                  <div class="text-truncate-multiline">I was hidden and you exposed me!</div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+                data-spirit-dismiss="toast"
+                data-spirit-target="#my-hidden-dismissible-toast"
+                aria-controls="my-hidden-dismissible-toast"
+                aria-expanded="true"
+              >
+                <svg
+                  class="Icon"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+                <span class="accessibility-hidden">Close</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Dynamic Toast Queue</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <!-- Toast alignment demo: start -->
+      <script>
+        const setToastAlignmentX = (event, selector) => {
+          const toastElement = document.querySelector(selector);
+
+          toastElement.classList.remove('Toast--left', 'Toast--center', 'Toast--right');
+          toastElement.classList.add(`Toast--${event.target.value}`);
+        };
+
+        const setToastAlignmentY = (event, selector) => {
+          const toastElement = document.querySelector(selector);
+
+          toastElement.classList.remove('Toast--top', 'Toast--bottom');
+          toastElement.classList.add(`Toast--${event.target.value}`);
+        };
+
+        const setToastCollapsing = (event, selector) => {
+          const toastElement = document.querySelector(selector);
+
+          toastElement.classList.toggle('Toast--collapsible');
+        };
+      </script>
+
+      <form>
+        <fieldset
+          onchange="setToastCollapsing(event, '#toast-example')"
+          style="border: 0;"
+        >
+          <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+            <input
+              type="checkbox"
+              id="toast-is-collapsible"
+              class="Checkbox"
+              name="is-collapsible"
+              autocomplete="off"
+              checked
+            />
+            <div>
+              <label
+                class="Label cursor-pointer"
+                for="toast-is-collapsible"
+              >Collapsible</label>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset
+          onchange="setToastAlignmentY(event, '#toast-example')"
+          style="border: 0;"
+        >
+          <legend>Vertical alignment:</legend>
+          <div class="my-500">
+            <div class="Flex Flex--horizontal Flex--inline mr-600 py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="radio"
+                id="toast-alignment-top"
+                name="toast-alignment-y"
+                value="top"
+                class="Radio"
+                autocomplete="off"
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="toast-alignment-top"
+                >Top</label>
+              </div>
+            </div>
+            <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="radio"
+                id="toast-alignment-bottom"
+                name="toast-alignment-y"
+                value="bottom"
+                class="Radio"
+                autocomplete="off"
+                checked
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="toast-alignment-bottom"
+                >Bottom</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset
+          onchange="setToastAlignmentX(event, '#toast-example')"
+          style="border: 0;"
+        >
+          <legend>Horizontal alignment:</legend>
+          <div class="my-500">
+            <div class="Flex Flex--horizontal Flex--inline mr-600 py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="radio"
+                id="toast-alignment-left"
+                name="toast-alignment-x"
+                value="left"
+                class="Radio"
+                autocomplete="off"
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="toast-alignment-left"
+                >Left</label>
+              </div>
+            </div>
+            <div class="Flex Flex--horizontal Flex--inline mr-600 py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="radio"
+                id="toast-alignment-center"
+                name="toast-alignment-x"
+                value="center"
+                class="Radio"
+                autocomplete="off"
+                checked
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="toast-alignment-center"
+                >Center</label>
+              </div>
+            </div>
+            <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="radio"
+                id="toast-alignment-right"
+                name="toast-alignment-x"
+                value="right"
+                class="Radio"
+                autocomplete="off"
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="toast-alignment-right"
+                >Right</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      <!-- Toast alignment demo: end -->
+
+      <!-- Dynamic queue demo: start -->
+      <script type="module">
+        import { addDynamicToast, clearQueue } from './dynamic-toast.mjs';
+
+        window.addDynamicToast = addDynamicToast;
+        window.clearQueue = clearQueue;
+
+        // Disable interval field if auto close is not checked.
+        const autoCloseIntervalField = document.getElementById('toast-auto-close-interval');
+        const enableAutoCloseCheckbox = document.getElementById('toast-enable-auto-close');
+
+        enableAutoCloseCheckbox.addEventListener('change', (event) => {
+          autoCloseIntervalField.disabled = !event.target.checked;
+        });
+
+        // Initialize the field state.
+        autoCloseIntervalField.disabled = !enableAutoCloseCheckbox.checked;
+
+        // Disable link props fields if enable link is not checked.
+        const linkField = document.getElementById('toast-link');
+        const enableLinkFieldCheckbox = document.getElementById('toast-enable-link');
+
+        enableLinkFieldCheckbox.addEventListener('change', (event) => {
+          linkField.disabled = !event.target.checked;
+        });
+
+        // Initialize the field state.
+        linkField.disabled = !enableLinkFieldCheckbox.checked;
+      </script>
+
+      <form>
+        <fieldset style="border: 0;">
+          <legend class="mb-500">New Toast:</legend>
+          <div class="Stack Stack--spacing">
+            <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+              <label
+                for="toast-color"
+                class="Label"
+              >Color</label>
+              <div class="InputContainer InputContainer--fill InputContainer--medium">
+                <select
+                  id="toast-color"
+                  name="color"
+                  autocomplete="off"
+                >
+                  <option value="neutral">Neutral</option>
+                  <option value="success">Success</option>
+                  <option value="warning">Warning</option>
+                  <option value="danger">Danger</option>
+                  <option value="informative">Informative</option>
+                </select>
+                <div class="InputAddon">
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="checkbox"
+                id="toast-has-icon"
+                class="Checkbox"
+                name="is-dismissible"
+                autocomplete="off"
+                checked
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="toast-has-icon"
+                >Has icon</label>
+              </div>
+            </div>
+            <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="checkbox"
+                id="toast-is-dismissible"
+                class="Checkbox"
+                name="is-dismissible"
+                autocomplete="off"
+                checked
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="toast-is-dismissible"
+                >Dismissible</label>
+              </div>
+            </div>
+            <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="checkbox"
+                id="toast-enable-auto-close"
+                class="Checkbox"
+                name="enable-auto-close"
+                autocomplete="off"
+                checked
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="toast-enable-auto-close"
+                >Enable AutoClose</label>
+              </div>
+            </div>
+            <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+              <label
+                for="toast-auto-close-interval"
+                class="Label"
+              >AutoClose interval (ms)</label>
+              <div class="InputContainer InputContainer--fill InputContainer--medium">
+                <input
+                  type="number"
+                  min="0"
+                  max="60000"
+                  step="500"
+                  value="3000"
+                  id="toast-auto-close-interval"
+                  name="auto-close-interval"
+                />
+              </div>
+            </div>
+            <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+              <label
+                for="toast-message"
+                class="Label"
+              >Message</label>
+              <div class="InputContainer InputContainer--fill InputContainer--medium">
+                <textarea
+                  id="toast-message"
+                  autocomplete="off"
+                  aria-describedby="toast-message-helper-text"
+                >This is a new toast message.</textarea>
+              </div>
+              <div
+                id="toast-message-helper-text"
+                class="HelperText"
+              >Can contain HTML</div>
+            </div>
+            <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+              <input
+                type="checkbox"
+                id="toast-enable-link"
+                class="Checkbox"
+                name="enable-link"
+                autocomplete="off"
+                checked
+              />
+              <div>
+                <label
+                  class="Label cursor-pointer"
+                  for="toast-enable-link"
+                >Add link</label>
+              </div>
+            </div>
+            <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+              <label
+                for="toast-link"
+                class="Label"
+              >Link</label>
+              <div class="InputContainer InputContainer--fill InputContainer--medium">
+                <textarea
+                  id="toast-link"
+                  autocomplete="off"
+                  aria-describedby="toast-link-helper-text"
+                >This is a toast link.</textarea>
+              </div>
+              <div
+                id="toast-link-helper-text"
+                class="HelperText"
+              >Can contain HTML</div>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="Button Button--medium Button--primary"
+                onclick="addDynamicToast(event, 'toast-example');"
+              >
+                Add
+              </button>
+              <button
+                type="button"
+                class="Button Button--medium Button--secondary"
+                onclick="clearQueue(event, 'toast-example')"
+              >
+                Clear queue
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      <!-- Dynamic queue demo: end -->
+
+      <!-- Toast and virtual keyboard demo: start -->
+      <script>
+        // Experimental, Chrome 94+ on Android only:
+        // Enable CSS to detect the presence of virtual keyboard.
+        if ('virtualKeyboard' in navigator) {
+          navigator.virtualKeyboard.overlaysContent = true;
+        }
+      </script>
+      <form>
+        <fieldset style="border: 0;">
+          <legend class="mb-500">Virtual keyboard interaction:</legend>
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+            <label
+              for="text-field-for-focus"
+              class="Label"
+            >In Chrome on Android, tap into this text field to
+              see how Toast position updates:</label>
+            <div class="InputContainer InputContainer--fill InputContainer--medium">
+              <input
+                type="text"
+                id="text-field-for-focus"
+                name="default"
+                placeholder="Tap here!"
+              />
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      <!-- Toast and virtual keyboard demo: end -->
+
+      <div
+        id="toast-example"
+        class="Toast Toast--bottom Toast--center Toast--collapsible"
+        role="log"
+      >
+        <div
+          class="Toast__queue"
+          data-spirit-element="toast-queue"
+        >
+
+          <template data-spirit-snippet="item">
+            <div
+              class="ToastBar is-hidden color-scheme-on-neutral-basic"
+              data-spirit-color="neutral"
+              data-spirit-populate-field="item"
+            >
+              <div class="ToastBar__box">
+                <div class="ToastBar__container">
+                  <svg
+                    class="Icon"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                    data-spirit-populate-field="icon"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#info" />
+                  </svg>
+                  <div class="ToastBar__content">
+                    <div
+                      class="text-truncate-multiline"
+                      data-spirit-populate-field="message"
+                    ></div>
+                    <a
+                      class="ToastBar__link"
+                      data-spirit-populate-field="link"
+                    ></a>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+                  data-spirit-populate-field="close-button"
+                  data-spirit-dismiss="toast"
+                  aria-expanded="true"
+                >
+                  <svg
+                    class="Icon"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#close" />
+                  </svg>
+                  <span class="accessibility-hidden">Close</span>
+                </button>
+              </div>
+            </div>
+          </template>
+
+          <div
+            id="my-dismissible-toast"
+            class="ToastBar ToastBar--success ToastBar--dismissible is-visible color-scheme-on-emotion-success-basic"
+          >
+            <div class="ToastBar__box">
+              <div class="ToastBar__container">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#success" />
+                </svg>
+                <div class="ToastBar__content">
+                  <div class="text-truncate-multiline">I was first!</div>
+                  <a
+                    href="#"
+                    class="ToastBar__link link-underlined"
+                  >Action</a>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+                data-spirit-dismiss="toast"
+                data-spirit-target="#my-dismissible-toast"
+                aria-controls="my-dismissible-toast"
+                aria-expanded="true"
+              >
+                <svg
+                  class="Icon"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+                <span class="accessibility-hidden">Close</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="my-other-dismissible-toast"
+            class="ToastBar ToastBar--informative ToastBar--dismissible is-visible color-scheme-on-emotion-informative-basic"
+          >
+            <div class="ToastBar__box">
+              <div class="ToastBar__container">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#info" />
+                </svg>
+                <div class="ToastBar__content">
+                  <div class="text-truncate-multiline">I appeared later. This toast has a long message that wraps
+                    automatically.
+                  </div>
+                  <a
+                    href="#"
+                    class="ToastBar__link link-underlined"
+                  >Action</a>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+                data-spirit-dismiss="toast"
+                data-spirit-target="#my-other-dismissible-toast"
+                aria-controls="my-other-dismissible-toast"
+                aria-expanded="true"
+              >
+                <svg
+                  class="Icon"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+                <span class="accessibility-hidden">Close</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Content Variations</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="ToastBar ToastBar--neutral color-scheme-on-neutral-basic">
+        <div class="ToastBar__box">
+          <div class="ToastBar__container">
+            <div class="ToastBar__content">
+              <div class="text-truncate-multiline">Message only</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ToastBar ToastBar--neutral color-scheme-on-neutral-basic">
+        <div class="ToastBar__box">
+          <div class="ToastBar__container">
+            <div class="ToastBar__content">
+              <div class="text-truncate-multiline">Message with action</div>
+              <a
+                href="#"
+                class="ToastBar__link link-underlined"
+              >Action</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ToastBar ToastBar--neutral color-scheme-on-neutral-basic">
+        <div class="ToastBar__box">
+          <div class="ToastBar__container">
+            <div class="ToastBar__content">
+              <div class="text-truncate-multiline">When the text is long and reaches the maximum width limit, the action
+                automatically wraps to the next line.
+              </div>
+              <a
+                href="#"
+                class="ToastBar__link link-underlined"
+              >Action</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ToastBar ToastBar--neutral color-scheme-on-neutral-basic">
+        <div class="ToastBar__box">
+          <div class="ToastBar__container">
+            <svg
+              class="Icon"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#info" />
+            </svg>
+            <div class="ToastBar__content">
+              <div class="text-truncate-multiline">Message with icon and action</div>
+              <a
+                href="#"
+                class="ToastBar__link link-underlined"
+              >Action</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="my-toast-variation-dismissible"
+        class="ToastBar ToastBar--neutral ToastBar--dismissible color-scheme-on-neutral-basic"
+      >
+        <div class="ToastBar__box">
+          <div class="ToastBar__container">
+            <div class="ToastBar__content">
+              <div class="text-truncate-multiline">Dismissible message</div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+            data-spirit-dismiss="toast"
+            aria-controls="my-toast-variation-dismissible"
+            aria-expanded="true"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="my-toast-variation-dismissible-with-icon-and-action"
+        class="ToastBar ToastBar--neutral ToastBar--dismissible color-scheme-on-neutral-basic"
+      >
+        <div class="ToastBar__box">
+          <div class="ToastBar__container">
+            <svg
+              class="Icon"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#download" />
+            </svg>
+            <div class="ToastBar__content">
+              <div class="text-truncate-multiline">Dismissible message with custom icon and action</div>
+              <a
+                href="#"
+                class="ToastBar__link link-underlined"
+              >Action</a>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+            data-spirit-dismiss="toast"
+            aria-controls="my-toast-variation-dismissible-with-icon-and-action"
+            aria-expanded="true"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Colors</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div
+        id="my-toast-color-neutral"
+        class="ToastBar ToastBar--neutral ToastBar--dismissible color-scheme-on-neutral-basic"
+      >
+        <div class="ToastBar__box">
+          <div class="ToastBar__container">
+            <svg
+              class="Icon"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#info" />
+            </svg>
+            <div class="ToastBar__content">
+              <div class="text-truncate-multiline">Neutral</div>
+              <a
+                href="#"
+                class="ToastBar__link link-underlined"
+              >Action</a>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+            data-spirit-dismiss="toast"
+            aria-controls="my-toast-color-neutral"
+            aria-expanded="true"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="my-toast-color-informative"
+        class="ToastBar ToastBar--informative ToastBar--dismissible color-scheme-on-emotion-informative-basic"
+      >
+        <div class="ToastBar__box">
+          <div class="ToastBar__container">
+            <svg
+              class="Icon"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#info" />
+            </svg>
+            <div class="ToastBar__content">
+              <div class="text-truncate-multiline">Informative</div>
+              <a
+                href="#"
+                class="ToastBar__link link-underlined"
+              >Action</a>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+            data-spirit-dismiss="toast"
+            aria-controls="my-toast-color-informative"
+            aria-expanded="true"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="my-toast-color-success"
+        class="ToastBar ToastBar--success ToastBar--dismissible color-scheme-on-emotion-success-basic"
+      >
+        <div class="ToastBar__box">
+          <div class="ToastBar__container">
+            <svg
+              class="Icon"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#success" />
+            </svg>
+            <div class="ToastBar__content">
+              <div class="text-truncate-multiline">Success</div>
+              <a
+                href="#"
+                class="ToastBar__link link-underlined"
+              >Action</a>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+            data-spirit-dismiss="toast"
+            aria-controls="my-toast-color-success"
+            aria-expanded="true"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="my-toast-color-warning"
+        class="ToastBar ToastBar--warning ToastBar--dismissible color-scheme-on-emotion-warning-basic"
+      >
+        <div class="ToastBar__box">
+          <div class="ToastBar__container">
+            <svg
+              class="Icon"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#warning" />
+            </svg>
+            <div class="ToastBar__content">
+              <div class="text-truncate-multiline">Warning</div>
+              <a
+                href="#"
+                class="ToastBar__link link-underlined"
+              >Action</a>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+            data-spirit-dismiss="toast"
+            aria-controls="my-toast-color-warning"
+            aria-expanded="true"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="my-toast-color-danger"
+        class="ToastBar ToastBar--danger ToastBar--dismissible color-scheme-on-emotion-danger-basic"
+      >
+        <div class="ToastBar__box">
+          <div class="ToastBar__container">
+            <svg
+              class="Icon"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#danger" />
+            </svg>
+            <div class="ToastBar__content">
+              <div class="text-truncate-multiline">Danger</div>
+              <a
+                href="#"
+                class="ToastBar__link link-underlined"
+              >Action</a>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="ControlButton ControlButton--medium text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+            data-spirit-dismiss="toast"
+            aria-controls="my-toast-color-danger"
+            aria-expanded="true"
+          >
+            <svg
+              class="Icon"
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+            <span class="accessibility-hidden">Close</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
