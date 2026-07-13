@@ -60,7 +60,7 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
               {label}
             </Label>
           )}
-          <Flex direction="vertical" alignmentX="left" spacingY="space-500">
+          <Flex direction="vertical" spacingY="space-500">
             {children}
           </Flex>
           <HelperText id={`${id}-helper-text`} registerAria={register} helperText={helperText} />

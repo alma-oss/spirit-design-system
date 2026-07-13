@@ -10,7 +10,10 @@ To distribute fields inside the FieldGroup, use the [Flex][readme-flex] componen
 <fieldset class="border-0">
   <legend class="accessibility-hidden">Label</legend>
   <div class="Label" aria-hidden="true">Label</div>
-  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+  <div
+    class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
+    style="--flex-spacing-y: var(--spirit-space-500);"
+  >
     <!-- Form fields… -->
   </div>
 </fieldset>
@@ -39,7 +42,10 @@ element.
 <fieldset class="border-0">
   <legend class="accessibility-hidden">Label</legend>
   <div class="Label Label--required" aria-hidden="true">Label</div>
-  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+  <div
+    class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
+    style="--flex-spacing-y: var(--spirit-space-500);"
+  >
     <!-- Form fields… -->
   </div>
 </fieldset>
@@ -59,7 +65,10 @@ code.
 <fieldset class="border-0">
   <legend class="accessibility-hidden">Label</legend>
   <!-- div.Label is omitted -->
-  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+  <div
+    class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
+    style="--flex-spacing-y: var(--spirit-space-500);"
+  >
     <!-- Form fields… -->
   </div>
 </fieldset>
@@ -75,7 +84,10 @@ To render helper text, use the [HelperText][readme-helper-text] component:
 <fieldset class="border-0" aria-describedby="field-group-helper-text">
   <legend class="accessibility-hidden">Label</legend>
   <div class="Label" aria-hidden="true">Label</div>
-  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+  <div
+    class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
+    style="--flex-spacing-y: var(--spirit-space-500);"
+  >
     <!-- Form fields… -->
   </div>
   <div class="HelperText" id="field-group-helper-text">Helper text</div>
@@ -110,7 +122,10 @@ disabled styling on all elements.
 <fieldset class="border-0" disabled>
   <legend class="accessibility-hidden">Label</legend>
   <div class="Label" aria-hidden="true">Label</div>
-  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+  <div
+    class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
+    style="--flex-spacing-y: var(--spirit-space-500);"
+  >
     <div>
       <label for="text-field" class="Label Label--disabled">Label</label>
       <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
@@ -129,7 +144,10 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
 <fieldset class="border-0" aria-describedby="field-group-success-validation-text">
   <legend class="accessibility-hidden">Label</legend>
   <div class="Label" aria-hidden="true">Label</div>
-  <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
+  <div
+    class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
+    style="--flex-spacing-y: var(--spirit-space-500);"
+  >
     <!-- Form fields… -->
   </div>
   <div id="field-group-success-validation-text" class="ValidationText ValidationText--success">Validation text</div>
