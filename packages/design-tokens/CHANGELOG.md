@@ -9,7 +9,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - **repo:** drop support for Node.js v20 and require Node.js v22 #DS-2597
 - **design-tokens,web:** rename component tokens from `header` to `navigation` #DS-2589
-- **design-tokens,web:** Filled tokens are now renamed to fill.
+- **design-tokens,web:** rename Form Field Filled tokens to Fill #DS-2502
 
 ### Features
 

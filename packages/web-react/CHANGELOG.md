@@ -26,79 +26,46 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **web,web-react:** drop examples with emphasized label in the Toggle and Checkbox
 - **web,web-react:** remove formFieldMode and vertical spacing from form field components
 - **web,web-react:** replace `link-stretched` with `element-stretched` helper class #DS-2653
-- **web,web-react:** align File and FileUpload with design changes #DS-2554
 - **web:** align Pagination with new design #DS-2554
 - **web-react:** align `Toast` with new design #DS-2554
 - **web:** align `Tag` with new design #DS-2554
 - **web:** align `Navigation` with new design #DS-2554
 - **web:** align `Button` sizes with action typography tokens #DS-2554
-- **web,web-react:** Spacings in Checkbox, Radio and Toggle are
-  now set using padding utility. Review all your usages.
+- **web,web-react:** use padding for Checkbox, Radio, and Toggle vertical spacings
 - **web-react:** remove `hideOnCollapse` from `UncontrolledCollapse`
-- **web,web-react:** the `closeButton` prop on `DrawerPanel` is removed.
-  Compose the panel from `DrawerPanelHeader` and `DrawerPanelContent`
-  instead.
-- **web-react:** `DrawerCloseButton`, `ModalCloseButton`, `TooltipCloseButton`, and
-  their prop types are removed. Use `CloseButton` instead.
-- **web-react:** Toggle now requires explicit margin management when used within Stack components.
+- **web,web-react:** expose `DrawerPanel` composition sub-components #DS-2656
+- **web-react:** add `CloseButton` and remove component-specific close buttons #DS-2216
+- **web-react:** update Toggle component to use composition #DS-564
 - **web,web-react:** replace `TooltipCloseButton` button with `ControlButton`
 - **web,web-react:** replace `ToastBar` close button with `ControlButton` #DS-2216
 - **web,web-react:** replace `Button` with `ControlButton` in `ModalCloseButton` #DS-2216
 - **web,web-react:** replace `DrawerCloseButton` with `ControlButton` in `Drawer` #DS-2216
-- **web-react:** Radio now requires explicit margin management when used within Stack components.
-- **web-react:** Checkbox now requires explicit margin management
-  when used within Stack components.
-- **web,web-react:** Item no longer accepts label, helperText, iconName,
-  or selectionDecorator props. Use children with startSlot/endSlot
-  and compose Label, HelperText, ValidationText, and Icon explicitly.
-- **web,web-react:** Item now renders as a div by default instead of a button.
-  Set elementType="button" when button semantics are needed.
-- **web,web-react:** The web Item markup now uses Item**content
-  and Item**slot instead of Item\_\_icon and grid-positioned Label/HelperText item styles.
-- **web,web-react:** `--disabled` modifier classes are removed from the migrated components — consumers
-  should apply the disabled utility class alongside the native disabled attribute.
+- **web-react:** update Radio component to use composition #DS-564
+- **web-react:** update Checkbox component to use composition
+- **web,web-react:** compose Item content with slots #DS-2586
+- **web,web-react:** use disabled utility for disabled color-scheme states #DS-2468
 - **repo:** drop support for Node.js v20 and require Node.js v22 #DS-2597
-- **web-react:** Remove FileUploader compound component and stabilize
-  UNSTABLE_FileUpload and UNSTABLE_File as FileUpload and File.
-- **web-react:** removed indicator for selected state in vertical navigation
-- **web,web-react:** `ControlButton` now uses the expanded size scale by default.
-  The existing `small`/`medium`/`large` sizes are remapped to smaller heights and
-  `xsmall`/`xlarge` are added. Remove the
-  `spirit-feature-enable-v5-control-button-expanded-size-scale` CSS class and the
-  `$enable-v5-control-button-expanded-size-scale` Sass flag from your project; to
-  keep the previous rendering, shift the size up (`small` → `medium`,
-  `medium` → `large`, `large` → `xlarge`).
-
+- **web-react:** stabilize FileUpload and File, remove FileUploader #DS-2592
+- **web-react:** introduce NavigationItem slots #DS-2523
+- **web,web-react:** remove `ControlButton` expanded size scale feature flag #DS-2216
 - **web-react:** remove Stack StackItem deprecation notice #DS-2639
 - **web-react:** stabilize UNSTABLE_Header and remove deprecated Header
 - **web,web-react:** rename ScrollView's arrows to controls #DS-2271
-- **web,web-react:** The `ValidationText--inline` modifier and `formFieldMode`
-  handling in `ValidationText` have been removed. Use default `ValidationText`
-  styling for Checkbox and Toggle validation messages.
+- **web,web-react:** remove inline modifier from `ValidationText` components
 - **web-react:** rename hasValidationStateIcon to validationStateIcon #DS-2490
 - **web,web-react:** drop has prefix from Stack CSS modifiers #DS-1916
 - **web,web-react:** derive `ControlButton` colors from color scheme #DS-2591
 - **web,web-react:** replace check-plain with success icon for success state #DS-2098
-- **web:** Visual BC of all form fields
-- **web,web-react:** If Icon component parent sets Icon size, it is used.
-  Icon `boxSize` overrides this value.
-- **web,web-react:** `.Tag--<color>` and `.Tag--subtle` CSS rules are no
-  longer emitted. Consumers must apply a `color-scheme-on-*` class (the
-  React component does this automatically).
-- **web,web-react:** web `Button` emotion variants now require color-scheme
-  helper classes for surface colors in markup examples.
-- **web,web-react:** TooltipPopover now requires color-scheme helper for surface colors
-- **web,web-react:** web `Alert` variants now require color-scheme classes for surface colors.
+- **web:** update typography in ValidationText to use regular weight #DS-2472
+- **web,web-react:** the Icon now inherits composition size unless it explicitly overrides it
+- **web,web-react:** migrate `Tag` to color schemes #DS-2456
+- **web,web-react:** migrate `Button` and `ButtonLink` to color schemes
+- **web,web-react:** migrate `TooltipPopover` to neutral color-scheme
+- **web,web-react:** migrate `Alert` to color schemes
 - **web,web-react:** use `InputContainer` in `UNSTABLE_Picker` #DS-564
 - **web,web-react:** remove deprecated `isBlock` prop from Button and ButtonLink #DS-1897
-- **web:** TextArea now uses InputContainer instead of a custom component.
-  CharacterCounter component is now a standalone component.
-- **web,web-react:** The new `Tag` appearance (`inline-flex` layout with explicit
-  height and inside spacing) is now default. Delete the `$enable-v5-tag-appearance`
-  Sass variable and the `spirit-feature-enable-v5-tag-appearance` CSS class from
-  your project — they have no effect. See the Tag: Appearance Feature Flag Removed
-  sections in the web and web-react package Migration Guides to version 5.
-
+- **web:** use InputContainer in TextArea #DS-564
+- **web,web-react:** drop `Tag` appearance feature flag #DS-2456
 - **web,web-react:** remove deprecated `row` direction value from `Flex` #DS-1629
 
 ### Features
