@@ -69,6 +69,7 @@ export * from './Toggle';
 export * from './Tooltip';
 export * from './Truncate';
 export * from './UNSTABLE_Picker';
+export * from './UNSTABLE_SplitTag';
 export * from './UNSTABLE_Table';
 export * from './ValidationText';
 export * from './VisuallyHidden';
