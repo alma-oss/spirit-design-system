@@ -751,6 +751,14 @@
       "require": "./dist/components/UNSTABLE_Picker/index.cjs",
       "default": "./dist/components/UNSTABLE_Picker/index.js"
     },
+    "./components/UNSTABLE_SplitTag": {
+      "types": "./dist/components/UNSTABLE_SplitTag/index.d.ts",
+      "development": "./src/components/UNSTABLE_SplitTag/index.ts",
+      "production": "./dist/components/UNSTABLE_SplitTag/index.js",
+      "import": "./dist/components/UNSTABLE_SplitTag/index.js",
+      "require": "./dist/components/UNSTABLE_SplitTag/index.cjs",
+      "default": "./dist/components/UNSTABLE_SplitTag/index.js"
+    },
     "./components/ValidationText": {
       "types": "./dist/components/ValidationText/index.d.ts",
       "development": "./src/components/ValidationText/index.ts",
