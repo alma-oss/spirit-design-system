@@ -27,22 +27,27 @@ const _ControlButton = <E extends ElementType = 'button', S = void>(
   props: SpiritControlButtonProps<E, S>,
   ref: PolymorphicRef<E>,
 ) => {
-  const contextProps = useContextProps<Partial<Pick<ControlButtonProps<S>, 'size'>>>();
+  const contextProps = useContextProps<Partial<Pick<ControlButtonProps<S>, 'isDisabled' | 'size'>>>();
   const propsWithDefaults = {
     ...defaultProps,
     size: contextProps.size ?? defaultProps.size,
+    isDisabled: contextProps.isDisabled ?? defaultProps.isDisabled,
     ...props,
   };
   const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
+  const isButtonElement = elementType === 'button';
+  const { type, ...restPropsWithoutType } = restProps;
+  const componentProps = isButtonElement ? { ...restPropsWithoutType, type } : restPropsWithoutType;
 
-  const { controlButtonProps } = useControlButtonProps(restProps);
+  const { controlButtonProps } = useControlButtonProps(componentProps);
+  const elementControlButtonProps = isButtonElement ? controlButtonProps : {};
   const {
     classProps,
     props: modifiedProps,
     styleProps: controlButtonStyleProps,
-  } = useControlButtonStyleProps(restProps as SpiritControlButtonProps<E, S>);
+  } = useControlButtonStyleProps(componentProps as SpiritControlButtonProps<E, S>);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, {
     classProps,
@@ -51,7 +56,7 @@ const _ControlButton = <E extends ElementType = 'button', S = void>(
   });
 
   return (
-    <Component {...otherProps} {...controlButtonProps} ref={ref} {...mergedStyleProps}>
+    <Component {...otherProps} {...elementControlButtonProps} ref={ref} {...mergedStyleProps}>
       {children}
     </Component>
   );
