@@ -1,0 +1,36 @@
+@use '@tokens' as tokens;
+@use 'theme';
+
+.UNSTABLE_SplitTag {
+    --#{tokens.$css-variable-prefix}unstable-split-tag-gap: #{-1 * theme.$border-width};
+    --#{tokens.$css-variable-prefix}unstable-split-tag-inner-border-radius: #{theme.$inner-border-radius};
+
+    display: inline-flex;
+}
+
+.UNSTABLE_SplitTag > :not(:is(a, button, span)) {
+    display: inline-flex;
+    align-items: center;
+}
+
+.UNSTABLE_SplitTag > :not(:first-child):is(a, button, span),
+.UNSTABLE_SplitTag > :not(:first-child) > :is(a, button) {
+    --#{tokens.$css-variable-prefix}tag-border-start-start-radius: var(
+        --#{tokens.$css-variable-prefix}unstable-split-tag-inner-border-radius
+    );
+    --#{tokens.$css-variable-prefix}tag-border-end-start-radius: var(
+        --#{tokens.$css-variable-prefix}unstable-split-tag-inner-border-radius
+    );
+
+    margin-inline-start: var(--#{tokens.$css-variable-prefix}unstable-split-tag-gap);
+}
+
+.UNSTABLE_SplitTag > :not(:last-child):is(a, button, span),
+.UNSTABLE_SplitTag > :not(:last-child) > :is(a, button) {
+    --#{tokens.$css-variable-prefix}tag-border-start-end-radius: var(
+        --#{tokens.$css-variable-prefix}unstable-split-tag-inner-border-radius
+    );
+    --#{tokens.$css-variable-prefix}tag-border-end-end-radius: var(
+        --#{tokens.$css-variable-prefix}unstable-split-tag-inner-border-radius
+    );
+}

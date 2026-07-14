@@ -25,7 +25,13 @@
     border-width: theme.$border-width;
     border-style: theme.$border-style;
     border-color: color-scheme.border-color();
-    border-radius: theme.$border-radius;
+    border-start-start-radius: var(
+        --#{tokens.$css-variable-prefix}tag-border-start-start-radius,
+        #{theme.$border-radius}
+    );
+    border-start-end-radius: var(--#{tokens.$css-variable-prefix}tag-border-start-end-radius, #{theme.$border-radius});
+    border-end-start-radius: var(--#{tokens.$css-variable-prefix}tag-border-end-start-radius, #{theme.$border-radius});
+    border-end-end-radius: var(--#{tokens.$css-variable-prefix}tag-border-end-end-radius, #{theme.$border-radius});
     background-color: color-scheme.background-color();
 }
 
