@@ -141,6 +141,18 @@ $utilities: (
             none,
         ),
     ),
+    'margin': (
+        responsive: true,
+        property: margin,
+        class: m,
+        generate-custom-properties: false,
+        values: map.merge(
+                tokens.$spaces,
+                (
+                    auto: auto,
+                )
+            ),
+    ),
     'margin-x': (
         responsive: true,
         property: margin-inline,
