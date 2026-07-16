@@ -1,0 +1,29 @@
+'use client';
+
+import icons from '@alma-oss/spirit-icons/icons';
+import React, { StrictMode } from 'react';
+import DocsSection from '../../../../docs/DocsSection';
+import { IconsProvider } from '../../../context';
+import ButtonLinkDefault from './ButtonLinkDefault';
+import ButtonLinkDisabled from './ButtonLinkDisabled';
+import ButtonLinkFluid from './ButtonLinkFluid';
+import ButtonLinkResponsive from './ButtonLinkResponsive';
+
+export const Preview = () => (
+  <StrictMode>
+    <IconsProvider value={icons}>
+      <DocsSection title="Default" stackAlignment="stretch">
+        <ButtonLinkDefault />
+      </DocsSection>
+      <DocsSection title="Disabled" stackAlignment="stretch">
+        <ButtonLinkDisabled />
+      </DocsSection>
+      <DocsSection title="Fluid" stackAlignment="stretch">
+        <ButtonLinkFluid />
+      </DocsSection>
+      <DocsSection title="Responsive" stackAlignment="start">
+        <ButtonLinkResponsive />
+      </DocsSection>
+    </IconsProvider>
+  </StrictMode>
+);

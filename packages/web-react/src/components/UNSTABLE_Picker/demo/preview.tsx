@@ -1,0 +1,67 @@
+'use client';
+
+import icons from '@alma-oss/spirit-icons/icons';
+import React, { StrictMode } from 'react';
+import DocsSection from '../../../../docs/DocsSection';
+import { IconsProvider } from '../../../context';
+import PickerAggregated from './PickerAggregated';
+import PickerDefault from './PickerDefault';
+import PickerDisabled from './PickerDisabled';
+import PickerGroupedJobFilters from './PickerGroupedJobFilters';
+import PickerHelperText from './PickerHelperText';
+import PickerHiddenLabel from './PickerHiddenLabel';
+import PickerRequired from './PickerRequired';
+import PickerSalary from './PickerSalary';
+import PickerSingle from './PickerSingle';
+import PickerSizes from './PickerSizes';
+import PickerThemes from './PickerThemes';
+import PickerValidationStates from './PickerValidationStates';
+import PickerVariants from './PickerVariants';
+
+export const Preview = () => (
+  <StrictMode>
+    <IconsProvider value={icons}>
+      <DocsSection title="Default">
+        <PickerDefault />
+      </DocsSection>
+      <DocsSection title="Themes">
+        <PickerThemes />
+      </DocsSection>
+      <DocsSection title="Variants">
+        <PickerVariants />
+      </DocsSection>
+      <DocsSection title="Sizes" stackAlignment="stretch">
+        <PickerSizes />
+      </DocsSection>
+      <DocsSection title="Aggregated Tags">
+        <PickerAggregated />
+      </DocsSection>
+      <DocsSection title="Hidden Label">
+        <PickerHiddenLabel />
+      </DocsSection>
+      <DocsSection title="Required">
+        <PickerRequired />
+      </DocsSection>
+      <DocsSection title="Helper Text">
+        <PickerHelperText />
+      </DocsSection>
+      <DocsSection title="Validation States">
+        <PickerValidationStates />
+      </DocsSection>
+      <DocsSection title="Disabled">
+        <PickerDisabled />
+      </DocsSection>
+      <DocsSection title="Salary Picker">
+        <PickerSalary />
+      </DocsSection>
+      <DocsSection title="Single with any option">
+        <PickerSingle />
+      </DocsSection>
+      <DocsSection title="Grouped sections with Button">
+        <PickerGroupedJobFilters />
+      </DocsSection>
+      {/* Safety margin so the last DropdownPopover does not overflow the page */}
+      <div style={{ paddingBottom: 500 }} className="hide-from-visual-tests" />
+    </IconsProvider>
+  </StrictMode>
+);
