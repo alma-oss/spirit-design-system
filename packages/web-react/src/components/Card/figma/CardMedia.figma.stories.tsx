@@ -23,7 +23,7 @@ const meta: Meta<typeof CardMedia> = {
   parameters: {
     design: {
       type: 'figma',
-      url: '<FIGMA_FILE_ID>?node-id=37201%3A1917',
+      url: 'https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-?node-id=37201%3A1917',
       props: {
         direction: figma.enum('Photo placement', {
           Left: 'horizontal',

@@ -11,7 +11,7 @@ const meta: Meta<typeof CardFooter> = {
   parameters: {
     design: {
       type: 'figma',
-      url: '<FIGMA_FILE_ID>?node-id=37173%3A2291',
+      url: 'https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-?node-id=37173%3A2291',
       props: {},
       examples: [
         { example: 'FigmaCardFooterLinks', variant: { Type: 'Links' } },
