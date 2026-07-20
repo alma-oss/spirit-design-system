@@ -7,9 +7,15 @@ import { mergeConfig } from 'vite';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const isProd = process.env.NODE_ENV === 'production';
+// Exclude Figma Code Connect stories from Chromatic snapshots only (set in storybook-deployment.yaml)
+const isChromatic = process.env.CHROMATIC === 'true';
 
 const config: StorybookConfig = {
-  stories: ['../../packages/**/*.mdx', '../../packages/**/*.stories.@(ts|tsx)'],
+  stories: [
+    '../../packages/**/*.mdx',
+    '../../packages/**/*.stories.@(ts|tsx)',
+    ...(isChromatic ? ['!../../packages/**/*.figma.stories.@(ts|tsx)'] : []),
+  ],
 
   // @see: https://storybook.js.org/docs/writing-stories/tags#custom-tags
   tags: {

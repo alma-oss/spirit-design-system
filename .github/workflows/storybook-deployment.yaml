@@ -49,6 +49,8 @@ jobs:
           # Disable connection to NX Cloud
           # @see: https://nx.dev/docs/reference/nx-cloud/config#disabling-connections-to-nx-cloud
           NX_NO_CLOUD: 'true'
+          # Exclude Figma Code Connect stories from Chromatic snapshots
+          CHROMATIC: 'true'
 
       - name: Publish to Chromatic
         id: chromatic
