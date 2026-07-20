@@ -11,7 +11,7 @@ const meta: Meta<typeof Button> = {
   parameters: {
     design: {
       type: 'figma',
-      url: '<FIGMA_FILE_ID>?node-id=776%3A20',
+      url: 'https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-?node-id=776%3A20',
       props: {
         color: figma.enum('Color', {
           Secondary: 'secondary',

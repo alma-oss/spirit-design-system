@@ -11,7 +11,7 @@ const meta: Meta<typeof CardArtwork> = {
   parameters: {
     design: {
       type: 'figma',
-      url: '<FIGMA_FILE_ID>?node-id=37173%3A2084',
+      url: 'https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-?node-id=37173%3A2084',
       props: {
         type: figma.enum('Type', {
           Iconbox: <IconBox color="01" iconName="add" shape="rounded" isSubtle />,

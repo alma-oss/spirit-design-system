@@ -26,7 +26,7 @@ const meta: Meta<typeof Card> = {
   parameters: {
     design: {
       type: 'figma',
-      url: '<FIGMA_FILE_ID>?node-id=37173%3A1977',
+      url: 'https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-?node-id=37173%3A1977',
       props: {
         artwork: figma.boolean('Artwork', {
           true: (

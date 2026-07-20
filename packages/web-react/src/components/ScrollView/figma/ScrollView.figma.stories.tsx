@@ -1,15 +1,33 @@
 import figma from '@figma/code-connect';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import ScrollView from '../ScrollView';
 
-figma.connect(ScrollView, '<FIGMA_FILE_ID>?node-id=35163%3A22653', {
-  props: {
-    direction: figma.enum('Direction', {
-      Horizontal: 'horizontal',
-    }),
-    hasControls: figma.boolean('Controls'),
+const meta: Meta<typeof ScrollView> = {
+  title: 'Components/ScrollView/Figma',
+  component: ScrollView,
+  tags: ['!autodocs', 'figma'],
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-?node-id=35163%3A22653',
+      props: {
+        direction: figma.enum('Direction', {
+          Horizontal: 'horizontal',
+        }),
+        hasControls: figma.boolean('Arrows'),
+      },
+      examples: ['FigmaPlayground'],
+    },
   },
-  example: (props) => (
+};
+
+export default meta;
+type Story = StoryObj<typeof ScrollView>;
+
+export const FigmaPlayground: Story = {
+  name: 'ScrollView',
+  render: (props) => (
     <ScrollView {...props}>
       <p>
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
@@ -23,4 +41,4 @@ figma.connect(ScrollView, '<FIGMA_FILE_ID>?node-id=35163%3A22653', {
       </p>
     </ScrollView>
   ),
-});
+};
