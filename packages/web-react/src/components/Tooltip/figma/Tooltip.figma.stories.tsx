@@ -12,7 +12,7 @@ const meta: Meta<typeof Tooltip> = {
     layout: 'centered',
     design: {
       type: 'figma',
-      url: '<FIGMA_FILE_ID>?node-id=4701%3A4086',
+      url: 'https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-?node-id=4701%3A4086',
       props: {
         isDismissible: figma.boolean('Dismissible'),
         placement: figma.enum('Placement', {

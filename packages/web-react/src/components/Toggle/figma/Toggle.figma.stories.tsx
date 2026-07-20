@@ -1,31 +1,32 @@
 import figma from '@figma/code-connect';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { type ReactNode } from 'react';
-import type { SpiritCheckboxProps } from '../../../types';
 import { Link } from '../../Link';
-import { Checkbox } from '..';
+import Toggle from '../Toggle';
 
-const meta: Meta<typeof Checkbox> = {
-  title: 'Components/Checkbox/Figma',
-  component: Checkbox,
+const meta: Meta<typeof Toggle> = {
+  title: 'Components/Toggle/Figma',
+  component: Toggle,
   tags: ['!autodocs', 'figma'],
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-?node-id=830%3A292',
+      url: 'https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-?node-id=19122%3A3329',
       props: {
         description: figma.boolean('Description', {
           true: <span>Description</span>,
           false: undefined,
         }),
-        indeterminate: figma.boolean('Indeterminate'),
-        isChecked: figma.boolean('Selected'),
-        isDisabled: figma.boolean('Disabled'),
         helperText: figma.boolean('Helper text', {
           true: 'Helper text',
           false: undefined,
         }),
-        label: figma.string('Label'),
+        isChecked: figma.boolean('Selected'),
+        isDisabled: figma.boolean('Disabled'),
+        isLabelHidden: figma.boolean('Label', {
+          true: false,
+          false: true,
+        }),
         link: figma.boolean('Link', {
           true: <Link href="#">Link</Link>,
           false: undefined,
@@ -35,10 +36,6 @@ const meta: Meta<typeof Checkbox> = {
           Warning: 'warning',
           Danger: 'danger',
         }),
-        validationText: figma.boolean('Validation text', {
-          true: 'Validation text',
-          false: undefined,
-        }),
       },
       examples: ['FigmaPlayground'],
     },
@@ -46,27 +43,25 @@ const meta: Meta<typeof Checkbox> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Checkbox>;
+type Story = StoryObj<typeof Toggle>;
 
 export const FigmaPlayground: Story = {
-  name: 'Checkbox',
+  name: 'Toggle',
   render: ({
     description,
     link,
     ...props
-  }: SpiritCheckboxProps & {
-    description?: ReactNode;
-    link?: ReactNode;
-  }) => (
-    <Checkbox
+  }: React.ComponentProps<typeof Toggle> & { description?: ReactNode; link?: ReactNode }) => (
+    <Toggle
       {...props}
+      label="Label"
+      id="toggle-example"
       details={
         <>
           {link}
           {description}
         </>
       }
-      id="checkbox-default"
     />
   ),
 };
