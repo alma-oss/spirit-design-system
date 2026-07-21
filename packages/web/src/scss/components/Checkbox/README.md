@@ -114,68 +114,76 @@ To add helper text, use the [HelperText][readme-helper-text] component:
 </div>
 ```
 
-## Consent Checkbox with Details
+## Consent with Details
 
-For consent scenarios where users need access to terms and conditions or privacy policies, use the [`InputDetails`][readme-input-details]
-element with modal triggers.
+For consent scenarios where users need access to supplementary content — such as terms and conditions or a privacy
+policy — use the [`InputDetails`][readme-input-details] element to render a trigger below the label. The linked
+content can be revealed in a [Modal][readme-modal] dialog or expanded inline with [Collapse][readme-collapse].
 
-### Full Example with Validation and Helper Text
+**Keep the checkbox label itself as short as possible at all times.** Move any supplementary explanation into
+`InputDetails` instead. Screen readers read the full label out loud, so a long label is read in full every time.
+Short labels are also easier for sighted users to scan.
 
-Complete example showing label, details with multiple links, helper text, and validation:
+### With Modal
 
 ```html
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
-  <input
-    type="checkbox"
-    id="consent-full-example"
-    class="Checkbox Checkbox--danger"
-    name="consentFullExample"
-    aria-details="consent-full-example-details"
-    aria-describedby="consent-full-example-helper-text consent-full-example-validation-text"
-    required
-  />
+  <input type="checkbox" id="consent" class="Checkbox" name="consent" aria-details="consent-details" required />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--required cursor-pointer" for="consent-full-example">
-      I agree to the terms and privacy policy
-    </label>
-    <div id="consent-full-example-details" class="InputDetails">
+    <label class="Label Label--required cursor-pointer" for="consent">I agree to the terms and privacy policy</label>
+    <div id="consent-details" class="InputDetails">
+      <p class="typography-body-small-regular mb-0">Please review our terms and conditions before you agree.</p>
       <button
         type="button"
         class="link-underlined link-inherit"
         data-spirit-toggle="modal"
-        data-spirit-target="#terms-modal"
-        aria-controls="terms-modal"
+        data-spirit-target="#checkbox-terms-modal"
+        aria-controls="checkbox-terms-modal"
         aria-expanded="false"
       >
         See full terms and conditions
       </button>
-      <button
-        type="button"
-        class="link-underlined link-inherit"
-        data-spirit-toggle="modal"
-        data-spirit-target="#privacy-modal"
-        aria-controls="privacy-modal"
-        aria-expanded="false"
-      >
-        See privacy policy
-      </button>
-    </div>
-    <div class="HelperText" id="consent-full-example-helper-text">
-      Please read the documents carefully before agreeing
-    </div>
-    <div class="ValidationText ValidationText--danger" id="consent-full-example-validation-text">
-      You must agree to continue
     </div>
   </div>
 </div>
 
-<!-- Modal definitions -->
+<!-- Modal definition -->
+```
+
+### With Collapse
+
+```html
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="checkbox" id="consent" class="Checkbox" name="consent" aria-details="consent-details" required />
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+    <label class="Label Label--required cursor-pointer" for="consent">I agree to the terms and conditions</label>
+    <div id="consent-details" class="InputDetails">
+      <p class="typography-body-small-regular mb-0">Please review our terms and conditions before you agree.</p>
+      <button
+        type="button"
+        class="link-underlined link-inherit"
+        data-spirit-toggle="collapse"
+        data-spirit-target="checkbox-terms-collapse"
+        aria-controls="checkbox-terms-collapse"
+        aria-expanded="false"
+      >
+        Show more
+      </button>
+      <div id="checkbox-terms-collapse" class="Collapse">
+        <div class="Collapse__content">
+          <!-- Terms and conditions content -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 ```
 
 ## Accessibility
 
 - The details content is linked to the checkbox via the `aria-details` attribute
-- Use `<button>` elements with link styling (e.g., `link-underlined`, `link-inherit`), NOT `<a>` tags, for modal triggers
+- Use `<button>` elements with link styling (e.g., `link-underlined`, `link-inherit`), NOT `<a>` tags, for modal or
+  collapse triggers
 - The `aria-details` attribute is separate from `aria-describedby`:
   - `aria-describedby` announces essential information immediately (helper text, validation messages)
   - `aria-details` points to supplementary content that users can explore when needed (terms links, additional info)
@@ -236,7 +244,9 @@ Use responsive breakpoint modifiers to change input position at different screen
 ```
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[readme-collapse]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Collapse/README.md
 [readme-flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Flex/README.md
 [readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [readme-input-details]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputDetails/README.md
+[readme-modal]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Modal/README.md
 [readme-validation-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ValidationText/README.md

@@ -3,7 +3,8 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
-import CheckboxConsentFullExample from './CheckboxConsentFullExample';
+import CheckboxConsentCollapseExample from './CheckboxConsentCollapseExample';
+import CheckboxConsentModalExample from './CheckboxConsentModalExample';
 import CheckboxDefault from './CheckboxDefault';
 import CheckboxDisabled from './CheckboxDisabled';
 import CheckboxHelperText from './CheckboxHelperText';
@@ -48,8 +49,11 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       <DocsSection title="Item">
         <CheckboxItem />
       </DocsSection>
-      <DocsSection title="Consent Full Example">
-        <CheckboxConsentFullExample />
+      <DocsSection title="Consent with Modal">
+        <CheckboxConsentModalExample />
+      </DocsSection>
+      <DocsSection title="Consent with Collapse">
+        <CheckboxConsentCollapseExample />
       </DocsSection>
     </IconsProvider>
   </StrictMode>,
