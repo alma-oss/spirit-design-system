@@ -17,7 +17,7 @@
     display: inline-flex;
     gap: var(--#{tokens.$css-variable-prefix}tag-gap);
     align-items: center;
-    height: var(--#{tokens.$css-variable-prefix}tag-height);
+    min-height: var(--#{tokens.$css-variable-prefix}tag-min-height);
     padding-inline: var(--#{tokens.$css-variable-prefix}tag-padding-x);
     padding-block: var(--#{tokens.$css-variable-prefix}tag-padding-y);
     text-align: center;
