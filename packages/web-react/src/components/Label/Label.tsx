@@ -1,7 +1,8 @@
 'use client';
 
 import React, { type ElementType, useContext } from 'react';
-import { InlineElementsContext, useContextProps } from '../../context';
+import { SizesExtended } from '../../constants';
+import { FormFieldsContext, InlineElementsContext, useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type SpiritLabelProps, type WithFormFieldContext } from '../../types';
 import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
@@ -13,12 +14,14 @@ const defaultProps: Partial<SpiritLabelProps> = {
   isDisabled: false,
   isLabelHidden: false,
   isRequired: false,
+  size: SizesExtended.MEDIUM,
 };
 
 const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX.Element => {
   const inlineElementsProps = useContext(InlineElementsContext) ?? {};
-  const mergedProps = useContextProps<WithFormFieldContext<SpiritLabelProps<E>>>(props, 'label');
-  const propsWithDefaults = mergeProps(defaultProps, inlineElementsProps, mergedProps);
+  const formFieldsProps = useContext(FormFieldsContext) ?? {};
+  const mergedProps = useContextProps(props, 'label') as WithFormFieldContext<SpiritLabelProps<E>>;
+  const propsWithDefaults = mergeProps(defaultProps, mergeProps(inlineElementsProps, formFieldsProps), mergedProps);
   const {
     children,
     elementType: ElementTag = 'label' as ElementType,
@@ -29,6 +32,7 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
     isStretched,
     isLabelHidden,
     isRequired,
+    size,
     ...restProps
   } = propsWithDefaults;
 
@@ -38,6 +42,7 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
     isStretched,
     isLabelHidden,
     isRequired,
+    size,
   });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
   const mergedStyleProps = mergeStyleProps(ElementTag, { classProps, styleProps, transferProps });
