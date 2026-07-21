@@ -124,8 +124,9 @@ The input's `placeholder` can carry the "add more" hint visually:
 - **≥ 1 tag selected**: placeholder reads `+ Add more…`.
 
 The input's minimum width is driven by the `--spirit-combobox-input-min-width` CSS variable
-(default `11ch`, sized for `+ Add more…`). Override it on the root element to fit a different
-placeholder string without truncation or unexpected wrapping:
+(default `11ch`, sized for `+ Add more…`). In the React package this variable is set automatically
+from the length of the currently visible placeholder. In HTML, override it on the root element to
+fit a different placeholder string without truncation or unexpected wrapping:
 
 ```html
 <div class="UNSTABLE_Combobox" style="--spirit-combobox-input-min-width: 18ch;">

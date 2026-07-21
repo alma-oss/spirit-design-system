@@ -1,6 +1,7 @@
 'use client';
 
 import { type FocusEvent, type KeyboardEvent, type RefObject, useCallback, useRef, useState } from 'react';
+import { type GridRowMove, getWrappedRowIndex } from './gridKeyboardNavigation';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 /** Row props produced by `useSelectionGridKeyboard` for roving tabindex and grid keys */
@@ -26,6 +27,14 @@ export interface UseSelectionGridKeyboardProps {
   isPopoverOpen?: boolean;
   /** Disable row keyboard interaction and tab stops when the control is disabled */
   isDisabled?: boolean;
+  /**
+   * Where to move focus after removing a tag.
+   * - `adjacent` (default): next/previous tag, or nowhere when none remain
+   * - `input`: call `onFocusInput` (e.g. Combobox filter after Gmail-style delete)
+   */
+  focusAfterRemove?: 'adjacent' | 'input';
+  /** Focus the filter input when `focusAfterRemove` is `input` */
+  onFocusInput?: () => void;
 }
 
 /**
@@ -55,7 +64,9 @@ const focusTagRow = (selectionRef: RefObject<HTMLElement | null> | undefined, ro
  * @param props.tagCount
  * @param props.isPopoverOpen
  * @param props.isDisabled
- * @returns {{ getKeyboardGridRowProps: (index: number) => SelectionGridRowProps, removeTagAtIndex: (index: number) => void }} Keyboard helpers for selection tag rows
+ * @param props.focusAfterRemove
+ * @param props.onFocusInput
+ * @returns {{ getKeyboardGridRowProps: (index: number) => SelectionGridRowProps, removeTagAtIndex: (index: number) => void, focusTagAtIndex: (index: number) => void }} Keyboard helpers for selection tag rows
  */
 export const useSelectionGridKeyboard = ({
   onRemoveAtIndex,
@@ -63,12 +74,18 @@ export const useSelectionGridKeyboard = ({
   tagCount,
   isPopoverOpen = false,
   isDisabled = false,
+  focusAfterRemove = 'adjacent',
+  onFocusInput,
 }: UseSelectionGridKeyboardProps): {
   getKeyboardGridRowProps: (index: number) => SelectionGridRowProps;
   removeTagAtIndex: (index: number) => void;
+  focusTagAtIndex: (index: number) => void;
 } => {
   const [activeTagIndex, setActiveTagIndex] = useState(0);
   const [focusedRowIndex, setFocusedRowIndex] = useState<number | null>(null);
+  // Bumped on every explicit focus request so a repeated request for the already active row
+  // (e.g. Backspace from the input after a removal) still reaches the focusing effect.
+  const [focusRequestId, setFocusRequestId] = useState(0);
   const prevTagCountRef = useRef<number | null>(null);
   const pendingFocusRowRef = useRef<number | null>(null);
 
@@ -116,11 +133,20 @@ export const useSelectionGridKeyboard = ({
 
     pendingFocusRowRef.current = null;
     focusTagRow(selectionRef, rowIndex);
-  }, [activeTagIndex, isPopoverOpen, selectionRef, tagCount]);
+  }, [activeTagIndex, focusRequestId, isPopoverOpen, selectionRef, tagCount]);
 
   const removeAt = useCallback(
     (index: number) => {
       const nextCount = tagCount - 1;
+
+      if (focusAfterRemove === 'input') {
+        setActiveTagIndex(nextCount > 0 ? Math.min(index, nextCount - 1) : 0);
+        setFocusedRowIndex(null);
+        onRemoveAtIndex(index);
+        onFocusInput?.();
+
+        return;
+      }
 
       if (nextCount > 0) {
         const nextActive = index < nextCount ? index : index - 1;
@@ -135,8 +161,18 @@ export const useSelectionGridKeyboard = ({
       setFocusedRowIndex(null);
       onRemoveAtIndex(index);
     },
-    [isPopoverOpen, onRemoveAtIndex, tagCount],
+    [focusAfterRemove, isPopoverOpen, onFocusInput, onRemoveAtIndex, tagCount],
   );
+
+  const focusTagAtIndex = useCallback((index: number) => {
+    if (index < 0) {
+      return;
+    }
+
+    setActiveTagIndex(index);
+    pendingFocusRowRef.current = index;
+    setFocusRequestId((current) => current + 1);
+  }, []);
 
   const getKeyboardGridRowProps = useCallback(
     (index: number): SelectionGridRowProps => {
@@ -158,7 +194,7 @@ export const useSelectionGridKeyboard = ({
           setFocusedRowIndex(index);
         },
         onBlurCapture: (event) => {
-          if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+          if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) {
             setFocusedRowIndex(null);
           }
         },
@@ -174,26 +210,32 @@ export const useSelectionGridKeyboard = ({
             return;
           }
 
-          let nextIndex = -1;
+          let move: GridRowMove | null = null;
 
           switch (event.key) {
             case 'ArrowRight':
             case 'ArrowDown':
-              nextIndex = (index + 1) % tagCount;
+              move = 'next';
               break;
             case 'ArrowLeft':
             case 'ArrowUp':
-              nextIndex = (index - 1 + tagCount) % tagCount;
+              move = 'previous';
               break;
             case 'Home':
-              nextIndex = 0;
+              move = 'first';
               break;
             case 'End':
-              nextIndex = tagCount - 1;
+              move = 'last';
               break;
             default:
               break;
           }
+
+          if (!move) {
+            return;
+          }
+
+          const nextIndex = getWrappedRowIndex(index, tagCount, move);
 
           if (nextIndex >= 0) {
             event.preventDefault();
@@ -206,5 +248,5 @@ export const useSelectionGridKeyboard = ({
     [activeTagIndex, focusedRowIndex, isDisabled, isPopoverOpen, removeAt, tagCount],
   );
 
-  return { getKeyboardGridRowProps, removeTagAtIndex: removeAt };
+  return { getKeyboardGridRowProps, removeTagAtIndex: removeAt, focusTagAtIndex };
 };
