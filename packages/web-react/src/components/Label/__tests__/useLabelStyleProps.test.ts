@@ -8,6 +8,12 @@ describe('useLabelStyleProps', () => {
     expect(result.current.classProps).toContain('Label');
   });
 
+  it('should return size class when size is set', () => {
+    const { result } = renderHook(() => useLabelStyleProps({ size: 'small' }));
+
+    expect(result.current.classProps).toContain('Label--small');
+  });
+
   it('should return disabled class when isDisabled is true', () => {
     const { result } = renderHook(() => useLabelStyleProps({ isDisabled: true }));
 

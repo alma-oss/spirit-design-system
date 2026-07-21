@@ -4,6 +4,7 @@
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../tools/accessibility';
+@use '../../tools/dictionaries';
 @use '../../tools/typography';
 @use 'theme';
 
@@ -12,11 +13,19 @@
     --#{tokens.$css-variable-prefix}label-color-disabled: #{theme.$color-state-disabled};
     --#{tokens.$css-variable-prefix}label-required-color: #{theme.$required-color};
 
-    @include typography.generate(theme.$typography);
+    // @deprecated Remove the implicit medium typography variables in the next major version.
+    @include typography.generate(theme.$typography, $as-css-variables: true, $css-variable-infix: 'label');
+    @include typography.from-css-variables($infix: 'label');
 
     display: block;
     color: var(--#{tokens.$css-variable-prefix}label-color, #{theme.$color-state-default});
 }
+
+@include dictionaries.generate-sizes(
+    $class-name: 'Label',
+    $dictionary-values: theme.$size-dictionary,
+    $config: theme.$size-config
+);
 
 // 1.
 .Label.Label--disabled {

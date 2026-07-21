@@ -10,6 +10,7 @@ import LabelBoxTextField from './LabelBoxTextField';
 import LabelCombinedCheckboxRadioItem from './LabelCombinedCheckboxRadioItem';
 import LabelInlineCheckbox from './LabelInlineCheckbox';
 import LabelItemComponent from './LabelItemComponent';
+import LabelSizes from './LabelSizes';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
@@ -20,6 +21,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
           requirements, all labels on this page are associated with related form component.
         </Text>
       </Section>
+      <DocsSection title="Sizes">
+        <LabelSizes />
+      </DocsSection>
       <DocsSection title="Box Label with TextField">
         <LabelBoxTextField />
       </DocsSection>
