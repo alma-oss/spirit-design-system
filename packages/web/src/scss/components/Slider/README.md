@@ -10,7 +10,7 @@ is required by Webkit-based browsers such as Chrome or Safari).
 
 ```html
 <div>
-  <label for="slider-default" class="Label">Slider</label>
+  <label for="slider-default" class="Label Label--medium">Slider</label>
   <input
     class="Slider"
     id="slider-default"
@@ -31,7 +31,7 @@ be updated when the slider value changes. See the [Slider Position](#slider-posi
 
 ```html
 <div>
-  <label for="slider-steps" class="Label">Slider</label>
+  <label for="slider-steps" class="Label Label--medium">Slider</label>
   <input
     class="Slider"
     id="slider-steps"
@@ -66,7 +66,7 @@ position = 100 * (value - min) / (max - min)
 
 ```html
 <div>
-  <label for="slider-hidden-label" class="Label accessibility-hidden">Slider</label>
+  <label for="slider-hidden-label" class="Label Label--medium accessibility-hidden">Slider</label>
   <input
     class="Slider"
     id="slider-hidden-label"
@@ -89,7 +89,7 @@ To add helper text, use the [HelperText][readme-helper-text] component:
 
 ```html
 <div>
-  <label for="slider-helper-text" class="Label">Slider</label>
+  <label for="slider-helper-text" class="Label Label--medium">Slider</label>
   <input
     class="Slider"
     id="slider-helper-text"
@@ -115,7 +115,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 
 ```html
 <div>
-  <label for="slider-success" class="Label">Slider</label>
+  <label for="slider-success" class="Label Label--medium">Slider</label>
   <input
     class="Slider"
     id="slider-success"
@@ -127,7 +127,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div>
-  <label for="slider-warning" class="Label">Slider</label>
+  <label for="slider-warning" class="Label Label--medium">Slider</label>
   <input
     class="Slider"
     id="slider-warning"
@@ -141,7 +141,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div>
-  <label for="slider-danger" class="Label">Slider</label>
+  <label for="slider-danger" class="Label Label--medium">Slider</label>
   <input
     class="Slider"
     id="slider-danger"
@@ -160,7 +160,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 </div>
 
 <div>
-  <label for="slider-warning" class="Label">Slider</label>
+  <label for="slider-warning" class="Label Label--medium">Slider</label>
   <input
     class="Slider"
     id="slider-warning"
@@ -183,7 +183,7 @@ a JS interaction class when controlled by JavaScript (`has-success`,
 
 ```html
 <div>
-  <label for="slider-disabled" class="Label Label--disabled">Slider</label>
+  <label for="slider-disabled" class="Label Label--medium Label--disabled">Slider</label>
   <input
     class="Slider"
     id="slider-disabled"

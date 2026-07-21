@@ -36,6 +36,32 @@ describe('Label', () => {
     expect(screen.getByText(label)).toBeInTheDocument();
   });
 
+  it('should use medium size by default', () => {
+    render(<Label>Text</Label>);
+
+    expect(screen.getByText('Text')).toHaveClass('Label--medium');
+  });
+
+  it('should use context size when no direct prop', () => {
+    render(
+      <PropsProvider value={{ size: 'small' }}>
+        <Label>Text</Label>
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText('Text')).toHaveClass('Label--small');
+  });
+
+  it('should use direct size over context', () => {
+    render(
+      <PropsProvider value={{ size: 'small' }}>
+        <Label size="xlarge">Text</Label>
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText('Text')).toHaveClass('Label--xlarge');
+  });
+
   it('should use context elementType when no direct prop', () => {
     render(
       <PropsProvider value={{ elementType: 'span' }}>

@@ -1,4 +1,5 @@
 @use '@tokens' as tokens;
+@use '../../settings/dictionaries';
 
 $typography: tokens.$label-medium;
 $color-state-default: tokens.$form-field-label;
@@ -6,3 +7,22 @@ $color-state-disabled: tokens.$disabled-content;
 $required-typography: tokens.$body-small-regular;
 $required-margin-left: tokens.$space-200;
 $required-color: tokens.$form-field-danger;
+
+$size-dictionary: dictionaries.$size-extended;
+$size-config: (
+    xsmall: (
+        typography: tokens.$label-xsmall,
+    ),
+    small: (
+        typography: tokens.$label-small,
+    ),
+    medium: (
+        typography: tokens.$label-medium,
+    ),
+    large: (
+        typography: tokens.$label-large,
+    ),
+    xlarge: (
+        typography: tokens.$label-xlarge,
+    ),
+);

@@ -4,7 +4,7 @@ Basic usage:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-default" class="Label">Label</label>
+  <label for="text-field-default" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-default" name="default" placeholder="Placeholder" />
   </div>
@@ -18,14 +18,14 @@ Variants:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-variant-fill" class="Label">Fill (default)</label>
+  <label for="text-field-variant-fill" class="Label Label--medium">Fill (default)</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-variant-fill" name="variantFill" placeholder="Placeholder" />
   </div>
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-variant-outline" class="Label">Outline</label>
+  <label for="text-field-variant-outline" class="Label Label--medium">Outline</label>
   <div class="InputContainer InputContainer--outline InputContainer--medium">
     <input type="text" id="text-field-variant-outline" name="variantOutline" placeholder="Placeholder" />
   </div>
@@ -36,21 +36,21 @@ Sizes:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-size-small" class="Label">Small</label>
+  <label for="text-field-size-small" class="Label Label--small">Small</label>
   <div class="InputContainer InputContainer--fill InputContainer--small">
     <input type="text" id="text-field-size-small" name="size-small" placeholder="Placeholder" />
   </div>
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-size-medium" class="Label">Medium (default)</label>
+  <label for="text-field-size-medium" class="Label Label--medium">Medium (default)</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-size-medium" name="size-medium" placeholder="Placeholder" />
   </div>
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-size-large" class="Label">Large</label>
+  <label for="text-field-size-large" class="Label Label--large">Large</label>
   <div class="InputContainer InputContainer--fill InputContainer--large">
     <input type="text" id="text-field-size-large" name="size-large" placeholder="Placeholder" />
   </div>
@@ -61,7 +61,7 @@ Required input:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-required" class="Label Label--required">Label</label>
+  <label for="text-field-required" class="Label Label--medium Label--required">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-required" name="required" placeholder="Placeholder" required />
   </div>
@@ -72,7 +72,7 @@ Hidden label:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-hidden-label" class="Label accessibility-hidden">Label</label>
+  <label for="text-field-hidden-label" class="Label Label--medium accessibility-hidden">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-hidden-label" name="hiddenLabel" placeholder="Placeholder" />
   </div>
@@ -85,7 +85,7 @@ Use [InputAddon][readme-input-addon] inside [InputContainer][readme-input-contai
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-addon-search" class="Label">Search</label>
+  <label for="text-field-addon-search" class="Label Label--medium">Search</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <label class="InputAddon InputAddon--medium" for="text-field-addon-search">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
@@ -98,7 +98,7 @@ Use [InputAddon][readme-input-addon] inside [InputContainer][readme-input-contai
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-addon-clear" class="Label">Search</label>
+  <label for="text-field-addon-clear" class="Label Label--medium">Search</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-addon-clear" name="addonClear" placeholder="Search" value="Filled" />
     <div class="InputAddon InputAddon--medium">
@@ -127,7 +127,7 @@ To add helper text, use the [HelperText][readme-helper-text] component. When hel
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-helper-text" class="Label">Label</label>
+  <label for="text-field-helper-text" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input
       type="text"
@@ -173,13 +173,13 @@ element:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-size" class="Label">4000 (in Roman numerals)</label>
+  <label for="text-field-size" class="Label Label--medium">4000 (in Roman numerals)</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" size="4" id="text-field-size" name="size" placeholder="Placeholder" />
   </div>
 </div>
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-size-em" class="Label">4000 (in Roman numerals)</label>
+  <label for="text-field-size-em" class="Label Label--medium">4000 (in Roman numerals)</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input
       type="text"
@@ -218,7 +218,7 @@ Then you need to add data attribute `data-spirit-toggle="password"` to the input
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-password-toggle" class="Label">Password Toggle</label>
+  <label for="text-field-password-toggle" class="Label Label--medium">Password Toggle</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input
       type="password"
@@ -263,14 +263,14 @@ Validation states can be presented either by adding a CSS modifier class on
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-success" class="Label">Label</label>
+  <label for="text-field-success" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--success">
     <input type="text" id="text-field-success" name="success" placeholder="Placeholder" value="Filled" />
   </div>
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-warning" class="Label">Label</label>
+  <label for="text-field-warning" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--warning">
     <input
       type="text"
@@ -285,7 +285,7 @@ Validation states can be presented either by adding a CSS modifier class on
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-danger" class="Label">Label</label>
+  <label for="text-field-danger" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger">
     <input
       type="text"
@@ -305,7 +305,7 @@ Validation states can be presented either by adding a CSS modifier class on
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-warning-validation-icon" class="Label">Label</label>
+  <label for="text-field-warning-validation-icon" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--warning">
     <input
       type="text"
@@ -333,14 +333,14 @@ JS interaction class when controlled by JavaScript:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-disabled" class="Label">Label</label>
+  <label for="text-field-disabled" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <input type="text" id="text-field-disabled" name="disabled" placeholder="Placeholder" disabled />
   </div>
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-disabled-filled" class="Label Label--required">Label</label>
+  <label for="text-field-disabled-filled" class="Label Label--medium Label--required">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <input
       type="text"
