@@ -1,10 +1,18 @@
 'use client';
 
-import { type RefObject, useCallback, useRef, useState } from 'react';
-import { useIsomorphicLayoutEffect } from '../../hooks';
-import type { UnstablePickerSelectionGridRowProps } from './types';
+import { type FocusEvent, type KeyboardEvent, type RefObject, useCallback, useRef, useState } from 'react';
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
-export interface UnstablePickerSelectionKeyboardProps {
+/** Row props produced by `useSelectionGridKeyboard` for roving tabindex and grid keys */
+export interface SelectionGridRowProps {
+  tabIndex: 0 | -1;
+  onKeyDown: (event: KeyboardEvent<HTMLElement>) => void;
+  onFocusCapture: (event: FocusEvent<HTMLElement>) => void;
+  onBlurCapture: (event: FocusEvent<HTMLElement>) => void;
+  removeButtonTabIndex: 0 | -1;
+}
+
+export interface UseSelectionGridKeyboardProps {
   /** Number of tag rows in the selection grid */
   tagCount: number;
   /** Called with the index of the tag to remove (keyboard or remove button) */
@@ -12,18 +20,16 @@ export interface UnstablePickerSelectionKeyboardProps {
   /** The selection element (`role="grid"`) — used to focus tag rows after arrow navigation or removal */
   selectionRef?: RefObject<HTMLElement | null>;
   /**
-   * When the picker popover is open, the dialog owns focus — do not move focus to tags and take tags
-   * out of the tab order until the popover closes (matches web picker demo).
+   * When the popover is open and owns focus, do not move focus to tags and take tags
+   * out of the tab order until the popover closes.
    */
   isPopoverOpen?: boolean;
-  /** Disable row keyboard interaction and tab stops when picker is disabled */
+  /** Disable row keyboard interaction and tab stops when the control is disabled */
   isDisabled?: boolean;
 }
 
 /**
- * Keyboard and roving tabindex behaviour for the Picker selection grid (`role="grid"`)
- * one tab stop per row, arrow / Home / End navigation, Delete & Backspace
- * to remove, and the remove control participating in the tab order while the row contains focus.
+ * Focus a tag row inside the selection grid by index.
  *
  * @param selectionRef Selection container (`role="grid"`)
  * @param rowIndex Index of the tag row to focus
@@ -38,14 +44,27 @@ const focusTagRow = (selectionRef: RefObject<HTMLElement | null> | undefined, ro
   rows.item(rowIndex)?.focus();
 };
 
-export const usePickerSelectionGridKeyboard = ({
+/**
+ * Keyboard and roving tabindex behaviour for a selection grid (`role="grid"`):
+ * one tab stop per row, arrow / Home / End navigation, Delete & Backspace
+ * to remove, and the remove control participating in the tab order while the row contains focus.
+ *
+ * @param props Hook configuration
+ * @param props.onRemoveAtIndex
+ * @param props.selectionRef
+ * @param props.tagCount
+ * @param props.isPopoverOpen
+ * @param props.isDisabled
+ * @returns {{ getKeyboardGridRowProps: (index: number) => SelectionGridRowProps, removeTagAtIndex: (index: number) => void }} Keyboard helpers for selection tag rows
+ */
+export const useSelectionGridKeyboard = ({
   onRemoveAtIndex,
   selectionRef,
   tagCount,
   isPopoverOpen = false,
   isDisabled = false,
-}: UnstablePickerSelectionKeyboardProps): {
-  getKeyboardGridRowProps: (index: number) => UnstablePickerSelectionGridRowProps;
+}: UseSelectionGridKeyboardProps): {
+  getKeyboardGridRowProps: (index: number) => SelectionGridRowProps;
   removeTagAtIndex: (index: number) => void;
 } => {
   const [activeTagIndex, setActiveTagIndex] = useState(0);
@@ -120,7 +139,7 @@ export const usePickerSelectionGridKeyboard = ({
   );
 
   const getKeyboardGridRowProps = useCallback(
-    (index: number): UnstablePickerSelectionGridRowProps => {
+    (index: number): SelectionGridRowProps => {
       if (isPopoverOpen || isDisabled) {
         return {
           tabIndex: -1,

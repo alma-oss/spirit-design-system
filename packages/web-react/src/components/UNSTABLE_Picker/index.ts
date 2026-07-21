@@ -9,5 +9,4 @@ export { PickerPopoverContextProvider, usePickerPopoverContext } from './PickerP
 export * from './types';
 export * from './usePickerId';
 export * from './usePickerPopoverTabOutToTrigger';
-export * from './usePickerSelectionGridKeyboard';
 export * from './usePickerStyleProps';
