@@ -4,7 +4,8 @@ import icons from '@alma-oss/spirit-icons/icons';
 import React, { StrictMode } from 'react';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
-import CheckboxConsentFullExample from './CheckboxConsentFullExample';
+import CheckboxConsentCollapseExample from './CheckboxConsentCollapseExample';
+import CheckboxConsentModalExample from './CheckboxConsentModalExample';
 import CheckboxDefault from './CheckboxDefault';
 import CheckboxDisabled from './CheckboxDisabled';
 import CheckboxHelperText from './CheckboxHelperText';
@@ -49,8 +50,11 @@ export const Preview = () => (
       <DocsSection title="Item">
         <CheckboxItem />
       </DocsSection>
-      <DocsSection title="Consent Full Example">
-        <CheckboxConsentFullExample />
+      <DocsSection title="Consent with Modal">
+        <CheckboxConsentModalExample />
+      </DocsSection>
+      <DocsSection title="Consent with Collapse">
+        <CheckboxConsentCollapseExample />
       </DocsSection>
     </IconsProvider>
   </StrictMode>
