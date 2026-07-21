@@ -12,10 +12,13 @@
     "copy-icons": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "cp -r packages/icons/dist/svg/. static/assets/icons/svg",
+        "command": "cp -r packages/icons/dist/. static/assets/icons",
         "cwd": "{workspaceRoot}"
       },
       "dependsOn": ["@alma-oss/spirit-icons:build"]
+    },
+    "start": {
+      "dependsOn": ["copy-icons"]
     }
   }
 }
