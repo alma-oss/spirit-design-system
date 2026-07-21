@@ -11,9 +11,7 @@
     "directory": "apps/demo"
   },
   "scripts": {
-    "icons:build": "shx mkdir -p public/icons && cd ../../packages/icons && yarn build && shx cp -r dist/. ../../static/assets/icons",
-    "start:prepare": "yarn icons:build",
-    "start": "yarn start:prepare && vite --host --config config/vite/app.ts",
+    "start": "vite --host --config config/vite/app.ts",
     "build": "vite build --config config/vite/app.ts",
     "preview": "vite preview --config config/vite/app.ts"
   },
@@ -27,7 +25,6 @@
     "rollup": "catalog:build",
     "sass-embedded": "catalog:build",
     "sass-true": "catalog:test",
-    "shx": "catalog:script",
     "typescript": "catalog:types",
     "vite": "catalog:build",
     "vite-plugin-handlebars": "catalog:build"
