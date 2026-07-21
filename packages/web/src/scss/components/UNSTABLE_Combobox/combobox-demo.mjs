@@ -46,9 +46,14 @@ function getVisibleRows(popupEl) {
   return getRows(popupEl).filter((row) => row.style.display !== 'none');
 }
 
-function setRowSelected(rowEl, selected) {
+function setRowSelected(rowEl, selected, { disabled = false } = {}) {
   rowEl.setAttribute('aria-selected', selected ? 'true' : 'false');
   rowEl.classList.toggle('Item--selected', selected);
+  rowEl.classList.toggle('color-scheme-on-selected-subtle', selected);
+  rowEl.classList.toggle('bg-color-scheme', selected && !disabled);
+  // Match Item API: selected + disabled uses disabled surface utilities, no fill background.
+  rowEl.classList.toggle('disabled', selected && disabled);
+  rowEl.classList.toggle('text-color-scheme', selected && disabled);
 }
 
 function getRowLabel(rowEl) {
@@ -216,7 +221,7 @@ function initCombobox(comboboxEl) {
     .filter((row) => row.getAttribute('aria-selected') === 'true')
     .forEach((row) => {
       if (row.id) selectedIds.push(row.id);
-      row.classList.add('Item--selected');
+      setRowSelected(row, true, { disabled: isDisabled });
     });
 
   // ── Selection rendering ───────────────────────────────────────────────────
@@ -295,7 +300,7 @@ function initCombobox(comboboxEl) {
         label,
         selectionEl,
         () => {
-          setRowSelected(rowEl, false);
+          setRowSelected(rowEl, false, { disabled: isDisabled });
           const idx = selectedIds.indexOf(id);
 
           if (idx !== -1) selectedIds.splice(idx, 1);
@@ -345,7 +350,7 @@ function initCombobox(comboboxEl) {
 
     const isSelected = rowEl.getAttribute('aria-selected') === 'true';
 
-    setRowSelected(rowEl, !isSelected);
+    setRowSelected(rowEl, !isSelected, { disabled: isDisabled });
 
     if (isSelected) {
       const idx = selectedIds.indexOf(rowEl.id);
@@ -562,7 +567,7 @@ function initCombobox(comboboxEl) {
       event.preventDefault();
       event.stopPropagation();
 
-      getRows(popupEl).forEach((row) => setRowSelected(row, false));
+      getRows(popupEl).forEach((row) => setRowSelected(row, false, { disabled: isDisabled }));
       selectedIds.length = 0;
       renderSelection();
       inputEl.focus();

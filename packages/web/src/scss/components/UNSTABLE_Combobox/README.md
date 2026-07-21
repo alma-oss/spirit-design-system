@@ -98,7 +98,12 @@ The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two
           aria-labelledby="combobox-label"
           aria-multiselectable="true"
         >
-          <div role="row" id="opt-cs" aria-selected="true" class="Item">
+          <div
+            role="row"
+            id="opt-cs"
+            aria-selected="true"
+            class="Item Item--selected color-scheme-on-selected-subtle bg-color-scheme"
+          >
             <div role="gridcell"><span class="Label element-stretched cursor-pointer">Spanish</span></div>
           </div>
           <div role="row" id="opt-cs" aria-selected="false" class="Item">
@@ -141,7 +146,12 @@ For more information, please follow this article [Don't Use The Placeholder Attr
 Set `aria-selected="true"` on any option row to pre-select it on page load.
 
 ```html
-<div role="row" id="opt-cs" aria-selected="true" class="Item">
+<div
+  role="row"
+  id="opt-cs"
+  aria-selected="true"
+  class="Item Item--selected color-scheme-on-selected-subtle bg-color-scheme"
+>
   <div role="gridcell"><span class="Label element-stretched cursor-pointer">Czech</span></div>
 </div>
 ```
