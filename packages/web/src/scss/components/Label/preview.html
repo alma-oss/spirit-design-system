@@ -1,11 +1,87 @@
-<section class="py-1000 py-tablet-1100 hide-from-visual-tests">
+<section class="py-900 py-tablet-1000">
 
   <div class="Container">
 
-    <p>
-      <strong>Note:</strong> For demonstration purposes and to fulfill accessibility and HTML semantics requirements,
-      all labels on this page are associated with a related form component.
-    </p>
+    <h2 class="docs-Heading">Sizes</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label
+          for="label-size-xsmall"
+          class="Label Label--xsmall"
+        >XSmall</label>
+        <div class="InputContainer InputContainer--fill InputContainer--medium">
+          <input
+            type="text"
+            id="label-size-xsmall"
+            name="label-size-xsmall"
+            placeholder="Placeholder"
+          />
+        </div>
+      </div>
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label
+          for="label-size-small"
+          class="Label Label--small"
+        >Small</label>
+        <div class="InputContainer InputContainer--fill InputContainer--medium">
+          <input
+            type="text"
+            id="label-size-small"
+            name="label-size-small"
+            placeholder="Placeholder"
+          />
+        </div>
+      </div>
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label
+          for="label-size-medium"
+          class="Label Label--medium"
+        >Medium (default)</label>
+        <div class="InputContainer InputContainer--fill InputContainer--medium">
+          <input
+            type="text"
+            id="label-size-medium"
+            name="label-size-medium"
+            placeholder="Placeholder"
+          />
+        </div>
+      </div>
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label
+          for="label-size-large"
+          class="Label Label--large"
+        >Large</label>
+        <div class="InputContainer InputContainer--fill InputContainer--medium">
+          <input
+            type="text"
+            id="label-size-large"
+            name="label-size-large"
+            placeholder="Placeholder"
+          />
+        </div>
+      </div>
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label
+          for="label-size-xlarge"
+          class="Label Label--xlarge"
+        >XLarge</label>
+        <div class="InputContainer InputContainer--fill InputContainer--medium">
+          <input
+            type="text"
+            id="label-size-xlarge"
+            name="label-size-xlarge"
+            placeholder="Placeholder"
+          />
+        </div>
+      </div>
+
+    </div>
 
   </div>
 
@@ -22,7 +98,7 @@
       <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="text-field-example"
-          class="Label"
+          class="Label Label--medium"
         >Label</label>
         <div class="InputContainer InputContainer--fill InputContainer--medium">
           <input
@@ -36,7 +112,7 @@
       <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="text-field-required"
-          class="Label Label--required"
+          class="Label Label--medium Label--required"
         >Required Field</label>
         <div class="InputContainer InputContainer--fill InputContainer--medium">
           <input
@@ -51,7 +127,7 @@
       <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="text-field-disabled"
-          class="Label Label--disabled"
+          class="Label Label--medium Label--disabled"
         >Disabled Field</label>
         <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
           <input
@@ -66,7 +142,7 @@
       <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
         <label
           for="text-field-hidden"
-          class="Label accessibility-hidden"
+          class="Label Label--medium accessibility-hidden"
         >Hidden Label</label>
         <div class="InputContainer InputContainer--fill InputContainer--medium">
           <input
@@ -101,7 +177,7 @@
           />
           <div>
             <label
-              class="Label cursor-pointer"
+              class="Label Label--medium cursor-pointer"
               for="checkbox-example"
             >Checkbox Label</label>
           </div>
@@ -116,7 +192,7 @@
           />
           <div>
             <label
-              class="Label cursor-pointer Label--required"
+              class="Label Label--medium cursor-pointer Label--required"
               for="checkbox-required"
             >Required Checkbox</label>
           </div>
@@ -131,7 +207,7 @@
           />
           <div>
             <label
-              class="Label cursor-pointer Label--disabled"
+              class="Label Label--medium cursor-pointer Label--disabled"
               for="checkbox-disabled"
             >Disabled Checkbox</label>
           </div>
@@ -158,7 +234,7 @@
         class="Item"
       >
         <span class="Item__content" role="presentation">
-          <span class="Label element-stretched cursor-pointer">Item label</span>
+          <span class="Label Label--medium element-stretched cursor-pointer">Item label</span>
         </span>
       </button>
 
@@ -167,7 +243,7 @@
         class="Item color-scheme-on-selected-subtle bg-color-scheme"
       >
         <span class="Item__content" role="presentation">
-          <span class="Label element-stretched cursor-pointer">Selected Item</span>
+          <span class="Label Label--medium element-stretched cursor-pointer">Selected Item</span>
         </span>
         <span class="Item__slot" role="presentation">
           <svg
@@ -186,7 +262,7 @@
         class="Item disabled text-color-scheme"
       >
         <span class="Item__content" role="presentation">
-          <span class="Label element-stretched Label--disabled">Disabled Item</span>
+          <span class="Label Label--medium element-stretched Label--disabled">Disabled Item</span>
         </span>
       </button>
 
@@ -214,7 +290,7 @@
         </div>
         <div class="Item__content" role="presentation">
           <label
-            class="Label element-stretched cursor-pointer"
+            class="Label Label--medium element-stretched cursor-pointer"
             for="checkbox-item-example"
           >Checkbox Item</label>
         </div>
@@ -231,7 +307,7 @@
         </div>
         <div class="Item__content" role="presentation">
           <label
-            class="Label element-stretched Label--disabled"
+            class="Label Label--medium element-stretched Label--disabled"
             for="checkbox-item-disabled"
           >Disabled Checkbox Item</label>
         </div>
@@ -248,7 +324,7 @@
         </div>
         <div class="Item__content" role="presentation">
           <label
-            class="Label element-stretched cursor-pointer"
+            class="Label Label--medium element-stretched cursor-pointer"
             for="radio-item-example"
           >Radio Item</label>
         </div>
@@ -266,7 +342,7 @@
         </div>
         <div class="Item__content" role="presentation">
           <label
-            class="Label element-stretched Label--disabled"
+            class="Label Label--medium element-stretched Label--disabled"
             for="radio-item-disabled"
           >Disabled Radio Item</label>
         </div>

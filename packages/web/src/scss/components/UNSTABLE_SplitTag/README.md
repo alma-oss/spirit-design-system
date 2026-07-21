@@ -78,7 +78,7 @@ but that is not the pattern used in this recipe.
           class="Item cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
         >
           <span class="Item__content" role="presentation">
-            <span class="Label">+5 km</span>
+            <span class="Label Label--medium">+5 km</span>
           </span>
           <span class="Item__slot" role="presentation">
             <svg
@@ -94,7 +94,7 @@ but that is not the pattern used in this recipe.
         </div>
         <div role="option" id="split-tag-radius-10" aria-selected="false" tabindex="-1" class="Item cursor-pointer">
           <span class="Item__content" role="presentation">
-            <span class="Label">+10 km</span>
+            <span class="Label Label--medium">+10 km</span>
           </span>
           <span class="Item__slot" role="presentation">
             <svg

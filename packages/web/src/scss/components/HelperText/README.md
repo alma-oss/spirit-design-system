@@ -6,7 +6,7 @@ HelperText is a component used to display helper text for form field components.
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-helper-text" class="Label">Label</label>
+  <label for="text-field-helper-text" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-helper-text" name="helperText" placeholder="Placeholder" />
   </div>
@@ -29,7 +29,7 @@ Place HelperText inside the **Radio** or **Checkbox** text area:
     aria-describedby="radio-helper-text-helper-text"
   />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label" for="radio-helper-text">Radio Label</label>
+    <label class="Label Label--medium" for="radio-helper-text">Radio Label</label>
     <div class="HelperText" id="radio-helper-text-helper-text">Helper text</div>
   </div>
 </div>
@@ -44,7 +44,7 @@ Place HelperText inside the **Radio** or **Checkbox** text area:
     aria-describedby="checkbox-helper-text-helper-text"
   />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label" for="checkbox-helper-text">Checkbox Label</label>
+    <label class="Label Label--medium" for="checkbox-helper-text">Checkbox Label</label>
     <div class="HelperText" id="checkbox-helper-text-helper-text">Helper text</div>
   </div>
 </div>
@@ -58,7 +58,7 @@ Place HelperText inside `Item__content`, including in Checkbox/Radio item varian
 <button type="button" class="Item">
   <span class="Item__content" role="presentation">
     <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-      <span class="Label element-stretched">Item label</span>
+      <span class="Label Label--medium element-stretched">Item label</span>
       <span class="HelperText">Helper text</span>
     </div>
   </span>
@@ -71,7 +71,7 @@ Use the `HelperText--disabled` modifier class for disabled helper text. Add it w
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-disabled" class="Label Label--disabled">Label</label>
+  <label for="text-field-disabled" class="Label Label--medium Label--disabled">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <input type="text" id="text-field-disabled" name="disabled" placeholder="Placeholder" disabled />
   </div>
@@ -85,7 +85,7 @@ When using HelperText with form inputs, associate it with the input using the `a
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-helper-text" class="Label">Label</label>
+  <label for="text-field-helper-text" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input
       type="text"

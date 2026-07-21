@@ -365,11 +365,11 @@ A producer provides one or more group contexts at once via the `Provider` helper
 
 The existing group contexts are:
 
-| Context                 | Shared value  | Consumers                                       | Producers                                    |
-| ----------------------- | ------------- | ----------------------------------------------- | -------------------------------------------- |
-| `FormFieldsContext`     | `size`        | `InputAddon`, `InputContainer`, `ControlButton` | `TextFieldBase`, `UNSTABLE_Picker`, `Select` |
-| `InlineElementsContext` | `elementType` | `Label`, `HelperText`, `ValidationText`         | `Item`, `Stack`, `StackItem`                 |
-| `ListItemsContext`      | `elementType` | `Item`, `StackItem`                             | `Stack`, `StackItem`                         |
+| Context                 | Shared value  | Consumers                                                | Producers                                                         |
+| ----------------------- | ------------- | -------------------------------------------------------- | ----------------------------------------------------------------- |
+| `FormFieldsContext`     | `size`        | `InputAddon`, `InputContainer`, `ControlButton`, `Label` | `TextFieldBase`, `UNSTABLE_Picker`, `Select`, `UNSTABLE_Combobox` |
+| `InlineElementsContext` | `elementType` | `Label`, `HelperText`, `ValidationText`                  | `Item`, `Stack`, `StackItem`                                      |
+| `ListItemsContext`      | `elementType` | `Item`, `StackItem`                                      | `Stack`, `StackItem`                                              |
 
 `InlineElementsContext` and `ListItemsContext` both carry an `elementType`, but they answer different questions
 and are read by disjoint components: `ListItemsContext` tells `Item`/`StackItem` what element type _they_
