@@ -1,5 +1,5 @@
-import { type FocusEvent, type KeyboardEvent, type ReactNode } from 'react';
-import type { SelectionMode } from '../../hooks';
+import { type ReactNode } from 'react';
+import type { SelectionGridRowProps, SelectionMode } from '../../hooks';
 import type {
   DropdownBaseProps,
   FillVariantDictionaryType,
@@ -18,13 +18,7 @@ import type {
 export type UnstablePickerSelectionMode = SelectionMode;
 
 /** Row props produced by `usePickerSelectionGridKeyboard` for roving tabindex and grid keys */
-export interface UnstablePickerSelectionGridRowProps {
-  tabIndex: 0 | -1;
-  onKeyDown: (event: KeyboardEvent<HTMLElement>) => void;
-  onFocusCapture: (event: FocusEvent<HTMLElement>) => void;
-  onBlurCapture: (event: FocusEvent<HTMLElement>) => void;
-  removeButtonTabIndex: 0 | -1;
-}
+export type UnstablePickerSelectionGridRowProps = SelectionGridRowProps;
 
 export interface UnstablePickerTranslations {
   addButtonLabel?: string;
