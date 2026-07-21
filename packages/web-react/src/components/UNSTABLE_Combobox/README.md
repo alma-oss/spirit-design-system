@@ -233,12 +233,12 @@ values Combobox does not set itself.
 
 #### Ref
 
-| Property                   | Description                                                                                          |
-| -------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `activateOption(optionId)` | Visually activate an option by value, or pass `null` to clear; focuses the filter input              |
-| `close()`                  | Closes the popover (via `onToggle`)                                                                  |
-| `focus()`                  | Focuses the combobox filter input                                                                    |
-| `selectedKeys`             | Current selected keys (mirrors the `selectedKeys` prop)                                              |
+| Property                   | Description                                                                             |
+| -------------------------- | --------------------------------------------------------------------------------------- |
+| `activateOption(optionId)` | Visually activate an option by value, or pass `null` to clear; focuses the filter input |
+| `close()`                  | Closes the popover (via `onToggle`)                                                     |
+| `focus()`                  | Focuses the combobox filter input                                                       |
+| `selectedKeys`             | Current selected keys (mirrors the `selectedKeys` prop)                                 |
 
 | Name                          | Type                                                        | Default                                     | Required | Description                                                                                                                          |
 | ----------------------------- | ----------------------------------------------------------- | ------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
