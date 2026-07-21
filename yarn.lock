@@ -6788,7 +6788,6 @@ __metadata:
     rollup: "catalog:build"
     sass-embedded: "catalog:build"
     sass-true: "catalog:test"
-    shx: "catalog:script"
     typescript: "catalog:types"
     vite: "catalog:build"
     vite-plugin-handlebars: "catalog:build"
