@@ -116,6 +116,32 @@ describe('Dropdown', () => {
     }
   });
 
+  it('should focus first interactive element inside popover when open', () => {
+    render(
+      <Dropdown id="dropdown" isOpen onToggle={jest.fn()}>
+        <DropdownTrigger>trigger</DropdownTrigger>
+        <DropdownPopover aria-label="Dropdown">
+          <button type="button">Action</button>
+        </DropdownPopover>
+      </Dropdown>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Action' })).toHaveFocus();
+  });
+
+  it('should not move focus into popover when enableAutoFocus is false', () => {
+    render(
+      <Dropdown id="dropdown" isOpen onToggle={jest.fn()}>
+        <DropdownTrigger>trigger</DropdownTrigger>
+        <DropdownPopover aria-label="Dropdown" enableAutoFocus={false}>
+          <button type="button">Action</button>
+        </DropdownPopover>
+      </Dropdown>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Action' })).not.toHaveFocus();
+  });
+
   it('should not call toggle on Escape when closed', () => {
     const onToggle = jest.fn();
 

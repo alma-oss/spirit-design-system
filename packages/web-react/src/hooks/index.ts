@@ -12,6 +12,7 @@ export * from './useDebouncedValue';
 export * from './useDeprecationMessage';
 export * from './useDimensionStyle';
 export * from './useDragAndDrop';
+export * from './gridKeyboardNavigation';
 export * from './useI18n';
 export * from './useIcon';
 export * from './useIconName';

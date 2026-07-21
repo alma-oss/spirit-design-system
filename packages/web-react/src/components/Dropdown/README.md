@@ -23,7 +23,8 @@ export const Example = () => {
 
 `DropdownPopover` follows the non-modal anchored dialog pattern:
 
-- When the popover **opens**, focus automatically moves to the **first interactive element** inside it.
+- When the popover **opens**, focus automatically moves to the **first interactive element** inside it
+  (opt out with `enableAutoFocus={false}`).
 - **Escape** – closes the popover and returns focus to the trigger (works from both the trigger and items inside the popover)
 - **Tab** from the last focusable element inside the popover – closes the popover and returns focus to the trigger (no focus trap)
 - **Shift+Tab** from the first focusable element inside the popover – closes the popover and returns focus to the trigger
@@ -151,10 +152,14 @@ When you override `role` (e.g. `role="menu"`), also pass the matching `aria-hasp
 </Dropdown>
 ```
 
-| Name       | Type                       | Default    | Required | Description            |
-| ---------- | -------------------------- | ---------- | -------- | ---------------------- |
-| `children` | \[`string` \| `ReactNode`] | —          | ✓        | Content of the popover |
-| `role`     | `string`                   | `"dialog"` | ✕        | Override the ARIA role |
+Widgets that manage focus themselves (e.g. a combobox keeping focus in its input) can opt out of the
+focus move on open with `enableAutoFocus={false}`.
+
+| Name              | Type                       | Default    | Required | Description                                                         |
+| ----------------- | -------------------------- | ---------- | -------- | ------------------------------------------------------------------- |
+| `children`        | \[`string` \| `ReactNode`] | —          | ✓        | Content of the popover                                              |
+| `enableAutoFocus` | `bool`                     | `true`     | ✕        | Moves focus to the first interactive element inside it when opening |
+| `role`            | `string`                   | `"dialog"` | ✕        | Override the ARIA role                                              |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
