@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import type { FocusEvent, KeyboardEvent } from 'react';
-import { usePickerSelectionGridKeyboard } from '../usePickerSelectionGridKeyboard';
+import { useSelectionGridKeyboard as usePickerSelectionGridKeyboard } from '../../../hooks/useSelectionGridKeyboard';
 
 const createSelectionGrid = (rowCount: number) => {
   const container = document.createElement('div');

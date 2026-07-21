@@ -10,6 +10,7 @@ import {
   useAriaDescribedBy,
   useI18n,
   useOpenOnArrowDown,
+  useSelectionGridKeyboard,
   useStyleProps,
 } from '../../hooks';
 import { replaceTranslationParams } from '../../translations';
@@ -30,7 +31,6 @@ import UNSTABLE_PickerSelection from './UNSTABLE_PickerSelection';
 import UNSTABLE_PickerTag from './UNSTABLE_PickerTag';
 import UNSTABLE_PickerTrigger from './UNSTABLE_PickerTrigger';
 import { usePickerId } from './usePickerId';
-import { usePickerSelectionGridKeyboard } from './usePickerSelectionGridKeyboard';
 import { usePickerStyleProps } from './usePickerStyleProps';
 import {
   collectPickerItems,
@@ -128,7 +128,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     isAggregated,
   });
 
-  const { getKeyboardGridRowProps, removeTagAtIndex } = usePickerSelectionGridKeyboard({
+  const { getKeyboardGridRowProps, removeTagAtIndex } = useSelectionGridKeyboard({
     isDisabled,
     isPopoverOpen: isOpen,
     onRemoveAtIndex: (index) => {
