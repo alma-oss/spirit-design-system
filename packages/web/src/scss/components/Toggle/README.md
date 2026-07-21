@@ -190,62 +190,80 @@ components mix CSS with JS by design and handle prefixes their own way.**
 
 ## Consent with Details
 
-For consent scenarios where users need access to terms and conditions or privacy policies, use the [`InputDetails`][readme-input-details]
-class to render supplementary content (such as modal triggers) below the label.
+For consent scenarios where users need access to supplementary content — such as terms and conditions or a privacy
+policy — use the [`InputDetails`][readme-input-details] element to render a trigger below the label. The linked
+content can be revealed in a [Modal][readme-modal] dialog or expanded inline with [Collapse][readme-collapse].
 
-### Full Example
+**Keep the toggle label itself as short as possible at all times.** Move any supplementary explanation into
+`InputDetails` instead. Screen readers read the full label out loud, so a long label is read in full every time.
+Short labels are also easier for sighted users to scan.
+
+### With Modal
 
 ```html
 <div
   class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
   style="--flex-spacing-x: var(--spirit-space-500);"
 >
-  <input
-    type="checkbox"
-    id="toggle-consent-full"
-    class="Toggle Toggle--danger"
-    name="consent"
-    required
-    aria-describedby="toggle-consent-full-helper-text toggle-consent-full-validation-text"
-    aria-details="toggle-consent-full-details"
-  />
+  <input type="checkbox" id="consent" class="Toggle" name="consent" required aria-details="consent-details" />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--required cursor-pointer" for="toggle-consent-full">
-      I agree to the terms and privacy policy
-    </label>
-    <div id="toggle-consent-full-details" class="InputDetails">
+    <label class="Label Label--required cursor-pointer" for="consent">I agree to the terms and conditions</label>
+    <div id="consent-details" class="InputDetails">
+      <p class="typography-body-small-regular mb-0">Please review our terms and conditions before you agree.</p>
       <button
         type="button"
         class="link-underlined link-inherit"
         data-spirit-toggle="modal"
-        data-spirit-target="#terms-modal"
+        data-spirit-target="#toggle-terms-modal"
+        aria-controls="toggle-terms-modal"
+        aria-expanded="false"
       >
         See full terms and conditions
       </button>
-      <button
-        type="button"
-        class="link-underlined link-inherit"
-        data-spirit-toggle="modal"
-        data-spirit-target="#privacy-modal"
-      >
-        See privacy policy
-      </button>
-    </div>
-    <div class="HelperText" id="toggle-consent-full-helper-text">
-      Please read the documents carefully before agreeing
-    </div>
-    <div class="ValidationText ValidationText--danger" id="toggle-consent-full-validation-text">
-      You must agree to continue
     </div>
   </div>
 </div>
-<!-- Modal definitions -->
+
+<!-- Modal definition -->
+```
+
+### With Collapse
+
+```html
+<div
+  class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500"
+  style="--flex-spacing-x: var(--spirit-space-500);"
+>
+  <input type="checkbox" id="consent" class="Toggle" name="consent" required aria-details="consent-details" />
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+    <label class="Label Label--required cursor-pointer" for="consent">I agree to the terms and conditions</label>
+    <div id="consent-details" class="InputDetails">
+      <p class="typography-body-small-regular mb-0">Please review our terms and conditions before you agree.</p>
+      <button
+        type="button"
+        class="link-underlined link-inherit"
+        data-spirit-toggle="collapse"
+        data-spirit-target="toggle-terms-collapse"
+        aria-controls="toggle-terms-collapse"
+        aria-expanded="false"
+      >
+        Show more
+      </button>
+      <div id="toggle-terms-collapse" class="Collapse">
+        <div class="Collapse__content">
+          <!-- Terms and conditions content -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 ```
 
 ## Accessibility
 
 - The details content is linked to the toggle via the `aria-details` attribute
-- Use `<button>` elements with link styling (e.g., `link-underlined`, `link-inherit`), NOT `<a>` tags, for modal triggers
+- Use `<button>` elements with link styling (e.g., `link-underlined`, `link-inherit`), NOT `<a>` tags, for modal or
+  collapse triggers
 - The `aria-details` attribute is separate from `aria-describedby`:
   - `aria-describedby` announces essential information immediately (helper text, validation messages)
   - `aria-details` points to supplementary content that users can explore when needed (terms links, additional info)
@@ -315,10 +333,12 @@ Use responsive breakpoint modifiers to change input position at different screen
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [mdn-checkbox]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
 [prefixed]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#prefixing-css-class-names
+[readme-collapse]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Collapse/README.md
 [readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
 [readme-flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Flex/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [readme-input-details]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputDetails/README.md
+[readme-modal]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Modal/README.md
 [readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
 [readme-validation-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ValidationText/README.md
