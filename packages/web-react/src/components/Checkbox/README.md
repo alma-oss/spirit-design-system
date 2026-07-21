@@ -49,18 +49,22 @@ Pass an object to adjust the input position based on the [breakpoint][dictionary
 
 ## Consent with Details
 
-For consent scenarios where users need access to terms and conditions or privacy policies, use the `details` prop
-to render supplementary content (such as link or modal triggers) below the label.
+For consent scenarios where users need access to supplementary content — such as terms and conditions or a privacy
+policy — use the `details` prop to render trigger links below the label. The linked content can be revealed in a
+[Modal][readme-modal] dialog or expanded inline with [Collapse][readme-collapse].
 
-### Full Example
+**Keep the `label` itself as short as possible at all times.** Move any supplementary explanation into `details`
+instead. Screen readers read the full label out loud, so a long label is read in full every time. Short labels are
+also easier for sighted users to scan.
+
+### With Modal
 
 ```tsx
 import React, { useState } from 'react';
-import { Checkbox, Link, Modal } from '@alma-oss/spirit-web-react';
+import { Checkbox, Link, Modal, Text } from '@alma-oss/spirit-web-react';
 
 const Example = () => {
   const [isTermsModalOpen, setTermsModalOpen] = useState(false);
-  const [isPrivacyModalOpen, setPrivacyModalOpen] = useState(false);
 
   return (
     <>
@@ -68,16 +72,13 @@ const Example = () => {
         id="consent"
         label="I agree to the terms and privacy policy"
         isRequired
-        helperText="Please read the documents carefully before agreeing"
-        validationState="danger"
-        validationText="You must agree to continue"
         details={
           <>
+            <Text size="small" marginBottom="space-0">
+              Please review our terms and conditions before you agree.
+            </Text>
             <Link elementType="button" color="inherit" underlined="always" onClick={() => setTermsModalOpen(true)}>
               See full terms and conditions
-            </Link>
-            <Link elementType="button" color="inherit" underlined="always" onClick={() => setPrivacyModalOpen(true)}>
-              See privacy policy
             </Link>
           </>
         }
@@ -85,10 +86,39 @@ const Example = () => {
       <Modal id="checkbox-terms-modal" isOpen={isTermsModalOpen} onClose={() => setTermsModalOpen(false)}>
         {/* Modal content */}
       </Modal>
-      <Modal id="checkbox-privacy-modal" isOpen={isPrivacyModalOpen} onClose={() => setPrivacyModalOpen(false)}>
-        {/* Modal content */}
-      </Modal>
     </>
+  );
+};
+```
+
+### With Collapse
+
+```tsx
+import React from 'react';
+import { Checkbox, Collapse, Link, Text, useCollapse } from '@alma-oss/spirit-web-react';
+
+const Example = () => {
+  const { isOpen, toggleHandler } = useCollapse(false);
+
+  return (
+    <Checkbox
+      id="consent"
+      label="I agree to the terms and conditions"
+      isRequired
+      details={
+        <>
+          <Text size="small" marginBottom="space-0">
+            Please review our terms and conditions before you agree.
+          </Text>
+          <Link elementType="button" color="inherit" underlined="always" onClick={toggleHandler} aria-expanded={isOpen}>
+            Show more
+          </Link>
+          <Collapse id="checkbox-terms-collapse" isOpen={isOpen}>
+            {/* Terms and conditions content */}
+          </Collapse>
+        </>
+      }
+    />
   );
 };
 ```
@@ -96,7 +126,7 @@ const Example = () => {
 ## Accessibility
 
 - The `details` content is linked to the checkbox via the `aria-details` attribute
-- Use `Link` component with `elementType="button"` for modal triggers (not `<a>` tags) for better accessibility
+- Use `Link` component with `elementType="button"` for modal or collapse triggers (not `<a>` tags) for better accessibility
 - The `aria-details` attribute is separate from `aria-describedby`:
   - `aria-describedby` announces essential information immediately (helper text, validation messages)
   - `aria-details` points to supplementary content that users can explore when needed (terms links, additional info)
@@ -229,9 +259,11 @@ For detailed information see the [Checkbox][readme-checkbox] component.
 [item]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Item/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-checkbox]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Checkbox/README.md
+[readme-collapse]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Collapse/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/HelperText/README.md
 [readme-label]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Label/README.md
+[readme-modal]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Modal/README.md
 [readme-responsive]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#responsive-props
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [readme-validation-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ValidationText/README.md
