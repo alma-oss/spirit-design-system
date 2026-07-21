@@ -64,7 +64,7 @@ Use the `ValidationText--disabled` modifier class when the associated form contr
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="text-field-disabled" class="Label Label--disabled">Label</label>
+  <label for="text-field-disabled" class="Label Label--medium Label--disabled">Label</label>
   <div
     class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled InputContainer--danger"
   >
@@ -99,7 +99,7 @@ ValidationText works seamlessly with Spirit form components:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="example" class="Label">Label</label>
+  <label for="example" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger">
     <input type="text" id="example" placeholder="Placeholder" value="Filled" />
   </div>
@@ -113,7 +113,7 @@ ValidationText works seamlessly with Spirit form components:
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="example" class="Checkbox Checkbox--danger" name="example" />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label" for="example">Checkbox Label</label>
+    <label class="Label Label--medium" for="example">Checkbox Label</label>
     <div class="ValidationText ValidationText--danger">Danger validation text</div>
   </div>
 </div>

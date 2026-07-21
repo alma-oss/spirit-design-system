@@ -8,9 +8,10 @@ export interface LabelStyles {
 }
 
 export function useLabelStyleProps(props: LabelStyleProps): LabelStyles {
-  const { hasPointerCursor, isDisabled, isStretched, isLabelHidden, isRequired } = props;
+  const { hasPointerCursor, isDisabled, isStretched, isLabelHidden, isRequired, size } = props;
 
   const prefix = useClassNamePrefix('Label');
+  const sizeClass = `${prefix}--${size}`;
   const requiredClass = `${prefix}--required`;
   const disabledClass = `${prefix}--disabled`;
   const hiddenClass = useClassNamePrefix('accessibility-hidden');
@@ -23,6 +24,7 @@ export function useLabelStyleProps(props: LabelStyleProps): LabelStyles {
     [requiredClass]: isRequired,
     [disabledClass]: isDisabled,
     [hiddenClass]: isLabelHidden,
+    [sizeClass]: size,
   });
 
   return {

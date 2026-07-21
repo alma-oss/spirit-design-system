@@ -26,20 +26,33 @@ You can override context by passing props directly:
 
 ### API
 
-| Name               | Type          | Default | Required | Description                                                                |
-| ------------------ | ------------- | ------- | -------- | -------------------------------------------------------------------------- |
-| `children`         | `ReactNode`   | —       | ✕        | Label content                                                              |
-| `elementType`      | `ElementType` | `label` | ✕        | Type of element used as root (e.g. `label`, `span`)                        |
-| `for` / `htmlFor`  | `string`      | —       | ✕        | ID of the associated form control (for `elementType="label"`)              |
-| `hasPointerCursor` | `bool`        | `false` | ✕        | Applies a pointer cursor; set automatically by Checkbox, Radio, and Toggle |
-| `isDisabled`       | `bool`        | `false` | ✕        | Disabled state; when not set, taken from parent context                    |
-| `isLabelHidden`    | `bool`        | `false` | ✕        | Visually hide label while keeping it accessible; from parent context       |
-| `isRequired`       | `bool`        | `false` | ✕        | Shows required indicator; when not set, taken from parent context          |
-| `isStretched`      | `bool`        | `false` | ✕        | Applies `element-stretched` helper; set automatically in item mode         |
+| Name               | Type                                        | Default  | Required | Description                                                                |
+| ------------------ | ------------------------------------------- | -------- | -------- | -------------------------------------------------------------------------- |
+| `children`         | `ReactNode`                                 | —        | ✕        | Label content                                                              |
+| `elementType`      | `ElementType`                               | `label`  | ✕        | Type of element used as root (e.g. `label`, `span`)                        |
+| `for` / `htmlFor`  | `string`                                    | —        | ✕        | ID of the associated form control (for `elementType="label"`)              |
+| `hasPointerCursor` | `bool`                                      | `false`  | ✕        | Applies a pointer cursor; set automatically by Checkbox, Radio, and Toggle |
+| `isDisabled`       | `bool`                                      | `false`  | ✕        | Disabled state; when not set, taken from parent context                    |
+| `isLabelHidden`    | `bool`                                      | `false`  | ✕        | Visually hide label while keeping it accessible; from parent context       |
+| `isRequired`       | `bool`                                      | `false`  | ✕        | Shows required indicator; when not set, taken from parent context          |
+| `isStretched`      | `bool`                                      | `false`  | ✕        | Applies `element-stretched` helper; set automatically in item mode         |
+| `size`             | [Size Extended dictionary][dictionary-size] | `medium` | ✕        | Typography size; inherited from size-aware parent context                  |
 
 On top of the API options, the component accepts [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+## Sizes
+
+Label supports `xsmall`, `small`, `medium`, `large`, and `xlarge` sizes. The default size is `medium`.
+Size-aware form fields such as TextField, TextArea, and Select provide their size through context.
+Label inherits it unless a direct `size` prop overrides the context.
+
+```tsx
+<Label elementType="span" size="small">
+  Small label
+</Label>
+```
 
 ## Pointer Cursor
 
@@ -55,6 +68,7 @@ You can also set it explicitly on a standalone Label:
 </Label>
 ```
 
+[dictionary-size]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#size
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-checkbox]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Checkbox/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
