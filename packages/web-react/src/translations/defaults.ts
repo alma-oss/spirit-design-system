@@ -28,6 +28,18 @@ export const defaultTranslations = {
     selectionAriaLabel: 'Selected {label}',
     tagDescriptionText: 'Press Delete or Backspace to remove',
   },
+  combobox: {
+    addMore: '+ Add more…',
+    addMoreDescription: 'Add more {label}',
+    emptyState: 'Nothing found',
+    loading: 'Loading…',
+    removeAll: 'Remove all',
+    removeItemLabel: 'Remove {itemLabel}',
+    selectionAriaLabel: 'Selected {label}',
+    selectionCountLabel: '{label}, {count} items selected',
+    selectionCountLabelSingular: '{label}, {count} item selected',
+    tagDescriptionText: 'Press Delete or Backspace to remove',
+  },
   textArea: {
     counter: {
       charactersEntered: '{count} characters entered',
