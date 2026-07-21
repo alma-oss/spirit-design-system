@@ -4,7 +4,8 @@ import icons from '@alma-oss/spirit-icons/icons';
 import React, { StrictMode } from 'react';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
-import ToggleConsentFullExample from './ToggleConsentFullExample';
+import ToggleConsentCollapseExample from './ToggleConsentCollapseExample';
+import ToggleConsentModalExample from './ToggleConsentModalExample';
 import ToggleDefault from './ToggleDefault';
 import ToggleDisabled from './ToggleDisabled';
 import ToggleHelperText from './ToggleHelperText';
@@ -45,8 +46,11 @@ export const Preview = () => (
       <DocsSection title="Input Position" stackAlignment="stretch">
         <ToggleInputPosition />
       </DocsSection>
-      <DocsSection title="Consent Full Example" stackAlignment="stretch">
-        <ToggleConsentFullExample />
+      <DocsSection title="Consent with Modal" stackAlignment="stretch">
+        <ToggleConsentModalExample />
+      </DocsSection>
+      <DocsSection title="Consent with Collapse" stackAlignment="stretch">
+        <ToggleConsentCollapseExample />
       </DocsSection>
     </IconsProvider>
   </StrictMode>

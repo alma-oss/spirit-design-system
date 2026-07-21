@@ -130,7 +130,7 @@ Short labels are also easier for sighted users to scan.
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="consent" class="Checkbox" name="consent" aria-details="consent-details" required />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--required cursor-pointer" for="consent">I agree to the terms and privacy policy</label>
+    <label class="Label Label--required cursor-pointer" for="consent">I agree to the terms and conditions</label>
     <div id="consent-details" class="InputDetails">
       <p class="typography-body-small-regular mb-0">Please review our terms and conditions before you agree.</p>
       <button
@@ -184,6 +184,8 @@ Short labels are also easier for sighted users to scan.
 - The details content is linked to the checkbox via the `aria-details` attribute
 - Use `<button>` elements with link styling (e.g., `link-underlined`, `link-inherit`), NOT `<a>` tags, for modal or
   collapse triggers
+- `aria-controls` (matching the Modal or Collapse `id`) and `aria-expanded` on the trigger element communicate the
+  trigger-content relationship and its open/expanded state to assistive technology
 - The `aria-details` attribute is separate from `aria-describedby`:
   - `aria-describedby` announces essential information immediately (helper text, validation messages)
   - `aria-details` points to supplementary content that users can explore when needed (terms links, additional info)

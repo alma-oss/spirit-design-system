@@ -49,12 +49,19 @@ export const Example = () => {
 
   return (
     <>
-      <Button onClick={toggleHandler}>Collapse Trigger ({isOpen ? 'Open' : 'Closed'})</Button>
-      <Collapse isOpen={isOpen}>…</Collapse>
+      <Button onClick={toggleHandler} aria-expanded={isOpen} aria-controls="collapse-example">
+        Collapse Trigger ({isOpen ? 'Open' : 'Closed'})
+      </Button>
+      <Collapse id="collapse-example" isOpen={isOpen}>
+        …
+      </Collapse>
     </>
   );
 };
 ```
+
+`aria-controls` (matching the Collapse `id`) and `aria-expanded` on the trigger element communicate the
+trigger-content relationship and its expanded state to assistive technology.
 
 ### Responsive
 

@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Collapse, useCollapse } from '../../Collapse';
 import { Link } from '../../Link';
 import { Text } from '../../Text';
-import Checkbox from '../Checkbox';
+import Toggle from '../Toggle';
 
-const CheckboxConsentCollapseExample = () => {
+const ToggleConsentCollapseExample = () => {
   const [isChecked, setChecked] = useState(true);
   const { isOpen, toggleHandler } = useCollapse(false);
 
   return (
-    <Checkbox
+    <Toggle
       id="consent-with-collapse-example"
       name="consentWithCollapseExample"
       label="Notifications about similar positions from this company"
@@ -43,4 +43,4 @@ const CheckboxConsentCollapseExample = () => {
   );
 };
 
-export default CheckboxConsentCollapseExample;
+export default ToggleConsentCollapseExample;
