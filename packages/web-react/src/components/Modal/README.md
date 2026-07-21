@@ -282,6 +282,9 @@ const handleClose = () => setOpen(false);
 </Button>;
 ```
 
+`aria-controls` (matching the Modal `id`) and `aria-expanded` on the trigger element communicate the
+trigger-dialog relationship and its open state to assistive technology.
+
 ## Scrolling Long Content
 
 In case the content is longer than user's viewport or device, the ModalBody will expand to fit the height of its content

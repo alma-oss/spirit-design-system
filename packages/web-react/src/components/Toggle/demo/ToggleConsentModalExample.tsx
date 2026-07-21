@@ -7,14 +7,14 @@ import ModalDialog from '../../Modal/ModalDialog';
 import ModalFooter from '../../Modal/ModalFooter';
 import ModalHeader from '../../Modal/ModalHeader';
 import { Text } from '../../Text';
-import Checkbox from '../Checkbox';
+import Toggle from '../Toggle';
 
-const CheckboxConsentModalExample = () => {
+const ToggleConsentModalExample = () => {
   const [isTermsOpen, setTermsOpen] = useState(false);
 
   return (
     <>
-      <Checkbox
+      <Toggle
         id="consent-with-modal-example"
         name="consentWithModalExample"
         label="I agree to the terms and conditions"
@@ -57,4 +57,4 @@ const CheckboxConsentModalExample = () => {
   );
 };
 
-export default CheckboxConsentModalExample;
+export default ToggleConsentModalExample;

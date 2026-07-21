@@ -70,14 +70,21 @@ const Example = () => {
     <>
       <Checkbox
         id="consent"
-        label="I agree to the terms and privacy policy"
+        label="I agree to the terms and conditions"
         isRequired
         details={
           <>
             <Text size="small" marginBottom="space-0">
               Please review our terms and conditions before you agree.
             </Text>
-            <Link elementType="button" color="inherit" underlined="always" onClick={() => setTermsModalOpen(true)}>
+            <Link
+              elementType="button"
+              color="inherit"
+              underlined="always"
+              onClick={() => setTermsModalOpen(true)}
+              aria-controls="checkbox-terms-modal"
+              aria-expanded={isTermsModalOpen}
+            >
               See full terms and conditions
             </Link>
           </>
@@ -110,7 +117,14 @@ const Example = () => {
           <Text size="small" marginBottom="space-0">
             Please review our terms and conditions before you agree.
           </Text>
-          <Link elementType="button" color="inherit" underlined="always" onClick={toggleHandler} aria-expanded={isOpen}>
+          <Link
+            elementType="button"
+            color="inherit"
+            underlined="always"
+            onClick={toggleHandler}
+            aria-expanded={isOpen}
+            aria-controls="checkbox-terms-collapse"
+          >
             Show more
           </Link>
           <Collapse id="checkbox-terms-collapse" isOpen={isOpen}>
@@ -127,6 +141,8 @@ const Example = () => {
 
 - The `details` content is linked to the checkbox via the `aria-details` attribute
 - Use `Link` component with `elementType="button"` for modal or collapse triggers (not `<a>` tags) for better accessibility
+- `aria-controls` (matching the Modal or Collapse `id`) and `aria-expanded` on the trigger element communicate the
+  trigger-content relationship and its open/expanded state to assistive technology
 - The `aria-details` attribute is separate from `aria-describedby`:
   - `aria-describedby` announces essential information immediately (helper text, validation messages)
   - `aria-details` points to supplementary content that users can explore when needed (terms links, additional info)
