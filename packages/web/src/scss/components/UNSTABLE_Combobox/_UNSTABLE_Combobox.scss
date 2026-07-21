@@ -48,3 +48,12 @@
         display: none;
     }
 }
+
+// Visual keyboard active option / nested control (pure aria-activedescendant — DOM focus stays on the input).
+.UNSTABLE_Combobox :where([role='option'], [role='row']).is-active:not([aria-disabled='true']) {
+    box-shadow: tokens.$focus-ring;
+}
+
+.UNSTABLE_Combobox [data-spirit-combobox-active-control] {
+    box-shadow: tokens.$focus-ring;
+}

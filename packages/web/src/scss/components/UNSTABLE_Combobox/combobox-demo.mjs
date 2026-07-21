@@ -8,9 +8,10 @@ import Dropdown from '../../../js/Dropdown';
 //   - Filter grid rows as the user types
 //   - Toggle aria-selected on rows (click or Enter/Space)
 //   - Render/remove Tag rows in the selection grid
-//   - Keyboard navigation: Arrow keys move physical focus into the popover; aria-activedescendant tracks the active row
+//   - Keyboard navigation: pure aria-activedescendant (DOM focus stays on the input; options are activated visually)
 //   - Clear-all button: deselect all rows, remove all tags
-//   - Popover open/close: Escape, click-outside, Tab-out
+//   - Popover open/close: pointer click, typing, Arrow Up/Down open; Escape, click-outside, Tab-out close
+//     (keyboard focus alone / Tab into the field does not open)
 //   - Hide the "+ Add more…" affordance when every option is already selected
 
 // ─── Selectors ───────────────────────────────────────────────────────────────
@@ -18,8 +19,12 @@ import Dropdown from '../../../js/Dropdown';
 const SELECTOR_COMBOBOX = '[data-spirit-element="combobox"]';
 const SELECTOR_INPUT = '[data-spirit-combobox-input]';
 const SELECTOR_POPUP = '[data-spirit-combobox-listbox]';
-const SELECTOR_ROW = '[role="row"]:not([data-spirit-combobox-tag-row])';
+/** Popup options: listbox `option` or grid `row` (selection tags are excluded). */
+const SELECTOR_OPTION_ITEM = '[role="option"], [role="row"]:not([data-spirit-combobox-tag-row])';
+const SELECTOR_OPTION_CELL_CONTROL = 'button:not([disabled]), [role="button"]:not([aria-disabled="true"])';
 const SELECTOR_GRIDCELL = '[role="gridcell"]';
+/** Remove control inside an option row (grid pattern demo: drop the option from the list). */
+const SELECTOR_OPTION_REMOVE = '[data-spirit-combobox-option-remove]';
 const SELECTOR_SELECTION = '[data-spirit-combobox-selection]';
 const SELECTOR_CLEAR = '[data-spirit-combobox-clear]';
 const SELECTOR_TAG_ROW = '[data-spirit-combobox-tag-row]';
@@ -30,36 +35,149 @@ const SELECTOR_EMPTY_STATE = '[data-spirit-combobox-empty-state]';
 const SELECTOR_LOADING = '[data-spirit-combobox-loading]';
 
 const ATTR_ASYNC = 'data-spirit-combobox-async';
+/** Filter-only demos (e.g. Last Searches): input filters rows; primary action is a link — no tags. */
+const ATTR_FILTER_ONLY = 'data-spirit-combobox-filter-only';
 
 const ID_TAG_TEMPLATE = 'combobox-tag-template';
 
 // Simulated async search delay (ms) — used only by instances with data-spirit-combobox-async
 const ASYNC_DELAY_MS = 600;
 
+const CLASSNAME_TAG_SIZE_DEFAULT = 'Tag--small';
+const CLASSNAME_CONTROL_BUTTON_SIZE_DEFAULT = 'ControlButton--xsmall';
+
+// Maps InputContainer size → nested Tag / ControlButton sizes (same as React COMBOBOX_NESTED_*_MAP).
+const NESTED_TAG_SIZES = {
+  small: { tagSizeClass: 'Tag--xsmall', controlButtonSizeClass: 'ControlButton--xsmall' },
+  medium: { tagSizeClass: 'Tag--small', controlButtonSizeClass: 'ControlButton--xsmall' },
+  large: { tagSizeClass: 'Tag--medium', controlButtonSizeClass: 'ControlButton--xsmall' },
+};
+
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
 function getRows(popupEl) {
-  return Array.from(popupEl.querySelectorAll(SELECTOR_ROW));
+  return Array.from(popupEl.querySelectorAll(SELECTOR_OPTION_ITEM));
 }
 
 function getVisibleRows(popupEl) {
   return getRows(popupEl).filter((row) => row.style.display !== 'none');
 }
 
-function setRowSelected(rowEl, selected) {
+function isRowDisabled(rowEl) {
+  return rowEl?.getAttribute('aria-disabled') === 'true';
+}
+
+// First enabled row from `startIndex`, walking in `step` direction without wrapping.
+function findEnabledRow(rows, startIndex, step) {
+  for (let index = startIndex; index >= 0 && index < rows.length; index += step) {
+    if (!isRowDisabled(rows[index])) return rows[index];
+  }
+
+  return null;
+}
+
+function getMoveStep(move) {
+  switch (move) {
+    case 'previous':
+    case 'last':
+      return -1;
+    case 'next':
+    case 'first':
+    default:
+      return 1;
+  }
+}
+
+// Wrapped arrow / Home / End index that keeps travelling until it lands on an enabled row.
+// Mirrors `getNextEnabledRowIndex` in web-react. Returns -1 when every row is disabled.
+function getNextEnabledRowIndex(currentIndex, rows, move) {
+  const count = rows.length;
+
+  if (count <= 0) return -1;
+
+  const step = getMoveStep(move);
+  let index;
+
+  switch (move) {
+    case 'first':
+      index = 0;
+      break;
+    case 'last':
+      index = count - 1;
+      break;
+    case 'next':
+      index = (currentIndex + 1) % count;
+      break;
+    case 'previous':
+    default:
+      index = (currentIndex - 1 + count) % count;
+      break;
+  }
+
+  for (let visited = 0; visited < count; visited += 1) {
+    if (!isRowDisabled(rows[index])) return index;
+    index = (index + step + count) % count;
+  }
+
+  return -1;
+}
+
+function getRowCellControls(rowEl) {
+  return Array.from(rowEl.querySelectorAll(SELECTOR_OPTION_CELL_CONTROL));
+}
+
+function setRowSelected(rowEl, selected, { disabled = false } = {}) {
   rowEl.setAttribute('aria-selected', selected ? 'true' : 'false');
-  rowEl.classList.toggle('Item--selected', selected);
+  rowEl.classList.toggle('color-scheme-on-selected-subtle', selected);
+  rowEl.classList.toggle('bg-color-scheme', selected && !disabled);
+  // Match Item API: selected + disabled uses disabled surface utilities, no fill background.
+  rowEl.classList.toggle('disabled', selected && disabled);
+  rowEl.classList.toggle('text-color-scheme', selected && disabled);
 }
 
 function getRowLabel(rowEl) {
+  const explicitLabel = rowEl.getAttribute('data-spirit-label');
+
+  if (explicitLabel) {
+    return explicitLabel.trim();
+  }
+
   const firstCell = rowEl.querySelector(SELECTOR_GRIDCELL);
 
   return firstCell ? firstCell.textContent.trim() : rowEl.textContent.trim();
 }
 
+function getNestedTagSizeConfig(comboboxEl) {
+  const inputContainer = comboboxEl.querySelector('.InputContainer');
+
+  if (inputContainer?.classList.contains('InputContainer--small')) {
+    return NESTED_TAG_SIZES.small;
+  }
+
+  if (inputContainer?.classList.contains('InputContainer--large')) {
+    return NESTED_TAG_SIZES.large;
+  }
+
+  return NESTED_TAG_SIZES.medium;
+}
+
 // ─── Tag management ───────────────────────────────────────────────────────────
 
-function createTag(label, selectionEl, onRemove, { disabled = false } = {}) {
+function removeFocusedTag(selectionEl, onRemove) {
+  onRemove();
+
+  // Focus goes back to the filter input, never to a neighbouring tag (Gmail-style chips).
+  requestAnimationFrame(() => {
+    const comboboxEl = selectionEl.closest(SELECTOR_COMBOBOX);
+    const inputEl = comboboxEl?.querySelector(SELECTOR_INPUT);
+
+    if (!inputEl) return;
+
+    inputEl.focus();
+  });
+}
+
+function createTag(label, selectionEl, onRemove, { disabled = false, sizeConfig = NESTED_TAG_SIZES.medium } = {}) {
   const template = document.getElementById(ID_TAG_TEMPLATE);
 
   if (!template) {
@@ -89,6 +207,16 @@ function createTag(label, selectionEl, onRemove, { disabled = false } = {}) {
   closeBtn.setAttribute('aria-label', `Remove ${label}`);
   closeBtn.setAttribute('tabindex', '-1');
 
+  if (sizeConfig.tagSizeClass !== CLASSNAME_TAG_SIZE_DEFAULT) {
+    row.classList.remove(CLASSNAME_TAG_SIZE_DEFAULT);
+    row.classList.add(sizeConfig.tagSizeClass);
+  }
+
+  if (sizeConfig.controlButtonSizeClass !== CLASSNAME_CONTROL_BUTTON_SIZE_DEFAULT) {
+    closeBtn.classList.remove(CLASSNAME_CONTROL_BUTTON_SIZE_DEFAULT);
+    closeBtn.classList.add(sizeConfig.controlButtonSizeClass);
+  }
+
   if (disabled) {
     // Disabled tag: drop the selected color scheme in favor of the disabled visual state and
     // disable the close button so it cannot be activated while the combobox is non-interactive.
@@ -105,7 +233,7 @@ function createTag(label, selectionEl, onRemove, { disabled = false } = {}) {
   row.addEventListener('keydown', (event) => {
     if (event.key === 'Delete' || event.key === 'Backspace') {
       event.preventDefault();
-      removeFocusedTag(row, selectionEl, onRemove);
+      removeFocusedTag(selectionEl, onRemove);
 
       return;
     }
@@ -131,32 +259,10 @@ function createTag(label, selectionEl, onRemove, { disabled = false } = {}) {
   closeBtn.addEventListener('click', (event) => {
     event.preventDefault();
     event.stopPropagation();
-    removeFocusedTag(row, selectionEl, onRemove);
+    removeFocusedTag(selectionEl, onRemove);
   });
 
   return fragment;
-}
-
-function removeFocusedTag(row, selectionEl, onRemove) {
-  const rows = Array.from(selectionEl.querySelectorAll(SELECTOR_TAG_ROW));
-  const index = rows.indexOf(row);
-
-  onRemove();
-
-  requestAnimationFrame(() => {
-    const remaining = Array.from(selectionEl.querySelectorAll(SELECTOR_TAG_ROW));
-    const next = remaining[index] || remaining[index - 1];
-
-    if (next) {
-      remaining.forEach((r) => r.setAttribute('tabindex', '-1'));
-      next.setAttribute('tabindex', '0');
-      next.focus();
-    } else {
-      const inputEl = selectionEl.closest(SELECTOR_COMBOBOX)?.querySelector(SELECTOR_INPUT);
-
-      inputEl?.focus();
-    }
-  });
 }
 
 // ─── Filter ───────────────────────────────────────────────────────────────────
@@ -188,7 +294,7 @@ function setLoading(comboboxEl, popupEl, isLoading) {
 
   loadingEl.hidden = !isLoading;
 
-  popupEl.querySelectorAll(`${SELECTOR_ROW}, ${SELECTOR_EMPTY_STATE}`).forEach((el) => {
+  popupEl.querySelectorAll(`${SELECTOR_OPTION_ITEM}, ${SELECTOR_EMPTY_STATE}`).forEach((el) => {
     el.style.display = isLoading ? 'none' : '';
   });
 }
@@ -205,6 +311,8 @@ function initCombobox(comboboxEl) {
 
   const isDisabled = inputEl.disabled;
   const isAsync = comboboxEl.hasAttribute(ATTR_ASYNC);
+  const isFilterOnly = comboboxEl.hasAttribute(ATTR_FILTER_ONLY);
+  const sizeConfig = getNestedTagSizeConfig(comboboxEl);
   let asyncTimer = null;
 
   // Track selection order: row IDs in insertion order (not popup DOM order).
@@ -212,13 +320,15 @@ function initCombobox(comboboxEl) {
   // append/remove from this list so the tag order reflects when items were selected.
   const selectedIds = [];
 
-  getRows(popupEl)
-    .filter((row) => row.getAttribute('aria-selected') === 'true')
-    .forEach((row) => {
-      if (row.id) selectedIds.push(row.id);
-      row.classList.add('Item--selected');
-    });
-
+  // Filter-only demos keep static aria-selected / selected styling in markup and never sync tags.
+  if (!isFilterOnly) {
+    getRows(popupEl)
+      .filter((row) => row.getAttribute('aria-selected') === 'true')
+      .forEach((row) => {
+        if (row.id) selectedIds.push(row.id);
+        setRowSelected(row, true, { disabled: isDisabled });
+      });
+  }
   // ── Selection rendering ───────────────────────────────────────────────────
 
   const fieldLabel = inputEl.placeholder;
@@ -262,12 +372,16 @@ function initCombobox(comboboxEl) {
     const showAddMore = totalSelected > 0 && !allSelected;
 
     if (clearBtn) {
+      // `d-none` is required because InputAddon sets `display: flex`, which overrides [hidden].
       clearBtn.hidden = totalSelected === 0;
+      clearBtn.classList.toggle('d-none', totalSelected === 0);
     }
 
     if (totalSelected === 0) {
+      selectionEl.setAttribute('role', 'group');
       inputEl.removeAttribute('aria-label');
     } else {
+      selectionEl.setAttribute('role', 'grid');
       inputEl.setAttribute(
         'aria-label',
         `${fieldLabel}, ${totalSelected} item${totalSelected > 1 ? 's' : ''} selected`,
@@ -295,13 +409,13 @@ function initCombobox(comboboxEl) {
         label,
         selectionEl,
         () => {
-          setRowSelected(rowEl, false);
+          setRowSelected(rowEl, false, { disabled: isDisabled });
           const idx = selectedIds.indexOf(id);
 
           if (idx !== -1) selectedIds.splice(idx, 1);
           renderSelection();
         },
-        { disabled: isDisabled },
+        { disabled: isDisabled, sizeConfig },
       );
 
       if (tag) selectionEl.appendChild(tag);
@@ -315,7 +429,9 @@ function initCombobox(comboboxEl) {
   // Disabled instances keep their initial aria-selected rows but stay non-interactive;
   // render the tags so the field reflects its selected state, then skip listeners.
   if (isDisabled) {
-    renderSelection();
+    if (!isFilterOnly) {
+      renderSelection();
+    }
 
     return;
   }
@@ -335,17 +451,19 @@ function initCombobox(comboboxEl) {
 
   const dropdown = new Dropdown(inputEl);
 
-  // Make popup option rows keyboard-focusable so physical focus can move into the popover.
+  // Options stay focusable for restore-after-remove patterns, but arrow keys do not move DOM focus.
   getRows(popupEl).forEach((row) => row.setAttribute('tabindex', '-1'));
+
+  let activeNestedControlIndex = null;
 
   // ── Row toggle ────────────────────────────────────────────────────────────
 
   function toggleRow(rowEl) {
-    if (rowEl.getAttribute('aria-disabled') === 'true') return;
+    if (isFilterOnly || isRowDisabled(rowEl)) return;
 
     const isSelected = rowEl.getAttribute('aria-selected') === 'true';
 
-    setRowSelected(rowEl, !isSelected);
+    setRowSelected(rowEl, !isSelected, { disabled: isDisabled });
 
     if (isSelected) {
       const idx = selectedIds.indexOf(rowEl.id);
@@ -367,34 +485,132 @@ function initCombobox(comboboxEl) {
     dropdown.show();
     // Dropdown.updateTriggerElement sets aria-controls to the data-spirit-target CSS selector
     // (e.g. "#combobox-input-popover") which is wrong for ARIA combobox — aria-controls must be
-    // a plain IDREF pointing to the role="grid" listbox, not the DropdownPopover container.
-    inputEl.setAttribute('aria-controls', listboxId);
+    // a plain IDREF pointing to the options widget, not the DropdownPopover container.
+    if (listboxId) {
+      inputEl.setAttribute('aria-controls', listboxId);
+    }
   }
 
-  // Focus a popup row and maintain aria-activedescendant on the input for AT.
-  function focusRow(rowEl) {
+  function clearVisualActiveControls() {
+    popupEl.querySelectorAll('[data-spirit-combobox-active-control]').forEach((el) => {
+      el.removeAttribute('data-spirit-combobox-active-control');
+      el.classList.remove('is-active');
+    });
+    popupEl.querySelectorAll('.Item.is-active').forEach((el) => el.classList.remove('is-active'));
+  }
+
+  function syncVisualActiveState(rowEl) {
+    clearVisualActiveControls();
+
     if (!rowEl) return;
-    rowEl.focus();
+
+    if (activeNestedControlIndex == null) {
+      rowEl.classList.add('is-active');
+
+      return;
+    }
+
+    const controlEl = getRowCellControls(rowEl)[activeNestedControlIndex];
+
+    if (!controlEl) {
+      rowEl.classList.add('is-active');
+      activeNestedControlIndex = null;
+
+      return;
+    }
+
+    controlEl.classList.add('is-active');
+    controlEl.setAttribute('data-spirit-combobox-active-control', '');
+  }
+
+  // Visually activate a popup row and maintain aria-activedescendant (DOM focus stays on the input).
+  function activateRow(rowEl) {
+    if (!rowEl) return;
+    activeNestedControlIndex = null;
     rowEl.scrollIntoView({ block: 'nearest' });
     inputEl.setAttribute('aria-activedescendant', rowEl.id);
+    syncVisualActiveState(rowEl);
+  }
+
+  // Visually activate a nested cell control without moving DOM focus.
+  function activateCellControl(controlEl, rowEl, controlIndex) {
+    if (!controlEl || !rowEl) return;
+    activeNestedControlIndex = controlIndex;
+    controlEl.scrollIntoView({ block: 'nearest' });
+    inputEl.setAttribute('aria-activedescendant', rowEl.id);
+    syncVisualActiveState(rowEl);
+  }
+
+  // Activate the row the move lands on, skipping disabled rows.
+  function activateRowByMove(visibleRows, currentIndex, move) {
+    const nextIndex = getNextEnabledRowIndex(currentIndex, visibleRows, move);
+
+    if (nextIndex === -1) return;
+
+    activateRow(visibleRows[nextIndex]);
+  }
+
+  function getActiveRowState() {
+    const visible = getVisibleRows(popupEl);
+    const activeId = inputEl.getAttribute('aria-activedescendant');
+    const currentRow = activeId ? visible.find((row) => row.id === activeId) || null : null;
+    const currentIndex = currentRow ? visible.indexOf(currentRow) : -1;
+
+    return { visible, currentRow, currentIndex };
+  }
+
+  // ── Row removal (grid pattern demo) ───────────────────────────────────────
+
+  // Removing a row destroys the focused element, so move focus to its neighbour (or the input).
+  // Disabled rows are not focus candidates — arrow navigation cannot leave them behind.
+  function removeOptionRow(rowEl) {
+    if (!rowEl) return;
+
+    const visible = getVisibleRows(popupEl);
+    const removedIndex = visible.indexOf(rowEl);
+    const remaining = visible.filter((row) => row !== rowEl);
+    const nextRow =
+      findEnabledRow(remaining, removedIndex, 1) || findEnabledRow(remaining, removedIndex - 1, -1) || null;
+    const selectedIndex = selectedIds.indexOf(rowEl.id);
+
+    if (selectedIndex !== -1) selectedIds.splice(selectedIndex, 1);
+
+    rowEl.remove();
+    renderSelection();
+    filterRows(popupEl, inputEl.value);
+
+    if (nextRow) {
+      activateRow(nextRow);
+    } else {
+      inputEl.removeAttribute('aria-activedescendant');
+      clearVisualActiveControls();
+      activeNestedControlIndex = null;
+    }
+
+    inputEl.focus();
   }
 
   function close() {
     clearTimeout(asyncTimer);
     setLoading(comboboxEl, popupEl, false);
     dropdown.hide();
-    inputEl.setAttribute('aria-controls', listboxId);
+    if (listboxId) {
+      inputEl.setAttribute('aria-controls', listboxId);
+    }
     inputEl.removeAttribute('aria-activedescendant');
+    clearVisualActiveControls();
+    activeNestedControlIndex = null;
   }
 
   // ── Event listeners ───────────────────────────────────────────────────────
 
-  // Container click focuses input (click-through from selection area)
+  // Container click focuses input and opens (click-through from selection area)
   const containerEl = inputEl.closest('[role="group"]') || inputEl.parentElement;
 
   containerEl.addEventListener('click', (event) => {
     if (!event.target.closest(`[data-spirit-combobox-clear], ${SELECTOR_TAG_ROW}`)) {
       inputEl.focus();
+      open();
     }
   });
 
@@ -407,16 +623,14 @@ function initCombobox(comboboxEl) {
     }
   });
 
-  inputEl.addEventListener('focus', (event) => {
-    // Do not re-open when focus returns from a popup row or tag (keyboard navigation
-    // moving back to the input should not reopen a popup that was just closed).
-    if (event.relatedTarget && comboboxEl.contains(event.relatedTarget)) return;
-    open();
-  });
+  // Open on pointer click, typing, or Arrow Up/Down — not on keyboard focus alone (Tab).
   inputEl.addEventListener('click', () => open());
 
   inputEl.addEventListener('input', () => {
     open();
+    inputEl.removeAttribute('aria-activedescendant');
+    clearVisualActiveControls();
+    activeNestedControlIndex = null;
 
     if (isAsync && inputEl.value.trim()) {
       clearTimeout(asyncTimer);
@@ -432,11 +646,11 @@ function initCombobox(comboboxEl) {
     }
   });
 
-  // ── Keyboard navigation ───────────────────────────────────────────────────
+  // ── Keyboard navigation (pure aria-activedescendant — focus stays on the input) ──
 
-  // Input: Escape/Tab close; ArrowDown/Up move physical focus into the popover.
   inputEl.addEventListener('keydown', (event) => {
     const isOpen = popupEl.classList.contains('is-open');
+    const hasActiveDescendant = Boolean(inputEl.getAttribute('aria-activedescendant'));
 
     if (event.key === 'Escape') {
       event.preventDefault();
@@ -447,6 +661,23 @@ function initCombobox(comboboxEl) {
 
     if (event.key === 'Tab') {
       close();
+
+      return;
+    }
+
+    // Empty filter + selected tags: Backspace focuses the last tag (Gmail-style; remove on next Backspace).
+    if (event.key === 'Backspace' && inputEl.value === '' && !isFilterOnly && selectedIds.length > 0) {
+      event.preventDefault();
+      close();
+
+      const tagRows = Array.from(selectionEl.querySelectorAll(SELECTOR_TAG_ROW));
+      const lastTag = tagRows[tagRows.length - 1];
+
+      if (lastTag) {
+        tagRows.forEach((row) => row.setAttribute('tabindex', '-1'));
+        lastTag.setAttribute('tabindex', '0');
+        lastTag.focus();
+      }
 
       return;
     }
@@ -456,103 +687,116 @@ function initCombobox(comboboxEl) {
 
       if (!isOpen) open();
 
-      const visible = getVisibleRows(popupEl);
+      const { visible, currentIndex } = getActiveRowState();
 
-      if (!visible.length) return;
-
-      // Move physical focus to the first (↓) or last (↑) visible row.
-      focusRow(event.key === 'ArrowDown' ? visible[0] : visible[visible.length - 1]);
-    }
-  });
-
-  // Popover: keyboard navigation while physical focus is on a popup row.
-  popupEl.addEventListener('keydown', (event) => {
-    const visible = getVisibleRows(popupEl);
-    const focused = document.activeElement;
-    const currentIndex = visible.indexOf(focused);
-
-    if (currentIndex === -1) return; // focus is not on a visible popup row
-
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      close();
-      inputEl.focus(); // relatedTarget is inside combobox → focus listener won't re-open
-
-      return;
-    }
-
-    if (event.key === 'Tab') {
-      if (event.shiftKey) {
-        event.preventDefault();
-        close();
-        inputEl.focus();
+      if (!hasActiveDescendant) {
+        activateRowByMove(visible, -1, event.key === 'ArrowDown' ? 'first' : 'last');
       } else {
-        close(); // let Tab continue to the next element
+        activateRowByMove(visible, currentIndex, event.key === 'ArrowDown' ? 'next' : 'previous');
       }
 
       return;
     }
 
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      // Stay on the last item (no wrap).
-      if (currentIndex < visible.length - 1) focusRow(visible[currentIndex + 1]);
+    if (!isOpen || !hasActiveDescendant) return;
 
-      return;
-    }
+    const { visible, currentRow, currentIndex } = getActiveRowState();
 
-    if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      if (currentIndex > 0) {
-        focusRow(visible[currentIndex - 1]);
-      } else {
-        // First item: return focus to the input (focus listener won't re-open).
-        inputEl.removeAttribute('aria-activedescendant');
-        inputEl.focus();
-      }
-
-      return;
-    }
+    if (!currentRow) return;
 
     if (event.key === 'Home') {
       event.preventDefault();
-      focusRow(visible[0]);
+      activateRowByMove(visible, currentIndex, 'first');
 
       return;
     }
 
     if (event.key === 'End') {
       event.preventDefault();
-      focusRow(visible[visible.length - 1]);
+      activateRowByMove(visible, currentIndex, 'last');
 
       return;
     }
 
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+      const controls = getRowCellControls(currentRow);
+
+      if (!controls.length) return;
+
       event.preventDefault();
-      toggleRow(focused);
+
+      if (event.key === 'ArrowRight') {
+        const nextIndex = activeNestedControlIndex == null ? 0 : activeNestedControlIndex + 1;
+
+        if (nextIndex < controls.length) {
+          activateCellControl(controls[nextIndex], currentRow, nextIndex);
+        }
+
+        return;
+      }
+
+      if (activeNestedControlIndex == null) return;
+
+      if (activeNestedControlIndex <= 0) {
+        activateRow(currentRow);
+
+        return;
+      }
+
+      activateCellControl(controls[activeNestedControlIndex - 1], currentRow, activeNestedControlIndex - 1);
 
       return;
     }
 
-    // Printable character: return focus to input so the user can continue filtering.
-    if (event.key.length === 1 && !event.ctrlKey && !event.altKey && !event.metaKey) {
-      inputEl.value += event.key;
-      inputEl.removeAttribute('aria-activedescendant');
-      inputEl.focus();
-      filterRows(popupEl, inputEl.value);
+    if (event.key === 'Enter') {
+      event.preventDefault();
+
+      if (activeNestedControlIndex != null) {
+        const controlEl = getRowCellControls(currentRow)[activeNestedControlIndex];
+
+        controlEl?.click();
+
+        return;
+      }
+
+      // Row-level Enter activates a nested link when present (e.g. Last Searches); otherwise toggles selection.
+      if (!isRowDisabled(currentRow)) {
+        const linkEl = currentRow.querySelector('a[href]');
+
+        if (linkEl) {
+          linkEl.click();
+
+          return;
+        }
+      }
+
+      toggleRow(currentRow);
     }
   });
 
   // ── Popup mouse events ────────────────────────────────────────────────────
 
-  popupEl.addEventListener('mousedown', (event) => {
-    const row = event.target.closest('[role="row"]');
+  popupEl.addEventListener('click', (event) => {
+    const removeBtn = event.target.closest(SELECTOR_OPTION_REMOVE);
 
-    if (!row || !popupEl.contains(row)) return;
+    if (!removeBtn) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    removeOptionRow(removeBtn.closest(SELECTOR_OPTION_ITEM));
+  });
+
+  popupEl.addEventListener('mousedown', (event) => {
+    if (event.target.closest('a, button, [role="button"]')) {
+      return;
+    }
+
+    const option = event.target.closest(SELECTOR_OPTION_ITEM);
+
+    if (!option || !popupEl.contains(option)) return;
 
     event.preventDefault(); // Keep focus on input
-    toggleRow(row);
+    toggleRow(option);
   });
 
   // ── Clear all ────────────────────────────────────────────────────────────
@@ -562,7 +806,7 @@ function initCombobox(comboboxEl) {
       event.preventDefault();
       event.stopPropagation();
 
-      getRows(popupEl).forEach((row) => setRowSelected(row, false));
+      getRows(popupEl).forEach((row) => setRowSelected(row, false, { disabled: isDisabled }));
       selectedIds.length = 0;
       renderSelection();
       inputEl.focus();
@@ -571,7 +815,9 @@ function initCombobox(comboboxEl) {
 
   // ── Initial render ────────────────────────────────────────────────────────
 
-  renderSelection();
+  if (!isFilterOnly) {
+    renderSelection();
+  }
 }
 
 // ─── Entry point ──────────────────────────────────────────────────────────────
