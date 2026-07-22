@@ -10,10 +10,9 @@ const toType = (object: unknown) => {
     return `${object}`;
   }
 
-  return Object.prototype.toString
-    .call(object)
-    .match(/\s([a-z]+)/i)[1]
-    .toLowerCase();
+  const match = Object.prototype.toString.call(object).match(/\s([a-z]+)/i);
+
+  return match ? match[1].toLowerCase() : '';
 };
 
 class Config {
