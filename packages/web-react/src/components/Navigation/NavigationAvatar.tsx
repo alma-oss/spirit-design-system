@@ -39,7 +39,7 @@ const _NavigationAvatar = <E extends ElementType = 'a'>(
 
   return (
     <ElementTag {...otherProps} {...mergedStyleProps} ref={ref}>
-      <Avatar size={avatarSize} isSquare={isSquare}>
+      <Avatar size={avatarSize} isSquare={isSquare} aria-hidden="true">
         {avatarContent}
       </Avatar>
       {children}
