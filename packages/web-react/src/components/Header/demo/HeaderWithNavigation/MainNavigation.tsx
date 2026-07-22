@@ -4,15 +4,17 @@ import { type NavigationActionVariantsType, type SpiritNavigationProps } from '.
 import { Navigation, NavigationAction, NavigationItem } from '../../../Navigation';
 
 interface MainNavigationProps extends Partial<SpiritNavigationProps> {
+  'aria-label'?: string;
   variant?: NavigationActionVariantsType;
 }
 
 export const MainNavigation = ({
+  'aria-label': ariaLabel,
   direction = Direction.HORIZONTAL,
   variant = ShapeVariants.BOX,
 }: Partial<MainNavigationProps>) => (
   <Navigation
-    aria-label="Main Navigation"
+    aria-label={ariaLabel}
     direction={direction}
     {...(isDirectionHorizontal(direction) ? { hideOn: ['mobile', 'tablet'] } : {})}
   >

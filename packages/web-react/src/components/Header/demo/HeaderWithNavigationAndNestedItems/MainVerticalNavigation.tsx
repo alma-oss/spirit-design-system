@@ -4,11 +4,15 @@ import { Icon } from '../../../Icon';
 import { Navigation, NavigationAction, NavigationItem } from '../../../Navigation';
 import CollapseNavigation from './CollapseNavigation';
 
-const DrawerWithNavigation = () => {
+interface DrawerWithNavigationProps {
+  'aria-label': string;
+}
+
+const DrawerWithNavigation = ({ 'aria-label': ariaLabel }: DrawerWithNavigationProps) => {
   const { isOpen: isCollapseOpen, toggleHandler: toggleCollapseHandler } = useCollapse(false);
 
   return (
-    <Navigation aria-label="Main Navigation" direction="vertical">
+    <Navigation aria-label={ariaLabel} direction="vertical">
       <NavigationItem>
         <NavigationAction href="#" aria-current="page" isSelected>
           Selected

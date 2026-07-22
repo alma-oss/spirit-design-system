@@ -16,8 +16,8 @@ The `Navigation` is a `nav` wrapper for navigation items.
 The `Navigation` component can be horizontal or vertical. Use `direction` prop to set the orientation. Default direction is `horizontal`.
 
 ```tsx
-<Navigation aria-label="Main Navigation">{/* Navigation items go here */}</Navigation>
-<Navigation aria-label="Main Navigation" direction="vertical">
+<Navigation aria-label="Main">{/* Navigation items go here */}</Navigation>
+<Navigation aria-label="Main" direction="vertical">
   {/* Navigation items go here */}
 </Navigation>
 ```
@@ -223,7 +223,7 @@ and [escape hatches][readme-escape-hatches].
 With NavigationAction/NavigationAvatar components:
 
 ```tsx
-<Navigation aria-label="Main Navigation">
+<Navigation aria-label="Main">
   <NavigationItem>
     <NavigationAction href="#" aria-current="page" isSelected>
       Selected Link
@@ -250,7 +250,7 @@ With NavigationAction/NavigationAvatar components:
 With Buttons:
 
 ```tsx
-<Navigation aria-label="Secondary Navigation">
+<Navigation aria-label="Secondary">
   <NavigationItem>
     <ButtonLink href="#">Button</ButtonLink>
   </NavigationItem>

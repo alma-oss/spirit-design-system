@@ -26,8 +26,12 @@ const HeaderWithPillNavigation = () => {
             <HeaderLogo href="#" aria-label="JobBoard homepage">
               <ProductLogo>{defaultSvgLogo}</ProductLogo>
             </HeaderLogo>
-            <MainNavigation variant="pill" />
-            <SecondaryHorizontalNavigation id="drawer-navigation-pill" handleOpenDrawer={() => setDrawerOpen(true)} />
+            <MainNavigation variant="pill" aria-label="Main with pill menu, desktop" />
+            <SecondaryHorizontalNavigation
+              id="drawer-navigation-pill"
+              aria-label="Secondary with pill menu, desktop"
+              handleOpenDrawer={() => setDrawerOpen(true)}
+            />
           </Flex>
         </Container>
       </Header>
@@ -53,10 +57,10 @@ const HeaderWithPillNavigation = () => {
                 <ProfileNavigation />
               </StackItem>
               <StackItem>
-                <MainNavigation direction="vertical" variant="pill" />
+                <MainNavigation direction="vertical" variant="pill" aria-label="Main with pill menu, mobile" />
               </StackItem>
               <StackItem>
-                <SecondaryVerticalNavigation />
+                <SecondaryVerticalNavigation aria-label="Secondary with pill menu, mobile" />
               </StackItem>
             </Stack>
           </DrawerPanelBody>

@@ -2,8 +2,12 @@ import React from 'react';
 import { Navigation, NavigationAction, NavigationItem } from '../../../Navigation';
 import MainHorizontalNavigationDropdown from './MainHorizontalNavigationDropdown';
 
-export const MainHorizontalNavigation = () => (
-  <Navigation aria-label="Main Navigation" hideOn={['mobile', 'tablet']}>
+interface MainHorizontalNavigationProps {
+  'aria-label': string;
+}
+
+export const MainHorizontalNavigation = ({ 'aria-label': ariaLabel }: MainHorizontalNavigationProps) => (
+  <Navigation aria-label={ariaLabel} hideOn={['mobile', 'tablet']}>
     <NavigationItem>
       <NavigationAction href="#" aria-current="page" isSelected>
         Selected

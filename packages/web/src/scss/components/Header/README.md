@@ -157,7 +157,7 @@ Use the composition mentioned above to create the layout you need.
         </ul>
       </nav>
 
-      <nav class="Navigation ml-auto" aria-label="Secondary Navigation">
+      <nav class="Navigation ml-auto" aria-label="Secondary">
         <ul>
           <li>
             <button class="Button Button--tertiary Button--medium Button--symmetrical">

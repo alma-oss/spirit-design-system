@@ -19,7 +19,7 @@ const NavigationAvatarWithDropdown = () => {
   const [isSquareDropdownOpen, toggleSquareDropdown] = useToggle();
 
   return (
-    <Navigation aria-label="NavigationAvatar">
+    <Navigation aria-label="Avatar with Dropdown">
       <NavigationItem alignmentY="stretch">
         <Dropdown
           alignmentX="stretch"

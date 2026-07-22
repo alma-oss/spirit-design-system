@@ -27,8 +27,11 @@ const HeaderWithNavigationAndNestedItems = () => {
             <HeaderLogo href="#" aria-label="JobBoard homepage">
               <ProductLogo>{defaultSvgLogo}</ProductLogo>
             </HeaderLogo>
-            <MainHorizontalNavigation />
-            <SecondaryHorizontalNavigation handleOpenDrawer={() => setDrawerOpen(true)} />
+            <MainHorizontalNavigation aria-label="Main with menu and nested items, desktop" />
+            <SecondaryHorizontalNavigation
+              aria-label="Secondary with menu and nested items, desktop"
+              handleOpenDrawer={() => setDrawerOpen(true)}
+            />
           </Flex>
         </Container>
       </Header>
@@ -61,10 +64,10 @@ const HeaderWithNavigationAndNestedItems = () => {
                 <ProfileNavigation isSquare />
               </StackItem>
               <StackItem>
-                <MainVerticalNavigation />
+                <MainVerticalNavigation aria-label="Main with menu and nested items, mobile" />
               </StackItem>
               <StackItem>
-                <SecondaryVerticalNavigation />
+                <SecondaryVerticalNavigation aria-label="Secondary with menu and nested items, mobile" />
               </StackItem>
             </Stack>
           </DrawerPanelBody>

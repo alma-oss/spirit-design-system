@@ -8,11 +8,15 @@ import { VisuallyHidden } from '../../../VisuallyHidden';
 import SecondaryHorizontalNavigationDropdown from '../HeaderWithNavigation/SecondaryHorizontalNavigationDropdown';
 
 interface SecondaryHorizontalNavigationProps {
+  'aria-label': string;
   handleOpenDrawer: (event: ClickEvent) => void;
 }
 
-const SecondaryHorizontalNavigation: FunctionComponent<SecondaryHorizontalNavigationProps> = ({ handleOpenDrawer }) => (
-  <Navigation marginLeft="auto" aria-label="Secondary Navigation">
+const SecondaryHorizontalNavigation: FunctionComponent<SecondaryHorizontalNavigationProps> = ({
+  'aria-label': ariaLabel,
+  handleOpenDrawer,
+}) => (
+  <Navigation marginLeft="auto" aria-label={ariaLabel}>
     <NavigationItem>
       <Button color="tertiary" size="small" isSymmetrical>
         <Icon name="search" />
