@@ -4,7 +4,7 @@ import Navigation from '../Navigation';
 import NavigationItem from '../NavigationItem';
 
 const NavigationHorizontalWithButtons = () => (
-  <Navigation aria-label="Navigation with Buttons">
+  <Navigation aria-label="Horizontal Navigation with Buttons">
     <NavigationItem>
       <ButtonLink href="#">Button</ButtonLink>
     </NavigationItem>

@@ -23,7 +23,7 @@ const NavigationHorizontalWithDropdown = () => {
   const [isNavigationActionDropdownOpen, setIsNavigationActionDropdownOpen] = useState(false);
 
   return (
-    <Navigation aria-label="Main Navigation">
+    <Navigation aria-label="Nested Horizontal Box Navigation with Dropdown">
       <NavigationItem>
         <NavigationAction href="/">Link</NavigationAction>
       </NavigationItem>

@@ -7,7 +7,7 @@ import NavigationAction from '../NavigationAction';
 import NavigationItem from '../NavigationItem';
 
 const NavigationVerticalWithBoxActionAndStartIcons = () => (
-  <Navigation aria-label="Main Navigation with Start Icons" direction="vertical">
+  <Navigation aria-label="Vertical Navigation with Box NavigationAction and Start/End Slots" direction="vertical">
     <NavigationItem>
       <NavigationAction href="/" startSlot={<Icon name="profile" />} endSlot={<Pill color="informative">12</Pill>}>
         Link
