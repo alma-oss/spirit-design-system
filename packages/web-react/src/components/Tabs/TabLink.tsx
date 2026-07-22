@@ -19,7 +19,7 @@ const defaultProps: TabLinkProps = {
 const _TabLink = <E extends ElementType = 'a'>(props: SpiritTabLinkProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = 'a', children, itemProps = {}, routerOptions, ...restProps } = propsWithDefaults;
-  const { href } = restProps;
+  const { href, 'aria-selected': ariaSelected = false, ...transferProps } = restProps;
 
   const Component = elementType as ElementType;
 
@@ -27,7 +27,7 @@ const _TabLink = <E extends ElementType = 'a'>(props: SpiritTabLinkProps<E>, ref
   const { styleProps: itemStyleProps, props: itemTransferProps } = useStyleProps(itemProps);
   const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.link });
 
-  const handleClick = useLinkClick({ ...restProps, routerOptions });
+  const handleClick = useLinkClick({ ...transferProps, href, routerOptions });
 
   return (
     <li
@@ -36,7 +36,15 @@ const _TabLink = <E extends ElementType = 'a'>(props: SpiritTabLinkProps<E>, ref
       className={classNames(classProps.item, itemStyleProps.className)}
       role="presentation"
     >
-      <Component {...restProps} {...mergedStyleProps} href={href} onClick={handleClick} ref={ref}>
+      <Component
+        {...transferProps}
+        {...mergedStyleProps}
+        href={href}
+        onClick={handleClick}
+        ref={ref}
+        role="tab"
+        aria-selected={ariaSelected}
+      >
         {children}
       </Component>
     </li>

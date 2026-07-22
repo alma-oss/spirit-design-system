@@ -29,6 +29,30 @@ describe('TabLink', () => {
     expect(element).toHaveClass('Tabs__link');
   });
 
+  it('should have role="tab"', () => {
+    const dom = render(<TabLink href="https://www.example.com" />);
+
+    const element = dom.container.querySelector('a') as HTMLElement;
+
+    expect(element).toHaveAttribute('role', 'tab');
+  });
+
+  it('should have aria-selected="false" by default', () => {
+    const dom = render(<TabLink href="https://www.example.com" />);
+
+    const element = dom.container.querySelector('a') as HTMLElement;
+
+    expect(element).toHaveAttribute('aria-selected', 'false');
+  });
+
+  it('should have aria-selected="true" when passed', () => {
+    const dom = render(<TabLink href="https://www.example.com" aria-selected />);
+
+    const element = dom.container.querySelector('a') as HTMLElement;
+
+    expect(element).toHaveAttribute('aria-selected', 'true');
+  });
+
   it('should render button element', () => {
     const dom = render(<TabLink elementType="button">Hello World</TabLink>);
 

@@ -139,11 +139,12 @@ Tab list link
 
 #### API
 
-| Name          | Type                         | Default | Required | Description                   |
-| ------------- | ---------------------------- | ------- | -------- | ----------------------------- |
-| `children`    | `any`                        | —       | ✕        | Child component               |
-| `elementType` | `ElementType`                | `a`     | ✕        | Type of element               |
-| `itemProps`   | `StyleProps & HTMLLIElement` | —       | ✕        | Props for parent list element |
+| Name            | Type                         | Default | Required | Description                                                                 |
+| --------------- | ---------------------------- | ------- | -------- | --------------------------------------------------------------------------- |
+| `aria-selected` | `boolean`                    | `false` | ✕        | Whether the tab link is currently selected; pass `true` for the active link |
+| `children`      | `any`                        | —       | ✕        | Child component                                                             |
+| `elementType`   | `ElementType`                | `a`     | ✕        | Type of element                                                             |
+| `itemProps`     | `StyleProps & HTMLLIElement` | —       | ✕        | Props for parent list element                                               |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
