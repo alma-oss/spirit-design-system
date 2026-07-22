@@ -31,10 +31,10 @@ Example usage:
     </button>
   </li>
   <li class="Tabs__item" role="presentation">
-    <a href="https://www.example.com" class="Tabs__link">Item Link</a>
+    <a href="https://www.example.com" class="Tabs__link" role="tab" aria-selected="false">Item Link</a>
   </li>
   <li class="Tabs__item d-none d-desktop-block" role="presentation">
-    <a href="https://www.example.com" class="Tabs__link">Item Link Only Desktop</a>
+    <a href="https://www.example.com" class="Tabs__link" role="tab" aria-selected="false">Item Link Only Desktop</a>
   </li>
 </ul>
 
@@ -48,7 +48,7 @@ A tab item can be a link that follows a URL:
 
 ```html
 <li class="Tabs__item" role="presentation">
-  <a href="https://www.example.com" class="Tabs__link">Link item</a>
+  <a href="https://www.example.com" class="Tabs__link" role="tab" aria-selected="false">Link item</a>
 </li>
 ```
 

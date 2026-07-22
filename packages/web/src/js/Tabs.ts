@@ -68,7 +68,11 @@ class Tabs extends BaseComponent {
     this.activate(getElementFromSelector(element));
 
     element.removeAttribute('tabindex');
-    element.setAttribute('aria-selected', 'true');
+
+    if (element.getAttribute('role') === 'tab') {
+      element.setAttribute('aria-selected', 'true');
+    }
+
     EventHandler.trigger(element, EVENT_SHOWN, {
       relatedTarget: relatedElem,
     });
@@ -82,7 +86,10 @@ class Tabs extends BaseComponent {
     element.classList.remove(CLASS_NAME_ACTIVE);
     this.deactivate(getElementFromSelector(element));
 
-    element.setAttribute('aria-selected', 'false');
+    if (element.getAttribute('role') === 'tab') {
+      element.setAttribute('aria-selected', 'false');
+    }
+
     element.setAttribute('tabindex', '-1');
     EventHandler.trigger(element, EVENT_HIDDEN, { relatedTarget: relatedElem });
   }

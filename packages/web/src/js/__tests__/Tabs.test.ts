@@ -67,6 +67,30 @@ describe('Tabs', () => {
       await tab.show();
     });
 
+    it('should not set aria-selected on tabpanel after activation', async () => {
+      fixtureEl.innerHTML = `
+          <ul class="Tabs" role="tablist">
+            <li class="Tabs__item" role="presentation"><button type="button" data-spirit-target="#home" class="Tabs__link is-selected" role="tab" aria-selected="true">Home</button></li>
+            <li class="Tabs__item" role="presentation"><button type="button" id="trigger-profile" data-spirit-target="#profile" class="Tabs__link" role="tab">Profile</button></li>
+          </ul>
+          <div class="Tabs-content">
+            <div class="TabsPane is-selected" id="home" role="tabpanel"></div>
+            <div class="TabsPane" id="profile" role="tabpanel"></div>
+          </div>
+        `;
+
+      const profileTriggerEl = fixtureEl.querySelector('#trigger-profile') as HTMLElement;
+      const tab = new Tabs(profileTriggerEl);
+
+      await tab.show();
+
+      const profilePanel = fixtureEl.querySelector('#profile') as HTMLElement;
+      const homePanel = fixtureEl.querySelector('#home') as HTMLElement;
+
+      expect(profilePanel.hasAttribute('aria-selected')).toBe(false);
+      expect(homePanel.hasAttribute('aria-selected')).toBe(false);
+    });
+
     it('should not fire shown when tab is already active', async () => {
       fixtureEl.innerHTML = `
           <ul class="Tabs" role="tablist">
