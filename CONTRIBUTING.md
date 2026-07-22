@@ -324,6 +324,10 @@ PR can be merged only by the appropriate group of maintainers.
 
 ### Authentication
 
+The release process involves two independent authentication mechanisms, one per workflow.
+
+#### GitHub (`Version` Workflow)
+
 The [`Version`][version-action] workflow authenticates as a GitHub App rather than a personal access token.
 A short-lived installation token is minted per run via `actions/create-github-app-token`, using the
 `GH_APP_CLIENT_ID` and `GH_APP_PRIVATE_KEY` secrets. Commits, tags, and releases it creates are attributed to
@@ -337,6 +341,27 @@ installation in the org's [GitHub App settings][github-app-settings] (find the a
 - Confirm the app is still installed on this repository.
 - Confirm its permissions cover what the workflow needs (`contents: write`).
 - Confirm the private key hasn't been rotated without updating the `GH_APP_PRIVATE_KEY` secret.
+
+#### npm ([`Publish`][publish-action] Workflow)
+
+Once `Version` pushes a new tag, the `Publish` workflow authenticates to the npm registry using
+[OIDC Trusted Publishers][npm-trusted-publishers] instead of a stored token. GitHub issues a
+short-lived OIDC token (via `permissions: id-token: write`), which npm exchanges for a publish
+token scoped to that single run — there is no `NPM_TOKEN`/`NODE_AUTH_TOKEN` secret to manage.
+`NPM_CONFIG_PROVENANCE: true` additionally attaches build provenance to each published package.
+
+This only works because the workflow runs under the `npm-registry` GitHub Actions environment,
+and each published package (`@alma-oss/spirit-web`, `@alma-oss/spirit-web-react`,
+`@alma-oss/spirit-design-tokens`, etc.) has this exact repo, workflow file, and environment
+registered as its Trusted Publisher on npmjs.com.
+
+**If `Publish` fails with an npm authentication or 403 error**:
+
+- Confirm the `npm-registry` environment still exists and is referenced correctly in
+  [`publish.yaml`][publish-action].
+- Check the affected package's Trusted Publisher configuration on npmjs.com (package →
+  Settings → Publishing access) — the trust link is matched by exact repo/workflow
+  file/environment name, so renaming any of them silently breaks it.
 
 ### Steps to Create a New Package Version
 
@@ -425,6 +450,7 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [lerna-home]: https://lerna.js.org
 [local-publish-testing]: tools/README.md
 [netlify-preview-gist]: https://gist.github.com/adamkudrna/694f3048c1338f07375b9b8af24afe2f
+[npm-trusted-publishers]: https://docs.npmjs.com/trusted-publishers
 [packages]: packages/
 [prettier]: https://prettier.io/
 [publish-action]: https://github.com/alma-oss/spirit-design-system/actions/workflows/publish.yaml
