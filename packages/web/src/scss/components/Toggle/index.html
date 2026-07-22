@@ -564,46 +564,87 @@
 
   <div class="Container">
 
-    <h2 class="docs-Heading">Consent Full Example</h2>
+    <h2 class="docs-Heading">Consent with Modal</h2>
 
     <div class="docs-Stack docs-Stack--stretch">
 
       <div class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500" style="--flex-spacing-x: var(--spirit-space-500);">
         <input
           type="checkbox"
-          id="toggle-consent-full-example"
-          class="Toggle Toggle--danger"
-          name="consent"
+          id="consent-with-modal-example"
+          class="Toggle"
+          name="consentWithModalExample"
           required
-          aria-describedby="toggle-consent-full-example-helper-text toggle-consent-full-example-validation-text"
-          aria-details="toggle-consent-full-example-details"
+          aria-details="consent-with-modal-example-details"
         />
         <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-          <label class="Label Label--required cursor-pointer" for="toggle-consent-full-example">I agree to the terms and privacy policy</label>
-          <div id="toggle-consent-full-example-details" class="InputDetails">
+          <label class="Label Label--required cursor-pointer" for="consent-with-modal-example">I agree to the terms and conditions</label>
+          <div id="consent-with-modal-example-details" class="InputDetails">
+            <p class="typography-body-small-regular mb-0">Please review our terms and conditions before you agree.</p>
             <button
               type="button"
               class="link-underlined link-inherit"
               data-spirit-toggle="modal"
-              data-spirit-target="#terms-modal"
-              aria-controls="terms-modal"
+              data-spirit-target="#consent-with-modal-terms-modal"
+              aria-controls="consent-with-modal-terms-modal"
               aria-expanded="false"
             >
               See full terms and conditions
             </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Consent with Collapse</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div class="Flex Flex--horizontalReversed Flex--inline Flex--alignmentXSpaceBetween py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+        <input
+          type="checkbox"
+          id="consent-with-collapse-example"
+          class="Toggle"
+          name="consentWithCollapseExample"
+          checked
+          aria-details="consent-with-collapse-example-details"
+        />
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+          <label class="Label cursor-pointer" for="consent-with-collapse-example">Notifications about similar positions from this company</label>
+          <div id="consent-with-collapse-example-details" class="InputDetails">
+            <p class="typography-body-small-regular mb-0">
+              I agree that Bright Horizon Ltd., Nova Talent Group, Summit Recruiting Co., Blueharbor Staffing Inc. and
+              Ironclad Careers Ltd. may let me know when they have another suitable position for me.
+            </p>
             <button
               type="button"
               class="link-underlined link-inherit"
-              data-spirit-toggle="modal"
-              data-spirit-target="#privacy-modal"
-              aria-controls="privacy-modal"
+              data-spirit-toggle="collapse"
+              data-spirit-target="consent-with-collapse-example-collapse"
+              aria-controls="consent-with-collapse-example-collapse"
               aria-expanded="false"
             >
-              See privacy policy
+              Show more
             </button>
+            <div id="consent-with-collapse-example-collapse" class="Collapse">
+              <div class="Collapse__content">
+                <p>
+                  You can withdraw this consent at any time in your account settings or by contacting our support
+                  team. Withdrawing your consent will not affect the lawfulness of any processing carried out before
+                  that point.
+                </p>
+              </div>
+            </div>
           </div>
-          <div class="HelperText" id="toggle-consent-full-example-helper-text">Please read the documents carefully before agreeing</div>
-          <div class="ValidationText ValidationText--danger" id="toggle-consent-full-example-validation-text">You must agree to continue</div>
         </div>
       </div>
 
@@ -614,7 +655,7 @@
 </section>
 
 <!-- Modal Definitions -->
-<dialog id="terms-modal" class="Modal">
+<dialog id="consent-with-modal-terms-modal" class="Modal">
   <article class="ModalDialog">
     <div class="ModalHeader">
       <h2 class="ModalHeader__title">Terms and Conditions</h2>
@@ -622,41 +663,8 @@
         type="button"
         class="Button Button--tertiary Button--symmetrical Button--medium"
         data-spirit-dismiss="modal"
-        data-spirit-target="#terms-modal"
-        aria-controls="terms-modal"
-        aria-expanded="false"
-      >
-        <svg
-          class="Icon"
-          width="24"
-          height="24"
-          aria-hidden="true"
-        >
-          <use href="/assets/icons/svg/sprite.svg#close" />
-        </svg>
-        <span class="accessibility-hidden">Close</span>
-      </button>
-    </div>
-    <div class="ModalBody">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam at excepturi laudantium magnam mollitia
-        perferendis reprehenderit, voluptate. Cum delectus dicta ducimus eligendi excepturi natus perferendis
-        provident unde. Eveniet, iste, molestiae?
-      </p>
-    </div>
-  </article>
-</dialog>
-
-<dialog id="privacy-modal" class="Modal">
-  <article class="ModalDialog">
-    <div class="ModalHeader">
-      <h2 class="ModalHeader__title">Privacy Policy</h2>
-      <button
-        type="button"
-        class="Button Button--tertiary Button--symmetrical Button--medium"
-        data-spirit-dismiss="modal"
-        data-spirit-target="#privacy-modal"
-        aria-controls="privacy-modal"
+        data-spirit-target="#consent-with-modal-terms-modal"
+        aria-controls="consent-with-modal-terms-modal"
         aria-expanded="false"
       >
         <svg
