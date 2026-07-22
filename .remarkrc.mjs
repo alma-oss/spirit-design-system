@@ -46,6 +46,7 @@ export default {
           '`[^`]+`',
           '[a-z-]+-config-spirit',
           '^use[A-Z]\\w+',
+          'npm',
         ],
       },
     ],
