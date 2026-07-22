@@ -145,12 +145,12 @@ in sync for you.
 The `NavigationAvatar` is a component that is styled to be used as a navigation action with an avatar.
 
 ```html
-<a href="#" class="NavigationAvatar">
-  <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+<a href="#" class="NavigationAvatar" aria-label="Profile of Jiří Bárta">
+  <div class="Avatar Avatar--small" aria-hidden="true">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
-  </span>
+  </div>
   <span class="typography-action-small">My Account</span>
 </a>
 ```
@@ -158,12 +158,12 @@ The `NavigationAvatar` is a component that is styled to be used as a navigation 
 If you want the avatar to be square, don't forget to add the `NavigationAvatar--square` modifier to the `NavigationAvatar` component.
 
 ```html
-<a href="#" class="NavigationAvatar NavigationAvatar--square">
-  <span class="Avatar Avatar--square Avatar--small" aria-label="Profile of Jiří Bárta">
+<a href="#" class="NavigationAvatar NavigationAvatar--square" aria-label="Profile of Jiří Bárta">
+  <div class="Avatar Avatar--square Avatar--small" aria-hidden="true">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
-  </span>
+  </div>
   <span class="typography-action-small">My Account</span>
 </a>
 ```
@@ -177,12 +177,12 @@ The avatar inside `NavigationAvatar` can have different sizes. Use the `Avatar--
 Available sizes: `xsmall`, `small`, `medium`, `large`, `xlarge`.
 
 ```html
-<a href="#" class="NavigationAvatar">
-  <span class="Avatar Avatar--xsmall" aria-label="Profile of Jiří Bárta">
+<a href="#" class="NavigationAvatar" aria-label="Profile of Jiří Bárta">
+  <div class="Avatar Avatar--xsmall" aria-hidden="true">
     <svg class="Icon" width="16" height="16" aria-hidden="true">
       <use href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
-  </span>
+  </div>
   <span class="typography-action-small">My Account</span>
 </a>
 ```
@@ -190,12 +190,12 @@ Available sizes: `xsmall`, `small`, `medium`, `large`, `xlarge`.
 You can also use responsive sizes with breakpoint-specific classes, e.g. `Avatar--tablet--<size>` or `Avatar--desktop--<size>`.
 
 ```html
-<a href="#" class="NavigationAvatar">
-  <span class="Avatar Avatar--small Avatar--tablet--medium Avatar--desktop--large" aria-label="Profile of Jiří Bárta">
+<a href="#" class="NavigationAvatar" aria-label="Profile of Jiří Bárta">
+  <div class="Avatar Avatar--small Avatar--tablet--medium Avatar--desktop--large" aria-hidden="true">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use href="/assets/icons/svg/sprite.svg#profile" />
     </svg>
-  </span>
+  </div>
   <span class="typography-action-small">My Account</span>
 </a>
 ```
@@ -219,12 +219,12 @@ With NavigationAction and NavigationAvatar components:
       <a class="NavigationAction NavigationAction--box" href="#">Link</a>
     </li>
     <li class="NavigationItem NavigationItem--alignmentYCenter">
-      <a href="#" class="NavigationAvatar">
-        <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+      <a href="#" class="NavigationAvatar" aria-label="Profile of Jiří Bárta">
+        <div class="Avatar Avatar--small" aria-hidden="true">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
             <use href="/assets/icons/svg/sprite.svg#profile" />
           </svg>
-        </span>
+        </div>
         <span class="typography-action-small">My Account</span>
       </a>
     </li>
@@ -244,12 +244,12 @@ With Buttons and NavigationAvatar:
       <a href="#" class="Button Button--medium Button--secondary">Button</a>
     </li>
     <li class="NavigationItem NavigationItem--alignmentYCenter">
-      <a href="#" class="NavigationAvatar">
-        <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+      <a href="#" class="NavigationAvatar" aria-label="Profile of Jiří Bárta">
+        <div class="Avatar Avatar--small" aria-hidden="true">
           <svg class="Icon" width="20" height="20" aria-hidden="true">
             <use href="/assets/icons/svg/sprite.svg#profile" />
           </svg>
-        </span>
+        </div>
         <span class="typography-action-small">My Account</span>
       </a>
     </li>

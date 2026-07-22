@@ -567,11 +567,11 @@
 
     <div class="docs-Stack docs-Stack--stretch">
 
-      <nav class="Navigation Navigation--horizontal" aria-label="NavigationAvatar">
+      <nav class="Navigation Navigation--horizontal" aria-label="Navigation Avatar">
         <ul>
           <li class="NavigationItem NavigationItem--alignmentYCenter">
             <div class="NavigationAvatar">
-              <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+              <div class="Avatar Avatar--small" aria-hidden="true">
                 <svg
                   class="Icon"
                   width="20"
@@ -580,13 +580,13 @@
                 >
                   <use href="/assets/icons/svg/sprite.svg#profile" />
                 </svg>
-              </span>
+              </div>
               My Account
             </div>
           </li>
           <li class="NavigationItem NavigationItem--alignmentYCenter">
             <div class="NavigationAvatar NavigationAvatar--square">
-              <span class="Avatar Avatar--square Avatar--small" aria-label="Profile of Jiří Bárta">
+              <div class="Avatar Avatar--square Avatar--small" aria-hidden="true">
                 <svg
                   class="Icon"
                   width="20"
@@ -595,7 +595,7 @@
                 >
                   <use href="/assets/icons/svg/sprite.svg#profile" />
                 </svg>
-              </span>
+              </div>
               My Account
             </div>
           </li>
@@ -616,11 +616,15 @@
 
     <div class="docs-Stack docs-Stack--stretch">
 
-      <nav class="Navigation Navigation--horizontal" aria-label="NavigationAvatar">
+      <nav class="Navigation Navigation--horizontal" aria-label="Navigation Avatar with Link">
         <ul>
           <li class="NavigationItem NavigationItem--alignmentYCenter">
-            <a href="#" class="NavigationAvatar">
-              <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+            <a
+              href="#"
+              class="NavigationAvatar"
+              aria-label="Profile of Jiří Bárta"
+            >
+              <div class="Avatar Avatar--small" aria-hidden="true">
                 <svg
                   class="Icon"
                   width="20"
@@ -629,13 +633,17 @@
                 >
                   <use href="/assets/icons/svg/sprite.svg#profile" />
                 </svg>
-              </span>
+              </div>
               My Account
             </a>
           </li>
           <li class="NavigationItem NavigationItem--alignmentYCenter">
-            <a href="#" class="NavigationAvatar NavigationAvatar--square">
-              <span class="Avatar Avatar--square Avatar--small" aria-label="Profile of Jiří Bárta">
+            <a
+              href="#"
+              class="NavigationAvatar NavigationAvatar--square"
+              aria-label="Profile of Jiří Bárta"
+            >
+              <div class="Avatar Avatar--square Avatar--small" aria-hidden="true">
                 <svg
                   class="Icon"
                   width="20"
@@ -644,7 +652,7 @@
                 >
                   <use href="/assets/icons/svg/sprite.svg#profile" />
                 </svg>
-              </span>
+              </div>
               My Account
             </a>
           </li>
@@ -665,20 +673,21 @@
 
     <div class="docs-Stack docs-Stack--stretch">
 
-      <nav class="Navigation Navigation--horizontal" aria-label="NavigationAvatar">
+      <nav class="Navigation Navigation--horizontal" aria-label="Navigation Avatar with Dropdown">
         <ul>
           <li class="NavigationItem NavigationItem--alignmentYStretch">
             <div class="Dropdown Dropdown--alignmentXStretch Dropdown--alignmentYStretch">
               <button
                 type="button"
                 class="NavigationAvatar"
-                data-spirit-toggle="dropdown"
-                data-spirit-target="#navigation-avatar"
-                aria-expanded="false"
                 aria-controls="navigation-avatar"
+                aria-expanded="false"
+                aria-label="Profile of Jiří Bárta"
                 data-spirit-autoclose="true"
+                data-spirit-target="#navigation-avatar"
+                data-spirit-toggle="dropdown"
               >
-                <span class="Avatar Avatar--small" aria-label="Profile of Jiří Bárta">
+                <span class="Avatar Avatar--small" aria-hidden="true">
                   <svg
                     class="Icon"
                     width="20"
@@ -742,13 +751,14 @@
               <button
                 type="button"
                 class="NavigationAvatar NavigationAvatar--square"
-                data-spirit-toggle="dropdown"
-                data-spirit-target="#navigation-avatar-square"
-                aria-expanded="false"
                 aria-controls="navigation-avatar-square"
+                aria-expanded="false"
+                aria-label="Profile of Jiří Bárta"
                 data-spirit-autoclose="true"
+                data-spirit-target="#navigation-avatar-square"
+                data-spirit-toggle="dropdown"
               >
-                <span class="Avatar Avatar--square Avatar--small" aria-label="Profile of Jiří Bárta">
+                <span class="Avatar Avatar--square Avatar--small" aria-hidden="true">
                   <svg
                     class="Icon"
                     width="20"
