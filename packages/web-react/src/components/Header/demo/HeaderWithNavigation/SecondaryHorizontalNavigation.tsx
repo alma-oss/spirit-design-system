@@ -8,14 +8,16 @@ import { VisuallyHidden } from '../../../VisuallyHidden';
 
 interface SecondaryHorizontalNavigationProps {
   id: string;
+  'aria-label': string;
   handleOpenDrawer: (event: ClickEvent) => void;
 }
 
 const SecondaryHorizontalNavigation: FunctionComponent<SecondaryHorizontalNavigationProps> = ({
   id,
+  'aria-label': ariaLabel,
   handleOpenDrawer,
 }) => (
-  <Navigation marginLeft="auto" aria-label="Secondary Navigation">
+  <Navigation marginLeft="auto" aria-label={ariaLabel}>
     <NavigationItem>
       <Button color="tertiary" size="small" isSymmetrical>
         <Icon name="search" />

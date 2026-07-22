@@ -5,7 +5,7 @@ import NavigationItem from '../NavigationItem';
 import { AVATAR_ARIA_LABEL, AVATAR_CONTENT, AVATAR_TEXT } from './navigationAvatarDemoHelpers';
 
 const NavigationAvatarBasic = () => (
-  <Navigation aria-label="NavigationAvatar">
+  <Navigation aria-label="Avatar">
     <NavigationItem>
       <NavigationAvatar avatarContent={AVATAR_CONTENT} aria-label={AVATAR_ARIA_LABEL} elementType="div">
         {AVATAR_TEXT}

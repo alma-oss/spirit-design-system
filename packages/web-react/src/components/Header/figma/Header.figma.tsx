@@ -43,7 +43,7 @@ const HeaderWithNavigationLoggedIn = ({ itemVariant }: { itemVariant: Navigation
                 </NavigationAction>
               </NavigationItem>
             </Navigation>
-            <Navigation marginLeft="auto" aria-label="Secondary Navigation">
+            <Navigation marginLeft="auto" aria-label="Secondary">
               <NavigationItem alignmentY="center" hideOn={['mobile', 'tablet']}>
                 <NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta">
                   My Account
@@ -98,7 +98,7 @@ const HeaderWithNavigationLoggedIn = ({ itemVariant }: { itemVariant: Navigation
                 </Navigation>
               </StackItem>
               <StackItem>
-                <Navigation aria-label="Main Navigation" direction="vertical">
+                <Navigation aria-label="Main" direction="vertical">
                   <NavigationItem>
                     <NavigationAction href="#" isSelected variant={itemVariant}>
                       Selected
@@ -117,7 +117,7 @@ const HeaderWithNavigationLoggedIn = ({ itemVariant }: { itemVariant: Navigation
                 </Navigation>
               </StackItem>
               <StackItem>
-                <Navigation aria-label="Secondary Navigation" direction="vertical">
+                <Navigation aria-label="Secondary Vertical" direction="vertical">
                   <NavigationItem>
                     <ButtonLink href="#" color="secondary">
                       Log Out
@@ -161,7 +161,7 @@ const HeaderWithNavigationLoggedOut = ({ itemVariant }: { itemVariant: Navigatio
                 </NavigationAction>
               </NavigationItem>
             </Navigation>
-            <Navigation marginLeft="auto" aria-label="Secondary Navigation">
+            <Navigation marginLeft="auto" aria-label="Secondary">
               <NavigationItem hideOn={['mobile', 'tablet']}>
                 <ButtonLink href="#" color="secondary">
                   Register
@@ -225,7 +225,7 @@ const HeaderWithNavigationLoggedOut = ({ itemVariant }: { itemVariant: Navigatio
                 </Navigation>
               </StackItem>
               <StackItem>
-                <Navigation aria-label="Secondary Navigation" direction="vertical">
+                <Navigation aria-label="Secondary Vertical" direction="vertical">
                   <NavigationItem>
                     <ButtonLink href="#" color="secondary">
                       Register

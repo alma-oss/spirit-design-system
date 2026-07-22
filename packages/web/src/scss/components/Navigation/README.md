@@ -16,14 +16,14 @@ The `Navigation` is a `nav` wrapper for lists of actions or other navigation com
 The `Navigation` component can be horizontal or vertical.
 
 ```html
-<nav class="Navigation Navigation--horizontal" aria-label="Horizontal Main Navigation">
+<nav class="Navigation Navigation--horizontal" aria-label="Main">
   <ul>
     <li>
       <!-- action -->
     </li>
   </ul>
 </nav>
-<nav class="Navigation Navigation--vertical" aria-label="Vertical Main Navigation">
+<nav class="Navigation Navigation--vertical" aria-label="Main">
   <ul>
     <li>
       <!-- action -->
@@ -205,7 +205,7 @@ You can also use responsive sizes with breakpoint-specific classes, e.g. `Avatar
 With NavigationAction and NavigationAvatar components:
 
 ```html
-<nav class="Navigation Navigation--horizontal" aria-label="Main Navigation">
+<nav class="Navigation Navigation--horizontal" aria-label="Main">
   <ul>
     <li class="NavigationItem NavigationItem--alignmentYCenter">
       <a class="NavigationAction NavigationAction--box NavigationAction--selected" href="#" aria-current="page"
@@ -235,7 +235,7 @@ With NavigationAction and NavigationAvatar components:
 With Buttons and NavigationAvatar:
 
 ```html
-<nav class="Navigation Navigation--horizontal" aria-label="Secondary Navigation">
+<nav class="Navigation Navigation--horizontal" aria-label="Secondary">
   <ul>
     <li class="NavigationItem NavigationItem--alignmentYCenter">
       <a href="#" class="Button Button--medium Button--primary">Button</a>

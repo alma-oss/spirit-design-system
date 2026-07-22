@@ -3,7 +3,7 @@ import Navigation from '../Navigation';
 import NavigationItem from '../NavigationItem';
 
 const NavigationVertical = () => (
-  <Navigation aria-label="Main Navigation" direction="vertical">
+  <Navigation aria-label="Vertical" direction="vertical">
     <NavigationItem>Item</NavigationItem>
   </Navigation>
 );

@@ -26,8 +26,12 @@ const HeaderWithNavigation = () => {
             <HeaderLogo href="#" aria-label="JobBoard homepage">
               <ProductLogo>{defaultSvgLogo}</ProductLogo>
             </HeaderLogo>
-            <MainNavigation />
-            <SecondaryHorizontalNavigation id="drawer-navigation" handleOpenDrawer={() => setDrawerOpen(true)} />
+            <MainNavigation aria-label="Main with menu, desktop" />
+            <SecondaryHorizontalNavigation
+              id="drawer-navigation"
+              aria-label="Secondary with menu, desktop"
+              handleOpenDrawer={() => setDrawerOpen(true)}
+            />
           </Flex>
         </Container>
       </Header>
@@ -48,10 +52,10 @@ const HeaderWithNavigation = () => {
                 <ProfileNavigation />
               </StackItem>
               <StackItem>
-                <MainNavigation direction="vertical" />
+                <MainNavigation direction="vertical" aria-label="Main with menu, mobile" />
               </StackItem>
               <StackItem>
-                <SecondaryVerticalNavigation />
+                <SecondaryVerticalNavigation aria-label="Secondary with menu, mobile" />
               </StackItem>
             </Stack>
           </DrawerPanelBody>
