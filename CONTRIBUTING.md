@@ -322,6 +322,22 @@ This project uses GitHub Actions to publish the packages automatically to npm.
 New packages are published after the new tag is pushed to the main branch.
 PR can be merged only by the appropriate group of maintainers.
 
+### Authentication
+
+The [`Version`][version-action] workflow authenticates as a GitHub App rather than a personal access token.
+A short-lived installation token is minted per run via `actions/create-github-app-token`, using the
+`GH_APP_CLIENT_ID` and `GH_APP_PRIVATE_KEY` secrets. Commits, tags, and releases it creates are attributed to
+`almaoss-spirit-design-system[bot]`. Unlike the PAT (tied to a personal account and requiring manual
+renewal), this token is org-owned, scoped to this repo, and expires automatically.
+
+**If the `Version` workflow fails with an authentication or permission error**, check the GitHub App's
+installation in the org's [GitHub App settings][github-app-settings] (find the app tied to
+`almaoss-spirit-design-system[bot]`):
+
+- Confirm the app is still installed on this repository.
+- Confirm its permissions cover what the workflow needs (`contents: write`).
+- Confirm the private key hasn't been rotated without updating the `GH_APP_PRIVATE_KEY` secret.
+
 ### Steps to Create a New Package Version
 
 Merge all appropriate PRs you want to publish into the appropriate branch
@@ -404,6 +420,7 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [figma-mcp-server]: https://developers.figma.com/docs/figma-mcp-server/remote-server-installation/
 [figma-quickstart]: https://developers.figma.com/docs/code-connect/quickstart-guide/#before-you-begin
 [figma-react-guide]: https://developers.figma.com/docs/code-connect/react/
+[github-app-settings]: https://github.com/organizations/alma-oss/settings/apps
 [jest]: https://jestjs.io/
 [lerna-home]: https://lerna.js.org
 [local-publish-testing]: tools/README.md
