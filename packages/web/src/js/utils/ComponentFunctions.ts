@@ -42,19 +42,50 @@ const onLoadHandler = (
   component.getOrCreateInstance(instance);
 };
 
+type DataTriggerEventHandler = (
+  element: HTMLElement,
+  component: typeof BaseComponent,
+  method: string,
+  event: Event,
+  aim: Aim,
+) => void;
+
+interface DataTriggerRegistration {
+  dataTriggerAttribute: DataTriggerAttribute;
+  component: typeof BaseComponent;
+  eventHandler: DataTriggerEventHandler;
+  method: string;
+  aim: Aim;
+}
+
+// Populated by every enableDataTrigger() call (i.e. each component module's own
+// `enable*Trigger(...)` call at import time). Consumed by initSpiritComponents()
+// to (re-)bind components scoped to a root that was inserted after the page's
+// original DOMContentLoaded already fired (e.g. HTML injected via innerHTML).
+const dataTriggerRegistrations: DataTriggerRegistration[] = [];
+
+const bindDataTrigger = (registration: DataTriggerRegistration, root: Element) => {
+  const { dataTriggerAttribute, component, eventHandler, method, aim } = registration;
+  const name = component.NAME;
+
+  SelectorEngine.findAll(`[${dataTriggerAttribute}="${name}"]`, root).forEach((toggleEl) => {
+    eventHandler(toggleEl, component, method, undefined as unknown as Event, aim);
+  });
+};
+
 const enableDataTrigger = (
   dataTriggerAttribute: DataTriggerAttribute,
   component: typeof BaseComponent,
-  eventHandler: (element: HTMLElement, component: typeof BaseComponent, method: string, event: Event, aim: Aim) => void,
+  eventHandler: DataTriggerEventHandler,
   method = 'toggle',
   aim: Aim = 'target',
 ) => {
-  const name = component.NAME;
+  const registration = { dataTriggerAttribute, component, eventHandler, method, aim };
 
-  EventHandler.on(window, 'DOMContentLoaded', (event: Event) => {
-    SelectorEngine.findAll(`[${dataTriggerAttribute}="${name}"]`).forEach((toggleEl) => {
-      eventHandler(toggleEl, component, method, event, aim);
-    });
+  dataTriggerRegistrations.push(registration);
+
+  EventHandler.on(window, 'DOMContentLoaded', () => {
+    bindDataTrigger(registration, document.documentElement);
   });
 };
 
@@ -72,4 +103,16 @@ const enableToggleAutoloader = (component: typeof BaseComponent, method = 'toggl
 
 const clickOutsideElement = (target: Element, event: Event) => !event.composedPath().includes(target);
 
-export { enableToggleTrigger, enableDismissTrigger, enableToggleAutoloader, clickOutsideElement };
+/**
+ * (Re-)binds every registered interactive component (Dropdown, Modal, Offcanvas, Collapse, ...)
+ * within `root`. Use this after inserting Spirit markup into the DOM outside of the normal page
+ * load flow (e.g. `dangerouslySetInnerHTML`), since the DOMContentLoaded-based auto-binding each
+ * component registers at import time only ever fires once, for the document's original load.
+ *
+ * @param root - Element to scope (re-)binding to. Defaults to the whole document.
+ */
+const initSpiritComponents = (root: Element = document.documentElement) => {
+  dataTriggerRegistrations.forEach((registration) => bindDataTrigger(registration, root));
+};
+
+export { enableToggleTrigger, enableDismissTrigger, enableToggleAutoloader, clickOutsideElement, initSpiritComponents };
