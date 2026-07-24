@@ -40,6 +40,9 @@ jobs:
   code-quality-checks:
     name: 🔍 Code Quality Checks
     uses: ./.github/workflows/lint.yaml
+    permissions:
+      actions: write
+      contents: read
 
   tests:
     name: 🧪 Tests
