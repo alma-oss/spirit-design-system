@@ -63,6 +63,40 @@ describe('ControlButton', () => {
     expect(screen.getByRole('button')).not.toHaveClass('ControlButton--large');
   });
 
+  it('should apply disabled state from context when prop is not provided', () => {
+    render(
+      <PropsProvider value={{ isDisabled: true }}>
+        <ControlButton />
+      </PropsProvider>,
+    );
+
+    expect(screen.getByRole('button')).toHaveClass('disabled');
+    expect(screen.getByRole('button')).toBeDisabled();
+  });
+
+  it('should prefer direct disabled prop over context disabled state', () => {
+    render(
+      <PropsProvider value={{ isDisabled: true }}>
+        <ControlButton isDisabled={false} />
+      </PropsProvider>,
+    );
+
+    expect(screen.getByRole('button')).not.toHaveClass('disabled');
+    expect(screen.getByRole('button')).not.toBeDisabled();
+  });
+
+  it('should not render button-only attributes on non-button elements', () => {
+    render(
+      <PropsProvider value={{ isDisabled: true }}>
+        <ControlButton elementType="span" data-testid="control-button-span" />
+      </PropsProvider>,
+    );
+
+    expect(screen.getByTestId('control-button-span')).toHaveClass('ControlButton', 'disabled');
+    expect(screen.getByTestId('control-button-span')).not.toHaveAttribute('type');
+    expect(screen.getByTestId('control-button-span')).not.toHaveAttribute('disabled');
+  });
+
   it('should render text children', () => {
     render(<ControlButton>Close</ControlButton>);
 

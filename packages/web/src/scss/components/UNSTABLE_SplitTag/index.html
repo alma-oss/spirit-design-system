@@ -1,0 +1,594 @@
+{{#> web/layout/default title="SplitTag" parentPageName="Components" isUnstable=true }}
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Default</h2>
+    <div class="docs-Stack docs-Stack--start">
+      <div class="UNSTABLE_SplitTag" role="group" aria-label="Prague distance filter, radius +5 km">
+        <span class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic">Prague</span>
+        <div class="Dropdown">
+          <button
+            type="button"
+            class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic"
+            data-spirit-toggle="dropdown"
+            data-spirit-target="#split-tag-prague-radius-dropdown"
+            aria-expanded="false"
+            aria-controls="split-tag-prague-radius-dropdown"
+            data-spirit-autoclose="true"
+          >
+            +5 km
+            <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+            </svg>
+          </button>
+          <div
+            class="DropdownPopover placement-bottom-start"
+            data-spirit-placement="bottom-start"
+            id="split-tag-prague-radius-dropdown"
+          >
+            <button type="button" class="Item color-scheme-on-selected-subtle bg-color-scheme">
+              <span class="Item__content" role="presentation">
+                <span class="Label">+5 km</span>
+              </span>
+            </button>
+            <button type="button" class="Item">
+              <span class="Item__content" role="presentation">
+                <span class="Label">+10 km</span>
+              </span>
+            </button>
+            <button type="button" class="Item">
+              <span class="Item__content" role="presentation">
+                <span class="Label">+20 km</span>
+              </span>
+            </button>
+            <button type="button" class="Item">
+              <span class="Item__content" role="presentation">
+                <span class="Label">+50 km</span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic"
+          aria-label="Remove Prague distance filter"
+        >
+          <span
+            class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+            aria-hidden="true"
+          >
+            <svg class="Icon" width="16" height="16" aria-hidden="true">
+              <use href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Remove segment variants</h2>
+    <div class="docs-Stack docs-Stack--start">
+      <section>
+        <h2 class="docs-Heading">Tag as button</h2>
+        <div class="docs-Stack docs-Stack--start">
+          <div class="UNSTABLE_SplitTag" role="group" aria-label="Prague distance filter, radius +5 km">
+            <span class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic">Prague</span>
+            <div class="Dropdown">
+              <button
+                type="button"
+                class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic"
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#split-tag-prague-radius-tag-button-dropdown"
+                aria-expanded="false"
+                aria-controls="split-tag-prague-radius-tag-button-dropdown"
+                data-spirit-autoclose="true"
+              >
+                +5 km
+                <svg class="Icon" width="24" height="24" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+              <div
+                class="DropdownPopover placement-bottom-start"
+                data-spirit-placement="bottom-start"
+                id="split-tag-prague-radius-tag-button-dropdown"
+              >
+                <button type="button" class="Item color-scheme-on-selected-subtle bg-color-scheme">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+5 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+10 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+20 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+50 km</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic"
+              aria-label="Remove Prague distance filter"
+            >
+              <span
+                class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+                aria-hidden="true"
+              >
+                <svg class="Icon" width="16" height="16" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="docs-Heading">ControlButton as button</h2>
+        <div class="docs-Stack docs-Stack--start">
+          <div class="UNSTABLE_SplitTag" role="group" aria-label="Prague distance filter, radius +5 km">
+            <span class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic">Prague</span>
+            <div class="Dropdown">
+              <button
+                type="button"
+                class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic"
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#split-tag-prague-radius-control-button-dropdown"
+                aria-expanded="false"
+                aria-controls="split-tag-prague-radius-control-button-dropdown"
+                data-spirit-autoclose="true"
+              >
+                +5 km
+                <svg class="Icon" width="24" height="24" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+              <div
+                class="DropdownPopover placement-bottom-start"
+                data-spirit-placement="bottom-start"
+                id="split-tag-prague-radius-control-button-dropdown"
+              >
+                <button type="button" class="Item color-scheme-on-selected-subtle bg-color-scheme">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+5 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+10 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+20 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+50 km</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <span class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic">
+              <button
+                type="button"
+                class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+                aria-label="Remove Prague distance filter"
+              >
+                <svg class="Icon" width="16" height="16" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Sizes</h2>
+    <div class="docs-Stack docs-Stack--start">
+      <section>
+        <h2 class="docs-Heading">Size xsmall</h2>
+        <div class="docs-Stack docs-Stack--start">
+          <div class="UNSTABLE_SplitTag" role="group" aria-label="Prague distance filter, radius +5 km">
+            <span class="Tag Tag--neutral Tag--xsmall color-scheme-on-neutral-basic">Prague</span>
+            <div class="Dropdown">
+              <button
+                type="button"
+                class="Tag Tag--neutral Tag--xsmall color-scheme-on-neutral-basic"
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#split-tag-prague-radius-xsmall-dropdown"
+                aria-expanded="false"
+                aria-controls="split-tag-prague-radius-xsmall-dropdown"
+                data-spirit-autoclose="true"
+              >
+                +5 km
+                <svg class="Icon" width="16" height="16" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+              <div
+                class="DropdownPopover placement-bottom-start"
+                data-spirit-placement="bottom-start"
+                id="split-tag-prague-radius-xsmall-dropdown"
+              >
+                <button type="button" class="Item color-scheme-on-selected-subtle bg-color-scheme">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+5 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+10 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+20 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+50 km</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="Tag Tag--neutral Tag--xsmall color-scheme-on-neutral-basic"
+              aria-label="Remove Prague distance filter"
+            >
+              <span
+                class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+                aria-hidden="true"
+              >
+                <svg class="Icon" width="16" height="16" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="docs-Heading">Size small</h2>
+        <div class="docs-Stack docs-Stack--start">
+          <div class="UNSTABLE_SplitTag" role="group" aria-label="Prague distance filter, radius +5 km">
+            <span class="Tag Tag--neutral Tag--small color-scheme-on-neutral-basic">Prague</span>
+            <div class="Dropdown">
+              <button
+                type="button"
+                class="Tag Tag--neutral Tag--small color-scheme-on-neutral-basic"
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#split-tag-prague-radius-small-dropdown"
+                aria-expanded="false"
+                aria-controls="split-tag-prague-radius-small-dropdown"
+                data-spirit-autoclose="true"
+              >
+                +5 km
+                <svg class="Icon" width="24" height="24" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+              <div
+                class="DropdownPopover placement-bottom-start"
+                data-spirit-placement="bottom-start"
+                id="split-tag-prague-radius-small-dropdown"
+              >
+                <button type="button" class="Item color-scheme-on-selected-subtle bg-color-scheme">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+5 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+10 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+20 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+50 km</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="Tag Tag--neutral Tag--small color-scheme-on-neutral-basic"
+              aria-label="Remove Prague distance filter"
+            >
+              <span
+                class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+                aria-hidden="true"
+              >
+                <svg class="Icon" width="16" height="16" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="docs-Heading">Size medium</h2>
+        <div class="docs-Stack docs-Stack--start">
+          <div class="UNSTABLE_SplitTag" role="group" aria-label="Prague distance filter, radius +5 km">
+            <span class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic">Prague</span>
+            <div class="Dropdown">
+              <button
+                type="button"
+                class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic"
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#split-tag-prague-radius-medium-dropdown"
+                aria-expanded="false"
+                aria-controls="split-tag-prague-radius-medium-dropdown"
+                data-spirit-autoclose="true"
+              >
+                +5 km
+                <svg class="Icon" width="24" height="24" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+              <div
+                class="DropdownPopover placement-bottom-start"
+                data-spirit-placement="bottom-start"
+                id="split-tag-prague-radius-medium-dropdown"
+              >
+                <button type="button" class="Item color-scheme-on-selected-subtle bg-color-scheme">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+5 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+10 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+20 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+50 km</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic"
+              aria-label="Remove Prague distance filter"
+            >
+              <span
+                class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+                aria-hidden="true"
+              >
+                <svg class="Icon" width="16" height="16" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="docs-Heading">Size large</h2>
+        <div class="docs-Stack docs-Stack--start">
+          <div class="UNSTABLE_SplitTag" role="group" aria-label="Prague distance filter, radius +5 km">
+            <span class="Tag Tag--neutral Tag--large color-scheme-on-neutral-basic">Prague</span>
+            <div class="Dropdown">
+              <button
+                type="button"
+                class="Tag Tag--neutral Tag--large color-scheme-on-neutral-basic"
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#split-tag-prague-radius-large-dropdown"
+                aria-expanded="false"
+                aria-controls="split-tag-prague-radius-large-dropdown"
+                data-spirit-autoclose="true"
+              >
+                +5 km
+                <svg class="Icon" width="24" height="24" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+              <div
+                class="DropdownPopover placement-bottom-start"
+                data-spirit-placement="bottom-start"
+                id="split-tag-prague-radius-large-dropdown"
+              >
+                <button type="button" class="Item color-scheme-on-selected-subtle bg-color-scheme">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+5 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+10 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+20 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+50 km</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="Tag Tag--neutral Tag--large color-scheme-on-neutral-basic"
+              aria-label="Remove Prague distance filter"
+            >
+              <span
+                class="ControlButton ControlButton--small text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+                aria-hidden="true"
+              >
+                <svg class="Icon" width="16" height="16" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="docs-Heading">Size xlarge</h2>
+        <div class="docs-Stack docs-Stack--start">
+          <div class="UNSTABLE_SplitTag" role="group" aria-label="Prague distance filter, radius +5 km">
+            <span class="Tag Tag--neutral Tag--xlarge color-scheme-on-neutral-basic">Prague</span>
+            <div class="Dropdown">
+              <button
+                type="button"
+                class="Tag Tag--neutral Tag--xlarge color-scheme-on-neutral-basic"
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#split-tag-prague-radius-xlarge-dropdown"
+                aria-expanded="false"
+                aria-controls="split-tag-prague-radius-xlarge-dropdown"
+                data-spirit-autoclose="true"
+              >
+                +5 km
+                <svg class="Icon" width="24" height="24" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+              <div
+                class="DropdownPopover placement-bottom-start"
+                data-spirit-placement="bottom-start"
+                id="split-tag-prague-radius-xlarge-dropdown"
+              >
+                <button type="button" class="Item color-scheme-on-selected-subtle bg-color-scheme">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+5 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+10 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+20 km</span>
+                  </span>
+                </button>
+                <button type="button" class="Item">
+                  <span class="Item__content" role="presentation">
+                    <span class="Label">+50 km</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="Tag Tag--neutral Tag--xlarge color-scheme-on-neutral-basic"
+              aria-label="Remove Prague distance filter"
+            >
+              <span
+                class="ControlButton ControlButton--small text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical"
+                aria-hidden="true"
+              >
+                <svg class="Icon" width="16" height="16" aria-hidden="true">
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Disabled</h2>
+    <div class="docs-Stack docs-Stack--start">
+      <div class="UNSTABLE_SplitTag" role="group" aria-label="Prague distance filter, radius +5 km">
+        <span class="Tag Tag--neutral Tag--medium disabled">Prague</span>
+        <div class="Dropdown">
+          <button type="button" class="Tag Tag--neutral Tag--medium disabled" disabled>
+            +5 km
+            <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+            </svg>
+          </button>
+        </div>
+        <button
+          type="button"
+          class="Tag Tag--neutral Tag--medium disabled"
+          aria-label="Remove Prague distance filter"
+          disabled
+        >
+          <span
+            class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border disabled ControlButton--symmetrical"
+            aria-hidden="true"
+          >
+            <svg class="Icon" width="16" height="16" aria-hidden="true">
+              <use href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+          </span>
+        </button>
+      </div>
+
+      <div class="UNSTABLE_SplitTag" role="group" aria-label="Prague distance filter, radius +5 km">
+        <span class="Tag Tag--neutral Tag--medium disabled">Prague</span>
+        <div class="Dropdown">
+          <button type="button" class="Tag Tag--neutral Tag--medium disabled" disabled>
+            +5 km
+            <svg class="Icon" width="24" height="24" aria-hidden="true">
+              <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+            </svg>
+          </button>
+        </div>
+        <span class="Tag Tag--neutral Tag--medium disabled">
+          <button
+            type="button"
+            class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--hasBackground dynamic-color-border disabled ControlButton--symmetrical"
+            aria-label="Remove Prague distance filter"
+            disabled
+          >
+            <svg class="Icon" width="16" height="16" aria-hidden="true">
+              <use href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{/web/layout/default }}

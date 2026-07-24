@@ -1,0 +1,4 @@
+@use '@tokens' as tokens;
+
+$border-width: tokens.$border-width-100;
+$inner-border-radius: 0;
