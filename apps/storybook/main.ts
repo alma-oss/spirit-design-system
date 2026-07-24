@@ -13,8 +13,9 @@ const isChromatic = process.env.CHROMATIC === 'true';
 const config: StorybookConfig = {
   stories: [
     '../../packages/**/*.mdx',
-    '../../packages/**/*.stories.@(ts|tsx)',
-    ...(isChromatic ? ['!../../packages/**/*.figma.stories.@(ts|tsx)'] : []),
+    isChromatic
+      ? '../../packages/**/!(*.figma).stories.@(ts|tsx)'
+      : '../../packages/**/*.stories.@(ts|tsx)',
   ],
 
   // @see: https://storybook.js.org/docs/writing-stories/tags#custom-tags

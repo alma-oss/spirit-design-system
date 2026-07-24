@@ -25,7 +25,9 @@ const meta: Meta<typeof Item> = {
         }),
         isDisabled: figma.boolean('Disabled'),
         isSelected: figma.boolean('Selected'),
-        iconProps: figma.instance('Icon').getProps<{ name: string }>(),
+        iconProps: (figma.instance('Icon') as unknown as { getProps?: <T>() => T } | undefined)?.getProps?.<{
+          name: string;
+        }>(),
       },
       examples: [
         { example: 'FigmaSingleSelect', variant: { Type: 'Single select' } },
