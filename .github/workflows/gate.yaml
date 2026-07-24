@@ -1,0 +1,41 @@
+name: 🚦 Evaluation Gate
+
+on:
+  workflow_call:
+    inputs:
+      needs-context:
+        description: 'JSON string of needs context'
+        required: true
+        type: string
+      gate-name:
+        description: 'Name of the gate for logging'
+        required: true
+        type: string
+      success-message:
+        description: 'Message to display on success'
+        required: false
+        type: string
+        default: 'All checks passed the gate successfully!'
+      failure-message:
+        description: 'Message to display on failure'
+        required: false
+        type: string
+        default: 'Dependency checks failed!'
+
+jobs:
+  evaluate:
+    name: ${{ inputs.gate-name }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Evaluate results of dependency jobs
+        run: |
+          needs_json='${{ inputs.needs-context }}'
+          echo "Evaluating dependencies for: ${{ inputs.gate-name }}"
+          echo "Needs context: $needs_json"
+
+          if echo "$needs_json" | jq -e 'to_entries | map(.value.result) | any(. == "failure" or . == "cancelled")' > /dev/null; then
+            echo "${{ inputs.failure-message }}"
+            exit 1
+          fi
+
+          echo "${{ inputs.success-message }}"

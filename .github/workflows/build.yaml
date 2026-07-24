@@ -1,16 +1,7 @@
 name: 🏗️ Build
 
 on:
-  # Run this workflow on push to branches only (not tags)
-  push:
-    branches:
-      - '**'
-    paths:
-      - packages/design-tokens/**
-      - packages/icons/**
-      - packages/vite-plugin-spirit-icons/**
-      - packages/web/**
-      - packages/web-react/**
+  workflow_call:
 
 env:
   NX_BRANCH: ${{ github.event.number || github.ref_name }}
