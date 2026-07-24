@@ -9,7 +9,7 @@ const NavigationVerticalWithCollapse = () => {
   const { isOpen, toggleHandler } = useCollapse(true);
 
   return (
-    <Navigation aria-label="Subnavigation Item States" direction="vertical">
+    <Navigation aria-label="Nested Vertical Navigation" direction="vertical">
       <NavigationItem>
         <NavigationAction href="/">Home</NavigationAction>
       </NavigationItem>

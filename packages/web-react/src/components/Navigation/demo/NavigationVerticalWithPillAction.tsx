@@ -4,7 +4,7 @@ import NavigationAction from '../NavigationAction';
 import NavigationItem from '../NavigationItem';
 
 const NavigationVerticalWithPillAction = () => (
-  <Navigation aria-label="Main Navigation" direction="vertical">
+  <Navigation aria-label="Vertical Navigation with Pill NavigationAction" direction="vertical">
     <NavigationItem>
       <NavigationAction href="/" variant="pill">
         Link
