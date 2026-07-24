@@ -1,13 +1,7 @@
-name: 🔍 Code Quality Checks
+name: 🧪 Tests
 
 on:
-  # Post-merge CI on main; pull_request covers everything else (including PRs into release branches)
-  push:
-    branches:
-      - main
-  pull_request:
-  schedule:
-    - cron: '0 9 * * *' # every day at 9:00
+  workflow_call:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref_name }}
@@ -21,11 +15,10 @@ env:
   NX_BRANCH: ${{ github.event.number || github.ref_name }}
   NX_VERBOSE_LOGGING: true
   NX_NO_CLOUD: true
-  CACHE_KEY: repository-cache-key-${{ github.run_id }}
 
 jobs:
-  install-build:
-    name: 🧶 Install Deps and 🏗️ Build Design Tokens
+  unit-tests:
+    name: 🧪 Unit Testing
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
@@ -40,54 +33,6 @@ jobs:
 
       - name: Build
         run: yarn workspace @alma-oss/spirit-design-tokens build
-
-      - name: Save Repository to Cache
-        id: save-repository-cache
-        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
-        with:
-          path: ./
-          key: ${{ env.CACHE_KEY }}
-
-  lint:
-    name: 📐 Code Linting
-    needs: [install-build]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    env:
-      HUSKY: 0
-
-    steps:
-      - name: Restore Repository from Cache
-        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
-        id: restore-repository-cache
-        with:
-          path: ./
-          key: ${{ env.CACHE_KEY }}
-
-      - name: Setup Node
-        uses: ./.github/actions/setup-node
-
-      - name: Lint
-        run: yarn lint
-
-  unit-tests:
-    name: 🧪 Unit Testing
-    needs: [install-build]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    env:
-      HUSKY: 0
-
-    steps:
-      - name: Restore Repository from Cache
-        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
-        id: restore-repository-cache
-        with:
-          path: ./
-          key: ${{ env.CACHE_KEY }}
-
-      - name: Setup Node
-        uses: ./.github/actions/setup-node
 
       - name: Unit Tests
         run: yarn test:unit:coverage
@@ -106,70 +51,8 @@ jobs:
           if-no-files-found: ignore
           retention-days: 1
 
-  format:
-    name: 💅 Code Formatting
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    env:
-      HUSKY: 0
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-
-      - name: Setup Node and Install Dependencies
-        uses: ./.github/actions/setup-install
-
-      - name: Check Code-Style Format
-        run: yarn format:check
-
-  types:
-    name: 📘 Type Checking
-    needs: [install-build]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    env:
-      HUSKY: 0
-
-    steps:
-      - name: Restore Repository from Cache
-        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
-        id: restore-repository-cache
-        with:
-          path: ./
-          key: ${{ env.CACHE_KEY }}
-
-      - name: Setup Node
-        uses: ./.github/actions/setup-node
-
-      - name: Types Check
-        run: yarn types
-
   publish-coverage:
     name: 📊 Publish Code Coverage
     needs: [unit-tests]
     if: always()
     uses: ./.github/workflows/publish-coverage.yaml
-    with:
-      # Only populated on pull_request events; empty on direct pushes (existing branch-tracking behavior)
-      compare-ref: ${{ github.base_ref }}
-      compare-sha: ${{ github.event.pull_request.base.sha }}
-
-  cleanup:
-    name: 🧹 Cleanup
-    needs: [install-build, lint, unit-tests, types, publish-coverage]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    if: always() && needs.install-build.result == 'success'
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-
-      # @see: https://github.com/actions/cache/blob/main/tips-and-workarounds.md#force-deletion-of-caches-overriding-default-cache-eviction-policy
-      - name: Cleanup cache
-        run: |
-          gh extension install actions/gh-actions-cache
-          gh actions-cache delete "${{ env.CACHE_KEY }}" --confirm
-        env:
-          GH_TOKEN: ${{ github.token}}

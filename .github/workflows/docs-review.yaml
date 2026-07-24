@@ -1,12 +1,7 @@
 name: 📄 Documentation Review
 
 on:
-  # Run this workflow on push to branches only (not tags)
-  push:
-    branches:
-      - '**'
-  schedule:
-    - cron: '0 9 * * *' # every day at 9:00
+  workflow_call:
 
 jobs:
   markdown-link-check:
