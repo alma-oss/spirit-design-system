@@ -1,9 +1,7 @@
-import React, { type ReactElement, forwardRef } from 'react';
-import { type PolymorphicRef, type SpiritNavigationAvatarProps } from '../../../types';
+import React from 'react';
 import { Icon } from '../../Icon';
 import { Item } from '../../Item';
 import { Label } from '../../Label';
-import NavigationAvatar from '../NavigationAvatar';
 
 // Shared constants
 export const AVATAR_CONTENT = <Icon name="profile" />;
@@ -23,14 +21,4 @@ export const DROPDOWN_ITEMS = (
       <Label>Log out</Label>
     </Item>
   </>
-);
-
-// Shared NavigationAvatarAsDropdownTrigger component
-const _NavigationAvatarAsDropdownTrigger = (
-  props: SpiritNavigationAvatarProps<'button'>,
-  ref: PolymorphicRef<'button'>,
-): ReactElement => <NavigationAvatar {...props} elementType="button" ref={ref} />;
-
-export const NavigationAvatarAsDropdownTrigger = forwardRef<HTMLButtonElement, SpiritNavigationAvatarProps<'button'>>(
-  _NavigationAvatarAsDropdownTrigger,
 );
