@@ -1,12 +1,7 @@
-name: 🔍 Code Quality Checks
+name: 🧪 Tests
 
 on:
-  # Run this workflow on push to branches only (not tags)
-  push:
-    branches:
-      - '**'
-  schedule:
-    - cron: '0 9 * * *' # every day at 9:00
+  workflow_call:
 
 permissions:
   actions: write
@@ -16,11 +11,10 @@ env:
   NX_BRANCH: ${{ github.event.number || github.ref_name }}
   NX_VERBOSE_LOGGING: true
   NX_NO_CLOUD: true
-  CACHE_KEY: repository-cache-key-${{ github.run_id }}
 
 jobs:
-  install-build:
-    name: 🧶 Install Deps and 🏗️ Build Design Tokens
+  unit-tests:
+    name: 🧪 Unit Testing
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
@@ -35,54 +29,6 @@ jobs:
 
       - name: Build
         run: yarn workspace @alma-oss/spirit-design-tokens build
-
-      - name: Save Repository to Cache
-        id: save-repository-cache
-        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5
-        with:
-          path: ./
-          key: ${{ env.CACHE_KEY }}
-
-  lint:
-    name: 📐 Code Linting
-    needs: [install-build]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    env:
-      HUSKY: 0
-
-    steps:
-      - name: Restore Repository from Cache
-        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5
-        id: restore-repository-cache
-        with:
-          path: ./
-          key: ${{ env.CACHE_KEY }}
-
-      - name: Setup Node
-        uses: ./.github/actions/setup-node
-
-      - name: Lint
-        run: yarn lint
-
-  unit-tests:
-    name: 🧪 Unit Testing
-    needs: [install-build]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    env:
-      HUSKY: 0
-
-    steps:
-      - name: Restore Repository from Cache
-        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5
-        id: restore-repository-cache
-        with:
-          path: ./
-          key: ${{ env.CACHE_KEY }}
-
-      - name: Setup Node
-        uses: ./.github/actions/setup-node
 
       - name: Unit Tests
         run: yarn test:unit:coverage
@@ -101,67 +47,8 @@ jobs:
           if-no-files-found: ignore
           retention-days: 1
 
-  format:
-    name: 💅 Code Formatting
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    env:
-      HUSKY: 0
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-
-      - name: Setup Node and Install Dependencies
-        uses: ./.github/actions/setup-install
-
-      - name: Check Code-Style Format
-        run: yarn format:check
-
-  types:
-    name: 📘 Type Checking
-    needs: [install-build]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    env:
-      HUSKY: 0
-
-    steps:
-      - name: Restore Repository from Cache
-        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5
-        id: restore-repository-cache
-        with:
-          path: ./
-          key: ${{ env.CACHE_KEY }}
-
-      - name: Setup Node
-        uses: ./.github/actions/setup-node
-
-      - name: Types Check
-        run: yarn types
-
   publish-coverage:
     name: 📊 Publish Code Coverage
     needs: [unit-tests]
     if: always()
     uses: ./.github/workflows/publish-coverage.yaml
-
-  cleanup:
-    name: 🧹 Cleanup
-    needs: [lint, unit-tests, types, publish-coverage]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    # Ensure this job runs regardless of previous job outcomes
-    if: always()
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-
-      # @see: https://github.com/actions/cache/blob/main/tips-and-workarounds.md#force-deletion-of-caches-overriding-default-cache-eviction-policy
-      - name: Cleanup cache
-        run: |
-          gh extension install actions/gh-actions-cache
-          gh actions-cache delete "${{ env.CACHE_KEY }}" --confirm
-        env:
-          GH_TOKEN: ${{ github.token}}
