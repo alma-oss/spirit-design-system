@@ -61,6 +61,8 @@ See individual [packages](#packages) to learn how to get started.
 
 - `git clone ssh://git@github.com:alma-oss/spirit-design-system.git`
 - `cd spirit-design-system`
+- Export `GITHUB_TOKEN` with `read:packages` before installing dependencies.
+  This is required to download private `@almacareer/*` packages used by Storybook.
 
 Using Make (recommended):
 

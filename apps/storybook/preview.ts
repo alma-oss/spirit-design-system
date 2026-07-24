@@ -1,7 +1,9 @@
-import './assets/stylesheets/index.scss';
+import './previewCssLink';
 import { IconGlobalDecorator } from './decorators/IconGlobalDecorator';
 import SpiritTheme from './spirit.theme';
 import {
+  cssSourceDecorators,
+  cssSourceGlobalTypes,
   displayArgTypes,
   displayArgs,
   escapeHatchArgTypes,
@@ -67,8 +69,8 @@ export const args = {
 };
 
 // Global types
-export const globalTypes = themeGlobalTypes;
+export const globalTypes = { ...themeGlobalTypes, ...cssSourceGlobalTypes };
 
 // Decorators
-export const decorators = [...themeDecorators, IconGlobalDecorator];
+export const decorators = [...themeDecorators, ...cssSourceDecorators, IconGlobalDecorator];
 export const tags = ['autodocs'];
