@@ -56,6 +56,7 @@
     "packages:changed": "lerna changed",
     "packages:list": "lerna ls",
     "post-changelog": "yarn workspace @alma-oss/spirit-post-changelog post-changelog",
+    "supernova:extract": "yarn workspace @alma-oss/spirit-supernova-extract extract",
     "release": "npm-run-all --serial build packages:publish",
     "version": "yarn format:fix:changelog"
   },

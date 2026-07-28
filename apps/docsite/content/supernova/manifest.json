@@ -1,0 +1,2792 @@
+{
+  "generatedAt": "2026-04-22T22:32:38.743Z",
+  "sitemapUrl": "https://spirit.supernova-docs.io/latest/sitemap.xml",
+  "pages": [
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/introduction/spirit-design-system-tGrwryFa",
+      "sourcePath": "/latest/introduction/spirit-design-system-tGrwryFa",
+      "outFile": "introduction/spirit-design-system.md",
+      "status": "ok",
+      "title": "Spirit Design System"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/introduction/what-is-spirit-PDPDSQC7",
+      "sourcePath": "/latest/introduction/what-is-spirit-PDPDSQC7",
+      "outFile": "introduction/what-is-spirit.md",
+      "status": "ok",
+      "title": "What Is Spirit"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/introduction/how-to-customize-spirit-BnwsYmmD",
+      "sourcePath": "/latest/introduction/how-to-customize-spirit-BnwsYmmD",
+      "outFile": "introduction/how-to-customize-spirit.md",
+      "status": "ok",
+      "title": "How to Customize Spirit"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/intro-gefOL1Xb",
+      "sourcePath": "/latest/design/intro-gefOL1Xb",
+      "outFile": "design/intro.md",
+      "status": "ok",
+      "title": "Intro"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/color-palette/palette-Ck21vnxG",
+      "sourcePath": "/latest/design/color-palette/palette-Ck21vnxG",
+      "outFile": "design/color-palette/palette.md",
+      "status": "ok",
+      "title": "Color Palette"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/color-palette/customisation-4OHZtR26",
+      "sourcePath": "/latest/design/color-palette/customisation-4OHZtR26",
+      "outFile": "design/color-palette/customisation.md",
+      "status": "ok",
+      "title": "Color Palette"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/themes/overview-ekjIxcrc",
+      "sourcePath": "/latest/design/theme-tokens/themes/overview-ekjIxcrc",
+      "outFile": "design/theme-tokens/themes/overview.md",
+      "status": "ok",
+      "title": "Themes"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/themes/customisation-8MDTfXME",
+      "sourcePath": "/latest/design/theme-tokens/themes/customisation-8MDTfXME",
+      "outFile": "design/theme-tokens/themes/customisation.md",
+      "status": "ok",
+      "title": "Themes"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/text-M2mffJyb",
+      "sourcePath": "/latest/design/theme-tokens/text-M2mffJyb",
+      "outFile": "design/theme-tokens/text.md",
+      "status": "ok",
+      "title": "text"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/background-zfq0pIBS",
+      "sourcePath": "/latest/design/theme-tokens/background-zfq0pIBS",
+      "outFile": "design/theme-tokens/background.md",
+      "status": "ok",
+      "title": "background"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/border-SY304V4c",
+      "sourcePath": "/latest/design/theme-tokens/border-SY304V4c",
+      "outFile": "design/theme-tokens/border.md",
+      "status": "ok",
+      "title": "border"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/link-FjaeC7k2",
+      "sourcePath": "/latest/design/theme-tokens/link-FjaeC7k2",
+      "outFile": "design/theme-tokens/link.md",
+      "status": "ok",
+      "title": "link"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/form-field-rrpFvpdH",
+      "sourcePath": "/latest/design/theme-tokens/form-field-rrpFvpdH",
+      "outFile": "design/theme-tokens/form-field.md",
+      "status": "ok",
+      "title": "form-field"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/component-button-At5Ihq6t-At5Ihq6t",
+      "sourcePath": "/latest/design/theme-tokens/component-button-At5Ihq6t-At5Ihq6t",
+      "outFile": "design/theme-tokens/component-button.md",
+      "status": "ok",
+      "title": "component-button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/component-header-FpBktcjY-FpBktcjY",
+      "sourcePath": "/latest/design/theme-tokens/component-header-FpBktcjY-FpBktcjY",
+      "outFile": "design/theme-tokens/component-header.md",
+      "status": "ok",
+      "title": "component-header"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/component-toggle-P9bseuGx-P9bseuGx",
+      "sourcePath": "/latest/design/theme-tokens/component-toggle-P9bseuGx-P9bseuGx",
+      "outFile": "design/theme-tokens/component-toggle.md",
+      "status": "ok",
+      "title": "component-toggle"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/selected-ASL2ipsL-ASL2ipsL",
+      "sourcePath": "/latest/design/theme-tokens/selected-ASL2ipsL-ASL2ipsL",
+      "outFile": "design/theme-tokens/selected.md",
+      "status": "ok",
+      "title": "selected"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/disabled-JvbRJBkS-JvbRJBkS",
+      "sourcePath": "/latest/design/theme-tokens/disabled-JvbRJBkS-JvbRJBkS",
+      "outFile": "design/theme-tokens/disabled.md",
+      "status": "ok",
+      "title": "disabled"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/neutral-0Hspn0uT-0Hspn0uT",
+      "sourcePath": "/latest/design/theme-tokens/neutral-0Hspn0uT-0Hspn0uT",
+      "outFile": "design/theme-tokens/neutral.md",
+      "status": "ok",
+      "title": "neutral"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/theme-tokens/emotion-MfeAbMb4-MfeAbMb4",
+      "sourcePath": "/latest/design/theme-tokens/emotion-MfeAbMb4-MfeAbMb4",
+      "outFile": "design/theme-tokens/emotion.md",
+      "status": "ok",
+      "title": "emotion"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/typography/overview-B6purUNc",
+      "sourcePath": "/latest/design/global-tokens/typography/overview-B6purUNc",
+      "outFile": "design/global-tokens/typography/overview.md",
+      "status": "ok",
+      "title": "Typography"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/typography/customisation-IhdVUQ93",
+      "sourcePath": "/latest/design/global-tokens/typography/customisation-IhdVUQ93",
+      "outFile": "design/global-tokens/typography/customisation.md",
+      "status": "ok",
+      "title": "Typography"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/typography/spirit-tokens-GWW6JIDT",
+      "sourcePath": "/latest/design/global-tokens/typography/spirit-tokens-GWW6JIDT",
+      "outFile": "design/global-tokens/typography/spirit-tokens.md",
+      "status": "ok",
+      "title": "Typography"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/radius/overview-dvtIAOKR",
+      "sourcePath": "/latest/design/global-tokens/radius/overview-dvtIAOKR",
+      "outFile": "design/global-tokens/radius/overview.md",
+      "status": "ok",
+      "title": "Radius"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/radius/customisation-18qHkI38",
+      "sourcePath": "/latest/design/global-tokens/radius/customisation-18qHkI38",
+      "outFile": "design/global-tokens/radius/customisation.md",
+      "status": "ok",
+      "title": "Radius"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/radius/spirit-tokens-MlmO2Td5",
+      "sourcePath": "/latest/design/global-tokens/radius/spirit-tokens-MlmO2Td5",
+      "outFile": "design/global-tokens/radius/spirit-tokens.md",
+      "status": "ok",
+      "title": "Radius"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/border/overview-NORd3C5d",
+      "sourcePath": "/latest/design/global-tokens/border/overview-NORd3C5d",
+      "outFile": "design/global-tokens/border/overview.md",
+      "status": "ok",
+      "title": "Border"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/border/customisation-gkAXMWm2",
+      "sourcePath": "/latest/design/global-tokens/border/customisation-gkAXMWm2",
+      "outFile": "design/global-tokens/border/customisation.md",
+      "status": "ok",
+      "title": "Border"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/border/spirit-tokens-R7ADj25F-R7ADj25F",
+      "sourcePath": "/latest/design/global-tokens/border/spirit-tokens-R7ADj25F-R7ADj25F",
+      "outFile": "design/global-tokens/border/spirit-tokens.md",
+      "status": "ok",
+      "title": "Border"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/spacing/overview-bGc59YZU",
+      "sourcePath": "/latest/design/global-tokens/spacing/overview-bGc59YZU",
+      "outFile": "design/global-tokens/spacing/overview.md",
+      "status": "ok",
+      "title": "Spacing"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/spacing/customisation-NUbP57r4-NUbP57r4",
+      "sourcePath": "/latest/design/global-tokens/spacing/customisation-NUbP57r4-NUbP57r4",
+      "outFile": "design/global-tokens/spacing/customisation.md",
+      "status": "ok",
+      "title": "Spacing"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/spacing/spirit-tokens-T1X2Qr3r-T1X2Qr3r",
+      "sourcePath": "/latest/design/global-tokens/spacing/spirit-tokens-T1X2Qr3r-T1X2Qr3r",
+      "outFile": "design/global-tokens/spacing/spirit-tokens.md",
+      "status": "ok",
+      "title": "Spacing"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/breakpoint/overview-rJA6XUTL",
+      "sourcePath": "/latest/design/global-tokens/breakpoint/overview-rJA6XUTL",
+      "outFile": "design/global-tokens/breakpoint/overview.md",
+      "status": "ok",
+      "title": "Breakpoint"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/breakpoint/customisation-dQGJgFzP-dQGJgFzP",
+      "sourcePath": "/latest/design/global-tokens/breakpoint/customisation-dQGJgFzP-dQGJgFzP",
+      "outFile": "design/global-tokens/breakpoint/customisation.md",
+      "status": "ok",
+      "title": "Breakpoint"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/breakpoint/spirit-tokens-O5YqzUBz-O5YqzUBz",
+      "sourcePath": "/latest/design/global-tokens/breakpoint/spirit-tokens-O5YqzUBz-O5YqzUBz",
+      "outFile": "design/global-tokens/breakpoint/spirit-tokens.md",
+      "status": "ok",
+      "title": "Breakpoint"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/container/overview-BskWfzqz",
+      "sourcePath": "/latest/design/global-tokens/container/overview-BskWfzqz",
+      "outFile": "design/global-tokens/container/overview.md",
+      "status": "ok",
+      "title": "Container"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/container/customisation-32Ku0QjB-32Ku0QjB",
+      "sourcePath": "/latest/design/global-tokens/container/customisation-32Ku0QjB-32Ku0QjB",
+      "outFile": "design/global-tokens/container/customisation.md",
+      "status": "ok",
+      "title": "Container"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/container/spirit-tokens-3YtsHfrm-3YtsHfrm",
+      "sourcePath": "/latest/design/global-tokens/container/spirit-tokens-3YtsHfrm-3YtsHfrm",
+      "outFile": "design/global-tokens/container/spirit-tokens.md",
+      "status": "ok",
+      "title": "Container"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/grid/overview-G7tz28hA",
+      "sourcePath": "/latest/design/global-tokens/grid/overview-G7tz28hA",
+      "outFile": "design/global-tokens/grid/overview.md",
+      "status": "ok",
+      "title": "Grid"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/grid/customisation-TtfLZSSf-TtfLZSSf",
+      "sourcePath": "/latest/design/global-tokens/grid/customisation-TtfLZSSf-TtfLZSSf",
+      "outFile": "design/global-tokens/grid/customisation.md",
+      "status": "ok",
+      "title": "Grid"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/grid/spirit-tokens-87sblp9p-87sblp9p",
+      "sourcePath": "/latest/design/global-tokens/grid/spirit-tokens-87sblp9p-87sblp9p",
+      "outFile": "design/global-tokens/grid/spirit-tokens.md",
+      "status": "ok",
+      "title": "Grid"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/elevation-and-shadows/overview-AXauWmfj",
+      "sourcePath": "/latest/design/global-tokens/elevation-and-shadows/overview-AXauWmfj",
+      "outFile": "design/global-tokens/elevation-and-shadows/overview.md",
+      "status": "ok",
+      "title": "Elevation & Shadows"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/elevation-and-shadows/brand-customisation-uA6m7MUs",
+      "sourcePath": "/latest/design/global-tokens/elevation-and-shadows/brand-customisation-uA6m7MUs",
+      "outFile": "design/global-tokens/elevation-and-shadows/brand.md",
+      "status": "ok",
+      "title": "Elevation & Shadows"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/global-tokens/elevation-and-shadows/spirit-tokens-XwKD1Is6",
+      "sourcePath": "/latest/design/global-tokens/elevation-and-shadows/spirit-tokens-XwKD1Is6",
+      "outFile": "design/global-tokens/elevation-and-shadows/spirit-tokens.md",
+      "status": "ok",
+      "title": "Elevation & Shadows"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/icons/overview-fE7VPYjB",
+      "sourcePath": "/latest/design/icons/overview-fE7VPYjB",
+      "outFile": "design/icons/overview.md",
+      "status": "ok",
+      "title": "Icons"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/icons/customisation-176yGC1R",
+      "sourcePath": "/latest/design/icons/customisation-176yGC1R",
+      "outFile": "design/icons/customisation.md",
+      "status": "ok",
+      "title": "Icons"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/icons/implementation-3bAINmba-3bAINmba",
+      "sourcePath": "/latest/design/icons/implementation-3bAINmba-3bAINmba",
+      "outFile": "design/icons/implementation.md",
+      "status": "ok",
+      "title": "Icons"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/icons/library-a8H50lxc-a8H50lxc",
+      "sourcePath": "/latest/design/icons/library-a8H50lxc-a8H50lxc",
+      "outFile": "design/icons/library.md",
+      "status": "ok",
+      "title": "Icons"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/illustrations/overview-AMqcmT1b",
+      "sourcePath": "/latest/design/illustrations/overview-AMqcmT1b",
+      "outFile": "design/illustrations/overview.md",
+      "status": "ok",
+      "title": "Illustrations"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/illustrations/library-oFza5e4A-oFza5e4A",
+      "sourcePath": "/latest/design/illustrations/library-oFza5e4A-oFza5e4A",
+      "outFile": "design/illustrations/library.md",
+      "status": "ok",
+      "title": "Illustrations"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/rules-and-principles-5sKA9tTY",
+      "sourcePath": "/latest/design/rules-and-principles-5sKA9tTY",
+      "outFile": "design/rules-and-principles.md",
+      "status": "ok",
+      "title": "Rules and Principles"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/design/visual-hierarchy-qk8QUbhU",
+      "sourcePath": "/latest/design/visual-hierarchy-qk8QUbhU",
+      "outFile": "design/visual-hierarchy.md",
+      "status": "ok",
+      "title": "Visual Hierarchy"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/development/helpers/accessibility-jta1KKl2",
+      "sourcePath": "/latest/development/helpers/accessibility-jta1KKl2",
+      "outFile": "development/helpers/accessibility.md",
+      "status": "ok",
+      "title": "Helpers"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/development/helpers/animations-tVOnNgsh",
+      "sourcePath": "/latest/development/helpers/animations-tVOnNgsh",
+      "outFile": "development/helpers/animations.md",
+      "status": "ok",
+      "title": "Helpers"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/development/helpers/breakout-PLiXPOiR",
+      "sourcePath": "/latest/development/helpers/breakout-PLiXPOiR",
+      "outFile": "development/helpers/breakout.md",
+      "status": "ok",
+      "title": "Helpers"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/development/helpers/dynamic-colors-x52GUUDZ-x52GUUDZ",
+      "sourcePath": "/latest/development/helpers/dynamic-colors-x52GUUDZ-x52GUUDZ",
+      "outFile": "development/helpers/dynamic-colors.md",
+      "status": "ok",
+      "title": "Helpers"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/development/helpers/images-vlaxk4d0",
+      "sourcePath": "/latest/development/helpers/images-vlaxk4d0",
+      "outFile": "development/helpers/images.md",
+      "status": "ok",
+      "title": "Helpers"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/development/helpers/links-NZFXo0p5",
+      "sourcePath": "/latest/development/helpers/links-NZFXo0p5",
+      "outFile": "development/helpers/links.md",
+      "status": "ok",
+      "title": "Helpers"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/development/helpers/lists-mVCJdzWk",
+      "sourcePath": "/latest/development/helpers/lists-mVCJdzWk",
+      "outFile": "development/helpers/lists.md",
+      "status": "ok",
+      "title": "Helpers"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/development/helpers/scroll-control-zxYuC39k",
+      "sourcePath": "/latest/development/helpers/scroll-control-zxYuC39k",
+      "outFile": "development/helpers/scroll-control.md",
+      "status": "ok",
+      "title": "Helpers"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/development/helpers/text-i8vjtUWA",
+      "sourcePath": "/latest/development/helpers/text-i8vjtUWA",
+      "outFile": "development/helpers/text.md",
+      "status": "ok",
+      "title": "Helpers"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/development/helpers/typography-Y8J6vWR5",
+      "sourcePath": "/latest/development/helpers/typography-Y8J6vWR5",
+      "outFile": "development/helpers/typography.md",
+      "status": "ok",
+      "title": "Helpers"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/development/utilities-gxjZpDOv",
+      "sourcePath": "/latest/development/utilities-gxjZpDOv",
+      "outFile": "development/utilities.md",
+      "status": "ok",
+      "title": "Utilities"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/development/dictionaries-89GTM4J1",
+      "sourcePath": "/latest/development/dictionaries-89GTM4J1",
+      "outFile": "development/dictionaries.md",
+      "status": "ok",
+      "title": "Dictionaries"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/all-components-pQwiFlOg",
+      "sourcePath": "/latest/components/all-components-pQwiFlOg",
+      "outFile": "components/all-components.md",
+      "status": "ok",
+      "title": "All Components"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/accordion/overview-TtEldb73",
+      "sourcePath": "/latest/components/accordion/overview-TtEldb73",
+      "outFile": "components/accordion/overview.md",
+      "status": "ok",
+      "title": "Accordion"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/accordion/design-kddP4ZSI",
+      "sourcePath": "/latest/components/accordion/design-kddP4ZSI",
+      "outFile": "components/accordion/design.md",
+      "status": "ok",
+      "title": "Accordion"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/accordion/figma-Q3pOUXce-Q3pOUXce",
+      "sourcePath": "/latest/components/accordion/figma-Q3pOUXce-Q3pOUXce",
+      "outFile": "components/accordion/figma.md",
+      "status": "ok",
+      "title": "Accordion"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/accordion/html-O7zVewq5",
+      "sourcePath": "/latest/components/accordion/html-O7zVewq5",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/accordion/react-K8ruxHsr",
+      "sourcePath": "/latest/components/accordion/react-K8ruxHsr",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/accordion/accessibility-tywoRtE4-tywoRtE4",
+      "sourcePath": "/latest/components/accordion/accessibility-tywoRtE4-tywoRtE4",
+      "outFile": "components/accordion/accessibility.md",
+      "status": "ok",
+      "title": "Accordion"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/action-group/overview-Bi5NXFGt",
+      "sourcePath": "/latest/components/action-group/overview-Bi5NXFGt",
+      "outFile": "components/action-group/overview.md",
+      "status": "ok",
+      "title": "Action Group"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/action-group/figma-2Vx7d8Tf-2Vx7d8Tf",
+      "sourcePath": "/latest/components/action-group/figma-2Vx7d8Tf-2Vx7d8Tf",
+      "outFile": "components/action-group/figma.md",
+      "status": "ok",
+      "title": "Action Group"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/action-group/react-geUF2Sil",
+      "sourcePath": "/latest/components/action-group/react-geUF2Sil",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/action-group/accessibility-9DtaHdEI-9DtaHdEI",
+      "sourcePath": "/latest/components/action-group/accessibility-9DtaHdEI-9DtaHdEI",
+      "outFile": "components/action-group/accessibility.md",
+      "status": "ok",
+      "title": "Action Group"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/alert/overview-ravlpYvH",
+      "sourcePath": "/latest/components/alert/overview-ravlpYvH",
+      "outFile": "components/alert/overview.md",
+      "status": "ok",
+      "title": "Alert"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/alert/design-IFR7YHl5",
+      "sourcePath": "/latest/components/alert/design-IFR7YHl5",
+      "outFile": "components/alert/design.md",
+      "status": "ok",
+      "title": "Alert"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/alert/figma-yOlRo9hm-yOlRo9hm",
+      "sourcePath": "/latest/components/alert/figma-yOlRo9hm-yOlRo9hm",
+      "outFile": "components/alert/figma.md",
+      "status": "ok",
+      "title": "Alert"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/alert/html-EyD9DYLm",
+      "sourcePath": "/latest/components/alert/html-EyD9DYLm",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/alert/react-qnO0Aapr",
+      "sourcePath": "/latest/components/alert/react-qnO0Aapr",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/alert/accessibility-lS7VQ4RQ-lS7VQ4RQ",
+      "sourcePath": "/latest/components/alert/accessibility-lS7VQ4RQ-lS7VQ4RQ",
+      "outFile": "components/alert/accessibility.md",
+      "status": "ok",
+      "title": "Alert"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/avatar/overview-iFcZOnrs",
+      "sourcePath": "/latest/components/avatar/overview-iFcZOnrs",
+      "outFile": "components/avatar/overview.md",
+      "status": "ok",
+      "title": "Avatar"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/avatar/design-WQbFkadT",
+      "sourcePath": "/latest/components/avatar/design-WQbFkadT",
+      "outFile": "components/avatar/design.md",
+      "status": "ok",
+      "title": "Avatar"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/avatar/figma-FzNpA9Fi-FzNpA9Fi",
+      "sourcePath": "/latest/components/avatar/figma-FzNpA9Fi-FzNpA9Fi",
+      "outFile": "components/avatar/figma.md",
+      "status": "ok",
+      "title": "Avatar"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/avatar/html-5NyvYlCK",
+      "sourcePath": "/latest/components/avatar/html-5NyvYlCK",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/avatar/react-SteMkvAV",
+      "sourcePath": "/latest/components/avatar/react-SteMkvAV",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/avatar/accessibility-qkOGZM7K-qkOGZM7K",
+      "sourcePath": "/latest/components/avatar/accessibility-qkOGZM7K-qkOGZM7K",
+      "outFile": "components/avatar/accessibility.md",
+      "status": "ok",
+      "title": "Avatar"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/box/overview-qy7lFEkG",
+      "sourcePath": "/latest/components/box/overview-qy7lFEkG",
+      "outFile": "components/box/overview.md",
+      "status": "ok",
+      "title": "Box"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/box/html-igbAmogw",
+      "sourcePath": "/latest/components/box/html-igbAmogw",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/box/react-NQRnduHa",
+      "sourcePath": "/latest/components/box/react-NQRnduHa",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/box/accessibility-NnNZUtQA-NnNZUtQA",
+      "sourcePath": "/latest/components/box/accessibility-NnNZUtQA-NnNZUtQA",
+      "outFile": "components/box/accessibility.md",
+      "status": "ok",
+      "title": "Box"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/breadcrumbs/overview-pSrdblPT",
+      "sourcePath": "/latest/components/breadcrumbs/overview-pSrdblPT",
+      "outFile": "components/breadcrumbs/overview.md",
+      "status": "ok",
+      "title": "Breadcrumbs"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/breadcrumbs/design-F5EECudN",
+      "sourcePath": "/latest/components/breadcrumbs/design-F5EECudN",
+      "outFile": "components/breadcrumbs/design.md",
+      "status": "ok",
+      "title": "Breadcrumbs"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/breadcrumbs/figma-RW575Xpl-RW575Xpl",
+      "sourcePath": "/latest/components/breadcrumbs/figma-RW575Xpl-RW575Xpl",
+      "outFile": "components/breadcrumbs/figma.md",
+      "status": "ok",
+      "title": "Breadcrumbs"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/breadcrumbs/html-j6RVbeEw",
+      "sourcePath": "/latest/components/breadcrumbs/html-j6RVbeEw",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/breadcrumbs/react-ok0u0eLy",
+      "sourcePath": "/latest/components/breadcrumbs/react-ok0u0eLy",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/breadcrumbs/accessibility-eCqiX64d-eCqiX64d",
+      "sourcePath": "/latest/components/breadcrumbs/accessibility-eCqiX64d-eCqiX64d",
+      "outFile": "components/breadcrumbs/accessibility.md",
+      "status": "ok",
+      "title": "Breadcrumbs"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/button/overview-oxxMcy7u",
+      "sourcePath": "/latest/components/button/overview-oxxMcy7u",
+      "outFile": "components/button/overview.md",
+      "status": "ok",
+      "title": "Button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/button/design-iZBfrVzQ",
+      "sourcePath": "/latest/components/button/design-iZBfrVzQ",
+      "outFile": "components/button/design.md",
+      "status": "ok",
+      "title": "Button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/button/figma-6AunFFwR-6AunFFwR",
+      "sourcePath": "/latest/components/button/figma-6AunFFwR-6AunFFwR",
+      "outFile": "components/button/figma.md",
+      "status": "ok",
+      "title": "Button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/button/react-nOaPrtDf",
+      "sourcePath": "/latest/components/button/react-nOaPrtDf",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/button/html-5rGayGNG",
+      "sourcePath": "/latest/components/button/html-5rGayGNG",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/button/accessibility-ZNuRYP72-ZNuRYP72",
+      "sourcePath": "/latest/components/button/accessibility-ZNuRYP72-ZNuRYP72",
+      "outFile": "components/button/accessibility.md",
+      "status": "ok",
+      "title": "Button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/button-link/overview-sxP7xJbC",
+      "sourcePath": "/latest/components/button-link/overview-sxP7xJbC",
+      "outFile": "components/button-link/overview.md",
+      "status": "ok",
+      "title": "Button Link"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/button-link/react-Nt3gx8cW",
+      "sourcePath": "/latest/components/button-link/react-Nt3gx8cW",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/button-link/accessibility-lAq8Un4j-lAq8Un4j",
+      "sourcePath": "/latest/components/button-link/accessibility-lAq8Un4j-lAq8Un4j",
+      "outFile": "components/button-link/accessibility.md",
+      "status": "ok",
+      "title": "Button Link"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/card/overview-9kNBP7gC",
+      "sourcePath": "/latest/components/card/overview-9kNBP7gC",
+      "outFile": "components/card/overview.md",
+      "status": "ok",
+      "title": "Card"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/card/design-1EgJClYx",
+      "sourcePath": "/latest/components/card/design-1EgJClYx",
+      "outFile": "components/card/design.md",
+      "status": "ok",
+      "title": "Card"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/card/figma-YxNCZ73u-YxNCZ73u",
+      "sourcePath": "/latest/components/card/figma-YxNCZ73u-YxNCZ73u",
+      "outFile": "components/card/figma.md",
+      "status": "ok",
+      "title": "Card"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/card/html-k3lbNxci",
+      "sourcePath": "/latest/components/card/html-k3lbNxci",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/card/react-B747E3kW",
+      "sourcePath": "/latest/components/card/react-B747E3kW",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/card/accessibility-ZazOcQKe-ZazOcQKe",
+      "sourcePath": "/latest/components/card/accessibility-ZazOcQKe-ZazOcQKe",
+      "outFile": "components/card/accessibility.md",
+      "status": "ok",
+      "title": "Card"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/checkbox/overview-rAiP3oPA",
+      "sourcePath": "/latest/components/checkbox/overview-rAiP3oPA",
+      "outFile": "components/checkbox/overview.md",
+      "status": "ok",
+      "title": "Checkbox"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/checkbox/design-GHatYJqE",
+      "sourcePath": "/latest/components/checkbox/design-GHatYJqE",
+      "outFile": "components/checkbox/design.md",
+      "status": "ok",
+      "title": "Checkbox"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/checkbox/figma-r6UttBpV-r6UttBpV",
+      "sourcePath": "/latest/components/checkbox/figma-r6UttBpV-r6UttBpV",
+      "outFile": "components/checkbox/figma.md",
+      "status": "ok",
+      "title": "Checkbox"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/checkbox/html-ECb975Nl",
+      "sourcePath": "/latest/components/checkbox/html-ECb975Nl",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/checkbox/react-iuAqL6ly",
+      "sourcePath": "/latest/components/checkbox/react-iuAqL6ly",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/checkbox/accessibility-eOGVSzHg-eOGVSzHg",
+      "sourcePath": "/latest/components/checkbox/accessibility-eOGVSzHg-eOGVSzHg",
+      "outFile": "components/checkbox/accessibility.md",
+      "status": "ok",
+      "title": "Checkbox"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/collapse/overview-V3uSQpZM",
+      "sourcePath": "/latest/components/collapse/overview-V3uSQpZM",
+      "outFile": "components/collapse/overview.md",
+      "status": "ok",
+      "title": "Collapse"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/collapse/design-tYGuvpzX-tYGuvpzX",
+      "sourcePath": "/latest/components/collapse/design-tYGuvpzX-tYGuvpzX",
+      "outFile": "components/collapse/design.md",
+      "status": "ok",
+      "title": "Collapse"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/collapse/html-XWxryM4M",
+      "sourcePath": "/latest/components/collapse/html-XWxryM4M",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/collapse/react-ltmy57Ln",
+      "sourcePath": "/latest/components/collapse/react-ltmy57Ln",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/collapse/accessibility-NFyNedKk-NFyNedKk",
+      "sourcePath": "/latest/components/collapse/accessibility-NFyNedKk-NFyNedKk",
+      "outFile": "components/collapse/accessibility.md",
+      "status": "ok",
+      "title": "Collapse"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/container/overview-J02hefXB",
+      "sourcePath": "/latest/components/container/overview-J02hefXB",
+      "outFile": "components/container/overview.md",
+      "status": "ok",
+      "title": "Container"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/container/html-NRwdMXgn",
+      "sourcePath": "/latest/components/container/html-NRwdMXgn",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/container/react-f9wmqaQd",
+      "sourcePath": "/latest/components/container/react-f9wmqaQd",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/container/accessibility-15LQtB5u-15LQtB5u",
+      "sourcePath": "/latest/components/container/accessibility-15LQtB5u-15LQtB5u",
+      "outFile": "components/container/accessibility.md",
+      "status": "ok",
+      "title": "Container"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/control-button/overview-AB1OSj30",
+      "sourcePath": "/latest/components/control-button/overview-AB1OSj30",
+      "outFile": "components/control-button/overview.md",
+      "status": "ok",
+      "title": "Control Button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/control-button/design-AVqRXYXL",
+      "sourcePath": "/latest/components/control-button/design-AVqRXYXL",
+      "outFile": "components/control-button/design.md",
+      "status": "ok",
+      "title": "Control Button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/control-button/figma-jm4ZC67a-jm4ZC67a",
+      "sourcePath": "/latest/components/control-button/figma-jm4ZC67a-jm4ZC67a",
+      "outFile": "components/control-button/figma.md",
+      "status": "ok",
+      "title": "Control Button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/control-button/html-E2VybPPm-E2VybPPm",
+      "sourcePath": "/latest/components/control-button/html-E2VybPPm-E2VybPPm",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/control-button/react-QrHDMVUM-QrHDMVUM",
+      "sourcePath": "/latest/components/control-button/react-QrHDMVUM-QrHDMVUM",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/control-button/accessibility-U4nKZKI7-U4nKZKI7",
+      "sourcePath": "/latest/components/control-button/accessibility-U4nKZKI7-U4nKZKI7",
+      "outFile": "components/control-button/accessibility.md",
+      "status": "ok",
+      "title": "Control Button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/divider/overview-x4POwGlS",
+      "sourcePath": "/latest/components/divider/overview-x4POwGlS",
+      "outFile": "components/divider/overview.md",
+      "status": "ok",
+      "title": "Divider"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/divider/design-h6Yq3Ags",
+      "sourcePath": "/latest/components/divider/design-h6Yq3Ags",
+      "outFile": "components/divider/design.md",
+      "status": "ok",
+      "title": "Divider"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/divider/figma-IqQhf3SN-IqQhf3SN",
+      "sourcePath": "/latest/components/divider/figma-IqQhf3SN-IqQhf3SN",
+      "outFile": "components/divider/figma.md",
+      "status": "ok",
+      "title": "Divider"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/divider/html-a1UXPeeB",
+      "sourcePath": "/latest/components/divider/html-a1UXPeeB",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/divider/react-LM4Ac89n",
+      "sourcePath": "/latest/components/divider/react-LM4Ac89n",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/divider/accessibility-GcTuPrlk-GcTuPrlk",
+      "sourcePath": "/latest/components/divider/accessibility-GcTuPrlk-GcTuPrlk",
+      "outFile": "components/divider/accessibility.md",
+      "status": "ok",
+      "title": "Divider"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/drawer/overview-DsjvffCu",
+      "sourcePath": "/latest/components/drawer/overview-DsjvffCu",
+      "outFile": "components/drawer/overview.md",
+      "status": "ok",
+      "title": "Drawer"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/drawer/design-kW1mWVYo-kW1mWVYo",
+      "sourcePath": "/latest/components/drawer/design-kW1mWVYo-kW1mWVYo",
+      "outFile": "components/drawer/design.md",
+      "status": "ok",
+      "title": "Drawer"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/drawer/figma-BDF1Zdxs-BDF1Zdxs",
+      "sourcePath": "/latest/components/drawer/figma-BDF1Zdxs-BDF1Zdxs",
+      "outFile": "components/drawer/figma.md",
+      "status": "ok",
+      "title": "Drawer"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/drawer/html-Y3NL719K",
+      "sourcePath": "/latest/components/drawer/html-Y3NL719K",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/drawer/react-m5mxeG6X-m5mxeG6X",
+      "sourcePath": "/latest/components/drawer/react-m5mxeG6X-m5mxeG6X",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/drawer/accessibility-0eIQjr9i-0eIQjr9i",
+      "sourcePath": "/latest/components/drawer/accessibility-0eIQjr9i-0eIQjr9i",
+      "outFile": "components/drawer/accessibility.md",
+      "status": "ok",
+      "title": "Drawer"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/dropdown/overview-vNMWvfx5",
+      "sourcePath": "/latest/components/dropdown/overview-vNMWvfx5",
+      "outFile": "components/dropdown/overview.md",
+      "status": "ok",
+      "title": "Dropdown"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/dropdown/design-4lGD4k4f",
+      "sourcePath": "/latest/components/dropdown/design-4lGD4k4f",
+      "outFile": "components/dropdown/design.md",
+      "status": "ok",
+      "title": "Dropdown"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/dropdown/figma-zlZBwWvn-zlZBwWvn",
+      "sourcePath": "/latest/components/dropdown/figma-zlZBwWvn-zlZBwWvn",
+      "outFile": "components/dropdown/figma.md",
+      "status": "ok",
+      "title": "Dropdown"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/dropdown/html-3V2h0KfE",
+      "sourcePath": "/latest/components/dropdown/html-3V2h0KfE",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/dropdown/react-fC6FLInw",
+      "sourcePath": "/latest/components/dropdown/react-fC6FLInw",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/dropdown/accessibility-KTpfMs2v-KTpfMs2v",
+      "sourcePath": "/latest/components/dropdown/accessibility-KTpfMs2v-KTpfMs2v",
+      "outFile": "components/dropdown/accessibility.md",
+      "status": "ok",
+      "title": "Dropdown"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/empty-state/overview-SCh3epQh",
+      "sourcePath": "/latest/components/empty-state/overview-SCh3epQh",
+      "outFile": "components/empty-state/overview.md",
+      "status": "ok",
+      "title": "Empty State"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/empty-state/design-B0fsV8Cm",
+      "sourcePath": "/latest/components/empty-state/design-B0fsV8Cm",
+      "outFile": "components/empty-state/design.md",
+      "status": "ok",
+      "title": "Empty State"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/empty-state/figma-1cpgDu2D-1cpgDu2D",
+      "sourcePath": "/latest/components/empty-state/figma-1cpgDu2D-1cpgDu2D",
+      "outFile": "components/empty-state/figma.md",
+      "status": "ok",
+      "title": "Empty State"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/empty-state/html-X4G76JPS",
+      "sourcePath": "/latest/components/empty-state/html-X4G76JPS",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/empty-state/react-OGWR9xa0",
+      "sourcePath": "/latest/components/empty-state/react-OGWR9xa0",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/empty-state/accessibility-LqX8NKgW-LqX8NKgW",
+      "sourcePath": "/latest/components/empty-state/accessibility-LqX8NKgW-LqX8NKgW",
+      "outFile": "components/empty-state/accessibility.md",
+      "status": "ok",
+      "title": "Empty State"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/field-group/overview-rFO8KPuP",
+      "sourcePath": "/latest/components/field-group/overview-rFO8KPuP",
+      "outFile": "components/field-group/overview.md",
+      "status": "ok",
+      "title": "Field Group"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/field-group/design-FdvfV5rr",
+      "sourcePath": "/latest/components/field-group/design-FdvfV5rr",
+      "outFile": "components/field-group/design.md",
+      "status": "ok",
+      "title": "Field Group"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/field-group/figma-4wHaRtrm-4wHaRtrm",
+      "sourcePath": "/latest/components/field-group/figma-4wHaRtrm-4wHaRtrm",
+      "outFile": "components/field-group/figma.md",
+      "status": "ok",
+      "title": "Field Group"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/field-group/html-X9I4G5Is",
+      "sourcePath": "/latest/components/field-group/html-X9I4G5Is",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/field-group/react-NLYh1mc6",
+      "sourcePath": "/latest/components/field-group/react-NLYh1mc6",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/field-group/accessibility-VQo20Z4H-VQo20Z4H",
+      "sourcePath": "/latest/components/field-group/accessibility-VQo20Z4H-VQo20Z4H",
+      "outFile": "components/field-group/accessibility.md",
+      "status": "ok",
+      "title": "Field Group"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/file-uploader/overview-jZ7Xzptz",
+      "sourcePath": "/latest/components/file-uploader/overview-jZ7Xzptz",
+      "outFile": "components/file-uploader/overview.md",
+      "status": "ok",
+      "title": "File Uploader"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/file-uploader/design-WxA1tP47",
+      "sourcePath": "/latest/components/file-uploader/design-WxA1tP47",
+      "outFile": "components/file-uploader/design.md",
+      "status": "ok",
+      "title": "File Uploader"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/file-uploader/html-fL2cV03J",
+      "sourcePath": "/latest/components/file-uploader/html-fL2cV03J",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/file-uploader/react-DWL9yHIn",
+      "sourcePath": "/latest/components/file-uploader/react-DWL9yHIn",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/file-uploader/accessibility-X2NRFK7p-X2NRFK7p",
+      "sourcePath": "/latest/components/file-uploader/accessibility-X2NRFK7p-X2NRFK7p",
+      "outFile": "components/file-uploader/accessibility.md",
+      "status": "ok",
+      "title": "File Uploader"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/flex/overview-696puvxK",
+      "sourcePath": "/latest/components/flex/overview-696puvxK",
+      "outFile": "components/flex/overview.md",
+      "status": "ok",
+      "title": "Flex"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/flex/design-XAUgrPpA-XAUgrPpA",
+      "sourcePath": "/latest/components/flex/design-XAUgrPpA-XAUgrPpA",
+      "outFile": "components/flex/design.md",
+      "status": "ok",
+      "title": "Flex"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/flex/html-Ek3MiHnS",
+      "sourcePath": "/latest/components/flex/html-Ek3MiHnS",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/flex/react-5VhjQMER",
+      "sourcePath": "/latest/components/flex/react-5VhjQMER",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/flex/accessibility-iEV9LsCD-iEV9LsCD",
+      "sourcePath": "/latest/components/flex/accessibility-iEV9LsCD-iEV9LsCD",
+      "outFile": "components/flex/accessibility.md",
+      "status": "ok",
+      "title": "Flex"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/footer/overview-T6I75fDO",
+      "sourcePath": "/latest/components/footer/overview-T6I75fDO",
+      "outFile": "components/footer/overview.md",
+      "status": "ok",
+      "title": "Footer"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/footer/design-M4NDAOSP",
+      "sourcePath": "/latest/components/footer/design-M4NDAOSP",
+      "outFile": "components/footer/design.md",
+      "status": "ok",
+      "title": "Footer"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/footer/html-24T7XDKf",
+      "sourcePath": "/latest/components/footer/html-24T7XDKf",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/footer/react-oFjDz9MJ",
+      "sourcePath": "/latest/components/footer/react-oFjDz9MJ",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/footer/accessibility-oQxYQkiO-oQxYQkiO",
+      "sourcePath": "/latest/components/footer/accessibility-oQxYQkiO-oQxYQkiO",
+      "outFile": "components/footer/accessibility.md",
+      "status": "ok",
+      "title": "Footer"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/grid/overview-5aQo9Uwf",
+      "sourcePath": "/latest/components/grid/overview-5aQo9Uwf",
+      "outFile": "components/grid/overview.md",
+      "status": "ok",
+      "title": "Grid"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/grid/design-lUGZeVqi-lUGZeVqi",
+      "sourcePath": "/latest/components/grid/design-lUGZeVqi-lUGZeVqi",
+      "outFile": "components/grid/design.md",
+      "status": "ok",
+      "title": "Grid"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/grid/html-wIwrd6th",
+      "sourcePath": "/latest/components/grid/html-wIwrd6th",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/grid/react-jmVyRPyk",
+      "sourcePath": "/latest/components/grid/react-jmVyRPyk",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/grid/accessibility-me66cEBm-me66cEBm",
+      "sourcePath": "/latest/components/grid/accessibility-me66cEBm-me66cEBm",
+      "outFile": "components/grid/accessibility.md",
+      "status": "ok",
+      "title": "Grid"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/header/overview-LDn3eyzu",
+      "sourcePath": "/latest/components/header/overview-LDn3eyzu",
+      "outFile": "components/header/overview.md",
+      "status": "ok",
+      "title": "Header"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/header/design-wTS1JpmN",
+      "sourcePath": "/latest/components/header/design-wTS1JpmN",
+      "outFile": "components/header/design.md",
+      "status": "ok",
+      "title": "Header"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/header/html-QccSUYVw",
+      "sourcePath": "/latest/components/header/html-QccSUYVw",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/header/react-tYrz9wC5",
+      "sourcePath": "/latest/components/header/react-tYrz9wC5",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/heading/overview-IGzEZcgZ",
+      "sourcePath": "/latest/components/heading/overview-IGzEZcgZ",
+      "outFile": "components/heading/overview.md",
+      "status": "ok",
+      "title": "Heading"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/heading/html-hFSI3vJj",
+      "sourcePath": "/latest/components/heading/html-hFSI3vJj",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/heading/react-ZPJc2oSv",
+      "sourcePath": "/latest/components/heading/react-ZPJc2oSv",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/heading/accessibility-EC4AHlhv-EC4AHlhv",
+      "sourcePath": "/latest/components/heading/accessibility-EC4AHlhv-EC4AHlhv",
+      "outFile": "components/heading/accessibility.md",
+      "status": "ok",
+      "title": "Heading"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/icon/overview-Pk38zWUt",
+      "sourcePath": "/latest/components/icon/overview-Pk38zWUt",
+      "outFile": "components/icon/overview.md",
+      "status": "ok",
+      "title": "Icon"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/icon/html-Ra3Pkp6D",
+      "sourcePath": "/latest/components/icon/html-Ra3Pkp6D",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/icon/react-SS6aEBks",
+      "sourcePath": "/latest/components/icon/react-SS6aEBks",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/icon/accessibility-qdG1iD8c-qdG1iD8c",
+      "sourcePath": "/latest/components/icon/accessibility-qdG1iD8c-qdG1iD8c",
+      "outFile": "components/icon/accessibility.md",
+      "status": "ok",
+      "title": "Icon"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/icon-box/overview-3QXN5SfE",
+      "sourcePath": "/latest/components/icon-box/overview-3QXN5SfE",
+      "outFile": "components/icon-box/overview.md",
+      "status": "ok",
+      "title": "IconBox"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/icon-box/design-wRKl8DUT-wRKl8DUT",
+      "sourcePath": "/latest/components/icon-box/design-wRKl8DUT-wRKl8DUT",
+      "outFile": "components/icon-box/design.md",
+      "status": "ok",
+      "title": "IconBox"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/icon-box/figma-FcYDG0nc-FcYDG0nc",
+      "sourcePath": "/latest/components/icon-box/figma-FcYDG0nc-FcYDG0nc",
+      "outFile": "components/icon-box/figma.md",
+      "status": "ok",
+      "title": "IconBox"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/icon-box/react-gPWyohSq-gPWyohSq",
+      "sourcePath": "/latest/components/icon-box/react-gPWyohSq-gPWyohSq",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/icon-box/accessibility-YhThHvIu-YhThHvIu",
+      "sourcePath": "/latest/components/icon-box/accessibility-YhThHvIu-YhThHvIu",
+      "outFile": "components/icon-box/accessibility.md",
+      "status": "ok",
+      "title": "IconBox"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/item/overview-RaZFZqBa",
+      "sourcePath": "/latest/components/item/overview-RaZFZqBa",
+      "outFile": "components/item/overview.md",
+      "status": "ok",
+      "title": "Item"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/item/design-4HkurRob",
+      "sourcePath": "/latest/components/item/design-4HkurRob",
+      "outFile": "components/item/design.md",
+      "status": "ok",
+      "title": "Item"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/item/figma-RmyR9shL-RmyR9shL",
+      "sourcePath": "/latest/components/item/figma-RmyR9shL-RmyR9shL",
+      "outFile": "components/item/figma.md",
+      "status": "ok",
+      "title": "Item"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/item/html-HZuuGdPS",
+      "sourcePath": "/latest/components/item/html-HZuuGdPS",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/item/react-FofOVAtJ",
+      "sourcePath": "/latest/components/item/react-FofOVAtJ",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/item/accessibility-nrqxpchy-nrqxpchy",
+      "sourcePath": "/latest/components/item/accessibility-nrqxpchy-nrqxpchy",
+      "outFile": "components/item/accessibility-nrqxpchy-nrqxpchy.md",
+      "status": "ok",
+      "title": "Item"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/link/overview-w4DlWKKF",
+      "sourcePath": "/latest/components/link/overview-w4DlWKKF",
+      "outFile": "components/link/overview.md",
+      "status": "ok",
+      "title": "Link"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/link/design-qRi0SHvf",
+      "sourcePath": "/latest/components/link/design-qRi0SHvf",
+      "outFile": "components/link/design.md",
+      "status": "ok",
+      "title": "Link"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/link/figma-9t1drUXH-9t1drUXH",
+      "sourcePath": "/latest/components/link/figma-9t1drUXH-9t1drUXH",
+      "outFile": "components/link/figma.md",
+      "status": "ok",
+      "title": "Link"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/link/html-6nahNqBU",
+      "sourcePath": "/latest/components/link/html-6nahNqBU",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/link/react-PmEsFqYP",
+      "sourcePath": "/latest/components/link/react-PmEsFqYP",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/link/accessibility-Ba6NYZZc-Ba6NYZZc",
+      "sourcePath": "/latest/components/link/accessibility-Ba6NYZZc-Ba6NYZZc",
+      "outFile": "components/link/accessibility.md",
+      "status": "ok",
+      "title": "Link"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/matrix/overview-uXzlhaFX",
+      "sourcePath": "/latest/components/matrix/overview-uXzlhaFX",
+      "outFile": "components/matrix/overview.md",
+      "status": "ok",
+      "title": "Matrix"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/matrix/design-Z9CFEvq7-Z9CFEvq7",
+      "sourcePath": "/latest/components/matrix/design-Z9CFEvq7-Z9CFEvq7",
+      "outFile": "components/matrix/design.md",
+      "status": "ok",
+      "title": "Matrix"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/matrix/react-WCuM7L5Y",
+      "sourcePath": "/latest/components/matrix/react-WCuM7L5Y",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/matrix/html-TFHkqROT",
+      "sourcePath": "/latest/components/matrix/html-TFHkqROT",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/matrix/accessibility-n5CwNQwZ-n5CwNQwZ",
+      "sourcePath": "/latest/components/matrix/accessibility-n5CwNQwZ-n5CwNQwZ",
+      "outFile": "components/matrix/accessibility.md",
+      "status": "ok",
+      "title": "Matrix"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/modal/overview-1gk69bB0",
+      "sourcePath": "/latest/components/modal/overview-1gk69bB0",
+      "outFile": "components/modal/overview.md",
+      "status": "ok",
+      "title": "Modal"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/modal/design-WRoHz9QS",
+      "sourcePath": "/latest/components/modal/design-WRoHz9QS",
+      "outFile": "components/modal/design.md",
+      "status": "ok",
+      "title": "Modal"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/modal/figma-73QUrKq1-73QUrKq1",
+      "sourcePath": "/latest/components/modal/figma-73QUrKq1-73QUrKq1",
+      "outFile": "components/modal/figma.md",
+      "status": "ok",
+      "title": "Modal"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/modal/html-ApI0gnTq",
+      "sourcePath": "/latest/components/modal/html-ApI0gnTq",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/modal/react-zfdnvi4h",
+      "sourcePath": "/latest/components/modal/react-zfdnvi4h",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/modal/accessibility-6KSvE5Lw-6KSvE5Lw",
+      "sourcePath": "/latest/components/modal/accessibility-6KSvE5Lw-6KSvE5Lw",
+      "outFile": "components/modal/accessibility.md",
+      "status": "ok",
+      "title": "Modal"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/navigation/overview-J6GGfZ2s",
+      "sourcePath": "/latest/components/navigation/overview-J6GGfZ2s",
+      "outFile": "components/navigation/overview.md",
+      "status": "ok",
+      "title": "Navigation"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/navigation/design-3ecLB1Dq-3ecLB1Dq",
+      "sourcePath": "/latest/components/navigation/design-3ecLB1Dq-3ecLB1Dq",
+      "outFile": "components/navigation/design.md",
+      "status": "ok",
+      "title": "Navigation"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/navigation/html-dfXpXyOj-dfXpXyOj",
+      "sourcePath": "/latest/components/navigation/html-dfXpXyOj-dfXpXyOj",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/navigation/react-FcrBxomR-FcrBxomR",
+      "sourcePath": "/latest/components/navigation/react-FcrBxomR-FcrBxomR",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/navigation/accessibility-5a2Im0e0-5a2Im0e0",
+      "sourcePath": "/latest/components/navigation/accessibility-5a2Im0e0-5a2Im0e0",
+      "outFile": "components/navigation/accessibility.md",
+      "status": "ok",
+      "title": "Navigation"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pagination/overview-QHJlrlJm",
+      "sourcePath": "/latest/components/pagination/overview-QHJlrlJm",
+      "outFile": "components/pagination/overview.md",
+      "status": "ok",
+      "title": "Pagination"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pagination/design-o0JsRcsv",
+      "sourcePath": "/latest/components/pagination/design-o0JsRcsv",
+      "outFile": "components/pagination/design.md",
+      "status": "ok",
+      "title": "Pagination"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pagination/figma-Dif18GDR-Dif18GDR",
+      "sourcePath": "/latest/components/pagination/figma-Dif18GDR-Dif18GDR",
+      "outFile": "components/pagination/figma.md",
+      "status": "ok",
+      "title": "Pagination"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pagination/html-umyhOsL2",
+      "sourcePath": "/latest/components/pagination/html-umyhOsL2",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pagination/react-YVQEmBpb",
+      "sourcePath": "/latest/components/pagination/react-YVQEmBpb",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pagination/accessibility-EnLY6JuG-EnLY6JuG",
+      "sourcePath": "/latest/components/pagination/accessibility-EnLY6JuG-EnLY6JuG",
+      "outFile": "components/pagination/accessibility.md",
+      "status": "ok",
+      "title": "Pagination"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/partner-logo/overview-8KYpEm6d",
+      "sourcePath": "/latest/components/partner-logo/overview-8KYpEm6d",
+      "outFile": "components/partner-logo/overview.md",
+      "status": "ok",
+      "title": "Partner Logo"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/partner-logo/design-06mFs8tf",
+      "sourcePath": "/latest/components/partner-logo/design-06mFs8tf",
+      "outFile": "components/partner-logo/design.md",
+      "status": "ok",
+      "title": "Partner Logo"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/partner-logo/html-JjA8hTmS",
+      "sourcePath": "/latest/components/partner-logo/html-JjA8hTmS",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/partner-logo/react-83Rlh2JV",
+      "sourcePath": "/latest/components/partner-logo/react-83Rlh2JV",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/partner-logo/accessibility-3NTAxqWM-3NTAxqWM",
+      "sourcePath": "/latest/components/partner-logo/accessibility-3NTAxqWM-3NTAxqWM",
+      "outFile": "components/partner-logo/accessibility.md",
+      "status": "ok",
+      "title": "Partner Logo"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pill/overview-cE9q06pW",
+      "sourcePath": "/latest/components/pill/overview-cE9q06pW",
+      "outFile": "components/pill/overview.md",
+      "status": "ok",
+      "title": "Pill"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pill/design-iVBlmdDI",
+      "sourcePath": "/latest/components/pill/design-iVBlmdDI",
+      "outFile": "components/pill/design.md",
+      "status": "ok",
+      "title": "Pill"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pill/figma-TPpJNlsD-TPpJNlsD",
+      "sourcePath": "/latest/components/pill/figma-TPpJNlsD-TPpJNlsD",
+      "outFile": "components/pill/figma.md",
+      "status": "ok",
+      "title": "Pill"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pill/react-3cr4DWLR",
+      "sourcePath": "/latest/components/pill/react-3cr4DWLR",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pill/html-5BIfxc0B",
+      "sourcePath": "/latest/components/pill/html-5BIfxc0B",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pill/accessibility-1GJetmhU-1GJetmhU",
+      "sourcePath": "/latest/components/pill/accessibility-1GJetmhU-1GJetmhU",
+      "outFile": "components/pill/accessibility.md",
+      "status": "ok",
+      "title": "Pill"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pricing-plan/overview-PKE6hibE",
+      "sourcePath": "/latest/components/pricing-plan/overview-PKE6hibE",
+      "outFile": "components/pricing-plan/overview.md",
+      "status": "ok",
+      "title": "Pricing Plan"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pricing-plan/design-W86rn9AG",
+      "sourcePath": "/latest/components/pricing-plan/design-W86rn9AG",
+      "outFile": "components/pricing-plan/design.md",
+      "status": "ok",
+      "title": "Pricing Plan"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pricing-plan/figma-0qmazwRJ-0qmazwRJ",
+      "sourcePath": "/latest/components/pricing-plan/figma-0qmazwRJ-0qmazwRJ",
+      "outFile": "components/pricing-plan/figma.md",
+      "status": "ok",
+      "title": "Pricing Plan"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pricing-plan/html-43yubE7P",
+      "sourcePath": "/latest/components/pricing-plan/html-43yubE7P",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pricing-plan/react-t473exn5",
+      "sourcePath": "/latest/components/pricing-plan/react-t473exn5",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/pricing-plan/accessibility-ltYyOKgN-ltYyOKgN",
+      "sourcePath": "/latest/components/pricing-plan/accessibility-ltYyOKgN-ltYyOKgN",
+      "outFile": "components/pricing-plan/accessibility.md",
+      "status": "ok",
+      "title": "Pricing Plan"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/product-logo/overview-bkZdqTca",
+      "sourcePath": "/latest/components/product-logo/overview-bkZdqTca",
+      "outFile": "components/product-logo/overview.md",
+      "status": "ok",
+      "title": "Product Logo"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/product-logo/design-5MCz8mOC",
+      "sourcePath": "/latest/components/product-logo/design-5MCz8mOC",
+      "outFile": "components/product-logo/design.md",
+      "status": "ok",
+      "title": "Product Logo"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/product-logo/html-o92DZKsc",
+      "sourcePath": "/latest/components/product-logo/html-o92DZKsc",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/product-logo/react-5syB8D4s",
+      "sourcePath": "/latest/components/product-logo/react-5syB8D4s",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/product-logo/accessibility-sD0lNrPO-sD0lNrPO",
+      "sourcePath": "/latest/components/product-logo/accessibility-sD0lNrPO-sD0lNrPO",
+      "outFile": "components/product-logo/accessibility.md",
+      "status": "ok",
+      "title": "Product Logo"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/radio/overview-EdxtJHuI",
+      "sourcePath": "/latest/components/radio/overview-EdxtJHuI",
+      "outFile": "components/radio/overview.md",
+      "status": "ok",
+      "title": "Radio"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/radio/design-jjAOakcx",
+      "sourcePath": "/latest/components/radio/design-jjAOakcx",
+      "outFile": "components/radio/design.md",
+      "status": "ok",
+      "title": "Radio"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/radio/figma-cDxV6wiK-cDxV6wiK",
+      "sourcePath": "/latest/components/radio/figma-cDxV6wiK-cDxV6wiK",
+      "outFile": "components/radio/figma.md",
+      "status": "ok",
+      "title": "Radio"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/radio/html-gl2lwjtF",
+      "sourcePath": "/latest/components/radio/html-gl2lwjtF",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/radio/react-gCApXSpA",
+      "sourcePath": "/latest/components/radio/react-gCApXSpA",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/radio/accessibility-nymIKJ0F-nymIKJ0F",
+      "sourcePath": "/latest/components/radio/accessibility-nymIKJ0F-nymIKJ0F",
+      "outFile": "components/radio/accessibility.md",
+      "status": "ok",
+      "title": "Radio"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/scroll-view/overview-bxCU4G4o",
+      "sourcePath": "/latest/components/scroll-view/overview-bxCU4G4o",
+      "outFile": "components/scroll-view/overview.md",
+      "status": "ok",
+      "title": "Scroll View"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/scroll-view/design-bGFF3hAc",
+      "sourcePath": "/latest/components/scroll-view/design-bGFF3hAc",
+      "outFile": "components/scroll-view/design.md",
+      "status": "ok",
+      "title": "Scroll View"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/scroll-view/figma-e6NU8xFM-e6NU8xFM",
+      "sourcePath": "/latest/components/scroll-view/figma-e6NU8xFM-e6NU8xFM",
+      "outFile": "components/scroll-view/figma.md",
+      "status": "ok",
+      "title": "Scroll View"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/scroll-view/html-BBbgOe6Y",
+      "sourcePath": "/latest/components/scroll-view/html-BBbgOe6Y",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/scroll-view/react-y6e6h6AD",
+      "sourcePath": "/latest/components/scroll-view/react-y6e6h6AD",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/scroll-view/accessibility-YiMegdXk-YiMegdXk",
+      "sourcePath": "/latest/components/scroll-view/accessibility-YiMegdXk-YiMegdXk",
+      "outFile": "components/scroll-view/accessibility.md",
+      "status": "ok",
+      "title": "Scroll View"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/section/overview-nCm5yBME",
+      "sourcePath": "/latest/components/section/overview-nCm5yBME",
+      "outFile": "components/section/overview.md",
+      "status": "ok",
+      "title": "Section"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/section/html-7ves6uxb",
+      "sourcePath": "/latest/components/section/html-7ves6uxb",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/section/react-o1uAsIiN",
+      "sourcePath": "/latest/components/section/react-o1uAsIiN",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/section/accessibility-CCdlzkQA-CCdlzkQA",
+      "sourcePath": "/latest/components/section/accessibility-CCdlzkQA-CCdlzkQA",
+      "outFile": "components/section/accessibility.md",
+      "status": "ok",
+      "title": "Section"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/segmented-control/overview-nz3Ky39G",
+      "sourcePath": "/latest/components/segmented-control/overview-nz3Ky39G",
+      "outFile": "components/segmented-control/overview.md",
+      "status": "ok",
+      "title": "Segmented Control"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/segmented-control/design-tAUoHW3n",
+      "sourcePath": "/latest/components/segmented-control/design-tAUoHW3n",
+      "outFile": "components/segmented-control/design.md",
+      "status": "ok",
+      "title": "Segmented Control"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/segmented-control/figma-Xmhl7KtD-Xmhl7KtD",
+      "sourcePath": "/latest/components/segmented-control/figma-Xmhl7KtD-Xmhl7KtD",
+      "outFile": "components/segmented-control/figma.md",
+      "status": "ok",
+      "title": "Segmented Control"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/segmented-control/html-bMgACLMi",
+      "sourcePath": "/latest/components/segmented-control/html-bMgACLMi",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/segmented-control/react-kKd84idp",
+      "sourcePath": "/latest/components/segmented-control/react-kKd84idp",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/segmented-control/accessibility-Sgmdxybu-Sgmdxybu",
+      "sourcePath": "/latest/components/segmented-control/accessibility-Sgmdxybu-Sgmdxybu",
+      "outFile": "components/segmented-control/accessibility.md",
+      "status": "ok",
+      "title": "Segmented Control"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/select/overview-CJTJAcAW",
+      "sourcePath": "/latest/components/select/overview-CJTJAcAW",
+      "outFile": "components/select/overview.md",
+      "status": "ok",
+      "title": "Select"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/select/design-VklspBX1",
+      "sourcePath": "/latest/components/select/design-VklspBX1",
+      "outFile": "components/select/design.md",
+      "status": "ok",
+      "title": "Select"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/select/figma-ygWs9zJx-ygWs9zJx",
+      "sourcePath": "/latest/components/select/figma-ygWs9zJx-ygWs9zJx",
+      "outFile": "components/select/figma.md",
+      "status": "ok",
+      "title": "Select"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/select/html-M7vV6yEg",
+      "sourcePath": "/latest/components/select/html-M7vV6yEg",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/select/react-z8fkF9Sz",
+      "sourcePath": "/latest/components/select/react-z8fkF9Sz",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/select/accessibility-kQFwPd8c-kQFwPd8c",
+      "sourcePath": "/latest/components/select/accessibility-kQFwPd8c-kQFwPd8c",
+      "outFile": "components/select/accessibility.md",
+      "status": "ok",
+      "title": "Select"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/skeleton/overview-1OlTge6X",
+      "sourcePath": "/latest/components/skeleton/overview-1OlTge6X",
+      "outFile": "components/skeleton/overview.md",
+      "status": "ok",
+      "title": "Skeleton"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/skeleton/design-DIGbfyF2",
+      "sourcePath": "/latest/components/skeleton/design-DIGbfyF2",
+      "outFile": "components/skeleton/design.md",
+      "status": "ok",
+      "title": "Skeleton"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/skeleton/figma-KarPbvrY-KarPbvrY",
+      "sourcePath": "/latest/components/skeleton/figma-KarPbvrY-KarPbvrY",
+      "outFile": "components/skeleton/figma.md",
+      "status": "ok",
+      "title": "Skeleton"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/skeleton/html-sTQcaRDT",
+      "sourcePath": "/latest/components/skeleton/html-sTQcaRDT",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/skeleton/react-ksjkDfjI",
+      "sourcePath": "/latest/components/skeleton/react-ksjkDfjI",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/skeleton/accessibility-x0P9i2gc-x0P9i2gc",
+      "sourcePath": "/latest/components/skeleton/accessibility-x0P9i2gc-x0P9i2gc",
+      "outFile": "components/skeleton/accessibility.md",
+      "status": "ok",
+      "title": "Skeleton"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/skip-link/overview-vYyFR7Sd",
+      "sourcePath": "/latest/components/skip-link/overview-vYyFR7Sd",
+      "outFile": "components/skip-link/overview.md",
+      "status": "ok",
+      "title": "Skip Link"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/skip-link/html-WTEQrT6y",
+      "sourcePath": "/latest/components/skip-link/html-WTEQrT6y",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/skip-link/react-S6aqlL9o",
+      "sourcePath": "/latest/components/skip-link/react-S6aqlL9o",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/skip-link/accessibility-gdhbL9Dg-gdhbL9Dg",
+      "sourcePath": "/latest/components/skip-link/accessibility-gdhbL9Dg-gdhbL9Dg",
+      "outFile": "components/skip-link/accessibility.md",
+      "status": "ok",
+      "title": "Skip Link"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/slider/overview-Y93PhlkV",
+      "sourcePath": "/latest/components/slider/overview-Y93PhlkV",
+      "outFile": "components/slider/overview.md",
+      "status": "ok",
+      "title": "Slider"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/slider/design-FZDIwAp3",
+      "sourcePath": "/latest/components/slider/design-FZDIwAp3",
+      "outFile": "components/slider/design.md",
+      "status": "ok",
+      "title": "Slider"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/slider/figma-PgzdVLdK-PgzdVLdK",
+      "sourcePath": "/latest/components/slider/figma-PgzdVLdK-PgzdVLdK",
+      "outFile": "components/slider/figma.md",
+      "status": "ok",
+      "title": "Slider"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/slider/html-mVLp51Ty",
+      "sourcePath": "/latest/components/slider/html-mVLp51Ty",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/slider/react-wcQuunOx",
+      "sourcePath": "/latest/components/slider/react-wcQuunOx",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/slider/accessibility-vBKv45bJ-vBKv45bJ",
+      "sourcePath": "/latest/components/slider/accessibility-vBKv45bJ-vBKv45bJ",
+      "outFile": "components/slider/accessibility.md",
+      "status": "ok",
+      "title": "Slider"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/spinner/overview-Q9kGTzdA",
+      "sourcePath": "/latest/components/spinner/overview-Q9kGTzdA",
+      "outFile": "components/spinner/overview.md",
+      "status": "ok",
+      "title": "Spinner"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/spinner/design-ekXLahqn",
+      "sourcePath": "/latest/components/spinner/design-ekXLahqn",
+      "outFile": "components/spinner/design.md",
+      "status": "ok",
+      "title": "Spinner"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/spinner/figma-TLTeM9fC-TLTeM9fC",
+      "sourcePath": "/latest/components/spinner/figma-TLTeM9fC-TLTeM9fC",
+      "outFile": "components/spinner/figma.md",
+      "status": "ok",
+      "title": "Spinner"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/spinner/html-dBmny8a9",
+      "sourcePath": "/latest/components/spinner/html-dBmny8a9",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/spinner/react-w7EmhF7Y",
+      "sourcePath": "/latest/components/spinner/react-w7EmhF7Y",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/spinner/accessibility-ipHRXm3F-ipHRXm3F",
+      "sourcePath": "/latest/components/spinner/accessibility-ipHRXm3F-ipHRXm3F",
+      "outFile": "components/spinner/accessibility.md",
+      "status": "ok",
+      "title": "Spinner"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/split-button/overview-Gs7ar1gD",
+      "sourcePath": "/latest/components/split-button/overview-Gs7ar1gD",
+      "outFile": "components/split-button/overview.md",
+      "status": "ok",
+      "title": "Split Button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/split-button/design-rw8HzHv2",
+      "sourcePath": "/latest/components/split-button/design-rw8HzHv2",
+      "outFile": "components/split-button/design.md",
+      "status": "ok",
+      "title": "Split Button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/split-button/figma-fNDwga2c-fNDwga2c",
+      "sourcePath": "/latest/components/split-button/figma-fNDwga2c-fNDwga2c",
+      "outFile": "components/split-button/figma.md",
+      "status": "ok",
+      "title": "Split Button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/split-button/html-KXVnOSfN",
+      "sourcePath": "/latest/components/split-button/html-KXVnOSfN",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/split-button/react-MZrbkhRD",
+      "sourcePath": "/latest/components/split-button/react-MZrbkhRD",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/split-button/accessibility-jU8UMa3N-jU8UMa3N",
+      "sourcePath": "/latest/components/split-button/accessibility-jU8UMa3N-jU8UMa3N",
+      "outFile": "components/split-button/accessibility.md",
+      "status": "ok",
+      "title": "Split Button"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/stack/overview-RCo1HEot",
+      "sourcePath": "/latest/components/stack/overview-RCo1HEot",
+      "outFile": "components/stack/overview.md",
+      "status": "ok",
+      "title": "Stack"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/stack/design-16geyRgi",
+      "sourcePath": "/latest/components/stack/design-16geyRgi",
+      "outFile": "components/stack/design.md",
+      "status": "ok",
+      "title": "Stack"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/stack/html-Q4OhL0rC",
+      "sourcePath": "/latest/components/stack/html-Q4OhL0rC",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/stack/react-uuzEJkd0",
+      "sourcePath": "/latest/components/stack/react-uuzEJkd0",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/stack/accessibility-Uv3oQ7If-Uv3oQ7If",
+      "sourcePath": "/latest/components/stack/accessibility-Uv3oQ7If-Uv3oQ7If",
+      "outFile": "components/stack/accessibility.md",
+      "status": "ok",
+      "title": "Stack"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tabs/overview-c7gB7K6t",
+      "sourcePath": "/latest/components/tabs/overview-c7gB7K6t",
+      "outFile": "components/tabs/overview.md",
+      "status": "ok",
+      "title": "Tabs"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tabs/design-7JTbJcBN",
+      "sourcePath": "/latest/components/tabs/design-7JTbJcBN",
+      "outFile": "components/tabs/design.md",
+      "status": "ok",
+      "title": "Tabs"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tabs/figma-8izgvLtX-8izgvLtX",
+      "sourcePath": "/latest/components/tabs/figma-8izgvLtX-8izgvLtX",
+      "outFile": "components/tabs/figma.md",
+      "status": "ok",
+      "title": "Tabs"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tabs/html-eZtLKUwh",
+      "sourcePath": "/latest/components/tabs/html-eZtLKUwh",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tabs/react-xQ02P9iJ",
+      "sourcePath": "/latest/components/tabs/react-xQ02P9iJ",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tabs/accessibility-yvsVj0Cy-yvsVj0Cy",
+      "sourcePath": "/latest/components/tabs/accessibility-yvsVj0Cy-yvsVj0Cy",
+      "outFile": "components/tabs/accessibility.md",
+      "status": "ok",
+      "title": "Tabs"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tag/overview-nOURQFhz",
+      "sourcePath": "/latest/components/tag/overview-nOURQFhz",
+      "outFile": "components/tag/overview.md",
+      "status": "ok",
+      "title": "Tag"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tag/design-GuoCVdbT",
+      "sourcePath": "/latest/components/tag/design-GuoCVdbT",
+      "outFile": "components/tag/design.md",
+      "status": "ok",
+      "title": "Tag"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tag/figma-wnRyt75n-wnRyt75n",
+      "sourcePath": "/latest/components/tag/figma-wnRyt75n-wnRyt75n",
+      "outFile": "components/tag/figma.md",
+      "status": "ok",
+      "title": "Tag"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tag/html-WgYsHSeE",
+      "sourcePath": "/latest/components/tag/html-WgYsHSeE",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tag/react-qwmMGIzi",
+      "sourcePath": "/latest/components/tag/react-qwmMGIzi",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tag/accessibility-qlfz32TJ-qlfz32TJ",
+      "sourcePath": "/latest/components/tag/accessibility-qlfz32TJ-qlfz32TJ",
+      "outFile": "components/tag/accessibility.md",
+      "status": "ok",
+      "title": "Tag"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text/overview-cB4kAjJc",
+      "sourcePath": "/latest/components/text/overview-cB4kAjJc",
+      "outFile": "components/text/overview.md",
+      "status": "ok",
+      "title": "Text"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text/html-wfF2XQq8",
+      "sourcePath": "/latest/components/text/html-wfF2XQq8",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text/react-7w4GH6cX",
+      "sourcePath": "/latest/components/text/react-7w4GH6cX",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text/accessibility-JOPJTrwG-JOPJTrwG",
+      "sourcePath": "/latest/components/text/accessibility-JOPJTrwG-JOPJTrwG",
+      "outFile": "components/text/accessibility.md",
+      "status": "ok",
+      "title": "Text"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text-area/overview-3ZyPNWnL",
+      "sourcePath": "/latest/components/text-area/overview-3ZyPNWnL",
+      "outFile": "components/text-area/overview.md",
+      "status": "ok",
+      "title": "Text Area"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text-area/design-CdWuHodL",
+      "sourcePath": "/latest/components/text-area/design-CdWuHodL",
+      "outFile": "components/text-area/design.md",
+      "status": "ok",
+      "title": "Text Area"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text-area/figma-YkZvA0Ia-YkZvA0Ia",
+      "sourcePath": "/latest/components/text-area/figma-YkZvA0Ia-YkZvA0Ia",
+      "outFile": "components/text-area/figma.md",
+      "status": "ok",
+      "title": "Text Area"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text-area/html-zkYJEm89",
+      "sourcePath": "/latest/components/text-area/html-zkYJEm89",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text-area/react-gmiQr51H",
+      "sourcePath": "/latest/components/text-area/react-gmiQr51H",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text-area/accessibility-iqUjBFF3-iqUjBFF3",
+      "sourcePath": "/latest/components/text-area/accessibility-iqUjBFF3-iqUjBFF3",
+      "outFile": "components/text-area/accessibility.md",
+      "status": "ok",
+      "title": "Text Area"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text-field/overview-uxoMLF2o",
+      "sourcePath": "/latest/components/text-field/overview-uxoMLF2o",
+      "outFile": "components/text-field/overview.md",
+      "status": "ok",
+      "title": "Text Field"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text-field/design-BCljpCkw",
+      "sourcePath": "/latest/components/text-field/design-BCljpCkw",
+      "outFile": "components/text-field/design.md",
+      "status": "ok",
+      "title": "Text Field"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text-field/figma-VSQFZFjC-VSQFZFjC",
+      "sourcePath": "/latest/components/text-field/figma-VSQFZFjC-VSQFZFjC",
+      "outFile": "components/text-field/figma.md",
+      "status": "ok",
+      "title": "Text Field"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text-field/html-tLcn41CO",
+      "sourcePath": "/latest/components/text-field/html-tLcn41CO",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text-field/react-udHnPWdL",
+      "sourcePath": "/latest/components/text-field/react-udHnPWdL",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/text-field/accessibility-jyL8s4pv-jyL8s4pv",
+      "sourcePath": "/latest/components/text-field/accessibility-jyL8s4pv-jyL8s4pv",
+      "outFile": "components/text-field/accessibility.md",
+      "status": "ok",
+      "title": "Text Field"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/timeline/overview-QyZZXWW7",
+      "sourcePath": "/latest/components/timeline/overview-QyZZXWW7",
+      "outFile": "components/timeline/overview.md",
+      "status": "ok",
+      "title": "Timeline"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/timeline/design-KOc1TkIo",
+      "sourcePath": "/latest/components/timeline/design-KOc1TkIo",
+      "outFile": "components/timeline/design.md",
+      "status": "ok",
+      "title": "Timeline"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/timeline/figma-Gaddsnt2",
+      "sourcePath": "/latest/components/timeline/figma-Gaddsnt2",
+      "outFile": "components/timeline/figma.md",
+      "status": "ok",
+      "title": "Timeline"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/timeline/html-hPdRgYGY",
+      "sourcePath": "/latest/components/timeline/html-hPdRgYGY",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/timeline/react-eCUJifRJ",
+      "sourcePath": "/latest/components/timeline/react-eCUJifRJ",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/timeline/accessibility-Ly7dDbjq",
+      "sourcePath": "/latest/components/timeline/accessibility-Ly7dDbjq",
+      "outFile": "components/timeline/accessibility.md",
+      "status": "ok",
+      "title": "Timeline"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/toast/overview-fGKpsqnF",
+      "sourcePath": "/latest/components/toast/overview-fGKpsqnF",
+      "outFile": "components/toast/overview.md",
+      "status": "ok",
+      "title": "Toast"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/toast/design-EmnRnU5B-EmnRnU5B",
+      "sourcePath": "/latest/components/toast/design-EmnRnU5B-EmnRnU5B",
+      "outFile": "components/toast/design.md",
+      "status": "ok",
+      "title": "Toast"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/toast/figma-yh32lmgJ-yh32lmgJ",
+      "sourcePath": "/latest/components/toast/figma-yh32lmgJ-yh32lmgJ",
+      "outFile": "components/toast/figma.md",
+      "status": "ok",
+      "title": "Toast"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/toast/html-7lYtSNqg",
+      "sourcePath": "/latest/components/toast/html-7lYtSNqg",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/toast/react-FK6hrYef",
+      "sourcePath": "/latest/components/toast/react-FK6hrYef",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/toast/accessibility-qks0FFOu-qks0FFOu",
+      "sourcePath": "/latest/components/toast/accessibility-qks0FFOu-qks0FFOu",
+      "outFile": "components/toast/accessibility.md",
+      "status": "ok",
+      "title": "Toast"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/toggle/overview-xkL1tbNO",
+      "sourcePath": "/latest/components/toggle/overview-xkL1tbNO",
+      "outFile": "components/toggle/overview.md",
+      "status": "ok",
+      "title": "Toggle"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/toggle/design-9fBthhF1",
+      "sourcePath": "/latest/components/toggle/design-9fBthhF1",
+      "outFile": "components/toggle/design.md",
+      "status": "ok",
+      "title": "Toggle"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/toggle/figma-52AApL1Z-52AApL1Z",
+      "sourcePath": "/latest/components/toggle/figma-52AApL1Z-52AApL1Z",
+      "outFile": "components/toggle/figma.md",
+      "status": "ok",
+      "title": "Toggle"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/toggle/html-KVGQwkEX",
+      "sourcePath": "/latest/components/toggle/html-KVGQwkEX",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/toggle/react-QukMZSrz",
+      "sourcePath": "/latest/components/toggle/react-QukMZSrz",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/toggle/accessibility-YbWyo7Jk-YbWyo7Jk",
+      "sourcePath": "/latest/components/toggle/accessibility-YbWyo7Jk-YbWyo7Jk",
+      "outFile": "components/toggle/accessibility.md",
+      "status": "ok",
+      "title": "Toggle"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tooltip/overview-zhGH30af",
+      "sourcePath": "/latest/components/tooltip/overview-zhGH30af",
+      "outFile": "components/tooltip/overview.md",
+      "status": "ok",
+      "title": "Tooltip"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tooltip/design-08uxcGKD",
+      "sourcePath": "/latest/components/tooltip/design-08uxcGKD",
+      "outFile": "components/tooltip/design.md",
+      "status": "ok",
+      "title": "Tooltip"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tooltip/figma-0ZlKs0M7-0ZlKs0M7",
+      "sourcePath": "/latest/components/tooltip/figma-0ZlKs0M7-0ZlKs0M7",
+      "outFile": "components/tooltip/figma.md",
+      "status": "ok",
+      "title": "Tooltip"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tooltip/html-fxoORGmr",
+      "sourcePath": "/latest/components/tooltip/html-fxoORGmr",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tooltip/react-ZI9bYUzJ",
+      "sourcePath": "/latest/components/tooltip/react-ZI9bYUzJ",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/tooltip/accessibility-TVRyDsew-TVRyDsew",
+      "sourcePath": "/latest/components/tooltip/accessibility-TVRyDsew-TVRyDsew",
+      "outFile": "components/tooltip/accessibility.md",
+      "status": "ok",
+      "title": "Tooltip"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/truncate/overview-YDVOXlsj",
+      "sourcePath": "/latest/components/truncate/overview-YDVOXlsj",
+      "outFile": "components/truncate/overview.md",
+      "status": "ok",
+      "title": "Truncate"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/truncate/react-N017E7W1",
+      "sourcePath": "/latest/components/truncate/react-N017E7W1",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/truncate/accessibility-j8sUbXIK-j8sUbXIK",
+      "sourcePath": "/latest/components/truncate/accessibility-j8sUbXIK-j8sUbXIK",
+      "outFile": "components/truncate/accessibility.md",
+      "status": "ok",
+      "title": "Truncate"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/unstable-header/overview-nOU7iqvO",
+      "sourcePath": "/latest/components/unstable-header/overview-nOU7iqvO",
+      "outFile": "components/unstable-header/overview.md",
+      "status": "ok",
+      "title": "UNSTABLE_Header"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/unstable-header/design-noJ6GZd2-noJ6GZd2",
+      "sourcePath": "/latest/components/unstable-header/design-noJ6GZd2-noJ6GZd2",
+      "outFile": "components/unstable-header/design.md",
+      "status": "ok",
+      "title": "UNSTABLE_Header"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/unstable-header/figma-pXldwkGC-pXldwkGC",
+      "sourcePath": "/latest/components/unstable-header/figma-pXldwkGC-pXldwkGC",
+      "outFile": "components/unstable-header/figma.md",
+      "status": "ok",
+      "title": "UNSTABLE_Header"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/unstable-header/html-Ge28rbfg",
+      "sourcePath": "/latest/components/unstable-header/html-Ge28rbfg",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/unstable-header/react-BAPcSBj4-BAPcSBj4",
+      "sourcePath": "/latest/components/unstable-header/react-BAPcSBj4-BAPcSBj4",
+      "outFile": "",
+      "status": "skipped",
+      "message": "Excluded: component web, html, or react subpage (sourced from package READMEs)"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/components/unstable-header/accessibility-GHZ35N0F-GHZ35N0F",
+      "sourcePath": "/latest/components/unstable-header/accessibility-GHZ35N0F-GHZ35N0F",
+      "outFile": "components/unstable-header/accessibility.md",
+      "status": "ok",
+      "title": "UNSTABLE_Header"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/releases/releases-4VBGl5i1",
+      "sourcePath": "/latest/releases/releases-4VBGl5i1",
+      "outFile": "releases/releases.md",
+      "status": "ok",
+      "title": "Releases"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/releases/release-schedule-sfHwB5SK-sfHwB5SK",
+      "sourcePath": "/latest/releases/release-schedule-sfHwB5SK-sfHwB5SK",
+      "outFile": "releases/release-schedule.md",
+      "status": "ok",
+      "title": "Release Schedule"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/releases/web-rmotrJah",
+      "sourcePath": "/latest/releases/web-rmotrJah",
+      "outFile": "releases/web.md",
+      "status": "ok",
+      "title": "Web"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/releases/web-react-mvRoAQOq",
+      "sourcePath": "/latest/releases/web-react-mvRoAQOq",
+      "outFile": "releases/web-react.md",
+      "status": "ok",
+      "title": "Web-React"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/migrations-qf5YZSuA",
+      "sourcePath": "/latest/migrations/migrations-qf5YZSuA",
+      "outFile": "migrations/migrations.md",
+      "status": "ok",
+      "title": "Migrations"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/codemods-Zl2cs4jk",
+      "sourcePath": "/latest/migrations/codemods-Zl2cs4jk",
+      "outFile": "migrations/codemods.md",
+      "status": "ok",
+      "title": "Codemods"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/design-tokens/migration-to-v4-gdoCuazi",
+      "sourcePath": "/latest/migrations/design-tokens/migration-to-v4-gdoCuazi",
+      "outFile": "migrations/design-tokens/migration-to-v4.md",
+      "status": "ok",
+      "title": "Migration to v4"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/web/migration-to-v1-qC0GshFR",
+      "sourcePath": "/latest/migrations/web/migration-to-v1-qC0GshFR",
+      "outFile": "migrations/web/migration-to-v1.md",
+      "status": "ok",
+      "title": "Migration to v1"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/web/migration-to-v2-xLLprXQ5",
+      "sourcePath": "/latest/migrations/web/migration-to-v2-xLLprXQ5",
+      "outFile": "migrations/web/migration-to-v2.md",
+      "status": "ok",
+      "title": "Migration to v2"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/web/migration-to-v3-bJESmv7K-bJESmv7K",
+      "sourcePath": "/latest/migrations/web/migration-to-v3-bJESmv7K-bJESmv7K",
+      "outFile": "migrations/web/migration-to-v3.md",
+      "status": "ok",
+      "title": "Migration to v3"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/web/migration-to-v4-SgBwQICP-SgBwQICP",
+      "sourcePath": "/latest/migrations/web/migration-to-v4-SgBwQICP-SgBwQICP",
+      "outFile": "migrations/web/migration-to-v4.md",
+      "status": "ok",
+      "title": "Migration to v4"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/web-react/migration-to-v1-gy1asP81",
+      "sourcePath": "/latest/migrations/web-react/migration-to-v1-gy1asP81",
+      "outFile": "migrations/web-react/migration-to-v1.md",
+      "status": "ok",
+      "title": "Migration to v1"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/web-react/migration-to-v2-8DAQDRZM",
+      "sourcePath": "/latest/migrations/web-react/migration-to-v2-8DAQDRZM",
+      "outFile": "migrations/web-react/migration-to-v2.md",
+      "status": "ok",
+      "title": "Migration to v2"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/web-react/migration-to-v3-iqrjVWlO-iqrjVWlO",
+      "sourcePath": "/latest/migrations/web-react/migration-to-v3-iqrjVWlO-iqrjVWlO",
+      "outFile": "migrations/web-react/migration-to-v3.md",
+      "status": "ok",
+      "title": "Migration to v3"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/web-react/migration-to-v4-tRDhfgZK-tRDhfgZK",
+      "sourcePath": "/latest/migrations/web-react/migration-to-v4-tRDhfgZK-tRDhfgZK",
+      "outFile": "migrations/web-react/migration-to-v4.md",
+      "status": "ok",
+      "title": "Migration to v4"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/web-react/migration-to-v5-0w9J8Yh7-0w9J8Yh7",
+      "sourcePath": "/latest/migrations/web-react/migration-to-v5-0w9J8Yh7-0w9J8Yh7",
+      "outFile": "migrations/web-react/migration-to-v5.md",
+      "status": "ok",
+      "title": "Migration to v5"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/web-twig/migration-to-v2-SvSnAg64",
+      "sourcePath": "/latest/migrations/web-twig/migration-to-v2-SvSnAg64",
+      "outFile": "migrations/web-twig/migration-to-v2.md",
+      "status": "ok",
+      "title": "Migration to v2"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/web-twig/migration-to-v3-rqitLM4p",
+      "sourcePath": "/latest/migrations/web-twig/migration-to-v3-rqitLM4p",
+      "outFile": "migrations/web-twig/migration-to-v3.md",
+      "status": "ok",
+      "title": "Migration to v3"
+    },
+    {
+      "sourceUrl": "https://spirit.supernova-docs.io/latest/migrations/web-twig/migration-to-v4-zRBb1o4j-zRBb1o4j",
+      "sourcePath": "/latest/migrations/web-twig/migration-to-v4-zRBb1o4j-zRBb1o4j",
+      "outFile": "migrations/web-twig/migration-to-v4.md",
+      "status": "ok",
+      "title": "Migration to v4"
+    }
+  ],
+  "stats": {
+    "totalInSitemap": 397,
+    "toExtract": 285,
+    "extracted": 285,
+    "failed": 0,
+    "skipped": 112
+  }
+}
