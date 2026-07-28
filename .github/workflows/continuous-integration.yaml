@@ -1,0 +1,67 @@
+name: 🔄 Continuous Integration
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 9 * * *' # every day at 9:00
+
+permissions:
+  contents: read
+  # Allows coveralls to post coverage reports as PR comments
+  # Enables updating PR description with coverage badges
+  # Required for PR status checks
+  pull-requests: write
+  # Allows coveralls to create/update check runs
+  # Enables the coverage status to appear in the PR checks section
+  # Required for passing/failing the coverage check
+  checks: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  git-checks:
+    name: 🚦 Git Checks
+    if: github.event_name == 'pull_request'
+    uses: ./.github/workflows/git.yaml
+
+  build-checks:
+    name: 🏗️ Build Checks
+    uses: ./.github/workflows/build.yaml
+
+  docs-reviews:
+    name: 📄 Docs Reviews
+    uses: ./.github/workflows/docs-review.yaml
+
+  code-quality-checks:
+    name: 🔍 Code Quality Checks
+    uses: ./.github/workflows/lint.yaml
+    permissions:
+      actions: write
+      contents: read
+
+  tests:
+    name: 🧪 Tests
+    uses: ./.github/workflows/test.yaml
+
+  code-quality-gate:
+    name: 📊 Code Quality Gate
+    needs: [code-quality-checks, tests, docs-reviews]
+    if: always()
+    uses: ./.github/workflows/gate.yaml
+    with:
+      needs-context: ${{ toJSON(needs) }}
+      gate-name: '📊 Code Quality Gate'
+
+  ready-to-integrate:
+    name: 🚢 Ready to Integrate
+    needs: [git-checks, build-checks, code-quality-gate]
+    if: always()
+    uses: ./.github/workflows/gate.yaml
+    with:
+      needs-context: ${{ toJSON(needs) }}
+      gate-name: '🚢 Ready to Integrate'
