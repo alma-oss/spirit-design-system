@@ -25,7 +25,7 @@ jobs:
         uses: styfle/cancel-workflow-action@d07a454dad7609a92316b57b23c9ccfd4f59af66 # 0.13.1
         with:
           access_token: ${{ github.token }}
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Labeled to e2e
         id: has-label
         uses: DanielTamkin/HasLabel@eb337eaf9036a5408ddd8ebc3e9ac540d74d2ae0 # v1.0.4
@@ -43,7 +43,7 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Setup Node and Install Dependencies
         uses: ./.github/actions/setup-install
