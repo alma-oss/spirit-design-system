@@ -64,7 +64,7 @@ jira_link_to_epic(issue_key="<new key>", epic_key="<epic from Step 2>")
 
 ### Step 6: Apply the Jira Wiki-Markup Gotchas
 
-This is the load-bearing section of this skill — every rule below was learned the hard way by watching the actual stored output, not by reading documentation.
+This is the load-bearing section of this skill — every rule below was learned the hard way by watching the actual stored output, not by reading documentation. See [`references/wiki-markup-cheatsheet.md`](references/wiki-markup-cheatsheet.md) for the full standard syntax reference plus this same corruption-bug table.
 
 - **Write real Jira wiki markup, not Markdown.** `h2.`/`h3.` headings, `*bold*`, `{{monospace}}`, `{code}...{code}` blocks, `*` for every bullet.
 - **Never start a bullet with bold immediately after the `*` marker.** `* *Bold text.* rest of sentence...` reliably corrupts into `_ _text*` garbage. Put emphasis later in the sentence, or skip it in bullets entirely.

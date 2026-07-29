@@ -51,4 +51,5 @@ Use when you need to:
 ## See Also
 
 - **SKILL.md** — Complete workflow with all steps, the wiki-markup gotcha list, and template reference
+- **references/wiki-markup-cheatsheet.md** — Full Jira wiki markup syntax reference plus the known corruption-bug table
 - Related skill: `/spirit:create-pr` — For opening the PR once the implementation is done
