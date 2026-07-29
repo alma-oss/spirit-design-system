@@ -34,7 +34,7 @@ describe('HelperText', () => {
 
   it('should use context elementType when no direct prop', () => {
     render(
-      <PropsProvider value={{ elementType: 'span' }}>
+      <PropsProvider value={{ helperText: { elementType: 'span' } }}>
         <HelperText helperText={helperText} />
       </PropsProvider>,
     );
@@ -44,7 +44,7 @@ describe('HelperText', () => {
 
   it('should use direct elementType over context', () => {
     render(
-      <PropsProvider value={{ elementType: 'span' }}>
+      <PropsProvider value={{ helperText: { elementType: 'span' } }}>
         <HelperText elementType="p" helperText={helperText} />
       </PropsProvider>,
     );
