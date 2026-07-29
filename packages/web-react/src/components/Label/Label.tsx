@@ -16,16 +16,13 @@ const defaultProps: Partial<SpiritLabelProps> = {
 };
 
 const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX.Element => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    elementType: contextProps.elementType,
-    isDisabled: contextProps.isDisabled,
-    isStretched: contextProps.isItem,
-    isLabelHidden: contextProps.isLabelHidden,
-    isRequired: contextProps.isRequired,
-    ...props,
-  };
+  const mergedProps = useContextProps<Partial<Omit<FormFieldContextValue, 'elementType'> & SpiritLabelProps<E>>>(
+    props,
+    'label',
+  );
+  const propsWithDefaults = { ...defaultProps, ...mergedProps, isStretched: mergedProps.isItem };
+  // isItem/validationState are discarded here so they never leak onto the DOM as raw attributes
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const {
     children,
     elementType: ElementTag = 'label' as ElementType,
@@ -33,11 +30,14 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
     hasPointerCursor,
     htmlFor,
     isDisabled,
+    isItem,
     isStretched,
     isLabelHidden,
     isRequired,
+    validationState,
     ...restProps
   } = propsWithDefaults;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const { classProps } = useLabelStyleProps({
     hasPointerCursor,

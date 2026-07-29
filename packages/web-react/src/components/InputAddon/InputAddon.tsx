@@ -15,13 +15,15 @@ const defaultProps: Partial<SpiritInputAddonProps> = {
 };
 
 const InputAddon = <E extends ElementType = 'div'>(props: SpiritInputAddonProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    size: contextProps.size ?? defaultProps.size,
-    ...props,
-  };
-  const { classProps, props: modifiedProps } = useInputAddonStyleProps(propsWithDefaults);
+  const mergedProps = useContextProps<Partial<Omit<FormFieldContextValue, 'elementType'> & SpiritInputAddonProps<E>>>(
+    props,
+    'inputAddon',
+  );
+  const propsWithDefaults = { ...defaultProps, ...mergedProps };
+  // isDisabled/isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { isDisabled, isRequired, validationState, ...ownProps } = propsWithDefaults;
+  const { classProps, props: modifiedProps } = useInputAddonStyleProps(ownProps);
   const { children, elementType, ...restProps } = modifiedProps;
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const Component = (elementType || defaultProps.elementType) as ElementType;

@@ -15,21 +15,24 @@ const defaultProps: Partial<SpiritHelperTextProps> = {
 };
 
 const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    elementType: contextProps.elementType,
-    isDisabled: contextProps.isDisabled,
-    ...props,
-  };
+  const mergedProps = useContextProps<Partial<Omit<FormFieldContextValue, 'elementType'> & SpiritHelperTextProps<E>>>(
+    props,
+    'helperText',
+  );
+  const propsWithDefaults = { ...defaultProps, ...mergedProps };
+  // isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const {
     helperText,
     elementType: Component = defaultProps.elementType as ElementType,
     id,
     isDisabled,
+    isRequired,
     registerAria,
+    validationState,
     ...restProps
   } = propsWithDefaults;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const { classProps } = useHelperTextStyleProps({ isDisabled });
   const { styleProps, props: transferProps } = useStyleProps(restProps);

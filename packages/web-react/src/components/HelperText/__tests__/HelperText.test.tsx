@@ -14,7 +14,11 @@ import HelperText from '../HelperText';
 describe('HelperText', () => {
   const helperText = 'Helper Text';
 
-  validHtmlAttributesTest(HelperText);
+  validHtmlAttributesTest(
+    (props) => <HelperText {...props} helperText={helperText} />,
+    {},
+    { globalProps: { isRequired: true, validationState: 'danger' } },
+  );
 
   stylePropsTest((props) => <HelperText {...props} helperText={helperText} />);
 

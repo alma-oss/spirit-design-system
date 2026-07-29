@@ -17,13 +17,12 @@ const defaultProps: Partial<SpiritValidationTextProps> = {
 };
 
 const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTextProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    elementType: contextProps.elementType,
-    isDisabled: contextProps.isDisabled,
-    ...props,
-  };
+  const mergedProps = useContextProps<
+    Partial<Omit<FormFieldContextValue, 'elementType'> & SpiritValidationTextProps<E>>
+  >(props, 'validationText');
+  const propsWithDefaults = { ...defaultProps, ...mergedProps };
+  // isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const {
     elementType: Component = defaultProps.elementType as ElementType,
     id,
@@ -32,11 +31,14 @@ const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTe
     role,
     validationText,
     isDisabled,
+    isRequired,
+    validationState,
     ...restProps
   } = propsWithDefaults;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const validationIconName = useValidationIcon({ validationStateIcon });
-  const validationStateForStyles = validationStateIcon ?? contextProps.validationState;
+  const validationStateForStyles = validationStateIcon ?? mergedProps.validationState;
   const { classProps } = useValidationTextStyleProps({
     validationStateIcon: validationStateForStyles,
     isDisabled,

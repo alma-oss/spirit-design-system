@@ -15,20 +15,24 @@ const defaultProps: Partial<InputDetailsProps> = {
 };
 
 const InputDetails = <E extends ElementType = 'div'>(props: InputDetailsProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    isDisabled: contextProps.isDisabled,
-    ...props,
-  };
+  const mergedProps = useContextProps<Partial<Omit<FormFieldContextValue, 'elementType'> & InputDetailsProps<E>>>(
+    props,
+    'inputDetails',
+  );
+  const propsWithDefaults = { ...defaultProps, ...mergedProps };
+  // isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const {
     children,
     elementType: ElementTag = defaultProps.elementType as ElementType,
     id,
     isDisabled,
+    isRequired,
     registerAriaDetails,
+    validationState,
     ...restProps
   } = propsWithDefaults;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const { classProps } = useInputDetailsStyleProps({ isDisabled });
   const { styleProps, props: transferProps } = useStyleProps(restProps);

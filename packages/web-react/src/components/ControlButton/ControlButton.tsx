@@ -6,6 +6,7 @@ import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import {
   type ControlButtonProps,
+  type FormFieldContextValue,
   type PolymorphicComponent,
   type PolymorphicRef,
   type SpiritControlButtonProps,
@@ -27,13 +28,20 @@ const _ControlButton = <E extends ElementType = 'button', S = void>(
   props: SpiritControlButtonProps<E, S>,
   ref: PolymorphicRef<E>,
 ) => {
-  const contextProps = useContextProps<Partial<Pick<ControlButtonProps<S>, 'size'>>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    size: contextProps.size ?? defaultProps.size,
-    ...props,
-  };
-  const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
+  const mergedProps = useContextProps(props, 'controlButton') as Partial<
+    Omit<FormFieldContextValue, 'elementType'> & SpiritControlButtonProps<E, S>
+  >;
+  const propsWithDefaults = { ...defaultProps, ...mergedProps };
+  // isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  const {
+    elementType = defaultProps.elementType,
+    children,
+    isRequired,
+    validationState,
+    ...restProps
+  } = propsWithDefaults;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const Component = elementType as ElementType;
 

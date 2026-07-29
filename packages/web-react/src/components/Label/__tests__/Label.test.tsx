@@ -17,7 +17,7 @@ describe('Label', () => {
 
   restPropsTest(Label, 'label');
 
-  validHtmlAttributesTest(Label);
+  validHtmlAttributesTest(Label, {}, { globalProps: { isRequired: true, validationState: 'danger' } });
 
   ariaAttributesTest(Label);
 

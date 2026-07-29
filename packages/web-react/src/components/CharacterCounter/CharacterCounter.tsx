@@ -10,13 +10,13 @@ import { useCharacterCounter } from './useCharacterCounterState';
 import { useCharacterCounterStyleProps } from './useCharacterCounterStyleProps';
 
 const CharacterCounter = (props: SpiritCharacterCounterProps) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    isDisabled: contextProps.isDisabled,
-    validationState: contextProps.validationState,
-    ...props,
-  };
-  const { classProps, props: restProps } = useCharacterCounterStyleProps(propsWithDefaults);
+  const mergedProps = useContextProps<
+    Partial<Omit<FormFieldContextValue, 'elementType'> & SpiritCharacterCounterProps>
+  >(props, 'characterCounter');
+  // isRequired is discarded here so it never leaks onto the DOM as a raw attribute
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { isRequired, ...ownProps } = mergedProps;
+  const { classProps, props: restProps } = useCharacterCounterStyleProps(ownProps as SpiritCharacterCounterProps);
   const {
     debouncedScreenReaderMessage,
     isVisible,

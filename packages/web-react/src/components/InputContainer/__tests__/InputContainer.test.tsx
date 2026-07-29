@@ -1,11 +1,22 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { validHtmlAttributesTest } from '@local/tests';
 import { FillVariants } from '../../../constants';
 import { PropsProvider } from '../../../context';
 import InputContainer from '../InputContainer';
 
 describe('InputContainer', () => {
+  validHtmlAttributesTest(
+    (props) => (
+      <InputContainer {...props}>
+        <span>Content</span>
+      </InputContainer>
+    ),
+    {},
+    { globalProps: { isRequired: true, validationState: 'danger' } },
+  );
+
   it('should apply fill variant class by default', () => {
     render(
       <InputContainer>
