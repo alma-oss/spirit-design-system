@@ -18,7 +18,7 @@ describe('StackItem', () => {
 
   restPropsTest(StackItem, 'div');
 
-  validHtmlAttributesTest(StackItem);
+  validHtmlAttributesTest(StackItem, {}, { globalProps: { isRequired: true, validationState: 'danger' } });
 
   ariaAttributesTest(StackItem);
 

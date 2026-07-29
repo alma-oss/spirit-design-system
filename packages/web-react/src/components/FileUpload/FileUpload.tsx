@@ -106,9 +106,9 @@ const FileUpload = (props: FileUploadProps) => {
     <ContextPropsProvider
       value={{
         isDisabled,
-        isLabelHidden,
         isRequired,
         validationState,
+        label: { isLabelHidden },
       }}
     >
       <div

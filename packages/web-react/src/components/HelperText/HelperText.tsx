@@ -3,8 +3,8 @@
 import React, { type ElementType, useEffect } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type FormFieldContextValue, type SpiritHelperTextProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { type SpiritHelperTextProps, type WithFormFieldContext } from '../../types';
+import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
 import { useHelperTextStyleProps } from './useHelperTextStyleProps';
 
 const defaultProps: Partial<SpiritHelperTextProps> = {
@@ -15,21 +15,20 @@ const defaultProps: Partial<SpiritHelperTextProps> = {
 };
 
 const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    elementType: contextProps.elementType,
-    isDisabled: contextProps.isDisabled,
-    ...props,
-  };
+  const inlineElementsProps = useContext(InlineElementsContext) ?? {};
+  const mergedProps = useContextProps<WithFormFieldContext<SpiritHelperTextProps<E>>>(props, 'helperText');
+  const propsWithDefaults = mergeProps(defaultProps, inlineElementsProps, mergedProps);
   const {
     helperText,
     elementType: Component = defaultProps.elementType as ElementType,
     id,
     isDisabled,
+    isRequired,
     registerAria,
+    validationState,
     ...restProps
   } = propsWithDefaults;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const { classProps } = useHelperTextStyleProps({ isDisabled });
   const { styleProps, props: transferProps } = useStyleProps(restProps);

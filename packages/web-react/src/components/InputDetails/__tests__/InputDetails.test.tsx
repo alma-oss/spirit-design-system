@@ -17,7 +17,11 @@ describe('InputDetails', () => {
 
   elementTypePropsTest((props) => <InputDetails {...props}>Test content</InputDetails>);
 
-  validHtmlAttributesTest((props) => <InputDetails {...props}>Test content</InputDetails>);
+  validHtmlAttributesTest(
+    (props) => <InputDetails {...props}>Test content</InputDetails>,
+    {},
+    { globalProps: { isRequired: true, validationState: 'danger' } },
+  );
 
   formFieldContextPropsTest({
     renderComponent: (props) => <InputDetails {...props}>Content</InputDetails>,

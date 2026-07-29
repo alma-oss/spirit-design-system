@@ -85,10 +85,9 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
     <ContextPropsProvider
       value={{
         isDisabled,
-        isItem,
-        isLabelHidden,
         isRequired,
         validationState,
+        label: { isStretched: isItem, isLabelHidden },
       }}
     >
       {isItem ? (

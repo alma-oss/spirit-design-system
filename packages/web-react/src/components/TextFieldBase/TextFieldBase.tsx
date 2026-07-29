@@ -98,11 +98,13 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
     <ContextPropsProvider
       value={{
         isDisabled,
-        isLabelHidden,
         isRequired,
-        size,
-        variant,
-        validationState,
+        label: { isLabelHidden },
+        inputContainer: { size, variant, validationState },
+        inputAddon: { size },
+        controlButton: { size },
+        validationText: { validationState },
+        characterCounter: { validationState },
       }}
     >
       <UniversalProvider values={[[FormFieldsContext, { size }]]}>

@@ -23,22 +23,14 @@ const _Button = <E extends ElementType = 'button', C = void, S = void>(
   props: SpiritButtonProps<E, C, S>,
   ref: PolymorphicRef<E>,
 ) => {
-  const { children, ...restFromProps } = props;
-  const contextProps = useContextProps<Partial<SpiritButtonProps<E, C, S>>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    ...restFromProps,
-    elementType: contextProps.elementType ?? restFromProps.elementType ?? defaultProps.elementType,
-    color: contextProps.color ?? restFromProps.color ?? defaultProps.color,
-    size: contextProps.size ?? restFromProps.size ?? defaultProps.size,
-    isDisabled: contextProps.isDisabled ?? restFromProps.isDisabled ?? defaultProps.isDisabled,
-    isLoading: contextProps.isLoading ?? restFromProps.isLoading ?? defaultProps.isLoading,
-    type: contextProps.type ?? restFromProps.type ?? defaultProps.type,
-  };
+  const mergedProps = useContextProps<Partial<SpiritButtonProps<E, C, S>>>(props, 'button');
+  const propsWithDefaults = { ...defaultProps, ...mergedProps };
 
   const { buttonProps } = useButtonProps(propsWithDefaults);
 
-  const { elementType, ...restProps } = propsWithDefaults;
+  // isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { children, elementType, isRequired, validationState, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
   const { classProps, props: modifiedProps, styleProps: buttonStyleProps } = useButtonStyleProps(restProps);

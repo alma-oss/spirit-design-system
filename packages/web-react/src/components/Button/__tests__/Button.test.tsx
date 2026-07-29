@@ -35,7 +35,7 @@ describe('Button', () => {
 
   restPropsTest(Button, 'button');
 
-  validHtmlAttributesTest(Button);
+  validHtmlAttributesTest(Button, {}, { globalProps: { isRequired: true, validationState: 'danger' } });
 
   ariaAttributesTest(Button);
 

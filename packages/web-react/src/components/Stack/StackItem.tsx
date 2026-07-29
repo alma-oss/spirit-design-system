@@ -20,10 +20,11 @@ const _StackItem = <E extends ElementType = 'div'>(
   props: SpiritStackItemProps<E>,
   ref: PolymorphicRef<E>,
 ): JSX.Element => {
-  const { elementType: propsElementType } = props;
-  const contextProps = useContextProps(props);
-  const { children, elementType: contextElementType, ...restProps } = contextProps;
-  const elementType = propsElementType ?? contextElementType ?? defaultProps.elementType;
+  const mergedProps = useContextProps<Partial<SpiritStackItemProps<E>>>(props, 'stackItem');
+  const propsWithDefaults = { ...defaultProps, ...mergedProps };
+  // isDisabled/isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { children, elementType, isDisabled, isRequired, validationState, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
 
@@ -36,8 +37,15 @@ const _StackItem = <E extends ElementType = 'div'>(
   });
 
   return (
-    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
-      <PropsProvider value={{ elementType: null }}>{children}</PropsProvider>
+    <Component {...filterDOMProps(otherProps)} {...mergedStyleProps} ref={ref}>
+      <PropsProvider
+        value={{
+          listItems: { elementType: null },
+          inlineElements: { elementType: null },
+        }}
+      >
+        {children}
+      </PropsProvider>
     </Component>
   );
 };

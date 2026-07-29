@@ -33,8 +33,6 @@ export interface FormFieldContextValue {
   elementType?: ElementType;
   /** Whether the field is disabled; affects Label and HelperText styling. */
   isDisabled?: boolean;
-  /** Whether the field is an item (Checkbox or Radio in item mode). */
-  isItem?: boolean;
   /** Whether the label is visually hidden but accessible. */
   isLabelHidden?: boolean;
   /** Whether the field is required (label shows required indicator). */
@@ -46,6 +44,9 @@ export interface FormFieldContextValue {
   /** Fill variant of the input for context-aware descendants. */
   variant?: FillVariantDictionaryType;
 }
+
+/** Props merged from `FormFieldContextValue` (excluding `elementType`) with a component's own props. */
+export type WithFormFieldContext<P> = Partial<Omit<FormFieldContextValue, 'elementType'> & P>;
 
 export type FormFieldStyleProps = Pick<FormFieldContextValue, 'isDisabled'>;
 

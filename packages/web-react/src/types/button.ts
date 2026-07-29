@@ -5,6 +5,7 @@ import type {
   ChildrenProps,
   ClickEvents,
   ComponentButtonColorNamesType,
+  ContextProps,
   EmotionColorNamesType,
   PolymorphicComponentProps,
   RouterLinkProps,
@@ -17,7 +18,7 @@ import type {
 export type ButtonColor<C> = ComponentButtonColorNamesType<C> | EmotionColorNamesType<C>;
 export type ButtonSize<S> = keyof S extends never ? ButtonSizesType : ButtonSizesType | S;
 
-export interface ButtonBaseProps extends ChildrenProps, StyleProps, ClickEvents {}
+export interface ButtonBaseProps extends ChildrenProps, StyleProps, ClickEvents, ContextProps {}
 
 /** ===== STYLE API ===== */
 export interface ButtonStyleProps<C = void, S = void> extends ButtonBaseProps {

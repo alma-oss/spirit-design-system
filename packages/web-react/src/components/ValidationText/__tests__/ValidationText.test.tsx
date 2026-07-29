@@ -19,7 +19,11 @@ const renderValidationText = <E extends ElementType = 'div'>(props: Partial<Spir
   render(<ValidationText {...props} />);
 
 describe('ValidationText', () => {
-  validHtmlAttributesTest(ValidationText);
+  validHtmlAttributesTest(
+    (props) => <ValidationText {...props} validationText="validation text" />,
+    {},
+    { globalProps: { isRequired: true, validationState: 'danger' } },
+  );
 
   stylePropsTest((props) => <ValidationText {...props} validationText="validation text" />);
 
