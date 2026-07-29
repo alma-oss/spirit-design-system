@@ -322,6 +322,17 @@ This project uses GitHub Actions to publish the packages automatically to npm.
 New packages are published after the new tag is pushed to the main branch.
 PR can be merged only by the appropriate group of maintainers.
 
+### Branch Protection
+
+Our release branches are guarded by [Repository Rulesets][github-rulesets]. You can find and edit
+the rulesets under the repository's **Settings → Rules → Rulesets**.
+
+Rulesets let us define required reviews, required status checks, linear history, etc. for
+everyone, while also naming specific **bypass actors** that are exempt from some or all of those
+rules. This is what allows `almaoss-spirit-design-system[bot]` (the GitHub App used by the
+`Version` workflow described below) to push version bump commits and tags directly to these branches,
+without opening a pull request, while regular contributors still go through PR review as usual.
+
 ### Authentication
 
 The release process involves two independent authentication mechanisms, one per workflow.
@@ -446,6 +457,7 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [figma-quickstart]: https://developers.figma.com/docs/code-connect/quickstart-guide/#before-you-begin
 [figma-react-guide]: https://developers.figma.com/docs/code-connect/react/
 [github-app-settings]: https://github.com/organizations/alma-oss/settings/apps
+[github-rulesets]: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets
 [jest]: https://jestjs.io/
 [lerna-home]: https://lerna.js.org
 [local-publish-testing]: tools/README.md
