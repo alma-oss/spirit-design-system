@@ -3,8 +3,8 @@
 import React, { type ElementType, useEffect } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type FormFieldContextValue, type SpiritValidationTextProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { type SpiritValidationTextProps, type WithFormFieldContext } from '../../types';
+import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
 import { Icon } from '../Icon';
 import { useValidationIcon } from './useValidationIcon';
 import { useValidationTextStyleProps } from './useValidationTextStyleProps';
@@ -17,13 +17,9 @@ const defaultProps: Partial<SpiritValidationTextProps> = {
 };
 
 const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTextProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    elementType: contextProps.elementType,
-    isDisabled: contextProps.isDisabled,
-    ...props,
-  };
+  const inlineElementsProps = useContext(InlineElementsContext) ?? {};
+  const mergedProps = useContextProps<WithFormFieldContext<SpiritValidationTextProps<E>>>(props, 'validationText');
+  const propsWithDefaults = mergeProps(defaultProps, inlineElementsProps, mergedProps);
   const {
     elementType: Component = defaultProps.elementType as ElementType,
     id,
@@ -32,11 +28,14 @@ const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTe
     role,
     validationText,
     isDisabled,
+    isRequired,
+    validationState,
     ...restProps
   } = propsWithDefaults;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const validationIconName = useValidationIcon({ validationStateIcon });
-  const validationStateForStyles = validationStateIcon ?? contextProps.validationState;
+  const validationStateForStyles = validationStateIcon ?? mergedProps.validationState;
   const { classProps } = useValidationTextStyleProps({
     validationStateIcon: validationStateForStyles,
     isDisabled,

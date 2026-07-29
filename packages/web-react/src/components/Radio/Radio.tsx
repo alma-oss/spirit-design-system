@@ -60,9 +60,8 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
     <ContextPropsProvider
       value={{
         isDisabled,
-        isItem,
-        isLabelHidden,
         validationState,
+        label: { isStretched: isItem, isLabelHidden },
       }}
     >
       {isItem ? (

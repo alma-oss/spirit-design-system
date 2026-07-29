@@ -6,6 +6,16 @@ import { ContextPropsProvider } from '../../../context';
 import InputAddon from '../InputAddon';
 
 describe('InputAddon', () => {
+  validHtmlAttributesTest(
+    (props) => (
+      <InputAddon {...props}>
+        <span>Addon content</span>
+      </InputAddon>
+    ),
+    {},
+    { globalProps: { isRequired: true, validationState: 'danger' } },
+  );
+
   it('should render children with InputAddon class', () => {
     render(
       <InputAddon>

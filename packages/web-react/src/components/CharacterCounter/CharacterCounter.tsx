@@ -2,21 +2,16 @@
 
 import React from 'react';
 import { useContextProps } from '../../context';
-import { type FormFieldContextValue } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { type WithFormFieldContext } from '../../types';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { type SpiritCharacterCounterProps } from './types';
 import { useCharacterCounter } from './useCharacterCounterState';
 import { useCharacterCounterStyleProps } from './useCharacterCounterStyleProps';
 
 const CharacterCounter = (props: SpiritCharacterCounterProps) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    isDisabled: contextProps.isDisabled,
-    validationState: contextProps.validationState,
-    ...props,
-  };
-  const { classProps, props: restProps } = useCharacterCounterStyleProps(propsWithDefaults);
+  const mergedProps = useContextProps<WithFormFieldContext<SpiritCharacterCounterProps>>(props, 'characterCounter');
+  const { classProps, props: restProps } = useCharacterCounterStyleProps(mergedProps as SpiritCharacterCounterProps);
   const {
     debouncedScreenReaderMessage,
     isVisible,

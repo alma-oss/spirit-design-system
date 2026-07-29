@@ -55,7 +55,9 @@ describe('CharacterCounter', () => {
 
   classNamePrefixProviderTest(CharacterCounterForClassNamePrefixTests, 'CharacterCounter');
 
-  validHtmlAttributesTest(CharacterCounter, characterCounterValidHtmlProps);
+  validHtmlAttributesTest(CharacterCounter, characterCounterValidHtmlProps, {
+    globalProps: { isRequired: true, validationState: 'danger' },
+  });
 
   ariaAttributesTest(CharacterCounter, characterCounterValidHtmlProps);
 

@@ -3,8 +3,8 @@
 import React, { type ElementType } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type FormFieldContextValue, type SpiritLabelProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { type SpiritLabelProps, type WithFormFieldContext } from '../../types';
+import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
 import { useLabelStyleProps } from './useLabelStyleProps';
 
 const defaultProps: Partial<SpiritLabelProps> = {
@@ -16,16 +16,9 @@ const defaultProps: Partial<SpiritLabelProps> = {
 };
 
 const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX.Element => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    elementType: contextProps.elementType,
-    isDisabled: contextProps.isDisabled,
-    isStretched: contextProps.isItem,
-    isLabelHidden: contextProps.isLabelHidden,
-    isRequired: contextProps.isRequired,
-    ...props,
-  };
+  const inlineElementsProps = useContext(InlineElementsContext) ?? {};
+  const mergedProps = useContextProps<WithFormFieldContext<SpiritLabelProps<E>>>(props, 'label');
+  const propsWithDefaults = mergeProps(defaultProps, inlineElementsProps, mergedProps);
   const {
     children,
     elementType: ElementTag = 'label' as ElementType,
@@ -36,8 +29,10 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
     isStretched,
     isLabelHidden,
     isRequired,
+    validationState,
     ...restProps
   } = propsWithDefaults;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const { classProps } = useLabelStyleProps({
     hasPointerCursor,

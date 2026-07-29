@@ -4,8 +4,8 @@ import React, { type ElementType } from 'react';
 import { Sizes } from '../../constants';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type FormFieldContextValue } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { type WithFormFieldContext } from '../../types';
+import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
 import { type SpiritInputAddonProps } from './types';
 import { useInputAddonStyleProps } from './useInputAddonStyleProps';
 
@@ -15,13 +15,10 @@ const defaultProps: Partial<SpiritInputAddonProps> = {
 };
 
 const InputAddon = <E extends ElementType = 'div'>(props: SpiritInputAddonProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    size: contextProps.size ?? defaultProps.size,
-    ...props,
-  };
-  const { classProps, props: modifiedProps } = useInputAddonStyleProps(propsWithDefaults);
+  const formFieldsProps = useContext(FormFieldsContext) ?? {};
+  const mergedProps = useContextProps<WithFormFieldContext<SpiritInputAddonProps<E>>>(props, 'inputAddon');
+  const propsWithDefaults = mergeProps(defaultProps, formFieldsProps, mergedProps);
+  const { classProps, props: modifiedProps } = useInputAddonStyleProps(propsWithDefaults as SpiritInputAddonProps<E>);
   const { children, elementType, ...restProps } = modifiedProps;
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const Component = (elementType || defaultProps.elementType) as ElementType;

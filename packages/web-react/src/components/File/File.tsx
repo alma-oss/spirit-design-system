@@ -74,7 +74,7 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
     <ContextPropsProvider
       value={{
         isDisabled,
-        validationState,
+        validationText: { validationState },
       }}
     >
       <Component

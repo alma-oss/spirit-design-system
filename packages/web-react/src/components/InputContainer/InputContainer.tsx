@@ -4,8 +4,8 @@ import React, { type ElementType } from 'react';
 import { FillVariants, Sizes } from '../../constants';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
-import { type FormFieldContextValue } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { type WithFormFieldContext } from '../../types';
+import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
 import { type SpiritInputContainerProps } from './types';
 import { useInputContainerStyleProps } from './useInputContainerStyleProps';
 
@@ -16,16 +16,12 @@ const defaultProps: Partial<SpiritInputContainerProps> = {
 };
 
 const InputContainer = <E extends ElementType = 'div'>(props: SpiritInputContainerProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    size: contextProps.size ?? defaultProps.size,
-    variant: contextProps.variant ?? defaultProps.variant,
-    isDisabled: contextProps.isDisabled,
-    validationState: contextProps.validationState,
-    ...props,
-  };
-  const { classProps, props: modifiedProps } = useInputContainerStyleProps(propsWithDefaults);
+  const formFieldsProps = useContext(FormFieldsContext) ?? {};
+  const mergedProps = useContextProps<WithFormFieldContext<SpiritInputContainerProps<E>>>(props, 'inputContainer');
+  const propsWithDefaults = mergeProps(defaultProps, formFieldsProps, mergedProps);
+  const { classProps, props: modifiedProps } = useInputContainerStyleProps(
+    propsWithDefaults as SpiritInputContainerProps<E>,
+  );
   const { children, elementType, ...restProps } = modifiedProps;
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const Component = (elementType || defaultProps.elementType) as ElementType;

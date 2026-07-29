@@ -50,9 +50,9 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
     <ContextPropsProvider
       value={{
         isDisabled,
-        isLabelHidden,
         isRequired,
         validationState,
+        label: { isLabelHidden },
       }}
     >
       <Flex

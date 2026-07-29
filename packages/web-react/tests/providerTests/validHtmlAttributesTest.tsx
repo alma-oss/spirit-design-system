@@ -34,7 +34,11 @@ const validateHTMLForComponent = (container: HTMLElement) => {
   elements.forEach((element) => validateHTMLAttributes(element));
 };
 
-export const validHtmlAttributesTest = (Component: ComponentType<any>, props: object = {}) => {
+export const validHtmlAttributesTest = (
+  Component: ComponentType<any>,
+  props: object = {},
+  options: { globalProps?: Record<string, unknown> } = {},
+) => {
   const componentName = getComponentName(Component);
 
   test(`should render valid HTML for ${componentName}`, () => {
