@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.7](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.5.6...@alma-oss/spirit-storybook@0.5.7) (2026-07-29)
+
+### Bug Fixes
+
+- **storybook:** fix Chromatic build failing on FCC story files #DS-2668, closes [#DS-2668](https://github.com/alma-oss/spirit-design-system/issues/DS-2668)
+
+### Chores
+
+- **storybook:** do not generate Chromatic snapshots for FCC files #DS-2668, closes [#DS-2668](https://github.com/alma-oss/spirit-design-system/issues/DS-2668)
+
 ## [0.5.6](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.5.5...@alma-oss/spirit-storybook@0.5.6) (2026-07-13)
 
 **Note:** Version bump only for package @alma-oss/spirit-storybook

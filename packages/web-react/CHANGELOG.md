@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@5.1.0...@alma-oss/spirit-web-react@5.2.0) (2026-07-29)
+
+### Features
+
+- **web-react:** update Figma Code Connect for various components #DS-2668, closes [#DS-2668](https://github.com/alma-oss/spirit-design-system/issues/DS-2668)
+
+### Bug Fixes
+
+- **storybook:** fix Chromatic build failing on FCC story files #DS-2668, closes [#DS-2668](https://github.com/alma-oss/spirit-design-system/issues/DS-2668)
+
+### Documentation
+
+- **repo:** use commit subjects for 5.0.0 backwards-incompatible updates #DS-2683, closes [#DS-2683](https://github.com/alma-oss/spirit-design-system/issues/DS-2683)
+- **web-react:** make partial-conflict components renderable in docsite preview, closes [#DS-2221](https://github.com/alma-oss/spirit-design-system/issues/DS-2221)
+- **web-react:** make rest of the components renderable in docsite preview, closes [#DS-2221](https://github.com/alma-oss/spirit-design-system/issues/DS-2221)
+
 ## [5.1.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@5.0.0...@alma-oss/spirit-web-react@5.1.0) (2026-07-13)
 
 ### Features

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@5.0.0...@alma-oss/spirit-design-tokens@5.0.1) (2026-07-29)
+
+### Documentation
+
+- **repo:** use commit subjects for 5.0.0 backwards-incompatible updates #DS-2683, closes [#DS-2683](https://github.com/alma-oss/spirit-design-system/issues/DS-2683)
+
 ## [5.0.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@4.2.2...@alma-oss/spirit-design-tokens@5.0.0) (2026-07-08)
 
 ### ⚠ BREAKING CHANGES

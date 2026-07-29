@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.8](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-example-next-with-app-router@0.6.7...@alma-oss/spirit-example-next-with-app-router@0.6.8) (2026-07-29)
+
+**Note:** Version bump only for package @alma-oss/spirit-example-next-with-app-router
+
 ## [0.6.7](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-example-next-with-app-router@0.6.6...@alma-oss/spirit-example-next-with-app-router@0.6.7) (2026-07-13)
 
 **Note:** Version bump only for package @alma-oss/spirit-example-next-with-app-router

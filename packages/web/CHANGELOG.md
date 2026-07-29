@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.2](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@5.0.1...@alma-oss/spirit-web@5.0.2) (2026-07-29)
+
+### Bug Fixes
+
+- **demo:** fix order of icons in the Button loading state #DS-2674, closes [#DS-2674](https://github.com/alma-oss/spirit-design-system/issues/DS-2674)
+- **demo:** omit href from Collapse tertiary trigger button #DS-2675, closes [#DS-2675](https://github.com/alma-oss/spirit-design-system/issues/DS-2675)
+- **web:** add missing margin utility class generation #DS-2682, closes [#DS-2682](https://github.com/alma-oss/spirit-design-system/issues/DS-2682)
+- **web:** set only correct min-height in Tag #DS-2690, closes [#DS-2690](https://github.com/alma-oss/spirit-design-system/issues/DS-2690)
+
+### Documentation
+
+- **repo:** use commit subjects for 5.0.0 backwards-incompatible updates #DS-2683, closes [#DS-2683](https://github.com/alma-oss/spirit-design-system/issues/DS-2683)
+- **web:** make partial-conflict components renderable in docsite preview, closes [#DS-2221](https://github.com/alma-oss/spirit-design-system/issues/DS-2221)
+- **web:** make rest of the components renderable in docsite preview, closes [#DS-2221](https://github.com/alma-oss/spirit-design-system/issues/DS-2221)
+
 ## [5.0.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@5.0.0...@alma-oss/spirit-web@5.0.1) (2026-07-13)
 
 ### Bug Fixes

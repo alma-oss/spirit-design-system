@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@3.0.0...@lmc-eu/spirit-demo-app@3.0.1) (2026-07-29)
+
+### Bug Fixes
+
+- **demo:** dedupe icons build so storybook starts with make start
+
 ## [3.0.0](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@2.1.0...@lmc-eu/spirit-demo-app@3.0.0) (2026-07-08)
 
 ### ⚠ BREAKING CHANGES
