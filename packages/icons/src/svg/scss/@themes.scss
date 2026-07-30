@@ -1,0 +1,15 @@
+@use 'sass:meta';
+@use 'themes/theme-light-default';
+@use 'themes/theme-light-on-brand';
+
+// The first theme is the default theme, as the left column in the Figma table.
+$themes: (
+    theme-light-default: (
+        variables: meta.module-variables(theme-light-default),
+        mixins: meta.module-mixins(theme-light-default),
+    ),
+    theme-light-on-brand: (
+        variables: meta.module-variables(theme-light-on-brand),
+        mixins: meta.module-mixins(theme-light-on-brand),
+    ),
+);
