@@ -130,6 +130,10 @@ export const componentPricingPlanHighlightedBackground = '#4e2ea6';
 export const componentPricingPlanHighlightedBorder = '#e4daff';
 export const componentPricingPlanHighlightedContent = '#ffcb33';
 
+export const componentTagSelectedBackground = '#7847ff';
+export const componentTagSelectedBorder = '#5432b3';
+export const componentTagSelectedContent = '#fff';
+
 export const componentToggleSelectedBorder = '#a07eff';
 export const componentToggleSelectedContent = '#fff';
 export const componentToggleSelectedStateActive = '#3e9b4f';
@@ -221,9 +225,11 @@ export const gradientBasicOverlayColor02 = '#60606000';
 
 export const gradientPrimaryColor01 = '#7847ff';
 export const gradientPrimaryColor02 = '#482b99';
+export const gradientPrimaryColor03 = '#fff';
 
 export const gradientSecondaryColor01 = '#35818e';
 export const gradientSecondaryColor02 = '#482b99';
+export const gradientSecondaryColor03 = '#fff';
 
 export const gradientSkeletonColor01 = '#6c40e5';
 export const gradientSkeletonColor02 = '#936cff';
