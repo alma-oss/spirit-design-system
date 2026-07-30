@@ -10,6 +10,7 @@ import {
   validHtmlAttributesTest,
 } from '@local/tests';
 import { SizesExtended } from '../../../constants';
+import { PropsProvider } from '../../../context';
 import { Icon } from '../../Icon';
 import NavigationAvatar from '../NavigationAvatar';
 
@@ -73,6 +74,28 @@ describe('NavigationAvatar', () => {
     );
 
     expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  it('should read elementType from context', () => {
+    render(
+      <PropsProvider value={{ elementType: 'button' }}>
+        <NavigationAvatar avatarContent={avatarContentMock}>Content</NavigationAvatar>
+      </PropsProvider>,
+    );
+
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  it('should allow explicit elementType to override context', () => {
+    render(
+      <PropsProvider value={{ elementType: 'button' }}>
+        <NavigationAvatar avatarContent={avatarContentMock} elementType="div">
+          Content
+        </NavigationAvatar>
+      </PropsProvider>,
+    );
+
+    expect(screen.getByText('Content').localName).toBe('div');
   });
 
   it.each(Object.values(SizesExtended))('should render %s size avatar', (size) => {
