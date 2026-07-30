@@ -9,7 +9,7 @@ To distribute fields inside the FieldGroup, use the [Flex][readme-flex] componen
 ```html
 <fieldset class="border-0">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="Label" aria-hidden="true">Label</div>
+  <div class="Label Label--medium" aria-hidden="true">Label</div>
   <div
     class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
     style="--flex-spacing-y: var(--spirit-space-500);"
@@ -41,7 +41,7 @@ element.
 ```html
 <fieldset class="border-0">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="Label Label--required" aria-hidden="true">Label</div>
+  <div class="Label Label--medium Label--required" aria-hidden="true">Label</div>
   <div
     class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
     style="--flex-spacing-y: var(--spirit-space-500);"
@@ -83,7 +83,7 @@ To render helper text, use the [HelperText][readme-helper-text] component:
 ```html
 <fieldset class="border-0" aria-describedby="field-group-helper-text">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="Label" aria-hidden="true">Label</div>
+  <div class="Label Label--medium" aria-hidden="true">Label</div>
   <div
     class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
     style="--flex-spacing-y: var(--spirit-space-500);"
@@ -121,13 +121,13 @@ disabled styling on all elements.
 ```html
 <fieldset class="border-0" disabled>
   <legend class="accessibility-hidden">Label</legend>
-  <div class="Label" aria-hidden="true">Label</div>
+  <div class="Label Label--medium" aria-hidden="true">Label</div>
   <div
     class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
     style="--flex-spacing-y: var(--spirit-space-500);"
   >
     <div>
-      <label for="text-field" class="Label Label--disabled">Label</label>
+      <label for="text-field" class="Label Label--medium Label--disabled">Label</label>
       <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
         <input type="text" id="text-field" name="textField" placeholder="Placeholder" disabled />
       </div>
@@ -143,7 +143,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
 ```html
 <fieldset class="border-0" aria-describedby="field-group-success-validation-text">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="Label" aria-hidden="true">Label</div>
+  <div class="Label Label--medium" aria-hidden="true">Label</div>
   <div
     class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
     style="--flex-spacing-y: var(--spirit-space-500);"
