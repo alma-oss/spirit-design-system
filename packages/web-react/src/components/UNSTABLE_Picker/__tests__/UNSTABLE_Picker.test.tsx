@@ -82,7 +82,7 @@ describe('UNSTABLE_Picker', () => {
 
     expect(screen.getByRole('row', { name: 'Czech' })).toBeInTheDocument();
 
-    fireEvent.click(screen.getByLabelText('Remove Czech'));
+    fireEvent.click(screen.getByRole('button', { name: 'Remove Czech' }));
 
     expect(onSelectionChange).toHaveBeenCalledWith([]);
   });

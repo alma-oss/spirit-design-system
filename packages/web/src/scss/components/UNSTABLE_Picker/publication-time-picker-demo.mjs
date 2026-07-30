@@ -6,6 +6,7 @@ import {
   SELECTOR_TAG_ROW,
   SELECTOR_TAG_LABEL,
   SELECTOR_TAG_CLOSE,
+  SELECTOR_TAG_CLOSE_LABEL,
   initPopoverBehavior,
 } from './picker-demo';
 
@@ -44,7 +45,7 @@ function renderPublicationTimeSelection(selectionEl, popoverEl) {
   row.setAttribute('aria-label', radioLabel);
   row.setAttribute('tabindex', '0');
   tag.querySelector(SELECTOR_TAG_LABEL).textContent = radioLabel;
-  tag.querySelector(SELECTOR_TAG_CLOSE).setAttribute('aria-label', `Remove ${radioLabel}`);
+  tag.querySelector(SELECTOR_TAG_CLOSE_LABEL).textContent = `Remove ${radioLabel}`;
 
   const resetToDefault = () => {
     if (anyRadio) anyRadio.checked = true;

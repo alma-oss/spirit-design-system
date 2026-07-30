@@ -4,10 +4,9 @@ import React, { useMemo } from 'react';
 import { Sizes } from '../../constants';
 import { useI18n } from '../../hooks';
 import { replaceTranslationParams } from '../../translations';
-import { ControlButton } from '../ControlButton';
-import { Icon } from '../Icon';
+import { CloseButton } from '../CloseButton';
 import { Tag } from '../Tag';
-import { PICKER_NESTED_CONTROL_BUTTON_SIZE_MAP, PICKER_NESTED_SIZE_MAP } from './constants';
+import { PICKER_NESTED_CLOSE_BUTTON_SIZE_MAP, PICKER_NESTED_SIZE_MAP } from './constants';
 import { usePickerContext } from './PickerContext';
 import type { SpiritUnstablePickerTagProps } from './types';
 import { getNodeText } from './utils';
@@ -24,7 +23,7 @@ const UNSTABLE_PickerTag = ({
   const { t } = useI18n();
   const { size = Sizes.MEDIUM, tagDescriptionId } = usePickerContext();
 
-  const removeButtonAriaLabel =
+  const removeButtonLabel =
     removeLabel ??
     replaceTranslationParams(t('picker.removeItemLabel'), {
       itemLabel: getNodeText(label),
@@ -57,16 +56,13 @@ const UNSTABLE_PickerTag = ({
     >
       <div role="gridcell" aria-colindex={1} className="d-contents">
         {children ?? <span>{label}</span>}
-        <ControlButton
-          aria-label={removeButtonAriaLabel}
+        <CloseButton
           isDisabled={isDisabled}
-          isSymmetrical
+          label={removeButtonLabel}
           onClick={onRemove}
-          size={PICKER_NESTED_CONTROL_BUTTON_SIZE_MAP[size]}
+          size={PICKER_NESTED_CLOSE_BUTTON_SIZE_MAP[size]}
           {...(tagKeyboardProps && { tabIndex: tagKeyboardProps.removeButtonTabIndex })}
-        >
-          <Icon name="close" />
-        </ControlButton>
+        />
       </div>
     </Tag>
   );

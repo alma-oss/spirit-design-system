@@ -50,7 +50,6 @@
       <span data-tag-label><!-- Tag label comes here --></span>
       <button
         type="button"
-        aria-label="Remove"
         class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
         data-tag-close
       >
@@ -62,6 +61,10 @@
         >
           <use href="/assets/icons/svg/sprite.svg#close" />
         </svg>
+        <span
+          class="accessibility-hidden"
+          data-tag-close-label
+        >Remove</span>
       </button>
     </div>
   </div>
