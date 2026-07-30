@@ -118,14 +118,11 @@ Place a hidden `<span>` with a unique `id` anywhere in the `<body>` and referenc
     <!-- Tag content start -->
     <div role="gridcell" aria-colindex="1" class="d-contents">
       <span>Czech</span>
-      <button
-        type="button"
-        aria-label="Remove Czech"
-        class="ControlButton ControlButton--xsmall ControlButton--symmetrical"
-      >
+      <button type="button" class="ControlButton ControlButton--xsmall ControlButton--symmetrical">
         <svg class="Icon" width="16" height="16" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#close" />
         </svg>
+        <span class="accessibility-hidden">Remove Czech</span>
       </button>
     </div>
     <!-- Tag content end -->
@@ -309,14 +306,11 @@ Each size expects a specific Tag and ControlButton size inside the selection are
         >
           <div role="gridcell" aria-colindex="1" class="d-contents">
             <span>Czech</span>
-            <button
-              type="button"
-              aria-label="Remove Czech"
-              class="ControlButton ControlButton--xsmall ControlButton--symmetrical"
-            >
+            <button type="button" class="ControlButton ControlButton--xsmall ControlButton--symmetrical">
               <svg class="Icon" width="16" height="16" aria-hidden="true">
                 <use href="/icons/svg/sprite.svg#close" />
               </svg>
+              <span class="accessibility-hidden">Remove Czech</span>
             </button>
           </div>
         </div>
@@ -410,15 +404,11 @@ inside the selection area (remove buttons) to disable the Picker.
         <div role="row" tabindex="0" aria-label="Czech" class="Tag Tag--selected Tag--small disabled">
           <div role="gridcell" aria-colindex="1" class="d-contents">
             <span>Czech</span>
-            <button
-              type="button"
-              aria-label="Remove Czech"
-              class="ControlButton ControlButton--xsmall ControlButton--symmetrical"
-              disabled
-            >
+            <button type="button" class="ControlButton ControlButton--xsmall ControlButton--symmetrical" disabled>
               <svg class="Icon" width="16" height="16" aria-hidden="true">
                 <use href="/icons/svg/sprite.svg#close" />
               </svg>
+              <span class="accessibility-hidden">Remove Czech</span>
             </button>
           </div>
         </div>

@@ -3,6 +3,7 @@
 export const SELECTOR_TAG_ROW = '[data-tag-row]';
 export const SELECTOR_TAG_LABEL = '[data-tag-label]';
 export const SELECTOR_TAG_CLOSE = '[data-tag-close]';
+export const SELECTOR_TAG_CLOSE_LABEL = '[data-tag-close-label]';
 
 export const ID_SELECTION_LABEL_TEMPLATE = 'picker-selection-label-template';
 export const ID_TAG_TEMPLATE = 'picker-tag-template';
@@ -59,7 +60,7 @@ function createTag(tagLabel, selectionEl, onClose, sizeConfig, tagClass, isDisab
 
   const removeButton = tag.querySelector(SELECTOR_TAG_CLOSE);
 
-  removeButton.setAttribute('aria-label', `Remove ${tagLabel}`);
+  removeButton.querySelector(SELECTOR_TAG_CLOSE_LABEL).textContent = `Remove ${tagLabel}`;
   removeButton.setAttribute('tabindex', '-1');
 
   if (sizeConfig) {

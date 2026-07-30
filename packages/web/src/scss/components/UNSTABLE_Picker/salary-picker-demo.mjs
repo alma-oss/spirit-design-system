@@ -6,6 +6,7 @@ import {
   SELECTOR_TAG_ROW,
   SELECTOR_TAG_LABEL,
   SELECTOR_TAG_CLOSE,
+  SELECTOR_TAG_CLOSE_LABEL,
   initPopoverBehavior,
 } from './picker-demo';
 
@@ -66,7 +67,7 @@ export function initSalaryPicker() {
     row.setAttribute('tabindex', '0');
     tag.querySelector(SELECTOR_TAG_LABEL).textContent = label;
     tag.querySelector(SELECTOR_TAG_LABEL).style.fontVariantNumeric = 'tabular-nums';
-    tag.querySelector(SELECTOR_TAG_CLOSE).setAttribute('aria-label', `Remove ${label}`);
+    tag.querySelector(SELECTOR_TAG_CLOSE_LABEL).textContent = `Remove ${label}`;
     tag.querySelector(SELECTOR_TAG_CLOSE).addEventListener('click', function (event) {
       event.preventDefault();
       event.stopPropagation();
