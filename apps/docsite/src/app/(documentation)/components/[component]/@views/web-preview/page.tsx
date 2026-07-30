@@ -1,3 +1,7 @@
+import { readFile } from 'fs/promises';
+import { join } from 'path';
+import WebPreviewContent from '@local/domains/components/ui/WebPreviewContent';
+import { compilePreview } from '@local/domains/components/utils/compilePreview';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
 import { notFound } from 'next/navigation';
 import React from 'react';
@@ -16,17 +20,16 @@ const WebPreviewTabPage = async ({ params }: WebPreviewTabProps) => {
   }
 
   try {
-    const { default: Preview } = await import(
-      `@workspace/web/scss/components/${slugToComponentName(component)}/preview.html`
+    const previewPath = join(
+      process.cwd(),
+      '../../packages/web/src/scss/components',
+      slugToComponentName(component),
+      'preview.html',
     );
-    const htmlDoc = { __html: Preview };
+    const source = await readFile(previewPath, 'utf-8');
+    const html = compilePreview(source);
 
-    return (
-      <>
-        {/* eslint-disable-next-line react/no-danger -- rendering HTML preview, static */}
-        <div dangerouslySetInnerHTML={htmlDoc} />
-      </>
-    );
+    return <WebPreviewContent html={html} />;
   } catch (error) {
     logError(`[ComponentView] Failed to load Web Preview for "${component}":`, error);
 
