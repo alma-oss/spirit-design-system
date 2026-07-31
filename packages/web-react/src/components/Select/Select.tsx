@@ -44,9 +44,9 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
         isDisabled,
         isRequired,
         validationState,
+        formFields: { size },
         label: { isLabelHidden },
-        inputContainer: { size, variant },
-        inputAddon: { size },
+        inputContainer: { variant },
       }}
     >
       <UniversalProvider values={[[FormFieldsContext, { size }]]}>
