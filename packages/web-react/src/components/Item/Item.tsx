@@ -44,9 +44,8 @@ const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Ele
     <PropsProvider
       value={{
         isDisabled,
-        label: { elementType: 'span', isItem: true },
-        helperText: { elementType: 'span' },
-        validationText: { elementType: 'span' },
+        inlineElements: { elementType: 'span' },
+        label: { isItem: true },
       }}
     >
       <Component {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && Component === 'button'}>

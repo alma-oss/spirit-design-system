@@ -45,9 +45,7 @@ const _StackItem = <E extends ElementType = 'div'>(
       <PropsProvider
         value={{
           stackItem: { elementType: null },
-          label: { elementType: null },
-          helperText: { elementType: null },
-          validationText: { elementType: null },
+          inlineElements: { elementType: null },
         }}
       >
         {children}

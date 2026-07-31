@@ -1,7 +1,7 @@
 'use client';
 
 import { type ReactNode, createContext, createElement, useContext } from 'react';
-import { isNullish } from '../utils';
+import { isNullish, isPlainObject, omitNullish } from '../utils';
 
 type PropsContextType = Record<string, unknown> | null;
 
@@ -14,10 +14,20 @@ type PropsContextType = Record<string, unknown> | null;
  */
 const GLOBAL_PROPS = ['isDisabled', 'isRequired', 'validationState'] as const;
 
-const PropsContext = createContext<PropsContextType>(null);
+/**
+ * Named groups of namespaces that additionally cascade a shared value beneath `GLOBAL_PROPS`.
+ *
+ * Unlike global props, a group value only reaches consumers whose namespace is listed as a
+ * member, so it doesn't leak into unrelated components (e.g. a group used for `elementType`
+ * doesn't reach `label` unless `label` is a member; a group used for `size` never reaches
+ * `Button`/`SplitButton`, whose size type is incompatible).
+ */
+const NAMESPACE_GROUPS = {
+  inlineElements: ['label', 'helperText', 'validationText'],
+  formFields: ['inputContainer', 'inputAddon', 'controlButton'],
+} as const;
 
-const isPlainObject = (value: unknown): value is Record<string, unknown> =>
-  typeof value === 'object' && value !== null && !Array.isArray(value);
+const PropsContext = createContext<PropsContextType>(null);
 
 /**
  * Picks the global props that are present (non-nullish) in the given context.
@@ -25,36 +35,26 @@ const isPlainObject = (value: unknown): value is Record<string, unknown> =>
  * @param {Record<string, unknown>} context - The current context value.
  * @returns {Record<string, unknown>} An object containing only the present global props.
  */
-const pickGlobalProps = (context: Record<string, unknown>): Record<string, unknown> => {
-  const globalProps: Record<string, unknown> = {};
-
-  for (const key of GLOBAL_PROPS) {
-    if (!isNullish(context[key])) {
-      globalProps[key] = context[key];
-    }
-  }
-
-  return globalProps;
-};
+const pickGlobalProps = (context: Record<string, unknown>): Record<string, unknown> =>
+  GLOBAL_PROPS.reduce<Record<string, unknown>>(
+    (globalProps, key) => (isNullish(context[key]) ? globalProps : { ...globalProps, [key]: context[key] }),
+    {},
+  );
 
 /**
- * Removes `null`/`undefined` values so they cannot clobber component defaults downstream.
+ * Picks the props of any namespace group the given namespace belongs to.
  *
- * @template T - The type of the props object.
- * @param {T} value - The object to filter.
- * @returns {T} A new object without nullish values.
+ * @param {Record<string, unknown>} context - The current context value.
+ * @param {string} [namespace] - The namespace to check group membership for.
+ * @returns {Record<string, unknown>} An object containing the applicable group props.
  */
-const omitNullish = <T extends Record<string, unknown>>(value: T): T => {
-  const result: Record<string, unknown> = {};
+const pickGroupProps = (context: Record<string, unknown>, namespace?: string): Record<string, unknown> =>
+  Object.entries(NAMESPACE_GROUPS).reduce<Record<string, unknown>>((groupProps, [groupName, members]) => {
+    const isMember =
+      !!namespace && (members as readonly string[]).includes(namespace) && isPlainObject(context[groupName]);
 
-  for (const [key, propValue] of Object.entries(value)) {
-    if (!isNullish(propValue)) {
-      result[key] = propValue;
-    }
-  }
-
-  return result as T;
-};
+    return isMember ? { ...groupProps, ...(context[groupName] as Record<string, unknown>) } : groupProps;
+  }, {});
 
 /**
  * Merges an incoming provider value into the inherited (parent) context value.
@@ -112,13 +112,14 @@ const PropsConsumer = PropsContext.Consumer;
  * Merges context props into the props passed directly to a component.
  *
  * Namespace props concept, the context value is namespaced by component:
- * a consumer reads only the props addressed to its namespace (plus the top-level global props),
- * so props from sibling providers do not collide. The namespace defaults to `defaultNamespace`
- * but can be overridden per instance via the component's `propsContext` prop.
+ * a consumer reads only the props addressed to its namespace (plus the top-level global props
+ * and any namespace-group props it belongs to, see `NAMESPACE_GROUPS`), so props from sibling
+ * providers do not collide. The namespace defaults to `defaultNamespace` but can be overridden
+ * per instance via the component's `propsContext` prop.
  *
- * Precedence (low → high): global props < namespace props < direct props. `null`/`undefined`
- * values are stripped so component defaults can still apply, and the `propsContext` addressing
- * prop is removed from the result.
+ * Precedence (low → high): global props < group props < namespace props < direct props.
+ * `null`/`undefined` values are stripped so component defaults can still apply, and the
+ * `propsContext` addressing prop is removed from the result.
  *
  * @template T - The type of the props object.
  * @param {T} props - Props passed directly to the component.
@@ -133,12 +134,13 @@ const useContextProps = <T extends Record<string, unknown>>(props: T = {} as T, 
   const namespaceProps =
     namespace && isPlainObject(context[namespace]) ? (context[namespace] as Record<string, unknown>) : {};
   const globalProps = pickGlobalProps(context);
+  const groupProps = pickGroupProps(context, namespace);
 
-  // Precedence (low → high): global props < namespace props < direct props.
-  const mergedProps = { ...globalProps, ...namespaceProps, ...restProps };
+  // Precedence (low → high): global props < group props < namespace props < direct props.
+  const mergedProps = { ...globalProps, ...groupProps, ...namespaceProps, ...restProps };
 
   return omitNullish(mergedProps) as T;
 };
 
 export default PropsContext;
-export { GLOBAL_PROPS, PropsConsumer, PropsProvider, useContextProps };
+export { GLOBAL_PROPS, NAMESPACE_GROUPS, PropsConsumer, PropsProvider, useContextProps };

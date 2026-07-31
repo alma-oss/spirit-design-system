@@ -37,9 +37,7 @@ const _Stack = <E extends ElementType = 'div'>(props: SpiritStackProps<E>, ref: 
     <PropsProvider
       value={{
         stackItem: { elementType: itemElementType },
-        label: { elementType: itemElementType },
-        helperText: { elementType: itemElementType },
-        validationText: { elementType: itemElementType },
+        inlineElements: { elementType: itemElementType },
       }}
     >
       <Component {...otherProps} {...mergedStyleProps} ref={ref}>
