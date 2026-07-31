@@ -40,7 +40,7 @@ const _StackItem = <E extends ElementType = 'div'>(
     <Component {...filterDOMProps(otherProps)} {...mergedStyleProps} ref={ref}>
       <PropsProvider
         value={{
-          listItems: { elementType: null },
+          stackItem: { elementType: null },
           inlineElements: { elementType: null },
         }}
       >

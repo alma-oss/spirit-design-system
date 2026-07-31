@@ -55,6 +55,48 @@ describe('useContextProps', () => {
     expect(result.current).toEqual({});
   });
 
+  describe('namespace groups', () => {
+    it('should apply a group prop to a member namespace', () => {
+      const { result } = renderHook(() => useContextProps<ContextValue>({}, 'label'), {
+        wrapper: createWrapper({ inlineElements: { elementType: 'span' } }),
+      });
+
+      expect(result.current).toEqual({ elementType: 'span' });
+    });
+
+    it('should not apply a group prop to a non-member namespace', () => {
+      const { result } = renderHook(() => useContextProps<ContextValue>({}, 'button'), {
+        wrapper: createWrapper({ inlineElements: { elementType: 'span' } }),
+      });
+
+      expect(result.current).toEqual({});
+    });
+
+    it('should prefer namespace props over group props', () => {
+      const { result } = renderHook(() => useContextProps<ContextValue>({}, 'label'), {
+        wrapper: createWrapper({ inlineElements: { elementType: 'span' }, label: { elementType: 'strong' } }),
+      });
+
+      expect(result.current).toEqual({ elementType: 'strong' });
+    });
+
+    it('should prefer group props over global props', () => {
+      const { result } = renderHook(() => useContextProps<ContextValue>({}, 'inputContainer'), {
+        wrapper: createWrapper({ isDisabled: true, formFields: { isDisabled: false } }),
+      });
+
+      expect(result.current).toEqual({ isDisabled: false });
+    });
+
+    it('should prefer direct props over group props', () => {
+      const { result } = renderHook(() => useContextProps<ContextValue>({ elementType: 'p' }, 'validationText'), {
+        wrapper: createWrapper({ inlineElements: { elementType: 'span' } }),
+      });
+
+      expect(result.current).toEqual({ elementType: 'p' });
+    });
+  });
+
   describe('precedence (direct props > namespace props > global props)', () => {
     it('should prefer namespace props over global props', () => {
       const { result } = renderHook(() => useContextProps<ContextValue>({}, 'button'), {

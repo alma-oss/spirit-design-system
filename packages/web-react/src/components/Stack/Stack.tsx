@@ -36,10 +36,7 @@ const _Stack = <E extends ElementType = 'div'>(props: SpiritStackProps<E>, ref: 
   return (
     <PropsProvider
       value={{
-        // Set even when itemElementType is undefined: a Stack nested inside an Item must reset
-        // any inherited elementType override (e.g. Item's inlineElements: 'span') for its own
-        // children, instead of letting it leak through unmodified.
-        listItems: { elementType: itemElementType },
+        stackItem: { elementType: itemElementType },
         inlineElements: { elementType: itemElementType },
       }}
     >
