@@ -5,7 +5,7 @@ import { Sizes } from '../../constants';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type FormFieldContextValue } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { type SpiritInputAddonProps } from './types';
 import { useInputAddonStyleProps } from './useInputAddonStyleProps';
 
@@ -20,17 +20,14 @@ const InputAddon = <E extends ElementType = 'div'>(props: SpiritInputAddonProps<
     'inputAddon',
   );
   const propsWithDefaults = { ...defaultProps, ...mergedProps };
-  // isDisabled/isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isDisabled, isRequired, validationState, ...ownProps } = propsWithDefaults;
-  const { classProps, props: modifiedProps } = useInputAddonStyleProps(ownProps);
+  const { classProps, props: modifiedProps } = useInputAddonStyleProps(propsWithDefaults as SpiritInputAddonProps<E>);
   const { children, elementType, ...restProps } = modifiedProps;
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const Component = (elementType || defaultProps.elementType) as ElementType;
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
-    <Component {...otherProps} {...mergedStyleProps}>
+    <Component {...filterDOMProps(otherProps)} {...mergedStyleProps}>
       {children}
     </Component>
   );

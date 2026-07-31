@@ -4,7 +4,7 @@ import React, { type ElementType, useEffect } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type FormFieldContextValue, type InputDetailsProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { useInputDetailsStyleProps } from './useInputDetailsStyleProps';
 
 const defaultProps: Partial<InputDetailsProps> = {
@@ -20,19 +20,14 @@ const InputDetails = <E extends ElementType = 'div'>(props: InputDetailsProps<E>
     'inputDetails',
   );
   const propsWithDefaults = { ...defaultProps, ...mergedProps };
-  // isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
-  /* eslint-disable @typescript-eslint/no-unused-vars */
   const {
     children,
     elementType: ElementTag = defaultProps.elementType as ElementType,
     id,
     isDisabled,
-    isRequired,
     registerAriaDetails,
-    validationState,
     ...restProps
   } = propsWithDefaults;
-  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const { classProps } = useInputDetailsStyleProps({ isDisabled });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
@@ -51,7 +46,7 @@ const InputDetails = <E extends ElementType = 'div'>(props: InputDetailsProps<E>
   }, [id, registerAriaDetails]);
 
   return (
-    <ElementTag {...transferProps} {...mergedStyleProps} id={id}>
+    <ElementTag {...filterDOMProps(transferProps)} {...mergedStyleProps} id={id}>
       {children}
     </ElementTag>
   );

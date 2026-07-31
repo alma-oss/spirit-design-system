@@ -10,7 +10,7 @@ import {
   type SpiritStackItemProps,
   type StackItemProps,
 } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { useStackStyleProps } from './useStackStyleProps';
 
 const defaultProps = {
@@ -26,9 +26,7 @@ const _StackItem = <E extends ElementType = 'div'>(
     'stackItem',
   );
   const propsWithDefaults = { ...defaultProps, ...mergedProps };
-  // isDisabled/isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { children, elementType, isDisabled, isRequired, validationState, ...restProps } = propsWithDefaults;
+  const { children, elementType, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
 
@@ -41,7 +39,7 @@ const _StackItem = <E extends ElementType = 'div'>(
   });
 
   return (
-    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
+    <Component {...filterDOMProps(otherProps)} {...mergedStyleProps} ref={ref}>
       <PropsProvider
         value={{
           stackItem: { elementType: null },

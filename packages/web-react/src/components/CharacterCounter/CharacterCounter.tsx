@@ -3,7 +3,7 @@
 import React from 'react';
 import { useContextProps } from '../../context';
 import { type FormFieldContextValue } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { type SpiritCharacterCounterProps } from './types';
 import { useCharacterCounter } from './useCharacterCounterState';
@@ -13,10 +13,7 @@ const CharacterCounter = (props: SpiritCharacterCounterProps) => {
   const mergedProps = useContextProps<
     Partial<Omit<FormFieldContextValue, 'elementType'> & SpiritCharacterCounterProps>
   >(props, 'characterCounter');
-  // isRequired is discarded here so it never leaks onto the DOM as a raw attribute
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isRequired, ...ownProps } = mergedProps;
-  const { classProps, props: restProps } = useCharacterCounterStyleProps(ownProps as SpiritCharacterCounterProps);
+  const { classProps, props: restProps } = useCharacterCounterStyleProps(mergedProps as SpiritCharacterCounterProps);
   const {
     debouncedScreenReaderMessage,
     isVisible,
@@ -29,7 +26,7 @@ const CharacterCounter = (props: SpiritCharacterCounterProps) => {
 
   return isVisible ? (
     <>
-      <div {...transferProps} {...mergedStyleProps} aria-hidden="true">
+      <div {...filterDOMProps(transferProps)} {...mergedStyleProps} aria-hidden="true">
         {visibleCounterText}
       </div>
       <VisuallyHidden id={screenReaderMessageId} aria-live="polite" aria-atomic="true">

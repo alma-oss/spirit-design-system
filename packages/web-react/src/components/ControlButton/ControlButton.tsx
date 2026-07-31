@@ -11,7 +11,7 @@ import {
   type PolymorphicRef,
   type SpiritControlButtonProps,
 } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { useControlButtonProps } from './useControlButtonProps';
 import { useControlButtonStyleProps } from './useControlButtonStyleProps';
 
@@ -32,16 +32,7 @@ const _ControlButton = <E extends ElementType = 'button', S = void>(
     Omit<FormFieldContextValue, 'elementType'> & SpiritControlButtonProps<E, S>
   >;
   const propsWithDefaults = { ...defaultProps, ...mergedProps };
-  // isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
-  /* eslint-disable @typescript-eslint/no-unused-vars */
-  const {
-    elementType = defaultProps.elementType,
-    children,
-    isRequired,
-    validationState,
-    ...restProps
-  } = propsWithDefaults;
-  /* eslint-enable @typescript-eslint/no-unused-vars */
+  const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
 
@@ -59,7 +50,7 @@ const _ControlButton = <E extends ElementType = 'button', S = void>(
   });
 
   return (
-    <Component {...otherProps} {...controlButtonProps} ref={ref} {...mergedStyleProps}>
+    <Component {...filterDOMProps(otherProps)} {...controlButtonProps} ref={ref} {...mergedStyleProps}>
       {children}
     </Component>
   );

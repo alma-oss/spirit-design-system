@@ -4,7 +4,7 @@ import React, { type ElementType } from 'react';
 import { PropsProvider, useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type FormFieldContextValue, type SpiritItemProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { useItemStyleProps } from './useItemStyleProps';
 
 const defaultProps: Partial<SpiritItemProps> = {
@@ -17,20 +17,7 @@ const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Ele
     'stackItem',
   );
   const propsWithDefaults = { ...defaultProps, ...mergedProps };
-  // isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
-  /* eslint-disable @typescript-eslint/no-unused-vars */
-  const {
-    children,
-    elementType,
-    endSlot,
-    isDisabled,
-    isRequired,
-    isSelected,
-    startSlot,
-    validationState,
-    ...restProps
-  } = propsWithDefaults;
-  /* eslint-enable @typescript-eslint/no-unused-vars */
+  const { children, elementType, endSlot, isDisabled, isSelected, startSlot, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;
   const { classProps, props: modifiedProps } = useItemStyleProps({
     isSelected,
@@ -48,7 +35,11 @@ const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Ele
         label: { isItem: true },
       }}
     >
-      <Component {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && Component === 'button'}>
+      <Component
+        {...filterDOMProps(otherProps)}
+        {...mergedStyleProps}
+        disabled={!!isDisabled && Component === 'button'}
+      >
         {startSlot && (
           <span className={classProps.slot} role="presentation">
             {startSlot}

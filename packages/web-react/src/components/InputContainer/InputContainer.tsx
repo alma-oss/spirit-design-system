@@ -5,7 +5,7 @@ import { FillVariants, Sizes } from '../../constants';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type FormFieldContextValue } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { type SpiritInputContainerProps } from './types';
 import { useInputContainerStyleProps } from './useInputContainerStyleProps';
 
@@ -20,17 +20,16 @@ const InputContainer = <E extends ElementType = 'div'>(props: SpiritInputContain
     Partial<Omit<FormFieldContextValue, 'elementType'> & SpiritInputContainerProps<E>>
   >(props, 'inputContainer');
   const propsWithDefaults = { ...defaultProps, ...mergedProps };
-  // isRequired is discarded here so it never leaks onto the DOM as a raw attribute
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isRequired, ...ownProps } = propsWithDefaults;
-  const { classProps, props: modifiedProps } = useInputContainerStyleProps(ownProps as SpiritInputContainerProps<E>);
+  const { classProps, props: modifiedProps } = useInputContainerStyleProps(
+    propsWithDefaults as SpiritInputContainerProps<E>,
+  );
   const { children, elementType, ...restProps } = modifiedProps;
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const Component = (elementType || defaultProps.elementType) as ElementType;
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
-    <Component {...otherProps} {...mergedStyleProps}>
+    <Component {...filterDOMProps(otherProps)} {...mergedStyleProps}>
       {children}
     </Component>
   );

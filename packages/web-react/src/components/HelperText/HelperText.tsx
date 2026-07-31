@@ -4,7 +4,7 @@ import React, { type ElementType, useEffect } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type FormFieldContextValue, type SpiritHelperTextProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { useHelperTextStyleProps } from './useHelperTextStyleProps';
 
 const defaultProps: Partial<SpiritHelperTextProps> = {
@@ -20,19 +20,14 @@ const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<
     'helperText',
   );
   const propsWithDefaults = { ...defaultProps, ...mergedProps };
-  // isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
-  /* eslint-disable @typescript-eslint/no-unused-vars */
   const {
     helperText,
     elementType: Component = defaultProps.elementType as ElementType,
     id,
     isDisabled,
-    isRequired,
     registerAria,
-    validationState,
     ...restProps
   } = propsWithDefaults;
-  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const { classProps } = useHelperTextStyleProps({ isDisabled });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
@@ -48,7 +43,7 @@ const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<
 
   if (helperText) {
     return (
-      <Component {...transferProps} {...mergedStyleProps} id={id}>
+      <Component {...filterDOMProps(transferProps)} {...mergedStyleProps} id={id}>
         {helperText}
       </Component>
     );
