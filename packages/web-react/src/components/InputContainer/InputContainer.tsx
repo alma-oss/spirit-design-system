@@ -28,7 +28,7 @@ const InputContainer = <E extends ElementType = 'div'>(props: SpiritInputContain
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
-    <Component {...otherProps} {...mergedStyleProps}>
+    <Component {...filterDOMProps(otherProps)} {...mergedStyleProps}>
       {children}
     </Component>
   );

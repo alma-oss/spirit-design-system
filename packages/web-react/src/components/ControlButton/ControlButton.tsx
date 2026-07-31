@@ -11,7 +11,7 @@ import {
   type SpiritControlButtonProps,
   type WithFormFieldContext,
 } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { useControlButtonProps } from './useControlButtonProps';
 import { useControlButtonStyleProps } from './useControlButtonStyleProps';
 
@@ -49,7 +49,7 @@ const _ControlButton = <E extends ElementType = 'button', S = void>(
   });
 
   return (
-    <Component {...otherProps} {...controlButtonProps} ref={ref} {...mergedStyleProps}>
+    <Component {...filterDOMProps(otherProps)} {...controlButtonProps} ref={ref} {...mergedStyleProps}>
       {children}
     </Component>
   );

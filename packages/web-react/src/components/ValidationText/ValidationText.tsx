@@ -28,11 +28,8 @@ const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTe
     role,
     validationText,
     isDisabled,
-    isRequired,
-    validationState,
     ...restProps
   } = propsWithDefaults;
-  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const validationIconName = useValidationIcon({ validationStateIcon });
   const validationStateForStyles = validationStateIcon ?? mergedProps.validationState;
@@ -62,7 +59,7 @@ const ValidationText = <E extends ElementType = 'div'>(props: SpiritValidationTe
   const nonArrayValidationText = validationStateIcon ? <div>{validationText}</div> : validationText;
 
   return (
-    <Component {...transferProps} {...mergedStyleProps} id={id} role={role}>
+    <Component {...filterDOMProps(transferProps)} {...mergedStyleProps} id={id} role={role}>
       {validationStateIcon && <Icon name={validationIconName} boxSize={20} />}
       {Array.isArray(validationText) ? (
         <ul>
