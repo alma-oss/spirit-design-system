@@ -4,7 +4,7 @@ import React, { type ElementType, forwardRef } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type ButtonProps, type PolymorphicComponent, type PolymorphicRef, type SpiritButtonProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { Spinner } from '../Spinner';
 import { useButtonProps } from './useButtonProps';
 import { useButtonStyleProps } from './useButtonStyleProps';
@@ -28,9 +28,7 @@ const _Button = <E extends ElementType = 'button', C = void, S = void>(
 
   const { buttonProps } = useButtonProps(propsWithDefaults);
 
-  // isRequired/validationState are discarded here so they never leak onto the DOM as raw attributes
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { children, elementType, isRequired, validationState, ...restProps } = propsWithDefaults;
+  const { children, elementType, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
   const { classProps, props: modifiedProps, styleProps: buttonStyleProps } = useButtonStyleProps(restProps);
@@ -42,7 +40,7 @@ const _Button = <E extends ElementType = 'button', C = void, S = void>(
   });
 
   return (
-    <Component {...otherProps} {...buttonProps} ref={ref} {...mergedStyleProps}>
+    <Component {...filterDOMProps(otherProps)} {...buttonProps} ref={ref} {...mergedStyleProps}>
       {children}
       {restProps.isLoading && <Spinner />}
     </Component>

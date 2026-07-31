@@ -24,7 +24,7 @@ const CharacterCounter = (props: SpiritCharacterCounterProps) => {
 
   return isVisible ? (
     <>
-      <div {...transferProps} {...mergedStyleProps} aria-hidden="true">
+      <div {...filterDOMProps(transferProps)} {...mergedStyleProps} aria-hidden="true">
         {visibleCounterText}
       </div>
       <VisuallyHidden id={screenReaderMessageId} aria-live="polite" aria-atomic="true">

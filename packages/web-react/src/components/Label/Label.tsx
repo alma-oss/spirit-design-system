@@ -29,10 +29,8 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
     isStretched,
     isLabelHidden,
     isRequired,
-    validationState,
     ...restProps
   } = propsWithDefaults;
-  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const { classProps } = useLabelStyleProps({
     hasPointerCursor,
@@ -46,7 +44,7 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
 
   return (
     <ElementTag
-      {...transferProps}
+      {...filterDOMProps(transferProps)}
       {...mergedStyleProps}
       htmlFor={ElementTag === 'label' ? labelFor || htmlFor : undefined}
     >

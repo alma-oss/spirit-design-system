@@ -23,12 +23,9 @@ const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<
     elementType: Component = defaultProps.elementType as ElementType,
     id,
     isDisabled,
-    isRequired,
     registerAria,
-    validationState,
     ...restProps
   } = propsWithDefaults;
-  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const { classProps } = useHelperTextStyleProps({ isDisabled });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
@@ -44,7 +41,7 @@ const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<
 
   if (helperText) {
     return (
-      <Component {...transferProps} {...mergedStyleProps} id={id}>
+      <Component {...filterDOMProps(transferProps)} {...mergedStyleProps} id={id}>
         {helperText}
       </Component>
     );

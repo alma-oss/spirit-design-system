@@ -4,6 +4,7 @@ export * from './colorTokens';
 export * from './compose';
 export * from './debounce';
 export * from './delayedCallback';
+export * from './filterDOMProps';
 export * from './focusable';
 export * from './getColorSchemeClassName';
 export * from './getPlacementClassName';

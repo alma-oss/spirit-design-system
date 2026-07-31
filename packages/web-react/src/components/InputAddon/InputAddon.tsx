@@ -25,7 +25,7 @@ const InputAddon = <E extends ElementType = 'div'>(props: SpiritInputAddonProps<
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
-    <Component {...otherProps} {...mergedStyleProps}>
+    <Component {...filterDOMProps(otherProps)} {...mergedStyleProps}>
       {children}
     </Component>
   );
