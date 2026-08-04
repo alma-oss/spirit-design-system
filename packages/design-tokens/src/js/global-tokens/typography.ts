@@ -334,7 +334,7 @@ export const eyebrow = {
     fontFamily: "'Inter', sans-serif",
     fontSize: '0.875rem',
     fontStyle: 'normal',
-    fontWeight: 400,
+    fontWeight: 600,
     lineHeight: 1.4286,
   },
 };
