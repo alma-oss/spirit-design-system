@@ -43,7 +43,7 @@ import { VisuallyHidden } from '../VisuallyHidden';
 </button>
 ```
 
-### Vanilla HTML + custom SCSS
+### Vanilla HTML + Custom SCSS
 
 Use when you need a custom selector instead of the `.accessibility-hidden` helper class.
 
