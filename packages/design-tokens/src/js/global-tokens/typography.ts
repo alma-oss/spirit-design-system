@@ -241,7 +241,7 @@ export const caption = {
 
 export const codeLargeBold = {
   mobile: {
-    fontFamily: "'Roboto Mono', sans-serif",
+    fontFamily: "'Roboto Mono', monospace",
     fontSize: '1.125rem',
     fontStyle: 'normal',
     fontWeight: 700,
@@ -251,7 +251,7 @@ export const codeLargeBold = {
 
 export const codeLargeRegular = {
   mobile: {
-    fontFamily: "'Roboto Mono', sans-serif",
+    fontFamily: "'Roboto Mono', monospace",
     fontSize: '1.125rem',
     fontStyle: 'normal',
     fontWeight: 400,
@@ -261,7 +261,7 @@ export const codeLargeRegular = {
 
 export const codeMediumBold = {
   mobile: {
-    fontFamily: "'Roboto Mono', sans-serif",
+    fontFamily: "'Roboto Mono', monospace",
     fontSize: '1rem',
     fontStyle: 'normal',
     fontWeight: 700,
@@ -271,7 +271,7 @@ export const codeMediumBold = {
 
 export const codeMediumRegular = {
   mobile: {
-    fontFamily: "'Roboto Mono', sans-serif",
+    fontFamily: "'Roboto Mono', monospace",
     fontSize: '1rem',
     fontStyle: 'normal',
     fontWeight: 400,
@@ -281,7 +281,7 @@ export const codeMediumRegular = {
 
 export const codeSmallBold = {
   mobile: {
-    fontFamily: "'Roboto Mono', sans-serif",
+    fontFamily: "'Roboto Mono', monospace",
     fontSize: '0.875rem',
     fontStyle: 'normal',
     fontWeight: 700,
@@ -291,7 +291,7 @@ export const codeSmallBold = {
 
 export const codeSmallRegular = {
   mobile: {
-    fontFamily: "'Roboto Mono', sans-serif",
+    fontFamily: "'Roboto Mono', monospace",
     fontSize: '0.875rem',
     fontStyle: 'normal',
     fontWeight: 400,
