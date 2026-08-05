@@ -53,13 +53,14 @@ describe('buildSvg', () => {
     it('should normalize default icons to use currentColor and ignore fill="none"', () => {
       const svgName = 'close.svg';
       const svgContent =
-        '<svg viewBox="0 0 24 24"><path fill="#000000" /><path fill="none" stroke="#FF0000" /><circle fill="#ABCDEF" /></svg>';
+        '<svg viewBox="0 0 24 24"><path fill="#000000" /><path fill="black" /><path fill="none" stroke="#FF0000" /><circle fill="#ABCDEF" /></svg>';
 
       const output = normalizeSvgColors(svgName, svgContent);
 
       expect(output).not.toContain('#000000');
+      expect(output).not.toContain('fill="black"');
       expect(output).not.toContain('#ABCDEF');
-      expect(output.match(/fill="currentColor"/g)?.length).toBe(2);
+      expect(output.match(/fill="currentColor"/g)?.length).toBe(3);
       expect(output).toContain('fill="none"');
     });
   });
@@ -82,7 +83,7 @@ describe('buildSvg', () => {
       (readFileSyncMock as jest.Mock).mockImplementation((filePath: string) => {
         const name = path.basename(filePath);
         if (name === 'alpha.svg') {
-          return '<svg viewBox="0 0 24 24"><path fill="#000000" /></svg>';
+          return '<svg viewBox="0 0 24 24"><defs><clipPath id="clip"><rect width="24" height="24" /></clipPath></defs><g clip-path="url(#clip)"><path fill="#000000" /></g></svg>';
         }
         if (name === 'beta-dualtone.svg') {
           return `<svg viewBox="0 0 24 24"><rect fill="${DUALTONE_COLOR_BACKGROUND_DEFAULT}" /><path fill="${DUALTONE_COLOR_BORDER_DEFAULT}" /></svg>`;
@@ -112,6 +113,15 @@ describe('buildSvg', () => {
       expect(spriteContent).toContain('<symbol id="alpha"');
       expect(spriteContent).toContain('<symbol id="beta-dualtone"');
       expect(spriteContent).toContain('<symbol id="gamma-colored"');
+      expect(spriteContent).not.toContain('<clipPath');
+      expect(spriteContent).not.toContain('clip-path=');
+
+      const alphaContent = (writeFileSyncMock as jest.Mock).mock.calls.find(
+        ([filePath]) => filePath === path.join(distDir, 'alpha.svg'),
+      )[1];
+
+      expect(alphaContent).not.toContain('<clipPath');
+      expect(alphaContent).not.toContain('clip-path=');
       // Sprite wrapper
       expect(spriteContent.startsWith('<svg')).toBe(true);
       expect(spriteContent.trim().endsWith('</svg>')).toBe(true);
