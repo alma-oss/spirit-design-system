@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
-import { filterSvgFiles, getIconType, ICON_TYPE_DUALTONE, ICON_TYPE_COLORED, Logger } from './shared';
+import { filterSvgFiles, getIconType, ICON_TYPE_DUALTONE, ICON_TYPE_COLORED, Logger, stripSvgClipPaths } from './shared';
 
 const consoleLogger: Logger = {
   info: (msg) => console.log(msg),
@@ -31,7 +31,7 @@ export const normalizeSvgColors = (fileName: string, svgContent: string): string
       return svgContent;
 
     default:
-      return svgContent.replace(/fill="#\w+"/g, 'fill="currentColor"');
+      return svgContent.replace(/fill="(?!none|currentColor)(?:#[\da-fA-F]+|[a-zA-Z]+)"/g, 'fill="currentColor"');
   }
 };
 
@@ -52,7 +52,8 @@ export const normalizeAndCopySvg = (srcDir: string, distDir: string, logger: Log
         const svgPath = path.join(srcDir, svg);
         const svgDistPath = path.join(distDir, svg);
         const svgContent = fs.readFileSync(svgPath, 'utf8');
-        const svgContentNormalized = normalizeSvgColors(svg, svgContent);
+        const svgContentStripped = stripSvgClipPaths(svgContent);
+        const svgContentNormalized = normalizeSvgColors(svg, svgContentStripped);
         const svgSpriteContent = svgContentNormalized
           .replace(/<svg.*(viewBox="(\d+\s){3}\d+").*>/, `<symbol id="${svg.slice(0, -4)}" $1>`)
           .replace(/<\/svg>/g, '</symbol>');
