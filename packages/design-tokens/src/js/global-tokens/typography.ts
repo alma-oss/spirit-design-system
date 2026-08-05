@@ -42,9 +42,10 @@ export const bodyLargeBold = {
 export const bodyLargeBoldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '1.125rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.5556,
   },
 };
 
@@ -81,9 +82,10 @@ export const bodyLargeSemibold = {
 export const bodyLargeSemiboldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '1.125rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 600,
+    lineHeight: 1.5556,
   },
 };
 
@@ -102,7 +104,8 @@ export const bodyMediumBoldItalic = {
     fontFamily: "'Inter', sans-serif",
     fontSize: '1rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.5,
   },
 };
 
@@ -141,7 +144,8 @@ export const bodyMediumSemiboldItalic = {
     fontFamily: "'Inter', sans-serif",
     fontSize: '1rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 600,
+    lineHeight: 1.5,
   },
 };
 
@@ -158,9 +162,10 @@ export const bodySmallBold = {
 export const bodySmallBoldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '0.875rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.4286,
   },
 };
 
@@ -197,9 +202,10 @@ export const bodySmallSemibold = {
 export const bodySmallSemiboldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '0.875rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 600,
+    lineHeight: 1.4286,
   },
 };
 
@@ -216,9 +222,10 @@ export const bodyXlargeBold = {
 export const bodyXlargeBoldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '1.25rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.6,
   },
 };
 
@@ -255,9 +262,10 @@ export const bodyXlargeSemibold = {
 export const bodyXlargeSemiboldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '1.25rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 600,
+    lineHeight: 1.6,
   },
 };
 
@@ -274,9 +282,10 @@ export const bodyXsmallBold = {
 export const bodyXsmallBoldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '0.75rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.6667,
   },
 };
 
@@ -313,9 +322,10 @@ export const bodyXsmallSemibold = {
 export const bodyXsmallSemiboldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '0.75rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 600,
+    lineHeight: 1.6667,
   },
 };
 
@@ -402,9 +412,10 @@ export const displayLarge = {
 export const displayLargeItalic = {
   mobile: {
     fontFamily: "'General Sans', sans-serif",
-    fontSize: '1rem',
+    fontSize: '4.75rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.1316,
   },
 };
 
@@ -420,10 +431,11 @@ export const displayMedium = {
 
 export const displayMediumItalic = {
   mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontFamily: "'General Sans', sans-serif",
+    fontSize: '3.5rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.2143,
   },
 };
 
@@ -439,10 +451,11 @@ export const displaySmall = {
 
 export const displaySmallItalic = {
   mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontFamily: "'General Sans', sans-serif",
+    fontSize: '3rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.1667,
   },
 };
 
@@ -483,9 +496,24 @@ export const headingLargeBold = {
 export const headingLargeBoldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '2rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.1875,
+  },
+  tablet: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '2.5rem',
+    fontStyle: 'italic',
+    fontWeight: 700,
+    lineHeight: 1.2,
+  },
+  desktop: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '2.5rem',
+    fontStyle: 'italic',
+    fontWeight: 700,
+    lineHeight: 1.2,
   },
 };
 
@@ -564,9 +592,24 @@ export const headingLargeSemibold = {
 export const headingLargeSemiboldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '2rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 600,
+    lineHeight: 1.1875,
+  },
+  tablet: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '2.5rem',
+    fontStyle: 'italic',
+    fontWeight: 600,
+    lineHeight: 1.2,
+  },
+  desktop: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '2.5rem',
+    fontStyle: 'italic',
+    fontWeight: 600,
+    lineHeight: 1.2,
   },
 };
 
@@ -597,9 +640,24 @@ export const headingMediumBold = {
 export const headingMediumBoldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '1.5rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.1667,
+  },
+  tablet: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '2rem',
+    fontStyle: 'italic',
+    fontWeight: 700,
+    lineHeight: 1.1875,
+  },
+  desktop: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '2rem',
+    fontStyle: 'italic',
+    fontWeight: 700,
+    lineHeight: 1.1875,
   },
 };
 
@@ -678,9 +736,24 @@ export const headingMediumSemibold = {
 export const headingMediumSemiboldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '1.5rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 600,
+    lineHeight: 1.1667,
+  },
+  tablet: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '2rem',
+    fontStyle: 'italic',
+    fontWeight: 600,
+    lineHeight: 1.1875,
+  },
+  desktop: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '2rem',
+    fontStyle: 'italic',
+    fontWeight: 600,
+    lineHeight: 1.1875,
   },
 };
 
@@ -711,9 +784,24 @@ export const headingSmallBold = {
 export const headingSmallBoldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '1.25rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.2,
+  },
+  tablet: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.5rem',
+    fontStyle: 'italic',
+    fontWeight: 700,
+    lineHeight: 1.1667,
+  },
+  desktop: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.5rem',
+    fontStyle: 'italic',
+    fontWeight: 700,
+    lineHeight: 1.1667,
   },
 };
 
@@ -792,9 +880,24 @@ export const headingSmallSemibold = {
 export const headingSmallSemiboldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '1.25rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 600,
+    lineHeight: 1.2,
+  },
+  tablet: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.5rem',
+    fontStyle: 'italic',
+    fontWeight: 600,
+    lineHeight: 1.1667,
+  },
+  desktop: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.5rem',
+    fontStyle: 'italic',
+    fontWeight: 600,
+    lineHeight: 1.1667,
   },
 };
 
@@ -825,9 +928,24 @@ export const headingXlargeBold = {
 export const headingXlargeBoldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '2.25rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.1667,
+  },
+  tablet: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '3rem',
+    fontStyle: 'italic',
+    fontWeight: 700,
+    lineHeight: 1.2083,
+  },
+  desktop: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '3rem',
+    fontStyle: 'italic',
+    fontWeight: 700,
+    lineHeight: 1.2083,
   },
 };
 
@@ -906,9 +1024,24 @@ export const headingXlargeSemibold = {
 export const headingXlargeSemiboldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '2.25rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 600,
+    lineHeight: 1.1667,
+  },
+  tablet: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '3rem',
+    fontStyle: 'italic',
+    fontWeight: 600,
+    lineHeight: 1.2083,
+  },
+  desktop: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '3rem',
+    fontStyle: 'italic',
+    fontWeight: 600,
+    lineHeight: 1.2083,
   },
 };
 
@@ -939,9 +1072,24 @@ export const headingXsmallBold = {
 export const headingXsmallBoldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '1.125rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 700,
+    lineHeight: 1.2222,
+  },
+  tablet: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.25rem',
+    fontStyle: 'italic',
+    fontWeight: 700,
+    lineHeight: 1.2,
+  },
+  desktop: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.25rem',
+    fontStyle: 'italic',
+    fontWeight: 700,
+    lineHeight: 1.2,
   },
 };
 
@@ -1020,9 +1168,24 @@ export const headingXsmallSemibold = {
 export const headingXsmallSemiboldItalic = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
+    fontSize: '1.125rem',
     fontStyle: 'italic',
-    fontWeight: 400,
+    fontWeight: 600,
+    lineHeight: 1.2222,
+  },
+  tablet: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.25rem',
+    fontStyle: 'italic',
+    fontWeight: 600,
+    lineHeight: 1.2,
+  },
+  desktop: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.25rem',
+    fontStyle: 'italic',
+    fontWeight: 600,
+    lineHeight: 1.2,
   },
 };
 
