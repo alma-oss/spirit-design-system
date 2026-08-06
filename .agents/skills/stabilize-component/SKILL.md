@@ -141,6 +141,9 @@ Add **rename codemods** under the current major's transforms directory so consum
 3. Remove now-obsolete entries from each package `DEPRECATIONS.md` (e.g. the deprecation that pointed users at
    the `UNSTABLE_` component, and the removed component's deprecation block).
 
+See `spirit:breaking-change-checklist` for the rules these entries must follow (stable → stable only, section
+placement and alphabetical order, keeping inbound heading anchors alive).
+
 ## Removing a Superseded Component
 
 When stabilization also retires an older component, in the **owning** package(s):
