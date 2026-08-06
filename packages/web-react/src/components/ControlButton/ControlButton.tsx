@@ -17,6 +17,7 @@ import { useControlButtonStyleProps } from './useControlButtonStyleProps';
 const defaultProps = {
   elementType: 'button',
   isDisabled: false,
+  isStretched: false,
   isSubtle: false,
   isSymmetrical: false,
   size: Sizes.MEDIUM,

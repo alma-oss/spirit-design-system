@@ -118,6 +118,15 @@ describe('ControlButton', () => {
     expect(screen.getByRole('button')).toHaveClass('ControlButton--symmetrical');
   });
 
+  it('should have element-stretched class and omit tap-target when isStretched is true', () => {
+    render(<ControlButton isStretched />);
+
+    const element = screen.getByRole('button');
+
+    expect(element).toHaveClass('element-stretched');
+    expect(element).not.toHaveClass('accessibility-tap-target');
+  });
+
   it('should have disabled class when isDisabled is true', () => {
     render(<ControlButton isDisabled />);
 

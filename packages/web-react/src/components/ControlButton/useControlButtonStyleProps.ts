@@ -24,13 +24,14 @@ export interface ControlButtonStyles {
 export function useControlButtonStyleProps<T extends ElementType = 'button', S = void>(
   props: SpiritControlButtonProps<T, S>,
 ): ControlButtonStyles {
-  const { isDisabled, isSubtle, isSymmetrical, size, spacing, ...restProps } = props;
+  const { isDisabled, isStretched, isSubtle, isSymmetrical, size, spacing, ...restProps } = props;
 
   const controlButtonClass = useClassNamePrefix('ControlButton');
   const controlButtonBackgroundClass = `${controlButtonClass}--hasBackground`;
   const dynamicColorBackgroundInteractiveClass = useClassNamePrefix('dynamic-color-background-interactive');
   const dynamicColorBorderClass = useClassNamePrefix('dynamic-color-border');
   const accessibilityTapTargetClass = useClassNamePrefix('accessibility-tap-target');
+  const elementStretchedClass = useClassNamePrefix('element-stretched');
   // Baked in so the content always picks up the active color scheme — including when the `disabled` utility is applied
   // on the ControlButton itself, where there is no parent to provide the content color.
   const textColorSchemeClass = useClassNamePrefix('text-color-scheme');
@@ -42,11 +43,14 @@ export function useControlButtonStyleProps<T extends ElementType = 'button', S =
     getControlButtonSizeClassname(controlButtonClass, size as SizeExtendedDictionaryType | S),
     textColorSchemeClass,
     dynamicColorBackgroundInteractiveClass,
-    accessibilityTapTargetClass,
     {
+      // Stretched ControlButton fills a positioned ancestor; skip the tap-target helper because it
+      // sets `position: relative` and owns `::before`, which would trap the stretch overlay.
+      [accessibilityTapTargetClass]: !isStretched,
       [controlButtonBackgroundClass]: !isSubtle,
       [dynamicColorBorderClass]: !isSubtle,
       [CLASS_NAME_DISABLED]: isDisabled,
+      [elementStretchedClass]: isStretched,
     },
     symmetricalClassName,
   );
