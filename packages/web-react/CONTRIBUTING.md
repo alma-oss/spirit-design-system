@@ -31,7 +31,7 @@ This is an example of a typical file structure of a component:
             │   ├── <ComponentName>Default.tsx
             │   └── index.tsx
             ├── figma — component's Figma code connect file
-            │   └── <ComponentName>.figma.tsx
+            │   └── <ComponentName>.figma.ts
             ├── stories — component's Storybook stories
             │   └── <ComponentName>.stories.tsx
             └── __tests__
