@@ -192,7 +192,7 @@ results are ambiguous or the match is implausible.
 
 When a Figma instance has no Code Connect snippet, the root cause is one of two very different things:
 
-- **Component exists in code but has no Code Connect binding** — the fix is to add a `.figma.tsx` Code Connect file (DS work only).
+- **Component exists in code but has no Code Connect binding** — the fix is to add a `.figma.ts` Code Connect file (DS work only).
 - **Component does not exist in code at all** — the Code Connect gap is a downstream symptom; the real work is implementing the component first.
 
 To determine which case applies, grep the codebase for the component name.
