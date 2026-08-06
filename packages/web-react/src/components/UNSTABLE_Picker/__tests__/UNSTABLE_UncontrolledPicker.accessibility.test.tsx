@@ -43,4 +43,32 @@ describe('UNSTABLE_UncontrolledPicker accessibility', () => {
       expect(document.getElementById(selectionDomId)).toHaveAttribute('aria-label', 'Selected Languages');
     });
   });
+
+  describe('listbox presentation', () => {
+    const ListboxPickerTest = (props: Partial<ComponentProps<typeof UNSTABLE_UncontrolledPicker>>) => (
+      <UNSTABLE_UncontrolledPicker
+        data-testid={pickerAccessibilityTestId}
+        id={`${pickerFieldId}-listbox`}
+        defaultIsOpen
+        label="Languages"
+        optionsRole="listbox"
+        {...props}
+      >
+        <UNSTABLE_PickerGroup label="Language">
+          <UNSTABLE_PickerItem value="cs">Czech</UNSTABLE_PickerItem>
+          <UNSTABLE_PickerItem value="dk">Danish</UNSTABLE_PickerItem>
+        </UNSTABLE_PickerGroup>
+      </UNSTABLE_UncontrolledPicker>
+    );
+
+    accessibilityTest(ListboxPickerTest, `[data-testid="${pickerAccessibilityTestId}"]`);
+
+    it('renders a named listbox with named options', () => {
+      render(<ListboxPickerTest />);
+
+      expect(screen.getByRole('listbox', { name: 'Language' })).toBeInTheDocument();
+      expect(screen.getByRole('option', { name: 'Czech' })).toBeInTheDocument();
+      expect(screen.getByRole('option', { name: 'Danish' })).toBeInTheDocument();
+    });
+  });
 });

@@ -3,7 +3,10 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React, { type ComponentProps } from 'react';
 import { ariaAttributesTest, restPropsTest, stylePropsTest, validHtmlAttributesTest } from '@local/tests';
 import { MULTIPLE_SELECTION_MODE } from '../../../constants';
+import { PickerOptionsRoles } from '../constants';
 import { PickerPopoverContextProvider } from '../PickerPopoverContext';
+import type { UnstablePickerPopoverContextValue } from '../types';
+import UNSTABLE_PickerGroup from '../UNSTABLE_PickerGroup';
 import UNSTABLE_PickerItem from '../UNSTABLE_PickerItem';
 
 jest.mock('../../../hooks/useIcon');
@@ -12,9 +15,22 @@ const defaultPopoverContextValue = {
   id: 'test-picker',
   isDisabled: false,
   onSelectionChange: jest.fn(),
+  optionsRole: PickerOptionsRoles.GROUP,
   selectedKeys: [] as string[],
   selectionMode: MULTIPLE_SELECTION_MODE,
 };
+
+const renderListboxItems = (contextOverrides: Partial<UnstablePickerPopoverContextValue> = {}) =>
+  render(
+    <PickerPopoverContextProvider
+      value={{ ...defaultPopoverContextValue, optionsRole: PickerOptionsRoles.LISTBOX, ...contextOverrides }}
+    >
+      <UNSTABLE_PickerGroup label="Languages">
+        <UNSTABLE_PickerItem value="cs">Czech</UNSTABLE_PickerItem>
+        <UNSTABLE_PickerItem value="dk">Danish</UNSTABLE_PickerItem>
+      </UNSTABLE_PickerGroup>
+    </PickerPopoverContextProvider>,
+  );
 
 const PickerItemTest = (props: Partial<ComponentProps<typeof UNSTABLE_PickerItem>>) => {
   const { children, value = 'cs', ...rest } = props;
@@ -132,5 +148,47 @@ describe('UNSTABLE_PickerItem', () => {
 
     expect(screen.getByRole('checkbox', { name: 'Czech' })).toHaveAttribute('id', 'picker-test-cs');
     expect(screen.getByRole('checkbox', { name: 'Danish' })).toHaveAttribute('id', 'picker-test-dk');
+  });
+
+  describe('listbox presentation', () => {
+    it('should render role="option" items with no native checkbox or radio', () => {
+      renderListboxItems();
+
+      expect(screen.getByRole('option', { name: 'Czech' })).toBeInTheDocument();
+      expect(screen.getByRole('option', { name: 'Danish' })).toBeInTheDocument();
+      expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
+      expect(screen.queryByRole('radio')).not.toBeInTheDocument();
+    });
+
+    it('should reflect selection via aria-selected', () => {
+      renderListboxItems({ selectedKeys: ['cs'] });
+
+      expect(screen.getByRole('option', { name: 'Czech' })).toHaveAttribute('aria-selected', 'true');
+      expect(screen.getByRole('option', { name: 'Danish' })).toHaveAttribute('aria-selected', 'false');
+    });
+
+    it('should toggle selection on click in multiple mode', () => {
+      const onSelectionChange = jest.fn();
+      renderListboxItems({ onSelectionChange, selectedKeys: ['cs'] });
+
+      fireEvent.click(screen.getByRole('option', { name: 'Danish' }));
+
+      expect(onSelectionChange).toHaveBeenCalledWith(['cs', 'dk']);
+    });
+
+    it('should replace selection on click in single mode', () => {
+      const onSelectionChange = jest.fn();
+      renderListboxItems({ onSelectionChange, selectedKeys: ['cs'], selectionMode: 'single' });
+
+      fireEvent.click(screen.getByRole('option', { name: 'Danish' }));
+
+      expect(onSelectionChange).toHaveBeenCalledWith(['dk']);
+    });
+
+    it('should mark options aria-disabled when the picker is disabled', () => {
+      renderListboxItems({ isDisabled: true });
+
+      expect(screen.getByRole('option', { name: 'Czech' })).toHaveAttribute('aria-disabled', 'true');
+    });
   });
 });

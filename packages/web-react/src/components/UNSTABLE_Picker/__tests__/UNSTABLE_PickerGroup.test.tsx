@@ -3,6 +3,7 @@ import { render, screen, within } from '@testing-library/react';
 import React, { type ComponentProps, type ReactElement } from 'react';
 import { ariaAttributesTest, restPropsTest, stylePropsTest, validHtmlAttributesTest } from '@local/tests';
 import { MULTIPLE_SELECTION_MODE } from '../../../constants';
+import { PickerOptionsRoles } from '../constants';
 import { PickerPopoverContextProvider } from '../PickerPopoverContext';
 import type { UnstablePickerPopoverContextValue } from '../types';
 import UNSTABLE_PickerGroup from '../UNSTABLE_PickerGroup';
@@ -13,6 +14,7 @@ const defaultPopoverContext: UnstablePickerPopoverContextValue = {
   id: 'test-picker',
   isDisabled: false,
   onSelectionChange: jest.fn(),
+  optionsRole: PickerOptionsRoles.GROUP,
   selectedKeys: [],
   selectionMode: MULTIPLE_SELECTION_MODE,
 };
@@ -102,6 +104,45 @@ describe('UNSTABLE_PickerGroup', () => {
 
       // Only the legend carries the group name; no second visible "Regions" label (isLabelHidden).
       expect(within(group).getAllByText('Regions')).toHaveLength(1);
+    });
+  });
+
+  describe('listbox presentation', () => {
+    it('should render a role="listbox" named by label instead of a fieldset', () => {
+      renderWithPopoverContext(
+        <UNSTABLE_PickerGroup label="Languages">
+          <span>child</span>
+        </UNSTABLE_PickerGroup>,
+        { optionsRole: PickerOptionsRoles.LISTBOX },
+      );
+
+      const listbox = screen.getByRole('listbox', { name: 'Languages' });
+
+      expect(listbox.localName).toBe('div');
+      expect(screen.queryByRole('group')).not.toBeInTheDocument();
+      expect(screen.getByText('child')).toBeInTheDocument();
+    });
+
+    it('should mark the listbox multiselectable in multiple selection mode', () => {
+      renderWithPopoverContext(
+        <UNSTABLE_PickerGroup label="Languages">
+          <span>child</span>
+        </UNSTABLE_PickerGroup>,
+        { optionsRole: PickerOptionsRoles.LISTBOX, selectionMode: 'multiple' },
+      );
+
+      expect(screen.getByRole('listbox', { name: 'Languages' })).toHaveAttribute('aria-multiselectable', 'true');
+    });
+
+    it('should not mark the listbox multiselectable in single selection mode', () => {
+      renderWithPopoverContext(
+        <UNSTABLE_PickerGroup label="Language">
+          <span>child</span>
+        </UNSTABLE_PickerGroup>,
+        { optionsRole: PickerOptionsRoles.LISTBOX, selectionMode: 'single' },
+      );
+
+      expect(screen.getByRole('listbox', { name: 'Language' })).not.toHaveAttribute('aria-multiselectable');
     });
   });
 });
