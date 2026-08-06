@@ -133,6 +133,62 @@ Place a hidden `<span>` with a unique `id` anywhere in the `<body>` and referenc
 <span id="picker-tag-description" hidden>Press Delete or Backspace to remove</span>
 ```
 
+## Listbox Presentation
+
+When the popover is only a list of selectable labels (no interactive content per option), present the
+options as a **listbox** instead of a `<fieldset>` of checkboxes. The popover stays a `role="dialog"`; the
+option list inside becomes a `role="listbox"` (add `aria-multiselectable="true"` for multiple selection),
+and each option is a `role="option"` with `aria-selected`. A decorative check (`Icon--selected`, wrapped in
+`d-none` until selected) sits in `Item__slot`; the selected option also gets
+`color-scheme-on-selected-subtle bg-color-scheme`.
+
+Selection is expressed only through `aria-selected` — there are no native inputs, so this presentation does
+not participate in native form submission (use the default `<fieldset>` presentation when you need that).
+The `role="listbox"` element must contain **only** options; place any Apply / close button as a sibling of
+the listbox, not inside it.
+
+```html
+<div
+  role="dialog"
+  aria-modal="true"
+  class="DropdownPopover placement-bottom-start theme-light-default"
+  id="picker-listbox"
+>
+  <div role="listbox" aria-multiselectable="true" aria-label="Languages">
+    <div
+      role="option"
+      id="picker-listbox-cs"
+      aria-selected="true"
+      tabindex="0"
+      class="Item cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
+    >
+      <div class="Item__slot" role="presentation">
+        <svg class="Icon Icon--selected" width="20" height="20" aria-hidden="true">
+          <use href="/assets/icons/svg/sprite.svg#check-plain" />
+        </svg>
+      </div>
+      <div class="Item__content" role="presentation">
+        <span class="Label element-stretched">Czech</span>
+      </div>
+    </div>
+    <div role="option" id="picker-listbox-en" aria-selected="false" tabindex="-1" class="Item cursor-pointer">
+      <div class="Item__slot" role="presentation">
+        <svg class="Icon Icon--selected d-none" width="20" height="20" aria-hidden="true">
+          <use href="/assets/icons/svg/sprite.svg#check-plain" />
+        </svg>
+      </div>
+      <div class="Item__content" role="presentation">
+        <span class="Label element-stretched">English</span>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+Keyboard (demo JS): a single tab stop (roving `tabindex`), Up/Down between options (clamped at the ends),
+Home/End to first/last, type-ahead by label, and Space/Enter to toggle selection. See
+[decision 013][decision-listbox-grid] for when to choose `listbox` over `fieldset` or `grid`.
+
 ## Hidden Label
 
 Use the `accessibility-hidden` helper to visually hide the label while keeping it
@@ -521,15 +577,21 @@ The selection area (`UNSTABLE_PickerSelection`) uses a dynamic ARIA role:
 Each tag is structured as a `row` containing a `cell` with the tag label and a remove button.
 A single-column grid is valid and follows the same pattern used by [React Aria][react-aria]'s TagGroup.
 
-### Dropdown Popover: No Listbox Role
+### Dropdown Popover: Presentation and Roles
 
-The dropdown popover intentionally does **not** use `role="listbox"`. The popover is designed to accept
-any content — Spirit components such as checkboxes, radios, sliders, and text fields. `role="listbox"`
-would be too restrictive: it expects `option` children with `aria-selected`, which conflicts with native
-interactive elements and prevents richer layouts.
+The popover is a `role="dialog"` (the trigger uses `aria-haspopup="dialog"`), so it can hold any content.
+How the **options inside it** are marked up depends on what they are — see
+[decision 013][decision-listbox-grid] for the full rationale:
 
-The trigger button uses `aria-haspopup="dialog"` to indicate that activating it opens a popup that is not
-a menu or listbox.
+- **`fieldset` (default)** — native checkboxes / radios in a `<fieldset>`. Use for real form controls
+  (including native form submission) or when options need richer, interactive content. A `role="listbox"`
+  would be too restrictive here: it expects `option` children with `aria-selected`, which conflicts with
+  native interactive elements.
+- **`listbox`** — a `role="listbox"` of `role="option"` items with `aria-selected` (see
+  [Listbox presentation](#listbox-presentation)). Use for a simple list of selectable labels with no
+  interactive content per option. This is the canonical pattern for that case.
+- **`grid`** — reserved for the **selection (tag) area**, where each row contains a remove button
+  (interactive content), which `listbox` cannot express.
 
 ### Dropdown Popover: Required JavaScript Features
 
@@ -598,6 +660,7 @@ Popover API is strongly recommended.
 | `aria-controls`    | Trigger button    | Points to the popup element                                                          |
 | `aria-describedby` | Tag               | Links to the hidden removal instruction                                              |
 
+[decision-listbox-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/013-listbox-vs-grid-for-selectable-options.md
 [dropdown]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Dropdown/README.md
 [mdn-dialog-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/dialog_role
 [mdn-grid-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/grid_role
