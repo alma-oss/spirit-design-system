@@ -1,0 +1,11 @@
+{
+  "name": "@alma-oss/spirit-figma-assets-webhook",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/figma-assets-webhook/netlify/functions",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "cache": true
+    }
+  }
+}

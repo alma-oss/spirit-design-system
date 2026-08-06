@@ -47,9 +47,11 @@
     "build:verify": "tsx ./scripts/verifyBuild.ts",
     "build": "npm-run-all --serial build:clean build:compile build:verify",
     "dev": "vite build --watch",
+    "sync": "yarn workspace @alma-oss/figma-assets sync --config ../icons/figma-assets.config.json",
     "types": "tsc --noEmit"
   },
   "devDependencies": {
+    "@alma-oss/figma-assets": "workspace:^",
     "@alma-oss/vite-plugin-spirit-icons": "workspace:^",
     "@types/node": "catalog:types",
     "@types/react": "catalog:types",

@@ -16,6 +16,7 @@ export default {
         'codemods',
         'common',
         'design-tokens',
+        'figma-assets',
         'icons',
         'vite-plugin-spirit-icons',
         'web',
