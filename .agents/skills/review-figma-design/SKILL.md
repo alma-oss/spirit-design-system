@@ -192,9 +192,7 @@ results are ambiguous or the match is implausible.
 
 When a Figma instance has no Code Connect snippet, the root cause is one of two very different things:
 
-- **Component exists in code but has no Code Connect binding** — the fix is to add a Code Connect
-  file (DS work only). Code Connect files use one of these patterns: `*.figma.tsx`, `*.figma.ts`,
-  or `*.figma.stories.tsx`.
+- **Component exists in code but has no Code Connect binding** — the fix is to add a `.figma.ts` Code Connect file (DS work only).
 - **Component does not exist in code at all** — the Code Connect gap is a downstream symptom; the real work is implementing the component first.
 
 To determine which case applies, search the codebase for the component name and for its Code
@@ -216,12 +214,12 @@ Connect file.
    ```
 
 3. When the component exists, look for its Code Connect file. Match **all** Code Connect file
-   patterns — a component may be bound from any of them, so a `*.figma.tsx`-only search reports
+   patterns — a component may be bound from any of them, so a `*.figma.ts`-only search reports
    false "lacks Code Connect" gaps:
 
    ```bash
    find <resolved-path> \
-     \( -name "*.figma.tsx" -o -name "*.figma.ts" -o -name "*.figma.stories.tsx" \) \
+     \( -name "*.figma.ts" \) \
      -path "*ComponentName*" 2>/dev/null | head -5
    ```
 
@@ -230,8 +228,7 @@ Connect file.
 
    ```bash
    find <resolved-path> \
-     \( -name "ComponentName.figma.tsx" -o -name "ComponentName.figma.ts" \
-        -o -name "ComponentName.figma.stories.tsx" \) 2>/dev/null | head -5
+     \( -name "ComponentName.figma.ts" \) 2>/dev/null | head -5
    ```
 
 Apply the result as follows:
@@ -906,7 +903,7 @@ Before writing the final report:
 - _(component)_ Dictionary enum completeness checked against DICTIONARIES.md
 - _(component)_ Interaction state completeness checked for all property combinations
 - All component instances checked for Code Connect mapping
-- _(Code Connect gaps)_ Codebase searched for **all** Code Connect file patterns (`*.figma.tsx`, `*.figma.ts`, `*.figma.stories.tsx`) before reporting a component as lacking Code Connect
+- _(Code Connect gaps)_ Codebase searched for **all** Code Connect file patterns (`*.figma.ts`) before reporting a component as lacking Code Connect
 - `search_design_system` or `get_code_connect_suggestions` called for any layer with no Code Connect snippet that appears to be a custom primitive — replacement suggestion included when the match is credible
 - Detached components identified (frames with DS component names) → flagged as findings
 - Modified instances: not detectable via MCP — note in report that manual verification in Figma is required
