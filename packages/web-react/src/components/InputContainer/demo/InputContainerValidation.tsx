@@ -8,7 +8,9 @@ import InputContainer from '../InputContainer';
 const InputContainerValidation = () => (
   <>
     <Stack spacing="space-400">
-      <PropsProvider value={{ validationState: 'warning' }}>
+      <PropsProvider
+        value={{ inputContainer: { validationState: 'warning' }, validationText: { validationState: 'warning' } }}
+      >
         <Label htmlFor="input-container-warning">Warning</Label>
         <InputContainer>
           <input
@@ -24,7 +26,9 @@ const InputContainerValidation = () => (
     </Stack>
 
     <Stack spacing="space-400">
-      <PropsProvider value={{ validationState: 'danger' }}>
+      <PropsProvider
+        value={{ inputContainer: { validationState: 'danger' }, validationText: { validationState: 'danger' } }}
+      >
         <Label htmlFor="input-container-danger">Danger</Label>
         <InputContainer>
           <input

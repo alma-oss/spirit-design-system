@@ -1,10 +1,21 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { validHtmlAttributesTest } from '@local/tests';
 import { PropsProvider } from '../../../context';
 import InputAddon from '../InputAddon';
 
 describe('InputAddon', () => {
+  validHtmlAttributesTest(
+    (props) => (
+      <InputAddon {...props}>
+        <span>Addon content</span>
+      </InputAddon>
+    ),
+    {},
+    { globalProps: { isRequired: true, validationState: 'danger' } },
+  );
+
   it('should render children with InputAddon class', () => {
     render(
       <InputAddon>
@@ -29,7 +40,7 @@ describe('InputAddon', () => {
 
   it('should apply size class from context when prop is not provided', () => {
     render(
-      <PropsProvider value={{ size: 'large' }}>
+      <PropsProvider value={{ inputAddon: { size: 'large' } }}>
         <InputAddon>
           <span>Addon content</span>
         </InputAddon>
@@ -41,7 +52,7 @@ describe('InputAddon', () => {
 
   it('should prefer direct size prop over context size', () => {
     render(
-      <PropsProvider value={{ size: 'large' }}>
+      <PropsProvider value={{ inputAddon: { size: 'large' } }}>
         <InputAddon size="medium">
           <span>Addon content</span>
         </InputAddon>

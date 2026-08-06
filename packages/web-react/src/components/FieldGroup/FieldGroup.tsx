@@ -41,9 +41,9 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
     <PropsProvider
       value={{
         isDisabled,
-        isLabelHidden,
         isRequired,
         validationState,
+        label: { isLabelHidden },
       }}
     >
       <fieldset

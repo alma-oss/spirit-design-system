@@ -17,7 +17,7 @@ describe('Label', () => {
 
   restPropsTest(Label, 'label');
 
-  validHtmlAttributesTest(Label);
+  validHtmlAttributesTest(Label, {}, { globalProps: { isRequired: true, validationState: 'danger' } });
 
   ariaAttributesTest(Label);
 
@@ -38,7 +38,7 @@ describe('Label', () => {
 
   it('should use context elementType when no direct prop', () => {
     render(
-      <PropsProvider value={{ elementType: 'span' }}>
+      <PropsProvider value={{ label: { elementType: 'span' } }}>
         <Label>Text</Label>
       </PropsProvider>,
     );
@@ -48,7 +48,7 @@ describe('Label', () => {
 
   it('should use direct elementType over context', () => {
     render(
-      <PropsProvider value={{ elementType: 'span' }}>
+      <PropsProvider value={{ label: { elementType: 'span' } }}>
         <Label elementType="strong">Text</Label>
       </PropsProvider>,
     );
@@ -58,7 +58,7 @@ describe('Label', () => {
 
   it('should use context isRequired and isLabelHidden when no direct prop', () => {
     render(
-      <PropsProvider value={{ isRequired: true, isLabelHidden: true }}>
+      <PropsProvider value={{ isRequired: true, label: { isLabelHidden: true } }}>
         <Label>Text</Label>
       </PropsProvider>,
     );

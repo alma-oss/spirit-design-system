@@ -98,11 +98,11 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
     <PropsProvider
       value={{
         isDisabled,
-        isLabelHidden,
         isRequired,
-        size,
-        variant,
         validationState,
+        formFields: { size },
+        label: { isLabelHidden },
+        inputContainer: { variant },
       }}
     >
       <Stack {...mergeStyleProps(Stack, { styleProps })} spacing="space-400">

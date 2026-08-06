@@ -14,7 +14,11 @@ import HelperText from '../HelperText';
 describe('HelperText', () => {
   const helperText = 'Helper Text';
 
-  validHtmlAttributesTest(HelperText);
+  validHtmlAttributesTest(
+    (props) => <HelperText {...props} helperText={helperText} />,
+    {},
+    { globalProps: { isRequired: true, validationState: 'danger' } },
+  );
 
   stylePropsTest((props) => <HelperText {...props} helperText={helperText} />);
 
@@ -30,7 +34,7 @@ describe('HelperText', () => {
 
   it('should use context elementType when no direct prop', () => {
     render(
-      <PropsProvider value={{ elementType: 'span' }}>
+      <PropsProvider value={{ helperText: { elementType: 'span' } }}>
         <HelperText helperText={helperText} />
       </PropsProvider>,
     );
@@ -40,7 +44,7 @@ describe('HelperText', () => {
 
   it('should use direct elementType over context', () => {
     render(
-      <PropsProvider value={{ elementType: 'span' }}>
+      <PropsProvider value={{ helperText: { elementType: 'span' } }}>
         <HelperText elementType="p" helperText={helperText} />
       </PropsProvider>,
     );

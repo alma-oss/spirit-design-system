@@ -6,11 +6,12 @@ import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import {
   type ControlButtonProps,
+  type FormFieldContextValue,
   type PolymorphicComponent,
   type PolymorphicRef,
   type SpiritControlButtonProps,
 } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { useControlButtonProps } from './useControlButtonProps';
 import { useControlButtonStyleProps } from './useControlButtonStyleProps';
 
@@ -27,12 +28,10 @@ const _ControlButton = <E extends ElementType = 'button', S = void>(
   props: SpiritControlButtonProps<E, S>,
   ref: PolymorphicRef<E>,
 ) => {
-  const contextProps = useContextProps<Partial<Pick<ControlButtonProps<S>, 'size'>>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    size: contextProps.size ?? defaultProps.size,
-    ...props,
-  };
+  const mergedProps = useContextProps(props, 'controlButton') as Partial<
+    Omit<FormFieldContextValue, 'elementType'> & SpiritControlButtonProps<E, S>
+  >;
+  const propsWithDefaults = { ...defaultProps, ...mergedProps };
   const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
@@ -51,7 +50,7 @@ const _ControlButton = <E extends ElementType = 'button', S = void>(
   });
 
   return (
-    <Component {...otherProps} {...controlButtonProps} ref={ref} {...mergedStyleProps}>
+    <Component {...filterDOMProps(otherProps)} {...controlButtonProps} ref={ref} {...mergedStyleProps}>
       {children}
     </Component>
   );

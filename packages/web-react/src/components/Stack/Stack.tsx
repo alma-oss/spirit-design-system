@@ -34,7 +34,12 @@ const _Stack = <E extends ElementType = 'div'>(props: SpiritStackProps<E>, ref: 
   const itemElementType = LIST_ELEMENT_TYPES.includes(elementType as string) ? ('li' as const) : undefined;
 
   return (
-    <PropsProvider value={{ elementType: itemElementType }}>
+    <PropsProvider
+      value={{
+        stackItem: { elementType: itemElementType },
+        inlineElements: { elementType: itemElementType },
+      }}
+    >
       <Component {...otherProps} {...mergedStyleProps} ref={ref}>
         {children}
       </Component>

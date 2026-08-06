@@ -4,7 +4,7 @@ import React, { type ElementType, useEffect } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type FormFieldContextValue, type InputDetailsProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { useInputDetailsStyleProps } from './useInputDetailsStyleProps';
 
 const defaultProps: Partial<InputDetailsProps> = {
@@ -15,12 +15,11 @@ const defaultProps: Partial<InputDetailsProps> = {
 };
 
 const InputDetails = <E extends ElementType = 'div'>(props: InputDetailsProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    isDisabled: contextProps.isDisabled,
-    ...props,
-  };
+  const mergedProps = useContextProps<Partial<Omit<FormFieldContextValue, 'elementType'> & InputDetailsProps<E>>>(
+    props,
+    'inputDetails',
+  );
+  const propsWithDefaults = { ...defaultProps, ...mergedProps };
   const {
     children,
     elementType: ElementTag = defaultProps.elementType as ElementType,
@@ -47,7 +46,7 @@ const InputDetails = <E extends ElementType = 'div'>(props: InputDetailsProps<E>
   }, [id, registerAriaDetails]);
 
   return (
-    <ElementTag {...transferProps} {...mergedStyleProps} id={id}>
+    <ElementTag {...filterDOMProps(transferProps)} {...mergedStyleProps} id={id}>
       {children}
     </ElementTag>
   );

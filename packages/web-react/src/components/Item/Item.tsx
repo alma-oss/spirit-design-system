@@ -4,7 +4,7 @@ import React, { type ElementType } from 'react';
 import { PropsProvider, useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type FormFieldContextValue, type SpiritItemProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { useItemStyleProps } from './useItemStyleProps';
 
 const defaultProps: Partial<SpiritItemProps> = {
@@ -12,18 +12,12 @@ const defaultProps: Partial<SpiritItemProps> = {
 };
 
 const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Element => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const {
-    children,
-    elementType: propsElementType,
-    endSlot,
-    isDisabled: propsIsDisabled,
-    isSelected,
-    startSlot,
-    ...restProps
-  } = props;
-  const isDisabled = propsIsDisabled ?? contextProps.isDisabled;
-  const elementType = propsElementType ?? contextProps.elementType ?? defaultProps.elementType;
+  const mergedProps = useContextProps<Partial<Omit<FormFieldContextValue, 'elementType'> & SpiritItemProps<E>>>(
+    props,
+    'stackItem',
+  );
+  const propsWithDefaults = { ...defaultProps, ...mergedProps };
+  const { children, elementType, endSlot, isDisabled, isSelected, startSlot, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;
   const { classProps, props: modifiedProps } = useItemStyleProps({
     isSelected,
@@ -34,8 +28,18 @@ const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Ele
   const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps, otherProps });
 
   return (
-    <PropsProvider value={{ elementType: 'span', isDisabled, isItem: true }}>
-      <Component {...otherProps} {...mergedStyleProps} disabled={!!isDisabled && Component === 'button'}>
+    <PropsProvider
+      value={{
+        isDisabled,
+        inlineElements: { elementType: 'span' },
+        label: { isItem: true },
+      }}
+    >
+      <Component
+        {...filterDOMProps(otherProps)}
+        {...mergedStyleProps}
+        disabled={!!isDisabled && Component === 'button'}
+      >
         {startSlot && (
           <span className={classProps.slot} role="presentation">
             {startSlot}

@@ -22,7 +22,7 @@ describe('ControlButton', () => {
 
   restPropsTest(ControlButton, 'button');
 
-  validHtmlAttributesTest(ControlButton);
+  validHtmlAttributesTest(ControlButton, {}, { globalProps: { isRequired: true, validationState: 'danger' } });
 
   ariaAttributesTest(ControlButton);
 
@@ -44,7 +44,7 @@ describe('ControlButton', () => {
 
   it('should apply size class from context when prop is not provided', () => {
     render(
-      <PropsProvider value={{ size: 'large' }}>
+      <PropsProvider value={{ controlButton: { size: 'large' } }}>
         <ControlButton />
       </PropsProvider>,
     );
@@ -54,7 +54,7 @@ describe('ControlButton', () => {
 
   it('should prefer direct size prop over context size', () => {
     render(
-      <PropsProvider value={{ size: 'large' }}>
+      <PropsProvider value={{ controlButton: { size: 'large' } }}>
         <ControlButton size="small" />
       </PropsProvider>,
     );

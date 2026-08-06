@@ -4,7 +4,7 @@ import React, { type ElementType } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type FormFieldContextValue, type SpiritLabelProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { useLabelStyleProps } from './useLabelStyleProps';
 
 const defaultProps: Partial<SpiritLabelProps> = {
@@ -16,16 +16,11 @@ const defaultProps: Partial<SpiritLabelProps> = {
 };
 
 const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX.Element => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    elementType: contextProps.elementType,
-    isDisabled: contextProps.isDisabled,
-    isStretched: contextProps.isItem,
-    isLabelHidden: contextProps.isLabelHidden,
-    isRequired: contextProps.isRequired,
-    ...props,
-  };
+  const mergedProps = useContextProps<Partial<Omit<FormFieldContextValue, 'elementType'> & SpiritLabelProps<E>>>(
+    props,
+    'label',
+  );
+  const propsWithDefaults = { ...defaultProps, ...mergedProps, isStretched: mergedProps.isItem };
   const {
     children,
     elementType: ElementTag = 'label' as ElementType,
@@ -33,6 +28,8 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
     hasPointerCursor,
     htmlFor,
     isDisabled,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- excluded from restProps so it isn't spread onto the DOM element
+    isItem,
     isStretched,
     isLabelHidden,
     isRequired,
@@ -51,7 +48,7 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
 
   return (
     <ElementTag
-      {...transferProps}
+      {...filterDOMProps(transferProps)}
       {...mergedStyleProps}
       htmlFor={ElementTag === 'label' ? labelFor || htmlFor : undefined}
     >

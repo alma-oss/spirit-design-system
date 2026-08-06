@@ -4,7 +4,7 @@ import React, { type ElementType, useEffect } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type FormFieldContextValue, type SpiritHelperTextProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { useHelperTextStyleProps } from './useHelperTextStyleProps';
 
 const defaultProps: Partial<SpiritHelperTextProps> = {
@@ -15,13 +15,11 @@ const defaultProps: Partial<SpiritHelperTextProps> = {
 };
 
 const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<E>) => {
-  const contextProps = useContextProps<Partial<FormFieldContextValue>>();
-  const propsWithDefaults = {
-    ...defaultProps,
-    elementType: contextProps.elementType,
-    isDisabled: contextProps.isDisabled,
-    ...props,
-  };
+  const mergedProps = useContextProps<Partial<Omit<FormFieldContextValue, 'elementType'> & SpiritHelperTextProps<E>>>(
+    props,
+    'helperText',
+  );
+  const propsWithDefaults = { ...defaultProps, ...mergedProps };
   const {
     helperText,
     elementType: Component = defaultProps.elementType as ElementType,
@@ -45,7 +43,7 @@ const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<
 
   if (helperText) {
     return (
-      <Component {...transferProps} {...mergedStyleProps} id={id}>
+      <Component {...filterDOMProps(transferProps)} {...mergedStyleProps} id={id}>
         {helperText}
       </Component>
     );

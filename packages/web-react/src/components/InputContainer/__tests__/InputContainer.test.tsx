@@ -1,11 +1,22 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { validHtmlAttributesTest } from '@local/tests';
 import { FillVariants } from '../../../constants';
 import { PropsProvider } from '../../../context';
 import InputContainer from '../InputContainer';
 
 describe('InputContainer', () => {
+  validHtmlAttributesTest(
+    (props) => (
+      <InputContainer {...props}>
+        <span>Content</span>
+      </InputContainer>
+    ),
+    {},
+    { globalProps: { isRequired: true, validationState: 'danger' } },
+  );
+
   it('should apply fill variant class by default', () => {
     render(
       <InputContainer>
@@ -35,7 +46,7 @@ describe('InputContainer', () => {
 
   it('should apply variant class from context when prop is not provided', () => {
     render(
-      <PropsProvider value={{ variant: FillVariants.OUTLINE }}>
+      <PropsProvider value={{ inputContainer: { variant: FillVariants.OUTLINE } }}>
         <InputContainer>
           <span>Content</span>
         </InputContainer>
@@ -47,7 +58,7 @@ describe('InputContainer', () => {
 
   it('should prefer direct variant prop over context variant', () => {
     render(
-      <PropsProvider value={{ variant: FillVariants.OUTLINE }}>
+      <PropsProvider value={{ inputContainer: { variant: FillVariants.OUTLINE } }}>
         <InputContainer variant={FillVariants.FILL}>
           <span>Content</span>
         </InputContainer>
@@ -76,7 +87,7 @@ describe('InputContainer', () => {
 
   it('should apply size class from context when prop is not provided', () => {
     render(
-      <PropsProvider value={{ size: 'large' }}>
+      <PropsProvider value={{ inputContainer: { size: 'large' } }}>
         <InputContainer>
           <span>Content</span>
         </InputContainer>
@@ -88,7 +99,7 @@ describe('InputContainer', () => {
 
   it('should prefer direct size prop over context size', () => {
     render(
-      <PropsProvider value={{ size: 'large' }}>
+      <PropsProvider value={{ inputContainer: { size: 'large' } }}>
         <InputContainer size="medium">
           <span>Content</span>
         </InputContainer>
@@ -145,7 +156,7 @@ describe('InputContainer', () => {
 
   it('should apply validation state class from context when prop is not provided', () => {
     render(
-      <PropsProvider value={{ validationState: 'danger' }}>
+      <PropsProvider value={{ inputContainer: { validationState: 'danger' } }}>
         <InputContainer>
           <span>Content</span>
         </InputContainer>
@@ -157,7 +168,7 @@ describe('InputContainer', () => {
 
   it('should prefer direct validationState prop over context', () => {
     render(
-      <PropsProvider value={{ validationState: 'danger' }}>
+      <PropsProvider value={{ inputContainer: { validationState: 'danger' } }}>
         <InputContainer validationState="warning">
           <span>Content</span>
         </InputContainer>

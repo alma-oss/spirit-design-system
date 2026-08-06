@@ -32,7 +32,7 @@ describe('Item', () => {
 
   restPropsTest((props: SpiritItemProps) => <Item {...props} />, 'div');
 
-  validHtmlAttributesTest(Item);
+  validHtmlAttributesTest(Item, {}, { globalProps: { isRequired: true, validationState: 'danger' } });
 
   ariaAttributesTest(Item);
 

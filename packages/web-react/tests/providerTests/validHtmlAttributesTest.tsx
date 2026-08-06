@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import { htmlElementAttributes } from 'html-element-attributes';
 import React, { type ComponentType } from 'react';
+import { PropsProvider } from '../../src/context';
 import { getComponentName } from '../testUtils/getComponentName';
 
 const globalAttributes = [...htmlElementAttributes['*'], 'role'];
@@ -33,11 +34,26 @@ const validateHTMLForComponent = (container: HTMLElement) => {
   elements.forEach((element) => validateHTMLAttributes(element));
 };
 
-export const validHtmlAttributesTest = (Component: ComponentType<any>, props: object = {}) => {
+export const validHtmlAttributesTest = (
+  Component: ComponentType<any>,
+  props: object = {},
+  options: { globalProps?: Record<string, unknown> } = {},
+) => {
   const componentName = getComponentName(Component);
 
   test(`should render valid HTML for ${componentName}`, () => {
     const { container } = render(<Component {...props} />);
     validateHTMLForComponent(container);
   });
+
+  if (options.globalProps) {
+    test(`should not leak global props onto ${componentName}'s rendered HTML`, () => {
+      const { container } = render(
+        <PropsProvider value={options.globalProps as Record<string, unknown>}>
+          <Component {...props} />
+        </PropsProvider>,
+      );
+      validateHTMLForComponent(container);
+    });
+  }
 };

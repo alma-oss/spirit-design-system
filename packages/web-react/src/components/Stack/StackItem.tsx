@@ -4,12 +4,13 @@ import React, { type ElementType, forwardRef } from 'react';
 import { PropsProvider, useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import {
+  type FormFieldContextValue,
   type PolymorphicComponent,
   type PolymorphicRef,
   type SpiritStackItemProps,
   type StackItemProps,
 } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeStyleProps } from '../../utils';
 import { useStackStyleProps } from './useStackStyleProps';
 
 const defaultProps = {
@@ -20,10 +21,12 @@ const _StackItem = <E extends ElementType = 'div'>(
   props: SpiritStackItemProps<E>,
   ref: PolymorphicRef<E>,
 ): JSX.Element => {
-  const { elementType: propsElementType } = props;
-  const contextProps = useContextProps(props);
-  const { children, elementType: contextElementType, ...restProps } = contextProps;
-  const elementType = propsElementType ?? contextElementType ?? defaultProps.elementType;
+  const mergedProps = useContextProps<Partial<Omit<FormFieldContextValue, 'elementType'> & SpiritStackItemProps<E>>>(
+    props,
+    'stackItem',
+  );
+  const propsWithDefaults = { ...defaultProps, ...mergedProps };
+  const { children, elementType, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
 
@@ -36,8 +39,15 @@ const _StackItem = <E extends ElementType = 'div'>(
   });
 
   return (
-    <Component {...otherProps} {...mergedStyleProps} ref={ref}>
-      <PropsProvider value={{ elementType: null }}>{children}</PropsProvider>
+    <Component {...filterDOMProps(otherProps)} {...mergedStyleProps} ref={ref}>
+      <PropsProvider
+        value={{
+          stackItem: { elementType: null },
+          inlineElements: { elementType: null },
+        }}
+      >
+        {children}
+      </PropsProvider>
     </Component>
   );
 };
