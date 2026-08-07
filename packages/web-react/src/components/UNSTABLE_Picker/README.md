@@ -54,6 +54,41 @@ export const Example = () => {
 };
 ```
 
+### Listbox Presentation
+
+The `optionsRole` prop sets the ARIA role of the popover option list. By default (`optionsRole="group"`) options render
+as native `Checkbox` / `Radio` controls inside a `FieldGroup`. Set **`optionsRole="listbox"`** to render a simple list
+of selectable options instead: `UNSTABLE_PickerGroup` becomes a `role="listbox"` and each `UNSTABLE_PickerItem` becomes
+a `role="option"` with `aria-selected`. This is the recommended accessibility pattern when the popover is only a list of
+selectable labels (no interactive content per option). It works for both `single` and `multiple` selection.
+
+```tsx
+<UNSTABLE_Picker
+  id="picker-listbox"
+  isOpen={isOpen}
+  label="Languages"
+  optionsRole="listbox"
+  onToggle={onToggle}
+  selectedKeys={selectedKeys}
+  onSelectionChange={setSelectionKeys}
+>
+  <UNSTABLE_PickerGroup label="Languages">
+    <UNSTABLE_PickerItem value="cs">Czech</UNSTABLE_PickerItem>
+    <UNSTABLE_PickerItem value="en">English</UNSTABLE_PickerItem>
+  </UNSTABLE_PickerGroup>
+</UNSTABLE_Picker>
+```
+
+Keyboard: Up/Down move between options, Home/End jump to first/last, type-ahead focuses by label, and Space/Enter
+toggles selection. A decorative selection glyph is shown for selected options (override it per item with `startSlot` /
+`endSlot`).
+
+ℹ️ With `optionsRole="listbox"` the group is a `listbox`, so it must contain **only** options — no interactive
+descendants. Put any Apply / close `Button` as a sibling of `UNSTABLE_PickerGroup`, not inside it. Group-level
+`helperText` and validation do not apply. Use the default `optionsRole="group"` when you need native form controls (for
+example native form submission) or richer per-option content. See [decision 013][decision-listbox-grid] for when to use
+`listbox` vs `grid` vs `group`.
+
 ### Single Selection
 
 Set `selectionMode` to `"single"`. Use the same `isOpen` / `onToggle` / `selectedKeys` pattern as in basic usage.
@@ -392,6 +427,7 @@ The trigger uses [Icon][web-react-icon-documentation] (`chevron-down` when close
 | `labelProps`          | `StyleProps`                                              | —                                  | ✕        | [Style props][readme-style-props] for the inner `Label`; see [`dropdownProps`, `popoverProps`, `labelProps`, and `tagProps`](#dropdownprops-popoverprops-labelprops-and-tagprops)           |
 | `onSelectionChange`   | `(keys: string[]) => void`                                | —                                  | ✓        | Called when the selection changes                                                                                                                                                           |
 | `onToggle`            | `() => void`                                              | —                                  | ✓        | Toggle callback; parent updates `isOpen`                                                                                                                                                    |
+| `optionsRole`         | `'group'` \| `'listbox'`                                  | `group`                            | ✕        | ARIA role for the popover option list; see [Listbox Presentation](#listbox-presentation)                                                                                                    |
 | `popoverProps`        | `StyleProps`                                              | `{ theme: 'theme-light-default' }` | ✕        | [Style props][readme-style-props] for the inner `DropdownPopover`; see [`dropdownProps`, `popoverProps`, `labelProps`, and `tagProps`](#dropdownprops-popoverprops-labelprops-and-tagprops) |
 | `tagProps`            | `StyleProps`                                              | —                                  | ✕        | [Style props][readme-style-props] for the default `Tag` elements; see [`dropdownProps`, `popoverProps`, `labelProps`, and `tagProps`](#dropdownprops-popoverprops-labelprops-and-tagprops)  |
 | `removeAllLabel`      | `string`                                                  | i18n `picker.removeAll`            | ✕        | Remove control label for aggregated tag                                                                                                                                                     |
@@ -477,21 +513,23 @@ Selection, `id`, `isChecked`, `isDisabled`, `inputPosition`, and `isItem` are co
 
 ### API
 
-| Name                | Type                                           | Default | Required | Description                                                |
-| ------------------- | ---------------------------------------------- | ------- | -------- | ---------------------------------------------------------- |
-| `autoComplete`      | `string`                                       | —       | ✕        | Native input `autoComplete`                                |
-| `children`          | `ReactNode`                                    | —       | ✓        | Label shown next to the radio/checkbox                     |
-| `details`           | `ReactNode`                                    | —       | ✕        | Details content below the label                            |
-| `hasValidationIcon` | `bool`                                         | `false` | ✕        | Whether to show validation icon                            |
-| `helperText`        | `ReactNode`                                    | —       | ✕        | Helper text below the radio/checkbox                       |
-| `indeterminate`     | `bool`                                         | —       | ✕        | Indeterminate checkbox state (`multiple` mode only)        |
-| `isLabelHidden`     | `bool`                                         | —       | ✕        | Whether the label is visually hidden                       |
-| `isRequired`        | `bool`                                         | —       | ✕        | Whether the option is required                             |
-| `name`              | `string`                                       | —       | ✕        | Native input `name` (`multiple` mode; ignored in `single`) |
-| `ref`               | `ForwardedRef<HTMLInputElement>`               | —       | ✕        | Input element reference                                    |
-| `validationState`   | [Validation dictionary][dictionary-validation] | —       | ✕        | Validation state                                           |
-| `validationText`    | `ReactNode` \| `ReactNode[]`                   | —       | ✕        | Validation message                                         |
-| `value`             | `string`                                       | —       | ✓        | Key used in `selectedKeys`                                 |
+| Name                | Type                                           | Default | Required | Description                                                                                       |
+| ------------------- | ---------------------------------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------- |
+| `autoComplete`      | `string`                                       | —       | ✕        | Native input `autoComplete`                                                                       |
+| `children`          | `ReactNode`                                    | —       | ✓        | Label shown next to the radio/checkbox                                                            |
+| `details`           | `ReactNode`                                    | —       | ✕        | Details content below the label                                                                   |
+| `hasValidationIcon` | `bool`                                         | `false` | ✕        | Whether to show validation icon                                                                   |
+| `helperText`        | `ReactNode`                                    | —       | ✕        | Helper text below the radio/checkbox                                                              |
+| `indeterminate`     | `bool`                                         | —       | ✕        | Indeterminate checkbox state (`multiple` mode only)                                               |
+| `isLabelHidden`     | `bool`                                         | —       | ✕        | Whether the label is visually hidden                                                              |
+| `isRequired`        | `bool`                                         | —       | ✕        | Whether the option is required                                                                    |
+| `name`              | `string`                                       | —       | ✕        | Native input `name` (`multiple` mode; ignored in `single`)                                        |
+| `ref`               | `ForwardedRef<HTMLInputElement>`               | —       | ✕        | Input element reference                                                                           |
+| `startSlot`         | `ReactNode`                                    | glyph   | ✕        | Decorative content before the label (`optionsRole="listbox"` only; defaults to a selection glyph) |
+| `endSlot`           | `ReactNode`                                    | —       | ✕        | Decorative content after the label (`optionsRole="listbox"` only)                                 |
+| `validationState`   | [Validation dictionary][dictionary-validation] | —       | ✕        | Validation state                                                                                  |
+| `validationText`    | `ReactNode` \| `ReactNode[]`                   | —       | ✕        | Validation message                                                                                |
+| `value`             | `string`                                       | —       | ✓        | Key used in `selectedKeys`                                                                        |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -517,6 +555,7 @@ If you need more control over the styling of a component, you can use [style pro
 and [escape hatches][readme-escape-hatches].
 
 [checkbox-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Checkbox/README.md
+[decision-listbox-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/013-listbox-vs-grid-for-selectable-options.md
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [dictionary-variant]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#variant

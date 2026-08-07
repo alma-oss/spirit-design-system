@@ -22,7 +22,7 @@ import { Label } from '../Label';
 import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { VisuallyHidden } from '../VisuallyHidden';
-import { DEFAULT_POPOVER_PROPS, DEFAULT_SIZE } from './constants';
+import { DEFAULT_OPTIONS_ROLE, DEFAULT_POPOVER_PROPS, DEFAULT_SIZE } from './constants';
 import { PickerContextProvider } from './PickerContext';
 import { PickerPopoverContextProvider } from './PickerPopoverContext';
 import type { SpiritUnstablePickerProps, SpiritUnstablePickerRef } from './types';
@@ -63,6 +63,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     labelProps,
     onSelectionChange,
     onToggle,
+    optionsRole = DEFAULT_OPTIONS_ROLE,
     popoverProps = DEFAULT_POPOVER_PROPS,
     tagProps,
     removeAllLabel = t('picker.removeAll'),
@@ -192,10 +193,11 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
       id: pickerId,
       isDisabled,
       onSelectionChange,
+      optionsRole,
       selectedKeys: selectedPickerKeys,
       selectionMode,
     }),
-    [selectedPickerKeys, isDisabled, onSelectionChange, pickerId, selectionMode],
+    [selectedPickerKeys, isDisabled, onSelectionChange, optionsRole, pickerId, selectionMode],
   );
 
   useImperativeHandle(
