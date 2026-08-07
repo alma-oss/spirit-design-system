@@ -235,9 +235,11 @@ export default [
     },
   },
   {
-    files: ['**/*.figma.*'],
+    files: ['**/*.figma.*', 'src/figma/**'],
     rules: {
       'react-refresh/only-export-components': 'off',
+      // 'figma' is a virtual module injected at runtime by @figma/code-connect CLI — no file on disk to resolve.
+      'import/no-unresolved': 'off',
     },
   },
   {
