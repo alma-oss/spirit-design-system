@@ -13,7 +13,13 @@
   >
     Button as anchor
   </button>
-  <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-default">
+  <div
+    class="DropdownPopover placement-bottom-start"
+    role="dialog"
+    aria-label="Options"
+    data-spirit-placement="bottom-start"
+    id="dropdown-default"
+  >
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
         <use href="/icons/svg/sprite.svg#info" />
@@ -55,7 +61,13 @@
   >
     Button as anchor
   </button>
-  <div class="DropdownPopover placement-top-end" data-spirit-placement="top-end" id="dropdown-top-end">
+  <div
+    class="DropdownPopover placement-top-end"
+    role="dialog"
+    aria-label="Options"
+    data-spirit-placement="top-end"
+    id="dropdown-top-end"
+  >
     <a href="#" class="d-flex mb-400">
       <svg width="24" height="24" aria-hidden="true" class="Icon mr-400">
         <use href="/icons/svg/sprite.svg#info" />
@@ -100,6 +112,8 @@
   </button>
   <div
     class="DropdownPopover placement-bottom-start"
+    role="dialog"
+    aria-label="Options"
     data-spirit-placement="bottom-start"
     id="dropdown-disabled-auto-close"
   >
@@ -146,6 +160,8 @@
   </button>
   <div
     class="DropdownPopover placement-top-start"
+    role="dialog"
+    aria-label="Options"
     data-spirit-placement="top-start"
     id="dropdown-full-width-mode-all"
     data-spirit-fullwidthmode="all"
@@ -193,6 +209,8 @@
   </button>
   <div
     class="DropdownPopover placement-top-start"
+    role="dialog"
+    aria-label="Options"
     data-spirit-placement="top-start"
     id="dropdown-full-width-mode-mobile"
     data-spirit-fullwidthmode="mobile-only"
@@ -240,7 +258,13 @@ See the [Item][item] component for more information.
   >
     Button as anchor
   </button>
-  <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-default">
+  <div
+    class="DropdownPopover placement-bottom-start"
+    role="dialog"
+    aria-label="Options"
+    data-spirit-placement="bottom-start"
+    id="dropdown-default"
+  >
     <a href="#" class="Item">
       <span class="Item__slot" role="presentation">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
@@ -256,6 +280,9 @@ See the [Item][item] component for more information.
 ```
 
 ## Placement
+
+`DropdownPopover` follows the non-modal anchored dialog pattern (`role="dialog"`). Provide an accessible name via
+`aria-label` or `aria-labelledby` (same as the React Dropdown).
 
 DropdownPopover uses the shared [placement helpers][placement-helpers] for positioning. Add the matching placement class to the popover (e.g. `placement-bottom-start`, `placement-top-end`) so the helper applies transform-origin and offset. The component sets `--spirit-placement-offset` for the gap; placement values follow the [Placement Dictionary][dictionary-placement]. You can keep `data-spirit-placement` on the element for scripting or accessibility if needed.
 
@@ -283,6 +310,8 @@ at edge of the `.Dropdown` element and on the place defined by the placement cla
   </button>
   <div
     class="DropdownPopover placement-bottom-start"
+    role="dialog"
+    aria-label="Options"
     data-spirit-placement="bottom-start"
     id="dropdown-alignment"
   >
@@ -306,9 +335,13 @@ There are two options here. Use the trigger element as an anchor or wrap the men
 
 ## DropdownPopover
 
-| Attribute                   | Type                               | Default | Required | Description     |
-| --------------------------- | ---------------------------------- | ------- | -------- | --------------- |
-| `data-spirit-fullwidthmode` | \[`off` \| `mobile-only` \| `all`] | —       | ✕        | Full-width mode |
+| Attribute                        | Type                               | Default | Required | Description                                                                                        |
+| -------------------------------- | ---------------------------------- | ------- | -------- | -------------------------------------------------------------------------------------------------- |
+| `role`                           | `string`                           | —       | ✓\*      | Use `dialog` for the non-modal anchored dialog pattern (or override when composing another widget) |
+| `aria-label` / `aria-labelledby` | `string`                           | —       | ✓\*      | Accessible name for `role="dialog"`                                                                |
+| `data-spirit-fullwidthmode`      | \[`off` \| `mobile-only` \| `all`] | —       | ✕        | Full-width mode                                                                                    |
+
+\*Required when using the default dialog pattern.
 
 ## JavaScript API
 

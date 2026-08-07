@@ -503,14 +503,14 @@ UNSTABLE_PickerTag is the tag shell for custom `renderTags` output. It applies p
 
 ### API
 
-| Name               | Type                                  | Default | Required | Description                                              |
-| ------------------ | ------------------------------------- | ------- | -------- | -------------------------------------------------------- |
-| `children`         | `ReactNode`                           | —       | ✕        | Tag content (defaults to `label`)                        |
-| `isDisabled`       | `bool`                                | `false` | ✕        | Disables the tag                                         |
-| `label`            | `ReactNode`                           | —       | ✓        | Accessible label for the tag                             |
-| `onRemove`         | `() => void`                          | —       | ✓        | Remove button handler                                    |
-| `removeLabel`      | `string`                              | —       | ✕        | Accessible name for the remove control                   |
-| `tagKeyboardProps` | `UnstablePickerSelectionGridRowProps` | —       | ✕        | Row props from `getKeyboardGridRowProps` in `renderTags` |
+| Name               | Type                    | Default | Required | Description                                              |
+| ------------------ | ----------------------- | ------- | -------- | -------------------------------------------------------- |
+| `children`         | `ReactNode`             | —       | ✕        | Tag content (defaults to `label`)                        |
+| `isDisabled`       | `bool`                  | `false` | ✕        | Disables the tag                                         |
+| `label`            | `ReactNode`             | —       | ✓        | Accessible label for the tag                             |
+| `onRemove`         | `() => void`            | —       | ✓        | Remove button handler                                    |
+| `removeLabel`      | `string`                | —       | ✕        | Accessible name for the remove control                   |
+| `tagKeyboardProps` | `SelectionGridRowProps` | —       | ✕        | Row props from `getKeyboardGridRowProps` in `renderTags` |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

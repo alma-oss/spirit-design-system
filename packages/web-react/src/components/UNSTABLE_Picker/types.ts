@@ -1,5 +1,5 @@
-import { type FocusEvent, type KeyboardEvent, type ReactNode } from 'react';
-import type { SelectionMode } from '../../hooks';
+import { type ReactNode } from 'react';
+import type { SelectionGridRowProps, SelectionMode } from '../../hooks';
 import type {
   DropdownBaseProps,
   FillVariantDictionaryType,
@@ -17,15 +17,6 @@ import type {
 
 export type UnstablePickerSelectionMode = SelectionMode;
 
-/** Row props produced by `usePickerSelectionGridKeyboard` for roving tabindex and grid keys */
-export interface UnstablePickerSelectionGridRowProps {
-  tabIndex: 0 | -1;
-  onKeyDown: (event: KeyboardEvent<HTMLElement>) => void;
-  onFocusCapture: (event: FocusEvent<HTMLElement>) => void;
-  onBlurCapture: (event: FocusEvent<HTMLElement>) => void;
-  removeButtonTabIndex: 0 | -1;
-}
-
 export interface UnstablePickerTranslations {
   addButtonLabel?: string;
   closeButtonLabel?: string;
@@ -39,7 +30,7 @@ export interface UnstablePickerTranslations {
 /** Arguments passed to `renderTags` for custom selection UI */
 export interface UnstablePickerRenderTagsOptions {
   /** Row keyboard props for `UNSTABLE_PickerTag` — use index `0..n-1` matching DOM order of `role="row"` */
-  getKeyboardGridRowProps: (index: number) => UnstablePickerSelectionGridRowProps;
+  getKeyboardGridRowProps: (index: number) => SelectionGridRowProps;
   /** Remove a selected item by key (same as default tags) */
   onRemove: (key: string) => void;
   /** Remove by row index; prefer for remove controls so focus moves like default tags */
@@ -94,7 +85,7 @@ export interface UnstablePickerTagProps extends Omit<
   'color' | 'elementType' | 'size' | 'children' | 'role' | 'tabIndex' | 'aria-label' | 'aria-describedby'
 > {
   children?: ReactNode;
-  tagKeyboardProps?: UnstablePickerSelectionGridRowProps;
+  tagKeyboardProps?: SelectionGridRowProps;
   isDisabled?: boolean;
   label: ReactNode;
   onRemove: () => void;

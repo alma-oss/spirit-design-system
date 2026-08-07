@@ -87,7 +87,7 @@ export const getAggregatedTagLabel = (label: string, selectedItems: UnstablePick
 
 /**
  * How many `role="row"` tags participate in selection-grid keyboard navigation
- * (`usePickerSelectionGridKeyboard`). Returns `0` when nothing is selected.
+ * (`useSelectionGridKeyboard`). Returns `0` when nothing is selected.
  * Custom `renderTags` should use one `UNSTABLE_PickerTag` (row) per count, or behaviour will not match.
  *
  * @param selectedItemCount
