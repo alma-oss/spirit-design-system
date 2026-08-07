@@ -1,0 +1,4 @@
+@use '@tokens' as tokens;
+
+$gap: tokens.$space-100;
+$inner-border-radius: tokens.$radius-0;
