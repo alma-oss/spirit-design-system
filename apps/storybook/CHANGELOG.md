@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.8](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.5.7...@alma-oss/spirit-storybook@0.5.8) (2026-08-07)
+
+**Note:** Version bump only for package @alma-oss/spirit-storybook
+
 ## [0.5.7](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.5.6...@alma-oss/spirit-storybook@0.5.7) (2026-07-29)
 
 ### Bug Fixes

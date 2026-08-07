@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/vite-plugin-spirit-icons@2.0.0...@alma-oss/vite-plugin-spirit-icons@2.1.0) (2026-08-07)
+
+### Features
+
+- **vite-plugin-spirit-icons:** strip svg clip paths during icon build #DS-2462, closes [#DS-2462](https://github.com/alma-oss/spirit-design-system/issues/DS-2462)
+
 ## [2.0.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/vite-plugin-spirit-icons@1.1.0...@alma-oss/vite-plugin-spirit-icons@2.0.0) (2026-07-08)
 
 ### ⚠ BREAKING CHANGES

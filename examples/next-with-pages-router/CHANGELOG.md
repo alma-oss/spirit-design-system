@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.9](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-example-next-with-pages-router@0.4.8...@alma-oss/spirit-example-next-with-pages-router@0.4.9) (2026-08-07)
+
+**Note:** Version bump only for package @alma-oss/spirit-example-next-with-pages-router
+
 ## [0.4.8](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-example-next-with-pages-router@0.4.7...@alma-oss/spirit-example-next-with-pages-router@0.4.8) (2026-07-29)
 
 **Note:** Version bump only for package @alma-oss/spirit-example-next-with-pages-router

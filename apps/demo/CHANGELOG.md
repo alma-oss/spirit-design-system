@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.2](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@3.0.1...@lmc-eu/spirit-demo-app@3.0.2) (2026-08-07)
+
+### Bug Fixes
+
+- **demo:** sync theme switcher selects without DOMContentLoaded
+
+### Documentation
+
+- **web,web-react:** use unique aria-label for Navigation landmark in demos #DS-2677, closes [#DS-2677](https://github.com/alma-oss/spirit-design-system/issues/DS-2677)
+
 ## [3.0.1](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@3.0.0...@lmc-eu/spirit-demo-app@3.0.1) (2026-07-29)
 
 ### Bug Fixes

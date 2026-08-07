@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@5.2.0...@alma-oss/spirit-web-react@5.2.1) (2026-08-07)
+
+### Bug Fixes
+
+- **web,web-react:** hide Avatar from AT, remove aria-label from div variant #DS-2677, closes [#DS-2677](https://github.com/alma-oss/spirit-design-system/issues/DS-2677)
+
+### Documentation
+
+- **web, web-react:** add `Collapse` alternative to `Checkbox` consent example #DS-2681, closes [#DS-2681](https://github.com/alma-oss/spirit-design-system/issues/DS-2681)
+- **web, web-react:** add `Collapse` alternative to `Toggle` consent example #DS-2681, closes [#DS-2681](https://github.com/alma-oss/spirit-design-system/issues/DS-2681)
+- **web,web-react:** use unique aria-label for Navigation landmark in demos #DS-2677, closes [#DS-2677](https://github.com/alma-oss/spirit-design-system/issues/DS-2677)
+
+### Code Refactoring
+
+- **web-react, web:** use `CloseButton` in `Picker` tag removal #DS-2703, closes [#DS-2703](https://github.com/alma-oss/spirit-design-system/issues/DS-2703)
+
 ## [5.2.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@5.1.0...@alma-oss/spirit-web-react@5.2.0) (2026-07-29)
 
 ### Features

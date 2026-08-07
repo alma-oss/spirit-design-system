@@ -223,7 +223,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@alma-oss/spirit-icons@npm:^4.0.0, @alma-oss/spirit-icons@workspace:^, @alma-oss/spirit-icons@workspace:packages/icons":
+"@alma-oss/spirit-icons@npm:^4.0.1, @alma-oss/spirit-icons@workspace:^, @alma-oss/spirit-icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-icons@workspace:packages/icons"
   dependencies:
@@ -414,7 +414,7 @@ __metadata:
   dependencies:
     "@alma-oss/spirit-common": "workspace:^"
     "@alma-oss/spirit-design-tokens": "npm:^5.0.1"
-    "@alma-oss/spirit-icons": "npm:^4.0.0"
+    "@alma-oss/spirit-icons": "npm:^4.0.1"
     "@babel/core": "catalog:build"
     "@csstools/normalize.css": "catalog:frontend"
     "@eslint/compat": "catalog:lint"

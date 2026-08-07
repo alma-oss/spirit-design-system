@@ -1,6 +1,6 @@
 {
   "name": "@alma-oss/vite-plugin-spirit-icons",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Vite plugin for generating Spirit Design System icons from SVG files",
   "license": "MIT",
   "engines": {
