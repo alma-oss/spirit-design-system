@@ -212,6 +212,7 @@ To avoid conflicts, we need a convention to distinguish situations when somethin
 - `.Component` classes, helper classes and utilities can be used by **CSS only**,
 - `.is-*` and `.has-*` classes, `data-*` and other attributes can be used by both **CSS and JS**,
 - `id` attribute can be used by **JS only**.
+
 </details>
 
 [design-tokens]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens

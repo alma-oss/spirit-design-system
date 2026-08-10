@@ -78,8 +78,7 @@ CharacterCounter is typically used next to helper and validation text below [Tex
     disabled
     aria-describedby="text-area-counter-disabled-message"
   >
-Disabled</textarea
-  >
+Disabled</textarea>
 </div>
 
 <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYTop">
@@ -99,8 +98,7 @@ Disabled</textarea
     placeholder="Placeholder"
     aria-describedby="text-area-counter-validation-validation-text text-area-counter-validation-message text-area-counter-validation-helper-text"
   >
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea
-  >
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea>
 </div>
 
 <div class="Flex Flex--horizontal Flex--noWrap Flex--alignmentXSpaceBetween Flex--alignmentYTop">

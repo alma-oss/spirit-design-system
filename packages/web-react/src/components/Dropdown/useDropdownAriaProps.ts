@@ -7,9 +7,9 @@ const NAME_DATA_FULLWIDTHMODE = 'data-spirit-fullwidthmode';
 const DIALOG_ROLE = 'dialog';
 
 export enum fullWidthModeKeys {
-  'off' = 'off',
+  off = 'off',
   'mobile-only' = 'mobile-only',
-  'all' = 'all',
+  all = 'all',
 }
 export interface UseDropdownAriaPropsProps {
   /** element ID */

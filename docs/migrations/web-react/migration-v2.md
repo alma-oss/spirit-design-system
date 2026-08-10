@@ -185,6 +185,7 @@ Manually update cross-axis names in the placement prop:
 - `<Dropdown placement="bottom-right" … />` → `<Dropdown placement="bottom-end" … />`
 - `<Dropdown placement="left-top" … />` → `<Dropdown placement="left-start" … />`
 - `<Dropdown placement="left-bottom" … />` → `<Dropdown placement="left-end" … />`
+
 </details>
 
 ### FileUploader: FileUploaderAttachment `buttonLabel` and `editButtonLabel` Props
@@ -209,6 +210,7 @@ Manually replace the props in your project:
 
 - `<FileUploaderAttachment buttonLabel="Remove this attachment" … />` → `<FileUploaderAttachment removeText="Remove this attachment" … />`
 - `<FileUploaderAttachment editButtonLabel="Edit this attachment" … />` → `<FileUploaderAttachment editText="Edit this attachment" … />`
+
 </details>
 
 ### Grid: Breakpoint Props
@@ -234,6 +236,7 @@ Manually replace `tablet` and `desktop` props with the `cols` object prop.
 - `<Grid cols="2" tablet="3" … />` → `<Grid cols={{ mobile: 2, tablet: 3 }} … />`
 - `<Grid desktop="3" … />` → `<Grid cols={{ desktop: 3 }} … />`
 - `<Grid cols="1" tablet="2" desktop="3" … />` → `<Grid cols={{ mobile: 1, tablet: 2, desktop: 3 }} … />`
+
 </details>
 
 ### Grid: GridSpan Component
@@ -291,6 +294,7 @@ The default number of columns is 12, so the equation is `1 + (12 - over) / 2` mo
   - `columnStart` = 1 + (12 - 8) / 2 = 3
   - `columnStart` = 1 + (12 - 6) / 2 = 4
   - `columnStart` = 1 + (12 - 4) / 2 = 5
+
   </details>
 
 ### Header: HeaderDesktopActions `isAtEnd` prop
@@ -318,6 +322,7 @@ Remove the `color` prop from the HeaderDesktopActions component.
 
 - `<HeaderDesktopActions color="secondary" … />` → `<HeaderDesktopActions isAtEnd … />`
 - `<HeaderDesktopActions color="primary" … />` → `<HeaderDesktopActions … />`
+
 </details>
 
 ### Modal: ModalDialog `isExpandedOnMobile` Prop
@@ -397,6 +402,7 @@ Manually update the `preferredHeightOnMobile` and `preferredHeightFromTabletUp` 
 Update the `maxHeightFromTabletUp` prop to the new `maxHeight` prop:
 
 - `<ModalDialog maxHeightFromTabletUp="555px" … />` → `<ModalDialog maxHeight={{ tablet: '555px' }} … />`
+
 </details>
 
 ### Modal: ModalDialog Uniform Appearance
@@ -443,6 +449,7 @@ Manually replace the props in your project.
 
 - `<TabItem forTab="TabPane1" … />` → `<TabItem forTabPane="TabPane1" … />`
 - `<TabPane tabId="TabPane1" … />` → `<TabPane id="TabPane1" … />`
+
 </details>
 
 ### TextField: `label` Prop
@@ -517,6 +524,7 @@ Manually update cross-axis names in the placement prop:
 - `<Tooltip placement="bottom-right" … />` → `<Tooltip placement="bottom-end" … />`
 - `<Tooltip placement="left-top" … />` → `<Tooltip placement="left-start" … />`
 - `<Tooltip placement="left-bottom" … />` → `<Tooltip placement="left-end" … />`
+
 </details>
 
 ### TooltipModern

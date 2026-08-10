@@ -19,13 +19,7 @@ import { formatUnitValue, type UnitFormatContext } from '../formatters/unitForma
 import { FONT_SIZE_BASE } from '../constants';
 
 type NumericToken =
-  | DimensionToken
-  | RadiusToken
-  | SpaceToken
-  | SizeToken
-  | FontSizeToken
-  | LineHeightToken
-  | LetterSpacingToken;
+  DimensionToken | RadiusToken | SpaceToken | SizeToken | FontSizeToken | LineHeightToken | LetterSpacingToken;
 
 type NumericTokenProcessorContext = {
   tokenGroups: Array<TokenGroup>;

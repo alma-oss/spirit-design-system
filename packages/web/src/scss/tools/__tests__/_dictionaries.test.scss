@@ -41,9 +41,7 @@
             @include test.output() {
                 @include dictionaries.generate-alignments(
                     $class-name: 'Test',
-                    $dictionary-values: (
-                        'left',
-                    ),
+                    $dictionary-values: ('left'),
                     $axis: 'x'
                 );
             }
@@ -59,9 +57,7 @@
             @include test.output() {
                 @include dictionaries.generate-alignments(
                     $class-name: 'Test',
-                    $dictionary-values: (
-                        'stretch',
-                    ),
+                    $dictionary-values: ('stretch'),
                     $axis: 'x',
                     $properties: 'justify-items',
                     $infix: 'tablet--'
@@ -79,9 +75,7 @@
             @include test.output() {
                 @include dictionaries.generate-alignments(
                     $class-name: 'Test',
-                    $dictionary-values: (
-                        'stretch',
-                    ),
+                    $dictionary-values: ('stretch'),
                     $axis: 'x',
                     $properties: (
                         'justify-content',
@@ -102,9 +96,7 @@
             @include test.output() {
                 @include dictionaries.generate-alignments(
                     $class-name: 'Test',
-                    $dictionary-values: (
-                        'space-between',
-                    ),
+                    $dictionary-values: ('space-between'),
                     $axis: 'x',
                     $properties: (
                         'justify-content',
@@ -405,9 +397,7 @@
             @include test.output() {
                 @include dictionaries.generate-sizes(
                     $class-name: 'TestSize',
-                    $dictionary-values: (
-                        'large',
-                    ),
+                    $dictionary-values: ('large'),
                     $config: (
                         large: (
                             width: 100px,
@@ -435,9 +425,7 @@
             @include test.output() {
                 @include dictionaries.generate-sizes(
                     $class-name: 'TestSize',
-                    $dictionary-values: (
-                        'large',
-                    ),
+                    $dictionary-values: ('large'),
                     $config: (
                         large: (
                             width: 100px,

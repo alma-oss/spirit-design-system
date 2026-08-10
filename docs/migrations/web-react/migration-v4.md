@@ -45,6 +45,7 @@ Manually replace the package name in all import statements in your project.
 - `@lmc-eu/spirit-web-react` → `@alma-oss/spirit-web-react`
 - `@lmc-eu/spirit-web-react/components/...` → `@alma-oss/spirit-web-react/components/...`
 - `@lmc-eu/spirit-web-react/src` → `@alma-oss/spirit-web-react/src`
+
 </details>
 
 > ℹ️ Don't forget to also update the [migration guide of the _spirit-design-tokens_ package][migration-guide-design-tokens] for related changes.
