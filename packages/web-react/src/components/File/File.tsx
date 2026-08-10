@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import React, { type ElementType } from 'react';
 import { PropsProvider } from '../../context';
 import { useI18n, useStyleProps } from '../../hooks';
+import { CloseButton } from '../CloseButton';
 import { ControlButton } from '../ControlButton';
 import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
@@ -64,10 +65,7 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
   ) : null;
 
   const dismissActionButton = onDismiss ? (
-    <ControlButton {...fileRowControlButtonProps} onClick={onDismiss}>
-      <VisuallyHidden>{resolvedRemoveText}</VisuallyHidden>
-      <Icon name="close" boxSize={16} aria-hidden="true" />
-    </ControlButton>
+    <CloseButton isDisabled={isDisabled} label={resolvedRemoveText} onClick={onDismiss} />
   ) : null;
 
   const Component = elementType as ElementType;

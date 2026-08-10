@@ -108,11 +108,7 @@ Compose richer rows with [HelperText][readme-helper-text], `Text`, or other inli
 ```tsx
 <Item
   startSlot={<Icon name="folder-dualtone" color="selected" />}
-  endSlot={
-    <ControlButton isSymmetrical size="small" aria-label="Remove Project Alpha">
-      <Icon name="close" />
-    </ControlButton>
-  }
+  endSlot={<CloseButton size="small" label="Remove Project Alpha" />}
   isSelected
 >
   <Label>Project Alpha</Label>
@@ -157,17 +153,11 @@ Use Text props when Item content needs plain text styling instead of form-field 
 
 ## Interactive Controls in Slots
 
-When a slot contains an interactive control such as a `ControlButton`, keep the Item root non-interactive
-or provide markup that avoids nested interactive elements. Icon-only controls need an accessible name such as `aria-label`.
+When a slot contains an interactive control such as a `CloseButton`, keep the Item root non-interactive
+or provide markup that avoids nested interactive elements.
 
 ```tsx
-<Item
-  endSlot={
-    <ControlButton isSymmetrical size="small" aria-label="Remove item">
-      <Icon name="close" />
-    </ControlButton>
-  }
->
+<Item endSlot={<CloseButton size="small" label="Remove item" />}>
   <Label>Dismissible item</Label>
 </Item>
 ```
@@ -180,11 +170,7 @@ and render a stretched `Link` inside the content:
   <Item
     alignmentY="top"
     startSlot={<Icon name="search" />}
-    endSlot={
-      <ControlButton isSymmetrical size="small" aria-label="Remove Malíř pokojů">
-        <Icon name="close" />
-      </ControlButton>
-    }
+    endSlot={<CloseButton size="small" label="Remove Malíř pokojů" />}
     isSelected
   >
     <Stack elementType="span" spacing="space-300">
@@ -278,7 +264,7 @@ Choose the Item root semantics according to what the row does:
 - Use the default non-interactive `div` for static content, status rows, or visual-only rows that are not directly actionable.
 - Use `elementType="button"` only when the whole row triggers one button-like action and the row has no other interactive descendants.
 - Use `elementType="a"` for a single link-like row. For composed rows, keep the Item root non-interactive and render a `Link` inside the content; `isStretched` can make the whole visual row clickable without nesting a link around other controls.
-- When a slot contains a removable `ControlButton`, do not render the Item root as a `button` or `a`. Keep the root non-interactive, or use the grid pattern below when the row exposes multiple actions. Icon-only remove controls need an accessible name such as `aria-label`.
+- When a slot contains a removable `CloseButton`, do not render the Item root as a `button` or `a`. Keep the root non-interactive, or use the grid pattern below when the row exposes multiple actions.
 - Use `role="grid"`, `role="row"`, and `role="gridcell"` when a row has multiple interactive cells or actions that should be navigated as a structured row. In this pattern, the Item itself can be `role="presentation"` and the cell content owns the interactive semantics.
 - `isSelected` is visual only. It does not add `aria-selected`, `aria-current`, or a widget role. The parent widget owns those semantics because listbox options, menu items, grid rows, and links all use different markup.
 - Decorative slot icons should stay hidden according to the Icon component conventions. A selected icon color is visual only and must not replace the ARIA state.
@@ -304,9 +290,7 @@ The grid role requires a keyboard navigation contract implemented in JavaScript:
     startSlot={<Icon name="folder-dualtone" />}
     endSlot={
       <span role="gridcell">
-        <ControlButton isSymmetrical size="small" aria-label="Remove Project Alpha">
-          <Icon name="close" />
-        </ControlButton>
+        <CloseButton size="small" label="Remove Project Alpha" />
       </span>
     }
   >

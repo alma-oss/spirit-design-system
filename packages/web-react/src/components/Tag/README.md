@@ -47,24 +47,22 @@ Subtle variants:
 <Tag size="xlarge">XLarge tag</Tag>
 ```
 
-## With ControlButton
+## With CloseButton
 
-### ControlButton Size Mapping
+### CloseButton Size Mapping
 
-| Tag Size | ControlButton Size |
-| -------- | ------------------ |
-| xsmall   | xsmall             |
-| small    | xsmall             |
-| medium   | xsmall             |
-| large    | small              |
-| xlarge   | small              |
+| Tag Size | CloseButton Size |
+| -------- | ---------------- |
+| xsmall   | xsmall           |
+| small    | xsmall           |
+| medium   | xsmall           |
+| large    | small            |
+| xlarge   | small            |
 
 ```tsx
 <Tag elementType="div" color="selected">
   <span>Tag label</span>
-  <ControlButton size="xsmall" isSymmetrical aria-label="Remove Tag label">
-    <Icon name="close" />
-  </ControlButton>
+  <CloseButton size="xsmall" label="Remove Tag label" />
 </Tag>
 ```
 
@@ -100,14 +98,12 @@ Use the `isDisabled` prop to visually disable a `Tag`:
 </Tag>
 ```
 
-Disabled `Tag` with `ControlButton`:
+Disabled `Tag` with `CloseButton`:
 
 ```tsx
 <Tag elementType="div" isDisabled>
   <span>Disabled tag</span>
-  <ControlButton size="xsmall" isSymmetrical isDisabled aria-label="Remove Disabled tag">
-    <Icon name="close" />
-  </ControlButton>
+  <CloseButton size="xsmall" isDisabled label="Remove Disabled tag" />
 </Tag>
 ```
 

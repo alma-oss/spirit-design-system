@@ -41,11 +41,11 @@ It is a standalone component, but most often it is used in combination with the 
       <button
         type="button"
         class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
-        aria-label="Remove file Document.pdf from list"
       >
         <svg class="Icon" width="16" height="16" aria-hidden="true">
           <use href="/assets/icons/svg/sprite.svg#close" />
         </svg>
+        <span class="accessibility-hidden">Remove file Document.pdf from list</span>
       </button>
     </div>
   </li>
@@ -168,12 +168,12 @@ Show upload progress using `HelperText` component:
   <button
     type="button"
     class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground text-color-scheme dynamic-color-border dynamic-color-background-interactive accessibility-tap-target disabled"
-    aria-label="Remove file Document.pdf from list"
     disabled
   >
     <svg class="Icon" width="16" height="16" aria-hidden="true">
       <use href="/assets/icons/svg/sprite.svg#close" />
     </svg>
+    <span class="accessibility-hidden">Remove file Document.pdf from list</span>
   </button>
 </li>
 ```

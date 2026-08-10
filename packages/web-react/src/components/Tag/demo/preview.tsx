@@ -8,7 +8,7 @@ import { IconsProvider } from '../../../context';
 import TagDefault from './TagDefault';
 import TagDisabled from './TagDisabled';
 import TagInteractive from './TagInteractive';
-import TagWithControlButton from './TagWithControlButton';
+import TagWithCloseButton from './TagWithCloseButton';
 
 export const Preview = () => (
   <StrictMode>
@@ -16,8 +16,8 @@ export const Preview = () => (
       <DocsSection title="Default" stackAlignment="stretch">
         <TagDefault />
       </DocsSection>
-      <DocsSection title="With ControlButton">
-        <TagWithControlButton />
+      <DocsSection title="With CloseButton">
+        <TagWithCloseButton />
       </DocsSection>
       <DocsSection title="Interactive">
         <TagInteractive />

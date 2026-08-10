@@ -1,17 +1,10 @@
 import React from 'react';
-import { ControlButton } from '../../ControlButton';
-import { Icon } from '../../Icon';
+import { CloseButton } from '../../CloseButton';
 import { Label } from '../../Label';
 import Item from '../Item';
 
 const ItemEndSlotControl = () => (
-  <Item
-    endSlot={
-      <ControlButton isSymmetrical size="small" aria-label="Remove item">
-        <Icon name="close" />
-      </ControlButton>
-    }
-  >
+  <Item endSlot={<CloseButton size="small" label="Remove item" />}>
     <Label>Dismissible item</Label>
   </Item>
 );

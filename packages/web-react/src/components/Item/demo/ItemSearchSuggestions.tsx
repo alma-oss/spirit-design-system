@@ -1,5 +1,5 @@
 import React from 'react';
-import { ControlButton } from '../../ControlButton';
+import { CloseButton } from '../../CloseButton';
 import { HelperText } from '../../HelperText';
 import { Icon } from '../../Icon';
 import { Link } from '../../Link';
@@ -15,11 +15,7 @@ const ItemSearchSuggestions = () => (
         <Item
           alignmentY="top"
           startSlot={<Icon name="search" />}
-          endSlot={
-            <ControlButton isSymmetrical size="small" aria-label="Remove Malíř pokojů">
-              <Icon name="close" />
-            </ControlButton>
-          }
+          endSlot={<CloseButton size="small" label="Remove Malíř pokojů" />}
           isSelected
         >
           <Stack elementType="span" spacing="space-300">
@@ -35,11 +31,7 @@ const ItemSearchSuggestions = () => (
         <Item
           alignmentY="top"
           startSlot={<Icon name="search" />}
-          endSlot={
-            <ControlButton isSymmetrical size="small" aria-label="Remove Malíř pokojů">
-              <Icon name="close" />
-            </ControlButton>
-          }
+          endSlot={<CloseButton size="small" label="Remove Malíř pokojů" />}
         >
           <Stack elementType="span" spacing="space-300">
             <Link href="#umelecky-malir" color="inherit" underlined="never" isStretched>
@@ -51,11 +43,7 @@ const ItemSearchSuggestions = () => (
         <Item
           alignmentY="top"
           startSlot={<Icon name="search" />}
-          endSlot={
-            <ControlButton isSymmetrical size="small" aria-label="Remove Skladník">
-              <Icon name="close" />
-            </ControlButton>
-          }
+          endSlot={<CloseButton size="small" label="Remove Skladník" />}
           isDisabled
         >
           <Stack elementType="span" spacing="space-300">
@@ -76,9 +64,7 @@ const ItemSearchSuggestions = () => (
           startSlot={<Icon name="search" />}
           endSlot={
             <span role="gridcell">
-              <ControlButton isSymmetrical size="small" aria-label="Remove Malíř pokojů">
-                <Icon name="close" />
-              </ControlButton>
+              <CloseButton size="small" label="Remove Malíř pokojů" />
             </span>
           }
           isSelected
@@ -99,9 +85,7 @@ const ItemSearchSuggestions = () => (
           startSlot={<Icon name="search" />}
           endSlot={
             <span role="gridcell">
-              <ControlButton isSymmetrical size="small" aria-label="Remove Malíř pokojů">
-                <Icon name="close" />
-              </ControlButton>
+              <CloseButton size="small" label="Remove Malíř pokojů" />
             </span>
           }
           role="row"

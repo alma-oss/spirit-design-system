@@ -37,7 +37,7 @@
 
   <div class="Container">
 
-    <h2 class="docs-Heading">With ControlButton</h2>
+    <h2 class="docs-Heading">With CloseButton</h2>
 
     <div class="docs-Stack docs-Stack--stretch">
       <div class="Grid Grid--cols-1 Grid--tablet--cols-3 Grid--desktop--cols-5" style="--grid-spacing-y: var(--spirit-space-1100);">
@@ -63,7 +63,6 @@
               <button
                 type="button"
                 class="ControlButton ControlButton--{{@root.controlButtonSize}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-                aria-label="Remove Tag {{color}}"
               >
                 <svg
                   class="Icon"
@@ -73,6 +72,7 @@
                 >
                   <use href="/assets/icons/svg/sprite.svg#close" />
                 </svg>
+                <span class="accessibility-hidden">Remove Tag {{color}}</span>
               </button>
             </div>
             <div class="Tag Tag--{{color}} Tag--{{size}} color-scheme-on-{{@root.colorPrefix}}-basic">
@@ -80,7 +80,6 @@
               <button
                 type="button"
                 class="ControlButton ControlButton--{{@root.controlButtonSize}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-                aria-label="Remove Tag {{color}}"
               >
                 <svg
                   class="Icon"
@@ -90,6 +89,7 @@
                 >
                   <use href="/assets/icons/svg/sprite.svg#close" />
                 </svg>
+                <span class="accessibility-hidden">Remove Tag {{color}}</span>
               </button>
             </div>
             {{/each}}
@@ -171,11 +171,10 @@
         aria-disabled="true"
       >Disabled link</a>
       <div class="Tag Tag--neutral Tag--medium disabled">
-        <span>Disabled with ControlButton</span>
+        <span>Disabled with CloseButton</span>
         <button
           type="button"
           class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-          aria-label="Remove Disabled"
           disabled
         >
           <svg
@@ -186,14 +185,14 @@
           >
             <use href="/assets/icons/svg/sprite.svg#close" />
           </svg>
+          <span class="accessibility-hidden">Remove Disabled</span>
         </button>
       </div>
       <div class="Tag Tag--neutral Tag--subtle Tag--medium disabled">
-        <span>Disabled subtle with ControlButton</span>
+        <span>Disabled subtle with CloseButton</span>
         <button
           type="button"
           class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
-          aria-label="Remove Disabled subtle"
           disabled
         >
           <svg
@@ -204,6 +203,7 @@
           >
             <use href="/assets/icons/svg/sprite.svg#close" />
           </svg>
+          <span class="accessibility-hidden">Remove Disabled subtle</span>
         </button>
       </div>
     </div>
