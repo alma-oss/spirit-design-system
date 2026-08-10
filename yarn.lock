@@ -32472,14 +32472,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:19.2.6":
-  version: 19.2.6
-  resolution: "react-dom@npm:19.2.6"
+"react-dom@npm:19.2.8":
+  version: 19.2.8
+  resolution: "react-dom@npm:19.2.8"
   dependencies:
     scheduler: "npm:^0.27.0"
   peerDependencies:
-    react: ^19.2.6
-  checksum: 10/695122e37dec3460311231ff1f9a96368d74457d4ccf60010eaebc08c3e1c47b054c9267b40d98c689ae99d0c29a340acacfd405016a954a4f11613146191e68
+    react: ^19.2.8
+  checksum: 10/fb45d500a8615a36d71a821213a3d4bfe32a70aa1d04ce17d8791dd10c4ef0281e7fdd46694e1112f0f2dcf58df89d12043a13228be9788458aa82f4885a9cdc
   languageName: node
   linkType: hard
 
@@ -32494,12 +32494,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-image-crop@npm:11.0.10":
-  version: 11.0.10
-  resolution: "react-image-crop@npm:11.0.10"
+"react-image-crop@npm:11.1.2":
+  version: 11.1.2
+  resolution: "react-image-crop@npm:11.1.2"
   peerDependencies:
     react: ">=16.13.1"
-  checksum: 10/5f38841ec89ac346a69e9bc3460eec71ccb8e154ef7364e7d8f87f902f6ecde2746dfd887230826d3d4fbe23314aa20cd19f80061bd9d3772d4464ba020987b8
+  checksum: 10/a132d49413ba1c73c4146028e3a9a3bf02e20be31284f12dedbcc472ea9cf33408fa71b709213257c8a0924ebe9ad16c1899b3220adf2d37fc7162bcd54f03ec
   languageName: node
   linkType: hard
 
@@ -32579,10 +32579,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.2.6":
-  version: 19.2.6
-  resolution: "react@npm:19.2.6"
-  checksum: 10/205f0db93bd6c6485f94471d1c3437ae1d410f322297c76186fe4f658f88a6786bb0805e3cf8f330f24d1daa923b6b610ec63960d2461e9201bca64ca8361db9
+"react@npm:19.2.8":
+  version: 19.2.8
+  resolution: "react@npm:19.2.8"
+  checksum: 10/a3c697798035e295ca9e51591d3a8700824535cb8c070fac1f8abbe69717ceb99108cbc4ba7b31a606806f336b1eba705705f63b9d39ace198fe51e8990ac843
   languageName: node
   linkType: hard
 
