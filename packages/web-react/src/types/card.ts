@@ -27,8 +27,7 @@ export type CardAlignmentYType = SingleOrResponsive<NonNullable<AlignmentYDictio
 
 // Card types
 export type CardDirectionType =
-  | NonNullable<DirectionExtendedDictionaryType>
-  | { [key: string]: NonNullable<DirectionExtendedDictionaryType> };
+  NonNullable<DirectionExtendedDictionaryType> | { [key: string]: NonNullable<DirectionExtendedDictionaryType> };
 
 /** ===== INTERNAL API ===== */
 export interface CardProps extends ChildrenProps, StyleProps {
@@ -41,9 +40,7 @@ export interface CardProps extends ChildrenProps, StyleProps {
 export type SpiritCardProps<E extends ElementType = 'article'> = PolymorphicComponentProps<E, CardProps>;
 
 export type CardMediaBackgroundColorsType =
-  | BackgroundColorsDictionaryType
-  | BackgroundAccentColorsType
-  | BackgroundEmotionColorsType;
+  BackgroundColorsDictionaryType | BackgroundAccentColorsType | BackgroundEmotionColorsType;
 
 export type CardMediaObjectFitType = (typeof ObjectFit)[keyof typeof ObjectFit];
 

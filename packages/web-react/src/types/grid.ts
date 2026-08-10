@@ -25,11 +25,9 @@ export type GridItemPositionBreakpoints = {
 export type GridItemPosition = number | GridItemSpan | GridItemPositionBreakpoints;
 
 export type GridAlignmentXType =
-  | NonNullable<AlignmentXExtendedDictionaryType>
-  | { [key: string]: NonNullable<AlignmentXExtendedDictionaryType> };
+  NonNullable<AlignmentXExtendedDictionaryType> | { [key: string]: NonNullable<AlignmentXExtendedDictionaryType> };
 export type GridAlignmentYType =
-  | NonNullable<AlignmentYExtendedDictionaryType>
-  | { [key: string]: NonNullable<AlignmentYExtendedDictionaryType> };
+  NonNullable<AlignmentYExtendedDictionaryType> | { [key: string]: NonNullable<AlignmentYExtendedDictionaryType> };
 
 export interface GridCustomLayoutProps {
   alignmentX?: GridAlignmentXType;

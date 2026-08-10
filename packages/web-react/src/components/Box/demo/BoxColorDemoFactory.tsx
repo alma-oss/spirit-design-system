@@ -11,10 +11,7 @@ import Box from '../Box';
 
 type BoxColorDemoType = 'background' | 'text';
 export type BoxTextColorsType =
-  | TextAccentColorsType
-  | TextEmotionColorsType
-  | TextNeutralColorsType
-  | TextColorsDictionaryType;
+  TextAccentColorsType | TextEmotionColorsType | TextNeutralColorsType | TextColorsDictionaryType;
 
 type BoxColorDemoFactoryProps = {
   label: string;

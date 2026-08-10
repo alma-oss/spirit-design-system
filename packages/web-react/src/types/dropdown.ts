@@ -28,11 +28,9 @@ export type DropdownTriggerRenderProps = {
 };
 
 export type DropdownAlignmentXType =
-  | AlignmentXExtendedDictionaryType
-  | { [key: string]: AlignmentXExtendedDictionaryType };
+  AlignmentXExtendedDictionaryType | { [key: string]: AlignmentXExtendedDictionaryType };
 export type DropdownAlignmentYType =
-  | AlignmentYExtendedDictionaryType
-  | { [key: string]: AlignmentYExtendedDictionaryType };
+  AlignmentYExtendedDictionaryType | { [key: string]: AlignmentYExtendedDictionaryType };
 
 export interface DropdownAlignmentProps {
   alignmentX?: DropdownAlignmentXType;

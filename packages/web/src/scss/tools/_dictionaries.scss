@@ -40,12 +40,8 @@
 // * $infix: the infix to add to the class name
 @mixin generate-alignments($class-name, $dictionary-values, $axis, $properties: null, $infix: '') {
     $axis-properties: (
-        'x': (
-            'justify-content',
-        ),
-        'y': (
-            'align-items',
-        ),
+        'x': ('justify-content'),
+        'y': ('align-items'),
     );
     $invalid-property-value-map: (
         'justify-items': 'space-between',

@@ -11,10 +11,7 @@ import {
 
 export type IconBoxSize = SingleOrResponsive<number>;
 export type IconColorType =
-  | TextColorNamesType
-  | EmotionColorNamesType
-  | AccentColorNamesType
-  | TextSelectedColorNamesType;
+  TextColorNamesType | EmotionColorNamesType | AccentColorNamesType | TextSelectedColorNamesType;
 
 export interface IconStyleProps extends SVGAttributes<SVGElement> {
   /** Size of the icon */

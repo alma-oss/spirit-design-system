@@ -331,6 +331,7 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/collapse-isDisposable-pr
 Manually replace the prop in your project.
 
 - `<UncontrolledCollapse hideOnCollapse … />` → `<UncontrolledCollapse isDisposable … />`
+
 </details>
 
 ### ControlButton: Expanded Size Scale Feature Flag Removed
@@ -375,6 +376,7 @@ If you relied on the previous heights, shift the `size` prop up to keep the same
 - `<ControlButton size="small" … />` → `<ControlButton size="medium" … />`
 - `<ControlButton size="medium" … />` → `<ControlButton size="large" … />`
 - `<ControlButton size="large" … />` → `<ControlButton size="xlarge" … />`
+
 </details>
 
 ### DrawerPanel: Restructured with Sub-components
@@ -584,6 +586,7 @@ Manually replace the prop values in your project.
 - `<Flex direction="row" … />` → `<Flex direction="horizontal" … />`
 - `<Flex direction="column" … />` → `<Flex direction="vertical" … />`
 - `<Flex direction={{ mobile: "column", tablet: "row" }} … />` → `<Flex direction={{ mobile: 'vertical', tablet: 'horizontal' }} … />`
+
 </details>
 
 ### Form Components: `isFluid` Prop Removed
@@ -618,6 +621,7 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/forms-isFluid-prop-remov
 Remove the `isFluid` prop from affected form components.
 
 - `<TextField id="name" label="Name" isFluid />` → `<TextField id="name" label="Name" />`
+
 </details>
 
 ### Header: Stabilization of `UNSTABLE_Header` to `Header`, Previous Implementation Removed
@@ -767,7 +771,8 @@ variant) was removed.
 - For expanded category triggers, set `aria-expanded="true"` on the action to get the open visual state.
 - For second-level items, use structural nesting and keep icons on parent category actions only.
 - If you relied on the vertical selected-state indicator, note that it has been removed; selection is now
-communicated through the action's background and color only.
+  communicated through the action's background and color only.
+
 </details>
 
 ### Radio: Composition Markup Changed

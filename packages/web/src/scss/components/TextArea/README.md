@@ -138,8 +138,7 @@ Use validation modifiers on `InputContainer`:
       placeholder="Placeholder"
       aria-describedby="text-area-warning-validation-text"
     >
-Filled</textarea
-    >
+Filled</textarea>
   </div>
   <div id="text-area-warning-validation-text" class="ValidationText ValidationText--warning">Validation text</div>
 </div>
@@ -153,8 +152,7 @@ Filled</textarea
       placeholder="Placeholder"
       aria-describedby="text-area-danger-validation-text"
     >
-Filled</textarea
-    >
+Filled</textarea>
   </div>
   <div id="text-area-danger-validation-text" class="ValidationText ValidationText--danger">
     <ul>
@@ -173,8 +171,7 @@ Filled</textarea
       placeholder="Placeholder"
       aria-describedby="text-area-danger-with-icon-validation-text"
     >
-Filled</textarea
-    >
+Filled</textarea>
   </div>
   <div id="text-area-danger-with-icon-validation-text" class="ValidationText ValidationText--danger">
     <svg class="Icon" width="20" height="20" aria-hidden="true">

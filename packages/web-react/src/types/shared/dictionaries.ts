@@ -45,16 +45,14 @@ export type AlignmentXDictionaryType<T = undefined> = (typeof AlignmentX)[Alignm
 
 export type AlignmentXExtendedDictionaryKeys = keyof typeof AlignmentXExtended;
 export type AlignmentXExtendedDictionaryType<T = undefined> =
-  | (typeof AlignmentXExtended)[AlignmentXExtendedDictionaryKeys]
-  | T;
+  (typeof AlignmentXExtended)[AlignmentXExtendedDictionaryKeys] | T;
 
 export type AlignmentYDictionaryKeys = keyof typeof AlignmentY;
 export type AlignmentYDictionaryType<T = undefined> = (typeof AlignmentY)[AlignmentYDictionaryKeys] | T;
 
 export type AlignmentYExtendedDictionaryKeys = keyof typeof AlignmentYExtended;
 export type AlignmentYExtendedDictionaryType<T = undefined> =
-  | (typeof AlignmentYExtended)[AlignmentYExtendedDictionaryKeys]
-  | T;
+  (typeof AlignmentYExtended)[AlignmentYExtendedDictionaryKeys] | T;
 
 export type TextAlignmentDictionaryKeys = keyof typeof TextAlignments;
 export type TextAlignmentDictionaryType<T = undefined> = (typeof TextAlignments)[TextAlignmentDictionaryKeys] | T;
@@ -75,13 +73,11 @@ export type BorderWidthsDictionaryType<C = undefined> = (typeof BorderWidths)[Bo
 /* Color */
 export type BackgroundColorsDictionaryKeys = keyof typeof BackgroundColors;
 export type BackgroundColorsDictionaryType<C = undefined> =
-  | (typeof BackgroundColors)[BackgroundColorsDictionaryKeys]
-  | C;
+  (typeof BackgroundColors)[BackgroundColorsDictionaryKeys] | C;
 
 export type ComponentButtonColorsDictionaryKeys = keyof typeof ComponentButtonColors;
 export type ComponentButtonColorsDictionaryType<C = undefined> =
-  | (typeof ComponentButtonColors)[ComponentButtonColorsDictionaryKeys]
-  | C;
+  (typeof ComponentButtonColors)[ComponentButtonColorsDictionaryKeys] | C;
 
 export type LinkColorsDictionaryKeys = keyof typeof LinkColors;
 export type LinkColorsDictionaryType<C = undefined> = (typeof LinkColors)[LinkColorsDictionaryKeys] | C;
@@ -108,8 +104,7 @@ export interface EmphasisProps<E> {
 /* Gradient */
 export type BackgroundGradientsDictionaryKeys = keyof typeof BackgroundGradients;
 export type BackgroundGradientsDictionaryType<C = undefined> =
-  | (typeof BackgroundGradients)[BackgroundGradientsDictionaryKeys]
-  | C;
+  (typeof BackgroundGradients)[BackgroundGradientsDictionaryKeys] | C;
 
 /* Placement */
 export type PlacementDictionaryKeys = keyof typeof Placements;
@@ -129,8 +124,7 @@ export interface SizeProps<P> {
 /* Validation */
 export type ValidationStatesDictionaryKeys = keyof typeof ValidationStates;
 export type ValidationStatesDictionaryType<T = undefined> =
-  | (typeof ValidationStates)[ValidationStatesDictionaryKeys]
-  | T;
+  (typeof ValidationStates)[ValidationStatesDictionaryKeys] | T;
 
 /* Variant */
 export type ShapeVariantDictionaryKeys = keyof typeof ShapeVariants;

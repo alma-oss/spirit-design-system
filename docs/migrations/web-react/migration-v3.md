@@ -45,6 +45,7 @@ Manually replace the props in your project.
 
 - `<Button isSquare … />` → `<Button isSymmetrical … />`
 - `<ButtonLink isSquare … />` → `<ButtonLink isSymmetrical … />`
+
 </details>
 
 ### Button and ButtonLink: Removed `inverted` Variant
@@ -81,6 +82,7 @@ npx @lmc-eu/spirit-codemods -p <path> -t v3/web-react/heading-elementType-prop
 Manually replace the props in your project.
 
 - `<Heading … />` → `<Heading elementType="{/* Your semantic HTML element here */}" … />`
+
 </details>
 
 ### Link: Removed `isUnderlined` Prop
@@ -103,6 +105,7 @@ npx @lmc-eu/spirit-codemods -p <path> -t v3/web-react/link-underlined-prop
 Manually replace the props in your project.
 
 - `<Link isUnderlined … />` → `<Link underlined="always" … />`
+
 </details>
 
 ### Link: Removed `inverted` Variant
@@ -129,6 +132,7 @@ npx @lmc-eu/spirit-codemods -p <path> -t v3/web-react/link-hasVisitedStyleAllowe
   <summary>🔧 Manual Migration Steps</summary>
 
 - `<Link … />` → `<Link hasVisitedStyleAllowed … />`
+
 </details>
 
 ### Pill: Update Color Palette
@@ -167,6 +171,7 @@ Manually replace the `ToastBar` prop color in your project.
 Instead of using `inverted`, use `neutral`.
 
 - `<ToastBar color="inverted" … />` → `<ToastBar color="neutral" … />`
+
 </details>
 
 ---

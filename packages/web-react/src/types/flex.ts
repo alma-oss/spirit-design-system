@@ -14,11 +14,9 @@ import {
 export type FlexDirection = DirectionExtendedDictionaryType;
 export type FlexDirectionType = FlexDirection | { [key: string]: FlexDirection };
 export type FlexAlignmentXType =
-  | NonNullable<AlignmentXExtendedDictionaryType>
-  | { [key: string]: NonNullable<AlignmentXExtendedDictionaryType> };
+  NonNullable<AlignmentXExtendedDictionaryType> | { [key: string]: NonNullable<AlignmentXExtendedDictionaryType> };
 export type FlexAlignmentYType =
-  | NonNullable<AlignmentYExtendedDictionaryType>
-  | { [key: string]: NonNullable<AlignmentYExtendedDictionaryType> };
+  NonNullable<AlignmentYExtendedDictionaryType> | { [key: string]: NonNullable<AlignmentYExtendedDictionaryType> };
 export type FlexWrapType = boolean | { [key: string]: boolean };
 
 export interface FlexBaseProps extends ChildrenProps, StyleProps {}

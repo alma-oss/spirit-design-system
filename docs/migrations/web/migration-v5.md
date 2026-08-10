@@ -700,7 +700,8 @@ active stripe in the `box` variant) was removed.
 - For expanded category triggers, set `aria-expanded="true"` on the action to get the open visual state.
 - For second-level items, use structural nesting and keep slot icons on parent category actions only.
 - If you relied on the vertical selected-state indicator, note that it has been removed; selection is now
-communicated through the action's background and color only.
+  communicated through the action's background and color only.
+
 </details>
 
 ### Pagination: Previous and Next Links Use Small Button

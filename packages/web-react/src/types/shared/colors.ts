@@ -16,9 +16,11 @@ type MatchingKeys<T, Prefix extends string> = keyof {
 };
 
 type GenerateColorsType<T, Prefix extends string, TokenPrefix extends string, C> = keyof {
-  [K in Extract<keyof T, string> as MatchingKeys<T[K], Prefix> extends `${Prefix}${infer Rest}`
-    ? `${TokenPrefix}-${K}-${Lowercase<Rest>}`
-    : never]: C;
+  [
+    K in Extract<keyof T, string> as MatchingKeys<T[K], Prefix> extends `${Prefix}${infer Rest}`
+      ? `${TokenPrefix}-${K}-${Lowercase<Rest>}`
+      : never
+  ]: C;
 };
 
 export type TextAccentColorsType<C = undefined> = GenerateColorsType<typeof accentColors, 'content', 'accent', C>;
