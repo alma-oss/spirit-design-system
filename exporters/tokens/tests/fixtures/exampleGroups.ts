@@ -1,5 +1,6 @@
 import { TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
-import { TokenGroupRemoteModel } from '@supernovaio/sdk-exporters/build/sdk-typescript/src/model/groups/SDKTokenGroup';
+
+type TokenGroupRemoteModel = ReturnType<TokenGroup['toWriteObject']>;
 
 export const groupFunctions = {
   addChild(): void {},
