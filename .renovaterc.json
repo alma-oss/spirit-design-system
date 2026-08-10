@@ -22,6 +22,11 @@
       "matchPackageNames": ["/^@supernovaio/"]
     },
     {
+      "groupName": "monorepo:babel",
+      "groupSlug": "monorepo-babel",
+      "matchPackageNames": ["/^@babel/", "/^@types\\/babel__/"]
+    },
+    {
       "groupName": "eslint plugins and configs non-major",
       "groupSlug": "eslint-plugins-configs-non-major",
       "matchUpdateTypes": ["minor", "patch"],
@@ -31,7 +36,7 @@
       "groupName": "compile tools non-major",
       "groupSlug": "compile-tools-non-major",
       "matchUpdateTypes": ["minor", "patch"],
-      "matchPackageNames": ["/^@babel/", "/^@swc/"]
+      "matchPackageNames": ["/^@swc/"]
     },
     {
       "groupName": "types non-major",
