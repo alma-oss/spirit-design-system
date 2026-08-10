@@ -1,7 +1,6 @@
 import React from 'react';
 import { DocsStack } from '../../../../docs';
-import { ControlButton } from '../../ControlButton';
-import { Icon } from '../../Icon';
+import { CloseButton } from '../../CloseButton';
 import { Tag } from '..';
 
 const TagDisabled = () => (
@@ -19,16 +18,12 @@ const TagDisabled = () => (
       Disabled link
     </Tag>
     <Tag elementType="div" isDisabled>
-      <span>Disabled with ControlButton</span>
-      <ControlButton size="xsmall" isSymmetrical isDisabled aria-label="Remove Disabled">
-        <Icon name="close" />
-      </ControlButton>
+      <span>Disabled with CloseButton</span>
+      <CloseButton size="xsmall" isDisabled label="Remove Disabled" />
     </Tag>
     <Tag elementType="div" isSubtle isDisabled>
-      <span>Disabled subtle with ControlButton</span>
-      <ControlButton size="xsmall" isSymmetrical isDisabled aria-label="Remove Disabled subtle">
-        <Icon name="close" />
-      </ControlButton>
+      <span>Disabled subtle with CloseButton</span>
+      <CloseButton size="xsmall" isDisabled label="Remove Disabled subtle" />
     </Tag>
   </DocsStack>
 );

@@ -191,9 +191,8 @@ Use typography and text helper classes when Item content needs plain text stylin
 
 ## Interactive Controls in Slots
 
-When `Item__slot` contains an interactive control such as a `ControlButton`, `button`, or link,
+When `Item__slot` contains an interactive control such as a `CloseButton`, `button`, or link,
 keep the Item root non-interactive or structure markup to avoid nested interactive elements.
-Icon-only controls need an accessible name such as `aria-label`.
 
 ```html
 <div class="Item">
@@ -204,11 +203,11 @@ Icon-only controls need an accessible name such as `aria-label`.
     <button
       type="button"
       class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
-      aria-label="Remove item"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
         <use href="/icons/svg/sprite.svg#close" />
       </svg>
+      <span class="accessibility-hidden">Remove item</span>
     </button>
   </span>
 </div>
@@ -234,11 +233,11 @@ and render a stretched link inside `Item__content`:
     <button
       type="button"
       class="ControlButton ControlButton--small ControlButton--hasBackground ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
-      aria-label="Remove Malíř pokojů"
     >
       <svg class="Icon" width="16" height="16" aria-hidden="true">
         <use href="/icons/svg/sprite.svg#close" />
       </svg>
+      <span class="accessibility-hidden">Remove Malíř pokojů</span>
     </button>
   </span>
 </li>
@@ -369,7 +368,7 @@ Choose the Item root semantics according to what the row does:
 - Use a non-interactive `<div class="Item">` for static content, status rows, or visual-only rows that are not directly actionable.
 - Use `<button type="button" class="Item">` only when the whole row triggers one button-like action and the row has no other interactive descendants.
 - Use `<a class="Item">` for a single link-like row. For composed rows, keep the Item root non-interactive and render a link inside `Item__content`; `element-stretched` can make the whole visual row clickable without nesting a link around other controls.
-- When `Item__slot` contains an interactive control, do not render the Item root as a `<button>` or `<a>`. Keep the root non-interactive, or use the grid pattern below when the row exposes multiple actions. Icon-only remove controls need an accessible name such as `aria-label`.
+- When `Item__slot` contains an interactive control, do not render the Item root as a `<button>` or `<a>`. Keep the root non-interactive, or use the grid pattern below when the row exposes multiple actions.
 - Use `role="grid"`, `role="row"`, and `role="gridcell"` when a row has multiple interactive cells or actions that should be navigated as a structured row. In this pattern, the Item itself can be `role="presentation"` and the cell content owns the interactive semantics.
 - `color-scheme-on-selected-subtle` is visual only. It does not imply `aria-selected`, `aria-current`, or a widget role. The parent widget owns those semantics because listbox options, menu items, grid rows, and links all use different markup.
 - Decorative slot icons should use `aria-hidden="true"` or the documented Icon conventions. `Icon--selected` is visual only and must not replace the ARIA state.
@@ -400,10 +399,11 @@ The grid role requires a keyboard navigation contract implemented in JavaScript:
     </span>
     <span class="Item__slot" role="presentation">
       <span role="gridcell">
-        <button type="button" class="ControlButton" aria-label="Remove Project Alpha">
+        <button type="button" class="ControlButton">
           <svg class="Icon" width="16" height="16" aria-hidden="true">
             <use href="/icons/svg/sprite.svg#close" />
           </svg>
+          <span class="accessibility-hidden">Remove Project Alpha</span>
         </button>
       </span>
     </span>

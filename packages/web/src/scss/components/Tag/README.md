@@ -50,29 +50,26 @@ Tag comes in five available sizes: xsmall, small, medium, large, and xlarge.
 <span class="Tag Tag--neutral Tag--xlarge color-scheme-on-neutral-basic">XLarge tag</span>
 ```
 
-## With ControlButton
+## With CloseButton
 
-### ControlButton Size Mapping
+### CloseButton Size Mapping
 
-| Tag Size | ControlButton Size |
-| -------- | ------------------ |
-| xsmall   | xsmall             |
-| small    | xsmall             |
-| medium   | xsmall             |
-| large    | small              |
-| xlarge   | small              |
+| Tag Size | CloseButton Size |
+| -------- | ---------------- |
+| xsmall   | xsmall           |
+| small    | xsmall           |
+| medium   | xsmall           |
+| large    | small            |
+| xlarge   | small            |
 
 ```html
 <div class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic">
   <span>Tag label</span>
-  <button
-    type="button"
-    class="ControlButton ControlButton--xsmall ControlButton--symmetrical"
-    aria-label="Remove Tag label"
-  >
+  <button type="button" class="ControlButton ControlButton--xsmall ControlButton--symmetrical">
     <svg class="Icon" width="16" height="16" aria-hidden="true">
       <use href="/icons/svg/sprite.svg#close" />
     </svg>
+    <span class="accessibility-hidden">Remove Tag label</span>
   </button>
 </div>
 ```
@@ -102,20 +99,16 @@ Use the `disabled` utility class for disabled colors and pointer interaction. Fo
 <span class="Tag Tag--neutral Tag--small disabled">Disabled tag</span>
 ```
 
-Disabled Tag with `ControlButton`:
+Disabled Tag with `CloseButton`:
 
 ```html
 <div class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic disabled">
   <span>Disabled tag</span>
-  <button
-    type="button"
-    class="ControlButton ControlButton--xsmall ControlButton--symmetrical disabled"
-    aria-label="Remove Disabled tag"
-    disabled
-  >
+  <button type="button" class="ControlButton ControlButton--xsmall ControlButton--symmetrical disabled" disabled>
     <svg class="Icon" width="16" height="16" aria-hidden="true">
       <use href="/icons/svg/sprite.svg#close" />
     </svg>
+    <span class="accessibility-hidden">Remove Disabled tag</span>
   </button>
 </div>
 ```

@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { ControlButton } from '../../ControlButton';
+import { CloseButton } from '../../CloseButton';
 import { Icon } from '../../Icon';
 import { Label } from '../../Label';
 import ReadMe from '../README.md?raw';
@@ -55,11 +55,7 @@ const meta: Meta<typeof Item> = {
       mapping: {
         None: undefined,
         'Check icon': <Icon name="check-plain" color="selected" />,
-        'Remove button': (
-          <ControlButton isSymmetrical size="small" aria-label="Remove item">
-            <Icon name="close" />
-          </ControlButton>
-        ),
+        'Remove button': <CloseButton size="small" label="Remove item" />,
       },
     },
   },
