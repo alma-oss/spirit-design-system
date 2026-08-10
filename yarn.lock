@@ -13116,13 +13116,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-regex@npm:^6.2.2":
-  version: 6.2.2
-  resolution: "ansi-regex@npm:6.2.2"
-  checksum: 10/9b17ce2c6daecc75bcd5966b9ad672c23b184dc3ed9bf3c98a0702f0d2f736c15c10d461913568f2cf527a5e64291c7473358885dd493305c84a1cfed66ba94f
-  languageName: node
-  linkType: hard
-
 "ansi-styles@npm:4.3.0, ansi-styles@npm:^4.0.0, ansi-styles@npm:^4.1.0":
   version: 4.3.0
   resolution: "ansi-styles@npm:4.3.0"
@@ -13162,7 +13155,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-styles@npm:^6.0.0, ansi-styles@npm:^6.1.0, ansi-styles@npm:^6.2.1, ansi-styles@npm:^6.2.3":
+"ansi-styles@npm:^6.0.0, ansi-styles@npm:^6.1.0, ansi-styles@npm:^6.2.1":
   version: 6.2.3
   resolution: "ansi-styles@npm:6.2.3"
   checksum: 10/c49dad7639f3e48859bd51824c93b9eb0db628afc243c51c3dd2410c4a15ede1a83881c6c7341aa2b159c4f90c11befb38f2ba848c07c66c9f9de4bcd7cb9f30
@@ -15298,16 +15291,6 @@ __metadata:
     slice-ansi: "npm:^5.0.0"
     string-width: "npm:^7.0.0"
   checksum: 10/d5149175fd25ca985731bdeec46a55ec237475cf74c1a5e103baea696aceb45e372ac4acbaabf1316f06bd62e348123060f8191ffadfeedebd2a70a2a7fb199d
-  languageName: node
-  linkType: hard
-
-"cli-truncate@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "cli-truncate@npm:5.2.0"
-  dependencies:
-    slice-ansi: "npm:^8.0.0"
-    string-width: "npm:^8.2.0"
-  checksum: 10/b789b6c2caff1560259aedeb6aaafcf41167d478df418d718a8c92edd6bc5a0ece272b8fb7e7911fbd31cef7b1ac8a30f2b21d90c3174b55a018fe3f2604a137
   languageName: node
   linkType: hard
 
@@ -19820,13 +19803,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eventemitter3@npm:^5.0.4":
-  version: 5.0.4
-  resolution: "eventemitter3@npm:5.0.4"
-  checksum: 10/54f5c8c543650d65f92d03dbef1bb73a682a920490c44699ad8f863a6b19bbca42fb7409aa09ca09cb98a44149d9a7bc1dffd55ca88a740bd928c7be0ad666a0
-  languageName: node
-  linkType: hard
-
 "events-universal@npm:^1.0.0":
   version: 1.0.1
   resolution: "events-universal@npm:1.0.1"
@@ -21192,13 +21168,6 @@ __metadata:
   version: 1.3.0
   resolution: "get-east-asian-width@npm:1.3.0"
   checksum: 10/8e8e779eb28701db7fdb1c8cab879e39e6ae23f52dadd89c8aed05869671cee611a65d4f8557b83e981428623247d8bc5d0c7a4ef3ea7a41d826e73600112ad8
-  languageName: node
-  linkType: hard
-
-"get-east-asian-width@npm:^1.3.1, get-east-asian-width@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "get-east-asian-width@npm:1.5.0"
-  checksum: 10/60bc34cd1e975055ab99f0f177e31bed3e516ff7cee9c536474383954a976abaa6b94a51d99ad158ef1e372790fa096cab7d07f166bb0778f6587954c0fbe946
   languageName: node
   linkType: hard
 
@@ -23407,15 +23376,6 @@ __metadata:
   dependencies:
     get-east-asian-width: "npm:^1.0.0"
   checksum: 10/8dfb2d2831b9e87983c136f5c335cd9d14c1402973e357a8ff057904612ed84b8cba196319fabedf9aefe4639e14fe3afe9d9966d1d006ebeb40fe1fed4babe5
-  languageName: node
-  linkType: hard
-
-"is-fullwidth-code-point@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "is-fullwidth-code-point@npm:5.1.0"
-  dependencies:
-    get-east-asian-width: "npm:^1.3.1"
-  checksum: 10/4700d8a82cb71bd2a2955587b2823c36dc4660eadd4047bfbd070821ddbce8504fc5f9b28725567ecddf405b1e06c6692c9b719f65df6af9ec5262bc11393a6a
   languageName: node
   linkType: hard
 
@@ -25842,12 +25802,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:17.0.8":
-  version: 17.0.8
-  resolution: "lint-staged@npm:17.0.8"
+"lint-staged@npm:17.3.0":
+  version: 17.3.0
+  resolution: "lint-staged@npm:17.3.0"
   dependencies:
-    listr2: "npm:^10.2.1"
-    picomatch: "npm:^4.0.4"
+    picomatch: "npm:^4.0.5"
     string-argv: "npm:^0.3.2"
     tinyexec: "npm:^1.2.4"
     yaml: "npm:^2.9.0"
@@ -25856,7 +25815,7 @@ __metadata:
       optional: true
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10/2b574a3107c030e27ff1c34166ef49f2189c256bb423b0deabef0becdf13ed4cfdcc6fb6815a1285ce0daa92fc6c545d8d0245c9d47a8eb3fbccbc4cf3754587
+  checksum: 10/52510d48c6b4aabeb61f84ad77f785f3af17fbfa517be8881de45144723df873996d767d9a7cf3bee4057037960ea5236fe3ac47a5d60fa9538078061b254445
   languageName: node
   linkType: hard
 
@@ -25900,19 +25859,6 @@ __metadata:
     rfdc: "npm:^1.4.1"
     wrap-ansi: "npm:^9.0.0"
   checksum: 10/c76542f18306195e464fe10203ee679a7beafa9bf0dc679ebacb416387cca8f5307c1d8ba35483d26ba611dc2fac5a1529733dce28f2660556082fb7eebb79f9
-  languageName: node
-  linkType: hard
-
-"listr2@npm:^10.2.1":
-  version: 10.2.2
-  resolution: "listr2@npm:10.2.2"
-  dependencies:
-    cli-truncate: "npm:^5.2.0"
-    eventemitter3: "npm:^5.0.4"
-    log-update: "npm:^6.1.0"
-    rfdc: "npm:^1.4.1"
-    wrap-ansi: "npm:^10.0.0"
-  checksum: 10/e9589e1cc8b2158d54dab1afe43f014fab443400a02096ee6914f83f64ca5aea56b72dd39582916c06e4b50351587964ff20a428994f61cec1b9160b92c70093
   languageName: node
   linkType: hard
 
@@ -30951,7 +30897,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picomatch@npm:^4.0.4":
+"picomatch@npm:^4.0.5":
   version: 4.0.5
   resolution: "picomatch@npm:4.0.5"
   checksum: 10/8bad770af9dcdb7f94ad1a893adcbe08a97d75a18872f8fed37161d3124217471c402b3929f051532f795f4ff2e53dcebb1644df4c1a5f3a9c476fef3b9f8c51
@@ -31832,12 +31778,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.8.3, prettier@npm:^3.7.4":
-  version: 3.8.3
-  resolution: "prettier@npm:3.8.3"
+"prettier@npm:3.9.6":
+  version: 3.9.6
+  resolution: "prettier@npm:3.9.6"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10/4b3b12cbb29e4c96bed936e5d070167552500c18d37676fb3e0caae6199c42860662608e4dc116230698f6e2bb0267ef2548158224c92d40f188d309d72fdd6f
+  checksum: 10/1dd1a1e0e40ec3b91cda9d294c4a95022aef61880ca3f441aad99b1252279f58a766c4cece81132c01550dcff1fd445efbd8812ea4a2374313e7fc6c8136f11f
   languageName: node
   linkType: hard
 
@@ -31847,6 +31793,15 @@ __metadata:
   bin:
     prettier: bin-prettier.js
   checksum: 10/00cdb6ab0281f98306cd1847425c24cbaaa48a5ff03633945ab4c701901b8e96ad558eb0777364ffc312f437af9b5a07d0f45346266e8245beaf6247b9c62b24
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^3.7.4":
+  version: 3.8.3
+  resolution: "prettier@npm:3.8.3"
+  bin:
+    prettier: bin/prettier.cjs
+  checksum: 10/4b3b12cbb29e4c96bed936e5d070167552500c18d37676fb3e0caae6199c42860662608e4dc116230698f6e2bb0267ef2548158224c92d40f188d309d72fdd6f
   languageName: node
   linkType: hard
 
@@ -35938,16 +35893,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"slice-ansi@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "slice-ansi@npm:8.0.0"
-  dependencies:
-    ansi-styles: "npm:^6.2.3"
-    is-fullwidth-code-point: "npm:^5.1.0"
-  checksum: 10/6a7e146852047e26dd5857b35c767e52906549c580cce0ad2287cc32f54f5a582494f674817fc9ac21b2e4ac1ddeaa85b3dee409782681b465330278890c73a8
-  languageName: node
-  linkType: hard
-
 "smart-buffer@npm:^4.2.0":
   version: 4.2.0
   resolution: "smart-buffer@npm:4.2.0"
@@ -36519,16 +36464,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"string-width@npm:^8.2.0":
-  version: 8.2.0
-  resolution: "string-width@npm:8.2.0"
-  dependencies:
-    get-east-asian-width: "npm:^1.5.0"
-    strip-ansi: "npm:^7.1.2"
-  checksum: 10/c4f62877ec08fca155e84a260eb4f58f473cfe5169bd1c1e21ffb563d8e0b7f6d705cc3d250f2ed6bb4f30ee9732ad026f54afaac77aa487e3d1dc1b1969e51b
-  languageName: node
-  linkType: hard
-
 "string.prototype.includes@npm:^2.0.1":
   version: 2.0.1
   resolution: "string.prototype.includes@npm:2.0.1"
@@ -36686,15 +36621,6 @@ __metadata:
   dependencies:
     ansi-regex: "npm:^6.0.1"
   checksum: 10/475f53e9c44375d6e72807284024ac5d668ee1d06010740dec0b9744f2ddf47de8d7151f80e5f6190fc8f384e802fdf9504b76a7e9020c9faee7103623338be2
-  languageName: node
-  linkType: hard
-
-"strip-ansi@npm:^7.1.2":
-  version: 7.2.0
-  resolution: "strip-ansi@npm:7.2.0"
-  dependencies:
-    ansi-regex: "npm:^6.2.2"
-  checksum: 10/96da3bc6d73cfba1218625a3d66cf7d37a69bf0920d8735b28f9eeaafcdb6c1fe8440e1ae9eb1ba0ca355dbe8702da872e105e2e939fa93e7851b3cb5dd7d316
   languageName: node
   linkType: hard
 
@@ -40282,17 +40208,6 @@ __metadata:
     string-width: "npm:^4.1.0"
     strip-ansi: "npm:^6.0.0"
   checksum: 10/cebdaeca3a6880da410f75209e68cd05428580de5ad24535f22696d7d9cab134d1f8498599f344c3cf0fb37c1715807a183778d8c648d6cc0cb5ff2bb4236540
-  languageName: node
-  linkType: hard
-
-"wrap-ansi@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "wrap-ansi@npm:10.0.0"
-  dependencies:
-    ansi-styles: "npm:^6.2.3"
-    string-width: "npm:^8.2.0"
-    strip-ansi: "npm:^7.1.2"
-  checksum: 10/b9ac5290e2c5b88cba928b72fbc04e4bb7196cebde1522eeb82a56b1e32c2e706a20169d305c182fe7e4b31100cb05bb1d98dc2747a4a98700ac44303b3ac2ce
   languageName: node
   linkType: hard
 
