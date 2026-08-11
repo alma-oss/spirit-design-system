@@ -1,6 +1,7 @@
 'use client';
 
 import React, { type ElementType } from 'react';
+import { ContextPropsProvider } from '../../context';
 import { useOpenOnArrowDown, useStyleProps } from '../../hooks';
 import { type DropdownTriggerProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -38,9 +39,11 @@ const DropdownTrigger = <E extends ElementType = 'button'>(props: DropdownTrigge
   const mergedProps = { ...otherProps, ...triggerProps, onKeyDown: handleKeyDown };
 
   return (
-    <Component {...mergedProps} {...mergedStyleProps} ref={triggerRef}>
-      {typeof children === 'function' ? children({ isOpen }) : children}
-    </Component>
+    <ContextPropsProvider value={{ tag: { elementType: 'button' } }}>
+      <Component {...mergedProps} {...mergedStyleProps} ref={triggerRef}>
+        {typeof children === 'function' ? children({ isOpen }) : children}
+      </Component>
+    </ContextPropsProvider>
   );
 };
 
