@@ -123,4 +123,23 @@
             }
         }
     }
+
+    @include test.it('should apply custom inset') {
+        @include test.assert() {
+            @include test.output() {
+                .test {
+                    @include pseudo-element.stretch($inset: -1px);
+                }
+            }
+
+            @include test.expect() {
+                .test::before {
+                    content: '';
+                    position: absolute;
+                    inset: -1px;
+                    z-index: 0;
+                }
+            }
+        }
+    }
 }

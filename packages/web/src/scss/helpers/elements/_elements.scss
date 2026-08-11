@@ -1,8 +1,9 @@
 // 1. Allow element stretching over the closest element with `position: relative`.
 
+@use '@tokens' as tokens;
 @use '../../tools/pseudo-element';
 
 // 1.
 .element-stretched {
-    @include pseudo-element.stretch();
+    @include pseudo-element.stretch($inset: #{var(--#{tokens.$css-variable-prefix}element-stretched-inset, 0)});
 }
