@@ -133,9 +133,16 @@ the scheme.
 
 ## Stretched
 
-Use the `isStretched` prop to stretch the interactive area of the ControlButton over its nearest positioned
-ancestor (for example a `Tag`). `Tag` provides `position: relative` for this pattern. When `isStretched` is
-set, the accessibility tap-target helper is omitted so it does not trap the stretch overlay.
+Use the `isStretched` prop to stretch the ControlButton over its nearest positioned ancestor (for example a
+`Tag`). `Tag` provides `position: relative` for this pattern. This expands the hit area when the ControlButton
+is interactive, or stretches its visual chrome when it is presentational. The accessibility tap-target helper
+is omitted so it does not trap the stretch overlay.
+
+Choose one interactive owner for the whole composition. In the example below, the Tag is the button-like host:
+it owns the accessible name and interaction, while the nested ControlButton is decorative visual chrome rendered
+as a `span` with `aria-hidden="true"`. This keeps the composition as one control and avoids nested buttons. A static
+Tag with an interactive ControlButton can be valid in another composition, but it is not the stretched
+Tag-control recipe shown here.
 
 ```tsx
 <Tag elementType="button" aria-label="Remove filter">
