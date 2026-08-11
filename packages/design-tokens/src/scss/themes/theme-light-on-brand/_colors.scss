@@ -130,6 +130,10 @@ $component-pricing-plan-highlighted-background: #4e2ea6 !default;
 $component-pricing-plan-highlighted-border: #e4daff !default;
 $component-pricing-plan-highlighted-content: #ffcb33 !default;
 
+$component-tag-selected-background: #7847ff !default;
+$component-tag-selected-border: #5432b3 !default;
+$component-tag-selected-content: #fff !default;
+
 $component-toggle-selected-border: #a07eff !default;
 $component-toggle-selected-content: #fff !default;
 $component-toggle-selected-state-active: #3e9b4f !default;
@@ -221,9 +225,11 @@ $gradient-basic-overlay-color-02: #60606000 !default;
 
 $gradient-primary-color-01: #7847ff !default;
 $gradient-primary-color-02: #482b99 !default;
+$gradient-primary-color-03: #fff !default;
 
 $gradient-secondary-color-01: #35818e !default;
 $gradient-secondary-color-02: #482b99 !default;
+$gradient-secondary-color-03: #fff !default;
 
 $gradient-skeleton-color-01: #6c40e5 !default;
 $gradient-skeleton-color-02: #936cff !default;
@@ -388,6 +394,9 @@ $text-tertiary: #b2b2b2 !default;
     --spirit-color-component-pricing-plan-highlighted-background: #{$component-pricing-plan-highlighted-background};
     --spirit-color-component-pricing-plan-highlighted-border: #{$component-pricing-plan-highlighted-border};
     --spirit-color-component-pricing-plan-highlighted-content: #{$component-pricing-plan-highlighted-content};
+    --spirit-color-component-tag-selected-background: #{$component-tag-selected-background};
+    --spirit-color-component-tag-selected-border: #{$component-tag-selected-border};
+    --spirit-color-component-tag-selected-content: #{$component-tag-selected-content};
     --spirit-color-component-toggle-selected-border: #{$component-toggle-selected-border};
     --spirit-color-component-toggle-selected-content: #{$component-toggle-selected-content};
     --spirit-color-component-toggle-selected-state-active: #{$component-toggle-selected-state-active};
@@ -466,8 +475,10 @@ $text-tertiary: #b2b2b2 !default;
     --spirit-color-gradient-basic-overlay-color-02: #{$gradient-basic-overlay-color-02};
     --spirit-color-gradient-primary-color-01: #{$gradient-primary-color-01};
     --spirit-color-gradient-primary-color-02: #{$gradient-primary-color-02};
+    --spirit-color-gradient-primary-color-03: #{$gradient-primary-color-03};
     --spirit-color-gradient-secondary-color-01: #{$gradient-secondary-color-01};
     --spirit-color-gradient-secondary-color-02: #{$gradient-secondary-color-02};
+    --spirit-color-gradient-secondary-color-03: #{$gradient-secondary-color-03};
     --spirit-color-gradient-skeleton-color-01: #{$gradient-skeleton-color-01};
     --spirit-color-gradient-skeleton-color-02: #{$gradient-skeleton-color-02};
     --spirit-color-gradient-skeleton-color-03: #{$gradient-skeleton-color-03};
