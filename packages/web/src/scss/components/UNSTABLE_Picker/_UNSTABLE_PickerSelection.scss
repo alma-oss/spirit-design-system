@@ -6,6 +6,13 @@
 @use 'theme';
 
 .UNSTABLE_PickerSelection {
+    --#{tokens.$css-variable-prefix}tag-border-radius: calc(
+        var(--#{tokens.$css-variable-prefix}input-container-border-radius) - var(
+                --#{tokens.$css-variable-prefix}input-container-border-width
+            ) -
+            #{theme.$padding-x}
+    );
+
     @include typography.from-css-variables($infix: 'input-container');
 
     display: flex;
