@@ -1,3 +1,5 @@
+// 1. This is used to stretch the element to the edges of the container.
+
 @use '@tokens' as tokens;
 @use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
@@ -12,9 +14,13 @@
 }
 
 .Tag {
+    --#{tokens.$css-variable-prefix}element-stretched-inset: calc(-1 * #{theme.$border-width}); // 1.
+
     @include typography.from-css-variables($infix: 'tag');
 
+    position: relative;
     display: inline-flex;
+    flex-shrink: 0;
     gap: var(--#{tokens.$css-variable-prefix}tag-gap);
     align-items: center;
     min-height: var(--#{tokens.$css-variable-prefix}tag-min-height);
@@ -25,7 +31,13 @@
     border-width: theme.$border-width;
     border-style: theme.$border-style;
     border-color: color-scheme.border-color();
-    border-radius: theme.$border-radius;
+    border-start-start-radius: var(
+        --#{tokens.$css-variable-prefix}tag-border-start-start-radius,
+        #{theme.$border-radius}
+    );
+    border-start-end-radius: var(--#{tokens.$css-variable-prefix}tag-border-start-end-radius, #{theme.$border-radius});
+    border-end-start-radius: var(--#{tokens.$css-variable-prefix}tag-border-end-start-radius, #{theme.$border-radius});
+    border-end-end-radius: var(--#{tokens.$css-variable-prefix}tag-border-end-end-radius, #{theme.$border-radius});
     background-color: color-scheme.background-color();
 }
 
