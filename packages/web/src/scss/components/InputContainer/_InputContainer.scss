@@ -78,7 +78,11 @@
 
     @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
         @include breakpoint.up($breakpoint-value) {
-            border-radius: var(--#{tokens.$css-variable-prefix}input-container-border-radius-#{$breakpoint-name});
+            --#{tokens.$css-variable-prefix}input-container-border-radius: var(
+                --#{tokens.$css-variable-prefix}input-container-border-radius-#{$breakpoint-name}
+            );
+
+            border-radius: var(--#{tokens.$css-variable-prefix}input-container-border-radius);
         }
     }
 }
