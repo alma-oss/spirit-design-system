@@ -13,6 +13,7 @@ import {
   validHtmlAttributesTest,
 } from '@local/tests';
 import { EmotionColors } from '../../../constants';
+import { ContextPropsProvider } from '../../../context';
 import { TagColorsExtended } from '../constants';
 import Tag from '../Tag';
 
@@ -69,6 +70,16 @@ describe('Tag', () => {
     expect(screen.getByRole('button', { name: 'Submit tag' })).toHaveAttribute('type', 'submit');
   });
 
+  it('should render as disabled button when isDisabled is true', () => {
+    render(
+      <Tag elementType="button" isDisabled>
+        Disabled button tag
+      </Tag>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Disabled button tag' })).toBeDisabled();
+  });
+
   it('should render as anchor', () => {
     render(
       <Tag elementType="a" href="/">
@@ -77,5 +88,47 @@ describe('Tag', () => {
     );
 
     expect(screen.getByRole('link', { name: 'Link tag' })).toHaveAttribute('href', '/');
+  });
+
+  it('should apply tag props from context when direct props are not provided', () => {
+    render(
+      <ContextPropsProvider
+        value={{
+          isDisabled: true,
+          tag: { color: 'selected', elementType: 'button', isSubtle: true, size: 'large' },
+        }}
+      >
+        <Tag>Context tag</Tag>
+      </ContextPropsProvider>,
+    );
+
+    const contextTag = screen.getByRole('button', { name: 'Context tag' });
+
+    expect(contextTag).toHaveClass('Tag--selected', 'Tag--large', 'Tag--subtle', 'disabled');
+    expect(contextTag).toBeDisabled();
+  });
+
+  it('should prefer direct tag props over context props', () => {
+    render(
+      <ContextPropsProvider
+        value={{
+          isDisabled: true,
+          tag: { color: 'selected', elementType: 'button', isSubtle: true, size: 'large' },
+        }}
+      >
+        <Tag color="neutral" elementType="span" isDisabled={false} isSubtle={false} size="small">
+          Direct props tag
+        </Tag>
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Direct props tag')).toHaveClass('Tag--neutral', 'Tag--small');
+    expect(screen.getByText('Direct props tag')).not.toHaveClass(
+      'Tag--selected',
+      'Tag--large',
+      'Tag--subtle',
+      'disabled',
+    );
+    expect(screen.queryByRole('button', { name: 'Direct props tag' })).not.toBeInTheDocument();
   });
 });
