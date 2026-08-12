@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { PropsProvider } from '../../context';
+import { InlineElementsContext, ListItemsContext, UniversalProvider } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type PolymorphicComponent, type PolymorphicRef, type SpiritStackProps, type StackProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -31,19 +31,23 @@ const _Stack = <E extends ElementType = 'div'>(props: SpiritStackProps<E>, ref: 
     styleProps,
     otherProps,
   });
-  const itemElementType = LIST_ELEMENT_TYPES.includes(elementType as string) ? ('li' as const) : undefined;
+  // Provided even when empty: a Stack nested inside an Item must reset any inherited
+  // elementType override (e.g. Item's InlineElementsContext 'span') for its own children,
+  // instead of letting it leak through unmodified. A Context.Provider always fully replaces
+  // the ancestor's value, so providing {} here is enough to reset it.
+  const itemElementTypeValue = LIST_ELEMENT_TYPES.includes(elementType as string) ? { elementType: 'li' as const } : {};
 
   return (
-    <PropsProvider
-      value={{
-        stackItem: { elementType: itemElementType },
-        inlineElements: { elementType: itemElementType },
-      }}
+    <UniversalProvider
+      values={[
+        [ListItemsContext, itemElementTypeValue],
+        [InlineElementsContext, itemElementTypeValue],
+      ]}
     >
       <Component {...otherProps} {...mergedStyleProps} ref={ref}>
         {children}
       </Component>
-    </PropsProvider>
+    </UniversalProvider>
   );
 };
 

@@ -1,8 +1,8 @@
 'use client';
 
-import React, { type ElementType, forwardRef } from 'react';
+import React, { type ElementType, forwardRef, useContext } from 'react';
 import { Sizes } from '../../constants';
-import { useContextProps } from '../../context';
+import { FormFieldsContext, useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import {
   type ControlButtonProps,
@@ -11,7 +11,7 @@ import {
   type SpiritControlButtonProps,
   type WithFormFieldContext,
 } from '../../types';
-import { filterDOMProps, mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
 import { useControlButtonProps } from './useControlButtonProps';
 import { useControlButtonStyleProps } from './useControlButtonStyleProps';
 

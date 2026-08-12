@@ -2,7 +2,7 @@
 
 import React, { type ForwardedRef, forwardRef } from 'react';
 import { Sizes } from '../../constants';
-import { FormFieldsContext, ContextPropsProvider, UniversalProvider } from '../../context';
+import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritSelectProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -44,7 +44,6 @@ const _Select = (props: SpiritSelectProps, ref: ForwardedRef<HTMLSelectElement>)
         isDisabled,
         isRequired,
         validationState,
-        formFields: { size },
         label: { isLabelHidden },
         inputContainer: { variant },
       }}

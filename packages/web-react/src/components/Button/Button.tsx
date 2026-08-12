@@ -4,7 +4,7 @@ import React, { type ElementType, forwardRef } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type ButtonProps, type PolymorphicComponent, type PolymorphicRef, type SpiritButtonProps } from '../../types';
-import { filterDOMProps, mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
 import { Spinner } from '../Spinner';
 import { useButtonProps } from './useButtonProps';
 import { useButtonStyleProps } from './useButtonStyleProps';
@@ -24,7 +24,7 @@ const _Button = <E extends ElementType = 'button', C = void, S = void>(
   ref: PolymorphicRef<E>,
 ) => {
   const mergedProps = useContextProps<Partial<SpiritButtonProps<E, C, S>>>(props, 'button');
-  const propsWithDefaults = { ...defaultProps, ...mergedProps };
+  const propsWithDefaults = mergeProps(defaultProps, mergedProps);
 
   const { buttonProps } = useButtonProps(propsWithDefaults);
 

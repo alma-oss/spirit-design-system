@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { MULTIPLE_SELECTION_MODE } from '../../constants';
-import { FormFieldsContext, ContextPropsProvider, UniversalProvider } from '../../context';
+import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../context';
 import {
   getSelectedKeys,
   isSingleSelectionMode,
@@ -24,7 +24,7 @@ import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { DEFAULT_POPOVER_PROPS, DEFAULT_SIZE } from './constants';
-import { PickerContextProvider } from './PickerContext';
+import { PickerContext } from './PickerContext';
 import { PickerPopoverContextProvider } from './PickerPopoverContext';
 import type { SpiritUnstablePickerProps, SpiritUnstablePickerRef } from './types';
 import UNSTABLE_PickerSelection from './UNSTABLE_PickerSelection';
@@ -213,12 +213,16 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
         isDisabled,
         isRequired,
         validationState,
-        formFields: { size },
         label: { isLabelHidden },
         inputContainer: { variant },
       }}
     >
-      <PickerContextProvider value={{ size, tagDescriptionId }}>
+      <UniversalProvider
+        values={[
+          [PickerContext, { size, tagDescriptionId }],
+          [FormFieldsContext, { size }],
+        ]}
+      >
         <div {...styleProps} className={classNames(classProps.root, styleProps.className)} {...transferProps}>
           <Stack spacing="space-400">
             <Label {...labelProps} id={labelId} elementType="span">

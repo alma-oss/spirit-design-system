@@ -12,6 +12,7 @@ export * from './htmlReactParser';
 export * from './inputPositionToFlexDirection';
 export * from './inputPositionToFlexAlignmentX';
 export * from './isPlainObject';
+export * from './mergeProps';
 export * from './mergeStyleProps';
 export * from './omitNullish';
 export * from './pxToRem';

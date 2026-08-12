@@ -4,7 +4,7 @@ import React, { type ElementType, useEffect } from 'react';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type InputDetailsProps, type WithFormFieldContext } from '../../types';
-import { filterDOMProps, mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
 import { useInputDetailsStyleProps } from './useInputDetailsStyleProps';
 
 const defaultProps: Partial<InputDetailsProps> = {
@@ -16,7 +16,7 @@ const defaultProps: Partial<InputDetailsProps> = {
 
 const InputDetails = <E extends ElementType = 'div'>(props: InputDetailsProps<E>) => {
   const mergedProps = useContextProps<WithFormFieldContext<InputDetailsProps<E>>>(props, 'inputDetails');
-  const propsWithDefaults = { ...defaultProps, ...mergedProps };
+  const propsWithDefaults = mergeProps(defaultProps, mergedProps);
   const {
     children,
     elementType: ElementTag = defaultProps.elementType as ElementType,

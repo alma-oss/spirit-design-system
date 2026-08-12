@@ -1,7 +1,7 @@
 'use client';
 
-import React, { type ElementType, forwardRef } from 'react';
-import { PropsProvider, useContextProps } from '../../context';
+import React, { type ElementType, forwardRef, useContext } from 'react';
+import { InlineElementsContext, ListItemsContext, UniversalProvider, useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import {
   type PolymorphicComponent,
@@ -9,7 +9,7 @@ import {
   type SpiritStackItemProps,
   type StackItemProps,
 } from '../../types';
-import { filterDOMProps, mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
 import { useStackStyleProps } from './useStackStyleProps';
 
 const defaultProps = {
@@ -20,8 +20,9 @@ const _StackItem = <E extends ElementType = 'div'>(
   props: SpiritStackItemProps<E>,
   ref: PolymorphicRef<E>,
 ): JSX.Element => {
+  const listItemsProps = useContext(ListItemsContext) ?? {};
   const mergedProps = useContextProps<Partial<SpiritStackItemProps<E>>>(props, 'stackItem');
-  const propsWithDefaults = { ...defaultProps, ...mergedProps };
+  const propsWithDefaults = mergeProps(defaultProps, listItemsProps, mergedProps);
   const { children, elementType, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
@@ -36,14 +37,14 @@ const _StackItem = <E extends ElementType = 'div'>(
 
   return (
     <Component {...filterDOMProps(otherProps)} {...mergedStyleProps} ref={ref}>
-      <PropsProvider
-        value={{
-          stackItem: { elementType: null },
-          inlineElements: { elementType: null },
-        }}
+      <UniversalProvider
+        values={[
+          [ListItemsContext, {}],
+          [InlineElementsContext, {}],
+        ]}
       >
         {children}
-      </PropsProvider>
+      </UniversalProvider>
     </Component>
   );
 };

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { type ElementType, useEffect } from 'react';
-import { useContextProps } from '../../context';
+import React, { type ElementType, useContext, useEffect } from 'react';
+import { InlineElementsContext, useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type SpiritHelperTextProps, type WithFormFieldContext } from '../../types';
 import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';

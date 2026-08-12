@@ -10,7 +10,7 @@ import React, {
   useMemo,
   useRef,
 } from 'react';
-import { FormFieldsContext, ContextPropsProvider, UniversalProvider } from '../../context';
+import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../context';
 import { useAriaDescribedBy, useI18n, useSelectionGridKeyboard, useStyleProps } from '../../hooks';
 import { replaceTranslationParams } from '../../translations';
 import { Dropdown } from '../Dropdown';
@@ -18,7 +18,7 @@ import { HelperText } from '../HelperText';
 import { Label } from '../Label';
 import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
-import { ComboboxContextProvider } from './ComboboxContext';
+import { ComboboxContext } from './ComboboxContext';
 import ComboboxInput from './ComboboxInput';
 import ComboboxPopoverContent from './ComboboxPopoverContent';
 import {
@@ -257,11 +257,10 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     <ContextPropsProvider
       value={{
         isDisabled,
-        isLabelHidden,
         isRequired,
-        size,
-        variant,
         validationState,
+        label: { isLabelHidden },
+        inputContainer: { variant },
       }}
     >
       <UniversalProvider

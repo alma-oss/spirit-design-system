@@ -6,6 +6,7 @@ import type { UnstableComboboxContextType } from './types';
 
 const ComboboxContext = createContext<UnstableComboboxContextType>({ size: Sizes.MEDIUM });
 
+export { ComboboxContext };
 export const ComboboxContextProvider = ComboboxContext.Provider;
 
 export const useComboboxContext = () => useContext(ComboboxContext);

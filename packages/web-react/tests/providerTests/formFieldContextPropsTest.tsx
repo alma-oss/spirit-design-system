@@ -101,7 +101,11 @@ export const formFieldContextPropsTest = ({
     });
 
     it('should use direct isDisabled over context (direct props override context)', () => {
-      render(<ContextPropsProvider value={{ isDisabled: true }}>{renderComponent({ isDisabled: false })}</ContextPropsProvider>);
+      render(
+        <ContextPropsProvider value={{ isDisabled: true }}>
+          {renderComponent({ isDisabled: false })}
+        </ContextPropsProvider>,
+      );
       const element = screen.getByText(text);
 
       expect(element.className).not.toContain(`${classNamePrefix}--disabled`);
