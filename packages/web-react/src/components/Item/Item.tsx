@@ -2,15 +2,15 @@
 
 import React, { type ElementType, useContext } from 'react';
 import {
+  ContextPropsProvider,
   InlineElementsContext,
   ListItemsContext,
-  ContextPropsProvider,
   UniversalProvider,
   useContextProps,
 } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type SpiritItemProps } from '../../types';
-import { filterDOMProps, mergeStyleProps } from '../../utils';
+import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
 import { useItemStyleProps } from './useItemStyleProps';
 
 const defaultProps: Partial<SpiritItemProps> = {
@@ -18,6 +18,7 @@ const defaultProps: Partial<SpiritItemProps> = {
 };
 
 const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Element => {
+  const listItemsProps = useContext(ListItemsContext) ?? {};
   const mergedProps = useContextProps<Partial<SpiritItemProps<E>>>(props, 'item');
   const propsWithDefaults = mergeProps(defaultProps, listItemsProps, mergedProps);
   const { children, elementType, endSlot, isDisabled, isSelected, startSlot, ...restProps } = propsWithDefaults;

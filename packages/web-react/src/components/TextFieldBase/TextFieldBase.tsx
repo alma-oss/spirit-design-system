@@ -2,7 +2,7 @@
 
 import React, { type ElementType, type ForwardedRef, type RefObject, forwardRef } from 'react';
 import { Sizes } from '../../constants';
-import { FormFieldsContext, ContextPropsProvider, UniversalProvider } from '../../context';
+import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../context';
 import { useAriaDescribedBy, useI18n, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritTextFieldBaseProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -100,7 +100,6 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
         isDisabled,
         isRequired,
         validationState,
-        formFields: { size },
         label: { isLabelHidden },
         inputContainer: { variant },
       }}
