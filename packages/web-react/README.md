@@ -12,6 +12,7 @@
 - [Usage](#usage)
 - [Translations](#translations)
 - [Additional Attributes](#additional-attributes)
+- [Shared and Inherited Props](#shared-and-inherited-props)
 - [Testing](#testing)
 - [Styling](#styling)
 - [Types Generated From Design Tokens](#types-generated-from-design-tokens)
