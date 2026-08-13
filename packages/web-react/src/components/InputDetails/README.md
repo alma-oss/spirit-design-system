@@ -147,8 +147,10 @@ You must manually set the `isDisabled` prop on interactive elements (Link, Butto
 
 The component accepts [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
-and [escape hatches][readme-escape-hatches].
+and [escape hatches][readme-escape-hatches]. For controlling inherited and shared props from ancestors, use
+[context props][readme-props-context] mechanisms.
 
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-props-context]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#shared-and-inherited-props
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

@@ -317,7 +317,8 @@ The grid role requires a keyboard navigation contract implemented in JavaScript:
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
-and [escape hatches][readme-escape-hatches].
+and [escape hatches][readme-escape-hatches]. For controlling inherited and shared props from ancestors, use
+[context props][readme-props-context] mechanisms.
 
 [checkbox]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Checkbox/README.md
 [dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#alignment
@@ -328,6 +329,7 @@ and [escape hatches][readme-escape-hatches].
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/HelperText/README.md
+[readme-props-context]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#shared-and-inherited-props
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [scott-o-hara-disabling-a-link]: https://www.scottohara.me/blog/2021/05/28/disabled-links.html
 [web-react-icon-documentation]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#-usage

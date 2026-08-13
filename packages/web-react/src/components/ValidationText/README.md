@@ -16,7 +16,7 @@ When used inside form field components such as [Checkbox][readme-checkbox], [Rad
 
 ## With Explicit Props
 
-You can override context by passing props directly:
+You can override an inherited value by passing the prop directly:
 
 ```tsx
 <ValidationText
@@ -44,15 +44,17 @@ When displaying validation text dynamically, set [`role="alert"`][aria-alert-rol
 | `validationStateIcon` | [Validation dictionary][dictionary-validation]         | —       | ✕        | When set, shows validation icon and applies state styling (e.g. `danger`)                                        |
 | `validationText`      | `ReactNode` \| `ReactNode[]`                           | —       | ✕        | Validation message or messages to display                                                                        |
 
-On top of the API options, the component accepts [additional attributes][readme-additional-attributes].
+On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
-and [escape hatches][readme-escape-hatches].
+and [escape hatches][readme-escape-hatches]. For controlling inherited and shared props from ancestors, use
+[context props][readme-props-context] mechanisms.
 
 [aria-alert-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/alert_role
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-checkbox]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Checkbox/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-props-context]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#shared-and-inherited-props
 [readme-radio]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Radio/README.md
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [readme-textfield]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/TextField/README.md
