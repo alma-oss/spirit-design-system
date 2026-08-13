@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type FocusEvent, type KeyboardEvent, type ReactNode } from 'react';
 import type { SelectionGridRowProps, SelectionMode } from '../../hooks';
 import type {
   DropdownBaseProps,
@@ -14,8 +14,23 @@ import type {
   Validation,
   ValidationTextProp,
 } from '../../types';
+import type { PickerOptionsRoles } from './constants';
 
 export type UnstablePickerSelectionMode = SelectionMode;
+
+export type UnstablePickerOptionsRole = (typeof PickerOptionsRoles)[keyof typeof PickerOptionsRoles];
+
+/** Props produced by `usePickerListboxKeyboard` for a single `role="option"` element (roving tabindex). */
+export interface UnstablePickerListboxOptionProps {
+  role: 'option';
+  id: string;
+  tabIndex: 0 | -1;
+  'aria-selected': boolean;
+  'aria-disabled'?: true;
+  onKeyDown: (event: KeyboardEvent<HTMLElement>) => void;
+  onFocus: (event: FocusEvent<HTMLElement>) => void;
+  onClick: () => void;
+}
 
 export interface UnstablePickerTranslations {
   addButtonLabel?: string;
@@ -59,6 +74,11 @@ export interface UnstablePickerBaseProps<S = void>
   popoverProps?: StyleProps;
   /** Props for the inner `Tag` elements (style props; `UNSAFE_className` is merged with tag classes). */
   tagProps?: StyleProps;
+  /**
+   * ARIA role for the popover option list. Affects only `UNSTABLE_PickerGroup` / `UNSTABLE_PickerItem`;
+   * free-style popover content is unaffected. See decision 013. @default 'group'
+   */
+  optionsRole?: UnstablePickerOptionsRole;
   renderTags?: (options: UnstablePickerRenderTagsOptions) => ReactNode;
   selectionMode?: UnstablePickerSelectionMode;
   size?: SizesDictionaryType<S>;
@@ -103,6 +123,10 @@ export interface UnstablePickerItemProps extends Omit<
 > {
   children: ReactNode;
   value: string;
+  /** Decorative content before the label when `optionsRole="listbox"` (defaults to a selection glyph). Ignored when `optionsRole="group"`. */
+  startSlot?: ReactNode;
+  /** Decorative content after the label when `optionsRole="listbox"`. Ignored when `optionsRole="group"`. */
+  endSlot?: ReactNode;
 }
 
 export type UnstablePickerItemData = { label: ReactNode; value: string };
@@ -122,8 +146,18 @@ export interface UnstablePickerPopoverContextValue {
   id: string;
   isDisabled: boolean;
   onSelectionChange: (keys: string[]) => void;
+  optionsRole: UnstablePickerOptionsRole;
   selectedKeys: string[];
   selectionMode: UnstablePickerSelectionMode;
+}
+
+/**
+ * Group-level context published by `UNSTABLE_PickerGroup` when `optionsRole="listbox"` so each
+ * `UNSTABLE_PickerItem` can render as a `role="option"` wired to the shared roving-tabindex state.
+ */
+export interface UnstablePickerListboxContextValue {
+  isListbox: boolean;
+  getOptionProps: (value: string) => UnstablePickerListboxOptionProps;
 }
 
 export interface UnstablePickerSelectionProps extends SpiritDivElementProps {
@@ -140,4 +174,7 @@ export type SpiritUnstablePickerSelectionProps = UnstablePickerSelectionProps;
 export type SpiritUnstablePickerTagProps = UnstablePickerTagProps;
 export type SpiritUnstablePickerTriggerProps = UnstablePickerTriggerProps;
 export type SpiritUnstablePickerItemProps = UnstablePickerItemProps;
+export type SpiritUnstablePickerOptionsRole = UnstablePickerOptionsRole;
+export type SpiritUnstablePickerListboxContextValue = UnstablePickerListboxContextValue;
+export type SpiritUnstablePickerListboxOptionProps = UnstablePickerListboxOptionProps;
 export type SpiritUnstablePickerRef = UnstablePickerRef;

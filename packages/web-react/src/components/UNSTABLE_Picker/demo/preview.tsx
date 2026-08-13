@@ -10,6 +10,8 @@ import PickerDisabled from './PickerDisabled';
 import PickerGroupedJobFilters from './PickerGroupedJobFilters';
 import PickerHelperText from './PickerHelperText';
 import PickerHiddenLabel from './PickerHiddenLabel';
+import PickerListbox from './PickerListbox';
+import PickerListboxSingle from './PickerListboxSingle';
 import PickerRequired from './PickerRequired';
 import PickerSalary from './PickerSalary';
 import PickerSingle from './PickerSingle';
@@ -23,6 +25,12 @@ export const Preview = () => (
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <PickerDefault />
+      </DocsSection>
+      <DocsSection title="Listbox presentation">
+        <PickerListbox />
+      </DocsSection>
+      <DocsSection title="Listbox presentation (single)">
+        <PickerListboxSingle />
       </DocsSection>
       <DocsSection title="Themes">
         <PickerThemes />

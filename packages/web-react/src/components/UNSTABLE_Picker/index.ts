@@ -5,8 +5,10 @@ export { default as UNSTABLE_PickerSelection } from './UNSTABLE_PickerSelection'
 export { default as UNSTABLE_PickerTag } from './UNSTABLE_PickerTag';
 export { default as UNSTABLE_PickerTrigger } from './UNSTABLE_PickerTrigger';
 export { default as UNSTABLE_UncontrolledPicker } from './UNSTABLE_UncontrolledPicker';
+export { PickerListboxContextProvider, usePickerListboxContext } from './PickerListboxContext';
 export { PickerPopoverContextProvider, usePickerPopoverContext } from './PickerPopoverContext';
 export * from './types';
 export * from './usePickerId';
+export * from './usePickerListboxKeyboard';
 export * from './usePickerPopoverTabOutToTrigger';
 export * from './usePickerStyleProps';
