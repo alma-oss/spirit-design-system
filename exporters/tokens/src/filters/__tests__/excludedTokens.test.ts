@@ -25,6 +25,15 @@ describe('filterExcludedTokens', () => {
     expect(filteredTokens).toStrictEqual(expectedTokens);
   });
 
+  it('should filter out typography tokens with "Italic" in their name', () => {
+    const italicToken = { ...exampleTypographyTokens.get('typographyRef1'), name: 'Bold-Italic' } as Token;
+    const tokens = [exampleTypographyTokens.get('typographyRef1'), italicToken].filter(Boolean) as Token[];
+
+    const filteredTokens = filterExcludedTokens(tokens);
+
+    expect(filteredTokens).toStrictEqual([exampleTypographyTokens.get('typographyRef1')]);
+  });
+
   it('should keep tokens that do not match exclusion criteria', () => {
     const tokens = [
       exampleDimensionAndStringTokens.get('dimensionRef'),
