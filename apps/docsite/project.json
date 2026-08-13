@@ -12,6 +12,9 @@
     "dev": {
       "dependsOn": ["^build"]
     },
+    "start": {
+      "dependsOn": ["^build", "@alma-oss/spirit-icons:build"]
+    },
     "lint": {
       "dependsOn": ["@alma-oss/spirit-icons:build"]
     },

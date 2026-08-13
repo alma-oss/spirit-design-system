@@ -4,9 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack --port 4321",
     "build": "next build",
-    "start": "next start",
+    "start": "next dev --turbopack --port 4321",
+    "start:prod": "next start --port 4321",
     "lint": "eslint",
     "lint:fix": "yarn lint --fix",
     "test": "npm-run-all --serial lint test:unit:coverage types",
