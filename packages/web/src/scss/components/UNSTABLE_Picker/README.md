@@ -12,7 +12,8 @@ selected values as tags.
 ## Basic Usage
 
 Picker is built on top of the [Dropdown][dropdown] component. It consists of a label, an input container
-displaying chosen options as tags with a trigger button, and optional helper or validation text.
+displaying chosen options as tags with a trigger button, and optional helper or validation text. The
+popover is a `role="dialog"`, so it can hold any content.
 
 ```txt
 Stack                                         space-400
@@ -24,10 +25,12 @@ Stack                                         space-400
 │   │   │   └── [selected]   Tag              role="row" (× N)
 │   │   │       └── role="gridcell"
 │   │   │           ├── tag label
-│   │   │           └── ControlButton        (remove)
+│   │   │           └── ControlButton         (remove)
 │   │   └── UNSTABLE_PickerTrigger            aria-haspopup="dialog"
 │   └── DropdownPopover                       role="dialog"
-│       └── FieldGroup                        (checkboxes or custom content)
+│       ├── [group]     fieldset + legend     role="group" (checkboxes / radios)
+│       ├── [listbox]   option list           role="listbox" · role="option"
+│       └── [free-form] any content           (controls keep their own roles)
 ├── HelperText                                (optional)
 └── ValidationText                            (optional)
 ```
@@ -35,6 +38,22 @@ Stack                                         space-400
 ⚠️ The DropdownPopover is rendered using absolute positioning relative to the trigger. Make sure there is
 enough space below the Picker (or around it, depending on the popover placement) so the popover does not
 overflow its scrollable container or get clipped.
+
+Pick the presentation by what a single option contains; see [decision 013][decision-listbox-grid] for the
+reasoning.
+
+| Presentation                     | Markup                                          | Use when                                                                   |
+| -------------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------- |
+| Group (default)                  | `<fieldset>` and `<legend>` of Checkbox / Radio | options are native form controls, need native submission or richer content |
+| [Listbox](#listbox-presentation) | `role="listbox"` of `role="option"` items       | options are plain selectable labels with no interactive content            |
+| Free-form                        | any content, controls keep their own roles      | the popover is not a uniform list (headings, inputs, an Apply button)      |
+
+ℹ️ `role="grid"` belongs to the selection (tag) area, not to the popover — see
+[Selected Tags](#selected-tags).
+
+The example below uses the default group presentation, with an Apply button as a sibling of the
+`<fieldset>`. The popover needs an accessible name (`aria-label` or `aria-labelledby`) and an `id` the
+trigger points to via `data-spirit-target` and `aria-controls`:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
@@ -68,7 +87,14 @@ overflow its scrollable container or get clipped.
         </svg>
       </button>
     </div>
-    <div role="dialog" class="DropdownPopover" data-spirit-placement="bottom-start" id="picker-popover">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Languages"
+      class="DropdownPopover placement-bottom-start"
+      data-spirit-placement="bottom-start"
+      id="picker-popover"
+    >
       <fieldset class="border-0">
         <legend class="accessibility-hidden">Language</legend>
         <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
@@ -83,10 +109,68 @@ overflow its scrollable container or get clipped.
           <!-- More checkboxes… -->
         </div>
       </fieldset>
+      <div class="d-grid mt-600">
+        <button type="button" class="Button Button--primary Button--medium">Apply</button>
+      </div>
     </div>
   </div>
 </div>
 ```
+
+## Listbox Presentation
+
+Inside the popover, set `role="listbox"` on the option list (plus `aria-multiselectable="true"` for multiple
+selection) and `role="option"` with `aria-selected` on each option. Put a decorative check
+(`Icon--selected`, wrapped in `d-none` until selected) in `Item__slot`, and give the selected option
+`color-scheme-on-selected-subtle bg-color-scheme`.
+
+ℹ️ The listbox must contain **only** options, so place any Apply / close button as a sibling of it. Selection
+lives in `aria-selected` alone, so it does not take part in native form submission — use the default group
+presentation when you need that.
+
+```html
+<!-- The trigger's data-spirit-target and aria-controls point to the popover id. -->
+<div
+  role="dialog"
+  aria-modal="true"
+  aria-label="Languages"
+  class="DropdownPopover placement-bottom-start"
+  data-spirit-placement="bottom-start"
+  id="picker-listbox"
+>
+  <div role="listbox" aria-multiselectable="true" aria-label="Languages">
+    <div
+      role="option"
+      id="picker-listbox-cs"
+      aria-selected="true"
+      tabindex="0"
+      class="Item cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
+    >
+      <div class="Item__slot" role="presentation">
+        <svg class="Icon Icon--selected" width="20" height="20" aria-hidden="true">
+          <use href="/icons/svg/sprite.svg#check-plain" />
+        </svg>
+      </div>
+      <div class="Item__content" role="presentation">
+        <span class="Label element-stretched">Czech</span>
+      </div>
+    </div>
+    <div role="option" id="picker-listbox-en" aria-selected="false" tabindex="-1" class="Item cursor-pointer">
+      <div class="Item__slot" role="presentation">
+        <svg class="Icon Icon--selected d-none" width="20" height="20" aria-hidden="true">
+          <use href="/icons/svg/sprite.svg#check-plain" />
+        </svg>
+      </div>
+      <div class="Item__content" role="presentation">
+        <span class="Label element-stretched">English</span>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+Keyboard (demo JS): a single tab stop (roving `tabindex`), Up/Down between options (clamped at the ends),
+Home/End to first/last, type-ahead by label, and Space/Enter to toggle selection.
 
 ## Selected Tags
 
@@ -216,7 +300,14 @@ On a **Light on Brand** surface, keep the label on-brand and use **Light Default
       <div role="group" aria-label="Languages" class="InputContainer InputContainer--fill InputContainer--medium">
         <!-- … -->
       </div>
-      <div role="dialog" class="DropdownPopover theme-light-default" id="picker-popover">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Languages"
+        class="DropdownPopover placement-bottom-start theme-light-default"
+        data-spirit-placement="bottom-start"
+        id="picker-popover"
+      >
         <!-- … -->
       </div>
     </div>
@@ -231,10 +322,12 @@ See the [Themes demo][picker-themes-demo].
 Customise the inner `Dropdown` and `DropdownPopover` elements directly using CSS utility classes
 and data attributes. The picker does not set these itself, so any values you add are applied as-is.
 
-- **`DropdownPopover` element** — add a theme utility class (for example `theme-light-default`;
-  this is the default) to control the panel theme.
-- **`data-spirit-placement`** on `.DropdownPopover` — controls where the popover anchors relative
-  to the trigger (for example `bottom-start`).
+- **`DropdownPopover` element** — add a theme utility class (for example `theme-light-default`) to
+  control the panel theme. The picker sets none, so the popover inherits the theme of its surrounding
+  surface; the demos add `theme-light-default` explicitly.
+- **`placement-*` class** on `.DropdownPopover` — controls where the popover anchors relative to the
+  trigger (for example `placement-bottom-start`). Keep the matching `data-spirit-placement` attribute
+  for scripting.
 - **`data-spirit-fullwidthmode`** on `.DropdownPopover` — stretches the popover to the field width
   (`off` · `mobile-only` · `all`).
 
@@ -249,7 +342,9 @@ The following example positions the popover at `bottom-start` and expands it to 
     </div>
     <div
       role="dialog"
-      class="DropdownPopover theme-light-default"
+      aria-modal="true"
+      aria-label="Languages"
+      class="DropdownPopover placement-bottom-start"
       data-spirit-placement="bottom-start"
       data-spirit-fullwidthmode="all"
       id="picker-example"
@@ -428,7 +523,14 @@ inside the selection area (remove buttons) to disable the Picker.
         </svg>
       </button>
     </div>
-    <div role="dialog" class="DropdownPopover" data-spirit-placement="bottom-start" id="picker-disabled">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Languages"
+      class="DropdownPopover placement-bottom-start"
+      data-spirit-placement="bottom-start"
+      id="picker-disabled"
+    >
       <fieldset class="border-0" disabled>
         <legend class="accessibility-hidden">Language</legend>
         <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
@@ -510,26 +612,18 @@ The selection area (`UNSTABLE_PickerSelection`) uses a dynamic ARIA role:
 - **Selected state** — `role="grid"`: switched by JavaScript when the first tag is added or when the
   picker renders with pre-selected values, and switched back to `group` when the last tag is removed.
 
-[`role="grid"`][mdn-grid-role] was chosen over alternatives because it is the only ARIA role that provides both:
+[`role="grid"`][mdn-grid-role] is used because each tag contains a remove button: `listbox` options cannot
+hold interactive elements and a plain `list` carries no keyboard navigation contract — see
+[decision 013][decision-listbox-grid]. Each tag is structured as a `row` containing a `cell` with the tag
+label and a remove button. A single-column grid is valid and follows the same pattern used by
+[React Aria][react-aria]'s TagGroup.
 
-1. **A keyboard navigation contract** — arrow keys move between items with roving `tabindex`, and only one
-   tag is in the tab order at a time.
-2. **Support for interactive content inside items** — each tag contains a remove button. Roles like `listbox`
-   require `option` children that cannot contain interactive elements. A plain `list` has no keyboard
-   navigation contract.
+### Dropdown Popover: Presentation and Roles
 
-Each tag is structured as a `row` containing a `cell` with the tag label and a remove button.
-A single-column grid is valid and follows the same pattern used by [React Aria][react-aria]'s TagGroup.
-
-### Dropdown Popover: No Listbox Role
-
-The dropdown popover intentionally does **not** use `role="listbox"`. The popover is designed to accept
-any content — Spirit components such as checkboxes, radios, sliders, and text fields. `role="listbox"`
-would be too restrictive: it expects `option` children with `aria-selected`, which conflicts with native
-interactive elements and prevents richer layouts.
-
-The trigger button uses `aria-haspopup="dialog"` to indicate that activating it opens a popup that is not
-a menu or listbox.
+The popover is a `role="dialog"` (the trigger uses `aria-haspopup="dialog"`), so it can hold any content. It
+needs an accessible name via `aria-label` or `aria-labelledby`. The role the **options inside it** carry
+follows from what a single option contains — see [Basic Usage](#basic-usage) for the three presentations and
+[decision 013][decision-listbox-grid] for the reasoning.
 
 ### Dropdown Popover: Required JavaScript Features
 
@@ -537,7 +631,8 @@ The [ARIA dialog role spec][mdn-dialog-role] mandates three JavaScript features.
 `<div role="dialog">`, none of these are provided by the browser and must be implemented explicitly:
 
 1. **Initial focus** — when the popover opens, focus must move to the first focusable element inside
-   it (the first checkbox). This is implemented by listening for the `shown.dropdown` event.
+   it (the first checkbox, or the option carrying `tabindex="0"` in the listbox presentation). This is
+   implemented by listening for the `shown.dropdown` event.
 2. **Focus restoration** — when the popover closes by any means (Escape, click outside, Tab-out),
    focus must return to the trigger button. This is implemented by listening for the `hidden.dropdown`
    event, which fires on every close path.
@@ -583,21 +678,26 @@ Popover API is strongly recommended.
 
 ### ARIA Attributes
 
-| Attribute          | Element           | Purpose                                                                              |
-| ------------------ | ----------------- | ------------------------------------------------------------------------------------ |
-| `role="group"`     | Input container   | Groups the selection area and trigger together                                       |
-| `role="group"`     | Selection area    | Initial role when no options are selected                                            |
-| `role="grid"`      | Selection area    | Active role when options are selected; enables keyboard navigation with roving focus |
-| `role="row"`       | Tag               | Represents a single selected option                                                  |
-| `role="gridcell"`  | Tag inner wrapper | Contains the tag label and remove button                                             |
-| `aria-live`        | Selection area    | Announces changes to selected options                                                |
-| `role="dialog"`    | Dropdown popover  | Marks the popover as a dialog                                                        |
-| `aria-modal`       | Dropdown popover  | Tells screen readers background content is inert while the popover is open           |
-| `aria-haspopup`    | Trigger button    | Indicates the button opens a popup                                                   |
-| `aria-expanded`    | Trigger button    | Indicates whether the popup is open                                                  |
-| `aria-controls`    | Trigger button    | Points to the popup element                                                          |
-| `aria-describedby` | Tag               | Links to the hidden removal instruction                                              |
+| Attribute              | Element           | Purpose                                                                              |
+| ---------------------- | ----------------- | ------------------------------------------------------------------------------------ |
+| `role="group"`         | Input container   | Groups the selection area and trigger together                                       |
+| `role="group"`         | Selection area    | Initial role when no options are selected                                            |
+| `role="grid"`          | Selection area    | Active role when options are selected; enables keyboard navigation with roving focus |
+| `role="row"`           | Tag               | Represents a single selected option                                                  |
+| `role="gridcell"`      | Tag inner wrapper | Contains the tag label and remove button                                             |
+| `aria-live`            | Selection area    | Announces changes to selected options                                                |
+| `role="dialog"`        | Dropdown popover  | Marks the popover as a dialog                                                        |
+| `role="listbox"`       | Option list       | Listbox presentation of the popover options                                          |
+| `aria-multiselectable` | Option list       | Indicates more than one option can be selected                                       |
+| `role="option"`        | Option            | Represents a single selectable option                                                |
+| `aria-selected`        | Option            | Indicates whether the option is selected                                             |
+| `aria-modal`           | Dropdown popover  | Tells screen readers background content is inert while the popover is open           |
+| `aria-haspopup`        | Trigger button    | Indicates the button opens a popup                                                   |
+| `aria-expanded`        | Trigger button    | Indicates whether the popup is open                                                  |
+| `aria-controls`        | Trigger button    | Points to the popup element                                                          |
+| `aria-describedby`     | Tag               | Links to the hidden removal instruction                                              |
 
+[decision-listbox-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/013-listbox-vs-grid-for-selectable-options.md
 [dropdown]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Dropdown/README.md
 [mdn-dialog-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/dialog_role
 [mdn-grid-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/grid_role
