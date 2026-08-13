@@ -16,7 +16,7 @@ When used inside form field components such as [Checkbox][readme-checkbox], [Rad
 
 ## With Explicit Props
 
-You can override context by passing props directly:
+You can override an inherited value by passing the prop directly:
 
 ```tsx
 <HelperText id="my-helper-text" helperText="Helper text" elementType="span" isDisabled />
@@ -32,13 +32,15 @@ You can override context by passing props directly:
 | `isDisabled`   | `bool`                                                 | `false` | ✕        | Disabled state; when omitted, taken from parent context       |
 | `registerAria` | `(payload: { add?: string; remove?: string }) => void` | —       | ✕        | Callback to register this element's id for `aria-describedby` |
 
-On top of the API options, the component accepts [additional attributes][readme-additional-attributes].
+On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
-and [escape hatches][readme-escape-hatches].
+and [escape hatches][readme-escape-hatches]. For controlling inherited and shared props from ancestors, use
+[context props][readme-props-context] mechanisms.
 
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-checkbox]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Checkbox/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-props-context]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#shared-and-inherited-props
 [readme-radio]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Radio/README.md
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [readme-textfield]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/TextField/README.md

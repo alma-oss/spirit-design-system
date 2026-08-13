@@ -62,13 +62,15 @@ You can use the native input `size` attribute to set width by character count:
 | `validationState` | [Validation dictionary][dictionary-validation] | —        | ✕        | Border validation styling; can come from parent context                     |
 | `variant`         | [Fill Variants dictionary][dictionary-variant] | `fill`   | ✕        | Variant modifier; overrides context when provided                           |
 
-On top of the API options, the component accepts [additional attributes][readme-additional-attributes].
+On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
-and [escape hatches][readme-escape-hatches].
+and [escape hatches][readme-escape-hatches]. For controlling inherited and shared props from ancestors, use
+[context props][readme-props-context] mechanisms.
 
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [dictionary-variant]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#variant
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-props-context]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#shared-and-inherited-props
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
