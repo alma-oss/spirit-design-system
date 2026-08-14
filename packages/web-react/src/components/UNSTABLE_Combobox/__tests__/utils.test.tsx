@@ -1,9 +1,9 @@
 import React from 'react';
+import { createCollection } from '../../../hooks';
 import { COMBOBOX_OPTION_LABEL_ATTR, COMBOBOX_OPTION_VALUE_ATTR } from '../constants';
 import UNSTABLE_ComboboxOption from '../UNSTABLE_ComboboxOption';
 import {
   areAllOptionsSelected,
-  collectComboboxItems,
   createSelectedKeysSet,
   getComboboxOptionDomId,
   getOptionRowCellControls,
@@ -101,19 +101,27 @@ describe('UNSTABLE_Combobox utils', () => {
     expect(getOptionRowCellControls(row)).toEqual([button]);
   });
 
-  it('collectComboboxItems should collect key, label, and disabled metadata', () => {
-    const items = collectComboboxItems(
-      <>
-        <UNSTABLE_ComboboxOption value="cs" label="Czech short">
-          Czech Republic
-        </UNSTABLE_ComboboxOption>
-        <UNSTABLE_ComboboxOption value="en" isDisabled>
-          English
-        </UNSTABLE_ComboboxOption>
-      </>,
-    );
+  it('collection should collect key, label, and disabled metadata from options', () => {
+    const collection = createCollection({
+      children: (
+        <>
+          <UNSTABLE_ComboboxOption value="cs" label="Czech short">
+            Czech Republic
+          </UNSTABLE_ComboboxOption>
+          <UNSTABLE_ComboboxOption value="en" isDisabled>
+            English
+          </UNSTABLE_ComboboxOption>
+        </>
+      ),
+    });
 
-    expect(items).toEqual([
+    expect(
+      [...collection.getItemNodes()].map((node) => ({
+        key: node.key,
+        label: node.textValue,
+        isDisabled: Boolean(node.isDisabled),
+      })),
+    ).toEqual([
       { key: 'cs', label: 'Czech short', isDisabled: false },
       { key: 'en', label: 'English', isDisabled: true },
     ]);

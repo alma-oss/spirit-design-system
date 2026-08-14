@@ -1,4 +1,4 @@
-import { Children, type ReactNode, isValidElement } from 'react';
+import { getNodeText } from '../../hooks';
 import {
   COMBOBOX_OPTION_CELL_CONTROL_SELECTOR,
   COMBOBOX_OPTION_ITEM_SELECTOR,
@@ -6,35 +6,7 @@ import {
   COMBOBOX_OPTION_VALUE_ATTR,
 } from './constants';
 
-/**
- * Flattens a ReactNode to plain text (for aria-labels).
- *
- * @param node React node
- */
-export const getNodeText = (node: ReactNode): string => {
-  if (node == null || typeof node === 'boolean') {
-    return '';
-  }
-
-  if (typeof node === 'string' || typeof node === 'number') {
-    return String(node);
-  }
-
-  if (Array.isArray(node)) {
-    return node.map(getNodeText).join('');
-  }
-
-  if (isValidElement<{ children?: ReactNode }>(node)) {
-    return getNodeText(node.props.children);
-  }
-
-  return '';
-};
-
-const isComboboxOption = (node: ReactNode) =>
-  isValidElement(node) && (node.type as { spiritComponent?: string })?.spiritComponent === 'UNSTABLE_ComboboxOption';
-
-const isOptionItemRole = (role?: string) => role === 'option' || role === 'row';
+export { getNodeText };
 
 /**
  * Namespaced DOM id for an option item (unique per Combobox instance).
@@ -52,79 +24,12 @@ export const getComboboxOptionDomId = (comboboxId: string, value: string): strin
 export const getOptionValueFromRow = (optionEl: HTMLElement): string =>
   optionEl.getAttribute(COMBOBOX_OPTION_VALUE_ATTR) || optionEl.id;
 
-/** Structured option metadata collected from Combobox children (Picker-style item collection). */
+/** Structured option metadata collected from Combobox children. */
 export interface ComboboxItem {
   isDisabled: boolean;
   key: string;
   label: string;
 }
-
-/**
- * Collects Combobox option items from children (`UNSTABLE_ComboboxOption` or `role="option"|"row"`).
- * Insertion order, unique by key.
- *
- * @param children Combobox option children
- */
-export const collectComboboxItems = (children: ReactNode): ComboboxItem[] => {
-  const items: ComboboxItem[] = [];
-  const seen = new Set<string>();
-
-  const push = (item: ComboboxItem) => {
-    if (!item.key || seen.has(item.key)) {
-      return;
-    }
-
-    seen.add(item.key);
-    items.push(item);
-  };
-
-  const traverse = (node: ReactNode) => {
-    Children.forEach(node, (child) => {
-      if (
-        !isValidElement<{
-          id?: string;
-          isDisabled?: boolean;
-          label?: string;
-          role?: string;
-          value?: string;
-          children?: ReactNode;
-        }>(child)
-      ) {
-        return;
-      }
-
-      const { id, isDisabled, label, role, value, children: childChildren } = child.props;
-
-      if (isComboboxOption(child) && value) {
-        push({
-          key: value,
-          label: label || getNodeText(childChildren),
-          isDisabled: Boolean(isDisabled),
-        });
-
-        return;
-      }
-
-      if (isOptionItemRole(role) && id) {
-        push({
-          key: id,
-          label: getNodeText(childChildren),
-          isDisabled: Boolean(isDisabled),
-        });
-
-        return;
-      }
-
-      if (childChildren != null) {
-        traverse(childChildren);
-      }
-    });
-  };
-
-  traverse(children);
-
-  return items;
-};
 
 /**
  * Readable label for an option item element.
@@ -141,25 +46,6 @@ export const getRowLabel = (optionEl: HTMLElement): string => {
   const firstCell = optionEl.querySelector('[role="gridcell"]');
 
   return (firstCell?.textContent ?? optionEl.textContent ?? '').trim();
-};
-
-/**
- * Visible option items inside the options widget (not hidden via `display: none` / `hidden`).
- *
- * @param optionsEl Options widget element (`listbox` or `grid`)
- */
-export const getVisibleOptionRows = (optionsEl: HTMLElement | null): HTMLElement[] => {
-  if (!optionsEl) {
-    return [];
-  }
-
-  return Array.from(optionsEl.querySelectorAll<HTMLElement>(COMBOBOX_OPTION_ITEM_SELECTOR)).filter((option) => {
-    if (option.hasAttribute('hidden') || option.getAttribute('aria-hidden') === 'true') {
-      return false;
-    }
-
-    return option.style.display !== 'none';
-  });
 };
 
 /**

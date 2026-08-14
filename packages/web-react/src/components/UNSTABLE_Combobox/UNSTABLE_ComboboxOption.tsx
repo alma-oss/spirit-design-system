@@ -1,7 +1,8 @@
 'use client';
 
 import classNames from 'classnames';
-import React from 'react';
+import React, { type ReactNode } from 'react';
+import { getNodeText } from '../../hooks';
 import { Item } from '../Item';
 import { useComboboxPopoverContext } from './ComboboxPopoverContext';
 import type { SpiritUnstableComboboxOptionProps } from './types';
@@ -56,5 +57,17 @@ const UNSTABLE_ComboboxOption = ({
 
 UNSTABLE_ComboboxOption.spiritComponent = 'UNSTABLE_ComboboxOption';
 UNSTABLE_ComboboxOption.displayName = 'UNSTABLE_ComboboxOption';
+
+UNSTABLE_ComboboxOption.getCollectionNode = function* getCollectionNode(props: Record<string, unknown>) {
+  const children = props.children as ReactNode;
+  const { label } = props;
+
+  yield {
+    type: 'item' as const,
+    key: String(props.value ?? ''),
+    textValue: label != null ? String(label) : getNodeText(children),
+    isDisabled: Boolean(props.isDisabled),
+  };
+};
 
 export default UNSTABLE_ComboboxOption;

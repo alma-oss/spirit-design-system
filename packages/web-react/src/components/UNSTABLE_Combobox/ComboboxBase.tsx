@@ -125,7 +125,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
   const selectionGridRef = useRef<HTMLDivElement>(null);
   const listboxRef = useRef<HTMLDivElement>(null);
 
-  const { getOptionRowEl, resolvedOptionKeys, selectedItems, warmItemLabel } = useComboboxItems({
+  const { getOptionRowEl, getVisibleOptionRows, resolvedOptionKeys, selectedItems, warmItemLabel } = useComboboxItems({
     children,
     listboxRef,
     optionKeys,
@@ -168,6 +168,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     close,
     focusInput,
     getOptionRowEl,
+    getVisibleOptionRows,
     inputRef,
     isDisabled,
     isOpen,

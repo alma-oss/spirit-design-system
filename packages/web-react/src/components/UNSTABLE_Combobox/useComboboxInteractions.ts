@@ -3,7 +3,7 @@
 import { type FocusEvent, type KeyboardEvent, type MouseEvent, type RefObject, useCallback } from 'react';
 import { COMBOBOX_OPTION_ITEM_SELECTOR } from './constants';
 import { useComboboxOptionGridKeyboard } from './useComboboxOptionGridKeyboard';
-import { getOptionRowFromFocus, getOptionValueFromRow, getVisibleOptionRows, isOptionRowDisabled } from './utils';
+import { getOptionRowFromFocus, getOptionValueFromRow, isOptionRowDisabled } from './utils';
 
 export interface UseComboboxInteractionsProps {
   activeDescendantId?: string;
@@ -12,6 +12,7 @@ export interface UseComboboxInteractionsProps {
   close: () => void;
   focusInput: () => void;
   getOptionRowEl: (optionId: string) => HTMLElement | null;
+  getVisibleOptionRows: () => HTMLElement[];
   inputRef: RefObject<HTMLInputElement>;
   isDisabled?: boolean;
   isOpen: boolean;
@@ -46,6 +47,7 @@ export interface UseComboboxInteractionsReturn {
  * @param props.close Close the options popover
  * @param props.focusInput Focus the filter input
  * @param props.getOptionRowEl Resolve an option row element by value
+ * @param props.getVisibleOptionRows Mounted option rows from the collection
  * @param props.inputRef Filter input element ref
  * @param props.isDisabled Whether the Combobox is disabled
  * @param props.isOpen Whether the options popover is open
@@ -63,6 +65,7 @@ export const useComboboxInteractions = ({
   close,
   focusInput,
   getOptionRowEl,
+  getVisibleOptionRows,
   inputRef,
   isDisabled = false,
   isOpen,
@@ -93,6 +96,7 @@ export const useComboboxInteractions = ({
     isDisabled,
     activeDescendantId,
     canFocusLastTag,
+    getVisibleOptionRows,
     onOpen: open,
     onClose: close,
     onToggleOption: handleToggleOption,
@@ -124,7 +128,7 @@ export const useComboboxInteractions = ({
 
   // Consumer code may still focus an option (e.g. after removing a row); keep activedescendant in sync.
   const handleListboxFocusCapture = (event: FocusEvent<HTMLElement>) => {
-    const option = getOptionRowFromFocus(event.target, getVisibleOptionRows(listboxRef.current));
+    const option = getOptionRowFromFocus(event.target, getVisibleOptionRows());
 
     if (option?.id) {
       setActiveDescendantId(option.id);

@@ -1,3 +1,4 @@
+export * from './collection';
 export * from './styleProps';
 export * from './useAutoFocus';
 export * from './useAlignmentClass';

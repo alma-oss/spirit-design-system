@@ -1,6 +1,6 @@
 import React from 'react';
+import { createCollection } from '../../../hooks';
 import {
-  collectPickerItems,
   getAggregatedTagLabel,
   getNodeText,
   getPickerItemLabelMap,
@@ -10,7 +10,7 @@ import {
 import { UNSTABLE_PickerGroup, UNSTABLE_PickerItem } from '..';
 
 describe('UNSTABLE_Picker utils', () => {
-  it('collectPickerItems should collect picker items recursively', () => {
+  it('collection should collect picker items recursively through groups', () => {
     const children = (
       <UNSTABLE_PickerGroup label="Languages">
         <UNSTABLE_PickerItem value="cs">Czech</UNSTABLE_PickerItem>
@@ -21,14 +21,16 @@ describe('UNSTABLE_Picker utils', () => {
       </UNSTABLE_PickerGroup>
     );
 
-    expect(collectPickerItems(children)).toEqual([
+    const collection = createCollection({ children });
+
+    expect([...collection.getItemNodes()].map((node) => ({ value: node.key, label: node.rendered }))).toEqual([
       { value: 'cs', label: 'Czech' },
       { value: 'dk', label: 'Danish' },
     ]);
   });
 
-  it('collectPickerItems should ignore valid elements without children', () => {
-    expect(collectPickerItems(<span />)).toEqual([]);
+  it('collection should ignore valid elements without collection nodes', () => {
+    expect(createCollection({ children: <span /> }).size).toBe(0);
   });
 
   it('getPickerItemLabelMap should build labels map from picker items', () => {

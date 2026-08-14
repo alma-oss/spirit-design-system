@@ -7,7 +7,7 @@ import {
   mapComboboxInputKeyToAction,
   useIsomorphicLayoutEffect,
 } from '../../hooks';
-import { getOptionRowCellControls, getOptionValueFromRow, getVisibleOptionRows, isOptionRowDisabled } from './utils';
+import { getOptionRowCellControls, getOptionValueFromRow, isOptionRowDisabled } from './utils';
 
 export interface UseComboboxOptionGridKeyboardProps {
   listboxRef: RefObject<HTMLElement | null>;
@@ -17,6 +17,8 @@ export interface UseComboboxOptionGridKeyboardProps {
   activeDescendantId?: string;
   /** When true, Backspace on the empty filter focuses the last selected tag */
   canFocusLastTag?: boolean;
+  /** Mounted option rows from the collection (no DOM visibility scan). */
+  getVisibleOptionRows: () => HTMLElement[];
   onOpen: () => void;
   onClose: () => void;
   onToggleOption: (optionId: string) => void;
@@ -107,6 +109,7 @@ const activateOptionRowByMove = (
  * @param props.onToggleOption Toggle selection for an option value
  * @param props.onFocusLastTag Focus the last selected tag from an empty filter
  * @param props.setActiveDescendantId State setter for activedescendant
+ * @param props.getVisibleOptionRows
  */
 export const useComboboxOptionGridKeyboard = ({
   listboxRef,
@@ -115,6 +118,7 @@ export const useComboboxOptionGridKeyboard = ({
   isDisabled = false,
   activeDescendantId,
   canFocusLastTag = false,
+  getVisibleOptionRows,
   onOpen,
   onClose,
   onToggleOption,
@@ -146,9 +150,9 @@ export const useComboboxOptionGridKeyboard = ({
   const activateEdgeOption = useCallback(
     (edge: 'first' | 'last') => {
       setActiveNestedControlIndex(null);
-      activateOptionRowByMove(getVisibleOptionRows(listboxRef.current), -1, edge, setActiveDescendantId);
+      activateOptionRowByMove(getVisibleOptionRows(), -1, edge, setActiveDescendantId);
     },
-    [listboxRef, setActiveDescendantId],
+    [getVisibleOptionRows, setActiveDescendantId],
   );
 
   // Options exist only once the popover is open, so arrow keys on a closed combobox wait for that render.
@@ -197,12 +201,12 @@ export const useComboboxOptionGridKeyboard = ({
   }, [activeDescendantId, activeNestedControlIndex, listboxRef]);
 
   const getActiveRowState = useCallback(() => {
-    const visible = getVisibleOptionRows(listboxRef.current);
+    const visible = getVisibleOptionRows();
     const currentRow = activeDescendantId ? (visible.find((row) => row.id === activeDescendantId) ?? null) : null;
     const currentIndex = currentRow ? visible.indexOf(currentRow) : -1;
 
     return { visible, currentRow, currentIndex };
-  }, [activeDescendantId, listboxRef]);
+  }, [activeDescendantId, getVisibleOptionRows]);
 
   const onInputKeyDown = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {

@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { InputPositions } from '../../constants';
-import { getToggledSelectedKeys, isKeySelected, isSingleSelectionMode } from '../../hooks';
+import { getNodeText, getToggledSelectedKeys, isKeySelected, isSingleSelectionMode } from '../../hooks';
 import { Checkbox } from '../Checkbox';
 import { Radio } from '../Radio';
 import { usePickerPopoverContext } from './PickerPopoverContext';
@@ -36,5 +36,14 @@ const UNSTABLE_PickerItem = ({ children, value, ...restProps }: SpiritUnstablePi
 };
 
 UNSTABLE_PickerItem.spiritComponent = 'UNSTABLE_PickerItem';
+
+UNSTABLE_PickerItem.getCollectionNode = function* getCollectionNode(props: Record<string, unknown>) {
+  yield {
+    type: 'item' as const,
+    key: String(props.value ?? ''),
+    rendered: props.children as ReactNode,
+    textValue: getNodeText(props.children as ReactNode),
+  };
+};
 
 export default UNSTABLE_PickerItem;

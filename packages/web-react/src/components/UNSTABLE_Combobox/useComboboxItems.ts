@@ -1,14 +1,8 @@
 'use client';
 
-import { type ReactNode, type RefObject, useCallback, useEffect, useMemo, useRef } from 'react';
-import { COMBOBOX_OPTION_ITEM_SELECTOR } from './constants';
-import {
-  type ComboboxItem,
-  collectComboboxItems,
-  getOptionRowEl as getOptionRowElFromListbox,
-  getOptionValueFromRow,
-  getRowLabel,
-} from './utils';
+import { type ReactNode, type RefObject, useCallback, useMemo, useRef } from 'react';
+import { useCollection } from '../../hooks';
+import { type ComboboxItem, getOptionRowEl as getOptionRowElFromListbox } from './utils';
 
 export interface ComboboxSelectedItem {
   label: string;
@@ -27,6 +21,8 @@ export interface UseComboboxItemsReturn {
   getItem: (key: string) => ComboboxItem | undefined;
   getItemLabel: (key: string) => string;
   getOptionRowEl: (optionId: string) => HTMLElement | null;
+  /** Mounted option rows resolved from the collection (no DOM visibility scan). */
+  getVisibleOptionRows: () => HTMLElement[];
   itemsByKey: Readonly<Record<string, ComboboxItem>>;
   resolvedOptionKeys: string[];
   selectedItems: ComboboxSelectedItem[];
@@ -52,15 +48,31 @@ export const useComboboxItems = ({
   const labelCacheRef = useRef<Map<string, string>>(new Map());
   const disabledCacheRef = useRef<Map<string, boolean>>(new Map());
 
-  const collectedItems = useMemo(() => collectComboboxItems(children), [children]);
+  const collection = useCollection({ children });
+
+  const collectedItems = useMemo(() => {
+    const items: ComboboxItem[] = [];
+
+    for (const node of collection.getItemNodes()) {
+      const item: ComboboxItem = {
+        key: node.key,
+        label: node.textValue,
+        isDisabled: Boolean(node.isDisabled),
+      };
+
+      items.push(item);
+      labelCacheRef.current.set(item.key, item.label);
+      disabledCacheRef.current.set(item.key, item.isDisabled);
+    }
+
+    return items;
+  }, [collection]);
 
   const itemsByKey = useMemo(() => {
     const map: Record<string, ComboboxItem> = {};
 
     collectedItems.forEach((item) => {
       map[item.key] = item;
-      labelCacheRef.current.set(item.key, item.label);
-      disabledCacheRef.current.set(item.key, item.isDisabled);
     });
 
     return map;
@@ -76,28 +88,19 @@ export const useComboboxItems = ({
     [listboxRef],
   );
 
-  const syncCachesFromDom = useCallback(() => {
-    const listbox = listboxRef.current;
+  const getVisibleOptionRows = useCallback((): HTMLElement[] => {
+    const rows: HTMLElement[] = [];
 
-    if (!listbox) {
-      return;
+    for (const node of collection.getItemNodes()) {
+      const rowEl = getOptionRowEl(node.key);
+
+      if (rowEl) {
+        rows.push(rowEl);
+      }
     }
 
-    listbox.querySelectorAll<HTMLElement>(COMBOBOX_OPTION_ITEM_SELECTOR).forEach((row) => {
-      const optionValue = getOptionValueFromRow(row);
-
-      if (!optionValue) {
-        return;
-      }
-
-      labelCacheRef.current.set(optionValue, getRowLabel(row));
-      disabledCacheRef.current.set(optionValue, row.getAttribute('aria-disabled') === 'true');
-    });
-  }, [listboxRef]);
-
-  useEffect(() => {
-    syncCachesFromDom();
-  }, [children, selectedKeys, syncCachesFromDom]);
+    return rows;
+  }, [collection, getOptionRowEl]);
 
   const getItem = useCallback(
     (key: string): ComboboxItem | undefined => {
@@ -138,20 +141,9 @@ export const useComboboxItems = ({
         return cached;
       }
 
-      const rowEl = getOptionRowEl(key);
-
-      if (rowEl) {
-        const labelText = getRowLabel(rowEl);
-
-        labelCacheRef.current.set(key, labelText);
-        disabledCacheRef.current.set(key, rowEl.getAttribute('aria-disabled') === 'true');
-
-        return labelText;
-      }
-
       return key;
     },
-    [getOptionRowEl, itemsByKey],
+    [itemsByKey],
   );
 
   const warmItemLabel = useCallback(
@@ -170,6 +162,7 @@ export const useComboboxItems = ({
     getItem,
     getItemLabel,
     getOptionRowEl,
+    getVisibleOptionRows,
     itemsByKey,
     resolvedOptionKeys,
     selectedItems,
