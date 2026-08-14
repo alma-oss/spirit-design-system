@@ -8,6 +8,7 @@ import {
   getSelectedKeys,
   isSingleSelectionMode,
   useAriaDescribedBy,
+  useCollection,
   useI18n,
   useOpenOnArrowDown,
   useSelectionGridKeyboard,
@@ -33,7 +34,6 @@ import UNSTABLE_PickerTrigger from './UNSTABLE_PickerTrigger';
 import { usePickerId } from './usePickerId';
 import { usePickerStyleProps } from './usePickerStyleProps';
 import {
-  collectPickerItems,
   getAggregatedTagLabel,
   getPickerItemLabelMap,
   getPickerSelectionGridKeyboardRowCount,
@@ -87,7 +87,16 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
   const { styleProps, props: transferProps } = useStyleProps(restProps);
   const { labelId, pickerId, popoverId, selectionId, tagDescriptionId } = usePickerId(id);
 
-  const pickerItems = useMemo(() => collectPickerItems(children), [children]);
+  const collection = useCollection({ children });
+
+  const pickerItems = useMemo(
+    () =>
+      [...collection.getItemNodes()].map((node) => ({
+        value: node.key,
+        label: node.rendered,
+      })),
+    [collection],
+  );
 
   const pickerItemLabels = useMemo(() => getPickerItemLabelMap(pickerItems), [pickerItems]);
 

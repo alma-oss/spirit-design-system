@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useId } from 'react';
+import React, { type ReactNode, useId } from 'react';
+import { getNodeText } from '../../hooks';
 import { FieldGroup } from '../FieldGroup';
 import { usePickerPopoverContext } from './PickerPopoverContext';
 import type { SpiritUnstablePickerGroupProps } from './types';
@@ -18,5 +19,15 @@ const UNSTABLE_PickerGroup = ({ children, label, ...restProps }: SpiritUnstableP
 };
 
 UNSTABLE_PickerGroup.spiritComponent = 'UNSTABLE_PickerGroup';
+
+UNSTABLE_PickerGroup.getCollectionNode = function* getCollectionNode(props: Record<string, unknown>) {
+  yield {
+    type: 'section' as const,
+    key: `group:${getNodeText(props.label as ReactNode)}`,
+    textValue: getNodeText(props.label as ReactNode),
+    hasChildNodes: true,
+    children: props.children as ReactNode,
+  };
+};
 
 export default UNSTABLE_PickerGroup;
