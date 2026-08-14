@@ -1,3 +1,6 @@
+// 1. We need the old flexbox syntax to make the trick work.
+// 2. Repeat the selector to override typography tokens that set `font-style: normal`.
+
 .text-underlined-dotted {
     text-decoration-line: underline;
     text-decoration-style: dotted;
@@ -14,10 +17,15 @@
 }
 
 .text-truncate-multiline {
-    // stylelint-disable-next-line value-no-vendor-prefix -- We need the old flexbox syntax to make the trick work.
+    // stylelint-disable-next-line value-no-vendor-prefix -- 1.
     display: -webkit-box;
     -webkit-line-clamp: var(--text-truncate-lines, 3);
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+// 2.
+.text-italic.text-italic {
+    font-style: italic;
 }
