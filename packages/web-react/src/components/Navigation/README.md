@@ -239,7 +239,7 @@ With NavigationAction/NavigationAvatar components:
   </NavigationItem>
   <NavigationItem>
     <NavigationAvatar avatarContent={<Icon name="profile" />} aria-label="Profile of Jiří Bárta">
-      <Text elementType="span" size="small" emphasis="semibold">
+      <Text elementType="span" size="small" fontWeight="semibold">
         My Account
       </Text>
     </NavigationAvatar>

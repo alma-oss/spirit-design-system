@@ -16,7 +16,11 @@ import {
   textWordBreakPropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { type EmphasisDictionaryType, type SizeExtendedDictionaryType, type SizesDictionaryType } from '../../../types';
+import {
+  type FontWeightDictionaryType,
+  type SizeExtendedDictionaryType,
+  type SizesDictionaryType,
+} from '../../../types';
 import Heading from '../Heading';
 import headingSizeDataProvider from './headingSizeDataProvider';
 
@@ -47,15 +51,55 @@ describe('Heading', () => {
 
   elementTypePropsTest(Heading);
 
-  it.each(headingSizeDataProvider)('should have classname', (size, emphasis, expectedClassName) => {
+  it.each(headingSizeDataProvider)('should have classname', (size, fontWeight, expectedClassName) => {
     render(
       <Heading
         size={size as SizesDictionaryType<string> as SizeExtendedDictionaryType<string>}
-        emphasis={emphasis as EmphasisDictionaryType}
+        fontWeight={fontWeight as FontWeightDictionaryType}
         elementType="h1"
       />,
     );
 
     expect(screen.getByRole('heading')).toHaveClass(expectedClassName as string);
+  });
+
+  it('should use deprecated emphasis as font weight fallback', () => {
+    render(
+      <Heading elementType="h1" emphasis="semibold">
+        Heading
+      </Heading>,
+    );
+
+    expect(screen.getByRole('heading')).toHaveClass('typography-heading-medium-semibold');
+  });
+
+  it('should still apply italic when emphasis is italic', () => {
+    render(
+      <Heading elementType="h1" emphasis="italic">
+        Heading
+      </Heading>,
+    );
+
+    expect(screen.getByRole('heading')).toHaveClass('typography-heading-medium-regular', 'text-italic');
+  });
+
+  it('should prefer fontWeight over deprecated emphasis', () => {
+    render(
+      <Heading elementType="h1" emphasis="italic" fontWeight="bold">
+        Heading
+      </Heading>,
+    );
+
+    expect(screen.getByRole('heading')).toHaveClass('typography-heading-medium-bold', 'text-italic');
+  });
+
+  it('should have text-italic classname when isItalic is set', () => {
+    render(
+      <Heading elementType="h1" isItalic>
+        Heading
+      </Heading>,
+    );
+
+    expect(screen.getByRole('heading')).toHaveClass('typography-heading-medium-bold', 'text-italic');
   });
 });

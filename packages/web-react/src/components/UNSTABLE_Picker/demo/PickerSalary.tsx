@@ -65,7 +65,7 @@ const PickerSalary = () => {
         if (keys.length === 0) setSalary(null);
       }}
     >
-      <Text elementType="h3" emphasis="bold">
+      <Text elementType="h3" fontWeight="bold">
         Salary
       </Text>
       <Text size="small">Set your minimum expected salary.</Text>

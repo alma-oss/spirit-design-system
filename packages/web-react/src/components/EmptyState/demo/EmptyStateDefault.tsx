@@ -21,7 +21,7 @@ const EmptyStateDefault = () => (
           />
         </svg>
         <div className="docs-Placeholder__text">
-          <Text emphasis="bold" marginBottom="space-0">
+          <Text fontWeight="bold" marginBottom="space-0">
             Placeholder
           </Text>
           <Text size="small" textColor="secondary">

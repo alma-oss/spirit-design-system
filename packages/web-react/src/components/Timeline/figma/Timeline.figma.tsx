@@ -22,7 +22,7 @@ figma.connect(Timeline, '<FIGMA_FILE_ID>?node-id=37905%3A1011', {
       <TimelineStep>
         <TimelineMarker variant={markerProps.variant} />
         <TimelineHeading>
-          <Heading elementType="h3" size="small" emphasis="semibold">
+          <Heading elementType="h3" size="small" fontWeight="semibold">
             Headline
           </Heading>
         </TimelineHeading>

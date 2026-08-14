@@ -68,7 +68,7 @@ const FooterTextAlignment = () => {
                 id="footer-navigation-text-alignment-section-1"
                 elementType="h3"
                 size="xsmall"
-                emphasis="semibold"
+                fontWeight="semibold"
                 marginBottom="space-700"
               >
                 Section headline
@@ -84,7 +84,7 @@ const FooterTextAlignment = () => {
                 id="footer-navigation-text-alignment-section-2"
                 elementType="h3"
                 size="xsmall"
-                emphasis="semibold"
+                fontWeight="semibold"
                 marginBottom="space-700"
               >
                 Section headline
@@ -100,7 +100,7 @@ const FooterTextAlignment = () => {
                 id="footer-navigation-text-alignment-section-3"
                 elementType="h3"
                 size="xsmall"
-                emphasis="semibold"
+                fontWeight="semibold"
                 marginBottom="space-700"
               >
                 Section headline
@@ -116,7 +116,7 @@ const FooterTextAlignment = () => {
                 id="footer-navigation-text-alignment-section-4"
                 elementType="h3"
                 size="xsmall"
-                emphasis="semibold"
+                fontWeight="semibold"
                 marginBottom="space-700"
               >
                 Section headline
@@ -132,7 +132,7 @@ const FooterTextAlignment = () => {
                 id="footer-navigation-text-alignment-section-5"
                 elementType="h3"
                 size="xsmall"
-                emphasis="semibold"
+                fontWeight="semibold"
                 marginBottom="space-700"
               >
                 Section headline
@@ -148,7 +148,7 @@ const FooterTextAlignment = () => {
                 id="footer-navigation-text-alignment-section-6"
                 elementType="h3"
                 size="xsmall"
-                emphasis="semibold"
+                fontWeight="semibold"
                 marginBottom="space-700"
               >
                 Section headline

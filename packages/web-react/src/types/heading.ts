@@ -3,6 +3,9 @@ import type {
   ChildrenProps,
   EmphasisDictionaryType,
   EmphasisProps,
+  FontWeightDictionaryType,
+  FontWeightProps,
+  ItalicProps,
   PolymorphicComponentProps,
   SizeExtendedDictionaryType,
   SizeProps,
@@ -15,13 +18,15 @@ import type {
 export type HeadingColorsType<C = undefined> = TextColorsType<C>;
 
 /** ===== INTERNAL API ===== */
-export interface HeadingProps<S = void, Emph = void, C = void>
+export interface HeadingProps<S = void, Emph = void, C = void, FW = void>
   extends
     ChildrenProps,
     StyleProps,
     TypographyBaseProps,
     SizeProps<SizeExtendedDictionaryType<S>>,
     EmphasisProps<EmphasisDictionaryType<Emph>>,
+    FontWeightProps<FontWeightDictionaryType<FW>>,
+    ItalicProps,
     TextColorProps<HeadingColorsType<C>> {}
 
 /** ===== PUBLIC API ===== */
@@ -30,4 +35,5 @@ export type SpiritHeadingProps<
   S = void,
   Emph = void,
   C = void,
-> = PolymorphicComponentProps<E, HeadingProps<S, Emph, C>>;
+  FW = void,
+> = PolymorphicComponentProps<E, HeadingProps<S, Emph, C, FW>>;

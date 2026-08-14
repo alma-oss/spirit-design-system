@@ -1,7 +1,15 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { Emphasis, SizesExtended, TextAlignments, TextColors, TextHyphens, TextWordBreaks } from '../../../constants';
+import {
+  Emphasis,
+  FontWeight,
+  SizesExtended,
+  TextAlignments,
+  TextColors,
+  TextHyphens,
+  TextWordBreaks,
+} from '../../../constants';
 import { getAccentTextColors, getEmotionTextColors } from '../../../utils';
 import ReadMe from '../README.md?raw';
 import { Heading } from '..';
@@ -31,9 +39,23 @@ const meta: Meta<typeof Heading> = {
     },
     emphasis: {
       control: 'select',
+      description: 'Deprecated. Use fontWeight and isItalic instead.',
       options: [...Object.values(Emphasis), undefined],
       table: {
-        defaultValue: { summary: Emphasis.BOLD },
+        defaultValue: { summary: undefined },
+      },
+    },
+    fontWeight: {
+      control: 'select',
+      options: [...Object.values(FontWeight), undefined],
+      table: {
+        defaultValue: { summary: FontWeight.BOLD },
+      },
+    },
+    isItalic: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
       },
     },
     isTextBalanced: {
@@ -81,7 +103,9 @@ const meta: Meta<typeof Heading> = {
   args: {
     children: 'Heading',
     elementType: 'h1',
-    emphasis: Emphasis.BOLD,
+    emphasis: undefined,
+    fontWeight: FontWeight.BOLD,
+    isItalic: false,
     isTextBalanced: false,
     size: SizesExtended.MEDIUM,
     textAlignment: TextAlignments.LEFT,

@@ -20,15 +20,33 @@ Use the `size` prop to set the size of the text.
 </Heading>
 ```
 
-## Emphasis
+## Font Weight
 
-Use the `emphasis` prop to set the emphasis of the text.
+Use the `fontWeight` prop to set the font weight to `regular`, `semibold`, or `bold`.
 
 ⚠️ This prop only affects styling, not the semantics of the element.
 
 ```tsx
-<Heading elementType="h1" emphasis="semibold">
+<Heading elementType="h1" fontWeight="semibold">
   Semibold heading
+</Heading>
+```
+
+⚠️ The `emphasis` prop is deprecated in its entirety. See the [deprecation notice](#deprecation-notice)
+for migration instructions.
+
+## Italic
+
+Use the `isItalic` prop to apply italic style. It can be combined with `fontWeight`.
+
+⚠️ This prop only affects styling, not the semantics of the element.
+
+```tsx
+<Heading elementType="h1" isItalic>
+  Italic heading
+</Heading>
+<Heading elementType="h1" fontWeight="bold" isItalic>
+  Bold italic heading
 </Heading>
 ```
 
@@ -105,7 +123,8 @@ less for Firefox).
 <Heading
   elementType="h1"
   size="large"
-  emphasis="semibold"
+  fontWeight="semibold"
+  isItalic
   isTextBalanced
   textAlignment="center"
   textColor="secondary"
@@ -118,16 +137,18 @@ less for Firefox).
 
 ## API
 
-| Name             | Type                                                                                                                                                                                                | Default  | Required | Description                             |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | --------------------------------------- |
-| `elementType`    | `React.Element`                                                                                                                                                                                     | —        | ✓        | HTML tag                                |
-| `emphasis`       | [Emphasis dictionary][dictionary-emphasis]                                                                                                                                                          | `bold`   | ✕        | Emphasis of the text                    |
-| `isTextBalanced` | `bool`                                                                                                                                                                                              | `false`  | ✕        | If true, the text has balanced wrapping |
-| `size`           | [Size Extended dictionary][dictionary-size]                                                                                                                                                         | `medium` | ✕        | Size of the text                        |
-| `textAlignment`  | \[[Text Alignment dictionary][dictionary-alignment] \| `Responsive<TextAlignmentDictionaryType>`]                                                                                                   | —        | ✕        | Text alignment                          |
-| `textColor`      | \[[TextColorNamesType][readme-generated-types] \| [AccentColorNamesType][readme-generated-types] \| [EmotionColorNamesType][readme-generated-types] ✕ [Intensity dictionary][dictionary-intensity]] | -        | ✕        | Color of the text                       |
-| `textHyphens`    | \[`none` \| `auto` \| `manual`]                                                                                                                                                                     | —        | ✕        | Hyphens strategy applied to the text    |
-| `textWordBreak`  | \[`normal` \| `anywhere` \| `long-words`]                                                                                                                                                           | —        | ✕        | Word break strategy applied to the text |
+| Name             | Type                                                                                                                                                                                                | Default  | Required | Description                                          |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ---------------------------------------------------- |
+| `elementType`    | `React.Element`                                                                                                                                                                                     | —        | ✓        | HTML tag                                             |
+| `emphasis`       | \[`regular` \| `semibold` \| `bold` \| `italic`]                                                                                                                                                    | —        | ✕        | Deprecated. Use `fontWeight` and `isItalic` instead. |
+| `fontWeight`     | [Font Weight dictionary][dictionary-font-weight]                                                                                                                                                    | `bold`   | ✕        | Font weight of the heading                           |
+| `isItalic`       | `bool`                                                                                                                                                                                              | `false`  | ✕        | If true, the heading is italic                       |
+| `isTextBalanced` | `bool`                                                                                                                                                                                              | `false`  | ✕        | If true, the text has balanced wrapping              |
+| `size`           | [Size Extended dictionary][dictionary-size]                                                                                                                                                         | `medium` | ✕        | Size of the text                                     |
+| `textAlignment`  | \[[Text Alignment dictionary][dictionary-alignment] \| `Responsive<TextAlignmentDictionaryType>`]                                                                                                   | —        | ✕        | Text alignment                                       |
+| `textColor`      | \[[TextColorNamesType][readme-generated-types] \| [AccentColorNamesType][readme-generated-types] \| [EmotionColorNamesType][readme-generated-types] ✕ [Intensity dictionary][dictionary-intensity]] | -        | ✕        | Color of the text                                    |
+| `textHyphens`    | \[`none` \| `auto` \| `manual`]                                                                                                                                                                     | —        | ✕        | Hyphens strategy applied to the text                 |
+| `textWordBreak`  | \[`normal` \| `anywhere` \| `long-words`]                                                                                                                                                           | —        | ✕        | Word break strategy applied to the text              |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -149,12 +170,48 @@ const CustomText = (props: SpiritHeadingProps): JSX.Element => {
 };
 ```
 
+## Deprecation Notice
+
+The `emphasis` prop is deprecated in its entirety and will be removed in v6. Use `fontWeight` for font weight
+and `isItalic` for italic styling.
+
+[What are deprecations?][readme-deprecations]
+
+### Migration Guide
+
+Run the codemod on your source files:
+
+```shell
+npx @alma-oss/spirit-codemods -p <path> -t v6/web-react/heading-text-emphasis-prop
+```
+
+Or migrate manually:
+
+```tsx
+// before
+<Heading elementType="h2" emphasis="italic">
+  Heading
+</Heading>
+<Heading elementType="h2" emphasis="semibold">
+  Heading
+</Heading>
+
+// after
+<Heading elementType="h2" fontWeight="regular" isItalic>
+  Heading
+</Heading>
+<Heading elementType="h2" fontWeight="semibold">
+  Heading
+</Heading>
+```
+
 [dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#alignment
-[dictionary-emphasis]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#emphasis
+[dictionary-font-weight]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#font-weight
 [dictionary-intensity]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#intensity
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#size
 [mdn-text-wrap-balance]: https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap#balance
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#deprecations
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
