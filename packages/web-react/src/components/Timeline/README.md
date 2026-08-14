@@ -183,7 +183,7 @@ Optional heading section for the timeline item.
 
 ```tsx
 <TimelineHeading>
-  <Heading elementType="h3" size="small" emphasis="semibold">
+  <Heading elementType="h3" size="small" fontWeight="semibold">
     Step Title
   </Heading>
 </TimelineHeading>
@@ -193,7 +193,7 @@ Optional heading section for the timeline item.
 
 ```tsx
 <TimelineHeading>
-  <Heading elementType="h3" size="small" emphasis="semibold">
+  <Heading elementType="h3" size="small" fontWeight="semibold">
     <Link href="#">Step Title</Link>
   </Heading>
 </TimelineHeading>
@@ -251,7 +251,7 @@ import {
   <TimelineStep>
     <TimelineMarker>1</TimelineMarker>
     <TimelineHeading>
-      <Heading elementType="h3" size="small" emphasis="semibold">
+      <Heading elementType="h3" size="small" fontWeight="semibold">
         Step Title
       </Heading>
     </TimelineHeading>

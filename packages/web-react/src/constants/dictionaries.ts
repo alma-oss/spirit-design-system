@@ -97,6 +97,13 @@ export const Emphasis = {
   ITALIC: 'italic',
 } as const;
 
+/* Font Weight */
+export const FontWeight = {
+  REGULAR: 'regular',
+  SEMIBOLD: 'semibold',
+  BOLD: 'bold',
+} as const;
+
 /* Gradient */
 export const BackgroundGradients = {
   PRIMARY: 'primary',

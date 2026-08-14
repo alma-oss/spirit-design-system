@@ -111,7 +111,7 @@ const meta: Meta<typeof Footer> = {
                     id="footer-navigation-section-2"
                     elementType="h3"
                     size="xsmall"
-                    emphasis="semibold"
+                    fontWeight="semibold"
                     marginBottom="space-700"
                   >
                     Section headline
@@ -166,7 +166,7 @@ export const FigmaContentBelow: Story = {
                   id="footer-navigation-section-1"
                   elementType="h3"
                   size="xsmall"
-                  emphasis="semibold"
+                  fontWeight="semibold"
                   marginBottom="space-700"
                 >
                   Section headline
@@ -221,7 +221,7 @@ export const FigmaNoContentBelow: Story = {
                   id="footer-navigation-section-1"
                   elementType="h3"
                   size="xsmall"
-                  emphasis="semibold"
+                  fontWeight="semibold"
                   marginBottom="space-700"
                 >
                   Section headline

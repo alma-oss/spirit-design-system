@@ -12,6 +12,7 @@ import {
   type ComponentButtonColors,
   type Emphasis,
   type FillVariants,
+  type FontWeight,
   type Intensity,
   type LinkColors,
   type Placements,
@@ -98,7 +99,20 @@ export type EmphasisDictionaryKeys = keyof typeof Emphasis;
 export type EmphasisDictionaryType<C = undefined> = (typeof Emphasis)[EmphasisDictionaryKeys] | C;
 
 export interface EmphasisProps<E> {
+  /** @deprecated Use `fontWeight` and `isItalic` instead. */
   emphasis?: E;
+}
+
+/* Font Weight */
+export type FontWeightDictionaryKeys = keyof typeof FontWeight;
+export type FontWeightDictionaryType<FW = undefined> = (typeof FontWeight)[FontWeightDictionaryKeys] | FW;
+
+export interface FontWeightProps<FW> {
+  fontWeight?: FW;
+}
+
+export interface ItalicProps {
+  isItalic?: boolean;
 }
 
 /* Gradient */

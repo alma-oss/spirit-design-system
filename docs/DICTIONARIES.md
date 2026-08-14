@@ -17,6 +17,7 @@ This project uses **dictionaries** to unify props across components.
 - [Breakpoint](#breakpoint)
 - [Color](#color)
 - [Emphasis](#emphasis)
+- [Font Weight](#font-weight)
 - [Gradient](#gradient)
 - [Placement](#placement)
 - [Size](#size)
@@ -74,9 +75,18 @@ This project uses **dictionaries** to unify props across components.
 
 ### Emphasis
 
+The Emphasis dictionary is **deprecated** for the `Heading` and `Text` components. Use [Font Weight](#font-weight) and
+`isItalic` instead.
+
 | Dictionary | Values                                  | Code name |
 | ---------- | --------------------------------------- | --------- |
 | Emphasis   | `regular`, `bold`, `semibold`, `italic` | Emphasis  |
+
+### Font Weight
+
+| Dictionary  | Values                        | Code name  |
+| ----------- | ----------------------------- | ---------- |
+| Font Weight | `regular`, `semibold`, `bold` | FontWeight |
 
 ### Gradient
 

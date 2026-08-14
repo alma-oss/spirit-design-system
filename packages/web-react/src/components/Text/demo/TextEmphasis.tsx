@@ -3,10 +3,17 @@ import Text from '../Text';
 
 const TextEmphasis = () => (
   <>
-    <Text emphasis="regular">Text regular</Text>
-    <Text emphasis="semibold">Text semibold</Text>
-    <Text emphasis="bold">Text bold</Text>
-    <Text emphasis="italic">Text italic</Text>
+    <Text>Text regular</Text>
+    <Text fontWeight="semibold">Text semibold</Text>
+    <Text fontWeight="bold">Text bold</Text>
+    <Text isItalic>Text regular italic</Text>
+    <Text fontWeight="semibold" isItalic>
+      Text semibold italic
+    </Text>
+    <Text fontWeight="bold" isItalic>
+      Text bold italic
+    </Text>
+    <Text isItalic>Text italic</Text>
   </>
 );
 

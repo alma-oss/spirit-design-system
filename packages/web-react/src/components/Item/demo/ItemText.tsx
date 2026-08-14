@@ -5,7 +5,7 @@ import Item from '../Item';
 const ItemText = () => (
   <>
     <Item>
-      <Text elementType="span" emphasis="semibold">
+      <Text elementType="span" fontWeight="semibold">
         Semibold medium text
       </Text>
       <Text elementType="span" size="small" textColor="secondary">

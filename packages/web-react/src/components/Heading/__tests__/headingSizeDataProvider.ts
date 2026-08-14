@@ -1,15 +1,10 @@
 const headingSizeDataProvider = [
-  // [size, emphasis, expectedClassName]
+  // [size, fontWeight, expectedClassName]
   ['xsmall', 'regular', 'typography-heading-xsmall-regular'],
   ['small', 'regular', 'typography-heading-small-regular'],
   ['medium', 'regular', 'typography-heading-medium-regular'],
   ['large', 'regular', 'typography-heading-large-regular'],
   ['xlarge', 'regular', 'typography-heading-xlarge-regular'],
-  ['xsmall', 'italic', 'typography-heading-xsmall-italic'],
-  ['small', 'italic', 'typography-heading-small-italic'],
-  ['medium', 'italic', 'typography-heading-medium-italic'],
-  ['large', 'italic', 'typography-heading-large-italic'],
-  ['xlarge', 'italic', 'typography-heading-xlarge-italic'],
   ['xsmall', 'bold', 'typography-heading-xsmall-bold'],
   ['small', 'bold', 'typography-heading-small-bold'],
   ['medium', 'bold', 'typography-heading-medium-bold'],

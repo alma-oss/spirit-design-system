@@ -37,7 +37,7 @@ const TimelineDemoFactory = ({ size, steps, variant }: TimelineDemoFactoryProps)
 
         {step.heading && (
           <TimelineHeading>
-            <Heading elementType="h3" size="small" emphasis="semibold">
+            <Heading elementType="h3" size="small" fontWeight="semibold">
               {step.heading.isLink ? (
                 <Link href="#" color="primary">
                   {step.heading.text}

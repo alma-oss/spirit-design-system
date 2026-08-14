@@ -1,15 +1,10 @@
 const textPropsDataProvider = [
-  // [size, emphasis, expectedClassName]
+  // [size, fontWeight, expectedClassName]
   ['xsmall', 'regular', 'typography-body-xsmall-regular'],
   ['small', 'regular', 'typography-body-small-regular'],
   ['medium', 'regular', 'typography-body-medium-regular'],
   ['large', 'regular', 'typography-body-large-regular'],
   ['xlarge', 'regular', 'typography-body-xlarge-regular'],
-  ['xsmall', 'italic', 'typography-body-xsmall-italic'],
-  ['small', 'italic', 'typography-body-small-italic'],
-  ['medium', 'italic', 'typography-body-medium-italic'],
-  ['large', 'italic', 'typography-body-large-italic'],
-  ['xlarge', 'italic', 'typography-body-xlarge-italic'],
   ['xsmall', 'bold', 'typography-body-xsmall-bold'],
   ['small', 'bold', 'typography-body-small-bold'],
   ['medium', 'bold', 'typography-body-medium-bold'],
