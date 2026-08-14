@@ -46,7 +46,7 @@ the `<Heading>` component matches the value of the `aria-labelledby` attribute o
 
 ```tsx
 <nav aria-labelledby="footer-navigation-section">
-  <Heading id="footer-navigation-section" elementType="h3" size="xsmall" emphasis="semibold" marginBottom="space-700">
+  <Heading id="footer-navigation-section" elementType="h3" size="xsmall" fontWeight="semibold" marginBottom="space-700">
     Section headline
   </Heading>
   <Stack elementType="ul" spacing="space-600" hasSpacing>
@@ -187,7 +187,7 @@ You can also define responsive values for the `textAlignment` prop using an obje
           id="footer-navigation-section-1"
           elementType="h3"
           size="xsmall"
-          emphasis="semibold"
+          fontWeight="semibold"
           marginBottom="space-700"
         >
           Section headline

@@ -132,7 +132,7 @@ Item with Text content instead of Label:
 
 ```tsx
 <Item>
-  <Text elementType="span" emphasis="semibold">
+  <Text elementType="span" fontWeight="semibold">
     Item title
   </Text>
   <Text elementType="span" size="small" textColor="secondary">

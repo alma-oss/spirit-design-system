@@ -368,7 +368,7 @@ styling yourself: set `textColor="primary"` and `marginBottom="space-500"` so th
 
 ```tsx
 <CardBody>
-  <Heading elementType="h4" size="xsmall" emphasis="semibold" textColor="primary" marginBottom="space-500">
+  <Heading elementType="h4" size="xsmall" fontWeight="semibold" textColor="primary" marginBottom="space-500">
     <CardLink href="#">Card title</CardLink>
   </Heading>
   <p>Card content</p>
@@ -379,7 +379,7 @@ styling yourself: set `textColor="primary"` and `marginBottom="space-500"` so th
 
 ```tsx
 <CardBody>
-  <Text elementType="h4" size="large" emphasis="regular" textColor="primary" marginBottom="space-500">
+  <Text elementType="h4" size="large" textColor="primary" marginBottom="space-500">
     <CardLink href="#">Card title</CardLink>
   </Text>
   <p>Card content</p>

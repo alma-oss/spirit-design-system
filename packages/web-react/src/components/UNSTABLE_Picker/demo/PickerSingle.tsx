@@ -40,7 +40,7 @@ const PickerSingle = () => {
       onSelectionChange={setSelectedKeys}
       onToggle={onToggle}
     >
-      <Text elementType="h3" emphasis="bold">
+      <Text elementType="h3" fontWeight="bold">
         {PUBLICATION_FIELD_LABEL}
       </Text>
       <UNSTABLE_PickerGroup label={PUBLICATION_FIELD_LABEL}>

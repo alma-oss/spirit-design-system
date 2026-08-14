@@ -109,7 +109,7 @@ type NavLinkColumnFactoryType = {
 
 const NavLinkColumnFactory = ({ id, headline, numOfLinks, withNestedLinks = false }: NavLinkColumnFactoryType) => (
   <nav aria-labelledby={id} className={withNestedLinks ? 'mb-1000' : undefined}>
-    <Heading id={id} elementType="h3" size="xsmall" emphasis="semibold" marginBottom="space-700">
+    <Heading id={id} elementType="h3" size="xsmall" fontWeight="semibold" marginBottom="space-700">
       {headline}
     </Heading>
     <Stack elementType="ul" spacing="space-600" hasSpacing>

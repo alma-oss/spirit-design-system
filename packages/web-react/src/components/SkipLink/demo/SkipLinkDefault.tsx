@@ -12,7 +12,7 @@ const SkipLinkDefault = () => (
     </Text>
 
     <Section id="skiplink-demo-main-content" size="xsmall" hasContainer={false}>
-      <Heading elementType="h3" size="xsmall" emphasis="semibold" marginBottom="space-700">
+      <Heading elementType="h3" size="xsmall" fontWeight="semibold" marginBottom="space-700">
         This is the main content area for the demonstration purpose.
       </Heading>
       <DocsBox isMultiline UNSAFE_className="py-1400 py-tablet-1600">

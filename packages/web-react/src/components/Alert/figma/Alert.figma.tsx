@@ -52,7 +52,7 @@ figma.connect(Alert, ALERT_NODE_URL, {
     children: figma.string('Informative Text'),
     headline: figma.boolean('Headline', {
       true: (
-        <Heading elementType="h3" emphasis="semibold">
+        <Heading elementType="h3" fontWeight="semibold">
           Congratulations
         </Heading>
       ),
@@ -70,7 +70,7 @@ figma.connect(Alert, ALERT_NODE_URL, {
     children: figma.string('Warning Text'),
     headline: figma.boolean('Headline', {
       true: (
-        <Heading elementType="h3" emphasis="semibold">
+        <Heading elementType="h3" fontWeight="semibold">
           Warning
         </Heading>
       ),
@@ -88,7 +88,7 @@ figma.connect(Alert, ALERT_NODE_URL, {
     children: figma.string('Danger Text'),
     headline: figma.boolean('Headline', {
       true: (
-        <Heading elementType="h3" emphasis="semibold">
+        <Heading elementType="h3" fontWeight="semibold">
           Error
         </Heading>
       ),
@@ -106,7 +106,7 @@ figma.connect(Alert, ALERT_NODE_URL, {
     children: figma.string('Success Text'),
     headline: figma.boolean('Headline', {
       true: (
-        <Heading elementType="h3" emphasis="semibold">
+        <Heading elementType="h3" fontWeight="semibold">
           Success
         </Heading>
       ),

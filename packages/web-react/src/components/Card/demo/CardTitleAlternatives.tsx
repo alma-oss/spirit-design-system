@@ -13,7 +13,7 @@ const CardTitleAlternatives = () => (
     <Card isBoxed>
       <CardMedia isExpanded>{MEDIA_IMAGE}</CardMedia>
       <CardBody>
-        <Heading elementType="h4" size="xsmall" emphasis="semibold" textColor="primary" marginBottom="space-500">
+        <Heading elementType="h4" size="xsmall" fontWeight="semibold" textColor="primary" marginBottom="space-500">
           <CardLink href="#">Card title</CardLink>
         </Heading>
         <p>Card content. The whole card is clickable via the title link.</p>
@@ -23,7 +23,7 @@ const CardTitleAlternatives = () => (
     <Card isBoxed>
       <CardMedia isExpanded>{MEDIA_IMAGE}</CardMedia>
       <CardBody>
-        <Text elementType="h4" size="large" emphasis="regular" textColor="primary" marginBottom="space-500">
+        <Text elementType="h4" size="large" textColor="primary" marginBottom="space-500">
           <CardLink href="#">Card title</CardLink>
         </Text>
         <p>Card content. The whole card is clickable via the title link.</p>
@@ -33,7 +33,7 @@ const CardTitleAlternatives = () => (
     <Card isBoxed>
       <CardMedia isExpanded>{MEDIA_IMAGE}</CardMedia>
       <CardBody>
-        <Heading elementType="h4" size="medium" emphasis="bold" textColor="secondary" marginBottom="space-700">
+        <Heading elementType="h4" size="medium" textColor="secondary" marginBottom="space-700">
           Card title
         </Heading>
         <p>Card content. The whole card is clickable via the title link.</p>

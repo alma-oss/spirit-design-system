@@ -77,7 +77,7 @@ const CardFooterContent = () => (
         <Flex>
           <Avatar size="large">{AVATAR}</Avatar>
           <div>
-            <Text elementType="div" size="small" textColor="primary" emphasis="semibold">
+            <Text elementType="div" size="small" textColor="primary" fontWeight="semibold">
               Jiří Bárta
             </Text>
             <Text elementType="div" size="small" textColor="tertiary">

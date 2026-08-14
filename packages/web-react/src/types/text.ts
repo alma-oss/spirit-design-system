@@ -3,6 +3,9 @@ import type {
   ChildrenProps,
   EmphasisDictionaryType,
   EmphasisProps,
+  FontWeightDictionaryType,
+  FontWeightProps,
+  ItalicProps,
   PolymorphicComponentProps,
   SizeExtendedDictionaryType,
   SizeProps,
@@ -13,17 +16,22 @@ import type {
 } from './shared';
 
 /** ===== INTERNAL API ===== */
-export interface TextProps<S = void, Emph = void, C = void>
+export interface TextProps<S = void, Emph = void, C = void, FW = void>
   extends
     ChildrenProps,
     StyleProps,
     TypographyBaseProps,
     SizeProps<SizeExtendedDictionaryType<S>>,
     EmphasisProps<EmphasisDictionaryType<Emph>>,
+    FontWeightProps<FontWeightDictionaryType<FW>>,
+    ItalicProps,
     TextColorProps<TextColorsType<C>> {}
 
 /** ===== PUBLIC API ===== */
-export type SpiritTextProps<E extends ElementType = 'p', S = void, Emph = void, C = void> = PolymorphicComponentProps<
-  E,
-  TextProps<S, Emph, C>
->;
+export type SpiritTextProps<
+  E extends ElementType = 'p',
+  S = void,
+  Emph = void,
+  C = void,
+  FW = void,
+> = PolymorphicComponentProps<E, TextProps<S, Emph, C, FW>>;

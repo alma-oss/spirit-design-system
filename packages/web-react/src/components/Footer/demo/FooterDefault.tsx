@@ -26,7 +26,7 @@ const FooterDefault = () => (
             id="footer-navigation-section-1"
             elementType="h3"
             size="xsmall"
-            emphasis="semibold"
+            fontWeight="semibold"
             marginBottom="space-700"
           >
             Section headline
@@ -42,7 +42,7 @@ const FooterDefault = () => (
             id="footer-navigation-section-2"
             elementType="h3"
             size="xsmall"
-            emphasis="semibold"
+            fontWeight="semibold"
             marginBottom="space-700"
           >
             Section headline
@@ -58,7 +58,7 @@ const FooterDefault = () => (
             id="footer-navigation-section-3"
             elementType="h3"
             size="xsmall"
-            emphasis="semibold"
+            fontWeight="semibold"
             marginBottom="space-700"
           >
             Section headline
@@ -74,7 +74,7 @@ const FooterDefault = () => (
             id="footer-navigation-section-4"
             elementType="h3"
             size="xsmall"
-            emphasis="semibold"
+            fontWeight="semibold"
             marginBottom="space-700"
           >
             Section headline
@@ -90,7 +90,7 @@ const FooterDefault = () => (
             id="footer-navigation-section-5"
             elementType="h3"
             size="xsmall"
-            emphasis="semibold"
+            fontWeight="semibold"
             marginBottom="space-700"
           >
             Section headline
@@ -106,7 +106,7 @@ const FooterDefault = () => (
             id="footer-navigation-section-4"
             elementType="h3"
             size="xsmall"
-            emphasis="semibold"
+            fontWeight="semibold"
             marginBottom="space-700"
           >
             Section headline
