@@ -1,10 +1,10 @@
 'use client';
 
 import { type FocusEvent, type KeyboardEvent, type RefObject, useCallback, useRef, useState } from 'react';
-import { type GridRowMove, getWrappedRowIndex } from './gridKeyboardNavigation';
-import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
+import { type GridRowMove, getWrappedRowIndex } from '../gridKeyboardNavigation';
+import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 
-/** Row props produced by `useSelectionGridKeyboard` for roving tabindex and grid keys */
+/** Row props produced by `useSelectionAria` for roving tabindex and grid keys */
 export interface SelectionGridRowProps {
   tabIndex: 0 | -1;
   onKeyDown: (event: KeyboardEvent<HTMLElement>) => void;
@@ -13,7 +13,7 @@ export interface SelectionGridRowProps {
   removeButtonTabIndex: 0 | -1;
 }
 
-export interface UseSelectionGridKeyboardProps {
+export interface UseSelectionAriaProps {
   /** Number of tag rows in the selection grid */
   tagCount: number;
   /** Called with the index of the tag to remove (keyboard or remove button) */
@@ -58,6 +58,9 @@ const focusTagRow = (selectionRef: RefObject<HTMLElement | null> | undefined, ro
  * one tab stop per row, arrow / Home / End navigation, Delete & Backspace
  * to remove, and the remove control participating in the tab order while the row contains focus.
  *
+ * Tag-grid scoped today. A Collection + KeyboardDelegate-driven generalization shared with
+ * option listboxes is deferred — see `hooks/selection/README.md`.
+ *
  * @param props Hook configuration
  * @param props.onRemoveAtIndex
  * @param props.selectionRef
@@ -68,7 +71,7 @@ const focusTagRow = (selectionRef: RefObject<HTMLElement | null> | undefined, ro
  * @param props.onFocusInput
  * @returns {{ getKeyboardGridRowProps: (index: number) => SelectionGridRowProps, removeTagAtIndex: (index: number) => void, focusTagAtIndex: (index: number) => void }} Keyboard helpers for selection tag rows
  */
-export const useSelectionGridKeyboard = ({
+export const useSelectionAria = ({
   onRemoveAtIndex,
   selectionRef,
   tagCount,
@@ -76,7 +79,7 @@ export const useSelectionGridKeyboard = ({
   isDisabled = false,
   focusAfterRemove = 'adjacent',
   onFocusInput,
-}: UseSelectionGridKeyboardProps): {
+}: UseSelectionAriaProps): {
   getKeyboardGridRowProps: (index: number) => SelectionGridRowProps;
   removeTagAtIndex: (index: number) => void;
   focusTagAtIndex: (index: number) => void;

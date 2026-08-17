@@ -1,27 +1,20 @@
 import { act, renderHook } from '@testing-library/react';
-import {
-  type SelectionMode,
-  getSelectedKeys,
-  getToggledSelectedKeys,
-  isKeySelected,
-  isSingleSelectionMode,
-  useSelectionState,
-} from '../useSelectionState';
+import { type SelectionMode, useSelectionState } from '../useSelectionState';
 
 describe('useSelectionState', () => {
   it('should toggle item in multiple mode', () => {
     const { result } = renderHook(() => useSelectionState({ defaultSelectedKeys: ['cs'] }));
 
-    act(() => result.current.toggleSelectedKey('dk'));
+    act(() => result.current.toggleSelection('dk'));
 
     expect(result.current.selectedKeys).toEqual(['cs', 'dk']);
 
-    act(() => result.current.toggleSelectedKey('cs'));
+    act(() => result.current.toggleSelection('cs'));
 
     expect(result.current.selectedKeys).toEqual(['dk']);
   });
 
-  it('should keep one item in single mode', () => {
+  it('should replace selection with a single key', () => {
     const { result } = renderHook(() =>
       useSelectionState({
         defaultSelectedKeys: ['cs'],
@@ -29,7 +22,20 @@ describe('useSelectionState', () => {
       }),
     );
 
-    act(() => result.current.toggleSelectedKey('dk'));
+    act(() => result.current.replaceSelection('dk'));
+
+    expect(result.current.selectedKeys).toEqual(['dk']);
+  });
+
+  it('should replace with the toggled key in single mode', () => {
+    const { result } = renderHook(() =>
+      useSelectionState({
+        defaultSelectedKeys: ['cs'],
+        selectionMode: 'single',
+      }),
+    );
+
+    act(() => result.current.toggleSelection('dk'));
 
     expect(result.current.selectedKeys).toEqual(['dk']);
   });
@@ -61,11 +67,11 @@ describe('useSelectionState', () => {
     expect(onSelectionChange).toHaveBeenCalledWith(['cs']);
   });
 
-  it('should call onSelectionChange once per toggleSelectedKey (not from inside state updater)', () => {
+  it('should call onSelectionChange once per toggleSelection (not from inside state updater)', () => {
     const onSelectionChange = jest.fn();
     const { result } = renderHook(() => useSelectionState({ defaultSelectedKeys: ['cs'], onSelectionChange }));
 
-    act(() => result.current.toggleSelectedKey('dk'));
+    act(() => result.current.toggleSelection('dk'));
 
     expect(onSelectionChange).toHaveBeenCalledTimes(1);
     expect(onSelectionChange).toHaveBeenCalledWith(['cs', 'dk']);
@@ -115,39 +121,5 @@ describe('useSelectionState', () => {
 
     expect(result.current.selectedKeys).toEqual(['cs']);
     expect(onSelectionChange).not.toHaveBeenCalled();
-  });
-});
-
-describe('useSelectionState helpers', () => {
-  it('isSingleSelectionMode', () => {
-    expect(isSingleSelectionMode('single')).toBeTruthy();
-    expect(isSingleSelectionMode('multiple')).toBeFalsy();
-  });
-
-  it.each<[string[], Parameters<typeof getSelectedKeys>[1], string[]]>([
-    [['cs', 'dk'], 'single', ['cs']],
-    [['cs'], 'single', ['cs']],
-    [[], 'single', []],
-    [['cs', 'dk'], 'multiple', ['cs', 'dk']],
-  ])('getSelectedKeys(%j, %s)', (keys, mode, expected) => {
-    expect(getSelectedKeys(keys, mode)).toEqual(expected);
-  });
-
-  it.each<[string[], string, Parameters<typeof isKeySelected>[2], boolean]>([
-    [['cs'], 'cs', 'single', true],
-    [['cs'], 'dk', 'single', false],
-    [['cs', 'dk'], 'dk', 'multiple', true],
-    [['cs', 'dk'], 'kl', 'multiple', false],
-  ])('isKeySelected(%j, %s, %s)', (selectedKeys, key, mode, expected) => {
-    expect(isKeySelected(selectedKeys, key, mode)).toBe(expected);
-  });
-
-  it.each<[string[], string, Parameters<typeof getToggledSelectedKeys>[2], string[]]>([
-    [['cs'], 'cs', 'single', []],
-    [['cs'], 'dk', 'single', ['dk']],
-    [['cs', 'dk'], 'dk', 'multiple', ['cs']],
-    [['cs', 'dk'], 'kl', 'multiple', ['cs', 'dk', 'kl']],
-  ])('getToggledSelectedKeys(%j, %s, %s)', (previousKeys, key, selectionMode, expected) => {
-    expect(getToggledSelectedKeys(previousKeys, key, selectionMode)).toEqual(expected);
   });
 });

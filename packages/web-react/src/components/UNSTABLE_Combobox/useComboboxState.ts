@@ -2,7 +2,7 @@
 
 import { type RefObject, useCallback, useMemo } from 'react';
 import { MULTIPLE_SELECTION_MODE } from '../../constants';
-import { getToggledSelectedKeys } from '../../hooks';
+import { useSelectionManager } from '../../hooks';
 import { useComboboxDisclosureState } from './useComboboxDisclosureState';
 import { createSelectedKeysSet } from './utils';
 
@@ -61,6 +61,15 @@ export const useComboboxState = ({
   const { activeDescendantId, close, focusInput, handleDropdownToggle, open, setActiveDescendantId } =
     useComboboxDisclosureState({ inputRef, isDisabled, isOpen, onToggle });
   const selectedKeysSet = useMemo(() => createSelectedKeysSet(selectedKeys), [selectedKeys]);
+  const {
+    removeAll: clearSelection,
+    removeItem,
+    toggleSelection,
+  } = useSelectionManager({
+    selectedKeys,
+    onSelectionChange,
+    selectionMode: MULTIPLE_SELECTION_MODE,
+  });
 
   const toggleOption = useCallback(
     (optionId: string, options?: { isDisabled?: boolean; warmLabel?: () => void }) => {
@@ -69,23 +78,16 @@ export const useComboboxState = ({
       }
 
       options?.warmLabel?.();
-      onSelectionChange(getToggledSelectedKeys(selectedKeys, optionId, MULTIPLE_SELECTION_MODE));
+      toggleSelection(optionId);
       onInputChange('');
     },
-    [onInputChange, onSelectionChange, selectedKeys],
-  );
-
-  const removeItem = useCallback(
-    (key: string) => {
-      onSelectionChange(selectedKeys.filter((selectedKey) => selectedKey !== key));
-    },
-    [onSelectionChange, selectedKeys],
+    [onInputChange, toggleSelection],
   );
 
   const removeAll = useCallback(() => {
-    onSelectionChange([]);
+    clearSelection();
     focusInput();
-  }, [focusInput, onSelectionChange]);
+  }, [clearSelection, focusInput]);
 
   return {
     activeDescendantId,
