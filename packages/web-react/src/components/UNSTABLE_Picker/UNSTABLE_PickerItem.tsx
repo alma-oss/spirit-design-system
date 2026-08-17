@@ -2,7 +2,7 @@
 
 import React, { type ReactNode } from 'react';
 import { InputPositions } from '../../constants';
-import { getNodeText, getToggledSelectedKeys, isKeySelected, isSingleSelectionMode } from '../../hooks';
+import { getNodeText, isKeySelected, isSingleSelectionMode, selectSingleKey, toggleSelection } from '../../hooks';
 import { Checkbox } from '../Checkbox';
 import { Radio } from '../Radio';
 import { usePickerPopoverContext } from './PickerPopoverContext';
@@ -16,7 +16,7 @@ const UNSTABLE_PickerItem = ({ children, value, ...restProps }: SpiritUnstablePi
   const inputId = `${id}-${value}`;
 
   const handleChange = () => {
-    onSelectionChange(single ? [value] : getToggledSelectedKeys(selectedKeys, value, selectionMode));
+    onSelectionChange(single ? selectSingleKey(value) : toggleSelection(selectedKeys, value));
   };
 
   return (

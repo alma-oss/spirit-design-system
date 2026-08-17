@@ -9,7 +9,7 @@
 - Supports static children and a dynamic `items` + `renderItem` builder path
 - Sections (groups) participate in the tree; consumers can still iterate flat item nodes
 - `filterCollection` returns a filtered view for navigation / future consumers
-- Composes with Selection (`useSelectionState`) — Collection does not own selection
+- Composes with [Selection][selection-pattern] (`useSelectionState`) — Collection does not own selection
 
 ## Anatomy
 
@@ -116,3 +116,4 @@ const Example = ({ children }) => {
 ```
 
 [collection-pattern]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/collections.md
+[selection-pattern]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/selection.md

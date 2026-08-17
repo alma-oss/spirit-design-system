@@ -6,7 +6,7 @@ Collections provide a stable tree of item and section nodes built from React chi
 
 Many Spirit components render a list of selectable or navigable items composed as JSX children. Walking those children ad hoc (and falling back to DOM queries for labels) duplicates fragile logic across components.
 
-A **Collection** walks the element tree once and produces a stable node tree for identity, labels, hierarchy, and disabled state. Selection, keyboard behavior, and consumer-owned filtering stay in separate layers (`useSelectionState`, grid keyboard hooks, Combobox `inputValue` filtering).
+A **Collection** walks the element tree once and produces a stable node tree for identity, labels, hierarchy, and disabled state. Selection, keyboard behavior, and consumer-owned filtering stay in separate layers ([Selection][selection-pattern], Combobox `inputValue` filtering).
 
 ## When to Use
 
@@ -41,10 +41,10 @@ Sections may exist in the tree (e.g. `UNSTABLE_PickerGroup`), but tag/selection 
 ## Related Hooks and Components
 
 - [`hooks/collection`][collection-hooks] — API for `useCollection`, `createCollection`, `filterCollection`, `getNodeText`
-- [`useSelectionState`][selection] — selection keys
+- [Selection pattern][selection-pattern] — `useSelectionState`, `useSelectionManager`, `useSelectionAria`
 - [UNSTABLE_Picker][picker] / [UNSTABLE_Combobox][combobox]
 
 [collection-hooks]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/hooks/collection/README.md
 [combobox]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Combobox/README.md
 [picker]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Picker/README.md
-[selection]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/hooks/useSelectionState.ts
+[selection-pattern]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/selection.md

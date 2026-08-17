@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import type { FocusEvent, KeyboardEvent } from 'react';
-import { useSelectionGridKeyboard as usePickerSelectionGridKeyboard } from '../../../hooks/useSelectionGridKeyboard';
+import { useSelectionAria } from '../useSelectionAria';
 
 const createSelectionGrid = (rowCount: number) => {
   const container = document.createElement('div');
@@ -16,12 +16,12 @@ const createSelectionGrid = (rowCount: number) => {
   return { container, rows };
 };
 
-describe('usePickerSelectionGridKeyboard', () => {
+describe('useSelectionAria', () => {
   it('should set active row to last tag on mount when tagCount > 0', () => {
     const onRemoveAtIndex = jest.fn();
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 3,
         onRemoveAtIndex,
       }),
@@ -35,7 +35,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     const onRemoveAtIndex = jest.fn();
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 0,
         onRemoveAtIndex,
       }),
@@ -49,7 +49,7 @@ describe('usePickerSelectionGridKeyboard', () => {
 
     const { result, rerender } = renderHook(
       ({ tagCount }) =>
-        usePickerSelectionGridKeyboard({
+        useSelectionAria({
           tagCount,
           onRemoveAtIndex,
         }),
@@ -72,7 +72,7 @@ describe('usePickerSelectionGridKeyboard', () => {
 
     const { result, rerender } = renderHook(
       ({ tagCount }) =>
-        usePickerSelectionGridKeyboard({
+        useSelectionAria({
           tagCount,
           onRemoveAtIndex,
           selectionRef: { current: container },
@@ -98,7 +98,7 @@ describe('usePickerSelectionGridKeyboard', () => {
 
     const { rerender } = renderHook(
       ({ tagCount, isPopoverOpen }) =>
-        usePickerSelectionGridKeyboard({
+        useSelectionAria({
           tagCount,
           onRemoveAtIndex,
           selectionRef: { current: container },
@@ -121,7 +121,7 @@ describe('usePickerSelectionGridKeyboard', () => {
 
     const { result, rerender } = renderHook(
       ({ tagCount }) =>
-        usePickerSelectionGridKeyboard({
+        useSelectionAria({
           tagCount,
           onRemoveAtIndex,
         }),
@@ -142,7 +142,7 @@ describe('usePickerSelectionGridKeyboard', () => {
 
     const { result, rerender } = renderHook(
       ({ tagCount }) =>
-        usePickerSelectionGridKeyboard({
+        useSelectionAria({
           tagCount,
           onRemoveAtIndex,
         }),
@@ -161,7 +161,7 @@ describe('usePickerSelectionGridKeyboard', () => {
 
     const { rerender } = renderHook(
       ({ tagCount }) =>
-        usePickerSelectionGridKeyboard({
+        useSelectionAria({
           tagCount,
           onRemoveAtIndex,
           selectionRef: undefined,
@@ -182,7 +182,7 @@ describe('usePickerSelectionGridKeyboard', () => {
 
     const { rerender } = renderHook(
       ({ tagCount }) =>
-        usePickerSelectionGridKeyboard({
+        useSelectionAria({
           tagCount,
           onRemoveAtIndex,
           selectionRef,
@@ -203,7 +203,7 @@ describe('usePickerSelectionGridKeyboard', () => {
 
     const { rerender } = renderHook(
       ({ tagCount }) =>
-        usePickerSelectionGridKeyboard({
+        useSelectionAria({
           tagCount,
           onRemoveAtIndex,
           selectionRef: { current: empty },
@@ -224,7 +224,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     const focusSpy = jest.spyOn(rows[0]!, 'focus');
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 2,
         onRemoveAtIndex,
         selectionRef: { current: container },
@@ -248,7 +248,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     const focusSpy = jest.spyOn(rows[0]!, 'focus');
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 3,
         onRemoveAtIndex,
         selectionRef: { current: container },
@@ -272,7 +272,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     const focusSpy = jest.spyOn(rows[0]!, 'focus');
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 2,
         onRemoveAtIndex,
         selectionRef: { current: container },
@@ -293,7 +293,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     const onRemoveAtIndex = jest.fn();
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 2,
         onRemoveAtIndex,
         isPopoverOpen: true,
@@ -318,7 +318,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     const onRemoveAtIndex = jest.fn();
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 2,
         onRemoveAtIndex,
         isDisabled: true,
@@ -337,7 +337,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     const focus1 = jest.spyOn(rows[1]!, 'focus');
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 2,
         onRemoveAtIndex,
         selectionRef: { current: container },
@@ -383,7 +383,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     const focus2 = jest.spyOn(rows[2]!, 'focus');
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 3,
         onRemoveAtIndex,
         selectionRef: { current: container },
@@ -417,7 +417,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     const onRemoveAtIndex = jest.fn();
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 1,
         onRemoveAtIndex,
         isPopoverOpen: false,
@@ -441,7 +441,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     const onRemoveAtIndex = jest.fn();
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 1,
         onRemoveAtIndex,
         isPopoverOpen: false,
@@ -462,7 +462,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     const onRemoveAtIndex = jest.fn();
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 0,
         onRemoveAtIndex,
         isPopoverOpen: false,
@@ -485,7 +485,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     const onRemoveAtIndex = jest.fn();
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 2,
         onRemoveAtIndex,
         isPopoverOpen: false,
@@ -510,7 +510,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     document.body.append(outside);
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 2,
         onRemoveAtIndex,
         isPopoverOpen: false,
@@ -542,7 +542,7 @@ describe('usePickerSelectionGridKeyboard', () => {
     row.append(inner);
 
     const { result } = renderHook(() =>
-      usePickerSelectionGridKeyboard({
+      useSelectionAria({
         tagCount: 2,
         onRemoveAtIndex,
         isPopoverOpen: false,

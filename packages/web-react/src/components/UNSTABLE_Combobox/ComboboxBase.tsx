@@ -11,7 +11,7 @@ import React, {
   useRef,
 } from 'react';
 import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../context';
-import { useAriaDescribedBy, useI18n, useSelectionGridKeyboard, useStyleProps } from '../../hooks';
+import { useAriaDescribedBy, useI18n, useSelectionAria, useStyleProps } from '../../hooks';
 import { replaceTranslationParams } from '../../translations';
 import { Dropdown } from '../Dropdown';
 import { HelperText } from '../HelperText';
@@ -132,7 +132,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     selectedKeys,
   });
 
-  const { getKeyboardGridRowProps, removeTagAtIndex, focusTagAtIndex } = useSelectionGridKeyboard({
+  const { getKeyboardGridRowProps, removeTagAtIndex, focusTagAtIndex } = useSelectionAria({
     isDisabled,
     isPopoverOpen: isOpen,
     focusAfterRemove: 'input',

@@ -6,12 +6,12 @@ import { MULTIPLE_SELECTION_MODE } from '../../constants';
 import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../context';
 import {
   getSelectedKeys,
-  isSingleSelectionMode,
   useAriaDescribedBy,
   useCollection,
   useI18n,
   useOpenOnArrowDown,
-  useSelectionGridKeyboard,
+  useSelectionAria,
+  useSelectionManager,
   useStyleProps,
 } from '../../hooks';
 import { replaceTranslationParams } from '../../translations';
@@ -107,12 +107,11 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     [selectedPickerKeys, pickerItemLabels],
   );
 
-  const removeItem = (key: string) =>
-    isSingleSelectionMode(selectionMode)
-      ? onSelectionChange([])
-      : onSelectionChange(selectedKeys.filter((selectedKey) => selectedKey !== key));
-
-  const removeAll = () => onSelectionChange([]);
+  const { removeAll, removeItem } = useSelectionManager({
+    selectedKeys,
+    onSelectionChange,
+    selectionMode,
+  });
 
   const selectionGridRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
@@ -137,7 +136,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     isAggregated,
   });
 
-  const { getKeyboardGridRowProps, removeTagAtIndex } = useSelectionGridKeyboard({
+  const { getKeyboardGridRowProps, removeTagAtIndex } = useSelectionAria({
     isDisabled,
     isPopoverOpen: isOpen,
     onRemoveAtIndex: (index) => {
