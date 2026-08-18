@@ -115,13 +115,12 @@ FIGMA_ACCESS_TOKEN=your-token yarn icons:sync
 The command adds, updates, and deletes SVGs so the directory exactly matches Figma. It does not rewrite icon colors;
 color normalization remains part of the package build.
 
-Publishing the Figma Assets library automatically invokes the **Sync Figma Assets** workflow through the dedicated
-[Figma webhook receiver][figma-assets-webhook]. Maintainers can also run the workflow manually from GitHub Actions. It
-opens or updates a pull request when the generated SVGs differ.
+Maintainers can run the **Sync Figma Assets** workflow from GitHub Actions. An external automation such as Make can
+also start the same workflow after a Figma `LIBRARY_PUBLISH` event. It opens or updates a pull request when the
+generated SVGs differ.
 
 [esm-only]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 [figma-assets]: https://www.figma.com/design/UMd06VnGrAE5xheb4C8QEg/Assets
-[figma-assets-webhook]: ../../apps/figma-assets-webhook/README.md
 [nextjs-transpile-packages]: https://nextjs.org/docs/pages/api-reference/next-config-js/transpilePackages
 [react-svgr]: https://react-svgr.com/
 [spirit-web]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web

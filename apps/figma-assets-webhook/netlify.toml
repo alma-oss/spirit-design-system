@@ -1,8 +1,0 @@
-[build]
-base = "/"
-command = "yarn workspace @alma-oss/spirit-figma-assets-webhook build"
-publish = "/apps/figma-assets-webhook/public/"
-
-[functions]
-directory = "/apps/figma-assets-webhook/netlify/functions/"
-node_bundler = "esbuild"

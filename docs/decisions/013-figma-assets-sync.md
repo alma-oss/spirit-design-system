@@ -23,12 +23,10 @@ combined in one target. The output directory is an exact mirror of the combined 
 updates, and removes SVG files.
 
 The Spirit repository runs synchronization through a GitHub Actions workflow. The workflow can be started manually or
-by a dedicated Netlify Function when the Figma Assets library publishes. The receiver validates Figma's webhook
-passcode, webhook ID, event type, and file key, then authenticates as the organization-owned GitHub App and sends a
-repository dispatch. The workflow opens or updates a pull request when generated files change.
+by an external automation, such as Make, that sends a `figma-library-publish` repository dispatch for the Assets file
+key. The workflow opens or updates a pull request when generated files change.
 
 A shared Figma account provides a read-only personal access token through the `FIGMA_ACCESS_TOKEN` repository secret.
-The webhook setup token with `webhooks:write` is separate and is not needed by the runtime receiver.
 
 SVG color transformations remain in the existing icon build pipeline. The synchronization CLI only downloads Figma SVGs
 and normalizes filenames and final newlines.
@@ -43,9 +41,5 @@ separately.
 - The same CLI configuration model can serve the private Práce and Jobs monorepo with separate Sync Targets.
 - Removing an icon in Figma removes its SVG in the generated pull request.
 - The first direct synchronization may replace most SVG markup even when rendered icons are unchanged.
-- Publishing the Figma Assets library automatically invokes the same synchronization workflow as a manual run without
-  changing the CLI.
-- Webhook delivery depends on a small dedicated Netlify project and production-only Figma and GitHub App secrets.
-- Figma webhook authenticity relies on a shared passcode rather than a signed payload, so the receiver additionally
-  allowlists the exact webhook, file, event, repository, and GitHub API destination, enforces event freshness, and
-  deduplicates delivery fingerprints in strongly consistent Netlify Blob storage.
+- Publishing the Figma Assets library can invoke the same synchronization workflow as a manual run without changing
+  the CLI, once an external webhook relay such as Make is configured.

@@ -78,12 +78,9 @@ The sync aborts before changing a target when it cannot discover or download the
 
 ## Automated Delivery
 
-Repositories can invoke the same CLI from any CI system. In this repository, a dedicated
-[Netlify webhook receiver][figma-assets-webhook] validates `LIBRARY_PUBLISH` events from the Figma Assets file and
-dispatches the **Sync Figma Assets** GitHub Actions workflow. Manual `workflow_dispatch` runs remain available.
-
-The receiver is intentionally separate from this package: the CLI handles deterministic Figma discovery, export, and
-filesystem synchronization, while the receiver owns external webhook authentication and GitHub delivery.
+Repositories can invoke the same CLI from any CI system. In this repository, the **Sync Figma Assets** GitHub Actions
+workflow accepts a manual run or a `figma-library-publish` repository dispatch. An external automation such as Make can
+receive Figma's `LIBRARY_PUBLISH` webhook and send that dispatch. Manual `workflow_dispatch` runs remain available.
 
 ## Testing
 
@@ -94,5 +91,3 @@ yarn workspace @alma-oss/figma-assets test
 ```
 
 The test command enforces 100% line, branch, and function coverage for the TypeScript source.
-
-[figma-assets-webhook]: ../../apps/figma-assets-webhook/README.md

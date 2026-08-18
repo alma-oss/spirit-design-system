@@ -1,8 +1,0 @@
-{
-  "extends": "../../configs/typescript-config-spirit/base",
-  "compilerOptions": {
-    "module": "esnext",
-    "target": "es2022"
-  },
-  "include": ["./netlify/functions/**/*.mts"]
-}
