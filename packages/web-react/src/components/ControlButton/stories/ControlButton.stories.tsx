@@ -31,6 +31,14 @@ const meta: Meta<typeof ControlButton> = {
         },
       },
     },
+    isStretched: {
+      control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: 'false',
+        },
+      },
+    },
     isSubtle: {
       control: 'boolean',
       description: 'Whether the button is in subtle variant (without border)',
@@ -83,6 +91,7 @@ const meta: Meta<typeof ControlButton> = {
   args: {
     children: <Icon name="close" />,
     isDisabled: false,
+    isStretched: false,
     isSubtle: false,
     isSymmetrical: true,
     type: 'button',
