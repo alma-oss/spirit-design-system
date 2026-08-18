@@ -9,18 +9,17 @@
 @use '../../tools/breakpoint';
 @use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
 @use '../../tools/responsive-properties';
 @use '../../tools/typography';
 @use 'theme';
-@use 'tools';
 
 $_component-name: 'Button';
 
 .Button {
     --#{tokens.$css-variable-prefix}icon-composition-size: var(--#{tokens.$css-variable-prefix}button-icon-size);
 
-    @include tools.responsive-border-radius();
     @include typography.from-css-variables($infix: string.to-lower-case($_component-name));
     @include responsive-properties.create-cascade(
         $property: 'column-gap',
@@ -48,20 +47,17 @@ $_component-name: 'Button';
     border-color: color-scheme.border-color();
     border-start-start-radius: var(
         --#{tokens.$css-variable-prefix}button-border-start-start-radius,
-        var(--#{tokens.$css-variable-prefix}button-border-radius)
+        #{theme.$border-radius}
     );
     border-start-end-radius: var(
         --#{tokens.$css-variable-prefix}button-border-start-end-radius,
-        var(--#{tokens.$css-variable-prefix}button-border-radius)
+        #{theme.$border-radius}
     );
     border-end-start-radius: var(
         --#{tokens.$css-variable-prefix}button-border-end-start-radius,
-        var(--#{tokens.$css-variable-prefix}button-border-radius)
+        #{theme.$border-radius}
     );
-    border-end-end-radius: var(
-        --#{tokens.$css-variable-prefix}button-border-end-end-radius,
-        var(--#{tokens.$css-variable-prefix}button-border-radius)
-    );
+    border-end-end-radius: var(--#{tokens.$css-variable-prefix}button-border-end-end-radius, #{theme.$border-radius});
     background-color: color-scheme.background-color();
     user-select: none;
     cursor: cursors.$buttons;
@@ -97,6 +93,7 @@ $_component-name: 'Button';
     $dictionary-values: theme.$size-dictionary,
     $config: theme.$size-config
 );
+@include component-radius-overrides.generate($class-name: $_component-name, $sizes: theme.$size-dictionary);
 
 @each $breakpoint-name, $breakpoint-value in theme.$breakpoints {
     $infix: breakpoint.get-modifier('infix', $breakpoint-name, $breakpoint-value);

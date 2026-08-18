@@ -1,0 +1,52 @@
+// Nested radius.
+//
+// Parents may set `--{infix}-border-radius` to
+// `container-radius - border-width - container-padding`. CSS has no `if`, so
+// `nested()` is equivalent to: use the inherited value when it is positive,
+// otherwise keep the default.
+//
+// 1. `var(--{infix}-border-radius, 1px)` inside `sign()`: dummy 1px so `sign()`
+//    always receives a dimension. An unset custom property would invalidate the
+//    whole `calc()`. This fallback is not the visible radius; when the property
+//    is unset, `sign(1px)` is 1 and the next `var()` supplies `$default`.
+// 2. `sign()`: -1 if negative, 0 if zero, 1 if positive.
+// 3. `max(0, sign(...))`: 1 only when the inherited radius is positive, otherwise 0.
+//    This is the switch used by both products below.
+// 4. First product: `switch * var(--{infix}-border-radius, default)` — inherited
+//    radius when the switch is 1 (or the default, when the property is unset and
+//    the dummy 1px made the switch 1).
+// 5. Second product: `(1 - switch) * default` — default radius when the switch is
+//    0 (explicit 0 or a negative inset from a container tighter than the child).
+
+@use '@tokens' as tokens;
+
+@function -property($infix) {
+    @return --#{tokens.$css-variable-prefix}#{$infix}-border-radius;
+}
+
+// Child: consume an optional parent-provided nested radius.
+//
+// Parameters are:
+// * $infix: custom-property infix, e.g. `tag` → `--tag-border-radius`
+// * $default: radius used when the parent value is unset, 0, or negative
+@function nested($infix, $default) {
+    $property: -property($infix);
+
+    @return calc(
+        max(0, sign(var(#{$property}, 1px))) * var(#{$property}, #{$default}) +
+            (1 - max(0, sign(var(#{$property}, 1px)))) * #{$default}
+    );
+}
+
+// Parent: expose an inset radius to nested children.
+//
+// Parameters are:
+// * $infix: custom-property infix, e.g. `tag` → `--tag-border-radius`
+// * $container-radius: outer surface radius
+// * $border-width: outer border width
+// * $padding: inner padding between the border and the child
+@mixin inset($infix, $container-radius, $border-width, $padding) {
+    $property: -property($infix);
+
+    #{$property}: calc(#{$container-radius} - #{$border-width} - #{$padding});
+}

@@ -1,20 +1,11 @@
 // 1. Disabled takes precedence over current, hover, focus, and active.
 
-@use 'sass:map';
 @use '@tokens' as tokens;
 @use 'theme';
 @use '../../settings/cursors';
-@use '../../tools/breakpoint';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/reset';
-@use '../../tools/tokens' as tokens-tools;
 @use '../../tools/typography';
-
-$item-border-radius: tokens-tools.generate-responsive-map(
-    $property: 'border-radius',
-    $variable-prefix: 'pagination',
-    $token-name: 'radius',
-    $fallback: theme.$item-border-radius-fallback,
-);
 
 .Pagination {
     display: inline-flex;
@@ -43,13 +34,8 @@ $item-border-radius: tokens-tools.generate-responsive-map(
     border-width: theme.$item-border-width;
     border-style: theme.$item-border-style;
     border-color: theme.$item-default-border-color;
+    border-radius: theme.$item-border-radius;
     background-color: theme.$item-default-background-color;
-
-    @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
-        @include breakpoint.up($breakpoint-value) {
-            border-radius: map.get($item-border-radius, 'border-radius-#{$breakpoint-name}');
-        }
-    }
 
     &:hover,
     &:focus {
@@ -95,3 +81,5 @@ $item-border-radius: tokens-tools.generate-responsive-map(
         background-color: theme.$item-disabled-background-color;
     }
 }
+
+@include component-radius-overrides.generate($class-name: 'Pagination', $host-element: '__link');

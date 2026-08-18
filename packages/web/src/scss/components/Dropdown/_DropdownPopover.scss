@@ -3,6 +3,7 @@
 @use 'sass:map';
 @use '@tokens' as tokens;
 @use '../../tools/breakpoint';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/placement';
 @use 'theme';
 
@@ -34,3 +35,5 @@
 .DropdownPopover.is-open {
     display: block;
 }
+
+@include component-radius-overrides.generate($class-name: 'DropdownPopover', $token-prefix: 'dropdown');

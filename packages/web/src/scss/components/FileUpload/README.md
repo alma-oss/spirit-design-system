@@ -4,6 +4,8 @@ FileUpload allows users to pick one or more files via a native file input and an
 
 > It does not upload files to the server or manage a file queue; implement that in your application.
 
+The drop zone radius follows the medium form-field device token. See [Component Radius Overrides][component-radius-overrides].
+
 The component is a composition of:
 
 - [FileUpload](#fileupload-1) (wrapper)
@@ -286,6 +288,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--spacing` on the
 
 See [File documentation][readme-file] for more details on file states and customization options.
 
+[component-radius-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-radius-overrides
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [mdn-accept]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
 [mdn-input-file]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file

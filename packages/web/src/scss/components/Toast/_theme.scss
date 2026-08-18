@@ -32,7 +32,10 @@ $bar-max-height: units.px-to-rem(
 ); // Whatever larger than the largest toast message. ⚠️ CAUTION: Affects animation timing!
 $bar-gap: tokens.$space-700;
 $bar-padding: tokens.$space-700;
-$bar-border-radius: tokens.$radius-300;
+$bar-border-radius: var(
+    --#{tokens.$css-variable-prefix}toast-bar-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-toast-bar-border-radius, #{tokens.$radius-300})
+);
 $bar-box-shadow: tokens.$shadow-400;
 $bar-content-gap: tokens.$space-600;
 $bar-message-gap-x: tokens.$space-900;

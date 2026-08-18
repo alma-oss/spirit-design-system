@@ -11,6 +11,7 @@
 @use 'sass:map';
 @use '@tokens' as tokens;
 @use '../../tools/breakpoint';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
 @use '../../tools/typography';
 @use 'theme';
@@ -65,6 +66,8 @@
         --#{tokens.$css-variable-prefix}card-padding: #{theme.$padding-tablet}; // 5.d
     }
 }
+
+@include component-radius-overrides.generate($class-name: 'Card');
 
 // 5.
 @each $breakpoint-name, $breakpoint-value in theme.$breakpoints {

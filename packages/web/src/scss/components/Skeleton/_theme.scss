@@ -6,12 +6,18 @@ $margin-bottom: tokens.$space-400;
 $item-gradient: tokens.$gradient-skeleton;
 $breakpoints: tokens.$breakpoints;
 
-$typography-border-radius: tokens.$radius-300;
+$typography-border-radius: var(
+    --#{tokens.$css-variable-prefix}skeleton-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-skeleton-border-radius, #{tokens.$radius-300})
+);
 $typography-default-height: tools.get-height(tokens.$body-medium-bold, mobile);
 
 $shape-border-color: tokens.$disabled-border;
 $shape-border-width: tokens.$border-width-100;
-$shape-default-border-radius: tokens.$radius-400;
+$shape-default-border-radius: var(
+    --#{tokens.$css-variable-prefix}skeleton-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-skeleton-border-radius, #{tokens.$radius-400})
+);
 
 $sizes-body: (
     xsmall: tokens.$body-xsmall-bold,

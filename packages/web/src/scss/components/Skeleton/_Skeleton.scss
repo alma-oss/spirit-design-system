@@ -1,5 +1,6 @@
 @use '@tokens' as tokens;
 @use '../../tools/breakpoint';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/responsive-properties';
 @use 'theme';
 @use 'tools';
@@ -76,3 +77,5 @@
         background-position: 0 50%;
     }
 }
+
+@include component-radius-overrides.generate($class-name: 'Skeleton');

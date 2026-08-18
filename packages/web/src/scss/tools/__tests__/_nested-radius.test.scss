@@ -1,0 +1,46 @@
+@use 'true' as test;
+@use '../nested-radius' as nested-radius;
+
+@include test.describe('nested-radius nested function') {
+    @include test.it('should emit the nested radius calc for the given infix and default') {
+        @include test.assert() {
+            @include test.output() {
+                .Test {
+                    border-radius: nested-radius.nested($infix: 'tag', $default: 8px);
+                }
+            }
+
+            @include test.expect() {
+                .Test {
+                    border-radius: calc(
+                        max(0, sign(var(--spirit-tag-border-radius, 1px))) * var(--spirit-tag-border-radius, 8px) +
+                            (1 - max(0, sign(var(--spirit-tag-border-radius, 1px)))) * 8px
+                    );
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('nested-radius inset mixin') {
+    @include test.it('should expose an inset radius custom property on the parent') {
+        @include test.assert() {
+            @include test.output() {
+                .Parent {
+                    @include nested-radius.inset(
+                        $infix: 'tag',
+                        $container-radius: 16px,
+                        $border-width: 2px,
+                        $padding: 4px
+                    );
+                }
+            }
+
+            @include test.expect() {
+                .Parent {
+                    --spirit-tag-border-radius: calc(16px - 2px - 4px);
+                }
+            }
+        }
+    }
+}

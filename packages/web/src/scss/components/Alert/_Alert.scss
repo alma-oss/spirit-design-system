@@ -1,6 +1,7 @@
 @use '@tokens' as tokens;
 @use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/typography';
 @use 'theme';
 
@@ -36,3 +37,4 @@
         background: background-color,
     )
 );
+@include component-radius-overrides.generate($class-name: 'Alert');

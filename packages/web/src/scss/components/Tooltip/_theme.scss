@@ -7,7 +7,10 @@ $max-width: units.px-to-rem(288px);
 $typography: tokens.$caption;
 $padding: tokens.$space-600 tokens.$space-700;
 $gap: tokens.$space-600;
-$border-radius: tokens.$radius-300;
+$border-radius: var(
+    --#{tokens.$css-variable-prefix}tooltip-popover-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-tooltip-popover-border-radius, #{tokens.$radius-300})
+);
 $box-shadow: tokens.$shadow-400;
 $transition-duration: transitions.$duration-200;
 $transition-scale-ratio: transitions.$scale-ratio-small-objects;

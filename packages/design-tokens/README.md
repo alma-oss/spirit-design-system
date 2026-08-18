@@ -358,6 +358,42 @@ export default nextConfig;
 
 </details>
 
+### Component Radius Overrides
+
+To override a component's default radius for all sizes, add a token to the devices collection using this pattern:
+`device/<component-name>/radius`.
+
+To override one component size, use:
+`device/<component-name>/<size>/radius`.
+
+For example:
+
+```text
+device/tag/radius
+device/tag/xsmall/radius
+```
+
+Each token slot must provide mobile, tablet, and desktop modes. Sass compilation fails when a slot is incomplete. When both
+slots exist, the size-specific radius takes precedence over the component-level radius. The component's default radius
+remains the fallback when neither slot exists.
+
+Radius CSS is generated only for token slots that exist. Button and Form Field size slots are included in the default Spirit
+tokens, so their radius CSS is always generated.
+
+Only the primary surface radius is affected. In particular, the Avatar token applies only to square Avatars. The Card
+token applies to boxed Cards and to `CardMedia` on every Card. `device/skeleton/radius` applies to text, heading, and
+shape skeletons; `--spirit-skeleton-shape-radius` still overrides the device token on shapes. Component names usually
+match their CSS classes. The following tokens use the public component name instead of the class that owns the surface:
+
+- `device/dropdown/radius` applies to `DropdownPopover`;
+- `device/form-field/<size>/radius` applies to `InputContainer`;
+- `device/form-field/medium/radius` also applies to `FileUploadInput__dropZone`;
+- `device/modal/radius` applies to `ModalDialog`;
+- `device/toast/radius` applies to `ToastBar`;
+- `device/tooltip/radius` applies to `TooltipPopover`.
+
+Test extreme custom radii on interactive surfaces to ensure focus indicators and content are not visually clipped.
+
 ### Component Color Overrides
 
 To override the default color scheme for a component, you can add tokens with the following pattern:

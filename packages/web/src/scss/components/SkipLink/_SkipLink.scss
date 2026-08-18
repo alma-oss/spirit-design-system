@@ -2,6 +2,7 @@
 //    but it's possible to have other elements with a higher z-index.
 
 @use 'theme';
+@use '../../tools/component-radius-overrides';
 
 .SkipLink {
     position: absolute;
@@ -27,3 +28,5 @@
         transition-timing-function: theme.$transition-timing;
     }
 }
+
+@include component-radius-overrides.generate($class-name: 'SkipLink');

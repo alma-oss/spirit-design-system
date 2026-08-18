@@ -60,7 +60,10 @@ $typography: tokens.$body-medium-regular;
 $border-width: tokens.$border-width-100;
 $border-style: solid;
 $border-color: tokens.$border-basic;
-$border-radius: tokens.$radius-300;
+$border-radius: var(
+    --#{tokens.$css-variable-prefix}card-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-card-border-radius, #{tokens.$radius-300})
+);
 
 $background-color: tokens.$background-primary;
 $color: tokens.$text-secondary;
