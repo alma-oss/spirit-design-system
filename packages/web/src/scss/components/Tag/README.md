@@ -24,6 +24,8 @@ Apply the matching `color-scheme-on-*` helper to each variant:
 
 The system allows you to override the default color scheme by configuring optional design tokens. Even though the `Tag--<color>` modifier is not used by default, it can be used to override the color scheme when needed. See [Component Color Overrides][component-color-overrides] for more information.
 
+The default radius can be customized for all sizes or an individual size with optional device tokens. See [Component Radius Overrides][component-radius-overrides].
+
 ### Subtle Variant
 
 Use the `*-subtle` color scheme class together with the `Tag--subtle` modifier when you need a softer color intensity:
@@ -122,4 +124,5 @@ Disabled link Tag:
 ℹ️ Read more about this pattern at [Scott O'Hara's blog][scott-o-hara-disabling-a-link].
 
 [component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
+[component-radius-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-radius-overrides
 [scott-o-hara-disabling-a-link]: https://www.scottohara.me/blog/2021/05/28/disabled-links.html

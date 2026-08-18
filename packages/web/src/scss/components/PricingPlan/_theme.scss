@@ -6,7 +6,10 @@ $rows: 100;
 $typography: tokens.$body-small-regular;
 $padding-x: tokens.$space-800;
 $border-width: tokens.$border-width-100;
-$border-radius: tokens.$radius-500;
+$border-radius: var(
+    --#{tokens.$css-variable-prefix}pricing-plan-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-pricing-plan-border-radius, #{tokens.$radius-500})
+);
 $border-color: tokens.$border-basic;
 $color: tokens.$text-primary;
 $background-color: tokens.$background-primary;

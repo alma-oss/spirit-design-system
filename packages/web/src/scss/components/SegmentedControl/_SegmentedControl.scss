@@ -2,11 +2,20 @@
 // 2. Because this is another component we can't use the specific class.
 
 @use '@tokens' as tokens;
+@use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
+@use '../../tools/nested-radius';
 @use 'theme';
 @use 'tools';
 
 .SegmentedControl {
+    @include nested-radius.inset(
+        $infix: 'segmented-control-item',
+        $container-radius: theme.$border-radius,
+        $border-width: theme.$border-width,
+        $padding: theme.$padding
+    );
+
     position: relative;
     display: grid;
     grid-auto-columns: 1fr;
@@ -47,3 +56,4 @@
     $dictionary-values: theme.$fill-variant-dictionary,
     $config: theme.$fill-variant-config
 );
+@include component-radius-overrides.generate($class-name: 'SegmentedControl');

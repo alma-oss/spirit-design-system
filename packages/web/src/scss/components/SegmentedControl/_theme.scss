@@ -2,12 +2,16 @@
 @use '../../settings/cursors';
 @use '../../settings/dictionaries';
 @use '../../settings/transitions';
+@use '../../tools/nested-radius';
 @use '../../tools/units';
 
 $padding: calc(#{tokens.$space-400} - #{tokens.$border-width-100});
 $gap: tokens.$space-400;
 $border-width: tokens.$border-width-100;
-$border-radius: tokens.$radius-full;
+$border-radius: var(
+    --#{tokens.$css-variable-prefix}segmented-control-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-segmented-control-border-radius, #{tokens.$radius-full})
+);
 $transition-radio:
     transform transitions.$duration-200 transitions.$timing-eased-in-out,
     background-color transitions.$duration-100 transitions.$timing-eased-out,
@@ -27,7 +31,10 @@ $fill-variant-dictionary: dictionaries.$fill-variants;
 $item-height: units.px-to-rem(40px);
 $item-padding-x: tokens.$space-600;
 $item-padding-y: tokens.$space-700;
-$item-border-radius: tokens.$radius-full;
+$item-border-radius: nested-radius.nested(
+    $infix: 'segmented-control-item',
+    $default: $border-radius,
+);
 $item-label-typography: tokens.$action-small;
 $item-gap: tokens.$space-500;
 $item-icon-size: units.px-to-rem(16px);

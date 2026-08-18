@@ -1,6 +1,7 @@
 @use 'theme';
 @use '@tokens' as tokens;
 @use '../../tools/breakpoint';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
 
 .PartnerLogo {
@@ -57,3 +58,5 @@
 .PartnerLogo--safeArea {
     padding: var(--#{tokens.$css-variable-prefix}partner-logo-padding);
 }
+
+@include component-radius-overrides.generate($class-name: 'PartnerLogo');

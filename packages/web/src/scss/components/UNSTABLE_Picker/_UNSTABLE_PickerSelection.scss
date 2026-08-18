@@ -1,20 +1,21 @@
 // 1. Elevate interactive elements above the trigger overlay.
-// 2. Nested Tag radius: inset the InputContainer corner by the field border and selection padding.
-//    Tag keeps its default radius when this calc is 0 or negative; see Tag `_theme.scss`.
 
 @use '@tokens' as tokens;
 @use '../../tools/form-fields' as form-fields-tools;
+@use '../../tools/nested-radius';
 @use '../../tools/typography';
 @use 'theme';
 
 .UNSTABLE_PickerSelection {
-    --#{tokens.$css-variable-prefix}tag-border-radius: calc(
-        var(--#{tokens.$css-variable-prefix}input-container-border-radius) - var(
-                --#{tokens.$css-variable-prefix}input-container-border-width
-            ) -
-            #{theme.$padding-x}
-    ); // 2.
-
+    @include nested-radius.inset(
+        $infix: 'tag',
+        $container-radius: var(
+                --#{tokens.$css-variable-prefix}input-container-border-radius,
+                var(--#{tokens.$css-variable-prefix}local-input-container-border-radius, #{tokens.$radius-300})
+            ),
+        $border-width: var(--#{tokens.$css-variable-prefix}input-container-border-width),
+        $padding: theme.$padding-x
+    );
     @include typography.from-css-variables($infix: 'input-container');
 
     display: flex;

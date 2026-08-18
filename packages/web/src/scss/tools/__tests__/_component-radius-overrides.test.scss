@@ -1,0 +1,341 @@
+@use 'true' as test;
+@use '../component-radius-overrides' as component-radius-overrides;
+
+$component-and-size-tokens: (
+    test-radius-mobile: 0,
+    test-radius-tablet: 6px,
+    test-radius-desktop: 8px,
+    test-small-radius-mobile: 10px,
+    test-small-radius-tablet: 12px,
+    test-small-radius-desktop: 14px,
+    test-unknown-radius-mobile: 20px,
+    test-unknown-radius-tablet: 22px,
+    test-unknown-radius-desktop: 24px,
+);
+
+@include test.describe('component-radius-overrides generate mixin') {
+    @include test.it('should emit component and supported size radius slots') {
+        @include test.assert() {
+            @include test.output() {
+                @include component-radius-overrides.generate(
+                    $class-name: 'Test',
+                    $sizes: (small),
+                    $token-variables: $component-and-size-tokens
+                );
+            }
+
+            @include test.expect() {
+                .Test {
+                    --spirit-test-border-radius-mobile: 0;
+                    --spirit-test-border-radius-tablet: 6px;
+                    --spirit-test-border-radius-desktop: 8px;
+                    --spirit-local-test-border-radius: var(--spirit-test-border-radius-mobile);
+                }
+
+                @media (width >= 48rem) {
+                    .Test {
+                        --spirit-local-test-border-radius: var(--spirit-test-border-radius-tablet);
+                    }
+                }
+
+                @media (width >= 80rem) {
+                    .Test {
+                        --spirit-local-test-border-radius: var(--spirit-test-border-radius-desktop);
+                    }
+                }
+
+                .Test.Test--small {
+                    --spirit-test-border-radius-mobile: 10px;
+                    --spirit-test-border-radius-tablet: 12px;
+                    --spirit-test-border-radius-desktop: 14px;
+                    --spirit-local-test-border-radius: var(--spirit-test-border-radius-mobile);
+                }
+
+                @media (width >= 48rem) {
+                    .Test.Test--small {
+                        --spirit-local-test-border-radius: var(--spirit-test-border-radius-tablet);
+                    }
+                }
+
+                @media (width >= 80rem) {
+                    .Test.Test--small {
+                        --spirit-local-test-border-radius: var(--spirit-test-border-radius-desktop);
+                    }
+                }
+            }
+        }
+    }
+
+    @include test.it('should separate the token prefix from the CSS variable infix') {
+        @include test.assert() {
+            @include test.output() {
+                @include component-radius-overrides.generate(
+                    $class-name: 'InputContainer',
+                    $sizes: (medium),
+                    $token-prefix: 'form-field',
+                    $token-variables: (
+                        form-field-medium-radius-mobile: 2px,
+                        form-field-medium-radius-tablet: 4px,
+                        form-field-medium-radius-desktop: 6px,
+                    )
+                );
+            }
+
+            @include test.expect() {
+                .InputContainer.InputContainer--medium {
+                    --spirit-input-container-border-radius-mobile: 2px;
+                    --spirit-input-container-border-radius-tablet: 4px;
+                    --spirit-input-container-border-radius-desktop: 6px;
+                    --spirit-local-input-container-border-radius: var(--spirit-input-container-border-radius-mobile);
+                }
+
+                @media (width >= 48rem) {
+                    .InputContainer.InputContainer--medium {
+                        --spirit-local-input-container-border-radius: var(
+                            --spirit-input-container-border-radius-tablet
+                        );
+                    }
+                }
+
+                @media (width >= 80rem) {
+                    .InputContainer.InputContainer--medium {
+                        --spirit-local-input-container-border-radius: var(
+                            --spirit-input-container-border-radius-desktop
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    @include test.it('should emit a radius on a modifier host') {
+        @include test.assert() {
+            @include test.output() {
+                @include component-radius-overrides.generate(
+                    $class-name: 'Avatar',
+                    $host-modifier: 'square',
+                    $token-variables: (
+                        avatar-radius-mobile: 2px,
+                        avatar-radius-tablet: 4px,
+                        avatar-radius-desktop: 6px,
+                    )
+                );
+            }
+
+            @include test.expect() {
+                .Avatar.Avatar--square {
+                    --spirit-avatar-border-radius-mobile: 2px;
+                    --spirit-avatar-border-radius-tablet: 4px;
+                    --spirit-avatar-border-radius-desktop: 6px;
+                    --spirit-local-avatar-border-radius: var(--spirit-avatar-border-radius-mobile);
+                }
+
+                @media (width >= 48rem) {
+                    .Avatar.Avatar--square {
+                        --spirit-local-avatar-border-radius: var(--spirit-avatar-border-radius-tablet);
+                    }
+                }
+
+                @media (width >= 80rem) {
+                    .Avatar.Avatar--square {
+                        --spirit-local-avatar-border-radius: var(--spirit-avatar-border-radius-desktop);
+                    }
+                }
+            }
+        }
+    }
+
+    @include test.it('should emit a radius on an element host') {
+        @include test.assert() {
+            @include test.output() {
+                @include component-radius-overrides.generate(
+                    $class-name: 'ToastBar',
+                    $host-element: '__box',
+                    $token-prefix: 'toast',
+                    $token-variables: (
+                        toast-radius-mobile: 2px,
+                        toast-radius-tablet: 4px,
+                        toast-radius-desktop: 6px,
+                    )
+                );
+            }
+
+            @include test.expect() {
+                .ToastBar__box {
+                    --spirit-toast-bar-border-radius-mobile: 2px;
+                    --spirit-toast-bar-border-radius-tablet: 4px;
+                    --spirit-toast-bar-border-radius-desktop: 6px;
+                    --spirit-local-toast-bar-border-radius: var(--spirit-toast-bar-border-radius-mobile);
+                }
+
+                @media (width >= 48rem) {
+                    .ToastBar__box {
+                        --spirit-local-toast-bar-border-radius: var(--spirit-toast-bar-border-radius-tablet);
+                    }
+                }
+
+                @media (width >= 80rem) {
+                    .ToastBar__box {
+                        --spirit-local-toast-bar-border-radius: var(--spirit-toast-bar-border-radius-desktop);
+                    }
+                }
+            }
+        }
+    }
+
+    @include test.it('should emit a single size slot on an element host') {
+        @include test.assert() {
+            @include test.output() {
+                @include component-radius-overrides.generate(
+                    $class-name: 'FileUploadInput',
+                    $host-element: '__dropZone',
+                    $token-prefix: 'form-field',
+                    $sizes: (medium),
+                    $token-variables: (
+                        form-field-medium-radius-mobile: 2px,
+                        form-field-medium-radius-tablet: 4px,
+                        form-field-medium-radius-desktop: 6px,
+                    )
+                );
+            }
+
+            @include test.expect() {
+                .FileUploadInput__dropZone {
+                    --spirit-file-upload-input-border-radius-mobile: 2px;
+                    --spirit-file-upload-input-border-radius-tablet: 4px;
+                    --spirit-file-upload-input-border-radius-desktop: 6px;
+                    --spirit-local-file-upload-input-border-radius: var(
+                        --spirit-file-upload-input-border-radius-mobile
+                    );
+                }
+
+                @media (width >= 48rem) {
+                    .FileUploadInput__dropZone {
+                        --spirit-local-file-upload-input-border-radius: var(
+                            --spirit-file-upload-input-border-radius-tablet
+                        );
+                    }
+                }
+
+                @media (width >= 80rem) {
+                    .FileUploadInput__dropZone {
+                        --spirit-local-file-upload-input-border-radius: var(
+                            --spirit-file-upload-input-border-radius-desktop
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    // stylelint-disable selector-max-class -- Host modifier and responsive size must be combined.
+    @include test.it('should emit responsive size selectors when supported') {
+        @include test.assert() {
+            @include test.output() {
+                @include component-radius-overrides.generate(
+                    $class-name: 'Avatar',
+                    $sizes: (small),
+                    $host-modifier: 'square',
+                    $responsive-size-selectors: true,
+                    $token-variables: (
+                        avatar-small-radius-mobile: 2px,
+                        avatar-small-radius-tablet: 4px,
+                        avatar-small-radius-desktop: 6px,
+                    )
+                );
+            }
+
+            @include test.expect() {
+                .Avatar.Avatar--small.Avatar--square {
+                    --spirit-avatar-border-radius-mobile: 2px;
+                    --spirit-avatar-border-radius-tablet: 4px;
+                    --spirit-avatar-border-radius-desktop: 6px;
+                    --spirit-local-avatar-border-radius: var(--spirit-avatar-border-radius-mobile);
+                }
+
+                @media (width >= 48rem) {
+                    .Avatar.Avatar--small.Avatar--square {
+                        --spirit-local-avatar-border-radius: var(--spirit-avatar-border-radius-tablet);
+                    }
+                }
+
+                @media (width >= 80rem) {
+                    .Avatar.Avatar--small.Avatar--square {
+                        --spirit-local-avatar-border-radius: var(--spirit-avatar-border-radius-desktop);
+                    }
+                }
+
+                @media (width >= 48rem) {
+                    .Avatar.Avatar--tablet--small.Avatar--square {
+                        --spirit-avatar-border-radius-mobile: 2px;
+                        --spirit-avatar-border-radius-tablet: 4px;
+                        --spirit-avatar-border-radius-desktop: 6px;
+                        --spirit-local-avatar-border-radius: var(--spirit-avatar-border-radius-tablet);
+                    }
+                }
+
+                @media (width >= 80rem) {
+                    .Avatar.Avatar--tablet--small.Avatar--square {
+                        --spirit-local-avatar-border-radius: var(--spirit-avatar-border-radius-desktop);
+                    }
+                }
+
+                @media (width >= 80rem) {
+                    .Avatar.Avatar--desktop--small.Avatar--square {
+                        --spirit-avatar-border-radius-mobile: 2px;
+                        --spirit-avatar-border-radius-tablet: 4px;
+                        --spirit-avatar-border-radius-desktop: 6px;
+                        --spirit-local-avatar-border-radius: var(--spirit-avatar-border-radius-desktop);
+                    }
+                }
+            }
+        }
+    }
+    // stylelint-enable selector-max-class
+
+    @include test.it('should emit nothing when no supported token slot exists') {
+        @include test.assert() {
+            @include test.output() {
+                @include component-radius-overrides.generate(
+                    $class-name: 'Test',
+                    $sizes: (large),
+                    $token-variables: $component-and-size-tokens
+                );
+            }
+
+            @include test.expect() {
+                .Test {
+                    --spirit-test-border-radius-mobile: 0;
+                    --spirit-test-border-radius-tablet: 6px;
+                    --spirit-test-border-radius-desktop: 8px;
+                    --spirit-local-test-border-radius: var(--spirit-test-border-radius-mobile);
+                }
+
+                @media (width >= 48rem) {
+                    .Test {
+                        --spirit-local-test-border-radius: var(--spirit-test-border-radius-tablet);
+                    }
+                }
+
+                @media (width >= 80rem) {
+                    .Test {
+                        --spirit-local-test-border-radius: var(--spirit-test-border-radius-desktop);
+                    }
+                }
+            }
+        }
+    }
+
+    @include test.it('should emit no CSS when no tokens match') {
+        @include test.assert() {
+            @include test.output() {
+                @include component-radius-overrides.generate(
+                    $class-name: 'Nonexistent',
+                    $token-variables: $component-and-size-tokens
+                );
+            }
+
+            @include test.expect();
+        }
+    }
+}

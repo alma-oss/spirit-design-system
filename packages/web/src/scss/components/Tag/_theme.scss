@@ -1,31 +1,15 @@
-// 1. Nested Tag radius. Parents may set `--tag-border-radius` to
-//    `container-radius - border-width - container-padding`. CSS has no `if`, so this mix is
-//    equivalent to: use the inherited value when it is positive, otherwise keep the default.
-//
-//    1. `var(--tag-border-radius, 1px)` inside `sign()`: dummy 1px so `sign()` always receives a
-//       dimension. An unset custom property would invalidate the whole `calc()`. This fallback is
-//       not the visible radius; when the property is unset, `sign(1px)` is 1 and the next `var()`
-//       supplies `$_default-border-radius`.
-//    2. `sign()`: -1 if negative, 0 if zero, 1 if positive.
-//    3. `max(0, sign(...))`: 1 only when the inherited radius is positive, otherwise 0. This is the
-//       switch used by both products below.
-//    4. First product: `switch * var(--tag-border-radius, default)` — inherited radius when the
-//       switch is 1 (or the default, when the property is unset and the dummy 1px made the switch 1).
-//    5. Second product: `(1 - switch) * default` — default radius when the switch is 0 (explicit 0
-//       or a negative inset from a container tighter than the Tag corner).
-
 @use '@tokens' as tokens;
 @use '../../settings/dictionaries';
+@use '../../tools/nested-radius';
 @use '../../tools/units';
 
 $border-width: tokens.$border-width-100;
 $border-style: solid;
-$_default-border-radius: tokens.$radius-300;
-$border-radius: calc(
-    max(0, sign(var(--#{tokens.$css-variable-prefix}tag-border-radius, 1px))) *
-        var(--#{tokens.$css-variable-prefix}tag-border-radius, #{$_default-border-radius}) +
-        (1 - max(0, sign(var(--#{tokens.$css-variable-prefix}tag-border-radius, 1px)))) * #{$_default-border-radius}
-); // 1.
+$_default-border-radius: var(--#{tokens.$css-variable-prefix}local-tag-border-radius, #{tokens.$radius-300});
+$border-radius: nested-radius.nested(
+    $infix: 'tag',
+    $default: $_default-border-radius,
+);
 
 $size-dictionary: dictionaries.$size-extended;
 $size-config: (

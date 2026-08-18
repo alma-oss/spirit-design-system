@@ -9,7 +9,10 @@ $input-drop-zone-border-color-state-dragging: tokens.$form-field-fill-border-sta
 $input-drop-zone-border-color-state-hover: tokens.$form-field-fill-border-state-hover;
 $input-drop-zone-border-color-state-active: tokens.$form-field-fill-border-state-selected;
 $input-drop-zone-border-color-state-disabled: tokens.$disabled-border;
-$input-drop-zone-border-radius: tokens.$radius-300;
+$input-drop-zone-border-radius: var(
+    --#{tokens.$css-variable-prefix}file-upload-input-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-file-upload-input-border-radius, #{tokens.$radius-300})
+);
 $input-drop-zone-background: tokens.$form-field-fill-background-state-default;
 $input-drop-zone-background-state-hover: tokens.$form-field-fill-background-state-hover;
 $input-drop-zone-background-state-active: tokens.$form-field-fill-background-state-active;

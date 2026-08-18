@@ -3,7 +3,10 @@
 @use '../../tools/units';
 
 $background-color: tokens.$background-primary;
-$border-radius: tokens.$radius-200;
+$border-radius: var(
+    --#{tokens.$css-variable-prefix}partner-logo-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-partner-logo-border-radius, #{tokens.$radius-200})
+);
 $breakpoints: tokens.$breakpoints;
 $size-dictionary: dictionaries.$size;
 $size-config: (

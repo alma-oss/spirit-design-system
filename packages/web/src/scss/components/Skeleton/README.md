@@ -4,6 +4,8 @@ On the parent element, you must use `aria-busy` and `aria-live` attributes to in
 The `aria-busy` is set to `true` when the content is loading, and `aria-live` is set to `polite` to announce the loading
 state to screen readers.
 
+The default radius can be customized with an optional device token. See [Component Radius Overrides][component-radius-overrides].
+
 ## Text
 
 The `Skeleton--text` class is used to create a text skeleton.
@@ -47,7 +49,8 @@ The Skeleton component supports the following sizes for text and heading skeleto
 
 Use CSS custom properties to define the width, height, and radius of the shape.
 
-- The default radius is `--spirit-radius-300`
+- The default radius is `--spirit-radius-400`
+- Instance `--spirit-skeleton-shape-radius` values override the device token
 
 - `--spirit-skeleton-shape-width: number{rem};`
 - `--spirit-skeleton-shape-height: number{rem};`
@@ -78,3 +81,5 @@ Fixed `px` values ignore the user's root font-size setting and break this consis
 ```
 
 ⚠️ Make sure that you have properly set up the `skeleton-gradient` token in your project. Without it, Skeleton will not be available.
+
+[component-radius-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-radius-overrides

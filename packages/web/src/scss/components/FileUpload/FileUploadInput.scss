@@ -5,6 +5,7 @@
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/accessibility';
 @use '../../tools/breakpoint';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/form-fields' as form-fields-tools;
 @use '../../tools/pseudo-element';
 @use '../../tools/typography';
@@ -108,3 +109,10 @@ $_field-name: 'FileUploadInput';
     border-color: theme.$input-drop-zone-border-color-state-disabled;
     background-color: theme.$input-drop-zone-background-state-disabled;
 }
+
+@include component-radius-overrides.generate(
+    $class-name: 'FileUploadInput',
+    $host-element: '__dropZone',
+    $token-prefix: 'form-field',
+    $sizes: (medium)
+);
