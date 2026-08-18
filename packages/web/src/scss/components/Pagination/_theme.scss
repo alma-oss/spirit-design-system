@@ -9,7 +9,10 @@ $item-height: units.px-to-rem(40px);
 $item-padding-inline: tokens.$space-600;
 $item-border-width: tokens.$border-width-100;
 $item-border-style: solid;
-$item-border-radius: tokens.$radius-full;
+$item-border-radius: var(
+    --#{tokens.$css-variable-prefix}pagination-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-pagination-border-radius, #{tokens.$radius-full})
+);
 
 $item-default-color: tokens.$component-pagination-unselected-content;
 $item-default-border-color: tokens.$component-pagination-unselected-border;

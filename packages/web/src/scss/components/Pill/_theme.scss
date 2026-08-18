@@ -7,7 +7,10 @@
 $typography: tokens.$label-xsmall;
 $padding-x: tokens.$space-300;
 $padding-y: tokens.$space-0;
-$border-radius: tokens.$radius-400;
+$border-radius: var(
+    --#{tokens.$css-variable-prefix}pill-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-pill-border-radius, #{tokens.$radius-400})
+);
 $size: units.px-to-rem(20px);
 
 $color-dictionary: (

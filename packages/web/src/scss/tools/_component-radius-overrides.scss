@@ -1,0 +1,190 @@
+// Auto-discover optional device radius tokens and emit responsive component
+// custom properties only for token slots that exist.
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use '@tokens' as tokens;
+@use 'breakpoint';
+@use 'string' as spirit-string;
+
+@function -get-slot-values($token-variables, $token-base-name, $breakpoints) {
+    $values: ();
+    $existing-values-count: 0;
+
+    @each $breakpoint-name, $breakpoint-value in $breakpoints {
+        $variable-name: '#{$token-base-name}-#{$breakpoint-name}';
+
+        @if map.has-key($token-variables, $variable-name) {
+            $values: map.set($values, $breakpoint-name, map.get($token-variables, $variable-name));
+            $existing-values-count: $existing-values-count + 1;
+        }
+    }
+
+    @if $existing-values-count == 0 {
+        @return null;
+    }
+
+    @if $existing-values-count != list.length(map.keys($breakpoints)) {
+        @error 'Incomplete component radius token slot `#{$token-base-name}`. Define all breakpoint modes.';
+    }
+
+    @return $values;
+}
+
+@mixin -emit-slot($selector, $css-variable-infix, $values, $breakpoints) {
+    #{$selector} {
+        @each $breakpoint-name, $value in $values {
+            --#{tokens.$css-variable-prefix}#{$css-variable-infix}-border-radius-#{$breakpoint-name}: #{$value};
+        }
+
+        --#{tokens.$css-variable-prefix}local-#{$css-variable-infix}-border-radius: var(
+            --#{tokens.$css-variable-prefix}#{$css-variable-infix}-border-radius-mobile
+        );
+    }
+
+    @each $breakpoint-name, $breakpoint-value in $breakpoints {
+        @if $breakpoint-value > 0 {
+            @include breakpoint.up($breakpoint-value) {
+                #{$selector} {
+                    --#{tokens.$css-variable-prefix}local-#{$css-variable-infix}-border-radius: var(
+                        --#{tokens.$css-variable-prefix}#{$css-variable-infix}-border-radius-#{$breakpoint-name}
+                    );
+                }
+            }
+        }
+    }
+}
+
+@mixin -emit-slot-from-breakpoint(
+    $selector,
+    $css-variable-infix,
+    $values,
+    $breakpoints,
+    $minimum-breakpoint-name,
+    $minimum-breakpoint-value
+) {
+    @include breakpoint.up($minimum-breakpoint-value) {
+        #{$selector} {
+            @each $breakpoint-name, $value in $values {
+                --#{tokens.$css-variable-prefix}#{$css-variable-infix}-border-radius-#{$breakpoint-name}: #{$value};
+            }
+
+            --#{tokens.$css-variable-prefix}local-#{$css-variable-infix}-border-radius: var(
+                --#{tokens.$css-variable-prefix}#{$css-variable-infix}-border-radius-#{$minimum-breakpoint-name}
+            );
+        }
+    }
+
+    @each $breakpoint-name, $breakpoint-value in $breakpoints {
+        @if $breakpoint-value > $minimum-breakpoint-value {
+            @include breakpoint.up($breakpoint-value) {
+                #{$selector} {
+                    --#{tokens.$css-variable-prefix}local-#{$css-variable-infix}-border-radius: var(
+                        --#{tokens.$css-variable-prefix}#{$css-variable-infix}-border-radius-#{$breakpoint-name}
+                    );
+                }
+            }
+        }
+    }
+}
+
+// Generate responsive radius custom properties from optional device tokens.
+//
+// Token slots:
+// - `{token-prefix}-radius-{breakpoint}` for the component-level radius
+// - `{token-prefix}-{size}-radius-{breakpoint}` for a size-specific radius
+//
+// Parameters are:
+// * $class-name: component class and CSS custom property infix source
+// * $sizes: supported size modifiers
+// * $token-prefix: device token prefix; defaults to the kebab-case class name
+// * $host-modifier: optional modifier that owns the radius, e.g. Avatar--square
+// * $host-element: optional element that owns the radius, e.g. ToastBar__box
+// * $responsive-size-selectors: whether the component supports breakpoint-prefixed size modifiers
+// * $token-variables: injectable token map used by tests
+@mixin generate(
+    $class-name,
+    $sizes: (),
+    $token-prefix: null,
+    $host-modifier: null,
+    $host-element: null,
+    $responsive-size-selectors: false,
+    $token-variables: meta.module-variables(tokens)
+) {
+    @if $host-modifier and $host-element {
+        @error 'Component radius overrides cannot use $host-modifier and $host-element together.';
+    }
+
+    @if $host-element and list.length($sizes) > 0 {
+        @error 'Component radius overrides cannot generate size slots for an element host.';
+    }
+
+    $base-class-name: spirit-string.remove-prefix($class-name, 'UNSTABLE_');
+    $css-variable-infix: spirit-string.convert-pascal-case-to-kebab-case($base-class-name);
+    $resolved-token-prefix: $token-prefix or $css-variable-infix;
+    $base-selector: '.#{$class-name}';
+
+    @if $host-modifier {
+        $base-selector: '#{$base-selector}.#{$class-name}--#{$host-modifier}';
+    } @else if $host-element {
+        $base-selector: '.#{$class-name}#{$host-element}';
+    }
+
+    $component-values: -get-slot-values($token-variables, '#{$resolved-token-prefix}-radius', tokens.$breakpoints);
+
+    @if $component-values {
+        @include -emit-slot($base-selector, $css-variable-infix, $component-values, tokens.$breakpoints);
+    }
+
+    @each $size in $sizes {
+        $size-values: -get-slot-values(
+            $token-variables,
+            '#{$resolved-token-prefix}-#{$size}-radius',
+            tokens.$breakpoints
+        );
+
+        @if $size-values {
+            $size-selector: '.#{$class-name}.#{$class-name}--#{$size}';
+
+            @if $host-modifier {
+                $size-selector: '#{$size-selector}.#{$class-name}--#{$host-modifier}';
+            } @else if $host-element {
+                $size-selector: '.#{$class-name}#{$host-element}.#{$class-name}--#{$size}';
+            }
+
+            @include -emit-slot($size-selector, $css-variable-infix, $size-values, tokens.$breakpoints);
+        }
+    }
+
+    @if $responsive-size-selectors {
+        @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
+            @if $breakpoint-value > 0 {
+                @each $size in $sizes {
+                    $size-values: -get-slot-values(
+                        $token-variables,
+                        '#{$resolved-token-prefix}-#{$size}-radius',
+                        tokens.$breakpoints
+                    );
+
+                    @if $size-values {
+                        $size-selector: '.#{$class-name}.#{$class-name}--#{$breakpoint-name}--#{$size}';
+
+                        @if $host-modifier {
+                            $size-selector: '#{$size-selector}.#{$class-name}--#{$host-modifier}';
+                        }
+
+                        @include -emit-slot-from-breakpoint(
+                            $size-selector,
+                            $css-variable-infix,
+                            $size-values,
+                            tokens.$breakpoints,
+                            $breakpoint-name,
+                            $breakpoint-value
+                        );
+                    }
+                }
+            }
+        }
+    }
+}

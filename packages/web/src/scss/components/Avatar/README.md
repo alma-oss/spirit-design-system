@@ -2,8 +2,7 @@
 
 The `Avatar` component is used to represent a user or entity.
 
-It can be a circle or a square (with rounded corners, using `radius-100` token) and
-can have different sizes.
+It can be a circle or a square with rounded corners and can have different sizes.
 
 ## Example
 
@@ -20,6 +19,8 @@ can have different sizes.
 ## Square
 
 Add `Avatar--square` modifier to make the avatar a square.
+The square Avatar primary surface radius can be customized for all sizes or an individual size with optional device tokens.
+See [Component Radius Overrides][component-radius-overrides].
 
 ```html
 <div class="Avatar Avatar--medium Avatar--square" aria-label="Profile of Jiří Bárta">
@@ -127,6 +128,7 @@ take care of the text length and case. The rest is handled by the component.
 using an abbreviation. The `aria-hidden` attribute is set on the text span, because the `aria-label`
 attribute is set on the container and the abbreviation is not useful for screen readers.
 
+[component-radius-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-radius-overrides
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [icon-documentation]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Icon

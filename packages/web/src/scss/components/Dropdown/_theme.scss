@@ -4,7 +4,10 @@
 $breakpoints: tokens.$breakpoints;
 $offset: tokens.$space-500;
 $padding: tokens.$space-700;
-$border-radius: tokens.$radius-300;
+$border-radius: var(
+    --#{tokens.$css-variable-prefix}dropdown-popover-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-dropdown-popover-border-radius, #{tokens.$radius-300})
+);
 $background: tokens.$background-primary;
 $shadow: tokens.$shadow-200;
 $alignment-x-dictionary: dictionaries.$alignments-x-extended;

@@ -6,6 +6,7 @@
 @use 'sass:math';
 @use '@tokens' as tokens;
 @use '../../tools/color-scheme';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/placement';
 @use '../../tools/svg';
 @use '../../tools/typography';
@@ -75,3 +76,5 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
 .TooltipPopover.is-visible {
     @extend %visible;
 }
+
+@include component-radius-overrides.generate($class-name: 'TooltipPopover', $token-prefix: 'tooltip');

@@ -7,7 +7,7 @@
 
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
-@use '../../tools/breakpoint';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
 @use '../../tools/typography';
 @use 'theme';
@@ -28,6 +28,7 @@
     color: var(--#{tokens.$css-variable-prefix}input-container-color);
     border: var(--#{tokens.$css-variable-prefix}input-container-border-width) theme.$border-style
         var(--#{tokens.$css-variable-prefix}input-container-border-color);
+    border-radius: theme.$border-radius;
     background-color: var(--#{tokens.$css-variable-prefix}input-container-background-color);
 
     &:has(> :where([size])) {
@@ -65,16 +66,6 @@
     &:not(.InputContainer--disabled):has(> :is(input, select, textarea):active),
     &:not(.InputContainer--disabled):has(> :is(input, select, textarea):focus-within) {
         background-color: var(--#{tokens.$css-variable-prefix}input-container-background-color-state-active);
-    }
-
-    @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
-        @include breakpoint.up($breakpoint-value) {
-            --#{tokens.$css-variable-prefix}input-container-border-radius: var(
-                --#{tokens.$css-variable-prefix}input-container-border-radius-#{$breakpoint-name}
-            );
-
-            border-radius: var(--#{tokens.$css-variable-prefix}input-container-border-radius);
-        }
     }
 }
 
@@ -154,6 +145,11 @@
     $class-name: 'InputContainer',
     $dictionary-values: theme.$size-dictionary,
     $config: theme.$size-config
+);
+@include component-radius-overrides.generate(
+    $class-name: 'InputContainer',
+    $sizes: theme.$size-dictionary,
+    $token-prefix: 'form-field'
 );
 @include dictionaries.generate-variants(
     $class-name: 'InputContainer',

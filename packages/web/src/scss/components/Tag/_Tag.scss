@@ -3,6 +3,7 @@
 @use '@tokens' as tokens;
 @use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
 @use '../../tools/dynamic-colors';
 @use '../../tools/reset';
@@ -46,6 +47,7 @@
     $dictionary-values: theme.$size-dictionary,
     $config: theme.$size-config
 );
+@include component-radius-overrides.generate($class-name: 'Tag', $sizes: theme.$size-dictionary);
 
 // Subtle tags stay visually transparent when disabled; the `.disabled` utility sets color tokens.
 .Tag--subtle.disabled {

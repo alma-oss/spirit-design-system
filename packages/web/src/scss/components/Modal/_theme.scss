@@ -22,7 +22,10 @@ $dialog-width-desktop: units.px-to-rem(680px);
 $dialog-height: auto;
 $dialog-max-height: none;
 $dialog-text-color: tokens.$text-primary;
-$dialog-border-radius: tokens.$radius-300;
+$dialog-border-radius: var(
+    --#{tokens.$css-variable-prefix}modal-dialog-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-modal-dialog-border-radius, #{tokens.$radius-300})
+);
 $dialog-background-color: tokens.$background-primary;
 $dialog-shadow: tokens.$shadow-300;
 

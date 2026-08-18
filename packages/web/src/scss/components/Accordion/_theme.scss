@@ -12,7 +12,10 @@ $header-gap: tokens.$space-600;
 $header-padding-y: tokens.$space-900;
 $header-padding-x: tokens.$space-700;
 
-$border-radius: tokens.$radius-200;
+$border-radius: var(
+    --#{tokens.$css-variable-prefix}accordion-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-accordion-border-radius, #{tokens.$radius-200})
+);
 
 $divider-color: tokens.$border-basic;
 $divider-width: tokens.$border-width-100;

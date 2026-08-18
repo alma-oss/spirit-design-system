@@ -5,6 +5,7 @@
 @use '../../settings/cursors';
 @use '../../tools/breakpoint';
 @use '../../tools/color-scheme';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
 @use '../../tools/reset';
 @use 'theme';
@@ -46,6 +47,8 @@
         cursor: cursors.$buttons;
     }
 }
+
+@include component-radius-overrides.generate($class-name: 'Item');
 
 .Item__content {
     display: grid;

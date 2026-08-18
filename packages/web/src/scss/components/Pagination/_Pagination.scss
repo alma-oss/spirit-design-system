@@ -1,5 +1,6 @@
 @use 'theme';
 @use '../../settings/cursors';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/reset';
 @use '../../tools/typography';
 
@@ -55,3 +56,5 @@
     background-color: theme.$item-selected-background-color;
     cursor: cursors.$disabled;
 }
+
+@include component-radius-overrides.generate($class-name: 'Pagination', $host-element: '__link');

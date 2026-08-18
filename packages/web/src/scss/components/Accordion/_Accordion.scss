@@ -20,6 +20,7 @@
 @use '@tokens' as tokens;
 @use 'sass:map';
 @use 'theme';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/typography';
 @use '../../tools/reset';
 
@@ -138,3 +139,5 @@
         border-bottom: theme.$divider-width theme.$divider-style theme.$divider-color;
     }
 }
+
+@include component-radius-overrides.generate($class-name: 'Accordion');

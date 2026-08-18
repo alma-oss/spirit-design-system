@@ -1,6 +1,7 @@
 @use 'theme';
 @use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/typography';
 
 .Pill {
@@ -25,3 +26,4 @@
         background: background-color,
     )
 );
+@include component-radius-overrides.generate($class-name: 'Pill');
