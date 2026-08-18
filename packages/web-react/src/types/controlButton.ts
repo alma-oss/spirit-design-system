@@ -18,6 +18,8 @@ export interface ControlButtonBaseProps extends ChildrenProps, StyleProps, Click
 export interface ControlButtonStyleProps<S = void> extends ControlButtonBaseProps {
   /** Whether the button is disabled. */
   isDisabled?: boolean;
+  /** Whether the button stretches over its nearest positioned ancestor. */
+  isStretched?: boolean;
   /** Whether the button is in a subtle variant (without border). */
   isSubtle?: boolean;
   /** Whether the button should be symmetrical. */

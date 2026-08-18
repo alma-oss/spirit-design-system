@@ -61,6 +61,17 @@ describe('useControlButtonStyleProps', () => {
     expect(result.current.classProps).toBe(expectedClasses);
   });
 
+  it('should return element-stretched class and omit tap-target when isStretched is true', () => {
+    const props = {
+      size: 'medium',
+      isStretched: true,
+    } as SpiritControlButtonProps;
+    const { result } = renderHook(() => useControlButtonStyleProps(props));
+
+    expect(result.current.classProps).toContain('element-stretched');
+    expect(result.current.classProps).not.toContain('accessibility-tap-target');
+  });
+
   it('should return xsmall size class', () => {
     const props = {
       size: 'xsmall',

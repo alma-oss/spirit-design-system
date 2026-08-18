@@ -131,6 +131,20 @@ ControlButton always uses the **subtle** border color so the border stands out o
 **computes** the interactive (hover and active) state colors from the background color instead of reading them from
 the scheme.
 
+## Stretched
+
+Use the `isStretched` prop to stretch the interactive area of the ControlButton over its nearest positioned
+ancestor (for example a `Tag`). `Tag` provides `position: relative` for this pattern. When `isStretched` is
+set, the accessibility tap-target helper is omitted so it does not trap the stretch overlay.
+
+```tsx
+<Tag elementType="button" aria-label="Remove filter">
+  <ControlButton elementType="span" aria-hidden="true" isStretched isSymmetrical>
+    <Icon name="close" />
+  </ControlButton>
+</Tag>
+```
+
 ## Disabled State
 
 Use the `isDisabled` prop to disable a ControlButton:
@@ -215,6 +229,7 @@ For icon-only buttons, always include an accessible label using the `aria-label`
 | `children`      | `ReactNode`                                 | `null`      | ✕        | Content of the button                                                                                                 |
 | `elementType`   | `ElementType`                               | `button`    | ✕        | HTML element type or React component                                                                                  |
 | `isDisabled`    | `bool`                                      | `false`     | ✕        | Whether the button is disabled, see [Disabled State](#disabled-state)                                                 |
+| `isStretched`   | `bool`                                      | `false`     | ✕        | Whether the button is stretched, see [Stretched](#stretched)                                                          |
 | `isSubtle`      | `bool`                                      | `false`     | ✕        | Whether the button is in subtle variant (no border)                                                                   |
 | `isSymmetrical` | \[`bool` \| `Responsive<bool>`]             | `false`     | ✕        | Whether the button should be symmetrical, use object to set responsive values, e.g. `{ mobile: true, tablet: false }` |
 | `onClick`       | `(event: ClickEvent) => void`               | —           | ✕        | Click handler                                                                                                         |
