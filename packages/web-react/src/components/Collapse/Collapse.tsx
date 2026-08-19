@@ -5,9 +5,10 @@ import { Transition, type TransitionStatus } from 'react-transition-group';
 import { useStyleProps } from '../../hooks';
 import { type SpiritCollapseProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
-import { useCollapseAriaProps } from './useCollapseAriaProps';
 import { useCollapseStyleProps } from './useCollapseStyleProps';
 import { useResizeHeight } from './useResizeHeight';
+
+const ATTRIBUTE_DATA_BREAKPOINT = 'data-spirit-breakpoint';
 
 const TRANSITION_DURATION = 250;
 
@@ -27,19 +28,21 @@ const defaultProps: Partial<SpiritCollapseProps> = {
 
 const Collapse = (props: SpiritCollapseProps) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType, children, transitionDuration = TRANSITION_DURATION, ...restProps } = propsWithDefaults;
+  const {
+    elementType,
+    children,
+    transitionDuration = TRANSITION_DURATION,
+    collapsibleToBreakpoint,
+    isOpen,
+    ...otherProps
+  } = propsWithDefaults;
   const Component = elementType as ElementType;
 
   const rootElementRef: MutableRefObject<HTMLElement | null> = useRef(null);
   const collapseElementRef: MutableRefObject<HTMLElement | null> = useRef(null);
   const collapseHeight = useResizeHeight(collapseElementRef);
 
-  const { classProps, styleProps: collapseStyleProps } = useCollapseStyleProps(
-    restProps.isOpen,
-    Component,
-    collapseHeight,
-  );
-  const { ariaProps, props: otherProps } = useCollapseAriaProps(restProps);
+  const { classProps, styleProps: collapseStyleProps } = useCollapseStyleProps(isOpen, Component, collapseHeight);
   const { styleProps, props: transferProps } = useStyleProps(otherProps);
 
   const mergedCollapseStyleProps = {
@@ -47,18 +50,22 @@ const Collapse = (props: SpiritCollapseProps) => {
     style: { ...collapseStyleProps, ...styleProps.style },
   };
 
+  const collapsibleToBreakpointAttr = collapsibleToBreakpoint
+    ? { [ATTRIBUTE_DATA_BREAKPOINT]: collapsibleToBreakpoint }
+    : {};
+
   // For inline elements, when open, render content outside the collapse element
   const isInlineElement = Component === 'span';
-  if (isInlineElement && restProps.isOpen) {
+  if (isInlineElement && isOpen) {
     return children;
   }
 
   return (
-    <Transition in={restProps.isOpen} nodeRef={rootElementRef} timeout={transitionDuration}>
+    <Transition in={isOpen} nodeRef={rootElementRef} timeout={transitionDuration}>
       {(transitionState: TransitionStatus) => (
         <Component
           {...transferProps}
-          {...ariaProps.root}
+          {...collapsibleToBreakpointAttr}
           {...mergeStyleProps(Component, {
             classProps: classProps.root,
             styleProps,

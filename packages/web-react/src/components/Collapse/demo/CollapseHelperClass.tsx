@@ -4,7 +4,10 @@ import Collapse from '../Collapse';
 import { useCollapse } from '../useCollapse';
 
 const CollapseHelperClass = () => {
-  const { isOpen, toggleHandler } = useCollapse(false);
+  const { isOpen, toggle, ariaProps } = useCollapse(false, { id: 'collapse-helper-class-id' });
+  // Only one trigger may carry the generated `id` — the anchor below reuses the rest.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { id: _triggerId, ...sharedTriggerAriaProps } = ariaProps.trigger;
 
   return (
     <>
@@ -26,11 +29,12 @@ const CollapseHelperClass = () => {
         bibendum nunc aenean facilisis. Phasellus euismod, donec sem odio ligula praesent finibus nibh convallis,
         tristique aliquam sed id tortor sem lobortis.
       </Collapse>
-      <Button onClick={toggleHandler} aria-expanded={isOpen}>
+      <Button onClick={toggle} aria-expanded={isOpen}>
         <span className="accessibility-open">Show less</span>
         <span className="accessibility-closed">Show more</span>
       </Button>
-      <a href="#" role="button" onClick={toggleHandler} aria-expanded={isOpen}>
+      {/* Real anchor: needs preventDefault (via toggle) so href="#" doesn't navigate/scroll. */}
+      <a href="#" role="button" {...sharedTriggerAriaProps} onClick={toggle}>
         <span className="accessibility-open">Show less</span>
         <span className="accessibility-closed">Show more</span>
       </a>

@@ -67,6 +67,14 @@ describe('UncontrolledCollapse', () => {
 
     expect(element).toHaveAttribute('id', 'example-id');
   });
+
+  it('should link the trigger and the panel via matching aria-controls/aria-labelledby', () => {
+    const trigger = screen.getByRole('button') as HTMLElement;
+    const panel = trigger.nextElementSibling as HTMLElement;
+
+    expect(trigger).toHaveAttribute('aria-controls', panel.id);
+    expect(panel).toHaveAttribute('aria-labelledby', trigger.id);
+  });
 });
 
 describe('UncontrolledCollapse with disposable trigger', () => {

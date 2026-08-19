@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+import { type DisclosureAria } from '../hooks/disclosure';
 import { type Booleanish, type ChildrenProps, type ClickEvent, type StyleProps } from './shared';
 
 export type CollapseElementType = 'div' | 'span' | 'article' | 'section' | 'main' | 'header' | 'footer';
@@ -14,6 +15,18 @@ export type CollapseRenderProps = {
 
 export interface BaseCollapseProps extends ChildrenProps, StyleProps {
   id: string;
+  /** Id of the element that labels the collapse panel. */
+  'aria-labelledby'?: string;
+}
+
+export interface CollapseAria {
+  ariaProps: {
+    /** trigger returned props */
+    trigger: DisclosureAria['triggerProps'];
+    /** panel returned props */
+    panel: DisclosureAria['panelProps'];
+  };
+  props: BaseCollapseProps;
 }
 
 export interface CollapseProps extends BaseCollapseProps {
