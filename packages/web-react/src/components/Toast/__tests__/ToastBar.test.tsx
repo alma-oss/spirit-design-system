@@ -1,17 +1,17 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  iconNamePropTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { renderWithIcons as render } from '@local/tests/testUtils/testIcons';
 import { getColorSchemeClassName } from '../../../utils';
 import ToastBar from '../ToastBar';
-
-jest.mock('../../../hooks/useIcon');
 
 describe('ToastBar', () => {
   classNamePrefixProviderTest((props) => <ToastBar {...props} id="test" />, 'ToastBar');
@@ -23,6 +23,8 @@ describe('ToastBar', () => {
   validHtmlAttributesTest(ToastBar);
 
   ariaAttributesTest(ToastBar);
+
+  iconNamePropTest(ToastBar, 'iconName', { id: 'toast-icon-test' });
 
   it('should not render', () => {
     const dom = render(<ToastBar isOpen={false} id="test" />);

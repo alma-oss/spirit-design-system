@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
@@ -7,15 +6,15 @@ import {
   colorSchemeSubtleTest,
   elementTypePropsTest,
   emotionColorPropsTest,
+  iconNamePropTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { renderWithIcons as render } from '@local/tests/testUtils/testIcons';
 import { EmotionColors } from '../../../constants';
 import { getColorSchemeClassName } from '../../../utils';
 import Alert from '../Alert';
-
-jest.mock('../../../hooks/useIcon');
 
 describe('Alert', () => {
   classNamePrefixProviderTest(Alert, 'Alert');
@@ -33,6 +32,8 @@ describe('Alert', () => {
   ariaAttributesTest(Alert);
 
   elementTypePropsTest(Alert);
+
+  iconNamePropTest(Alert);
 
   it('should have default classname', () => {
     const dom = render(<Alert />);

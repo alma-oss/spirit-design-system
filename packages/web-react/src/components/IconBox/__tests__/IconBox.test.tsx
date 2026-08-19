@@ -1,20 +1,20 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
   elementTypePropsTest,
+  iconNamePropTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { renderWithIcons as render } from '@local/tests/testUtils/testIcons';
 import { EmotionColors } from '../../../constants';
 import type { IconBoxColorsType, IconBoxShapeType, SizeExtendedDictionaryType } from '../../../types';
 import { pxToRem } from '../../../utils';
 import { IconBoxShapesRadii, IconBoxSizes } from '../constants';
 import IconBox from '../IconBox';
-
-jest.mock('../../../hooks/useIcon');
 
 const sizeTestCasesProvider = Object.entries(IconBoxSizes).map(([size, { iconSize, padding }]) => ({
   size,
@@ -55,6 +55,8 @@ describe('IconBox', () => {
   ariaAttributesTest(IconBox);
 
   elementTypePropsTest(IconBox);
+
+  iconNamePropTest(IconBox);
 
   it('should render the icon', () => {
     render(<IconBox iconName="check" data-testid="IconBox" />);
