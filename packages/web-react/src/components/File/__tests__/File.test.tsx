@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
@@ -7,13 +7,13 @@ import {
   formFieldHelperTextContextPropsTest,
   formFieldLabelContextPropsTest,
   formFieldValidationTextContextPropsTest,
+  iconNamePropTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { renderWithIcons as render } from '@local/tests/testUtils/testIcons';
 import File from '../File';
-
-jest.mock('../../../hooks/useIcon');
 
 const defaultProps = {
   id: 'unstable-file-1',
@@ -71,6 +71,8 @@ describe('File', () => {
   formFieldValidationTextContextPropsTest({
     renderComponent: (props) => <File {...defaultProps} {...props} />,
   });
+
+  iconNamePropTest(File, 'iconName', defaultProps);
 
   it('should render dismiss button with accessible name', () => {
     render(

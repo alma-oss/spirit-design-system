@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { createEvent, fireEvent, render, screen } from '@testing-library/react';
+import { createEvent, fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -9,13 +9,13 @@ import {
   formFieldHelperTextContextPropsTest,
   formFieldLabelContextPropsTest,
   formFieldValidationTextContextPropsTest,
+  iconNamePropTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { renderWithIcons as render } from '@local/tests/testUtils/testIcons';
 import FileUpload from '../FileUpload';
-
-jest.mock('../../../hooks/useIcon');
 
 const defaultProps = { id: 'file-uploader' };
 const defaultPropsWithInput = { id: 'file-upload-input', name: 'file-upload-input', label: 'upload' };
@@ -50,6 +50,8 @@ describe('FileUpload', () => {
       renderComponent: (props) => <FileUpload {...defaultPropsWithInput} {...props} />,
       labelText: 'upload',
     });
+
+    iconNamePropTest(FileUpload, 'iconName', defaultPropsWithInput);
 
     it('should have drag-and-drop class in Client component', () => {
       const { container } = render(<FileUpload {...defaultPropsWithInput} data-testid="test" />);

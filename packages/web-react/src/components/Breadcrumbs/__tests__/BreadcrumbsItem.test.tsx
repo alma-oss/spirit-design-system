@@ -1,16 +1,15 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  iconNamePropTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { renderWithIcons as render } from '@local/tests/testUtils/testIcons';
 import BreadcrumbsItem from '../BreadcrumbsItem';
-
-jest.mock('../../../hooks/useIcon');
 
 describe('BreadcrumbsItem', () => {
   classNamePrefixProviderTest(BreadcrumbsItem, 'd-none');
@@ -23,6 +22,10 @@ describe('BreadcrumbsItem', () => {
   validHtmlAttributesTest(BreadcrumbsItem);
 
   ariaAttributesTest(BreadcrumbsItem);
+
+  iconNamePropTest(BreadcrumbsItem, 'iconNameEnd');
+
+  iconNamePropTest(BreadcrumbsItem, 'iconNameStart', { isGoBackOnly: true });
 
   describe('BreadcrumbsItem with go back title', () => {
     const BreadcrumbsItemGoBack = () => (
