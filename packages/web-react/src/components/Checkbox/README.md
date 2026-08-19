@@ -105,7 +105,7 @@ import React from 'react';
 import { Checkbox, Collapse, Link, Text, useCollapse } from '@alma-oss/spirit-web-react';
 
 const Example = () => {
-  const { isOpen, toggleHandler } = useCollapse(false);
+  const { isOpen, toggle } = useCollapse(false);
 
   return (
     <Checkbox
@@ -121,7 +121,7 @@ const Example = () => {
             elementType="button"
             color="inherit"
             underlined="always"
-            onClick={toggleHandler}
+            onClick={toggle}
             aria-expanded={isOpen}
             aria-controls="checkbox-terms-collapse"
           >

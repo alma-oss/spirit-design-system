@@ -53,13 +53,13 @@ const meta: Meta<typeof Collapse> = {
 export default meta;
 type Story = StoryObj<typeof Collapse>;
 
-const CollapseWithHooks = (args: SpiritCollapseProps) => {
-  const { isOpen, toggleHandler } = useCollapse(true);
+const CollapseWithHooks = ({ id, ...args }: SpiritCollapseProps) => {
+  const { isOpen, ariaProps } = useCollapse(true, { id });
 
   return (
     <div>
-      <Button onClick={toggleHandler}>Collapse Trigger ({isOpen ? 'Open' : 'Closed'})</Button>
-      <Collapse {...args} isOpen={isOpen}>
+      <Button {...ariaProps.trigger}>Collapse Trigger ({isOpen ? 'Open' : 'Closed'})</Button>
+      <Collapse {...args} {...ariaProps.panel} isOpen={isOpen}>
         {content}
       </Collapse>
     </div>

@@ -45,11 +45,11 @@ import React, { useState } from 'react';
 import { Button, Collapse, useCollapse } from '@alma-oss/spirit-web-react';
 
 export const Example = () => {
-  const { isOpen, toggleHandler } = useCollapse(false);
+  const { isOpen, toggle } = useCollapse(false);
 
   return (
     <>
-      <Button onClick={toggleHandler} aria-expanded={isOpen} aria-controls="collapse-example">
+      <Button onClick={toggle} aria-expanded={isOpen} aria-controls="collapse-example">
         Collapse Trigger ({isOpen ? 'Open' : 'Closed'})
       </Button>
       <Collapse id="collapse-example" isOpen={isOpen}>

@@ -4,7 +4,6 @@ import React from 'react';
 import { type SpiritUncontrolledCollapseProps } from '../../types';
 import Collapse from './Collapse';
 import { useCollapse } from './useCollapse';
-import { useCollapseAriaProps } from './useCollapseAriaProps';
 
 const defaultProps = {
   isOpen: false,
@@ -13,8 +12,7 @@ const defaultProps = {
 const UncontrolledCollapse = (props: SpiritUncontrolledCollapseProps) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { children, isDisposable, renderTrigger, ...restProps } = propsWithDefaults;
-  const { isOpen, toggleHandler } = useCollapse(restProps.isOpen);
-  const { ariaProps } = useCollapseAriaProps({ ...restProps, isOpen });
+  const { isOpen, toggle, ariaProps } = useCollapse(restProps.isOpen, { id: restProps.id });
 
   const triggerRenderHandler = () => {
     const showTrigger = isDisposable ? !(isDisposable && isOpen) : true;
@@ -22,8 +20,8 @@ const UncontrolledCollapse = (props: SpiritUncontrolledCollapseProps) => {
     return renderTrigger && showTrigger
       ? renderTrigger({
           isOpen,
-          onClick: toggleHandler,
           ...ariaProps.trigger,
+          onClick: toggle,
         })
       : null;
   };
@@ -34,7 +32,7 @@ const UncontrolledCollapse = (props: SpiritUncontrolledCollapseProps) => {
       {isDisposable && isOpen ? (
         children
       ) : (
-        <Collapse {...restProps} isOpen={isOpen}>
+        <Collapse {...restProps} {...ariaProps.panel} isOpen={isOpen}>
           {children}
         </Collapse>
       )}

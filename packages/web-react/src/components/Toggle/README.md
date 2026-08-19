@@ -148,7 +148,7 @@ import React from 'react';
 import { Collapse, Link, Text, Toggle, useCollapse } from '@alma-oss/spirit-web-react';
 
 const Example = () => {
-  const { isOpen, toggleHandler } = useCollapse(false);
+  const { isOpen, toggle } = useCollapse(false);
 
   return (
     <Toggle
@@ -164,7 +164,7 @@ const Example = () => {
             elementType="button"
             color="inherit"
             underlined="always"
-            onClick={toggleHandler}
+            onClick={toggle}
             aria-expanded={isOpen}
             aria-controls="toggle-terms-collapse"
           >
