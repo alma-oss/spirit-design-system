@@ -6,7 +6,10 @@ $typography: tokens.$caption;
 $gap: tokens.$space-600;
 $icon-size: units.px-to-rem(20px);
 $padding: tokens.$space-700;
-$border-radius: tokens.$radius-300;
+$border-radius: var(
+    --#{tokens.$css-variable-prefix}alert-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-alert-border-radius, #{tokens.$radius-300})
+);
 $border-style: solid;
 $border-width: tokens.$border-width-100;
 

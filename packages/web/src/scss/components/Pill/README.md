@@ -24,6 +24,8 @@ Apply the matching `color-scheme-on-*` helper to each variant:
 
 ℹ️ Even though the `Pill--<color>` modifier is not used by default, it can be used to override the color scheme when needed. See [Component Color Overrides][component-color-overrides] for more information.
 
+The default radius can be customized with an optional device token. See [Component Radius Overrides][component-radius-overrides].
+
 ### Subtle Variant
 
 Use the `*-subtle` color scheme class when you need a softer color intensity:
@@ -46,3 +48,4 @@ Pill works well for short labels and numeric counts, but it can also render long
 ```
 
 [component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
+[component-radius-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-radius-overrides

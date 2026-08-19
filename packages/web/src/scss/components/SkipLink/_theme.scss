@@ -2,7 +2,10 @@
 @use '../../settings/transitions';
 
 $background-color: tokens.$background-primary;
-$border-radius: tokens.$radius-300;
+$border-radius: var(
+    --#{tokens.$css-variable-prefix}skip-link-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-skip-link-border-radius, #{tokens.$radius-300})
+);
 $box-shadow: tokens.$shadow-400;
 $offset: tokens.$space-900;
 $padding: tokens.$space-700;

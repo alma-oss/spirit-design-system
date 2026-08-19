@@ -7,7 +7,10 @@
 $padding: calc(#{tokens.$space-400} - #{tokens.$border-width-100});
 $gap: tokens.$space-400;
 $border-width: tokens.$border-width-100;
-$border-radius: tokens.$radius-full;
+$border-radius: var(
+    --#{tokens.$css-variable-prefix}segmented-control-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-segmented-control-border-radius, #{tokens.$radius-full})
+);
 $transition-radio:
     transform transitions.$duration-200 transitions.$timing-eased-in-out,
     background-color transitions.$duration-100 transitions.$timing-eased-out,

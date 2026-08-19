@@ -2,6 +2,7 @@
 // 2. Because this is another component we can't use the specific class.
 
 @use '@tokens' as tokens;
+@use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
 @use 'theme';
 @use 'tools';
@@ -47,3 +48,4 @@
     $dictionary-values: theme.$fill-variant-dictionary,
     $config: theme.$fill-variant-config
 );
+@include component-radius-overrides.generate($class-name: 'SegmentedControl');

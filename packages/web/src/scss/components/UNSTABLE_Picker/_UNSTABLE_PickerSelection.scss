@@ -7,9 +7,10 @@
 
 .UNSTABLE_PickerSelection {
     --#{tokens.$css-variable-prefix}tag-border-radius: calc(
-        var(--#{tokens.$css-variable-prefix}input-container-border-radius) - var(
-                --#{tokens.$css-variable-prefix}input-container-border-width
-            ) -
+        var(
+                --#{tokens.$css-variable-prefix}input-container-border-radius,
+                var(--#{tokens.$css-variable-prefix}local-input-container-border-radius, #{tokens.$radius-300})
+            ) - var(--#{tokens.$css-variable-prefix}input-container-border-width) -
             #{theme.$padding-x}
     );
 

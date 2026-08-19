@@ -6,6 +6,7 @@
 
 @use 'sass:map';
 @use '../../tools/breakpoint';
+@use '../../tools/component-radius-overrides';
 @use '../../tools/typography';
 @use 'theme';
 
@@ -93,3 +94,5 @@
         min-height: theme.$dialog-docked-expanded-min-height;
     }
 }
+
+@include component-radius-overrides.generate($class-name: 'ModalDialog', $token-prefix: 'modal');

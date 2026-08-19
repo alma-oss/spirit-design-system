@@ -1,5 +1,6 @@
 @use 'theme';
 @use '@tokens' as tokens;
+@use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
 @use '../../tools/typography';
 
@@ -47,4 +48,10 @@
     $dictionary-values: theme.$size-dictionary,
     $config: theme.$size-config,
     $breakpoints: theme.$breakpoints
+);
+@include component-radius-overrides.generate(
+    $class-name: 'Avatar',
+    $sizes: theme.$size-dictionary,
+    $host-modifier: 'square',
+    $responsive-size-selectors: true
 );

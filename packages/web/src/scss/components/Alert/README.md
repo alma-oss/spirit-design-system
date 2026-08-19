@@ -4,6 +4,8 @@ Variants:
 
 ℹ️ Even though the `Alert--<color>` modifier is not used by default, it can be used to override the color scheme when needed. See [Component Color Overrides][component-color-overrides] for more information.
 
+The default radius can be customized with an optional device token. See [Component Radius Overrides][component-radius-overrides].
+
 ```html
 <div class="Alert Alert--success color-scheme-on-emotion-success-subtle">
   <svg class="Icon" width="20" height="20" aria-hidden="true">
@@ -86,3 +88,4 @@ distinguishable from surrounding text:
 ```
 
 [component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
+[component-radius-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-radius-overrides
