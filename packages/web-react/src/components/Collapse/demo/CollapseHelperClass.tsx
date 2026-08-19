@@ -20,7 +20,7 @@ const CollapseHelperClass = () => {
         posuere tristique bibendum aliquam. In donec dolor ut, imperdiet quam fermentum molestie vulputate scelerisque
         ac nec, tortor mi orci sollicitudin elementum.
       </p>
-      <Collapse id="collapse-helper-class-id" isOpen={isOpen}>
+      <Collapse {...ariaProps.panel} isOpen={isOpen}>
         Aliquam varius, consequat posuere a lacinia mauris eu tellus condimentum ut id ante, accumsan vehicula nulla
         neque. Mauris mi orci, in donec nullam odio leo sapien et vehicula nunc a lacinia, fermentum arcu ullamcorper
         posuere. Mauris euismod, ac nec ante fermentum praesent nisi commodo neque placerat, vivamus dui et tempus

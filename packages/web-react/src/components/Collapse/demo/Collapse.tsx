@@ -2,7 +2,8 @@
 import { type StoryFn } from '@storybook/react';
 import React from 'react';
 import { Button } from '../../Button';
-import { Collapse, useCollapse } from '../index';
+import { Collapse } from '../index';
+import { useCollapse } from '../useCollapse';
 
 export const content = (
   <>
@@ -32,13 +33,13 @@ export const CollapseTrigger = ({ isOpen, ...rest }: any) => (
 );
 
 const Story: StoryFn<typeof Collapse> = () => {
-  const { isOpen, toggleHandler } = useCollapse(false);
+  const { isOpen, ariaProps } = useCollapse(false, { id: 'collapse-id' });
 
   return (
     <div>
       {content}
-      <CollapseTrigger isOpen={isOpen} onClick={toggleHandler} />
-      <Collapse id="collapse-id" isOpen={isOpen}>
+      <CollapseTrigger isOpen={isOpen} {...ariaProps.trigger} />
+      <Collapse {...ariaProps.panel} isOpen={isOpen}>
         {content}
       </Collapse>
     </div>

@@ -4,14 +4,14 @@ import Collapse from '../Collapse';
 import { useCollapse } from '../useCollapse';
 
 const CollapseVisibilityBreakpointTablet = () => {
-  const { isOpen: isOpenTablet, toggleHandler: toggleHandlerTablet } = useCollapse(false);
+  const { isOpen, ariaProps } = useCollapse(false, { id: 'collapse-visibility-breakpoint-tablet-id' });
 
   return (
     <>
-      <ButtonLink onClick={toggleHandlerTablet} size="medium" hideFrom="tablet">
+      <ButtonLink {...ariaProps.trigger} size="medium" hideFrom="tablet">
         Collapse trigger
       </ButtonLink>
-      <Collapse id="collapse-visibility-breakpoint-tablet-id" isOpen={isOpenTablet} collapsibleToBreakpoint="tablet">
+      <Collapse {...ariaProps.panel} isOpen={isOpen} collapsibleToBreakpoint="tablet">
         Turpis cursus, urna vehicula sed porttitor nulla non mauris sapien congue, urna dui augue facilisis. Nunc elit,
         ipsum porttitor curabitur sapien nulla finibus quis pulvinar, commodo convallis lorem fringilla nec. Quam
         libero, vitae massa ornare eget vestibulum et iaculis quisque sapien, turpis maximus maximus vivamus. Nibh

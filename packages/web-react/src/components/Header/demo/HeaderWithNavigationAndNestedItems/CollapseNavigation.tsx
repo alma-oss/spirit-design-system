@@ -1,9 +1,10 @@
 import React from 'react';
+import { type PanelAriaProps } from '../../../../hooks/disclosure';
 import { Collapse } from '../../../Collapse';
 import { NavigationAction, NavigationItem } from '../../../Navigation';
 
-const CollapseNavigation = ({ isOpen }: { isOpen: boolean }) => (
-  <Collapse id="collapse-navigation" isOpen={isOpen}>
+const CollapseNavigation = ({ isOpen, panelAriaProps }: { isOpen: boolean; panelAriaProps: PanelAriaProps }) => (
+  <Collapse {...panelAriaProps} isOpen={isOpen}>
     <ul>
       <NavigationItem>
         <NavigationAction href="https://www.example.com">My Account</NavigationAction>

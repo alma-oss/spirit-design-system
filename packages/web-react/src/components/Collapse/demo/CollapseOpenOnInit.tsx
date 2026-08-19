@@ -4,12 +4,12 @@ import Collapse from '../Collapse';
 import { useCollapse } from '../useCollapse';
 
 const CollapseOpenOnInit = () => {
-  const { isOpen, toggleHandler } = useCollapse(true);
+  const { isOpen, ariaProps } = useCollapse(true, { id: 'collapse-open-on-init-id' });
 
   return (
     <>
-      <Button onClick={toggleHandler}>Collapse trigger</Button>
-      <Collapse id="collapse-open-on-init-id" isOpen={isOpen}>
+      <Button {...ariaProps.trigger}>Collapse trigger</Button>
+      <Collapse {...ariaProps.panel} isOpen={isOpen}>
         Cras dictum ante, mollis ollicitudin proin bibendum nec commodo consequat fusce ante, consequat venenatis
         suscipit odio morbi. Dolor sit amet porta, placerat tristique sit amet ligula nisl risus et vehicula, suscipit
         accumsan nunc curabitur. Et neque, augue ut nulla a sed porta scelerisque proin, elit sapien lacinia felis.
