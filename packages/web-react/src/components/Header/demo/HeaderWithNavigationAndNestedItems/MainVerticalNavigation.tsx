@@ -9,7 +9,7 @@ interface DrawerWithNavigationProps {
 }
 
 const DrawerWithNavigation = ({ 'aria-label': ariaLabel }: DrawerWithNavigationProps) => {
-  const { isOpen: isCollapseOpen, toggleHandler: toggleCollapseHandler } = useCollapse(false);
+  const { isOpen: isCollapseOpen, ariaProps: collapseAriaProps } = useCollapse(false, { id: 'collapse-navigation' });
 
   return (
     <Navigation aria-label={ariaLabel} direction="vertical">
@@ -24,13 +24,12 @@ const DrawerWithNavigation = ({ 'aria-label': ariaLabel }: DrawerWithNavigationP
       <NavigationItem>
         <NavigationAction
           elementType="button"
-          aria-expanded={isCollapseOpen}
-          onClick={toggleCollapseHandler}
+          {...collapseAriaProps.trigger}
           endSlot={<Icon name={`chevron-${isCollapseOpen ? 'up' : 'down'}`} />}
         >
           Menu
         </NavigationAction>
-        <CollapseNavigation isOpen={isCollapseOpen} />
+        <CollapseNavigation isOpen={isCollapseOpen} panelAriaProps={collapseAriaProps.panel} />
       </NavigationItem>
       <NavigationItem>
         <NavigationAction href="#" isDisabled>

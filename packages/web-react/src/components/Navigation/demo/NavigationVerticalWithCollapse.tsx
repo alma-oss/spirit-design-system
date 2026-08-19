@@ -6,7 +6,7 @@ import NavigationAction from '../NavigationAction';
 import NavigationItem from '../NavigationItem';
 
 const NavigationVerticalWithCollapse = () => {
-  const { isOpen, toggleHandler } = useCollapse(true);
+  const { isOpen, ariaProps } = useCollapse(true, { id: 'collapse-navigation' });
 
   return (
     <Navigation aria-label="Nested Vertical" direction="vertical">
@@ -19,13 +19,12 @@ const NavigationVerticalWithCollapse = () => {
       <NavigationItem>
         <NavigationAction
           elementType="button"
-          onClick={toggleHandler}
-          aria-expanded={isOpen}
+          {...ariaProps.trigger}
           endSlot={<Icon name={`chevron-${isOpen ? 'up' : 'down'}`} />}
         >
           My bucket
         </NavigationAction>
-        <Collapse id="collapse-navigation" isOpen={isOpen}>
+        <Collapse {...ariaProps.panel} isOpen={isOpen}>
           <ul>
             <NavigationItem>
               <NavigationAction href="/">Webdesign 2026</NavigationAction>

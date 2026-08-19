@@ -6,7 +6,7 @@ import Toggle from '../Toggle';
 
 const ToggleConsentCollapseExample = () => {
   const [isChecked, setChecked] = useState(true);
-  const { isOpen, toggleHandler } = useCollapse(false);
+  const { isOpen, ariaProps } = useCollapse(false, { id: 'consent-with-collapse-example-details' });
 
   return (
     <Toggle
@@ -21,17 +21,10 @@ const ToggleConsentCollapseExample = () => {
             I agree that Bright Horizon Ltd., Nova Talent Group, Summit Recruiting Co., Blueharbor Staffing Inc. and
             Ironclad Careers Ltd. may let me know when they have another suitable position for me.
           </Text>
-          <Link
-            elementType="button"
-            color="inherit"
-            underlined="always"
-            onClick={toggleHandler}
-            aria-expanded={isOpen}
-            aria-controls="consent-with-collapse-example-details"
-          >
+          <Link elementType="button" color="inherit" underlined="always" {...ariaProps.trigger}>
             Show more
           </Link>
-          <Collapse id="consent-with-collapse-example-details" isOpen={isOpen}>
+          <Collapse {...ariaProps.panel} isOpen={isOpen}>
             <p>
               You can withdraw this consent at any time in your account settings or by contacting our support team.
               Withdrawing your consent will not affect the lawfulness of any processing carried out before that point.

@@ -4,12 +4,15 @@ import Collapse from '../Collapse';
 import { useCollapse } from '../useCollapse';
 
 const CollapseMultipleTriggers = () => {
-  const { isOpen, toggleHandler } = useCollapse(false);
+  const { isOpen, ariaProps } = useCollapse(false, { id: 'collapse-multiple-triggers-id' });
+  // Only one trigger may carry the generated `id` — the others still need matching aria-expanded/aria-controls/onClick.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { id: _triggerId, ...sharedTriggerAriaProps } = ariaProps.trigger;
 
   return (
     <>
-      <Button onClick={toggleHandler}>Collapse trigger</Button>
-      <Collapse id="collapse-multiple-triggers-id" isOpen={isOpen}>
+      <Button {...ariaProps.trigger}>Collapse trigger</Button>
+      <Collapse {...ariaProps.panel} isOpen={isOpen}>
         Aliquam varius, consequat posuere a lacinia mauris eu tellus condimentum ut id ante, accumsan vehicula nulla
         neque. Mauris mi orci, in donec nullam odio leo sapien et vehicula nunc a lacinia, fermentum arcu ullamcorper
         posuere. Mauris euismod, ac nec ante fermentum praesent nisi commodo neque placerat, vivamus dui et tempus
@@ -18,10 +21,10 @@ const CollapseMultipleTriggers = () => {
         bibendum nunc aenean facilisis. Phasellus euismod, donec sem odio ligula praesent finibus nibh convallis,
         tristique aliquam sed id tortor sem lobortis.
       </Collapse>
-      <Button onClick={toggleHandler} color="secondary">
+      <Button {...sharedTriggerAriaProps} color="secondary">
         Secondary trigger
       </Button>{' '}
-      <ButtonLink onClick={toggleHandler} aria-expanded={isOpen} color="tertiary">
+      <ButtonLink {...sharedTriggerAriaProps} color="tertiary">
         Tertiary trigger
       </ButtonLink>
     </>
