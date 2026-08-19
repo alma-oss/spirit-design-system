@@ -160,9 +160,11 @@ export const CvEditor = () => {
                   </Grid>
                 </CardFooter>
               </Card>
-              {/* Floating actions, tablet + desktop only. Box is used here so we can use zero padding-x since the padding
-                  is already provided by NavigationItems.
-              */}
+              {/* Floating actions, tablet + desktop only. */}
+              {/* TODO: Consider removing the baked-in horizontal padding from NavigationItems.
+                  It's why this Box uses zero padding-x and relies on NavigationAction's own pill padding
+                  instead of a uniform Box padding like Panel uses elsewhere — a workaround, not a choice.
+               */}
               <Box
                 backgroundColor="primary"
                 borderColor="basic"
