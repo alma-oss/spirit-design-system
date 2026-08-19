@@ -1,4 +1,5 @@
 export * from './collection';
+export * from './disclosure';
 export * from './styleProps';
 export * from './useAutoFocus';
 export * from './useAlignmentClass';
@@ -9,6 +10,7 @@ export * from './useClassNamePrefix';
 export * from './useClick';
 export * from './useClickOutside';
 export * from './useControlledModeGuard';
+export * from './useControlledState';
 export * from './useDebouncedValue';
 export * from './useDeprecationMessage';
 export * from './useDimensionStyle';
