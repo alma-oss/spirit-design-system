@@ -28,6 +28,7 @@ const keyEvent = (key: string): KeyboardEvent<HTMLElement> =>
   ({
     key,
     preventDefault: jest.fn(),
+    stopPropagation: jest.fn(),
     ctrlKey: false,
     metaKey: false,
     altKey: false,
@@ -104,18 +105,18 @@ describe('useSplitTagListboxKeyboard', () => {
     expect(focusSpy).toHaveBeenCalled();
   });
 
-  it('should clamp ArrowDown at the last option', () => {
+  it('should wrap ArrowDown from the last option to the first', () => {
     const { result, container } = renderListboxKeyboard();
-    const focusSpy = jest.spyOn(container.querySelector<HTMLElement>('#option-3')!, 'focus');
+    const focusSpy = jest.spyOn(container.querySelector<HTMLElement>('#option-0')!, 'focus');
 
     result.current.getOptionProps('+50 km').onKeyDown(keyEvent('ArrowDown'));
 
     expect(focusSpy).toHaveBeenCalled();
   });
 
-  it('should clamp ArrowUp at the first option', () => {
+  it('should wrap ArrowUp from the first option to the last', () => {
     const { result, container } = renderListboxKeyboard();
-    const focusSpy = jest.spyOn(container.querySelector<HTMLElement>('#option-0')!, 'focus');
+    const focusSpy = jest.spyOn(container.querySelector<HTMLElement>('#option-3')!, 'focus');
 
     result.current.getOptionProps('+5 km').onKeyDown(keyEvent('ArrowUp'));
 

@@ -1,6 +1,7 @@
 export { default as UNSTABLE_Combobox } from './UNSTABLE_Combobox';
 export { default as UNSTABLE_ComboboxOption } from './UNSTABLE_ComboboxOption';
 export { default as UNSTABLE_ComboboxSelection } from './UNSTABLE_ComboboxSelection';
+export { default as UNSTABLE_ComboboxSplitTag } from './UNSTABLE_ComboboxSplitTag';
 export { default as UNSTABLE_ComboboxTag } from './UNSTABLE_ComboboxTag';
 export { default as UNSTABLE_UncontrolledCombobox } from './UNSTABLE_UncontrolledCombobox';
 export { ComboboxPopoverContextProvider, useComboboxPopoverContext } from './ComboboxPopoverContext';

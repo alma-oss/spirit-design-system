@@ -127,6 +127,35 @@ export interface UnstableComboboxTagProps extends Omit<
   removeLabel?: string;
 }
 
+/** Option for the nested select segment on `UNSTABLE_ComboboxSplitTag`. */
+export type UnstableComboboxSplitTagSelectOption = string | { value: string; label: ReactNode };
+
+/** Controlled select segment rendered between the label and remove control. */
+export interface UnstableComboboxSplitTagSelectProps {
+  value: string;
+  options: UnstableComboboxSplitTagSelectOption[];
+  onChange: (value: string) => void;
+  /** Accessible name for the select trigger. */
+  'aria-label'?: string;
+  /** Accessible name for the options listbox. @default "Options" */
+  listboxLabel?: string;
+  /** Stable id prefix for the nested Dropdown / option ids. */
+  id?: string;
+}
+
+export interface UnstableComboboxSplitTagProps {
+  /** Primary label segment (e.g. city name). */
+  label: ReactNode;
+  onRemove: () => void;
+  removeLabel?: string;
+  tagKeyboardProps?: SelectionGridRowProps;
+  isDisabled?: boolean;
+  /** Nested select segment (e.g. distance). */
+  select: UnstableComboboxSplitTagSelectProps;
+}
+
+export type SpiritUnstableComboboxSplitTagProps = UnstableComboboxSplitTagProps;
+
 export interface UnstableComboboxRef {
   /**
    * Visually activate an option by value (or clear with `null`).
@@ -141,6 +170,11 @@ export interface UnstableComboboxRef {
 export interface UnstableComboboxContextType {
   size: SizesDictionaryType;
   tagDescriptionId?: string;
+  /** Whether the Combobox options popover is open (for nested overlays in selection tags). */
+  isOpen?: boolean;
+  /** Toggle the Combobox options popover. */
+  onToggle?: () => void;
+  isDisabled?: boolean;
 }
 
 export interface UnstableComboboxPopoverContextValue {

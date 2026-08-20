@@ -139,12 +139,12 @@ export const useSplitTagListboxKeyboard = ({
             case 'ArrowDown':
               event.preventDefault();
               event.stopPropagation();
-              focusValueAt(Math.min(index + 1, optionValues.length - 1));
+              focusValueAt(optionValues.length === 0 ? -1 : (index + 1) % optionValues.length);
               break;
             case 'ArrowUp':
               event.preventDefault();
               event.stopPropagation();
-              focusValueAt(Math.max(index - 1, 0));
+              focusValueAt(optionValues.length === 0 ? -1 : (index - 1 + optionValues.length) % optionValues.length);
               break;
             case 'Home':
               event.preventDefault();

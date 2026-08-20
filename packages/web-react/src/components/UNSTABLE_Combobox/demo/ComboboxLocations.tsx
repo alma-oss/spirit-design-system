@@ -47,13 +47,12 @@ const ComboboxLocations = () => {
       selectedKeys={selectedKeys}
       renderTags={({ getKeyboardGridRowProps, removeTagAtIndex, selectedItems }) =>
         selectedItems.map((item, index) => {
-          const cityLabel = String(item.label);
           const distance = distances[item.value] ?? DEFAULT_LOCATION_DISTANCE;
 
           return (
             <UNSTABLE_ComboboxSplitTag
               key={item.value}
-              label={cityLabel}
+              label={item.label}
               onRemove={() => removeTagAtIndex(index)}
               select={{
                 id: `demo-combobox-locations-distance-${item.value}`,

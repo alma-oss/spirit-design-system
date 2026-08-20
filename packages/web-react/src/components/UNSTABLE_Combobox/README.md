@@ -13,6 +13,7 @@ Combobox is a composition of:
 - [UNSTABLE_Combobox](#unstable_combobox) – Main container; you control `selectedKeys`, `isOpen`, `onToggle`, `inputValue`, and `onInputChange` (same open pattern as [Dropdown][dropdown-readme])
 - [UNSTABLE_ComboboxOption](#unstable_comboboxoption) – One option in the popover (`option` or grid `row`)
 - [UNSTABLE_ComboboxTag](#unstable_comboboxtag) – Tag layout for custom `renderTags` output
+- [UNSTABLE_ComboboxSplitTag](#unstable_comboboxsplittag) – SplitTag layout with a nested select for custom `renderTags` output
 
 Optional convenience wrapper (you do not need it to build the composition):
 
@@ -23,14 +24,16 @@ For structure, accessibility, and layout, see the [UNSTABLE Combobox web documen
 ## UNSTABLE_Combobox
 
 UNSTABLE_Combobox is the main container of the composition. Popover open state uses **`isOpen`** and **`onToggle`**,
-like [Dropdown][dropdown-readme]. Selection uses **`selectedKeys`** and **`onSelectionChange`**. The filter string is
-controlled via **`inputValue`** / **`onInputChange`** — **filtering and async loading are owned by the consumer**.
+like [Dropdown][dropdown-readme] (internally `useComboboxDisclosureState`). You can drive that from
+[`useDisclosureState`][disclosure-hooks] (`isOpen={isExpanded}` / `onToggle={toggle}`) or any other toggle. Selection
+uses **`selectedKeys`** and **`onSelectionChange`**. The filter string is controlled via **`inputValue`** /
+**`onInputChange`** — **filtering and async loading are owned by the consumer**.
 
 ### Basic Usage
 
 ```tsx
 import React, { useMemo, useState } from 'react';
-import { Label, UNSTABLE_Combobox, UNSTABLE_ComboboxOption, useToggle } from '@alma-oss/spirit-web-react';
+import { Label, UNSTABLE_Combobox, UNSTABLE_ComboboxOption, useDisclosureState } from '@alma-oss/spirit-web-react';
 
 const ALL_OPTIONS = [
   { id: 'cs', label: 'Czech' },
@@ -38,7 +41,7 @@ const ALL_OPTIONS = [
 ];
 
 export const Example = () => {
-  const [isOpen, onToggle] = useToggle(false);
+  const { isExpanded: isOpen, toggle: onToggle } = useDisclosureState({ defaultExpanded: false });
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
 
@@ -175,8 +178,9 @@ If you omit `tagKeyboardProps` / row keyboard props, custom tags are not on the 
 `removeTagAtIndex` still apply.
 
 Default selection uses [`UNSTABLE_ComboboxTag`](#unstable_comboboxtag) (a single [Tag][tag-readme]). For joined
-segments (city + distance + remove), compose [`UNSTABLE_SplitTag`][splittag-readme] inside each `role="row"` —
-see the **Locations** demo.
+segments (label + select + remove), use [`UNSTABLE_ComboboxSplitTag`](#unstable_comboboxsplittag) — see the
+**Locations** demo. For a fully custom row, compose your own `role="row"` (for example with
+[`UNSTABLE_SplitTag`][splittag-readme]) and pass `getKeyboardGridRowProps`.
 
 ### Themes
 
@@ -358,8 +362,11 @@ and [escape hatches][readme-escape-hatches].
 
 ## UNSTABLE_ComboboxTag
 
-UNSTABLE_ComboboxTag is the tag shell for custom `renderTags` output. It applies combobox sizing and accessibility
-roles consistent with the default tags. It wraps [Tag][tag-readme] with fixed `color`, `elementType`, and `size`.
+UNSTABLE_ComboboxTag is the tag shell for custom `renderTags` output. It applies accessibility roles consistent with
+the default tags (`role="row"`, remove control). Nested [Tag][tag-readme] `color` / `size` and remove
+[ControlButton][control-button] `size` come from Combobox’s [`ContextPropsProvider`][context-props] (mapped from the
+Combobox shell `size`). Combobox-specific values such as `tagDescriptionId` and nested overlay open state stay on
+Combobox context — not ContextProps.
 
 ### API
 
@@ -376,11 +383,70 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
+## UNSTABLE_ComboboxSplitTag
+
+`UNSTABLE_ComboboxSplitTag` is a data-driven selection row for `renderTags`: a
+[`UNSTABLE_SplitTag`][splittag-readme] with a label segment, nested select (Dropdown + listbox), and remove
+control. Wire `tagKeyboardProps` the same way as [`UNSTABLE_ComboboxTag`](#unstable_comboboxtag). Nested overlay
+and keyboard behaviour (including closing the Combobox popover when the select opens) is handled via Combobox
+context; Tag / ControlButton sizing and `isDisabled` come from Combobox [`ContextPropsProvider`][context-props].
+
+The nested select open state is managed with [`useDisclosureState`][disclosure-hooks] inside the component. The
+Combobox popover itself stays on the public **`isOpen`** / **`onToggle`** API and `useComboboxDisclosureState` —
+do not treat the Combobox input as an ARIA disclosure.
+
+```tsx
+renderTags={({ getKeyboardGridRowProps, removeTagAtIndex, selectedItems }) =>
+  selectedItems.map((item, index) => (
+    <UNSTABLE_ComboboxSplitTag
+      key={item.value}
+      label={item.label}
+      onRemove={() => removeTagAtIndex(index)}
+      tagKeyboardProps={getKeyboardGridRowProps(index)}
+      select={{
+        value: distances[item.value],
+        options: ['+5 km', '+10 km', '+20 km', '+50 km'],
+        onChange: (next) => setDistances((current) => ({ ...current, [item.value]: next })),
+      }}
+    />
+  ))
+}
+```
+
+### API
+
+| Name               | Type                                  | Default                         | Required | Description                                                |
+| ------------------ | ------------------------------------- | ------------------------------- | -------- | ---------------------------------------------------------- |
+| `isDisabled`       | `bool`                                | Combobox `isDisabled`           | ✕        | Disables the row                                           |
+| `label`            | `ReactNode`                           | —                               | ✓        | Primary label segment                                      |
+| `onRemove`         | `() => void`                          | —                               | ✓        | Remove button handler                                      |
+| `removeLabel`      | `string`                              | i18n `combobox.removeItemLabel` | ✕        | Accessible name for remove; supports `{itemLabel}`         |
+| `select`           | `UnstableComboboxSplitTagSelectProps` | —                               | ✓        | Controlled select segment (`value`, `options`, `onChange`) |
+| `tagKeyboardProps` | `SelectionGridRowProps`               | —                               | ✕        | Row props from `getKeyboardGridRowProps` in `renderTags`   |
+
+#### `select`
+
+| Name           | Type                             | Default                     | Required | Description                            |
+| -------------- | -------------------------------- | --------------------------- | -------- | -------------------------------------- |
+| `aria-label`   | `string`                         | derived from selected value | ✕        | Accessible name for the select trigger |
+| `id`           | `string`                         | auto                        | ✕        | Id prefix for Dropdown / option ids    |
+| `listboxLabel` | `string`                         | `"Options"`                 | ✕        | Accessible name for the listbox        |
+| `onChange`     | `(value: string) => void`        | —                           | ✓        | Selected option change                 |
+| `options`      | `string[] \| { value, label }[]` | —                           | ✓        | Select options                         |
+| `value`        | `string`                         | —                           | ✓        | Selected option value                  |
+
+On top of the API options, the components accept [additional attributes][readme-additional-attributes].
+If you need more control over the styling of a component, you can use [style props][readme-style-props]
+and [escape hatches][readme-escape-hatches].
+
 [combobox-themes-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Combobox/demo/ComboboxThemes.tsx
 [combobox-web]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_Combobox/README.md
+[context-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#shared-and-inherited-props
+[control-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ControlButton/README.md
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [dictionary-variant]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#fill-variants
+[disclosure-hooks]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/hooks/disclosure/README.md
 [dropdown-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Dropdown/README.md
 [item-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Item/README.md
 [picker-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Picker/README.md
