@@ -192,10 +192,13 @@ results are ambiguous or the match is implausible.
 
 When a Figma instance has no Code Connect snippet, the root cause is one of two very different things:
 
-- **Component exists in code but has no Code Connect binding** — the fix is to add a `.figma.tsx` Code Connect file (DS work only).
+- **Component exists in code but has no Code Connect binding** — the fix is to add a Code Connect
+  file (DS work only). Code Connect files use one of these patterns: `*.figma.tsx`, `*.figma.ts`,
+  or `*.figma.stories.tsx`.
 - **Component does not exist in code at all** — the Code Connect gap is a downstream symptom; the real work is implementing the component first.
 
-To determine which case applies, grep the codebase for the component name.
+To determine which case applies, search the codebase for the component name and for its Code
+Connect file.
 
 1. Resolve the components search path by trying the following in order, stopping at the first match:
    1. `packages/web-react/src/components/` — Spirit's default components path
@@ -207,16 +210,37 @@ To determine which case applies, grep the codebase for the component name.
    as "not yet implemented".
 
 2. Grep the resolved path for the component name:
+
    ```bash
    grep -r "ComponentName" <resolved-path> --include="*.tsx" -l 2>/dev/null | head -1
    ```
 
+3. When the component exists, look for its Code Connect file. Match **all** Code Connect file
+   patterns — a component may be bound from any of them, so a `*.figma.tsx`-only search reports
+   false "lacks Code Connect" gaps:
+
+   ```bash
+   find <resolved-path> \
+     \( -name "*.figma.tsx" -o -name "*.figma.ts" -o -name "*.figma.stories.tsx" \) \
+     -path "*ComponentName*" 2>/dev/null | head -5
+   ```
+
+   If the component's files are not laid out per-directory, fall back to matching the file name
+   instead of the path:
+
+   ```bash
+   find <resolved-path> \
+     \( -name "ComponentName.figma.tsx" -o -name "ComponentName.figma.ts" \
+        -o -name "ComponentName.figma.stories.tsx" \) 2>/dev/null | head -5
+   ```
+
 Apply the result as follows:
 
-| Grep result | Case                            | Development Considerations wording                                                                                                | Required DS Changes entry              |
-| ----------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| Match found | Exists in code, no Code Connect | `🚨 \`ComponentName\` lacks Code Connect — component is implemented (path: \`packages/…\`) but has no Figma Code Connect binding` | "Add Code Connect for `ComponentName`" |
-| No match    | Not yet implemented             | `🚨 \`ComponentName\` is not yet implemented — no code equivalent exists; implement from DS primitives, then add Code Connect`    | "Implement `ComponentName`"            |
+| Step 2 (component) | Step 3 (Code Connect file) | Case                                            | Development Considerations wording                                                                                                            | Required DS Changes entry                    |
+| ------------------ | -------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| Match found        | No match                   | Exists in code, no Code Connect                 | `🚨 \`ComponentName\` lacks Code Connect — component is implemented (path: \`packages/…\`) but has no Figma Code Connect binding`             | "Add Code Connect for `ComponentName`"       |
+| Match found        | Match found                | Code Connect exists but is stale or unpublished | `⚠️ \`ComponentName\` has a Code Connect file (\`<matched path>\`) but Figma returns no snippet — the mapping is likely stale or unpublished` | "Republish Code Connect for `ComponentName`" |
+| No match           | —                          | Not yet implemented                             | `🚨 \`ComponentName\` is not yet implemented — no code equivalent exists; implement from DS primitives, then add Code Connect`                | "Implement `ComponentName`"                  |
 
 **Product-specific components** (names with a product prefix such as `OPU-`, `Cyborg-`, or similar) will not be added to the Spirit DS. For these:
 
@@ -882,6 +906,7 @@ Before writing the final report:
 - _(component)_ Dictionary enum completeness checked against DICTIONARIES.md
 - _(component)_ Interaction state completeness checked for all property combinations
 - All component instances checked for Code Connect mapping
+- _(Code Connect gaps)_ Codebase searched for **all** Code Connect file patterns (`*.figma.tsx`, `*.figma.ts`, `*.figma.stories.tsx`) before reporting a component as lacking Code Connect
 - `search_design_system` or `get_code_connect_suggestions` called for any layer with no Code Connect snippet that appears to be a custom primitive — replacement suggestion included when the match is credible
 - Detached components identified (frames with DS component names) → flagged as findings
 - Modified instances: not detectable via MCP — note in report that manual verification in Figma is required
