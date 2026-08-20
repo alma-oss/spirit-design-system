@@ -223,10 +223,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@alma-oss/spirit-figma-assets-exporter@workspace:^, @alma-oss/spirit-figma-assets-exporter@workspace:exporters/figma-assets":
+  version: 0.0.0-use.local
+  resolution: "@alma-oss/spirit-figma-assets-exporter@workspace:exporters/figma-assets"
+  dependencies:
+    "@types/node": "catalog:types"
+    eslint: "catalog:lint"
+    eslint-config-spirit: "workspace:^"
+    npm-run-all2: "catalog:script"
+    tsup: "catalog:build"
+    tsx: "catalog:script"
+    typescript: "catalog:types"
+  bin:
+    spirit-figma-assets-exporter: ./dist/bin/figma-assets.js
+  languageName: unknown
+  linkType: soft
+
 "@alma-oss/spirit-icons@npm:^4.0.0, @alma-oss/spirit-icons@workspace:^, @alma-oss/spirit-icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-icons@workspace:packages/icons"
   dependencies:
+    "@alma-oss/spirit-figma-assets-exporter": "workspace:^"
     "@alma-oss/vite-plugin-spirit-icons": "workspace:^"
     "@types/node": "catalog:types"
     "@types/react": "catalog:types"
