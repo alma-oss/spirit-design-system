@@ -203,7 +203,7 @@ Code Connect configuration is defined in `packages/web-react/figma.config.json`.
 ### Connected Components
 
 You can see which components are already connected by looking for files
-with the suffix `.figma.tsx` in their component directory in `figma` folder.
+with the suffix `.figma.ts` in their component directory in `figma` folder.
 
 ### Creating New Connections
 
@@ -214,7 +214,7 @@ yarn workspace @alma-oss/spirit-web-react run figma:connect
 ```
 
 This will guide you through the process of creating a new Code Connect file.
-Alternatively, you can create the file manually by following the pattern in existing `*.figma.tsx` files.
+Alternatively, you can create the file manually by following the pattern in existing `*.figma.ts` files.
 
 ### Publishing to Figma
 

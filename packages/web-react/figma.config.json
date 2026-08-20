@@ -1,16 +1,10 @@
 {
   "codeConnect": {
-    "include": ["src/components/**/*.{tsx,ts}"],
+    "include": ["src/components/**/*.figma.ts"],
     "label": "React",
     "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-",
     "documentUrlSubstitutions": {
       "<FIGMA_FILE_ID>": "https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-"
-    },
-    "importPaths": {
-      "src/components/*": "@alma-oss/spirit-web-react"
-    },
-    "storybook": {
-      "url": "https://spirit-design-system-storybook.netlify.app"
     }
   }
 }

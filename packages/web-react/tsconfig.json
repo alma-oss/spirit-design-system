@@ -13,6 +13,10 @@
     // @see: https://www.typescriptlang.org/tsconfig/#moduleResolution
     "moduleResolution": "bundler",
 
+    // Add figma type declarations for Code Connect .figma.ts files.
+    // @see: https://www.npmjs.com/package/@figma/code-connect
+    "types": ["node", "jest", "@testing-library/jest-dom", "@figma/code-connect/figma-types"],
+
     "baseUrl": ".",
 
     "paths": {
