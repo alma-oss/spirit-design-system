@@ -28,6 +28,7 @@ const INPUT_IDS = {
     searchResults: 'combobox-search-results-input',
     lastSearches: 'combobox-last-searches-input',
     tip: 'combobox-tip-input',
+    locations: 'combobox-locations-input',
   },
   'web-react': {
     default: 'combobox-demo-combobox-default-input',
@@ -35,6 +36,7 @@ const INPUT_IDS = {
     searchResults: 'combobox-demo-combobox-search-results-input',
     lastSearches: 'combobox-demo-combobox-last-searches-grid-input',
     tip: 'combobox-demo-combobox-custom-content-input',
+    locations: 'combobox-demo-combobox-locations-input',
   },
 } as const;
 
@@ -49,6 +51,9 @@ const getComboboxOpenTestConfigs = (packageName: string): ComboboxOpenTestConfig
     { inputId: ids.tip, testName: 'custom-content' },
   ];
 };
+
+const getLocationsInputId = (packageName: string): string =>
+  packageName === 'web' ? INPUT_IDS.web.locations : INPUT_IDS['web-react'].locations;
 
 const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
   if (!packageName) return;
@@ -65,6 +70,7 @@ const runComponentCompareTests = ({ componentsDir, packageName, componentName }:
         await waitForPageLoad(page);
         await hideFromVisualTests(page);
         await runComboboxOpenTests(page, componentName, packageName);
+        await runLocationsSplitTagOpenTest(page, componentName, packageName);
       } catch (error) {
         console.error(`Test for demo ${formattedPackageName} component ${componentName} failed. ${error}`);
         throw error;
@@ -120,6 +126,38 @@ const runComboboxOpenTests = async (page: Page, componentName: string, packageNa
     await restoreSections();
     await page.waitForTimeout(300);
   }
+};
+
+/**
+ * Locations: select a city, then open the nested SplitTag distance select
+ * (Combobox popover closes when the distance menu opens).
+ */
+const runLocationsSplitTagOpenTest = async (
+  page: Page,
+  componentName: string,
+  packageName: string,
+): Promise<void> => {
+  const inputId = getLocationsInputId(packageName);
+  const restoreSections = await isolateComboboxSection(page, inputId);
+  const input = page.locator(`[id="${inputId}"]`);
+
+  await input.click();
+  await expect(input).toHaveAttribute('aria-expanded', 'true');
+  await page.getByRole('option', { name: 'Praha' }).click();
+  await expect(page.getByRole('row', { name: 'Praha, +5 km' })).toBeVisible();
+
+  const distanceTrigger = page.getByRole('button', { name: 'Select distance, selected +5 km' });
+
+  await distanceTrigger.click();
+  await expect(input).toHaveAttribute('aria-expanded', 'false');
+  await expect(distanceTrigger).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.getByRole('listbox', { name: 'Distance' })).toBeVisible();
+  await expect(page.getByRole('listbox', { name: 'Locations' })).toBeHidden();
+  await takeScreenshot(page, `${componentName}-locations`);
+  await page.keyboard.press('Escape');
+  await expect(distanceTrigger).toHaveAttribute('aria-expanded', 'false');
+  await restoreSections();
+  await page.waitForTimeout(300);
 };
 
 const componentName = 'UNSTABLE_Combobox';
