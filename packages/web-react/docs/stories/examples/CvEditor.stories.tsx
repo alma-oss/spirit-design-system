@@ -177,24 +177,31 @@ export const CvEditor = () => {
                 hideOn={['mobile', 'tablet']}
                 paddingY="space-800"
               >
-                {/* role="toolbar": a persistent, always-visible set of CV actions, not a menu (transient,
-                    dismissable) or site navigation (Navigation's implicit `nav` role). */}
+                {/* Shipped as a plain Navigation, i.e. a named `nav` landmark. The prototype uses
+                    `role="toolbar"`: a persistent, always-visible set of CV actions is neither a menu
+                    (transient, dismissable) nor real site navigation. That role is parked in the TODO
+                    below, because Spirit cannot honour the keyboard contract it implies. */}
                 {/* TODO: Allow the `toolbar` pattern for Navigation
 
-                    1. The `toolbar` role implies the keyboard accessibility contract, see:
+                    1. The `toolbar` role implies a keyboard accessibility contract Spirit does not
+                       implement (roving tabindex, arrow keys, Home/End), see:
                        https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/toolbar_role#keyboard_interactions
                        https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
 
                     2. Allow `elementType` for Navigation and its subcomponents.
                        Not critical since the `toolbar` role overrides the <nav> role of Navigation,
                        and the <ul>/<li> markup inside should be harmless.
+
+                    Once both are in place, this becomes:
+
+                    <Navigation
+                      direction="vertical"
+                      aria-orientation="vertical"
+                      aria-label="Správa životopisu"
+                      {...({ role: 'toolbar' } as Record<string, string>)}
+                    >
                  */}
-                <Navigation
-                  direction="vertical"
-                  aria-orientation="vertical"
-                  aria-label="Správa životopisu"
-                  {...({ role: 'toolbar' } as Record<string, string>)}
-                >
+                <Navigation direction="vertical" aria-label="Správa životopisu">
                   {MENU_ITEMS.map(({ iconName, label }) => (
                     <NavigationItem key={label}>
                       <NavigationAction href="#" variant="pill" startSlot={<Icon name={iconName} />}>
@@ -226,14 +233,25 @@ export const CvEditor = () => {
                   >
                     Osobní údaje
                   </Heading>
+                  {/* Shipped as Dropdown's built-in dialog pattern: the trigger gets
+                      `aria-haspopup="dialog"` and the popover `role="dialog"`, both by default, so the
+                      `aria-label` below still names it. The prototype uses a menu instead, parked in the
+                      TODO — Spirit cannot honour that role's keyboard contract yet. */}
                   {/* TODO: Allow the `menu` pattern for Dropdown
 
                       The menu role is a good fit for transient, dismissible contextual actions.
 
-                      Using the `menu` role implies the keyboard accessibility contract, see:
+                      Using the `menu` role implies a keyboard accessibility contract Spirit does not
+                      implement (roving tabindex, arrow keys, Home/End, typeahead), see:
                       https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/menu_role#keyboard_interactions
                       https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
                       https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
+
+                      Once it is in place, this becomes:
+
+                      <DropdownTrigger elementType={ControlButton} size="large" isSymmetrical aria-haspopup="menu">
+                      <DropdownPopover role="menu" aria-label="Možnosti">
+                        <Item elementType="button" role="menuitem" startSlot={<Icon name="edit" />}>
                    */}
                   <Dropdown
                     id="personal-details-actions"
@@ -248,15 +266,15 @@ export const CvEditor = () => {
                         `white` background. Not a problem here: Surface is a Box, and `backgroundColor="primary"`
                         does declare the context. The gap on Card's side remains.
                     */}
-                    <DropdownTrigger elementType={ControlButton} size="large" isSymmetrical aria-haspopup="menu">
+                    <DropdownTrigger elementType={ControlButton} size="large" isSymmetrical>
                       <VisuallyHidden>Zobrazit akce</VisuallyHidden>
                       <Icon name="more" />
                     </DropdownTrigger>
-                    <DropdownPopover role="menu" aria-label="Možnosti">
-                      <Item elementType="button" role="menuitem" startSlot={<Icon name="edit" />}>
+                    <DropdownPopover aria-label="Možnosti">
+                      <Item elementType="button" startSlot={<Icon name="edit" />}>
                         Upravit položku
                       </Item>
-                      <Item elementType="button" role="menuitem" startSlot={<Icon name="placeholder" />}>
+                      <Item elementType="button" startSlot={<Icon name="placeholder" />}>
                         Smazat položku
                       </Item>
                     </DropdownPopover>
