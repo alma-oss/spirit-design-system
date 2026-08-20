@@ -177,6 +177,26 @@ If you want the avatar to be square, don't forget to add the `isSquare` prop to 
 
 ℹ️ The `NavigationAvatar` can be used with different element types (`a`, `button`, `div`, `span`, etc.). Hover and active states only apply to clickable/interactive elements (`a`, `button`, elements with `href` attribute, or elements with `role="button"` or `role="link"`). When using non-interactive elements like `div` or `span`, hover styles will not be applied.
 
+### With Dropdown
+
+`DropdownTrigger` requires one button-like host. Use `elementType={NavigationAvatar}` so the avatar owns the button
+semantics and interaction. `DropdownTrigger` supplies `elementType="button"` through the `navigationAvatar` context
+namespace. A direct `elementType` prop overrides that default.
+
+```tsx
+<Dropdown id="navigation-avatar" isOpen={isOpen} onToggle={onToggle}>
+  <DropdownTrigger
+    elementType={NavigationAvatar}
+    avatarContent={<Icon name="profile" />}
+    aria-label="Profile of Jiří Bárta"
+  >
+    My Account
+    <Icon name="chevron-down" />
+  </DropdownTrigger>
+  <DropdownPopover>{/* ... */}</DropdownPopover>
+</Dropdown>
+```
+
 ### Avatar Size
 
 The avatar inside `NavigationAvatar` can have different sizes. Use the `avatarSize` prop to change its size. The default size is `small`.
