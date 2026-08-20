@@ -43,6 +43,177 @@
   </div>
 </template>
 
+<!-- Autocomplete: SplitTag template (Locations demo) -->
+<template id="combobox-split-tag-template">
+  <div
+    role="row"
+    data-spirit-combobox-tag-row
+    tabindex="-1"
+  >
+    <div
+      role="gridcell"
+      aria-colindex="1"
+      class="d-contents"
+    >
+      <div
+        class="UNSTABLE_SplitTag"
+        role="group"
+        data-spirit-combobox-split-tag
+      >
+        <span class="Tag Tag--selected Tag--small color-scheme-on-selected-basic">
+          <span data-spirit-combobox-tag-label></span>
+        </span>
+        <div class="Dropdown">
+          <button
+            type="button"
+            class="Tag Tag--selected Tag--small color-scheme-on-selected-basic"
+            data-spirit-toggle="dropdown"
+            data-spirit-autoclose="true"
+            data-spirit-combobox-split-distance
+            aria-expanded="false"
+            aria-haspopup="dialog"
+          >
+            <span data-spirit-combobox-split-distance-label>+5 km</span>
+            <span
+              class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical element-stretched"
+              aria-hidden="true"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </span>
+          </button>
+          <div
+            class="DropdownPopover placement-bottom-start"
+            role="dialog"
+            aria-label="Distance options"
+            data-spirit-placement="bottom-start"
+            data-spirit-combobox-split-distance-popover
+          >
+            <div
+              class="Stack Stack--spacing"
+              style="--stack-spacing: var(--spirit-space-300);"
+              role="listbox"
+              aria-label="Distance"
+              data-spirit-combobox-split-distance-listbox
+            >
+              <div
+                role="option"
+                class="Item cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
+                aria-selected="true"
+                tabindex="0"
+                data-spirit-combobox-split-distance-option="+5 km"
+              >
+                <span class="Item__content" role="presentation">
+                  <span class="Label">+5 km</span>
+                </span>
+                <span class="Item__slot" role="presentation">
+                  <svg
+                    class="Icon Icon--selected"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#check-plain" />
+                  </svg>
+                </span>
+              </div>
+              <div
+                role="option"
+                class="Item cursor-pointer"
+                aria-selected="false"
+                tabindex="-1"
+                data-spirit-combobox-split-distance-option="+10 km"
+              >
+                <span class="Item__content" role="presentation">
+                  <span class="Label">+10 km</span>
+                </span>
+                <span class="Item__slot" role="presentation">
+                  <svg
+                    class="Icon Icon--selected d-none"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#check-plain" />
+                  </svg>
+                </span>
+              </div>
+              <div
+                role="option"
+                class="Item cursor-pointer"
+                aria-selected="false"
+                tabindex="-1"
+                data-spirit-combobox-split-distance-option="+20 km"
+              >
+                <span class="Item__content" role="presentation">
+                  <span class="Label">+20 km</span>
+                </span>
+                <span class="Item__slot" role="presentation">
+                  <svg
+                    class="Icon Icon--selected d-none"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#check-plain" />
+                  </svg>
+                </span>
+              </div>
+              <div
+                role="option"
+                class="Item cursor-pointer"
+                aria-selected="false"
+                tabindex="-1"
+                data-spirit-combobox-split-distance-option="+50 km"
+              >
+                <span class="Item__content" role="presentation">
+                  <span class="Label">+50 km</span>
+                </span>
+                <span class="Item__slot" role="presentation">
+                  <svg
+                    class="Icon Icon--selected d-none"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#check-plain" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="Tag Tag--selected Tag--small color-scheme-on-selected-basic"
+          data-spirit-combobox-tag-close
+        >
+          <span
+            class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive ControlButton--hasBackground dynamic-color-border ControlButton--symmetrical element-stretched"
+            aria-hidden="true"
+          >
+            <svg
+              class="Icon"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <use href="/assets/icons/svg/sprite.svg#close" />
+            </svg>
+          </span>
+          <span class="accessibility-hidden">Remove</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
 <section class="py-900 py-tablet-1000">
   <div class="Container">
 
@@ -262,6 +433,136 @@
                   class="Item color-scheme-on-selected-subtle bg-color-scheme"
                 >
                   <span class="Label element-stretched cursor-pointer">Slovak</span>
+                </div>
+              </div>
+
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Locations (with SplitTag)</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div
+        class="UNSTABLE_Combobox"
+        data-spirit-element="combobox"
+        data-spirit-combobox-tag-template="combobox-split-tag-template"
+      >
+
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+          <label
+            class="Label"
+            id="combobox-locations-label"
+            for="combobox-locations-input"
+          >Locations</label>
+
+          <div class="Dropdown">
+
+            <div
+              class="InputContainer InputContainer--fill InputContainer--medium"
+              role="group"
+              aria-label="Locations"
+            >
+
+              <div class="UNSTABLE_ComboboxSelection">
+                <div
+                  role="group"
+                  id="combobox-locations-selection"
+                  class="d-contents"
+                  aria-label="Selected Locations"
+                  aria-live="off"
+                  aria-atomic="false"
+                  aria-relevant="additions"
+                  data-spirit-combobox-selection
+                ></div>
+                <input
+                  type="text"
+                  id="combobox-locations-input"
+                  role="combobox"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-controls="combobox-locations-listbox"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  placeholder="Locations"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="dialog"
+              aria-labelledby="combobox-locations-label"
+              data-spirit-combobox-listbox
+            >
+              <div
+                class="Stack Stack--spacing"
+                style="--stack-spacing: var(--spirit-space-300);"
+                role="listbox"
+                id="combobox-locations-listbox"
+                aria-labelledby="combobox-locations-label"
+                aria-multiselectable="true"
+              >
+                <div
+                  role="option"
+                  id="combobox-locations-prague"
+                  aria-selected="false"
+                  class="Item"
+                >
+                  <span class="Label element-stretched cursor-pointer">Praha</span>
+                </div>
+                <div
+                  role="option"
+                  id="combobox-locations-brno"
+                  aria-selected="false"
+                  class="Item"
+                >
+                  <span class="Label element-stretched cursor-pointer">Brno</span>
+                </div>
+                <div
+                  role="option"
+                  id="combobox-locations-ostrava"
+                  aria-selected="false"
+                  class="Item"
+                >
+                  <span class="Label element-stretched cursor-pointer">Ostrava</span>
+                </div>
+                <div
+                  role="option"
+                  id="combobox-locations-plzen"
+                  aria-selected="false"
+                  class="Item"
+                >
+                  <span class="Label element-stretched cursor-pointer">Plzeň</span>
+                </div>
+                <div
+                  role="option"
+                  id="combobox-locations-liberec"
+                  aria-selected="false"
+                  class="Item"
+                >
+                  <span class="Label element-stretched cursor-pointer">Liberec</span>
                 </div>
               </div>
 

@@ -33,12 +33,35 @@ const SELECTOR_TAG_LABEL = '[data-spirit-combobox-tag-label]';
 const SELECTOR_TAG_DESCRIPTION = '[data-spirit-combobox-tag-description]';
 const SELECTOR_EMPTY_STATE = '[data-spirit-combobox-empty-state]';
 const SELECTOR_LOADING = '[data-spirit-combobox-loading]';
+const SELECTOR_SPLIT_TAG = '[data-spirit-combobox-split-tag]';
+const SELECTOR_SPLIT_DISTANCE = '[data-spirit-combobox-split-distance]';
+const SELECTOR_SPLIT_DISTANCE_LABEL = '[data-spirit-combobox-split-distance-label]';
+const SELECTOR_SPLIT_DISTANCE_POPOVER = '[data-spirit-combobox-split-distance-popover]';
+const SELECTOR_SPLIT_DISTANCE_LISTBOX = '[data-spirit-combobox-split-distance-listbox]';
+const SELECTOR_SPLIT_DISTANCE_OPTION = '[data-spirit-combobox-split-distance-option]';
 
 const ATTR_ASYNC = 'data-spirit-combobox-async';
 /** Filter-only demos (e.g. Last Searches): input filters rows; primary action is a link — no tags. */
 const ATTR_FILTER_ONLY = 'data-spirit-combobox-filter-only';
+const ATTR_TAG_TEMPLATE = 'data-spirit-combobox-tag-template';
 
 const ID_TAG_TEMPLATE = 'combobox-tag-template';
+const ID_SPLIT_TAG_TEMPLATE = 'combobox-split-tag-template';
+
+const DEFAULT_DISTANCE = '+5 km';
+const CLASSNAMES_DISTANCE_SELECTED = ['color-scheme-on-selected-subtle', 'bg-color-scheme'];
+
+/**
+ * Interactive selection rows and controls that must not steal Combobox container clicks.
+ * Do not include `.Dropdown`: the Combobox field lives inside the options Dropdown wrapper.
+ * SplitTag distance triggers use `data-spirit-toggle="dropdown"`; rows use `SELECTOR_TAG_ROW`.
+ */
+const SELECTOR_GROUP_CLICK_IGNORE = `[data-spirit-combobox-clear], ${SELECTOR_TAG_ROW}, button, a, [role="button"], [data-spirit-toggle="dropdown"]`;
+
+/** Deferred Dropdown wiring for SplitTag distance triggers (must run after append to DOM). */
+const splitDistanceDropdownInits = new WeakMap();
+/** Live SplitTag distance Dropdown instances — closed when the Combobox input takes focus / opens. */
+const splitDistanceDropdowns = new WeakMap();
 
 // Simulated async search delay (ms) — used only by instances with data-spirit-combobox-async
 const ASYNC_DELAY_MS = 600;
@@ -242,11 +265,15 @@ function createTag(label, selectionEl, onRemove, { disabled = false, sizeConfig 
     const index = rows.indexOf(row);
     let target = null;
 
-    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') target = rows[(index + 1) % rows.length];
-    else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp')
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      target = rows[(index + 1) % rows.length];
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
       target = rows[(index - 1 + rows.length) % rows.length];
-    else if (event.key === 'Home') [target] = rows;
-    else if (event.key === 'End') target = rows[rows.length - 1];
+    } else if (event.key === 'Home') {
+      [target] = rows;
+    } else if (event.key === 'End') {
+      target = rows[rows.length - 1];
+    }
 
     if (target) {
       event.preventDefault();
@@ -260,6 +287,373 @@ function createTag(label, selectionEl, onRemove, { disabled = false, sizeConfig 
     event.preventDefault();
     event.stopPropagation();
     removeFocusedTag(selectionEl, onRemove);
+  });
+
+  return fragment;
+}
+
+function setDistanceOptionSelected(optionEl, selected) {
+  optionEl.setAttribute('aria-selected', selected ? 'true' : 'false');
+  CLASSNAMES_DISTANCE_SELECTED.forEach((className) => optionEl.classList.toggle(className, selected));
+  optionEl.querySelector('.Icon--selected')?.classList.toggle('d-none', !selected);
+}
+
+function createSplitTag(
+  label,
+  selectionEl,
+  onRemove,
+  {
+    disabled = false,
+    distance = DEFAULT_DISTANCE,
+    onDistanceChange = () => {},
+    onOpenDistance = () => {},
+    optionId = '',
+    sizeConfig = NESTED_TAG_SIZES.medium,
+  } = {},
+) {
+  const template = document.getElementById(ID_SPLIT_TAG_TEMPLATE);
+
+  if (!template) {
+    // eslint-disable-next-line no-console
+    console.warn(`[UNSTABLE_Combobox] SplitTag template #${ID_SPLIT_TAG_TEMPLATE} not found — skipping tag render.`);
+
+    return null;
+  }
+
+  const fragment = template.content.cloneNode(true);
+  const row = fragment.querySelector(SELECTOR_TAG_ROW);
+  const splitTag = fragment.querySelector(SELECTOR_SPLIT_TAG);
+  const distanceTrigger = fragment.querySelector(SELECTOR_SPLIT_DISTANCE);
+  const distanceLabelEl = fragment.querySelector(SELECTOR_SPLIT_DISTANCE_LABEL);
+  const distancePopover = fragment.querySelector(SELECTOR_SPLIT_DISTANCE_POPOVER);
+  const distanceListbox = fragment.querySelector(SELECTOR_SPLIT_DISTANCE_LISTBOX);
+  const closeBtn = fragment.querySelector(SELECTOR_TAG_CLOSE);
+  const tagDescriptionId = document.querySelector(SELECTOR_TAG_DESCRIPTION)?.id;
+  const popoverId = `combobox-split-distance-${optionId || label}`.replace(/\s+/g, '-').toLowerCase();
+
+  row.setAttribute('aria-label', `${label}, ${distance}`);
+  row.setAttribute('tabindex', '-1');
+  splitTag.setAttribute('aria-label', `${label} distance filter, radius ${distance}`);
+
+  if (tagDescriptionId) {
+    row.setAttribute('aria-describedby', tagDescriptionId);
+  }
+
+  fragment.querySelector(SELECTOR_TAG_LABEL).textContent = label;
+  distanceLabelEl.textContent = distance;
+  distanceTrigger.setAttribute('aria-label', `Select distance, selected ${distance}`);
+  distanceTrigger.setAttribute('aria-controls', popoverId);
+  distanceTrigger.dataset.spiritTarget = `#${popoverId}`;
+  distancePopover.id = popoverId;
+  closeBtn.setAttribute('aria-label', `Remove ${label}`);
+  closeBtn.setAttribute('tabindex', '-1');
+
+  if (sizeConfig.tagSizeClass !== CLASSNAME_TAG_SIZE_DEFAULT) {
+    fragment.querySelectorAll('.Tag').forEach((tagEl) => {
+      tagEl.classList.remove(CLASSNAME_TAG_SIZE_DEFAULT);
+      tagEl.classList.add(sizeConfig.tagSizeClass);
+    });
+  }
+
+  if (sizeConfig.controlButtonSizeClass !== CLASSNAME_CONTROL_BUTTON_SIZE_DEFAULT) {
+    fragment.querySelectorAll('.ControlButton').forEach((btnEl) => {
+      btnEl.classList.remove(CLASSNAME_CONTROL_BUTTON_SIZE_DEFAULT);
+      btnEl.classList.add(sizeConfig.controlButtonSizeClass);
+    });
+  }
+
+  distanceListbox.querySelectorAll(SELECTOR_SPLIT_DISTANCE_OPTION).forEach((optionEl) => {
+    const optionDistance = optionEl.getAttribute('data-spirit-combobox-split-distance-option');
+
+    setDistanceOptionSelected(optionEl, optionDistance === distance);
+  });
+
+  if (disabled) {
+    splitTag.classList.add('disabled');
+    distanceTrigger.disabled = true;
+    closeBtn.disabled = true;
+
+    return fragment;
+  }
+
+  const applyDistance = (nextDistance) => {
+    distanceLabelEl.textContent = nextDistance;
+    distanceTrigger.setAttribute('aria-label', `Select distance, selected ${nextDistance}`);
+    splitTag.setAttribute('aria-label', `${label} distance filter, radius ${nextDistance}`);
+    row.setAttribute('aria-label', `${label}, ${nextDistance}`);
+    distanceListbox.querySelectorAll(SELECTOR_SPLIT_DISTANCE_OPTION).forEach((optionEl) => {
+      const optionDistance = optionEl.getAttribute('data-spirit-combobox-split-distance-option');
+
+      setDistanceOptionSelected(optionEl, optionDistance === nextDistance);
+    });
+    onDistanceChange(nextDistance);
+  };
+
+  const focusDistanceOption = (optionEl) => {
+    distanceListbox.querySelectorAll(SELECTOR_SPLIT_DISTANCE_OPTION).forEach((el) => {
+      el.setAttribute('tabindex', el === optionEl ? '0' : '-1');
+    });
+    optionEl.focus();
+  };
+
+  const getDistanceOptions = () => Array.from(distanceListbox.querySelectorAll(SELECTOR_SPLIT_DISTANCE_OPTION));
+
+  const focusSelectedOrFirstDistanceOption = () => {
+    const options = getDistanceOptions();
+    const selected = options.find((optionEl) => optionEl.getAttribute('aria-selected') === 'true') || options[0];
+
+    if (selected) focusDistanceOption(selected);
+  };
+
+  const focusSplitSegment = (segmentEl) => {
+    [distanceTrigger, closeBtn].forEach((el) => {
+      el.setAttribute('tabindex', el === segmentEl ? '0' : '-1');
+    });
+    segmentEl.focus();
+  };
+
+  const moveToAdjacentTagRow = (event, direction) => {
+    const rows = Array.from(selectionEl.querySelectorAll(SELECTOR_TAG_ROW));
+    const index = rows.indexOf(row);
+    const target =
+      direction === 'next' ? rows[(index + 1) % rows.length] : rows[(index - 1 + rows.length) % rows.length];
+
+    if (!target || target === row) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    rows.forEach((r) => r.setAttribute('tabindex', '-1'));
+    target.setAttribute('tabindex', '0');
+    target.focus();
+  };
+
+  row.addEventListener('focus', () => {
+    distanceTrigger.setAttribute('tabindex', '0');
+    closeBtn.setAttribute('tabindex', '0');
+  });
+  row.addEventListener('blur', (event) => {
+    if (event.relatedTarget instanceof Node && row.contains(event.relatedTarget)) {
+      return;
+    }
+
+    distanceTrigger.setAttribute('tabindex', '-1');
+    closeBtn.setAttribute('tabindex', '-1');
+  });
+
+  row.addEventListener('keydown', (event) => {
+    if (event.target !== row && event.target !== closeBtn && event.target !== distanceTrigger) {
+      return;
+    }
+
+    if (event.key === 'Delete' || event.key === 'Backspace') {
+      event.preventDefault();
+      removeFocusedTag(selectionEl, onRemove);
+
+      return;
+    }
+
+    if (
+      (event.key === 'ArrowLeft' || event.key === 'ArrowRight') &&
+      (event.target === distanceTrigger || event.target === closeBtn)
+    ) {
+      return;
+    }
+
+    const rows = Array.from(selectionEl.querySelectorAll(SELECTOR_TAG_ROW));
+    const index = rows.indexOf(row);
+    let target = null;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      target = rows[(index + 1) % rows.length];
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      target = rows[(index - 1 + rows.length) % rows.length];
+    } else if (event.key === 'Home') {
+      [target] = rows;
+    } else if (event.key === 'End') {
+      target = rows[rows.length - 1];
+    }
+
+    if (target) {
+      event.preventDefault();
+      rows.forEach((r) => r.setAttribute('tabindex', '-1'));
+      target.setAttribute('tabindex', '0');
+      target.focus();
+    }
+  });
+
+  distanceTrigger.setAttribute('tabindex', '-1');
+
+  closeBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    removeFocusedTag(selectionEl, onRemove);
+  });
+
+  // Dynamically created triggers are not picked up by Dropdown's DOMContentLoaded wiring.
+  splitDistanceDropdownInits.set(row, () => {
+    const dropdown = new Dropdown(distanceTrigger);
+
+    splitDistanceDropdowns.set(row, dropdown);
+
+    distanceTrigger.addEventListener('keydown', (event) => {
+      if (distancePopover.classList.contains('is-open')) {
+        if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          let move = 'next';
+
+          if (event.key === 'ArrowUp') {
+            move = 'previous';
+          } else if (event.key === 'Home') {
+            move = 'first';
+          } else if (event.key === 'End') {
+            move = 'last';
+          }
+
+          const options = getDistanceOptions();
+          let nextIndex = 0;
+
+          if (move === 'last') {
+            nextIndex = options.length - 1;
+          } else if (move === 'previous') {
+            nextIndex = options.length - 1;
+          }
+
+          if (options[nextIndex]) {
+            focusDistanceOption(options[nextIndex]);
+          }
+        }
+
+        return;
+      }
+
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        event.stopPropagation();
+        focusSplitSegment(closeBtn);
+
+        return;
+      }
+
+      if (event.key === 'ArrowLeft') {
+        moveToAdjacentTagRow(event, 'prev');
+
+        return;
+      }
+
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        event.stopPropagation();
+        onOpenDistance();
+        dropdown.show();
+        focusSelectedOrFirstDistanceOption();
+      }
+    });
+
+    closeBtn.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        event.stopPropagation();
+        focusSplitSegment(distanceTrigger);
+
+        return;
+      }
+
+      if (event.key === 'ArrowRight') {
+        moveToAdjacentTagRow(event, 'next');
+      }
+    });
+
+    distanceTrigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      onOpenDistance();
+      dropdown.toggle();
+
+      if (distancePopover.classList.contains('is-open')) {
+        focusSelectedOrFirstDistanceOption();
+      }
+    });
+
+    distanceListbox.addEventListener('mousedown', (event) => {
+      if (!event.target.closest(SELECTOR_SPLIT_DISTANCE_OPTION)) {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+    });
+
+    distanceListbox.addEventListener('click', (event) => {
+      const optionEl = event.target.closest(SELECTOR_SPLIT_DISTANCE_OPTION);
+
+      if (!optionEl) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+      applyDistance(optionEl.getAttribute('data-spirit-combobox-split-distance-option'));
+      dropdown.hide();
+      distanceTrigger.focus();
+    });
+
+    distanceListbox.addEventListener('keydown', (event) => {
+      const options = getDistanceOptions();
+      const focused = document.activeElement?.closest?.(SELECTOR_SPLIT_DISTANCE_OPTION);
+      const currentIndex = options.indexOf(focused);
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        dropdown.hide();
+        distanceTrigger.focus();
+
+        return;
+      }
+
+      if (event.key === 'ArrowDown' && currentIndex >= 0) {
+        event.preventDefault();
+        event.stopPropagation();
+        focusDistanceOption(options[(currentIndex + 1) % options.length]);
+
+        return;
+      }
+
+      if (event.key === 'ArrowUp' && currentIndex >= 0) {
+        event.preventDefault();
+        event.stopPropagation();
+        focusDistanceOption(options[(currentIndex - 1 + options.length) % options.length]);
+
+        return;
+      }
+
+      if (event.key === 'Home') {
+        event.preventDefault();
+        event.stopPropagation();
+        focusDistanceOption(options[0]);
+
+        return;
+      }
+
+      if (event.key === 'End') {
+        event.preventDefault();
+        event.stopPropagation();
+        focusDistanceOption(options[options.length - 1]);
+
+        return;
+      }
+
+      if ((event.key === 'Enter' || event.key === ' ') && focused) {
+        event.preventDefault();
+        event.stopPropagation();
+        applyDistance(focused.getAttribute('data-spirit-combobox-split-distance-option'));
+        dropdown.hide();
+        distanceTrigger.focus();
+      }
+    });
   });
 
   return fragment;
@@ -312,7 +706,10 @@ function initCombobox(comboboxEl) {
   const isDisabled = inputEl.disabled;
   const isAsync = comboboxEl.hasAttribute(ATTR_ASYNC);
   const isFilterOnly = comboboxEl.hasAttribute(ATTR_FILTER_ONLY);
+  const tagTemplateId = comboboxEl.getAttribute(ATTR_TAG_TEMPLATE) || ID_TAG_TEMPLATE;
+  const usesSplitTag = tagTemplateId === ID_SPLIT_TAG_TEMPLATE;
   const sizeConfig = getNestedTagSizeConfig(comboboxEl);
+  const distanceByOptionId = new Map();
   let asyncTimer = null;
 
   // Track selection order: row IDs in insertion order (not popup DOM order).
@@ -405,20 +802,38 @@ function initCombobox(comboboxEl) {
       if (!rowEl) return;
 
       const label = getRowLabel(rowEl);
-      const tag = createTag(
-        label,
-        selectionEl,
-        () => {
-          setRowSelected(rowEl, false, { disabled: isDisabled });
-          const idx = selectedIds.indexOf(id);
+      const onRemove = () => {
+        setRowSelected(rowEl, false, { disabled: isDisabled });
+        const idx = selectedIds.indexOf(id);
 
-          if (idx !== -1) selectedIds.splice(idx, 1);
-          renderSelection();
-        },
-        { disabled: isDisabled, sizeConfig },
-      );
+        if (idx !== -1) selectedIds.splice(idx, 1);
+        distanceByOptionId.delete(id);
+        renderSelection();
+      };
 
-      if (tag) selectionEl.appendChild(tag);
+      const tag = usesSplitTag
+        ? createSplitTag(label, selectionEl, onRemove, {
+            disabled: isDisabled,
+            distance: distanceByOptionId.get(id) || DEFAULT_DISTANCE,
+            onDistanceChange: (nextDistance) => distanceByOptionId.set(id, nextDistance),
+            onOpenDistance: () => {
+              close();
+            },
+            optionId: id,
+            sizeConfig,
+          })
+        : createTag(label, selectionEl, onRemove, { disabled: isDisabled, sizeConfig });
+
+      if (tag) {
+        selectionEl.appendChild(tag);
+        const appendedRow = selectionEl.querySelector(`${SELECTOR_TAG_ROW}:last-child`);
+        const initSplitDistanceDropdown = appendedRow && splitDistanceDropdownInits.get(appendedRow);
+
+        if (initSplitDistanceDropdown) {
+          initSplitDistanceDropdown();
+          splitDistanceDropdownInits.delete(appendedRow);
+        }
+      }
     });
 
     const tagRows = Array.from(selectionEl.querySelectorAll(SELECTOR_TAG_ROW));
@@ -439,6 +854,8 @@ function initCombobox(comboboxEl) {
   // Wire up the Dropdown plugin for popup open/close so events and state flow through
   // the same channel as Picker and other Dropdown-based components.
   // ID is assigned dynamically so the HTML does not need to change.
+  const listboxId = inputEl.getAttribute('aria-controls');
+
   if (!popupEl.id) popupEl.id = `${inputEl.id}-popover`;
   inputEl.dataset.spiritTarget = `#${popupEl.id}`;
 
@@ -472,8 +889,12 @@ function initCombobox(comboboxEl) {
       const idx = selectedIds.indexOf(rowEl.id);
 
       if (idx !== -1) selectedIds.splice(idx, 1);
+      distanceByOptionId.delete(rowEl.id);
     } else if (rowEl.id) {
       selectedIds.push(rowEl.id);
+      if (usesSplitTag && !distanceByOptionId.has(rowEl.id)) {
+        distanceByOptionId.set(rowEl.id, DEFAULT_DISTANCE);
+      }
     }
 
     renderSelection();
@@ -485,7 +906,20 @@ function initCombobox(comboboxEl) {
   // ── Popover helpers ───────────────────────────────────────────────────────
 
   function open() {
+    closeOpenSplitDistanceDropdowns();
     dropdown.show();
+    // Dropdown.updateTriggerElement sets aria-controls to the data-spirit-target CSS selector
+    // (e.g. "#combobox-input-popover") which is wrong for ARIA combobox — aria-controls must be
+    // a plain IDREF pointing to the options widget, not the DropdownPopover container.
+    if (listboxId) {
+      inputEl.setAttribute('aria-controls', listboxId);
+    }
+  }
+
+  function closeOpenSplitDistanceDropdowns() {
+    selectionEl.querySelectorAll(SELECTOR_TAG_ROW).forEach((row) => {
+      splitDistanceDropdowns.get(row)?.hide();
+    });
   }
 
   function clearVisualActiveControls() {
@@ -592,6 +1026,9 @@ function initCombobox(comboboxEl) {
   popupEl.addEventListener('hide.dropdown', () => {
     clearTimeout(asyncTimer);
     setLoading(comboboxEl, popupEl, false);
+    if (listboxId) {
+      inputEl.setAttribute('aria-controls', listboxId);
+    }
     inputEl.removeAttribute('aria-activedescendant');
     clearVisualActiveControls();
     activeNestedControlIndex = null;
@@ -610,7 +1047,7 @@ function initCombobox(comboboxEl) {
   const containerEl = inputEl.closest('[role="group"]') || inputEl.parentElement;
 
   containerEl.addEventListener('click', (event) => {
-    if (!event.target.closest(`[data-spirit-combobox-clear], ${SELECTOR_TAG_ROW}`)) {
+    if (!event.target.closest(SELECTOR_GROUP_CLICK_IGNORE)) {
       inputEl.focus();
       open();
     }
@@ -627,6 +1064,10 @@ function initCombobox(comboboxEl) {
 
   // Open on pointer click, typing, or Arrow Up/Down — not on keyboard focus alone (Tab).
   inputEl.addEventListener('click', () => open());
+
+  inputEl.addEventListener('focus', () => {
+    closeOpenSplitDistanceDropdowns();
+  });
 
   inputEl.addEventListener('input', () => {
     open();
