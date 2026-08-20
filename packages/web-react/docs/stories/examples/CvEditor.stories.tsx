@@ -241,11 +241,12 @@ export const CvEditor = () => {
                     onToggle={onPersonalDetailsDropdownToggle}
                     placement="bottom-end"
                   >
-                    {/* TODO: Consider letting Box declare a background color context
+                    {/* TODO: Consider making Card declare a background color context
 
-                        ControlButton's "white" background is only offered in the `primary` background context, and
-                        `backgroundColor="primary"` (see Surface above) sets the background but not the context, so
-                        there is no way to ask for it from here. Should Box set its background via a color scheme?
+                        Card sets `background-color` directly, without the local background color variable that the
+                        `bg-*` utilities and color schemes set — so a ControlButton inside a Card cannot resolve its
+                        `white` background. Not a problem here: Surface is a Box, and `backgroundColor="primary"`
+                        does declare the context. The gap on Card's side remains.
                     */}
                     <DropdownTrigger elementType={ControlButton} size="large" isSymmetrical aria-haspopup="menu">
                       <VisuallyHidden>Zobrazit akce</VisuallyHidden>
