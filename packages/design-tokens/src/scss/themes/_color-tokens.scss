@@ -130,6 +130,10 @@ $component-pricing-plan-highlighted-background: var(--spirit-color-component-pri
 $component-pricing-plan-highlighted-border: var(--spirit-color-component-pricing-plan-highlighted-border);
 $component-pricing-plan-highlighted-content: var(--spirit-color-component-pricing-plan-highlighted-content);
 
+$component-tag-selected-background: var(--spirit-color-component-tag-selected-background);
+$component-tag-selected-border: var(--spirit-color-component-tag-selected-border);
+$component-tag-selected-content: var(--spirit-color-component-tag-selected-content);
+
 $component-toggle-selected-border: var(--spirit-color-component-toggle-selected-border);
 $component-toggle-selected-content: var(--spirit-color-component-toggle-selected-content);
 $component-toggle-selected-state-active: var(--spirit-color-component-toggle-selected-state-active);
@@ -221,9 +225,11 @@ $gradient-basic-overlay-color-02: var(--spirit-color-gradient-basic-overlay-colo
 
 $gradient-primary-color-01: var(--spirit-color-gradient-primary-color-01);
 $gradient-primary-color-02: var(--spirit-color-gradient-primary-color-02);
+$gradient-primary-color-03: var(--spirit-color-gradient-primary-color-03);
 
 $gradient-secondary-color-01: var(--spirit-color-gradient-secondary-color-01);
 $gradient-secondary-color-02: var(--spirit-color-gradient-secondary-color-02);
+$gradient-secondary-color-03: var(--spirit-color-gradient-secondary-color-03);
 
 $gradient-skeleton-color-01: var(--spirit-color-gradient-skeleton-color-01);
 $gradient-skeleton-color-02: var(--spirit-color-gradient-skeleton-color-02);
@@ -543,10 +549,12 @@ $gradient-colors: (
     primary: (
         color-01: $gradient-primary-color-01,
         color-02: $gradient-primary-color-02,
+        color-03: $gradient-primary-color-03,
     ),
     secondary: (
         color-01: $gradient-secondary-color-01,
         color-02: $gradient-secondary-color-02,
+        color-03: $gradient-secondary-color-03,
     ),
     skeleton: (
         color-01: $gradient-skeleton-color-01,

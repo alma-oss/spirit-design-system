@@ -23,6 +23,8 @@ $container-padding-tablet: 2rem !default;
 
 $container-max-width: 80rem !default;
 
+$container-xxlarge-max-width: 100rem !default;
+
 $containers: (
     xsmall: (
         max-width: $container-xsmall-max-width,
@@ -45,6 +47,9 @@ $containers: (
         tablet: $container-padding-tablet,
     ),
     max-width: $container-max-width,
+    xxlarge: (
+        max-width: $container-xxlarge-max-width,
+    ),
 ) !default;
 
 $grids: (

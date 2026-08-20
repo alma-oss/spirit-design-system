@@ -130,6 +130,10 @@ $component-pricing-plan-highlighted-background: #f2f7fd !default;
 $component-pricing-plan-highlighted-border: #80b2eb !default;
 $component-pricing-plan-highlighted-content: #00428c !default;
 
+$component-tag-selected-background: #7847ff !default;
+$component-tag-selected-border: #5432b3 !default;
+$component-tag-selected-content: #fff !default;
+
 $component-toggle-selected-border: #327c3f !default;
 $component-toggle-selected-content: #fdfdfc !default;
 $component-toggle-selected-state-active: #3e9b4f !default;
@@ -147,7 +151,7 @@ $disabled-content: #a5a5a5 !default;
 $disabled-foreground: #d9d9d9 !default;
 
 $emotion-danger-background-basic: #b60000 !default;
-$emotion-danger-background-subtle: #fef2f2 !default;
+$emotion-danger-background-subtle: #fae4e4 !default;
 $emotion-danger-border-basic: #b60000 !default;
 $emotion-danger-border-subtle: #f18080 !default;
 $emotion-danger-content-basic: #940000 !default;
@@ -157,7 +161,7 @@ $emotion-danger-state-default: #b60000 !default;
 $emotion-danger-state-hover: #cd0000 !default;
 
 $emotion-informative-background-basic: #0052ad !default;
-$emotion-informative-background-subtle: #f2f7fd !default;
+$emotion-informative-background-subtle: #e4effa !default;
 $emotion-informative-border-basic: #0052ad !default;
 $emotion-informative-border-subtle: #80b2eb !default;
 $emotion-informative-content-basic: #00428c !default;
@@ -167,7 +171,7 @@ $emotion-informative-state-default: #0052ad !default;
 $emotion-informative-state-hover: #005cc2 !default;
 
 $emotion-success-background-basic: #327c3f !default;
-$emotion-success-background-subtle: #f5faf6 !default;
+$emotion-success-background-subtle: #dbf2de !default;
 $emotion-success-border-basic: #327c3f !default;
 $emotion-success-border-subtle: #9ecda7 !default;
 $emotion-success-content-basic: #286533 !default;
@@ -177,7 +181,7 @@ $emotion-success-state-default: #327c3f !default;
 $emotion-success-state-hover: #388b47 !default;
 
 $emotion-warning-background-basic: #c26400 !default;
-$emotion-warning-background-subtle: #fef8f2 !default;
+$emotion-warning-background-subtle: #faf1e4 !default;
 $emotion-warning-border-basic: #c26400 !default;
 $emotion-warning-border-subtle: #f9be80 !default;
 $emotion-warning-content-basic: #9d5100 !default;
@@ -221,9 +225,11 @@ $gradient-basic-overlay-color-02: #fff0 !default;
 
 $gradient-primary-color-01: #eae3ff !default;
 $gradient-primary-color-02: #cebcff !default;
+$gradient-primary-color-03: #fff !default;
 
 $gradient-secondary-color-01: #fff !default;
 $gradient-secondary-color-02: #a7d9e2 !default;
+$gradient-secondary-color-03: #fff !default;
 
 $gradient-skeleton-color-01: #e5e5e5 !default;
 $gradient-skeleton-color-02: #fff !default;
@@ -388,6 +394,9 @@ $text-tertiary: #7f7f7f !default;
     --spirit-color-component-pricing-plan-highlighted-background: #{$component-pricing-plan-highlighted-background};
     --spirit-color-component-pricing-plan-highlighted-border: #{$component-pricing-plan-highlighted-border};
     --spirit-color-component-pricing-plan-highlighted-content: #{$component-pricing-plan-highlighted-content};
+    --spirit-color-component-tag-selected-background: #{$component-tag-selected-background};
+    --spirit-color-component-tag-selected-border: #{$component-tag-selected-border};
+    --spirit-color-component-tag-selected-content: #{$component-tag-selected-content};
     --spirit-color-component-toggle-selected-border: #{$component-toggle-selected-border};
     --spirit-color-component-toggle-selected-content: #{$component-toggle-selected-content};
     --spirit-color-component-toggle-selected-state-active: #{$component-toggle-selected-state-active};
@@ -466,8 +475,10 @@ $text-tertiary: #7f7f7f !default;
     --spirit-color-gradient-basic-overlay-color-02: #{$gradient-basic-overlay-color-02};
     --spirit-color-gradient-primary-color-01: #{$gradient-primary-color-01};
     --spirit-color-gradient-primary-color-02: #{$gradient-primary-color-02};
+    --spirit-color-gradient-primary-color-03: #{$gradient-primary-color-03};
     --spirit-color-gradient-secondary-color-01: #{$gradient-secondary-color-01};
     --spirit-color-gradient-secondary-color-02: #{$gradient-secondary-color-02};
+    --spirit-color-gradient-secondary-color-03: #{$gradient-secondary-color-03};
     --spirit-color-gradient-skeleton-color-01: #{$gradient-skeleton-color-01};
     --spirit-color-gradient-skeleton-color-02: #{$gradient-skeleton-color-02};
     --spirit-color-gradient-skeleton-color-03: #{$gradient-skeleton-color-03};

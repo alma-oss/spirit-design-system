@@ -130,6 +130,10 @@ export const componentPricingPlanHighlightedBackground = 'var(--spirit-color-com
 export const componentPricingPlanHighlightedBorder = 'var(--spirit-color-component-pricing-plan-highlighted-border)';
 export const componentPricingPlanHighlightedContent = 'var(--spirit-color-component-pricing-plan-highlighted-content)';
 
+export const componentTagSelectedBackground = 'var(--spirit-color-component-tag-selected-background)';
+export const componentTagSelectedBorder = 'var(--spirit-color-component-tag-selected-border)';
+export const componentTagSelectedContent = 'var(--spirit-color-component-tag-selected-content)';
+
 export const componentToggleSelectedBorder = 'var(--spirit-color-component-toggle-selected-border)';
 export const componentToggleSelectedContent = 'var(--spirit-color-component-toggle-selected-content)';
 export const componentToggleSelectedStateActive = 'var(--spirit-color-component-toggle-selected-state-active)';
@@ -221,9 +225,11 @@ export const gradientBasicOverlayColor02 = 'var(--spirit-color-gradient-basic-ov
 
 export const gradientPrimaryColor01 = 'var(--spirit-color-gradient-primary-color-01)';
 export const gradientPrimaryColor02 = 'var(--spirit-color-gradient-primary-color-02)';
+export const gradientPrimaryColor03 = 'var(--spirit-color-gradient-primary-color-03)';
 
 export const gradientSecondaryColor01 = 'var(--spirit-color-gradient-secondary-color-01)';
 export const gradientSecondaryColor02 = 'var(--spirit-color-gradient-secondary-color-02)';
+export const gradientSecondaryColor03 = 'var(--spirit-color-gradient-secondary-color-03)';
 
 export const gradientSkeletonColor01 = 'var(--spirit-color-gradient-skeleton-color-01)';
 export const gradientSkeletonColor02 = 'var(--spirit-color-gradient-skeleton-color-02)';
@@ -543,10 +549,12 @@ export const gradientColors = {
   primary: {
     color01: gradientPrimaryColor01,
     color02: gradientPrimaryColor02,
+    color03: gradientPrimaryColor03,
   },
   secondary: {
     color01: gradientSecondaryColor01,
     color02: gradientSecondaryColor02,
+    color03: gradientSecondaryColor03,
   },
   skeleton: {
     color01: gradientSkeletonColor01,

@@ -130,6 +130,10 @@ export const componentPricingPlanHighlightedBackground = '#f2f7fd';
 export const componentPricingPlanHighlightedBorder = '#80b2eb';
 export const componentPricingPlanHighlightedContent = '#00428c';
 
+export const componentTagSelectedBackground = '#7847ff';
+export const componentTagSelectedBorder = '#5432b3';
+export const componentTagSelectedContent = '#fff';
+
 export const componentToggleSelectedBorder = '#327c3f';
 export const componentToggleSelectedContent = '#fdfdfc';
 export const componentToggleSelectedStateActive = '#3e9b4f';
@@ -147,7 +151,7 @@ export const disabledContent = '#a5a5a5';
 export const disabledForeground = '#d9d9d9';
 
 export const emotionDangerBackgroundBasic = '#b60000';
-export const emotionDangerBackgroundSubtle = '#fef2f2';
+export const emotionDangerBackgroundSubtle = '#fae4e4';
 export const emotionDangerBorderBasic = '#b60000';
 export const emotionDangerBorderSubtle = '#f18080';
 export const emotionDangerContentBasic = '#940000';
@@ -157,7 +161,7 @@ export const emotionDangerStateDefault = '#b60000';
 export const emotionDangerStateHover = '#cd0000';
 
 export const emotionInformativeBackgroundBasic = '#0052ad';
-export const emotionInformativeBackgroundSubtle = '#f2f7fd';
+export const emotionInformativeBackgroundSubtle = '#e4effa';
 export const emotionInformativeBorderBasic = '#0052ad';
 export const emotionInformativeBorderSubtle = '#80b2eb';
 export const emotionInformativeContentBasic = '#00428c';
@@ -167,7 +171,7 @@ export const emotionInformativeStateDefault = '#0052ad';
 export const emotionInformativeStateHover = '#005cc2';
 
 export const emotionSuccessBackgroundBasic = '#327c3f';
-export const emotionSuccessBackgroundSubtle = '#f5faf6';
+export const emotionSuccessBackgroundSubtle = '#dbf2de';
 export const emotionSuccessBorderBasic = '#327c3f';
 export const emotionSuccessBorderSubtle = '#9ecda7';
 export const emotionSuccessContentBasic = '#286533';
@@ -177,7 +181,7 @@ export const emotionSuccessStateDefault = '#327c3f';
 export const emotionSuccessStateHover = '#388b47';
 
 export const emotionWarningBackgroundBasic = '#c26400';
-export const emotionWarningBackgroundSubtle = '#fef8f2';
+export const emotionWarningBackgroundSubtle = '#faf1e4';
 export const emotionWarningBorderBasic = '#c26400';
 export const emotionWarningBorderSubtle = '#f9be80';
 export const emotionWarningContentBasic = '#9d5100';
@@ -221,9 +225,11 @@ export const gradientBasicOverlayColor02 = '#fff0';
 
 export const gradientPrimaryColor01 = '#eae3ff';
 export const gradientPrimaryColor02 = '#cebcff';
+export const gradientPrimaryColor03 = '#fff';
 
 export const gradientSecondaryColor01 = '#fff';
 export const gradientSecondaryColor02 = '#a7d9e2';
+export const gradientSecondaryColor03 = '#fff';
 
 export const gradientSkeletonColor01 = '#e5e5e5';
 export const gradientSkeletonColor02 = '#fff';
