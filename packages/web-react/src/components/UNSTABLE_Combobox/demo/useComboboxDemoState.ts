@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { useToggle } from '../../../hooks';
+import { useDisclosureState } from '../../../hooks';
 import { COMBOBOX_LANGUAGE_OPTION_KEYS, filterComboboxLanguageOptions } from './ComboboxLanguageItems';
 
 export interface UseComboboxDemoStateOptions {
@@ -9,7 +9,7 @@ export interface UseComboboxDemoStateOptions {
 }
 
 export const useComboboxDemoState = ({ defaultSelectedKeys = [] }: UseComboboxDemoStateOptions = {}) => {
-  const [isOpen, onToggle] = useToggle(false);
+  const { isExpanded: isOpen, toggle: onToggle } = useDisclosureState({ defaultExpanded: false });
   const [selectedKeys, setSelectedKeys] = useState<string[]>(defaultSelectedKeys);
   const [inputValue, setInputValue] = useState('');
 

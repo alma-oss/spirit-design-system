@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { useToggle } from '../../../hooks';
+import { useDisclosureState } from '../../../hooks';
 import { Icon } from '../../Icon';
 import { Text } from '../../Text';
 import { UNSTABLE_Combobox, UNSTABLE_ComboboxOption } from '..';
@@ -47,7 +47,7 @@ const SEARCH_RESULTS: readonly SearchResult[] = [
 ];
 
 const ComboboxSearchResults = () => {
-  const [isOpen, onToggle] = useToggle(false);
+  const { isExpanded: isOpen, toggle: onToggle } = useDisclosureState({ defaultExpanded: false });
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
 

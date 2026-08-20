@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { useToggle } from '../../../hooks';
+import { useDisclosureState } from '../../../hooks';
 import { Grid } from '../../Grid';
 import { Spinner } from '../../Spinner';
 import { UNSTABLE_Combobox } from '..';
@@ -17,7 +17,7 @@ const OPTIONS = COMBOBOX_LANGUAGE_OPTIONS;
 const OPTION_KEYS = getComboboxLanguageOptionKeys(OPTIONS);
 
 const LoadingField = ({ id, label, loadingLabel }: { id: string; label: string; loadingLabel: React.ReactNode }) => {
-  const [isOpen, onToggle] = useToggle(false);
+  const { isExpanded: isOpen, toggle: onToggle } = useDisclosureState({ defaultExpanded: false });
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
