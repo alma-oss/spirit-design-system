@@ -1,9 +1,13 @@
 // 1. Create a stacking context so that ControlButtons inside Tags (z-index: 1) do not escape
 //    into the page stacking context and overlap DropdownPopovers of neighboring Pickers.
 // 2. For select, we need to place the input addon over the input to keep the interaction consistent.
-// 3. We pass the input arrows width if the input type is number.
-// 4. If the input has a size attribute, we calculate the width based on the input width, padding, border width and arrows width.
-// 5. We generate the input width based on the number of characters.
+// 3. When a nested DropdownPopover opens inside the field (e.g. SplitTag distance menu in Combobox),
+//    raise this stacking context so the popover paints above the next InputContainer. Nested
+//    popovers cannot escape `isolation: isolate` on their own; the Combobox options popover
+//    avoids this by living as a sibling of InputContainer.
+// 4. We pass the input arrows width if the input type is number.
+// 5. If the input has a size attribute, we calculate the width based on the input width, padding, border width and arrows width.
+// 6. We generate the input width based on the number of characters.
 
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
@@ -54,6 +58,11 @@
         border-color: theme.$border-color-state-focus;
         outline: 0;
         box-shadow: theme.$focus-shadow;
+    }
+
+    // 3. After lower-specificity `&:has` / `&:focus-within` rules (stylelint no-descending-specificity).
+    &:has(.DropdownPopover.is-open) {
+        z-index: 1;
     }
 
     @media (hover: hover) {
@@ -111,12 +120,12 @@
 .InputContainer > input {
     padding-block: theme.$input-padding-y;
 
-    // 3.
+    // 4.
     &:where([type='number']) {
         --#{tokens.$css-variable-prefix}input-container-input-arrows-width: #{theme.$input-number-arrows-width};
     }
 
-    // 4.
+    // 5.
     &:where([size]) {
         width: calc(
             var(--#{tokens.$css-variable-prefix}input-container-input-width) + 2 *
@@ -126,7 +135,7 @@
         );
     }
 
-    // 5.
+    // 6.
     @each $size in theme.$input-size-characters {
         &:where([size='#{$size}']) {
             --#{tokens.$css-variable-prefix}input-container-input-width: #{$size}ch;

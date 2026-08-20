@@ -296,6 +296,25 @@ Each size expects a specific Tag and ControlButton size inside the selection are
 </div>
 ```
 
+## Custom Selection Tags (Tag vs SplitTag)
+
+The demo script reads `data-spirit-combobox-tag-template` on `.UNSTABLE_Combobox` to choose which
+`<template>` clones into the selection grid:
+
+- **Default** (`combobox-tag-template`) — a single selected [Tag][tag] row with a remove control.
+- **SplitTag** (`combobox-split-tag-template`) — an [`UNSTABLE_SplitTag`][splittag] row with city label,
+  nested distance [Dropdown][dropdown], and remove control (see the **Locations** demo).
+
+```html
+<div
+  class="UNSTABLE_Combobox"
+  data-spirit-element="combobox"
+  data-spirit-combobox-tag-template="combobox-split-tag-template"
+>
+  <!-- … -->
+</div>
+```
+
 ## Helper Text
 
 Add supplementary information below the Dropdown using the `HelperText` component. Give it a unique
@@ -613,5 +632,7 @@ input for option navigation; Space and printable characters type into the filter
 [dropdown]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Dropdown/README.md
 [picker-selection-role]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Picker/README.md#selection-area-dynamic-role
 [smashing-magazine-placeholder]: https://www.smashingmagazine.com/2018/06/placeholder-attribute/
+[splittag]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_SplitTag/README.md
+[tag]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Tag/README.md
 [w3-combobox-grid-popup]: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/grid-combo/
 [w3-combobox-list-autocomplete]: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/
