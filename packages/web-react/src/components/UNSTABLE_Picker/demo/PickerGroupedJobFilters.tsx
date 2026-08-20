@@ -40,7 +40,7 @@ const PickerGroupedJobFilters = () => {
       selectionMode={MULTIPLE_SELECTION_MODE}
     >
       <div style={{ width: '300px' }}>
-        <Text elementType="h3" emphasis="bold">
+        <Text elementType="h3" fontWeight="bold">
           {EMPLOYMENT_TYPE_FIELD_LABEL}
         </Text>
         <UNSTABLE_PickerGroup label={EMPLOYMENT_TYPE_FIELD_LABEL} marginBottom="space-0">
@@ -51,7 +51,7 @@ const PickerGroupedJobFilters = () => {
           ))}
         </UNSTABLE_PickerGroup>
         <Divider marginY="space-600" />
-        <Text elementType="h3" emphasis="bold">
+        <Text elementType="h3" fontWeight="bold">
           {COOPERATION_FIELD_LABEL}
         </Text>
         <UNSTABLE_PickerGroup label={COOPERATION_FIELD_LABEL} marginBottom="space-0">
@@ -62,7 +62,7 @@ const PickerGroupedJobFilters = () => {
           ))}
         </UNSTABLE_PickerGroup>
         <Divider marginY="space-600" />
-        <Text elementType="h3" emphasis="bold">
+        <Text elementType="h3" fontWeight="bold">
           {INTERNSHIP_FIELD_LABEL}
         </Text>
         <UNSTABLE_PickerGroup label={INTERNSHIP_FIELD_LABEL}>

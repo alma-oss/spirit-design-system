@@ -1,7 +1,15 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { Emphasis, SizesExtended, TextAlignments, TextColors, TextHyphens, TextWordBreaks } from '../../../constants';
+import {
+  Emphasis,
+  FontWeight,
+  SizesExtended,
+  TextAlignments,
+  TextColors,
+  TextHyphens,
+  TextWordBreaks,
+} from '../../../constants';
 import { type TextColorsType } from '../../../types';
 import { getAccentTextColors, getEmotionTextColors } from '../../../utils';
 import ReadMe from '../README.md?raw';
@@ -32,9 +40,23 @@ const meta: Meta<typeof Text> = {
     },
     emphasis: {
       control: 'select',
+      description: 'Deprecated. Use fontWeight and isItalic instead.',
       options: [...Object.values(Emphasis), undefined],
       table: {
-        defaultValue: { summary: Emphasis.REGULAR },
+        defaultValue: { summary: undefined },
+      },
+    },
+    fontWeight: {
+      control: 'select',
+      options: [...Object.values(FontWeight), undefined],
+      table: {
+        defaultValue: { summary: FontWeight.REGULAR },
+      },
+    },
+    isItalic: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
       },
     },
     isTextBalanced: {
@@ -82,7 +104,9 @@ const meta: Meta<typeof Text> = {
   args: {
     children: 'Text',
     elementType: 'p',
-    emphasis: Emphasis.REGULAR,
+    emphasis: undefined,
+    fontWeight: FontWeight.REGULAR,
+    isItalic: false,
     isTextBalanced: false,
     size: SizesExtended.MEDIUM,
     textAlignment: TextAlignments.LEFT,

@@ -39,16 +39,6 @@ export const bodyLargeBold = {
   },
 };
 
-export const bodyLargeItalic = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1.125rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.5556,
-  },
-};
-
 export const bodyLargeRegular = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
@@ -75,16 +65,6 @@ export const bodyMediumBold = {
     fontSize: '1rem',
     fontStyle: 'normal',
     fontWeight: 700,
-    lineHeight: 1.5,
-  },
-};
-
-export const bodyMediumItalic = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
     lineHeight: 1.5,
   },
 };
@@ -119,16 +99,6 @@ export const bodySmallBold = {
   },
 };
 
-export const bodySmallItalic = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '0.875rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.4286,
-  },
-};
-
 export const bodySmallRegular = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
@@ -159,16 +129,6 @@ export const bodyXlargeBold = {
   },
 };
 
-export const bodyXlargeItalic = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1.25rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.6,
-  },
-};
-
 export const bodyXlargeRegular = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
@@ -195,16 +155,6 @@ export const bodyXsmallBold = {
     fontSize: '0.75rem',
     fontStyle: 'normal',
     fontWeight: 700,
-    lineHeight: 1.6667,
-  },
-};
-
-export const bodyXsmallItalic = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '0.75rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
     lineHeight: 1.6667,
   },
 };
@@ -363,30 +313,6 @@ export const headingLargeBold = {
   },
 };
 
-export const headingLargeItalic = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '2rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.1875,
-  },
-  tablet: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '2.5rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.2,
-  },
-  desktop: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '2.5rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.2,
-  },
-};
-
 export const headingLargeRegular = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
@@ -455,30 +381,6 @@ export const headingMediumBold = {
     fontSize: '2rem',
     fontStyle: 'normal',
     fontWeight: 700,
-    lineHeight: 1.1875,
-  },
-};
-
-export const headingMediumItalic = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1.5rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.1667,
-  },
-  tablet: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '2rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.1875,
-  },
-  desktop: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '2rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
     lineHeight: 1.1875,
   },
 };
@@ -555,30 +457,6 @@ export const headingSmallBold = {
   },
 };
 
-export const headingSmallItalic = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1.25rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.2,
-  },
-  tablet: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1.5rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.1667,
-  },
-  desktop: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1.5rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.1667,
-  },
-};
-
 export const headingSmallRegular = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
@@ -651,30 +529,6 @@ export const headingXlargeBold = {
   },
 };
 
-export const headingXlargeItalic = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '2.25rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.1667,
-  },
-  tablet: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '3rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.2083,
-  },
-  desktop: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '3rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.2083,
-  },
-};
-
 export const headingXlargeRegular = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
@@ -743,30 +597,6 @@ export const headingXsmallBold = {
     fontSize: '1.25rem',
     fontStyle: 'normal',
     fontWeight: 700,
-    lineHeight: 1.2,
-  },
-};
-
-export const headingXsmallItalic = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1.125rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.2222,
-  },
-  tablet: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1.25rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.2,
-  },
-  desktop: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1.25rem',
-    fontStyle: 'italic',
-    fontWeight: 400,
     lineHeight: 1.2,
   },
 };
@@ -904,23 +734,18 @@ export const styles = {
   actionMedium,
   actionSmall,
   bodyLargeBold,
-  bodyLargeItalic,
   bodyLargeRegular,
   bodyLargeSemibold,
   bodyMediumBold,
-  bodyMediumItalic,
   bodyMediumRegular,
   bodyMediumSemibold,
   bodySmallBold,
-  bodySmallItalic,
   bodySmallRegular,
   bodySmallSemibold,
   bodyXlargeBold,
-  bodyXlargeItalic,
   bodyXlargeRegular,
   bodyXlargeSemibold,
   bodyXsmallBold,
-  bodyXsmallItalic,
   bodyXsmallRegular,
   bodyXsmallSemibold,
   caption,
@@ -935,23 +760,18 @@ export const styles = {
   displaySmall,
   eyebrow,
   headingLargeBold,
-  headingLargeItalic,
   headingLargeRegular,
   headingLargeSemibold,
   headingMediumBold,
-  headingMediumItalic,
   headingMediumRegular,
   headingMediumSemibold,
   headingSmallBold,
-  headingSmallItalic,
   headingSmallRegular,
   headingSmallSemibold,
   headingXlargeBold,
-  headingXlargeItalic,
   headingXlargeRegular,
   headingXlargeSemibold,
   headingXsmallBold,
-  headingXsmallItalic,
   headingXsmallRegular,
   headingXsmallSemibold,
   inputLarge,

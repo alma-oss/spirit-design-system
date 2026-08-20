@@ -52,13 +52,13 @@ const meta: Meta<typeof NavigationAvatar> = {
         in this demo are not customizable.`,
       mapping: {
         text: (
-          <Text elementType="span" size="small" emphasis="semibold">
+          <Text elementType="span" size="small" fontWeight="semibold">
             My Account
           </Text>
         ),
         'text with icon': (
           <>
-            <Text elementType="span" size="small" emphasis="semibold">
+            <Text elementType="span" size="small" fontWeight="semibold">
               My Account
             </Text>
             <Icon name="chevron-down" />

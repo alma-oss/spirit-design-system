@@ -110,7 +110,7 @@ export const PublicationTimePicker = () => {
       onSelectionChange={setSelectedKeys}
       onToggle={onToggle}
     >
-      <Text elementType="h3" emphasis="bold">
+      <Text elementType="h3" fontWeight="bold">
         {LABEL}
       </Text>
       <UNSTABLE_PickerGroup label={LABEL}>

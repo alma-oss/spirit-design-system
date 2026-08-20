@@ -98,6 +98,7 @@ The exporter handles specific exceptions to the general logic of token processin
   customizable while maintaining a clear and structured naming convention. Additionally, occurrences of `0px` are normalized to `0` for consistency.
 - Typography tokens with Link – Typography tokens that include `Link` in their name are intentionally excluded from processing. This ensures that these tokens do not interfere with standard typography styling
   and are not mistakenly included in style mappings.
+- Typography tokens with Italic – Typography tokens that include `Italic` in their name are intentionally excluded from processing. Italics are applied with the `.text-italic` helper instead of dedicated token variants.
 - Tokens with `figma-` – Tokens that contain `figma-` in their name are intentionally excluded from processing. This ensures that internal Figma tokens are not included in the exported output.
 - `breakpoint-mobile` token: This token is assigned a fixed value of `0`, deviating from standard processing rules. This ensures compatibility with predefined requirements and reflects its role in responsive design settings.
 

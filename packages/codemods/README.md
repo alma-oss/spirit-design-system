@@ -54,9 +54,15 @@ npx @alma-oss/spirit-codemods -p ./src --import-sources=@org/design-system -t v5
 
 ## Available Scripts
 
-- [Web-React v2 Codemods](https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v2/web-react/README.md)
-- [Web-React v3 Codemods](https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v3/web-react/README.md)
-- [Web-React v4 Codemods](https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v4/web-react/README.md)
-- [Web-React v5 Codemods](https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v5/web-react/README.md)
+- [Web-React v2 Codemods][codemods-v2]
+- [Web-React v3 Codemods][codemods-v3]
+- [Web-React v4 Codemods][codemods-v4]
+- [Web-React v5 Codemods][codemods-v5]
+- [Web-React v6 Codemods][codemods-v6]
 
+[codemods-v2]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v2/web-react/README.md
+[codemods-v3]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v3/web-react/README.md
+[codemods-v4]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v4/web-react/README.md
+[codemods-v5]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v5/web-react/README.md
+[codemods-v6]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/codemods/src/transforms/v6/web-react/README.md
 [jscodeshift]: https://github.com/facebook/jscodeshift

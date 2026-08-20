@@ -36,7 +36,7 @@ const meta: Meta<typeof TimelineStep> = {
       <>
         <TimelineMarker variant="number">1</TimelineMarker>
         <TimelineHeading>
-          <Heading elementType="h3" size="small" emphasis="semibold">
+          <Heading elementType="h3" size="small" fontWeight="semibold">
             {TIMELINE_DATA[0].title}
           </Heading>
         </TimelineHeading>

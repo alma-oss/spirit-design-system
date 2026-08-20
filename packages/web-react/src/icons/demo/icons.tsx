@@ -21,7 +21,7 @@ const Icons = () => {
         {icons?.map((icon) => (
           <li key={icon} className="mb-700">
             <Icon name={icon} />
-            <Text marginTop="space-600" emphasis="bold">
+            <Text marginTop="space-600" fontWeight="bold">
               {icon}
             </Text>
           </li>

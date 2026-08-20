@@ -15,7 +15,7 @@ const renderTimelineContent = (item: TimelineDataStep) => (
   <>
     {item.title && (
       <TimelineHeading>
-        <Heading elementType="h3" size="small" emphasis="semibold">
+        <Heading elementType="h3" size="small" fontWeight="semibold">
           {item.button ? <Link href="#">{item.title}</Link> : item.title}
         </Heading>
       </TimelineHeading>

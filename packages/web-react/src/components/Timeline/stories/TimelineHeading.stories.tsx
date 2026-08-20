@@ -21,12 +21,12 @@ const meta: Meta<typeof TimelineHeading> = {
       description: 'Heading content examples',
       mapping: {
         Heading: (
-          <Heading elementType="h3" size="small" emphasis="semibold">
+          <Heading elementType="h3" size="small" fontWeight="semibold">
             Heading
           </Heading>
         ),
         'Heading with link': (
-          <Heading elementType="h3" size="small" emphasis="semibold">
+          <Heading elementType="h3" size="small" fontWeight="semibold">
             <Link href="#">Heading with link</Link>
           </Heading>
         ),
