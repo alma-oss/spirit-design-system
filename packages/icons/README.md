@@ -100,7 +100,27 @@ This configuration is not required if you are using the Next.js App Router.
 
 For more information, please see the [Next.js documentation][nextjs-transpile-packages].
 
+## Synchronizing Icons From Figma
+
+The [Figma Assets file][figma-assets] is the source of truth for icons. Component sets named `Icons/{icon-name}` contain
+Brand variants; this repository synchronizes only the `Brand=Spirit` variant into `src/svg`.
+
+To synchronize locally, create a Figma personal access token with the `file_content:read` scope and access to the Assets
+file, then run:
+
+```shell
+FIGMA_ACCESS_TOKEN=your-token yarn icons:sync
+```
+
+The command adds, updates, and deletes SVGs so the directory exactly matches Figma. It does not rewrite icon colors;
+color normalization remains part of the package build.
+
+Maintainers can run the **Sync Figma Assets** workflow from GitHub Actions. An external automation such as Make can
+also start the same workflow after a Figma `LIBRARY_PUBLISH` event. It opens or updates a pull request when the
+generated SVGs differ.
+
 [esm-only]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
-[spirit-web]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web
+[figma-assets]: https://www.figma.com/design/UMd06VnGrAE5xheb4C8QEg/Assets
 [nextjs-transpile-packages]: https://nextjs.org/docs/pages/api-reference/next-config-js/transpilePackages
 [react-svgr]: https://react-svgr.com/
+[spirit-web]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web
