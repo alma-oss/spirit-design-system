@@ -29,6 +29,7 @@
     "format:check": "prettier --check ./",
     "format:fix": "prettier --write ./",
     "format:fix:changelog": "prettier --write ./**/CHANGELOG.md",
+    "icons:sync": "yarn workspace @alma-oss/spirit-icons sync",
     "prepare": "is-ci || husky install",
     "storybook": "lerna run start --scope=@alma-oss/spirit-storybook",
     "test": "yarn packages:test",

@@ -21,6 +21,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@alma-oss/figma-assets@workspace:^, @alma-oss/figma-assets@workspace:packages/figma-assets":
+  version: 0.0.0-use.local
+  resolution: "@alma-oss/figma-assets@workspace:packages/figma-assets"
+  dependencies:
+    "@types/node": "catalog:types"
+    eslint: "catalog:lint"
+    eslint-config-spirit: "workspace:^"
+    npm-run-all2: "catalog:script"
+    tsup: "catalog:build"
+    tsx: "catalog:script"
+    typescript: "catalog:types"
+  bin:
+    figma-assets: ./dist/bin/figma-assets.js
+  languageName: unknown
+  linkType: soft
+
 "@alma-oss/spirit-analytics@workspace:packages/analytics":
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-analytics@workspace:packages/analytics"
@@ -227,6 +243,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-icons@workspace:packages/icons"
   dependencies:
+    "@alma-oss/figma-assets": "workspace:^"
     "@alma-oss/vite-plugin-spirit-icons": "workspace:^"
     "@types/node": "catalog:types"
     "@types/react": "catalog:types"
