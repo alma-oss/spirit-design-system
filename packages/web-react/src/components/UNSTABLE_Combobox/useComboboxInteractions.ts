@@ -1,7 +1,7 @@
 'use client';
 
 import { type FocusEvent, type KeyboardEvent, type MouseEvent, type RefObject, useCallback } from 'react';
-import { COMBOBOX_OPTION_ITEM_SELECTOR } from './constants';
+import { COMBOBOX_OPTION_ITEM_SELECTOR, COMBOBOX_SELECTION_CHROME_SELECTOR } from './constants';
 import { useComboboxOptionGridKeyboard } from './useComboboxOptionGridKeyboard';
 import { getOptionRowFromFocus, getOptionValueFromRow, isOptionRowDisabled } from './utils';
 
@@ -118,7 +118,11 @@ export const useComboboxInteractions = ({
 
     const target = event.target as HTMLElement;
 
-    if (target.closest('[role="row"]')) {
+    // Skip selection chrome and nested overlays (e.g. SplitTag distance trigger) so clicks
+    // on those controls do not steal focus or reopen the Combobox popover.
+    // Do not match `.Dropdown`: the Combobox field itself lives inside the options Dropdown.
+    // Tag chrome is covered by `[role="row"]` (including custom SplitTag rows) — no component classnames.
+    if (target.closest(COMBOBOX_SELECTION_CHROME_SELECTOR)) {
       return;
     }
 

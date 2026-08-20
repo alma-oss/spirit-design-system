@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useRef, useState } from 'react';
-import { useToggle } from '../../../hooks';
+import { useDisclosureState } from '../../../hooks';
 import { CloseButton } from '../../CloseButton';
 import { HelperText } from '../../HelperText';
 import { Icon } from '../../Icon';
@@ -44,7 +44,7 @@ const INITIAL_LAST_SEARCHES: readonly LastSearch[] = [
 ];
 
 const ComboboxLastSearchesGrid = () => {
-  const [isOpen, onToggle] = useToggle(false);
+  const { isExpanded: isOpen, toggle: onToggle } = useDisclosureState({ defaultExpanded: false });
   const [selectedKeys] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [searches, setSearches] = useState([...INITIAL_LAST_SEARCHES]);

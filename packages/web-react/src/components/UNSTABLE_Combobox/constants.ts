@@ -17,6 +17,12 @@ export const DEFAULT_OPTIONS_ROLE: ComboboxOptionsRole = 'listbox';
 export const COMBOBOX_OPTION_ITEM_SELECTOR = '[role="option"], [role="row"]';
 
 /**
+ * Clicks on selection rows or Spirit toggles must not reopen the Combobox popover.
+ * Keep this narrow — broad `button`/`a` matches can block Clear and other chrome.
+ */
+export const COMBOBOX_SELECTION_CHROME_SELECTOR = '[role="row"], [data-spirit-toggle]';
+
+/**
  * Nested interactive controls inside an option row (e.g. remove button in a grid cell).
  * Links are omitted — row-level Enter activates `a[href]`; Left/Right only reach secondary controls.
  * Includes `tabindex="-1"` targets so arrow keys can focus them without putting them in the tab order.

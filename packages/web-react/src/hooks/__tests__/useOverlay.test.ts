@@ -13,6 +13,8 @@ describe('useOverlay', () => {
 
   it('should close on Escape when open', () => {
     const onClose = jest.fn();
+    const preventDefault = jest.fn();
+    const stopPropagation = jest.fn();
     const overlayRef = createOverlayRef();
 
     const { result } = renderHook(() =>
@@ -26,9 +28,13 @@ describe('useOverlay', () => {
     act(() => {
       result.current.onOverlayKeyDown({
         key: 'Escape',
+        preventDefault,
+        stopPropagation,
       } as never);
     });
 
+    expect(preventDefault).toHaveBeenCalledTimes(1);
+    expect(stopPropagation).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
@@ -73,6 +79,49 @@ describe('useOverlay', () => {
     });
 
     expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it('should not close an outer overlay when a nested overlay already handled Escape', () => {
+    const onCloseInner = jest.fn();
+    const onCloseOuter = jest.fn();
+    const innerOverlayRef = createOverlayRef();
+    const outerOverlayRef = createOverlayRef();
+    let defaultPrevented = false;
+    const stopPropagation = jest.fn();
+    const event = {
+      key: 'Escape',
+      get defaultPrevented() {
+        return defaultPrevented;
+      },
+      preventDefault: () => {
+        defaultPrevented = true;
+      },
+      stopPropagation,
+    };
+
+    const { result: inner } = renderHook(() =>
+      useOverlay({
+        isOpen: true,
+        overlayRef: innerOverlayRef,
+        onClose: onCloseInner,
+      }),
+    );
+    const { result: outer } = renderHook(() =>
+      useOverlay({
+        isOpen: true,
+        overlayRef: outerOverlayRef,
+        onClose: onCloseOuter,
+      }),
+    );
+
+    act(() => {
+      inner.current.onOverlayKeyDown(event as never);
+      outer.current.onOverlayKeyDown(event as never);
+    });
+
+    expect(onCloseInner).toHaveBeenCalledTimes(1);
+    expect(onCloseOuter).not.toHaveBeenCalled();
+    expect(stopPropagation).toHaveBeenCalledTimes(1);
   });
 
   it('should close on outside click when enabled', () => {

@@ -12,6 +12,7 @@ import type {
   Validation,
   ValidationTextProp,
 } from '../../types';
+import type { ComboboxSelectedItem } from './useComboboxItems';
 /** Popup options widget role. `null` on the prop means no options widget (tip-only / auxiliary content). */
 export type ComboboxOptionsRole = 'listbox' | 'grid';
 
@@ -37,6 +38,8 @@ export interface UnstableComboboxRenderTagsOptions {
   onRemove: (key: string) => void;
   /** Remove by row index; prefer for remove controls so focus moves like default tags */
   removeTagAtIndex: (index: number) => void;
+  /** Currently selected items in selection order (value + label) */
+  selectedItems: ComboboxSelectedItem[];
 }
 
 export interface UnstableComboboxBaseProps<S = void>

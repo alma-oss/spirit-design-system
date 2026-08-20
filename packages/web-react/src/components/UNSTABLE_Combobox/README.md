@@ -165,13 +165,18 @@ grid demo). That clears any nested cell-control highlight and keeps DOM focus on
 
 Use `renderTags` when you need a custom selection area. The callback receives:
 
+- **`selectedItems`** – Selected items in selection order (`{ value, label }`)
 - **`onRemove(key)`** – Remove by option value
 - **`removeTagAtIndex(index)`** – Remove by row index (prefer for remove buttons so focus moves like the default tags)
-- **`getKeyboardGridRowProps(index)`** – Pass as `tagKeyboardProps` on each [`UNSTABLE_ComboboxTag`](#unstable_comboboxtag).
-  Use one row per selected item in DOM order (`0` … `n-1`).
+- **`getKeyboardGridRowProps(index)`** – Pass as `tagKeyboardProps` on each [`UNSTABLE_ComboboxTag`](#unstable_comboboxtag),
+  or spread onto a custom `role="row"` wrapper. Use one row per selected item in DOM order (`0` … `n-1`).
 
-If you omit `tagKeyboardProps`, custom tags are not on the selection grid keyboard path; `onRemove` /
+If you omit `tagKeyboardProps` / row keyboard props, custom tags are not on the selection grid keyboard path; `onRemove` /
 `removeTagAtIndex` still apply.
+
+Default selection uses [`UNSTABLE_ComboboxTag`](#unstable_comboboxtag) (a single [Tag][tag-readme]). For joined
+segments (city + distance + remove), compose [`UNSTABLE_SplitTag`][splittag-readme] inside each `role="row"` —
+see the **Locations** demo.
 
 ### Themes
 
@@ -382,4 +387,5 @@ and [escape hatches][readme-escape-hatches].
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[splittag-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_SplitTag/README.md
 [tag-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Tag/README.md

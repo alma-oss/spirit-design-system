@@ -10,6 +10,7 @@ import ComboboxFullWidth from './ComboboxFullWidth';
 import ComboboxHelperText from './ComboboxHelperText';
 import ComboboxLastSearchesGrid from './ComboboxLastSearchesGrid';
 import ComboboxLoading from './ComboboxLoading';
+import ComboboxLocations from './ComboboxLocations';
 import ComboboxRequired from './ComboboxRequired';
 import ComboboxSearchResults from './ComboboxSearchResults';
 import ComboboxSizes from './ComboboxSizes';
@@ -23,6 +24,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <ComboboxDefault />
+      </DocsSection>
+      <DocsSection title="Locations (with SplitTag)">
+        <ComboboxLocations />
       </DocsSection>
       <DocsSection title="Themes">
         <ComboboxThemes />

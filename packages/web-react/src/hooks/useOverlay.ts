@@ -29,6 +29,11 @@ export interface UseOverlayReturn {
  * Reusable overlay-close behavior for non-modal overlays.
  * Handles Escape dismissal and click-outside dismissal.
  *
+ * Escape calls `preventDefault` and `stopPropagation` so nested overlays (for example a SplitTag
+ * distance Dropdown inside Combobox) close one level at a time. An outer overlay that also uses
+ * this hook will not close on the same keypress: either the event does not bubble, or
+ * `event.defaultPrevented` is already set. Consumers today are `Dropdown` / `UncontrolledDropdown`.
+ *
  * @param props - Hook configuration.
  * @param props.isOpen - Whether overlay is currently open.
  * @param props.overlayRef - Ref to the overlay root element.
@@ -75,6 +80,9 @@ export const useOverlay = ({
         return;
       }
 
+      // Stop propagation so nested overlays (e.g. SplitTag distance inside Combobox) close one level at a time.
+      event.preventDefault();
+      event.stopPropagation();
       onClose(event);
     },
     [closeOnEscape, isOpen, onClose],
