@@ -23,6 +23,8 @@ import ComboboxInput from './ComboboxInput';
 import ComboboxPopoverContent from './ComboboxPopoverContent';
 import {
   COMBOBOX_INPUT_MIN_WIDTH_CSS_VAR,
+  COMBOBOX_NESTED_CONTROL_BUTTON_SIZE_MAP,
+  COMBOBOX_NESTED_SIZE_MAP,
   DEFAULT_OPTIONS_ROLE,
   DEFAULT_POPOVER_PROPS,
   DEFAULT_SIZE,
@@ -262,12 +264,23 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
         validationState,
         label: { isLabelHidden },
         inputContainer: { variant },
+        tag: {
+          color: 'selected',
+          size: COMBOBOX_NESTED_SIZE_MAP[size],
+        },
+        splitTag: {
+          color: 'selected',
+          size: COMBOBOX_NESTED_SIZE_MAP[size],
+        },
+        controlButton: {
+          size: COMBOBOX_NESTED_CONTROL_BUTTON_SIZE_MAP[size],
+        },
       }}
     >
       <UniversalProvider
         values={[
           [FormFieldsContext, { size }],
-          [ComboboxContext, { size, tagDescriptionId }],
+          [ComboboxContext, { size, tagDescriptionId, isOpen, onToggle: handleDropdownToggle, isDisabled }],
         ]}
       >
         <div

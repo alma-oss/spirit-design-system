@@ -8,6 +8,8 @@ import {
   useRef,
   useState,
 } from 'react';
+import { KeyboardKey } from '../../constants';
+import { blockDefaultReactions } from '../../utils';
 
 const TYPE_AHEAD_RESET_MS = 500;
 
@@ -136,30 +138,25 @@ export const useSplitTagListboxKeyboard = ({
           }
 
           switch (event.key) {
-            case 'ArrowDown':
-              event.preventDefault();
-              event.stopPropagation();
-              focusValueAt(Math.min(index + 1, optionValues.length - 1));
+            case KeyboardKey.ArrowDown:
+              blockDefaultReactions(event);
+              focusValueAt(optionValues.length === 0 ? -1 : (index + 1) % optionValues.length);
               break;
-            case 'ArrowUp':
-              event.preventDefault();
-              event.stopPropagation();
-              focusValueAt(Math.max(index - 1, 0));
+            case KeyboardKey.ArrowUp:
+              blockDefaultReactions(event);
+              focusValueAt(optionValues.length === 0 ? -1 : (index - 1 + optionValues.length) % optionValues.length);
               break;
-            case 'Home':
-              event.preventDefault();
-              event.stopPropagation();
+            case KeyboardKey.Home:
+              blockDefaultReactions(event);
               focusValueAt(0);
               break;
-            case 'End':
-              event.preventDefault();
-              event.stopPropagation();
+            case KeyboardKey.End:
+              blockDefaultReactions(event);
               focusValueAt(optionValues.length - 1);
               break;
-            case ' ':
-            case 'Enter':
-              event.preventDefault();
-              event.stopPropagation();
+            case KeyboardKey.Space:
+            case KeyboardKey.Enter:
+              blockDefaultReactions(event);
               select(value);
               break;
             default:

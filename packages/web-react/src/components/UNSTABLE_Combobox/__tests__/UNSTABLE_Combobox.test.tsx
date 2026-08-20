@@ -78,6 +78,22 @@ describe('UNSTABLE_Combobox', () => {
     expect(screen.getByRole('group', { name: 'Languages' })).toHaveClass('InputContainer--outline');
   });
 
+  it.each([
+    ['small', 'Tag--xsmall', 'ControlButton--xsmall'],
+    ['medium', 'Tag--small', 'ControlButton--xsmall'],
+    ['large', 'Tag--medium', 'ControlButton--xsmall'],
+  ] as const)(
+    'maps Combobox size %s to nested Tag / ControlButton sizes via ContextProps',
+    (size, tagClass, controlButtonClass) => {
+      render(<TestCombobox size={size} selectedKeys={['cs']} />);
+
+      const tag = screen.getByRole('row', { name: 'Czech' });
+
+      expect(tag).toHaveClass(tagClass);
+      expect(within(tag).getByRole('button', { name: /Remove/i })).toHaveClass(controlButtonClass);
+    },
+  );
+
   formFieldLabelContextPropsTest({
     renderComponent: (props) => <TestCombobox {...defaultProps} {...props} />,
   });

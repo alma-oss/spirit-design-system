@@ -17,10 +17,11 @@ export const DEFAULT_OPTIONS_ROLE: ComboboxOptionsRole = 'listbox';
 export const COMBOBOX_OPTION_ITEM_SELECTOR = '[role="option"], [role="row"]';
 
 /**
- * Clicks on selection rows or Spirit toggles must not reopen the Combobox popover.
- * Keep this narrow — broad `button`/`a` matches can block Clear and other chrome.
+ * Selected items in the Combobox input (`UNSTABLE_ComboboxTag`, `UNSTABLE_ComboboxSplitTag`).
+ * Clicks on these rows must not steal focus or reopen the Combobox popover.
+ * Keep this narrow — broad `button`/`a` matches can block Clear and other input addons.
  */
-export const COMBOBOX_SELECTION_CHROME_SELECTOR = '[role="row"], [data-spirit-toggle]';
+export const COMBOBOX_SELECTION_SELECTOR = '[role="row"]';
 
 /**
  * Nested interactive controls inside an option row (e.g. remove button in a grid cell).

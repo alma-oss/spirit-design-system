@@ -10,7 +10,11 @@ export interface SelectionGridRowProps {
   onKeyDown: (event: KeyboardEvent<HTMLElement>) => void;
   onFocusCapture: (event: FocusEvent<HTMLElement>) => void;
   onBlurCapture: (event: FocusEvent<HTMLElement>) => void;
-  removeButtonTabIndex: 0 | -1;
+  /**
+   * Roving tabindex for secondary controls inside the row (remove button, nested select trigger).
+   * `0` while the row contains focus; otherwise `-1`.
+   */
+  secondaryControlTabIndex: 0 | -1;
 }
 
 export interface UseSelectionAriaProps {
@@ -56,7 +60,7 @@ const focusTagRow = (selectionRef: RefObject<HTMLElement | null> | undefined, ro
 /**
  * Keyboard and roving tabindex behaviour for a selection grid (`role="grid"`):
  * one tab stop per row, arrow / Home / End navigation, Delete & Backspace
- * to remove, and the remove control participating in the tab order while the row contains focus.
+ * to remove, and secondary controls participating in the tab order while the row contains focus.
  *
  * Tag-grid scoped today. A Collection + KeyboardDelegate-driven generalization shared with
  * option listboxes is deferred — see `hooks/selection/README.md`.
@@ -182,7 +186,7 @@ export const useSelectionAria = ({
       if (isPopoverOpen || isDisabled) {
         return {
           tabIndex: -1,
-          removeButtonTabIndex: -1,
+          secondaryControlTabIndex: -1,
           onFocusCapture: () => {},
           onBlurCapture: () => {},
           onKeyDown: () => {},
@@ -191,7 +195,7 @@ export const useSelectionAria = ({
 
       return {
         tabIndex: index === activeTagIndex ? 0 : -1,
-        removeButtonTabIndex: focusedRowIndex === index ? 0 : -1,
+        secondaryControlTabIndex: focusedRowIndex === index ? 0 : -1,
         onFocusCapture: () => {
           setActiveTagIndex(index);
           setFocusedRowIndex(index);
@@ -210,6 +214,12 @@ export const useSelectionAria = ({
             event.preventDefault();
             removeAt(index);
 
+            return;
+          }
+
+          // Nested overlays (e.g. Combobox SplitTag select) must preventDefault on handled keys
+          // so selection-grid navigation does not run. Consumers wrap this handler when needed.
+          if (event.defaultPrevented) {
             return;
           }
 
