@@ -20,6 +20,7 @@ import {
   Stack,
   Tag,
   UNSTABLE_SplitTag,
+  useSplitTagListboxKeyboard,
   useToggle,
 } from '@alma-oss/spirit-web-react';
 ```
@@ -39,9 +40,8 @@ import {
 semantics and interaction. The nested `ControlButton` is decorative: render it as a `span` with
 `aria-hidden="true"`. This keeps one segment as one control instead of nesting one control inside another.
 
-The following composition mirrors the live demo. It uses the demo-local `useSplitTagListboxKeyboard` helper
-to supply roving focus, selection, and keyboard handlers. This helper is not part of the public package API;
-applications must provide equivalent behavior.
+The following composition mirrors the live demo. It uses `useSplitTagListboxKeyboard` for roving focus,
+selection, and keyboard handlers on listbox options.
 
 ```tsx
 const [selectedRadius, setSelectedRadius] = React.useState('+5 km');
@@ -181,4 +181,4 @@ and [escape hatches][readme-escape-hatches].
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
-[split-tag-listbox-keyboard-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_SplitTag/demo/useSplitTagListboxKeyboard.ts
+[split-tag-listbox-keyboard-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_SplitTag/useSplitTagListboxKeyboard.ts

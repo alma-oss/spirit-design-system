@@ -10,8 +10,8 @@ import { VisuallyHidden } from '../../VisuallyHidden';
 import { UNSTABLE_SPLIT_TAG_CONTROL_BUTTON_SIZE_MAP } from '../constants';
 import { type SpiritUnstableSplitTagProps } from '../types';
 import UNSTABLE_SplitTag from '../UNSTABLE_SplitTag';
+import { useSplitTagListboxKeyboard } from '../useSplitTagListboxKeyboard';
 import { radiusOptions } from './constants';
-import { useSplitTagListboxKeyboard } from './useSplitTagListboxKeyboard';
 
 export interface SplitTagLocationRadiusProps extends Pick<
   SpiritUnstableSplitTagProps,

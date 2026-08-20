@@ -213,6 +213,13 @@ export const useSelectionAria = ({
             return;
           }
 
+          const target = event.target as HTMLElement;
+
+          // Nested listbox / menu (e.g. Combobox SplitTag select) owns its own arrow keys.
+          if (event.defaultPrevented || target.closest('[role="option"], [role="listbox"], .DropdownPopover')) {
+            return;
+          }
+
           let move: GridRowMove | null = null;
 
           switch (event.key) {

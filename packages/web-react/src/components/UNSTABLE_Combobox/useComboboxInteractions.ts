@@ -118,7 +118,11 @@ export const useComboboxInteractions = ({
 
     const target = event.target as HTMLElement;
 
-    if (target.closest('[role="row"]')) {
+    // Skip selection chrome and nested overlays (e.g. SplitTag distance trigger) so clicks
+    // on those controls do not steal focus or reopen the Combobox popover.
+    // Do not match `.Dropdown`: the Combobox field itself lives inside the options Dropdown.
+    // Tag chrome is covered by `[role="row"]` (including custom SplitTag rows) — no component classnames.
+    if (target.closest('[role="row"], button, a, [role="button"], [data-spirit-toggle]')) {
       return;
     }
 

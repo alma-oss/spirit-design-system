@@ -1,4 +1,10 @@
-import { type ElementType, type LegacyRef, type MutableRefObject, type ReactNode } from 'react';
+import {
+  type ElementType,
+  type KeyboardEventHandler,
+  type LegacyRef,
+  type MutableRefObject,
+  type ReactNode,
+} from 'react';
 import {
   type AlignmentXExtendedDictionaryType,
   type AlignmentYExtendedDictionaryType,
@@ -65,6 +71,8 @@ export interface SpiritDropdownProps extends DropdownProps {
 /** ===== INTERNAL API ===== */
 export interface DropdownTriggerBaseProps extends StyleProps {
   children: string | ReactNode | ((props: { isOpen: boolean }) => ReactNode);
+  /** Additional keydown handler; merged with the trigger’s ArrowDown open behavior. */
+  onKeyDown?: KeyboardEventHandler<HTMLElement>;
 }
 
 /** ===== PUBLIC API ===== */

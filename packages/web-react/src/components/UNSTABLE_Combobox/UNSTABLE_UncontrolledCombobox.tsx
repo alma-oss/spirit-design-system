@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ForwardedRef, forwardRef, useCallback, useRef, useState } from 'react';
-import { useSelectionState, useToggle } from '../../hooks';
+import { useDisclosureState, useSelectionState } from '../../hooks';
 import { type ForwardRefComponent } from '../../types';
 import ComboboxBase from './ComboboxBase';
 import type { SpiritUnstableComboboxRef, SpiritUnstableUncontrolledComboboxProps } from './types';
@@ -21,7 +21,7 @@ const UNSTABLE_UncontrolledCombobox = forwardRef(
       ...baseProps
     } = props;
     const inputRef = useRef<HTMLInputElement>(null);
-    const [isOpen, onToggle] = useToggle(defaultIsOpen);
+    const { isExpanded: isOpen, toggle: onToggle } = useDisclosureState({ defaultExpanded: defaultIsOpen });
     const [inputValue, setInputValue] = useState('');
     const { selectedKeys, setSelectedKeys } = useSelectionState({
       defaultSelectedKeys,

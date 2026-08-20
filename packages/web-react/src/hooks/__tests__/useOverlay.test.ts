@@ -13,6 +13,8 @@ describe('useOverlay', () => {
 
   it('should close on Escape when open', () => {
     const onClose = jest.fn();
+    const preventDefault = jest.fn();
+    const stopPropagation = jest.fn();
     const overlayRef = createOverlayRef();
 
     const { result } = renderHook(() =>
@@ -26,9 +28,13 @@ describe('useOverlay', () => {
     act(() => {
       result.current.onOverlayKeyDown({
         key: 'Escape',
+        preventDefault,
+        stopPropagation,
       } as never);
     });
 
+    expect(preventDefault).toHaveBeenCalledTimes(1);
+    expect(stopPropagation).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
