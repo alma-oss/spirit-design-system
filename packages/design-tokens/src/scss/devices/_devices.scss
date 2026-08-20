@@ -385,6 +385,10 @@ $form-field-small-radius-desktop: 0.5rem !default;
 $form-field-small-radius-mobile: 0.5rem !default;
 $form-field-small-radius-tablet: 0.5rem !default;
 
+$pagination-radius-desktop: 624.9375rem !default;
+$pagination-radius-mobile: 624.9375rem !default;
+$pagination-radius-tablet: 624.9375rem !default;
+
 $breakpoint-mobile: 0 !default;
 $breakpoint-tablet: 48rem !default;
 $breakpoint-desktop: 80rem !default;
@@ -950,6 +954,14 @@ $form-fields: (
             mobile: $form-field-small-radius-mobile,
             tablet: $form-field-small-radius-tablet,
         ),
+    ),
+) !default;
+
+$paginations: (
+    radius: (
+        desktop: $pagination-radius-desktop,
+        mobile: $pagination-radius-mobile,
+        tablet: $pagination-radius-tablet,
     ),
 ) !default;
 
