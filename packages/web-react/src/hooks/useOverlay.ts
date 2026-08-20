@@ -75,6 +75,9 @@ export const useOverlay = ({
         return;
       }
 
+      // Stop propagation so nested overlays (e.g. SplitTag distance inside Combobox) close one level at a time.
+      event.preventDefault();
+      event.stopPropagation();
       onClose(event);
     },
     [closeOnEscape, isOpen, onClose],
