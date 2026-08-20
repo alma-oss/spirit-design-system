@@ -303,7 +303,7 @@ describe('useSelectionAria', () => {
     const props = result.current.getKeyboardGridRowProps(0);
 
     expect(props.tabIndex).toBe(-1);
-    expect(props.removeButtonTabIndex).toBe(-1);
+    expect(props.secondaryControlTabIndex).toBe(-1);
 
     act(() => {
       props.onFocusCapture({} as FocusEvent<HTMLElement>);
@@ -521,7 +521,7 @@ describe('useSelectionAria', () => {
       result.current.getKeyboardGridRowProps(0).onFocusCapture({} as FocusEvent<HTMLElement>);
     });
 
-    expect(result.current.getKeyboardGridRowProps(0).removeButtonTabIndex).toBe(0);
+    expect(result.current.getKeyboardGridRowProps(0).secondaryControlTabIndex).toBe(0);
 
     act(() => {
       result.current.getKeyboardGridRowProps(0).onBlurCapture({
@@ -530,7 +530,7 @@ describe('useSelectionAria', () => {
       } as unknown as FocusEvent<HTMLElement>);
     });
 
-    expect(result.current.getKeyboardGridRowProps(0).removeButtonTabIndex).toBe(-1);
+    expect(result.current.getKeyboardGridRowProps(0).secondaryControlTabIndex).toBe(-1);
 
     outside.remove();
   });
@@ -560,6 +560,6 @@ describe('useSelectionAria', () => {
       } as unknown as FocusEvent<HTMLElement>);
     });
 
-    expect(result.current.getKeyboardGridRowProps(0).removeButtonTabIndex).toBe(0);
+    expect(result.current.getKeyboardGridRowProps(0).secondaryControlTabIndex).toBe(0);
   });
 });

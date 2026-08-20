@@ -3,6 +3,7 @@ export * from './colors';
 export * from './dictionaries';
 export * from './direction';
 export * from './inputs';
+export * from './keyboard';
 export * from './media';
 export * from './position';
 export * from './selection';

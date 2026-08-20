@@ -61,7 +61,7 @@ const UNSTABLE_PickerTag = ({
           label={removeButtonLabel}
           onClick={onRemove}
           size={PICKER_NESTED_CLOSE_BUTTON_SIZE_MAP[size]}
-          {...(tagKeyboardProps && { tabIndex: tagKeyboardProps.removeButtonTabIndex })}
+          {...(tagKeyboardProps && { tabIndex: tagKeyboardProps.secondaryControlTabIndex })}
         />
       </div>
     </Tag>

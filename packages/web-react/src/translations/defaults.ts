@@ -38,6 +38,8 @@ export const defaultTranslations = {
     selectionAriaLabel: 'Selected {label}',
     selectionCountLabel: '{label}, {count} items selected',
     selectionCountLabelSingular: '{label}, {count} item selected',
+    splitTagListboxLabel: 'Options',
+    splitTagSelectLabel: 'Select option, selected {selectedLabel}',
     tagDescriptionText: 'Press Delete or Backspace to remove',
   },
   textArea: {

@@ -4,14 +4,15 @@ import { ControlButton } from '../../ControlButton';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../../Dropdown';
 import { Icon } from '../../Icon';
 import { Item } from '../../Item';
+import { Label } from '../../Label';
 import { Stack } from '../../Stack';
 import { Tag } from '../../Tag';
 import { VisuallyHidden } from '../../VisuallyHidden';
 import { UNSTABLE_SPLIT_TAG_CONTROL_BUTTON_SIZE_MAP } from '../constants';
 import { type SpiritUnstableSplitTagProps } from '../types';
 import UNSTABLE_SplitTag from '../UNSTABLE_SplitTag';
+import { useSplitTagListboxKeyboard } from '../useSplitTagListboxKeyboard';
 import { radiusOptions } from './constants';
-import { useSplitTagListboxKeyboard } from './useSplitTagListboxKeyboard';
 
 export interface SplitTagLocationRadiusProps extends Pick<
   SpiritUnstableSplitTagProps,
@@ -83,9 +84,9 @@ const SplitTagLocationRadius = ({
                   {...getOptionProps(radiusOption)}
                   key={radiusOption}
                   isSelected={isSelected}
-                  endSlot={isSelected ? <Icon name="check-plain" boxSize={20} /> : undefined}
+                  endSlot={isSelected ? <Icon name="check-plain" color="selected" boxSize={20} /> : undefined}
                 >
-                  {radiusOption}
+                  <Label>{radiusOption}</Label>
                 </Item>
               );
             })}

@@ -8,6 +8,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { ContextPropsProvider } from '../../../context';
 import { ControlButton } from '../../ControlButton';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../../Dropdown';
 import { Tag } from '../../Tag';
@@ -36,6 +37,18 @@ describe('UNSTABLE_SplitTag', () => {
     expect(screen.getByText('Content')).toBeInTheDocument();
   });
 
+  it('should inherit color and size from splitTag ContextProps', () => {
+    render(
+      <ContextPropsProvider value={{ splitTag: { color: 'selected', size: 'small' } }}>
+        <UNSTABLE_SplitTag>
+          <Tag>Prague</Tag>
+        </UNSTABLE_SplitTag>
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Prague')).toHaveClass('Tag--selected', 'Tag--small');
+  });
+
   it('should pass tag props to nested Tags and ControlButtons as defaults', () => {
     render(
       <UNSTABLE_SplitTag color="selected" isDisabled isSubtle size="large">
@@ -56,7 +69,7 @@ describe('UNSTABLE_SplitTag', () => {
     );
     expect(screen.getByRole('button', { name: 'Remove Prague' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Remove Prague' }).querySelector('.ControlButton')).toHaveClass(
-      'ControlButton--large',
+      'ControlButton--small',
       'disabled',
     );
     expect(screen.getByRole('button', { name: 'Remove Prague' }).querySelector('.ControlButton')).toHaveAttribute(
@@ -81,7 +94,7 @@ describe('UNSTABLE_SplitTag', () => {
     expect(screen.getByText('Prague')).not.toHaveClass('Tag--selected', 'Tag--subtle', 'disabled');
     expect(screen.getByRole('button', { name: 'Remove Prague' })).not.toBeDisabled();
     expect(screen.getByRole('button', { name: 'Remove Prague' }).querySelector('.ControlButton')).toHaveClass(
-      'ControlButton--large',
+      'ControlButton--small',
     );
     expect(screen.getByRole('button', { name: 'Remove Prague' }).querySelector('.ControlButton')).not.toHaveClass(
       'disabled',
