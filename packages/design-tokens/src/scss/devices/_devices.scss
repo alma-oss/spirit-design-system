@@ -389,6 +389,10 @@ $breakpoint-mobile: 0 !default;
 $breakpoint-tablet: 48rem !default;
 $breakpoint-desktop: 80rem !default;
 
+$pagination-radius-desktop: 624.9375rem !default;
+$pagination-radius-mobile: 624.9375rem !default;
+$pagination-radius-tablet: 624.9375rem !default;
+
 $typographys: (
     body: (
         xsmall: (
@@ -957,4 +961,12 @@ $breakpoints: (
     mobile: $breakpoint-mobile,
     tablet: $breakpoint-tablet,
     desktop: $breakpoint-desktop,
+) !default;
+
+$pagination: (
+    radius: (
+        desktop: $pagination-radius-desktop,
+        mobile: $pagination-radius-mobile,
+        tablet: $pagination-radius-tablet,
+    ),
 ) !default;
