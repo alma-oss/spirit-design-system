@@ -36,7 +36,7 @@ First item selected:
       </a>
     </li>
     <li class="Pagination__item">
-      <a href="#" class="Button Button--secondary Button--small Button--symmetrical">
+      <a href="#" class="Pagination__link">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#chevron-right" />
         </svg>
@@ -53,7 +53,7 @@ Middle item selected:
 <nav role="navigation" aria-label="Page navigation">
   <ul class="Pagination">
     <li class="Pagination__item">
-      <a href="#" class="Button Button--secondary Button--small Button--symmetrical">
+      <a href="#" class="Pagination__link">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#chevron-left" />
         </svg>
@@ -91,7 +91,7 @@ Middle item selected:
       </a>
     </li>
     <li class="Pagination__item">
-      <a href="#" class="Button Button--secondary Button--small Button--symmetrical">
+      <a href="#" class="Pagination__link">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#chevron-right" />
         </svg>
@@ -108,7 +108,7 @@ Last item selected:
 <nav role="navigation" aria-label="Page navigation">
   <ul class="Pagination">
     <li class="Pagination__item">
-      <a href="#" class="Button Button--secondary Button--small Button--symmetrical">
+      <a href="#" class="Pagination__link">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#chevron-left" />
         </svg>
@@ -143,6 +143,53 @@ Last item selected:
       <a href="#" class="Pagination__link Pagination__link--current" aria-current="page">
         <span class="accessibility-hidden">Current Page, Page 113</span>
         <span aria-hidden="true">113</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+```
+
+Disabled:
+
+Disabled links use `Pagination__link--disabled` and `aria-disabled="true"` on `<a>`.
+Use the native `disabled` attribute on `<button>`. The same styles also apply to
+`.Pagination__link:disabled`. Disabled styles take precedence over the current state.
+
+```html
+<nav role="navigation" aria-label="Page navigation">
+  <ul class="Pagination">
+    <li class="Pagination__item">
+      <a href="#" class="Pagination__link Pagination__link--disabled" aria-disabled="true">
+        <svg class="Icon" width="24" height="24" aria-hidden="true">
+          <use href="/icons/svg/sprite.svg#chevron-left" />
+        </svg>
+        <span class="accessibility-hidden">Previous</span>
+      </a>
+    </li>
+    <li class="Pagination__item">
+      <a href="#" class="Pagination__link Pagination__link--disabled" aria-disabled="true" aria-label="Go to Page 11">
+        <span class="accessibility-hidden">page</span>
+        11
+      </a>
+    </li>
+    <li class="Pagination__item">
+      <a href="#" class="Pagination__link Pagination__link--current" aria-current="page">
+        <span class="accessibility-hidden">Current Page, Page 12</span>
+        <span aria-hidden="true">12</span>
+      </a>
+    </li>
+    <li class="Pagination__item">
+      <a href="#" class="Pagination__link" aria-label="Go to Page 13">
+        <span class="accessibility-hidden">page</span>
+        13
+      </a>
+    </li>
+    <li class="Pagination__item">
+      <a href="#" class="Pagination__link Pagination__link--disabled" aria-disabled="true">
+        <svg class="Icon" width="24" height="24" aria-hidden="true">
+          <use href="/icons/svg/sprite.svg#chevron-right" />
+        </svg>
+        <span class="accessibility-hidden">Next</span>
       </a>
     </li>
   </ul>

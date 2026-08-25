@@ -85,15 +85,19 @@ $_numeric-keys-pad-string: '0';
 // Parameters are:
 // * $property: the base CSS property name (e.g. 'border-radius')
 // * $token-name: token name (e.g. 'radius')
-// * $size: the size variant (e.g. 'small', 'medium')
+// * $size: optional size variant (e.g. 'small', 'medium'); omit for tokens like `pagination-radius-mobile`
 // * $variable-prefix: prefix used for the token variable names (e.g. 'form-field')
 // * $fallback: value to use if token is not found
-@function generate-responsive-map($property, $token-name, $size, $variable-prefix, $fallback) {
+@function generate-responsive-map($property, $token-name, $variable-prefix, $fallback, $size: null) {
     $result: ();
 
     @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
         $key: '#{$property}-#{$breakpoint-name}';
-        $variable-name: '#{$variable-prefix}-#{$size}-#{$token-name}-#{$breakpoint-name}';
+        $variable-name: if(
+            $size,
+            '#{$variable-prefix}-#{$size}-#{$token-name}-#{$breakpoint-name}',
+            '#{$variable-prefix}-#{$token-name}-#{$breakpoint-name}'
+        );
         $value: get-variable-if-exists($variable-name, $fallback);
 
         $result: map.merge(
