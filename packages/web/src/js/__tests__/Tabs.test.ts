@@ -186,6 +186,32 @@ describe('Tabs', () => {
       await firstTabs.show();
     });
 
+    it('should not set aria-selected or mutate tabindex on role=tabpanel when activating a tab', async () => {
+      fixtureEl.innerHTML = `
+          <ul class="Tabs" role="tablist">
+            <li class="Tabs__item" role="presentation"><button type="button" data-spirit-target="#home" class="Tabs__link is-selected" role="tab" aria-selected="true">Home</button></li>
+            <li class="Tabs__item" role="presentation"><button type="button" id="trigger-profile" data-spirit-target="#profile" class="Tabs__link" role="tab">Profile</button></li>
+          </ul>
+          <div class="Tabs-content">
+            <div class="TabsPane is-selected" id="home" role="tabpanel"></div>
+            <div class="TabsPane" id="profile" role="tabpanel"></div>
+          </div>
+        `;
+
+      const profileTriggerEl = fixtureEl.querySelector('#trigger-profile') as HTMLElement;
+      const profilePanelEl = fixtureEl.querySelector('#profile') as HTMLElement;
+      const homePanelEl = fixtureEl.querySelector('#home') as HTMLElement;
+      const tab = new Tabs(profileTriggerEl);
+
+      await tab.show();
+
+      expect(profileTriggerEl.getAttribute('aria-selected')).toBe('true');
+      expect(profilePanelEl.hasAttribute('aria-selected')).toBe(false);
+      expect(homePanelEl.hasAttribute('aria-selected')).toBe(false);
+      expect(profilePanelEl.hasAttribute('tabindex')).toBe(false);
+      expect(homePanelEl.hasAttribute('tabindex')).toBe(false);
+    });
+
     it('should handle removed tabs', async () => {
       fixtureEl.innerHTML = `
           <ul class="Tabs" role="tablist">
