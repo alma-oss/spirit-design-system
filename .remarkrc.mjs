@@ -37,7 +37,7 @@ export default {
     [
       'remark-lint-heading-capitalization',
       {
-        lowerCaseWords: ['v1', 'v2', 'v3', 'v4', 'v5', 'vs', 'npm'],
+        lowerCaseWords: ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'vs', 'npm'],
         ignorePattern: [
           '^@lmc-eu/spirit-[a-z-]+',
           '^@alma-oss/spirit-[a-z-]+',
