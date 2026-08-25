@@ -1,7 +1,20 @@
+// 1. Disabled takes precedence over current, hover, focus, and active.
+
+@use 'sass:map';
+@use '@tokens' as tokens;
 @use 'theme';
 @use '../../settings/cursors';
+@use '../../tools/breakpoint';
 @use '../../tools/reset';
+@use '../../tools/tokens' as tokens-tools;
 @use '../../tools/typography';
+
+$item-border-radius: tokens-tools.generate-responsive-map(
+    $property: 'border-radius',
+    $variable-prefix: 'pagination',
+    $token-name: 'radius',
+    $fallback: theme.$item-border-radius-fallback,
+);
 
 .Pagination {
     display: inline-flex;
@@ -14,6 +27,8 @@
 }
 
 .Pagination__link {
+    --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$item-icon-size};
+
     @include reset.button();
     @include typography.generate(theme.$typography);
 
@@ -23,12 +38,18 @@
     min-width: theme.$item-min-width;
     height: theme.$item-height;
     padding-inline: theme.$item-padding-inline;
+    text-decoration: none;
     color: theme.$item-default-color;
     border-width: theme.$item-border-width;
     border-style: theme.$item-border-style;
     border-color: theme.$item-default-border-color;
-    border-radius: theme.$item-border-radius;
     background-color: theme.$item-default-background-color;
+
+    @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
+        @include breakpoint.up($breakpoint-value) {
+            border-radius: map.get($item-border-radius, 'border-radius-#{$breakpoint-name}');
+        }
+    }
 
     &:hover,
     &:focus {
@@ -54,4 +75,23 @@
     border-color: theme.$item-selected-border-color;
     background-color: theme.$item-selected-background-color;
     cursor: cursors.$disabled;
+}
+
+// 1.
+.Pagination__link--disabled,
+.Pagination__link[aria-disabled='true'],
+.Pagination__link:disabled {
+    color: theme.$item-disabled-color;
+    border-color: theme.$item-disabled-border-color;
+    background-color: theme.$item-disabled-background-color;
+    pointer-events: none;
+    cursor: cursors.$disabled;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: theme.$item-disabled-color;
+        border-color: theme.$item-disabled-border-color;
+        background-color: theme.$item-disabled-background-color;
+    }
 }

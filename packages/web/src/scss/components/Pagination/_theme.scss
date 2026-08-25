@@ -9,7 +9,8 @@ $item-height: units.px-to-rem(40px);
 $item-padding-inline: tokens.$space-600;
 $item-border-width: tokens.$border-width-100;
 $item-border-style: solid;
-$item-border-radius: tokens.$radius-full;
+$item-icon-size: units.px-to-rem(16px);
+$item-border-radius-fallback: tokens.$radius-full;
 
 $item-default-color: tokens.$component-pagination-unselected-content;
 $item-default-border-color: tokens.$component-pagination-unselected-border;
@@ -26,3 +27,7 @@ $item-hover-background-color: tokens.$component-pagination-unselected-state-hove
 $item-selected-color: tokens.$component-pagination-selected-content;
 $item-selected-border-color: tokens.$component-pagination-selected-border;
 $item-selected-background-color: tokens.$component-pagination-selected-state-default;
+
+$item-disabled-color: tokens.$disabled-content;
+$item-disabled-border-color: tokens.$disabled-border;
+$item-disabled-background-color: tokens.$disabled-background;
