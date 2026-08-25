@@ -34,3 +34,4 @@ For stabilizing an experimental component or removing a deprecation, use `spirit
 - Fixtures were generated with `--dry --print`, not hand-written
 - No intermediate unreleased API states documented in the migration guide
 - No inbound links left pointing at a heading anchor that squashing removed
+- Agent skills that name the changed API (especially `figma-to-code`) are updated in the same change

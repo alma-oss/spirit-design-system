@@ -51,3 +51,4 @@ The skill references proven commit patterns from repository history (component d
 - No duplicate warnings caused by wrapper components
 - README + DEPRECATIONS list are consistent
 - Breaking-release cleanup removes all stale deprecation references
+- `/spirit:figma-to-code` (and any other skill that names the API) emits the replacement in the same change
