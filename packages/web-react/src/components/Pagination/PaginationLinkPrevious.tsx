@@ -1,23 +1,33 @@
 'use client';
 
-import React, { type ElementType, type ForwardedRef, forwardRef } from 'react';
+import React, { type ElementType, forwardRef } from 'react';
 import { useI18n } from '../../hooks';
-import { type ForwardRefComponent, type SpiritPaginationLinkPreviousNextProps } from '../../types';
-import PaginationButtonLink from './PaginationButtonLink';
+import {
+  type PolymorphicComponent,
+  type PolymorphicRef,
+  type SpiritPaginationLinkPreviousNextProps,
+} from '../../types';
+import { Icon } from '../Icon';
+import { VisuallyHidden } from '../VisuallyHidden';
+import PaginationLink from './PaginationLink';
 
 const _PaginationLinkPrevious = <E extends ElementType = 'a'>(
   { accessibilityLabel, ...restProps }: SpiritPaginationLinkPreviousNextProps<E>,
-  ref: ForwardedRef<HTMLAnchorElement>,
+  ref: PolymorphicRef<E>,
 ) => {
   const { t } = useI18n();
-  const previousLabel = accessibilityLabel ?? t('pagination.previous');
 
-  return <PaginationButtonLink direction="previous" accessibilityLabel={previousLabel} {...restProps} ref={ref} />;
+  return (
+    <PaginationLink {...restProps} ref={ref}>
+      <Icon name="chevron-left" />
+      <VisuallyHidden>{accessibilityLabel ?? t('pagination.previous')}</VisuallyHidden>
+    </PaginationLink>
+  );
 };
 
-const PaginationLinkPrevious = forwardRef<HTMLAnchorElement, SpiritPaginationLinkPreviousNextProps>(
+const PaginationLinkPrevious = forwardRef<HTMLAnchorElement, SpiritPaginationLinkPreviousNextProps<'a'>>(
   _PaginationLinkPrevious,
-) as ForwardRefComponent<HTMLAnchorElement, SpiritPaginationLinkPreviousNextProps>;
+) as unknown as PolymorphicComponent<'a', SpiritPaginationLinkPreviousNextProps<ElementType>>;
 
 PaginationLinkPrevious.spiritComponent = 'PaginationLinkPrevious';
 PaginationLinkPrevious.displayName = 'PaginationLinkPrevious';

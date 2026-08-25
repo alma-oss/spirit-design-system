@@ -12,6 +12,12 @@ const meta: Meta<typeof PaginationLinkPrevious> = {
     href: {
       control: 'text',
     },
+    isDisabled: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
   },
   args: {
     accessibilityLabel: 'Previous',

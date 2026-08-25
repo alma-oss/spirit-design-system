@@ -9,6 +9,7 @@ import PaginationCurrentFirst from './PaginationCurrentFirst';
 import PaginationCurrentFirstCentered from './PaginationCurrentFirstCentered';
 import PaginationCurrentLast from './PaginationCurrentLast';
 import PaginationCurrentMiddle from './PaginationCurrentMiddle';
+import PaginationDisabled from './PaginationDisabled';
 
 export const Preview = () => (
   <StrictMode>
@@ -24,6 +25,9 @@ export const Preview = () => (
       </DocsSection>
       <DocsSection title="Pagination Current First Centered" stackAlignment="stretch">
         <PaginationCurrentFirstCentered />
+      </DocsSection>
+      <DocsSection title="Pagination Disabled">
+        <PaginationDisabled />
       </DocsSection>
     </IconsProvider>
   </StrictMode>

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ElementType, type ForwardedRef, forwardRef } from 'react';
-import { useI18n } from '../../hooks';
+import { useDeprecationMessage, useI18n } from '../../hooks';
 import { type ForwardRefComponent, type SpiritPaginationButtonLinkProps } from '../../types';
 import { ButtonLink } from '../Button';
 import { Icon } from '../Icon';
@@ -11,6 +11,14 @@ const _PaginationButtonLink = <E extends ElementType = 'a'>(
   props: SpiritPaginationButtonLinkProps<E>,
   ref: ForwardedRef<HTMLAnchorElement>,
 ) => {
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: true,
+    componentName: 'PaginationButtonLink',
+    customText:
+      'The component will be removed in the next major version. Use PaginationLinkPrevious or PaginationLinkNext instead.',
+  });
+
   const { t } = useI18n();
   const { direction, accessibilityLabel, ...restProps } = props as unknown as SpiritPaginationButtonLinkProps;
   const directionLabel =
@@ -29,6 +37,9 @@ const _PaginationButtonLink = <E extends ElementType = 'a'>(
   );
 };
 
+/**
+ * @deprecated PaginationButtonLink will be removed in the next major version. Use PaginationLinkPrevious or PaginationLinkNext instead.
+ */
 const PaginationButtonLink = forwardRef<HTMLAnchorElement, SpiritPaginationButtonLinkProps>(
   _PaginationButtonLink,
 ) as ForwardRefComponent<HTMLAnchorElement, SpiritPaginationButtonLinkProps>;

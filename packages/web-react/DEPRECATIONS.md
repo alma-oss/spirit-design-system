@@ -41,6 +41,30 @@ Or migrate manually:
 </Heading>
 ```
 
+### PaginationButtonLink
+
+The `PaginationButtonLink` component is deprecated. Use `PaginationLinkPrevious` / `PaginationLinkNext` for previous and next links.
+
+#### Migration Guide
+
+Replace `PaginationButtonLink` with `PaginationLinkPrevious` or `PaginationLinkNext`.
+
+```tsx
+// Before
+<PaginationButtonLink direction="next" href="/page-2" />
+<PaginationButtonLink direction="previous" href="/page-1" />
+
+// After
+<PaginationLinkNext href="/page-2" />
+<PaginationLinkPrevious href="/page-1" />
+```
+
+🪄 Use a codemod to rename `PaginationButtonLink` to `PaginationLinkPrevious` / `PaginationLinkNext`:
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v6/web-react/pagination-button-link-to-pagination-link
+```
+
 ### Text
 
 The `emphasis` prop is deprecated in its entirety and will be removed in v6. Use the `fontWeight` prop for the
