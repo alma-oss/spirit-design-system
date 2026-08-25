@@ -155,6 +155,12 @@ When stabilization also retires an older component, in the **owning** package(s)
 4. Remove docsite category/slug entries and demo references.
 5. Search for stragglers before committing (see Verification).
 
+## Agent Skills
+
+When promoting `UNSTABLE_X` → `X`, update `/spirit:figma-to-code` routing in the same change so new
+conversions emit the stable name. Search `.agents/skills/figma-to-code/` for the old `UNSTABLE_`
+identifier. Do not wait for a later cleanup PR.
+
 ## Verification
 
 1. **Search for leftovers** across the repo:
