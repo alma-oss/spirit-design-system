@@ -108,6 +108,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-design-tokens@workspace:packages/design-tokens"
   dependencies:
+    "@alma-oss/spirit-figma-tokens-exporter": "workspace:^"
     "@eslint/compat": "catalog:lint"
     "@eslint/eslintrc": "catalog:lint"
     eslint: "catalog:lint"
@@ -220,6 +221,23 @@ __metadata:
     react: "catalog:frontend"
     react-dom: "catalog:frontend"
     typescript: "catalog:types"
+  languageName: unknown
+  linkType: soft
+
+"@alma-oss/spirit-figma-tokens-exporter@workspace:^, @alma-oss/spirit-figma-tokens-exporter@workspace:exporters/figma-tokens":
+  version: 0.0.0-use.local
+  resolution: "@alma-oss/spirit-figma-tokens-exporter@workspace:exporters/figma-tokens"
+  dependencies:
+    "@figma/plugin-typings": "catalog:design-tools"
+    "@types/node": "catalog:types"
+    eslint: "catalog:lint"
+    eslint-config-spirit: "workspace:^"
+    npm-run-all2: "catalog:script"
+    tsup: "catalog:build"
+    tsx: "catalog:script"
+    typescript: "catalog:types"
+  bin:
+    spirit-figma-tokens-exporter: ./dist/bin/figma-tokens.js
   languageName: unknown
   linkType: soft
 
@@ -4985,6 +5003,13 @@ __metadata:
   bin:
     figma: bin/figma
   checksum: 10/ecd257edc10cca144e8dcb2695f613f462a8da0a73392939fa015b212a81449f80baeb7c80f2c9c552edce7399f29a493070d6d2e08a65c1b0be2398c8823204
+  languageName: node
+  linkType: hard
+
+"@figma/plugin-typings@npm:1.117.0":
+  version: 1.117.0
+  resolution: "@figma/plugin-typings@npm:1.117.0"
+  checksum: 10/4a5cbe9982d405596e1aea025a9e46300a249cb6c381b1e354601f716fe5a9600d6af6789219fd8bb08497b5ce87eb342d653559518d3400ec191f0b424d58f2
   languageName: node
   linkType: hard
 

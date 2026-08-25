@@ -35,9 +35,11 @@
     "lint:scripts": "eslint ./src/**/*.ts",
     "lint:styles": "stylelint ./src/**/*.scss",
     "test": "yarn lint",
-    "types": "tsc"
+    "types": "tsc",
+    "sync": "yarn workspace @alma-oss/spirit-figma-tokens-exporter generate --config ../../packages/design-tokens/figma-tokens.config.json"
   },
   "devDependencies": {
+    "@alma-oss/spirit-figma-tokens-exporter": "workspace:^",
     "@eslint/compat": "catalog:lint",
     "@eslint/eslintrc": "catalog:lint",
     "eslint": "catalog:lint",

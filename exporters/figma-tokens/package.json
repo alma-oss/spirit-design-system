@@ -1,0 +1,38 @@
+{
+  "name": "@alma-oss/spirit-figma-tokens-exporter",
+  "version": "0.0.0",
+  "description": "Capture Figma variables and styles and generate Spirit design tokens",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": "./dist/bin/figma-tokens.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup --config ./tsup.config.ts && tsup --config ./tsup.plugin.ts",
+    "lint": "eslint ./",
+    "lint:fix": "yarn lint --fix",
+    "generate": "tsx ./src/bin/figma-tokens.js generate",
+    "check": "tsx ./src/bin/figma-tokens.js check",
+    "test": "npm-run-all --serial lint types build test:unit",
+    "test:unit": "node --import tsx --test ./tests/*.test.mjs",
+    "types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "catalog:design-tools",
+    "@types/node": "catalog:types",
+    "eslint": "catalog:lint",
+    "eslint-config-spirit": "workspace:^",
+    "npm-run-all2": "catalog:script",
+    "tsup": "catalog:build",
+    "tsx": "catalog:script",
+    "typescript": "catalog:types"
+  }
+}

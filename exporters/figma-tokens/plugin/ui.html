@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Spirit Figma Tokens</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: Inter, system-ui, sans-serif;
+      }
+
+      body {
+        margin: 16px;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      button {
+        width: 100%;
+        margin-top: 12px;
+        padding: 8px;
+      }
+
+      pre {
+        max-height: 220px;
+        overflow: auto;
+        padding: 8px;
+        background: Canvas;
+        border: 1px solid ButtonBorder;
+        white-space: pre-wrap;
+      }
+
+      .error {
+        color: #b42318;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Captures every local variable, relevant style, binding, and remote alias from this file as a versioned lossless
+      snapshot. Processing happens in the repository CLI.
+    </p>
+    <button id="export" type="button">Export Snapshot</button>
+    <pre id="status">Ready.</pre>
+    <script>
+      const status = document.getElementById('status');
+      const button = document.getElementById('export');
+
+      button.addEventListener('click', () => {
+        status.textContent = 'Capturing…';
+        status.className = '';
+        parent.postMessage({ pluginMessage: { type: 'export-snapshot' } }, '*');
+      });
+
+      window.onmessage = (event) => {
+        const message = event.data.pluginMessage;
+        if (!message) {
+          return;
+        }
+
+        if (message.type === 'snapshot-error') {
+          status.className = 'error';
+          status.textContent = message.error;
+          return;
+        }
+
+        if (message.type === 'snapshot') {
+          const blob = new Blob([message.json], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = message.fileName;
+          link.click();
+          URL.revokeObjectURL(url);
+          status.className = '';
+          status.textContent = message.summary;
+        }
+      };
+    </script>
+  </body>
+</html>
