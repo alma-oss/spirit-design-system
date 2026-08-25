@@ -51,3 +51,9 @@ plus their own specific steps (renames, exports, deprecation-notice wording).
 - Generate output fixtures with `yarn dlx jscodeshift --dry --print -t <transform> <input>` — never hand-write them.
   jscodeshift's exact whitespace, blank lines between top-level declarations, and import ordering must match the
   fixture; any deviation causes the test to fail.
+
+## Agent Skills
+
+When the breaking change renames a public component, removes or renames a prop, changes a default, or
+alters a composition contract, search `.agents/skills/` (especially `figma-to-code`) for the old
+name and update the skill in the same change. Skills must not keep documenting a removed API.

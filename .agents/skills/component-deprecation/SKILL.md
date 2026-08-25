@@ -192,6 +192,13 @@ The repo **commitlint** config allows one **scope** per commit. Touching **web**
 
 For major removals, use breaking-change style commits/scopes consistent with current repository conventions.
 
+## Agent Skills
+
+When the deprecation replaces a public API that conversion skills name (especially
+`/spirit:figma-to-code`), update that skill in the same change so new conversions emit the
+replacement immediately. Do not wait for the major-version removal. Search
+`.agents/skills/figma-to-code/` for the old name, prop, default, or example.
+
 ## Verification
 
 Minimum verification after adding deprecations:
