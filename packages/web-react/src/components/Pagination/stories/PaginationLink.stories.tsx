@@ -21,6 +21,12 @@ const meta: Meta<typeof PaginationLink> = {
         defaultValue: { summary: 'false' },
       },
     },
+    isDisabled: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
     pageNumber: {
       control: 'number',
     },
@@ -28,7 +34,6 @@ const meta: Meta<typeof PaginationLink> = {
   args: {
     accessibilityLabel: 'Go to Page 11',
     elementType: 'a',
-    isCurrent: false,
     pageNumber: 11,
   },
 };

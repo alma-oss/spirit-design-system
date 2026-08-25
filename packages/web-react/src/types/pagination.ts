@@ -1,4 +1,4 @@
-import { type ElementType } from 'react';
+import { type ElementType, type ReactNode } from 'react';
 import { type SpiritButtonProps } from './button';
 import {
   type ChildrenProps,
@@ -23,13 +23,25 @@ export interface AriaPaginationProps {
 
 export interface PaginationLinkBaseProps<E extends ElementType = 'a'> {
   elementType?: E;
+  isDisabled?: boolean;
 }
 
-export interface PaginationLinkProps<E extends ElementType = 'a'>
+export interface PaginationLinkPageProps<E extends ElementType = 'a'>
   extends PaginationLinkBaseProps<E>, AriaPaginationProps, RouterLinkProps {
+  children?: never;
   isCurrent?: boolean;
   pageNumber: number;
 }
+
+export interface PaginationLinkChildrenProps<E extends ElementType = 'a'>
+  extends PaginationLinkBaseProps<E>, AriaPaginationProps, RouterLinkProps {
+  children: ReactNode;
+  isCurrent?: boolean;
+  pageNumber?: never;
+}
+
+export type PaginationLinkProps<E extends ElementType = 'a'> =
+  PaginationLinkPageProps<E> | PaginationLinkChildrenProps<E>;
 
 export type PaginationButtonLinkProps<E extends ElementType = 'a'> = SpiritButtonProps<E> &
   AriaPaginationProps &
@@ -37,9 +49,12 @@ export type PaginationButtonLinkProps<E extends ElementType = 'a'> = SpiritButto
     direction: PaginationLinkDirectionType;
   };
 
-export type PaginationLinkPreviousNextProps<E extends ElementType = 'a'> = SpiritButtonProps<E> &
+export type PaginationLinkPreviousNextProps<E extends ElementType = 'a'> = PaginationLinkBaseProps<E> &
   AriaPaginationProps &
-  RouterLinkProps;
+  RouterLinkProps & {
+    children?: never;
+    pageNumber?: never;
+  };
 
 export interface SpiritPaginationProps extends PaginationProps {}
 
@@ -50,7 +65,8 @@ export type SpiritPaginationLinkProps<E extends ElementType = 'a'> = PaginationL
 
 export type SpiritPaginationButtonLinkProps<E extends ElementType = 'a'> = PaginationButtonLinkProps<E>;
 
-export type SpiritPaginationLinkPreviousNextProps<E extends ElementType = 'a'> = PaginationLinkPreviousNextProps<E>;
+export type SpiritPaginationLinkPreviousNextProps<E extends ElementType = 'a'> = PaginationLinkPreviousNextProps<E> &
+  SpiritPolymorphicElementPropsWithRef<E, PaginationLinkPreviousNextProps<E>>;
 
 export interface UncontrolledPaginationProps {
   accessibilityLabelNext?: string;
