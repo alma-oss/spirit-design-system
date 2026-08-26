@@ -39,7 +39,7 @@ For detailed API references, examples, and common mistakes:
 7. **Use https://picsum.photos/ for all image placeholders** - Format: `https://picsum.photos/seed/{identifier}/{width}/{height}`
 8. **DO NOT set props to default values** - Only set props when they differ from component defaults. Common defaults to omit:
    - **Layout**: Flex `direction="horizontal"`, `alignmentX="stretch"`, `alignmentY="stretch"`; Grid `alignmentX="stretch"`, `alignmentY="stretch"`; Box/Stack `elementType="div"`; Section `hasContainer={true}`; Container `size="xlarge"`
-   - **Typography**: Heading `size="medium"`, `emphasis="bold"`; Text `elementType="p"`, `size="medium"`, `emphasis="regular"`
+   - **Typography**: Heading `size="medium"`, `fontWeight="bold"`; Text `elementType="p"`, `size="medium"`, `fontWeight="regular"`
    - **Exception**: Heading `elementType` is always REQUIRED for accessibility
    - Check component-specific documentation for complete default values
 9. **Context7 MCP is a LAST RESORT** - Only use for components not documented in this skill:
@@ -62,6 +62,7 @@ For detailed API references, examples, and common mistakes:
 ### Deprecated Props (Still Available but Will Be Removed)
 
 - **UncontrolledCollapse: `hideOnCollapse` prop** - Replaced by `isDisposable`. Always use `isDisposable` instead.
+- **Heading/Text `emphasis` prop** - Replaced by `fontWeight` (and `isItalic` for italic). Always use `fontWeight="semibold"` / `fontWeight="bold"` instead of `emphasis="semibold"` / `emphasis="bold"`.
 
 ### Already Migrated (Current Best Practices)
 
@@ -144,6 +145,112 @@ Figma Layers:                          Spirit Components:
 | Vertical list with dividers             | `Stack`                                    | Use `hasIntermediateDividers`                   |
 | Only styling (background, border)       | `Box`                                      | No layout capabilities                          |
 | Styling + layout combined               | `Box elementType={Flex}`                   | Combines styling and layout                     |
+| Submit/cancel button group              | `ActionGroup`                              | NOT `Flex`; see Form Patterns below             |
+
+### Form Patterns
+
+Use these patterns whenever the design contains a form with input fields and submit/cancel buttons.
+
+#### Native `<form>` element
+
+Always use a native `<form>` element as the outermost wrapper, covering **both** the field card and the action buttons. Add `aria-labelledby` pointing to the nearest heading — a named `<form>` becomes a `form` landmark in the accessibility tree:
+
+```tsx
+// ✅ Correct — form wraps the field card AND the buttons
+<form aria-labelledby="form-heading-id" method="post">
+  <Box backgroundColor="primary" borderRadius="400" borderWidth="100" padding="space-900">
+    {/* form fields */}
+  </Box>
+  <ActionGroup direction={{ mobile: 'vertical', tablet: 'horizontal-reversed' }}>
+    <Button type="submit">Save</Button>
+    <Button color="secondary">Cancel</Button>
+  </ActionGroup>
+</form>
+
+// ❌ Wrong — submit button is outside <form>; Enter key won't activate it
+<Box elementType="form">…fields…</Box>
+<ActionGroup><Button type="submit">Save</Button></ActionGroup>
+```
+
+#### `ActionGroup` for button groups — DOM-first submit
+
+Use `ActionGroup` (not `Flex`) for submit/cancel pairs. Put the **submit button first in DOM** — `horizontal-reversed` places it visually right while it receives keyboard/Enter priority:
+
+```tsx
+<ActionGroup
+  direction={{ mobile: 'vertical', tablet: 'horizontal-reversed' }}
+  alignmentX={{ mobile: 'stretch', tablet: 'left' }}
+  spacing="space-600"
+>
+  <Button type="submit">Save</Button> {/* first in DOM → rightmost on tablet */}
+  <Button color="secondary">Cancel</Button> {/* second in DOM → leftmost on tablet */}
+</ActionGroup>
+```
+
+#### Grid form layout — always wrap fields in `GridItem`
+
+`TextField` and similar inputs render an internal `Stack` (`display: grid`). As direct `Grid` children they get stretched vertically by the outer grid. Wrap each field in `GridItem` to isolate the stretch. Use responsive `cols` and `spacing`; full-width items need a matching responsive `columnEnd`:
+
+```tsx
+// ✅ Correct
+<Grid cols={{ mobile: 1, tablet: 2 }} spacing={{ mobile: 'space-700', tablet: 'space-900' }}>
+  <GridItem><TextField id="first-name" label="First name" isRequired /></GridItem>
+  <GridItem><TextField id="last-name" label="Last name" isRequired /></GridItem>
+  <GridItem columnEnd={{ mobile: 'span 1', tablet: 'span 2' }}>
+    <Checkbox id="show-title" label="Include title" />
+  </GridItem>
+</Grid>
+
+// ❌ Wrong — TextField is a direct Grid child; grid stretches it to match tallest sibling
+<Grid cols={2}><TextField id="a" label="A" /><TextField id="b" label="B" /></Grid>
+```
+
+#### `autoComplete` on personal-data fields (WCAG 1.3.5)
+
+| Field               | `autoComplete` value |
+| ------------------- | -------------------- |
+| First name          | `given-name`         |
+| Last name           | `family-name`        |
+| Title before name   | `honorific-prefix`   |
+| Title after name    | `honorific-suffix`   |
+| Email               | `email`              |
+| Phone               | `tel`                |
+| City / municipality | `address-level2`     |
+| Street address      | `street-address`     |
+| Postal / ZIP code   | `postal-code`        |
+| Country             | `country`            |
+
+#### Conditional disclosure fields
+
+When a checkbox reveals extra fields, use `useState`, set `aria-expanded`, and make `aria-controls` **conditional** — only present when the referenced IDs exist in the DOM:
+
+```tsx
+function DisclosureExample() {
+  const [showExtra, setShowExtra] = useState(false);
+  return (
+    <>
+      <Checkbox
+        id="toggle"
+        label="Show extra"
+        isChecked={showExtra}
+        aria-expanded={showExtra}
+        {...(showExtra && { 'aria-controls': 'extra-1 extra-2' })}
+        onChange={() => setShowExtra((prev) => !prev)}
+      />
+      {showExtra && (
+        <>
+          <GridItem>
+            <TextField id="extra-1" label="Extra 1" />
+          </GridItem>
+          <GridItem>
+            <TextField id="extra-2" label="Extra 2" />
+          </GridItem>
+        </>
+      )}
+    </>
+  );
+}
+```
 
 **IMPORTANT**: Check [Layout Components](components/layout.md) for API reference, prop values, and common mistakes before implementing.
 
@@ -189,10 +296,10 @@ When analyzing Figma, check if children have `w-full` (full width) or `shrink-0 
 
 ### Step 5: Set Typography
 
-| Figma Text Style | Spirit Component | Key Props                                    |
-| ---------------- | ---------------- | -------------------------------------------- |
-| Heading styles   | `Heading`        | `elementType` (REQUIRED), `size`, `emphasis` |
-| Body text        | `Text`           | `elementType`, `size`, `emphasis`            |
+| Figma Text Style | Spirit Component | Key Props                                      |
+| ---------------- | ---------------- | ---------------------------------------------- |
+| Heading styles   | `Heading`        | `elementType` (REQUIRED), `size`, `fontWeight` |
+| Body text        | `Text`           | `elementType`, `size`, `fontWeight`            |
 
 **Accessibility rules:**
 

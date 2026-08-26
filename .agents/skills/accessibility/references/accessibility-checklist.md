@@ -59,7 +59,15 @@ the code-review methodology. Worked code examples for these items live in `acces
 - Errors are associated programmatically (`aria-describedby`) and announced; never conveyed by color
   alone.
 - Group related controls with `fieldset`/`legend`.
-- Use an appropriate input `type` and `autocomplete`.
+- Use an appropriate input `type` and `autocomplete`. For personal-data fields use WCAG 1.3.5 token
+  values: `given-name`, `family-name`, `email`, `tel`, `honorific-prefix`, `honorific-suffix`,
+  `address-level2`, `street-address`, `postal-code`, `country`. See patterns for the full table.
+- A named `<form>` (via `aria-label` or `aria-labelledby`) is exposed as a `form` landmark —
+  always add `aria-labelledby` pointing to the nearest heading so the form is reachable by
+  landmark navigation.
+- `aria-controls` must reference IDs that **exist in the DOM**. When controlled elements are
+  conditionally rendered, omit `aria-controls` while they are absent — `aria-expanded` alone
+  correctly signals the collapsed state. See patterns for a worked example.
 - On submit, errors are surfaced and focus moves to the first error or an error summary.
 
 ## Content

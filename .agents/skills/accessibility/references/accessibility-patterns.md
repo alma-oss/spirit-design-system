@@ -166,10 +166,69 @@ Any reorder/slider/drag interaction must also be operable with discrete controls
 </li>
 ```
 
+## Named Form Landmark (1.3.6, 4.1.2)
+
+A `<form>` has a `form` landmark role only when it has an accessible name. Add `aria-labelledby`
+pointing to the nearest heading, and let the form wrap both the field area and the action buttons:
+
+```tsx
+<Heading id="form-heading" elementType="h1">Personal details</Heading>
+<form aria-labelledby="form-heading" method="post">
+  <Box>{/* fields */}</Box>
+  <ActionGroup><Button type="submit">Save</Button></ActionGroup>
+</form>
+```
+
+## Conditional `aria-controls` — Disclosure Pattern (4.1.2)
+
+`aria-controls` must reference IDs that **exist in the DOM**. When controlled elements are
+conditionally rendered, omit `aria-controls` while they are absent — `aria-expanded` alone is
+sufficient to signal the collapsed state:
+
+```tsx
+// ✅ Correct — aria-controls only present when IDs are in the DOM
+function Example() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Checkbox
+        aria-expanded={open}
+        {...(open && { 'aria-controls': 'extra-1 extra-2' })}
+        onChange={() => setOpen((prev) => !prev)}
+      />
+      {open && (
+        <>
+          <TextField id="extra-1" />
+          <TextField id="extra-2" />
+        </>
+      )}
+    </>
+  );
+}
+
+// ❌ Wrong — aria-controls always present, even when elements are absent from the DOM
+function WrongExample() {
+  return <Checkbox aria-controls="extra-1 extra-2" aria-expanded={open} />;
+}
+```
+
 ## Form Labels (3.3.2)
 
 Every field has a programmatically associated label. Placeholder text is not a label. Group
-related controls with `fieldset`/`legend`.
+related controls with `fieldset`/`legend`. For personal-data fields add `autoComplete` (WCAG 1.3.5):
+
+| Field               | `autoComplete`     |
+| ------------------- | ------------------ |
+| First name          | `given-name`       |
+| Last name           | `family-name`      |
+| Title before name   | `honorific-prefix` |
+| Title after name    | `honorific-suffix` |
+| Email               | `email`            |
+| Phone               | `tel`              |
+| City / municipality | `address-level2`   |
+| Street address      | `street-address`   |
+| Postal / ZIP        | `postal-code`      |
+| Country             | `country`          |
 
 ```tsx
 // ✅ Explicit association
