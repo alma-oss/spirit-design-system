@@ -151,7 +151,7 @@ Figma Layers:                          Spirit Components:
 
 Use these patterns whenever the design contains a form with input fields and submit/cancel buttons.
 
-#### Native `<form>` element
+#### Native `<form>` Element
 
 Always use a native `<form>` element as the outermost wrapper, covering **both** the field card and the action buttons. Add `aria-labelledby` pointing to the nearest heading — a named `<form>` becomes a `form` landmark in the accessibility tree:
 
@@ -172,7 +172,7 @@ Always use a native `<form>` element as the outermost wrapper, covering **both**
 <ActionGroup><Button type="submit">Save</Button></ActionGroup>
 ```
 
-#### `ActionGroup` for button groups — DOM-first submit
+#### `ActionGroup` for Button Groups — DOM-First Submit
 
 Use `ActionGroup` (not `Flex`) for submit/cancel pairs. Put the **submit button first in DOM** — `horizontal-reversed` places it visually right while it receives keyboard/Enter priority:
 
@@ -187,7 +187,7 @@ Use `ActionGroup` (not `Flex`) for submit/cancel pairs. Put the **submit button 
 </ActionGroup>
 ```
 
-#### Grid form layout — always wrap fields in `GridItem`
+#### Grid Form Layout — Always Wrap Fields in `GridItem`
 
 `TextField` and similar inputs render an internal `Stack` (`display: grid`). As direct `Grid` children they get stretched vertically by the outer grid. Wrap each field in `GridItem` to isolate the stretch. Use responsive `cols` and `spacing`; full-width items need a matching responsive `columnEnd`:
 
@@ -205,7 +205,7 @@ Use `ActionGroup` (not `Flex`) for submit/cancel pairs. Put the **submit button 
 <Grid cols={2}><TextField id="a" label="A" /><TextField id="b" label="B" /></Grid>
 ```
 
-#### `autoComplete` on personal-data fields (WCAG 1.3.5)
+#### `autoComplete` on Personal-Data Fields (WCAG 1.3.5)
 
 | Field               | `autoComplete` value |
 | ------------------- | -------------------- |
@@ -220,7 +220,7 @@ Use `ActionGroup` (not `Flex`) for submit/cancel pairs. Put the **submit button 
 | Postal / ZIP code   | `postal-code`        |
 | Country             | `country`            |
 
-#### Conditional disclosure fields
+#### Conditional Disclosure Fields
 
 When a checkbox reveals extra fields, use `useState`, set `aria-expanded`, and make `aria-controls` **conditional** — only present when the referenced IDs exist in the DOM:
 
