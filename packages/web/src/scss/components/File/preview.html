@@ -118,6 +118,58 @@
           </ul>
         </section>
 
+        <!--
+          TODO: DS-2724 — when ProgressBar lands in web-react, mirror this section in the web-react File demo and
+          drop the `hide-from-visual-tests` class here. It is hidden because the web and web-react demos share a
+          single visual snapshot (see tests/helpers/takeScreenshot.ts), so a section that exists in only one of
+          them fails the other package's test.
+        -->
+        <section class="hide-from-visual-tests">
+          <h3>Uploading State with Progress Bar</h3>
+          <ul aria-label="File attachments">
+            <li class="File">
+              <div class="File__preview">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#file" />
+                </svg>
+              </div>
+              <div class="File__content">
+                <div class="File__text">
+                  <span class="File__name">
+                    <span class="text-truncate-multiline text-word-break-long-words" style="--text-truncate-lines: 1;">Document.pdf</span>
+                  </span>
+                  <progress
+                    class="ProgressBar color-scheme-on-emotion-informative-subtle"
+                    value="60"
+                    max="100"
+                    style="--progress-bar-value: 60%"
+                    aria-label="Uploading Document.pdf"
+                  ></progress>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+                <span class="accessibility-hidden">Cancel upload of Document.pdf</span>
+              </button>
+            </li>
+          </ul>
+        </section>
+
         <section>
           <h3>Disabled State</h3>
           <ul aria-label="File attachments">
