@@ -29,9 +29,16 @@ to apply different color combinations. This approach had several drawbacks:
    - `--spirit-local-color` (text color)
    - `--spirit-local-border-color` (border color)
    - `--spirit-local-background-color` (background color)
+   - `--spirit-local-background-color-basic` and `--spirit-local-background-color-subtle` (both intensities of the
+     background color, set regardless of the `<intensity>` picked)
 
    When state tokens are defined for a given color category, additional state-specific custom
    properties (e.g. for hover and active states) or intensity-specific custom properties (e.g. `border-color-subtle`) are also set.
+
+   Both background intensities are exposed regardless of the variant so that a single color scheme class can color a
+   component that combines them — for example the subtle track and the basic indicator of a `ProgressBar`. For
+   `color-scheme-on-disabled`, which has no background pair of its own, the disabled foreground stands in for the basic
+   background: it is the color of a filled element sitting on a disabled surface.
 
    These properties are not applied automatically — they must be consumed by the component's own CSS or by the
    provided utility classes (`bg-color-scheme`, `text-color-scheme`, `border-color-scheme`). This indirection allows

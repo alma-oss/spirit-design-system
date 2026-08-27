@@ -60,6 +60,10 @@ In practice, this means you choose one surface class and Spirit keeps text, back
    `color-scheme-on-accent-01-subtle`, or `color-scheme-on-disabled`). Each one sets **local** custom properties for content, border, and background (with the
    Spirit CSS variable prefix), for example `--spirit-local-color` and `--spirit-local-background-color`.
 
+   ℹ️ Every surface class also exposes `--spirit-local-background-color-basic` and `--spirit-local-background-color-subtle` regardless of which variant you
+   picked, so a single surface class can color a component that combines both, such as the subtle track and the basic indicator of a `ProgressBar`. For
+   `color-scheme-on-disabled`, the basic background is the disabled foreground: the color of a filled element sitting on a disabled surface.
+
 2. **Utilities or Components** — On the same element (or an ancestor that already has a surface class), use utilities that read those locals: `bg-color-scheme`,
    `text-color-scheme`, and `border-color-scheme` so backgrounds, text, and borders stay on-palette without listing every token. See the [dynamic color helper demo][dynamic-color-demo] for examples.
    Or read the color scheme directly in the component CSS classes (for example `Pill`).
