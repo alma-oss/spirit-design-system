@@ -1,10 +1,12 @@
 <!-- Picker JavaScript interaction DEMO -->
 <script type="module">
   import { initPickers } from './picker-demo.mjs';
+  import { initListboxPickers } from './listbox-picker-demo.mjs';
   import { initSalaryPicker } from './salary-picker-demo.mjs';
   import { initPublicationTimePicker } from './publication-time-picker-demo.mjs';
 
   initPickers();
+  initListboxPickers();
   initSalaryPicker();
   initPublicationTimePicker();
 
@@ -125,7 +127,6 @@
               <span class="accessibility-hidden">Add</span>
               <svg
                 class="Icon"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -138,6 +139,7 @@
           <div
             role="dialog"
             aria-modal="true"
+            aria-label="Languages"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-lang"
@@ -257,14 +259,13 @@
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-lang-pre"
               class="UNSTABLE_PickerTrigger"
-              aria-haspopup="listbox"
+              aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-lang-pre"
             >
               <span class="accessibility-hidden">Add</span>
               <svg
                 class="Icon"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -277,6 +278,7 @@
           <div
             role="dialog"
             aria-modal="true"
+            aria-label="Languages"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-lang-pre"
@@ -366,6 +368,319 @@
 
 </section>
 
+<!-- Hidden from visual tests: no React counterpart yet (DS-2770), and both previews share one screenshot. -->
+<section class="py-900 py-tablet-1000 hide-from-visual-tests">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Listbox presentation</h2>
+
+    <!-- Options are role="option" inside role="listbox"; selection uses aria-selected (no inputs). -->
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+
+        <span class="Label">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="listbox-picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="InputContainer InputContainer--fill InputContainer--medium"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-listbox-selection"
+              class="UNSTABLE_PickerSelection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_PickerSelection__empty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-listbox"
+              class="UNSTABLE_PickerTrigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="picker-listbox"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Languages"
+            class="DropdownPopover placement-bottom-start theme-light-default"
+            data-spirit-placement="bottom-start"
+            id="picker-listbox"
+          >
+
+            <div
+              role="listbox"
+              aria-multiselectable="true"
+              aria-label="Languages"
+              class="Stack Stack--spacing"
+              style="--stack-spacing: var(--spirit-space-500);"
+            >
+
+              <div
+                role="option"
+                id="picker-listbox-cs"
+                aria-selected="false"
+                tabindex="0"
+                class="Item cursor-pointer"
+              >
+                <div class="Item__content" role="presentation">
+                  <span class="Label element-stretched">Czech</span>
+                </div>
+                <div class="Item__slot" role="presentation">
+                  <svg
+                    class="Icon Icon--selected d-none"
+                    data-spirit-element="option-check"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#check-plain" />
+                  </svg>
+                </div>
+              </div>
+
+              <div
+                role="option"
+                id="picker-listbox-dk"
+                aria-selected="false"
+                tabindex="-1"
+                class="Item cursor-pointer"
+              >
+                <div class="Item__content" role="presentation">
+                  <span class="Label element-stretched">Danish</span>
+                </div>
+                <div class="Item__slot" role="presentation">
+                  <svg
+                    class="Icon Icon--selected d-none"
+                    data-spirit-element="option-check"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#check-plain" />
+                  </svg>
+                </div>
+              </div>
+
+              <div
+                role="option"
+                id="picker-listbox-kl"
+                aria-selected="false"
+                tabindex="-1"
+                class="Item cursor-pointer"
+              >
+                <div class="Item__content" role="presentation">
+                  <span class="Label element-stretched">Greenlandic</span>
+                </div>
+                <div class="Item__slot" role="presentation">
+                  <svg
+                    class="Icon Icon--selected d-none"
+                    data-spirit-element="option-check"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#check-plain" />
+                  </svg>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+
+        <span class="Label">Languages</span>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="listbox-picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="InputContainer InputContainer--fill InputContainer--medium"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-listbox-pre-selection"
+              class="UNSTABLE_PickerSelection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_PickerSelection__empty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-listbox-pre"
+              class="UNSTABLE_PickerTrigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="picker-listbox-pre"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Languages"
+            class="DropdownPopover placement-bottom-start theme-light-default"
+            data-spirit-placement="bottom-start"
+            id="picker-listbox-pre"
+          >
+
+            <div
+              role="listbox"
+              aria-multiselectable="true"
+              aria-label="Languages"
+              class="Stack Stack--spacing"
+              style="--stack-spacing: var(--spirit-space-500);"
+            >
+
+              <div
+                role="option"
+                id="picker-listbox-pre-cs"
+                aria-selected="true"
+                tabindex="0"
+                class="Item cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
+              >
+                <div class="Item__content" role="presentation">
+                  <span class="Label element-stretched">Czech</span>
+                </div>
+                <div class="Item__slot" role="presentation">
+                  <svg
+                    class="Icon Icon--selected"
+                    data-spirit-element="option-check"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#check-plain" />
+                  </svg>
+                </div>
+              </div>
+
+              <div
+                role="option"
+                id="picker-listbox-pre-dk"
+                aria-selected="true"
+                tabindex="-1"
+                class="Item cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
+              >
+                <div class="Item__content" role="presentation">
+                  <span class="Label element-stretched">Danish</span>
+                </div>
+                <div class="Item__slot" role="presentation">
+                  <svg
+                    class="Icon Icon--selected"
+                    data-spirit-element="option-check"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#check-plain" />
+                  </svg>
+                </div>
+              </div>
+
+              <div
+                role="option"
+                id="picker-listbox-pre-kl"
+                aria-selected="false"
+                tabindex="-1"
+                class="Item cursor-pointer"
+              >
+                <div class="Item__content" role="presentation">
+                  <span class="Label element-stretched">Greenlandic</span>
+                </div>
+                <div class="Item__slot" role="presentation">
+                  <svg
+                    class="Icon Icon--selected d-none"
+                    data-spirit-element="option-check"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#check-plain" />
+                  </svg>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
 <section class="py-900 py-tablet-1000">
 
   <div class="Container">
@@ -421,7 +736,6 @@
                 <span class="accessibility-hidden">Add</span>
                 <svg
                   class="Icon"
-                  viewBox="0 0 24 24"
                   width="20"
                   height="20"
                   aria-hidden="true"
@@ -434,6 +748,7 @@
             <div
               role="dialog"
               aria-modal="true"
+              aria-label="Languages"
               class="DropdownPopover placement-bottom-start theme-light-default"
               data-spirit-placement="bottom-start"
               data-spirit-fullwidthmode="all"
@@ -576,7 +891,6 @@
                   <span class="accessibility-hidden">Add</span>
                   <svg
                     class="Icon"
-                    viewBox="0 0 24 24"
                     width="20"
                     height="20"
                     aria-hidden="true"
@@ -589,6 +903,7 @@
               <div
                 role="dialog"
                 aria-modal="true"
+                aria-label="Languages"
                 class="DropdownPopover placement-bottom-start theme-light-default"
                 data-spirit-placement="bottom-start"
                 id="picker-variant-fill-bg-primary-popover"
@@ -708,7 +1023,6 @@
                   <span class="accessibility-hidden">Add</span>
                   <svg
                     class="Icon"
-                    viewBox="0 0 24 24"
                     width="20"
                     height="20"
                     aria-hidden="true"
@@ -721,6 +1035,7 @@
               <div
                 role="dialog"
                 aria-modal="true"
+                aria-label="Languages"
                 class="DropdownPopover placement-bottom-start theme-light-default"
                 data-spirit-placement="bottom-start"
                 id="picker-variant-outline-bg-primary-popover"
@@ -846,7 +1161,6 @@
                   <span class="accessibility-hidden">Add</span>
                   <svg
                     class="Icon"
-                    viewBox="0 0 24 24"
                     width="20"
                     height="20"
                     aria-hidden="true"
@@ -859,6 +1173,7 @@
               <div
                 role="dialog"
                 aria-modal="true"
+                aria-label="Languages"
                 class="DropdownPopover placement-bottom-start theme-light-default"
                 data-spirit-placement="bottom-start"
                 id="picker-variant-fill-bg-secondary-popover"
@@ -978,7 +1293,6 @@
                   <span class="accessibility-hidden">Add</span>
                   <svg
                     class="Icon"
-                    viewBox="0 0 24 24"
                     width="20"
                     height="20"
                     aria-hidden="true"
@@ -991,6 +1305,7 @@
               <div
                 role="dialog"
                 aria-modal="true"
+                aria-label="Languages"
                 class="DropdownPopover placement-bottom-start theme-light-default"
                 data-spirit-placement="bottom-start"
                 id="picker-variant-outline-bg-secondary-popover"
@@ -1116,7 +1431,6 @@
                   <span class="accessibility-hidden">Add</span>
                   <svg
                     class="Icon"
-                    viewBox="0 0 24 24"
                     width="20"
                     height="20"
                     aria-hidden="true"
@@ -1129,6 +1443,7 @@
               <div
                 role="dialog"
                 aria-modal="true"
+                aria-label="Languages"
                 class="DropdownPopover placement-bottom-start theme-light-default"
                 data-spirit-placement="bottom-start"
                 id="picker-variant-fill-bg-tertiary-popover"
@@ -1248,7 +1563,6 @@
                   <span class="accessibility-hidden">Add</span>
                   <svg
                     class="Icon"
-                    viewBox="0 0 24 24"
                     width="20"
                     height="20"
                     aria-hidden="true"
@@ -1261,6 +1575,7 @@
               <div
                 role="dialog"
                 aria-modal="true"
+                aria-label="Languages"
                 class="DropdownPopover placement-bottom-start theme-light-default"
                 data-spirit-placement="bottom-start"
                 id="picker-variant-outline-bg-tertiary-popover"
@@ -1386,7 +1701,6 @@
                   <span class="accessibility-hidden">Add</span>
                   <svg
                     class="Icon"
-                    viewBox="0 0 24 24"
                     width="20"
                     height="20"
                     aria-hidden="true"
@@ -1399,6 +1713,7 @@
               <div
                 role="dialog"
                 aria-modal="true"
+                aria-label="Languages"
                 class="DropdownPopover placement-bottom-start theme-light-default"
                 data-spirit-placement="bottom-start"
                 id="picker-variant-fill-theme-light-on-brand-bg-primary-popover"
@@ -1519,7 +1834,6 @@
                   <span class="accessibility-hidden">Add</span>
                   <svg
                     class="Icon"
-                    viewBox="0 0 24 24"
                     width="20"
                     height="20"
                     aria-hidden="true"
@@ -1532,6 +1846,7 @@
               <div
                 role="dialog"
                 aria-modal="true"
+                aria-label="Languages"
                 class="DropdownPopover placement-bottom-start theme-light-default"
                 data-spirit-placement="bottom-start"
                 id="picker-variant-outline-theme-light-on-brand-bg-primary-popover"
@@ -1613,7 +1928,7 @@
         </div>
       </div>
 
-    </div> </div>
+    </div>
 
   </div>
 
@@ -1675,7 +1990,6 @@
                 <span class="accessibility-hidden">Add</span>
                 <svg
                   class="Icon"
-                  viewBox="0 0 24 24"
                   width="20"
                   height="20"
                   aria-hidden="true"
@@ -1688,6 +2002,7 @@
             <div
               role="dialog"
               aria-modal="true"
+              aria-label="Languages"
               class="DropdownPopover placement-bottom-start theme-light-default"
               data-spirit-placement="bottom-start"
               id="picker-small"
@@ -1808,7 +2123,6 @@
                 <span class="accessibility-hidden">Add</span>
                 <svg
                   class="Icon"
-                  viewBox="0 0 24 24"
                   width="20"
                   height="20"
                   aria-hidden="true"
@@ -1821,6 +2135,7 @@
             <div
               role="dialog"
               aria-modal="true"
+              aria-label="Languages"
               class="DropdownPopover placement-bottom-start theme-light-default"
               data-spirit-placement="bottom-start"
               id="picker-medium"
@@ -1941,7 +2256,6 @@
                 <span class="accessibility-hidden">Add</span>
                 <svg
                   class="Icon"
-                  viewBox="0 0 24 24"
                   width="20"
                   height="20"
                   aria-hidden="true"
@@ -1954,6 +2268,7 @@
             <div
               role="dialog"
               aria-modal="true"
+              aria-label="Languages"
               class="DropdownPopover placement-bottom-start theme-light-default"
               data-spirit-placement="bottom-start"
               id="picker-large"
@@ -2081,14 +2396,13 @@
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-lang2"
               class="UNSTABLE_PickerTrigger"
-              aria-haspopup="listbox"
+              aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-lang2"
             >
               <span class="accessibility-hidden">Add</span>
               <svg
                 class="Icon"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -2101,6 +2415,7 @@
           <div
             role="dialog"
             aria-modal="true"
+            aria-label="Languages"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-lang2"
@@ -2234,14 +2549,13 @@
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-hidden-label"
               class="UNSTABLE_PickerTrigger"
-              aria-haspopup="listbox"
+              aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-hidden-label"
             >
               <span class="accessibility-hidden">Add</span>
               <svg
                 class="Icon"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -2254,6 +2568,7 @@
           <div
             role="dialog"
             aria-modal="true"
+            aria-label="Languages"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-hidden-label"
@@ -2387,14 +2702,13 @@
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-required"
               class="UNSTABLE_PickerTrigger"
-              aria-haspopup="listbox"
+              aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-required"
             >
               <span class="accessibility-hidden">Add</span>
               <svg
                 class="Icon"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -2407,6 +2721,7 @@
           <div
             role="dialog"
             aria-modal="true"
+            aria-label="Languages"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-required"
@@ -2541,14 +2856,13 @@
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-helper"
               class="UNSTABLE_PickerTrigger"
-              aria-haspopup="listbox"
+              aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-helper"
             >
               <span class="accessibility-hidden">Add</span>
               <svg
                 class="Icon"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -2561,6 +2875,7 @@
           <div
             role="dialog"
             aria-modal="true"
+            aria-label="Languages"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-helper"
@@ -2698,14 +3013,13 @@
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-danger"
               class="UNSTABLE_PickerTrigger"
-              aria-haspopup="listbox"
+              aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-danger"
             >
               <span class="accessibility-hidden">Add</span>
               <svg
                 class="Icon"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -2718,6 +3032,7 @@
           <div
             role="dialog"
             aria-modal="true"
+            aria-label="Languages"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-danger"
@@ -2840,14 +3155,13 @@
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-warning"
               class="UNSTABLE_PickerTrigger"
-              aria-haspopup="listbox"
+              aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-warning"
             >
               <span class="accessibility-hidden">Add</span>
               <svg
                 class="Icon"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -2860,6 +3174,7 @@
           <div
             role="dialog"
             aria-modal="true"
+            aria-label="Languages"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-warning"
@@ -2983,14 +3298,13 @@
               data-spirit-toggle="dropdown"
               data-spirit-target="#picker-success"
               class="UNSTABLE_PickerTrigger"
-              aria-haspopup="listbox"
+              aria-haspopup="dialog"
               aria-expanded="false"
               aria-controls="picker-success"
             >
               <span class="accessibility-hidden">Add</span>
               <svg
                 class="Icon"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -3003,6 +3317,7 @@
           <div
             role="dialog"
             aria-modal="true"
+            aria-label="Languages"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-success"
@@ -3159,6 +3474,8 @@
 
           <div
             role="dialog"
+            aria-modal="true"
+            aria-label="Languages"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-disabled"
@@ -3300,6 +3617,8 @@
 
           <div
             role="dialog"
+            aria-modal="true"
+            aria-label="Languages"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-disabled-pre"
@@ -3442,7 +3761,6 @@
               <span class="accessibility-hidden">Edit</span>
               <svg
                 class="Icon"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -3455,6 +3773,7 @@
           <div
             role="dialog"
             aria-modal="true"
+            aria-label="Salary"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-salary"
@@ -3603,7 +3922,6 @@
               <span class="accessibility-hidden">Add</span>
               <svg
                 class="Icon"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -3616,6 +3934,7 @@
           <div
             role="dialog"
             aria-modal="true"
+            aria-label="Publication time"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="demo-picker-publication-time"
@@ -3768,7 +4087,6 @@
               <span class="accessibility-hidden">Add</span>
               <svg
                 class="Icon"
-                viewBox="0 0 24 24"
                 width="20"
                 height="20"
                 aria-hidden="true"
@@ -3781,6 +4099,7 @@
           <div
             role="dialog"
             aria-modal="true"
+            aria-label="Employment type"
             class="DropdownPopover placement-bottom-start theme-light-default"
             data-spirit-placement="bottom-start"
             id="picker-job-filters"

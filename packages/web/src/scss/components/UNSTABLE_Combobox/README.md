@@ -610,26 +610,29 @@ input for option navigation; Space and printable characters type into the filter
 
 ### ARIA Attributes
 
-| Attribute                        | Element                | Purpose                                                                |
-| -------------------------------- | ---------------------- | ---------------------------------------------------------------------- |
-| `role="group"`                   | InputContainer         | Groups the selection area and input together                           |
-| `role="group"`                   | Selection inner div    | Initial role when no options are selected                              |
-| `role="grid"`                    | Selection inner div    | Active role when tags are present; enables roving focus across tags    |
-| `role="listbox"` / `role="grid"` | Options Stack          | Options widget (`listbox` default; `grid` for multi-action rows)       |
-| `role="option"` / `role="row"`   | Option item            | One selectable option (listbox or grid)                                |
-| `role="gridcell"`                | Tag / grid option cell | Contains the label and interactive controls (tags; grid options)       |
-| `aria-live="off"`                | Selection inner area   | Announces added tags to screen readers without interrupting            |
-| `role="combobox"`                | Text input             | Identifies the text input as a combobox                                |
-| `aria-haspopup`                  | Text input             | `"listbox"` or `"grid"` matching the options widget; omit for tip-only |
-| `aria-expanded`                  | Text input             | Indicates whether the popover is open                                  |
-| `aria-controls`                  | Text input             | Points to the options widget (omit when there is none)                 |
-| `aria-autocomplete`              | Text input             | Set to `"list"` to indicate filtered suggestions                       |
-| `aria-activedescendant`          | Text input             | Points to the currently active option                                  |
-| `aria-multiselectable`           | Options Stack          | Indicates multiple options can be selected simultaneously              |
-| `aria-selected`                  | Option item            | Marks whether the option is currently selected                         |
-| `aria-describedby`               | Tag / text input       | Links to the removal instruction / helper text / validation message    |
+| Attribute                        | Element                | Purpose                                                                                               |
+| -------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------- |
+| `role="group"`                   | InputContainer         | Groups the selection area and input together                                                          |
+| `role="group"`                   | Selection inner div    | Initial role when no options are selected                                                             |
+| `role="grid"`                    | Selection inner div    | Active role when tags are present; enables roving focus across tags                                   |
+| `role="listbox"` / `role="grid"` | Options Stack          | Options widget (`listbox` default; `grid` for multi-action rows)                                      |
+| `role="option"` / `role="row"`   | Option item            | One selectable option (listbox or grid)                                                               |
+| `role="gridcell"`                | Tag / grid option cell | Contains the label and interactive controls (tags; grid options)                                      |
+| `aria-live="off"`                | Selection inner area   | Live region is currently disabled; no change is announced (see [DS-2759][jira-selection-live-region]) |
+| `aria-atomic="false"`            | Selection inner area   | Would announce only the changed node, not the whole region                                            |
+| `aria-relevant="additions"`      | Selection inner area   | Would announce added tags only; removals are left to focus management                                 |
+| `role="combobox"`                | Text input             | Identifies the text input as a combobox                                                               |
+| `aria-haspopup`                  | Text input             | `"listbox"` or `"grid"` matching the options widget; omit for tip-only                                |
+| `aria-expanded`                  | Text input             | Indicates whether the popover is open                                                                 |
+| `aria-controls`                  | Text input             | Points to the options widget (omit when there is none)                                                |
+| `aria-autocomplete`              | Text input             | Set to `"list"` to indicate filtered suggestions                                                      |
+| `aria-activedescendant`          | Text input             | Points to the currently active option                                                                 |
+| `aria-multiselectable`           | Options Stack          | Indicates multiple options can be selected simultaneously                                             |
+| `aria-selected`                  | Option item            | Marks whether the option is currently selected                                                        |
+| `aria-describedby`               | Tag / text input       | Links to the removal instruction / helper text / validation message                                   |
 
 [dropdown]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Dropdown/README.md
+[jira-selection-live-region]: https://jira.almacareer.tech/browse/DS-2759
 [picker-selection-role]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Picker/README.md#selection-area-dynamic-role
 [smashing-magazine-placeholder]: https://www.smashingmagazine.com/2018/06/placeholder-attribute/
 [splittag]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_SplitTag/README.md
