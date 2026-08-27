@@ -9,65 +9,97 @@
             (
                 emotion-danger-basic: (
                     color: var(--spirit-color-emotion-danger-content-subtle),
+                    color-basic: var(--spirit-color-emotion-danger-content-basic),
+                    color-subtle: var(--spirit-color-emotion-danger-content-subtle),
                     border-color: var(--spirit-color-emotion-danger-border-basic),
                     border-color-subtle: var(--spirit-color-emotion-danger-border-subtle),
                     background-color: var(--spirit-color-emotion-danger-background-basic),
+                    background-color-basic: var(--spirit-color-emotion-danger-background-basic),
+                    background-color-subtle: var(--spirit-color-emotion-danger-background-subtle),
                     background-color-state-hover: var(--spirit-color-emotion-danger-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-danger-state-active),
                 ),
                 emotion-danger-subtle: (
                     color: var(--spirit-color-emotion-danger-content-basic),
+                    color-basic: var(--spirit-color-emotion-danger-content-basic),
+                    color-subtle: var(--spirit-color-emotion-danger-content-subtle),
                     border-color: var(--spirit-color-emotion-danger-border-subtle),
                     border-color-subtle: var(--spirit-color-emotion-danger-border-subtle),
                     background-color: var(--spirit-color-emotion-danger-background-subtle),
+                    background-color-basic: var(--spirit-color-emotion-danger-background-basic),
+                    background-color-subtle: var(--spirit-color-emotion-danger-background-subtle),
                     background-color-state-hover: var(--spirit-color-emotion-danger-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-danger-state-active),
                 ),
                 emotion-informative-basic: (
                     color: var(--spirit-color-emotion-informative-content-subtle),
+                    color-basic: var(--spirit-color-emotion-informative-content-basic),
+                    color-subtle: var(--spirit-color-emotion-informative-content-subtle),
                     border-color: var(--spirit-color-emotion-informative-border-basic),
                     border-color-subtle: var(--spirit-color-emotion-informative-border-subtle),
                     background-color: var(--spirit-color-emotion-informative-background-basic),
+                    background-color-basic: var(--spirit-color-emotion-informative-background-basic),
+                    background-color-subtle: var(--spirit-color-emotion-informative-background-subtle),
                     background-color-state-hover: var(--spirit-color-emotion-informative-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-informative-state-active),
                 ),
                 emotion-informative-subtle: (
                     color: var(--spirit-color-emotion-informative-content-basic),
+                    color-basic: var(--spirit-color-emotion-informative-content-basic),
+                    color-subtle: var(--spirit-color-emotion-informative-content-subtle),
                     border-color: var(--spirit-color-emotion-informative-border-subtle),
                     border-color-subtle: var(--spirit-color-emotion-informative-border-subtle),
                     background-color: var(--spirit-color-emotion-informative-background-subtle),
+                    background-color-basic: var(--spirit-color-emotion-informative-background-basic),
+                    background-color-subtle: var(--spirit-color-emotion-informative-background-subtle),
                     background-color-state-hover: var(--spirit-color-emotion-informative-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-informative-state-active),
                 ),
                 emotion-success-basic: (
                     color: var(--spirit-color-emotion-success-content-subtle),
+                    color-basic: var(--spirit-color-emotion-success-content-basic),
+                    color-subtle: var(--spirit-color-emotion-success-content-subtle),
                     border-color: var(--spirit-color-emotion-success-border-basic),
                     border-color-subtle: var(--spirit-color-emotion-success-border-subtle),
                     background-color: var(--spirit-color-emotion-success-background-basic),
+                    background-color-basic: var(--spirit-color-emotion-success-background-basic),
+                    background-color-subtle: var(--spirit-color-emotion-success-background-subtle),
                     background-color-state-hover: var(--spirit-color-emotion-success-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-success-state-active),
                 ),
                 emotion-success-subtle: (
                     color: var(--spirit-color-emotion-success-content-basic),
+                    color-basic: var(--spirit-color-emotion-success-content-basic),
+                    color-subtle: var(--spirit-color-emotion-success-content-subtle),
                     border-color: var(--spirit-color-emotion-success-border-subtle),
                     border-color-subtle: var(--spirit-color-emotion-success-border-subtle),
                     background-color: var(--spirit-color-emotion-success-background-subtle),
+                    background-color-basic: var(--spirit-color-emotion-success-background-basic),
+                    background-color-subtle: var(--spirit-color-emotion-success-background-subtle),
                     background-color-state-hover: var(--spirit-color-emotion-success-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-success-state-active),
                 ),
                 emotion-warning-basic: (
                     color: var(--spirit-color-emotion-warning-content-subtle),
+                    color-basic: var(--spirit-color-emotion-warning-content-basic),
+                    color-subtle: var(--spirit-color-emotion-warning-content-subtle),
                     border-color: var(--spirit-color-emotion-warning-border-basic),
                     border-color-subtle: var(--spirit-color-emotion-warning-border-subtle),
                     background-color: var(--spirit-color-emotion-warning-background-basic),
+                    background-color-basic: var(--spirit-color-emotion-warning-background-basic),
+                    background-color-subtle: var(--spirit-color-emotion-warning-background-subtle),
                     background-color-state-hover: var(--spirit-color-emotion-warning-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-warning-state-active),
                 ),
                 emotion-warning-subtle: (
                     color: var(--spirit-color-emotion-warning-content-basic),
+                    color-basic: var(--spirit-color-emotion-warning-content-basic),
+                    color-subtle: var(--spirit-color-emotion-warning-content-subtle),
                     border-color: var(--spirit-color-emotion-warning-border-subtle),
                     border-color-subtle: var(--spirit-color-emotion-warning-border-subtle),
                     background-color: var(--spirit-color-emotion-warning-background-subtle),
+                    background-color-basic: var(--spirit-color-emotion-warning-background-basic),
+                    background-color-subtle: var(--spirit-color-emotion-warning-background-subtle),
                     background-color-state-hover: var(--spirit-color-emotion-warning-state-hover),
                     background-color-state-active: var(--spirit-color-emotion-warning-state-active),
                 ),
@@ -94,8 +126,12 @@
                     (
                         fixture-basic: (
                             color: #fff,
+                            color-basic: #111,
+                            color-subtle: #fff,
                             border-color: #0f0,
                             background-color: #f00,
+                            background-color-basic: #f00,
+                            background-color-subtle: #fee,
                         ),
                     )
                 );
@@ -104,9 +140,136 @@
             @include test.expect() {
                 .color-scheme-on-fixture-basic {
                     --spirit-local-color: #fff;
+                    --spirit-local-color-basic: #111;
+                    --spirit-local-color-subtle: #fff;
                     --spirit-local-border-color: #0f0;
                     --spirit-local-background-color: #f00;
+                    --spirit-local-background-color-basic: #f00;
+                    --spirit-local-background-color-subtle: #fee;
                 }
+            }
+        }
+    }
+}
+
+@include test.describe('color-scheme-values function') {
+    @include test.it('should expose the disabled foreground as the basic background') {
+        $values: map.get(color-scheme.color-scheme-values(), 'disabled');
+
+        @include test.assert-equal(map.get($values, 'background-color-basic'), var(--spirit-color-disabled-foreground));
+        @include test.assert-equal(
+            map.get($values, 'background-color-subtle'),
+            var(--spirit-color-disabled-background)
+        );
+    }
+
+    @include test.it('should use the single disabled content color for both content intensities') {
+        $values: map.get(color-scheme.color-scheme-values(), 'disabled');
+
+        @include test.assert-equal(map.get($values, 'color-basic'), var(--spirit-color-disabled-content));
+        @include test.assert-equal(map.get($values, 'color-subtle'), var(--spirit-color-disabled-content));
+    }
+}
+
+@include test.describe('color-basic function') {
+    @include test.it('should return the local basic content color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                color: color-scheme.color-basic();
+            }
+
+            @include test.expect() {
+                color: var(--spirit-local-color-basic);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                color: color-scheme.color-basic(#111);
+            }
+
+            @include test.expect() {
+                color: var(--spirit-local-color-basic, #111);
+            }
+        }
+    }
+}
+
+@include test.describe('color-subtle function') {
+    @include test.it('should return the local subtle content color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                color: color-scheme.color-subtle();
+            }
+
+            @include test.expect() {
+                color: var(--spirit-local-color-subtle);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                color: color-scheme.color-subtle(#eee);
+            }
+
+            @include test.expect() {
+                color: var(--spirit-local-color-subtle, #eee);
+            }
+        }
+    }
+}
+
+@include test.describe('background-color-basic function') {
+    @include test.it('should return the local basic background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.background-color-basic();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-basic);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.background-color-basic(#f00);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-basic, #f00);
+            }
+        }
+    }
+}
+
+@include test.describe('background-color-subtle function') {
+    @include test.it('should return the local subtle background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.background-color-subtle();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-subtle);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.background-color-subtle(#0f0);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-subtle, #0f0);
             }
         }
     }

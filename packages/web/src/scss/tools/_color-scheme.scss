@@ -1,8 +1,14 @@
 // Generates `.color-scheme-on-*` classes: `--local-color`, `--local-border-color`, and `--local-background-color`.
+// Basic backgrounds are paired with subtle text colors and vice versa.
 // Pairing logic and token references match the former utilities map (see color-scheme-values).
 //
 // 1. The subtle border color is exposed regardless of the variant because the dynamic color helpers always use the
 //    subtle border, so it stands out on a basic background (see tools/dynamic-colors).
+// 2. Both intensities of the background and content colors are exposed regardless of the variant so that a single
+//    scheme class can color a component that combines them, e.g. a subtle surface carrying a basic-colored indicator.
+// 3. The disabled scheme has no background pair of its own, so the disabled foreground stands in for the basic
+//    background: it is the color of a filled element sitting on a disabled surface. It has a single content color,
+//    which therefore serves as both content intensities.
 
 @use '@tokens' as tokens;
 @use 'sass:map';
@@ -16,7 +22,6 @@ $_accent-tokens-key: 'accent-colors';
 $_emotion-prefix: 'emotion-';
 $_emotion-tokens-key: 'emotion-colors';
 
-// Basic backgrounds are paired with subtle text colors and vice versa.
 @function generate-color-scheme-map($tokens-group, $prefix: '') {
     $result: ();
     $token-map: tokens-tools.get-variable-if-exists($tokens-group, null);
@@ -44,10 +49,13 @@ $_emotion-tokens-key: 'emotion-colors';
                 string.unquote($name),
                 (
                     color: $content-subtle,
+                    color-basic: $content-basic,
+                    color-subtle: $content-subtle,
                     border-color: $border-basic,
-                    // 1.
                     border-color-subtle: $border-subtle,
                     background-color: $background-basic,
+                    background-color-basic: $background-basic,
+                    background-color-subtle: $background-subtle,
                     background-color-state-hover: $state-hover,
                     background-color-state-active: $state-active,
                 )
@@ -61,10 +69,13 @@ $_emotion-tokens-key: 'emotion-colors';
                 string.unquote($name),
                 (
                     color: $content-basic,
+                    color-basic: $content-basic,
+                    color-subtle: $content-subtle,
                     border-color: $border-subtle,
-                    // 1.
                     border-color-subtle: $border-subtle,
                     background-color: $background-subtle,
+                    background-color-basic: $background-basic,
+                    background-color-subtle: $background-subtle,
                     background-color-state-hover: $state-hover,
                     background-color-state-active: $state-active,
                 )
@@ -82,42 +93,58 @@ $_emotion-tokens-key: 'emotion-colors';
         (
             disabled: (
                 color: tokens.$disabled-content,
+                color-basic: tokens.$disabled-content,
+                color-subtle: tokens.$disabled-content,
                 border-color: tokens.$disabled-border,
                 background-color: tokens.$disabled-background,
+                background-color-basic: tokens.$disabled-foreground,
+                background-color-subtle: tokens.$disabled-background,
             ),
             neutral-basic: (
                 color: tokens.$neutral-content-subtle,
+                color-basic: tokens.$neutral-content-basic,
+                color-subtle: tokens.$neutral-content-subtle,
                 border-color: tokens.$neutral-border-basic,
-                // 1.
                 border-color-subtle: tokens.$neutral-border-subtle,
                 background-color: tokens.$neutral-background-basic,
+                background-color-basic: tokens.$neutral-background-basic,
+                background-color-subtle: tokens.$neutral-background-subtle,
                 background-color-state-hover: tokens.$neutral-state-hover,
                 background-color-state-active: tokens.$neutral-state-active,
             ),
             neutral-subtle: (
                 color: tokens.$neutral-content-basic,
+                color-basic: tokens.$neutral-content-basic,
+                color-subtle: tokens.$neutral-content-subtle,
                 border-color: tokens.$neutral-border-subtle,
-                // 1.
                 border-color-subtle: tokens.$neutral-border-subtle,
                 background-color: tokens.$neutral-background-subtle,
+                background-color-basic: tokens.$neutral-background-basic,
+                background-color-subtle: tokens.$neutral-background-subtle,
                 background-color-state-hover: tokens.$neutral-state-hover,
                 background-color-state-active: tokens.$neutral-state-active,
             ),
             selected-basic: (
                 color: tokens.$selected-content-subtle,
+                color-basic: tokens.$selected-content-basic,
+                color-subtle: tokens.$selected-content-subtle,
                 border-color: tokens.$selected-border-basic,
-                // 1.
                 border-color-subtle: tokens.$selected-border-subtle,
                 background-color: tokens.$selected-background-basic,
+                background-color-basic: tokens.$selected-background-basic,
+                background-color-subtle: tokens.$selected-background-subtle,
                 background-color-state-hover: tokens.$selected-state-hover,
                 background-color-state-active: tokens.$selected-state-active,
             ),
             selected-subtle: (
                 color: tokens.$selected-content-basic,
+                color-basic: tokens.$selected-content-basic,
+                color-subtle: tokens.$selected-content-subtle,
                 border-color: tokens.$selected-border-subtle,
-                // 1.
                 border-color-subtle: tokens.$selected-border-subtle,
                 background-color: tokens.$selected-background-subtle,
+                background-color-basic: tokens.$selected-background-basic,
+                background-color-subtle: tokens.$selected-background-subtle,
                 background-color-state-hover: tokens.$selected-state-hover,
                 background-color-state-active: tokens.$selected-state-active,
             ),
@@ -131,6 +158,22 @@ $_emotion-tokens-key: 'emotion-colors';
     }
 
     @return var(--#{tokens.$css-variable-prefix}local-color, $fallback);
+}
+
+@function color-basic($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-color-basic);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-color-basic, $fallback);
+}
+
+@function color-subtle($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-color-subtle);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-color-subtle, $fallback);
 }
 
 @function border-color($fallback: null) {
@@ -155,6 +198,22 @@ $_emotion-tokens-key: 'emotion-colors';
     }
 
     @return var(--#{tokens.$css-variable-prefix}local-background-color, $fallback);
+}
+
+@function background-color-basic($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-background-color-basic);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-background-color-basic, $fallback);
+}
+
+@function background-color-subtle($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-background-color-subtle);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-background-color-subtle, $fallback);
 }
 
 @function background-color-state-hover($fallback: null) {
@@ -184,15 +243,29 @@ $_emotion-tokens-key: 'emotion-colors';
 @mixin emit-color-scheme-classes($values, $class-prefix: 'color-scheme-on') {
     @each $key, $pair in $values {
         $color: map.get($pair, color);
+        $color-basic: map.get($pair, color-basic); // 2.
+        $color-subtle: map.get($pair, color-subtle); // 2.
         $border-color: map.get($pair, border-color);
         $border-color-subtle: map.get($pair, border-color-subtle); // 1.
         $background-color: map.get($pair, background-color);
+        $background-color-basic: map.get($pair, background-color-basic); // 2.
+        $background-color-subtle: map.get($pair, background-color-subtle); // 2.
         $background-color-state-hover: map.get($pair, background-color-state-hover);
         $background-color-state-active: map.get($pair, background-color-state-active);
 
         .#{$class-prefix}-#{$key} {
             @if $color {
                 --#{tokens.$css-variable-prefix}local-color: #{$color};
+            }
+
+            // 2.
+            @if $color-basic {
+                --#{tokens.$css-variable-prefix}local-color-basic: #{$color-basic};
+            }
+
+            // 2.
+            @if $color-subtle {
+                --#{tokens.$css-variable-prefix}local-color-subtle: #{$color-subtle};
             }
 
             @if $border-color {
@@ -206,6 +279,16 @@ $_emotion-tokens-key: 'emotion-colors';
 
             @if $background-color {
                 --#{tokens.$css-variable-prefix}local-background-color: #{$background-color};
+            }
+
+            // 2.
+            @if $background-color-basic {
+                --#{tokens.$css-variable-prefix}local-background-color-basic: #{$background-color-basic};
+            }
+
+            // 2.
+            @if $background-color-subtle {
+                --#{tokens.$css-variable-prefix}local-background-color-subtle: #{$background-color-subtle};
             }
 
             @if $background-color-state-hover {
