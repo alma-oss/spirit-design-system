@@ -1,0 +1,269 @@
+{{setVar "colorSchemes" "emotion-informative" "emotion-success" "emotion-warning" "emotion-danger" "selected" "accent-01" "accent-02" "accent-03" "accent-04" "accent-05" "accent-06" }}
+{{setVar "completions" 0 20 40 60 80 100 }}
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Default</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+      <progress
+        class="ProgressBar color-scheme-on-emotion-informative-subtle"
+        value="60"
+        max="100"
+        aria-label="Profile completeness"
+      ></progress>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Completion</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+      {{#each @root.completions as |completion|}}
+      <div
+        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter"
+        style="--flex-spacing-x: var(--spirit-space-600);"
+      >
+        <progress
+          class="ProgressBar color-scheme-on-emotion-informative-subtle"
+          value="{{completion}}"
+          max="100"
+          aria-label="Profile completeness"
+        ></progress>
+        <span class="typography-caption text-secondary">{{completion}}%</span>
+      </div>
+      {{/each}}
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Value Placement</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <h3 class="docs-Heading">Right</h3>
+      <div
+        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter"
+        style="--flex-spacing-x: var(--spirit-space-600);"
+      >
+        <progress
+          class="ProgressBar color-scheme-on-emotion-informative-subtle"
+          value="20"
+          max="100"
+          aria-label="Profile completeness"
+        ></progress>
+        <span class="typography-caption text-secondary">20%</span>
+      </div>
+
+      <h3 class="docs-Heading">Bottom</h3>
+      <div class="Flex Flex--vertical" style="--flex-spacing-y: var(--spirit-space-600);">
+        <progress
+          class="ProgressBar color-scheme-on-emotion-informative-subtle"
+          value="4"
+          max="20"
+          aria-label="Awards collected"
+          aria-valuetext="4 out of 20 awards"
+        ></progress>
+        <span class="typography-caption text-secondary" aria-hidden="true">4 out of 20 awards</span>
+      </div>
+
+      <h3 class="docs-Heading">None</h3>
+      <progress
+        class="ProgressBar color-scheme-on-emotion-informative-subtle"
+        value="20"
+        max="100"
+        aria-label="Profile completeness"
+      ></progress>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Colors</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+      {{#each @root.colorSchemes as |colorScheme|}}
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <span class="typography-caption text-secondary">{{colorScheme}}</span>
+        <div
+          class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter"
+          style="--flex-spacing-x: var(--spirit-space-600);"
+        >
+          <progress
+            class="ProgressBar color-scheme-on-{{colorScheme}}-subtle"
+            value="60"
+            max="100"
+            aria-label="{{colorScheme}}"
+          ></progress>
+          <span class="typography-caption text-secondary">60%</span>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Field Composition</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label for="progress-bar-helper-text" class="Label">Profile completeness</label>
+        <div
+          class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter"
+          style="--flex-spacing-x: var(--spirit-space-600);"
+        >
+          <progress
+            class="ProgressBar color-scheme-on-emotion-informative-subtle"
+            id="progress-bar-helper-text"
+            value="60"
+            max="100"
+            aria-describedby="progress-bar-helper-text-helper-text"
+          ></progress>
+          <span class="typography-caption text-secondary">60%</span>
+        </div>
+        <div class="HelperText" id="progress-bar-helper-text-helper-text">Complete your profile to get more offers</div>
+      </div>
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label for="progress-bar-validation-text" class="Label Label--required">Profile completeness</label>
+        <div
+          class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter"
+          style="--flex-spacing-x: var(--spirit-space-600);"
+        >
+          <progress
+            class="ProgressBar color-scheme-on-emotion-success-subtle"
+            id="progress-bar-validation-text"
+            value="100"
+            max="100"
+            aria-describedby="progress-bar-validation-text-validation-text"
+          ></progress>
+          <span class="typography-caption text-secondary">100%</span>
+        </div>
+        <div class="ValidationText ValidationText--success" id="progress-bar-validation-text-validation-text">
+          Your profile is complete
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Disabled State</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label for="progress-bar-disabled" class="Label Label--disabled">Profile completeness</label>
+        <div
+          class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter color-scheme-on-disabled"
+          style="--flex-spacing-x: var(--spirit-space-600);"
+        >
+          <progress
+            class="ProgressBar"
+            id="progress-bar-disabled"
+            value="40"
+            max="100"
+            aria-describedby="progress-bar-disabled-helper-text"
+          ></progress>
+          <span class="typography-caption text-color-scheme">40%</span>
+        </div>
+        <div class="HelperText HelperText--disabled" id="progress-bar-disabled-helper-text">
+          Complete your profile to get more offers
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Usage with File</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+      <ul aria-label="Uploaded files">
+        <li class="File">
+          <div class="File__preview">
+            <svg class="Icon" width="20" height="20" aria-hidden="true">
+              <use href="/assets/icons/svg/sprite.svg#file" />
+            </svg>
+          </div>
+          <div class="File__content">
+            <div class="File__text">
+              <span class="File__name">
+                <span class="text-truncate-multiline text-word-break-long-words" style="--text-truncate-lines: 1;"
+                  >Document.pdf</span
+                >
+              </span>
+              <div
+                class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter"
+                style="--flex-spacing-x: var(--spirit-space-600);"
+              >
+                <progress
+                  class="ProgressBar color-scheme-on-emotion-informative-subtle"
+                  value="60"
+                  max="100"
+                  aria-label="Uploading Document.pdf"
+                  aria-describedby="file-upload-status"
+                ></progress>
+                <span class="typography-caption text-secondary">60%</span>
+              </div>
+              <span class="HelperText" id="file-upload-status" role="status">Uploading your file…</span>
+            </div>
+          </div>
+          <div
+            class="Flex Flex--noWrap Flex--alignmentXStretch Flex--tablet--alignmentXLeft Flex--alignmentYStretch Flex--horizontal"
+            style="--flex-spacing-x: var(--spirit-space-500)"
+          >
+            <button
+              type="button"
+              class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
+            >
+              <svg class="Icon" width="16" height="16" aria-hidden="true">
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+              <span class="accessibility-hidden">Cancel upload of Document.pdf</span>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</section>
