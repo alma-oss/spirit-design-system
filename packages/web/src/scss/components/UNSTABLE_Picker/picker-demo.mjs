@@ -35,7 +35,7 @@ const TAG_SIZES = {
   medium: { tagSizeClass: 'Tag--medium', controlButtonSizeClass: 'ControlButton--xsmall' },
 };
 
-function createSelectionLabel(text) {
+export function createSelectionLabel(text) {
   const template = document.getElementById(ID_SELECTION_LABEL_TEMPLATE);
   const label = template.content.cloneNode(true);
 
@@ -50,7 +50,7 @@ function getCheckboxLabel(checkbox) {
   return label ? label.textContent.trim() : '';
 }
 
-function createTag(tagLabel, selectionEl, onClose, sizeConfig, tagClass, isDisabled) {
+export function createTag(tagLabel, selectionEl, onClose, sizeConfig, tagClass, isDisabled) {
   const tag = document.getElementById(ID_TAG_TEMPLATE).content.cloneNode(true);
   const row = tag.querySelector(SELECTOR_TAG_ROW);
 
