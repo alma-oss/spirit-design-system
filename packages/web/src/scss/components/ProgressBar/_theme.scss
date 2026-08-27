@@ -1,0 +1,8 @@
+@use '@tokens' as tokens;
+
+$height: tokens.$space-400;
+$border-radius: tokens.$radius-200;
+
+// Used when no color scheme class is present.
+$track-background: tokens.$emotion-informative-background-subtle;
+$indicator-background: tokens.$emotion-informative-background-basic;

@@ -1,0 +1,50 @@
+// 1. Each vendor pseudo-element needs its own rule: browsers drop the entire selector list if they do not understand
+//    one part of it. Note that while we’re repeating code here, that’s necessary (see the Slider component).
+// 2. Firefox styles the track on the element itself, Chromium and WebKit use the `::-webkit-progress-bar`
+//    pseudo-element.
+// 3. Firefox renders a border by default.
+// 4. Lets the bar shrink to the remaining width inside a horizontal Flex instead of being blocked by the intrinsic
+//    width of the `progress` element.
+// 5. The width of the indicator is computed by the browser from the `value` attribute, so it cannot be transitioned.
+//    Rewriting the component to `div` elements would be needed to animate it.
+
+@use '../../tools/color-scheme';
+@use '../../tools/component-color-overrides';
+@use 'theme';
+
+.ProgressBar {
+    appearance: none;
+    display: block;
+    width: 100%;
+    min-width: 0; // 4.
+    height: theme.$height;
+    border: 0; // 3.
+    border-radius: theme.$border-radius;
+    background-color: color-scheme.background-color-subtle(theme.$track-background); // 2.
+}
+
+// 1., 2.
+.ProgressBar::-webkit-progress-bar {
+    border-radius: theme.$border-radius;
+    background-color: color-scheme.background-color-subtle(theme.$track-background);
+}
+
+// 1., 5.
+.ProgressBar::-webkit-progress-value {
+    border-radius: theme.$border-radius;
+    background-color: color-scheme.background-color-basic(theme.$indicator-background);
+}
+
+// 1., 5.
+.ProgressBar::-moz-progress-bar {
+    border-radius: theme.$border-radius;
+    background-color: color-scheme.background-color-basic(theme.$indicator-background);
+}
+
+@include component-color-overrides.generate(
+    $class-name: 'ProgressBar',
+    $property-map: (
+        background-basic: background-color-basic,
+        background-subtle: background-color-subtle,
+    )
+);
