@@ -3,7 +3,7 @@ import React from 'react';
 import UNSTABLE_Table from '../UNSTABLE_Table';
 
 const meta: Meta<typeof UNSTABLE_Table> = {
-  title: 'Components/UNSTABLE_Table',
+  title: 'Experimental/UNSTABLE_Table',
   component: UNSTABLE_Table,
   parameters: {
     docs: {
