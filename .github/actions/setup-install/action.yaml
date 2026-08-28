@@ -16,9 +16,9 @@ runs:
       uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
       with:
         path: ./.yarn/cache
-        key: ${{ runner.os }}-Yarn-main
+        key: ${{ runner.os }}-Yarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-Yarn-main-
+          ${{ runner.os }}-Yarn-
 
     - name: Install dependencies
       uses: ./.github/actions/deps-install

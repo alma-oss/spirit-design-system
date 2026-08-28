@@ -6,7 +6,8 @@
 #
 # @see: https://classic.yarnpkg.com/blog/2016/11/24/offline-mirror/
 #
-# The cache is created once per day, or can be manually triggered.
+# The cache is keyed by OS + yarn.lock hash only (no branch name), so it is
+# created once per day (always against main), or can be manually triggered.
 # Every install on every branch will use the same cache if available.
 # Or install all the dependencies from scratch if not.
 # The thing is, even if same dependencies changed or are missing, only those
@@ -44,6 +45,7 @@ jobs:
     name: 🔄 Update Dependencies Cache
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    if: ${{ github.ref_name == 'main' }}
     permissions:
       actions: write
       contents: read
@@ -70,7 +72,7 @@ jobs:
         id: cache-key
         run: |
           HASH="${{ hashFiles('**/yarn.lock') }}"
-          echo "key=${{ runner.os }}-Yarn-${{ github.ref_name }}-${HASH}" >> $GITHUB_OUTPUT
+          echo "key=${{ runner.os }}-Yarn-${HASH}" >> $GITHUB_OUTPUT
           echo "hash=${HASH}" >> $GITHUB_OUTPUT
 
       - name: Check Cache
