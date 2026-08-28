@@ -43,6 +43,8 @@ export const CvEditorPersonalDetails = () => {
       <Section elementType="div" size="small" backgroundColor="secondary" containerProps={{ size: 'small' }}>
         <Stack spacing="space-1000">
           <form aria-labelledby="cv-personal-details-heading" method="post" action="#">
+            {/* TODO [DS-2774]: The design applies `shadow-100` on this card. `Box` has no `boxShadow` prop
+                and there is no shadow utility class in `web`, so the shadow is intentionally omitted here. */}
             <Box
               backgroundColor="primary"
               borderColor="basic"
@@ -51,6 +53,9 @@ export const CvEditorPersonalDetails = () => {
               padding="space-900"
               marginBottom={{ mobile: 'space-900', tablet: 'space-1000' }}
             >
+              {/* TODO [DS-2775]: `TextField` renders an internal `Stack` (`display: grid`). As a direct `Grid`
+                  child it gets vertically stretched to match the tallest sibling. Each field must be wrapped
+                  in `GridItem` to contain the stretch. */}
               <Grid cols={{ mobile: 1, tablet: 2 }} spacing={{ mobile: 'space-700', tablet: 'space-900' }}>
                 <GridItem>
                   <TextField id="personal-details-first-name" label="Jméno" autoComplete="given-name" isRequired />
