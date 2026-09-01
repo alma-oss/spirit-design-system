@@ -2,7 +2,7 @@ import { Stack } from '@alma-oss/spirit-web-react';
 import { type ChildrenProps } from '@local/types';
 import { Footer } from '@local/ui';
 import { AppProvider } from '@local/ui/AppProvider';
-import { inter } from '@local/ui/fonts';
+import { fontshareApiUrl, generalSansStylesheet } from '@local/ui/fonts';
 import '@local/ui/globals.scss';
 import { Header } from '@local/ui/Header';
 import { Metadata } from 'next';
@@ -21,7 +21,11 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: RootLayoutProps) => (
   <html lang="en">
-    <body className={`${inter.className} antialiased`}>
+    <head>
+      <link rel="preconnect" href={fontshareApiUrl} />
+      <link rel="stylesheet" href={generalSansStylesheet} />
+    </head>
+    <body>
       <AppProvider>
         <Header />
         <main>

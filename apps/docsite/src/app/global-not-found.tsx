@@ -2,7 +2,7 @@ import { ButtonLink, EmptyState, EmptyStateSection, Flex, Heading, Section, Text
 import { routes } from '@local/domains/routing/routes';
 import { Header, Footer } from '@local/ui';
 import { AppProvider } from '@local/ui/AppProvider';
-import { inter } from '@local/ui/fonts';
+import { fontshareApiUrl, generalSansStylesheet } from '@local/ui/fonts';
 import { Metadata } from 'next';
 import '../ui/globals.scss';
 
@@ -14,7 +14,11 @@ export const metadata: Metadata = {
 
 const GlobalNotFound = () => (
   <html lang="en">
-    <body className={`${inter.className} antialiased`}>
+    <head>
+      <link rel="preconnect" href={fontshareApiUrl} />
+      <link rel="stylesheet" href={generalSansStylesheet} />
+    </head>
+    <body>
       <AppProvider>
         <Header disableClientRouting />
         <Flex elementType="main" alignmentX="center" alignmentY="center">
