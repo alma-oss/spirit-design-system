@@ -1,6 +1,7 @@
 @forward '@alma-oss/spirit-web/src/scss';
 @use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
-@use 'devices/devices' as tokens;
+@use '@alma-oss/spirit-web/src/scss/tools/typography';
+@use '@tokens' as tokens;
 
 // 1. Expand the page to fill the viewport height to be ready for various themes.
 // 2. Make the footer sticky.
@@ -147,12 +148,11 @@ body {
 }
 
 .docs-Markdown code:not(pre code) {
+    @include typography.generate(tokens.$code-small-regular);
+
     background: var(--spirit-color-background-secondary);
-    color: var(--spirit-color-neutral-content-strong);
     padding: 0.1em 0.4em;
     border-radius: var(--spirit-radius-200);
-    font-size: 0.95em;
-    font-family: var(--spirit-font-mono, 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace);
     word-break: break-word;
     white-space: pre-wrap;
     vertical-align: baseline;
