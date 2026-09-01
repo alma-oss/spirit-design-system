@@ -45,6 +45,49 @@ jobs:
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
 
+      - name: Read Figma publish notes
+        id: figma-notes
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+          FIGMA_FILE_KEY: UMd06VnGrAE5xheb4C8QEg
+        run: |
+          NOTES=""
+          if RESPONSE="$(curl -fsS -H "X-Figma-Token: ${FIGMA_ACCESS_TOKEN}" \
+            "https://api.figma.com/v1/files/${FIGMA_FILE_KEY}/versions")"; then
+            NOTES="$(printf '%s' "$RESPONSE" | node --input-type=module -e '
+              const chunks = [];
+              process.stdin.on("data", (chunk) => chunks.push(chunk));
+              process.stdin.on("end", () => {
+                try {
+                  const json = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+                  const description = json?.versions?.[0]?.description;
+                  if (typeof description === "string" && description.trim()) {
+                    process.stdout.write(description.trim());
+                  }
+                } catch {
+                  // Missing or invalid version metadata must not fail the sync.
+                }
+              });
+            ')" || true
+          fi
+
+          {
+            echo "body<<PRBODY"
+            echo "## Summary"
+            echo ""
+            echo "- synchronize Spirit SVG icons directly from the Figma Assets file"
+            echo "- add, update, or remove icons to match the configured \`Brand=Spirit\` variants"
+            echo ""
+            if [ -n "$NOTES" ]; then
+              echo "## Figma Publish Notes"
+              echo ""
+              echo "$NOTES"
+              echo ""
+            fi
+            echo "This pull request is managed by the Figma asset sync workflow."
+            echo "PRBODY"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Open or update pull request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
         with:
@@ -53,12 +96,6 @@ jobs:
           delete-branch: true
           commit-message: 'chore(icons): sync icons from Figma'
           title: 'Chore(icons): Sync icons from Figma'
-          body: |
-            ## Summary
-
-            - synchronize Spirit SVG icons directly from the Figma Assets file
-            - add, update, or remove icons to match the configured `Brand=Spirit` variants
-
-            This pull request is managed by the Figma asset sync workflow.
+          body: ${{ steps.figma-notes.outputs.body }}
           add-paths: |
             packages/icons/src/svg

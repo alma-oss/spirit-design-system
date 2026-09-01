@@ -31,6 +31,7 @@ export default [
       // Skip packages that don’t need linting from root
       'apps/docsite',
       'examples/*',
+      'exporters/assets',
       'exporters/js',
       'exporters/scss',
       'exporters/tokens',

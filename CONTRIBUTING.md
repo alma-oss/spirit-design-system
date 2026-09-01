@@ -64,7 +64,7 @@ The `footer` is optional. The [Commit Message Footer](#commit-footer) format des
   │       │             └─⫸ Summary in present tense. Sentence case. No period at the end.
   │       │
   │       └─⫸ Commit Scope: analytics|design-tokens|icons|web|web-react|
-  |                          exporter-tokens|exporter-assets|exporter-figma-assets|ci|repo
+  |                          exporter-tokens|exporter-assets|ci|repo
   │
   └─⫸ Commit Type: Feat|Fix|Perf|Revert|Docs|Style|Refactor|Test|Chore|Deps
 ```
@@ -96,7 +96,6 @@ The following is the list of supported scopes:
   - `demo`
 - Exporters:
   - `exporter-assets`
-  - `exporter-figma-assets`
   - `exporter-tokens`
 - Packages:
   - `analytics`

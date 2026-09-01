@@ -1,4 +1,4 @@
-export const createFigmaFetch = () => async (input) => {
+export const createFigmaFetch = () => async (input: RequestInfo | URL) => {
   const url = String(input);
 
   if (url.includes('/files/figma-file?depth=3')) {
@@ -74,6 +74,12 @@ export const createFigmaFetch = () => async (input) => {
   return new Response('Not found', { status: 404 });
 };
 
+interface ExportFetchOptions {
+  file?: Response | Record<string, unknown>;
+  images?: Response | Record<string, unknown>;
+  svg?: Response | ((url: string) => Response);
+}
+
 export const createExportFetch = ({
   file = {
     document: {
@@ -92,8 +98,8 @@ export const createExportFetch = ({
   },
   images = { err: null, images: { '1:2': 'https://assets.example/test.svg' } },
   svg = new Response('<svg />'),
-} = {}) => {
-  return async (input) => {
+}: ExportFetchOptions = {}) => {
+  return async (input: RequestInfo | URL) => {
     const url = String(input);
 
     if (url.includes('/files/')) {

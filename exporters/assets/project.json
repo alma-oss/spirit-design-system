@@ -1,7 +1,7 @@
 {
-  "name": "@alma-oss/spirit-figma-assets-exporter",
+  "name": "@alma-oss/spirit-assets-exporter",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "exporters/figma-assets/src",
+  "sourceRoot": "exporters/assets/src",
   "projectType": "library",
   "targets": {
     "build": {

@@ -1,19 +1,13 @@
 import { mkdir, readdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { exportAssets } from './figma';
-import type { AssetType, SyncChange, SyncOptions, SyncResult, TargetSyncResult } from './types';
+import { exportAssets as exportFigmaAssets } from './adapters/figma';
+import { CHANGE_TYPES } from './constants';
+import { FigmaApiError } from './errors';
+import type { ExportedAsset, SyncChange, SyncOptions, SyncResult, TargetSyncResult } from './types';
 
-const syncTarget = async (
-  fileKey: string,
-  brand: string,
-  assets: AssetType[],
-  out: string,
-  token: string,
-  fetchImplementation: typeof fetch,
-): Promise<TargetSyncResult> => {
-  const icons = await exportAssets(fileKey, brand, assets, token, fetchImplementation);
-  const expectedFiles = new Set(icons.map(({ name }) => `${name}.svg`));
+export const mirrorAssets = async (brand: string, out: string, assets: ExportedAsset[]): Promise<TargetSyncResult> => {
+  const expectedFiles = new Set(assets.map(({ name }) => `${name}.svg`));
   const changes: SyncChange[] = [];
 
   await mkdir(out, { recursive: true });
@@ -22,8 +16,8 @@ const syncTarget = async (
     .filter((entry) => entry.isFile() && entry.name.endsWith('.svg'))
     .map((entry) => entry.name);
 
-  for (const icon of icons) {
-    const fileName = `${icon.name}.svg`;
+  for (const asset of assets) {
+    const fileName = `${asset.name}.svg`;
     const filePath = path.join(out, fileName);
     let currentSvg: string | undefined;
 
@@ -35,14 +29,14 @@ const syncTarget = async (
       }
     }
 
-    if (currentSvg === icon.svg) {
+    if (currentSvg === asset.svg) {
       continue;
     }
 
-    await writeFile(filePath, icon.svg);
+    await writeFile(filePath, asset.svg);
     changes.push({
       file: filePath,
-      type: currentSvg === undefined ? 'added' : 'updated',
+      type: currentSvg === undefined ? CHANGE_TYPES[0] : CHANGE_TYPES[2],
     });
   }
 
@@ -55,27 +49,34 @@ const syncTarget = async (
     await unlink(filePath);
     changes.push({
       file: filePath,
-      type: 'deleted',
+      type: CHANGE_TYPES[1],
     });
   }
 
   return {
     brand,
-    out,
-    exported: icons.length,
     changes: changes.sort((first, second) => first.file.localeCompare(second.file)),
+    exported: assets.length,
+    out,
   };
 };
 
-export const syncAssets = async ({ config, token, fetch: fetchImplementation = fetch }: SyncOptions): Promise<SyncResult> => {
+export const syncAssets = async ({
+  config,
+  exportAssets = exportFigmaAssets,
+  fetch: fetchImplementation = fetch,
+  token,
+}: SyncOptions): Promise<SyncResult> => {
   if (!token.trim()) {
-    throw new Error('FIGMA_ACCESS_TOKEN is required.');
+    throw new FigmaApiError('FIGMA_ACCESS_TOKEN is required.');
   }
 
   const targets: TargetSyncResult[] = [];
 
   for (const target of config.targets) {
-    targets.push(await syncTarget(config.fileKey, target.brand, target.assets, target.out, token, fetchImplementation));
+    const exported = await exportAssets(config.fileKey, target.brand, target.assets, token, fetchImplementation);
+
+    targets.push(await mirrorAssets(target.brand, target.out, exported));
   }
 
   return { targets };

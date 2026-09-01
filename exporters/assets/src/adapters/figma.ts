@@ -1,4 +1,6 @@
-import type { AssetType } from './types';
+import { ASSET_DISCOVERY } from '../constants';
+import { AssetDiscoveryError, FigmaApiError } from '../errors';
+import type { AssetType, ExportedAsset } from '../types';
 
 const FIGMA_API_URL = 'https://api.figma.com/v1';
 const EXPORT_BATCH_SIZE = 100;
@@ -26,11 +28,6 @@ interface IconVariant {
   name: string;
 }
 
-export interface ExportedIcon {
-  name: string;
-  svg: string;
-}
-
 const requestJson = async <Response>(
   fetchImplementation: typeof fetch,
   url: string,
@@ -43,7 +40,7 @@ const requestJson = async <Response>(
   });
 
   if (!response.ok) {
-    throw new Error(`Figma API request failed (${response.status} ${response.statusText}): ${url}`);
+    throw new FigmaApiError(`Figma API request failed (${response.status} ${response.statusText}): ${url}`);
   }
 
   return (await response.json()) as Response;
@@ -68,7 +65,10 @@ const isBrandVariant = (node: FigmaNode, brand: string): boolean => {
 };
 
 const toAssetFileName = (nodeName: string, prefix: string): string => {
-  const name = nodeName.slice(prefix.length).trim().replace(/\.svg$/i, '');
+  const name = nodeName
+    .slice(prefix.length)
+    .trim()
+    .replace(/\.svg$/i, '');
   const normalizedName = name
     .normalize('NFKD')
     .replace(/[\u0300-\u036f]/g, '')
@@ -79,67 +79,65 @@ const toAssetFileName = (nodeName: string, prefix: string): string => {
     .toLowerCase();
 
   if (!normalizedName) {
-    throw new Error(`Figma asset "${nodeName}" does not produce a valid filename.`);
+    throw new AssetDiscoveryError(`Figma asset "${nodeName}" does not produce a valid filename.`);
   }
 
   return normalizedName;
 };
 
+const matchesDiscoveryRule = (node: FigmaNode, assetType: AssetType): boolean => {
+  const rule = ASSET_DISCOVERY[assetType];
+
+  if (node.type !== rule.nodeType || !node.name.startsWith(rule.matchPrefix)) {
+    return false;
+  }
+
+  return !(assetType === 'icons' && node.name.startsWith(ASSET_DISCOVERY['benefit-icons'].matchPrefix));
+};
+
 const discoverAssetNodes = (document: FigmaNode, brand: string, assets: AssetType[]): IconVariant[] => {
   const variants: IconVariant[] = [];
-  const includesIcons = assets.includes('icons');
-  const includesBenefitIcons = assets.includes('benefit-icons');
-  const includesIllustrations = assets.includes('illustrations');
-  let iconCount = 0;
-  let benefitIconCount = 0;
-  let illustrationCount = 0;
+  const counts = Object.fromEntries(assets.map((assetType) => [assetType, 0])) as Record<AssetType, number>;
 
   walkNodes(document, (node) => {
-    if (includesBenefitIcons && node.type === 'COMPONENT' && node.name.startsWith('Icons/benefit-')) {
+    const assetType = assets.find((candidate) => matchesDiscoveryRule(node, candidate));
+
+    if (!assetType) {
+      return;
+    }
+
+    const rule = ASSET_DISCOVERY[assetType];
+
+    if (rule.branded) {
+      if (!node.children?.length) {
+        return;
+      }
+
+      const variant = node.children.find((child) => isBrandVariant(child, brand));
+
+      if (!variant) {
+        throw new AssetDiscoveryError(`Icon component set "${node.name}" does not contain Brand=${brand}.`);
+      }
+
+      variants.push({
+        id: variant.id,
+        name: toAssetFileName(node.name, rule.namePrefix),
+      });
+    } else {
       variants.push({
         id: node.id,
-        name: toAssetFileName(node.name, 'Icons/'),
+        name: toAssetFileName(node.name, rule.namePrefix),
       });
-      benefitIconCount += 1;
-      return;
     }
 
-    if (node.type !== 'COMPONENT_SET' || !node.children?.length) {
-      return;
-    }
-
-    const isIcon = includesIcons && node.name.startsWith('Icons/');
-    const isIllustration = includesIllustrations && node.name.startsWith('Illustration/');
-
-    if (!isIcon && !isIllustration) {
-      return;
-    }
-
-    const variant = node.children.find((child) => isBrandVariant(child, brand));
-
-    if (!variant) {
-      throw new Error(`Icon component set "${node.name}" does not contain Brand=${brand}.`);
-    }
-
-    variants.push({
-      id: variant.id,
-      name: toAssetFileName(node.name, isIcon ? 'Icons/' : 'Illustration/'),
-    });
-    iconCount += Number(isIcon);
-    illustrationCount += Number(isIllustration);
+    counts[assetType] += 1;
   });
 
-  if (includesIcons && iconCount === 0) {
-    throw new Error(`No Icons/* component sets with Brand=${brand} were found in the Figma file.`);
-  }
-
-  if (includesBenefitIcons && benefitIconCount === 0) {
-    throw new Error('No Icons/benefit-* components were found in the Figma file.');
-  }
-
-  if (includesIllustrations && illustrationCount === 0) {
-    throw new Error(`No Illustration/* component sets with Brand=${brand} were found in the Figma file.`);
-  }
+  assets.forEach((assetType) => {
+    if (counts[assetType] === 0) {
+      throw new AssetDiscoveryError(ASSET_DISCOVERY[assetType].missingError(brand));
+    }
+  });
 
   return variants.sort((first, second) => first.name.localeCompare(second.name));
 };
@@ -151,13 +149,13 @@ const downloadSvg = async (fetchImplementation: typeof fetch, url: string, iconN
   const response = await fetchImplementation(url);
 
   if (!response.ok) {
-    throw new Error(`Unable to download SVG for "${iconName}" (${response.status} ${response.statusText}).`);
+    throw new FigmaApiError(`Unable to download SVG for "${iconName}" (${response.status} ${response.statusText}).`);
   }
 
   const svg = (await response.text()).trim();
 
   if (!svg.startsWith('<svg')) {
-    throw new Error(`Figma returned invalid SVG content for "${iconName}".`);
+    throw new FigmaApiError(`Figma returned invalid SVG content for "${iconName}".`);
   }
 
   return `${svg}\n`;
@@ -169,7 +167,7 @@ export const exportAssets = async (
   assets: AssetType[],
   token: string,
   fetchImplementation: typeof fetch = fetch,
-): Promise<ExportedIcon[]> => {
+): Promise<ExportedAsset[]> => {
   const file = await requestJson<FigmaFileResponse>(
     fetchImplementation,
     `${FIGMA_API_URL}/files/${encodeURIComponent(fileKey)}?depth=3`,
@@ -177,11 +175,11 @@ export const exportAssets = async (
   );
 
   if (file.err) {
-    throw new Error(`Figma file request failed: ${file.err}`);
+    throw new FigmaApiError(`Figma file request failed: ${file.err}`);
   }
 
   if (!file.document) {
-    throw new Error('Figma file response did not contain a document.');
+    throw new FigmaApiError('Figma file response did not contain a document.');
   }
 
   const variants = discoverAssetNodes(file.document, brand, assets);
@@ -199,14 +197,14 @@ export const exportAssets = async (
     );
 
     if (images.err) {
-      throw new Error(`Figma SVG export failed: ${images.err}`);
+      throw new FigmaApiError(`Figma SVG export failed: ${images.err}`);
     }
 
     batch.forEach((variant) => {
       const url = images.images?.[variant.id];
 
       if (!url) {
-        throw new Error(`Figma did not return an SVG export URL for "${variant.name}".`);
+        throw new FigmaApiError(`Figma did not return an SVG export URL for "${variant.name}".`);
       }
 
       exportUrls.set(variant.id, url);
@@ -219,13 +217,13 @@ export const exportAssets = async (
       svg: await downloadSvg(fetchImplementation, exportUrls.get(variant.id) as string, variant.name),
     })),
   );
-  const uniqueAssets = new Map<string, ExportedIcon>();
+  const uniqueAssets = new Map<string, ExportedAsset>();
 
   downloadedAssets.forEach((asset) => {
     const duplicate = uniqueAssets.get(asset.name);
 
     if (duplicate && duplicate.svg !== asset.svg) {
-      throw new Error(`Multiple Figma assets resolve to "${asset.name}.svg" with different content.`);
+      throw new AssetDiscoveryError(`Multiple Figma assets resolve to "${asset.name}.svg" with different content.`);
     }
 
     uniqueAssets.set(asset.name, asset);
@@ -239,4 +237,4 @@ export const exportIcons = (
   brand: string,
   token: string,
   fetchImplementation: typeof fetch = fetch,
-): Promise<ExportedIcon[]> => exportAssets(fileKey, brand, ['icons'], token, fetchImplementation);
+): Promise<ExportedAsset[]> => exportAssets(fileKey, brand, ['icons'], token, fetchImplementation);
