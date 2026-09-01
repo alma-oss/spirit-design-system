@@ -8,11 +8,13 @@ Spirit typography components for consistent text rendering. These components do 
 
 **Always choose the Spirit component from the Figma text style name.** Do not use visual appearance alone.
 
-| Figma text style                                           | Spirit component |
-| ---------------------------------------------------------- | ---------------- |
-| **Heading\*** (e.g. Heading/Large/Bold)                    | `Heading`        |
-| **Body\*** (e.g. Body/Medium/Semibold, Body/Small/Regular) | `Text`           |
+| Figma text style                                           | Spirit component          |
+| ---------------------------------------------------------- | ------------------------- |
+| **Heading\*** (e.g. Heading/Large/Bold)                    | `Heading`                 |
+| **Display\*** (e.g. Display/Large, Display/Medium)         | `UNSTABLE_DisplayHeading` |
+| **Body\*** (e.g. Body/Medium/Semibold, Body/Small/Regular) | `Text`                    |
 
+- **Display\*** text style ⇒ use **UNSTABLE_DisplayHeading** (with required `elementType`: h1–h6 for semantic headings, div/span for decorative). Do not use Heading. Display has no font-weight axis; do not pass `fontWeight` or `emphasis`.
 - **Heading\*** text style ⇒ use **Heading** component (with appropriate `elementType`: h1–h6 for semantic headings, div/span for decorative).
 - **Figma Heading style name** is `Heading/[Size]/[Emphasis]` → map to Spirit `size` and optionally `emphasis`. Examples:
   - **Heading/Large/Bold** → `<Heading elementType="..." size="large">` (omit `emphasis="bold"` since bold is default)
@@ -72,14 +74,15 @@ Example: Figma "Body/Medium/Semibold" for a person's name → use `<Text size="m
 
 DO NOT set these props when they match component defaults:
 
-| Component | Default Props (Omit These)                                                         |
-| --------- | ---------------------------------------------------------------------------------- |
-| Heading   | `size="medium"`, `emphasis="bold"`, `isTextBalanced={false}`                       |
-| Text      | `elementType="p"`, `size="medium"`, `emphasis="regular"`, `isTextBalanced={false}` |
+| Component               | Default Props (Omit These)                                                         |
+| ----------------------- | ---------------------------------------------------------------------------------- |
+| Heading                 | `size="medium"`, `emphasis="bold"`, `isTextBalanced={false}`                       |
+| UNSTABLE_DisplayHeading | `size="medium"`, `isTextBalanced={false}`                                          |
+| Text                    | `elementType="p"`, `size="medium"`, `emphasis="regular"`, `isTextBalanced={false}` |
 
 **Important Notes:**
 
-- **Heading `elementType` is REQUIRED** - Unlike other defaults, you must always set `elementType` (h1-h6, div, span) for accessibility and semantic HTML. This is the ONLY required prop.
+- **Heading and UNSTABLE_DisplayHeading `elementType` is REQUIRED** - Unlike other defaults, you must always set `elementType` (h1-h6, div, span) for accessibility and semantic HTML. This is the ONLY required prop.
 - **Text `emphasis="regular"` is default** - Only set `emphasis` when you need semibold or bold
 - **Heading `emphasis="bold"` is default** - Omit `emphasis` for bold headings; only set for regular or semibold
 
@@ -120,6 +123,8 @@ DO NOT set these props when they match component defaults:
 
 When Figma shows:
 
+- **Display/Medium** → `<UNSTABLE_DisplayHeading elementType="...">` (omit size, medium is default)
+- **Display/Large** → `<UNSTABLE_DisplayHeading elementType="..." size="large">`
 - **Heading/Medium/Bold** → `<Heading elementType="...">` (omit size and emphasis, both are defaults)
 - **Heading/Large/Bold** → `<Heading elementType="..." size="large">` (omit emphasis, bold is default)
 - **Heading/Large/Regular** → `<Heading elementType="..." size="large" emphasis="regular">` (must set emphasis when differs from default)
@@ -140,6 +145,7 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
 ### When NOT to Use
 
+- For **Display\*** Figma text styles (e.g. Display/Large) - use [UNSTABLE_DisplayHeading](#unstable_displayheading), not Heading
 - For **Body\*** Figma text styles (e.g. Body/Medium/Semibold) - use [Text](#text), not Heading
 - For body text or paragraphs - use [Text](#text)
 - For decorative text that looks like a heading but isn't semantically one - use Heading with `elementType="div"`
@@ -358,6 +364,77 @@ Utility component for rendering consistent typographic hierarchy and semantic he
 
 ---
 
+## UNSTABLE_DisplayHeading
+
+Utility component for rendering display-scale type (hero lines larger than Heading). Experimental: the export is prefixed `UNSTABLE_`.
+
+### When to Use
+
+- For any text that uses **Display\*** typography styles in Figma
+- For large decorative or hero type that is not a Heading style
+
+### When NOT to Use
+
+- For **Heading\*** Figma text styles - use [Heading](#heading)
+- For **Body\*** Figma text styles - use [Text](#text)
+- For button or link labels - use Button or Link components
+
+### API Reference
+
+| Prop             | Type                                                                            | Default          | Required | Description                                        |
+| ---------------- | ------------------------------------------------------------------------------- | ---------------- | -------- | -------------------------------------------------- |
+| `elementType`    | `"h1"` \| `"h2"` \| `"h3"` \| `"h4"` \| `"h5"` \| `"h6"` \| `"div"` \| `"span"` | -                | **YES**  | HTML element to render                             |
+| `size`           | `"small"` \| `"medium"` \| `"large"`                                            | `"medium"`       | No       | Visual size of the display heading                 |
+| `isItalic`       | boolean                                                                         | `false`          | No       | Italic styling only (not semantics)                |
+| `textColor`      | ColorToken                                                                      | inherited        | No       | Text color                                         |
+| `textAlignment`  | `"left"` \| `"center"` \| `"right"` \| Responsive                               | -                | No       | Text alignment within element                      |
+| `isTextBalanced` | boolean                                                                         | `false`          | No       | Enable balanced text wrapping (text-wrap: balance) |
+| `textHyphens`    | `"none"` \| `"auto"` \| `"manual"`                                              | -                | No       | Hyphenation strategy                               |
+| `textWordBreak`  | `"normal"` \| `"anywhere"` \| `"long-words"`                                    | -                | No       | Word break strategy                                |
+| `marginBottom`   | SpaceToken                                                                      | (default margin) | No       | Override default bottom margin                     |
+
+There is no `fontWeight` or `emphasis` prop. Display tokens have no weight axis.
+
+### Common Mistakes
+
+1. Using Heading for Figma Display\* text styles
+
+   ```tsx
+   // WRONG - Figma shows "Display/Large"
+   <Heading elementType="h1" size="xlarge">Summer Sale</Heading>
+
+   // CORRECT - Display* style => UNSTABLE_DisplayHeading, size from the style name
+   <UNSTABLE_DisplayHeading elementType="h1" size="large">Summer Sale</UNSTABLE_DisplayHeading>
+   ```
+
+2. Omitting `elementType`
+
+   ```tsx
+   // WRONG
+   <UNSTABLE_DisplayHeading size="large">Summer Sale</UNSTABLE_DisplayHeading>
+
+   // CORRECT
+   <UNSTABLE_DisplayHeading elementType="h1" size="large">Summer Sale</UNSTABLE_DisplayHeading>
+   ```
+
+3. Passing `fontWeight` or `emphasis`
+
+   Display styles have a single baked-in weight. Do not pass `fontWeight` or `emphasis`.
+
+```tsx
+// Page title at display large (omit size="medium")
+<UNSTABLE_DisplayHeading elementType="h1" size="large" isTextBalanced>
+  Summer Sale
+</UNSTABLE_DisplayHeading>
+
+// Decorative display type that is not a heading
+<UNSTABLE_DisplayHeading elementType="div" size="small" textColor="accent-02-basic" marginBottom="space-0">
+  300K+
+</UNSTABLE_DisplayHeading>
+```
+
+---
+
 ## Text
 
 Utility component for rendering consistent typography for body content and inline text.
@@ -371,6 +448,7 @@ Utility component for rendering consistent typography for body content and inlin
 ### When NOT to Use
 
 - For titles or section headers - use [Heading](#heading)
+- For **Display\*** Figma text styles - use [UNSTABLE_DisplayHeading](#unstable_displayheading)
 - For button or link labels - use Button or Link components
 - For form labels - use the label prop on form components
 

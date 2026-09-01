@@ -751,6 +751,14 @@
       "require": "./dist/components/UNSTABLE_Combobox/index.cjs",
       "default": "./dist/components/UNSTABLE_Combobox/index.js"
     },
+    "./components/UNSTABLE_DisplayHeading": {
+      "types": "./dist/components/UNSTABLE_DisplayHeading/index.d.ts",
+      "development": "./src/components/UNSTABLE_DisplayHeading/index.ts",
+      "production": "./dist/components/UNSTABLE_DisplayHeading/index.js",
+      "import": "./dist/components/UNSTABLE_DisplayHeading/index.js",
+      "require": "./dist/components/UNSTABLE_DisplayHeading/index.cjs",
+      "default": "./dist/components/UNSTABLE_DisplayHeading/index.js"
+    },
     "./components/UNSTABLE_Picker": {
       "types": "./dist/components/UNSTABLE_Picker/index.d.ts",
       "development": "./src/components/UNSTABLE_Picker/index.ts",

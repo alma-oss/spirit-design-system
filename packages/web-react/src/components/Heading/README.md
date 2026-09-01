@@ -2,6 +2,8 @@
 
 The Heading component provides helper classes to render headings.
 
+ℹ️ For display-scale type, use [`UNSTABLE_DisplayHeading`][readme-display-heading] instead of Heading.
+
 ## Basic Usage
 
 Use the `elementType` prop to set the HTML tag of the Heading component.
@@ -212,6 +214,7 @@ Or migrate manually:
 [mdn-text-wrap-balance]: https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap#balance
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#deprecations
+[readme-display-heading]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_DisplayHeading/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
