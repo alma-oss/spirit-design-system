@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web-react%405.2.1...%40alma-oss%2Fspirit-web-react%405.3.0) (2026-09-02)
+
+### Features
+
+- **web-react:** add `isStretched` prop to `ControlButton` ([2231ff8](https://github.com/alma-oss/spirit-design-system/commit/2231ff8f05ffc0d0d566fddc3755c8b957838fa8))
+- **web-react:** add context support for split tag composition ([a91984a](https://github.com/alma-oss/spirit-design-system/commit/a91984acf81ff456f29ee9b56d21936c64886067))
+- **web-react:** add namespace groups to PropsContext #DS-2447 ([5fbe9bc](https://github.com/alma-oss/spirit-design-system/commit/5fbe9bc8fe8bd066445e5d77bce2ccd126d08331)), references [#DS-2447](https://github.com/alma-oss/spirit-design-system/issues/DS-2447)
+- **web-react:** add namespaced context props to PropsContext #DS-2447 ([d0e4449](https://github.com/alma-oss/spirit-design-system/commit/d0e44490a694326d037e177f3e1d65e6be2969fc)), references [#DS-2447](https://github.com/alma-oss/spirit-design-system/issues/DS-2447)
+- **web-react:** add UNSTABLE_SplitTag component ([26fd3a0](https://github.com/alma-oss/spirit-design-system/commit/26fd3a005790519a0342bcfbbd49717b9bc5ccf9))
+- **web-react:** adopt selection pattern for Picker and Combobox #DS-2698 ([915be05](https://github.com/alma-oss/spirit-design-system/commit/915be05199070615f48226d6958f2024d3fae5b9)), references [#DS-2698](https://github.com/alma-oss/spirit-design-system/issues/DS-2698)
+- **web-react:** enable `NavigationAvatar` as dropdown trigger via context ([6a7b6ef](https://github.com/alma-oss/spirit-design-system/commit/6a7b6efe828e2aac41402399482aad7a9840e9a3))
+- **web-react:** expose extensible group contexts for shared props ([a0d02dd](https://github.com/alma-oss/spirit-design-system/commit/a0d02dd367add2ef507f24026b612e003bba13ed))
+- **web-react:** introduce `fontWeight` and `isItalic`, deprecate `emphasis` #DS-2725 ([3e5e3b6](https://github.com/alma-oss/spirit-design-system/commit/3e5e3b69201d4cabd72eaa797e16a6ad6de55f08)), references [#DS-2725](https://github.com/alma-oss/spirit-design-system/issues/DS-2725)
+- **web-react:** introduce `UNSTABLE_Combobox` component #DS-2304 ([d10670e](https://github.com/alma-oss/spirit-design-system/commit/d10670e9c01438e658fc4ceea3d1b5ead3c07a96)), references [#DS-2304](https://github.com/alma-oss/spirit-design-system/issues/DS-2304)
+- **web-react:** introduce `UNSTABLE_ComboboxSplitTag` for select segments #DS-2708 ([044bdb2](https://github.com/alma-oss/spirit-design-system/commit/044bdb2c56e316cd89d787eedca02ded8770faa1)), references [#DS-2708](https://github.com/alma-oss/spirit-design-system/issues/DS-2708)
+- **web-react:** introduce `UNSTABLE_DisplayHeading` #DS-2779 ([bc5e2de](https://github.com/alma-oss/spirit-design-system/commit/bc5e2de72c7e1f6dc1c71c134d60f9c2fa2c2469)), references [#DS-2779](https://github.com/alma-oss/spirit-design-system/issues/DS-2779)
+- **web-react:** introduce Collection pattern for Picker and Combobox #DS-2699 ([5bb0668](https://github.com/alma-oss/spirit-design-system/commit/5bb066847b04f6347ae21d7b32e0a6ebbe291284)), references [#DS-2699](https://github.com/alma-oss/spirit-design-system/issues/DS-2699)
+- **web-react:** introduce disclosure hooks ([0bbb23b](https://github.com/alma-oss/spirit-design-system/commit/0bbb23bebcb5cc0c63b5b183db8bdf58f3940dac)), references [#DS-2519](https://github.com/alma-oss/spirit-design-system/issues/DS-2519)
+- **web-react:** make `PaginationLink` generic and deprecate `PaginationButtonLink` #DS-2684 ([ff9a041](https://github.com/alma-oss/spirit-design-system/commit/ff9a041ad10b51e36f8f42f209b74e86fba0bd17)), references [#DS-2684](https://github.com/alma-oss/spirit-design-system/issues/DS-2684)
+- **web-react:** support SplitTag selection in `UNSTABLE_Combobox` #DS-2708 ([92304cd](https://github.com/alma-oss/spirit-design-system/commit/92304cdb822dda450e8056be080717babb6afca1)), references [#DS-2708](https://github.com/alma-oss/spirit-design-system/issues/DS-2708)
+
+### Bug Fixes
+
+- **web:** align `UNSTABLE_Combobox` demo and docs with React #DS-2304 ([b8f0cd4](https://github.com/alma-oss/spirit-design-system/commit/b8f0cd46705d15a1614c430b98d841161bd76e2b)), references [#DS-2304](https://github.com/alma-oss/spirit-design-system/issues/DS-2304)
+
+### Documentation
+
+- **storybook:** move `UNSTABLE_Table` stories under experimental ([b046b5e](https://github.com/alma-oss/spirit-design-system/commit/b046b5ed8d76e958f7a5b3058ad4f90cc5013464))
+- **web-react:** add Combobox Examples compositions #DS-2708 ([34dd7b6](https://github.com/alma-oss/spirit-design-system/commit/34dd7b61fc303116e8bbf0e2f4b9f96064e1c895)), references [#DS-2708](https://github.com/alma-oss/spirit-design-system/issues/DS-2708)
+- **web-react:** add draft CV editor example page #DS-2720 ([9c2aab7](https://github.com/alma-oss/spirit-design-system/commit/9c2aab70d85a2c9cac633a7b6d26917ffbb9e30c)), references [#DS-2720](https://github.com/alma-oss/spirit-design-system/issues/DS-2720)
+- **web-react:** add shared and inherited props section ([a260f9e](https://github.com/alma-oss/spirit-design-system/commit/a260f9e3cc6a198d6bcb8f5c66e6d5bd9095d342))
+- **web-react:** cross-link component docs to shared and inherited props ([07a316d](https://github.com/alma-oss/spirit-design-system/commit/07a316d1a10ace50a1143196bac4a622867b4aa9))
+
+### Styles
+
+- reformat for updated prettier/eslint rules ([ebab4f0](https://github.com/alma-oss/spirit-design-system/commit/ebab4f05f1d41dae1230e17b1151a4e781982c8c))
+
+### Code Refactoring
+
+- **web-react:** add filterDOMProps utility to prevent non-DOM props leaking onto elements ([d9a8892](https://github.com/alma-oss/spirit-design-system/commit/d9a889259724c48547e0dd440a3de68688822d6b))
+- **web-react:** consume namespaced context props in components #DS-2447 ([808c335](https://github.com/alma-oss/spirit-design-system/commit/808c3353ce8e6c1a9b15688af247f22ccc3b16df)), references [#DS-2447](https://github.com/alma-oss/spirit-design-system/issues/DS-2447)
+- **web-react:** extract shared `useSelectionGridKeyboard` hook #DS-2304 ([8c9fc92](https://github.com/alma-oss/spirit-design-system/commit/8c9fc924fb60a084458db204c5ffea91cb78e831)), references [#DS-2304](https://github.com/alma-oss/spirit-design-system/issues/DS-2304)
+- **web-react:** integrate disclosure hooks into Collapse component ([dee638e](https://github.com/alma-oss/spirit-design-system/commit/dee638e988fc2ce4f21813de31e4654e08fa6af1))
+- **web-react:** replace `ControlButton` dismiss with `CloseButton` in `File`, `Item`, and `Tag` ([71e69fd](https://github.com/alma-oss/spirit-design-system/commit/71e69fd44672a4615651c1a342834ccb8dfcf483)), references [#DS-2705](https://github.com/alma-oss/spirit-design-system/issues/DS-2705)
+- **web-react:** update Collapse demos to use useDisclosureState ([61b28f4](https://github.com/alma-oss/spirit-design-system/commit/61b28f40220e878f3e88716575b2af02f5a541ff))
+
+### Tests
+
+- **web-react:** add iconNamePropTest for components with icon-name props #DS-771 ([2426c2c](https://github.com/alma-oss/spirit-design-system/commit/2426c2c6e0e436124abbd90c5952120409f87c94)), references [#DS-771](https://github.com/alma-oss/spirit-design-system/issues/DS-771)
+- **web-react:** update context-props tests and demos for namespacing #DS-2447 ([03dc058](https://github.com/alma-oss/spirit-design-system/commit/03dc058279d6fcf951caf297ecba5e1e2703689f)), references [#DS-2447](https://github.com/alma-oss/spirit-design-system/issues/DS-2447)
+
 ## [5.2.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web-react@5.2.0...@alma-oss/spirit-web-react@5.2.1) (2026-08-07)
 
 ### Bug Fixes

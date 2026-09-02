@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.0](https://github.com/alma-oss/spirit-design-system/compare/%40lmc-eu%2Fspirit-demo-app%403.0.2...%40lmc-eu%2Fspirit-demo-app%403.1.0) (2026-09-02)
+
+### Features
+
+- **web-react:** introduce `UNSTABLE_DisplayHeading` #DS-2779 ([bc5e2de](https://github.com/alma-oss/spirit-design-system/commit/bc5e2de72c7e1f6dc1c71c134d60f9c2fa2c2469)), references [#DS-2779](https://github.com/alma-oss/spirit-design-system/issues/DS-2779)
+
 ## [3.0.2](https://github.com/alma-oss/spirit-design-system/compare/@lmc-eu/spirit-demo-app@3.0.1...@lmc-eu/spirit-demo-app@3.0.2) (2026-08-07)
 
 ### Bug Fixes

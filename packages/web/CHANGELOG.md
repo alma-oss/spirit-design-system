@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web%405.0.3...%40alma-oss%2Fspirit-web%405.1.0) (2026-09-02)
+
+### Features
+
+- **web-react:** introduce `UNSTABLE_Combobox` component #DS-2304 ([d10670e](https://github.com/alma-oss/spirit-design-system/commit/d10670e9c01438e658fc4ceea3d1b5ead3c07a96)), references [#DS-2304](https://github.com/alma-oss/spirit-design-system/issues/DS-2304)
+- **web-react:** introduce `UNSTABLE_DisplayHeading` #DS-2779 ([bc5e2de](https://github.com/alma-oss/spirit-design-system/commit/bc5e2de72c7e1f6dc1c71c134d60f9c2fa2c2469)), references [#DS-2779](https://github.com/alma-oss/spirit-design-system/issues/DS-2779)
+- **web:** add Combobox Locations SplitTag demo and nested stacking #DS-2708 ([566e8ef](https://github.com/alma-oss/spirit-design-system/commit/566e8ef69332a7725aa079cff00b73c14330c099)), references [#DS-2708](https://github.com/alma-oss/spirit-design-system/issues/DS-2708)
+- **web:** add keyboard navigation to Dropdown #DS-1609 ([9089d81](https://github.com/alma-oss/spirit-design-system/commit/9089d81d9e617d2d2767ec23f7d66ad01b0e986b)), references [#DS-1609](https://github.com/alma-oss/spirit-design-system/issues/DS-1609)
+- **web:** add UNSTABLE_SplitTag styles and demo ([118a112](https://github.com/alma-oss/spirit-design-system/commit/118a112706469065b59d313e322a093b25c9bb53))
+- **web:** delegate Combobox Escape handling to Dropdown #DS-1609 ([c6db4a6](https://github.com/alma-oss/spirit-design-system/commit/c6db4a6cefe06b45c134296105a0cc083422b9a4)), references [#DS-1609](https://github.com/alma-oss/spirit-design-system/issues/DS-1609)
+- **web:** introduce `.text-italic` helper #DS-2725 ([fef3712](https://github.com/alma-oss/spirit-design-system/commit/fef3712783054721a36f3f970e72d22f93e9f2b9)), references [#DS-2725](https://github.com/alma-oss/spirit-design-system/issues/DS-2725)
+- **web:** style `Pagination` links with radius tokens and disabled state #DS-2684 ([327841b](https://github.com/alma-oss/spirit-design-system/commit/327841b9bbb0739a3c8728bb97468da24bb5a24c)), references [#DS-2684](https://github.com/alma-oss/spirit-design-system/issues/DS-2684)
+
+### Bug Fixes
+
+- **web:** align `UNSTABLE_Combobox` demo and docs with React #DS-2304 ([b8f0cd4](https://github.com/alma-oss/spirit-design-system/commit/b8f0cd46705d15a1614c430b98d841161bd76e2b)), references [#DS-2304](https://github.com/alma-oss/spirit-design-system/issues/DS-2304)
+- **web:** inherit nested `Tag` radius from `InputContainer` #DS-2710 ([62f6f8f](https://github.com/alma-oss/spirit-design-system/commit/62f6f8fdd7ee941966f0bf48574cbc0782a2484e)), references [#DS-2710](https://github.com/alma-oss/spirit-design-system/issues/DS-2710)
+
+### Styles
+
+- reformat for updated prettier/eslint rules ([ebab4f0](https://github.com/alma-oss/spirit-design-system/commit/ebab4f05f1d41dae1230e17b1151a4e781982c8c))
+
+### Code Refactoring
+
+- **web-react:** replace `ControlButton` dismiss with `CloseButton` in `File`, `Item`, and `Tag` ([71e69fd](https://github.com/alma-oss/spirit-design-system/commit/71e69fd44672a4615651c1a342834ccb8dfcf483)), references [#DS-2705](https://github.com/alma-oss/spirit-design-system/issues/DS-2705)
+
 ## [5.0.3](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-web@5.0.2...@alma-oss/spirit-web@5.0.3) (2026-08-07)
 
 ### Bug Fixes

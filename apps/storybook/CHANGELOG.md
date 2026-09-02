@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-storybook%400.5.8...%40alma-oss%2Fspirit-storybook%400.6.0) (2026-09-02)
+
+### Features
+
+- **web-react:** introduce `UNSTABLE_DisplayHeading` #DS-2779 ([bc5e2de](https://github.com/alma-oss/spirit-design-system/commit/bc5e2de72c7e1f6dc1c71c134d60f9c2fa2c2469)), references [#DS-2779](https://github.com/alma-oss/spirit-design-system/issues/DS-2779)
+
 ## [0.5.8](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-storybook@0.5.7...@alma-oss/spirit-storybook@0.5.8) (2026-08-07)
 
 **Note:** Version bump only for package @alma-oss/spirit-storybook

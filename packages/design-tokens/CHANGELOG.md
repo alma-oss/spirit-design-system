@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-design-tokens%405.0.1...%40alma-oss%2Fspirit-design-tokens%405.1.0) (2026-09-02)
+
+### Features
+
+- **design-tokens:** add pagination radius tokens #DS-2684 ([4e70b61](https://github.com/alma-oss/spirit-design-system/commit/4e70b612d1b131e69f6d6aa09e649991e7037a8b)), references [#DS-2684](https://github.com/alma-oss/spirit-design-system/issues/DS-2684)
+- **design-tokens:** update tokens #DS-2725 ([703c1d0](https://github.com/alma-oss/spirit-design-system/commit/703c1d0ac6187ca446b3446e4a2da35cf7fd46a5)), references [#DS-2725](https://github.com/alma-oss/spirit-design-system/issues/DS-2725)
+
 ## [5.0.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-design-tokens@5.0.0...@alma-oss/spirit-design-tokens@5.0.1) (2026-07-29)
 
 ### Documentation

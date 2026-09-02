@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-tokens-exporter%404.3.0...%40alma-oss%2Fspirit-tokens-exporter%404.4.0) (2026-09-02)
+
+### Features
+
+- **exporter-tokens:** exclude italic typography tokens #DS-2725 ([a6bf666](https://github.com/alma-oss/spirit-design-system/commit/a6bf66688baa6212f4f9d58379c09adee055ad70)), references [#DS-2725](https://github.com/alma-oss/spirit-design-system/issues/DS-2725)
+- **web:** introduce `.text-italic` helper #DS-2725 ([fef3712](https://github.com/alma-oss/spirit-design-system/commit/fef3712783054721a36f3f970e72d22f93e9f2b9)), references [#DS-2725](https://github.com/alma-oss/spirit-design-system/issues/DS-2725)
+
+### Chores
+
+- **deps:** update dependency @supernovaio/sdk-exporters to v2.4.11 ([1c101e8](https://github.com/alma-oss/spirit-design-system/commit/1c101e8ecba197bf5d3e929e81e6143bdf1c381b))
+- **exporter-tokens:** rebuild after update ([6113291](https://github.com/alma-oss/spirit-design-system/commit/61132913c2a5e2a283dd7971182757d34a57fe09))
+
+### Styles
+
+- reformat for updated prettier/eslint rules ([ebab4f0](https://github.com/alma-oss/spirit-design-system/commit/ebab4f05f1d41dae1230e17b1151a4e781982c8c))
+
 ## [4.3.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-tokens-exporter@4.2.0...@alma-oss/spirit-tokens-exporter@4.3.0) (2026-07-13)
 
 ### Features

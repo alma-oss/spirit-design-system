@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-codemods%403.0.1...%40alma-oss%2Fspirit-codemods%403.1.0) (2026-09-02)
+
+### Features
+
+- **codemods:** migrate `PaginationButtonLink` to previous/next links #DS-2684 ([1558dca](https://github.com/alma-oss/spirit-design-system/commit/1558dcaec0c30ecfd094ea9ab99b85bf465fb520)), references [#DS-2684](https://github.com/alma-oss/spirit-design-system/issues/DS-2684)
+- **web-react:** add namespaced context props to PropsContext #DS-2447 ([d0e4449](https://github.com/alma-oss/spirit-design-system/commit/d0e44490a694326d037e177f3e1d65e6be2969fc)), references [#DS-2447](https://github.com/alma-oss/spirit-design-system/issues/DS-2447)
+- **web-react:** introduce `fontWeight` and `isItalic`, deprecate `emphasis` #DS-2725 ([3e5e3b6](https://github.com/alma-oss/spirit-design-system/commit/3e5e3b69201d4cabd72eaa797e16a6ad6de55f08)), references [#DS-2725](https://github.com/alma-oss/spirit-design-system/issues/DS-2725)
+
 ## [3.0.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-codemods@3.0.0...@alma-oss/spirit-codemods@3.0.1) (2026-07-13)
 
 ### Chores
