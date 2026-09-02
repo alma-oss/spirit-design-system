@@ -1,0 +1,167 @@
+diff --git a/dist/chunk-EB6RZPL6.js b/dist/chunk-EB6RZPL6.js
+index 9477c535e42b3794de06532f405560093937f964..18abcbf5b305dd021ea900bd8141a30866c9fe07 100644
+--- a/dist/chunk-EB6RZPL6.js
++++ b/dist/chunk-EB6RZPL6.js
+@@ -195,6 +195,47 @@ var require2 = createRequire(import.meta.url);
+ function factory(argv) {
+   return new PublishCommand(argv);
+ }
++// === YARN CATALOG RESOLUTION PATCH ===
++var _yarnCatalogsCacheB = Object.create(null);
++function _getYarnCatalogsB(cwd) {
++  try {
++    var dir = path.resolve(cwd || process.cwd());
++    if (_yarnCatalogsCacheB[dir]) return _yarnCatalogsCacheB[dir];
++    var currentDir = dir, yarnrcDir = null;
++    while (true) {
++      var yarnrcPath = path.join(currentDir, ".yarnrc.yml");
++      if (fs.existsSync(yarnrcPath)) { yarnrcDir = currentDir; break; }
++      var parent = path.dirname(currentDir);
++      if (parent === currentDir) break;
++      currentDir = parent;
++    }
++    var cacheKey = yarnrcDir || dir;
++    if (_yarnCatalogsCacheB[cacheKey]) return (_yarnCatalogsCacheB[dir] = _yarnCatalogsCacheB[cacheKey]);
++    var result = yarnrcDir ? _parseYarnCatalogsB(fs.readFileSync(path.join(yarnrcDir, ".yarnrc.yml"), "utf-8")) : {};
++    return (_yarnCatalogsCacheB[cacheKey] = _yarnCatalogsCacheB[dir] = result);
++  } catch (_e) { return {}; }
++}
++function _parseYarnCatalogsB(content) {
++  try {
++    const _require = createRequire(import.meta.url);
++    let _yaml;
++    try { _yaml = _require("js-yaml"); } catch (_e) { return {}; }
++    var doc = _yaml.load(content);
++    if (!doc || typeof doc !== "object") return {};
++    var catalogs = doc.catalogs;
++    if (!catalogs || typeof catalogs !== "object") return {};
++    return catalogs;
++  } catch (_e2) { return {}; }
++}
++function _resolveCatalogSpecB(depName, spec, location) {
++  var m = spec.match(/^catalog:(.*)$/);
++  if (!m) return spec;
++  var catalogName = m[1] || "default";
++  var version = (_getYarnCatalogsB(location) || {})[catalogName];
++  return (version && version[depName]) || spec;
++}
++// === END YARN CATALOG RESOLUTION PATCH ===
++
+ var PublishCommand = class extends Command {
+   savePrefix;
+   tagPrefix;
+@@ -397,6 +438,38 @@ var PublishCommand = class extends Command {
+     }
+     await this.resolveLocalDependencyLinks();
+     await this.resolveWorkspaceDependencyLinks();
++    {
++      const _depFields = ["dependencies", "devDependencies", "peerDependencies", "optionalDependencies"];
++      for (const _pkg of this.packagesToPublish || []) {
++        let _pkgChanged = false;
++        for (const _field of _depFields) {
++          const _deps = _pkg[_field];
++          if (!_deps) continue;
++          for (const [_depName, _spec] of Object.entries(_deps)) {
++            if (/^catalog:/.test(_spec)) {
++              const _resolved = _resolveCatalogSpecB(_depName, _spec, _pkg.location);
++              if (_resolved !== _spec) { _deps[_depName] = _resolved; _pkgChanged = true; }
++            }
++          }
++        }
++        if (_pkgChanged && _pkg.contents !== _pkg.location) {
++          const _distPkgPath = path.join(_pkg.contents, "package.json");
++          if (fs.existsSync(_distPkgPath)) {
++            const _distPkg = JSON.parse(fs.readFileSync(_distPkgPath, "utf-8"));
++            for (const _field of _depFields) {
++              if (!_distPkg[_field]) continue;
++              for (const [_depName, _spec] of Object.entries(_distPkg[_field])) {
++                if (/^catalog:/.test(_spec)) {
++                  const _resolved = _resolveCatalogSpecB(_depName, _spec, _pkg.location);
++                  if (_resolved !== _spec) _distPkg[_field][_depName] = _resolved;
++                }
++              }
++            }
++            fs.writeFileSync(_distPkgPath, JSON.stringify(_distPkg, null, 2) + "\n");
++          }
++        }
++      }
++    }
+     this.annotateGitHead();
+     await this.serializeChanges();
+     await this.packUpdated();
+diff --git a/dist/chunk-WC2B4V4E.js b/dist/chunk-WC2B4V4E.js
+index be3166d89a2c6707626b70adaa5f68735311c585..e5016b4c28293464485d7b9a22e25c3eb2b81897 100644
+--- a/dist/chunk-WC2B4V4E.js
++++ b/dist/chunk-WC2B4V4E.js
+@@ -3285,8 +3285,47 @@ async function createProjectGraphWithPackages(projectGraph, projectFileMap, pack
+   });
+   return projectGraphWithOrderedNodes;
+ }
++// === YARN CATALOG RESOLUTION PATCH ===
++var _yarnCatalogsCacheA = Object.create(null);
++function _getYarnCatalogsA(cwd) {
++  try {
++    var dir = path.resolve(cwd || process.cwd());
++    if (_yarnCatalogsCacheA[dir]) return _yarnCatalogsCacheA[dir];
++    var currentDir = dir, yarnrcDir = null;
++    while (true) {
++      var yarnrcPath = path.join(currentDir, ".yarnrc.yml");
++      if (fs.existsSync(yarnrcPath)) { yarnrcDir = currentDir; break; }
++      var parent = path.dirname(currentDir);
++      if (parent === currentDir) break;
++      currentDir = parent;
++    }
++    var cacheKey = yarnrcDir || dir;
++    if (_yarnCatalogsCacheA[cacheKey]) return (_yarnCatalogsCacheA[dir] = _yarnCatalogsCacheA[cacheKey]);
++    var result = yarnrcDir ? _parseYarnCatalogsA(fs.readFileSync(path.join(yarnrcDir, ".yarnrc.yml"), "utf-8")) : {};
++    return (_yarnCatalogsCacheA[cacheKey] = _yarnCatalogsCacheA[dir] = result);
++  } catch (_e) { return {}; }
++}
++function _parseYarnCatalogsA(content) {
++  try {
++    var doc = load(content);
++    if (!doc || typeof doc !== "object") return {};
++    var catalogs = doc.catalogs;
++    if (!catalogs || typeof catalogs !== "object") return {};
++    return catalogs;
++  } catch (_e2) { return {}; }
++}
++function _resolveCatalogSpecA(depName, spec, location) {
++  var m = spec.match(/^catalog:(.*)$/);
++  if (!m) return spec;
++  var catalogName = m[1] || "default";
++  var version = (_getYarnCatalogsA(location) || {})[catalogName];
++  return (version && version[depName]) || spec;
++}
++// === END YARN CATALOG RESOLUTION PATCH ===
++
+ var resolvePackage = (name, version, spec, location) => {
+   spec = spec.replace(/^link:/, "file:");
++  if (/^catalog:/.test(spec)) { spec = _resolveCatalogSpecA(name, spec, location); }
+   const isWorkspaceSpec = /^workspace:/.test(spec);
+   let workspaceSpec;
+   let workspaceAlias;
+@@ -6070,7 +6109,22 @@ async function npmPublish(pkg, tarFilePath, options, conf, otpCache) {
+       manifestContent.publishConfig.tag = opts.defaultTag;
+     }
+     if (manifestContent.publishConfig) {
+-      Object.assign(opts, publishConfigToOpts(manifestContent.publishConfig));
++      const _pcOpts = publishConfigToOpts(manifestContent.publishConfig);
++      if (process.env.LERNA_NO_PROVENANCE) delete _pcOpts.provenance;
++      Object.assign(opts, _pcOpts);
++    }
++    {
++      const _cdf = ["dependencies", "devDependencies", "peerDependencies", "optionalDependencies"];
++      for (const _f of _cdf) {
++        if (manifestContent[_f]) {
++          for (const [_d, _s] of Object.entries(manifestContent[_f])) {
++            if (/^catalog:/.test(_s)) {
++              const _r = _resolveCatalogSpecA(_d, _s, path17.dirname(pkg.location));
++              if (_r !== _s) manifestContent[_f][_d] = _r;
++            }
++          }
++        }
++      }
+     }
+     await oidc({
+       packageName: pkg.name,
