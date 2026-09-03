@@ -184,37 +184,6 @@ related controls with `fieldset`/`legend`.
 </fieldset>
 ```
 
-## Identify Input Purpose (`autoComplete`, 1.3.5)
-
-Personal-data fields need WCAG 1.3.5 autocomplete tokens. Use tokens from the [HTML autocomplete
-spec][html-autocomplete] (`given-name`, `family-name`, `email`, and so on). Do not invent tokens.
-This skill does not ship a full token table.
-
-```tsx
-<TextField id="given-name" name="givenName" label="First name" autoComplete="given-name" />
-<TextField id="family-name" name="familyName" label="Last name" autoComplete="family-name" />
-<TextField id="email" name="email" label="Email" type="email" autoComplete="email" />
-```
-
-## Conditional Field Disclosure (4.1.2)
-
-When a checkbox reveals extra fields, set `aria-expanded` from the open state. Add `aria-controls`
-only while the referenced IDs exist in the DOM — omit it while the fields are unmounted.
-
-```tsx
-<Checkbox
-  id="is-company"
-  label="I am ordering as a company"
-  isChecked={isCompany}
-  onChange={() => setIsCompany((open) => !open)}
-  aria-expanded={isCompany}
-  aria-controls={isCompany ? extraFieldId : undefined}
-/>;
-{
-  isCompany && <TextField id={extraFieldId} name="company" label="Company name" />;
-}
-```
-
 ## Error Handling on Submit (3.3.1, 3.3.3)
 
 Announce errors, mark invalid fields, and move focus to the first error (or an error summary).
@@ -283,5 +252,3 @@ default for users who have requested reduced motion.
   }
 }
 ```
-
-[html-autocomplete]: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill

@@ -94,11 +94,29 @@ Section defaults: `elementType="section"`, `hasContainer={true}`. Container defa
   `Container` components. Do not nest a second Container inside Section’s default one.
 - Full-bleed backgrounds stay on Section; constrained content goes in Container.
 
-## Spacing and Max-Width
+## Multiple Sections on a Page
+
+A Figma frame named "Section" is not automatically a Spirit `Section`. `Section` defaults to
+`<section>` and is a landmark only when it has an accessible name (usually its heading).
+
+- Keep the page's `h1` out of an anonymous `<section>`. If the title is the document heading, render
+  it outside `Section`, or use `elementType="div"` for a visual-only wrapper.
+- Sibling Figma Section frames that are distinct regions become sibling Spirit `Section`s, each
+  with its own heading (`h2`+). Do not nest them just to match Figma's layer tree.
+- One full-page "Section" frame with a background is often a visual wrapper — `Box` or a single
+  `Section` with `elementType="div"` — not a landmark around the whole page.
+
+## Spacing
 
 Map Figma spacing variables to `space-*` tokens (`space-0` through `space-1700` in
-`packages/design-tokens/src/js/global-tokens/spacing.ts`). Apply `UNSAFE_style={{ maxWidth }}` only
-on the innermost wrapper that actually carries the constraint.
+`packages/design-tokens/src/js/global-tokens/spacing.ts`).
+
+## Max-Width
+
+Before applying `maxWidth`, check whether `Grid` can express the constraint (uniform repeating
+items, column counts). Prefer `Section` or `Container` when the design is a page/region width
+limit, not a one-off cap. Apply `UNSAFE_style={{ maxWidth: 'x' }}` only on the innermost wrapper
+that actually carries the constraint, and only when Grid, Section, or Container cannot.
 
 ## Typography Inside Flex and Grid
 
