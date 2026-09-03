@@ -70,4 +70,5 @@ nx-cloud.env
 !.claude/
 .claude/*
 !.claude/skills
+!.claude/settings.json
 .claude/settings.local.json
