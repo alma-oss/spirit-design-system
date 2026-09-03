@@ -385,13 +385,13 @@ export const formFieldSmallRadiusDesktop = '0.5rem';
 export const formFieldSmallRadiusMobile = '0.5rem';
 export const formFieldSmallRadiusTablet = '0.5rem';
 
-export const breakpointMobile = 0;
-export const breakpointTablet = '48rem';
-export const breakpointDesktop = '80rem';
-
 export const paginationRadiusDesktop = '624.9375rem';
 export const paginationRadiusMobile = '624.9375rem';
 export const paginationRadiusTablet = '624.9375rem';
+
+export const breakpointMobile = 0;
+export const breakpointTablet = '48rem';
+export const breakpointDesktop = '80rem';
 
 export const typographys = {
   body: {
@@ -957,16 +957,16 @@ export const formFields = {
   },
 };
 
-export const breakpoints = {
-  mobile: breakpointMobile,
-  tablet: breakpointTablet,
-  desktop: breakpointDesktop,
-};
-
-export const pagination = {
+export const paginations = {
   radius: {
     desktop: paginationRadiusDesktop,
     mobile: paginationRadiusMobile,
     tablet: paginationRadiusTablet,
   },
+};
+
+export const breakpoints = {
+  mobile: breakpointMobile,
+  tablet: breakpointTablet,
+  desktop: breakpointDesktop,
 };
