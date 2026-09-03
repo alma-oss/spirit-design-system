@@ -5,84 +5,75 @@ import { z } from 'zod';
 
 import { ASSET_TYPES, CONFIG_MODULE_NAME } from './constants';
 import { ConfigError } from './errors';
-import type { AssetType, AssetsConfig, ResolvedAssetsConfig, SyncTarget } from './types';
+import type { AssetsConfig, ResolvedAssetsConfig } from './types';
 
 const assetTypeSchema = z.enum(ASSET_TYPES);
 
 const syncTargetSchema = z.object({
-  assets: z.unknown().optional(),
-  brand: z.unknown().optional(),
-  out: z.unknown().optional(),
+  assets: z
+    .array(assetTypeSchema, { message: 'must have at least one asset type' })
+    .min(1, 'must have at least one asset type')
+    .refine((assets) => new Set(assets).size === assets.length, 'contains duplicate asset types'),
+  brand: z.string().trim().min(1, 'must have a non-empty "brand"'),
+  out: z.string().trim().min(1, 'must have a non-empty "out"'),
 });
 
 const assetsConfigSchema = z.object({
-  fileKey: z.string(),
-  targets: z.array(z.unknown()),
+  fileKey: z.string().trim().min(1, 'must have a non-empty "fileKey"'),
+  targets: z.array(syncTargetSchema).min(1, 'must have at least one sync target'),
 });
 
-const isNonEmptyString = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0;
+const describeIssues = (error: z.ZodError, configPath: string): string =>
+  error.issues
+    .map((issue) => {
+      if (
+        issue.path.length === 0 ||
+        (issue.path[0] === 'targets' && issue.path.length === 1 && issue.code === 'invalid_type')
+      ) {
+        return `Assets config at ${configPath} must contain a JSON object.`;
+      }
 
-const validateTarget = (target: unknown, index: number): SyncTarget => {
-  const parsedTarget = syncTargetSchema.safeParse(target);
+      if (issue.path[0] === 'targets' && typeof issue.path[1] === 'number') {
+        const target = `Config target at index ${issue.path[1]}`;
+        const field = issue.path[2];
 
-  if (!parsedTarget.success) {
-    throw new ConfigError(`Config target at index ${index} must be an object.`);
-  }
+        if (issue.path.length === 2) {
+          return `${target} must be an object.`;
+        }
 
-  const { brand, out, assets } = parsedTarget.data;
+        if (field === 'assets') {
+          if (issue.path.length > 3) {
+            return `${target} contains unsupported asset type.`;
+          }
 
-  if (!isNonEmptyString(brand)) {
-    throw new ConfigError(`Config target at index ${index} must have a non-empty "brand".`);
-  }
+          return `${target} ${issue.message}.`;
+        }
 
-  if (!isNonEmptyString(out)) {
-    throw new ConfigError(`Config target at index ${index} must have a non-empty "out".`);
-  }
+        if (field === 'brand') {
+          return `${target} must have a non-empty "brand".`;
+        }
 
-  if (!Array.isArray(assets) || assets.length === 0) {
-    throw new ConfigError(`Config target at index ${index} must have at least one asset type.`);
-  }
+        return `${target} must have a non-empty "out".`;
+      }
 
-  const unsupportedAsset = assets.find((asset) => assetTypeSchema.safeParse(asset).success === false);
+      if (issue.path[0] === 'fileKey') {
+        return 'Config must have a non-empty "fileKey".';
+      }
 
-  if (unsupportedAsset !== undefined) {
-    throw new ConfigError(
-      `Config target at index ${index} contains unsupported asset type "${String(unsupportedAsset)}".`,
-    );
-  }
-
-  const typedAssets = assets as AssetType[];
-
-  if (new Set(typedAssets).size !== typedAssets.length) {
-    throw new ConfigError(`Config target at index ${index} contains duplicate asset types.`);
-  }
-
-  return {
-    assets: typedAssets,
-    brand: brand.trim(),
-    out,
-  };
-};
+      return `Config ${issue.message}.`;
+    })
+    .join(' ');
 
 export const resolveConfig = (config: unknown, configPath: string): ResolvedAssetsConfig => {
   const parsedConfig = assetsConfigSchema.safeParse(config);
 
   if (!parsedConfig.success) {
-    throw new ConfigError(`Assets config at ${configPath} must contain a JSON object.`);
+    throw new ConfigError(describeIssues(parsedConfig.error, configPath));
   }
 
   const { fileKey, targets } = parsedConfig.data;
-
-  if (!isNonEmptyString(fileKey)) {
-    throw new ConfigError('Config must have a non-empty "fileKey".');
-  }
-
-  if (targets.length === 0) {
-    throw new ConfigError('Config must have at least one sync target.');
-  }
-
   const configDirectory = path.dirname(path.resolve(configPath));
-  const resolvedTargets = targets.map(validateTarget).map((target) => ({
+  const resolvedTargets = targets.map((target) => ({
     ...target,
     out: path.resolve(configDirectory, target.out),
   }));
@@ -96,7 +87,7 @@ export const resolveConfig = (config: unknown, configPath: string): ResolvedAsse
   }
 
   return {
-    fileKey: fileKey.trim(),
+    fileKey,
     targets: resolvedTargets,
   };
 };

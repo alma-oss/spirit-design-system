@@ -2,7 +2,7 @@ import { ASSET_TYPES, CHANGE_TYPES } from './constants';
 
 export type AssetType = (typeof ASSET_TYPES)[number];
 
-export type ChangeType = (typeof CHANGE_TYPES)[number];
+export type ChangeType = (typeof CHANGE_TYPES)[keyof typeof CHANGE_TYPES];
 
 export interface SyncTarget {
   brand: string;

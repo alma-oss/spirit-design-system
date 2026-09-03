@@ -141,42 +141,60 @@ describe('resolveConfig', () => {
     expect(config.targets[0].assets).toEqual(['icons', 'benefit-icons']);
   });
 
-  it('rejects invalid files and targets', () => {
+  it.each([
+    {
+      config: { fileKey: '', targets: [] },
+      expectedError: /non-empty "fileKey"/,
+    },
+    {
+      config: { fileKey: 'file', targets: [] },
+      expectedError: /at least one sync target/,
+    },
+    {
+      config: { fileKey: 'file', targets: [null] },
+      expectedError: /target at index 0 must be an object/,
+    },
+    {
+      config: { fileKey: 'file', targets: [1] },
+      expectedError: /target at index 0 must be an object/,
+    },
+    {
+      config: { fileKey: 'file', targets: null },
+      expectedError: /must contain a JSON object/,
+    },
+    {
+      config: { fileKey: 'file', targets: [{ brand: 1, out: 'svg' }] },
+      expectedError: /non-empty "brand"/,
+    },
+    {
+      config: { fileKey: 'file', targets: [{ brand: 'Spirit', out: ' ' }] },
+      expectedError: /non-empty "out"/,
+    },
+    {
+      config: { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'svg' }] },
+      expectedError: /at least one asset type/,
+    },
+    {
+      config: { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'svg', assets: [] }] },
+      expectedError: /at least one asset type/,
+    },
+    {
+      config: { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons', 'unknown'] }] },
+      expectedError: /unsupported asset type/,
+    },
+    {
+      config: { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons', 'icons'] }] },
+      expectedError: /duplicate asset types/,
+    },
+  ])('rejects invalid config: $expectedError', ({ config, expectedError }) => {
     const configPath = '/repo/spirit-assets.config.json';
 
-    expect(() => resolveConfig({ fileKey: '', targets: [] }, configPath)).toThrow(/non-empty "fileKey"/);
-    expect(() => resolveConfig({ fileKey: 'file', targets: [] }, configPath)).toThrow(/at least one sync target/);
-    expect(() => resolveConfig({ fileKey: 'file', targets: [null] }, configPath)).toThrow(
-      /target at index 0 must be an object/,
-    );
-    expect(() => resolveConfig({ fileKey: 'file', targets: [1] }, configPath)).toThrow(
-      /target at index 0 must be an object/,
-    );
-    expect(() => resolveConfig({ fileKey: 'file', targets: null }, configPath)).toThrow(/must contain a JSON object/);
-    expect(() => resolveConfig({ fileKey: 'file', targets: [{ brand: 1, out: 'svg' }] }, configPath)).toThrow(
-      /non-empty "brand"/,
-    );
-    expect(() => resolveConfig({ fileKey: 'file', targets: [{ brand: 'Spirit', out: ' ' }] }, configPath)).toThrow(
-      /non-empty "out"/,
-    );
-    expect(() => resolveConfig({ fileKey: 'file', targets: [{ brand: 'Spirit', out: 'svg' }] }, configPath)).toThrow(
-      /at least one asset type/,
-    );
-    expect(() =>
-      resolveConfig({ fileKey: 'file', targets: [{ brand: 'Spirit', out: 'svg', assets: [] }] }, configPath),
-    ).toThrow(/at least one asset type/);
-    expect(() =>
-      resolveConfig(
-        { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons', 'unknown'] }] },
-        configPath,
-      ),
-    ).toThrow(/unsupported asset type/);
-    expect(() =>
-      resolveConfig(
-        { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons', 'icons'] }] },
-        configPath,
-      ),
-    ).toThrow(/duplicate asset types/);
+    expect(() => resolveConfig(config, configPath)).toThrow(expectedError);
+  });
+
+  it('rejects targets that resolve to the same output directory', () => {
+    const configPath = '/repo/spirit-assets.config.json';
+
     expect(() =>
       resolveConfig(
         {

@@ -45,7 +45,7 @@ export default [
     },
   },
   {
-    files: ['src/cli.ts', 'src/bin/**/*.js', 'tests/**/*.ts'],
+    files: ['src/cli.ts', 'src/bin/**/*.js', '__tests__/**/*.ts'],
     rules: {
       'no-console': 'off',
     },

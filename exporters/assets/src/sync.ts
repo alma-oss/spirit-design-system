@@ -36,7 +36,7 @@ export const mirrorAssets = async (brand: string, out: string, assets: ExportedA
     await writeFile(filePath, asset.svg);
     changes.push({
       file: filePath,
-      type: currentSvg === undefined ? CHANGE_TYPES[0] : CHANGE_TYPES[2],
+      type: currentSvg === undefined ? CHANGE_TYPES.ADDED : CHANGE_TYPES.UPDATED,
     });
   }
 
@@ -49,7 +49,7 @@ export const mirrorAssets = async (brand: string, out: string, assets: ExportedA
     await unlink(filePath);
     changes.push({
       file: filePath,
-      type: CHANGE_TYPES[1],
+      type: CHANGE_TYPES.DELETED,
     });
   }
 

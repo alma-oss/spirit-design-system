@@ -1,5 +1,5 @@
 import { exportAssets, exportIcons } from '../src';
-import { createExportFetch, createFigmaFetch } from './fixtures';
+import { createExportFetch, createFigmaFetch } from '../__fixtures__/figma';
 
 describe('exportAssets', () => {
   it('combines branded icons with shared benefit icons', async () => {
@@ -146,6 +146,22 @@ describe('exportIcons', () => {
     } finally {
       fetchSpy.mockRestore();
     }
+  });
+
+  it('applies a timeout signal to Figma API and SVG requests', async () => {
+    const baseFetch = createExportFetch();
+    const signals: AbortSignal[] = [];
+    const fetchWithSignalCheck = async (input: RequestInfo | URL, init?: RequestInit) => {
+      signals.push(init?.signal as AbortSignal);
+
+      return baseFetch(input);
+    };
+
+    await exportIcons('file', 'Spirit', 'token', fetchWithSignalCheck);
+
+    expect(signals).toHaveLength(3);
+
+    signals.forEach((signal) => expect(signal).toBeInstanceOf(AbortSignal));
   });
 
   it('reports Figma API and document errors', async () => {

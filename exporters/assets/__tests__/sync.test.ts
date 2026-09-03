@@ -3,7 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 import { syncAssets } from '../src';
-import { createFigmaFetch } from './fixtures';
+import { createFigmaFetch } from '../__fixtures__/figma';
 
 describe('syncAssets', () => {
   it('adds, updates, and deletes SVG files', async () => {

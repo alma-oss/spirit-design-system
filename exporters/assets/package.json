@@ -1,6 +1,6 @@
 {
   "name": "@alma-oss/spirit-assets-exporter",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "description": "Synchronize design assets from Figma into source repositories",
   "license": "MIT",
   "private": true,

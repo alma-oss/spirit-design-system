@@ -1,6 +1,10 @@
 export const ASSET_TYPES = ['benefit-icons', 'icons', 'illustrations'] as const;
 
-export const CHANGE_TYPES = ['added', 'deleted', 'updated'] as const;
+export const CHANGE_TYPES = {
+  ADDED: 'added',
+  DELETED: 'deleted',
+  UPDATED: 'updated',
+} as const;
 
 export const CONFIG_MODULE_NAME = 'spirit-assets';
 
