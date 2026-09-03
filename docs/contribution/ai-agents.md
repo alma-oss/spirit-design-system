@@ -10,12 +10,27 @@ so always thoroughly check its output and ensure that there are no security brea
 
 ## Overview
 
-| File                    | Purpose                                                |
-| ----------------------- | ------------------------------------------------------ |
-| `.mcp.json`             | Shared MCP server definitions (Figma, GitHub, Jira, …) |
-| `.claude/settings.json` | Recommended permissions for Claude Code                |
-| `.cursor/cli.json`      | Recommended permissions for Cursor CLI                 |
-| `.cursor/mcp.json`      | MCP server config for Cursor                           |
+| File                    | Purpose                                                       |
+| ----------------------- | ------------------------------------------------------------- |
+| `.mcp.json`             | Shared MCP server definitions (Figma, GitHub, Jira, …)        |
+| `.claude/settings.json` | Tracked Claude Code attribution off (mandatory)               |
+| `.cursor/cli.json`      | Recommended permissions for Cursor CLI (local; not committed) |
+| `.cursor/mcp.json`      | MCP server config for Cursor (local; not committed)           |
+
+## Mandatory Attribution Policy
+
+AI co-author trailers and “Made with …” footers must stay off for commits and PRs in this repository
+(see [Git Workflow Guidelines][agents-git-workflow]).
+
+| Tool        | Where it is enforced                                                                                  |
+| ----------- | ----------------------------------------------------------------------------------------------------- |
+| Claude Code | Tracked `.claude/settings.json` — `attribution.commit` and `attribution.pr` set to empty strings      |
+| Cursor CLI  | User-level `~/.cursor/cli-config.json` (required); local `.cursor/cli.json` may mirror the same flags |
+| Cursor IDE  | User setting: **Cursor Settings → Git & PRs → Attribution** — turn commit and PR attribution off      |
+
+Cursor currently honors attribution only from user-level CLI config and the IDE settings UI.
+Local `.cursor/cli.json` may include the flags for documentation and future support, but they are not enough on their own today.
+Cursor config files are not committed — follow the examples in this guide locally.
 
 ## MCP Servers
 
@@ -75,7 +90,22 @@ The structure is the same as Claude Code and Cursor.
 
 ## Claude Code
 
-### Recommended `.claude/settings.json`
+### Tracked `.claude/settings.json`
+
+Empty strings disable Claude Code co-author trailers on commits and PRs.
+
+```json
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  }
+}
+```
+
+### Recommended Local Permissions
+
+Put permissions and MCP enablement in `.claude/settings.local.json` (gitignored), so local tweaks do not dirty the tracked attribution-only `.claude/settings.json`:
 
 ```json
 {
@@ -116,15 +146,14 @@ The structure is the same as Claude Code and Cursor.
       "Write(.env*)"
     ]
   },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  },
   "enabledMcpjsonServers": ["chrome-devtools", "context7", "figma", "github", "jira"]
 }
 ```
 
 ### Key Settings Explained
+
+**`attribution`** — **Mandatory**. Empty strings disable AI attribution footers in commits and PRs
+(see [Mandatory Attribution Policy](#mandatory-attribution-policy) and [Git Workflow Guidelines][agents-git-workflow]).
 
 **`defaultMode: plan`** — Agents start in plan mode and propose a plan before executing anything. Switch per session with `/auto` or `/code`.
 
@@ -133,8 +162,6 @@ The structure is the same as Claude Code and Cursor.
 **`ask`** — Potentially destructive but sometimes needed: `git push --force`, `git branch -D`. Claude will prompt before running these.
 
 **`deny`** — Irreversible or sensitive operations that are never allowed: `git reset --hard`, `git clean -fd`, `rm -rf`, publish commands, access to `.env*` and `~/.ssh/*`.
-
-**`attribution`** — Empty strings disable AI attribution footers in commits and PRs (see [Git Workflow Guidelines][agents-git-workflow]).
 
 **`enabledMcpjsonServers`** — Activates the servers defined in `.mcp.json`.
 
@@ -155,6 +182,9 @@ For personal allow rules (e.g. tools specific to your machine), use `.claude/set
 Cursor settings mirror the Claude Code setup in a Cursor-compatible format.
 
 ### Recommended `.cursor/cli.json`
+
+Create this file locally. It mirrors Claude permissions and documents the project-level attribution analogue.
+Cursor CLI still requires the same attribution flags in your **user-level** config (see below).
 
 ```json
 {
@@ -192,9 +222,30 @@ Cursor settings mirror the Claude Code setup in a Cursor-compatible format.
       "Read(.env*)",
       "Write(.env*)"
     ]
+  },
+  "attribution": {
+    "attributeCommitsToAgent": false,
+    "attributePRsToAgent": false
   }
 }
 ```
+
+### Mandatory User-Level Cursor Attribution
+
+Local `.cursor/cli.json` is not sufficient today. Contributors **must** also:
+
+1. Set attribution in `~/.cursor/cli-config.json` (macOS/Linux) or `%USERPROFILE%\.cursor\cli-config.json` (Windows):
+
+```json
+{
+  "attribution": {
+    "attributeCommitsToAgent": false,
+    "attributePRsToAgent": false
+  }
+}
+```
+
+2. In Cursor IDE: **Cursor Settings → Git & PRs → Attribution** — turn off commit and PR attribution.
 
 ### Recommended `.cursor/mcp.json`
 
