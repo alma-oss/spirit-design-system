@@ -17,7 +17,7 @@ when no Spirit component is responsible (plain paragraphs inside Card, list item
 | Section / page block                     | `Section`                                             | Includes `Container` by default                                                                     |
 | Named Container layer                    | `Container` or `Section containerProps`               | Multiple distinct widths → extra `Container`s; see [layout](layout.md)                              |
 | Autolayout row/column                    | `Flex`                                                | Uniform repeating items → `Grid`; vertical list with dividers → `Stack`                             |
-| Surface, padding, border, semantic color | `Box`                                                 | Prefer `colorScheme`; `Box` has no layout                                                           |
+| Surface, padding, border, semantic color | `Box`                                                 | Prefer `colorScheme`; `Box` has no layout. Settings panels → `Box`, not `Card isBoxed`              |
 | Heading text styles                      | `Heading`                                             | `elementType` required                                                                              |
 | Display text styles                      | `UNSTABLE_DisplayHeading`                             | `elementType` required; no `fontWeight`. Not `Heading`                                              |
 | Body text styles                         | `Text`                                                |                                                                                                     |
@@ -29,7 +29,7 @@ when no Spirit component is responsible (plain paragraphs inside Card, list item
 | Close / dismiss control                  | `CloseButton`                                         | Replaces old per-overlay close buttons                                                              |
 | Icon glyph                               | `Icon`                                                | Prop is `name`. Requires `IconsProvider`                                                            |
 | Icon in a shaped container               | `IconBox`                                             | Prop is `iconName`, not `name`                                                                      |
-| Card family                              | `Card` + subcomponents                                | Flat ordered composition; see [cards](cards.md)                                                     |
+| Card family                              | `Card` + subcomponents                                | Only when artwork/title/footer/link composition applies; else `Box`. See [cards](cards.md)          |
 | Form control                             | Matching field (`TextField`, `Select`, `Checkbox`, …) | Compose Label, HelperText, ValidationText from current field docs. Form shell: [forms](forms.md)    |
 | File upload                              | `File` + `FileUpload`                                 | Not the removed `FileUploader`                                                                      |
 | Header / Navigation / Footer             | Stabilized `Header`, `Navigation`, `Footer`           | Not `UNSTABLE_Header`                                                                               |

@@ -114,12 +114,16 @@ Spirit breakpoints are `mobile` from `0`, `tablet` from `48rem`, `desktop` from 
 
 ### 5. Accessibility
 
-Apply `/spirit:accessibility` and:
+Apply `/spirit:accessibility`. This step is a **semantics pass**, not a prop re-check. Cover
+landmarks, heading outline, list markup, and role/`elementType` from meaning — not from the Figma
+component name.
 
 - Choose `elementType` from document outline, not from visual size. Visual style and semantics
   are independent.
 - Prefer not to skip heading ranks; fix the outline rather than forcing a visual size onto the
-  wrong tag.
+  wrong tag. Keep the page `h1` out of an anonymous `<section>`. See [Layout](references/layout.md).
+- Repeating cards or items that are a list in meaning use `ul`/`ol` with `li`, not a bare Flex/Grid
+  of `div`s.
 - Preserve DOM source order. If Flex `horizontal-reversed` or similar changes visual order, keep
   the accessible reading order correct.
 - Give controls accessible names, states, and relationships (label, description, error, required).
@@ -160,6 +164,8 @@ If a gate cannot run, say so in the handoff (`verified` vs `unverified`) and lis
 - \[ \] Icon identifiers unchanged (`Icon name`, `IconBox iconName`)
 - \[ \] No deprecated or removed APIs (`emphasis`, `row`/`column`, `hideOnCollapse`, `CardDescription`)
 - \[ \] Semantic structure preserved; Figma-only wrapper frames not copied 1:1
+- \[ \] Card vs Box decided by composition (artwork/title/footer/link), not Figma name
+- \[ \] Page `h1` not nested in an anonymous Section; repeating cards use list markup
 - \[ \] Heading `elementType` set; Display/\* → `UNSTABLE_DisplayHeading`; typography mapped by text style, not by size alone
 - \[ \] Form wraps fields and actions; submit first in DOM; `autoComplete` on personal-data fields
 - \[ \] Responsive values exist only where Figma supports them; breakpoints are Spirit tokens

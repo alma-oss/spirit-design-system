@@ -5,6 +5,18 @@ Canonical docs: `packages/web-react/src/components/Card/README.md`, types in
 
 There is **no** `CardDescription`. Put supporting copy in `CardBody` as `Text`, `<p>`, or `Truncate`.
 
+## Card vs Box
+
+Choose by composition and behavior, not by the Figma layer name.
+
+Use `Card` when the block is a **topic container**: artwork or media, eyebrow/title, supporting copy,
+optional footer actions, and optionally a stretched `CardLink`. `isBoxed` is a visual modifier on
+that composition, not a reason to pick Card.
+
+Use `Box` (with Flex or Grid if layout is needed) for padded surfaces, settings panels, form field
+groups, and other chrome that only needs background, border, or radius. A Figma component named
+"Card" that has no Card subcomponents is still a `Box`.
+
 ## Composition
 
 Keep this order. Extra wrappers and reordering break Card grid areas, spacing, and accessibility:
