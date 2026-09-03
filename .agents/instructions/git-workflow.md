@@ -39,6 +39,9 @@ refactor/DS-101-simplify-modal-logic
 
 Follow the [Conventional Commits][conventional-commits] specification with lowercase format.
 
+> To split a mixed working tree into a clean series of atomic commits following the rules below,
+> use the [`atomic-commits`][atomic-commits-skill] skill.
+
 ### Before Committing
 
 **IMPORTANT:** Before creating any commit, you MUST ask the user for the Jira issue ID (e.g., `DS-1234`) if one was not already provided in the conversation. Do not skip this step.
@@ -134,5 +137,6 @@ Fill out all sections in the PR template:
 2. **Additional context**: Note anything reviewers should focus on
 3. **Issue reference**: Link to the Jira issue (full URL format)
 
+[atomic-commits-skill]: ../skills/atomic-commits/README.md
 [commitlintrc]: ../../.commitlintrc.mjs
 [conventional-commits]: https://www.conventionalcommits.org/
