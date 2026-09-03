@@ -27,5 +27,4 @@ redundant entry (`3.3.7`), and accessible authentication (`3.3.8`).
   and automated-testing commands).
 - `references/accessibility-patterns.md` — worked, Spirit-adapted code patterns (icon-button names,
   `:focus-visible` with the `focus-ring` token, error fields, live regions, modal focus management,
-  form labels, personal-data `autoComplete`, conditional field disclosure, reduced motion, and the
-  new 2.2 patterns).
+  form labels, reduced motion, and the new 2.2 patterns).
