@@ -1,3 +1,5 @@
+// 1. Prevent options with long text from overflowing the popover.
+
 @use 'sass:map';
 @use '@tokens' as tokens;
 @use '../../tools/breakpoint';
@@ -19,11 +21,13 @@
     &[data-spirit-fullwidthmode='mobile-only'] {
         @include breakpoint.down(map.get(theme.$breakpoints, tablet)) {
             width: 100%;
+            min-width: min-content; // 1.
         }
     }
 
     &[data-spirit-fullwidthmode='all'] {
         width: 100%;
+        min-width: min-content; // 1.
     }
 }
 
