@@ -9,12 +9,16 @@ import { NextResponse } from 'next/server';
 const SPRITE_PATH = join(process.cwd(), '../../packages/web/public/icons/svg/sprite.svg');
 
 export const GET = async () => {
-  const sprite = await readFile(SPRITE_PATH, 'utf-8');
+  try {
+    const sprite = await readFile(SPRITE_PATH, 'utf-8');
 
-  return new NextResponse(sprite, {
-    headers: {
-      'Content-Type': 'image/svg+xml',
-      'Cache-Control': 'public, max-age=3600',
-    },
-  });
+    return new NextResponse(sprite, {
+      headers: {
+        'Content-Type': 'image/svg+xml',
+        'Cache-Control': 'public, max-age=3600',
+      },
+    });
+  } catch {
+    return new NextResponse('Icon sprite not found', { status: 404 });
+  }
 };

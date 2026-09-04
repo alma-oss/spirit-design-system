@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 
-interface WebPreviewContentProps {
+interface WebPreviewProps {
   html: string;
 }
 
@@ -19,7 +19,7 @@ const executeInlineScripts = (container: HTMLElement) => {
   });
 };
 
-const WebPreviewContent = ({ html }: WebPreviewContentProps) => {
+const WebPreview = ({ html }: WebPreviewProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -56,4 +56,4 @@ const WebPreviewContent = ({ html }: WebPreviewContentProps) => {
   );
 };
 
-export default WebPreviewContent;
+export default WebPreview;

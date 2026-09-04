@@ -1,6 +1,6 @@
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import WebPreviewContent from '@local/domains/components/ui/WebPreviewContent';
+import WebPreview from '@local/domains/components/ui/WebPreview';
 import { compilePreview } from '@local/domains/components/utils/compilePreview';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
 import { notFound } from 'next/navigation';
@@ -29,7 +29,7 @@ const WebPreviewTabPage = async ({ params }: WebPreviewTabProps) => {
     const source = await readFile(previewPath, 'utf-8');
     const html = compilePreview(source);
 
-    return <WebPreviewContent html={html} />;
+    return <WebPreview html={html} />;
   } catch (error) {
     logError(`[ComponentView] Failed to load Web Preview for "${component}":`, error);
 

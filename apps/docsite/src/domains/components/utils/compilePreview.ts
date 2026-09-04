@@ -2,9 +2,10 @@ import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 import Handlebars from 'handlebars';
 
-// Matches apps/demo/config/vite/app.ts's vite-plugin-handlebars setup, so `preview.html`
-// files compile the same way in both apps/demo (Vite) and apps/docsite (this module).
-const DEMO_PARTIALS_DIR = join(process.cwd(), '../../apps/demo/partials');
+// Only the partials packages/web's preview.html files actually reference are kept here (a copy
+// of the matching apps/demo/partials files), so docsite doesn't depend on apps/demo's full partial
+// set and keeps working if/when apps/demo is removed.
+const PARTIALS_DIR = join(__dirname, 'partials');
 
 let handlebarsEnv: typeof Handlebars | undefined;
 
@@ -32,6 +33,9 @@ const getHandlebarsEnv = () => {
     const varName = data.shift();
     const options = data.pop();
 
+    if (!options.data) {
+      options.data = {};
+    }
     if (!options.data.root) {
       options.data.root = {};
     }
@@ -40,7 +44,7 @@ const getHandlebarsEnv = () => {
   instance.registerHelper('eq', (variable, value) => variable === value);
   instance.registerHelper('contains', (array, value) => array.includes(value));
 
-  registerPartialsFromDir(instance, DEMO_PARTIALS_DIR);
+  registerPartialsFromDir(instance, PARTIALS_DIR);
 
   handlebarsEnv = instance;
 
