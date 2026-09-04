@@ -1,0 +1,57 @@
+{
+  "name": "@alma-oss/spirit-assets-exporter",
+  "version": "2.0.0",
+  "description": "Synchronize design assets from Figma into source repositories",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": "./dist/bin/spirit-assets.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "npm-run-all --serial build:compile build:bin",
+    "build:bin": "shx mkdir -p dist/bin && shx cp src/bin/spirit-assets.js dist/bin/spirit-assets.js",
+    "build:compile": "vite build",
+    "lint": "eslint ./",
+    "lint:fix": "yarn lint --fix",
+    "sync": "tsx ./src/bin/spirit-assets.js sync",
+    "test": "npm-run-all --serial lint types build test:unit:coverage",
+    "test:unit": "jest",
+    "test:unit:coverage": "yarn test:unit --coverage",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "cosmiconfig": "catalog:script",
+    "sade": "catalog:script",
+    "zod": "catalog:script"
+  },
+  "devDependencies": {
+    "@eslint/compat": "catalog:lint",
+    "@eslint/eslintrc": "catalog:lint",
+    "@lmc-eu/eslint-config-jest": "catalog:lint",
+    "@lmc-eu/eslint-config-typescript": "catalog:lint",
+    "@swc/core": "catalog:build",
+    "@swc/jest": "catalog:test",
+    "@types/jest": "catalog:types",
+    "@types/node": "catalog:types",
+    "eslint": "catalog:lint",
+    "eslint-config-spirit": "workspace:^",
+    "jest": "catalog:test",
+    "jest-config-spirit": "workspace:^",
+    "npm-run-all2": "catalog:script",
+    "prettier-config-spirit": "workspace:^",
+    "shx": "catalog:script",
+    "tsx": "catalog:script",
+    "typescript": "catalog:types",
+    "vite": "catalog:build",
+    "vite-plugin-dts": "catalog:build",
+    "vite-plugin-externalize-deps": "catalog:build"
+  }
+}

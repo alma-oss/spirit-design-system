@@ -1,28 +1,140 @@
-# Spirit Assets Exporter
+# Assets Exporter
 
-The Spirit Assets Exporter allows you to **export a list of images** in such a way that it can be immediately used in your production codebase. This specific exporter exports assets in generic fashion, as SVG format, without any additional formatting or generated support files.
+`@alma-oss/spirit-assets-exporter` synchronizes SVG assets from a Figma Asset File into one or more repository
+directories. Figma is the current source adapter; the CLI, configuration, and disk mirroring stay source-agnostic.
 
-## Exporter Output
+The package is private. Consumer repositories do not install it from npm. This repository runs the CLI locally and from
+GitHub Actions. A later Cyborg delivery can keep the configuration here and open a pull request in that repository.
 
-This exporter will render image assets defined inside one specific brand and will produce flat structure:
+## Configuration
 
-⚠️ We only output assets from `icons` directory.
+Create `spirit-assets.config.json` (cosmiconfig also accepts `.spirit-assetsrc`, `spirit-assets.config.js`, and a
+`spirit-assets` key in `package.json`):
 
-## Naming
+```json
+{
+  "fileKey": "your-figma-file-key",
+  "targets": [
+    {
+      "brand": "Spirit",
+      "out": "src/svg",
+      "assets": ["icons"]
+    }
+  ]
+}
+```
 
-The names of icons will be constructed from the original name.
+The Figma file key is not a secret. It identifies a published Figma file, the same way
+[`packages/web-react/figma.config.json`][web-react-figma-config] stores a file URL.
 
-Names follow `icon-name` convention.
+Output paths are relative to the configuration file. Each target selects one or more asset types:
 
-This behavior can be fully customized by simply modifying the path generation template file `asset_path.pr`. Simply fork, modify and upload as your version of the exporter. If you have never done this before, [follow our guide to modifying existing exporters](https://developers.supernova.io/latest/building-exporters/cloning-exporters.html).
+- `icons`: Brand-specific variants from `Icons/{icon-name}` component sets
+- `benefit-icons`: shared, unbranded `Icons/benefit-*` components
+- `illustrations`: Brand-specific variants from `Illustration/{illustration-name}` component sets
 
-## Installing
+Multiple asset types in one target share the same output directory and are treated as one complete set. This allows each
+Brand repository to store its regular and benefit icons together:
 
-In order to make the Supernova SVG Asset exporter available for your organization so you can start generating code from your design system, please follow the installation guide in our [developer documentation](https://developers.supernova.io/using-exporters/installing-exporters).
+```json
+{
+  "fileKey": "your-figma-file-key",
+  "targets": [
+    {
+      "brand": "Práce",
+      "out": "packages/prace-icons/src/svg",
+      "assets": ["icons", "benefit-icons"]
+    },
+    {
+      "brand": "Jobs",
+      "out": "packages/jobs-icons/src/svg",
+      "assets": ["icons", "benefit-icons"]
+    }
+  ]
+}
+```
 
-## Useful Links
+Branded icon component sets must contain a `Brand` property matching the configured target. Benefit icons do not have a
+Brand variant and are exported unchanged into every target that selects them.
 
-- To learn more about Supernova, [go visit our website](https://supernova.io)
-- To join our community of fellow developers where we try to push what is possible with design systems and code automation, join our [community discord](https://community.supernova.io)
-- To understand everything you can do with Supernova and how much time and resources it can save you, go read our [product documentation](https://learn.supernova.io/)
-- Finally, to learn everything about what exporters are and how you can integrate with your codebase, go read our [developer documentation](https://developers.supernova.io/)
+Illustrations should use a separate target because they are not part of the 24×24 icon set:
+
+```json
+{
+  "brand": "Spirit",
+  "out": "src/illustrations",
+  "assets": ["illustrations"]
+}
+```
+
+## Usage
+
+Set `FIGMA_ACCESS_TOKEN` to a Figma personal access token with the `file_content:read` scope and access to the Asset
+File, then run:
+
+```shell
+yarn icons:sync
+```
+
+Or invoke the CLI with an explicit config path:
+
+```shell
+yarn workspace @alma-oss/spirit-assets-exporter sync --config packages/icons/spirit-assets.config.json
+```
+
+If `--config` is omitted, cosmiconfig searches the current working directory for a `spirit-assets` configuration.
+
+The target directory becomes an exact mirror of the selected Brand:
+
+- new SVGs are added
+- changed SVGs are updated
+- SVGs missing from Figma are deleted
+
+The sync aborts before changing a target when it cannot discover or download the complete asset set.
+
+## Automated Delivery
+
+This repository runs the **Sync Figma Assets** GitHub Actions workflow. It accepts a manual `workflow_dispatch` or a
+`figma-library-publish` repository dispatch. An external automation such as Make can receive Figma's `LIBRARY_PUBLISH`
+webhook and send that dispatch. The workflow reuses the branch `chore/figma-icons-sync` so a rerun updates the same pull
+request. When Figma publish notes are available on the latest file version, they are added to the pull request body.
+
+Other repositories can copy this workflow:
+
+```yaml
+name: Sync Figma Assets
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - figma-library-publish
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup-install
+      - run: yarn icons:sync
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+      - uses: peter-evans/create-pull-request@v8
+        with:
+          branch: chore/figma-icons-sync
+          commit-message: 'chore(icons): sync icons from Figma'
+          title: 'Chore(icons): Sync icons from Figma'
+```
+
+Cyborg delivery is planned, not implemented: configuration stays in this repository, and a GitHub Action would open a
+commit and pull request in Cyborg. Until then, Cyborg does not run this CLI.
+
+## Testing
+
+Run the complete package checks with:
+
+```shell
+yarn workspace @alma-oss/spirit-assets-exporter test
+```
+
+[web-react-figma-config]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/figma.config.json

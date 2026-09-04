@@ -95,8 +95,8 @@ The following is the list of supported scopes:
 - Apps:
   - `demo`
 - Exporters:
-  - `exporter-tokens`
   - `exporter-assets`
+  - `exporter-tokens`
 - Packages:
   - `analytics`
   - `codemods`
