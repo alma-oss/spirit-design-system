@@ -36,7 +36,7 @@ const WebPreview = ({ html }: WebPreviewProps) => {
     // Importing @alma-oss/spirit-web's JS registers each interactive component's auto-binder,
     // but only against the page's original DOMContentLoaded, which already fired before this
     // content was injected — initSpiritComponents() re-runs that binding scoped to `container`.
-    import('@workspace/web/js/index.esm').then(({ initSpiritComponents }) => {
+    import('@alma-oss/spirit-web/js/index.esm').then(({ initSpiritComponents }) => {
       if (!cancelled) {
         initSpiritComponents(container);
       }
