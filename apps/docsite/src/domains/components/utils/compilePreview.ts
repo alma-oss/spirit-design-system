@@ -8,7 +8,7 @@ import Handlebars from 'handlebars';
 // Only the partials packages/web's preview.html files actually reference are kept here (a copy
 // of the matching apps/demo/partials files), so docsite doesn't depend on apps/demo's full partial
 // set and keeps working if/when apps/demo is removed.
-const PARTIALS_DIR = join(process.cwd(), 'src/domains/components/utils/partials');
+const PARTIALS_DIR = join(process.cwd(), 'src/domains/components/ui/partials');
 
 let handlebarsEnv: typeof Handlebars | undefined;
 

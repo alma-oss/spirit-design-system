@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
     '/assets/icons/svg/sprite.svg': ['../../packages/web/public/icons/svg/sprite.svg'],
     '/components/[component]/web-preview': [
       '../../packages/web/src/scss/components/**/preview.html',
-      './src/domains/components/utils/partials/**/*',
+      './src/domains/components/ui/partials/**/*',
     ],
   },
   transpilePackages: ['@alma-oss/spirit-web-react'],
