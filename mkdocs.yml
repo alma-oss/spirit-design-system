@@ -36,6 +36,9 @@ nav:
       - 009 - Tokens Structure: decisions/009-tokens-structure.md
       - 010 - Deprecations: decisions/010-deprecations.md
       - 011 - Component Customization: decisions/011-component-customization.md
+      - 012 - Color Schemes: decisions/012-color-schemes.md
+      - 013 - Listbox vs Grid for Selectable Options: decisions/013-listbox-vs-grid-for-selectable-options.md
+      - 014 - Non-Visual React Components: decisions/014-non-visual-components.md
   - Migration Guides:
       - Overview: migrations/README.md
       - web-react:
