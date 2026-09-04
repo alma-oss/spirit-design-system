@@ -29,6 +29,7 @@ const nextConfig: NextConfig = {
     '/assets/icons/svg/sprite.svg': ['../../packages/web/public/icons/svg/sprite.svg'],
     '/components/[component]/web-preview': [
       '../../packages/web/src/scss/components/**/preview.html',
+      // Path is hardcoded in compilePreview.ts as `PARTIALS_DIR` — update both if this moves.
       './src/domains/components/ui/partials/**/*',
     ],
   },

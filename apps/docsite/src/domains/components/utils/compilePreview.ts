@@ -8,6 +8,9 @@ import Handlebars from 'handlebars';
 // Only the partials packages/web's preview.html files actually reference are kept here (a copy
 // of the matching apps/demo/partials files), so docsite doesn't depend on apps/demo's full partial
 // set and keeps working if/when apps/demo is removed.
+//
+// This path is also hardcoded in next.config.ts's `outputFileTracingIncludes` (keyed by the
+// web-preview route) so it ships with production/serverless builds — update both if this moves.
 const PARTIALS_DIR = join(process.cwd(), 'src/domains/components/ui/partials');
 
 let handlebarsEnv: typeof Handlebars | undefined;
@@ -47,7 +50,9 @@ const getHandlebarsEnv = () => {
   instance.registerHelper('eq', (variable, value) => variable === value);
   instance.registerHelper('contains', (array, value) => array.includes(value));
 
-  registerPartialsFromDir(instance, PARTIALS_DIR);
+  // Registered as `web/assets/*` (not `assets/*`) to match the partial names preview.html files
+  // use — the same names apps/demo registers from its own apps/demo/partials/web/assets/*.hbs.
+  registerPartialsFromDir(instance, PARTIALS_DIR, 'web/');
 
   handlebarsEnv = instance;
 
