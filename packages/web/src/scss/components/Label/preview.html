@@ -1,0 +1,279 @@
+<section class="py-1000 py-tablet-1100 hide-from-visual-tests">
+
+  <div class="Container">
+
+    <p>
+      <strong>Note:</strong> For demonstration purposes and to fulfill accessibility and HTML semantics requirements,
+      all labels on this page are associated with related form component.
+    </p>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Box Label with TextField</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label
+          for="text-field-example"
+          class="Label"
+        >Label</label>
+        <div class="InputContainer InputContainer--fill InputContainer--medium">
+          <input
+            type="text"
+            id="text-field-example"
+            placeholder="Placeholder"
+          />
+        </div>
+      </div>
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label
+          for="text-field-required"
+          class="Label Label--required"
+        >Required Field</label>
+        <div class="InputContainer InputContainer--fill InputContainer--medium">
+          <input
+            type="text"
+            id="text-field-required"
+            placeholder="Placeholder"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label
+          for="text-field-disabled"
+          class="Label Label--disabled"
+        >Disabled Field</label>
+        <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
+          <input
+            type="text"
+            id="text-field-disabled"
+            placeholder="Placeholder"
+            disabled
+          />
+        </div>
+      </div>
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label
+          for="text-field-hidden"
+          class="Label accessibility-hidden"
+        >Hidden Label</label>
+        <div class="InputContainer InputContainer--fill InputContainer--medium">
+          <input
+            type="text"
+            id="text-field-hidden"
+            placeholder="Placeholder with hidden label"
+          />
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Inline Label with Checkbox</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Stack">
+
+        <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-example"
+            class="Checkbox"
+          />
+          <div>
+            <label
+              class="Label cursor-pointer"
+              for="checkbox-example"
+            >Checkbox Label</label>
+          </div>
+        </div>
+
+        <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-required"
+            class="Checkbox"
+            required
+          />
+          <div>
+            <label
+              class="Label cursor-pointer Label--required"
+              for="checkbox-required"
+            >Required Checkbox</label>
+          </div>
+        </div>
+
+        <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+          <input
+            type="checkbox"
+            id="checkbox-disabled"
+            class="Checkbox"
+            disabled
+          />
+          <div>
+            <label
+              class="Label cursor-pointer Label--disabled"
+              for="checkbox-disabled"
+            >Disabled Checkbox</label>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Item Label with Item Component</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <button
+        type="button"
+        class="Item"
+      >
+        <span class="Item__content" role="presentation">
+          <span class="Label element-stretched cursor-pointer">Item label</span>
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="Item color-scheme-on-selected-subtle bg-color-scheme"
+      >
+        <span class="Item__content" role="presentation">
+          <span class="Label element-stretched cursor-pointer">Selected Item</span>
+        </span>
+        <span class="Item__slot" role="presentation">
+          <svg
+            class="Icon Icon--selected"
+            width="24"
+            height="24"
+            aria-hidden="true"
+          >
+            <use href="/assets/icons/svg/sprite.svg#check-plain" />
+          </svg>
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="Item disabled text-color-scheme"
+      >
+        <span class="Item__content" role="presentation">
+          <span class="Label element-stretched Label--disabled">Disabled Item</span>
+        </span>
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Combined Label with Checkbox Item</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Item">
+        <div class="Item__slot" role="presentation">
+          <input
+            type="checkbox"
+            id="checkbox-item-example"
+            class="Checkbox Checkbox--item"
+          />
+        </div>
+        <div class="Item__content" role="presentation">
+          <label
+            class="Label element-stretched cursor-pointer"
+            for="checkbox-item-example"
+          >Checkbox Item</label>
+        </div>
+      </div>
+
+      <div class="Item Item--disabled">
+        <div class="Item__slot" role="presentation">
+          <input
+            type="checkbox"
+            id="checkbox-item-disabled"
+            class="Checkbox Checkbox--item"
+            disabled
+          />
+        </div>
+        <div class="Item__content" role="presentation">
+          <label
+            class="Label element-stretched Label--disabled"
+            for="checkbox-item-disabled"
+          >Disabled Checkbox Item</label>
+        </div>
+      </div>
+
+      <div class="Item">
+        <div class="Item__slot" role="presentation">
+          <input
+            type="radio"
+            id="radio-item-example"
+            class="Radio Radio--item"
+            name="example"
+          />
+        </div>
+        <div class="Item__content" role="presentation">
+          <label
+            class="Label element-stretched cursor-pointer"
+            for="radio-item-example"
+          >Radio Item</label>
+        </div>
+      </div>
+
+      <div class="Item Item--disabled">
+        <div class="Item__slot" role="presentation">
+          <input
+            type="radio"
+            id="radio-item-disabled"
+            class="Radio Radio--item"
+            name="example-disabled"
+            disabled
+          />
+        </div>
+        <div class="Item__content" role="presentation">
+          <label
+            class="Label element-stretched Label--disabled"
+            for="radio-item-disabled"
+          >Disabled Radio Item</label>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

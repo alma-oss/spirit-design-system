@@ -22,6 +22,17 @@ const mdxPluginOptions: { remarkPlugins: StringPluginTuple[]; rehypePlugins: Str
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: join(__dirname, '../../'),
+  // The sprite route and the Web Preview tab read packages/web files via runtime `fs` calls,
+  // which output file tracing can't detect statically — include them explicitly so they ship
+  // with the built app instead of 404ing/erroring in production.
+  outputFileTracingIncludes: {
+    '/assets/icons/svg/sprite.svg': ['../../packages/web/public/icons/svg/sprite.svg'],
+    '/components/[component]/web-preview': [
+      '../../packages/web/src/scss/components/**/preview.html',
+      // Path is hardcoded in compilePreview.ts as `PARTIALS_DIR` — update both if this moves.
+      './src/domains/components/ui/partials/**/*',
+    ],
+  },
   transpilePackages: ['@alma-oss/spirit-web-react'],
   reactStrictMode: true,
   experimental: {
@@ -41,20 +52,6 @@ const nextConfig: NextConfig = {
   // dynamic imports of README.md files from packages are handled by the same loader.
   turbopack: {
     rules: {
-      // html-loader without sources processing — serializable options for Turbopack.
-      // The filter function in the webpack html-loader rule is only for SVG sprite href,
-      // not needed for preview HTML files imported in web-preview/page.tsx.
-      '*.html': {
-        loaders: [
-          {
-            loader: 'html-loader',
-            options: {
-              sources: false,
-            },
-          },
-        ],
-        as: '*.js',
-      },
       '*.md': {
         loaders: [
           {
@@ -77,31 +74,6 @@ const nextConfig: NextConfig = {
         '@local': resolve(__dirname, './src'),
       },
     };
-    config.module.rules.push({
-      test: /\.(html)$/,
-      use: [
-        {
-          loader: 'html-loader',
-          options: {
-            sources: {
-              list: [
-                {
-                  tag: 'use',
-                  attribute: 'href',
-                  type: 'src',
-                  filter: (tag: unknown, attribute: string | number, attributes: { [x: string]: string }) => {
-                    // Ensure the attribute value exists before calling startsWith
-                    const value = attributes[attribute];
-
-                    return value && !value.startsWith('/');
-                  },
-                },
-              ],
-            },
-          },
-        },
-      ],
-    });
 
     return config;
   },

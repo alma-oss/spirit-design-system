@@ -15,14 +15,22 @@
     ],
     "paths": {
       "@local/*": ["./src/*"],
-      "@workspace/web-react/*": ["../../packages/web-react/src/*"],
-      "@workspace/web/*": ["../../packages/web/src/*"]
+      "@alma-oss/spirit-web-react/*": ["../../packages/web-react/src/*"],
+      "@alma-oss/spirit-web/*": ["../../packages/web/src/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "target": "esnext",
     "module": "esnext",
     "isolatedModules": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    // Global ambient types (SpiritElement, etc.) for packages/web/src/js, imported by
+    // WebPreviewContent.tsx — not picked up automatically since it isn't a module file.
+    "../../packages/web/src/js/global.d.ts"
+  ],
   "exclude": ["node_modules"]
 }

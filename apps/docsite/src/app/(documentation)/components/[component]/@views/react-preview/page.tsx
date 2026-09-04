@@ -18,7 +18,7 @@ const ReactPreviewTabPage = async ({ params }: ReactPreviewTabProps) => {
   const componentName = slugToComponentName(component);
 
   try {
-    const { default: Preview } = await import(`@workspace/web-react/components/${componentName}/preview`);
+    const { default: Preview } = await import(`@alma-oss/spirit-web-react/components/${componentName}/preview`);
 
     return <Preview />;
   } catch (error) {
