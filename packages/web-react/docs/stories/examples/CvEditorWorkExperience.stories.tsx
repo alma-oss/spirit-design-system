@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { type ChangeEvent, useState } from 'react';
 import {
   ActionGroup,
   Box,
@@ -15,6 +15,10 @@ import {
   Text,
   TextArea,
   TextField,
+  Toast,
+  ToastBar,
+  ToastBarMessage,
+  Toggle,
 } from '../../../src/components';
 
 const MONTHS = [
@@ -34,6 +38,12 @@ const MONTHS = [
 
 const CURRENT_YEAR = new Date().getFullYear();
 const YEARS = Array.from({ length: CURRENT_YEAR - 1949 }, (_, index) => String(CURRENT_YEAR - index));
+
+const DESCRIPTION_COUNTER_THRESHOLD = 5000;
+const DESCRIPTION_SENTENCE = 'Vedení týmu, plánování projektů a komunikace se zákazníky. ';
+const OVER_LIMIT_DESCRIPTION = DESCRIPTION_SENTENCE.repeat(
+  Math.ceil((DESCRIPTION_COUNTER_THRESHOLD + 1) / DESCRIPTION_SENTENCE.length),
+);
 
 const PROFESSIONAL_FIELDS = [
   { value: '1', label: 'Administrativa' },
@@ -85,11 +95,58 @@ export default {
   parameters: { layout: 'fullscreen' },
 };
 
+/**
+ * Interactive CV editor work experience page. The “Simulate validation errors” toggle puts the form
+ * into the state it has after a failed save — required fields in their `danger` state, an over-limit
+ * description and the error Toast — so the error design can be reviewed without filling the form in.
+ */
 export const CvEditorWorkExperience = () => {
   const [isCurrentlyWorking, setIsCurrentlyWorking] = useState(false);
+  const [hasSimulatedErrors, setHasSimulatedErrors] = useState(false);
+  const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
+  const [description, setDescription] = useState('');
+
+  const isDescriptionOverLimit = description.length > DESCRIPTION_COUNTER_THRESHOLD;
+
+  const handleSimulateErrorsChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { checked } = event.target;
+
+    setHasSimulatedErrors(checked);
+    setIsErrorToastOpen(checked);
+    setDescription(checked ? OVER_LIMIT_DESCRIPTION : '');
+  };
 
   return (
     <>
+      <Toast alignmentX="center" alignmentY="top">
+        <ToastBar
+          id="cv-work-experience-error-toast"
+          color="danger"
+          onClose={() => setIsErrorToastOpen(false)}
+          hasIcon
+          isDismissible
+          isOpen={isErrorToastOpen}
+        >
+          <ToastBarMessage>Formulář se nepovedlo uložit. Zkontrolujte prosím zvýrazněná pole.</ToastBarMessage>
+        </ToastBar>
+      </Toast>
+      <Section elementType="div" size="small" containerProps={{ size: 'small' }}>
+        <Box
+          backgroundColor="emotion-informative-subtle"
+          borderColor="emotion-informative-basic"
+          borderWidth="100"
+          borderRadius="200"
+          padding="space-600"
+        >
+          <Toggle
+            id="cv-work-experience-simulate-errors"
+            label="Simulate validation errors"
+            isChecked={hasSimulatedErrors}
+            inputPosition="start"
+            onChange={handleSimulateErrorsChange}
+          />
+        </Box>
+      </Section>
       <Section
         elementType="div"
         size="small"
@@ -128,6 +185,7 @@ export const CvEditorWorkExperience = () => {
           onSubmit={(event) => event.preventDefault()}
           aria-labelledby="cv-work-experience-heading"
           spacing="space-1000"
+          noValidate
         >
           {/* TODO [DS-2774]: The design applies `shadow-100` on this card. `Box` has no `boxShadow` prop
                 and there is no shadow utility class in `web`, so the shadow is intentionally omitted here. */}
@@ -143,6 +201,10 @@ export const CvEditorWorkExperience = () => {
                   label="Název pracovní pozice"
                   autoComplete="organization-title"
                   isRequired
+                  {...(hasSimulatedErrors && {
+                    validationState: 'danger',
+                    validationText: 'Zadejte název pracovní pozice.',
+                  })}
                 />
               </GridItem>
               <GridItem>
@@ -152,10 +214,23 @@ export const CvEditorWorkExperience = () => {
                   label="Firma, instituce"
                   autoComplete="organization"
                   isRequired
+                  {...(hasSimulatedErrors && {
+                    validationState: 'danger',
+                    validationText: 'Zadejte název firmy nebo instituce.',
+                  })}
                 />
               </GridItem>
               <GridItem>
-                <Select id="work-experience-field" name="professionalField" label="Profesní obor" isRequired>
+                <Select
+                  id="work-experience-field"
+                  name="professionalField"
+                  label="Profesní obor"
+                  isRequired
+                  {...(hasSimulatedErrors && {
+                    validationState: 'danger',
+                    validationText: 'Vyberte profesní obor.',
+                  })}
+                >
                   <option value="">Vyberte</option>
                   {PROFESSIONAL_FIELDS.map(({ value, label }) => (
                     <option key={value} value={value}>
@@ -203,8 +278,14 @@ export const CvEditorWorkExperience = () => {
                   name="description"
                   label="Vaše pracovní zkušenosti"
                   placeholder="Co bylo hlavní náplní vaší práce?"
-                  counterThreshold={5000}
+                  counterThreshold={DESCRIPTION_COUNTER_THRESHOLD}
                   isAutoResizing
+                  value={description}
+                  onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setDescription(event.target.value)}
+                  {...(isDescriptionOverLimit && {
+                    validationState: 'danger',
+                    validationText: `Vyplněný text je příliš dlouhý. Může obsahovat maximálně ${DESCRIPTION_COUNTER_THRESHOLD} znaků.`,
+                  })}
                 />
               </GridItem>
             </Grid>
