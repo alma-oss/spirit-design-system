@@ -19,6 +19,8 @@ export default [
       '**/node_modules/**',
       '**/dist/**',
       '**/build/**',
+      'exporters/figma-tokens/plugin/code.js',
+      'plugin/code.js',
       '**/.nx/**',
       '**/.yarn/**',
       // Ignore the playwright-report directory
