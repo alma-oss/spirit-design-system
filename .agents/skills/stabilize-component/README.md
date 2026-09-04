@@ -54,3 +54,4 @@ addition, migration docs, and removal cleanup), so behavior reflects what was ac
 - Migration guides document both automatic (codemod) and manual steps
 - e2e snapshots regenerated; no shared-name collisions between `web` and `web-react`
 - Removed component leaves no stale files, exports, deprecations, or docs
+- `/spirit:figma-to-code` routing uses the stable name in the same change

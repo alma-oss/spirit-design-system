@@ -568,12 +568,13 @@ screenshots, and metadata for selected nodes. With the Figma desktop app open an
 in your tool, the agent can use tools such as `get_design_context` and `get_screenshot`.
 See [Figma MCP documentation][figma-mcp] for more information.
 
-**Figma-to-Spirit skill** — We also provide an agent skill [Figma to Spirit][figma-skill] that teaches your AI-powered
-tool how to convert Figma designs into React using Spirit Web React components (layout, typography, cards, and rules
-for reading props from Figma and Code Connect). Install it with:
+**Figma-to-code skill** — [Figma to Code][figma-skill] (`/spirit:figma-to-code`) teaches an AI-powered
+tool how to implement production React from a Figma design using current Spirit Web React APIs.
+Use it when the requested output is React code. For a pre-handoff design-system review of a Figma frame,
+use `/spirit:review-figma-design` instead. Install the implementation skill with:
 
 ```bash
-npx skills add https://github.com/alma-oss/spirit-design-system --skill figma-to-spirit
+npx skills add https://github.com/alma-oss/spirit-design-system --skill figma-to-code
 ```
 
 To learn more about skills, see [Skills documentation][skills-docs].
@@ -581,7 +582,8 @@ To learn more about skills, see [Skills documentation][skills-docs].
 ### Summary
 
 - In Figma, use Figma Code Connect to see and copy the code for the component you are implementing.
-- If you use AI, install the Figma MCP and Figma-to-Spirit skill and then prompt the agent to implement the UI from Figma.
+- If you use AI to **implement** UI from Figma, install the Figma MCP and `/spirit:figma-to-code`, then prompt the agent with the Figma node or URL.
+- If you use AI to **review** a Figma frame before handoff, use `/spirit:review-figma-design`.
 
 ## License
 
@@ -596,7 +598,7 @@ See the [LICENSE][license] file for information.
 [figma-code-connect]: https://developers.figma.com/docs/code-connect/
 [figma-code-connect-image]: https://github.com/alma-oss/spirit-design-system/blob/main/static/figma-code-connect.png?raw=true
 [figma-mcp]: https://developers.figma.com/docs/figma-mcp-server/
-[figma-skill]: https://skills.sh/alma-oss/spirit-design-system/figma-to-spirit
+[figma-skill]: https://skills.sh/alma-oss/spirit-design-system/figma-to-code
 [license]: LICENSE.md
 [next-pages-router-push]: https://nextjs.org/docs/pages/api-reference/functions/use-router#routerpush
 [units-guide]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/contribution/units.md
