@@ -64,12 +64,12 @@ interface DataTriggerRegistration {
 // original DOMContentLoaded already fired (e.g. HTML injected via innerHTML).
 const dataTriggerRegistrations: DataTriggerRegistration[] = [];
 
-const bindDataTrigger = (registration: DataTriggerRegistration, root: Element) => {
+const bindDataTrigger = (registration: DataTriggerRegistration, root: Element, event: Event) => {
   const { dataTriggerAttribute, component, eventHandler, method, aim } = registration;
   const name = component.NAME;
 
   SelectorEngine.findAll(`[${dataTriggerAttribute}="${name}"]`, root).forEach((toggleEl) => {
-    eventHandler(toggleEl, component, method, undefined as unknown as Event, aim);
+    eventHandler(toggleEl, component, method, event, aim);
   });
 };
 
@@ -84,8 +84,8 @@ const enableDataTrigger = (
 
   dataTriggerRegistrations.push(registration);
 
-  EventHandler.on(window, 'DOMContentLoaded', () => {
-    bindDataTrigger(registration, document.documentElement);
+  EventHandler.on(window, 'DOMContentLoaded', (event: Event) => {
+    bindDataTrigger(registration, document.documentElement, event);
   });
 };
 
@@ -112,7 +112,11 @@ const clickOutsideElement = (target: Element, event: Event) => !event.composedPa
  * @param root - Element to scope (re-)binding to. Defaults to the whole document.
  */
 const initSpiritComponents = (root: Element = document.documentElement) => {
-  dataTriggerRegistrations.forEach((registration) => bindDataTrigger(registration, root));
+  // No real DOMContentLoaded event exists for this rebind, since the page's own already fired —
+  // dispatch a synthetic one so trigger handlers that inspect the event (e.g. Modal.toggle) still get one.
+  const event = new Event('DOMContentLoaded');
+
+  dataTriggerRegistrations.forEach((registration) => bindDataTrigger(registration, root, event));
 };
 
 export { enableToggleTrigger, enableDismissTrigger, enableToggleAutoloader, clickOutsideElement, initSpiritComponents };
