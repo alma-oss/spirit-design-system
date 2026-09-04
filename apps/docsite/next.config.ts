@@ -22,11 +22,15 @@ const mdxPluginOptions: { remarkPlugins: StringPluginTuple[]; rehypePlugins: Str
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: join(__dirname, '../../'),
-  // The sprite route reads packages/web/public/icons/svg/sprite.svg via a runtime `fs.readFile`
-  // call, which output file tracing can't detect statically — include it explicitly so it ships
-  // with the built app instead of 404ing in production.
+  // The sprite route and the Web Preview tab read packages/web files via runtime `fs` calls,
+  // which output file tracing can't detect statically — include them explicitly so they ship
+  // with the built app instead of 404ing/erroring in production.
   outputFileTracingIncludes: {
     '/assets/icons/svg/sprite.svg': ['../../packages/web/public/icons/svg/sprite.svg'],
+    '/components/[component]/web-preview': [
+      '../../packages/web/src/scss/components/**/preview.html',
+      './src/domains/components/utils/partials/**/*',
+    ],
   },
   transpilePackages: ['@alma-oss/spirit-web-react'],
   reactStrictMode: true,

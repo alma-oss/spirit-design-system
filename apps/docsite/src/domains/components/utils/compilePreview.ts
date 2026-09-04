@@ -2,10 +2,13 @@ import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 import Handlebars from 'handlebars';
 
+// `__dirname` doesn't survive Turbopack's server bundling (it no longer points at this file's
+// source directory once bundled), so use `process.cwd()` like the rest of docsite's fs reads.
+//
 // Only the partials packages/web's preview.html files actually reference are kept here (a copy
 // of the matching apps/demo/partials files), so docsite doesn't depend on apps/demo's full partial
 // set and keeps working if/when apps/demo is removed.
-const PARTIALS_DIR = join(__dirname, 'partials');
+const PARTIALS_DIR = join(process.cwd(), 'src/domains/components/utils/partials');
 
 let handlebarsEnv: typeof Handlebars | undefined;
 
