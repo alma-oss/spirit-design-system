@@ -77,7 +77,7 @@ jira_link_to_epic(issue_key="<new key>", epic_key="<epic from Step 2>")
 
 This is the load-bearing section of this skill — every rule below was learned the hard way by watching the actual stored output, not by reading documentation. See [`references/wiki-markup-cheatsheet.md`](references/wiki-markup-cheatsheet.md) for the full standard syntax reference plus this same corruption-bug table.
 
-- **Write real Jira wiki markup, not Markdown.** `h2.`/`h3.` headings, `*bold*`, `{{monospace}}`, `{code}...{code}` blocks, `*` for every bullet.
+- **Write `h2.`/`h3.` headings and `*` bullets as real Jira wiki markup — but write bold and monospace as Markdown.** The write path runs input through a Markdown-aware step first: a literal `*bold*` gets parsed as Markdown italic and stored as `_bold_`. Write Markdown `**bold**` and backtick `` `code` `` instead — they convert correctly to wiki `*bold*` and `{{code}}`. Headings (`h2.`) and bullets (`*`) are not valid Markdown syntax, so they pass through untouched and must be written directly in wiki form.
 - **Never start a bullet with bold immediately after the `*` marker.** `* *Bold text.* rest of sentence...` reliably corrupts into `_ _text*` garbage. Put emphasis later in the sentence, or skip it in bullets entirely.
 - **Never use `#`-numbered lists.** They get converted into a sequence of full `h1.` headings instead of a numbered list. Use `*` bullets even for sequential steps.
 - **Avoid generic angle-bracket notation** like `Node<T>` or `Collection<T>` — silently mangled to `Node[T]`. Describe types in prose instead ("a Node type parameterized by the item type").
