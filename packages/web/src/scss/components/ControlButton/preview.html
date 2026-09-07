@@ -1,0 +1,516 @@
+{{setVar "basicColors" "primary" "secondary" "tertiary" }}
+{{setVar "neutralColors" "neutral" }}
+{{setVar "emotionColors" "success" "informative" "warning" "danger" }}
+{{setVar "accentColors" "01" "02" "03" "04" "05" "06" }}
+{{setVar "sizes" "xsmall" "small" "medium" "large" "xlarge" }}
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Icon</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div
+        class="Grid Grid--alignmentXStretch Grid--alignmentYTop Grid--cols-1 Grid--desktop--cols-3"
+        style="--grid-spacing-y: var(--spirit-space-1100);"
+      >
+        <div class="docs-Stack docs-Stack--stretch">
+
+          <h3>On Background Colors</h3>
+
+          {{#each @root.basicColors as |color|}}
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-{{color}} p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter bg-{{color}} p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          {{/each}}
+
+          {{#each @root.neutralColors as |color|}}
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-{{color}}-basic bg-color-scheme text-color-scheme p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-{{color}}-basic bg-color-scheme text-color-scheme p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-{{color}}-subtle bg-color-scheme text-color-scheme p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-{{color}}-subtle bg-color-scheme text-color-scheme p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          {{/each}}
+
+        </div>
+        <div class="docs-Stack docs-Stack--stretch">
+
+          <h3>On Emotion Colors</h3>
+
+          {{#each @root.emotionColors as |color|}}
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-emotion-{{color}}-basic bg-color-scheme text-color-scheme p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-emotion-{{color}}-basic bg-color-scheme text-color-scheme p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-emotion-{{color}}-subtle bg-color-scheme text-color-scheme p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-emotion-{{color}}-subtle bg-color-scheme text-color-scheme p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          {{/each}}
+
+        </div>
+        <div class="docs-Stack docs-Stack--stretch">
+
+          <h3>On Accent Colors</h3>
+
+          {{#each @root.accentColors as |color|}}
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-accent-{{color}}-basic bg-color-scheme text-color-scheme p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-accent-{{color}}-basic bg-color-scheme text-color-scheme p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-accent-{{color}}-subtle bg-color-scheme text-color-scheme p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--symmetrical accessibility-tap-target dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          <div
+            class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-accent-{{color}}-subtle bg-color-scheme text-color-scheme p-800"
+          >
+            {{#each @root.sizes as |size|}}
+            <button
+              type="button"
+              class="ControlButton ControlButton--{{size}} ControlButton--hasBackground ControlButton--symmetrical accessibility-tap-target dynamic-color-border dynamic-color-background-interactive"
+              aria-label="Close dialog"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#close" />
+              </svg>
+            </button>
+            {{/each}}
+          </div>
+          {{/each}}
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Responsive Symmetrical</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <button
+        type="button"
+        class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
+        aria-label="Close"
+      >
+        <svg
+          class="Icon"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        >
+          <use href="/assets/icons/svg/sprite.svg#close" />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="ControlButton ControlButton--medium ControlButton--tablet--symmetrical dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
+        aria-label="Close"
+      >
+        <svg
+          class="Icon"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        >
+          <use href="/assets/icons/svg/sprite.svg#close" />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="ControlButton ControlButton--medium ControlButton--desktop--symmetrical dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
+        aria-label="Close"
+      >
+        <svg
+          class="Icon"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        >
+          <use href="/assets/icons/svg/sprite.svg#close" />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--tablet--asymmetrical dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
+        aria-label="Close"
+      >
+        <svg
+          class="Icon"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        >
+          <use href="/assets/icons/svg/sprite.svg#close" />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--desktop--asymmetrical dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
+        aria-label="Close"
+      >
+        <svg
+          class="Icon"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        >
+          <use href="/assets/icons/svg/sprite.svg#close" />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="ControlButton ControlButton--medium ControlButton--tablet--symmetrical ControlButton--desktop--asymmetrical dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
+        aria-label="Close"
+      >
+        <svg
+          class="Icon"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        >
+          <use href="/assets/icons/svg/sprite.svg#close" />
+        </svg>
+      </button>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">Disabled State</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+      <h3>Color Scheme on Parent</h3>
+
+      <div class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter color-scheme-on-disabled bg-color-scheme text-color-scheme p-800">
+        <button
+          type="button"
+          class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target disabled"
+          aria-label="Previous"
+          disabled
+        >
+          <svg
+            class="Icon"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <use href="/assets/icons/svg/sprite.svg#chevron-left" />
+          </svg>
+        </button>
+
+        <span class="mx-400">Disabled content</span>
+
+        <button
+          type="button"
+          class="ControlButton ControlButton--medium ControlButton--symmetrical dynamic-color-background-interactive dynamic-color-border accessibility-tap-target disabled"
+          aria-label="Next"
+          disabled
+        >
+          <svg
+            class="Icon"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <use href="/assets/icons/svg/sprite.svg#chevron-right" />
+          </svg>
+        </button>
+      </div>
+
+      <h3>Color Scheme on Component</h3>
+
+      <div class="Flex Flex--horizontal Flex--alignmentXCenter Flex--tablet--alignmentXLeft Flex--alignmentYCenter">
+        <button
+          type="button"
+          class="ControlButton ControlButton--medium ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target disabled"
+          aria-label="Close"
+          disabled
+        >
+          <svg
+            class="Icon"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <use href="/assets/icons/svg/sprite.svg#close" />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground text-color-scheme dynamic-color-background-interactive dynamic-color-border accessibility-tap-target disabled"
+          aria-label="Close"
+          disabled
+        >
+          <svg
+            class="Icon"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <use href="/assets/icons/svg/sprite.svg#close" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
