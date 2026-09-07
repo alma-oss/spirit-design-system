@@ -17,7 +17,7 @@ const WebTabPage = async ({ params }: WebTabPageProps) => {
 
   try {
     const { default: ReadMe } = await import(
-      `@workspace/web/scss/components/${slugToComponentName(component)}/README.md`
+      `@alma-oss/spirit-web/scss/components/${slugToComponentName(component)}/README.md`
     );
 
     return (

@@ -15,8 +15,8 @@
     ],
     "paths": {
       "@local/*": ["./src/*"],
-      "@workspace/web-react/*": ["../../packages/web-react/src/*"],
-      "@workspace/web/*": ["../../packages/web/src/*"]
+      "@alma-oss/spirit-web-react/*": ["../../packages/web-react/src/*"],
+      "@alma-oss/spirit-web/*": ["../../packages/web/src/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "target": "esnext",

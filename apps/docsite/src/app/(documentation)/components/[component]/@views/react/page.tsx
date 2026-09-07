@@ -17,7 +17,7 @@ const ReactTabPage = async ({ params }: ReactTabProps) => {
 
   try {
     const { default: ReadMe } = await import(
-      `@workspace/web-react/components/${slugToComponentName(component)}/README.md`
+      `@alma-oss/spirit-web-react/components/${slugToComponentName(component)}/README.md`
     );
 
     return (
