@@ -22,6 +22,7 @@ export default {
         'web-react',
         // Use when committing changes/additions/removals to exact exporter
         'exporter-assets',
+        'exporter-figma-tokens',
         'exporter-tokens',
         // Use when committing changes/additions/removals to exact config
         'eslint-config',

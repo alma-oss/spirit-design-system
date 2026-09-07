@@ -1,0 +1,12 @@
+{
+  "name": "@alma-oss/spirit-figma-tokens-exporter",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "exporters/figma-tokens/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "outputs": ["{projectRoot}/dist", "{projectRoot}/plugin/code.js"],
+      "cache": true
+    }
+  }
+}

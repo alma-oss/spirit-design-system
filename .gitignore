@@ -18,6 +18,7 @@ local.mk
 
 # Distribution files
 packages/*/dist
+exporters/*/dist
 
 # Internal builds
 packages/*/build
@@ -56,6 +57,13 @@ nx-cloud.env
 # Dotenv
 .env*
 !.env.*.example
+
+# Ephemeral Figma token snapshots (plugin output; not committed)
+**/*.figma-tokens.snapshot.json
+**/.snapshots/
+
+# Figma plugin bundle (must live next to plugin/manifest.json)
+exporters/figma-tokens/plugin/code.js
 
 # Design reviews
 /design-reviews/
