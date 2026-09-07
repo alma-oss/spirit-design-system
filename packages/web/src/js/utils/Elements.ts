@@ -39,5 +39,29 @@ const getElementFromSelector = (element: HTMLElement | null): HTMLElement | null
   return selector ? document.querySelector(selector) : null;
 };
 
-export { isElement, getElement, getElementFromSelector, getSelector, getTriggerOrTarget };
+// A native `disabled` attribute on a real form control (e.g. `<button disabled>`) already stops
+// the browser from firing a click event in the first place, so this mostly matters for the
+// `class="disabled"` and `aria-disabled="true"` conventions used on non-form-control triggers
+// (e.g. `<a>`), which do still receive clicks.
+const isDisabled = (element?: SpiritElement): boolean => {
+  if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+    return true;
+  }
+
+  if (element.classList.contains('disabled')) {
+    return true;
+  }
+
+  if (typeof (element as HTMLButtonElement).disabled !== 'undefined') {
+    return (element as HTMLButtonElement).disabled;
+  }
+
+  if (element.hasAttribute('disabled')) {
+    return element.getAttribute('disabled') !== 'false';
+  }
+
+  return element.getAttribute('aria-disabled') === 'true';
+};
+
+export { isElement, getElement, getElementFromSelector, getSelector, getTriggerOrTarget, isDisabled };
 export type { Aim };
