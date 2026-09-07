@@ -246,7 +246,12 @@ describe('Tabs', () => {
         expect(fixtureEl.querySelectorAll('.Tabs__link')).toHaveLength(2);
       });
 
-      btnCloseEl.addEventListener('click', () => {
+      btnCloseEl.addEventListener('click', (event) => {
+        // A close button nested inside a toggle trigger must stop the click from also bubbling
+        // to the tab's own `data-spirit-toggle` delegated listener (which would otherwise try to
+        // activate the tab this test is in the middle of removing).
+        event.stopPropagation();
+
         const linkEl = btnCloseEl.parentNode as HTMLElement;
         const liEl = linkEl.parentNode as HTMLElement;
         const tabId = linkEl.getAttribute('href') as string;

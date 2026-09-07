@@ -349,7 +349,7 @@ describe('Offcanvas', () => {
     it('should focus on trigger element after closing offcanvas', async () => {
       fixtureEl.innerHTML = [
         '<button id="btn" data-spirit-toggle="offcanvas" data-spirit-target="#offcanvas"></button>',
-        '<div id="offcanvas" class="offcanvas"></div>',
+        '<dialog id="offcanvas" class="offcanvas"></dialog>',
       ].join('');
 
       const trigger = fixtureEl.querySelector('#btn') as HTMLElement;
@@ -372,7 +372,7 @@ describe('Offcanvas', () => {
     it('should not focus on trigger element after closing offcanvas, if it is not visible', async () => {
       fixtureEl.innerHTML = [
         '<button id="btn" data-spirit-toggle="offcanvas" data-spirit-target="#offcanvas"></button>',
-        '<div id="offcanvas" class="offcanvas"></div>',
+        '<dialog id="offcanvas" class="offcanvas"></dialog>',
       ].join('');
 
       const trigger = fixtureEl.querySelector('#btn') as HTMLElement;
@@ -380,11 +380,11 @@ describe('Offcanvas', () => {
       const offcanvas = new Offcanvas(offcanvasEl);
       const spy = jest.spyOn(trigger, 'focus');
 
-      offcanvasEl.addEventListener('shown.bs.offcanvas', () => {
+      offcanvasEl.addEventListener('shown.offcanvas', () => {
         trigger.style.display = 'none';
         offcanvas.hide();
       });
-      offcanvasEl.addEventListener('hidden.bs.offcanvas', () => {
+      offcanvasEl.addEventListener('hidden.offcanvas', () => {
         setTimeout(() => {
           expect(spy).not.toHaveBeenCalled();
         }, 5);
