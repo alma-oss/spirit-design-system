@@ -9,7 +9,13 @@ const reflow = (element: HTMLElement): void => {
   element.offsetHeight;
 };
 
-export * from './ComponentFunctions';
+export {
+  enableToggleTrigger,
+  enableDismissTrigger,
+  enableToggleAutoloader,
+  clickOutsideElement,
+} from './ComponentFunctions';
+export { loadComponents } from '../dom/Autoload';
 export * from './Config';
 export { default as Config } from './Config';
 export * from './Debounce';
