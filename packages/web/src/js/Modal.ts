@@ -146,15 +146,21 @@ class Modal extends BaseComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   hide(event: Event & { target: any }) {
     let target;
-    // hiding by resizing
+    // hiding by resizing (or any other call without a real event target)
     if (!event?.target?.dataset) {
       target = this.element;
-      // hiding by clicking
-    } else if (event.target.dataset.spiritTarget) {
-      target = SelectorEngine.findOne(event.target.dataset.spiritTarget);
-      // hiding by keyboard
     } else {
-      target = event.target;
+      // `closest` (not just `event.target.dataset.spiritTarget` directly) so a click landing on a
+      // nested child of the toggle (e.g. an icon inside the button) still resolves to the toggle.
+      const toggleEl = (event.target as Element)?.closest?.('[data-spirit-target]');
+
+      // hiding by clicking
+      if (toggleEl) {
+        target = SelectorEngine.findOne(toggleEl.getAttribute('data-spirit-target'));
+        // hiding by keyboard
+      } else {
+        target = event.target;
+      }
     }
 
     const toggleEl = SelectorEngine.findOne(MODAL_TOGGLE_SELECTOR, this.element);

@@ -120,6 +120,27 @@ describe('Modal', () => {
       // Since it's a div, it won't have a close method
       expect(modalEl).not.toHaveProperty('close');
     });
+
+    it('should close the dialog when the click event.target is a nested child of the toggle', () => {
+      fixtureEl.innerHTML = [
+        '<button data-spirit-toggle="modal" data-spirit-target="#nested-modal"><span class="icon"></span></button>',
+        '<dialog id="nested-modal" class="Modal"><div class="Modal__content"></div></dialog>',
+      ].join('');
+
+      const modalEl = fixtureEl.querySelector('#nested-modal') as HTMLDialogElement;
+      const icon = fixtureEl.querySelector('.icon') as HTMLElement;
+      const modal = new Modal(modalEl);
+
+      modal.show();
+
+      const event = new Event('click');
+      Object.defineProperty(event, 'target', { value: icon });
+
+      modal.hide(event);
+
+      expect(modalEl.classList.contains('is-open')).toBe(false);
+      expect(modalEl.close).toHaveBeenCalled();
+    });
   });
 
   describe('getInstance', () => {
