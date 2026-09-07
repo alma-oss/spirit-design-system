@@ -50,12 +50,17 @@ class Modal extends BaseComponent {
       return;
     }
 
-    if (event.target === this.element || event.target.dataset.spiritDismiss) {
+    // `closest` (not just `event.target.dataset.spiritDismiss` directly) so a click landing on a
+    // nested child of the dismiss button (e.g. an icon inside it) still resolves to the button.
+    const dismissElement =
+      event.target === this.element ? this.element : (event.target as Element)?.closest?.('[data-spirit-dismiss]');
+
+    if (dismissElement) {
       event.preventDefault();
       event.stopPropagation();
       if (
-        !event.target.dataset.spiritCloseOnBackdropClick ||
-        event.target.dataset.spiritCloseOnBackdropClick === 'true'
+        !dismissElement.dataset.spiritCloseOnBackdropClick ||
+        dismissElement.dataset.spiritCloseOnBackdropClick === 'true'
       ) {
         this.hide(event);
       }
@@ -123,8 +128,8 @@ class Modal extends BaseComponent {
       return;
     }
 
-    const toggleEl = SelectorEngine.findOne(MODAL_TOGGLE_SELECTOR, this.element);
-    toggleEl?.setAttribute('aria-expanded', 'true');
+    const toggleElement = SelectorEngine.findOne(MODAL_TOGGLE_SELECTOR, this.element);
+    toggleElement?.setAttribute('aria-expanded', 'true');
 
     // Close the dialog first if it's already open to prevent InvalidStateError
     if (this.element?.open) {
@@ -152,18 +157,18 @@ class Modal extends BaseComponent {
     } else {
       // `closest` (not just `event.target.dataset.spiritTarget` directly) so a click landing on a
       // nested child of the toggle (e.g. an icon inside the button) still resolves to the toggle.
-      const toggleEl = (event.target as Element)?.closest?.('[data-spirit-target]');
+      const toggleElement = (event.target as Element)?.closest?.('[data-spirit-target]');
 
       // hiding by clicking
-      if (toggleEl) {
-        target = SelectorEngine.findOne(toggleEl.getAttribute('data-spirit-target'));
+      if (toggleElement) {
+        target = SelectorEngine.findOne(toggleElement.getAttribute('data-spirit-target'));
         // hiding by keyboard
       } else {
         target = event.target;
       }
     }
 
-    const toggleEl = SelectorEngine.findOne(MODAL_TOGGLE_SELECTOR, this.element);
+    const toggleElement = SelectorEngine.findOne(MODAL_TOGGLE_SELECTOR, this.element);
 
     if (typeof target.close === 'function') {
       // Remove visual state class first to trigger transition
@@ -172,14 +177,14 @@ class Modal extends BaseComponent {
       // Wait for transition to complete before closing
       executeAfterTransition(target, () => {
         target.close();
-        toggleEl?.setAttribute('aria-expanded', 'false');
+        toggleElement?.setAttribute('aria-expanded', 'false');
         this.removeEventListeners();
         this.isShown = false;
         this.scrollControl.enableScroll();
       });
     } else {
       // If no close function, clean up immediately
-      toggleEl?.setAttribute('aria-expanded', 'false');
+      toggleElement?.setAttribute('aria-expanded', 'false');
       this.removeEventListeners();
       this.isShown = false;
       this.scrollControl.enableScroll();

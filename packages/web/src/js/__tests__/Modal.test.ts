@@ -222,6 +222,32 @@ describe('Modal', () => {
 
       expect(modal.hide).toHaveBeenCalled();
     });
+
+    it('should hide the modal when the click event.target is a nested child of the dismiss button', () => {
+      fixtureEl.innerHTML = [
+        '<dialog class="Modal">',
+        '  <button data-spirit-dismiss="modal" data-spirit-target="#nested-dismiss-modal"><span class="icon"></span></button>',
+        '</dialog>',
+      ].join('');
+
+      const dialog = fixtureEl.querySelector('dialog') as HTMLElement;
+      dialog.id = 'nested-dismiss-modal';
+      const icon = fixtureEl.querySelector('.icon') as HTMLElement;
+      const modal = new Modal(dialog);
+
+      const mousedownEvent = new Event('mousedown', { bubbles: true });
+      Object.defineProperty(mousedownEvent, 'target', { writable: false, value: icon });
+      modal.onMouseDown(mousedownEvent);
+
+      const mouseClickEvent = new MouseEvent('click', { bubbles: true, detail: 1 });
+      Object.defineProperty(mouseClickEvent, 'target', { writable: false, value: icon });
+
+      jest.spyOn(modal, 'hide');
+
+      modal.onClick(mouseClickEvent);
+
+      expect(modal.hide).toHaveBeenCalled();
+    });
   });
 
   describe('keyboard accessibility', () => {
