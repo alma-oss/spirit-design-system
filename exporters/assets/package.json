@@ -21,6 +21,7 @@
     "build:compile": "vite build",
     "lint": "eslint ./",
     "lint:fix": "yarn lint --fix",
+    "read-publish-notes": "tsx ./src/bin/read-publish-notes.ts",
     "sync": "tsx ./src/bin/spirit-assets.js sync",
     "test": "npm-run-all --serial lint types build test:unit:coverage",
     "test:unit": "jest",

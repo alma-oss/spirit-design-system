@@ -1,0 +1,34 @@
+import { extractPublishNotesFromDispatch, extractPublishNotesFromVersions } from '../adapters/figma/publishNotes';
+
+describe('extractPublishNotesFromDispatch', () => {
+  it('reads the library publish description from the repository_dispatch payload', () => {
+    expect(extractPublishNotesFromDispatch({ description: 'Update', file_key: 'abc' })).toBe('Update');
+  });
+
+  it.each([undefined, null, '', '   ', 1, {}, []])('ignores missing or invalid payload notes: %p', (payload) => {
+    expect(extractPublishNotesFromDispatch(payload)).toBe('');
+    expect(extractPublishNotesFromDispatch({ description: payload })).toBe('');
+  });
+});
+
+describe('extractPublishNotesFromVersions', () => {
+  it('uses the first version with a description or label', () => {
+    expect(
+      extractPublishNotesFromVersions({
+        versions: [
+          { created_at: '2026-09-08T07:58:00Z', description: '', label: null },
+          { created_at: '2026-09-08T07:57:00Z', description: 'Update', label: 'Autosave' },
+        ],
+      }),
+    ).toBe('Update');
+  });
+
+  it('falls back to the version label when description is empty', () => {
+    expect(extractPublishNotesFromVersions({ versions: [{ description: ' ', label: 'Update' }] })).toBe('Update');
+  });
+
+  it('returns nothing when the versions payload is missing or empty', () => {
+    expect(extractPublishNotesFromVersions({ versions: [] })).toBe('');
+    expect(extractPublishNotesFromVersions({ err: 'Invalid token' })).toBe('');
+  });
+});
