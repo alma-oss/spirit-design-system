@@ -33,5 +33,6 @@ ignore = """\
     ./packages/web-react/ \
     ./apps/demo/ \
     ./packages/web/ \
+    ./packages/icons/ \
     ./.github/workflows/ \
     """

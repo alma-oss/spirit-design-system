@@ -34,6 +34,7 @@ ignore = """\
     ./packages/web-react/src/ \
     ./apps/storybook/ \
     ./packages/web-react/docs/stories/ \
+    ./packages/icons/ \
     """
 
 [[headers]]

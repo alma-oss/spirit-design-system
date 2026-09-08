@@ -31,4 +31,16 @@ describe('extractPublishNotesFromVersions', () => {
     expect(extractPublishNotesFromVersions({ versions: [] })).toBe('');
     expect(extractPublishNotesFromVersions({ err: 'Invalid token' })).toBe('');
   });
+
+  it.each([undefined, null, '', '   ', 1, {}, []])('ignores missing or invalid versions payloads: %p', (payload) => {
+    expect(extractPublishNotesFromVersions(payload)).toBe('');
+  });
+
+  it('skips version entries that are not objects', () => {
+    expect(
+      extractPublishNotesFromVersions({
+        versions: [null, 'skip', [], { description: 'Update' }],
+      }),
+    ).toBe('Update');
+  });
 });
