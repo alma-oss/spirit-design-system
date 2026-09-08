@@ -69,8 +69,8 @@ Illustrations should use a separate target because they are not part of the 24×
 
 ## Usage
 
-Set `FIGMA_ACCESS_TOKEN` to a Figma personal access token with the `file_content:read` scope and access to the Asset
-File, then run:
+Set `FIGMA_ACCESS_TOKEN` to a Figma personal access token with `file_content:read` (and `file_versions:read` if the
+workflow should read publish notes from Figma version history) and access to the Asset File, then run:
 
 ```shell
 yarn icons:sync
@@ -97,8 +97,9 @@ The sync aborts before changing a target when it cannot discover or download the
 This repository runs the **Sync Assets** GitHub Actions workflow. It accepts a manual `workflow_dispatch` or a
 `figma-library-publish` repository dispatch. An external automation such as Make can receive Figma's `LIBRARY_PUBLISH`
 webhook and send that dispatch. The workflow reuses the branch `chore/figma-icons-sync` so a rerun updates the same pull
-request. When Figma publish notes are available on the latest file version, they are added to the pull request body. The
-job runs in the `figma` GitHub Actions environment, which holds the `FIGMA_ACCESS_TOKEN` secret.
+request. Publish notes come from `client_payload.description` on the dispatch, then from Figma version history when the
+token has `file_versions:read`. The job runs in the `figma` GitHub Actions environment, which holds the
+`FIGMA_ACCESS_TOKEN` secret.
 
 Other repositories can copy this workflow:
 

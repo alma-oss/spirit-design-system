@@ -51,25 +51,20 @@ jobs:
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
           FIGMA_FILE_KEY: UMd06VnGrAE5xheb4C8QEg
+          DISPATCH_DESCRIPTION: ${{ github.event.client_payload.description }}
         run: |
-          NOTES=""
-          if RESPONSE="$(curl -fsS -H "X-Figma-Token: ${FIGMA_ACCESS_TOKEN}" \
-            "https://api.figma.com/v1/files/${FIGMA_FILE_KEY}/versions")"; then
-            NOTES="$(printf '%s' "$RESPONSE" | node --input-type=module -e '
-              const chunks = [];
-              process.stdin.on("data", (chunk) => chunks.push(chunk));
-              process.stdin.on("end", () => {
-                try {
-                  const json = JSON.parse(Buffer.concat(chunks).toString("utf8"));
-                  const description = json?.versions?.[0]?.description;
-                  if (typeof description === "string" && description.trim()) {
-                    process.stdout.write(description.trim());
-                  }
-                } catch {
-                  // Missing or invalid version metadata must not fail the sync.
-                }
-              });
-            ')" || true
+          NOTES="$(yarn workspace @alma-oss/spirit-assets-exporter publish-notes)"
+
+          if [ -z "$NOTES" ]; then
+            HTTP_CODE="$(curl -sS -o /tmp/figma-versions.json -w '%{http_code}' \
+              -H "X-Figma-Token: ${FIGMA_ACCESS_TOKEN}" \
+              "https://api.figma.com/v1/files/${FIGMA_FILE_KEY}/versions" || true)"
+
+            if [ "$HTTP_CODE" != "200" ]; then
+              echo "::warning::Figma versions API returned HTTP ${HTTP_CODE}. Grant file_versions:read on FIGMA_ACCESS_TOKEN, or forward the library publish description as repository_dispatch client_payload.description."
+            else
+              NOTES="$(yarn workspace @alma-oss/spirit-assets-exporter publish-notes /tmp/figma-versions.json)"
+            fi
           fi
 
           {

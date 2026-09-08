@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     externalizeDeps(),
     dts({
-      exclude: ['**/__tests__/**', '**/__fixtures__/**'],
+      exclude: ['**/__tests__/**', '**/__fixtures__/**', '**/bin/**'],
       insertTypesEntry: true,
       rollupTypes: false,
     }),
