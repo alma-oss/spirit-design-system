@@ -115,9 +115,8 @@ FIGMA_ACCESS_TOKEN=your-token yarn icons:sync
 The command adds, updates, and deletes SVGs so the directory exactly matches Figma. It does not rewrite icon colors;
 color normalization remains part of the package build.
 
-Maintainers can run the **Sync Assets** workflow from GitHub Actions. It can be started manually or by a Figma library
-publish via external automation. Credentials live in GitHub Actions. The workflow opens or updates a pull request when
-the generated SVGs differ.
+Maintainers can run the **Sync Assets** workflow from GitHub Actions. It discovers repositories that opted in with a
+root `spirit.config.json` `assets` section and opens or updates one pull request per configured target.
 
 [esm-only]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 [figma-assets]: https://www.figma.com/design/UMd06VnGrAE5xheb4C8QEg/Assets

@@ -1,7 +1,7 @@
-import { toAssetFileName } from '../../assetFileName';
-import { ASSET_DISCOVERY } from '../../constants';
-import { AssetDiscoveryError } from '../../errors';
-import type { AssetType } from '../../types';
+import { toAssetFileName } from '../../../assetFileName';
+import { ASSET_DISCOVERY } from '../../../constants';
+import { AssetDiscoveryError } from '../../../errors';
+import type { AssetType } from '../../../types';
 
 export interface FigmaNode {
   id: string;
