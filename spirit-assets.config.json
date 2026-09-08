@@ -3,7 +3,7 @@
   "targets": [
     {
       "brand": "Spirit",
-      "out": "src/svg",
+      "out": "packages/icons/src/svg",
       "assets": ["icons"]
     }
   ]
