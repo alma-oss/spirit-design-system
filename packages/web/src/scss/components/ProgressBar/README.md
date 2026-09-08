@@ -12,6 +12,7 @@ assistive technologies without any extra markup:
   class="ProgressBar color-scheme-on-emotion-informative-subtle"
   value="60"
   max="100"
+  style="--progress-bar-value: 60%"
   aria-label="Profile completeness"
 ></progress>
 ```
@@ -19,8 +20,22 @@ assistive technologies without any extra markup:
 ℹ️ Always set the `value` attribute. A `progress` element without a value renders the browser's own
 indeterminate animation, which cannot be styled.
 
-ℹ️ The width of the filled part is computed by the browser from the `value` attribute, so it cannot be
-transitioned. Set `value` to the new number and the bar jumps to it.
+ℹ️ Always set the `--progress-bar-value` custom property as well and keep it in sync with `value`. The filled
+part is painted from this property, so a ProgressBar without it renders as an empty track. The property is a
+percentage of `max`, not a copy of `value`: with `value="4" max="20"` it is `20%`.
+
+## Animation
+
+The filled part is transitioned, so changing `--progress-bar-value` animates the bar to its new width. Update
+the attribute and the property together:
+
+```js
+progressBar.value = 90;
+progressBar.style.setProperty('--progress-bar-value', '90%');
+```
+
+ℹ️ The transition is wrapped in a `prefers-reduced-motion: no-preference` media query, so the bar jumps
+straight to the new width for users who ask for reduced motion.
 
 ## Colors
 
@@ -28,12 +43,42 @@ The colors come from a [color scheme][color-schemes] class. Pick the `subtle` va
 the subtle background and the filled part uses the basic background of the same scheme.
 
 ```html
-<progress class="ProgressBar color-scheme-on-emotion-informative-subtle" value="60" max="100"></progress>
-<progress class="ProgressBar color-scheme-on-emotion-success-subtle" value="60" max="100"></progress>
-<progress class="ProgressBar color-scheme-on-emotion-warning-subtle" value="60" max="100"></progress>
-<progress class="ProgressBar color-scheme-on-emotion-danger-subtle" value="60" max="100"></progress>
-<progress class="ProgressBar color-scheme-on-selected-subtle" value="60" max="100"></progress>
-<progress class="ProgressBar color-scheme-on-accent-01-subtle" value="60" max="100"></progress>
+<progress
+  class="ProgressBar color-scheme-on-emotion-informative-subtle"
+  value="60"
+  max="100"
+  style="--progress-bar-value: 60%"
+></progress>
+<progress
+  class="ProgressBar color-scheme-on-emotion-success-subtle"
+  value="60"
+  max="100"
+  style="--progress-bar-value: 60%"
+></progress>
+<progress
+  class="ProgressBar color-scheme-on-emotion-warning-subtle"
+  value="60"
+  max="100"
+  style="--progress-bar-value: 60%"
+></progress>
+<progress
+  class="ProgressBar color-scheme-on-emotion-danger-subtle"
+  value="60"
+  max="100"
+  style="--progress-bar-value: 60%"
+></progress>
+<progress
+  class="ProgressBar color-scheme-on-selected-subtle"
+  value="60"
+  max="100"
+  style="--progress-bar-value: 60%"
+></progress>
+<progress
+  class="ProgressBar color-scheme-on-accent-01-subtle"
+  value="60"
+  max="100"
+  style="--progress-bar-value: 60%"
+></progress>
 ```
 
 Without a color scheme class, ProgressBar falls back to the informative colors.
@@ -58,6 +103,7 @@ To the right of the bar:
     class="ProgressBar color-scheme-on-emotion-informative-subtle"
     value="20"
     max="100"
+    style="--progress-bar-value: 20%"
     aria-label="Profile completeness"
   ></progress>
   <span class="typography-caption text-secondary">20%</span>
@@ -72,6 +118,7 @@ Below the bar:
     class="ProgressBar color-scheme-on-accent-01-subtle"
     value="4"
     max="20"
+    style="--progress-bar-value: 20%"
     aria-label="Awards collected"
     aria-valuetext="4 out of 20 awards"
   ></progress>
@@ -97,6 +144,7 @@ any other form field:
     id="progress-bar-label"
     value="60"
     max="100"
+    style="--progress-bar-value: 60%"
   ></progress>
 </div>
 ```
@@ -123,6 +171,7 @@ Associate the [HelperText][readme-helper-text] component with the ProgressBar us
     id="progress-bar-helper-text"
     value="60"
     max="100"
+    style="--progress-bar-value: 60%"
     aria-describedby="progress-bar-helper-text-helper-text"
   ></progress>
   <div class="HelperText" id="progress-bar-helper-text-helper-text">Complete your profile to get more offers</div>
@@ -141,6 +190,7 @@ Pair the matching color scheme with the [ValidationText][readme-validation-text]
     id="progress-bar-success"
     value="100"
     max="100"
+    style="--progress-bar-value: 100%"
     aria-describedby="progress-bar-success-validation-text"
   ></progress>
   <div class="ValidationText ValidationText--success" id="progress-bar-success-validation-text">
@@ -166,6 +216,7 @@ disabled content color up through the `text-color-scheme` helper class:
       id="progress-bar-disabled"
       value="40"
       max="100"
+      style="--progress-bar-value: 40%"
       aria-describedby="progress-bar-disabled-helper-text"
     ></progress>
     <span class="typography-caption text-color-scheme">40%</span>
@@ -195,6 +246,7 @@ Place the ProgressBar inside `File__text` to show the progress of a single uploa
           class="ProgressBar color-scheme-on-emotion-informative-subtle"
           value="60"
           max="100"
+          style="--progress-bar-value: 60%"
           aria-label="Uploading Document.pdf"
           aria-describedby="file-upload-status"
         ></progress>
@@ -216,9 +268,30 @@ Place the ProgressBar inside `File__text` to show the progress of a single uploa
 - Do not rely on the color alone to communicate success or failure. Pair it with the value or with the
   [ValidationText][readme-validation-text] component.
 
+When the ProgressBar tracks the loading of a region of the page, set `aria-busy="true"` on that region and
+point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` once loading has finished:
+
+```html
+<div id="offers" aria-busy="true" aria-describedby="offers-progress">
+  <!-- … the content of this region is loading … -->
+</div>
+
+<progress
+  class="ProgressBar color-scheme-on-emotion-informative-subtle"
+  id="offers-progress"
+  value="60"
+  max="100"
+  style="--progress-bar-value: 60%"
+  aria-label="Loading offers"
+></progress>
+```
+
+👉 See [Describing a particular region][mdn-progress-region] for more information.
+
 [color-schemes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/README.md#color-schemes
 [component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
 [mdn-progress]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
+[mdn-progress-region]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/progress#describing_a_particular_region
 [readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
 [readme-flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Flex/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md

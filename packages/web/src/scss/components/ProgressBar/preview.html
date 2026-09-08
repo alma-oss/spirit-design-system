@@ -12,6 +12,7 @@
         class="ProgressBar color-scheme-on-emotion-informative-subtle"
         value="60"
         max="100"
+        style="--progress-bar-value: 60%"
         aria-label="Profile completeness"
       ></progress>
     </div>
@@ -36,11 +37,45 @@
           class="ProgressBar color-scheme-on-emotion-informative-subtle"
           value="{{completion}}"
           max="100"
+          style="--progress-bar-value: {{completion}}%"
           aria-label="Profile completeness"
         ></progress>
         <span class="typography-caption text-secondary">{{completion}}%</span>
       </div>
       {{/each}}
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Animation</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+      <div
+        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter"
+        style="--flex-spacing-x: var(--spirit-space-600);"
+      >
+        <progress
+          class="ProgressBar color-scheme-on-emotion-informative-subtle"
+          id="progress-bar-animated"
+          value="30"
+          max="100"
+          style="--progress-bar-value: 30%"
+          aria-label="Profile completeness"
+        ></progress>
+        <span class="typography-caption text-secondary" id="progress-bar-animated-value">30%</span>
+      </div>
+
+      <div class="Flex Flex--horizontal" style="--flex-spacing-x: var(--spirit-space-500);">
+        <button type="button" class="Button Button--medium Button--primary" data-progress-bar-value="10">10%</button>
+        <button type="button" class="Button Button--medium Button--primary" data-progress-bar-value="50">50%</button>
+        <button type="button" class="Button Button--medium Button--primary" data-progress-bar-value="90">90%</button>
+      </div>
     </div>
 
   </div>
@@ -64,6 +99,7 @@
           class="ProgressBar color-scheme-on-emotion-informative-subtle"
           value="20"
           max="100"
+          style="--progress-bar-value: 20%"
           aria-label="Profile completeness"
         ></progress>
         <span class="typography-caption text-secondary">20%</span>
@@ -75,6 +111,7 @@
           class="ProgressBar color-scheme-on-emotion-informative-subtle"
           value="4"
           max="20"
+          style="--progress-bar-value: 20%"
           aria-label="Awards collected"
           aria-valuetext="4 out of 20 awards"
         ></progress>
@@ -86,6 +123,7 @@
         class="ProgressBar color-scheme-on-emotion-informative-subtle"
         value="20"
         max="100"
+        style="--progress-bar-value: 20%"
         aria-label="Profile completeness"
       ></progress>
 
@@ -113,6 +151,7 @@
             class="ProgressBar color-scheme-on-{{colorScheme}}-subtle"
             value="60"
             max="100"
+            style="--progress-bar-value: 60%"
             aria-label="{{colorScheme}}"
           ></progress>
           <span class="typography-caption text-secondary">60%</span>
@@ -144,6 +183,7 @@
             id="progress-bar-helper-text"
             value="60"
             max="100"
+            style="--progress-bar-value: 60%"
             aria-describedby="progress-bar-helper-text-helper-text"
           ></progress>
           <span class="typography-caption text-secondary">60%</span>
@@ -162,12 +202,40 @@
             id="progress-bar-validation-text"
             value="100"
             max="100"
+            style="--progress-bar-value: 100%"
             aria-describedby="progress-bar-validation-text-validation-text"
           ></progress>
           <span class="typography-caption text-secondary">100%</span>
         </div>
         <div class="ValidationText ValidationText--success" id="progress-bar-validation-text-validation-text">
           Your profile is complete
+        </div>
+      </div>
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+        <label for="progress-bar-validation-text-icon" class="Label">Profile completeness</label>
+        <div
+          class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter"
+          style="--flex-spacing-x: var(--spirit-space-600);"
+        >
+          <progress
+            class="ProgressBar color-scheme-on-emotion-danger-subtle"
+            id="progress-bar-validation-text-icon"
+            value="20"
+            max="100"
+            style="--progress-bar-value: 20%"
+            aria-describedby="progress-bar-validation-text-icon-helper-text progress-bar-validation-text-icon-validation-text"
+          ></progress>
+          <span class="typography-caption text-secondary">20%</span>
+        </div>
+        <div class="HelperText" id="progress-bar-validation-text-icon-helper-text">
+          Complete your profile to get more offers
+        </div>
+        <div class="ValidationText ValidationText--danger" id="progress-bar-validation-text-icon-validation-text">
+          <svg class="Icon" width="20" height="20" aria-hidden="true">
+            <use href="/assets/icons/svg/sprite.svg#danger" />
+          </svg>
+          <div>Add your work experience to continue</div>
         </div>
       </div>
 
@@ -195,6 +263,7 @@
             id="progress-bar-disabled"
             value="40"
             max="100"
+            style="--progress-bar-value: 40%"
             aria-describedby="progress-bar-disabled-helper-text"
           ></progress>
           <span class="typography-caption text-color-scheme">40%</span>
@@ -238,6 +307,7 @@
                   class="ProgressBar color-scheme-on-emotion-informative-subtle"
                   value="60"
                   max="100"
+                  style="--progress-bar-value: 60%"
                   aria-label="Uploading Document.pdf"
                   aria-describedby="file-upload-status"
                 ></progress>
@@ -267,3 +337,18 @@
   </div>
 
 </section>
+
+<script>
+  const animatedProgressBar = document.getElementById('progress-bar-animated');
+  const animatedProgressBarValue = document.getElementById('progress-bar-animated-value');
+
+  document.querySelectorAll('[data-progress-bar-value]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const value = Number(button.dataset.progressBarValue);
+
+      animatedProgressBar.value = value;
+      animatedProgressBar.style.setProperty('--progress-bar-value', `${value}%`);
+      animatedProgressBarValue.textContent = `${value}%`;
+    });
+  });
+</script>

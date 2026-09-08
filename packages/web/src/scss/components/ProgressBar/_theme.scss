@@ -1,7 +1,12 @@
+@use 'sass:math';
 @use '@tokens' as tokens;
 
 $height: tokens.$space-400;
 $border-radius: tokens.$radius-200;
+
+// The indicator is painted as a background layer, so its rounded cap has to be drawn explicitly. Half the height
+// matches the pill shape the track renders at this size.
+$indicator-cap-radius: math.div($height, 2);
 
 // Used when no color scheme class is present.
 $track-background: tokens.$emotion-informative-background-subtle;

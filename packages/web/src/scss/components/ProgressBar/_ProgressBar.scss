@@ -5,12 +5,23 @@
 // 3. Firefox renders a border by default.
 // 4. Lets the bar shrink to the remaining width inside a horizontal Flex instead of being blocked by the intrinsic
 //    width of the `progress` element.
-// 5. The width of the indicator is computed by the browser from the `value` attribute, so it cannot be transitioned.
-//    Rewriting the component to `div` elements would be needed to animate it.
+// 5. The width of the native indicator is computed by the browser from the `value` attribute and cannot be
+//    transitioned. The indicator is therefore painted as background layers of the element: a body layer sized by
+//    `--progress-bar-value`, and a cap layer that keeps the leading edge rounded the way the native indicator was.
+//    Registering `--progress-bar-value` with `@property` is what makes it interpolable, and hence animatable.
+// 6. The native indicator would paint over the background layers, so it is hidden in all engines.
 
+@use '../../settings/transitions';
 @use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use 'theme';
+
+// 5.
+@property --progress-bar-value {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 0%;
+}
 
 .ProgressBar {
     appearance: none;
@@ -20,25 +31,37 @@
     height: theme.$height;
     border: 0; // 3.
     border-radius: theme.$border-radius;
-    background-color: color-scheme.background-color-subtle(theme.$track-background); // 2.
+
+    // 2., 5.
+    background:
+        radial-gradient(
+                circle #{theme.$indicator-cap-radius} at calc(100% - #{theme.$indicator-cap-radius}) 50%,
+                color-scheme.background-color-basic(theme.$indicator-background) 100%,
+                transparent 100%
+            )
+            0 0 / var(--progress-bar-value) 100% no-repeat,
+        linear-gradient(color-scheme.background-color-basic(theme.$indicator-background) 0 0) 0 0 /
+            calc(var(--progress-bar-value) - #{theme.$indicator-cap-radius}) 100% no-repeat,
+        color-scheme.background-color-subtle(theme.$track-background);
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: --progress-bar-value transitions.$duration-300 transitions.$timing-eased-in-out;
+    }
 }
 
-// 1., 2.
+// 1., 2., 6.
 .ProgressBar::-webkit-progress-bar {
-    border-radius: theme.$border-radius;
-    background-color: color-scheme.background-color-subtle(theme.$track-background);
+    background: transparent;
 }
 
-// 1., 5.
+// 1., 6.
 .ProgressBar::-webkit-progress-value {
-    border-radius: theme.$border-radius;
-    background-color: color-scheme.background-color-basic(theme.$indicator-background);
+    background: transparent;
 }
 
-// 1., 5.
+// 1., 6.
 .ProgressBar::-moz-progress-bar {
-    border-radius: theme.$border-radius;
-    background-color: color-scheme.background-color-basic(theme.$indicator-background);
+    background: transparent;
 }
 
 @include component-color-overrides.generate(
