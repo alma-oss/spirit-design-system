@@ -69,8 +69,8 @@ Illustrations should use a separate target because they are not part of the 24×
 
 ## Usage
 
-Set `FIGMA_ACCESS_TOKEN` to a Figma personal access token with `file_content:read` (and `file_versions:read` if the
-workflow should read publish notes from Figma version history) and access to the Asset File, then run:
+Set `FIGMA_ACCESS_TOKEN` to a Figma personal access token with `file_content:read` and access to the Asset File, then
+run:
 
 ```shell
 yarn icons:sync
@@ -94,40 +94,11 @@ The sync aborts before changing a target when it cannot discover or download the
 
 ## Automated Delivery
 
-This repository runs the **Sync Assets** GitHub Actions workflow. It accepts a manual `workflow_dispatch` or a
-`figma-library-publish` repository dispatch. An external automation such as Make can receive Figma's `LIBRARY_PUBLISH`
-webhook and send that dispatch. The workflow reuses the branch `chore/figma-icons-sync` so a rerun updates the same pull
-request. Publish notes come from `client_payload.description` on the dispatch, then from Figma version history when the
-token has `file_versions:read`. The job runs in the `figma` GitHub Actions environment, which holds the
-`FIGMA_ACCESS_TOKEN` secret.
+This repository runs a GitHub Actions workflow that synchronizes icons from Figma. It can be started manually or by a
+Figma library publish via external automation. Credentials live in GitHub Actions. The workflow opens or updates a pull
+request when the generated SVGs differ.
 
-Other repositories can copy this workflow:
-
-```yaml
-name: Sync Assets
-
-on:
-  workflow_dispatch:
-  repository_dispatch:
-    types:
-      - figma-library-publish
-
-jobs:
-  sync:
-    runs-on: ubuntu-24.04
-    environment: figma
-    steps:
-      - uses: actions/checkout@v7
-      - uses: ./.github/actions/setup-install
-      - run: yarn icons:sync
-        env:
-          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
-      - uses: peter-evans/create-pull-request@v8
-        with:
-          branch: chore/figma-icons-sync
-          commit-message: 'chore(icons): sync icons from Figma'
-          title: 'Chore(icons): Sync icons from Figma'
-```
+Other repositories can set up a similar workflow to run the CLI and open a pull request.
 
 Cyborg delivery is planned, not implemented: configuration stays in this repository, and a GitHub Action would open a
 commit and pull request in Cyborg. Until then, Cyborg does not run this CLI.

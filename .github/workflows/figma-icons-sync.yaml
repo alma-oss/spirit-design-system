@@ -11,17 +11,43 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  check-figma-file:
+    name: Check Figma file
+    runs-on: ubuntu-24.04
+    environment: figma
+    timeout-minutes: 5
+    env:
+      FIGMA_FILE_KEY: ${{ vars.FIGMA_FILE_KEY }}
+    outputs:
+      matched: ${{ steps.file-key.outputs.matched }}
+
+    steps:
+      - name: Check Figma file key
+        id: file-key
+        env:
+          DISPATCH_FILE_KEY: ${{ github.event.client_payload.file_key }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          MATCHED=false
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] || [ "$DISPATCH_FILE_KEY" = "$FIGMA_FILE_KEY" ]; then
+            MATCHED=true
+          fi
+          echo "matched=$MATCHED" >> "$GITHUB_OUTPUT"
+          if [ "$MATCHED" = "false" ]; then
+            echo "Skipping sync: published Figma file does not match this repository."
+          fi
+
   sync:
     name: Sync Figma Assets
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.action == 'figma-library-publish' &&
-      github.event.client_payload.file_key == 'UMd06VnGrAE5xheb4C8QEg')
+    needs: check-figma-file
+    if: ${{ needs.check-figma-file.outputs.matched == 'true' }}
     runs-on: ubuntu-24.04
     environment: figma
     timeout-minutes: 15
     permissions:
       contents: read
+    env:
+      FIGMA_FILE_KEY: ${{ vars.FIGMA_FILE_KEY }}
 
     steps:
       - name: Generate GitHub App token
@@ -50,10 +76,9 @@ jobs:
         id: figma-notes
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
-          FIGMA_FILE_KEY: UMd06VnGrAE5xheb4C8QEg
           DISPATCH_DESCRIPTION: ${{ github.event.client_payload.description }}
         run: |
-          NOTES="$(yarn workspace @alma-oss/spirit-assets-exporter publish-notes)"
+          NOTES="$(yarn workspace @alma-oss/spirit-assets-exporter read-publish-notes)"
 
           if [ -z "$NOTES" ]; then
             HTTP_CODE="$(curl -sS -o /tmp/figma-versions.json -w '%{http_code}' \
@@ -63,7 +88,7 @@ jobs:
             if [ "$HTTP_CODE" != "200" ]; then
               echo "::warning::Figma versions API returned HTTP ${HTTP_CODE}. Grant file_versions:read on FIGMA_ACCESS_TOKEN, or forward the library publish description as repository_dispatch client_payload.description."
             else
-              NOTES="$(yarn workspace @alma-oss/spirit-assets-exporter publish-notes /tmp/figma-versions.json)"
+              NOTES="$(yarn workspace @alma-oss/spirit-assets-exporter read-publish-notes /tmp/figma-versions.json)"
             fi
           fi
 
