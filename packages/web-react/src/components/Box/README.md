@@ -9,7 +9,8 @@ The Box component is a simple container around content or other components.
 ## Color Scheme
 
 Use the `colorScheme` prop as the preferred way to apply a semantic surface with matching background, text, and border behavior.
-For what color schemes are and how they relate to CSS classes and tokens, see [Color schemes in `web` package][web-readme-color-scheme].
+For what color schemes are and how they relate to CSS classes and tokens, see the [Color Schemes][color-schemes-guide] guide
+and [Color schemes in `web` package][web-readme-color-scheme].
 
 It adds the matching `color-scheme-on-*` class and, by default, scheme-backed `bg-color-scheme`, `text-color-scheme`, and (when `borderWidth` is greater than `0` and `borderColor` is not set) `border-color-scheme` utilities.
 
@@ -133,6 +134,7 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
+[color-schemes-guide]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/color-schemes.md
 [dictionary-border]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#border
 [dictionary-color]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#color
 [dictionary-gradient]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#gradient
