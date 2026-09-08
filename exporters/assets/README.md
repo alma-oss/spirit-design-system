@@ -97,7 +97,8 @@ The sync aborts before changing a target when it cannot discover or download the
 This repository runs the **Sync Assets** GitHub Actions workflow. It accepts a manual `workflow_dispatch` or a
 `figma-library-publish` repository dispatch. An external automation such as Make can receive Figma's `LIBRARY_PUBLISH`
 webhook and send that dispatch. The workflow reuses the branch `chore/figma-icons-sync` so a rerun updates the same pull
-request. When Figma publish notes are available on the latest file version, they are added to the pull request body.
+request. When Figma publish notes are available on the latest file version, they are added to the pull request body. The
+job runs in the `figma` GitHub Actions environment, which holds the `FIGMA_ACCESS_TOKEN` secret.
 
 Other repositories can copy this workflow:
 
@@ -113,6 +114,7 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-24.04
+    environment: figma
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-install
