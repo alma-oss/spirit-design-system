@@ -20,9 +20,9 @@ don't need to type the slash command.
 4. Confirms the Jira issue ID if none was already given
 5. Drafts one Conventional Commit message per group, following the repo's
    `type(scope): description #DS-XXXX` format
-6. Shows the full grouping and messages for review as an interactive confirmation (e.g. Claude
-   Code's `AskUserQuestion`), including whether each group is a new commit or a `--fixup` of an
-   existing one
+6. Shows the full grouping and messages for review as an interactive confirmation (the agent's
+   native tool for asking questions), including whether each group is a new commit or a
+   `--fixup` of an existing one
 7. Stages each group at hunk granularity and commits it through `git` (never `--no-verify`)
 
 ## Setup

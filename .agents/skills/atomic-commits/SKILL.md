@@ -27,6 +27,10 @@ granularity, then commit through the normal `git` path so hooks (commitlint, etc
 - **No AI attribution.** Do not add "Generated with Claude Code", `Co-authored-by`, or similar
   trailers.
 - **Pushing is out of scope.** Stop after committing unless the user explicitly asked to push.
+- **Interactive confirmation.** Wherever this skill says to confirm something with the user, use
+  the agent's native tool for asking questions with selectable options; if the agent has no such
+  tool, ask a plain question listing the options (e.g. numbered) and wait for the reply before
+  proceeding.
 - **Ask before committing.** Always confirm with the user before creating any commit: whether
   each group should be a new commit or a `--fixup` of an existing commit (and which hash), per
   [Fixup Commits][fixup-commits].
@@ -44,8 +48,8 @@ command -v git-surgeon
 ```
 
 - **Available:** use it for all staging in this workflow (Steps 2 and 6).
-- **Not available:** tell the user it's missing and offer to install it before continuing, e.g.
-  via `AskUserQuestion` with options **Install now** / **Continue without it**:
+- **Not available:** tell the user it's missing and offer to install it before continuing —
+  interactive confirmation with options **Install now** / **Continue without it**:
 
   ```bash
   brew install raine/git-surgeon/git-surgeon
@@ -103,13 +107,14 @@ Omit the body for trivial commits (e.g. `chore(deps): bump lerna to 8.1.0`).
 ### Step 5: Confirm the Plan
 
 First collect, for **each** group, whether it should be a **new commit** or a **fixup** of an
-existing commit. Use `AskUserQuestion` with one question per group (options: **New commit** /
+existing commit — one interactive confirmation per group (options: **New commit** /
 **Fixup into `<hash>`** — list the relevant existing commit hash(es) from `git log` as separate
 options so the user picks the hash directly, rather than typing it as free text).
 
-Then use a second `AskUserQuestion` call to present the full plan — groups → hunk IDs → messages
-→ the new-commit-or-fixup choice just collected for each group — before touching git. Put the
-complete plan in the `preview` of the first option:
+Then present a second interactive confirmation with the full plan — groups → hunk IDs → messages
+→ the new-commit-or-fixup choice just collected for each group — before touching git. If the
+native tool supports a preview or detail field, put the complete plan there; otherwise print the
+plan in the question text itself:
 
 - **Apply it** (preview: the full grouping + messages + mode/hash per group) — create the
   commits as proposed.
