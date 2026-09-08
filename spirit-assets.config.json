@@ -1,0 +1,12 @@
+{
+  "assets": {
+    "fileKey": "UMd06VnGrAE5xheb4C8QEg",
+    "targets": [
+      {
+        "brand": "Spirit",
+        "out": "packages/icons/src/svg",
+        "assets": ["icons"]
+      }
+    ]
+  }
+}
