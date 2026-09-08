@@ -21,6 +21,14 @@ export interface ResolvedSyncTarget extends SyncTarget {
 
 export interface ResolvedAssetsConfig extends AssetsConfig {
   targets: ResolvedSyncTarget[];
+  configPath: string;
+  repositoryRoot?: string;
+}
+
+export interface SyncConfig {
+  fileKey: string;
+  repositoryRoot?: string;
+  targets: ResolvedSyncTarget[];
 }
 
 export interface SyncChange {
@@ -53,7 +61,7 @@ export type AssetExporter = (
 ) => Promise<ExportedAsset[]>;
 
 export interface SyncOptions {
-  config: ResolvedAssetsConfig;
+  config: SyncConfig;
   token: string;
   fetch?: typeof fetch;
   exportAssets?: AssetExporter;

@@ -1,4 +1,4 @@
-import { chmod, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { chmod, mkdir, mkdtemp, readFile, readdir, rm, symlink, unlink, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 
@@ -53,6 +53,28 @@ describe('syncAssets', () => {
       });
 
       expect(repeatedResult.targets[0].changes).toEqual([]);
+    } finally {
+      await rm(temporaryDirectory, { recursive: true, force: true });
+    }
+  });
+
+  it('writes inside a repository root after rechecking containment', async () => {
+    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-contained-'));
+    const outputDirectory = path.join(temporaryDirectory, 'svg');
+
+    try {
+      const result = await syncAssets({
+        config: {
+          fileKey: 'figma-file',
+          repositoryRoot: temporaryDirectory,
+          targets: [{ brand: 'Spirit', out: outputDirectory, assets: ['icons'] }],
+        },
+        token: 'test-token',
+        exportAssets: async () => [{ name: 'contained', svg: '<svg />\n' }],
+      });
+
+      expect(result.targets[0].exported).toBe(1);
+      expect(await readFile(path.join(outputDirectory, 'contained.svg'), 'utf8')).toBe('<svg />\n');
     } finally {
       await rm(temporaryDirectory, { recursive: true, force: true });
     }
@@ -139,6 +161,82 @@ describe('syncAssets', () => {
       expect(await readdir(outputDirectory)).toEqual(['existing.svg']);
     } finally {
       await rm(temporaryDirectory, { recursive: true, force: true });
+    }
+  });
+
+  it('refuses to write outside the repository root', async () => {
+    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-escape-'));
+
+    try {
+      await expect(
+        syncAssets({
+          config: {
+            fileKey: 'figma-file',
+            repositoryRoot: temporaryDirectory,
+            targets: [{ brand: 'Spirit', out: path.join(os.tmpdir(), 'spirit-assets-outside'), assets: ['icons'] }],
+          },
+          token: 'test-token',
+          fetch: createFigmaFetch(),
+        }),
+      ).rejects.toThrow(/outside the repository/);
+    } finally {
+      await rm(temporaryDirectory, { recursive: true, force: true });
+    }
+  });
+
+  it('refuses to follow output path symlinks', async () => {
+    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-sync-link-'));
+
+    try {
+      const outside = path.join(temporaryDirectory, 'outside');
+      const linked = path.join(temporaryDirectory, 'svg');
+      await mkdir(outside);
+      await symlink(outside, linked);
+
+      await expect(
+        syncAssets({
+          config: {
+            fileKey: 'figma-file',
+            repositoryRoot: temporaryDirectory,
+            targets: [{ brand: 'Spirit', out: linked, assets: ['icons'] }],
+          },
+          token: 'test-token',
+          fetch: createFigmaFetch(),
+        }),
+      ).rejects.toThrow(/symlink/);
+    } finally {
+      await rm(temporaryDirectory, { recursive: true, force: true });
+    }
+  });
+
+  it.each([
+    ['matching', 'icon'],
+    ['orphan', 'orphan'],
+  ])('refuses to follow a %s SVG file symlink', async (_scenario, symlinkName) => {
+    const repositoryRoot = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-sync-file-link-'));
+    const outputDirectory = path.join(repositoryRoot, 'svg');
+    const victimPath = path.join(os.tmpdir(), `spirit-assets-victim-${crypto.randomUUID()}.svg`);
+
+    try {
+      await mkdir(outputDirectory);
+      await writeFile(victimPath, '<svg>private</svg>\n');
+      await symlink(victimPath, path.join(outputDirectory, `${symlinkName}.svg`));
+
+      await expect(
+        syncAssets({
+          config: {
+            fileKey: 'figma-file',
+            repositoryRoot,
+            targets: [{ brand: 'Spirit', out: outputDirectory, assets: ['icons'] }],
+          },
+          token: 'test-token',
+          exportAssets: async () => [{ name: 'icon', svg: '<svg>updated</svg>\n' }],
+        }),
+      ).rejects.toThrow(/symlink/);
+      await expect(readFile(victimPath, 'utf8')).resolves.toBe('<svg>private</svg>\n');
+    } finally {
+      await rm(repositoryRoot, { recursive: true, force: true });
+      await unlink(victimPath).catch(() => undefined);
     }
   });
 });

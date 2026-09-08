@@ -1,4 +1,4 @@
-import { extractPublishNotesFromDispatch, extractPublishNotesFromVersions } from '../adapters/figma/publishNotes';
+import { extractPublishNotesFromDispatch, extractPublishNotesFromVersions } from '../sync/adapters/figma/publishNotes';
 
 describe('extractPublishNotesFromDispatch', () => {
   it('reads the library publish description from the repository_dispatch payload', () => {

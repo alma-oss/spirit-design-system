@@ -1,0 +1,188 @@
+name: 🎨 Sync Assets
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - figma-library-publish
+
+concurrency:
+  group: figma-assets-sync
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    name: Discover sync targets
+    runs-on: ubuntu-24.04
+    environment: figma
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    outputs:
+      has-targets: ${{ steps.discover.outputs.has-targets }}
+      matrix: ${{ steps.discover.outputs.matrix }}
+
+    steps:
+      - name: Checkout Spirit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Node and Install Dependencies
+        uses: ./.github/actions/setup-install
+
+      - name: Discover opted-in repositories
+        id: discover
+        env:
+          DISPATCH_FILE_KEY: ${{ github.event.client_payload.file_key }}
+          GH_APP_CLIENT_ID: ${{ secrets.GH_APP_CLIENT_ID }}
+          GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
+        run: yarn workspace @alma-oss/spirit-assets-exporter discover
+
+      - name: Build sync CLI
+        if: ${{ steps.discover.outputs.has-targets == 'true' }}
+        run: yarn workspace @alma-oss/spirit-assets-exporter build:ci
+
+      - name: Upload sync CLI
+        if: ${{ steps.discover.outputs.has-targets == 'true' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: spirit-assets-cli
+          path: exporters/assets/dist-ci/spirit-assets.mjs
+
+  sync:
+    name: Synchronize assets
+    needs: discover
+    if: ${{ needs.discover.outputs.has-targets == 'true' }}
+    runs-on: ubuntu-24.04
+    environment: figma
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix: ${{ fromJSON(needs.discover.outputs.matrix) }}
+    permissions:
+      contents: read
+
+    steps:
+      - name: Register private metadata masks
+        env:
+          BASE: ${{ matrix.base }}
+          BRANCH: ${{ matrix.branch }}
+          BRAND: ${{ matrix.brand }}
+          COMMIT_MESSAGE: ${{ matrix.commitMessage }}
+          OUT: ${{ matrix.out }}
+          OWNER: ${{ matrix.owner }}
+          REF: ${{ matrix.ref }}
+          REPO: ${{ matrix.repo }}
+          SLUG: ${{ matrix.slug }}
+          TITLE: ${{ matrix.title }}
+        run: |
+          set +x
+          escape_and_mask() {
+            local value="$1"
+            value="${value//'%'/'%25'}"
+            value="${value//$'\r'/'%0D'}"
+            value="${value//$'\n'/'%0A'}"
+            printf '::add-mask::%s\n' "$value"
+          }
+
+          for value in "$BASE" "$BRANCH" "$BRAND" "$COMMIT_MESSAGE" "$OUT" "$OWNER" "$REF" "$REPO" "$SLUG" "$TITLE" "$OWNER/$REPO"; do
+            if [ -n "$value" ]; then
+              escape_and_mask "$value"
+            fi
+          done
+
+      - name: Setup Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: '22'
+
+      - name: Download sync CLI
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: spirit-assets-cli
+
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ secrets.GH_APP_CLIENT_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          owner: ${{ matrix.owner }}
+          repositories: ${{ matrix.repo }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Checkout target repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: ${{ matrix.owner }}/${{ matrix.repo }}
+          token: ${{ steps.app-token.outputs.token }}
+          path: target
+          ref: ${{ matrix.ref }}
+          fetch-depth: 1
+          sparse-checkout: |
+            /spirit.config.json
+            /${{ matrix.out }}/
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+          show-progress: false
+
+      - name: Sync assets from Figma
+        run: |
+          node spirit-assets.mjs sync \
+            --config=target/spirit.config.json \
+            --repository-root=target \
+            --brand="$BRAND" \
+            --out="$OUT" \
+            --publish-notes-path="$NOTES_PATH"
+        env:
+          BRAND: ${{ matrix.brand }}
+          DISPATCH_DESCRIPTION: ${{ github.event.client_payload.description }}
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+          NOTES_PATH: ${{ runner.temp }}/figma-publish-notes.txt
+          OUT: ${{ matrix.out }}
+
+      - name: Build pull request body
+        env:
+          BRAND: ${{ matrix.brand }}
+          NOTES_PATH: ${{ runner.temp }}/figma-publish-notes.txt
+          PR_BODY_PATH: ${{ runner.temp }}/figma-pr-body.md
+        run: |
+          {
+            printf '%s\n\n' '## Summary'
+            printf '%s\n' "- synchronize ${BRAND} SVG icons directly from the configured Figma file"
+            printf '%s\n\n' "- add, update, or remove icons to match the configured \`Brand=${BRAND}\` variants"
+            if [ -s "$NOTES_PATH" ]; then
+              printf '%s\n\n' '## Figma Publish Notes'
+              cat "$NOTES_PATH"
+              printf '\n'
+            fi
+            printf '%s\n' 'This pull request is managed by the Figma asset sync workflow in alma-oss/spirit-design-system.'
+          } > "$PR_BODY_PATH"
+
+      - name: Open or update pull request
+        env:
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+          BASE: ${{ matrix.base }}
+          BRANCH: ${{ matrix.branch }}
+          COMMIT_MESSAGE: ${{ matrix.commitMessage }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          OUT: ${{ matrix.out }}
+          OWNER: ${{ matrix.owner }}
+          PR_BODY_PATH: ${{ runner.temp }}/figma-pr-body.md
+          REPO: ${{ matrix.repo }}
+          TITLE: ${{ matrix.title }}
+        run: |
+          node spirit-assets.mjs deliver \
+            --app-slug="$APP_SLUG" \
+            --base="$BASE" \
+            --body-path "$PR_BODY_PATH" \
+            --branch="$BRANCH" \
+            --commit-message="$COMMIT_MESSAGE" \
+            --out="$OUT" \
+            --owner="$OWNER" \
+            --repo="$REPO" \
+            --repository-root=target \
+            --title="$TITLE"

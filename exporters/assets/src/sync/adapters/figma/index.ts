@@ -1,6 +1,6 @@
-import { SVG_EXTENSION } from '../../constants';
-import { AssetDiscoveryError, FigmaApiError } from '../../errors';
-import type { AssetType, ExportedAsset } from '../../types';
+import { SVG_EXTENSION } from '../../../constants';
+import { AssetDiscoveryError, FigmaApiError } from '../../../errors';
+import type { AssetType, ExportedAsset } from '../../../types';
 import { chunk, DOWNLOAD_BATCH_SIZE, downloadSvg, EXPORT_BATCH_SIZE, FIGMA_API_URL, requestJson } from './client';
 import { discoverAssetNodes, type FigmaFileResponse, type FigmaImagesResponse } from './parser';
 

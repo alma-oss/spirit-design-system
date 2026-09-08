@@ -21,6 +21,7 @@
     "build:compile": "vite build",
     "lint": "eslint ./",
     "lint:fix": "yarn lint --fix",
+    "discover": "tsx ./src/bin/spirit-assets.js discover",
     "read-publish-notes": "tsx ./src/bin/read-publish-notes.ts",
     "sync": "tsx ./src/bin/spirit-assets.js sync",
     "test": "npm-run-all --serial lint types build test:unit:coverage",
@@ -30,6 +31,7 @@
   },
   "dependencies": {
     "cosmiconfig": "catalog:script",
+    "octokit": "catalog:script",
     "sade": "catalog:script",
     "zod": "catalog:script"
   },
