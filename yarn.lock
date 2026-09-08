@@ -50,6 +50,38 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@alma-oss/spirit-assets-exporter@workspace:^, @alma-oss/spirit-assets-exporter@workspace:exporters/assets":
+  version: 0.0.0-use.local
+  resolution: "@alma-oss/spirit-assets-exporter@workspace:exporters/assets"
+  dependencies:
+    "@eslint/compat": "catalog:lint"
+    "@eslint/eslintrc": "catalog:lint"
+    "@lmc-eu/eslint-config-jest": "catalog:lint"
+    "@lmc-eu/eslint-config-typescript": "catalog:lint"
+    "@swc/core": "catalog:build"
+    "@swc/jest": "catalog:test"
+    "@types/jest": "catalog:types"
+    "@types/node": "catalog:types"
+    cosmiconfig: "catalog:script"
+    eslint: "catalog:lint"
+    eslint-config-spirit: "workspace:^"
+    jest: "catalog:test"
+    jest-config-spirit: "workspace:^"
+    npm-run-all2: "catalog:script"
+    prettier-config-spirit: "workspace:^"
+    sade: "catalog:script"
+    shx: "catalog:script"
+    tsx: "catalog:script"
+    typescript: "catalog:types"
+    vite: "catalog:build"
+    vite-plugin-dts: "catalog:build"
+    vite-plugin-externalize-deps: "catalog:build"
+    zod: "catalog:script"
+  bin:
+    spirit-assets-exporter: ./dist/bin/spirit-assets.js
+  languageName: unknown
+  linkType: soft
+
 "@alma-oss/spirit-codemods@workspace:packages/codemods":
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-codemods@workspace:packages/codemods"
@@ -227,6 +259,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-icons@workspace:packages/icons"
   dependencies:
+    "@alma-oss/spirit-assets-exporter": "workspace:^"
     "@alma-oss/vite-plugin-spirit-icons": "workspace:^"
     "@types/node": "catalog:types"
     "@types/react": "catalog:types"
@@ -15816,6 +15849,23 @@ __metadata:
     typescript:
       optional: true
   checksum: 10/8bdf1dfbb6fdb3755195b6886dc0649a3c742ec75afa4cb8da7b070936aed22a4f4e5b7359faafe03180358f311dbc300d248fd6586c458203d376a40cc77826
+  languageName: node
+  linkType: hard
+
+"cosmiconfig@npm:9.0.2":
+  version: 9.0.2
+  resolution: "cosmiconfig@npm:9.0.2"
+  dependencies:
+    env-paths: "npm:^2.2.1"
+    import-fresh: "npm:^3.3.0"
+    js-yaml: "npm:^4.1.0"
+    parse-json: "npm:^5.2.0"
+  peerDependencies:
+    typescript: ">=4.9.5"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10/e7b08c9c6ed862852bf0ed88c8fa49c57276d976901c9332c87d831926f332c32df3f5ff6a87f3823c3b7c5d6f857a7fd34336e0c2c596fa2d73e6cccbb7bf58
   languageName: node
   linkType: hard
 
@@ -39548,6 +39598,13 @@ __metadata:
   version: 3.25.76
   resolution: "zod@npm:3.25.76"
   checksum: 10/f0c963ec40cd96858451d1690404d603d36507c1fc9682f2dae59ab38b578687d542708a7fdbf645f77926f78c9ed558f57c3d3aa226c285f798df0c4da16995
+  languageName: node
+  linkType: hard
+
+"zod@npm:4.1.12":
+  version: 4.1.12
+  resolution: "zod@npm:4.1.12"
+  checksum: 10/c5f04e6ac306515c4db6ef73cf7705f521c7a2107c8c8912416a0658d689f361db9bee829b0bf01ef4a22492f1065c5cbcdb523ce532606ac6792fd714f3c326
   languageName: node
   linkType: hard
 

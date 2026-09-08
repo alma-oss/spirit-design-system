@@ -1,0 +1,12 @@
+{
+  "name": "@alma-oss/spirit-assets-exporter",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "exporters/assets/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "outputs": ["{projectRoot}/dist"],
+      "cache": true
+    }
+  }
+}
