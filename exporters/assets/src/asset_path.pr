@@ -1,9 +1,0 @@
-{[ let extension = asset.format /]}
-
-{* Generate name as [originalName][-numberOfDuplicates][extension] *}
-{[ let duplicateExtension = (asset.previouslyDuplicatedNames > 0 ? ("-" + asset.previouslyDuplicatedNames) : "") /]}
-{[ let name = (asset.originalName.lowercased().replacing(" ", "-") + duplicateExtension +  "." + asset.format) /]}
-
-{[ if asset.group.name.equals("Icons") ]}
-    {{ name }}
-{[/]}

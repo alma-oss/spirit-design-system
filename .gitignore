@@ -18,6 +18,7 @@ local.mk
 
 # Distribution files
 packages/*/dist
+exporters/*/dist
 
 # Internal builds
 packages/*/build
