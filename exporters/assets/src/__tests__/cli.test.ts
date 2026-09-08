@@ -3,6 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 import { loadConfig, resolveConfig, runCli } from '..';
+import { filterTargets } from '../config';
 
 describe('runCli', () => {
   const originalExit = process.exit;
@@ -47,7 +48,8 @@ describe('runCli', () => {
   });
 
   it('requires a path for --config', async () => {
-    await expect(runCli(['sync', '--config'], { log: jest.fn() })).rejects.toThrow(/--config requires a path/);
+    await expect(runCli(['sync', '--config'], { log: jest.fn() })).rejects.toThrow(/--config requires a value/);
+    await expect(runCli(['sync', '-c'], { log: jest.fn() })).rejects.toThrow(/-c requires a value/);
   });
 
   it('reports a missing default configuration file', async () => {
@@ -125,6 +127,202 @@ describe('runCli', () => {
       await rm(temporaryDirectory, { recursive: true, force: true });
     }
   });
+
+  it('passes repository-root, brand, and out through to configuration loading', async () => {
+    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-cli-root-'));
+    const configPath = path.join(temporaryDirectory, 'spirit-assets.config.json');
+    let receivedConfig: { repositoryRoot?: string; targets: { brand: string }[] } | undefined;
+
+    try {
+      await writeFile(
+        configPath,
+        '{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"packages/icons/src/svg","assets":["icons"]},{"brand":"Jobs","out":"packages/jobs/src/svg","assets":["icons"]}]}',
+      );
+
+      await runCli(
+        [
+          'sync',
+          '--config',
+          configPath,
+          '--repository-root',
+          temporaryDirectory,
+          '--brand',
+          'Spirit',
+          '--out',
+          'packages/icons/src/svg',
+        ],
+        {
+          log: jest.fn(),
+          sync: async (options) => {
+            receivedConfig = options.config;
+
+            return { targets: [] };
+          },
+          token: 'token',
+        },
+      );
+
+      expect(receivedConfig?.repositoryRoot).toBe(temporaryDirectory);
+      expect(receivedConfig?.targets).toHaveLength(1);
+      expect(receivedConfig?.targets[0].brand).toBe('Spirit');
+    } finally {
+      await rm(temporaryDirectory, { recursive: true, force: true });
+    }
+  });
+
+  it('requires values for repository-root, brand, and out flags', async () => {
+    await expect(runCli(['sync', '--repository-root'], { log: jest.fn() })).rejects.toThrow(
+      /--repository-root requires a value/,
+    );
+    await expect(runCli(['sync', '--brand'], { log: jest.fn() })).rejects.toThrow(/--brand requires a value/);
+    await expect(runCli(['sync', '--out'], { log: jest.fn() })).rejects.toThrow(/--out requires a value/);
+  });
+
+  it('discovers opted-in repositories and writes GitHub output', async () => {
+    const originalClientId = process.env.GH_APP_CLIENT_ID;
+    const originalPrivateKey = process.env.GH_APP_PRIVATE_KEY;
+    const originalDispatch = process.env.DISPATCH_FILE_KEY;
+    const originalOutput = process.env.GITHUB_OUTPUT;
+    const outputPath = path.join(os.tmpdir(), `spirit-assets-output-${Date.now()}`);
+    const messages: string[] = [];
+    const errors: string[] = [];
+    let written = '';
+
+    process.env.GH_APP_CLIENT_ID = 'client';
+    process.env.GH_APP_PRIVATE_KEY = 'key';
+    process.env.DISPATCH_FILE_KEY = 'dispatch-key';
+    process.env.GITHUB_OUTPUT = outputPath;
+
+    try {
+      await runCli(['discover'], {
+        discover: async (options = {}) => {
+          options.log?.('skipped');
+
+          return {
+            include: [
+              {
+                brand: 'Spirit',
+                fileKey: options.fileKey ?? '',
+                out: 'packages/icons/src/svg',
+                owner: 'alma-oss',
+                repo: 'spirit-design-system',
+                slug: 'spirit-design-system-packages-icons-src-svg',
+              },
+            ],
+          };
+        },
+        log: (message) => messages.push(message),
+        logError: (message) => errors.push(message),
+        writeOutput: async (_path, contents) => {
+          written = contents;
+        },
+      });
+
+      expect(messages[0]).toContain('"owner":"alma-oss"');
+      expect(written).toContain('has-targets=true');
+      expect(JSON.parse(messages[0] ?? '{}').include[0].fileKey).toBe('dispatch-key');
+    } finally {
+      process.env.GH_APP_CLIENT_ID = originalClientId;
+      process.env.GH_APP_PRIVATE_KEY = originalPrivateKey;
+      process.env.DISPATCH_FILE_KEY = originalDispatch;
+      process.env.GITHUB_OUTPUT = originalOutput;
+    }
+  });
+
+  it('requires a value for --file-key and writes empty GitHub output', async () => {
+    const originalOutput = process.env.GITHUB_OUTPUT;
+    const originalDispatch = process.env.DISPATCH_FILE_KEY;
+    process.env.GITHUB_OUTPUT = '/tmp/spirit-assets-empty-output';
+    delete process.env.DISPATCH_FILE_KEY;
+    const written: string[] = [];
+    let receivedFileKey: string | undefined;
+
+    try {
+      await expect(runCli(['discover', '--file-key'], { log: jest.fn() })).rejects.toThrow(
+        /--file-key requires a value/,
+      );
+
+      await runCli(['discover', '--file-key', 'abc'], {
+        discover: async (options = {}) => {
+          receivedFileKey = options.fileKey;
+
+          return { include: [] };
+        },
+        log: jest.fn(),
+        writeOutput: async (_path, contents) => {
+          written.push(contents);
+        },
+      });
+
+      expect(written[0]).toContain('has-targets=false');
+      expect(receivedFileKey).toBe('abc');
+    } finally {
+      process.env.GITHUB_OUTPUT = originalOutput;
+      process.env.DISPATCH_FILE_KEY = originalDispatch;
+    }
+  });
+
+  it('writes GitHub output with the default writer', async () => {
+    const originalOutput = process.env.GITHUB_OUTPUT;
+    const outputDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-gh-output-'));
+    const outputPath = path.join(outputDirectory, 'github-output');
+    process.env.GITHUB_OUTPUT = outputPath;
+
+    try {
+      await runCli(['discover'], {
+        discover: async () => ({ include: [] }),
+        log: jest.fn(),
+      });
+      const { readFile } = await import('node:fs/promises');
+
+      expect(await readFile(outputPath, 'utf8')).toContain('has-targets=false');
+    } finally {
+      process.env.GITHUB_OUTPUT = originalOutput;
+      await rm(outputDirectory, { recursive: true, force: true });
+    }
+  });
+
+  it('uses the default discoverer when GitHub App credentials are missing', async () => {
+    const originalClientId = process.env.GH_APP_CLIENT_ID;
+    const originalPrivateKey = process.env.GH_APP_PRIVATE_KEY;
+    delete process.env.GH_APP_CLIENT_ID;
+    delete process.env.GH_APP_PRIVATE_KEY;
+
+    try {
+      await expect(runCli(['discover'], { log: jest.fn() })).rejects.toThrow(
+        /GH_APP_CLIENT_ID and GH_APP_PRIVATE_KEY are required/,
+      );
+    } finally {
+      process.env.GH_APP_CLIENT_ID = originalClientId;
+      process.env.GH_APP_PRIVATE_KEY = originalPrivateKey;
+    }
+  });
+
+  it('prints discovery results without GitHub output', async () => {
+    const originalOutput = process.env.GITHUB_OUTPUT;
+    const originalDispatch = process.env.DISPATCH_FILE_KEY;
+    delete process.env.GITHUB_OUTPUT;
+    process.env.DISPATCH_FILE_KEY = '';
+    const messages: string[] = [];
+    let receivedFileKey: string | undefined;
+
+    try {
+      await runCli(['discover'], {
+        discover: async (options = {}) => {
+          receivedFileKey = options.fileKey;
+
+          return { include: [] };
+        },
+        log: (message) => messages.push(message),
+      });
+
+      expect(messages[0]).toBe('{"include":[]}');
+      expect(receivedFileKey).toBeUndefined();
+    } finally {
+      process.env.GITHUB_OUTPUT = originalOutput;
+      process.env.DISPATCH_FILE_KEY = originalDispatch;
+    }
+  });
 });
 
 describe('resolveConfig', () => {
@@ -186,6 +384,10 @@ describe('resolveConfig', () => {
       config: { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons', 'icons'] }] },
       expectedError: /duplicate asset types/,
     },
+    {
+      config: { fileKey: '../etc', targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons'] }] },
+      expectedError: /valid Figma "fileKey"/,
+    },
   ])('rejects invalid config: $expectedError', ({ config, expectedError }) => {
     const configPath = '/repo/spirit-assets.config.json';
 
@@ -207,6 +409,40 @@ describe('resolveConfig', () => {
         configPath,
       ),
     ).toThrow(/same output directory/);
+  });
+
+  it('rejects absolute output paths', () => {
+    expect(() =>
+      resolveConfig(
+        { fileKey: 'file', targets: [{ brand: 'Spirit', out: '/tmp/svg', assets: ['icons'] }] },
+        '/repo/spirit-assets.config.json',
+      ),
+    ).toThrow(/relative path/);
+    expect(() =>
+      resolveConfig(
+        { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'C:\\Windows\\Temp', assets: ['icons'] }] },
+        '/repo/spirit-assets.config.json',
+      ),
+    ).toThrow(/relative path/);
+  });
+
+  it('rejects parent-directory output paths', () => {
+    expect(() =>
+      resolveConfig(
+        { fileKey: 'file', targets: [{ brand: 'Spirit', out: '../escape', assets: ['icons'] }] },
+        '/repo/spirit-assets.config.json',
+      ),
+    ).toThrow(/\.\./);
+  });
+
+  it('confines repository-owned configs to the repository root file', () => {
+    expect(() =>
+      resolveConfig(
+        { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons'] }] },
+        '/repo/packages/icons/spirit-assets.config.json',
+        { repositoryRoot: '/repo' },
+      ),
+    ).toThrow(/must be \/repo\/spirit-assets.config.json/);
   });
 });
 
@@ -275,5 +511,44 @@ describe('loadConfig', () => {
       process.chdir(originalCwd);
       await rm(temporaryDirectory, { recursive: true, force: true });
     }
+  });
+});
+
+describe('filterTargets', () => {
+  const config = resolveConfig(
+    {
+      fileKey: 'figma-file',
+      targets: [
+        { brand: 'Spirit', out: 'packages/icons/src/svg', assets: ['icons'] },
+        { brand: 'Jobs', out: 'packages/jobs/src/svg', assets: ['icons'] },
+      ],
+    },
+    '/repo/spirit-assets.config.json',
+  );
+
+  it('returns the original config when no filter is provided', () => {
+    expect(filterTargets(config)).toBe(config);
+  });
+
+  it('requires brand and out together', () => {
+    expect(() => filterTargets(config, 'Spirit')).toThrow(/must be used together/);
+    expect(() => filterTargets(config, undefined, 'packages/icons/src/svg')).toThrow(/must be used together/);
+  });
+
+  it('requires a configuration path to match output directories', () => {
+    expect(() =>
+      filterTargets({ fileKey: 'figma-file', targets: config.targets }, 'Spirit', 'packages/icons/src/svg'),
+    ).toThrow(/without a configuration path/);
+  });
+
+  it('selects a single matching target', () => {
+    const filtered = filterTargets(config, 'Spirit', 'packages/icons/src/svg');
+
+    expect(filtered.targets).toHaveLength(1);
+    expect(filtered.targets[0].brand).toBe('Spirit');
+  });
+
+  it('rejects unknown brand and output combinations', () => {
+    expect(() => filterTargets(config, 'Spirit', 'missing/svg')).toThrow(/Unable to find a sync target/);
   });
 });

@@ -1,3 +1,4 @@
+import { lstat, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { cosmiconfig } from 'cosmiconfig';
@@ -5,7 +6,21 @@ import { z } from 'zod';
 
 import { ASSET_TYPES, CONFIG_MODULE_NAME } from './constants';
 import { ConfigError } from './errors';
+import {
+  assertContainedInRoot,
+  assertNoSymlinkComponents,
+  assertRelativeOutputPath,
+  expectedRepositoryConfigPath,
+} from './paths';
 import type { AssetsConfig, ResolvedAssetsConfig } from './types';
+
+export interface ResolveConfigOptions {
+  repositoryRoot?: string;
+}
+
+export interface LoadConfigOptions {
+  repositoryRoot?: string;
+}
 
 const assetTypeSchema = z.enum(ASSET_TYPES);
 
@@ -19,7 +34,11 @@ const syncTargetSchema = z.object({
 });
 
 const assetsConfigSchema = z.object({
-  fileKey: z.string().trim().min(1, 'must have a non-empty "fileKey"'),
+  fileKey: z
+    .string()
+    .trim()
+    .min(1, 'must have a non-empty "fileKey"')
+    .regex(/^[A-Za-z0-9_-]+$/, 'must have a valid Figma "fileKey"'),
   targets: z.array(syncTargetSchema).min(1, 'must have at least one sync target'),
 });
 
@@ -57,6 +76,10 @@ const describeIssues = (error: z.ZodError, configPath: string): string =>
       }
 
       if (issue.path[0] === 'fileKey') {
+        if (issue.message.includes('valid Figma')) {
+          return 'Config must have a valid Figma "fileKey".';
+        }
+
         return 'Config must have a non-empty "fileKey".';
       }
 
@@ -64,19 +87,44 @@ const describeIssues = (error: z.ZodError, configPath: string): string =>
     })
     .join(' ');
 
-export const resolveConfig = (config: unknown, configPath: string): ResolvedAssetsConfig => {
+export const resolveConfig = (
+  config: unknown,
+  configPath: string,
+  options: ResolveConfigOptions = {},
+): ResolvedAssetsConfig => {
   const parsedConfig = assetsConfigSchema.safeParse(config);
 
   if (!parsedConfig.success) {
     throw new ConfigError(describeIssues(parsedConfig.error, configPath));
   }
 
+  const resolvedConfigPath = path.resolve(configPath);
+  const repositoryRoot = options.repositoryRoot ? path.resolve(options.repositoryRoot) : undefined;
+
+  if (repositoryRoot) {
+    assertContainedInRoot(resolvedConfigPath, repositoryRoot, 'Assets config');
+
+    if (resolvedConfigPath !== expectedRepositoryConfigPath(repositoryRoot)) {
+      throw new ConfigError(`Repository assets config must be ${expectedRepositoryConfigPath(repositoryRoot)}.`);
+    }
+  }
+
   const { fileKey, targets } = parsedConfig.data;
-  const configDirectory = path.dirname(path.resolve(configPath));
-  const resolvedTargets = targets.map((target) => ({
-    ...target,
-    out: path.resolve(configDirectory, target.out),
-  }));
+  const configDirectory = path.dirname(resolvedConfigPath);
+  const resolvedTargets = targets.map((target) => {
+    assertRelativeOutputPath(target.out);
+
+    const out = path.resolve(configDirectory, target.out);
+
+    if (repositoryRoot) {
+      assertContainedInRoot(out, repositoryRoot, 'Config target "out"');
+    }
+
+    return {
+      ...target,
+      out,
+    };
+  });
 
   const duplicateOutput = resolvedTargets.find(
     (target, index) => resolvedTargets.findIndex((candidate) => candidate.out === target.out) !== index,
@@ -87,12 +135,87 @@ export const resolveConfig = (config: unknown, configPath: string): ResolvedAsse
   }
 
   return {
+    configPath: resolvedConfigPath,
     fileKey,
+    repositoryRoot,
     targets: resolvedTargets,
   };
 };
 
-export const loadConfig = async (configPath?: string): Promise<ResolvedAssetsConfig> => {
+export const filterTargets = (config: ResolvedAssetsConfig, brand?: string, out?: string): ResolvedAssetsConfig => {
+  if (brand === undefined && out === undefined) {
+    return config;
+  }
+
+  if (!brand || !out) {
+    throw new ConfigError('--brand and --out must be used together.');
+  }
+
+  if (!config.configPath) {
+    throw new ConfigError('Unable to match a sync target without a configuration path.');
+  }
+
+  const resolvedOut = path.resolve(path.dirname(config.configPath), out);
+  const matched = config.targets.filter((target) => target.brand === brand && target.out === resolvedOut);
+
+  if (matched.length !== 1) {
+    throw new ConfigError(`Unable to find a sync target for brand=${brand} out=${out}.`);
+  }
+
+  return {
+    ...config,
+    targets: matched,
+  };
+};
+
+const loadRepositoryConfig = async (
+  configPath: string | undefined,
+  repositoryRoot: string,
+): Promise<ResolvedAssetsConfig> => {
+  const expectedPath = expectedRepositoryConfigPath(repositoryRoot);
+  const resolvedConfigPath = path.resolve(configPath ?? expectedPath);
+
+  if (resolvedConfigPath !== expectedPath) {
+    throw new ConfigError(`Repository assets config must be ${expectedPath}.`);
+  }
+
+  let stats;
+
+  try {
+    stats = await lstat(resolvedConfigPath);
+  } catch (error) {
+    throw new ConfigError(`Unable to read assets config at ${resolvedConfigPath}: ${String(error)}`, { cause: error });
+  }
+
+  if (stats.isSymbolicLink()) {
+    throw new ConfigError(`Assets config at ${resolvedConfigPath} must not be a symlink.`);
+  }
+
+  let parsedConfig: unknown;
+
+  try {
+    parsedConfig = JSON.parse(await readFile(resolvedConfigPath, 'utf8')) as unknown;
+  } catch (error) {
+    throw new ConfigError(`Unable to read assets config at ${resolvedConfigPath}: ${String(error)}`, { cause: error });
+  }
+
+  const config = resolveConfig(parsedConfig, resolvedConfigPath, { repositoryRoot });
+
+  for (const target of config.targets) {
+    await assertNoSymlinkComponents(repositoryRoot, target.out);
+  }
+
+  return config;
+};
+
+export const loadConfig = async (
+  configPath?: string,
+  options: LoadConfigOptions = {},
+): Promise<ResolvedAssetsConfig> => {
+  if (options.repositoryRoot) {
+    return loadRepositoryConfig(configPath, options.repositoryRoot);
+  }
+
   const explorer = cosmiconfig(CONFIG_MODULE_NAME, {
     cache: false,
     searchPlaces: [

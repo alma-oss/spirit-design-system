@@ -4,6 +4,7 @@ import path from 'node:path';
 import { exportAssets as exportFigmaAssets } from './adapters/figma';
 import { CHANGE_TYPES, SVG_EXTENSION } from './constants';
 import { FigmaApiError } from './errors';
+import { assertContainedInRoot, assertNoSymlinkComponents } from './paths';
 import type { ExportedAsset, SyncChange, SyncOptions, SyncResult, TargetSyncResult } from './types';
 
 export const mirrorAssets = async (brand: string, out: string, assets: ExportedAsset[]): Promise<TargetSyncResult> => {
@@ -74,6 +75,11 @@ export const syncAssets = async ({
   const targets: TargetSyncResult[] = [];
 
   for (const target of config.targets) {
+    if (config.repositoryRoot) {
+      assertContainedInRoot(target.out, config.repositoryRoot, 'Config target "out"');
+      await assertNoSymlinkComponents(config.repositoryRoot, target.out);
+    }
+
     const exported = await exportAssets(config.fileKey, target.brand, target.assets, token, fetchImplementation);
 
     targets.push(await mirrorAssets(target.brand, target.out, exported));

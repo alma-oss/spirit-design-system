@@ -8,6 +8,8 @@ export const CHANGE_TYPES = {
 
 export const CONFIG_MODULE_NAME = 'spirit-assets';
 
+export const ROOT_CONFIG_FILE = `${CONFIG_MODULE_NAME}.config.json`;
+
 export const SVG_EXTENSION = '.svg';
 
 export const ASSET_DISCOVERY = {

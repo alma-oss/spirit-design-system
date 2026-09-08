@@ -21,6 +21,8 @@ export interface ResolvedSyncTarget extends SyncTarget {
 
 export interface ResolvedAssetsConfig extends AssetsConfig {
   targets: ResolvedSyncTarget[];
+  configPath?: string;
+  repositoryRoot?: string;
 }
 
 export interface SyncChange {
