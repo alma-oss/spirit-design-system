@@ -111,6 +111,28 @@ describe('File', () => {
     expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 
+  it('should render children below the file name instead of helper text', () => {
+    renderInList(
+      <File {...defaultProps} helperText="Uploading…">
+        <span data-testid="file-children">Progress</span>
+      </File>,
+    );
+
+    const name = screen.getByText(defaultProps.label);
+    const extraContent = screen.getByTestId('file-children');
+
+    expect(extraContent).toHaveTextContent('Progress');
+    expect(screen.queryByText('Uploading…')).not.toBeInTheDocument();
+
+    const text = extraContent.parentElement;
+    const children = Array.from(text?.children ?? []);
+    const nameIndex = children.findIndex((child) => child.contains(name));
+    const extraContentIndex = children.indexOf(extraContent);
+
+    expect(nameIndex).toBeGreaterThanOrEqual(0);
+    expect(extraContentIndex).toBeGreaterThan(nameIndex);
+  });
+
   it('should render edit and remove buttons when onChange is provided', () => {
     renderInList(<File {...defaultProps} editText="Edit file" removeText="Remove file" onChange={() => {}} />);
 
