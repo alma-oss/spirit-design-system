@@ -35,6 +35,8 @@ export interface FileImagePreviewProps extends SpiritSpanElementProps, FilePrevi
 }
 
 export interface FileBaseProps {
+  /** Optional content rendered between the file name and helper/validation text. */
+  children?: ReactNode;
   editText?: string;
   helperText?: ReactNode;
   hasValidationIcon?: boolean;
