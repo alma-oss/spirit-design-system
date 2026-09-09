@@ -92,4 +92,10 @@ describe('HelperText', () => {
 
     expect(register).toHaveBeenCalledWith({ remove: id });
   });
+
+  it('should render with role', () => {
+    render(<HelperText helperText={helperText} role="status" />);
+
+    expect(screen.getByText(helperText)).toHaveAttribute('role', 'status');
+  });
 });
