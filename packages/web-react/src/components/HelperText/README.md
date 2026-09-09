@@ -31,6 +31,7 @@ You can override an inherited value by passing the prop directly:
 | `id`           | `string`                                               | —       | ✕        | Element id (e.g. for `aria-describedby`)                      |
 | `isDisabled`   | `bool`                                                 | `false` | ✕        | Disabled state; when omitted, taken from parent context       |
 | `registerAria` | `(payload: { add?: string; remove?: string }) => void` | —       | ✕        | Callback to register this element's id for `aria-describedby` |
+| `role`         | `AriaRole`                                             | —       | ✕        | ARIA role (e.g. `status` for live progress)                   |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
