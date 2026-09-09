@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import React, { type ElementType } from 'react';
 import { ContextPropsProvider } from '../../context';
 import { useI18n, useStyleProps } from '../../hooks';
-import { CloseButton } from '../CloseButton';
 import { ControlButton } from '../ControlButton';
 import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
@@ -25,6 +24,7 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
   const propsWithDefaults = { ...defaultProps, ...props };
   const { t } = useI18n();
   const {
+    children,
     editText,
     elementType,
     hasValidationIcon,
@@ -65,7 +65,10 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
   ) : null;
 
   const dismissActionButton = onDismiss ? (
-    <CloseButton isDisabled={isDisabled} label={resolvedRemoveText} onClick={onDismiss} />
+    <ControlButton {...fileRowControlButtonProps} onClick={onDismiss}>
+      <Icon name="close" boxSize={16} aria-hidden="true" />
+      <VisuallyHidden>{resolvedRemoveText}</VisuallyHidden>
+    </ControlButton>
   ) : null;
 
   const Component = elementType as ElementType;
@@ -95,6 +98,7 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
                 {label}
               </Truncate>
             </span>
+            {children}
             <HelperText helperText={helperText} />
             {validationState && (
               <ValidationText
@@ -105,16 +109,11 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
             )}
           </div>
         </div>
-        {editActionButton && dismissActionButton ? (
+        {(editActionButton || dismissActionButton) && (
           <Flex alignmentX={{ mobile: 'stretch', tablet: 'left' }} alignmentY="stretch" spacingX="space-500">
             {editActionButton}
             {dismissActionButton}
           </Flex>
-        ) : (
-          <>
-            {editActionButton}
-            {dismissActionButton}
-          </>
         )}
       </Component>
     </ContextPropsProvider>
