@@ -1,10 +1,18 @@
 // 1. Sized to comfortably fit the default placeholder copy ("+ Add more…", ~11 characters).
+// 2. Temporary stacking workaround until Dropdown uses the Popover API top layer.
+//    @see https://developer.mozilla.org/en-US/docs/Web/API/Popover_API
 
 @use '@tokens' as tokens;
 @use 'theme';
 
 .UNSTABLE_Combobox {
     --#{tokens.$css-variable-prefix}combobox-input-min-width: #{theme.$input-min-width};
+}
+
+// 2.
+.UNSTABLE_Combobox:has(.DropdownPopover.is-open) {
+    position: relative;
+    z-index: 2;
 }
 
 .UNSTABLE_Combobox__input {
