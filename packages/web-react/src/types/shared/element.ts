@@ -74,6 +74,7 @@ export type SpiritSpanElementBaseProps = SpiritDetailedHTMLProps<HTMLSpanElement
 export type SpiritTextAreaElementBaseProps = SpiritCombinedHTMLProps<HTMLTextAreaElement>;
 export type SpiritUListElementBaseProps = SpiritDetailedHTMLProps<HTMLUListElement>;
 export type SpiritFieldGroupElementBaseProps = SpiritDetailedHTMLProps<HTMLFieldSetElement>;
+export type SpiritProgressElementBaseProps = SpiritCombinedHTMLProps<HTMLProgressElement>;
 export type SpiritSegmentedControlElementBaseProps = SpiritDetailedHTMLProps<HTMLFieldSetElement>;
 
 export type SpiritElementProps = OverloadStyleProps<SpiritElementBaseProps>;
@@ -94,6 +95,7 @@ export type SpiritTextAreaElementProps = Omit<
 >;
 export type SpiritUListElementProps = OverloadStyleProps<SpiritUListElementBaseProps>;
 export type SpiritFieldGroupElementProps = OverloadStyleProps<SpiritFieldGroupElementBaseProps>;
+export type SpiritProgressElementProps = OverloadStyleProps<SpiritProgressElementBaseProps>;
 export type SpiritSegmentedControlElementProps = OverloadStyleProps<SpiritSegmentedControlElementBaseProps>;
 
 export type SpiritInputElementPropsWithRef = Omit<
@@ -116,3 +118,4 @@ export type SpiritFieldGroupElementPropsWithRef = Omit<
   SpiritFieldGroupElementProps & ComponentPropsWithRef<'fieldset'>,
   'id'
 >;
+export type SpiritProgressElementPropsWithRef = SpiritProgressElementProps & ComponentPropsWithRef<'progress'>;

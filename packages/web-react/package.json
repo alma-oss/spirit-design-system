@@ -567,6 +567,14 @@
       "require": "./dist/components/ProductLogo/index.cjs",
       "default": "./dist/components/ProductLogo/index.js"
     },
+    "./components/ProgressBar": {
+      "types": "./dist/components/ProgressBar/index.d.ts",
+      "development": "./src/components/ProgressBar/index.ts",
+      "production": "./dist/components/ProgressBar/index.js",
+      "import": "./dist/components/ProgressBar/index.js",
+      "require": "./dist/components/ProgressBar/index.cjs",
+      "default": "./dist/components/ProgressBar/index.js"
+    },
     "./components/Radio": {
       "types": "./dist/components/Radio/index.d.ts",
       "development": "./src/components/Radio/index.ts",

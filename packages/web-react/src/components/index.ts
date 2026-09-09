@@ -46,6 +46,7 @@ export * from './PartnerLogo';
 export * from './Pill';
 export * from './PricingPlan';
 export * from './ProductLogo';
+export * from './ProgressBar';
 export * from './Radio';
 export * from './ScrollView';
 export * from './Section';
