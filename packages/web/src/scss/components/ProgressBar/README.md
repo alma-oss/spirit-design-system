@@ -257,19 +257,13 @@ Place the ProgressBar inside `File__text` to show the progress of a single uploa
             >Document.pdf</span
           >
         </span>
-        <div
-          class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter color-scheme-on-emotion-informative-subtle"
-          style="--flex-spacing-x: var(--spirit-space-600);"
-        >
-          <progress
-            class="ProgressBar"
-            value="60"
-            max="100"
-            style="--progress-bar-value: 60%"
-            aria-label="Uploading Document.pdf"
-          ></progress>
-          <span class="typography-caption text-secondary">60&nbsp;%</span>
-        </div>
+        <progress
+          class="ProgressBar color-scheme-on-emotion-informative-subtle"
+          value="60"
+          max="100"
+          style="--progress-bar-value: 60%"
+          aria-label="Uploading Document.pdf"
+        ></progress>
       </div>
     </div>
     <!-- … actions … -->
@@ -285,8 +279,8 @@ apply, the higher priority wins:
 3. HelperText
 
 So while an upload is running, the bar replaces the helper text; when it fails, the validation text
-replaces the bar. Label the bar with the file name (`aria-label="Uploading Document.pdf"`) so the
-announcement identifies the upload without a separate line of text.
+replaces the bar. The bar carries no visible value here — it takes the full width of that single line —
+so label it with the file name (`aria-label="Uploading Document.pdf"`) to identify the upload.
 
 ## Accessibility
 
