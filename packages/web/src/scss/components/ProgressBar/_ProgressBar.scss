@@ -5,14 +5,17 @@
 //    width of the `progress` element.
 // 3. Firefox renders a border by default.
 // 4. The width of the native indicator is computed by the browser from the `value` attribute and cannot be
-//    transitioned. The indicator is therefore painted as background layers of the element, listed top to bottom
-//    below.
-// 5. The track is painted on the element itself because that is where Firefox styles it. Chromium and WebKit style
-//    the track in the `::-webkit-progress-bar` pseudo-element instead, which is why that one is made transparent
-//    below.
-// 6. Each vendor pseudo-element needs its own rule: browsers drop the entire selector list if they do not understand
+//    transitioned. The indicator is therefore painted as background layers of the element, listed top to bottom:
+//
+//    a) Cap: the rounded leading edge of the indicator, clipped to the filled width.
+//    b) Body: the filled part of the bar, stopping short of the cap so the two meet without overlapping.
+//    c) Track: the unfilled remainder. It is painted on the element itself because that is where Firefox styles the
+//       track. Chromium and WebKit style the track in the `::-webkit-progress-bar` pseudo-element instead, which is
+//       why that one is made transparent below.
+//
+// 5. Each vendor pseudo-element needs its own rule: browsers drop the entire selector list if they do not understand
 //    one part of it. Note that while we’re repeating code here, that’s necessary (see the Slider component).
-// 7. The native indicator would paint over the background layers, so it is hidden in all engines.
+// 6. The native indicator would paint over the background layers, so it is hidden in all engines.
 
 @use '../../settings/transitions';
 @use '../../tools/color-scheme';
@@ -35,19 +38,19 @@
     border: 0; // 3.
     border-radius: theme.$border-radius;
 
-    // 4., 5.
+    // 4.
     background:
-        // Cap: the rounded leading edge of the indicator, clipped to the filled width.
+        // 4.a
         radial-gradient(
                 circle #{theme.$indicator-cap-radius} at calc(100% - #{theme.$indicator-cap-radius}) 50%,
                 color-scheme.background-color-basic(theme.$indicator-background-fallback) 100%,
                 transparent 100%
             )
             0 0 / var(--progress-bar-value) 100% no-repeat,
-        // Body: the filled part of the bar, stopping short of the cap so the two meet without overlapping.
+        // 4.b
         linear-gradient(color-scheme.background-color-basic(theme.$indicator-background-fallback) 0 0) 0 0 /
             calc(var(--progress-bar-value) - #{theme.$indicator-cap-radius}) 100% no-repeat,
-        // Track: the unfilled remainder, painted underneath the two layers above.
+        // 4.c
         color-scheme.background-color-subtle(theme.$track-background-fallback);
 
     @media (prefers-reduced-motion: no-preference) {
@@ -55,17 +58,17 @@
     }
 }
 
-// 5., 6., 7.
+// 4.c, 5., 6.
 .ProgressBar::-webkit-progress-bar {
     background: transparent;
 }
 
-// 6., 7.
+// 5., 6.
 .ProgressBar::-webkit-progress-value {
     background: transparent;
 }
 
-// 6., 7.
+// 5., 6.
 .ProgressBar::-moz-progress-bar {
     background: transparent;
 }

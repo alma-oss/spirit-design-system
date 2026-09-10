@@ -119,8 +119,10 @@
         </section>
 
         <!--
-          Hidden from visual tests: the web and web-react demos share one snapshot (see
-          tests/helpers/takeScreenshot.ts) and web-react has no ProgressBar yet. Unhide once it lands.
+          TODO: DS-2724 — when ProgressBar lands in web-react, mirror this section in the web-react File demo and
+          drop the `hide-from-visual-tests` class here. It is hidden because the web and web-react demos share a
+          single visual snapshot (see tests/helpers/takeScreenshot.ts), so a section that exists in only one of
+          them fails the other package's test.
         -->
         <section class="hide-from-visual-tests">
           <h3>Uploading State with Progress Bar</h3>
