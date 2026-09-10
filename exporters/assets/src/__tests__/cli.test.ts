@@ -2,7 +2,7 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 
-import { loadConfig, resolveConfig, runCli } from '..';
+import { confineConfig, loadConfig, resolveConfig, runCli } from '..';
 import { filterTargets } from '../config';
 
 describe('runCli', () => {
@@ -53,14 +53,12 @@ describe('runCli', () => {
   });
 
   it('reports a missing default configuration file', async () => {
-    await expect(runCli(['sync'], { log: jest.fn() })).rejects.toThrow(
-      /Unable to find a spirit-assets configuration file/,
-    );
+    await expect(runCli(['sync'], { log: jest.fn() })).rejects.toThrow(/Unable to find a Spirit configuration file/);
   });
 
   it('synchronizes configured targets and reports changes', async () => {
     const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-cli-'));
-    const configPath = path.join(temporaryDirectory, 'spirit-assets.config.json');
+    const configPath = path.join(temporaryDirectory, 'spirit.config.json');
     const messages: string[] = [];
     const expectedFetch = async () => new Response();
     let receivedOptions: { token?: string; fetch?: typeof fetch } | undefined;
@@ -105,7 +103,7 @@ describe('runCli', () => {
 
   it('uses default logging and synchronization', async () => {
     const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-cli-'));
-    const configPath = path.join(temporaryDirectory, 'spirit-assets.config.json');
+    const configPath = path.join(temporaryDirectory, 'spirit.config.json');
     const originalLog = console.log;
     const messages: string[] = [];
 
@@ -130,7 +128,7 @@ describe('runCli', () => {
 
   it('passes repository-root, brand, and out through to configuration loading', async () => {
     const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-cli-root-'));
-    const configPath = path.join(temporaryDirectory, 'spirit-assets.config.json');
+    const configPath = path.join(temporaryDirectory, 'spirit.config.json');
     let receivedConfig: { repositoryRoot?: string; targets: { brand: string }[] } | undefined;
 
     try {
@@ -332,7 +330,7 @@ describe('resolveConfig', () => {
         fileKey: 'figma-file',
         targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons', 'benefit-icons'] }],
       },
-      '/repo/packages/icons/spirit-assets.config.json',
+      '/repo/packages/icons/spirit.config.json',
     );
 
     expect(config.targets[0].out).toBe('/repo/packages/icons/src/svg');
@@ -389,13 +387,13 @@ describe('resolveConfig', () => {
       expectedError: /valid Figma "fileKey"/,
     },
   ])('rejects invalid config: $expectedError', ({ config, expectedError }) => {
-    const configPath = '/repo/spirit-assets.config.json';
+    const configPath = '/repo/spirit.config.json';
 
     expect(() => resolveConfig(config, configPath)).toThrow(expectedError);
   });
 
   it('rejects targets that resolve to the same output directory', () => {
-    const configPath = '/repo/spirit-assets.config.json';
+    const configPath = '/repo/spirit.config.json';
 
     expect(() =>
       resolveConfig(
@@ -415,13 +413,13 @@ describe('resolveConfig', () => {
     expect(() =>
       resolveConfig(
         { fileKey: 'file', targets: [{ brand: 'Spirit', out: '/tmp/svg', assets: ['icons'] }] },
-        '/repo/spirit-assets.config.json',
+        '/repo/spirit.config.json',
       ),
     ).toThrow(/relative path/);
     expect(() =>
       resolveConfig(
         { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'C:\\Windows\\Temp', assets: ['icons'] }] },
-        '/repo/spirit-assets.config.json',
+        '/repo/spirit.config.json',
       ),
     ).toThrow(/relative path/);
   });
@@ -430,19 +428,21 @@ describe('resolveConfig', () => {
     expect(() =>
       resolveConfig(
         { fileKey: 'file', targets: [{ brand: 'Spirit', out: '../escape', assets: ['icons'] }] },
-        '/repo/spirit-assets.config.json',
+        '/repo/spirit.config.json',
       ),
     ).toThrow(/\.\./);
   });
 
   it('confines repository-owned configs to the repository root file', () => {
     expect(() =>
-      resolveConfig(
-        { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons'] }] },
-        '/repo/packages/icons/spirit-assets.config.json',
-        { repositoryRoot: '/repo' },
+      confineConfig(
+        resolveConfig(
+          { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons'] }] },
+          '/repo/packages/icons/spirit.config.json',
+        ),
+        '/repo',
       ),
-    ).toThrow(/must be \/repo\/spirit-assets.config.json/);
+    ).toThrow(/must be \/repo\/spirit.config.json/);
   });
 });
 
@@ -451,7 +451,7 @@ describe('loadConfig', () => {
     const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-config-'));
 
     try {
-      const validPath = path.join(temporaryDirectory, 'spirit-assets.config.json');
+      const validPath = path.join(temporaryDirectory, 'spirit.config.json');
       const invalidJsonPath = path.join(temporaryDirectory, 'invalid.json');
       const invalidValuePath = path.join(temporaryDirectory, 'value.json');
 
@@ -484,7 +484,7 @@ describe('loadConfig', () => {
 
     try {
       await writeFile(
-        path.join(temporaryDirectory, 'spirit-assets.config.json'),
+        path.join(temporaryDirectory, 'spirit.config.json'),
         '{"fileKey":"discovered","targets":[{"brand":"Spirit","out":"svg","assets":["icons"]}]}',
       );
       process.chdir(temporaryDirectory);
@@ -503,7 +503,7 @@ describe('loadConfig', () => {
     const originalCwd = process.cwd();
 
     try {
-      await writeFile(path.join(temporaryDirectory, 'spirit-assets.config.json'), '{');
+      await writeFile(path.join(temporaryDirectory, 'spirit.config.json'), '{');
       process.chdir(temporaryDirectory);
 
       await expect(loadConfig()).rejects.toThrow(/Unable to read assets config/);
@@ -523,7 +523,7 @@ describe('filterTargets', () => {
         { brand: 'Jobs', out: 'packages/jobs/src/svg', assets: ['icons'] },
       ],
     },
-    '/repo/spirit-assets.config.json',
+    '/repo/spirit.config.json',
   );
 
   it('returns the original config when no filter is provided', () => {

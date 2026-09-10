@@ -5,8 +5,8 @@ import { fileURLToPath } from 'node:url';
 import sade from 'sade';
 
 import { filterTargets, loadConfig } from './config';
-import { discoverSyncTargets } from './discover';
 import { ConfigError } from './errors';
+import { discoverSyncTargets, formatGitHubActionsOutput } from './providers/github';
 import { syncAssets } from './sync';
 import type { SyncResult } from './types';
 
@@ -126,9 +126,7 @@ const createProgram = (options: CliOptions, log: (message: string) => void, logE
 
       if (process.env.GITHUB_OUTPUT) {
         const writeOutput = options.writeOutput ?? appendFile;
-        const hasTargets = result.include.length > 0;
-
-        await writeOutput(process.env.GITHUB_OUTPUT, `matrix<<MATRIX\n${json}\nMATRIX\nhas-targets=${hasTargets}\n`);
+        await writeOutput(process.env.GITHUB_OUTPUT, formatGitHubActionsOutput(result));
       }
     });
 };

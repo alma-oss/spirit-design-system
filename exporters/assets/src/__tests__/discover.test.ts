@@ -9,7 +9,7 @@ import {
   ROOT_CONFIG_FILE,
   sparseCheckoutRepository,
 } from '..';
-import type { GitHubAppLike, ListedRepository } from '../discover';
+import type { GitHubAppLike, ListedRepository } from '../providers/github';
 
 const createRepository = (overrides: Partial<ListedRepository> = {}): ListedRepository => ({
   archived: false,
@@ -160,10 +160,9 @@ describe('discoverSyncTargets', () => {
     expect(messages.join('\n')).toContain('installation token was not available');
     expect(messages.join('\n')).toContain(`no ${ROOT_CONFIG_FILE}`);
     expect(messages.join('\n')).toContain('unable to read');
-    expect(messages.join('\n')).toContain('is invalid');
+    expect(messages.join('\n')).toContain('must contain a JSON object');
+    expect(messages.join('\n')).toContain('must be an object');
     expect(messages.join('\n')).toContain('fileKey does not match');
-    expect(messages.join('\n')).toContain('target is invalid');
-    expect(messages.join('\n')).toContain('target is incomplete');
     expect(messages.join('\n')).toContain('clone failed');
     expect(messages.join('\n')).toContain('boom');
   });

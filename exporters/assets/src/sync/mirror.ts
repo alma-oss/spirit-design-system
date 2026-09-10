@@ -1,11 +1,8 @@
 import { mkdir, readdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { exportAssets as exportFigmaAssets } from './adapters/figma';
-import { CHANGE_TYPES, SVG_EXTENSION } from './constants';
-import { FigmaApiError } from './errors';
-import { assertContainedInRoot, assertNoSymlinkComponents } from './paths';
-import type { ExportedAsset, SyncChange, SyncOptions, SyncResult, TargetSyncResult } from './types';
+import { CHANGE_TYPES, SVG_EXTENSION } from '../constants';
+import type { ExportedAsset, SyncChange, TargetSyncResult } from '../types';
 
 export const mirrorAssets = async (brand: string, out: string, assets: ExportedAsset[]): Promise<TargetSyncResult> => {
   const expectedFiles = new Set(assets.map(({ name }) => `${name}${SVG_EXTENSION}`));
@@ -60,30 +57,4 @@ export const mirrorAssets = async (brand: string, out: string, assets: ExportedA
     exported: assets.length,
     out,
   };
-};
-
-export const syncAssets = async ({
-  config,
-  exportAssets = exportFigmaAssets,
-  fetch: fetchImplementation = fetch,
-  token,
-}: SyncOptions): Promise<SyncResult> => {
-  if (!token.trim()) {
-    throw new FigmaApiError('FIGMA_ACCESS_TOKEN is required.');
-  }
-
-  const targets: TargetSyncResult[] = [];
-
-  for (const target of config.targets) {
-    if (config.repositoryRoot) {
-      assertContainedInRoot(target.out, config.repositoryRoot, 'Config target "out"');
-      await assertNoSymlinkComponents(config.repositoryRoot, target.out);
-    }
-
-    const exported = await exportAssets(config.fileKey, target.brand, target.assets, token, fetchImplementation);
-
-    targets.push(await mirrorAssets(target.brand, target.out, exported));
-  }
-
-  return { targets };
 };

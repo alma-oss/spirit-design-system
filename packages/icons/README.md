@@ -116,7 +116,7 @@ The command adds, updates, and deletes SVGs so the directory exactly matches Fig
 color normalization remains part of the package build.
 
 Maintainers can run the **Sync Assets** workflow from GitHub Actions. It discovers repositories that opted in with a
-root `spirit-assets.config.json` and opens or updates one pull request per configured target.
+root `spirit.config.json` and opens or updates one pull request per configured target.
 
 [esm-only]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 [figma-assets]: https://www.figma.com/design/UMd06VnGrAE5xheb4C8QEg/Assets

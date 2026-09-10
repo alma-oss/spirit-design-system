@@ -1,17 +1,23 @@
-export { exportAssets, exportIcons } from './adapters/figma';
+export { exportAssets, exportIcons } from './sync/adapters/figma';
 export { runCli } from './cli';
-export { filterTargets, loadConfig, resolveConfig } from './config';
+export { assertRelativeOutputPath, filterTargets, loadConfig, resolveConfig } from './config';
 export { ASSET_DISCOVERY, ASSET_TYPES, CHANGE_TYPES, CONFIG_MODULE_NAME, ROOT_CONFIG_FILE } from './constants';
-export { createGitHubApp, discoverSyncTargets, listAppRepositories, sparseCheckoutRepository } from './discover';
-export type { DiscoverMatrix, DiscoverTarget, ListedRepository } from './discover';
 export { AssetDiscoveryError, ConfigError, FigmaApiError } from './errors';
+export {
+  createGitHubApp,
+  discoverSyncTargets,
+  formatGitHubActionsOutput,
+  listAppRepositories,
+  sparseCheckoutRepository,
+} from './providers/github';
+export type { DiscoverMatrix, DiscoverTarget, ListedRepository } from './providers/github';
 export {
   assertContainedInRoot,
   assertNoSymlinkComponents,
-  assertRelativeOutputPath,
+  confineConfig,
   isContainedInRoot,
   toTargetSlug,
-} from './paths';
+} from './repository';
 export { mirrorAssets, syncAssets } from './sync';
 export type {
   AssetExporter,

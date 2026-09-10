@@ -1,0 +1,80 @@
+import { z } from 'zod';
+
+import { ASSET_TYPES } from '../constants';
+import { ConfigError } from '../errors';
+import type { AssetsConfig } from '../types';
+
+const assetTypeSchema = z.enum(ASSET_TYPES);
+
+const syncTargetSchema = z.object({
+  assets: z
+    .array(assetTypeSchema, { message: 'must have at least one asset type' })
+    .min(1, 'must have at least one asset type')
+    .refine((assets) => new Set(assets).size === assets.length, 'contains duplicate asset types'),
+  brand: z.string().trim().min(1, 'must have a non-empty "brand"'),
+  out: z.string().trim().min(1, 'must have a non-empty "out"'),
+});
+
+export const assetsConfigSchema = z.object({
+  fileKey: z
+    .string()
+    .trim()
+    .min(1, 'must have a non-empty "fileKey"')
+    .regex(/^[A-Za-z0-9_-]+$/, 'must have a valid Figma "fileKey"'),
+  targets: z.array(syncTargetSchema).min(1, 'must have at least one sync target'),
+});
+
+export const describeConfigIssues = (error: z.ZodError, configPath: string): string =>
+  error.issues
+    .map((issue) => {
+      if (
+        issue.path.length === 0 ||
+        (issue.path[0] === 'targets' && issue.path.length === 1 && issue.code === 'invalid_type')
+      ) {
+        return `Assets config at ${configPath} must contain a JSON object.`;
+      }
+
+      if (issue.path[0] === 'targets' && typeof issue.path[1] === 'number') {
+        const target = `Config target at index ${issue.path[1]}`;
+        const field = issue.path[2];
+
+        if (issue.path.length === 2) {
+          return `${target} must be an object.`;
+        }
+
+        if (field === 'assets') {
+          if (issue.path.length > 3) {
+            return `${target} contains unsupported asset type.`;
+          }
+
+          return `${target} ${issue.message}.`;
+        }
+
+        if (field === 'brand') {
+          return `${target} must have a non-empty "brand".`;
+        }
+
+        return `${target} must have a non-empty "out".`;
+      }
+
+      if (issue.path[0] === 'fileKey') {
+        if (issue.message.includes('valid Figma')) {
+          return 'Config must have a valid Figma "fileKey".';
+        }
+
+        return 'Config must have a non-empty "fileKey".';
+      }
+
+      return `Config ${issue.message}.`;
+    })
+    .join(' ');
+
+export const parseAssetsConfig = (config: unknown, configPath: string): AssetsConfig => {
+  const parsedConfig = assetsConfigSchema.safeParse(config);
+
+  if (!parsedConfig.success) {
+    throw new ConfigError(describeConfigIssues(parsedConfig.error, configPath));
+  }
+
+  return parsedConfig.data;
+};

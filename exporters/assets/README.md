@@ -4,12 +4,12 @@
 directories. Figma is the current source adapter; the CLI, configuration, and disk mirroring stay source-agnostic.
 
 The package is private. Consumer repositories do not install it from npm. This repository runs the CLI locally and from
-GitHub Actions. A repository opts in by installing the GitHub App and merging a root `spirit-assets.config.json`.
+GitHub Actions. A repository opts in by installing the GitHub App and merging a root `spirit.config.json`.
 
 ## Configuration
 
-Create `spirit-assets.config.json` at the repository root (cosmiconfig also accepts `.spirit-assetsrc`,
-`spirit-assets.config.js`, and a `spirit-assets` key in `package.json` for local use):
+Create `spirit.config.json` at the repository root. Cosmiconfig also searches for `.spiritrc`, `spirit.config.js`, and a
+`spirit` key in `package.json` during trusted local use:
 
 ```json
 {
@@ -74,10 +74,10 @@ yarn icons:sync
 Or invoke the CLI with an explicit config path:
 
 ```shell
-yarn workspace @alma-oss/spirit-assets-exporter sync --config spirit-assets.config.json
+yarn workspace @alma-oss/spirit-assets-exporter sync --config spirit.config.json
 ```
 
-If `--config` is omitted, cosmiconfig searches the current working directory for a `spirit-assets` configuration.
+If `--config` is omitted, cosmiconfig searches the current working directory for a Spirit configuration.
 
 The target directory becomes an exact mirror of the selected Brand:
 
@@ -93,13 +93,13 @@ This repository runs a GitHub Actions workflow that synchronizes icons from Figm
 Figma library publish via external automation. Credentials live in the `figma` GitHub Actions environment.
 
 The workflow authenticates as the GitHub App, checks out every repository the App can access, and looks for
-`spirit-assets.config.json` at the repository root. Repositories without that file are skipped. Each configured target
-gets its own updating pull request.
+`spirit.config.json` at the repository root. Repositories without that file are skipped. Each configured target gets its
+own updating pull request.
 
 A repository opts in by:
 
 1. installing the same GitHub App, with `Contents: write` and `Pull requests: write`
-2. merging `spirit-assets.config.json` at the repository root
+2. merging `spirit.config.json` at the repository root
 3. allowing the App to push the automation branch
 
 The target repository does not run the exporter or store Figma credentials.

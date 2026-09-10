@@ -1,4 +1,4 @@
-import { FigmaApiError } from '../../errors';
+import { FigmaApiError } from '../../../errors';
 
 export const FIGMA_API_URL = 'https://api.figma.com/v1';
 export const EXPORT_BATCH_SIZE = 100;

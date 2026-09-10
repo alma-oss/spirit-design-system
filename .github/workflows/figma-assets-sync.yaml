@@ -85,7 +85,7 @@ jobs:
       - name: Sync assets from Figma
         run: >
           yarn workspace @alma-oss/spirit-assets-exporter sync
-          --config target/spirit-assets.config.json
+          --config target/spirit.config.json
           --repository-root target
           --brand "${{ matrix.brand }}"
           --out "${{ matrix.out }}"

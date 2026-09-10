@@ -1,8 +1,8 @@
 import { lstat } from 'node:fs/promises';
 import path from 'node:path';
 
-import { ROOT_CONFIG_FILE } from './constants';
-import { ConfigError } from './errors';
+import { ROOT_CONFIG_FILE } from '../constants';
+import { ConfigError } from '../errors';
 
 export const isContainedInRoot = (targetPath: string, repositoryRoot: string): boolean => {
   const resolvedRoot = path.resolve(repositoryRoot);
@@ -15,18 +15,6 @@ export const isContainedInRoot = (targetPath: string, repositoryRoot: string): b
 export const assertContainedInRoot = (targetPath: string, repositoryRoot: string, label: string): void => {
   if (!isContainedInRoot(targetPath, repositoryRoot)) {
     throw new ConfigError(`${label} resolves outside the repository: ${path.resolve(targetPath)}`);
-  }
-};
-
-export const assertRelativeOutputPath = (out: string): void => {
-  const posixPath = out.replaceAll('\\', '/');
-
-  if (path.isAbsolute(out) || path.win32.isAbsolute(out)) {
-    throw new ConfigError('Config target "out" must be a relative path.');
-  }
-
-  if (posixPath.split('/').includes('..')) {
-    throw new ConfigError('Config target "out" must not contain "..".');
   }
 };
 

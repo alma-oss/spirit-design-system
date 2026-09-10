@@ -2,8 +2,8 @@ import { lstat, mkdir, mkdtemp, rm, symlink, writeFile } from 'node:fs/promises'
 import os from 'node:os';
 import path from 'node:path';
 
-import { loadConfig, resolveConfig } from '..';
-import { expectedRepositoryConfigPath } from '../paths';
+import { confineConfig, loadConfig, resolveConfig } from '..';
+import { expectedRepositoryConfigPath } from '../repository';
 
 describe('repository-owned assets config', () => {
   it('loads JSON from the repository root and resolves nested output paths', async () => {
@@ -11,7 +11,7 @@ describe('repository-owned assets config', () => {
 
     try {
       await writeFile(
-        path.join(repositoryRoot, 'spirit-assets.config.json'),
+        path.join(repositoryRoot, 'spirit.config.json'),
         '{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"packages/icons/src/svg","assets":["icons"]}]}',
       );
 
@@ -41,7 +41,7 @@ describe('repository-owned assets config', () => {
     try {
       await expect(loadConfig(undefined, { repositoryRoot })).rejects.toThrow(/Unable to read assets config/);
 
-      const configPath = path.join(repositoryRoot, 'spirit-assets.config.json');
+      const configPath = path.join(repositoryRoot, 'spirit.config.json');
       await writeFile(configPath, '{');
 
       await expect(loadConfig(configPath, { repositoryRoot })).rejects.toThrow(/Unable to read assets config/);
@@ -65,7 +65,7 @@ describe('repository-owned assets config', () => {
       await mkdir(outside);
       await symlink(outside, linked);
       await writeFile(
-        path.join(repositoryRoot, 'spirit-assets.config.json'),
+        path.join(repositoryRoot, 'spirit.config.json'),
         '{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"packages/icons/src/svg","assets":["icons"]}]}',
       );
 
@@ -77,21 +77,29 @@ describe('repository-owned assets config', () => {
 
   it('rejects configs that resolve outside the repository root', () => {
     expect(() =>
-      resolveConfig(
-        { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons'] }] },
-        '/other/spirit-assets.config.json',
-        { repositoryRoot: '/repo' },
+      confineConfig(
+        resolveConfig(
+          { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons'] }] },
+          '/other/spirit.config.json',
+        ),
+        '/repo',
       ),
     ).toThrow(/outside the repository/);
   });
 
+  it('requires a configuration path before confining outputs', () => {
+    expect(() =>
+      confineConfig({ fileKey: 'file', targets: [{ brand: 'Spirit', out: '/repo/svg', assets: ['icons'] }] }, '/repo'),
+    ).toThrow(/without a configuration path/);
+  });
+
   it('reports the expected repository config path', () => {
-    expect(expectedRepositoryConfigPath('/repo')).toBe(path.join(path.resolve('/repo'), 'spirit-assets.config.json'));
+    expect(expectedRepositoryConfigPath('/repo')).toBe(path.join(path.resolve('/repo'), 'spirit.config.json'));
   });
 
   it('does not treat ordinary files as symlinks', async () => {
     const repositoryRoot = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-lstat-'));
-    const configPath = path.join(repositoryRoot, 'spirit-assets.config.json');
+    const configPath = path.join(repositoryRoot, 'spirit.config.json');
 
     try {
       await writeFile(
