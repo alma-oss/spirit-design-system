@@ -73,7 +73,12 @@ nest buttons inside the overlay link. Use `CardBody isSelectable` when body text
 selectable.
 
 Detect CardLink from Figma: title uses a link text style or `themed/link/...` tokens, or Code
-Connect maps to `CardLink`.
+Connect maps to `CardLink`. Code Connect for “Card Basic” often returns only the outer composition
+and **omits** `CardLink`. That snippet is incomplete, not proof the card is static. Inspect the
+title node’s color token (`themed/link/primary/state-default` or any `themed/link/…` token) — it
+overrides a snippet with no `CardLink`. Re-fetch the card instance if the parent frame only returned
+the snippet. Do not treat a purple screenshot as evidence. If the token is unavailable, flag the
+ambiguity instead of leaving a static title.
 
 ## Artwork and Media
 
