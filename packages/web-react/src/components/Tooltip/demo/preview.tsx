@@ -9,6 +9,7 @@ import TooltipDefault from './TooltipDefault';
 import TooltipDismissible from './TooltipDismissible';
 import TooltipDismissibleViaJS from './TooltipDismissibleViaJS';
 import TooltipIcon from './TooltipIcon';
+import TooltipInsideForm from './TooltipInsideForm';
 import TooltipPlacements from './TooltipPlacements';
 import TooltipTriggers from './TooltipTriggers';
 import TooltipWithLink from './TooltipWithLink';
@@ -30,6 +31,9 @@ export const Preview = () => (
       </DocsSection>
       <DocsSection title="Tooltip Triggers">
         <TooltipTriggers />
+      </DocsSection>
+      <DocsSection title="Tooltip Trigger Inside a Form">
+        <TooltipInsideForm />
       </DocsSection>
       <DocsSection title="Tooltip on Icon Component">
         <TooltipIcon />

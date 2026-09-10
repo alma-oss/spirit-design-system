@@ -20,7 +20,15 @@ const TooltipTrigger = <E extends ElementType = 'button'>(props: TooltipTriggerP
   const mergedStyleProps = mergeStyleProps(Component, { triggerStyleProps, transferProps });
 
   return (
-    <Component {...transferProps} {...mergedStyleProps} id={id} ref={triggerRef} {...getReferenceProps()}>
+    <Component
+      // `type` must remain overridable via `type` prop.
+      {...(elementType === 'button' && { type: 'button' })}
+      {...transferProps}
+      {...mergedStyleProps}
+      id={id}
+      ref={triggerRef}
+      {...getReferenceProps()}
+    >
       {typeof children === 'function' ? children({ isOpen }) : children}
     </Component>
   );
