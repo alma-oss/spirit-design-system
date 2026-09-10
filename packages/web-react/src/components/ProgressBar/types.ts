@@ -39,7 +39,10 @@ export interface ProgressBarProps<C = void>
   value: number;
   /** Placement of `valueLabel` relative to the bar. */
   valuePlacement?: ProgressBarValuePlacement;
-  /** Visible label of the value shown next to or below the bar. */
+  /**
+   * Visible label of the value shown next to or below the bar.
+   * A string also sets `aria-valuetext` unless that attribute is passed.
+   */
   valueLabel?: ReactNode;
   /** Id applied to the visible `valueLabel` element. */
   valueLabelId?: string;

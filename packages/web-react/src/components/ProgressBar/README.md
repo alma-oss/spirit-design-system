@@ -48,7 +48,6 @@ under the bar.
 <ProgressBar aria-label="Profile completeness" value={20} valueLabel="20 %" />
 <ProgressBar
   aria-label="Awards collected"
-  aria-valuetext="4 out of 20 awards"
   max={20}
   value={4}
   valuePlacement="bottom"
@@ -56,9 +55,9 @@ under the bar.
 />
 ```
 
-ℹ️ Browsers announce `value` and `max` as a percentage. When the value is not a percentage, describe it
-with `aria-valuetext`. ProgressBar hides the visible `valueLabel` from assistive technologies in that case
-so the value is not announced twice.
+ℹ️ A string `valueLabel` is also used as `aria-valuetext`. Override `aria-valuetext` when the announced
+value should differ. ProgressBar then hides the visible `valueLabel` from assistive technologies so the
+value is not announced twice.
 
 ## Label
 

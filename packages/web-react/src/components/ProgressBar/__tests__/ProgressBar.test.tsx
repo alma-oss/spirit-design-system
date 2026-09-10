@@ -144,10 +144,25 @@ describe('ProgressBar', () => {
     expect(container.querySelector('.Flex')).not.toHaveClass('Flex--alignmentXStretch');
   });
 
-  it('should hide value label from assistive technologies when aria-valuetext is set', () => {
-    render(<ProgressBar {...defaultProps} aria-valuetext="4 out of 20 awards" valueLabel="4 out of 20 awards" />);
+  it('should set aria-valuetext from a string valueLabel', () => {
+    render(<ProgressBar {...defaultProps} valueLabel="60 %" />);
 
-    expect(screen.getByText('4 out of 20 awards')).toHaveAttribute('aria-hidden', 'true');
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuetext', '60 %');
+    expect(screen.getByText('60 %')).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it('should prefer an explicit aria-valuetext over valueLabel', () => {
+    render(<ProgressBar {...defaultProps} aria-valuetext="4 out of 20 awards" valueLabel="4 / 20" />);
+
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuetext', '4 out of 20 awards');
+    expect(screen.getByText('4 / 20')).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it('should not set aria-valuetext from a non-string valueLabel', () => {
+    render(<ProgressBar {...defaultProps} valueLabel={<span>4 out of 20</span>} />);
+
+    expect(screen.getByRole('progressbar')).not.toHaveAttribute('aria-valuetext');
+    expect(screen.getByText('4 out of 20')).not.toHaveAttribute('aria-hidden');
   });
 
   it('should apply the disabled color scheme to the value row', () => {

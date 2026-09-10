@@ -46,6 +46,7 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
   const shouldRenderField = label != null || Boolean(helperText) || Boolean(validationState);
   const hasValueLabel = valueLabel != null;
   const applyStylePropsToProgress = !shouldRenderField && !hasValueLabel;
+  const resolvedAriaValueText = ariaValueText ?? (typeof valueLabel === 'string' ? valueLabel : undefined);
 
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
@@ -59,7 +60,7 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
       {...otherProps}
       {...(applyStylePropsToProgress ? styleProps : {})}
       {...ariaDescribedByProp}
-      aria-valuetext={ariaValueText}
+      aria-valuetext={resolvedAriaValueText}
       className={classNames(classProps.root, applyStylePropsToProgress ? styleProps.className : undefined)}
       id={shouldRenderField ? id : idProp}
       max={max}
@@ -81,7 +82,7 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
     >
       {progressElement}
       <CaptionText
-        aria-hidden={ariaValueText ? true : undefined}
+        aria-hidden={resolvedAriaValueText ? true : undefined}
         id={valueLabelId}
         textColor={isDisabled ? undefined : 'secondary'}
         UNSAFE_className={classProps.valueLabel || undefined}

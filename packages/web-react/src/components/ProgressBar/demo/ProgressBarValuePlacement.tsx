@@ -9,7 +9,6 @@ const ProgressBarValuePlacement = () => (
     <h3 className="docs-Heading">Bottom</h3>
     <ProgressBar
       aria-label="Awards collected"
-      aria-valuetext="4 out of 20 awards"
       max={20}
       value={4}
       valuePlacement="bottom"
