@@ -1,16 +1,15 @@
 'use client';
 
-import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef, useId } from 'react';
 import { ContextPropsProvider, useContextProps } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent } from '../../types';
-import { CaptionText } from '../CaptionText';
-import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
 import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
+import Progress from './Progress';
+import ProgressBarCaption from './ProgressBarCaption';
 import { type SpiritProgressBarProps } from './types';
 import { useProgressBarStyleProps } from './useProgressBarStyleProps';
 
@@ -63,52 +62,53 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
   });
 
   const progressElement = (
-    <progress
+    <Progress
       {...otherProps}
-      {...(applyStylePropsToProgress ? styleProps : {})}
       {...ariaDescribedByProp}
       aria-valuetext={resolvedAriaValueText}
-      className={classNames(classProps.root, applyStylePropsToProgress ? styleProps.className : undefined)}
+      className={classProps.root}
       id={shouldRenderField ? id : idProp}
       max={max}
       ref={ref}
-      style={{
-        ...progressBarStyleProps,
-        ...(applyStylePropsToProgress ? styleProps.style : undefined),
-      }}
+      style={progressBarStyleProps}
+      styleProps={applyStylePropsToProgress ? styleProps : undefined}
       value={value}
     />
   );
 
-  const isValueLabelBottom = valuePlacement === 'bottom';
-
   const barWithValue = hasValueLabel ? (
-    <Flex
-      alignmentX="left"
-      alignmentY={isValueLabelBottom ? undefined : 'center'}
-      direction={isValueLabelBottom ? 'vertical' : 'horizontal'}
-      spacingX={isValueLabelBottom ? undefined : 'space-600'}
-      spacingY={isValueLabelBottom ? 'space-600' : undefined}
-      UNSAFE_className={classNames(!shouldRenderField && styleProps.className, classProps.value) || undefined}
-      UNSAFE_style={!shouldRenderField ? styleProps.style : undefined}
+    <ProgressBarCaption
+      classProps={classProps}
+      isAriaHidden={Boolean(resolvedAriaValueText)}
+      styleProps={!shouldRenderField ? styleProps : undefined}
+      valueLabel={valueLabel}
+      valueLabelId={valueLabelId}
+      valuePlacement={valuePlacement}
     >
       {progressElement}
-      <CaptionText
-        aria-hidden={resolvedAriaValueText ? true : undefined}
-        id={valueLabelId}
-        textColor={isDisabled ? undefined : 'secondary'}
-        UNSAFE_className={classProps.valueLabel || undefined}
-      >
-        {valueLabel}
-      </CaptionText>
-    </Flex>
+    </ProgressBarCaption>
   ) : (
     progressElement
   );
 
-  if (!shouldRenderField) {
-    return barWithValue;
-  }
+  const content = shouldRenderField ? (
+    <Stack spacing="space-400" UNSAFE_className={styleProps.className} UNSAFE_style={styleProps.style}>
+      {label != null && <Label htmlFor={id}>{label}</Label>}
+      {barWithValue}
+      <HelperText helperText={helperText} id={`${id}-helper-text`} registerAria={register} />
+      {validationState && (
+        <ValidationText
+          id={`${id}-validation-text`}
+          {...(hasValidationIcon && { validationStateIcon: validationState })}
+          registerAria={register}
+          validationText={validationText}
+          role={validationTextRole}
+        />
+      )}
+    </Stack>
+  ) : (
+    barWithValue
+  );
 
   return (
     <ContextPropsProvider
@@ -119,20 +119,7 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
         label: { isLabelHidden },
       }}
     >
-      <Stack spacing="space-400" UNSAFE_className={styleProps.className} UNSAFE_style={styleProps.style}>
-        {label != null && <Label htmlFor={id}>{label}</Label>}
-        {barWithValue}
-        <HelperText helperText={helperText} id={`${id}-helper-text`} registerAria={register} />
-        {validationState && (
-          <ValidationText
-            id={`${id}-validation-text`}
-            {...(hasValidationIcon && { validationStateIcon: validationState })}
-            registerAria={register}
-            validationText={validationText}
-            role={validationTextRole}
-          />
-        )}
-      </Stack>
+      {content}
     </ContextPropsProvider>
   );
 };

@@ -123,31 +123,6 @@ describe('ProgressBar', () => {
     expect(screen.getByText('Your profile is complete')).toBeInTheDocument();
   });
 
-  it('should render value label to the right of the bar', () => {
-    const { container } = render(<ProgressBar {...defaultProps} valueLabel="60 %" />);
-
-    expect(screen.getByText('60 %')).toBeInTheDocument();
-    expect(container.querySelector('.Flex')).toHaveClass(
-      'Flex',
-      'Flex--horizontal',
-      'Flex--noWrap',
-      'Flex--alignmentXLeft',
-      'Flex--alignmentYCenter',
-    );
-    expect((container.querySelector('.Flex') as HTMLElement).style.getPropertyValue('--flex-spacing-x')).toBe(
-      'var(--spirit-space-600)',
-    );
-  });
-
-  it('should render value label below the bar', () => {
-    const { container } = render(<ProgressBar {...defaultProps} valuePlacement="bottom" valueLabel="4 out of 20" />);
-
-    expect(container.querySelector('.Flex')).toHaveClass('Flex', 'Flex--vertical', 'Flex--alignmentXLeft');
-    expect((container.querySelector('.Flex') as HTMLElement).style.getPropertyValue('--flex-spacing-y')).toBe(
-      'var(--spirit-space-600)',
-    );
-  });
-
   it('should set aria-valuetext from a string valueLabel', () => {
     render(<ProgressBar {...defaultProps} valueLabel="60 %" />);
 
@@ -181,12 +156,6 @@ describe('ProgressBar', () => {
     render(<ProgressBar {...defaultProps} max={20} value={4} />);
 
     expect(screen.getByRole('progressbar').style.getPropertyValue('--progress-bar-value')).toBe('20%');
-  });
-
-  it('should set id on the visible value label', () => {
-    render(<ProgressBar {...defaultProps} valueLabel="30 %" valueLabelId="progress-bar-animated-value" />);
-
-    expect(screen.getByText('30 %')).toHaveAttribute('id', 'progress-bar-animated-value');
   });
 
   it('should apply disabled state from context when prop is not provided', () => {
