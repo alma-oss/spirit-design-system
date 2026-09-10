@@ -1,6 +1,6 @@
-import { ROOT_CONFIG_FILE } from '../constants';
-import { GITHUB_API_URL, GITHUB_API_VERSION, readRepositoryConfigFile } from '../providers/github/contents';
-import type { ListedRepository } from '../providers/github';
+import { ROOT_CONFIG_FILE } from '../../constants';
+import type { ListedRepository } from './app';
+import { GITHUB_API_URL, GITHUB_API_VERSION, readRepositoryConfigFile } from './contents';
 
 const repository: ListedRepository = {
   archived: false,
@@ -85,20 +85,23 @@ describe('readRepositoryConfigFile', () => {
   });
 
   it('redacts network errors while resolving the revision or reading config', async () => {
+    const networkError = new Error('private-owner/private-repository');
     const branchFailure = jest.fn(async () => {
-      throw new Error('private-owner/private-repository');
+      throw networkError;
     }) as unknown as typeof fetch;
     const contentsFailure = jest
       .fn()
       .mockResolvedValueOnce(new Response(JSON.stringify({ sha: ref }), { status: 200 }))
-      .mockRejectedValueOnce(new Error('private-owner/private-repository')) as unknown as typeof fetch;
+      .mockRejectedValueOnce(networkError) as unknown as typeof fetch;
 
-    await expect(readRepositoryConfigFile(repository, branchFailure)).rejects.toThrow(
-      'Unable to resolve the repository default branch.',
-    );
-    await expect(readRepositoryConfigFile(repository, contentsFailure)).rejects.toThrow(
-      `Unable to read ${ROOT_CONFIG_FILE} from the repository.`,
-    );
+    await expect(readRepositoryConfigFile(repository, branchFailure)).rejects.toMatchObject({
+      cause: networkError,
+      message: 'Unable to resolve the repository default branch.',
+    });
+    await expect(readRepositoryConfigFile(repository, contentsFailure)).rejects.toMatchObject({
+      cause: networkError,
+      message: `Unable to read ${ROOT_CONFIG_FILE} from the repository.`,
+    });
   });
 
   it('rejects malformed default-branch commit JSON', async () => {

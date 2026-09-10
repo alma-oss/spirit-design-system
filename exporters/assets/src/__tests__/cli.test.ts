@@ -7,10 +7,31 @@ import { filterTargets } from '../config';
 
 describe('runCli', () => {
   const originalExit = process.exit;
+  const originalEnvironment = {
+    DISPATCH_DESCRIPTION: process.env.DISPATCH_DESCRIPTION,
+    DISPATCH_FILE_KEY: process.env.DISPATCH_FILE_KEY,
+    FIGMA_ACCESS_TOKEN: process.env.FIGMA_ACCESS_TOKEN,
+    GH_APP_CLIENT_ID: process.env.GH_APP_CLIENT_ID,
+    GH_APP_PRIVATE_KEY: process.env.GH_APP_PRIVATE_KEY,
+    GITHUB_ACTIONS: process.env.GITHUB_ACTIONS,
+    GITHUB_EVENT_NAME: process.env.GITHUB_EVENT_NAME,
+    GITHUB_OUTPUT: process.env.GITHUB_OUTPUT,
+    GITHUB_PUBLISH_NOTES_PATH: process.env.GITHUB_PUBLISH_NOTES_PATH,
+  };
+
+  beforeEach(() => {
+    delete process.env.GITHUB_ACTIONS;
+  });
 
   afterEach(() => {
     process.exit = originalExit;
-    delete process.env.FIGMA_ACCESS_TOKEN;
+    Object.entries(originalEnvironment).forEach(([name, value]) => {
+      if (value === undefined) {
+        delete process.env[name];
+      } else {
+        process.env[name] = value;
+      }
+    });
   });
 
   it('prints help for --help and -h', async () => {
@@ -168,12 +189,67 @@ describe('runCli', () => {
     }
   });
 
+  it('preserves numeric-looking option values as strings', async () => {
+    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-cli-numeric-'));
+    const configPath = path.join(temporaryDirectory, 'spirit.config.json');
+    let receivedBrands: string[] = [];
+
+    try {
+      await writeFile(
+        configPath,
+        '{"assets":{"fileKey":"123","targets":[{"brand":"123","out":"456","assets":["icons"]},{"brand":"Other","out":"other","assets":["icons"]}]}}',
+      );
+
+      await runCli(['sync', '--config', configPath, '--brand', '123', '--out', '456'], {
+        log: jest.fn(),
+        sync: async ({ config }) => {
+          receivedBrands = config.targets.map(({ brand }) => brand);
+
+          return { targets: [] };
+        },
+        token: 'token',
+      });
+
+      expect(receivedBrands).toEqual(['123']);
+    } finally {
+      await rm(temporaryDirectory, { recursive: true, force: true });
+    }
+  });
+
+  it('preserves leading-hyphen option values supplied with equals syntax', async () => {
+    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-cli-hyphen-'));
+    const configPath = path.join(temporaryDirectory, 'spirit.config.json');
+    let receivedBrands: string[] = [];
+
+    try {
+      await writeFile(
+        configPath,
+        '{"assets":{"fileKey":"file","targets":[{"brand":"-123","out":"-456","assets":["icons"]},{"brand":"Other","out":"other","assets":["icons"]}]}}',
+      );
+
+      await runCli(['sync', '--config', configPath, '--brand=-123', '--out=-456'], {
+        log: jest.fn(),
+        sync: async ({ config }) => {
+          receivedBrands = config.targets.map(({ brand }) => brand);
+
+          return { targets: [] };
+        },
+        token: 'token',
+      });
+
+      expect(receivedBrands).toEqual(['-123']);
+    } finally {
+      await rm(temporaryDirectory, { recursive: true, force: true });
+    }
+  });
+
   it('requires values for repository-root, brand, and out flags', async () => {
     await expect(runCli(['sync', '--repository-root'], { log: jest.fn() })).rejects.toThrow(
       /--repository-root requires a value/,
     );
     await expect(runCli(['sync', '--brand'], { log: jest.fn() })).rejects.toThrow(/--brand requires a value/);
     await expect(runCli(['sync', '--out'], { log: jest.fn() })).rejects.toThrow(/--out requires a value/);
+    await expect(runCli(['sync', '--brand='], { log: jest.fn() })).rejects.toThrow(/--brand requires a value/);
   });
 
   it('discovers opted-in repositories and writes GitHub output', async () => {
@@ -199,12 +275,13 @@ describe('runCli', () => {
           return {
             include: [
               {
+                base: 'main',
                 branch: 'chore/figma-icons-sync-spirit-design-system-packages-icons-src-svg',
                 brand: 'Spirit',
                 commitMessage: 'chore(icons): sync Spirit icons from Figma',
-                fileKey: options.fileKey ?? '',
                 out: 'packages/icons/src/svg',
                 owner: 'alma-oss',
+                ref: 'a'.repeat(40),
                 repo: 'spirit-design-system',
                 slug: 'spirit-design-system-packages-icons-src-svg',
                 title: 'Chore(icons): Sync Spirit icons from Figma',
@@ -219,9 +296,10 @@ describe('runCli', () => {
         },
       });
 
-      expect(messages[0]).toContain('"owner":"alma-oss"');
       expect(written).toContain('has-targets=true');
-      expect(JSON.parse(messages[0] ?? '{}').include[0].fileKey).toBe('dispatch-key');
+      expect(written).toContain(`"ref":"${'a'.repeat(40)}"`);
+      expect(messages).toEqual([]);
+      expect(errors).toEqual(['skipped', 'Discovered 1 asset sync target(s).']);
     } finally {
       process.env.GH_APP_CLIENT_ID = originalClientId;
       process.env.GH_APP_PRIVATE_KEY = originalPrivateKey;
@@ -261,6 +339,15 @@ describe('runCli', () => {
       process.env.GITHUB_OUTPUT = originalOutput;
       process.env.DISPATCH_FILE_KEY = originalDispatch;
     }
+  });
+
+  it('requires a file key for repository dispatch events', async () => {
+    process.env.GITHUB_EVENT_NAME = 'repository_dispatch';
+    delete process.env.DISPATCH_FILE_KEY;
+
+    await expect(runCli(['discover'], { log: jest.fn() })).rejects.toThrow(
+      'DISPATCH_FILE_KEY is required for repository_dispatch.',
+    );
   });
 
   it('writes GitHub output with the default writer', async () => {
@@ -340,6 +427,22 @@ describe('resolveConfig', () => {
 
     expect(config.targets[0].out).toBe('/repo/packages/icons/src/svg');
     expect(config.targets[0].assets).toEqual(['icons', 'benefit-icons']);
+    expect(config.configPath).toBe('/repo/packages/icons/spirit.config.json');
+  });
+
+  it('accepts Unicode and spaces in brand and output path names', () => {
+    const config = resolveConfig(
+      {
+        assets: {
+          fileKey: 'figma-file',
+          targets: [{ brand: 'Alma Career Práce', out: 'design assets/ikony práce', assets: ['icons'] }],
+        },
+      },
+      '/repo/spirit.config.json',
+    );
+
+    expect(config.targets[0].brand).toBe('Alma Career Práce');
+    expect(config.targets[0].out).toBe('/repo/design assets/ikony práce');
   });
 
   it('requires a shared Spirit config with an assets object', () => {
@@ -392,6 +495,22 @@ describe('resolveConfig', () => {
     {
       config: { fileKey: 'file', targets: [{ brand: 'Spirit', out: ' ' }] },
       expectedError: /non-empty "out"/,
+    },
+    {
+      config: { fileKey: 'file', targets: [{ brand: 'Spirit\nwhoami', out: 'svg', assets: ['icons'] }] },
+      expectedError: /safe characters in "brand"/,
+    },
+    {
+      config: { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'svg; whoami', assets: ['icons'] }] },
+      expectedError: /safe characters in "out"/,
+    },
+    {
+      config: { fileKey: 'file', targets: [{ brand: 'Spirit', out: '.', assets: ['icons'] }] },
+      expectedError: /must not contain "."/,
+    },
+    {
+      config: { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'svg//icons', assets: ['icons'] }] },
+      expectedError: /empty path segments/,
     },
     {
       config: { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'svg' }] },
@@ -466,7 +585,7 @@ describe('resolveConfig', () => {
             fileKey: ' file ',
             targets: [
               { brand: ' Spirit ', out: 'svg', assets: ['icons'] },
-              { brand: 'Jobs', out: './svg', assets: ['icons'] },
+              { brand: 'Jobs', out: 'svg', assets: ['icons'] },
             ],
           },
         },
@@ -487,7 +606,7 @@ describe('resolveConfig', () => {
         { assets: { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'C:\\Windows\\Temp', assets: ['icons'] }] } },
         '/repo/spirit.config.json',
       ),
-    ).toThrow(/relative path/);
+    ).toThrow(/safe characters/);
   });
 
   it('rejects parent-directory output paths', () => {
@@ -601,12 +720,6 @@ describe('filterTargets', () => {
   it('requires brand and out together', () => {
     expect(() => filterTargets(config, 'Spirit')).toThrow(/must be used together/);
     expect(() => filterTargets(config, undefined, 'packages/icons/src/svg')).toThrow(/must be used together/);
-  });
-
-  it('requires a configuration path to match output directories', () => {
-    expect(() =>
-      filterTargets({ fileKey: 'figma-file', targets: config.targets }, 'Spirit', 'packages/icons/src/svg'),
-    ).toThrow(/without a configuration path/);
   });
 
   it('selects a single matching target', () => {

@@ -97,9 +97,22 @@ The sync aborts before changing a target when it cannot discover or download the
 This repository runs a GitHub Actions workflow that synchronizes icons from Figma. It can be started manually or by a
 Figma library publish via external automation. Credentials live in the `figma` GitHub Actions environment.
 
-The workflow authenticates as the GitHub App, checks out every repository the App can access, and looks for
-`spirit.config.json` at the repository root. Repositories without that file, or without an `assets` object, are skipped.
-Each configured target gets its own updating pull request.
+The workflow authenticates as the GitHub App and reads `spirit.config.json` from each repository the App can access via
+the GitHub Contents API. Discovery resolves the repository default branch to an exact commit and reads the config at
+that revision. Repositories without that file, or without an `assets` object, are skipped. A run is rejected if discovery
+produces more than 128 targets. Repository dispatch events must provide `client_payload.file_key`; manual runs can
+synchronize every opted-in file.
+
+Each configured target gets its own updating pull request. Sync jobs download a prebuilt CLI from the discover job and
+do not install this monorepo. They check out the exact revision inspected by discovery with `blob:none` and non-cone
+sparse checkout limited to `/spirit.config.json` and the validated output directory. Figma publish notes are resolved
+inside each target job and written directly to a temporary pull-request body file; private checkout data and publish
+notes are never uploaded as workflow artifacts.
+
+The orchestrator repository and its Actions run are public. Job names and logs are redacted, and repository-specific
+values are masked before checkout, but sparse checkout is a risk reduction rather than a strict confidentiality
+boundary: Git and GitHub Actions can still expose repository or tree metadata. Repositories that require zero public
+metadata exposure must run synchronization from a private orchestrator instead.
 
 Branch name, commit message, and pull request title are optional and belong only on the `assets` object. Omitted fields
 keep these defaults:
@@ -135,6 +148,10 @@ Allowed placeholders: `{brand}`, `{slug}`, `{out}`, `{repo}`, `{owner}`. Unknown
 For `branch` only, interpolated `{brand}` and `{out}` are slugified so names like `Práce` stay valid git refs.
 `{slug}`, `{repo}`, and `{owner}` are left as-is. If two targets in the same repository resolve to the same branch, that
 repository is skipped.
+
+An existing automation branch is updated or deleted only when it belongs to a pull request authored by the configured
+GitHub App at the same head revision. Updates and deletions use `--force-with-lease`, so a concurrent or unverified
+branch cannot be overwritten.
 
 A repository opts in by:
 
