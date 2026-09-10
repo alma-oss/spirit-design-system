@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Container, Flex, Heading, Section, Text } from '../../../src/components';
+import { Avatar, Container, Flex, Grid, GridItem, Heading, Section, Text } from '../../../src/components';
 
 export default {
   title: 'Examples/Layout Templates/Team',
@@ -79,87 +79,54 @@ const teamMembers: TeamMember[] = [
 const TeamMemberCard = ({ member }: { member: TeamMember }) => (
   <Flex direction="vertical" spacing="space-800" alignmentX="left" alignmentY="top">
     <Avatar size="xlarge" aria-label={member.name}>
-      <img src={member.avatarUrl} alt={member.name} />
+      <img src={member.avatarUrl} alt="" aria-hidden="true" />
     </Avatar>
-    <Flex direction="vertical" spacing="space-700" alignmentX="left" alignmentY="top">
+    <Flex direction="vertical" spacing="space-800" alignmentX="left" alignmentY="top">
       <Flex direction="vertical" spacing="space-300" alignmentX="left" alignmentY="top">
-        <Text elementType="p" size="medium" emphasis="semibold">
+        <Text elementType="p" fontWeight="semibold" marginBottom="space-0">
           {member.name}
         </Text>
-        <Text elementType="p" size="small">
+        <Text elementType="p" size="small" textColor="secondary">
           {member.role}
         </Text>
       </Flex>
-      <Text elementType="p" size="small">
+      <Text elementType="p" size="small" textColor="secondary">
         {member.bio}
       </Text>
     </Flex>
   </Flex>
 );
 
-export const WithContent = () => {
-  const firstRowMembers = teamMembers.slice(0, 4);
-  const secondRowMembers = teamMembers.slice(4, 8);
-
-  return (
-    <Section size="xlarge">
-      <Container size="xlarge">
-        <Flex direction="vertical" spacing="space-1400" alignmentX="stretch" alignmentY="top">
-          {/* Header Section */}
-          <Flex
-            direction="vertical"
-            spacing="space-700"
-            alignmentX="left"
-            alignmentY="top"
-            UNSAFE_style={{ maxWidth: '696px' }}
-          >
-            <Flex direction="vertical" spacing="space-900" alignmentX="left" alignmentY="top">
-              <Heading elementType="h1" size="large">
-                Spirit Design System
-              </Heading>
-              <Text elementType="p" size="large" textColor="secondary">
-                Our mission is to develop a comprehensive design system that can swiftly adapt to any business or
-                technological demands, thereby preventing the redundancy of steps when establishing new frontends.
-              </Text>
+export const WithContent = () => (
+  <Section size="xlarge" backgroundColor="primary" hasContainer={false}>
+    <Flex direction="vertical" spacing="space-1400" alignmentX="stretch" alignmentY="top">
+      <Container>
+        {/* Header spans 7 of the 12 columns, which is the 696px width used in Figma */}
+        <Grid cols={12} spacing="space-1000">
+          <GridItem columnEnd={{ mobile: 'span 12', desktop: 'span 7' }}>
+            <Flex direction="vertical" spacing="space-700" alignmentX="left" alignmentY="top">
+              <Flex direction="vertical" spacing="space-900" alignmentX="left" alignmentY="top">
+                <Heading elementType="h1" size="large" marginBottom="space-0">
+                  Spirit Design System
+                </Heading>
+                <Text elementType="p" size="large" textColor="secondary">
+                  Our mission is to develop a comprehensive design system that can swiftly adapt to any business or
+                  technological demands, thereby preventing the redundancy of steps when establishing new frontends.
+                </Text>
+              </Flex>
             </Flex>
-          </Flex>
-
-          {/* Team Members Section */}
-          <Flex direction="vertical" spacing="space-1000" alignmentX="stretch" alignmentY="top">
-            {/* First Row */}
-            <Flex direction="horizontal" spacing="space-1000" alignmentX="stretch" alignmentY="top">
-              {firstRowMembers.map((member) => (
-                <Flex
-                  key={member.id}
-                  direction="vertical"
-                  spacing="space-800"
-                  alignmentX="left"
-                  alignmentY="top"
-                  UNSAFE_style={{ flex: '1 0 0' }}
-                >
-                  <TeamMemberCard member={member} />
-                </Flex>
-              ))}
-            </Flex>
-
-            {/* Second Row */}
-            <Flex direction="horizontal" spacing="space-1000" alignmentX="stretch" alignmentY="top">
-              {secondRowMembers.map((member) => (
-                <Flex
-                  key={member.id}
-                  direction="vertical"
-                  spacing="space-800"
-                  alignmentX="left"
-                  alignmentY="top"
-                  UNSAFE_style={{ flex: '1 0 0' }}
-                >
-                  <TeamMemberCard member={member} />
-                </Flex>
-              ))}
-            </Flex>
-          </Flex>
-        </Flex>
+          </GridItem>
+        </Grid>
       </Container>
-    </Section>
-  );
-};
+
+      <Container>
+        {/* Two rows of four members, laid out as one grid */}
+        <Grid cols={{ mobile: 1, tablet: 2, desktop: 4 }} spacing="space-1000">
+          {teamMembers.map((member) => (
+            <TeamMemberCard key={member.id} member={member} />
+          ))}
+        </Grid>
+      </Container>
+    </Flex>
+  </Section>
+);

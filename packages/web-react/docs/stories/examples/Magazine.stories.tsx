@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Box,
   Button,
   Card,
   CardBody,
@@ -11,6 +10,7 @@ import {
   Container,
   Flex,
   Grid,
+  GridItem,
   Heading,
   Icon,
   Section,
@@ -30,22 +30,25 @@ export const WithCards = () => (
   <Section size="xlarge" hasContainer={false}>
     <Flex direction="vertical" spacing="space-1400" alignmentX="stretch">
       <Container>
-        <Box UNSAFE_style={{ maxWidth: '696px' }}>
-          <Flex direction="vertical" spacing="space-700" alignmentX="left">
-            <Tag isSubtle size="small">
-              Small Tag
-            </Tag>
-            <Flex direction="vertical" spacing="space-900" alignmentX="left">
-              <Heading elementType="h1" size="large" marginBottom="space-0">
-                Spirit Design System
-              </Heading>
-              <Text size="large" textColor="secondary">
-                Our mission is to develop a comprehensive design system that can swiftly adapt to any business or
-                technological demands, thereby preventing the redundancy of steps when establishing new frontends.
-              </Text>
+        {/* Header spans 7 of the 12 columns, which is the 696px width used in Figma */}
+        <Grid cols={12} spacing="space-1000">
+          <GridItem columnEnd={{ mobile: 'span 12', desktop: 'span 7' }}>
+            <Flex direction="vertical" spacing="space-700" alignmentX="left">
+              <Tag isSubtle size="small">
+                Label
+              </Tag>
+              <Flex direction="vertical" spacing="space-900" alignmentX="left">
+                <Heading elementType="h1" size="large" marginBottom="space-0">
+                  Spirit Design System
+                </Heading>
+                <Text size="large" textColor="secondary">
+                  Our mission is to develop a comprehensive design system that can swiftly adapt to any business or
+                  technological demands, thereby preventing the redundancy of steps when establishing new frontends.
+                </Text>
+              </Flex>
             </Flex>
-          </Flex>
-        </Box>
+          </GridItem>
+        </Grid>
       </Container>
 
       <Container>
@@ -60,7 +63,10 @@ export const WithCards = () => (
                 <CardTitle isHeading>
                   <CardLink href="#">Exploring the Spirit Design System: A Guide to Modern UI Design</CardLink>
                 </CardTitle>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean fermentum risus id tortor.</p>
+                <p>
+                  In this piece, we delve into the fascinating world of user-centered design and its importance in
+                  creating effective software.
+                </p>
               </CardBody>
             </Card>
 
@@ -73,7 +79,9 @@ export const WithCards = () => (
                 <CardTitle isHeading>
                   <CardLink href="#">Unveiling the Spirit Design System: Crafting Seamless User Experiences</CardLink>
                 </CardTitle>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean fermentum risus id tortor.</p>
+                <p>
+                  Welcome to our article! Here, we explore the intricacies of design and its impact on user experience.
+                </p>
               </CardBody>
             </Card>
 
@@ -86,7 +94,10 @@ export const WithCards = () => (
                 <CardTitle isHeading>
                   <CardLink href="#">Crafting Seamless User Experiences</CardLink>
                 </CardTitle>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean fermentum risus id tortor.</p>
+                <p>
+                  Join us as we discuss the key principles of user experience design and how they can enhance your
+                  projects.
+                </p>
               </CardBody>
             </Card>
 
@@ -99,7 +110,10 @@ export const WithCards = () => (
                 <CardTitle isHeading>
                   <CardLink href="#">Crafting Seamless User Experiences</CardLink>
                 </CardTitle>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean fermentum risus id tortor.</p>
+                <p>
+                  Join us as we discuss the key principles of user experience design and how they can enhance your
+                  projects.
+                </p>
               </CardBody>
             </Card>
           </Grid>
@@ -108,7 +122,7 @@ export const WithCards = () => (
             <Button color="secondary" size="large">
               Button
             </Button>
-            <Flex spacing="space-300" alignmentY="center">
+            <Flex spacing="space-600" alignmentY="center">
               <Button isSymmetrical color="secondary" size="large" aria-label="Previous">
                 <Icon name="chevron-left" />
               </Button>

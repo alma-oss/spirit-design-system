@@ -50,6 +50,11 @@ defaults to false — set it only when the design is italic. Do not pass `fontWe
 
 If Code Connect still emits `emphasis`, replace it and mention the mapping to the user.
 
+Preserve literal text from `get_design_context`, including copy in each repeated card, column, or
+row. Do not use `get_metadata` layer names as copy (they are often generic: “Supporting text”).
+Inspect every repeated instance instead of copying the first item’s strings. If instance text is
+unavailable, use an explicit placeholder and list it as unverified.
+
 ## Color
 
 When `textColor` is omitted, text inherits from the parent.

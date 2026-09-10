@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Container, Flex, Heading, Section, Text } from '../../../src/components';
+import { Avatar, Container, Flex, Grid, Heading, Section, Text } from '../../../src/components';
 
 export default {
   title: 'Examples/Layout Templates/Team',
@@ -68,32 +68,29 @@ const teamMembers: TeamMember[] = [
 ];
 
 const TeamMemberCard = ({ member }: { member: TeamMember }) => (
-  <Flex direction="vertical" spacing="space-800" alignmentX="center" alignmentY="top" UNSAFE_style={{ flex: '1 0 0' }}>
+  <Flex direction="vertical" spacing="space-800" alignmentX="center" alignmentY="top">
     <Avatar size="xlarge" aria-label={member.name}>
-      <img src={member.avatarUrl} alt={member.name} />
+      <img src={member.avatarUrl} alt="" aria-hidden="true" />
     </Avatar>
     <Flex direction="vertical" spacing="space-300" alignmentX="center" alignmentY="top">
-      <Text elementType="p" size="medium" emphasis="semibold" textAlignment="center">
+      <Text elementType="p" fontWeight="semibold" textAlignment="center" marginBottom="space-0">
         {member.name}
       </Text>
-      <Text elementType="p" size="small" textAlignment="center">
+      <Text elementType="p" size="small" textColor="secondary" textAlignment="center">
         {member.role}
       </Text>
     </Flex>
   </Flex>
 );
 
-export const WithoutContent = () => {
-  const firstRowMembers = teamMembers.slice(0, 4);
-  const secondRowMembers = teamMembers.slice(4, 8);
-
-  return (
-    <Section size="xlarge" hasContainer={false}>
-      <Flex direction="vertical" spacing="space-1400" alignmentX="stretch" alignmentY="top">
-        {/* Centered header in narrow Container Medium */}
-        <Container size="medium">
+export const WithoutContent = () => (
+  <Section size="xlarge" backgroundColor="primary" hasContainer={false}>
+    <Flex direction="vertical" spacing="space-1400" alignmentX="stretch" alignmentY="top">
+      {/* Centered header in narrow Container Medium */}
+      <Container size="medium">
+        <Flex direction="vertical" spacing="space-700" alignmentX="center" alignmentY="top">
           <Flex direction="vertical" spacing="space-900" alignmentX="center" alignmentY="top">
-            <Heading elementType="h1" size="large" textAlignment="center">
+            <Heading elementType="h1" size="large" textAlignment="center" marginBottom="space-0">
               Spirit Design System
             </Heading>
             <Text elementType="p" size="large" textColor="secondary" textAlignment="center">
@@ -101,27 +98,17 @@ export const WithoutContent = () => {
               technological demands, thereby preventing the redundancy of steps when establishing new frontends.
             </Text>
           </Flex>
-        </Container>
+        </Flex>
+      </Container>
 
-        {/* Team grid in full-width Container XLarge */}
-        <Container size="xlarge">
-          <Flex direction="vertical" spacing="space-1000" alignmentX="stretch" alignmentY="top">
-            {/* First Row */}
-            <Flex direction="horizontal" spacing="space-1000" alignmentX="stretch" alignmentY="top">
-              {firstRowMembers.map((member) => (
-                <TeamMemberCard key={member.id} member={member} />
-              ))}
-            </Flex>
-
-            {/* Second Row */}
-            <Flex direction="horizontal" spacing="space-1000" alignmentX="stretch" alignmentY="top">
-              {secondRowMembers.map((member) => (
-                <TeamMemberCard key={member.id} member={member} />
-              ))}
-            </Flex>
-          </Flex>
-        </Container>
-      </Flex>
-    </Section>
-  );
-};
+      {/* Two rows of four members, laid out as one grid */}
+      <Container>
+        <Grid cols={{ mobile: 1, tablet: 2, desktop: 4 }} spacing="space-1000">
+          {teamMembers.map((member) => (
+            <TeamMemberCard key={member.id} member={member} />
+          ))}
+        </Grid>
+      </Container>
+    </Flex>
+  </Section>
+);

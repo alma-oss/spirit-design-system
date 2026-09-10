@@ -14,12 +14,12 @@ const heroImage = 'https://picsum.photos/seed/hero-banner/1200/460';
 export const WithCards = () => (
   <Section size="xlarge">
     <Flex direction="vertical" spacing="space-1400" alignmentX="stretch" alignmentY="top">
-      {/* Top row: heading + hero image */}
-      <Flex direction="horizontal" spacing="space-1000" alignmentY="center" alignmentX="stretch">
+      {/* Top row: heading + hero image, 6 + 6 of the 12 column grid */}
+      <Grid cols={2} spacing="space-1000" alignmentY="center">
         {/* Left: heading and subtitle */}
-        <Box UNSAFE_style={{ flex: '1 0 0', maxWidth: '800px' }} paddingRight="space-1000">
-          <Flex direction="vertical" spacing="space-900" alignmentX="stretch" alignmentY="top">
-            <Heading elementType="h1" size="xlarge" marginBottom="space-0">
+        <Box paddingRight={{ mobile: 'space-0', desktop: 'space-1000' }}>
+          <Flex direction="vertical" spacing="space-900" alignmentY="top">
+            <Heading elementType="h1" size="xlarge" fontWeight="semibold" marginBottom="space-0">
               With us,
               <br />
               you&apos;ll find a company that suits you.
@@ -32,13 +32,17 @@ export const WithCards = () => (
         </Box>
 
         {/* Right: hero image */}
-        <Box borderRadius="300" UNSAFE_style={{ flex: '1 0 0', height: '460px', overflow: 'hidden' }}>
-          <img src={heroImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <Box borderRadius="300" UNSAFE_style={{ overflow: 'hidden' }}>
+          <img
+            src={heroImage}
+            alt=""
+            style={{ display: 'block', width: '100%', height: '460px', objectFit: 'cover' }}
+          />
         </Box>
-      </Flex>
+      </Grid>
 
       {/* Bottom row: 3 feature cards */}
-      <Grid cols={3} spacing="space-1000">
+      <Grid cols={{ mobile: 1, desktop: 3 }} spacing="space-1000">
         <Card isBoxed>
           <CardBody>
             <CardTitle isHeading>
