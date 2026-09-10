@@ -6,6 +6,7 @@ import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent } from '../../types';
 import { CaptionText } from '../CaptionText';
+import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
 import { Stack } from '../Stack';
@@ -21,7 +22,7 @@ const defaultProps = {
 
 const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgressElement>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { classProps, progressStyle, valueRow, props: modifiedProps } = useProgressBarStyleProps(propsWithDefaults);
+  const { classProps, progressStyle, props: modifiedProps } = useProgressBarStyleProps(propsWithDefaults);
   const {
     'aria-describedby': ariaDescribedBy,
     'aria-valuetext': ariaValueText,
@@ -38,6 +39,7 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
     value,
     valueLabel,
     valueLabelId,
+    valuePlacement,
     ...restProps
   } = modifiedProps;
 
@@ -73,12 +75,17 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
     />
   );
 
+  const isValueLabelBottom = valuePlacement === 'bottom';
+
   const barWithValue = hasValueLabel ? (
-    <div
-      className={
-        classNames(valueRow.className, !shouldRenderField && styleProps.className, classProps.value) || undefined
-      }
-      style={{ ...valueRow.style, ...(!shouldRenderField ? styleProps.style : undefined) }}
+    <Flex
+      alignmentX="left"
+      alignmentY={isValueLabelBottom ? undefined : 'center'}
+      direction={isValueLabelBottom ? 'vertical' : 'horizontal'}
+      spacingX={isValueLabelBottom ? undefined : 'space-600'}
+      spacingY={isValueLabelBottom ? 'space-600' : undefined}
+      UNSAFE_className={classNames(!shouldRenderField && styleProps.className, classProps.value) || undefined}
+      UNSAFE_style={!shouldRenderField ? styleProps.style : undefined}
     >
       {progressElement}
       <CaptionText
@@ -89,7 +96,7 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
       >
         {valueLabel}
       </CaptionText>
-    </div>
+    </Flex>
   ) : (
     progressElement
   );

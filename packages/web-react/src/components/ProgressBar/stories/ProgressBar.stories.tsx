@@ -88,4 +88,15 @@ type Story = StoryObj<typeof ProgressBar>;
 
 export const Playground: Story = {
   name: 'ProgressBar',
+  render: (args) => (
+    <div
+      className="d-grid"
+      style={{
+        width: '20rem',
+        maxWidth: '100%',
+      }}
+    >
+      <ProgressBar {...args} />
+    </div>
+  ),
 };

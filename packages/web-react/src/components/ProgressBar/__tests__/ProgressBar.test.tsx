@@ -74,13 +74,12 @@ describe('ProgressBar', () => {
     },
   );
 
-  it('should render disabled bar without a color scheme', () => {
+  it('should render disabled bar without an emotion color scheme', () => {
     render(<ProgressBar {...defaultProps} isDisabled />);
 
     const element = screen.getByRole('progressbar');
 
-    expect(element).toHaveClass('ProgressBar');
-    expect(element).not.toHaveClass('color-scheme-on-disabled');
+    expect(element).toHaveClass('ProgressBar', 'color-scheme-on-disabled');
     expect(element).not.toHaveClass('ProgressBar--informative');
     expect(element).not.toHaveClass(getColorSchemeClassName({ color: 'informative', isSubtle: true }));
     expect(element.style.getPropertyValue('--progress-bar-value')).toBe('60%');
@@ -131,17 +130,21 @@ describe('ProgressBar', () => {
       'Flex',
       'Flex--horizontal',
       'Flex--noWrap',
+      'Flex--alignmentXLeft',
       'Flex--alignmentYCenter',
     );
-    expect(container.querySelector('.Flex')).not.toHaveClass('Flex--alignmentXStretch');
+    expect((container.querySelector('.Flex') as HTMLElement).style.getPropertyValue('--flex-spacing-x')).toBe(
+      'var(--spirit-space-600)',
+    );
   });
 
   it('should render value label below the bar', () => {
     const { container } = render(<ProgressBar {...defaultProps} valuePlacement="bottom" valueLabel="4 out of 20" />);
 
-    expect(container.querySelector('.Flex')).toHaveClass('Flex', 'Flex--vertical');
-    expect(container.querySelector('.Flex')).not.toHaveClass('Flex--noWrap');
-    expect(container.querySelector('.Flex')).not.toHaveClass('Flex--alignmentXStretch');
+    expect(container.querySelector('.Flex')).toHaveClass('Flex', 'Flex--vertical', 'Flex--alignmentXLeft');
+    expect((container.querySelector('.Flex') as HTMLElement).style.getPropertyValue('--flex-spacing-y')).toBe(
+      'var(--spirit-space-600)',
+    );
   });
 
   it('should set aria-valuetext from a string valueLabel', () => {
@@ -169,6 +172,7 @@ describe('ProgressBar', () => {
     const { container } = render(<ProgressBar {...defaultProps} isDisabled valueLabel="40 %" />);
 
     expect(container.querySelector('.Flex')).toHaveClass('color-scheme-on-disabled');
+    expect(screen.getByRole('progressbar')).toHaveClass('color-scheme-on-disabled');
     expect(screen.getByText('40 %')).toHaveClass('text-color-scheme');
   });
 
