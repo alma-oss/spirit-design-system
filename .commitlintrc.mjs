@@ -6,7 +6,23 @@ export default {
     ...conventionalConfig.ignores,
     (commit) => commit.includes('Updated styles and tokens'),
   ],
+  plugins: [
+    {
+      rules: {
+        'issue-reference-format': ({ raw = '' }) => {
+          const refs = raw.match(/#(?:[A-Za-z]+-\w+|\d+)(?!\w|-)/g) ?? [];
+          const invalid = refs.filter((r) => !/^(?:#[A-Za-z]+-\d+|#\d+)$/.test(r));
+
+          return [
+            invalid.length === 0,
+            `Issue reference must have a numeric suffix (e.g. #DS-1234, #UA-5678, #1234): ${invalid.join(', ')}`,
+          ];
+        },
+      },
+    },
+  ],
   rules: {
+    'issue-reference-format': [2, 'always'],
     'scope-enum': [
       1,
       'always',
