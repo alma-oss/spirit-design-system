@@ -1,5 +1,19 @@
-import React, { type CSSProperties } from 'react';
-import { Box, Button, Divider, Flex, Heading, Icon, Section, Tag, Text } from '../../../src/components';
+import React from 'react';
+import {
+  Button,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Matrix,
+  PricingPlan,
+  PricingPlanBody,
+  PricingPlanHeader,
+  ScrollView,
+  Section,
+  Tag,
+  Text,
+} from '../../../src/components';
 
 export default {
   title: 'Examples/Layout Templates/Pricing',
@@ -9,292 +23,140 @@ export default {
   },
 };
 
-const BORDER_RADIUS = 'var(--radius/radius-500, 16px)';
+const FEATURE_TITLE = 'Function Name';
 
-type ColumnPosition = 'top' | 'middle' | 'bottom';
+// The Figma feature titles use a dotted underline, which Spirit renders only for features that open a Tooltip
+// or a Modal. The frame does not expose the tooltip copy, so the generic placeholder from the design is used.
+const FEATURE_TOOLTIP = 'Supporting text or message';
 
-function getColumnStyle(highlighted: boolean, position: ColumnPosition): CSSProperties {
-  const bg = highlighted
-    ? 'var(--themed/component/pricing-plan/highlighted-background, #f2f7fd)'
-    : 'var(--themed/background/primary, #fdfdfc)';
-  const bc = highlighted
-    ? 'var(--themed/component/pricing-plan/highlighted-border, #80b2eb)'
-    : 'var(--themed/border/basic, #d9d9d9)';
-
-  return {
-    flex: '1 0 0',
-    minWidth: 0,
-    background: bg,
-    borderLeft: `1px solid ${bc}`,
-    borderRight: `1px solid ${bc}`,
-    ...(position === 'top' && {
-      borderTop: `1px solid ${bc}`,
-      borderTopLeftRadius: BORDER_RADIUS,
-      borderTopRightRadius: BORDER_RADIUS,
-    }),
-    ...(position === 'bottom' && {
-      borderBottom: `1px solid ${bc}`,
-      borderBottomLeftRadius: BORDER_RADIUS,
-      borderBottomRightRadius: BORDER_RADIUS,
-    }),
-  };
-}
-
-interface PricingPlan {
+interface Plan {
   id: string;
   name: string;
-  description: string;
+  subtitle: string;
   price: string;
   note: string;
-  highlighted: boolean;
   badge?: string;
+  isHighlighted?: boolean;
+  featureDescriptions: string[];
 }
 
-const plans: PricingPlan[] = [
+const plans: Plan[] = [
   {
     id: 'plan-1',
     name: 'Plan name',
-    description: "Just a friendly reminder that I'm here for you!",
-    price: '9 690 Kč',
+    subtitle: 'Supporting text or message',
+    price: '2 900 Kč',
     note: 'Supporting text or message',
-    highlighted: false,
+    featureDescriptions: [
+      'Hey there! Just a little note to support you.',
+      'Supporting text or message',
+      'Hey! Just sending some positive energy your way!',
+      'Supporting text or message',
+    ],
   },
   {
     id: 'plan-2',
     name: 'Plan name',
-    description: "Just a friendly reminder that I'm here for you!",
-    price: '19 690 Kč',
-    note: "Just a friendly reminder that we're here for you!",
-    highlighted: false,
+    subtitle: 'Supporting text or message',
+    price: '4 990 Kč',
+    note: 'Hey there! Just a little note to back you up.',
+    featureDescriptions: [
+      'Just wanted to drop a quick message to cheer you on!',
+      'Hey there! Just a little message to support you.',
+      "Here's a little encouragement to brighten your day!",
+      'Supporting text or message',
+    ],
   },
   {
     id: 'plan-3',
     name: 'Plan name',
-    description: "Just a friendly reminder that I'm here for you!",
-    price: '39 000 Kč',
+    subtitle: "Just a friendly reminder that I'm here for you!",
+    price: '9 690 Kč',
     note: 'Supporting text or message',
-    highlighted: true,
-    badge: 'Most Popular',
+    badge: 'Badge',
+    featureDescriptions: [
+      "Here's a friendly reminder that I'm here for you!",
+      'Supporting text or message',
+      "Just a quick message to say I'm cheering for you!",
+      'Supporting text or message',
+    ],
   },
   {
     id: 'plan-4',
     name: 'Plan name',
-    description: "Just a friendly reminder that I'm here for you!",
-    price: '59 000 Kč',
+    subtitle: "Just a friendly reminder that I'm here for you!",
+    price: '39 000 Kč',
     note: "Just a friendly reminder that we're here for you!",
-    highlighted: false,
-  },
-];
-
-const features: { id: string; name: string; descriptions: [string, string, string, string] }[] = [
-  {
-    id: 'feature-1',
-    name: 'Function Name',
-    descriptions: [
-      "Here's a friendly reminder that I'm here for you!",
+    isHighlighted: true,
+    featureDescriptions: [
       'Sending some good vibes your way!',
-      "Here's a friendly reminder that I'm here for you!",
-      'Sending some good vibes your way!',
-    ],
-  },
-  {
-    id: 'feature-2',
-    name: 'Function Name',
-    descriptions: [
-      'Supporting text or message',
       'Just a friendly note to back you up!',
+      "Hey! Just wanted to remind you that I'm here for you.",
       'Supporting text or message',
-      'Just a friendly note to back you up!',
-    ],
-  },
-  {
-    id: 'feature-3',
-    name: 'Function Name',
-    descriptions: [
-      "Just a quick message to say I'm cheering for you!",
-      "Hey! Just wanted to remind you that I'm here for you.",
-      "Just a quick message to say I'm cheering for you!",
-      "Hey! Just wanted to remind you that I'm here for you.",
     ],
   },
 ];
 
-const lastFeature = {
-  name: 'Function Name',
-  descriptions: [
-    'Supporting text or message',
-    'Supporting text or message',
-    'Supporting text or message',
-    'Supporting text or message',
-  ] as [string, string, string, string],
-};
-
-const FeatureContent = ({ name, description }: { name: string; description: string }) => (
-  <Flex spacing="space-500" alignmentY="top">
-    <Box UNSAFE_style={{ display: 'flex', alignItems: 'center', height: '24px', flexShrink: 0 }}>
-      <Icon name="check-plain" />
-    </Box>
-    <Flex direction="vertical" spacing="space-300">
-      <Text
-        emphasis="semibold"
-        marginBottom="space-0"
-        UNSAFE_style={{ textDecoration: 'underline dotted', textDecorationSkipInk: 'none' }}
-      >
-        {name}
-      </Text>
-      <Text size="small" textColor="secondary" marginBottom="space-0">
-        {description}
-      </Text>
-    </Flex>
-  </Flex>
-);
-
-const PricingTable = () => (
-  <Flex direction="vertical">
-    {/* Badge row – top position with rounded top corners */}
-    <Flex spacing="space-800">
-      {plans.map((plan) => (
-        <Box
-          key={plan.id}
-          paddingX="space-800"
-          paddingY="space-500"
-          UNSAFE_style={{ ...getColumnStyle(plan.highlighted, 'top'), minHeight: '40px' }}
-        >
-          {plan.badge && (
-            <Text size="small" emphasis="semibold" marginBottom="space-0">
-              {plan.badge}
-            </Text>
-          )}
-        </Box>
-      ))}
-    </Flex>
-
-    {/* Plan name row */}
-    <Flex spacing="space-800" alignmentY="stretch">
-      {plans.map((plan) => (
-        <Box
-          key={plan.id}
-          paddingTop="space-700"
-          paddingX="space-800"
-          UNSAFE_style={getColumnStyle(plan.highlighted, 'middle')}
-        >
-          <Flex direction="vertical" spacing="space-300">
-            <Heading elementType="div" size="small" marginBottom="space-0">
-              {plan.name}
-            </Heading>
-            <Text size="small" marginBottom="space-0">
-              {plan.description}
-            </Text>
-          </Flex>
-        </Box>
-      ))}
-    </Flex>
-
-    {/* Price row */}
-    <Flex spacing="space-800" alignmentY="stretch">
-      {plans.map((plan) => (
-        <Box
-          key={plan.id}
-          paddingTop="space-800"
-          paddingBottom="space-900"
-          paddingX="space-800"
-          UNSAFE_style={getColumnStyle(plan.highlighted, 'middle')}
-        >
-          <Flex direction="vertical" spacing="space-700" alignmentX="stretch">
-            <Heading elementType="div" size="medium" textAlignment="center" marginBottom="space-0">
-              {plan.price}
-            </Heading>
-            <Flex direction="vertical" spacing="space-700" alignmentX="stretch">
-              <Button size="large">Button</Button>
-              <Text size="small" textColor="secondary" textAlignment="center" marginBottom="space-0">
-                {plan.note}
-              </Text>
-            </Flex>
-          </Flex>
-        </Box>
-      ))}
-    </Flex>
-
-    {/* Horizontal dividers */}
-    <Flex spacing="space-800">
-      {plans.map((plan) => (
-        <Divider key={plan.id} UNSAFE_style={{ flex: '1 0 0', minWidth: 0 }} />
-      ))}
-    </Flex>
-
-    {/* Headline row */}
-    <Flex spacing="space-800" alignmentY="stretch">
-      {plans.map((plan) => (
-        <Box
-          key={plan.id}
-          paddingX="space-800"
-          paddingY="space-700"
-          UNSAFE_style={getColumnStyle(plan.highlighted, 'middle')}
-        >
-          <Text size="small" textColor="secondary" marginBottom="space-0">
-            Headline
-          </Text>
-        </Box>
-      ))}
-    </Flex>
-
-    {/* Feature rows */}
-    {features.map((feature) => (
-      <Flex key={feature.id} spacing="space-800" alignmentY="stretch">
-        {plans.map((plan, planIndex) => (
-          <Box
-            key={plan.id}
-            paddingX="space-800"
-            paddingY="space-600"
-            UNSAFE_style={getColumnStyle(plan.highlighted, 'middle')}
-          >
-            <FeatureContent name={feature.name} description={feature.descriptions[planIndex]} />
-          </Box>
-        ))}
-      </Flex>
-    ))}
-
-    {/* Last feature row – bottom position with rounded bottom corners */}
-    <Flex spacing="space-800" alignmentY="stretch">
-      {plans.map((plan, planIndex) => (
-        <Box
-          key={plan.id}
-          paddingTop="space-600"
-          paddingBottom="space-1000"
-          paddingX="space-800"
-          UNSAFE_style={getColumnStyle(plan.highlighted, 'bottom')}
-        >
-          <FeatureContent name={lastFeature.name} description={lastFeature.descriptions[planIndex]} />
-        </Box>
-      ))}
-    </Flex>
-  </Flex>
+const PlanColumn = ({ plan }: { plan: Plan }) => (
+  <PricingPlan hasComparableFeatures isHighlighted={plan.isHighlighted}>
+    <PricingPlanHeader
+      action={
+        <Button id={`${plan.id}-action`} aria-labelledby={`${plan.id}-action ${plan.id}-title`}>
+          Button
+        </Button>
+      }
+      badge={plan.badge && <span id={`${plan.id}-badge`}>{plan.badge}</span>}
+      title={
+        <span id={`${plan.id}-title`} aria-labelledby={plan.badge && `${plan.id}-badge ${plan.id}-title`}>
+          {plan.name}
+        </span>
+      }
+      subtitle={plan.subtitle}
+      price={plan.price}
+      note={plan.note}
+    />
+    <PricingPlanBody
+      id={plan.id}
+      description="Headline"
+      features={plan.featureDescriptions.map((description) => ({
+        title: FEATURE_TITLE,
+        description,
+        tooltipContent: FEATURE_TOOLTIP,
+      }))}
+    />
+  </PricingPlan>
 );
 
 export const WithTable = () => (
   <Section size="xlarge" backgroundColor="primary">
     <Flex direction="vertical" spacing="space-1400" alignmentX="stretch">
-      <Flex
-        direction="vertical"
-        spacing="space-700"
-        alignmentX="center"
-        alignmentY="top"
-        UNSAFE_style={{ maxWidth: '800px', width: '100%', margin: '0 auto' }}
-      >
-        <Tag isSubtle size="small">
-          Small Tag
-        </Tag>
-        <Flex direction="vertical" spacing="space-900" alignmentX="center" alignmentY="top">
-          <Heading elementType="h1" size="large" textAlignment="center" marginBottom="space-0">
-            Spirit Design System
-          </Heading>
-          <Text size="large" textColor="secondary" textAlignment="center">
-            Our mission is to develop a comprehensive design system that can swiftly adapt to any business or
-            technological demands, thereby preventing the redundancy of steps when establishing new frontends.
-          </Text>
-        </Flex>
-      </Flex>
-      <PricingTable />
+      <Grid cols={12} spacing="space-1000">
+        <GridItem columnStart={{ mobile: 1, desktop: 3 }} columnEnd={{ mobile: 'span 12', desktop: 'span 8' }}>
+          <Flex direction="vertical" spacing="space-700" alignmentX="center" alignmentY="top">
+            <Tag isSubtle size="small">
+              Label
+            </Tag>
+            <Flex direction="vertical" spacing="space-900" alignmentX="center" alignmentY="top">
+              <Heading elementType="h1" size="large" textAlignment="center" marginBottom="space-0">
+                Spirit Design System
+              </Heading>
+              <Text size="large" textColor="secondary" textAlignment="center">
+                Our mission is to develop a comprehensive design system that can swiftly adapt to any business or
+                technological demands, thereby preventing the redundancy of steps when establishing new frontends.
+              </Text>
+            </Flex>
+          </Flex>
+        </GridItem>
+      </Grid>
+
+      <ScrollView direction="horizontal">
+        {/* Matrix aligns the feature rows across all four plans */}
+        <Matrix cols={4} spacingX="space-800">
+          {plans.map((plan) => (
+            <PlanColumn key={plan.id} plan={plan} />
+          ))}
+        </Matrix>
+      </ScrollView>
     </Flex>
   </Section>
 );
