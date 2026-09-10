@@ -2,7 +2,7 @@
 
 import classNames from 'classnames';
 import React, { type ForwardedRef, forwardRef, useId } from 'react';
-import { ContextPropsProvider } from '../../context';
+import { ContextPropsProvider, useContextProps } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent } from '../../types';
 import { CaptionText } from '../CaptionText';
@@ -21,7 +21,8 @@ const defaultProps = {
 } as const;
 
 const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgressElement>) => {
-  const propsWithDefaults = { ...defaultProps, ...props };
+  const mergedProps = useContextProps<Partial<SpiritProgressBarProps>>(props, 'progressBar');
+  const propsWithDefaults = { ...defaultProps, ...mergedProps } as SpiritProgressBarProps;
   const { classProps, progressStyle, props: modifiedProps } = useProgressBarStyleProps(propsWithDefaults);
   const {
     'aria-describedby': ariaDescribedBy,

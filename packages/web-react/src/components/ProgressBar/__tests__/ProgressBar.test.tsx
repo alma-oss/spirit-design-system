@@ -13,6 +13,7 @@ import {
   validHtmlAttributesTest,
 } from '@local/tests';
 import { EmotionColors } from '../../../constants';
+import { ContextPropsProvider } from '../../../context';
 import { getColorSchemeClassName } from '../../../utils';
 import { ProgressBarColorsExtended } from '../constants';
 import ProgressBar from '../ProgressBar';
@@ -186,5 +187,41 @@ describe('ProgressBar', () => {
     render(<ProgressBar {...defaultProps} valueLabel="30 %" valueLabelId="progress-bar-animated-value" />);
 
     expect(screen.getByText('30 %')).toHaveAttribute('id', 'progress-bar-animated-value');
+  });
+
+  it('should apply disabled state from context when prop is not provided', () => {
+    render(
+      <ContextPropsProvider value={{ isDisabled: true }}>
+        <ProgressBar {...defaultProps} />
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByRole('progressbar')).toHaveClass('color-scheme-on-disabled');
+    expect(screen.getByRole('progressbar')).not.toHaveClass(
+      getColorSchemeClassName({ color: 'informative', isSubtle: true }),
+    );
+  });
+
+  it('should prefer direct isDisabled over context', () => {
+    render(
+      <ContextPropsProvider value={{ isDisabled: true }}>
+        <ProgressBar {...defaultProps} isDisabled={false} />
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByRole('progressbar')).not.toHaveClass('color-scheme-on-disabled');
+    expect(screen.getByRole('progressbar')).toHaveClass(
+      getColorSchemeClassName({ color: 'informative', isSubtle: true }),
+    );
+  });
+
+  it('should apply validationState from context when prop is not provided', () => {
+    render(
+      <ContextPropsProvider value={{ validationState: 'danger' }}>
+        <ProgressBar {...fieldProps} validationText="Add your work experience to continue" />
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Add your work experience to continue')).toBeInTheDocument();
   });
 });
