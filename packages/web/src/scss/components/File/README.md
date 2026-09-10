@@ -93,8 +93,7 @@ The image can be positioned/cropped via CSS custom properties:
 
 ## Upload Progress
 
-While a file is uploading, put a [ProgressBar][readme-progress-bar] inside `File__text`. Pair it with a
-`HelperText` carrying `role="status"` so screen readers announce the upload as it finishes:
+While a file is uploading, put a [ProgressBar][readme-progress-bar] inside `File__text`:
 
 ```html
 <li class="File">
@@ -120,19 +119,25 @@ While a file is uploading, put a [ProgressBar][readme-progress-bar] inside `File
           max="100"
           style="--progress-bar-value: 60%"
           aria-label="Uploading Document.pdf"
-          aria-describedby="file-progress-bar-status"
         ></progress>
         <span class="typography-caption text-secondary">60&nbsp;%</span>
       </div>
-      <span class="HelperText" id="file-progress-bar-status" role="status">Uploading your file…</span>
     </div>
   </div>
   <!-- … actions … -->
 </li>
 ```
 
-👉 Label the bar with the file name so the announcement identifies which upload it belongs to, and offer a
-way to cancel it in the actions area.
+👉 Only **one line of content is shown below the file name at a time**. When more than one could apply,
+the higher priority wins:
+
+1. ProgressBar
+2. ValidationText
+3. HelperText
+
+So the bar replaces the helper text while the upload runs, and a validation text replaces the bar if it
+fails. Label the bar with the file name so the announcement identifies which upload it belongs to, and
+offer a way to cancel it in the actions area.
 
 ## Validation States
 
