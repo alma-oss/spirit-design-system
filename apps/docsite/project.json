@@ -7,6 +7,14 @@
     "build": {
       "outputs": ["{projectRoot}/.next"],
       "dependsOn": ["^build"],
+      "inputs": [
+        "default",
+        "{workspaceRoot}/docs/introduction/**/*.md",
+        "{workspaceRoot}/docs/design/**/*.md",
+        "{workspaceRoot}/docs/development/**/*.md",
+        "{workspaceRoot}/docs/migrations/index.md",
+        "{workspaceRoot}/packages/web-react/src/components/**/docs/*.md"
+      ],
       "cache": true
     },
     "dev": {

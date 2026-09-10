@@ -157,3 +157,22 @@ body {
     white-space: pre-wrap;
     vertical-align: baseline;
 }
+
+.docs-Embed {
+    display: block;
+    width: 100%;
+    min-height: 32rem;
+    margin-block: var(--spirit-space-1000);
+    border: 0;
+}
+
+.docs-SectionBody {
+    flex: 1;
+    min-width: 0;
+}
+
+.docs-Sidebar {
+    flex: 0 0 16rem;
+    min-width: 16rem;
+    max-width: 22rem;
+}

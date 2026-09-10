@@ -35,8 +35,16 @@ const nextConfig: NextConfig = {
       // Path is hardcoded in compilePreview.ts as `PARTIALS_DIR` — update both if this moves.
       './src/domains/components/ui/partials/**/*',
     ],
+    '/*': [
+      '../../docs/introduction/**/*.md',
+      '../../docs/design/**/*.md',
+      '../../docs/development/**/*.md',
+      '../../docs/migrations/index.md',
+      '../../packages/web-react/src/components/**/docs/*.md',
+    ],
   },
   transpilePackages: ['@alma-oss/spirit-web-react'],
+  serverExternalPackages: ['next-mdx-remote'],
   reactStrictMode: true,
   experimental: {
     globalNotFound: true,

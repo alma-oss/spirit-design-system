@@ -3,18 +3,18 @@ import CanonicalMarkdown from '@local/domains/content/CanonicalMarkdown';
 import { resolveComponentTabFile } from '@local/domains/content/repository';
 import { notFound } from 'next/navigation';
 
-interface DesignTabPageProps {
+interface AccessibilityTabPageProps {
   params: Promise<{ component: string }>;
 }
 
-const DesignTabPage = async ({ params }: DesignTabPageProps) => {
+const AccessibilityTabPage = async ({ params }: AccessibilityTabPageProps) => {
   const { component } = await params;
 
   if (!isValidComponentSlug(component)) {
     notFound();
   }
 
-  const filePath = resolveComponentTabFile(component, 'design');
+  const filePath = resolveComponentTabFile(component, 'accessibility');
 
   if (!filePath) {
     notFound();
@@ -23,4 +23,4 @@ const DesignTabPage = async ({ params }: DesignTabPageProps) => {
   return <CanonicalMarkdown isCanonical filePath={filePath} missing="not-found" />;
 };
 
-export default DesignTabPage;
+export default AccessibilityTabPage;
