@@ -22,7 +22,7 @@ const ProgressBarColors = () => (
     {colors.map(({ label, color }) => (
       <Stack key={label} spacing="space-400">
         <CaptionText textColor="secondary">{label}</CaptionText>
-        <ProgressBar aria-label={label} color={color} value={60} valueText="60%" />
+        <ProgressBar aria-label={label} color={color} value={60} valueText="60 %" />
       </Stack>
     ))}
   </>

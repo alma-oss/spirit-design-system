@@ -45,7 +45,7 @@ Use `valueText` to show the current value next to the bar. Set `valuePlacement` 
 under the bar.
 
 ```tsx
-<ProgressBar aria-label="Profile completeness" value={20} valueText="20%" />
+<ProgressBar aria-label="Profile completeness" value={20} valueText="20 %" />
 <ProgressBar
   aria-label="Awards collected"
   aria-valuetext="4 out of 20 awards"
@@ -109,7 +109,7 @@ Use the `isDisabled` prop. The value text picks up the disabled content color au
   isDisabled
   label="Profile completeness"
   value={40}
-  valueText="40%"
+  valueText="40 %"
 />
 ```
 
@@ -129,7 +129,7 @@ Place the ProgressBar as File children to show the progress of a single upload:
     onDismiss={onDismiss}
     removeText="Cancel upload of Document.pdf"
   >
-    <ProgressBar aria-describedby="file-upload-status" aria-label="Uploading Document.pdf" value={60} valueText="60%" />
+    <ProgressBar aria-describedby="file-upload-status" aria-label="Uploading Document.pdf" value={60} valueText="60 %" />
   </File>
 </ul>
 ```

@@ -70,7 +70,7 @@ Pass children to render a [`ProgressBar`][progress-bar-readme] between the file 
   }
   onDismiss={() => onDismiss('file-1')}
 >
-  <ProgressBar aria-describedby="file-upload-status" aria-label="Uploading Document.pdf" value={60} valueText="60%" />
+  <ProgressBar aria-describedby="file-upload-status" aria-label="Uploading Document.pdf" value={60} valueText="60 %" />
 </File>
 ```
 

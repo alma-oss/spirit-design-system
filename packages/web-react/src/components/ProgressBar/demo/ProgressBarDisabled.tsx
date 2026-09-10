@@ -8,7 +8,7 @@ const ProgressBarDisabled = () => (
     isDisabled
     label="Profile completeness"
     value={40}
-    valueText="40%"
+    valueText="40 %"
   />
 );
 

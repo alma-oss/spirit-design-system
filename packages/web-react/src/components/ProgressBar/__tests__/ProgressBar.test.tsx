@@ -124,9 +124,9 @@ describe('ProgressBar', () => {
   });
 
   it('should render value text to the right of the bar', () => {
-    const { container } = render(<ProgressBar {...defaultProps} valueText="60%" />);
+    const { container } = render(<ProgressBar {...defaultProps} valueText="60 %" />);
 
-    expect(screen.getByText('60%')).toBeInTheDocument();
+    expect(screen.getByText('60 %')).toBeInTheDocument();
     expect(container.querySelector('.Flex')).toHaveClass(
       'Flex',
       'Flex--horizontal',
@@ -151,10 +151,10 @@ describe('ProgressBar', () => {
   });
 
   it('should apply the disabled color scheme to the value row', () => {
-    const { container } = render(<ProgressBar {...defaultProps} isDisabled valueText="40%" />);
+    const { container } = render(<ProgressBar {...defaultProps} isDisabled valueText="40 %" />);
 
     expect(container.querySelector('.Flex')).toHaveClass('color-scheme-on-disabled');
-    expect(screen.getByText('40%')).toHaveClass('text-color-scheme');
+    expect(screen.getByText('40 %')).toHaveClass('text-color-scheme');
   });
 
   it('should apply --progress-bar-value as a percentage of max', () => {
@@ -164,8 +164,8 @@ describe('ProgressBar', () => {
   });
 
   it('should set id on the visible value text', () => {
-    render(<ProgressBar {...defaultProps} valueText="30%" valueTextId="progress-bar-animated-value" />);
+    render(<ProgressBar {...defaultProps} valueText="30 %" valueTextId="progress-bar-animated-value" />);
 
-    expect(screen.getByText('30%')).toHaveAttribute('id', 'progress-bar-animated-value');
+    expect(screen.getByText('30 %')).toHaveAttribute('id', 'progress-bar-animated-value');
   });
 });
