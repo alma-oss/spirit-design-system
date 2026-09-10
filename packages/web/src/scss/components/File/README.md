@@ -91,6 +91,49 @@ The image can be positioned/cropped via CSS custom properties:
 </li>
 ```
 
+## Upload Progress
+
+While a file is uploading, put a [ProgressBar][readme-progress-bar] inside `File__text`. Pair it with a
+`HelperText` carrying `role="status"` so screen readers announce the upload as it finishes:
+
+```html
+<li class="File">
+  <div class="File__preview">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
+      <use href="/assets/icons/svg/sprite.svg#file" />
+    </svg>
+  </div>
+  <div class="File__content">
+    <div class="File__text">
+      <span class="File__name">
+        <span class="text-truncate-multiline text-word-break-long-words" style="--text-truncate-lines: 1;"
+          >Document.pdf</span
+        >
+      </span>
+      <div
+        class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter color-scheme-on-emotion-informative-subtle"
+        style="--flex-spacing-x: var(--spirit-space-600);"
+      >
+        <progress
+          class="ProgressBar"
+          value="60"
+          max="100"
+          style="--progress-bar-value: 60%"
+          aria-label="Uploading Document.pdf"
+          aria-describedby="file-progress-bar-status"
+        ></progress>
+        <span class="typography-caption text-secondary">60&nbsp;%</span>
+      </div>
+      <span class="HelperText" id="file-progress-bar-status" role="status">Uploading your file…</span>
+    </div>
+  </div>
+  <!-- … actions … -->
+</li>
+```
+
+👉 Label the bar with the file name so the announcement identifies which upload it belongs to, and offer a
+way to cancel it in the actions area.
+
 ## Validation States
 
 Validation states can be presented either by adding a CSS modifier class
@@ -180,3 +223,4 @@ Show upload progress using `HelperText` component:
 
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [readme-file-upload]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/FileUpload/README.md
+[readme-progress-bar]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/ProgressBar/README.md

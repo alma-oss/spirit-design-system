@@ -118,6 +118,64 @@
           </ul>
         </section>
 
+        <!--
+          Hidden from visual tests: the web and web-react demos share one snapshot (see
+          tests/helpers/takeScreenshot.ts) and web-react has no ProgressBar yet. Unhide once it lands.
+        -->
+        <section class="hide-from-visual-tests">
+          <h3>Uploading State with Progress Bar</h3>
+          <ul aria-label="File attachments">
+            <li class="File">
+              <div class="File__preview">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#file" />
+                </svg>
+              </div>
+              <div class="File__content">
+                <div class="File__text">
+                  <span class="File__name">
+                    <span class="text-truncate-multiline text-word-break-long-words" style="--text-truncate-lines: 1;">Document.pdf</span>
+                  </span>
+                  <div
+                    class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter color-scheme-on-emotion-informative-subtle"
+                    style="--flex-spacing-x: var(--spirit-space-600);"
+                  >
+                    <progress
+                      class="ProgressBar"
+                      value="60"
+                      max="100"
+                      style="--progress-bar-value: 60%"
+                      aria-label="Uploading Document.pdf"
+                      aria-describedby="file-progress-bar-status"
+                    ></progress>
+                    <span class="typography-caption text-secondary">60&nbsp;%</span>
+                  </div>
+                  <span class="HelperText" id="file-progress-bar-status" role="status">Uploading your file…</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ControlButton ControlButton--medium ControlButton--symmetrical ControlButton--hasBackground dynamic-color-border dynamic-color-background-interactive accessibility-tap-target"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+                <span class="accessibility-hidden">Cancel upload of Document.pdf</span>
+              </button>
+            </li>
+          </ul>
+        </section>
+
         <section>
           <h3>Disabled State</h3>
           <ul aria-label="File attachments">
