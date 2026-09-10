@@ -271,16 +271,7 @@ Place the ProgressBar inside `File__text` to show the progress of a single uploa
 </ul>
 ```
 
-👉 File shows **only one line of content below the file name at a time**. When more than one could
-apply, the higher priority wins:
-
-1. ProgressBar
-2. ValidationText
-3. HelperText
-
-So while an upload is running, the bar replaces the helper text; when it fails, the validation text
-replaces the bar. The bar carries no visible value here — it takes the full width of that single line —
-so label it with the file name (`aria-label="Uploading Document.pdf"`) to identify the upload.
+👉 See [File][readme-file-upload-progress] for what File displays below the file name, and when.
 
 ## Accessibility
 
@@ -317,6 +308,7 @@ point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` 
 [mdn-progress]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
 [mdn-progress-region]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/progress#describing_a_particular_region
 [readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
+[readme-file-upload-progress]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/File/README.md#upload-progress
 [readme-flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Flex/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
