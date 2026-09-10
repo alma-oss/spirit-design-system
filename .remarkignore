@@ -20,3 +20,6 @@ design-reviews
 
 # Canonical Pages overwritten by supernova-extract until Cutover
 apps/docsite/content
+
+# Generated extract sidecar
+scripts/supernova-extract/REPORT.md
