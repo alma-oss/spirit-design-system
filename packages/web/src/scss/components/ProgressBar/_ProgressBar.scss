@@ -1,6 +1,6 @@
 // 1. `--progress-bar-value` is the public API of this component: authors set it in inline styles, so it stays
-//    unprefixed, the same way `--flex-spacing-x` or `--stack-spacing` do. Registering it with `@property` is what
-//    makes it interpolable, and hence animatable.
+//    unprefixed, the same way `--flex-spacing-x` or `--stack-spacing` do (see DS-1106). Registering it with
+//    `@property` is what makes it interpolable, and hence animatable.
 // 2. Lets the bar shrink to the remaining width inside a horizontal Flex instead of being blocked by the intrinsic
 //    width of the `progress` element.
 // 3. Firefox renders a border by default.
