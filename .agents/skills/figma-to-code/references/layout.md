@@ -10,16 +10,16 @@ Breakpoints: `mobile` from `0`, `tablet` from `48rem`, `desktop` from `80rem`. R
 
 ## Choose a Layout Component
 
-| Need                                  | Component   |
-| ------------------------------------- | ----------- |
-| One-dimensional row or column         | `Flex`      |
-| Uniform repeating items that wrap     | `Grid`      |
-| Equal-width siblings (`flex: 1 0 0`)  | `Grid`      |
-| Vertical list, optional dividers      | `Stack`     |
+| Need                                  | Component    |
+| ------------------------------------- | ------------ |
+| One-dimensional row or column         | `Flex`       |
+| Uniform repeating items that wrap     | `Grid`       |
+| Equal-width siblings (`flex: 1 0 0`)  | `Grid`       |
+| Vertical list, optional dividers      | `Stack`      |
 | Horizontal overflow / carousel        | `ScrollView` |
-| Surface only (color, padding, border) | `Box`       |
-| Page/region with optional max-width   | `Section`   |
-| Width constraint without Section      | `Container` |
+| Surface only (color, padding, border) | `Box`        |
+| Page/region with optional max-width   | `Section`    |
+| Width constraint without Section      | `Container`  |
 
 Do not copy every Figma autolayout frame into a Spirit node. Skip frames that only name, clip, or
 group for the designer. Keep wrappers that create a real gap, alignment, max-width, or semantic
