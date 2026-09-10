@@ -41,7 +41,7 @@
           style="--progress-bar-value: {{completion}}%"
           aria-label="Profile completeness"
         ></progress>
-        <span class="typography-caption text-secondary">{{completion}}%</span>
+        <span class="typography-caption text-secondary">{{completion}}&nbsp;%</span>
       </div>
       {{/each}}
     </div>
@@ -69,7 +69,7 @@
           style="--progress-bar-value: 10%"
           aria-label="Profile completeness"
         ></progress>
-        <span class="typography-caption text-secondary" id="progress-bar-animated-value">10%</span>
+        <span class="typography-caption text-secondary" id="progress-bar-animated-value">10&nbsp;%</span>
       </div>
 
       <div class="Flex Flex--horizontal">
@@ -93,7 +93,7 @@
             {{@root.checkedAttr}}
           >
           <label for="progress-bar-animated-{{animatedValue}}" class="SegmentedControlItem__label">
-            <span class="text-truncate">{{animatedValue}}%</span>
+            <span class="text-truncate">{{animatedValue}}&nbsp;%</span>
           </label>
           {{/each}}
 
@@ -125,7 +125,7 @@
           style="--progress-bar-value: 20%"
           aria-label="Profile completeness"
         ></progress>
-        <span class="typography-caption text-secondary">20%</span>
+        <span class="typography-caption text-secondary">20&nbsp;%</span>
       </div>
 
       <h3 class="docs-Heading">Bottom</h3>
@@ -177,7 +177,7 @@
             style="--progress-bar-value: 60%"
             aria-label="{{colorScheme}}"
           ></progress>
-          <span class="typography-caption text-secondary">60%</span>
+          <span class="typography-caption text-secondary">60&nbsp;%</span>
         </div>
       </div>
       {{/each}}
@@ -209,7 +209,7 @@
             style="--progress-bar-value: 60%"
             aria-describedby="progress-bar-helper-text-helper-text"
           ></progress>
-          <span class="typography-caption text-secondary">60%</span>
+          <span class="typography-caption text-secondary">60&nbsp;%</span>
         </div>
         <div class="HelperText" id="progress-bar-helper-text-helper-text">Complete your profile to get more offers</div>
       </div>
@@ -228,7 +228,7 @@
             style="--progress-bar-value: 100%"
             aria-describedby="progress-bar-validation-text-validation-text"
           ></progress>
-          <span class="typography-caption text-secondary">100%</span>
+          <span class="typography-caption text-secondary">100&nbsp;%</span>
         </div>
         <div class="ValidationText ValidationText--success" id="progress-bar-validation-text-validation-text">
           Your profile is complete
@@ -249,7 +249,7 @@
             style="--progress-bar-value: 20%"
             aria-describedby="progress-bar-validation-text-icon-helper-text progress-bar-validation-text-icon-validation-text"
           ></progress>
-          <span class="typography-caption text-secondary">20%</span>
+          <span class="typography-caption text-secondary">20&nbsp;%</span>
         </div>
         <div class="HelperText" id="progress-bar-validation-text-icon-helper-text">
           Complete your profile to get more offers
@@ -289,7 +289,7 @@
             style="--progress-bar-value: 40%"
             aria-describedby="progress-bar-disabled-helper-text"
           ></progress>
-          <span class="typography-caption text-color-scheme">40%</span>
+          <span class="typography-caption text-color-scheme">40&nbsp;%</span>
         </div>
         <div class="HelperText HelperText--disabled" id="progress-bar-disabled-helper-text">
           Complete your profile to get more offers
@@ -334,7 +334,7 @@
                   aria-label="Uploading Document.pdf"
                   aria-describedby="file-upload-status"
                 ></progress>
-                <span class="typography-caption text-secondary">60%</span>
+                <span class="typography-caption text-secondary">60&nbsp;%</span>
               </div>
               <span class="HelperText" id="file-upload-status" role="status">Uploading your file…</span>
             </div>
@@ -371,7 +371,7 @@
 
       animatedProgressBar.value = value;
       animatedProgressBar.style.setProperty('--progress-bar-value', `${value}%`);
-      animatedProgressBarValue.textContent = `${value}%`;
+      animatedProgressBarValue.textContent = `${value}\u00a0%`;
     });
   });
 </script>

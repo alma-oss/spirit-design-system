@@ -34,13 +34,16 @@ progressBar.value = 90;
 progressBar.style.setProperty('--progress-bar-value', '90%');
 ```
 
-ℹ️ The transition is wrapped in a `prefers-reduced-motion: no-preference` media query, so the bar jumps
-straight to the new width for users who ask for reduced motion.
+ℹ️ The animation effect of this component is dependent on the `prefers-reduced-motion` media query.
 
 ## Colors
 
-The colors come from a [color scheme][color-schemes] class. Pick the `subtle` variant: the track uses
-the subtle background and the filled part uses the basic background of the same scheme.
+The colors come from a [color scheme][color-schemes] class. The track uses the subtle background of the
+scheme and the filled part uses its basic background.
+
+Both intensities are read explicitly, and every scheme class exposes both, so the `basic` and the `subtle`
+variant of the same scheme render an identical bar. Prefer `subtle`: it is the variant that describes what
+the component mostly is, a subtle track.
 
 Put the class on the outermost element the component owns: on the wrapping Flex when the bar is paired
 with a value, on the `<progress>` element itself when it stands alone. The class only declares custom
@@ -111,7 +114,7 @@ To the right of the bar:
     style="--progress-bar-value: 20%"
     aria-label="Profile completeness"
   ></progress>
-  <span class="typography-caption text-secondary">20%</span>
+  <span class="typography-caption text-secondary">20&nbsp;%</span>
 </div>
 ```
 
@@ -225,13 +228,19 @@ helper class:
       style="--progress-bar-value: 40%"
       aria-describedby="progress-bar-disabled-helper-text"
     ></progress>
-    <span class="typography-caption text-color-scheme">40%</span>
+    <span class="typography-caption text-color-scheme">40&nbsp;%</span>
   </div>
   <div class="HelperText HelperText--disabled" id="progress-bar-disabled-helper-text">
     Complete your profile to get more offers
   </div>
 </div>
 ```
+
+👉 There is no `ProgressBar--disabled` modifier and no `disabled` attribute: `<progress>` is not an
+interactive control, so there is nothing to disable. The state is presentational only, which is also why
+it takes no `aria-disabled` — that attribute is not supported on the `progressbar` role. When the bar sits
+in a field, disable the surrounding controls and pair it with `Label--disabled` and `HelperText--disabled`
+as shown above.
 
 ## Usage with File
 

@@ -9,5 +9,5 @@ $border-radius: tokens.$radius-200;
 $indicator-cap-radius: math.div($height, 2);
 
 // Used when no color scheme class is present.
-$track-background: tokens.$emotion-informative-background-subtle;
-$indicator-background: tokens.$emotion-informative-background-basic;
+$track-background-fallback: tokens.$emotion-informative-background-subtle;
+$indicator-background-fallback: tokens.$emotion-informative-background-basic;
