@@ -16,6 +16,9 @@
 // 5. Each vendor pseudo-element needs its own rule: browsers drop the entire selector list if they do not understand
 //    one part of it. Note that while we’re repeating code here, that’s necessary (see the Slider component).
 // 6. The native indicator would paint over the background layers, so it is hidden in all engines.
+// 7. Reserves the height of the caption line the value text renders in, so the bar occupies the same box whether
+//    the value is displayed next to it or not, and the spacing around it does not change. Where the value is
+//    displayed, the margin box matches the caption line box exactly, so the row does not grow.
 
 @use '../../settings/transitions';
 @use '../../tools/color-scheme';
@@ -35,6 +38,7 @@
     width: 100%;
     min-width: 0; // 2.
     height: theme.$height;
+    margin-block: theme.$line-height-reserve; // 7.
     border: 0; // 3.
     border-radius: theme.$border-radius;
 

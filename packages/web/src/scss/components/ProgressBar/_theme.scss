@@ -1,13 +1,18 @@
+// 1. The indicator is painted as a background layer, so its rounded cap has to be drawn explicitly. Half the height
+//    matches the pill shape the track renders at this size.
+// 2. Used when no color scheme class is present.
+// 3. The bar is thinner than the caption line its value text renders in. Reserving half of the difference above and
+//    below keeps the outer box exactly one caption line tall, whether the value is displayed or not. Derived from
+//    the token so it follows typography updates; the three breakpoint variants are equal today, and if they ever
+//    diverge this needs to become responsive.
+
 @use 'sass:math';
 @use '@tokens' as tokens;
 
 $height: tokens.$space-400;
 $border-radius: tokens.$radius-200;
-
-// The indicator is painted as a background layer, so its rounded cap has to be drawn explicitly. Half the height
-// matches the pill shape the track renders at this size.
-$indicator-cap-radius: math.div($height, 2);
-
-// Used when no color scheme class is present.
-$track-background-fallback: tokens.$emotion-informative-background-subtle;
-$indicator-background-fallback: tokens.$emotion-informative-background-basic;
+$indicator-cap-radius: math.div($height, 2); // 1.
+$track-background-fallback: tokens.$emotion-informative-background-subtle; // 2.
+$indicator-background-fallback: tokens.$emotion-informative-background-basic; // 2.
+$value-line-height: tokens.$typography-caption-line-height-mobile; // 3.
+$line-height-reserve: math.div($value-line-height - $height, 2); // 3.
