@@ -25,6 +25,7 @@ export type {
   AssetsConfig,
   ChangeType,
   ExportedAsset,
+  GitTemplates,
   ResolvedAssetsConfig,
   SyncChange,
   SyncOptions,

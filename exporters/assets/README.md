@@ -101,6 +101,41 @@ The workflow authenticates as the GitHub App, checks out every repository the Ap
 `spirit.config.json` at the repository root. Repositories without that file, or without an `assets` object, are skipped.
 Each configured target gets its own updating pull request.
 
+Branch name, commit message, and pull request title are optional and belong only on the `assets` object. Omitted fields
+keep these defaults:
+
+- `branch`: `chore/figma-icons-sync-{slug}`
+- `commitMessage`: `chore(icons): sync {brand} icons from Figma`
+- `pullRequestTitle`: `Chore(icons): Sync {brand} icons from Figma`
+
+Repo-wide defaults live next to `fileKey`. A target may override any of them. `pullRequestTitle` is not copied from
+`commitMessage`.
+
+```json
+{
+  "assets": {
+    "fileKey": "your-figma-file-key",
+    "branch": "chore/figma-icons-sync-{slug}",
+    "commitMessage": "chore(icons): sync {brand} icons from Figma",
+    "pullRequestTitle": "Chore(icons): Sync {brand} icons from Figma",
+    "targets": [
+      {
+        "brand": "Jobs",
+        "out": "libs/design-icons/jobs.cz/svg",
+        "assets": ["icons"],
+        "commitMessage": "chore(jobs-icons): sync icons from Figma"
+      }
+    ]
+  }
+}
+```
+
+Allowed placeholders: `{brand}`, `{slug}`, `{out}`, `{repo}`, `{owner}`. Unknown `{tokens}` fail config parse.
+
+For `branch` only, interpolated `{brand}` and `{out}` are slugified so names like `Práce` stay valid git refs.
+`{slug}`, `{repo}`, and `{owner}` are left as-is. If two targets in the same repository resolve to the same branch, that
+repository is skipped.
+
 A repository opts in by:
 
 1. installing the same GitHub App, with `Contents: write` and `Pull requests: write`

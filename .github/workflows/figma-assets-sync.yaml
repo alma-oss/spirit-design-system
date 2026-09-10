@@ -136,10 +136,10 @@ jobs:
         with:
           token: ${{ steps.app-token.outputs.token }}
           path: target
-          branch: chore/figma-icons-sync-${{ matrix.slug }}
+          branch: ${{ matrix.branch }}
           delete-branch: true
-          commit-message: 'chore(icons): sync ${{ matrix.brand }} icons from Figma'
-          title: 'Chore(icons): Sync ${{ matrix.brand }} icons from Figma'
+          commit-message: ${{ matrix.commitMessage }}
+          title: ${{ matrix.title }}
           body: ${{ steps.figma-notes.outputs.body }}
           add-paths: |
             ${{ matrix.out }}

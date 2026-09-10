@@ -9,6 +9,7 @@ import { toTargetSlug } from '../../repository/paths';
 import { createGitHubApp, listAppRepositories, type GitHubAppLike, type ListedRepository } from './app';
 import { sparseCheckoutRepository } from './checkout';
 import type { DiscoverMatrix, DiscoverTarget } from './output';
+import { hasUniqueGitBranches, resolveGitTemplates } from './templates';
 
 export interface DiscoverSyncTargetsOptions {
   appId?: string;
@@ -86,16 +87,33 @@ export const discoverSyncTargets = async ({
         continue;
       }
 
-      optIn.config.targets.forEach((target) => {
-        include.push({
+      const resolvedTargets: DiscoverTarget[] = optIn.config.targets.map((target) => {
+        const slug = toTargetSlug(`${repository.name}-${target.out}`);
+        const templates = resolveGitTemplates(optIn.config, target, {
+          brand: target.brand,
+          out: target.out,
+          owner: repository.owner,
+          repo: repository.name,
+          slug,
+        });
+
+        return {
           brand: target.brand,
           fileKey: optIn.config.fileKey,
           out: target.out,
           owner: repository.owner,
           repo: repository.name,
-          slug: toTargetSlug(`${repository.name}-${target.out}`),
-        });
+          slug,
+          ...templates,
+        };
       });
+
+      if (!hasUniqueGitBranches(resolvedTargets)) {
+        log(`Skipping ${repository.owner}/${repository.name}: resolved git branches are not unique.`);
+        continue;
+      }
+
+      include.push(...resolvedTargets);
     } catch (error) {
       log(`Skipping ${repository.owner}/${repository.name}: ${error instanceof Error ? error.message : String(error)}`);
     } finally {

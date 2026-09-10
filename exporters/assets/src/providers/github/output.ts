@@ -1,10 +1,13 @@
 export interface DiscoverTarget {
+  branch: string;
   brand: string;
+  commitMessage: string;
   fileKey: string;
   out: string;
   owner: string;
   repo: string;
   slug: string;
+  title: string;
 }
 
 export interface DiscoverMatrix {

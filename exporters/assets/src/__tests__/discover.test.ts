@@ -47,20 +47,26 @@ describe('discoverSyncTargets', () => {
 
     expect(result.include).toEqual([
       {
+        branch: 'chore/figma-icons-sync-spirit-design-system-packages-icons-src-svg',
         brand: 'Spirit',
+        commitMessage: 'chore(icons): sync Spirit icons from Figma',
         fileKey: 'figma-file',
         out: 'packages/icons/src/svg',
         owner: 'alma-oss',
         repo: 'spirit-design-system',
         slug: 'spirit-design-system-packages-icons-src-svg',
+        title: 'Chore(icons): Sync Spirit icons from Figma',
       },
       {
+        branch: 'chore/figma-icons-sync-spirit-design-system-libs-design-icons-jobs-cz-svg',
         brand: 'Jobs',
+        commitMessage: 'chore(icons): sync Jobs icons from Figma',
         fileKey: 'figma-file',
         out: 'libs/design-icons/jobs.cz/svg',
         owner: 'alma-oss',
         repo: 'spirit-design-system',
         slug: 'spirit-design-system-libs-design-icons-jobs-cz-svg',
+        title: 'Chore(icons): Sync Jobs icons from Figma',
       },
     ]);
     expect(messages).toEqual([]);
@@ -272,6 +278,142 @@ describe('discoverSyncTargets', () => {
 
     expect(result.include).toHaveLength(1);
     expect(result.include[0].repo).toBe('icons-consumer');
+  });
+
+  it('resolves assets-level templates and per-target overrides', async () => {
+    const result = await discoverSyncTargets({
+      checkoutRepository: async (_repository, directory) => {
+        await writeFile(
+          path.join(directory, ROOT_CONFIG_FILE),
+          JSON.stringify({
+            assets: {
+              fileKey: 'figma-file',
+              branch: 'chore/figma-icons-sync-{slug}',
+              commitMessage: 'chore(icons): sync {brand} icons from Figma',
+              pullRequestTitle: 'Chore(icons): Sync {brand} icons from Figma',
+              targets: [
+                {
+                  brand: 'Práce',
+                  out: 'libs/design-icons/prace.cz/svg',
+                  assets: ['icons'],
+                },
+                {
+                  brand: 'Jobs',
+                  out: 'libs/design-icons/jobs.cz/svg',
+                  assets: ['icons'],
+                  commitMessage: 'chore(jobs-icons): sync icons from Figma',
+                },
+              ],
+            },
+          }),
+        );
+      },
+      listRepositories: async function* listRepositories() {
+        yield createRepository({ name: 'platform-frontends', owner: 'almacareer' });
+      },
+    });
+
+    expect(result.include).toEqual([
+      {
+        branch: 'chore/figma-icons-sync-platform-frontends-libs-design-icons-prace-cz-svg',
+        brand: 'Práce',
+        commitMessage: 'chore(icons): sync Práce icons from Figma',
+        fileKey: 'figma-file',
+        out: 'libs/design-icons/prace.cz/svg',
+        owner: 'almacareer',
+        repo: 'platform-frontends',
+        slug: 'platform-frontends-libs-design-icons-prace-cz-svg',
+        title: 'Chore(icons): Sync Práce icons from Figma',
+      },
+      {
+        branch: 'chore/figma-icons-sync-platform-frontends-libs-design-icons-jobs-cz-svg',
+        brand: 'Jobs',
+        commitMessage: 'chore(jobs-icons): sync icons from Figma',
+        fileKey: 'figma-file',
+        out: 'libs/design-icons/jobs.cz/svg',
+        owner: 'almacareer',
+        repo: 'platform-frontends',
+        slug: 'platform-frontends-libs-design-icons-jobs-cz-svg',
+        title: 'Chore(icons): Sync Jobs icons from Figma',
+      },
+    ]);
+  });
+
+  it('slugifies interpolated brand and out values in resolved branches', async () => {
+    const result = await discoverSyncTargets({
+      checkoutRepository: async (_repository, directory) => {
+        await writeFile(
+          path.join(directory, ROOT_CONFIG_FILE),
+          JSON.stringify({
+            assets: {
+              fileKey: 'figma-file',
+              branch: 'sync/{brand}/{out}',
+              targets: [{ brand: 'Práce', out: 'libs/design-icons/prace.cz/svg', assets: ['icons'] }],
+            },
+          }),
+        );
+      },
+      listRepositories: async function* listRepositories() {
+        yield createRepository();
+      },
+    });
+
+    expect(result.include[0]?.branch).toBe('sync/Pr-ce/libs-design-icons-prace-cz-svg');
+  });
+
+  it('skips a repository when a resolved branch is not a safe git ref', async () => {
+    const messages: string[] = [];
+
+    const result = await discoverSyncTargets({
+      checkoutRepository: async (_repository, directory) => {
+        await writeFile(
+          path.join(directory, ROOT_CONFIG_FILE),
+          JSON.stringify({
+            assets: {
+              fileKey: 'figma-file',
+              branch: '../{slug}',
+              targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons'] }],
+            },
+          }),
+        );
+      },
+      listRepositories: async function* listRepositories() {
+        yield createRepository();
+      },
+      log: (message) => messages.push(message),
+    });
+
+    expect(result.include).toEqual([]);
+    expect(messages.join('\n')).toContain('not a safe git ref');
+  });
+
+  it('skips a repository when resolved branches are not unique', async () => {
+    const messages: string[] = [];
+
+    const result = await discoverSyncTargets({
+      checkoutRepository: async (_repository, directory) => {
+        await writeFile(
+          path.join(directory, ROOT_CONFIG_FILE),
+          JSON.stringify({
+            assets: {
+              fileKey: 'figma-file',
+              branch: 'chore/figma-icons-sync',
+              targets: [
+                { brand: 'Spirit', out: 'packages/icons/src/svg', assets: ['icons'] },
+                { brand: 'Jobs', out: 'libs/design-icons/jobs.cz/svg', assets: ['icons'] },
+              ],
+            },
+          }),
+        );
+      },
+      listRepositories: async function* listRepositories() {
+        yield createRepository();
+      },
+      log: (message) => messages.push(message),
+    });
+
+    expect(result.include).toEqual([]);
+    expect(messages.join('\n')).toContain('resolved git branches are not unique');
   });
 
   it('uses an empty repository list without checking out', async () => {
