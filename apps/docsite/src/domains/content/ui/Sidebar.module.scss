@@ -1,0 +1,10 @@
+@use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
+@use '@tokens' as tokens;
+
+.Sidebar {
+    @include breakpoint.up(tokens.$breakpoint-desktop) {
+        flex: 0 0 16rem;
+        min-width: 16rem;
+        max-width: 22rem;
+    }
+}

@@ -9,7 +9,6 @@ import { Metadata } from 'next';
 
 interface RootLayoutProps extends ChildrenProps {}
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
   title: {
     template: '%s | Spirit Design System',

@@ -1,4 +1,5 @@
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
+import MarkdownContent from '@local/domains/content/ui/MarkdownContent';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
@@ -21,9 +22,9 @@ const WebTabPage = async ({ params }: WebTabPageProps) => {
     );
 
     return (
-      <div className="docs-Markdown">
+      <MarkdownContent>
         <ReadMe />
-      </div>
+      </MarkdownContent>
     );
   } catch (error) {
     logError(`[ComponentView] Failed to load Web README for "${component}":`, error);

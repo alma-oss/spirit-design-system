@@ -32,6 +32,13 @@ ignore = """\
     git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF \
     ./.github/workflows/ \
     ./apps/docsite/ \
+    ./docs/contribution/ \
+    ./docs/decisions/ \
+    ./docs/design/ \
+    ./docs/development/ \
+    ./docs/introduction/ \
+    ./docs/migrations/ \
+    ./packages/codemods/README.md \
     ./packages/design-tokens/ \
     ./packages/icons/ \
     ./packages/web/ \

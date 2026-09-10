@@ -1,5 +1,6 @@
 // @ts-nocheck -- MDX intrinsic element props include LegacyRef (string refs), which conflicts with Spirit Heading ref typing when spreading MDX props.
 import { Heading, ScrollView, UNSTABLE_Table } from '@alma-oss/spirit-web-react';
+import Embed from '@local/domains/content/ui/Embed';
 import type { MDXComponents } from 'mdx/types';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -32,11 +33,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     table: ({ children, ...props }) => (
       <div className="d-grid mb-1200">
-        <ScrollView direction="horizontal" isScrollbarDisabled overflowDecorators="shadows">
+        <ScrollView direction="horizontal" isScrollbarDisabled>
           <UNSTABLE_Table {...props}>{children}</UNSTABLE_Table>
         </ScrollView>
       </div>
     ),
+    iframe: Embed,
     ...components,
   };
 }

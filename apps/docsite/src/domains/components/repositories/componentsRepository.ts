@@ -1,5 +1,7 @@
 import { readdirSync } from 'fs';
 import { resolve } from 'path';
+import { getRepoRoot } from '@local/domains/content/paths';
+import { componentDocsDirectory } from '@local/domains/routing/routes';
 
 const getDirs = (source: string) =>
   readdirSync(source, { withFileTypes: true })
@@ -7,7 +9,7 @@ const getDirs = (source: string) =>
     .map((dirent) => dirent.name);
 
 export const fetchAllComponents = (): string[] => {
-  const components = getDirs(resolve(process.cwd(), '../../packages/web-react/src/components'));
+  const components = getDirs(resolve(getRepoRoot(), componentDocsDirectory));
 
   return components;
 };
