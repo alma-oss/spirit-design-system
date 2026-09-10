@@ -6,7 +6,23 @@ export default {
     ...conventionalConfig.ignores,
     (commit) => commit.includes('Updated styles and tokens'),
   ],
+  plugins: [
+    {
+      rules: {
+        'jira-ticket-format': ({ raw = '' }) => {
+          const refs = raw.match(/#DS-\w*/g) ?? [];
+          const invalid = refs.filter((r) => !/^#DS-\d+$/.test(r));
+
+          return [
+            invalid.length === 0,
+            `Jira ticket must have a numeric suffix (e.g. #DS-1234): ${invalid.join(', ')}`,
+          ];
+        },
+      },
+    },
+  ],
   rules: {
+    'jira-ticket-format': [2, 'always'],
     'scope-enum': [
       1,
       'always',
