@@ -2,7 +2,14 @@
 
 const config = {
   preset: 'jest-config-spirit/node',
-  coveragePathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/node_modules/', 'bin', '__fixtures__'],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/dist/',
+    '<rootDir>/dist-ci/',
+    '<rootDir>/node_modules/',
+    'bin',
+    '__fixtures__',
+    'syncCli.ts',
+  ],
   moduleNameMapper: {
     '^octokit$': '<rootDir>/src/__fixtures__/octokit.ts',
   },

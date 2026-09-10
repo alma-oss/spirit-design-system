@@ -1,14 +1,4 @@
-import { mkdtemp, rm, writeFile } from 'node:fs/promises';
-import os from 'node:os';
-import path from 'node:path';
-
-import {
-  createGitHubApp,
-  discoverSyncTargets,
-  listAppRepositories,
-  ROOT_CONFIG_FILE,
-  sparseCheckoutRepository,
-} from '..';
+import { createGitHubApp, discoverSyncTargets, listAppRepositories, ROOT_CONFIG_FILE } from '..';
 import type { GitHubAppLike, ListedRepository } from '../providers/github';
 
 const createRepository = (overrides: Partial<ListedRepository> = {}): ListedRepository => ({
@@ -20,29 +10,26 @@ const createRepository = (overrides: Partial<ListedRepository> = {}): ListedRepo
   ...overrides,
 });
 
+const optedInConfig = JSON.stringify({
+  assets: {
+    fileKey: 'figma-file',
+    targets: [
+      { brand: 'Spirit', out: 'packages/icons/src/svg', assets: ['icons'] },
+      { brand: 'Jobs', out: 'libs/design-icons/jobs.cz/svg', assets: ['icons', 'benefit-icons'] },
+    ],
+  },
+});
+
 describe('discoverSyncTargets', () => {
   it('emits one matrix entry per opted-in target', async () => {
     const messages: string[] = [];
 
     const result = await discoverSyncTargets({
-      checkoutRepository: async (_repository, directory) => {
-        await writeFile(
-          path.join(directory, ROOT_CONFIG_FILE),
-          JSON.stringify({
-            assets: {
-              fileKey: 'figma-file',
-              targets: [
-                { brand: 'Spirit', out: 'packages/icons/src/svg', assets: ['icons'] },
-                { brand: 'Jobs', out: 'libs/design-icons/jobs.cz/svg', assets: ['icons', 'benefit-icons'] },
-              ],
-            },
-          }),
-        );
-      },
       listRepositories: async function* listRepositories() {
         yield createRepository();
       },
       log: (message) => messages.push(message),
+      readConfigFile: async () => optedInConfig,
     });
 
     expect(result.include).toEqual([
@@ -74,76 +61,9 @@ describe('discoverSyncTargets', () => {
 
   it('skips archived, disabled, unauthenticated, unmatched, and invalid repositories', async () => {
     const messages: string[] = [];
-    const checkedOut: string[] = [];
+    const read: string[] = [];
 
     const result = await discoverSyncTargets({
-      checkoutRepository: async (repository, directory) => {
-        checkedOut.push(repository.name);
-
-        if (repository.name === 'missing') {
-          return;
-        }
-
-        if (repository.name === 'invalid-json') {
-          await writeFile(path.join(directory, ROOT_CONFIG_FILE), '{');
-
-          return;
-        }
-
-        if (repository.name === 'invalid-shape') {
-          await writeFile(path.join(directory, ROOT_CONFIG_FILE), '[]');
-
-          return;
-        }
-
-        if (repository.name === 'invalid-primitive') {
-          await writeFile(path.join(directory, ROOT_CONFIG_FILE), '"not-an-object"');
-
-          return;
-        }
-
-        if (repository.name === 'tokens-only') {
-          await writeFile(path.join(directory, ROOT_CONFIG_FILE), '{"tokens":{"out":"src/scss"}}');
-
-          return;
-        }
-
-        if (repository.name === 'other-file') {
-          await writeFile(
-            path.join(directory, ROOT_CONFIG_FILE),
-            '{"assets":{"fileKey":"other","targets":[{"brand":"Jobs","out":"svg","assets":["icons"]}]}}',
-          );
-
-          return;
-        }
-
-        if (repository.name === 'incomplete') {
-          await writeFile(
-            path.join(directory, ROOT_CONFIG_FILE),
-            JSON.stringify({
-              assets: {
-                fileKey: 'figma-file',
-                targets: [
-                  null,
-                  1,
-                  { brand: 1, out: 2, assets: 'icons' },
-                  { brand: ' ', out: 'svg', assets: ['icons'] },
-                  { brand: 'Jobs', out: 'svg', assets: [] },
-                ],
-              },
-            }),
-          );
-
-          return;
-        }
-
-        if (repository.name === 'string-error') {
-          // eslint-disable-next-line no-throw-literal -- cover non-Error skip logging
-          throw 'boom';
-        }
-
-        throw new Error('clone failed');
-      },
       fileKey: 'figma-file',
       listRepositories: async function* listRepositories() {
         yield createRepository({ name: 'archived', archived: true });
@@ -160,10 +80,59 @@ describe('discoverSyncTargets', () => {
         yield createRepository({ name: 'string-error' });
       },
       log: (message) => messages.push(message),
+      readConfigFile: async (repository) => {
+        read.push(repository.name);
+
+        if (repository.name === 'missing') {
+          return null;
+        }
+
+        if (repository.name === 'invalid-json') {
+          return '{';
+        }
+
+        if (repository.name === 'invalid-shape') {
+          return '[]';
+        }
+
+        if (repository.name === 'invalid-primitive') {
+          return '"not-an-object"';
+        }
+
+        if (repository.name === 'tokens-only') {
+          return '{"tokens":{"out":"src/scss"}}';
+        }
+
+        if (repository.name === 'other-file') {
+          return '{"assets":{"fileKey":"other","targets":[{"brand":"Jobs","out":"svg","assets":["icons"]}]}}';
+        }
+
+        if (repository.name === 'incomplete') {
+          return JSON.stringify({
+            assets: {
+              fileKey: 'figma-file',
+              targets: [
+                null,
+                1,
+                { brand: 1, out: 2, assets: 'icons' },
+                { brand: ' ', out: 'svg', assets: ['icons'] },
+                { brand: 'Jobs', out: 'svg', assets: [] },
+              ],
+            },
+          });
+        }
+
+        if (repository.name === 'string-error') {
+          // eslint-disable-next-line no-throw-literal -- cover non-Error skip logging
+          throw 'boom';
+        }
+
+        throw new Error('Unable to read spirit.config.json from alma-oss/broken (500).');
+      },
     });
 
     expect(result.include).toEqual([]);
-    expect(checkedOut).toEqual([
+    expect(read).toEqual([
       'missing',
       'invalid-json',
       'invalid-shape',
@@ -182,7 +151,7 @@ describe('discoverSyncTargets', () => {
     expect(messages.join('\n')).toContain('must be an object');
     expect(messages.join('\n')).toContain('no assets configuration');
     expect(messages.join('\n')).toContain('fileKey does not match');
-    expect(messages.join('\n')).toContain('clone failed');
+    expect(messages.join('\n')).toContain('Unable to read spirit.config.json from alma-oss/broken (500).');
     expect(messages.join('\n')).toContain('boom');
   });
 
@@ -193,7 +162,7 @@ describe('discoverSyncTargets', () => {
     );
   });
 
-  it('lists repositories from a GitHub App and checks them out', async () => {
+  it('lists repositories from a GitHub App and reads their configs', async () => {
     const app: GitHubAppLike = {
       eachRepository: {
         iterator: async function* iterator() {
@@ -261,12 +230,6 @@ describe('discoverSyncTargets', () => {
 
     const result = await discoverSyncTargets({
       appId: 'client-id',
-      checkoutRepository: async (_repository, directory) => {
-        await writeFile(
-          path.join(directory, ROOT_CONFIG_FILE),
-          '{"assets":{"fileKey":"figma-file","targets":[{"brand":"Jobs","out":"svg","assets":["icons"]}]}}',
-        );
-      },
       createApp: (appId, privateKey) => {
         expect(appId).toBe('client-id');
         expect(privateKey).toBe('private-key');
@@ -274,6 +237,8 @@ describe('discoverSyncTargets', () => {
         return app;
       },
       privateKey: 'private-key',
+      readConfigFile: async () =>
+        '{"assets":{"fileKey":"figma-file","targets":[{"brand":"Jobs","out":"svg","assets":["icons"]}]}}',
     });
 
     expect(result.include).toHaveLength(1);
@@ -282,35 +247,31 @@ describe('discoverSyncTargets', () => {
 
   it('resolves assets-level templates and per-target overrides', async () => {
     const result = await discoverSyncTargets({
-      checkoutRepository: async (_repository, directory) => {
-        await writeFile(
-          path.join(directory, ROOT_CONFIG_FILE),
-          JSON.stringify({
-            assets: {
-              fileKey: 'figma-file',
-              branch: 'chore/figma-icons-sync-{slug}',
-              commitMessage: 'chore(icons): sync {brand} icons from Figma',
-              pullRequestTitle: 'Chore(icons): Sync {brand} icons from Figma',
-              targets: [
-                {
-                  brand: 'Práce',
-                  out: 'libs/design-icons/prace.cz/svg',
-                  assets: ['icons'],
-                },
-                {
-                  brand: 'Jobs',
-                  out: 'libs/design-icons/jobs.cz/svg',
-                  assets: ['icons'],
-                  commitMessage: 'chore(jobs-icons): sync icons from Figma',
-                },
-              ],
-            },
-          }),
-        );
-      },
       listRepositories: async function* listRepositories() {
         yield createRepository({ name: 'platform-frontends', owner: 'almacareer' });
       },
+      readConfigFile: async () =>
+        JSON.stringify({
+          assets: {
+            fileKey: 'figma-file',
+            branch: 'chore/figma-icons-sync-{slug}',
+            commitMessage: 'chore(icons): sync {brand} icons from Figma',
+            pullRequestTitle: 'Chore(icons): Sync {brand} icons from Figma',
+            targets: [
+              {
+                brand: 'Práce',
+                out: 'libs/design-icons/prace.cz/svg',
+                assets: ['icons'],
+              },
+              {
+                brand: 'Jobs',
+                out: 'libs/design-icons/jobs.cz/svg',
+                assets: ['icons'],
+                commitMessage: 'chore(jobs-icons): sync icons from Figma',
+              },
+            ],
+          },
+        }),
     });
 
     expect(result.include).toEqual([
@@ -341,21 +302,17 @@ describe('discoverSyncTargets', () => {
 
   it('slugifies interpolated brand and out values in resolved branches', async () => {
     const result = await discoverSyncTargets({
-      checkoutRepository: async (_repository, directory) => {
-        await writeFile(
-          path.join(directory, ROOT_CONFIG_FILE),
-          JSON.stringify({
-            assets: {
-              fileKey: 'figma-file',
-              branch: 'sync/{brand}/{out}',
-              targets: [{ brand: 'Práce', out: 'libs/design-icons/prace.cz/svg', assets: ['icons'] }],
-            },
-          }),
-        );
-      },
       listRepositories: async function* listRepositories() {
         yield createRepository();
       },
+      readConfigFile: async () =>
+        JSON.stringify({
+          assets: {
+            fileKey: 'figma-file',
+            branch: 'sync/{brand}/{out}',
+            targets: [{ brand: 'Práce', out: 'libs/design-icons/prace.cz/svg', assets: ['icons'] }],
+          },
+        }),
     });
 
     expect(result.include[0]?.branch).toBe('sync/Pr-ce/libs-design-icons-prace-cz-svg');
@@ -365,22 +322,18 @@ describe('discoverSyncTargets', () => {
     const messages: string[] = [];
 
     const result = await discoverSyncTargets({
-      checkoutRepository: async (_repository, directory) => {
-        await writeFile(
-          path.join(directory, ROOT_CONFIG_FILE),
-          JSON.stringify({
-            assets: {
-              fileKey: 'figma-file',
-              branch: '../{slug}',
-              targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons'] }],
-            },
-          }),
-        );
-      },
       listRepositories: async function* listRepositories() {
         yield createRepository();
       },
       log: (message) => messages.push(message),
+      readConfigFile: async () =>
+        JSON.stringify({
+          assets: {
+            fileKey: 'figma-file',
+            branch: '../{slug}',
+            targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons'] }],
+          },
+        }),
     });
 
     expect(result.include).toEqual([]);
@@ -391,32 +344,28 @@ describe('discoverSyncTargets', () => {
     const messages: string[] = [];
 
     const result = await discoverSyncTargets({
-      checkoutRepository: async (_repository, directory) => {
-        await writeFile(
-          path.join(directory, ROOT_CONFIG_FILE),
-          JSON.stringify({
-            assets: {
-              fileKey: 'figma-file',
-              branch: 'chore/figma-icons-sync',
-              targets: [
-                { brand: 'Spirit', out: 'packages/icons/src/svg', assets: ['icons'] },
-                { brand: 'Jobs', out: 'libs/design-icons/jobs.cz/svg', assets: ['icons'] },
-              ],
-            },
-          }),
-        );
-      },
       listRepositories: async function* listRepositories() {
         yield createRepository();
       },
       log: (message) => messages.push(message),
+      readConfigFile: async () =>
+        JSON.stringify({
+          assets: {
+            fileKey: 'figma-file',
+            branch: 'chore/figma-icons-sync',
+            targets: [
+              { brand: 'Spirit', out: 'packages/icons/src/svg', assets: ['icons'] },
+              { brand: 'Jobs', out: 'libs/design-icons/jobs.cz/svg', assets: ['icons'] },
+            ],
+          },
+        }),
     });
 
     expect(result.include).toEqual([]);
     expect(messages.join('\n')).toContain('resolved git branches are not unique');
   });
 
-  it('uses an empty repository list without checking out', async () => {
+  it('uses an empty repository list without reading configs', async () => {
     await expect(
       discoverSyncTargets({
         listRepositories: async function* listRepositories() {
@@ -424,6 +373,39 @@ describe('discoverSyncTargets', () => {
         },
       }),
     ).resolves.toEqual({ include: [] });
+  });
+
+  it('reads multiple repositories concurrently and keeps listing order', async () => {
+    let inFlight = 0;
+    let maxInFlight = 0;
+    const names = ['repo-a', 'repo-b', 'repo-c', 'repo-d', 'repo-e'];
+
+    const result = await discoverSyncTargets({
+      concurrency: 3,
+      listRepositories: async function* listRepositories() {
+        for (const name of names) {
+          yield createRepository({ name });
+        }
+      },
+      readConfigFile: async (repository) => {
+        inFlight += 1;
+        maxInFlight = Math.max(maxInFlight, inFlight);
+        await new Promise((resolve) => {
+          setTimeout(resolve, 20);
+        });
+        inFlight -= 1;
+
+        return JSON.stringify({
+          assets: {
+            fileKey: 'figma-file',
+            targets: [{ brand: repository.name, out: 'svg', assets: ['icons'] }],
+          },
+        });
+      },
+    });
+
+    expect(maxInFlight).toBe(3);
+    expect(result.include.map((target) => target.repo)).toEqual(names);
   });
 
   it('creates a GitHub App with the provided constructor', () => {
@@ -443,51 +425,6 @@ describe('discoverSyncTargets', () => {
       createGitHubApp('id', '-----BEGIN PRIVATE KEY-----\n-----END PRIVATE KEY-----');
     } catch {
       // Invalid keys are still enough to cover the default App constructor.
-    }
-  });
-
-  it('clones a repository with a sparse checkout of the opt-in config', async () => {
-    const commands: { command: string; args: string[]; cwd?: string }[] = [];
-    const exec = (async (command: string, args: string[], options?: { cwd?: string }) => {
-      commands.push({ args, command, cwd: options?.cwd });
-
-      return { stderr: '', stdout: '' };
-    }) as unknown as Parameters<typeof sparseCheckoutRepository>[2];
-
-    await sparseCheckoutRepository(createRepository(), '/tmp/checkout', exec);
-
-    expect(commands[0]?.args).toContain('--sparse');
-    expect(commands[0]?.args.at(-2)).toContain('x-access-token:token@github.com/alma-oss/spirit-design-system.git');
-    expect(commands[1]?.args).toEqual(['sparse-checkout', 'set', '--cone', ROOT_CONFIG_FILE]);
-    expect(commands[1]?.cwd).toBe('/tmp/checkout');
-  });
-
-  it('hides git clone failures behind a generic checkout error', async () => {
-    const exec = (async () => {
-      throw new Error('fatal: Authentication failed for https://x-access-token:token@github.com/org/repo.git');
-    }) as unknown as Parameters<typeof sparseCheckoutRepository>[2];
-
-    await expect(sparseCheckoutRepository(createRepository(), '/tmp/checkout', exec)).rejects.toThrow(
-      'Unable to checkout alma-oss/spirit-design-system.',
-    );
-  });
-
-  it('uses git when no executor is provided', async () => {
-    const directory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-git-'));
-
-    try {
-      await expect(
-        sparseCheckoutRepository(
-          createRepository({
-            name: 'this-repo-does-not-exist',
-            owner: 'this-org-does-not-exist-spirit-assets',
-            token: 'invalid',
-          }),
-          directory,
-        ),
-      ).rejects.toThrow('Unable to checkout this-org-does-not-exist-spirit-assets/this-repo-does-not-exist.');
-    } finally {
-      await rm(directory, { recursive: true, force: true });
     }
   });
 });

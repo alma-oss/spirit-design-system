@@ -18,13 +18,14 @@
   "scripts": {
     "build": "npm-run-all --serial build:compile build:bin",
     "build:bin": "shx mkdir -p dist/bin && shx cp src/bin/spirit-assets.js dist/bin/spirit-assets.js",
+    "build:ci": "vite build --config vite.bundle.config.ts",
     "build:compile": "vite build",
     "lint": "eslint ./",
     "lint:fix": "yarn lint --fix",
     "discover": "tsx ./src/bin/spirit-assets.js discover",
     "read-publish-notes": "tsx ./src/bin/read-publish-notes.ts",
     "sync": "tsx ./src/bin/spirit-assets.js sync",
-    "test": "npm-run-all --serial lint types build test:unit:coverage",
+    "test": "npm-run-all --serial lint types build build:ci test:unit:coverage",
     "test:unit": "jest",
     "test:unit:coverage": "yarn test:unit --coverage",
     "types": "tsc --noEmit"

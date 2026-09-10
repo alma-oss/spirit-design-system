@@ -1,13 +1,13 @@
-import { readFileSync } from 'node:fs';
-import { appendFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import { appendFile, writeFile } from 'node:fs/promises';
 
 import sade from 'sade';
 
+import packageJson from '../package.json';
 import { filterTargets, loadConfig } from './config';
 import { ConfigError } from './errors';
-import { discoverSyncTargets, formatGitHubActionsOutput } from './providers/github';
+import { discoverSyncTargets, formatGitHubActionsOutput, type DiscoverMatrix } from './providers/github';
 import { syncAssets } from './sync';
+import { resolvePublishNotes } from './sync/adapters/figma/publishNotes';
 import type { SyncResult } from './types';
 
 interface PackageManifest {
@@ -20,8 +20,10 @@ interface CliOptions {
   fetch?: typeof fetch;
   log?: (message: string) => void;
   logError?: (message: string) => void;
+  resolveNotes?: typeof resolvePublishNotes;
   sync?: typeof syncAssets;
   token?: string;
+  writeFile?: (path: string, contents: string) => Promise<void>;
   writeOutput?: (path: string, contents: string) => Promise<void>;
 }
 
@@ -36,11 +38,10 @@ interface DiscoverCliOptions {
   fileKey?: string | boolean;
 }
 
-const readPackageManifest = (): PackageManifest => {
-  const packageJsonUrl = new URL('../package.json', import.meta.url);
-
-  return JSON.parse(readFileSync(fileURLToPath(packageJsonUrl), 'utf8')) as PackageManifest;
-};
+const readPackageManifest = (): PackageManifest => ({
+  description: packageJson.description,
+  version: packageJson.version,
+});
 
 const FLAGS_REQUIRING_VALUE = ['-c', '--config', '--repository-root', '--brand', '--out', '--file-key'];
 
@@ -66,6 +67,12 @@ const readOption = (
   camelCaseKey: string,
   kebabCaseKey: string,
 ): string | undefined => requireStringOption(opts[camelCaseKey] ?? opts[kebabCaseKey]);
+
+const uniqueDiscoveredFileKey = (result: DiscoverMatrix): string | undefined => {
+  const fileKeys = [...new Set(result.include.map((target) => target.fileKey))];
+
+  return fileKeys.length === 1 ? fileKeys[0] : undefined;
+};
 
 const printResult = (result: SyncResult, log: (message: string) => void): void => {
   result.targets.forEach((target) => {
@@ -127,6 +134,19 @@ const createProgram = (options: CliOptions, log: (message: string) => void, logE
       if (process.env.GITHUB_OUTPUT) {
         const writeOutput = options.writeOutput ?? appendFile;
         await writeOutput(process.env.GITHUB_OUTPUT, formatGitHubActionsOutput(result));
+      }
+
+      if (process.env.GITHUB_PUBLISH_NOTES_PATH) {
+        const resolveNotes = options.resolveNotes ?? resolvePublishNotes;
+        const notes = await resolveNotes({
+          description: process.env.DISPATCH_DESCRIPTION,
+          fetch: options.fetch,
+          fileKey: fileKey || uniqueDiscoveredFileKey(result),
+          logError,
+          token: process.env.FIGMA_ACCESS_TOKEN,
+        });
+        const writeNotes = options.writeFile ?? writeFile;
+        await writeNotes(process.env.GITHUB_PUBLISH_NOTES_PATH, notes);
       }
     });
 };

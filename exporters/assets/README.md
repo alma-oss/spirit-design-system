@@ -97,9 +97,10 @@ The sync aborts before changing a target when it cannot discover or download the
 This repository runs a GitHub Actions workflow that synchronizes icons from Figma. It can be started manually or by a
 Figma library publish via external automation. Credentials live in the `figma` GitHub Actions environment.
 
-The workflow authenticates as the GitHub App, checks out every repository the App can access, and looks for
-`spirit.config.json` at the repository root. Repositories without that file, or without an `assets` object, are skipped.
-Each configured target gets its own updating pull request.
+The workflow authenticates as the GitHub App and reads `spirit.config.json` from each repository the App can access via
+the GitHub Contents API. Repositories without that file, or without an `assets` object, are skipped. Each configured
+target gets its own updating pull request. Sync jobs download a prebuilt CLI from the discover job and do not install
+this monorepo. Figma publish notes are fetched once per run and reused in every pull request.
 
 Branch name, commit message, and pull request title are optional and belong only on the `assets` object. Omitted fields
 keep these defaults:

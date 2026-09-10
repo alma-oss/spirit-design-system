@@ -324,6 +324,154 @@ describe('runCli', () => {
       process.env.DISPATCH_FILE_KEY = originalDispatch;
     }
   });
+
+  it('writes Figma publish notes for GitHub Actions', async () => {
+    const originalNotes = process.env.GITHUB_PUBLISH_NOTES_PATH;
+    const originalDescription = process.env.DISPATCH_DESCRIPTION;
+    process.env.GITHUB_PUBLISH_NOTES_PATH = '/tmp/figma-publish-notes.txt';
+    process.env.DISPATCH_DESCRIPTION = 'Library update';
+    const written: Array<{ contents: string; path: string }> = [];
+
+    try {
+      await runCli(['discover'], {
+        discover: async () => ({ include: [] }),
+        log: jest.fn(),
+        writeFile: async (notesPath, contents) => {
+          written.push({ contents, path: notesPath });
+        },
+      });
+
+      expect(written).toEqual([{ contents: 'Library update', path: '/tmp/figma-publish-notes.txt' }]);
+    } finally {
+      process.env.GITHUB_PUBLISH_NOTES_PATH = originalNotes;
+      process.env.DISPATCH_DESCRIPTION = originalDescription;
+    }
+  });
+
+  it('writes publish notes with the default writer', async () => {
+    const originalNotes = process.env.GITHUB_PUBLISH_NOTES_PATH;
+    const originalDescription = process.env.DISPATCH_DESCRIPTION;
+    const directory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-notes-'));
+    const notesPath = path.join(directory, 'notes.txt');
+    process.env.GITHUB_PUBLISH_NOTES_PATH = notesPath;
+    process.env.DISPATCH_DESCRIPTION = 'From disk';
+
+    try {
+      await runCli(['discover'], {
+        discover: async () => ({ include: [] }),
+        log: jest.fn(),
+      });
+      const { readFile } = await import('node:fs/promises');
+
+      expect(await readFile(notesPath, 'utf8')).toBe('From disk');
+    } finally {
+      process.env.GITHUB_PUBLISH_NOTES_PATH = originalNotes;
+      process.env.DISPATCH_DESCRIPTION = originalDescription;
+      await rm(directory, { recursive: true, force: true });
+    }
+  });
+
+  it('uses a unique discovered file key when writing publish notes', async () => {
+    const originalNotes = process.env.GITHUB_PUBLISH_NOTES_PATH;
+    const originalDispatch = process.env.DISPATCH_FILE_KEY;
+    process.env.GITHUB_PUBLISH_NOTES_PATH = '/tmp/figma-publish-notes.txt';
+    delete process.env.DISPATCH_FILE_KEY;
+    let receivedFileKey: string | undefined;
+
+    try {
+      await runCli(['discover'], {
+        discover: async () => ({
+          include: [
+            {
+              branch: 'a',
+              brand: 'Spirit',
+              commitMessage: 'commit',
+              fileKey: 'shared-file',
+              out: 'svg',
+              owner: 'alma-oss',
+              repo: 'one',
+              slug: 'one-svg',
+              title: 'title',
+            },
+            {
+              branch: 'b',
+              brand: 'Jobs',
+              commitMessage: 'commit',
+              fileKey: 'shared-file',
+              out: 'svg',
+              owner: 'alma-oss',
+              repo: 'two',
+              slug: 'two-svg',
+              title: 'title',
+            },
+          ],
+        }),
+        log: jest.fn(),
+        resolveNotes: async (options) => {
+          receivedFileKey = options.fileKey;
+
+          return 'From versions';
+        },
+        writeFile: jest.fn(),
+      });
+
+      expect(receivedFileKey).toBe('shared-file');
+    } finally {
+      process.env.GITHUB_PUBLISH_NOTES_PATH = originalNotes;
+      process.env.DISPATCH_FILE_KEY = originalDispatch;
+    }
+  });
+
+  it('does not guess a file key when discovered targets use different Figma files', async () => {
+    const originalNotes = process.env.GITHUB_PUBLISH_NOTES_PATH;
+    const originalDispatch = process.env.DISPATCH_FILE_KEY;
+    process.env.GITHUB_PUBLISH_NOTES_PATH = '/tmp/figma-publish-notes.txt';
+    delete process.env.DISPATCH_FILE_KEY;
+    let receivedFileKey: string | undefined;
+
+    try {
+      await runCli(['discover'], {
+        discover: async () => ({
+          include: [
+            {
+              branch: 'a',
+              brand: 'Spirit',
+              commitMessage: 'commit',
+              fileKey: 'file-a',
+              out: 'svg',
+              owner: 'alma-oss',
+              repo: 'one',
+              slug: 'one-svg',
+              title: 'title',
+            },
+            {
+              branch: 'b',
+              brand: 'Jobs',
+              commitMessage: 'commit',
+              fileKey: 'file-b',
+              out: 'svg',
+              owner: 'alma-oss',
+              repo: 'two',
+              slug: 'two-svg',
+              title: 'title',
+            },
+          ],
+        }),
+        log: jest.fn(),
+        resolveNotes: async (options) => {
+          receivedFileKey = options.fileKey;
+
+          return '';
+        },
+        writeFile: jest.fn(),
+      });
+
+      expect(receivedFileKey).toBeUndefined();
+    } finally {
+      process.env.GITHUB_PUBLISH_NOTES_PATH = originalNotes;
+      process.env.DISPATCH_FILE_KEY = originalDispatch;
+    }
+  });
 });
 
 describe('resolveConfig', () => {

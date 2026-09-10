@@ -8,7 +8,7 @@ export {
   discoverSyncTargets,
   formatGitHubActionsOutput,
   listAppRepositories,
-  sparseCheckoutRepository,
+  readRepositoryConfigFile,
 } from './providers/github';
 export type { DiscoverMatrix, DiscoverTarget, ListedRepository } from './providers/github';
 export {

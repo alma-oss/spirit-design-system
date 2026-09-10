@@ -34,10 +34,32 @@ jobs:
       - name: Discover opted-in repositories
         id: discover
         env:
+          DISPATCH_DESCRIPTION: ${{ github.event.client_payload.description }}
           DISPATCH_FILE_KEY: ${{ github.event.client_payload.file_key }}
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
           GH_APP_CLIENT_ID: ${{ secrets.GH_APP_CLIENT_ID }}
           GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          GITHUB_PUBLISH_NOTES_PATH: ${{ github.workspace }}/figma-publish-notes.txt
         run: yarn workspace @alma-oss/spirit-assets-exporter discover
+
+      - name: Build sync CLI
+        if: ${{ steps.discover.outputs.has-targets == 'true' }}
+        run: yarn workspace @alma-oss/spirit-assets-exporter build:ci
+
+      - name: Upload sync CLI
+        if: ${{ steps.discover.outputs.has-targets == 'true' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: spirit-assets-cli
+          path: exporters/assets/dist-ci/spirit-assets.mjs
+
+      - name: Upload Figma publish notes
+        if: ${{ steps.discover.outputs.has-targets == 'true' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: figma-publish-notes
+          path: figma-publish-notes.txt
+          if-no-files-found: ignore
 
   sync:
     name: Sync Figma Assets (${{ matrix.owner }}/${{ matrix.repo }} / ${{ matrix.brand }})
@@ -67,11 +89,6 @@ jobs:
           permission-contents: write
           permission-pull-requests: write
 
-      - name: Checkout Spirit
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          persist-credentials: false
-
       - name: Checkout target repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -79,12 +96,24 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           path: target
 
-      - name: Setup Node and Install Dependencies
-        uses: ./.github/actions/setup-install
+      - name: Setup Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: '22'
+
+      - name: Download sync CLI
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: spirit-assets-cli
+
+      - name: Download Figma publish notes
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: figma-publish-notes
 
       - name: Sync assets from Figma
         run: >
-          yarn workspace @alma-oss/spirit-assets-exporter sync
+          node spirit-assets.mjs sync
           --config target/spirit.config.json
           --repository-root target
           --brand "${{ matrix.brand }}"
@@ -95,23 +124,11 @@ jobs:
       - name: Read Figma publish notes
         id: figma-notes
         env:
-          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
-          DISPATCH_DESCRIPTION: ${{ github.event.client_payload.description }}
           BRAND: ${{ matrix.brand }}
-          FIGMA_FILE_KEY: ${{ matrix.fileKey }}
         run: |
-          NOTES="$(yarn workspace @alma-oss/spirit-assets-exporter read-publish-notes)"
-
-          if [ -z "$NOTES" ]; then
-            HTTP_CODE="$(curl -sS -o /tmp/figma-versions.json -w '%{http_code}' \
-              -H "X-Figma-Token: ${FIGMA_ACCESS_TOKEN}" \
-              "https://api.figma.com/v1/files/${FIGMA_FILE_KEY}/versions" || true)"
-
-            if [ "$HTTP_CODE" != "200" ]; then
-              echo "::warning::Figma versions API returned HTTP ${HTTP_CODE}. Grant file_versions:read on FIGMA_ACCESS_TOKEN, or forward the library publish description as repository_dispatch client_payload.description."
-            else
-              NOTES="$(yarn workspace @alma-oss/spirit-assets-exporter read-publish-notes /tmp/figma-versions.json)"
-            fi
+          NOTES=""
+          if [ -f figma-publish-notes.txt ]; then
+            NOTES="$(cat figma-publish-notes.txt)"
           fi
 
           {
