@@ -66,7 +66,7 @@ describe('runCli', () => {
     try {
       await writeFile(
         configPath,
-        '{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"svg","assets":["icons"]}]}',
+        '{"assets":{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"svg","assets":["icons"]}]}}',
       );
       process.env.FIGMA_ACCESS_TOKEN = 'environment-token';
 
@@ -112,7 +112,7 @@ describe('runCli', () => {
       await runCli(['--help']);
       await writeFile(
         configPath,
-        '{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"svg","assets":["icons"]}]}',
+        '{"assets":{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"svg","assets":["icons"]}]}}',
       );
 
       await expect(runCli(['sync', '--config', configPath], { token: '' })).rejects.toThrow(
@@ -134,7 +134,7 @@ describe('runCli', () => {
     try {
       await writeFile(
         configPath,
-        '{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"packages/icons/src/svg","assets":["icons"]},{"brand":"Jobs","out":"packages/jobs/src/svg","assets":["icons"]}]}',
+        '{"assets":{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"packages/icons/src/svg","assets":["icons"]},{"brand":"Jobs","out":"packages/jobs/src/svg","assets":["icons"]}]}}',
       );
 
       await runCli(
@@ -327,14 +327,38 @@ describe('resolveConfig', () => {
   it('resolves output directories relative to the config file', () => {
     const config = resolveConfig(
       {
-        fileKey: 'figma-file',
-        targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons', 'benefit-icons'] }],
+        assets: {
+          fileKey: 'figma-file',
+          targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons', 'benefit-icons'] }],
+        },
       },
       '/repo/packages/icons/spirit.config.json',
     );
 
     expect(config.targets[0].out).toBe('/repo/packages/icons/src/svg');
     expect(config.targets[0].assets).toEqual(['icons', 'benefit-icons']);
+  });
+
+  it('requires a shared Spirit config with an assets object', () => {
+    expect(() => resolveConfig({}, '/repo/spirit.config.json')).toThrow(/"assets" object/);
+    expect(() => resolveConfig({ tokens: { out: 'src/scss' } }, '/repo/spirit.config.json')).toThrow(/"assets" object/);
+    expect(() => resolveConfig(null, '/repo/spirit.config.json')).toThrow(/JSON object/);
+  });
+
+  it('ignores sibling tool keys on the shared Spirit config', () => {
+    const config = resolveConfig(
+      {
+        tokens: { out: 'src/scss' },
+        assets: {
+          fileKey: 'figma-file',
+          targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons'] }],
+        },
+      },
+      '/repo/spirit.config.json',
+    );
+
+    expect(config.fileKey).toBe('figma-file');
+    expect(config.targets[0].out).toBe('/repo/src/svg');
   });
 
   it.each([
@@ -389,7 +413,7 @@ describe('resolveConfig', () => {
   ])('rejects invalid config: $expectedError', ({ config, expectedError }) => {
     const configPath = '/repo/spirit.config.json';
 
-    expect(() => resolveConfig(config, configPath)).toThrow(expectedError);
+    expect(() => resolveConfig({ assets: config }, configPath)).toThrow(expectedError);
   });
 
   it('rejects targets that resolve to the same output directory', () => {
@@ -398,11 +422,13 @@ describe('resolveConfig', () => {
     expect(() =>
       resolveConfig(
         {
-          fileKey: ' file ',
-          targets: [
-            { brand: ' Spirit ', out: 'svg', assets: ['icons'] },
-            { brand: 'Jobs', out: './svg', assets: ['icons'] },
-          ],
+          assets: {
+            fileKey: ' file ',
+            targets: [
+              { brand: ' Spirit ', out: 'svg', assets: ['icons'] },
+              { brand: 'Jobs', out: './svg', assets: ['icons'] },
+            ],
+          },
         },
         configPath,
       ),
@@ -412,13 +438,13 @@ describe('resolveConfig', () => {
   it('rejects absolute output paths', () => {
     expect(() =>
       resolveConfig(
-        { fileKey: 'file', targets: [{ brand: 'Spirit', out: '/tmp/svg', assets: ['icons'] }] },
+        { assets: { fileKey: 'file', targets: [{ brand: 'Spirit', out: '/tmp/svg', assets: ['icons'] }] } },
         '/repo/spirit.config.json',
       ),
     ).toThrow(/relative path/);
     expect(() =>
       resolveConfig(
-        { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'C:\\Windows\\Temp', assets: ['icons'] }] },
+        { assets: { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'C:\\Windows\\Temp', assets: ['icons'] }] } },
         '/repo/spirit.config.json',
       ),
     ).toThrow(/relative path/);
@@ -427,7 +453,7 @@ describe('resolveConfig', () => {
   it('rejects parent-directory output paths', () => {
     expect(() =>
       resolveConfig(
-        { fileKey: 'file', targets: [{ brand: 'Spirit', out: '../escape', assets: ['icons'] }] },
+        { assets: { fileKey: 'file', targets: [{ brand: 'Spirit', out: '../escape', assets: ['icons'] }] } },
         '/repo/spirit.config.json',
       ),
     ).toThrow(/\.\./);
@@ -437,7 +463,7 @@ describe('resolveConfig', () => {
     expect(() =>
       confineConfig(
         resolveConfig(
-          { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons'] }] },
+          { assets: { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons'] }] } },
           '/repo/packages/icons/spirit.config.json',
         ),
         '/repo',
@@ -457,7 +483,7 @@ describe('loadConfig', () => {
 
       await writeFile(
         validPath,
-        '{"fileKey":" file ","targets":[{"brand":" Spirit ","out":"svg","assets":["icons"]}]}',
+        '{"assets":{"fileKey":" file ","targets":[{"brand":" Spirit ","out":"svg","assets":["icons"]}]}}',
       );
       await writeFile(invalidJsonPath, '{');
       await writeFile(invalidValuePath, '[]');
@@ -485,7 +511,7 @@ describe('loadConfig', () => {
     try {
       await writeFile(
         path.join(temporaryDirectory, 'spirit.config.json'),
-        '{"fileKey":"discovered","targets":[{"brand":"Spirit","out":"svg","assets":["icons"]}]}',
+        '{"assets":{"fileKey":"discovered","targets":[{"brand":"Spirit","out":"svg","assets":["icons"]}]}}',
       );
       process.chdir(temporaryDirectory);
 
@@ -517,11 +543,13 @@ describe('loadConfig', () => {
 describe('filterTargets', () => {
   const config = resolveConfig(
     {
-      fileKey: 'figma-file',
-      targets: [
-        { brand: 'Spirit', out: 'packages/icons/src/svg', assets: ['icons'] },
-        { brand: 'Jobs', out: 'packages/jobs/src/svg', assets: ['icons'] },
-      ],
+      assets: {
+        fileKey: 'figma-file',
+        targets: [
+          { brand: 'Spirit', out: 'packages/icons/src/svg', assets: ['icons'] },
+          { brand: 'Jobs', out: 'packages/jobs/src/svg', assets: ['icons'] },
+        ],
+      },
     },
     '/repo/spirit.config.json',
   );

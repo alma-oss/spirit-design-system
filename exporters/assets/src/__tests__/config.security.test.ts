@@ -12,7 +12,7 @@ describe('repository-owned assets config', () => {
     try {
       await writeFile(
         path.join(repositoryRoot, 'spirit.config.json'),
-        '{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"packages/icons/src/svg","assets":["icons"]}]}',
+        '{"assets":{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"packages/icons/src/svg","assets":["icons"]}]}}',
       );
 
       const config = await loadConfig(undefined, { repositoryRoot });
@@ -66,7 +66,7 @@ describe('repository-owned assets config', () => {
       await symlink(outside, linked);
       await writeFile(
         path.join(repositoryRoot, 'spirit.config.json'),
-        '{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"packages/icons/src/svg","assets":["icons"]}]}',
+        '{"assets":{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"packages/icons/src/svg","assets":["icons"]}]}}',
       );
 
       await expect(loadConfig(undefined, { repositoryRoot })).rejects.toThrow(/symlink/);
@@ -79,7 +79,7 @@ describe('repository-owned assets config', () => {
     expect(() =>
       confineConfig(
         resolveConfig(
-          { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons'] }] },
+          { assets: { fileKey: 'file', targets: [{ brand: 'Spirit', out: 'src/svg', assets: ['icons'] }] } },
           '/other/spirit.config.json',
         ),
         '/repo',
@@ -104,7 +104,7 @@ describe('repository-owned assets config', () => {
     try {
       await writeFile(
         configPath,
-        '{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"src/svg","assets":["icons"]}]}',
+        '{"assets":{"fileKey":"figma-file","targets":[{"brand":"Spirit","out":"src/svg","assets":["icons"]}]}}',
       );
 
       expect((await lstat(configPath)).isSymbolicLink()).toBe(false);

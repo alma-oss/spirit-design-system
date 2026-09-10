@@ -29,11 +29,13 @@ describe('discoverSyncTargets', () => {
         await writeFile(
           path.join(directory, ROOT_CONFIG_FILE),
           JSON.stringify({
-            fileKey: 'figma-file',
-            targets: [
-              { brand: 'Spirit', out: 'packages/icons/src/svg', assets: ['icons'] },
-              { brand: 'Jobs', out: 'libs/design-icons/jobs.cz/svg', assets: ['icons', 'benefit-icons'] },
-            ],
+            assets: {
+              fileKey: 'figma-file',
+              targets: [
+                { brand: 'Spirit', out: 'packages/icons/src/svg', assets: ['icons'] },
+                { brand: 'Jobs', out: 'libs/design-icons/jobs.cz/svg', assets: ['icons', 'benefit-icons'] },
+              ],
+            },
           }),
         );
       },
@@ -94,10 +96,16 @@ describe('discoverSyncTargets', () => {
           return;
         }
 
+        if (repository.name === 'tokens-only') {
+          await writeFile(path.join(directory, ROOT_CONFIG_FILE), '{"tokens":{"out":"src/scss"}}');
+
+          return;
+        }
+
         if (repository.name === 'other-file') {
           await writeFile(
             path.join(directory, ROOT_CONFIG_FILE),
-            '{"fileKey":"other","targets":[{"brand":"Jobs","out":"svg","assets":["icons"]}]}',
+            '{"assets":{"fileKey":"other","targets":[{"brand":"Jobs","out":"svg","assets":["icons"]}]}}',
           );
 
           return;
@@ -107,14 +115,16 @@ describe('discoverSyncTargets', () => {
           await writeFile(
             path.join(directory, ROOT_CONFIG_FILE),
             JSON.stringify({
-              fileKey: 'figma-file',
-              targets: [
-                null,
-                1,
-                { brand: 1, out: 2, assets: 'icons' },
-                { brand: ' ', out: 'svg', assets: ['icons'] },
-                { brand: 'Jobs', out: 'svg', assets: [] },
-              ],
+              assets: {
+                fileKey: 'figma-file',
+                targets: [
+                  null,
+                  1,
+                  { brand: 1, out: 2, assets: 'icons' },
+                  { brand: ' ', out: 'svg', assets: ['icons'] },
+                  { brand: 'Jobs', out: 'svg', assets: [] },
+                ],
+              },
             }),
           );
 
@@ -137,6 +147,7 @@ describe('discoverSyncTargets', () => {
         yield createRepository({ name: 'invalid-json' });
         yield createRepository({ name: 'invalid-shape' });
         yield createRepository({ name: 'invalid-primitive' });
+        yield createRepository({ name: 'tokens-only' });
         yield createRepository({ name: 'other-file' });
         yield createRepository({ name: 'incomplete' });
         yield createRepository({ name: 'broken' });
@@ -151,6 +162,7 @@ describe('discoverSyncTargets', () => {
       'invalid-json',
       'invalid-shape',
       'invalid-primitive',
+      'tokens-only',
       'other-file',
       'incomplete',
       'broken',
@@ -162,6 +174,7 @@ describe('discoverSyncTargets', () => {
     expect(messages.join('\n')).toContain('unable to read');
     expect(messages.join('\n')).toContain('must contain a JSON object');
     expect(messages.join('\n')).toContain('must be an object');
+    expect(messages.join('\n')).toContain('no assets configuration');
     expect(messages.join('\n')).toContain('fileKey does not match');
     expect(messages.join('\n')).toContain('clone failed');
     expect(messages.join('\n')).toContain('boom');
@@ -245,7 +258,7 @@ describe('discoverSyncTargets', () => {
       checkoutRepository: async (_repository, directory) => {
         await writeFile(
           path.join(directory, ROOT_CONFIG_FILE),
-          '{"fileKey":"figma-file","targets":[{"brand":"Jobs","out":"svg","assets":["icons"]}]}',
+          '{"assets":{"fileKey":"figma-file","targets":[{"brand":"Jobs","out":"svg","assets":["icons"]}]}}',
         );
       },
       createApp: (appId, privateKey) => {

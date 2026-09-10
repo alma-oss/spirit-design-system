@@ -24,6 +24,12 @@ export const assetsConfigSchema = z.object({
   targets: z.array(syncTargetSchema).min(1, 'must have at least one sync target'),
 });
 
+export const spiritConfigSchema = z
+  .object({
+    assets: z.unknown().optional(),
+  })
+  .passthrough();
+
 export const describeConfigIssues = (error: z.ZodError, configPath: string): string =>
   error.issues
     .map((issue) => {
@@ -69,8 +75,28 @@ export const describeConfigIssues = (error: z.ZodError, configPath: string): str
     })
     .join(' ');
 
+export const readAssetsSection = (config: unknown, configPath: string): { assets: unknown } | { error: string } => {
+  const parsedConfig = spiritConfigSchema.safeParse(config);
+
+  if (!parsedConfig.success) {
+    return { error: `Spirit config at ${configPath} must contain a JSON object.` };
+  }
+
+  if (parsedConfig.data.assets === undefined) {
+    return { error: `Spirit config at ${configPath} must contain an "assets" object.` };
+  }
+
+  return { assets: parsedConfig.data.assets };
+};
+
 export const parseAssetsConfig = (config: unknown, configPath: string): AssetsConfig => {
-  const parsedConfig = assetsConfigSchema.safeParse(config);
+  const section = readAssetsSection(config, configPath);
+
+  if ('error' in section) {
+    throw new ConfigError(section.error);
+  }
+
+  const parsedConfig = assetsConfigSchema.safeParse(section.assets);
 
   if (!parsedConfig.success) {
     throw new ConfigError(describeConfigIssues(parsedConfig.error, configPath));
