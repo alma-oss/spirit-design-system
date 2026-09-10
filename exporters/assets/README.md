@@ -9,18 +9,21 @@ GitHub Actions. A repository opts in by installing the GitHub App and merging a 
 ## Configuration
 
 Create `spirit.config.json` at the repository root. Cosmiconfig also searches for `.spiritrc`, `spirit.config.js`, and a
-`spirit` key in `package.json` during trusted local use:
+`spirit` key in `package.json` during trusted local use. Asset export is one tool on that shared file; other tools can
+add sibling keys later without changing this shape:
 
 ```json
 {
-  "fileKey": "your-figma-file-key",
-  "targets": [
-    {
-      "brand": "Spirit",
-      "out": "src/svg",
-      "assets": ["icons"]
-    }
-  ]
+  "assets": {
+    "fileKey": "your-figma-file-key",
+    "targets": [
+      {
+        "brand": "Spirit",
+        "out": "src/svg",
+        "assets": ["icons"]
+      }
+    ]
+  }
 }
 ```
 
@@ -38,14 +41,16 @@ Multiple asset types in one target share the same output directory and are treat
 
 ```json
 {
-  "fileKey": "your-figma-file-key",
-  "targets": [
-    {
-      "brand": "Example",
-      "out": "packages/example-icons/src/svg",
-      "assets": ["icons", "benefit-icons"]
-    }
-  ]
+  "assets": {
+    "fileKey": "your-figma-file-key",
+    "targets": [
+      {
+        "brand": "Example",
+        "out": "packages/example-icons/src/svg",
+        "assets": ["icons", "benefit-icons"]
+      }
+    ]
+  }
 }
 ```
 
@@ -93,8 +98,8 @@ This repository runs a GitHub Actions workflow that synchronizes icons from Figm
 Figma library publish via external automation. Credentials live in the `figma` GitHub Actions environment.
 
 The workflow authenticates as the GitHub App, checks out every repository the App can access, and looks for
-`spirit.config.json` at the repository root. Repositories without that file are skipped. Each configured target gets its
-own updating pull request.
+`spirit.config.json` at the repository root. Repositories without that file, or without an `assets` object, are skipped.
+Each configured target gets its own updating pull request.
 
 A repository opts in by:
 
