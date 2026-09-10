@@ -7,6 +7,19 @@
     "build": {
       "outputs": ["{projectRoot}/.next"],
       "dependsOn": ["^build"],
+      "inputs": [
+        "default",
+        "{workspaceRoot}/docs/introduction/**/*.md",
+        "{workspaceRoot}/docs/design/**/*.md",
+        "{workspaceRoot}/docs/development/**/*.md",
+        "{workspaceRoot}/docs/migrations/**/*.md",
+        "{workspaceRoot}/docs/decisions/**/*.md",
+        "{workspaceRoot}/docs/contribution/**/*.md",
+        "{workspaceRoot}/packages/codemods/README.md",
+        "{workspaceRoot}/packages/web/CHANGELOG.md",
+        "{workspaceRoot}/packages/web-react/CHANGELOG.md",
+        "{workspaceRoot}/packages/web-react/src/components/**/docs/*.md"
+      ],
       "cache": true
     },
     "dev": {
