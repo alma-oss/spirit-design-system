@@ -20,33 +20,31 @@ export type ProgressBarColor<C = void> =
 export type ProgressBarValuePlacement = 'right' | 'bottom';
 
 /** ===== INTERNAL API ===== */
-export interface ProgressBarProps<C = void>
-  extends
-    StyleProps,
-    HelperTextProps,
-    InputBaseProps,
-    Validation,
-    Omit<SpiritProgressElementPropsWithRef, 'color' | 'label' | 'max' | 'value'> {
-  /** The color of the progress bar. */
-  color?: ProgressBarColor<C>;
-  /** Accessible name rendered with the Label component. */
-  label?: ReactNode;
-  /** The maximum value of the progress bar. */
-  max?: number;
-  /** The validation text to display. */
-  validationText?: ValidationTextType;
-  /** The current value of the progress bar. */
-  value: number;
-  /** Placement of `valueLabel` relative to the bar. */
-  valuePlacement?: ProgressBarValuePlacement;
-  /**
-   * Visible label of the value shown next to or below the bar.
-   * A string also sets `aria-valuetext` unless that attribute is passed.
-   */
-  valueLabel?: ReactNode;
-  /** Id applied to the visible `valueLabel` element. */
-  valueLabelId?: string;
-}
+export type ProgressBarProps<C = void> = StyleProps &
+  HelperTextProps &
+  InputBaseProps &
+  Validation &
+  Omit<SpiritProgressElementPropsWithRef, 'color' | 'label' | 'max' | 'value'> & {
+    /** The color of the progress bar. */
+    color?: ProgressBarColor<C>;
+    /** Accessible name rendered with the Label component. */
+    label?: ReactNode;
+    /** The maximum value of the progress bar. */
+    max?: number;
+    /** The validation text to display. */
+    validationText?: ValidationTextType;
+    /** The current value of the progress bar. */
+    value: number;
+    /** Placement of `valueLabel` relative to the bar. */
+    valuePlacement?: ProgressBarValuePlacement;
+    /**
+     * Visible label of the value shown next to or below the bar.
+     * A string also sets `aria-valuetext` unless that attribute is passed.
+     */
+    valueLabel?: ReactNode;
+    /** Id applied to the visible `valueLabel` element. */
+    valueLabelId?: string;
+  };
 
 /** ===== PUBLIC API ===== */
-export interface SpiritProgressBarProps<C = void> extends ProgressBarProps<C> {}
+export type SpiritProgressBarProps<C = void> = ProgressBarProps<C>;

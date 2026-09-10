@@ -23,7 +23,11 @@ const defaultProps = {
 const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgressElement>) => {
   const mergedProps = useContextProps<Partial<SpiritProgressBarProps>>(props, 'progressBar');
   const propsWithDefaults = { ...defaultProps, ...mergedProps } as SpiritProgressBarProps;
-  const { classProps, progressStyle, props: modifiedProps } = useProgressBarStyleProps(propsWithDefaults);
+  const {
+    classProps,
+    props: modifiedProps,
+    styleProps: progressBarStyleProps,
+  } = useProgressBarStyleProps(propsWithDefaults);
   const {
     'aria-describedby': ariaDescribedBy,
     'aria-valuetext': ariaValueText,
@@ -69,7 +73,7 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
       max={max}
       ref={ref}
       style={{
-        ...progressStyle,
+        ...progressBarStyleProps,
         ...(applyStylePropsToProgress ? styleProps.style : undefined),
       }}
       value={value}

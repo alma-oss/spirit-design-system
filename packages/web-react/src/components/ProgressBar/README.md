@@ -132,7 +132,12 @@ Place the ProgressBar as File children to show the progress of a single upload:
     onDismiss={onDismiss}
     removeText="Cancel upload of Document.pdf"
   >
-    <ProgressBar aria-describedby="file-upload-status" aria-label="Uploading Document.pdf" value={60} valueLabel="60 %" />
+    <ProgressBar
+      aria-describedby="file-upload-status"
+      aria-label="Uploading Document.pdf"
+      value={60}
+      valueLabel="60 %"
+    />
   </File>
 </ul>
 ```
@@ -161,22 +166,22 @@ point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` 
 
 ## API
 
-| Name                | Type                                                                                                               | Default       | Required | Description                                   |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------- | -------- | --------------------------------------------- |
-| `color`             | \[[EmotionColorNamesType][readme-generated-types] \| [AccentColorNamesType][readme-generated-types] \| `selected`] | `informative` | ✕        | Color of the component                        |
-| `hasValidationIcon` | `bool`                                                                                                             | `false`       | ✕        | Whether to show the validation state icon     |
-| `helperText`        | `ReactNode`                                                                                                        | —             | ✕        | Helper text displayed below the bar           |
-| `id`                | `string`                                                                                                           | —             | ✕        | Id of the native `progress` element           |
-| `isDisabled`        | `bool`                                                                                                             | `false`       | ✕        | Whether the ProgressBar is disabled           |
-| `isLabelHidden`     | `bool`                                                                                                             | `false`       | ✕        | Whether the label is visually hidden          |
+| Name                | Type                                                                                                               | Default       | Required | Description                                                             |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------- | -------- | ----------------------------------------------------------------------- |
+| `color`             | \[[EmotionColorNamesType][readme-generated-types] \| [AccentColorNamesType][readme-generated-types] \| `selected`] | `informative` | ✕        | Color of the component                                                  |
+| `hasValidationIcon` | `bool`                                                                                                             | `false`       | ✕        | Whether to show the validation state icon                               |
+| `helperText`        | `ReactNode`                                                                                                        | —             | ✕        | Helper text displayed below the bar                                     |
+| `id`                | `string`                                                                                                           | —             | ✕        | Id of the native `progress` element                                     |
+| `isDisabled`        | `bool`                                                                                                             | `false`       | ✕        | Whether the ProgressBar is disabled                                     |
+| `isLabelHidden`     | `bool`                                                                                                             | `false`       | ✕        | Whether the label is visually hidden                                    |
 | `label`             | `ReactNode`                                                                                                        | —             | ✕        | Visible label; omit and use `aria-label` when there is no visible label |
-| `max`               | `number`                                                                                                           | `100`         | ✕        | Maximum value of the ProgressBar              |
-| `validationState`   | [Validation dictionary][dictionary-validation]                                                                     | —             | ✕        | Validation state                              |
-| `validationText`    | `ReactNode` or `ReactNode[]`                                                                                       | —             | ✕        | Validation text displayed below the bar       |
-| `value`             | `number`                                                                                                           | —             | ✓        | Current value of the ProgressBar              |
-| `valueLabel`        | `ReactNode`                                                                                                        | —             | ✕        | Visible label of the value next to or below the bar |
-| `valueLabelId`      | `string`                                                                                                           | —             | ✕        | Id applied to the visible `valueLabel` element |
-| `valuePlacement`    | `right` \| `bottom`                                                                                                | `right`       | ✕        | Placement of `valueLabel` relative to the bar  |
+| `max`               | `number`                                                                                                           | `100`         | ✕        | Maximum value of the ProgressBar                                        |
+| `validationState`   | [Validation dictionary][dictionary-validation]                                                                     | —             | ✕        | Validation state                                                        |
+| `validationText`    | `ReactNode` or `ReactNode[]`                                                                                       | —             | ✕        | Validation text displayed below the bar                                 |
+| `value`             | `number`                                                                                                           | —             | ✓        | Current value of the ProgressBar                                        |
+| `valueLabel`        | `ReactNode`                                                                                                        | —             | ✕        | Visible label of the value next to or below the bar                     |
+| `valueLabelId`      | `string`                                                                                                           | —             | ✕        | Id applied to the visible `valueLabel` element                          |
+| `valuePlacement`    | `right` \| `bottom`                                                                                                | `right`       | ✕        | Placement of `valueLabel` relative to the bar                           |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

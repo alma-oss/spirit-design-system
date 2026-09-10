@@ -16,7 +16,7 @@ describe('useProgressBarStyleProps', () => {
         isSubtle: true,
       })}`,
     );
-    expect(result.current.progressStyle).toEqual({ '--progress-bar-value': '60%' });
+    expect(result.current.styleProps).toEqual({ '--progress-bar-value': '60%' });
   });
 
   it.each([...Object.values(EmotionColors), ...Object.values(ProgressBarColorsExtended)])(
@@ -47,6 +47,6 @@ describe('useProgressBarStyleProps', () => {
     const props = { color: 'informative', max: 20, value: 4 } as SpiritProgressBarProps;
     const { result } = renderHook(() => useProgressBarStyleProps(props));
 
-    expect(result.current.progressStyle).toEqual({ '--progress-bar-value': '20%' });
+    expect(result.current.styleProps).toEqual({ '--progress-bar-value': '20%' });
   });
 });

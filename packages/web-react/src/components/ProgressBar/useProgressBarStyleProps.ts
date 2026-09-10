@@ -15,10 +15,10 @@ export interface ProgressBarStyles {
     value: string;
     valueLabel: string;
   };
-  /** Style for the native progress element, including `--progress-bar-value` */
-  progressStyle: ProgressBarCSSProperties;
   /** props to be passed to the element */
-  props: Partial<ProgressBarProps>;
+  props: ProgressBarProps;
+  /** Style for the native progress element, including `--progress-bar-value` */
+  styleProps: ProgressBarCSSProperties;
 }
 
 const getProgressBarValueStyle = (value: number, max: number): ProgressBarCSSProperties => ({
@@ -42,12 +42,12 @@ export function useProgressBarStyleProps(props: ProgressBarProps): ProgressBarSt
       value: isDisabled ? disabledColorSchemeClass : '',
       valueLabel: isDisabled ? textColorSchemeClass : '',
     },
-    progressStyle: getProgressBarValueStyle(value, max),
     props: {
       ...modifiedProps,
       isDisabled,
       max,
       value,
     },
+    styleProps: getProgressBarValueStyle(value, max),
   };
 }
