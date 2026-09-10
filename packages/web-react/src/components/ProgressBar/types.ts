@@ -37,12 +37,12 @@ export interface ProgressBarProps<C = void>
   validationText?: ValidationTextType;
   /** The current value of the progress bar. */
   value: number;
-  /** Placement of `valueText` relative to the bar. */
+  /** Placement of `valueLabel` relative to the bar. */
   valuePlacement?: ProgressBarValuePlacement;
-  /** Visible value shown next to or below the bar. */
-  valueText?: ReactNode;
-  /** Id applied to the visible `valueText` element. */
-  valueTextId?: string;
+  /** Visible label of the value shown next to or below the bar. */
+  valueLabel?: ReactNode;
+  /** Id applied to the visible `valueLabel` element. */
+  valueLabelId?: string;
 }
 
 /** ===== PUBLIC API ===== */

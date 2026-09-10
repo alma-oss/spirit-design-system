@@ -123,8 +123,8 @@ describe('ProgressBar', () => {
     expect(screen.getByText('Your profile is complete')).toBeInTheDocument();
   });
 
-  it('should render value text to the right of the bar', () => {
-    const { container } = render(<ProgressBar {...defaultProps} valueText="60 %" />);
+  it('should render value label to the right of the bar', () => {
+    const { container } = render(<ProgressBar {...defaultProps} valueLabel="60 %" />);
 
     expect(screen.getByText('60 %')).toBeInTheDocument();
     expect(container.querySelector('.Flex')).toHaveClass(
@@ -136,22 +136,22 @@ describe('ProgressBar', () => {
     expect(container.querySelector('.Flex')).not.toHaveClass('Flex--alignmentXStretch');
   });
 
-  it('should render value text below the bar', () => {
-    const { container } = render(<ProgressBar {...defaultProps} valuePlacement="bottom" valueText="4 out of 20" />);
+  it('should render value label below the bar', () => {
+    const { container } = render(<ProgressBar {...defaultProps} valuePlacement="bottom" valueLabel="4 out of 20" />);
 
     expect(container.querySelector('.Flex')).toHaveClass('Flex', 'Flex--vertical');
     expect(container.querySelector('.Flex')).not.toHaveClass('Flex--noWrap');
     expect(container.querySelector('.Flex')).not.toHaveClass('Flex--alignmentXStretch');
   });
 
-  it('should hide value text from assistive technologies when aria-valuetext is set', () => {
-    render(<ProgressBar {...defaultProps} aria-valuetext="4 out of 20 awards" valueText="4 out of 20 awards" />);
+  it('should hide value label from assistive technologies when aria-valuetext is set', () => {
+    render(<ProgressBar {...defaultProps} aria-valuetext="4 out of 20 awards" valueLabel="4 out of 20 awards" />);
 
     expect(screen.getByText('4 out of 20 awards')).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('should apply the disabled color scheme to the value row', () => {
-    const { container } = render(<ProgressBar {...defaultProps} isDisabled valueText="40 %" />);
+    const { container } = render(<ProgressBar {...defaultProps} isDisabled valueLabel="40 %" />);
 
     expect(container.querySelector('.Flex')).toHaveClass('color-scheme-on-disabled');
     expect(screen.getByText('40 %')).toHaveClass('text-color-scheme');
@@ -163,8 +163,8 @@ describe('ProgressBar', () => {
     expect(screen.getByRole('progressbar').style.getPropertyValue('--progress-bar-value')).toBe('20%');
   });
 
-  it('should set id on the visible value text', () => {
-    render(<ProgressBar {...defaultProps} valueText="30 %" valueTextId="progress-bar-animated-value" />);
+  it('should set id on the visible value label', () => {
+    render(<ProgressBar {...defaultProps} valueLabel="30 %" valueLabelId="progress-bar-animated-value" />);
 
     expect(screen.getByText('30 %')).toHaveAttribute('id', 'progress-bar-animated-value');
   });

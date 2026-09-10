@@ -44,7 +44,7 @@ describe('useProgressBarStyleProps', () => {
 
     expect(result.current.classProps.root).toBe('ProgressBar');
     expect(result.current.classProps.value).toBe('color-scheme-on-disabled');
-    expect(result.current.classProps.valueText).toBe('text-color-scheme');
+    expect(result.current.classProps.valueLabel).toBe('text-color-scheme');
   });
 
   it('should return vertical value row for bottom placement', () => {

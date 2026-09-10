@@ -36,16 +36,16 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
     validationState,
     validationText,
     value,
-    valueText,
-    valueTextId,
+    valueLabel,
+    valueLabelId,
     ...restProps
   } = modifiedProps;
 
   const generatedId = useId();
   const id = idProp ?? generatedId;
   const shouldRenderField = label != null || Boolean(helperText) || Boolean(validationState);
-  const hasValueText = valueText != null;
-  const applyStylePropsToProgress = !shouldRenderField && !hasValueText;
+  const hasValueLabel = valueLabel != null;
+  const applyStylePropsToProgress = !shouldRenderField && !hasValueLabel;
 
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
@@ -72,7 +72,7 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
     />
   );
 
-  const barWithValue = hasValueText ? (
+  const barWithValue = hasValueLabel ? (
     <div
       className={
         classNames(valueRow.className, !shouldRenderField && styleProps.className, classProps.value) || undefined
@@ -82,11 +82,11 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
       {progressElement}
       <CaptionText
         aria-hidden={ariaValueText ? true : undefined}
-        id={valueTextId}
+        id={valueLabelId}
         textColor={isDisabled ? undefined : 'secondary'}
-        UNSAFE_className={classProps.valueText || undefined}
+        UNSAFE_className={classProps.valueLabel || undefined}
       >
-        {valueText}
+        {valueLabel}
       </CaptionText>
     </div>
   ) : (

@@ -69,7 +69,7 @@ const meta: Meta<typeof ProgressBar> = {
         defaultValue: { summary: 'right' },
       },
     },
-    valueText: {
+    valueLabel: {
       control: 'text',
     },
   },

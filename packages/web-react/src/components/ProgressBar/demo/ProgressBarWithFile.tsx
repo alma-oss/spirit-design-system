@@ -11,7 +11,7 @@ const ProgressBarWithFile = () => (
         aria-describedby="file-upload-status"
         aria-label="Uploading Document.pdf"
         value={60}
-        valueText="60 %"
+        valueLabel="60 %"
       />
       <span className="HelperText" id="file-upload-status" role="status">
         Uploading your file…

@@ -3,7 +3,7 @@
 ProgressBar shows how far a task has advanced, either on its own or as part of a form field.
 
 The [web package][progress-bar] still composes the native `progress` element with layout helpers. In React, label,
-value text, helper text, and validation are part of the `ProgressBar` API.
+value label, helper text, and validation are part of the `ProgressBar` API.
 
 ## Basic Usage
 
@@ -41,23 +41,23 @@ Without a `color` prop, ProgressBar falls back to the informative colors.
 
 ## Value
 
-Use `valueText` to show the current value next to the bar. Set `valuePlacement` to `"bottom"` to place it
+Use `valueLabel` to show the label of the value next to the bar. Set `valuePlacement` to `"bottom"` to place it
 under the bar.
 
 ```tsx
-<ProgressBar aria-label="Profile completeness" value={20} valueText="20 %" />
+<ProgressBar aria-label="Profile completeness" value={20} valueLabel="20 %" />
 <ProgressBar
   aria-label="Awards collected"
   aria-valuetext="4 out of 20 awards"
   max={20}
   value={4}
   valuePlacement="bottom"
-  valueText="4 out of 20 awards"
+  valueLabel="4 out of 20 awards"
 />
 ```
 
 ℹ️ Browsers announce `value` and `max` as a percentage. When the value is not a percentage, describe it
-with `aria-valuetext`. ProgressBar hides the visible `valueText` from assistive technologies in that case
+with `aria-valuetext`. ProgressBar hides the visible `valueLabel` from assistive technologies in that case
 so the value is not announced twice.
 
 ## Label
@@ -104,7 +104,7 @@ width in page layouts.
 
 ## Disabled State
 
-Use the `isDisabled` prop. The value text picks up the disabled content color automatically:
+Use the `isDisabled` prop. The value label picks up the disabled content color automatically:
 
 ```tsx
 <ProgressBar
@@ -113,7 +113,7 @@ Use the `isDisabled` prop. The value text picks up the disabled content color au
   isDisabled
   label="Profile completeness"
   value={40}
-  valueText="40 %"
+  valueLabel="40 %"
 />
 ```
 
@@ -133,7 +133,7 @@ Place the ProgressBar as File children to show the progress of a single upload:
     onDismiss={onDismiss}
     removeText="Cancel upload of Document.pdf"
   >
-    <ProgressBar aria-describedby="file-upload-status" aria-label="Uploading Document.pdf" value={60} valueText="60 %" />
+    <ProgressBar aria-describedby="file-upload-status" aria-label="Uploading Document.pdf" value={60} valueLabel="60 %" />
   </File>
 </ul>
 ```
@@ -175,9 +175,9 @@ point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` 
 | `validationState`   | [Validation dictionary][dictionary-validation]                                                                     | —             | ✕        | Validation state                              |
 | `validationText`    | `ReactNode` or `ReactNode[]`                                                                                       | —             | ✕        | Validation text displayed below the bar       |
 | `value`             | `number`                                                                                                           | —             | ✓        | Current value of the ProgressBar              |
-| `valuePlacement`    | `right` \| `bottom`                                                                                                | `right`       | ✕        | Placement of `valueText` relative to the bar  |
-| `valueText`         | `ReactNode`                                                                                                        | —             | ✕        | Visible value shown next to or below the bar  |
-| `valueTextId`       | `string`                                                                                                           | —             | ✕        | Id applied to the visible `valueText` element |
+| `valueLabel`        | `ReactNode`                                                                                                        | —             | ✕        | Visible label of the value next to or below the bar |
+| `valueLabelId`      | `string`                                                                                                           | —             | ✕        | Id applied to the visible `valueLabel` element |
+| `valuePlacement`    | `right` \| `bottom`                                                                                                | `right`       | ✕        | Placement of `valueLabel` relative to the bar  |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

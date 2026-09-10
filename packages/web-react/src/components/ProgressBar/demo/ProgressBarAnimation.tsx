@@ -14,8 +14,8 @@ const ProgressBarAnimation = () => {
         aria-label="Profile completeness"
         id="progress-bar-animated"
         value={value}
-        valueText={`${value} %`}
-        valueTextId="progress-bar-animated-value"
+        valueLabel={`${value} %`}
+        valueLabelId="progress-bar-animated-value"
       />
       <Flex spacingX="space-500">
         {completions.map((completion) => (

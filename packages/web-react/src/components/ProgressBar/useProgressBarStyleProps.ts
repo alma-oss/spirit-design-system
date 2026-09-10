@@ -19,11 +19,11 @@ export interface ProgressBarStyles {
   classProps: {
     root: string;
     value: string;
-    valueText: string;
+    valueLabel: string;
   };
   /** Style for the native progress element, including `--progress-bar-value` */
   progressStyle: ProgressBarCSSProperties;
-  /** Class and spacing styles matching the web Flex markup for the bar and value text */
+  /** Class and spacing styles matching the web Flex markup for the bar and value label */
   valueRow: ProgressBarValueRowProps;
   /** props to be passed to the element */
   props: Partial<ProgressBarProps>;
@@ -65,7 +65,7 @@ export function useProgressBarStyleProps(props: ProgressBarProps): ProgressBarSt
     classProps: {
       root: classNames(progressBarClass, colorSchemeClass),
       value: isDisabled ? disabledColorSchemeClass : '',
-      valueText: isDisabled ? textColorSchemeClass : '',
+      valueLabel: isDisabled ? textColorSchemeClass : '',
     },
     progressStyle: getProgressBarValueStyle(value, max),
     valueRow: getValueRowProps(valuePlacement),
