@@ -5,6 +5,7 @@ import React, { type CSSProperties, type ReactNode } from 'react';
 import { useContextProps } from '../../context';
 import { CaptionText } from '../CaptionText';
 import { Flex } from '../Flex';
+import { PROGRESS_BAR_VALUE_LABEL_TEXT_COLOR, PROGRESS_BAR_VALUE_PLACEMENT_FLEX_PROPS } from './constants';
 import { type ProgressBarValuePlacement } from './types';
 
 type ProgressBarCaptionProps = {
@@ -26,15 +27,10 @@ type ProgressBarCaptionProps = {
 const ProgressBarCaption = (props: ProgressBarCaptionProps) => {
   const { children, classProps, isAriaHidden, styleProps, valueLabel, valueLabelId, valuePlacement = 'right' } = props;
   const { isDisabled } = useContextProps<{ isDisabled?: boolean }>({}, 'progressBar');
-  const isValueLabelBottom = valuePlacement === 'bottom';
 
   return (
     <Flex
-      alignmentX="left"
-      alignmentY={isValueLabelBottom ? undefined : 'center'}
-      direction={isValueLabelBottom ? 'vertical' : 'horizontal'}
-      spacingX={isValueLabelBottom ? undefined : 'space-600'}
-      spacingY={isValueLabelBottom ? 'space-600' : undefined}
+      {...PROGRESS_BAR_VALUE_PLACEMENT_FLEX_PROPS[valuePlacement]}
       UNSAFE_className={classNames(styleProps?.className, classProps.value) || undefined}
       UNSAFE_style={styleProps?.style}
     >
@@ -42,7 +38,7 @@ const ProgressBarCaption = (props: ProgressBarCaptionProps) => {
       <CaptionText
         aria-hidden={isAriaHidden ? true : undefined}
         id={valueLabelId}
-        textColor={isDisabled ? undefined : 'secondary'}
+        textColor={isDisabled ? undefined : PROGRESS_BAR_VALUE_LABEL_TEXT_COLOR}
         UNSAFE_className={classProps.valueLabel || undefined}
       >
         {valueLabel}
