@@ -1,0 +1,39 @@
+{
+  "name": "@alma-oss/spirit-supernova-extract",
+  "version": "1.0.0",
+  "description": "Extract hardcoded Supernova documentation pages to markdown for apps/docsite migration",
+  "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alma-oss/spirit-design-system.git",
+    "directory": "scripts/supernova-extract"
+  },
+  "license": "MIT",
+  "scripts": {
+    "extract": "tsx ./src/cli.ts",
+    "test": "npm-run-all --serial test:unit types",
+    "test:unit": "jest --config ./jest.config.ts",
+    "test:unit:watch": "yarn test:unit --watchAll",
+    "test:unit:coverage": "yarn test:unit --coverage",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "jsdom": "catalog:build",
+    "sade": "catalog:script",
+    "tsx": "catalog:script",
+    "turndown": "catalog:script",
+    "turndown-plugin-gfm": "catalog:script",
+    "yaml": "catalog:script"
+  },
+  "devDependencies": {
+    "@swc/core": "catalog:build",
+    "@swc/jest": "catalog:test",
+    "@types/node": "catalog:types",
+    "@types/turndown": "catalog:types",
+    "jest": "catalog:test",
+    "jest-config-spirit": "workspace:^",
+    "npm-run-all2": "catalog:script",
+    "typescript": "catalog:types"
+  }
+}
