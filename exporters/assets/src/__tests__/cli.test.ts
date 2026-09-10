@@ -199,12 +199,15 @@ describe('runCli', () => {
           return {
             include: [
               {
+                branch: 'chore/figma-icons-sync-spirit-design-system-packages-icons-src-svg',
                 brand: 'Spirit',
+                commitMessage: 'chore(icons): sync Spirit icons from Figma',
                 fileKey: options.fileKey ?? '',
                 out: 'packages/icons/src/svg',
                 owner: 'alma-oss',
                 repo: 'spirit-design-system',
                 slug: 'spirit-design-system-packages-icons-src-svg',
+                title: 'Chore(icons): Sync Spirit icons from Figma',
               },
             ],
           };
@@ -409,6 +412,43 @@ describe('resolveConfig', () => {
     {
       config: { fileKey: '../etc', targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons'] }] },
       expectedError: /valid Figma "fileKey"/,
+    },
+    {
+      config: { fileKey: 'file', branch: ' ', targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons'] }] },
+      expectedError: /non-empty "branch"/,
+    },
+    {
+      config: {
+        fileKey: 'file',
+        pullRequestTitle: 'Chore({token})',
+        targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons'] }],
+      },
+      expectedError: /unknown placeholder/,
+    },
+    {
+      config: { fileKey: 'file', branch: 1, targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons'] }] },
+      expectedError: /non-empty "branch"/,
+    },
+    {
+      config: {
+        fileKey: 'file',
+        targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons'], branch: '{unknown}' }],
+      },
+      expectedError: /unknown placeholder/,
+    },
+    {
+      config: {
+        fileKey: 'file',
+        targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons'], commitMessage: ' ' }],
+      },
+      expectedError: /non-empty "commitMessage"/,
+    },
+    {
+      config: {
+        fileKey: 'file',
+        targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons'], pullRequestTitle: 'Chore({token})' }],
+      },
+      expectedError: /unknown placeholder/,
     },
   ])('rejects invalid config: $expectedError', ({ config, expectedError }) => {
     const configPath = '/repo/spirit.config.json';
