@@ -42,6 +42,11 @@ straight to the new width for users who ask for reduced motion.
 The colors come from a [color scheme][color-schemes] class. Pick the `subtle` variant: the track uses
 the subtle background and the filled part uses the basic background of the same scheme.
 
+Put the class on the outermost element the component owns: on the wrapping Flex when the bar is paired
+with a value, on the `<progress>` element itself when it stands alone. The class only declares custom
+properties, so the bar looks the same either way, but on the Flex the value can pick the content color
+up as well. The same placement applies to the [disabled state](#disabled-state).
+
 ```html
 <progress
   class="ProgressBar color-scheme-on-emotion-informative-subtle"
@@ -96,11 +101,11 @@ To the right of the bar:
 
 ```html
 <div
-  class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter"
+  class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter color-scheme-on-emotion-informative-subtle"
   style="--flex-spacing-x: var(--spirit-space-600);"
 >
   <progress
-    class="ProgressBar color-scheme-on-emotion-informative-subtle"
+    class="ProgressBar"
     value="20"
     max="100"
     style="--progress-bar-value: 20%"
@@ -113,9 +118,9 @@ To the right of the bar:
 Below the bar:
 
 ```html
-<div class="Flex Flex--vertical" style="--flex-spacing-y: var(--spirit-space-600);">
+<div class="Flex Flex--vertical color-scheme-on-accent-01-subtle" style="--flex-spacing-y: var(--spirit-space-600);">
   <progress
-    class="ProgressBar color-scheme-on-accent-01-subtle"
+    class="ProgressBar"
     value="4"
     max="20"
     style="--progress-bar-value: 20%"
@@ -201,8 +206,9 @@ Pair the matching color scheme with the [ValidationText][readme-validation-text]
 
 ## Disabled State
 
-Use the `color-scheme-on-disabled` class. Put it on the wrapping Flex so that the value can pick the
-disabled content color up through the `text-color-scheme` helper class:
+Use the `color-scheme-on-disabled` class in place of the [color](#colors) scheme class, in the same
+spot. On the wrapping Flex the value picks the disabled content color up through the `text-color-scheme`
+helper class:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
