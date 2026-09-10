@@ -62,11 +62,15 @@ so the value is not announced twice.
 
 ## Label
 
+The ProgressBar needs an accessible name. Pass a visible `label`, or `aria-label` when there is no visible
+label. `label` itself is optional.
+
 ```tsx
 <ProgressBar id="progress-bar-label" label="Profile completeness" value={60} />
+<ProgressBar aria-label="Profile completeness" value={60} />
 ```
 
-Use `isLabelHidden` on ProgressBar, or the `aria-label` attribute, when the label should not be visible.
+Use `isLabelHidden` when the `label` should not be visible.
 
 ## Layout
 
@@ -166,7 +170,7 @@ point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` 
 | `id`                | `string`                                                                                                           | —             | ✕        | Id of the native `progress` element           |
 | `isDisabled`        | `bool`                                                                                                             | `false`       | ✕        | Whether the ProgressBar is disabled           |
 | `isLabelHidden`     | `bool`                                                                                                             | `false`       | ✕        | Whether the label is visually hidden          |
-| `label`             | `ReactNode`                                                                                                        | —             | ✕        | Label of the ProgressBar                      |
+| `label`             | `ReactNode`                                                                                                        | —             | ✕        | Visible label; omit and use `aria-label` when there is no visible label |
 | `max`               | `number`                                                                                                           | `100`         | ✕        | Maximum value of the ProgressBar              |
 | `validationState`   | [Validation dictionary][dictionary-validation]                                                                     | —             | ✕        | Validation state                              |
 | `validationText`    | `ReactNode` or `ReactNode[]`                                                                                       | —             | ✕        | Validation text displayed below the bar       |
