@@ -41,14 +41,14 @@ jobs:
 
       - name: Build sync CLI
         if: ${{ steps.discover.outputs.has-targets == 'true' }}
-        run: yarn workspace @alma-oss/spirit-assets-exporter build:ci
+        run: yarn workspace @alma-oss/spirit-assets-exporter build
 
       - name: Upload sync CLI
         if: ${{ steps.discover.outputs.has-targets == 'true' }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: spirit-assets-cli
-          path: exporters/assets/dist-ci/spirit-assets.mjs
+          path: exporters/assets/dist/standalone.mjs
 
   sync:
     name: Synchronize assets
@@ -131,7 +131,7 @@ jobs:
 
       - name: Sync assets from Figma
         run: |
-          node spirit-assets.mjs sync \
+          node standalone.mjs sync \
             --config=target/spirit.config.json \
             --repository-root=target \
             --brand="$BRAND" \
@@ -175,7 +175,7 @@ jobs:
           REPO: ${{ matrix.repo }}
           TITLE: ${{ matrix.title }}
         run: |
-          node spirit-assets.mjs deliver \
+          node standalone.mjs deliver \
             --app-slug="$APP_SLUG" \
             --base="$BASE" \
             --body-path "$PR_BODY_PATH" \

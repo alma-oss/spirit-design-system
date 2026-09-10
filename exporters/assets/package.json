@@ -13,7 +13,8 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./standalone": "./dist/standalone.mjs"
   },
   "scripts": {
     "build": "npm-run-all --serial build:compile build:bin",
@@ -25,7 +26,7 @@
     "read-publish-notes": "tsx ./src/bin/read-publish-notes.ts",
     "sync": "tsx ./src/bin/spirit-assets.js sync",
     "test": "npm-run-all --serial lint types build test:unit:coverage",
-    "test:unit": "jest",
+    "test:unit": "vite build && jest",
     "test:unit:coverage": "yarn test:unit --coverage",
     "types": "tsc --noEmit"
   },

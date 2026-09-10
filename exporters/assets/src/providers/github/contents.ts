@@ -27,8 +27,8 @@ const requestGitHub = async (
 ): Promise<Response> => {
   try {
     return await fetchImplementation(url, init);
-  } catch {
-    throw new Error(errorMessage);
+  } catch (error) {
+    throw new Error(errorMessage, { cause: error });
   }
 };
 
