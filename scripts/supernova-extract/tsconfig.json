@@ -1,0 +1,12 @@
+{
+  "extends": "../../configs/typescript-config-spirit/base",
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "rootDir": ".",
+    "types": ["node"]
+  },
+  "include": ["./src/**/*", "./jest.config.ts"],
+  "exclude": ["./src/**/__tests__/**"]
+}
