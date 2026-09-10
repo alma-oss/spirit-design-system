@@ -2,54 +2,47 @@
 
 import { Navigation, NavigationAction, NavigationItem } from '@alma-oss/spirit-web-react';
 import { routes } from '@local/domains/routing/routes';
-import useIsPage from '@local/hooks/useIsPage';
+import useIsSection from '@local/hooks/useIsSection';
 import NextLink from 'next/link';
 import React from 'react';
 
 const isAriaCurrent = (condition: boolean) => (condition ? { 'aria-current': true as const } : {});
 
-const Menu = () => {
-  const isComponentsPage = useIsPage(routes.components);
-  const isIconPage = useIsPage(routes.icons);
-  const isHelpersPage = useIsPage(routes.helpers);
+const MENU_ITEMS = [
+  { label: 'Introduction', href: routes.introduction },
+  { label: 'Design', href: routes.design },
+  { label: 'Components', href: routes.components },
+  { label: 'Icons', href: routes.icons },
+  { label: 'Helpers', href: routes.helpers },
+  { label: 'Development', href: routes.development },
+  { label: 'Migrations', href: routes.migrations },
+  { label: 'Releases', href: routes.releases },
+] as const;
+
+const MenuItem = ({ href, label }: { href: string; label: string }) => {
+  const isCurrent = useIsSection(href);
 
   return (
-    <Navigation aria-label="Main Navigation" hideOn={['mobile', 'tablet']}>
-      <NavigationItem>
-        <NavigationAction
-          elementType={NextLink}
-          variant="pill"
-          href={routes.components}
-          {...isAriaCurrent(isComponentsPage)}
-          isSelected={isComponentsPage}
-        >
-          Components
-        </NavigationAction>
-      </NavigationItem>
-      <NavigationItem>
-        <NavigationAction
-          elementType={NextLink}
-          variant="pill"
-          href={routes.icons}
-          {...isAriaCurrent(isIconPage)}
-          isSelected={isIconPage}
-        >
-          Icons
-        </NavigationAction>
-      </NavigationItem>
-      <NavigationItem>
-        <NavigationAction
-          elementType={NextLink}
-          variant="pill"
-          href={routes.helpers}
-          {...isAriaCurrent(isHelpersPage)}
-          isSelected={isHelpersPage}
-        >
-          Helpers
-        </NavigationAction>
-      </NavigationItem>
-    </Navigation>
+    <NavigationItem>
+      <NavigationAction
+        elementType={NextLink}
+        variant="pill"
+        href={href}
+        {...isAriaCurrent(isCurrent)}
+        isSelected={isCurrent}
+      >
+        {label}
+      </NavigationAction>
+    </NavigationItem>
   );
 };
+
+const Menu = () => (
+  <Navigation aria-label="Main" hideOn={['mobile', 'tablet']}>
+    {MENU_ITEMS.map((item) => (
+      <MenuItem key={item.href} href={item.href} label={item.label} />
+    ))}
+  </Navigation>
+);
 
 export default Menu;
