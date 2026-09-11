@@ -360,6 +360,75 @@
 
   <div class="Container">
 
+    <h2 class="docs-Heading">Tooltip Trigger Inside a Form</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <script
+        type="module"
+        src="form-example.mjs"
+      ></script>
+
+      <p>Clicking the tooltip trigger does not submit the form.</p>
+
+      <form
+        id="tooltip-in-form-form"
+        class="docs-Stack docs-Stack--start"
+      >
+
+        <div
+          class="Tooltip d-inline-block"
+          data-spirit-element="tooltip"
+        >
+          <button
+            type="button"
+            id="button-in-form"
+            class="Button Button--primary Button--medium"
+            aria-describedby="tooltip-in-form"
+            data-spirit-toggle="tooltip"
+            data-spirit-target="#tooltip-in-form"
+          >
+            Tooltip inside a form
+          </button>
+          <div
+            id="tooltip-in-form"
+            class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-right placement-controlled"
+            data-spirit-placement="right"
+            data-spirit-flip-fallback-placements="bottom"
+            data-spirit-trigger="click"
+          >
+            Hello there!
+            <span
+              class="TooltipPopover__arrow"
+              data-spirit-element="arrow"
+            ></span>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="Button Button--secondary Button--medium"
+        >
+          Submit the form
+        </button>
+
+      </form>
+
+      <p>
+        Tooltip trigger clicks: <strong id="tooltip-in-form-trigger-count">0</strong>,
+        form submits: <strong id="tooltip-in-form-submit-count">0</strong>
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
     <h2 class="docs-Heading">Tooltip on Icon Component</h2>
 
     <div class="docs-Stack docs-Stack--start">

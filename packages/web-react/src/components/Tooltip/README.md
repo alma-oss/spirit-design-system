@@ -107,6 +107,8 @@ export const Example = () => {
 | `children`    | `ReactNode`   | —        | ✓        | TooltipTrigger children's nodes` |
 | `elementType` | `ElementType` | "button" | ✕        | Type of element used as trigger  |
 
+👉 When `elementType` is a native `button` (the default), the trigger renders with `type="button"`. Pass your own `type` to override it.
+
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
