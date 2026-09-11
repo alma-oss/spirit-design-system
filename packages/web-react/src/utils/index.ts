@@ -12,6 +12,7 @@ export * from './getPlacementClassName';
 export * from './htmlReactParser';
 export * from './inputPositionToFlexAlignmentX';
 export * from './inputPositionToFlexDirection';
+export * from './isAriaHidden';
 export * from './isPlainObject';
 export * from './mergeProps';
 export * from './mergeStyleProps';

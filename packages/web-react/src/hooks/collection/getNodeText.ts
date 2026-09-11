@@ -1,8 +1,14 @@
-import { type ReactNode, isValidElement } from 'react';
+import { type ReactElement, type ReactNode, isValidElement } from 'react';
+
+/** Options of `getNodeText`. */
+export interface GetNodeTextOptions {
+  /** Predicate leaving matching elements and their subtrees out of the text. */
+  shouldSkipElement?: (element: ReactElement) => boolean;
+}
 
 const normalizeWhitespace = (text: string) => text.replace(/\s+/g, ' ').trim();
 
-const collectNodeText = (value: ReactNode): string => {
+const collectNodeText = (value: ReactNode, shouldSkipElement?: GetNodeTextOptions['shouldSkipElement']): string => {
   if (value == null || typeof value === 'boolean') {
     return '';
   }
@@ -12,11 +18,18 @@ const collectNodeText = (value: ReactNode): string => {
   }
 
   if (Array.isArray(value)) {
-    return value.map(collectNodeText).filter(Boolean).join(' ');
+    return value
+      .map((child) => collectNodeText(child, shouldSkipElement))
+      .filter(Boolean)
+      .join(' ');
   }
 
   if (isValidElement(value)) {
-    return collectNodeText((value.props as { children?: ReactNode }).children);
+    if (shouldSkipElement?.(value)) {
+      return '';
+    }
+
+    return collectNodeText((value.props as { children?: ReactNode }).children, shouldSkipElement);
   }
 
   return '';
@@ -27,5 +40,8 @@ const collectNodeText = (value: ReactNode): string => {
  * Joins array children with spaces and normalizes whitespace.
  *
  * @param node React node
+ * @param options Options
+ * @param options.shouldSkipElement Predicate leaving matching elements and their subtrees out of the text
  */
-export const getNodeText = (node: ReactNode): string => normalizeWhitespace(collectNodeText(node));
+export const getNodeText = (node: ReactNode, options: GetNodeTextOptions = {}): string =>
+  normalizeWhitespace(collectNodeText(node, options.shouldSkipElement));

@@ -1,4 +1,5 @@
 export { getNodeText } from './getNodeText';
+export type { GetNodeTextOptions } from './getNodeText';
 export { createCollection } from './createCollection';
 export { filterCollection } from './filterCollection';
 export { useCollection } from './useCollection';

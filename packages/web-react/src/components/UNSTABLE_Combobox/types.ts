@@ -57,7 +57,11 @@ export interface UnstableComboboxBaseProps<S = void>
   isRequired?: boolean;
   /** Shows loading slot sibling of the options widget */
   isLoading?: boolean;
-  label: string;
+  /**
+   * Visible label and accessible name. Rich content is flattened to plain text for the input
+   * placeholder and the `{label}` translation placeholders; `aria-hidden` parts are left out.
+   */
+  label: ReactNode;
   /** Props for the inner `Dropdown`. */
   dropdownProps?: DropdownBaseProps;
   /**

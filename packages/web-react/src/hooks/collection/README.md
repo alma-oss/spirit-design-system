@@ -63,10 +63,13 @@ filterCollection(collection: Collection, predicate: (node) => boolean): Collecti
 
 Flattens a `ReactNode` to plain text for `textValue` / aria labels (whitespace normalized).
 
+Pass `shouldSkipElement` to leave matching elements and their subtrees out of the text, e.g. to skip parts that do not
+take part in an accessible name.
+
 ### API
 
 ```js
-getNodeText(node: ReactNode): string
+getNodeText(node: ReactNode, options?: { shouldSkipElement?: (element: ReactElement) => boolean }): string
 ```
 
 ## Example

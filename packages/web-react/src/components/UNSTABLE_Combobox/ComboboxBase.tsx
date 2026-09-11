@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import React, {
   Children,
   type ForwardedRef,
+  type MouseEvent,
   type RefObject,
   useCallback,
   useImperativeHandle,
@@ -13,6 +14,7 @@ import React, {
 import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../context';
 import { useAriaDescribedBy, useI18n, useSelectionAria, useStyleProps } from '../../hooks';
 import { replaceTranslationParams } from '../../translations';
+import { isAriaHidden } from '../../utils';
 import { Dropdown } from '../Dropdown';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
@@ -23,6 +25,7 @@ import ComboboxInput from './ComboboxInput';
 import ComboboxPopoverContent from './ComboboxPopoverContent';
 import {
   COMBOBOX_INPUT_MIN_WIDTH_CSS_VAR,
+  COMBOBOX_LABEL_CONTROL_SELECTOR,
   COMBOBOX_NESTED_CONTROL_BUTTON_SIZE_MAP,
   COMBOBOX_NESTED_SIZE_MAP,
   DEFAULT_OPTIONS_ROLE,
@@ -35,7 +38,7 @@ import { useComboboxInteractions } from './useComboboxInteractions';
 import { useComboboxItems } from './useComboboxItems';
 import { type ComboboxState } from './useComboboxState';
 import { useComboboxStyleProps } from './useComboboxStyleProps';
-import { areAllOptionsSelected, getComboboxOptionDomId } from './utils';
+import { areAllOptionsSelected, getComboboxOptionDomId, getNodeText } from './utils';
 
 export interface ComboboxBaseProps extends UnstableComboboxBaseProps {
   forwardedRef: ForwardedRef<SpiritUnstableComboboxRef>;
@@ -183,6 +186,20 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     warmItemLabel,
   });
 
+  // The label is a `div`, so it may hold interactive content. Restore the native `<label>`
+  // click behaviour (focus and open the field) for clicks outside that content.
+  const handleLabelClick = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      if ((event.target as HTMLElement).closest(COMBOBOX_LABEL_CONTROL_SELECTOR)) {
+        return;
+      }
+
+      focusInput();
+      open();
+    },
+    [focusInput, open],
+  );
+
   const activateOption = useCallback(
     (optionId: string | null) => {
       clearActiveNestedControl();
@@ -218,7 +235,10 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     [activateOption, close, focusInput, selectedKeys],
   );
 
-  const emptyPlaceholder = emptySelectionLabel ? replaceTranslationParams(emptySelectionLabel, { label }) : label;
+  const labelText = getNodeText(label, { shouldSkipElement: isAriaHidden });
+  const emptyPlaceholder = emptySelectionLabel
+    ? replaceTranslationParams(emptySelectionLabel, { label: labelText })
+    : labelText;
 
   const inputPlaceholder = (() => {
     if (selectedKeys.length === 0) {
@@ -244,7 +264,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     selectedKeys.length === 0
       ? undefined
       : replaceTranslationParams(selectedKeys.length === 1 ? selectionCountLabelSingular : selectionCountLabel, {
-          label,
+          label: labelText,
           count: String(selectedKeys.length),
         });
 
@@ -291,7 +311,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
           {...transferProps}
         >
           <Stack spacing="space-400">
-            <Label {...labelProps} id={labelId} htmlFor={inputId}>
+            <Label {...labelProps} id={labelId} elementType="div" onClick={handleLabelClick}>
               {label}
             </Label>
             <Dropdown
@@ -320,8 +340,8 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
                 isDisabled={isDisabled}
                 isOpen={isOpen}
                 isRequired={isRequired}
-                label={label}
                 labelId={labelId}
+                labelText={labelText}
                 listboxId={listboxId}
                 onInputKeyDown={onInputKeyDown}
                 open={open}

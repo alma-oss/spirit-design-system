@@ -131,6 +131,67 @@ The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two
 > `role="dialog"` with an accessible name (`aria-labelledby` pointing at the Combobox label) — same packaging
 > constraint as the React Combobox and Picker.
 
+### Rich Label Content
+
+A `label` element must not contain interactive content, so when the label carries something like a Tooltip trigger,
+render it as a `div` with the `Label` class instead. The input is already named by `aria-labelledby`, so the accessible
+name is unaffected — but the native "click the label to focus the field" behaviour is not, and your script has to
+restore it.
+
+Give the trigger its accessible name with `aria-label`, mark the popover `aria-hidden="true"` so its copy is not folded
+into the field's accessible name, and link the same text to the input with `aria-describedby` so assistive technologies
+still get it.
+
+```html
+<div class="Label" id="combobox-label">
+  Languages
+  <div class="Tooltip d-inline-block" data-spirit-element="tooltip">
+    <button
+      type="button"
+      class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--symmetrical"
+      aria-label="More information about languages"
+      data-spirit-toggle="tooltip"
+      data-spirit-target="#combobox-label-tooltip"
+    >
+      <svg class="Icon" width="16" height="16" aria-hidden="true">
+        <use href="/assets/icons/svg/sprite.svg#info" />
+      </svg>
+    </button>
+    <div
+      id="combobox-label-tooltip"
+      class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-top placement-controlled"
+      aria-hidden="true"
+      data-spirit-trigger="hover, focus, click"
+      data-spirit-placement="top"
+      data-spirit-flip-fallback-placements="bottom"
+    >
+      Only languages supported by our editorial team are offered.
+      <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
+    </div>
+  </div>
+</div>
+
+<!-- The input carries `aria-describedby="combobox-label-hint"`. -->
+<span id="combobox-label-hint" class="accessibility-hidden">
+  Only languages supported by our editorial team are offered.
+</span>
+```
+
+Clicks on the trigger must not be redirected to the input:
+
+```js
+labelEl.addEventListener('click', (event) => {
+  if (event.target.closest('a[href], button, input, select, textarea, [role="button"]')) {
+    return;
+  }
+
+  inputEl.focus();
+});
+```
+
+👉 An exposed trigger inside the label becomes part of the field's accessible name
+(`Languages More information about languages`).
+
 ### Placeholder and Add-More Affordance
 
 The input's `placeholder` can carry the "add more" hint visually:

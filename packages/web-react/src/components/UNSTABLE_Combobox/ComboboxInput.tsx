@@ -32,8 +32,9 @@ export interface ComboboxInputProps {
   isDisabled: boolean;
   isOpen: boolean;
   isRequired: boolean;
-  label: string;
   labelId: string;
+  /** Field label flattened to plain text, for ARIA strings that cannot hold markup. */
+  labelText: string;
   listboxId: string;
   onInputKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
   open: () => void;
@@ -79,8 +80,8 @@ const ComboboxInput = (props: ComboboxInputProps) => {
     isDisabled,
     isOpen,
     isRequired,
-    label,
     labelId,
+    labelText,
     listboxId,
     onInputKeyDown,
     open,
@@ -134,14 +135,14 @@ const ComboboxInput = (props: ComboboxInputProps) => {
   })();
 
   return (
-    <InputContainer role="group" aria-label={label} onClick={handleGroupClick}>
+    <InputContainer role="group" aria-label={labelText} onClick={handleGroupClick}>
       <UNSTABLE_ComboboxSelection isDisabled={isDisabled}>
         <div
           ref={selectionGridRef}
           role={selectedItems.length ? 'grid' : 'group'}
           id={selectionId}
           className="d-contents"
-          aria-label={replaceTranslationParams(selectionAriaLabel, { label })}
+          aria-label={replaceTranslationParams(selectionAriaLabel, { label: labelText })}
           aria-live="off"
           aria-atomic={false}
           aria-relevant="additions"
@@ -172,7 +173,7 @@ const ComboboxInput = (props: ComboboxInputProps) => {
           onKeyDown={onInputKeyDown}
         />
         <VisuallyHidden id={addMoreHelperId} {...(!showAddMore ? { hidden: true } : {})}>
-          {replaceTranslationParams(addMoreDescriptionText, { label })}
+          {replaceTranslationParams(addMoreDescriptionText, { label: labelText })}
         </VisuallyHidden>
       </UNSTABLE_ComboboxSelection>
       {hasClearButton && (

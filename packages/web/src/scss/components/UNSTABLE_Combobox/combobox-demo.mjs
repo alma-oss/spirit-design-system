@@ -25,6 +25,7 @@ const SELECTOR_OPTION_CELL_CONTROL = 'button:not([disabled]), [role="button"]:no
 const SELECTOR_GRIDCELL = '[role="gridcell"]';
 /** Remove control inside an option row (grid pattern demo: drop the option from the list). */
 const SELECTOR_OPTION_REMOVE = '[data-spirit-combobox-option-remove]';
+const SELECTOR_LABEL = '[data-spirit-combobox-label]';
 const SELECTOR_SELECTION = '[data-spirit-combobox-selection]';
 const SELECTOR_CLEAR = '[data-spirit-combobox-clear]';
 const SELECTOR_TAG_ROW = '[data-spirit-combobox-tag-row]';
@@ -57,6 +58,9 @@ const CLASSNAMES_DISTANCE_SELECTED = ['color-scheme-on-selected-subtle', 'bg-col
  * SplitTag distance triggers use `data-spirit-toggle="dropdown"`; rows use `SELECTOR_TAG_ROW`.
  */
 const SELECTOR_GROUP_CLICK_IGNORE = `[data-spirit-combobox-clear], ${SELECTOR_TAG_ROW}, button, a, [role="button"], [data-spirit-toggle="dropdown"]`;
+
+/** Interactive content inside a `div` label (e.g. a Tooltip trigger) keeps its own clicks. */
+const SELECTOR_LABEL_CLICK_IGNORE = 'a[href], button, input, select, textarea, [role="button"]';
 
 /** Deferred Dropdown wiring for SplitTag distance triggers (must run after append to DOM). */
 const splitDistanceDropdownInits = new WeakMap();
@@ -1048,6 +1052,16 @@ function initCombobox(comboboxEl) {
 
   containerEl.addEventListener('click', (event) => {
     if (!event.target.closest(SELECTOR_GROUP_CLICK_IGNORE)) {
+      inputEl.focus();
+      open();
+    }
+  });
+
+  // A `div` label (rich label content) has no native `for` behaviour, so restore it here.
+  const labelEl = comboboxEl.querySelector(SELECTOR_LABEL);
+
+  labelEl?.addEventListener('click', (event) => {
+    if (!event.target.closest(SELECTOR_LABEL_CLICK_IGNORE)) {
       inputEl.focus();
       open();
     }

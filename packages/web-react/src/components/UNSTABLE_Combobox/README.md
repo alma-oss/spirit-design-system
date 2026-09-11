@@ -182,6 +182,61 @@ segments (label + select + remove), use [`UNSTABLE_ComboboxSplitTag`](#unstable_
 **Locations** demo. For a fully custom row, compose your own `role="row"` (for example with
 [`UNSTABLE_SplitTag`][splittag-readme]) and pass `getKeyboardGridRowProps`.
 
+### Rich Label Content
+
+`label` accepts a `ReactNode`, so it can carry inline markup such as a `Tooltip` with extra guidance. Because a
+`<label>` element must not contain interactive content, the visible label renders as a `<div>` carrying `labelId`; the
+filter input is named through `aria-labelledby`, and clicking the label focuses and opens the field just like a native
+label would. A Tooltip trigger inside the label therefore stays in the tab order and keeps its own click behaviour.
+
+Where the label is needed as plain text — the input placeholder and the `{label}` translation placeholders — the node
+is flattened to its text and `aria-hidden` parts are skipped. Mark the tooltip popover `aria-hidden` so its copy stays
+out of the placeholder, and link the same text to the field with `aria-describedby` so assistive technologies still
+get it. Otherwise the placeholder would read `Languages Only languages supported by our editorial team are offered.`
+
+```tsx
+const HINT_ID = 'combobox-example-hint';
+const HINT_TEXT = 'Only languages supported by our editorial team are offered.';
+
+<>
+  <UNSTABLE_UncontrolledCombobox
+    id="combobox-example"
+    aria-describedby={HINT_ID}
+    label={
+      <>
+        Languages{' '}
+        <UncontrolledTooltip
+          id="combobox-example-tooltip"
+          placement="top"
+          trigger={['hover', 'focus', 'click']}
+          UNSAFE_className="d-inline-block"
+        >
+          {/* ControlButton size comes from the Combobox context (`xsmall`). */}
+          <TooltipTrigger
+            elementType={ControlButton}
+            aria-label="More information about languages"
+            isSubtle
+            isSymmetrical
+          >
+            <Icon name="info" />
+          </TooltipTrigger>
+          <TooltipPopover aria-hidden>{HINT_TEXT}</TooltipPopover>
+        </UncontrolledTooltip>
+      </>
+    }
+  >
+    {/* UNSTABLE_ComboboxOption children */}
+  </UNSTABLE_UncontrolledCombobox>
+  <VisuallyHidden id={HINT_ID}>{HINT_TEXT}</VisuallyHidden>
+</>;
+```
+
+Give the trigger its accessible name with `aria-label` rather than visible or visually hidden text, so the name is not
+folded into the text derived from `label`. Note that an exposed trigger inside the label becomes part of the field's
+accessible name (`Languages More information about languages`).
+
+See the [Tooltip in Label demo][combobox-tooltip-in-label-demo].
+
 ### Themes
 
 The combobox, its label, and the popover can each use a different [theme][readme-style-props]:
@@ -269,7 +324,7 @@ values Combobox does not set itself.
 | `isLoading`                   | `bool`                                                      | `false`                                     | ✕        | Shows the loading slot                                                                                                               |
 | `isOpen`                      | `bool`                                                      | —                                           | ✓        | Popover open state                                                                                                                   |
 | `isRequired`                  | `bool`                                                      | `false`                                     | ✕        | Required indicator on the label and `aria-required` on the filter input                                                              |
-| `label`                       | `string`                                                    | —                                           | ✓        | Visible label and accessible name                                                                                                    |
+| `label`                       | `ReactNode`                                                 | —                                           | ✓        | Visible label and accessible name; rich content is flattened to text for `{label}` placeholders                                      |
 | `labelProps`                  | `StyleProps`                                                | —                                           | ✕        | [Style props][readme-style-props] for the inner `Label`; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)           |
 | `loadingLabel`                | `ReactNode`                                                 | i18n `combobox.loading`                     | ✕        | Loading slot content (text and/or spinner)                                                                                           |
 | `onInputChange`               | `(value: string) => void`                                   | —                                           | ✓        | Called when the filter input changes                                                                                                 |
@@ -328,7 +383,7 @@ managed internally.
 | `defaultIsOpen`       | `bool`                     | `false` | ✕        | Initial popover open state                |
 | `defaultSelectedKeys` | `string[]`                 | `[]`    | ✕        | Initial selection                         |
 | `id`                  | `string`                   | —       | ✓        | Stable id                                 |
-| `label`               | `string`                   | —       | ✓        | Label                                     |
+| `label`               | `ReactNode`                | —       | ✓        | Label                                     |
 | `onInputChange`       | `(value: string) => void`  | —       | ✕        | Optional callback when the filter changes |
 | `onSelectionChange`   | `(keys: string[]) => void` | —       | ✕        | Optional callback when selection changes  |
 
@@ -465,6 +520,7 @@ If you need more control over the styling of a component, you can use [style pro
 and [escape hatches][readme-escape-hatches].
 
 [combobox-themes-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Combobox/demo/ComboboxThemes.tsx
+[combobox-tooltip-in-label-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Combobox/demo/ComboboxTooltipInLabel.tsx
 [combobox-web]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_Combobox/README.md
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
