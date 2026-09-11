@@ -111,6 +111,40 @@ describe('Dropdown', () => {
     });
   });
 
+  describe('auto-close ordering', () => {
+    it('should close a previously-open dropdown when a second dropdown is toggled, without the second self-closing', async () => {
+      fixtureEl.innerHTML = `
+        <button id="trigger-a" data-spirit-toggle="dropdown" data-spirit-target="#dropdown-a">toggle A</button>
+        <div class="Dropdown" id="dropdown-a">${childrenHtml}</div>
+        <button id="trigger-b" data-spirit-toggle="dropdown" data-spirit-target="#dropdown-b">toggle B</button>
+        <div class="Dropdown" id="dropdown-b">${childrenHtml}</div>
+      `;
+
+      const triggerA = fixtureEl.querySelector('#trigger-a') as HTMLElement;
+      const triggerB = fixtureEl.querySelector('#trigger-b') as HTMLElement;
+      const dropdownAEl = fixtureEl.querySelector('#dropdown-a') as HTMLElement;
+      const dropdownBEl = fixtureEl.querySelector('#dropdown-b') as HTMLElement;
+
+      // Opening A registers its autoCloseHandler inside a setTimeout(0) (so the click that opened
+      // it doesn't immediately close it again) — wait for `shown.dropdown` so it's in place before
+      // clicking B's trigger.
+      await new Promise<void>((resolve) => {
+        dropdownAEl.addEventListener('shown.dropdown', () => resolve(), { once: true });
+        triggerA.click();
+      });
+
+      expect(dropdownAEl).toHaveClass(CLASSNAME_OPEN);
+
+      await new Promise<void>((resolve) => {
+        dropdownBEl.addEventListener('shown.dropdown', () => resolve(), { once: true });
+        triggerB.click();
+      });
+
+      expect(dropdownBEl).toHaveClass(CLASSNAME_OPEN);
+      expect(dropdownAEl).not.toHaveClass(CLASSNAME_OPEN);
+    });
+  });
+
   describe('aria-controls', () => {
     it('should derive a valid IDREF from data-spirit-target when none is set', async () => {
       fixtureEl.innerHTML = `
