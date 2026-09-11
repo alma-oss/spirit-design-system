@@ -25,13 +25,15 @@
     "classnames": "catalog:frontend",
     "handlebars": "catalog:build",
     "next": "catalog:frontend",
+    "next-mdx-remote": "catalog:content",
     "nuqs": "catalog:frontend",
     "react": "catalog:frontend",
     "react-dom": "catalog:frontend",
     "rehype-pretty-code": "catalog:content",
     "remark-gfm": "catalog:content",
     "sass-embedded": "catalog:build",
-    "shiki": "catalog:content"
+    "shiki": "catalog:content",
+    "yaml": "catalog:script"
   },
   "devDependencies": {
     "@eslint/compat": "catalog:lint",

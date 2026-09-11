@@ -37,6 +37,7 @@ const nextConfig: NextConfig = {
     ],
   },
   transpilePackages: ['@alma-oss/spirit-web-react'],
+  serverExternalPackages: ['next-mdx-remote'],
   reactStrictMode: true,
   experimental: {
     globalNotFound: true,
