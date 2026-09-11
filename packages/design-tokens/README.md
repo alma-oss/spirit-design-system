@@ -74,7 +74,7 @@ the `@themes` file in the [`spirit-web`][web-docs] package.
 install this package because `spirit-design-tokens` is installed automatically
 as a dependency of `spirit-web`.
 
-If you want to use just `spirit-design-tokens` alone in your project, run:
+To use just `spirit-design-tokens` alone in your project, run:
 
 ```shell
 yarn add @alma-oss/spirit-design-tokens
@@ -440,7 +440,7 @@ files in the directory.
 
 In order for developers to know the file behaves differently than usual Sass
 partials, a `@` prefix is added to mark this behavior both in filesystem and
-inside Sass files. As a result, it's clear why e.g. `@use 'tools'` refers to
+inside Sass files. As a result, it's clear why for example `@use 'tools'` refers to
 a local file and `@use '@tokens'` does not. However, **it's only a naming
 convention,** there is no special tooling or configuration for Sass partials
 starting with `@`.

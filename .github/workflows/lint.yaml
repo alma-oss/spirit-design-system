@@ -58,7 +58,7 @@ jobs:
         uses: ./.github/actions/setup-node
 
       - name: Lint
-        run: yarn lint
+        run: yarn lint:script
 
   types:
     name: 📘 Type Checking

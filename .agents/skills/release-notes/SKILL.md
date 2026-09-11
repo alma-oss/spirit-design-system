@@ -12,7 +12,12 @@ Generate a Slack-ready release notes document from the latest lerna publish, inc
 - **Human tone, not a changelog dump.** The summary paragraph should read like a newsletter, not a list of commit messages.
 - **Only Features and Bug Fixes in the package sections.** Other sections are noise for consumers.
 - **Warn, don't silently drop.** Flag anything potentially important that was filtered out.
+
+<!-- textlint-disable @alma-oss/alma/terminology -- exclude github emoji formatting -->
+
 - **Slack Canvas format.** Use Unicode emoji directly (not `:emoji:` codes). Use `#` for the document title, `##` for top-level sections, `###` for subsections (Features, Bug Fixes) — Canvas renders these as proper headers when pasted. Emoji mapping: 📢 loudspeaker, 🚀 rocket, 🎉 tada, 📦 package, 🔮 crystal ball, 🎯 dart, 💬 slack, 🐙 github.
+
+<!-- textlint-enable @alma-oss/alma/terminology -->
 
 ---
 
@@ -55,7 +60,7 @@ For each kept entry:
 
 - Strip the scope prefix (`**web-react:**`, `**web:**`, etc.) — keep only the description text.
 - Keep the `#DS-XXXX` ticket reference.
-- Keep the commit hash as a markdown link: `([abcdef1](https://github.com/alma-oss/spirit-design-system/commit/<full-hash>))` — use the 7-char short hash as display text and the full hash (from the CHANGELOG entry) as the URL.
+- Keep the commit hash as a Markdown link: `([abcdef1](https://github.com/alma-oss/spirit-design-system/commit/<full-hash>))` — use the 7-char short hash as display text and the full hash (from the CHANGELOG entry) as the URL.
 - Wrap every **component name** (PascalCase, e.g. `Picker`, `ControlButton`, `UNSTABLE_File`) and every **hook/utility name** (camelCase with `use` prefix or similar, e.g. `useSelectionState`) in backticks.
 - Wrap every **prop name** or **HTML attribute name** (e.g. `elementType`, `name`) in **bold** instead of backticks.
 - Package names (e.g. `@alma-oss/spirit-web-react`) are always in backticks — including in the package header line.
@@ -107,7 +112,7 @@ Where:
 - `{Display Name}` is the human name (e.g. "Web React", "Design Tokens")
 - `{version}` is the version number (e.g. 4.5.0)
 - `{npm-package-name}` is the full scoped name (e.g. @alma-oss/spirit-web-react)
-- The "Full changelog" line must use markdown link syntax `[Full changelog](url)` — bare URLs containing `@` (from scoped package names) break in Slack Canvas because `@` is interpreted as a mention
+- The "Full changelog" line must use Markdown link syntax `[Full changelog](url)` — bare URLs containing `@` (from scoped package names) break in Slack Canvas because `@` is interpreted as a mention
 - Omit the Features or Bug Fixes section entirely if there are no entries for it
 
 ---
