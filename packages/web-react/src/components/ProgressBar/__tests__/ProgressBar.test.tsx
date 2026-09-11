@@ -144,11 +144,24 @@ describe('ProgressBar', () => {
     expect(screen.getByText('4 out of 20')).not.toHaveAttribute('aria-hidden');
   });
 
+  it('should apply the color scheme to the value row when valueLabel is set', () => {
+    const { container } = render(<ProgressBar {...defaultProps} valueLabel="60 %" />);
+
+    expect(container.querySelector('.Flex')).toHaveClass(
+      getColorSchemeClassName({ color: 'informative', isSubtle: true }),
+    );
+    expect(screen.getByRole('progressbar')).toHaveClass('ProgressBar');
+    expect(screen.getByRole('progressbar')).not.toHaveClass(
+      getColorSchemeClassName({ color: 'informative', isSubtle: true }),
+    );
+  });
+
   it('should apply the disabled color scheme to the value row', () => {
     const { container } = render(<ProgressBar {...defaultProps} isDisabled valueLabel="40 %" />);
 
     expect(container.querySelector('.Flex')).toHaveClass('color-scheme-on-disabled');
-    expect(screen.getByRole('progressbar')).toHaveClass('color-scheme-on-disabled');
+    expect(screen.getByRole('progressbar')).toHaveClass('ProgressBar');
+    expect(screen.getByRole('progressbar')).not.toHaveClass('color-scheme-on-disabled');
     expect(screen.getByText('40 %')).toHaveClass('text-color-scheme');
   });
 

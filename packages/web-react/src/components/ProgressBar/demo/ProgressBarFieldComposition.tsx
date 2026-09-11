@@ -8,7 +8,7 @@ const ProgressBarFieldComposition = () => (
       id="progress-bar-helper-text"
       label="Profile completeness"
       value={60}
-      valueLabel="60 %"
+      valueLabel={'60\u00a0%'}
     />
 
     <ProgressBar
@@ -19,7 +19,7 @@ const ProgressBarFieldComposition = () => (
       validationState="success"
       validationText="Your profile is complete"
       value={100}
-      valueLabel="100 %"
+      valueLabel={'100\u00a0%'}
     />
 
     <ProgressBar
@@ -31,7 +31,7 @@ const ProgressBarFieldComposition = () => (
       validationState="danger"
       validationText="Add your work experience to continue"
       value={20}
-      valueLabel="20 %"
+      valueLabel={'20\u00a0%'}
     />
   </>
 );

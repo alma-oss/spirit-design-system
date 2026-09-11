@@ -1,5 +1,6 @@
 import React from 'react';
 import { File } from '../../File';
+import { HelperText } from '../../HelperText';
 import { ProgressBar } from '..';
 
 const noop = () => {};
@@ -11,11 +12,9 @@ const ProgressBarWithFile = () => (
         aria-describedby="file-upload-status"
         aria-label="Uploading Document.pdf"
         value={60}
-        valueLabel="60 %"
+        valueLabel={'60\u00a0%'}
       />
-      <span className="HelperText" id="file-upload-status" role="status">
-        Uploading your file…
-      </span>
+      <HelperText elementType="span" helperText="Uploading your file…" id="file-upload-status" role="status" />
     </File>
   </ul>
 );

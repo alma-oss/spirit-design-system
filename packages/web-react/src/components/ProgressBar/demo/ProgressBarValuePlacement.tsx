@@ -4,7 +4,7 @@ import { ProgressBar } from '..';
 const ProgressBarValuePlacement = () => (
   <>
     <h3 className="docs-Heading">Right</h3>
-    <ProgressBar aria-label="Profile completeness" value={20} valueLabel="20 %" />
+    <ProgressBar aria-label="Profile completeness" value={20} valueLabel={'20\u00a0%'} />
 
     <h3 className="docs-Heading">Bottom</h3>
     <ProgressBar

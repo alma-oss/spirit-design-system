@@ -45,7 +45,7 @@ Use `valueLabel` to show the label of the value next to the bar. Set `valuePlace
 under the bar.
 
 ```tsx
-<ProgressBar aria-label="Profile completeness" value={20} valueLabel="20 %" />
+<ProgressBar aria-label="Profile completeness" value={20} valueLabel={'20\u00a0%'} />
 <ProgressBar
   aria-label="Awards collected"
   max={20}
@@ -112,7 +112,7 @@ Use the `isDisabled` prop. The value label picks up the disabled content color a
   isDisabled
   label="Profile completeness"
   value={40}
-  valueLabel="40 %"
+  valueLabel="40\u00a0%"
 />
 ```
 
@@ -122,22 +122,14 @@ Place the ProgressBar as File children to show the progress of a single upload:
 
 ```tsx
 <ul aria-label="Uploaded files">
-  <File
-    helperText={
-      <span id="file-upload-status" role="status">
-        Uploading your file…
-      </span>
-    }
-    label="Document.pdf"
-    onDismiss={onDismiss}
-    removeText="Cancel upload of Document.pdf"
-  >
+  <File label="Document.pdf" onDismiss={onDismiss} removeText="Cancel upload of Document.pdf">
     <ProgressBar
       aria-describedby="file-upload-status"
       aria-label="Uploading Document.pdf"
       value={60}
-      valueLabel="60 %"
+      valueLabel={'60\u00a0%'}
     />
+    <HelperText elementType="span" helperText="Uploading your file…" id="file-upload-status" role="status" />
   </File>
 </ul>
 ```

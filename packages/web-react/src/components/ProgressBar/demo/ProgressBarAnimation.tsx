@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { Button } from '../../Button';
 import { Flex } from '../../Flex';
+import { SegmentedControl, SegmentedControlItem } from '../../SegmentedControl';
+import { Truncate } from '../../Truncate';
 import { ProgressBar } from '..';
 
 const completions = [10, 50, 90];
 
 const ProgressBarAnimation = () => {
-  const [value, setValue] = useState(30);
+  const [value, setValue] = useState(10);
+
+  const handleSelectionChange = (nextValue: string | string[]) => {
+    setValue(Number(Array.isArray(nextValue) ? nextValue[0] : nextValue));
+  };
 
   return (
     <>
@@ -14,15 +19,29 @@ const ProgressBarAnimation = () => {
         aria-label="Profile completeness"
         id="progress-bar-animated"
         value={value}
-        valueLabel={`${value} %`}
+        valueLabel={`${value}\u00a0%`}
         valueLabelId="progress-bar-animated-value"
       />
-      <Flex spacingX="space-500">
-        {completions.map((completion) => (
-          <Button key={completion} data-progress-bar-value={completion} onClick={() => setValue(completion)}>
-            {completion}%
-          </Button>
-        ))}
+      <Flex>
+        <SegmentedControl
+          label="Profile completeness value"
+          name="progress-bar-animated-value"
+          onSelectionChange={handleSelectionChange}
+          selectedValue={String(value)}
+          setSelectedValue={handleSelectionChange}
+        >
+          {completions.map((completion) => (
+            <SegmentedControlItem
+              key={completion}
+              id={`progress-bar-animated-${completion}`}
+              value={String(completion)}
+            >
+              <Truncate limit={1} mode="lines">
+                {`${completion}\u00a0%`}
+              </Truncate>
+            </SegmentedControlItem>
+          ))}
+        </SegmentedControl>
       </Flex>
     </>
   );

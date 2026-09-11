@@ -34,11 +34,38 @@ describe('useProgressBarStyleProps', () => {
     },
   );
 
-  it('should apply the disabled color scheme on the bar and the value row', () => {
+  it('should apply the color scheme on the value row when valueLabel is set', () => {
+    const props = { color: 'informative', value: 60, valueLabel: '60 %' } as SpiritProgressBarProps;
+    const { result } = renderHook(() => useProgressBarStyleProps(props));
+
+    expect(result.current.classProps.root).toBe('ProgressBar');
+    expect(result.current.classProps.value).toBe(
+      getColorSchemeClassName({
+        color: 'informative',
+        isSubtle: true,
+      }),
+    );
+  });
+
+  it('should apply the disabled color scheme on the bar when there is no valueLabel', () => {
     const props = { color: 'informative', isDisabled: true, value: 40 } as SpiritProgressBarProps;
     const { result } = renderHook(() => useProgressBarStyleProps(props));
 
     expect(result.current.classProps.root).toBe('ProgressBar color-scheme-on-disabled');
+    expect(result.current.classProps.value).toBe('');
+    expect(result.current.classProps.valueLabel).toBe('text-color-scheme');
+  });
+
+  it('should apply the disabled color scheme on the value row when valueLabel is set', () => {
+    const props = {
+      color: 'informative',
+      isDisabled: true,
+      value: 40,
+      valueLabel: '40 %',
+    } as SpiritProgressBarProps;
+    const { result } = renderHook(() => useProgressBarStyleProps(props));
+
+    expect(result.current.classProps.root).toBe('ProgressBar');
     expect(result.current.classProps.value).toBe('color-scheme-on-disabled');
     expect(result.current.classProps.valueLabel).toBe('text-color-scheme');
   });

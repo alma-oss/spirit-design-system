@@ -26,20 +26,22 @@ const getProgressBarValueStyle = (value: number, max: number): ProgressBarCSSPro
 });
 
 export function useProgressBarStyleProps(props: ProgressBarProps): ProgressBarStyles {
-  const { color, isDisabled, max = 100, value, ...modifiedProps } = props;
+  const { color, isDisabled, max = 100, value, valueLabel, ...modifiedProps } = props;
 
   const progressBarClass = useClassNamePrefix('ProgressBar');
   const disabledColorSchemeClass = useClassNamePrefix('color-scheme-on-disabled');
   const textColorSchemeClass = useClassNamePrefix('text-color-scheme');
   const colorSchemeClass =
     !isDisabled && color ? getColorSchemeClassName({ color: String(color), isSubtle: true }) : '';
+  const hasValueLabel = valueLabel != null;
+  const activeColorSchemeClass = isDisabled ? disabledColorSchemeClass : colorSchemeClass;
 
   return {
     classProps: {
-      root: classNames(progressBarClass, colorSchemeClass, {
-        [disabledColorSchemeClass]: isDisabled,
+      root: classNames(progressBarClass, {
+        [activeColorSchemeClass]: !hasValueLabel && Boolean(activeColorSchemeClass),
       }),
-      value: isDisabled ? disabledColorSchemeClass : '',
+      value: hasValueLabel ? activeColorSchemeClass : '',
       valueLabel: isDisabled ? textColorSchemeClass : '',
     },
     props: {
@@ -47,6 +49,7 @@ export function useProgressBarStyleProps(props: ProgressBarProps): ProgressBarSt
       isDisabled,
       max,
       value,
+      valueLabel,
     },
     styleProps: getProgressBarValueStyle(value, max),
   };
