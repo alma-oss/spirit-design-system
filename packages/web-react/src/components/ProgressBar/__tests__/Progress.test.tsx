@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import React, { createRef, type CSSProperties } from 'react';
+import React, { type CSSProperties, createRef } from 'react';
 import { ariaAttributesTest, restPropsTest, validHtmlAttributesTest } from '@local/tests';
 import Progress from '../Progress';
 
