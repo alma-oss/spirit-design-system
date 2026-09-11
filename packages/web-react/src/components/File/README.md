@@ -57,20 +57,12 @@ If any of the keys is missing, crop styling is skipped and the image uses the de
 
 ### Upload Progress
 
-Pass children to render a [`ProgressBar`][progress-bar-readme] between the file name and helper/validation text:
+Pass a [`ProgressBar`][progress-bar-readme] as children. Name the bar with `aria-label` from the file name, and
+set `removeText` if the row can cancel the upload:
 
 ```tsx
-<File
-  id="file-1"
-  label="Document.pdf"
-  helperText={
-    <span id="file-upload-status" role="status">
-      Uploading your file…
-    </span>
-  }
-  onDismiss={() => onDismiss('file-1')}
->
-  <ProgressBar aria-describedby="file-upload-status" aria-label="Uploading Document.pdf" value={60} valueLabel="60 %" />
+<File id="file-1" label="Document.pdf" onDismiss={() => onDismiss('file-1')} removeText="Cancel upload of Document.pdf">
+  <ProgressBar aria-label="Uploading Document.pdf" value={60} />
 </File>
 ```
 
