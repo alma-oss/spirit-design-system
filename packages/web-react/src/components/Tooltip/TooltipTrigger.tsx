@@ -21,6 +21,7 @@ const TooltipTrigger = <E extends ElementType = 'button'>(props: TooltipTriggerP
 
   return (
     <Component
+      // `type` must remain overridable via `type` prop.
       {...(elementType === 'button' && { type: 'button' })}
       {...transferProps}
       {...mergedStyleProps}
