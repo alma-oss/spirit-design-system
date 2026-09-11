@@ -60,17 +60,9 @@ If any of the keys is missing, crop styling is skipped and the image uses the de
 Pass children to render a [`ProgressBar`][progress-bar-readme] between the file name and helper/validation text:
 
 ```tsx
-<File
-  id="file-1"
-  label="Document.pdf"
-  helperText={
-    <span id="file-upload-status" role="status">
-      Uploading your file…
-    </span>
-  }
-  onDismiss={() => onDismiss('file-1')}
->
+<File id="file-1" label="Document.pdf" onDismiss={() => onDismiss('file-1')}>
   <ProgressBar aria-describedby="file-upload-status" aria-label="Uploading Document.pdf" value={60} valueLabel="60 %" />
+  <HelperText elementType="span" helperText="Uploading your file…" id="file-upload-status" role="status" />
 </File>
 ```
 
