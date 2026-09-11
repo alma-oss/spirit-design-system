@@ -1,0 +1,86 @@
+// 1. `--progress-bar-value` is the public API of this component: authors set it in inline styles, so it stays
+//    unprefixed, the same way `--flex-spacing-x` or `--stack-spacing` do (see DS-1106). Registering it with
+//    `@property` is what makes it interpolable, and hence animatable.
+// 2. Lets the bar shrink to the remaining width inside a horizontal Flex instead of being blocked by the intrinsic
+//    width of the `progress` element.
+// 3. Firefox renders a border by default.
+// 4. The width of the native indicator is computed by the browser from the `value` attribute and cannot be
+//    transitioned. The indicator is therefore painted as background layers of the element, listed top to bottom:
+//
+//    a) Cap: the rounded leading edge of the indicator, clipped to the filled width.
+//    b) Body: the filled part of the bar, stopping short of the cap so the two meet without overlapping.
+//    c) Track: the unfilled remainder. It is painted on the element itself because that is where Firefox styles the
+//       track. Chromium and WebKit style the track in the `::-webkit-progress-bar` pseudo-element instead, which is
+//       why that one is made transparent below.
+//
+// 5. Each vendor pseudo-element needs its own rule: browsers drop the entire selector list if they do not understand
+//    one part of it. Note that while we’re repeating code here, that’s necessary (see the Slider component).
+// 6. The native indicator would paint over the background layers, so it is hidden in all engines.
+// 7. Reserves the height of the caption line the value text renders in, so the bar occupies the same box whether
+//    the value is displayed next to it or not, and the spacing around it does not change. Where the value is
+//    displayed, the margin box matches the caption line box exactly, so the row does not grow.
+
+@use '../../settings/transitions';
+@use '../../tools/color-scheme';
+@use '../../tools/component-color-overrides';
+@use 'theme';
+
+// 1.
+@property --progress-bar-value {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 0%;
+}
+
+.ProgressBar {
+    appearance: none;
+    display: block;
+    width: 100%;
+    min-width: 0; // 2.
+    height: theme.$height;
+    margin-block: theme.$line-height-reserve; // 7.
+    border: 0; // 3.
+    border-radius: theme.$border-radius;
+
+    // 4.
+    background:
+        // 4.a
+        radial-gradient(
+                circle #{theme.$indicator-cap-radius} at calc(100% - #{theme.$indicator-cap-radius}) 50%,
+                color-scheme.background-color-basic(theme.$indicator-background-fallback) 100%,
+                transparent 100%
+            )
+            0 0 / var(--progress-bar-value) 100% no-repeat,
+        // 4.b
+        linear-gradient(color-scheme.background-color-basic(theme.$indicator-background-fallback) 0 0) 0 0 /
+            calc(var(--progress-bar-value) - #{theme.$indicator-cap-radius}) 100% no-repeat,
+        // 4.c
+        color-scheme.background-color-subtle(theme.$track-background-fallback);
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: --progress-bar-value transitions.$duration-300 transitions.$timing-eased-in-out;
+    }
+}
+
+// 4.c, 5., 6.
+.ProgressBar::-webkit-progress-bar {
+    background: transparent;
+}
+
+// 5., 6.
+.ProgressBar::-webkit-progress-value {
+    background: transparent;
+}
+
+// 5., 6.
+.ProgressBar::-moz-progress-bar {
+    background: transparent;
+}
+
+@include component-color-overrides.generate(
+    $class-name: 'ProgressBar',
+    $property-map: (
+        background-basic: background-color-basic,
+        background-subtle: background-color-subtle,
+    )
+);
