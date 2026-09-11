@@ -55,6 +55,17 @@ const cropMeta = {
 
 If any of the keys is missing, crop styling is skipped and the image uses the default layout. Use `imageObjectFit` (`cover` or `contain`) when you need different fitting outside the crop math.
 
+### Upload Progress
+
+Pass children to render a [`ProgressBar`][progress-bar-readme] between the file name and helper/validation text:
+
+```tsx
+<File id="file-1" label="Document.pdf" onDismiss={() => onDismiss('file-1')}>
+  <ProgressBar aria-describedby="file-upload-status" aria-label="Uploading Document.pdf" value={60} valueLabel="60 %" />
+  <HelperText elementType="span" helperText="Uploading your file…" id="file-upload-status" role="status" />
+</File>
+```
+
 ### Validation
 
 There is no built-in file validation. Set `validationState` and `validationText` from your own logic. States follow the [Validation state dictionary][dictionary-validation] (`success`, `warning`, `danger`).
@@ -86,6 +97,7 @@ Set `hasValidationIcon` to show the status icon next to the message (same patter
 
 | Name                | Type                                           | Default | Required | Description                                                                                                                     |
 | ------------------- | ---------------------------------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `children`          | `ReactNode`                                    | —       | ✕        | Optional content between the file name and helper/validation text (e.g. `ProgressBar`)                                          |
 | `editText`          | `string`                                       | i18n    | ✕        | Accessible name for the edit control (default from `attachment.edit`)                                                           |
 | `elementType`       | `ElementType`                                  | `li`    | ✕        | Root HTML element for the row                                                                                                   |
 | `hasValidationIcon` | `boolean`                                      | `false` | ✕        | When `validationState` is set, show the validation icon next to `validationText`                                                |
@@ -125,6 +137,7 @@ The rest of the properties are created from the default `<span>` element. [More 
 [file-upload-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FileUpload/README.md
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [li-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li
+[progress-bar-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ProgressBar/README.md
 [span-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches

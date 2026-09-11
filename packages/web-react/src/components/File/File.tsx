@@ -25,6 +25,7 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
   const propsWithDefaults = { ...defaultProps, ...props };
   const { t } = useI18n();
   const {
+    children,
     editText,
     elementType,
     hasValidationIcon,
@@ -95,6 +96,7 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
                 {label}
               </Truncate>
             </span>
+            {children}
             <HelperText helperText={helperText} />
             {validationState && (
               <ValidationText
@@ -105,16 +107,11 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
             )}
           </div>
         </div>
-        {editActionButton && dismissActionButton ? (
+        {(editActionButton || dismissActionButton) && (
           <Flex alignmentX={{ mobile: 'stretch', tablet: 'left' }} alignmentY="stretch" spacingX="space-500">
             {editActionButton}
             {dismissActionButton}
           </Flex>
-        ) : (
-          <>
-            {editActionButton}
-            {dismissActionButton}
-          </>
         )}
       </Component>
     </ContextPropsProvider>

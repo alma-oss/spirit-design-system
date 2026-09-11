@@ -1,6 +1,8 @@
 import React from 'react';
 import { Grid } from '../../Grid';
+import { HelperText } from '../../HelperText';
 import { Icon } from '../../Icon';
+import { ProgressBar } from '../../ProgressBar';
 import { File } from '..';
 
 const noop = () => {};
@@ -34,6 +36,25 @@ const FileIconVariant = () => (
           removeText="Remove file Document.pdf from list"
           onDismiss={noop}
         />
+      </ul>
+    </section>
+    <section>
+      <h3>Uploading State with Progress Bar</h3>
+      <ul aria-label="File attachments">
+        <File label="Document.pdf" onDismiss={noop} removeText="Cancel upload of Document.pdf">
+          <ProgressBar
+            aria-describedby="file-progress-bar-status"
+            aria-label="Uploading Document.pdf"
+            value={60}
+            valueLabel={'60\u00a0%'}
+          />
+          <HelperText
+            elementType="span"
+            helperText="Uploading your file…"
+            id="file-progress-bar-status"
+            role="status"
+          />
+        </File>
       </ul>
     </section>
     <section>
