@@ -7,8 +7,16 @@ Do not memorize full APIs here. Confirm exports, props, and defaults from curren
 - Categories (docsite, not an export list): `apps/docsite/src/domains/components/constants/componentCategories.ts`
 - Deprecations: `packages/web-react/DEPRECATIONS.md`
 
-Prefer a Spirit component when it owns the needed semantics, behavior, or styling. Use native HTML
-when no Spirit component is responsible (plain paragraphs inside Card, list items, decorative wrappers).
+Prefer a Spirit component when it owns the needed semantics, behavior, or styling. Before building a
+recognisable pattern out of Box, Flex, and borders, search `packages/web-react/src/components` for a
+composite that already covers it. Pricing tables, scrollable areas, and divider lists map to
+`PricingPlan` + `Matrix`, `ScrollView`, and `Stack` — not stacked bordered boxes. The Figma layer
+name is the strongest hint. Reproducing a component’s visuals by hand also loses its behaviour
+(for example the dotted underline on a PricingPlan feature exists only when that feature opens a
+Tooltip or Modal).
+
+Use native HTML when no Spirit component is responsible (plain paragraphs inside Card, list items,
+decorative wrappers).
 
 ## Routing
 
@@ -40,7 +48,8 @@ when no Spirit component is responsible (plain paragraphs inside Card, list item
 | Screen-reader-only label                 | `VisuallyHidden`                                      |                                                                                                                        |
 | Clamped copy                             | `Truncate`                                            | Common inside Card body                                                                                                |
 | Nested stacks that must align            | `Matrix`                                              |                                                                                                                        |
-| Overflow region                          | `ScrollView`                                          |                                                                                                                        |
+| Pricing table / plan comparison          | `PricingPlan` + `Matrix`                              | Not a stack of bordered Boxes. Feature underlines come from Tooltip/Modal, not `textDecoration`                        |
+| Overflow region                          | `ScrollView`                                          | Horizontal carousels: wrap Grid/Matrix; do not give children fixed pixel widths                                        |
 
 Experimental public names start with `UNSTABLE_` (`UNSTABLE_DisplayHeading`, `UNSTABLE_Combobox`,
 `UNSTABLE_Picker`, `UNSTABLE_SplitTag`, `UNSTABLE_Table`). Use them when Figma or Code Connect maps
@@ -65,6 +74,10 @@ Dropdown instance. In code it is `DropdownTrigger` with `elementType` set to tha
 - `Icon` → `name`
 - `IconBox` → `iconName` (IconBox README examples that use `name` are stale; types require `iconName`)
 - Keep `placeholder` and other Figma identifiers exactly
+- Exception: if sibling controls are identified by Figma layers, component properties, annotations,
+  or provided design context as **distinct** actions (for example previous and next), do not collapse
+  them to duplicate placeholders. Use the confirmed glyph for each action. If the glyphs cannot be
+  confirmed, keep the placeholders and flag the ambiguity.
 - Decorative icons: Icon defaults to `ariaHidden={true}`. Informative icons need an accessible name (`title` or surrounding text)
 
 ## When Nothing Maps
