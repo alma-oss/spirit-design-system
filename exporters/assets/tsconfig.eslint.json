@@ -1,4 +1,4 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["./", "./eslint.config.mjs", "./vite.config.ts", "./jest.config.ts"]
+  "include": ["./", "./eslint.config.mjs", "./vite.config.ts", "./vite.bundle.config.ts", "./jest.config.ts"]
 }

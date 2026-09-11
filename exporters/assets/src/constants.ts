@@ -6,7 +6,19 @@ export const CHANGE_TYPES = {
   UPDATED: 'updated',
 } as const;
 
-export const CONFIG_MODULE_NAME = 'spirit-assets';
+export const CONFIG_MODULE_NAME = 'spirit';
+
+export const ROOT_CONFIG_FILE = `${CONFIG_MODULE_NAME}.config.json`;
+
+export const DISCOVERY_CONCURRENCY = 8;
+
+export const GIT_TEMPLATE_PLACEHOLDERS = ['brand', 'out', 'owner', 'repo', 'slug'] as const;
+
+export const DEFAULT_GIT_TEMPLATES = {
+  branch: 'chore/figma-icons-sync-{slug}',
+  commitMessage: 'chore(icons): sync {brand} icons from Figma',
+  pullRequestTitle: 'Chore(icons): Sync {brand} icons from Figma',
+} as const;
 
 export const SVG_EXTENSION = '.svg';
 

@@ -4,53 +4,53 @@
 directories. Figma is the current source adapter; the CLI, configuration, and disk mirroring stay source-agnostic.
 
 The package is private. Consumer repositories do not install it from npm. This repository runs the CLI locally and from
-GitHub Actions. A later Cyborg delivery can keep the configuration here and open a pull request in that repository.
+GitHub Actions. A repository opts in by installing the GitHub App and merging a root `spirit.config.json`.
 
 ## Configuration
 
-Create `spirit-assets.config.json` (cosmiconfig also accepts `.spirit-assetsrc`, `spirit-assets.config.js`, and a
-`spirit-assets` key in `package.json`):
+Create `spirit.config.json` at the repository root. Cosmiconfig also searches for `.spiritrc`, `spirit.config.js`, and a
+`spirit` key in `package.json` during trusted local use. Asset export is one tool on that shared file; other tools can
+add sibling keys later without changing this shape:
 
 ```json
 {
-  "fileKey": "your-figma-file-key",
-  "targets": [
-    {
-      "brand": "Spirit",
-      "out": "src/svg",
-      "assets": ["icons"]
-    }
-  ]
+  "assets": {
+    "fileKey": "your-figma-file-key",
+    "targets": [
+      {
+        "brand": "Spirit",
+        "out": "src/svg",
+        "assets": ["icons"]
+      }
+    ]
+  }
 }
 ```
 
 The Figma file key is not a secret. It identifies a published Figma file, the same way
 [`packages/web-react/figma.config.json`][web-react-figma-config] stores a file URL.
 
-Output paths are relative to the configuration file. Each target selects one or more asset types:
+Output paths are relative to the configuration file and must stay inside the repository. Each target selects one or more
+asset types:
 
 - `icons`: Brand-specific variants from `Icons/{icon-name}` component sets
 - `benefit-icons`: shared, unbranded `Icons/benefit-*` components
 - `illustrations`: Brand-specific variants from `Illustration/{illustration-name}` component sets
 
-Multiple asset types in one target share the same output directory and are treated as one complete set. This allows each
-Brand repository to store its regular and benefit icons together:
+Multiple asset types in one target share the same output directory and are treated as one complete set:
 
 ```json
 {
-  "fileKey": "your-figma-file-key",
-  "targets": [
-    {
-      "brand": "Práce",
-      "out": "packages/prace-icons/src/svg",
-      "assets": ["icons", "benefit-icons"]
-    },
-    {
-      "brand": "Jobs",
-      "out": "packages/jobs-icons/src/svg",
-      "assets": ["icons", "benefit-icons"]
-    }
-  ]
+  "assets": {
+    "fileKey": "your-figma-file-key",
+    "targets": [
+      {
+        "brand": "Example",
+        "out": "packages/example-icons/src/svg",
+        "assets": ["icons", "benefit-icons"]
+      }
+    ]
+  }
 }
 ```
 
@@ -79,10 +79,10 @@ yarn icons:sync
 Or invoke the CLI with an explicit config path:
 
 ```shell
-yarn workspace @alma-oss/spirit-assets-exporter sync --config packages/icons/spirit-assets.config.json
+yarn workspace @alma-oss/spirit-assets-exporter sync --config spirit.config.json
 ```
 
-If `--config` is omitted, cosmiconfig searches the current working directory for a `spirit-assets` configuration.
+If `--config` is omitted, cosmiconfig searches the current working directory for a Spirit configuration.
 
 The target directory becomes an exact mirror of the selected Brand:
 
@@ -95,13 +95,55 @@ The sync aborts before changing a target when it cannot discover or download the
 ## Automated Delivery
 
 This repository runs a GitHub Actions workflow that synchronizes icons from Figma. It can be started manually or by a
-Figma library publish via external automation. Credentials live in GitHub Actions. The workflow opens or updates a pull
-request when the generated SVGs differ.
+Figma library publish via external automation. Credentials live in the `figma` GitHub Actions environment.
 
-Other repositories can set up a similar workflow to run the CLI and open a pull request.
+The workflow authenticates as the GitHub App and reads `spirit.config.json` from each repository the App can access via
+the GitHub Contents API. Repositories without that file, or without an `assets` object, are skipped. Each configured
+target gets its own updating pull request. Sync jobs download a prebuilt CLI from the discover job and do not install
+this monorepo. Figma publish notes are fetched once per run and reused in every pull request.
 
-Cyborg delivery is planned, not implemented: configuration stays in this repository, and a GitHub Action would open a
-commit and pull request in Cyborg. Until then, Cyborg does not run this CLI.
+Branch name, commit message, and pull request title are optional and belong only on the `assets` object. Omitted fields
+keep these defaults:
+
+- `branch`: `chore/figma-icons-sync-{slug}`
+- `commitMessage`: `chore(icons): sync {brand} icons from Figma`
+- `pullRequestTitle`: `Chore(icons): Sync {brand} icons from Figma`
+
+Repo-wide defaults live next to `fileKey`. A target may override any of them. `pullRequestTitle` is not copied from
+`commitMessage`.
+
+```json
+{
+  "assets": {
+    "fileKey": "your-figma-file-key",
+    "branch": "chore/figma-icons-sync-{slug}",
+    "commitMessage": "chore(icons): sync {brand} icons from Figma",
+    "pullRequestTitle": "Chore(icons): Sync {brand} icons from Figma",
+    "targets": [
+      {
+        "brand": "Jobs",
+        "out": "libs/design-icons/jobs.cz/svg",
+        "assets": ["icons"],
+        "commitMessage": "chore(jobs-icons): sync icons from Figma"
+      }
+    ]
+  }
+}
+```
+
+Allowed placeholders: `{brand}`, `{slug}`, `{out}`, `{repo}`, `{owner}`. Unknown `{tokens}` fail config parse.
+
+For `branch` only, interpolated `{brand}` and `{out}` are slugified so names like `Práce` stay valid git refs.
+`{slug}`, `{repo}`, and `{owner}` are left as-is. If two targets in the same repository resolve to the same branch, that
+repository is skipped.
+
+A repository opts in by:
+
+1. installing the same GitHub App, with `Contents: write` and `Pull requests: write`
+2. merging `spirit.config.json` at the repository root
+3. allowing the App to push the automation branch
+
+The target repository does not run the exporter or store Figma credentials.
 
 ## Testing
 

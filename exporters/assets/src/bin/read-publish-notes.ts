@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 
-import { extractPublishNotesFromDispatch, extractPublishNotesFromVersions } from '../adapters/figma/publishNotes';
+import { extractPublishNotesFromDispatch, extractPublishNotesFromVersions } from '../sync/adapters/figma/publishNotes';
 
 const dispatchNotes = extractPublishNotesFromDispatch({
   description: process.env.DISPATCH_DESCRIPTION,

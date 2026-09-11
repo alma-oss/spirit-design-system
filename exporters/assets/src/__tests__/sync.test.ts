@@ -58,6 +58,28 @@ describe('syncAssets', () => {
     }
   });
 
+  it('writes inside a repository root after rechecking containment', async () => {
+    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-contained-'));
+    const outputDirectory = path.join(temporaryDirectory, 'svg');
+
+    try {
+      const result = await syncAssets({
+        config: {
+          fileKey: 'figma-file',
+          repositoryRoot: temporaryDirectory,
+          targets: [{ brand: 'Spirit', out: outputDirectory, assets: ['icons'] }],
+        },
+        token: 'test-token',
+        exportAssets: async () => [{ name: 'contained', svg: '<svg />\n' }],
+      });
+
+      expect(result.targets[0].exported).toBe(1);
+      expect(await readFile(path.join(outputDirectory, 'contained.svg'), 'utf8')).toBe('<svg />\n');
+    } finally {
+      await rm(temporaryDirectory, { recursive: true, force: true });
+    }
+  });
+
   it('uses an injected asset exporter', async () => {
     const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-export-'));
     const outputDirectory = path.join(temporaryDirectory, 'svg');
@@ -137,6 +159,52 @@ describe('syncAssets', () => {
         }),
       ).rejects.toThrow(/Brand=Práce/);
       expect(await readdir(outputDirectory)).toEqual(['existing.svg']);
+    } finally {
+      await rm(temporaryDirectory, { recursive: true, force: true });
+    }
+  });
+
+  it('refuses to write outside the repository root', async () => {
+    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-escape-'));
+
+    try {
+      await expect(
+        syncAssets({
+          config: {
+            fileKey: 'figma-file',
+            repositoryRoot: temporaryDirectory,
+            targets: [{ brand: 'Spirit', out: path.join(os.tmpdir(), 'spirit-assets-outside'), assets: ['icons'] }],
+          },
+          token: 'test-token',
+          fetch: createFigmaFetch(),
+        }),
+      ).rejects.toThrow(/outside the repository/);
+    } finally {
+      await rm(temporaryDirectory, { recursive: true, force: true });
+    }
+  });
+
+  it('refuses to follow output path symlinks', async () => {
+    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-sync-link-'));
+    const { symlink } = await import('node:fs/promises');
+
+    try {
+      const outside = path.join(temporaryDirectory, 'outside');
+      const linked = path.join(temporaryDirectory, 'svg');
+      await mkdir(outside);
+      await symlink(outside, linked);
+
+      await expect(
+        syncAssets({
+          config: {
+            fileKey: 'figma-file',
+            repositoryRoot: temporaryDirectory,
+            targets: [{ brand: 'Spirit', out: linked, assets: ['icons'] }],
+          },
+          token: 'test-token',
+          fetch: createFigmaFetch(),
+        }),
+      ).rejects.toThrow(/symlink/);
     } finally {
       await rm(temporaryDirectory, { recursive: true, force: true });
     }

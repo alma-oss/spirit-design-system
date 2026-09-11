@@ -1,0 +1,162 @@
+name: 🎨 Sync Assets
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - figma-library-publish
+
+concurrency:
+  group: figma-assets-sync
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    name: Discover sync targets
+    runs-on: ubuntu-24.04
+    environment: figma
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    outputs:
+      has-targets: ${{ steps.discover.outputs.has-targets }}
+      matrix: ${{ steps.discover.outputs.matrix }}
+
+    steps:
+      - name: Checkout Spirit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Node and Install Dependencies
+        uses: ./.github/actions/setup-install
+
+      - name: Discover opted-in repositories
+        id: discover
+        env:
+          DISPATCH_DESCRIPTION: ${{ github.event.client_payload.description }}
+          DISPATCH_FILE_KEY: ${{ github.event.client_payload.file_key }}
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+          GH_APP_CLIENT_ID: ${{ secrets.GH_APP_CLIENT_ID }}
+          GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          GITHUB_PUBLISH_NOTES_PATH: ${{ github.workspace }}/figma-publish-notes.txt
+        run: yarn workspace @alma-oss/spirit-assets-exporter discover
+
+      - name: Build sync CLI
+        if: ${{ steps.discover.outputs.has-targets == 'true' }}
+        run: yarn workspace @alma-oss/spirit-assets-exporter build:ci
+
+      - name: Upload sync CLI
+        if: ${{ steps.discover.outputs.has-targets == 'true' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: spirit-assets-cli
+          path: exporters/assets/dist-ci/spirit-assets.mjs
+
+      - name: Upload Figma publish notes
+        if: ${{ steps.discover.outputs.has-targets == 'true' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: figma-publish-notes
+          path: figma-publish-notes.txt
+          if-no-files-found: ignore
+
+  sync:
+    name: Sync Figma Assets (${{ matrix.owner }}/${{ matrix.repo }} / ${{ matrix.brand }})
+    needs: discover
+    if: ${{ needs.discover.outputs.has-targets == 'true' }}
+    runs-on: ubuntu-24.04
+    environment: figma
+    timeout-minutes: 15
+    concurrency:
+      group: figma-assets-sync-${{ matrix.owner }}-${{ matrix.repo }}-${{ matrix.slug }}
+      cancel-in-progress: false
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.discover.outputs.matrix) }}
+    permissions:
+      contents: read
+
+    steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ secrets.GH_APP_CLIENT_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          owner: ${{ matrix.owner }}
+          repositories: ${{ matrix.repo }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Checkout target repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: ${{ matrix.owner }}/${{ matrix.repo }}
+          token: ${{ steps.app-token.outputs.token }}
+          path: target
+
+      - name: Setup Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: '22'
+
+      - name: Download sync CLI
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: spirit-assets-cli
+
+      - name: Download Figma publish notes
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: figma-publish-notes
+
+      - name: Sync assets from Figma
+        run: >
+          node spirit-assets.mjs sync
+          --config target/spirit.config.json
+          --repository-root target
+          --brand "${{ matrix.brand }}"
+          --out "${{ matrix.out }}"
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+
+      - name: Read Figma publish notes
+        id: figma-notes
+        env:
+          BRAND: ${{ matrix.brand }}
+        run: |
+          NOTES=""
+          if [ -f figma-publish-notes.txt ]; then
+            NOTES="$(cat figma-publish-notes.txt)"
+          fi
+
+          {
+            echo "body<<PRBODY"
+            echo "## Summary"
+            echo ""
+            echo "- synchronize ${BRAND} SVG icons directly from the Figma Assets file"
+            echo "- add, update, or remove icons to match the configured \`Brand=${BRAND}\` variants"
+            echo ""
+            if [ -n "$NOTES" ]; then
+              echo "## Figma Publish Notes"
+              echo ""
+              echo "$NOTES"
+              echo ""
+            fi
+            echo "This pull request is managed by the Figma asset sync workflow in alma-oss/spirit-design-system."
+            echo "PRBODY"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Open or update pull request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          path: target
+          branch: ${{ matrix.branch }}
+          delete-branch: true
+          commit-message: ${{ matrix.commitMessage }}
+          title: ${{ matrix.title }}
+          body: ${{ steps.figma-notes.outputs.body }}
+          add-paths: |
+            ${{ matrix.out }}

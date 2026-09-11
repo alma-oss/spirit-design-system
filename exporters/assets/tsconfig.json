@@ -4,5 +4,5 @@
     "module": "esnext",
     "target": "es2022"
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*", "./package.json"]
 }

@@ -4,13 +4,19 @@ export type AssetType = (typeof ASSET_TYPES)[number];
 
 export type ChangeType = (typeof CHANGE_TYPES)[keyof typeof CHANGE_TYPES];
 
-export interface SyncTarget {
+export interface GitTemplates {
+  branch?: string;
+  commitMessage?: string;
+  pullRequestTitle?: string;
+}
+
+export interface SyncTarget extends GitTemplates {
   brand: string;
   out: string;
   assets: AssetType[];
 }
 
-export interface AssetsConfig {
+export interface AssetsConfig extends GitTemplates {
   fileKey: string;
   targets: SyncTarget[];
 }
@@ -21,6 +27,8 @@ export interface ResolvedSyncTarget extends SyncTarget {
 
 export interface ResolvedAssetsConfig extends AssetsConfig {
   targets: ResolvedSyncTarget[];
+  configPath?: string;
+  repositoryRoot?: string;
 }
 
 export interface SyncChange {
