@@ -1,7 +1,15 @@
 'use client';
 
 import classNames from 'classnames';
-import React, { type ForwardedRef, forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import React, {
+  type ForwardedRef,
+  type MouseEvent,
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react';
 import { MULTIPLE_SELECTION_MODE } from '../../constants';
 import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../context';
 import {
@@ -24,7 +32,12 @@ import { Label } from '../Label';
 import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { VisuallyHidden } from '../VisuallyHidden';
-import { DEFAULT_POPOVER_PROPS, DEFAULT_SIZE } from './constants';
+import {
+  DEFAULT_POPOVER_PROPS,
+  DEFAULT_SIZE,
+  PICKER_LABEL_CONTROL_SELECTOR,
+  PICKER_NESTED_CLOSE_BUTTON_SIZE_MAP,
+} from './constants';
 import { PickerContext } from './PickerContext';
 import { PickerPopoverContextProvider } from './PickerPopoverContext';
 import type { SpiritUnstablePickerProps, SpiritUnstablePickerRef } from './types';
@@ -35,6 +48,7 @@ import { usePickerId } from './usePickerId';
 import { usePickerStyleProps } from './usePickerStyleProps';
 import {
   getAggregatedTagLabel,
+  getNodeText,
   getPickerItemLabelMap,
   getPickerSelectionGridKeyboardRowCount,
   getSelectedItems,
@@ -132,6 +146,23 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     onToggle,
   });
 
+  // The label is a `div`, so it may hold interactive content. Restore native `<label>`
+  // click behaviour (focus and open the field) for clicks outside that content.
+  const handleLabelClick = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      if (isDisabled || (event.target as HTMLElement).closest(PICKER_LABEL_CONTROL_SELECTOR)) {
+        return;
+      }
+
+      triggerRef.current?.focus();
+
+      if (!isOpen) {
+        onToggle();
+      }
+    },
+    [isDisabled, isOpen, onToggle],
+  );
+
   const selectionGridKeyboardRowCount = getPickerSelectionGridKeyboardRowCount(selectedPickerItems.length, {
     isAggregated,
   });
@@ -150,8 +181,11 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     tagCount: selectionGridKeyboardRowCount,
   });
 
-  const emptyLabel = emptySelectionLabel ? replaceTranslationParams(emptySelectionLabel, { label }) : label;
-  const aggregatedTagLabel = getAggregatedTagLabel(label, selectedPickerItems);
+  const labelText = getNodeText(label);
+  const emptyLabel = emptySelectionLabel
+    ? replaceTranslationParams(emptySelectionLabel, { label: labelText })
+    : labelText;
+  const aggregatedTagLabel = getAggregatedTagLabel(labelText, selectedPickerItems);
 
   const selectionContent = (() => {
     if (!selectedPickerItems.length) {
@@ -223,6 +257,9 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
         validationState,
         label: { isLabelHidden },
         inputContainer: { variant },
+        controlButton: {
+          size: PICKER_NESTED_CLOSE_BUTTON_SIZE_MAP[size],
+        },
       }}
     >
       <UniversalProvider
@@ -233,18 +270,18 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
       >
         <div {...styleProps} className={classNames(classProps.root, styleProps.className)} {...transferProps}>
           <Stack spacing="space-400">
-            <Label {...labelProps} id={labelId} elementType="span">
+            <Label {...labelProps} id={labelId} elementType="div" onClick={handleLabelClick}>
               {label}
             </Label>
             <Dropdown {...dropdownProps} id={popoverId} isOpen={isOpen} onToggle={onToggle} triggerRef={triggerRef}>
-              <InputContainer role="group" aria-label={label}>
+              <InputContainer role="group" aria-label={labelText}>
                 <UNSTABLE_PickerSelection
                   ref={selectionGridRef}
                   {...ariaDescribedByProp}
                   id={selectionId}
                   isDisabled={isDisabled}
                   role={selectedPickerItems.length ? 'grid' : 'group'}
-                  aria-label={replaceTranslationParams(selectionAriaLabel, { label })}
+                  aria-label={replaceTranslationParams(selectionAriaLabel, { label: labelText })}
                   aria-live="off"
                   aria-atomic={false}
                   aria-relevant="additions"

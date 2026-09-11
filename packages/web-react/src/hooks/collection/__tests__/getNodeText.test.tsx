@@ -27,4 +27,23 @@ describe('getNodeText', () => {
   it('should join array children with spaces', () => {
     expect(getNodeText(['Hello', ' ', 'world'])).toBe('Hello world');
   });
+
+  it('should skip aria-hidden subtrees', () => {
+    expect(
+      getNodeText(
+        <>
+          Languages
+          <span aria-hidden>
+            <em>Decorative hint</em>
+          </span>
+        </>,
+      ),
+    ).toBe('Languages');
+    expect(getNodeText(<span aria-hidden="true">Hidden</span>)).toBe('');
+  });
+
+  it('should keep content of elements with aria-hidden explicitly disabled', () => {
+    expect(getNodeText(<span aria-hidden={false}>Visible</span>)).toBe('Visible');
+    expect(getNodeText(<span aria-hidden="false">Visible</span>)).toBe('Visible');
+  });
 });
