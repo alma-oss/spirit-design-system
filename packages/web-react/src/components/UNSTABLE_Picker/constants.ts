@@ -5,6 +5,12 @@ type PickerShellSize = (typeof Sizes)[keyof typeof Sizes];
 
 export const DEFAULT_SIZE = Sizes.MEDIUM;
 
+/**
+ * Interactive content inside the field label (e.g. a Tooltip trigger).
+ * Clicks on these must not be redirected to the picker trigger.
+ */
+export const PICKER_LABEL_CONTROL_SELECTOR = 'a[href], button, input, select, textarea, [role="button"]';
+
 /** Default props for the inner `DropdownPopover` (overridable via `popoverProps`). */
 export const DEFAULT_POPOVER_PROPS: StyleProps = {
   theme: 'theme-light-default',

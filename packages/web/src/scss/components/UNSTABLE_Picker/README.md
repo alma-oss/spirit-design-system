@@ -117,6 +117,64 @@ trigger points to via `data-spirit-target` and `aria-controls`:
 </div>
 ```
 
+### Rich Label Content
+
+A `label` element must not contain interactive content, so when the label carries something like a Tooltip trigger,
+render it as a `div` with the `Label` class instead. Give the trigger its accessible name with `aria-label`, mark the
+popover `aria-hidden="true"` so its copy is not folded into placeholder strings, and link the same text to the
+selection area with `aria-describedby` so assistive technologies still get it.
+
+```html
+<div class="Label" id="picker-label" data-spirit-picker-label>
+  Languages
+  <div class="Tooltip d-inline-block" data-spirit-element="tooltip">
+    <button
+      type="button"
+      class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--symmetrical"
+      aria-label="More information about languages"
+      data-spirit-toggle="tooltip"
+      data-spirit-target="#picker-label-tooltip"
+    >
+      <svg class="Icon" width="16" height="16" aria-hidden="true">
+        <use href="/assets/icons/svg/sprite.svg#info" />
+      </svg>
+    </button>
+    <div
+      id="picker-label-tooltip"
+      class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-top placement-controlled"
+      aria-hidden="true"
+      data-spirit-trigger="hover, focus, click"
+      data-spirit-placement="top"
+      data-spirit-flip-fallback-placements="bottom"
+    >
+      Only languages supported by our editorial team are offered.
+      <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
+    </div>
+  </div>
+</div>
+
+<!-- The selection area carries `aria-describedby="picker-label-hint"`. -->
+<span id="picker-label-hint" class="accessibility-hidden">
+  Only languages supported by our editorial team are offered.
+</span>
+```
+
+Clicks on the trigger must not be redirected to the picker trigger:
+
+```js
+labelEl.addEventListener('click', (event) => {
+  if (!event.target.closest('a[href], button, input, select, textarea, [role="button"]')) {
+    triggerEl.focus();
+
+    if (triggerEl.getAttribute('aria-expanded') !== 'true') {
+      triggerEl.click();
+    }
+  }
+});
+```
+
+👉 The Picker field uses the plain-text label for its accessible name; the exposed trigger remains a separate control.
+
 ## Listbox Presentation
 
 Inside the popover, set `role="listbox"` on the option list (plus `aria-multiselectable="true"` for multiple

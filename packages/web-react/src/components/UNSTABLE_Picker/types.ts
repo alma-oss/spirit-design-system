@@ -50,7 +50,12 @@ export interface UnstablePickerBaseProps<S = void>
   isDisabled?: boolean;
   isLabelHidden?: boolean;
   isRequired?: boolean;
-  label: string;
+  /**
+   * Visible label and accessible name. Rich content is flattened to plain text for the empty
+   * selection placeholder, aggregated tag, and `{label}` translation placeholders; `aria-hidden`
+   * parts are left out.
+   */
+  label: ReactNode;
   /** Props for the inner `Dropdown`. */
   dropdownProps?: DropdownBaseProps;
   /** Props for the inner `Label` (style props; `UNSAFE_className` is merged with picker classes). */

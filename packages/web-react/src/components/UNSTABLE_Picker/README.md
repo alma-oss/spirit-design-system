@@ -338,6 +338,62 @@ On a **Light on Brand** surface, keep the label on-brand and use **Light Default
 
 See the [Themes demo][picker-themes-demo].
 
+### Rich Label Content
+
+`label` accepts a `ReactNode`, so it can carry inline markup such as a `Tooltip` with extra guidance. Because a
+`<label>` element must not contain interactive content, the visible label renders as a `<div>` carrying `labelId`; the
+field is named through `aria-label` (flattened from the node), and clicking the label focuses and opens the trigger
+just like a native label would. A Tooltip trigger inside the label therefore stays in the tab order and keeps its own
+click behaviour.
+
+Where the label is needed as plain text — the empty selection placeholder, the aggregated tag, and the `{label}`
+translation placeholders — the node is flattened to its text and `aria-hidden` parts are skipped. Mark the tooltip
+popover `aria-hidden` so its copy stays out of those strings, and link the same text to the field with
+`aria-describedby` so assistive technologies still get it.
+
+```tsx
+const HINT_ID = 'picker-example-hint';
+const HINT_TEXT = 'Only languages supported by our editorial team are offered.';
+
+<>
+  <UNSTABLE_UncontrolledPicker
+    id="picker-example"
+    aria-describedby={HINT_ID}
+    label={
+      <>
+        Languages{' '}
+        <UncontrolledTooltip
+          id="picker-example-tooltip"
+          placement="top"
+          trigger={['hover', 'focus', 'click']}
+          UNSAFE_className="d-inline-block"
+        >
+          {/* ControlButton size comes from the Picker context (`xsmall`). */}
+          <TooltipTrigger
+            elementType={ControlButton}
+            aria-label="More information about languages"
+            isSubtle
+            isSymmetrical
+          >
+            <Icon name="info" />
+          </TooltipTrigger>
+          <TooltipPopover aria-hidden>{HINT_TEXT}</TooltipPopover>
+        </UncontrolledTooltip>
+      </>
+    }
+  >
+    {/* UNSTABLE_PickerGroup / UNSTABLE_PickerItem children */}
+  </UNSTABLE_UncontrolledPicker>
+  <VisuallyHidden id={HINT_ID}>{HINT_TEXT}</VisuallyHidden>
+</>;
+```
+
+Give the trigger its accessible name with `aria-label` rather than visible or visually hidden text. The Picker field
+itself uses the plain-text `label` value for its `aria-label`, so the trigger remains a separate control and is not part
+of the field's accessible name.
+
+See the [Tooltip in Label demo][picker-tooltip-in-label-demo].
+
 ### `dropdownProps`, `popoverProps`, `labelProps`, and `tagProps`
 
 Forward props to the inner `Dropdown`, `DropdownPopover`, `Label`, and `Tag` elements. Each `*Props` type only includes values the picker does not set itself.
@@ -388,7 +444,7 @@ The trigger uses [Icon][web-react-icon-documentation] (`chevron-down` when close
 | `isLabelHidden`       | `bool`                                                    | `false`                            | ✕        | Visually hides the label (remains accessible)                                                                                                                                               |
 | `isOpen`              | `bool`                                                    | —                                  | ✓        | Popover open state                                                                                                                                                                          |
 | `isRequired`          | `bool`                                                    | `false`                            | ✕        | Required indicator on the label (visual only)                                                                                                                                               |
-| `label`               | `string`                                                  | —                                  | ✓        | Visible label and accessible name for the control                                                                                                                                           |
+| `label`               | `ReactNode`                                               | —                                  | ✓        | Visible label and accessible name; rich content is flattened to text for `{label}` placeholders                                                                                             |
 | `labelProps`          | `StyleProps`                                              | —                                  | ✕        | [Style props][readme-style-props] for the inner `Label`; see [`dropdownProps`, `popoverProps`, `labelProps`, and `tagProps`](#dropdownprops-popoverprops-labelprops-and-tagprops)           |
 | `onSelectionChange`   | `(keys: string[]) => void`                                | —                                  | ✓        | Called when the selection changes                                                                                                                                                           |
 | `onToggle`            | `() => void`                                              | —                                  | ✓        | Toggle callback; parent updates `isOpen`                                                                                                                                                    |
@@ -436,7 +492,7 @@ All props from **UNSTABLE_Picker** apply except `isOpen`, `onToggle`, and `selec
 | --------------------- | -------------------------- | ---------- | -------- | ---------------------------------------- |
 | `children`            | `ReactNode`                | —          | ✓        | Popover content                          |
 | `id`                  | `string`                   | —          | ✓        | Stable id                                |
-| `label`               | `string`                   | —          | ✓        | Label                                    |
+| `label`               | `ReactNode`                | —          | ✓        | Label                                    |
 | `defaultIsOpen`       | `bool`                     | `false`    | ✕        | Initial popover open state               |
 | `defaultSelectedKeys` | `string[]`                 | `[]`       | ✕        | Initial selection                        |
 | `onSelectionChange`   | `(keys: string[]) => void` | —          | ✕        | Optional callback when selection changes |
@@ -523,6 +579,7 @@ and [escape hatches][readme-escape-hatches].
 [dropdown-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Dropdown/README.md
 [fieldgroup-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/FieldGroup/README.md
 [picker-themes-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Picker/demo/PickerThemes.tsx
+[picker-tooltip-in-label-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Picker/demo/PickerTooltipInLabel.tsx
 [picker-web]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Picker/README.md
 [radio-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Radio/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes

@@ -15,6 +15,7 @@ import PickerSalary from './PickerSalary';
 import PickerSingle from './PickerSingle';
 import PickerSizes from './PickerSizes';
 import PickerThemes from './PickerThemes';
+import PickerTooltipInLabel from './PickerTooltipInLabel';
 import PickerValidationStates from './PickerValidationStates';
 import PickerVariants from './PickerVariants';
 
@@ -38,6 +39,9 @@ export const Preview = () => (
       </DocsSection>
       <DocsSection title="Hidden Label">
         <PickerHiddenLabel />
+      </DocsSection>
+      <DocsSection title="Tooltip in Label">
+        <PickerTooltipInLabel />
       </DocsSection>
       <DocsSection title="Required">
         <PickerRequired />

@@ -15,6 +15,9 @@ const CLASSNAME_TAG_SIZE_DEFAULT = 'Tag--small';
 const CLASSNAME_CONTROL_BUTTON_SIZE_DEFAULT = 'ControlButton--xsmall';
 
 const SELECTOR_PICKER = '[data-spirit-toggle="picker"]';
+const SELECTOR_LABEL = '[data-spirit-picker-label]';
+/** Interactive content inside a `div` label (e.g. a Tooltip trigger) keeps its own clicks. */
+const SELECTOR_LABEL_CLICK_IGNORE = 'a[href], button, input, select, textarea, [role="button"]';
 const SELECTOR_DROPDOWN_TRIGGER = '[data-spirit-toggle="dropdown"]';
 const SELECTOR_SELECTION = '[data-spirit-element="selection"]';
 const SELECTOR_SELECTION_LABEL = '[data-spirit-element="selection-label"]';
@@ -174,6 +177,21 @@ function initPicker(dropdownEl) {
   const tagSizeKey = dropdownEl.dataset.pickerTagSize;
   const tagClass = dropdownEl.dataset.pickerTagClass || '';
   const isDisabled = Boolean(triggerEl?.disabled);
+
+  // A `div` label (rich label content) has no native `for` behaviour, so restore it here.
+  // The documented markup places that label as the dropdown's previous sibling; do not
+  // `querySelector` the wrapper, or every picker would bind to the first label.
+  const labelEl = dropdownEl.previousElementSibling?.matches(SELECTOR_LABEL) ? dropdownEl.previousElementSibling : null;
+
+  labelEl?.addEventListener('click', (event) => {
+    if (!isDisabled && !event.target.closest(SELECTOR_LABEL_CLICK_IGNORE)) {
+      triggerEl?.focus();
+
+      if (triggerEl && triggerEl.getAttribute('aria-expanded') !== 'true') {
+        triggerEl.click();
+      }
+    }
+  });
   const sizeConfig = (tagSizeKey && TAG_SIZES[tagSizeKey]) || null;
   const getCheckboxes = () => Array.from(popoverEl.querySelectorAll(SELECTOR_CHECKBOX_INPUT));
   const getChecked = () => getCheckboxes().filter((checkbox) => checkbox.checked);
