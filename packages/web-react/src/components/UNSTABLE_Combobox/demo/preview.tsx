@@ -16,6 +16,7 @@ import ComboboxRequired from './ComboboxRequired';
 import ComboboxSearchResults from './ComboboxSearchResults';
 import ComboboxSizes from './ComboboxSizes';
 import ComboboxThemes from './ComboboxThemes';
+import ComboboxTooltipInLabel from './ComboboxTooltipInLabel';
 import ComboboxValidationStates from './ComboboxValidationStates';
 import ComboboxVariants from './ComboboxVariants';
 import ComboboxWithClearButton from './ComboboxWithClearButton';
@@ -40,6 +41,9 @@ export const Preview = () => (
       </DocsSection>
       <DocsSection title="Helper Text" stackAlignment="stretch">
         <ComboboxHelperText />
+      </DocsSection>
+      <DocsSection title="Tooltip in Label" stackAlignment="stretch">
+        <ComboboxTooltipInLabel />
       </DocsSection>
       <DocsSection title="Required" stackAlignment="stretch">
         <ComboboxRequired />

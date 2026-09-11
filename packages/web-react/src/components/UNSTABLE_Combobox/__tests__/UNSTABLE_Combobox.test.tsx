@@ -10,7 +10,7 @@ import {
   restPropsTest,
   stylePropsTest,
 } from '@local/tests';
-import { Label } from '../..';
+import { Label, TooltipPopover, TooltipTrigger, UncontrolledTooltip } from '../..';
 import { FillVariants, ValidationStates } from '../../../constants';
 import { useToggle } from '../../../hooks';
 import { COMBOBOX_INPUT_MIN_WIDTH_CSS_VAR } from '../constants';
@@ -191,6 +191,122 @@ describe('UNSTABLE_Combobox', () => {
 
     expect(optionLabel).not.toHaveClass('Label--required');
     expect(optionLabel).not.toHaveClass('accessibility-hidden');
+  });
+
+  it('should render rich label content and flatten it to text for ARIA and placeholder', () => {
+    const richLabel = (
+      <>
+        Languages <span>(optional)</span>
+      </>
+    );
+
+    render(<TestCombobox label={richLabel} />);
+
+    expect(screen.getByText('(optional)')).toBeInTheDocument();
+    expect(screen.getByRole('group', { name: 'Languages (optional)' })).toBeInTheDocument();
+    expect(screen.getByRole('combobox')).toHaveAttribute('placeholder', 'Languages (optional)');
+    expect(screen.getByRole('group', { name: 'Selected Languages (optional)' })).toBeInTheDocument();
+  });
+
+  it('should flatten rich label content in the selection count aria-label', () => {
+    render(
+      <TestCombobox
+        label={
+          <>
+            Languages <span>(optional)</span>
+          </>
+        }
+        selectedKeys={['cs']}
+      />,
+    );
+
+    expect(screen.getByRole('combobox')).toHaveAttribute('aria-label', 'Languages (optional), 1 item selected');
+  });
+
+  it('should render the label as a div so it can hold interactive content', () => {
+    render(<TestCombobox />);
+
+    const label = screen.getByText('Languages');
+
+    expect(label.tagName).toBe('DIV');
+    expect(label).toHaveAttribute('id', 'combobox-test-combobox-label');
+    expect(screen.getByRole('combobox')).toHaveAttribute('aria-labelledby', 'combobox-test-combobox-label');
+  });
+
+  it('should focus and open the field when the label is clicked', () => {
+    const onToggle = jest.fn();
+
+    render(<TestCombobox isOpen={false} onToggle={onToggle} />);
+
+    fireEvent.click(screen.getByText('Languages'));
+
+    expect(screen.getByRole('combobox')).toHaveFocus();
+    expect(onToggle).toHaveBeenCalled();
+  });
+
+  it('should not steal focus when interactive label content is clicked', () => {
+    const onToggle = jest.fn();
+    const onTriggerClick = jest.fn();
+
+    render(
+      <TestCombobox
+        isOpen={false}
+        onToggle={onToggle}
+        label={
+          <>
+            Languages{' '}
+            <button type="button" onClick={onTriggerClick}>
+              More information
+            </button>
+          </>
+        }
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'More information' }));
+
+    expect(onTriggerClick).toHaveBeenCalled();
+    expect(screen.getByRole('combobox')).not.toHaveFocus();
+    expect(onToggle).not.toHaveBeenCalled();
+  });
+
+  it('should keep aria-hidden label content out of the placeholder and ARIA strings', () => {
+    render(
+      <TestCombobox
+        label={
+          <>
+            Languages{' '}
+            <span aria-hidden>
+              <em>More about languages</em>
+            </span>
+          </>
+        }
+      />,
+    );
+
+    expect(screen.getByRole('combobox')).toHaveAttribute('placeholder', 'Languages');
+    expect(screen.getByRole('group', { name: 'Languages' })).toBeInTheDocument();
+  });
+
+  it('should keep a Tooltip in the label focusable while its popover stays out of the placeholder', () => {
+    render(
+      <TestCombobox
+        label={
+          <>
+            Languages{' '}
+            <UncontrolledTooltip id="combobox-label-tooltip" trigger={['hover', 'focus', 'click']}>
+              <TooltipTrigger aria-label="More information about languages">
+                <span aria-hidden>?</span>
+              </TooltipTrigger>
+              <TooltipPopover aria-hidden>Only official languages are offered.</TooltipPopover>
+            </UncontrolledTooltip>
+          </>
+        }
+      />,
+    );
+
+    expect(screen.getByRole('combobox')).toHaveAttribute('placeholder', 'Languages');
+    expect(screen.getByRole('button', { name: 'More information about languages' })).toBeInTheDocument();
   });
 
   it('should show clear button when hasClearButton and selection is non-empty', () => {

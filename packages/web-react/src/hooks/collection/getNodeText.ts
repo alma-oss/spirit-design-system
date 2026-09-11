@@ -16,7 +16,17 @@ const collectNodeText = (value: ReactNode): string => {
   }
 
   if (isValidElement(value)) {
-    return collectNodeText((value.props as { children?: ReactNode }).children);
+    const { 'aria-hidden': ariaHidden, children } = value.props as {
+      'aria-hidden'?: boolean | string;
+      children?: ReactNode;
+    };
+
+    // Content hidden from assistive technologies is excluded from accessible names.
+    if (ariaHidden === true || ariaHidden === 'true') {
+      return '';
+    }
+
+    return collectNodeText(children);
   }
 
   return '';
@@ -24,7 +34,7 @@ const collectNodeText = (value: ReactNode): string => {
 
 /**
  * Flattens a ReactNode to plain text (for aria-labels / collection textValue).
- * Joins array children with spaces and normalizes whitespace.
+ * Joins array children with spaces, normalizes whitespace, and skips `aria-hidden` subtrees.
  *
  * @param node React node
  */

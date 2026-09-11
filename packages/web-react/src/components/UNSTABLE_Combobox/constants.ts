@@ -31,6 +31,12 @@ export const COMBOBOX_SELECTION_SELECTOR = '[role="row"]';
 export const COMBOBOX_OPTION_CELL_CONTROL_SELECTOR =
   'button:not([disabled]), [role="button"]:not([aria-disabled="true"])';
 
+/**
+ * Interactive content inside the field label (e.g. a Tooltip trigger).
+ * Clicks on these must not be redirected to the filter input.
+ */
+export const COMBOBOX_LABEL_CONTROL_SELECTOR = 'a[href], button, input, select, textarea, [role="button"]';
+
 /** Attribute holding the selection key on an option item (DOM `id` is namespaced). */
 export const COMBOBOX_OPTION_VALUE_ATTR = 'data-spirit-value';
 
