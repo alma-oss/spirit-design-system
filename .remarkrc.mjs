@@ -1,4 +1,4 @@
-import config from '@almacareer/remark-config';
+import config from '@alma-oss/remark-config';
 
 export default {
   ...config,

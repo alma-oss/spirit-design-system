@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@alma-oss/commitlint-config": "catalog:lint",
-    "@almacareer/remark-config": "catalog:lint",
+    "@alma-oss/remark-config": "catalog:lint",
     "@axe-core/playwright": "catalog:test",
     "@commitlint/cli": "catalog:lint",
     "@eslint/compat": "catalog:lint",
