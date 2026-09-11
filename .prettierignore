@@ -102,6 +102,9 @@ Caddyfile
 # Node version
 .nvmrc
 
+# Browserslist config (no Prettier parser for this format)
+.browserslistrc
+
 # Git
 .gitignore
 .gitattributes
