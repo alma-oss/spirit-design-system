@@ -171,7 +171,7 @@ jobs:
                             "type": "plain_text",
                             "text": ":github: Download Report"
                           },
-                          "url": "${{ steps.artifact-upload-step.outputs.artifact-url }}"
+                          "url": "${{ steps.artifact-upload-step.outputs.artifact-url || format('{0}/{1}/actions/runs/{2}', github.server_url, github.repository, github.run_id) }}"
                         }
                       ]
                     }
