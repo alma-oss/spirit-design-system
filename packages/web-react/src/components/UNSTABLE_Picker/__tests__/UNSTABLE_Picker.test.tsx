@@ -10,6 +10,7 @@ import {
   restPropsTest,
   stylePropsTest,
 } from '@local/tests';
+import { TooltipPopover, TooltipTrigger, UncontrolledTooltip } from '../..';
 import { FillVariants, ValidationStates } from '../../../constants';
 import { useToggle } from '../../../hooks';
 import {
@@ -30,7 +31,9 @@ const defaultProps = {
 };
 
 const TestPicker = (props: Partial<ComponentProps<typeof UNSTABLE_Picker>> = {}) => {
-  const [isOpen, onToggle] = useToggle(false);
+  const [internalIsOpen, internalOnToggle] = useToggle(false);
+  const isOpen = props.isOpen ?? internalIsOpen;
+  const onToggle = props.onToggle ?? internalOnToggle;
 
   return (
     <UNSTABLE_Picker {...defaultProps} {...props} isOpen={isOpen} onToggle={onToggle}>
@@ -135,6 +138,124 @@ describe('UNSTABLE_Picker', () => {
     const label = screen.getByText('Languages', { selector: '.Label' });
 
     expect(label).toHaveClass('theme-light-on-brand', 'Label');
+  });
+
+  it('should render rich label content and flatten it to text for ARIA and placeholder', () => {
+    const richLabel = (
+      <>
+        Languages <span>(optional)</span>
+      </>
+    );
+
+    render(<TestPicker label={richLabel} />);
+
+    expect(screen.getByText('(optional)')).toBeInTheDocument();
+    expect(screen.getByRole('group', { name: 'Languages (optional)' })).toBeInTheDocument();
+    expect(
+      screen.getByText('Languages (optional)', { selector: '.UNSTABLE_PickerSelection__empty' }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('group', { name: 'Selected Languages (optional)' })).toBeInTheDocument();
+  });
+
+  it('should flatten rich label content in the aggregated tag', () => {
+    render(
+      <TestPicker
+        isAggregated
+        label={
+          <>
+            Languages <span>(optional)</span>
+          </>
+        }
+        selectedKeys={['cs', 'dk']}
+      />,
+    );
+
+    expect(screen.getByRole('row', { name: 'Languages (optional) (2)' })).toBeInTheDocument();
+  });
+
+  it('should render the label as a div so it can hold interactive content', () => {
+    render(<TestPicker />);
+
+    const label = screen.getByText('Languages', { selector: '.Label' });
+
+    expect(label.tagName).toBe('DIV');
+    expect(label).toHaveAttribute('id', 'picker-test-picker-label');
+  });
+
+  it('should focus and open the field when the label is clicked', () => {
+    const onToggle = jest.fn();
+
+    render(<TestPicker isOpen={false} onToggle={onToggle} />);
+
+    fireEvent.click(screen.getByText('Languages', { selector: '.Label' }));
+
+    expect(screen.getByRole('button', { name: 'Add' })).toHaveFocus();
+    expect(onToggle).toHaveBeenCalled();
+  });
+
+  it('should not steal focus when interactive label content is clicked', () => {
+    const onToggle = jest.fn();
+    const onTriggerClick = jest.fn();
+
+    render(
+      <TestPicker
+        isOpen={false}
+        onToggle={onToggle}
+        label={
+          <>
+            Languages{' '}
+            <button type="button" onClick={onTriggerClick}>
+              More information
+            </button>
+          </>
+        }
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'More information' }));
+
+    expect(onTriggerClick).toHaveBeenCalled();
+    expect(screen.getByRole('button', { name: 'Add' })).not.toHaveFocus();
+    expect(onToggle).not.toHaveBeenCalled();
+  });
+
+  it('should keep aria-hidden label content out of the placeholder and ARIA strings', () => {
+    render(
+      <TestPicker
+        label={
+          <>
+            Languages{' '}
+            <span aria-hidden>
+              <em>More about languages</em>
+            </span>
+          </>
+        }
+      />,
+    );
+
+    expect(screen.getByText('Languages', { selector: '.UNSTABLE_PickerSelection__empty' })).toBeInTheDocument();
+    expect(screen.getByRole('group', { name: 'Languages' })).toBeInTheDocument();
+  });
+
+  it('should keep a Tooltip in the label focusable while its popover stays out of the placeholder', () => {
+    render(
+      <TestPicker
+        label={
+          <>
+            Languages{' '}
+            <UncontrolledTooltip id="picker-label-tooltip" trigger={['hover', 'focus', 'click']}>
+              <TooltipTrigger aria-label="More information about languages">
+                <span aria-hidden>?</span>
+              </TooltipTrigger>
+              <TooltipPopover aria-hidden>Only official languages are offered.</TooltipPopover>
+            </UncontrolledTooltip>
+          </>
+        }
+      />,
+    );
+
+    expect(screen.getByText('Languages', { selector: '.UNSTABLE_PickerSelection__empty' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'More information about languages' })).toBeInTheDocument();
   });
 
   it('should forward tagProps to Tag elements', () => {

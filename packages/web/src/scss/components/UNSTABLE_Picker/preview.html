@@ -2660,6 +2660,213 @@
 
   <div class="Container">
 
+    <h2 class="docs-Heading">Tooltip in Label</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+
+        <!--
+          Rich label content: a `div` instead of a `label`, because a `label` must not contain
+          interactive content. The field is named by `aria-label`, and the demo script
+          focuses the trigger when the label is clicked.
+        -->
+        <div
+          class="Label"
+          id="picker-tooltip-label-label"
+          data-spirit-picker-label
+        >Languages
+          <div
+            class="Tooltip d-inline-block"
+            data-spirit-element="tooltip"
+          >
+            <button
+              type="button"
+              class="ControlButton ControlButton--xsmall text-color-scheme dynamic-color-background-interactive accessibility-tap-target ControlButton--symmetrical"
+              aria-label="More information about languages"
+              data-spirit-toggle="tooltip"
+              data-spirit-target="#picker-tooltip-label-tooltip"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#info" />
+              </svg>
+            </button>
+            <!--
+              Shown to sighted users only; AT gets the same text from the hint below.
+              Tooltip config is read from the popover, not the toggle.
+            -->
+            <div
+              id="picker-tooltip-label-tooltip"
+              class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-top placement-controlled"
+              aria-hidden="true"
+              data-spirit-trigger="hover, focus, click"
+              data-spirit-placement="top"
+              data-spirit-flip-fallback-placements="bottom"
+            >Only languages supported by our editorial team are offered.
+              <span
+                class="TooltipPopover__arrow"
+                data-spirit-element="arrow"
+              ></span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="InputContainer InputContainer--fill InputContainer--medium"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-describedby="picker-tooltip-label-hint"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-tooltip-label-selection"
+              class="UNSTABLE_PickerSelection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_PickerSelection__empty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-tooltip-label"
+              class="UNSTABLE_PickerTrigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="picker-tooltip-label"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="picker-tooltip-label-label"
+            class="DropdownPopover placement-bottom-start theme-light-default"
+            data-spirit-placement="bottom-start"
+            id="picker-tooltip-label"
+          >
+
+            <fieldset class="border-0">
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical" style="--flex-spacing-y: var(--spirit-space-500);">
+
+                <div class="Item" data-spirit-element="checkbox">
+                  <div class="Item__slot" role="presentation">
+                    <input
+                      type="checkbox"
+                      id="picker-tooltip-lang-cs"
+                      class="Checkbox Checkbox--item"
+                      name="tooltip-in-label"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="Item__content" role="presentation">
+                    <label
+                      class="Label element-stretched cursor-pointer"
+                      data-spirit-element="checkbox-label"
+                      for="picker-tooltip-lang-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Item" data-spirit-element="checkbox">
+                  <div class="Item__slot" role="presentation">
+                    <input
+                      type="checkbox"
+                      id="picker-tooltip-lang-dk"
+                      class="Checkbox Checkbox--item"
+                      name="tooltip-in-label"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="Item__content" role="presentation">
+                    <label
+                      class="Label element-stretched cursor-pointer"
+                      data-spirit-element="checkbox-label"
+                      for="picker-tooltip-lang-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Item" data-spirit-element="checkbox">
+                  <div class="Item__slot" role="presentation">
+                    <input
+                      type="checkbox"
+                      id="picker-tooltip-lang-kl"
+                      class="Checkbox Checkbox--item"
+                      name="tooltip-in-label"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="Item__content" role="presentation">
+                    <label
+                      class="Label element-stretched cursor-pointer"
+                      data-spirit-element="checkbox-label"
+                      for="picker-tooltip-lang-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+        <span
+          id="picker-tooltip-label-hint"
+          class="accessibility-hidden"
+        >Only languages supported by our editorial team are offered.</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
     <h2 class="docs-Heading">Required</h2>
 
     <div class="docs-Stack docs-Stack--start">
