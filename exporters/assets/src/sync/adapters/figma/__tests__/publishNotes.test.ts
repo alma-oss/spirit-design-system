@@ -1,9 +1,5 @@
-import {
-  extractPublishNotesFromDispatch,
-  extractPublishNotesFromVersions,
-  resolvePublishNotes,
-} from '../sync/adapters/figma/publishNotes';
-import { FIGMA_API_URL } from '../sync/adapters/figma/client';
+import { FIGMA_API_URL } from '../client';
+import { extractPublishNotesFromDispatch, extractPublishNotesFromVersions, resolvePublishNotes } from '../publishNotes';
 
 describe('extractPublishNotesFromDispatch', () => {
   it('reads the library publish description from the repository_dispatch payload', () => {

@@ -2,8 +2,8 @@ import { chmod, mkdir, mkdtemp, readFile, readdir, rm, symlink, unlink, writeFil
 import os from 'node:os';
 import path from 'node:path';
 
-import { syncAssets } from '..';
-import { createFigmaFetch } from '../__fixtures__/figma';
+import { createFigmaFetch } from '../../__fixtures__/figma';
+import { syncAssets } from '../sync';
 
 describe('syncAssets', () => {
   it('adds, updates, and deletes SVG files', async () => {

@@ -7,6 +7,8 @@ const config = {
     '<rootDir>/node_modules/',
     'bin',
     '__fixtures__',
+    '__tests__',
+    '\\.test\\.ts$',
   ],
   moduleNameMapper: {
     '^octokit$': '<rootDir>/src/__fixtures__/octokit.ts',

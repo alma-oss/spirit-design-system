@@ -2,9 +2,9 @@ import { lstat, mkdir, mkdtemp, rm, symlink, writeFile } from 'node:fs/promises'
 import os from 'node:os';
 import path from 'node:path';
 
-import { loadConfig, resolveConfig } from '../config';
-import { confineConfig } from './load';
-import { expectedRepositoryConfigPath } from './paths';
+import { loadConfig, resolveConfig } from '../../config';
+import { confineConfig } from '../load';
+import { expectedRepositoryConfigPath } from '../paths';
 
 describe('repository-owned assets config', () => {
   it('loads JSON from the repository root and resolves nested output paths', async () => {

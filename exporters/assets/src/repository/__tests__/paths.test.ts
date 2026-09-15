@@ -2,7 +2,7 @@ import { mkdir, mkdtemp, rm } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 
-import { assertContainedInRoot, assertNoSymlinkComponents, isContainedInRoot, toTargetSlug } from './paths';
+import { assertContainedInRoot, assertNoSymlinkComponents, isContainedInRoot, toTargetSlug } from '../paths';
 
 describe('path helpers', () => {
   it('treats nested paths as contained and escaped paths as outside', () => {

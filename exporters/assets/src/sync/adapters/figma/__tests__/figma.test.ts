@@ -1,5 +1,5 @@
+import { createExportFetch, createFigmaFetch } from '../../../../__fixtures__/figma';
 import { exportAssets, exportIcons } from '..';
-import { createExportFetch, createFigmaFetch } from '../__fixtures__/figma';
 
 describe('exportAssets', () => {
   it('combines branded icons with shared benefit icons', async () => {
