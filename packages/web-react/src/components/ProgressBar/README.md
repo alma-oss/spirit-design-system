@@ -113,7 +113,7 @@ Use the `isDisabled` prop. The value label picks up the disabled content color a
   isDisabled
   label="Profile completeness"
   value={40}
-  valueLabel="40\u00a0%"
+  valueLabel={'40\u00a0%'}
 />
 ```
 
@@ -132,11 +132,24 @@ Place the ProgressBar as File children to show the progress of a single upload:
 ## Accessibility
 
 - ProgressBar always needs an accessible name: the `label` prop, or the `aria-label` attribute.
-- Changes of the value are not announced automatically. Announce milestones such as "Upload complete"
-  with a polite live region, for example `role="status"` on the accompanying HelperText. Do not announce
-  every percent.
 - Do not rely on the color alone to communicate success or failure. Pair it with the value or with
   `validationText`.
+
+Changes of the value are not announced automatically. If you need to announce milestones such as
+"Upload complete", render them as text that you update, and mark that element as a polite live region
+with `role="status"`. Do not announce every percent, and do not add `role="status"` to text that never
+changes:
+
+```tsx
+<ProgressBar id="progress-bar-live-region" aria-label="Uploading Document.pdf" value={60} />;
+
+{
+  /* The text of this element is replaced with "Upload complete" once the upload has finished. */
+}
+<div role="status" aria-live="polite">
+  Uploading…
+</div>;
+```
 
 When the ProgressBar tracks the loading of a region of the page, set `aria-busy="true"` on that region and
 point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` once loading has finished:

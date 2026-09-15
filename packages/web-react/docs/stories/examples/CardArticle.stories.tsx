@@ -25,7 +25,7 @@ type CardArticleCompositionProps = {
 };
 
 export default {
-  title: 'Examples/Compositions',
+  title: 'Examples/Compositions/Card',
   argTypes: {
     contentText: {
       control: 'text',

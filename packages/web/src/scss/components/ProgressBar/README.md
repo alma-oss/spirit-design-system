@@ -275,11 +275,27 @@ Place the ProgressBar inside `File__text` to show the progress of a single uploa
 
 - ProgressBar always needs an accessible name: a [Label][readme-label] linked with the `for` attribute,
   or the `aria-label` attribute.
-- Changes of the value are not announced automatically. Announce milestones such as "Upload complete"
-  with a polite live region, for example `role="status"` on the accompanying HelperText. Do not announce
-  every percent.
 - Do not rely on the color alone to communicate success or failure. Pair it with the value or with the
   [ValidationText][readme-validation-text] component.
+
+Changes of the value are not announced automatically. If you need to announce milestones such as
+"Upload complete", render them as text that you update, and mark that element as a polite live region
+with `role="status"`. Do not announce every percent, and do not add `role="status"` to text that never
+changes:
+
+```html
+<progress
+  class="ProgressBar color-scheme-on-emotion-informative-subtle"
+  id="progress-bar-live-region"
+  value="60"
+  max="100"
+  style="--progress-bar-value: 60%"
+  aria-label="Uploading Document.pdf"
+></progress>
+
+<!-- The text of this element is replaced with "Upload complete" once the upload has finished. -->
+<div role="status" aria-live="polite">Uploading…</div>
+```
 
 When the ProgressBar tracks the loading of a region of the page, set `aria-busy="true"` on that region and
 point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` once loading has finished:

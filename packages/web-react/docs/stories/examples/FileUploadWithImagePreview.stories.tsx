@@ -46,7 +46,7 @@ type FileUploadCompositionType = {
 };
 
 export default {
-  title: 'Examples/Compositions',
+  title: 'Examples/Compositions/FileUpload',
   argTypes: {
     accept: {
       control: 'text',

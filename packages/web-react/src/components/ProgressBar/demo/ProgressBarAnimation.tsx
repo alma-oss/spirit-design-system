@@ -22,7 +22,7 @@ const ProgressBarAnimation = () => {
         valueLabel={`${value}\u00a0%`}
         valueLabelId="progress-bar-animated-value"
       />
-      <Flex alignmentX={undefined} alignmentY={undefined}>
+      <Flex alignmentX="stretch" alignmentY="stretch">
         <SegmentedControl
           label="Profile completeness value"
           name="progress-bar-animated-value"
@@ -36,9 +36,7 @@ const ProgressBarAnimation = () => {
               id={`progress-bar-animated-${completion}`}
               value={String(completion)}
             >
-              <Truncate limit={1} mode="lines">
-                {`${completion}\u00a0%`}
-              </Truncate>
+              <Truncate limit={1}>{`${completion}\u00a0%`}</Truncate>
             </SegmentedControlItem>
           ))}
         </SegmentedControl>
