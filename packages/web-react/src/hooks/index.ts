@@ -30,5 +30,6 @@ export * from './useResizeObserver';
 export * from './useScrollControl';
 export * from './useSpacingStyle';
 export * from './useSymmetry';
+export * from './useThrottledValue';
 export * from './useToggle';
 export * from './useWrapClass';
