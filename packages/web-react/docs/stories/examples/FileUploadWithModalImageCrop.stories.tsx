@@ -4,12 +4,16 @@ import 'react-image-crop/dist/ReactCrop.css';
 import {
   Box,
   Button,
+  FieldGroup,
+  Flex,
   Icon,
   Modal,
   ModalBody,
   ModalDialog,
   ModalFooter,
   ModalHeader,
+  ProgressBar,
+  Radio,
   Stack,
   Text,
   Toggle,
@@ -32,12 +36,16 @@ type ImageSize = {
 };
 
 type UploadState = 'uploading' | 'success' | 'error';
+type UploadIndicator = 'spinner' | 'progress';
+const UPLOAD_DURATION_MS = 3500;
+/** Matches ProgressBar `--progress-bar-value` transition (`duration-200`). */
+const PROGRESS_BAR_SETTLE_MS = 250;
 
 export default {
-  title: 'Examples/Compositions',
+  title: 'Examples/Compositions/FileUpload',
 };
 
-export const FileUploaderWithModalImageCrop = () => {
+export const FileUploadWithModalImageCrop = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [fileToCrop, setFileToCrop] = useState<File | null>(null);
   const [cropParams, setCropParams] = useState<Crop | null>(null);
@@ -46,19 +54,54 @@ export const FileUploaderWithModalImageCrop = () => {
   const [imageSize, setImageSize] = useState<ImageSize | null>(null);
   const [editingKey, setEditingKey] = useState<string | null>(null);
   const [simulateError, setSimulateError] = useState(false);
+  const [uploadIndicator, setUploadIndicator] = useState<UploadIndicator>('progress');
   const [shakeKey, setShakeKey] = useState(0);
   const [uploadStates, setUploadStates] = useState<Map<string, UploadState>>(new Map());
+  const [uploadProgress, setUploadProgress] = useState(0);
   const filesMap = useRef<Map<string, File>>(new Map());
   const uploadTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const uploadAnimationRef = useRef<number | null>(null);
+  const uploadIndicatorRef = useRef(uploadIndicator);
+  uploadIndicatorRef.current = uploadIndicator;
   const fileToCropUrl = useFilePreviewUrl(fileToCrop ?? EMPTY_FILE);
   const { fileQueue, addToQueue, updateQueue, onDismiss } = useFileQueue();
 
-  useEffect(
-    () => () => {
-      if (uploadTimerRef.current) clearTimeout(uploadTimerRef.current);
-    },
-    [],
-  );
+  const stopUploadSimulation = () => {
+    if (uploadTimerRef.current) {
+      clearTimeout(uploadTimerRef.current);
+      uploadTimerRef.current = null;
+    }
+    if (uploadAnimationRef.current != null) {
+      cancelAnimationFrame(uploadAnimationRef.current);
+      uploadAnimationRef.current = null;
+    }
+  };
+
+  const startUploadSimulation = (key: string) => {
+    stopUploadSimulation();
+    setUploadProgress(0);
+
+    const startedAt = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - startedAt;
+      const nextValue = elapsed >= UPLOAD_DURATION_MS ? 100 : Math.round((elapsed / UPLOAD_DURATION_MS) * 100);
+      setUploadProgress(nextValue);
+
+      if (nextValue < 100) {
+        uploadAnimationRef.current = requestAnimationFrame(tick);
+
+        return;
+      }
+
+      const settleDelay = uploadIndicatorRef.current === 'progress' ? PROGRESS_BAR_SETTLE_MS : 0;
+      uploadTimerRef.current = setTimeout(() => {
+        setUploadStates((prev) => new Map(prev).set(key, simulateError ? 'error' : 'success'));
+      }, settleDelay);
+    };
+    uploadAnimationRef.current = requestAnimationFrame(tick);
+  };
+
+  useEffect(() => stopUploadSimulation, []);
 
   const items: FileUploadAttachmentsItem[] = useMemo(
     () =>
@@ -201,18 +244,15 @@ export const FileUploaderWithModalImageCrop = () => {
 
     setUploadStates((prev) => new Map(prev).set(key, 'uploading'));
     handleModalClose();
-
-    // Simulate a network upload delay, then resolve to success or error based on the toggle.
-    if (uploadTimerRef.current) clearTimeout(uploadTimerRef.current);
-    uploadTimerRef.current = setTimeout(() => {
-      setUploadStates((prev) => new Map(prev).set(key, simulateError ? 'error' : 'success'));
-    }, 1500);
+    startUploadSimulation(key);
   };
 
   // Removes the file from the queue, the original-file cache, and the upload-state tracker.
   const handleDismiss = (key: string) => {
+    stopUploadSimulation();
     onDismiss(key);
     filesMap.current.delete(key);
+    setUploadProgress(0);
     setUploadStates((prev) => {
       const next = new Map(prev);
       next.delete(key);
@@ -231,20 +271,44 @@ export const FileUploaderWithModalImageCrop = () => {
         padding="space-600"
         marginBottom="space-1000"
       >
-        <Toggle
-          id="simulate-upload-error"
-          label="Simulate file upload error"
-          isChecked={simulateError}
-          inputPosition="start"
-          onChange={(e) => setSimulateError(e.target.checked)}
-        />
-        <Text textColor="emotion-informative-basic">
-          💡 Drop multiple files to see validation; drop them again while the error is visible to trigger a shake
-          animation.
-        </Text>
+        <Stack spacing="space-800">
+          <Stack hasSpacing>
+            <Toggle
+              id="simulate-upload-error"
+              label="Simulate file upload error"
+              isChecked={simulateError}
+              inputPosition="start"
+              onChange={(e) => setSimulateError(e.target.checked)}
+            />
+            <Text textColor="emotion-informative-basic">
+              💡 Drop multiple files to see validation; drop them again while the error is visible to trigger a shake
+              animation.
+            </Text>
+          </Stack>
+          <FieldGroup id="upload-indicator" label="Upload indicator">
+            <Flex>
+              <Radio
+                id="upload-indicator-progress"
+                isChecked={uploadIndicator === 'progress'}
+                label="Progress bar"
+                name="upload-indicator"
+                onChange={() => setUploadIndicator('progress')}
+                value="progress"
+              />
+              <Radio
+                id="upload-indicator-spinner"
+                isChecked={uploadIndicator === 'spinner'}
+                label="Spinner"
+                name="upload-indicator"
+                onChange={() => setUploadIndicator('spinner')}
+                value="spinner"
+              />
+            </Flex>
+          </FieldGroup>
+        </Stack>
       </Box>
       <FileUpload
-        id="file-uploader-react-image-crop"
+        id="file-upload-modal-image-crop"
         accept=".png,image/jpeg"
         helperText="Max file size is 10 MB"
         isUploadDisabled={items.length > 0}
@@ -278,7 +342,6 @@ export const FileUploaderWithModalImageCrop = () => {
             <FileAttachment
               key={item.id}
               id={item.id}
-              isDisabled={isUploading}
               label={item.label}
               removeText={`Remove ${item.label} from list`}
               {...(!isError && {
@@ -286,14 +349,15 @@ export const FileUploaderWithModalImageCrop = () => {
                 onChange: () => handleEdit(item.id),
               })}
               onDismiss={() => handleDismiss(item.id)}
-              {...(isUploading && {
-                helperText: (
-                  <>
-                    <Icon name="spinner" boxSize={16} UNSAFE_className="animation-spin-clockwise" />{' '}
-                    <span>Uploading your file…</span>
-                  </>
-                ),
-              })}
+              {...(isUploading &&
+                uploadIndicator === 'spinner' && {
+                  helperText: (
+                    <>
+                      <Icon name="spinner" boxSize={16} UNSAFE_className="animation-spin-clockwise" />{' '}
+                      <span>Uploading your file…</span>
+                    </>
+                  ),
+                })}
               {...(isSuccess && {
                 validationState: 'success',
                 hasValidationIcon: true,
@@ -314,7 +378,15 @@ export const FileUploaderWithModalImageCrop = () => {
                   />
                 ),
               })}
-            />
+            >
+              {isUploading && uploadIndicator === 'progress' ? (
+                <ProgressBar
+                  aria-label={`Uploading ${item.label}`}
+                  value={uploadProgress}
+                  valueLabel={`${uploadProgress}\u00a0%`}
+                />
+              ) : null}
+            </FileAttachment>
           );
         })}
       </Stack>
