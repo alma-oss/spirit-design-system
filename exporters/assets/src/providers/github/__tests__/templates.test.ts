@@ -1,5 +1,5 @@
-import { DEFAULT_GIT_TEMPLATES } from '../../constants';
-import { assertSafeGitBranch, hasUniqueGitBranches, resolveGitTemplates, type GitTemplateContext } from './templates';
+import { DEFAULT_GIT_TEMPLATES } from '../../../constants';
+import { assertSafeGitBranch, hasUniqueGitBranches, resolveGitTemplates, type GitTemplateContext } from '../templates';
 
 const context: GitTemplateContext = {
   brand: 'Práce',

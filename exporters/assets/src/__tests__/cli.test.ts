@@ -2,8 +2,9 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 
-import { confineConfig, loadConfig, resolveConfig, runCli } from '..';
-import { filterTargets } from '../config';
+import { runCli } from '../cli';
+import { filterTargets, loadConfig, resolveConfig } from '../config';
+import { confineConfig } from '../repository';
 
 describe('runCli', () => {
   const originalExit = process.exit;

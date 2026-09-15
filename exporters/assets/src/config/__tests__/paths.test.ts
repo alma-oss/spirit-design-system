@@ -1,4 +1,4 @@
-import { assertRelativeOutputPath } from './paths';
+import { assertRelativeOutputPath } from '../paths';
 
 describe('assertRelativeOutputPath', () => {
   it('rejects absolute and parent-directory output paths', () => {

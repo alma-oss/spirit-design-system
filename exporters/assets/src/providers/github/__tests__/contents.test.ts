@@ -1,6 +1,6 @@
-import { ROOT_CONFIG_FILE } from '../../constants';
-import type { ListedRepository } from './app';
-import { GITHUB_API_URL, GITHUB_API_VERSION, readRepositoryConfigFile } from './contents';
+import { ROOT_CONFIG_FILE } from '../../../constants';
+import type { ListedRepository } from '../app';
+import { GITHUB_API_URL, GITHUB_API_VERSION, readRepositoryConfigFile } from '../contents';
 
 const repository: ListedRepository = {
   archived: false,

@@ -1,6 +1,6 @@
-import { ROOT_CONFIG_FILE } from '../../constants';
-import { createGitHubApp, listAppRepositories, type GitHubAppLike, type ListedRepository } from './app';
-import { discoverSyncTargets } from './discover';
+import { ROOT_CONFIG_FILE } from '../../../constants';
+import { createGitHubApp, listAppRepositories, type GitHubAppLike, type ListedRepository } from '../app';
+import { discoverSyncTargets } from '../discover';
 
 const createRepository = (overrides: Partial<ListedRepository> = {}): ListedRepository => ({
   archived: false,

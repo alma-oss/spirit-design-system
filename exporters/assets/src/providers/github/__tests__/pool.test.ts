@@ -1,4 +1,4 @@
-import { mapPool } from './pool';
+import { mapPool } from '../pool';
 
 const items = async function* items() {
   yield 'repository';
