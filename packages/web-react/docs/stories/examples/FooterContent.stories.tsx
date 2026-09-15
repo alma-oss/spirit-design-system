@@ -28,7 +28,7 @@ type FooterCompositionsProps = {
 };
 
 export default {
-  title: 'Examples/Compositions',
+  title: 'Examples/Compositions/Footer',
   argTypes: {
     headingsWithLink: {
       control: 'boolean',

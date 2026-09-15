@@ -43,7 +43,7 @@ type CardCompositionType = {
 } & UseCardStyleProps;
 
 export default {
-  title: 'Examples/Compositions',
+  title: 'Examples/Compositions/Card',
   argTypes: {
     artworkAlignmentX: {
       control: 'select',

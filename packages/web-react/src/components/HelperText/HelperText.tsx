@@ -12,7 +12,6 @@ const defaultProps: Partial<SpiritHelperTextProps> = {
   id: undefined,
   isDisabled: false,
   registerAria: undefined,
-  role: undefined,
 };
 
 const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<E>) => {
@@ -25,7 +24,6 @@ const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<
     id,
     isDisabled,
     registerAria,
-    role,
     ...restProps
   } = propsWithDefaults;
 
@@ -43,7 +41,7 @@ const HelperText = <E extends ElementType = 'div'>(props: SpiritHelperTextProps<
 
   if (helperText) {
     return (
-      <Component {...filterDOMProps(transferProps)} {...mergedStyleProps} id={id} role={role}>
+      <Component {...filterDOMProps(transferProps)} {...mergedStyleProps} id={id}>
         {helperText}
       </Component>
     );
