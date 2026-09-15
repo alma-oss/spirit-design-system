@@ -56,7 +56,7 @@
         color-scheme.background-color-subtle();
 
     @media (prefers-reduced-motion: no-preference) {
-        transition: --progress-bar-value transitions.$duration-300 transitions.$timing-eased-in-out;
+        transition: --progress-bar-value transitions.$duration-200 transitions.$timing-eased-in-out;
     }
 }
 
