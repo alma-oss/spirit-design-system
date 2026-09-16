@@ -2,6 +2,7 @@ import {
   type ColorToken,
   type DimensionToken,
   type RadiusToken,
+  type SizeToken,
   type SpaceToken,
   type StringToken,
   TokenType,
@@ -128,6 +129,36 @@ describe('tokenMapper', () => {
           adapter: 'supernova',
           originalId: 'spaceRef',
           originalType: 'Space',
+        },
+      });
+    });
+
+    it('maps a size token to the internal model', () => {
+      const token = {
+        id: 'sizeRef',
+        name: 'size-small',
+        tokenType: TokenType.size,
+        parentGroupId: '1',
+        value: { measure: 32, unit: 'Pixels', referencedTokenId: null },
+      } as unknown as SizeToken;
+
+      const result = mapToken(token, exampleGroups);
+
+      expect(result).toEqual({
+        id: 'sizeRef',
+        name: 'size-small',
+        type: TokenTypeEnum.Size,
+        value: { type: 'number', value: 32, unit: 'Pixels' },
+        description: undefined,
+        metadata: {
+          brandId: undefined,
+          device: undefined,
+          groupPath: ['Grid', 'spacing'],
+        },
+        source: {
+          adapter: 'supernova',
+          originalId: 'sizeRef',
+          originalType: 'Size',
         },
       });
     });
