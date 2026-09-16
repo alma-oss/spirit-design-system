@@ -11,7 +11,7 @@ const ComponentCover = () => {
 
   return (
     <Section size="xlarge">
-      <Heading elementType="h1" size="xlarge" emphasis="bold">
+      <Heading elementType="h1" size="xlarge" fontWeight="bold">
         <Flex elementType="span" alignmentX="stretch" alignmentY="center" spacing="space-1000">
           {currentPage.name}
           {isComponentUnstable && (
