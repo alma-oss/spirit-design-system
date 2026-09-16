@@ -489,7 +489,7 @@ class Tooltip extends BaseComponent {
   }
 }
 
-enableToggleAutoloader(Tooltip, undefined, 'target');
+enableToggleAutoloader(Tooltip, 'target');
 enableDismissTrigger(Tooltip, 'hide');
 
 export default Tooltip;

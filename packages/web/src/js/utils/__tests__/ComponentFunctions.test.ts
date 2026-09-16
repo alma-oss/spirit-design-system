@@ -185,7 +185,7 @@ describe('ComponentFunctions', () => {
     it('should not create an instance for an element whose data-spirit-target does not resolve, with aim "target"', () => {
       const Component = createComponent();
 
-      enableToggleAutoloader(Component, undefined, 'target');
+      enableToggleAutoloader(Component, 'target');
 
       fixtureEl.innerHTML = `<div data-spirit-toggle="${Component.NAME}" data-spirit-target="#missing"></div>`;
 

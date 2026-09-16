@@ -56,7 +56,7 @@ const enableDismissTrigger = (component: typeof BaseComponent, method = 'dismiss
 
 // Eager autoloaders instantiate every matching element up front (no click involved) — see
 // dom/Autoload for why that needs an explicit rescan hook, unlike click delegation above.
-const enableToggleAutoloader = (component: typeof BaseComponent, _method?: string, aim: Aim = 'trigger') => {
+const enableToggleAutoloader = (component: typeof BaseComponent, aim: Aim = 'trigger') => {
   registerAutoload((root) => {
     SelectorEngine.findAll(`[${ATTRIBUTE_DATA_TOGGLE}="${component.NAME}"]`, root).forEach((element) => {
       const instance = aim === 'target' ? getTriggerOrTarget(getElement(element), aim) : element;
