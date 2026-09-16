@@ -2,6 +2,7 @@ import {
   type ColorToken,
   type DimensionToken,
   type FontSizeToken,
+  type LineHeightToken,
   type RadiusToken,
   type SizeToken,
   type SpaceToken,
@@ -190,6 +191,36 @@ describe('tokenMapper', () => {
           adapter: 'supernova',
           originalId: 'fontSizeRef',
           originalType: 'FontSize',
+        },
+      });
+    });
+
+    it('maps a lineHeight token to the internal model', () => {
+      const token = {
+        id: 'lineHeightRef',
+        name: 'line-height-body',
+        tokenType: TokenType.lineHeight,
+        parentGroupId: '1',
+        value: { measure: 24, unit: 'Pixels', referencedTokenId: null },
+      } as unknown as LineHeightToken;
+
+      const result = mapToken(token, exampleGroups);
+
+      expect(result).toEqual({
+        id: 'lineHeightRef',
+        name: 'line-height-body',
+        type: TokenTypeEnum.LineHeight,
+        value: { type: 'number', value: 24, unit: 'Pixels' },
+        description: undefined,
+        metadata: {
+          brandId: undefined,
+          device: undefined,
+          groupPath: ['Grid', 'spacing'],
+        },
+        source: {
+          adapter: 'supernova',
+          originalId: 'lineHeightRef',
+          originalType: 'LineHeight',
         },
       });
     });
