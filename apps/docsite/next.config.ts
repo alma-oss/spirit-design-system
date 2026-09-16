@@ -35,6 +35,7 @@ const nextConfig: NextConfig = {
       // Path is hardcoded in compilePreview.ts as `PARTIALS_DIR` — update both if this moves.
       './src/domains/components/ui/partials/**/*',
     ],
+    '/helpers/[helper]': ['../../packages/web/src/scss/helpers/**/preview.html'],
   },
   transpilePackages: ['@alma-oss/spirit-web-react'],
   reactStrictMode: true,

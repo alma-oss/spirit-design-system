@@ -162,6 +162,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-docsite@workspace:apps/docsite"
   dependencies:
+    "@alma-oss/spirit-common": "workspace:^"
     "@alma-oss/spirit-design-tokens": "workspace:^"
     "@alma-oss/spirit-icons": "workspace:^"
     "@alma-oss/spirit-web": "workspace:^"
