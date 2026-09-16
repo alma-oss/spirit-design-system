@@ -3,9 +3,23 @@ import {
   type Token,
   type TokenGroup as SupernovaTokenGroup,
   TokenType,
+  type Unit,
 } from '@supernovaio/sdk-exporters';
+import { CSSHelper } from '@supernovaio/export-helpers';
 import { getDeviceAlias } from '../../../helpers/deviceHelpers';
 import { type DesignToken, type TokenMetadata, type SourceMetadata, TokenTypeEnum } from '../../../core/types';
+
+/**
+ * Normalizes a Supernova unit enum value (e.g. `Unit.pixels`, "Pixels") to
+ * the CSS unit string generators expect (e.g. "px"). Keeps `DesignToken`
+ * values source-agnostic - a future adapter's unit representation would be
+ * normalized the same way, at the adapter boundary, not left for every
+ * consumer to know Supernova's raw enum.
+ *
+ * @param unit
+ */
+const normalizeUnit = (unit: unknown): string | undefined =>
+  unit === undefined ? undefined : CSSHelper.unitToCSS(unit as Unit);
 
 /** Numeric-value token whose measure/unit live directly on `token.value` (dimension, radius, space, size, fontSize, lineHeight, letterSpacing, borderWidth). */
 type NumericValueToken = Token & { value?: { measure: number; unit: unknown } };
@@ -83,7 +97,7 @@ const mapNumericToken = (
     value: {
       type: 'number',
       value: measure,
-      unit: token.value?.unit === undefined ? undefined : String(token.value.unit),
+      unit: normalizeUnit(token.value?.unit),
     },
     description: token.description || undefined,
     metadata: buildMetadata(token, tokenGroups),
@@ -116,7 +130,7 @@ const mapBorderToken = (
     value: {
       type: 'number',
       value: measure,
-      unit: token.value?.width?.unit === undefined ? undefined : String(token.value.width.unit),
+      unit: normalizeUnit(token.value?.width?.unit),
     },
     description: token.description || undefined,
     metadata: buildMetadata(token, tokenGroups),
