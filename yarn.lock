@@ -12,12 +12,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@alma-oss/browserslist-config@npm:3.0.0-alpha.0":
+  version: 3.0.0-alpha.0
+  resolution: "@alma-oss/browserslist-config@npm:3.0.0-alpha.0"
+  checksum: 10/231dd7adae0a2e56e8b64c070d2fd6777cdd9c7a9c457768340a105b6e8d009ddc403c80d17921e580c4bb2b887e912b043f68404b7f3d0dc9e0235b65dc9d15
+  languageName: node
+  linkType: hard
+
 "@alma-oss/commitlint-config@npm:3.0.0":
   version: 3.0.0
   resolution: "@alma-oss/commitlint-config@npm:3.0.0"
   dependencies:
     "@commitlint/config-conventional": "npm:^19.0.0"
   checksum: 10/7a269a664db580f7a10f3cb6d12bd2dce82b1f1892e73df30791b2fb262dff0edba0cc88d17907922c9efd0511c8be60bead0589be94a2f6c675b67e7d187cbb
+  languageName: node
+  linkType: hard
+
+"@alma-oss/remark-config@npm:1.0.0-alpha.0":
+  version: 1.0.0-alpha.0
+  resolution: "@alma-oss/remark-config@npm:1.0.0-alpha.0"
+  dependencies:
+    remark-preset-lint-consistent: "npm:^6.0.0"
+    remark-preset-lint-markdown-style-guide: "npm:^6.0.0"
+    remark-preset-lint-recommended: "npm:^7.0.0"
+  checksum: 10/678e5271f18d9569c314719172e67d68a74848da87efc4aa94168616f4398615432b077bc3acd3bc660239d3f7ed5c837c33cb39b0eba73079546758e5798011
   languageName: node
   linkType: hard
 
@@ -445,6 +463,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-web@workspace:packages/web"
   dependencies:
+    "@alma-oss/browserslist-config": "catalog:build"
     "@alma-oss/spirit-common": "workspace:^"
     "@alma-oss/spirit-design-tokens": "npm:^5.1.0"
     "@alma-oss/spirit-icons": "npm:^4.0.1"
@@ -453,7 +472,6 @@ __metadata:
     "@eslint/compat": "catalog:lint"
     "@eslint/eslintrc": "catalog:lint"
     "@floating-ui/dom": "catalog:frontend"
-    "@lmc-eu/browserslist-config": "catalog:build"
     "@rollup/plugin-babel": "catalog:build"
     "@rollup/plugin-node-resolve": "catalog:build"
     "@rollup/plugin-replace": "catalog:build"
@@ -490,6 +508,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@alma-oss/stylelint-config@npm:10.0.0-alpha.0":
+  version: 10.0.0-alpha.0
+  resolution: "@alma-oss/stylelint-config@npm:10.0.0-alpha.0"
+  dependencies:
+    postcss-scss: "npm:^4.0.3"
+    stylelint-config-standard-scss: "npm:^13.0.0"
+    stylelint-order: "npm:^6.0.0"
+  peerDependencies:
+    stylelint: ^16.0.0
+  checksum: 10/68b3eaa6735bee307d955ccfb65da8fc84686b92a95f1189d2d6e7def2858910aeb00e5f49c7aae13fe93a197b361bfc2d353ca65bac3505790cd2cf4acf66b5
+  languageName: node
+  linkType: hard
+
 "@alma-oss/vite-plugin-spirit-icons@workspace:^, @alma-oss/vite-plugin-spirit-icons@workspace:packages/vite-plugin-spirit-icons":
   version: 0.0.0-use.local
   resolution: "@alma-oss/vite-plugin-spirit-icons@workspace:packages/vite-plugin-spirit-icons"
@@ -511,30 +542,6 @@ __metadata:
     vite: ">=5"
   languageName: unknown
   linkType: soft
-
-"@almacareer/remark-config@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@almacareer/remark-config@npm:0.1.0"
-  dependencies:
-    remark-preset-lint-consistent: "npm:^6.0.0"
-    remark-preset-lint-markdown-style-guide: "npm:^6.0.0"
-    remark-preset-lint-recommended: "npm:^7.0.0"
-  checksum: 10/5fc4a6eead07286ad28a410395cc4deb8deb21a05a19624856bd82f491316a74243410193d006e8bcc7049779a8ce58141f0e7268f0dae741b173a978d995aea
-  languageName: node
-  linkType: hard
-
-"@almacareer/stylelint-config@npm:9.1.3":
-  version: 9.1.3
-  resolution: "@almacareer/stylelint-config@npm:9.1.3"
-  dependencies:
-    postcss-scss: "npm:^4.0.3"
-    stylelint-config-standard-scss: "npm:^13.0.0"
-    stylelint-order: "npm:^6.0.0"
-  peerDependencies:
-    stylelint: ^16.0.0
-  checksum: 10/8af3216ffb50411f1d2c035e543c692b26a6ef7bec348aa883dde31e66e1ea0ac7bba8d9c9ec7061bb7d265120721ce8a9a9f89b2a6f363646cab901d6cd2e48
-  languageName: node
-  linkType: hard
 
 "@ampproject/remapping@npm:^2.2.0":
   version: 2.3.0
@@ -6683,13 +6690,6 @@ __metadata:
   version: 1.1.1
   resolution: "@kwsites/promise-deferred@npm:1.1.1"
   checksum: 10/07455477a0123d9a38afb503739eeff2c5424afa8d3dbdcc7f9502f13604488a4b1d9742fc7288832a52a6422cf1e1c0a1d51f69a39052f14d27c9a0420b6629
-  languageName: node
-  linkType: hard
-
-"@lmc-eu/browserslist-config@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@lmc-eu/browserslist-config@npm:2.0.1"
-  checksum: 10/94f1cd729b321cf3d6b46b39d7479ed9442af24f14c4e1cce1abfa1c922081ee4736a57609c41d77c7059ea99243fcc6d9ff2770508982dfa72245614fdc5379
   languageName: node
   linkType: hard
 
@@ -35418,7 +35418,7 @@ __metadata:
   resolution: "spirit@workspace:."
   dependencies:
     "@alma-oss/commitlint-config": "catalog:lint"
-    "@almacareer/remark-config": "catalog:lint"
+    "@alma-oss/remark-config": "catalog:lint"
     "@axe-core/playwright": "catalog:test"
     "@commitlint/cli": "catalog:lint"
     "@eslint/compat": "catalog:lint"
@@ -36138,7 +36138,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "stylelint-config-spirit@workspace:configs/stylelint-config-spirit"
   dependencies:
-    "@almacareer/stylelint-config": "catalog:lint"
+    "@alma-oss/stylelint-config": "catalog:lint"
     prettier: "catalog:lint"
     stylelint: "catalog:lint"
     stylelint-order: "catalog:lint"
