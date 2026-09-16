@@ -1,4 +1,4 @@
-import { type DimensionToken, type StringToken } from '@supernovaio/sdk-exporters';
+import { type DimensionToken, type RadiusToken, type StringToken, TokenType } from '@supernovaio/sdk-exporters';
 import { exampleDimensionAndStringTokens } from '../../../../../tests/fixtures/exampleDimensionAndStringTokens';
 import { exampleGroups } from '../../../../../tests/fixtures/exampleGroups';
 import { TokenTypeEnum } from '../../../../core/types';
@@ -30,8 +30,48 @@ describe('tokenMapper', () => {
       });
     });
 
-    it('returns null for token types not yet supported by the adapter', () => {
+    it('maps a dimension token to the internal model', () => {
       const token = exampleDimensionAndStringTokens.get('dimensionRef') as DimensionToken;
+
+      const result = mapToken(token, exampleGroups);
+
+      expect(result).toEqual({
+        id: 'dimensionRef',
+        name: 'desktop',
+        type: TokenTypeEnum.Dimension,
+        value: { type: 'number', value: 32, unit: 'Pixels' },
+        description: undefined,
+        metadata: {
+          brandId: undefined,
+          device: undefined,
+          groupPath: ['Grid', 'spacing'],
+        },
+        source: {
+          adapter: 'supernova',
+          originalId: 'dimensionRef',
+          originalType: 'Dimension',
+        },
+      });
+    });
+
+    it('returns null for a numeric token with no measure', () => {
+      const token = {
+        ...(exampleDimensionAndStringTokens.get('dimensionRef') as DimensionToken),
+        value: { measure: undefined, unit: 'Pixels', referencedTokenId: null },
+      };
+
+      const result = mapToken(token, exampleGroups);
+
+      expect(result).toBeNull();
+    });
+
+    it('returns null for token types not yet supported by the adapter', () => {
+      const token = {
+        id: 'radiusRef',
+        name: 'radius-small',
+        tokenType: TokenType.radius,
+        value: { measure: 4, unit: 'Pixels', referencedTokenId: null },
+      } as unknown as RadiusToken;
 
       const result = mapToken(token, exampleGroups);
 
