@@ -11,12 +11,9 @@ type BorderTokenProcessorContext = {
 };
 
 /**
- * Processes border and borderWidth tokens (no rem conversion).
- *
- * `borderWidth`'s value is read through the adapter (see #DS-2335); `border`
- * still reads its nested `.value.width` natively, since the adapter doesn't
- * map that composite shape yet - `mapToken` returning a non-numeric result
- * for it is exactly the "not migrated yet" case, not "no value".
+ * Processes border and borderWidth tokens (no rem conversion). Both are read
+ * through the adapter (see #DS-2335); the native fallback branches exist
+ * only for defense-in-depth should `mapToken` ever regress.
  *
  * @param borderToken - The border or borderWidth token to process
  * @param ctx - Processing context with token groups and output options
@@ -33,17 +30,19 @@ export const processBorderToken = (
   const mappedValue = designToken?.value.type === 'number' ? designToken.value : undefined;
 
   let value: number | undefined;
-  let rawUnit: string | undefined;
+  // The adapter normalizes the unit to CSS form already; the native fallback
+  // branches below still need CSSHelper to do that conversion themselves.
+  let unit: string | undefined;
 
   if (mappedValue) {
     value = mappedValue.value;
-    rawUnit = mappedValue.unit;
+    unit = mappedValue.unit;
   } else if ('width' in borderToken.value && borderToken.value.width) {
     value = borderToken.value.width.measure;
-    rawUnit = borderToken.value.width.unit;
+    unit = CSSHelper.unitToCSS(borderToken.value.width.unit);
   } else if ('measure' in borderToken.value) {
     value = borderToken.value.measure;
-    rawUnit = borderToken.value.unit;
+    unit = borderToken.value.unit ? CSSHelper.unitToCSS(borderToken.value.unit as unknown as Unit) : undefined;
   }
 
   if (value === undefined) {
@@ -51,7 +50,6 @@ export const processBorderToken = (
   }
 
   const processedNumber = handleSpecialCase(name, value);
-  const unit = rawUnit ? CSSHelper.unitToCSS(rawUnit as unknown as Unit) : undefined;
 
   return formatTokenStyleByOutput(name, processedNumber, hasJsOutput, unit, false);
 };

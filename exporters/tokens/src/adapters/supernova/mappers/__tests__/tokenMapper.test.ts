@@ -52,7 +52,7 @@ describe('tokenMapper', () => {
         id: 'dimensionRef',
         name: 'desktop',
         type: TokenTypeEnum.Dimension,
-        value: { type: 'number', value: 32, unit: 'Pixels' },
+        value: { type: 'number', value: 32, unit: 'px' },
         description: undefined,
         metadata: {
           brandId: undefined,
@@ -93,7 +93,7 @@ describe('tokenMapper', () => {
         id: 'radiusRef',
         name: 'radius-small',
         type: TokenTypeEnum.Radius,
-        value: { type: 'number', value: 4, unit: 'Pixels' },
+        value: { type: 'number', value: 4, unit: 'px' },
         description: undefined,
         metadata: {
           brandId: undefined,
@@ -123,7 +123,7 @@ describe('tokenMapper', () => {
         id: 'spaceRef',
         name: 'space-small',
         type: TokenTypeEnum.Space,
-        value: { type: 'number', value: 8, unit: 'Pixels' },
+        value: { type: 'number', value: 8, unit: 'px' },
         description: undefined,
         metadata: {
           brandId: undefined,
@@ -153,7 +153,7 @@ describe('tokenMapper', () => {
         id: 'sizeRef',
         name: 'size-small',
         type: TokenTypeEnum.Size,
-        value: { type: 'number', value: 32, unit: 'Pixels' },
+        value: { type: 'number', value: 32, unit: 'px' },
         description: undefined,
         metadata: {
           brandId: undefined,
@@ -183,7 +183,7 @@ describe('tokenMapper', () => {
         id: 'fontSizeRef',
         name: 'font-size-body',
         type: TokenTypeEnum.FontSize,
-        value: { type: 'number', value: 16, unit: 'Pixels' },
+        value: { type: 'number', value: 16, unit: 'px' },
         description: undefined,
         metadata: {
           brandId: undefined,
@@ -213,7 +213,7 @@ describe('tokenMapper', () => {
         id: 'lineHeightRef',
         name: 'line-height-body',
         type: TokenTypeEnum.LineHeight,
-        value: { type: 'number', value: 24, unit: 'Pixels' },
+        value: { type: 'number', value: 24, unit: 'px' },
         description: undefined,
         metadata: {
           brandId: undefined,
@@ -243,7 +243,7 @@ describe('tokenMapper', () => {
         id: 'letterSpacingRef',
         name: 'letter-spacing-body',
         type: TokenTypeEnum.LetterSpacing,
-        value: { type: 'number', value: 0.5, unit: 'Pixels' },
+        value: { type: 'number', value: 0.5, unit: 'px' },
         description: undefined,
         metadata: {
           brandId: undefined,
@@ -273,7 +273,7 @@ describe('tokenMapper', () => {
         id: 'borderWidthRef',
         name: 'border-width-thin',
         type: TokenTypeEnum.BorderWidth,
-        value: { type: 'number', value: 2, unit: 'Pixels' },
+        value: { type: 'number', value: 2, unit: 'px' },
         description: undefined,
         metadata: {
           brandId: undefined,
@@ -309,7 +309,7 @@ describe('tokenMapper', () => {
         id: 'borderRef',
         name: 'border-default',
         type: TokenTypeEnum.Border,
-        value: { type: 'number', value: 1, unit: 'Pixels' },
+        value: { type: 'number', value: 1, unit: 'px' },
         description: undefined,
         metadata: {
           brandId: undefined,

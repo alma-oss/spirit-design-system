@@ -114,8 +114,9 @@ export const processNumericToken = (
 
   let value = mappedValue ? mappedValue.value : numericToken.value?.measure;
   value = handleSpecialCase(name, value);
-  const rawUnit = mappedValue ? (mappedValue.unit as unknown as Unit) : numericToken.value?.unit;
-  const unit = CSSHelper.unitToCSS(rawUnit);
+  // The adapter normalizes the unit to CSS form already; the native fallback
+  // path still needs CSSHelper to do that conversion itself.
+  const unit = mappedValue ? mappedValue.unit : CSSHelper.unitToCSS(numericToken.value?.unit as Unit);
   const baseFontSize = getBaseFontSize(fontSizeBaseMap, numericToken);
 
   const formattedValue = formatMeasure(numericToken, tokenType, name, value, unit, baseFontSize);
