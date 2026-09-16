@@ -1,4 +1,5 @@
 import {
+  type BorderWidthToken,
   type ColorToken,
   type DimensionToken,
   type FontSizeToken,
@@ -252,6 +253,36 @@ describe('tokenMapper', () => {
           adapter: 'supernova',
           originalId: 'letterSpacingRef',
           originalType: 'LetterSpacing',
+        },
+      });
+    });
+
+    it('maps a borderWidth token to the internal model', () => {
+      const token = {
+        id: 'borderWidthRef',
+        name: 'border-width-thin',
+        tokenType: TokenType.borderWidth,
+        parentGroupId: '1',
+        value: { measure: 2, unit: 'Pixels', referencedTokenId: null },
+      } as unknown as BorderWidthToken;
+
+      const result = mapToken(token, exampleGroups);
+
+      expect(result).toEqual({
+        id: 'borderWidthRef',
+        name: 'border-width-thin',
+        type: TokenTypeEnum.BorderWidth,
+        value: { type: 'number', value: 2, unit: 'Pixels' },
+        description: undefined,
+        metadata: {
+          brandId: undefined,
+          device: undefined,
+          groupPath: ['Grid', 'spacing'],
+        },
+        source: {
+          adapter: 'supernova',
+          originalId: 'borderWidthRef',
+          originalType: 'BorderWidth',
         },
       });
     });
