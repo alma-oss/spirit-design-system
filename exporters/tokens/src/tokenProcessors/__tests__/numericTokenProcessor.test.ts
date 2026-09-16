@@ -176,6 +176,21 @@ describe('numericTokenProcessor', () => {
       expect(result).toContain('rem');
     });
 
+    it('should keep the unit when a non-zero px value rounds to zero rem', () => {
+      const dimensionToken = exampleDimensionAndStringTokens.get('dimensionRef') as DimensionToken;
+      const token = { ...dimensionToken, value: { measure: 0.0001, unit: 'px' } } as unknown as DimensionToken;
+      const ctx = {
+        tokenGroups,
+        hasParentPrefix: true,
+        hasJsOutput: false,
+        fontSizeBaseMap,
+      };
+
+      const result = processNumericToken(token, TokenType.dimension, ctx);
+
+      expect(result).toBe('$grid-spacing-desktop: 0rem !default;');
+    });
+
     it('should return null for undefined value', () => {
       const token = {
         id: '1',
