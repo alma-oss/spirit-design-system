@@ -14,6 +14,7 @@
     "build": "storybook build --config-dir ./ --output-dir ./build --stats-json"
   },
   "devDependencies": {
+    "@alma-oss/spirit-common": "workspace:^",
     "@alma-oss/spirit-design-tokens": "workspace:^",
     "@alma-oss/spirit-icons": "workspace:^",
     "@alma-oss/spirit-web-react": "workspace:^",

@@ -1,19 +1,6 @@
 import type { SelectEntry } from './types';
 
-/**
- * Convert a kebab-case token name to title case.
- *
- * @example
- * toTitleCase('theme-light-default'); // "Theme Light Default"
- *
- * @param value Kebab-case token name.
- * @returns Title-cased representation of the token.
- */
-export const toTitleCase = (value: string) =>
-  value
-    .split('-')
-    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
-    .join(' ');
+export { kebabToTitleCase as toTitleCase } from '@alma-oss/spirit-common/utilities/kebabToTitleCase';
 
 /**
  * Convert an array of select entries to a map that Storybook controls can consume.
