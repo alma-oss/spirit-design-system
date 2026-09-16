@@ -19,6 +19,8 @@ import { getFontSizeBaseForBreakpoint, type FontSizeBaseMap } from '../helpers/u
 import { formatUnitValue, type UnitFormatContext } from '../formatters/unitFormatter';
 import { FONT_SIZE_BASE } from '../constants';
 import { mapToken } from '../adapters/supernova/mappers/tokenMapper';
+import { TransformationEngine, pxToRemRule } from '../transformations';
+import type { NumberValue } from '../core/types';
 
 type NumericToken =
   DimensionToken | RadiusToken | SpaceToken | SizeToken | FontSizeToken | LineHeightToken | LetterSpacingToken;
@@ -86,15 +88,40 @@ const formatMeasure = (
   return formatUnitValue(measure, unit, ctx);
 };
 
+const pxToRemEngine = new TransformationEngine([pxToRemRule]);
+
+/**
+ * Formats an already-transformed `NumberValue` into the final output value:
+ * bare `0` for zero, the bare number when there's no unit, otherwise the
+ * number and unit concatenated. The rem-conversion decision itself now
+ * happens earlier, via the `TransformationEngine` - this is purely
+ * formatting, mirroring `formatUnitValue`'s tail once a rule has already run
+ * (or decided not to).
+ *
+ * @param value
+ */
+const formatNumberValue = (value: NumberValue): string | number => {
+  if (value.value === 0) {
+    return 0;
+  }
+
+  if (!value.unit) {
+    return value.value;
+  }
+
+  return `${value.value}${value.unit}`;
+};
+
 /**
  * Processes numeric tokens (dimension, radius, space, size, fontSize, lineHeight, letterSpacing)
  * that support rem conversion based on font-size-base.
  *
  * Naming stays on the native token (it needs the SDK's `NamingHelper`). The
  * value is read through the internal `DesignToken` model via the Supernova
- * adapter's mapper for the types it supports so far (see #DS-2335); for any
- * other numeric type, the native value is read directly, exactly as before -
- * `mapToken` returning `null` there means "not migrated yet", not "no value".
+ * adapter's mapper, and the px-to-rem decision runs through the
+ * `TransformationEngine`'s `pxToRemRule` (see #DS-2335). The native fallback
+ * branch is unreachable today - all 7 dimension-family types are migrated -
+ * and is kept only as defense-in-depth, same as `processBorderToken`.
  *
  * @param numericToken - The numeric token to process
  * @param tokenType - The type of the token
@@ -108,18 +135,30 @@ export const processNumericToken = (
 ): string | null => {
   const { tokenGroups, hasParentPrefix, hasJsOutput, fontSizeBaseMap } = ctx;
   const name = tokenVariableName(numericToken, tokenGroups, hasParentPrefix);
-
-  const designToken = mapToken(numericToken, tokenGroups);
-  const mappedValue = designToken?.value.type === 'number' ? designToken.value : undefined;
-
-  let value = mappedValue ? mappedValue.value : numericToken.value?.measure;
-  value = handleSpecialCase(name, value);
-  // The adapter normalizes the unit to CSS form already; the native fallback
-  // path still needs CSSHelper to do that conversion itself.
-  const unit = mappedValue ? mappedValue.unit : CSSHelper.unitToCSS(numericToken.value?.unit as Unit);
   const baseFontSize = getBaseFontSize(fontSizeBaseMap, numericToken);
 
-  const formattedValue = formatMeasure(numericToken, tokenType, name, value, unit, baseFontSize);
+  const designToken = mapToken(numericToken, tokenGroups);
+  let formattedValue: string | number | undefined;
+
+  if (designToken?.value.type === 'number') {
+    // handleSpecialCase runs on the raw measure first, exactly as before -
+    // it can short-circuit a value (e.g. breakpoint-mobile -> 0) before the
+    // rem-conversion decision ever sees it.
+    const specialCasedValue = handleSpecialCase(name, designToken.value.value);
+    const tokenForTransform = { ...designToken, value: { ...designToken.value, value: specialCasedValue } };
+
+    const transformed = pxToRemEngine.transformToken(tokenForTransform, {
+      token: tokenForTransform,
+      params: { baseFontSize, isFontSizeBaseToken: isFontSizeBaseToken(numericToken, name) },
+    });
+
+    formattedValue = transformed.value.type === 'number' ? formatNumberValue(transformed.value) : undefined;
+  } else {
+    const value = handleSpecialCase(name, numericToken.value?.measure);
+    const unit = CSSHelper.unitToCSS(numericToken.value?.unit as Unit);
+
+    formattedValue = formatMeasure(numericToken, tokenType, name, value, unit, baseFontSize);
+  }
 
   return formattedValue === undefined ? null : formatTokenStyleByOutput(name, formattedValue, hasJsOutput);
 };
