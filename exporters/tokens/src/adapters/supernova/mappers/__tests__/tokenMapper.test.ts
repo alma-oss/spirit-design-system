@@ -1,4 +1,5 @@
 import {
+  type BorderToken,
   type BorderWidthToken,
   type ColorToken,
   type DimensionToken,
@@ -285,6 +286,55 @@ describe('tokenMapper', () => {
           originalType: 'BorderWidth',
         },
       });
+    });
+
+    it('maps a border token to the internal model, using only the width', () => {
+      const token = {
+        id: 'borderRef',
+        name: 'border-default',
+        tokenType: TokenType.border,
+        parentGroupId: '1',
+        value: {
+          width: { measure: 1, unit: 'Pixels', referencedTokenId: null },
+          color: { color: { r: 0, g: 0, b: 0 }, opacity: { measure: 1 }, referencedTokenId: null },
+          position: 'inside',
+          style: 'solid',
+          referencedTokenId: null,
+        },
+      } as unknown as BorderToken;
+
+      const result = mapToken(token, exampleGroups);
+
+      expect(result).toEqual({
+        id: 'borderRef',
+        name: 'border-default',
+        type: TokenTypeEnum.Border,
+        value: { type: 'number', value: 1, unit: 'Pixels' },
+        description: undefined,
+        metadata: {
+          brandId: undefined,
+          device: undefined,
+          groupPath: ['Grid', 'spacing'],
+        },
+        source: {
+          adapter: 'supernova',
+          originalId: 'borderRef',
+          originalType: 'Border',
+        },
+      });
+    });
+
+    it('returns null for a border token with no width', () => {
+      const token = {
+        id: 'borderRef',
+        name: 'border-undefined',
+        tokenType: TokenType.border,
+        value: { width: undefined, color: {}, referencedTokenId: null },
+      } as unknown as BorderToken;
+
+      const result = mapToken(token, exampleGroups);
+
+      expect(result).toBeNull();
     });
 
     it('returns null for token types not yet supported by the adapter', () => {
