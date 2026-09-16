@@ -9,6 +9,7 @@ import {
   Token,
   TokenGroup,
   TokenType,
+  type Unit,
 } from '@supernovaio/sdk-exporters';
 import { CSSHelper } from '@supernovaio/export-helpers';
 import { formatTokenStyleByOutput, tokenVariableName } from '../helpers/tokenHelper';
@@ -17,6 +18,7 @@ import { getDeviceAlias } from '../helpers/deviceHelpers';
 import { getFontSizeBaseForBreakpoint, type FontSizeBaseMap } from '../helpers/unitHelper';
 import { formatUnitValue, type UnitFormatContext } from '../formatters/unitFormatter';
 import { FONT_SIZE_BASE } from '../constants';
+import { mapToken } from '../adapters/supernova/mappers/tokenMapper';
 
 type NumericToken =
   DimensionToken | RadiusToken | SpaceToken | SizeToken | FontSizeToken | LineHeightToken | LetterSpacingToken;
@@ -88,6 +90,12 @@ const formatMeasure = (
  * Processes numeric tokens (dimension, radius, space, size, fontSize, lineHeight, letterSpacing)
  * that support rem conversion based on font-size-base.
  *
+ * Naming stays on the native token (it needs the SDK's `NamingHelper`). The
+ * value is read through the internal `DesignToken` model via the Supernova
+ * adapter's mapper for the types it supports so far (see #DS-2335); for any
+ * other numeric type, the native value is read directly, exactly as before -
+ * `mapToken` returning `null` there means "not migrated yet", not "no value".
+ *
  * @param numericToken - The numeric token to process
  * @param tokenType - The type of the token
  * @param ctx - Processing context with token groups, fontSizeBaseMap, and output options
@@ -100,9 +108,14 @@ export const processNumericToken = (
 ): string | null => {
   const { tokenGroups, hasParentPrefix, hasJsOutput, fontSizeBaseMap } = ctx;
   const name = tokenVariableName(numericToken, tokenGroups, hasParentPrefix);
-  let value = numericToken.value?.measure;
+
+  const designToken = mapToken(numericToken, tokenGroups);
+  const mappedValue = designToken?.value.type === 'number' ? designToken.value : undefined;
+
+  let value = mappedValue ? mappedValue.value : numericToken.value?.measure;
   value = handleSpecialCase(name, value);
-  const unit = CSSHelper.unitToCSS(numericToken.value?.unit);
+  const rawUnit = mappedValue ? (mappedValue.unit as unknown as Unit) : numericToken.value?.unit;
+  const unit = CSSHelper.unitToCSS(rawUnit);
   const baseFontSize = getBaseFontSize(fontSizeBaseMap, numericToken);
 
   const formattedValue = formatMeasure(numericToken, tokenType, name, value, unit, baseFontSize);
