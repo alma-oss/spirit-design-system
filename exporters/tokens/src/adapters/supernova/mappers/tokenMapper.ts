@@ -21,6 +21,7 @@ const NUMERIC_TOKEN_TYPES: Partial<Record<TokenType, TokenTypeEnum>> = {
   [TokenType.size]: TokenTypeEnum.Size,
   [TokenType.fontSize]: TokenTypeEnum.FontSize,
   [TokenType.lineHeight]: TokenTypeEnum.LineHeight,
+  [TokenType.letterSpacing]: TokenTypeEnum.LetterSpacing,
 };
 
 const buildGroupPath = (token: Token, tokenGroups: Array<SupernovaTokenGroup>): string[] => {
