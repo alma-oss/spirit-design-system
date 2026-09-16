@@ -1,10 +1,5 @@
 import { readdirSync } from 'fs';
-
-export const kebabToTitleCase = (string) =>
-  string
-    .split('-')
-    .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
-    .join(' ');
+import { kebabToTitleCase } from '@alma-oss/spirit-common/utilities/kebabToTitleCase';
 
 export const getListOfNestedDirectories = (path, mainFile) => [
   ...readdirSync(path, { withFileTypes: true })
