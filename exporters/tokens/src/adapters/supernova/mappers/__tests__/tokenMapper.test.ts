@@ -2,6 +2,7 @@ import {
   type ColorToken,
   type DimensionToken,
   type FontSizeToken,
+  type LetterSpacingToken,
   type LineHeightToken,
   type RadiusToken,
   type SizeToken,
@@ -221,6 +222,36 @@ describe('tokenMapper', () => {
           adapter: 'supernova',
           originalId: 'lineHeightRef',
           originalType: 'LineHeight',
+        },
+      });
+    });
+
+    it('maps a letterSpacing token to the internal model', () => {
+      const token = {
+        id: 'letterSpacingRef',
+        name: 'letter-spacing-body',
+        tokenType: TokenType.letterSpacing,
+        parentGroupId: '1',
+        value: { measure: 0.5, unit: 'Pixels', referencedTokenId: null },
+      } as unknown as LetterSpacingToken;
+
+      const result = mapToken(token, exampleGroups);
+
+      expect(result).toEqual({
+        id: 'letterSpacingRef',
+        name: 'letter-spacing-body',
+        type: TokenTypeEnum.LetterSpacing,
+        value: { type: 'number', value: 0.5, unit: 'Pixels' },
+        description: undefined,
+        metadata: {
+          brandId: undefined,
+          device: undefined,
+          groupPath: ['Grid', 'spacing'],
+        },
+        source: {
+          adapter: 'supernova',
+          originalId: 'letterSpacingRef',
+          originalType: 'LetterSpacing',
         },
       });
     });
