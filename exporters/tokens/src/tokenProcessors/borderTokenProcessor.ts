@@ -11,12 +11,11 @@ type BorderTokenProcessorContext = {
 };
 
 /**
- * Processes border and borderWidth tokens (no rem conversion).
- *
- * `borderWidth`'s value and `border`'s nested `.value.width` are read
- * through the adapter (see #DS-2335); color/position/style remain unmapped
- * because `processBorderToken` ignores them. If the adapter cannot map the
- * width, the processor falls back to the native value.
+ * Processes border and borderWidth tokens (no rem conversion). Both are read
+ * through the adapter (see #DS-2335): `borderWidth`'s value and `border`'s
+ * nested `.value.width`. Color/position/style remain unmapped because this
+ * processor ignores them. The native fallback branches exist only for
+ * defense-in-depth should `mapToken` ever regress.
  *
  * @param borderToken - The border or borderWidth token to process
  * @param ctx - Processing context with token groups and output options
@@ -33,17 +32,19 @@ export const processBorderToken = (
   const mappedValue = designToken?.value.type === 'number' ? designToken.value : undefined;
 
   let value: number | undefined;
-  let rawUnit: string | undefined;
+  // The adapter normalizes the unit to CSS form already; the native fallback
+  // branches below still need CSSHelper to do that conversion themselves.
+  let unit: string | undefined;
 
   if (mappedValue) {
     value = mappedValue.value;
-    rawUnit = mappedValue.unit;
+    unit = mappedValue.unit;
   } else if ('width' in borderToken.value && borderToken.value.width) {
     value = borderToken.value.width.measure;
-    rawUnit = borderToken.value.width.unit;
+    unit = CSSHelper.unitToCSS(borderToken.value.width.unit);
   } else if ('measure' in borderToken.value) {
     value = borderToken.value.measure;
-    rawUnit = borderToken.value.unit;
+    unit = borderToken.value.unit ? CSSHelper.unitToCSS(borderToken.value.unit as unknown as Unit) : undefined;
   }
 
   if (value === undefined) {
@@ -51,7 +52,6 @@ export const processBorderToken = (
   }
 
   const processedNumber = handleSpecialCase(name, value);
-  const unit = rawUnit ? CSSHelper.unitToCSS(rawUnit as unknown as Unit) : undefined;
 
   return formatTokenStyleByOutput(name, processedNumber, hasJsOutput, unit, false);
 };
