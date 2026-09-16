@@ -1,6 +1,7 @@
 import {
   type ColorToken,
   type DimensionToken,
+  type FontSizeToken,
   type RadiusToken,
   type SizeToken,
   type SpaceToken,
@@ -159,6 +160,36 @@ describe('tokenMapper', () => {
           adapter: 'supernova',
           originalId: 'sizeRef',
           originalType: 'Size',
+        },
+      });
+    });
+
+    it('maps a fontSize token to the internal model', () => {
+      const token = {
+        id: 'fontSizeRef',
+        name: 'font-size-body',
+        tokenType: TokenType.fontSize,
+        parentGroupId: '1',
+        value: { measure: 16, unit: 'Pixels', referencedTokenId: null },
+      } as unknown as FontSizeToken;
+
+      const result = mapToken(token, exampleGroups);
+
+      expect(result).toEqual({
+        id: 'fontSizeRef',
+        name: 'font-size-body',
+        type: TokenTypeEnum.FontSize,
+        value: { type: 'number', value: 16, unit: 'Pixels' },
+        description: undefined,
+        metadata: {
+          brandId: undefined,
+          device: undefined,
+          groupPath: ['Grid', 'spacing'],
+        },
+        source: {
+          adapter: 'supernova',
+          originalId: 'fontSizeRef',
+          originalType: 'FontSize',
         },
       });
     });
