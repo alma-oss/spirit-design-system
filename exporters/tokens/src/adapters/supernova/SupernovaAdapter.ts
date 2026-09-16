@@ -1,5 +1,6 @@
 import { type RemoteVersionIdentifier, type Supernova } from '@supernovaio/sdk-exporters';
 import { filterByBrandId } from '../../filters/brandIdFilter';
+import { filterExcludedTokens } from '../../filters/excludedTokens';
 import { type DesignToken, type TokenCollection } from '../../core/types';
 import { type AdapterConfig, type SourceAdapter } from '../SourceAdapter';
 import { mapGroup } from './mappers/groupMapper';
@@ -27,7 +28,8 @@ export class SupernovaAdapter implements SourceAdapter {
       tokenGroups = filterByBrandId(tokenGroups, brandId);
     }
 
-    const mappedTokens = tokens
+    // Same exclusion rules as the native pipeline (e.g. internal `figma-` tokens), applied before mapping.
+    const mappedTokens = filterExcludedTokens(tokens)
       .map((token) => mapToken(token, tokenGroups))
       .filter((token): token is DesignToken => token !== null);
 
