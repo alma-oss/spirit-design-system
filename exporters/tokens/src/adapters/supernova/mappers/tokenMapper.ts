@@ -17,6 +17,7 @@ type NumericValueToken = Token & { value?: { measure: number; unit: unknown } };
 const NUMERIC_TOKEN_TYPES: Partial<Record<TokenType, TokenTypeEnum>> = {
   [TokenType.dimension]: TokenTypeEnum.Dimension,
   [TokenType.radius]: TokenTypeEnum.Radius,
+  [TokenType.space]: TokenTypeEnum.Space,
 };
 
 const buildGroupPath = (token: Token, tokenGroups: Array<SupernovaTokenGroup>): string[] => {

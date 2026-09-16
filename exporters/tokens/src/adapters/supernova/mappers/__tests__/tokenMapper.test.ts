@@ -2,6 +2,7 @@ import {
   type ColorToken,
   type DimensionToken,
   type RadiusToken,
+  type SpaceToken,
   type StringToken,
   TokenType,
 } from '@supernovaio/sdk-exporters';
@@ -97,6 +98,36 @@ describe('tokenMapper', () => {
           adapter: 'supernova',
           originalId: 'radiusRef',
           originalType: 'BorderRadius',
+        },
+      });
+    });
+
+    it('maps a space token to the internal model', () => {
+      const token = {
+        id: 'spaceRef',
+        name: 'space-small',
+        tokenType: TokenType.space,
+        parentGroupId: '1',
+        value: { measure: 8, unit: 'Pixels', referencedTokenId: null },
+      } as unknown as SpaceToken;
+
+      const result = mapToken(token, exampleGroups);
+
+      expect(result).toEqual({
+        id: 'spaceRef',
+        name: 'space-small',
+        type: TokenTypeEnum.Space,
+        value: { type: 'number', value: 8, unit: 'Pixels' },
+        description: undefined,
+        metadata: {
+          brandId: undefined,
+          device: undefined,
+          groupPath: ['Grid', 'spacing'],
+        },
+        source: {
+          adapter: 'supernova',
+          originalId: 'spaceRef',
+          originalType: 'Space',
         },
       });
     });
