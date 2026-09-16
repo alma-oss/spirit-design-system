@@ -18,6 +18,7 @@ const NUMERIC_TOKEN_TYPES: Partial<Record<TokenType, TokenTypeEnum>> = {
   [TokenType.dimension]: TokenTypeEnum.Dimension,
   [TokenType.radius]: TokenTypeEnum.Radius,
   [TokenType.space]: TokenTypeEnum.Space,
+  [TokenType.size]: TokenTypeEnum.Size,
 };
 
 const buildGroupPath = (token: Token, tokenGroups: Array<SupernovaTokenGroup>): string[] => {
