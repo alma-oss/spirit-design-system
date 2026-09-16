@@ -14,6 +14,9 @@ export const componentSegments = {
 export const routes = {
   homepage: ROUTE_DELIMITER,
   components: `${ROUTE_DELIMITER}components`,
+  icons: `${ROUTE_DELIMITER}icons`,
+  helpers: `${ROUTE_DELIMITER}helpers`,
+  helper: (helperName: string) => `${routes.helpers}${ROUTE_DELIMITER}${helperName}`,
   component: (componentName: string) => `${routes.components}/${componentNameToSlug(componentName)}`,
   guidelines: (componentName: string) =>
     `${routes.component(componentName)}${ROUTE_DELIMITER}${componentSegments.guidelines}`,

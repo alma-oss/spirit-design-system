@@ -17,6 +17,7 @@
     "types": "tsc"
   },
   "dependencies": {
+    "@alma-oss/spirit-common": "workspace:^",
     "@alma-oss/spirit-design-tokens": "workspace:^",
     "@alma-oss/spirit-icons": "workspace:^",
     "@alma-oss/spirit-web": "workspace:^",
