@@ -121,7 +121,7 @@ and allows users to easily close it.
 
 ### Hidden Title
 
-Even in cases you don't need the title to be visible you should provide an accessible name for the dialog, e.g. using
+Even in cases you don't need the title to be visible you should provide an accessible name for the dialog, for example using
 the `aria-label` attribute on the `<dialog>` element:
 
 ```html
@@ -204,7 +204,7 @@ accordingly:
 
 ## Opening the Modal
 
-Use our JavaScript plugin to open your Modal, e.g.:
+Use our JavaScript plugin to open your Modal, for example:
 
 ```html
 <button
@@ -248,7 +248,7 @@ Scrolling inside ModalDialog can be turned on by adding the `ModalDialog--scroll
 ### Scrolling with ScrollView
 
 Additionally, you can wrap the ModalBody content in a [ScrollView][scroll-view] to take over the responsibility for
-scrolling, e.g.:
+scrolling, for example:
 
 ```html
 <article class="ModalDialog ModalDialog--scrollable">
@@ -285,7 +285,7 @@ The custom properties fall back to the previous breakpoint using the mobile-firs
 `--modal-dialog-height-tablet` while leaving `--modal-dialog-height-desktop` unset, the value will be used for
 both tablet and desktop screens.
 
-This is useful for Modals with dynamic content, e.g. a list of items that can be added or removed, or a multistep wizard.
+This is useful for Modals with dynamic content, for example a list of items that can be added or removed, or a multistep wizard.
 
 ```html
 <article

@@ -21,7 +21,7 @@ The Node.js v18 is no longer supported. The minimum required Node.js version is 
 
 ### Dropped Support for React.js 17
 
-The React.js v17 is no longer supported. The minimum required React.js version is 18.
+The React v17 is no longer supported. The minimum required React version is 18.
 
 ### Change Package npm Organization to `@alma-oss`
 

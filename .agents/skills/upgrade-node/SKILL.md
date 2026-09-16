@@ -24,7 +24,7 @@ in migration guides.
 
 - **Scan first.** Always run `scan-node-refs.mjs` before asking questions or editing files.
 - **Confirm before editing.** Show a change summary and get user approval.
-- **Git precedents, not memory.** Inspect recent Node upgrade commits in this repo.
+- **Git precedents, not memory.** Inspect recent Node upgrade commits in this repository.
 
 ---
 

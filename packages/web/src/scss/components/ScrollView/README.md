@@ -228,7 +228,7 @@ Depending on user's operating system and browser, the scrollbar may be hidden by
 
 👉 Unless you decide to [hide the scrollbar](#hiding-the-scrollbar), you may need to provide spacing for the scrollbar, so it does
 not cover your content when visible. For example, having a horizontal ScrollView, you can do so by adding a margin or padding utility
-class to your content, e.g. `mb-700` or `pb-700`.
+class to your content, for example `mb-700` or `pb-700`.
 
 ```html
 <div class="ScrollView ScrollView--horizontal" data-spirit-toggle="scrollView" data-spirit-direction="horizontal">
@@ -245,7 +245,7 @@ class to your content, e.g. `mb-700` or `pb-700`.
 
 To hide the scrollbar, add the `ScrollView--hideScrollbar` class to the container element.
 
-⚠️ Make sure that the content is still accessible to users who don’t use a pointing device with support of horizontal scrolling, e.g. by providing keyboard navigation.
+⚠️ Make sure that the content is still accessible to users who don't use a pointing device with support of horizontal scrolling, for example by providing keyboard navigation.
 
 ```html
 <div
@@ -279,7 +279,7 @@ See [WAI Scrollable content guidelines][wai-scrollable-content] for more informa
 | Method                | Description                                                                                                                                       |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `getInstance`         | _Static_ method which allows you to get the ScrollView instance associated with a DOM element.                                                    |
-| `getOrCreateInstance` | _Static_ method which allows you to get the ScrollView instance associated with a DOM element, or create a new one in case it wasn’t initialized. |
+| `getOrCreateInstance` | _Static_ method which allows you to get the ScrollView instance associated with a DOM element, or create a new one in case it wasn't initialized. |
 
 [container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
 [wai-scrollable-content]: https://www.w3.org/WAI/standards-guidelines/act/rules/0ssw9k/

@@ -2,7 +2,7 @@
 
 > Analytic tools for Spirit Design System.
 
-Spirit-analytics is a simple CLI tool, which parses a repository with [react-scanner][react-scanner].
+Spirit-analytics is a simple command-line tool, which parses a repository with [react-scanner][react-scanner].
 The output is a JSON file or files with collected data.
 
 ## Install
@@ -35,7 +35,7 @@ By default, the output will be saved into the `.scanner` directory, but you can 
 spirit-analytics --output path/to/folder
 ```
 
-The [react-scanner][react-scanner] requires a [config file][react-scanner-config] to make it work, `spirit-analytics` has a default config inside, but if you need to, you can use your own config:
+The [react-scanner][react-scanner] requires a [config file][react-scanner-config] to make it work, `spirit-analytics` has a default config inside, but if you need, you can use your own config:
 
 ```shell
 spirit-analytics --config path/to/config
@@ -76,13 +76,13 @@ export default {
 
 #### Twig
 
-| Option             | Type                  | Description                                                                                                                                                                                                                                                                                                                                   |
-| ------------------ | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| crawlFrom          | `string`              | The path of the directory to start crawling from.                                                                                                                                                                                                                                                                                             |
-| exclude            | `array` or `function` | Each array item should be a string or a regex. When crawling, if directory name matches exactly the string item or matches the regex item, it will be excluded from crawling. For more complex scenarios, exclude can be a a function that accepts a directory name and should return true if the directory should be excluded from crawling. |
-| configFile         | `string`              | Path to the local `spirit-web-twig.yml` configuration file.                                                                                                                                                                                                                                                                                   |
-| outputFile         | `string`              | Path to the file where the result of the analysis will be stored.                                                                                                                                                                                                                                                                             |
-| coreComponentsPath | `string`              | Path to the directory where are core Spirit components installed.                                                                                                                                                                                                                                                                             |
+| Option             | Type                  | Description                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------ | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| crawlFrom          | `string`              | The path of the directory to start crawling from.                                                                                                                                                                                                                                                                                                                       |
+| exclude            | `array` or `function` | Each array item should be a string or a regular expression. When crawling, if directory name matches exactly the string item or matches the regular expression item, it will be excluded from crawling. For more complex scenarios, exclude can be a a function that accepts a directory name and should return true if the directory should be excluded from crawling. |
+| configFile         | `string`              | Path to the local `spirit-web-twig.yml` configuration file.                                                                                                                                                                                                                                                                                                             |
+| outputFile         | `string`              | Path to the file where the result of the analysis will be stored.                                                                                                                                                                                                                                                                                                       |
+| coreComponentsPath | `string`              | Path to the directory where are core Spirit components installed.                                                                                                                                                                                                                                                                                                       |
 
 [react-scanner]: https://github.com/moroshko/react-scanner
 [react-scanner-config]: https://github.com/moroshko/react-scanner#config-file

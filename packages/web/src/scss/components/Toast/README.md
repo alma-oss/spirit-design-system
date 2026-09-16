@@ -83,7 +83,7 @@ Example:
 ### Responsive Alignment
 
 The Toast container can be aligned differently on different screen sizes. Use the `Toast--<breakpoint>--<alignmentX/Y>`
-modifiers to change the alignment of the Toast component starting on a specific [breakpoint][dictionary-breakpoint], e.g. `Toast--tablet--top`,
+modifiers to change the alignment of the Toast component starting on a specific [breakpoint][dictionary-breakpoint], for example `Toast--tablet--top`,
 `Tablet--desktop--left`, etc. (leave the breakpoint empty for alignment on all screen sizes, including mobile screens).
 
 Example:
@@ -101,7 +101,7 @@ Example:
 Positioning becomes trickier on mobile screens due to the presence of notches, rounded corners, and the virtual
 keyboard. The Toast component tries to find the best position to be visible using the following detection mechanisms:
 
-1. On devices with rounded displays and/or notches (e.g. iPhone X and newer), the Toast component is pushed inwards to
+1. On devices with rounded displays and/or notches (for example iPhone X and newer), the Toast component is pushed inwards to
    avoid the rounded corners. The `viewport-fit="cover"` meta tag is required for this feature to work:
 
    ```html
@@ -166,7 +166,7 @@ the queue and are only accessible by closing the newer ones.
 👉 Please note only the _visible_ ToastBar components are scrollable. Collapsed items are not accessible until visible
 items are dismissed.
 
-👉 For the sake of simplicity, the collapsible items limit cannot be configured at the moment.
+👉 For the sake of simplicity, the collapsible items limit cannot be configured now.
 
 ## ToastBar
 
@@ -277,7 +277,7 @@ JavaScript plugin.
 
 #### Showing the Static ToastBar
 
-Use our JavaScript plugin to show a Toast **that is present in the DOM,** e.g.:
+Use our JavaScript plugin to show a Toast **that is present in the DOM,** for example:
 
 ```html
 <button
@@ -446,12 +446,12 @@ toast.show();
 
 ## JavaScript Plugin API
 
-| Method                | Description                                                                                                                                            |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `getInstance`         | _Static_ method which allows you to get the Toast instance associated with a ToastBar DOM element.                                                     |
-| `getOrCreateInstance` | _Static_ method which allows you to get the Toast instance associated with a ToastBar DOM element, or create a new one in case it wasn’t initialized.  |
-| `hide`                | Hides the toast element. Returns to the caller before the toast has actually been hidden (i.e. before the `hidden.toast` event occurs).                |
-| `show`                | Reveals or creates the toast element. **Returns to the caller before the toast has actually been shown** (i.e. before the `shown.toast` event occurs). |
+| Method                | Description                                                                                                                                               |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `getInstance`         | _Static_ method which allows you to get the Toast instance associated with a ToastBar DOM element.                                                        |
+| `getOrCreateInstance` | _Static_ method which allows you to get the Toast instance associated with a ToastBar DOM element, or create a new one in case it wasn't initialized.     |
+| `hide`                | Hides the toast element. Returns to the caller before the toast has actually been hidden (that is before the `hidden.toast` event occurs).                |
+| `show`                | Reveals or creates the toast element. **Returns to the caller before the toast has actually been shown** (that is before the `shown.toast` event occurs). |
 
 ```js
 const toast = Toast.getInstance('#example'); // Returns a toast instance

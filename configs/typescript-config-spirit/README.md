@@ -27,7 +27,7 @@ It is worth noting that when you extend a `tsconfig.json` file, the properties i
 And **when both files define the same property, the child `tsconfig.json` wins**.
 
 However, this is not the case with `include` and `exclude`.
-If you define them in the child `tsconfig.json` file, that **exact value will be used; it won’t be merged** with the value from the base `tsconfig.json` file.
+If you define them in the child `tsconfig.json` file, that **exact value will be used; it won't be merged** with the value from the base `tsconfig.json` file.
 
 ### Base Configuration
 

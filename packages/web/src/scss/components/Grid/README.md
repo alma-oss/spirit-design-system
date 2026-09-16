@@ -63,7 +63,7 @@ equally distribute 5 items in a row.
 ## Custom Spacing
 
 Use CSS custom properties to define custom gutters between items. Set the `--grid-spacing-x` or the `--grid-spacing-y`
-property to one of spacing token values defined on the `:root` element, e.g. `--grid-spacing-y: var(--spirit-space-1200)`.
+property to one of spacing token values defined on the `:root` element, for example `--grid-spacing-y: var(--spirit-space-1200)`.
 This will set the spacing between rows to `var(--spirit-space-1200)` for all breakpoints.
 
 ```html
@@ -80,10 +80,10 @@ This will set the spacing between rows to `var(--spirit-space-1200)` for all bre
 ℹ️ We highly discourage you from using absolute values like `--grid-spacing-y: 1rem`. It will work, but you will lose
 the consistency between the spacing and the design tokens.
 
-If you need to set custom spacing from a specific breakpoint, use the `--grid-spacing-x-{breakpoint}` or the `--grid-spacing-y-{breakpoint}` property,
-e.g. `--grid-spacing-y-tablet: var(--spirit-space-900)`. The breakpoint value must be one of the breakpoint tokens
+To set custom spacing from a specific breakpoint, use the `--grid-spacing-x-{breakpoint}` or the `--grid-spacing-y-{breakpoint}` property,
+for example `--grid-spacing-y-tablet: var(--spirit-space-900)`. The breakpoint value must be one of the breakpoint tokens
 except for the `mobile` breakpoint where you don't need the suffix at all. The spacing is set to all larger breakpoints
-automatically if you don't set them explicitly. E.g. if you set only `--grid-spacing-y-tablet: var(--spirit-space-900)`
+automatically if you don't set them explicitly. For example if you set only `--grid-spacing-y-tablet: var(--spirit-space-900)`
 the spacing will be set to `var(--spirit-space-900)` for `tablet` and `desktop` breakpoints while on the `mobile`
 breakpoint the default spacing will be used.
 
@@ -162,7 +162,7 @@ Responsive Horizontal and Vertical alignment:
 
 Grid Item is a wrapper for Grid items. It allows you to configure your Grid structure
 as you wish. Use CSS variables to set a column where the Grid Item should start or end.
-If you want to set how to item should span, set the value as `span X` where X is the
+To set how to item should span, set the value as `span X` where X is the
 number of columns the item should span, like this `--grid-item-column-start: span 2`.
 
 These variables are available:

@@ -72,6 +72,6 @@ The script reports:
 
 ## Prerequisites
 
-- Node.js matching the current repo minimum (Yarn `plugin-engines` enforces it)
+- Node.js matching the current repository minimum (Yarn `plugin-engines` enforces it)
 - `yarn` available in PATH
 - Network for `npm view node@<major> version` when resolving the latest LTS patch

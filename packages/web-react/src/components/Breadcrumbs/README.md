@@ -96,7 +96,7 @@ and [escape hatches][readme-escape-hatches].
 ### Dealing with Long Titles
 
 When you need to shorten the title of the BreadcrumbsItem the preferred way is to use platform native helpers.
-There are multiple ways in JavaScript which will truncate a string for you like `.slice` or `.substring`, e.g. `str.slice(0, num) + '…'`.
+There are multiple ways in JavaScript which will truncate a string for you like `.slice` or `.substring`, for example `str.slice(0, num) + '…'`.
 
 Additional option is to use helper class `text-truncate` with defined width.
 

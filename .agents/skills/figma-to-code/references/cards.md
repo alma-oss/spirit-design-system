@@ -83,7 +83,7 @@ Connect maps to `CardLink`.
 - Use an inner Flex only when artwork alignment must differ from the rest of the Card.
 - `CardMedia` owns image/video presentation (size, fit, filled height, background). The source prop
   is `hasFilledHeight` (not a class-name prop from older README wording).
-- Images: use Figma MCP assets, repo files, or the product CDN. Do not use `picsum.photos`. Decide
+- Images: use Figma MCP assets, repository files, or the product CDN. Do not use `picsum.photos`. Decide
   informative vs decorative `alt` explicitly (`alt=""` when decorative).
 
 ## Footer and Lists
