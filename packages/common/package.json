@@ -33,6 +33,10 @@
     "./utilities/cssLengthToPixels": {
       "types": "./src/utilities/cssLengthToPixels.ts",
       "default": "./src/utilities/cssLengthToPixels.ts"
+    },
+    "./utilities/kebabToTitleCase": {
+      "types": "./src/utilities/kebabToTitleCase.ts",
+      "default": "./src/utilities/kebabToTitleCase.ts"
     }
   },
   "keywords": [
