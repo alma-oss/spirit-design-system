@@ -92,9 +92,42 @@ const mapNumericToken = (
 };
 
 /**
- * Maps a Supernova token to the internal model. Only `string` tokens and the
- * numeric types listed in `NUMERIC_TOKEN_TYPES` are supported so far - other
- * types return `null` and are filtered out by the adapter, the same way
+ * Maps a `border` token. Only `.value.width` is mapped - `processBorderToken`
+ * never reads color/position/style, so that's the only part that needs to
+ * flow through the internal model for now. Returns `null` when the width
+ * measure is missing, same convention as `mapNumericToken`.
+ *
+ * @param token
+ * @param tokenGroups
+ */
+const mapBorderToken = (
+  token: Token & { value?: { width?: { measure: number; unit: unknown } } },
+  tokenGroups: Array<SupernovaTokenGroup>,
+): DesignToken | null => {
+  const measure = token.value?.width?.measure;
+  if (measure === undefined) {
+    return null;
+  }
+
+  return {
+    id: token.id,
+    name: token.name,
+    type: TokenTypeEnum.Border,
+    value: {
+      type: 'number',
+      value: measure,
+      unit: token.value?.width?.unit === undefined ? undefined : String(token.value.width.unit),
+    },
+    description: token.description || undefined,
+    metadata: buildMetadata(token, tokenGroups),
+    source: buildSource(token),
+  };
+};
+
+/**
+ * Maps a Supernova token to the internal model. Only `string` tokens, `border`,
+ * and the numeric types listed in `NUMERIC_TOKEN_TYPES` are supported so far -
+ * other types return `null` and are filtered out by the adapter, the same way
  * `stylesGenerator.tokenToStyleByType` silently skips types it doesn't have a
  * case for. Support is added type by type as each generator/processor is
  * migrated to consume `DesignToken` directly.
@@ -105,6 +138,10 @@ const mapNumericToken = (
 export const mapToken = (token: Token, tokenGroups: Array<SupernovaTokenGroup>): DesignToken | null => {
   if (token.tokenType === TokenType.string) {
     return mapStringToken(token as StringToken, tokenGroups);
+  }
+
+  if (token.tokenType === TokenType.border) {
+    return mapBorderToken(token, tokenGroups);
   }
 
   const numericType = NUMERIC_TOKEN_TYPES[token.tokenType];

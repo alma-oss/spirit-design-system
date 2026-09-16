@@ -13,10 +13,10 @@ type BorderTokenProcessorContext = {
 /**
  * Processes border and borderWidth tokens (no rem conversion).
  *
- * `borderWidth`'s value is read through the adapter (see #DS-2335); `border`
- * still reads its nested `.value.width` natively, since the adapter doesn't
- * map that composite shape yet - `mapToken` returning a non-numeric result
- * for it is exactly the "not migrated yet" case, not "no value".
+ * `borderWidth`'s value and `border`'s nested `.value.width` are read
+ * through the adapter (see #DS-2335); color/position/style remain unmapped
+ * because `processBorderToken` ignores them. If the adapter cannot map the
+ * width, the processor falls back to the native value.
  *
  * @param borderToken - The border or borderWidth token to process
  * @param ctx - Processing context with token groups and output options
