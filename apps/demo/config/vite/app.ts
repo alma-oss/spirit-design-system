@@ -35,6 +35,7 @@ export default defineConfig({
       partialDirectory: [
         join(pathRelativeToPackageRoot, 'partials'),
         join(pathRelativeToRepositoryRoot, 'packages/web/src/scss/components'),
+        join(pathRelativeToRepositoryRoot, 'packages/web/src/scss/helpers'),
       ],
       helpers: {
         setVar: (...data) => {
