@@ -17,6 +17,7 @@ import {
 import { replaceTranslationParams } from '../../translations';
 import { type ForwardRefComponent } from '../../types';
 import { Dropdown, DropdownPopover } from '../Dropdown';
+import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
 import { InputContainer } from '../InputContainer';
@@ -49,6 +50,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     addButtonLabel = t('picker.add'),
     children,
     closeButtonLabel = t('common.close'),
+    contextualHelp,
     emptySelectionLabel,
     hasValidationIcon,
     helperText,
@@ -85,7 +87,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
   });
   const { classProps } = usePickerStyleProps();
   const { styleProps, props: transferProps } = useStyleProps(restProps);
-  const { labelId, pickerId, popoverId, selectionId, tagDescriptionId } = usePickerId(id);
+  const { contextualHelpId, labelId, pickerId, popoverId, selectionId, tagDescriptionId } = usePickerId(id);
 
   const collection = useCollection({ children });
 
@@ -223,6 +225,9 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
         validationState,
         label: { isLabelHidden },
         inputContainer: { variant },
+        contextualHelp: {
+          id: contextualHelpId,
+        },
       }}
     >
       <UniversalProvider
@@ -233,9 +238,12 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
       >
         <div {...styleProps} className={classNames(classProps.root, styleProps.className)} {...transferProps}>
           <Stack spacing="space-400">
-            <Label {...labelProps} id={labelId} elementType="span">
-              {label}
-            </Label>
+            <Flex alignmentY="center" spacingX="space-100">
+              <Label {...labelProps} id={labelId} elementType="span">
+                {label}
+              </Label>
+              {contextualHelp}
+            </Flex>
             <Dropdown {...dropdownProps} id={popoverId} isOpen={isOpen} onToggle={onToggle} triggerRef={triggerRef}>
               <InputContainer role="group" aria-label={label}>
                 <UNSTABLE_PickerSelection
