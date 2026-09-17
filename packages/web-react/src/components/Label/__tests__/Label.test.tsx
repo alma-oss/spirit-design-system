@@ -9,7 +9,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { ContextPropsProvider } from '../../../context';
+import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../../context';
 import Label from '../Label';
 
 describe('Label', () => {
@@ -34,6 +34,32 @@ describe('Label', () => {
     render(<Label>{label}</Label>);
 
     expect(screen.getByText(label)).toBeInTheDocument();
+  });
+
+  it('should use medium size by default', () => {
+    render(<Label>Text</Label>);
+
+    expect(screen.getByText('Text')).toHaveClass('Label--medium');
+  });
+
+  it('should use FormFieldsContext size when no direct prop', () => {
+    render(
+      <UniversalProvider values={[[FormFieldsContext, { size: 'small' }]]}>
+        <Label>Text</Label>
+      </UniversalProvider>,
+    );
+
+    expect(screen.getByText('Text')).toHaveClass('Label--small');
+  });
+
+  it('should use direct size over FormFieldsContext', () => {
+    render(
+      <UniversalProvider values={[[FormFieldsContext, { size: 'small' }]]}>
+        <Label size="xlarge">Text</Label>
+      </UniversalProvider>,
+    );
+
+    expect(screen.getByText('Text')).toHaveClass('Label--xlarge');
   });
 
   it('should use context elementType when no direct prop', () => {

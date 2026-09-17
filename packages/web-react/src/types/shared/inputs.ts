@@ -2,6 +2,7 @@ import type { AriaRole, ElementType, ReactNode } from 'react';
 import { type InputPositions } from '../../constants';
 import {
   type FillVariantDictionaryType,
+  type SizeExtendedDictionaryType,
   type SizesDictionaryType,
   type ValidationStatesDictionaryType,
 } from './dictionaries';
@@ -37,7 +38,7 @@ export interface FormFieldContextValue {
   isLabelHidden?: boolean;
   /** Whether the field is required (label shows required indicator). */
   isRequired?: boolean;
-  /** Shared field size for context-aware descendants (e.g. InputContainer). */
+  /** Shared field size for context-aware descendants (e.g. InputContainer and Label). */
   size?: SizesDictionaryType;
   /** Current validation state; passed to ValidationText for styling. */
   validationState?: ValidationState;
@@ -56,6 +57,8 @@ export type LabelStyleProps = FormFieldStyleProps &
     hasPointerCursor?: boolean;
     /** Whether the label uses the element-stretched helper (item mode). */
     isStretched?: boolean;
+    /** Label typography size; inherits from form-field context when available. */
+    size?: SizeExtendedDictionaryType;
   };
 
 export type ValidationTextStyleProps = Pick<FormFieldContextValue, 'isDisabled'>;

@@ -1,6 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
+import { SizesExtended } from '../../../constants';
 import ReadMe from '../README.md?raw';
 import { Label } from '..';
 
@@ -37,6 +38,13 @@ const meta: Meta<typeof Label> = {
     isRequired: {
       control: 'boolean',
     },
+    size: {
+      control: 'select',
+      options: Object.values(SizesExtended),
+      table: {
+        defaultValue: { summary: SizesExtended.MEDIUM },
+      },
+    },
   },
   args: {
     children: 'Label text',
@@ -46,6 +54,7 @@ const meta: Meta<typeof Label> = {
     isDisabled: false,
     isLabelHidden: false,
     isRequired: false,
+    size: SizesExtended.MEDIUM,
   },
 };
 

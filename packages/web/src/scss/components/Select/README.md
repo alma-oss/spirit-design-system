@@ -4,7 +4,7 @@ Basic usage:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-simple" class="Label">Label</label>
+  <label for="select-simple" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-simple" name="simple">
       <option value="1">Option 1</option>
@@ -26,7 +26,7 @@ Variants:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-variant-fill" class="Label">Fill (default)</label>
+  <label for="select-variant-fill" class="Label Label--medium">Fill (default)</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-variant-fill" name="variantFill">
       <option value="">Placeholder</option>
@@ -41,7 +41,7 @@ Variants:
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-variant-outline" class="Label">Outline</label>
+  <label for="select-variant-outline" class="Label Label--medium">Outline</label>
   <div class="InputContainer InputContainer--outline InputContainer--medium">
     <select id="select-variant-outline" name="variantOutline">
       <option value="">Placeholder</option>
@@ -60,7 +60,7 @@ Sizes (please note the icon size):
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-size-small" class="Label">Small</label>
+  <label for="select-size-small" class="Label Label--small">Small</label>
   <div class="InputContainer InputContainer--fill InputContainer--small">
     <select id="select-size-small" name="size-small">
       <option value="1">Option 1</option>
@@ -75,7 +75,7 @@ Sizes (please note the icon size):
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-size-medium" class="Label">Medium (default)</label>
+  <label for="select-size-medium" class="Label Label--medium">Medium (default)</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-size-medium" name="size-medium">
       <option value="1">Option 1</option>
@@ -90,7 +90,7 @@ Sizes (please note the icon size):
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-size-large" class="Label">Large</label>
+  <label for="select-size-large" class="Label Label--large">Large</label>
   <div class="InputContainer InputContainer--fill InputContainer--large">
     <select id="select-size-large" name="size-large">
       <option value="1">Option 1</option>
@@ -109,7 +109,7 @@ Required select (requires a placeholder option):
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-required" class="Label Label--required">Label</label>
+  <label for="select-required" class="Label Label--medium Label--required">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-required" name="required" required>
       <option value="" selected>Select an option</option>
@@ -129,7 +129,7 @@ Hidden label:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-hidden-label" class="Label accessibility-hidden">Label</label>
+  <label for="select-hidden-label" class="Label Label--medium accessibility-hidden">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-hidden-label" name="hiddenLabel">
       <option value="1">Option 1</option>
@@ -156,7 +156,7 @@ sure users give all needed details before sending the form.
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-placeholder" class="Label">Label</label>
+  <label for="select-placeholder" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-placeholder" name="placeholder">
       <option value="" selected>Select an option</option>
@@ -172,7 +172,7 @@ sure users give all needed details before sending the form.
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-placeholder-disabled" class="Label Label--required">Label</label>
+  <label for="select-placeholder-disabled" class="Label Label--medium Label--required">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-placeholder-disabled" name="placeholderDisabled" required>
       <option value="" selected disabled>Select an option [selected & disabled]</option>
@@ -199,7 +199,7 @@ To add helper text, use the [HelperText][readme-helper-text] component:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-helper-text" class="Label">Label</label>
+  <label for="select-helper-text" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <select id="select-helper-text" name="helperText" aria-describedby="select-helper-text-helper-text">
       <option value="1">Option 1</option>
@@ -227,7 +227,7 @@ or by adding a JS interaction class when controlled by JavaScript (`has-success`
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-success" class="Label">Label</label>
+  <label for="select-success" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--success">
     <select id="select-success" name="success">
       <option value="1">Option 1</option>
@@ -242,7 +242,7 @@ or by adding a JS interaction class when controlled by JavaScript (`has-success`
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-warning" class="Label">Label</label>
+  <label for="select-warning" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--warning">
     <select id="select-warning" name="warning" aria-describedby="select-warning-validation-text">
       <option value="1">Option 1</option>
@@ -258,7 +258,7 @@ or by adding a JS interaction class when controlled by JavaScript (`has-success`
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-danger" class="Label">Label</label>
+  <label for="select-danger" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger">
     <select id="select-danger" name="danger" aria-describedby="select-danger-validation-text">
       <option value="1">Option 1</option>
@@ -279,7 +279,7 @@ or by adding a JS interaction class when controlled by JavaScript (`has-success`
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-warning-icon" class="Label">Label</label>
+  <label for="select-warning-icon" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--warning">
     <select id="select-warning-icon" name="warning" aria-describedby="select-warning-icon-validation-text">
       <option value="1">Option 1</option>
@@ -309,7 +309,7 @@ class when controlled by JavaScript:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-disabled" class="Label Label--disabled">Label</label>
+  <label for="select-disabled" class="Label Label--medium Label--disabled">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <select id="select-disabled" name="disabled" disabled>
       <option value="1">Option 1</option>
@@ -324,7 +324,7 @@ class when controlled by JavaScript:
 </div>
 
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="select-is-disabled" class="Label">Label</label>
+  <label for="select-is-disabled" class="Label Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium is-disabled">
     <select id="select-is-disabled" name="isDisabled" disabled>
       <option value="1">Option 1</option>
