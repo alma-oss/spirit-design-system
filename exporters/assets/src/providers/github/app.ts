@@ -12,7 +12,7 @@ export interface ListedRepository {
 export interface GitHubAppLike {
   eachRepository: {
     iterator: () => AsyncIterable<{
-      octokit: { auth: () => Promise<unknown> };
+      octokit: { auth: (options?: unknown) => Promise<unknown> };
       repository: {
         archived?: boolean;
         default_branch: string;
@@ -29,7 +29,7 @@ export const createGitHubApp = (appId: string, privateKey: string, AppConstructo
 
 export const listAppRepositories = async function* (app: GitHubAppLike): AsyncIterable<ListedRepository> {
   for await (const { octokit, repository } of app.eachRepository.iterator()) {
-    const authentication = await octokit.auth();
+    const authentication = await octokit.auth({ type: 'installation' });
     const token =
       typeof authentication === 'object' && authentication && 'token' in authentication
         ? String(authentication.token)
