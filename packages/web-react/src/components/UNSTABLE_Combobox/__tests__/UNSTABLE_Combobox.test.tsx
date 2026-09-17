@@ -10,7 +10,7 @@ import {
   restPropsTest,
   stylePropsTest,
 } from '@local/tests';
-import { Label } from '../..';
+import { ContextualHelp, Label } from '../..';
 import { FillVariants, ValidationStates } from '../../../constants';
 import { useToggle } from '../../../hooks';
 import { COMBOBOX_INPUT_MIN_WIDTH_CSS_VAR } from '../constants';
@@ -104,6 +104,23 @@ describe('UNSTABLE_Combobox', () => {
 
   formFieldValidationTextContextPropsTest({
     renderComponent: (props) => <TestCombobox {...defaultProps} {...props} />,
+  });
+
+  it('should render contextual help in a tooltip next to the label', () => {
+    render(<TestCombobox contextualHelp={<ContextualHelp>Choose all languages you can use.</ContextualHelp>} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'More information' }));
+
+    expect(screen.getByRole('tooltip')).toHaveTextContent('Choose all languages you can use.');
+  });
+
+  it('should provide a contextual help tooltip id from the field', () => {
+    render(<TestCombobox contextualHelp={<ContextualHelp>Help content</ContextualHelp>} />);
+
+    expect(screen.getByRole('button', { name: 'More information' })).toHaveAttribute(
+      'id',
+      'combobox-test-combobox-contextual-help',
+    );
   });
 
   it('should expose combobox ARIA on the input', () => {

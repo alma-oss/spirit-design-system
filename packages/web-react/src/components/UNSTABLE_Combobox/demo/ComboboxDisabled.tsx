@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
+import { ContextualHelp, UNSTABLE_Combobox } from '../..';
 import { Grid } from '../../Grid';
-import { UNSTABLE_Combobox } from '..';
 import { renderComboboxLanguageItems } from './ComboboxLanguageItems';
 import { useComboboxDemoState } from './useComboboxDemoState';
 
@@ -29,6 +29,11 @@ const ComboboxDisabled = () => {
         {renderComboboxLanguageItems(emptyField.filteredOptions)}
       </UNSTABLE_Combobox>
       <UNSTABLE_Combobox
+        contextualHelp={
+          <ContextualHelp label="More information about Languages">
+            Pick every language you can use at work, not only your native one.
+          </ContextualHelp>
+        }
         emptySelectionLabel="Languages"
         hasEmptyState={selectedField.hasEmptyState}
         id="demo-combobox-disabled-selected"

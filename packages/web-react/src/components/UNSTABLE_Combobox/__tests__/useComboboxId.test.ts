@@ -7,6 +7,7 @@ describe('useComboboxId', () => {
 
     expect(result.current).toEqual({
       comboboxId: 'combobox-languages',
+      contextualHelpId: 'combobox-languages-contextual-help',
       labelId: 'combobox-languages-label',
       inputId: 'combobox-languages-input',
       popoverId: 'combobox-languages-popover',
