@@ -84,7 +84,7 @@ const SplitTagLocationRadius = ({
                   {...getOptionProps(radiusOption)}
                   key={radiusOption}
                   isSelected={isSelected}
-                  endSlot={isSelected ? <Icon name="check-plain" color="selected" boxSize={20} /> : undefined}
+                  {...(isSelected && { endSlot: <Icon name="check-plain" color="selected" /> })}
                 >
                   <Label>{radiusOption}</Label>
                 </Item>

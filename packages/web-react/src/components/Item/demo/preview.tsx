@@ -13,6 +13,7 @@ import ItemHelperText from './ItemHelperText';
 import ItemIcon from './ItemIcon';
 import ItemSearchSuggestions from './ItemSearchSuggestions';
 import ItemSelected from './ItemSelected';
+import ItemSizes from './ItemSizes';
 import ItemText from './ItemText';
 import RadioItem from './RadioItem';
 
@@ -21,6 +22,9 @@ export const Preview = () => (
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <ItemDefault />
+      </DocsSection>
+      <DocsSection title="Sizes">
+        <ItemSizes />
       </DocsSection>
       <DocsSection title="Selected" stackAlignment="stretch">
         <ItemSelected />

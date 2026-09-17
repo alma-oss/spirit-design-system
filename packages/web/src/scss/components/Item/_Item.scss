@@ -32,12 +32,12 @@
         text-decoration: none;
     }
 
-    &:not(.Item--disabled, .disabled, :disabled):active {
+    &:not(.disabled, :disabled):active {
         background-color: theme.$background-color-state-active;
     }
 
     @media (hover: hover) {
-        &:not(.Item--disabled, .disabled, :disabled):hover {
+        &:not(.disabled, :disabled):hover {
             text-decoration: none;
             background-color: theme.$background-color-state-hover;
         }
@@ -49,6 +49,11 @@
 }
 
 @include component-radius-overrides.generate($class-name: 'Item');
+@include dictionaries.generate-sizes(
+    $class-name: 'Item',
+    $dictionary-values: theme.$size-dictionary,
+    $config: theme.$size-config
+);
 
 .Item__content {
     display: grid;
@@ -57,7 +62,10 @@
 }
 
 .Item__slot {
-    --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$slot-icon-size};
+    --#{tokens.$css-variable-prefix}icon-composition-size: var(
+        --#{tokens.$css-variable-prefix}item-icon-size,
+        #{theme.$slot-icon-size}
+    );
 
     display: flex;
 }

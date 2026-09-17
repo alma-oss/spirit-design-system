@@ -1,6 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
+import { SizesExtended } from '../../../constants';
 import { CloseButton } from '../../CloseButton';
 import { Icon } from '../../Icon';
 import { Label } from '../../Label';
@@ -36,6 +37,13 @@ const meta: Meta<typeof Item> = {
       control: 'boolean',
       table: {
         defaultValue: { summary: 'false' },
+      },
+    },
+    size: {
+      control: 'select',
+      options: Object.values(SizesExtended),
+      table: {
+        defaultValue: { summary: SizesExtended.MEDIUM },
       },
     },
     children: {

@@ -225,6 +225,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
         validationState,
         label: { isLabelHidden },
         inputContainer: { variant },
+        item: { size },
         contextualHelp: {
           id: contextualHelpId,
         },

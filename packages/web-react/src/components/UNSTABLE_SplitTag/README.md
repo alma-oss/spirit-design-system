@@ -6,7 +6,7 @@
 
 The component works with Spirit `Tag` segments and `Dropdown` whose `DropdownTrigger` renders as `Tag`.
 Wrapper-level `color`, `size`, `isSubtle`, and `isDisabled` props are provided to nested Tags as context defaults.
-The `size` and `isDisabled` defaults also reach nested ControlButtons. Direct props override context defaults.
+The `size` default also reaches nested Items and ControlButtons, and `isDisabled` reaches both. Direct props override context defaults.
 Keep nested Tags at the uniform wrapper `size`; use the ControlButton size mapping below for nested visual controls.
 
 ```tsx
@@ -85,7 +85,7 @@ const { getOptionProps } = useSplitTagListboxKeyboard({
               {...getOptionProps(radiusOption)}
               key={radiusOption}
               isSelected={isSelected}
-              endSlot={isSelected ? <Icon name="check-plain" color="selected" boxSize={20} /> : undefined}
+              endSlot={isSelected ? <Icon name="check-plain" color="selected" /> : undefined}
             >
               <Label>{radiusOption}</Label>
             </Item>
@@ -146,8 +146,8 @@ Keep all nested Tags at the wrapper `size`. Uniform segment sizing is a SplitTag
 
 ## Disabled State
 
-The `isDisabled` prop disables nested Tag and ControlButton interactions by default. Direct props on nested
-components can override this default when a specific segment must remain interactive.
+The `isDisabled` prop disables nested Tag, Item, and ControlButton interactions by default. Direct props on
+nested components can override this default when a specific segment or dropdown option must remain interactive.
 
 ```tsx
 <UNSTABLE_SplitTag isDisabled>
@@ -163,13 +163,13 @@ components can override this default when a specific segment must remain interac
 
 ## API
 
-| Name         | Type                                                                     | Default   | Required | Description                                               |
-| ------------ | ------------------------------------------------------------------------ | --------- | -------- | --------------------------------------------------------- |
-| `children`   | `ReactNode`                                                              | —         | ✓        | SplitTag segments                                         |
-| `color`      | \[[EmotionColorType][readme-generated-types] \| `neutral` \| `selected`] | `neutral` | ✕        | Default color for nested Tag segments                     |
-| `isDisabled` | `bool`                                                                   | `false`   | ✕        | Default disabled state for nested Tags and ControlButtons |
-| `isSubtle`   | `bool`                                                                   | `false`   | ✕        | Default subtle variant for nested Tags                    |
-| `size`       | [Size Extended dictionary][dictionary-size]                              | `medium`  | ✕        | Context size for nested Tags and ControlButtons           |
+| Name         | Type                                                                     | Default   | Required | Description                                                       |
+| ------------ | ------------------------------------------------------------------------ | --------- | -------- | ----------------------------------------------------------------- |
+| `children`   | `ReactNode`                                                              | —         | ✓        | SplitTag segments                                                 |
+| `color`      | \[[EmotionColorType][readme-generated-types] \| `neutral` \| `selected`] | `neutral` | ✕        | Default color for nested Tag segments                             |
+| `isDisabled` | `bool`                                                                   | `false`   | ✕        | Default disabled state for nested Tags, Items, and ControlButtons |
+| `isSubtle`   | `bool`                                                                   | `false`   | ✕        | Default subtle variant for nested Tags                            |
+| `size`       | [Size Extended dictionary][dictionary-size]                              | `medium`  | ✕        | Context size for nested Tags, Items, and ControlButtons           |
 
 On top of the API options, the component accepts [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

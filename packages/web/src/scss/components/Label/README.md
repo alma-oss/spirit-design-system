@@ -129,7 +129,7 @@ Applies disabled styling to the label.
 ### Inline Field Label with Item Modifier
 
 ```html
-<div class="Item">
+<div class="Item Item--medium">
   <div class="Item__slot" role="presentation">
     <input type="checkbox" id="checkbox-item" class="Checkbox Checkbox--item" />
   </div>
@@ -142,7 +142,7 @@ Applies disabled styling to the label.
 ### Item Label
 
 ```html
-<button type="button" class="Item">
+<button type="button" class="Item Item--medium">
   <span class="Item__content" role="presentation">
     <span class="Label Label--medium element-stretched">Item label</span>
   </span>
