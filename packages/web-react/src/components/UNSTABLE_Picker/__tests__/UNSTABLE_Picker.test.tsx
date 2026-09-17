@@ -10,6 +10,7 @@ import {
   restPropsTest,
   stylePropsTest,
 } from '@local/tests';
+import { ContextualHelp } from '../..';
 import { FillVariants, ValidationStates } from '../../../constants';
 import { useToggle } from '../../../hooks';
 import {
@@ -74,6 +75,32 @@ describe('UNSTABLE_Picker', () => {
 
   formFieldValidationTextContextPropsTest({
     renderComponent: (props) => <TestPicker {...defaultProps} {...props} />,
+  });
+
+  it('should render contextual help in a tooltip next to the label', () => {
+    render(
+      <TestPicker
+        contextualHelp={<ContextualHelp id="test-picker-help">Choose all languages you can use.</ContextualHelp>}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'More information' }));
+
+    expect(screen.getByRole('tooltip')).toHaveTextContent('Choose all languages you can use.');
+  });
+
+  it('should support a custom contextual help label', () => {
+    render(
+      <TestPicker
+        contextualHelp={
+          <ContextualHelp id="test-picker-help" label="Help for Languages">
+            Help content
+          </ContextualHelp>
+        }
+      />,
+    );
+
+    expect(screen.getByRole('button', { name: 'Help for Languages' })).toBeInTheDocument();
   });
 
   it('should render selected tags and toggle items', () => {

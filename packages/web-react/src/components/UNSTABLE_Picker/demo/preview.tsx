@@ -5,6 +5,7 @@ import React, { StrictMode } from 'react';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import PickerAggregated from './PickerAggregated';
+import PickerContextualHelp from './PickerContextualHelp';
 import PickerDefault from './PickerDefault';
 import PickerDisabled from './PickerDisabled';
 import PickerGroupedJobFilters from './PickerGroupedJobFilters';
@@ -38,6 +39,9 @@ export const Preview = () => (
       </DocsSection>
       <DocsSection title="Hidden Label">
         <PickerHiddenLabel />
+      </DocsSection>
+      <DocsSection title="Contextual Help">
+        <PickerContextualHelp />
       </DocsSection>
       <DocsSection title="Required">
         <PickerRequired />

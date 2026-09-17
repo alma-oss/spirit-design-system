@@ -378,6 +378,7 @@ The trigger uses [Icon][web-react-icon-documentation] (`chevron-down` when close
 | `addButtonLabel`      | `string`                                                  | i18n `picker.add`                  | ✕        | Visually hidden label for the trigger when the popover is closed                                                                                                                            |
 | `children`            | `ReactNode`                                               | —                                  | ✓        | Popover content (for example `UNSTABLE_PickerGroup` with `UNSTABLE_PickerItem`)                                                                                                             |
 | `closeButtonLabel`    | `string`                                                  | i18n `common.close`                | ✕        | Visually hidden label for the trigger when the popover is open                                                                                                                              |
+| `contextualHelp`      | `ReactNode`                                               | —                                  | ✕        | Content next to the field label, typically [ContextualHelp][contextual-help]                                                                                                                |
 | `dropdownProps`       | `UnstablePickerDropdownProps`                             | —                                  | ✕        | Alignment and dropdown behavior for the inner `Dropdown`; see [`dropdownProps`, `popoverProps`, `labelProps`, and `tagProps`](#dropdownprops-popoverprops-labelprops-and-tagprops)          |
 | `emptySelectionLabel` | `string`                                                  | —                                  | ✕        | Placeholder when nothing is selected; supports `{label}`                                                                                                                                    |
 | `hasValidationIcon`   | `bool`                                                    | `false`                            | ✕        | Whether to show the validation icon                                                                                                                                                         |
@@ -517,6 +518,7 @@ If you need more control over the styling of a component, you can use [style pro
 and [escape hatches][readme-escape-hatches].
 
 [checkbox-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Checkbox/README.md
+[contextual-help]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ContextualHelp/README.md
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [dictionary-variant]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#variant
