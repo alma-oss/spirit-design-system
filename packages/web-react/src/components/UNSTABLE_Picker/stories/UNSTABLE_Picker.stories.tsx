@@ -1,6 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
+import { ContextualHelp } from '../..';
 import { FillVariants, Sizes, ValidationStates } from '../../../constants';
 import { useSelectionState, useToggle } from '../../../hooks';
 import { renderPickerLanguageItems } from '../demo/PickerLanguageItems';
@@ -9,18 +10,27 @@ import { UNSTABLE_Picker, UNSTABLE_PickerGroup, UNSTABLE_UncontrolledPicker } fr
 
 const PLAYGROUND_PICKER_ID = 'story-picker-playground';
 
-const meta: Meta<typeof UNSTABLE_Picker> = {
+type PickerStoryArgs = React.ComponentProps<typeof UNSTABLE_Picker> & {
+  showContextualHelp?: boolean;
+};
+
+const meta = {
   title: 'Experimental/UNSTABLE_Picker',
   component: UNSTABLE_Picker,
   parameters: {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,
     },
-    controls: { exclude: ['children', 'hasValidationIcon'] },
+    controls: { exclude: ['children', 'hasValidationIcon', 'contextualHelp'] },
   },
   argTypes: {
     addButtonLabel: { control: 'text' },
     closeButtonLabel: { control: 'text' },
+    showContextualHelp: {
+      control: 'boolean',
+      description: 'Shows `ContextualHelp` next to the label.',
+      table: { defaultValue: { summary: 'false' } },
+    },
     emptySelectionLabel: { control: 'text' },
     hasValidationIcon: {
       control: 'boolean',
@@ -79,6 +89,7 @@ const meta: Meta<typeof UNSTABLE_Picker> = {
   args: {
     addButtonLabel: 'Add',
     closeButtonLabel: 'Close',
+    showContextualHelp: false,
     emptySelectionLabel: 'Languages',
     hasValidationIcon: false,
     helperText: undefined,
@@ -98,12 +109,13 @@ const meta: Meta<typeof UNSTABLE_Picker> = {
     validationText: 'Validation message',
     variant: FillVariants.FILL,
   },
-};
+} as Meta<PickerStoryArgs>;
 
 export default meta;
-type Story = StoryObj<typeof UNSTABLE_Picker>;
+type Story = StoryObj<PickerStoryArgs>;
 
-const PlaygroundStory = (args: React.ComponentProps<typeof UNSTABLE_Picker>) => {
+const PlaygroundStory = (args: PickerStoryArgs) => {
+  const { showContextualHelp, ...pickerArgs } = args;
   const { selectionMode } = args;
   const { selectedKeys, setSelectedKeys } = useSelectionState({
     defaultSelectedKeys: [],
@@ -113,7 +125,14 @@ const PlaygroundStory = (args: React.ComponentProps<typeof UNSTABLE_Picker>) => 
 
   return (
     <UNSTABLE_Picker
-      {...args}
+      {...pickerArgs}
+      {...(showContextualHelp && {
+        contextualHelp: (
+          <ContextualHelp label={`More information about ${pickerArgs.label}`}>
+            Choose all languages you can use.
+          </ContextualHelp>
+        ),
+      })}
       isOpen={isOpen}
       onToggle={onToggle}
       onSelectionChange={setSelectedKeys}
@@ -124,9 +143,11 @@ const PlaygroundStory = (args: React.ComponentProps<typeof UNSTABLE_Picker>) => 
   );
 };
 
-const UncontrolledStory = (args: React.ComponentProps<typeof UNSTABLE_Picker>) => {
+const UncontrolledStory = (args: PickerStoryArgs) => {
+  const { label, showContextualHelp } = args;
   const { id } = args;
   const rest = { ...args } as Record<string, unknown>;
+  delete rest.showContextualHelp;
   delete rest.id;
   delete rest.isOpen;
   delete rest.onToggle;
@@ -136,6 +157,11 @@ const UncontrolledStory = (args: React.ComponentProps<typeof UNSTABLE_Picker>) =
   return (
     <UNSTABLE_UncontrolledPicker
       {...(rest as unknown as React.ComponentProps<typeof UNSTABLE_UncontrolledPicker>)}
+      {...(showContextualHelp && {
+        contextualHelp: (
+          <ContextualHelp label={`More information about ${label}`}>Choose all languages you can use.</ContextualHelp>
+        ),
+      })}
       id={`${id}-uncontrolled`}
       defaultSelectedKeys={['cs']}
     >
@@ -146,10 +172,10 @@ const UncontrolledStory = (args: React.ComponentProps<typeof UNSTABLE_Picker>) =
 
 export const Playground: Story = {
   name: 'UNSTABLE_Picker',
-  render: (args: React.ComponentProps<typeof UNSTABLE_Picker>) => <PlaygroundStory {...args} />,
+  render: (args: PickerStoryArgs) => <PlaygroundStory {...args} />,
 };
 
 export const UncontrolledPlayground: Story = {
   name: 'UNSTABLE_UncontrolledPicker',
-  render: (args: React.ComponentProps<typeof UNSTABLE_Picker>) => <UncontrolledStory {...args} />,
+  render: (args: PickerStoryArgs) => <UncontrolledStory {...args} />,
 };
