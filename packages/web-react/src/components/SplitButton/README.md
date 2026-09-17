@@ -4,6 +4,8 @@ The Split Button component groups multiple related actions a user can take, comb
 
 👉 The buttons' **color** and **size** are defined at the `SplitButton` component level and apply uniformly to **all buttons** within it.
 
+👉 Nested `Item` components, such as dropdown options, inherit the `SplitButton` size. A direct Item `size` prop overrides it.
+
 👉 The `SplitButton` component works exclusively with the Spirit `Button` and is not compatible with third-party or custom buttons.
 
 Learn more about the [Button][readme-button] component in its documentation.
@@ -52,7 +54,11 @@ const onToggle = () => setIsOpen(!isOpen);
       Dropdown
       <Icon name="chevron-down" />
     </DropdownTrigger>
-    <DropdownPopover>Dropdown content</DropdownPopover>
+    <DropdownPopover>
+      <Item>
+        <Label>Information</Label>
+      </Item>
+    </DropdownPopover>
   </Dropdown>
 </SplitButton>;
 ```
@@ -99,17 +105,21 @@ const onDropdownToggle = () => setIsOpen(!isOpen);
       Dropdown
       <Icon name="chevron-down" />
     </DropdownTrigger>
-    <DropdownPopover>Dropdown content</DropdownPopover>
+    <DropdownPopover>
+      <Item>
+        <Label>Information</Label>
+      </Item>
+    </DropdownPopover>
   </Dropdown>
 </SplitButton>;
 ```
 
 ## API
 
-| Name    | Type                                       | Default   | Required | Description   |
-| ------- | ------------------------------------------ | --------- | -------- | ------------- |
-| `color` | \[`primary` \| `secondary` \| `tertiary` ] | `primary` | ✕        | Color variant |
-| `size`  | [Size dictionary][dictionary-size]         | `medium`  | ✕        | Size variant  |
+| Name    | Type                                       | Default   | Required | Description                               |
+| ------- | ------------------------------------------ | --------- | -------- | ----------------------------------------- |
+| `color` | \[`primary` \| `secondary` \| `tertiary` ] | `primary` | ✕        | Color variant                             |
+| `size`  | [Size dictionary][dictionary-size]         | `medium`  | ✕        | Context size for nested Buttons and Items |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -128,7 +138,9 @@ Simple variant:
   buttonLabel="Button"
   buttonOnClick={() => alert('Button clicked')}
 >
-  {/* Dropdown content */}
+  <Item>
+    <Label>Information</Label>
+  </Item>
 </UncontrolledSplitButton>
 ```
 
@@ -147,7 +159,9 @@ Full example:
   isDisabled={false}
   size="large"
 >
-  {/* Dropdown content */}
+  <Item>
+    <Label>Information</Label>
+  </Item>
 </UncontrolledSplitButton>
 ```
 
@@ -167,7 +181,7 @@ Full example:
 | `isButtonLabelHidden`          | `bool`                                       | `false`        | ✕ \*     | Whether is button label hidden                           |
 | `isDisabled`                   | `bool`                                       | `false`        | ✕        | Disables the Split Button                                |
 | `isDropdownTriggerLabelHidden` | `bool`                                       | `false`        | ✕        | Whether is dropdown trigger label hidden                 |
-| `size`                         | [Size dictionary][dictionary-size]           | `medium`       | ✕        | Size variant                                             |
+| `size`                         | [Size dictionary][dictionary-size]           | `medium`       | ✕        | Context size for nested Buttons and Items                |
 
 (\*) Conditionally required: either `buttonIconName` or `buttonLabel` must be visible. If you want only the Icon to be visible, use the `isButtonLabelHidden` prop to visually hide the `buttonLabel`, which is required for accessibility reasons.
 

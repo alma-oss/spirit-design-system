@@ -6,9 +6,11 @@ import {
   classNamePrefixProviderTest,
   elementTypePropsTest,
   restPropsTest,
+  sizeExtendedPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { ContextPropsProvider } from '../../../context';
 import { type SpiritItemProps } from '../../../types';
 import { HelperText } from '../../HelperText';
 import { Label } from '../../Label';
@@ -37,6 +39,50 @@ describe('Item', () => {
   ariaAttributesTest(Item);
 
   elementTypePropsTest(Item);
+
+  sizeExtendedPropsTest(Item);
+
+  it('should use medium size by default', () => {
+    render(<Item>{renderItemContent()}</Item>);
+
+    expect(screen.getByText('Item label').closest('.Item')).toHaveClass('Item--medium');
+    expect(screen.getByText('Item label')).toHaveClass('Label--medium');
+  });
+
+  it('should apply size from context when prop is not provided', () => {
+    render(
+      <ContextPropsProvider value={{ item: { size: 'large' } }}>
+        <Item>{renderItemContent()}</Item>
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Item label').closest('.Item')).toHaveClass('Item--large');
+    expect(screen.getByText('Item label')).toHaveClass('Label--large');
+  });
+
+  it('should prefer direct size prop over context size', () => {
+    render(
+      <ContextPropsProvider value={{ item: { size: 'large' } }}>
+        <Item size="small">{renderItemContent()}</Item>
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Item label').closest('.Item')).toHaveClass('Item--small');
+    expect(screen.getByText('Item label').closest('.Item')).not.toHaveClass('Item--large');
+    expect(screen.getByText('Item label')).toHaveClass('Label--small');
+  });
+
+  it('should allow nested Label to override inherited size', () => {
+    render(
+      <Item size="large">
+        <Label size="xsmall">Item label</Label>
+      </Item>,
+    );
+
+    expect(screen.getByText('Item label').closest('.Item')).toHaveClass('Item--large');
+    expect(screen.getByText('Item label')).toHaveClass('Label--xsmall');
+    expect(screen.getByText('Item label')).not.toHaveClass('Label--large');
+  });
 
   it('should render label', () => {
     const label = 'Item label';

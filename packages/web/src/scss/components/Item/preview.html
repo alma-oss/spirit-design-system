@@ -1,3 +1,5 @@
+{{setVar "itemSizes" "xsmall" "small" "medium" "large" "xlarge" }}
+
 <section class="py-900 py-tablet-1000">
 
   <div class="Container">
@@ -6,7 +8,7 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Item">
+      <div class="Item Item--medium">
         <span class="Item__content" role="presentation">
           <span class="Label Label--medium element-stretched cursor-pointer">Item label</span>
         </span>
@@ -14,7 +16,7 @@
 
       <button
         type="button"
-        class="Item"
+        class="Item Item--medium"
       >
         <span class="Item__content" role="presentation">
           <span class="Label Label--medium element-stretched cursor-pointer">Item label as button</span>
@@ -23,12 +25,59 @@
 
       <a
         href="https://www.example.com"
-        class="Item"
+        class="Item Item--medium"
       >
         <span class="Item__content" role="presentation">
           <span class="Label Label--medium element-stretched cursor-pointer">Item label as link</span>
         </span>
       </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Sizes</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      {{#each @root.itemSizes as |size|}}
+      {{#if (eq size "xsmall")}}{{setVar "itemSizeLabel" "XSmall"}}{{/if}}
+      {{#if (eq size "small")}}{{setVar "itemSizeLabel" "Small"}}{{/if}}
+      {{#if (eq size "medium")}}{{setVar "itemSizeLabel" "Medium"}}{{/if}}
+      {{#if (eq size "large")}}{{setVar "itemSizeLabel" "Large"}}{{/if}}
+      {{#if (eq size "xlarge")}}{{setVar "itemSizeLabel" "XLarge"}}{{/if}}
+      <div class="Item Item--{{size}}">
+        <span class="Item__slot" role="presentation">
+          <svg
+            class="Icon"
+            width="24"
+            height="24"
+            aria-hidden="true"
+          >
+            <use href="/assets/icons/svg/sprite.svg#search" />
+          </svg>
+        </span>
+        <span class="Item__content" role="presentation">
+          <span class="Label Label--{{size}} element-stretched">{{@root.itemSizeLabel}} item</span>
+        </span>
+        <span class="Item__slot" role="presentation">
+          <svg
+            class="Icon Icon--selected"
+            width="24"
+            height="24"
+            aria-hidden="true"
+          >
+            <use href="/assets/icons/svg/sprite.svg#check-plain" />
+          </svg>
+        </span>
+      </div>
+      {{/each}}
 
     </div>
 
@@ -50,7 +99,7 @@
 
         <button
           type="button"
-          class="Item color-scheme-on-selected-subtle bg-color-scheme"
+          class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
         >
           <span class="Item__content" role="presentation">
             <span class="Label Label--medium element-stretched cursor-pointer">Item label</span>
@@ -65,7 +114,7 @@
 
         <button
           type="button"
-          class="Item"
+          class="Item Item--medium"
         >
           <span class="Item__content" role="presentation">
             <span class="Label Label--medium element-stretched cursor-pointer">Item label</span>
@@ -90,7 +139,7 @@
 
         <button
           type="button"
-          class="Item color-scheme-on-selected-subtle bg-color-scheme"
+          class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
         >
           <span class="Item__content" role="presentation">
             <span class="Label Label--medium element-stretched cursor-pointer">Item label</span>
@@ -125,7 +174,7 @@
 
       <button
         type="button"
-        class="Item color-scheme-on-selected-subtle disabled text-color-scheme"
+        class="Item Item--medium color-scheme-on-selected-subtle disabled text-color-scheme"
         disabled
       >
         <span class="Item__content" role="presentation">
@@ -135,7 +184,7 @@
 
       <button
         type="button"
-        class="Item color-scheme-on-selected-subtle disabled text-color-scheme"
+        class="Item Item--medium color-scheme-on-selected-subtle disabled text-color-scheme"
         disabled
       >
         <span class="Item__content" role="presentation">
@@ -169,7 +218,7 @@
 
       <button
         type="button"
-        class="Item"
+        class="Item Item--medium"
       >
         <span class="Item__content" role="presentation">
           <span class="Label Label--medium element-stretched cursor-pointer">Item label</span>
@@ -179,7 +228,7 @@
 
       <button
         type="button"
-        class="Item color-scheme-on-selected-subtle bg-color-scheme"
+        class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
       >
         <span class="Item__content" role="presentation">
           <span class="Label Label--medium element-stretched cursor-pointer">Item label</span>
@@ -199,7 +248,7 @@
 
       <button
         type="button"
-        class="Item color-scheme-on-selected-subtle disabled text-color-scheme"
+        class="Item Item--medium color-scheme-on-selected-subtle disabled text-color-scheme"
         disabled
       >
         <span class="Item__content" role="presentation">
@@ -210,7 +259,7 @@
 
       <button
         type="button"
-        class="Item color-scheme-on-selected-subtle disabled text-color-scheme"
+        class="Item Item--medium color-scheme-on-selected-subtle disabled text-color-scheme"
         disabled
       >
         <span class="Item__content" role="presentation">
@@ -242,14 +291,14 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Item">
+      <div class="Item Item--medium">
         <span class="Item__content">
           <span class="typography-body-medium-semibold">Semibold medium text</span>
           <span class="typography-body-small-regular text-secondary">Secondary small text</span>
         </span>
       </div>
 
-      <div class="Item">
+      <div class="Item Item--medium">
         <span class="Item__content">
           <span class="typography-body-large-regular">Regular large text</span>
         </span>
@@ -270,7 +319,7 @@
 
       <button
         type="button"
-        class="Item Item--alignmentYTop"
+        class="Item Item--medium Item--alignmentYTop"
       >
         <span class="Item__slot" role="presentation">
           <svg
@@ -290,7 +339,7 @@
 
       <button
         type="button"
-        class="Item Item--alignmentYCenter"
+        class="Item Item--medium Item--alignmentYCenter"
       >
         <span class="Item__slot" role="presentation">
           <svg
@@ -310,7 +359,7 @@
 
       <button
         type="button"
-        class="Item Item--alignmentYBottom"
+        class="Item Item--medium Item--alignmentYBottom"
       >
         <span class="Item__slot" role="presentation">
           <svg
@@ -344,7 +393,7 @@
 
       <button
         type="button"
-        class="Item"
+        class="Item Item--medium"
       >
         <span class="Item__slot" role="presentation">
           <svg
@@ -363,7 +412,7 @@
 
       <button
         type="button"
-        class="Item color-scheme-on-selected-subtle bg-color-scheme"
+        class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
       >
         <span class="Item__slot" role="presentation">
           <svg
@@ -404,7 +453,7 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Item">
+      <div class="Item Item--medium">
         <span class="Item__content" role="presentation">
           <span class="Label Label--medium element-stretched cursor-pointer">Dismissible item</span>
         </span>
@@ -450,7 +499,7 @@
           aria-label="Last searches"
         >
 
-          <li class="Item Item--alignmentYTop color-scheme-on-selected-subtle bg-color-scheme">
+          <li class="Item Item--medium Item--alignmentYTop color-scheme-on-selected-subtle bg-color-scheme">
             <span class="Item__slot" role="presentation">
               <svg
                 class="Icon"
@@ -486,7 +535,7 @@
             </span>
           </li>
 
-          <li class="Item Item--alignmentYTop">
+          <li class="Item Item--medium Item--alignmentYTop">
             <span class="Item__slot" role="presentation">
               <svg
                 class="Icon"
@@ -521,7 +570,7 @@
             </span>
           </li>
 
-          <li class="Item Item--alignmentYTop disabled text-color-scheme">
+          <li class="Item Item--medium Item--alignmentYTop disabled text-color-scheme">
             <span class="Item__slot" role="presentation">
               <svg
                 class="Icon"
@@ -571,7 +620,7 @@
           role="grid"
         >
 
-          <div class="Item Item--alignmentYTop color-scheme-on-selected-subtle bg-color-scheme" role="row">
+          <div class="Item Item--medium Item--alignmentYTop color-scheme-on-selected-subtle bg-color-scheme" role="row">
             <span class="Item__slot" role="presentation">
               <svg
                 class="Icon"
@@ -613,7 +662,7 @@
             </span>
           </div>
 
-          <div class="Item Item--alignmentYTop" role="row">
+          <div class="Item Item--medium Item--alignmentYTop" role="row">
             <span class="Item__slot" role="presentation">
               <svg
                 class="Icon"
@@ -670,7 +719,7 @@
         >
 
           <li class="StackItem" role="presentation">
-            <div class="Item" role="option">
+            <div class="Item Item--medium" role="option">
               <span class="Item__slot" role="presentation">
                 <svg
                   class="Icon"
@@ -688,7 +737,7 @@
           </li>
 
           <li class="StackItem" role="presentation">
-            <div class="Item" role="option">
+            <div class="Item Item--medium" role="option">
               <span class="Item__slot" role="presentation">
                 <svg
                   class="Icon Icon--primary"
@@ -706,7 +755,7 @@
           </li>
 
           <li class="StackItem" role="presentation">
-            <div class="Item" role="option">
+            <div class="Item Item--medium" role="option">
               <span class="Item__slot" role="presentation">
                 <svg
                   class="Icon Icon--primary"
@@ -740,7 +789,7 @@
 
           <li class="StackItem" role="presentation">
             <div
-              class="Item color-scheme-on-selected-subtle bg-color-scheme"
+              class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
               role="option"
               aria-selected="true"
             >
@@ -751,7 +800,7 @@
           </li>
 
           <li class="StackItem" role="presentation">
-            <div class="Item" role="option">
+            <div class="Item Item--medium" role="option">
               <span class="Item__content" role="presentation">
                 <span class="typography-body-medium-regular">Malešice, Praha</span>
               </span>
@@ -776,7 +825,7 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Item">
+      <div class="Item Item--medium">
         <div class="Item__slot" role="presentation">
           <input
             type="checkbox"
@@ -804,7 +853,7 @@
 
     <div class="docs-Stack docs-Stack--start">
 
-      <div class="Item">
+      <div class="Item Item--medium">
         <div class="Item__slot" role="presentation">
           <input
             type="radio"
