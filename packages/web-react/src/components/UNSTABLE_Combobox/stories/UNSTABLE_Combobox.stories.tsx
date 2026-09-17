@@ -11,20 +11,30 @@ import {
 } from '../demo/ComboboxLanguageItems';
 import ReadMe from '../README.md?raw';
 import { UNSTABLE_Combobox } from '..';
+import { ContextualHelp } from '../..';
 
 const PLAYGROUND_COMBOBOX_ID = 'story-combobox-playground';
 
-const meta: Meta<typeof UNSTABLE_Combobox> = {
+type ComboboxStoryArgs = React.ComponentProps<typeof UNSTABLE_Combobox> & {
+  showContextualHelp?: boolean;
+};
+
+const meta = {
   title: 'Experimental/UNSTABLE_Combobox',
   component: UNSTABLE_Combobox,
   parameters: {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,
     },
-    controls: { exclude: ['children', 'hasValidationIcon'] },
+    controls: { exclude: ['children', 'hasValidationIcon', 'contextualHelp'] },
   },
   argTypes: {
     addMoreLabel: { control: 'text' },
+    showContextualHelp: {
+      control: 'boolean',
+      description: 'Shows `ContextualHelp` next to the label.',
+      table: { defaultValue: { summary: 'false' } },
+    },
     emptySelectionLabel: { control: 'text' },
     hasClearButton: {
       control: 'boolean',
@@ -79,6 +89,7 @@ const meta: Meta<typeof UNSTABLE_Combobox> = {
     },
   },
   args: {
+    showContextualHelp: false,
     id: PLAYGROUND_COMBOBOX_ID,
     label: 'Languages',
     helperText: 'You can select multiple languages.',
@@ -91,12 +102,13 @@ const meta: Meta<typeof UNSTABLE_Combobox> = {
     validationText: 'Validation message',
     variant: FillVariants.FILL,
   },
-};
+} as Meta<ComboboxStoryArgs>;
 
 export default meta;
-type Story = StoryObj<typeof UNSTABLE_Combobox>;
+type Story = StoryObj<ComboboxStoryArgs>;
 
-const PlaygroundRender = (args: React.ComponentProps<typeof UNSTABLE_Combobox>) => {
+const PlaygroundRender = (args: ComboboxStoryArgs) => {
+  const { showContextualHelp, ...comboboxArgs } = args;
   const [isOpen, onToggle] = useToggle(false);
   const [selectedKeys, setSelectedKeys] = useState<string[]>(['cs']);
   const [inputValue, setInputValue] = useState('');
@@ -108,7 +120,14 @@ const PlaygroundRender = (args: React.ComponentProps<typeof UNSTABLE_Combobox>) 
 
   return (
     <UNSTABLE_Combobox
-      {...args}
+      {...comboboxArgs}
+      contextualHelp={
+        showContextualHelp ? (
+          <ContextualHelp id={`${comboboxArgs.id}-contextual-help`} label="More information about Languages">
+            Choose all languages you can use.
+          </ContextualHelp>
+        ) : undefined
+      }
       isOpen={isOpen}
       onToggle={onToggle}
       selectedKeys={selectedKeys}
@@ -125,5 +144,5 @@ const PlaygroundRender = (args: React.ComponentProps<typeof UNSTABLE_Combobox>) 
 
 export const Playground: Story = {
   name: 'UNSTABLE_Combobox',
-  render: (args) => <PlaygroundRender {...args} />,
+  render: (args: ComboboxStoryArgs) => <PlaygroundRender {...args} />,
 };

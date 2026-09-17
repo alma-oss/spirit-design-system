@@ -14,6 +14,7 @@ import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../.
 import { useAriaDescribedBy, useI18n, useSelectionAria, useStyleProps } from '../../hooks';
 import { replaceTranslationParams } from '../../translations';
 import { Dropdown } from '../Dropdown';
+import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
 import { Stack } from '../Stack';
@@ -60,6 +61,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     addMoreDescriptionText = t('combobox.addMoreDescription'),
     children,
     auxiliaryContent,
+    contextualHelp,
     emptySelectionLabel,
     emptyStateLabel = t('combobox.emptyState'),
     forwardedRef,
@@ -291,9 +293,12 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
           {...transferProps}
         >
           <Stack spacing="space-400">
-            <Label {...labelProps} id={labelId} htmlFor={inputId}>
-              {label}
-            </Label>
+            <Flex alignmentY="center" spacingX="space-100">
+              <Label {...labelProps} id={labelId} htmlFor={inputId}>
+                {label}
+              </Label>
+              {contextualHelp}
+            </Flex>
             <Dropdown
               {...dropdownProps}
               id={popoverId}
