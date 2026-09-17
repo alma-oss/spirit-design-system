@@ -96,6 +96,46 @@ describe('exportAssets', () => {
 
     expect(assets).toEqual([{ name: 'keep', svg: '<svg />\n' }]);
   });
+
+  it('skips branded component sets that do not contain the requested brand', async () => {
+    const assets = await exportAssets(
+      'file',
+      'Spirit',
+      ['icons'],
+      'token',
+      createExportFetch({
+        file: {
+          document: {
+            id: '0:0',
+            name: 'Document',
+            type: 'DOCUMENT',
+            children: [
+              {
+                id: '1:1',
+                name: 'Icons/angel-dualtone',
+                type: 'COMPONENT_SET',
+                children: [{ id: '1:2', name: 'Brand=Jobs', type: 'COMPONENT' }],
+              },
+              {
+                id: '2:1',
+                name: 'Icons/Keep',
+                type: 'COMPONENT_SET',
+                children: [{ id: '2:2', name: 'Brand=Spirit', type: 'COMPONENT' }],
+              },
+            ],
+          },
+        },
+        images: {
+          err: null,
+          images: {
+            '2:2': 'https://assets.example/test.svg',
+          },
+        },
+      }),
+    );
+
+    expect(assets).toEqual([{ name: 'keep', svg: '<svg />\n' }]);
+  });
 });
 
 describe('exportIcons', () => {
@@ -221,7 +261,7 @@ describe('exportIcons', () => {
           ),
         }),
       ),
-    ).rejects.toThrow(/does not contain Brand=Spirit/);
+    ).rejects.toThrow(/No Icons\/\* component sets with Brand=Spirit/);
 
     await expect(
       exportIcons(
