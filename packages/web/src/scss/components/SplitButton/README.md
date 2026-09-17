@@ -18,6 +18,7 @@ Simple variant:
 ## Variant with Dropdown
 
 You can add a Dropdown component inside a Split Button to provide additional actions.
+Match dropdown Item and Label size modifiers to the Split Button size, for example `Item--medium` and `Label--medium`.
 
 Learn more about the [Dropdown][readme-dropdown] component in its documentation.
 
@@ -40,7 +41,11 @@ Learn more about the [Dropdown][readme-dropdown] component in its documentation.
       </svg>
     </button>
     <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-1">
-      Dropdown content
+      <a href="#" class="Item Item--medium">
+        <span class="Item__content" role="presentation">
+          <span class="Label Label--medium element-stretched">Information</span>
+        </span>
+      </a>
     </div>
   </div>
 </div>

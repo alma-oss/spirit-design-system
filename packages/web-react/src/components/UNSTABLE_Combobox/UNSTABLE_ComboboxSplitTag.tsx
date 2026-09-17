@@ -93,7 +93,7 @@ const UNSTABLE_ComboboxSplitTag = (props: SpiritUnstableComboboxSplitTagProps) =
                       {...getOptionProps(option.value)}
                       key={option.value}
                       isSelected={isSelected}
-                      endSlot={isSelected ? <Icon name="check-plain" color="selected" boxSize={20} /> : undefined}
+                      endSlot={isSelected ? <Icon name="check-plain" color="selected" /> : undefined}
                     >
                       <Label>{option.label}</Label>
                     </Item>

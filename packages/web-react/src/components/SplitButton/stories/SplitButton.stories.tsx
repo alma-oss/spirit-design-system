@@ -25,7 +25,7 @@ const meta: Meta<typeof SplitButton> = {
     size: {
       control: 'select',
       options: [...Object.values(Sizes)],
-      description: 'Size of the button.',
+      description: 'Size of the button and nested Items.',
       table: {
         defaultValue: { summary: Sizes.MEDIUM },
         type: { summary: 'ButtonSize' },

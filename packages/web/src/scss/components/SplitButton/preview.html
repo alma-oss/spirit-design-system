@@ -48,7 +48,7 @@
                   data-spirit-placement="bottom-end"
                   id="dropdown-{{ color }}-{{ size }}-label-and-icon"
                 >
-                  <a href="#" class="Item">
+                  <a href="#" class="Item Item--{{ size }}">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -60,10 +60,10 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Information</span>
+                      <span class="Label Label--{{ size }} element-stretched cursor-pointer">Information</span>
                     </span>
                   </a>
-                  <a href="#" class="Item">
+                  <a href="#" class="Item Item--{{ size }}">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -75,10 +75,10 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Profile</span>
+                      <span class="Label Label--{{ size }} element-stretched cursor-pointer">Profile</span>
                     </span>
                   </a>
-                  <a href="#" class="Item">
+                  <a href="#" class="Item Item--{{ size }}">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -90,7 +90,7 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Help</span>
+                      <span class="Label Label--{{ size }} element-stretched cursor-pointer">Help</span>
                     </span>
                   </a>
                 </div>
@@ -135,7 +135,7 @@
                   data-spirit-placement="bottom-end"
                   id="dropdown-{{ color }}-{{ size }}-more-buttons-and-icon"
                 >
-                  <a href="#" class="Item">
+                  <a href="#" class="Item Item--{{ size }}">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -147,10 +147,10 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Information</span>
+                      <span class="Label Label--{{ size }} element-stretched cursor-pointer">Information</span>
                     </span>
                   </a>
-                  <a href="#" class="Item">
+                  <a href="#" class="Item Item--{{ size }}">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -162,10 +162,10 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Profile</span>
+                      <span class="Label Label--{{ size }} element-stretched cursor-pointer">Profile</span>
                     </span>
                   </a>
-                  <a href="#" class="Item">
+                  <a href="#" class="Item Item--{{ size }}">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -177,7 +177,7 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Help</span>
+                      <span class="Label Label--{{ size }} element-stretched cursor-pointer">Help</span>
                     </span>
                   </a>
                 </div>
@@ -221,7 +221,7 @@
                   data-spirit-placement="bottom-end"
                   id="dropdown-{{ color }}-{{ size }}-button-and-icon"
                 >
-                  <a href="#" class="Item">
+                  <a href="#" class="Item Item--{{ size }}">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -233,10 +233,10 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Information</span>
+                      <span class="Label Label--{{ size }} element-stretched cursor-pointer">Information</span>
                     </span>
                   </a>
-                  <a href="#" class="Item">
+                  <a href="#" class="Item Item--{{ size }}">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -248,10 +248,10 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Profile</span>
+                      <span class="Label Label--{{ size }} element-stretched cursor-pointer">Profile</span>
                     </span>
                   </a>
-                  <a href="#" class="Item">
+                  <a href="#" class="Item Item--{{ size }}">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -263,7 +263,7 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Help</span>
+                      <span class="Label Label--{{ size }} element-stretched cursor-pointer">Help</span>
                     </span>
                   </a>
                 </div>
@@ -425,7 +425,7 @@
                   data-spirit-placement="bottom-end"
                   id="dropdown-disabled-{{ size }}-label-and-icon"
                 >
-                  <a href="#" class="Item">
+                  <a href="#" class="Item disabled Item--{{ size }} text-color-scheme">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -437,10 +437,10 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Information</span>
+                      <span class="Label Label--disabled Label--{{ size }} element-stretched">Information</span>
                     </span>
                   </a>
-                  <a href="#" class="Item">
+                  <a href="#" class="Item disabled Item--{{ size }} text-color-scheme">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -452,10 +452,10 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Profile</span>
+                      <span class="Label Label--disabled Label--{{ size }} element-stretched">Profile</span>
                     </span>
                   </a>
-                  <a href="#" class="Item">
+                  <a href="#" class="Item disabled Item--{{ size }} text-color-scheme">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -467,7 +467,7 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Help</span>
+                      <span class="Label Label--disabled Label--{{ size }} element-stretched">Help</span>
                     </span>
                   </a>
                 </div>
@@ -521,7 +521,7 @@
                   data-spirit-placement="bottom-end"
                   id="dropdown-disabled-{{ size }}-more-buttons-and-icon"
                 >
-                  <a href="#" class="Item">
+                  <a href="#" class="Item disabled Item--{{ size }} text-color-scheme">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -533,10 +533,10 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Information</span>
+                      <span class="Label Label--disabled Label--{{ size }} element-stretched">Information</span>
                     </span>
                   </a>
-                  <a href="#" class="Item">
+                  <a href="#" class="Item disabled Item--{{ size }} text-color-scheme">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -548,10 +548,10 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Profile</span>
+                      <span class="Label Label--disabled Label--{{ size }} element-stretched">Profile</span>
                     </span>
                   </a>
-                  <a href="#" class="Item">
+                  <a href="#" class="Item disabled Item--{{ size }} text-color-scheme">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -563,7 +563,7 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Help</span>
+                      <span class="Label Label--disabled Label--{{ size }} element-stretched">Help</span>
                     </span>
                   </a>
                 </div>
@@ -612,7 +612,7 @@
                   data-spirit-placement="bottom-end"
                   id="dropdown-disabled-{{ size }}-button-and-icon"
                 >
-                  <a href="#" class="Item">
+                  <a href="#" class="Item disabled Item--{{ size }} text-color-scheme">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -624,10 +624,10 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Information</span>
+                      <span class="Label Label--disabled Label--{{ size }} element-stretched">Information</span>
                     </span>
                   </a>
-                  <a href="#" class="Item">
+                  <a href="#" class="Item disabled Item--{{ size }} text-color-scheme">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -639,10 +639,10 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Profile</span>
+                      <span class="Label Label--disabled Label--{{ size }} element-stretched">Profile</span>
                     </span>
                   </a>
-                  <a href="#" class="Item">
+                  <a href="#" class="Item disabled Item--{{ size }} text-color-scheme">
                     <span class="Item__slot" role="presentation">
                       <svg
                         class="Icon"
@@ -654,7 +654,7 @@
                       </svg>
                     </span>
                     <span class="Item__content" role="presentation">
-                      <span class="Label Label--medium element-stretched cursor-pointer">Help</span>
+                      <span class="Label Label--disabled Label--{{ size }} element-stretched">Help</span>
                     </span>
                   </a>
                 </div>

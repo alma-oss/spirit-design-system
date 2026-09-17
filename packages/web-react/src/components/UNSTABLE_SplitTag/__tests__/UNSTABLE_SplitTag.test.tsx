@@ -11,6 +11,8 @@ import {
 import { ContextPropsProvider } from '../../../context';
 import { ControlButton } from '../../ControlButton';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../../Dropdown';
+import { Item } from '../../Item';
+import { Label } from '../../Label';
 import { Tag } from '../../Tag';
 import UNSTABLE_SplitTag from '../UNSTABLE_SplitTag';
 
@@ -76,6 +78,45 @@ describe('UNSTABLE_SplitTag', () => {
       'aria-hidden',
       'true',
     );
+  });
+
+  it('should pass size to nested Items and their Labels', () => {
+    render(
+      <UNSTABLE_SplitTag size="xlarge">
+        <Tag>Prague</Tag>
+        <Dropdown id="radius-dropdown" isOpen onToggle={jest.fn()}>
+          <DropdownTrigger elementType={Tag}>+5 km</DropdownTrigger>
+          <DropdownPopover>
+            <Item>
+              <Label>Item</Label>
+            </Item>
+          </DropdownPopover>
+        </Dropdown>
+      </UNSTABLE_SplitTag>,
+    );
+
+    expect(screen.getByText('Item').closest('.Item')).toHaveClass('Item--xlarge');
+    expect(screen.getByText('Item')).toHaveClass('Label--xlarge');
+  });
+
+  it("should prefer the Item's own size over the SplitTag context", () => {
+    render(
+      <UNSTABLE_SplitTag size="xlarge">
+        <Tag>Prague</Tag>
+        <Dropdown id="radius-dropdown" isOpen onToggle={jest.fn()}>
+          <DropdownTrigger elementType={Tag}>+5 km</DropdownTrigger>
+          <DropdownPopover>
+            <Item size="small">
+              <Label>Item</Label>
+            </Item>
+          </DropdownPopover>
+        </Dropdown>
+      </UNSTABLE_SplitTag>,
+    );
+
+    expect(screen.getByText('Item').closest('.Item')).toHaveClass('Item--small');
+    expect(screen.getByText('Item').closest('.Item')).not.toHaveClass('Item--xlarge');
+    expect(screen.getByText('Item')).toHaveClass('Label--small');
   });
 
   it('should allow nested Tags and ControlButtons to override non-size split tag defaults', () => {

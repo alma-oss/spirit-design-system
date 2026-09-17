@@ -12,6 +12,9 @@ import {
 import { ComponentButtonColors } from '../../../constants';
 import { type SplitButtonColorType } from '../../../types';
 import { Button } from '../../Button';
+import { Dropdown, DropdownPopover, DropdownTrigger } from '../../Dropdown';
+import { Item } from '../../Item';
+import { Label } from '../../Label';
 import SplitButton from '../SplitButton';
 
 describe('SplitButton', () => {
@@ -69,6 +72,45 @@ describe('SplitButton', () => {
 
     expect(screen.getByText('Button')).toHaveClass('Button--secondary');
     expect(screen.getByText('Button')).toHaveClass('Button--small');
+  });
+
+  it('should pass size to nested Items and their Labels', () => {
+    render(
+      <SplitButton size="small">
+        <Button>Action</Button>
+        <Dropdown id="dropdown" isOpen onToggle={jest.fn()}>
+          <DropdownTrigger elementType={Button}>More</DropdownTrigger>
+          <DropdownPopover>
+            <Item>
+              <Label>Item</Label>
+            </Item>
+          </DropdownPopover>
+        </Dropdown>
+      </SplitButton>,
+    );
+
+    expect(screen.getByText('Item').closest('.Item')).toHaveClass('Item--small');
+    expect(screen.getByText('Item')).toHaveClass('Label--small');
+  });
+
+  it("should prefer the Item's own size over the SplitButton context", () => {
+    render(
+      <SplitButton size="small">
+        <Button>Action</Button>
+        <Dropdown id="dropdown" isOpen onToggle={jest.fn()}>
+          <DropdownTrigger elementType={Button}>More</DropdownTrigger>
+          <DropdownPopover>
+            <Item size="large">
+              <Label>Item</Label>
+            </Item>
+          </DropdownPopover>
+        </Dropdown>
+      </SplitButton>,
+    );
+
+    expect(screen.getByText('Item').closest('.Item')).toHaveClass('Item--large');
+    expect(screen.getByText('Item').closest('.Item')).not.toHaveClass('Item--small');
+    expect(screen.getByText('Item')).toHaveClass('Label--large');
   });
 
   it("should prefer the Button's own color and size over the SplitButton context", () => {

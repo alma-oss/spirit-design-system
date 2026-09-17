@@ -79,18 +79,21 @@ describe('UNSTABLE_Combobox', () => {
   });
 
   it.each([
-    ['small', 'Tag--xsmall', 'ControlButton--xsmall'],
-    ['medium', 'Tag--small', 'ControlButton--xsmall'],
-    ['large', 'Tag--medium', 'ControlButton--xsmall'],
+    ['small', 'Tag--xsmall', 'ControlButton--xsmall', 'Item--small'],
+    ['medium', 'Tag--small', 'ControlButton--xsmall', 'Item--medium'],
+    ['large', 'Tag--medium', 'ControlButton--xsmall', 'Item--large'],
   ] as const)(
-    'maps Combobox size %s to nested Tag / ControlButton sizes via ContextProps',
-    (size, tagClass, controlButtonClass) => {
+    'maps Combobox size %s to nested Tag / ControlButton / Item sizes via ContextProps',
+    (size, tagClass, controlButtonClass, itemClass) => {
       render(<TestCombobox size={size} selectedKeys={['cs']} />);
 
       const tag = screen.getByRole('row', { name: 'Czech' });
+      const option = screen.getByRole('option', { name: 'Czech' });
 
       expect(tag).toHaveClass(tagClass);
       expect(within(tag).getByRole('button', { name: /Remove/i })).toHaveClass(controlButtonClass);
+      expect(option).toHaveClass(itemClass);
+      expect(within(option).getByText('Czech')).toHaveClass(`Label--${size}`);
     },
   );
 

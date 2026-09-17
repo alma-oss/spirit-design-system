@@ -17,8 +17,9 @@ export interface ItemStyles {
 }
 
 export function useItemStyleProps<P extends ItemStyleProps>(props: P): ItemStyles {
-  const { alignmentY, isDisabled, isSelected, ...restProps } = props;
+  const { alignmentY, isDisabled, isSelected, size, ...restProps } = props;
   const itemClass = useClassNamePrefix('Item');
+  const itemSizeClass = `${itemClass}--${size}`;
   const itemSelectedColorSchemeClass = getColorSchemeClassName({ color: 'selected', isSubtle: true });
   const bgColorSchemeClass = useClassNamePrefix('bg-color-scheme');
   const textColorSchemeClass = useClassNamePrefix('text-color-scheme');
@@ -31,6 +32,7 @@ export function useItemStyleProps<P extends ItemStyleProps>(props: P): ItemStyle
       root: classNames(itemClass, {
         [useAlignmentClass(itemClass, alignmentY as ItemAlignmentYType, 'alignmentY')]: alignmentY,
         [CLASS_NAME_DISABLED]: isDisabled,
+        [itemSizeClass]: size,
         [itemSelectedColorSchemeClass]: isSelected,
         [bgColorSchemeClass]: isSelected && !isDisabled,
         [textColorSchemeClass]: isDisabled,

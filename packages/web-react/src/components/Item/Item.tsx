@@ -1,6 +1,7 @@
 'use client';
 
 import React, { type ElementType, useContext } from 'react';
+import { SizesExtended } from '../../constants';
 import {
   ContextPropsProvider,
   InlineElementsContext,
@@ -15,17 +16,19 @@ import { useItemStyleProps } from './useItemStyleProps';
 
 const defaultProps: Partial<SpiritItemProps> = {
   elementType: 'div',
+  size: SizesExtended.MEDIUM,
 };
 
 const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Element => {
   const listItemsProps = useContext(ListItemsContext) ?? {};
   const mergedProps = useContextProps<Partial<SpiritItemProps<E>>>(props, 'item');
   const propsWithDefaults = mergeProps(defaultProps, listItemsProps, mergedProps);
-  const { children, elementType, endSlot, isDisabled, isSelected, startSlot, ...restProps } = propsWithDefaults;
+  const { children, elementType, endSlot, isDisabled, isSelected, size, startSlot, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;
   const { classProps, props: modifiedProps } = useItemStyleProps({
     isSelected,
     isDisabled,
+    size,
     ...restProps,
   });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
@@ -35,7 +38,7 @@ const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Ele
     <ContextPropsProvider
       value={{
         isDisabled,
-        label: { isStretched: true },
+        label: { isStretched: true, size },
       }}
     >
       <UniversalProvider values={[[InlineElementsContext, { elementType: 'span' }]]}>

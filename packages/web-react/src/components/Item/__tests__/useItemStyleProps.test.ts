@@ -21,6 +21,13 @@ describe('useItemStyleProps', () => {
     expect(result.current.classProps.root).toBe('Item color-scheme-on-selected-subtle bg-color-scheme');
   });
 
+  it('should return size class', () => {
+    const props = { size: 'xlarge' } as SpiritItemProps;
+    const { result } = renderHook(() => useItemStyleProps(props));
+
+    expect(result.current.classProps.root).toBe('Item Item--xlarge');
+  });
+
   it('should return item with non-default vertical alignment', () => {
     const props = { alignmentY: 'bottom' } as SpiritItemProps;
     const { result } = renderHook(() => useItemStyleProps(props));
@@ -52,7 +59,13 @@ describe('useItemStyleProps', () => {
   });
 
   it('should not pass style props to returned props', () => {
-    const props = { alignmentY: 'top', isDisabled: true, isSelected: true, id: 'item' } as SpiritItemProps;
+    const props = {
+      alignmentY: 'top',
+      isDisabled: true,
+      isSelected: true,
+      size: 'large',
+      id: 'item',
+    } as SpiritItemProps;
     const { result } = renderHook(() => useItemStyleProps(props));
 
     expect(result.current.props).toEqual({ id: 'item' });
