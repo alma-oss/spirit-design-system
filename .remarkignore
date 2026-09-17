@@ -17,3 +17,13 @@ migration-*
 
 # Generated design review reports (output of the figma-design-review skill)
 design-reviews
+
+# Canonical Pages overwritten by supernova-extract until Cutover
+docs/design
+docs/development
+docs/introduction
+docs/migrations/index.md
+packages/web-react/src/components/*/docs
+
+# Generated extract sidecar
+scripts/supernova-extract/REPORT.md
