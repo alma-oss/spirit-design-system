@@ -303,6 +303,14 @@
       "require": "./dist/components/Container/index.cjs",
       "default": "./dist/components/Container/index.js"
     },
+    "./components/ContextualHelp": {
+      "types": "./dist/components/ContextualHelp/index.d.ts",
+      "development": "./src/components/ContextualHelp/index.ts",
+      "production": "./dist/components/ContextualHelp/index.js",
+      "import": "./dist/components/ContextualHelp/index.js",
+      "require": "./dist/components/ContextualHelp/index.cjs",
+      "default": "./dist/components/ContextualHelp/index.js"
+    },
     "./components/ControlButton": {
       "types": "./dist/components/ControlButton/index.d.ts",
       "development": "./src/components/ControlButton/index.ts",
