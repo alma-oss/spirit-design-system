@@ -24,6 +24,7 @@ const SplitButton = (props: SpiritSplitButtonProps) => {
       value={{
         isDisabled,
         button: { color, size },
+        item: { size },
       }}
     >
       <div {...styleProps} {...otherProps} className={classNames(classProps, styleProps.className)}>

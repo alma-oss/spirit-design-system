@@ -4,6 +4,7 @@ import {
   type ChildrenProps,
   type PolymorphicComponentProps,
   type SingleOrResponsive,
+  type SizeExtendedDictionaryType,
   type StyleProps,
 } from './shared';
 
@@ -13,6 +14,7 @@ export interface ItemStyleProps extends StyleProps {
   alignmentY?: ItemAlignmentYType;
   isDisabled?: boolean;
   isSelected?: boolean;
+  size?: SizeExtendedDictionaryType;
 }
 
 /** ===== INTERNAL API ===== */

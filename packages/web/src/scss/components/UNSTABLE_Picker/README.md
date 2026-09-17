@@ -98,7 +98,7 @@ trigger points to via `data-spirit-target` and `aria-controls`:
       <fieldset class="border-0">
         <legend class="accessibility-hidden">Language</legend>
         <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
-          <div class="Item">
+          <div class="Item Item--medium">
             <div class="Item__slot" role="presentation">
               <input type="checkbox" id="lang-cs" class="Checkbox Checkbox--item" name="language" />
             </div>
@@ -154,7 +154,7 @@ presentation when you need that.
       id="picker-listbox-cs"
       aria-selected="true"
       tabindex="0"
-      class="Item cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
+      class="Item Item--medium cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
     >
       <div class="Item__content" role="presentation">
         <span class="Label Label--medium element-stretched">Czech</span>
@@ -165,7 +165,13 @@ presentation when you need that.
         </svg>
       </div>
     </div>
-    <div role="option" id="picker-listbox-en" aria-selected="false" tabindex="-1" class="Item cursor-pointer">
+    <div
+      role="option"
+      id="picker-listbox-en"
+      aria-selected="false"
+      tabindex="-1"
+      class="Item Item--medium cursor-pointer"
+    >
       <div class="Item__content" role="presentation">
         <span class="Label Label--medium element-stretched">English</span>
       </div>
@@ -547,7 +553,7 @@ inside the selection area (remove buttons) to disable the Picker.
       <fieldset class="border-0" disabled>
         <legend class="accessibility-hidden">Language</legend>
         <div class="Flex Flex--vertical Flex--alignmentXLeft" style="--flex-spacing-y: var(--spirit-space-500);">
-          <div class="Item">
+          <div class="Item Item--medium">
             <div class="Item__slot" role="presentation">
               <input
                 type="checkbox"

@@ -63,7 +63,7 @@
                 id="split-tag-location-radius-default-medium-5"
                 aria-selected="true"
                 tabindex="0"
-                class="Item cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
+                class="Item Item--medium cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
               >
                 <span class="Item__content" role="presentation">
                   <span class="Label Label--medium">+5 km</span>
@@ -85,7 +85,7 @@
                 id="split-tag-location-radius-default-medium-10"
                 aria-selected="false"
                 tabindex="-1"
-                class="Item cursor-pointer"
+                class="Item Item--medium cursor-pointer"
               >
                 <span class="Item__content" role="presentation">
                   <span class="Label Label--medium">+10 km</span>
@@ -107,7 +107,7 @@
                 id="split-tag-location-radius-default-medium-20"
                 aria-selected="false"
                 tabindex="-1"
-                class="Item cursor-pointer"
+                class="Item Item--medium cursor-pointer"
               >
                 <span class="Item__content" role="presentation">
                   <span class="Label Label--medium">+20 km</span>
@@ -129,7 +129,7 @@
                 id="split-tag-location-radius-default-medium-50"
                 aria-selected="false"
                 tabindex="-1"
-                class="Item cursor-pointer"
+                class="Item Item--medium cursor-pointer"
               >
                 <span class="Item__content" role="presentation">
                   <span class="Label Label--medium">+50 km</span>
@@ -247,10 +247,10 @@
                       id="split-tag-location-radius-{{color}}-{{size}}-subtle-5"
                       aria-selected="true"
                       tabindex="0"
-                      class="Item cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
+                      class="Item Item--{{size}} cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
                     >
                       <span class="Item__content" role="presentation">
-                        <span class="Label Label--medium">+5 km</span>
+                        <span class="Label Label--{{size}}">+5 km</span>
                       </span>
                       <span class="Item__slot" role="presentation">
                         <svg
@@ -269,10 +269,10 @@
                       id="split-tag-location-radius-{{color}}-{{size}}-subtle-10"
                       aria-selected="false"
                       tabindex="-1"
-                      class="Item cursor-pointer"
+                      class="Item Item--{{size}} cursor-pointer"
                     >
                       <span class="Item__content" role="presentation">
-                        <span class="Label Label--medium">+10 km</span>
+                        <span class="Label Label--{{size}}">+10 km</span>
                       </span>
                       <span class="Item__slot" role="presentation">
                         <svg
@@ -291,10 +291,10 @@
                       id="split-tag-location-radius-{{color}}-{{size}}-subtle-20"
                       aria-selected="false"
                       tabindex="-1"
-                      class="Item cursor-pointer"
+                      class="Item Item--{{size}} cursor-pointer"
                     >
                       <span class="Item__content" role="presentation">
-                        <span class="Label Label--medium">+20 km</span>
+                        <span class="Label Label--{{size}}">+20 km</span>
                       </span>
                       <span class="Item__slot" role="presentation">
                         <svg
@@ -313,10 +313,10 @@
                       id="split-tag-location-radius-{{color}}-{{size}}-subtle-50"
                       aria-selected="false"
                       tabindex="-1"
-                      class="Item cursor-pointer"
+                      class="Item Item--{{size}} cursor-pointer"
                     >
                       <span class="Item__content" role="presentation">
-                        <span class="Label Label--medium">+50 km</span>
+                        <span class="Label Label--{{size}}">+50 km</span>
                       </span>
                       <span class="Item__slot" role="presentation">
                         <svg
@@ -406,10 +406,10 @@
                       id="split-tag-location-radius-{{color}}-{{size}}-5"
                       aria-selected="true"
                       tabindex="0"
-                      class="Item cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
+                      class="Item Item--{{size}} cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
                     >
                       <span class="Item__content" role="presentation">
-                        <span class="Label Label--medium">+5 km</span>
+                        <span class="Label Label--{{size}}">+5 km</span>
                       </span>
                       <span class="Item__slot" role="presentation">
                         <svg
@@ -428,10 +428,10 @@
                       id="split-tag-location-radius-{{color}}-{{size}}-10"
                       aria-selected="false"
                       tabindex="-1"
-                      class="Item cursor-pointer"
+                      class="Item Item--{{size}} cursor-pointer"
                     >
                       <span class="Item__content" role="presentation">
-                        <span class="Label Label--medium">+10 km</span>
+                        <span class="Label Label--{{size}}">+10 km</span>
                       </span>
                       <span class="Item__slot" role="presentation">
                         <svg
@@ -450,10 +450,10 @@
                       id="split-tag-location-radius-{{color}}-{{size}}-20"
                       aria-selected="false"
                       tabindex="-1"
-                      class="Item cursor-pointer"
+                      class="Item Item--{{size}} cursor-pointer"
                     >
                       <span class="Item__content" role="presentation">
-                        <span class="Label Label--medium">+20 km</span>
+                        <span class="Label Label--{{size}}">+20 km</span>
                       </span>
                       <span class="Item__slot" role="presentation">
                         <svg
@@ -472,10 +472,10 @@
                       id="split-tag-location-radius-{{color}}-{{size}}-50"
                       aria-selected="false"
                       tabindex="-1"
-                      class="Item cursor-pointer"
+                      class="Item Item--{{size}} cursor-pointer"
                     >
                       <span class="Item__content" role="presentation">
-                        <span class="Label Label--medium">+50 km</span>
+                        <span class="Label Label--{{size}}">+50 km</span>
                       </span>
                       <span class="Item__slot" role="presentation">
                         <svg
@@ -536,6 +536,9 @@
             type="button"
             class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic disabled"
             aria-label="Select distance, selected +5 km"
+            aria-expanded="false"
+            aria-controls="split-tag-location-radius-disabled-dropdown"
+            aria-haspopup="dialog"
             disabled
           >
             +5 km
@@ -553,6 +556,79 @@
               </svg>
             </span>
           </button>
+          <div
+            role="dialog"
+            aria-label="Distance options"
+            class="DropdownPopover placement-bottom-start"
+            data-spirit-placement="bottom-start"
+            id="split-tag-location-radius-disabled-dropdown"
+          >
+            <div
+              class="Stack Stack--spacing"
+              style="--stack-spacing: var(--spirit-space-300);"
+              role="listbox"
+              aria-label="Distance"
+            >
+              <div
+                role="option"
+                id="split-tag-location-radius-disabled-5"
+                aria-selected="true"
+                aria-disabled="true"
+                tabindex="0"
+                class="Item disabled Item--medium color-scheme-on-selected-subtle text-color-scheme"
+              >
+                <span class="Item__content" role="presentation">
+                  <span class="Label Label--disabled Label--medium">+5 km</span>
+                </span>
+                <span class="Item__slot" role="presentation">
+                  <svg
+                    class="Icon Icon--selected"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#check-plain" />
+                  </svg>
+                </span>
+              </div>
+              <div
+                role="option"
+                id="split-tag-location-radius-disabled-10"
+                aria-selected="false"
+                aria-disabled="true"
+                tabindex="-1"
+                class="Item disabled Item--medium text-color-scheme"
+              >
+                <span class="Item__content" role="presentation">
+                  <span class="Label Label--disabled Label--medium">+10 km</span>
+                </span>
+              </div>
+              <div
+                role="option"
+                id="split-tag-location-radius-disabled-20"
+                aria-selected="false"
+                aria-disabled="true"
+                tabindex="-1"
+                class="Item disabled Item--medium text-color-scheme"
+              >
+                <span class="Item__content" role="presentation">
+                  <span class="Label Label--disabled Label--medium">+20 km</span>
+                </span>
+              </div>
+              <div
+                role="option"
+                id="split-tag-location-radius-disabled-50"
+                aria-selected="false"
+                aria-disabled="true"
+                tabindex="-1"
+                class="Item disabled Item--medium text-color-scheme"
+              >
+                <span class="Item__content" role="presentation">
+                  <span class="Label Label--disabled Label--medium">+50 km</span>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
         <button
           type="button"
