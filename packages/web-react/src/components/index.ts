@@ -13,6 +13,7 @@ export * from './Checkbox';
 export * from './CloseButton';
 export * from './Collapse';
 export * from './Container';
+export * from './ContextualHelp';
 export * from './ControlButton';
 export * from './Dialog';
 export * from './Divider';
