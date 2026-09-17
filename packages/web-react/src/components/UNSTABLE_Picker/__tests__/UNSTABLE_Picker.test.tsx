@@ -64,6 +64,15 @@ describe('UNSTABLE_Picker', () => {
     expect(screen.getByRole('group', { name: 'Languages' })).not.toHaveClass('InputContainer--fill');
   });
 
+  it.each(['small', 'medium', 'large'] as const)('passes %s size to nested Items and Labels', (size) => {
+    render(<TestPicker size={size} />);
+
+    const label = screen.getByText('Czech');
+
+    expect(label.closest('.Item')).toHaveClass(`Item--${size}`);
+    expect(label).toHaveClass(`Label--${size}`);
+  });
+
   formFieldLabelContextPropsTest({
     renderComponent: (props) => <TestPicker {...defaultProps} emptySelectionLabel="Select" {...props} />,
   });

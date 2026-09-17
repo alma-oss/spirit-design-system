@@ -37,7 +37,7 @@ export const sizePropsTest = (Component: ComponentType<any>, testId?: string) =>
 };
 
 export const sizeExtendedPropsTest = (Component: ComponentType<any>, testId?: string) => {
-  it.each([Object.values(SizesExtended)])('should render extended size %s', async (size) => {
+  it.each(Object.values(SizesExtended))('should render extended size %s', async (size) => {
     const dom = render(<Component size={size as SizeExtendedDictionaryType<string>} />);
 
     await waitFor(() => {
