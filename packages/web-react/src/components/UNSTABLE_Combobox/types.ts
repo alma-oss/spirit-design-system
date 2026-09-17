@@ -51,6 +51,8 @@ export interface UnstableComboboxBaseProps<S = void>
     UnstableComboboxTranslations {
   /** Option items. Optional for tip-only / custom popover content. */
   children?: ReactNode;
+  /** Content next to the field label, typically `ContextualHelp`. */
+  contextualHelp?: ReactNode;
   id: string;
   isDisabled?: boolean;
   isLabelHidden?: boolean;
