@@ -54,8 +54,9 @@ Multiple asset types in one target share the same output directory and are treat
 }
 ```
 
-Branded icon component sets must contain a `Brand` property matching the configured target. Benefit icons do not have a
-Brand variant and are exported unchanged into every target that selects them.
+Branded icon and illustration component sets are exported only when they include a `Brand` variant matching the
+configured target. Sets without that brand are skipped. Benefit icons do not have a Brand variant and are exported
+unchanged into every target that selects them.
 
 Illustrations should use a separate target because they are not part of the 24×24 icon set:
 

@@ -75,7 +75,7 @@ export const discoverAssetNodes = (document: FigmaNode, brand: string, assets: A
       const variant = node.children.find((child) => isBrandVariant(child, brand));
 
       if (!variant) {
-        throw new AssetDiscoveryError(`Icon component set "${node.name}" does not contain Brand=${brand}.`);
+        return;
       }
 
       variants.push({
