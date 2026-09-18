@@ -1,4 +1,4 @@
-import { ROOT_CONFIG_FILE } from '../../constants';
+import { ROOT_CONFIG_FILES } from '../../constants';
 import type { ListedRepository } from './app';
 
 export const GITHUB_API_URL = 'https://api.github.com';
@@ -7,6 +7,7 @@ export const GITHUB_REQUEST_TIMEOUT_MS = 15_000;
 
 export interface RepositoryConfigFile {
   contents: string;
+  path: string;
   ref: string;
 }
 
@@ -62,26 +63,31 @@ export const readRepositoryConfigFile = async (
     throw new Error('Unable to resolve the repository default branch commit.');
   }
 
-  const response = await requestGitHub(
-    fetchImplementation,
-    `${GITHUB_API_URL}/repos/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.name)}/contents/${ROOT_CONFIG_FILE}?ref=${encodeURIComponent(commit.sha)}`,
-    {
-      headers: requestHeaders(repository, 'application/vnd.github.raw'),
-      signal: AbortSignal.timeout(GITHUB_REQUEST_TIMEOUT_MS),
-    },
-    `Unable to read ${ROOT_CONFIG_FILE} from the repository.`,
-  );
+  for (const configFile of ROOT_CONFIG_FILES) {
+    const response = await requestGitHub(
+      fetchImplementation,
+      `${GITHUB_API_URL}/repos/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.name)}/contents/${encodeURIComponent(configFile)}?ref=${encodeURIComponent(commit.sha)}`,
+      {
+        headers: requestHeaders(repository, 'application/vnd.github.raw'),
+        signal: AbortSignal.timeout(GITHUB_REQUEST_TIMEOUT_MS),
+      },
+      `Unable to read ${configFile} from the repository.`,
+    );
 
-  if (response.status === 404) {
-    return null;
+    if (response.status === 404) {
+      continue;
+    }
+
+    if (!response.ok) {
+      throw new Error(`Unable to read ${configFile} from the repository (${response.status}).`);
+    }
+
+    return {
+      contents: await response.text(),
+      path: configFile,
+      ref: commit.sha,
+    };
   }
 
-  if (!response.ok) {
-    throw new Error(`Unable to read ${ROOT_CONFIG_FILE} from the repository (${response.status}).`);
-  }
-
-  return {
-    contents: await response.text(),
-    ref: commit.sha,
-  };
+  return null;
 };

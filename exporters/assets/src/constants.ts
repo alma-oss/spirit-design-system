@@ -9,6 +9,16 @@ export const CHANGE_TYPES = {
 export const CONFIG_MODULE_NAME = 'spirit';
 
 export const ROOT_CONFIG_FILE = `${CONFIG_MODULE_NAME}.config.json`;
+export const ROOT_CONFIG_FILES = [
+  ROOT_CONFIG_FILE,
+  `.${CONFIG_MODULE_NAME}rc.json`,
+  `${CONFIG_MODULE_NAME}.config.js`,
+  `${CONFIG_MODULE_NAME}.config.mjs`,
+  `${CONFIG_MODULE_NAME}.config.cjs`,
+  `${CONFIG_MODULE_NAME}.config.ts`,
+  `${CONFIG_MODULE_NAME}.config.cts`,
+  `${CONFIG_MODULE_NAME}.config.mts`,
+] as const;
 
 export const DISCOVERY_CONCURRENCY = 8;
 export const DISCOVERY_TARGET_LIMIT = 128;

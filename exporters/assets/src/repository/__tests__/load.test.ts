@@ -27,11 +27,57 @@ describe('repository-owned assets config', () => {
     }
   });
 
+  it.each([
+    [
+      'spirit.config.ts',
+      "export default { assets: { fileKey: 'figma-file', targets: [{ brand: 'Spirit', out: 'svg', assets: ['icons'] }] } };",
+    ],
+  ])('loads static %s from the repository root', async (configFile, source) => {
+    const repositoryRoot = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-root-static-'));
+
+    try {
+      await writeFile(path.join(repositoryRoot, configFile), source);
+
+      const config = await loadConfig(undefined, { repositoryRoot });
+
+      expect(config.configPath).toBe(path.join(repositoryRoot, configFile));
+      expect(config.fileKey).toBe('figma-file');
+      expect(config.targets[0].out).toBe(path.join(repositoryRoot, 'svg'));
+    } finally {
+      await rm(repositoryRoot, { recursive: true, force: true });
+    }
+  });
+
+  it('prefers spirit.config.json when more than one supported root config exists', async () => {
+    const repositoryRoot = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-root-priority-'));
+
+    try {
+      await writeFile(
+        path.join(repositoryRoot, 'spirit.config.json'),
+        '{"assets":{"fileKey":"json-file","targets":[{"brand":"Spirit","out":"json-svg","assets":["icons"]}]}}',
+      );
+      await writeFile(
+        path.join(repositoryRoot, 'spirit.config.ts'),
+        "export default { assets: { fileKey: 'ts-file', targets: [{ brand: 'Spirit', out: 'ts-svg', assets: ['icons'] }] } };",
+      );
+
+      const config = await loadConfig(undefined, { repositoryRoot });
+
+      expect(config.fileKey).toBe('json-file');
+      expect(config.configPath).toBe(path.join(repositoryRoot, 'spirit.config.json'));
+    } finally {
+      await rm(repositoryRoot, { recursive: true, force: true });
+    }
+  });
+
   it('rejects a config path that is not the repository root file', async () => {
     const repositoryRoot = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-wrong-path-'));
 
     try {
       await expect(loadConfig(path.join(repositoryRoot, 'nested.json'), { repositoryRoot })).rejects.toThrow(/must be/);
+      await expect(loadConfig(path.join(repositoryRoot, 'spirit.config.ts'), { repositoryRoot })).rejects.toThrow(
+        /Unable to read assets config/,
+      );
     } finally {
       await rm(repositoryRoot, { recursive: true, force: true });
     }

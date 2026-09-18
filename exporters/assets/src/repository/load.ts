@@ -1,10 +1,11 @@
 import { lstat, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
+import { parseSpiritConfigSource } from '../config/source';
 import { resolveConfig } from '../config/resolve';
 import { ConfigError } from '../errors';
 import type { ResolvedAssetsConfig } from '../types';
-import { assertContainedInRoot, assertNoSymlinkComponents, expectedRepositoryConfigPath } from './paths';
+import { assertContainedInRoot, assertNoSymlinkComponents, expectedRepositoryConfigPaths } from './paths';
 
 export const confineConfig = (config: ResolvedAssetsConfig, repositoryRoot: string): ResolvedAssetsConfig => {
   const resolvedRoot = path.resolve(repositoryRoot);
@@ -12,8 +13,10 @@ export const confineConfig = (config: ResolvedAssetsConfig, repositoryRoot: stri
 
   assertContainedInRoot(resolvedConfigPath, resolvedRoot, 'Assets config');
 
-  if (resolvedConfigPath !== expectedRepositoryConfigPath(resolvedRoot)) {
-    throw new ConfigError(`Repository assets config must be ${expectedRepositoryConfigPath(resolvedRoot)}.`);
+  const allowedConfigPaths = expectedRepositoryConfigPaths(resolvedRoot);
+
+  if (!allowedConfigPaths.includes(resolvedConfigPath)) {
+    throw new ConfigError(`Repository assets config must be one of: ${allowedConfigPaths.join(', ')}.`);
   }
 
   config.targets.forEach((target) => {
@@ -30,19 +33,34 @@ export const loadRepositoryConfig = async (
   configPath: string | undefined,
   repositoryRoot: string,
 ): Promise<ResolvedAssetsConfig> => {
-  const expectedPath = expectedRepositoryConfigPath(repositoryRoot);
-  const resolvedConfigPath = path.resolve(configPath ?? expectedPath);
+  const expectedPaths = expectedRepositoryConfigPaths(repositoryRoot);
+  const requestedPath = configPath ? path.resolve(configPath) : undefined;
 
-  if (resolvedConfigPath !== expectedPath) {
-    throw new ConfigError(`Repository assets config must be ${expectedPath}.`);
+  if (requestedPath && !expectedPaths.includes(requestedPath)) {
+    throw new ConfigError(`Repository assets config must be one of: ${expectedPaths.join(', ')}.`);
   }
 
-  let stats;
+  let resolvedConfigPath: string | undefined;
+  let stats: Awaited<ReturnType<typeof lstat>> | undefined;
 
-  try {
-    stats = await lstat(resolvedConfigPath);
-  } catch (error) {
-    throw new ConfigError(`Unable to read assets config at ${resolvedConfigPath}: ${String(error)}`, { cause: error });
+  for (const candidatePath of requestedPath ? [requestedPath] : expectedPaths) {
+    try {
+      stats = await lstat(candidatePath);
+      resolvedConfigPath = candidatePath;
+      break;
+    } catch (error) {
+      if (!requestedPath && (error as NodeJS.ErrnoException).code === 'ENOENT') {
+        continue;
+      }
+
+      throw new ConfigError(`Unable to read assets config at ${candidatePath}: ${String(error)}`, { cause: error });
+    }
+  }
+
+  if (!resolvedConfigPath || !stats) {
+    throw new ConfigError(
+      `Unable to read assets config: no supported Spirit configuration at ${path.resolve(repositoryRoot)}.`,
+    );
   }
 
   if (stats.isSymbolicLink()) {
@@ -52,7 +70,7 @@ export const loadRepositoryConfig = async (
   let parsedConfig: unknown;
 
   try {
-    parsedConfig = JSON.parse(await readFile(resolvedConfigPath, 'utf8')) as unknown;
+    parsedConfig = parseSpiritConfigSource(resolvedConfigPath, await readFile(resolvedConfigPath, 'utf8'));
   } catch (error) {
     throw new ConfigError(`Unable to read assets config at ${resolvedConfigPath}: ${String(error)}`, { cause: error });
   }
