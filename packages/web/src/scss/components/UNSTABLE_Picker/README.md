@@ -17,7 +17,9 @@ popover is a `role="dialog"`, so it can hold any content.
 
 ```txt
 Stack                                         space-400
-├── Label
+├── Flex                                      Label + optional ContextualHelp
+│   ├── Label
+│   └── ContextualHelp                        (optional)
 ├── Dropdown
 │   ├── InputContainer                        role="group"
 │   │   ├── UNSTABLE_PickerSelection          role="group" (empty) · role="grid" (selected)
@@ -228,6 +230,43 @@ Place a hidden `<span>` with a unique `id` anywhere in the `<body>` and referenc
 
 <!-- AT help text for tags removal -->
 <span id="picker-tag-description" hidden>Press Delete or Backspace to remove</span>
+```
+
+## Contextual Help
+
+Place [ContextualHelp][contextual-help] next to the Label in a horizontal Flex. Use an accessible name that includes
+the field label:
+
+```html
+<div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+  <div class="Flex Flex--horizontal Flex--alignmentYCenter" style="--flex-spacing-x: var(--spirit-space-100);">
+    <span class="Label">Languages</span>
+    <div class="Tooltip d-inline-block" data-spirit-element="tooltip">
+      <button
+        type="button"
+        class="ControlButton ControlButton--small ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target d-flex"
+        aria-describedby="picker-contextual-help"
+        data-spirit-toggle="tooltip"
+        data-spirit-target="#picker-contextual-help"
+      >
+        <svg class="Icon" width="16" height="16" aria-hidden="true">
+          <use href="/icons/svg/sprite.svg#info" />
+        </svg>
+        <span class="accessibility-hidden">More information about Languages</span>
+      </button>
+      <div
+        id="picker-contextual-help"
+        class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-top placement-controlled"
+        data-spirit-placement="top"
+        data-spirit-trigger="click, hover, focus"
+      >
+        Pick every language you can use at work, not only your native one.
+        <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
+      </div>
+    </div>
+  </div>
+  <div class="Dropdown"><!-- … --></div>
+</div>
 ```
 
 ## Hidden Label
@@ -712,6 +751,7 @@ Popover API is strongly recommended.
 | `aria-controls`             | Trigger button    | Points to the popup element                                                                           |
 | `aria-describedby`          | Tag               | Links to the hidden removal instruction                                                               |
 
+[contextual-help]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/ContextualHelp/README.md
 [decision-listbox-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/013-listbox-vs-grid-for-selectable-options.md
 [dropdown]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Dropdown/README.md
 [jira-listbox-react]: https://jira.almacareer.tech/browse/DS-2770

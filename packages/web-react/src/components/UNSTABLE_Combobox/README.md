@@ -255,6 +255,7 @@ values Combobox does not set itself.
 | `addMoreLabel`                | `string`                                                    | i18n `combobox.addMore`                     | ✕        | Input placeholder when ≥1 tag selected                                                                                               |
 | `auxiliaryContent`            | `ReactNode`                                                 | —                                           | ✕        | Extra popover content sibling of the options widget                                                                                  |
 | `children`                    | `ReactNode`                                                 | —                                           | ✕        | Options inside the popover widget (optional for tip-only / `auxiliaryContent`)                                                       |
+| `contextualHelp`              | `ReactNode`                                                 | —                                           | ✕        | Content next to the field label, typically [ContextualHelp][contextual-help]                                                         |
 | `dropdownProps`               | `DropdownBaseProps`                                         | —                                           | ✕        | Alignment and dropdown behavior for the inner `Dropdown`; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)          |
 | `emptySelectionLabel`         | `string`                                                    | —                                           | ✕        | Input placeholder when nothing selected; supports `{label}`                                                                          |
 | `emptyStateLabel`             | `ReactNode`                                                 | i18n `combobox.emptyState`                  | ✕        | Empty-state slot content                                                                                                             |
@@ -466,6 +467,7 @@ and [escape hatches][readme-escape-hatches].
 
 [combobox-themes-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Combobox/demo/ComboboxThemes.tsx
 [combobox-web]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_Combobox/README.md
+[contextual-help]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ContextualHelp/README.md
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [dictionary-variant]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#fill-variants
