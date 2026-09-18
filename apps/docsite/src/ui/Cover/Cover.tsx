@@ -6,7 +6,7 @@ import React from 'react';
 
 const Cover = () => (
   <Section size="xlarge" textAlignment="center" backgroundColor="primary">
-    <Heading elementType="h1" size="xlarge" emphasis="bold">
+    <Heading elementType="h1" size="xlarge" fontWeight="bold">
       Spirit Design System
     </Heading>
     <Heading elementType="h2" size="small" textColor="secondary" marginBottom="space-1000">
