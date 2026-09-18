@@ -396,6 +396,8 @@ Test extreme custom radii on interactive surfaces to ensure focus indicators and
 
 ### Component Color Overrides
 
+👉 For how color schemes work and where these overrides fit in, see the [Color Schemes][color-schemes-guide] guide.
+
 To override the default color scheme for a component, you can add tokens with the following pattern:
 `component-<component-name>-<token-name>-<suffix>`.
 
@@ -513,6 +515,7 @@ values. This way, you can switch between themes without changing your components
 
 See the [LICENSE](LICENSE.md) file for information.
 
+[color-schemes-guide]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/color-schemes.md
 [readme-web-pill]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Pill/README.md
 [sass-embedded]: https://sass-lang.com/documentation/breaking-changes/legacy-js-api/#bundlers
 [spirit-figma]: https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/
