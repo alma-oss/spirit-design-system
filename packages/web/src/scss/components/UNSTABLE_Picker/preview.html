@@ -2660,6 +2660,198 @@
 
   <div class="Container">
 
+    <h2 class="docs-Heading">Contextual Help</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+
+        <div
+          class="Flex Flex--horizontal Flex--alignmentYCenter"
+          style="--flex-spacing-x: var(--spirit-space-100);"
+        >
+          <span class="Label">Languages</span>
+          <div
+            class="Tooltip"
+            data-spirit-element="tooltip"
+          >
+            <button
+              type="button"
+              class="ControlButton ControlButton--small ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target d-flex"
+              aria-describedby="picker-contextual-help"
+              data-spirit-toggle="tooltip"
+              data-spirit-target="#picker-contextual-help"
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#info" />
+              </svg>
+              <span class="accessibility-hidden">More information about Languages</span>
+            </button>
+            <div
+              id="picker-contextual-help"
+              class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-top placement-controlled"
+              data-spirit-placement="top"
+              data-spirit-trigger="click, hover, focus"
+            >
+              Pick every language you can use at work, not only your native one.
+              <span
+                class="TooltipPopover__arrow"
+                data-spirit-element="arrow"
+              ></span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="Dropdown"
+          data-spirit-toggle="picker"
+          data-picker-label="Languages"
+        >
+
+          <div
+            role="group"
+            aria-label="Languages"
+            class="InputContainer InputContainer--fill InputContainer--medium"
+          >
+
+            <div
+              role="group"
+              tabindex="-1"
+              aria-atomic="false"
+              aria-label="Selected languages"
+              aria-live="off"
+              aria-relevant="additions"
+              id="picker-contextual-help-selection"
+              class="UNSTABLE_PickerSelection"
+              data-spirit-element="selection"
+            >
+              <span
+                class="UNSTABLE_PickerSelection__empty"
+                data-spirit-element="selection-label"
+                aria-hidden="true"
+              >Languages</span>
+            </div>
+
+            <button
+              data-spirit-toggle="dropdown"
+              data-spirit-target="#picker-contextual-help-popover"
+              class="UNSTABLE_PickerTrigger"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="picker-contextual-help-popover"
+            >
+              <span class="accessibility-hidden">Add</span>
+              <svg
+                class="Icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Languages"
+            class="DropdownPopover placement-bottom-start theme-light-default"
+            data-spirit-placement="bottom-start"
+            id="picker-contextual-help-popover"
+          >
+
+            <fieldset class="border-0">
+              <legend class="accessibility-hidden">Language</legend>
+              <div class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical" style="--flex-spacing-y: var(--spirit-space-500);">
+
+                <div class="Item" data-spirit-element="checkbox">
+                  <div class="Item__slot" role="presentation">
+                    <input
+                      type="checkbox"
+                      id="lang-contextual-help-cs"
+                      class="Checkbox Checkbox--item"
+                      name="contextual-help"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="Item__content" role="presentation">
+                    <label
+                      class="Label element-stretched cursor-pointer"
+                      data-spirit-element="checkbox-label"
+                      for="lang-contextual-help-cs"
+                    >
+                      Czech
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Item" data-spirit-element="checkbox">
+                  <div class="Item__slot" role="presentation">
+                    <input
+                      type="checkbox"
+                      id="lang-contextual-help-dk"
+                      class="Checkbox Checkbox--item"
+                      name="contextual-help"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="Item__content" role="presentation">
+                    <label
+                      class="Label element-stretched cursor-pointer"
+                      data-spirit-element="checkbox-label"
+                      for="lang-contextual-help-dk"
+                    >
+                      Danish
+                    </label>
+                  </div>
+                </div>
+
+                <div class="Item" data-spirit-element="checkbox">
+                  <div class="Item__slot" role="presentation">
+                    <input
+                      type="checkbox"
+                      id="lang-contextual-help-kl"
+                      class="Checkbox Checkbox--item"
+                      name="contextual-help"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="Item__content" role="presentation">
+                    <label
+                      class="Label element-stretched cursor-pointer"
+                      data-spirit-element="checkbox-label"
+                      for="lang-contextual-help-kl"
+                    >
+                      Greenlandic
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
     <h2 class="docs-Heading">Required</h2>
 
     <div class="docs-Stack docs-Stack--start">
@@ -3562,7 +3754,47 @@
 
       <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
 
-        <span class="Label Label--medium Label--disabled">Languages</span>
+        <div
+          class="Flex Flex--horizontal Flex--alignmentYCenter"
+          style="--flex-spacing-x: var(--spirit-space-100);"
+        >
+          <span class="Label Label--medium Label--disabled">Languages</span>
+          <div
+            class="Tooltip"
+            data-spirit-element="tooltip"
+          >
+            <button
+              type="button"
+              class="ControlButton ControlButton--small ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target d-flex disabled"
+              aria-describedby="picker-disabled-pre-help"
+              data-spirit-toggle="tooltip"
+              data-spirit-target="#picker-disabled-pre-help"
+              disabled
+            >
+              <svg
+                class="Icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <use href="/assets/icons/svg/sprite.svg#info" />
+              </svg>
+              <span class="accessibility-hidden">More information about Languages</span>
+            </button>
+            <div
+              id="picker-disabled-pre-help"
+              class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-top placement-controlled"
+              data-spirit-placement="top"
+              data-spirit-trigger="click, hover, focus"
+            >
+              Pick every language you can use at work, not only your native one.
+              <span
+                class="TooltipPopover__arrow"
+                data-spirit-element="arrow"
+              ></span>
+            </div>
+          </div>
+        </div>
 
         <div
           class="Dropdown"
