@@ -13,7 +13,11 @@ const createRepository = (overrides: Partial<ListedRepository> = {}): ListedRepo
 });
 
 const TEST_REF = 'a'.repeat(40);
-const configFile = (contents: string) => ({ contents, ref: TEST_REF });
+const configFile = (contents: string, configPath = ROOT_CONFIG_FILE) => ({
+  contents,
+  path: configPath,
+  ref: TEST_REF,
+});
 
 const optedInConfig = JSON.stringify({
   assets: {
@@ -43,6 +47,7 @@ describe('discoverSyncTargets', () => {
         branch: 'chore/figma-icons-sync-spirit-design-system-packages-icons-src-svg',
         brand: 'Spirit',
         commitMessage: 'chore(icons): sync Spirit icons from Figma',
+        configFile: ROOT_CONFIG_FILE,
         out: 'packages/icons/src/svg',
         owner: 'alma-oss',
         ref: TEST_REF,
@@ -55,6 +60,7 @@ describe('discoverSyncTargets', () => {
         branch: 'chore/figma-icons-sync-spirit-design-system-libs-design-icons-jobs-cz-svg',
         brand: 'Jobs',
         commitMessage: 'chore(icons): sync Jobs icons from Figma',
+        configFile: ROOT_CONFIG_FILE,
         out: 'libs/design-icons/jobs.cz/svg',
         owner: 'alma-oss',
         ref: TEST_REF,
@@ -64,6 +70,26 @@ describe('discoverSyncTargets', () => {
       },
     ]);
     expect(messages).toEqual([]);
+  });
+
+  it('parses a static TypeScript config and records its filename in the matrix', async () => {
+    const result = await discoverSyncTargets({
+      listRepositories: async function* listRepositories() {
+        yield createRepository();
+      },
+      readConfigFile: async () =>
+        configFile(
+          "export default { assets: { fileKey: 'figma-file', targets: [{ brand: 'Jobs', out: 'svg', assets: ['icons'] }] } };",
+          'spirit.config.ts',
+        ),
+    });
+
+    expect(result.include).toHaveLength(1);
+    expect(result.include[0]).toMatchObject({
+      brand: 'Jobs',
+      configFile: 'spirit.config.ts',
+      out: 'svg',
+    });
   });
 
   it('skips archived, disabled, unauthenticated, unmatched, and invalid repositories', async () => {
@@ -147,8 +173,8 @@ describe('discoverSyncTargets', () => {
     ]);
     expect(messages.join('\n')).toContain('archived or disabled');
     expect(messages.join('\n')).toContain('installation token was not available');
-    expect(messages.join('\n')).toContain(`no ${ROOT_CONFIG_FILE}`);
-    expect(messages.join('\n')).toContain('contains invalid JSON');
+    expect(messages.join('\n')).toContain('no supported Spirit configuration');
+    expect(messages.join('\n')).toContain('contains invalid static configuration');
     expect(messages.join('\n')).toContain('must contain a JSON object');
     expect(messages.join('\n')).toContain('must be an object');
     expect(messages.join('\n')).toContain('no assets configuration');
@@ -194,7 +220,7 @@ describe('discoverSyncTargets', () => {
     });
 
     expect(result.include).toEqual([]);
-    expect(messages).toEqual(['Skipping repository: unable to read spirit.config.json.']);
+    expect(messages).toEqual(['Skipping repository: unable to read Spirit configuration.']);
     expect(messages.join('\n')).not.toMatch(/private-(owner|repository)/);
   });
 
@@ -210,7 +236,7 @@ describe('discoverSyncTargets', () => {
       redact: true,
     });
 
-    expect(messages).toEqual(['Skipping repository: spirit.config.json contains invalid JSON.']);
+    expect(messages).toEqual(['Skipping repository: spirit.config.json contains invalid static configuration.']);
     expect(messages.join('\n')).not.toMatch(/private-(owner|repository|secret)/);
   });
 
@@ -371,6 +397,7 @@ describe('discoverSyncTargets', () => {
         branch: 'chore/figma-icons-sync-platform-frontends-libs-design-icons-prace-cz-svg',
         brand: 'Práce',
         commitMessage: 'chore(icons): sync Práce icons from Figma',
+        configFile: ROOT_CONFIG_FILE,
         out: 'libs/design-icons/prace.cz/svg',
         owner: 'almacareer',
         ref: TEST_REF,
@@ -383,6 +410,7 @@ describe('discoverSyncTargets', () => {
         branch: 'chore/figma-icons-sync-platform-frontends-libs-design-icons-jobs-cz-svg',
         brand: 'Jobs',
         commitMessage: 'chore(jobs-icons): sync icons from Figma',
+        configFile: ROOT_CONFIG_FILE,
         out: 'libs/design-icons/jobs.cz/svg',
         owner: 'almacareer',
         ref: TEST_REF,

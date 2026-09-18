@@ -1,4 +1,5 @@
-import { DISCOVERY_CONCURRENCY, DISCOVERY_TARGET_LIMIT, ROOT_CONFIG_FILE } from '../../constants';
+import { parseSpiritConfigSource } from '../../config';
+import { DISCOVERY_CONCURRENCY, DISCOVERY_TARGET_LIMIT } from '../../constants';
 import { ConfigError } from '../../errors';
 import { tryParseOptInConfig } from '../../repository/optIn';
 import { toTargetSlug } from '../../repository/paths';
@@ -55,14 +56,14 @@ const inspectRepository = async (
   } catch (error) {
     /* istanbul ignore if -- Config file reads reject with Error instances. */
     if (!(error instanceof Error)) {
-      log(`Skipping ${repositoryLabel}: unable to read ${ROOT_CONFIG_FILE}.`);
+      log(`Skipping ${repositoryLabel}: unable to read Spirit configuration.`);
 
       return [];
     }
 
     log(
       redact
-        ? `Skipping ${repositoryLabel}: unable to read ${ROOT_CONFIG_FILE}.`
+        ? `Skipping ${repositoryLabel}: unable to read Spirit configuration.`
         : `Skipping ${repositoryLabel}: ${error.message}`,
     );
 
@@ -70,7 +71,7 @@ const inspectRepository = async (
   }
 
   if (configFile === null) {
-    log(`Skipping ${repositoryLabel}: no ${ROOT_CONFIG_FILE}.`);
+    log(`Skipping ${repositoryLabel}: no supported Spirit configuration.`);
 
     return [];
   }
@@ -78,14 +79,14 @@ const inspectRepository = async (
   let parsedConfig: unknown;
 
   try {
-    parsedConfig = JSON.parse(configFile.contents) as unknown;
+    parsedConfig = parseSpiritConfigSource(configFile.path, configFile.contents);
   } catch {
-    log(`Skipping ${repositoryLabel}: ${ROOT_CONFIG_FILE} contains invalid JSON.`);
+    log(`Skipping ${repositoryLabel}: ${configFile.path} contains invalid static configuration.`);
 
     return [];
   }
 
-  const optIn = tryParseOptInConfig(parsedConfig);
+  const optIn = tryParseOptInConfig(parsedConfig, configFile.path);
 
   if ('error' in optIn) {
     log(`Skipping ${repositoryLabel}: ${optIn.error}`);
@@ -115,6 +116,7 @@ const inspectRepository = async (
       return {
         base: repository.defaultBranch,
         brand: target.brand,
+        configFile: configFile.path,
         ref: configFile.ref,
         out: target.out,
         owner: repository.owner,

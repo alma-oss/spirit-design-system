@@ -1,7 +1,7 @@
 import { lstat } from 'node:fs/promises';
 import path from 'node:path';
 
-import { ROOT_CONFIG_FILE } from '../constants';
+import { ROOT_CONFIG_FILE, ROOT_CONFIG_FILES } from '../constants';
 import { ConfigError } from '../errors';
 
 export const isContainedInRoot = (targetPath: string, repositoryRoot: string): boolean => {
@@ -20,6 +20,9 @@ export const assertContainedInRoot = (targetPath: string, repositoryRoot: string
 
 export const expectedRepositoryConfigPath = (repositoryRoot: string): string =>
   path.join(path.resolve(repositoryRoot), ROOT_CONFIG_FILE);
+
+export const expectedRepositoryConfigPaths = (repositoryRoot: string): string[] =>
+  ROOT_CONFIG_FILES.map((configFile) => path.join(path.resolve(repositoryRoot), configFile));
 
 export const toTargetSlug = (out: string): string => {
   const slug = out.replace(/[^A-Za-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
