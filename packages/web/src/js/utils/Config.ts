@@ -12,8 +12,8 @@ const toType = (object: unknown) => {
 
   return Object.prototype.toString
     .call(object)
-    .match(/\s([a-z]+)/i)[1]
-    .toLowerCase();
+    .match(/\s([a-z]+)/i)?.[1]
+    ?.toLowerCase();
 };
 
 class Config {

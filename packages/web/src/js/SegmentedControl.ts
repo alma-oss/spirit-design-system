@@ -4,6 +4,7 @@ import { EventHandler } from './dom';
 import SelectorEngine from './dom/SelectorEngine';
 import { CLASS_NAME_TRANSITIONING } from './constants';
 import { enableToggleAutoloader, SpiritConfig } from './utils';
+import { SpiritElement } from './types';
 
 const NAME = 'segmentedControl';
 const DATA_KEY = `${NAME}`;
