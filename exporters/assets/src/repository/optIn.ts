@@ -3,9 +3,12 @@ import { ROOT_CONFIG_FILE } from '../constants';
 import { ConfigError } from '../errors';
 import type { AssetsConfig } from '../types';
 
-export const tryParseOptInConfig = (value: unknown): { config: AssetsConfig } | { error: string } => {
+export const tryParseOptInConfig = (
+  value: unknown,
+  configPath: string = ROOT_CONFIG_FILE,
+): { config: AssetsConfig } | { error: string } => {
   try {
-    return { config: parseAssetsConfig(value, ROOT_CONFIG_FILE) };
+    return { config: parseAssetsConfig(value, configPath) };
   } catch (error) {
     /* istanbul ignore if -- Parsing converts all validation failures to ConfigError. */
     if (!(error instanceof ConfigError)) {

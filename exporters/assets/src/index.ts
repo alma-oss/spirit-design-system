@@ -1,7 +1,14 @@
 export { exportAssets, exportIcons } from './sync/adapters/figma';
 export { runCli } from './cli';
 export { assertRelativeOutputPath, filterTargets, loadConfig, resolveConfig } from './config';
-export { ASSET_DISCOVERY, ASSET_TYPES, CHANGE_TYPES, CONFIG_MODULE_NAME, ROOT_CONFIG_FILE } from './constants';
+export {
+  ASSET_DISCOVERY,
+  ASSET_TYPES,
+  CHANGE_TYPES,
+  CONFIG_MODULE_NAME,
+  ROOT_CONFIG_FILE,
+  ROOT_CONFIG_FILES,
+} from './constants';
 export { AssetDiscoveryError, ConfigError, FigmaApiError } from './errors';
 export {
   createGitHubApp,

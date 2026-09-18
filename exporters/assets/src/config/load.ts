@@ -2,11 +2,12 @@ import path from 'node:path';
 
 import { cosmiconfig } from 'cosmiconfig';
 
-import { CONFIG_MODULE_NAME, ROOT_CONFIG_FILE } from '../constants';
+import { CONFIG_MODULE_NAME, ROOT_CONFIG_FILE, ROOT_CONFIG_FILES } from '../constants';
 import { ConfigError } from '../errors';
 import { loadRepositoryConfig } from '../repository/load';
 import type { ResolvedAssetsConfig } from '../types';
 import { resolveConfig } from './resolve';
+import { parseSpiritConfigSource } from './source';
 
 export interface LoadConfigOptions {
   repositoryRoot?: string;
@@ -22,15 +23,15 @@ export const loadConfig = async (
 
   const explorer = cosmiconfig(CONFIG_MODULE_NAME, {
     cache: false,
-    searchPlaces: [
-      ROOT_CONFIG_FILE,
-      'package.json',
-      `.${CONFIG_MODULE_NAME}rc`,
-      `.${CONFIG_MODULE_NAME}rc.json`,
-      `${CONFIG_MODULE_NAME}.config.js`,
-      `${CONFIG_MODULE_NAME}.config.mjs`,
-      `${CONFIG_MODULE_NAME}.config.ts`,
-    ],
+    loaders: {
+      '.cjs': parseSpiritConfigSource,
+      '.cts': parseSpiritConfigSource,
+      '.js': parseSpiritConfigSource,
+      '.mjs': parseSpiritConfigSource,
+      '.mts': parseSpiritConfigSource,
+      '.ts': parseSpiritConfigSource,
+    },
+    searchPlaces: [ROOT_CONFIG_FILE, 'package.json', `.${CONFIG_MODULE_NAME}rc`, ...ROOT_CONFIG_FILES.slice(1)],
   });
 
   try {

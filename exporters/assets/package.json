@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "cosmiconfig": "catalog:script",
+    "json5": "catalog:script",
     "octokit": "catalog:script",
     "sade": "catalog:script",
     "zod": "catalog:script"
