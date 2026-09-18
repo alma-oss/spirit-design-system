@@ -280,6 +280,7 @@ describe('runCli', () => {
                 branch: 'chore/figma-icons-sync-spirit-design-system-packages-icons-src-svg',
                 brand: 'Spirit',
                 commitMessage: 'chore(icons): sync Spirit icons from Figma',
+                configFile: 'spirit.config.json',
                 out: 'packages/icons/src/svg',
                 owner: 'alma-oss',
                 ref: 'a'.repeat(40),
@@ -628,7 +629,7 @@ describe('resolveConfig', () => {
         ),
         '/repo',
       ),
-    ).toThrow(/must be \/repo\/spirit.config.json/);
+    ).toThrow(/must be one of: \/repo\/spirit.config.json/);
   });
 });
 

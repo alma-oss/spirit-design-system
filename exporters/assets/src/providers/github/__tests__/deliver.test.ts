@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 
@@ -7,6 +7,7 @@ import { deliverPullRequest, type GitCommand } from '../deliver';
 
 const OLD_SHA = 'a'.repeat(40);
 const NEW_SHA = 'b'.repeat(40);
+const TREE_SHA = 'c'.repeat(40);
 
 const response = (body: unknown, status = 200) =>
   new Response(body === undefined ? undefined : JSON.stringify(body), { status });
@@ -24,6 +25,27 @@ const createOptions = () => ({
   title: 'Sync icons',
   token: 'token',
 });
+
+const createChangedExistingBranchGit = () =>
+  jest.fn(async (args: string[]) => {
+    if (args[0] === 'write-tree') {
+      return TREE_SHA;
+    }
+
+    if (args[0] === 'ls-tree') {
+      return 'svg/icon.svg\n';
+    }
+
+    if (args[0] === 'status') {
+      return ' M svg/icon.svg\n';
+    }
+
+    if (args[0] === 'rev-parse') {
+      return args[1] === 'FETCH_HEAD' ? OLD_SHA : NEW_SHA;
+    }
+
+    return '';
+  });
 
 describe('deliverPullRequest', () => {
   it('uses the default Git and fetch adapters', async () => {
@@ -89,17 +111,7 @@ describe('deliverPullRequest', () => {
       .mockResolvedValueOnce(response({ author: { name: 'spirit-assets[bot]' } }))
       .mockResolvedValueOnce(response({ number: 42 }));
     const fetchImplementation = fetchMock as unknown as typeof fetch;
-    const git = jest.fn(async (args: string[]) => {
-      if (args[0] === 'status') {
-        return ' M svg/icon.svg\n';
-      }
-
-      if (args[0] === 'rev-parse') {
-        return NEW_SHA;
-      }
-
-      return '';
-    });
+    const git = createChangedExistingBranchGit();
 
     await expect(
       deliverPullRequest(createOptions(), {
@@ -188,17 +200,7 @@ describe('deliverPullRequest', () => {
       )
       .mockResolvedValueOnce(response({ number: 17 }));
     const fetchImplementation = fetchMock as unknown as typeof fetch;
-    const git = jest.fn(async (args: string[]) => {
-      if (args[0] === 'status') {
-        return ' M svg/icon.svg\n';
-      }
-
-      if (args[0] === 'rev-parse') {
-        return `${NEW_SHA}\n`;
-      }
-
-      return '';
-    });
+    const git = createChangedExistingBranchGit();
     const body = 'Release notes\nEOF\n::warning::still text\n';
 
     await expect(
@@ -220,11 +222,96 @@ describe('deliverPullRequest', () => {
         GIT_CONFIG_VALUE_0: expect.stringMatching(/^AUTHORIZATION: basic /),
       }),
     );
+    expect(git).toHaveBeenCalledWith([
+      'switch',
+      '--discard-changes',
+      '--force-create',
+      'chore/figma-icons-sync',
+      'FETCH_HEAD',
+    ]);
+    expect(git).not.toHaveBeenCalledWith(['switch', '-C', 'chore/figma-icons-sync']);
 
     const updateRequest = fetchMock.mock.calls[2]?.[1] as RequestInit;
 
     expect(JSON.parse(String(updateRequest.body))).toEqual({ body, title: 'Sync icons' });
   });
+
+  it('commits assets on top of human follow-up commits on the automation branch', async () => {
+    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-delivery-preserve-'));
+    const seedRepository = path.join(temporaryDirectory, 'seed');
+    const remoteRepository = path.join(temporaryDirectory, 'remote.git');
+    const runnerRepository = path.join(temporaryDirectory, 'runner');
+    const branch = 'chore/figma-icons-sync';
+
+    try {
+      await mkdir(seedRepository);
+      execFileSync('git', ['init', '--initial-branch=main'], { cwd: seedRepository, stdio: 'ignore' });
+      execFileSync('git', ['config', 'user.name', 'Base Author'], { cwd: seedRepository });
+      execFileSync('git', ['config', 'user.email', 'base@example.com'], { cwd: seedRepository });
+      await mkdir(path.join(seedRepository, 'svg'));
+      await writeFile(path.join(seedRepository, 'svg/icon.svg'), 'base');
+      execFileSync('git', ['add', '.'], { cwd: seedRepository });
+      execFileSync('git', ['commit', '-m', 'base'], { cwd: seedRepository, stdio: 'ignore' });
+      execFileSync('git', ['switch', '-c', branch], { cwd: seedRepository, stdio: 'ignore' });
+      execFileSync('git', ['config', 'user.name', 'Reviewer'], { cwd: seedRepository });
+      execFileSync('git', ['config', 'user.email', 'reviewer@example.com'], { cwd: seedRepository });
+      await writeFile(path.join(seedRepository, 'e2e.snap'), 'visual fix');
+      execFileSync('git', ['add', '.'], { cwd: seedRepository });
+      execFileSync('git', ['commit', '-m', 'fix snapshots'], { cwd: seedRepository, stdio: 'ignore' });
+      const existingSha = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: seedRepository, encoding: 'utf8' }).trim();
+      execFileSync('git', ['switch', 'main'], { cwd: seedRepository, stdio: 'ignore' });
+      execFileSync('git', ['clone', '--bare', seedRepository, remoteRepository], { stdio: 'ignore' });
+      execFileSync('git', ['clone', remoteRepository, runnerRepository], { stdio: 'ignore' });
+      execFileSync('git', ['sparse-checkout', 'set', '--no-cone', '/svg/'], {
+        cwd: runnerRepository,
+        stdio: 'ignore',
+      });
+      await writeFile(path.join(runnerRepository, 'svg/icon.svg'), 'new from Figma');
+      const bodyPath = path.join(temporaryDirectory, 'body.md');
+      await writeFile(bodyPath, 'body');
+
+      const fetchImplementation = jest
+        .fn()
+        .mockResolvedValueOnce(response({ object: { sha: existingSha } }))
+        .mockResolvedValueOnce(
+          response([
+            {
+              head: { sha: existingSha },
+              number: 17,
+              state: 'open',
+              user: { login: 'spirit-assets[bot]' },
+            },
+          ]),
+        )
+        .mockResolvedValueOnce(response({ number: 17 })) as unknown as typeof fetch;
+
+      await expect(
+        deliverPullRequest(
+          {
+            ...createOptions(),
+            bodyPath,
+            branch,
+            repositoryRoot: runnerRepository,
+          },
+          { fetch: fetchImplementation },
+        ),
+      ).resolves.toEqual({ changed: true, pullRequestNumber: 17 });
+
+      expect(
+        execFileSync('git', ['--git-dir', remoteRepository, 'show', `${branch}:e2e.snap`], { encoding: 'utf8' }),
+      ).toBe('visual fix');
+      expect(
+        execFileSync('git', ['--git-dir', remoteRepository, 'show', `${branch}:svg/icon.svg`], { encoding: 'utf8' }),
+      ).toBe('new from Figma');
+      expect(
+        execFileSync('git', ['--git-dir', remoteRepository, 'log', '--format=%an', '-2', branch], {
+          encoding: 'utf8',
+        }).trim(),
+      ).toBe('spirit-assets[bot]\nReviewer');
+    } finally {
+      await rm(temporaryDirectory, { recursive: true, force: true });
+    }
+  }, 15_000);
 
   it('deletes an obsolete owned branch with a lease before closing its pull request', async () => {
     const events: string[] = [];
@@ -241,12 +328,25 @@ describe('deliverPullRequest', () => {
           },
         ]),
       )
+      .mockImplementationOnce(async () => response({ author: { name: 'spirit-assets[bot]' } }))
       .mockImplementationOnce(async () => {
         events.push('close');
 
         return response({ number: 17 });
       }) as unknown as typeof fetch;
     const git = jest.fn(async (args: string[]) => {
+      if (args[0] === 'write-tree') {
+        return TREE_SHA;
+      }
+
+      if (args[0] === 'ls-tree') {
+        return '';
+      }
+
+      if (args[0] === 'rev-parse') {
+        return OLD_SHA;
+      }
+
       if (args.includes('push')) {
         events.push('delete');
       }
@@ -284,13 +384,105 @@ describe('deliverPullRequest', () => {
             user: { login: 'spirit-assets[bot]' },
           },
         ]),
-      ) as unknown as typeof fetch;
-    const git = jest.fn(async () => '');
+      )
+      .mockResolvedValueOnce(response({ author: { name: 'spirit-assets[bot]' } })) as unknown as typeof fetch;
+    const git = jest.fn(async (args: string[]) => {
+      if (args[0] === 'write-tree') {
+        return TREE_SHA;
+      }
+
+      if (args[0] === 'ls-tree') {
+        return 'svg/icon.svg\n';
+      }
+
+      return args[0] === 'rev-parse' ? OLD_SHA : '';
+    });
 
     await expect(deliverPullRequest(createOptions(), { fetch: fetchImplementation, git })).resolves.toEqual({
       changed: false,
     });
-    expect(fetchImplementation).toHaveBeenCalledTimes(2);
+    expect(fetchImplementation).toHaveBeenCalledTimes(3);
+  });
+
+  it('keeps an owned pull request when its human-authored head has no asset changes', async () => {
+    const fetchImplementation = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(
+        response([
+          {
+            head: { sha: OLD_SHA },
+            number: 17,
+            state: 'open',
+            user: { login: 'spirit-assets[bot]' },
+          },
+        ]),
+      )
+      .mockResolvedValueOnce(response({ author: { name: 'reviewer' } })) as unknown as typeof fetch;
+    const git = jest.fn(async (args: string[]) => {
+      if (args[0] === 'write-tree') {
+        return TREE_SHA;
+      }
+
+      if (args[0] === 'ls-tree') {
+        return 'svg/icon.svg\n';
+      }
+
+      return args[0] === 'rev-parse' ? OLD_SHA : '';
+    });
+
+    await expect(deliverPullRequest(createOptions(), { fetch: fetchImplementation, git })).resolves.toEqual({
+      changed: false,
+    });
+    expect(git.mock.calls.some(([args]) => args[0] === 'push')).toBe(false);
+  });
+
+  it('rejects an automation branch that changes while it is being prepared', async () => {
+    const fetchImplementation = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(
+        response([
+          {
+            head: { sha: OLD_SHA },
+            number: 17,
+            state: 'open',
+            user: { login: 'spirit-assets[bot]' },
+          },
+        ]),
+      ) as unknown as typeof fetch;
+    const git = jest.fn(async (args: string[]) => {
+      if (args[0] === 'write-tree') {
+        return TREE_SHA;
+      }
+
+      return args[0] === 'rev-parse' ? NEW_SHA : '';
+    });
+
+    await expect(deliverPullRequest(createOptions(), { fetch: fetchImplementation, git })).rejects.toThrow(
+      'Automation branch changed during delivery.',
+    );
+  });
+
+  it('rejects an invalid desired tree revision', async () => {
+    const fetchImplementation = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(
+        response([
+          {
+            head: { sha: OLD_SHA },
+            number: 17,
+            state: 'open',
+            user: { login: 'spirit-assets[bot]' },
+          },
+        ]),
+      ) as unknown as typeof fetch;
+    const git = jest.fn(async () => '');
+
+    await expect(deliverPullRequest(createOptions(), { fetch: fetchImplementation, git })).rejects.toThrow(
+      'Git returned an invalid desired tree revision.',
+    );
   });
 
   it('creates a pull request for a new automation branch using a body file', async () => {
@@ -376,13 +568,7 @@ describe('deliverPullRequest', () => {
         ]),
       )
       .mockResolvedValueOnce(updateResponse) as unknown as typeof fetch;
-    const git = jest.fn(async (args: string[]) => {
-      if (args[0] === 'status') {
-        return ' M svg/icon.svg\n';
-      }
-
-      return args[0] === 'rev-parse' ? NEW_SHA : '';
-    });
+    const git = createChangedExistingBranchGit();
 
     await expect(
       deliverPullRequest(createOptions(), {

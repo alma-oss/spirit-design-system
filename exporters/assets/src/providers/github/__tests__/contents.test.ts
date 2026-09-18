@@ -1,4 +1,4 @@
-import { ROOT_CONFIG_FILE } from '../../../constants';
+import { ROOT_CONFIG_FILE, ROOT_CONFIG_FILES } from '../../../constants';
 import type { ListedRepository } from '../app';
 import { GITHUB_API_URL, GITHUB_API_VERSION, readRepositoryConfigFile } from '../contents';
 
@@ -22,6 +22,7 @@ describe('readRepositoryConfigFile', () => {
 
     await expect(readRepositoryConfigFile(repository, fetchImplementation)).resolves.toEqual({
       contents: '{"assets":{}}',
+      path: ROOT_CONFIG_FILE,
       ref,
     });
     expect(fetchMock.mock.calls).toEqual([
@@ -54,9 +55,33 @@ describe('readRepositoryConfigFile', () => {
     const fetchImplementation = jest
       .fn()
       .mockResolvedValueOnce(new Response(JSON.stringify({ sha: ref }), { status: 200 }))
-      .mockResolvedValueOnce(new Response('', { status: 404 })) as unknown as typeof fetch;
+      .mockResolvedValue(new Response('', { status: 404 })) as unknown as typeof fetch;
 
     await expect(readRepositoryConfigFile(repository, fetchImplementation)).resolves.toBeNull();
+    expect(fetchImplementation).toHaveBeenCalledTimes(ROOT_CONFIG_FILES.length + 1);
+  });
+
+  it('uses the first supported config file found at the pinned revision', async () => {
+    const configFile: (typeof ROOT_CONFIG_FILES)[number] = 'spirit.config.ts';
+    const configIndex = ROOT_CONFIG_FILES.indexOf(configFile);
+    const fetchMock = jest.fn().mockResolvedValueOnce(new Response(JSON.stringify({ sha: ref }), { status: 200 }));
+
+    ROOT_CONFIG_FILES.slice(0, configIndex).forEach(() => {
+      fetchMock.mockResolvedValueOnce(new Response('', { status: 404 }));
+    });
+    fetchMock.mockResolvedValueOnce(new Response('export default { assets: {} };', { status: 200 }));
+
+    const fetchImplementation = fetchMock as unknown as typeof fetch;
+
+    await expect(readRepositoryConfigFile(repository, fetchImplementation)).resolves.toEqual({
+      contents: 'export default { assets: {} };',
+      path: configFile,
+      ref,
+    });
+    expect(fetchMock).toHaveBeenLastCalledWith(
+      `${GITHUB_API_URL}/repos/alma-oss/spirit-design-system/contents/${configFile}?ref=${ref}`,
+      expect.anything(),
+    );
   });
 
   it('throws when the default branch or Contents API cannot be read', async () => {
@@ -120,7 +145,11 @@ describe('readRepositoryConfigFile', () => {
       .mockResolvedValueOnce(new Response('{"assets":{}}', { status: 200 })) as unknown as typeof fetch;
 
     try {
-      await expect(readRepositoryConfigFile(repository)).resolves.toEqual({ contents: '{"assets":{}}', ref });
+      await expect(readRepositoryConfigFile(repository)).resolves.toEqual({
+        contents: '{"assets":{}}',
+        path: ROOT_CONFIG_FILE,
+        ref,
+      });
     } finally {
       global.fetch = originalFetch;
     }

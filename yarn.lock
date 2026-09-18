@@ -69,6 +69,7 @@ __metadata:
     eslint-config-spirit: "workspace:^"
     jest: "catalog:test"
     jest-config-spirit: "workspace:^"
+    json5: "catalog:script"
     npm-run-all2: "catalog:script"
     octokit: "catalog:script"
     prettier-config-spirit: "workspace:^"

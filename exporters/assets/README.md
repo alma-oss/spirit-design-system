@@ -4,13 +4,12 @@
 directories. Figma is the current source adapter; the CLI, configuration, and disk mirroring stay source-agnostic.
 
 The package is private. Consumer repositories do not install it from npm. This repository runs the CLI locally and from
-GitHub Actions. A repository opts in by installing the GitHub App and merging a root `spirit.config.json`.
+GitHub Actions. A repository opts in by installing the GitHub App and merging a supported Spirit config at its root.
 
 ## Configuration
 
-Create `spirit.config.json` at the repository root. Cosmiconfig also searches for `.spiritrc`, `spirit.config.js`, and a
-`spirit` key in `package.json` during trusted local use. Asset export is one tool on that shared file; other tools can
-add sibling keys later without changing this shape:
+Create `spirit.config.json` at the repository root. Asset export is one tool on that shared file; other tools can add
+sibling keys later without changing this shape:
 
 ```json
 {
@@ -26,6 +25,12 @@ add sibling keys later without changing this shape:
   }
 }
 ```
+
+Repository opt-in also supports `.spiritrc.json` and static `spirit.config.{js,mjs,cjs,ts,cts,mts}` files. JSON takes
+precedence when more than one supported root file exists. JavaScript and TypeScript configs must contain only a
+JSON5-compatible object exported with `export default`; the CommonJS `.cjs` form uses `module.exports`. Imports,
+function calls, `defineConfig`, `satisfies`, and `as const` are not executed or accepted. During trusted local use,
+Cosmiconfig also supports an extensionless `.spiritrc` and a `spirit` key in `package.json`.
 
 The Figma file key is not a secret. It identifies a published Figma file, the same way
 [`packages/web-react/figma.config.json`][web-react-figma-config] stores a file URL.
@@ -98,17 +103,18 @@ The sync aborts before changing a target when it cannot discover or download the
 This repository runs a GitHub Actions workflow that synchronizes icons from Figma. It can be started manually or by a
 Figma library publish via external automation. Credentials live in the `figma` GitHub Actions environment.
 
-The workflow authenticates as the GitHub App and reads `spirit.config.json` from each repository the App can access via
-the GitHub Contents API. Discovery resolves the repository default branch to an exact commit and reads the config at
-that revision. Repositories without that file, or without an `assets` object, are skipped. A run is rejected if discovery
-produces more than 128 targets. Repository dispatch events must provide `client_payload.file_key`; manual runs can
-synchronize every opted-in file.
+The workflow authenticates as the GitHub App and probes the supported root config filenames in each repository the App
+can access via the GitHub Contents API. Discovery resolves the repository default branch to an exact commit and reads
+the first matching config at that revision. Repositories without a supported config, or without an `assets` object, are
+skipped. Config files are parsed as data and never executed. A run is rejected if discovery produces more than 128
+targets. Repository dispatch events must provide `client_payload.file_key`; manual runs can synchronize every opted-in
+file.
 
 Each configured target gets its own updating pull request. Sync jobs download a prebuilt CLI from the discover job and
 do not install this monorepo. They check out the exact revision inspected by discovery with `blob:none` and non-cone
-sparse checkout limited to `/spirit.config.json` and the validated output directory. Figma publish notes are resolved
-inside each target job and written directly to a temporary pull-request body file; private checkout data and publish
-notes are never uploaded as workflow artifacts.
+sparse checkout limited to the discovered root config and the validated output directory. Figma publish notes are
+resolved inside each target job and written directly to a temporary pull-request body file; private checkout data and
+publish notes are never uploaded as workflow artifacts.
 
 The orchestrator repository and its Actions run are public. Job names and logs are redacted, and repository-specific
 values are masked before checkout, but sparse checkout is a risk reduction rather than a strict confidentiality
@@ -151,13 +157,15 @@ For `branch` only, interpolated `{brand}` and `{out}` are slugified so names lik
 repository is skipped.
 
 An existing automation branch is updated or deleted only when it belongs to a pull request authored by the configured
-GitHub App at the same head revision. Updates and deletions use `--force-with-lease`, so a concurrent or unverified
-branch cannot be overwritten.
+GitHub App at the same head revision. Icon updates are committed on top of the existing branch, preserving follow-up
+commits such as visual-test fixes. A branch with no icon changes is deleted only when its head commit is App-authored;
+human follow-up commits keep the pull request open. Updates and deletions use `--force-with-lease`, so a concurrent or
+unverified branch cannot be overwritten.
 
 A repository opts in by:
 
 1. installing the same GitHub App, with `Contents: write` and `Pull requests: write`
-2. merging `spirit.config.json` at the repository root
+2. merging a supported Spirit config at the repository root
 3. allowing the App to push the automation branch
 
 The target repository does not run the exporter or store Figma credentials.

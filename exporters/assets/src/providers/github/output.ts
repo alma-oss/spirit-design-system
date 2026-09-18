@@ -3,6 +3,7 @@ export interface DiscoverTarget {
   branch: string;
   brand: string;
   commitMessage: string;
+  configFile: string;
   out: string;
   owner: string;
   ref: string;

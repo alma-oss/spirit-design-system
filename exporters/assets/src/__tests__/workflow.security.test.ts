@@ -19,8 +19,9 @@ describe('Figma asset sync workflow security policy', () => {
     expect(workflow).toContain(['ref: $', '{{ matrix.ref }}'].join(''));
     expect(workflow).not.toContain('filter:');
     expect(workflow).toContain('sparse-checkout-cone-mode: false');
-    expect(workflow).toContain('/spirit.config.json');
+    expect(workflow).toContain(['/$', '{{ matrix.configFile }}'].join(''));
     expect(workflow).toContain(['/$', '{{ matrix.out }}/'].join(''));
+    expect(workflow).toContain(['--config="target/$', '{{ matrix.configFile }}"'].join(''));
     expect(workflow).toContain('persist-credentials: false');
   });
 

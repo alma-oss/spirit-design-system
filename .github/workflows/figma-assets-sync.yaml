@@ -123,7 +123,7 @@ jobs:
           ref: ${{ matrix.ref }}
           fetch-depth: 1
           sparse-checkout: |
-            /spirit.config.json
+            /${{ matrix.configFile }}
             /${{ matrix.out }}/
           sparse-checkout-cone-mode: false
           persist-credentials: false
@@ -132,7 +132,7 @@ jobs:
       - name: Sync assets from Figma
         run: |
           node standalone.mjs sync \
-            --config=target/spirit.config.json \
+            --config="target/${{ matrix.configFile }}" \
             --repository-root=target \
             --brand="$BRAND" \
             --out="$OUT" \

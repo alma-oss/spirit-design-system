@@ -37,6 +37,7 @@ interface PullRequestDeliveryDependencies {
 }
 
 interface ExistingBranch {
+  headAuthoredByApp?: boolean;
   openPullRequestNumber?: number;
   sha?: string;
 }
@@ -80,6 +81,28 @@ const parseJson = async (response: Response, operation: string): Promise<unknown
   } catch {
     throw new ConfigError(`GitHub returned an invalid response while ${operation}.`);
   }
+};
+
+const isCommitAuthoredByApp = async (
+  options: PullRequestDeliveryOptions,
+  sha: string,
+  fetchImplementation: typeof fetch,
+): Promise<boolean> => {
+  const { appSlug, owner, repo, token } = options;
+  const repositoryUrl = `${GITHUB_API_URL}/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+  const commitResponse = await fetchImplementation(`${repositoryUrl}/git/commits/${encodeURIComponent(sha)}`, {
+    headers: createHeaders(token),
+  });
+
+  if (!commitResponse.ok) {
+    throw new ConfigError(`Unable to inspect the automation commit (${commitResponse.status}).`);
+  }
+
+  const commitPayload = (await parseJson(commitResponse, 'inspecting the automation commit')) as {
+    author?: { name?: unknown };
+  };
+
+  return commitPayload.author?.name === `${appSlug}[bot]`;
 };
 
 const inspectExistingBranch = async (
@@ -145,23 +168,11 @@ const inspectExistingBranch = async (
     };
   }
 
-  const commitResponse = await fetchImplementation(`${repositoryUrl}/git/commits/${encodeURIComponent(sha)}`, {
-    headers: createHeaders(token),
-  });
-
-  if (!commitResponse.ok) {
-    throw new ConfigError(`Unable to inspect the automation commit (${commitResponse.status}).`);
-  }
-
-  const commitPayload = (await parseJson(commitResponse, 'inspecting the automation commit')) as {
-    author?: { name?: unknown };
-  };
-
-  if (commitPayload.author?.name !== `${appSlug}[bot]`) {
+  if (!(await isCommitAuthoredByApp(options, sha, fetchImplementation))) {
     throw new ConfigError('Existing automation branch is not owned by this GitHub App.');
   }
 
-  return { sha };
+  return { headAuthoredByApp: true, sha };
 };
 
 const requestGitHub = async (
@@ -215,18 +226,51 @@ export const deliverPullRequest = async (
   const existingBranch = await inspectExistingBranch(options, fetchImplementation);
   const branchRef = `refs/heads/${branch}`;
   const expectedSha = existingBranch.sha ?? '';
-  const status = await git(['status', '--porcelain=v1', '--untracked-files=all', '--', out]);
   const repositoryUrl = `${GITHUB_API_URL}/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
   const authenticatedHeader = Buffer.from(`x-access-token:${token}`).toString('base64');
+  const authenticatedEnvironment = {
+    GIT_CONFIG_COUNT: '1',
+    GIT_CONFIG_KEY_0: 'http.https://github.com/.extraheader',
+    GIT_CONFIG_VALUE_0: `AUTHORIZATION: basic ${authenticatedHeader}`,
+  };
   const push = (refspec: string) =>
-    git(['push', `--force-with-lease=${branchRef}:${expectedSha}`, 'origin', refspec], {
-      GIT_CONFIG_COUNT: '1',
-      GIT_CONFIG_KEY_0: 'http.https://github.com/.extraheader',
-      GIT_CONFIG_VALUE_0: `AUTHORIZATION: basic ${authenticatedHeader}`,
-    });
+    git(['push', `--force-with-lease=${branchRef}:${expectedSha}`, 'origin', refspec], authenticatedEnvironment);
+
+  if (existingBranch.sha) {
+    await git(['add', '--all', '--', out]);
+    const desiredTree = (await git(['write-tree'])).trim();
+
+    if (!SHA_PATTERN.test(desiredTree)) {
+      throw new ConfigError('Git returned an invalid desired tree revision.');
+    }
+
+    await git(['fetch', '--no-tags', '--depth=1', 'origin', branchRef], authenticatedEnvironment);
+    const fetchedSha = (await git(['rev-parse', 'FETCH_HEAD'])).trim();
+
+    if (fetchedSha !== existingBranch.sha) {
+      throw new ConfigError('Automation branch changed during delivery.');
+    }
+
+    await git(['switch', '--discard-changes', '--force-create', branch, 'FETCH_HEAD']);
+    await git(['rm', '-r', '--ignore-unmatch', '--', out]);
+
+    if ((await git(['ls-tree', '--name-only', '-r', desiredTree, '--', out])).trim()) {
+      await git(['restore', `--source=${desiredTree}`, '--staged', '--worktree', '--', out]);
+    }
+  }
+
+  const status = await git(['status', '--porcelain=v1', '--untracked-files=all', '--', out]);
 
   if (!status.trim()) {
     if (!existingBranch.sha) {
+      return { changed: false };
+    }
+
+    const headAuthoredByApp =
+      existingBranch.headAuthoredByApp ??
+      (await isCommitAuthoredByApp(options, existingBranch.sha, fetchImplementation));
+
+    if (!headAuthoredByApp) {
       return { changed: false };
     }
 
@@ -248,8 +292,12 @@ export const deliverPullRequest = async (
 
   await git(['config', 'user.name', `${appSlug}[bot]`]);
   await git(['config', 'user.email', `${appSlug}[bot]@users.noreply.github.com`]);
-  await git(['switch', '-C', branch]);
-  await git(['add', '--', out]);
+
+  if (!existingBranch.sha) {
+    await git(['switch', '-C', branch]);
+  }
+
+  await git(['add', '--all', '--', out]);
   await git(['commit', '-m', commitMessage]);
   const localSha = (await git(['rev-parse', 'HEAD'])).trim();
 

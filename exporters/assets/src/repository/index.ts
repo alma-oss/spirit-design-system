@@ -4,6 +4,7 @@ export {
   assertContainedInRoot,
   assertNoSymlinkComponents,
   expectedRepositoryConfigPath,
+  expectedRepositoryConfigPaths,
   isContainedInRoot,
   toTargetSlug,
 } from './paths';
