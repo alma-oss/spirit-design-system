@@ -30,6 +30,8 @@ const WebPreview = ({ html }: WebPreviewProps) => {
     }
 
     executeInlineScripts(container);
+
+    import('@alma-oss/spirit-web/src/js/index.esm').then(({ loadComponents }) => loadComponents(container));
   }, [html]);
 
   return (
