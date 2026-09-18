@@ -21,12 +21,15 @@ const registerAutoload = (callback: ScanCallback) => {
   scanCallbacks.push(callback);
 };
 
-if (document.readyState === 'loading') {
+// `'loading'` and `'interactive'` both mean DOMContentLoaded hasn't fired yet — module/deferred
+// scripts (e.g. this one, loaded as `type="module"`) always run during `'interactive'`, so only
+// `'complete'` reliably means the event already passed and an immediate scan is safe.
+if (document.readyState === 'complete') {
+  scanCallbacks.forEach((callback) => callback(document.documentElement));
+} else {
   EventHandler.on(window, 'DOMContentLoaded', () => {
     scanCallbacks.forEach((callback) => callback(document.documentElement));
   });
-} else {
-  scanCallbacks.forEach((callback) => callback(document.documentElement));
 }
 
 /**
