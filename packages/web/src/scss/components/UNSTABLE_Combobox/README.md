@@ -18,7 +18,9 @@ filterable option list.
 ```txt
 UNSTABLE_Combobox
 └── Stack                                             space-400
-    ├── Label
+    ├── Flex                                          Label + optional ContextualHelp
+    │   ├── Label
+    │   └── ContextualHelp                            (optional)
     ├── Dropdown
     │   ├── InputContainer                            role="group"
     │   │   └── UNSTABLE_ComboboxSelection            (wrapper)
@@ -312,6 +314,45 @@ The demo script reads `data-spirit-combobox-tag-template` on `.UNSTABLE_Combobox
   data-spirit-combobox-tag-template="combobox-split-tag-template"
 >
   <!-- … -->
+</div>
+```
+
+## Contextual Help
+
+Place [ContextualHelp][contextual-help] next to the Label in a horizontal Flex. Use an accessible name that includes
+the field label:
+
+```html
+<div class="UNSTABLE_Combobox">
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+    <div class="Flex Flex--horizontal Flex--alignmentYCenter" style="--flex-spacing-x: var(--spirit-space-100);">
+      <label class="Label" id="combobox-label" for="combobox-input">Languages</label>
+      <div class="Tooltip d-inline-block" data-spirit-element="tooltip">
+        <button
+          type="button"
+          class="ControlButton ControlButton--small ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target d-flex"
+          aria-describedby="combobox-contextual-help"
+          data-spirit-toggle="tooltip"
+          data-spirit-target="#combobox-contextual-help"
+        >
+          <svg class="Icon" width="16" height="16" aria-hidden="true">
+            <use href="/icons/svg/sprite.svg#info" />
+          </svg>
+          <span class="accessibility-hidden">More information about Languages</span>
+        </button>
+        <div
+          id="combobox-contextual-help"
+          class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-top placement-controlled"
+          data-spirit-placement="top"
+          data-spirit-trigger="click, hover, focus"
+        >
+          Pick every language you can use at work, not only your native one.
+          <span class="TooltipPopover__arrow" data-spirit-element="arrow"></span>
+        </div>
+      </div>
+    </div>
+    <div class="Dropdown"><!-- … --></div>
+  </div>
 </div>
 ```
 
@@ -631,6 +672,7 @@ input for option navigation; Space and printable characters type into the filter
 | `aria-selected`                  | Option item            | Marks whether the option is currently selected                                                        |
 | `aria-describedby`               | Tag / text input       | Links to the removal instruction / helper text / validation message                                   |
 
+[contextual-help]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/ContextualHelp/README.md
 [dropdown]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Dropdown/README.md
 [jira-selection-live-region]: https://jira.almacareer.tech/browse/DS-2759
 [picker-selection-role]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Picker/README.md#selection-area-dynamic-role
