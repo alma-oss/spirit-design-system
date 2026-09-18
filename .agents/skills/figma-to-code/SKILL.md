@@ -68,9 +68,9 @@ If a Figma design-to-code skill is available, follow it before calling `get_desi
 Preserve reading order, visual grouping, max-width boundaries, and Spirit composition contracts.
 Figma frames often exist for editing, clipping, or naming — they are not 1:1 DOM nodes.
 
-- Use a Spirit component when it owns the needed semantics, behavior, or styling contract. Search
-  for an existing composite (`PricingPlan` + `Matrix`, `ScrollView`, `Stack`) before assembling the
-  same look from Box, Flex, and borders. See [Component selection](references/component-selection.md).
+- Use a Spirit component when it owns the needed semantics, behavior, or styling contract. Match
+  Figma names and layout patterns first, then search for an existing composite
+  (`PricingPlan` + `Matrix`, `ScrollView`, `Stack`). See [Component selection](references/component-selection.md).
 - Use native semantic elements (`p`, `ul`/`ol`/`li`, `article`, `form`) when no Spirit component is
   responsible, including inside Card body content.
 - Do not wrap extra layout components around Card, Dialog, Drawer, or other families that require a
@@ -114,9 +114,9 @@ Spirit breakpoints are `mobile` from `0`, `tablet` from `48rem`, `desktop` from 
   (`{ mobile: 'small', desktop: 'large' }` keeps `small` on tablet).
 - If only one frame is provided, match that frame. Do not invent other breakpoints.
 - Figma layout guides (column counts, gutters) are often absent from MCP output. If the user
-  mentions them, implement with Grid and ask when the column count is unclear. Even without guides,
-  measured widths usually map to 12-column spans — convert them before hardcoding pixels. See
-  [Layout](references/layout.md).
+  mentions them, implement with Grid and ask when the column count is unclear. Infer column counts
+  from how the frame divides the parent (tokens and the 12-column system), not from a pixel formula.
+  See [Layout](references/layout.md).
 
 ### 5. Accessibility
 
@@ -169,7 +169,7 @@ If a gate cannot run, say so in the handoff (`verified` vs `unverified`) and lis
 - \[ \] No deprecated or removed APIs (`emphasis`, `row`/`column`, `hideOnCollapse`, `CardDescription`)
 - \[ \] Semantic structure preserved; Figma-only wrapper frames not copied 1:1
 - \[ \] Existing composite used where one covers the pattern (`PricingPlan`, `ScrollView`, `Stack`)
-- \[ \] Pixel widths converted to Grid column spans; no `UNSAFE_style` flex/max-width column hacks
+- \[ \] Widths expressed as Grid column spans or Container `size` tokens, not one-off pixel formulas
 - \[ \] Card vs Box decided by composition (artwork/title/footer/link), not Figma name
 - \[ \] Card titles with `themed/link/…` tokens use `CardLink` even if Code Connect omitted it
 - \[ \] Page `h1` not nested in an anonymous Section; repeating cards use list markup
