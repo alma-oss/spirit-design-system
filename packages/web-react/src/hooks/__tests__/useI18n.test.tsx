@@ -133,7 +133,7 @@ describe('useI18n', () => {
       const wrapper = createProviderWrapper({
         translations: {
           test: { greeting: 'Ahoj, {name}!' },
-        } as unknown as NonNullable<I18nProviderProps['translations']>,
+        },
       });
       const { result } = renderHook(() => useI18n(), { wrapper });
 
@@ -146,7 +146,7 @@ describe('useI18n', () => {
         translations: {
           en: { common: { close: 'Close EN' } },
           cs: { common: { close: 'Zavřít' } },
-        } as unknown as NonNullable<I18nProviderProps['translations']>,
+        },
       });
       const { result } = renderHook(() => useI18n(), { wrapper });
 
@@ -158,7 +158,7 @@ describe('useI18n', () => {
         translations: {
           en: { common: { close: 'Close EN' } },
           cs: { common: { close: 'Zavřít' } },
-        } as unknown as NonNullable<I18nProviderProps['translations']>,
+        },
       });
       const { result } = renderHook(() => useI18n(), { wrapper });
 
@@ -170,11 +170,35 @@ describe('useI18n', () => {
         locale: 'de',
         translations: {
           cs: { common: { close: 'Zavřít' } },
-        } as unknown as NonNullable<I18nProviderProps['translations']>,
+        },
       });
       const { result } = renderHook(() => useI18n(), { wrapper });
 
       expect(result.current.t('common.close')).toBe('Close');
+    });
+
+    it('should resolve arbitrary application keys from a direct translation tree', () => {
+      const wrapper = createProviderWrapper({
+        translations: {
+          modal: { close: 'Close {name}' },
+        },
+      });
+      const { result } = renderHook(() => useI18n(), { wrapper });
+
+      expect(result.current.t('modal.close', { name: 'Settings' })).toBe('Close Settings');
+    });
+
+    it('should resolve arbitrary application keys from a locale catalog', () => {
+      const wrapper = createProviderWrapper({
+        locale: 'cs',
+        translations: {
+          en: { modal: { close: 'Close' } },
+          cs: { modal: { close: 'Zavřít' } },
+        },
+      });
+      const { result } = renderHook(() => useI18n(), { wrapper });
+
+      expect(result.current.t('modal.close')).toBe('Zavřít');
     });
   });
 });

@@ -5,17 +5,11 @@ import { defaultTranslations } from '../translations/defaults';
 import { mergeTranslations } from '../translations/mergeTranslations';
 import { type ChildrenProps } from '../types/shared';
 
-type TranslationTree = { [key: string]: string | TranslationTree };
-
 export type I18nTranslations = typeof defaultTranslations;
 
-type NestedPartial<T> = {
-  [K in keyof T]?: T[K] extends string ? string : T[K] extends object ? NestedPartial<T[K]> : never;
-};
-
-type LocaleCatalog = Record<string, NestedPartial<I18nTranslations>>;
-
-export type I18nProviderTranslations = NestedPartial<I18nTranslations> | LocaleCatalog;
+export interface I18nProviderTranslations {
+  [key: string]: string | I18nProviderTranslations;
+}
 
 export type I18nProviderProps = ChildrenProps & {
   /** Optional locale used when `translations` is a locale catalog. */
@@ -27,7 +21,7 @@ export type I18nProviderProps = ChildrenProps & {
 const I18nContext = createContext<I18nTranslations | null>(null);
 const I18nConsumer = I18nContext.Consumer;
 
-const isNestedTranslations = (value: unknown): value is TranslationTree =>
+const isNestedTranslations = (value: unknown): value is I18nProviderTranslations =>
   typeof value === 'object' && value !== null && !Array.isArray(value);
 
 const hasDefaultTranslationNamespace = (translations: Record<string, unknown>): boolean =>
@@ -36,18 +30,18 @@ const hasDefaultTranslationNamespace = (translations: Record<string, unknown>): 
 const resolveLocalizedTranslations = (
   translations: I18nProviderTranslations | undefined,
   locale: string,
-): TranslationTree | undefined => {
+): I18nProviderTranslations | undefined => {
   if (translations == null || !isNestedTranslations(translations)) {
     return undefined;
   }
 
   if (hasDefaultTranslationNamespace(translations)) {
-    return translations as TranslationTree;
+    return translations;
   }
 
-  const localized = (translations as LocaleCatalog)[locale];
+  const localized = translations[locale];
 
-  return isNestedTranslations(localized) ? (localized as TranslationTree) : undefined;
+  return isNestedTranslations(localized) ? localized : translations;
 };
 
 const I18nProvider = ({ children, locale = 'en', translations }: I18nProviderProps) => {
