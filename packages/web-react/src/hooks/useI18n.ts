@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import I18nContext from '../context/I18nContext';
 import { defaultTranslations, replaceTranslationParams, resolveTranslationKey } from '../translations';
 
@@ -30,11 +30,14 @@ export const useI18n = (): UseI18nReturn => {
   const mergedTranslations = useContext(I18nContext);
   const translations = mergedTranslations ?? defaultTranslations;
 
-  const t: TranslateFunction = (key, params) => {
-    const translation = resolveTranslationKey(translations, key);
+  const t: TranslateFunction = useCallback(
+    (key, params) => {
+      const translation = resolveTranslationKey(translations, key);
 
-    return !params ? translation : replaceTranslationParams(translation, params);
-  };
+      return !params ? translation : replaceTranslationParams(translation, params);
+    },
+    [translations],
+  );
 
   return { t };
 };

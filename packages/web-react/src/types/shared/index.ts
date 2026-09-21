@@ -21,6 +21,7 @@ export * from './router';
 export * from './sizes';
 export * from './slots';
 export * from './style';
+export * from './strings';
 export * from './text';
 export * from './tokens';
 
