@@ -6,6 +6,35 @@ You can find instructions on how to run these codemods in the main package [READ
 
 ## Included Scripts
 
+### `v6/web-react/component-strings-prop` — Migrate Component Strings
+
+This codemod renames required string props and moves optional component copy into the `strings` object.
+Existing object-literal `strings` values are preserved when the new key is already present.
+
+Dynamic `strings` values, object literals with spreads, and elements with JSX spreads are left unchanged because
+their runtime keys cannot be merged safely. Boolean attributes without a value (for example `label`) stay as-is
+instead of adding an empty `strings={{}}`. Empty object-literal fold sources such as `ariaLabelControls={{}}` are
+removed without creating `strings`.
+
+#### Usage
+
+```sh
+npx @alma-oss/spirit-codemods -p <path> -t v6/web-react/component-strings-prop
+```
+
+#### Example
+
+```diff
+- <UncontrolledSplitButton buttonLabel="Save" dropdownTriggerLabel="More" />
++ <UncontrolledSplitButton labelButton="Save" strings={{ label: { dropdown: { trigger: 'More' } } }} />
+
+- <File editText="Edit" removeText="Remove" />
++ <File strings={{ ariaLabel: { edit: 'Edit', remove: 'Remove' } }} />
+
+- <ScrollView hasControls ariaLabelControls={{ start: 'Left' }} />
++ <ScrollView hasControls strings={{ ariaLabel: { start: 'Left' } }} />
+```
+
 ### `v6/web-react/heading-text-emphasis-prop` — Replace `emphasis` on `Heading` and `Text`
 
 This codemod replaces the deprecated `emphasis` prop on `Heading` and `Text`.
