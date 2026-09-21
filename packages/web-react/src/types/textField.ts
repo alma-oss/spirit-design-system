@@ -9,7 +9,9 @@ import {
   type RequiredProps,
   type SizesDictionaryType,
   type SpiritInputElementPropsWithRef,
+  type StringsProps,
   type TextInputProps,
+  type TranslatableString,
   type Validation,
   type ValidationTextProp,
 } from './shared';
@@ -25,6 +27,11 @@ export interface TextFieldAddonProps {
   startAddon?: ReactNode;
 }
 
+export type TextFieldStrings = {
+  hideAria?: TranslatableString;
+  showAria?: TranslatableString;
+};
+
 export interface TextFieldProps<S = void>
   extends
     TextFieldElementBaseProps,
@@ -37,7 +44,8 @@ export interface TextFieldProps<S = void>
     TextInputProps,
     RequiredProps,
     Validation,
-    TextFieldAddonProps {
+    TextFieldAddonProps,
+    StringsProps<TextFieldStrings> {
   /** The size of the text field */
   size?: SizesDictionaryType<S>;
   /** The type of text field */
