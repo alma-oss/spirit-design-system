@@ -19,7 +19,7 @@ const meta: Meta<typeof Breadcrumbs> = {
         defaultValue: { summary: 'nav' },
       },
     },
-    goBackTitle: {
+    labelBack: {
       control: 'text',
       table: {
         defaultValue: { summary: 'Back' },
@@ -28,7 +28,7 @@ const meta: Meta<typeof Breadcrumbs> = {
   },
   args: {
     elementType: 'nav',
-    goBackTitle: 'Back',
+    labelBack: 'Back',
     items: [
       {
         title: 'Root',

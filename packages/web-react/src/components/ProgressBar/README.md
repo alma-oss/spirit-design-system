@@ -123,7 +123,7 @@ Place the ProgressBar as File children to show the progress of a single upload:
 
 ```tsx
 <ul aria-label="Uploaded files">
-  <File label="Document.pdf" onDismiss={onDismiss} removeText="Cancel upload of Document.pdf">
+  <File label="Document.pdf" onDismiss={onDismiss} strings={{ ariaLabelRemove: 'Cancel upload of Document.pdf' }}>
     <ProgressBar aria-label="Uploading Document.pdf" value={60} />
   </File>
 </ul>

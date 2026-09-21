@@ -12,19 +12,50 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
   example: () => (
     <Pagination>
       <PaginationItem>
-        <PaginationLink href="#" isCurrent accessibilityLabel="Current Page, Page 1" pageNumber={1} />
+        <PaginationLink
+          href="#"
+          isCurrent
+          pageNumber={1}
+          strings={{
+            ariaLabel: 'Current Page, Page 1',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 2" pageNumber={2} />
+        <PaginationLink
+          href="#"
+          pageNumber={2}
+          strings={{
+            ariaLabel: 'Go to Page 2',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 3" pageNumber={3} />
+        <PaginationLink
+          href="#"
+          pageNumber={3}
+          strings={{
+            ariaLabel: 'Go to Page 3',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 4" pageNumber={4} />
+        <PaginationLink
+          href="#"
+          pageNumber={4}
+          strings={{
+            ariaLabel: 'Go to Page 4',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 5" pageNumber={5} />
+        <PaginationLink
+          href="#"
+          pageNumber={5}
+          strings={{
+            ariaLabel: 'Go to Page 5',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
         <PaginationLinkNext href="#" />
@@ -42,16 +73,41 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
         <PaginationLinkPrevious href="#" />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" isCurrent accessibilityLabel="Current Page, Page 2" pageNumber={2} />
+        <PaginationLink
+          href="#"
+          isCurrent
+          pageNumber={2}
+          strings={{
+            ariaLabel: 'Current Page, Page 2',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 3" pageNumber={3} />
+        <PaginationLink
+          href="#"
+          pageNumber={3}
+          strings={{
+            ariaLabel: 'Go to Page 3',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 4" pageNumber={4} />
+        <PaginationLink
+          href="#"
+          pageNumber={4}
+          strings={{
+            ariaLabel: 'Go to Page 4',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 5" pageNumber={5} />
+        <PaginationLink
+          href="#"
+          pageNumber={5}
+          strings={{
+            ariaLabel: 'Go to Page 5',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
         <PaginationLinkNext href="#" />
@@ -69,19 +125,50 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
         <PaginationLinkPrevious href="#" />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 1" pageNumber={1} />
+        <PaginationLink
+          href="#"
+          pageNumber={1}
+          strings={{
+            ariaLabel: 'Go to Page 1',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 2" pageNumber={2} />
+        <PaginationLink
+          href="#"
+          pageNumber={2}
+          strings={{
+            ariaLabel: 'Go to Page 2',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" isCurrent accessibilityLabel="Current Page, Page 3" pageNumber={3} />
+        <PaginationLink
+          href="#"
+          isCurrent
+          pageNumber={3}
+          strings={{
+            ariaLabel: 'Current Page, Page 3',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 4" pageNumber={4} />
+        <PaginationLink
+          href="#"
+          pageNumber={4}
+          strings={{
+            ariaLabel: 'Go to Page 4',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 5" pageNumber={5} />
+        <PaginationLink
+          href="#"
+          pageNumber={5}
+          strings={{
+            ariaLabel: 'Go to Page 5',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
         <PaginationLinkNext href="#" />
@@ -99,19 +186,50 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
         <PaginationLinkPrevious href="#" />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 5" pageNumber={5} />
+        <PaginationLink
+          href="#"
+          pageNumber={5}
+          strings={{
+            ariaLabel: 'Go to Page 5',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 6" pageNumber={6} />
+        <PaginationLink
+          href="#"
+          pageNumber={6}
+          strings={{
+            ariaLabel: 'Go to Page 6',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" isCurrent accessibilityLabel="Current Page, Page 7" pageNumber={7} />
+        <PaginationLink
+          href="#"
+          isCurrent
+          pageNumber={7}
+          strings={{
+            ariaLabel: 'Current Page, Page 7',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 8" pageNumber={8} />
+        <PaginationLink
+          href="#"
+          pageNumber={8}
+          strings={{
+            ariaLabel: 'Go to Page 8',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 9" pageNumber={9} />
+        <PaginationLink
+          href="#"
+          pageNumber={9}
+          strings={{
+            ariaLabel: 'Go to Page 9',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
         <PaginationLinkNext href="#" />
@@ -129,19 +247,50 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
         <PaginationLinkPrevious href="#" />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 98" pageNumber={98} />
+        <PaginationLink
+          href="#"
+          pageNumber={98}
+          strings={{
+            ariaLabel: 'Go to Page 98',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 99" pageNumber={99} />
+        <PaginationLink
+          href="#"
+          pageNumber={99}
+          strings={{
+            ariaLabel: 'Go to Page 99',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 100" pageNumber={100} />
+        <PaginationLink
+          href="#"
+          pageNumber={100}
+          strings={{
+            ariaLabel: 'Go to Page 100',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 101" pageNumber={101} />
+        <PaginationLink
+          href="#"
+          pageNumber={101}
+          strings={{
+            ariaLabel: 'Go to Page 101',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" isCurrent accessibilityLabel="Current Page, Page 102" pageNumber={102} />
+        <PaginationLink
+          href="#"
+          isCurrent
+          pageNumber={102}
+          strings={{
+            ariaLabel: 'Current Page, Page 102',
+          }}
+        />
       </PaginationItem>
     </Pagination>
   ),

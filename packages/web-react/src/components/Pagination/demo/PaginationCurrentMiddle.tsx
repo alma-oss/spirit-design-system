@@ -11,19 +11,50 @@ const PaginationCurrentMiddle = () => (
       <PaginationLinkPrevious href="#" />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" accessibilityLabel="Go to Page 11" pageNumber={11} />
+      <PaginationLink
+        href="#"
+        pageNumber={11}
+        strings={{
+          ariaLabel: 'Go to Page 11',
+        }}
+      />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" accessibilityLabel="Go to Page 12" pageNumber={12} />
+      <PaginationLink
+        href="#"
+        pageNumber={12}
+        strings={{
+          ariaLabel: 'Go to Page 12',
+        }}
+      />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" isCurrent accessibilityLabel="Current Page, Page 13" pageNumber={13} />
+      <PaginationLink
+        href="#"
+        isCurrent
+        pageNumber={13}
+        strings={{
+          ariaLabel: 'Current Page, Page 13',
+        }}
+      />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" accessibilityLabel="Go to Page 14" pageNumber={14} />
+      <PaginationLink
+        href="#"
+        pageNumber={14}
+        strings={{
+          ariaLabel: 'Go to Page 14',
+        }}
+      />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" accessibilityLabel="Go to Page 15" pageNumber={15} />
+      <PaginationLink
+        href="#"
+        pageNumber={15}
+        strings={{
+          ariaLabel: 'Go to Page 15',
+        }}
+      />
     </PaginationItem>
     <PaginationItem>
       <PaginationLinkNext href="#" />

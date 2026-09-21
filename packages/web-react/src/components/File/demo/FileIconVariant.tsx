@@ -14,10 +14,12 @@ const FileIconVariant = () => (
         <File
           label="Document.pdf"
           helperText="8,5 kB"
-          editText="Edit file name Document.pdf"
-          removeText="Remove file Document.pdf from list"
           onDismiss={noop}
           onChange={noop}
+          strings={{
+            ariaLabelEdit: 'Edit file name Document.pdf',
+            ariaLabelRemove: 'Remove file Document.pdf from list',
+          }}
         />
       </ul>
     </section>
@@ -32,15 +34,21 @@ const FileIconVariant = () => (
               <span>Uploading your file…</span>
             </div>
           }
-          removeText="Remove file Document.pdf from list"
           onDismiss={noop}
+          strings={{
+            ariaLabelRemove: 'Remove file Document.pdf from list',
+          }}
         />
       </ul>
     </section>
     <section>
       <h3>Uploading State with Progress Bar</h3>
       <ul aria-label="File attachments">
-        <File label="Document.pdf" onDismiss={noop} removeText="Cancel upload of Document.pdf">
+        <File
+          label="Document.pdf"
+          onDismiss={noop}
+          strings={{ ariaLabelRemove: 'Cancel upload of Document.pdf' }}
+        >
           <ProgressBar aria-label="Uploading Document.pdf" value={60} />
         </File>
       </ul>
@@ -52,8 +60,10 @@ const FileIconVariant = () => (
           label="Document.pdf"
           helperText="8,5 kB"
           isDisabled
-          removeText="Remove file Document.pdf from list"
           onDismiss={noop}
+          strings={{
+            ariaLabelRemove: 'Remove file Document.pdf from list',
+          }}
         />
       </ul>
     </section>
@@ -65,8 +75,10 @@ const FileIconVariant = () => (
           validationState="success"
           hasValidationIcon
           validationText="File uploaded successfully"
-          removeText="Remove file Document.pdf from list"
           onDismiss={noop}
+          strings={{
+            ariaLabelRemove: 'Remove file Document.pdf from list',
+          }}
         />
       </ul>
     </section>
@@ -78,8 +90,10 @@ const FileIconVariant = () => (
           validationState="warning"
           hasValidationIcon
           validationText="Large file – may take time"
-          removeText="Remove file Document.pdf from list"
           onDismiss={noop}
+          strings={{
+            ariaLabelRemove: 'Remove file Document.pdf from list',
+          }}
         />
       </ul>
     </section>
@@ -91,8 +105,10 @@ const FileIconVariant = () => (
           validationState="danger"
           hasValidationIcon
           validationText="File upload error – please retry"
-          removeText="Remove file Document.pdf from list"
           onDismiss={noop}
+          strings={{
+            ariaLabelRemove: 'Remove file Document.pdf from list',
+          }}
         />
       </ul>
     </section>

@@ -14,8 +14,6 @@ const FileUploadInputValidationStates = () => (
           id={`file-uploader-standard-${state}`}
           helperText="Max file size is 10 MB"
           label="Label"
-          inputUploadText="Upload your file"
-          inputDragAndDropText="or drag and drop here"
           name={`attachment-standard-${state}`}
           validationText={
             state === ValidationStates.DANGER
@@ -23,6 +21,10 @@ const FileUploadInputValidationStates = () => (
               : `This is ${state} validation text.`
           }
           validationState={state}
+          strings={{
+            labelUpload: 'Upload your file',
+            labelDragAndDrop: 'or drag and drop here',
+          }}
         />
         <FileUpload
           rootId={`example-validation-compact-${state}`}
@@ -30,8 +32,6 @@ const FileUploadInputValidationStates = () => (
           helperText="Max file size is 10 MB"
           isCompact
           label="Label"
-          inputUploadText="Upload your file"
-          inputDragAndDropText="or drag and drop here"
           name={`attachment-compact-${state}`}
           validationText={
             state === ValidationStates.DANGER
@@ -39,6 +39,10 @@ const FileUploadInputValidationStates = () => (
               : `This is ${state} validation text.`
           }
           validationState={state}
+          strings={{
+            labelUpload: 'Upload your file',
+            labelDragAndDrop: 'or drag and drop here',
+          }}
         />
       </Grid>
     ))}

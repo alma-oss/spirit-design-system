@@ -58,10 +58,15 @@ If any of the keys is missing, crop styling is skipped and the image uses the de
 ### Upload Progress
 
 Pass a [`ProgressBar`][progress-bar-readme] as children. Name the bar with `aria-label` from the file name, and
-set `removeText` if the row can cancel the upload:
+set `strings.ariaLabelRemove` if the row can cancel the upload:
 
 ```tsx
-<File id="file-1" label="Document.pdf" onDismiss={() => onDismiss('file-1')} removeText="Cancel upload of Document.pdf">
+<File
+  id="file-1"
+  label="Document.pdf"
+  onDismiss={() => onDismiss('file-1')}
+  strings={{ ariaLabelRemove: 'Cancel upload of Document.pdf' }}
+>
   <ProgressBar aria-label="Uploading Document.pdf" value={60} />
 </File>
 ```
@@ -98,7 +103,8 @@ Set `hasValidationIcon` to show the status icon next to the message (same patter
 | Name                | Type                                           | Default | Required | Description                                                                                                                     |
 | ------------------- | ---------------------------------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `children`          | `ReactNode`                                    | —       | ✕        | Content below the file name (e.g. `ProgressBar`)                                                                                |
-| `editText`          | `string`                                       | i18n    | ✕        | Accessible name for the edit control (default from `attachment.edit`)                                                           |
+| `strings`           | `{ ariaLabelEdit?, ariaLabelRemove? }`         | —       | ✕        | `TranslatableString` overrides for action labels                                                                                |
+| `editText`          | `string`                                       | —       | ✕        | _Deprecated, use `strings.ariaLabelEdit`_                                                                                       |
 | `elementType`       | `ElementType`                                  | `li`    | ✕        | Root HTML element for the row                                                                                                   |
 | `hasValidationIcon` | `boolean`                                      | `false` | ✕        | When `validationState` is set, show the validation icon next to `validationText`                                                |
 | `helperText`        | `ReactNode`                                    | —       | ✕        | Secondary text under the file name                                                                                              |
@@ -109,7 +115,7 @@ Set `hasValidationIcon` to show the status icon next to the message (same patter
 | `onChange`          | `() => void`                                   | —       | ✕        | Edit action; with `onDismiss`, both render in a row; without `onDismiss`, only the edit control is shown                        |
 | `onDismiss`         | `() => void`                                   | —       | ✕        | Remove action; omit to hide the dismiss control                                                                                 |
 | `previewSlot`       | `ReactNode`                                    | —       | ✕        | Custom preview area (e.g. `FileImagePreview`)                                                                                   |
-| `removeText`        | `string`                                       | i18n    | ✕        | Accessible name for remove (default from `attachment.remove`)                                                                   |
+| `removeText`        | `string`                                       | —       | ✕        | _Deprecated, use `strings.ariaLabelRemove`_                                                                                     |
 | `validationState`   | [Validation dictionary][dictionary-validation] | —       | ✕        | Visual validation state (visual only)                                                                                           |
 | `validationText`    | `ReactNode` or `ReactNode[]`                   | —       | ✕        | Message(s) under the name when `validationState` is set (visual only); array renders multiple lines like other field validation |
 
@@ -118,6 +124,17 @@ The rest of the properties are created from the default `<li>` element. [More ab
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Deprecation Notice
+
+`editText` and `removeText` are deprecated and will be removed in v6.
+
+### Migration Guide
+
+```diff
+- <File label="report.pdf" editText="Edit" removeText="Remove" />
++ <File label="report.pdf" strings={{ ariaLabelEdit: 'Edit', ariaLabelRemove: { key: 'attachment.remove' } }} />
+```
 
 ## Icons
 

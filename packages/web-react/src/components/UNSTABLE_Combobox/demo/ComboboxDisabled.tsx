@@ -13,13 +13,13 @@ const ComboboxDisabled = () => {
   return (
     <Grid cols={{ mobile: 1, desktop: 2 }} alignmentY="top">
       <UNSTABLE_Combobox
-        emptySelectionLabel="Languages"
         hasEmptyState={emptyField.hasEmptyState}
         id="demo-combobox-disabled-empty"
         inputValue={emptyField.inputValue}
         isDisabled
         isOpen={emptyField.isOpen}
         label="Languages (empty)"
+        strings={{ labelEmptySelection: 'Languages' }}
         onInputChange={emptyField.onInputChange}
         onSelectionChange={emptyField.onSelectionChange}
         onToggle={emptyField.onToggle}
@@ -29,13 +29,13 @@ const ComboboxDisabled = () => {
         {renderComboboxLanguageItems(emptyField.filteredOptions)}
       </UNSTABLE_Combobox>
       <UNSTABLE_Combobox
-        emptySelectionLabel="Languages"
         hasEmptyState={selectedField.hasEmptyState}
         id="demo-combobox-disabled-selected"
         inputValue={selectedField.inputValue}
         isDisabled
         isOpen={selectedField.isOpen}
         label="Languages (with selection)"
+        strings={{ labelEmptySelection: 'Languages' }}
         onInputChange={selectedField.onInputChange}
         onSelectionChange={selectedField.onSelectionChange}
         onToggle={selectedField.onToggle}

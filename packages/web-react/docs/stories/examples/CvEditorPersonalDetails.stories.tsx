@@ -26,7 +26,7 @@ export const CvEditorPersonalDetails = () => {
       <Section elementType="div" backgroundColor="secondary" containerProps={{ size: 'small' }} paddingTop="space-1000">
         <Stack spacing="space-1000">
           <Breadcrumbs
-            goBackTitle="Zpět"
+            labelBack="Zpět"
             items={[{ title: 'Můj Jobs.cz', url: '#' }, { title: 'Životopis', url: '#' }, { title: 'Osobní údaje' }]}
           />
           <Heading

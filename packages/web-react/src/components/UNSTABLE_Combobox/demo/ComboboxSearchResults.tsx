@@ -64,12 +64,12 @@ const ComboboxSearchResults = () => {
   return (
     <UNSTABLE_Combobox
       dropdownProps={{ fullWidthMode: 'all' }}
-      emptySelectionLabel="Search"
       hasEmptyState
       id="demo-combobox-search-results"
       inputValue={inputValue}
       isOpen={isOpen}
       label="Search results"
+      strings={{ labelEmptySelection: 'Search' }}
       onInputChange={setInputValue}
       onSelectionChange={setSelectedKeys}
       onToggle={onToggle}

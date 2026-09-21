@@ -104,7 +104,7 @@ export const CvBuilderPublish = () => {
       <Section elementType="div" containerProps={{ size: 'large' }} paddingTop="space-1000">
         <Stack spacing="space-1000">
           <Breadcrumbs
-            goBackTitle="Zpět"
+            labelBack="Zpět"
             items={[
               { title: 'Můj Jobs.cz', url: '#' },
               { title: 'Životopis', url: '#' },
@@ -139,7 +139,7 @@ export const CvBuilderPublish = () => {
                   <UNSTABLE_Combobox
                     id="publish-job-search"
                     label="Jakou práci hledáte?"
-                    emptySelectionLabel="Zadejte obor, profesi,…"
+                    strings={{ labelEmptySelection: 'Zadejte obor, profesi,…' }}
                     isRequired
                     isOpen={isJobOpen}
                     onToggle={onJobToggle}
@@ -159,7 +159,7 @@ export const CvBuilderPublish = () => {
                   <UNSTABLE_Combobox
                     id="publish-location-search"
                     label="Ve kterém městě nebo kraji chcete pracovat?"
-                    emptySelectionLabel="Jihlava"
+                    strings={{ labelEmptySelection: 'Jihlava' }}
                     isRequired
                     isOpen={isLocationOpen}
                     onToggle={onLocationToggle}
@@ -322,7 +322,7 @@ export const CvBuilderPublish = () => {
                     TS2322: Type 'Element' is not assignable to type 'string'. Suppressed until fixed. */}
                 <UNSTABLE_Combobox
                   id="publish-hide-companies"
-                  emptySelectionLabel="Uveďte název firmy"
+                  strings={{ labelEmptySelection: 'Uveďte název firmy' }}
                   /* @ts-ignore – ReactNode isn't supported by the `label` -- @see https://jira.almacareer.tech/browse/DS-2790 */
                   label={
                     <>

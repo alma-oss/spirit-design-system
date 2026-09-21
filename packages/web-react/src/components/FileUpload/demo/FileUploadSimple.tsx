@@ -39,10 +39,12 @@ const SimpleUploadColumn = ({ title, inputId, isCompact, name, rootId }: SimpleU
         isCompact={isCompact}
         isRequired
         label="Label"
-        inputUploadText="Upload your file"
-        inputDragAndDropText="or drag and drop here"
         name={name}
         onFilesSelected={handleFilesSelected}
+        strings={{
+          labelUpload: 'Upload your file',
+          labelDragAndDrop: 'or drag and drop here',
+        }}
       />
       {fileQueue.size > 0 && (
         <Stack aria-label="Uploaded files" elementType="ul" spacing="space-700">
@@ -51,7 +53,6 @@ const SimpleUploadColumn = ({ title, inputId, isCompact, name, rootId }: SimpleU
               key={key}
               id={key}
               label={item.label}
-              removeText={`Remove ${item.label} from list`}
               onDismiss={() => onDismiss(key)}
               previewSlot={
                 item.previewUrl ? (
@@ -62,6 +63,9 @@ const SimpleUploadColumn = ({ title, inputId, isCompact, name, rootId }: SimpleU
                   />
                 ) : undefined
               }
+              strings={{
+                ariaLabelRemove: `Remove ${item.label} from list`,
+              }}
             />
           ))}
         </Stack>

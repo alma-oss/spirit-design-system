@@ -6,7 +6,7 @@ const noop = () => {};
 
 const ProgressBarWithFile = () => (
   <ul aria-label="Uploaded files">
-    <File label="Document.pdf" onDismiss={noop} removeText="Cancel upload of Document.pdf">
+    <File label="Document.pdf" onDismiss={noop} strings={{ ariaLabelRemove: 'Cancel upload of Document.pdf' }}>
       <ProgressBar aria-label="Uploading Document.pdf" value={60} />
     </File>
   </ul>

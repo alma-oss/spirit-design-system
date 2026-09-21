@@ -181,15 +181,27 @@ To render the `ModalHeader` component without the close button set the `hasClose
 
 ### API
 
-| Name             | Type        | Default | Required | Description                      |
-| ---------------- | ----------- | ------- | -------- | -------------------------------- |
-| `children`       | `ReactNode` | —       | ✕        | Children node                    |
-| `closeLabel`     | `string`    | `Close` | ✕        | Close button label               |
-| `hasCloseButton` | `bool`      | `true`  | ✕        | Whether close button is rendered |
+| Name             | Type                                      | Default | Required | Description                                |
+| ---------------- | ----------------------------------------- | ------- | -------- | ------------------------------------------ |
+| `children`       | `ReactNode`                               | —       | ✕        | Children node                              |
+| `strings`        | `{ ariaLabelClose?: TranslatableString }` | —       | ✕        | Close button label override                |
+| `closeLabel`     | `string`                                  | —       | ✕        | _Deprecated, use `strings.ariaLabelClose`_ |
+| `hasCloseButton` | `bool`                                    | `true`  | ✕        | Whether close button is rendered           |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Deprecation Notice
+
+`ModalHeader.closeLabel` is deprecated and will be removed in v6.
+
+### Migration Guide
+
+```diff
+- <ModalHeader closeLabel="Dismiss">Title</ModalHeader>
++ <ModalHeader strings={{ ariaLabelClose: { key: 'modal.close' } }}>Title</ModalHeader>
+```
 
 ## ModalBody
 

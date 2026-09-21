@@ -15,12 +15,13 @@ grep -rEn "FileUploader|UNSTABLE_FileUpload|UNSTABLE_File|UnstableFileUpload|Unc
 ```sh
 npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/unstable-fileupload-component-name
 npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/unstable-file-component-name
+npx @alma-oss/spirit-codemods -p <path> -t v6/web-react/component-strings-prop
 ```
 
 Handles rename of `UNSTABLE_*` to stable names and prop renames:
 
-- `linkText` → `inputUploadText`
-- `labelText` → `inputDragAndDropText`
+- `linkText` → `strings.labelUpload`
+- `labelText` → `strings.labelDragAndDrop`
 
 ## Safe Automated Edits
 
@@ -52,8 +53,7 @@ const [items, setItems] = useState<FileItem[]>([]);
     id="file-upload"
     name="attachments"
     label="Label"
-    inputUploadText="Upload your file(s)"
-    inputDragAndDropText="or drag and drop here"
+    strings={{ labelUpload: 'Upload your file(s)', labelDragAndDrop: 'or drag and drop here' }}
     onFilesSelected={(files) => setItems((c) => [...c, ...files.map((f) => ({ id: f.name, label: f.name }))])}
   />
   <Stack elementType="ul" aria-label="Uploaded files" hasSpacing>

@@ -68,7 +68,13 @@ const ShowToastButton = () => {
 const UncontrolledToastDemo = () => (
   <ToastProvider>
     <ShowToastButton />
-    <UncontrolledToast alignmentX="right" alignmentY="top" closeLabel="Close" />
+    <UncontrolledToast
+      alignmentX="right"
+      alignmentY="top"
+      strings={{
+        ariaLabelClose: 'Close',
+      }}
+    />
   </ToastProvider>
 );
 

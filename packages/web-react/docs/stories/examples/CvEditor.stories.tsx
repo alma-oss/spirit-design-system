@@ -314,9 +314,11 @@ export const CvEditor = () => {
                   label="Fotka"
                   isLabelHidden
                   isCompact
-                  inputUploadText="Nahrajte nebo přetáhněte soubor"
                   helperText="Maximální velikost souboru 2 MB"
-                  buttonText="Procházet"
+                  strings={{
+                    labelButton: 'Procházet',
+                    labelUpload: 'Nahrajte nebo přetáhněte soubor',
+                  }}
                 />
               </Surface>
 

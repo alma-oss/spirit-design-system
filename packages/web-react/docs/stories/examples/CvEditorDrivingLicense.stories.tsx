@@ -88,7 +88,7 @@ export const CvEditorDrivingLicense = () => {
       >
         <Stack spacing="space-1000">
           <Breadcrumbs
-            goBackTitle="Zpět"
+            labelBack="Zpět"
             items={[{ title: 'Můj Jobs.cz', url: '#' }, { title: 'Životopis', url: '#' }, { title: 'Řidičský průkaz' }]}
           />
           <Heading

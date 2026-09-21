@@ -30,7 +30,7 @@ const items = [
 Simply pass the breadcrumbs array as a prop:
 
 ```tsx
-<Breadcrumbs items={items} goBackTitle="Custom back link translation" />
+<Breadcrumbs items={items} labelBack={{ key: 'navigation.back' }} />
 ```
 
 ### Custom Usage
@@ -51,16 +51,28 @@ Use custom content for the ordered list as component's children instead of passi
 
 ### API
 
-| Name          | Type                | Default | Required | Description                                                                                                                                                                                      |
-| ------------- | ------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `children`    | `ReactNode`         | —       | ✕        | Custom content to override items rendering from array                                                                                                                                            |
-| `elementType` | `ElementType`       | `nav`   | ✕        | Type of element used as wrapper                                                                                                                                                                  |
-| `goBackTitle` | `string`            | —       | ✕        | Title/translation for back link to previous page on mobile. It's essential to be set along with items. If items property is not passed, the back link is to be created within children property. |
-| `items`       | `BreadcrumbsItem[]` | —       | ✕        | Navigation menu items                                                                                                                                                                            |
+| Name          | Type                 | Default | Required | Description                                                      |
+| ------------- | -------------------- | ------- | -------- | ---------------------------------------------------------------- |
+| `children`    | `ReactNode`          | —       | ✕        | Custom content to override items rendering from array            |
+| `elementType` | `ElementType`        | `nav`   | ✕        | Type of element used as wrapper                                  |
+| `labelBack`   | `TranslatableString` | —       | ✕        | Back-link label on mobile; no Back item is rendered when omitted |
+| `goBackTitle` | `string`             | —       | ✕        | _Deprecated, use `labelBack`_                                    |
+| `items`       | `BreadcrumbsItem[]`  | —       | ✕        | Navigation menu items                                            |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Deprecation Notice
+
+The `goBackTitle` prop is deprecated and will be removed in v6.
+
+### Migration Guide
+
+```diff
+- <Breadcrumbs goBackTitle="Back" />
++ <Breadcrumbs labelBack={{ key: 'navigation.back' }} />
+```
 
 ## BreadcrumbsItem
 

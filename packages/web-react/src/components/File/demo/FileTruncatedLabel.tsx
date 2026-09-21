@@ -12,10 +12,12 @@ const FileTruncatedLabel = () => (
         <File
           label="This_very_long_label_of_document_should_truncate.pdf"
           helperText="8,5 kB"
-          editText="Edit file name Document.pdf"
-          removeText="Remove file Document.pdf from list"
           onDismiss={noop}
           onChange={noop}
+          strings={{
+            ariaLabelEdit: 'Edit file name Document.pdf',
+            ariaLabelRemove: 'Remove file Document.pdf from list',
+          }}
         />
       </ul>
     </section>

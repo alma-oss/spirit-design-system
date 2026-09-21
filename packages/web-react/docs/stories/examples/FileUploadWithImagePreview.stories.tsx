@@ -17,8 +17,8 @@ type FileUploadCompositionType = {
   hasValidationIcon: boolean;
   helperText: string;
   iconName: string;
-  inputDragAndDropText: string;
-  inputUploadText: string;
+  labelDragAndDrop: string;
+  labelUpload: string;
   isDisabled: boolean;
   isLabelHidden: boolean;
   isMultiple: boolean;
@@ -30,14 +30,14 @@ type FileUploadCompositionType = {
   // File list (Stack) – aria-label
   attachmentsLabel: string;
   // File props (applies to all rows; `file*` prefix avoids clash with FileUpload controls)
-  editText: string;
+  ariaLabelEdit: string;
   fileHasValidationIcon: boolean;
   fileHelperText: string;
   fileIconName: string;
   fileIsDisabled: boolean;
   fileValidationState: (typeof ValidationStates)[keyof typeof ValidationStates] | undefined;
   fileValidationText: string;
-  removeText: string;
+  ariaLabelRemove: string;
   showEditButton: boolean;
   showFileRowId: boolean;
   // FileImagePreview props
@@ -89,7 +89,7 @@ export default {
         defaultValue: { summary: 'upload' },
       },
     },
-    inputDragAndDropText: {
+    labelDragAndDrop: {
       control: 'text',
       description: 'Drag-and-drop suffix in the drop zone.',
       table: {
@@ -97,7 +97,7 @@ export default {
         defaultValue: { summary: 'or drag and drop here' },
       },
     },
-    inputUploadText: {
+    labelUpload: {
       control: 'text',
       description: 'Primary label in the drop zone.',
       table: {
@@ -181,7 +181,7 @@ export default {
       },
     },
     // File props
-    editText: {
+    ariaLabelEdit: {
       control: 'text',
       description: 'Edit button label.',
       table: {
@@ -244,7 +244,7 @@ export default {
         defaultValue: { summary: 'File validation message' },
       },
     },
-    removeText: {
+    ariaLabelRemove: {
       control: 'text',
       description: 'Remove button label.',
       table: {
@@ -298,8 +298,8 @@ export default {
     hasValidationIcon: false,
     helperText: 'Max file size is 10 MB',
     iconName: 'upload',
-    inputDragAndDropText: 'or drag and drop here',
-    inputUploadText: 'Upload your file(s)',
+    labelDragAndDrop: 'or drag and drop here',
+    labelUpload: 'Upload your file(s)',
     isDisabled: false,
     isLabelHidden: false,
     isMultiple: false,
@@ -309,14 +309,14 @@ export default {
     validationState: undefined,
     validationText: 'Validation message',
     attachmentsLabel: 'Attachments',
-    editText: 'Edit',
+    ariaLabelEdit: 'Edit',
     fileHasValidationIcon: false,
     fileHelperText: '2.5 MB',
     fileIconName: 'file',
     fileIsDisabled: false,
     fileValidationState: undefined,
     fileValidationText: 'File validation message',
-    removeText: 'Remove',
+    ariaLabelRemove: 'Remove',
     showEditButton: false,
     showFileRowId: true,
     imageObjectFit: ObjectFit.COVER,
@@ -328,7 +328,7 @@ export const FileUploadWithModalImagePreview = (args: FileUploadCompositionType)
   const {
     accept,
     attachmentsLabel,
-    editText,
+    ariaLabelEdit,
     fileHasValidationIcon,
     fileHelperText,
     fileIconName,
@@ -340,15 +340,15 @@ export const FileUploadWithModalImagePreview = (args: FileUploadCompositionType)
     helperText,
     iconName,
     imageObjectFit,
-    inputDragAndDropText,
-    inputUploadText,
+    labelDragAndDrop,
+    labelUpload,
     isDisabled,
     isLabelHidden,
     isMultiple,
     isRequired,
     label,
     name,
-    removeText,
+    ariaLabelRemove,
     showEditButton,
     showFileRowId,
     showImagePreview,
@@ -406,8 +406,6 @@ export const FileUploadWithModalImagePreview = (args: FileUploadCompositionType)
         helperText={helperText}
         iconName={iconName}
         id={fileUploadId}
-        inputDragAndDropText={inputDragAndDropText}
-        inputUploadText={inputUploadText}
         isDisabled={isDisabled}
         isLabelHidden={isLabelHidden}
         isMultiple={isMultiple}
@@ -417,12 +415,15 @@ export const FileUploadWithModalImagePreview = (args: FileUploadCompositionType)
         onFilesSelected={onFilesSelected}
         validationState={validationState}
         validationText={validationText}
+        strings={{
+          labelUpload,
+          labelDragAndDrop,
+        }}
       />
       <Stack aria-label={attachmentsLabel} elementType="ul" hasSpacing>
         {items.map((item) => (
           <FileAttachment
             key={item.id}
-            editText={editText}
             hasValidationIcon={fileHasValidationIcon}
             helperText={fileHelperText || undefined}
             iconName={fileIconName}
@@ -430,7 +431,7 @@ export const FileUploadWithModalImagePreview = (args: FileUploadCompositionType)
             isDisabled={fileIsDisabled}
             label={item.label}
             onDismiss={() => onDismiss(item.id)}
-            removeText={removeText}
+            strings={{ ariaLabelEdit, ariaLabelRemove }}
             validationState={fileValidationState}
             validationText={fileValidationText}
             {...(showEditButton && { onChange: fn() })}

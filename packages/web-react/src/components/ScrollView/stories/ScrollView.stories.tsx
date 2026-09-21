@@ -13,7 +13,7 @@ const meta: Meta<typeof ScrollView> = {
     },
   },
   argTypes: {
-    ariaLabelControls: {
+    strings: {
       control: 'select',
       options: [
         'default',
@@ -25,30 +25,30 @@ const meta: Meta<typeof ScrollView> = {
         'custom-bottom',
       ],
       description: `Labels for the scroll controls, mainly for accessibility purposes. In the real code you can
-        pass in any object with \`start\`/\`end\` properties for horizontal direction or \`top\`/\`bottom\` properties for vertical direction.
+        pass in any object with \`ariaStart\`/\`ariaEnd\` properties for horizontal direction or \`ariaTop\`/\`ariaBottom\` properties for vertical direction.
         In this demo we have predefined options: \`default\`, \`custom-both-horizontal\`, \`custom-both-vertical\`, \`custom-start\`, \`custom-end\`, \`custom-top\`, and \`custom-bottom\`.
         Please note the predefined options in this demo are not customizable.`,
       mapping: {
         default: undefined,
         'custom-both-horizontal': {
-          start: 'Custom scroll left',
-          end: 'Custom scroll right',
+          ariaStart: 'Custom scroll left',
+          ariaEnd: 'Custom scroll right',
         },
         'custom-both-vertical': {
-          top: 'Custom scroll up',
-          bottom: 'Custom scroll down',
+          ariaTop: 'Custom scroll up',
+          ariaBottom: 'Custom scroll down',
         },
         'custom-start': {
-          start: 'Custom scroll left',
+          ariaStart: 'Custom scroll left',
         },
         'custom-end': {
-          end: 'Custom scroll right',
+          ariaEnd: 'Custom scroll right',
         },
         'custom-top': {
-          top: 'Custom scroll up',
+          ariaTop: 'Custom scroll up',
         },
         'custom-bottom': {
-          bottom: 'Custom scroll down',
+          ariaBottom: 'Custom scroll down',
         },
       },
     },
@@ -179,7 +179,7 @@ const meta: Meta<typeof ScrollView> = {
     },
   },
   args: {
-    ariaLabelControls: undefined,
+    strings: undefined,
     children: 'vertical',
     controlsScrollStep: 300,
     direction: 'vertical',

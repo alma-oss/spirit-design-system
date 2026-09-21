@@ -48,6 +48,7 @@ With validation state:
 | `id`               | `string`                                              | —       | ✓        | Base id for the field; used to build the screen reader message element id (`${id}-counter-screen-reader-message`). |
 | `isDisabled`       | `boolean`                                             | —       | ✕        | Whether the character counter is disabled.                                                                         |
 | `registerAria`     | `(params: { add?: string; remove?: string }) => void` | —       | ✓        | Adds/removes the screen reader message id from `aria-describedby` (same pattern as helper/validation text).        |
+| `strings`          | `CharacterCounterStrings`                             | —       | ✕        | `TranslatableString` overrides for screen reader messages. Visible `5/200` text is not translated.                 |
 | `validationState`  | `Validation`                                          | —       | ✕        | Validation state.                                                                                                  |
 
 The component renders nothing if neither `hasCounter` nor `counterThreshold` is set.

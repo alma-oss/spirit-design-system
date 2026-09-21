@@ -30,19 +30,50 @@ export const Playground: Story = {
   render: (args) => (
     <Pagination {...args}>
       <PaginationItem>
-        <PaginationLink href="#" isCurrent accessibilityLabel="Current Page, Page 1" pageNumber={1} />
+        <PaginationLink
+          href="#"
+          isCurrent
+          pageNumber={1}
+          strings={{
+            ariaLabel: 'Current Page, Page 1',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 2" pageNumber={2} />
+        <PaginationLink
+          href="#"
+          pageNumber={2}
+          strings={{
+            ariaLabel: 'Go to Page 2',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 3" pageNumber={3} />
+        <PaginationLink
+          href="#"
+          pageNumber={3}
+          strings={{
+            ariaLabel: 'Go to Page 3',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 4" pageNumber={4} />
+        <PaginationLink
+          href="#"
+          pageNumber={4}
+          strings={{
+            ariaLabel: 'Go to Page 4',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink href="#" accessibilityLabel="Go to Page 5" pageNumber={5} />
+        <PaginationLink
+          href="#"
+          pageNumber={5}
+          strings={{
+            ariaLabel: 'Go to Page 5',
+          }}
+        />
       </PaginationItem>
       <PaginationItem>
         <PaginationLinkNext href="#" />

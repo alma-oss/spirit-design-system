@@ -76,14 +76,14 @@ Clicking a control moves the viewport by `controlsScrollStep` value in the Scrol
 
 ### Custom Control Labels
 
-You can customize the control button labels using the `ariaLabelControls` prop.
+You can customize the control button labels using the `strings` prop.
 Note that these labels are not visually displayed — they are used for accessibility purposes only.
-All properties (`top`, `bottom`, `start`, `end`) are optional, and you can define any combination of them.
+All properties (`ariaTop`, `ariaBottom`, `ariaStart`, `ariaEnd`) are optional, and you can define any combination of them.
 
 Default labels are automatically set based on the `direction` prop:
 
-- Horizontal: `Scroll left` and `Scroll right` (uses `start` and `end` properties)
-- Vertical: `Scroll up` and `Scroll down` (uses `top` and `bottom` properties)
+- Horizontal: `Scroll left` and `Scroll right` (uses `ariaStart` and `ariaEnd`)
+- Vertical: `Scroll up` and `Scroll down` (uses `ariaTop` and `ariaBottom`)
 
 You can override all labels:
 
@@ -91,11 +91,11 @@ You can override all labels:
 <ScrollView
   hasControls
   direction="horizontal"
-  ariaLabelControls={{
-    start: 'Custom scroll left',
-    end: 'Custom scroll right',
-    top: 'Custom scroll up',
-    bottom: 'Custom scroll down',
+  strings={{
+    ariaStart: 'Custom scroll left',
+    ariaEnd: 'Custom scroll right',
+    ariaTop: 'Custom scroll up',
+    ariaBottom: 'Custom scroll down',
   }}
 >
   {/* scrollable content */}
@@ -105,26 +105,39 @@ You can override all labels:
 Or override only one label:
 
 ```tsx
-<ScrollView hasControls direction="horizontal" ariaLabelControls={{ start: 'Custom scroll left' }}>
+<ScrollView hasControls direction="horizontal" strings={{ ariaStart: 'Custom scroll left' }}>
   {/* scrollable content */}
 </ScrollView>
 ```
 
 ## ScrollView Props
 
-| Name                  | Type                                                              | Default    | Required | Description                                     |
-| --------------------- | ----------------------------------------------------------------- | ---------- | -------- | ----------------------------------------------- |
-| `ariaLabelControls`   | `{ top?: string, bottom?: string, start?: string; end?: string }` | —          | ✕        | Custom accessibility labels for control buttons |
-| `controlsScrollStep`  | `number`                                                          | `300`      | ✕        | Scroll step for controls (pixels)               |
-| `children`            | `ReactNode`                                                       | —          | ✓        | ScrollView children's nodes                     |
-| `direction`           | \[`horizontal` \| `vertical`]                                     | `vertical` | ✕        | Direction of the wrapper                        |
-| `hasControls`         | `bool`                                                            | `false`    | ✕        | If true, controls are displayed                 |
-| `isScrollbarDisabled` | `bool`                                                            | `false`    | ✕        | If true, the Scrollbar is disabled              |
-| `overflowDecorators`  | \[`borders` \| `shadows` \| `both`]                               | `shadows`  | ✕        | ScrollView overflow decorators                  |
+| Name                  | Type                                                              | Default    | Required | Description                                                                  |
+| --------------------- | ----------------------------------------------------------------- | ---------- | -------- | ---------------------------------------------------------------------------- |
+| `strings`             | `{ ariaStart?, ariaEnd?, ariaTop?, ariaBottom? }`                 | —          | ✕        | `TranslatableString` overrides for control button labels                     |
+| `ariaLabelControls`   | `{ top?: string, bottom?: string, start?: string; end?: string }` | —          | ✕        | _Deprecated, use `strings.ariaStart` / `ariaEnd` / `ariaTop` / `ariaBottom`_ |
+| `controlsScrollStep`  | `number`                                                          | `300`      | ✕        | Scroll step for controls (pixels)                                            |
+| `children`            | `ReactNode`                                                       | —          | ✓        | ScrollView children's nodes                                                  |
+| `direction`           | \[`horizontal` \| `vertical`]                                     | `vertical` | ✕        | Direction of the wrapper                                                     |
+| `hasControls`         | `bool`                                                            | `false`    | ✕        | If true, controls are displayed                                              |
+| `isScrollbarDisabled` | `bool`                                                            | `false`    | ✕        | If true, the Scrollbar is disabled                                           |
+| `overflowDecorators`  | \[`borders` \| `shadows` \| `both`]                               | `shadows`  | ✕        | ScrollView overflow decorators                                               |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Deprecation Notice
+
+`ariaLabelControls` is deprecated and will be removed in v6. Use `strings.ariaStart` / `ariaEnd` / `ariaTop` /
+`ariaBottom` instead.
+
+### Migration Guide
+
+```diff
+- <ScrollView hasControls ariaLabelControls={{ start: 'Left', end: 'Right' }} />
++ <ScrollView hasControls strings={{ ariaStart: 'Left', ariaEnd: 'Right' }} />
+```
 
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches

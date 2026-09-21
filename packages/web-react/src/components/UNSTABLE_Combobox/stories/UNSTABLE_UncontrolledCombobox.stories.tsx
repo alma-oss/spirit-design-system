@@ -18,8 +18,6 @@ const meta: Meta<typeof UNSTABLE_UncontrolledCombobox> = {
     controls: { exclude: ['children', 'hasValidationIcon'] },
   },
   argTypes: {
-    addMoreLabel: { control: 'text' },
-    emptySelectionLabel: { control: 'text' },
     hasClearButton: {
       control: 'boolean',
       table: { defaultValue: { summary: 'false' } },
@@ -47,15 +45,11 @@ const meta: Meta<typeof UNSTABLE_UncontrolledCombobox> = {
       table: { defaultValue: { summary: 'false' } },
     },
     label: { control: 'text' },
-    removeAllLabel: { control: 'text' },
-    removeItemLabel: { control: 'text' },
-    selectionAriaLabel: { control: 'text' },
     size: {
       control: 'select',
       options: [...Object.values(Sizes), undefined],
       table: { defaultValue: { summary: Sizes.MEDIUM } },
     },
-    tagDescriptionText: { control: 'text' },
     validationState: {
       control: 'select',
       options: [...Object.values(ValidationStates), undefined],
@@ -71,6 +65,7 @@ const meta: Meta<typeof UNSTABLE_UncontrolledCombobox> = {
       options: [...Object.values(FillVariants), undefined],
       table: { defaultValue: { summary: FillVariants.FILL } },
     },
+    strings: { control: 'object' },
   },
   args: {
     id: UNCONTROLLED_COMBOBOX_ID,

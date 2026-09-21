@@ -117,6 +117,7 @@ an optimized experience:
 | `maxLength`             | `number`                                       | —        | ✕        | Native textarea hard cap; with `counterThreshold`, prefer `>= counterThreshold` |
 | `name`                  | `string`                                       | —        | ✕        | Textarea name                                                                   |
 | `placeholder`           | `string`                                       | —        | ✕        | Textarea placeholder                                                            |
+| `strings`               | `CharacterCounterStrings`                      | —        | ✕        | Passed to `CharacterCounter` for screen reader message overrides                |
 | `ref`                   | `ForwardedRef<HTMLTextAreaElement>`            | —        | ✕        | Textarea element reference                                                      |
 | `rows`                  | `number`                                       | —        | ✕        | Number of visible rows                                                          |
 | `size`                  | [Size dictionary][dictionary-size]             | `medium` | ✕        | Size variant                                                                    |
