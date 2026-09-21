@@ -1,6 +1,15 @@
-import type { RegisterType, StyleProps, ValidationState } from '../../types/shared';
+import type { RegisterType, StyleProps, TranslatableString, ValidationState, WithStrings } from '../../types/shared';
 
-export interface CharacterCounterProps extends StyleProps {
+export type CharacterCounterStrings = {
+  ariaCanEnterUpTo?: TranslatableString;
+  ariaCharacterOverLimit?: TranslatableString;
+  ariaCharacterRemaining?: TranslatableString;
+  ariaCharactersEntered?: TranslatableString;
+  ariaCharactersOverLimit?: TranslatableString;
+  ariaCharactersRemaining?: TranslatableString;
+};
+
+export interface CharacterCounterProps extends StyleProps, WithStrings<CharacterCounterStrings> {
   /** Character threshold shown after the slash in the counter (e.g. `5/200`); implicitly enables the counter */
   counterThreshold?: number;
   /** Current number of characters */

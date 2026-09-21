@@ -12,14 +12,14 @@ import { useScrollViewControls } from './useScrollViewControls';
 import { useScrollViewStyleProps } from './useScrollViewStyleProps';
 
 const ScrollViewControls = (props: SpiritScrollViewControlsProps) => {
-  const { ariaLabelControls, direction, scrollStep, viewportRef, ...restProps } = props;
+  const { ariaLabelControls, direction, scrollStep, strings, viewportRef, ...restProps } = props;
   const { classProps } = useScrollViewStyleProps({
     direction,
   });
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const mergedStyleProps = mergeStyleProps('button', { classProps: classProps.controls, styleProps });
   const isHorizontal = isDirectionHorizontal(direction);
-  const { controls } = useScrollViewControls(isHorizontal, ariaLabelControls, scrollStep);
+  const { controls } = useScrollViewControls(isHorizontal, ariaLabelControls, scrollStep, strings);
   const { handleScroll } = useScrollCallback({ viewportRef, direction });
 
   return (

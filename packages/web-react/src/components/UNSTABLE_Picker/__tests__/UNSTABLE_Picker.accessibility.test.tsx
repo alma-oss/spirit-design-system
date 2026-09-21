@@ -70,7 +70,7 @@ describe('UNSTABLE_Picker accessibility', () => {
     });
 
     it('applies custom selectionAriaLabel with label substitution', () => {
-      render(<PickerTest selectionAriaLabel="Picked: {label}" />);
+      render(<PickerTest strings={{ ariaSelection: 'Picked: {label}' }} />);
 
       expect(document.getElementById(selectionDomId)).toHaveAttribute('aria-label', 'Picked: Languages');
     });
@@ -98,7 +98,7 @@ describe('UNSTABLE_Picker accessibility', () => {
     });
 
     it('exposes tag instruction text in a hidden element', () => {
-      render(<PickerTest tagDescriptionText="Custom remove hint" />);
+      render(<PickerTest strings={{ ariaTagDescription: 'Custom remove hint' }} />);
       const el = document.getElementById(tagDescriptionDomId);
 
       expect(el).toBeInTheDocument();

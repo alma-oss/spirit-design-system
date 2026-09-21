@@ -1,6 +1,13 @@
 import { type Placement, type Strategy } from '@floating-ui/react';
 import type { ElementType, ReactNode } from 'react';
-import type { ChildrenProps, PolymorphicComponentProps, SpiritDivElementProps, StyleProps } from './shared';
+import type {
+  ChildrenProps,
+  PolymorphicComponentProps,
+  SpiritDivElementProps,
+  StyleProps,
+  TranslatableString,
+  WithStrings,
+} from './shared';
 
 /** ===== BASE API ===== */
 export const TOOLTIP_TRIGGER = {
@@ -19,7 +26,12 @@ export interface TooltipState {
   onToggle: (isOpen: boolean) => void;
 }
 
-export interface TooltipBaseProps extends ChildrenProps, StyleProps {
+export type TooltipStrings = {
+  ariaLabelClose?: TranslatableString;
+};
+
+export interface TooltipBaseProps extends ChildrenProps, StyleProps, WithStrings<TooltipStrings> {
+  /** @deprecated Use `strings.ariaLabelClose` instead. */
   closeLabel?: string;
   id: string;
 }

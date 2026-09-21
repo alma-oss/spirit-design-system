@@ -9,24 +9,47 @@ import type {
   SpiritItemProps,
   SpiritTagProps,
   StyleProps,
+  TranslatableString,
   Validation,
   ValidationTextProp,
+  WithStrings,
 } from '../../types';
 import type { ComboboxSelectedItem } from './useComboboxItems';
 /** Popup options widget role. `null` on the prop means no options widget (tip-only / auxiliary content). */
 export type ComboboxOptionsRole = 'listbox' | 'grid';
 
+export type UnstableComboboxStrings = {
+  ariaAddMoreDescription?: TranslatableString;
+  ariaRemoveAll?: TranslatableString;
+  ariaRemoveItem?: TranslatableString;
+  ariaSelection?: TranslatableString;
+  ariaSelectionCount?: TranslatableString;
+  ariaSelectionCountSingular?: TranslatableString;
+  ariaTagDescription?: TranslatableString;
+  labelAddMore?: TranslatableString;
+  labelEmptySelection?: TranslatableString;
+};
+
 export interface UnstableComboboxTranslations {
+  /** @deprecated Use `strings.labelAddMore` instead. */
   addMoreLabel?: string;
+  /** @deprecated Use `strings.ariaAddMoreDescription` instead. */
   addMoreDescriptionText?: string;
+  /** @deprecated Use `strings.labelEmptySelection` instead. */
   emptySelectionLabel?: string;
   emptyStateLabel?: ReactNode;
   loadingLabel?: ReactNode;
+  /** @deprecated Use `strings.ariaRemoveAll` instead. */
   removeAllLabel?: string;
+  /** @deprecated Use `strings.ariaRemoveItem` instead. */
   removeItemLabel?: string;
+  /** @deprecated Use `strings.ariaSelection` instead. */
   selectionAriaLabel?: string;
+  /** @deprecated Use `strings.ariaSelectionCount` instead. */
   selectionCountLabel?: string;
+  /** @deprecated Use `strings.ariaSelectionCountSingular` instead. */
   selectionCountLabelSingular?: string;
+  /** @deprecated Use `strings.ariaTagDescription` instead. */
   tagDescriptionText?: string;
 }
 
@@ -48,7 +71,8 @@ export interface UnstableComboboxBaseProps<S = void>
     HelperTextProps,
     Validation,
     ValidationTextProp,
-    UnstableComboboxTranslations {
+    UnstableComboboxTranslations,
+    WithStrings<UnstableComboboxStrings> {
   /** Option items. Optional for tip-only / custom popover content. */
   children?: ReactNode;
   id: string;
@@ -124,7 +148,7 @@ export interface UnstableComboboxTagProps extends Omit<
   isDisabled?: boolean;
   label: ReactNode;
   onRemove: () => void;
-  removeLabel?: string;
+  removeLabel?: TranslatableString;
 }
 
 /** Option for the nested select segment on `UNSTABLE_ComboboxSplitTag`. */
@@ -142,7 +166,7 @@ export interface UnstableComboboxSplitTagSelectProps {
   /** Accessible name for the select trigger. */
   'aria-label'?: string;
   /** Accessible name for the options listbox. @default i18n `combobox.splitTagListboxLabel` */
-  listboxLabel?: string;
+  listboxLabel?: TranslatableString;
   /** Stable id prefix for the nested Dropdown / option ids. */
   id?: string;
 }
@@ -151,7 +175,7 @@ export interface UnstableComboboxSplitTagProps {
   /** Primary label segment (e.g. city name). */
   label: ReactNode;
   onRemove: () => void;
-  removeLabel?: string;
+  removeLabel?: TranslatableString;
   tagKeyboardProps?: SelectionGridRowProps;
   isDisabled?: boolean;
   /** Nested select segment (e.g. distance). */

@@ -1,5 +1,5 @@
 import { type ElementType } from 'react';
-import { type ChildrenProps, type PolymorphicComponentProps, type StyleProps } from './shared';
+import { type ChildrenProps, type PolymorphicComponentProps, type StyleProps, type TranslatableString } from './shared';
 
 type BreadcrumbsItem = {
   title: string;
@@ -22,7 +22,9 @@ export interface BreadcrumbsStyleProps extends StyleProps {
 
 /** ===== INTERNAL API ===== */
 export interface BreadcrumbsProps extends StyleProps, ChildrenProps {
+  /** @deprecated Use `labelBack` instead. */
   goBackTitle?: string;
+  labelBack?: TranslatableString;
   items?: BreadcrumbsItems;
 }
 

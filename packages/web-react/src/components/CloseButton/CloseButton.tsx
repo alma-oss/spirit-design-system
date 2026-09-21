@@ -1,7 +1,8 @@
 'use client';
 
 import React, { forwardRef } from 'react';
-import { useI18n } from '../../hooks';
+import { useDeprecationMessage, useI18n } from '../../hooks';
+import { resolveComponentString } from '../../translations';
 import { ControlButton } from '../ControlButton';
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
@@ -13,9 +14,17 @@ const defaultProps: Partial<CloseButtonProps> = {
 
 const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>((props, ref) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { label, ...restProps } = propsWithDefaults;
+  const { label, strings, ...restProps } = propsWithDefaults;
   const { t } = useI18n();
-  const closeLabel = label ?? t('common.close');
+  const closeLabel = resolveComponentString(strings?.ariaLabel ?? label ?? { key: 'common.close' }, t);
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: label != null,
+    componentName: 'CloseButton',
+    customText:
+      'The "label" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel" instead.',
+  });
 
   return (
     <ControlButton {...restProps} ref={ref}>

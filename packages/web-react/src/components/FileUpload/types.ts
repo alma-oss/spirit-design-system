@@ -1,23 +1,42 @@
 import { type MutableRefObject, type ReactNode } from 'react';
-import { type SpiritInputElementProps, type Validation, type ValidationTextType } from '../../types/shared';
+import {
+  type SpiritInputElementProps,
+  type TranslatableString,
+  type Validation,
+  type ValidationTextType,
+  type WithStrings,
+} from '../../types/shared';
 import { type FileItem } from '../File/types';
 
 export interface FileUploadTextProps {
   /** Label for the decorative button (opens the same file input as the drop-zone label). */
+  /** @deprecated Use `strings.labelButton` instead. */
   buttonText?: string;
   helperText?: string;
   /** Drag-and-drop suffix in the drop zone (e.g. "or drag and drop here"). Hidden when drag-and-drop is not supported. */
+  /** @deprecated Use `strings.labelDragAndDrop` instead. */
   inputDragAndDropText?: string;
   /** Primary label in the drop zone (e.g. "Upload your file"). */
+  /** @deprecated Use `strings.labelUpload` instead. */
   inputUploadText?: string;
 }
+
+export type FileUploadStrings = {
+  labelButton?: TranslatableString;
+  labelDragAndDrop?: TranslatableString;
+  labelUpload?: TranslatableString;
+};
 
 export type FileUploadAttachmentsItem = FileItem;
 
 export type FilesSelectedType = (files: File[]) => void;
 
 export interface FileUploadInputProps
-  extends Omit<SpiritInputElementProps, 'onError' | 'label'>, FileUploadTextProps, Validation {
+  extends
+    Omit<SpiritInputElementProps, 'onError' | 'label'>,
+    FileUploadTextProps,
+    Validation,
+    WithStrings<FileUploadStrings> {
   accept?: string;
   dropZoneRef?: MutableRefObject<HTMLDivElement>;
   hasValidationIcon?: boolean;

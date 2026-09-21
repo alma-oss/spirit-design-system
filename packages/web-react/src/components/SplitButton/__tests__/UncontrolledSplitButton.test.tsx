@@ -35,7 +35,7 @@ describe('SplitButton', () => {
     render(
       <UncontrolledSplitButton
         id="uncontrolled-split-button-id"
-        buttonLabel="Button"
+        labelButton="Button"
         buttonOnClick={onClick}
         data-testid="test"
       >
@@ -48,7 +48,7 @@ describe('SplitButton', () => {
 
   it('should render dropdown content', () => {
     render(
-      <UncontrolledSplitButton id="uncontrolled-split-button-id" buttonLabel="Button" buttonOnClick={onClick}>
+      <UncontrolledSplitButton id="uncontrolled-split-button-id" labelButton="Button" buttonOnClick={onClick}>
         Content
       </UncontrolledSplitButton>,
     );
@@ -101,5 +101,37 @@ describe('SplitButton', () => {
 
     expect(screen.getByText('Button')).toHaveClass('Button--secondary');
     expect(screen.getByText('Button')).toHaveClass('Button--small');
+  });
+
+  it('should resolve required and optional component strings', () => {
+    render(
+      <UncontrolledSplitButton
+        id="uncontrolled-split-button-id"
+        labelButton={{ key: 'common.edit' }}
+        buttonOnClick={onClick}
+        strings={{ ariaLabelDropdown: 'More options' }}
+      >
+        Content
+      </UncontrolledSplitButton>,
+    );
+
+    expect(screen.getByText('Edit')).toBeInTheDocument();
+    expect(screen.getByText('More options')).toBeInTheDocument();
+  });
+
+  it('should prefer labelButton over deprecated buttonLabel', () => {
+    render(
+      <UncontrolledSplitButton
+        id="uncontrolled-split-button-id"
+        labelButton="Current"
+        buttonLabel="Deprecated"
+        buttonOnClick={onClick}
+      >
+        Content
+      </UncontrolledSplitButton>,
+    );
+
+    expect(screen.getByText('Current')).toBeInTheDocument();
+    expect(screen.queryByText('Deprecated')).not.toBeInTheDocument();
   });
 });

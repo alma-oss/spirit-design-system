@@ -37,4 +37,31 @@ describe('Breadcrumbs', () => {
 
     expect(element).toHaveTextContent('test_title');
   });
+
+  it('should resolve labelBack from a translation reference', () => {
+    const dom = render(
+      <Breadcrumbs
+        items={[
+          { title: 'test', url: '/test' },
+          { title: 'test_2', url: '/test_2' },
+        ]}
+        labelBack={{ key: 'breadcrumbs.back' }}
+      />,
+    );
+
+    expect(dom.container.querySelectorAll('ol > li > a')[0]).toHaveTextContent('Go back');
+  });
+
+  it('should not render the back item without labelBack or goBackTitle', () => {
+    const dom = render(
+      <Breadcrumbs
+        items={[
+          { title: 'test', url: '/test' },
+          { title: 'test_2', url: '/test_2' },
+        ]}
+      />,
+    );
+
+    expect(dom.container.querySelectorAll('ol > li')).toHaveLength(2);
+  });
 });

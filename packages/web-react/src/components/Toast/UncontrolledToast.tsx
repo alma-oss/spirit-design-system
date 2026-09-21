@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useDeprecationMessage } from '../../hooks';
 import { type UncontrolledToastProps } from '../../types';
 import Toast from './Toast';
 import ToastBar from './ToastBar';
@@ -9,8 +10,16 @@ import ToastBarMessage from './ToastBarMessage';
 import { useToast } from './useToast';
 
 const UncontrolledToast = (props: UncontrolledToastProps) => {
-  const { alignmentX, alignmentY, isCollapsible, closeLabel, ...restProps } = props;
+  const { alignmentX, alignmentY, isCollapsible, closeLabel, strings, ...restProps } = props;
   const { hide, queue } = useToast();
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: closeLabel != null,
+    componentName: 'UncontrolledToast',
+    customText:
+      'The "closeLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabelClose" instead.',
+  });
 
   return (
     <Toast alignmentX={alignmentX} alignmentY={alignmentY} isCollapsible={isCollapsible}>
@@ -22,7 +31,7 @@ const UncontrolledToast = (props: UncontrolledToastProps) => {
             {...restProps}
             key={id}
             id={id}
-            closeLabel={closeLabel}
+            strings={{ ariaLabelClose: strings?.ariaLabelClose ?? closeLabel }}
             color={color}
             hasIcon={hasIcon}
             iconName={iconName}

@@ -1,28 +1,10 @@
-import { type ScrollViewControlsAriaLabelType, type ScrollViewControlsScrollStepType } from '../../types';
+import { useDeprecationMessage, useI18n } from '../../hooks';
+import { resolveComponentString } from '../../translations';
 import {
-  SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_END,
-  SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_START,
-  SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_END,
-  SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_START,
-} from './constants';
-
-const getDefaultControlLabels = (
-  isHorizontal: boolean,
-): {
-  start?: string;
-  end?: string;
-  top?: string;
-  bottom?: string;
-} =>
-  isHorizontal
-    ? {
-        start: SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_START,
-        end: SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_END,
-      }
-    : {
-        top: SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_START,
-        bottom: SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_END,
-      };
+  type ScrollViewControlsAriaLabelType,
+  type ScrollViewControlsScrollStepType,
+  type ScrollViewStrings,
+} from '../../types';
 
 export interface UseScrollViewControlsReturn {
   controls: Array<{
@@ -36,23 +18,44 @@ export const useScrollViewControls = (
   isHorizontal: boolean,
   ariaLabelControls?: ScrollViewControlsAriaLabelType,
   scrollStep: ScrollViewControlsScrollStepType = 300,
+  strings?: ScrollViewStrings,
 ): UseScrollViewControlsReturn => {
-  const defaultControlLabels = getDefaultControlLabels(isHorizontal);
-  const mergedControlLabels = { ...defaultControlLabels, ...ariaLabelControls };
+  const { t } = useI18n();
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: ariaLabelControls != null,
+    componentName: 'ScrollView',
+    customText:
+      'The "ariaLabelControls" property is deprecated and will be removed in the next major version. Use "strings.ariaStart", "strings.ariaEnd", "strings.ariaTop", and "strings.ariaBottom" instead.',
+  });
+
+  const startLabel = resolveComponentString(
+    strings?.ariaStart ?? ariaLabelControls?.start ?? { key: 'scrollView.ariaStart' },
+    t,
+  );
+  const endLabel = resolveComponentString(
+    strings?.ariaEnd ?? ariaLabelControls?.end ?? { key: 'scrollView.ariaEnd' },
+    t,
+  );
+  const topLabel = resolveComponentString(
+    strings?.ariaTop ?? ariaLabelControls?.top ?? { key: 'scrollView.ariaTop' },
+    t,
+  );
+  const bottomLabel = resolveComponentString(
+    strings?.ariaBottom ?? ariaLabelControls?.bottom ?? { key: 'scrollView.ariaBottom' },
+    t,
+  );
 
   const controls = [
     {
       icon: isHorizontal ? 'chevron-left' : 'chevron-up',
-      label: (isHorizontal
-        ? (mergedControlLabels.start ?? defaultControlLabels.start)
-        : (mergedControlLabels.top ?? defaultControlLabels.top)) as string,
+      label: isHorizontal ? startLabel : topLabel,
       step: -scrollStep,
     },
     {
       icon: isHorizontal ? 'chevron-right' : 'chevron-down',
-      label: (isHorizontal
-        ? (mergedControlLabels.end ?? defaultControlLabels.end)
-        : (mergedControlLabels.bottom ?? defaultControlLabels.bottom)) as string,
+      label: isHorizontal ? endLabel : bottomLabel,
       step: scrollStep,
     },
   ];

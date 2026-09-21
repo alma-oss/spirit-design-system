@@ -3,7 +3,7 @@
 import { cssLengthToPixels } from '@alma-oss/spirit-common/utilities/cssLengthToPixels';
 import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
 import React, { type ElementType, forwardRef, useRef } from 'react';
-import { useStyleProps } from '../../hooks';
+import { useDeprecationMessage, useStyleProps } from '../../hooks';
 import {
   type PolymorphicComponent,
   type PolymorphicRef,
@@ -18,6 +18,7 @@ import { useTooltipStyleProps } from './useTooltipStyleProps';
 const _Tooltip = <E extends ElementType = 'div'>(props: SpiritTooltipProps<E>, ref: PolymorphicRef<E>) => {
   const {
     children,
+    closeLabel,
     elementType = 'div',
     enableFlipping: flipProp = true,
     enableFlippingCrossAxis: flipCrossAxis = true,
@@ -32,6 +33,7 @@ const _Tooltip = <E extends ElementType = 'div'>(props: SpiritTooltipProps<E>, r
     onToggle,
     placement: tooltipPlacement,
     positionStrategy = 'absolute',
+    strings,
     trigger = ['click', 'hover'],
     ...restProps
   } = props;
@@ -48,6 +50,14 @@ const _Tooltip = <E extends ElementType = 'div'>(props: SpiritTooltipProps<E>, r
   const mergedStyleProps = mergeStyleProps(Component, {
     classProps: classProps.rootClassName,
     styleProps,
+  });
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: closeLabel != null,
+    componentName: 'Tooltip',
+    customText:
+      'The "closeLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabelClose" instead.',
   });
 
   // Refs for FloatingUI
@@ -112,6 +122,7 @@ const _Tooltip = <E extends ElementType = 'div'>(props: SpiritTooltipProps<E>, r
       value={{
         anchorRef: refs.setPositionReference,
         arrowRef,
+        closeLabel,
         getFloatingProps,
         getReferenceProps,
         id,
@@ -121,6 +132,7 @@ const _Tooltip = <E extends ElementType = 'div'>(props: SpiritTooltipProps<E>, r
         onToggle,
         placement,
         sizeMaxWidth: maxWidth,
+        strings,
         tooltipMaxWidth,
         tooltipRef: refs.setFloating,
         triggerRef: refs.setReference,

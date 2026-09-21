@@ -270,9 +270,21 @@ describe('UNSTABLE_Picker', () => {
 
   it('should render custom empty selection label', () => {
     // Placeholders must be `{label}` — `{{label}}` is only partially replaced and leaves stray braces.
-    render(<TestPicker emptySelectionLabel="Choose {label}" />);
+    render(<TestPicker strings={{ labelEmptySelection: 'Choose {label}' }} />);
 
     expect(screen.getByText('Choose Languages')).toBeInTheDocument();
+  });
+
+  it('should prefer strings over deprecated translation aliases', () => {
+    render(
+      <TestPicker
+        addButtonLabel="Deprecated add"
+        strings={{ ariaAdd: 'Pick', labelEmptySelection: 'Pick a language' }}
+      />,
+    );
+
+    expect(screen.getByRole('button', { name: 'Pick' })).toBeInTheDocument();
+    expect(screen.getByText('Pick a language')).toBeInTheDocument();
   });
 
   it('should render aggregated tag and remove all selected items', () => {

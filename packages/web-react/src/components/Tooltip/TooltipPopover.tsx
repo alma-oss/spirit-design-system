@@ -15,6 +15,7 @@ const TooltipPopover = (props: TooltipPopoverProps) => {
   const { children, ...rest } = props;
   const {
     arrowRef,
+    closeLabel,
     getFloatingProps,
     isDismissible,
     isOpen,
@@ -26,6 +27,7 @@ const TooltipPopover = (props: TooltipPopoverProps) => {
     y,
     position,
     sizeMaxWidth,
+    strings,
     tooltipMaxWidth,
   } = useTooltipContext();
   const { classProps, props: modifiedProps } = useTooltipStyleProps({
@@ -37,8 +39,15 @@ const TooltipPopover = (props: TooltipPopoverProps) => {
   const { styleProps: contentStyleProps, props: contentOtherProps } = useStyleProps(modifiedProps);
 
   const renderCloseButton = useMemo(
-    () => isDismissible && <CloseButton aria-expanded="true" onClick={() => onToggle(false)} />,
-    [isDismissible, onToggle],
+    () =>
+      isDismissible && (
+        <CloseButton
+          aria-expanded="true"
+          strings={{ ariaLabel: strings?.ariaLabelClose ?? closeLabel }}
+          onClick={() => onToggle(false)}
+        />
+      ),
+    [closeLabel, isDismissible, onToggle, strings?.ariaLabelClose],
   );
 
   const getMaxHeightAndWidth = () => {

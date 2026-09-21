@@ -7,6 +7,8 @@ import {
   type SpiritDivElementProps,
   type SpiritElementProps,
   type StyleProps,
+  type TranslatableString,
+  type WithStrings,
 } from './shared';
 
 export type ModalDialogHandlingProps = {
@@ -46,7 +48,12 @@ export type ModalDialogStyleProps<E extends ElementType = 'article'> = Pick<
 >;
 export interface ModalBodyProps extends SpiritDivElementProps, ChildrenProps {}
 
-export interface ModalHeaderProps extends SpiritElementProps, ChildrenProps {
+export type ModalHeaderStrings = {
+  ariaLabelClose?: TranslatableString;
+};
+
+export interface ModalHeaderProps extends SpiritElementProps, ChildrenProps, WithStrings<ModalHeaderStrings> {
+  /** @deprecated Use `strings.ariaLabelClose` instead. */
   closeLabel?: string;
   hasCloseButton?: boolean;
 }

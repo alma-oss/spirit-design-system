@@ -1,6 +1,11 @@
-import { type SpiritControlButtonProps } from '../../types';
+import { type SpiritControlButtonProps, type TranslatableString, type WithStrings } from '../../types';
 
-export interface CloseButtonProps extends Omit<SpiritControlButtonProps<'button'>, 'children'> {
-  /** Accessible label for the close button. Falls back to the localized "Close" string. */
+export type CloseButtonStrings = {
+  ariaLabel?: TranslatableString;
+};
+
+export interface CloseButtonProps
+  extends Omit<SpiritControlButtonProps<'button'>, 'children'>, WithStrings<CloseButtonStrings> {
+  /** @deprecated Use `strings.ariaLabel` instead. */
   label?: string;
 }

@@ -256,6 +256,24 @@ The `t` function accepts an optional second argument **`params`**: an object who
 t('textArea.counter.charactersEntered', { count: 42 });
 ```
 
+### Component Strings
+
+Required component copy is exposed as a top-level prop, while optional copy with a built-in default is grouped in
+the `strings` prop. Both accept a literal string or a translation reference with optional parameters.
+
+```tsx
+<UncontrolledSplitButton labelButton="Save" />
+<ModalHeader strings={{ ariaLabelClose: 'Dismiss dialog' }} />
+<ModalHeader strings={{ ariaLabelClose: { key: 'common.close' } }} />
+<ModalHeader strings={{ ariaLabelClose: { key: 'modal.close', params: { name: 'Settings' } } }} />
+```
+
+Translation references can use any application or Phrase key provided through `I18nProvider`; they are not limited
+to the built-in namespaces. Resolution precedence is instance `strings`, deprecated alias during the v5 migration,
+provider translation, and finally the built-in English default.
+
+Use the `ariaLabel*` naming convention for screen-reader-only copy and `label*` for visible copy.
+
 ## Additional Attributes
 
 All components accept additional attributes that are passed down to the root element of the component.

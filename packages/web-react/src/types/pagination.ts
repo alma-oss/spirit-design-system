@@ -7,6 +7,8 @@ import {
   type SpiritLItemElementProps,
   type SpiritPolymorphicElementPropsWithRef,
   type SpiritUListElementProps,
+  type TranslatableString,
+  type WithStrings,
 } from './shared';
 
 export type PaginationLinkDirectionType = 'previous' | 'next';
@@ -17,9 +19,23 @@ export interface PaginationProps extends SpiritElementProps {
 
 export interface PaginationItemProps extends SpiritLItemElementProps {}
 
-export interface AriaPaginationProps {
+export interface DeprecatedAccessibilityLabelProps {
+  /** @deprecated Use the corresponding key in `strings` instead. */
   accessibilityLabel?: string;
 }
+
+export type PaginationLinkStrings = {
+  ariaLabel?: TranslatableString;
+};
+
+export type PaginationLinkPreviousNextStrings = {
+  ariaLabelNext?: TranslatableString;
+  ariaLabelPrevious?: TranslatableString;
+};
+
+export type UncontrolledPaginationStrings = PaginationLinkStrings & PaginationLinkPreviousNextStrings;
+
+export interface AriaPaginationProps extends DeprecatedAccessibilityLabelProps, WithStrings<PaginationLinkStrings> {}
 
 export interface PaginationLinkBaseProps<E extends ElementType = 'a'> {
   elementType?: E;
@@ -44,13 +60,14 @@ export type PaginationLinkProps<E extends ElementType = 'a'> =
   PaginationLinkPageProps<E> | PaginationLinkChildrenProps<E>;
 
 export type PaginationButtonLinkProps<E extends ElementType = 'a'> = SpiritButtonProps<E> &
-  AriaPaginationProps &
+  DeprecatedAccessibilityLabelProps &
   RouterLinkProps & {
     direction: PaginationLinkDirectionType;
   };
 
 export type PaginationLinkPreviousNextProps<E extends ElementType = 'a'> = PaginationLinkBaseProps<E> &
-  AriaPaginationProps &
+  DeprecatedAccessibilityLabelProps &
+  WithStrings<PaginationLinkPreviousNextStrings> &
   RouterLinkProps & {
     children?: never;
     pageNumber?: never;
@@ -69,7 +86,9 @@ export type SpiritPaginationLinkPreviousNextProps<E extends ElementType = 'a'> =
   SpiritPolymorphicElementPropsWithRef<E, PaginationLinkPreviousNextProps<E>>;
 
 export interface UncontrolledPaginationProps {
+  /** @deprecated Use `strings.ariaLabelNext` instead. */
   accessibilityLabelNext?: string;
+  /** @deprecated Use `strings.ariaLabelPrevious` instead. */
   accessibilityLabelPrevious?: string;
   defaultPage?: number;
   visiblePages?: number;
@@ -78,7 +97,11 @@ export interface UncontrolledPaginationProps {
 }
 
 export interface SpiritUncontrolledPaginationProps
-  extends AriaPaginationProps, UncontrolledPaginationProps, ChildrenProps {}
+  extends
+    DeprecatedAccessibilityLabelProps,
+    UncontrolledPaginationProps,
+    ChildrenProps,
+    WithStrings<UncontrolledPaginationStrings> {}
 
 export interface UsePaginationProps extends UncontrolledPaginationProps {
   defaultPage: number;

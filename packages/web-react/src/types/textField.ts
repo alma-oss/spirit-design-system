@@ -10,8 +10,10 @@ import {
   type SizesDictionaryType,
   type SpiritInputElementPropsWithRef,
   type TextInputProps,
+  type TranslatableString,
   type Validation,
   type ValidationTextProp,
+  type WithStrings,
 } from './shared';
 
 export type TextFieldType = 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
@@ -25,6 +27,11 @@ export interface TextFieldAddonProps {
   startAddon?: ReactNode;
 }
 
+export type TextFieldStrings = {
+  ariaLabelHide?: TranslatableString;
+  ariaLabelShow?: TranslatableString;
+};
+
 export interface TextFieldProps<S = void>
   extends
     TextFieldElementBaseProps,
@@ -37,7 +44,8 @@ export interface TextFieldProps<S = void>
     TextInputProps,
     RequiredProps,
     Validation,
-    TextFieldAddonProps {
+    TextFieldAddonProps,
+    WithStrings<TextFieldStrings> {
   /** The size of the text field */
   size?: SizesDictionaryType<S>;
   /** The type of text field */

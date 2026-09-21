@@ -9,8 +9,9 @@ import {
   useI18n,
   useStyleProps,
 } from '../../hooks';
+import { resolveComponentString } from '../../translations';
 import { CHARACTER_COUNTER_SCREEN_READER_DEBOUNCE_MS } from './constants';
-import { type CharacterCounterProps, type SpiritCharacterCounterProps } from './types';
+import { type CharacterCounterProps, type CharacterCounterStrings, type SpiritCharacterCounterProps } from './types';
 
 /** Return value of the useCharacterCounterState hook */
 export interface CharacterCounterState {
@@ -30,6 +31,8 @@ export interface UseCharacterCounterStateProps {
   hasCounter?: boolean;
   /** Called when the textarea value changes */
   onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  /** Screen reader message overrides */
+  strings?: CharacterCounterStrings;
   /** Controlled value (takes precedence over defaultValue) */
   value?: string;
 }
@@ -60,32 +63,44 @@ const getCharacterCounterVisibleText = (currentLength: number, counterThreshold:
  * @param t - Translation function (e.g. from `useI18n`).
  * @param currentLength - Current number of characters.
  * @param counterThreshold - When set, messages relate to this max; when omitted, only “characters entered” copy is used.
+ * @param strings - Optional screen reader message overrides.
  * @returns {string} Localized screen reader string (not debounced).
  */
 const getCharacterCounterScreenReaderMessage = (
   t: TranslateFunction,
   currentLength: number,
   counterThreshold: number | undefined,
+  strings?: CharacterCounterStrings,
 ): string => {
   if (counterThreshold === undefined) {
-    return t('textArea.counter.charactersEntered', { count: currentLength });
+    return resolveComponentString(strings?.ariaCharactersEntered ?? { key: 'textArea.counter.charactersEntered' }, t, {
+      count: currentLength,
+    });
   }
 
   if (currentLength === 0) {
-    return t('textArea.counter.canEnterUpTo', { maxLength: counterThreshold });
+    return resolveComponentString(strings?.ariaCanEnterUpTo ?? { key: 'textArea.counter.canEnterUpTo' }, t, {
+      maxLength: counterThreshold,
+    });
   }
 
   if (currentLength > counterThreshold) {
     const overCount = currentLength - counterThreshold;
-    const key = overCount === 1 ? 'textArea.counter.characterOverLimit' : 'textArea.counter.charactersOverLimit';
+    const value =
+      overCount === 1
+        ? (strings?.ariaCharacterOverLimit ?? { key: 'textArea.counter.characterOverLimit' })
+        : (strings?.ariaCharactersOverLimit ?? { key: 'textArea.counter.charactersOverLimit' });
 
-    return t(key, { count: overCount });
+    return resolveComponentString(value, t, { count: overCount });
   }
 
   const remaining = counterThreshold - currentLength;
-  const key = remaining === 1 ? 'textArea.counter.characterRemaining' : 'textArea.counter.charactersRemaining';
+  const value =
+    remaining === 1
+      ? (strings?.ariaCharacterRemaining ?? { key: 'textArea.counter.characterRemaining' })
+      : (strings?.ariaCharactersRemaining ?? { key: 'textArea.counter.charactersRemaining' });
 
-  return t(key, { count: remaining });
+  return resolveComponentString(value, t, { count: remaining });
 };
 
 /**
@@ -95,7 +110,7 @@ const getCharacterCounterScreenReaderMessage = (
  * @returns {CharacterCounterState} Counter props for `CharacterCounter` (if visible) and textarea `onChange` handler.
  */
 export const useCharacterCounterState = (props: UseCharacterCounterStateProps): CharacterCounterState => {
-  const { value, defaultValue, counterThreshold, hasCounter, onChange } = props;
+  const { value, defaultValue, counterThreshold, hasCounter, onChange, strings } = props;
   const isControlled = value !== undefined;
 
   useControlledModeGuard({
@@ -126,6 +141,7 @@ export const useCharacterCounterState = (props: UseCharacterCounterStateProps): 
         counterThreshold,
         currentLength,
         hasCounter,
+        strings,
       }
     : undefined;
 
@@ -142,13 +158,13 @@ export const useCharacterCounterState = (props: UseCharacterCounterStateProps): 
  * @returns {UseCharacterCounterResult} Values to render the visible counter and `VisuallyHidden` live region.
  */
 export const useCharacterCounter = (props: SpiritCharacterCounterProps): UseCharacterCounterResult => {
-  const { counterThreshold, currentLength, hasCounter, id, registerAria, ...restProps } = props;
+  const { counterThreshold, currentLength, hasCounter, id, registerAria, strings, ...restProps } = props;
   const { styleProps, props: transferProps } = useStyleProps(restProps);
   const { t } = useI18n();
   const isVisible = hasCounter === true || counterThreshold !== undefined;
   const screenReaderMessageId = `${id}-counter-screen-reader-message`;
   const visibleCounterText = getCharacterCounterVisibleText(currentLength, counterThreshold);
-  const screenReaderMessage = getCharacterCounterScreenReaderMessage(t, currentLength, counterThreshold);
+  const screenReaderMessage = getCharacterCounterScreenReaderMessage(t, currentLength, counterThreshold, strings);
   const debouncedScreenReaderMessage = useDebouncedValue(
     screenReaderMessage,
     CHARACTER_COUNTER_SCREEN_READER_DEBOUNCE_MS,

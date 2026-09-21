@@ -219,4 +219,21 @@ describe('TextField', () => {
 
     expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
+
+  it('should use strings for password toggle labels', () => {
+    render(
+      <TextField
+        id="textfield"
+        label="Label"
+        hasPasswordToggle
+        strings={{ ariaLabelShow: 'Reveal password', ariaLabelHide: { key: 'textField.password.hide' } }}
+      />,
+    );
+
+    const toggle = screen.getByRole('switch', { name: 'Reveal password' });
+    fireEvent.click(toggle);
+
+    expect(toggle).toHaveAccessibleName('Hide password');
+    expect(toggle).not.toHaveAttribute('strings');
+  });
 });

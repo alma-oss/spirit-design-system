@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React, { type MutableRefObject, useRef } from 'react';
 import { Transition, type TransitionStatus } from 'react-transition-group';
-import { useStyleProps } from '../../hooks';
+import { useDeprecationMessage, useStyleProps } from '../../hooks';
 import { type SpiritToastBarProps } from '../../types';
 import { CloseButton } from '../CloseButton';
 import { Icon } from '../Icon';
@@ -22,6 +22,7 @@ const ToastBar = (props: SpiritToastBarProps) => {
     isDismissible,
     isOpen = true,
     onClose = () => {},
+    strings,
     ...restProps
   } = props;
   const rootElementRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
@@ -32,6 +33,14 @@ const ToastBar = (props: SpiritToastBarProps) => {
     isDismissible,
   });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: closeLabel != null,
+    componentName: 'ToastBar',
+    customText:
+      'The "closeLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabelClose" instead.',
+  });
 
   return (
     <Transition in={isOpen} nodeRef={rootElementRef} timeout={TRANSITION_DURATION} unmountOnExit>
@@ -54,7 +63,7 @@ const ToastBar = (props: SpiritToastBarProps) => {
                 onClick={onClose}
                 aria-expanded={isOpen}
                 aria-controls={id}
-                label={closeLabel}
+                strings={{ ariaLabel: strings?.ariaLabelClose ?? closeLabel }}
               />
             )}
           </div>

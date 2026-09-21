@@ -2,7 +2,7 @@
 
 import classNames from 'classnames';
 import React from 'react';
-import { useStyleProps } from '../../hooks';
+import { useDeprecationMessage, useStyleProps } from '../../hooks';
 import { type ModalHeaderProps } from '../../types';
 import { CloseButton } from '../CloseButton';
 import { useModalContext } from './ModalContext';
@@ -14,10 +14,18 @@ const defaultProps: ModalHeaderProps = {
 
 const ModalHeader = (props: ModalHeaderProps) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { children, closeLabel, hasCloseButton, ...restProps } = propsWithDefaults;
+  const { children, closeLabel, hasCloseButton, strings, ...restProps } = propsWithDefaults;
   const { classProps } = useModalStyleProps();
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const { id, isOpen, onClose } = useModalContext();
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: closeLabel != null,
+    componentName: 'ModalHeader',
+    customText:
+      'The "closeLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabelClose" instead.',
+  });
 
   return (
     <header {...otherProps} {...styleProps} className={classNames(classProps.header, styleProps.className)}>
@@ -27,7 +35,13 @@ const ModalHeader = (props: ModalHeaderProps) => {
         </h2>
       )}
       {hasCloseButton && (
-        <CloseButton size="xlarge" aria-expanded={isOpen} aria-controls={id} label={closeLabel} onClick={onClose} />
+        <CloseButton
+          size="xlarge"
+          aria-expanded={isOpen}
+          aria-controls={id}
+          strings={{ ariaLabel: strings?.ariaLabelClose ?? closeLabel }}
+          onClick={onClose}
+        />
       )}
     </header>
   );
