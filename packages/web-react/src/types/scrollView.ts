@@ -1,5 +1,11 @@
 import type { RefObject } from 'react';
-import { type ChildrenProps, type DirectionDictionaryType, type StyleProps } from './shared';
+import {
+  type ChildrenProps,
+  type DirectionDictionaryType,
+  type StringsProps,
+  type StyleProps,
+  type TranslatableString,
+} from './shared';
 
 export type ScrollViewDirectionType = DirectionDictionaryType;
 export type ScrollViewOverflowDecoratorsType = 'borders' | 'shadows' | 'both';
@@ -11,16 +17,25 @@ export type ScrollViewControlsAriaLabelType = {
   end?: string;
 };
 
+export type ScrollViewStrings = {
+  bottomAria?: TranslatableString;
+  endAria?: TranslatableString;
+  startAria?: TranslatableString;
+  topAria?: TranslatableString;
+};
+
 export type ScrollViewControlsScrollStepType = number;
 
-interface ScrollViewControlsBaseProps {
+interface ScrollViewControlsBaseProps extends StringsProps<ScrollViewStrings> {
+  /** @deprecated Use `strings.startAria`, `strings.endAria`, `strings.topAria`, and `strings.bottomAria` instead. */
   ariaLabelControls?: ScrollViewControlsAriaLabelType;
   direction: ScrollViewDirectionType;
   scrollStep: ScrollViewControlsScrollStepType;
   viewportRef: RefObject<HTMLDivElement>;
 }
 
-export interface ScrollViewBaseProps extends ChildrenProps, StyleProps {
+export interface ScrollViewBaseProps extends ChildrenProps, StyleProps, StringsProps<ScrollViewStrings> {
+  /** @deprecated Use `strings.startAria`, `strings.endAria`, `strings.topAria`, and `strings.bottomAria` instead. */
   ariaLabelControls?: ScrollViewControlsAriaLabelType;
   controlsScrollStep?: ScrollViewControlsScrollStepType;
   direction?: ScrollViewDirectionType;

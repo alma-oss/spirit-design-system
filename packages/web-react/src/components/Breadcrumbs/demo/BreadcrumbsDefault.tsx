@@ -21,7 +21,7 @@ const BreadcrumbsDefault = () => {
     },
   ];
 
-  return <Breadcrumbs items={items} goBackTitle="Back" />;
+  return <Breadcrumbs items={items} />;
 };
 
 export default BreadcrumbsDefault;

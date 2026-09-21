@@ -286,6 +286,65 @@ describe('UNSTABLE_Combobox', () => {
     expect(screen.getByText('Loading…')).toBeInTheDocument();
   });
 
+  it('should prefer strings.loading and strings.emptyState over the catalog', () => {
+    const { rerender } = render(
+      <UNSTABLE_Combobox
+        {...defaultProps}
+        hasEmptyState
+        isOpen
+        strings={{ emptyState: 'No matches', loading: 'Please wait' }}
+      />,
+    );
+
+    expect(screen.getByText('No matches')).toBeInTheDocument();
+    expect(screen.queryByText('Nothing found')).not.toBeInTheDocument();
+
+    rerender(
+      <UNSTABLE_Combobox
+        {...defaultProps}
+        hasEmptyState
+        isLoading
+        isOpen
+        strings={{ emptyState: 'No matches', loading: 'Please wait' }}
+      />,
+    );
+
+    expect(screen.getByText('Please wait')).toBeInTheDocument();
+    expect(screen.queryByText('Loading…')).not.toBeInTheDocument();
+  });
+
+  it('should prefer ReactNode empty and loading slots over strings', () => {
+    const { rerender } = render(
+      <UNSTABLE_Combobox
+        {...defaultProps}
+        hasEmptyState
+        isOpen
+        emptyStateLabel={<span>Custom empty</span>}
+        strings={{ emptyState: 'No matches' }}
+      />,
+    );
+
+    expect(screen.getByText('Custom empty')).toBeInTheDocument();
+    expect(screen.queryByText('No matches')).not.toBeInTheDocument();
+
+    rerender(
+      <UNSTABLE_Combobox
+        {...defaultProps}
+        isLoading
+        isOpen
+        loadingLabel={<span>Custom loading</span>}
+        strings={{ loading: 'Please wait' }}
+      >
+        <UNSTABLE_ComboboxOption value="cs">
+          <Label>Czech</Label>
+        </UNSTABLE_ComboboxOption>
+      </UNSTABLE_Combobox>,
+    );
+
+    expect(screen.getByText('Custom loading')).toBeInTheDocument();
+    expect(screen.queryByText('Please wait')).not.toBeInTheDocument();
+  });
+
   it('should set aria-activedescendant on ArrowDown when open', () => {
     render(<TestCombobox isOpen />);
 
@@ -807,13 +866,30 @@ describe('UNSTABLE_Combobox', () => {
   });
 
   it('should set input min-width from the empty-selection placeholder length', () => {
-    const { container } = render(<TestCombobox emptySelectionLabel="Languages" />);
+    const { container } = render(
+      <TestCombobox
+        strings={{
+          selection: {
+            empty: 'Languages',
+          },
+        }}
+      />,
+    );
 
     expect(container.firstChild).toHaveStyle({ [COMBOBOX_INPUT_MIN_WIDTH_CSS_VAR]: '9ch' });
   });
 
   it('should set input min-width from the add-more placeholder when items are selected', () => {
-    const { container } = render(<TestCombobox selectedKeys={['cs']} addMoreLabel="+ Add more…" />);
+    const { container } = render(
+      <TestCombobox
+        selectedKeys={['cs']}
+        strings={{
+          addMore: {
+            label: '+ Add more…',
+          },
+        }}
+      />,
+    );
 
     expect(container.firstChild).toHaveStyle({ [COMBOBOX_INPUT_MIN_WIDTH_CSS_VAR]: '11ch' });
   });
@@ -827,7 +903,11 @@ describe('UNSTABLE_Combobox', () => {
   it('should respect a consumer override of the input min-width CSS variable', () => {
     const { container } = render(
       <TestCombobox
-        emptySelectionLabel="Languages"
+        strings={{
+          selection: {
+            empty: 'Languages',
+          },
+        }}
         UNSAFE_style={{ [COMBOBOX_INPUT_MIN_WIDTH_CSS_VAR]: '18ch' } as CSSProperties}
       />,
     );

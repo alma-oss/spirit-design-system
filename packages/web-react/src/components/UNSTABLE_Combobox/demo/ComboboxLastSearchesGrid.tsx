@@ -75,12 +75,16 @@ const ComboboxLastSearchesGrid = () => {
   return (
     <UNSTABLE_Combobox
       dropdownProps={{ fullWidthMode: 'all' }}
-      emptySelectionLabel="Search"
       hasEmptyState
       id="demo-combobox-last-searches-grid"
       inputValue={inputValue}
       isOpen={isOpen}
       label="Last searches"
+      strings={{
+        selection: {
+          empty: 'Search',
+        },
+      }}
       onInputChange={setInputValue}
       onSelectionChange={() => {}}
       onToggle={onToggle}

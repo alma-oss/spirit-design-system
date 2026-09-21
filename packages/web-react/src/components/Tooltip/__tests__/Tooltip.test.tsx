@@ -44,6 +44,25 @@ describe('Tooltip', () => {
     expect(screen.getByRole('tooltip')).toHaveTextContent(popoverText);
   });
 
+  it('should pass the dismiss label to the close button', () => {
+    render(
+      <Tooltip
+        id={id}
+        isDismissible
+        isOpen
+        onToggle={() => null}
+        strings={{
+          closeAria: 'Dismiss tooltip',
+        }}
+      >
+        <TooltipTrigger>{triggerText}</TooltipTrigger>
+        <TooltipPopover>{popoverText}</TooltipPopover>
+      </Tooltip>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Dismiss tooltip' })).toBeInTheDocument();
+  });
+
   it('should be opened', () => {
     const onToggle = jest.fn();
 

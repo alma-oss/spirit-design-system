@@ -33,12 +33,16 @@ const VariantField = ({ id, label, variant }: { id: string; label: string; varia
 
   return (
     <UNSTABLE_Combobox
-      emptySelectionLabel="Languages"
       hasEmptyState={state.hasEmptyState}
       id={id}
       inputValue={state.inputValue}
       isOpen={state.isOpen}
       label={label}
+      strings={{
+        selection: {
+          empty: 'Languages',
+        },
+      }}
       onInputChange={state.onInputChange}
       onSelectionChange={state.onSelectionChange}
       onToggle={state.onToggle}

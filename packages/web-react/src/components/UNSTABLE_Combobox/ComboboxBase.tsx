@@ -11,8 +11,15 @@ import React, {
   useRef,
 } from 'react';
 import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../context';
-import { useAriaDescribedBy, useI18n, useSelectionAria, useStyleProps } from '../../hooks';
-import { replaceTranslationParams } from '../../translations';
+import {
+  useAriaDescribedBy,
+  useDeprecationMessage,
+  useI18n,
+  useSelectionAria,
+  useStringsProp,
+  useStyleProps,
+} from '../../hooks';
+import { resolveComponentString } from '../../translations';
 import { Dropdown } from '../Dropdown';
 import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
@@ -57,13 +64,13 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
 
   const {
     'aria-describedby': ariaDescribedBy = '',
-    addMoreLabel = t('combobox.addMore'),
-    addMoreDescriptionText = t('combobox.addMoreDescription'),
+    addMoreLabel,
+    addMoreDescriptionText,
     children,
     auxiliaryContent,
     contextualHelp,
     emptySelectionLabel,
-    emptyStateLabel = t('combobox.emptyState'),
+    emptyStateLabel,
     forwardedRef,
     hasClearButton = false,
     hasEmptyState = false,
@@ -78,25 +85,96 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     dropdownProps,
     label,
     labelProps,
-    loadingLabel = t('combobox.loading'),
+    loadingLabel,
     optionKeys,
     optionsRole = DEFAULT_OPTIONS_ROLE,
     popoverProps = DEFAULT_POPOVER_PROPS,
     tagProps,
-    removeAllLabel = t('combobox.removeAll'),
+    removeAllLabel,
     removeItemLabel,
     renderTags,
-    selectionAriaLabel = t('combobox.selectionAriaLabel'),
-    selectionCountLabel = t('combobox.selectionCountLabel'),
-    selectionCountLabelSingular = t('combobox.selectionCountLabelSingular'),
+    selectionAriaLabel,
+    selectionCountLabel,
+    selectionCountLabelSingular,
     size = DEFAULT_SIZE,
     state,
-    tagDescriptionText = t('combobox.tagDescriptionText'),
+    strings,
+    tagDescriptionText,
     validationState,
     validationText,
     variant,
     ...restProps
   } = props;
+
+  const {
+    addMoreDescriptionText: resolvedAddMoreDescriptionText,
+    addMoreLabel: resolvedAddMoreLabel,
+    emptySelectionLabel: resolvedEmptySelectionLabel,
+    emptyState: resolvedEmptyStateText,
+    loading: resolvedLoadingText,
+    removeAllLabel: resolvedRemoveAllLabel,
+    selectionAriaLabel: resolvedSelectionAriaLabel,
+    selectionCountLabel: resolvedSelectionCountLabel,
+    selectionCountLabelSingular: resolvedSelectionCountLabelSingular,
+    tagDescriptionText: resolvedTagDescriptionText,
+  } = useStringsProp({
+    addMoreDescriptionText: {
+      value: strings?.addMore?.descriptionAria,
+      deprecated: addMoreDescriptionText,
+      key: 'combobox.addMoreDescription',
+      params: { label },
+    },
+    addMoreLabel: { value: strings?.addMore?.label, deprecated: addMoreLabel, key: 'combobox.addMore' },
+    emptySelectionLabel: {
+      value: strings?.selection?.empty,
+      deprecated: emptySelectionLabel,
+      params: { label },
+    },
+    emptyState: { value: strings?.emptyState, key: 'combobox.emptyState' },
+    loading: { value: strings?.loading, key: 'combobox.loading' },
+    removeAllLabel: { value: strings?.removeAllAria, deprecated: removeAllLabel, key: 'combobox.removeAll' },
+    selectionAriaLabel: {
+      value: strings?.selection?.labelAria,
+      deprecated: selectionAriaLabel,
+      key: 'combobox.selectionAriaLabel',
+      params: { label },
+    },
+    selectionCountLabel: {
+      value: strings?.selection?.countAria?.plural,
+      deprecated: selectionCountLabel,
+      key: 'combobox.selectionCountLabel',
+    },
+    selectionCountLabelSingular: {
+      value: strings?.selection?.countAria?.singular,
+      deprecated: selectionCountLabelSingular,
+      key: 'combobox.selectionCountLabelSingular',
+    },
+    tagDescriptionText: {
+      value: strings?.tag?.descriptionAria,
+      deprecated: tagDescriptionText,
+      key: 'combobox.tagDescriptionText',
+    },
+  });
+  const resolvedEmptyStateLabel = emptyStateLabel ?? resolvedEmptyStateText;
+  const resolvedLoadingLabel = loadingLabel ?? resolvedLoadingText;
+  const resolvedRemoveItemLabel = strings?.tag?.removeAria ?? removeItemLabel;
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger:
+      addMoreLabel != null ||
+      addMoreDescriptionText != null ||
+      emptySelectionLabel != null ||
+      removeAllLabel != null ||
+      removeItemLabel != null ||
+      selectionAriaLabel != null ||
+      selectionCountLabel != null ||
+      selectionCountLabelSingular != null ||
+      tagDescriptionText != null,
+    componentName: 'UNSTABLE_Combobox',
+    customText:
+      'The flat translation properties are deprecated and will be removed in the next major version. Use "strings" instead.',
+  });
 
   const {
     activeDescendantId,
@@ -229,7 +307,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     [activateOption, close, focusInput, selectedKeys],
   );
 
-  const emptyPlaceholder = emptySelectionLabel ? replaceTranslationParams(emptySelectionLabel, { label }) : label;
+  const emptyPlaceholder = resolvedEmptySelectionLabel || label;
 
   const inputPlaceholder = (() => {
     if (selectedKeys.length === 0) {
@@ -240,7 +318,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
       return '';
     }
 
-    return addMoreLabel;
+    return resolvedAddMoreLabel;
   })();
 
   const hasConsumerInputMinWidth =
@@ -254,10 +332,14 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
   const inputAriaLabel =
     selectedKeys.length === 0
       ? undefined
-      : replaceTranslationParams(selectedKeys.length === 1 ? selectionCountLabelSingular : selectionCountLabel, {
-          label,
-          count: String(selectedKeys.length),
-        });
+      : resolveComponentString(
+          selectedKeys.length === 1 ? resolvedSelectionCountLabelSingular : resolvedSelectionCountLabel,
+          t,
+          {
+            label,
+            count: String(selectedKeys.length),
+          },
+        );
 
   const describedByIds = [ariaDescribedByProp['aria-describedby'], showAddMore ? addMoreHelperId : undefined]
     .filter(Boolean)
@@ -300,7 +382,10 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
       <UniversalProvider
         values={[
           [FormFieldsContext, { size }],
-          [ComboboxContext, { size, tagDescriptionId, isOpen, onToggle: handleDropdownToggle, isDisabled }],
+          [
+            ComboboxContext,
+            { size, tagDescriptionId, isOpen, onToggle: handleDropdownToggle, isDisabled, splitTag: strings?.splitTag },
+          ],
         ]}
       >
         <div
@@ -329,7 +414,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
             >
               <ComboboxInput
                 activeDescendantId={activeDescendantId}
-                addMoreDescriptionText={addMoreDescriptionText}
+                addMoreDescriptionText={resolvedAddMoreDescriptionText}
                 addMoreHelperId={addMoreHelperId}
                 describedByIds={describedByIds}
                 getKeyboardGridRowProps={getKeyboardGridRowProps}
@@ -352,14 +437,14 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
                 open={open}
                 optionsRole={optionsRole}
                 removeAll={removeAll}
-                removeAllLabel={removeAllLabel}
+                removeAllLabel={resolvedRemoveAllLabel}
                 removeItem={removeItem}
-                removeItemLabel={removeItemLabel}
+                removeItemLabel={resolvedRemoveItemLabel}
                 removeTagAtIndex={removeTagAtIndex}
                 renderTags={renderTags}
                 selectedItems={selectedItems}
                 selectedKeysCount={selectedKeys.length}
-                selectionAriaLabel={selectionAriaLabel}
+                selectionAriaLabel={resolvedSelectionAriaLabel}
                 selectionGridRef={selectionGridRef}
                 selectionId={selectionId}
                 shouldRenderOptions={shouldRenderOptions}
@@ -370,7 +455,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
               <ComboboxPopoverContent
                 auxiliaryContent={auxiliaryContent}
                 emptyStateClassName={classProps.emptyState}
-                emptyStateLabel={emptyStateLabel}
+                emptyStateLabel={resolvedEmptyStateLabel}
                 handleListboxFocusCapture={handleListboxFocusCapture}
                 handleListboxMouseDown={handleListboxMouseDown}
                 hasEmptyState={hasEmptyState}
@@ -379,7 +464,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
                 listboxId={listboxId}
                 listboxRef={listboxRef}
                 loadingClassName={classProps.loading}
-                loadingLabel={loadingLabel}
+                loadingLabel={resolvedLoadingLabel}
                 optionsRole={optionsRole}
                 popoverContextValue={popoverContextValue}
                 popoverProps={popoverProps}
@@ -401,7 +486,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
             )}
           </Stack>
           <span id={tagDescriptionId} hidden>
-            {tagDescriptionText}
+            {resolvedTagDescriptionText}
           </span>
         </div>
       </UniversalProvider>

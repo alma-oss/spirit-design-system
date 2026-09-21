@@ -1,28 +1,9 @@
-import { type ScrollViewControlsAriaLabelType, type ScrollViewControlsScrollStepType } from '../../types';
+import { useDeprecationMessage, useStringsProp } from '../../hooks';
 import {
-  SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_END,
-  SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_START,
-  SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_END,
-  SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_START,
-} from './constants';
-
-const getDefaultControlLabels = (
-  isHorizontal: boolean,
-): {
-  start?: string;
-  end?: string;
-  top?: string;
-  bottom?: string;
-} =>
-  isHorizontal
-    ? {
-        start: SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_START,
-        end: SCROLL_VIEW_CONTROLS_LABEL_HORIZONTAL_END,
-      }
-    : {
-        top: SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_START,
-        bottom: SCROLL_VIEW_CONTROLS_LABEL_VERTICAL_END,
-      };
+  type ScrollViewControlsAriaLabelType,
+  type ScrollViewControlsScrollStepType,
+  type ScrollViewStrings,
+} from '../../types';
 
 export interface UseScrollViewControlsReturn {
   controls: Array<{
@@ -36,23 +17,37 @@ export const useScrollViewControls = (
   isHorizontal: boolean,
   ariaLabelControls?: ScrollViewControlsAriaLabelType,
   scrollStep: ScrollViewControlsScrollStepType = 300,
+  strings?: ScrollViewStrings,
 ): UseScrollViewControlsReturn => {
-  const defaultControlLabels = getDefaultControlLabels(isHorizontal);
-  const mergedControlLabels = { ...defaultControlLabels, ...ariaLabelControls };
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: ariaLabelControls != null,
+    componentName: 'ScrollView',
+    customText:
+      'The "ariaLabelControls" property is deprecated and will be removed in the next major version. Use "strings.startAria", "strings.endAria", "strings.topAria", and "strings.bottomAria" instead.',
+  });
+
+  const {
+    start: startLabel,
+    end: endLabel,
+    top: topLabel,
+    bottom: bottomLabel,
+  } = useStringsProp({
+    start: { value: strings?.startAria, deprecated: ariaLabelControls?.start, key: 'scrollView.ariaStart' },
+    end: { value: strings?.endAria, deprecated: ariaLabelControls?.end, key: 'scrollView.ariaEnd' },
+    top: { value: strings?.topAria, deprecated: ariaLabelControls?.top, key: 'scrollView.ariaTop' },
+    bottom: { value: strings?.bottomAria, deprecated: ariaLabelControls?.bottom, key: 'scrollView.ariaBottom' },
+  });
 
   const controls = [
     {
       icon: isHorizontal ? 'chevron-left' : 'chevron-up',
-      label: (isHorizontal
-        ? (mergedControlLabels.start ?? defaultControlLabels.start)
-        : (mergedControlLabels.top ?? defaultControlLabels.top)) as string,
+      label: isHorizontal ? startLabel : topLabel,
       step: -scrollStep,
     },
     {
       icon: isHorizontal ? 'chevron-right' : 'chevron-down',
-      label: (isHorizontal
-        ? (mergedControlLabels.end ?? defaultControlLabels.end)
-        : (mergedControlLabels.bottom ?? defaultControlLabels.bottom)) as string,
+      label: isHorizontal ? endLabel : bottomLabel,
       step: scrollStep,
     },
   ];
