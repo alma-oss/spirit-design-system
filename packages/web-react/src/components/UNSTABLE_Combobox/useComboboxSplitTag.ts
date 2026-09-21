@@ -13,7 +13,7 @@ import {
 } from 'react';
 import { KeyboardKey } from '../../constants';
 import { useI18n } from '../../hooks';
-import { replaceTranslationParams } from '../../translations';
+import { resolveComponentString } from '../../translations';
 import { blockDefaultReactions } from '../../utils';
 import {
   type SplitTagListboxOptionProps,
@@ -103,17 +103,15 @@ export const useComboboxSplitTag = (props: SpiritUnstableComboboxSplitTagProps):
 
   const labelText = getNodeText(label);
   const selectedLabelText = getNodeText(selectedOptionLabel);
-  const removeButtonAriaLabel =
-    removeLabel ??
-    replaceTranslationParams(t('combobox.removeItemLabel'), {
-      itemLabel: labelText,
-    });
+  const removeButtonAriaLabel = resolveComponentString(removeLabel ?? { key: 'combobox.removeItemLabel' }, t, {
+    itemLabel: labelText,
+  });
   const selectTriggerAriaLabel =
     select['aria-label'] ??
-    replaceTranslationParams(t('combobox.splitTagSelectLabel'), {
+    resolveComponentString({ key: 'combobox.splitTagSelectLabel' }, t, {
       selectedLabel: selectedLabelText,
     });
-  const listboxLabel = select.listboxLabel ?? t('combobox.splitTagListboxLabel');
+  const listboxLabel = resolveComponentString(select.listboxLabel ?? { key: 'combobox.splitTagListboxLabel' }, t);
 
   const getOptionId = useCallback(
     (optionValue: string) => `${dropdownId}-option-${optionValues.indexOf(optionValue)}`,

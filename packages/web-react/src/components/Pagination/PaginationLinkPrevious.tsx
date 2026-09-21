@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { useI18n } from '../../hooks';
+import { useDeprecationMessage, useStringsProp } from '../../hooks';
 import {
   type PolymorphicComponent,
   type PolymorphicRef,
@@ -12,15 +12,25 @@ import { VisuallyHidden } from '../VisuallyHidden';
 import PaginationLink from './PaginationLink';
 
 const _PaginationLinkPrevious = <E extends ElementType = 'a'>(
-  { accessibilityLabel, ...restProps }: SpiritPaginationLinkPreviousNextProps<E>,
+  { accessibilityLabel, strings, ...restProps }: SpiritPaginationLinkPreviousNextProps<E>,
   ref: PolymorphicRef<E>,
 ) => {
-  const { t } = useI18n();
+  const { label } = useStringsProp({
+    label: { value: strings?.ariaLabel?.previous, deprecated: accessibilityLabel, key: 'pagination.previous' },
+  });
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: accessibilityLabel != null,
+    componentName: 'PaginationLinkPrevious',
+    customText:
+      'The "accessibilityLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.previous" instead.',
+  });
 
   return (
     <PaginationLink {...restProps} ref={ref}>
       <Icon name="chevron-left" />
-      <VisuallyHidden>{accessibilityLabel ?? t('pagination.previous')}</VisuallyHidden>
+      <VisuallyHidden>{label}</VisuallyHidden>
     </PaginationLink>
   );
 };

@@ -3,7 +3,7 @@
 import React, { useMemo } from 'react';
 import { Sizes } from '../../constants';
 import { useI18n } from '../../hooks';
-import { replaceTranslationParams } from '../../translations';
+import { resolveComponentString } from '../../translations';
 import { CloseButton } from '../CloseButton';
 import { Tag } from '../Tag';
 import { PICKER_NESTED_CLOSE_BUTTON_SIZE_MAP, PICKER_NESTED_SIZE_MAP } from './constants';
@@ -23,11 +23,9 @@ const UNSTABLE_PickerTag = ({
   const { t } = useI18n();
   const { size = Sizes.MEDIUM, tagDescriptionId } = usePickerContext();
 
-  const removeButtonLabel =
-    removeLabel ??
-    replaceTranslationParams(t('picker.removeItemLabel'), {
-      itemLabel: getNodeText(label),
-    });
+  const removeButtonLabel = resolveComponentString(removeLabel ?? { key: 'picker.removeItemLabel' }, t, {
+    itemLabel: getNodeText(label),
+  });
 
   const tagKeyboardEventProps = useMemo(() => {
     if (isDisabled || !tagKeyboardProps) {
@@ -58,7 +56,7 @@ const UNSTABLE_PickerTag = ({
         {children ?? <span>{label}</span>}
         <CloseButton
           isDisabled={isDisabled}
-          label={removeButtonLabel}
+          strings={{ ariaLabel: { close: removeButtonLabel } }}
           onClick={onRemove}
           size={PICKER_NESTED_CLOSE_BUTTON_SIZE_MAP[size]}
           {...(tagKeyboardProps && { tabIndex: tagKeyboardProps.secondaryControlTabIndex })}

@@ -326,25 +326,26 @@ Implementation uses **`useI18n`** in `src/hooks/useI18n.ts` and optional **`I18n
    `StringsProps<FooStrings>`.
 4. Nest optional copy as `strings.ariaLabel.*` (screen-reader) and `strings.label.*` (visible), including when there
    is only one string (for example `strings.ariaLabel.close`).
-5. Resolve the selected literal or translation reference with `resolveComponentString`; select deprecated aliases
-   and the internal default key before calling the resolver. When a component has several optional strings, use
-   `resolveComponentStrings` instead of repeating the call.
+5. Resolve optional copy with `useStringsProp`. Pass `strings` as `value`, a deprecated alias as `deprecated`, and the
+   dictionary fallback as `key`. Omit `key` when unset copy should stay undefined. Use `resolveComponentString` only
+   when the call site is not a hook, or when interpolation depends on a value that is not known for the whole component
+   (for example a per-item label).
+6. Document the `strings` keys in a **Translations** section of the component README (key, default dictionary path,
+   English default, and whether the text is visible or screen-reader-only). Keep a short `strings` row in the props
+   table that links to that section.
 
 Do not create both a top-level optional prop and a `strings` key for the same value. Consumer content such as field
 labels and React node slots remains a regular prop.
 
 ```tsx
-const label = resolveComponentString(strings?.ariaLabel?.close ?? closeLabel ?? { key: 'common.close' }, t);
+const { closeLabel } = useStringsProp({
+  closeLabel: { value: strings?.ariaLabel?.close, deprecated: label, key: 'common.close' },
+});
 
-const labels = resolveComponentStrings(
-  {
-    ariaLabel: {
-      add: { value: strings?.ariaLabel?.add ?? addButtonLabel, key: 'picker.add' },
-      close: { value: strings?.ariaLabel?.close ?? closeButtonLabel, key: 'common.close' },
-    },
-  },
-  t,
-);
+const { addButtonLabel, closeButtonLabel } = useStringsProp({
+  addButtonLabel: { value: strings?.ariaLabel?.add, deprecated: addButtonLabel, key: 'picker.add' },
+  closeButtonLabel: { value: strings?.ariaLabel?.close, deprecated: closeButtonLabel, key: 'common.close' },
+});
 ```
 
 [web-react-readme]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react/README.md

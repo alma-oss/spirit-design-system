@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+import { type CharacterCounterStrings } from '../components/CharacterCounter/types';
 import { type LabelProps } from './label';
 import {
   type ChildrenProps,
@@ -8,6 +9,7 @@ import {
   type RequiredProps,
   type SizesDictionaryType,
   type SpiritTextAreaElementPropsWithRef,
+  type StringsProps,
   type TextInputProps,
   type Validation,
   type ValidationTextProp,
@@ -71,6 +73,8 @@ type TextAreaCounterWithThresholdProps = {
 
 type TextAreaCounterProps = TextAreaCounterOffProps | TextAreaCounterOnProps | TextAreaCounterWithThresholdProps;
 
-export type TextAreaProps<S = void> = TextAreaBaseProps<S> & TextAreaCounterProps;
+export type TextAreaProps<S = void> = TextAreaBaseProps<S> &
+  TextAreaCounterProps &
+  StringsProps<CharacterCounterStrings>;
 
 export type SpiritTextAreaProps<S = void> = TextAreaProps<S>;

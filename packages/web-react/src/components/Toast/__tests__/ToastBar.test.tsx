@@ -77,7 +77,7 @@ describe('ToastBar', () => {
     const onClose = jest.fn();
 
     render(
-      <ToastBar id="test" isDismissible closeLabel="Close toast" onClose={onClose}>
+      <ToastBar id="test" isDismissible strings={{ ariaLabel: { close: 'Close toast' } }} onClose={onClose}>
         Hello World
       </ToastBar>,
     );
@@ -89,6 +89,16 @@ describe('ToastBar', () => {
     fireEvent.click(closeButton);
 
     expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('should keep supporting the deprecated closeLabel', () => {
+    render(
+      <ToastBar id="test" isDismissible closeLabel="Deprecated close">
+        Hello World
+      </ToastBar>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Deprecated close' })).toBeInTheDocument();
   });
 
   it('should not render dismiss button when not dismissible', () => {
