@@ -15,7 +15,8 @@ which the component wires to the appropriate UI elements (input, drag-and-drop, 
 
 Files are rendered in a **Stack** (with `elementType="ul"` and `aria-label="Uploaded files"`) as a sibling of `FileUpload`. You iterate over your items and render list items using the [File][readme-file] component. You manage the list in your own state and provide handlers such as `onDismiss` and `onFilesSelected`.
 
-To show the file input and drop zone, pass `name` (and typically `label`, `inputUploadText`, `inputDragAndDropText`, and optionally `buttonText` for the decorative button). When `name` is omitted, only the wrapper is rendered (e.g. for layout or when you only show the uploaded files list).
+To show the file input and drop zone, pass `name` and `label`. Component copy has localized defaults and can be
+overridden with `strings`. When `name` is omitted, only the wrapper is rendered.
 
 ```tsx
 <Stack spacing="space-800">
@@ -23,8 +24,10 @@ To show the file input and drop zone, pass `name` (and typically `label`, `input
     id="file-uploader-example"
     name="attachments"
     label="Label"
-    inputUploadText="Upload your file(s)"
-    inputDragAndDropText="or drag and drop here"
+    strings={{
+      upload: 'Upload your file(s)',
+      dragAndDrop: 'or drag and drop here',
+    }}
     helperText="Max file size is 10 MB"
     onFilesSelected={onFilesSelected}
   />
@@ -78,15 +81,16 @@ The consumer is responsible for setting the validation state based on their own 
 | Name                     | Type                                 | Default  | Required | Description                                                                                                                                                                                                                                                        |
 | ------------------------ | ------------------------------------ | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `accept`                 | `string`                             | —        | ✕        | The accept attribute takes as its value a comma-separated list of one or more file types, or unique file type specifiers, describing which file types to allow. Applies to the file picker dialog only; for drag and drop you must filter accepted types yourself. |
-| `buttonText`             | `string`                             | `Browse` | ✕        | Visible label on the decorative button (`aria-hidden`; triggers the same file input). Use `inputUploadText` / field `label` for the accessible name.                                                                                                               |
+| `strings`                | `{ button?, upload?, dragAndDrop? }` | —        | ✕        | Drop-zone copy overrides; see [Translations](#translations)                                                                                                                                                                                                        |
+| `buttonText`             | `string`                             | —        | ✕        | _Deprecated, use `strings.button`_                                                                                                                                                                                                                                 |
 | `dropZoneRef`            | `MutableRefObject<HTMLDivElement>`   | —        | ✕        | Drop zone element reference                                                                                                                                                                                                                                        |
 | `hasValidationIcon`      | `bool`                               | `false`  | ✕        | Whether to show validation icon                                                                                                                                                                                                                                    |
 | `helperText`             | `ReactNode`                          | —        | ✕        | Custom helper text                                                                                                                                                                                                                                                 |
 | `iconName`               | `string`                             | `upload` | ✕        | Icon used in the drop zone                                                                                                                                                                                                                                         |
 | `id`                     | `string`                             | —        | ✓        | File input id (`id` / `htmlFor` / `aria-describedby` linkage in upload input block)                                                                                                                                                                                |
-| `inputDragAndDropText`   | `string`                             | —        | ✕        | Drag-and-drop suffix in the drop zone (hidden when drag-and-drop is not supported)                                                                                                                                                                                 |
+| `inputDragAndDropText`   | `string`                             | —        | ✕        | _Deprecated, use `strings.dragAndDrop`_                                                                                                                                                                                                                            |
 | `inputRef`               | `MutableRefObject<HTMLInputElement>` | —        | ✕        | Input element reference                                                                                                                                                                                                                                            |
-| `inputUploadText`        | `string`                             | —        | ✕        | Primary label in the drop zone                                                                                                                                                                                                                                     |
+| `inputUploadText`        | `string`                             | —        | ✕        | _Deprecated, use `strings.upload`_                                                                                                                                                                                                                                 |
 | `isCompact`              | `bool`                               | —        | ✕        | Compact drop-zone layout (`FileUploadInput__dropZone--compact`)                                                                                                                                                                                                    |
 | `isDisabled`             | `bool`                               | —        | ✕        | Whether is field disabled                                                                                                                                                                                                                                          |
 | `isDragAndDropSupported` | `bool`                               | —        | ✕        | When set, overrides drag-and-drop support (dashed border / DnD handlers); use `false` for "dragging not available" examples.                                                                                                                                       |
@@ -111,6 +115,31 @@ and [escape hatches][readme-escape-hatches].
 
 The files list is built with the **Stack** component: use `<Stack aria-label="Uploaded files" elementType="ul" spacing="space-700">` and render file items from [File][readme-file] as its children. See [Stack documentation][stack-docs] for Stack props.
 
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
+
+| Key           | Default key                     | English default         | Description                                         |
+| ------------- | ------------------------------- | ----------------------- | --------------------------------------------------- |
+| `button`      | `fileUploader.browse`           | `Browse`                | Visible browse button                               |
+| `upload`      | `fileUploader.inputUpload`      | `Upload your file`      | Drop-zone primary text                              |
+| `dragAndDrop` | `fileUploader.inputDragAndDrop` | `or drag and drop here` | Drop-zone suffix; omitted when drag-and-drop is off |
+
+### Deprecation Notice
+
+`buttonText`, `inputUploadText`, and `inputDragAndDropText` are deprecated and will be removed in v6.
+
+### Migration Guide
+
+```diff
+- <FileUpload buttonText="Browse" inputUploadText="Upload" inputDragAndDropText="or drop here" />
++ <FileUpload strings={{
+button: 'Browse',
+upload: 'Upload',
+dragAndDrop: 'or drop here',
+}} />
+```
+
 ## Icons
 
 This component uses the `Icon` component internally. To ensure correct rendering,
@@ -118,6 +147,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 
 [div-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Container/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-file]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/File/README.md
