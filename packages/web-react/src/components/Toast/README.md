@@ -296,7 +296,8 @@ To make the ToastBar dismissible, add the `isDismissible` prop along with a `onC
 
 | Name            | Type                                                            | Default    | Required | Description                                         |
 | --------------- | --------------------------------------------------------------- | ---------- | -------- | --------------------------------------------------- |
-| `closeLabel`    | `string`                                                        | `Close`    | ✕        | Close label                                         |
+| `strings`       | `{ ariaLabel?: { close? } }`                                    | —          | ✕        | Close label; see [Translations](#translations)      |
+| `closeLabel`    | `string`                                                        | —          | ✕        | _Deprecated, use `strings.ariaLabel.close`_         |
 | `color`         | \[[EmotionColorNamesType][readme-generated-types] \| `neutral`] | `neutral`  | ✕        | Color variant                                       |
 | `hasIcon`       | `bool`                                                          | `false` \* | ✕        | If true, an icon is shown along the message         |
 | `iconName`      | `string`                                                        | `info` \*  | ✕        | Name of a custom icon to be shown along the message |
@@ -312,6 +313,14 @@ Read the section [Default Icons according to Color Variant](#default-icons-accor
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
+
+| Key               | Default key    | English default | Description    |
+| ----------------- | -------------- | --------------- | -------------- |
+| `ariaLabel.close` | `common.close` | `Close`         | Dismiss button |
 
 ## Full Example
 
@@ -382,7 +391,7 @@ export const Example = () => {
       <UncontrolledToast
         alignmentX="right"
         alignmentY="top"
-        closeLabel="Close toast"
+        strings={{ ariaLabel: { close: 'Close toast' } }}
         hasIcon
         isDismissible
         isCollapsible
@@ -447,12 +456,24 @@ Read the section [Default Icons according to Color Variant](#default-icons-accor
 | --------------- | ------------------------------------------------------------ | -------- | -------- | ----------------------------------------------------------------- |
 | `alignmentX`    | \[[AlignmentX dictionary][dictionary-alignment] \| `object`] | `center` | ✕        | Horizontal alignment of the toast queue                           |
 | `alignmentY`    | \[`top` \| `bottom` \| `object`]                             | `bottom` | ✕        | Vertical alignment of the toast queue                             |
-| `closeLabel`    | `string`                                                     | `Close`  | ✕        | Close label                                                       |
+| `strings`       | `{ ariaLabel?: { close? } }`                                 | —        | ✕        | Close label; see [Translations](#translations)                    |
+| `closeLabel`    | `string`                                                     | —        | ✕        | _Deprecated, use `strings.ariaLabel.close`_                       |
 | `isCollapsible` | `bool`                                                       | `true`   | ✕        | If true, Toast queue collapses if there are more than 3 ToastBars |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Deprecation Notice
+
+The `closeLabel` prop on `ToastBar` and `UncontrolledToast` is deprecated and will be removed in v6.
+
+### Migration Guide
+
+```diff
+- <ToastBar closeLabel="Dismiss" />
++ <ToastBar strings={{ ariaLabel: { close: 'Dismiss' } }} />
+```
 
 ## Icons
 
@@ -466,6 +487,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 [mdn-role-log]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/log_role
 [react-uncontrolled]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#controlled-vs-uncontrolled-components
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

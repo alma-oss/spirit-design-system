@@ -29,13 +29,11 @@ const meta = {
     controls: { exclude: ['children', 'hasValidationIcon', 'contextualHelp'] },
   },
   argTypes: {
-    addMoreLabel: { control: 'text' },
     showContextualHelp: {
       control: 'boolean',
       description: 'Shows `ContextualHelp` next to the label.',
       table: { defaultValue: { summary: 'false' } },
     },
-    emptySelectionLabel: { control: 'text' },
     hasClearButton: {
       control: 'boolean',
       table: { defaultValue: { summary: 'false' } },
@@ -63,15 +61,11 @@ const meta = {
       table: { defaultValue: { summary: 'false' } },
     },
     label: { control: 'text' },
-    removeAllLabel: { control: 'text' },
-    removeItemLabel: { control: 'text' },
-    selectionAriaLabel: { control: 'text' },
     size: {
       control: 'select',
       options: [...Object.values(Sizes), undefined],
       table: { defaultValue: { summary: Sizes.MEDIUM } },
     },
-    tagDescriptionText: { control: 'text' },
     validationState: {
       control: 'select',
       options: [...Object.values(ValidationStates), undefined],
@@ -87,6 +81,7 @@ const meta = {
       options: [...Object.values(FillVariants), undefined],
       table: { defaultValue: { summary: FillVariants.FILL } },
     },
+    strings: { control: 'object' },
   },
   args: {
     showContextualHelp: false,

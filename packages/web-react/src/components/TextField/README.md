@@ -41,6 +41,7 @@ hidden or shown while the field remains correctly marked as required.
   label="Password"
   name="textFieldPasswordToggle"
   placeholder="Placeholder"
+  strings={{ ariaLabel: { show: 'Reveal password', hide: { key: 'password.hide' } } }}
   validationState="danger"
   validationText="validation failed"
 />
@@ -155,6 +156,7 @@ such as a `button` or link.
 | `ref`               | `ForwardedRef<HTMLInputElement>`                                             | —        | ✕        | Input element reference                                                 |
 | `size`              | [Size dictionary][dictionary-size]                                           | `medium` | ✕        | Size variant                                                            |
 | `startAddon`        | `ReactNode`                                                                  | —        | ✕        | Addon rendered before the input                                         |
+| `strings`           | `{ ariaLabel?: { hide?, show? } }`                                           | —        | ✕        | Password-toggle labels; see [Translations](#translations)               |
 | `type`              | \[`email` \| `number` \| `password` \| `search` \| `tel` \| `text` \| `url`] | `text`   | ✕        | Input type                                                              |
 | `validationState`   | [Validation dictionary][dictionary-validation]                               | —        | ✕        | Type of validation state                                                |
 | `validationText`    | \[`ReactNode` \| `ReactNode[]`]                                              | —        | ✕        | Validation text                                                         |
@@ -162,6 +164,15 @@ such as a `button` or link.
 | `variant`           | [Fill Variants dictionary][dictionary-variant]                               | `fill`   | ✕        | InputContainer variant                                                  |
 
 (\*) When `value` is provided, the component acts as an controlled component and requires an native `onChange` handler to update the value. For more information, please read [React documentation][react-input]
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Used when `hasPasswordToggle` is set. Omitted keys use the built-in English default.
+
+| Key              | Default key               | English default | Description                    |
+| ---------------- | ------------------------- | --------------- | ------------------------------ |
+| `ariaLabel.show` | `textField.password.show` | `Show password` | Toggle when password is hidden |
+| `ariaLabel.hide` | `textField.password.hide` | `Hide password` | Toggle when password is shown  |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -194,6 +205,7 @@ For detailed information see [TextField][readme-web-textfield] component.
 [dictionary-variant]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#variant
 [react-input]: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-input-addon]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/InputAddon/README.md
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

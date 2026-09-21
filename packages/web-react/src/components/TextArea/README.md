@@ -100,30 +100,31 @@ an optimized experience:
 
 ## API
 
-| Name                    | Type                                           | Default  | Required | Description                                                                     |
-| ----------------------- | ---------------------------------------------- | -------- | -------- | ------------------------------------------------------------------------------- |
-| `autoComplete`          | `string`                                       | -        | ✕        | [Automated assistance in filling][autocomplete-attr]                            |
-| `autoResizingMaxHeight` | `number`                                       | `400`    | ✕        | Maximum field height **in px** with automatic height control. \*                |
-| `counterThreshold`      | `number`                                       | —        | ✕        | Character threshold; shows `current/threshold` counter                          |
-| `hasCounter`            | `bool`                                         | —        | ✕        | Show character counter (count only); auto `true` with `counterThreshold`        |
-| `hasValidationIcon`     | `bool`                                         | `false`  | ✕        | Whether to show validation icon                                                 |
-| `helperText`            | `string`                                       | —        | ✕        | Custom helper text                                                              |
-| `id`                    | `string`                                       | —        | ✓        | Textarea and label identification                                               |
-| `isAutoResizing`        | `bool`                                         | —        | ✕        | Whether is field auto resizing which adjusts its height while typing            |
-| `isDisabled`            | `bool`                                         | —        | ✕        | Whether is field disabled                                                       |
-| `isLabelHidden`         | `bool`                                         | —        | ✕        | Whether is label hidden                                                         |
-| `isRequired`            | `bool`                                         | —        | ✕        | Whether is field required                                                       |
-| `label`                 | `ReactNode`                                    | —        | ✓        | Label text                                                                      |
-| `maxLength`             | `number`                                       | —        | ✕        | Native textarea hard cap; with `counterThreshold`, prefer `>= counterThreshold` |
-| `name`                  | `string`                                       | —        | ✕        | Textarea name                                                                   |
-| `placeholder`           | `string`                                       | —        | ✕        | Textarea placeholder                                                            |
-| `ref`                   | `ForwardedRef<HTMLTextAreaElement>`            | —        | ✕        | Textarea element reference                                                      |
-| `rows`                  | `number`                                       | —        | ✕        | Number of visible rows                                                          |
-| `size`                  | [Size dictionary][dictionary-size]             | `medium` | ✕        | Size variant                                                                    |
-| `validationState`       | [Validation dictionary][dictionary-validation] | —        | ✕        | Type of validation state                                                        |
-| `validationText`        | \[`ReactNode` \| `ReactNode[]`]                | —        | ✕        | Validation text                                                                 |
-| `value`                 | `string`                                       | —        | ✕        | Textarea value                                                                  |
-| `variant`               | [Fill Variants dictionary][dictionary-variant] | `fill`   | ✕        | InputContainer variant                                                          |
+| Name                    | Type                                           | Default  | Required | Description                                                                                                 |
+| ----------------------- | ---------------------------------------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------- |
+| `autoComplete`          | `string`                                       | -        | ✕        | [Automated assistance in filling][autocomplete-attr]                                                        |
+| `autoResizingMaxHeight` | `number`                                       | `400`    | ✕        | Maximum field height **in px** with automatic height control. \*                                            |
+| `counterThreshold`      | `number`                                       | —        | ✕        | Character threshold; shows `current/threshold` counter                                                      |
+| `hasCounter`            | `bool`                                         | —        | ✕        | Show character counter (count only); auto `true` with `counterThreshold`                                    |
+| `hasValidationIcon`     | `bool`                                         | `false`  | ✕        | Whether to show validation icon                                                                             |
+| `helperText`            | `string`                                       | —        | ✕        | Custom helper text                                                                                          |
+| `id`                    | `string`                                       | —        | ✓        | Textarea and label identification                                                                           |
+| `isAutoResizing`        | `bool`                                         | —        | ✕        | Whether is field auto resizing which adjusts its height while typing                                        |
+| `isDisabled`            | `bool`                                         | —        | ✕        | Whether is field disabled                                                                                   |
+| `isLabelHidden`         | `bool`                                         | —        | ✕        | Whether is label hidden                                                                                     |
+| `isRequired`            | `bool`                                         | —        | ✕        | Whether is field required                                                                                   |
+| `label`                 | `ReactNode`                                    | —        | ✓        | Label text                                                                                                  |
+| `maxLength`             | `number`                                       | —        | ✕        | Native textarea hard cap; with `counterThreshold`, prefer `>= counterThreshold`                             |
+| `name`                  | `string`                                       | —        | ✕        | Textarea name                                                                                               |
+| `placeholder`           | `string`                                       | —        | ✕        | Textarea placeholder                                                                                        |
+| `strings`               | `CharacterCounterStrings`                      | —        | ✕        | Counter screen reader overrides; see [CharacterCounter Translations][readme-character-counter-translations] |
+| `ref`                   | `ForwardedRef<HTMLTextAreaElement>`            | —        | ✕        | Textarea element reference                                                                                  |
+| `rows`                  | `number`                                       | —        | ✕        | Number of visible rows                                                                                      |
+| `size`                  | [Size dictionary][dictionary-size]             | `medium` | ✕        | Size variant                                                                                                |
+| `validationState`       | [Validation dictionary][dictionary-validation] | —        | ✕        | Type of validation state                                                                                    |
+| `validationText`        | \[`ReactNode` \| `ReactNode[]`]                | —        | ✕        | Validation text                                                                                             |
+| `value`                 | `string`                                       | —        | ✕        | Textarea value                                                                                              |
+| `variant`               | [Fill Variants dictionary][dictionary-variant] | `fill`   | ✕        | InputContainer variant                                                                                      |
 
 (\*) The value is compared against the browser's `scrollHeight` (a DOM pixel measurement),
 so `px` is intentional here and cannot be replaced with `rem`.
@@ -160,3 +161,4 @@ For detailed information see [TextArea](https://github.com/alma-oss/spirit-desig
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[readme-character-counter-translations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/CharacterCounter/README.md#translations
