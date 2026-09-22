@@ -3,7 +3,7 @@
 const { describe, it } = require('node:test');
 const { RuleTester } = require('eslint');
 const htmlParser = require('@html-eslint/parser');
-const rule = require('../no-xlink-href');
+const rule = require('../no-xlink-href.cjs');
 
 RuleTester.describe = describe;
 RuleTester.it = it;
