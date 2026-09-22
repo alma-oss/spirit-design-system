@@ -8,7 +8,13 @@ import {
 } from '../../types/shared';
 import { type FileItem } from '../File/types';
 
-export interface FileUploadTextProps {
+export type FileUploadStrings = {
+  labelButton?: TranslatableString;
+  labelDragAndDrop?: TranslatableString;
+  labelUpload?: TranslatableString;
+};
+
+export interface FileUploadTextProps extends WithStrings<FileUploadStrings> {
   /** Label for the decorative button (opens the same file input as the drop-zone label). */
   /** @deprecated Use `strings.labelButton` instead. */
   buttonText?: string;
@@ -21,44 +27,35 @@ export interface FileUploadTextProps {
   inputUploadText?: string;
 }
 
-export type FileUploadStrings = {
-  labelButton?: TranslatableString;
-  labelDragAndDrop?: TranslatableString;
-  labelUpload?: TranslatableString;
-};
-
 export type FileUploadAttachmentsItem = FileItem;
 
 export type FilesSelectedType = (files: File[]) => void;
 
-export interface FileUploadInputProps
-  extends
-    Omit<SpiritInputElementProps, 'onError' | 'label'>,
-    FileUploadTextProps,
-    Validation,
-    WithStrings<FileUploadStrings> {
-  accept?: string;
-  dropZoneRef?: MutableRefObject<HTMLDivElement>;
-  hasValidationIcon?: boolean;
-  iconName?: string;
-  id: string;
-  inputRef?: MutableRefObject<HTMLInputElement>;
-  isCompact?: boolean;
-  isDisabled?: boolean;
-  /** When set, overrides environment drag-and-drop detection (e.g. unsupported appearance in docs). */
-  isDragAndDropSupported?: boolean;
-  isLabelHidden?: boolean;
-  isMultiple?: boolean;
-  isRequired?: boolean;
-  isUploadDisabled?: boolean;
-  label?: ReactNode;
-  name: string;
-  onFilesSelected?: FilesSelectedType;
-  validationText?: ValidationTextType;
-}
+export type FileUploadInputProps = Omit<SpiritInputElementProps, 'onError' | 'label' | 'strings'> &
+  FileUploadTextProps &
+  Validation & {
+    accept?: string;
+    dropZoneRef?: MutableRefObject<HTMLDivElement>;
+    hasValidationIcon?: boolean;
+    iconName?: string;
+    id: string;
+    inputRef?: MutableRefObject<HTMLInputElement>;
+    isCompact?: boolean;
+    isDisabled?: boolean;
+    /** When set, overrides environment drag-and-drop detection (e.g. unsupported appearance in docs). */
+    isDragAndDropSupported?: boolean;
+    isLabelHidden?: boolean;
+    isMultiple?: boolean;
+    isRequired?: boolean;
+    isUploadDisabled?: boolean;
+    label?: ReactNode;
+    name: string;
+    onFilesSelected?: FilesSelectedType;
+    validationText?: ValidationTextType;
+  };
 
-export interface FileUploadProps extends FileUploadInputProps {
+export type FileUploadProps = FileUploadInputProps & {
   id: string;
   /** Optional `id` on the root `.FileUpload` wrapper (static HTML uses `example-*` ids for doc sections). */
   rootId?: string;
-}
+};
