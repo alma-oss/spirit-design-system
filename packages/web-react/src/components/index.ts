@@ -74,5 +74,6 @@ export * from './UNSTABLE_DisplayHeading';
 export * from './UNSTABLE_Picker';
 export * from './UNSTABLE_SplitTag';
 export * from './UNSTABLE_Table';
+export * from './UNSTABLE_Tile';
 export * from './ValidationText';
 export * from './VisuallyHidden';
