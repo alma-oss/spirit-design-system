@@ -2,6 +2,8 @@
 //    https://floating-ui.com
 //
 // 2. Reuse already generated custom properties to allow overriding the arrow appearance live in the browser.
+//
+// 3. Z-index must be higher than DropdownPopover__content (z-index: 1) so the tooltip can appear above it.
 
 @use 'sass:math';
 @use '@tokens' as tokens;
@@ -19,7 +21,7 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
     --tooltip-max-width: #{theme.$max-width};
     --#{$_tooltip-placement-prefix}-offset: #{theme.$arrow-height};
 
-    @include placement.child();
+    @include placement.child(2); // 3.
     @include placement.child-controlled($prefix: $_tooltip-placement-prefix, $offset: theme.$arrow-height);
     @include typography.generate(theme.$typography);
 
