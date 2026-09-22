@@ -1,5 +1,6 @@
 import { fixupConfigRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
+import spiritConfig from 'eslint-config-spirit';
 import spiritHtml from 'eslint-config-spirit/html';
 import spiritRules from 'eslint-config-spirit/rules';
 
@@ -37,9 +38,8 @@ export default [
       '**/*.json',
     ],
   },
-  ...fixupConfigRules(
-    compat.extends('eslint-config-spirit', '@lmc-eu/eslint-config-typescript', 'eslint-config-spirit/prettier'),
-  ),
+  ...spiritConfig,
+  ...fixupConfigRules(compat.extends('@lmc-eu/eslint-config-typescript', 'eslint-config-spirit/prettier')),
   ...spiritHtml,
   ...spiritRules,
   {
