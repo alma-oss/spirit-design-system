@@ -1,99 +1,109 @@
-module.exports = {
-  root: true,
+import { fixupConfigRules } from '@eslint/compat';
+import { FlatCompat } from '@eslint/eslintrc';
+import jestFormatting from 'eslint-plugin-jest-formatting';
+import storybook from 'eslint-plugin-storybook';
+import globals from 'globals';
 
-  parserOptions: {
-    ecmaVersion: 'latest',
-  },
+const compat = new FlatCompat({ baseDirectory: import.meta.dirname });
 
-  env: {
-    browser: true,
-    node: true,
-  },
+const legacyReactAndJestConfig = compat.extends(
+  '@lmc-eu/eslint-config-react/base',
+  '@lmc-eu/eslint-config-react/optional',
+  '@lmc-eu/eslint-config-jest',
+);
 
-  extends: [
-    '@lmc-eu/eslint-config-react/base',
-    '@lmc-eu/eslint-config-react/optional',
-    '@lmc-eu/eslint-config-jest',
-    'plugin:storybook/recommended',
-  ],
+export default [
 
   /**
    * Enable `react-refresh` after this config is migrated to flat
    *
    * Disabled in:
+   *
    * @see { @link https://github.com/alma-oss/spirit-design-system/pull/2421 }
    */
-  plugins: ['jest-formatting', 'promise', 'react', '@typescript-eslint', /* 'react-refresh' */],
+  ...fixupConfigRules(legacyReactAndJestConfig),
 
-  rules: {
-    /**
-     * Set sorting of imports
-     *
-     * @see { @link https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md }
-     */
-    'import/order': [
-      'error',
-      {
-        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-        pathGroups: [
-          {
-            pattern: '**',
-            group: 'internal',
+  ...storybook.configs['flat/recommended'],
+
+  {
+    languageOptions: {
+      ecmaVersion: 'latest',
+      globals: { ...globals.browser, ...globals.node },
+    },
+
+    rules: {
+
+      /**
+       * Set sorting of imports
+       *
+       * @see { @link https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md }
+       */
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          pathGroups: [
+            {
+              pattern: '**',
+              group: 'internal',
+            },
+            {
+              pattern: '..',
+              group: 'parent',
+              position: 'after',
+            },
+          ],
+          pathGroupsExcludedImportTypes: ['builtin'],
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
           },
-          {
-            pattern: '..',
-            group: 'parent',
-            position: 'after',
-          },
-        ],
-        pathGroupsExcludedImportTypes: ['builtin'],
-        alphabetize: {
-          order: 'asc',
-          caseInsensitive: true,
+          'newlines-between': 'never',
         },
-        'newlines-between': 'never',
-      },
-    ],
+      ],
 
-    /**
-     * Allow reassignment of params in properties
-     *
-     * @see { @link https://eslint.org/docs/latest/rules/no-param-reassign }
-     */
-    'no-param-reassign': ['warn', { props: false }],
+      /**
+       * Allow reassignment of params in properties
+       *
+       * @see { @link https://eslint.org/docs/latest/rules/no-param-reassign }
+       */
+      'no-param-reassign': ['warn', { props: false }],
 
-    /**
-     * Allow `++`/`--` in for loops
-     *
-     * @see { @link https://eslint.org/docs/rules/no-plusplus }
-     */
-    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+      /**
+       * Allow `++`/`--` in for loops
+       *
+       * @see { @link https://eslint.org/docs/rules/no-plusplus }
+       */
+      'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
 
-    /**
-     * Warn when not using single quotes
-     *
-     * @see { @link https://eslint.org/docs/latest/rules/quotes }
-     */
-    quotes: ['warn', 'single'],
+      /**
+       * Warn when not using single quotes
+       *
+       * @see { @link https://eslint.org/docs/latest/rules/quotes }
+       */
+      quotes: ['warn', 'single'],
+    },
   },
 
-  overrides: [
-    {
-      // Allow @jest-config-loader tag in jest.config.ts files
-      // This is a special Jest directive for specifying the TypeScript loader
-      // @see https://jestjs.io/docs/configuration
-      files: ['**/jest.config.ts'],
-      rules: {
-        'jsdoc/check-tag-names': 'off',
-      },
+  {
+    // Allow @jest-config-loader tag in jest.config.ts files
+    // This is a special Jest directive for specifying the TypeScript loader
+    // @see https://jestjs.io/docs/configuration
+    files: ['**/jest.config.ts'],
+    rules: {
+      'jsdoc/check-tag-names': 'off',
     },
-    {
-      files: ['test/**', 'tests/**', '**/*.test.*', '**/*.spec.*'],
-      rules: {
-        // Require an empty line before the first `expect` in a group
-        // @see { @link https://github.com/dangreenisrael/eslint-plugin-jest-formatting }
-        'jest-formatting/padding-around-expect-groups': 'error',
-      },
+  },
+
+  {
+    files: ['test/**', 'tests/**', '**/*.test.*', '**/*.spec.*'],
+    plugins: {
+      'jest-formatting': jestFormatting,
     },
-  ],
-};
+    rules: {
+      // Require an empty line before the first `expect` in a group
+      // @see { @link https://github.com/dangreenisrael/eslint-plugin-jest-formatting }
+      'jest-formatting/padding-around-expect-groups': 'error',
+    },
+  },
+];
