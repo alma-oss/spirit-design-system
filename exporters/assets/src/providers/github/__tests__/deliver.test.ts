@@ -84,6 +84,29 @@ describe('deliverPullRequest', () => {
     expect(git).toHaveBeenCalledTimes(1);
   });
 
+  it('authenticates a lazy promisor fetch triggered by Git status', async () => {
+    const fetchImplementation = jest.fn(async () => response(undefined, 404)) as unknown as typeof fetch;
+    const git = jest.fn(async (args: string[], environment?: NodeJS.ProcessEnv) => {
+      if (args[0] === 'status' && !environment?.GIT_CONFIG_VALUE_0?.startsWith('AUTHORIZATION: basic ')) {
+        throw new Error(
+          "fatal: could not read Username for 'https://github.com'\nfatal: could not fetch object from promisor remote",
+        );
+      }
+
+      return '';
+    });
+
+    await expect(deliverPullRequest(createOptions(), { fetch: fetchImplementation, git })).resolves.toEqual({
+      changed: false,
+    });
+    expect(git).toHaveBeenCalledWith(
+      ['status', '--porcelain=v1', '--untracked-files=all', '--', 'svg'],
+      expect.objectContaining({
+        GIT_CONFIG_VALUE_0: expect.stringMatching(/^AUTHORIZATION: basic /),
+      }),
+    );
+  });
+
   it.each([
     ['an untrusted commit author', { author: { name: 'untrusted-user' } }],
     ['a missing commit author', {}],
@@ -222,13 +245,12 @@ describe('deliverPullRequest', () => {
         GIT_CONFIG_VALUE_0: expect.stringMatching(/^AUTHORIZATION: basic /),
       }),
     );
-    expect(git).toHaveBeenCalledWith([
-      'switch',
-      '--discard-changes',
-      '--force-create',
-      'chore/figma-icons-sync',
-      'FETCH_HEAD',
-    ]);
+    expect(git).toHaveBeenCalledWith(
+      ['switch', '--discard-changes', '--force-create', 'chore/figma-icons-sync', 'FETCH_HEAD'],
+      expect.objectContaining({
+        GIT_CONFIG_VALUE_0: expect.stringMatching(/^AUTHORIZATION: basic /),
+      }),
+    );
     expect(git).not.toHaveBeenCalledWith(['switch', '-C', 'chore/figma-icons-sync']);
 
     const updateRequest = fetchMock.mock.calls[2]?.[1] as RequestInit;
