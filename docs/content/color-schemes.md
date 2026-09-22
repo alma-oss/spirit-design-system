@@ -12,7 +12,7 @@ Spirit resolves colors in layers. Each layer narrows the previous one:
    See [Themes][adr-themes].
 3. **Color schemes** pick a coherent set out of the active palette and publish it as **local** CSS custom
    properties (`--spirit-local-background-color`).
-4. **Utilities and component CSS** read those locals and actually paint something.
+4. **Component CSS and utilities** read those locals and actually paint something.
 
 ```text
 --spirit-color-emotion-success-background-subtle    design tokens — the raw palette
@@ -25,9 +25,9 @@ Spirit resolves colors in layers. Each layer narrows the previous one:
     │                                               publishes --spirit-local-*;
     │                                               bg-color-scheme is what paints the background
     │
+    ├── <span class="Pill">                         component CSS — reads the locals itself
     ├── <h2 class="text-color-scheme">              utility — paints the text
-    ├── <hr class="border-color-scheme">            utility — paints the border
-    └── <span class="Pill">                         component CSS — reads the locals itself
+    └── <hr class="border-color-scheme">            utility — paints the border
 ```
 
 Steps 3 and 4 are deliberately kept apart:
@@ -43,15 +43,17 @@ or many selective consumers.
 
 ## When to Use
 
-- A region needs a **semantic** color — success, danger, selected, an accent — rather than one specific value
+- A region needs a **semantic** color — accent, emotion, neutral, or selected — rather than one specific value
 - Several properties (background, text, border) must stay consistent with each other
 - Interactive children inside the region need hover and active colors that match
 - Building a component that should adopt whatever surface its consumer places it on
+- The CSS should stay small as the palette grows — one set of scheme CSS classes serves every component, instead of
+  every component generating a CSS class per color it supports
 
 ## When Not to Use
 
 - **A single one-off color** — use a background or text utility; a scheme is overkill
-- **Repalettizing a whole page region** — that is a theme, see [Themes][adr-themes]
+- **Recoloring a whole page region** — that is a theme, see [Themes][adr-themes]
 - **Deriving interactive or computed colors** — use the [dynamic color helpers][dynamic-colors], which read the
   active scheme and compute what the tokens do not cover
 - **Disabling an interactive element** — use the `disabled` utility, see [Disabled State](#disabled-state)
@@ -74,15 +76,14 @@ color-scheme-on-<category>-<intensity>
 
 | Category                                                                      | CSS classes                                     |
 | ----------------------------------------------------------------------------- | ----------------------------------------------- |
-| `accent-01`, `accent-02`, `accent-03`, `accent-04`, `accent-05`, `accent-06`  | `color-scheme-on-accent-<NN>-{basic,subtle}`    |
+| `accent-<NN>`                                                                 | `color-scheme-on-accent-<NN>-{basic,subtle}`    |
 | `emotion-danger`, `emotion-informative`, `emotion-success`, `emotion-warning` | `color-scheme-on-emotion-<NAME>-{basic,subtle}` |
 | `neutral`                                                                     | `color-scheme-on-neutral-{basic,subtle}`        |
 | `selected`                                                                    | `color-scheme-on-selected-{basic,subtle}`       |
 | `disabled`                                                                    | `color-scheme-on-disabled`                      |
 
-That is 25 CSS classes today. The accent and emotion ones are **generated** from the `accent-colors` and
-`emotion-colors` token maps, so adding an accent or an emotion in the design tokens produces new scheme CSS classes
-with no code change.
+The accent and emotion CSS classes are **generated** from the `accent-colors` and `emotion-colors` token maps, so
+adding an accent or an emotion in the design tokens produces new scheme CSS classes with no code change.
 `neutral`, `selected`, and `disabled` are written out by hand in the same generator, because they are flat token sets
 rather than maps.
 
@@ -92,14 +93,14 @@ their values.
 ### Pairing Logic
 
 The intensity in the CSS class name describes the **background**. The content color flips to the opposite intensity,
-because a strong background needs light text and a light background needs strong text:
+because a basic background needs subtle content on top of it and a subtle background needs basic content:
 
 | CSS class suffix | Background          | Content          | Border          |
 | ---------------- | ------------------- | ---------------- | --------------- |
 | `-basic`         | `background-basic`  | `content-subtle` | `border-basic`  |
 | `-subtle`        | `background-subtle` | `content-basic`  | `border-subtle` |
 
-This flip is what guarantees the contrast ratio. It is also the single most common point of confusion:
+This flip is what guarantees a sufficient contrast ratio. It is also the single most common point of confusion:
 `color-scheme-on-emotion-danger-basic` is the _loud_ one (saturated red surface, near-white text), and
 `color-scheme-on-emotion-danger-subtle` is the _quiet_ one (pale red surface, dark red text).
 
@@ -108,8 +109,9 @@ for large calm areas — alert bodies, banners, selected rows — where a satura
 
 ### CSS Custom Properties
 
-Every scheme CSS class publishes two sets of CSS custom properties, and the `tools/color-scheme` Sass module exposes a
-matching accessor for each. All accessors take an optional `$fallback`.
+Every scheme CSS class publishes two sets of CSS custom properties — the **picked combination** and the **full
+palette** — and the `tools/color-scheme` Sass module exposes a matching accessor for each. All accessors take an
+optional `$fallback`.
 
 #### The Picked Combination
 
@@ -154,7 +156,7 @@ Three details are worth knowing before you go looking for them:
 
 ## Color Schemes, Themes, and Dynamic Colors
 
-Spirit has five ways to color something. They are not alternatives to each other; they operate at different scopes.
+These tools are not alternatives to each other; they operate at different scopes:
 
 | Tool                                                     | What it does                          | Reach for it when                                              |
 | -------------------------------------------------------- | ------------------------------------- | -------------------------------------------------------------- |
@@ -173,7 +175,7 @@ not use it to implement color schemes, and the problem it addresses sits closer 
 
 ## Applying a Color Scheme
 
-### In Markup
+### In HTML
 
 A scheme CSS class and the utilities that read it can sit on the **same element** — a scheme applies to the element
 that declares it, not only to its descendants:
@@ -216,7 +218,8 @@ still looks right when no scheme CSS class is present anywhere above it:
 
 ⚠️ **Prefer accessors over `.bg-color-scheme` inside a component.** `ControlButton` reads `background-color()` in its
 own CSS precisely because the utility's `!important` would override `dynamic-color-background-interactive` and kill
-the hover and active states.
+the hover and active states. Accessors also keep the component recolorable — the same `!important` would beat the
+[component color overrides](#overriding-scheme-colors-per-component).
 
 ### In React
 
@@ -236,17 +239,6 @@ Components with their own palette expose `color` and `isSubtle` instead, and bui
 ```tsx
 <Alert color="success">Your changes have been saved.</Alert>
 ```
-
-For a custom component, build the CSS class with `getColorSchemeClassName`:
-
-```tsx
-import { getColorSchemeClassName } from '@alma-oss/spirit-web-react';
-
-const className = getColorSchemeClassName({ color: 'emotion-success', isSubtle: true });
-```
-
-The `ColorSchemeType` union in [`types/shared/colors.ts`][color-scheme-types] enumerates every valid suffix, so
-invalid combinations fail at compile time.
 
 ℹ️ There is no generic color scheme prop beyond `Box`. Other components either expose `color` / `isSubtle` or inherit
 whatever scheme their parent provides.
@@ -272,10 +264,6 @@ In React this is handled for you, though not identically. `Tag` drops its scheme
 is set and applies `disabled`. `Item` keeps `color-scheme-on-selected-subtle` on a selected row but stops painting
 the background with it, letting `disabled` win on color while `text-color-scheme` keeps the label readable.
 
-⚠️ **`disabled` does not set the intensity properties.** It provides the paired locals only, not
-`--spirit-local-color-basic` / `-subtle` or `--spirit-local-background-color-basic` / `-subtle`. A component that
-reads an intensity accessor needs a fallback to survive being placed inside `.disabled`.
-
 ## Overriding Scheme Colors Per Component
 
 Replacing component color modifiers with shared utilities did not delete the modifiers. `Alert--success`,
@@ -292,8 +280,7 @@ component/alert/emotion-success-content-basic
 component/alert/emotion-success-border-subtle
 ```
 
-`Alert`, `Button`, `Pill`, `Tag`, and `ToastBar` are wired up for this today. See
-[Component Color Overrides][component-color-overrides] for the full naming reference.
+See [Component Color Overrides][component-color-overrides] for the full naming reference.
 
 ℹ️ Deciding between a prop and a component token is its own question — see
 [Component Customization][adr-component-customization]. In short: a prop lets a developer vary one instance, a
@@ -416,8 +403,9 @@ to choose and keep in sync.
 
 ### Do Not Stack Two Scheme CSS Classes on One Element
 
-The second one wins for every property, which is rarely what anyone means. If a nested area needs a different
-surface, give it its own element.
+Whichever CSS class comes later in the generated stylesheet wins for every property — not the one written later in
+the markup — so which surface you get is effectively arbitrary. If a nested area needs a different surface, give it
+its own element.
 
 ```html
 <!-- ❌ Bad: two schemes on one element — whichever comes later in the CSS wins outright -->
@@ -438,7 +426,7 @@ surface, give it its own element.
 
 Hard-coding a token inside a component opts it out of the surrounding scheme permanently. Use the accessor with the
 token as its fallback instead — the component then adapts when a scheme is present and still looks right when it is
-not.
+not. The exception is a component that is meant to hold one fixed color whatever surrounds it, like `Tooltip`.
 
 ```scss
 // ❌ Bad: hard-coded tokens ignore whatever scheme surrounds the component
@@ -452,26 +440,6 @@ not.
   color: color-scheme.color(theme.$content);
   background-color: color-scheme.background-color(theme.$background);
 }
-```
-
-### Match Intensity to Area
-
-Basic is for emphasis on small elements; subtle is for large calm areas. A full-width banner in a basic emotion color
-reads as an emergency.
-
-```html
-<!-- ❌ Bad: a saturated fill across the whole banner overstates the message -->
-<section class="color-scheme-on-emotion-warning-basic bg-color-scheme text-color-scheme p-900">
-  Your trial ends in 14 days.
-</section>
-
-<!-- ✅ Good: subtle carries the surface, basic is saved for the one thing that must stand out -->
-<section class="color-scheme-on-emotion-warning-subtle bg-color-scheme text-color-scheme p-900">
-  Your trial ends in
-  <span class="color-scheme-on-emotion-warning-basic bg-color-scheme text-color-scheme px-500 py-300 rounded-200">
-    14 days
-  </span>
-</section>
 ```
 
 ## Accessibility
@@ -517,7 +485,6 @@ reads as an emergency.
 [box-preview]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Box/preview.html
 [box-react-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Box/README.md
 [color-scheme-tool]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/tools/_color-scheme.scss
-[color-scheme-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/types/shared/colors.ts
 [component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
 [control-button-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ControlButton/README.md
 [dynamic-colors]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/helpers/dynamic-color/README.md
