@@ -44,11 +44,7 @@ const FileIconVariant = () => (
     <section>
       <h3>Uploading State with Progress Bar</h3>
       <ul aria-label="File attachments">
-        <File
-          label="Document.pdf"
-          onDismiss={noop}
-          strings={{ ariaLabelRemove: 'Cancel upload of Document.pdf' }}
-        >
+        <File label="Document.pdf" onDismiss={noop} strings={{ ariaLabelRemove: 'Cancel upload of Document.pdf' }}>
           <ProgressBar aria-label="Uploading Document.pdf" value={60} />
         </File>
       </ul>
