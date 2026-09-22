@@ -18,6 +18,23 @@ export interface SpacingProp {
   spacing?: SpacingType;
 }
 
+export interface PaddingProps {
+  /** Padding of the element. */
+  padding?: SingleOrResponsive<SpaceToken>;
+  /** Padding bottom of the element. */
+  paddingBottom?: SingleOrResponsive<SpaceToken>;
+  /** Padding left of the element. */
+  paddingLeft?: SingleOrResponsive<SpaceToken>;
+  /** Padding right of the element. */
+  paddingRight?: SingleOrResponsive<SpaceToken>;
+  /** Padding top of the element. */
+  paddingTop?: SingleOrResponsive<SpaceToken>;
+  /** Horizontal padding of the element. */
+  paddingX?: SingleOrResponsive<SpaceToken>;
+  /** Vertical padding of the element. */
+  paddingY?: SingleOrResponsive<SpaceToken>;
+}
+
 export interface SpacingCSSProperties extends CSSProperties {
   [index: `--${string}`]: string | undefined | number;
 }
