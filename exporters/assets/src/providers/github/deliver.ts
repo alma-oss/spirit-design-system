@@ -251,15 +251,15 @@ export const deliverPullRequest = async (
       throw new ConfigError('Automation branch changed during delivery.');
     }
 
-    await git(['switch', '--discard-changes', '--force-create', branch, 'FETCH_HEAD']);
+    await git(['switch', '--discard-changes', '--force-create', branch, 'FETCH_HEAD'], authenticatedEnvironment);
     await git(['rm', '-r', '--ignore-unmatch', '--', out]);
 
     if ((await git(['ls-tree', '--name-only', '-r', desiredTree, '--', out])).trim()) {
-      await git(['restore', `--source=${desiredTree}`, '--staged', '--worktree', '--', out]);
+      await git(['restore', `--source=${desiredTree}`, '--staged', '--worktree', '--', out], authenticatedEnvironment);
     }
   }
 
-  const status = await git(['status', '--porcelain=v1', '--untracked-files=all', '--', out]);
+  const status = await git(['status', '--porcelain=v1', '--untracked-files=all', '--', out], authenticatedEnvironment);
 
   if (!status.trim()) {
     if (!existingBranch.sha) {
