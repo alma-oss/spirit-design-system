@@ -1,5 +1,6 @@
 import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
+import spiritConfig from 'eslint-config-spirit';
 import spiritHtml from 'eslint-config-spirit/html';
 import spiritRules from 'eslint-config-spirit/rules';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -35,9 +36,9 @@ export default [
       '**/*.json',
     ],
   },
+  ...spiritConfig,
   ...fixupConfigRules(
     compat.extends(
-      'eslint-config-spirit',
       '@lmc-eu/eslint-config-react',
       '@lmc-eu/eslint-config-typescript',
       '@lmc-eu/eslint-config-typescript/react',
