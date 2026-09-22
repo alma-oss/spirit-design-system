@@ -13,9 +13,9 @@ import {
   type BorderWidthsDictionaryType,
   type ChildrenProps,
   type ColorSchemeType,
+  type PaddingProps,
   type PolymorphicComponentProps,
   type SingleOrResponsive,
-  type SpaceToken,
   type StyleProps,
   type TextColorProps,
 } from './shared';
@@ -26,7 +26,7 @@ export type BoxBackgroundColorsType =
   | BackgroundEmotionColorsType
   | BackgroundNeutralColorsType;
 
-export interface BoxBaseProps extends ChildrenProps, TextColorProps, StyleProps {
+export interface BoxBaseProps extends ChildrenProps, TextColorProps, PaddingProps, StyleProps {
   /** The background color of the box. */
   backgroundColor?: BoxBackgroundColorsType;
   /** The background gradient of the box. */
@@ -41,20 +41,6 @@ export interface BoxBaseProps extends ChildrenProps, TextColorProps, StyleProps 
   borderWidth?: BorderWidthsDictionaryType;
   /** The color scheme of the box. */
   colorScheme?: ColorSchemeType;
-  /** Padding of the box. */
-  padding?: SingleOrResponsive<SpaceToken>;
-  /** Horizontal padding of the box. */
-  paddingX?: SingleOrResponsive<SpaceToken>;
-  /** Vertical padding of the box. */
-  paddingY?: SingleOrResponsive<SpaceToken>;
-  /** Padding top of the box. */
-  paddingTop?: SingleOrResponsive<SpaceToken>;
-  /** Padding bottom of the box. */
-  paddingBottom?: SingleOrResponsive<SpaceToken>;
-  /** Padding left of the box. */
-  paddingLeft?: SingleOrResponsive<SpaceToken>;
-  /** Padding right of the box. */
-  paddingRight?: SingleOrResponsive<SpaceToken>;
 }
 
 export type BoxProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, BoxBaseProps>;
