@@ -166,8 +166,12 @@ const FileUpload = (props: FileUploadProps) => {
               <div className={classProps.input.dropZone.content}>
                 <label htmlFor={inputId} className={classProps.input.dropZone.label}>
                   {resolvedInputUploadText}
-                  {'\u00A0'}
-                  <span className={classProps.input.dropLabel}>{resolvedInputDragAndDropText}</span>
+                  {isDragAndDropSupported && (
+                    <>
+                      {'\u00A0'}
+                      <span className={classProps.input.dropLabel}>{resolvedInputDragAndDropText}</span>
+                    </>
+                  )}
                 </label>
                 <HelperText
                   id={`${inputId}-helper-text`}

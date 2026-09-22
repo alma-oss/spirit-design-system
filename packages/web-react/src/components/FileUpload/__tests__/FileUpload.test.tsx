@@ -91,6 +91,13 @@ describe('FileUpload', () => {
       expect(container.querySelector('.has-drag-and-drop')).not.toBeInTheDocument();
     });
 
+    it('should hide the drag-and-drop suffix when isDragAndDropSupported is false', () => {
+      render(<FileUpload {...defaultPropsWithInput} isDragAndDropSupported={false} />);
+
+      expect(screen.getByText('Upload your file')).toBeInTheDocument();
+      expect(screen.queryByText('or drag and drop here')).not.toBeInTheDocument();
+    });
+
     it('should not have drag-and-drop class in Server component', () => {
       const container = renderToString(<FileUpload {...defaultPropsWithInput} data-testid="test" />);
 
