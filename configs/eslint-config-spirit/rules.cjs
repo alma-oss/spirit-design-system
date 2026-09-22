@@ -1,6 +1,6 @@
 "use strict";
 
-const noXlinkHref = require('./rules/no-xlink-href');
+const noXlinkHref = require('./rules/no-xlink-href.cjs');
 
 module.exports = [
   {

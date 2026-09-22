@@ -7,7 +7,7 @@ const assert = require('node:assert/strict');
 const { describe, it } = require('node:test');
 
 const { ESLint } = require('eslint');
-const htmlConfig = require('../html.js');
+const htmlConfig = require('../html.cjs');
 
 describe('eslint-config-spirit/html', () => {
   it('exports a non-empty flat config array', () => {

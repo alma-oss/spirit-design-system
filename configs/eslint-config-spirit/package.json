@@ -3,13 +3,13 @@
   "description": "ESlint configuration and preset for Spirit Design System",
   "version": "0.4.0",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "exports": {
     ".": "./index.js",
-    "./rules": "./rules.js",
-    "./prettier": "./prettier.js",
-    "./style": "./style.js",
-    "./html": "./html.js"
+    "./rules": "./rules.cjs",
+    "./prettier": "./prettier.cjs",
+    "./style": "./style.cjs",
+    "./html": "./html.cjs"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,8 @@
     "@babel/core": "catalog:build",
     "@babel/eslint-parser": "catalog:test",
     "@babel/preset-react": "catalog:build",
+    "@eslint/compat": "catalog:lint",
+    "@eslint/eslintrc": "catalog:lint",
     "@html-eslint/eslint-plugin": "catalog:lint",
     "@html-eslint/parser": "catalog:lint",
     "@lmc-eu/eslint-config-base": "catalog:lint",
@@ -48,6 +50,7 @@
     "eslint-plugin-import": "catalog:lint",
     "eslint-plugin-jest": "catalog:lint",
     "eslint-plugin-jest-dom": "catalog:lint",
+    "eslint-plugin-jest-formatting": "catalog:lint",
     "eslint-plugin-jsdoc": "catalog:lint",
     "eslint-plugin-jsx-a11y": "catalog:lint",
     "eslint-plugin-prettier": "catalog:lint",
@@ -59,6 +62,7 @@
     "eslint-plugin-storybook": "catalog:lint",
     "eslint-plugin-testing-library": "catalog:lint",
     "eslint-restricted-globals": "catalog:lint",
+    "globals": "catalog:lint",
     "prettier": "catalog:lint",
     "prettier-config-spirit": "workspace:^",
     "typescript": "catalog:types"
