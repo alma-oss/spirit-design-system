@@ -1,6 +1,6 @@
-import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
+import { fixupConfigRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
-import importPlugin from 'eslint-plugin-import';
+import spiritConfig from 'eslint-config-spirit';
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
@@ -51,12 +51,6 @@ export default [
       '!*.config.js',
     ],
   },
-  {
-    // @TODO: remove `files` and `plugins` when all configs are flat
-    files: ['**/*.{js,mjs,cjs}'],
-    plugins: {
-      import: fixupPluginRules(importPlugin),
-    },
-    ...fixupConfigRules(compat.extends('eslint-config-spirit', 'eslint-config-spirit/style'))[0],
-  },
+  ...spiritConfig,
+  ...fixupConfigRules(compat.extends('eslint-config-spirit/style')),
 ];
