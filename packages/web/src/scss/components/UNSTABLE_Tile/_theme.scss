@@ -1,0 +1,13 @@
+@use '@tokens' as tokens;
+
+$padding: tokens.$space-800;
+$color: tokens.$text-primary;
+$border-width: tokens.$border-width-100;
+$border-style: solid;
+$border-color: tokens.$border-basic;
+$border-radius: var(
+    --#{tokens.$css-variable-prefix}tile-border-radius,
+    var(--#{tokens.$css-variable-prefix}local-tile-border-radius, #{tokens.$radius-300})
+);
+$background-color: tokens.$background-primary;
+$box-shadow: tokens.$shadow-100;
