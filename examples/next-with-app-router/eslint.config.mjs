@@ -3,6 +3,7 @@ import { FlatCompat } from '@eslint/eslintrc';
 import eslintNextPlugin from '@next/eslint-plugin-next';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
+import spiritConfig from 'eslint-config-spirit';
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
@@ -38,9 +39,9 @@ export default [
       '**/*.json',
     ],
   },
+  ...spiritConfig,
   ...fixupConfigRules(
     compat.extends(
-      'eslint-config-spirit',
       '@lmc-eu/eslint-config-react',
       '@lmc-eu/eslint-config-typescript',
       '@lmc-eu/eslint-config-typescript/react',
