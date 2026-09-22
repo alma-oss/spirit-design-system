@@ -1,5 +1,6 @@
 import { fixupConfigRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
+import spiritConfig from 'eslint-config-spirit';
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
@@ -34,8 +35,9 @@ export default [
       '**/*.json',
     ],
   },
+  ...spiritConfig,
   ...fixupConfigRules(
-    compat.extends('eslint-config-spirit', '@lmc-eu/eslint-config-typescript', 'eslint-config-spirit/prettier'),
+    compat.extends('@lmc-eu/eslint-config-typescript', 'eslint-config-spirit/prettier'),
   ),
   {
     languageOptions: {
