@@ -96,14 +96,17 @@ export default [
   },
 
   {
+    // Registered under a spirit-namespaced key to avoid "Cannot redefine plugin" collisions
+    // with whatever copy of `eslint-plugin-jest-formatting` `@lmc-eu/eslint-config-jest`
+    // resolves internally (and to not depend on its overrides matching these file globs).
     files: ['test/**', 'tests/**', '**/*.test.*', '**/*.spec.*'],
     plugins: {
-      'jest-formatting': jestFormatting,
+      'spirit-jest-formatting': jestFormatting,
     },
     rules: {
       // Require an empty line before the first `expect` in a group
       // @see { @link https://github.com/dangreenisrael/eslint-plugin-jest-formatting }
-      'jest-formatting/padding-around-expect-groups': 'error',
+      'spirit-jest-formatting/padding-around-expect-groups': 'error',
     },
   },
 ];
