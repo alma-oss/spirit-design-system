@@ -1,10 +1,11 @@
 import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 import eslintNextPlugin from '@next/eslint-plugin-next';
+import spiritConfig from 'eslint-config-spirit';
+import spiritConfigPrettier from 'eslint-config-spirit/prettier';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
-import spiritConfig from 'eslint-config-spirit';
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
@@ -57,9 +58,9 @@ export default [
       '@lmc-eu/eslint-config-typescript',
       '@lmc-eu/eslint-config-typescript/react',
       '@lmc-eu/eslint-config-jest',
-      'eslint-config-spirit/prettier',
     ),
   ),
+  ...spiritConfigPrettier,
   eslintNextPlugin.configs.recommended,
   {
     plugins: {
