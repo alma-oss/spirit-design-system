@@ -1,17 +1,17 @@
 /**
  * Flat ESLint configuration for Spirit `.html` demo templates (`packages/web`, `packages/web-react`).
  *
- * Uses `@html-eslint/eslint-plugin` in flat-config form (array export), unlike `style.js`, which
- * exports a classic shareable config object—HTML linting is only wired through the flat preset.
+ * Uses `@html-eslint/eslint-plugin` in flat-config form (array export) — HTML linting is only
+ * wired through the flat preset.
  *
  * @see {@link https://github.com/yeonjuan/html-eslint/tree/main/docs/rules}
  */
-const html = require('@html-eslint/eslint-plugin');
-const { TEMPLATE_ENGINE_SYNTAX } = require('@html-eslint/parser');
+import html from '@html-eslint/eslint-plugin';
+import { TEMPLATE_ENGINE_SYNTAX } from '@html-eslint/parser';
 
 const recommended = html.configs['flat/recommended'];
 
-module.exports = [
+export default [
   {
     files: ['**/*.html'],
     ...recommended,
