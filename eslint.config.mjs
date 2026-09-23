@@ -1,10 +1,6 @@
-import { fixupConfigRules } from '@eslint/compat';
-import { FlatCompat } from '@eslint/eslintrc';
 import spiritConfig from 'eslint-config-spirit';
-
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-});
+import spiritPrettier from 'eslint-config-spirit/prettier';
+import spiritStyle from 'eslint-config-spirit/style';
 
 export default [
   {
@@ -57,7 +53,8 @@ export default [
     ],
   },
   ...spiritConfig,
-  ...fixupConfigRules(compat.extends('eslint-config-spirit/style', 'eslint-config-spirit/prettier')),
+  ...spiritPrettier,
+  ...spiritStyle,
 
   {
     // Standalone Node CLI scripts print to stdout/stderr by design.
