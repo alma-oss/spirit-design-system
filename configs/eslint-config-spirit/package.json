@@ -6,10 +6,10 @@
   "type": "module",
   "exports": {
     ".": "./index.js",
-    "./rules": "./rules.cjs",
-    "./prettier": "./prettier.cjs",
-    "./style": "./style.cjs",
-    "./html": "./html.cjs"
+    "./rules": "./rules.js",
+    "./prettier": "./prettier.js",
+    "./style": "./style.js",
+    "./html": "./html.js"
   },
   "repository": {
     "type": "git",

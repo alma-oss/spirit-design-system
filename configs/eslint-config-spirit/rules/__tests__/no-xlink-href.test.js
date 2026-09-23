@@ -1,9 +1,7 @@
-"use strict";
-
-const { describe, it } = require('node:test');
-const { RuleTester } = require('eslint');
-const htmlParser = require('@html-eslint/parser');
-const rule = require('../no-xlink-href.cjs');
+import { describe, it } from 'node:test';
+import htmlParser from '@html-eslint/parser';
+import { RuleTester } from 'eslint';
+import rule from '../no-xlink-href.js';
 
 RuleTester.describe = describe;
 RuleTester.it = it;
@@ -26,62 +24,63 @@ const htmlTester = new RuleTester({
 tester.run('no-xlink-href', rule, {
   valid: [
     // Plain href is fine
-    { code: `<use href="#icon" />` },
-    { code: `<image href="photo.png" />` },
+    { code: '<use href="#icon" />' },
+    { code: '<image href="photo.png" />' },
     // Unrelated attributes
-    { code: `<a xlink:show="new" />` },
+    { code: '<a xlink:show="new" />' },
     // String without xlink:href
-    { code: `const s = "just a string with href"` },
-    { code: "const t = `template with href`" },
+    { code: 'const s = "just a string with href"' },
+    { code: 'const t = `template with href`' },
   ],
 
   invalid: [
     // ── JSX namespaced ────────────────────────────────────────────────────
     {
-      code: `<use xlink:href="#icon" />`,
+      code: '<use xlink:href="#icon" />',
       errors: [{ messageId: 'jsxNamespacedAttr' }],
-      output: `<use href="#icon" />`,
+      output: '<use href="#icon" />',
     },
     {
-      code: `<image xlink:href="photo.png" />`,
+      code: '<image xlink:href="photo.png" />',
       errors: [{ messageId: 'jsxNamespacedAttr' }],
-      output: `<image href="photo.png" />`,
+      output: '<image href="photo.png" />',
     },
     {
-      code: `<use xlink:href={iconRef} />`,
+      code: '<use xlink:href={iconRef} />',
       errors: [{ messageId: 'jsxNamespacedAttr' }],
-      output: `<use href={iconRef} />`,
+      output: '<use href={iconRef} />',
     },
 
     // ── JSX camelCase (React) ─────────────────────────────────────────────
     {
-      code: `<use xlinkHref="#icon" />`,
+      code: '<use xlinkHref="#icon" />',
       errors: [{ messageId: 'jsxCamelCaseAttr' }],
-      output: `<use href="#icon" />`,
+      output: '<use href="#icon" />',
     },
     {
-      code: `<use xlinkHref={ref} />`,
+      code: '<use xlinkHref={ref} />',
       errors: [{ messageId: 'jsxCamelCaseAttr' }],
-      output: `<use href={ref} />`,
+      output: '<use href={ref} />',
     },
 
     // ── String literals ───────────────────────────────────────────────────
     {
-      code: `const s = '<use xlink:href="#icon" />'`,
+      code: 'const s = \'<use xlink:href="#icon" />\'',
       errors: [{ messageId: 'stringLiteral' }],
     },
     {
-      code: `const html = '<use xlink:href="#id" />'`,
+      code: 'const html = \'<use xlink:href="#id" />\'',
       errors: [{ messageId: 'stringLiteral' }],
     },
 
     // ── Template literals ─────────────────────────────────────────────────
     {
-      code: "const svg = `<use xlink:href=\"#icon\" />`",
+      code: 'const svg = `<use xlink:href="#icon" />`',
       errors: [{ messageId: 'stringLiteral' }],
     },
     {
-      code: "const svg = `<image xlink:href=\"${src}\" />`",
+      // eslint-disable-next-line no-template-curly-in-string -- fixture data, not real code
+      code: 'const svg = `<image xlink:href="${src}" />`',
       errors: [{ messageId: 'stringLiteral' }],
     },
   ],
@@ -89,20 +88,20 @@ tester.run('no-xlink-href', rule, {
 
 htmlTester.run('no-xlink-href (html)', rule, {
   valid: [
-    { code: `<svg><use href="#icon"></use></svg>` },
-    { code: `<a href="/somewhere">link</a>` },
+    { code: '<svg><use href="#icon"></use></svg>' },
+    { code: '<a href="/somewhere">link</a>' },
   ],
 
   invalid: [
     {
-      code: `<svg><use xlink:href="#icon"></use></svg>`,
+      code: '<svg><use xlink:href="#icon"></use></svg>',
       errors: [{ messageId: 'htmlNamespacedAttr' }],
-      output: `<svg><use href="#icon"></use></svg>`,
+      output: '<svg><use href="#icon"></use></svg>',
     },
     {
-      code: `<svg><image xlink:href="photo.png" /></svg>`,
+      code: '<svg><image xlink:href="photo.png" /></svg>',
       errors: [{ messageId: 'htmlNamespacedAttr' }],
-      output: `<svg><image href="photo.png" /></svg>`,
+      output: '<svg><image href="photo.png" /></svg>',
     },
   ],
 });

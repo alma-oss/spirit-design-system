@@ -1,0 +1,665 @@
+/**
+ * @todo Move this configuration to Code Quality Tools once the migration to ESLint v9 is done
+ */
+import stylistic from '@stylistic/eslint-plugin';
+import prettierConfig from 'prettier-config-spirit';
+
+const customized = stylistic.configs.customize({
+  ...prettierConfig,
+  semi: true,
+});
+
+export default [
+  stylistic.configs['all-flat'],
+  {
+    rules: {
+      ...customized.rules,
+
+      // Enforce consistent line breaks before and after function arguments
+      // @see { @link } https://eslint.style/rules/function-call-argument-newline
+      '@stylistic/function-call-argument-newline': ['error', 'consistent'],
+
+      // Enforce line breaks after third chained call
+      // This rule checks and reports the chained calls if there are no new lines after each call or
+      // deep member access.
+      // @see { @link } https://eslint.style/rules/newline-per-chained-call
+      '@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 3 }],
+
+      // Enforce placing object properties on separate lines
+      // This rule makes it possible to ensure, as some style guides require, that property
+      // specifications appear on separate lines or on the same line for better readability.
+      // @see { @link } https://eslint.style/rules/object-property-newline
+      '@stylistic/object-property-newline': ['warn', { allowAllPropertiesOnSameLine: true }],
+
+      // Enforce consistent line breaks between array elements
+      // A number of style guides require or disallow line breaks between array elements. This ruleset
+      // requires consistent usage of linebreaks between array elements.
+      // @see { @link } https://eslint.style/rules/array-element-newline
+      '@stylistic/array-element-newline': ['error', 'consistent'],
+
+      // Enforce line breaks after opening and before closing array brackets
+      // Requires consistent usage of linebreaks for each pair of brackets. It reports an error if one
+      // bracket in the pair has a linebreak inside it and the other bracket does not.
+      // @see { @link } https://eslint.style/rules/array-bracket-newline
+      '@stylistic/array-bracket-newline': ['error', 'consistent'],
+
+      // Require parens in arrow function arguments
+      // Arrow functions can omit parentheses when they have exactly one parameter. Since their main
+      // strength lies in being short and concise, parens around arguments should be omitted when they
+      // are not needed.
+      // However, since we are using arrow function as default style for functions
+      // we need to enforce parenthesis to achieve better DX when extending the code
+      // @see { @link } https://eslint.style/rules/arrow-parens
+      '@stylistic/arrow-parens': ['error', 'always'],
+
+      // There are places where arrow body make sense and where does not
+      // We are leaving this up to developer to decide where to use braces and where implicit return
+      // @see { @link https://eslint.org/docs/latest/rules/arrow-body-style }
+      'arrow-body-style': ['warn', 'as-needed'],
+
+      // Let the developer decide whether to use implicit linebreaks in arrow functions
+      // @see { @link } https://eslint.style/rules/implicit-arrow-linebreak
+      '@stylistic/implicit-arrow-linebreak': ['off'],
+
+      // Quoting Style for Property Names
+      // This rule aims to enforce use of quotes in property names.
+      // Require quotes where necessary, disallow where unnecessary
+      // Enforce consistent use of quotes in object properties
+      // @see { @link } https://eslint.style/rules/quote-props
+      '@stylistic/quote-props': ['warn', 'as-needed'],
+
+      // @see { @link } https://eslint.style/rules/no-confusing-arrow
+      '@stylistic/no-confusing-arrow': ['error', { onlyOneSimpleParam: true }],
+
+      // `eslint-config-prettier` (applied before this config) already turns off the legacy
+      // (core) equivalents of the `@stylistic/*` rules throughout this file. The rules below
+      // aren't covered by it and still get enabled a second time by the airbnb base config
+      // pulled in via FlatCompat, so they need an explicit `off` here.
+      'lines-between-class-members': ['off'],
+      'spaced-comment': ['off'],
+      'padding-line-between-statements': ['off'],
+
+      // Disallow or enforce spaces inside of brackets
+      // Disallow
+      // @see { @link https://eslint.style/rules/array-bracket-spacing }
+      '@stylistic/array-bracket-spacing': ['warn', 'never'],
+
+      // Require space before/after arrow function's arrow
+      '@stylistic/arrow-spacing': ['warn', {
+        before: true,
+        after: true,
+      }],
+
+      // Disallow or enforce spaces inside of single line blocks
+      // Enforce
+      '@stylistic/block-spacing': ['warn', 'always'],
+
+      // Require Brace Style
+      // The one true brace style is one of the most common brace styles in JavaScript, in which the
+      // opening curly brace of a block is placed on the same line as its corresponding statement or
+      // declaration.
+      '@stylistic/brace-style': ['warn', '1tbs', {
+        allowSingleLine: true,
+      }],
+
+      // Require Camelcase
+      // This rule looks for any underscores (_) located within the source code. It ignores leading
+      // and trailing underscores and only checks those in the middle of a variable name. If ESLint
+      // decides that the variable is a constant (all uppercase), then no warning will be thrown.
+      camelcase: ['warn'],
+
+      // This rule enforces consistent use of trailing commas in object and array literals
+      // Allow trailing commas for func parameters, array and object literals spread across
+      // multiple lines
+      '@stylistic/comma-dangle': ['warn', 'always-multiline'],
+
+      // Enforces spacing around commas
+      // This rule aims to enforce spacing around a comma.
+      // A space must be only after comma, i.e. `var a, b`
+      '@stylistic/comma-spacing': ['warn', {
+        before: false,
+        after: true,
+      }],
+
+      // Comma style
+      // This rule is aimed at enforcing a particular comma style in JavaScript.
+      // Commas should be placed at the end of line, not at the beginning
+      '@stylistic/comma-style': ['warn', 'last'],
+
+      // Disallow or enforce spaces inside of computed properties
+      // This rule aims to maintain consistency around the spacing inside of computed properties.
+      // No spaces allowed
+      '@stylistic/computed-property-spacing': ['warn', 'never'],
+
+      // Require Consistent This
+      // This rule designates a variable as the chosen alias for `this`.
+      'consistent-this': ['warn', 'self'],
+
+      // Require Following Curly Brace Conventions
+      // This rule is aimed at preventing bugs and increasing code clarity by ensuring that block
+      // statements are wrapped in curly braces.
+      // All block statements must be wrapped in curly braces
+      curly: ['warn', 'all'],
+
+      // Enforce consistent line breaks after opening and before closing braces
+      // Blocks like `if (x) { doSomething(); }` are always expanded onto multiple lines.
+      '@stylistic/curly-newline': ['warn', 'always'],
+
+      // Enforce default clauses in switch statements to be last
+      'default-case-last': 'warn',
+
+      // Enforce default parameters to be last
+      // Putting default parameter at last allows function calls to omit optional tail arguments.
+      'default-param-last': 'warn',
+
+      // Enforce newline before and after dot
+      // This rule aims to enforce newline consistency in member expressions. This rule prevents the
+      // use of mixed newlines around the dot in a member expression.
+      // Require the dot to be placed together with the property identifier
+      '@stylistic/dot-location': ['warn', 'property'],
+
+      // Require Dot Notation
+      // This rule is aimed at maintaining code consistency and improving code readability by
+      // encouraging use of the dot notation style whenever possible.
+      'dot-notation': 'warn',
+
+      // Require file to end with single newline
+      // Benefits of trailing newlines include the ability to concatenate or append to files as well
+      // as output files to the terminal without interfering with shell prompts.
+      '@stylistic/eol-last': ['warn', 'unix'],
+
+      // Enforce consistent line breaks inside function parentheses
+      // Requires linebreaks inside function parentheses if any of the parameters/arguments have a
+      // line break between them. Otherwise, it disallows linebreaks.
+      '@stylistic/function-paren-newline': ['warn', 'multiline'],
+
+      // Require or disallow spacing between function identifiers and their invocations
+      // This rule disallows spaces between the function name and the opening parenthesis that calls
+      // it.
+      '@stylistic/func-call-spacing': 'warn',
+
+      // Enforce Function Style
+      // Due to these different behaviors, it is common to have guidelines as to which style of
+      // function should be used. There is really no correct or incorrect choice here, it is just a
+      // preference. A good reason to use function declarations is that the function names then appear
+      // in stack traces which help during debugging.
+      // Allow arrow functions to be saved into variables
+      'func-style': ['warn', 'declaration', {
+        allowArrowFunctions: true,
+      }],
+
+      // Require function names to match the name of the variable to which they are assigned
+      'func-name-matching': 'warn',
+
+      // Enforce spacing around the * in generator functions
+      // This rule enforces that the * is placed together with the `function` keyword. The reasoning
+      // is that a generator function is a special type of function, therefore it should come together
+      // with the `function` keyword. In contrast, it has nothing to do with the function's name,
+      // which may be missing completely.
+      '@stylistic/generator-star-spacing': ['warn', {
+        before: false,
+        after: true,
+        // For class/object methods, the * should come together with the name
+        method: 'before',
+      }],
+
+      // Require grouped accessor pairs in object literals and classes
+      // This rule requires grouped definitions of accessor functions for the same property in object
+      // literals, class declarations and class expressions.
+      'grouped-accessor-pairs': ['warn', 'getBeforeSet'],
+
+      // Limit minimum and maximum length for identifiers
+      // This rule is aimed at increasing code readability and maintainability by enforcing an
+      // identifier length convention.
+      'id-length': ['warn', {
+        min: 2,
+        exceptions: [
+        // index
+          'i',
+          // lodash 💩
+          '_',
+          // ramda 😍
+          'R',
+          // jQuery 🤮
+          '$',
+          // vitest in-test context: `it('works', t => { t.expect(1).toBe(1) })`
+          't',
+        ],
+      }],
+
+      // Validate Indentation
+      // This rule is aimed to enforce consistent indentation style.
+      '@stylistic/indent': ['warn', 2, {
+        SwitchCase: 1,
+      }],
+
+      // Enforce Property Spacing
+      // This rule will warn when spacing in properties does not match the specified options. In the
+      // case of long lines, it is acceptable to add a new line wherever whitespace is allowed.
+      '@stylistic/key-spacing': ['warn', {
+        beforeColon: false,
+        afterColon: true,
+        mode: 'strict',
+      }],
+
+      // This rule will enforce consistency of spacing around keywords and keyword-like tokens
+      '@stylistic/keyword-spacing': ['warn', {
+        before: true,
+        after: true,
+      }],
+
+      // Disallow mixing CRLF and LF linebreaks
+      // This rule aims to ensure having consistent line endings independent of operating system.
+      '@stylistic/linebreak-style': ['error', 'unix'],
+
+      // Require empty lines around comments
+      // Disabled: we don't want a blank line forced before every inline `/* ... */` comment
+      // (e.g. between object/interface members), which is overly noisy for short annotations.
+      '@stylistic/lines-around-comment': 'off',
+
+      // Require an empty line between class members
+      // This rule improves readability by enforcing lines between class members. It will not check
+      // empty lines before the first member and after the last member, since that is already taken
+      // care of by padded-blocks.
+      '@stylistic/lines-between-class-members': ['warn', 'always', {
+        exceptAfterSingleLine: true,
+      }],
+
+      // Limit Maximum Length of Line
+      // Very long lines of code in any language can be difficult to read. In order to aid in
+      // readability and maintainability many coders have developed a convention to limit lines of
+      // code to a certain number of characters.
+      '@stylistic/max-len': ['warn',
+        { code: 120, ignoreTrailingComments: true, ignoreUrls: true, ignorePattern: '^import\\W.*' }],
+
+      // Limit Maximum Number of Parameters
+      // Functions that take numerous parameters can be difficult to read and write because it
+      // requires the memorization of what each parameter is, its type, and the order they should
+      // appear in.
+      'max-params': ['warn', 5],
+
+      // Set Maximum Depth of Nested Callbacks
+      // This rule is aimed at increasing code clarity by discouraging deeply nesting callbacks.
+      'max-nested-callbacks': ['warn', 4],
+
+      // Specify the Maximum Number of Statements Allowed per Line
+      // A line of code containing too many statements can be difficult to read. Code is generally
+      // read from the top down, especially when scanning, so limiting the number of statements
+      // allowed on a single line can be very beneficial for readability and maintainability.
+      '@stylistic/max-statements-per-line': 'warn',
+
+      // Enforce a particular style for multiline comments
+      // Prefer consecutive line comments for multiline comment block
+      // Prefer JSDoc comment style that starts with `/**`
+      // @see { @link } https://eslint.style/rules/multiline-comment-style
+      // @todo: Enable this after migration to ESLint v9
+      // '@stylistic/multiline-comment-style': ['warn', 'separate-lines',],
+      '@stylistic/multiline-comment-style': ['off'],
+
+      // Enforce newlines between operands of ternary expressions
+      // Enforce either the whole ternary on a single line or each part of the ternary on its own line
+      // if the expression contains a newline
+      '@stylistic/multiline-ternary': ['warn', 'always-multiline'],
+
+      // Require Constructors to Use Initial Caps
+      // This rule is aimed at helping to distinguish regular functions from constructor functions. As
+      // such, it warns whenever it sees new followed by an identifier that isn't capitalized or
+      // whenever it sees capitalized function called directly without new operator.
+      'new-cap': ['warn', {
+        newIsCap: true,
+        // Decorators are usually written in PascalCase but are rarely called with `new` when used
+        capIsNew: false,
+      }],
+
+      // Require Parens for Constructors
+      // This rule is aimed at highlighting a lack of convention and increasing code clarity by
+      // requiring the use of parentheses when invoking a constructor via the new keyword.
+      '@stylistic/new-parens': 'warn',
+
+      // Enforce the location of single-line statements
+      // When writing if, else, while, do-while, and for statements, the body can be a single
+      // statement instead of a block. It can be useful to enforce a consistent location for these
+      // single statements.
+      '@stylistic/nonblock-statement-body-position': ['warn', 'below', {
+        overrides: {
+          if: 'beside',
+          else: 'beside',
+        },
+      }],
+
+      // Disallow return in else
+      // If an if block contains a return statement, the else block becomes unnecessary. Its contents
+      // can be placed outside of the block.
+      'no-else-return': 'warn',
+
+      // Disallow Extra Boolean Casts
+      // In contexts such as an if statement's test where the result of the expression will already be
+      // coerced to a Boolean, casting to a Boolean via double negation (!!) is unnecessary.
+      'no-extra-boolean-cast': 'warn',
+
+      // Disallow unnecessary parentheses
+      // This rule restricts the use of parentheses to only where they are necessary.
+      // developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
+      '@stylistic/no-extra-parens': ['warn', 'all', {
+        nestedBinaryExpressions: false,
+        returnAssign: false,
+        ignoreJSX: 'multi-line',
+      }],
+
+      // Disallow Floating Decimals
+      // Float values in JavaScript contain a decimal point, and there is no requirement that the
+      // decimal point be preceded or followed by a number. Although not a syntax error, this format
+      // for numbers can make it difficult to distinguish between true decimal numbers and the dot
+      // operator.
+      '@stylistic/no-floating-decimal': 'warn',
+
+      // Disallow the type conversion with shorter notations
+      // This rule is aimed to flag shorter notations for the type conversion, then suggest a more
+      // self-explanatory notation.
+      'no-implicit-coercion': 'warn',
+
+      // Disallows comments after code
+      // This rule will disallow comments on the same line as code.
+      'no-inline-comments': 'warn',
+
+      // Disallow if as the Only Statement in an else Block
+      // This rule warns when an if statement's else block contains only another if statement.
+      'no-lonely-if': 'warn',
+
+      // Disallow mixes of different operators
+      // Enclosing complex expressions by parentheses clarifies the developer’s intention, which makes
+      // the code more readable. This rule warns when different operators are used consecutively
+      // without parentheses in an expression.
+      '@stylistic/no-mixed-operators': 'warn',
+
+      // Disallow mixed spaces and tabs for indentation
+      // The no-mixed-spaces-and-tabs rule is aimed at flagging any lines of code that are indented
+      // with a mixture of tabs and spaces.
+      '@stylistic/no-mixed-spaces-and-tabs': 'warn',
+
+      // Disallow Use of Chained Assignment Expressions
+      // This rule disallows using multiple assignments within a single statement.
+      'no-multi-assign': 'warn',
+
+      // Disallows multiple blank lines
+      // Whitespace is useful for separating logical sections of code, but excess whitespace takes up
+      // more of the screen.
+      '@stylistic/no-multiple-empty-lines': ['warn', {
+        max: 2,
+        maxEOF: 0,
+        maxBOF: 0,
+      }],
+
+      // Disallow multiple spaces
+      // This rule aims to disallow multiple whitespace around logical expressions, conditional
+      // expressions, declarations, array elements, object properties, sequences and function
+      // parameters.
+      '@stylistic/no-multi-spaces': 'warn',
+
+      // Disallow tabs
+      // Use of tabs is discouraged in favour of spaces because there is no "standard" width for a tab
+      // character and many viewers/editors use their own tab width, which could cause code to be
+      // misaligned and not formatted as intended/indented.
+      '@stylistic/no-tabs': 'warn',
+
+      // Disallow Nested Ternaries
+      // The no-nested-ternary rule aims to increase the clarity and readability of code by
+      // disallowing the use of nested ternary expressions.
+      'no-nested-ternary': 'error',
+
+      // Disallow trailing spaces at the end of lines
+      // Sometimes in the course of editing files, you can end up with extra whitespace at the end of
+      // lines. These whitespace differences can be picked up by source control systems and flagged as
+      // diffs, causing frustration for developers. While this extra whitespace causes no functional
+      // issues, many code conventions require that trailing spaces be removed before checkin.
+      '@stylistic/no-trailing-spaces': 'warn',
+
+      // Disallow Dangling Underscores in Identifiers
+      'no-underscore-dangle': 'warn',
+
+      // Disallow conditional expressions that can be expressed with simpler constructs
+      // Use || instead of ternary in default assignments
+      'no-unneeded-ternary': ['warn', {
+        defaultAssignment: false,
+      }],
+
+      // Disallow unnecessary computed property keys on objects
+      // It’s unnecessary to use computed properties when the property name is a literal.
+      'no-useless-computed-key': 'warn',
+
+      // Disallow Warning Comments
+      // These comments are a warning signal, that there is something not production ready in your
+      // code. Most likely you want to fix it or remove the comments before you roll out your code
+      // with a good feeling.
+      // @see { @link https://eslint.org/docs/latest/rules/no-warning-comments }
+      'no-warning-comments': ['warn', {
+        terms: [],
+        location: 'anywhere',
+      }],
+
+      // Disallow whitespace before properties
+      // This rule alerts for whitespace around the dot or brackets before properties of objects if
+      // they are on the same line. It does not alert for whitespace when the object and property are
+      // on separate lines.
+      '@stylistic/no-whitespace-before-property': 'warn',
+
+      // Enforce consistent line breaks inside braces
+      '@stylistic/object-curly-newline': ['warn', {
+        consistent: true,
+      }],
+
+      // Enforce spaces inside of curly braces in objects
+      // This rule aims to maintain consistency around the spacing inside of object literals. It also
+      // applies to EcmaScript 6 destructured assignment and import/export specifiers.
+      '@stylistic/object-curly-spacing': ['warn', 'always'],
+
+      // Require Object Literal Shorthand Syntax
+      // EcmaScript 6 provides a concise form for defining object literal methods and properties. This
+      // syntax can make defining complex object literals much cleaner.
+      'object-shorthand': ['warn', 'always'],
+
+      // Require or Disallow One Variable Declaration per Scope
+      // This rule is aimed at enforcing the use of one variable declaration per function (for var)
+      // and multiple variable declaration per block (for let and const) scope.
+      'one-var': ['warn', {
+        var: 'always',
+        let: 'never',
+        const: 'never',
+      }],
+
+      // Require a newline around variable declarations
+      // This rule enforces a consistent coding style where newlines are required after each var
+      // declaration or just when there is a variable initialization. It ignores var declarations
+      // inside for loop conditionals.
+      '@stylistic/one-var-declaration-per-line': 'warn',
+
+      // Operator Assignment Shorthand
+      // This rule enforces use of the shorthand assignment operators by requiring them where
+      // possible.
+      'operator-assignment': ['warn', 'always'],
+
+      // Operator Linebreak
+      // When a statement is too long to fit on a single line, line breaks are generally inserted next
+      // to the operators separating expressions. This rule is aimed at enforcing a particular
+      // operator line break style.
+      '@stylistic/operator-linebreak': ['warn', 'before'],
+
+      // Enforce padding within blocks
+      // This rule enforces consistent padding within blocks.
+      '@stylistic/padded-blocks': ['warn', 'never'],
+
+      // Require or disallow padding lines between statements
+      // This rule requires or disallows blank lines between the given 2 kinds of statements. Properly
+      // blank lines help developers to understand the code.
+      // @see { @link https://eslint.style/rules/padding-line-between-statements }
+      '@stylistic/padding-line-between-statements': [
+        'warn',
+        { blankLine: 'always', next: '*', prev: ['cjs-import', 'directive'] },
+        { blankLine: 'always', prev: '*', next: ['cjs-export', 'class', 'export', 'function'] },
+        { blankLine: 'never', prev: 'directive', next: 'directive' },
+        { blankLine: 'never', prev: 'cjs-import', next: 'cjs-import' },
+        { blankLine: 'always', prev: 'export', next: 'export' },
+        { blankLine: 'never', prev: 'import', next: 'import' },
+        { blankLine: 'always', prev: '*', next: ['function', 'for', 'do', 'switch', 'if', 'try'] },
+      ],
+
+      // Suggest using arrow functions as callbacks
+      // This rule is aimed to flag usage of function expressions in an argument list.
+      'prefer-arrow-callback': ['warn', {
+        allowNamedFunctions: true,
+      }],
+
+      // Suggest using const
+      // This rule is aimed at flagging variables that are declared using let keyword, but never
+      // modified after the initial assignment. This helps v8 to better optimise code at runtime.
+      'prefer-const': 'warn',
+
+      // Disallow parseInt() in favor of binary, octal, and hexadecimal literals
+      // This rule disallows parseInt() if it is called with two arguments: a string and a radix
+      // option of 2 (binary), 8 (octal), or 16 (hexadecimal).
+      'prefer-numeric-literals': 'warn',
+
+      // Prefer use of an object spread over Object.assign
+      // When Object.assign is called using an object literal as the first argument, this rule
+      // requires using the object spread syntax instead. This rule also warns on cases where an
+      // Object.assign call is made using a single argument that is an object literal, in this case,
+      // the Object.assign call is not needed.
+      'prefer-object-spread': 'warn',
+
+      // Disallow use of the RegExp constructor in favor of regular expression literals
+      'prefer-regex-literals': ['warn', {
+        disallowRedundantWrapping: true,
+      }],
+
+      // Suggest using template literals instead of string concatenation
+      // This rule is aimed to flag usage of + operators with strings.
+      'prefer-template': 'warn',
+
+      // Enforce Quote Style
+      // This rule is aimed at ensuring consistency of string quotes.
+      '@stylistic/quotes': ['warn', 'single', 'avoid-escape'],
+
+      // Enforce spacing between rest and spread operators and their expressions
+      // This rule aims to enforce consistent spacing between rest and spread operators and their
+      // expressions.
+      '@stylistic/rest-spread-spacing': ['warn', 'never'],
+
+      // Enforce spacing before and after semicolons
+      '@stylistic/semi-spacing': ['warn', {
+        before: false,
+        after: true,
+      }],
+
+      // Enforce location of semicolons
+      // Generally, semicolons are at the end of lines. However, in semicolon-less style, semicolons
+      // are at the beginning of lines. This rule enforces that semicolons are at the configured
+      // location.
+      // @see { @link https://eslint.style/rules/semi-style }
+      '@stylistic/semi-style': ['warn', 'last'],
+
+      // Enforce or Disallow Semicolons
+      // This rule is aimed at ensuring consistent use of semicolons.
+      '@stylistic/semi': ['warn', 'always'],
+
+      // Require Or Disallow Space Before Blocks
+      // This rule will enforce consistency of spacing before blocks.
+      '@stylistic/space-before-blocks': ['warn', 'always'],
+
+      // Require or disallow a space before function parenthesis
+      '@stylistic/space-before-function-paren': ['warn', {
+        anonymous: 'never',
+        named: 'never',
+        asyncArrow: 'always',
+      }],
+
+      // Disallow or enforce spaces inside of parentheses
+      // This rule will enforce consistency of spacing directly inside of parentheses, by disallowing
+      // or requiring one or more spaces to the right of ( and to the left of ). In either case, ()
+      // will still be allowed.
+      '@stylistic/space-in-parens': ['warn', 'never'],
+
+      // Require Spaces Around Infix Operators
+      // This rule is aimed at ensuring there are spaces around infix operators.
+      '@stylistic/space-infix-ops': 'warn',
+
+      // Require or disallow spaces before/after unary operators
+      // This rule enforces consistency regarding the spaces after words unary operators and
+      // after/before nonwords unary operators.
+      '@stylistic/space-unary-ops': ['warn', {
+        words: true,
+        nonwords: false,
+      }],
+
+      // Require or disallow a whitespace beginning a comment
+      // This rule will enforce consistency of spacing after the start of a comment // or /*.
+      // @see { @link https://eslint.style/rules/spaced-comment#spaced-comment }
+      '@stylistic/spaced-comment': ['warn', 'always', {
+        line: {
+        // Allow TypeScript's `/// <reference />` stanzas
+          markers: ['/'],
+        },
+        block: {
+          markers: ['/', '*', '!'],
+        },
+      }],
+
+      // Enforce spacing around colons of switch statements
+      // This rule controls spacing around colons of case and default clauses in switch statements.
+      // Spacing around colons improves readability of case/default clauses.
+      '@stylistic/switch-colon-spacing': 'warn',
+
+      // Enforce Usage of Spacing in Template Strings
+      // This rule aims to maintain consistency around the spacing inside of template literals.
+      '@stylistic/template-curly-spacing': 'warn',
+
+      // Require or disallow spacing between template tags and their literals
+      // This rule aims to maintain consistency around the spacing between template tag functions and
+      // their template literals.
+      '@stylistic/template-tag-spacing': ['warn', 'never'],
+
+      // Require IIFEs to be Wrapped
+      '@stylistic/wrap-iife': ['warn', 'inside'],
+
+      // Enforce spacing around the * in `yield*` expressions
+      '@stylistic/yield-star-spacing': ['warn', 'after'],
+
+      // Require or disallow Yoda Conditions
+      // Yoda conditions are so named because the literal value of the condition comes first while the
+      // variable comes second ("red" === color).
+      yoda: 'warn',
+
+      // PLUGIN: eslint-plugin-import
+
+      // This rule either enforces or bans the use of inline type-only markers for named imports
+      'import/consistent-type-specifier-style': ['warn', 'prefer-inline'],
+
+      // Enforce all exports to be declared at the bottom of the file
+      // The exports-last rule is currently only working on ES6 exports.
+      'import/exports-last': 'warn',
+
+      // Reports when named exports are not grouped together in a single export declaration or when
+      // multiple assignments to CommonJS module.exports or exports object are present in a single
+      // file
+      // An export declaration or module.exports assignment can appear anywhere in the code. By
+      // requiring a single export declaration all your exports will remain at one place, making it
+      // easier to see what exports a module provides.
+      // @see { @link https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/group-exports.md }
+      'import/group-exports': 'off',
+
+      // Reports the use of empty named import blocks
+      // Example: `import {} from 'foo'`
+      'import/no-empty-named-blocks': 'warn',
+
+      // Ensure that there are no useless path segments in import statement path
+      'import/no-useless-path-segments': ['warn', {
+        noUselessIndex: false,
+      }],
+
+      // Enforce a convention in the order of require() / import statements
+      'import/order': 'warn',
+
+      // Enforces having an empty line after the last top-level import statement or require call
+      'import/newline-after-import': 'warn',
+    },
+  },
+];

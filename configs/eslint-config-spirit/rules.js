@@ -1,8 +1,6 @@
-"use strict";
+import noXlinkHref from './rules/no-xlink-href.js';
 
-const noXlinkHref = require('./rules/no-xlink-href.cjs');
-
-module.exports = [
+export default [
   {
     plugins: {
       spirit: {
