@@ -1,10 +1,5 @@
-import { fixupConfigRules } from '@eslint/compat';
-import { FlatCompat } from '@eslint/eslintrc';
 import spiritConfig from 'eslint-config-spirit';
-
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-});
+import spiritStyle from 'eslint-config-spirit/style';
 
 export default [
   {
@@ -52,5 +47,5 @@ export default [
     ],
   },
   ...spiritConfig,
-  ...fixupConfigRules(compat.extends('eslint-config-spirit/style')),
+  ...spiritStyle,
 ];

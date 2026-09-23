@@ -2,6 +2,7 @@ import { fixupConfigRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 import spiritConfig from 'eslint-config-spirit';
 import spiritHtml from 'eslint-config-spirit/html';
+import spiritConfigPrettier from 'eslint-config-spirit/prettier';
 import spiritRules from 'eslint-config-spirit/rules';
 
 const compat = new FlatCompat({
@@ -39,7 +40,8 @@ export default [
     ],
   },
   ...spiritConfig,
-  ...fixupConfigRules(compat.extends('@lmc-eu/eslint-config-typescript', 'eslint-config-spirit/prettier')),
+  ...fixupConfigRules(compat.extends('@lmc-eu/eslint-config-typescript')),
+  ...spiritConfigPrettier,
   ...spiritHtml,
   ...spiritRules,
   {
