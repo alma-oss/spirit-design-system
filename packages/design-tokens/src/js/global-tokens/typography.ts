@@ -679,7 +679,7 @@ export const inputSmall = {
   },
 };
 
-export const labelLarge = {
+export const labelLargeBold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
     fontSize: '1.125rem',
@@ -689,7 +689,17 @@ export const labelLarge = {
   },
 };
 
-export const labelMedium = {
+export const labelLargeRegular = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.125rem',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 1.3333,
+  },
+};
+
+export const labelMediumBold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
     fontSize: '1rem',
@@ -699,7 +709,17 @@ export const labelMedium = {
   },
 };
 
-export const labelSmall = {
+export const labelMediumRegular = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1rem',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 1.25,
+  },
+};
+
+export const labelSmallBold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
     fontSize: '0.875rem',
@@ -709,7 +729,17 @@ export const labelSmall = {
   },
 };
 
-export const labelXlarge = {
+export const labelSmallRegular = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '0.875rem',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 1.1429,
+  },
+};
+
+export const labelXlargeBold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
     fontSize: '1.25rem',
@@ -719,12 +749,32 @@ export const labelXlarge = {
   },
 };
 
-export const labelXsmall = {
+export const labelXlargeRegular = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.25rem',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 1.4,
+  },
+};
+
+export const labelXsmallBold = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
     fontSize: '0.75rem',
     fontStyle: 'normal',
     fontWeight: 600,
+    lineHeight: 1.3333,
+  },
+};
+
+export const labelXsmallRegular = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '0.75rem',
+    fontStyle: 'normal',
+    fontWeight: 400,
     lineHeight: 1.3333,
   },
 };
@@ -777,9 +827,14 @@ export const styles = {
   inputLarge,
   inputMedium,
   inputSmall,
-  labelLarge,
-  labelMedium,
-  labelSmall,
-  labelXlarge,
-  labelXsmall,
+  labelLargeBold,
+  labelLargeRegular,
+  labelMediumBold,
+  labelMediumRegular,
+  labelSmallBold,
+  labelSmallRegular,
+  labelXlargeBold,
+  labelXlargeRegular,
+  labelXsmallBold,
+  labelXsmallRegular,
 };

@@ -23,6 +23,8 @@ export const containerPaddingTablet = '2rem';
 
 export const containerMaxWidth = '80rem';
 
+export const containerXxlargeMaxWidth = '100rem';
+
 export const containers = {
   xsmall: {
     maxWidth: containerXsmallMaxWidth,
@@ -45,6 +47,9 @@ export const containers = {
     tablet: containerPaddingTablet,
   },
   maxWidth: containerMaxWidth,
+  xxlarge: {
+    maxWidth: containerXxlargeMaxWidth,
+  },
 };
 
 export const grids = {
