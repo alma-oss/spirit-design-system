@@ -33,9 +33,9 @@ const config: StorybookConfig = {
     crossOriginIsolated: false,
   },
 
-  async viteFinal(config) {
+  async viteFinal(viteConfig) {
     // Merge custom configuration into the default config
-    return mergeConfig(config, {
+    return mergeConfig(viteConfig, {
       resolve: {
         conditions: ['development'],
         alias: {

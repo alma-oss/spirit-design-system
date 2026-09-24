@@ -41,8 +41,11 @@ export const handler = async (event) => {
   const host = event.headers['x-forwarded-host'] || event.headers.host;
   const protocol = event.headers['x-forwarded-proto'] || 'https';
   const requestUrl = `${protocol}://${host}${event.rawUrl ? new URL(event.rawUrl).pathname : event.path}`;
-  const body
-    = event.body == null ? undefined : event.isBase64Encoded ? Buffer.from(event.body, 'base64') : event.body;
+  let body;
+
+  if (event.body != null) {
+    body = event.isBase64Encoded ? Buffer.from(event.body, 'base64') : event.body;
+  }
 
   const request = new Request(requestUrl, {
     method: event.httpMethod,
