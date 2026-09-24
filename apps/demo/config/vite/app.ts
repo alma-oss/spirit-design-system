@@ -4,7 +4,6 @@ import { join, resolve } from 'path';
 // to make it work the package must be transpiled into CommonJS
 // as a workaround, we can import the file directly
 // @see: https://github.com/vitejs/vite/issues/5370
-// eslint-disable-next-line import/no-unresolved, import/extensions -- deep `src` import, see above
 import { SERVERS } from '@alma-oss/spirit-common/src/constants/servers';
 import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
