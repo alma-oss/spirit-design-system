@@ -10,7 +10,12 @@ type ComponentMigration = {
 };
 
 const MIGRATIONS: Record<string, ComponentMigration> = {
-  Breadcrumbs: { rename: [{ from: 'goBackTitle', to: 'labelBack' }] },
+  Breadcrumbs: {
+    fold: [
+      { from: 'labelBack', to: 'label.back' },
+      { from: 'goBackTitle', to: 'label.back' },
+    ],
+  },
   CloseButton: { fold: [{ from: 'label', to: 'ariaLabel' }] },
   File: {
     fold: [
@@ -169,6 +174,84 @@ const getStringsObject = (element: JSXOpeningElement): ObjectExpression | undefi
   return stringsAttribute.value.expression;
 };
 
+const getObjectProperty = (object: ObjectExpression, name: string): ObjectProperty | undefined =>
+  object.properties.find(
+    (property): property is ObjectProperty =>
+      property.type === 'ObjectProperty' &&
+      ((property.key.type === 'Identifier' && property.key.name === name) ||
+        ((property.key.type === 'StringLiteral' || property.key.type === 'Literal') && property.key.value === name)),
+  );
+
+const hasNestedObjectProperty = (object: ObjectExpression, path: string): boolean => {
+  const segments = path.split('.');
+  let current: ObjectExpression | undefined = object;
+
+  return segments.every((segment, index) => {
+    if (!current) {
+      return false;
+    }
+
+    const property = getObjectProperty(current, segment);
+
+    if (!property) {
+      return false;
+    }
+
+    if (index === segments.length - 1) {
+      return true;
+    }
+
+    if (property.value.type !== 'ObjectExpression') {
+      current = undefined;
+
+      return false;
+    }
+
+    current = property.value;
+
+    return true;
+  });
+};
+
+const getOrCreateNestedObject = (
+  j: API['jscodeshift'],
+  parent: ObjectExpression,
+  name: string,
+): ObjectExpression => {
+  const existing = getObjectProperty(parent, name);
+
+  if (existing?.value.type === 'ObjectExpression') {
+    return existing.value;
+  }
+
+  const nestedObject = j.objectExpression([]);
+
+  if (existing) {
+    existing.value = nestedObject;
+  } else {
+    parent.properties.push(j.objectProperty(j.identifier(name), nestedObject));
+  }
+
+  return nestedObject;
+};
+
+const setNestedObjectProperty = (
+  j: API['jscodeshift'],
+  object: ObjectExpression,
+  path: string,
+  value: ObjectProperty['value'],
+) => {
+  const segments = path.split('.');
+  const leafName = segments[segments.length - 1];
+  const parent = segments
+    .slice(0, -1)
+    .reduce((current, segment) => getOrCreateNestedObject(j, current, segment), object);
+
+  if (!hasObjectProperty(parent, leafName)) {
+    parent.properties.push(j.objectProperty(j.identifier(leafName), value));
+  }
+};
+
 const migrateRenames = (element: JSXOpeningElement, migrations: PropertyMigration[]): boolean => {
   let hasChanges = false;
 
@@ -228,7 +311,7 @@ const migrateFoldedProperties = (
   oldAttributes.forEach(({ migration, attribute }) => {
     const expression = getAttributeExpression(j, attribute);
 
-    if (stringsObject && hasObjectProperty(stringsObject, migration.to)) {
+    if (stringsObject && hasNestedObjectProperty(stringsObject, migration.to)) {
       element.attributes = element.attributes?.filter((item) => item !== attribute);
       didChange = true;
     } else if (expression) {
@@ -237,7 +320,7 @@ const migrateFoldedProperties = (
         element.attributes?.push(j.jsxAttribute(j.jsxIdentifier('strings'), j.jsxExpressionContainer(stringsObject)));
       }
 
-      stringsObject.properties.push(j.objectProperty(j.identifier(migration.to), expression));
+      setNestedObjectProperty(j, stringsObject, migration.to, expression);
       element.attributes = element.attributes?.filter((item) => item !== attribute);
       didChange = true;
     }
@@ -245,14 +328,6 @@ const migrateFoldedProperties = (
 
   return didChange;
 };
-
-const getObjectProperty = (object: ObjectExpression, name: string): ObjectProperty | undefined =>
-  object.properties.find(
-    (property): property is ObjectProperty =>
-      property.type === 'ObjectProperty' &&
-      ((property.key.type === 'Identifier' && property.key.name === name) ||
-        ((property.key.type === 'StringLiteral' || property.key.type === 'Literal') && property.key.value === name)),
-  );
 
 /**
  * Folds a nested object-literal prop (e.g. `ariaLabelControls`) into `strings`.

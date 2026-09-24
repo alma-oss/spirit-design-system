@@ -13,8 +13,17 @@ import {
 
 export const Example = () => (
   <>
-    <Breadcrumbs labelBack="Back" />
-    <Breadcrumbs labelBack="Current" />
+    <Breadcrumbs strings={{
+      label: {
+        back: "Back"
+      }
+    }} />
+    <Breadcrumbs
+      strings={{
+        label: {
+          back: "Current"
+        }
+      }} />
     <DismissButton strings={{
       ariaLabel: "Close"
     }} />
