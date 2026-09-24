@@ -31,9 +31,13 @@ const waitForFilesCount = async (dir: string, expectedCount: number, timeoutMs =
   for (let i = 0; i < maxIterations; i++) {
     const files = fs.existsSync(dir) ? fs.readdirSync(dir) : [];
 
-    if (files.length >= expectedCount) { return true; }
+    if (files.length >= expectedCount) {
+      return true;
+    }
 
-    if (Date.now() - start > timeoutMs) { return false; }
+    if (Date.now() - start > timeoutMs) {
+      return false;
+    }
     await new Promise((r) => setTimeout(r, pollInterval));
   }
 

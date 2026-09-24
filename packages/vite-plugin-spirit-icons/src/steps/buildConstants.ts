@@ -6,7 +6,9 @@ import { filterSvgFiles, Logger } from './shared';
 const consoleLogger: Logger = {
   info: (msg) => console.log(msg),
   warn: (msg) => console.warn(msg),
-  error: (msg) => { throw new Error(msg); },
+  error: (msg) => {
+    throw new Error(msg);
+  },
 };
 
 export const buildConstants = (srcDir: string, file: string, logger: Logger = consoleLogger): boolean => {

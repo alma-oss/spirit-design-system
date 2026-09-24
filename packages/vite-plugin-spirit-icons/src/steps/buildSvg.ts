@@ -6,7 +6,9 @@ import { filterSvgFiles, getIconType, ICON_TYPE_DUALTONE, ICON_TYPE_COLORED, Log
 const consoleLogger: Logger = {
   info: (msg) => console.log(msg),
   warn: (msg) => console.warn(msg),
-  error: (msg) => { throw new Error(msg); },
+  error: (msg) => {
+    throw new Error(msg);
+  },
 };
 
 export const DUALTONE_COLOR_BACKGROUND_DEFAULT = '#F2F2F2'; // Gray95
