@@ -16,46 +16,46 @@ const MIGRATIONS: Record<string, ComponentMigration> = {
       { from: 'goBackTitle', to: 'label.back' },
     ],
   },
-  CloseButton: { fold: [{ from: 'label', to: 'ariaLabel' }] },
+  CloseButton: { fold: [{ from: 'label', to: 'ariaLabel.close' }] },
   File: {
     fold: [
-      { from: 'editText', to: 'ariaLabelEdit' },
-      { from: 'removeText', to: 'ariaLabelRemove' },
+      { from: 'editText', to: 'ariaLabel.edit' },
+      { from: 'removeText', to: 'ariaLabel.remove' },
     ],
   },
   FileUpload: {
     fold: [
-      { from: 'buttonText', to: 'labelButton' },
-      { from: 'inputUploadText', to: 'labelUpload' },
-      { from: 'inputDragAndDropText', to: 'labelDragAndDrop' },
+      { from: 'buttonText', to: 'label.button' },
+      { from: 'inputUploadText', to: 'label.upload' },
+      { from: 'inputDragAndDropText', to: 'label.dragAndDrop' },
     ],
   },
-  ModalHeader: { fold: [{ from: 'closeLabel', to: 'ariaLabelClose' }] },
-  PaginationLink: { fold: [{ from: 'accessibilityLabel', to: 'ariaLabel' }] },
-  PaginationLinkNext: { fold: [{ from: 'accessibilityLabel', to: 'ariaLabelNext' }] },
-  PaginationLinkPrevious: { fold: [{ from: 'accessibilityLabel', to: 'ariaLabelPrevious' }] },
-  ToastBar: { fold: [{ from: 'closeLabel', to: 'ariaLabelClose' }] },
-  Tooltip: { fold: [{ from: 'closeLabel', to: 'ariaLabelClose' }] },
+  ModalHeader: { fold: [{ from: 'closeLabel', to: 'ariaLabel.close' }] },
+  PaginationLink: { fold: [{ from: 'accessibilityLabel', to: 'ariaLabel.page' }] },
+  PaginationLinkNext: { fold: [{ from: 'accessibilityLabel', to: 'ariaLabel.next' }] },
+  PaginationLinkPrevious: { fold: [{ from: 'accessibilityLabel', to: 'ariaLabel.previous' }] },
+  ToastBar: { fold: [{ from: 'closeLabel', to: 'ariaLabel.close' }] },
+  Tooltip: { fold: [{ from: 'closeLabel', to: 'ariaLabel.close' }] },
   UncontrolledPagination: {
     fold: [
-      { from: 'accessibilityLabel', to: 'ariaLabel' },
-      { from: 'accessibilityLabelPrevious', to: 'ariaLabelPrevious' },
-      { from: 'accessibilityLabelNext', to: 'ariaLabelNext' },
+      { from: 'accessibilityLabel', to: 'ariaLabel.page' },
+      { from: 'accessibilityLabelPrevious', to: 'ariaLabel.previous' },
+      { from: 'accessibilityLabelNext', to: 'ariaLabel.next' },
     ],
   },
   UncontrolledSplitButton: {
     rename: [{ from: 'buttonLabel', to: 'labelButton' }],
-    fold: [{ from: 'dropdownTriggerLabel', to: 'ariaLabelDropdown' }],
+    fold: [{ from: 'dropdownTriggerLabel', to: 'ariaLabel.dropdown' }],
   },
-  UncontrolledToast: { fold: [{ from: 'closeLabel', to: 'ariaLabelClose' }] },
+  UncontrolledToast: { fold: [{ from: 'closeLabel', to: 'ariaLabel.close' }] },
   ScrollView: {
     foldObject: {
       from: 'ariaLabelControls',
       keys: [
-        { from: 'start', to: 'ariaStart' },
-        { from: 'end', to: 'ariaEnd' },
-        { from: 'top', to: 'ariaTop' },
-        { from: 'bottom', to: 'ariaBottom' },
+        { from: 'start', to: 'ariaLabel.start' },
+        { from: 'end', to: 'ariaLabel.end' },
+        { from: 'top', to: 'ariaLabel.top' },
+        { from: 'bottom', to: 'ariaLabel.bottom' },
       ],
     },
   },
@@ -63,59 +63,59 @@ const MIGRATIONS: Record<string, ComponentMigration> = {
     foldObject: {
       from: 'ariaLabelControls',
       keys: [
-        { from: 'start', to: 'ariaStart' },
-        { from: 'end', to: 'ariaEnd' },
-        { from: 'top', to: 'ariaTop' },
-        { from: 'bottom', to: 'ariaBottom' },
+        { from: 'start', to: 'ariaLabel.start' },
+        { from: 'end', to: 'ariaLabel.end' },
+        { from: 'top', to: 'ariaLabel.top' },
+        { from: 'bottom', to: 'ariaLabel.bottom' },
       ],
     },
   },
   UNSTABLE_Picker: {
     fold: [
-      { from: 'addButtonLabel', to: 'ariaAdd' },
-      { from: 'closeButtonLabel', to: 'ariaClose' },
-      { from: 'emptySelectionLabel', to: 'labelEmptySelection' },
-      { from: 'removeAllLabel', to: 'ariaRemoveAll' },
-      { from: 'removeItemLabel', to: 'ariaRemoveItem' },
-      { from: 'selectionAriaLabel', to: 'ariaSelection' },
-      { from: 'tagDescriptionText', to: 'ariaTagDescription' },
+      { from: 'addButtonLabel', to: 'ariaLabel.add' },
+      { from: 'closeButtonLabel', to: 'ariaLabel.close' },
+      { from: 'emptySelectionLabel', to: 'label.emptySelection' },
+      { from: 'removeAllLabel', to: 'ariaLabel.removeAll' },
+      { from: 'removeItemLabel', to: 'ariaLabel.removeItem' },
+      { from: 'selectionAriaLabel', to: 'ariaLabel.selection' },
+      { from: 'tagDescriptionText', to: 'ariaLabel.tagDescription' },
     ],
   },
   UNSTABLE_UncontrolledPicker: {
     fold: [
-      { from: 'addButtonLabel', to: 'ariaAdd' },
-      { from: 'closeButtonLabel', to: 'ariaClose' },
-      { from: 'emptySelectionLabel', to: 'labelEmptySelection' },
-      { from: 'removeAllLabel', to: 'ariaRemoveAll' },
-      { from: 'removeItemLabel', to: 'ariaRemoveItem' },
-      { from: 'selectionAriaLabel', to: 'ariaSelection' },
-      { from: 'tagDescriptionText', to: 'ariaTagDescription' },
+      { from: 'addButtonLabel', to: 'ariaLabel.add' },
+      { from: 'closeButtonLabel', to: 'ariaLabel.close' },
+      { from: 'emptySelectionLabel', to: 'label.emptySelection' },
+      { from: 'removeAllLabel', to: 'ariaLabel.removeAll' },
+      { from: 'removeItemLabel', to: 'ariaLabel.removeItem' },
+      { from: 'selectionAriaLabel', to: 'ariaLabel.selection' },
+      { from: 'tagDescriptionText', to: 'ariaLabel.tagDescription' },
     ],
   },
   UNSTABLE_Combobox: {
     fold: [
-      { from: 'addMoreLabel', to: 'labelAddMore' },
-      { from: 'addMoreDescriptionText', to: 'ariaAddMoreDescription' },
-      { from: 'emptySelectionLabel', to: 'labelEmptySelection' },
-      { from: 'removeAllLabel', to: 'ariaRemoveAll' },
-      { from: 'removeItemLabel', to: 'ariaRemoveItem' },
-      { from: 'selectionAriaLabel', to: 'ariaSelection' },
-      { from: 'selectionCountLabel', to: 'ariaSelectionCount' },
-      { from: 'selectionCountLabelSingular', to: 'ariaSelectionCountSingular' },
-      { from: 'tagDescriptionText', to: 'ariaTagDescription' },
+      { from: 'addMoreLabel', to: 'label.addMore' },
+      { from: 'addMoreDescriptionText', to: 'ariaLabel.addMoreDescription' },
+      { from: 'emptySelectionLabel', to: 'label.emptySelection' },
+      { from: 'removeAllLabel', to: 'ariaLabel.removeAll' },
+      { from: 'removeItemLabel', to: 'ariaLabel.removeItem' },
+      { from: 'selectionAriaLabel', to: 'ariaLabel.selection' },
+      { from: 'selectionCountLabel', to: 'ariaLabel.selectionCount' },
+      { from: 'selectionCountLabelSingular', to: 'ariaLabel.selectionCountSingular' },
+      { from: 'tagDescriptionText', to: 'ariaLabel.tagDescription' },
     ],
   },
   UNSTABLE_UncontrolledCombobox: {
     fold: [
-      { from: 'addMoreLabel', to: 'labelAddMore' },
-      { from: 'addMoreDescriptionText', to: 'ariaAddMoreDescription' },
-      { from: 'emptySelectionLabel', to: 'labelEmptySelection' },
-      { from: 'removeAllLabel', to: 'ariaRemoveAll' },
-      { from: 'removeItemLabel', to: 'ariaRemoveItem' },
-      { from: 'selectionAriaLabel', to: 'ariaSelection' },
-      { from: 'selectionCountLabel', to: 'ariaSelectionCount' },
-      { from: 'selectionCountLabelSingular', to: 'ariaSelectionCountSingular' },
-      { from: 'tagDescriptionText', to: 'ariaTagDescription' },
+      { from: 'addMoreLabel', to: 'label.addMore' },
+      { from: 'addMoreDescriptionText', to: 'ariaLabel.addMoreDescription' },
+      { from: 'emptySelectionLabel', to: 'label.emptySelection' },
+      { from: 'removeAllLabel', to: 'ariaLabel.removeAll' },
+      { from: 'removeItemLabel', to: 'ariaLabel.removeItem' },
+      { from: 'selectionAriaLabel', to: 'ariaLabel.selection' },
+      { from: 'selectionCountLabel', to: 'ariaLabel.selectionCount' },
+      { from: 'selectionCountLabelSingular', to: 'ariaLabel.selectionCountSingular' },
+      { from: 'tagDescriptionText', to: 'ariaLabel.tagDescription' },
     ],
   },
 };
@@ -372,7 +372,7 @@ const migrateFoldedObject = (
   migration.keys.forEach(({ from, to }) => {
     const nestedProperty = getObjectProperty(nestedObject, from);
 
-    if (!nestedProperty || (stringsObject && hasObjectProperty(stringsObject, to))) {
+    if (!nestedProperty || (stringsObject && hasNestedObjectProperty(stringsObject, to))) {
       return;
     }
 
@@ -381,7 +381,7 @@ const migrateFoldedObject = (
       element.attributes?.push(j.jsxAttribute(j.jsxIdentifier('strings'), j.jsxExpressionContainer(stringsObject)));
     }
 
-    stringsObject.properties.push(j.objectProperty(j.identifier(to), nestedProperty.value));
+    setNestedObjectProperty(j, stringsObject, to, nestedProperty.value);
   });
 
   element.attributes = element.attributes?.filter((item) => item !== oldAttribute);

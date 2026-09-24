@@ -18,7 +18,7 @@ export const Example = () => (
     <DismissButton label="Close" />
     <DismissButton label />
     <File editText="Edit" removeText={removeLabel} />
-    <File editText="Old edit" strings={{ ariaLabelEdit: "Current edit" }} />
+    <File editText="Old edit" strings={{ ariaLabel: { edit: "Current edit" } }} />
     <FileUpload buttonText="Browse" inputUploadText={uploadLabel} inputDragAndDropText="or drop" />
     <Tooltip closeLabel="Close tooltip" />
     <UncontrolledPagination

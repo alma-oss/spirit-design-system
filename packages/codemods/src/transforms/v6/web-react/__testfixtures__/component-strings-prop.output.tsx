@@ -25,43 +25,62 @@ export const Example = () => (
         }
       }} />
     <DismissButton strings={{
-      ariaLabel: "Close"
+      ariaLabel: {
+        close: "Close"
+      }
     }} />
     <DismissButton label />
     <File
       strings={{
-        ariaLabelEdit: "Edit",
-        ariaLabelRemove: removeLabel
+        ariaLabel: {
+          edit: "Edit",
+          remove: removeLabel
+        }
       }} />
-    <File strings={{ ariaLabelEdit: "Current edit" }} />
+    <File strings={{ ariaLabel: { edit: "Current edit" } }} />
     <FileUpload
       strings={{
-        labelButton: "Browse",
-        labelUpload: uploadLabel,
-        labelDragAndDrop: "or drop"
+        label: {
+          button: "Browse",
+          upload: uploadLabel,
+          dragAndDrop: "or drop"
+        }
       }} />
     <Tooltip strings={{
-      ariaLabelClose: "Close tooltip"
+      ariaLabel: {
+        close: "Close tooltip"
+      }
     }} />
     <UncontrolledPagination
       strings={{
-        ariaLabel: "Go to page",
-        ariaLabelPrevious: "Previous",
-        ariaLabelNext: "Next"
+        ariaLabel: {
+          page: "Go to page",
+          previous: "Previous",
+          next: "Next"
+        }
       }} />
     <UncontrolledSplitButton labelButton="Save" strings={{
-      ariaLabelDropdown: "More"
+      ariaLabel: {
+        dropdown: "More"
+      }
     }}>
       Menu
     </UncontrolledSplitButton>
     <UNSTABLE_Picker
       strings={{
-        ariaAdd: "Add",
-        labelEmptySelection: "Languages"
+        ariaLabel: {
+          add: "Add"
+        },
+
+        label: {
+          emptySelection: "Languages"
+        }
       }} />
     <ScrollView hasControls strings={{
-      ariaStart: "Left",
-      ariaEnd: "Right"
+      ariaLabel: {
+        start: "Left",
+        end: "Right"
+      }
     }} />
     <ScrollView hasControls />
     <CloseButton label="Local component" />

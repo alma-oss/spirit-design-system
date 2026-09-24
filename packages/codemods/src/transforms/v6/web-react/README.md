@@ -26,13 +26,13 @@ npx @alma-oss/spirit-codemods -p <path> -t v6/web-react/component-strings-prop
 
 ```diff
 - <UncontrolledSplitButton buttonLabel="Save" dropdownTriggerLabel="More" />
-+ <UncontrolledSplitButton labelButton="Save" strings={{ ariaLabelDropdown: 'More' }} />
++ <UncontrolledSplitButton labelButton="Save" strings={{ ariaLabel: { dropdown: 'More' } }} />
 
 - <File editText="Edit" removeText="Remove" />
-+ <File strings={{ ariaLabelEdit: 'Edit', ariaLabelRemove: 'Remove' }} />
++ <File strings={{ ariaLabel: { edit: 'Edit', remove: 'Remove' } }} />
 
 - <ScrollView hasControls ariaLabelControls={{ start: 'Left' }} />
-+ <ScrollView hasControls strings={{ ariaStart: 'Left' }} />
++ <ScrollView hasControls strings={{ ariaLabel: { start: 'Left' } }} />
 ```
 
 ### `v6/web-react/heading-text-emphasis-prop` — Replace `emphasis` on `Heading` and `Text`
