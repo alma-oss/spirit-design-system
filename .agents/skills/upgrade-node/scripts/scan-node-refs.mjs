@@ -184,10 +184,10 @@ const scanDockerImages = (root) => {
     const basename = path.basename(filePath);
 
     return (
-      basename === 'devcontainer.json' ||
-      basename.startsWith('docker-compose') ||
-      basename === 'Dockerfile' ||
-      basename.endsWith('.Dockerfile')
+      basename === 'devcontainer.json'
+      || basename.startsWith('docker-compose')
+      || basename === 'Dockerfile'
+      || basename.endsWith('.Dockerfile')
     );
   });
 
@@ -267,7 +267,7 @@ const scanMigrationGuides = (root) => {
 
       guides.push({
         file: relativePath,
-        hasNodeDropSection: /###\s+Dropped Support for Node\.js/i.test(content ?? ''),
+        hasNodeDropSection: (/###\s+Dropped Support for Node\.js/i).test(content ?? ''),
       });
     }
   }
@@ -327,6 +327,7 @@ const validateExpectMin = (snapshot, expectMin) => {
 
   if (Number.isNaN(expectMin)) {
     failures.push('--expect-min requires a numeric major version.');
+
     return failures;
   }
 
@@ -346,9 +347,7 @@ const validateExpectMin = (snapshot, expectMin) => {
     const toolsMinimum = Number.parseInt(snapshot.toolsReadme.minimum, 10);
 
     if (!Number.isNaN(toolsMinimum) && toolsMinimum < expectMin) {
-      failures.push(
-        `${snapshot.toolsReadme.file} documents Node.js ≥ ${toolsMinimum}, below expected minimum ${expectMin}.`,
-      );
+      failures.push(`${snapshot.toolsReadme.file} documents Node.js ≥ ${toolsMinimum}, below expected minimum ${expectMin}.`);
     }
   }
 
@@ -357,8 +356,8 @@ const validateExpectMin = (snapshot, expectMin) => {
 
 const printPretty = (snapshot) => {
   console.log('# Node.js reference scan\n');
-  console.log(`| Field | Value |`);
-  console.log(`| --- | --- |`);
+  console.log('| Field | Value |');
+  console.log('| --- | --- |');
   console.log(`| .nvmrc | ${snapshot.nvmrc ?? '—'} |`);
   console.log(`| engines files | ${snapshot.summary.enginesFileCount} |`);
   console.log(`| min engines major | ${snapshot.summary.minEngineMajor ?? '—'} |`);
