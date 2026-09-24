@@ -26,6 +26,7 @@ export default [
 
       // No JSON-aware parser is configured, so JSON/JSONC files (including tsconfig.json,
       // which allows comments) fail to parse as plain JS. Nothing here lints JSON on purpose.
+      // @see { @link https://github.com/lmc-eu/code-quality-tools/issues/270 }
       '**/*.json',
 
       // Skip packages that don’t need linting from root
@@ -78,6 +79,7 @@ export default [
     // of it ships to consumers, so devDependencies are the correct place for its imports. This
     // extends airbnb's default `import/no-extraneous-dependencies` allowlist (see
     // `--print-config`) with the patterns it doesn't already cover.
+    // @see { @link https://github.com/lmc-eu/code-quality-tools/issues/271 }
     rules: {
       'import/no-extraneous-dependencies': ['error', {
         devDependencies: [
