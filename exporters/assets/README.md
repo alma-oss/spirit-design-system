@@ -35,8 +35,9 @@ Cosmiconfig also supports an extensionless `.spiritrc` and a `spirit` key in `pa
 The Figma file key is not a secret. It identifies a published Figma file, the same way
 [`packages/web-react/figma.config.json`][web-react-figma-config] stores a file URL.
 
-Output paths are relative to the configuration file and must stay inside the repository. Each target selects one or more
-asset types:
+Output paths are relative to the configuration file and must stay inside the repository. Each `out` directory must
+contain only generated files. Synchronization is recursively destructive: every file and nested directory inside `out`
+that is not part of the current export is deleted. Each target selects one or more asset types:
 
 - `icons`: Brand-specific variants from `Icons/{icon-name}` component sets
 - `benefit-icons`: shared, unbranded `Icons/benefit-*` components
@@ -90,11 +91,12 @@ yarn workspace @alma-oss/spirit-assets-exporter sync --config spirit.config.json
 
 If `--config` is omitted, cosmiconfig searches the current working directory for a Spirit configuration.
 
-The target directory becomes an exact mirror of the selected Brand:
+The target directory becomes an exact mirror of the selected Brand. `out` must contain only generated files, because
+anything else in that directory is removed:
 
 - new SVGs are added
 - changed SVGs are updated
-- SVGs missing from Figma are deleted
+- files and nested directories missing from the current Figma export are deleted, including the directories themselves
 
 The sync aborts before changing a target when it cannot discover or download the complete asset set.
 
