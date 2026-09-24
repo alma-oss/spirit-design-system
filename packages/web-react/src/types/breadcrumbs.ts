@@ -9,6 +9,9 @@ import {
 
 export type BreadcrumbsStrings = {
   ariaLabel?: TranslatableString;
+  label?: {
+    back?: TranslatableString;
+  };
 };
 
 type BreadcrumbsItem = {
@@ -32,9 +35,8 @@ export interface BreadcrumbsStyleProps extends StyleProps {
 
 /** ===== INTERNAL API ===== */
 export interface BreadcrumbsProps extends StyleProps, ChildrenProps, StringsProps<BreadcrumbsStrings> {
-  /** @deprecated Use `labelBack` instead. */
+  /** @deprecated Use `strings.label.back` instead. */
   goBackTitle?: string;
-  labelBack?: TranslatableString;
   items?: BreadcrumbsItems;
 }
 

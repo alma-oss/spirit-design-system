@@ -38,14 +38,14 @@ describe('Breadcrumbs', () => {
     expect(element).toHaveTextContent('test_title');
   });
 
-  it('should resolve labelBack from a translation reference', () => {
+  it('should resolve strings.label.back from a translation reference', () => {
     const dom = render(
       <Breadcrumbs
         items={[
           { title: 'test', url: '/test' },
           { title: 'test_2', url: '/test_2' },
         ]}
-        labelBack={{ key: 'breadcrumbs.back' }}
+        strings={{ label: { back: { key: 'breadcrumbs.back' } } }}
       />,
     );
 
@@ -79,7 +79,7 @@ describe('Breadcrumbs', () => {
     expect(dom.container.querySelector('nav')).toHaveAttribute('aria-label', 'Drobečková navigace');
   });
 
-  it('should not render the back item without labelBack or goBackTitle', () => {
+  it('should not render the back item without strings.label.back or goBackTitle', () => {
     const dom = render(
       <Breadcrumbs
         items={[

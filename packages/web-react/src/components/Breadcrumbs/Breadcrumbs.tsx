@@ -15,13 +15,13 @@ const defaultProps: Partial<SpiritBreadcrumbsProps> = {
 
 const Breadcrumbs = <E extends ElementType = 'nav'>(props: SpiritBreadcrumbsProps<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { children, elementType, goBackTitle, items, labelBack, strings, ...restProps } = propsWithDefaults;
+  const { children, elementType, goBackTitle, items, strings, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;
   const { classProps, props: modifiedProps } = useBreadcrumbsStyleProps({ ...restProps });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps });
   const { t } = useI18n();
-  const backLabelSource = labelBack ?? goBackTitle;
+  const backLabelSource = strings?.label?.back ?? goBackTitle;
   const resolvedBackLabel = backLabelSource ? resolveComponentString(backLabelSource, t) : undefined;
   const resolvedAriaLabel = resolveComponentString(strings?.ariaLabel ?? { key: 'breadcrumbs.ariaLabel' }, t);
 
@@ -29,7 +29,7 @@ const Breadcrumbs = <E extends ElementType = 'nav'>(props: SpiritBreadcrumbsProp
     method: 'property',
     trigger: goBackTitle != null,
     componentName: 'Breadcrumbs',
-    propertyProps: { deprecatedName: 'goBackTitle', newName: 'labelBack' },
+    propertyProps: { deprecatedName: 'goBackTitle', newName: 'strings.label.back' },
   });
 
   const isLast = (index: number, itemsCount: number) => index === itemsCount - 1;
