@@ -1,6 +1,6 @@
 import { Stack } from '@alma-oss/spirit-web-react';
+import Footer from '@local/domains/footer/ui/Footer';
 import { type ChildrenProps } from '@local/types';
-import { Footer } from '@local/ui';
 import { AppProvider } from '@local/ui/AppProvider';
 import { fontshareApiUrl, generalSansStylesheet } from '@local/ui/fonts';
 import '@local/ui/globals.scss';
@@ -28,9 +28,7 @@ const RootLayout = ({ children }: RootLayoutProps) => (
       <AppProvider>
         <Header />
         <main>
-          <Stack elementType="div" hasIntermediateDividers>
-            {children}
-          </Stack>
+          <Stack hasIntermediateDividers>{children}</Stack>
         </main>
         <Footer />
       </AppProvider>

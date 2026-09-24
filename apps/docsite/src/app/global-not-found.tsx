@@ -1,6 +1,7 @@
 import { ButtonLink, EmptyState, EmptyStateSection, Flex, Heading, Section, Text } from '@alma-oss/spirit-web-react';
+import Footer from '@local/domains/footer/ui/Footer';
 import { routes } from '@local/domains/routing/routes';
-import { Header, Footer } from '@local/ui';
+import { Header } from '@local/ui';
 import { AppProvider } from '@local/ui/AppProvider';
 import { fontshareApiUrl, generalSansStylesheet } from '@local/ui/fonts';
 import { Metadata } from 'next';
