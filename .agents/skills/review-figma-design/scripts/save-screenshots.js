@@ -12,7 +12,6 @@ import http from 'http';
 const BASE_URL = 'http://localhost:3845/mcp';
 
 /**
- *
  * @param sessionId
  * @param body
  */
@@ -25,7 +24,9 @@ function post(sessionId, body) {
       'Content-Length': Buffer.byteLength(data),
     };
 
-    if (sessionId) { headers['mcp-session-id'] = sessionId; }
+    if (sessionId) {
+      headers['mcp-session-id'] = sessionId;
+    }
 
     const req = http.request(BASE_URL, { method: 'POST', headers }, (res) => {
       const chunks = [];
@@ -33,27 +34,28 @@ function post(sessionId, body) {
       res.on('end', () => resolve({ headers: res.headers, body: Buffer.concat(chunks).toString() }));
     });
     req.on('error', reject);
-    req.setTimeout(15000, () => { req.destroy(); reject(new Error('Request timed out')); });
+    req.setTimeout(15000, () => {
+      req.destroy();
+      reject(new Error('Request timed out'));
+    });
     req.write(data);
     req.end();
   });
 }
 
 /**
- *
  * @param raw
  */
 function parseSSE(raw) {
   for (const line of raw.split('\n')) {
-    if (line.startsWith('data:')) { return JSON.parse(line.slice(5)); }
+    if (line.startsWith('data:')) {
+      return JSON.parse(line.slice(5));
+    }
   }
 
   return null;
 }
 
-/**
- *
- */
 async function initSession() {
   const { headers } = await post(null, {
     jsonrpc: '2.0',
@@ -65,9 +67,6 @@ async function initSession() {
   return headers['mcp-session-id'];
 }
 
-/**
- *
- */
 async function main() {
   const args = process.argv.slice(2);
 
