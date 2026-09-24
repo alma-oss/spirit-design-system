@@ -16,6 +16,7 @@
     "preview": "vite preview --config config/vite/app.ts"
   },
   "devDependencies": {
+    "@alma-oss/spirit-common": "workspace:^",
     "@rollup/plugin-terser": "catalog:build",
     "@rollup/plugin-typescript": "catalog:build",
     "autoprefixer": "catalog:build",
