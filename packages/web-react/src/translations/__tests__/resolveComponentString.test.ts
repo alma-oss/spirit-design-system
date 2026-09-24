@@ -73,4 +73,29 @@ describe('resolveComponentStrings', () => {
       ariaSelection: 'Selected Languages',
     });
   });
+
+  it('resolves nested source trees into the same shape', () => {
+    const resolved = resolveComponentStrings(
+      {
+        ariaLabel: {
+          close: { value: 'Dismiss', key: 'common.close' },
+          selection: { value: undefined, key: 'picker.selectionAriaLabel', params: { label: 'Languages' } },
+        },
+        label: {
+          add: { value: undefined, key: 'picker.add' },
+        },
+      },
+      t,
+    );
+
+    expect(resolved).toEqual({
+      ariaLabel: {
+        close: 'Dismiss',
+        selection: 'Selected Languages',
+      },
+      label: {
+        add: 'Add',
+      },
+    });
+  });
 });

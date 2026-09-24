@@ -3,6 +3,14 @@
  */
 export type TranslatableString = string | { key: string; params?: Record<string, unknown> };
 
-export interface StringsProps<T extends Record<string, TranslatableString | undefined>> {
+/**
+ * Optional component copy grouped under `label` (visible) and `ariaLabel` (screen-reader).
+ * Leaves are `TranslatableString`; nest further only when a group of related strings needs it.
+ */
+export interface ComponentStrings {
+  [key: string]: TranslatableString | ComponentStrings | undefined;
+}
+
+export interface StringsProps<T extends ComponentStrings = ComponentStrings> {
   strings?: T;
 }
