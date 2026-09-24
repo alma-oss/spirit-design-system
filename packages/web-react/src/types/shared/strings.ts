@@ -3,6 +3,6 @@
  */
 export type TranslatableString = string | { key: string; params?: Record<string, unknown> };
 
-export interface WithStrings<T extends Record<string, TranslatableString | undefined>> {
+export interface StringsProps<T extends Record<string, TranslatableString | undefined>> {
   strings?: T;
 }
