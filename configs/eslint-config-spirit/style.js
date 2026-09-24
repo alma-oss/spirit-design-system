@@ -141,6 +141,10 @@ export default [
       // All block statements must be wrapped in curly braces
       curly: ['warn', 'all'],
 
+      // Enforce consistent line breaks after opening and before closing braces
+      // Blocks like `if (x) { doSomething(); }` are always expanded onto multiple lines.
+      '@stylistic/curly-newline': ['warn', 'always'],
+
       // Enforce default clauses in switch statements to be last
       'default-case-last': 'warn',
 
@@ -247,6 +251,11 @@ export default [
       // Disallow mixing CRLF and LF linebreaks
       // This rule aims to ensure having consistent line endings independent of operating system.
       '@stylistic/linebreak-style': ['error', 'unix'],
+
+      // Require empty lines around comments
+      // Disabled: we don't want a blank line forced before every inline `/* ... */` comment
+      // (e.g. between object/interface members), which is overly noisy for short annotations.
+      '@stylistic/lines-around-comment': 'off',
 
       // Require an empty line between class members
       // This rule improves readability by enforcing lines between class members. It will not check
