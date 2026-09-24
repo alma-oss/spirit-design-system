@@ -5,14 +5,18 @@ import { toPascalCase, prepareSvgForReactComponent } from '../steps/prepareSvgRe
 
 // Ensure shared.filterSvgFiles is resilient to undefined in CI fs edge cases
 jest.mock('../steps/shared', () => {
-  const p = require('path');
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires -- jest.mock factories can't reference outer-scope imports
+  const pathModule = require('path');
 
 
   return {
-    filterSvgFiles: (fileNames: string[] | undefined) =>
-      Array.isArray(fileNames)
-        ? fileNames.filter((fileName) => p.extname(fileName) === '.svg' && fileName !== 'sprite.svg')
-        : [],
+    filterSvgFiles: (fileNames: string[] | undefined) => {
+      if (!Array.isArray(fileNames)) {
+        return [];
+      }
+
+      return fileNames.filter((fileName) => pathModule.extname(fileName) === '.svg' && fileName !== 'sprite.svg');
+    },
   };
 });
 
@@ -38,7 +42,11 @@ const waitForFilesCount = async (dir: string, expectedCount: number, timeoutMs =
     if (Date.now() - start > timeoutMs) {
       return false;
     }
-    await new Promise((r) => setTimeout(r, pollInterval));
+
+    // eslint-disable-next-line no-await-in-loop -- polling must wait between checks
+    await new Promise((resolve) => {
+      setTimeout(resolve, pollInterval);
+    });
   }
 
   return false;
