@@ -1,4 +1,5 @@
 import spiritConfig from 'eslint-config-spirit';
+import spiritPrettier from 'eslint-config-spirit/prettier';
 import spiritStyle from 'eslint-config-spirit/style';
 
 export default [
@@ -22,6 +23,10 @@ export default [
 
       // Internal output folders
       'static',
+
+      // No JSON-aware parser is configured, so JSON/JSONC files (including tsconfig.json,
+      // which allows comments) fail to parse as plain JS. Nothing here lints JSON on purpose.
+      '**/*.json',
 
       // Skip packages that don’t need linting from root
       'apps/docsite',
@@ -47,5 +52,65 @@ export default [
     ],
   },
   ...spiritConfig,
+  ...spiritPrettier,
   ...spiritStyle,
+
+  {
+    // Standalone Node CLI scripts print to stdout/stderr by design.
+    files: ['.agents/skills/**/scripts/**'],
+    rules: {
+      'no-console': 'off',
+    },
+  },
+
+  {
+    // These packages are plain Node ESM with no build/bundle step, so relative imports
+    // must keep explicit extensions to resolve at runtime.
+    files: ['configs/*/**'],
+    rules: {
+      'import/extensions': ['error', 'ignorePackages'],
+    },
+  },
+
+  {
+    // Everything linted from the repo root (per the ignores above) is tooling: build/lint/test
+    // config, Storybook's own app, the demo app's Vite config, ambient type declarations. None
+    // of it ships to consumers, so devDependencies are the correct place for its imports. This
+    // extends airbnb's default `import/no-extraneous-dependencies` allowlist (see
+    // `--print-config`) with the patterns it doesn't already cover.
+    rules: {
+      'import/no-extraneous-dependencies': ['error', {
+        devDependencies: [
+          'config/**',
+          'test/**',
+          'tests/**',
+          'spec/**',
+          'scripts/*',
+          '**/scripts/**',
+          '**/__tests__/**',
+          '**/__mocks__/**',
+          'test.{js,jsx,ts,tsx}',
+          'test-*.{js,jsx,ts,tsx}',
+          '**/*{.,_}{test,spec}.{js,jsx,ts,tsx}',
+          '**/jest.setup.{,m,c}{j,t}s',
+          '**/vitest.setup.{,m,c}{j,t}s',
+          '**/gulpfile.{,m,c}{j,t}s',
+          '**/gulpfile.*.{,m,c}{j,t}s',
+          '**/Gruntfile{,.js}',
+          '**/.eslintrc.{,m,c}js',
+          '**/.prettierrc.{,m,c}js',
+          '**/.commitlintrc.{,m,c}js',
+          '**/.remarkrc.{,m,c}js',
+          '**/*.config.{,m,c}{j,t}s',
+          '**/*.config.*.{,m,c}{j,t}s',
+          '**/*.conf.{,m,c}{j,t}s',
+          '**/*.conf.*.{,m,c}{j,t}s',
+          '**/*.d.ts',
+          'apps/storybook/**',
+          'apps/demo/**',
+        ],
+        optionalDependencies: false,
+      }],
+    },
+  },
 ];
