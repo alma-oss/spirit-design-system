@@ -40,6 +40,34 @@ export function stripEmptyAnchorHeadings(markdown: string): string {
 
 const unescapeMarkdownUrl = (src: string): string => src.replace(/\\_/gu, '_');
 
+const HTML_ATTRIBUTE_ESCAPES: Record<string, string> = {
+  '&': '&amp;',
+  '"': '&quot;',
+  '<': '&lt;',
+  '>': '&gt;',
+};
+
+const escapeHtmlAttribute = (value: string): string =>
+  value.replace(/[&"<>]/gu, (char) => HTML_ATTRIBUTE_ESCAPES[char] ?? char);
+
+/**
+ * Iframe sources come from third-party markdown. Keep only http(s) URLs and
+ * escape them before they land in an HTML attribute.
+ */
+const iframeSrc = (src: string): string | null => {
+  try {
+    const url = new URL(unescapeMarkdownUrl(src.trim()));
+
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+      return null;
+    }
+
+    return escapeHtmlAttribute(url.href);
+  } catch {
+    return null;
+  }
+};
+
 const CARD_LINK = /\[\n+([^\n[\]]+)\n+(?:([^\n[\]]+)\n+)?\]\(([^)\s]+)\)/gu;
 
 /**
@@ -59,10 +87,15 @@ export function flattenMultilineMarkdownLinks(markdown: string): string {
 }
 
 export function restoreIframeEmbeds(markdown: string): string {
-  return markdown.replace(
-    iframePlaceholder,
-    (_full, src: string) => `<iframe src="${unescapeMarkdownUrl(src)}" title="Embedded content" />`,
-  );
+  return markdown.replace(iframePlaceholder, (_full, src: string) => {
+    const safeSrc = iframeSrc(src);
+
+    if (!safeSrc) {
+      return '';
+    }
+
+    return `<iframe src="${safeSrc}" title="Embedded content" />`;
+  });
 }
 
 const FENCE = /(```[\s\S]*?```)/u;

@@ -204,6 +204,13 @@ Spacing
 [Spacing](/design/global-tokens/spacing)`);
   });
 
+  it('escapes iframe src attributes and drops non-http urls', () => {
+    expect(
+      transformExtractedMarkdown('Embedded content: [iframe](https://example.com/embed?a=1&b=2)'),
+    ).toBe('<iframe src="https://example.com/embed?a=1&amp;b=2" title="Embedded content" />');
+    expect(transformExtractedMarkdown('Embedded content: [iframe](javascript:alert)')).toBe('');
+  });
+
   it('strips helper sibling tab lists', () => {
     const input = `*   [Animations](/latest/development/helpers/animations-abcDEF12)
 *   [Links](/latest/development/helpers/links-abcDEF12)
