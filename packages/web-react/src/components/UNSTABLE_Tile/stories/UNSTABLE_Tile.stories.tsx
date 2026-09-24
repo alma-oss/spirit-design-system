@@ -13,6 +13,14 @@ const meta: Meta<typeof UNSTABLE_Tile> = {
     },
   },
   argTypes: {
+    backgroundColor: {
+      control: 'text',
+      table: {
+        type: {
+          summary: 'BoxBackgroundColorsType',
+        },
+      },
+    },
     children: {
       control: 'text',
     },
@@ -59,13 +67,50 @@ const meta: Meta<typeof UNSTABLE_Tile> = {
         },
       },
     },
+    paddingTop: {
+      control: 'text',
+      table: {
+        type: {
+          summary: 'SpaceToken',
+        },
+      },
+    },
+    paddingRight: {
+      control: 'text',
+      table: {
+        type: {
+          summary: 'SpaceToken',
+        },
+      },
+    },
+    paddingBottom: {
+      control: 'text',
+      table: {
+        type: {
+          summary: 'SpaceToken',
+        },
+      },
+    },
+    paddingLeft: {
+      control: 'text',
+      table: {
+        type: {
+          summary: 'SpaceToken',
+        },
+      },
+    },
   },
   args: {
+    backgroundColor: undefined,
     children: 'Tile content',
     hasShadow: false,
     padding: undefined,
     paddingX: undefined,
     paddingY: undefined,
+    paddingTop: undefined,
+    paddingRight: undefined,
+    paddingBottom: undefined,
+    paddingLeft: undefined,
   },
 };
 

@@ -1,24 +1,18 @@
 import { type ElementType } from 'react';
-import type { ChildrenProps, PolymorphicComponentProps, SingleOrResponsive, SpaceToken, StyleProps } from '../../types';
+import type {
+  BoxBackgroundColorsType,
+  ChildrenProps,
+  PaddingProps,
+  PolymorphicComponentProps,
+  StyleProps,
+} from '../../types';
 
 /** ===== INTERNAL API ===== */
-export interface TileBaseProps extends ChildrenProps, StyleProps {
+export interface TileBaseProps extends ChildrenProps, StyleProps, PaddingProps {
+  /** The background color of the tile. */
+  backgroundColor?: BoxBackgroundColorsType;
   /** Whether the tile is raised with a shadow. */
   hasShadow?: boolean;
-  /** Padding of the tile. */
-  padding?: SingleOrResponsive<SpaceToken>;
-  /** Padding bottom of the tile. */
-  paddingBottom?: SingleOrResponsive<SpaceToken>;
-  /** Padding left of the tile. */
-  paddingLeft?: SingleOrResponsive<SpaceToken>;
-  /** Padding right of the tile. */
-  paddingRight?: SingleOrResponsive<SpaceToken>;
-  /** Padding top of the tile. */
-  paddingTop?: SingleOrResponsive<SpaceToken>;
-  /** Horizontal padding of the tile. */
-  paddingX?: SingleOrResponsive<SpaceToken>;
-  /** Vertical padding of the tile. */
-  paddingY?: SingleOrResponsive<SpaceToken>;
 }
 
 export type TileProps<E extends ElementType = 'div'> = PolymorphicComponentProps<E, TileBaseProps>;

@@ -1,7 +1,6 @@
 import React from 'react';
-import { ControlButton } from '../../ControlButton';
+import { CloseButton } from '../../CloseButton';
 import { Flex } from '../../Flex';
-import { Icon } from '../../Icon';
 import { UNSTABLE_Tile } from '..';
 
 const TileCustomBackground = () => (
@@ -9,25 +8,19 @@ const TileCustomBackground = () => (
     <UNSTABLE_Tile>
       <Flex alignmentX="space-between" alignmentY="center">
         <div>Default surface</div>
-        <ControlButton isSymmetrical aria-label="Close">
-          <Icon name="close" />
-        </ControlButton>
+        <CloseButton />
       </Flex>
     </UNSTABLE_Tile>
-    <UNSTABLE_Tile UNSAFE_className="bg-secondary">
+    <UNSTABLE_Tile backgroundColor="secondary">
       <Flex alignmentX="space-between" alignmentY="center">
-        <div>Secondary background from a utility class</div>
-        <ControlButton isSymmetrical aria-label="Close">
-          <Icon name="close" />
-        </ControlButton>
+        <div>Secondary background</div>
+        <CloseButton />
       </Flex>
     </UNSTABLE_Tile>
-    <UNSTABLE_Tile UNSAFE_className="bg-tertiary">
+    <UNSTABLE_Tile backgroundColor="tertiary">
       <Flex alignmentX="space-between" alignmentY="center">
-        <div>Tertiary background from a utility class</div>
-        <ControlButton isSymmetrical aria-label="Close">
-          <Icon name="close" />
-        </ControlButton>
+        <div>Tertiary background</div>
+        <CloseButton />
       </Flex>
     </UNSTABLE_Tile>
   </>

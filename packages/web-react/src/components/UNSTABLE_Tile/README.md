@@ -20,12 +20,11 @@ artwork, a body and a footer.
 
 ## Custom Background
 
-The tile renders the default surface. To recolor it, reach for a background utility class through the
-[`UNSAFE_className` escape hatch][readme-escape-hatches]. Components nested in the tile, such as
-[`ControlButton`][control-button], pick the new background up.
+The tile renders the default surface. Use the `backgroundColor` prop to recolor it. Components nested in the
+tile, such as [`ControlButton`][control-button], pick the new background up.
 
 ```tsx
-<UNSTABLE_Tile UNSAFE_className="bg-secondary">{/* Content goes here */}</UNSTABLE_Tile>
+<UNSTABLE_Tile backgroundColor="secondary">{/* Content goes here */}</UNSTABLE_Tile>
 ```
 
 ℹ️ Color schemes are not part of the tile's API. A tile keeps the default surface even inside a region
@@ -98,18 +97,19 @@ to space them.
 
 ## API
 
-| Name            | Type                                        | Default     | Required | Description                    |
-| --------------- | ------------------------------------------- | ----------- | -------- | ------------------------------ |
-| `children`      | `ReactNode`                                 | -           | ✕        | Content of the Tile            |
-| `elementType`   | `ElementType`                               | `div`       | ✕        | Type of element                |
-| `hasShadow`     | `bool`                                      | `false`     | ✕        | Whether the Tile has a shadow  |
-| `padding`       | \[`SpaceToken` \| `Responsive<SpaceToken>`] | `space-800` | ✕        | Padding of the Tile            |
-| `paddingX`      | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -           | ✕        | Horizontal padding of the Tile |
-| `paddingY`      | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -           | ✕        | Vertical padding of the Tile   |
-| `paddingTop`    | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -           | ✕        | Padding top of the Tile        |
-| `paddingRight`  | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -           | ✕        | Padding right of the Tile      |
-| `paddingBottom` | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -           | ✕        | Padding bottom of the Tile     |
-| `paddingLeft`   | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -           | ✕        | Padding left of the Tile       |
+| Name              | Type                                        | Default | Required | Description                    |
+| ----------------- | ------------------------------------------- | ------- | -------- | ------------------------------ |
+| `backgroundColor` | `BoxBackgroundColorsType`                   | -       | ✕        | Background color of the Tile   |
+| `children`        | `ReactNode`                                 | -       | ✕        | Content of the Tile            |
+| `elementType`     | `ElementType`                               | `div`   | ✕        | Type of element                |
+| `hasShadow`       | `bool`                                      | `false` | ✕        | Whether the Tile has a shadow  |
+| `padding`         | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -       | ✕        | Padding of the Tile            |
+| `paddingX`        | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -       | ✕        | Horizontal padding of the Tile |
+| `paddingY`        | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -       | ✕        | Vertical padding of the Tile   |
+| `paddingTop`      | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -       | ✕        | Padding top of the Tile        |
+| `paddingRight`    | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -       | ✕        | Padding right of the Tile      |
+| `paddingBottom`   | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -       | ✕        | Padding bottom of the Tile     |
+| `paddingLeft`     | \[`SpaceToken` \| `Responsive<SpaceToken>`] | -       | ✕        | Padding left of the Tile       |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

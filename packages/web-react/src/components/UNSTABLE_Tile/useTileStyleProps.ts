@@ -13,12 +13,14 @@ export interface UseTileStyleProps<E> {
 export const useTileStyleProps = (
   props: Partial<TileProps<ElementType>>,
 ): UseTileStyleProps<Partial<TileProps<ElementType>>> => {
-  const { hasShadow, ...restProps } = props || {};
+  const { backgroundColor, hasShadow, ...restProps } = props || {};
 
   const tileClass = useClassNamePrefix('UNSTABLE_Tile');
+  const backgroundColorClass = useClassNamePrefix(backgroundColor ? `bg-${backgroundColor}` : '');
   const hasShadowClass = `${tileClass}--shadow`;
 
   const classProps = classNames(tileClass, {
+    [backgroundColorClass]: Boolean(backgroundColor),
     [hasShadowClass]: hasShadow,
   });
 

@@ -18,6 +18,23 @@ describe('useTileStyleProps', () => {
     expect(result.current.classProps).toBe('UNSTABLE_Tile');
   });
 
+  it.each(['primary', 'secondary', 'tertiary', 'accent-01-basic'] as const)(
+    'should return the background color class for %s',
+    (backgroundColor) => {
+      const props: TileProps = { backgroundColor };
+      const { result } = renderHook(() => useTileStyleProps(props));
+
+      expect(result.current.classProps).toBe(`UNSTABLE_Tile bg-${backgroundColor}`);
+    },
+  );
+
+  it('should not pass backgroundColor to the rest props', () => {
+    const props: TileProps = { backgroundColor: 'secondary' };
+    const { result } = renderHook(() => useTileStyleProps(props));
+
+    expect(result.current.props).not.toHaveProperty('backgroundColor');
+  });
+
   it('should return the shadow modifier class', () => {
     const props: TileProps = { hasShadow: true };
     const { result } = renderHook(() => useTileStyleProps(props));
