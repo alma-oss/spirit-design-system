@@ -21,9 +21,7 @@ export default [
     ],
   },
   ...spiritConfig,
-  ...fixupConfigRules(
-    compat.extends('@lmc-eu/eslint-config-typescript', '@lmc-eu/eslint-config-jest'),
-  ),
+  ...fixupConfigRules(compat.extends('@lmc-eu/eslint-config-typescript', '@lmc-eu/eslint-config-jest')),
   ...spiritPrettier,
   {
     languageOptions: {
