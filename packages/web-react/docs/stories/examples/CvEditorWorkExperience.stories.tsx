@@ -157,7 +157,7 @@ export const CvEditorWorkExperience = () => {
       >
         <Stack spacing="space-1000">
           <Breadcrumbs
-            labelBack={{ key: 'breadcrumbs.back' }}
+            strings={{ label: { back: { key: 'breadcrumbs.back' } } }}
             items={[
               { title: 'Můj Jobs.cz', url: '#' },
               { title: 'Životopis', url: '#' },

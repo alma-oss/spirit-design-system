@@ -30,7 +30,7 @@ const items = [
 Simply pass the breadcrumbs array as a prop:
 
 ```tsx
-<Breadcrumbs items={items} labelBack={{ key: 'navigation.back' }} />
+<Breadcrumbs items={items} strings={{ label: { back: { key: 'navigation.back' } } }} />
 ```
 
 ### Custom Usage
@@ -55,10 +55,9 @@ Use custom content for the ordered list as component's children instead of passi
 | ------------- | ---------------------------------------------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------- |
 | `children`    | `ReactNode`                                          | —       | ✕        | Custom content to override items rendering from array                                                           |
 | `elementType` | `ElementType`                                        | `nav`   | ✕        | Type of element used as wrapper                                                                                 |
-| `labelBack`   | [`TranslatableString`][readme-component-strings]     | —       | ✕        | Back-link label on mobile; no Back item is rendered when omitted                                                |
-| `goBackTitle` | `string`                                             | —       | ✕        | _Deprecated, use `labelBack`_                                                                                   |
+| `goBackTitle` | `string`                                             | —       | ✕        | _Deprecated, use `strings.label.back`_                                                                          |
 | `items`       | `BreadcrumbsItem[]`                                  | —       | ✕        | Navigation menu items                                                                                           |
-| `strings`     | `{ ariaLabel? }`                                     | —       | ✕        | Root `aria-label` override ([`TranslatableString`][readme-component-strings]); default is localized `Breadcrumb` |
+| `strings`     | `{ ariaLabel?, label?: { back? } }`                  | —       | ✕        | Root `aria-label` (default localized `Breadcrumb`) and optional Back label ([`TranslatableString`][readme-component-strings]); no Back item is rendered when `label.back` is omitted |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -72,7 +71,7 @@ The `goBackTitle` prop is deprecated and will be removed in v6.
 
 ```diff
 - <Breadcrumbs goBackTitle="Back" />
-+ <Breadcrumbs labelBack={{ key: 'navigation.back' }} />
++ <Breadcrumbs strings={{ label: { back: { key: 'navigation.back' } } }} />
 ```
 
 ## BreadcrumbsItem

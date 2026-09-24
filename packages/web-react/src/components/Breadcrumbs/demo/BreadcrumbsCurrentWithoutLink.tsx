@@ -20,7 +20,7 @@ const BreadcrumbsDefault = () => {
     },
   ];
 
-  return <Breadcrumbs items={items} labelBack="Back" />;
+  return <Breadcrumbs items={items} strings={{ label: { back: 'Back' } }} />;
 };
 
 export default BreadcrumbsDefault;

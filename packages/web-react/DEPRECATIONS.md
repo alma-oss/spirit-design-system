@@ -16,7 +16,7 @@ npx @alma-oss/spirit-codemods -p <path> -t v6/web-react/component-strings-prop
 
 ### Breadcrumbs
 
-The `goBackTitle` prop is deprecated and will be removed in v6. Use `labelBack` instead.
+The `goBackTitle` prop is deprecated and will be removed in v6. Use `strings.label.back` instead.
 
 #### Migration Guide
 
@@ -25,7 +25,7 @@ The `goBackTitle` prop is deprecated and will be removed in v6. Use `labelBack` 
 <Breadcrumbs goBackTitle="Back" />
 
 // After
-<Breadcrumbs labelBack="Back" />
+<Breadcrumbs strings={{ label: { back: 'Back' } }} />
 ```
 
 ### CloseButton

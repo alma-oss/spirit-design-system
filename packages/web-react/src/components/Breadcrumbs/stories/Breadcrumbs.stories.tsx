@@ -19,16 +19,15 @@ const meta: Meta<typeof Breadcrumbs> = {
         defaultValue: { summary: 'nav' },
       },
     },
-    labelBack: {
-      control: 'text',
-      table: {
-        defaultValue: { summary: 'Back' },
-      },
+    strings: {
+      control: 'object',
     },
   },
   args: {
     elementType: 'nav',
-    labelBack: 'Back',
+    strings: {
+      label: { back: 'Back' },
+    },
     items: [
       {
         title: 'Root',
