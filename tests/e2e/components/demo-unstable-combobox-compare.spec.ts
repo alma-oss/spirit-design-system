@@ -56,7 +56,9 @@ const getLocationsInputId = (packageName: string): string =>
   packageName === 'web' ? INPUT_IDS.web.locations : INPUT_IDS['web-react'].locations;
 
 const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) { return; }
+  if (!packageName) {
+    return;
+  }
 
   const formattedPackageName = formatPackageName(packageName);
 

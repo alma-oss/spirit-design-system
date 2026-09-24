@@ -10,7 +10,9 @@ type TestConfig = {
 };
 
 const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) { return; }
+  if (!packageName) {
+    return;
+  }
 
   const formattedPackageName = formatPackageName(packageName);
 
