@@ -1,6 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
+import { BackgroundColors } from '../../../constants';
 import ReadMe from '../README.md?raw';
 import { UNSTABLE_Tile } from '..';
 
@@ -14,10 +15,11 @@ const meta: Meta<typeof UNSTABLE_Tile> = {
   },
   argTypes: {
     backgroundColor: {
-      control: 'text',
+      control: 'select',
+      options: [...Object.values(BackgroundColors)],
       table: {
         type: {
-          summary: 'BoxBackgroundColorsType',
+          summary: 'BackgroundColorsDictionaryType',
         },
       },
     },

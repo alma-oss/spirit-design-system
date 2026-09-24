@@ -1,6 +1,6 @@
 import { type ElementType } from 'react';
 import type {
-  BoxBackgroundColorsType,
+  BackgroundColorsDictionaryType,
   ChildrenProps,
   PaddingProps,
   PolymorphicComponentProps,
@@ -10,7 +10,7 @@ import type {
 /** ===== INTERNAL API ===== */
 export interface TileBaseProps extends ChildrenProps, StyleProps, PaddingProps {
   /** The background color of the tile. */
-  backgroundColor?: BoxBackgroundColorsType;
+  backgroundColor?: BackgroundColorsDictionaryType;
   /** Whether the tile is raised with a shadow. */
   hasShadow?: boolean;
 }

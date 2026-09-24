@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react';
+import { BackgroundColors } from '../../../constants';
 import { type TileProps } from '../types';
 import { useTileStyleProps } from '../useTileStyleProps';
 
@@ -18,15 +19,12 @@ describe('useTileStyleProps', () => {
     expect(result.current.classProps).toBe('UNSTABLE_Tile');
   });
 
-  it.each(['primary', 'secondary', 'tertiary', 'accent-01-basic'] as const)(
-    'should return the background color class for %s',
-    (backgroundColor) => {
-      const props: TileProps = { backgroundColor };
-      const { result } = renderHook(() => useTileStyleProps(props));
+  it.each([Object.values(BackgroundColors)])('should return the background color class for %s', (backgroundColor) => {
+    const props: TileProps = { backgroundColor };
+    const { result } = renderHook(() => useTileStyleProps(props));
 
-      expect(result.current.classProps).toBe(`UNSTABLE_Tile bg-${backgroundColor}`);
-    },
-  );
+    expect(result.current.classProps).toBe(`UNSTABLE_Tile bg-${backgroundColor}`);
+  });
 
   it('should not pass backgroundColor to the rest props', () => {
     const props: TileProps = { backgroundColor: 'secondary' };

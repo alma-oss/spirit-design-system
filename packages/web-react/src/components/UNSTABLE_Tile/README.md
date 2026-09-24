@@ -99,7 +99,7 @@ to space them.
 
 | Name              | Type                                        | Default | Required | Description                    |
 | ----------------- | ------------------------------------------- | ------- | -------- | ------------------------------ |
-| `backgroundColor` | `BoxBackgroundColorsType`                   | -       | ✕        | Background color of the Tile   |
+| `backgroundColor` | `BackgroundColorsDictionaryType`            | -       | ✕        | Background color of the Tile   |
 | `children`        | `ReactNode`                                 | -       | ✕        | Content of the Tile            |
 | `elementType`     | `ElementType`                               | `div`   | ✕        | Type of element                |
 | `hasShadow`       | `bool`                                      | `false` | ✕        | Whether the Tile has a shadow  |

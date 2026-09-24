@@ -10,6 +10,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { BackgroundColors } from '../../../constants';
 import UNSTABLE_Tile from '../UNSTABLE_Tile';
 
 const paddingProvider = [
@@ -79,14 +80,11 @@ describe('UNSTABLE_Tile', () => {
     expect(screen.getByText('Tile content')).not.toHaveClass('UNSTABLE_Tile--shadow');
   });
 
-  it.each(['primary', 'secondary', 'tertiary', 'accent-01-basic'] as const)(
-    'should render the background color %s',
-    (backgroundColor) => {
-      render(<UNSTABLE_Tile backgroundColor={backgroundColor}>Tile content</UNSTABLE_Tile>);
+  it.each([Object.values(BackgroundColors)])('should render the background color %s', (backgroundColor) => {
+    render(<UNSTABLE_Tile backgroundColor={backgroundColor}>Tile content</UNSTABLE_Tile>);
 
-      expect(screen.getByText('Tile content')).toHaveClass(`bg-${backgroundColor}`);
-    },
-  );
+    expect(screen.getByText('Tile content')).toHaveClass(`bg-${backgroundColor}`);
+  });
 
   it('should render the shadow modifier when hasShadow is set', () => {
     render(<UNSTABLE_Tile hasShadow>Tile content</UNSTABLE_Tile>);
