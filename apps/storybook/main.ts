@@ -1,7 +1,7 @@
-import type { StorybookConfig } from '@storybook/react-vite';
-import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { type StorybookConfig } from '@storybook/react-vite';
+import react from '@vitejs/plugin-react';
 import { mergeConfig } from 'vite';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
@@ -22,7 +22,7 @@ const config: StorybookConfig = {
   tags: {
     figma: {
       excludeFromSidebar: isProd,
-      ...(isProd && { defaultFilterSelection: 'exclude' as const }),
+      ...isProd && { defaultFilterSelection: 'exclude' as const },
     },
   },
 
