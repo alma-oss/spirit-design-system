@@ -20,6 +20,7 @@ import {
   ToastBarMessage,
   Toggle,
 } from '../../../src/components';
+import CvExampleI18n from './CvExampleI18n';
 
 const MONTHS = [
   { value: '1', label: 'Leden' },
@@ -117,7 +118,7 @@ export const CvEditorWorkExperience = () => {
   };
 
   return (
-    <>
+    <CvExampleI18n>
       <Toast alignmentX="center" alignmentY="top">
         <ToastBar
           id="cv-work-experience-error-toast"
@@ -156,7 +157,7 @@ export const CvEditorWorkExperience = () => {
       >
         <Stack spacing="space-1000">
           <Breadcrumbs
-            labelBack="Zpět"
+            labelBack={{ key: 'breadcrumbs.back' }}
             items={[
               { title: 'Můj Jobs.cz', url: '#' },
               { title: 'Životopis', url: '#' },
@@ -300,6 +301,6 @@ export const CvEditorWorkExperience = () => {
           </ActionGroup>
         </Stack>
       </Section>
-    </>
+    </CvExampleI18n>
   );
 };

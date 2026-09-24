@@ -12,6 +12,7 @@ import {
   Stack,
   TextField,
 } from '../../../src/components';
+import CvExampleI18n from './CvExampleI18n';
 
 export default {
   title: 'Examples/Pages',
@@ -22,11 +23,11 @@ export const CvEditorPersonalDetails = () => {
   const [showTitle, setShowTitle] = useState(false);
 
   return (
-    <>
+    <CvExampleI18n>
       <Section elementType="div" backgroundColor="secondary" containerProps={{ size: 'small' }} paddingTop="space-1000">
         <Stack spacing="space-1000">
           <Breadcrumbs
-            labelBack="Zpět"
+            labelBack={{ key: 'breadcrumbs.back' }}
             items={[{ title: 'Můj Jobs.cz', url: '#' }, { title: 'Životopis', url: '#' }, { title: 'Osobní údaje' }]}
           />
           <Heading
@@ -122,6 +123,6 @@ export const CvEditorPersonalDetails = () => {
           </form>
         </Stack>
       </Section>
-    </>
+    </CvExampleI18n>
   );
 };

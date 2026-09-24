@@ -30,6 +30,7 @@ import {
   VisuallyHidden,
 } from '../../../src/components';
 import { useToggle } from '../../../src/hooks';
+import CvExampleI18n from './CvExampleI18n';
 
 export default {
   title: 'Examples/Pages',
@@ -100,11 +101,11 @@ export const CvBuilderPublish = () => {
   // @ts-ignore
   // @ts-ignore
   return (
-    <>
+    <CvExampleI18n>
       <Section elementType="div" containerProps={{ size: 'large' }} paddingTop="space-1000">
         <Stack spacing="space-1000">
           <Breadcrumbs
-            labelBack="Zpět"
+            labelBack={{ key: 'breadcrumbs.back' }}
             items={[
               { title: 'Můj Jobs.cz', url: '#' },
               { title: 'Životopis', url: '#' },
@@ -386,6 +387,6 @@ export const CvBuilderPublish = () => {
           </Box>
         </Stack>
       </Section>
-    </>
+    </CvExampleI18n>
   );
 };
