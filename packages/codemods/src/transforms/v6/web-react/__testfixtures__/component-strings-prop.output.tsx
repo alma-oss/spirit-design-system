@@ -18,6 +18,7 @@ export const Example = () => (
     <DismissButton strings={{
       ariaLabel: "Close"
     }} />
+    <DismissButton label />
     <File
       strings={{
         ariaLabelEdit: "Edit",
@@ -53,6 +54,7 @@ export const Example = () => (
       ariaStart: "Left",
       ariaEnd: "Right"
     }} />
+    <ScrollView hasControls />
     <CloseButton label="Local component" />
     <PaginationButtonLink accessibilityLabel="Unchanged deprecated component" />
     <File editText="Keep" strings={fileStrings} />

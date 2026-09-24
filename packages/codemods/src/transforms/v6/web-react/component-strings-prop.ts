@@ -197,7 +197,7 @@ const migrateRenames = (element: JSXOpeningElement, migrations: PropertyMigratio
  * @param j - JSCodeshift factory used to create new AST nodes.
  * @param element - JSX element to migrate.
  * @param migrations - Deprecated-to-current key mappings for the component.
- * @returns {boolean} Whether at least one deprecated attribute was eligible for migration.
+ * @returns {boolean} Whether at least one deprecated attribute was migrated or dropped as a duplicate.
  */
 const migrateFoldedProperties = (
   j: API['jscodeshift'],
@@ -223,23 +223,27 @@ const migrateFoldedProperties = (
     return false;
   }
 
-  if (!stringsObject) {
-    stringsObject = j.objectExpression([]);
-    element.attributes?.push(j.jsxAttribute(j.jsxIdentifier('strings'), j.jsxExpressionContainer(stringsObject)));
-  }
+  let didChange = false;
 
   oldAttributes.forEach(({ migration, attribute }) => {
     const expression = getAttributeExpression(j, attribute);
 
-    if (hasObjectProperty(stringsObject, migration.to)) {
+    if (stringsObject && hasObjectProperty(stringsObject, migration.to)) {
       element.attributes = element.attributes?.filter((item) => item !== attribute);
+      didChange = true;
     } else if (expression) {
+      if (!stringsObject) {
+        stringsObject = j.objectExpression([]);
+        element.attributes?.push(j.jsxAttribute(j.jsxIdentifier('strings'), j.jsxExpressionContainer(stringsObject)));
+      }
+
       stringsObject.properties.push(j.objectProperty(j.identifier(migration.to), expression));
       element.attributes = element.attributes?.filter((item) => item !== attribute);
+      didChange = true;
     }
   });
 
-  return true;
+  return didChange;
 };
 
 const getObjectProperty = (object: ObjectExpression, name: string): ObjectProperty | undefined =>
@@ -288,18 +292,18 @@ const migrateFoldedObject = (
     return false;
   }
 
-  if (!stringsObject) {
-    stringsObject = j.objectExpression([]);
-    element.attributes?.push(j.jsxAttribute(j.jsxIdentifier('strings'), j.jsxExpressionContainer(stringsObject)));
-  }
-
   const nestedObject = oldAttribute.value.expression;
 
   migration.keys.forEach(({ from, to }) => {
     const nestedProperty = getObjectProperty(nestedObject, from);
 
-    if (!nestedProperty || hasObjectProperty(stringsObject, to)) {
+    if (!nestedProperty || (stringsObject && hasObjectProperty(stringsObject, to))) {
       return;
+    }
+
+    if (!stringsObject) {
+      stringsObject = j.objectExpression([]);
+      element.attributes?.push(j.jsxAttribute(j.jsxIdentifier('strings'), j.jsxExpressionContainer(stringsObject)));
     }
 
     stringsObject.properties.push(j.objectProperty(j.identifier(to), nestedProperty.value));

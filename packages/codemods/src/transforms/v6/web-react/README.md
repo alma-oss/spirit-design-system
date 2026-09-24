@@ -12,7 +12,9 @@ This codemod renames required string props and moves optional component copy int
 Existing object-literal `strings` values are preserved when the new key is already present.
 
 Dynamic `strings` values, object literals with spreads, and elements with JSX spreads are left unchanged because
-their runtime keys cannot be merged safely.
+their runtime keys cannot be merged safely. Boolean attributes without a value (for example `label`) stay as-is
+instead of adding an empty `strings={{}}`. Empty object-literal fold sources such as `ariaLabelControls={{}}` are
+removed without creating `strings`.
 
 #### Usage
 
