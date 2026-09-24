@@ -26,6 +26,32 @@ export default [
   ...storybook.configs['flat/recommended'],
 
   {
+    // `eslint-import-resolver-node` (the default) can't follow packages whose `package.json`
+    // only declares an `exports` map (e.g. `eslint-plugin-storybook`, `@storybook/mcp`, and
+    // this monorepo's own workspace packages), so it wrongly reports them as unresolved.
+    // `eslint-import-resolver-typescript` understands `exports` maps and TS path mapping,
+    // and we explicitly point it at the repo's TypeScript projects to keep workspace
+    // packages resolvable when linting from the repository root.
+    settings: {
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.mjs', '.cjs', '.jsx', '.ts', '.tsx'],
+        },
+        typescript: {
+          alwaysTryTypes: true,
+          project: [
+            './tsconfig.json',
+            './apps/*/tsconfig.json',
+            './packages/*/tsconfig.json',
+            './configs/*/tsconfig.json',
+            './examples/*/tsconfig.json',
+            './exporters/*/tsconfig.json',
+          ],
+        },
+      },
+    },
+  },
+  {
     languageOptions: {
       ecmaVersion: 'latest',
       globals: { ...globals.browser, ...globals.node },
