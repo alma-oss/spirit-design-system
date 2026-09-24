@@ -1,7 +1,7 @@
 import { isTesting } from '@alma-oss/spirit-common/constants/environments';
 import { SERVERS, getDevelopmentEndpointUri } from '@alma-oss/spirit-common/constants/servers';
-import { test } from '../helpers/fixtures';
 import { hideFromVisualTests, retryPageGoto, takeScreenshot, waitForPageLoad } from '../helpers';
+import { test } from '../helpers/fixtures';
 
 test.describe('Demo Homepages', () => {
   const demos = [
