@@ -6,7 +6,6 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { ESLint } from 'eslint';
-// eslint-disable-next-line import/extensions -- plain Node ESM requires the extension here
 import htmlConfig from '../html.js';
 
 describe('eslint-config-spirit/html', () => {

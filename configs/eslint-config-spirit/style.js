@@ -43,10 +43,6 @@ export default [
       // @see { @link } https://eslint.style/rules/array-bracket-newline
       '@stylistic/array-bracket-newline': ['error', 'consistent'],
 
-      // Enforce consistent line breaks before and after function parentheses
-      // @see { @link } https://eslint.style/rules/function-paren-newline
-      'function-paren-newline': ['error', 'consistent'],
-
       // Require parens in arrow function arguments
       // Arrow functions can omit parentheses when they have exactly one parameter. Since their main
       // strength lies in being short and concise, parens around arguments should be omitted when they
@@ -64,8 +60,6 @@ export default [
       // Let the developer decide whether to use implicit linebreaks in arrow functions
       // @see { @link } https://eslint.style/rules/implicit-arrow-linebreak
       '@stylistic/implicit-arrow-linebreak': ['off'],
-      // @todo: Remove this rule after upgrade to ESLint 9
-      'implicit-arrow-linebreak': ['off'],
 
       // Quoting Style for Property Names
       // This rule aims to enforce use of quotes in property names.
@@ -76,11 +70,14 @@ export default [
 
       // @see { @link } https://eslint.style/rules/no-confusing-arrow
       '@stylistic/no-confusing-arrow': ['error', { onlyOneSimpleParam: true }],
-      // @todo: Remove this rule after upgrade to ESLint 9
-      'no-confusing-arrow': ['error', { onlyOneSimpleParam: true }],
 
-      // @todo: Remove this rule after upgrade to ESLint 9
-      indent: ['off'],
+      // `eslint-config-prettier` (applied before this config) already turns off the legacy
+      // (core) equivalents of the `@stylistic/*` rules throughout this file. The rules below
+      // aren't covered by it and still get enabled a second time by the airbnb base config
+      // pulled in via FlatCompat, so they need an explicit `off` here.
+      'lines-between-class-members': ['off'],
+      'spaced-comment': ['off'],
+      'padding-line-between-statements': ['off'],
 
       // Disallow or enforce spaces inside of brackets
       // Disallow

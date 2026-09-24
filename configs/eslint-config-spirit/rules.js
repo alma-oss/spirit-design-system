@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/extensions -- plain Node ESM requires the extension here
 import noXlinkHref from './rules/no-xlink-href.js';
 
 export default [

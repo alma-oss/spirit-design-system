@@ -1,7 +1,6 @@
 import { describe, it } from 'node:test';
 import htmlParser from '@html-eslint/parser';
 import { RuleTester } from 'eslint';
-// eslint-disable-next-line import/extensions -- plain Node ESM requires the extension here
 import rule from '../no-xlink-href.js';
 
 RuleTester.describe = describe;
