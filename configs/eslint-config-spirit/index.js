@@ -92,10 +92,8 @@ export default [
     // below) — flat config treats two different module instances under the same key as a clash.
     files: jestRuleFileGlobs,
     plugins: { 'spirit-jest': jest },
-    rules: Object.fromEntries(
-      Object.entries({ ...jest.configs['flat/recommended'].rules, ...jest.configs['flat/style'].rules })
-        .map(([rule, severity]) => [rule.replace(/^jest\//, 'spirit-jest/'), severity]),
-    ),
+    rules: Object.fromEntries(Object.entries({ ...jest.configs['flat/recommended'].rules, ...jest.configs['flat/style'].rules })
+      .map(([rule, severity]) => [rule.replace(/^jest\//, 'spirit-jest/'), severity])),
   },
 
   {
