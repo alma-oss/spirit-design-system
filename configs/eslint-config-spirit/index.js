@@ -181,7 +181,7 @@ export default [
     // Registered under a spirit-namespaced key to avoid "Cannot redefine plugin" collisions
     // with whatever copy of `eslint-plugin-jest-formatting` `@lmc-eu/eslint-config-jest`
     // resolves internally (and to not depend on its overrides matching these file globs).
-    files: ['test/**', 'tests/**', '**/*.test.*', '**/*.spec.*'],
+    files: testFileGlobs,
     plugins: {
       'spirit-jest-formatting': jestFormatting,
     },
