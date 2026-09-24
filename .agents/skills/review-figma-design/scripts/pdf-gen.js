@@ -55,10 +55,6 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 // --- Local HTTP server for the HTML directory ------------------------------
 // Chrome CDP blocks file:// navigation; serving over localhost sidesteps it.
 
-/**
- *
- * @param htmlPath
- */
 function startServer(htmlPath) {
   const dir = path.dirname(path.resolve(htmlPath));
   const file = path.basename(htmlPath);
@@ -89,9 +85,6 @@ function startServer(htmlPath) {
 
 // --- Helpers ---------------------------------------------------------------
 
-/**
- *
- */
 function getFreePort() {
   return new Promise((resolve, reject) => {
     const srv = net.createServer();
@@ -103,11 +96,6 @@ function getFreePort() {
   });
 }
 
-/**
- *
- * @param url
- * @param timeoutMs
- */
 function httpGet(url, timeoutMs = 5000) {
   return new Promise((resolve, reject) => {
     const req = http.get(url, (res) => {
@@ -125,9 +113,6 @@ function httpGet(url, timeoutMs = 5000) {
 
 // --- Chrome CDP ------------------------------------------------------------
 
-/**
- *
- */
 async function run() {
   const CDP_PORT = await getFreePort();
   const userDataDir = `/tmp/chrome-pdf-${Date.now()}`;
@@ -164,13 +149,17 @@ async function run() {
       }
     }
 
-    if (!jsonData) { throw new Error('Chrome CDP did not become ready'); }
+    if (!jsonData) {
+      throw new Error('Chrome CDP did not become ready');
+    }
 
     // Find the main page tab (type:"page"), not extension background pages
     const tabs = JSON.parse(jsonData);
     const tab = tabs.find((t) => t.type === 'page' && t.webSocketDebuggerUrl);
 
-    if (!tab) { throw new Error('No debuggable page tab found'); }
+    if (!tab) {
+      throw new Error('No debuggable page tab found');
+    }
     const wsUrl = tab.webSocketDebuggerUrl;
 
     // Connect via WebSocket (Node.js 22+ built-in)
@@ -218,9 +207,13 @@ async function run() {
       footerTemplate,
     });
 
-    if (result.error) { throw new Error(`CDP error: ${result.error.message}`); }
+    if (result.error) {
+      throw new Error(`CDP error: ${result.error.message}`);
+    }
 
-    if (!result.result?.data) { throw new Error('Page.printToPDF returned no data'); }
+    if (!result.result?.data) {
+      throw new Error('Page.printToPDF returned no data');
+    }
 
     fs.writeFileSync(PDF, Buffer.from(result.result.data, 'base64'));
     ws.close();
