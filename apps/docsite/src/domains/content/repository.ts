@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { isValidComponentSlug, slugToComponentName } from '../components/utils/componentSlug';
+import { componentDocsDirectory, componentDocTabs, type ComponentDocTab } from '../routing/routes';
 import { DOC_SECTIONS, isDocSection, isSafeSlug } from './constants';
 import { slugToDisplayName, titleForSiblingPage } from './pageTitle';
 import { parseCanonicalFrontmatter } from './parseFrontmatter';
@@ -13,7 +14,12 @@ import {
   listRepoDocAliases,
 } from './repoAliases';
 
-export type CanonicalFileKind = 'page' | 'generated-index';
+export const CANONICAL_FILE_KIND = {
+  page: 'page',
+  generatedIndex: 'generated-index',
+} as const;
+
+export type CanonicalFileKind = (typeof CANONICAL_FILE_KIND)[keyof typeof CANONICAL_FILE_KIND];
 
 export interface ResolvedCanonicalFile {
   kind: CanonicalFileKind;
@@ -35,16 +41,16 @@ export interface ComponentTabAvailability {
   figma: boolean;
 }
 
-export type ComponentTab = keyof ComponentTabAvailability;
+export type ComponentTab = ComponentDocTab;
 
-const COMPONENT_TABS: ComponentTab[] = ['overview', 'design', 'accessibility', 'figma'];
+const isComponentDocTab = (tab: string): tab is ComponentTab => (componentDocTabs as readonly string[]).includes(tab);
 
 export const resolveComponentTabFile = (slug: string, tab: ComponentTab, repoRoot = getRepoRoot()): string | null => {
-  if (!isValidComponentSlug(slug) || !COMPONENT_TABS.includes(tab)) {
+  if (!isValidComponentSlug(slug) || !isComponentDocTab(tab)) {
     return null;
   }
 
-  return path.join(repoRoot, 'packages/web-react/src/components', slugToComponentName(slug), 'docs', `${tab}.md`);
+  return path.join(repoRoot, componentDocsDirectory, slugToComponentName(slug), 'docs', `${tab}.md`);
 };
 
 const fileExists = async (filePath: string): Promise<boolean> => {
@@ -109,7 +115,7 @@ export const resolveCanonicalFile = async (
 
     if (alias) {
       return {
-        kind: 'page',
+        kind: CANONICAL_FILE_KIND.page,
         filePath: path.join(repoRoot, alias.repoPath),
         isCanonical: false,
         title: alias.title,
@@ -118,19 +124,19 @@ export const resolveCanonicalFile = async (
   }
 
   if (await fileExists(asFile)) {
-    return { kind: 'page', filePath: asFile, isCanonical: true };
+    return { kind: CANONICAL_FILE_KIND.page, filePath: asFile, isCanonical: true };
   }
 
   if (await fileExists(asIndex)) {
-    return { kind: 'page', filePath: asIndex, isCanonical: true };
+    return { kind: CANONICAL_FILE_KIND.page, filePath: asIndex, isCanonical: true };
   }
 
   if (repoRoot && (await hasRepoDocAliasChildren(slug, repoRoot))) {
-    return { kind: 'generated-index', filePath: asDir, isCanonical: false };
+    return { kind: CANONICAL_FILE_KIND.generatedIndex, filePath: asDir, isCanonical: false };
   }
 
   if (await dirExists(asDir)) {
-    return { kind: 'generated-index', filePath: asDir, isCanonical: true };
+    return { kind: CANONICAL_FILE_KIND.generatedIndex, filePath: asDir, isCanonical: true };
   }
 
   return null;
@@ -168,7 +174,7 @@ export const getComponentTabAvailability = async (
   repoRoot = getRepoRoot(),
 ): Promise<ComponentTabAvailability> => {
   const availability = await Promise.all(
-    COMPONENT_TABS.map(async (tab) => {
+    componentDocTabs.map(async (tab) => {
       const filePath = resolveComponentTabFile(slug, tab, repoRoot);
 
       return filePath ? fileExists(filePath) : false;

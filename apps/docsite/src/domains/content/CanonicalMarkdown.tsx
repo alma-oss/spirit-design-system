@@ -2,6 +2,7 @@ import { compileCanonicalSource } from '@local/domains/content/compileCanonicalM
 import { prepareMarkdownSource } from '@local/domains/content/prepareMarkdownSource';
 import { readAllowedMarkdown, readCanonicalFile } from '@local/domains/content/repository';
 import { notFound } from 'next/navigation';
+import styles from './CanonicalMarkdown.module.scss';
 
 interface CanonicalMarkdownProps {
   relativePath?: string;
@@ -46,7 +47,7 @@ const CanonicalMarkdown = async ({
 
   const { content } = await compileCanonicalSource(raw);
 
-  return <div className="docs-Markdown">{content}</div>;
+  return <div className={styles.markdown}>{content}</div>;
 };
 
 export default CanonicalMarkdown;

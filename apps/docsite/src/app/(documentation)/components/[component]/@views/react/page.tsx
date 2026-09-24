@@ -1,4 +1,5 @@
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
+import markdownStyles from '@local/domains/content/CanonicalMarkdown.module.scss';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
@@ -21,7 +22,7 @@ const ReactTabPage = async ({ params }: ReactTabProps) => {
     );
 
     return (
-      <div className="docs-Markdown">
+      <div className={markdownStyles.markdown}>
         <ReadMe />
       </div>
     );

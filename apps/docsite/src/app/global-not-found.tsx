@@ -6,7 +6,6 @@ import { fontshareApiUrl, generalSansStylesheet } from '@local/ui/fonts';
 import { Metadata } from 'next';
 import '../ui/globals.scss';
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
   title: 'Page Not Found | Spirit Design System',
   description: 'The page you are looking for does not exist.',

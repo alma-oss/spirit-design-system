@@ -1,5 +1,12 @@
 import CanonicalMarkdown from '@local/domains/content/CanonicalMarkdown';
-import { listDocSlugs, listSectionNav, resolveCanonicalFile, type NavNode } from '@local/domains/content/repository';
+import markdownStyles from '@local/domains/content/CanonicalMarkdown.module.scss';
+import {
+  CANONICAL_FILE_KIND,
+  listDocSlugs,
+  listSectionNav,
+  resolveCanonicalFile,
+  type NavNode,
+} from '@local/domains/content/repository';
 import NextLink from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -26,7 +33,7 @@ const findNavNode = (nodes: NavNode[], href: string): NavNode | undefined => {
 };
 
 const GeneratedIndex = ({ nodes }: { nodes: NavNode[] }) => (
-  <div className="docs-Markdown">
+  <div className={markdownStyles.markdown}>
     <ul>
       {nodes.map((node) => (
         <li key={node.href}>
@@ -45,7 +52,7 @@ const DocsSlugPage = async ({ params }: DocsSlugPageProps) => {
     notFound();
   }
 
-  if (resolved.kind === 'generated-index') {
+  if (resolved.kind === CANONICAL_FILE_KIND.generatedIndex) {
     const sectionNav = await listSectionNav(slug[0] ?? '');
     const href = `/${slug.join('/')}`;
     const nodes = slug.length === 1 ? sectionNav : (findNavNode(sectionNav, href)?.children ?? []);
@@ -56,7 +63,6 @@ const DocsSlugPage = async ({ params }: DocsSlugPageProps) => {
   return <CanonicalMarkdown isCanonical={resolved.isCanonical} missing="not-found" filePath={resolved.filePath} />;
 };
 
-// eslint-disable-next-line react-refresh/only-export-components -- Next.js static params belong on the page module
 export const generateStaticParams = async () => {
   const slugs = await listDocSlugs();
 

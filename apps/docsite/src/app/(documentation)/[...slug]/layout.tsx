@@ -4,10 +4,11 @@ import { isDocSection, isSafeSlug } from '@local/domains/content/constants';
 import { slugToDisplayName, titleForSiblingPage } from '@local/domains/content/pageTitle';
 import { parseCanonicalFrontmatter } from '@local/domains/content/parseFrontmatter';
 import { listSectionNav, resolveCanonicalFile } from '@local/domains/content/repository';
-import DocsCover from '@local/domains/content/ui/DocsCover';
-import DocsSidebar from '@local/domains/content/ui/DocsSidebar';
+import Cover from '@local/domains/content/ui/Cover';
+import Sidebar from '@local/domains/content/ui/Sidebar';
 import { notFound } from 'next/navigation';
 import { type ReactNode } from 'react';
+import styles from './layout.module.scss';
 
 interface DocsSlugLayoutProps {
   children: ReactNode;
@@ -48,11 +49,11 @@ const DocsSlugLayout = async ({ children, params }: DocsSlugLayoutProps) => {
 
   return (
     <>
-      <DocsCover title={title} crumbs={crumbs} />
+      <Cover title={title} crumbs={crumbs} />
       <Section size="xlarge">
         <Flex alignmentX="stretch" alignmentY="stretch" spacing="space-1200">
-          {nav.length > 0 && <DocsSidebar nodes={nav} currentPath={currentPath} />}
-          <div className="docs-SectionBody">{children}</div>
+          {nav.length > 0 && <Sidebar nodes={nav} currentPath={currentPath} />}
+          <div className={styles.sectionBody}>{children}</div>
         </Flex>
       </Section>
     </>

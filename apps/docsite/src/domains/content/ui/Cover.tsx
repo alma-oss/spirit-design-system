@@ -6,7 +6,7 @@ interface DocsCoverProps {
   crumbs: { name: string; href: string }[];
 }
 
-const DocsCover = ({ title, crumbs }: DocsCoverProps) => (
+const Cover = ({ title, crumbs }: DocsCoverProps) => (
   <Section size="xlarge">
     <Heading elementType="h1" size="xlarge" emphasis="bold">
       {title}
@@ -22,4 +22,4 @@ const DocsCover = ({ title, crumbs }: DocsCoverProps) => (
   </Section>
 );
 
-export default DocsCover;
+export default Cover;

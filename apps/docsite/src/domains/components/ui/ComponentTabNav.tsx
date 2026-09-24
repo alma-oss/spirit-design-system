@@ -55,28 +55,26 @@ const ComponentTabNav = ({ views, component, tabs }: ComponentTabNavProps) => {
 
   return (
     <>
-      <section className="d-grid breakout-container">
-        <Container>
-          <div className="d-grid">
-            <ScrollView direction="horizontal" isScrollbarDisabled overflowDecorators="shadows">
-              <Navigation aria-label="Component documentation">
-                {items.map((item) => (
-                  <NavigationItem key={item.segment}>
-                    <NavigationAction
-                      elementType={NextLink}
-                      href={item.href}
-                      {...{ 'aria-current': selectedNav === item.segment ? 'page' : undefined }}
-                      isSelected={selectedNav === item.segment}
-                    >
-                      {item.label}
-                    </NavigationAction>
-                  </NavigationItem>
-                ))}
-              </Navigation>
-            </ScrollView>
-          </div>
-        </Container>
-      </section>
+      <Container>
+        <div className="d-grid">
+          <ScrollView direction="horizontal" isScrollbarDisabled>
+            <Navigation aria-label="Component documentation">
+              {items.map((item) => (
+                <NavigationItem key={item.segment}>
+                  <NavigationAction
+                    elementType={NextLink}
+                    href={item.href}
+                    {...{ 'aria-current': selectedNav === item.segment ? 'page' : undefined }}
+                    isSelected={selectedNav === item.segment}
+                  >
+                    {item.label}
+                  </NavigationAction>
+                </NavigationItem>
+              ))}
+            </Navigation>
+          </ScrollView>
+        </div>
+      </Container>
       <Section size="xlarge">{views}</Section>
     </>
   );

@@ -1,22 +1,19 @@
 'use client';
 
 import { Collapse, Icon, Navigation, NavigationAction, NavigationItem } from '@alma-oss/spirit-web-react';
+import { isActiveBranch, isCurrentPath } from '@local/domains/routing/navPath';
 import NextLink from 'next/link';
 import React from 'react';
 import type { NavNode } from '../repository';
+import styles from './Sidebar.module.scss';
 
 interface DocsSidebarProps {
   nodes: NavNode[];
   currentPath: string;
 }
 
-const isCurrent = (href: string, currentPath: string) => href === currentPath;
-
-const isActiveBranch = (href: string, currentPath: string) =>
-  currentPath === href || currentPath.startsWith(`${href}/`);
-
-const DocsSidebarItem = ({ node, currentPath }: { node: NavNode; currentPath: string }) => {
-  const selected = isCurrent(node.href, currentPath);
+const SidebarItem = ({ node, currentPath }: { node: NavNode; currentPath: string }) => {
+  const selected = isCurrentPath(node.href, currentPath);
   const hasChildren = Boolean(node.children && node.children.length > 0);
   const isOpen = hasChildren && isActiveBranch(node.href, currentPath);
 
@@ -35,7 +32,7 @@ const DocsSidebarItem = ({ node, currentPath }: { node: NavNode; currentPath: st
         <Collapse id={`docs-sidebar${node.href.replaceAll('/', '-')}`} isOpen={isOpen}>
           <ul>
             {node.children.map((child) => (
-              <DocsSidebarItem key={child.href} node={child} currentPath={currentPath} />
+              <SidebarItem key={child.href} node={child} currentPath={currentPath} />
             ))}
           </ul>
         </Collapse>
@@ -44,14 +41,14 @@ const DocsSidebarItem = ({ node, currentPath }: { node: NavNode; currentPath: st
   );
 };
 
-const DocsSidebar = ({ nodes, currentPath }: DocsSidebarProps) => (
-  <div className="docs-Sidebar">
+const Sidebar = ({ nodes, currentPath }: DocsSidebarProps) => (
+  <div className={styles.sidebar}>
     <Navigation aria-label="Section" direction="vertical">
       {nodes.map((node) => (
-        <DocsSidebarItem key={node.href} node={node} currentPath={currentPath} />
+        <SidebarItem key={node.href} node={node} currentPath={currentPath} />
       ))}
     </Navigation>
   </div>
 );
 
-export default DocsSidebar;
+export default Sidebar;

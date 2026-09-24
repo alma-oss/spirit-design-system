@@ -1,6 +1,13 @@
 import { componentNameToSlug } from '../components/utils/componentSlug';
+import documentationSchema from '../content/documentation.schema.json';
 
 const ROUTE_DELIMITER = '/';
+
+export const componentDocTabs = documentationSchema.componentDocs.tabs;
+
+export type ComponentDocTab = (typeof componentDocTabs)[number];
+
+export const componentDocsDirectory = documentationSchema.componentDocs.directory;
 
 export const componentSegments = {
   guidelines: 'guidelines',

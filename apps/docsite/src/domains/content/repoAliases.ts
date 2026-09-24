@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import documentationSchema from './documentation.schema.json';
 import { getRepoRoot } from './paths';
 
 export interface RepoDocAlias {
@@ -14,24 +15,13 @@ export interface AliasNavNode {
   children?: AliasNavNode[];
 }
 
-const MIGRATION_PACKAGE_URL: Record<string, string> = {
-  web: 'web',
-  'web-react': 'web-react',
-  'web-twig': 'web-twig',
-  'design-tokens': 'design',
-};
+const MIGRATION_PACKAGE_URL: Record<string, string> = documentationSchema.migrationPackages;
 
-const STATIC_ALIASES: RepoDocAlias[] = [
-  { slug: ['migrations', 'codemods'], repoPath: 'packages/codemods/README.md', title: 'Codemods' },
-  { slug: ['releases'], repoPath: 'docs/decisions/007-release-names.md', title: 'Releases' },
-  {
-    slug: ['releases', 'release-schedule'],
-    repoPath: 'docs/contribution/release-schedule.md',
-    title: 'Release Schedule',
-  },
-  { slug: ['releases', 'web'], repoPath: 'packages/web/CHANGELOG.md', title: 'Web' },
-  { slug: ['releases', 'web-react'], repoPath: 'packages/web-react/CHANGELOG.md', title: 'Web React' },
-];
+const STATIC_ALIASES: RepoDocAlias[] = documentationSchema.aliases.map((alias) => ({
+  slug: [...alias.slug],
+  repoPath: alias.repoPath,
+  title: alias.title,
+}));
 
 const listMigrationAliases = async (repoRoot: string): Promise<RepoDocAlias[]> => {
   const aliases: RepoDocAlias[] = [];

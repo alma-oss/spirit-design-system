@@ -8,7 +8,7 @@ import React from 'react';
 
 const isAriaCurrent = (condition: boolean) => (condition ? { 'aria-current': true as const } : {});
 
-const ITEMS = [
+const MENU_ITEMS = [
   { label: 'Introduction', href: docSectionRoutes.introduction },
   { label: 'Design', href: docSectionRoutes.design },
   { label: 'Components', href: docSectionRoutes.components },
@@ -38,8 +38,8 @@ const MenuItem = ({ href, label }: { href: string; label: string }) => {
 };
 
 const Menu = () => (
-  <Navigation aria-label="Main Navigation" hideOn={['mobile', 'tablet']}>
-    {ITEMS.map((item) => (
+  <Navigation aria-label="Main" hideOn={['mobile', 'tablet']}>
+    {MENU_ITEMS.map((item) => (
       <MenuItem key={item.href} href={item.href} label={item.label} />
     ))}
   </Navigation>

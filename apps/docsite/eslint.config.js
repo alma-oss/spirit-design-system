@@ -78,8 +78,12 @@ export default [
     files: ['**/*.{js,mjs,cjs,ts,tsx,mts,cts}'],
 
     rules: {
+      // Next.js page exports (generateStaticParams, metadata, …) are allowed by the plugin's next preset.
       // @see: https://github.com/ArnaudBarre/eslint-plugin-react-refresh
-      'react-refresh/only-export-components': 'warn',
+      'react-refresh/only-export-components': [
+        'warn',
+        reactRefresh.configs.next.rules['react-refresh/only-export-components'][1],
+      ],
       // we like to use props spreading for additional props in this case
       'react/jsx-props-no-spreading': 'off', // Used inside HOC, that is fine.
       // prefer arrow function over function expression
