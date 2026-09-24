@@ -237,7 +237,7 @@ export const deliverPullRequest = async (
     git(['push', `--force-with-lease=${branchRef}:${expectedSha}`, 'origin', refspec], authenticatedEnvironment);
 
   if (existingBranch.sha) {
-    await git(['add', '--all', '--', out]);
+    await git(['add', '--all', '--', out], authenticatedEnvironment);
     const desiredTree = (await git(['write-tree'])).trim();
 
     if (!SHA_PATTERN.test(desiredTree)) {

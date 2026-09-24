@@ -107,6 +107,41 @@ describe('deliverPullRequest', () => {
     );
   });
 
+  it('authenticates a lazy promisor fetch triggered by Git add on an existing branch', async () => {
+    const fetchImplementation = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(response([]))
+      .mockResolvedValueOnce(response({ author: { name: 'spirit-assets[bot]' } })) as unknown as typeof fetch;
+    const git = jest.fn(async (args: string[], environment?: NodeJS.ProcessEnv) => {
+      if (args[0] === 'add' && !environment?.GIT_CONFIG_VALUE_0?.startsWith('AUTHORIZATION: basic ')) {
+        throw new Error(
+          "fatal: could not read Username for 'https://github.com'\nfatal: could not fetch object from promisor remote",
+        );
+      }
+
+      if (args[0] === 'write-tree') {
+        return TREE_SHA;
+      }
+
+      if (args[0] === 'ls-tree') {
+        return '';
+      }
+
+      return args[0] === 'rev-parse' ? OLD_SHA : '';
+    });
+
+    await expect(deliverPullRequest(createOptions(), { fetch: fetchImplementation, git })).resolves.toEqual({
+      changed: false,
+    });
+    expect(git).toHaveBeenCalledWith(
+      ['add', '--all', '--', 'svg'],
+      expect.objectContaining({
+        GIT_CONFIG_VALUE_0: expect.stringMatching(/^AUTHORIZATION: basic /),
+      }),
+    );
+  });
+
   it.each([
     ['an untrusted commit author', { author: { name: 'untrusted-user' } }],
     ['a missing commit author', {}],
