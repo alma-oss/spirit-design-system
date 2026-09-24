@@ -1,10 +1,13 @@
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+import { buildConstants } from '../steps/buildConstants';
 
 // Make filterSvgFiles resilient to undefined to avoid CI edge case crashes
 jest.mock('../steps/shared', () => {
   const path = require('path');
+
+
   return {
     filterSvgFiles: (fileNames: string[] | undefined) =>
       Array.isArray(fileNames)
@@ -12,8 +15,6 @@ jest.mock('../steps/shared', () => {
         : [],
   };
 });
-
-import { buildConstants } from '../steps/buildConstants';
 
 // Helper to create a temp workspace with svg files
 const setupTemp = (svgs: Record<string, string>) => {
@@ -34,7 +35,7 @@ const waitForFile = async (filePath: string, timeoutMs = 2000) => {
   const start = Date.now();
 
   while (Date.now() - start <= timeoutMs) {
-    if (fs.existsSync(filePath)) return true;
+    if (fs.existsSync(filePath)) { return true; }
     await new Promise((r) => setTimeout(r, 10));
   }
 
@@ -99,6 +100,7 @@ describe('buildConstants', () => {
     const result = buildConstants(tmpRoot, distFile);
 
     const created = await waitForFile(distFile, 200);
+
     expect(result).toBe(false);
     expect(created).toBe(false);
 

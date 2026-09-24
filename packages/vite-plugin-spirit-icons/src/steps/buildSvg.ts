@@ -10,6 +10,7 @@ const consoleLogger: Logger = {
 };
 
 export const DUALTONE_COLOR_BACKGROUND_DEFAULT = '#F2F2F2'; // Gray95
+
 export const DUALTONE_COLOR_BORDER_DEFAULT = '#202020'; // DarkGray
 
 export const normalizeSvgColors = (fileName: string, svgContent: string): string => {

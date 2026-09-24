@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { JSDOM } from 'jsdom';
 import { filterSvgFiles, Logger } from './shared';
 
@@ -31,10 +30,10 @@ export const buildConstants = (srcDir: string, file: string, logger: Logger = co
 
       distContent += JSON.stringify(icons, null, 2);
       distContent += ';';
-      // eslint-disable-next-line quotes -- we need to use special chars in this string
-      distContent += `\n\nexport default icons;`;
+      distContent += '\n\nexport default icons;';
 
       const dirName = path.dirname(file);
+
       if (!fs.existsSync(dirName)) {
         fs.mkdirSync(dirName, { recursive: true });
       }
