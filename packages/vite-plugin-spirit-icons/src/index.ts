@@ -10,7 +10,6 @@ import { prepareSvgReact } from './steps/prepareSvgReact';
 import { Logger } from './steps/shared';
 
 export interface SpiritIconsPluginOptions {
-
   /** Source SVG directory, relative to Vite root. Default: 'src/svg' */
   svgDir?: string;
 
@@ -21,10 +20,6 @@ export interface SpiritIconsPluginOptions {
   distSvgDir?: string;
 }
 
-/**
- *
- * @param options
- */
 export function spiritIconsPlugin(options?: SpiritIconsPluginOptions): Plugin {
   let root: string;
 

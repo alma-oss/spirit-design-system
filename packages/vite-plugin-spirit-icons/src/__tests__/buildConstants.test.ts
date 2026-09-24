@@ -7,7 +7,6 @@ import { buildConstants } from '../steps/buildConstants';
 jest.mock('../steps/shared', () => {
   const path = require('path');
 
-
   return {
     filterSvgFiles: (fileNames: string[] | undefined) =>
       Array.isArray(fileNames)
@@ -35,7 +34,9 @@ const waitForFile = async (filePath: string, timeoutMs = 2000) => {
   const start = Date.now();
 
   while (Date.now() - start <= timeoutMs) {
-    if (fs.existsSync(filePath)) { return true; }
+    if (fs.existsSync(filePath)) {
+      return true;
+    }
     await new Promise((r) => setTimeout(r, 10));
   }
 
