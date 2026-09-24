@@ -34,7 +34,7 @@ export const runDemoPageTests = (testConfig: DemoPageTestConfig) => {
         .filter((item) => readdirSync(`${packageDir}${srcDir}${targetDir}/${item.name}`).includes('index.html'))
         .filter((item) => !ignoredTests.includes(item.name))
         // there is a problem with url on case insensitive systems
-        .map((item) => process.env.NODE_ENV ? item.name.toLowerCase() : item.name);
+        .map((item) => (process.env.NODE_ENV ? item.name.toLowerCase() : item.name));
 
       for (const item of dirs) {
         test(`test demo ${formattedPackageName} ${entityLabel} ${item}`, async ({ page, pageRetries }) => {

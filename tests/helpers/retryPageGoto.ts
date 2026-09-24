@@ -119,6 +119,7 @@ export async function retryPageGoto(
 
   let lastError: Error | undefined;
 
+  /* eslint-disable no-await-in-loop -- retries are inherently sequential (must wait for one attempt before the next) */
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
       const gotoOptions: Parameters<Page['goto']>[1] = {
@@ -175,6 +176,7 @@ export async function retryPageGoto(
       }
     }
   }
+  /* eslint-enable no-await-in-loop */
 
   // This should not be reached due to the throw in the loop, but TypeScript needs it
   throw lastError || new Error(`Failed to navigate to ${url}`);

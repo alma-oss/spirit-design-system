@@ -2,6 +2,12 @@ import { type Result as AxeResult, type NodeResult } from 'axe-core';
 import { type FormattedViolation, type FormattedNode, type A11yScanResult, type ImpactLevel } from './types';
 import { IMPACT_BADGES } from './types';
 
+export const formatNode = (node: NodeResult): FormattedNode => ({
+  html: node.html,
+  target: node.target,
+  failureSummary: node.failureSummary || 'No summary available',
+});
+
 export const formatViolations = (violations: AxeResult[]): FormattedViolation[] =>
   violations.map(({ id: ruleId, impact, description, helpUrl, nodes }) => ({
     ruleId,
@@ -11,11 +17,7 @@ export const formatViolations = (violations: AxeResult[]): FormattedViolation[] 
     nodes: nodes.map(formatNode),
   }));
 
-export const formatNode = (node: NodeResult): FormattedNode => ({
-  html: node.html,
-  target: node.target,
-  failureSummary: node.failureSummary || 'No summary available',
-});
+export const getImpactBadge = (impact: string): string => IMPACT_BADGES[impact as ImpactLevel] || '[UNKNOWN]';
 
 // TODO by dlouhak: Find better way how to format console logs  – #DS-2327
 export const formatViolationError = (results: A11yScanResult): string => {
@@ -50,5 +52,3 @@ export const formatViolationError = (results: A11yScanResult): string => {
 
   return header + violationDetails + footer;
 };
-
-export const getImpactBadge = (impact: string): string => IMPACT_BADGES[impact as ImpactLevel] || '[UNKNOWN]';
