@@ -1,5 +1,5 @@
-import { test } from '../../helpers/fixtures';
 import { assertNoA11yViolations, getWCAG2AAConfig, retryPageGoto, waitForPageLoad, WEB_REACT_SERVER_URL } from '../../helpers';
+import { test } from '../../helpers/fixtures';
 
 test.describe('Homepage Accessibility', () => {
   const testUrl = WEB_REACT_SERVER_URL;
