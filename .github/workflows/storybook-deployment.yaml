@@ -62,6 +62,21 @@ jobs:
           # TurboSnap: only re-snapshot stories whose code changed vs last accepted baseline
           onlyChanged: true
 
+      - name: Resolve Chromatic build URL
+        id: chromatic_url
+        if: always() && (steps.chromatic.outcome == 'success' || steps.chromatic.outcome == 'failure')
+        run: |
+          URL="${CHROMATIC_URL:-}"
+          # TurboSnap can skip the build entirely (e.g. no frontend files changed), in which
+          # case the chromaui/action leaves this output as the literal string "undefined",
+          # which Slack's API rejects as an invalid button URL.
+          if [ -z "$URL" ] || [ "$URL" = "undefined" ]; then
+            URL="https://www.chromatic.com/builds?appId=697a3d45f227adebd06a1852"
+          fi
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+        env:
+          CHROMATIC_URL: ${{ steps.chromatic.outputs.url }}
+
       - name: Notify Slack with Chromatic URL
         if: always() && (steps.chromatic.outcome == 'success' || steps.chromatic.outcome == 'failure')
         uses: slackapi/slack-github-action@fcfb566f8b0aab22203f066d80ca1d7e4b5d05b3 # v1.27.1
@@ -94,7 +109,7 @@ jobs:
                         {
                           "type": "button",
                           "text": { "type": "plain_text", "text": "View in Chromatic" },
-                          "url": "${{ steps.chromatic.outputs.url }}"
+                          "url": "${{ steps.chromatic_url.outputs.url }}"
                         },
                         {
                           "type": "button",
