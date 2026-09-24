@@ -8,11 +8,11 @@ import type {
   SpiritDivElementProps,
   SpiritItemProps,
   SpiritTagProps,
+  StringsProps,
   StyleProps,
   TranslatableString,
   Validation,
   ValidationTextProp,
-  WithStrings,
 } from '../../types';
 import type { ComboboxSelectedItem } from './useComboboxItems';
 /** Popup options widget role. `null` on the prop means no options widget (tip-only / auxiliary content). */
@@ -72,7 +72,7 @@ export interface UnstableComboboxBaseProps<S = void>
     Validation,
     ValidationTextProp,
     UnstableComboboxTranslations,
-    WithStrings<UnstableComboboxStrings> {
+    StringsProps<UnstableComboboxStrings> {
   /** Option items. Optional for tip-only / custom popover content. */
   children?: ReactNode;
   id: string;

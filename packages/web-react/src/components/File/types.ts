@@ -1,6 +1,6 @@
 import { type ElementType, type ReactNode } from 'react';
 import { type ObjectFit } from '../../constants';
-import { type PolymorphicComponentProps, type TranslatableString, type WithStrings } from '../../types';
+import { type PolymorphicComponentProps, type StringsProps, type TranslatableString } from '../../types';
 import {
   type SpiritButtonElementProps,
   type SpiritSpanElementProps,
@@ -39,7 +39,7 @@ export type FileStrings = {
   ariaLabelRemove?: TranslatableString;
 };
 
-export interface FileBaseProps extends WithStrings<FileStrings> {
+export interface FileBaseProps extends StringsProps<FileStrings> {
   /** Optional content rendered between the file name and helper/validation text. */
   children?: ReactNode;
   /** @deprecated Use `strings.ariaLabelEdit` instead. */

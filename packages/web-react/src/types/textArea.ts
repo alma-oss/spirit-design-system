@@ -9,10 +9,10 @@ import {
   type RequiredProps,
   type SizesDictionaryType,
   type SpiritTextAreaElementPropsWithRef,
+  type StringsProps,
   type TextInputProps,
   type Validation,
   type ValidationTextProp,
-  type WithStrings,
 } from './shared';
 
 export type TextAreaElementBaseProps = Omit<SpiritTextAreaElementPropsWithRef, 'size'>;
@@ -75,6 +75,6 @@ type TextAreaCounterProps = TextAreaCounterOffProps | TextAreaCounterOnProps | T
 
 export type TextAreaProps<S = void> = TextAreaBaseProps<S> &
   TextAreaCounterProps &
-  WithStrings<CharacterCounterStrings>;
+  StringsProps<CharacterCounterStrings>;
 
 export type SpiritTextAreaProps<S = void> = TextAreaProps<S>;

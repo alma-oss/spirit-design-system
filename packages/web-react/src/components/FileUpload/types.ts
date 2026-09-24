@@ -1,10 +1,10 @@
 import { type MutableRefObject, type ReactNode } from 'react';
 import {
   type SpiritInputElementProps,
+  type StringsProps,
   type TranslatableString,
   type Validation,
   type ValidationTextType,
-  type WithStrings,
 } from '../../types/shared';
 import { type FileItem } from '../File/types';
 
@@ -14,7 +14,7 @@ export type FileUploadStrings = {
   labelUpload?: TranslatableString;
 };
 
-export interface FileUploadTextProps extends WithStrings<FileUploadStrings> {
+export interface FileUploadTextProps extends StringsProps<FileUploadStrings> {
   /** Label for the decorative button (opens the same file input as the drop-zone label). */
   /** @deprecated Use `strings.labelButton` instead. */
   buttonText?: string;

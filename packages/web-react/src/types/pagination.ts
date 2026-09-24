@@ -7,8 +7,8 @@ import {
   type SpiritLItemElementProps,
   type SpiritPolymorphicElementPropsWithRef,
   type SpiritUListElementProps,
+  type StringsProps,
   type TranslatableString,
-  type WithStrings,
 } from './shared';
 
 export type PaginationLinkDirectionType = 'previous' | 'next';
@@ -35,7 +35,7 @@ export type PaginationLinkPreviousNextStrings = {
 
 export type UncontrolledPaginationStrings = PaginationLinkStrings & PaginationLinkPreviousNextStrings;
 
-export interface AriaPaginationProps extends DeprecatedAccessibilityLabelProps, WithStrings<PaginationLinkStrings> {}
+export interface AriaPaginationProps extends DeprecatedAccessibilityLabelProps, StringsProps<PaginationLinkStrings> {}
 
 export interface PaginationLinkBaseProps<E extends ElementType = 'a'> {
   elementType?: E;
@@ -67,7 +67,7 @@ export type PaginationButtonLinkProps<E extends ElementType = 'a'> = SpiritButto
 
 export type PaginationLinkPreviousNextProps<E extends ElementType = 'a'> = PaginationLinkBaseProps<E> &
   DeprecatedAccessibilityLabelProps &
-  WithStrings<PaginationLinkPreviousNextStrings> &
+  StringsProps<PaginationLinkPreviousNextStrings> &
   RouterLinkProps & {
     children?: never;
     pageNumber?: never;
@@ -101,7 +101,7 @@ export interface SpiritUncontrolledPaginationProps
     DeprecatedAccessibilityLabelProps,
     UncontrolledPaginationProps,
     ChildrenProps,
-    WithStrings<UncontrolledPaginationStrings> {}
+    StringsProps<UncontrolledPaginationStrings> {}
 
 export interface UsePaginationProps extends UncontrolledPaginationProps {
   defaultPage: number;

@@ -4,9 +4,9 @@ import type {
   ComponentButtonColorNamesType,
   PlacementDictionaryType,
   SpiritDivElementProps,
+  StringsProps,
   StyleProps,
   TranslatableString,
-  WithStrings,
 } from './shared';
 
 export interface SplitButtonProps extends StyleProps, ChildrenProps, Omit<SpiritDivElementProps, 'color'> {}
@@ -56,5 +56,5 @@ export type UncontrolledSplitButtonProps<C = void, S = void> = {
     }
 ) &
   UncontrolledSplitButtonLabelProps &
-  WithStrings<UncontrolledSplitButtonStrings> &
+  StringsProps<UncontrolledSplitButtonStrings> &
   SpiritSplitButtonProps<C, S>;

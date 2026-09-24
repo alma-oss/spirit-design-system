@@ -10,11 +10,11 @@ import type {
   SpiritDivElementProps,
   SpiritFieldGroupProps,
   SpiritTagProps,
+  StringsProps,
   StyleProps,
   TranslatableString,
   Validation,
   ValidationTextProp,
-  WithStrings,
 } from '../../types';
 
 export type UnstablePickerSelectionMode = SelectionMode;
@@ -63,7 +63,7 @@ export interface UnstablePickerBaseProps<S = void>
     Validation,
     ValidationTextProp,
     UnstablePickerTranslations,
-    WithStrings<UnstablePickerStrings> {
+    StringsProps<UnstablePickerStrings> {
   children: ReactNode;
   id: string;
   isAggregated?: boolean;

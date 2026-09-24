@@ -4,9 +4,9 @@ import type {
   ChildrenProps,
   PolymorphicComponentProps,
   SpiritDivElementProps,
+  StringsProps,
   StyleProps,
   TranslatableString,
-  WithStrings,
 } from './shared';
 
 /** ===== BASE API ===== */
@@ -30,7 +30,7 @@ export type TooltipStrings = {
   ariaLabelClose?: TranslatableString;
 };
 
-export interface TooltipBaseProps extends ChildrenProps, StyleProps, WithStrings<TooltipStrings> {
+export interface TooltipBaseProps extends ChildrenProps, StyleProps, StringsProps<TooltipStrings> {
   /** @deprecated Use `strings.ariaLabelClose` instead. */
   closeLabel?: string;
   id: string;

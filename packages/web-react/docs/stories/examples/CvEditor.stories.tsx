@@ -117,9 +117,6 @@ export const CvEditor = () => {
         containerProps={{ size: 'large' }}
         paddingBottom={{ mobile: 'space-0', tablet: 'space-0' }}
       >
-        {/* TODO: DS-2747 — Breadcrumbs hardcodes aria-label="Breadcrumb" on its root <nav> — the literal is placed after
-            the prop spread in the component, so it wins over any aria-label passed in here. Can't localize this
-            landmark's name from consumer code; would need a fix in Breadcrumbs itself (src/, out of scope here). */}
         <Breadcrumbs marginBottom="space-1000" items={[{ title: 'Domů', url: '#' }, { title: 'Životopis' }]} />
         <Heading elementType="h1" size="large" fontWeight="semibold">
           Můj životopis

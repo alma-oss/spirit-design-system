@@ -52,6 +52,33 @@ describe('Breadcrumbs', () => {
     expect(dom.container.querySelectorAll('ol > li > a')[0]).toHaveTextContent('Go back');
   });
 
+  it('should use the default aria-label on the root element', () => {
+    const dom = render(
+      <Breadcrumbs
+        items={[
+          { title: 'test', url: '/test' },
+          { title: 'test_2', url: '/test_2' },
+        ]}
+      />,
+    );
+
+    expect(dom.container.querySelector('nav')).toHaveAttribute('aria-label', 'Breadcrumb');
+  });
+
+  it('should resolve strings.ariaLabel for the root aria-label', () => {
+    const dom = render(
+      <Breadcrumbs
+        items={[
+          { title: 'test', url: '/test' },
+          { title: 'test_2', url: '/test_2' },
+        ]}
+        strings={{ ariaLabel: 'Drobečková navigace' }}
+      />,
+    );
+
+    expect(dom.container.querySelector('nav')).toHaveAttribute('aria-label', 'Drobečková navigace');
+  });
+
   it('should not render the back item without labelBack or goBackTitle', () => {
     const dom = render(
       <Breadcrumbs

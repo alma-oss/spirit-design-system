@@ -9,11 +9,11 @@ import {
   type RequiredProps,
   type SizesDictionaryType,
   type SpiritInputElementPropsWithRef,
+  type StringsProps,
   type TextInputProps,
   type TranslatableString,
   type Validation,
   type ValidationTextProp,
-  type WithStrings,
 } from './shared';
 
 export type TextFieldType = 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
@@ -45,7 +45,7 @@ export interface TextFieldProps<S = void>
     RequiredProps,
     Validation,
     TextFieldAddonProps,
-    WithStrings<TextFieldStrings> {
+    StringsProps<TextFieldStrings> {
   /** The size of the text field */
   size?: SizesDictionaryType<S>;
   /** The type of text field */

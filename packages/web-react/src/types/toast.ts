@@ -6,9 +6,9 @@ import type {
   AlignmentYDictionaryType,
   ChildrenProps,
   EmotionColorNamesType,
+  StringsProps,
   StyleProps,
   TranslatableString,
-  WithStrings,
 } from './shared';
 
 export type ToastColorsExtendedNamesType = (typeof ToastColorsExtended)[keyof typeof ToastColorsExtended];
@@ -27,7 +27,7 @@ export type ToastStrings = {
   ariaLabelClose?: TranslatableString;
 };
 
-export interface BaseToastBarProps extends ChildrenProps, StyleProps, WithStrings<ToastStrings> {
+export interface BaseToastBarProps extends ChildrenProps, StyleProps, StringsProps<ToastStrings> {
   /** @deprecated Use `strings.ariaLabelClose` instead. */
   closeLabel?: string;
   color?: ToastColorType;
@@ -57,7 +57,7 @@ export interface ToastLinkProps<E extends ElementType = 'a'> extends ToastBarHan
   target?: LinkTarget;
 }
 
-export interface UncontrolledToastProps extends ChildrenProps, StyleProps, WithStrings<ToastStrings> {
+export interface UncontrolledToastProps extends ChildrenProps, StyleProps, StringsProps<ToastStrings> {
   alignmentX?: 'left' | 'center' | 'right';
   alignmentY?: 'top' | 'bottom';
   /** @deprecated Use `strings.ariaLabelClose` instead. */

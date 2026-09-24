@@ -2,9 +2,9 @@ import type { RefObject } from 'react';
 import {
   type ChildrenProps,
   type DirectionDictionaryType,
+  type StringsProps,
   type StyleProps,
   type TranslatableString,
-  type WithStrings,
 } from './shared';
 
 export type ScrollViewDirectionType = DirectionDictionaryType;
@@ -26,7 +26,7 @@ export type ScrollViewStrings = {
 
 export type ScrollViewControlsScrollStepType = number;
 
-interface ScrollViewControlsBaseProps extends WithStrings<ScrollViewStrings> {
+interface ScrollViewControlsBaseProps extends StringsProps<ScrollViewStrings> {
   /** @deprecated Use `strings.ariaStart` / `strings.ariaEnd` / `strings.ariaTop` / `strings.ariaBottom` instead. */
   ariaLabelControls?: ScrollViewControlsAriaLabelType;
   direction: ScrollViewDirectionType;
@@ -34,7 +34,7 @@ interface ScrollViewControlsBaseProps extends WithStrings<ScrollViewStrings> {
   viewportRef: RefObject<HTMLDivElement>;
 }
 
-export interface ScrollViewBaseProps extends ChildrenProps, StyleProps, WithStrings<ScrollViewStrings> {
+export interface ScrollViewBaseProps extends ChildrenProps, StyleProps, StringsProps<ScrollViewStrings> {
   /** @deprecated Use `strings.ariaStart` / `strings.ariaEnd` / `strings.ariaTop` / `strings.ariaBottom` instead. */
   ariaLabelControls?: ScrollViewControlsAriaLabelType;
   controlsScrollStep?: ScrollViewControlsScrollStepType;

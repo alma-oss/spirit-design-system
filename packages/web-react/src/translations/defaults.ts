@@ -9,6 +9,7 @@ export const defaultTranslations = {
     remove: 'Remove',
   },
   breadcrumbs: {
+    ariaLabel: 'Breadcrumb',
     back: 'Go back',
   },
   fileUploader: {
