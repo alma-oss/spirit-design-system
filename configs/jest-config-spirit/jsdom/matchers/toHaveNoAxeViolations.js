@@ -8,8 +8,7 @@ const formatNodes = (nodes, utils) =>
         wrapSection('Target:', node.target?.join(', '), utils, 6),
         wrapSection('HTML:', node.html ? utils.printReceived(node.html) : undefined, utils, 6),
         wrapSection('Failure:', node.failureSummary, utils, 6),
-      ),
-    )
+      ))
     .join('\n');
 
 const formatNodesBlock = (nodes, utils) =>
@@ -39,8 +38,8 @@ export const toHaveNoAxeViolations = function toHaveNoAxeViolations(received, op
   }
 
   const violations = Array.isArray(received.violations) ? received.violations : [];
-  const filteredViolations =
-    includedImpacts && includedImpacts.length
+  const filteredViolations
+    = includedImpacts && includedImpacts.length
       ? violations.filter((violation) => includedImpacts.includes(violation.impact))
       : violations;
 
@@ -51,8 +50,8 @@ export const toHaveNoAxeViolations = function toHaveNoAxeViolations(received, op
     message: () => {
       if (pass) {
         return (
-          `${matcherHint('.not.toHaveNoAxeViolations')}` +
-          '\n\nExpected accessibility violations to be present, but none were found.'
+          `${matcherHint('.not.toHaveNoAxeViolations')}`
+          + '\n\nExpected accessibility violations to be present, but none were found.'
         );
       }
 
@@ -63,4 +62,3 @@ export const toHaveNoAxeViolations = function toHaveNoAxeViolations(received, op
     },
   };
 };
-
