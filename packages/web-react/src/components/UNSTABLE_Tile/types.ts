@@ -8,7 +8,7 @@ import type {
 } from '../../types';
 
 /** ===== INTERNAL API ===== */
-export interface TileBaseProps extends ChildrenProps, StyleProps, PaddingProps {
+export interface TileBaseProps extends ChildrenProps, PaddingProps, StyleProps {
   /** The background color of the tile. */
   backgroundColor?: BackgroundColorsDictionaryType;
   /** Whether the tile is raised with a shadow. */

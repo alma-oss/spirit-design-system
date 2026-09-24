@@ -26,7 +26,7 @@ export type BoxBackgroundColorsType =
   | BackgroundEmotionColorsType
   | BackgroundNeutralColorsType;
 
-export interface BoxBaseProps extends ChildrenProps, TextColorProps, StyleProps, PaddingProps {
+export interface BoxBaseProps extends ChildrenProps, TextColorProps, PaddingProps, StyleProps {
   /** The background color of the box. */
   backgroundColor?: BoxBackgroundColorsType;
   /** The background gradient of the box. */
