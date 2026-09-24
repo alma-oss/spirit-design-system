@@ -13,7 +13,9 @@ export type PreviewGlobals = Record<string, unknown>;
 export type BreakpointName = keyof typeof breakpoints;
 
 export type MarginPropName = Exclude<keyof typeof SpacingStyleProp, 'margin'>;
+
 export type MarginArgs = Record<MarginPropName, undefined>;
 
 export type DisplayPropName = keyof typeof DisplayStyleProps;
+
 export type DisplayArgs = Record<DisplayPropName, undefined>;
