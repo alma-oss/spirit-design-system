@@ -1,16 +1,35 @@
 import { fixupConfigRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
+import jest from 'eslint-plugin-jest';
 import jestFormatting from 'eslint-plugin-jest-formatting';
 import storybook from 'eslint-plugin-storybook';
 import globals from 'globals';
 
 const compat = new FlatCompat({ baseDirectory: import.meta.dirname });
 
-const legacyReactAndJestConfig = compat.extends(
+const testFileGlobs = ['test/**', 'tests/**', '**/*.test.*', '**/*.spec.*'];
+
+// Narrower than `testFileGlobs`: excludes bare `tests/**`, which also matches shared test
+// helpers (e.g. `tests/providerTests/spacingPropsTest.tsx`) that legitimately `export`
+// reusable test factories and would trip `jest/no-export` if the full jest ruleset applied.
+// Those helpers still need jest globals (see below), just not the plugin's own rules.
+const jestRuleFileGlobs = ['test/**', '**/*.test.*', '**/*.spec.*', 'config/jest/**'];
+
+const legacyReactConfig = compat.extends(
   '@lmc-eu/eslint-config-react/base',
   '@lmc-eu/eslint-config-react/optional',
-  '@lmc-eu/eslint-config-jest',
 );
+
+// `@lmc-eu/eslint-config-typescript` only declares its file-specific tweaks (`*.d.ts`,
+// config files) via `overrides`, which `FlatCompat` cannot translate correctly when the
+// override itself uses `extends` (see the jest config below for the same limitation) —
+// it silently produces `files: [null]`, a pattern that never matches. Drop those broken
+// entries and scope the rest (parser, plugin, base rules) to TypeScript files ourselves.
+const legacyTypescriptConfig = fixupConfigRules(compat.extends('@lmc-eu/eslint-config-typescript'))
+  // Drop `settings` here — it must apply to every file (JS imports resolve TS modules too),
+  // not just the TS-file-scoped block below. It's re-added, unscoped, further down.
+  .filter((config) => !config.files && !config.settings)
+  .map((config) => ({ ...config, files: ['**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts'] }));
 
 export default [
 
@@ -21,7 +40,9 @@ export default [
    *
    * @see { @link https://github.com/alma-oss/spirit-design-system/pull/2421 }
    */
-  ...fixupConfigRules(legacyReactAndJestConfig),
+  ...fixupConfigRules(legacyReactConfig),
+
+  ...legacyTypescriptConfig,
 
   ...storybook.configs['flat/recommended'],
 
@@ -51,6 +72,41 @@ export default [
       },
     },
   },
+
+  // `@lmc-eu/eslint-config-jest` only exposes its settings via a single `overrides` entry
+  // that itself uses `extends`, which `FlatCompat` cannot translate (same limitation as
+  // the TypeScript config above) — every resulting entry gets `files: [null]` and never
+  // applies. Configure the jest plugin and globals natively instead, scoped to test files.
+  {
+    files: testFileGlobs,
+    languageOptions: {
+      globals: jest.environments.globals.globals,
+    },
+  },
+
+  {
+    // Registered under a spirit-namespaced key to avoid "Cannot redefine plugin" collisions
+    // with whatever copy of `eslint-plugin-jest` a consumer resolves internally via its own
+    // `compat.extends('@lmc-eu/eslint-config-jest')` (same rationale as `spirit-jest-formatting`
+    // below) — flat config treats two different module instances under the same key as a clash.
+    files: jestRuleFileGlobs,
+    plugins: { 'spirit-jest': jest },
+    rules: Object.fromEntries(
+      Object.entries({ ...jest.configs['flat/recommended'].rules, ...jest.configs['flat/style'].rules })
+        .map(([rule, severity]) => [rule.replace(/^jest\//, 'spirit-jest/'), severity]),
+    ),
+  },
+
+  {
+    // Custom jest matchers/setup code (e.g. `expect.extend(...)`) runs in the jest
+    // environment but isn't itself a `*.test.*`/`*.spec.*` file, so it needs the jest
+    // globals without the test-file-specific plugin rules above.
+    files: ['configs/jest-config-spirit/**'],
+    languageOptions: {
+      globals: jest.environments.globals.globals,
+    },
+  },
+
   {
     languageOptions: {
       ecmaVersion: 'latest',
