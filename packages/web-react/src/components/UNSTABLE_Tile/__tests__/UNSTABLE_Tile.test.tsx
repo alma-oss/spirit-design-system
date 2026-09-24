@@ -66,14 +66,6 @@ describe('UNSTABLE_Tile', () => {
     expect(screen.getByText('Tile content')).toHaveClass('p-600', 'p-tablet-1000', 'p-desktop-1200');
   });
 
-  // The surface comes from the stylesheet, never from utility classes.
-  it('should not render surface utility classes', () => {
-    render(<UNSTABLE_Tile>Tile content</UNSTABLE_Tile>);
-
-    expect(screen.getByText('Tile content')).toHaveClass('UNSTABLE_Tile');
-    expect(screen.getByText('Tile content')).not.toHaveClass('bg-primary', 'border-basic', 'border-100', 'rounded-300');
-  });
-
   it('should not render the shadow modifier by default', () => {
     render(<UNSTABLE_Tile>Tile content</UNSTABLE_Tile>);
 

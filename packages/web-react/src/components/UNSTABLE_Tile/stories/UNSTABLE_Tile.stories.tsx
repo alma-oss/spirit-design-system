@@ -16,7 +16,7 @@ const meta: Meta<typeof UNSTABLE_Tile> = {
   argTypes: {
     backgroundColor: {
       control: 'select',
-      options: [...Object.values(BackgroundColors)],
+      options: [...Object.values(BackgroundColors), undefined],
       table: {
         type: {
           summary: 'BackgroundColorsDictionaryType',
