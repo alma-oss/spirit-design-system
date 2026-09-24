@@ -1,4 +1,4 @@
-/* eslint-disable jest/no-disabled-tests */
+/* eslint-disable spirit-jest/no-disabled-tests */
 /**
  * @todo Enable skipped tests
  * @see { @link https://jira.almacareer.tech/browse/DS-1796 }
