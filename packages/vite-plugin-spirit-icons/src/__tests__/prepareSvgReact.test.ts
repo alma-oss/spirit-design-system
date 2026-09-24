@@ -1,21 +1,32 @@
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+import { toPascalCase, prepareSvgForReactComponent } from '../steps/prepareSvgReact';
 
 // Ensure shared.filterSvgFiles is resilient to undefined in CI fs edge cases
 jest.mock('../steps/shared', () => {
-  const p = require('path');
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires -- jest.mock factories can't reference outer-scope imports
+  const pathModule = require('path');
+
+
   return {
-    filterSvgFiles: (fileNames: string[] | undefined) =>
-      Array.isArray(fileNames)
-        ? fileNames.filter((fileName) => p.extname(fileName) === '.svg' && fileName !== 'sprite.svg')
-        : [],
+    filterSvgFiles: (fileNames: string[] | undefined) => {
+      if (!Array.isArray(fileNames)) {
+        return [];
+      }
+
+      return fileNames.filter((fileName) => pathModule.extname(fileName) === '.svg' && fileName !== 'sprite.svg');
+    },
   };
 });
 
-import { toPascalCase, prepareSvgForReactComponent } from '../steps/prepareSvgReact';
-
-/** Wait until directory contains expected file count (polling) */
+/**
+ * Wait until directory contains expected file count (polling)
+ *
+ * @param dir
+ * @param expectedCount
+ * @param timeoutMs
+ */
 const waitForFilesCount = async (dir: string, expectedCount: number, timeoutMs = 2000) => {
   const start = Date.now();
   const pollInterval = 10;
@@ -23,15 +34,29 @@ const waitForFilesCount = async (dir: string, expectedCount: number, timeoutMs =
 
   for (let i = 0; i < maxIterations; i++) {
     const files = fs.existsSync(dir) ? fs.readdirSync(dir) : [];
-    if (files.length >= expectedCount) return true;
-    if (Date.now() - start > timeoutMs) return false;
-    await new Promise((r) => setTimeout(r, pollInterval));
+
+    if (files.length >= expectedCount) {
+      return true;
+    }
+
+    if (Date.now() - start > timeoutMs) {
+      return false;
+    }
+
+    // eslint-disable-next-line no-await-in-loop -- polling must wait between checks
+    await new Promise((resolve) => {
+      setTimeout(resolve, pollInterval);
+    });
   }
 
   return false;
 };
 
-/** Helper that runs exported prepareSvgForReactComponent with temp dirs */
+/**
+ * Helper that runs exported prepareSvgForReactComponent with temp dirs
+ *
+ * @param inputFileNames
+ */
 const prepareSvgReactWithTempSvgs = async (inputFileNames: string[]) => {
   const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'prepare-svg-react-'));
   const srcDir = path.join(tmpRoot, 'src');
