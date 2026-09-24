@@ -156,11 +156,17 @@ For `branch` only, interpolated `{brand}` and `{out}` are slugified so names lik
 `{slug}`, `{repo}`, and `{owner}` are left as-is. If two targets in the same repository resolve to the same branch, that
 repository is skipped.
 
-An existing automation branch is updated or deleted only when it belongs to a pull request authored by the configured
-GitHub App at the same head revision. Icon updates are committed on top of the existing branch, preserving follow-up
-commits such as visual-test fixes. A branch with no icon changes is deleted only when its head commit is App-authored;
-human follow-up commits keep the pull request open. Updates and deletions use `--force-with-lease`, so a concurrent or
-unverified branch cannot be overwritten.
+An existing automation branch is kept. A later sync appends a `fixup!` commit for the original App-authored asset sync
+commit and preserves later human commits, such as visual-test fixes. The push is a normal fast-forward, so a concurrent
+branch update is rejected instead of overwritten.
+
+An open pull request is updated in place. A closed, unmerged pull request is reopened, or a new pull request is opened
+when that pull request cannot be reopened. A merged pull request stays merged, and new asset changes open another pull
+request. A rerun with no asset changes does not add a commit; it refreshes the open pull request or reopens the closed,
+unmerged one.
+
+The configured output directory mirrors the current Figma export. Icons and any other files removed from that export
+are deleted, including nested directories inside the output path.
 
 A repository opts in by:
 

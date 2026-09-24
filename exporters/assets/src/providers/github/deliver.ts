@@ -8,6 +8,8 @@ import { assertSafeGitBranch } from './templates';
 
 const GITHUB_API_VERSION = '2022-11-28';
 const SHA_PATTERN = /^[a-f0-9]{40,64}$/i;
+const FIXUP_SUBJECT_PATTERN = /^(?:amend|fixup|squash)!/;
+const CANNOT_REOPEN_STATUSES = new Set([405, 422]);
 
 export interface PullRequestDeliveryOptions {
   appSlug: string;
@@ -36,17 +38,29 @@ interface PullRequestDeliveryDependencies {
   readBody?: (path: string) => Promise<string>;
 }
 
+type PullRequestState = 'closed' | 'merged' | 'open';
+
+interface ExistingPullRequest {
+  number: number;
+  state: PullRequestState;
+}
+
 interface ExistingBranch {
-  headAuthoredByApp?: boolean;
-  openPullRequestNumber?: number;
+  pullRequest?: ExistingPullRequest;
   sha?: string;
 }
 
 interface PullRequestSummary {
   head?: { sha?: unknown };
+  merged_at?: unknown;
   number?: unknown;
   state?: unknown;
   user?: { login?: unknown };
+}
+
+interface CompareCommit {
+  commit?: { author?: { name?: unknown }; message?: unknown };
+  sha?: unknown;
 }
 
 const runGitCommand = (repositoryRoot: string, args: string[], environment?: NodeJS.ProcessEnv): Promise<string> =>
@@ -105,6 +119,25 @@ const isCommitAuthoredByApp = async (
   return commitPayload.author?.name === `${appSlug}[bot]`;
 };
 
+const classifyOwnedPullRequest = (
+  pullRequest: PullRequestSummary,
+  appSlug: string,
+): ExistingPullRequest | undefined => {
+  if (pullRequest.user?.login !== `${appSlug}[bot]` || typeof pullRequest.number !== 'number') {
+    return undefined;
+  }
+
+  if (typeof pullRequest.merged_at === 'string' && pullRequest.merged_at.trim()) {
+    return { number: pullRequest.number, state: 'merged' };
+  }
+
+  if (pullRequest.state === 'open' || pullRequest.state === 'closed') {
+    return { number: pullRequest.number, state: pullRequest.state };
+  }
+
+  return undefined;
+};
+
 const inspectExistingBranch = async (
   options: PullRequestDeliveryOptions,
   fetchImplementation: typeof fetch,
@@ -154,25 +187,84 @@ const inspectExistingBranch = async (
     throw new ConfigError('GitHub returned an invalid automation pull request list.');
   }
 
-  const ownedPullRequest = (pullsPayload as PullRequestSummary[]).find(
-    (pullRequest) =>
-      pullRequest.user?.login === `${appSlug}[bot]` &&
-      pullRequest.head?.sha === sha &&
-      typeof pullRequest.number === 'number',
-  );
+  const ownedPullRequests = (pullsPayload as PullRequestSummary[]).flatMap((pullRequest) => {
+    const classified = classifyOwnedPullRequest(pullRequest, appSlug);
 
-  if (ownedPullRequest) {
-    return {
-      openPullRequestNumber: ownedPullRequest.state === 'open' ? (ownedPullRequest.number as number) : undefined,
-      sha,
-    };
+    return classified ? [classified] : [];
+  });
+  const pullRequest = (['open', 'closed', 'merged'] as const)
+    .map((state) => ownedPullRequests.find((candidate) => candidate.state === state))
+    .find((candidate): candidate is ExistingPullRequest => candidate !== undefined);
+
+  if (pullRequest) {
+    return { pullRequest, sha };
   }
 
   if (!(await isCommitAuthoredByApp(options, sha, fetchImplementation))) {
     throw new ConfigError('Existing automation branch is not owned by this GitHub App.');
   }
 
-  return { headAuthoredByApp: true, sha };
+  return { sha };
+};
+
+const commitSubject = (message: unknown): string => {
+  if (typeof message !== 'string') {
+    return '';
+  }
+
+  const [subject] = message.split('\n');
+
+  return subject;
+};
+
+const originalSyncCommit = (commits: CompareCommit[], appSlug: string): string | undefined => {
+  const botCommits = commits.filter(
+    (commit): commit is CompareCommit & { sha: string } =>
+      typeof commit.sha === 'string' &&
+      SHA_PATTERN.test(commit.sha) &&
+      commit.commit?.author?.name === `${appSlug}[bot]`,
+  );
+  const original = botCommits.find((commit) => !FIXUP_SUBJECT_PATTERN.test(commitSubject(commit.commit?.message)));
+
+  return (original ?? botCommits[0])?.sha;
+};
+
+const resolveOriginalSyncCommit = async (
+  options: PullRequestDeliveryOptions,
+  fetchImplementation: typeof fetch,
+): Promise<string> => {
+  const { appSlug, base, branch, owner, repo, token } = options;
+  const repositoryUrl = `${GITHUB_API_URL}/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+  const compareUrl = `${repositoryUrl}/compare/${encodeURIComponent(base)}...${encodeURIComponent(branch)}`;
+  const compareResponse = await fetchImplementation(compareUrl, { headers: createHeaders(token) });
+
+  if (!compareResponse.ok) {
+    throw new ConfigError(`Unable to compare the automation branch (${compareResponse.status}).`);
+  }
+
+  const comparePayload = (await parseJson(compareResponse, 'comparing the automation branch')) as {
+    commits?: unknown;
+    total_commits?: unknown;
+  };
+
+  if (!Array.isArray(comparePayload.commits)) {
+    throw new ConfigError('GitHub returned an invalid automation comparison.');
+  }
+
+  const historyIsTruncated =
+    typeof comparePayload.total_commits === 'number' && comparePayload.total_commits > comparePayload.commits.length;
+
+  if (historyIsTruncated) {
+    throw new ConfigError('Automation branch history is too large to identify the original sync commit.');
+  }
+
+  const syncCommit = originalSyncCommit(comparePayload.commits as CompareCommit[], appSlug);
+
+  if (!syncCommit) {
+    throw new ConfigError('Unable to find the original asset sync commit.');
+  }
+
+  return syncCommit;
 };
 
 const requestGitHub = async (
@@ -206,6 +298,16 @@ const requirePullRequestNumber = (payload: unknown): number => {
   return number;
 };
 
+const commitExists = async (git: (args: string[]) => Promise<string>, sha: string): Promise<boolean> => {
+  try {
+    await git(['cat-file', '-e', `${sha}^{commit}`]);
+
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 export const deliverPullRequest = async (
   options: PullRequestDeliveryOptions,
   dependencies: PullRequestDeliveryDependencies = {},
@@ -220,12 +322,11 @@ export const deliverPullRequest = async (
   }
 
   const fetchImplementation = dependencies.fetch ?? fetch;
-  const git =
+  const runGit =
     dependencies.git ??
     ((args: string[], environment?: NodeJS.ProcessEnv) => runGitCommand(repositoryRoot, args, environment));
   const existingBranch = await inspectExistingBranch(options, fetchImplementation);
   const branchRef = `refs/heads/${branch}`;
-  const expectedSha = existingBranch.sha ?? '';
   const repositoryUrl = `${GITHUB_API_URL}/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
   const authenticatedHeader = Buffer.from(`x-access-token:${token}`).toString('base64');
   const authenticatedEnvironment = {
@@ -233,94 +334,69 @@ export const deliverPullRequest = async (
     GIT_CONFIG_KEY_0: 'http.https://github.com/.extraheader',
     GIT_CONFIG_VALUE_0: `AUTHORIZATION: basic ${authenticatedHeader}`,
   };
-  const push = (refspec: string) =>
-    git(['push', `--force-with-lease=${branchRef}:${expectedSha}`, 'origin', refspec], authenticatedEnvironment);
+  // Sparse checkouts are promisor clones, so any Git command may fetch missing objects.
+  // Keep the ephemeral App credential on every subprocess without persisting it.
+  const git = (args: string[]) => runGit(args, authenticatedEnvironment);
 
   if (existingBranch.sha) {
-    await git(['add', '--all', '--', out], authenticatedEnvironment);
+    await git(['add', '--all', '--', out]);
     const desiredTree = (await git(['write-tree'])).trim();
 
     if (!SHA_PATTERN.test(desiredTree)) {
       throw new ConfigError('Git returned an invalid desired tree revision.');
     }
 
-    await git(['fetch', '--no-tags', '--depth=1', 'origin', branchRef], authenticatedEnvironment);
+    await git(['fetch', '--no-tags', '--depth=1', 'origin', branchRef]);
     const fetchedSha = (await git(['rev-parse', 'FETCH_HEAD'])).trim();
 
     if (fetchedSha !== existingBranch.sha) {
       throw new ConfigError('Automation branch changed during delivery.');
     }
 
-    await git(['switch', '--discard-changes', '--force-create', branch, 'FETCH_HEAD'], authenticatedEnvironment);
+    await git(['switch', '--discard-changes', '--force-create', branch, 'FETCH_HEAD']);
     await git(['rm', '-r', '--ignore-unmatch', '--', out]);
 
     if ((await git(['ls-tree', '--name-only', '-r', desiredTree, '--', out])).trim()) {
-      await git(['restore', `--source=${desiredTree}`, '--staged', '--worktree', '--', out], authenticatedEnvironment);
+      await git(['restore', `--source=${desiredTree}`, '--staged', '--worktree', '--', out]);
     }
   }
 
-  const status = await git(['status', '--porcelain=v1', '--untracked-files=all', '--', out], authenticatedEnvironment);
+  const status = await git(['status', '--porcelain=v1', '--untracked-files=all', '--', out]);
+  const changed = Boolean(status.trim());
+  const readBody = dependencies.readBody ?? ((filePath: string) => readFile(filePath, 'utf8'));
+  const publishPullRequest = async (): Promise<number> => {
+    const body = await readBody(bodyPath);
+    const { pullRequest } = existingBranch;
 
-  if (!status.trim()) {
-    if (!existingBranch.sha) {
-      return { changed: false };
-    }
-
-    const headAuthoredByApp =
-      existingBranch.headAuthoredByApp ??
-      (await isCommitAuthoredByApp(options, existingBranch.sha, fetchImplementation));
-
-    if (!headAuthoredByApp) {
-      return { changed: false };
-    }
-
-    await push(`:${branchRef}`);
-
-    if (existingBranch.openPullRequestNumber) {
-      await requestGitHub(
+    if (pullRequest?.state === 'open') {
+      const payload = await requestGitHub(
         fetchImplementation,
-        `${repositoryUrl}/pulls/${existingBranch.openPullRequestNumber}`,
+        `${repositoryUrl}/pulls/${pullRequest.number}`,
         token,
         'PATCH',
-        { state: 'closed' },
-        'close the obsolete pull request',
+        { body, title },
+        'update the pull request',
       );
+
+      return requirePullRequestNumber(payload);
     }
 
-    return { changed: false };
-  }
+    if (pullRequest?.state === 'closed') {
+      const response = await fetchImplementation(`${repositoryUrl}/pulls/${pullRequest.number}`, {
+        body: JSON.stringify({ body, state: 'open', title }),
+        headers: createHeaders(token),
+        method: 'PATCH',
+      });
 
-  await git(['config', 'user.name', `${appSlug}[bot]`]);
-  await git(['config', 'user.email', `${appSlug}[bot]@users.noreply.github.com`]);
+      if (response.ok) {
+        return requirePullRequestNumber(await parseJson(response, 'reopening the pull request'));
+      }
 
-  if (!existingBranch.sha) {
-    await git(['switch', '-C', branch]);
-  }
+      if (!(changed && CANNOT_REOPEN_STATUSES.has(response.status))) {
+        throw new ConfigError(`Unable to reopen the pull request (${response.status}).`);
+      }
+    }
 
-  await git(['add', '--all', '--', out]);
-  await git(['commit', '-m', commitMessage]);
-  const localSha = (await git(['rev-parse', 'HEAD'])).trim();
-
-  if (!SHA_PATTERN.test(localSha)) {
-    throw new ConfigError('Git returned an invalid commit revision.');
-  }
-
-  await push(`HEAD:${branchRef}`);
-
-  const body = await (dependencies.readBody ?? ((path: string) => readFile(path, 'utf8')))(bodyPath);
-  let pullRequestNumber: number;
-
-  if (existingBranch.openPullRequestNumber) {
-    const payload = await requestGitHub(
-      fetchImplementation,
-      `${repositoryUrl}/pulls/${existingBranch.openPullRequestNumber}`,
-      token,
-      'PATCH',
-      { body, title },
-      'update the pull request',
-    );
-    pullRequestNumber = requirePullRequestNumber(payload);
-  } else {
     const payload = await requestGitHub(
       fetchImplementation,
       `${repositoryUrl}/pulls`,
@@ -329,8 +405,43 @@ export const deliverPullRequest = async (
       { base, body, head: branch, title },
       'create the pull request',
     );
-    pullRequestNumber = requirePullRequestNumber(payload);
+
+    return requirePullRequestNumber(payload);
+  };
+
+  if (!changed) {
+    if (!existingBranch.pullRequest || existingBranch.pullRequest.state === 'merged') {
+      return { changed: false };
+    }
+
+    return { changed: false, pullRequestNumber: await publishPullRequest() };
   }
 
-  return { changed: true, pullRequestNumber };
+  await git(['config', 'user.name', `${appSlug}[bot]`]);
+  await git(['config', 'user.email', `${appSlug}[bot]@users.noreply.github.com`]);
+
+  if (existingBranch.sha) {
+    const syncCommit = await resolveOriginalSyncCommit(options, fetchImplementation);
+
+    if (!(await commitExists(git, syncCommit))) {
+      await git(['fetch', '--no-tags', '--depth=1', 'origin', syncCommit]);
+    }
+
+    await git(['add', '--all', '--', out]);
+    await git(['commit', `--fixup=${syncCommit}`]);
+  } else {
+    await git(['switch', '-C', branch]);
+    await git(['add', '--all', '--', out]);
+    await git(['commit', '-m', commitMessage]);
+  }
+
+  const localSha = (await git(['rev-parse', 'HEAD'])).trim();
+
+  if (!SHA_PATTERN.test(localSha)) {
+    throw new ConfigError('Git returned an invalid commit revision.');
+  }
+
+  await git(['push', 'origin', `HEAD:${branchRef}`]);
+
+  return { changed: true, pullRequestNumber: await publishPullRequest() };
 };
