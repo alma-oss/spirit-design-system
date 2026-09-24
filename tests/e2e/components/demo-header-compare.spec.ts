@@ -9,30 +9,6 @@ type TestConfig = {
   componentName: string;
 };
 
-const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) {
-    return;
-  }
-
-  const formattedPackageName = formatPackageName(packageName);
-
-  test.describe('Test opened Header', () => {
-    test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page, pageRetries }) => {
-      try {
-        const url = getServerUrl(packageName);
-        await page.setViewportSize({ width: 375, height: 812 });
-        await retryPageGoto(page, normalizeUrl(url, componentsDir, componentName), { retries: pageRetries });
-        await waitForPageLoad(page);
-        await hideFromVisualTests(page);
-        await runHeaderTests(page, componentName);
-      } catch (error) {
-        console.error(`Test for demo ${formattedPackageName} component ${componentName} failed. ${error}`);
-        throw error;
-      }
-    });
-  });
-};
-
 const runHeaderTests = async (page: Page, componentName: string): Promise<void> => {
   // open drawer for 'With Navigation'
   await page.click('[id="drawer-navigation-open-button"]');
@@ -63,6 +39,30 @@ const runHeaderTests = async (page: Page, componentName: string): Promise<void> 
   await page.locator('body').click({ position: { x: 0, y: 0 } });
 
   await expect(page.getByRole('dialog')).not.toBeVisible();
+};
+
+const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
+  if (!packageName) {
+    return;
+  }
+
+  const formattedPackageName = formatPackageName(packageName);
+
+  test.describe('Test opened Header', () => {
+    test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page, pageRetries }) => {
+      try {
+        const url = getServerUrl(packageName);
+        await page.setViewportSize({ width: 375, height: 812 });
+        await retryPageGoto(page, normalizeUrl(url, componentsDir, componentName), { retries: pageRetries });
+        await waitForPageLoad(page);
+        await hideFromVisualTests(page);
+        await runHeaderTests(page, componentName);
+      } catch (error) {
+        console.error(`Test for demo ${formattedPackageName} component ${componentName} failed. ${error}`);
+        throw error;
+      }
+    });
+  });
 };
 
 const componentName = 'Header';

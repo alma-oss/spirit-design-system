@@ -9,29 +9,6 @@ type TestConfig = {
   componentName: string;
 };
 
-const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) {
-    return;
-  }
-
-  const formattedPackageName = formatPackageName(packageName);
-
-  test.describe('Test opened Drawer', () => {
-    test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page, pageRetries }) => {
-      try {
-        const url = getServerUrl(packageName);
-        await retryPageGoto(page, normalizeUrl(url, componentsDir, componentName), { retries: pageRetries });
-        await waitForPageLoad(page);
-        await hideFromVisualTests(page);
-        await runDrawerTests(page, componentName);
-      } catch (error) {
-        console.error(`Test for demo ${formattedPackageName} component ${componentName} failed. ${error}`);
-        throw error;
-      }
-    });
-  });
-};
-
 /**
  * Waits for the drawer alignment to be applied after clicking an alignment radio button.
  *
@@ -121,6 +98,29 @@ const runDrawerTests = async (page: Page, componentName: string): Promise<void> 
   await page.keyboard.press('Escape');
 
   await expect(page.getByTestId('drawer-panel')).not.toBeVisible();
+};
+
+const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
+  if (!packageName) {
+    return;
+  }
+
+  const formattedPackageName = formatPackageName(packageName);
+
+  test.describe('Test opened Drawer', () => {
+    test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page, pageRetries }) => {
+      try {
+        const url = getServerUrl(packageName);
+        await retryPageGoto(page, normalizeUrl(url, componentsDir, componentName), { retries: pageRetries });
+        await waitForPageLoad(page);
+        await hideFromVisualTests(page);
+        await runDrawerTests(page, componentName);
+      } catch (error) {
+        console.error(`Test for demo ${formattedPackageName} component ${componentName} failed. ${error}`);
+        throw error;
+      }
+    });
+  });
 };
 
 const componentName = 'Drawer';

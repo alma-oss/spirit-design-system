@@ -52,42 +52,10 @@ const getComboboxOpenTestConfigs = (packageName: string): ComboboxOpenTestConfig
   ];
 };
 
-const getLocationsInputId = (packageName: string): string =>
-  packageName === 'web' ? INPUT_IDS.web.locations : INPUT_IDS['web-react'].locations;
-
-const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) {
-    return;
-  }
-
-  const formattedPackageName = formatPackageName(packageName);
-
-  test.describe('Test opened Combobox', () => {
-    test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page, pageRetries }) => {
-      try {
-        // Taller than default Desktop Chrome so tall grid popovers are not clipped.
-        await page.setViewportSize({ width: 1280, height: 960 });
-        const url = getServerUrl(packageName);
-        await retryPageGoto(page, normalizeUrl(url, componentsDir, componentName), { retries: pageRetries });
-        await waitForPageLoad(page);
-        await hideFromVisualTests(page);
-        await runComboboxOpenTests(page, componentName, packageName);
-        await runLocationsSplitTagOpenTest(page, componentName, packageName);
-      } catch (error) {
-        console.error(`Test for demo ${formattedPackageName} component ${componentName} failed. ${error}`);
-        throw error;
-      }
-    });
-  });
+const getLocationsInputId = (packageName: string): string => {
+  return packageName === 'web' ? INPUT_IDS.web.locations : INPUT_IDS['web-react'].locations;
 };
 
-/**
- * Hide sibling demo sections so the target Combobox sits at the top of the viewport
- * and its downward popover is not clipped by the page length above it.
- *
- * @param page
- * @param inputId
- */
 const isolateComboboxSection = async (page: Page, inputId: string): Promise<() => Promise<void>> => {
   await page.evaluate((id) => {
     const input = document.getElementById(id);
@@ -118,6 +86,7 @@ const isolateComboboxSection = async (page: Page, inputId: string): Promise<() =
 };
 
 const runComboboxOpenTests = async (page: Page, componentName: string, packageName: string): Promise<void> => {
+  /* eslint-disable no-await-in-loop -- each Combobox must be opened, screenshotted and closed before the next */
   for (const config of getComboboxOpenTestConfigs(packageName)) {
     const restoreSections = await isolateComboboxSection(page, config.inputId);
     const input = page.locator(`[id="${config.inputId}"]`);
@@ -135,6 +104,7 @@ const runComboboxOpenTests = async (page: Page, componentName: string, packageNa
     await restoreSections();
     await page.waitForTimeout(300);
   }
+  /* eslint-enable no-await-in-loop */
 };
 
 /**
@@ -178,6 +148,32 @@ const runLocationsSplitTagOpenTest = async (
 
   await restoreSections();
   await page.waitForTimeout(300);
+};
+
+const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
+  if (!packageName) {
+    return;
+  }
+
+  const formattedPackageName = formatPackageName(packageName);
+
+  test.describe('Test opened Combobox', () => {
+    test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page, pageRetries }) => {
+      try {
+        // Taller than default Desktop Chrome so tall grid popovers are not clipped.
+        await page.setViewportSize({ width: 1280, height: 960 });
+        const url = getServerUrl(packageName);
+        await retryPageGoto(page, normalizeUrl(url, componentsDir, componentName), { retries: pageRetries });
+        await waitForPageLoad(page);
+        await hideFromVisualTests(page);
+        await runComboboxOpenTests(page, componentName, packageName);
+        await runLocationsSplitTagOpenTest(page, componentName, packageName);
+      } catch (error) {
+        console.error(`Test for demo ${formattedPackageName} component ${componentName} failed. ${error}`);
+        throw error;
+      }
+    });
+  });
 };
 
 const componentName = 'UNSTABLE_Combobox';
