@@ -1,0 +1,306 @@
+{
+  "templateFile": "./Icon.figma.batch.ts",
+  "components": [
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3615",
+      "name": "add",
+      "id": "icon-add",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=31224-87",
+      "name": "bullet-outline",
+      "id": "icon-bullet-outline",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=31224-86",
+      "name": "bullet",
+      "id": "icon-bullet",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3621",
+      "name": "check-plain",
+      "id": "icon-check-plain",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3633",
+      "name": "chevron-down",
+      "id": "icon-chevron-down",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3624",
+      "name": "chevron-left",
+      "id": "icon-chevron-left",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3627",
+      "name": "chevron-right",
+      "id": "icon-chevron-right",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3630",
+      "name": "chevron-up",
+      "id": "icon-chevron-up",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3618",
+      "name": "close",
+      "id": "icon-close",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3663",
+      "name": "danger",
+      "id": "icon-danger",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=11847-9707",
+      "name": "download",
+      "id": "icon-download",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=13545-10470",
+      "name": "edit",
+      "id": "icon-edit",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=11847-9772",
+      "name": "file",
+      "id": "icon-file",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=32935-1175",
+      "name": "folder-dualtone",
+      "id": "icon-folder-dualtone",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3650",
+      "name": "hamburger",
+      "id": "icon-hamburger",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3648",
+      "name": "help",
+      "id": "icon-help",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3649",
+      "name": "info",
+      "id": "icon-info",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5888-3640",
+      "name": "link",
+      "id": "icon-link",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=33631-145",
+      "name": "lock",
+      "id": "icon-lock",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=18856-34441",
+      "name": "logo-apple-colored",
+      "id": "icon-logo-apple-colored",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=18856-34442",
+      "name": "logo-apple",
+      "id": "icon-logo-apple",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=16444-956",
+      "name": "logo-facebook-colored",
+      "id": "icon-logo-facebook-colored",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=16444-955",
+      "name": "logo-facebook",
+      "id": "icon-logo-facebook",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=16441-195",
+      "name": "logo-google-colored",
+      "id": "icon-logo-google-colored",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=16441-193",
+      "name": "logo-google",
+      "id": "icon-logo-google",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=16444-960",
+      "name": "logo-linkedin-colored",
+      "id": "icon-logo-linkedin-colored",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=16444-959",
+      "name": "logo-linkedin",
+      "id": "icon-logo-linkedin",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=16444-958",
+      "name": "logo-x-colored",
+      "id": "icon-logo-x-colored",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=16444-957",
+      "name": "logo-x",
+      "id": "icon-logo-x",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=16340-414",
+      "name": "logo-youtube-colored",
+      "id": "icon-logo-youtube-colored",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=16340-415",
+      "name": "logo-youtube",
+      "id": "icon-logo-youtube",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3651",
+      "name": "more",
+      "id": "icon-more",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=33631-6434",
+      "name": "placeholder",
+      "id": "icon-placeholder",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3652",
+      "name": "profile",
+      "id": "icon-profile",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3653",
+      "name": "reload",
+      "id": "icon-reload",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3654",
+      "name": "search",
+      "id": "icon-search",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=32935-1174",
+      "name": "shield-dualtone",
+      "id": "icon-shield-dualtone",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=11441-8832",
+      "name": "spinner",
+      "id": "icon-spinner",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=27435-4350",
+      "name": "success",
+      "id": "icon-success",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=11847-9706",
+      "name": "upload",
+      "id": "icon-upload",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3662",
+      "name": "visibility-off",
+      "id": "icon-visibility-off",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=5920-3661",
+      "name": "visibility-on",
+      "id": "icon-visibility-on",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    },
+    {
+      "url": "<FIGMA_FILE_ID>?node-id=17261-10794",
+      "name": "warning",
+      "id": "icon-warning",
+      "component": "Icon",
+      "source": "https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/Icon.tsx"
+    }
+  ]
+}
