@@ -1,16 +1,12 @@
 export type StringOrStringArray = string | string[];
 
 export interface A11yScanOptions {
-
   /** CSS selectors to exclude from scan */
   exclude?: StringOrStringArray;
-
   /** Rule IDs to disable */
   disableRules?: StringOrStringArray;
-
   /** Tags to filter rules (e.g., 'wcag2a', 'wcag2aa') */
   withTags?: StringOrStringArray;
-
   /** Specific rule IDs to test */
   withRules?: StringOrStringArray;
 }
