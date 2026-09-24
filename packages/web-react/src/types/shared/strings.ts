@@ -5,7 +5,7 @@ export type TranslatableString = string | { key: string; params?: Record<string,
 
 /**
  * Optional component copy grouped under `label` (visible) and `ariaLabel` (screen-reader).
- * Leaves are `TranslatableString`; nest further only when a group of related strings needs it.
+ * Leaves are `TranslatableString` under a descriptive key even when a group has only one string.
  */
 export interface ComponentStrings {
   [key: string]: TranslatableString | ComponentStrings | undefined;

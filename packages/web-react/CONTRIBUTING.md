@@ -324,8 +324,8 @@ Implementation uses **`useI18n`** in `src/hooks/useI18n.ts` and optional **`I18n
 2. Expose required component copy as a top-level `TranslatableString` prop.
 3. Expose optional component copy with a meaningful default through a component-local `FooStrings` type and
    `StringsProps<FooStrings>`.
-4. Nest optional copy as `strings.ariaLabel.*` (screen-reader) and `strings.label.*` (visible). A single SR string
-   is the leaf `strings.ariaLabel`. Nest further only when a group of related strings needs it.
+4. Nest optional copy as `strings.ariaLabel.*` (screen-reader) and `strings.label.*` (visible), including when there
+   is only one string (for example `strings.ariaLabel.close`).
 5. Resolve the selected literal or translation reference with `resolveComponentString`; select deprecated aliases
    and the internal default key before calling the resolver. When a component has several optional strings, use
    `resolveComponentStrings` instead of repeating the call.
@@ -334,7 +334,7 @@ Do not create both a top-level optional prop and a `strings` key for the same va
 labels and React node slots remains a regular prop.
 
 ```tsx
-const label = resolveComponentString(strings?.ariaLabel ?? closeLabel ?? { key: 'common.close' }, t);
+const label = resolveComponentString(strings?.ariaLabel?.close ?? closeLabel ?? { key: 'common.close' }, t);
 
 const labels = resolveComponentStrings(
   {
