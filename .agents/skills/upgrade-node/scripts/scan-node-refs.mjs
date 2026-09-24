@@ -50,23 +50,14 @@ const walkFiles = (directory, matcher, results = []) => {
   }
 
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-    if (SKIP_DIRS.has(entry.name)) {
-      continue;
-    }
+    if (!SKIP_DIRS.has(entry.name) && !SKIP_FILES.has(entry.name)) {
+      const absolutePath = path.join(directory, entry.name);
 
-    if (SKIP_FILES.has(entry.name)) {
-      continue;
-    }
-
-    const absolutePath = path.join(directory, entry.name);
-
-    if (entry.isDirectory()) {
-      walkFiles(absolutePath, matcher, results);
-      continue;
-    }
-
-    if (matcher(absolutePath)) {
-      results.push(absolutePath);
+      if (entry.isDirectory()) {
+        walkFiles(absolutePath, matcher, results);
+      } else if (matcher(absolutePath)) {
+        results.push(absolutePath);
+      }
     }
   }
 
@@ -127,24 +118,22 @@ const scanCiMatrix = (root) => {
   }
 
   for (const workflowFile of fs.readdirSync(workflowDir)) {
-    if (!workflowFile.endsWith('.yaml') && !workflowFile.endsWith('.yml')) {
-      continue;
-    }
+    if (workflowFile.endsWith('.yaml') || workflowFile.endsWith('.yml')) {
+      const relativePath = `.github/workflows/${workflowFile}`;
+      const content = readText(root, relativePath);
+      const match = content?.match(/node-version:\s*\[([^\]]+)\]/);
 
-    const relativePath = `.github/workflows/${workflowFile}`;
-    const content = readText(root, relativePath);
-    const match = content?.match(/node-version:\s*\[([^\]]+)\]/);
+      if (match) {
+        const nodeVersions = match[1]
+          .split(',')
+          .map((value) => Number.parseInt(value.trim(), 10))
+          .filter((value) => !Number.isNaN(value));
 
-    if (match) {
-      const nodeVersions = match[1]
-        .split(',')
-        .map((value) => Number.parseInt(value.trim(), 10))
-        .filter((value) => !Number.isNaN(value));
-
-      return {
-        file: relativePath,
-        nodeVersions,
-      };
+        return {
+          file: relativePath,
+          nodeVersions,
+        };
+      }
     }
   }
 
@@ -221,15 +210,13 @@ const findLatestMigrationGuide = (root, packageName) => {
   for (const guideFile of fs.readdirSync(packagePath)) {
     const match = guideFile.match(/^migration-v(\d+)\.md$/);
 
-    if (!match) {
-      continue;
-    }
+    if (match) {
+      const version = Number.parseInt(match[1], 10);
 
-    const version = Number.parseInt(match[1], 10);
-
-    if (version > latestVersion) {
-      latestVersion = version;
-      latestFile = toRelative(root, path.join(packagePath, guideFile));
+      if (version > latestVersion) {
+        latestVersion = version;
+        latestFile = toRelative(root, path.join(packagePath, guideFile));
+      }
     }
   }
 
@@ -251,24 +238,20 @@ const scanMigrationGuides = (root) => {
   const guides = [];
 
   for (const packageDir of fs.readdirSync(migrationRoot, { withFileTypes: true })) {
-    if (!packageDir.isDirectory()) {
-      continue;
-    }
+    if (packageDir.isDirectory()) {
+      const packagePath = path.join(migrationRoot, packageDir.name);
 
-    const packagePath = path.join(migrationRoot, packageDir.name);
+      for (const guideFile of fs.readdirSync(packagePath)) {
+        if (guideFile.startsWith('migration-v') && guideFile.endsWith('.md')) {
+          const relativePath = toRelative(root, path.join(packagePath, guideFile));
+          const content = readText(root, relativePath);
 
-    for (const guideFile of fs.readdirSync(packagePath)) {
-      if (!guideFile.startsWith('migration-v') || !guideFile.endsWith('.md')) {
-        continue;
+          guides.push({
+            file: relativePath,
+            hasNodeDropSection: (/###\s+Dropped Support for Node\.js/i).test(content ?? ''),
+          });
+        }
       }
-
-      const relativePath = toRelative(root, path.join(packagePath, guideFile));
-      const content = readText(root, relativePath);
-
-      guides.push({
-        file: relativePath,
-        hasNodeDropSection: (/###\s+Dropped Support for Node\.js/i).test(content ?? ''),
-      });
     }
   }
 

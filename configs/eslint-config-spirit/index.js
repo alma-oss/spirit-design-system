@@ -177,6 +177,20 @@ export default [
   },
 
   {
+    // Skill scripts are agent-facing tooling, not part of the published packages —
+    // requiring/enforcing JSDoc here only adds noise (and `--fix` generates empty
+    // `/** */` blocks when a description is missing).
+    files: ['.agents/skills/**'],
+    rules: {
+      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/require-param': 'off',
+      'jsdoc/require-param-type': 'off',
+      'jsdoc/require-returns': 'off',
+      'jsdoc/require-returns-type': 'off',
+    },
+  },
+
+  {
     // Registered under a spirit-namespaced key to avoid "Cannot redefine plugin" collisions
     // with whatever copy of `eslint-plugin-jest-formatting` `@lmc-eu/eslint-config-jest`
     // resolves internally (and to not depend on its overrides matching these file globs).

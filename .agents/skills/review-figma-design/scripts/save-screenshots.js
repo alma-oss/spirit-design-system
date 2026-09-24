@@ -89,6 +89,7 @@ async function main() {
   const session = await initSession();
 
   for (const { id, nodeId, path } of findings) {
+    // eslint-disable-next-line no-await-in-loop -- requests must be sequential, they share one MCP session
     const { body } = await post(session, {
       jsonrpc: '2.0',
       id,

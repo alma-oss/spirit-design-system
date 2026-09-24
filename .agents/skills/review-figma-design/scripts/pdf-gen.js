@@ -50,7 +50,9 @@ const footerTemplate = `
 
 // --- Helpers ---------------------------------------------------------------
 
-const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+const wait = (ms) => new Promise((resolve) => {
+  setTimeout(resolve, ms);
+});
 
 // --- Local HTTP server for the HTML directory ------------------------------
 // Chrome CDP blocks file:// navigation; serving over localhost sidesteps it.
@@ -137,13 +139,16 @@ async function run() {
   );
 
   try {
-    // Wait for Chrome to start and retry /json until it responds
+    // Wait for Chrome to start and retry /json until it responds. Sequential
+    // retries are required here, so awaiting inside the loop is intentional.
     let jsonData;
 
     for (let attempt = 0; attempt < 10; attempt++) {
+      // eslint-disable-next-line no-await-in-loop -- must wait before each retry
       await wait(600);
 
       try {
+        // eslint-disable-next-line no-await-in-loop -- retries are inherently sequential
         jsonData = await httpGet(`http://127.0.0.1:${CDP_PORT}/json`);
         break;
       } catch {
@@ -186,7 +191,8 @@ async function run() {
 
     const cdp = (method, params = {}) =>
       new Promise((resolve) => {
-        const id = ++msgId;
+        msgId += 1;
+        const id = msgId;
         pending.set(id, resolve);
         ws.send(JSON.stringify({ id, method, params }));
       });
