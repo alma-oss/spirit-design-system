@@ -3,8 +3,6 @@
 //    utility classes.
 // 2. The radius matches Card's and uses the same customization chain.
 // 3. The shadow is static for now; DS-2774 tracks a general shadow API that can take it over.
-// 4. The custom properties omit the `UNSTABLE_` prefix, matching the radius generator. They are public API, so
-//    they keep their names once the component stabilizes.
 
 @use '@tokens' as tokens;
 @use '../../tools/color-scheme';
@@ -23,12 +21,12 @@
     border-width: theme.$border-width;
     border-style: theme.$border-style;
     border-color: color-scheme.border-color();
-    border-radius: theme.$border-radius; // 2., 4.
+    border-radius: theme.$border-radius; // 2.
     background-color: color-scheme.background-color();
 }
 
 .UNSTABLE_Tile--shadow {
-    box-shadow: var(--#{tokens.$css-variable-prefix}tile-box-shadow); // 3., 4.
+    box-shadow: var(--#{tokens.$css-variable-prefix}tile-box-shadow); // 3.
 }
 
 @include component-radius-overrides.generate($class-name: 'UNSTABLE_Tile');
