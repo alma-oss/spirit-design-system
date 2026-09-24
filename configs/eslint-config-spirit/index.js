@@ -25,6 +25,7 @@ const legacyReactConfig = compat.extends(
 // override itself uses `extends` (see the jest config below for the same limitation) —
 // it silently produces `files: [null]`, a pattern that never matches. Drop those broken
 // entries and scope the rest (parser, plugin, base rules) to TypeScript files ourselves.
+// @see { @link https://github.com/lmc-eu/code-quality-tools/issues/268 }
 const legacyTypescriptConfig = fixupConfigRules(compat.extends('@lmc-eu/eslint-config-typescript'))
   // Drop `settings` here — it must apply to every file (JS imports resolve TS modules too),
   // not just the TS-file-scoped block below. It's re-added, unscoped, further down.
@@ -41,9 +42,7 @@ export default [
    * @see { @link https://github.com/alma-oss/spirit-design-system/pull/2421 }
    */
   ...fixupConfigRules(legacyReactConfig),
-
   ...legacyTypescriptConfig,
-
   ...storybook.configs['flat/recommended'],
 
   {
@@ -53,6 +52,7 @@ export default [
     // `eslint-import-resolver-typescript` understands `exports` maps and TS path mapping,
     // and we explicitly point it at the repo's TypeScript projects to keep workspace
     // packages resolvable when linting from the repository root.
+    // @see { @link https://github.com/lmc-eu/code-quality-tools/issues/269 }
     settings: {
       'import/resolver': {
         node: {
@@ -77,6 +77,7 @@ export default [
   // that itself uses `extends`, which `FlatCompat` cannot translate (same limitation as
   // the TypeScript config above) — every resulting entry gets `files: [null]` and never
   // applies. Configure the jest plugin and globals natively instead, scoped to test files.
+  // @see { @link https://github.com/lmc-eu/code-quality-tools/issues/268 }
   {
     files: testFileGlobs,
     languageOptions: {
