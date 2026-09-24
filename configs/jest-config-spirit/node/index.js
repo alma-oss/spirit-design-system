@@ -1,5 +1,3 @@
-import { resolve } from 'path';
-
 export const config = {
   // This option tells Jest that all imported modules in your tests should be mocked automatically.
   // https://jestjs.io/docs/configuration#automock-boolean
