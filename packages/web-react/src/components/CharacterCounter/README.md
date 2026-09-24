@@ -48,7 +48,7 @@ With validation state:
 | `id`               | `string`                                              | —       | ✓        | Base id for the field; used to build the screen reader message element id (`${id}-counter-screen-reader-message`). |
 | `isDisabled`       | `boolean`                                             | —       | ✕        | Whether the character counter is disabled.                                                                         |
 | `registerAria`     | `(params: { add?: string; remove?: string }) => void` | —       | ✓        | Adds/removes the screen reader message id from `aria-describedby` (same pattern as helper/validation text).        |
-| `strings`          | `CharacterCounterStrings`                             | —       | ✕        | `TranslatableString` overrides for screen reader messages. Visible `5/200` text is not translated.                 |
+| `strings`          | `CharacterCounterStrings`                             | —       | ✕        | [`TranslatableString`][readme-component-strings] overrides for screen reader messages. Visible `5/200` text is not translated.                 |
 | `validationState`  | `Validation`                                          | —       | ✕        | Validation state.                                                                                                  |
 
 The component renders nothing if neither `hasCounter` nor `counterThreshold` is set.
@@ -59,6 +59,7 @@ and [escape hatches][readme-escape-hatches]. For controlling inherited and share
 [context props][readme-props-context] mechanisms.
 
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-props-context]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#shared-and-inherited-props
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

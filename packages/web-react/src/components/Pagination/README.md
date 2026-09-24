@@ -167,7 +167,7 @@ Do not mix the two.
 
 | Name                 | Type                                 | Default | Required | Description                                                      |
 | -------------------- | ------------------------------------ | ------- | -------- | ---------------------------------------------------------------- |
-| `strings`            | `{ ariaLabel?: TranslatableString }` | —       | ✕        | Accessible label override                                        |
+| `strings`            | `{ ariaLabel?: TranslatableString }` | —       | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]) |
 | `accessibilityLabel` | `string`                             | —       | ✕        | _Deprecated, use `strings.ariaLabel`_                            |
 | `children`           | `ReactNode`                          | —       | ✕        | Custom content; use instead of `pageNumber`                      |
 | `elementType`        | `ElementType`                        | `a`     | ✕        | Type of an element                                               |
@@ -208,7 +208,7 @@ This component wraps `PaginationLink` and renders a previous chevron with a visu
 
 | Name                 | Type                                         | Default | Required | Description                                   |
 | -------------------- | -------------------------------------------- | ------- | -------- | --------------------------------------------- |
-| `strings`            | `{ ariaLabelPrevious?: TranslatableString }` | —       | ✕        | Accessible label override                     |
+| `strings`            | `{ ariaLabelPrevious?: TranslatableString }` | —       | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]) |
 | `accessibilityLabel` | `string`                                     | —       | ✕        | _Deprecated, use `strings.ariaLabelPrevious`_ |
 | `href`               | `string`                                     | —       | ✕        | Link URL                                      |
 | `isDisabled`         | `bool`                                       | `false` | ✕        | If true, the link is disabled                 |
@@ -223,7 +223,7 @@ This component wraps `PaginationLink` and renders a next chevron with a visually
 
 | Name                 | Type                                     | Default | Required | Description                               |
 | -------------------- | ---------------------------------------- | ------- | -------- | ----------------------------------------- |
-| `strings`            | `{ ariaLabelNext?: TranslatableString }` | —       | ✕        | Accessible label override                 |
+| `strings`            | `{ ariaLabelNext?: TranslatableString }` | —       | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]) |
 | `accessibilityLabel` | `string`                                 | —       | ✕        | _Deprecated, use `strings.ariaLabelNext`_ |
 | `href`               | `string`                                 | —       | ✕        | Link URL                                  |
 | `isDisabled`         | `bool`                                   | `false` | ✕        | If true, the link is disabled             |
@@ -236,7 +236,7 @@ and [escape hatches][readme-escape-hatches].
 
 | Name                         | Type                                                 | Default | Required | Description                                                         |
 | ---------------------------- | ---------------------------------------------------- | ------- | -------- | ------------------------------------------------------------------- |
-| `strings`                    | `{ ariaLabel?, ariaLabelNext?, ariaLabelPrevious? }` | —       | ✕        | Component string overrides                                          |
+| `strings`                    | `{ ariaLabel?, ariaLabelNext?, ariaLabelPrevious? }` | —       | ✕        | Component string overrides ([`TranslatableString`][readme-component-strings]) |
 | `accessibilityLabel`         | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabel`_                               |
 | `accessibilityLabelNext`     | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabelNext`_                           |
 | `accessibilityLabelPrevious` | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabelPrevious`_                       |
@@ -273,6 +273,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 [li-element]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li
 [pagination]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Pagination/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#deprecations
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

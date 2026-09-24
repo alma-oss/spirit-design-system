@@ -51,13 +51,14 @@ Use custom content for the ordered list as component's children instead of passi
 
 ### API
 
-| Name          | Type                 | Default | Required | Description                                                      |
-| ------------- | -------------------- | ------- | -------- | ---------------------------------------------------------------- |
-| `children`    | `ReactNode`          | —       | ✕        | Custom content to override items rendering from array            |
-| `elementType` | `ElementType`        | `nav`   | ✕        | Type of element used as wrapper                                  |
-| `labelBack`   | `TranslatableString` | —       | ✕        | Back-link label on mobile; no Back item is rendered when omitted |
-| `goBackTitle` | `string`             | —       | ✕        | _Deprecated, use `labelBack`_                                    |
-| `items`       | `BreadcrumbsItem[]`  | —       | ✕        | Navigation menu items                                            |
+| Name          | Type                                                 | Default | Required | Description                                                                                                     |
+| ------------- | ---------------------------------------------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------- |
+| `children`    | `ReactNode`                                          | —       | ✕        | Custom content to override items rendering from array                                                           |
+| `elementType` | `ElementType`                                        | `nav`   | ✕        | Type of element used as wrapper                                                                                 |
+| `labelBack`   | [`TranslatableString`][readme-component-strings]     | —       | ✕        | Back-link label on mobile; no Back item is rendered when omitted                                                |
+| `goBackTitle` | `string`                                             | —       | ✕        | _Deprecated, use `labelBack`_                                                                                   |
+| `items`       | `BreadcrumbsItem[]`                                  | —       | ✕        | Navigation menu items                                                                                           |
+| `strings`     | `{ ariaLabel? }`                                     | —       | ✕        | Root `aria-label` override ([`TranslatableString`][readme-component-strings]); default is localized `Breadcrumb` |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -125,6 +126,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 
 [breadcrumbs]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Breadcrumbs/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [truncation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/TRUNCATING.md#breadcrumbs

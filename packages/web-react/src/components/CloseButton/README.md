@@ -69,7 +69,7 @@ When the button controls a specific surface, forward the relevant ARIA attribute
 | `isDisabled`    | `bool`                               | `false`  | ✕        | Whether the button is disabled                                                                                        |
 | `isSubtle`      | `bool`                               | `false`  | ✕        | Whether the button is in subtle variant (no border)                                                                   |
 | `isSymmetrical` | \[`bool` \| `Responsive<bool>`]      | `true`   | ✕        | Whether the button should be symmetrical, use object to set responsive values, e.g. `{ mobile: true, tablet: false }` |
-| `strings`       | `{ ariaLabel?: TranslatableString }` | —        | ✕        | Accessible label override; falls back to the localized `Close` string                                                 |
+| `strings`       | `{ ariaLabel?: TranslatableString }` | —        | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]); falls back to the localized `Close` string |
 | `label`         | `string`                             | —        | ✕        | _Deprecated, use `strings.ariaLabel`_                                                                                 |
 | `onClick`       | `(event: ClickEvent) => void`        | —        | ✕        | Click handler                                                                                                         |
 | `ref`           | `ForwardedRef<HTMLButtonElement>`    | —        | ✕        | Button element reference                                                                                              |
@@ -93,6 +93,7 @@ The `label` prop is deprecated and will be removed in v6. Use `strings.ariaLabel
 [control-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ControlButton/README.md
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [visually-hidden]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/VisuallyHidden/README.md

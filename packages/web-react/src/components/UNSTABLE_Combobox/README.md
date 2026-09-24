@@ -286,7 +286,7 @@ values Combobox does not set itself.
 | `selectionCountLabel`         | `string`                                                    | i18n `combobox.selectionCountLabel`         | ✕        | _Deprecated, use `strings.ariaSelectionCount`_                                                                                       |
 | `selectionCountLabelSingular` | `string`                                                    | i18n `combobox.selectionCountLabelSingular` | ✕        | _Deprecated, use `strings.ariaSelectionCountSingular`_                                                                               |
 | `size`                        | [Size dictionary][dictionary-size]                          | `medium`                                    | ✕        | Size of the field shell                                                                                                              |
-| `strings`                     | `UnstableComboboxStrings`                                   | —                                           | ✕        | `TranslatableString` overrides for optional component copy                                                                           |
+| `strings`                     | `UnstableComboboxStrings`                                   | —                                           | ✕        | [`TranslatableString`][readme-component-strings] overrides for optional component copy                                                                           |
 | `tagDescriptionText`          | `string`                                                    | i18n `combobox.tagDescriptionText`          | ✕        | _Deprecated, use `strings.ariaTagDescription`_                                                                                       |
 | `tagProps`                    | `StyleProps`                                                | —                                           | ✕        | [Style props][readme-style-props] for the default `Tag` elements; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)  |
 | `validationState`             | [Validation dictionary][dictionary-validation]              | —                                           | ✕        | Validation state                                                                                                                     |
@@ -487,6 +487,7 @@ and [escape hatches][readme-escape-hatches].
 [item-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Item/README.md
 [picker-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Picker/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [splittag-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_SplitTag/README.md

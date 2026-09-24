@@ -114,7 +114,7 @@ Or override only one label:
 
 | Name                  | Type                                                              | Default    | Required | Description                                                                  |
 | --------------------- | ----------------------------------------------------------------- | ---------- | -------- | ---------------------------------------------------------------------------- |
-| `strings`             | `{ ariaStart?, ariaEnd?, ariaTop?, ariaBottom? }`                 | —          | ✕        | `TranslatableString` overrides for control button labels                     |
+| `strings`             | `{ ariaStart?, ariaEnd?, ariaTop?, ariaBottom? }`                 | —          | ✕        | [`TranslatableString`][readme-component-strings] overrides for control button labels                     |
 | `ariaLabelControls`   | `{ top?: string, bottom?: string, start?: string; end?: string }` | —          | ✕        | _Deprecated, use `strings.ariaStart` / `ariaEnd` / `ariaTop` / `ariaBottom`_ |
 | `controlsScrollStep`  | `number`                                                          | `300`      | ✕        | Scroll step for controls (pixels)                                            |
 | `children`            | `ReactNode`                                                       | —          | ✓        | ScrollView children's nodes                                                  |
@@ -140,5 +140,6 @@ and [escape hatches][readme-escape-hatches].
 ```
 
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

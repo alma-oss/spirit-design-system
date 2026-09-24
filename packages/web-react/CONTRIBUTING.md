@@ -323,7 +323,7 @@ Implementation uses **`useI18n`** in `src/hooks/useI18n.ts` and optional **`I18n
 1. Add the key to `defaultTranslations` in `src/translations/defaults.ts` following the nested structure (e.g. `pagination.goToPage`, `textField.password.show`).
 2. Expose required component copy as a top-level `TranslatableString` prop.
 3. Expose optional component copy with a meaningful default through a component-local `FooStrings` type and
-   `WithStrings<FooStrings>`.
+   `StringsProps<FooStrings>`.
 4. Use `ariaLabel*` for screen-reader-only copy and `label*` for visible copy.
 5. Resolve the selected literal or translation reference with `resolveComponentString`; select deprecated aliases
    and the internal default key before calling the resolver. When a component has several optional strings, use

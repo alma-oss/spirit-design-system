@@ -184,7 +184,7 @@ To render the `ModalHeader` component without the close button set the `hasClose
 | Name             | Type                                      | Default | Required | Description                                |
 | ---------------- | ----------------------------------------- | ------- | -------- | ------------------------------------------ |
 | `children`       | `ReactNode`                               | —       | ✕        | Children node                              |
-| `strings`        | `{ ariaLabelClose?: TranslatableString }` | —       | ✕        | Close button label override                |
+| `strings`        | `{ ariaLabelClose?: TranslatableString }` | —       | ✕        | Close button label override ([`TranslatableString`][readme-component-strings]) |
 | `closeLabel`     | `string`                                  | —       | ✕        | _Deprecated, use `strings.ariaLabelClose`_ |
 | `hasCloseButton` | `bool`                                    | `true`  | ✕        | Whether close button is rendered           |
 
@@ -470,6 +470,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 [modal]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Modal
 [pxtorem-utility]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#pxtorem
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [scroll-view]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ScrollView/README.md

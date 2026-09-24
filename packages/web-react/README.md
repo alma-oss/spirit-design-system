@@ -263,6 +263,7 @@ the `strings` prop. Both accept a literal string or a translation reference with
 
 ```tsx
 <UncontrolledSplitButton labelButton="Save" />
+<UncontrolledSplitButton labelButton={{ key: 'actions.save' }} />
 <ModalHeader strings={{ ariaLabelClose: 'Dismiss dialog' }} />
 <ModalHeader strings={{ ariaLabelClose: { key: 'common.close' } }} />
 <ModalHeader strings={{ ariaLabelClose: { key: 'modal.close', params: { name: 'Settings' } } }} />

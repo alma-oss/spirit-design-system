@@ -296,7 +296,7 @@ To make the ToastBar dismissible, add the `isDismissible` prop along with a `onC
 
 | Name            | Type                                                            | Default    | Required | Description                                         |
 | --------------- | --------------------------------------------------------------- | ---------- | -------- | --------------------------------------------------- |
-| `strings`       | `{ ariaLabelClose?: TranslatableString }`                       | —          | ✕        | Close label override                                |
+| `strings`       | `{ ariaLabelClose?: TranslatableString }`                       | —          | ✕        | Close label override ([`TranslatableString`][readme-component-strings]) |
 | `closeLabel`    | `string`                                                        | —          | ✕        | _Deprecated, use `strings.ariaLabelClose`_          |
 | `color`         | \[[EmotionColorNamesType][readme-generated-types] \| `neutral`] | `neutral`  | ✕        | Color variant                                       |
 | `hasIcon`       | `bool`                                                          | `false` \* | ✕        | If true, an icon is shown along the message         |
@@ -448,7 +448,7 @@ Read the section [Default Icons according to Color Variant](#default-icons-accor
 | --------------- | ------------------------------------------------------------ | -------- | -------- | ----------------------------------------------------------------- |
 | `alignmentX`    | \[[AlignmentX dictionary][dictionary-alignment] \| `object`] | `center` | ✕        | Horizontal alignment of the toast queue                           |
 | `alignmentY`    | \[`top` \| `bottom` \| `object`]                             | `bottom` | ✕        | Vertical alignment of the toast queue                             |
-| `strings`       | `{ ariaLabelClose?: TranslatableString }`                    | —        | ✕        | Close label override                                              |
+| `strings`       | `{ ariaLabelClose?: TranslatableString }`                    | —        | ✕        | Close label override ([`TranslatableString`][readme-component-strings]) |
 | `closeLabel`    | `string`                                                     | —        | ✕        | _Deprecated, use `strings.ariaLabelClose`_                        |
 | `isCollapsible` | `bool`                                                       | `true`   | ✕        | If true, Toast queue collapses if there are more than 3 ToastBars |
 
@@ -479,6 +479,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 [mdn-role-log]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/log_role
 [react-uncontrolled]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#controlled-vs-uncontrolled-components
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

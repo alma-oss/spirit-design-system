@@ -103,7 +103,7 @@ Set `hasValidationIcon` to show the status icon next to the message (same patter
 | Name                | Type                                           | Default | Required | Description                                                                                                                     |
 | ------------------- | ---------------------------------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `children`          | `ReactNode`                                    | —       | ✕        | Content below the file name (e.g. `ProgressBar`)                                                                                |
-| `strings`           | `{ ariaLabelEdit?, ariaLabelRemove? }`         | —       | ✕        | `TranslatableString` overrides for action labels                                                                                |
+| `strings`           | `{ ariaLabelEdit?, ariaLabelRemove? }`         | —       | ✕        | [`TranslatableString`][readme-component-strings] overrides for action labels                                                                                |
 | `editText`          | `string`                                       | —       | ✕        | _Deprecated, use `strings.ariaLabelEdit`_                                                                                       |
 | `elementType`       | `ElementType`                                  | `li`    | ✕        | Root HTML element for the row                                                                                                   |
 | `hasValidationIcon` | `boolean`                                      | `false` | ✕        | When `validationState` is set, show the validation icon next to `validationText`                                                |
@@ -157,6 +157,7 @@ The rest of the properties are created from the default `<span>` element. [More 
 [progress-bar-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ProgressBar/README.md
 [span-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [web-react-icon-documentation]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#-usage

@@ -156,14 +156,14 @@ Full example:
 | Name                           | Type                                         | Default        | Required | Description                                              |
 | ------------------------------ | -------------------------------------------- | -------------- | -------- | -------------------------------------------------------- |
 | `buttonIconName`               | `string`                                     | -              | ✕ \*     | Name of the icon to be displayed in the Button           |
-| `labelButton`                  | `TranslatableString`                         | -              | ✓ \*     | Label of the Button                                      |
+| `labelButton`                  | [`TranslatableString`][readme-component-strings] | -              | ✓ \*     | Label of the Button                                      |
 | `buttonLabel`                  | `string`                                     | -              | ✓ \*     | _Deprecated, use `labelButton`_                          |
 | `buttonOnClick`                | `function`                                   | -              | ✓        | Function to be called when the Button is clicked         |
 | `children`                     | `ReactNode`                                  | -              | ✓        | Dropdown content                                         |
 | `color`                        | \[`primary` \| `secondary` \| `tertiary` ]   | `primary`      | ✕        | Color variant                                            |
 | `dropdownPlacement`            | [Placement dictionary][dictionary-placement] | `bottom-end`   | ✕        | Placement of the Dropdown                                |
 | `dropdownTriggerIconName`      | `string`                                     | `chevron-down` | ✕        | Name of the icon to be displayed in the Dropdown Trigger |
-| `strings`                      | `{ ariaLabelDropdown?: TranslatableString }` | -              | ✕        | Dropdown Trigger label override                          |
+| `strings`                      | `{ ariaLabelDropdown?: TranslatableString }` | -              | ✕        | Dropdown Trigger label override ([`TranslatableString`][readme-component-strings]) |
 | `dropdownTriggerLabel`         | `string`                                     | -              | ✕        | _Deprecated, use `strings.ariaLabelDropdown`_            |
 | `id`                           | `string`                                     | -              | ✓        | Id of the Split Button and part of Dropdown id           |
 | `isButtonLabelHidden`          | `bool`                                       | `false`        | ✕ \*     | Whether is button label hidden                           |
@@ -189,6 +189,7 @@ to be visible, use `isButtonLabelHidden` to visually hide the required accessibl
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#size
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Button/README.md
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-dropdown]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Dropdown/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

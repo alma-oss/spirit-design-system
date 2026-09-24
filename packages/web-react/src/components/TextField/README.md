@@ -156,7 +156,7 @@ such as a `button` or link.
 | `ref`               | `ForwardedRef<HTMLInputElement>`                                             | —        | ✕        | Input element reference                                                 |
 | `size`              | [Size dictionary][dictionary-size]                                           | `medium` | ✕        | Size variant                                                            |
 | `startAddon`        | `ReactNode`                                                                  | —        | ✕        | Addon rendered before the input                                         |
-| `strings`           | `{ ariaLabelShow?: TranslatableString; ariaLabelHide?: TranslatableString }` | —        | ✕        | Password-toggle accessible label overrides                              |
+| `strings`           | `{ ariaLabelShow?: TranslatableString; ariaLabelHide?: TranslatableString }` | —        | ✕        | Password-toggle accessible label overrides ([`TranslatableString`][readme-component-strings]) |
 | `type`              | \[`email` \| `number` \| `password` \| `search` \| `tel` \| `text` \| `url`] | `text`   | ✕        | Input type                                                              |
 | `validationState`   | [Validation dictionary][dictionary-validation]                               | —        | ✕        | Type of validation state                                                |
 | `validationText`    | \[`ReactNode` \| `ReactNode[]`]                                              | —        | ✕        | Validation text                                                         |
@@ -196,6 +196,7 @@ For detailed information see [TextField][readme-web-textfield] component.
 [dictionary-variant]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#variant
 [react-input]: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-input-addon]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/InputAddon/README.md
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
