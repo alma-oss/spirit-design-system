@@ -1,6 +1,6 @@
-import type { Decorator } from '@storybook/react';
-import { IconsProvider } from '@alma-oss/spirit-web-react';
 import icons from '@alma-oss/spirit-icons/icons';
+import { IconsProvider } from '@alma-oss/spirit-web-react';
+import { type Decorator } from '@storybook/react';
 
 // Add debug logging to help identify deployment issues
 if (!icons || Object.keys(icons).length === 0) {
