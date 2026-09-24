@@ -6560,6 +6560,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lmc-eu/spirit-demo-app@workspace:apps/demo"
   dependencies:
+    "@alma-oss/spirit-common": "workspace:^"
     "@rollup/plugin-terser": "catalog:build"
     "@rollup/plugin-typescript": "catalog:build"
     autoprefixer: "catalog:build"
@@ -19286,6 +19287,8 @@ __metadata:
     "@babel/core": "catalog:build"
     "@babel/eslint-parser": "catalog:test"
     "@babel/preset-react": "catalog:build"
+    "@eslint/compat": "catalog:lint"
+    "@eslint/eslintrc": "catalog:lint"
     "@html-eslint/eslint-plugin": "catalog:lint"
     "@html-eslint/parser": "catalog:lint"
     "@lmc-eu/eslint-config-base": "catalog:lint"
@@ -19301,6 +19304,7 @@ __metadata:
     eslint-plugin-import: "catalog:lint"
     eslint-plugin-jest: "catalog:lint"
     eslint-plugin-jest-dom: "catalog:lint"
+    eslint-plugin-jest-formatting: "catalog:lint"
     eslint-plugin-jsdoc: "catalog:lint"
     eslint-plugin-jsx-a11y: "catalog:lint"
     eslint-plugin-prettier: "catalog:lint"
@@ -19312,6 +19316,7 @@ __metadata:
     eslint-plugin-storybook: "catalog:lint"
     eslint-plugin-testing-library: "catalog:lint"
     eslint-restricted-globals: "catalog:lint"
+    globals: "catalog:lint"
     prettier: "catalog:lint"
     prettier-config-spirit: "workspace:^"
     typescript: "catalog:types"

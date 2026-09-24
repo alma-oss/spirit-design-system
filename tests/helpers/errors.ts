@@ -1,3 +1,5 @@
+/* eslint-disable max-classes-per-file -- cohesive group of related transient-error classes */
+
 /**
  * Custom error classes for distinguishing between different types of failures.
  * These help differentiate between transient issues (that can be retried) and real test failures.

@@ -5,14 +5,13 @@ import { filterSvgFiles } from './shared';
 export const toPascalCase = (string: string): string =>
   string
     .replace('.svg', '')
-    .replace(/\w+/g, (word) => {
-      return word[0].toUpperCase() + word.slice(1).toLowerCase();
-    })
+    .replace(/\w+/g, (word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
     .replaceAll('-', '');
 
 export const prepareSvgForReactComponent = (srcDir: string, distDir: string): void => {
   const files = fs.readdirSync(srcDir);
   const svgs = filterSvgFiles(files);
+
   if (svgs.length > 0) {
     // Ensure distDir exists
     if (!fs.existsSync(distDir)) {

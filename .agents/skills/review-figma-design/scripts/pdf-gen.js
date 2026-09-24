@@ -7,9 +7,9 @@
 // Requires Node.js 22+ for the built-in WebSocket global.
 
 import { spawn } from 'child_process';
+import fs from 'fs';
 import http from 'http';
 import net from 'net';
-import fs from 'fs';
 import path from 'path';
 
 const [, , CHROME, HTML, PDF] = process.argv;
@@ -50,7 +50,9 @@ const footerTemplate = `
 
 // --- Helpers ---------------------------------------------------------------
 
-const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+const wait = (ms) => new Promise((resolve) => {
+  setTimeout(resolve, ms);
+});
 
 // --- Local HTTP server for the HTML directory ------------------------------
 // Chrome CDP blocks file:// navigation; serving over localhost sidesteps it.
@@ -63,7 +65,11 @@ function startServer(htmlPath) {
     const server = http.createServer((req, res) => {
       const filePath = path.join(dir, decodeURIComponent(req.url.split('?')[0]));
       fs.readFile(filePath, (err, data) => {
-        if (err) { res.writeHead(404); res.end(); return; }
+        if (err) {
+          res.writeHead(404); res.end();
+
+          return;
+        }
         const ext = path.extname(filePath).toLowerCase();
         const mime = { '.html': 'text/html', '.png': 'image/png', '.svg': 'image/svg+xml' }[ext] || 'application/octet-stream';
         res.writeHead(200, { 'Content-Type': mime });
@@ -96,7 +102,9 @@ function httpGet(url, timeoutMs = 5000) {
   return new Promise((resolve, reject) => {
     const req = http.get(url, (res) => {
       let data = '';
-      res.on('data', (chunk) => { data += chunk; });
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
       res.on('end', () => resolve(data));
     });
     req.on('error', reject);
@@ -131,23 +139,34 @@ async function run() {
   );
 
   try {
-    // Wait for Chrome to start and retry /json until it responds
+    // Wait for Chrome to start and retry /json until it responds. Sequential
+    // retries are required here, so awaiting inside the loop is intentional.
     let jsonData;
+
     for (let attempt = 0; attempt < 10; attempt++) {
+      // eslint-disable-next-line no-await-in-loop -- must wait before each retry
       await wait(600);
+
       try {
+        // eslint-disable-next-line no-await-in-loop -- retries are inherently sequential
         jsonData = await httpGet(`http://127.0.0.1:${CDP_PORT}/json`);
         break;
       } catch {
         // not ready yet — retry
       }
     }
-    if (!jsonData) throw new Error('Chrome CDP did not become ready');
+
+    if (!jsonData) {
+      throw new Error('Chrome CDP did not become ready');
+    }
 
     // Find the main page tab (type:"page"), not extension background pages
     const tabs = JSON.parse(jsonData);
     const tab = tabs.find((t) => t.type === 'page' && t.webSocketDebuggerUrl);
-    if (!tab) throw new Error('No debuggable page tab found');
+
+    if (!tab) {
+      throw new Error('No debuggable page tab found');
+    }
     const wsUrl = tab.webSocketDebuggerUrl;
 
     // Connect via WebSocket (Node.js 22+ built-in)
@@ -155,8 +174,7 @@ async function run() {
     await new Promise((resolve, reject) => {
       ws.addEventListener('open', resolve);
       ws.addEventListener('error', (e) =>
-        reject(new Error(e.message || e.type || 'WebSocket connection failed')),
-      );
+        reject(new Error(e.message || e.type || 'WebSocket connection failed')));
     });
 
     let msgId = 0;
@@ -164,6 +182,7 @@ async function run() {
 
     ws.addEventListener('message', (e) => {
       const msg = JSON.parse(e.data);
+
       if (msg.id !== undefined && pending.has(msg.id)) {
         pending.get(msg.id)(msg);
         pending.delete(msg.id);
@@ -172,7 +191,8 @@ async function run() {
 
     const cdp = (method, params = {}) =>
       new Promise((resolve) => {
-        const id = ++msgId;
+        msgId += 1;
+        const id = msgId;
         pending.set(id, resolve);
         ws.send(JSON.stringify({ id, method, params }));
       });
@@ -195,8 +215,13 @@ async function run() {
       footerTemplate,
     });
 
-    if (result.error) throw new Error(`CDP error: ${result.error.message}`);
-    if (!result.result?.data) throw new Error('Page.printToPDF returned no data');
+    if (result.error) {
+      throw new Error(`CDP error: ${result.error.message}`);
+    }
+
+    if (!result.result?.data) {
+      throw new Error('Page.printToPDF returned no data');
+    }
 
     fs.writeFileSync(PDF, Buffer.from(result.result.data, 'base64'));
     ws.close();

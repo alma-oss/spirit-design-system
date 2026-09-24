@@ -1,7 +1,7 @@
 /* eslint-disable no-console -- we want to log when test fails */
-import { test, Page } from '../../helpers/fixtures';
-import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot, retryPageGoto } from '../../helpers';
 import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
+import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot, retryPageGoto } from '../../helpers';
+import { test, Page } from '../../helpers/fixtures';
 
 type TestConfig = {
   componentsDir: string;
@@ -14,26 +14,32 @@ type ModalTestConfig = {
   testName: string;
 };
 
-const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) return;
-
-  const formattedPackageName = formatPackageName(packageName);
-
-  test.describe(`Test opened Modal`, () => {
-    test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page, pageRetries }) => {
-      try {
-        const url = getServerUrl(packageName);
-        await retryPageGoto(page, normalizeUrl(url, componentsDir, componentName), { retries: pageRetries });
-        await waitForPageLoad(page);
-        await hideFromVisualTests(page);
-        await runModalTests(page, componentName);
-      } catch (error) {
-        console.error(`Test for demo ${formattedPackageName} component ${componentName} failed. ${error}`);
-        throw error;
-      }
-    });
-  });
-};
+const modalTestConfigs: ModalTestConfig[] = [
+  {
+    openSelector: 'modal-with-form',
+    testName: 'with-form',
+  },
+  {
+    openSelector: 'modal-with-long-content',
+    testName: 'with-long-content',
+  },
+  {
+    openSelector: 'modal-with-scrolling-inside',
+    testName: 'with-scrolling-inside',
+  },
+  {
+    openSelector: 'modal-with-scrollview',
+    testName: 'with-scrollview',
+  },
+  {
+    openSelector: 'modal-with-custom-height',
+    testName: 'with-custom-height',
+  },
+  {
+    openSelector: 'modal-with-disabled-backdrop-click',
+    testName: 'disabled-backdrop-click',
+  },
+];
 
 const runModalTests = async (page: Page, componentName: string): Promise<void> => {
   // open basic modal, close with backdrop click
@@ -63,8 +69,11 @@ const runModalTests = async (page: Page, componentName: string): Promise<void> =
 
   // open rest of modals and take screenshots, close with close button
   for (const config of modalTestConfigs) {
+    // eslint-disable-next-line no-await-in-loop -- each modal must be opened, screenshotted and closed before the next
     await page.click(`[data-test-id="${config.openSelector}"]`);
+    // eslint-disable-next-line no-await-in-loop -- each modal must be opened, screenshotted and closed before the next
     await takeScreenshot(page, `${componentName}-${config.testName}`);
+    // eslint-disable-next-line no-await-in-loop -- each modal must be opened, screenshotted and closed before the next
     await page.click('dialog[open] header button');
   }
 
@@ -72,32 +81,28 @@ const runModalTests = async (page: Page, componentName: string): Promise<void> =
   await takeScreenshot(page, `${componentName}-closed-modals`, { fullPage: true });
 };
 
-const modalTestConfigs: ModalTestConfig[] = [
-  {
-    openSelector: 'modal-with-form',
-    testName: 'with-form',
-  },
-  {
-    openSelector: 'modal-with-long-content',
-    testName: 'with-long-content',
-  },
-  {
-    openSelector: 'modal-with-scrolling-inside',
-    testName: 'with-scrolling-inside',
-  },
-  {
-    openSelector: 'modal-with-scrollview',
-    testName: 'with-scrollview',
-  },
-  {
-    openSelector: 'modal-with-custom-height',
-    testName: 'with-custom-height',
-  },
-  {
-    openSelector: 'modal-with-disabled-backdrop-click',
-    testName: 'disabled-backdrop-click',
-  },
-];
+const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
+  if (!packageName) {
+    return;
+  }
+
+  const formattedPackageName = formatPackageName(packageName);
+
+  test.describe('Test opened Modal', () => {
+    test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page, pageRetries }) => {
+      try {
+        const url = getServerUrl(packageName);
+        await retryPageGoto(page, normalizeUrl(url, componentsDir, componentName), { retries: pageRetries });
+        await waitForPageLoad(page);
+        await hideFromVisualTests(page);
+        await runModalTests(page, componentName);
+      } catch (error) {
+        console.error(`Test for demo ${formattedPackageName} component ${componentName} failed. ${error}`);
+        throw error;
+      }
+    });
+  });
+};
 
 const componentName = 'Modal';
 

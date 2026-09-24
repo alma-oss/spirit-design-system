@@ -1,4 +1,4 @@
-import { test } from '../../helpers/fixtures';
+import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
 import {
   assertNoA11yViolations,
   getWCAG2AAConfig,
@@ -7,7 +7,7 @@ import {
   WEB_REACT_COMPONENTS_URI,
   WEB_REACT_SERVER_URL,
 } from '../../helpers';
-import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
+import { test } from '../../helpers/fixtures';
 
 test.describe('Select Accessibility', () => {
   const testUrl = normalizeUrl(WEB_REACT_SERVER_URL, WEB_REACT_COMPONENTS_URI, 'Select');

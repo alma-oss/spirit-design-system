@@ -27,6 +27,8 @@ const NETWORK_ERROR_PATTERNS = [
 
 /**
  * Checks if an error is a network-related error that should trigger a retry.
+ *
+ * @param error
  */
 function isNetworkError(error: unknown): boolean {
   const errorMessage = String(error);
@@ -37,6 +39,8 @@ function isNetworkError(error: unknown): boolean {
 /**
  * Detects Netlify verification interstitial page.
  * This is not the target demo page and should be retried like network flakiness.
+ *
+ * @param page
  */
 async function isVerificationInterstitial(page: Page): Promise<boolean> {
   try {
@@ -52,21 +56,23 @@ async function isVerificationInterstitial(page: Page): Promise<boolean> {
 
 /**
  * Calculates exponential backoff delay in milliseconds.
+ *
  * @param attemptNumber - The attempt number (1-based)
  * @param error - Error that triggered retry
  * @returns Delay in milliseconds
  */
 function getBackoffDelay(attemptNumber: number, error: unknown): number {
   // Verification interstitials tend to persist longer than transient TCP resets.
-  const baseDelay =
-    error instanceof VerificationChallengeError
+  const baseDelay
+    = error instanceof VerificationChallengeError
       ? VERIFICATION_INTERSTITIAL_BASE_BACKOFF_MS
       : NETWORK_ERROR_BASE_BACKOFF_MS;
 
-  return baseDelay * Math.pow(2, attemptNumber - 1);
+  return baseDelay * 2 ** (attemptNumber - 1);
 }
 
 interface RetryPageGotoOptions {
+
   /**
    * Number of times to retry on network errors. Default: 3
    */
@@ -113,6 +119,7 @@ export async function retryPageGoto(
 
   let lastError: Error | undefined;
 
+  /* eslint-disable no-await-in-loop -- retries are inherently sequential (must wait for one attempt before the next) */
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
       const gotoOptions: Parameters<Page['goto']>[1] = {
@@ -139,28 +146,24 @@ export async function retryPageGoto(
 
       // If it's not a network error or Timeout, rethrow immediately
       if (
-        !isNetworkError(error) &&
-        !(error instanceof errors.TimeoutError) &&
-        !(error instanceof VerificationChallengeError)
+        !isNetworkError(error)
+        && !(error instanceof errors.TimeoutError)
+        && !(error instanceof VerificationChallengeError)
       ) {
         throw error;
       }
 
       // If this is the last attempt, wrap in NetworkError
       if (attempt === retries) {
-        console.error(
-          `✗ Failed to navigate to ${url} after ${retries} attempts with network error: ${error}`,
-        );
+        console.error(`✗ Failed to navigate to ${url} after ${retries} attempts with network error: ${error}`);
 
         throw new NetworkError(`Failed to navigate to ${url} after ${retries} retries`, lastError);
       }
 
       // Calculate backoff and log retry
       const backoffMs = getBackoffDelay(attempt, error);
-      console.warn(
-        `⚠ Network error on attempt ${attempt}/${retries} for ${url}: ${error}. ` +
-          `Retrying in ${backoffMs}ms...`,
-      );
+      console.warn(`⚠ Network error on attempt ${attempt}/${retries} for ${url}: ${error}. `
+        + `Retrying in ${backoffMs}ms...`);
 
       // Wait before retrying
       await page.waitForTimeout(backoffMs);
@@ -173,6 +176,7 @@ export async function retryPageGoto(
       }
     }
   }
+  /* eslint-enable no-await-in-loop */
 
   // This should not be reached due to the throw in the loop, but TypeScript needs it
   throw lastError || new Error(`Failed to navigate to ${url}`);
