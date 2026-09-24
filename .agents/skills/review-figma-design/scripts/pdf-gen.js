@@ -100,7 +100,9 @@ function httpGet(url, timeoutMs = 5000) {
   return new Promise((resolve, reject) => {
     const req = http.get(url, (res) => {
       let data = '';
-      res.on('data', (chunk) => { data += chunk; });
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
       res.on('end', () => resolve(data));
     });
     req.on('error', reject);
