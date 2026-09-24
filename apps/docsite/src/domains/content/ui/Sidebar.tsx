@@ -42,7 +42,7 @@ const SidebarItem = ({ node, currentPath }: { node: NavNode; currentPath: string
 };
 
 const Sidebar = ({ nodes, currentPath }: DocsSidebarProps) => (
-  <div className={styles.sidebar}>
+  <div className={styles.Sidebar}>
     <Navigation aria-label="Section" direction="vertical">
       {nodes.map((node) => (
         <SidebarItem key={node.href} node={node} currentPath={currentPath} />

@@ -22,7 +22,7 @@ const ReactTabPage = async ({ params }: ReactTabProps) => {
     );
 
     return (
-      <div className={markdownStyles.markdown}>
+      <div className={markdownStyles.CanonicalMarkdown}>
         <ReadMe />
       </div>
     );

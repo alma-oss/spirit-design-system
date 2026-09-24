@@ -33,7 +33,7 @@ const findNavNode = (nodes: NavNode[], href: string): NavNode | undefined => {
 };
 
 const GeneratedIndex = ({ nodes }: { nodes: NavNode[] }) => (
-  <div className={markdownStyles.markdown}>
+  <div className={markdownStyles.CanonicalMarkdown}>
     <ul>
       {nodes.map((node) => (
         <li key={node.href}>

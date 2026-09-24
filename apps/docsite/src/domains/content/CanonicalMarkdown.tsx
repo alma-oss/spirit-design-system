@@ -47,7 +47,7 @@ const CanonicalMarkdown = async ({
 
   const { content } = await compileCanonicalSource(raw);
 
-  return <div className={styles.markdown}>{content}</div>;
+  return <div className={styles.CanonicalMarkdown}>{content}</div>;
 };
 
 export default CanonicalMarkdown;

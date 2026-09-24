@@ -1,10 +1,10 @@
 @use '@alma-oss/spirit-web/src/scss/tools/typography';
 @use '@tokens' as tokens;
 
-.markdown {
+.CanonicalMarkdown {
     pre {
-        margin-block: 2rem;
-        padding: 1.25rem 1.5rem;
+        margin-block: var(--spirit-space-1000);
+        padding: var(--spirit-space-800) var(--spirit-space-900);
         white-space: pre-wrap;
         border-radius: var(--spirit-radius-300);
     }
@@ -16,7 +16,7 @@
     ul,
     ol {
         margin-block: var(--spirit-space-900);
-        padding-inline-start: 2rem;
+        padding-inline-start: var(--spirit-space-1000);
         max-width: 70ch;
     }
 
@@ -49,7 +49,7 @@
         @include typography.generate(tokens.$code-small-regular);
 
         background: var(--spirit-color-background-secondary);
-        padding: 0.1em 0.4em;
+        padding: var(--spirit-space-100) var(--spirit-space-400);
         border-radius: var(--spirit-radius-200);
         word-break: break-word;
         white-space: pre-wrap;

@@ -22,7 +22,7 @@ const WebTabPage = async ({ params }: WebTabPageProps) => {
     );
 
     return (
-      <div className={markdownStyles.markdown}>
+      <div className={markdownStyles.CanonicalMarkdown}>
         <ReadMe />
       </div>
     );

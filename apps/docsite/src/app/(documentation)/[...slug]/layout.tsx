@@ -53,7 +53,7 @@ const DocsSlugLayout = async ({ children, params }: DocsSlugLayoutProps) => {
       <Section size="xlarge">
         <Flex alignmentX="stretch" alignmentY="stretch" spacing="space-1200">
           {nav.length > 0 && <Sidebar nodes={nav} currentPath={currentPath} />}
-          <div className={styles.sectionBody}>{children}</div>
+          <div className={styles.SectionBody}>{children}</div>
         </Flex>
       </Section>
     </>

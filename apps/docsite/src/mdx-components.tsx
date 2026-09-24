@@ -38,7 +38,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </ScrollView>
       </div>
     ),
-    iframe: ({ title, ...props }) => <iframe className={styles.embed} title={title || 'Embedded content'} {...props} />,
+    iframe: ({ title, ...props }) => <iframe className={styles.Embed} title={title || 'Embedded content'} {...props} />,
     ...components,
   };
 }
