@@ -94,7 +94,7 @@ The target directory becomes an exact mirror of the selected Brand:
 
 - new SVGs are added
 - changed SVGs are updated
-- SVGs missing from Figma are deleted
+- files and nested directories missing from the current Figma export are deleted
 
 The sync aborts before changing a target when it cannot discover or download the complete asset set.
 
