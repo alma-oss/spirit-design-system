@@ -11,7 +11,7 @@ export default {
       rules: {
         'issue-reference-format': ({ raw = '' }) => {
           const refs = raw.match(/#(?:[A-Za-z]+-\w+|\d+)(?!\w|-)/g) ?? [];
-          const invalid = refs.filter((r) => !/^(?:#[A-Za-z]+-\d+|#\d+)$/.test(r));
+          const invalid = refs.filter((r) => !(/^(?:#[A-Za-z]+-\d+|#\d+)$/).test(r));
 
           return [
             invalid.length === 0,
