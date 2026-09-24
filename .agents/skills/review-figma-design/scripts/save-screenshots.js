@@ -6,20 +6,27 @@
 // Node IDs contain colons (e.g. "2802:66561"), so the script splits on the LAST
 // colon to separate the node ID from the file path.
 
-import http from 'http';
 import fs from 'fs';
+import http from 'http';
 
 const BASE_URL = 'http://localhost:3845/mcp';
 
+/**
+ * @param sessionId
+ * @param body
+ */
 function post(sessionId, body) {
   return new Promise((resolve, reject) => {
     const data = JSON.stringify(body);
     const headers = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json, text/event-stream',
+      Accept: 'application/json, text/event-stream',
       'Content-Length': Buffer.byteLength(data),
     };
-    if (sessionId) headers['mcp-session-id'] = sessionId;
+
+    if (sessionId) {
+      headers['mcp-session-id'] = sessionId;
+    }
 
     const req = http.request(BASE_URL, { method: 'POST', headers }, (res) => {
       const chunks = [];
@@ -27,51 +34,70 @@ function post(sessionId, body) {
       res.on('end', () => resolve({ headers: res.headers, body: Buffer.concat(chunks).toString() }));
     });
     req.on('error', reject);
-    req.setTimeout(15000, () => { req.destroy(); reject(new Error('Request timed out')); });
+    req.setTimeout(15000, () => {
+      req.destroy();
+      reject(new Error('Request timed out'));
+    });
     req.write(data);
     req.end();
   });
 }
 
+/**
+ * @param raw
+ */
 function parseSSE(raw) {
   for (const line of raw.split('\n')) {
-    if (line.startsWith('data:')) return JSON.parse(line.slice(5));
+    if (line.startsWith('data:')) {
+      return JSON.parse(line.slice(5));
+    }
   }
+
   return null;
 }
 
 async function initSession() {
   const { headers } = await post(null, {
-    jsonrpc: '2.0', id: 0, method: 'initialize',
+    jsonrpc: '2.0',
+    id: 0,
+    method: 'initialize',
     params: { protocolVersion: '2024-11-05', capabilities: {}, clientInfo: { name: 'x', version: '1' } },
   });
+
   return headers['mcp-session-id'];
 }
 
 async function main() {
   const args = process.argv.slice(2);
+
   if (args.length === 0) {
-    process.stderr.write(`Usage: node save-screenshots.js NODE_ID:PATH [NODE_ID:PATH ...]\n`);
+    process.stderr.write('Usage: node save-screenshots.js NODE_ID:PATH [NODE_ID:PATH ...]\n');
     process.exit(1);
   }
 
   const findings = args.map((arg, i) => {
     const last = arg.lastIndexOf(':');
+
     if (last === -1) {
       process.stderr.write(`Error: argument '${arg}' must be NODE_ID:PATH\n`);
       process.exit(1);
     }
+
     return { id: i + 1, nodeId: arg.slice(0, last), path: arg.slice(last + 1) };
   });
 
   const session = await initSession();
 
   for (const { id, nodeId, path } of findings) {
+    // eslint-disable-next-line no-await-in-loop -- requests must be sequential, they share one MCP session
     const { body } = await post(session, {
-      jsonrpc: '2.0', id, method: 'tools/call',
+      jsonrpc: '2.0',
+      id,
+      method: 'tools/call',
       params: { name: 'get_screenshot', arguments: { nodeId } },
     });
     const msg = parseSSE(body);
+
     for (const item of msg?.result?.content ?? []) {
       if (item.type === 'image') {
         const buf = Buffer.from(item.data, 'base64');
