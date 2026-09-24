@@ -6,6 +6,7 @@ const PAGE_RETRIES_FALLBACK = 3;
  * Custom fixture types for extended test functionality.
  */
 interface CustomFixtures {
+
   /**
    * Number of retries for page navigation operations.
    * Configured via PW_PAGE_RETRIES environment variable (default: 3).
