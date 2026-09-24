@@ -19,24 +19,28 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://spiritdesignsystem.com'),
 };
 
-const RootLayout = ({ children }: RootLayoutProps) => (
-  <html lang="en">
-    <head>
-      <link rel="preconnect" href={fontshareApiUrl} />
-      <link rel="stylesheet" href={generalSansStylesheet} />
-    </head>
-    <body>
-      <AppProvider>
-        <Header />
-        <main>
-          <Stack elementType="div" hasIntermediateDividers>
-            {children}
-          </Stack>
-        </main>
-        <Footer />
-      </AppProvider>
-    </body>
-  </html>
-);
+const RootLayout = async ({ children }: RootLayoutProps) => {
+  const footer = await Footer();
+
+  return (
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href={fontshareApiUrl} />
+        <link rel="stylesheet" href={generalSansStylesheet} />
+      </head>
+      <body>
+        <AppProvider>
+          <Header />
+          <main>
+            <Stack elementType="div" hasIntermediateDividers>
+              {children}
+            </Stack>
+          </main>
+          {footer}
+        </AppProvider>
+      </body>
+    </html>
+  );
+};
 
 export default RootLayout;
