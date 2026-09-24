@@ -18,10 +18,10 @@ Need a generic icon-only control that isn't a close action? Use [ControlButton][
 ```
 
 CloseButton renders the close icon and a [VisuallyHidden][visually-hidden] label automatically. By default the
-label is the localized `Close` string; override it with `strings.ariaLabel`.
+label is the localized `Close` string; override it with `strings.ariaLabel.close`.
 
 ```tsx
-<CloseButton strings={{ ariaLabel: 'Dismiss notification' }} onClick={handleClose} />
+<CloseButton strings={{ ariaLabel: { close: 'Dismiss notification' } }} onClick={handleClose} />
 ```
 
 ## Sizes
@@ -50,10 +50,10 @@ Remove the border with `isSubtle`:
 ## Accessibility
 
 CloseButton always renders a visually hidden text label so the button has an accessible name without any extra
-markup. Provide a more specific label with `strings.ariaLabel` when the default `Close` is not descriptive enough:
+markup. Provide a more specific label with `strings.ariaLabel.close` when the default `Close` is not descriptive enough:
 
 ```tsx
-<CloseButton strings={{ ariaLabel: { key: 'dialog.close' } }} onClick={handleClose} />
+<CloseButton strings={{ ariaLabel: { close: { key: 'dialog.close' } } }} onClick={handleClose} />
 ```
 
 When the button controls a specific surface, forward the relevant ARIA attributes:
@@ -69,8 +69,8 @@ When the button controls a specific surface, forward the relevant ARIA attribute
 | `isDisabled`    | `bool`                               | `false`  | ✕        | Whether the button is disabled                                                                                        |
 | `isSubtle`      | `bool`                               | `false`  | ✕        | Whether the button is in subtle variant (no border)                                                                   |
 | `isSymmetrical` | \[`bool` \| `Responsive<bool>`]      | `true`   | ✕        | Whether the button should be symmetrical, use object to set responsive values, e.g. `{ mobile: true, tablet: false }` |
-| `strings`       | `{ ariaLabel?: TranslatableString }` | —        | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]); falls back to the localized `Close` string |
-| `label`         | `string`                             | —        | ✕        | _Deprecated, use `strings.ariaLabel`_                                                                                 |
+| `strings`       | `{ ariaLabel?: { close? } }` | —        | ✕        | Accessible close label override ([`TranslatableString`][readme-component-strings]); falls back to the localized `Close` string |
+| `label`         | `string`                     | —        | ✕        | _Deprecated, use `strings.ariaLabel.close`_                                                                                 |
 | `onClick`       | `(event: ClickEvent) => void`        | —        | ✕        | Click handler                                                                                                         |
 | `ref`           | `ForwardedRef<HTMLButtonElement>`    | —        | ✕        | Button element reference                                                                                              |
 | `size`          | [Size dictionary][dictionary-size]   | `medium` | ✕        | Size of the button                                                                                                    |
@@ -81,13 +81,13 @@ use [style props][readme-style-props] and [escape hatches][readme-escape-hatches
 
 ### Deprecation Notice
 
-The `label` prop is deprecated and will be removed in v6. Use `strings.ariaLabel`.
+The `label` prop is deprecated and will be removed in v6. Use `strings.ariaLabel.close`.
 
 ### Migration Guide
 
 ```diff
 - <CloseButton label="Dismiss" />
-+ <CloseButton strings={{ ariaLabel: 'Dismiss' }} />
++ <CloseButton strings={{ ariaLabel: { close: 'Dismiss' } }} />
 ```
 
 [control-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ControlButton/README.md

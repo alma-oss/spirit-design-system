@@ -296,8 +296,8 @@ To make the ToastBar dismissible, add the `isDismissible` prop along with a `onC
 
 | Name            | Type                                                            | Default    | Required | Description                                         |
 | --------------- | --------------------------------------------------------------- | ---------- | -------- | --------------------------------------------------- |
-| `strings`       | `{ ariaLabelClose?: TranslatableString }`                       | —          | ✕        | Close label override ([`TranslatableString`][readme-component-strings]) |
-| `closeLabel`    | `string`                                                        | —          | ✕        | _Deprecated, use `strings.ariaLabelClose`_          |
+| `strings`       | `{ ariaLabel?: { close? } }`                       | —          | ✕        | Close label override ([`TranslatableString`][readme-component-strings]) |
+| `closeLabel`    | `string`                                                        | —          | ✕        | _Deprecated, use `strings.ariaLabel.close`_          |
 | `color`         | \[[EmotionColorNamesType][readme-generated-types] \| `neutral`] | `neutral`  | ✕        | Color variant                                       |
 | `hasIcon`       | `bool`                                                          | `false` \* | ✕        | If true, an icon is shown along the message         |
 | `iconName`      | `string`                                                        | `info` \*  | ✕        | Name of a custom icon to be shown along the message |
@@ -383,7 +383,7 @@ export const Example = () => {
       <UncontrolledToast
         alignmentX="right"
         alignmentY="top"
-        strings={{ ariaLabelClose: 'Close toast' }}
+        strings={{ ariaLabel: { close: 'Close toast' } }}
         hasIcon
         isDismissible
         isCollapsible
@@ -448,8 +448,8 @@ Read the section [Default Icons according to Color Variant](#default-icons-accor
 | --------------- | ------------------------------------------------------------ | -------- | -------- | ----------------------------------------------------------------- |
 | `alignmentX`    | \[[AlignmentX dictionary][dictionary-alignment] \| `object`] | `center` | ✕        | Horizontal alignment of the toast queue                           |
 | `alignmentY`    | \[`top` \| `bottom` \| `object`]                             | `bottom` | ✕        | Vertical alignment of the toast queue                             |
-| `strings`       | `{ ariaLabelClose?: TranslatableString }`                    | —        | ✕        | Close label override ([`TranslatableString`][readme-component-strings]) |
-| `closeLabel`    | `string`                                                     | —        | ✕        | _Deprecated, use `strings.ariaLabelClose`_                        |
+| `strings`       | `{ ariaLabel?: { close? } }`                    | —        | ✕        | Close label override ([`TranslatableString`][readme-component-strings]) |
+| `closeLabel`    | `string`                                                     | —        | ✕        | _Deprecated, use `strings.ariaLabel.close`_                        |
 | `isCollapsible` | `bool`                                                       | `true`   | ✕        | If true, Toast queue collapses if there are more than 3 ToastBars |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
@@ -464,7 +464,7 @@ The `closeLabel` prop on `ToastBar` and `UncontrolledToast` is deprecated and wi
 
 ```diff
 - <ToastBar closeLabel="Dismiss" />
-+ <ToastBar strings={{ ariaLabelClose: 'Dismiss' }} />
++ <ToastBar strings={{ ariaLabel: { close: 'Dismiss' } }} />
 ```
 
 ## Icons

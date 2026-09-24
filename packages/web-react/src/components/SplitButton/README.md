@@ -142,7 +142,7 @@ Full example:
   color="secondary"
   dropdownPlacement="bottom-start"
   dropdownTriggerIconName="more"
-  strings={{ ariaLabelDropdown: 'More' }}
+  strings={{ ariaLabel: { dropdown: 'More' } }}
   id="uncontrolled-split-button"
   isDisabled={false}
   size="large"
@@ -163,8 +163,8 @@ Full example:
 | `color`                        | \[`primary` \| `secondary` \| `tertiary` ]   | `primary`      | ✕        | Color variant                                            |
 | `dropdownPlacement`            | [Placement dictionary][dictionary-placement] | `bottom-end`   | ✕        | Placement of the Dropdown                                |
 | `dropdownTriggerIconName`      | `string`                                     | `chevron-down` | ✕        | Name of the icon to be displayed in the Dropdown Trigger |
-| `strings`                      | `{ ariaLabelDropdown?: TranslatableString }` | -              | ✕        | Dropdown Trigger label override ([`TranslatableString`][readme-component-strings]) |
-| `dropdownTriggerLabel`         | `string`                                     | -              | ✕        | _Deprecated, use `strings.ariaLabelDropdown`_            |
+| `strings`                      | `{ ariaLabel?: { dropdown?: TranslatableString } }` | -              | ✕        | Dropdown Trigger label override ([`TranslatableString`][readme-component-strings]) |
+| `dropdownTriggerLabel`         | `string`                                     | -              | ✕        | _Deprecated, use `strings.ariaLabel.dropdown`_           |
 | `id`                           | `string`                                     | -              | ✓        | Id of the Split Button and part of Dropdown id           |
 | `isButtonLabelHidden`          | `bool`                                       | `false`        | ✕ \*     | Whether is button label hidden                           |
 | `isDisabled`                   | `bool`                                       | `false`        | ✕        | Disables the Split Button                                |
@@ -182,7 +182,7 @@ to be visible, use `isButtonLabelHidden` to visually hide the required accessibl
 
 ```diff
 - <UncontrolledSplitButton buttonLabel="Save" dropdownTriggerLabel="More" />
-+ <UncontrolledSplitButton labelButton={{ key: 'actions.save' }} strings={{ ariaLabelDropdown: 'More' }} />
++ <UncontrolledSplitButton labelButton={{ key: 'actions.save' }} strings={{ ariaLabel: { dropdown: 'More' } }} />
 ```
 
 [dictionary-placement]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#placement

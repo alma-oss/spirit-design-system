@@ -78,12 +78,12 @@ Clicking a control moves the viewport by `controlsScrollStep` value in the Scrol
 
 You can customize the control button labels using the `strings` prop.
 Note that these labels are not visually displayed — they are used for accessibility purposes only.
-All properties (`ariaTop`, `ariaBottom`, `ariaStart`, `ariaEnd`) are optional, and you can define any combination of them.
+All properties (`ariaLabel.top`, `ariaLabel.bottom`, `ariaLabel.start`, `ariaLabel.end`) are optional, and you can define any combination of them.
 
 Default labels are automatically set based on the `direction` prop:
 
-- Horizontal: `Scroll left` and `Scroll right` (uses `ariaStart` and `ariaEnd`)
-- Vertical: `Scroll up` and `Scroll down` (uses `ariaTop` and `ariaBottom`)
+- Horizontal: `Scroll left` and `Scroll right` (uses `ariaLabel.start` and `ariaLabel.end`)
+- Vertical: `Scroll up` and `Scroll down` (uses `ariaLabel.top` and `ariaLabel.bottom`)
 
 You can override all labels:
 
@@ -91,12 +91,7 @@ You can override all labels:
 <ScrollView
   hasControls
   direction="horizontal"
-  strings={{
-    ariaStart: 'Custom scroll left',
-    ariaEnd: 'Custom scroll right',
-    ariaTop: 'Custom scroll up',
-    ariaBottom: 'Custom scroll down',
-  }}
+  strings={{ ariaLabel: { start: 'Custom scroll left', end: 'Custom scroll right', top: 'Custom scroll up', bottom: 'Custom scroll down' } }}
 >
   {/* scrollable content */}
 </ScrollView>
@@ -105,7 +100,7 @@ You can override all labels:
 Or override only one label:
 
 ```tsx
-<ScrollView hasControls direction="horizontal" strings={{ ariaStart: 'Custom scroll left' }}>
+<ScrollView hasControls direction="horizontal" strings={{ ariaLabel: { start: 'Custom scroll left' } }}>
   {/* scrollable content */}
 </ScrollView>
 ```
@@ -114,8 +109,8 @@ Or override only one label:
 
 | Name                  | Type                                                              | Default    | Required | Description                                                                  |
 | --------------------- | ----------------------------------------------------------------- | ---------- | -------- | ---------------------------------------------------------------------------- |
-| `strings`             | `{ ariaStart?, ariaEnd?, ariaTop?, ariaBottom? }`                 | —          | ✕        | [`TranslatableString`][readme-component-strings] overrides for control button labels                     |
-| `ariaLabelControls`   | `{ top?: string, bottom?: string, start?: string; end?: string }` | —          | ✕        | _Deprecated, use `strings.ariaStart` / `ariaEnd` / `ariaTop` / `ariaBottom`_ |
+| `strings`             | `{ ariaLabel?: { start?, end?, top?, bottom? } }`             | —          | ✕        | [`TranslatableString`][readme-component-strings] overrides for control button labels                     |
+| `ariaLabelControls`   | `{ top?: string, bottom?: string, start?: string; end?: string }` | —          | ✕        | _Deprecated, use `strings.ariaLabel.start` / `end` / `top` / `bottom`_ |
 | `controlsScrollStep`  | `number`                                                          | `300`      | ✕        | Scroll step for controls (pixels)                                            |
 | `children`            | `ReactNode`                                                       | —          | ✓        | ScrollView children's nodes                                                  |
 | `direction`           | \[`horizontal` \| `vertical`]                                     | `vertical` | ✕        | Direction of the wrapper                                                     |
@@ -129,14 +124,14 @@ and [escape hatches][readme-escape-hatches].
 
 ### Deprecation Notice
 
-`ariaLabelControls` is deprecated and will be removed in v6. Use `strings.ariaStart` / `ariaEnd` / `ariaTop` /
-`ariaBottom` instead.
+`ariaLabelControls` is deprecated and will be removed in v6. Use `strings.ariaLabel.start` / `end` / `top` /
+`bottom` instead.
 
 ### Migration Guide
 
 ```diff
 - <ScrollView hasControls ariaLabelControls={{ start: 'Left', end: 'Right' }} />
-+ <ScrollView hasControls strings={{ ariaStart: 'Left', ariaEnd: 'Right' }} />
++ <ScrollView hasControls strings={{ ariaLabel: { start: 'Left', end: 'Right' } }} />
 ```
 
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes

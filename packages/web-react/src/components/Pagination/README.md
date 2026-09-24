@@ -167,8 +167,8 @@ Do not mix the two.
 
 | Name                 | Type                                 | Default | Required | Description                                                      |
 | -------------------- | ------------------------------------ | ------- | -------- | ---------------------------------------------------------------- |
-| `strings`            | `{ ariaLabel?: TranslatableString }` | —       | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]) |
-| `accessibilityLabel` | `string`                             | —       | ✕        | _Deprecated, use `strings.ariaLabel`_                            |
+| `strings`            | `{ ariaLabel?: { page?: TranslatableString } }` | —       | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]) |
+| `accessibilityLabel` | `string`                             | —       | ✕        | _Deprecated, use `strings.ariaLabel.page`_                       |
 | `children`           | `ReactNode`                          | —       | ✕        | Custom content; use instead of `pageNumber`                      |
 | `elementType`        | `ElementType`                        | `a`     | ✕        | Type of an element                                               |
 | `href`               | `string`                             | —       | ✕        | Link URL                                                         |
@@ -208,8 +208,8 @@ This component wraps `PaginationLink` and renders a previous chevron with a visu
 
 | Name                 | Type                                         | Default | Required | Description                                   |
 | -------------------- | -------------------------------------------- | ------- | -------- | --------------------------------------------- |
-| `strings`            | `{ ariaLabelPrevious?: TranslatableString }` | —       | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]) |
-| `accessibilityLabel` | `string`                                     | —       | ✕        | _Deprecated, use `strings.ariaLabelPrevious`_ |
+| `strings`            | `{ ariaLabel?: { previous?: TranslatableString } }` | —       | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]) |
+| `accessibilityLabel` | `string`                                     | —       | ✕        | _Deprecated, use `strings.ariaLabel.previous`_ |
 | `href`               | `string`                                     | —       | ✕        | Link URL                                      |
 | `isDisabled`         | `bool`                                       | `false` | ✕        | If true, the link is disabled                 |
 
@@ -223,8 +223,8 @@ This component wraps `PaginationLink` and renders a next chevron with a visually
 
 | Name                 | Type                                     | Default | Required | Description                               |
 | -------------------- | ---------------------------------------- | ------- | -------- | ----------------------------------------- |
-| `strings`            | `{ ariaLabelNext?: TranslatableString }` | —       | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]) |
-| `accessibilityLabel` | `string`                                 | —       | ✕        | _Deprecated, use `strings.ariaLabelNext`_ |
+| `strings`            | `{ ariaLabel?: { next?: TranslatableString } }` | —       | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]) |
+| `accessibilityLabel` | `string`                                 | —       | ✕        | _Deprecated, use `strings.ariaLabel.next`_ |
 | `href`               | `string`                                 | —       | ✕        | Link URL                                  |
 | `isDisabled`         | `bool`                                   | `false` | ✕        | If true, the link is disabled             |
 
@@ -236,10 +236,10 @@ and [escape hatches][readme-escape-hatches].
 
 | Name                         | Type                                                 | Default | Required | Description                                                         |
 | ---------------------------- | ---------------------------------------------------- | ------- | -------- | ------------------------------------------------------------------- |
-| `strings`                    | `{ ariaLabel?, ariaLabelNext?, ariaLabelPrevious? }` | —       | ✕        | Component string overrides ([`TranslatableString`][readme-component-strings]) |
-| `accessibilityLabel`         | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabel`_                               |
-| `accessibilityLabelNext`     | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabelNext`_                           |
-| `accessibilityLabelPrevious` | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabelPrevious`_                       |
+| `strings`                    | `{ ariaLabel?: { page?, next?, previous? } }`            | —       | ✕        | Component string overrides ([`TranslatableString`][readme-component-strings]) |
+| `accessibilityLabel`         | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabel.page`_                              |
+| `accessibilityLabelNext`     | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabel.next`_                              |
+| `accessibilityLabelPrevious` | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabel.previous`_                          |
 | `defaultPage`                | `number`                                             | `1`     | ✕        | The number of the page selected as current page at the first render |
 | `onChange`                   | `(pageNumber: number) => void`                       | -       | ✕        | On page change callback                                             |
 | `totalPages`                 | `number`                                             | `0`     | ✓        | Total count of pages                                                |
@@ -251,14 +251,14 @@ and [escape hatches][readme-escape-hatches].
 
 ### Deprecation Notice
 
-The `accessibilityLabel*` props are deprecated and will be removed in v6. Use the corresponding `ariaLabel*` key
-in `strings`.
+The `accessibilityLabel*` props are deprecated and will be removed in v6. Use the corresponding `strings.ariaLabel.*`
+keys.
 
 ### Migration Guide
 
 ```diff
 - <UncontrolledPagination accessibilityLabel="Page" accessibilityLabelNext="Following" totalPages={10} />
-+ <UncontrolledPagination strings={{ ariaLabel: 'Page', ariaLabelNext: 'Following' }} totalPages={10} />
++ <UncontrolledPagination strings={{ ariaLabel: { page: 'Page', next: 'Following' } }} totalPages={10} />
 ```
 
 For detailed information see [Pagination][pagination] component.

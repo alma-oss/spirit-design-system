@@ -41,7 +41,7 @@ hidden or shown while the field remains correctly marked as required.
   label="Password"
   name="textFieldPasswordToggle"
   placeholder="Placeholder"
-  strings={{ ariaLabelShow: 'Reveal password', ariaLabelHide: { key: 'password.hide' } }}
+  strings={{ ariaLabel: { show: 'Reveal password', hide: { key: 'password.hide' } } }}
   validationState="danger"
   validationText="validation failed"
 />
@@ -156,7 +156,7 @@ such as a `button` or link.
 | `ref`               | `ForwardedRef<HTMLInputElement>`                                             | —        | ✕        | Input element reference                                                 |
 | `size`              | [Size dictionary][dictionary-size]                                           | `medium` | ✕        | Size variant                                                            |
 | `startAddon`        | `ReactNode`                                                                  | —        | ✕        | Addon rendered before the input                                         |
-| `strings`           | `{ ariaLabelShow?: TranslatableString; ariaLabelHide?: TranslatableString }` | —        | ✕        | Password-toggle accessible label overrides ([`TranslatableString`][readme-component-strings]) |
+| `strings`           | `{ ariaLabel?: { hide?, show? } }`                                           | —        | ✕        | Password-toggle accessible label overrides ([`TranslatableString`][readme-component-strings]) |
 | `type`              | \[`email` \| `number` \| `password` \| `search` \| `tel` \| `text` \| `url`] | `text`   | ✕        | Input type                                                              |
 | `validationState`   | [Validation dictionary][dictionary-validation]                               | —        | ✕        | Type of validation state                                                |
 | `validationText`    | \[`ReactNode` \| `ReactNode[]`]                                              | —        | ✕        | Validation text                                                         |

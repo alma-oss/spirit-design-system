@@ -265,16 +265,16 @@ the `strings` prop. Both accept a literal string or a translation reference with
 ```tsx
 <UncontrolledSplitButton labelButton="Save" />
 <UncontrolledSplitButton labelButton={{ key: 'actions.save' }} />
-<ModalHeader strings={{ ariaLabelClose: 'Dismiss dialog' }} />
-<ModalHeader strings={{ ariaLabelClose: { key: 'common.close' } }} />
-<ModalHeader strings={{ ariaLabelClose: { key: 'modal.close', params: { name: 'Settings' } } }} />
+<ModalHeader strings={{ ariaLabel: { close: 'Dismiss dialog' } }} />
+<ModalHeader strings={{ ariaLabel: { close: { key: 'common.close' } } }} />
+<ModalHeader strings={{ ariaLabel: { close: { key: 'modal.close', params: { name: 'Settings' } } } }} />
 ```
 
 Translation references can use any application or Phrase key provided through `I18nProvider`; they are not limited
 to the built-in namespaces. Resolution precedence is instance `strings`, deprecated alias during the v5 migration,
 provider translation, and finally the built-in English default.
 
-Use the `ariaLabel*` naming convention for screen-reader-only copy and `label*` for visible copy.
+Use `strings.ariaLabel` / `strings.ariaLabel.*` for screen-reader-only text and `strings.label.*` for visible text.
 
 ## Additional Attributes
 

@@ -30,7 +30,7 @@ The `goBackTitle` prop is deprecated and will be removed in v6. Use `strings.lab
 
 ### CloseButton
 
-The `label` prop is deprecated and will be removed in v6. Use `strings.ariaLabel` instead.
+The `label` prop is deprecated and will be removed in v6. Use `strings.ariaLabel.close` instead.
 
 #### Migration Guide
 
@@ -39,13 +39,13 @@ The `label` prop is deprecated and will be removed in v6. Use `strings.ariaLabel
 <CloseButton label="Close dialog" />
 
 // After
-<CloseButton strings={{ ariaLabel: 'Close dialog' }} />
+<CloseButton strings={{ ariaLabel: { close: 'Close dialog' } }} />
 ```
 
 ### File
 
-The `editText` and `removeText` props are deprecated and will be removed in v6. Use `strings.ariaLabelEdit` and
-`strings.ariaLabelRemove` instead.
+The `editText` and `removeText` props are deprecated and will be removed in v6. Use `strings.ariaLabel.edit` and
+`strings.ariaLabel.remove` instead.
 
 #### Migration Guide
 
@@ -54,13 +54,13 @@ The `editText` and `removeText` props are deprecated and will be removed in v6. 
 <File label="document.pdf" editText="Edit file" removeText="Remove file" />
 
 // After
-<File label="document.pdf" strings={{ ariaLabelEdit: 'Edit file', ariaLabelRemove: 'Remove file' }} />
+<File label="document.pdf" strings={{ ariaLabel: { edit: 'Edit file', remove: 'Remove file' } }} />
 ```
 
 ### FileUpload
 
 The `buttonText`, `inputUploadText`, and `inputDragAndDropText` props are deprecated and will be removed in v6.
-Use `strings.labelButton`, `strings.labelUpload`, and `strings.labelDragAndDrop` instead.
+Use `strings.label.button`, `strings.label.upload`, and `strings.label.dragAndDrop` instead.
 
 #### Migration Guide
 
@@ -81,16 +81,18 @@ Use `strings.labelButton`, `strings.labelUpload`, and `strings.labelDragAndDrop`
   name="attachments"
   label="Attachments"
   strings={{
-    labelButton: 'Browse',
-    labelUpload: 'Upload your file',
-    labelDragAndDrop: 'or drag and drop here',
+    label: {
+      button: 'Browse',
+      upload: 'Upload your file',
+      dragAndDrop: 'or drag and drop here',
+    },
   }}
 />
 ```
 
 ### ModalHeader
 
-The `closeLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabelClose` instead.
+The `closeLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabel.close` instead.
 
 #### Migration Guide
 
@@ -99,12 +101,12 @@ The `closeLabel` prop is deprecated and will be removed in v6. Use `strings.aria
 <ModalHeader closeLabel="Close modal">Modal title</ModalHeader>
 
 // After
-<ModalHeader strings={{ ariaLabelClose: 'Close modal' }}>Modal title</ModalHeader>
+<ModalHeader strings={{ ariaLabel: { close: 'Close modal' } }}>Modal title</ModalHeader>
 ```
 
 ### PaginationLink
 
-The `accessibilityLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabel` instead.
+The `accessibilityLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabel.page` instead.
 
 #### Migration Guide
 
@@ -113,12 +115,12 @@ The `accessibilityLabel` prop is deprecated and will be removed in v6. Use `stri
 <PaginationLink accessibilityLabel="Go to page 2" pageNumber={2} />
 
 // After
-<PaginationLink strings={{ ariaLabel: 'Go to page 2' }} pageNumber={2} />
+<PaginationLink strings={{ ariaLabel: { page: 'Go to page 2' } }} pageNumber={2} />
 ```
 
 ### PaginationLinkPrevious
 
-The `accessibilityLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabelPrevious` instead.
+The `accessibilityLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabel.previous` instead.
 
 #### Migration Guide
 
@@ -127,12 +129,12 @@ The `accessibilityLabel` prop is deprecated and will be removed in v6. Use `stri
 <PaginationLinkPrevious accessibilityLabel="Previous page" href="/page/1" />
 
 // After
-<PaginationLinkPrevious strings={{ ariaLabelPrevious: 'Previous page' }} href="/page/1" />
+<PaginationLinkPrevious strings={{ ariaLabel: { previous: 'Previous page' } }} href="/page/1" />
 ```
 
 ### PaginationLinkNext
 
-The `accessibilityLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabelNext` instead.
+The `accessibilityLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabel.next` instead.
 
 #### Migration Guide
 
@@ -141,7 +143,7 @@ The `accessibilityLabel` prop is deprecated and will be removed in v6. Use `stri
 <PaginationLinkNext accessibilityLabel="Next page" href="/page/3" />
 
 // After
-<PaginationLinkNext strings={{ ariaLabelNext: 'Next page' }} href="/page/3" />
+<PaginationLinkNext strings={{ ariaLabel: { next: 'Next page' } }} href="/page/3" />
 ```
 
 ### UncontrolledPagination
@@ -163,9 +165,11 @@ be removed in v6. Use the corresponding keys in `strings` instead.
 // After
 <UncontrolledPagination
   strings={{
-    ariaLabel: 'Go to page',
-    ariaLabelPrevious: 'Previous page',
-    ariaLabelNext: 'Next page',
+    ariaLabel: {
+      page: 'Go to page',
+      previous: 'Previous page',
+      next: 'Next page',
+    },
   }}
   totalPages={10}
 />
@@ -174,7 +178,7 @@ be removed in v6. Use the corresponding keys in `strings` instead.
 ### UncontrolledSplitButton
 
 The `buttonLabel` and `dropdownTriggerLabel` props are deprecated and will be removed in v6. Use `labelButton` and
-`strings.ariaLabelDropdown` instead.
+`strings.ariaLabel.dropdown` instead.
 
 #### Migration Guide
 
@@ -192,13 +196,13 @@ The `buttonLabel` and `dropdownTriggerLabel` props are deprecated and will be re
   id="save-actions"
   labelButton="Save"
   buttonOnClick={handleSave}
-  strings={{ ariaLabelDropdown: 'More' }}
+  strings={{ ariaLabel: { dropdown: 'More' } }}
 />
 ```
 
 ### ToastBar
 
-The `closeLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabelClose` instead.
+The `closeLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabel.close` instead.
 
 #### Migration Guide
 
@@ -207,12 +211,12 @@ The `closeLabel` prop is deprecated and will be removed in v6. Use `strings.aria
 <ToastBar id="toast-example" closeLabel="Close toast" />
 
 // After
-<ToastBar id="toast-example" strings={{ ariaLabelClose: 'Close toast' }} />
+<ToastBar id="toast-example" strings={{ ariaLabel: { close: 'Close toast' } }} />
 ```
 
 ### UncontrolledToast
 
-The `closeLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabelClose` instead.
+The `closeLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabel.close` instead.
 
 #### Migration Guide
 
@@ -221,12 +225,12 @@ The `closeLabel` prop is deprecated and will be removed in v6. Use `strings.aria
 <UncontrolledToast closeLabel="Close toast" />
 
 // After
-<UncontrolledToast strings={{ ariaLabelClose: 'Close toast' }} />
+<UncontrolledToast strings={{ ariaLabel: { close: 'Close toast' } }} />
 ```
 
 ### Tooltip
 
-The `closeLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabelClose` instead.
+The `closeLabel` prop is deprecated and will be removed in v6. Use `strings.ariaLabel.close` instead.
 
 #### Migration Guide
 
@@ -237,7 +241,7 @@ The `closeLabel` prop is deprecated and will be removed in v6. Use `strings.aria
 // After
 <Tooltip
   id="tooltip-example"
-  strings={{ ariaLabelClose: 'Close tooltip' }}
+  strings={{ ariaLabel: { close: 'Close tooltip' } }}
   isOpen
   onToggle={setIsOpen}
 />
@@ -256,7 +260,7 @@ instead. The same mapping applies to `UNSTABLE_UncontrolledPicker`.
 <UNSTABLE_Picker addButtonLabel="Add" emptySelectionLabel="Languages" />
 
 // After
-<UNSTABLE_Picker strings={{ ariaAdd: 'Add', labelEmptySelection: 'Languages' }} />
+<UNSTABLE_Picker strings={{ ariaLabel: { add: 'Add' }, label: { emptySelection: 'Languages' } }} />
 ```
 
 ### UNSTABLE_Combobox
@@ -273,13 +277,13 @@ because they accept `ReactNode`. The same mapping applies to `UNSTABLE_Uncontrol
 <UNSTABLE_Combobox addMoreLabel="+ Add more…" emptySelectionLabel="Search" />
 
 // After
-<UNSTABLE_Combobox strings={{ labelAddMore: '+ Add more…', labelEmptySelection: 'Search' }} />
+<UNSTABLE_Combobox strings={{ label: { addMore: '+ Add more…', emptySelection: 'Search' } }} />
 ```
 
 ### ScrollView
 
-The `ariaLabelControls` prop is deprecated and will be removed in v6. Use `strings.ariaStart`, `strings.ariaEnd`,
-`strings.ariaTop`, and `strings.ariaBottom` instead. The same mapping applies to `ScrollViewControls`.
+The `ariaLabelControls` prop is deprecated and will be removed in v6. Use `strings.ariaLabel.start`, `strings.ariaLabel.end`,
+`strings.ariaLabel.top`, and `strings.ariaLabel.bottom` instead. The same mapping applies to `ScrollViewControls`.
 
 #### Migration Guide
 
@@ -288,7 +292,7 @@ The `ariaLabelControls` prop is deprecated and will be removed in v6. Use `strin
 <ScrollView hasControls ariaLabelControls={{ start: 'Left', end: 'Right' }} />
 
 // After
-<ScrollView hasControls strings={{ ariaStart: 'Left', ariaEnd: 'Right' }} />
+<ScrollView hasControls strings={{ ariaLabel: { start: 'Left', end: 'Right' } }} />
 ```
 
 ### Heading

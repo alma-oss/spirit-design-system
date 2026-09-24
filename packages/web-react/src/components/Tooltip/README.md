@@ -38,7 +38,7 @@ export const Example = () => {
       onToggle={setOpen}
       placement="right"
       isDismissible
-      strings={{ ariaLabelClose: 'Dismiss tooltip' }}
+      strings={{ ariaLabel: { close: 'Dismiss tooltip' } }}
     >
       <TooltipTrigger elementType={Button}>I have a tooltip 😎</TooltipTrigger>
       <TooltipPopover>Close me</TooltipPopover>
@@ -61,8 +61,8 @@ export const Example = () => {
 | `flipFallbackPlacements`        | `string`                                                          | -                    | ✕        | This describes a list of [explicit placements][floating-ui-flip-fallback-placements] to try if the initial placement doesn’t fit on the axes in which overflow is checked. For example you can set `"top, right, bottom"`                                                                                  |
 | `id`                            | `string`                                                          | -                    | ✓        | Tooltip id                                                                                                                                                                                                                                                                                                 |
 | `isDismissible`                 | `bool`                                                            | false                | ✕        | Make tooltip dismissible                                                                                                                                                                                                                                                                                   |
-| `strings`                       | `{ ariaLabelClose?: TranslatableString }`                         | —                    | ✕        | Close-button label override ([`TranslatableString`][readme-component-strings]) |
-| `closeLabel`                    | `string`                                                          | —                    | ✕        | _Deprecated, use `strings.ariaLabelClose`_                                                                                                                                                                                                                                                                 |
+| `strings`                       | `{ ariaLabel?: { close? } }`                                  | —                    | ✕        | Close-button label override ([`TranslatableString`][readme-component-strings]) |
+| `closeLabel`                    | `string`                                                          | —                    | ✕        | _Deprecated, use `strings.ariaLabel.close`_                                                                                                                                                                                                                                                                 |
 | `isFocusableOnHover`            | `bool`                                                            | false                | ✕        | Allows you to mouse over a tooltip without closing it. We suggest turning off the `click` trigger if you use this feature.                                                                                                                                                                                 |
 | `isOpen`                        | `bool`                                                            | -                    | ✓        | Open state                                                                                                                                                                                                                                                                                                 |
 | `onToggle`                      | `() => void`                                                      | -                    | ✓        | Function for toggle open state of dropdown                                                                                                                                                                                                                                                                 |
@@ -117,7 +117,7 @@ The `closeLabel` prop is deprecated and will be removed in v6.
 
 ```diff
 - <Tooltip closeLabel="Dismiss" />
-+ <Tooltip strings={{ ariaLabelClose: 'Dismiss' }} />
++ <Tooltip strings={{ ariaLabel: { close: 'Dismiss' } }} />
 ```
 
 ## API
