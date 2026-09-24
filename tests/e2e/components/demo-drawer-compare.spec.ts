@@ -1,7 +1,7 @@
 /* eslint-disable no-console -- we want to log when test fails */
-import { test, type Page, expect } from '../../helpers/fixtures';
-import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot, retryPageGoto } from '../../helpers';
 import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
+import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot, retryPageGoto } from '../../helpers';
+import { test, type Page, expect } from '../../helpers/fixtures';
 
 type TestConfig = {
   componentsDir: string;
@@ -10,11 +10,11 @@ type TestConfig = {
 };
 
 const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) return;
+  if (!packageName) { return; }
 
   const formattedPackageName = formatPackageName(packageName);
 
-  test.describe(`Test opened Drawer`, () => {
+  test.describe('Test opened Drawer', () => {
     test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page, pageRetries }) => {
       try {
         const url = getServerUrl(packageName);
@@ -36,14 +36,18 @@ const runComponentCompareTests = ({ componentsDir, packageName, componentName }:
  * This helper is needed because:
  * - web-react: React handles state updates properly, so check() alone would work
  * - web package: The inline JavaScript change event handler doesn't fire reliably
- *   with Playwright's interactions (click/check). Even with check(), the native
- *   change event isn't triggered, so we directly update the class via page.evaluate().
+ * with Playwright's interactions (click/check). Even with check(), the native
+ * change event isn't triggered, so we directly update the class via page.evaluate().
  *
  * Since this test runs for both packages, we need the page.evaluate() workaround
  * to ensure the web package's drawer has the correct alignment class.
+ *
+ * @param page
+ * @param alignment
  */
 const waitForDrawerAlignment = async (page: Page, alignment: 'left' | 'right'): Promise<void> => {
   await expect(page.locator(`[id="drawer-alignment-${alignment}"]`)).toBeChecked();
+
   await page.evaluate((align) => {
     const drawer = document.getElementById('drawer-example');
 
@@ -60,6 +64,7 @@ const runDrawerTests = async (page: Page, componentName: string): Promise<void> 
   await page.click('[data-testid="drawer-open-button"]');
   await takeScreenshot(page, `${componentName}-right-backdrop-click-`);
   await page.locator('body').click({ position: { x: 0, y: 0 } });
+
   await expect(page.getByTestId('drawer-panel')).not.toBeVisible();
 
   // open drawer on the left side, close with backdrop click
@@ -68,38 +73,51 @@ const runDrawerTests = async (page: Page, componentName: string): Promise<void> 
   await page.click('[data-testid="drawer-open-button"]');
   await takeScreenshot(page, `${componentName}-left-backdrop-click`);
   await page.locator('body').click({ position: { x: 400, y: 0 } });
+
   await expect(page.getByTestId('drawer-panel')).not.toBeVisible();
 
   // open drawer on the right side, close with close button
   await page.locator('[id="drawer-alignment-right"]').check();
   await waitForDrawerAlignment(page, 'right');
   await page.click('[data-testid="drawer-open-button"]');
+
   await expect(page.getByTestId('drawer-panel')).toBeVisible();
+
   await page.click('dialog[open] button');
+
   await expect(page.getByTestId('drawer-panel')).not.toBeVisible();
 
   // open drawer on the left side, close with close button
   await page.locator('[id="drawer-alignment-left"]').check();
   await waitForDrawerAlignment(page, 'left');
   await page.click('[data-testid="drawer-open-button"]');
+
   await expect(page.getByTestId('drawer-panel')).toBeVisible();
+
   await page.click('dialog[open] button');
+
   await expect(page.getByTestId('drawer-panel')).not.toBeVisible();
 
   // open drawer on the right side, close with escape keys
   await page.locator('[id="drawer-alignment-right"]').check();
   await waitForDrawerAlignment(page, 'right');
   await page.click('[data-testid="drawer-open-button"]');
+
   await expect(page.getByTestId('drawer-panel')).toBeVisible();
+
   await page.keyboard.press('Escape');
+
   await expect(page.getByTestId('drawer-panel')).not.toBeVisible();
 
   // open drawer on the left side, close with escape keys
   await page.locator('[id="drawer-alignment-left"]').check();
   await waitForDrawerAlignment(page, 'left');
   await page.click('[data-testid="drawer-open-button"]');
+
   await expect(page.getByTestId('drawer-panel')).toBeVisible();
+
   await page.keyboard.press('Escape');
+
   await expect(page.getByTestId('drawer-panel')).not.toBeVisible();
 };
 

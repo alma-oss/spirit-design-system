@@ -1,7 +1,7 @@
 /* eslint-disable no-console -- we want to log when test fails */
-import { test, Page } from '../../helpers/fixtures';
-import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot, retryPageGoto } from '../../helpers';
 import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
+import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot, retryPageGoto } from '../../helpers';
+import { test, Page } from '../../helpers/fixtures';
 
 type TestConfig = {
   componentsDir: string;
@@ -15,11 +15,11 @@ type ModalTestConfig = {
 };
 
 const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) return;
+  if (!packageName) { return; }
 
   const formattedPackageName = formatPackageName(packageName);
 
-  test.describe(`Test opened Modal`, () => {
+  test.describe('Test opened Modal', () => {
     test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page, pageRetries }) => {
       try {
         const url = getServerUrl(packageName);

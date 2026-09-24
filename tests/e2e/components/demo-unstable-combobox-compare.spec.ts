@@ -1,5 +1,5 @@
 /* eslint-disable no-console -- we want to log when test fails */
-import { test, expect, type Page } from '../../helpers/fixtures';
+import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
 import {
   formatPackageName,
   getServerUrl,
@@ -8,7 +8,7 @@ import {
   takeScreenshot,
   retryPageGoto,
 } from '../../helpers';
-import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
+import { test, expect, type Page } from '../../helpers/fixtures';
 
 type TestConfig = {
   componentsDir: string;
@@ -56,11 +56,11 @@ const getLocationsInputId = (packageName: string): string =>
   packageName === 'web' ? INPUT_IDS.web.locations : INPUT_IDS['web-react'].locations;
 
 const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) return;
+  if (!packageName) { return; }
 
   const formattedPackageName = formatPackageName(packageName);
 
-  test.describe(`Test opened Combobox`, () => {
+  test.describe('Test opened Combobox', () => {
     test(`Test ${componentName} component in ${formattedPackageName} package`, async ({ page, pageRetries }) => {
       try {
         // Taller than default Desktop Chrome so tall grid popovers are not clipped.
@@ -82,6 +82,9 @@ const runComponentCompareTests = ({ componentsDir, packageName, componentName }:
 /**
  * Hide sibling demo sections so the target Combobox sits at the top of the viewport
  * and its downward popover is not clipped by the page length above it.
+ *
+ * @param page
+ * @param inputId
  */
 const isolateComboboxSection = async (page: Page, inputId: string): Promise<() => Promise<void>> => {
   await page.evaluate((id) => {
@@ -118,11 +121,15 @@ const runComboboxOpenTests = async (page: Page, componentName: string, packageNa
     const input = page.locator(`[id="${config.inputId}"]`);
 
     await input.click();
+
     await expect(input).toHaveAttribute('aria-expanded', 'true');
     await expect(page.getByRole('dialog')).toBeVisible();
+
     await takeScreenshot(page, `${componentName}-${config.testName}`);
     await page.keyboard.press('Escape');
+
     await expect(input).toHaveAttribute('aria-expanded', 'false');
+
     await restoreSections();
     await page.waitForTimeout(300);
   }
@@ -131,6 +138,10 @@ const runComboboxOpenTests = async (page: Page, componentName: string, packageNa
 /**
  * Locations: select a city, then open the nested SplitTag distance select
  * (Combobox popover closes when the distance menu opens).
+ *
+ * @param page
+ * @param componentName
+ * @param packageName
  */
 const runLocationsSplitTagOpenTest = async (
   page: Page,
@@ -142,20 +153,27 @@ const runLocationsSplitTagOpenTest = async (
   const input = page.locator(`[id="${inputId}"]`);
 
   await input.click();
+
   await expect(input).toHaveAttribute('aria-expanded', 'true');
+
   await page.getByRole('option', { name: 'Praha' }).click();
+
   await expect(page.getByRole('row', { name: 'Praha, +5 km' })).toBeVisible();
 
   const distanceTrigger = page.getByRole('button', { name: 'Select distance, selected +5 km' });
 
   await distanceTrigger.click();
+
   await expect(input).toHaveAttribute('aria-expanded', 'false');
   await expect(distanceTrigger).toHaveAttribute('aria-expanded', 'true');
   await expect(page.getByRole('listbox', { name: 'Distance' })).toBeVisible();
   await expect(page.getByRole('listbox', { name: 'Locations' })).toBeHidden();
+
   await takeScreenshot(page, `${componentName}-locations`);
   await page.keyboard.press('Escape');
+
   await expect(distanceTrigger).toHaveAttribute('aria-expanded', 'false');
+
   await restoreSections();
   await page.waitForTimeout(300);
 };

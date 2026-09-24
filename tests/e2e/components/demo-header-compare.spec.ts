@@ -1,7 +1,7 @@
 /* eslint-disable no-console -- we want to log when test fails */
-import { test, expect, type Page } from '../../helpers/fixtures';
-import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot, retryPageGoto } from '../../helpers';
 import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
+import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot, retryPageGoto } from '../../helpers';
+import { test, expect, type Page } from '../../helpers/fixtures';
 
 type TestConfig = {
   componentsDir: string;
@@ -10,7 +10,7 @@ type TestConfig = {
 };
 
 const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) return;
+  if (!packageName) { return; }
 
   const formattedPackageName = formatPackageName(packageName);
 
@@ -35,22 +35,31 @@ const runHeaderTests = async (page: Page, componentName: string): Promise<void> 
   // open drawer for 'With Navigation'
   await page.click('[id="drawer-navigation-open-button"]');
   await takeScreenshot(page, `${componentName}-with-navigation`);
+
   await expect(page.getByRole('dialog')).toBeVisible();
+
   await page.locator('body').click({ position: { x: 0, y: 0 } });
+
   await expect(page.getByRole('dialog')).not.toBeVisible();
 
   // open drawer for 'With Pill Navigation'
   await page.click('[id="drawer-navigation-pill-open-button"]');
   await takeScreenshot(page, `${componentName}-with-pill-navigation`);
+
   await expect(page.getByRole('dialog')).toBeVisible();
+
   await page.locator('body').click({ position: { x: 0, y: 0 } });
+
   await expect(page.getByRole('dialog')).not.toBeVisible();
 
   // open drawer for 'With Navigation and Nested Items'
   await page.click('[id="drawer-navigation-expanded-open-button"]');
   await takeScreenshot(page, `${componentName}-with-navigation-and-nested-items`);
+
   await expect(page.getByRole('dialog')).toBeVisible();
+
   await page.locator('body').click({ position: { x: 0, y: 0 } });
+
   await expect(page.getByRole('dialog')).not.toBeVisible();
 };
 
