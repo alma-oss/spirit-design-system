@@ -25,6 +25,7 @@ const legacyReactConfig = compat.extends(
 // override itself uses `extends` (see the jest config below for the same limitation) —
 // it silently produces `files: [null]`, a pattern that never matches. Drop those broken
 // entries and scope the rest (parser, plugin, base rules) to TypeScript files ourselves.
+// @see { @link https://github.com/lmc-eu/code-quality-tools/issues/268 }
 const legacyTypescriptConfig = fixupConfigRules(compat.extends('@lmc-eu/eslint-config-typescript'))
   // Drop `settings` here — it must apply to every file (JS imports resolve TS modules too),
   // not just the TS-file-scoped block below. It's re-added, unscoped, further down.
@@ -41,9 +42,7 @@ export default [
    * @see { @link https://github.com/alma-oss/spirit-design-system/pull/2421 }
    */
   ...fixupConfigRules(legacyReactConfig),
-
   ...legacyTypescriptConfig,
-
   ...storybook.configs['flat/recommended'],
 
   {
@@ -53,6 +52,7 @@ export default [
     // `eslint-import-resolver-typescript` understands `exports` maps and TS path mapping,
     // and we explicitly point it at the repo's TypeScript projects to keep workspace
     // packages resolvable when linting from the repository root.
+    // @see { @link https://github.com/lmc-eu/code-quality-tools/issues/269 }
     settings: {
       'import/resolver': {
         node: {
@@ -77,6 +77,7 @@ export default [
   // that itself uses `extends`, which `FlatCompat` cannot translate (same limitation as
   // the TypeScript config above) — every resulting entry gets `files: [null]` and never
   // applies. Configure the jest plugin and globals natively instead, scoped to test files.
+  // @see { @link https://github.com/lmc-eu/code-quality-tools/issues/268 }
   {
     files: testFileGlobs,
     languageOptions: {
@@ -91,10 +92,8 @@ export default [
     // below) — flat config treats two different module instances under the same key as a clash.
     files: jestRuleFileGlobs,
     plugins: { 'spirit-jest': jest },
-    rules: Object.fromEntries(
-      Object.entries({ ...jest.configs['flat/recommended'].rules, ...jest.configs['flat/style'].rules })
-        .map(([rule, severity]) => [rule.replace(/^jest\//, 'spirit-jest/'), severity]),
-    ),
+    rules: Object.fromEntries(Object.entries({ ...jest.configs['flat/recommended'].rules, ...jest.configs['flat/style'].rules })
+      .map(([rule, severity]) => [rule.replace(/^jest\//, 'spirit-jest/'), severity])),
   },
 
   {
@@ -178,10 +177,24 @@ export default [
   },
 
   {
+    // Skill scripts are agent-facing tooling, not part of the published packages —
+    // requiring/enforcing JSDoc here only adds noise (and `--fix` generates empty
+    // `/** */` blocks when a description is missing).
+    files: ['.agents/skills/**'],
+    rules: {
+      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/require-param': 'off',
+      'jsdoc/require-param-type': 'off',
+      'jsdoc/require-returns': 'off',
+      'jsdoc/require-returns-type': 'off',
+    },
+  },
+
+  {
     // Registered under a spirit-namespaced key to avoid "Cannot redefine plugin" collisions
     // with whatever copy of `eslint-plugin-jest-formatting` `@lmc-eu/eslint-config-jest`
     // resolves internally (and to not depend on its overrides matching these file globs).
-    files: ['test/**', 'tests/**', '**/*.test.*', '**/*.spec.*'],
+    files: testFileGlobs,
     plugins: {
       'spirit-jest-formatting': jestFormatting,
     },
