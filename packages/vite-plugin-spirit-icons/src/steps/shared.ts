@@ -7,6 +7,7 @@ export interface Logger {
 }
 
 export const ICON_TYPE_DUALTONE = 'dualtone';
+
 export const ICON_TYPE_COLORED = 'colored';
 
 export const filterSvgFiles = (fileNames: string[]): string[] =>
@@ -27,7 +28,7 @@ export const getIconType = (fileName: string): string => {
 export const stripSvgClipPaths = (svgContent: string): string => {
   let result = svgContent;
 
-  while (/<clipPath\b/i.test(result)) {
+  while ((/<clipPath\b/i).test(result)) {
     result = result.replace(/<defs\b[^>]*>\s*<clipPath\b[^>]*>[\s\S]*?<\/clipPath>\s*<\/defs>/gi, '');
     result = result.replace(/<clipPath\b[^>]*>[\s\S]*?<\/clipPath>/gi, '');
   }
