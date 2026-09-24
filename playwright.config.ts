@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
 
 /**
  * Read environment variables from a `.env` file.
@@ -24,18 +24,25 @@ const parseNumber = (value: string | undefined): number | undefined => {
  */
 export default defineConfig({
   testDir: './tests/e2e',
+
   /* Run tests in files in parallel */
   fullyParallel: true,
+
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
+
   /* Number of retries: use PW_RETRIES if set, default to 2 on CI, otherwise set to 0. */
   retries: parseNumber(process.env.PW_RETRIES) ?? (process.env.CI ? 2 : 0),
+
   /* Configure workers: use PW_WORKERS if set, default to 1 on CI, otherwise Playwright's default. */
   workers: parseNumber(process.env.PW_WORKERS) ?? (process.env.CI ? 1 : undefined),
+
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['html', { open: 'never' }]],
+
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: process.env.WEBSITE_URL,
 
@@ -57,6 +64,7 @@ export default defineConfig({
 
   /* Configure expect() to use in tests */
   expect: {
+
     /* Use PW_TIMEOUT if set, otherwise default to 120 000 ms (2 minutes). */
     timeout: parseNumber(process.env.PW_TIMEOUT) ?? 120000,
   },
