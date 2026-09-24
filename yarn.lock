@@ -6560,6 +6560,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lmc-eu/spirit-demo-app@workspace:apps/demo"
   dependencies:
+    "@alma-oss/spirit-common": "workspace:^"
     "@rollup/plugin-terser": "catalog:build"
     "@rollup/plugin-typescript": "catalog:build"
     autoprefixer: "catalog:build"
