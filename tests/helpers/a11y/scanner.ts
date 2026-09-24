@@ -1,7 +1,7 @@
-import { Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import type { A11yScanOptions, A11yScanResult } from './types';
+import { Page } from '@playwright/test';
 import { formatViolations, formatViolationError } from './formatters';
+import { type A11yScanOptions, type A11yScanResult } from './types';
 
 /**
  * Runs an accessibility scan on the current page
