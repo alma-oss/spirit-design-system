@@ -10,7 +10,9 @@ type TestConfig = {
 };
 
 const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) { return; }
+  if (!packageName) {
+    return;
+  }
 
   const formattedPackageName = formatPackageName(packageName);
 
@@ -36,8 +38,8 @@ const runComponentCompareTests = ({ componentsDir, packageName, componentName }:
  * This helper is needed because:
  * - web-react: React handles state updates properly, so check() alone would work
  * - web package: The inline JavaScript change event handler doesn't fire reliably
- * with Playwright's interactions (click/check). Even with check(), the native
- * change event isn't triggered, so we directly update the class via page.evaluate().
+ *   with Playwright's interactions (click/check). Even with check(), the native
+ *   change event isn't triggered, so we directly update the class via page.evaluate().
  *
  * Since this test runs for both packages, we need the page.evaluate() workaround
  * to ensure the web package's drawer has the correct alignment class.
