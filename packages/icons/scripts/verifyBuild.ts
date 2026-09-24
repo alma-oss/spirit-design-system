@@ -33,6 +33,7 @@ function verifyBuild(): VerificationResult {
     const reactEntries = ['index.js', 'index.d.ts'];
     reactEntries.forEach((file) => {
       const filePath = path.join(reactDir, file);
+
       if (!fs.existsSync(filePath)) {
         errors.push(`Missing react entry point: ${file}`);
       }
