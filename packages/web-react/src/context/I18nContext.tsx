@@ -27,6 +27,12 @@ const isNestedTranslations = (value: unknown): value is I18nProviderTranslations
 const hasDefaultTranslationNamespace = (translations: Record<string, unknown>): boolean =>
   Object.keys(translations).some((key) => key in defaultTranslations);
 
+const isLocaleCatalog = (translations: Record<string, unknown>): boolean => {
+  const keys = Object.keys(translations);
+
+  return keys.length > 0 && keys.every((key) => /^[a-z]{2}(?:-[a-z]{2})?$/i.test(key));
+};
+
 const resolveLocalizedTranslations = (
   translations: I18nProviderTranslations | undefined,
   locale: string,
@@ -41,7 +47,11 @@ const resolveLocalizedTranslations = (
 
   const localized = translations[locale];
 
-  return isNestedTranslations(localized) ? localized : translations;
+  if (isNestedTranslations(localized)) {
+    return localized;
+  }
+
+  return isLocaleCatalog(translations) ? undefined : translations;
 };
 
 const I18nProvider = ({ children, locale = 'en', translations }: I18nProviderProps) => {

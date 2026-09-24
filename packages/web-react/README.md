@@ -206,7 +206,8 @@ You can pass either:
 - partial nested **`translations`** (same nested shape as library defaults), or
 - a locale catalog with **`locale`** + locale-keyed translations (`translations[locale]`).
 
-Missing keys always fall back to built-in defaults.
+Missing keys always fall back to built-in defaults. A locale catalog with no entry for the active
+`locale` also uses those defaults — the catalog is not merged as translation namespaces.
 
 ```tsx
 import { I18nProvider } from '@alma-oss/spirit-web-react';

@@ -169,12 +169,14 @@ describe('useI18n', () => {
       const wrapper = createProviderWrapper({
         locale: 'de',
         translations: {
+          en: { common: { close: 'Close EN' } },
           cs: { common: { close: 'Zavřít' } },
         },
       });
       const { result } = renderHook(() => useI18n(), { wrapper });
 
       expect(result.current.t('common.close')).toBe('Close');
+      expect(result.current.t('cs.common.close')).toBe('cs.common.close');
     });
 
     it('should resolve arbitrary application keys from a direct translation tree', () => {
