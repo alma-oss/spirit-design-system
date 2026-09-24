@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import { chmod, mkdir, mkdtemp, readFile, readdir, rm, symlink, unlink, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -12,7 +13,10 @@ describe('syncAssets', () => {
 
     try {
       await mkdir(outputDirectory);
-      await mkdir(path.join(outputDirectory, 'nested'));
+      await mkdir(path.join(outputDirectory, 'nested', 'deeper'), { recursive: true });
+      await mkdir(path.join(outputDirectory, 'obsolete'));
+      await writeFile(path.join(outputDirectory, 'nested', 'legacy.svg'), '<svg>legacy</svg>\n');
+      await writeFile(path.join(outputDirectory, 'nested', 'notes.txt'), 'remove me');
       await writeFile(path.join(outputDirectory, 'add-item.svg'), '<svg>old</svg>\n');
       await writeFile(path.join(outputDirectory, 'README.txt'), 'keep me');
       await writeFile(path.join(outputDirectory, 'removed.svg'), '<svg />\n');
@@ -26,19 +30,19 @@ describe('syncAssets', () => {
         fetch: createFigmaFetch(),
       });
 
-      expect(result.targets[0].changes.map(({ file, type }) => [path.basename(file), type])).toEqual([
+      expect(result.targets[0].changes.map(({ file, type }) => [path.relative(outputDirectory, file), type])).toEqual([
         ['add-item.svg', 'updated'],
         ['benefit-health.svg', 'added'],
         ['logo-colored.svg', 'added'],
+        ['nested', 'deleted'],
+        [path.join('nested', 'deeper'), 'deleted'],
+        [path.join('nested', 'legacy.svg'), 'deleted'],
+        [path.join('nested', 'notes.txt'), 'deleted'],
+        ['obsolete', 'deleted'],
+        ['README.txt', 'deleted'],
         ['removed.svg', 'deleted'],
       ]);
-      expect(await readdir(outputDirectory)).toEqual([
-        'README.txt',
-        'add-item.svg',
-        'benefit-health.svg',
-        'logo-colored.svg',
-        'nested',
-      ]);
+      expect(await readdir(outputDirectory)).toEqual(['add-item.svg', 'benefit-health.svg', 'logo-colored.svg']);
       expect(await readFile(path.join(outputDirectory, 'logo-colored.svg'), 'utf8')).toBe(
         '<svg viewBox="0 0 24 24"><path fill="#123456" /></svg>\n',
       );
@@ -221,6 +225,62 @@ describe('syncAssets', () => {
       await mkdir(outputDirectory);
       await writeFile(victimPath, '<svg>private</svg>\n');
       await symlink(victimPath, path.join(outputDirectory, `${symlinkName}.svg`));
+
+      await expect(
+        syncAssets({
+          config: {
+            fileKey: 'figma-file',
+            repositoryRoot,
+            targets: [{ brand: 'Spirit', out: outputDirectory, assets: ['icons'] }],
+          },
+          token: 'test-token',
+          exportAssets: async () => [{ name: 'icon', svg: '<svg>updated</svg>\n' }],
+        }),
+      ).rejects.toThrow(/symlink/);
+      await expect(readFile(victimPath, 'utf8')).resolves.toBe('<svg>private</svg>\n');
+    } finally {
+      await rm(repositoryRoot, { recursive: true, force: true });
+      await unlink(victimPath).catch(() => undefined);
+    }
+  });
+
+  it('refuses to delete an unsupported filesystem entry', async () => {
+    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-sync-fifo-'));
+    const outputDirectory = path.join(temporaryDirectory, 'svg');
+    const nestedDirectory = path.join(outputDirectory, 'nested');
+
+    try {
+      await mkdir(nestedDirectory, { recursive: true });
+      await writeFile(path.join(outputDirectory, 'keep.svg'), '<svg>keep</svg>\n');
+      execFileSync('mkfifo', [path.join(nestedDirectory, 'queue')]);
+
+      await expect(
+        syncAssets({
+          config: {
+            fileKey: 'figma-file',
+            targets: [{ brand: 'Spirit', out: outputDirectory, assets: ['icons'] }],
+          },
+          token: 'test-token',
+          exportAssets: async () => [{ name: 'icon', svg: '<svg />\n' }],
+        }),
+      ).rejects.toThrow(/unsupported entry/);
+      expect((await readdir(outputDirectory)).sort()).toEqual(['keep.svg', 'nested']);
+      expect(await readdir(nestedDirectory)).toEqual(['queue']);
+      await expect(readFile(path.join(outputDirectory, 'icon.svg'), 'utf8')).rejects.toThrow();
+    } finally {
+      await rm(temporaryDirectory, { recursive: true, force: true });
+    }
+  });
+
+  it('refuses to follow a nested symlink while mirroring the output directory', async () => {
+    const repositoryRoot = await mkdtemp(path.join(os.tmpdir(), 'spirit-assets-sync-nested-link-'));
+    const outputDirectory = path.join(repositoryRoot, 'svg');
+    const victimPath = path.join(os.tmpdir(), `spirit-assets-victim-${crypto.randomUUID()}.svg`);
+
+    try {
+      await mkdir(path.join(outputDirectory, 'nested'), { recursive: true });
+      await writeFile(victimPath, '<svg>private</svg>\n');
+      await symlink(victimPath, path.join(outputDirectory, 'nested', 'icon.svg'));
 
       await expect(
         syncAssets({
