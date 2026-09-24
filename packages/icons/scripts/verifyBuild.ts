@@ -11,9 +11,6 @@ interface VerificationResult {
   errors: string[];
 }
 
-/**
- *
- */
 function verifyBuild(): VerificationResult {
   const errors: string[] = [];
 
