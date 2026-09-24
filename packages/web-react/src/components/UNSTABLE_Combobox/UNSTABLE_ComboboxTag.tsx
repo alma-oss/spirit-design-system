@@ -51,7 +51,7 @@ const UNSTABLE_ComboboxTag = ({
       <div role="gridcell" aria-colindex={1} className="d-contents">
         {children ?? <span>{label}</span>}
         <CloseButton
-          strings={{ ariaLabel: removeButtonAriaLabel }}
+          strings={{ ariaLabel: { close: removeButtonAriaLabel } }}
           isDisabled={isDisabled}
           onClick={onRemove}
           {...(tagKeyboardProps && { tabIndex: tagKeyboardProps.secondaryControlTabIndex })}

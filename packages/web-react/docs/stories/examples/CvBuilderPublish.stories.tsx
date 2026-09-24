@@ -140,7 +140,7 @@ export const CvBuilderPublish = () => {
                   <UNSTABLE_Combobox
                     id="publish-job-search"
                     label="Jakou práci hledáte?"
-                    strings={{ labelEmptySelection: 'Zadejte obor, profesi,…' }}
+                    strings={{ label: { emptySelection: 'Zadejte obor, profesi,…' } }}
                     isRequired
                     isOpen={isJobOpen}
                     onToggle={onJobToggle}
@@ -160,7 +160,7 @@ export const CvBuilderPublish = () => {
                   <UNSTABLE_Combobox
                     id="publish-location-search"
                     label="Ve kterém městě nebo kraji chcete pracovat?"
-                    strings={{ labelEmptySelection: 'Jihlava' }}
+                    strings={{ label: { emptySelection: 'Jihlava' } }}
                     isRequired
                     isOpen={isLocationOpen}
                     onToggle={onLocationToggle}
@@ -323,7 +323,7 @@ export const CvBuilderPublish = () => {
                     TS2322: Type 'Element' is not assignable to type 'string'. Suppressed until fixed. */}
                 <UNSTABLE_Combobox
                   id="publish-hide-companies"
-                  strings={{ labelEmptySelection: 'Uveďte název firmy' }}
+                  strings={{ label: { emptySelection: 'Uveďte název firmy' } }}
                   /* @ts-ignore – ReactNode isn't supported by the `label` -- @see https://jira.almacareer.tech/browse/DS-2790 */
                   label={
                     <>

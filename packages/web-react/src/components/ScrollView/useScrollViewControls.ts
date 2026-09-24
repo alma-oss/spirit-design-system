@@ -27,23 +27,23 @@ export const useScrollViewControls = (
     trigger: ariaLabelControls != null,
     componentName: 'ScrollView',
     customText:
-      'The "ariaLabelControls" property is deprecated and will be removed in the next major version. Use "strings.ariaStart", "strings.ariaEnd", "strings.ariaTop", and "strings.ariaBottom" instead.',
+      'The "ariaLabelControls" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.start", "strings.ariaLabel.end", "strings.ariaLabel.top", and "strings.ariaLabel.bottom" instead.',
   });
 
   const startLabel = resolveComponentString(
-    strings?.ariaStart ?? ariaLabelControls?.start ?? { key: 'scrollView.ariaStart' },
+    strings?.ariaLabel?.start ?? ariaLabelControls?.start ?? { key: 'scrollView.ariaStart' },
     t,
   );
   const endLabel = resolveComponentString(
-    strings?.ariaEnd ?? ariaLabelControls?.end ?? { key: 'scrollView.ariaEnd' },
+    strings?.ariaLabel?.end ?? ariaLabelControls?.end ?? { key: 'scrollView.ariaEnd' },
     t,
   );
   const topLabel = resolveComponentString(
-    strings?.ariaTop ?? ariaLabelControls?.top ?? { key: 'scrollView.ariaTop' },
+    strings?.ariaLabel?.top ?? ariaLabelControls?.top ?? { key: 'scrollView.ariaTop' },
     t,
   );
   const bottomLabel = resolveComponentString(
-    strings?.ariaBottom ?? ariaLabelControls?.bottom ?? { key: 'scrollView.ariaBottom' },
+    strings?.ariaLabel?.bottom ?? ariaLabelControls?.bottom ?? { key: 'scrollView.ariaBottom' },
     t,
   );
 

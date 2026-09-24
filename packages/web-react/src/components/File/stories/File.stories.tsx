@@ -81,7 +81,7 @@ const meta = {
     },
   },
   args: {
-    strings: { ariaLabelEdit: 'Edit', ariaLabelRemove: 'Remove' },
+    strings: { ariaLabel: { edit: 'Edit', remove: 'Remove' } },
     hasValidationIcon: false,
     helperText: '2.5 MB',
     iconName: 'file',

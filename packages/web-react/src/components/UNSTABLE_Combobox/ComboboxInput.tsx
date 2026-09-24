@@ -180,7 +180,7 @@ const ComboboxInput = (props: ComboboxInputProps) => {
           {...(selectedKeysCount === 0 ? { hidden: true, UNSAFE_className: 'd-none' } : {})}
         >
           <CloseButton
-            strings={{ ariaLabel: removeAllLabel }}
+            strings={{ ariaLabel: { close: removeAllLabel } }}
             onClick={(event: MouseEvent<HTMLButtonElement>) => {
               event.preventDefault();
               event.stopPropagation();

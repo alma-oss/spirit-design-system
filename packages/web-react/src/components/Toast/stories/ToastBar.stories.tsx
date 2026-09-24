@@ -64,7 +64,7 @@ const meta: Meta<typeof ToastBar> = {
         <ToastBarLink href="#">Action</ToastBarLink>
       </>
     ),
-    strings: { ariaLabelClose: 'Close' },
+    strings: { ariaLabel: { close: 'Close' } },
     color: ToastColorsExtended.NEUTRAL,
     hasIcon: false,
     iconName: '',

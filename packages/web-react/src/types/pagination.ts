@@ -25,15 +25,25 @@ export interface DeprecatedAccessibilityLabelProps {
 }
 
 export type PaginationLinkStrings = {
-  ariaLabel?: TranslatableString;
+  ariaLabel?: {
+    page?: TranslatableString;
+  };
 };
 
 export type PaginationLinkPreviousNextStrings = {
-  ariaLabelNext?: TranslatableString;
-  ariaLabelPrevious?: TranslatableString;
+  ariaLabel?: {
+    next?: TranslatableString;
+    previous?: TranslatableString;
+  };
 };
 
-export type UncontrolledPaginationStrings = PaginationLinkStrings & PaginationLinkPreviousNextStrings;
+export type UncontrolledPaginationStrings = {
+  ariaLabel?: {
+    next?: TranslatableString;
+    page?: TranslatableString;
+    previous?: TranslatableString;
+  };
+};
 
 export interface AriaPaginationProps extends DeprecatedAccessibilityLabelProps, StringsProps<PaginationLinkStrings> {}
 
@@ -86,9 +96,9 @@ export type SpiritPaginationLinkPreviousNextProps<E extends ElementType = 'a'> =
   SpiritPolymorphicElementPropsWithRef<E, PaginationLinkPreviousNextProps<E>>;
 
 export interface UncontrolledPaginationProps {
-  /** @deprecated Use `strings.ariaLabelNext` instead. */
+  /** @deprecated Use `strings.ariaLabel.next` instead. */
   accessibilityLabelNext?: string;
-  /** @deprecated Use `strings.ariaLabelPrevious` instead. */
+  /** @deprecated Use `strings.ariaLabel.previous` instead. */
   accessibilityLabelPrevious?: string;
   defaultPage?: number;
   visiblePages?: number;

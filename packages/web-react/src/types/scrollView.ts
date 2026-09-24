@@ -18,16 +18,18 @@ export type ScrollViewControlsAriaLabelType = {
 };
 
 export type ScrollViewStrings = {
-  ariaBottom?: TranslatableString;
-  ariaEnd?: TranslatableString;
-  ariaStart?: TranslatableString;
-  ariaTop?: TranslatableString;
+  ariaLabel?: {
+    bottom?: TranslatableString;
+    end?: TranslatableString;
+    start?: TranslatableString;
+    top?: TranslatableString;
+  };
 };
 
 export type ScrollViewControlsScrollStepType = number;
 
 interface ScrollViewControlsBaseProps extends StringsProps<ScrollViewStrings> {
-  /** @deprecated Use `strings.ariaStart` / `strings.ariaEnd` / `strings.ariaTop` / `strings.ariaBottom` instead. */
+  /** @deprecated Use `strings.ariaLabel.start` / `strings.ariaLabel.end` / `strings.ariaLabel.top` / `strings.ariaLabel.bottom` instead. */
   ariaLabelControls?: ScrollViewControlsAriaLabelType;
   direction: ScrollViewDirectionType;
   scrollStep: ScrollViewControlsScrollStepType;
@@ -35,7 +37,7 @@ interface ScrollViewControlsBaseProps extends StringsProps<ScrollViewStrings> {
 }
 
 export interface ScrollViewBaseProps extends ChildrenProps, StyleProps, StringsProps<ScrollViewStrings> {
-  /** @deprecated Use `strings.ariaStart` / `strings.ariaEnd` / `strings.ariaTop` / `strings.ariaBottom` instead. */
+  /** @deprecated Use `strings.ariaLabel.start` / `strings.ariaLabel.end` / `strings.ariaLabel.top` / `strings.ariaLabel.bottom` instead. */
   ariaLabelControls?: ScrollViewControlsAriaLabelType;
   controlsScrollStep?: ScrollViewControlsScrollStepType;
   direction?: ScrollViewDirectionType;

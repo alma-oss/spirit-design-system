@@ -13,8 +13,10 @@ const FileUploadInputDisabled = () => (
       isDisabled
       isRequired
       strings={{
-        labelUpload: 'Upload your file',
-        labelDragAndDrop: 'or drag and drop here',
+        label: {
+          upload: 'Upload your file',
+          dragAndDrop: 'or drag and drop here',
+        },
       }}
     />
     <FileUpload
@@ -27,8 +29,10 @@ const FileUploadInputDisabled = () => (
       isDisabled
       isRequired
       strings={{
-        labelUpload: 'Upload your file',
-        labelDragAndDrop: 'or drag and drop here',
+        label: {
+          upload: 'Upload your file',
+          dragAndDrop: 'or drag and drop here',
+        },
       }}
     />
   </Grid>

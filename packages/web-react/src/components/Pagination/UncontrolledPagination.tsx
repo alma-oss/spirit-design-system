@@ -25,7 +25,7 @@ const UncontrolledPagination = (props: SpiritUncontrolledPaginationProps): JSX.E
     ...rest
   } = props;
   const resolvedAccessibilityLabel = resolveComponentString(
-    strings?.ariaLabel ?? accessibilityLabel ?? { key: 'pagination.goToPage' },
+    strings?.ariaLabel?.page ?? accessibilityLabel ?? { key: 'pagination.goToPage' },
     t,
   );
   const { currentPage, pages, handlePageChange } = usePagination({
@@ -47,7 +47,7 @@ const UncontrolledPagination = (props: SpiritUncontrolledPaginationProps): JSX.E
     <Pagination {...rest}>
       {currentPage !== 1 && (
         <PaginationLinkPrevious
-          strings={{ ariaLabelPrevious: strings?.ariaLabelPrevious ?? accessibilityLabelPrevious }}
+          strings={{ ariaLabel: { previous: strings?.ariaLabel?.previous ?? accessibilityLabelPrevious } }}
           onClick={(event: ClickEvent) => {
             event.preventDefault();
             handlePageChange(currentPage - 1);
@@ -57,7 +57,7 @@ const UncontrolledPagination = (props: SpiritUncontrolledPaginationProps): JSX.E
       {pages?.map((pageNumber: number) => (
         <PaginationItem key={pageNumber}>
           <PaginationLink
-            strings={{ ariaLabel: `${resolvedAccessibilityLabel} ${pageNumber}` }}
+            strings={{ ariaLabel: { page: `${resolvedAccessibilityLabel} ${pageNumber}` } }}
             href="#"
             isCurrent={currentPage === pageNumber}
             pageNumber={pageNumber}
@@ -70,7 +70,7 @@ const UncontrolledPagination = (props: SpiritUncontrolledPaginationProps): JSX.E
       ))}
       {currentPage !== totalPages && (
         <PaginationLinkNext
-          strings={{ ariaLabelNext: strings?.ariaLabelNext ?? accessibilityLabelNext }}
+          strings={{ ariaLabel: { next: strings?.ariaLabel?.next ?? accessibilityLabelNext } }}
           onClick={(event: ClickEvent) => {
             event.preventDefault();
             handlePageChange(currentPage + 1);

@@ -109,7 +109,7 @@ describe('SplitButton', () => {
         id="uncontrolled-split-button-id"
         labelButton={{ key: 'common.edit' }}
         buttonOnClick={onClick}
-        strings={{ ariaLabelDropdown: 'More options' }}
+        strings={{ ariaLabel: { dropdown: 'More options' } }}
       >
         Content
       </UncontrolledSplitButton>,

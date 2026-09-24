@@ -121,9 +121,11 @@ const meta: Meta<typeof FileUpload> = {
   args: {
     accept: '',
     strings: {
-      labelButton: 'Browse',
-      labelDragAndDrop: 'or drag and drop here',
-      labelUpload: 'Upload your file(s)',
+      label: {
+        button: 'Browse',
+        dragAndDrop: 'or drag and drop here',
+        upload: 'Upload your file(s)',
+      },
     },
     hasValidationIcon: false,
     helperText: 'Max file size is 10 MB',

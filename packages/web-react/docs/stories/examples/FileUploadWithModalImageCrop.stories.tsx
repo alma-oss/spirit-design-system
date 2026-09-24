@@ -313,7 +313,7 @@ export const FileUploadWithModalImageCrop = () => {
         helperText="Max file size is 10 MB"
         isUploadDisabled={items.length > 0}
         label="Label"
-        strings={{ labelDragAndDrop: 'or drag and drop here', labelUpload: 'Upload your file' }}
+        strings={{ label: { dragAndDrop: 'or drag and drop here', upload: 'Upload your file' } }}
         name="attachments"
         onFilesSelected={onFilesSelected}
         {...(fileError && { validationState: 'danger' })}
@@ -343,8 +343,10 @@ export const FileUploadWithModalImageCrop = () => {
               id={item.id}
               label={item.label}
               strings={{
-                ariaLabelRemove: `Remove ${item.label} from list`,
-                ...(!isError && { ariaLabelEdit: `Edit crop of ${item.label}` }),
+                ariaLabel: {
+                  remove: `Remove ${item.label} from list`,
+                  ...(!isError && { edit: `Edit crop of ${item.label}` }),
+                },
               }}
               {...(!isError && {
                 onChange: () => handleEdit(item.id),

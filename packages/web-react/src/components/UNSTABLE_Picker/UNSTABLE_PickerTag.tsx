@@ -56,7 +56,7 @@ const UNSTABLE_PickerTag = ({
         {children ?? <span>{label}</span>}
         <CloseButton
           isDisabled={isDisabled}
-          strings={{ ariaLabel: removeButtonLabel }}
+          strings={{ ariaLabel: { close: removeButtonLabel } }}
           onClick={onRemove}
           size={PICKER_NESTED_CLOSE_BUTTON_SIZE_MAP[size]}
           {...(tagKeyboardProps && { tabIndex: tagKeyboardProps.secondaryControlTabIndex })}

@@ -23,7 +23,7 @@ const _PaginationLink = <E extends ElementType = 'a'>(props: SpiritPaginationLin
     ...restProps
   } = props;
   const isButtonElement = elementType === 'button';
-  const labelOverride = strings?.ariaLabel ?? accessibilityLabel;
+  const labelOverride = strings?.ariaLabel?.page ?? accessibilityLabel;
   const visuallyHiddenLabel = labelOverride
     ? resolveComponentString(labelOverride, t)
     : `${t('pagination.goToPage')} ${pageNumber}`;
@@ -33,7 +33,7 @@ const _PaginationLink = <E extends ElementType = 'a'>(props: SpiritPaginationLin
     trigger: accessibilityLabel != null,
     componentName: 'PaginationLink',
     customText:
-      'The "accessibilityLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel" instead.',
+      'The "accessibilityLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.page" instead.',
   });
 
   const Component = elementType as ElementType;

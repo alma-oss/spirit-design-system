@@ -25,30 +25,42 @@ const meta: Meta<typeof ScrollView> = {
         'custom-bottom',
       ],
       description: `Labels for the scroll controls, mainly for accessibility purposes. In the real code you can
-        pass in any object with \`ariaStart\`/\`ariaEnd\` properties for horizontal direction or \`ariaTop\`/\`ariaBottom\` properties for vertical direction.
+        pass in any object with \`ariaLabel.start\`/\`ariaLabel.end\` properties for horizontal direction or \`ariaLabel.top\`/\`ariaLabel.bottom\` properties for vertical direction.
         In this demo we have predefined options: \`default\`, \`custom-both-horizontal\`, \`custom-both-vertical\`, \`custom-start\`, \`custom-end\`, \`custom-top\`, and \`custom-bottom\`.
         Please note the predefined options in this demo are not customizable.`,
       mapping: {
         default: undefined,
         'custom-both-horizontal': {
-          ariaStart: 'Custom scroll left',
-          ariaEnd: 'Custom scroll right',
+          ariaLabel: {
+            start: 'Custom scroll left',
+            end: 'Custom scroll right',
+          },
         },
         'custom-both-vertical': {
-          ariaTop: 'Custom scroll up',
-          ariaBottom: 'Custom scroll down',
+          ariaLabel: {
+            top: 'Custom scroll up',
+            bottom: 'Custom scroll down',
+          },
         },
         'custom-start': {
-          ariaStart: 'Custom scroll left',
+          ariaLabel: {
+            start: 'Custom scroll left',
+          },
         },
         'custom-end': {
-          ariaEnd: 'Custom scroll right',
+          ariaLabel: {
+            end: 'Custom scroll right',
+          },
         },
         'custom-top': {
-          ariaTop: 'Custom scroll up',
+          ariaLabel: {
+            top: 'Custom scroll up',
+          },
         },
         'custom-bottom': {
-          ariaBottom: 'Custom scroll down',
+          ariaLabel: {
+            bottom: 'Custom scroll down',
+          },
         },
       },
     },

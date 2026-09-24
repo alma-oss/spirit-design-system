@@ -73,13 +73,13 @@ const getCharacterCounterScreenReaderMessage = (
   strings?: CharacterCounterStrings,
 ): string => {
   if (counterThreshold === undefined) {
-    return resolveComponentString(strings?.ariaCharactersEntered ?? { key: 'textArea.counter.charactersEntered' }, t, {
+    return resolveComponentString(strings?.ariaLabel?.characters?.entered ?? { key: 'textArea.counter.charactersEntered' }, t, {
       count: currentLength,
     });
   }
 
   if (currentLength === 0) {
-    return resolveComponentString(strings?.ariaCanEnterUpTo ?? { key: 'textArea.counter.canEnterUpTo' }, t, {
+    return resolveComponentString(strings?.ariaLabel?.canEnterUpTo ?? { key: 'textArea.counter.canEnterUpTo' }, t, {
       maxLength: counterThreshold,
     });
   }
@@ -88,8 +88,8 @@ const getCharacterCounterScreenReaderMessage = (
     const overCount = currentLength - counterThreshold;
     const value =
       overCount === 1
-        ? (strings?.ariaCharacterOverLimit ?? { key: 'textArea.counter.characterOverLimit' })
-        : (strings?.ariaCharactersOverLimit ?? { key: 'textArea.counter.charactersOverLimit' });
+        ? (strings?.ariaLabel?.character?.overLimit ?? { key: 'textArea.counter.characterOverLimit' })
+        : (strings?.ariaLabel?.characters?.overLimit ?? { key: 'textArea.counter.charactersOverLimit' });
 
     return resolveComponentString(value, t, { count: overCount });
   }
@@ -97,8 +97,8 @@ const getCharacterCounterScreenReaderMessage = (
   const remaining = counterThreshold - currentLength;
   const value =
     remaining === 1
-      ? (strings?.ariaCharacterRemaining ?? { key: 'textArea.counter.characterRemaining' })
-      : (strings?.ariaCharactersRemaining ?? { key: 'textArea.counter.charactersRemaining' });
+      ? (strings?.ariaLabel?.character?.remaining ?? { key: 'textArea.counter.characterRemaining' })
+      : (strings?.ariaLabel?.characters?.remaining ?? { key: 'textArea.counter.charactersRemaining' });
 
   return resolveComponentString(value, t, { count: remaining });
 };

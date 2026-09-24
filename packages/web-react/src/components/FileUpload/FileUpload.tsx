@@ -47,15 +47,15 @@ const FileUpload = (props: FileUploadProps) => {
     ...restProps
   } = props;
   const resolvedButtonText = resolveComponentString(
-    strings?.labelButton ?? buttonText ?? { key: 'fileUploader.browse' },
+    strings?.label?.button ?? buttonText ?? { key: 'fileUploader.browse' },
     t,
   );
   const resolvedInputUploadText = resolveComponentString(
-    strings?.labelUpload ?? inputUploadText ?? { key: 'fileUploader.inputUpload' },
+    strings?.label?.upload ?? inputUploadText ?? { key: 'fileUploader.inputUpload' },
     t,
   );
   const resolvedInputDragAndDropText = resolveComponentString(
-    strings?.labelDragAndDrop ?? inputDragAndDropText ?? { key: 'fileUploader.inputDragAndDrop' },
+    strings?.label?.dragAndDrop ?? inputDragAndDropText ?? { key: 'fileUploader.inputDragAndDrop' },
     t,
   );
 

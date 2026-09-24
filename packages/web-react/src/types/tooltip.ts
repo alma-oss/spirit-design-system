@@ -27,11 +27,13 @@ export interface TooltipState {
 }
 
 export type TooltipStrings = {
-  ariaLabelClose?: TranslatableString;
+  ariaLabel?: {
+    close?: TranslatableString;
+  };
 };
 
 export interface TooltipBaseProps extends ChildrenProps, StyleProps, StringsProps<TooltipStrings> {
-  /** @deprecated Use `strings.ariaLabelClose` instead. */
+  /** @deprecated Use `strings.ariaLabel.close` instead. */
   closeLabel?: string;
   id: string;
 }

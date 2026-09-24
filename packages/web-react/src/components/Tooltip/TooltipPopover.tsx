@@ -43,11 +43,11 @@ const TooltipPopover = (props: TooltipPopoverProps) => {
       isDismissible && (
         <CloseButton
           aria-expanded="true"
-          strings={{ ariaLabel: strings?.ariaLabelClose ?? closeLabel }}
+          strings={{ ariaLabel: { close: strings?.ariaLabel?.close ?? closeLabel } }}
           onClick={() => onToggle(false)}
         />
       ),
-    [closeLabel, isDismissible, onToggle, strings?.ariaLabelClose],
+    [closeLabel, isDismissible, onToggle, strings?.ariaLabel?.close],
   );
 
   const getMaxHeightAndWidth = () => {

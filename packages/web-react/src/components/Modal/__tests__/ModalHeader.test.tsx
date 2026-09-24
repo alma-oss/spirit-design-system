@@ -30,7 +30,7 @@ describe('ModalHeader', () => {
   });
 
   it('should pass the close label override to CloseButton', () => {
-    render(<ModalHeader strings={{ ariaLabelClose: 'Dismiss modal' }}>Modal Title</ModalHeader>);
+    render(<ModalHeader strings={{ ariaLabel: { close: 'Dismiss modal' } }}>Modal Title</ModalHeader>);
 
     expect(screen.getByRole('button', { name: 'Dismiss modal' })).toBeInTheDocument();
   });

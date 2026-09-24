@@ -120,7 +120,7 @@ const meta: Meta<typeof UncontrolledSplitButton> = {
     color: ComponentButtonColors.PRIMARY,
     dropdownPlacement: Placements.BOTTOM_END,
     dropdownTriggerIconName: 'chevron-down',
-    strings: { ariaLabelDropdown: 'More' },
+    strings: { ariaLabel: { dropdown: 'More' } },
     id: 'uncontrolled-split-button',
     isButtonLabelHidden: false,
     isDisabled: false,

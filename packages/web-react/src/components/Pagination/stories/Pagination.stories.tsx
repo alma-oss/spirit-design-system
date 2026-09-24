@@ -35,7 +35,7 @@ export const Playground: Story = {
           isCurrent
           pageNumber={1}
           strings={{
-            ariaLabel: 'Current Page, Page 1',
+            ariaLabel: { page: 'Current Page, Page 1' },
           }}
         />
       </PaginationItem>
@@ -44,7 +44,7 @@ export const Playground: Story = {
           href="#"
           pageNumber={2}
           strings={{
-            ariaLabel: 'Go to Page 2',
+            ariaLabel: { page: 'Go to Page 2' },
           }}
         />
       </PaginationItem>
@@ -53,7 +53,7 @@ export const Playground: Story = {
           href="#"
           pageNumber={3}
           strings={{
-            ariaLabel: 'Go to Page 3',
+            ariaLabel: { page: 'Go to Page 3' },
           }}
         />
       </PaginationItem>
@@ -62,7 +62,7 @@ export const Playground: Story = {
           href="#"
           pageNumber={4}
           strings={{
-            ariaLabel: 'Go to Page 4',
+            ariaLabel: { page: 'Go to Page 4' },
           }}
         />
       </PaginationItem>
@@ -71,7 +71,7 @@ export const Playground: Story = {
           href="#"
           pageNumber={5}
           strings={{
-            ariaLabel: 'Go to Page 5',
+            ariaLabel: { page: 'Go to Page 5' },
           }}
         />
       </PaginationItem>

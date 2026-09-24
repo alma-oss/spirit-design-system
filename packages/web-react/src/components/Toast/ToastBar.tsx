@@ -39,7 +39,7 @@ const ToastBar = (props: SpiritToastBarProps) => {
     trigger: closeLabel != null,
     componentName: 'ToastBar',
     customText:
-      'The "closeLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabelClose" instead.',
+      'The "closeLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.close" instead.',
   });
 
   return (
@@ -63,7 +63,7 @@ const ToastBar = (props: SpiritToastBarProps) => {
                 onClick={onClose}
                 aria-expanded={isOpen}
                 aria-controls={id}
-                strings={{ ariaLabel: strings?.ariaLabelClose ?? closeLabel }}
+                strings={{ ariaLabel: { close: strings?.ariaLabel?.close ?? closeLabel } }}
               />
             )}
           </div>

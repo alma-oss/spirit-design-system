@@ -18,7 +18,7 @@ const UncontrolledToast = (props: UncontrolledToastProps) => {
     trigger: closeLabel != null,
     componentName: 'UncontrolledToast',
     customText:
-      'The "closeLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabelClose" instead.',
+      'The "closeLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.close" instead.',
   });
 
   return (
@@ -31,7 +31,7 @@ const UncontrolledToast = (props: UncontrolledToastProps) => {
             {...restProps}
             key={id}
             id={id}
-            strings={{ ariaLabelClose: strings?.ariaLabelClose ?? closeLabel }}
+            strings={{ ariaLabel: { close: strings?.ariaLabel?.close ?? closeLabel } }}
             color={color}
             hasIcon={hasIcon}
             iconName={iconName}

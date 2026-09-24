@@ -16,9 +16,7 @@ const UncontrolledSplitButtonDemo = () => (
     isDisabled={false}
     isDropdownTriggerLabelHidden
     size="large"
-    strings={{
-      ariaLabelDropdown: 'More',
-    }}
+    strings={{ ariaLabel: { dropdown: 'More', } }}
   >
     <Item>
       <Label>Item 1</Label>

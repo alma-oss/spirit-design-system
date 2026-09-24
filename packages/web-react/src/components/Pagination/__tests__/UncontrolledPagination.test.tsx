@@ -15,7 +15,7 @@ describe('UncontrolledPagination', () => {
   it('renders pagination items with test page selected', () => {
     render(
       <UncontrolledPagination
-        strings={{ ariaLabel: 'test page', ariaLabelNext: 'Following', ariaLabelPrevious: 'Back' }}
+        strings={{ ariaLabel: { page: 'test page', next: 'Following', previous: 'Back' } }}
         totalPages={10}
         defaultPage={5}
         onChange={onPageChange}
@@ -56,7 +56,7 @@ describe('UncontrolledPagination', () => {
   });
 
   it('falls back for keys omitted from a partial strings object', () => {
-    render(<UncontrolledPagination strings={{ ariaLabel: 'page' }} totalPages={3} defaultPage={2} />);
+    render(<UncontrolledPagination strings={{ ariaLabel: { page: 'page' } }} totalPages={3} defaultPage={2} />);
 
     expect(screen.getByRole('button', { name: 'Previous' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Next' })).toBeInTheDocument();

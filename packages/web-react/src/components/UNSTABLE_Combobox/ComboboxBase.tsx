@@ -108,27 +108,27 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
   } = resolveComponentStrings(
     {
       addMoreDescriptionText: {
-        value: strings?.ariaAddMoreDescription ?? addMoreDescriptionText,
+        value: strings?.ariaLabel?.addMoreDescription ?? addMoreDescriptionText,
         key: 'combobox.addMoreDescription',
         params: { label },
       },
-      addMoreLabel: { value: strings?.labelAddMore ?? addMoreLabel, key: 'combobox.addMore' },
-      removeAllLabel: { value: strings?.ariaRemoveAll ?? removeAllLabel, key: 'combobox.removeAll' },
+      addMoreLabel: { value: strings?.label?.addMore ?? addMoreLabel, key: 'combobox.addMore' },
+      removeAllLabel: { value: strings?.ariaLabel?.removeAll ?? removeAllLabel, key: 'combobox.removeAll' },
       selectionAriaLabel: {
-        value: strings?.ariaSelection ?? selectionAriaLabel,
+        value: strings?.ariaLabel?.selection ?? selectionAriaLabel,
         key: 'combobox.selectionAriaLabel',
         params: { label },
       },
       selectionCountLabel: {
-        value: strings?.ariaSelectionCount ?? selectionCountLabel,
+        value: strings?.ariaLabel?.selectionCount ?? selectionCountLabel,
         key: 'combobox.selectionCountLabel',
       },
       selectionCountLabelSingular: {
-        value: strings?.ariaSelectionCountSingular ?? selectionCountLabelSingular,
+        value: strings?.ariaLabel?.selectionCountSingular ?? selectionCountLabelSingular,
         key: 'combobox.selectionCountLabelSingular',
       },
       tagDescriptionText: {
-        value: strings?.ariaTagDescription ?? tagDescriptionText,
+        value: strings?.ariaLabel?.tagDescription ?? tagDescriptionText,
         key: 'combobox.tagDescriptionText',
       },
     },
@@ -136,8 +136,8 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
   );
   const resolvedEmptyStateLabel = emptyStateLabel ?? t('combobox.emptyState');
   const resolvedLoadingLabel = loadingLabel ?? t('combobox.loading');
-  const resolvedRemoveItemLabel = strings?.ariaRemoveItem ?? removeItemLabel;
-  const emptySelectionValue = strings?.labelEmptySelection ?? emptySelectionLabel;
+  const resolvedRemoveItemLabel = strings?.ariaLabel?.removeItem ?? removeItemLabel;
+  const emptySelectionValue = strings?.label?.emptySelection ?? emptySelectionLabel;
 
   useDeprecationMessage({
     method: 'custom',

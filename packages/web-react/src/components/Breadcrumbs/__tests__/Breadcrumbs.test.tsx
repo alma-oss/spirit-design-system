@@ -72,7 +72,7 @@ describe('Breadcrumbs', () => {
           { title: 'test', url: '/test' },
           { title: 'test_2', url: '/test_2' },
         ]}
-        strings={{ ariaLabel: 'Drobečková navigace' }}
+        strings={{ ariaLabel: { nav: 'Drobečková navigace' } }}
       />,
     );
 

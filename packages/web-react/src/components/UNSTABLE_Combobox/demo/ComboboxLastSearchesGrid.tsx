@@ -80,7 +80,7 @@ const ComboboxLastSearchesGrid = () => {
       inputValue={inputValue}
       isOpen={isOpen}
       label="Last searches"
-      strings={{ labelEmptySelection: 'Search' }}
+      strings={{ label: { emptySelection: 'Search' } }}
       onInputChange={setInputValue}
       onSelectionChange={() => {}}
       onToggle={onToggle}

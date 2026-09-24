@@ -14,7 +14,7 @@ const FileUploadDraggingNotAvailable = () => (
       label="Label"
       name="attachment-no-drag-standard"
       strings={{
-        labelUpload: 'Upload your file',
+        label: { upload: 'Upload your file' },
       }}
     />
     <FileUpload
@@ -27,7 +27,7 @@ const FileUploadDraggingNotAvailable = () => (
       label="Label"
       name="attachment-no-drag-compact"
       strings={{
-        labelUpload: 'Upload your file',
+        label: { upload: 'Upload your file' },
       }}
     />
   </Grid>

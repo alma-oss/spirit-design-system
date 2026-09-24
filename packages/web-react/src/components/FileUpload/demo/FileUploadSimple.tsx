@@ -42,8 +42,10 @@ const SimpleUploadColumn = ({ title, inputId, isCompact, name, rootId }: SimpleU
         name={name}
         onFilesSelected={handleFilesSelected}
         strings={{
-          labelUpload: 'Upload your file',
-          labelDragAndDrop: 'or drag and drop here',
+          label: {
+            upload: 'Upload your file',
+            dragAndDrop: 'or drag and drop here',
+          },
         }}
       />
       {fileQueue.size > 0 && (
@@ -64,7 +66,9 @@ const SimpleUploadColumn = ({ title, inputId, isCompact, name, rootId }: SimpleU
                 ) : undefined
               }
               strings={{
-                ariaLabelRemove: `Remove ${item.label} from list`,
+                ariaLabel: {
+                  remove: `Remove ${item.label} from list`,
+                },
               }}
             />
           ))}

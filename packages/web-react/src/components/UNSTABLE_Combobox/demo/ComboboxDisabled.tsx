@@ -19,7 +19,7 @@ const ComboboxDisabled = () => {
         isDisabled
         isOpen={emptyField.isOpen}
         label="Languages (empty)"
-        strings={{ labelEmptySelection: 'Languages' }}
+        strings={{ label: { emptySelection: 'Languages' } }}
         onInputChange={emptyField.onInputChange}
         onSelectionChange={emptyField.onSelectionChange}
         onToggle={emptyField.onToggle}
@@ -35,7 +35,7 @@ const ComboboxDisabled = () => {
         isDisabled
         isOpen={selectedField.isOpen}
         label="Languages (with selection)"
-        strings={{ labelEmptySelection: 'Languages' }}
+        strings={{ label: { emptySelection: 'Languages' } }}
         onInputChange={selectedField.onInputChange}
         onSelectionChange={selectedField.onSelectionChange}
         onToggle={selectedField.onToggle}

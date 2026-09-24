@@ -24,7 +24,7 @@ const ModalHeader = (props: ModalHeaderProps) => {
     trigger: closeLabel != null,
     componentName: 'ModalHeader',
     customText:
-      'The "closeLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabelClose" instead.',
+      'The "closeLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.close" instead.',
   });
 
   return (
@@ -39,7 +39,7 @@ const ModalHeader = (props: ModalHeaderProps) => {
           size="xlarge"
           aria-expanded={isOpen}
           aria-controls={id}
-          strings={{ ariaLabel: strings?.ariaLabelClose ?? closeLabel }}
+          strings={{ ariaLabel: { close: strings?.ariaLabel?.close ?? closeLabel } }}
           onClick={onClose}
         />
       )}

@@ -20,29 +20,33 @@ import type {
 export type UnstablePickerSelectionMode = SelectionMode;
 
 export type UnstablePickerStrings = {
-  ariaAdd?: TranslatableString;
-  ariaClose?: TranslatableString;
-  ariaRemoveAll?: TranslatableString;
-  ariaRemoveItem?: TranslatableString;
-  ariaSelection?: TranslatableString;
-  ariaTagDescription?: TranslatableString;
-  labelEmptySelection?: TranslatableString;
+  ariaLabel?: {
+    add?: TranslatableString;
+    close?: TranslatableString;
+    removeAll?: TranslatableString;
+    removeItem?: TranslatableString;
+    selection?: TranslatableString;
+    tagDescription?: TranslatableString;
+  };
+  label?: {
+    emptySelection?: TranslatableString;
+  };
 };
 
 export interface UnstablePickerTranslations {
-  /** @deprecated Use `strings.ariaAdd` instead. */
+  /** @deprecated Use `strings.ariaLabel.add` instead. */
   addButtonLabel?: string;
-  /** @deprecated Use `strings.ariaClose` instead. */
+  /** @deprecated Use `strings.ariaLabel.close` instead. */
   closeButtonLabel?: string;
-  /** @deprecated Use `strings.labelEmptySelection` instead. */
+  /** @deprecated Use `strings.label.emptySelection` instead. */
   emptySelectionLabel?: string;
-  /** @deprecated Use `strings.ariaRemoveAll` instead. */
+  /** @deprecated Use `strings.ariaLabel.removeAll` instead. */
   removeAllLabel?: string;
-  /** @deprecated Use `strings.ariaRemoveItem` instead. */
+  /** @deprecated Use `strings.ariaLabel.removeItem` instead. */
   removeItemLabel?: string;
-  /** @deprecated Use `strings.ariaSelection` instead. */
+  /** @deprecated Use `strings.ariaLabel.selection` instead. */
   selectionAriaLabel?: string;
-  /** @deprecated Use `strings.ariaTagDescription` instead. */
+  /** @deprecated Use `strings.ariaLabel.tagDescription` instead. */
   tagDescriptionText?: string;
 }
 

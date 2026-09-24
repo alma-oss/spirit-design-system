@@ -23,7 +23,7 @@ const Breadcrumbs = <E extends ElementType = 'nav'>(props: SpiritBreadcrumbsProp
   const { t } = useI18n();
   const backLabelSource = strings?.label?.back ?? goBackTitle;
   const resolvedBackLabel = backLabelSource ? resolveComponentString(backLabelSource, t) : undefined;
-  const resolvedAriaLabel = resolveComponentString(strings?.ariaLabel ?? { key: 'breadcrumbs.ariaLabel' }, t);
+  const resolvedAriaLabel = resolveComponentString(strings?.ariaLabel?.nav ?? { key: 'breadcrumbs.ariaLabel' }, t);
 
   useDeprecationMessage({
     method: 'property',

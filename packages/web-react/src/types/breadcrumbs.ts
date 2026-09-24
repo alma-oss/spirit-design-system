@@ -8,7 +8,9 @@ import {
 } from './shared';
 
 export type BreadcrumbsStrings = {
-  ariaLabel?: TranslatableString;
+  ariaLabel?: {
+    nav?: TranslatableString;
+  };
   label?: {
     back?: TranslatableString;
   };

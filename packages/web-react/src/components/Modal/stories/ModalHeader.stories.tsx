@@ -28,7 +28,7 @@ const meta: Meta<typeof ModalHeader> = {
   },
   args: {
     children: 'Modal Header',
-    strings: { ariaLabelClose: 'Close' },
+    strings: { ariaLabel: { close: 'Close' } },
     hasCloseButton: true,
   },
 };

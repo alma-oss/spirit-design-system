@@ -20,7 +20,7 @@ const meta: Meta<typeof PaginationLinkPrevious> = {
     },
   },
   args: {
-    strings: { ariaLabelPrevious: 'Previous' },
+    strings: { ariaLabel: { previous: 'Previous' } },
     href: '#',
   },
 };
@@ -40,7 +40,7 @@ export const PaginationLinkPreviousPlayground: Story = {
           href="#"
           pageNumber={11}
           strings={{
-            ariaLabel: 'Go to Page 11',
+            ariaLabel: { page: 'Go to Page 11' },
           }}
         />
       </PaginationItem>
@@ -49,7 +49,7 @@ export const PaginationLinkPreviousPlayground: Story = {
           href="#"
           pageNumber={12}
           strings={{
-            ariaLabel: 'Go to Page 12',
+            ariaLabel: { page: 'Go to Page 12' },
           }}
         />
       </PaginationItem>
@@ -59,7 +59,7 @@ export const PaginationLinkPreviousPlayground: Story = {
           isCurrent
           pageNumber={13}
           strings={{
-            ariaLabel: 'Current Page, Page 13',
+            ariaLabel: { page: 'Current Page, Page 13' },
           }}
         />
       </PaginationItem>
@@ -68,7 +68,7 @@ export const PaginationLinkPreviousPlayground: Story = {
           href="#"
           pageNumber={14}
           strings={{
-            ariaLabel: 'Go to Page 14',
+            ariaLabel: { page: 'Go to Page 14' },
           }}
         />
       </PaginationItem>
@@ -77,7 +77,7 @@ export const PaginationLinkPreviousPlayground: Story = {
           href="#"
           pageNumber={15}
           strings={{
-            ariaLabel: 'Go to Page 15',
+            ariaLabel: { page: 'Go to Page 15' },
           }}
         />
       </PaginationItem>

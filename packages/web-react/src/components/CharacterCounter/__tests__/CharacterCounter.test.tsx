@@ -196,7 +196,7 @@ describe('CharacterCounter', () => {
         <CharacterCounter
           {...defaultProps}
           counterThreshold={200}
-          strings={{ ariaCanEnterUpTo: 'Up to {maxLength} chars' }}
+          strings={{ ariaLabel: { canEnterUpTo: 'Up to {maxLength} chars' } }}
         />,
       );
 

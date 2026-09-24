@@ -14,7 +14,7 @@ const PaginationCurrentLast = () => (
         href="#"
         pageNumber={109}
         strings={{
-          ariaLabel: 'Go to Page 109',
+          ariaLabel: { page: 'Go to Page 109' },
         }}
       />
     </PaginationItem>
@@ -23,7 +23,7 @@ const PaginationCurrentLast = () => (
         href="#"
         pageNumber={110}
         strings={{
-          ariaLabel: 'Go to Page 110',
+          ariaLabel: { page: 'Go to Page 110' },
         }}
       />
     </PaginationItem>
@@ -32,7 +32,7 @@ const PaginationCurrentLast = () => (
         href="#"
         pageNumber={111}
         strings={{
-          ariaLabel: 'Go to Page 111',
+          ariaLabel: { page: 'Go to Page 111' },
         }}
       />
     </PaginationItem>
@@ -41,7 +41,7 @@ const PaginationCurrentLast = () => (
         href="#"
         pageNumber={112}
         strings={{
-          ariaLabel: 'Go to Page 112',
+          ariaLabel: { page: 'Go to Page 112' },
         }}
       />
     </PaginationItem>
@@ -51,7 +51,7 @@ const PaginationCurrentLast = () => (
         isCurrent
         pageNumber={113}
         strings={{
-          ariaLabel: 'Current Page, Page 113',
+          ariaLabel: { page: 'Current Page, Page 113' },
         }}
       />
     </PaginationItem>

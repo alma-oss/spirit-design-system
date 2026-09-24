@@ -37,7 +37,7 @@ const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
   const buttonLabelValue = labelButton ?? buttonLabel;
   const resolvedButtonLabel = buttonLabelValue ? resolveComponentString(buttonLabelValue, t) : '';
   const resolvedDropdownTriggerLabel = resolveComponentString(
-    strings?.ariaLabelDropdown ?? dropdownTriggerLabel ?? { key: 'splitButton.dropdown' },
+    strings?.ariaLabel?.dropdown ?? dropdownTriggerLabel ?? { key: 'splitButton.dropdown' },
     t,
   );
   const [openDropdownState, setOpenDropdownState] = useState(false);
@@ -53,7 +53,7 @@ const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
     trigger: dropdownTriggerLabel != null,
     componentName: 'UncontrolledSplitButton',
     customText:
-      'The "dropdownTriggerLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabelDropdown" instead.',
+      'The "dropdownTriggerLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.dropdown" instead.',
   });
 
   return (

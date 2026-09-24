@@ -46,7 +46,7 @@ describe('Tooltip', () => {
 
   it('should pass the dismiss label to the close button', () => {
     render(
-      <Tooltip id={id} isDismissible isOpen onToggle={() => null} strings={{ ariaLabelClose: 'Dismiss tooltip' }}>
+      <Tooltip id={id} isDismissible isOpen onToggle={() => null} strings={{ ariaLabel: { close: 'Dismiss tooltip' } }}>
         <TooltipTrigger>{triggerText}</TooltipTrigger>
         <TooltipPopover>{popoverText}</TooltipPopover>
       </Tooltip>,

@@ -1,12 +1,18 @@
 import type { RegisterType, StringsProps, StyleProps, TranslatableString, ValidationState } from '../../types/shared';
 
 export type CharacterCounterStrings = {
-  ariaCanEnterUpTo?: TranslatableString;
-  ariaCharacterOverLimit?: TranslatableString;
-  ariaCharacterRemaining?: TranslatableString;
-  ariaCharactersEntered?: TranslatableString;
-  ariaCharactersOverLimit?: TranslatableString;
-  ariaCharactersRemaining?: TranslatableString;
+  ariaLabel?: {
+    canEnterUpTo?: TranslatableString;
+    character?: {
+      overLimit?: TranslatableString;
+      remaining?: TranslatableString;
+    };
+    characters?: {
+      entered?: TranslatableString;
+      overLimit?: TranslatableString;
+      remaining?: TranslatableString;
+    };
+  };
 };
 
 export interface CharacterCounterProps extends StyleProps, StringsProps<CharacterCounterStrings> {

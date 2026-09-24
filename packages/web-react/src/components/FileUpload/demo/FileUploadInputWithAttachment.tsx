@@ -15,8 +15,10 @@ const FileUploadInputWithAttachment = () => (
       name="attachment-with-list"
       isMultiple
       strings={{
-        labelUpload: 'Upload your file',
-        labelDragAndDrop: 'or drag and drop here',
+        label: {
+          upload: 'Upload your file',
+          dragAndDrop: 'or drag and drop here',
+        },
       }}
     />
     <Stack aria-label="Uploaded files" elementType="ul" spacing="space-700">
@@ -25,10 +27,7 @@ const FileUploadInputWithAttachment = () => (
         helperText="2.5 MB"
         onDismiss={visualOnlyNoopOnDismiss}
         onChange={() => {}}
-        strings={{
-          ariaLabelEdit: 'Edit file name Document.pdf',
-          ariaLabelRemove: 'Remove file Document.pdf from list',
-        }}
+        strings={{ ariaLabel: { edit: 'Edit file name Document.pdf', remove: 'Remove file Document.pdf from list', } }}
       />
       <File
         label="vacation-photo.jpg"
@@ -40,9 +39,7 @@ const FileUploadInputWithAttachment = () => (
         }
         onDismiss={visualOnlyNoopOnDismiss}
         previewSlot={<FileImagePreview imagePreview="https://picsum.photos/seed/upload1/48/48" label="Image preview" />}
-        strings={{
-          ariaLabelRemove: 'Remove file vacation-photo.jpg from list',
-        }}
+        strings={{ ariaLabel: { remove: 'Remove file vacation-photo.jpg from list', } }}
       />
       <File
         label="report-2024.xlsx"
@@ -50,9 +47,7 @@ const FileUploadInputWithAttachment = () => (
         hasValidationIcon
         validationText="File uploaded successfully"
         onDismiss={visualOnlyNoopOnDismiss}
-        strings={{
-          ariaLabelRemove: 'Remove file report-2024.xlsx from list',
-        }}
+        strings={{ ariaLabel: { remove: 'Remove file report-2024.xlsx from list', } }}
       />
       <File
         label="large-file.zip"
@@ -60,9 +55,7 @@ const FileUploadInputWithAttachment = () => (
         hasValidationIcon
         validationText="File upload error – please retry"
         onDismiss={visualOnlyNoopOnDismiss}
-        strings={{
-          ariaLabelRemove: 'Remove file large-file.zip from list',
-        }}
+        strings={{ ariaLabel: { remove: 'Remove file large-file.zip from list', } }}
       />
     </Stack>
   </Stack>

@@ -49,11 +49,13 @@ export type ModalDialogStyleProps<E extends ElementType = 'article'> = Pick<
 export interface ModalBodyProps extends SpiritDivElementProps, ChildrenProps {}
 
 export type ModalHeaderStrings = {
-  ariaLabelClose?: TranslatableString;
+  ariaLabel?: {
+    close?: TranslatableString;
+  };
 };
 
 export interface ModalHeaderProps extends SpiritElementProps, ChildrenProps, StringsProps<ModalHeaderStrings> {
-  /** @deprecated Use `strings.ariaLabelClose` instead. */
+  /** @deprecated Use `strings.ariaLabel.close` instead. */
   closeLabel?: string;
   hasCloseButton?: boolean;
 }

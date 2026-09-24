@@ -87,7 +87,7 @@ const meta: Meta<UncontrolledToastPlaygroundProps> = {
     },
     alignmentX: 'center',
     alignmentY: 'bottom',
-    strings: { ariaLabelClose: 'Close' },
+    strings: { ariaLabel: { close: 'Close' } },
     hasIcon: false,
     isDismissible: true,
     color: ToastColorsExtended.NEUTRAL,

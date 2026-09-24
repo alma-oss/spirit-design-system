@@ -9,21 +9,23 @@ import {
 import { type FileItem } from '../File/types';
 
 export type FileUploadStrings = {
-  labelButton?: TranslatableString;
-  labelDragAndDrop?: TranslatableString;
-  labelUpload?: TranslatableString;
+  label?: {
+    button?: TranslatableString;
+    dragAndDrop?: TranslatableString;
+    upload?: TranslatableString;
+  };
 };
 
 export interface FileUploadTextProps extends StringsProps<FileUploadStrings> {
   /** Label for the decorative button (opens the same file input as the drop-zone label). */
-  /** @deprecated Use `strings.labelButton` instead. */
+  /** @deprecated Use `strings.label.button` instead. */
   buttonText?: string;
   helperText?: string;
   /** Drag-and-drop suffix in the drop zone (e.g. "or drag and drop here"). Hidden when drag-and-drop is not supported. */
-  /** @deprecated Use `strings.labelDragAndDrop` instead. */
+  /** @deprecated Use `strings.label.dragAndDrop` instead. */
   inputDragAndDropText?: string;
   /** Primary label in the drop zone (e.g. "Upload your file"). */
-  /** @deprecated Use `strings.labelUpload` instead. */
+  /** @deprecated Use `strings.label.upload` instead. */
   inputUploadText?: string;
 }
 

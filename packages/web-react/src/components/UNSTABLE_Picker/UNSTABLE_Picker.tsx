@@ -89,24 +89,24 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     tagDescriptionText: resolvedTagDescriptionText,
   } = resolveComponentStrings(
     {
-      addButtonLabel: { value: strings?.ariaAdd ?? addButtonLabel, key: 'picker.add' },
-      closeButtonLabel: { value: strings?.ariaClose ?? closeButtonLabel, key: 'common.close' },
-      removeAllLabel: { value: strings?.ariaRemoveAll ?? removeAllLabel, key: 'picker.removeAll' },
+      addButtonLabel: { value: strings?.ariaLabel?.add ?? addButtonLabel, key: 'picker.add' },
+      closeButtonLabel: { value: strings?.ariaLabel?.close ?? closeButtonLabel, key: 'common.close' },
+      removeAllLabel: { value: strings?.ariaLabel?.removeAll ?? removeAllLabel, key: 'picker.removeAll' },
       selectionAriaLabel: {
-        value: strings?.ariaSelection ?? selectionAriaLabel,
+        value: strings?.ariaLabel?.selection ?? selectionAriaLabel,
         key: 'picker.selectionAriaLabel',
         params: { label },
       },
       tagDescriptionText: {
-        value: strings?.ariaTagDescription ?? tagDescriptionText,
+        value: strings?.ariaLabel?.tagDescription ?? tagDescriptionText,
         key: 'picker.tagDescriptionText',
       },
     },
     t,
   );
-  const emptySelectionValue = strings?.labelEmptySelection ?? emptySelectionLabel;
+  const emptySelectionValue = strings?.label?.emptySelection ?? emptySelectionLabel;
   const emptyLabel = emptySelectionValue ? resolveComponentString(emptySelectionValue, t, { label }) : label;
-  const resolvedRemoveItemLabel = strings?.ariaRemoveItem ?? removeItemLabel;
+  const resolvedRemoveItemLabel = strings?.ariaLabel?.removeItem ?? removeItemLabel;
 
   useDeprecationMessage({
     method: 'custom',

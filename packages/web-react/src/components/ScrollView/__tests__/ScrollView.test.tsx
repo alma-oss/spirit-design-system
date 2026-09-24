@@ -227,7 +227,7 @@ describe('ScrollView', () => {
         hasControls
         direction="horizontal"
         ariaLabelControls={{ start: 'Deprecated start', end: 'Deprecated end' }}
-        strings={{ ariaStart: 'Strings start', ariaEnd: 'Strings end' }}
+        strings={{ ariaLabel: { start: 'Strings start', end: 'Strings end' } }}
       >
         <div style={{ width: '1000px' }}>Content</div>
       </ScrollView>,

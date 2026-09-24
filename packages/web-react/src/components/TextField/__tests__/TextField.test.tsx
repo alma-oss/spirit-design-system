@@ -226,7 +226,7 @@ describe('TextField', () => {
         id="textfield"
         label="Label"
         hasPasswordToggle
-        strings={{ ariaLabelShow: 'Reveal password', ariaLabelHide: { key: 'textField.password.hide' } }}
+        strings={{ ariaLabel: { show: 'Reveal password', hide: { key: 'textField.password.hide' } } }}
       />,
     );
 

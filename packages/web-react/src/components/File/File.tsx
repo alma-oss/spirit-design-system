@@ -45,9 +45,9 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
     ...restProps
   } = propsWithDefaults;
 
-  const resolvedEditText = resolveComponentString(strings?.ariaLabelEdit ?? editText ?? { key: 'attachment.edit' }, t);
+  const resolvedEditText = resolveComponentString(strings?.ariaLabel?.edit ?? editText ?? { key: 'attachment.edit' }, t);
   const resolvedRemoveText = resolveComponentString(
-    strings?.ariaLabelRemove ?? removeText ?? { key: 'attachment.remove' },
+    strings?.ariaLabel?.remove ?? removeText ?? { key: 'attachment.remove' },
     t,
   );
   const { classProps } = useFileStyleProps({ isDisabled, validationState });
@@ -62,7 +62,7 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
     trigger: editText != null || removeText != null,
     componentName: 'File',
     customText:
-      'The "editText" and "removeText" properties are deprecated and will be removed in the next major version. Use "strings.ariaLabelEdit" and "strings.ariaLabelRemove" instead.',
+      'The "editText" and "removeText" properties are deprecated and will be removed in the next major version. Use "strings.ariaLabel.edit" and "strings.ariaLabel.remove" instead.',
   });
 
   const fileRowControlButtonProps = {
@@ -79,7 +79,7 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
   ) : null;
 
   const dismissActionButton = onDismiss ? (
-    <CloseButton isDisabled={isDisabled} strings={{ ariaLabel: resolvedRemoveText }} onClick={onDismiss} />
+    <CloseButton isDisabled={isDisabled} strings={{ ariaLabel: { close: resolvedRemoveText } }} onClick={onDismiss} />
   ) : null;
 
   const Component = elementType as ElementType;

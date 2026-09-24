@@ -17,10 +17,7 @@ const FileImagePreviewVariant = () => (
           previewSlot={<FileImagePreview imagePreview={imagePreview} label="Profile photo" />}
           onDismiss={noop}
           onChange={noop}
-          strings={{
-            ariaLabelEdit: 'Edit file name Document.pdf',
-            ariaLabelRemove: 'Remove file Document.pdf from list',
-          }}
+          strings={{ ariaLabel: { edit: 'Edit file name Document.pdf', remove: 'Remove file Document.pdf from list', } }}
         />
       </ul>
     </section>
@@ -37,9 +34,7 @@ const FileImagePreviewVariant = () => (
           }
           previewSlot={<FileImagePreview imagePreview={imagePreview} label="Profile photo" />}
           onDismiss={noop}
-          strings={{
-            ariaLabelRemove: 'Remove file Document.pdf from list',
-          }}
+          strings={{ ariaLabel: { remove: 'Remove file Document.pdf from list', } }}
         />
       </ul>
     </section>
@@ -52,9 +47,7 @@ const FileImagePreviewVariant = () => (
           isDisabled
           previewSlot={<FileImagePreview imagePreview={imagePreview} label="Profile photo" />}
           onDismiss={noop}
-          strings={{
-            ariaLabelRemove: 'Remove file Document.pdf from list',
-          }}
+          strings={{ ariaLabel: { remove: 'Remove file Document.pdf from list', } }}
         />
       </ul>
     </section>
@@ -68,9 +61,7 @@ const FileImagePreviewVariant = () => (
           validationText="File uploaded successfully"
           previewSlot={<FileImagePreview imagePreview={imagePreview} label="Profile photo" />}
           onDismiss={noop}
-          strings={{
-            ariaLabelRemove: 'Remove file Document.pdf from list',
-          }}
+          strings={{ ariaLabel: { remove: 'Remove file Document.pdf from list', } }}
         />
       </ul>
     </section>
@@ -84,9 +75,7 @@ const FileImagePreviewVariant = () => (
           validationText="Large file – may take time"
           previewSlot={<FileImagePreview imagePreview={imagePreview} label="Profile photo" />}
           onDismiss={noop}
-          strings={{
-            ariaLabelRemove: 'Remove file Document.pdf from list',
-          }}
+          strings={{ ariaLabel: { remove: 'Remove file Document.pdf from list', } }}
         />
       </ul>
     </section>
@@ -100,9 +89,7 @@ const FileImagePreviewVariant = () => (
           validationText="File upload error – please retry"
           previewSlot={<FileImagePreview imagePreview={imagePreview} label="Profile photo" />}
           onDismiss={noop}
-          strings={{
-            ariaLabelRemove: 'Remove file Document.pdf from list',
-          }}
+          strings={{ ariaLabel: { remove: 'Remove file Document.pdf from list', } }}
         />
       </ul>
     </section>

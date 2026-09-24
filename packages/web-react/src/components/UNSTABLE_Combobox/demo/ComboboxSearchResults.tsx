@@ -69,7 +69,7 @@ const ComboboxSearchResults = () => {
       inputValue={inputValue}
       isOpen={isOpen}
       label="Search results"
-      strings={{ labelEmptySelection: 'Search' }}
+      strings={{ label: { emptySelection: 'Search' } }}
       onInputChange={setInputValue}
       onSelectionChange={setSelectedKeys}
       onToggle={onToggle}

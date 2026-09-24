@@ -77,7 +77,7 @@ describe('ToastBar', () => {
     const onClose = jest.fn();
 
     render(
-      <ToastBar id="test" isDismissible strings={{ ariaLabelClose: 'Close toast' }} onClose={onClose}>
+      <ToastBar id="test" isDismissible strings={{ ariaLabel: { close: 'Close toast' } }} onClose={onClose}>
         Hello World
       </ToastBar>,
     );

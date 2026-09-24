@@ -73,7 +73,7 @@ describe('FileUpload', () => {
       const { container } = render(
         <FileUpload
           {...defaultPropsWithInput}
-          strings={{ labelButton: 'Select', labelUpload: { key: 'fileUploader.inputUpload' } }}
+          strings={{ label: { button: 'Select', upload: { key: 'fileUploader.inputUpload' } } }}
         />,
       );
 

@@ -14,10 +14,7 @@ const FileTruncatedLabel = () => (
           helperText="8,5 kB"
           onDismiss={noop}
           onChange={noop}
-          strings={{
-            ariaLabelEdit: 'Edit file name Document.pdf',
-            ariaLabelRemove: 'Remove file Document.pdf from list',
-          }}
+          strings={{ ariaLabel: { edit: 'Edit file name Document.pdf', remove: 'Remove file Document.pdf from list', } }}
         />
       </ul>
     </section>

@@ -17,7 +17,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           isCurrent
           pageNumber={1}
           strings={{
-            ariaLabel: 'Current Page, Page 1',
+            ariaLabel: { page: 'Current Page, Page 1' },
           }}
         />
       </PaginationItem>
@@ -26,7 +26,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={2}
           strings={{
-            ariaLabel: 'Go to Page 2',
+            ariaLabel: { page: 'Go to Page 2' },
           }}
         />
       </PaginationItem>
@@ -35,7 +35,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={3}
           strings={{
-            ariaLabel: 'Go to Page 3',
+            ariaLabel: { page: 'Go to Page 3' },
           }}
         />
       </PaginationItem>
@@ -44,7 +44,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={4}
           strings={{
-            ariaLabel: 'Go to Page 4',
+            ariaLabel: { page: 'Go to Page 4' },
           }}
         />
       </PaginationItem>
@@ -53,7 +53,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={5}
           strings={{
-            ariaLabel: 'Go to Page 5',
+            ariaLabel: { page: 'Go to Page 5' },
           }}
         />
       </PaginationItem>
@@ -78,7 +78,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           isCurrent
           pageNumber={2}
           strings={{
-            ariaLabel: 'Current Page, Page 2',
+            ariaLabel: { page: 'Current Page, Page 2' },
           }}
         />
       </PaginationItem>
@@ -87,7 +87,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={3}
           strings={{
-            ariaLabel: 'Go to Page 3',
+            ariaLabel: { page: 'Go to Page 3' },
           }}
         />
       </PaginationItem>
@@ -96,7 +96,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={4}
           strings={{
-            ariaLabel: 'Go to Page 4',
+            ariaLabel: { page: 'Go to Page 4' },
           }}
         />
       </PaginationItem>
@@ -105,7 +105,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={5}
           strings={{
-            ariaLabel: 'Go to Page 5',
+            ariaLabel: { page: 'Go to Page 5' },
           }}
         />
       </PaginationItem>
@@ -129,7 +129,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={1}
           strings={{
-            ariaLabel: 'Go to Page 1',
+            ariaLabel: { page: 'Go to Page 1' },
           }}
         />
       </PaginationItem>
@@ -138,7 +138,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={2}
           strings={{
-            ariaLabel: 'Go to Page 2',
+            ariaLabel: { page: 'Go to Page 2' },
           }}
         />
       </PaginationItem>
@@ -148,7 +148,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           isCurrent
           pageNumber={3}
           strings={{
-            ariaLabel: 'Current Page, Page 3',
+            ariaLabel: { page: 'Current Page, Page 3' },
           }}
         />
       </PaginationItem>
@@ -157,7 +157,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={4}
           strings={{
-            ariaLabel: 'Go to Page 4',
+            ariaLabel: { page: 'Go to Page 4' },
           }}
         />
       </PaginationItem>
@@ -166,7 +166,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={5}
           strings={{
-            ariaLabel: 'Go to Page 5',
+            ariaLabel: { page: 'Go to Page 5' },
           }}
         />
       </PaginationItem>
@@ -190,7 +190,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={5}
           strings={{
-            ariaLabel: 'Go to Page 5',
+            ariaLabel: { page: 'Go to Page 5' },
           }}
         />
       </PaginationItem>
@@ -199,7 +199,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={6}
           strings={{
-            ariaLabel: 'Go to Page 6',
+            ariaLabel: { page: 'Go to Page 6' },
           }}
         />
       </PaginationItem>
@@ -209,7 +209,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           isCurrent
           pageNumber={7}
           strings={{
-            ariaLabel: 'Current Page, Page 7',
+            ariaLabel: { page: 'Current Page, Page 7' },
           }}
         />
       </PaginationItem>
@@ -218,7 +218,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={8}
           strings={{
-            ariaLabel: 'Go to Page 8',
+            ariaLabel: { page: 'Go to Page 8' },
           }}
         />
       </PaginationItem>
@@ -227,7 +227,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={9}
           strings={{
-            ariaLabel: 'Go to Page 9',
+            ariaLabel: { page: 'Go to Page 9' },
           }}
         />
       </PaginationItem>
@@ -251,7 +251,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={98}
           strings={{
-            ariaLabel: 'Go to Page 98',
+            ariaLabel: { page: 'Go to Page 98' },
           }}
         />
       </PaginationItem>
@@ -260,7 +260,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={99}
           strings={{
-            ariaLabel: 'Go to Page 99',
+            ariaLabel: { page: 'Go to Page 99' },
           }}
         />
       </PaginationItem>
@@ -269,7 +269,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={100}
           strings={{
-            ariaLabel: 'Go to Page 100',
+            ariaLabel: { page: 'Go to Page 100' },
           }}
         />
       </PaginationItem>
@@ -278,7 +278,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           href="#"
           pageNumber={101}
           strings={{
-            ariaLabel: 'Go to Page 101',
+            ariaLabel: { page: 'Go to Page 101' },
           }}
         />
       </PaginationItem>
@@ -288,7 +288,7 @@ figma.connect(Pagination, '<FIGMA_FILE_ID>?node-id=6630%3A6855', {
           isCurrent
           pageNumber={102}
           strings={{
-            ariaLabel: 'Current Page, Page 102',
+            ariaLabel: { page: 'Current Page, Page 102' },
           }}
         />
       </PaginationItem>

@@ -28,8 +28,10 @@ export interface TextFieldAddonProps {
 }
 
 export type TextFieldStrings = {
-  ariaLabelHide?: TranslatableString;
-  ariaLabelShow?: TranslatableString;
+  ariaLabel?: {
+    hide?: TranslatableString;
+    show?: TranslatableString;
+  };
 };
 
 export interface TextFieldProps<S = void>

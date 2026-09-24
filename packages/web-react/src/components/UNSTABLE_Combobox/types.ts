@@ -19,37 +19,41 @@ import type { ComboboxSelectedItem } from './useComboboxItems';
 export type ComboboxOptionsRole = 'listbox' | 'grid';
 
 export type UnstableComboboxStrings = {
-  ariaAddMoreDescription?: TranslatableString;
-  ariaRemoveAll?: TranslatableString;
-  ariaRemoveItem?: TranslatableString;
-  ariaSelection?: TranslatableString;
-  ariaSelectionCount?: TranslatableString;
-  ariaSelectionCountSingular?: TranslatableString;
-  ariaTagDescription?: TranslatableString;
-  labelAddMore?: TranslatableString;
-  labelEmptySelection?: TranslatableString;
+  ariaLabel?: {
+    addMoreDescription?: TranslatableString;
+    removeAll?: TranslatableString;
+    removeItem?: TranslatableString;
+    selection?: TranslatableString;
+    selectionCount?: TranslatableString;
+    selectionCountSingular?: TranslatableString;
+    tagDescription?: TranslatableString;
+  };
+  label?: {
+    addMore?: TranslatableString;
+    emptySelection?: TranslatableString;
+  };
 };
 
 export interface UnstableComboboxTranslations {
-  /** @deprecated Use `strings.labelAddMore` instead. */
+  /** @deprecated Use `strings.label.addMore` instead. */
   addMoreLabel?: string;
-  /** @deprecated Use `strings.ariaAddMoreDescription` instead. */
+  /** @deprecated Use `strings.ariaLabel.addMoreDescription` instead. */
   addMoreDescriptionText?: string;
-  /** @deprecated Use `strings.labelEmptySelection` instead. */
+  /** @deprecated Use `strings.label.emptySelection` instead. */
   emptySelectionLabel?: string;
   emptyStateLabel?: ReactNode;
   loadingLabel?: ReactNode;
-  /** @deprecated Use `strings.ariaRemoveAll` instead. */
+  /** @deprecated Use `strings.ariaLabel.removeAll` instead. */
   removeAllLabel?: string;
-  /** @deprecated Use `strings.ariaRemoveItem` instead. */
+  /** @deprecated Use `strings.ariaLabel.removeItem` instead. */
   removeItemLabel?: string;
-  /** @deprecated Use `strings.ariaSelection` instead. */
+  /** @deprecated Use `strings.ariaLabel.selection` instead. */
   selectionAriaLabel?: string;
-  /** @deprecated Use `strings.ariaSelectionCount` instead. */
+  /** @deprecated Use `strings.ariaLabel.selectionCount` instead. */
   selectionCountLabel?: string;
-  /** @deprecated Use `strings.ariaSelectionCountSingular` instead. */
+  /** @deprecated Use `strings.ariaLabel.selectionCountSingular` instead. */
   selectionCountLabelSingular?: string;
-  /** @deprecated Use `strings.ariaTagDescription` instead. */
+  /** @deprecated Use `strings.ariaLabel.tagDescription` instead. */
   tagDescriptionText?: string;
 }
 

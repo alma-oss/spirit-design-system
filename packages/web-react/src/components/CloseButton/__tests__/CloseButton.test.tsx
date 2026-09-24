@@ -28,7 +28,7 @@ describe('CloseButton', () => {
   });
 
   it('should render a literal string override without leaking strings to the DOM', () => {
-    render(<CloseButton strings={{ ariaLabel: 'Dismiss' }} />);
+    render(<CloseButton strings={{ ariaLabel: { close: 'Dismiss' } }} />);
 
     const button = screen.getByRole('button', { name: 'Dismiss' });
 
@@ -38,7 +38,7 @@ describe('CloseButton', () => {
   it('should resolve a translation reference with parameters from the provider', () => {
     render(
       <I18nProvider translations={{ dialog: { close: 'Close {name}' } }}>
-        <CloseButton strings={{ ariaLabel: { key: 'dialog.close', params: { name: 'Settings' } } }} />
+        <CloseButton strings={{ ariaLabel: { close: { key: 'dialog.close', params: { name: 'Settings' } } } }} />
       </I18nProvider>,
     );
 
@@ -46,7 +46,7 @@ describe('CloseButton', () => {
   });
 
   it('should prefer strings over the deprecated label', () => {
-    render(<CloseButton label="Deprecated" strings={{ ariaLabel: 'Current' }} />);
+    render(<CloseButton label="Deprecated" strings={{ ariaLabel: { close: 'Current' } }} />);
 
     expect(screen.getByRole('button', { name: 'Current' })).toBeInTheDocument();
   });

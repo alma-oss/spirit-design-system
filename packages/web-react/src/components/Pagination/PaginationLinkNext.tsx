@@ -17,14 +17,14 @@ const _PaginationLinkNext = <E extends ElementType = 'a'>(
   ref: PolymorphicRef<E>,
 ) => {
   const { t } = useI18n();
-  const label = resolveComponentString(strings?.ariaLabelNext ?? accessibilityLabel ?? { key: 'pagination.next' }, t);
+  const label = resolveComponentString(strings?.ariaLabel?.next ?? accessibilityLabel ?? { key: 'pagination.next' }, t);
 
   useDeprecationMessage({
     method: 'custom',
     trigger: accessibilityLabel != null,
     componentName: 'PaginationLinkNext',
     customText:
-      'The "accessibilityLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabelNext" instead.',
+      'The "accessibilityLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.next" instead.',
   });
 
   return (

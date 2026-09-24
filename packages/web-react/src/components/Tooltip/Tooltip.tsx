@@ -57,7 +57,7 @@ const _Tooltip = <E extends ElementType = 'div'>(props: SpiritTooltipProps<E>, r
     trigger: closeLabel != null,
     componentName: 'Tooltip',
     customText:
-      'The "closeLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabelClose" instead.',
+      'The "closeLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.close" instead.',
   });
 
   // Refs for FloatingUI

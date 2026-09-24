@@ -30,14 +30,14 @@ type FileUploadCompositionType = {
   // File list (Stack) – aria-label
   attachmentsLabel: string;
   // File props (applies to all rows; `file*` prefix avoids clash with FileUpload controls)
-  ariaLabelEdit: string;
+  edit: string;
   fileHasValidationIcon: boolean;
   fileHelperText: string;
   fileIconName: string;
   fileIsDisabled: boolean;
   fileValidationState: (typeof ValidationStates)[keyof typeof ValidationStates] | undefined;
   fileValidationText: string;
-  ariaLabelRemove: string;
+  remove: string;
   showEditButton: boolean;
   showFileRowId: boolean;
   // FileImagePreview props
@@ -181,7 +181,7 @@ export default {
       },
     },
     // File props
-    ariaLabelEdit: {
+    edit: {
       control: 'text',
       description: 'Edit button label.',
       table: {
@@ -244,7 +244,7 @@ export default {
         defaultValue: { summary: 'File validation message' },
       },
     },
-    ariaLabelRemove: {
+    remove: {
       control: 'text',
       description: 'Remove button label.',
       table: {
@@ -309,14 +309,14 @@ export default {
     validationState: undefined,
     validationText: 'Validation message',
     attachmentsLabel: 'Attachments',
-    ariaLabelEdit: 'Edit',
+    edit: 'Edit',
     fileHasValidationIcon: false,
     fileHelperText: '2.5 MB',
     fileIconName: 'file',
     fileIsDisabled: false,
     fileValidationState: undefined,
     fileValidationText: 'File validation message',
-    ariaLabelRemove: 'Remove',
+    remove: 'Remove',
     showEditButton: false,
     showFileRowId: true,
     imageObjectFit: ObjectFit.COVER,
@@ -328,7 +328,7 @@ export const FileUploadWithModalImagePreview = (args: FileUploadCompositionType)
   const {
     accept,
     attachmentsLabel,
-    ariaLabelEdit,
+    edit,
     fileHasValidationIcon,
     fileHelperText,
     fileIconName,
@@ -348,7 +348,7 @@ export const FileUploadWithModalImagePreview = (args: FileUploadCompositionType)
     isRequired,
     label,
     name,
-    ariaLabelRemove,
+    remove,
     showEditButton,
     showFileRowId,
     showImagePreview,
@@ -416,8 +416,10 @@ export const FileUploadWithModalImagePreview = (args: FileUploadCompositionType)
         validationState={validationState}
         validationText={validationText}
         strings={{
-          labelUpload,
-          labelDragAndDrop,
+          label: {
+            upload: labelUpload,
+            dragAndDrop: labelDragAndDrop,
+          },
         }}
       />
       <Stack aria-label={attachmentsLabel} elementType="ul" hasSpacing>
@@ -431,7 +433,7 @@ export const FileUploadWithModalImagePreview = (args: FileUploadCompositionType)
             isDisabled={fileIsDisabled}
             label={item.label}
             onDismiss={() => onDismiss(item.id)}
-            strings={{ ariaLabelEdit, ariaLabelRemove }}
+            strings={{ ariaLabel: { edit, remove } }}
             validationState={fileValidationState}
             validationText={fileValidationText}
             {...(showEditButton && { onChange: fn() })}

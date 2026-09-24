@@ -16,14 +16,14 @@ const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>((props, ref)
   const propsWithDefaults = { ...defaultProps, ...props };
   const { label, strings, ...restProps } = propsWithDefaults;
   const { t } = useI18n();
-  const closeLabel = resolveComponentString(strings?.ariaLabel ?? label ?? { key: 'common.close' }, t);
+  const closeLabel = resolveComponentString(strings?.ariaLabel?.close ?? label ?? { key: 'common.close' }, t);
 
   useDeprecationMessage({
     method: 'custom',
     trigger: label != null,
     componentName: 'CloseButton',
     customText:
-      'The "label" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel" instead.',
+      'The "label" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.close" instead.',
   });
 
   return (

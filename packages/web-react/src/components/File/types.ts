@@ -35,14 +35,16 @@ export interface FileImagePreviewProps extends SpiritSpanElementProps, FilePrevi
 }
 
 export type FileStrings = {
-  ariaLabelEdit?: TranslatableString;
-  ariaLabelRemove?: TranslatableString;
+  ariaLabel?: {
+    edit?: TranslatableString;
+    remove?: TranslatableString;
+  };
 };
 
 export interface FileBaseProps extends StringsProps<FileStrings> {
   /** Optional content rendered between the file name and helper/validation text. */
   children?: ReactNode;
-  /** @deprecated Use `strings.ariaLabelEdit` instead. */
+  /** @deprecated Use `strings.ariaLabel.edit` instead. */
   editText?: string;
   helperText?: ReactNode;
   hasValidationIcon?: boolean;
@@ -55,7 +57,7 @@ export interface FileBaseProps extends StringsProps<FileStrings> {
   onDismiss?: () => void;
   onChange?: () => void;
   previewSlot?: ReactNode;
-  /** @deprecated Use `strings.ariaLabelRemove` instead. */
+  /** @deprecated Use `strings.ariaLabel.remove` instead. */
   removeText?: string;
   validationState?: ValidationState;
   validationText?: ValidationTextType;

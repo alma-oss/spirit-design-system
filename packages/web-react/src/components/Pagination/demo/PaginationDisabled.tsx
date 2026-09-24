@@ -16,7 +16,7 @@ const PaginationDisabled = () => (
         isDisabled
         pageNumber={11}
         strings={{
-          ariaLabel: 'Go to Page 11',
+          ariaLabel: { page: 'Go to Page 11' },
         }}
       />
     </PaginationItem>
@@ -26,7 +26,7 @@ const PaginationDisabled = () => (
         isCurrent
         pageNumber={12}
         strings={{
-          ariaLabel: 'Current Page, Page 12',
+          ariaLabel: { page: 'Current Page, Page 12' },
         }}
       />
     </PaginationItem>
@@ -35,7 +35,7 @@ const PaginationDisabled = () => (
         href="#"
         pageNumber={13}
         strings={{
-          ariaLabel: 'Go to Page 13',
+          ariaLabel: { page: 'Go to Page 13' },
         }}
       />
     </PaginationItem>

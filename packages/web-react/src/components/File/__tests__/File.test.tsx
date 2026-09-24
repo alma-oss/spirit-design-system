@@ -146,7 +146,7 @@ describe('File', () => {
         {...defaultProps}
         editText="Deprecated edit"
         removeText="Deprecated remove"
-        strings={{ ariaLabelEdit: { key: 'attachment.edit' }, ariaLabelRemove: 'Delete file' }}
+        strings={{ ariaLabel: { edit: { key: 'attachment.edit' }, remove: 'Delete file' } }}
         onChange={() => {}}
       />,
     );

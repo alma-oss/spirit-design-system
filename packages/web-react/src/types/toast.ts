@@ -24,11 +24,13 @@ export interface SpiritToastProps extends BaseToastProps {
 }
 
 export type ToastStrings = {
-  ariaLabelClose?: TranslatableString;
+  ariaLabel?: {
+    close?: TranslatableString;
+  };
 };
 
 export interface BaseToastBarProps extends ChildrenProps, StyleProps, StringsProps<ToastStrings> {
-  /** @deprecated Use `strings.ariaLabelClose` instead. */
+  /** @deprecated Use `strings.ariaLabel.close` instead. */
   closeLabel?: string;
   color?: ToastColorType;
   hasIcon?: boolean;
@@ -60,7 +62,7 @@ export interface ToastLinkProps<E extends ElementType = 'a'> extends ToastBarHan
 export interface UncontrolledToastProps extends ChildrenProps, StyleProps, StringsProps<ToastStrings> {
   alignmentX?: 'left' | 'center' | 'right';
   alignmentY?: 'top' | 'bottom';
-  /** @deprecated Use `strings.ariaLabelClose` instead. */
+  /** @deprecated Use `strings.ariaLabel.close` instead. */
   closeLabel?: string;
   isCollapsible?: boolean;
 }

@@ -72,7 +72,7 @@ const UncontrolledToastDemo = () => (
       alignmentX="right"
       alignmentY="top"
       strings={{
-        ariaLabelClose: 'Close',
+        ariaLabel: { close: 'Close' },
       }}
     />
   </ToastProvider>

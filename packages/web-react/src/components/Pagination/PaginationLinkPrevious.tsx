@@ -18,7 +18,7 @@ const _PaginationLinkPrevious = <E extends ElementType = 'a'>(
 ) => {
   const { t } = useI18n();
   const label = resolveComponentString(
-    strings?.ariaLabelPrevious ?? accessibilityLabel ?? { key: 'pagination.previous' },
+    strings?.ariaLabel?.previous ?? accessibilityLabel ?? { key: 'pagination.previous' },
     t,
   );
 
@@ -27,7 +27,7 @@ const _PaginationLinkPrevious = <E extends ElementType = 'a'>(
     trigger: accessibilityLabel != null,
     componentName: 'PaginationLinkPrevious',
     customText:
-      'The "accessibilityLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabelPrevious" instead.',
+      'The "accessibilityLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.previous" instead.',
   });
 
   return (
