@@ -9,27 +9,26 @@ const instance = getInstance();
 
 const alignmentY = instance.getEnum('Alignment Y', { Center: undefined, Bottom: 'bottom' });
 const isDockedOnMobile = instance.getBoolean('Docked On Mobile');
-
 const hasTitle = instance.getBoolean('Title');
-const titleText = hasTitle ? instance.getString('Title Text') : undefined;
-const isDismissible = instance.getBoolean('Dismissible');
-
-const hasDescription = instance.getBoolean('Description');
-const descriptionText = hasDescription ? instance.getString('Description Text') : undefined;
-const alignmentX = instance.getEnum('Alignment X', { Center: 'center', Right: undefined });
 
 const bodyContent = instance.getSlot('Modal Body Slot');
 const illustrationContent = instance.getSlot('Modal Body Illustration');
 
-const button = instance.findInstance('Button', { traverseInstances: true });
-let buttonCode;
-if (button && button.type === 'INSTANCE') {
-  buttonCode = button.executeTemplate().example;
+const header = instance.findInstance('Subcomponent Modal Header', { traverseInstances: true });
+let headerCode;
+if (header && header.type === 'INSTANCE') {
+  headerCode = header.executeTemplate().example;
+}
+
+const footer = instance.findInstance('Subcomponent Modal Footer', { traverseInstances: true });
+let footerCode;
+if (footer && footer.type === 'INSTANCE') {
+  footerCode = footer.executeTemplate().example;
 }
 
 export default {
   id: 'Modal',
-  imports: ["import { Modal, ModalBody, ModalDialog, ModalFooter, ModalHeader } from '@alma-oss/spirit-web-react';"],
+  imports: ["import { Modal, ModalBody, ModalDialog } from '@alma-oss/spirit-web-react';"],
   example: figma.code`
     <Modal
       id="modal-example"
@@ -39,17 +38,12 @@ export default {
       ${alignmentY ? figma.code`alignmentY="${alignmentY}"` : ''}
     >
       <ModalDialog${isDockedOnMobile ? ' isDockedOnMobile' : ''}>
-        <ModalHeader${!isDismissible ? ' hasCloseButton={false}' : ''}>${titleText}</ModalHeader>
+        ${headerCode}
         <ModalBody>
           ${bodyContent}
           ${illustrationContent}
         </ModalBody>
-        <ModalFooter
-          ${descriptionText ? figma.code`description="${descriptionText}"` : ''}
-          ${alignmentX ? figma.code`alignmentX="${alignmentX}"` : ''}
-        >
-          ${buttonCode}
-        </ModalFooter>
+        ${footerCode}
       </ModalDialog>
     </Modal>`,
 };
