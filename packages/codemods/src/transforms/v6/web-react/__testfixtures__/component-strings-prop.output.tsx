@@ -18,17 +18,13 @@ export const Example = () => (
         back: "Back"
       }
     }} />
-    <Breadcrumbs
-      strings={{
-        label: {
-          back: "Current"
-        }
-      }} />
+    <Breadcrumbs strings={{ label: { back: "Current" } }} />
     <DismissButton strings={{
       ariaLabel: {
         close: "Close"
       }
     }} />
+    <DismissButton strings={{ ariaLabel: { close: "Current" } }} />
     <DismissButton label />
     <File
       strings={{
@@ -46,11 +42,13 @@ export const Example = () => (
           dragAndDrop: "or drop"
         }
       }} />
+    <FileUpload strings={{ label: { button: "Current" } }} />
     <Tooltip strings={{
       ariaLabel: {
         close: "Close tooltip"
       }
     }} />
+    <Tooltip strings={{ ariaLabel: { close: "Current" } }} />
     <UncontrolledPagination
       strings={{
         ariaLabel: {
@@ -59,11 +57,19 @@ export const Example = () => (
           next: "Next"
         }
       }} />
+    <UncontrolledPagination strings={{ ariaLabel: { page: "Current" } }} />
     <UncontrolledSplitButton labelButton="Save" strings={{
-      ariaLabel: {
-        dropdown: "More"
+      label: {
+        dropdown: {
+          trigger: "More"
+        }
       }
     }}>
+      Menu
+    </UncontrolledSplitButton>
+    <UncontrolledSplitButton
+      labelButton="Save"
+      strings={{ label: { dropdown: { trigger: "Current" } } }}>
       Menu
     </UncontrolledSplitButton>
     <UNSTABLE_Picker
@@ -76,12 +82,14 @@ export const Example = () => (
           emptySelection: "Languages"
         }
       }} />
+    <UNSTABLE_Picker strings={{ ariaLabel: { add: "Current" } }} />
     <ScrollView hasControls strings={{
       ariaLabel: {
         start: "Left",
         end: "Right"
       }
     }} />
+    <ScrollView hasControls strings={{ ariaLabel: { start: "Current" } }} />
     <ScrollView hasControls />
     <CloseButton label="Local component" />
     <PaginationButtonLink accessibilityLabel="Unchanged deprecated component" />

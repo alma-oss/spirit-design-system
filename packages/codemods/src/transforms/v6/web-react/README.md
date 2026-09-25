@@ -26,7 +26,7 @@ npx @alma-oss/spirit-codemods -p <path> -t v6/web-react/component-strings-prop
 
 ```diff
 - <UncontrolledSplitButton buttonLabel="Save" dropdownTriggerLabel="More" />
-+ <UncontrolledSplitButton labelButton="Save" strings={{ ariaLabel: { dropdown: 'More' } }} />
++ <UncontrolledSplitButton labelButton="Save" strings={{ label: { dropdown: { trigger: 'More' } } }} />
 
 - <File editText="Edit" removeText="Remove" />
 + <File strings={{ ariaLabel: { edit: 'Edit', remove: 'Remove' } }} />

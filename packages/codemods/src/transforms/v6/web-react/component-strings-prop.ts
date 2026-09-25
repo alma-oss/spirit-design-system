@@ -10,12 +10,7 @@ type ComponentMigration = {
 };
 
 const MIGRATIONS: Record<string, ComponentMigration> = {
-  Breadcrumbs: {
-    fold: [
-      { from: 'labelBack', to: 'label.back' },
-      { from: 'goBackTitle', to: 'label.back' },
-    ],
-  },
+  Breadcrumbs: { fold: [{ from: 'goBackTitle', to: 'label.back' }] },
   CloseButton: { fold: [{ from: 'label', to: 'ariaLabel.close' }] },
   File: {
     fold: [
@@ -45,7 +40,7 @@ const MIGRATIONS: Record<string, ComponentMigration> = {
   },
   UncontrolledSplitButton: {
     rename: [{ from: 'buttonLabel', to: 'labelButton' }],
-    fold: [{ from: 'dropdownTriggerLabel', to: 'ariaLabel.dropdown' }],
+    fold: [{ from: 'dropdownTriggerLabel', to: 'label.dropdown.trigger' }],
   },
   UncontrolledToast: { fold: [{ from: 'closeLabel', to: 'ariaLabel.close' }] },
   ScrollView: {
@@ -213,11 +208,7 @@ const hasNestedObjectProperty = (object: ObjectExpression, path: string): boolea
   });
 };
 
-const getOrCreateNestedObject = (
-  j: API['jscodeshift'],
-  parent: ObjectExpression,
-  name: string,
-): ObjectExpression => {
+const getOrCreateNestedObject = (j: API['jscodeshift'], parent: ObjectExpression, name: string): ObjectExpression => {
   const existing = getObjectProperty(parent, name);
 
   if (existing?.value.type === 'ObjectExpression') {
