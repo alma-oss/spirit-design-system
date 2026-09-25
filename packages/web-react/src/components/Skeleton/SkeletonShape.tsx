@@ -3,8 +3,8 @@
 import React, { type ElementType, type ReactElement } from 'react';
 import { BorderRadii } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import { type SpiritSkeletonShapeProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
+import { type SpiritSkeletonShapeProps } from './types';
 import { useSkeletonShapeStyleProps } from './useSkeletonShapeStyleProps';
 
 const defaultProps: Partial<SpiritSkeletonShapeProps> = {

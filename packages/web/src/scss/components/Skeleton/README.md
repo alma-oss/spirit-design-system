@@ -45,6 +45,17 @@ The Skeleton component supports the following sizes for text and heading skeleto
 <div class="Skeleton Skeleton--heading Skeleton--medium"></div>
 ```
 
+### Text, Heading Width
+
+Text and heading skeletons are `100%` wide by default. Override the width with `--spirit-skeleton-width`.
+Use `rem` or a percentage. The last line of a multi-line skeleton stays at `80%` of that width.
+
+```html
+<div class="Skeleton Skeleton--text" style="--spirit-skeleton-width: 60%">
+  <div class="Skeleton__item" aria-hidden="true"></div>
+</div>
+```
+
 ## Shapes
 
 Use CSS custom properties to define the width, height, and radius of the shape.
@@ -52,8 +63,8 @@ Use CSS custom properties to define the width, height, and radius of the shape.
 - The default radius is `--spirit-radius-400`
 - Instance `--spirit-skeleton-shape-radius` values override the device token
 
-- `--spirit-skeleton-shape-width: number{rem};`
-- `--spirit-skeleton-shape-height: number{rem};`
+- `--spirit-skeleton-shape-width: number{rem} | percentage;`
+- `--spirit-skeleton-shape-height: number{rem} | percentage;`
 - `--spirit-skeleton-shape-radius: var(--spirit-radius-200);`
 - `--spirit-skeleton-shape-radius-tablet: var(--spirit-radius-300);`
 - `--spirit-skeleton-shape-radius-desktop: var(--spirit-radius-400);`
@@ -65,6 +76,7 @@ Always express shape dimensions in `rem` (not `px`). `rem` is relative to the ro
 - follow the same scale as the rest of Spirit's design tokens (spacing, typography, sizing), which are all defined in `rem`.
 
 Fixed `px` values ignore the user's root font-size setting and break this consistency.
+A percentage, such as `50%`, is also valid when the shape should follow its parent.
 
 ```html
 <div

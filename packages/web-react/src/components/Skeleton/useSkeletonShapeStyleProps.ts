@@ -1,21 +1,8 @@
 import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
 import classNames from 'classnames';
-import { type CSSProperties } from 'react';
 import { useClassNamePrefix } from '../../hooks';
-import { type SkeletonShapeBaseProps } from '../../types';
-import { pxToRem } from '../../utils';
-
-interface CustomizedCSSProperties extends CSSProperties {
-  [key: string]: string | undefined | number;
-}
-
-const setCustomDimension = (prefix: string, size: number | undefined): CustomizedCSSProperties => {
-  if (!size) return {};
-
-  const propName = `--${prefix}`;
-
-  return { [propName]: pxToRem(size) } as CustomizedCSSProperties;
-};
+import { type CustomizedCSSProperties, type SkeletonShapeBaseProps } from './types';
+import { useSkeletonDimensionStyle } from './useSkeletonDimensionStyle';
 
 const setCustomBorderRadius = (
   prefix: string,
@@ -47,8 +34,8 @@ export const useSkeletonShapeStyleProps = <E = void>(props: SkeletonShapeBasePro
   const stylePrefix: string = `${cssVariablePrefix}skeleton-shape`;
 
   const customizedShapeStyle = {
-    ...setCustomDimension(`${stylePrefix}-width`, width),
-    ...setCustomDimension(`${stylePrefix}-height`, height),
+    ...useSkeletonDimensionStyle(`${stylePrefix}-width`, width),
+    ...useSkeletonDimensionStyle(`${stylePrefix}-height`, height),
     ...(borderRadius ? setCustomBorderRadius(`${stylePrefix}-radius`, borderRadius) : {}),
   };
 

@@ -6,7 +6,7 @@
 @use 'tools';
 
 .Skeleton {
-    width: 100%;
+    width: var(--#{tokens.$css-variable-prefix}skeleton-width, 100%);
 }
 
 .Skeleton--text {
