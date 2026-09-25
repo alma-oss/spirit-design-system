@@ -10,14 +10,16 @@ Breakpoints: `mobile` from `0`, `tablet` from `48rem`, `desktop` from `80rem`. R
 
 ## Choose a Layout Component
 
-| Need                                  | Component   |
-| ------------------------------------- | ----------- |
-| One-dimensional row or column         | `Flex`      |
-| Uniform repeating items that wrap     | `Grid`      |
-| Vertical list, optional dividers      | `Stack`     |
-| Surface only (color, padding, border) | `Box`       |
-| Page/region with optional max-width   | `Section`   |
-| Width constraint without Section      | `Container` |
+| Need                                     | Component    |
+| ---------------------------------------- | ------------ |
+| One-dimensional row or column            | `Flex`       |
+| Uniform repeating items that wrap        | `Grid`       |
+| Equal-width columns in one row           | `Grid`       |
+| Vertical list, optional dividers         | `Stack`      |
+| Overflow region (horizontal or vertical) | `ScrollView` |
+| Surface only (color, padding, border)    | `Box`        |
+| Page/region with optional max-width      | `Section`    |
+| Width constraint without Section         | `Container`  |
 
 Do not copy every Figma autolayout frame into a Spirit node. Skip frames that only name, clip, or
 group for the designer. Keep wrappers that create a real gap, alignment, max-width, or semantic
@@ -40,8 +42,8 @@ unless Figma differs.
 
 ```tsx
 <Flex direction="vertical" spacing="space-1000">
-  <Box UNSAFE_style={{ maxWidth: '50rem' }}>{/* constrained child still stretches up to max-width */}</Box>
-  <Grid cols={4}>{/* fills the Flex width */}</Grid>
+  <Heading elementType="h2">Title</Heading>
+  <Text>Stretches on the cross axis by default.</Text>
 </Flex>
 ```
 
@@ -55,6 +57,54 @@ when `cols` is omitted. Do not add explicit default alignment “to be safe.”
 
 For list semantics, set `elementType="ul"` (or `ol`) and put items in `GridItem` as `li`. See the
 Grid README.
+
+Equal-width siblings in Figma (including exports that look like flex-grow) are Grid columns, not
+Flex children with a grow or fixed-basis style. Two Figma rows of identical items are one Grid
+over all of them, unless the rows genuinely differ.
+
+### Mapping Figma Widths Onto Grid
+
+Container max-widths and Grid gutters are **design tokens** (`container-*-max-width`, `space-*`),
+not a frozen pixel formula. Infer columns from how the frame divides the parent, then express that
+with `Grid` / `GridItem` on the twelve-column system:
+
+- Equal repeating items: `cols` is the item count at that breakpoint (1, 2, 3, 4, 6, 12).
+- One item that takes half the row: `GridItem columnEnd="span 6"` (or `cols={2}` when every sibling is equal).
+- An asymmetric block: pick a span that matches its share of the 12-column track, not a measured px/rem.
+
+Confirm Container size from the `size` token (`small` … `xlarge`), not from inspecting a screenshot width.
+
+```tsx
+// Measured or flex-grow widths on Flex children
+<Flex spacing="space-1000">
+  {cards.map((card) => (
+    <Box key={card.id} UNSAFE_style={{ flex: '1 0 0' }}>
+      <Card>{card.content}</Card>
+    </Box>
+  ))}
+</Flex>
+
+// Same layout as equal Grid columns
+<Grid cols={{ mobile: 1, tablet: 2, desktop: 4 }} spacing="space-1000">
+  {cards.map((card) => (
+    <Card key={card.id}>{card.content}</Card>
+  ))}
+</Grid>
+
+// Asymmetric share of the twelve-column grid
+<Grid cols={12} spacing="space-1000">
+  <GridItem columnEnd="span 7">
+    <Heading elementType="h1">…</Heading>
+  </GridItem>
+</Grid>
+```
+
+When items overflow the parent and the frame shows a clipped next item or previous/next controls,
+wrap the overflowing content in `ScrollView` and set `direction` to match the scroll axis. Size the
+children with Grid, Flex, or other layout components rather than a one-off width.
+
+Count all siblings and inspect each instance override before mapping an array. Repeated columns can
+differ independently in background, border, badge visibility, spacing, or content.
 
 ## Stack
 
@@ -114,9 +164,17 @@ Map Figma spacing variables to `space-*` tokens (`space-0` through `space-1700` 
 ## Max-Width
 
 Before applying `maxWidth`, check whether `Grid` can express the constraint (uniform repeating
-items, column counts). Prefer `Section` or `Container` when the design is a page/region width
-limit, not a one-off cap. Apply `UNSAFE_style={{ maxWidth: 'x' }}` only on the innermost wrapper
-that actually carries the constraint, and only when Grid, Section, or Container cannot.
+items, column counts). Prefer `Section` or `Container` (with a `size` token) when the design is a
+page/region width limit. A max-width on a block that starts at the container’s left edge is usually
+a column span — use `GridItem` instead of a one-off width.
+
+Drop a max-width that is larger than the column the block already sits in; it is inert design
+metadata and should not be copied into code.
+
+Apply `UNSAFE_style={{ maxWidth: 'x' }}` only on the innermost wrapper that actually carries the
+constraint, and only when Grid, Section, or Container cannot. If a one-off cap is required, prefer
+a spacing or container token over a raw pixel value. `flex`, `maxWidth`, `margin: 0 auto`, and
+`borderTop` in `UNSAFE_style` usually mean a layout component was skipped.
 
 ## Typography Inside Flex and Grid
 
