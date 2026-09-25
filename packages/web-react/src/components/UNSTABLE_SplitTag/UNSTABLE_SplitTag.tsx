@@ -41,6 +41,7 @@ const UNSTABLE_SplitTag = <C = void, S = void>(props: SpiritUnstableSplitTagProp
         // Nested icons use a smaller ControlButton than the Tag shell (see SplitTag size demos).
         controlButton: { size: controlButtonSize },
         isDisabled,
+        item: { size },
         tag: { color, isSubtle, size },
       }}
     >

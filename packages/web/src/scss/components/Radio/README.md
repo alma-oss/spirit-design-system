@@ -117,7 +117,7 @@ To add helper text, use the [HelperText][readme-helper-text] component:
 Use the [Item][readme-item] component to render Radio in item mode:
 
 ```html
-<div class="Item">
+<div class="Item Item--medium">
   <div class="Item__slot" role="presentation">
     <input type="radio" id="radio-item-default" class="Radio Radio--item" name="item" />
   </div>
@@ -130,7 +130,7 @@ Use the [Item][readme-item] component to render Radio in item mode:
 ### As an Item with Helper Text
 
 ```html
-<div class="Item">
+<div class="Item Item--medium">
   <div class="Item__slot" role="presentation">
     <input
       type="radio"

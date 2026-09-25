@@ -28,6 +28,7 @@ button-like `Tag`.
 Use a button-like `Tag` as the Dropdown trigger when the segment opens, for example a radius picker. The
 `Tag` button is the one interactive segment and owns the action. Render the nested `ControlButton` as a
 decorative `span` to avoid nested or competing controls.
+Match dropdown Item and Label size modifiers to the SplitTag size.
 
 An interactive `ControlButton` can be rendered inside a static `Tag` when the inner button owns the action,
 but that is not the pattern used in this recipe.
@@ -75,7 +76,7 @@ but that is not the pattern used in this recipe.
           id="split-tag-radius-5"
           aria-selected="true"
           tabindex="0"
-          class="Item cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
+          class="Item Item--medium cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
         >
           <span class="Item__content" role="presentation">
             <span class="Label Label--medium">+5 km</span>
@@ -92,7 +93,13 @@ but that is not the pattern used in this recipe.
             </svg>
           </span>
         </div>
-        <div role="option" id="split-tag-radius-10" aria-selected="false" tabindex="-1" class="Item cursor-pointer">
+        <div
+          role="option"
+          id="split-tag-radius-10"
+          aria-selected="false"
+          tabindex="-1"
+          class="Item Item--medium cursor-pointer"
+        >
           <span class="Item__content" role="presentation">
             <span class="Label Label--medium">+10 km</span>
           </span>

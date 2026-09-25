@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import React, { useState } from 'react';
+import React, { type ComponentProps, useState } from 'react';
 import '@testing-library/jest-dom';
 import { type SelectionGridRowProps, useDisclosureState } from '../../../hooks';
 import { UNSTABLE_Combobox, UNSTABLE_ComboboxOption, UNSTABLE_ComboboxSplitTag } from '..';
@@ -39,6 +39,7 @@ interface TestComboboxWithSplitTagsProps {
   isDisabled?: boolean;
   onSelectionChange?: (keys: string[]) => void;
   selectedKeys?: string[];
+  size?: ComponentProps<typeof UNSTABLE_Combobox>['size'];
   withKeyboardGrid?: boolean;
 }
 
@@ -46,6 +47,7 @@ const TestComboboxWithSplitTags = ({
   isDisabled = false,
   onSelectionChange,
   selectedKeys: selectedKeysProp = ['prague'],
+  size,
   withKeyboardGrid = true,
 }: TestComboboxWithSplitTagsProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,6 +73,7 @@ const TestComboboxWithSplitTags = ({
       onSelectionChange={handleSelectionChange}
       inputValue=""
       onInputChange={() => {}}
+      size={size}
       renderTags={({ getKeyboardGridRowProps, removeTagAtIndex, selectedItems }) =>
         selectedItems.map((item, index) => (
           <TestSplitTagRow
@@ -124,17 +127,22 @@ describe('UNSTABLE_ComboboxSplitTag', () => {
     expect(unselectedOption.querySelector('.Icon--selected')).not.toBeInTheDocument();
   });
 
-  it('should map medium Combobox size to Tag--small and ControlButton--xsmall on split segments', () => {
-    const { container } = render(<TestComboboxWithSplitTags />);
+  it.each([
+    ['small', 'xsmall'],
+    ['medium', 'small'],
+    ['large', 'medium'],
+  ] as const)('should map %s Combobox size to %s SplitTag and Item size', (comboboxSize, nestedSize) => {
+    render(<TestComboboxWithSplitTags size={comboboxSize} />);
 
     const row = screen.getByRole('row', { name: 'Praha, +5 km' });
     const tags = row.querySelectorAll('.Tag');
     const controlButtons = row.querySelectorAll('.ControlButton');
+    const distanceTrigger = screen.getByRole('button', { name: 'Select distance, selected +5 km' });
 
     expect(tags.length).toBeGreaterThanOrEqual(2);
 
     tags.forEach((tag) => {
-      expect(tag).toHaveClass('Tag--small');
+      expect(tag).toHaveClass(`Tag--${nestedSize}`);
     });
 
     expect(controlButtons.length).toBeGreaterThanOrEqual(2);
@@ -143,7 +151,12 @@ describe('UNSTABLE_ComboboxSplitTag', () => {
       expect(button).toHaveClass('ControlButton--xsmall');
     });
 
-    expect(container.querySelector('.ControlButton--small')).not.toBeInTheDocument();
+    fireEvent.click(distanceTrigger);
+
+    const selectedOption = screen.getByRole('option', { name: '+5 km' });
+
+    expect(selectedOption).toHaveClass(`Item--${nestedSize}`);
+    expect(selectedOption.querySelector('.Label')).toHaveClass(`Label--${nestedSize}`);
   });
 
   it('should keep the split tag row out of tab order when Combobox is disabled', () => {

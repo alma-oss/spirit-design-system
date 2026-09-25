@@ -264,6 +264,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
         validationState,
         label: { isLabelHidden },
         inputContainer: { variant },
+        item: { size },
         tag: {
           color: 'selected',
           size: COMBOBOX_NESTED_SIZE_MAP[size],

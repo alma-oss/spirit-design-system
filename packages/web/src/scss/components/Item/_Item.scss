@@ -49,6 +49,11 @@
 }
 
 @include component-radius-overrides.generate($class-name: 'Item');
+@include dictionaries.generate-sizes(
+    $class-name: 'Item',
+    $dictionary-values: theme.$size-dictionary,
+    $config: theme.$size-config
+);
 
 .Item__content {
     display: grid;
@@ -57,7 +62,10 @@
 }
 
 .Item__slot {
-    --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$slot-icon-size};
+    --#{tokens.$css-variable-prefix}icon-composition-size: var(
+        --#{tokens.$css-variable-prefix}item-icon-size,
+        #{theme.$slot-icon-size}
+    );
 
     display: flex;
 }

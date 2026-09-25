@@ -265,7 +265,7 @@ See the [Item][item] component for more information.
     data-spirit-placement="bottom-start"
     id="dropdown-default"
   >
-    <a href="#" class="Item">
+    <a href="#" class="Item Item--medium">
       <span class="Item__slot" role="presentation">
         <svg class="Icon" width="24" height="24" aria-hidden="true">
           <use href="/icons/svg/sprite.svg#info" />

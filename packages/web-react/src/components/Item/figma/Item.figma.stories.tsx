@@ -25,9 +25,7 @@ const meta: Meta<typeof Item> = {
         }),
         isDisabled: figma.boolean('Disabled'),
         isSelected: figma.boolean('Selected'),
-        iconProps: (figma.instance('Icon') as unknown as { getProps?: <T>() => T } | undefined)?.getProps?.<{
-          name: string;
-        }>(),
+        iconProps: figma.instance('Icon').getProps<{ name: string }>(),
       },
       examples: [
         { example: 'FigmaSingleSelect', variant: { Type: 'Single select' } },
@@ -50,8 +48,8 @@ type ItemFigmaProps = ComponentProps<typeof Item> & {
 
 export const FigmaSingleSelect: Story = {
   name: 'Single select',
-  render: ({ helperTextProps = {}, ...props }: ItemFigmaProps) => (
-    <Item {...props}>
+  render: ({ helperTextProps = {}, isDisabled, isSelected }: ItemFigmaProps) => (
+    <Item isDisabled={isDisabled} isSelected={isSelected}>
       <Label>Item label</Label>
       <HelperText helperText={helperTextProps.helperText} />
     </Item>
@@ -60,27 +58,29 @@ export const FigmaSingleSelect: Story = {
 
 export const FigmaMultiSelect: Story = {
   name: 'Multi select',
-  render: ({ helperTextProps = {}, ...props }: ItemFigmaProps) => (
+  render: ({ helperTextProps = {}, isDisabled, isSelected }: ItemFigmaProps) => (
     <Checkbox
-      {...props}
       helperText={helperTextProps.helperText}
       id="checkbox-item-default"
+      isChecked={isSelected}
+      isDisabled={isDisabled}
+      isItem
       label="Item label"
       name="checkboxItemDefault"
-      isItem
     />
   ),
 };
 
 export const FigmaRadio: Story = {
   name: 'Radio',
-  render: ({ helperTextProps = {}, ...props }: ItemFigmaProps) => (
+  render: ({ helperTextProps = {}, isDisabled, isSelected }: ItemFigmaProps) => (
     <Radio
-      {...props}
       helperText={helperTextProps.helperText}
       id="radio-item-default"
-      label="Item label"
+      isChecked={isSelected}
+      isDisabled={isDisabled}
       isItem
+      label="Item label"
       name="item"
     />
   ),
@@ -88,8 +88,8 @@ export const FigmaRadio: Story = {
 
 export const FigmaIconUnselected: Story = {
   name: 'Single select + Icon (unselected)',
-  render: ({ helperTextProps = {}, iconProps = { name: 'placeholder' }, ...props }: ItemFigmaProps) => (
-    <Item {...props} startSlot={<Icon name={iconProps.name} />}>
+  render: ({ helperTextProps = {}, iconProps = { name: 'placeholder' }, isDisabled }: ItemFigmaProps) => (
+    <Item isDisabled={isDisabled} startSlot={<Icon name={iconProps.name} />}>
       <Label>Item label</Label>
       <HelperText helperText={helperTextProps.helperText} />
     </Item>
@@ -98,8 +98,8 @@ export const FigmaIconUnselected: Story = {
 
 export const FigmaIconSelected: Story = {
   name: 'Single select + Icon (selected)',
-  render: ({ helperTextProps = {}, iconProps = { name: 'placeholder' }, ...props }: ItemFigmaProps) => (
-    <Item {...props} isSelected startSlot={<Icon name={iconProps.name} color="selected" />}>
+  render: ({ helperTextProps = {}, iconProps = { name: 'placeholder' }, isDisabled }: ItemFigmaProps) => (
+    <Item isDisabled={isDisabled} isSelected startSlot={<Icon name={iconProps.name} color="selected" />}>
       <Label>Item label</Label>
       <HelperText helperText={helperTextProps.helperText} />
     </Item>

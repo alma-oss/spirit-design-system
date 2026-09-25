@@ -208,7 +208,7 @@ Short labels are also easier for sighted users to scan.
 ## As an Item
 
 ```html
-<div class="Item">
+<div class="Item Item--medium">
   <div class="Item__slot" role="presentation">
     <input type="checkbox" id="checkbox-item-default" class="Checkbox Checkbox--item" name="item" />
   </div>

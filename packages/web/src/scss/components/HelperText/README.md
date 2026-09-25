@@ -55,7 +55,7 @@ Place HelperText inside the **Radio** or **Checkbox** text area:
 Place HelperText inside `Item__content`, including in Checkbox/Radio item variants (`Checkbox--item`, `Radio--item`):
 
 ```html
-<button type="button" class="Item">
+<button type="button" class="Item Item--medium">
   <span class="Item__content" role="presentation">
     <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
       <span class="Label Label--medium element-stretched">Item label</span>

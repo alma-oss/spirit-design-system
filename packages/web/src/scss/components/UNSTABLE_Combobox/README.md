@@ -107,14 +107,14 @@ The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two
             role="option"
             id="opt-es"
             aria-selected="true"
-            class="Item color-scheme-on-selected-subtle bg-color-scheme"
+            class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
           >
             <span class="Label Label--medium element-stretched cursor-pointer">Spanish</span>
           </div>
-          <div role="option" id="opt-cs" aria-selected="false" class="Item">
+          <div role="option" id="opt-cs" aria-selected="false" class="Item Item--medium">
             <span class="Label Label--medium element-stretched cursor-pointer">Czech</span>
           </div>
-          <div role="option" id="opt-en" aria-selected="false" class="Item">
+          <div role="option" id="opt-en" aria-selected="false" class="Item Item--medium">
             <span class="Label Label--medium element-stretched cursor-pointer">English</span>
           </div>
           <!-- More options… -->
@@ -157,7 +157,12 @@ For more information, please follow this article [Don't Use The Placeholder Attr
 Set `aria-selected="true"` on any option to pre-select it on page load.
 
 ```html
-<div role="option" id="opt-cs" aria-selected="true" class="Item color-scheme-on-selected-subtle bg-color-scheme">
+<div
+  role="option"
+  id="opt-cs"
+  aria-selected="true"
+  class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
+>
   <span class="Label Label--medium element-stretched cursor-pointer">Czech</span>
 </div>
 ```
@@ -194,7 +199,7 @@ A row with a country name and flag but **no** interactive controls still uses `r
       role="row"
       id="opt-search-1"
       aria-selected="false"
-      class="Item Item--alignmentYTop"
+      class="Item Item--medium Item--alignmentYTop"
       data-spirit-label="Painter"
       tabindex="-1"
     >

@@ -22,6 +22,21 @@ need to set it on each component manually. Direct `elementType` props still over
 When Item is rendered inside a `Stack` with `elementType="ul"` or `elementType="ol"`, it inherits
 `elementType="li"` from the Stack context.
 
+## Sizes
+
+`Item` comes in five available sizes. Its size sets the default size of nested `Label` components and the
+composition size of `Icon` components rendered in `startSlot` or `endSlot`.
+A direct `size` prop on `Item` overrides size inherited from context, and a direct `size` prop on `Label`
+overrides the inherited Item size.
+
+```tsx
+<Item size="xsmall"><Label>XSmall item</Label></Item>
+<Item size="small"><Label>Small item</Label></Item>
+<Item><Label>Medium item</Label></Item>
+<Item size="large"><Label>Large item</Label></Item>
+<Item size="xlarge"><Label>XLarge item</Label></Item>
+```
+
 ## Item as Button or Link
 
 Use `elementType="button"` when the whole row triggers one action and has no other interactive descendants.
@@ -305,15 +320,16 @@ The grid role requires a keyboard navigation contract implemented in JavaScript:
 
 ## API
 
-| Name          | Type                                                         | Default | Required | Description                                                                             |
-| ------------- | ------------------------------------------------------------ | ------- | -------- | --------------------------------------------------------------------------------------- |
-| `alignmentY`  | \[[AlignmentY dictionary][dictionary-alignment] \| `object`] | —       | ✕        | Apply vertical alignment of item slots and content, use object to set responsive values |
-| `children`    | `ReactNode`                                                  | —       | ✕        | Item content                                                                            |
-| `elementType` | `ElementType`                                                | `div`   | ✕        | Type of element used as wrapper                                                         |
-| `endSlot`     | `ReactNode`                                                  | —       | ✕        | Content shown at the end                                                                |
-| `isDisabled`  | `bool`                                                       | `false` | ✕        | Whether is the item disabled                                                            |
-| `isSelected`  | `bool`                                                       | `false` | ✕        | Whether is the item selected                                                            |
-| `startSlot`   | `ReactNode`                                                  | —       | ✕        | Content shown at the start                                                              |
+| Name          | Type                                                         | Default  | Required | Description                                                                             |
+| ------------- | ------------------------------------------------------------ | -------- | -------- | --------------------------------------------------------------------------------------- |
+| `alignmentY`  | \[[AlignmentY dictionary][dictionary-alignment] \| `object`] | —        | ✕        | Apply vertical alignment of item slots and content, use object to set responsive values |
+| `children`    | `ReactNode`                                                  | —        | ✕        | Item content                                                                            |
+| `elementType` | `ElementType`                                                | `div`    | ✕        | Type of element used as wrapper                                                         |
+| `endSlot`     | `ReactNode`                                                  | —        | ✕        | Content shown at the end                                                                |
+| `isDisabled`  | `bool`                                                       | `false`  | ✕        | Whether is the item disabled                                                            |
+| `isSelected`  | `bool`                                                       | `false`  | ✕        | Whether is the item selected                                                            |
+| `size`        | [Size Extended dictionary][dictionary-size]                  | `medium` | ✕        | Size of the Item, nested Labels, and Icons rendered in slots                            |
+| `startSlot`   | `ReactNode`                                                  | —        | ✕        | Content shown at the start                                                              |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -322,6 +338,7 @@ and [escape hatches][readme-escape-hatches]. For controlling inherited and share
 
 [checkbox]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Checkbox/README.md
 [dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#alignment
+[dictionary-size]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#size-extended
 [dropdown]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Dropdown
 [mdn-grid-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/grid_role
 [mdn-option-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/option_role
