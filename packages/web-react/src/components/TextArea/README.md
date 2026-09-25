@@ -117,7 +117,7 @@ an optimized experience:
 | `maxLength`             | `number`                                       | —        | ✕        | Native textarea hard cap; with `counterThreshold`, prefer `>= counterThreshold` |
 | `name`                  | `string`                                       | —        | ✕        | Textarea name                                                                   |
 | `placeholder`           | `string`                                       | —        | ✕        | Textarea placeholder                                                            |
-| `strings`               | `CharacterCounterStrings`                      | —        | ✕        | Passed to `CharacterCounter` for screen reader message overrides ([`TranslatableString`][readme-component-strings]) |
+| `strings`               | `CharacterCounterStrings`                      | —        | ✕        | Counter screen reader overrides; see [CharacterCounter Translations][readme-character-counter-translations] |
 | `ref`                   | `ForwardedRef<HTMLTextAreaElement>`            | —        | ✕        | Textarea element reference                                                      |
 | `rows`                  | `number`                                       | —        | ✕        | Number of visible rows                                                          |
 | `size`                  | [Size dictionary][dictionary-size]             | `medium` | ✕        | Size variant                                                                    |
@@ -162,3 +162,4 @@ For detailed information see [TextArea](https://github.com/alma-oss/spirit-desig
 [readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[readme-character-counter-translations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/CharacterCounter/README.md#translations

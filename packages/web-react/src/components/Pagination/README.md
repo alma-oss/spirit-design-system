@@ -167,7 +167,7 @@ Do not mix the two.
 
 | Name                 | Type                                 | Default | Required | Description                                                      |
 | -------------------- | ------------------------------------ | ------- | -------- | ---------------------------------------------------------------- |
-| `strings`            | `{ ariaLabel?: { page?: TranslatableString } }` | —       | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]) |
+| `strings`            | `{ ariaLabel?: { page?: TranslatableString } }` | —       | ✕        | Page label; see [Translations](#translations)                    |
 | `accessibilityLabel` | `string`                             | —       | ✕        | _Deprecated, use `strings.ariaLabel.page`_                       |
 | `children`           | `ReactNode`                          | —       | ✕        | Custom content; use instead of `pageNumber`                      |
 | `elementType`        | `ElementType`                        | `a`     | ✕        | Type of an element                                               |
@@ -208,7 +208,7 @@ This component wraps `PaginationLink` and renders a previous chevron with a visu
 
 | Name                 | Type                                         | Default | Required | Description                                   |
 | -------------------- | -------------------------------------------- | ------- | -------- | --------------------------------------------- |
-| `strings`            | `{ ariaLabel?: { previous?: TranslatableString } }` | —       | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]) |
+| `strings`            | `{ ariaLabel?: { previous?: TranslatableString } }` | —       | ✕        | Previous label; see [Translations](#translations) |
 | `accessibilityLabel` | `string`                                     | —       | ✕        | _Deprecated, use `strings.ariaLabel.previous`_ |
 | `href`               | `string`                                     | —       | ✕        | Link URL                                      |
 | `isDisabled`         | `bool`                                       | `false` | ✕        | If true, the link is disabled                 |
@@ -223,7 +223,7 @@ This component wraps `PaginationLink` and renders a next chevron with a visually
 
 | Name                 | Type                                     | Default | Required | Description                               |
 | -------------------- | ---------------------------------------- | ------- | -------- | ----------------------------------------- |
-| `strings`            | `{ ariaLabel?: { next?: TranslatableString } }` | —       | ✕        | Accessible label override ([`TranslatableString`][readme-component-strings]) |
+| `strings`            | `{ ariaLabel?: { next?: TranslatableString } }` | —       | ✕        | Next label; see [Translations](#translations) |
 | `accessibilityLabel` | `string`                                 | —       | ✕        | _Deprecated, use `strings.ariaLabel.next`_ |
 | `href`               | `string`                                 | —       | ✕        | Link URL                                  |
 | `isDisabled`         | `bool`                                   | `false` | ✕        | If true, the link is disabled             |
@@ -236,7 +236,7 @@ and [escape hatches][readme-escape-hatches].
 
 | Name                         | Type                                                 | Default | Required | Description                                                         |
 | ---------------------------- | ---------------------------------------------------- | ------- | -------- | ------------------------------------------------------------------- |
-| `strings`                    | `{ ariaLabel?: { page?, next?, previous? } }`            | —       | ✕        | Component string overrides ([`TranslatableString`][readme-component-strings]) |
+| `strings`                    | `{ ariaLabel?: { page?, next?, previous? } }`            | —       | ✕        | Page, previous, and next labels; see [Translations](#translations) |
 | `accessibilityLabel`         | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabel.page`_                              |
 | `accessibilityLabelNext`     | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabel.next`_                              |
 | `accessibilityLabelPrevious` | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabel.previous`_                          |
@@ -248,6 +248,18 @@ and [escape hatches][readme-escape-hatches].
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
+`PaginationLink` uses `ariaLabel.page`, previous/next links use `ariaLabel.previous` / `ariaLabel.next`, and
+`UncontrolledPagination` accepts all three.
+
+| Key                   | Default key            | English default | Description        |
+| --------------------- | ---------------------- | --------------- | ------------------ |
+| `ariaLabel.page`      | `pagination.goToPage`  | `Go to page`    | Numbered page      |
+| `ariaLabel.previous`  | `pagination.previous`  | `Previous`      | Previous control   |
+| `ariaLabel.next`      | `pagination.next`      | `Next`          | Next control       |
 
 ### Deprecation Notice
 

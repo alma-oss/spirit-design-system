@@ -178,7 +178,7 @@ be removed in v6. Use the corresponding keys in `strings` instead.
 ### UncontrolledSplitButton
 
 The `buttonLabel` and `dropdownTriggerLabel` props are deprecated and will be removed in v6. Use `labelButton` and
-`strings.ariaLabel.dropdown` instead.
+`strings.label.dropdown.trigger` instead.
 
 #### Migration Guide
 
@@ -196,7 +196,7 @@ The `buttonLabel` and `dropdownTriggerLabel` props are deprecated and will be re
   id="save-actions"
   labelButton="Save"
   buttonOnClick={handleSave}
-  strings={{ ariaLabel: { dropdown: 'More' } }}
+  strings={{ label: { dropdown: { trigger: 'More' } } }}
 />
 ```
 

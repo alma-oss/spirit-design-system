@@ -103,7 +103,7 @@ Set `hasValidationIcon` to show the status icon next to the message (same patter
 | Name                | Type                                           | Default | Required | Description                                                                                                                     |
 | ------------------- | ---------------------------------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `children`          | `ReactNode`                                    | —       | ✕        | Content below the file name (e.g. `ProgressBar`)                                                                                |
-| `strings`           | `{ ariaLabel?: { edit?, remove? } }`           | —       | ✕        | [`TranslatableString`][readme-component-strings] overrides for action labels                                                                                |
+| `strings`           | `{ ariaLabel?: { edit?, remove? } }`           | —       | ✕        | Action label overrides; see [Translations](#translations)                                                           |
 | `editText`          | `string`                                       | —       | ✕        | _Deprecated, use `strings.ariaLabel.edit`_                                                                                      |
 | `elementType`       | `ElementType`                                  | `li`    | ✕        | Root HTML element for the row                                                                                                   |
 | `hasValidationIcon` | `boolean`                                      | `false` | ✕        | When `validationState` is set, show the validation icon next to `validationText`                                                |
@@ -124,6 +124,15 @@ The rest of the properties are created from the default `<li>` element. [More ab
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
+
+| Key                 | Default key         | English default | Description        |
+| ------------------- | ------------------- | --------------- | ------------------ |
+| `ariaLabel.edit`    | `attachment.edit`   | `Edit`          | Edit action        |
+| `ariaLabel.remove`  | `attachment.remove` | `Remove`        | Dismiss action     |
 
 ### Deprecation Notice
 

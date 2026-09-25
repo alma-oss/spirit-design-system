@@ -401,7 +401,7 @@ The trigger uses [Icon][web-react-icon-documentation] (`chevron-down` when close
 | `selectionAriaLabel`  | `string`                                                  | i18n `picker.selectionAriaLabel`   | ✕        | _Deprecated, use `strings.ariaLabel.selection`_                                                                                                                                                   |
 | `selectionMode`       | `'single'` \| `'multiple'`                                | `multiple`                         | ✕        | Radio vs checkbox behavior for `UNSTABLE_PickerItem`                                                                                                                                        |
 | `size`                | [Size dictionary][dictionary-size]                        | `medium`                           | ✕        | Size of the picker shell                                                                                                                                                                    |
-| `strings`             | `UnstablePickerStrings`                                   | —                                  | ✕        | [`TranslatableString`][readme-component-strings] overrides for component copy; see [Deprecation Notice](#deprecation-notice)                                                                                            |
+| `strings`             | `UnstablePickerStrings`                                   | —                                  | ✕        | Optional copy overrides; see [Translations](#translations)                                                                                          |
 | `tagDescriptionText`  | `string`                                                  | i18n `picker.tagDescriptionText`   | ✕        | _Deprecated, use `strings.ariaLabel.tagDescription`_                                                                                                                                              |
 | `validationState`     | [Validation dictionary][dictionary-validation]            | —                                  | ✕        | Validation state                                                                                                                                                                            |
 | `validationText`      | `ReactNode` \| `ReactNode[]`                              | —                                  | ✕        | Validation message                                                                                                                                                                          |
@@ -410,6 +410,20 @@ The trigger uses [Icon][web-react-icon-documentation] (`chevron-down` when close
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default unless noted.
+
+| Key                         | Default key                   | English default                          | Description                    |
+| --------------------------- | ----------------------------- | ---------------------------------------- | ------------------------------ |
+| `ariaLabel.add`             | `picker.add`                  | `Add`                                    | Open / add control             |
+| `ariaLabel.close`           | `common.close`                | `Close`                                  | Close popover                  |
+| `ariaLabel.removeAll`       | `picker.removeAll`            | `Remove all`                             | Clear all                      |
+| `ariaLabel.removeItem`      | `picker.removeItemLabel`      | `Remove {itemLabel}`                     | Remove one tag                 |
+| `ariaLabel.selection`       | `picker.selectionAriaLabel`   | `Selected {label}`                       | Selection summary              |
+| `ariaLabel.tagDescription`  | `picker.tagDescriptionText`   | `Press Delete or Backspace to remove`    | Tag hint                       |
+| `label.emptySelection`      | —                             | field `label`                            | Empty-field placeholder        |
 
 ### Deprecation Notice
 

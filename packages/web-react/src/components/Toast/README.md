@@ -296,7 +296,7 @@ To make the ToastBar dismissible, add the `isDismissible` prop along with a `onC
 
 | Name            | Type                                                            | Default    | Required | Description                                         |
 | --------------- | --------------------------------------------------------------- | ---------- | -------- | --------------------------------------------------- |
-| `strings`       | `{ ariaLabel?: { close? } }`                       | —          | ✕        | Close label override ([`TranslatableString`][readme-component-strings]) |
+| `strings`       | `{ ariaLabel?: { close? } }`                       | —          | ✕        | Close label; see [Translations](#translations)                  |
 | `closeLabel`    | `string`                                                        | —          | ✕        | _Deprecated, use `strings.ariaLabel.close`_          |
 | `color`         | \[[EmotionColorNamesType][readme-generated-types] \| `neutral`] | `neutral`  | ✕        | Color variant                                       |
 | `hasIcon`       | `bool`                                                          | `false` \* | ✕        | If true, an icon is shown along the message         |
@@ -313,6 +313,14 @@ Read the section [Default Icons according to Color Variant](#default-icons-accor
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
+
+| Key                | Default key    | English default | Description    |
+| ------------------ | -------------- | --------------- | -------------- |
+| `ariaLabel.close`  | `common.close` | `Close`         | Dismiss button |
 
 ## Full Example
 
@@ -448,7 +456,7 @@ Read the section [Default Icons according to Color Variant](#default-icons-accor
 | --------------- | ------------------------------------------------------------ | -------- | -------- | ----------------------------------------------------------------- |
 | `alignmentX`    | \[[AlignmentX dictionary][dictionary-alignment] \| `object`] | `center` | ✕        | Horizontal alignment of the toast queue                           |
 | `alignmentY`    | \[`top` \| `bottom` \| `object`]                             | `bottom` | ✕        | Vertical alignment of the toast queue                             |
-| `strings`       | `{ ariaLabel?: { close? } }`                    | —        | ✕        | Close label override ([`TranslatableString`][readme-component-strings]) |
+| `strings`       | `{ ariaLabel?: { close? } }`                    | —        | ✕        | Close label; see [Translations](#translations)                    |
 | `closeLabel`    | `string`                                                     | —        | ✕        | _Deprecated, use `strings.ariaLabel.close`_                        |
 | `isCollapsible` | `bool`                                                       | `true`   | ✕        | If true, Toast queue collapses if there are more than 3 ToastBars |
 

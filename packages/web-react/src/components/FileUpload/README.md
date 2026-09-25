@@ -78,7 +78,7 @@ The consumer is responsible for setting the validation state based on their own 
 | Name                     | Type                                                | Default  | Required | Description                                                                                                                                                                                                                                                        |
 | ------------------------ | --------------------------------------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `accept`                 | `string`                                            | —        | ✕        | The accept attribute takes as its value a comma-separated list of one or more file types, or unique file type specifiers, describing which file types to allow. Applies to the file picker dialog only; for drag and drop you must filter accepted types yourself. |
-| `strings`                | `{ label?: { button?, upload?, dragAndDrop? } }`    | —        | ✕        | [`TranslatableString`][readme-component-strings] overrides for component copy                                                                                                                                                                                                                  |
+| `strings`                | `{ label?: { button?, upload?, dragAndDrop? } }`    | —        | ✕        | Drop-zone copy overrides; see [Translations](#translations)                                                                                                                                                                                                |
 | `buttonText`             | `string`                                            | —        | ✕        | _Deprecated, use `strings.label.button`_                                                                                                                                                                                                                           |
 | `dropZoneRef`            | `MutableRefObject<HTMLDivElement>`                  | —        | ✕        | Drop zone element reference                                                                                                                                                                                                                                        |
 | `hasValidationIcon`      | `bool`                                              | `false`  | ✕        | Whether to show validation icon                                                                                                                                                                                                                                    |
@@ -111,6 +111,16 @@ and [escape hatches][readme-escape-hatches].
 > Instead, the component opens the system file dialog and the consumer manages the file(s) (e.g. via `onFilesSelected`).
 
 The files list is built with the **Stack** component: use `<Stack aria-label="Uploaded files" elementType="ul" spacing="space-700">` and render file items from [File][readme-file] as its children. See [Stack documentation][stack-docs] for Stack props.
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
+
+| Key                   | Default key                        | English default           | Description                                      |
+| --------------------- | ---------------------------------- | ------------------------- | ------------------------------------------------ |
+| `label.button`        | `fileUploader.browse`              | `Browse`                  | Visible browse button                            |
+| `label.upload`        | `fileUploader.inputUpload`         | `Upload your file`        | Drop-zone primary text                           |
+| `label.dragAndDrop`   | `fileUploader.inputDragAndDrop`    | `or drag and drop here`   | Drop-zone suffix; omitted when drag-and-drop is off |
 
 ### Deprecation Notice
 

@@ -109,7 +109,7 @@ Or override only one label:
 
 | Name                  | Type                                                              | Default    | Required | Description                                                                  |
 | --------------------- | ----------------------------------------------------------------- | ---------- | -------- | ---------------------------------------------------------------------------- |
-| `strings`             | `{ ariaLabel?: { start?, end?, top?, bottom? } }`             | —          | ✕        | [`TranslatableString`][readme-component-strings] overrides for control button labels                     |
+| `strings`             | `{ ariaLabel?: { start?, end?, top?, bottom? } }`             | —          | ✕        | Control button labels; see [Translations](#translations)                                     |
 | `ariaLabelControls`   | `{ top?: string, bottom?: string, start?: string; end?: string }` | —          | ✕        | _Deprecated, use `strings.ariaLabel.start` / `end` / `top` / `bottom`_ |
 | `controlsScrollStep`  | `number`                                                          | `300`      | ✕        | Scroll step for controls (pixels)                                            |
 | `children`            | `ReactNode`                                                       | —          | ✓        | ScrollView children's nodes                                                  |
@@ -121,6 +121,17 @@ Or override only one label:
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
+
+| Key                 | Default key            | English default | Description                         |
+| ------------------- | ---------------------- | --------------- | ----------------------------------- |
+| `ariaLabel.start`   | `scrollView.ariaStart` | `Scroll left`   | Horizontal start control            |
+| `ariaLabel.end`     | `scrollView.ariaEnd`   | `Scroll right`  | Horizontal end control              |
+| `ariaLabel.top`     | `scrollView.ariaTop`   | `Scroll up`     | Vertical start control              |
+| `ariaLabel.bottom`  | `scrollView.ariaBottom`| `Scroll down`   | Vertical end control                |
 
 ### Deprecation Notice
 

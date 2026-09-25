@@ -275,6 +275,7 @@ to the built-in namespaces. Resolution precedence is instance `strings`, depreca
 provider translation, and finally the built-in English default.
 
 Use `strings.ariaLabel` / `strings.ariaLabel.*` for screen-reader-only text and `strings.label.*` for visible text.
+Each component README lists the keys, dictionary defaults, and English copy in a **Translations** section.
 
 ## Additional Attributes
 

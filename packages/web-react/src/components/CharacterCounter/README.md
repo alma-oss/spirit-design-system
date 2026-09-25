@@ -48,10 +48,24 @@ With validation state:
 | `id`               | `string`                                              | —       | ✓        | Base id for the field; used to build the screen reader message element id (`${id}-counter-screen-reader-message`). |
 | `isDisabled`       | `boolean`                                             | —       | ✕        | Whether the character counter is disabled.                                                                         |
 | `registerAria`     | `(params: { add?: string; remove?: string }) => void` | —       | ✓        | Adds/removes the screen reader message id from `aria-describedby` (same pattern as helper/validation text).        |
-| `strings`          | `CharacterCounterStrings`                             | —       | ✕        | [`TranslatableString`][readme-component-strings] overrides for screen reader messages. Visible `5/200` text is not translated.                 |
+| `strings`          | `CharacterCounterStrings`                             | —       | ✕        | Screen reader message overrides; see [Translations](#translations)                                                 |
 | `validationState`  | `Validation`                                          | —       | ✕        | Validation state.                                                                                                  |
 
 The component renders nothing if neither `hasCounter` nor `counterThreshold` is set.
+
+### Translations
+
+Override screen reader messages with [`strings`][readme-component-strings]. The visible `5/200` text is not translated.
+Omitted keys use the built-in English default.
+
+| Key                                  | Default key                                 | English default                              | Description                         |
+| ------------------------------------ | ------------------------------------------- | -------------------------------------------- | ----------------------------------- |
+| `ariaLabel.canEnterUpTo`             | `textArea.counter.canEnterUpTo`             | `You can enter up to {maxLength} characters` | At the limit                        |
+| `ariaLabel.character.overLimit`      | `textArea.counter.characterOverLimit`       | `{count} character over limit`               | One character over                  |
+| `ariaLabel.character.remaining`      | `textArea.counter.characterRemaining`       | `{count} character remaining`                | One character remaining             |
+| `ariaLabel.characters.entered`       | `textArea.counter.charactersEntered`        | `{count} characters entered`                 | Count only (no threshold)           |
+| `ariaLabel.characters.overLimit`     | `textArea.counter.charactersOverLimit`      | `{count} characters over limit`              | Several characters over             |
+| `ariaLabel.characters.remaining`     | `textArea.counter.charactersRemaining`      | `{count} characters remaining`               | Several characters remaining        |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

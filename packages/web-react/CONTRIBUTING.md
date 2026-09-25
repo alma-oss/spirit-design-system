@@ -329,6 +329,9 @@ Implementation uses **`useI18n`** in `src/hooks/useI18n.ts` and optional **`I18n
 5. Resolve the selected literal or translation reference with `resolveComponentString`; select deprecated aliases
    and the internal default key before calling the resolver. When a component has several optional strings, use
    `resolveComponentStrings` instead of repeating the call.
+6. Document the `strings` keys in a **Translations** section of the component README (key, default dictionary path,
+   English default, and whether the text is visible or screen-reader-only). Keep a short `strings` row in the props
+   table that links to that section.
 
 Do not create both a top-level optional prop and a `strings` key for the same value. Consumer content such as field
 labels and React node slots remains a regular prop.
