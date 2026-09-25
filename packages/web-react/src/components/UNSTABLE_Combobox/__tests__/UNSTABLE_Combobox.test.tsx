@@ -777,7 +777,9 @@ describe('UNSTABLE_Combobox', () => {
   });
 
   it('should set input min-width from the add-more placeholder when items are selected', () => {
-    const { container } = render(<TestCombobox selectedKeys={['cs']} strings={{ label: { addMore: '+ Add more…' } }} />);
+    const { container } = render(
+      <TestCombobox selectedKeys={['cs']} strings={{ label: { addMore: '+ Add more…' } }} />,
+    );
 
     expect(container.firstChild).toHaveStyle({ [COMBOBOX_INPUT_MIN_WIDTH_CSS_VAR]: '11ch' });
   });

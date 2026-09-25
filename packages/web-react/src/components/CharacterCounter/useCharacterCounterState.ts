@@ -73,9 +73,13 @@ const getCharacterCounterScreenReaderMessage = (
   strings?: CharacterCounterStrings,
 ): string => {
   if (counterThreshold === undefined) {
-    return resolveComponentString(strings?.ariaLabel?.characters?.entered ?? { key: 'textArea.counter.charactersEntered' }, t, {
-      count: currentLength,
-    });
+    return resolveComponentString(
+      strings?.ariaLabel?.characters?.entered ?? { key: 'textArea.counter.charactersEntered' },
+      t,
+      {
+        count: currentLength,
+      },
+    );
   }
 
   if (currentLength === 0) {
