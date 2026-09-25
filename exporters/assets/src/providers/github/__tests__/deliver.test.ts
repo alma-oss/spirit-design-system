@@ -2,15 +2,33 @@ import { execFileSync } from 'node:child_process';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { deliverPullRequest, type GitCommand } from '../deliver';
 
 const OLD_SHA = 'a'.repeat(40);
 const NEW_SHA = 'b'.repeat(40);
 const TREE_SHA = 'c'.repeat(40);
+const SYNC_SHA = 'd'.repeat(40);
+const BRANCH_REF = 'refs/heads/chore/figma-icons-sync';
 
 const response = (body: unknown, status = 200) =>
   new Response(body === undefined ? undefined : JSON.stringify(body), { status });
+
+const compareResponse = (
+  commits: Array<{ message: string; name?: string; sha: string }> = [
+    { message: 'chore(icons): sync icons\n', sha: SYNC_SHA },
+  ],
+) =>
+  response({
+    commits: commits.map(({ message, name = 'spirit-assets[bot]', sha }) => ({
+      commit: { author: { name }, message },
+      sha,
+    })),
+    total_commits: commits.length,
+  });
+
+const pushArgs = ['push', 'origin', `HEAD:${BRANCH_REF}`];
 
 const createOptions = () => ({
   appSlug: 'spirit-assets',
@@ -167,6 +185,7 @@ describe('deliverPullRequest', () => {
       .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
       .mockResolvedValueOnce(response([]))
       .mockResolvedValueOnce(response({ author: { name: 'spirit-assets[bot]' } }))
+      .mockResolvedValueOnce(compareResponse())
       .mockResolvedValueOnce(response({ number: 42 }));
     const fetchImplementation = fetchMock as unknown as typeof fetch;
     const git = createChangedExistingBranchGit();
@@ -178,8 +197,9 @@ describe('deliverPullRequest', () => {
         readBody: async () => 'body',
       }),
     ).resolves.toEqual({ changed: true, pullRequestNumber: 42 });
+    expect(git).toHaveBeenCalledWith(['commit', `--fixup=${SYNC_SHA}`], expect.any(Object));
 
-    const createRequest = fetchMock.mock.calls[3]?.[1] as RequestInit;
+    const createRequest = fetchMock.mock.calls[4]?.[1] as RequestInit;
 
     expect(JSON.parse(String(createRequest.body))).toEqual({
       base: 'main',
@@ -250,10 +270,23 @@ describe('deliverPullRequest', () => {
         response([
           {
             head: { sha: OLD_SHA },
+            merged_at: '2026-09-01T00:00:00Z',
+            number: 11,
+            state: 'closed',
+            user: { login: 'spirit-assets[bot]' },
+          },
+          {
+            head: { sha: OLD_SHA },
             number: 17,
             state: 'open',
             user: { login: 'spirit-assets[bot]' },
           },
+        ]),
+      )
+      .mockResolvedValueOnce(
+        compareResponse([
+          { message: 'fixup! chore(icons): sync icons\n', sha: OLD_SHA },
+          { message: 'chore(icons): sync icons\n', sha: SYNC_SHA },
         ]),
       )
       .mockResolvedValueOnce(response({ number: 17 }));
@@ -268,17 +301,15 @@ describe('deliverPullRequest', () => {
         readBody: async () => body,
       }),
     ).resolves.toEqual({ changed: true, pullRequestNumber: 17 });
-
+    expect(git).toHaveBeenCalledWith(['commit', `--fixup=${SYNC_SHA}`], expect.any(Object));
     expect(git).toHaveBeenCalledWith(
-      [
-        'push',
-        '--force-with-lease=refs/heads/chore/figma-icons-sync:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-        'origin',
-        'HEAD:refs/heads/chore/figma-icons-sync',
-      ],
+      pushArgs,
       expect.objectContaining({
         GIT_CONFIG_VALUE_0: expect.stringMatching(/^AUTHORIZATION: basic /),
       }),
+    );
+    expect(git.mock.calls.some(([args]) => args[0] === 'push' && args.some((arg) => arg.includes('--force')))).toBe(
+      false,
     );
     expect(git).toHaveBeenCalledWith(
       ['switch', '--discard-changes', '--force-create', 'chore/figma-icons-sync', 'FETCH_HEAD'],
@@ -288,7 +319,7 @@ describe('deliverPullRequest', () => {
     );
     expect(git).not.toHaveBeenCalledWith(['switch', '-C', 'chore/figma-icons-sync']);
 
-    const updateRequest = fetchMock.mock.calls[2]?.[1] as RequestInit;
+    const updateRequest = fetchMock.mock.calls[3]?.[1] as RequestInit;
 
     expect(JSON.parse(String(updateRequest.body))).toEqual({ body, title: 'Sync icons' });
   });
@@ -310,6 +341,15 @@ describe('deliverPullRequest', () => {
       execFileSync('git', ['add', '.'], { cwd: seedRepository });
       execFileSync('git', ['commit', '-m', 'base'], { cwd: seedRepository, stdio: 'ignore' });
       execFileSync('git', ['switch', '-c', branch], { cwd: seedRepository, stdio: 'ignore' });
+      execFileSync('git', ['config', 'user.name', 'spirit-assets[bot]'], { cwd: seedRepository });
+      execFileSync('git', ['config', 'user.email', 'spirit-assets[bot]@users.noreply.github.com'], {
+        cwd: seedRepository,
+      });
+      await writeFile(path.join(seedRepository, 'svg/icon.svg'), 'previous sync');
+      await writeFile(path.join(seedRepository, 'svg/stale.svg'), 'stale');
+      execFileSync('git', ['add', '.'], { cwd: seedRepository });
+      execFileSync('git', ['commit', '-m', 'chore(icons): sync icons'], { cwd: seedRepository, stdio: 'ignore' });
+      const syncSha = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: seedRepository, encoding: 'utf8' }).trim();
       execFileSync('git', ['config', 'user.name', 'Reviewer'], { cwd: seedRepository });
       execFileSync('git', ['config', 'user.email', 'reviewer@example.com'], { cwd: seedRepository });
       await writeFile(path.join(seedRepository, 'e2e.snap'), 'visual fix');
@@ -318,7 +358,12 @@ describe('deliverPullRequest', () => {
       const existingSha = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: seedRepository, encoding: 'utf8' }).trim();
       execFileSync('git', ['switch', 'main'], { cwd: seedRepository, stdio: 'ignore' });
       execFileSync('git', ['clone', '--bare', seedRepository, remoteRepository], { stdio: 'ignore' });
-      execFileSync('git', ['clone', remoteRepository, runnerRepository], { stdio: 'ignore' });
+      execFileSync('git', ['config', 'uploadpack.allowReachableSHA1InWant', 'true'], { cwd: remoteRepository });
+      execFileSync(
+        'git',
+        ['clone', '--depth=1', '--branch=main', pathToFileURL(remoteRepository).href, runnerRepository],
+        { stdio: 'ignore' },
+      );
       execFileSync('git', ['sparse-checkout', 'set', '--no-cone', '/svg/'], {
         cwd: runnerRepository,
         stdio: 'ignore',
@@ -338,6 +383,12 @@ describe('deliverPullRequest', () => {
               state: 'open',
               user: { login: 'spirit-assets[bot]' },
             },
+          ]),
+        )
+        .mockResolvedValueOnce(
+          compareResponse([
+            { message: 'chore(icons): sync icons\n', sha: syncSha },
+            { message: 'fix snapshots\n', name: 'Reviewer', sha: existingSha },
           ]),
         )
         .mockResolvedValueOnce(response({ number: 17 })) as unknown as typeof fetch;
@@ -360,6 +411,16 @@ describe('deliverPullRequest', () => {
       expect(
         execFileSync('git', ['--git-dir', remoteRepository, 'show', `${branch}:svg/icon.svg`], { encoding: 'utf8' }),
       ).toBe('new from Figma');
+      expect(() =>
+        execFileSync('git', ['--git-dir', remoteRepository, 'cat-file', '-e', `${branch}:svg/stale.svg`], {
+          stdio: 'ignore',
+        }),
+      ).toThrow();
+      expect(
+        execFileSync('git', ['--git-dir', remoteRepository, 'log', '-1', '--format=%s', branch], {
+          encoding: 'utf8',
+        }).trim(),
+      ).toBe('fixup! chore(icons): sync icons');
       expect(
         execFileSync('git', ['--git-dir', remoteRepository, 'log', '--format=%an', '-2', branch], {
           encoding: 'utf8',
@@ -370,12 +431,11 @@ describe('deliverPullRequest', () => {
     }
   }, 15_000);
 
-  it('deletes an obsolete owned branch with a lease before closing its pull request', async () => {
-    const events: string[] = [];
-    const fetchImplementation = jest
+  it('refreshes an open pull request without a commit when assets are unchanged', async () => {
+    const fetchMock = jest
       .fn()
-      .mockImplementationOnce(async () => response({ object: { sha: OLD_SHA } }))
-      .mockImplementationOnce(async () =>
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(
         response([
           {
             head: { sha: OLD_SHA },
@@ -385,12 +445,8 @@ describe('deliverPullRequest', () => {
           },
         ]),
       )
-      .mockImplementationOnce(async () => response({ author: { name: 'spirit-assets[bot]' } }))
-      .mockImplementationOnce(async () => {
-        events.push('close');
-
-        return response({ number: 17 });
-      }) as unknown as typeof fetch;
+      .mockResolvedValueOnce(response({ number: 17 }));
+    const fetchImplementation = fetchMock as unknown as typeof fetch;
     const git = jest.fn(async (args: string[]) => {
       if (args[0] === 'write-tree') {
         return TREE_SHA;
@@ -400,49 +456,40 @@ describe('deliverPullRequest', () => {
         return '';
       }
 
-      if (args[0] === 'rev-parse') {
-        return OLD_SHA;
-      }
-
-      if (args.includes('push')) {
-        events.push('delete');
-      }
-
-      return '';
+      return args[0] === 'rev-parse' ? OLD_SHA : '';
     });
 
-    await expect(deliverPullRequest(createOptions(), { fetch: fetchImplementation, git })).resolves.toEqual({
-      changed: false,
-    });
-    expect(events).toEqual(['delete', 'close']);
-    expect(git).toHaveBeenCalledWith(
-      [
-        'push',
-        '--force-with-lease=refs/heads/chore/figma-icons-sync:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-        'origin',
-        ':refs/heads/chore/figma-icons-sync',
-      ],
-      expect.objectContaining({
-        GIT_CONFIG_VALUE_0: expect.stringMatching(/^AUTHORIZATION: basic /),
+    await expect(
+      deliverPullRequest(createOptions(), {
+        fetch: fetchImplementation,
+        git,
+        readBody: async () => 'updated body',
       }),
-    );
+    ).resolves.toEqual({ changed: false, pullRequestNumber: 17 });
+    expect(git.mock.calls.some(([args]) => args[0] === 'push' || args[0] === 'commit')).toBe(false);
+    expect(JSON.parse(String((fetchMock.mock.calls[2]?.[1] as RequestInit).body))).toEqual({
+      body: 'updated body',
+      title: 'Sync icons',
+    });
   });
 
-  it('deletes an obsolete owned branch without trying to close an already closed pull request', async () => {
-    const fetchImplementation = jest
+  it('reopens a closed pull request without a commit when assets are unchanged', async () => {
+    const fetchMock = jest
       .fn()
       .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
       .mockResolvedValueOnce(
         response([
           {
             head: { sha: OLD_SHA },
+            merged_at: null,
             number: 17,
             state: 'closed',
             user: { login: 'spirit-assets[bot]' },
           },
         ]),
       )
-      .mockResolvedValueOnce(response({ author: { name: 'spirit-assets[bot]' } })) as unknown as typeof fetch;
+      .mockResolvedValueOnce(response({ number: 17 }));
+    const fetchImplementation = fetchMock as unknown as typeof fetch;
     const git = jest.fn(async (args: string[]) => {
       if (args[0] === 'write-tree') {
         return TREE_SHA;
@@ -455,13 +502,22 @@ describe('deliverPullRequest', () => {
       return args[0] === 'rev-parse' ? OLD_SHA : '';
     });
 
-    await expect(deliverPullRequest(createOptions(), { fetch: fetchImplementation, git })).resolves.toEqual({
-      changed: false,
+    await expect(
+      deliverPullRequest(createOptions(), {
+        fetch: fetchImplementation,
+        git,
+        readBody: async () => 'updated body',
+      }),
+    ).resolves.toEqual({ changed: false, pullRequestNumber: 17 });
+    expect(git.mock.calls.some(([args]) => args[0] === 'push' || args[0] === 'commit')).toBe(false);
+    expect(JSON.parse(String((fetchMock.mock.calls[2]?.[1] as RequestInit).body))).toEqual({
+      body: 'updated body',
+      state: 'open',
+      title: 'Sync icons',
     });
-    expect(fetchImplementation).toHaveBeenCalledTimes(3);
   });
 
-  it('keeps an owned pull request when its human-authored head has no asset changes', async () => {
+  it('keeps a merged pull request unchanged when a rerun has no asset changes', async () => {
     const fetchImplementation = jest
       .fn()
       .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
@@ -469,13 +525,13 @@ describe('deliverPullRequest', () => {
         response([
           {
             head: { sha: OLD_SHA },
+            merged_at: '2026-09-01T00:00:00Z',
             number: 17,
-            state: 'open',
+            state: 'closed',
             user: { login: 'spirit-assets[bot]' },
           },
         ]),
-      )
-      .mockResolvedValueOnce(response({ author: { name: 'reviewer' } })) as unknown as typeof fetch;
+      ) as unknown as typeof fetch;
     const git = jest.fn(async (args: string[]) => {
       if (args[0] === 'write-tree') {
         return TREE_SHA;
@@ -491,7 +547,8 @@ describe('deliverPullRequest', () => {
     await expect(deliverPullRequest(createOptions(), { fetch: fetchImplementation, git })).resolves.toEqual({
       changed: false,
     });
-    expect(git.mock.calls.some(([args]) => args[0] === 'push')).toBe(false);
+    expect(fetchImplementation).toHaveBeenCalledTimes(2);
+    expect(git.mock.calls.some(([args]) => args[0] === 'push' || args[0] === 'commit')).toBe(false);
   });
 
   it('rejects an automation branch that changes while it is being prepared', async () => {
@@ -569,15 +626,8 @@ describe('deliverPullRequest', () => {
         deliverPullRequest({ ...createOptions(), bodyPath }, { fetch: fetchImplementation, git }),
       ).resolves.toEqual({ changed: true, pullRequestNumber: 23 });
 
-      expect(git).toHaveBeenCalledWith(
-        [
-          'push',
-          '--force-with-lease=refs/heads/chore/figma-icons-sync:',
-          'origin',
-          'HEAD:refs/heads/chore/figma-icons-sync',
-        ],
-        expect.objectContaining({ GIT_CONFIG_COUNT: '1' }),
-      );
+      expect(git).toHaveBeenCalledWith(pushArgs, expect.objectContaining({ GIT_CONFIG_COUNT: '1' }));
+      expect(git).toHaveBeenCalledWith(['commit', '-m', 'chore(icons): sync icons'], expect.any(Object));
     } finally {
       await rm(temporaryDirectory, { recursive: true, force: true });
     }
@@ -624,6 +674,7 @@ describe('deliverPullRequest', () => {
           },
         ]),
       )
+      .mockResolvedValueOnce(compareResponse())
       .mockResolvedValueOnce(updateResponse) as unknown as typeof fetch;
     const git = createChangedExistingBranchGit();
 
@@ -634,6 +685,264 @@ describe('deliverPullRequest', () => {
         readBody: async () => 'body',
       }),
     ).rejects.toThrow(expectedError);
+  });
+
+  it('reopens a closed pull request when the rerun has asset changes', async () => {
+    const fetchMock = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(
+        response([{ head: { sha: OLD_SHA }, number: 17, state: 'closed', user: { login: 'spirit-assets[bot]' } }]),
+      )
+      .mockResolvedValueOnce(compareResponse())
+      .mockResolvedValueOnce(response({ number: 17 }));
+    const fetchImplementation = fetchMock as unknown as typeof fetch;
+
+    await expect(
+      deliverPullRequest(createOptions(), {
+        fetch: fetchImplementation,
+        git: createChangedExistingBranchGit(),
+        readBody: async () => 'body',
+      }),
+    ).resolves.toEqual({ changed: true, pullRequestNumber: 17 });
+    expect(JSON.parse(String((fetchMock.mock.calls[3]?.[1] as RequestInit).body))).toEqual({
+      body: 'body',
+      state: 'open',
+      title: 'Sync icons',
+    });
+  });
+
+  it('opens a new pull request when a closed pull request cannot be reopened', async () => {
+    const fetchMock = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(
+        response([{ merged_at: null, number: 17, state: 'closed', user: { login: 'spirit-assets[bot]' } }]),
+      )
+      .mockResolvedValueOnce(compareResponse([{ message: 'fixup! chore(icons): sync icons\n', sha: SYNC_SHA }]))
+      .mockResolvedValueOnce(response(undefined, 422))
+      .mockResolvedValueOnce(response({ number: 29 }));
+    const fetchImplementation = fetchMock as unknown as typeof fetch;
+    const git = createChangedExistingBranchGit();
+
+    await expect(
+      deliverPullRequest(createOptions(), {
+        fetch: fetchImplementation,
+        git,
+        readBody: async () => 'body',
+      }),
+    ).resolves.toEqual({ changed: true, pullRequestNumber: 29 });
+    expect(git).toHaveBeenCalledWith(['commit', `--fixup=${SYNC_SHA}`], expect.any(Object));
+    expect(JSON.parse(String((fetchMock.mock.calls[4]?.[1] as RequestInit).body))).toEqual({
+      base: 'main',
+      body: 'body',
+      head: 'chore/figma-icons-sync',
+      title: 'Sync icons',
+    });
+  });
+
+  it('opens a new pull request when the previous pull request was merged', async () => {
+    const fetchMock = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(
+        response([
+          {
+            merged_at: '2026-09-01T00:00:00Z',
+            number: 17,
+            state: 'closed',
+            user: { login: 'spirit-assets[bot]' },
+          },
+        ]),
+      )
+      .mockResolvedValueOnce(compareResponse())
+      .mockResolvedValueOnce(response({ number: 31 }));
+    const fetchImplementation = fetchMock as unknown as typeof fetch;
+
+    await expect(
+      deliverPullRequest(createOptions(), {
+        fetch: fetchImplementation,
+        git: createChangedExistingBranchGit(),
+        readBody: async () => 'body',
+      }),
+    ).resolves.toEqual({ changed: true, pullRequestNumber: 31 });
+    expect((fetchMock.mock.calls[3]?.[1] as RequestInit).method).toBe('POST');
+  });
+
+  it('rejects a non-fast-forward push without forcing the branch or updating the pull request', async () => {
+    const fetchImplementation = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(response([{ number: 17, state: 'open', user: { login: 'spirit-assets[bot]' } }]))
+      .mockResolvedValueOnce(compareResponse()) as unknown as typeof fetch;
+    const git = jest.fn(async (args: string[]) => {
+      if (args[0] === 'push') {
+        throw new Error('non-fast-forward');
+      }
+
+      if (args[0] === 'write-tree') {
+        return TREE_SHA;
+      }
+
+      if (args[0] === 'status') {
+        return ' M svg/icon.svg\n';
+      }
+
+      if (args[0] !== 'rev-parse') {
+        return '';
+      }
+
+      return args[1] === 'FETCH_HEAD' ? OLD_SHA : NEW_SHA;
+    });
+
+    await expect(
+      deliverPullRequest(createOptions(), {
+        fetch: fetchImplementation,
+        git,
+        readBody: async () => 'body',
+      }),
+    ).rejects.toThrow('non-fast-forward');
+    expect(git.mock.calls.filter(([args]) => args[0] === 'push').map(([args]) => args)).toEqual([pushArgs]);
+    expect(fetchImplementation).toHaveBeenCalledTimes(3);
+  });
+
+  it('fetches the original sync commit when the shallow clone does not contain it', async () => {
+    const fetchImplementation = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(response([{ number: 17, state: 'open', user: { login: 'spirit-assets[bot]' } }]))
+      .mockResolvedValueOnce(
+        response({
+          commits: [{ commit: { author: { name: 'spirit-assets[bot]' } }, sha: SYNC_SHA }],
+          total_commits: 1,
+        }),
+      )
+      .mockResolvedValueOnce(response({ number: 17 })) as unknown as typeof fetch;
+    const git = jest.fn(async (args: string[]) => {
+      if (args[0] === 'cat-file') {
+        throw new Error('missing');
+      }
+
+      if (args[0] === 'write-tree') {
+        return TREE_SHA;
+      }
+
+      if (args[0] === 'status') {
+        return ' D svg/stale.svg\n';
+      }
+
+      if (args[0] !== 'rev-parse') {
+        return '';
+      }
+
+      return args[1] === 'FETCH_HEAD' ? OLD_SHA : NEW_SHA;
+    });
+
+    await expect(
+      deliverPullRequest(createOptions(), {
+        fetch: fetchImplementation,
+        git,
+        readBody: async () => 'body',
+      }),
+    ).resolves.toEqual({ changed: true, pullRequestNumber: 17 });
+    expect(git).toHaveBeenCalledWith(
+      ['fetch', '--no-tags', '--depth=1', 'origin', SYNC_SHA],
+      expect.objectContaining({
+        GIT_CONFIG_VALUE_0: expect.stringMatching(/^AUTHORIZATION: basic /),
+      }),
+    );
+  });
+
+  it.each([
+    ['request failure', response(undefined, 500), 'Unable to compare the automation branch (500).'],
+    ['invalid payload', response({ commits: {} }), 'GitHub returned an invalid automation comparison.'],
+    [
+      'truncated history',
+      response({ commits: [], total_commits: 1 }),
+      'Automation branch history is too large to identify the original sync commit.',
+    ],
+    [
+      'missing App commit',
+      response({
+        commits: [
+          { commit: { author: { name: 'Reviewer' }, message: 'fix snapshots' }, sha: OLD_SHA },
+          { commit: { author: { name: 'spirit-assets[bot]' }, message: 12 }, sha: 'invalid' },
+        ],
+        total_commits: 2,
+      }),
+      'Unable to find the original asset sync commit.',
+    ],
+    [
+      'invalid JSON',
+      new Response('{', { status: 200 }),
+      'GitHub returned an invalid response while comparing the automation branch.',
+    ],
+  ])('rejects a comparison %s', async (_scenario, comparePayload, expectedError) => {
+    const fetchImplementation = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(response([{ number: 17, state: 'open', user: { login: 'spirit-assets[bot]' } }]))
+      .mockResolvedValueOnce(comparePayload) as unknown as typeof fetch;
+
+    await expect(
+      deliverPullRequest(createOptions(), {
+        fetch: fetchImplementation,
+        git: createChangedExistingBranchGit(),
+        readBody: async () => 'body',
+      }),
+    ).rejects.toThrow(expectedError);
+  });
+
+  it('rejects a reopen failure when the rerun has asset changes', async () => {
+    const fetchImplementation = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(response([{ number: 17, state: 'closed', user: { login: 'spirit-assets[bot]' } }]))
+      .mockResolvedValueOnce(compareResponse())
+      .mockResolvedValueOnce(response(undefined, 500)) as unknown as typeof fetch;
+
+    await expect(
+      deliverPullRequest(createOptions(), {
+        fetch: fetchImplementation,
+        git: createChangedExistingBranchGit(),
+        readBody: async () => 'body',
+      }),
+    ).rejects.toThrow('Unable to reopen the pull request (500).');
+  });
+
+  it('rejects a pull request that cannot be reopened when there are no new asset changes', async () => {
+    const fetchImplementation = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(response([{ number: 17, state: 'closed', user: { login: 'spirit-assets[bot]' } }]))
+      .mockResolvedValueOnce(response(undefined, 405)) as unknown as typeof fetch;
+    const git = jest.fn(async (args: string[]) => {
+      if (args[0] === 'write-tree') {
+        return TREE_SHA;
+      }
+
+      return args[0] === 'rev-parse' ? OLD_SHA : '';
+    });
+
+    await expect(
+      deliverPullRequest(createOptions(), {
+        fetch: fetchImplementation,
+        git,
+        readBody: async () => 'body',
+      }),
+    ).rejects.toThrow('Unable to reopen the pull request (405).');
+  });
+
+  it('rejects an owned pull request whose state cannot be classified when the branch is not App-authored', async () => {
+    const fetchImplementation = jest
+      .fn()
+      .mockResolvedValueOnce(response({ object: { sha: OLD_SHA } }))
+      .mockResolvedValueOnce(response([{ number: 17, state: 'unknown', user: { login: 'spirit-assets[bot]' } }]))
+      .mockResolvedValueOnce(response({ author: { name: 'reviewer' } })) as unknown as typeof fetch;
+
+    await expect(deliverPullRequest(createOptions(), { fetch: fetchImplementation, git: jest.fn() })).rejects.toThrow(
+      'Existing automation branch is not owned by this GitHub App.',
+    );
   });
 
   it('rejects missing credentials and unsafe output paths before contacting GitHub', async () => {
