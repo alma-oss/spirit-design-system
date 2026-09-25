@@ -19,7 +19,7 @@ export const generateReactIndex = (reactDir: string): void => {
       lines.push(`export { default as ${componentName} } from './${componentName}';`);
     });
 
-    const indexContent = lines.join('\n') + '\n';
+    const indexContent = `${lines.join('\n')}\n`;
     const indexPath = path.join(reactDir, 'index.ts');
 
     fs.writeFileSync(indexPath, indexContent);

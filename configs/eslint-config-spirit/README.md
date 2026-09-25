@@ -13,15 +13,13 @@ yarn add eslint-config-spirit
 
 ## 🚀 Usage
 
-You can use `eslint-config-spirit` in your project by extending it in your
-`eslint` configuration. For example, if we had an `.eslintrc` file:
+You can use `eslint-config-spirit` in your project by spreading it into your flat
+`eslint.config.js`/`eslint.config.mjs` file:
 
 ```js
-const eslintConfig = require('eslint-config-spirit');
+import spiritConfig from 'eslint-config-spirit';
 
-module.exports = {
-  ...eslintConfig,
-};
+export default [...spiritConfig];
 ```
 
 ### 💅 Style
@@ -53,13 +51,10 @@ For example:
 Choose this if you want to customize specific style rules or don't want to add Prettier as a dependency.
 
 ```js
-const eslintConfig = require('eslint-config-spirit');
-const eslintConfigStyle = require('eslint-config-spirit/style');
+import spiritConfig from 'eslint-config-spirit';
+import spiritStyle from 'eslint-config-spirit/style';
 
-module.exports = {
-  ...eslintConfig,
-  ...eslintConfigStyle,
-};
+export default [...spiritConfig, ...spiritStyle];
 ```
 
 #### Prettier
@@ -75,13 +70,10 @@ Note that this requires Prettier as a peer dependency.
 - Requires `prettier` installed as a peer dependency
 
 ```js
-const eslintConfig = require('eslint-config-spirit');
-const eslintConfigPrettier = require('eslint-config-spirit/prettier');
+import spiritConfig from 'eslint-config-spirit';
+import spiritConfigPrettier from 'eslint-config-spirit/prettier';
 
-module.exports = {
-  ...eslintConfig,
-  ...eslintConfigPrettier,
-};
+export default [...spiritConfig, ...spiritConfigPrettier];
 ```
 
 #### Switching Between Style Configurations

@@ -39,6 +39,7 @@ export const waitForPageLoad = async (page: Page): Promise<void> => {
       await page.waitForFunction(
         () => {
           const videos = document.querySelectorAll('video');
+
           return Array.from(videos).every((video) => video.readyState >= 2);
         },
         { timeout: 10000 }, // 10s timeout for external video URLs

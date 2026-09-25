@@ -1,36 +1,12 @@
 /* eslint-disable no-console -- we want to log when test fails */
-import { test, type Page } from '../../helpers/fixtures';
-import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot, retryPageGoto } from '../../helpers';
 import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
+import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot, retryPageGoto } from '../../helpers';
+import { test, type Page } from '../../helpers/fixtures';
 
 type TestConfig = {
   componentsDir: string;
   packageName: string;
   componentName: string;
-};
-
-const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
-  if (!packageName) return;
-
-  const formattedPackageName = formatPackageName(packageName);
-
-  test.describe('Test Tooltip with focus trigger', () => {
-    test(`Test ${componentName} component focus trigger in ${formattedPackageName} package`, async ({
-      page,
-      pageRetries,
-    }) => {
-      try {
-        const url = getServerUrl(packageName);
-        await retryPageGoto(page, normalizeUrl(url, componentsDir, componentName), { retries: pageRetries });
-        await waitForPageLoad(page);
-        await hideFromVisualTests(page);
-        await runTooltipTests(page, componentName, packageName);
-      } catch (error) {
-        console.error(`Test for demo ${formattedPackageName} component ${componentName} failed. ${error}`);
-        throw error;
-      }
-    });
-  });
 };
 
 const runTooltipTests = async (page: Page, componentName: string, packageName: string): Promise<void> => {
@@ -69,6 +45,32 @@ const runTooltipTests = async (page: Page, componentName: string, packageName: s
   // Move focus away
   await page.keyboard.press('Tab');
   await page.waitForTimeout(200);
+};
+
+const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
+  if (!packageName) {
+    return;
+  }
+
+  const formattedPackageName = formatPackageName(packageName);
+
+  test.describe('Test Tooltip with focus trigger', () => {
+    test(`Test ${componentName} component focus trigger in ${formattedPackageName} package`, async ({
+      page,
+      pageRetries,
+    }) => {
+      try {
+        const url = getServerUrl(packageName);
+        await retryPageGoto(page, normalizeUrl(url, componentsDir, componentName), { retries: pageRetries });
+        await waitForPageLoad(page);
+        await hideFromVisualTests(page);
+        await runTooltipTests(page, componentName, packageName);
+      } catch (error) {
+        console.error(`Test for demo ${formattedPackageName} component ${componentName} failed. ${error}`);
+        throw error;
+      }
+    });
+  });
 };
 
 const componentName = 'Tooltip';
