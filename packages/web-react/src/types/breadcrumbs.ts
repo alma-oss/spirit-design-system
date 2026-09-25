@@ -1,5 +1,20 @@
 import { type ElementType } from 'react';
-import { type ChildrenProps, type PolymorphicComponentProps, type StyleProps } from './shared';
+import {
+  type ChildrenProps,
+  type PolymorphicComponentProps,
+  type StringsProps,
+  type StyleProps,
+  type TranslatableString,
+} from './shared';
+
+export type BreadcrumbsStrings = {
+  ariaLabel?: {
+    nav?: TranslatableString;
+  };
+  label?: {
+    back?: TranslatableString;
+  };
+};
 
 type BreadcrumbsItem = {
   title: string;
@@ -21,7 +36,8 @@ export interface BreadcrumbsStyleProps extends StyleProps {
 }
 
 /** ===== INTERNAL API ===== */
-export interface BreadcrumbsProps extends StyleProps, ChildrenProps {
+export interface BreadcrumbsProps extends StyleProps, ChildrenProps, StringsProps<BreadcrumbsStrings> {
+  /** @deprecated Use `strings.label.back` instead. */
   goBackTitle?: string;
   items?: BreadcrumbsItems;
 }

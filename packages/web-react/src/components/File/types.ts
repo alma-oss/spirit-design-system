@@ -1,6 +1,6 @@
 import { type ElementType, type ReactNode } from 'react';
 import { type ObjectFit } from '../../constants';
-import { type PolymorphicComponentProps } from '../../types';
+import { type PolymorphicComponentProps, type StringsProps, type TranslatableString } from '../../types';
 import {
   type SpiritButtonElementProps,
   type SpiritSpanElementProps,
@@ -34,9 +34,17 @@ export interface FileImagePreviewProps extends SpiritSpanElementProps, FilePrevi
   label: string;
 }
 
-export interface FileBaseProps {
+export type FileStrings = {
+  ariaLabel?: {
+    edit?: TranslatableString;
+    remove?: TranslatableString;
+  };
+};
+
+export interface FileBaseProps extends StringsProps<FileStrings> {
   /** Optional content rendered between the file name and helper/validation text. */
   children?: ReactNode;
+  /** @deprecated Use `strings.ariaLabel.edit` instead. */
   editText?: string;
   helperText?: ReactNode;
   hasValidationIcon?: boolean;
@@ -49,6 +57,7 @@ export interface FileBaseProps {
   onDismiss?: () => void;
   onChange?: () => void;
   previewSlot?: ReactNode;
+  /** @deprecated Use `strings.ariaLabel.remove` instead. */
   removeText?: string;
   validationState?: ValidationState;
   validationText?: ValidationTextType;

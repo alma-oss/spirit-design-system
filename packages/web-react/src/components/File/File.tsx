@@ -3,7 +3,8 @@
 import classNames from 'classnames';
 import React, { type ElementType } from 'react';
 import { ContextPropsProvider } from '../../context';
-import { useI18n, useStyleProps } from '../../hooks';
+import { useDeprecationMessage, useI18n, useStyleProps } from '../../hooks';
+import { resolveComponentStrings } from '../../translations';
 import { CloseButton } from '../CloseButton';
 import { ControlButton } from '../ControlButton';
 import { Flex } from '../Flex';
@@ -38,18 +39,32 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
     onChange,
     previewSlot,
     removeText,
+    strings,
     validationState,
     validationText,
     ...restProps
   } = propsWithDefaults;
 
-  const resolvedEditText = editText ?? t('attachment.edit');
-  const resolvedRemoveText = removeText ?? t('attachment.remove');
+  const { edit: resolvedEditText, remove: resolvedRemoveText } = resolveComponentStrings(
+    {
+      edit: { value: strings?.ariaLabel?.edit ?? editText, key: 'attachment.edit' },
+      remove: { value: strings?.ariaLabel?.remove ?? removeText, key: 'attachment.remove' },
+    },
+    t,
+  );
   const { classProps } = useFileStyleProps({ isDisabled, validationState });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
   const validationTextRole = useValidationTextRole({
     validationState,
     validationText,
+  });
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: editText != null || removeText != null,
+    componentName: 'File',
+    customText:
+      'The "editText" and "removeText" properties are deprecated and will be removed in the next major version. Use "strings.ariaLabel.edit" and "strings.ariaLabel.remove" instead.',
   });
 
   const fileRowControlButtonProps = {
@@ -66,7 +81,7 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
   ) : null;
 
   const dismissActionButton = onDismiss ? (
-    <CloseButton isDisabled={isDisabled} label={resolvedRemoveText} onClick={onDismiss} />
+    <CloseButton isDisabled={isDisabled} strings={{ ariaLabel: { close: resolvedRemoveText } }} onClick={onDismiss} />
   ) : null;
 
   const Component = elementType as ElementType;

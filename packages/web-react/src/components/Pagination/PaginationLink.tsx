@@ -1,7 +1,8 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { useClick, useI18n, useLinkClick, useStyleProps } from '../../hooks';
+import { useClick, useDeprecationMessage, useI18n, useLinkClick, useStyleProps } from '../../hooks';
+import { resolveComponentString } from '../../translations';
 import { type PolymorphicComponent, type PolymorphicRef, type SpiritPaginationLinkProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { VisuallyHidden } from '../VisuallyHidden';
@@ -17,11 +18,23 @@ const _PaginationLink = <E extends ElementType = 'a'>(props: SpiritPaginationLin
     isDisabled,
     pageNumber,
     routerOptions,
+    strings,
     onClick,
     ...restProps
   } = props;
   const isButtonElement = elementType === 'button';
-  const visuallyHiddenLabel = accessibilityLabel || `${t('pagination.goToPage')} ${pageNumber}`;
+  const labelOverride = strings?.ariaLabel?.page ?? accessibilityLabel;
+  const visuallyHiddenLabel = labelOverride
+    ? resolveComponentString(labelOverride, t)
+    : `${t('pagination.goToPage')} ${pageNumber}`;
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: accessibilityLabel != null,
+    componentName: 'PaginationLink',
+    customText:
+      'The "accessibilityLabel" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.page" instead.',
+  });
 
   const Component = elementType as ElementType;
 

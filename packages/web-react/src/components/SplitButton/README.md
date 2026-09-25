@@ -125,7 +125,7 @@ Simple variant:
 ```tsx
 <UncontrolledSplitButton
   id="uncontrolled-split-button-id"
-  buttonLabel="Button"
+  labelButton="Button"
   buttonOnClick={() => alert('Button clicked')}
 >
   {/* Dropdown content */}
@@ -137,12 +137,12 @@ Full example:
 ```tsx
 <UncontrolledSplitButton
   buttonIconName="check-plain"
-  buttonLabel="Button"
+  labelButton={{ key: 'actions.save' }}
   buttonOnClick={() => alert('Button clicked')}
   color="secondary"
   dropdownPlacement="bottom-start"
   dropdownTriggerIconName="more"
-  dropdownTriggerLabel="More"
+  strings={{ label: { dropdown: { trigger: 'More' } } }}
   id="uncontrolled-split-button"
   isDisabled={false}
   size="large"
@@ -153,28 +153,54 @@ Full example:
 
 ### API
 
-| Name                           | Type                                         | Default        | Required | Description                                              |
-| ------------------------------ | -------------------------------------------- | -------------- | -------- | -------------------------------------------------------- |
-| `buttonIconName`               | `string`                                     | -              | ✕ \*     | Name of the icon to be displayed in the Button           |
-| `buttonLabel`                  | `string`                                     | -              | ✓        | Label of the Button                                      |
-| `buttonOnClick`                | `function`                                   | -              | ✓        | Function to be called when the Button is clicked         |
-| `children`                     | `ReactNode`                                  | -              | ✓        | Dropdown content                                         |
-| `color`                        | \[`primary` \| `secondary` \| `tertiary` ]   | `primary`      | ✕        | Color variant                                            |
-| `dropdownPlacement`            | [Placement dictionary][dictionary-placement] | `bottom-end`   | ✕        | Placement of the Dropdown                                |
-| `dropdownTriggerIconName`      | `string`                                     | `chevron-down` | ✕        | Name of the icon to be displayed in the Dropdown Trigger |
-| `dropdownTriggerLabel`         | `string`                                     | `More`         | ✕        | Label of the Dropdown Trigger                            |
-| `id`                           | `string`                                     | -              | ✓        | Id of the Split Button and part of Dropdown id           |
-| `isButtonLabelHidden`          | `bool`                                       | `false`        | ✕ \*     | Whether is button label hidden                           |
-| `isDisabled`                   | `bool`                                       | `false`        | ✕        | Disables the Split Button                                |
-| `isDropdownTriggerLabelHidden` | `bool`                                       | `false`        | ✕        | Whether is dropdown trigger label hidden                 |
-| `size`                         | [Size dictionary][dictionary-size]           | `medium`       | ✕        | Size variant                                             |
+| Name                           | Type                                                          | Default        | Required | Description                                                        |
+| ------------------------------ | ------------------------------------------------------------- | -------------- | -------- | ------------------------------------------------------------------ |
+| `buttonIconName`               | `string`                                                      | -              | ✕ \*     | Name of the icon to be displayed in the Button                     |
+| `labelButton`                  | [`TranslatableString`][readme-component-strings]              | -              | ✓ \*     | Label of the Button                                                |
+| `buttonLabel`                  | `string`                                                      | -              | ✓ \*     | _Deprecated, use `labelButton`_                                    |
+| `buttonOnClick`                | `function`                                                    | -              | ✓        | Function to be called when the Button is clicked                   |
+| `children`                     | `ReactNode`                                                   | -              | ✓        | Dropdown content                                                   |
+| `color`                        | \[`primary` \| `secondary` \| `tertiary` ]                    | `primary`      | ✕        | Color variant                                                      |
+| `dropdownPlacement`            | [Placement dictionary][dictionary-placement]                  | `bottom-end`   | ✕        | Placement of the Dropdown                                          |
+| `dropdownTriggerIconName`      | `string`                                                      | `chevron-down` | ✕        | Name of the icon to be displayed in the Dropdown Trigger           |
+| `strings`                      | `{ label?: { dropdown?: { trigger?: TranslatableString } } }` | -              | ✕        | Dropdown trigger label override; see [Translations](#translations) |
+| `dropdownTriggerLabel`         | `string`                                                      | -              | ✕        | _Deprecated, use `strings.label.dropdown.trigger`_                 |
+| `id`                           | `string`                                                      | -              | ✓        | Id of the Split Button and part of Dropdown id                     |
+| `isButtonLabelHidden`          | `bool`                                                        | `false`        | ✕ \*     | Whether is button label hidden                                     |
+| `isDisabled`                   | `bool`                                                        | `false`        | ✕        | Disables the Split Button                                          |
+| `isDropdownTriggerLabelHidden` | `bool`                                                        | `false`        | ✕        | Whether is dropdown trigger label hidden                           |
+| `size`                         | [Size dictionary][dictionary-size]                            | `medium`       | ✕        | Size variant                                                       |
 
-(\*) Conditionally required: either `buttonIconName` or `buttonLabel` must be visible. If you want only the Icon to be visible, use the `isButtonLabelHidden` prop to visually hide the `buttonLabel`, which is required for accessibility reasons.
+(\*) During the v5 migration, provide either `labelButton` or deprecated `buttonLabel`. If you want only the Icon
+to be visible, use `isButtonLabelHidden` to visually hide the required accessible label.
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
+The dropdown trigger label is visible unless `isDropdownTriggerLabelHidden` is set.
+
+| Key                      | Default key            | English default | Description            |
+| ------------------------ | ---------------------- | --------------- | ---------------------- |
+| `label.dropdown.trigger` | `splitButton.dropdown` | `More`          | Dropdown trigger label |
+
+Required button copy stays on `labelButton` (not `strings`).
+
+### Deprecation Notice
+
+`buttonLabel` and `dropdownTriggerLabel` are deprecated and will be removed in v6.
+
+### Migration Guide
+
+```diff
+- <UncontrolledSplitButton buttonLabel="Save" dropdownTriggerLabel="More" />
++ <UncontrolledSplitButton labelButton={{ key: 'actions.save' }} strings={{ label: { dropdown: { trigger: 'More' } } }} />
+```
 
 [dictionary-placement]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#placement
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#size
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Button/README.md
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-dropdown]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Dropdown/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

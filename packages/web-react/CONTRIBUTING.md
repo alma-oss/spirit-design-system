@@ -321,6 +321,33 @@ Implementation uses **`useI18n`** in `src/hooks/useI18n.ts` and optional **`I18n
 ### Adding New Keys
 
 1. Add the key to `defaultTranslations` in `src/translations/defaults.ts` following the nested structure (e.g. `pagination.goToPage`, `textField.password.show`).
-2. Use the key in components via `t('your.namespace.key')`.
+2. Expose required component copy as a top-level `TranslatableString` prop.
+3. Expose optional component copy with a meaningful default through a component-local `FooStrings` type and
+   `StringsProps<FooStrings>`.
+4. Nest optional copy as `strings.ariaLabel.*` (screen-reader) and `strings.label.*` (visible), including when there
+   is only one string (for example `strings.ariaLabel.close`).
+5. Resolve the selected literal or translation reference with `resolveComponentString`; select deprecated aliases
+   and the internal default key before calling the resolver. When a component has several optional strings, use
+   `resolveComponentStrings` instead of repeating the call.
+6. Document the `strings` keys in a **Translations** section of the component README (key, default dictionary path,
+   English default, and whether the text is visible or screen-reader-only). Keep a short `strings` row in the props
+   table that links to that section.
+
+Do not create both a top-level optional prop and a `strings` key for the same value. Consumer content such as field
+labels and React node slots remains a regular prop.
+
+```tsx
+const label = resolveComponentString(strings?.ariaLabel?.close ?? closeLabel ?? { key: 'common.close' }, t);
+
+const labels = resolveComponentStrings(
+  {
+    ariaLabel: {
+      add: { value: strings?.ariaLabel?.add ?? addButtonLabel, key: 'picker.add' },
+      close: { value: strings?.ariaLabel?.close ?? closeButtonLabel, key: 'common.close' },
+    },
+  },
+  t,
+);
+```
 
 [web-react-readme]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react/README.md

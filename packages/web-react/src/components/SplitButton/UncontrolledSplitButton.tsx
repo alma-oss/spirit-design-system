@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useI18n } from '../../hooks';
+import { useDeprecationMessage, useI18n } from '../../hooks';
+import { resolveComponentString } from '../../translations';
 import { type UncontrolledSplitButtonProps } from '../../types';
 import { Button } from '../Button';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../Dropdown';
@@ -20,6 +21,7 @@ const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
   const {
     buttonIconName,
     buttonLabel,
+    labelButton,
     buttonOnClick,
     children,
     dropdownTriggerIconName,
@@ -29,16 +31,36 @@ const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
     isButtonLabelHidden,
     isDisabled,
     isDropdownTriggerLabelHidden,
+    strings,
     ...restProps
   } = propsWithDefaults;
-  const resolvedDropdownTriggerLabel = dropdownTriggerLabel ?? t('splitButton.dropdown');
+  const buttonLabelValue = labelButton ?? buttonLabel;
+  const resolvedButtonLabel = buttonLabelValue ? resolveComponentString(buttonLabelValue, t) : '';
+  const resolvedDropdownTriggerLabel = resolveComponentString(
+    strings?.label?.dropdown?.trigger ?? dropdownTriggerLabel ?? { key: 'splitButton.dropdown' },
+    t,
+  );
   const [openDropdownState, setOpenDropdownState] = useState(false);
+
+  useDeprecationMessage({
+    method: 'property',
+    trigger: buttonLabel != null,
+    componentName: 'UncontrolledSplitButton',
+    propertyProps: { deprecatedName: 'buttonLabel', newName: 'labelButton' },
+  });
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: dropdownTriggerLabel != null,
+    componentName: 'UncontrolledSplitButton',
+    customText:
+      'The "dropdownTriggerLabel" property is deprecated and will be removed in the next major version. Use "strings.label.dropdown.trigger" instead.',
+  });
 
   return (
     <SplitButton {...restProps} id={id} isDisabled={isDisabled}>
       <Button onClick={buttonOnClick}>
         {buttonIconName && <Icon name={buttonIconName} />}
-        {isButtonLabelHidden ? <VisuallyHidden>{buttonLabel}</VisuallyHidden> : buttonLabel}
+        {isButtonLabelHidden ? <VisuallyHidden>{resolvedButtonLabel}</VisuallyHidden> : resolvedButtonLabel}
       </Button>
       <Dropdown
         id={`${id}-dropdown`}

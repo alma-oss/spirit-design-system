@@ -56,7 +56,6 @@ const LoadingField = ({ id, label, loadingLabel }: { id: string; label: string; 
 
   return (
     <UNSTABLE_Combobox
-      emptySelectionLabel="Languages"
       hasEmptyState
       id={id}
       inputValue={inputValue}
@@ -64,6 +63,7 @@ const LoadingField = ({ id, label, loadingLabel }: { id: string; label: string; 
       isOpen={isOpen}
       label={label}
       loadingLabel={loadingLabel}
+      strings={{ label: { emptySelection: 'Languages' } }}
       onInputChange={handleInputChange}
       onSelectionChange={setSelectedKeys}
       onToggle={onToggle}

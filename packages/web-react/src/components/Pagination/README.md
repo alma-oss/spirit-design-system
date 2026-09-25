@@ -165,15 +165,16 @@ Renders a numbered page, or custom content through `children`.
 Pass `pageNumber` for a page number, or `children` for custom content.
 Do not mix the two.
 
-| Name                 | Type          | Default                   | Required | Description                                                      |
-| -------------------- | ------------- | ------------------------- | -------- | ---------------------------------------------------------------- |
-| `accessibilityLabel` | `string`      | `Go to page {pageNumber}` | ✕        | Accessibility label of the numbered link                         |
-| `children`           | `ReactNode`   | —                         | ✕        | Custom content; use instead of `pageNumber`                      |
-| `elementType`        | `ElementType` | `a`                       | ✕        | Type of an element                                               |
-| `href`               | `string`      | —                         | ✕        | Link URL                                                         |
-| `isCurrent`          | `bool`        | `null`                    | ✕        | If true, the numbered link is marked as current                  |
-| `isDisabled`         | `bool`        | `false`                   | ✕        | If true, the link is disabled                                    |
-| `pageNumber`         | `number`      | —                         | ✕        | Page number, hidden for screen readers; omit when using children |
+| Name                 | Type                                            | Default | Required | Description                                                      |
+| -------------------- | ----------------------------------------------- | ------- | -------- | ---------------------------------------------------------------- |
+| `strings`            | `{ ariaLabel?: { page?: TranslatableString } }` | —       | ✕        | Page label; see [Translations](#translations)                    |
+| `accessibilityLabel` | `string`                                        | —       | ✕        | _Deprecated, use `strings.ariaLabel.page`_                       |
+| `children`           | `ReactNode`                                     | —       | ✕        | Custom content; use instead of `pageNumber`                      |
+| `elementType`        | `ElementType`                                   | `a`     | ✕        | Type of an element                                               |
+| `href`               | `string`                                        | —       | ✕        | Link URL                                                         |
+| `isCurrent`          | `bool`                                          | `null`  | ✕        | If true, the numbered link is marked as current                  |
+| `isDisabled`         | `bool`                                          | `false` | ✕        | If true, the link is disabled                                    |
+| `pageNumber`         | `number`                                        | —       | ✕        | Page number, hidden for screen readers; omit when using children |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -205,11 +206,12 @@ and [escape hatches][readme-escape-hatches].
 
 This component wraps `PaginationLink` and renders a previous chevron with a visually hidden label.
 
-| Name                 | Type     | Default    | Required | Description                     |
-| -------------------- | -------- | ---------- | -------- | ------------------------------- |
-| `accessibilityLabel` | `string` | `Previous` | ✕        | Accessibility label of the link |
-| `href`               | `string` | —          | ✕        | Link URL                        |
-| `isDisabled`         | `bool`   | `false`    | ✕        | If true, the link is disabled   |
+| Name                 | Type                                                | Default | Required | Description                                       |
+| -------------------- | --------------------------------------------------- | ------- | -------- | ------------------------------------------------- |
+| `strings`            | `{ ariaLabel?: { previous?: TranslatableString } }` | —       | ✕        | Previous label; see [Translations](#translations) |
+| `accessibilityLabel` | `string`                                            | —       | ✕        | _Deprecated, use `strings.ariaLabel.previous`_    |
+| `href`               | `string`                                            | —       | ✕        | Link URL                                          |
+| `isDisabled`         | `bool`                                              | `false` | ✕        | If true, the link is disabled                     |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -219,11 +221,12 @@ and [escape hatches][readme-escape-hatches].
 
 This component wraps `PaginationLink` and renders a next chevron with a visually hidden label.
 
-| Name                 | Type     | Default | Required | Description                     |
-| -------------------- | -------- | ------- | -------- | ------------------------------- |
-| `accessibilityLabel` | `string` | `Next`  | ✕        | Accessibility label of the link |
-| `href`               | `string` | —       | ✕        | Link URL                        |
-| `isDisabled`         | `bool`   | `false` | ✕        | If true, the link is disabled   |
+| Name                 | Type                                            | Default | Required | Description                                   |
+| -------------------- | ----------------------------------------------- | ------- | -------- | --------------------------------------------- |
+| `strings`            | `{ ariaLabel?: { next?: TranslatableString } }` | —       | ✕        | Next label; see [Translations](#translations) |
+| `accessibilityLabel` | `string`                                        | —       | ✕        | _Deprecated, use `strings.ariaLabel.next`_    |
+| `href`               | `string`                                        | —       | ✕        | Link URL                                      |
+| `isDisabled`         | `bool`                                          | `false` | ✕        | If true, the link is disabled                 |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -231,19 +234,44 @@ and [escape hatches][readme-escape-hatches].
 
 ## UncontrolledPagination Props
 
-| Name                         | Type                           | Default      | Required | Description                                                         |
-| ---------------------------- | ------------------------------ | ------------ | -------- | ------------------------------------------------------------------- |
-| `accessibilityLabel`         | `string`                       | `Go to page` | ✕        | Accessibility label prefix for the page links                       |
-| `accessibilityLabelNext`     | `string`                       | `Next`       | ✕        | Accessibility label of the next link                                |
-| `accessibilityLabelPrevious` | `string`                       | `Previous`   | ✕        | Accessibility label of the previous link                            |
-| `defaultPage`                | `number`                       | `1`          | ✕        | The number of the page selected as current page at the first render |
-| `onChange`                   | `(pageNumber: number) => void` | -            | ✕        | On page change callback                                             |
-| `totalPages`                 | `number`                       | `0`          | ✓        | Total count of pages                                                |
-| `visiblePages`               | `number`                       | `5`          | ✕        | Number of displayed pages                                           |
+| Name                         | Type                                          | Default | Required | Description                                                         |
+| ---------------------------- | --------------------------------------------- | ------- | -------- | ------------------------------------------------------------------- |
+| `strings`                    | `{ ariaLabel?: { page?, next?, previous? } }` | —       | ✕        | Page, previous, and next labels; see [Translations](#translations)  |
+| `accessibilityLabel`         | `string`                                      | —       | ✕        | _Deprecated, use `strings.ariaLabel.page`_                          |
+| `accessibilityLabelNext`     | `string`                                      | —       | ✕        | _Deprecated, use `strings.ariaLabel.next`_                          |
+| `accessibilityLabelPrevious` | `string`                                      | —       | ✕        | _Deprecated, use `strings.ariaLabel.previous`_                      |
+| `defaultPage`                | `number`                                      | `1`     | ✕        | The number of the page selected as current page at the first render |
+| `onChange`                   | `(pageNumber: number) => void`                | -       | ✕        | On page change callback                                             |
+| `totalPages`                 | `number`                                      | `0`     | ✓        | Total count of pages                                                |
+| `visiblePages`               | `number`                                      | `5`     | ✕        | Number of displayed pages                                           |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
+`PaginationLink` uses `ariaLabel.page`, previous/next links use `ariaLabel.previous` / `ariaLabel.next`, and
+`UncontrolledPagination` accepts all three.
+
+| Key                  | Default key           | English default | Description      |
+| -------------------- | --------------------- | --------------- | ---------------- |
+| `ariaLabel.page`     | `pagination.goToPage` | `Go to page`    | Numbered page    |
+| `ariaLabel.previous` | `pagination.previous` | `Previous`      | Previous control |
+| `ariaLabel.next`     | `pagination.next`     | `Next`          | Next control     |
+
+### Deprecation Notice
+
+The `accessibilityLabel*` props are deprecated and will be removed in v6. Use the corresponding `strings.ariaLabel.*`
+keys.
+
+### Migration Guide
+
+```diff
+- <UncontrolledPagination accessibilityLabel="Page" accessibilityLabelNext="Following" totalPages={10} />
++ <UncontrolledPagination strings={{ ariaLabel: { page: 'Page', next: 'Following' } }} totalPages={10} />
+```
 
 For detailed information see [Pagination][pagination] component.
 
@@ -257,6 +285,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 [li-element]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li
 [pagination]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Pagination/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#deprecations
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

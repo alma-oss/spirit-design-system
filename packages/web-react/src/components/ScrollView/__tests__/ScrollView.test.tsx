@@ -220,4 +220,20 @@ describe('ScrollView', () => {
     expect(screen.getByRole('button', { name: 'Custom start label' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Custom end label' })).toBeInTheDocument();
   });
+
+  it('should prefer strings over deprecated ariaLabelControls', () => {
+    render(
+      <ScrollView
+        hasControls
+        direction="horizontal"
+        ariaLabelControls={{ start: 'Deprecated start', end: 'Deprecated end' }}
+        strings={{ ariaLabel: { start: 'Strings start', end: 'Strings end' } }}
+      >
+        <div style={{ width: '1000px' }}>Content</div>
+      </ScrollView>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Strings start' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Strings end' })).toBeInTheDocument();
+  });
 });

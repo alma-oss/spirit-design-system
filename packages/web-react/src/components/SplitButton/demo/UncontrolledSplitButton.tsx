@@ -6,17 +6,17 @@ import UncontrolledSplitButton from '../UncontrolledSplitButton';
 const UncontrolledSplitButtonDemo = () => (
   <UncontrolledSplitButton
     buttonIconName="check-plain"
-    buttonLabel="Button"
+    labelButton="Button"
     buttonOnClick={() => alert('Button clicked')}
     color="primary"
     dropdownPlacement="top-end"
     dropdownTriggerIconName="more"
-    dropdownTriggerLabel="More"
     id="uncontrolled-split-button"
     isButtonLabelHidden
     isDisabled={false}
     isDropdownTriggerLabelHidden
     size="large"
+    strings={{ label: { dropdown: { trigger: 'More' } } }}
   >
     <Item>
       <Label>Item 1</Label>

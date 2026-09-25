@@ -16,6 +16,7 @@ import {
   ToastBarMessage,
   Toggle,
 } from '../../../src/components';
+import CvExampleI18n from './CvExampleI18n';
 
 const LICENSE_GROUPS = [
   { id: 'a', label: 'Skupina A' },
@@ -49,7 +50,7 @@ export const CvEditorDrivingLicense = () => {
   };
 
   return (
-    <>
+    <CvExampleI18n>
       <Toast alignmentX="center" alignmentY="top">
         <ToastBar
           id="cv-driving-license-error-toast"
@@ -88,7 +89,6 @@ export const CvEditorDrivingLicense = () => {
       >
         <Stack spacing="space-1000">
           <Breadcrumbs
-            goBackTitle="Zpět"
             items={[{ title: 'Můj Jobs.cz', url: '#' }, { title: 'Životopis', url: '#' }, { title: 'Řidičský průkaz' }]}
           />
           <Heading
@@ -141,6 +141,6 @@ export const CvEditorDrivingLicense = () => {
           </ActionGroup>
         </Stack>
       </Section>
-    </>
+    </CvExampleI18n>
   );
 };

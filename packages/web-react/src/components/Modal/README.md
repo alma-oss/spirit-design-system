@@ -181,15 +181,35 @@ To render the `ModalHeader` component without the close button set the `hasClose
 
 ### API
 
-| Name             | Type        | Default | Required | Description                      |
-| ---------------- | ----------- | ------- | -------- | -------------------------------- |
-| `children`       | `ReactNode` | —       | ✕        | Children node                    |
-| `closeLabel`     | `string`    | `Close` | ✕        | Close button label               |
-| `hasCloseButton` | `bool`      | `true`  | ✕        | Whether close button is rendered |
+| Name             | Type                         | Default | Required | Description                                           |
+| ---------------- | ---------------------------- | ------- | -------- | ----------------------------------------------------- |
+| `children`       | `ReactNode`                  | —       | ✕        | Children node                                         |
+| `strings`        | `{ ariaLabel?: { close? } }` | —       | ✕        | Close button label; see [Translations](#translations) |
+| `closeLabel`     | `string`                     | —       | ✕        | _Deprecated, use `strings.ariaLabel.close`_           |
+| `hasCloseButton` | `bool`                       | `true`  | ✕        | Whether close button is rendered                      |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
+
+| Key               | Default key    | English default | Description        |
+| ----------------- | -------------- | --------------- | ------------------ |
+| `ariaLabel.close` | `common.close` | `Close`         | Modal close button |
+
+### Deprecation Notice
+
+`ModalHeader.closeLabel` is deprecated and will be removed in v6.
+
+### Migration Guide
+
+```diff
+- <ModalHeader closeLabel="Dismiss">Title</ModalHeader>
++ <ModalHeader strings={{ ariaLabel: { close: { key: 'modal.close' } } }}>Title</ModalHeader>
+```
 
 ## ModalBody
 
@@ -458,6 +478,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 [modal]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Modal
 [pxtorem-utility]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#pxtorem
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [scroll-view]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ScrollView/README.md

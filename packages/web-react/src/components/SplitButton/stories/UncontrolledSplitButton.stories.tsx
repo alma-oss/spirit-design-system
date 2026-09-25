@@ -41,7 +41,7 @@ const meta: Meta<typeof UncontrolledSplitButton> = {
         type: { summary: 'ButtonColor' },
       },
     },
-    buttonLabel: {
+    labelButton: {
       control: 'text',
       description: 'The label for the button.',
       table: {
@@ -55,9 +55,9 @@ const meta: Meta<typeof UncontrolledSplitButton> = {
         type: { summary: 'string' },
       },
     },
-    dropdownTriggerLabel: {
-      control: 'text',
-      description: 'The label for the dropdown button.',
+    strings: {
+      control: 'object',
+      description: 'Component string overrides.',
       table: {
         type: { summary: 'string' },
       },
@@ -114,13 +114,13 @@ const meta: Meta<typeof UncontrolledSplitButton> = {
   },
   args: {
     buttonIconName: undefined,
-    buttonLabel: 'Button',
+    labelButton: 'Button',
     buttonOnClick: () => {},
     children: <DropdownContent />,
     color: ComponentButtonColors.PRIMARY,
     dropdownPlacement: Placements.BOTTOM_END,
     dropdownTriggerIconName: 'chevron-down',
-    dropdownTriggerLabel: 'More',
+    strings: { label: { dropdown: { trigger: 'More' } } },
     id: 'uncontrolled-split-button',
     isButtonLabelHidden: false,
     isDisabled: false,

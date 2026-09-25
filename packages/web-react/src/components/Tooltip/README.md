@@ -32,7 +32,14 @@ export const Example = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <Tooltip id="tooltip-dismissible" isOpen={open} onToggle={setOpen} placement="right" isDismissible>
+    <Tooltip
+      id="tooltip-dismissible"
+      isOpen={open}
+      onToggle={setOpen}
+      placement="right"
+      isDismissible
+      strings={{ ariaLabel: { close: 'Dismiss tooltip' } }}
+    >
       <TooltipTrigger elementType={Button}>I have a tooltip 😎</TooltipTrigger>
       <TooltipPopover>Close me</TooltipPopover>
     </Tooltip>
@@ -54,6 +61,8 @@ export const Example = () => {
 | `flipFallbackPlacements`        | `string`                                                          | -                    | ✕        | This describes a list of [explicit placements][floating-ui-flip-fallback-placements] to try if the initial placement doesn’t fit on the axes in which overflow is checked. For example you can set `"top, right, bottom"`                                                                                  |
 | `id`                            | `string`                                                          | -                    | ✓        | Tooltip id                                                                                                                                                                                                                                                                                                 |
 | `isDismissible`                 | `bool`                                                            | false                | ✕        | Make tooltip dismissible                                                                                                                                                                                                                                                                                   |
+| `strings`                       | `{ ariaLabel?: { close? } }`                                      | —                    | ✕        | Close-button label; see [Translations](#translations)                                                                                                                                                                                                                                                      |
+| `closeLabel`                    | `string`                                                          | —                    | ✕        | _Deprecated, use `strings.ariaLabel.close`_                                                                                                                                                                                                                                                                |
 | `isFocusableOnHover`            | `bool`                                                            | false                | ✕        | Allows you to mouse over a tooltip without closing it. We suggest turning off the `click` trigger if you use this feature.                                                                                                                                                                                 |
 | `isOpen`                        | `bool`                                                            | -                    | ✓        | Open state                                                                                                                                                                                                                                                                                                 |
 | `onToggle`                      | `() => void`                                                      | -                    | ✓        | Function for toggle open state of dropdown                                                                                                                                                                                                                                                                 |
@@ -64,6 +73,14 @@ export const Example = () => {
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Used when `isDismissible` is set. Omitted keys use the built-in English default.
+
+| Key               | Default key    | English default | Description    |
+| ----------------- | -------------- | --------------- | -------------- |
+| `ariaLabel.close` | `common.close` | `Close`         | Dismiss button |
 
 ## TooltipTrigger
 
@@ -100,6 +117,17 @@ export const Example = () => {
 };
 ```
 
+### Deprecation Notice
+
+The `closeLabel` prop is deprecated and will be removed in v6.
+
+### Migration Guide
+
+```diff
+- <Tooltip closeLabel="Dismiss" />
++ <Tooltip strings={{ ariaLabel: { close: 'Dismiss' } }} />
+```
+
 ## API
 
 | Attribute     | Type          | Default  | Required | Description                      |
@@ -126,6 +154,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 [floating-ui-shift]: https://floating-ui.com/docs/shift
 [floating-ui-size]: https://floating-ui.com/docs/size
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [use-floating-strategy]: https://floating-ui.com/docs/usefloating#strategy

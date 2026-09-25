@@ -27,10 +27,16 @@ const items = [
 ];
 ```
 
-Simply pass the breadcrumbs array as a prop:
+Simply pass the breadcrumbs array as a prop. A localized Back item is rendered on small viewports by default.
 
 ```tsx
-<Breadcrumbs items={items} goBackTitle="Custom back link translation" />
+<Breadcrumbs items={items} />
+```
+
+Override the Back label or the landmark name with `strings`:
+
+```tsx
+<Breadcrumbs items={items} strings={{ label: { back: { key: 'navigation.back' } } }} />
 ```
 
 ### Custom Usage
@@ -51,16 +57,37 @@ Use custom content for the ordered list as component's children instead of passi
 
 ### API
 
-| Name          | Type                | Default | Required | Description                                                                                                                                                                                      |
-| ------------- | ------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `children`    | `ReactNode`         | —       | ✕        | Custom content to override items rendering from array                                                                                                                                            |
-| `elementType` | `ElementType`       | `nav`   | ✕        | Type of element used as wrapper                                                                                                                                                                  |
-| `goBackTitle` | `string`            | —       | ✕        | Title/translation for back link to previous page on mobile. It's essential to be set along with items. If items property is not passed, the back link is to be created within children property. |
-| `items`       | `BreadcrumbsItem[]` | —       | ✕        | Navigation menu items                                                                                                                                                                            |
+| Name          | Type                                | Default | Required | Description                                                |
+| ------------- | ----------------------------------- | ------- | -------- | ---------------------------------------------------------- |
+| `children`    | `ReactNode`                         | —       | ✕        | Custom content to override items rendering from array      |
+| `elementType` | `ElementType`                       | `nav`   | ✕        | Type of element used as wrapper                            |
+| `goBackTitle` | `string`                            | —       | ✕        | _Deprecated, use `strings.label.back`_                     |
+| `items`       | `BreadcrumbsItem[]`                 | —       | ✕        | Navigation menu items                                      |
+| `strings`     | `{ ariaLabel?, label?: { back? } }` | —       | ✕        | Optional copy overrides; see [Translations](#translations) |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
+
+| Key             | Default key             | English default | Description                            |
+| --------------- | ----------------------- | --------------- | -------------------------------------- |
+| `label.back`    | `breadcrumbs.back`      | `Go back`       | Visible go-back item (small viewports) |
+| `ariaLabel.nav` | `breadcrumbs.ariaLabel` | `Breadcrumb`    | Accessible name of the landmark        |
+
+### Deprecation Notice
+
+The `goBackTitle` prop is deprecated and will be removed in v6.
+
+### Migration Guide
+
+```diff
+- <Breadcrumbs goBackTitle="Back" />
++ <Breadcrumbs strings={{ label: { back: { key: 'navigation.back' } } }} />
+```
 
 ## BreadcrumbsItem
 
@@ -113,6 +140,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 
 [breadcrumbs]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Breadcrumbs/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [truncation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/TRUNCATING.md#breadcrumbs

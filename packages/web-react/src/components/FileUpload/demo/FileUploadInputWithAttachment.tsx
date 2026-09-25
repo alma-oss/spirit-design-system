@@ -12,19 +12,22 @@ const FileUploadInputWithAttachment = () => (
       id="file-uploader-with-list"
       helperText="Max file size is 10 MB"
       label="Upload files"
-      inputUploadText="Upload your file"
-      inputDragAndDropText="or drag and drop here"
       name="attachment-with-list"
       isMultiple
+      strings={{
+        label: {
+          upload: 'Upload your file',
+          dragAndDrop: 'or drag and drop here',
+        },
+      }}
     />
     <Stack aria-label="Uploaded files" elementType="ul" spacing="space-700">
       <File
         label="Document.pdf"
         helperText="2.5 MB"
-        editText="Edit file name Document.pdf"
-        removeText="Remove file Document.pdf from list"
         onDismiss={visualOnlyNoopOnDismiss}
         onChange={() => {}}
+        strings={{ ariaLabel: { edit: 'Edit file name Document.pdf', remove: 'Remove file Document.pdf from list' } }}
       />
       <File
         label="vacation-photo.jpg"
@@ -34,25 +37,25 @@ const FileUploadInputWithAttachment = () => (
             <span>Uploading your file…</span>
           </>
         }
-        removeText="Remove file vacation-photo.jpg from list"
         onDismiss={visualOnlyNoopOnDismiss}
         previewSlot={<FileImagePreview imagePreview="https://picsum.photos/seed/upload1/48/48" label="Image preview" />}
+        strings={{ ariaLabel: { remove: 'Remove file vacation-photo.jpg from list' } }}
       />
       <File
         label="report-2024.xlsx"
         validationState="success"
         hasValidationIcon
         validationText="File uploaded successfully"
-        removeText="Remove file report-2024.xlsx from list"
         onDismiss={visualOnlyNoopOnDismiss}
+        strings={{ ariaLabel: { remove: 'Remove file report-2024.xlsx from list' } }}
       />
       <File
         label="large-file.zip"
         validationState="danger"
         hasValidationIcon
         validationText="File upload error – please retry"
-        removeText="Remove file large-file.zip from list"
         onDismiss={visualOnlyNoopOnDismiss}
+        strings={{ ariaLabel: { remove: 'Remove file large-file.zip from list' } }}
       />
     </Stack>
   </Stack>

@@ -19,9 +19,6 @@ const meta: Meta<typeof UNSTABLE_Picker> = {
     controls: { exclude: ['children', 'hasValidationIcon'] },
   },
   argTypes: {
-    addButtonLabel: { control: 'text' },
-    closeButtonLabel: { control: 'text' },
-    emptySelectionLabel: { control: 'text' },
     hasValidationIcon: {
       control: 'boolean',
       table: { defaultValue: { summary: 'false' } },
@@ -45,9 +42,6 @@ const meta: Meta<typeof UNSTABLE_Picker> = {
       table: { defaultValue: { summary: 'false' } },
     },
     label: { control: 'text' },
-    removeAllLabel: { control: 'text' },
-    removeItemLabel: { control: 'text' },
-    selectionAriaLabel: { control: 'text' },
     selectionMode: {
       control: 'select',
       options: ['multiple', 'single'],
@@ -58,7 +52,6 @@ const meta: Meta<typeof UNSTABLE_Picker> = {
       options: [...Object.values(Sizes), undefined],
       table: { defaultValue: { summary: Sizes.MEDIUM } },
     },
-    tagDescriptionText: { control: 'text' },
     tagProps: { control: 'object' },
     validationState: {
       control: 'select',
@@ -75,11 +68,9 @@ const meta: Meta<typeof UNSTABLE_Picker> = {
       options: [...Object.values(FillVariants), undefined],
       table: { defaultValue: { summary: FillVariants.FILL } },
     },
+    strings: { control: 'object' },
   },
   args: {
-    addButtonLabel: 'Add',
-    closeButtonLabel: 'Close',
-    emptySelectionLabel: 'Languages',
     hasValidationIcon: false,
     helperText: undefined,
     id: PLAYGROUND_PICKER_ID,
@@ -88,12 +79,8 @@ const meta: Meta<typeof UNSTABLE_Picker> = {
     isLabelHidden: false,
     isRequired: false,
     label: 'Languages',
-    removeAllLabel: 'Remove all',
-    removeItemLabel: 'Remove {itemLabel}',
-    selectionAriaLabel: 'Selected {label}',
     selectionMode: 'multiple',
     size: Sizes.MEDIUM,
-    tagDescriptionText: 'Press Delete or Backspace to remove',
     validationState: undefined,
     validationText: 'Validation message',
     variant: FillVariants.FILL,

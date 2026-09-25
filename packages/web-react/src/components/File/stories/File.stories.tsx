@@ -30,9 +30,9 @@ const meta = {
     },
   },
   argTypes: {
-    editText: {
-      control: 'text',
-      table: { defaultValue: { summary: 'Edit' } },
+    strings: {
+      control: 'object',
+      table: { defaultValue: { summary: '—' } },
     },
     hasValidationIcon: {
       control: 'boolean',
@@ -54,10 +54,6 @@ const meta = {
     },
     label: {
       control: 'text',
-    },
-    removeText: {
-      control: 'text',
-      table: { defaultValue: { summary: 'Remove' } },
     },
     validationState: {
       control: 'select',
@@ -85,7 +81,7 @@ const meta = {
     },
   },
   args: {
-    editText: 'Edit',
+    strings: { ariaLabel: { edit: 'Edit', remove: 'Remove' } },
     hasValidationIcon: false,
     helperText: '2.5 MB',
     iconName: 'file',
@@ -93,7 +89,6 @@ const meta = {
     isDisabled: false,
     label: 'Document.pdf',
     onDismiss: fn(),
-    removeText: 'Remove',
     validationState: undefined,
     validationText: 'Validation message',
     showEditButton: false,

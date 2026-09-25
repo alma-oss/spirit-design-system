@@ -18,7 +18,7 @@ const PickerSizes = () => (
       <UNSTABLE_UncontrolledPicker
         key={size}
         id={`demo-picker-size-${size}`}
-        emptySelectionLabel="Languages"
+        strings={{ label: { emptySelection: 'Languages' } }}
         label={label}
         size={size}
       >

@@ -18,8 +18,8 @@ const meta: Meta<typeof ToastBar> = {
     children: {
       control: 'text',
     },
-    closeLabel: {
-      control: 'text',
+    strings: {
+      control: 'object',
       table: {
         defaultValue: { summary: 'Close' },
       },
@@ -64,7 +64,7 @@ const meta: Meta<typeof ToastBar> = {
         <ToastBarLink href="#">Action</ToastBarLink>
       </>
     ),
-    closeLabel: 'Close',
+    strings: { ariaLabel: { close: 'Close' } },
     color: ToastColorsExtended.NEUTRAL,
     hasIcon: false,
     iconName: '',

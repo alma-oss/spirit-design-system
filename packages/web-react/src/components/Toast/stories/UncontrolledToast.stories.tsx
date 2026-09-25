@@ -33,8 +33,8 @@ const meta: Meta<UncontrolledToastPlaygroundProps> = {
         defaultValue: { summary: 'bottom' },
       },
     },
-    closeLabel: {
-      control: 'text',
+    strings: {
+      control: 'object',
       table: {
         defaultValue: { summary: 'Close' },
       },
@@ -87,7 +87,7 @@ const meta: Meta<UncontrolledToastPlaygroundProps> = {
     },
     alignmentX: 'center',
     alignmentY: 'bottom',
-    closeLabel: 'Close',
+    strings: { ariaLabel: { close: 'Close' } },
     hasIcon: false,
     isDismissible: true,
     color: ToastColorsExtended.NEUTRAL,

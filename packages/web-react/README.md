@@ -206,7 +206,8 @@ You can pass either:
 - partial nested **`translations`** (same nested shape as library defaults), or
 - a locale catalog with **`locale`** + locale-keyed translations (`translations[locale]`).
 
-Missing keys always fall back to built-in defaults.
+Missing keys always fall back to built-in defaults. A locale catalog with no entry for the active
+`locale` also uses those defaults — the catalog is not merged as translation namespaces.
 
 ```tsx
 import { I18nProvider } from '@alma-oss/spirit-web-react';
@@ -255,6 +256,26 @@ The `t` function accepts an optional second argument **`params`**: an object who
 ```tsx
 t('textArea.counter.charactersEntered', { count: 42 });
 ```
+
+### Component Strings
+
+Required component copy is exposed as a top-level prop, while optional copy with a built-in default is grouped in
+the `strings` prop. Both accept a literal string or a translation reference with optional parameters.
+
+```tsx
+<UncontrolledSplitButton labelButton="Save" />
+<UncontrolledSplitButton labelButton={{ key: 'actions.save' }} />
+<ModalHeader strings={{ ariaLabel: { close: 'Dismiss dialog' } }} />
+<ModalHeader strings={{ ariaLabel: { close: { key: 'common.close' } } }} />
+<ModalHeader strings={{ ariaLabel: { close: { key: 'modal.close', params: { name: 'Settings' } } } }} />
+```
+
+Translation references can use any application or Phrase key provided through `I18nProvider`; they are not limited
+to the built-in namespaces. Resolution precedence is instance `strings`, deprecated alias during the v5 migration,
+provider translation, and finally the built-in English default.
+
+Use `strings.ariaLabel` / `strings.ariaLabel.*` for screen-reader-only text and `strings.label.*` for visible text.
+Each component README lists the keys, dictionary defaults, and English copy in a **Translations** section.
 
 ## Additional Attributes
 

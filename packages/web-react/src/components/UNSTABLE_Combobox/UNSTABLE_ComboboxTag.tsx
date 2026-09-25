@@ -2,7 +2,7 @@
 
 import React, { useMemo } from 'react';
 import { useI18n } from '../../hooks';
-import { replaceTranslationParams } from '../../translations';
+import { resolveComponentString } from '../../translations';
 import { CloseButton } from '../CloseButton';
 import { Tag } from '../Tag';
 import { useComboboxContext } from './ComboboxContext';
@@ -21,11 +21,9 @@ const UNSTABLE_ComboboxTag = ({
   const { t } = useI18n();
   const { tagDescriptionId } = useComboboxContext();
 
-  const removeButtonAriaLabel =
-    removeLabel ??
-    replaceTranslationParams(t('combobox.removeItemLabel'), {
-      itemLabel: getNodeText(label),
-    });
+  const removeButtonAriaLabel = resolveComponentString(removeLabel ?? { key: 'combobox.removeItemLabel' }, t, {
+    itemLabel: getNodeText(label),
+  });
 
   const tagKeyboardEventProps = useMemo(() => {
     if (isDisabled || !tagKeyboardProps) {
@@ -53,7 +51,7 @@ const UNSTABLE_ComboboxTag = ({
       <div role="gridcell" aria-colindex={1} className="d-contents">
         {children ?? <span>{label}</span>}
         <CloseButton
-          label={removeButtonAriaLabel}
+          strings={{ ariaLabel: { close: removeButtonAriaLabel } }}
           isDisabled={isDisabled}
           onClick={onRemove}
           {...(tagKeyboardProps && { tabIndex: tagKeyboardProps.secondaryControlTabIndex })}

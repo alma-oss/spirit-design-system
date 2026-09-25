@@ -28,6 +28,7 @@ const _TextArea = (props: SpiritTextAreaProps, ref: ForwardedRef<HTMLTextAreaEle
     helperText,
     isDisabled,
     id,
+    strings,
     ...restProps
   } = props;
 
@@ -48,6 +49,7 @@ const _TextArea = (props: SpiritTextAreaProps, ref: ForwardedRef<HTMLTextAreaEle
     counterThreshold,
     hasCounter,
     onChange,
+    strings,
   });
 
   const counterOn = isCounterActive(hasCounter, counterThreshold);

@@ -3,7 +3,8 @@
 import classNames from 'classnames';
 import React, { type DragEvent, type DragEventHandler, useEffect, useState } from 'react';
 import { ContextPropsProvider } from '../../context';
-import { useAriaDescribedBy, useStyleProps } from '../../hooks';
+import { useAriaDescribedBy, useDeprecationMessage, useI18n, useStyleProps } from '../../hooks';
+import { resolveComponentStrings } from '../../translations';
 import { Button } from '../Button';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
@@ -15,10 +16,11 @@ import { useFileUploadStyleProps } from './useFileUploadStyleProps';
 
 const FileUpload = (props: FileUploadProps) => {
   const [isDragAndDropDetected, setIsDragAndDropDetected] = useState(false);
+  const { t } = useI18n();
   const {
     'aria-describedby': ariaDescribedBy = '',
     accept,
-    buttonText = 'Browse',
+    buttonText,
     children,
     dropZoneRef,
     hasValidationIcon,
@@ -39,10 +41,23 @@ const FileUpload = (props: FileUploadProps) => {
     name,
     onFilesSelected,
     rootId,
+    strings,
     validationState,
     validationText,
     ...restProps
   } = props;
+  const {
+    button: resolvedButtonText,
+    upload: resolvedInputUploadText,
+    dragAndDrop: resolvedInputDragAndDropText,
+  } = resolveComponentStrings(
+    {
+      button: { value: strings?.label?.button ?? buttonText, key: 'fileUploader.browse' },
+      upload: { value: strings?.label?.upload ?? inputUploadText, key: 'fileUploader.inputUpload' },
+      dragAndDrop: { value: strings?.label?.dragAndDrop ?? inputDragAndDropText, key: 'fileUploader.inputDragAndDrop' },
+    },
+    t,
+  );
 
   const hasInput = name !== undefined;
   const isUploadInteractionDisabled = isDisabled || isUploadDisabled;
@@ -71,6 +86,14 @@ const FileUpload = (props: FileUploadProps) => {
   const validationTextRole = useValidationTextRole({
     validationState,
     validationText,
+  });
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: buttonText != null || inputUploadText != null || inputDragAndDropText != null,
+    componentName: 'FileUpload',
+    customText:
+      'The "buttonText", "inputUploadText", and "inputDragAndDropText" properties are deprecated and will be removed in the next major version. Use the corresponding keys in "strings" instead.',
   });
   const inputId = `${id}-input`;
   const rootDomId = rootId != null && rootId !== '' ? rootId : id;
@@ -142,10 +165,13 @@ const FileUpload = (props: FileUploadProps) => {
               {!isCompact && <Icon name={iconName} boxSize={28} aria-hidden="true" />}
               <div className={classProps.input.dropZone.content}>
                 <label htmlFor={inputId} className={classProps.input.dropZone.label}>
-                  {inputUploadText && inputUploadText}
-                  {/* Non-breaking space between upload label and drag-and-drop suffix; only when both are set to avoid leading/trailing whitespace. */}
-                  {inputUploadText && inputDragAndDropText && '\u00A0'}
-                  {inputDragAndDropText && <span className={classProps.input.dropLabel}>{inputDragAndDropText}</span>}
+                  {resolvedInputUploadText}
+                  {isDragAndDropSupported && (
+                    <>
+                      {'\u00A0'}
+                      <span className={classProps.input.dropLabel}>{resolvedInputDragAndDropText}</span>
+                    </>
+                  )}
                 </label>
                 <HelperText
                   id={`${inputId}-helper-text`}
@@ -155,7 +181,7 @@ const FileUpload = (props: FileUploadProps) => {
                 />
               </div>
               <Button aria-hidden="true" isDisabled={isUploadInteractionDisabled} elementType="div" size="small">
-                {buttonText}
+                {resolvedButtonText}
               </Button>
             </div>
             {validationState && (

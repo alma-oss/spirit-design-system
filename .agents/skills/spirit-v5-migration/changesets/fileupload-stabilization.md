@@ -17,10 +17,7 @@ npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/unstable-fileupload-comp
 npx @alma-oss/spirit-codemods -p <path> -t v5/web-react/unstable-file-component-name
 ```
 
-Handles rename of `UNSTABLE_*` to stable names and prop renames:
-
-- `linkText` → `inputUploadText`
-- `labelText` → `inputDragAndDropText`
+Handles rename of `UNSTABLE_*` to stable names.
 
 ## Safe Automated Edits
 

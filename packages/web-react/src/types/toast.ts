@@ -6,7 +6,9 @@ import type {
   AlignmentYDictionaryType,
   ChildrenProps,
   EmotionColorNamesType,
+  StringsProps,
   StyleProps,
+  TranslatableString,
 } from './shared';
 
 export type ToastColorsExtendedNamesType = (typeof ToastColorsExtended)[keyof typeof ToastColorsExtended];
@@ -21,7 +23,14 @@ export interface SpiritToastProps extends BaseToastProps {
   isCollapsible?: boolean;
 }
 
-export interface BaseToastBarProps extends ChildrenProps, StyleProps {
+export type ToastStrings = {
+  ariaLabel?: {
+    close?: TranslatableString;
+  };
+};
+
+export interface BaseToastBarProps extends ChildrenProps, StyleProps, StringsProps<ToastStrings> {
+  /** @deprecated Use `strings.ariaLabel.close` instead. */
   closeLabel?: string;
   color?: ToastColorType;
   hasIcon?: boolean;
@@ -50,9 +59,10 @@ export interface ToastLinkProps<E extends ElementType = 'a'> extends ToastBarHan
   target?: LinkTarget;
 }
 
-export interface UncontrolledToastProps extends ChildrenProps, StyleProps {
+export interface UncontrolledToastProps extends ChildrenProps, StyleProps, StringsProps<ToastStrings> {
   alignmentX?: 'left' | 'center' | 'right';
   alignmentY?: 'top' | 'bottom';
+  /** @deprecated Use `strings.ariaLabel.close` instead. */
   closeLabel?: string;
   isCollapsible?: boolean;
 }

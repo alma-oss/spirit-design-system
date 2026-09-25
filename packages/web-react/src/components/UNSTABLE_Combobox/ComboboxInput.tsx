@@ -2,8 +2,7 @@
 
 import React, { type KeyboardEvent, type MouseEvent, type ReactNode, type RefObject } from 'react';
 import type { SelectionGridRowProps } from '../../hooks';
-import { replaceTranslationParams } from '../../translations';
-import type { SizesDictionaryType, StyleProps } from '../../types';
+import type { SizesDictionaryType, StyleProps, TranslatableString } from '../../types';
 import { CloseButton } from '../CloseButton';
 import { InputAddon } from '../InputAddon';
 import { InputContainer } from '../InputContainer';
@@ -41,7 +40,7 @@ export interface ComboboxInputProps {
   removeAll: () => void;
   removeAllLabel: string;
   removeItem: (key: string) => void;
-  removeItemLabel?: string;
+  removeItemLabel?: TranslatableString;
   removeTagAtIndex: (index: number) => void;
   renderTags?: (options: UnstableComboboxRenderTagsOptions) => ReactNode;
   selectedItems: ComboboxSelectedItem[];
@@ -126,7 +125,7 @@ const ComboboxInput = (props: ComboboxInputProps) => {
         onRemove={() => removeTagAtIndex(index)}
         {...(removeItemLabel
           ? {
-              removeLabel: replaceTranslationParams(removeItemLabel, { itemLabel: item.label }),
+              removeLabel: removeItemLabel,
             }
           : {})}
       />
@@ -141,7 +140,7 @@ const ComboboxInput = (props: ComboboxInputProps) => {
           role={selectedItems.length ? 'grid' : 'group'}
           id={selectionId}
           className="d-contents"
-          aria-label={replaceTranslationParams(selectionAriaLabel, { label })}
+          aria-label={selectionAriaLabel}
           aria-live="off"
           aria-atomic={false}
           aria-relevant="additions"
@@ -172,7 +171,7 @@ const ComboboxInput = (props: ComboboxInputProps) => {
           onKeyDown={onInputKeyDown}
         />
         <VisuallyHidden id={addMoreHelperId} {...(!showAddMore ? { hidden: true } : {})}>
-          {replaceTranslationParams(addMoreDescriptionText, { label })}
+          {addMoreDescriptionText}
         </VisuallyHidden>
       </UNSTABLE_ComboboxSelection>
       {hasClearButton && (
@@ -181,7 +180,7 @@ const ComboboxInput = (props: ComboboxInputProps) => {
           {...(selectedKeysCount === 0 ? { hidden: true, UNSAFE_className: 'd-none' } : {})}
         >
           <CloseButton
-            label={removeAllLabel}
+            strings={{ ariaLabel: { close: removeAllLabel } }}
             onClick={(event: MouseEvent<HTMLButtonElement>) => {
               event.preventDefault();
               event.stopPropagation();

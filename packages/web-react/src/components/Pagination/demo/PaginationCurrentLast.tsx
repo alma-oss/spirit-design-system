@@ -10,19 +10,50 @@ const PaginationCurrentLast = () => (
       <PaginationLinkPrevious href="#" />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" accessibilityLabel="Go to Page 109" pageNumber={109} />
+      <PaginationLink
+        href="#"
+        pageNumber={109}
+        strings={{
+          ariaLabel: { page: 'Go to Page 109' },
+        }}
+      />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" accessibilityLabel="Go to Page 110" pageNumber={110} />
+      <PaginationLink
+        href="#"
+        pageNumber={110}
+        strings={{
+          ariaLabel: { page: 'Go to Page 110' },
+        }}
+      />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" accessibilityLabel="Go to Page 111" pageNumber={111} />
+      <PaginationLink
+        href="#"
+        pageNumber={111}
+        strings={{
+          ariaLabel: { page: 'Go to Page 111' },
+        }}
+      />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" accessibilityLabel="Go to Page 112" pageNumber={112} />
+      <PaginationLink
+        href="#"
+        pageNumber={112}
+        strings={{
+          ariaLabel: { page: 'Go to Page 112' },
+        }}
+      />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" isCurrent accessibilityLabel="Current Page, Page 113" pageNumber={113} />
+      <PaginationLink
+        href="#"
+        isCurrent
+        pageNumber={113}
+        strings={{
+          ariaLabel: { page: 'Current Page, Page 113' },
+        }}
+      />
     </PaginationItem>
   </Pagination>
 );

@@ -11,13 +11,33 @@ const PaginationDisabled = () => (
       <PaginationLinkPrevious href="#" isDisabled />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" isDisabled accessibilityLabel="Go to Page 11" pageNumber={11} />
+      <PaginationLink
+        href="#"
+        isDisabled
+        pageNumber={11}
+        strings={{
+          ariaLabel: { page: 'Go to Page 11' },
+        }}
+      />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" isCurrent accessibilityLabel="Current Page, Page 12" pageNumber={12} />
+      <PaginationLink
+        href="#"
+        isCurrent
+        pageNumber={12}
+        strings={{
+          ariaLabel: { page: 'Current Page, Page 12' },
+        }}
+      />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#" accessibilityLabel="Go to Page 13" pageNumber={13} />
+      <PaginationLink
+        href="#"
+        pageNumber={13}
+        strings={{
+          ariaLabel: { page: 'Go to Page 13' },
+        }}
+      />
     </PaginationItem>
     <PaginationItem>
       <PaginationLinkNext href="#" isDisabled />

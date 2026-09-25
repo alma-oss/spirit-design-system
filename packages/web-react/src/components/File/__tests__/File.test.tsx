@@ -140,6 +140,21 @@ describe('File', () => {
     expect(screen.getByRole('button', { name: 'Remove file' })).toBeInTheDocument();
   });
 
+  it('should resolve strings overrides and prefer them over deprecated aliases', () => {
+    renderInList(
+      <File
+        {...defaultProps}
+        editText="Deprecated edit"
+        removeText="Deprecated remove"
+        strings={{ ariaLabel: { edit: { key: 'attachment.edit' }, remove: 'Delete file' } }}
+        onChange={() => {}}
+      />,
+    );
+
+    expect(screen.getByRole('button', { name: 'Edit' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Delete file' })).toBeInTheDocument();
+  });
+
   it('should call onChange when edit button is clicked', () => {
     const onChange = jest.fn();
 

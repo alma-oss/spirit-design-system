@@ -10,20 +10,43 @@ import type {
   SpiritDivElementProps,
   SpiritFieldGroupProps,
   SpiritTagProps,
+  StringsProps,
   StyleProps,
+  TranslatableString,
   Validation,
   ValidationTextProp,
 } from '../../types';
 
 export type UnstablePickerSelectionMode = SelectionMode;
 
+export type UnstablePickerStrings = {
+  ariaLabel?: {
+    add?: TranslatableString;
+    close?: TranslatableString;
+    removeAll?: TranslatableString;
+    removeItem?: TranslatableString;
+    selection?: TranslatableString;
+    tagDescription?: TranslatableString;
+  };
+  label?: {
+    emptySelection?: TranslatableString;
+  };
+};
+
 export interface UnstablePickerTranslations {
+  /** @deprecated Use `strings.ariaLabel.add` instead. */
   addButtonLabel?: string;
+  /** @deprecated Use `strings.ariaLabel.close` instead. */
   closeButtonLabel?: string;
+  /** @deprecated Use `strings.label.emptySelection` instead. */
   emptySelectionLabel?: string;
+  /** @deprecated Use `strings.ariaLabel.removeAll` instead. */
   removeAllLabel?: string;
+  /** @deprecated Use `strings.ariaLabel.removeItem` instead. */
   removeItemLabel?: string;
+  /** @deprecated Use `strings.ariaLabel.selection` instead. */
   selectionAriaLabel?: string;
+  /** @deprecated Use `strings.ariaLabel.tagDescription` instead. */
   tagDescriptionText?: string;
 }
 
@@ -43,7 +66,8 @@ export interface UnstablePickerBaseProps<S = void>
     HelperTextProps,
     Validation,
     ValidationTextProp,
-    UnstablePickerTranslations {
+    UnstablePickerTranslations,
+    StringsProps<UnstablePickerStrings> {
   children: ReactNode;
   id: string;
   isAggregated?: boolean;
@@ -89,7 +113,7 @@ export interface UnstablePickerTagProps extends Omit<
   isDisabled?: boolean;
   label: ReactNode;
   onRemove: () => void;
-  removeLabel?: string;
+  removeLabel?: TranslatableString;
 }
 
 export interface UnstablePickerGroupProps extends Omit<SpiritFieldGroupProps, 'id' | 'isLabelHidden'> {
