@@ -8,6 +8,12 @@
       "outputs": ["{projectRoot}/dist"],
       "cache": true,
       "dependsOn": ["^build"]
+    },
+    "generate": {
+      "outputs": ["{projectRoot}/.icons-tmp"],
+      "inputs": ["{projectRoot}/src/svg/**/*", "{projectRoot}/scripts/**/*", "^production"],
+      "cache": true,
+      "dependsOn": ["@alma-oss/spirit-design-tokens:build"]
     }
   }
 }
