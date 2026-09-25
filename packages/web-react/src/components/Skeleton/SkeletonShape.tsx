@@ -3,8 +3,8 @@
 import React, { type ElementType, type ReactElement } from 'react';
 import { BorderRadii } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import { type SpiritSkeletonShapeProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
+import { type SpiritSkeletonShapeProps } from './types';
 import { useSkeletonShapeStyleProps } from './useSkeletonShapeStyleProps';
 
 const defaultProps: Partial<SpiritSkeletonShapeProps> = {
@@ -17,12 +17,12 @@ const SkeletonShape = <E extends ElementType = 'div', C = void>(
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;
-  const { classProps, skeletonShapeStyleProps, props: modifiedProps } = useSkeletonShapeStyleProps(restProps);
+  const { classProps, styleProps: skeletonStyleProps, props: modifiedProps } = useSkeletonShapeStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, {
     classProps,
     styleProps,
-    skeletonShapeStyleProps,
+    skeletonStyleProps,
     otherProps,
   });
 

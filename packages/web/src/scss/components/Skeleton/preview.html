@@ -2,36 +2,8 @@
 
 <section class="py-900 py-tablet-1000">
   <div class="Container">
-    <h2 class="docs-Heading">SkeletonText</h2>
-    <div class="docs-Stack docs-Stack--stretch">
-      <div class="Grid Grid--cols-1 Grid--tablet--cols-2 Grid--desktop--cols-3" style="--grid-spacing-y: var(--spirit-space-1100);">
-
-        {{#each @root.sizes as |size|}}
-        <section>
-          <h2 class="docs-Heading">Size {{size}}</h2>
-          <div class="docs-Stack docs-Stack--stretch">
-            <div class="Skeleton Skeleton--text Skeleton--{{size}}">
-              <div class="Skeleton__item" aria-hidden="true"></div>
-              <div class="Skeleton__item" aria-hidden="true"></div>
-              <div class="Skeleton__item" aria-hidden="true"></div>
-            </div>
-            <div class="Skeleton Skeleton--text Skeleton--{{size}}">
-              <div class="Skeleton__item" aria-hidden="true"></div>
-              <div class="Skeleton__item" aria-hidden="true"></div>
-            </div>
-          </div>
-        </section>
-        {{/each}}
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-900 py-tablet-1000">
-  <div class="Container">
     <h2 class="docs-Heading">SkeletonHeading</h2>
-    <div class="docs-Stack docs-Stack--stretch">
+    <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-1100);">
       <div class="Grid Grid--cols-1 Grid--tablet--cols-2 Grid--desktop--cols-3" style="--grid-spacing-y: var(--spirit-space-1100);">
 
         {{#each @root.sizes as |size|}}
@@ -48,6 +20,80 @@
         {{/each}}
 
       </div>
+      <div class="Grid Grid--cols-1 Grid--tablet--cols-2 Grid--desktop--cols-3" style="--grid-spacing-y: var(--spirit-space-1100);">
+
+        <section>
+          <h2 class="docs-Heading">Fixed width [rem]</h2>
+          <div class="docs-Stack docs-Stack--stretch">
+            <div class="Skeleton Skeleton--heading Skeleton--medium" style="--spirit-skeleton-width: 15rem">
+              <div class="Skeleton__item" aria-hidden="true"></div>
+              <div class="Skeleton__item" aria-hidden="true"></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="docs-Heading">Fluid width [%]</h2>
+          <div class="docs-Stack docs-Stack--stretch">
+            <div class="Skeleton Skeleton--heading Skeleton--medium" style="--spirit-skeleton-width: 50%">
+              <div class="Skeleton__item" aria-hidden="true"></div>
+              <div class="Skeleton__item" aria-hidden="true"></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+    <h2 class="docs-Heading">SkeletonText</h2>
+    <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-1100);">
+      <div class="Grid Grid--cols-1 Grid--tablet--cols-2 Grid--desktop--cols-3" style="--grid-spacing-y: var(--spirit-space-1100);">
+
+        {{#each @root.sizes as |size|}}
+        <section>
+          <h2 class="docs-Heading">Size {{size}}</h2>
+          <div class="docs-Stack docs-Stack--stretch">
+            <div class="Skeleton Skeleton--text Skeleton--{{size}}">
+              <div class="Skeleton__item" aria-hidden="true"></div>
+              <div class="Skeleton__item" aria-hidden="true"></div>
+              <div class="Skeleton__item" aria-hidden="true"></div>
+            </div>
+            <div class="Skeleton Skeleton--text Skeleton--{{size}}">
+              <div class="Skeleton__item" aria-hidden="true"></div>
+              <div class="Skeleton__item" aria-hidden="true"></div>
+            </div>
+          </div>
+        </section>
+        {{/each}}
+
+      </div>
+      <div class="Grid Grid--cols-1 Grid--tablet--cols-2 Grid--desktop--cols-3" style="--grid-spacing-y: var(--spirit-space-1100);">
+
+        <section>
+          <h2 class="docs-Heading">Fixed width [rem]</h2>
+          <div class="docs-Stack docs-Stack--stretch">
+            <div class="Skeleton Skeleton--text Skeleton--medium" style="--spirit-skeleton-width: 15rem">
+              <div class="Skeleton__item" aria-hidden="true"></div>
+              <div class="Skeleton__item" aria-hidden="true"></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="docs-Heading">Fluid width [%]</h2>
+          <div class="docs-Stack docs-Stack--stretch">
+            <div class="Skeleton Skeleton--text Skeleton--medium" style="--spirit-skeleton-width: 60%">
+              <div class="Skeleton__item" aria-hidden="true"></div>
+              <div class="Skeleton__item" aria-hidden="true"></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
     </div>
   </div>
 </section>
@@ -55,7 +101,7 @@
 <section class="py-900 py-tablet-1000">
   <div class="Container">
     <h2 class="docs-Heading">SkeletonShape</h2>
-    <div class="docs-Stack docs-Stack--stretch">
+    <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-1100);">
       <div class="Grid Grid--cols-1 Grid--tablet--cols-2 Grid--desktop--cols-3" style="--grid-spacing-y: var(--spirit-space-1100);">
 
         <section>
@@ -64,8 +110,8 @@
             <div
               class="Skeleton Skeleton--shape"
               style="
-              --spirit-skeleton-shape-width: 6.25rem;
-              --spirit-skeleton-shape-height: 6.25rem
+                --spirit-skeleton-shape-width: 6.25rem;
+                --spirit-skeleton-shape-height: 6.25rem
               "
             >
             </div>
@@ -78,9 +124,9 @@
             <div
               class="Skeleton Skeleton--shape"
               style="
-              --spirit-skeleton-shape-width: 6.25rem;
-              --spirit-skeleton-shape-height: 6.25rem;
-              --spirit-skeleton-shape-radius: var(--spirit-radius-full)
+                --spirit-skeleton-shape-width: 6.25rem;
+                --spirit-skeleton-shape-height: 6.25rem;
+                --spirit-skeleton-shape-radius: var(--spirit-radius-full)
               "
             >
             </div>
@@ -93,9 +139,9 @@
             <div
               class="Skeleton Skeleton--shape"
               style="
-              --spirit-skeleton-shape-width: 18.75rem;
-              --spirit-skeleton-shape-height: 6.25rem;
-              --spirit-skeleton-shape-radius: var(--spirit-radius-400)
+                --spirit-skeleton-shape-width: 18.75rem;
+                --spirit-skeleton-shape-height: 6.25rem;
+                --spirit-skeleton-shape-radius: var(--spirit-radius-400)
               "
             >
             </div>
@@ -106,12 +152,44 @@
           <h2 class="docs-Heading">Shape Rectangular responsive radius</h2>
           <div class="docs-Stack docs-Stack--stretch">
             <div
-              class="Skeleton Skeleton--shape" style="
-              --spirit-skeleton-shape-width: 18.75rem;
-              --spirit-skeleton-shape-height: 6.25rem;
-              --spirit-skeleton-shape-radius: var(--spirit-radius-200);
-              --spirit-skeleton-shape-radius-tablet: var(--spirit-radius-400);
-              --spirit-skeleton-shape-radius-desktop: var(--spirit-radius-500);
+              class="Skeleton Skeleton--shape"
+              style="
+                --spirit-skeleton-shape-width: 18.75rem;
+                --spirit-skeleton-shape-height: 6.25rem;
+                --spirit-skeleton-shape-radius: var(--spirit-radius-200);
+                --spirit-skeleton-shape-radius-tablet: var(--spirit-radius-400);
+                --spirit-skeleton-shape-radius-desktop: var(--spirit-radius-500);
+              "
+            >
+            </div>
+          </div>
+        </section>
+
+      </div>
+      <div class="Grid Grid--cols-1 Grid--tablet--cols-2 Grid--desktop--cols-3" style="--grid-spacing-y: var(--spirit-space-1100);">
+
+        <section>
+          <h2 class="docs-Heading">Fixed size [rem]</h2>
+          <div class="docs-Stack docs-Stack--stretch">
+            <div
+              class="Skeleton Skeleton--shape"
+              style="
+                --spirit-skeleton-shape-width: 15rem;
+                --spirit-skeleton-shape-height: 6.25rem
+              "
+            >
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="docs-Heading">Fluid width [%]</h2>
+          <div class="docs-Stack docs-Stack--stretch">
+            <div
+              class="Skeleton Skeleton--shape"
+              style="
+                --spirit-skeleton-shape-width: 50%;
+                --spirit-skeleton-shape-height: 6.25rem
               "
             >
             </div>
@@ -139,9 +217,9 @@
               <div
                 class="Skeleton Skeleton--shape"
                 style="
-                --spirit-skeleton-shape-width: 6.25rem;
-                --spirit-skeleton-shape-height: 6.25rem;
-                --spirit-skeleton-shape-radius: var(--spirit-radius-full)
+                  --spirit-skeleton-shape-width: 6.25rem;
+                  --spirit-skeleton-shape-height: 6.25rem;
+                  --spirit-skeleton-shape-radius: var(--spirit-radius-full)
                 "
               >
               </div>
@@ -149,8 +227,8 @@
             <div
               class="GridItem"
               style="
-              --grid-item-column-start: 2;
-              --grid-item-column-end: span 10;
+                --grid-item-column-start: 2;
+                --grid-item-column-end: span 10;
               "
             >
               <div class="Skeleton Skeleton--heading Skeleton--small mb-900">

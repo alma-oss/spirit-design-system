@@ -41,7 +41,6 @@ export * from './section';
 export * from './segmentedControl';
 export * from './select';
 export * from './shared';
-export * from './skeleton';
 export * from './skipLink';
 export * from './slider';
 export * from './spinner';
