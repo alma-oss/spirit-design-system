@@ -1,0 +1,32 @@
+// 1. The tile sets the locals itself, so it keeps the default surface instead of taking the colors of a scheme
+//    it is nested in. Color schemes are not part of the tile's API yet; recolor the surface with the `bg-*`
+//    utility classes.
+// 2. The radius matches Card's and uses the same customization chain.
+// 3. The shadow is static for now; DS-2774 tracks a general shadow API that can take it over.
+
+@use '@tokens' as tokens;
+@use '../../tools/color-scheme';
+@use '../../tools/component-radius-overrides';
+@use 'theme';
+
+.UNSTABLE_Tile {
+    // 1.
+    --#{tokens.$css-variable-prefix}local-color: #{theme.$color};
+    --#{tokens.$css-variable-prefix}local-border-color: #{theme.$border-color};
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background-color};
+    --#{tokens.$css-variable-prefix}tile-box-shadow: #{theme.$box-shadow};
+
+    padding: theme.$padding;
+    color: color-scheme.color();
+    border-width: theme.$border-width;
+    border-style: theme.$border-style;
+    border-color: color-scheme.border-color();
+    border-radius: theme.$border-radius; // 2.
+    background-color: color-scheme.background-color();
+}
+
+.UNSTABLE_Tile--shadow {
+    box-shadow: var(--#{tokens.$css-variable-prefix}tile-box-shadow); // 3.
+}
+
+@include component-radius-overrides.generate($class-name: 'UNSTABLE_Tile');
