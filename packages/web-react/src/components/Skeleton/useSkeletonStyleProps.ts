@@ -1,6 +1,9 @@
+import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
 import classNames from 'classnames';
+import { type CSSProperties } from 'react';
 import { useClassNamePrefix } from '../../hooks';
-import { type SkeletonBaseProps, type SkeletonProps } from '../../types';
+import { type SkeletonBaseProps, type SkeletonProps } from './types';
+import { useSkeletonDimensionStyle } from './useSkeletonDimensionStyle';
 
 export interface SkeletonStyles {
   /** className props */
@@ -12,10 +15,12 @@ export interface SkeletonStyles {
   };
   /** props to be passed to the element */
   props: SkeletonProps;
+  /** CSS variable for an optional custom width */
+  skeletonWidthStyleProps: CSSProperties;
 }
 
 export function useSkeletonStyleProps<C = void>(props?: Omit<SkeletonBaseProps<C>, 'lines'>): SkeletonStyles {
-  const { size, ...restProps } = props || {};
+  const { size, width, ...restProps } = props || {};
 
   const skeletonClass = useClassNamePrefix('Skeleton');
   const skeletonSizeClass = `${skeletonClass}--${size}`;
@@ -34,6 +39,7 @@ export function useSkeletonStyleProps<C = void>(props?: Omit<SkeletonBaseProps<C
       heading: skeletonHeadingClass,
       item: skeletonItemClass,
     },
+    skeletonWidthStyleProps: useSkeletonDimensionStyle(`${cssVariablePrefix}skeleton-width`, width),
     props: restProps,
   };
 }

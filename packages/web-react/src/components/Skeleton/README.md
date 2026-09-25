@@ -20,14 +20,19 @@ SkeletonText defines a placeholder for loading the Text component.
 <SkeletonText/>
 <SkeletonText lines={2}/>
 <SkeletonText lines={2} size="small"/>
+<SkeletonText lines={2} width={240}/>
+<SkeletonText lines={2} width="60%"/>
 ```
+
+A pixel `width` is converted to `rem`. A percentage is applied as-is. The last line of a multi-line skeleton is `80%` of that width.
 
 ### API
 
-| Name    | Type                               | Default  | Required | Description                  |
-| ------- | ---------------------------------- | -------- | -------- | ---------------------------- |
-| `size`  | [Size dictionary][dictionary-size] | `medium` | ✕        | Size variant                 |
-| `lines` | `number`                           | 1        | ✕        | Specifies an number of lines |
+| Name    | Type                               | Default  | Required | Description                                                                      |
+| ------- | ---------------------------------- | -------- | -------- | -------------------------------------------------------------------------------- |
+| `size`  | [Size dictionary][dictionary-size] | `medium` | ✕        | Size variant                                                                     |
+| `lines` | `number`                           | 1        | ✕        | Specifies an number of lines                                                     |
+| `width` | `number` or percentage             | `100%`   | ✕        | Width in **px** (converted to `rem` internally), or a percentage such as `'60%'` |
 
 ## SkeletonHeading
 
@@ -37,14 +42,19 @@ SkeletonHeading defines a placeholder for loading the Heading component.
 <SkeletonHeading/>
 <SkeletonHeading lines={2}/>
 <SkeletonHeading lines={2} size="small"/>
+<SkeletonHeading lines={2} width={240}/>
+<SkeletonHeading lines={2} width="50%"/>
 ```
+
+A pixel `width` is converted to `rem`. A percentage is applied as-is. The last line of a multi-line skeleton is `80%` of that width.
 
 ### API
 
-| Name    | Type                               | Default  | Required | Description                  |
-| ------- | ---------------------------------- | -------- | -------- | ---------------------------- |
-| `size`  | [Size dictionary][dictionary-size] | `medium` | ✕        | Size variant                 |
-| `lines` | `number`                           | 1        | ✕        | Specifies an number of lines |
+| Name    | Type                               | Default  | Required | Description                                                                      |
+| ------- | ---------------------------------- | -------- | -------- | -------------------------------------------------------------------------------- |
+| `size`  | [Size dictionary][dictionary-size] | `medium` | ✕        | Size variant                                                                     |
+| `lines` | `number`                           | 1        | ✕        | Specifies an number of lines                                                     |
+| `width` | `number` or percentage             | `100%`   | ✕        | Width in **px** (converted to `rem` internally), or a percentage such as `'50%'` |
 
 ## SkeletonShape
 
@@ -54,17 +64,26 @@ SkeletonShape defines a placeholder for loading the Shape component.
 <SkeletonShape width={100} height={100}/>
 <SkeletonShape width={100} height={100} borderRadius="full"/>
 <SkeletonShape width={100} height={100} borderRadius={{ mobile: '100', tablet: '400', desktop: '500' }}/>
+<SkeletonShape width="50%" height={100}/>
+<SkeletonShape width="100%" height="50%"/>
 ```
 
 ### Shape Size Units
 
-The `width` and `height` props accept values **in px** (as a plain number, without the unit suffix).
-The component converts them to `rem` internally using the Spirit base font size (16 px by default),
-so the shape scales with the user's root font-size preference.
+The `width` and `height` props accept:
+
+- a **px** value as a plain number, without the unit suffix
+- a **percentage** string, for example `'100%'`
+
+Pixel numbers are converted to `rem` internally using the Spirit base font size (16 px by default),
+so the shape scales with the user's root font-size preference. Percentage strings are applied as-is.
 
 ```tsx
 // 100 px → '6.25rem' at the default 16 px base
 <SkeletonShape width={100} height={100} />
+
+// percentage is kept as a CSS percentage
+<SkeletonShape width="100%" height="50%" />
 ```
 
 ### API
@@ -72,8 +91,8 @@ so the shape scales with the user's root font-size preference.
 | Name           | Type                                        | Default | Required | Description                                                                                                       |
 | -------------- | ------------------------------------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
 | `borderRadius` | [Radius dictionary][radius-size] \ `object` | `400`   | ✕        | Border radius variant, use object to set responsive values, e.g. { mobile: '200', tablet: '300', desktop: '400' } |
-| `width`        | `number`                                    | ✕       | ✓        | Width of the shape **in px** (converted to `rem` internally)                                                      |
-| `height`       | `number`                                    | ✕       | ✓        | Height of the shape **in px** (converted to `rem` internally)                                                     |
+| `width`        | `number` or percentage                      | ✕       | ✓        | Width in **px** (converted to `rem` internally), or a percentage such as `'100%'`                                 |
+| `height`       | `number` or percentage                      | ✕       | ✓        | Height in **px** (converted to `rem` internally), or a percentage such as `'100%'`                                |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

@@ -3,10 +3,10 @@
 import React, { type ElementType, type ReactElement } from 'react';
 import { SizesExtended } from '../../constants';
 import { useStyleProps } from '../../hooks';
-import { type SpiritSkeletonProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { LINES_COUNT_DEFAULT } from './constants';
 import SkeletonItem from './SkeletonItem';
+import { type SpiritSkeletonProps } from './types';
 import { useSkeletonStyleProps } from './useSkeletonStyleProps';
 
 const defaultProps: Partial<SpiritSkeletonProps> = {
@@ -18,12 +18,13 @@ const SkeletonHeading = <E extends ElementType = 'div', C = void>(props: SpiritS
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType, lines, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;
-  const { classProps, props: modifiedProps } = useSkeletonStyleProps(restProps);
+  const { classProps, skeletonWidthStyleProps, props: modifiedProps } = useSkeletonStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, {
     classProps: classProps.root,
     classPropsHeading: classProps.heading,
     styleProps,
+    skeletonWidthStyleProps,
     otherProps,
   });
   const linesToRender = [...Array(lines ?? LINES_COUNT_DEFAULT).keys()];

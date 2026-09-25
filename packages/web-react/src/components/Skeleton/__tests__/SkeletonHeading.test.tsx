@@ -40,6 +40,12 @@ describe('SkeletonHeading', () => {
     expect(screen.getByTestId('SkeletonHeading').children).toHaveLength(1);
   });
 
+  it('should fall back to the default line count when lines is undefined', () => {
+    render(<SkeletonHeading data-testid="SkeletonHeadingUndefinedLines" lines={undefined} />);
+
+    expect(screen.getByTestId('SkeletonHeadingUndefinedLines').children).toHaveLength(1);
+  });
+
   describe('with custom props', () => {
     beforeEach(() => {
       render(<SkeletonHeading data-testid="SkeletonHeadingCustom" lines={3} size="large" />);
@@ -52,5 +58,14 @@ describe('SkeletonHeading', () => {
     it('should render custom text children when lines is provided', () => {
       expect(screen.getByTestId('SkeletonHeadingCustom').children).toHaveLength(3);
     });
+  });
+
+  it('should apply width as a css variable', () => {
+    render(<SkeletonHeading data-testid="SkeletonHeadingWidth" width={160} />);
+
+    const skeleton = screen.getByTestId('SkeletonHeadingWidth');
+
+    expect(skeleton).toHaveStyle({ '--spirit-skeleton-width': '10rem' });
+    expect(skeleton).not.toHaveAttribute('width');
   });
 });
