@@ -1,29 +1,37 @@
-import { type ElementType } from 'react';
-import {
-  type BorderRadiiDictionaryType,
-  type ChildrenProps,
-  type PolymorphicComponentProps,
-  type SingleOrResponsive,
-  type SizeExtendedDictionaryType,
-  type StyleProps,
-} from './shared';
+import { type CSSProperties, type ElementType } from 'react';
+import type {
+  BorderRadiiDictionaryType,
+  ChildrenProps,
+  PolymorphicComponentProps,
+  SingleOrResponsive,
+  SizeExtendedDictionaryType,
+  StyleProps,
+} from '../../types';
 
 export type SkeletonSize<C> = SizeExtendedDictionaryType | C;
 
 export type SkeletonRadius<C> = SingleOrResponsive<BorderRadiiDictionaryType> | C;
 
+/** A pixel number (converted to rem) or a percentage, for example `'100%'`. */
+export type SkeletonDimension = number | `${number}%`;
+
 export interface SkeletonProps extends ChildrenProps, StyleProps {}
 
 export interface SkeletonStyleProps<C = void> {
-  width: number;
-  height: number;
+  width: SkeletonDimension;
+  height: SkeletonDimension;
   borderRadius?: SkeletonRadius<C>;
 }
 
 /** ===== INTERNAL API ===== */
+export interface CustomizedCSSProperties extends CSSProperties {
+  [key: string]: string | undefined | number;
+}
+
 export interface SkeletonBaseProps<C = void> extends SkeletonProps {
   size?: SkeletonSize<C>;
   lines?: number;
+  width?: SkeletonDimension;
 }
 
 /** ===== PUBLIC API ===== */
