@@ -20,8 +20,10 @@ export interface SpiritSplitButtonProps<C = void, S = void> extends SplitButtonP
 }
 
 export type UncontrolledSplitButtonStrings = {
-  ariaLabel?: {
-    dropdown?: TranslatableString;
+  label?: {
+    dropdown?: {
+      trigger?: TranslatableString;
+    };
   };
 };
 
@@ -40,7 +42,7 @@ type UncontrolledSplitButtonLabelProps =
 export type UncontrolledSplitButtonProps<C = void, S = void> = {
   buttonOnClick: () => void;
   dropdownTriggerIconName?: string;
-  /** @deprecated Use `strings.ariaLabel.dropdown` instead. */
+  /** @deprecated Use `strings.label.dropdown.trigger` instead. */
   dropdownTriggerLabel?: string;
   dropdownPlacement?: PlacementDictionaryType;
   id: string;

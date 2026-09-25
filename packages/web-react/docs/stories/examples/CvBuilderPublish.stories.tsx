@@ -105,7 +105,6 @@ export const CvBuilderPublish = () => {
       <Section elementType="div" containerProps={{ size: 'large' }} paddingTop="space-1000">
         <Stack spacing="space-1000">
           <Breadcrumbs
-            strings={{ label: { back: { key: 'breadcrumbs.back' } } }}
             items={[
               { title: 'Můj Jobs.cz', url: '#' },
               { title: 'Životopis', url: '#' },

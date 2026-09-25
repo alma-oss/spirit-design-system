@@ -79,7 +79,7 @@ describe('Breadcrumbs', () => {
     expect(dom.container.querySelector('nav')).toHaveAttribute('aria-label', 'Drobečková navigace');
   });
 
-  it('should not render the back item without strings.label.back or goBackTitle', () => {
+  it('should render the default back item from the translation catalog', () => {
     const dom = render(
       <Breadcrumbs
         items={[
@@ -89,6 +89,7 @@ describe('Breadcrumbs', () => {
       />,
     );
 
-    expect(dom.container.querySelectorAll('ol > li')).toHaveLength(2);
+    expect(dom.container.querySelectorAll('ol > li > a')[0]).toHaveTextContent('Go back');
+    expect(dom.container.querySelectorAll('ol > li')).toHaveLength(3);
   });
 });

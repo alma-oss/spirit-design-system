@@ -89,7 +89,6 @@ export const CvEditorDrivingLicense = () => {
       >
         <Stack spacing="space-1000">
           <Breadcrumbs
-            strings={{ label: { back: { key: 'breadcrumbs.back' } } }}
             items={[{ title: 'Můj Jobs.cz', url: '#' }, { title: 'Životopis', url: '#' }, { title: 'Řidičský průkaz' }]}
           />
           <Heading
