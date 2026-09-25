@@ -4,6 +4,10 @@ Date: 2026-07-03
 
 Status: accepted
 
+Amended by: [015](015-color-scheme-intensity-exposure.md)
+
+👉 This is the decision record. For a practical guide to using color schemes, see [Color Schemes][color-schemes-guide].
+
 ## Context
 
 We noticed that many components still relied on component-specific color modifiers (e.g., `Button--danger`, `ToastBar--success`)
@@ -30,8 +34,8 @@ to apply different color combinations. This approach had several drawbacks:
    - `--spirit-local-border-color` (border color)
    - `--spirit-local-background-color` (background color)
 
-   When state tokens are defined for a given color category, additional state-specific custom
-   properties (e.g. for hover and active states) or intensity-specific custom properties (e.g. `border-color-subtle`) are also set.
+   When state tokens are defined for a given color category, additional state-specific CSS custom
+   properties (e.g. for hover and active states) or intensity-specific CSS custom properties (e.g. `border-color-subtle`) are also set.
 
    These properties are not applied automatically — they must be consumed by the component's own CSS or by the
    provided utility classes (`bg-color-scheme`, `text-color-scheme`, `border-color-scheme`). This indirection allows
@@ -103,4 +107,5 @@ These tokens generate overrides scoped to `.Alert--success`, which take preceden
 `color-scheme-on-emotion-success-subtle` utility class. See [Component Color Overrides][component-color-overrides]
 for the full token naming reference.
 
+[color-schemes-guide]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/color-schemes.md
 [component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
