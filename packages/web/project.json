@@ -11,7 +11,7 @@
     },
     "types": {
       "cache": true,
-      "dependsOn": ["@alma-oss/spirit-icons:build", "@alma-oss/spirit-design-tokens:build"]
+      "dependsOn": ["@alma-oss/spirit-icons:generate", "@alma-oss/spirit-design-tokens:build"]
     }
   }
 }

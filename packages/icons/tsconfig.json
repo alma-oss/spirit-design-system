@@ -4,6 +4,7 @@
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "customConditions": ["development"],
     "baseUrl": ".",
     "types": ["node"]
   },
