@@ -679,7 +679,7 @@ $input-small: (
     ),
 ) !default;
 
-$label-large: (
+$label-large-bold: (
     mobile: (
         font-family: "'Inter', sans-serif",
         font-size: 1.125rem,
@@ -689,7 +689,17 @@ $label-large: (
     ),
 ) !default;
 
-$label-medium: (
+$label-large-regular: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 1.125rem,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.3333,
+    ),
+) !default;
+
+$label-medium-bold: (
     mobile: (
         font-family: "'Inter', sans-serif",
         font-size: 1rem,
@@ -699,7 +709,17 @@ $label-medium: (
     ),
 ) !default;
 
-$label-small: (
+$label-medium-regular: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 1rem,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.25,
+    ),
+) !default;
+
+$label-small-bold: (
     mobile: (
         font-family: "'Inter', sans-serif",
         font-size: 0.875rem,
@@ -709,7 +729,17 @@ $label-small: (
     ),
 ) !default;
 
-$label-xlarge: (
+$label-small-regular: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 0.875rem,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.1429,
+    ),
+) !default;
+
+$label-xlarge-bold: (
     mobile: (
         font-family: "'Inter', sans-serif",
         font-size: 1.25rem,
@@ -719,12 +749,32 @@ $label-xlarge: (
     ),
 ) !default;
 
-$label-xsmall: (
+$label-xlarge-regular: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 1.25rem,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.4,
+    ),
+) !default;
+
+$label-xsmall-bold: (
     mobile: (
         font-family: "'Inter', sans-serif",
         font-size: 0.75rem,
         font-style: normal,
         font-weight: 600,
+        line-height: 1.3333,
+    ),
+) !default;
+
+$label-xsmall-regular: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 0.75rem,
+        font-style: normal,
+        font-weight: 400,
         line-height: 1.3333,
     ),
 ) !default;
@@ -777,9 +827,14 @@ $styles: (
     input-large: $input-large,
     input-medium: $input-medium,
     input-small: $input-small,
-    label-large: $label-large,
-    label-medium: $label-medium,
-    label-small: $label-small,
-    label-xlarge: $label-xlarge,
-    label-xsmall: $label-xsmall,
+    label-large-bold: $label-large-bold,
+    label-large-regular: $label-large-regular,
+    label-medium-bold: $label-medium-bold,
+    label-medium-regular: $label-medium-regular,
+    label-small-bold: $label-small-bold,
+    label-small-regular: $label-small-regular,
+    label-xlarge-bold: $label-xlarge-bold,
+    label-xlarge-regular: $label-xlarge-regular,
+    label-xsmall-bold: $label-xsmall-bold,
+    label-xsmall-regular: $label-xsmall-regular,
 ) !default;
