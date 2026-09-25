@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React, { type ElementType } from 'react';
 import { ContextPropsProvider } from '../../context';
 import { useDeprecationMessage, useI18n, useStyleProps } from '../../hooks';
-import { resolveComponentString } from '../../translations';
+import { resolveComponentStrings } from '../../translations';
 import { CloseButton } from '../CloseButton';
 import { ControlButton } from '../ControlButton';
 import { Flex } from '../Flex';
@@ -45,9 +45,11 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
     ...restProps
   } = propsWithDefaults;
 
-  const resolvedEditText = resolveComponentString(strings?.ariaLabel?.edit ?? editText ?? { key: 'attachment.edit' }, t);
-  const resolvedRemoveText = resolveComponentString(
-    strings?.ariaLabel?.remove ?? removeText ?? { key: 'attachment.remove' },
+  const { edit: resolvedEditText, remove: resolvedRemoveText } = resolveComponentStrings(
+    {
+      edit: { value: strings?.ariaLabel?.edit ?? editText, key: 'attachment.edit' },
+      remove: { value: strings?.ariaLabel?.remove ?? removeText, key: 'attachment.remove' },
+    },
     t,
   );
   const { classProps } = useFileStyleProps({ isDisabled, validationState });

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React, { type DragEvent, type DragEventHandler, useEffect, useState } from 'react';
 import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useDeprecationMessage, useI18n, useStyleProps } from '../../hooks';
-import { resolveComponentString } from '../../translations';
+import { resolveComponentStrings } from '../../translations';
 import { Button } from '../Button';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
@@ -46,16 +46,16 @@ const FileUpload = (props: FileUploadProps) => {
     validationText,
     ...restProps
   } = props;
-  const resolvedButtonText = resolveComponentString(
-    strings?.label?.button ?? buttonText ?? { key: 'fileUploader.browse' },
-    t,
-  );
-  const resolvedInputUploadText = resolveComponentString(
-    strings?.label?.upload ?? inputUploadText ?? { key: 'fileUploader.inputUpload' },
-    t,
-  );
-  const resolvedInputDragAndDropText = resolveComponentString(
-    strings?.label?.dragAndDrop ?? inputDragAndDropText ?? { key: 'fileUploader.inputDragAndDrop' },
+  const {
+    button: resolvedButtonText,
+    upload: resolvedInputUploadText,
+    dragAndDrop: resolvedInputDragAndDropText,
+  } = resolveComponentStrings(
+    {
+      button: { value: strings?.label?.button ?? buttonText, key: 'fileUploader.browse' },
+      upload: { value: strings?.label?.upload ?? inputUploadText, key: 'fileUploader.inputUpload' },
+      dragAndDrop: { value: strings?.label?.dragAndDrop ?? inputDragAndDropText, key: 'fileUploader.inputDragAndDrop' },
+    },
     t,
   );
 

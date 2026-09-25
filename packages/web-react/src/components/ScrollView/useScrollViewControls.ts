@@ -1,5 +1,5 @@
 import { useDeprecationMessage, useI18n } from '../../hooks';
-import { resolveComponentString } from '../../translations';
+import { resolveComponentStrings } from '../../translations';
 import {
   type ScrollViewControlsAriaLabelType,
   type ScrollViewControlsScrollStepType,
@@ -30,20 +30,18 @@ export const useScrollViewControls = (
       'The "ariaLabelControls" property is deprecated and will be removed in the next major version. Use "strings.ariaLabel.start", "strings.ariaLabel.end", "strings.ariaLabel.top", and "strings.ariaLabel.bottom" instead.',
   });
 
-  const startLabel = resolveComponentString(
-    strings?.ariaLabel?.start ?? ariaLabelControls?.start ?? { key: 'scrollView.ariaStart' },
-    t,
-  );
-  const endLabel = resolveComponentString(
-    strings?.ariaLabel?.end ?? ariaLabelControls?.end ?? { key: 'scrollView.ariaEnd' },
-    t,
-  );
-  const topLabel = resolveComponentString(
-    strings?.ariaLabel?.top ?? ariaLabelControls?.top ?? { key: 'scrollView.ariaTop' },
-    t,
-  );
-  const bottomLabel = resolveComponentString(
-    strings?.ariaLabel?.bottom ?? ariaLabelControls?.bottom ?? { key: 'scrollView.ariaBottom' },
+  const {
+    start: startLabel,
+    end: endLabel,
+    top: topLabel,
+    bottom: bottomLabel,
+  } = resolveComponentStrings(
+    {
+      start: { value: strings?.ariaLabel?.start ?? ariaLabelControls?.start, key: 'scrollView.ariaStart' },
+      end: { value: strings?.ariaLabel?.end ?? ariaLabelControls?.end, key: 'scrollView.ariaEnd' },
+      top: { value: strings?.ariaLabel?.top ?? ariaLabelControls?.top, key: 'scrollView.ariaTop' },
+      bottom: { value: strings?.ariaLabel?.bottom ?? ariaLabelControls?.bottom, key: 'scrollView.ariaBottom' },
+    },
     t,
   );
 

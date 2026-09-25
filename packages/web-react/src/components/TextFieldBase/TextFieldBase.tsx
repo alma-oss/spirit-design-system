@@ -4,7 +4,7 @@ import React, { type ElementType, type ForwardedRef, type RefObject, forwardRef 
 import { Sizes } from '../../constants';
 import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../context';
 import { useAriaDescribedBy, useI18n, useStyleProps } from '../../hooks';
-import { resolveComponentString } from '../../translations';
+import { resolveComponentStrings } from '../../translations';
 import { type ForwardRefComponent, type SpiritTextFieldBaseProps, type TextFieldStrings } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { CharacterCounter } from '../CharacterCounter';
@@ -44,8 +44,13 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
     ...restProps
   } = propsWithoutStrings;
   const { t } = useI18n();
-  const ariaLabelHide = resolveComponentString(strings?.ariaLabel?.hide ?? { key: 'textField.password.hide' }, t);
-  const ariaLabelShow = resolveComponentString(strings?.ariaLabel?.show ?? { key: 'textField.password.show' }, t);
+  const { hide: ariaLabelHide, show: ariaLabelShow } = resolveComponentStrings(
+    {
+      hide: { value: strings?.ariaLabel?.hide, key: 'textField.password.hide' },
+      show: { value: strings?.ariaLabel?.show, key: 'textField.password.show' },
+    },
+    t,
+  );
   const { isPasswordShown, passwordToggle } = usePasswordToggle();
   const hasPasswordToggleAddon = Boolean(hasPasswordToggle && !isMultiline);
   let inputType = type;
