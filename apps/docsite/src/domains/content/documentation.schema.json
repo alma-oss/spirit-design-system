@@ -1,0 +1,40 @@
+{
+  "description": "Canonical Page sources that stay in the repository. repoAliases.ts parses aliases into routes. componentDocs lists which parts a component page renders and where those files live.",
+  "aliases": [
+    {
+      "slug": ["migrations", "codemods"],
+      "repoPath": "packages/codemods/README.md",
+      "title": "Codemods"
+    },
+    {
+      "slug": ["releases"],
+      "repoPath": "docs/decisions/007-release-names.md",
+      "title": "Releases"
+    },
+    {
+      "slug": ["releases", "release-schedule"],
+      "repoPath": "docs/contribution/release-schedule.md",
+      "title": "Release Schedule"
+    },
+    {
+      "slug": ["releases", "web"],
+      "repoPath": "packages/web/CHANGELOG.md",
+      "title": "Web"
+    },
+    {
+      "slug": ["releases", "web-react"],
+      "repoPath": "packages/web-react/CHANGELOG.md",
+      "title": "Web React"
+    }
+  ],
+  "componentDocs": {
+    "directory": "packages/web-react/src/components",
+    "tabs": ["overview", "design", "accessibility", "figma"]
+  },
+  "migrationPackages": {
+    "web": "web",
+    "web-react": "web-react",
+    "web-twig": "web-twig",
+    "design-tokens": "design"
+  }
+}

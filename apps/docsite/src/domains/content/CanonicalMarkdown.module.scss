@@ -1,0 +1,58 @@
+@use '@alma-oss/spirit-web/src/scss/tools/typography';
+@use '@tokens' as tokens;
+
+.CanonicalMarkdown {
+    pre {
+        margin-block: var(--spirit-space-1000);
+        padding: var(--spirit-space-800) var(--spirit-space-900);
+        white-space: pre-wrap;
+        border-radius: var(--spirit-radius-300);
+    }
+
+    p {
+        max-width: 70ch;
+    }
+
+    ul,
+    ol {
+        margin-block: var(--spirit-space-900);
+        padding-inline-start: var(--spirit-space-1000);
+        max-width: 70ch;
+    }
+
+    ul {
+        list-style: disc;
+    }
+
+    ol {
+        list-style: decimal;
+    }
+
+    li {
+        margin-block: var(--spirit-space-600);
+    }
+
+    li::marker {
+        color: var(--spirit-color-neutral-content-basic);
+        font-size: 1em;
+    }
+
+    ul ul,
+    ul ol,
+    ol ul,
+    ol ol {
+        margin-block: var(--spirit-space-400);
+        max-width: unset;
+    }
+
+    code:not(pre code) {
+        @include typography.generate(tokens.$code-small-regular);
+
+        background: var(--spirit-color-background-secondary);
+        padding: var(--spirit-space-100) var(--spirit-space-400);
+        border-radius: var(--spirit-radius-200);
+        word-break: break-word;
+        white-space: pre-wrap;
+        vertical-align: baseline;
+    }
+}

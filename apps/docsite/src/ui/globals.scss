@@ -1,6 +1,5 @@
 @forward '@alma-oss/spirit-web/src/scss';
 @use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
-@use '@alma-oss/spirit-web/src/scss/tools/typography';
 @use '@tokens' as tokens;
 
 // 1. Expand the page to fill the viewport height to be ready for various themes.
@@ -102,58 +101,4 @@ body {
 
 .docs-border-bottom-basic {
     border-bottom: 1px solid var(--spirit-color-border-basic);
-}
-
-.docs-Markdown pre {
-    margin-block: 2rem;
-    padding: 1.25rem 1.5rem;
-    white-space: pre-wrap;
-    border-radius: var(--spirit-radius-300);
-}
-
-.docs-Markdown p {
-    max-width: 70ch;
-}
-
-.docs-Markdown ul,
-.docs-Markdown ol {
-    margin-block: var(--spirit-space-900);
-    padding-inline-start: 2rem;
-    max-width: 70ch;
-}
-
-.docs-Markdown ul {
-    list-style: disc;
-}
-
-.docs-Markdown ol {
-    list-style: decimal;
-}
-
-.docs-Markdown li {
-    margin-block: var(--spirit-space-600);
-}
-
-.docs-Markdown li::marker {
-    color: var(--spirit-color-neutral-content-basic);
-    font-size: 1em;
-}
-
-.docs-Markdown ul ul,
-.docs-Markdown ul ol,
-.docs-Markdown ol ul,
-.docs-Markdown ol ol {
-    margin-block: var(--spirit-space-400);
-    max-width: unset;
-}
-
-.docs-Markdown code:not(pre code) {
-    @include typography.generate(tokens.$code-small-regular);
-
-    background: var(--spirit-color-background-secondary);
-    padding: 0.1em 0.4em;
-    border-radius: var(--spirit-radius-200);
-    word-break: break-word;
-    white-space: pre-wrap;
-    vertical-align: baseline;
 }
