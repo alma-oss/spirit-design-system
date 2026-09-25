@@ -91,7 +91,14 @@ You can override all labels:
 <ScrollView
   hasControls
   direction="horizontal"
-  strings={{ ariaLabel: { start: 'Custom scroll left', end: 'Custom scroll right', top: 'Custom scroll up', bottom: 'Custom scroll down' } }}
+  strings={{
+    ariaLabel: {
+      start: 'Custom scroll left',
+      end: 'Custom scroll right',
+      top: 'Custom scroll up',
+      bottom: 'Custom scroll down',
+    },
+  }}
 >
   {/* scrollable content */}
 </ScrollView>
@@ -107,16 +114,16 @@ Or override only one label:
 
 ## ScrollView Props
 
-| Name                  | Type                                                              | Default    | Required | Description                                                                  |
-| --------------------- | ----------------------------------------------------------------- | ---------- | -------- | ---------------------------------------------------------------------------- |
-| `strings`             | `{ ariaLabel?: { start?, end?, top?, bottom? } }`             | —          | ✕        | Control button labels; see [Translations](#translations)                                     |
+| Name                  | Type                                                              | Default    | Required | Description                                                            |
+| --------------------- | ----------------------------------------------------------------- | ---------- | -------- | ---------------------------------------------------------------------- |
+| `strings`             | `{ ariaLabel?: { start?, end?, top?, bottom? } }`                 | —          | ✕        | Control button labels; see [Translations](#translations)               |
 | `ariaLabelControls`   | `{ top?: string, bottom?: string, start?: string; end?: string }` | —          | ✕        | _Deprecated, use `strings.ariaLabel.start` / `end` / `top` / `bottom`_ |
-| `controlsScrollStep`  | `number`                                                          | `300`      | ✕        | Scroll step for controls (pixels)                                            |
-| `children`            | `ReactNode`                                                       | —          | ✓        | ScrollView children's nodes                                                  |
-| `direction`           | \[`horizontal` \| `vertical`]                                     | `vertical` | ✕        | Direction of the wrapper                                                     |
-| `hasControls`         | `bool`                                                            | `false`    | ✕        | If true, controls are displayed                                              |
-| `isScrollbarDisabled` | `bool`                                                            | `false`    | ✕        | If true, the Scrollbar is disabled                                           |
-| `overflowDecorators`  | \[`borders` \| `shadows` \| `both`]                               | `shadows`  | ✕        | ScrollView overflow decorators                                               |
+| `controlsScrollStep`  | `number`                                                          | `300`      | ✕        | Scroll step for controls (pixels)                                      |
+| `children`            | `ReactNode`                                                       | —          | ✓        | ScrollView children's nodes                                            |
+| `direction`           | \[`horizontal` \| `vertical`]                                     | `vertical` | ✕        | Direction of the wrapper                                               |
+| `hasControls`         | `bool`                                                            | `false`    | ✕        | If true, controls are displayed                                        |
+| `isScrollbarDisabled` | `bool`                                                            | `false`    | ✕        | If true, the Scrollbar is disabled                                     |
+| `overflowDecorators`  | \[`borders` \| `shadows` \| `both`]                               | `shadows`  | ✕        | ScrollView overflow decorators                                         |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -126,12 +133,12 @@ and [escape hatches][readme-escape-hatches].
 
 Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
 
-| Key                 | Default key            | English default | Description                         |
-| ------------------- | ---------------------- | --------------- | ----------------------------------- |
-| `ariaLabel.start`   | `scrollView.ariaStart` | `Scroll left`   | Horizontal start control            |
-| `ariaLabel.end`     | `scrollView.ariaEnd`   | `Scroll right`  | Horizontal end control              |
-| `ariaLabel.top`     | `scrollView.ariaTop`   | `Scroll up`     | Vertical start control              |
-| `ariaLabel.bottom`  | `scrollView.ariaBottom`| `Scroll down`   | Vertical end control                |
+| Key                | Default key             | English default | Description              |
+| ------------------ | ----------------------- | --------------- | ------------------------ |
+| `ariaLabel.start`  | `scrollView.ariaStart`  | `Scroll left`   | Horizontal start control |
+| `ariaLabel.end`    | `scrollView.ariaEnd`    | `Scroll right`  | Horizontal end control   |
+| `ariaLabel.top`    | `scrollView.ariaTop`    | `Scroll up`     | Vertical start control   |
+| `ariaLabel.bottom` | `scrollView.ariaBottom` | `Scroll down`   | Vertical end control     |
 
 ### Deprecation Notice
 

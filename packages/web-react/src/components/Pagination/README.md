@@ -165,16 +165,16 @@ Renders a numbered page, or custom content through `children`.
 Pass `pageNumber` for a page number, or `children` for custom content.
 Do not mix the two.
 
-| Name                 | Type                                 | Default | Required | Description                                                      |
-| -------------------- | ------------------------------------ | ------- | -------- | ---------------------------------------------------------------- |
+| Name                 | Type                                            | Default | Required | Description                                                      |
+| -------------------- | ----------------------------------------------- | ------- | -------- | ---------------------------------------------------------------- |
 | `strings`            | `{ ariaLabel?: { page?: TranslatableString } }` | —       | ✕        | Page label; see [Translations](#translations)                    |
-| `accessibilityLabel` | `string`                             | —       | ✕        | _Deprecated, use `strings.ariaLabel.page`_                       |
-| `children`           | `ReactNode`                          | —       | ✕        | Custom content; use instead of `pageNumber`                      |
-| `elementType`        | `ElementType`                        | `a`     | ✕        | Type of an element                                               |
-| `href`               | `string`                             | —       | ✕        | Link URL                                                         |
-| `isCurrent`          | `bool`                               | `null`  | ✕        | If true, the numbered link is marked as current                  |
-| `isDisabled`         | `bool`                               | `false` | ✕        | If true, the link is disabled                                    |
-| `pageNumber`         | `number`                             | —       | ✕        | Page number, hidden for screen readers; omit when using children |
+| `accessibilityLabel` | `string`                                        | —       | ✕        | _Deprecated, use `strings.ariaLabel.page`_                       |
+| `children`           | `ReactNode`                                     | —       | ✕        | Custom content; use instead of `pageNumber`                      |
+| `elementType`        | `ElementType`                                   | `a`     | ✕        | Type of an element                                               |
+| `href`               | `string`                                        | —       | ✕        | Link URL                                                         |
+| `isCurrent`          | `bool`                                          | `null`  | ✕        | If true, the numbered link is marked as current                  |
+| `isDisabled`         | `bool`                                          | `false` | ✕        | If true, the link is disabled                                    |
+| `pageNumber`         | `number`                                        | —       | ✕        | Page number, hidden for screen readers; omit when using children |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -206,12 +206,12 @@ and [escape hatches][readme-escape-hatches].
 
 This component wraps `PaginationLink` and renders a previous chevron with a visually hidden label.
 
-| Name                 | Type                                         | Default | Required | Description                                   |
-| -------------------- | -------------------------------------------- | ------- | -------- | --------------------------------------------- |
+| Name                 | Type                                                | Default | Required | Description                                       |
+| -------------------- | --------------------------------------------------- | ------- | -------- | ------------------------------------------------- |
 | `strings`            | `{ ariaLabel?: { previous?: TranslatableString } }` | —       | ✕        | Previous label; see [Translations](#translations) |
-| `accessibilityLabel` | `string`                                     | —       | ✕        | _Deprecated, use `strings.ariaLabel.previous`_ |
-| `href`               | `string`                                     | —       | ✕        | Link URL                                      |
-| `isDisabled`         | `bool`                                       | `false` | ✕        | If true, the link is disabled                 |
+| `accessibilityLabel` | `string`                                            | —       | ✕        | _Deprecated, use `strings.ariaLabel.previous`_    |
+| `href`               | `string`                                            | —       | ✕        | Link URL                                          |
+| `isDisabled`         | `bool`                                              | `false` | ✕        | If true, the link is disabled                     |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -221,12 +221,12 @@ and [escape hatches][readme-escape-hatches].
 
 This component wraps `PaginationLink` and renders a next chevron with a visually hidden label.
 
-| Name                 | Type                                     | Default | Required | Description                               |
-| -------------------- | ---------------------------------------- | ------- | -------- | ----------------------------------------- |
+| Name                 | Type                                            | Default | Required | Description                                   |
+| -------------------- | ----------------------------------------------- | ------- | -------- | --------------------------------------------- |
 | `strings`            | `{ ariaLabel?: { next?: TranslatableString } }` | —       | ✕        | Next label; see [Translations](#translations) |
-| `accessibilityLabel` | `string`                                 | —       | ✕        | _Deprecated, use `strings.ariaLabel.next`_ |
-| `href`               | `string`                                 | —       | ✕        | Link URL                                  |
-| `isDisabled`         | `bool`                                   | `false` | ✕        | If true, the link is disabled             |
+| `accessibilityLabel` | `string`                                        | —       | ✕        | _Deprecated, use `strings.ariaLabel.next`_    |
+| `href`               | `string`                                        | —       | ✕        | Link URL                                      |
+| `isDisabled`         | `bool`                                          | `false` | ✕        | If true, the link is disabled                 |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -234,16 +234,16 @@ and [escape hatches][readme-escape-hatches].
 
 ## UncontrolledPagination Props
 
-| Name                         | Type                                                 | Default | Required | Description                                                         |
-| ---------------------------- | ---------------------------------------------------- | ------- | -------- | ------------------------------------------------------------------- |
-| `strings`                    | `{ ariaLabel?: { page?, next?, previous? } }`            | —       | ✕        | Page, previous, and next labels; see [Translations](#translations) |
-| `accessibilityLabel`         | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabel.page`_                              |
-| `accessibilityLabelNext`     | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabel.next`_                              |
-| `accessibilityLabelPrevious` | `string`                                             | —       | ✕        | _Deprecated, use `strings.ariaLabel.previous`_                          |
-| `defaultPage`                | `number`                                             | `1`     | ✕        | The number of the page selected as current page at the first render |
-| `onChange`                   | `(pageNumber: number) => void`                       | -       | ✕        | On page change callback                                             |
-| `totalPages`                 | `number`                                             | `0`     | ✓        | Total count of pages                                                |
-| `visiblePages`               | `number`                                             | `5`     | ✕        | Number of displayed pages                                           |
+| Name                         | Type                                          | Default | Required | Description                                                         |
+| ---------------------------- | --------------------------------------------- | ------- | -------- | ------------------------------------------------------------------- |
+| `strings`                    | `{ ariaLabel?: { page?, next?, previous? } }` | —       | ✕        | Page, previous, and next labels; see [Translations](#translations)  |
+| `accessibilityLabel`         | `string`                                      | —       | ✕        | _Deprecated, use `strings.ariaLabel.page`_                          |
+| `accessibilityLabelNext`     | `string`                                      | —       | ✕        | _Deprecated, use `strings.ariaLabel.next`_                          |
+| `accessibilityLabelPrevious` | `string`                                      | —       | ✕        | _Deprecated, use `strings.ariaLabel.previous`_                      |
+| `defaultPage`                | `number`                                      | `1`     | ✕        | The number of the page selected as current page at the first render |
+| `onChange`                   | `(pageNumber: number) => void`                | -       | ✕        | On page change callback                                             |
+| `totalPages`                 | `number`                                      | `0`     | ✓        | Total count of pages                                                |
+| `visiblePages`               | `number`                                      | `5`     | ✕        | Number of displayed pages                                           |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -255,11 +255,11 @@ Override optional copy with [`strings`][readme-component-strings]. Omitted keys 
 `PaginationLink` uses `ariaLabel.page`, previous/next links use `ariaLabel.previous` / `ariaLabel.next`, and
 `UncontrolledPagination` accepts all three.
 
-| Key                   | Default key            | English default | Description        |
-| --------------------- | ---------------------- | --------------- | ------------------ |
-| `ariaLabel.page`      | `pagination.goToPage`  | `Go to page`    | Numbered page      |
-| `ariaLabel.previous`  | `pagination.previous`  | `Previous`      | Previous control   |
-| `ariaLabel.next`      | `pagination.next`      | `Next`          | Next control       |
+| Key                  | Default key           | English default | Description      |
+| -------------------- | --------------------- | --------------- | ---------------- |
+| `ariaLabel.page`     | `pagination.goToPage` | `Go to page`    | Numbered page    |
+| `ariaLabel.previous` | `pagination.previous` | `Previous`      | Previous control |
+| `ariaLabel.next`     | `pagination.next`     | `Next`          | Next control     |
 
 ### Deprecation Notice
 

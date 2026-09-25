@@ -103,7 +103,7 @@ Set `hasValidationIcon` to show the status icon next to the message (same patter
 | Name                | Type                                           | Default | Required | Description                                                                                                                     |
 | ------------------- | ---------------------------------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `children`          | `ReactNode`                                    | —       | ✕        | Content below the file name (e.g. `ProgressBar`)                                                                                |
-| `strings`           | `{ ariaLabel?: { edit?, remove? } }`           | —       | ✕        | Action label overrides; see [Translations](#translations)                                                           |
+| `strings`           | `{ ariaLabel?: { edit?, remove? } }`           | —       | ✕        | Action label overrides; see [Translations](#translations)                                                                       |
 | `editText`          | `string`                                       | —       | ✕        | _Deprecated, use `strings.ariaLabel.edit`_                                                                                      |
 | `elementType`       | `ElementType`                                  | `li`    | ✕        | Root HTML element for the row                                                                                                   |
 | `hasValidationIcon` | `boolean`                                      | `false` | ✕        | When `validationState` is set, show the validation icon next to `validationText`                                                |
@@ -129,10 +129,10 @@ and [escape hatches][readme-escape-hatches].
 
 Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
 
-| Key                 | Default key         | English default | Description        |
-| ------------------- | ------------------- | --------------- | ------------------ |
-| `ariaLabel.edit`    | `attachment.edit`   | `Edit`          | Edit action        |
-| `ariaLabel.remove`  | `attachment.remove` | `Remove`        | Dismiss action     |
+| Key                | Default key         | English default | Description    |
+| ------------------ | ------------------- | --------------- | -------------- |
+| `ariaLabel.edit`   | `attachment.edit`   | `Edit`          | Edit action    |
+| `ariaLabel.remove` | `attachment.remove` | `Remove`        | Dismiss action |
 
 ### Deprecation Notice
 

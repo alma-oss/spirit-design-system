@@ -181,12 +181,12 @@ To render the `ModalHeader` component without the close button set the `hasClose
 
 ### API
 
-| Name             | Type                                      | Default | Required | Description                                |
-| ---------------- | ----------------------------------------- | ------- | -------- | ------------------------------------------ |
-| `children`       | `ReactNode`                               | —       | ✕        | Children node                              |
-| `strings`        | `{ ariaLabel?: { close? } }`              | —       | ✕        | Close button label; see [Translations](#translations)          |
-| `closeLabel`     | `string`                                  | —       | ✕        | _Deprecated, use `strings.ariaLabel.close`_ |
-| `hasCloseButton` | `bool`                                    | `true`  | ✕        | Whether close button is rendered           |
+| Name             | Type                         | Default | Required | Description                                           |
+| ---------------- | ---------------------------- | ------- | -------- | ----------------------------------------------------- |
+| `children`       | `ReactNode`                  | —       | ✕        | Children node                                         |
+| `strings`        | `{ ariaLabel?: { close? } }` | —       | ✕        | Close button label; see [Translations](#translations) |
+| `closeLabel`     | `string`                     | —       | ✕        | _Deprecated, use `strings.ariaLabel.close`_           |
+| `hasCloseButton` | `bool`                       | `true`  | ✕        | Whether close button is rendered                      |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -196,9 +196,9 @@ and [escape hatches][readme-escape-hatches].
 
 Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
 
-| Key                | Default key    | English default | Description                    |
-| ------------------ | -------------- | --------------- | ------------------------------ |
-| `ariaLabel.close`  | `common.close` | `Close`         | Modal close button             |
+| Key               | Default key    | English default | Description        |
+| ----------------- | -------------- | --------------- | ------------------ |
+| `ariaLabel.close` | `common.close` | `Close`         | Modal close button |
 
 ### Deprecation Notice
 

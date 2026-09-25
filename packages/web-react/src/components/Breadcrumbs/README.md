@@ -57,13 +57,13 @@ Use custom content for the ordered list as component's children instead of passi
 
 ### API
 
-| Name          | Type                                                 | Default | Required | Description                                                                                                     |
-| ------------- | ---------------------------------------------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------- |
-| `children`    | `ReactNode`                                          | —       | ✕        | Custom content to override items rendering from array                                                           |
-| `elementType` | `ElementType`                                        | `nav`   | ✕        | Type of element used as wrapper                                                                                 |
-| `goBackTitle` | `string`                                             | —       | ✕        | _Deprecated, use `strings.label.back`_                                                                          |
-| `items`       | `BreadcrumbsItem[]`                                  | —       | ✕        | Navigation menu items                                                                                           |
-| `strings`     | `{ ariaLabel?, label?: { back? } }`                  | —       | ✕        | Optional copy overrides; see [Translations](#translations)                                                          |
+| Name          | Type                                | Default | Required | Description                                                |
+| ------------- | ----------------------------------- | ------- | -------- | ---------------------------------------------------------- |
+| `children`    | `ReactNode`                         | —       | ✕        | Custom content to override items rendering from array      |
+| `elementType` | `ElementType`                       | `nav`   | ✕        | Type of element used as wrapper                            |
+| `goBackTitle` | `string`                            | —       | ✕        | _Deprecated, use `strings.label.back`_                     |
+| `items`       | `BreadcrumbsItem[]`                 | —       | ✕        | Navigation menu items                                      |
+| `strings`     | `{ ariaLabel?, label?: { back? } }` | —       | ✕        | Optional copy overrides; see [Translations](#translations) |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -73,10 +73,10 @@ and [escape hatches][readme-escape-hatches].
 
 Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
 
-| Key              | Default key               | English default | Description                                      |
-| ---------------- | ------------------------- | --------------- | ------------------------------------------------ |
-| `label.back`     | `breadcrumbs.back`        | `Go back`       | Visible go-back item (small viewports)           |
-| `ariaLabel.nav`  | `breadcrumbs.ariaLabel`   | `Breadcrumb`    | Accessible name of the landmark                  |
+| Key             | Default key             | English default | Description                            |
+| --------------- | ----------------------- | --------------- | -------------------------------------- |
+| `label.back`    | `breadcrumbs.back`      | `Go back`       | Visible go-back item (small viewports) |
+| `ariaLabel.nav` | `breadcrumbs.ariaLabel` | `Breadcrumb`    | Accessible name of the landmark        |
 
 ### Deprecation Notice
 

@@ -153,23 +153,23 @@ Full example:
 
 ### API
 
-| Name                           | Type                                         | Default        | Required | Description                                              |
-| ------------------------------ | -------------------------------------------- | -------------- | -------- | -------------------------------------------------------- |
-| `buttonIconName`               | `string`                                     | -              | ✕ \*     | Name of the icon to be displayed in the Button           |
-| `labelButton`                  | [`TranslatableString`][readme-component-strings] | -              | ✓ \*     | Label of the Button                                      |
-| `buttonLabel`                  | `string`                                     | -              | ✓ \*     | _Deprecated, use `labelButton`_                          |
-| `buttonOnClick`                | `function`                                   | -              | ✓        | Function to be called when the Button is clicked         |
-| `children`                     | `ReactNode`                                  | -              | ✓        | Dropdown content                                         |
-| `color`                        | \[`primary` \| `secondary` \| `tertiary` ]   | `primary`      | ✕        | Color variant                                            |
-| `dropdownPlacement`            | [Placement dictionary][dictionary-placement] | `bottom-end`   | ✕        | Placement of the Dropdown                                |
-| `dropdownTriggerIconName`      | `string`                                     | `chevron-down` | ✕        | Name of the icon to be displayed in the Dropdown Trigger |
+| Name                           | Type                                                          | Default        | Required | Description                                                        |
+| ------------------------------ | ------------------------------------------------------------- | -------------- | -------- | ------------------------------------------------------------------ |
+| `buttonIconName`               | `string`                                                      | -              | ✕ \*     | Name of the icon to be displayed in the Button                     |
+| `labelButton`                  | [`TranslatableString`][readme-component-strings]              | -              | ✓ \*     | Label of the Button                                                |
+| `buttonLabel`                  | `string`                                                      | -              | ✓ \*     | _Deprecated, use `labelButton`_                                    |
+| `buttonOnClick`                | `function`                                                    | -              | ✓        | Function to be called when the Button is clicked                   |
+| `children`                     | `ReactNode`                                                   | -              | ✓        | Dropdown content                                                   |
+| `color`                        | \[`primary` \| `secondary` \| `tertiary` ]                    | `primary`      | ✕        | Color variant                                                      |
+| `dropdownPlacement`            | [Placement dictionary][dictionary-placement]                  | `bottom-end`   | ✕        | Placement of the Dropdown                                          |
+| `dropdownTriggerIconName`      | `string`                                                      | `chevron-down` | ✕        | Name of the icon to be displayed in the Dropdown Trigger           |
 | `strings`                      | `{ label?: { dropdown?: { trigger?: TranslatableString } } }` | -              | ✕        | Dropdown trigger label override; see [Translations](#translations) |
-| `dropdownTriggerLabel`         | `string`                                     | -              | ✕        | _Deprecated, use `strings.label.dropdown.trigger`_       |
-| `id`                           | `string`                                     | -              | ✓        | Id of the Split Button and part of Dropdown id           |
-| `isButtonLabelHidden`          | `bool`                                       | `false`        | ✕ \*     | Whether is button label hidden                           |
-| `isDisabled`                   | `bool`                                       | `false`        | ✕        | Disables the Split Button                                |
-| `isDropdownTriggerLabelHidden` | `bool`                                       | `false`        | ✕        | Whether is dropdown trigger label hidden                 |
-| `size`                         | [Size dictionary][dictionary-size]           | `medium`       | ✕        | Size variant                                             |
+| `dropdownTriggerLabel`         | `string`                                                      | -              | ✕        | _Deprecated, use `strings.label.dropdown.trigger`_                 |
+| `id`                           | `string`                                                      | -              | ✓        | Id of the Split Button and part of Dropdown id                     |
+| `isButtonLabelHidden`          | `bool`                                                        | `false`        | ✕ \*     | Whether is button label hidden                                     |
+| `isDisabled`                   | `bool`                                                        | `false`        | ✕        | Disables the Split Button                                          |
+| `isDropdownTriggerLabelHidden` | `bool`                                                        | `false`        | ✕        | Whether is dropdown trigger label hidden                           |
+| `size`                         | [Size dictionary][dictionary-size]                            | `medium`       | ✕        | Size variant                                                       |
 
 (\*) During the v5 migration, provide either `labelButton` or deprecated `buttonLabel`. If you want only the Icon
 to be visible, use `isButtonLabelHidden` to visually hide the required accessible label.
@@ -179,9 +179,9 @@ to be visible, use `isButtonLabelHidden` to visually hide the required accessibl
 Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
 The dropdown trigger label is visible unless `isDropdownTriggerLabelHidden` is set.
 
-| Key              | Default key             | English default | Description             |
-| ---------------- | ----------------------- | --------------- | ----------------------- |
-| `label.dropdown.trigger` | `splitButton.dropdown`  | `More`          | Dropdown trigger label  |
+| Key                      | Default key            | English default | Description            |
+| ------------------------ | ---------------------- | --------------- | ---------------------- |
+| `label.dropdown.trigger` | `splitButton.dropdown` | `More`          | Dropdown trigger label |
 
 Required button copy stays on `labelButton` (not `strings`).
 

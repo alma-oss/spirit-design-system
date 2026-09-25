@@ -64,24 +64,24 @@ When the button controls a specific surface, forward the relevant ARIA attribute
 
 ## API
 
-| Name            | Type                                 | Default  | Required | Description                                                                                                           |
-| --------------- | ------------------------------------ | -------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
-| `isDisabled`    | `bool`                               | `false`  | ✕        | Whether the button is disabled                                                                                        |
-| `isSubtle`      | `bool`                               | `false`  | ✕        | Whether the button is in subtle variant (no border)                                                                   |
-| `isSymmetrical` | \[`bool` \| `Responsive<bool>`]      | `true`   | ✕        | Whether the button should be symmetrical, use object to set responsive values, e.g. `{ mobile: true, tablet: false }` |
-| `strings`       | `{ ariaLabel?: { close? } }` | —        | ✕        | Close label override; see [Translations](#translations)                                                               |
-| `label`         | `string`                     | —        | ✕        | _Deprecated, use `strings.ariaLabel.close`_                                                                                 |
-| `onClick`       | `(event: ClickEvent) => void`        | —        | ✕        | Click handler                                                                                                         |
-| `ref`           | `ForwardedRef<HTMLButtonElement>`    | —        | ✕        | Button element reference                                                                                              |
-| `size`          | [Size dictionary][dictionary-size]   | `medium` | ✕        | Size of the button                                                                                                    |
+| Name            | Type                               | Default  | Required | Description                                                                                                           |
+| --------------- | ---------------------------------- | -------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
+| `isDisabled`    | `bool`                             | `false`  | ✕        | Whether the button is disabled                                                                                        |
+| `isSubtle`      | `bool`                             | `false`  | ✕        | Whether the button is in subtle variant (no border)                                                                   |
+| `isSymmetrical` | \[`bool` \| `Responsive<bool>`]    | `true`   | ✕        | Whether the button should be symmetrical, use object to set responsive values, e.g. `{ mobile: true, tablet: false }` |
+| `strings`       | `{ ariaLabel?: { close? } }`       | —        | ✕        | Close label override; see [Translations](#translations)                                                               |
+| `label`         | `string`                           | —        | ✕        | _Deprecated, use `strings.ariaLabel.close`_                                                                           |
+| `onClick`       | `(event: ClickEvent) => void`      | —        | ✕        | Click handler                                                                                                         |
+| `ref`           | `ForwardedRef<HTMLButtonElement>`  | —        | ✕        | Button element reference                                                                                              |
+| `size`          | [Size dictionary][dictionary-size] | `medium` | ✕        | Size of the button                                                                                                    |
 
 ### Translations
 
 Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
 
-| Key                | Default key    | English default | Description                    |
-| ------------------ | -------------- | --------------- | ------------------------------ |
-| `ariaLabel.close`  | `common.close` | `Close`         | Visually hidden accessible name |
+| Key               | Default key    | English default | Description                     |
+| ----------------- | -------------- | --------------- | ------------------------------- |
+| `ariaLabel.close` | `common.close` | `Close`         | Visually hidden accessible name |
 
 On top of the API options, the component accepts [additional attributes][readme-additional-attributes] and the
 remaining [ControlButton][control-button] props. If you need more control over the styling of a component, you can

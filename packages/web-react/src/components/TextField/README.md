@@ -156,7 +156,7 @@ such as a `button` or link.
 | `ref`               | `ForwardedRef<HTMLInputElement>`                                             | —        | ✕        | Input element reference                                                 |
 | `size`              | [Size dictionary][dictionary-size]                                           | `medium` | ✕        | Size variant                                                            |
 | `startAddon`        | `ReactNode`                                                                  | —        | ✕        | Addon rendered before the input                                         |
-| `strings`           | `{ ariaLabel?: { hide?, show? } }`                                           | —        | ✕        | Password-toggle labels; see [Translations](#translations)                               |
+| `strings`           | `{ ariaLabel?: { hide?, show? } }`                                           | —        | ✕        | Password-toggle labels; see [Translations](#translations)               |
 | `type`              | \[`email` \| `number` \| `password` \| `search` \| `tel` \| `text` \| `url`] | `text`   | ✕        | Input type                                                              |
 | `validationState`   | [Validation dictionary][dictionary-validation]                               | —        | ✕        | Type of validation state                                                |
 | `validationText`    | \[`ReactNode` \| `ReactNode[]`]                                              | —        | ✕        | Validation text                                                         |
@@ -169,10 +169,10 @@ such as a `button` or link.
 
 Override optional copy with [`strings`][readme-component-strings]. Used when `hasPasswordToggle` is set. Omitted keys use the built-in English default.
 
-| Key                | Default key                 | English default   | Description                    |
-| ------------------ | --------------------------- | ----------------- | ------------------------------ |
-| `ariaLabel.show`   | `textField.password.show`   | `Show password`   | Toggle when password is hidden |
-| `ariaLabel.hide`   | `textField.password.hide`   | `Hide password`   | Toggle when password is shown  |
+| Key              | Default key               | English default | Description                    |
+| ---------------- | ------------------------- | --------------- | ------------------------------ |
+| `ariaLabel.show` | `textField.password.show` | `Show password` | Toggle when password is hidden |
+| `ariaLabel.hide` | `textField.password.hide` | `Hide password` | Toggle when password is shown  |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
