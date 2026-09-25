@@ -1,4 +1,4 @@
-import { pxToRem } from '../pxToRem';
+import { pxToRem, pxToRemValue } from '../pxToRem';
 
 describe('pxToRem', () => {
   it('should convert px to rem with default rounding and trims zeros', () => {
@@ -36,5 +36,24 @@ describe('pxToRem', () => {
     expect(pxToRem(1, { baseFontSize: 16, decimals: -1 })).toBe('0.0625rem');
     expect(pxToRem(1, { baseFontSize: 16, decimals: 101 })).toBe('0.0625rem');
     expect(pxToRem(1, { baseFontSize: 16, decimals: 2.5 })).toBe('0.0625rem');
+  });
+});
+
+describe('pxToRemValue', () => {
+  it('matches the numeric portion of pxToRem for the same inputs', () => {
+    expect(pxToRemValue(32, { baseFontSize: 16 })).toEqual({ value: 2, unit: 'rem' });
+    expect(pxToRemValue(40, { baseFontSize: 16 })).toEqual({ value: 2.5, unit: 'rem' });
+    expect(pxToRemValue(1, { baseFontSize: 16 })).toEqual({ value: 0.0625, unit: 'rem' });
+    expect(pxToRemValue(8, { baseFontSize: 14 })).toEqual({ value: 0.5714, unit: 'rem' });
+  });
+
+  it('supports custom decimals', () => {
+    expect(pxToRemValue(1, { baseFontSize: 16, decimals: 3 })).toEqual({ value: 0.063, unit: 'rem' });
+    expect(pxToRemValue(10, { baseFontSize: 16, decimals: 3 })).toEqual({ value: 0.625, unit: 'rem' });
+  });
+
+  it('uses default decimals when the decimals option is invalid', () => {
+    expect(pxToRemValue(1, { baseFontSize: 16, decimals: Number.NaN })).toEqual({ value: 0.0625, unit: 'rem' });
+    expect(pxToRemValue(1, { baseFontSize: 16, decimals: -1 })).toEqual({ value: 0.0625, unit: 'rem' });
   });
 });
