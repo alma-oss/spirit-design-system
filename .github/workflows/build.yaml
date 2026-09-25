@@ -3,10 +3,15 @@ name: 🏗️ Build
 on:
   workflow_call:
 
+permissions:
+  actions: write
+  contents: read
+
 env:
   NX_BRANCH: ${{ github.event.number || github.ref_name }}
   NX_VERBOSE_LOGGING: true
   NX_NO_CLOUD: true
+  CACHE_KEY: repository-cache-key-${{ github.run_id }}
 
 jobs:
   build:
@@ -37,3 +42,12 @@ jobs:
             git status
             exit 1
           fi
+
+      # Node 22 is the minimum supported version; lint.yaml restores this cache to reuse
+      # the already-built workspace packages instead of building them again.
+      - name: Save Repository to Cache
+        if: matrix.node-version == 22
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: ./
+          key: ${{ env.CACHE_KEY }}

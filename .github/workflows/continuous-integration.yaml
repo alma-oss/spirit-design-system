@@ -33,6 +33,9 @@ jobs:
   build-checks:
     name: 🏗️ Build Checks
     uses: ./.github/workflows/build.yaml
+    permissions:
+      actions: write
+      contents: read
 
   docs-reviews:
     name: 📄 Docs Reviews
@@ -40,6 +43,7 @@ jobs:
 
   code-quality-checks:
     name: 🔍 Code Quality Checks
+    needs: [build-checks]
     uses: ./.github/workflows/lint.yaml
     permissions:
       actions: write
