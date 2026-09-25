@@ -12,39 +12,43 @@ export const metadata: Metadata = {
   description: 'The page you are looking for does not exist.',
 };
 
-const GlobalNotFound = () => (
-  <html lang="en">
-    <head>
-      <link rel="preconnect" href={fontshareApiUrl} />
-      <link rel="stylesheet" href={generalSansStylesheet} />
-    </head>
-    <body>
-      <AppProvider>
-        <Header disableClientRouting />
-        <Flex elementType="main" alignmentX="center" alignmentY="center">
-          <Section size="medium">
-            <EmptyState spacing="space-900">
-              <EmptyStateSection>
-                <Heading elementType="h1" size="xlarge">
-                  404
-                </Heading>
-              </EmptyStateSection>
-              <EmptyStateSection spacing="space-600">
-                <Heading elementType="h2" size="xsmall">
-                  Page Not Found
-                </Heading>
-                <Text>The page you are looking for might have been moved, deleted, or never existed.</Text>
-              </EmptyStateSection>
-              <EmptyStateSection>
-                <ButtonLink href={routes.homepage}>Back to Homepage</ButtonLink>
-              </EmptyStateSection>
-            </EmptyState>
-          </Section>
-        </Flex>
-        <Footer />
-      </AppProvider>
-    </body>
-  </html>
-);
+const GlobalNotFound = async () => {
+  const footer = await Footer();
+
+  return (
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href={fontshareApiUrl} />
+        <link rel="stylesheet" href={generalSansStylesheet} />
+      </head>
+      <body>
+        <AppProvider>
+          <Header disableClientRouting />
+          <Flex elementType="main" alignmentX="center" alignmentY="center">
+            <Section size="medium">
+              <EmptyState spacing="space-900">
+                <EmptyStateSection>
+                  <Heading elementType="h1" size="xlarge">
+                    404
+                  </Heading>
+                </EmptyStateSection>
+                <EmptyStateSection spacing="space-600">
+                  <Heading elementType="h2" size="xsmall">
+                    Page Not Found
+                  </Heading>
+                  <Text>The page you are looking for might have been moved, deleted, or never existed.</Text>
+                </EmptyStateSection>
+                <EmptyStateSection>
+                  <ButtonLink href={routes.homepage}>Back to Homepage</ButtonLink>
+                </EmptyStateSection>
+              </EmptyState>
+            </Section>
+          </Flex>
+          {footer}
+        </AppProvider>
+      </body>
+    </html>
+  );
+};
 
 export default GlobalNotFound;
