@@ -24,6 +24,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "development": "./src/index.ts",
       "import": "./dist/index.js"
     }
   },
@@ -35,7 +36,9 @@
     "test": "npm-run-all --serial test:unit",
     "test:unit": "jest",
     "test:unit:watch": "yarn test:unit --watchAll",
-    "test:unit:coverage": "yarn test:unit --coverage"
+    "test:unit:coverage": "yarn test:unit --coverage",
+    "prepack": "tsx ./scripts/stripDevelopmentExports.ts --strip",
+    "postpack": "tsx ./scripts/stripDevelopmentExports.ts --restore"
   },
   "dependencies": {
     "@alma-oss/spirit-design-tokens": "4.0.3",

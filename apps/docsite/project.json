@@ -16,10 +16,13 @@
       "dependsOn": ["^build", "@alma-oss/spirit-icons:build"]
     },
     "lint": {
-      "dependsOn": ["@alma-oss/spirit-icons:build"]
+      // `import/resolver` (see `configs/eslint-config-spirit`) prefers each workspace package's
+      // `development` export condition over `dist`, so linting only needs the cheap
+      // `@alma-oss/spirit-icons:generate` codegen step, not a full icons build.
+      "dependsOn": ["@alma-oss/spirit-icons:generate"]
     },
     "types": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["@alma-oss/spirit-icons:generate", "@alma-oss/spirit-design-tokens:build"]
     }
   },
   "implicitDependencies": [
