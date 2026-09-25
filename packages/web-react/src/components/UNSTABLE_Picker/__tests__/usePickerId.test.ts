@@ -7,6 +7,7 @@ describe('usePickerId', () => {
 
     expect(result.current).toEqual({
       pickerId: 'picker-my-field',
+      contextualHelpId: 'picker-my-field-contextual-help',
       labelId: 'picker-my-field-label',
       popoverId: 'picker-my-field-popover',
       selectionId: 'picker-my-field-selection',

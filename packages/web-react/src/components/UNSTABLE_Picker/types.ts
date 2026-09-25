@@ -45,6 +45,8 @@ export interface UnstablePickerBaseProps<S = void>
     ValidationTextProp,
     UnstablePickerTranslations {
   children: ReactNode;
+  /** Content next to the field label, typically `ContextualHelp`. */
+  contextualHelp?: ReactNode;
   id: string;
   isAggregated?: boolean;
   isDisabled?: boolean;

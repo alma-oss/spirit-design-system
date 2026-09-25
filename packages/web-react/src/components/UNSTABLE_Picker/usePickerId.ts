@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 export interface UnstablePickerId {
+  contextualHelpId: string;
   labelId: string;
   pickerId: string;
   popoverId: string;
@@ -14,6 +15,7 @@ export const usePickerId = (id: string): UnstablePickerId =>
 
     return {
       pickerId,
+      contextualHelpId: `${pickerId}-contextual-help`,
       labelId: `${pickerId}-label`,
       popoverId: `${pickerId}-popover`,
       selectionId: `${pickerId}-selection`,

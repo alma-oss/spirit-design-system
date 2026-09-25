@@ -1,6 +1,7 @@
 export const defaultTranslations = {
   common: {
     close: 'Close',
+    contextualHelp: 'More information',
     edit: 'Edit',
     remove: 'Remove',
   },

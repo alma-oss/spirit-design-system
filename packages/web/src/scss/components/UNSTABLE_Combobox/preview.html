@@ -2006,6 +2006,170 @@
 <section class="py-900 py-tablet-1000">
   <div class="Container">
 
+    <h2 class="docs-Heading">Contextual Help</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+          <div
+            class="Flex Flex--horizontal Flex--alignmentYCenter"
+            style="--flex-spacing-x: var(--spirit-space-100);"
+          >
+            <label
+              class="Label"
+              id="combobox-contextual-help-label"
+              for="combobox-contextual-help-input"
+            >Languages</label>
+            <div
+              class="Tooltip"
+              data-spirit-element="tooltip"
+            >
+              <button
+                type="button"
+                class="ControlButton ControlButton--small ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target d-flex"
+                aria-describedby="combobox-contextual-help"
+                data-spirit-toggle="tooltip"
+                data-spirit-target="#combobox-contextual-help"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#info" />
+                </svg>
+                <span class="accessibility-hidden">More information about Languages</span>
+              </button>
+              <div
+                id="combobox-contextual-help"
+                class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-top placement-controlled"
+                data-spirit-placement="top"
+                data-spirit-trigger="click, hover, focus"
+              >
+                Pick every language you can use at work, not only your native one.
+                <span
+                  class="TooltipPopover__arrow"
+                  data-spirit-element="arrow"
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="Dropdown">
+
+            <div
+              class="InputContainer InputContainer--fill InputContainer--medium"
+              role="group"
+              aria-label="Languages"
+            >
+              <div class="UNSTABLE_ComboboxSelection">
+                <div
+                  role="group"
+                  id="combobox-contextual-help-selection"
+                  class="d-contents"
+                  aria-label="Selected Languages"
+                  aria-live="off"
+                  aria-atomic="false"
+                  aria-relevant="additions"
+                  data-spirit-combobox-selection
+                ></div>
+                <input
+                  type="text"
+                  id="combobox-contextual-help-input"
+                  role="combobox"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-controls="combobox-contextual-help-listbox"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  placeholder="Languages"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="dialog"
+              aria-labelledby="combobox-contextual-help-label"
+              data-spirit-combobox-listbox
+            >
+              <div
+                class="Stack Stack--spacing"
+                style="--stack-spacing: var(--spirit-space-300);"
+                role="listbox"
+                id="combobox-contextual-help-listbox"
+                aria-labelledby="combobox-contextual-help-label"
+                aria-multiselectable="true"
+              >
+                <div
+                  role="option"
+                  id="combobox-contextual-help-cs"
+                  aria-selected="false"
+                  class="Item"
+                >
+                  <span class="Label element-stretched cursor-pointer">Czech</span>
+                </div>
+                <div
+                  role="option"
+                  id="combobox-contextual-help-da"
+                  aria-selected="false"
+                  class="Item"
+                >
+                  <span class="Label element-stretched cursor-pointer">Danish</span>
+                </div>
+                <div
+                  role="option"
+                  id="combobox-contextual-help-en"
+                  aria-selected="false"
+                  class="Item"
+                >
+                  <span class="Label element-stretched cursor-pointer">English</span>
+                </div>
+                <div
+                  role="option"
+                  id="combobox-contextual-help-fi"
+                  aria-selected="false"
+                  class="Item"
+                >
+                  <span class="Label element-stretched cursor-pointer">Finnish</span>
+                </div>
+                <div
+                  role="option"
+                  id="combobox-contextual-help-sk"
+                  aria-selected="false"
+                  class="Item"
+                >
+                  <span class="Label element-stretched cursor-pointer">Slovak</span>
+                </div>
+              </div>
+
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
     <h2 class="docs-Heading">Helper Text</h2>
 
     <div class="docs-Stack docs-Stack--stretch">
@@ -2752,11 +2916,51 @@
         <div class="UNSTABLE_Combobox UNSTABLE_Combobox--disabled" data-spirit-element="combobox">
 
           <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-            <label
-              class="Label Label--medium Label--disabled"
-              id="combobox-disabled-pre-label"
-              for="combobox-disabled-pre-input"
-            >Languages (with selection)</label>
+            <div
+              class="Flex Flex--horizontal Flex--alignmentYCenter"
+              style="--flex-spacing-x: var(--spirit-space-100);"
+            >
+              <label
+                class="Label Label--medium Label--disabled"
+                id="combobox-disabled-pre-label"
+                for="combobox-disabled-pre-input"
+              >Languages (with selection)</label>
+              <div
+                class="Tooltip"
+                data-spirit-element="tooltip"
+              >
+                <button
+                  type="button"
+                  class="ControlButton ControlButton--small ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive accessibility-tap-target d-flex disabled"
+                  aria-describedby="combobox-disabled-pre-help"
+                  data-spirit-toggle="tooltip"
+                  data-spirit-target="#combobox-disabled-pre-help"
+                  disabled
+                >
+                  <svg
+                    class="Icon"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <use href="/assets/icons/svg/sprite.svg#info" />
+                  </svg>
+                  <span class="accessibility-hidden">More information about Languages</span>
+                </button>
+                <div
+                  id="combobox-disabled-pre-help"
+                  class="TooltipPopover color-scheme-on-neutral-basic is-hidden placement-top placement-controlled"
+                  data-spirit-placement="top"
+                  data-spirit-trigger="click, hover, focus"
+                >
+                  Pick every language you can use at work, not only your native one.
+                  <span
+                    class="TooltipPopover__arrow"
+                    data-spirit-element="arrow"
+                  ></span>
+                </div>
+              </div>
+            </div>
 
             <div class="Dropdown">
 
