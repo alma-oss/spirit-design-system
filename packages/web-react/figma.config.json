@@ -1,6 +1,6 @@
 {
   "codeConnect": {
-    "include": ["src/components/**/*.figma.ts"],
+    "include": ["src/components/**/*.figma.ts", "src/components/**/*.figma.batch.json"],
     "label": "React",
     "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/SPIRIT-DESIGN-SYSTEM--UI-Kit-",
     "documentUrlSubstitutions": {
