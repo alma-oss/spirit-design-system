@@ -1,0 +1,20 @@
+// url=<FIGMA_FILE_ID>?node-id=4611%3A4293
+// source=https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Tabs/TabItem.tsx
+// component=TabItem
+
+import figma from 'figma';
+import { getInstance } from '../../../figma/helpers';
+
+const instance = getInstance();
+
+const labelText = instance.getString('Label Text');
+
+export default {
+  id: 'TabItem',
+  imports: ["import { TabItem } from '@alma-oss/spirit-web-react';"],
+  example: figma.code`<TabItem forTabPane="${labelText}">${labelText}</TabItem>`,
+  metadata: {
+    nestable: true,
+    props: { labelText },
+  },
+};
